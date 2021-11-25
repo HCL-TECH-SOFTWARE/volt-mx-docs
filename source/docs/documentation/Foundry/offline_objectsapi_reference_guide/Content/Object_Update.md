@@ -135,13 +135,13 @@ Android (Java)
 
 {% highlight voltMx %}void <VMXObj>.update(HashMap<String, Object> record,
                       HashMap<String, Object> options,
-                final HCLCallback callback) throws Exception 
+                final VMXCallback callback) throws Exception 
 
 {% endhighlight %}
 
 ### Parameters
 
-<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1" style="width: 336px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">record</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HashMap&lt;String, Object&gt;</td><td class="TableStyle-Basic-BodyE-Column1-Body1">A HashMap containing column name and value pairs which are to be updated.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HashMap&lt;String, Object&gt;</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The options parameter accepts a HashMap with the following option keys: primaryKeys whereCondition whereConditionAsAString trackChanges trackIntermediateUpdates markForUpload For detailed information, refer <a href="#Options" class="selected">Options Keys</a>. <b>If the options parameter is omitted, all the records are updated.</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">callback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">HCLCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">Application implements <b>onSuccess</b> and <b>onFailure</b> methods of <b>HCLCallback</b> interface.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
+<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1" style="width: 336px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">record</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HashMap&lt;String, Object&gt;</td><td class="TableStyle-Basic-BodyE-Column1-Body1">A HashMap containing column name and value pairs which are to be updated.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HashMap&lt;String, Object&gt;</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The options parameter accepts a HashMap with the following option keys: primaryKeys whereCondition whereConditionAsAString trackChanges trackIntermediateUpdates markForUpload For detailed information, refer <a href="#Options" class="selected">Options Keys</a>. <b>If the options parameter is omitted, all the records are updated.</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">callback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">VMXCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">Application implements <b>onSuccess</b> and <b>onFailure</b> methods of <b>VMXCallback</b> interface.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
 
 #### Options Keys
 
@@ -163,7 +163,7 @@ primaryKeys.put("CATEGORY_ID", "123");
 HashMap<String, Object> options = new HashMap<>(); 
 options.put("primaryKeys", primaryKeys);  
 try{ 
-  category.update(record, options, new HCLCallback() 
+  category.update(record, options, new VMXCallback() 
   { 
 	@Override
 	public void onSuccess(Object object) 
@@ -193,7 +193,7 @@ primaryKeys.put("CATEGORY_KEY2", "124");
 HashMap<String, Object> options = new HashMap<>();
 options.put("primaryKeys", primaryKeys);  
 try{ 
-  category.update(record, options, new HCLCallback() 
+  category.update(record, options, new VMXCallback() 
   { 
 	@Override
 	public void onSuccess(Object object) 
@@ -223,7 +223,7 @@ whereClause.put("CATEGORY_ID", "123");
 HashMap<String, Object> options = new HashMap<>(); 
 options.put("whereCondition", whereClause);  
 try{ 
-  category.update(record, options, new HCLCallback() 
+  category.update(record, options, new VMXCallback() 
   { 
 	@Override 
 	public void onSuccess(Object object) 
@@ -253,7 +253,7 @@ HashMap<String, Object> options = new HashMap<>();
 options.put(“whereConditionAsAString”, whereClause);
 try 
 { 
-  category.update(record, options, new HCLCallback() 
+  category.update(record, options, new VMXCallback() 
   { 
 	@Override 
 	public void onSuccess(Object object) 
@@ -274,7 +274,7 @@ catch(Exception e)
 }
 
 //Disable change tracking - trackIntermediateUpdates 
-HashMap<String, Object>options=new HashMap<>(); options.put(KSPublicConstants.TRACK_INTERMEDIATE_UPDATES, false); category.update(record, options, new HCLCallback(){
+HashMap<String, Object>options=new HashMap<>(); options.put(KSPublicConstants.TRACK_INTERMEDIATE_UPDATES, false); category.update(record, options, new VMXCallback(){
 @Override
 public void onSuccess(Object object)  
 {}
@@ -285,7 +285,7 @@ public void onFailure(Object object)
 
 //Disable change tracking - trackChanges 
 HashMap<String, Object> options = new HashMap<>(); options.put(KSPublicConstants.TRACK_CHANGES, false); 
-category.update(record, options, new HCLCallback(){  
+category.update(record, options, new VMXCallback(){  
 @Override
 public void onSuccess(Object object)  
 {}
@@ -296,7 +296,7 @@ public void onFailure(Object object)
   
 //Mark for Upload 
 HashMap<String, Object> options = new HashMap<>(); options.put(KSPublicConstants.MARK_FOR_UPLOAD, false); 
-category.update(record, options, new HCLCallback(){  
+category.update(record, options, new VMXCallback(){  
 @Override
 public void onSuccess(Object object)  
 {}
@@ -314,14 +314,14 @@ iOS (Objective C)
 
 {% highlight voltMx %}void <VMXObj>.update:(NSDictionary<NSString *, id> *)record
              options:(NSDictionary<NSString *, id> *)options
-           onSuccess:(HCLSuccessCompletionHandler)onSuccess
-           onFailure:(HCLFailureCompletionHandler)onFailure 
+           onSuccess:(VMXSuccessCompletionHandler)onSuccess
+           onFailure:(VMXFailureCompletionHandler)onFailure 
 
 {% endhighlight %}
 
 ### Parameters
 
-<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1" style="width: 210px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 213px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">record</td><td class="TableStyle-Basic-BodyE-Column1-Body1">NSDictionary&lt;NSString*, id&gt;</td><td class="TableStyle-Basic-BodyE-Column1-Body1">A dictionary containing column name and value pairs which are to be updated.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1">NSDictionary&lt;NSString*, id&gt;</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The options parameter accepts a NSDictionary with the following option keys: primaryKeys whereCondition whereConditionAsAString trackChanges trackIntermediateUpdates markForUpload For detailed information, refer <a href="#Options" class="selected">Options Keys</a>. <b>If the options parameter is null or empty, all the records are updated.</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">onSuccess</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HCLSuccessCompletionHandler</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The function is invoked when records are updated successfully.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">onFailure</td><td class="TableStyle-Basic-BodyB-Column1-Body1">HCLFailureCompletionHandler</td><td class="TableStyle-Basic-BodyB-Column1-Body1">The function is invoked when updating records fail with the cause of failure.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
+<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1" style="width: 210px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 213px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">record</td><td class="TableStyle-Basic-BodyE-Column1-Body1">NSDictionary&lt;NSString*, id&gt;</td><td class="TableStyle-Basic-BodyE-Column1-Body1">A dictionary containing column name and value pairs which are to be updated.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1">NSDictionary&lt;NSString*, id&gt;</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The options parameter accepts a NSDictionary with the following option keys: primaryKeys whereCondition whereConditionAsAString trackChanges trackIntermediateUpdates markForUpload For detailed information, refer <a href="#Options" class="selected">Options Keys</a>. <b>If the options parameter is null or empty, all the records are updated.</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">onSuccess</td><td class="TableStyle-Basic-BodyE-Column1-Body1">VMXSuccessCompletionHandler</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The function is invoked when records are updated successfully.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">onFailure</td><td class="TableStyle-Basic-BodyB-Column1-Body1">VMXFailureCompletionHandler</td><td class="TableStyle-Basic-BodyB-Column1-Body1">The function is invoked when updating records fail with the cause of failure.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
 
 #### Options Keys
 
@@ -426,21 +426,21 @@ NSLog(@"Update record failed with error %@",
 ];
   
 **//Disable change tracking - trackIntermediateUpdates** 
-NSDictionary <NSString*, id> *options=@{HCLCONSTANTS_TRACK_ INTERMEDIATE_UPDATES: @NO};   
+NSDictionary <NSString*, id> *options=@{VMXCONSTANTS_TRACK_ INTERMEDIATE_UPDATES: @NO};   
 [sdkObjectSync update:record 
 		 options:options 
 		onSuccess:^(id object){} 
 		onFailure:^(id object){}
 ];  
 **//Disable change tracking - trackChanges** 
-NSDictionary <NSString*, id> *options=@{HCLCONSTANTS_TRACK_CHANGES_ UPDATES: @NO};   
+NSDictionary <NSString*, id> *options=@{VMXCONSTANTS_TRACK_CHANGES_ UPDATES: @NO};   
 [sdkObjectSync update:record 
 		 options:options 
 		onSuccess:^(id object){} 
 		onFailure:^(id object){}
 ];  
 **//Mark for Upload** 
-NSDictionary <NSString*, id> *options=@{HCLCONSTANTS_MARK_FOR_ UPLOAD: @NO};   
+NSDictionary <NSString*, id> *options=@{VMXCONSTANTS_MARK_FOR_ UPLOAD: @NO};   
 [sdkObjectSync update:record 
 		 options:options 
 		onSuccess:^(id object){} 

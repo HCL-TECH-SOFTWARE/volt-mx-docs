@@ -86,13 +86,13 @@ Android (Java)
 
 ### Signature
 
-{% highlight voltMx %}void <VMXObjSvc>.startSync(final HashMap<String, Object> syncOptions, final HCLCallback syncCallback, final HCLProgressCallback progressCallback) throws Exception
+{% highlight voltMx %}void <VMXObjSvc>.startSync(final HashMap<String, Object> syncOptions, final VMXCallback syncCallback, final VMXProgressCallback progressCallback) throws Exception
 
 {% endhighlight %}
 
 ### Parameters
 
-<table style="mc-table-style: url('Resources/TableStyles/Basic.css');margin-left: 0;margin-right: auto;width: 100%;" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 224px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 171px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 584px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 94px;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">syncOptions</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HashMap&lt;String, Object&gt;</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The user can provide options to customize sync behavior. For example, Filters, downloadBatchSize etc, Refer <a href="#Sync2" class="selected">Sync Options</a> for supported options. Refer <a href="{{ site.baseurl }}/docs/documentation/Foundry/offline_objects_gettingstarted/Content/Offline_Objects_Getting_Started.html" target="_blank">Offline Objects Getting Started guide</a> for more details.&nbsp;</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">syncCallback</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HCLCallback</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Application implements <b>onSuccess</b> and <b>onFailure</b> methods of <b>HCLCallback</b> interface.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">progressCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">HCLProgressCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">Application implements <b>onProgress</b> method of <b>HCLProgressCallback</b> interface if progress callback is supplied.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">No</td></tr></tbody></table>
+<table style="mc-table-style: url('Resources/TableStyles/Basic.css');margin-left: 0;margin-right: auto;width: 100%;" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 224px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 171px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 584px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 94px;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">syncOptions</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HashMap&lt;String, Object&gt;</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The user can provide options to customize sync behavior. For example, Filters, downloadBatchSize etc, Refer <a href="#Sync2" class="selected">Sync Options</a> for supported options. Refer <a href="{{ site.baseurl }}/docs/documentation/Foundry/offline_objects_gettingstarted/Content/Offline_Objects_Getting_Started.html" target="_blank">Offline Objects Getting Started guide</a> for more details.&nbsp;</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">syncCallback</td><td class="TableStyle-Basic-BodyE-Column1-Body1">VMXCallback</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Application implements <b>onSuccess</b> and <b>onFailure</b> methods of <b>VMXCallback</b> interface.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">progressCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">VMXProgressCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">Application implements <b>onProgress</b> method of <b>VMXProgressCallback</b> interface if progress callback is supplied.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">No</td></tr></tbody></table>
 
 #### Sync Options
 
@@ -136,7 +136,7 @@ void
 
     //Supplying call back to receive sync progress events too               
     syncObject.startSync(syncOptions,
-        new HCLCallback() {
+        new VMXCallback() {
             @Override
             public void onSuccess(Object object) {
                 Log.d("ObjectServiceSync", "ObjectService sync   successful");
@@ -149,7 +149,7 @@ void
     		failed with error: " + e.getMessage());
             }
         },
-        new HCLProgressCallback() {
+        new VMXProgressCallback() {
             @Override
             public void onProgress(Object object) {
                 Log.d("ObjectServiceSync", "ObjectService sync progress event received");
@@ -167,15 +167,15 @@ iOS (Objective C)
 ### Signature
 
 {% highlight voltMx %}void <VMXObjSvc> startSync:(NSDictionary <NSString *, id> *)syncOptions
-      onSuccess:(HCLSuccessCompletionHandler)onSuccess
-      onFailure:(HCLFailureCompletionHandler)onFailure
-      onProgress:(HCLProgressCompletionHandler)onProgress;
+      onSuccess:(VMXSuccessCompletionHandler)onSuccess
+      onFailure:(VMXFailureCompletionHandler)onFailure
+      onProgress:(VMXProgressCompletionHandler)onProgress;
 
 {% endhighlight %}
 
 ### Parameters
 
-<table style="mc-table-style: url('Resources/TableStyles/Basic.css');margin-left: 0;margin-right: auto;width: 100%;" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1" style="width: 195px;"> <col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">syncOptions</td><td class="TableStyle-Basic-BodyE-Column1-Body1">NSDictionary&lt;NSString*, id&gt;</td><td class="TableStyle-Basic-BodyE-Column1-Body1">A user can provide options to customize sync behavior. For example, Filters, download batch size etc, see <a href="#Sync2" class="selected">Sync Options</a> section for supported options. Refer <a href="{{ site.baseurl }}/docs/documentation/Foundry/offline_objects_gettingstarted/Content/Offline_Objects_Getting_Started.html" target="_blank">Offline Objects Getting Started guide</a> for more details.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">onSuccess</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HCLSuccessCompletionHandler</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The method called after a successful sync.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">onFailure</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HCLFailureCompletionHandler</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The method called on sync failure.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">onProgress</td><td class="TableStyle-Basic-BodyB-Column1-Body1">HCLProgress CompletionHandler</td><td class="TableStyle-Basic-BodyB-Column1-Body1">The method called on sync progress events.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">No</td></tr></tbody></table>
+<table style="mc-table-style: url('Resources/TableStyles/Basic.css');margin-left: 0;margin-right: auto;width: 100%;" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1" style="width: 195px;"> <col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">syncOptions</td><td class="TableStyle-Basic-BodyE-Column1-Body1">NSDictionary&lt;NSString*, id&gt;</td><td class="TableStyle-Basic-BodyE-Column1-Body1">A user can provide options to customize sync behavior. For example, Filters, download batch size etc, see <a href="#Sync2" class="selected">Sync Options</a> section for supported options. Refer <a href="{{ site.baseurl }}/docs/documentation/Foundry/offline_objects_gettingstarted/Content/Offline_Objects_Getting_Started.html" target="_blank">Offline Objects Getting Started guide</a> for more details.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">onSuccess</td><td class="TableStyle-Basic-BodyE-Column1-Body1">VMXSuccessCompletionHandler</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The method called after a successful sync.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">onFailure</td><td class="TableStyle-Basic-BodyE-Column1-Body1">VMXFailureCompletionHandler</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The method called on sync failure.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">onProgress</td><td class="TableStyle-Basic-BodyB-Column1-Body1">VMXProgress CompletionHandler</td><td class="TableStyle-Basic-BodyB-Column1-Body1">The method called on sync progress events.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">No</td></tr></tbody></table>
 
 #### Sync Options
 
@@ -197,15 +197,15 @@ void
 > if (error) {
 >     NSLog(@"Object Service Object Creation Failed");
 > } else {
->     HCLSuccessCompletionHandler onSuccess = ^ void(id object) {
+>     VMXSuccessCompletionHandler onSuccess = ^ void(id object) {
 >         //Operation to be performed on successful sync.
 >     };
 > 
->     HCLFailureCompletionHandler onFailure = ^ void(id object) {
+>     VMXFailureCompletionHandler onFailure = ^ void(id object) {
 >         //Operation to be performed on sync failure.
 >     };
 > 
->     HCLProgressCompletionHandler onProgress = ^ void(id object) {
+>     VMXProgressCompletionHandler onProgress = ^ void(id object) {
 >         //Operation to be performed on sync progress.
 >     };
 > 

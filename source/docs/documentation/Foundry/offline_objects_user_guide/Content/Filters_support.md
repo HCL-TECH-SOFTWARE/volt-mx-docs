@@ -55,7 +55,7 @@ The following examples demonstrate the filter usage in the sync API.
    HashMap<String, Object> syncOptions = new HashMap<String, Object>();
    syncOptions.put("filter", "FirstName eq 'Berta'");
    
-   employeeObject.startSync(syncOptions, new HCLCallback() {
+   employeeObject.startSync(syncOptions, new VMXCallback() {
         @Override
         public void onSuccess(Object successObject) {
             //Operation to be performed on successful sync.
@@ -80,11 +80,11 @@ The following examples demonstrate the filter usage in the sync API.
   if(error) {
       NSLog(@"Object creation failed!");
   } else {
-      HCLSuccessCompletionHandler onSuccessHandler = ^(id successObject) {
+      VMXSuccessCompletionHandler onSuccessHandler = ^(id successObject) {
           //Operation to be performed on successful sync.
       }
 
-      HCLFailureCompletionHandler onFailureHandler = ^(id error) {
+      VMXFailureCompletionHandler onFailureHandler = ^(id error) {
           //Operation to be performed on unsuccessful sync.
       }
    
@@ -148,7 +148,7 @@ The following examples demonstrate applying filters for multiple objects during 
       HashMap<String, Object> syncOptions = new HashMap<String, Object>();
       syncOptions.put("filter", filterObject);
 
-      orgObjectService.startSync(syncOptions, new HCLCallback() {
+      orgObjectService.startSync(syncOptions, new VMXCallback() {
           @Override
           public void onSuccess(Object successObject) {
               //Operation to be performed on successful creation.
@@ -173,11 +173,11 @@ The following examples demonstrate applying filters for multiple objects during 
   if(error) {
       NSLog(@"Object service creation failed!");
   } else {
-      HCLSuccessCompletionHandler onSuccessHandler = ^(id successObject) {
+      VMXSuccessCompletionHandler onSuccessHandler = ^(id successObject) {
           //Operation to be performed on successful creation.
       }
 
-      HCLFailureCompletionHandler onFailureHandler = ^(id error) {
+      VMXFailureCompletionHandler onFailureHandler = ^(id error) {
           //Operation to be performed on unsuccessful creation.
       }
    

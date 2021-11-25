@@ -158,13 +158,13 @@ Android (Java)
 
 ### Signature
 
-{% highlight voltMx %}void <VMXObj>.get(HashMap<String, Object> options, final HCLCallback callback) throws Exception
+{% highlight voltMx %}void <VMXObj>.get(HashMap<String, Object> options, final VMXCallback callback) throws Exception
 
 {% endhighlight %}
 
 ### Parameters
 
-<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 182px;"> <col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1" style="width: 266px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 99px;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HashMap&lt;String, Object&gt;</td><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">If the options parameter is omitted, all records are returned.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1" style="font-weight: normal;">callback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">HCLCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1" style="font-weight: normal;">Application must implement onSuccess and onFailure methods of HCLCallback interface. Read records are passed as an argument through onSuccess handler. onFailure handler takes cause of failure as an argument.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
+<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 182px;"> <col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1" style="width: 266px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 99px;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HashMap&lt;String, Object&gt;</td><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">If the options parameter is omitted, all records are returned.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1" style="font-weight: normal;">callback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">VMXCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1" style="font-weight: normal;">Application must implement onSuccess and onFailure methods of VMXCallback interface. Read records are passed as an argument through onSuccess handler. onFailure handler takes cause of failure as an argument.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
 
 #### Options Keys
 
@@ -181,7 +181,7 @@ void
  
  //----- Example : Get all  --------
  HashMap<String,Object> finalMap = new HashMap<String, Object>();
- category.get(finalMap, new HCLCallback() {
+ category.get(finalMap, new VMXCallback() {
      @Override
      public void onSuccess(Object object) {
          Log.d("Object Read", "Object Read successful for category");		
@@ -210,7 +210,7 @@ void
  orderByMap.add(orderByCondition2);
  finalMap.put("orderByMap",orderByMap);
  
- category.get(finalMap, new HCLCallback() {
+ category.get(finalMap, new VMXCallback() {
      @Override
      public void onSuccess(Object object) {
          Log.d("Object Read", "Object Read successful for category");		
@@ -231,7 +231,7 @@ void
  HashMap<String,Object> primaryKeys = new HashMap<String, Object>();
  primaryKeys.put("CATEGORY_ID","2233");
  finalMap.put("primaryKeys",primaryKeys);
- category.get(finalMap, new HCLCallback() {
+ category.get(finalMap, new VMXCallback() {
      @Override
      public void onSuccess(Object object) {
          Log.d("Object Read", "Object Read successful for category");		
@@ -252,7 +252,7 @@ void
  HashMap<String,Object> finalMap = new HashMap<String, Object>();
  String whereClause = "CATEGORY_ID = '2233'";
  finalMap.put("whereConditionAsAString",whereClause);
- category.get(finalMap, new HCLCallback() {
+ category.get(finalMap, new VMXCallback() {
      @Override
      public void onSuccess(Object object) {
          Log.d("Object Read", "Object Read successful for category");		
@@ -278,7 +278,7 @@ ArrayList<String> projectionColumnsList = new ArrayList<String>();
 projectionColumnsList.add("CATEGORY_DES");  
 finalMap.put("distinct", true);  
 finalMap.put("projectionColumns" , projectionColumnsList);  
-category.get(finalMap, new HCLCallback() {  
+category.get(finalMap, new VMXCallback() {  
      @Override  
      public void onSuccess(Object object) {  
        Log.d("Object Read", "Object Read successful for category");  
@@ -302,14 +302,14 @@ iOS (Objective C)
 ### Signature
 
 {% highlight voltMx %}void <VMXObj> get:(NSDictionary <NSString *, id> *)options
-               onSuccess:(HCLSuccessCompletionHandler)onSuccess
-               onFailure:(HCLFailureCompletionHandler)onFailure
+               onSuccess:(VMXSuccessCompletionHandler)onSuccess
+               onFailure:(VMXFailureCompletionHandler)onFailure
 
 {% endhighlight %}
 
 ### Parameters
 
-<table style="mc-table-style: url('Resources/TableStyles/Basic.css');margin-left: 0;margin-right: auto;width: 100%;" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1" style="width: 218px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1">NSDictionary&lt;NSString*, id&gt;</td><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">If the options parameter is omitted, all records are returned.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">onSuccess</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HCLSuccessCompletionHandler</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The function is invoked on success with records passed as an argument.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">onFailure</td><td class="TableStyle-Basic-BodyB-Column1-Body1">HCLFailureCompletionHandler</td><td class="TableStyle-Basic-BodyB-Column1-Body1">The function is invoked on an error with the cause of failure as an argument.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
+<table style="mc-table-style: url('Resources/TableStyles/Basic.css');margin-left: 0;margin-right: auto;width: 100%;" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1" style="width: 218px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1">NSDictionary&lt;NSString*, id&gt;</td><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">If the options parameter is omitted, all records are returned.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">onSuccess</td><td class="TableStyle-Basic-BodyE-Column1-Body1">VMXSuccessCompletionHandler</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The function is invoked on success with records passed as an argument.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">onFailure</td><td class="TableStyle-Basic-BodyB-Column1-Body1">VMXFailureCompletionHandler</td><td class="TableStyle-Basic-BodyB-Column1-Body1">The function is invoked on an error with the cause of failure as an argument.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
 
 #### Options Keys
 
@@ -331,12 +331,12 @@ VMXObj * _categoryObject = [
     error: & error
 ];
 //Success handler
-HCLSuccessCompletionHandler onSuccess = ^ (id records) {
+VMXSuccessCompletionHandler onSuccess = ^ (id records) {
     NSLog(@"Records read from db successfully");
 };
 
 //Failure Handler
-HCLFailureCompletionHandler onError = ^ (id error) {
+VMXFailureCompletionHandler onError = ^ (id error) {
     NSLog(@"Failed to read records with error %@", [error.userInfo localizedDescription]);
 };
 
@@ -360,12 +360,12 @@ NSDictionary * options = @ {
     "orderBy": orderByClause
 };
 //Success handler
-HCLSuccessCompletionHandler onSuccess = ^ (id records) {
+VMXSuccessCompletionHandler onSuccess = ^ (id records) {
     NSLog(@"Records read from db successfully");
 };
 
 //Failure Handler
-HCLFailureCompletionHandler onError = ^ (id error) {
+VMXFailureCompletionHandler onError = ^ (id error) {
     NSLog(@"Failed to read records with error %@", [error.userInfo localizedDescription]);
 };
 
@@ -385,12 +385,12 @@ NSDictionary * options = @ {
     "primaryKeys": primaryKeys
 };
 //Success handler
-HCLSuccessCompletionHandler onSuccess = ^ (id records) {
+VMXSuccessCompletionHandler onSuccess = ^ (id records) {
     NSLog(@"Records read from db successfully");
 };
 
 //Failure Handler
-HCLFailureCompletionHandler onError = ^ (id error) {
+VMXFailureCompletionHandler onError = ^ (id error) {
     NSLog(@"Failed to read records with error %@", [error.userInfo localizedDescription]);
 };
 
@@ -409,12 +409,12 @@ NSDictionary * options = @ {
     "whereClause": whereClause
 };
 //Success handler
-HCLSuccessCompletionHandler onSuccess = ^ (id records) {
+VMXSuccessCompletionHandler onSuccess = ^ (id records) {
     NSLog(@"Records read from db successfully");
 };
 
 //Failure Handler
-HCLFailureCompletionHandler onError = ^ (id error) {
+VMXFailureCompletionHandler onError = ^ (id error) {
     NSLog(@"Failed to read records with error %@", [error.userInfo localizedDescription]);
 };
 
@@ -437,12 +437,12 @@ NSMutableArray * projectionColumnList = [NSMutableArray new];
 [options setValues: projectionColumnList forKey: @"projectionColumns"];
 
 //Success handler
-HCLSuccessCompletionHandler onSuccess = ^ (id records) {
+VMXSuccessCompletionHandler onSuccess = ^ (id records) {
     NSLog(@"Records read from db successfully");
 };
 
 //Failure Handler
-HCLFailureCompletionHandler onError = ^ (id error) {
+VMXFailureCompletionHandler onError = ^ (id error) {
     NSLog(@"Failed to read records with error %@", [error.userInfo localizedDescription]);
 };
 

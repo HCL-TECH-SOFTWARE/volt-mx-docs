@@ -63,7 +63,7 @@ The following examples demonstrate subscribing to the sync progress events and t
   syncOptions.put("GetSyncStats", "true");
  
   //Supplying callback to receive sync progress event too.
-  syncObject.startSync(syncOptions, new HCLCallback() {
+  syncObject.startSync(syncOptions, new VMXCallback() {
      @Override
      public void onSuccess(Object successObject) {
          //Operation to be performed on successful sync.
@@ -73,7 +73,7 @@ The following examples demonstrate subscribing to the sync progress events and t
      public void onFailure(Object error) {
          //Operation to be performed on unsuccessful sync.
      }
-  }, new HCLProgressCallback() {
+  }, new VMXProgressCallback() {
  
      @Override
      public void onProgress(Object object) {
@@ -96,15 +96,15 @@ The following examples demonstrate subscribing to the sync progress events and t
  if(error) {
      NSLog(@"Object creation failed!");
  } else {
-     HCLSuccessCompletionHandler onSuccessHandler = ^(id successObject) {
+     VMXSuccessCompletionHandler onSuccessHandler = ^(id successObject) {
          //Operation to be performed on successful sync.
      }
  
-     HCLFailureCompletionHandler onFailureHandler = ^(id error) {
+     VMXFailureCompletionHandler onFailureHandler = ^(id error) {
          //Operation to be performed on unsuccessful sync.
      }
     
-     HCLProgressCompletionHandler onProgressHandler = ^(id progressObject) {
+     VMXProgressCompletionHandler onProgressHandler = ^(id progressObject) {
         //Update Progressbar
      }
  

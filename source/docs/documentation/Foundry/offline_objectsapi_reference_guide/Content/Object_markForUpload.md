@@ -79,12 +79,12 @@ Android (Java)
 
 ### Signature
 
-{% highlight voltMx %}<VMXObj>.markForUpload(final HashMap<String, Object> options, final HCLCallback callback)
+{% highlight voltMx %}<VMXObj>.markForUpload(final HashMap<String, Object> options, final VMXCallback callback)
 {% endhighlight %}
 
 ### Parameters
 
-<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1" style="width: 289px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HashMap&lt;String, Object&gt;</td><td class="TableStyle-Basic-BodyE-Column1-Body1">key: <b>primaryKeys</b>. Value: HashMap&lt;String, Object&gt;: Pass a hashmap of primary keys and its value. HashMap containing PK (column name and value). In case of a composite PK, the dictionary will contain multiple key-value pairs.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">callback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">HCLCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">Takes onSuccess and onFailure methods.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
+<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1" style="width: 289px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HashMap&lt;String, Object&gt;</td><td class="TableStyle-Basic-BodyE-Column1-Body1">key: <b>primaryKeys</b>. Value: HashMap&lt;String, Object&gt;: Pass a hashmap of primary keys and its value. HashMap containing PK (column name and value). In case of a composite PK, the dictionary will contain multiple key-value pairs.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">callback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">VMXCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">Takes onSuccess and onFailure methods.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
 
 #### Options Keys
 
@@ -102,7 +102,7 @@ HashMap < String, Object > primaryKeys = new HashMap < String, Object > ();
 primaryKeys.put("CATEGORY_ID", "1");
 options.put("primaryKeys", primaryKeys);
 //mark the deferred record for upload with primary key 1
-category.markForUpload(options, new HCLCallback() {
+category.markForUpload(options, new VMXCallback() {
         @Override
         public void onSuccess(Object object) {
             Log.d("Object markforupload", "Object markforupload Successful ");
@@ -117,7 +117,7 @@ category.markForUpload(options, new HCLCallback() {
 
     VMXObj category = new VMXObj("CATEGORY"); HashMap < String, Object > options = new HashMap < String, Object > (); String whereCondition = "CATEGORY_ID = '1'"; options.put("whereConditionAsAString", whereCondition);
     //mark the deferred records for upload satisfying whereClause
-    category.markForUpload(options, new HCLCallback() {
+    category.markForUpload(options, new VMXCallback() {
             @Override
             public void onSuccess(Object object) {
                 Log.d("Object markforupload", "Object markforupload Successful");
@@ -131,7 +131,7 @@ category.markForUpload(options, new HCLCallback() {
 
         VMXObj category = new VMXObj("CATEGORY"); HashMap < String, Object > options = new HashMap < String, Object > (); HashMap < String, Object > whereCondition = new HashMap < String, Object > (); whereCondition.put("CATEGORY_ID", "1"); options.put("whereCondition", whereCondition);
         //mark the deferred records for upload satisfying whereConditon
-        category.markForUpload(options, new HCLCallback() {
+        category.markForUpload(options, new VMXCallback() {
                 @Override
                 public void onSuccess(Object object) {
                     Log.d("Object markforupload", "Object markforupload Successful");
@@ -145,7 +145,7 @@ category.markForUpload(options, new HCLCallback() {
 
             VMXObj category = new VMXObj("CATEGORY");
             //mark all the deferred records in the object for upload
-            category.markForUpload(null, new HCLCallback() {
+            category.markForUpload(null, new VMXCallback() {
                     @Override
                     public void onSuccess(Object object) {
                         Log.d("Object markforupload", "Object markforupload Successful");
@@ -164,13 +164,13 @@ iOS (Objective C)
 ### Signature
 
 {% highlight voltMx %}void <VMXObj> markForUpload:(NSDictionary <NSString *, id> *)options 
-               onSuccess:(HCLSuccessCompletionHandler)onSuccess 
-               onFailure:(HCLFailureCompletionHandler)onFailure
+               onSuccess:(VMXSuccessCompletionHandler)onSuccess 
+               onFailure:(VMXFailureCompletionHandler)onFailure
 {% endhighlight %}
 
 ### Parameters
 
-<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1" style="width: 207px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 250px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1">NSDictionary</td><td class="TableStyle-Basic-BodyE-Column1-Body1">key: <b>primaryKeys</b>. Value: Dictionary containing PK (column name and value). In case of composite PK, the dictionary will contain multiple key-value pairs.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">onSuccessCallback</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HCLSuccessCompletionHandler</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The function is invoked when the changes are successfully uploaded to the server.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">onFailCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">HCLFailureCompletionHandler</td><td class="TableStyle-Basic-BodyB-Column1-Body1">The function is invoked when the changes are deferred from uploading the server.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
+<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1" style="width: 207px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 250px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1">NSDictionary</td><td class="TableStyle-Basic-BodyE-Column1-Body1">key: <b>primaryKeys</b>. Value: Dictionary containing PK (column name and value). In case of composite PK, the dictionary will contain multiple key-value pairs.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">onSuccessCallback</td><td class="TableStyle-Basic-BodyE-Column1-Body1">VMXSuccessCompletionHandler</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The function is invoked when the changes are successfully uploaded to the server.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">onFailCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">VMXFailureCompletionHandler</td><td class="TableStyle-Basic-BodyB-Column1-Body1">The function is invoked when the changes are deferred from uploading the server.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
 
 #### Options Keys
 
@@ -307,13 +307,13 @@ function failureCallback(error) {
 
 #### Signature
 
-{% highlight voltMx %}void <VMXObj>. getUploadDeferredRecordKeys (final HCLCallback callback)
+{% highlight voltMx %}void <VMXObj>. getUploadDeferredRecordKeys (final VMXCallback callback)
 {% endhighlight %}
 
 #### Example
 
 {% highlight voltMx %}VMXObj category = new VMXObj("CATEGORY");
-category.getUploadDeferredRecordKeys(new HCLCallback() {
+category.getUploadDeferredRecordKeys(new VMXCallback() {
         @Override
         public void onSuccess(Object result) {
             List &lt; HashMap &lt; String, Object &gt;&gt; pksList = (List &lt; HashMap &lt; String, Object &gt;&gt; ) result;
@@ -338,8 +338,8 @@ category.getUploadDeferredRecordKeys(new HCLCallback() {
 
 #### Signature
 
-{% highlight voltMx %}<void> [<VMXObj> getUploadDeferredRecordKeys: (HCLSuccessCompletionHandler) onSuccess
-		 onFailure: (HCLFailureCompletionHandler) onFailure]
+{% highlight voltMx %}<void> [<VMXObj> getUploadDeferredRecordKeys: (VMXSuccessCompletionHandler) onSuccess
+		 onFailure: (VMXFailureCompletionHandler) onFailure]
 
 {% endhighlight %}
 
@@ -353,7 +353,7 @@ VMXObj * _categories = [
 
 [_categories getUploadDeferredRecordKeys: onSuccess: onFailure: onFailure];
 
-HCLSuccessCompletionHandler onSuccess = ^ void(id result) {
+VMXSuccessCompletionHandler onSuccess = ^ void(id result) {
     NSArray * pks = (NSArray * ) result;
     for (id obj in pks) {
         for (id key in obj) {
@@ -362,7 +362,7 @@ HCLSuccessCompletionHandler onSuccess = ^ void(id result) {
     }
 }
 
-HCLFailureCompletionHandler onFailure = ^ void(id error) {
+VMXFailureCompletionHandler onFailure = ^ void(id error) {
     NSLog("failed with error " + error.code);
 }
 {% endhighlight %}

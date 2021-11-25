@@ -353,7 +353,7 @@ VMXObject.deleteByPK(options, onSuccess, onFailure);  </code></pre></figure>
       </h3>
     
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">void &lt;object&gt;.deleteByPK(HashMap&lt;String, Object&gt; options, final HCLCallback syncCallback) throws Exception </code></pre></figure>
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">void &lt;object&gt;.deleteByPK(HashMap&lt;String, Object&gt; options, final VMXCallback syncCallback) throws Exception </code></pre></figure>
       <h3 id="parameters-1">
         
         
@@ -363,7 +363,7 @@ VMXObject.deleteByPK(options, onSuccess, onFailure);  </code></pre></figure>
       </h3>
     
 
-<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" /> <col class="TableStyle-Basic-Column-Column1" /> <col class="TableStyle-Basic-Column-Column1" style="width: 289px;" /> <col class="TableStyle-Basic-Column-Column1" /></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HashMap&lt;String, Object&gt;</td><td class="TableStyle-Basic-BodyE-Column1-Body1">key: <b>primaryKeys</b>. Value: HashMap&lt;String, Object&gt;: Pass a hashmap of primary keys and its value. HashMap containing PK (column name and value). In case of a composite PK, the dictionary will contain multiple key-value pairs.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">syncCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">HCLCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">Takes onSuccess and onFailure methods.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
+<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" /> <col class="TableStyle-Basic-Column-Column1" /> <col class="TableStyle-Basic-Column-Column1" style="width: 289px;" /> <col class="TableStyle-Basic-Column-Column1" /></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HashMap&lt;String, Object&gt;</td><td class="TableStyle-Basic-BodyE-Column1-Body1">key: <b>primaryKeys</b>. Value: HashMap&lt;String, Object&gt;: Pass a hashmap of primary keys and its value. HashMap containing PK (column name and value). In case of a composite PK, the dictionary will contain multiple key-value pairs.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">syncCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">VMXCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">Takes onSuccess and onFailure methods.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
       <h4 id="options-keys-1">
         
         
@@ -400,7 +400,7 @@ primaryKeys.put("CATEGORY_ID", "123");
 options.put("primaryKeys", key);
 
 try 
-    category.deleteByPK(options, new HCLCallback() {
+    category.deleteByPK(options, new VMXCallback() {
         @Override
         public void onSuccess(Object object) {
             Log.d("Object Delete", "Object Delete Successful for category");
@@ -418,7 +418,7 @@ try
 //Disable change tracking
 Hashmap &lt; string, object &gt; options = new HashMap &lt; &gt; ();
 options.put(KSPublicConstants.TRACK_CHANGES, false);
-sdkObjectSync.deleteByPK(options, new HCLCallback() {
+sdkObjectSync.deleteByPK(options, new VMXCallback() {
     @Override
     public void onSuccess(Object object) {}
     @Override
@@ -428,7 +428,7 @@ sdkObjectSync.deleteByPK(options, new HCLCallback() {
 //Mark for UploadHashmap 
 &lt; string, object &gt; options = new HashMap &lt; &gt; ();
 options.put(KSPublicConstants.MARK_FOR_UPLOAD, false);
-sdkObjectSync.deleteByPK(options, new HCLCallback() {
+sdkObjectSync.deleteByPK(options, new VMXCallback() {
     @Override
     public void onSuccess(Object object) {}
     @Override
@@ -452,8 +452,8 @@ sdkObjectSync.deleteByPK(options, new HCLCallback() {
     
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">void [&lt;object&gt; deleteByPK:(NSDictionary &lt;NSString *, id&gt; *)options 				  
-onSuccess:(HCLSuccessCompletionHandler)onSuccess 
-		 onFailure:(HCLFailureCompletionHandler)onFailure];</code></pre></figure>
+onSuccess:(VMXSuccessCompletionHandler)onSuccess 
+		 onFailure:(VMXFailureCompletionHandler)onFailure];</code></pre></figure>
       <h3 id="parameters-2">
         
         
@@ -463,7 +463,7 @@ onSuccess:(HCLSuccessCompletionHandler)onSuccess
       </h3>
     
 
-<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" /> <col class="TableStyle-Basic-Column-Column1" style="width: 207px;" /> <col class="TableStyle-Basic-Column-Column1" style="width: 250px;" /> <col class="TableStyle-Basic-Column-Column1" /></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1">NSDictionary</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The options parameter accepts a HashMap that has the following options keys primaryKeys trackChanges markForUpload For detailed information, refer <a href="#Options" class="selected"></a><a href="#Options" class="selected">Options Keys</a>. <b>If the options parameter is omitted, all the records will be deleted.</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">onSuccessCallback</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HCLSuccessCompletionHandler</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The function is invoked on successful deletion of a record.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">onFailureCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">HCLFailureCompletionHandler</td><td class="TableStyle-Basic-BodyB-Column1-Body1">The function is invoked on an error with the cause of failure as an argument</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
+<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" /> <col class="TableStyle-Basic-Column-Column1" style="width: 207px;" /> <col class="TableStyle-Basic-Column-Column1" style="width: 250px;" /> <col class="TableStyle-Basic-Column-Column1" /></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1">NSDictionary</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The options parameter accepts a HashMap that has the following options keys primaryKeys trackChanges markForUpload For detailed information, refer <a href="#Options" class="selected"></a><a href="#Options" class="selected">Options Keys</a>. <b>If the options parameter is omitted, all the records will be deleted.</b></td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">onSuccessCallback</td><td class="TableStyle-Basic-BodyE-Column1-Body1">VMXSuccessCompletionHandler</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The function is invoked on successful deletion of a record.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">onFailureCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">VMXFailureCompletionHandler</td><td class="TableStyle-Basic-BodyB-Column1-Body1">The function is invoked on an error with the cause of failure as an argument</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
       <h3 id="options-keys-2">
         
         
@@ -520,7 +520,7 @@ NSDictionary * options = @ {@
 
 //Disable change tracking
 NSDictionary &lt; NSString * , id &gt; * options = @ {
-    HCLCONSTANTS_TRACK_CHANGES: @NO
+    VMXCONSTANTS_TRACK_CHANGES: @NO
 };
 [sdkObjectSync deleteByPK: options
     onSuccess: ^ (id object) {}
@@ -529,7 +529,7 @@ NSDictionary &lt; NSString * , id &gt; * options = @ {
 
 //Mark for Upload
 NSDictionary &lt; NSString * , id &gt; * options = @ {
-    HCLCONSTANTS_MARK_FOR_UPLOAD: @NO
+    VMXCONSTANTS_MARK_FOR_UPLOAD: @NO
 };
 [sdkObjectSync deleteByPK: options
     onSuccess: ^ (id object) {}
@@ -867,7 +867,7 @@ NSDictionary &lt; NSString * , id &gt; * options = @ {
 		<td>com.konylabs</td>
 	  </tr>
 	  <tr>
-	    <td>HCLFoundry</td>
+	    <td>VMXFoundry</td>
 		<td>KNYMobileFabric</td>
 	  </tr>
 	  <tr>
@@ -890,7 +890,7 @@ NSDictionary &lt; NSString * , id &gt; * options = @ {
         <td>com.konylabs.middleware.dataobject</td>
       </tr>
 	  <tr>
-	    <td>HCLFoundry.OfflineObjects.drop</td>
+	    <td>VMXFoundry.OfflineObjects.drop</td>
 		<td>KNYMobileFabric.OfflineObjects.drop</td>
 	  </tr>
     </table>
