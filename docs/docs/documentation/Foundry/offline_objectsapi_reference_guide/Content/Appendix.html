@@ -260,11 +260,11 @@
     </tr>
     <tr>
       <td>Java</td>
-      <td><strong>Signature</strong>: public void onFailure(error) <strong>Error object</strong> : OfflineObjectsException <strong>Error code</strong> : (OfflineObjectsException)error.getErrorCode() of type int. <strong>Error description</strong> : (OfflineObjectsException)error.getMessage() of type string. Error domain : (OfflineObjectsException)error.getDomain() of type string Error callstack : (OfflineObjectsException)error.getCallStack() of type string. <strong>Sample Code</strong> VoltMXClient sdk= new VoltMXClient();OfflineObjects appSync = sdk.getOfflineObjects(); HashMap&lt;String, Object&gt; options=new HashMap&lt;String, Object&gt;(); appSync.setup(options, new HCLCallback() { @Override public void onSuccess(Object object) { Log.d(“Application”, “Application setup successful”); } @Override public void onFailure(Object error) { OfflineObjectsException e = (OfflineObjectsException)error; Log.d(“Application”, “Error Code:” + e.getErrorCode()); Log.d(“Application”, “Error Domain:” + e.getDomain()); Log.d(“Application”, “Error Message:” + e.getMessage()); Log.d(“Application”, “Error Callstack:” + e.getCallStack()); } });</td>
+      <td><strong>Signature</strong>: public void onFailure(error) <strong>Error object</strong> : OfflineObjectsException <strong>Error code</strong> : (OfflineObjectsException)error.getErrorCode() of type int. <strong>Error description</strong> : (OfflineObjectsException)error.getMessage() of type string. Error domain : (OfflineObjectsException)error.getDomain() of type string Error callstack : (OfflineObjectsException)error.getCallStack() of type string. <strong>Sample Code</strong> VoltMXClient sdk= new VoltMXClient();OfflineObjects appSync = sdk.getOfflineObjects(); HashMap&lt;String, Object&gt; options=new HashMap&lt;String, Object&gt;(); appSync.setup(options, new VMXCallback() { @Override public void onSuccess(Object object) { Log.d(“Application”, “Application setup successful”); } @Override public void onFailure(Object error) { OfflineObjectsException e = (OfflineObjectsException)error; Log.d(“Application”, “Error Code:” + e.getErrorCode()); Log.d(“Application”, “Error Domain:” + e.getDomain()); Log.d(“Application”, “Error Message:” + e.getMessage()); Log.d(“Application”, “Error Callstack:” + e.getCallStack()); } });</td>
     </tr>
     <tr>
       <td>Objective C</td>
-      <td><strong>Signature</strong>: onFailure:^(id error) <strong>Error object</strong> : Error Object <strong>Error code</strong> : error.code of type NSInteger. <strong>Error description</strong> : [error.userInfo localizedDescription] of type NSString. Error domain : error.domain of type string Error callstack : [error.userInfo callStack] of type string. <strong>Sample Code</strong> HCLClient *sdk= [HCLClient sharedClient]; OfflineObjects *applicationSync = [sdk getOfflineObjects];NSDictionary *options=@{};[applicationSync setup:options             onSuccess:onSuccess              onFailure:onFailure];   HCLSuccessCompletionHandler onSuccess = ^void(id error){     NSLog(@”Application setup successful”); };     HCLFailureCompletionHandler onFailure = ^void(id object){     OfflineObjectsError *error = (OfflineObjectsError)object;     NSLog(@”Error code: %@” error.code);     NSLog(@”Error domain: %@” error.domain);     NSLog(@”Error message: %@” [error.userInfo  localizedDescription]);     NSLog(@”Error Callstack:%@”,[error.userInfo callStack]); }</td>
+      <td><strong>Signature</strong>: onFailure:^(id error) <strong>Error object</strong> : Error Object <strong>Error code</strong> : error.code of type NSInteger. <strong>Error description</strong> : [error.userInfo localizedDescription] of type NSString. Error domain : error.domain of type string Error callstack : [error.userInfo callStack] of type string. <strong>Sample Code</strong> VMXClient *sdk= [VMXClient sharedClient]; OfflineObjects *applicationSync = [sdk getOfflineObjects];NSDictionary *options=@{};[applicationSync setup:options             onSuccess:onSuccess              onFailure:onFailure];   VMXSuccessCompletionHandler onSuccess = ^void(id error){     NSLog(@”Application setup successful”); };     VMXFailureCompletionHandler onFailure = ^void(id object){     OfflineObjectsError *error = (OfflineObjectsError)object;     NSLog(@”Error code: %@” error.code);     NSLog(@”Error domain: %@” error.domain);     NSLog(@”Error message: %@” [error.userInfo  localizedDescription]);     NSLog(@”Error Callstack:%@”,[error.userInfo callStack]); }</td>
     </tr>
   </tbody>
 </table>
@@ -357,7 +357,7 @@
     </tr>
     <tr>
       <td>Java</td>
-      <td>syncObject = new VMXObj(“CATEGORY”);HashMap&lt;String, Object&gt;options=new HashMap&lt;String, Object&gt;();syncObject.startSync(options, new HCLCallback() { @Override public void onSuccess(Object object) { HashMap&lt;String, Object&gt; successObject = (HashMap&lt;String, Object&gt;) object; if(successObject.containsKey(“syncErrors”)) { Log.d(“Object sync”, “Object Sync is partial Success for syncObject with sync errors “ + successObject.get(“syncErrors”)); } else { Log.d(“Object sync”, “Object Sync Successful for syncObject” + successObject); } } @Override public void onFailure(Object object) { OfflineObjectsException e= (OfflineObjectsException) object; List<HashMap> syncErrors = e.getSyncErrors(); if(syncErrors != null &amp;;&amp;; syncErrors.size&gt; 0) { Log.d("Object sync", "Object Sync is unsuccessful for syncObject with sync errors " + syncErrors); } else { Log.d("Object Sync", "Object Sync unsuccessful for syncObject with Error :" + e); } } }, null);</HashMap></td>
+      <td>syncObject = new VMXObj(“CATEGORY”);HashMap&lt;String, Object&gt;options=new HashMap&lt;String, Object&gt;();syncObject.startSync(options, new VMXCallback() { @Override public void onSuccess(Object object) { HashMap&lt;String, Object&gt; successObject = (HashMap&lt;String, Object&gt;) object; if(successObject.containsKey(“syncErrors”)) { Log.d(“Object sync”, “Object Sync is partial Success for syncObject with sync errors “ + successObject.get(“syncErrors”)); } else { Log.d(“Object sync”, “Object Sync Successful for syncObject” + successObject); } } @Override public void onFailure(Object object) { OfflineObjectsException e= (OfflineObjectsException) object; List<HashMap> syncErrors = e.getSyncErrors(); if(syncErrors != null &amp;;&amp;; syncErrors.size&gt; 0) { Log.d("Object sync", "Object Sync is unsuccessful for syncObject with sync errors " + syncErrors); } else { Log.d("Object Sync", "Object Sync unsuccessful for syncObject with Error :" + e); } } }, null);</HashMap></td>
     </tr>
     <tr>
       <td>Objective C</td>
@@ -1206,7 +1206,7 @@
 		<td>com.konylabs</td>
 	  </tr>
 	  <tr>
-	    <td>HCLFoundry</td>
+	    <td>VMXFoundry</td>
 		<td>KNYMobileFabric</td>
 	  </tr>
 	  <tr>
@@ -1229,7 +1229,7 @@
         <td>com.konylabs.middleware.dataobject</td>
       </tr>
 	  <tr>
-	    <td>HCLFoundry.OfflineObjects.drop</td>
+	    <td>VMXFoundry.OfflineObjects.drop</td>
 		<td>KNYMobileFabric.OfflineObjects.drop</td>
 	  </tr>
     </table>

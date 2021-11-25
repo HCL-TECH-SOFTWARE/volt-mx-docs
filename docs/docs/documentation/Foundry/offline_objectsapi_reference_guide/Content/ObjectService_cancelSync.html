@@ -364,7 +364,7 @@ syncObjectSvc.cancelSync({},
       </h3>
     
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">public void cancelSync(HashMap&lt;String, Object&gt; options, final HCLCallback syncCancellationCallback)</code></pre></figure>
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">public void cancelSync(HashMap&lt;String, Object&gt; options, final VMXCallback syncCancellationCallback)</code></pre></figure>
       <h3 id="parameters-1">
         
         
@@ -392,8 +392,8 @@ syncObjectSvc.cancelSync({},
     </tr>
     <tr>
       <td>syncCancellationCallback</td>
-      <td>HCLCallback</td>
-      <td>Application implements <strong>onSuccess</strong> and <strong>onFailure</strong> methods of <strong>HCLCallback</strong> interface.</td>
+      <td>VMXCallback</td>
+      <td>Application implements <strong>onSuccess</strong> and <strong>onFailure</strong> methods of <strong>VMXCallback</strong> interface.</td>
       <td>Yes</td>
     </tr>
   </tbody>
@@ -428,7 +428,7 @@ syncOptions.put("getSyncStats"
 
 // Start Sync asynchronously
 syncObjectSvc.startSync(syncOptions,
-    new HCLCallback() {
+    new VMXCallback() {
         @Override
         public void onSuccess(Object object) {
             Log.d("ObjectServiceSync", "ObjectService sync successful");
@@ -439,7 +439,7 @@ syncObjectSvc.startSync(syncOptions,
             Log.e("ObjectServiceSync", "ObjectService sync failed with error: " + error);
         }
     },
-    new HCLProgressCallback() {
+    new VMXProgressCallback() {
         @Override
         public void onProgress(Object object) {
             Log.d("ObjectServiceSync", "ObjectService sync progress event received");
@@ -450,7 +450,7 @@ syncObjectSvc.startSync(syncOptions,
 // Now attempt to Cancel Sync
 // passing an empty HashMap for options parameter
 syncObjectSvc.cancelSync(new HashMap &lt; String, Object &gt; (),
-    new HCLCallback() {
+    new VMXCallback() {
         @Override
         public void onSuccess(Object object) {
             Log.d("ObjectServiceSync Cancellation", "ObjectService sync cancellation successful");
@@ -479,8 +479,8 @@ syncObjectSvc.cancelSync(new HashMap &lt; String, Object &gt; (),
     
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">(void)cancelSync:(NSDictionary *)options
-              onSuccess:(HCLSuccessCompletionHandler)onSuccess
-              onFailure:(HCLFailureCompletionHandler)onFailure</code></pre></figure>
+              onSuccess:(VMXSuccessCompletionHandler)onSuccess
+              onFailure:(VMXFailureCompletionHandler)onFailure</code></pre></figure>
       <h3 id="parameters-2">
         
         
@@ -490,7 +490,7 @@ syncObjectSvc.cancelSync(new HashMap &lt; String, Object &gt; (),
       </h3>
     
 
-<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" /> <col class="TableStyle-Basic-Column-Column1" style="width: 210px;" /> <col class="TableStyle-Basic-Column-Column1" /> <col class="TableStyle-Basic-Column-Column1" /></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">onSuccess</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HCLSuccessCompletionHandler</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The method called after a successful cancellation.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">onFailure</td><td class="TableStyle-Basic-BodyB-Column1-Body1">HCLFailureCompletionHandler</td><td class="TableStyle-Basic-BodyB-Column1-Body1">The method called after the cancellation fails.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
+<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" /> <col class="TableStyle-Basic-Column-Column1" style="width: 210px;" /> <col class="TableStyle-Basic-Column-Column1" /> <col class="TableStyle-Basic-Column-Column1" /></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">onSuccess</td><td class="TableStyle-Basic-BodyE-Column1-Body1">VMXSuccessCompletionHandler</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The method called after a successful cancellation.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">onFailure</td><td class="TableStyle-Basic-BodyB-Column1-Body1">VMXFailureCompletionHandler</td><td class="TableStyle-Basic-BodyB-Column1-Body1">The method called after the cancellation fails.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
       <h3 id="return-type-2">
         
         
@@ -869,7 +869,7 @@ onFailure: ^ (NSError * error) {
 		<td>com.konylabs</td>
 	  </tr>
 	  <tr>
-	    <td>HCLFoundry</td>
+	    <td>VMXFoundry</td>
 		<td>KNYMobileFabric</td>
 	  </tr>
 	  <tr>
@@ -892,7 +892,7 @@ onFailure: ^ (NSError * error) {
         <td>com.konylabs.middleware.dataobject</td>
       </tr>
 	  <tr>
-	    <td>HCLFoundry.OfflineObjects.drop</td>
+	    <td>VMXFoundry.OfflineObjects.drop</td>
 		<td>KNYMobileFabric.OfflineObjects.drop</td>
 	  </tr>
     </table>

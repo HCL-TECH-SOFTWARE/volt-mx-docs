@@ -346,7 +346,7 @@ category.create(record, options, successCallback, errorCallback);  </code></pre>
       </h3>
     
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">void &lt;VMXObj&gt;.create(final HashMap&lt;String, Object&gt;record, final HashMap&lt;String, Object&gt; options, HCLCallback callback) throws Exception</code></pre></figure>
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">void &lt;VMXObj&gt;.create(final HashMap&lt;String, Object&gt;record, final HashMap&lt;String, Object&gt; options, VMXCallback callback) throws Exception</code></pre></figure>
       <h3 id="parameters-1">
         
         
@@ -356,7 +356,7 @@ category.create(record, options, successCallback, errorCallback);  </code></pre>
       </h3>
     
 
-<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" /> <col class="TableStyle-Basic-Column-Column1" /> <col class="TableStyle-Basic-Column-Column1" style="width: 314px;" /> <col class="TableStyle-Basic-Column-Column1" /></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">record</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HashMap&lt;String, Object&gt;</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Specify the record to be created in the database under a given object.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1" data-mc-conditions=""><td class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HashMap&lt;String, Object&gt;</td><td class="TableStyle-Basic-BodyE-Column1-Body1">For future use, supply null or empty HashMap as options.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">callback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">HCLCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">Application must implement <b>onSuccess</b> and <b>onFailure</b> methods of <b>HCLCallback</b> interface. Newly created record is retuned through <b>onSuccess</b> callback and <b>onFailure</b> handler is invoked with cause of failure as an argument in case of error.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
+<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" /> <col class="TableStyle-Basic-Column-Column1" /> <col class="TableStyle-Basic-Column-Column1" style="width: 314px;" /> <col class="TableStyle-Basic-Column-Column1" /></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">record</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HashMap&lt;String, Object&gt;</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Specify the record to be created in the database under a given object.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1" data-mc-conditions=""><td class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HashMap&lt;String, Object&gt;</td><td class="TableStyle-Basic-BodyE-Column1-Body1">For future use, supply null or empty HashMap as options.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">callback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">VMXCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">Application must implement <b>onSuccess</b> and <b>onFailure</b> methods of <b>VMXCallback</b> interface. Newly created record is retuned through <b>onSuccess</b> callback and <b>onFailure</b> handler is invoked with cause of failure as an argument in case of error.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
       <h3 id="sync-options">
         
         
@@ -398,7 +398,7 @@ category.create(record, options, successCallback, errorCallback);  </code></pre>
     //HashMap for options.
     HashMap &lt; String, Object &gt; ;
     options = new HashMap &lt; &gt; ();
-    syncObject.create(newRecord, options, new HCLCallback() {
+    syncObject.create(newRecord, options, new VMXCallback() {
         @Override
         public void onSuccess(Object response) {
             Log.d("Primary key of the newly created record:" + response.get("CATEGORY_ID"));
@@ -416,7 +416,7 @@ category.create(record, options, successCallback, errorCallback);  </code></pre>
 //Disable change tracking
 Hashmap &lt; String, Object &gt; options = new HashMap &lt; &gt; ();
 options.put(KSPublicConstants.TRACK_CHANGES, false);
-sdkObjectSync.create(record, options, new HCLCallback() {
+sdkObjectSync.create(record, options, new VMXCallback() {
     @Override
     public void onSuccess(Object response) {}
 	@Override
@@ -427,7 +427,7 @@ sdkObjectSync.create(record, options, new HCLCallback() {
 HashMap &lt; String, Object &gt; ;
 options = new HashMap &lt; String, Object &gt; ();
 options.put("markForUpload", false);
-syncObject.create(newRecord, options, new HCLCallback() {
+syncObject.create(newRecord, options, new VMXCallback() {
     @Override
     public void onSuccess(Object response) {}
 	@Override
@@ -452,8 +452,8 @@ syncObject.create(newRecord, options, new HCLCallback() {
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">void &lt;VMXObj&gt; create:(NSDictionary &lt;NSString *, id&gt; *) record 
              options:(NSDictionary &lt;NSString *, id&gt; *)options 
-           onSuccess:(HCLSuccessCompletionHandler)onSuccess 
-           onFailure:(HCLFailureCompletionHandler)onFailure</code></pre></figure>
+           onSuccess:(VMXSuccessCompletionHandler)onSuccess 
+           onFailure:(VMXFailureCompletionHandler)onFailure</code></pre></figure>
       <h3 id="parameters-2">
         
         
@@ -463,7 +463,7 @@ syncObject.create(newRecord, options, new HCLCallback() {
       </h3>
     
 
-<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" /> <col class="TableStyle-Basic-Column-Column1" style="width: 204px;" /> <col class="TableStyle-Basic-Column-Column1" style="width: 257px;" /> <col class="TableStyle-Basic-Column-Column1" /></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">record</td><td class="TableStyle-Basic-BodyE-Column1-Body1">NSDictionary&lt;NSString*, id&gt;</td><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">Specify the record to be created in the database under a given object.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1">NSDictionary&lt;NSString*, id&gt;</td><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">For future use, supply null or empty <b>NSDictionary</b> as options.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">onSuccess</td><td class="TableStyle-Basic-BodyE-Column1-Body1">HCLSuccessCompletionHandler</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The function is invoked when records are created successfully. Newly created record is retuned through the success callback.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">onFailure</td><td class="TableStyle-Basic-BodyB-Column1-Body1">HCLFailureCompletionHandler</td><td class="TableStyle-Basic-BodyB-Column1-Body1">The function is invoked on an error with the cause of failure as an argument.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
+<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" /> <col class="TableStyle-Basic-Column-Column1" style="width: 204px;" /> <col class="TableStyle-Basic-Column-Column1" style="width: 257px;" /> <col class="TableStyle-Basic-Column-Column1" /></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">record</td><td class="TableStyle-Basic-BodyE-Column1-Body1">NSDictionary&lt;NSString*, id&gt;</td><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">Specify the record to be created in the database under a given object.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">options</td><td class="TableStyle-Basic-BodyE-Column1-Body1">NSDictionary&lt;NSString*, id&gt;</td><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">For future use, supply null or empty <b>NSDictionary</b> as options.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">onSuccess</td><td class="TableStyle-Basic-BodyE-Column1-Body1">VMXSuccessCompletionHandler</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The function is invoked when records are created successfully. Newly created record is retuned through the success callback.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">onFailure</td><td class="TableStyle-Basic-BodyB-Column1-Body1">VMXFailureCompletionHandler</td><td class="TableStyle-Basic-BodyB-Column1-Body1">The function is invoked on an error with the cause of failure as an argument.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Yes</td></tr></tbody></table>
       <h3 id="sync-options-1">
         
         
@@ -513,7 +513,7 @@ newRecord[@"CATEGORY_PN"] = @"7";
 
 //Disable change tracking
 NSDictionary &lt; NSString * , id &gt; * options = @ {
-    HCLCONSTANTS_TRACK_CHANGES: @NO
+    VMXCONSTANTS_TRACK_CHANGES: @NO
 };
 [sdkObjectSync create: record options: options onSuccess: ^ (id object) {}
     onFailure: ^ (id object) {}
@@ -521,7 +521,7 @@ NSDictionary &lt; NSString * , id &gt; * options = @ {
 
 //Mark for Upload
 NSDictionary &lt; NSString * , id &gt; * options = @ {
-    HCLCONSTANTS_MARK_FOR_UPLOAD: @NO
+    VMXCONSTANTS_MARK_FOR_UPLOAD: @NO
 };
 [sdkObjectSync create: record options: options onSuccess: ^ (id object) {}
     onFailure: ^ (id object) {}
@@ -855,7 +855,7 @@ NSDictionary &lt; NSString * , id &gt; * options = @ {
 		<td>com.konylabs</td>
 	  </tr>
 	  <tr>
-	    <td>HCLFoundry</td>
+	    <td>VMXFoundry</td>
 		<td>KNYMobileFabric</td>
 	  </tr>
 	  <tr>
@@ -878,7 +878,7 @@ NSDictionary &lt; NSString * , id &gt; * options = @ {
         <td>com.konylabs.middleware.dataobject</td>
       </tr>
 	  <tr>
-	    <td>HCLFoundry.OfflineObjects.drop</td>
+	    <td>VMXFoundry.OfflineObjects.drop</td>
 		<td>KNYMobileFabric.OfflineObjects.drop</td>
 	  </tr>
     </table>
