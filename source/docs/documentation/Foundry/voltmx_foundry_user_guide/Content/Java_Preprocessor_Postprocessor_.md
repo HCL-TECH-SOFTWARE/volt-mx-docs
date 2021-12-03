@@ -55,6 +55,8 @@ The step allows you to further filter the data received from a service call.
             ![](Resources/Images/JSValidate.png)
             
             
+            
+            
             **The following are different scenarios that occur when you validate the JavaScript code for the Preprocessor:**
             
             *   If you click **Validate**, and if the JavaScript code has **no errors**, the Validate Successful message appears. You can save the operation.
@@ -86,6 +88,8 @@ The step allows you to further filter the data received from a service call.
             **JavaScript Code Validation for the Postprocessor:** You can validate your JavaScript Code for the postprocessor before saving an operation. To validate the JavaScript code, click the Validate icon in the JavaScript code text box for the postprocessor.
             
             ![](Resources/Images/JSValidate.png)
+            
+            
             
             **The following are different scenarios that occur when you validate the JavaScript code for Postprocessor:**
             
