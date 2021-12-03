@@ -33,7 +33,7 @@ Creates a [media object](media_object.html) from a media file on the device.
 
 {% highlight VoltMx %}
 voltmx.media.createFromFile(  
-    fileobj)
+    fileobj,psp)
 {% endhighlight %}
 
 ### Input Parameters
@@ -138,7 +138,7 @@ Creates a [media object](media_object.html) that plays a remote audio file acros
 
 {% highlight VoltMx %}
 voltmx.media.createFromUri(  
-    uriString)
+    uriString,psp)
 {% endhighlight %}
 
 ### Input Parameters
