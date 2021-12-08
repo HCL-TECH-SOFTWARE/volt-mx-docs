@@ -10,8 +10,9 @@ media Methods
 
 The media Object consists of the following methods.
 
+<h1 id="pause"></h1>
 
-<details close markdown="block"><summary>pause</summary> 
+<details open markdown="block"><summary>pause</summary> 
 
 * * *
 
@@ -47,7 +48,7 @@ Windows10, Android, iOS
 * * *
 
 </details>
-<details close markdown="block"><summary>play</summary> 
+<details open markdown="block"><summary>play</summary> 
 
 * * *
 
@@ -90,7 +91,7 @@ Windows10, Android, iOS
 * * *
 
 </details>
-<details close markdown="block"><summary>releaseMedia</summary> 
+<details open markdown="block"><summary>releaseMedia</summary> 
 
 * * *
 
@@ -123,7 +124,7 @@ Your app can call this function to save memory, especially on devices where memo
 * * *
 
 </details>
-<details close markdown="block"><summary>seek</summary> 
+<details open markdown="block"><summary>seek</summary> 
 
 * * *
 
@@ -165,7 +166,7 @@ Windows10, Android, iOS
 * * *
 
 </details>
-<details close markdown="block"><summary>setCallbacks</summary>
+<details open markdown="block"><summary>setCallbacks</summary>
 
 * * *
 
@@ -245,8 +246,10 @@ Windows10, Android, iOS
 
 * * *
 
+<h1 id="stop"></h1>
+
 </details>
-<details close markdown="block"><summary>stop</summary>
+<details open markdown="block"><summary>stop</summary>
 
 * * *
 
