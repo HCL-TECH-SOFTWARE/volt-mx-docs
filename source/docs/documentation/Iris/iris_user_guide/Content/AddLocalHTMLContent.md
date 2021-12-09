@@ -44,7 +44,7 @@ To add existing HTML content to a project, do the following:
 
 Alternately, you can import HTML content by clicking the context menu arrow of the **Localfiles** folder, clicking **Import File(s)**, navigating to the files and folders you want to import, selecting them, and then clicking **Open**.
 
-You can download the sample HTML and JS files from [here](https://docs.voltmx.com/voltmxlibrary/iris/zip/user_guide/chart2.zip) and see the feature in action.
+You can download the sample HTML and JS files from [here](https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/iris/zip/user_guide/chart2.zip) and see the feature in action.
 
 Create New HTML Content for a Project
 -------------------------------------
