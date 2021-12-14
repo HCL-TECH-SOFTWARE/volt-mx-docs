@@ -6,8 +6,8 @@ category: "voltmx_foundry_user_guide"
 
 User Guide: Create a Volt MX Foundry Account
 
-Accessing the Volt Foundry Cloud Console
-========================================
+Accessing the Volt Foundry Console
+==================================
 
 Before you use various Volt Foundry services, you must create a Volt MX account by following these steps.
 
