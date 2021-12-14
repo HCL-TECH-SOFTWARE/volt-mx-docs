@@ -11,8 +11,8 @@ Accessing the Volt Foundry Cloud Console
 
 Before you use various Volt Foundry services, you must create a Volt MX account by following these steps.
 
-1.  [Create a Volt MX Account](#create-a-volt-mx-foundry-account)
-2.  [Access the Volt Foundry Portal](#access-foundry-portal)
+1.  [Create a Volt MX Account](#create-a-volt-mx-account)
+2.  [Access the Volt Foundry Portal](#access-volt-foundry-portal)
 
 Create a Volt MX Account
 ------------------------
