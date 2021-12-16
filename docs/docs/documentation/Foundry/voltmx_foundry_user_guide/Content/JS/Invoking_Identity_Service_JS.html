@@ -263,17 +263,17 @@ var providerName = &lt; your - provider - name &gt; ;
 var username = &lt; uername - for -your - provider &gt; ;
 var password = &lt; password - for -your - provider &gt; ;
 try {
-    authClient = client.getIdentityService(providerName);
+authClient = client.getIdentityService(providerName);
 } catch (exception) {
-    console.log("Exception" + exception.message);
+console.log("Exception" + exception.message);
 }
 authClient.login({
-    "userid": username,
-    "password": password
+"userid": username,
+"password": password
 }, function(response) {
-    console.log("Login success" + JSON.stringify(response));
+console.log("Login success" + JSON.stringify(response));
 }, function(error) {
-    console.log("Login failure" + JSON.stringify(error));
+console.log("Login failure" + JSON.stringify(error));
 });</code></pre></figure>
 
 <blockquote>
@@ -281,10 +281,9 @@ authClient.login({
 </blockquote>
 
 <blockquote>
-  <p><strong><em>Important:</em></strong> When you select Volt MX User Repository as the identity type, the system does not allow you to provide an identity name.</p>
+  <p><strong><em>Important:</em></strong> When you select Volt MX User Repository as the identity type, the system does not allow you to provide an identity name.<br />
+To use Volt MX User Repository as authentication service, ensure that the value for <code class="language-plaintext highlighter-rouge">providerName</code> is set as <code class="language-plaintext highlighter-rouge">userstore</code>. If you set it with any other value (for example, Volt MX User Repository, User Store or Cloud Repository), the system throws an error.</p>
 </blockquote>
-
-<p>To use Volt MX User Repository as authentication service, ensure that the value for <code class="language-plaintext highlighter-rouge">providerName</code> is set as <code class="language-plaintext highlighter-rouge">userstore</code>. If you set it with any other value (for example, Volt MX User Repository, User Store or Cloud Repository), the system throws an error.</p>
       <h2 id="login-with-provider-type-as-oauthsaml">
         
         
@@ -298,16 +297,16 @@ authClient.login({
 var authClient = null;
 var providerName = &lt; your - provider - name &gt; ;
 try {
-    authClient = client.getIdentityService(providerName);
+authClient = client.getIdentityService(providerName);
 } catch (exception) {
-    console.log("Exception" + exception.message);
+console.log("Exception" + exception.message);
 }
 authClient.login({},
-    function(response) {
-        console.log("Login success" + JSON.stringify(response));
-    }, function(error) {
-        console.log("Login failure" + JSON.stringify(error));
-    }
+function(response) {
+console.log("Login success" + JSON.stringify(response));
+}, function(error) {
+console.log("Login failure" + JSON.stringify(error));
+}
 );</code></pre></figure>
 
 <blockquote>
@@ -333,17 +332,17 @@ options["noPopup"] = true; // This parameter in options will open the login url 
 options["success_url"] = http: //mynativeapplication; // This is a deeplink url, where the control will be redirected after login.
 
 try {
-    //The client is the voltmx.sdk();
-    authClient = client.getIdentityService(providerName);
+//The client is the voltmx.sdk();
+authClient = client.getIdentityService(providerName);
 } catch (exception) {
-    console.log("Exception" + exception.message);
+console.log("Exception" + exception.message);
 }
 authClient.login(options,
-    function(response) {
-        console.log("Login success" + JSON.stringify(response));
-    }, function(error) {
-        console.log("Login failure" + JSON.stringify(error));
-    }
+function(response) {
+console.log("Login success" + JSON.stringify(response));
+}, function(error) {
+console.log("Login failure" + JSON.stringify(error));
+}
 );</code></pre></figure>
 
 <p>The sample above shows various parameters similar to the parameters of the <a href="#login-with-provider-type-as-oauth-saml">Login with provider type as OAuth/SAML</a>. The following two optional parameters are added further.</p>
@@ -360,10 +359,10 @@ authClient.login(options,
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx"> // windown.onload gets called upon page reload, client can choose which method should be called after the deeplink redirection. In this sample onload gets called after redirection.
 
 window.onload = function() {
-    // Getting the current url to retrieve the query params.
-    var url = window.location.href;
-    var hashes = url.split("?")[1];
-    var queryParams = {};
+// Getting the current url to retrieve the query params.
+var url = window.location.href;
+var hashes = url.split("?")[1];
+var queryParams = {};
 
     if (hashes) {
         var hash = hashes.split('&amp;');
@@ -379,6 +378,7 @@ window.onload = function() {
             alert("Client login failure");
         });
     }
+
 };</code></pre></figure>
 
 <p>For more information on deep links, click <a href="/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Introduction.html">here</a>.</p>
@@ -396,12 +396,12 @@ var userid = &lt; username_for_logged_in_provider &gt; ;
 var password = &lt; password_for_logged_in_provider &gt; ;
 var forceFromServer = true / false;
 authClient.getBackendToken(forceFromServer, {
-    "userid": userid,
-    "password": password  
+"userid": userid,
+"password": password  
 }, function(response) {
-    console.log("Backend token is  :" + JSON.stringify(response));  
+console.log("Backend token is :" + JSON.stringify(response));  
 }, function(error) {    
-    console.log("Failed to get backend token : " + JSON.stringify(error));
+console.log("Failed to get backend token : " + JSON.stringify(error));
 });</code></pre></figure>
 
 <blockquote>
@@ -423,11 +423,11 @@ authClient.getBackendToken(forceFromServer, {
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx"> // Sample code to get user profile details
 var forceFromServer = true / false;
 authClient.getProfile(forceFromServer,
-    function(response) {
-        console.log("User profile is  :" + JSON.stringify(response));
-    }, function(error) {
-        console.log("Failed to fetch profile : " + JSON.stringify(error));
-    }
+function(response) {
+console.log("User profile is :" + JSON.stringify(response));
+}, function(error) {
+console.log("Failed to fetch profile : " + JSON.stringify(error));
+}
 );</code></pre></figure>
 
 <blockquote>
@@ -476,14 +476,14 @@ Var providerType = authClient.getProviderType();</code></pre></figure>
       </h2>
     
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx"> // Sample code to logout from auth serviceauthClient .logout( 
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx"> // Sample code to logout from auth serviceauthClient .logout(
 function(response) {
-    console.log("Logout success" + JSON.stringify(response));
+console.log("Logout success" + JSON.stringify(response));
 },
 function(error) {
-    console.log("Logout failure" + JSON.stringify(error));
+console.log("Logout failure" + JSON.stringify(error));
 }
-    );</code></pre></figure>
+);</code></pre></figure>
 
 <blockquote>
   <p><strong><em>Note:</em></strong> The authClient is the IdentityService object for the loggedIn provider.</p>
