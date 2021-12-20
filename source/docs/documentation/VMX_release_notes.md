@@ -11,7 +11,7 @@ This topic lists new features, enhancements, and changes in Volt MX.
 Note: For detailed information about fixes and known issues in 	Volt MX, see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
 
 [Volt Iris](#volt-iris)
-- [V9 Servicepack 2 Fixpack 37](#v9-servicepack-2-fixpack-37)
+- [V9 Servicepack 2 Fixpack 37](#v9-servicepack-2-fixpack-38)
 - [Earlier Iris releases](#earlier-iris-releases)
 
 [Volt Foundry](#volt-foundry)
@@ -19,6 +19,12 @@ Note: For detailed information about fixes and known issues in 	Volt MX, see the
 - [Earlier Foundry releases](#earlier-foundry-releases)
 
 ## Volt Iris
+
+### V9 Servicepack 2 Fixpack 38
+
+#### Iris Enhancements
+
+There are no new features or enhancements in this release. The purpose of this fixpack is to address the log4j threat. For the relevant Support note, see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
 
 ### V9 Servicepack 2 Fixpack 37
 
