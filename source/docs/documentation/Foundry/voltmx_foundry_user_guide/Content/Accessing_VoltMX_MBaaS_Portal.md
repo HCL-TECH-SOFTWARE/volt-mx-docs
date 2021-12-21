@@ -62,11 +62,11 @@ From the Volt Foundry Console, you can use the lefthand navigation pane to acces
 * [API Management](API_Management.md): Configure and manage (create, edit, and delete) app services (identity, integration, and orchestration) without linking or configuring them within an app.
 * [Developer Portal](VoltMXDevPortal.md): Allows you to create a Portal for exposing APIs created using Volt Foundry. Developers from internal and external partner teams can access the portal created to explore and test the APIs.
 * **Clouds (Environments)**: For more information on Cloud/Environments, refer to [Environments - Cloud](Environments-Cloud.md).
-* **Reports**: For more information on **Reports**, refer to [Custom metrics and reports](../../Foundry/custom_metrics_and_reports/Content/Custom_Metrics_and_Reports_Guide.md).
+* **Reports**: For more information on **Reports**, refer to [Custom metrics and reports](../../custom_metrics_and_reports/Content/Custom_Metrics_and_Reports_Guide.md).
 * **Settings**: Allows you to invite users associated with account roles such as admin, billing, and member.
 * **Support**: Displays links to the latest tutorials and articles and Developer resources from Base Camp Library. [Click here for more information](Support.md).
 
     > **_Note:_** The release version of a console is displayed at the bottom left corner in the console menu pane. The release version is in the following format:  
-    `<Major_version> <servicepack> <hotfix> <DEV/QA>`  
-    For example: `V8 SP1 HF4 DEV`
+    `<Major_version> <servicepack> <hotfix>`  
+    For example: `V9 SP2 FP1 HF7`
     
