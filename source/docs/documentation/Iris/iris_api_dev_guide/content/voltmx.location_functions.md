@@ -374,7 +374,7 @@ For Android Channel apps, the following permissions are required.
 In Project settings -> Native -> Android Mobile/Tablet, make these two changes:
 
 - Check "Use Google Play Location Services".
-- Add the permission tag under manifest tag <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+- Add the permission tag under manifest tag \<uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/\>
 
 For more details on these permissions, see [https://developer.android.com/training/location/permissions](https://developer.android.com/training/location/permissions).
 
