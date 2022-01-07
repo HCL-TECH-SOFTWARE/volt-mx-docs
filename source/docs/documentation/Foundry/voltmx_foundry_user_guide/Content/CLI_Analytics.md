@@ -62,11 +62,9 @@ The `wrap` command helps the user to enable analytics into third-party client ap
 
 For example, analytics attributes such as Volt MX Foundry-SDK, App Key and App Secret, and App Service URL. At the end of the successful wrapping, the app client binary gets bundled with the analytics attributes and downloaded to the MFCLI admin's directory. Now the client app binary is enabled with the analytics capability.
 
-> **_Important:_** The analytics wrapping feature is supported with versions older than `SDK-GA-8.0.0`. If you use `SDK-GA-8.0.0` or higher versions of Volt MX Foundry SDK for analytics wrapping, the app will not work as expected after wrapping.  
-  
+> **_Important:_** The analytics wrapping feature is supported with versions older than `SDK-GA-8.0.0`. If you use `SDK-GA-8.0.0` or higher versions of Volt MX Foundry SDK for analytics wrapping, the app will not work as expected after wrapping.<br>    
 HCL recommends that you use any of the Volt MX Foundry SDK versions less than or equal to `SDK-GA-7.3.0.17` for analytics wrapping available from Volt MX Download portal.  
-While executing the `wrap` command from MFCLI, admin must pass the optional field value `--sdk-version “x.x[.x][.x]”`. Otherwise MFCLI consume the latest version of SDK by default.  
-  
+While executing the `wrap` command from MFCLI, admin must pass the optional field value `--sdk-version “x.x[.x][.x]”`. Otherwise MFCLI consume the latest version of SDK by default.<br>   
 For example, if you want to specify the SDK version SDK-GA-7.3.0.17 for wrap command, pass the value as in this format: `--sdk-version “7.3.0.17”`
 
 **The following is a sample command to wrap an app binary to manage.hclvoltmx.com**  
@@ -172,8 +170,11 @@ In this example, a user needs to perform the following two steps:
     
     {% highlight voltMx %} java -jar mfcli.jar wrap -u <user> -p <password> -t <account id> -a <app name> -e <environment name> -cb <client binary file> -plat <client binary platform> -ks <keystore file> -kpp <keystore passphrase> -cpp <certificate passphrase> -ca <certificate alias>
     {% endhighlight %}
+
     
-    The Volt MX Foundry app is created with the given name by the user. The analytics enabled app binary is stored in the Volt MX Foundry workspace. Volt MX Foundry Admin can access the analytics enabled app binary in **VoltMX Foundry Console > Apps** page - for example, `SampleAnalyticsWrapApp`. Now, the analytics enabled app binary can be distributed to users.
+The Volt MX Foundry app is created with the given name by the user. The analytics enabled app binary is stored in the Volt MX Foundry workspace. Volt MX Foundry Admin can access the analytics enabled app binary in **VoltMX Foundry Console > Apps** page - for example, `SampleAnalyticsWrapApp`. Now, the analytics enabled app binary can be distributed to users.
+
+   
     
 2.  Make the analytics enabled app binary available to users in one of the ways mentioned below:
     *   To distribute the analytics enabled app binary to users enrolled with Management Server, Volt MX Foundry Admin can use the [**VoltMX Foundry Console > Publish > Native Client**]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Publish_Native_Client.html)  feature to publish the analytics app to Volt MX Management environment as `Sign Only`. After successful publish of the analytics enabled app binary, the app gets published to the environment. Now, the targeted users can download and install the analytics enabled app on their devices using the Enterprise Store.

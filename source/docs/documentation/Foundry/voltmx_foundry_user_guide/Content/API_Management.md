@@ -11,8 +11,7 @@ APIs - API Management
 
 A Volt MX Foundry app comprises a group of services, [shared and non-shared services](Export-Import_Apps.html#Shared-NonSharedServices). With API Management, you can manage (create, edit, and delete) shared services (identity, integration, orchestration, objects, and logic for Node.js services) without linking or configuring them within an app. After configuring the services in the **APIs** page, you can edit, clone, view a sample code, and delete a service. When you create the services in the **APIs** page, the services are not linked to apps automatically. You can link the services across any apps created for that account in Volt MX Foundry Console. The **APIs** page also allows you to view the list of apps or services that are using or referencing a given service. When you make changes to the services in the **APIs** page, the changes will be reflected in the services associated with other apps.
 
-> **_Note:_**  You can edit a service. When you make a change to the service, the changes will be reflected in the services associated with other apps.  
-
+> **_Note:_**  You can edit a service. When you make a change to the service, the changes will be reflected in the services associated with other apps.<br>  
 You cannot delete a service if it is associated with an app or a service.
 
 To create services through the APIs page, follow these steps:

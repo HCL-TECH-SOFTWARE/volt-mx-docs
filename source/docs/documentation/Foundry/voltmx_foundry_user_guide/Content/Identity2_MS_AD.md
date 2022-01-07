@@ -28,7 +28,7 @@ The process of configuring your Active Directory service depends on the authenti
 
 To create an Active Directory service using **SAML** authentication mode, follow these steps:
 
-1.  Under the **[**Identity** service designer](ConfigureIdentiryService.html#IdentitySDpage)** page, type a name for the service in the **Enter Service Name** text box.
+1.  Under the [Identity service designer](ConfigureIdentiryService.html#IdentitySDpage) page, type a name for the service in the **Enter Service Name** text box.
 2.  From the **Type of Identity** list, select **Microsoft Active Directory**.
 3.  From the **Auth Mode** list, select **SAML**.
 4.  Download metadata from your identity provider from the following link:  
@@ -37,7 +37,7 @@ To create an Active Directory service using **SAML** authentication mode, follow
     
 
 1.  From the **Metadata Mode**, select an option to upload metadata.
-    *   If you click **Metadata File**, the system displays **Metadata File** option. Click **Browse** to navigate to your identity provider metadata file that you downloaded, and  then click **Open**. The system uploads your metadata file - for example, `idpmetadata.xml`.
+    *   If you click **Metadata File**, the system displays **Metadata File** option. Click **Browse** to navigate to your identity provider metadata file that you downloaded, and  then click **Open**. The system uploads your metadata file - for example, idpmetadata.xml.
     *   If you click **Metadata URL**, the system displays **Metadata URL** text box. Enter the URL for the metadata.
 2.  Under the **Choose Assertion Consumer Service Binding**, by default, this field is set to the Artifact Binding. Choose one of the following options:
     *   **Artifact Binding** – to transmit SAML request and response messages in a single protocol using two different bindings.
@@ -141,7 +141,7 @@ To upload your service provider's metadata to ADFS, follow these steps:
 
 To create Active Directory service **using **LDAP/LDAPS** authentication**, follow these steps:
 
-1.  Under the **[**Identity** service designer](Identity.html#IdentitySDpage)** page, type a name for the service in the **Enter Service Name** text box.
+1.  Under the [Identity service designer](Identity.html#IdentitySDpage)** page, type a name for the service in the **Enter Service Name** text box.
 2.  From the **Type of Identity** list, select **Microsoft Active Directory**.
     
 3.  From the **Auth Mode** list, select **LDAP/LDAPS**.
@@ -309,20 +309,20 @@ This is used for fetching profile or other information and to retrieve user info
     
 <details close markdown="block"><summary>Steps to copy the entity ID and reply URL for Identity Service.</summary>
     
-    **Pre-Requisite** - App must be in published state to copy the steps.
+**Pre-Requisite** - App must be in published state to copy the steps.
     
-    **Steps:**
+**Steps:**
     
-    1.  Go to **Publish** tab.
-    2.  On the relevant **Environment** click **Download**. **Azure SAML Endpoints** option appears.
+1.  Go to **Publish** tab.
+2.  On the relevant **Environment** click **Download**. **Azure SAML Endpoints** option appears.
         
-        ![](Resources/Images/ID_AZSAML_Download_504x223.png)
+![](Resources/Images/ID_AZSAML_Download_504x223.png)
         
-    3.  Click on it to view the **Entity ID** and **Reply URLs** for all Azure SAML providers linked to the app.
+3.  Click on it to view the **Entity ID** and **Reply URLs** for all Azure SAML providers linked to the app.
         
-        ![](Resources/Images/ID_AZSAML_Copy_502x204.png)
+![](Resources/Images/ID_AZSAML_Copy_502x204.png)
         
-    4.  Mouse hover on the values and click **Copy** to copy the value.
+4.  Mouse hover on the values and click **Copy** to copy the value.
 </details>
     
 15. To view the service provider's metadata, click the **Download app documentation** button in the **Published Environment** box. Click **SAML Metadata** and then select the desired metadata from the list.  

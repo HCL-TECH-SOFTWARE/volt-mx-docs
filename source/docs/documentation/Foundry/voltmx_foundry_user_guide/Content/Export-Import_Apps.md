@@ -50,8 +50,7 @@ How to Export an App
 
 When an app is exported from a workspace, the exported app is saved with the same name of the app - for example, `ExportApp.zip`. An exported .zip file has an app's configured services information, such as icon files, certificates, .XML files, and meta files.
 
-> **_Note:_**  You cannot import an exported app after you modify the structure in the exported app. Support for importing an edited zip (exported app) file is not available. If you try to import an edited ZIP file, the system may fail to import the app successfully.  
-  
+> **_Note:_**  You cannot import an exported app after you modify the structure in the exported app. Support for importing an edited zip (exported app) file is not available. If you try to import an edited ZIP file, the system may fail to import the app successfully.<br>   
 An exported zip file should have the correct folder structure. An exported zip file should have correct references in meta files. For more details about the folder structure of an exported app, refer to the [Folder Structure of an Exported App](#folder-structure-of-an-exported-app) section.
 
 > **_Important:_**  Before exporting an app, do not unlink identity services that are referenced in the integration services of the app.  
@@ -112,21 +111,21 @@ To import an app as a new app, follow these steps:
         2.   If there are any associated JAR files or services in the app that will conflict with the account, they will be listed in the Import App dialog box.  
             ![](Resources/Images/Import_Overwrite_Existing_Services.PNG)  
             
-            *   If you want to download a file containing a list of the asset conflicts, click the **Conflict Assets List** button.
-            *   If you want to cancel the app import, click **Cancel**.
-            *   If you want to finish the import, click **Confirm Overwrite**.
+        *   If you want to download a file containing a list of the asset conflicts, click the **Conflict Assets List** button.
+        *   If you want to cancel the app import, click **Cancel**.
+        *   If you want to finish the import, click **Confirm Overwrite**.
               
             
-            > **_Important:_**    While overwriting an app, if the app names are same, the new data will override the existing data.  
+        > **_Important:_**    While overwriting an app, if the app names are same, the new data will override the existing data.  
             
-            Based on various services configured in an existing app, the system overwrites the existing data from a zip file. For example:
+        Based on various services configured in an existing app, the system overwrites the existing data from a zip file. For example:
             
-            *   While overwriting an app, if a provider in that Volt MX account exists with the importing identity provider name, the system fails to import the zip file.
-            *   While overwriting an app, if the existing app has identity, integration, and orchestration services, these services will be unlinked from the existing app.
-            *   While overwriting an app, if the names of the existing app's integration and orchestration services are the same as those in the zip file, these services will be updated.
-            *   While overwriting an app, all non-shared services (synchronization and engagement) are overwritten into the existing app. The existing app will only contain new data. You cannot retrieve old data in the existing app.
+        *   While overwriting an app, if a provider in that Volt MX account exists with the importing identity provider name, the system fails to import the zip file.
+        *   While overwriting an app, if the existing app has identity, integration, and orchestration services, these services will be unlinked from the existing app.
+        *   While overwriting an app, if the names of the existing app's integration and orchestration services are the same as those in the zip file, these services will be updated.
+        *   While overwriting an app, all non-shared services (synchronization and engagement) are overwritten into the existing app. The existing app will only contain new data. You cannot retrieve old data in the existing app.
             
-            > **_Note:_**  You can also import an app via API. For more details, refer to [Continuous Integration - Import an app via API](CI_with_Foundry_APIs.html#import-an-app)
+        > **_Note:_**  You can also import an app via API. For more details, refer to [Continuous Integration - Import an app via API](CI_with_Foundry_APIs.html#import-an-app)
             
 
 How to Import an App to an Existing App

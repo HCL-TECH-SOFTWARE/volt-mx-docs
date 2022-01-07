@@ -13,9 +13,8 @@ You need to create an environment to publish your apps. Environments can include
 
 > **_Important:_**  As a user, you must be an admin or owner to access the Environments page and perform different tasks based on your role.
 
-> **_Important:_**  Ensure that your environments include all required servers that are part of an app.  
-  
-For example, if your environment contains only Volt MX Foundry Sync, and you try to publish an app with Volt MX Foundry Engagement, the system throws an error.
+> **_Important:_**  Ensure that your environments include all required servers that are part of an app.<br>  
+  For example, if your environment contains only Volt MX Foundry Sync, and you try to publish an app with Volt MX Foundry Engagement, the system throws an error.
 
 How to Add an Environment
 -------------------------
@@ -59,30 +58,30 @@ To add an environment, follow these steps:
     
 <details close markdown="block"><summary>Click here to configure other environments such as Engagement, Sync, or Management.</summary>
     
-    1.  To configure the Volt MX Foundry Engagement, click the **Engagement** tab, and provide the following details:
-        *   **URL**: Enter the URL for your Volt MX Foundry Engagement.
+1.  To configure the Volt MX Foundry Engagement, click the **Engagement** tab, and provide the following details:
+    *   **URL**: Enter the URL for your Volt MX Foundry Engagement.
         *   Under **Advanced**:
             
-            *   **Feature Username**: By default, this field shows the default username of Volt MX Foundry Engagement. You can modify the username, if required.
+        *   **Feature Username**: By default, this field shows the default username of Volt MX Foundry Engagement. You can modify the username, if required.
             
-            *   **Feature Password**: By default, this field shows the default password of Volt MX Foundry Engagement. You can modify the password, if required.
+        *   **Feature Password**: By default, this field shows the default password of Volt MX Foundry Engagement. You can modify the password, if required.
                 
-                > **_Important:_**  Support for Volt MX Foundry Engagement is available from Volt MX Foundry Engagement Version 6.0.1 onwards.
+        > **_Important:_**  Support for Volt MX Foundry Engagement is available from Volt MX Foundry Engagement Version 6.0.1 onwards.
                 
-    2.  To configure the Volt MX Foundry Sync, click the **Sync** tab, and provide the following details:
-        *   **URL**: Enter the URL for your Volt MX Foundry Sync.
-        *   Under **Advanced**:
+2.  To configure the Volt MX Foundry Sync, click the **Sync** tab, and provide the following details:
+    *   **URL**: Enter the URL for your Volt MX Foundry Sync.
+    *   Under **Advanced**:
             
-            *   **Feature Username**: By default, this field shows the default username of Volt MX Foundry Sync. You can modify the username, if required.
+    *   **Feature Username**: By default, this field shows the default username of Volt MX Foundry Sync. You can modify the username, if required.
             
-            *   **Feature Password**: By default, this field shows the default password of Volt MX Foundry Sync. You can modify the password, if required.
-    3.  To configure the Volt MX Foundry Management, click the **Management** tab, and provide the following details:
-        *   **URL**: Enter the URL for your Volt MX Foundry Management.
-        *   Under **Advanced**:
+    *   **Feature Password**: By default, this field shows the default password of Volt MX Foundry Sync. You can modify the password, if required.
+3.  To configure the Volt MX Foundry Management, click the **Management** tab, and provide the following details:
+    *   **URL**: Enter the URL for your Volt MX Foundry Management.
+    *   Under **Advanced**:
             
-            *   **Feature Username**: By default, this field shows the default username of Volt MX Foundry Management. You can modify the username, if required.
+    *   **Feature Username**: By default, this field shows the default username of Volt MX Foundry Management. You can modify the username, if required.
             
-            *   **Feature Password**: By default, this field shows the default password of Volt MX Foundry Management. You can modify the password, if required.
+    *   **Feature Password**: By default, this field shows the default password of Volt MX Foundry Management. You can modify the password, if required.
 
 </details>
     
@@ -92,8 +91,7 @@ To add an environment, follow these steps:
     ![](Resources/Images/OnPrem/Env_Server_591x494.png)
     
     > **_Important:_**  The system allows you to add a unique server URL to only one environment.  
-    If a server is already configured with an environment and you try to add the same server to another environment, the system will throw an error, shown below:  
-      
+    If a server is already configured with an environment and you try to add the same server to another environment, the system will throw an error, shown below:<br>  
     ![](Resources/Images/OnPrem/Env_Error.png)  
     Click **OK** to confirm.
     
