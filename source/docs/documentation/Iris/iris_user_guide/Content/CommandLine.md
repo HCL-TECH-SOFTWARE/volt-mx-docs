@@ -108,10 +108,10 @@ cloud.password=
 #Provide Volt MX Foundry specific details 
 voltmxfoundry.url=  
   
-\# Environment.Name used for publishing example using the format LocalDevEnv  
-\# For example, if your Volt MX Foundry Environment URL is:  
-\# https://mycompany.voltmxcloud.com  
-\# then the value is as follows: environment.name=mycompany
+#Environment.Name used for publishing example using the format LocalDevEnv  
+#For example, if your Volt MX Foundry Environment URL is:  
+#https://mycompany.voltmxcloud.com  
+#then the value is as follows: environment.name=mycompany
 environment.name=  
 account.id=  
 mf.appname=  
@@ -202,7 +202,7 @@ combinewar.ear=false
 #Provide full path of dependant libraries,Separate with semicolon(;) if there are multiple libraries
 combinewar.dependencylibraries=  
   
-\# Supported context paths for Volt MX Foundry components, if customized.  
+#Supported context paths for Volt MX Foundry components, if customized.  
 context.path.identity
 context.path.workspace
 context.path.accounts  
@@ -218,9 +218,7 @@ login.siteminder.url
 {% endhighlight %}
 
 > **_Important:_** If you do not want to store your password in the headless build.properties file, you can use mfcli to encrypt your password. You can download the mfcli.jar from [https://community.hclvoltmx.com/downloads](https://community.hclvoltmx.com/downloads).  
-  
-Ensure that you use the corresponding version of MFCLI as that of the Iris. i.e 7.x iris, 7.x mfcli, 8.x iris, 8.x mfcli.  
-  
+Ensure that you use the corresponding version of MFCLI as that of the Iris. i.e 7.x iris, 7.x mfcli, 8.x iris, 8.x mfcli.    
 To encrypt the password using mfcli (using default password.encryption.key),  
 `java -jar mfcli.jar encrypt "VoltMX@1234"  
 Encrypted password is: en1801f1abee7b9e12426c062509e1b18epd`
@@ -252,10 +250,10 @@ cloud.password=Abc@123
 #Provide Volt MX Foundry specific details 
 voltmxfoundry.url=https://mbaastest25.hcl.net:443  
   
-\# Environment.Name used for publishing example using the format LocalDevEnv  
-\# For example, if your Volt MX Foundry Environment URL is:  
-\# https://mycompany.voltmxcloud.com  
-\# then the value is as follows: environment.name=mycompany
+#Environment.Name used for publishing example using the format LocalDevEnv  
+#For example, if your Volt MX Foundry Environment URL is:  
+#https://mycompany.voltmxcloud.com  
+#then the value is as follows: environment.name=mycompany
 environment.name=
 
 {% endhighlight %}
@@ -299,10 +297,10 @@ To configure Volt MX Foundry parameters, follow these steps:
     #Provide Volt MX Foundry specific details 
     voltmxfoundry.url=https://mbaastest25.hcl.net:443  
       
-    \# Environment.Name used for publishing example using the format LocalDevEnv  
-    \# For example, if your Volt MX Foundry Environment URL is:  
-    \# https://mycompany.voltmxcloud.com  
-    \# then the value is as follows: environment.name=mycompany
+    #Environment.Name used for publishing example using the format LocalDevEnv  
+    #For example, if your Volt MX Foundry Environment URL is:  
+    #https://mycompany.voltmxcloud.com  
+    #then the value is as follows: environment.name=mycompany
     environment.name=
     {% endhighlight %}
 6.  In order to enable services, you need to publish the app at least once from IDE.
