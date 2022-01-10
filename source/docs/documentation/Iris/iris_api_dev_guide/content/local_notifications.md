@@ -14,7 +14,7 @@ When you run your app on a device with Android OS 8.0 or above, Volt MX uses def
 
 > **_Note:_** Each app on a device is limited to 64 scheduled local notifications. The system discards scheduled notifications exceeding this limit. Recurring notifications are treated as a single notification.
 
-![](resources/images/pushmsg_253x491.jpg)
+![](resources/images/pushmsg_253x491.png)
 
 The local notification system consists of the following namespace and related functions:
 
