@@ -2774,12 +2774,83 @@ voltmx.application.requestPermission(resourceId\[constant/String\], statusCallba
 
 ### Input Parameters
 
-| Parameter | Description |
-| --- | --- |
-| resourceId \[constant/String\] - Mandatory | Specifies the ID of the resource or name of the permission (only for Android) that you want to access. You can specify either a String (permission name) or an integer (resourceId) value. The feature to specify the name of the permission as a String is applicable only for Android. For instance, you can query a Native Android permission from the AndroidManifest.xml file by specifying the String directly: "android.permission.READ\_PHONE\_STATE". The available **resourceId** constants are as follows: voltmx.os.RESOURCE\_CAMERA voltmx.os.RESOURCE\_LOCATION voltmx.os.RESOURCE\_PHOTO\_GALERY voltmx.os.RESOURCE\_CONTACTS voltmx.os.RESOURCE\_CALENDAR voltmx.os.RESOURCE\_SIRI (iOS-specific) voltmx.os.RESOURCE\_AUDIO\_RECORD voltmx.os.RESOURCE\_NOTIFICATION (iOS-specific) |
-| statusCallback \[Function\] - Mandatory | A callback function receives the end-user's decision. The statusCallback function receives a JS Object, which contains overall status and permission-specific status that end-user responded on the permission dialog box. function statusCallback(response); Here, **response** is a hash map that contains the authorization status of the requested resource. This argument contains the following key: status \[constant\] Resource status constant that indicates the overall status of the resource authorization. The possible values for **status** are as follows: voltmx.application.PERMISSION\_GRANTED voltmx.application.PERMISSION\_DENIED voltmx.application.PERMISSION\_NEVER\_ASK\_AGAIN |
-| options \[JSObject\] - Optional | > Specifies the additional option to identify the resource for which you want permission. This key is applicable on android only. To obtain the voltmx.application.PERMISSION\_NEVER\_ASK\_AGAIN status, you have to set the `getNeverAskAgainStatus` key to true and pass the key in the options object. If the key is not set, and the user selects either the Deny or Never Ask Again options, then the permission status is considered as Volt MX.application.PERMISSION\_DENIED.var options = { "isVideoCapture": true, "getNeverAskAgainStatus": true } |
-| options \[Object\] - For Notifications | This is a mandatory parameter for notifications. {notificationtypes : constants} The available constants are as follows: voltmx.notificationsettings.BADGE voltmx.notificationsettings.SOUND voltmx.notificationsettings.ALERT |
+<table>
+<tr>
+<style>
+  mark { 
+  background-color:#e3e3e3;
+  color: black;
+ }
+</style>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>resourceId [constant/String] - Mandatory</td>
+<td>
+<p></p>
+<p>Specifies the ID of the resource or name of the permission (only for Android) that you want to access. You can specify either a String (permission name) or an integer (resourceId) value.</p>
+<br>
+<p>The feature to specify the name of the permission as a String is applicable only for Android. For instance, you can query a Native Android permission from the AndroidManifest.xml file by specifying the String directly: “android.permission.READ_PHONE_STATE”.</p>
+<br>
+<p>The available resourceId constants are as follows:</p>
+<ul>
+<li>voltmx.os.RESOURCE_CAMERA</li>
+<li>voltmx.os.RESOURCE_LOCATION</li>
+<li>voltmx.os.RESOURCE_PHOTO_GALERY</li>
+<li>voltmx.os.RESOURCE_CONTACTS</li>
+<li>voltmx.os.RESOURCE_CALENDAR</li>
+<li>voltmx.os.RESOURCE_SIRI (iOS-specific)</li>
+<li>voltmx.os.RESOURCE_AUDIO_RECORD (iOS-specific)</li>
+<li>voltmx.os.RESOURCE_NOTIFICATION (iOS-specific)</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>statusCallback [Function] - Mandatory</td>
+<td>
+<p></p>
+<p>A callback function receives the end-user’s decision. The statusCallback function receives a JS Object, which contains overall status and permission-specific status that end-user responded on the permission dialog box.</p>
+<br>
+<p><mark>function statusCallback(response);</mark></p>
+<br>
+<p>Here, response is a hash map that contains the authorization status of the requested resource. This argument contains the following key:</p>
+<br>
+<p>status [constant]</p>
+<br>
+<p>Resource status constant that indicates the overall status of the resource authorization. The possible values for status are as follows:</p>
+<ul>
+<li>voltmx.application.PERMISSION_GRANTED</li>
+<li>voltmx.application.PERMISSION_DENIED</li>
+<li>voltmx.application.PERMISSION_NEVER_ASK_AGAIN</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>options [JSObject] - Optional</td>
+<td>
+<p>Specifies the additional option to identify the resource for which you want permission. This key is applicable on android only.
+</p>
+<p>To obtain the voltmx.application.PERMISSION_NEVER_ASK_AGAIN status, you have to set the getNeverAskAgainStatus key to true and pass the key in the options object. If the key is not set, and the user selects either the Deny or Never Ask Again options, then the permission status is considered as Volt MX.application.PERMISSION_DENIED.</p>
+<pre style="position: relative;"><input type="button" id="button" class="btn" style="float: right;" onclick="var codeSnippet = this.parentNode.textContent; copyFunction(codeSnippet, this);"><mark>var options = {
+    "isVideoCapture": true,
+    "getNeverAskAgainStatus": true
+}</mark><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</td>
+</tr>
+<tr>
+<td>options [Object] - For Notifications</td>
+<td>
+<p>This is a mandatory parameter for notifications.</p>
+<p><mark>{notificationtypes : constants}</mark></p><br><p>The available constants are as follows:</p>
+<ul>
+<li>voltmx.notificationsettings.BADGE</li>
+<li>voltmx.notificationsettings.SOUND</li>
+<li>voltmx.notificationsettings.ALERT</li>
+</ul>
+</td>
+</tr>
+</table>
 
 ### Example 1
 
@@ -2838,9 +2909,24 @@ function permissionStatusCallback(response) {
 ### Return Values
 
   
-| Function | Description |
-| --- | --- |
-| JSObject | A JSObject contains the authorization status of the requested resource. The returned JSObject contains the following key: status \[constant\] Resource status constant which indicates the overall status of the resource authorization. For more information, refer to [Permission Status](runtime_permissions.html#permission-status). > **_Note:_** In the Android platform, the status remains PERMISSION\_DENIED if at least one of the permissions associated with the resource is denied by the end-user. |
+<table>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>JSObject</td>
+<td>
+<p></p>
+<p>A JSObject contains the authorization status of the requested resource. The returned JSObject contains the following key:</p>
+<br>
+<p>status [constant]</p>
+<br>
+<p>Resource status constant which indicates the overall status of the resource authorization. For more information, refer to <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/runtime_permissions.html#permission-status">permission-status.</a></p>
+<p><blockquote><em>Note : </em>In the Android platform, the status remains PERMISSION\_DENIED if at least one of the permissions associated with the resource is denied by the end-user.</blockquote></p>
+</td>
+</tr>
+</table>
 
 ### Platform Availability
 
