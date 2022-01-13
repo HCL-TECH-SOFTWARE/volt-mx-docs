@@ -454,7 +454,7 @@ voltmx.application.checkPermission(resourceId\[constant/String\], options\[JSObj
 
 | Parameter | Description |
 | --- | --- |
-| resourceId \[constant/String\] - Mandatory | Specify the ID of the resource or name of the permission (only for Android) for which you want to check the status. You can specify either a String (permission name) or an integer (resourceId) value. The feature to specify the name of the permission as a String is applicable only for Android. For instance, you can query a Native Android permission from the AndroidManifest.xml file by specifying the String directly: "android.permission.READ\_PHONE\_STATE". |
+| resourceId \[constant/String\] - Mandatory | Specify the ID of the resource or name of the permission for which you want to check the status. You can specify either a String (permission name) or an integer (resourceId) value.<br><br> The feature to specify the name of the permission as a String is applicable only for Android. For instance, you can query a Native Android permission from the AndroidManifest.xml file by specifying the String directly: "android.permission.READ\_PHONE\_STATE". |
 | options \[JSObject\] - Optional | Specify the additional option to identify the exact resource of which you want to know the status. This is a platform-specific key. For more information, refer to Resource ID. |
 
  
@@ -493,7 +493,7 @@ A JS Object contains the authorization status of the requested resource. The ret
 | Return value | Description |
 | --- | --- |
 | status \[constant\] | Resource status constant which indicates the overall status of the resource authorization. For more information, refer to Permission Status. |
-| canRequestPermission \[Boolean\] | Indicates whether you can request for the permissions or not in case the value of the status is PERMISSION\_DENIED. In the iOS platform, authorization for a resource can be requested only once. For more information, refer to [Permission model in iOS](runtime_permissions.html#iOS).In the Android platform, the app can request for the permissions even though the status return value is PERMISSION\_DENIED or direct the user to app settings to turn on or off the authorization. |
+| canRequestPermission \[Boolean\] | Indicates whether you can request for the permissions or not in case the value of the status is PERMISSION\_DENIED. In the iOS platform, authorization for a resource can be requested only once. For more information, refer to [Permission model in iOS](runtime_permissions.html#iOS). |
 
  
 
@@ -2789,7 +2789,7 @@ voltmx.application.requestPermission(resourceId\[constant/String\], statusCallba
 <td>resourceId [constant/String] - Mandatory</td>
 <td>
 <p></p>
-<p>Specifies the ID of the resource or name of the permission (only for Android) that you want to access. You can specify either a String (permission name) or an integer (resourceId) value.</p>
+<p>Specifies the ID of the resource or name of the permission that you want to access. You can specify either a String (permission name) or an integer (resourceId) value.</p>
 <br>
 <p>The feature to specify the name of the permission as a String is applicable only for Android. For instance, you can query a Native Android permission from the AndroidManifest.xml file by specifying the String directly: “android.permission.READ_PHONE_STATE”.</p>
 <br>
@@ -2922,8 +2922,7 @@ function permissionStatusCallback(response) {
 <br>
 <p>status [constant]</p>
 <br>
-<p>Resource status constant which indicates the overall status of the resource authorization. For more information, refer to <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/runtime_permissions.html#permission-status">permission-status.</a></p>
-<p><blockquote><em>Note : </em>In the Android platform, the status remains PERMISSION\_DENIED if at least one of the permissions associated with the resource is denied by the end-user.</blockquote></p>
+<p>Resource status constant which indicates the overall status of the resource authorization. For more information, refer to <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/runtime_permissions.html#permission-status">permission-status.</a></p>  
 </td>
 </tr>
 </table>
