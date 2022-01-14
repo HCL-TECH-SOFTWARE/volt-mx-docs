@@ -452,10 +452,40 @@ voltmx.application.checkPermission(resourceId\[constant/String\], options\[JSObj
 ### Input Parameters
 
 
-| Parameter | Description |
-| --- | --- |
-| resourceId \[constant/String\] - Mandatory | Specify the ID of the resource or name of the permission for which you want to check the status. You can specify either a String (permission name) or an integer (resourceId) value.<br><br> The feature to specify the name of the permission as a String is applicable only for Android. For instance, you can query a Native Android permission from the AndroidManifest.xml file by specifying the String directly: "android.permission.READ\_PHONE\_STATE". |
-| options \[JSObject\] - Optional | Specify the additional option to identify the exact resource of which you want to know the status. This is a platform-specific key. For more information, refer to Resource ID. |
+<table>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>resourceId [constant/String] - Mandatory</td>
+<td>
+<p></p>
+<p>Specifies the ID of the resource or name of the permission that you want to access. You can specify either a String (permission name) or an integer (resourceId) value.</p>
+<br>
+<p>The feature to specify the name of the permission as a String is applicable only for Android. For instance, you can query a Native Android permission from the AndroidManifest.xml file by specifying the String directly: “android.permission.READ_PHONE_STATE”.</p>
+<br>
+<p>The available resourceId constants are as follows:</p>
+<ul>
+<li>voltmx.os.RESOURCE_CAMERA</li>
+<li>voltmx.os.RESOURCE_LOCATION</li>
+<li>voltmx.os.RESOURCE_PHOTO_GALERY</li>
+<li>voltmx.os.RESOURCE_CONTACTS</li>
+<li>voltmx.os.RESOURCE_CALENDAR</li>
+<li>voltmx.os.RESOURCE_SIRI (iOS-specific)</li>
+<li>voltmx.os.RESOURCE_AUDIO_RECORD (iOS-specific)</li>
+<li>voltmx.os.RESOURCE_NOTIFICATION (iOS-specific)</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>options [JSObject] - Optional</td>
+<td>
+<p></p>
+<p>Specify the additional option to identify the exact resource of which you want to know the status. This is a platform-specific key. For more information, refer to Resource ID.</p>
+</td>
+</tr>
+</table>
 
  
 ### Example 1
