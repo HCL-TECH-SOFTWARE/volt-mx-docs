@@ -18,8 +18,9 @@ Currently Volt MX supports JasperReports Server 6.0 and 6.2 and 7.1. Download th
 
 To download a package, follow these steps:
 
-1.  For current version reports, log in to [](http://developer.voltmx.com/VoltMXReleases)[http://community.hclvoltmx.com/downloads/manual](http://community.hclvoltmx.com/downloads/manual). You can obtain a user name and password from your sales representative or partner.
-    *   To download older version reports, log in to [https://community.hclvoltmx.com/downloads/archive/manual](./Older version reports can be downloaded from: https://community.hclvoltmx.com/downloads/archive/manual)
+1.  For current version reports, log in to [](http://developer.voltmx.com/VoltMXReleases)[http://community.hclvoltmx.com/downloads/manual](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_MX_Util_v9.2.x&orgId=HCL). You can obtain a user name and password from your sales representative or partner.
+
+    *   To download older version reports, log in to [https://community.hclvoltmx.com/downloads/archive/manual]( https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/downloadPackageVersions.action?datatype=archive&lineId=HCL+Volt+MX)
         
 2.  Click the **VoltMX Foundry** tab.
 3.  From the **VoltMX Metrics-Jasper Reports** list, select the specific release and then click **Download**. The jasper-reports zip is downloaded to you local system
