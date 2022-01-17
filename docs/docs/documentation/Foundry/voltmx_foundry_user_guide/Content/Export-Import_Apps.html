@@ -250,22 +250,14 @@
 <ul>
   <li>Non-shared services that cannot be shared with other apps, such as Volt MX Foundry Sync and Volt MX Foundry Messaging.
     <ul>
-      <li>
-        <p>Volt MX Foundry Sync enables developers to add synchronization capabilities to mobile applications. Fundamental to Sync Framework is the ability to support offline and collaborative data between devices and the back-end systems.</p>
-      </li>
-      <li>
-        <p>Volt MX Foundry Messaging allows developers to upload push certificates for iOS, Android, BlackBerry, and Windows 8 RT platforms.</p>
-      </li>
+      <li>Volt MX Foundry Sync enables developers to add synchronization capabilities to mobile applications. Fundamental to Sync Framework is the ability to support offline and collaborative data between devices and the back-end systems.</li>
+      <li>Volt MX Foundry Messaging allows developers to upload push certificates for iOS, Android, BlackBerry, and Windows 8 RT platforms.</li>
     </ul>
   </li>
   <li>Shared services that can be shared with other apps, such as custom code JAR files, integration services, and orchestration services.
     <ul>
-      <li>
-        <p>The integration service of an application represents the application interaction with the external data source.</p>
-      </li>
-      <li>
-        <p>Service orchestration coordinates or integrates several services and exposes them as a single service.</p>
-      </li>
+      <li>The integration service of an application represents the application interaction with the external data source.</li>
+      <li>Service orchestration coordinates or integrates several services and exposes them as a single service.</li>
     </ul>
   </li>
 </ul>
@@ -312,10 +304,9 @@ For example, a user exports an app from the Volt MX Foundry portal and merges th
 <p>When an app is exported from a workspace, the exported app is saved with the same name of the app - for example, <code class="language-plaintext highlighter-rouge">ExportApp.zip</code>. An exported .zip file has an app’s configured services information, such as icon files, certificates, .XML files, and meta files.</p>
 
 <blockquote>
-  <p><strong><em>Note:</em></strong>  You cannot import an exported app after you modify the structure in the exported app. Support for importing an edited zip (exported app) file is not available. If you try to import an edited ZIP file, the system may fail to import the app successfully.</p>
+  <p><strong><em>Note:</em></strong>  You cannot import an exported app after you modify the structure in the exported app. Support for importing an edited zip (exported app) file is not available. If you try to import an edited ZIP file, the system may fail to import the app successfully.<br /><br />
+An exported zip file should have the correct folder structure. An exported zip file should have correct references in meta files. For more details about the folder structure of an exported app, refer to the <a href="#folder-structure-of-an-exported-app">Folder Structure of an Exported App</a> section.</p>
 </blockquote>
-
-<p>An exported zip file should have the correct folder structure. An exported zip file should have correct references in meta files. For more details about the folder structure of an exported app, refer to the <a href="#folder-structure-of-an-exported-app">Folder Structure of an Exported App</a> section.</p>
 
 <blockquote>
   <p><strong><em>Important:</em></strong>  Before exporting an app, do not unlink identity services that are referenced in the integration services of the app.<br />
@@ -335,7 +326,7 @@ If you unlink a referenced identity service in the <strong>Identity</strong> tab
 
     <p><img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Resources/Images/Import-Export_Apps/Import-Export_602x428.png" alt="" /></p>
 
-    <p>The system saves the app as  <code class="language-plaintext highlighter-rouge">&lt;_AppName_&gt;.zip</code> in your browser’s default download location.</p>
+    <p>The system saves the app as  <code><em>&lt;_AppName_&gt;</em>.zip</code> in your browser’s default download location.</p>
 
     <blockquote>
       <p><strong><em>Important:</em></strong>  You must republish the app for the new settings to take effect.</p>
@@ -400,33 +391,27 @@ If you unlink a referenced identity service in the <strong>Identity</strong> tab
       <li>
         <p>Click <strong>Overwrite Existing</strong> to overwrite an existing app, and then do the following:</p>
         <ol>
-          <li> Click the <strong>Select App</strong> list, and select one of the existing apps from the list, and then click <strong>Import</strong>.</li>
-          <li>
-            <p> If there are any associated JAR files or services in the app that will conflict with the account, they will be listed in the Import App dialog box.<br />
-<img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Resources/Images/Import_Overwrite_Existing_Services.PNG" alt="" /></p>
-
+          <li>Click the <strong>Select App</strong> list, and select one of the existing apps from the list, and then click <strong>Import</strong>.</li>
+          <li>If there are any associated JAR files or services in the app that will conflict with the account, they will be listed in the Import App dialog box.<br />
+<img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Resources/Images/Import_Overwrite_Existing_Services.PNG" alt="" />
             <ul>
               <li>If you want to download a file containing a list of the asset conflicts, click the <strong>Conflict Assets List</strong> button.</li>
               <li>If you want to cancel the app import, click <strong>Cancel</strong>.</li>
-              <li>If you want to finish the import, click <strong>Confirm Overwrite</strong>.</li>
-            </ul>
-
-            <blockquote>
-              <p><strong><em>Important:</em></strong>    While overwriting an app, if the app names are same, the new data will override the existing data.</p>
-            </blockquote>
-
-            <p>Based on various services configured in an existing app, the system overwrites the existing data from a zip file. For example:</p>
-
-            <ul>
+              <li>If you want to finish the import, click <strong>Confirm Overwrite</strong>.
+                <blockquote>
+                  <p><strong><em>Important:</em></strong>    While overwriting an app, if the app names are same, the new data will override the existing data.
+Based on various services configured in an existing app, the system overwrites the existing data from a zip file. For example:</p>
+                </blockquote>
+              </li>
               <li>While overwriting an app, if a provider in that Volt MX account exists with the importing identity provider name, the system fails to import the zip file.</li>
               <li>While overwriting an app, if the existing app has identity, integration, and orchestration services, these services will be unlinked from the existing app.</li>
               <li>While overwriting an app, if the names of the existing app’s integration and orchestration services are the same as those in the zip file, these services will be updated.</li>
-              <li>While overwriting an app, all non-shared services (synchronization and engagement) are overwritten into the existing app. The existing app will only contain new data. You cannot retrieve old data in the existing app.</li>
+              <li>While overwriting an app, all non-shared services (synchronization and engagement) are overwritten into the existing app. The existing app will only contain new data. You cannot retrieve old data in the existing app.
+                <blockquote>
+                  <p><strong><em>Note:</em></strong>  You can also import an app via API. For more details, refer to <a href="CI_with_Foundry_APIs.html#import-an-app">Continuous Integration - Import an app via API</a></p>
+                </blockquote>
+              </li>
             </ul>
-
-            <blockquote>
-              <p><strong><em>Note:</em></strong>  You can also import an app via API. For more details, refer to <a href="CI_with_Foundry_APIs.html#import-an-app">Continuous Integration - Import an app via API</a></p>
-            </blockquote>
           </li>
         </ol>
       </li>
@@ -495,47 +480,47 @@ In the <strong>Import App</strong> dialog, the selected file is added. To remove
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx"> //Folder structure of an exported app
 
 /Apps
-   /App1
-        Meta.json
-        Icon file
-       /_Messaging
-           Meta.json
-           AppleCert1.p12
-           AppleCert2.p12
-           AppleCert3.p12
-           AppleCert4.p12
-       /_Sync
-           Meta.json
-           /SyncScope1
-               Meta.json
-               Syncobject1.xml
-               Syncobject2.xml
-               …
-   /App2
-        …
-/_Identity
-   /Identity1
-       Meta.json
-       Metadata1.xml
-       …
-/_Integration
-   /Service1
-       /Endpoints
-           Endpoint1.xml
-       /Operations
-           Operation1.xml
-           Operation2.xml
-           …
-       WSDLFile
-/_Orchestration
-   /Orch1
-       Operation1.xml
-       Operation2.xml
-       …
-/_JARs
-   Jar1.jar
-   Jar1.meta
-   …</code></pre></figure>
+/App1
+Meta.json
+Icon file
+/\_Messaging
+Meta.json
+AppleCert1.p12
+AppleCert2.p12
+AppleCert3.p12
+AppleCert4.p12
+/\_Sync
+Meta.json
+/SyncScope1
+Meta.json
+Syncobject1.xml
+Syncobject2.xml
+…
+/App2
+…
+/\_Identity
+/Identity1
+Meta.json
+Metadata1.xml
+…
+/\_Integration
+/Service1
+/Endpoints
+Endpoint1.xml
+/Operations
+Operation1.xml
+Operation2.xml
+…
+WSDLFile
+/\_Orchestration
+/Orch1
+Operation1.xml
+Operation2.xml
+…
+/\_JARs
+Jar1.jar
+Jar1.meta
+…</code></pre></figure>
 
 <p>The logical flow of an exported app folder structure has four levels of folders. The primary, or root, level is the Apps folder, which contains all sublevel folders including files and metadata. The following table explains hierarchical levels of an exported app folder structure:</p>
 
@@ -652,22 +637,22 @@ In the <strong>Import App</strong> dialog, the selected file is added. To remove
 
 <p>The root level (for example, App1) section has details of the apps meta file, icon file, messaging (meta file and certificates), and sync (meta file and objects). While exporting an app, an <appname>.zip file is saved with the root app name. You can rename an exported zip file, if required.</appname></p>
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx"> //Sample data in apps (root) section of an exported app folder structure 
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx"> //Sample data in apps (root) section of an exported app folder structure
 
 /App1
-    Meta.json 
-    Icon file
-    /_Messaging
-       Meta.json
-       AppleCert1.p12
-       AppleCert2.p12
-   /_Sync
-       Meta.json
-       /SyncScope1
-           Meta.json
-           Syncobject1.xml
-           Syncobject2.xml
-           …</code></pre></figure>
+Meta.json
+Icon file
+/\_Messaging
+Meta.json
+AppleCert1.p12
+AppleCert2.p12
+/\_Sync
+Meta.json
+/SyncScope1
+Meta.json
+Syncobject1.xml
+Syncobject2.xml
+…</code></pre></figure>
       <h4 id="app-meta-file">
         
         
@@ -682,18 +667,18 @@ In the <strong>Import App</strong> dialog, the selected file is added. To remove
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx"> //Sample data in the app meta file of an exported app folder structure
 
 {
-  "Icon": "Iconfile",
+"Icon": "Iconfile",
   "description": "description",
-  "Identity": [\--&gt; referencing identity providers
-    "Identity1","Identity2"
-  ],
-  
-  "Integration": [
-    "Service1","Service2", referencing integration services
-  ],
-  "Orchestration": [
-    "Orch1","Orch2", referencing orchestration services
-  ],
+"Identity": [\--&gt; referencing identity providers
+"Identity1","Identity2"
+],
+
+"Integration": [
+"Service1","Service2", referencing integration services
+],
+"Orchestration": [
+"Orch1","Orch2", referencing orchestration services
+],
 }</code></pre></figure>
       <h4 id="app-icon-file">
         
@@ -716,14 +701,14 @@ In the <strong>Import App</strong> dialog, the selected file is added. To remove
 
 <p>The messaging section has referenced (non-shared) messaging services configured for an app, such as meta file and certificates configured for messaging services.</p>
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx"> //Sample data in the messaging section of an exported app folder structure  
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx"> //Sample data in the messaging section of an exported app folder structure
 
-/_Messaging
-   Meta.json
-   AppleCert1.p12
-   AppleCert2.p12
-   AppleCert3.p12
-   AppleCert4.p12</code></pre></figure>
+/\_Messaging
+Meta.json
+AppleCert1.p12
+AppleCert2.p12
+AppleCert3.p12
+AppleCert4.p12</code></pre></figure>
       <h5 id="messaging-meta-file">
         
         
@@ -742,37 +727,37 @@ In the <strong>Import App</strong> dialog, the selected file is added. To remove
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx"> //Sample data in the messaging meta file of an exported app folder structure
 
 {
-  "appleProdmode" : true/false,
-  "iphonecertprod" : {
-    "certName" : "AppleCert1.p12",
-    "passwd" : "&lt;password&gt;",
-  },
-  "iphonecertdev" : {
-    "certName" : "AppleCert2.p12",
-    "passwd" : "&lt;password&gt;",
-  },
-  "ipadcertprod" : {
-    "certName" : "AppleCert3.p12",
-    "passwd" : "&lt;password&gt;",
-  },
-  "ipadcertdev" : {
-    "certName" : "AppleCert4.p12",
-    "passwd" : "&lt;password&gt;",
-  },
-  "Android": {
-    "Key": "&lt;GCM Key&gt;",
-  },
-  "Blackberry": {
-    "id": "",
-    "passwd": "",
-    "pushurl": "",
-  },
-  "Windows": {
-    "id": "",
-    "passwd": "",
-    "windows7": true/false,
-    "windows8": true/false,
-  },
+"appleProdmode" : true/false,
+"iphonecertprod" : {
+"certName" : "AppleCert1.p12",
+"passwd" : "&lt;password&gt;",
+},
+"iphonecertdev" : {
+"certName" : "AppleCert2.p12",
+"passwd" : "&lt;password&gt;",
+},
+"ipadcertprod" : {
+"certName" : "AppleCert3.p12",
+"passwd" : "&lt;password&gt;",
+},
+"ipadcertdev" : {
+"certName" : "AppleCert4.p12",
+"passwd" : "&lt;password&gt;",
+},
+"Android": {
+"Key": "&lt;GCM Key&gt;",
+},
+"Blackberry": {
+"id": "",
+"passwd": "",
+"pushurl": "",
+},
+"Windows": {
+"id": "",
+"passwd": "",
+"windows7": true/false,
+"windows8": true/false,
+},
 }</code></pre></figure>
       <h4 id="synchronization-section">
         
@@ -787,16 +772,15 @@ In the <strong>Import App</strong> dialog, the selected file is added. To remove
 
 <p>The following is the folder structure of a synchronization service:</p>
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx"> 
-//Sample data in the synchronization section of an exported app folder structure
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">//Sample data in the synchronization section of an exported app folder structure
 
-/_Sync
-   Meta.json
-   /SyncScope1 --&gt; SyncScope1 is the name of the SyncScope
-       Meta.json
-       Syncobject1.xml
-       Syncobject2.xml
-       …</code></pre></figure>
+/\_Sync
+Meta.json
+/SyncScope1 --&gt; SyncScope1 is the name of the SyncScope
+Meta.json
+Syncobject1.xml
+Syncobject2.xml
+…</code></pre></figure>
       <h5 id="syncconfig-meta-file-_syncmetajson">
         
         
@@ -815,7 +799,7 @@ In the <strong>Import App</strong> dialog, the selected file is added. To remove
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx"> //Sample data in the SyncConfig meta file of an exported app folder structure
 
 {
-  "PersistentDBType": "MYSQL/Oracle/MYSQL Server",
+"PersistentDBType": "MYSQL/Oracle/MYSQL Server",
 }</code></pre></figure>
       <h5 id="syncscope-meta-file-_syncmetajson">
         
@@ -833,18 +817,18 @@ In the <strong>Import App</strong> dialog, the selected file is added. To remove
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx"> //Sample data in the SyncScope meta file of an exported app folder structure
 
 [
-     "SyncScope1": { --&gt; Sync scope name 
-       "Strategy": "",
-       "NameSpace": "",
-       "ChangeTrackingPolicyType": "",
-       "SoftDeleteFlag": "",
-       "LastUpdateTimeStamp": "",
-       "ConflictPolicyType": "", 
-       "DataSource": "Service1", --&gt; Referencing integration service
-       "SyncJar": "Jar1", --&gt; referencing Sync interceptor jar
+"SyncScope1": { --&gt; Sync scope name
+"Strategy": "",
+"NameSpace": "",
+"ChangeTrackingPolicyType": "",
+"SoftDeleteFlag": "",
+"LastUpdateTimeStamp": "",
+"ConflictPolicyType": "",
+"DataSource": "Service1", --&gt; Referencing integration service
+"SyncJar": "Jar1", --&gt; referencing Sync interceptor jar
        "className": "sample", --&gt; Class name used in case of custom Sync
-    },
-    …
+},
+…
 ]</code></pre></figure>
       <h3 id="identity-section">
         
@@ -862,9 +846,9 @@ In the <strong>Import App</strong> dialog, the selected file is added. To remove
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx"> //Sample data in the identity section of an exported app folder structure
 
 /Identity
-   /Identity1 --&gt; Identity1 is the name of the identity service
-       Meta.json 
-       Metadata1.xml --&gt; This metadata is required for identity providers that have metadata, such as, SAML.
+/Identity1 --&gt; Identity1 is the name of the identity service
+Meta.json
+Metadata1.xml --&gt; This metadata is required for identity providers that have metadata, such as, SAML.
 .</code></pre></figure>
       <h4 id="identity-meta-file">
         
@@ -882,13 +866,13 @@ In the <strong>Import App</strong> dialog, the selected file is added. To remove
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx"> //Sample data in the identity meta file of an exported app folder structure
 
 {
-  "name": &lt;name of the identity provider&gt;,
-  "displayName": &lt;display name of the identity provider&gt;,
-  "version": &lt;version&gt;,
-  "loginText": &lt;login text of the identity provider&gt;,
-  "metaPreference": &lt;meta preference &gt;,
-  "type": &lt;type of identity provider&gt;,
-  "config": {},  --&gt; configuration details of the identity provider
+"name": &lt;name of the identity provider&gt;,
+"displayName": &lt;display name of the identity provider&gt;,
+"version": &lt;version&gt;,
+"loginText": &lt;login text of the identity provider&gt;,
+"metaPreference": &lt;meta preference &gt;,
+"type": &lt;type of identity provider&gt;,
+"config": {}, --&gt; configuration details of the identity provider
 }</code></pre></figure>
       <h3 id="integration-section">
         
@@ -903,17 +887,16 @@ In the <strong>Import App</strong> dialog, the selected file is added. To remove
 
 <p>The following is the folder structure of an integration service:</p>
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx"> 
-//Sample data in the integration section of an exported app folder structure
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">//Sample data in the integration section of an exported app folder structure
 
-/_Integration
-   /Service1 --&gt; Service1 is the name of the integration service
-       /Endpoints --&gt; only one endpoint per service is allowed           Endpoint1.xml
-       /Operations
-           Operation1.xml
-           Operation2.xml
-           …
-	WSDLFile</code></pre></figure>
+/\_Integration
+/Service1 --&gt; Service1 is the name of the integration service
+/Endpoints --&gt; only one endpoint per service is allowed Endpoint1.xml
+/Operations
+Operation1.xml
+Operation2.xml
+…
+WSDLFile</code></pre></figure>
 
 <p>This section contains the Web Services Description Language (WSDL) file used by the soap integration service.</p>
       <h4 id="endpoints-file">
@@ -929,8 +912,7 @@ In the <strong>Import App</strong> dialog, the selected file is added. To remove
 
 <p>The following is the endpoint file structure of an integration service:</p>
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx"> 
-//Sample data in the endpoints file of an exported app folder structure
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">//Sample data in the endpoints file of an exported app folder structure
 
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;endpoint name="default" type="[type]" encryptSecureInfo="false"&gt;
@@ -977,9 +959,9 @@ In the <strong>Import App</strong> dialog, the selected file is added. To remove
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx"> //Sample data in the orchestration section of an exported app folder structure
 
-/_Orchestration
-  /Orch1 --&gt; Orch1 is the name of the orchestration service
-      Operation1.xml --&gt; looping or concurrent operation      </code></pre></figure>
+/\_Orchestration
+/Orch1 --&gt; Orch1 is the name of the orchestration service
+Operation1.xml --&gt; looping or concurrent operation  </code></pre></figure>
       <h4 id="operation-file-1">
         
         
@@ -1005,12 +987,12 @@ In the <strong>Import App</strong> dialog, the selected file is added. To remove
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx"> //Sample data in the custom code JARs section of an exported app folder structure
 
-/_JARs
-         Jar1.jar 	 --&gt; The JAR file 
-         Jar1.meta.json --&gt; Meta for the JAR file contains information about dependent jars.
-         Jar2.jar 
-         Jar2.meta.json
-         …</code></pre></figure>
+/\_JARs
+Jar1.jar --&gt; The JAR file
+Jar1.meta.json --&gt; Meta for the JAR file contains information about dependent jars.
+Jar2.jar
+Jar2.meta.json
+…</code></pre></figure>
       <h3 id="jar-meta-file">
         
         
@@ -1027,9 +1009,9 @@ In the <strong>Import App</strong> dialog, the selected file is added. To remove
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx"> //Sample data in the JAR meta file of an exported app folder structure
 
 {
-  "dependent_jars": [  --&gt; JARs files that depend on other JAR files.
+"dependent_jars": [ --&gt; JARs files that depend on other JAR files.
    "jar1.jar","jar2.jar"
-  ]
+]
 }</code></pre></figure>
 
         
