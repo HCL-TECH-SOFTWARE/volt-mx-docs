@@ -2,35 +2,32 @@
 layout: "documentation"
 category: "voltmx_foundry_user_guide"
 ---
-                              
 
 User Guide: Continuous Integration with Volt MX Foundry MFCLI
 
-Continuous Integration with Volt MX Foundry
-==========================================
+# Continuous Integration with Volt MX Foundry
 
 [Continuous Integration](https://en.wikipedia.org/wiki/Continuous_integration) is a key modern day software development practice. Any software development project doing Agile development probably would be doing Continuous Integration (CI) too.
 
-Volt MX  Foundry being a SDLC tool, supports Continuous Integration.  Volt MX Foundry has REST APIs for import/export of an application and publish/unpublish of an application to facilitate CI.  You can consume these REST APIs directly if needed.  For this, refer to the [Continuous Integration with Volt MX Foundry APIs](CI_with_Foundry_APIs.html)documentation. 
+Volt MX Foundry being a SDLC tool, supports Continuous Integration.  Volt MX Foundry has REST APIs for import/export of an application and publish/unpublish of an application to facilitate CI.  You can consume these REST APIs directly if needed.  For this, refer to the [Continuous Integration with Volt MX Foundry APIs](CI_with_Foundry_APIs.html)documentation.
 
 While deploying the application to different environments, you may need to reconfigure certain properties, such as the end-point URL to which the application should talk in the production environment. For these kind of reconfiguration, you can use the [Reconfiguration at Publish](ReconfigPublish.html) support. You can set environment specific properties as one time activity using Volt MX Foundry Console and these will automatically get applied during publish in CI flow.
 
-Volt MX  Foundry Command Line Utility
------------------------------------
+## Volt MX Foundry Command Line Utility
 
 Using REST APIs may not be ideal in some cases.  For example, a developer uses a shell script for Continuous Integration, then calls REST APIs and does all the response handling. The process can become tedious and time-consuming.  To make such scenarios easier, we offer Volt MX Foundry Command Line Utility.  The utility helps you export/import or publish/unpublish an application on on-premise Volt MX Foundry and Volt MX Cloud environments.
 
 ### Download Links
 
-Volt MX  Foundry Command Line Utility can be downloaded from [VoltMX download center](https://hclsoftware-fno.flexnetoperations.com/flexnet/operations/startPage).
+Volt MX Foundry Command Line Utility can be downloaded from [VoltMX download center](https://hclsoftware-fno.flexnetoperations.com/flexnet/operations/startPage).
 
 ### Examples
 
 This section will help you better understand the utility. For example, company MoBoCo is developing the app MoBoApp. Some of the app's developers use the development environment called DevEnv1. As part of the continuous integration job that runs every night, the team wants to push the MoBoApp from DevEnv1 to QAEnv1 . The team wants automation and testing to occur at night and the following day. Consider the following scenarios.
 
-Scenario 1 – Promoting an app from the local development environment to local QA environment every night
+**Scenario 1 – Promoting an app from the local development environment to local QA environment every night**
 
-There is one Volt MX Foundry Console connected to two environments – DevEnv1 and QAEnv1.  The following image shows the Volt MX Foundry topology:
+There is **one Volt MX Foundry Console connected to two environments – DevEnv1 and QAEnv1**.  The following image shows the Volt MX Foundry topology:
 
 ![](Resources/Images/CI_MF_655x372.png)
 
@@ -51,7 +48,7 @@ java -jar mfcli.jar Publish -u [user] -p [password] -e [environment name] -a [ap
 
 If the end-point URL or any other property is different in QA environment, you can use the [Application Reconfiguration](ServiceReconfig.html) support to set these properties at one time action in Volt MX Foundry Console. The environment specific properties will automatically get applied every time you publish.
 
-Scenario 2 – Promoting an app from the local development environment to QA environment running on Volt MX Cloud every night
+**Scenario 2 – Promoting an app from the local development environment to QA environment running on Volt MX Cloud every night**
 
 This case is more complex. Developers are working against a local environment (DevEnv1), but QA is testing through an environment in Volt MX Cloud (QAEnv1). There are **two MF Consoles**. The example is a hybrid scenario of on-premise and the cloud. The following image shows the Volt MX Foundry topology:
 
@@ -71,36 +68,37 @@ The command line utility supports on-premise Volt MX Foundry and Volt MX Cloud. 
 In the scenario, a user must perform the following steps:
 
 1.  **Encrypt the password**.
-    
+
+
     To encrypt the password, run the following command.
-    
+
     {% highlight voltMx %} java -jar mfcli.jar  encrypt password ciuserpwd
     {% endhighlight %}
-    
+
     An encrypted password is generated for the preceding ciuserpwd. Use the encrypted password in the following commands in the scenario.
-    
+
 2.  **Export the app from DevEnv1 (as a zip file)**
 
-To export the app, a user must run the following command.
+
+    To export the app, a user must run the following command.
 
 {% highlight voltMx %} java -jar mfcli.jar Export -u ciuser@moboco.com -p encrypted_password -a MoBoApp –f .\MoBoApp.zip -au http://10.10.25.18:8080 -cu http://10.10.25.18:8080.
 {% endhighlight %}
 
-In the scenario, ciuser@moboco.com is the user with password  encrypted\_password. The user's account helps to export the MoBoApp as MoBoApp.zip. The Identity (Auth) Services and console are running on http://10.10.25.18:8080.
+In the scenario, ciuser@moboco.com is the user with password  encrypted_password. The user's account helps to export the MoBoApp as MoBoApp.zip. The Identity (Auth) Services and console are running on http://10.10.25.18:8080.
 
 The following is an example of how the export command is used:
 
-{% highlight voltMx %} 
+{% highlight voltMx %}
 
 To export an application from an on premise installation,
 
 java -jar mfcli.jar Export -u [user] -p [encrypted_password] -a [app name] -f [file name] -au [Identity URL] -cu [Console URL]
 
+{% endhighlight %}8. **Import the app (as a zip file) into Volt MX Cloud Account**{% highlight voltMx %} java -jar mfcli.jar Import -u ciuser@moboco.com -p encrypted_password -a MoBoApp –f .\MoBoApp.zip –t 100054321
+{% endhighlight %}
 
-{% endhighlight %}8.  **Import the app (as a zip file) into Volt MX Cloud Account**{% highlight voltMx %} java -jar mfcli.jar Import -u ciuser@moboco.com -p encrypted\_password -a MoBoApp –f .\MoBoApp.zip –t 100054321
-    {% endhighlight %}
-
-In the example, ciuser@moboco.com is the user with encrypted\_password. The user's account helps to import the MoBoApp from MoBoApp.zip.
+In the example, ciuser@moboco.com is the user with encrypted_password. The user's account helps to import the MoBoApp from MoBoApp.zip.
 
 > **_Note:_** Since no URL is provided for Identity Service and console, it is assumed that the URL is Volt MX Cloud ([](https://manage.hclvoltmx.com/)[https://manage.hclvoltmx.com](https://manage.hclvoltmx.com/)). Since Volt MX Cloud is a multiple tenants (account) service, a user must specify the account ID using –t. The account ID in the preceding example is 100054321.
 
@@ -108,22 +106,21 @@ In the example, ciuser@moboco.com is the user with encrypted\_password. The user
 
 The following is an example of how the import command is used:
 
-{% highlight voltMx %} 
+{% highlight voltMx %}
 
 To import an application to manage.hclvoltmx.com,
 
 java -jar mfcli.jar import -u <user> -p <password> -t <account id> [-f <file name> | -r <directory name>] [-a <app name>] [-v <app version>] [-ay] [-to <time in secs>]
 
-
-{% endhighlight %}14.  **Publish the app to QAEnv1**{% highlight voltMx %} java -jar mfcli.jar Publish -u ciuser@moboco.com -p encrypted\_password -e QAEnv1 -a MoBoApp –t 100054321
-    {% endhighlight %}
+{% endhighlight %}14. **Publish the app to QAEnv1**{% highlight voltMx %} java -jar mfcli.jar Publish -u ciuser@moboco.com -p encrypted_password -e QAEnv1 -a MoBoApp –t 100054321
+{% endhighlight %}
 
 This method is similar to local publish, except the -t option specifies the account ID.
 
 The following is an example of how the publish command is used:
 
-{% highlight voltMx %} To publish an application to manage.hclvoltmx.com,  
-  
+{% highlight voltMx %} To publish an application to manage.hclvoltmx.com,
+
 java -jar mfcli.jar Publish -u [user] -p [encrypted_password] -e [environment name] -a [app name] -t [account id]
 {% endhighlight %}
 
@@ -353,10 +350,6 @@ For example, to encrypt password 'mypassword',
 java -jar mfcli.jar encrypt mypasswordOr,
 java -DVOLTMX_MFCLI_ENCRYPTION_KEY=2d04b412-64cc-4066-a6c8-9c1417b9b85f -jar mfcli.jar encrypt mypassword </code></pre>
 
-
-
-
-
 #### Unpublish Command
 
 The Unpublish feature helps you undo the publish command. The syntax for the Unpublish command is that same as the publish command's. For republish, do not unpublish.  To overwrite an existing publish, republish by executing the publish command again.  When a user does unpublish, all of the app's metadata are removed. The next publish creates fresh metadata, such as a new app key/secret. In case of republishing, when a user does publish multiple times to republish an app, all of the app's metadata are retained.
@@ -380,4 +373,3 @@ java -jar mfcli.jar authenticate -u <user> -p <pasword> -t <accountid> --externa
 #### Force Release Lock
 
 This utility guarantees a consistent operation during the preceding import/export/publish/unpublish commands.  The utility ensures that only one such operation per app occurs at a given time.  To do this, the utility takes a lock in the database. If there is a software defect, the DB lock is not freed. A user can use --release-lock to force the lock release. This option should be used with caution because it can cancel any existing app publish.
-
