@@ -234,7 +234,7 @@
       </h1>
     
 
-<p>A headless build is a method of building and publishing an app without launching the Eclipse environment that hosts Volt MX Iris. Instead, <a href="javascript:void(0);">AntAn open-source software tool developed by the Apache Software Foundation that automates software build processes.</a> manages the build and publish process.</p>
+<p>A headless build is a method of building and publishing an app without launching the Eclipse environment that hosts Volt MX Iris. Instead, <strong><a href="#," title="An open-source software tool developed by the Apache Software Foundation that automates software build processes.">Ant</a></strong> manages the build and publish process.</p>
 
 <p>Conducting headless builds has a number of advantages.</p>
 
@@ -248,7 +248,7 @@
 You will need to configure few other settings for this to work. See <a href="ApplicationSecurity.html">Application Security</a> for more information.</li>
 </ul>
 
-<p>Running a headless build involves the following tasks: </p>
+<p>Running a headless build involves the following tasks:</p>
 
 <ol>
   <li><a href="#prerequisites">Prerequisites for a Headless Build</a></li>
@@ -269,7 +269,7 @@ You will need to configure few other settings for this to work. See <a href="App
   <li>HeadlessBuild-Global.properties</li>
 </ul>
 
-<p>Most of the effort in preparing a headless build involves configuring these files. Ant gives you the flexibility to build an app or publish it. The decision of building or publishing is configured using Modes. The modes are: </p>
+<p>Most of the effort in preparing a headless build involves configuring these files. Ant gives you the flexibility to build an app or publish it. The decision of building or publishing is configured using Modes. The modes are:</p>
 
 <ul>
   <li><strong>Mode 0</strong> - The application is built, and all the binaries are generated.</li>
@@ -287,7 +287,7 @@ You will need to configure few other settings for this to work. See <a href="App
       </h3>
     
 
-<p>Following are the prerequisites for doing headless build: </p>
+<p>Following are the prerequisites for doing headless build:</p>
 
 <ul>
   <li>Before doing headless builds, you have to do a blank publish to Volt MX Foundry to use services in your app. Building the application is not required in this case.</li>
@@ -368,19 +368,19 @@ android.packagename=com.orgname.app1
 
 #Cloud Mode credentials (Applicable only for cloud)
 cloud.username=
-cloud.password= 
-  
-#Provide Volt MX Foundry specific details 
-voltmxfoundry.url=  
-  
-\# Environment.Name used for publishing example using the format LocalDevEnv  
-\# For example, if your Volt MX Foundry Environment URL is:  
-\# https://mycompany.voltmxcloud.com  
-\# then the value is as follows: environment.name=mycompany
+cloud.password=
+
+#Provide Volt MX Foundry specific details
+voltmxfoundry.url=
+
+#Environment.Name used for publishing example using the format LocalDevEnv  
+#For example, if your Volt MX Foundry Environment URL is:  
+#https://mycompany.voltmxcloud.com  
+#then the value is as follows: environment.name=mycompany
 environment.name=  
 account.id=  
-mf.appname=  
-  
+mf.appname=
+
 #Specify the platforms for which the headless build needs to run.
 #Mobile Channel.
 iphone=false
@@ -400,14 +400,13 @@ spa.ipad=false
 spa.androidtablet=false
 spa.windowstablet=false
 
-
 #Desktop Channel.
 desktop_kiosk=false
-desktopweb=false 
+desktopweb=false
 
 #Wearbles channel.
-iphonewatch=false  
-  
+iphonewatch=false
+
 #Universal Channel.
 universal.iphone=false
 universal.android=false
@@ -445,11 +444,10 @@ middleware_https_port=443
 #used in cloud mode
 cloud.middleware.url=
 
-
 middleware_web_context=middleware
 mobileweb_web_context=app1
 
-#To build binaries with protected mode enabled.   
+#To build binaries with protected mode enabled.  
 protectedmodeenabled.ios=true  
 protectedmodeenabled.android=true  
 protectedmodeenabled.web=true  
@@ -457,7 +455,7 @@ protectedmodeenabled.web=true
 binaries.location=
 
 #Combine Web Application+VoltMX Server Archive. Applicable for mode = 3 or 4 #
-#Full path of middleware archive (war/ear).If project has Volt MX session Manager, 
+#Full path of middleware archive (war/ear).If project has Volt MX session Manager,
 #provide with-cache archive, for Http session Manager, provide without-cache archive.
 combinewar.middlewarearchive=
 combinewar.context=
@@ -465,30 +463,23 @@ combinewar.context=
 combinewar.war=false
 combinewar.ear=false
 #Provide full path of dependant libraries,Separate with semicolon(;) if there are multiple libraries
-combinewar.dependencylibraries=  
-  
-\# Supported context paths for Volt MX Foundry components, if customized.  
+combinewar.dependencylibraries=
+
+#Supported context paths for Volt MX Foundry components, if customized.  
 context.path.identity
 context.path.workspace
 context.path.accounts  
-context.path.console  
-  
+context.path.console
+
 #Siteminder login URL if your on-premise Volt MX Foundry is protected by siteminder.  
-login.siteminder.url
-  
-  
-  
-  </code></pre></figure>
+login.siteminder.url</code></pre></figure>
 
 <blockquote>
-  <p><strong><em>Important:</em></strong> If you do not want to store your password in the headless build.properties file, you can use mfcli to encrypt your password. You can download the mfcli.jar from <a href="https://community.hclvoltmx.com/downloads">https://community.hclvoltmx.com/downloads</a>.</p>
+  <p><strong><em>Important:</em></strong> If you do not want to store your password in the headless build.properties file, you can use mfcli to encrypt your password. You can download the mfcli.jar from <a href="https://community.hclvoltmx.com/downloads">https://community.hclvoltmx.com/downloads</a>.<br />
+Ensure that you use the corresponding version of MFCLI as that of the Iris. i.e 7.x iris, 7.x mfcli, 8.x iris, 8.x mfcli.<br />
+To encrypt the password using mfcli (using default password.encryption.key),<br />
+<code class="language-plaintext highlighter-rouge">java -jar mfcli.jar encrypt "VoltMX@1234" Encrypted password is: en1801f1abee7b9e12426c062509e1b18epd</code></p>
 </blockquote>
-
-<p>Ensure that you use the corresponding version of MFCLI as that of the Iris. i.e 7.x iris, 7.x mfcli, 8.x iris, 8.x mfcli.</p>
-
-<p>To encrypt the password using mfcli (using default password.encryption.key),<br />
-<code class="language-plaintext highlighter-rouge">java -jar mfcli.jar encrypt "VoltMX@1234"  
-Encrypted password is: en1801f1abee7b9e12426c062509e1b18epd</code></p>
       <h5 id="configure-the-mode">
         
         
@@ -508,9 +499,9 @@ Encrypted password is: en1801f1abee7b9e12426c062509e1b18epd</code></p>
       </h6>
     
 
-<p>In Mode 0, the application is built, binaries are generated at the location specified in HeadlessBuild.properties, additionally if no location is specified they will also be copied to <drive>/<workspace>/<project>/binaries, apart from the temp folder. To configure `build.properties` for mode 0, in addition to setting `mode=0`, simply set the platform you are building for to _true._</project></workspace></drive></p>
+<p>In Mode 0, the application is built, binaries are generated at the location specified in HeadlessBuild.properties, additionally if no location is specified they will also be copied to <drive>/<workspace>/<project>/binaries, apart from the temp folder. To configure `build.properties` for mode 0, in addition to setting `mode=0`, simply set the platform you are building for to <em>true</em>.</project></workspace></drive></p>
 
-<p>For example, <code class="language-plaintext highlighter-rouge">iphone=true</code></p>
+<pre><code style="display:block;background-color:#eee;">For example, iphone=true</code></pre>
       <h6 id="mode-1-properties">
         
         
@@ -540,36 +531,28 @@ Encrypted password is: en1801f1abee7b9e12426c062509e1b18epd</code></p>
 cloud.username=username@voltmx.com
 cloud.password=Abc@123
 
-#Provide Volt MX Foundry specific details 
-voltmxfoundry.url=https://mbaastest25.hcl.net:443  
-  
-\# Environment.Name used for publishing example using the format LocalDevEnv  
-\# For example, if your Volt MX Foundry Environment URL is:  
-\# https://mycompany.voltmxcloud.com  
-\# then the value is as follows: environment.name=mycompany
+#Provide Volt MX Foundry specific details
+voltmxfoundry.url=https://mbaastest25.hcl.net:443
+
+#Environment.Name used for publishing example using the format LocalDevEnv  
+#For example, if your Volt MX Foundry Environment URL is:  
+#https://mycompany.voltmxcloud.com  
+#then the value is as follows: environment.name=mycompany
 environment.name=</code></pre></figure>
-      <h6 id="mode-3-properties">
+      <h6>
         
         
-          <a href="#mode-3-properties" class="anchor-heading" aria-labelledby="mode-3-properties"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Mode 3 Properties
+          Mode 3 Properties
         
         
       </h6>
     
-
-<p>In mode 3, Volt MX Iris combines the web archive and the Volt MX Foundry archive which presumes the web archive is already built and generates a combined war/ear file. If the application is not built or the web archive is not available, then Volt MX Iris displays an error. To configure <code class="language-plaintext highlighter-rouge">HeadlessBuild.properties</code> for mode 3, in addition to setting <code class="language-plaintext highlighter-rouge">mode=3</code>, the following properties must be set:</p>
-
-<p>#Full path of middleware archive (war/ear). If project has Volt MX session Manager, provide with-cache archive, for Http session Manager, provide without-cache</p>
-
-<p>archive.combinewar.middlewarearchive= &lt;Path to middleware archive (war/ear, based on whether combinewar.ear / combinewar.war properties)&gt;<br />
-combinewar.context= &lt;Provide context name with which final war/ear will be generated.&gt;</p>
-
-<p>#combinewar.war and combinewar.ear are mutually exclusive(only one of them should be true)<br />
-combinewar.war=false<br />
-combinewar.ear=false</p>
-
-<p>#Provide full path of dependent libraries, separated by semicolons(;) if there are multiple libraries<br />
-combinewar.dependencylibraries= &lt;All MobileWeb dependency jars (full path) separated by semicolons(;) should be provided.&gt;</p>
+<p>In mode 3, Volt MX Iris combines the web archive and the Volt MX Foundry archive which presumes the web archive is already built and generates a combined war/ear file. If the application is not built or the web archive is not available, then Volt MX Iris displays an error. To configure <code>HeadlessBuild.properties</code> for mode 3, in addition to setting <code>mode=3</code>, the following properties must be set:</p>
+<pre><code style="display:block;background-color:#eee;"><p>Full path of middleware archive (war/ear). If project has Volt MX session Manager, provide with-cache archive, for Http session Manager, provide without-cache</p>
+<p>archive.combinewar.middlewarearchive= &lt;Path to middleware archive (war/ear, based on whether combinewar.ear / combinewar.war properties)&gt;<br />combinewar.context= &lt;Provide context name with which final war/ear will be generated.&gt;</p>
+<p>#combinewar.war and combinewar.ear are mutually exclusive(only one of them should be true)<br />combinewar.war=false<br />combinewar.ear=false</p>
+<p>#Provide full path of dependent libraries, separated by semicolons(;) if there are multiple libraries<br />combinewar.dependencylibraries= &lt;All MobileWeb dependency jars (full path) separated by semicolons(;) should be provided.&gt;</p>
+</code></pre>
       <h6 id="mode-4-properties">
         
         
@@ -580,46 +563,37 @@ combinewar.dependencylibraries= &lt;All MobileWeb dependency jars (full path) se
     
 
 <p>Because mode 4 is a combination of modes 0 and 3, you must set the properties described in the headings <em>Mode 0 Properties</em> and <em>Mode 3 Properties</em>, and set the property <code class="language-plaintext highlighter-rouge">mode=4</code>.</p>
-      <h4 id="configure-volt-mx-foundry-parameters">
+      <h4>
         
         
-          <a href="#configure-volt-mx-foundry-parameters" class="anchor-heading" aria-labelledby="configure-volt-mx-foundry-parameters"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Configure Volt MX Foundry Parameters
+          CONFIGURE VOLT MX FOUNDRY PARAMETERS
         
         
       </h4>
     
-
 <p>To configure Volt MX Foundry parameters, follow these steps:</p>
-
 <ol>
-  <li>Open HeadlessBuild.properties file.</li>
-  <li>Provide user-name at <em>cloud.username</em>.</li>
-  <li>Provide password at <em>cloud.password</em>.</li>
-  <li>Provide Volt MX Foundry URL at <em>voltmxfoundry.url</em>.</li>
-  <li>
-    <p>Provide Volt MX Foundry environment name at <em>environment.name</em>.</p>
-
-    <blockquote>
-      <p><strong><em>Note:</em></strong> Providing user-name, password, and Volt MX Foundry URL are mandatory to build an application from the command line.</p>
-    </blockquote>
-  </li>
-</ol>
-
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">#Cloud Mode credentials (Applicable only for cloud)
+  <li>Open HeadlessBuild.properties file.</li>  
+  <li>Provide user-name at <em>cloud.username.</em></li>  
+  <li>Provide password at <em>cloud.password.</em></li>  
+  <li>Provide Volt MX Foundry URL at <em>voltmxfoundry.url.</em></li>  
+  <li>Provide Volt MX Foundry environment name at <em>environment.name.</em>
+    <blockquote><em>Note:</em> Providing user-name, password, and Volt MX Foundry URL are mandatory to build an application from the command line.</blockquote>
+    <br />
+    <pre><code style="margin-left:20px;display:block;background-color:#eee;">#Cloud Mode credentials (Applicable only for cloud)
     cloud.username=username@voltmx.com
     cloud.password=Abc@123
-    
+        
     #Provide Volt MX Foundry specific details 
     voltmxfoundry.url=https://mbaastest25.hcl.net:443  
-      
-    \# Environment.Name used for publishing example using the format LocalDevEnv  
-    \# For example, if your Volt MX Foundry Environment URL is:  
-    \# https://mycompany.voltmxcloud.com  
-    \# then the value is as follows: environment.name=mycompany
-    environment.name=
-    </code></pre></figure>
-
-<ol>
+        
+    # Environment.Name used for publishing example using the format LocalDevEnv  
+    # For example, if your Volt MX Foundry Environment URL is:  
+    # https://mycompany.voltmxcloud.com  
+    # then the value is as follows: environment.name=mycompany
+    environment.name=     
+   </code></pre>
+  </li>  
   <li>In order to enable services, you need to publish the app at least once from IDE.</li>
 </ol>
       <h3 id="configure-the-headlessbuild-globalproperties-file">
@@ -658,10 +632,10 @@ combinewar.dependencylibraries= &lt;All MobileWeb dependency jars (full path) se
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">#The file represents the workspace level properties relevant for Headless Build
 #Note: Please escape '\' with '\\' in file paths (Ex: C:\\workspace\\project)
 
- #Specify the eclipse workspace path where the project exists.
+#Specify the eclipse workspace path where the project exists.
 workspace.location=
 
-#Full Path to a jar file whose name starts with 'org.eclipse.equinox.launcher_' in eclipse plugins folder
+#Full Path to a jar file whose name starts with 'org.eclipse.equinox.launcher\_' in eclipse plugins folder
 #Example: D:\\eclipse\\plugins\\org.eclipse.equinox.launcher_1.1.0.v20100507.jar
 eclipse.equinox.path=
 
@@ -679,62 +653,41 @@ android.home=</code></pre></figure>
 <p>If required, you can increase the heap memory available to your build by modifying the <code class="language-plaintext highlighter-rouge">run</code> file (either <code class="language-plaintext highlighter-rouge">run.bat</code> or <code class="language-plaintext highlighter-rouge">run.sh</code>). To increase the heap memory, type the following memory options in the <code class="language-plaintext highlighter-rouge">run</code> file.</p>
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">java -Xms40m -Xmx512m -Dinput.file=%1 -Dglobal.file=%4 -cp %3 org.eclipse.core.launcher.Main -data %2 -application com.pat.tool.keditor.voltmxapplication</code></pre></figure>
-      <h3 id="generating-ipa">
+      <h3>
         
         
-          <a href="#generating-ipa" class="anchor-heading" aria-labelledby="generating-ipa"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Generating IPA
+          Generating IPA
         
         
       </h3>
     
-
 <p>To generate IPA, following fields need to be configured before triggering the build.</p>
-
 <ol>
   <li>Open HeadlessBuild.properties file.</li>
-  <li>Provide Mac User-name at <em>mac.username</em>.</li>
-  <li>Provide Mac password at <em>mac.password</em>.</li>
-  <li>Provide IP address at <em>mac.ipaddress</em>.</li>
-</ol>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">#Provide following details to generate IPA file in the case of iPhone or iPad.
-    mac.ipaddress=xx.xx.xx.xx
-    mac.username=Username
-    mac.password=p@ssword
-    
-    </code></pre></figure>
-
-<ol>
-  <li>Provide profile key chain password, export method, and Team ID.</li>
-</ol>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">keychain.password=p@ssword  
-    #Possible values for method are "app-store", "ad-hoc", "enterprise", "development"
-    method="development"
-    #Examples for development.team are "G9B5P7QDV2", "PM7453S8QE"  
-    development.team="G9B5P7QDV2"  
-    
-    </code></pre></figure>
-
-<ol>
-  <li>Based on the requirement, user should set <strong>genipaiphone</strong> or <strong>genipaipad</strong> value to true.</li>
-</ol>
-
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">#Possible values are true/false
-    genipaiphone=true
-    genipaipad=false
-    </code></pre></figure>
-
-<ol>
-  <li>Value of the respective <strong>channel</strong> should be set to true.</li>
-</ol>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">#Mobile Channel.
-    iphone=True
-    android=false
-    windowsphone8=false
-    windowsphone81s=false
-    </code></pre></figure>
-
-<ol>
-  <li>Build the application to generate IPA.</li>
+  <li>Provide Mac User-name at mac.username.</li>
+  <li>Provide Mac password at mac.password.</li>
+  <li>Provide IP address at mac.ipaddress.
+        <pre><code style="margin-left:20px;display:block;background-color=#eee;">#Provide following details to generate IPA file in the case of iPhone or iPad.
+        mac.ipaddress=xx.xx.xx.xx
+        mac.username=Username
+        mac.password=p@ssword</code></pre></li>
+<li>Provide profile key chain password, export method, and Team ID.
+        <pre><code style="margin-left:20px;display:block;background-color=#eee;">keychain.password=p@ssword
+        #Possible values for method are "app-store", "ad-hoc", "enterprise", "development"
+        method="development"
+        #Examples for development.team are "G9B5P7QDV2", "PM7453S8QE"
+        development.team="G9B5P7QDV2"</code></pre></li>  
+<li>Based on the requirement, user should set <strong>genipaiphone</strong> or <strong>genipaipad</strong> value to true.
+        <pre><code style="margin-left:20px;display:block;background-color=#eee;">#Possible values are true/false
+        genipaiphone=true
+        genipaipad=false</code></pre></li>
+<li>Value of the respective channel should be set to true.
+        <pre><code style="margin-left:20px;display:block;background-color=#eee;">#Mobile Channel.
+        iphone=True
+        android=false
+        windowsphone8=false
+        windowsphone81s=false</code></pre></li> 
+<li>Build the application to generate IPA.</li>
 </ol>
       <h3 id="build-the-application">
         

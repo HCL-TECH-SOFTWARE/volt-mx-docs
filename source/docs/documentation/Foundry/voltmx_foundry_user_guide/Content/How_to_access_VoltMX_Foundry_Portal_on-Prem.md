@@ -22,8 +22,7 @@ To access Volt MX Foundry, follow these steps:
 
 <h2 id="how-to-get-started-with-foundry-console"> How to Get Started With Volt MX Foundry Console</h2>
 
-> **_Note:_** If you have installed Console and Identity Service along with one or more Volt MX Foundry components such as **Integration**, **Engagement** and **Sync** services on **Tomcat** or **JBoss** on a **single node**, you can directly log in to Volt MX Foundry Console as you have already created your super administrator account.  
-  
+> **_Note:_** If you have installed Console and Identity Service along with one or more Volt MX Foundry components such as **Integration**, **Engagement** and **Sync** services on **Tomcat** or **JBoss** on a **single node**, you can directly log in to Volt MX Foundry Console as you have already created your super administrator account.<br>  
 While installing Volt MX Foundry components with above combination, the **Administrator Account Configuration** window helps you to configure your super administrator account.
 
 After Volt MX Foundry is installed, you need to configure identity services, and create your administrator account. Based on the installation, you will see the list of URLs in the **Install Complete** window shown below:
