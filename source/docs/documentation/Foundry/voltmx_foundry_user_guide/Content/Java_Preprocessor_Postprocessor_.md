@@ -17,7 +17,7 @@ Configure the parameters for the preprocessor and postprocessor to filter the re
 </tr><tr>
  The preprocessor and postprocessor are Java classes that implement **DataPreProcessor** / **DataPreProcessor2** and **DataPostProcessor** / **DataPostProcessor2** interfaces. A developer can write custom code in the **execute** method of the preprocessor or postprocessor class. For a sample Java class code, refer to [Java Sample Code for Preprocessor and Postprocessor](Java_Pre-Post_Samples.html). For various objects (session and request) and the methods with sample Java class code, refer to [Volt MX App Services API]({{ site.baseurl }}/java_docs_apis/MiddlewareAPI/index.html)
  > **_Note:_** You need the `middleware-system.jar` for defining custom code. **\- For on-premises** Volt MX Foundry, you can find the jar within the installation folder `<VoltMXFoundryInstallDir>/middleware_home/`. You can also download the `middleware-system.jar` from Admin Console.- **For Cloud**, contact Volt MX Cloud Support for getting the appropriate middleware-system.jar for your server version. 
- > **_Note:_** For details on middleware APIs for preprocessor and postprocessor, contact refer to [Volt MX App Services API]({{ site.baseurl }}/java_docs_apis/MiddlewareAPI/index.html) | 
+ > **_Note:_** For details on middleware APIs for preprocessor and postprocessor, contact refer to [Volt MX App Services API]({{ site.baseurl }}/java_docs_apis/MiddlewareAPI/index.html) 
 </tr><tr style="background-color: #dddddd;">
 **JavaScript Preprocessor and Postprocessor** 
 </tr><tr>
