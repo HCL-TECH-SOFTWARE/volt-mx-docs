@@ -180,16 +180,15 @@ Ensure that the root location of your zip contains the following files.
     }
     {% endhighlight %}
     
-    > **_Important:_**
+> **_Important:_** The value for the **adapterType** key depends on the type of file you use.
     
-    The value for the **adapterType** key depends on the type of file you use.
-    
-    *   **raml** - If the adapter is based on RAML.
-    *   **swagger** - If the adapter is based on Swagger.
+*   **raml** - If the adapter is based on RAML.
+*   **swagger** - If the adapter is based on Swagger.
    </details> 
+
 *   **Image** _\[Optional\]_ - You can include an image to use as the icon for the Custom Data Adapter.
     
-    > **_Note:_** You need to insert the name of the image under the **icon** key of the **properties.json** file to ensure that Volt MX Foundry uses the image as the logo.
+> **_Note:_** You need to insert the name of the image under the **icon** key of the **properties.json** file to ensure that Volt MX Foundry uses the image as the logo.
     
 *   **RAML** or **Swagger** File - This file should contain all your API definitions.
     
@@ -248,9 +247,7 @@ The root location of the zip files should contain the following files.
     				}
     {% endhighlight %}
     
-    > **_Important:_**
-    
-    The value for the **adapterType** key should be **mf\_app**.
+> **_Important:_** The value for the **adapterType** key should be **mf\_app**.
 
 </details>
     
@@ -263,14 +260,16 @@ The root location of the zip files should contain the following files.
     
 <details close markdown="block"><summary>Click to view folder structure</summary>
     
-    The root location of your zip file should be similar to the given image.  
-    ![](Resources/Images/adapter_app_structure.png)
+The root location of your zip file should be similar to the given image.
+
+![](Resources/Images/adapter_app_structure.png)
     
-    *   Ensure that the name of the first level folder matches with your service name.  
-        In the given example, **NewsObject** is the name of the [Object Service]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Objectservices.html), and **newsService** is the name of the [Integration Service]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Services.html).
-    *   The second level folder's name should be **services**. The folder should contain your service definition file.
+*   Ensure that the name of the first level folder matches with
+    your service name.  
+    In the given example, **NewsObject** is the name of the [Object Service]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Objectservices.html), and **newsService** is the name of the [Integration Service]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Services.html).
+*   The second level folder's name should be **services**. The folder should contain your service definition file.
     
-    ![](Resources/Images/adapter_service_structure.png)  ![](Resources/Images/adapter_object_structure.png)
+![](Resources/Images/adapter_service_structure.png)  ![](Resources/Images/adapter_object_structure.png)
     
 </details>
 Once you've configured all the files and folders, you can compress it into a zip file and [import](#importing-a-custom-data-adapter) it into Volt MX Foundry.

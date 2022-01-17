@@ -13,8 +13,7 @@ By default, at least one Cloud/Environment is configured for your Volt MX Cloud 
 
 For more details on HCL AppFactory such as how to configure your first app using your source code repository, build and deploy apps, deliver apps, refer [HCL AppFactory User Guide]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_appfactory_user_guide/Content/Introduction.html).
 
-> **_Important:_**  Ensure that your environments include all required servers that are part of an app.  
-  
+> **_Important:_**  Ensure that your environments include all required servers that are part of an app.<br>  
 For example, if your environment contains only Volt MX Foundry Sync, and you try to publish an app with Volt MX Foundry Engagement, the system throws an error.
 
 From the **Environments** (VoltMX Cloud) page, you can navigate to the existing Clouds in your account:
