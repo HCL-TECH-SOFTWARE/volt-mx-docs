@@ -90,28 +90,25 @@ To generate, encrypt, and use the RSA key pair, follow these steps: 
     
     b.  Extract public key from RSA key pair using this command.
         
-        openssl rsa -pubout -in private\_key.pem -out public\_key.pem
+        openssl rsa -pubout -in private_key.pem -out public_key.pem
         
     c.  View the private key using this command.  
         `openssl rsa -text -in private_key.pem`
     
     d.  To use private keys use the following commands.
         
-        i.  `less private_key.pem` to verify that it starts with a `-----BEGIN RSA PRIVATE KEY-----`.
+        i.  less private_key.pem to verify that it starts with a -----BEGIN RSA PRIVATE KEY-----.
 
         ii.  less public_key.pem to verify that it starts with a -----BEGIN PUBLIC KEY——.
-3.  Engage support public key and Volt MX Iris version. This step is applicable for Android, iOS platforms, and responsive Web/SPA platform. 
-
+3.  Send your public key and Volt MX Iris version to [ voltmxlicensing@hcl.com](mailto:voltmxlicensing@hcl.com?subject=Keys). This step is applicable for Android, iOS platforms, and responsive Web/SPA platform. 
     
-      > **_Important:_** Public key must not be shared with anyone except Volt MX.
-
-
+    > **_Important:_** Public key must not be shared with anyone except Volt MX.
 4. For Android and iOS platforms, VoltMX's security team validates the details and encrypts your public key.  
     For the Responsive Web/SPA platform, VoltMX's security team validates the information and shares the unique **clientID** and **clientSecret** through email. You must then use these details to [create a postbuild task](BuildAnSPAApplication.html#securing-your-web-applications).
 5. VoltMX's security team then returns the encrypted public key to you through email.
     1.  For iOS, Volt MX provides a set of `fin` keys along with the public key to protect iOS applications.
 
-    > **_Note:_** Starting with Volt MX will not provide the `fin` keys folder if your Iris version is V8 SP3 or later.
+    > **_Note:_** Starting with Volt MX Iris V8 SP3, `fin` keys are not applicable. Volt MX will not provide the `fin` keys folder if your Iris version is V8 SP3 or later.
 
     > **_Important:_** You must not share your private key with anyone including Volt MX. In case of a key compromise for the Android, iOS and Responsive Web/SPA platforms, generate a new set of keys and send the public key to [voltmxlicensing@hcl.com](mailto:voltmxlicensing@hcl.com?subject=Keys). 
 6. Navigate to your Volt MX Iris workspace and create a **\_\_encryptionkeys** folder.
@@ -121,11 +118,10 @@ To generate, encrypt, and use the RSA key pair, follow these steps: 
     
     b.  Encrypted public keys provided by Volt MX Iris.
         
-    > **_Note:_**  Once you have updated your Iris version to V8 SP3 or later, you can delete the `fin` keys folder from your **\_\_encryptionkeys** folder.
+    > **_Note:_** Starting with Volt MX Iris V8 SP3, `fin` keys are not applicable. Once you have updated your Iris version to V8 SP3 or later, you can delete the `fin` keys folder from your **\_\_encryptionkeys** folder.
         
     c. For iOS, the `fin` keys provided by Volt MX Iris. These keys are provided to protect iOS applications. `fin` keys are applicable until the Volt MX Iris V8 SP2 version.
     
-
     ![](Resources/Images/FinKeys1_696x388.png)
     
 
@@ -140,28 +136,22 @@ To enable Protected Mode in Project Settings, follow these steps:
     You can read the information on the screen on how to procure the keys.
 4.  Click **Finish**.
 
-5.  From the **Build** menu, select **Build and Publish Native** .  
+1.  From the **Build** menu, select **Build and Publish Native** .  
     The **Build and Publish Native** dialog box appears.
-6.  Select the required channels and platforms.
-7.  In the **Build Mode** drop-down list, click **Protected**.  
+2.  Select the required channels and platforms.
+3.  In the **Build Mode** drop-down list, click **release**.  
       
-
     ![](Resources/Images/Build_Generation_for_Sample.PNG)
-
-
-8.  Click **Build**.
+4.  Click **Build**.
 
 Impact on App's Performance
 ---------------------------
 
 While enabling security features in your application ensures attacks are prevented, your application's start-up time may slow. Following image provides you insight on the performance hit if you enable the _Protected Mode_ option.
 
-
 ![](Resources/Images/AppPerformanceiOS.png)
 
-
 ![](Resources/Images/AppPerformanceAndroid.png)
-
 
 Application Security Guidelines
 -------------------------------
@@ -292,7 +282,7 @@ It is recommended that you follow the security guidelines to ensure the applicat
 *   Periodically generate a new session identifier if the connection security changes from HTTP to HTTPS, as can occur during authentication. Within an application, it is recommended to consistently use HTTPS rather than switching between HTTP to HTTPS.
 *   Generate a new session identifier and deactivate the old one periodically. (This action can mitigate certain session hijacking scenarios where the original identifier was compromised).
 *   Set HttpOnly ([https://www.owasp.org/index.php/HttpOnly](https://www.owasp.org/index.php/HttpOnly)) attributes on all cookies.
-*   Set the `secure` attribute for cookies transmitted over a TLS connection. [https://www.owasp.org/index.php/SecureFlag](https://owasp.org/www-community/controls/SecureCookieAttribute)
+*   Set the `secure` attribute for cookies transmitted over a TLS connection. ([https://www.owasp.org/index.php/SecureFlag](https://www.owasp.org/index.php/SecureFlag))
 
 ### Access Control
 
@@ -386,11 +376,10 @@ The following APIs are not respected as they are available only when JavaScript 
 
 To modify the default error message for Android, do the following:
 
-1.  Create a **stringconstants.xml** file with the following content.
-     {% highlight voltMx %}<?xml version="1.0" encoding="utf-8"?>  
-     <resources>  
-     <string name="default_root_detetection_message">Custom Root Detection Message</string>  
-     </resources>
+1.  Create a **stringconstants.xml** file with the following content.{% highlight voltMx %}<?xml version="1.0" encoding="utf-8"?>  
+    <resources>  
+    <string name="default_root_detetection_message">Custom Root Detection Message</string>  
+    </resources>
     
     {% endhighlight %}
 2.  Modify the Custom Root Detection Message as per your requirement
