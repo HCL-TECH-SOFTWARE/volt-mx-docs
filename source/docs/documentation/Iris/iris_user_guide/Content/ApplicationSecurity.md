@@ -139,9 +139,10 @@ To enable Protected Mode in Project Settings, follow these steps:
 1.  From the **Build** menu, select **Build and Publish Native** .  
     The **Build and Publish Native** dialog box appears.
 2.  Select the required channels and platforms.
-3.  In the **Build Mode** drop-down list, click **release**.  
+3.  In the **Build Mode** drop-down list, click **Protected**.  
       
     ![](Resources/Images/Build_Generation_for_Sample.PNG)
+
 4.  Click **Build**.
 
 Impact on App's Performance
