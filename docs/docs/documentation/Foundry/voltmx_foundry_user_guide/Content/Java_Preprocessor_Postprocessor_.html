@@ -240,85 +240,107 @@
 <p><img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Resources/Images/Integration-Advanced_Tab_678x272.png" alt="" /></p>
 
 <table>
-  <thead>
-    <tr>
-      <th>Java Preprocessor and Postprocessor</th>
-    </tr>
-  </thead>
   <tbody>
     <tr>
-      <td>The preprocessor and postprocessor are Java classes that implement <strong>DataPreProcessor</strong> / <strong>DataPreProcessor2</strong> and <strong>DataPostProcessor</strong> / <strong>DataPostProcessor2</strong> interfaces. A developer can write custom code in the <strong>execute</strong> method of the preprocessor or postprocessor class. For a sample Java class code, refer to <a href="Java_Pre-Post_Samples.html">Java Sample Code for Preprocessor and Postprocessor</a>. For various objects (session and request) and the methods with sample Java class code, refer to <a href="/volt-mx-docs/java_docs_apis/MiddlewareAPI/index.html">Volt MX App Services API</a> <br /></td>
+      <td>
+      <h2 style="text-decoration:underline;">
+        
+        
+          Java Preprocessor and Postprocessor
+        
+        
+      </h2>
+    </td>
+    </tr>
+    <tr>
+      <td>
+      <p>The preprocessor and postprocessor are Java classes that implement <b>DataPreProcessor</b>&#47;<b>DataPreProcessor2</b> and <b>DataPostProcessor</b>&#47;<b>DataPostProcessor2</b> interfaces. A developer can write custom code in the <b>execute</b> method of the preprocessor or postprocessor class. </p>
+      <p>For a sample Java class code, refer to <a href="Java_Pre-Post_Samples.html" target="_blank">Java Sample Code for Preprocessor and Postprocessor</a>. </p>
+      <p>For various objects (session and request) and the methods with sample Java class code, refer to <a href="https://opensource.hcltechsw.com/volt-mx-docs/java_docs_apis/MiddlewareAPI/index.html" target="_blank">Volt MX App Services API</a> 
+      </p>
+      <blockquote><b><i>Note:</i></b> You need the <code>middleware-system.jar</code> for defining custom code     <br />
+        <b>- For on-premises</b> Volt MX Foundry, you can find the jar within the installation folder <code> &lt;VoltMXFoundryInstallDir&gt; / middleware_home / </code>. You can also download the <code> middleware-system.jar </code> from Admin Console.<br />
+        <b>- For Cloud</b>, contact Volt MX Cloud Support for getting the appropriate middleware-system.jar for your server version. 
+      </blockquote> <br />
+      <blockquote><b><i>Note:</i></b> For details on middleware APIs for preprocessor and postprocessor, contact refer to <a href="https://opensource.hcltechsw.com/volt-mx-docs/java_docs_apis/MiddlewareAPI/index.html">Volt MX App Services API</a> 
+       </blockquote> 
+      </td>
+    </tr>
+    <tr><td>
+      <h2 style="text-decoration:underline;">
+        
+        
+          JavaScript Preprocessor and Postprocessor
+        
+        
+      </h2>
+    </td></tr>
+    <tr>
+      <td>
+            <p>Based on the interface, the preprocessors and postprocessors implement the following objects:<br /> <code> &lt;serviceInputParams&gt; </code>, <code> &lt;request&gt; </code>, <code> &lt;response&gt; </code> and <code> &lt;result&gt; </code>.</p>
+            <p> VoltMX Foundry supports modifying the result object as JSON object in JavaScript. Two new APIs, <b>resultToJSON</b> and <b>jsonToResult</b> in <b>JavaScript</b>.</p>
+            <ul><li>
+            For <b>Postprocessor</b>, you must call <b>resultToJSON</b> API which converts result object to JSON object. You can modify the result object as a string. For sample JavaScript code, refer to <a href="JS_Pre-Post_Samples.html#resultToJSONAPI" target="_blank">Sample code for <b>Postprocessor</b></a>.
+            </li><li>
+            For <b>Preprocessor</b>, you must call <b>resultToJSON</b> API which returns JSON object. You can use the JSON object to modify the result as JSON and reset the result using <b>jsonToResult</b> API. For sample JavaScript code, refer to <a href="JS_Pre-Post_Samples.html#jsontoResultAPI" target="_blank">Sample code for <b>Preprocessor</b></a>.
+            </li></ul>
+            <p>You can use these objects and their corresponding methods directly in JavaScript code.For a sample JavaScript code, refer to <a href="JS_Pre-Post_Samples.html">JavaScript Sample Code for Preprocessor and Postprocessor</a>.</p>
+      </td>
+    </tr>
+    <tr><td>
+      <h2 style="text-decoration:underline;">
+        
+        
+          Rules Preprocessor and Postprocessor
+        
+        
+      </h2>
+    </td></tr>
+    <tr>
+            <td><p>You can use the <b>Rules</b> option to define you custom logic as a set of rules. This option makes defining pre and post processor custom logic closer to human language and is built using <a href="http://mvel.documentnode.com/" target="_blank" title="MVEL is an expression language based on Java-syntax, with some marked differences specific to MVEL.  Unlike Java however, MVEL is dynamically typed (with optional typing), meaning type qualification is not required in the source.">MVEL</a>. <br /> </p>
+            <p>Based on the interface, the preprocessors and postprocessors implement the following structure for rules: <br /><code> name: "&lt; Name of the rule &gt;" <br /> description: "&lt; Description of the rule &gt;" <br /> priority: &lt; Priority of the rule &gt; <br /> condition: "&lt; Condition to evaluate &gt;" <br /> actions: <br /> - "&lt; Set of actions to execute &gt;" </code><br /> </p>
+            <p>For more details on How to write Rules, objects, use cases with sample rules, refer to <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Rules_as_Pre_Post_Processors.html" target="_blank">Rules for Preprocessor and Postprocessor</a>.</p>
+      </td>
     </tr>
   </tbody>
 </table>
 
-<blockquote>
-  <p><strong><em>Note:</em></strong> You need the <code class="language-plaintext highlighter-rouge">middleware-system.jar</code> for defining custom code. <strong>- For on-premises</strong> Volt MX Foundry, you can find the jar within the installation folder <code class="language-plaintext highlighter-rouge">&lt;VoltMXFoundryInstallDir&gt;/middleware_home/</code>. You can also download the <code class="language-plaintext highlighter-rouge">middleware-system.jar</code> from Admin Console.- <strong>For Cloud</strong>, contact Volt MX Cloud Support for getting the appropriate middleware-system.jar for your server version. <br /></p>
-</blockquote>
-
-<blockquote>
-  <table>
-    <tbody>
-      <tr>
-        <td><strong><em>Note:</em></strong> For details on middleware APIs for preprocessor and postprocessor, contact refer to <a href="/volt-mx-docs/java_docs_apis/MiddlewareAPI/index.html">Volt MX App Services API</a></td>
-      </tr>
-    </tbody>
-  </table>
-</blockquote>
-
-<table>
-  <thead>
-    <tr>
-      <th>JavaScript Preprocessor and Postprocessor</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Based on the interface, the preprocessors and postprocessors implement the following objects:<code class="language-plaintext highlighter-rouge">&lt;serviceInputParams&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;request&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;response&gt;</code> and <code class="language-plaintext highlighter-rouge">&lt;result&gt;</code>.VoltMX Foundry supports modifying the result object as JSON object in JavaScript. Two new APIs, <strong>resultToJSON</strong> and <strong>jsonToResult</strong> in <strong>JavaScript</strong>. For <strong>Postprocessor</strong>, you must call <strong>resultToJSON</strong> API which converts result object to JSON object. You can modify the result object as a string. For sample JavaScript code, refer to <a href="JS_Pre-Post_Samples.html#resultToJSONAPI">Sample code for <strong>Postprocessor</strong></a>.For <strong>Preprocessor</strong>, you must call <strong>resultToJSON</strong> API which returns JSON object. You can use the JSON object to modify the result as JSON and reset the result using <strong>jsonToResult</strong> API. For sample JavaScript code, refer to <a href="JS_Pre-Post_Samples.html#jsontoResultAPI">Sample code for <strong>Preprocessor</strong></a>.You can use these objects and their corresponding methods directly in JavaScript code.For a sample JavaScript code, refer to <a href="JS_Pre-Post_Samples.html">JavaScript Sample Code for Preprocessor and Postprocessor</a>.</td>
-    </tr>
-  </tbody>
-</table>
-
-<table>
-  <thead>
-    <tr>
-      <th>Rules Preprocessor and Postprocessor</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>You can use the <strong>Rules</strong> option to define you custom logic as a set of rules. This option makes defining pre and post processor custom logic closer to human language and is built using <a href="http://mvel.documentnode.com/" title="MVEL is an expression language based on Java-syntax, with some marked differences specific to MVEL.  Unlike Java however, MVEL is dynamically typed (with optional typing), meaning type qualification is not required in the source. ">MVEL</a>. Based on the interface, the preprocessors and postprocessors implement the following structure for rules: <br /> name: “&lt;Name of the rule&gt;” <br /> description: “&lt;Description of the rule&gt;” <br /> priority: &lt;Priority of the rule&gt; <br /> condition: “&lt;Condition to evaluate&gt;” <br /> actions: <br /> - “&lt;Set of actions to execute&gt;” <br /> For more details on How to write Rules, objects, use cases with sample rules, refer to <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Rules_as_Pre_Post_Processors.html">Rules for Preprocessor and Postprocessor</a>.</td>
-    </tr>
-  </tbody>
-</table>
+<p><br /></p>
 
 <p>The step allows you to further filter the data received from a service call.</p>
 
 <ol>
-  <li>Under the <strong>Custom Code Invocation</strong>, follow these steps:
+  <li>
+    <p>Under the <strong>Custom Code Invocation</strong>, follow these steps:</p>
+
     <ul>
-      <li>Under <strong>Preprocessor</strong>, configure one of the following:
+      <li>
+        <p>Under <strong>Preprocessor</strong>, configure one of the following:</p>
+
         <ul>
-          <li>
-            <p>For <strong>Java</strong>, you can configure multiple Preprocessors. This is supported for Integration/Orchestration services and Object services. If you have defined your logic for multiple preprocessors in the uploaded JAR file in the service definition, you can select the available one or other preprocessors. You can arrange the selected pre-processors to be executed in the desired order during the operation call.</p>
+          <li>For <strong>Java</strong>, you can configure multiple Preprocessors. This is supported for Integration/Orchestration services and Object services. If you have defined your logic for multiple preprocessors in the uploaded JAR file in the service definition, you can select the available one or other preprocessors. You can arrange the selected pre-processors to be executed in the desired order during the operation call.</li>
+        </ul>
+        <details close="">
+          <summary>Use Case </summary>
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>When customers have a large amount of custom code, the maintainability of the code becomes an issue. The issue becomes much more complicated when multiple stakeholders working on custom code. In such cases, the custom code can be split into multiple pre/post processors so that stakeholders can work on their respective modules. This increases the upgradability and maintainability of the custom code.  
+</code></pre></div>          </div>
+        </details>
 
-            <details close="">
-              <summary>Use Case </summary>
-              <p>When customers have a large amount of custom code, the maintainability of the code becomes an issue. The issue becomes much more complicated when multiple stakeholders working on custom code. In such cases, the custom code can be split into multiple pre/post processors so that stakeholders can work on their respective modules. This increases the upgradability and maintainability of the custom code.</p>
-            </details>
+        <p>Select <strong>Java</strong>, and from the <strong>Class</strong> list, select a preprocessor class. You can select one or more classes.<br />
+ This step enables a developer to include any business logic on the data before sending the response to a mobile device.</p>
 
-            <p>Select <strong>Java</strong>, and from the <strong>Class</strong> list, select a preprocessor class. You can select one or more classes.<br />
-This step enables a developer to include any business logic on the data before sending the response to a mobile device.<br />
-<img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Resources/Images/multiplePreprocessor_426x328.png" alt="" /></p>
+        <p><img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Resources/Images/multiplePreprocessor_426x328.png" alt="" /></p>
 
-            <p><img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Resources/Images/multiplePreprocessor1_399x256.png" alt="" /></p>
-          </li>
+        <p><img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Resources/Images/multiplePreprocessor1_399x256.png" alt="" /></p>
+
+        <ul>
           <li>
             <p>Select <strong>JavaScript</strong> to open a text box. Here, you can write custom JavaScript code for the preprocessor.</p>
 
-            <p><strong>JavaScript Code Validation for the Preprocessor:</strong> You can validate your JavaScript Code for the preprocessor before saving an operation. To validate the JavaScript code, click the Validate icon in the JavaScript code text box for the preprocessor.</p>
-
-            <p><img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Resources/Images/JSValidate.png" alt="" /></p>
+            <p><strong>JavaScript Code Validation for the Preprocessor:</strong> You can validate your JavaScript Code for the preprocessor before saving an operation. To validate the JavaScript code, click the Validate icon in the JavaScript code text box for the preprocessor.
+<br />
+<img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Resources/Images/JSValidate.png" alt="" /><br />
+<br /></p>
 
             <p><strong>The following are different scenarios that occur when you validate the JavaScript code for the Preprocessor:</strong></p>
 
@@ -354,16 +376,17 @@ This step enables a developer to include any business logic on the data before s
             <p>Select <strong>Java</strong>, and from the <strong>Class</strong> list, select a postprocessor class. You can select one or more classes.<br />
 This step enables a developer to include any business logic on the data before sending the response to a mobile device.**<br />
 <img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Resources/Images/multiplePostprocessor_346x317.png" alt="" /><br />
-<strong>You can rearrange the order of the classes to be executed, if required.</strong><br />
+**You can rearrange the order of the classes to be executed, if required.**<br />
 <img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Resources/Images/multiplePostprocessor1_346x234.png" alt="" /><br />
-**</p>
+<br /></p>
           </li>
           <li>
             <p>Select <strong>JavaScript</strong> to open a text box. Here, you can write custom JavaScript code for the postprocessor.</p>
 
-            <p><strong>JavaScript Code Validation for the Postprocessor:</strong> You can validate your JavaScript Code for the postprocessor before saving an operation. To validate the JavaScript code, click the Validate icon in the JavaScript code text box for the postprocessor.</p>
-
-            <p><img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Resources/Images/JSValidate.png" alt="" /></p>
+            <p><strong>JavaScript Code Validation for the Postprocessor:</strong> You can validate your JavaScript Code for the postprocessor before saving an operation. To validate the JavaScript code, click the Validate icon in the JavaScript code text box for the postprocessor.
+<br />
+<img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Resources/Images/JSValidate.png" alt="" />
+<br /></p>
 
             <p><strong>The following are different scenarios that occur when you validate the JavaScript code for Postprocessor:</strong></p>
 
@@ -410,13 +433,12 @@ This step enables a developer to include any business logic on the data before s
 
 <p>For example:</p>
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx"> 
-  @OnException
-  public Result executeWithAnnotation(@VoltMXContext Result result,
-      @VoltMXContext DataControllerRequest request, @VoltMXContext     DataControllerResponse response,
-      @VoltMXContext(parameterName = ContextParams.INPUT) Map&lt;String, Object&gt; inputMap,
-      @VoltMXContext(parameterName = ContextParams.CONFIGMAP) Map&lt;String, Object&gt; configMap,
-      @VoltMXException Exception exception) throws Exception {
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">@OnException
+public Result executeWithAnnotation(@VoltMXContext Result result,
+@VoltMXContext DataControllerRequest request, @VoltMXContext DataControllerResponse response,
+@VoltMXContext(parameterName = ContextParams.INPUT) Map&lt;String, Object&gt; inputMap,
+@VoltMXContext(parameterName = ContextParams.CONFIGMAP) Map&lt;String, Object&gt; configMap,
+@VoltMXException Exception exception) throws Exception {
 
     Param config = new Param();
     config.setName("className");
@@ -424,6 +446,7 @@ This step enables a developer to include any business logic on the data before s
 
     result.setParam(config);
     return result;
+
 }</code></pre></figure>
 
 <blockquote>
