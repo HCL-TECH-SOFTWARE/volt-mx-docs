@@ -132,7 +132,7 @@ The step allows you to further filter the data received from a service call.
     - **No. of connection retries -**Represents the number of times the service should be invoked in case of a failure. For example, consider a case in which an operation is invoked, and it fails due to a network issue. In this case, if you set the value as 2, the operation will invoke the service two more times after the failure. If you set the value to 0 (zero), the operation will not invoke the service after the failure.
 3.  Under the **Pass-through Cookies**, specify a comma separated list of cookie names. When cookies names are present in the incoming client request, these cookies are sent to the backend target along with preprocessor request. A sample value looks like - cookie1, cookie2.
 
-#### Exception Handling in Preprocessor - Support to access config map as part of onException handler
+### Exception Handling in Preprocessor, Support to access config map as part of onException handler
 
 The service config and input map are being sent to the onException Implementation of postprocessor.
 
