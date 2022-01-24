@@ -2,12 +2,10 @@
 layout: "documentation"
 category: "voltmx_foundry_user_guide"
 ---
-                              
 
 User Guide: Support
 
-Volt MX  Support
-===============
+# Volt MX Support
 
 The **Support** page displays links to the latest tutorials and articles and Developer resources from Base Camp Library. Base Camp is VoltMX's centralized hub for developer resources and community. Our resource-rich platform will help you get your Apps up running quickly.
 
@@ -15,13 +13,11 @@ The **Support** page displays links to the latest tutorials and articles and Dev
 
 The following are the Developer resources from Base Camp Library:
 
-*   [Forum](https://basecamp.voltmx.com/s/) - Ask questions, get answers.
-*   [Marketplace](https://marketplace.hclvoltmx.com/#/) - Free! Yes, we said free components to pop into your apps.
-*   [Events](https://basecamp.voltmx.com/s/events) - Geek out with us during our monthly Tech Talks and Webinars.
-*   [Ideation](https://basecamp.voltmx.com/s/ideation?page=1) - Search for, vote on, and create Ideas (feature requests) for HCL products.
-*   [Training](https://basecamp.voltmx.com/s/Skills) - Up your game by becoming a HCL Certified Designer for free.
-*   [Documentation](https://basecamp.voltmx.com/s/app-platform-documentation) & [Articles](https://basecamp.voltmx.com/s/articlelistview) & [Announcements](https://basecamp.voltmx.com/s/announcements) – Resources the way you want them.
-*   [Release Information](https://basecamp.voltmx.com/s/whats-new) - Do not miss a beat when we release new features into the wild.
-*   [HCL Infinity](https://basecamp.voltmx.com/s/dbx) - Visit the DBX page on Base Camp for banking resources.
-
-You can join the Base Camp community to participate in Groups, Events, and Forums. You'll be earning points and badges as you engage with the content and fellow members. To join Base Camp, click **[JOIN US ON BASE CAMP](https://basecamp.voltmx.com/login/?startURL=/s/)**.
+- [Forum](https://support.hcltechsw.com/community?id=community_forum&sys_id=1cdf6e1a1bf31898beab64e6ec4bcbae) - Ask questions, get answers.
+- [Marketplace](https://marketplace.hclvoltmx.com/) - Free! Yes, we said free components to pop into your apps.
+- [Events](https://www.hcltechsw.com/about/events) - Geek out with us during our monthly Tech Talks and Webinars.
+- [Ideation](https://volt-mx.hcltechsw.com/ideas) - Search for, vote on, and create Ideas (feature requests) for HCL products.
+- [Training](https://academy.hcltechsw.com/courses?search=eyJjYXQiOiIxMCIsInRpdGxlIjoiIiwiZmlsdGVyIjoiIn0=) - Up your game by becoming a HCL Certified Designer for free.
+- [Documentation](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/) & [Articles](https://support.hcltechsw.com/csm?id=kb_search&spa=1&kb_category=db382ff1db631c14a45ad9fcd3961936) – Resources the way you want them.
+- [Release Notes - Foundry](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/VMX_release_notes.html#volt-foundry) & [Iris](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/VMX_release_notes.html#volt-iris) - Do not miss a beat when we release new features into the wild.
+<!-- - [HCL Infinity](https://basecamp.voltmx.com/s/dbx) - Visit the DBX page on Base Camp for banking resources. -->
