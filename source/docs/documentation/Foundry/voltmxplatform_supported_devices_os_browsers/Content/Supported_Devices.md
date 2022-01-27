@@ -29,25 +29,25 @@ The following is a list of supported devices for the iOS platform along with the
 | iPhone 5S | 1136×640 | Latest iOS 12 |
 | iPhone 6 | 1334×750 | Latest iOS 12 |
 | iPhone 6 Plus | 1920×1080 | Latest iOS 12 |
-| iPhone 6 S | 1334×750 | Latest iOS 14 |
-| iPhone 6 S Plus | 1920×1080 | Latest iOS 14 |
-| iPhone SE | 1136×640 | Latest iOS 14 |
-| iPhone 7 | 1334×750 | Latest iOS 14 |
-| iPhone 7 Plus | 1920×1080 | Latest iOS 14 |
-| iPhone 8 | 1334×750 | Latest iOS 14 |
-| iPhone 8 Plus | 1920×1080 | Latest iOS 14 |
-| iPhone X | 2436×1125 | Latest iOS 14 |
-| iPhone XS | 1125×2436 | Latest iOS 14 |
-| iPhone XS Max | 1242×2688 | Latest iOS 14 |
-| iPhone XR | 828×1792 | Latest iOS 14 |
-| iPhone 11 | 828×1972 | Latest iOS 14 |
-| iPhone 11 Pro | 1125×2436 | Latest iOS 14 |
-| iPhone 11 Pro Max | 1242×2688 | Latest iOS 14 |
-| iPhone SE (2nd Gen) | 1334×750 | Latest iOS 14 |
-| iPhone 12 | 2532×1170 | Latest iOS 14 |
-| iPhone 12 Mini | 2340×1080 | Latest iOS 14 |
-| iPhone 12 Pro | 2532×1170 | Latest iOS 14 |
-| iPhone 12 Pro Max | 2778×1284 | Latest iOS 14 |
+| iPhone 6 S | 1334×750 | Latest iOS 15 |
+| iPhone 6 S Plus | 1920×1080 | Latest iOS 15 |
+| iPhone SE | 1136×640 | Latest iOS 15 |
+| iPhone 7 | 1334×750 | Latest iOS 15 |
+| iPhone 7 Plus | 1920×1080 | Latest iOS 15 |
+| iPhone 8 | 1334×750 | Latest iOS 15 |
+| iPhone 8 Plus | 1920×1080 | Latest iOS 15 |
+| iPhone X | 2436×1125 | Latest iOS 15 |
+| iPhone XS | 1125×2436 | Latest iOS 15 |
+| iPhone XS Max | 1242×2688 | Latest iOS 15 |
+| iPhone XR | 828×1792 | Latest iOS 15 |
+| iPhone 11 | 828×1972 | Latest iOS 15 |
+| iPhone 11 Pro | 1125×2436 | Latest iOS 15 |
+| iPhone 11 Pro Max | 1242×2688 | Latest iOS 15 |
+| iPhone SE (2nd Gen) | 1334×750 | Latest iOS 15 |
+| iPhone 12 | 2532×1170 | Latest iOS 15 |
+| iPhone 12 Mini | 2340×1080 | Latest iOS 15 |
+| iPhone 12 Pro | 2532×1170 | Latest iOS 15 |
+| iPhone 12 Pro Max | 2778×1284 | Latest iOS 15 |
 | iPhone 13  | 2532×1170 | Latest iOS 15 |
 | iPhone 13 Mini | 2340×1080 | Latest iOS 15 |
 | iPhone 13 Pro | 2532×1170 | Latest iOS 15 |
@@ -56,20 +56,20 @@ The following is a list of supported devices for the iOS platform along with the
 | iPod (6th Gen) | 1136×640 | Latest iOS 12 |
 | __iPad__ |   |   |
 | iPad Air 1 | 2048×1536 | Latest iOS 12 |
-| iPad Air 2 | 2048×1536 | Latest iPadOS 14 |
-| iPad pro 12.9 inch 1st gen | 2732×2048 | Latest iPadOS 14 |
-| iPad pro 9.7 inch | 2048x1536 | Latest iPadOS 14 |
-| iPad pro 12.9 inch 2nd gen | 2732×2048 | Latest iPadOS 14 |
-| iPad pro 10.5 inch | 2224×1668 | Latest iPadOS 14 |
+| iPad Air 2 | 2048×1536 | Latest iPadOS 15 |
+| iPad pro 12.9 inch 1st gen | 2732×2048 | Latest iPadOS 15 |
+| iPad pro 9.7 inch | 2048x1536 | Latest iPadOS 15 |
+| iPad pro 12.9 inch 2nd gen | 2732×2048 | Latest iPadOS 15 |
+| iPad pro 10.5 inch | 2224×1668 | Latest iPadOS 15 |
 | iPad pro 12.9 inch | 2732×2048 | Latest iPadOS 15 |
 | iPad pro 11 inch | 2388×1668 | Latest iPadOS 15 |
-| iPad 5th Gen | 2048×1536 | Latest iPadOS 14 |
-| iPad 7th Gen | 2160×1620 | Latest iPadOS 14 |
+| iPad 5th Gen | 2048×1536 | Latest iPadOS 15 |
+| iPad 7th Gen | 2160×1620 | Latest iPadOS 15 |
 | iPad 8th Gen | 2160×1620 | Latest iPadOS 15 |
 | iPad 9th Gen | 2160×1620 | Latest iPadOS 15 |
 | iPad mini 2 | 2048×1536 | Latest iOS 12 |
 | iPad mini 3 | 2048×1536 | Latest iOS 12 |
-| iPad mini 4 | 2048×1536 | Latest iPadOS 14 |
+| iPad mini 4 | 2048×1536 | Latest iPadOS 15 |
 | iPad mini (6th generation) | 2266×1488  | Latest iPadOS 15 |
 
 
@@ -140,7 +140,7 @@ Volt MX  Iris supported versions for Windows
 
 | Windows Phone Versions | Volt MX Iris Release Versions |   |
 | --- | --- | --- |
-| V8 | V9 |
+| | V8  | V9 |
 | --- | --- |
 | Windows Desktop | ![](Resources/Images/yes.png) | ![](Resources/Images/no.png) |
 | Windows 8.1 Tablets | ![](Resources/Images/yes.png) | ![](Resources/Images/no.png) |
