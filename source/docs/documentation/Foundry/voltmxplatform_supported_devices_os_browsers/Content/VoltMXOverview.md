@@ -12,7 +12,7 @@ Volt MX  Overview
 Product Compatibility Chart
 ---------------------------
 
-Volt MX  Foundry and Volt MX Iris both support each other for the current release version and one previous version.
+Volt MX Foundry and Volt MX Iris both support each other for the current release.
 
   
 | Product Version | Compatible With |
