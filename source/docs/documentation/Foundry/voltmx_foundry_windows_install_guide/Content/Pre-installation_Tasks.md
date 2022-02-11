@@ -12,10 +12,10 @@ Pre-Installation Tasks
 Download Volt MX Foundry Installer
 ---------------------------------
 
-Download `VoltMXFoundrySetup.zip` from the [Downloads](http://community.hclvoltmx.com/downloads) site and extract the file. To download Volt MX Foundry installer from the community portal, follow these steps:
+Download Volt MX Foundry from Flexnet Operations site and extract the file. To download Volt MX Foundry installer from Flexnet, follow these steps:
 
-1.   Log in to [](http://developer.voltmx.com/VoltMXReleases)[](http://community.hclvoltmx.com/downloads)[Downloads](http://community.hclvoltmx.com/downloads) site . You can obtain a user name and password from your sales representative or partner.
-2.  Click the **VoltMX Foundry** tab.
+1.  Log in to [Flexnet](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal). You can obtain a user name and password from your sales representative or partner.
+2.  Once logged in, navigate to "Your Downloads" and select "HCL Volt MX".  HCL Volt MX Foundry will be displayed in the list.
 3.  Select the specific release version from the **VoltMX Foundry Installer (Consolidated Installer for all features)** drop-down list and then click on the specific release related files you want to download. For example, if you want to download `VoltMX Foundry 9.0.0 GA installer`, select the `9.0.0 GA` version from the drop-down list, and then click the **Installer\_Windows** link.
     
     The `VoltMXFoundrySetup.zip` file contains the following files:
