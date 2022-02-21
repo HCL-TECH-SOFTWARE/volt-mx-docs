@@ -25,11 +25,11 @@ To connect to the Volt MX Foundry Console, do the following: 
 3.  In the **VoltMX Foundry URL** text box, enter the base URL for your Volt MX Foundry account, and then click **Validate**.
 <br> __For example:__ 
 
-* __Cloud customers__: [https://manage.hclvoltmx.com](https://manage.hclvoltmx.com/oauth/authorize?oauth_token=52cf12c2dda185aa1280bd8bd8aa0f360a3db666)
+    * __Cloud customers__: [https://manage.hclvoltmx.com](https://manage.hclvoltmx.com/oauth/authorize?oauth_token=52cf12c2dda185aa1280bd8bd8aa0f360a3db666)
 
-* __On-prem customers__: Enter the base URL of the Volt Foundry on-premises environment
+    * __On-prem customers__: Enter the base URL of the Volt Foundry on-premises environment
 
-* __Trial (demo) customers__: [https://manage.demo-hclvoltmx.com](https://manage.demo-hclvoltmx.com/oauth/authorize?oauth_token=a8366454f9ecbd67bb6515cd8cc53c2e9da06865)
+    * __Trial (demo) customers__: [https://manage.demo-hclvoltmx.com](https://manage.demo-hclvoltmx.com/oauth/authorize?oauth_token=a8366454f9ecbd67bb6515cd8cc53c2e9da06865)
 
 4.  Once the Volt MX Foundry URL is validated, click **OK**.
 
