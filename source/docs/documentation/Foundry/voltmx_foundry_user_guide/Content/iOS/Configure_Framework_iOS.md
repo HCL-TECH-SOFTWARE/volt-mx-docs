@@ -104,8 +104,7 @@ To configure binaries, follow these steps:
         exit 0
         {% endhighlight %}
         
-        > **_Note:_** This step should be the final step under the Build Phase.  
-          
+        >**_Note:_** This step should be the final step under the Build Phase.  
         ![](../Resources/Images/iOS/script_497x653.png)  
         
 8.  Add dependent libraries to your project, shown below:
@@ -115,7 +114,6 @@ To configure binaries, follow these steps:
 9.  Add linker flags to your project , shown below:
     
     ![](../Resources/Images/iOS/Linker_flags_590x145.png)
-    
 
 Installing com.voltmx.VoltMXSDK.docset in Xcode
 -------------------------------------------
