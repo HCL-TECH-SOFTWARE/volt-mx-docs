@@ -104,7 +104,10 @@ To configure binaries, follow these steps:
         exit 0
         {% endhighlight %}
         
-        >**_Note:_** This step should be the final step under the Build Phase.  
+        >**_Note:_** This step should be the final step under the Build Phase.
+
+        <br/>
+        
         ![](../Resources/Images/iOS/script_497x653.png)  
         
 8.  Add dependent libraries to your project, shown below:
