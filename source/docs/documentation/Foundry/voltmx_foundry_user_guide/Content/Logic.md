@@ -249,7 +249,7 @@ Troubleshooting
 {% endhighlight %}
 
 For technical questions, suggestions, and comments, or to report problems on HCL product line, contact [support@voltmx.com](mailto:support@voltmx.com).
-
+<!-- 
 Node.js Services Integration in Volt MX Foundry
 ----------------------------------------------
 
@@ -259,3 +259,4 @@ Node.js services integration in Volt MX Foundry apps involves the following two 
 2.  [How to Integrate Node.js Services into Volt MX Foundry Apps](Logic_in_Apps.html#how-to-integrate-node-js-services-into-foundry-apps). This section details how to integrate Node.js services to Volt MX Foundry apps.
 
 <table style="margin-left: 0;margin-right: auto;" data-mc-conditions="Default.HTML5 Only"><colgroup><col> <col> <col></colgroup><tbody><tr><td>Rev</td><td>Author</td><td>Edits</td></tr><tr><td>7.2</td><td>SD</td><td>SD</td></tr></tbody></table>
+-->
