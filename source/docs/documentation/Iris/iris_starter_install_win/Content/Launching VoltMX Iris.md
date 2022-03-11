@@ -34,36 +34,43 @@ Launching Volt MX Iris
 
 To launch Iris, follow these steps:
 
-1.  Double-click the Volt MX Iris shortcut icon on the desktop to open the login screen of Iris.
+1.  Double-click the Volt MX Iris shortcut icon on the
+    desktop to open the login screen of Iris.
 
-> **_Note:_** You can also navigate to the folder where Iris is installed, and double-click **Iris** to launch it.
+    > **_Note:_** You can also navigate to the folder where Iris is installed, and double-click **Iris** to launch it.
 
-3.  On launching Iris, the **VoltMX Cloud Login** screen appears for license validation.
+2.  On launching Iris, the **VoltMX Cloud Login** screen 
+    appears for license validation.
 
-[![](Resources/Images/win_st_install_2_thumb_0_288.png)](Resources/Images/win_st_install_2.png)
+    [![](Resources/Images/win_st_install_2_thumb_0_288.png)](Resources/Images/win_st_install_2.png)
 
-5.  Enter your Volt MX Cloud credentials, and then click **Login**.  
+3.  Enter your Volt MX Cloud credentials, and then click 
+    **Login**.  
+
     Iris validates the license associated with your Cloud account.  
     
-6.  The Hikes screen appears. The Hikes screen displays links to different Hikes available in Volt MX Iris. You can go through these hikes to understand various features of Volt MX.
+4.  The Hikes screen appears. The Hikes screen displays links 
+    to different Hikes available in Volt MX Iris. You can go through these hikes to understand various features of Volt MX.
 
-[![](Resources/Images/welcome_thumb_0_288.png)](Resources/Images/welcome.png)
+    [![](Resources/Images/welcome_thumb_0_288.png)](Resources/Images/welcome.png)
 
-8.  Close the Hikes screen. The Volt MX IQ bot gets activated.
+5.  Close the Hikes screen. The Volt MX IQ bot gets activated.
     
     Use the bot to guide you in the process of developing applications in Volt MX Iris.
     
 
-[![](Resources/Images/VoltMX_IQ_thumb_0_288.png)](Resources/Images/VoltMX_IQ.png)
+    [![](Resources/Images/VoltMX_IQ_thumb_0_288.png)](Resources/Images/VoltMX_IQ.png)
 
-10.  After the Volt MX IQ bot disappears, a sample form loads in the application canvas.
+6.  After the Volt MX IQ bot disappears, a sample form loads 
+    in the application canvas.
     
 
-[![](Resources/Images/form_1_thumb_0_288.png)](Resources/Images/form_1.png)
+    [![](Resources/Images/form_1_thumb_0_288.png)](Resources/Images/form_1.png)
 
-12.  Click **Project** > **New Project** to create a new Iris project
+7.  Click **Project** > **New Project** to create a new Iris 
+     project
 
-For details on how to uninstall the Iris application from your system, refer [Uninstall Volt MX Iris](Uninstalling VoltMX Iris.html).
+    For details on how to uninstall the Iris application from your system, refer [Uninstall Volt MX Iris](Uninstalling VoltMX Iris.html).
 
 *   [Prerequisites](Prerequisites.html#prerequisites)
     *   [System Requirements](Prerequisites.html#system-requirements)
