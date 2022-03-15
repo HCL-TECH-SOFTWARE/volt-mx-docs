@@ -20,7 +20,6 @@ This section provides a library of mapper examples. Select a link from the follo
 - [Conditional Mapping](#Conditional_Mapping)
 - [Conditional Mapping With Choose-When-Otherwise](#Conditional_Mapping_With_Choose-When-Otherwise)
 - [Field Mapping](#Field_Mapping)
-
 - [Global Mapper Output Mapping](#Global_Mapper_Output_Mapping)
 - [Global Mapper Output Second Mapping](#Global_Mapper_Output_Second_Mapping)
 - [Independent Object Structure Mapping](#Independent_Object_Structure_Mapping)
@@ -91,26 +90,26 @@ This is an example of attribute to object mapping.
 \]
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version\="1.0" encoding\="UTF-8" standalone\="yes"?>
-<mapper
-xmlns\="http://www.voltmx.com/ns/mapper"\>
-<map outputpath\="WorkOrder" inputpath\="WorkOrder"\>
-<set-param outputpath\="WorkOrderId" inputpath\="WorkOrderId" />
-<map outputpath\="Address" inputpath\=""\>
-<set-param outputpath\="WorkOrderId" inputpath\="WorkOrderId" />
-<set-param outputpath\="AddressId" inputpath\="AddressId" />
-<set-param outputpath\="AddressType" input\="ORD" />
-</map>
-</map>
-</mapper></code></pre>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version\="1.0" encoding\="UTF-8" standalone\="yes"?&gt;
+&lt;mapper
+    xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath\="WorkOrder" inputpath\="WorkOrder"&gt;
+&lt; outputpath\="WorkOrderId" inputpath\="WorkOrderId" /&gt;
+&lt;map outputpath\="Address" inputpath\=""&gt;
+&lt; outputpath\="WorkOrderId" inputpath\="WorkOrderId" /&gt;
+&lt; outputpath\="AddressId" inputpath\="AddressId" /&gt;
+&lt; outputpath\="AddressType" input\="ORD" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
-<h3 id="Attribute_To_Object_Mapping">Attribute To Object With Empty Fields</h3>
+<h3 id="Attribute_To_Object_With_Empty_Fields">Attribute To Object With Empty Fields</h3>
 
 This is an example of mapping an attribute to an object with empty fields.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{"WorkOrder": \[
 
@@ -140,10 +139,9 @@ Input
 
 }</code></pre>
 
-Output
+<b>Output</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">
-{
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
 "WorkOrder": \[
 
@@ -209,35 +207,25 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="WorkOrder" inputpath="WorkOrder">
-
-<set-param outputpath="WorkOrderId" inputpath="WorkOrderId" />
-
-<map outputpath="Address" inputpath="">
-
-<set-param outputpath="WorkOrderId" inputpath="WorkOrderId" />
-
-<set-param outputpath="AddressId" inputpath="AddressId" />
-
-<set-param outputpath="AddressType" input="ORD" />
-
-</map>
-
-</map>
-
-</mapper> </code></pre>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="WorkOrder" inputpath="WorkOrder"&gt;
+&lt; outputpath="WorkOrderId" inputpath="WorkOrderId" /&gt;
+&lt;map outputpath="Address" inputpath=""&gt;
+&lt; outputpath="WorkOrderId" inputpath="WorkOrderId" /&gt;
+&lt; outputpath="AddressId" inputpath="AddressId" /&gt;
+&lt; outputpath="AddressType" input="ORD" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
 <h3 id="Attribute_To_Object_With_Missing_Fields">Attribute To Object With Missing Fields</h3>
 
 This is an example of mapping an attribute to an object with missing fields.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -269,7 +257,7 @@ Input
 
 }</code></pre>
 
-Output
+<b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -337,35 +325,25 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="WorkOrder" inputpath="WorkOrder">
-
-<set-param outputpath="WorkOrderId" inputpath="WorkOrderId" />
-
-<map outputpath="Address" inputpath="">
-
-<set-param outputpath="WorkOrderId" inputpath="WorkOrderId" />
-
-<set-param outputpath="AddressId" inputpath="AddressId" />
-
-<set-param outputpath="AddressType" input="ORD" />
-
-</map>
-
-</map>
-
-</mapper></code></pre>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="WorkOrder" inputpath="WorkOrder"&gt;
+&lt; outputpath="WorkOrderId" inputpath="WorkOrderId" /&gt;
+&lt;map outputpath="Address" inputpath=""&gt;
+&lt; outputpath="WorkOrderId" inputpath="WorkOrderId" /&gt;
+&lt; outputpath="AddressId" inputpath="AddressId" /&gt;
+&lt; outputpath="AddressType" input="ORD" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
 <h3 id="Attribute_To_Object_With_Null_Field_Value">Attribute To Object With Null Field Value</h3>
 
 This is an example of mapping an attribute to an object with a null field value.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -467,27 +445,21 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="A" inputpath="A">
-
-<set-param outputpath="Q1" inputpath="P1" />
-
-<set-param outputpath="Q2" inputpath="P2" />
-
-</map>
-
-</mapper></code></pre>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="A" inputpath="A"&gt;
+&lt; outputpath="Q1" inputpath="P1" /&gt;
+&lt; outputpath="Q2" inputpath="P2" /&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
 <h3 id="Concatenation_From_Child">Concatenation From Child</h3>
 
 This is an example of concatenation mapping from a child.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -539,7 +511,7 @@ Input
 
 }</code></pre>
 
-Output
+<b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -573,41 +545,28 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="Customers" inputpath="Customers">
-
-<set-param outputpath="Id" inputpath="Id" />
-
-<map outputpath="" inputpath="Address">
-
-<exec-function name="voltmx.string:concat" outputpath="concatname output="$vars">
-
-<set-arg name="FirstName" inputpath="FirstName"/>
-
-<set-arg name="Separator" input=" " />
-
-<set-arg name="LastName" inputpath="LastName"/>
-
-</exec-function>
-
-<set-param outputpath="Name" inputpath="$vars/concatname" />
-
-</map>
-
-</map>
-
-</mapper></code></pre>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="Customers" inputpath="Customers"&gt;
+&lt; outputpath="Id" inputpath="Id" /&gt;
+&lt;map outputpath="" inputpath="Address"&gt;
+&lt;exec-function name="voltmx.string:concat" outputpath="concatname output="$vars"&gt;
+&lt;set-arg name="FirstName" inputpath="FirstName"/&gt;
+&lt;set-arg name="Separator" input=" " /&gt;
+&lt;set-arg name="LastName" inputpath="LastName"/&lt;
+&lt;/exec-function&gt;
+&lt;set-param outputpath="Name" inputpath="$vars/concatname" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
 <h3 id="Concatenation_Mapping">Concatenation Mapping</h3>
 
 This is an example of concatenation mapping.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -625,7 +584,7 @@ Input
 
 }</code></pre>
 
-Output
+<b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -641,35 +600,25 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="A" inputpath="A">
-
-<exec-function name="voltmx.string:concat" outputpath="P1P2Concat" output="$vars">
-
-<set-arg name="P1" inputpath="P1"/>
-
-<set-arg name="Separator" input="-" />
-
-<set-arg name="P2" inputpath="P2"/>
-
-</exec-function>
-
-<set-param outputpath="Q1" inputpath="$vars/P1P2Concat" />
-
-</map>
-
-</mapper></code></pre>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="A" inputpath="A"&gt;
+&lt;exec-function name="voltmx.string:concat" outputpath="P1P2Concat" output="$vars"&gt;
+&lt;set-arg name="P1" inputpath="P1"/&gt;
+&lt;set-arg name="Separator" input="-" /&gt;
+&lt;set-arg name="P2" inputpath="P2"/&gt;
+&lt;/exec-function&gt;
+&lt; outputpath="Q1" inputpath="$vars/P1P2Concat" /&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
 <h3 id="Concatenation_With_Child_Attribute">Concatenation With Child Attribute</h3>
 
 This is an example of mapping concatenation with a child attribute.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -695,7 +644,7 @@ Input
 
 }</code></pre>
 
-Output
+<b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -711,35 +660,25 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="Address" inputpath="EAM\_WO\_HDR">
-
-<exec-function name="voltmx.string:concat" outputpath="P1P2Concat" output="$vars">
-
-<set-arg name="P1" inputpath="EAM\_WO\_Address/P1"/>
-
-<set-arg name="Separator" input="-" />
-
-<set-arg name="P2" inputpath="P2"/>
-
-</exec-function>
-
-<set-param outputpath="Q1" inputpath="$vars/P1P2Concat" />
-
-</map>
-
-</mapper></code></pre>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="Address" inputpath="EAM_WO_HDR"&gt;
+&lt;exec-function name="voltmx.string:concat" outputpath="P1P2Concat" output="$vars"&gt;
+&lt;set-arg name="P1" inputpath="EAM_WO_Address/P1"/&gt;
+&lt;set-arg name="Separator" input="-" /&gt;
+&lt;set-arg name="P2" inputpath="P2"/&gt;
+&lt;/exec-function&gt;
+&lt; outputpath="Q1" inputpath="$vars/P1P2Concat" /&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
 <h3 id="Concatenation_With_Dollar_Mapping">Concatenation With Dollar Mapping</h3>
 
 This is an example of concatenation with dollar mapping.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -757,7 +696,7 @@ Input
 
 }</code></pre>
 
-Output
+<b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -773,35 +712,25 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="A" inputpath="A">
-
-<exec-function name="voltmx.string:concat" outputpath="P1P2Concat" output="$vars">
-
-<set-arg name="P1" inputpath="P1"/>
-
-<set-arg name="Separator" input="\\$" />
-
-<set-arg name="P2" inputpath="P2"/>
-
-</exec-function>
-
-<set-param outputpath="Q1" inputpath= "$vars/P1P2Concat" />
-
-</map>
-
-</mapper></code></pre>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="A" inputpath="A"&gt;
+&lt;exec-function name="voltmx.string:concat" outputpath="P1P2Concat" output="$vars"&gt;
+&lt;set-arg name="P1" inputpath="P1"/&gt;
+&lt;set-arg name="Separator" input="\\$" /&gt;
+&lt;set-arg name="P2" inputpath="P2"/&gt;
+&lt;/exec-function&gt;
+&lt; outputpath="Q1" inputpath= "$vars/P1P2Concat" /&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
 <h3 id="Conditional_Mapping">Conditional Mapping</h3>
 
 This is an example of conditional mapping.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -853,7 +782,7 @@ Input
 
 }</code></pre>
 
-Output
+<b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -887,85 +816,50 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="Customers" inputpath="Customers">
-
-<set-param outputpath="Id" inputpath="Id" />
-
-<exec-function name="voltmx.logical:equal" outputpath="NotStartedCond" output="$vars">
-
-<set-arg name="NotStarted" inputpath="NotStarted" />
-
-<set-arg name="X" input="X" />
-
-</exec-function>
-
-<exec-function name="voltmx.logical:equal" outputpath="StartedCond" output="$vars">
-
-<set-arg name="Started" inputpath="Started" />
-
-<set-arg name="X" input="X" />
-
-</exec-function>
-
-<exec-function name="voltmx.logical:equal" outputpath="InProgressCond" output="$vars">
-
-<set-arg name="InProgress" inputpath="InProgress" />
-
-<set-arg name="X" input="X" />
-
-</exec-function>
-
-<exec-function name="voltmx.logical:equal" outputpath="CompletedCond" output="$vars">
-
-<set-arg name="Completed" inputpath="Completed" />
-
-<set-arg name="X" input="X" />
-
-</exec-function>
-
-<choose>
-
-<when test="$vars/NotStartedCond">
-
-<set-param outputpath="Status" input="NotStarted" />
-
-</when>
-
-<when test="$vars/StartedCond">
-
-<set-param outputpath="Status" input="Started" />
-
-</when>
-
-<when test="$vars/InProgressCond">
-
-<set-param outputpath="Status" input="InProgress" />
-
-</when>
-
-<when test="$vars/CompletedCond">
-
-<set-param outputpath="Status" input="Completed" />
-
-</when>
-
-</choose>
-
-</map>
-
-</mapper></code></pre>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="Customers" inputpath="Customers"&gt;
+&lt; outputpath="Id" inputpath="Id" /&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="NotStartedCond" output="$vars"&gt;
+&lt;set-arg name="NotStarted" inputpath="NotStarted" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="StartedCond" output="$vars"&gt;
+&lt;set-arg name="Started" inputpath="Started" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="InProgressCond" output="$vars"&gt;
+&lt;set-arg name="InProgress" inputpath="InProgress" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="CompletedCond" output="$vars"&gt;
+&lt;set-arg name="Completed" inputpath="Completed" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;choose&gt;
+&lt;when test="$vars/NotStartedCond"&gt;
+&lt; outputpath="Status" input="NotStarted" /&gt;
+&lt;/when&gt;
+&lt;when test="$vars/StartedCond"&gt;
+&lt; outputpath="Status" input="Started" /&gt;
+&lt;/when&gt;
+&lt;when test="$vars/InProgressCond"&gt;
+&lt; outputpath="Status" input="InProgress" /&gt;
+&lt;/when&gt;
+&lt;when test="$vars/CompletedCond"&gt;
+&lt; outputpath="Status" input="Completed" /&gt;
+&lt;/when&gt;
+&lt;/choose&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
 <h3 id="Conditional_Mapping_With_Choose-When-Otherwise">Conditional Mapping With Choose-When-Otherwise</h3>
 
 This is an example of conditional mapping that uses a choose-when-otherwise block.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -1031,7 +925,7 @@ Input
 
 }</code></pre>
 
-Output
+<b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -1073,91 +967,54 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
 
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="Customers" inputpath="Customers">
-
-<set-param outputpath="Id" inputpath="Id" />
-
-<exec-function name="voltmx.logical:equal" outputpath="NotStartedCond" output="$vars">
-
-<set-arg name="NotStarted" inputpath="NotStarted" />
-
-<set-arg name="X" input="X" />
-
-</exec-function>
-
-<exec-function name="voltmx.logical:equal" outputpath="StartedCond" output="$vars">
-
-<set-arg name="Started" inputpath="Started" />
-
-<set-arg name="X" input="X" />
-
-</exec-function>
-
-<exec-function name="voltmx.logical:equal" outputpath="InProgressCond" output="$vars">
-
-<set-arg name="InProgress" inputpath="InProgress" />
-
-<set-arg name="X" input="X" />
-
-</exec-function>
-
-<exec-function name="voltmx.logical:equal" outputpath="CompletedCond" output="$vars">
-
-<set-arg name="Completed" inputpath="Completed" />
-
-<set-arg name="X" input="X" />
-
-</exec-function>
-
-<choose>
-
-<when test="$vars/NotStartedCond">
-
-<set-param outputpath="Status" input="NotStarted" />
-
-</when>
-
-<when test="$vars/StartedCond">
-
-<set-param outputpath="Status" input="Started" />
-
-</when>
-
-<when test="$vars/InProgressCond">
-
-<set-param outputpath="Status" input="InProgress" />
-
-</when>
-
-<when test="$vars/CompletedCond">
-
-<set-param outputpath="Status" input="Completed" />
-
-</when>
-
-<otherwise>
-
-<set-param outputpath="Status" input="Unknown" />
-
-</otherwise>
-
-</choose>
-
-</map>
-
-</mapper></code></pre>
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="Customers" inputpath="Customers"&gt;
+&lt; outputpath="Id" inputpath="Id" /&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="NotStartedCond" output="$vars"&gt;
+&lt;set-arg name="NotStarted" inputpath="NotStarted" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="StartedCond" output="$vars"&gt;
+&lt;set-arg name="Started" inputpath="Started" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="InProgressCond" output="$vars"&gt;
+&lt;set-arg name="InProgress" inputpath="InProgress" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="CompletedCond" output="$vars"&gt;
+&lt;set-arg name="Completed" inputpath="Completed" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;choose&gt;
+&lt;when test="$vars/NotStartedCond"&gt;
+&lt; outputpath="Status" input="NotStarted" /&gt;
+&lt;/when&gt;
+&lt;when test="$vars/StartedCond"&gt;
+&lt; outputpath="Status" input="Started" /&gt;
+&lt;/when&gt;
+&lt;when test="$vars/InProgressCond"&gt;
+&lt; outputpath="Status" input="InProgress" /&gt;
+&lt;/when&gt;
+&lt;when test="$vars/CompletedCond"&gt;
+&lt; outputpath="Status" input="Completed" /&gt;
+&lt;/when&gt;
+&lt;otherwise&gt;
+&lt; outputpath="Status" input="Unknown" />
+&lt;/otherwise&gt;
+&lt;/choose&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
 <h3 id="Field_Mapping">Field Mapping</h3>
 
 This is an example of field mapping.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -1183,7 +1040,7 @@ Input
 
 }</code></pre>
 
-Output
+<b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -1209,43 +1066,31 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map name="field-mapping"&gt;
+&lt;exec-function name="field-mapping"&gt;
+&lt;/exec-function&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
+<b>Functions</b>
 
-<map name="field-mapping">
-
-<exec-function name="field-mapping">
-
-</exec-function>
-
-</map>
-
-</mapper></code></pre>
-
-Functions
-
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<functions xmlns="http://www.voltmx.com/ns/mapper">
-
-<function name="field-mapping">
-
-<set-param outputpath="Q1" inputpath="P1" />
-
-<set-param outputpath="Q2" inputpath="P2" />
-
-</function>
-
-</function></code></pre>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;functions xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;function name="field-mapping"&gt;
+&lt; outputpath="Q1" inputpath="P1" /&gt;
+&lt; outputpath="Q2" inputpath="P2" /&gt;
+&lt;/function&gt;
+&lt;/function&gt;</code></pre>
 
 <h3 id="Global_Mapper_Output_Mapping">Global Mapper Output Mapping</h3>
 
 This is an example of global mapper output mapping.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -1311,7 +1156,7 @@ Input
 
 }</code></pre>
 
-Output
+<b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -1353,91 +1198,53 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="Customers" inputpath="Customers">
-
-<set-param outputpath="Id" inputpath="Id" />
-
-<exec-function name="voltmx.logical:equal" outputpath="NotStartedCond" output="$vars">
-
-<set-arg name="NotStarted" inputpath="NotStarted" />
-
-<set-arg name="X" input="X" />
-
-</exec-function>
-
-<exec-function name="voltmx.logical:equal" outputpath="StartedCond" output="$vars">
-
-<set-arg name="Started" inputpath="Started" />
-
-<set-arg name="X" input="X" />
-
-</exec-function>
-
-<exec-function name="voltmx.logical:equal" outputpath="InProgressCond" output="$vars">
-
-<set-arg name="InProgress" inputpath="InProgress" />
-
-<set-arg name="X" input="X" />
-
-</exec-function>
-
-<exec-function name="voltmx.logical:equal" outputpath="CompletedCond" output="$vars">
-
-<set-arg name="Completed" inputpath="Completed" />
-
-<set-arg name="X" input="X" />
-
-</exec-function>
-
-<choose>
-
-<when test="$vars/NotStartedCond">
-
-<set-param outputpath="Status" input="NotStarted" />
-
-</when>
-
-<when test="$vars/StartedCond">
-
-<set-param outputpath="Status" input="Started" />
-
-</when>
-
-<when test="$vars/InProgressCond">
-
-<set-param outputpath="Status" input="InProgress" />
-
-</when>
-
-<when test="$vars/CompletedCond">
-
-<set-param outputpath="Status" input="Completed" />
-
-</when>
-
-<otherwise>
-
-<set-param outputpath="Error-Message" input="Unknown element." output="$mapper-output"/>
-
-</otherwise>
-
-</choose>
-
-</map>
-
-</mapper></code></pre>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="Customers" inputpath="Customers"&gt;
+&lt; outputpath="Id" inputpath="Id" /&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="NotStartedCond" output="$vars"&gt;
+&lt;set-arg name="NotStarted" inputpath="NotStarted" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="StartedCond" output="$vars"&gt;
+&lt;set-arg name="Started" inputpath="Started" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="InProgressCond" output="$vars"&gt;
+&lt;set-arg name="InProgress" inputpath="InProgress" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="CompletedCond" output="$vars"&gt;
+&lt;set-arg name="Completed" inputpath="Completed" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;choose&gt;
+&lt;when test="$vars/NotStartedCond"&gt;
+&lt; outputpath="Status" input="NotStarted" /&gt;
+&lt;/when&gt;
+&lt;when test="$vars/StartedCond"&gt;
+&lt; outputpath="Status" input="Started" /&gt;
+&lt;/when&gt;
+&lt;when test="$vars/InProgressCond"&gt;
+&lt; outputpath="Status" input="InProgress" /&gt;
+&lt;/when&gt;
+&lt;when test="$vars/CompletedCond"&gt;
+&lt; outputpath="Status" input="Completed" /&gt;
+&lt;/when&gt;
+&lt;otherwise&gt;
+&lt; outputpath="Error-Message" input="Unknown element." output="$mapper-output"/&gt;
+&lt;/otherwise&gt;
+&lt;/choose&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
 <h3 id="Global_Mapper_Output_Second_Mapping">Global Mapper Output Second Mapping</h3>
 
 This is an example of mapping a second global mapper output.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -1503,7 +1310,7 @@ Input
 
 }</code></pre>
 
-Output
+<b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -1547,97 +1354,56 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="Customers" inputpath="Customers">
-
-<set-param outputpath="Id" inputpath="Id" />
-
-<exec-function name="voltmx.logical:equal" outputpath="NotStartedCond" output="$vars">
-
-<set-arg name="NotStarted" inputpath="NotStarted" />
-
-<set-arg name="X" input="X" />
-
-</exec-function>
-
-<exec-function name="voltmx.logical:equal" outputpath="StartedCond" output="$vars">
-
-<set-arg name="Started" inputpath="Started" />
-
-<set-arg name="X" input="X" />
-
-</exec-function>
-
-<exec-function name="voltmx.logical:equal" outputpath="InProgressCond" output="$vars">
-
-<set-arg name="InProgress" inputpath="InProgress" />
-
-<set-arg name="X" input="X" />
-
-</exec-function>
-
-<exec-function name="voltmx.logical:equal" outputpath="CompletedCond" output="$vars">
-
-<set-arg name="Completed" inputpath="Completed" />
-
-<set-arg name="X" input="X" />
-
-</exec-function>
-
-<choose>
-
-<when test="$vars/NotStartedCond">
-
-<set-param outputpath="Id" inputpath="Id" />
-
-<set-param outputpath="Status" input="NotStarted" />
-
-</when>
-
-<when test="$vars/StartedCond">
-
-<set-param outputpath="Status" input="Started" />
-
-</when>
-
-<when test="$vars/InProgressCond">
-
-<set-param outputpath="Id" inputpath="Id" />
-
-<set-param outputpath="Status" input="InProgress" />
-
-</when>
-
-<when test="$vars/CompletedCond">
-
-<set-param outputpath="Id" inputpath="Id" />
-
-<set-param outputpath="Status" input="Completed" />
-
-</when>
-
-<otherwise>
-
-<set-param outputpath="Error-Message" input="Unknown element." output="$mapper-output"/>
-
-</otherwise>
-
-</choose>
-
-</map>
-
-</mapper></code></pre>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="Customers" inputpath="Customers"&gt;
+&lt; outputpath="Id" inputpath="Id" /&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="NotStartedCond" output="$vars"&gt;
+&lt;set-arg name="NotStarted" inputpath="NotStarted" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="StartedCond" output="$vars"&gt;
+&lt;set-arg name="Started" inputpath="Started" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="InProgressCond" output="$vars"&gt;
+&lt;set-arg name="InProgress" inputpath="InProgress" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="CompletedCond" output="$vars"&gt;
+&lt;set-arg name="Completed" inputpath="Completed" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;choose&gt;
+&lt;when test="$vars/NotStartedCond"&gt;
+&lt; outputpath="Id" inputpath="Id" /&gt;
+&lt; outputpath="Status" input="NotStarted" /&gt;
+&lt;/when&gt;
+&lt;when test="$vars/StartedCond"&gt;
+&lt; outputpath="Status" input="Started" /&gt;
+&lt;/when&gt;
+&lt;when test="$vars/InProgressCond"&gt;
+&lt; outputpath="Id" inputpath="Id" /&gt;
+&lt; outputpath="Status" input="InProgress" /&gt;
+&lt;/when&gt;
+&lt;when test="$vars/CompletedCond"&gt;
+&lt; outputpath="Id" inputpath="Id" /&gt;
+&lt; outputpath="Status" input="Completed" /&gt;
+&lt;/when&gt;
+&lt;otherwise&gt;
+&lt; outputpath="Error-Message" input="Unknown element." output="$mapper-output"/&gt;
+&lt;/otherwise&gt;
+&lt;/choose&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
 <h3 id="Independent_Object_Structure_Mapping">Independent Object Structure Mapping</h3>
 
 This is an example of mapping an independent object structure.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -1713,7 +1479,7 @@ Input
 
 }</code></pre>
 
-Output
+<b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -1771,43 +1537,29 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="WorkOrder" inputpath="WorkOrder">
-
-<map outputpath="Address" inputpath="Address">
-
-<set-param outputpath="CustomerId" inputpath="CustomerId" />
-
-<set-param outputpath="AddressId" inputpath="AddressId" />
-
-</map>
-
-</map>
-
-<map outputpath="workOrderContacts" inputpath="WorkOrder">
-
-<map outputpath="Contacts" inputpath="Address">
-
-<set-param outputpath="PrimaryContactId" inputpath="PrimaryContactId" />
-
-<set-param outputpath="SecondaryContactId" inputpath="SecondaryContactId" />
-
-</map>
-
-</map>
-
-</mapper></code></pre>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="WorkOrder" inputpath="WorkOrder"&gt;
+&lt;map outputpath="Address" inputpath="Address"&gt;
+&lt; outputpath="CustomerId" inputpath="CustomerId" /&gt;
+&lt; outputpath="AddressId" inputpath="AddressId" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;map outputpath="workOrderContacts" inputpath="WorkOrder"&gt;
+&lt;map outputpath="Contacts" inputpath="Address"&gt;
+&lt; outputpath="PrimaryContactId" inputpath="PrimaryContactId" /&gt;
+&lt; outputpath="SecondaryContactId" inputpath="SecondaryContactId" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
 <h3 id="Looping_Filter">Looping Filter</h3>
 
 This is an example of mapping a looping filter.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -1857,7 +1609,7 @@ Input
 
 }</code></pre>
 
-Output
+<b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -1899,67 +1651,41 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="" inputpath="Persons">
-
-<exec-function name="voltmx.logical:equal" outputpath="EMPCondition" output="$vars">
-
-<set-arg name="Type" inputpath="Type" />
-
-<set-arg name="EMP" input="EMP" />
-
-</exec-function>
-
-<exec-function name="voltmx.logical:equal" outputpath="CUSTCondition" output="$vars">
-
-<set-arg name="Type" inputpath="Type" />
-
-<set-arg name="CUST" input="CUST" />
-
-</exec-function>
-
-<choose>
-
-<when test="$vars/EMPCondition">
-
-<map outputpath="Employee" inputpath="">
-
-<set-param outputpath="Id" inputpath="Id" />
-
-<set-param outputpath="Name" inputpath="Name" />
-
-</map>
-
-</when>
-
-<when test="$vars/CUSTCondition">
-
-<map outputpath="Customer" inputpath="">
-
-<set-param outputpath="Id" inputpath="Id" />
-
-<set-param outputpath="Name" inputpath="Name" />
-
-</map>
-
-</when>
-
-</choose>
-
-</map>
-
-</mapper></code></pre>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="" inputpath="Persons">
+&lt;exec-function name="voltmx.logical:equal" outputpath="EMPCondition" output="$vars"&gt;
+&lt;set-arg name="Type" inputpath="Type" /&gt;
+&lt;set-arg name="EMP" input="EMP" />
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="CUSTCondition" output="$vars"&gt;
+&lt;set-arg name="Type" inputpath="Type" /&gt;
+&lt;set-arg name="CUST" input="CUST" />
+&lt;/exec-function&gt;
+&lt;choose&gt;
+&lt;when test="$vars/EMPCondition">
+&lt;map outputpath="Employee" inputpath=""&gt;
+&lt; outputpath="Id" inputpath="Id" /&gt;
+&lt;set-param outputpath="Name" inputpath="Name" /&gt;
+&lt;/map&gt;
+&lt;/when&gt;
+&lt;when test="$vars/CUSTCondition">
+&lt;map outputpath="Customer" inputpath=""&gt;
+&lt; outputpath="Id" inputpath="Id" /&gt;
+&lt;set-param outputpath="Name" inputpath="Name" /&gt;
+&lt;/map&gt;
+&lt;/when&gt;
+&lt;/choose&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
 <h3 id="One_To_N_Split_Mapping">One To N Split Mapping</h3>
 
 This is an example of one to N split mapping.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -2047,7 +1773,7 @@ Input
 
 }</code></pre>
 
-Output
+<b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -2175,69 +1901,41 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="WorkOrder" inputpath="WorkOrder">
-
-<set-param outputpath="WorkOrderId" inputpath="WorkOrderId" />
-
-<exec-function name="voltmx.logical:equal" outputpath="EmptyCondition" output="$vars">
-
-<set-arg name="AddressId" inputpath="AddressId" />
-
-<set-arg name="Empty" input="" />
-
-</exec-function>
-
-<choose>
-
-<when test="$vars/EmptyCondition">
-
-</when>
-
-<otherwise>
-
-<map outputpath="Address" inputpath="">
-
-<set-param outputpath="AddressId" inputpath="AddressId" />
-
-<set-param outputpath="AddressType" input="ADDRESS" />
-
-</map>
-
-</otherwise>
-
-</choose>
-
-<map outputpath="Address" inputpath="">
-
-<set-param outputpath="AddressId" inputpath="CustomerId" />
-
-<set-param outputpath="AddressType" input="CUSTOMER" />
-
-</map>
-
-<map outputpath="Address" inputpath="Contacts">
-
-<set-param outputpath="AddressId" inputpath="Id" />
-
-<set-param outputpath="AddressType" input="CONTACT" />
-
-</map>
-
-</map>
-
-</mapper></code></pre>
-
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="WorkOrder" inputpath="WorkOrder"&gt;
+&lt; outputpath="WorkOrderId" inputpath="WorkOrderId" /&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="EmptyCondition" output="$vars"&gt;
+&lt;set-arg name="AddressId" inputpath="AddressId" /&gt;
+&lt;set-arg name="Empty" input="" /&gt;
+&lt;/exec-function&gt;
+&lt;choose&gt;
+&lt;when test="$vars/EmptyCondition"&gt;
+&lt;/when&gt;
+&lt;otherwise&gt;
+&lt;map outputpath="Address" inputpath=""&gt;
+&lt; outputpath="AddressId" inputpath="AddressId" /&gt;
+&lt; outputpath="AddressType" input="Address" /&gt;
+&lt;/map&gt;
+&lt;/otherwise&gt;
+&lt;/choose&gt;
+&lt;map outputpath="Address" inputpath=""&gt;
+&lt; outputpath="AddressId" inputpath="CustomerId" /&gt;
+&lt; outputpath="AddressType" input="Customer" /&gt;
+&lt;/map&gt;
+&lt;map outputpath="Address" inputpath="Contacts">
+&lt; outputpath="AddressId" inputpath="Id" /&gt;
+&lt; outputpath="AddressType" input="Contact" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 <h3 id="Optional_Input_Path">Optional Input Path</h3>
 
 This is an example of mapping an optional input path .
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -2311,7 +2009,7 @@ Input
 
 }</code></pre>
 
-Output
+<b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -2401,35 +2099,25 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="Address" inputpath="WorkOrder/Address">
-
-<set-param outputpath="CustomerId" inputpath="CustomerId" />
-
-<set-param outputpath="AddressId" inputpath="AddressId" />
-
-<map outputpath="Contact" inputpath="">
-
-<set-param outputpath="PrimaryContactId" inputpath="PrimaryContactId" />
-
-<set-param outputpath="SecondaryContactId" inputpath="SecondaryContactId" />
-
-</map>
-
-</map>
-
-</mapper></code></pre>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="Address" inputpath="WorkOrder/Address"&gt;
+&lt; outputpath="CustomerId" inputpath="CustomerId" /&gt;
+&lt; outputpath="AddressId" inputpath="AddressId" /&gt;
+&lt;map outputpath="Contact" inputpath=""&gt;
+&lt; outputpath="PrimaryContactId" inputpath="PrimaryContactId" /&gt;
+&lt; outputpath="SecondaryContactId" inputpath="SecondaryContactId" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
 <h3 id="Optional_Output_Path">Optional Output Path</h3>
 
 This is an example of mapping an optional output path.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -2499,7 +2187,7 @@ Input
 
 }</code></pre>
 
-Output
+<b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -2533,35 +2221,25 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="Address" inputpath="WorkOrder">
-
-<set-param outputpath="CustomerId" inputpath="CustomerId" />
-
-<set-param outputpath="AddressId" inputpath="AddressId" />
-
-<map outputpath="Contact" inputpath="">
-
-<set-param outputpath="PrimaryContactId" inputpath="PrimaryContactId" />
-
-<set-param outputpath="SecondaryContactId" inputpath="SecondaryContactId" />
-
-</map>
-
-</map>
-
-</mapper></code></pre>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="Address" inputpath="WorkOrder"&gt;
+&lt; outputpath="CustomerId" inputpath="CustomerId" /&gt;
+&lt; outputpath="AddressId" inputpath="AddressId" /&gt;
+&lt;map outputpath="Contact" inputpath=""&gt;
+&lt; outputpath="PrimaryContactId" inputpath="PrimaryContactId" /&gt;
+&lt; outputpath="SecondaryContactId" inputpath="SecondaryContactId" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
 <h3 id="Parent_Attributes_To_Different_Child_Objects">Parent Attributes To Different Child Objects</h3>
 
 This is an example of mapping parent attributes to different child objects.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -2623,7 +2301,7 @@ Input
 
 }</code></pre>
 
-Output
+<b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -2653,29 +2331,22 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="Contact" inputpath="EAM\_CONTACTS">
-
-<set-param outputpath="CONTACT\_NO" inputpath="ContactNo" />
-
-<set-param outputpath="FirstName" inputpath="EAM\_CONT\_ADDRESS/Name1" />
-
-<set-param outputpath="Preferences" inputpath="EAM\_CONT\_MISC/PREFERENCES" />
-
-</map>
-
-</mapper></code></pre>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="Contact" inputpath="EAM_CONTACTS">
+&lt; outputpath="CONTACT_NO" inputpath="ContactNo" />
+&lt; outputpath="FirstName" inputpath="EAM_CONT_ADDRESS/Name1" />
+&lt; outputpath="Preferences" inputpath="EAM_CONT_MISC/PREFERENCES" />
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
 <h3 id="Primary_To_Secondary_Mapping">Primary To Secondary Mapping</h3>
 
 This is an example of primary to secondary mapping.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -2749,7 +2420,7 @@ Input
 
 }</code></pre>
 
-Output
+<b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -2839,35 +2510,25 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="WorkOrder" inputpath="WorkOrder/Address">
-
-<set-param outputpath="CustomerId" inputpath="CustomerId" />
-
-<set-param outputpath="AddressId" inputpath="AddressId" />
-
-<map outputpath="workOrderContacts" inputpath="">
-
-<set-param outputpath="PrimaryContactId" inputpath="PrimaryContactId" />
-
-<set-param outputpath="SecondaryContactId" inputpath="SecondaryContactId" />
-
-</map>
-
-</map>
-
-</mapper></code></pre>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="WorkOrder" inputpath="WorkOrder/Address"&gt;
+&lt; outputpath="CustomerId" inputpath="CustomerId" /&gt;
+&lt; outputpath="AddressId" inputpath="AddressId" /&gt;
+&lt;map outputpath="workOrderContacts" inputpath=""&gt;
+&lt; outputpath="PrimaryContactId" inputpath="PrimaryContactId" /&gt;
+&lt; outputpath="SecondaryContactId" inputpath="SecondaryContactId" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
 <h3 id="Random_Mapping">Random Mapping</h3>
 
 This is an example of mapping using the random function.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -2889,7 +2550,7 @@ Input
 
 }</code></pre>
 
-Output
+<b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -2915,31 +2576,23 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="M" inputpath="A">
-
-<exec-function name="voltmx.util:random" outputpath="random" output="$vars">
-
-</exec-function>
-
-<set-param outputpath="Q1" inputpath="P1" />
-
-<set-param outputpath="Q2" inputpath="$vars/random" />
-
-</map>
-
-</mapper></code></pre>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="M" inputpath="A"&gt;
+&lt;exec-function name="voltmx.util:random" outputpath="random" output="$vars"&gt;
+&lt;/exec-function&gt;
+&lt; outputpath="Q1" inputpath="P1" /&gt;
+&lt; outputpath="Q2" inputpath="$vars/random" />
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
 <h3 id="Reference_Only_Child_Object">Reference Only Child Object</h3>
 
 This is an example of referencing only a child object.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -3013,7 +2666,7 @@ Input
 
 }</code></pre>
 
-Output
+<b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -3071,31 +2724,23 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="Address" inputpath="WorkOrder/Address">
-
-<set-param outputpath="CustomerId" inputpath="CustomerId" />
-
-<set-param outputpath="AddressId" inputpath="AddressId" />
-
-<set-param outputpath="PrimaryContactId" inputpath="PrimaryContactId" />
-
-<set-param outputpath="SecondaryContactId" inputpath="SecondaryContactId" />
-
-</map>
-
-</mapper></code></pre>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="Address" inputpath="WorkOrder/Address"&gt;
+&lt; outputpath="CustomerId" inputpath="CustomerId" /&gt;
+&lt; outputpath="AddressId" inputpath="AddressId" /&gt;
+&lt; outputpath="PrimaryContactId" inputpath="PrimaryContactId" /&gt;
+&lt; outputpath="SecondaryContactId" inputpath="SecondaryContactId" /&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
 <h3 id="Reverse_Parent_Child">Reverse Parent Child</h3>
 
 This is an example of reverse parent-child mapping.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -3161,7 +2806,7 @@ Input
 
 }</code></pre>
 
-Output
+<b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -3251,35 +2896,25 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="Tasks" inputpath="WorkOrder/Tasks">
-
-<set-param outputpath="TaskId" inputpath="TaskId" />
-
-<set-param outputpath="Name" inputpath="Name" />
-
-<map outputpath="WorkOrder" inputpath="..">
-
-<set-param outputpath="WorkOrderId" inputpath="WorkOrderId" />
-
-<set-param outputpath="Name" inputpath="Name" />
-
-</map>
-
-</map>
-
-</mapper></code></pre>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="Tasks" inputpath="WorkOrder/Tasks"&gt;
+&lt; outputpath="TaskId" inputpath="TaskId" /&gt;
+&lt;set-param outputpath="Name" inputpath="Name" /&gt;
+&lt;map outputpath="WorkOrder" inputpath=".."&gt;
+&lt; outputpath="WorkOrderId" inputpath="WorkOrderId" /&gt;
+&lt;set-param outputpath="Name" inputpath="Name" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
 <h3 id="Simple_Mapping_List">Simple Mapping List</h3>
 
 This is an example of a simple mapping list.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -3305,7 +2940,7 @@ Input
 
 }</code></pre>
 
-Output
+<b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -3331,27 +2966,21 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="M" inputpath="A">
-
-<set-param outputpath="Q1" inputpath="P1" />
-
-<set-param outputpath="Q2" inputpath="P2" />
-
-</map>
-
-</mapper></code></pre>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="M" inputpath="A"&gt;
+&lt; outputpath="Q1" inputpath="P1" /&gt;
+&lt; outputpath="Q2" inputpath="P2" /&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
 <h3 id="Simple_Mapping_List_With_One_Row">Simple Mapping List With One Row</h3>
 
 This is an example of a simple mapping list with one row.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -3369,7 +2998,7 @@ Input
 
 }</code></pre>
 
-Output
+<b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -3387,27 +3016,21 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="M" inputpath="A">
-
-<set-param outputpath="Q1" inputpath="P1" />
-
-<set-param outputpath="Q2" inputpath="P2" />
-
-</map>
-
-</mapper></code></pre>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="M" inputpath="A"&gt;
+&lt; outputpath="Q1" inputpath="P1" /&gt;
+&lt; outputpath="Q2" inputpath="P2" /&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
 <h3 id="Simple_Split_Mapping">Simple Split Mapping</h3>
 
 This is an example of simple split mapping using the substringbefore and substringafter functions.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -3423,7 +3046,7 @@ Input
 
 }</code></pre>
 
-Output
+<b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -3441,43 +3064,29 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="A" inputpath="A">
-
-<exec-function name="voltmx.string:substringBefore" outputpath="NameSplitBeforeExpr" output="$vars">
-
-<set-arg name="Name" inputpath="Name"/>
-
-<set-arg name="Separator" input=" " />
-
-</exec-function>
-
-<exec-function name="voltmx.string:substringAfter" outputpath="NameSplitAfterExpr" output="$vars">
-
-<set-arg name="Name" inputpath="Name"/>
-
-<set-arg name="Separator" input=" " />
-
-</exec-function>
-
-<set-param outputpath="FirstName" inputpath="$vars/NameSplitBeforeExpr" />
-
-<set-param outputpath="LastName" inputpath="$vars/NameSplitAfterExpr" />
-
-</map>
-
-</mapper></code></pre>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="A" inputpath="A"&gt;
+&lt;exec-function name="voltmx.string:substringBefore" outputpath="NameSplitBeforeExpr" output="$vars"&gt;
+&lt;set-arg name="Name" inputpath="Name"/&gt;
+&lt;set-arg name="Separator" input=" " /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.string:substringAfter" outputpath="NameSplitAfterExpr" output="$vars"&gt;
+&lt;set-arg name="Name" inputpath="Name"/&gt;
+&lt;set-arg name="Separator" input=" " /&gt;
+&lt;/exec-function&gt;
+&lt; outputpath="FirstName" inputpath="$vars/NameSplitBeforeExpr" /&gt;
+&lt; outputpath="LastName" inputpath="$vars/NameSplitAfterExpr" /&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
 <h3 id="Split_Table">Split Table</h3>
 
 This is an example of split table mapping.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -3503,7 +3112,7 @@ Input
 
 }</code></pre>
 
-Output
+<b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -3541,31 +3150,23 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="Customer" inputpath="Customer">
-
-<set-param outputpath="CustomerInfo" inputpath="CustomerInfo" />
-
-</map>
-
-<map outputpath="CustomerAddress" inputpath="Customer">
-
-<set-param outputpath="AddressID" inputpath="AddressID" />
-
-</map>
-
-</mapper></code></pre>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="Customer" inputpath="Customer">
+&lt; outputpath="CustomerInfo" inputpath="CustomerInfo" />
+&lt;/map&gt;
+&lt;map outputpath="CustomerAddress" inputpath="Customer">
+&lt; outputpath="AddressID" inputpath="AddressId" /&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
 <h3 id="Split_Table_Filter_Mapping">Split Table Filter Mapping</h3>
 
 This is an example of split table filter mapping.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -3691,7 +3292,7 @@ Input
 
 }</code></pre>
 
-Output
+<b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -3761,81 +3362,48 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="WorkOrder" inputpath="WorkOrder">
-
-<set-param outputpath="WorkOrderId" inputpath="Id" />
-
-<map outputpath="" inputpath="WorkOrderData">
-
-<exec-function name="voltmx.logical:equal" outputpath="CustomerCondition" output="$vars">
-
-<set-arg name="Type" inputpath="Type" />
-
-<set-arg name="Customer" input="Customer" />
-
-</exec-function>
-
-<exec-function name="voltmx.logical:equal" outputpath="AddressCondition" output="$vars">
-
-<set-arg name="Type" inputpath="Type" />
-
-<set-arg name="Address" input="Address" />
-
-</exec-function>
-
-<exec-function name="voltmx.logical:equal" outputpath="ContactCondition" output="$vars">
-
-<set-arg name="Type" inputpath="Type" />
-
-<set-arg name="Contact" input="Contact" />
-
-</exec-function>
-
-<choose>
-
-<when test="$vars/CustomerCondition">
-
-<set-param outputpath="CustomerId" inputpath="Id" />
-
-</when>
-
-<when test="$vars/AddressCondition">
-
-<set-param outputpath="AddressId" inputpath="Id" />
-
-</when>
-
-<when test="$vars/ContactCondition">
-
-<map outputpath="Contacts" inputpath="">
-
-<set-param outputpath="ContactId" inputpath="Id" />
-
-<set-param outputpath="Name" inputpath="Name" />
-
-</map>
-
-</when>
-
-</choose>
-
-</map>
-
-</map>
-
-</mapper></code></pre>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="WorkOrder" inputpath="WorkOrder"&gt;
+&lt; outputpath="WorkOrderId" inputpath="Id" /&gt;
+&lt;map outputpath="" inputpath="WorkOrderData">
+&lt;exec-function name="voltmx.logical:equal" outputpath="CustomerCondition" output="$vars"&gt;
+&lt;set-arg name="Type" inputpath="Type" /&gt;
+&lt;set-arg name="Customer" input="Customer" /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="AddressCondition" output="$vars"&gt;
+&lt;set-arg name="Type" inputpath="Type" /&gt;
+&lt;set-arg name="Address" input="Address" /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="ContactCondition" output="$vars"&gt;
+&lt;set-arg name="Type" inputpath="Type" /&gt;
+&lt;set-arg name="Contact" input="Contact" /&gt;
+&lt;/exec-function&gt;
+&lt;choose&gt;
+&lt;when test="$vars/CustomerCondition">
+&lt; outputpath="CustomerId" inputpath="Id" /&gt;
+&lt;/when&gt;
+&lt;when test="$vars/AddressCondition">
+&lt; outputpath="AddressId" inputpath="Id" /&gt;
+&lt;/when&gt;
+&lt;when test="$vars/ContactCondition">
+&lt;map outputpath="Contacts" inputpath=""&gt;
+&lt; outputpath="ContactId" inputpath="Id" /&gt;
+&lt;set-param outputpath="Name" inputpath="Name" /&gt;
+&lt;/map&gt;
+&lt;/when&gt;
+&lt;/choose&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
 <h3 id="Static_Lookup">Static Lookup</h3>
 
 This is an example of static lookup mapping.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -3861,7 +3429,7 @@ Input
 
 }</code></pre>
 
-Output
+<b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -3887,35 +3455,25 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="WorkOrder" inputpath="WorkOrder">
-
-<variables>
-
-<variable name="statusmap" evalType="map" value="{&quot;Completed&quot;:&quot;DONE&quot;, &quot;InProgress&quot;:&quot;INCOMPLETE&quot;}" />
-
-</variables>
-
-<set-param outputpath="Id" inputpath="WorkOrder/Id" />
-
-<set-param outputpath="Status"
-
-inputpath="$vars.statusmap.get($content.get('WorkOrder').getValue('Status').getValue())" />
-
-</map>
-
-</mapper></code></pre>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="WorkOrder" inputpath="WorkOrder"&gt;
+&lt;variables&gt;
+&lt;variable name="statusmap" evalType="map" value="{&quot;Completed&quot;:&quot;DONE&quot;, &quot;InProgress&quot;:&quot;INCOMPLETE&quot;}" /&gt;
+&lt;/variables&gt;
+&lt; outputpath="Id" inputpath="WorkOrder/Id" /&gt;
+&lt; outputpath="Status"
+inputpath="$vars.statusmap.get($content.get('WorkOrder').getValue('Status').getValue())" /&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
 <h3 id="Two_Childs_To_Same_Entity">Two Childs To Same Entity</h3>
 
 This is an example of mapping two child objects to the same entity.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -4097,7 +3655,7 @@ Input
 
 }</code></pre>
 
-Output
+<b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -4155,63 +3713,39 @@ Output
 
 }</code></pre>
 
-Mapping
+<b>Mapping</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="Task" inputpath="EAM\_WO\_OPERATION">
-
-<set-param outputpath="Location\_id" inputpath="LOCATION" />
-
-<set-param outputpath="Type\_id" inputpath="CONTROL\_KEY" />
-
-<set-param outputpath="Plant\_id" inputpath="PLANT" />
-
-<set-param outputpath="Code" inputpath="INTERNAL\_NUMBER" />
-
-<map outputpath="WorkOrderMaterial" inputpath="EAM\_WO\_MAT">
-
-<set-param outputpath="type" input="M" />
-
-<set-param outputpath="Material" inputpath="MATERIAL\_NUM" />
-
-<set-param outputpath="Order" inputpath="ORDER\_NUM" />
-
-<set-param outputpath="Description" inputpath="SHORT\_TXT\_TASK" />
-
-<set-param outputpath="ItemNumber" inputpath="COMP\_ITEM\_NUM" />
-
-<set-param outputpath="Item" inputpath="ITEM\_CATEGORY" />
-
-</map>
-
-<map outputpath="WorkOrderMaterial" inputpath="EAM\_WO\_PRT">
-
-<set-param outputpath="type" input="P" />
-
-<set-param outputpath="Material" inputpath="MATERIAL\_NUM" />
-
-<set-param outputpath="Order" inputpath="ORDER\_NUM" />
-
-<set-param outputpath="Description" inputpath="SHORT\_TXT\_TASK" />
-
-<set-param outputpath="ItemNumber" inputpath="COMP\_ITEM\_NUM" />
-
-<set-param outputpath="Item" inputpath="PRT\_CATEGORY" />
-
-</map>
-
-</map>
-
-</mapper></code></pre>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="Task" inputpath="EAM_WO_OPERATION">
+&lt; outputpath="Location_id" inputpath="LOCATION" />
+&lt; outputpath="Type_id" inputpath="CONTROL_KEY" />
+&lt; outputpath="Plant_id" inputpath="PLANT" />
+&lt; outputpath="Code" inputpath="INTERNAL_NUMBER" />
+&lt;map outputpath="WorkOrderMaterial" inputpath="EAM_WO_MAT">
+&lt; outputpath="type" input="M" />
+&lt; outputpath="Material" inputpath="MATERIAL_NUM" />
+&lt; outputpath="Order" inputpath="ORDER_NUM" />
+&lt; outputpath="Description" inputpath="SHORT_TXT_TASK" />
+&lt; outputpath="ItemNumber" inputpath="COMP_ITEM_NUM" />
+&lt; outputpath="Item" inputpath="ITEM_CATEGORY" />
+&lt;/map&gt;
+&lt;map outputpath="WorkOrderMaterial" inputpath="EAM_WO_PRT">
+&lt; outputpath="type" input="P" />
+&lt; outputpath="Material" inputpath="MATERIAL_NUM" />
+&lt; outputpath="Order" inputpath="ORDER_NUM" />
+&lt; outputpath="Description" inputpath="SHORT_TXT_TASK" />
+&lt; outputpath="ItemNumber" inputpath="COMP_ITEM_NUM" />
+&lt; outputpath="Item" inputpath="PRT_CATEGORY" />
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
 <h3 id="EAM_Notification_Mapping">EAM Notification Mapping</h3>
 
 This is an example of enterprise asset management (EAM) notification mapping.
 
-Input
+<b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -5353,7 +4887,7 @@ Input
 
 },</code></pre>
 
-Output
+<b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
@@ -6339,1241 +5873,1111 @@ Output
 
 }</code></pre>
 
-Mapping
-
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<mapper xmlns="http://www.voltmx.com/ns/mapper">
-
-<map outputpath="Notification" inputpath="EAM\_NOTIF">
-
-<set-param outputpath="NOTIF\_NUM" inputpath="NOTIF\_NUM" />
-
-<set-param outputpath="Type\_id" inputpath="NOTIF\_TYPE" />
-
-<set-param outputpath="Description" inputpath="SHORT\_TEXT" />
-
-<set-param outputpath="NOTIF\_DATE" inputpath="NOTIF\_DATE" />
-
-<set-param outputpath="NOTIF\_TIME" inputpath="NOTIF\_TIME" />
-
-<set-param outputpath="FUNC\_LOCATION" inputpath="FUNC\_LOCATION" />
-
-<set-param outputpath="FLOCN\_DESC" inputpath="FLOCN\_DESC" />
-
-<set-param outputpath="EQUIP\_NUM" inputpath="EQUIP\_NUM" />
-
-<set-param outputpath="TECH\_OBJ\_DESC" inputpath="TECH\_OBJ\_DESC" />
-
-<set-param outputpath="CATALOG\_PROFILE" inputpath="CATALOG\_PROFILE" />
-
-<set-param outputpath="PRIORITY" inputpath="PRIORITY" />
-
-<set-param outputpath="INTERNAL\_NUMBER" inputpath="INTERNAL\_NUMBER" />
-
-<set-param outputpath="WRRNTY\_START\_DT" inputpath="WRRNTY\_START\_DT" />
-
-<set-param outputpath="WRRNTY\_END\_DT" inputpath="WRRNTY\_END\_DT" />
-
-<set-param outputpath="WORK\_CENTER" inputpath="WORK\_CENTER" />
-
-<set-param outputpath="WC\_SHORT\_DESC" inputpath="WC\_SHORT\_DESC" />
-
-<set-param outputpath="SYS\_STATUS" inputpath="SYS\_STATUS" />
-
-<set-param outputpath="TIME\_ZONE" inputpath="TIME\_ZONE" />
-
-<set-param outputpath="PLANPLANT" inputpath="PLANPLANT" />
-
-<set-param outputpath="LOC\_ACC" inputpath="LOC\_ACC" />
-
-<set-param outputpath="STRMLFNDATE" inputpath="STRMLFNDATE" />
-
-<set-param outputpath="ENDMLFNDATE" inputpath="ENDMLFNDATE" />
-
-<set-param outputpath="STRMLFNTIME" inputpath="STRMLFNTIME" />
-
-<set-param outputpath="ENDMLFNTIME" inputpath="ENDMLFNTIME" />
-
-<set-param outputpath="DOWNTIME" inputpath="DOWNTIME" />
-
-<set-param outputpath="UNIT" inputpath="UNIT" />
-
-<set-param outputpath="PLANGROUP" inputpath="PLANGROUP" />
-
-<set-param outputpath="CREATED\_BY" inputpath="CREATED\_BY" />
-
-<set-param outputpath="CREATED\_ON" inputpath="CREATED\_ON" />
-
-<set-param outputpath="CHANGED\_ON" inputpath="CHANGED\_ON" />
-
-<set-param outputpath="DESSTDATE" inputpath="DESSTDATE" />
-
-<set-param outputpath="DESSTTIME" inputpath="DESSTTIME" />
-
-<set-param outputpath="DESENDDATE" inputpath="DESENDDATE" />
-
-<set-param outputpath="DESENDTM" inputpath="DESENDTM" />
-
-<set-param outputpath="CUST\_NO" inputpath="CUST\_NO" />
-
-<set-param outputpath="PRILANG" inputpath="PRILANG" />
-
-<set-param outputpath="REFDATE" inputpath="REFDATE" />
-
-<set-param outputpath="REFTIME" inputpath="REFTIME" />
-
-<set-param outputpath="PURCH\_DATE" inputpath="PURCH\_DATE" />
-
-<set-param outputpath="DIVISION" inputpath="DIVISION" />
-
-<set-param outputpath="SALES\_ORG" inputpath="SALES\_ORG" />
-
-<set-param outputpath="DISTR\_CHAN" inputpath="DISTR\_CHAN" />
-
-<set-param outputpath="CHANGED\_AT" inputpath="CHANGED\_AT" />
-
-<set-param outputpath="CREATED\_AT" inputpath="CREATED\_AT" />
-
-<set-param outputpath="NOTIFTMEZ" inputpath="NOTIFTMEZ" />
-
-<set-param outputpath="MAINTPLANT" inputpath="MAINTPLANT" />
-
-<set-param outputpath="BUS\_AREA" inputpath="BUS\_AREA" />
-
-<set-param outputpath="CO\_AREA" inputpath="CO\_AREA" />
-
-<set-param outputpath="TIMESTAMP" inputpath="TIMESTAMP" />
-
-<set-param outputpath="ADDR\_NO\_LOC" inputpath="ADDR\_NO\_LOC" />
-
-<map outputpath="" inputpath="EAM\_NOTIFICATION\_ADDRESS">
-
-<map outputpath="Address" inputpath="">
-
-<set-param outputpath="id" inputpath="EAM\_ADDRESS/ADDRNO" />
-
-<set-param outputpath="city" inputpath="EAM\_ADDRESS/CITY" />
-
-<set-param outputpath="NAME1" inputpath="EAM\_ADDRESS/NAME1" />
-
-<set-param outputpath="STREET" inputpath="EAM\_ADDRESS/STREET" />
-
-<set-param outputpath="POST\_CODE" inputpath="EAM\_ADDRESS/POST\_CODE" />
-
-<set-param outputpath="COUNTRY" inputpath="EAM\_ADDRESS/COUNTRY" />
-
-<set-param outputpath="PHONE1" inputpath="EAM\_ADDRESS/PHONE1" />
-
-<set-param outputpath="TIMESTAMP" inputpath="EAM\_ADDRESS/TIMESTAMP" />
-
-</map>
-
-<map outputpath="Contacts" inputpath="">
-
-<set-param outputpath="NotificationId" inputpath="DOC\_NUM" />
-
-<set-param outputpath="ContactId" inputpath="ADDR\_TYPE\_ID" />
-
-<set-param outputpath="Partner" inputpath="PARTNER\_TYPE" />
-
-<set-param outputpath="ADDRESS\_ID" inputpath="ADDRESS\_ID" />
-
-<set-param outputpath="TIMESTAMP" inputpath="TIMESTAMP" />
-
-</map>
-
-</map>
-
-</map>
-
-</mapper></code></pre>
+<b>Mapping</b>
+
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="Notification" inputpath="EAM_NOTIF">
+&lt; outputpath="NOTIF_NUM" inputpath="NOTIF_NUM" />
+&lt; outputpath="Type_id" inputpath="NOTIF_TYPE" />
+&lt; outputpath="Description" inputpath="SHORT_TEXT" />
+&lt; outputpath="NOTIF_DATE" inputpath="NOTIF_DATE" />
+&lt; outputpath="NOTIF_TIME" inputpath="NOTIF_TIME" />
+&lt; outputpath="FUNC_LOCATION" inputpath="FUNC_LOCATION" />
+&lt; outputpath="FLOCN_DESC" inputpath="FLOCN_DESC" />
+&lt; outputpath="EQUIP_NUM" inputpath="EQUIP_NUM" />
+&lt; outputpath="TECH_OBJ_DESC" inputpath="TECH_OBJ_DESC" />
+&lt; outputpath="CATALOG_PROFILE" inputpath="CATALOG_PROFILE" />
+&lt; outputpath="PRIORITY" inputpath="PRIORITY" />
+&lt; outputpath="INTERNAL_NUMBER" inputpath="INTERNAL_NUMBER" />
+&lt; outputpath="WRRNTY_START_DT" inputpath="WRRNTY_START_DT" />
+&lt; outputpath="WRRNTY_END_DT" inputpath="WRRNTY_END_DT" />
+&lt; outputpath="WORK_CENTER" inputpath="WORK_CENTER" />
+&lt; outputpath="WC_SHORT_DESC" inputpath="WC_SHORT_DESC" />
+&lt; outputpath="SYS_STATUS" inputpath="SYS_STATUS" />
+&lt; outputpath="TIME_ZONE" inputpath="TIME_ZONE" />
+&lt; outputpath="PLANPLANT" inputpath="PLANPLANT" />
+&lt; outputpath="LOC_ACC" inputpath="LOC_ACC" />
+&lt; outputpath="STRMLFNDATE" inputpath="STRMLFNDATE" />
+&lt; outputpath="ENDMLFNDATE" inputpath="ENDMLFNDATE" />
+&lt; outputpath="STRMLFNTIME" inputpath="STRMLFNTIME" />
+&lt; outputpath="ENDMLFNTIME" inputpath="ENDMLFNTIME" />
+&lt; outputpath="DOWNTIME" inputpath="DOWNTIME" />
+&lt; outputpath="UNIT" inputpath="UNIT" />
+&lt; outputpath="PLANGROUP" inputpath="PLANGROUP" />
+&lt; outputpath="CREATED_BY" inputpath="CREATED_BY" />
+&lt; outputpath="CREATED_ON" inputpath="CREATED_ON" />
+&lt; outputpath="CHANGED_ON" inputpath="CHANGED_ON" />
+&lt; outputpath="DESSTDATE" inputpath="DESSTDATE" />
+&lt; outputpath="DESSTTIME" inputpath="DESSTTIME" />
+&lt; outputpath="DESENDDATE" inputpath="DESENDDATE" />
+&lt; outputpath="DESENDTM" inputpath="DESENDTM" />
+&lt; outputpath="CUST_NO" inputpath="CUST_NO" />
+&lt; outputpath="PRILANG" inputpath="PRILANG" />
+&lt; outputpath="REFDATE" inputpath="REFDATE" />
+&lt; outputpath="REFTIME" inputpath="REFTIME" />
+&lt; outputpath="PURCH_DATE" inputpath="PURCH_DATE" />
+&lt; outputpath="DIVISION" inputpath="DIVISION" />
+&lt; outputpath="SALES_ORG" inputpath="SALES_ORG" />
+&lt; outputpath="DISTR_CHAN" inputpath="DISTR_CHAN" />
+&lt; outputpath="CHANGED_AT" inputpath="CHANGED_AT" />
+&lt; outputpath="CREATED_AT" inputpath="CREATED_AT" />
+&lt; outputpath="NOTIFTMEZ" inputpath="NOTIFTMEZ" />
+&lt; outputpath="MAINTPLANT" inputpath="MAINTPLANT" />
+&lt; outputpath="BUS_AREA" inputpath="BUS_AREA" />
+&lt; outputpath="CO_AREA" inputpath="CO_AREA" />
+&lt; outputpath="TIMESTAMP" inputpath="TIMESTAMP" />
+&lt; outputpath="ADDR_NO_LOC" inputpath="ADDR_NO_LOC" />
+&lt;map outputpath="" inputpath="EAM_NOTIFICATION_ADDRESS">
+&lt;map outputpath="Address" inputpath=""&gt;
+&lt; outputpath="id" inputpath="EAM_ADDRESS/ADDRNO" />
+&lt; outputpath="city" inputpath="EAM_ADDRESS/CITY" />
+&lt; outputpath="NAME1" inputpath="EAM_ADDRESS/NAME1" />
+&lt; outputpath="STREET" inputpath="EAM_ADDRESS/STREET" />
+&lt; outputpath="POST_CODE" inputpath="EAM_ADDRESS/POST_CODE" />
+&lt; outputpath="COUNTRY" inputpath="EAM_ADDRESS/COUNTRY" />
+&lt; outputpath="PHONE1" inputpath="EAM_ADDRESS/PHONE1" />
+&lt; outputpath="TIMESTAMP" inputpath="EAM_ADDRESS/TIMESTAMP" />
+&lt;/map&gt;
+&lt;map outputpath="Contacts" inputpath=""&gt;
+&lt; outputpath="NotificationId" inputpath="DOC_NUM" />
+&lt; outputpath="ContactId" inputpath="ADDR_TYPE_ID" />
+&lt; outputpath="Partner" inputpath="PARTNER_TYPE" />
+&lt; outputpath="ADDRESS_ID" inputpath="ADDRESS_ID" />
+&lt; outputpath="TIMESTAMP" inputpath="TIMESTAMP" />
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
 
 <h3 id="Aggregation_Support_in_Mapper">Aggregation Support in Mapper</h3>
 
 Aggregation support in Mapper allows you to iterate through a collection of objects and aggregate them based on a specific key.
 
-**Use case:**
+<b>Use case:</b>
 
 A user has multiple objects tracking daily employee hours and would like to combine them into a weekly summary of hours.
 
-**Input object**
+<b>Input object</b>
 
 Time_Entry - Project_Task_id, Timesheet_Id, End_Time, Start_Time, Time_Type_Id, Activity_Description, Employee_Id, StatusId, Actual_Hours, Id, Project_Task_Type, Date
 
-**Output object**
+<b>Output object</b>
 
 Timesheet - Employee_Id, Id, Start_Date, End_Date, Total_Hours
 
-**Example for Aggregation Support in Mapper**
+<p><b><u>Example for Aggregation Support in Mapper</u></b></p>
+<ul>
+  <li><b>AggregationToFindMinMaxAndSum</b></li>
+</ul>
+<table>
+  <tr>
+    <td><b>Input</b></td>    
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+  "Time_Entry": [
+	{
+	"Project_Task_id" : "0000001202",
+	"Timesheet_Id" : "MYTIME_V1_20161009",
+	"End_Time" : "080000",
+	"Start_Time" : "070000",
+	"Time_Type_Id" : "0800",
+	"Activity_Description" : "",
+	"Employee_Id" : "1000001",
+	"StatusId" : "2",
+	"Actual_Hours" : "8.000",
+	"Id" : "MYTIME_V1_1209_1",
+	"Project_Task_Type" : "CC",
+	"Date" : "20161012"
+	}, 
+	{
+	"Project_Task_id" : "0000001202",
+	"Timesheet_Id" : "MYTIME_V1_20161009",
+	"End_Time" : "080000",
+	"Start_Time" : "070000",
+	"Time_Type_Id" : "0800",
+	"Activity_Description" : "",
+	"Employee_Id" : "1000001",
+	"StatusId" : "2",
+	"Actual_Hours" : "8Ti.000",
+	"Id" : "MYTIME_V1_1209_1",
+	"Project_Task_Type" : "CC",
+	"Date" : "20161013"
+	},
+	{
+        "Project_Task_id": "0000001202",
+        "Timesheet_Id": "MYTIME_V1_20161009",
+        "End_Time": "080000",
+        "Start_Time": "070000",
+        "Time_Type_Id": "0800",
+        "Activity_Description": "",
+        "Employee_Id": "1000001",
+        "StatusId": "2",
+        "Actual_Hours": "8.000",
+        "Id": "MYTIME_V1_1209_1",
+        "Project_Task_Type": "CC",
+        "Date": "20161014"
+        },
+	{
+        "Project_Task_id": "0000001202",
+        "Timesheet_Id": "MYTIME_V1_20161009",
+        "End_Time": "080000",
+        "Start_Time": "070000",
+        "Time_Type_Id": "0800",
+        "Activity_Description": "",
+        "Employee_Id": "1000001",
+        "StatusId": "2",
+        "Actual_Hours": "8.000",
+        "Id": "MYTIME_V1_1209_1",
+        "Project_Task_Type": "CC",
+        "Date": "20161015"
+	},
+	{
+        "Project_Task_id": "0000001202",
+        "Timesheet_Id": "MYTIME_V1_20161016",
+        "End_Time": "080000",
+        "Start_Time": "070000",
+        "Time_Type_Id": "0800",
+        "Activity_Description": "",
+        "Employee_Id": "1000001",
+        "StatusId": "2",
+        "Actual_Hours": "8.000",
+        "Id": "MYTIME_V1_1209_1",
+        "Project_Task_Type": "CC",
+        "Date": "20161016"
+	},
+	{
+        "Project_Task_id": "0000001202",
+        "Timesheet_Id": "MYTIME_V1_20161016",
+        "End_Time": "080000",
+        "Start_Time": "070000",
+        "Time_Type_Id": "0800",
+        "Activity_Description": "",
+        "Employee_Id": "1000001",
+        "StatusId": "2",
+        "Actual_Hours": "8.000",
+        "Id": "MYTIME_V1_1209_1",
+        "Project_Task_Type": "CC",
+        "Date": "20161017"
+	},
+	{
+        "Project_Task_id": "0000001202",
+        "Timesheet_Id": "MYTIME_V1_20161016",
+        "End_Time": "080000",
+        "Start_Time": "070000",
+        "Time_Type_Id": "0800",
+        "Activity_Description": "",
+        "Employee_Id": "1000001",
+        "StatusId": "2",
+        "Actual_Hours": "8.000",
+        "Id": "MYTIME_V1_1209_1",
+        "Project_Task_Type": "CC",
+        "Date": "20161018"
+	},
+]
+}</code></pre>
+  </td>
+  </tr>
+  <tr>      
+    <td><b>Output</b></td>  
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{"Timesheet" : [
+	 {
+		"Employee_Id": "1000001",
+		"Id": " MYTIME_V1_1209_1",
+		"Start_Date": "20161012",
+		"End_Date": "20161015",
+		"Total_Hours": "32.000"
+	},
+	{
+		"Employee_Id": "1000001",
+		"Id": " MYTIME_V1_1209_1",
+		"Start_Date": "20161016",
+		"End_Date": "20161018",
+		"Total_Hours": "24.000"
+	}
+]}</code></pre>
+  </td>
+</tr>    
+<tr>      
+   <td><b>Mapping</b></td>  
+   <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+	&lt;create-group inputpath="Time_Entry" output="$vars" outputpath="TimeEntryGroup"&gt;                            
+		&lt;group-key inputpath="Timesheet_Id"/&gt;                    
+	&lt;/create-group&gt;
+	&lt;map outputpath="Timesheets" input="$vars" inputpath="TimeEntryGroup"&gt;
+		&lt;set-param outputpath="Timesheet_Id" inputpath="Timesheet_Id"/&gt;
+		&lt;set-param outputpath="Start_Date" input="99999999"/&gt;
+		&lt;set-param outputpath="End_Date" input="-1"/&gt;
+    	&lt;map outputpath="" inputpath="rows"&gt;
+    		&lt;set-param outputpath="Employee_Id" inputpath="Employee_Id"/&gt;
+    		&lt;set-param outputpath="Id" inputpath="Id" /&gt;
+    		&lt;exec-function name="voltmx.logical:min" outputpath="Start_Date"&gt;
+    			&lt;set-arg name="arg1" inputpath="Date" /&gt;
+    			&lt;set-arg name="arg2" inputpath="Start_Date" input="$current-output"/&gt;
+    		&lt;/exec-function&gt;
+    		&lt;exec-function name="voltmx.logical:max" outputpath="End_Date"&gt;
+    			&lt;set-arg name="arg1" inputpath="Date" /&gt;
+    			&lt;set-arg name="arg2" inputpath="End_Date" input="$current-output"/&gt;
+    		&lt;/exec-function&gt;
+    		&lt;exec-function name="voltmx.logical:sum" outputpath="Total_Hours"&gt;
+    			&lt;set-arg name="arg1" inputpath="Actual_Hours" /&gt;
+    			&lt;set-arg name="arg2" inputpath="Total_Hours" input="$current-output"/&gt;
+    		&lt;/exec-function&gt;
+    	&lt;/map&gt;
+    &lt;/map&gt;
 
-- **AggregationToFindMinMaxAndSum**
-- **Input**
+&lt;/mapper&gt;</code></pre>
 
-  {
-  "Time_Entry": \[
-  {
-  "Project_Task_id" : "0000001202",
-  "Timesheet_Id" : "MYTIME_V1_20161009",
-  "End_Time" : "080000",
-  "Start_Time" : "070000",
-  "Time_Type_Id" : "0800",
-  "Activity_Description" : "",
-  "Employee_Id" : "1000001",
-  "StatusId" : "2",
-  "Actual_Hours" : "8.000",
-  "Id" : "MYTIME_V1_1209_1",
-  "Project_Task_Type" : "CC",
-  "Date" : "20161012"
-  },
-  {
-  "Project_Task_id" : "0000001202",
-  "Timesheet_Id" : "MYTIME_V1_20161009",
-  "End_Time" : "080000",
-  "Start_Time" : "070000",
-  "Time_Type_Id" : "0800",
-  "Activity_Description" : "",
-  "Employee_Id" : "1000001",
-  "StatusId" : "2",
-  "Actual_Hours" : "8Ti.000",
-  "Id" : "MYTIME_V1_1209_1",
-  "Project_Task_Type" : "CC",
-  "Date" : "20161013"
-  },
-  {
-  "Project_Task_id": "0000001202",
-  "Timesheet_Id": "MYTIME_V1_20161009",
-  "End_Time": "080000",
-  "Start_Time": "070000",
-  "Time_Type_Id": "0800",
-  "Activity_Description": "",
-  "Employee_Id": "1000001",
-  "StatusId": "2",
-  "Actual_Hours": "8.000",
-  "Id": "MYTIME_V1_1209_1",
-  "Project_Task_Type": "CC",
-  "Date": "20161014"
-  },
-  {
-  "Project_Task_id": "0000001202",
-  "Timesheet_Id": "MYTIME_V1_20161009",
-  "End_Time": "080000",
-  "Start_Time": "070000",
-  "Time_Type_Id": "0800",
-  "Activity_Description": "",
-  "Employee_Id": "1000001",
-  "StatusId": "2",
-  "Actual_Hours": "8.000",
-  "Id": "MYTIME_V1_1209_1",
-  "Project_Task_Type": "CC",
-  "Date": "20161015"
-  },
-  {
-  "Project_Task_id": "0000001202",
-  "Timesheet_Id": "MYTIME_V1_20161016",
-  "End_Time": "080000",
-  "Start_Time": "070000",
-  "Time_Type_Id": "0800",
-  "Activity_Description": "",
-  "Employee_Id": "1000001",
-  "StatusId": "2",
-  "Actual_Hours": "8.000",
-  "Id": "MYTIME_V1_1209_1",
-  "Project_Task_Type": "CC",
-  "Date": "20161016"
-  },
-  {
-  "Project_Task_id": "0000001202",
-  "Timesheet_Id": "MYTIME_V1_20161016",
-  "End_Time": "080000",
-  "Start_Time": "070000",
-  "Time_Type_Id": "0800",
-  "Activity_Description": "",
-  "Employee_Id": "1000001",
-  "StatusId": "2",
-  "Actual_Hours": "8.000",
-  "Id": "MYTIME_V1_1209_1",
-  "Project_Task_Type": "CC",
-  "Date": "20161017"
-  },
-  {
-  "Project_Task_id": "0000001202",
-  "Timesheet_Id": "MYTIME_V1_20161016",
-  "End_Time": "080000",
-  "Start_Time": "070000",
-  "Time_Type_Id": "0800",
-  "Activity_Description": "",
-  "Employee_Id": "1000001",
-  "StatusId": "2",
-  "Actual_Hours": "8.000",
-  "Id": "MYTIME_V1_1209_1",
-  "Project_Task_Type": "CC",
-  "Date": "20161018"
-  },
-  \]
-  }
-
-  **Output**
-
-  {"Timesheet" : \[
-  {
-  "Employee_Id": "1000001",
-  "Id": " MYTIME_V1_1209_1",
-  "Start_Date": "20161012",
-  "End_Date": "20161015",
-  "Total_Hours": "32.000"
-  },
-  {
-  "Employee_Id": "1000001",
-  "Id": " MYTIME_V1_1209_1",
-  "Start_Date": "20161016",
-  "End_Date": "20161018",
-  "Total_Hours": "24.000"
-  }
-  \]}
-
-  **Mapping**
-
-   <?xml version\="1.0" encoding\="UTF-8" standalone\="yes"?>
-
-  <mapper xmlns\="http://www.voltmx.com/ns/mapper"\>
-  <create-group inputpath\="Time_Entry" output\="$vars" outputpath\="TimeEntryGroup"\>                            
-    		<group-key inputpath\="Timesheet\_Id"/>                    
-    	</create-group>	
-    	<map outputpath\="Timesheets" input\="$vars" inputpath\="TimeEntryGroup"\>
-  <set-param outputpath\="Timesheet_Id" inputpath\="Timesheet_Id"/>
-  <set-param outputpath\="Start_Date" input\="99999999"/>
-  <set-param outputpath\="End_Date" input\="-1"/>
-
-      	<map outputpath\="" inputpath\="rows"\>
-      		<set-param outputpath\="Employee\_Id" inputpath\="Employee\_Id"/>
-      		<set-param outputpath\="Id" inputpath\="Id" />
-      		<exec-function name\="voltmx.logical:min" outputpath\="Start\_Date"\>
-      			<set-arg name\="arg1" inputpath\="Date" />
-      			<set-arg name\="arg2" inputpath\="Start\_Date" input\="$current-output"/>
-      		</exec-function>
-      		<exec-function name\="voltmx.logical:max" outputpath\="End\_Date"\>
-      			<set-arg name\="arg1" inputpath\="Date" />
-      			<set-arg name\="arg2" inputpath\="End\_Date" input\="$current-output"/>
-      		</exec-function>
-      		<exec-function name\="voltmx.logical:sum" outputpath\="Total\_Hours"\>
-      			<set-arg name\="arg1" inputpath\="Actual\_Hours" />
-      			<set-arg name\="arg2" inputpath\="Total\_Hours" input\="$current-output"/>
-      		</exec-function>
-      	</map>
-      </map>
-
-  </mapper>
+  </td>
+</tr> 
+</table>
 
 <h3 id="Look-up_Support_in_Mapper">Look-up Support in Mapper</h3>
 
-Look-up support in mapper helps you combine two parallel objects and generate a common object depending upon the key. For example, the user wants to combine two parallel objects `Customers` and `Orders` with one or more fields in common and to generate a common object depending upon the key.
+Look-up support in mapper helps you combine two parallel objects and generate a common object depending upon the key. For example, the user wants to combine two parallel objects Customers and Orders with one or more fields in common and to generate a common object depending upon the key.
 
-- **Input** **object**:
+<ul>
+  <li>
+    <b>Input object:</b>
+    <ul>
+      <li>Customers – Id, Name, Phone</li>      
+      <li>
+        Orders – OrderId, CustomerId, ProductId, Quantity <br/>
+        In above objects, the  Id of Customers and the  CustomerId of Orders are same.
+      </li>
+    </ul>    
+  </li>
+</ul>
+<ul>
+  <li>
+    <b>Output object:</b>
+    <ul>
+      <li>CustomerOrders – OrderId, CustomerName, Phone, ProductId, Quantity</li>      
+    </ul>    
+  </li>
+</ul>
+<p><b><u><u>Examples for Look-up Support in Mapper</u></u></b></p>
+<ul>
+  <li><b>LookupMappingWithMultiplePrimaryKey</b></li>
+</ul>
+<table>
+  <tr>
+    <td><b>Input</b></td>    
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "Customers": [
+        {
+            "Id": "101",
+            "Domain": "Finance",
+            "Name": "Customer1",
+            "Phone": "12345"
+        },
+        {
+            "Id": "102",
+            "Domain": "Healthcare",
+            "Name": "Customer2",
+            "Phone": "12346"
+        }
+    ],
+    "Orders": [
+        {
+            "CustomerId": "101",
+            "OrderDomain": "Finance",
+            "OrderId": "111",
+            "ProductId": "Product1",
+            "Quantity": "5"
+        },
+        {
+            "CustomerId": "102",
+            "OrderDomain": "Healthcare",
+            "OrderId": "222",
+            "ProductId": "Product2",
+            "Quantity": "6"
+        }
+    ]
+}</code></pre>
+  </td>
+  </tr>
+  <tr>      
+    <td><b>Output</b></td>  
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "CustomerOrders": [
+        {
+            "OrderId": "111",
+            "CustomerName": "Customer1",
+            "Phone": "12345",
+            "ProductId": "Product1",
+            "Quantity": "5"
+        },
+        {
+            "OrderId": "222",
+            "CustomerName": "Customer2",
+            "Phone": "12346",
+            "ProductId": "Product2",
+            "Quantity": "6"
+        }
+    ]
+}</code></pre>
+  </td>
+</tr>    
+<tr>      
+   <td><b>Mapping</b></td>  
+   <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> 
+&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;create-lookup&gt;
+&lt;lookup-key inputpath="Id"/&gt;
+&lt;lookup-key inputpath="Domain"/&gt;
+	&lt;/create-lookup&gt;
+	&lt;map inputpath="response_in" outputpath="response_out"&gt;
+	&lt;map outputpath="CustomerOrders" inputpath="Orders"&gt;
+		&lt;set-param outputpath="OrderId" inputpath="OrderId" /&gt;
+		&lt;lookup input="$vars" inputpath="customerMap" outputpath="customerRef" output="$vars"&gt;
+			&lt;lookup-key inputpath="CustomerId" /&gt;
+			&lt;lookup-key inputpath="OrderDomain" /&gt;
+		&lt;/lookup&gt;
+		&lt;set-param outputpath="CustomerName" inputpath="$vars/customerRef/Name" /&gt;
+		&lt;set-param outputpath="Phone" inputpath="$vars/customerRef/Phone" /&gt;
+		&lt;set-param outputpath="ProductId" inputpath="ProductId" /&gt;
+		&lt;set-param outputpath="Quantity" inputpath="Quantity" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+  </td>
+</tr> 
+</table>
 
-  - Customers – Id, Name, Phone
-  - Orders – OrderId, CustomerId, ProductId, Quantity
+<ul>
+  <li><b>LookupMappingWithOnePrimaryKey</b></li>
+</ul>
+<table>
+  <tr>
+    <td><b>Input</b></td>    
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "Customers": [
+        {
+            "Id": "101",
+            "Name": "Customer1",
+            "Phone": "12345"
+        },
+        {
+            "Id": "102",
+            "Name": "Customer2",
+            "Phone": "12346"
+        }
+    ],
+    "Orders": [
+        {
+            "CustomerId": "101",
+            "OrderId": "111",
+            "ProductId": "Product1",
+            "Quantity": "5"
+        },
+        {
+            "CustomerId": "102",
+            "OrderId": "222",
+            "ProductId": "Product2",
+            "Quantity": "6"
+        }
+    ]
+}</code></pre>
+  </td>
+  </tr>
+  <tr>      
+    <td><b>Output</b></td>  
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "CustomerOrders": [
+        {
+            "OrderId": "111",
+            "CustomerName": "Customer1",
+            "Phone": "12345",
+            "ProductId": "Product1",
+            "Quantity": "5"
+        },
+        {
+            "OrderId": "222",
+            "CustomerName": "Customer2",
+            "Phone": "12346",
+            "ProductId": "Product2",
+            "Quantity": "6"
+        }
+    ]
+}</code></pre>
+  </td>
+</tr>    
+<tr>      
+   <td><b>Mapping</b></td>  
+   <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;create-lookup&gt;
+&lt;lookup-key inputpath="Id"/&gt;
+&lt;lookup-key inputpath="Domain"/&gt;
+	&lt;/create-lookup&gt;
+	&lt;map inputpath="response_in" outputpath="response_out"&gt;
+	&lt;map outputpath="CustomerOrders" inputpath="Orders"&gt;
+		&lt;set-param outputpath="OrderId" inputpath="OrderId" /&gt;
+		&lt;lookup input="$vars" inputpath="customerMap" outputpath="customerRef" output="$vars"&gt;
+			&lt;lookup-key inputpath="CustomerId" /&gt;
+			&lt;lookup-key inputpath="OrderDomain" /&gt;
+		&lt;/lookup&gt;
+		&lt;set-param outputpath="CustomerName" inputpath="$vars/customerRef/Name" /&gt;
+		&lt;set-param outputpath="Phone" inputpath="$vars/customerRef/Phone" /&gt;
+		&lt;set-param outputpath="ProductId" inputpath="ProductId" /&gt;
+		&lt;set-param outputpath="Quantity" inputpath="Quantity" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+  </td>
+</tr> 
+</table>
 
-    In above objects, the  `Id` of Customers and the  `CustomerId` of Orders are same.
+<ul>
+  <li><b>LookupMappingWhenPrimaryKeyNotFoundInChild</b></li>
+</ul>
+<table>
+  <tr>
+    <td><b>Input</b></td>    
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "Customers": [
+        {
+            "Id": "101",
+            "Name": "Customer1",
+            "Phone": "12345"
+        },
+        {
+            "Id": "102",
+            "Name": "Customer2",
+            "Phone": "12346"
+        },
+        {
+            "Id": "103",
+            "Name": "Customer3",
+            "Phone": "12347"
+        }
+    ],
+    "Orders": [
+        {
+            "CustomerId": "101",
+            "OrderId": "111",
+            "ProductId": "Product1",
+            "Quantity": "5"
+        },
+        {
+            "CustomerId": "102",
+            "OrderId": "222",
+            "ProductId": "Product2",
+            "Quantity": "6"
+        }
+    ]
+}</code></pre>
+  </td>
+  </tr>
+  <tr>      
+    <td><b>Output</b></td>  
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "CustomerOrders": [
+        {
+            "OrderId": "111",
+            "CustomerName": "Customer1",
+            "Phone": "12345",
+            "ProductId": "Product1",
+            "Quantity": "5"
+        },
+        {
+            "OrderId": "222",
+            "CustomerName": "Customer2",
+            "Phone": "12346",
+            "ProductId": "Product2",
+            "Quantity": "6"
+        }
+    ]
+}</code></pre>
+  </td>
+</tr>    
+<tr>      
+   <td><b>Mapping</b></td>  
+   <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;create-lookup&gt;
+&lt;lookup-key inputpath="Id"/&gt;
+&lt;lookup-key inputpath="Domain"/&gt;
+	&lt;/create-lookup&gt;
+	&lt;map inputpath="response_in" outputpath="response_out"&gt;
+	&lt;map outputpath="CustomerOrders" inputpath="Orders"&gt;
+		&lt;set-param outputpath="OrderId" inputpath="OrderId" /&gt;
+		&lt;lookup input="$vars" inputpath="customerMap" outputpath="customerRef" output="$vars"&gt;
+			&lt;lookup-key inputpath="CustomerId" /&gt;
+			&lt;lookup-key inputpath="OrderDomain" /&gt;
+		&lt;/lookup&gt;
+		&lt;set-param outputpath="CustomerName" inputpath="$vars/customerRef/Name" /&gt;
+		&lt;set-param outputpath="Phone" inputpath="$vars/customerRef/Phone" /&gt;
+		&lt;set-param outputpath="ProductId" inputpath="ProductId" /&gt;
+		&lt;set-param outputpath="Quantity" inputpath="Quantity" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+  </td>
+</tr> 
+</table>
 
-- **Output** **object**:
-  - CustomerOrders – OrderId, CustomerName, Phone, ProductId, Quantity
-
-Examples for Look-up Support in Mapper
-
-- **LookupMappingWithMultiplePrimaryKey**
-
-  **Input**
-
-  {
-  "Customers": \[
-  {
-  "Id": "101",
-  "Domain": "Finance",
-  "Name": "Customer1",
-  "Phone": "12345"
-  },
-  {
-  "Id": "102",
-  "Domain": "Healthcare",
-  "Name": "Customer2",
-  "Phone": "12346"
-  }
-  \],
-  "Orders": \[
-  {
-  "CustomerId": "101",
-  "OrderDomain": "Finance",
-  "OrderId": "111",
-  "ProductId": "Product1",
-  "Quantity": "5"
-  },
-  {
-  "CustomerId": "102",
-  "OrderDomain": "Healthcare",
-  "OrderId": "222",
-  "ProductId": "Product2",
-  "Quantity": "6"
-  }
-  \]
-  }
-
-  **Output**
-
-  {
-  "CustomerOrders": \[
-  {
-  "OrderId": "111",
-  "CustomerName": "Customer1",
-  "Phone": "12345",
-  "ProductId": "Product1",
-  "Quantity": "5"
-  },
-  {
-  "OrderId": "222",
-  "CustomerName": "Customer2",
-  "Phone": "12346",
-  "ProductId": "Product2",
-  "Quantity": "6"
-  }
-  \]
-  }
-
-  **Mapping**
-
-  <?xml version\="1.0" encoding\="UTF-8" standalone\="yes"?>
-
-  <mapper xmlns\="http://www.voltmx.com/ns/mapper"\>
-  <create-lookup>
-  <lookup-key inputpath\="Id"/>
-  <lookup-key inputpath\="Domain"/>
-  </create-lookup>
-  <map inputpath\="response_in" outputpath\="response_out"\>
-  <map outputpath\="CustomerOrders" inputpath\="Orders"\>
-  <set-param outputpath\="OrderId" inputpath\="OrderId" />
-  <lookup input\="$vars" inputpath\="customerMap" outputpath\="customerRef" output\="$vars"\>
-  <lookup-key inputpath\="CustomerId" />
-  <lookup-key inputpath\="OrderDomain" />
-  </lookup>
-  <set-param outputpath\="CustomerName" inputpath\="$vars/customerRef/Name" />
-    		<set-param outputpath\="Phone" inputpath\="$vars/customerRef/Phone" />
-  <set-param outputpath\="ProductId" inputpath\="ProductId" />
-  <set-param outputpath\="Quantity" inputpath\="Quantity" />
-  </map>
-  </map>
-  </mapper>
-
-- **LookupMappingWithOnePrimaryKey**
-
-  **Input**
-
-  {
-  "Customers": \[
-  {
-  "Id": "101",
-  "Name": "Customer1",
-  "Phone": "12345"
-  },
-  {
-  "Id": "102",
-  "Name": "Customer2",
-  "Phone": "12346"
-  }
-  \],
-  "Orders": \[
-  {
-  "CustomerId": "101",
-  "OrderId": "111",
-  "ProductId": "Product1",
-  "Quantity": "5"
-  },
-  {
-  "CustomerId": "102",
-  "OrderId": "222",
-  "ProductId": "Product2",
-  "Quantity": "6"
-  }
-  \]
-  }
-
-  **Output**
-
-  {
-  "CustomerOrders": \[
-  {
-  "OrderId": "111",
-  "CustomerName": "Customer1",
-  "Phone": "12345",
-  "ProductId": "Product1",
-  "Quantity": "5"
-  },
-  {
-  "OrderId": "222",
-  "CustomerName": "Customer2",
-  "Phone": "12346",
-  "ProductId": "Product2",
-  "Quantity": "6"
-  }
-  \]
-  }
-
-  **Mapping**
-
-   <?xml version\="1.0" encoding\="UTF-8" standalone\="yes"?>
-
-  <mapper xmlns\="http://www.voltmx.com/ns/mapper"\>
-  <create-lookup>
-  <lookup-key inputpath\="Id"/>
-  <lookup-key inputpath\="Domain"/>
-  </create-lookup>
-  <map inputpath\="response_in" outputpath\="response_out"\>
-  <map outputpath\="CustomerOrders" inputpath\="Orders"\>
-  <set-param outputpath\="OrderId" inputpath\="OrderId" />
-  <lookup input\="$vars" inputpath\="customerMap" outputpath\="customerRef" output\="$vars"\>
-  <lookup-key inputpath\="CustomerId" />
-  <lookup-key inputpath\="OrderDomain" />
-  </lookup>
-  <set-param outputpath\="CustomerName" inputpath\="$vars/customerRef/Name" />
-    		<set-param outputpath\="Phone" inputpath\="$vars/customerRef/Phone" />
-  <set-param outputpath\="ProductId" inputpath\="ProductId" />
-  <set-param outputpath\="Quantity" inputpath\="Quantity" />
-  </map>
-  </map>
-  </mapper>
-
-- **LookupMappingWhenPrimaryKeyNotFoundInChild**
-
-  **Input**
-
-  {
-  "Customers": \[
-  {
-  "Id": "101",
-  "Name": "Customer1",
-  "Phone": "12345"
-  },
-  {
-  "Id": "102",
-  "Name": "Customer2",
-  "Phone": "12346"
-  },
-  {
-  "Id": "103",
-  "Name": "Customer3",
-  "Phone": "12347"
-  }
-  \],
-  "Orders": \[
-  {
-  "CustomerId": "101",
-  "OrderId": "111",
-  "ProductId": "Product1",
-  "Quantity": "5"
-  },
-  {
-  "CustomerId": "102",
-  "OrderId": "222",
-  "ProductId": "Product2",
-  "Quantity": "6"
-  }
-  \]
-  }
-
-  **Output**
-
-  {
-  "CustomerOrders": \[
-  {
-  "OrderId": "111",
-  "CustomerName": "Customer1",
-  "Phone": "12345",
-  "ProductId": "Product1",
-  "Quantity": "5"
-  },
-  {
-  "OrderId": "222",
-  "CustomerName": "Customer2",
-  "Phone": "12346",
-  "ProductId": "Product2",
-  "Quantity": "6"
-  }
-  \]
-  }
-
-  **Mapping**
-
-   <?xml version\="1.0" encoding\="UTF-8" standalone\="yes"?>
-
-  <mapper xmlns\="http://www.voltmx.com/ns/mapper"\>
-  <create-lookup>
-  <lookup-key inputpath\="Id"/>
-  <lookup-key inputpath\="Domain"/>
-  </create-lookup>
-  <map inputpath\="response_in" outputpath\="response_out"\>
-  <map outputpath\="CustomerOrders" inputpath\="Orders"\>
-  <set-param outputpath\="OrderId" inputpath\="OrderId" />
-  <lookup input\="$vars" inputpath\="customerMap" outputpath\="customerRef" output\="$vars"\>
-  <lookup-key inputpath\="CustomerId" />
-  <lookup-key inputpath\="OrderDomain" />
-  </lookup>
-  <set-param outputpath\="CustomerName" inputpath\="$vars/customerRef/Name" />
-    		<set-param outputpath\="Phone" inputpath\="$vars/customerRef/Phone" />
-  <set-param outputpath\="ProductId" inputpath\="ProductId" />
-  <set-param outputpath\="Quantity" inputpath\="Quantity" />
-  </map>
-  </map>
-  </mapper>
-
-- **LookupMappingWhenPrimaryKeyNotFoundInParent**
-
-  **Input**
-
-  {
-  "Customers": \[
-  {
-  "Id": "101",
-  "Name": "Customer1",
-  "Phone": "12345"
-  },
-  {
-  "Id": "102",
-  "Name": "Customer2",
-  "Phone": "12346"
-  }
-  \],
-  "Orders": \[
-  {
-  "CustomerId": "101",
-  "OrderId": "111",
-  "ProductId": "Product1",
-  "Quantity": "5"
-  },
-  {
-  "CustomerId": "102",
-  "OrderId": "222",
-  "ProductId": "Product2",
-  "Quantity": "6"
-  },
-  {
-  "CustomerId": "103",
-  "OrderId": "333",
-  "ProductId": "Product3",
-  "Quantity": "7"
-  }
-  \]
-  }
-
-  **Output**
-
-  {
-  "CustomerOrders": \[
-  {
-  "OrderId": "111",
-  "CustomerName": "Customer1",
-  "Phone": "12345",
-  "ProductId": "Product1",
-  "Quantity": "5"
-  },
-  {
-  "OrderId": "222",
-  "CustomerName": "Customer2",
-  "Phone": "12346",
-  "ProductId": "Product2",
-  "Quantity": "6"
-  },
-  {
-  "OrderId": "333",
-  "ProductId": "Product3",
-  "Quantity": "7"
-  }
-  \]
-  }
-
-  **Mapping**
-
-   <?xml version\="1.0" encoding\="UTF-8" standalone\="yes"?>
-
-  <mapper xmlns\="http://www.voltmx.com/ns/mapper"\>
-  <create-lookup>
-  <lookup-key inputpath\="Id"/>
-  <lookup-key inputpath\="Domain"/>
-  </create-lookup>
-  <map inputpath\="response_in" outputpath\="response_out"\>
-  <map outputpath\="CustomerOrders" inputpath\="Orders"\>
-  <set-param outputpath\="OrderId" inputpath\="OrderId" />
-  <lookup input\="$vars" inputpath\="customerMap" outputpath\="customerRef" output\="$vars"\>
-  <lookup-key inputpath\="CustomerId" />
-  <lookup-key inputpath\="OrderDomain" />
-  </lookup>
-  <set-param outputpath\="CustomerName" inputpath\="$vars/customerRef/Name" />
-    		<set-param outputpath\="Phone" inputpath\="$vars/customerRef/Phone" />
-  <set-param outputpath\="ProductId" inputpath\="ProductId" />
-  <set-param outputpath\="Quantity" inputpath\="Quantity" />
-  </map>
-  </map>
-  </mapper>
+<ul>
+  <li><b>LookupMappingWhenPrimaryKeyNotFoundInParent</b></li>
+</ul>
+<table>
+  <tr>
+    <td><b>Input</b></td>    
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "Customers": [
+        {
+            "Id": "101",
+            "Name": "Customer1",
+            "Phone": "12345"
+        },
+        {
+            "Id": "102",
+            "Name": "Customer2",
+            "Phone": "12346"
+        }
+    ],
+    "Orders": [
+        {
+            "CustomerId": "101",
+            "OrderId": "111",
+            "ProductId": "Product1",
+            "Quantity": "5"
+        },
+        {
+            "CustomerId": "102",
+            "OrderId": "222",
+            "ProductId": "Product2",
+            "Quantity": "6"
+        },
+        {
+            "CustomerId": "103",
+            "OrderId": "333",
+            "ProductId": "Product3",
+            "Quantity": "7"
+        }
+    ]
+}</code></pre>
+  </td>
+  </tr>
+  <tr>      
+    <td><b>Output</b></td>  
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "CustomerOrders": [
+        {
+            "OrderId": "111",
+            "CustomerName": "Customer1",
+            "Phone": "12345",
+            "ProductId": "Product1",
+            "Quantity": "5"
+        },
+        {
+            "OrderId": "222",
+            "CustomerName": "Customer2",
+            "Phone": "12346",
+            "ProductId": "Product2",
+            "Quantity": "6"
+        },
+        {
+            "OrderId": "333",
+            "ProductId": "Product3",
+            "Quantity": "7"
+        }
+    ]
+}</code></pre>
+  </td>
+</tr>    
+<tr>      
+   <td><b>Mapping</b></td>  
+   <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;create-lookup&gt;
+&lt;lookup-key inputpath="Id"/&gt;
+&lt;lookup-key inputpath="Domain"/&gt;
+	&lt;/create-lookup&gt;
+	&lt;map inputpath="response_in" outputpath="response_out"&gt;
+	&lt;map outputpath="CustomerOrders" inputpath="Orders"&gt;
+		&lt;set-param outputpath="OrderId" inputpath="OrderId" /&gt;
+		&lt;lookup input="$vars" inputpath="customerMap" outputpath="customerRef" output="$vars"&gt;
+			&lt;lookup-key inputpath="CustomerId" /&gt;
+			&lt;lookup-key inputpath="OrderDomain" /&gt;
+		&lt;/lookup&gt;
+		&lt;set-param outputpath="CustomerName" inputpath="$vars/customerRef/Name" /&gt;
+		&lt;set-param outputpath="Phone" inputpath="$vars/customerRef/Phone" /&gt;
+		&lt;set-param outputpath="ProductId" inputpath="ProductId" /&gt;
+		&lt;set-param outputpath="Quantity" inputpath="Quantity" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+  </td>
+</tr> 
+</table>
 
 <h3 id="JavaScript_Support_in_Mapper">JavaScript Support in Mapper</h3>
-
-JavaScript support in mapper helps you write JavaScript code to manipulate return values into the format that is expected from the app data model, or manipulate input values from the app data model into back-end LOB. You can use JavaScript support in mapper based on the following scenarios:
-
-- LOB returns data in one format (such as dates, currency, arrays) and an **App Data** model expects the data in another format.
-- Attributes returned from LOB either to be clubbed or split before assigning the attributes to an **App Data** model.
-
-To enable JavaScript support in mapper, you need to write standalone JavaScript code snippets in mapper. Each standalone JavaScript snippet should be self-contained code and not dependent on other JavaScript files. JavaScript snippets can have multiple functions. A standalone JS snippet must be written `HTML CDATA` . ECMA 5.1 standard is supported JavaScript.
-
-**_Important:_** In the **Methods** tab, **Request Mapping** tab, and **Response Mapping** tab, click the **Validate** button to validate whether the XML is proper. The action does not validate the JavaScript snippet code.
-
-**JavaScript Snippet Rules**
-
-- The Function element can occur zero or more times as a child element to the mapper element.
-- The JavaScript element must occur one time only as a child element to the Function element.
-- `Set-arg` and Script elements can occur as child elements to the JavaScript element.
-
-  - The Set-arg element is optional, and can occur zero or more times. The element is a parameter for JS snippet.
-
-    For example:
-
-    <set-arg name\="firstName" inputpath\="FirstName" />
-
-    - inputpath - A field in LOB data
-
-    - name - A JavaScript function argument that holds a field of LOB data.
-
-- The Script element is mandatory and must occur only once. The JavaScript snippet should be written in the CDATA section of the element.
-- The `Exec-function` element invokes the JavaScript function. The exec-function name and function name should match.
-
-Sample JavaScript
-
-**Sample JavaScript Use Case**
-
-- **LOB data** has the following attributes:
-  - FirstName (for example, _Bill_)
-  - MiddleName (for example, _Tom_)
-  - LastName (for example, _Sam_)
-- **App Model Object** has the following attributes:
-
-  - FirstName (for example, _Bill_)
-  - MiddleName (for example, _Tom_)
-  - LastName (for example, _Sam_)
-  - **FullName**
-
-    The **FullName** attribute is derived from FirstName, MiddleName and LastName - for example, `FullName = FirstName + MiddlName + first letter of LastName + “. “`
-
-    The result: **Bill Tom S.**
-
-**Sample JavaScript mapping.xml**
-
-The following sample `mapping.xml` contains JavaScript code can be used as a reference. The following highlighted XML code shows how JavaScript code can be written and used to achieve the scenario.
-
- <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"><?xml version\="1.0" encoding\="UTF-8" standalone\="yes"?>
-
-<mapper xmlns\="http://www.voltmx.com/ns/mapper"\>
-<function name\="NameConcat"\>
-<javascript outputpath\="FullName"\>
-<set-arg name\="firstName" inputpath\="FirstName" />
-<set-arg name\="middleName" inputpath\="MiddleName" />
-<set-arg name\="lastName" inputpath\="LastName" />
-
-<script>
-<!\[CDATA\[
-function concat(){
-var result \= firstName+' '+ middleName + ' '+lastName.substring(0, 1).toUpperCase() + '. '
-return result;
-}
-concat();
-\]\]>
-</script>
-</javascript>
-</function>
-<create-lookup>
-<lookup-key inputpath\="Id"/>
-<lookup-key inputpath\="Domain"/>
-</create-lookup>
-<map inputpath\="response_in" outputpath\="response_out"\>
-<map outputpath\="CustomerOrders" inputpath\="Orders"\>
-<set-param outputpath\="OrderId" inputpath\="OrderId" />
-<lookup input\="$vars" inputpath\="customerMap" outputpath\="customerRef" output\="$vars"\>
-<lookup-key inputpath\="CustomerId" />
-<lookup-key inputpath\="OrderDomain" />
-</lookup>
-<set-param outputpath\="CustomerName" inputpath\="$vars/customerRef/Name" />
-		<set-param outputpath\="Phone" inputpath\="$vars/customerRef/Phone" />
-<set-param outputpath\="ProductId" inputpath\="ProductId" />
-<set-param outputpath\="Quantity" inputpath\="Quantity" />
-</map>
-</map>
-</mapper></code></pre>
-
-**Examples for JavaScript Support in Mapper**
-
-- **SimpleJSFunction**
-
-  **Input**
-
-  {
-  "Person": \[
-  {
-  "Id": "1021",
-  "FirstName": "bill",
-  "MiddleName": "tom",
-  "LastName": "sam"
-  }
-  \]
-  }
-
-  **Output**
-
-  {
-  "PersonInfo": \[
-  {
-  "Id": "1021",
-  "FullName": "bill T. sam"
-  }
-  \]
-  }
-
-  **Mapping**
-
-   <?xml version\="1.0" encoding\="UTF-8" standalone\="yes"?>
-
-  <mapper xmlns\="http://www.voltmx.com/ns/mapper"\>
-
-      <function name\="NameConcat"\>
-      	<javascript outputpath\="FullName"\>
-      		<set-arg name\="firstName" inputpath\="FirstName" />
-      		<set-arg name\="middleName" inputpath\="MiddleName" />
-      		<set-arg name\="lastName" inputpath\="LastName" />
-      		<script>
-      				<!\[CDATA\[
-      		              function concat(){
-      		                 var result \= firstName +' ' + middleName.substring(0, 1).toUpperCase() + '. ' + lastName
-      		                 return result;
-      		              }
-      		              concat();
-      		        \]\]>
-      		</script>
-      	</javascript>
-      </function>
-
-  <create-lookup>
-  <lookup-key inputpath\="Id"/>
-  <lookup-key inputpath\="Domain"/>
-  	</create-lookup>
-  	<map inputpath\="response\_in" outputpath\="response\_out"\>
-  	<map outputpath\="CustomerOrders" inputpath\="Orders"\>
-  		<set-param outputpath\="OrderId" inputpath\="OrderId" />
-  		<lookup input\="$vars" inputpath\="customerMap" outputpath\="customerRef" output\="$vars"\>
-  			<lookup-key inputpath\="CustomerId" />
-  			<lookup-key inputpath\="OrderDomain" />
-  		</lookup>
-  		<set-param outputpath\="CustomerName" inputpath\="$vars/customerRef/Name" />
-  		<set-param outputpath\="Phone" inputpath\="$vars/customerRef/Phone" />
-  		<set-param outputpath\="ProductId" inputpath\="ProductId" />
-  		<set-param outputpath\="Quantity" inputpath\="Quantity" />
-  </map>
-  </map>
-  </mapper>
-
-- **ParallelJSFuncntions**
-
-  **Input**
-
-  {
-  "Person": \[
-  {
-  "Id": "1021",
-  "FirstName": "bill",
-  "MiddleName": "tom",
-  "LastName": "sam",
-  "DOJ": "July 22, 2013"
-  }
-  \]
-  }
-
-  **Output**
-
-  {
-  "PersonInfo": \[
-  {
-  "Id": "1021",
-  "FullName": "bill T. sam",
-  "MonthOfJoining": "July"
-  }
-  \]
-  }
-
-  **Mapping**
-
-   <?xml version\="1.0" encoding\="UTF-8" standalone\="yes"?>
-
-  <mapper xmlns\="http://www.voltmx.com/ns/mapper"\>
-
-      <function name\="NameConcat"\>
-      	<javascript outputpath\="FullName"\>
-      		<set-arg name\="firstName" inputpath\="FirstName" />
-      		<set-arg name\="middleName" inputpath\="MiddleName" />
-      		<set-arg name\="lastName" inputpath\="LastName" />
-      		<script>
-      				<!\[CDATA\[
-      		              function concat(){
-      		                 var result \= firstName +' ' + middleName.substring(0, 1).toUpperCase() + '. ' + lastName
-      		                 return result;
-      		              }
-      		              concat();
-      		        \]\]>
-      		</script>
-      	</javascript>
-      </function>
-
-      <function name\="ExtractMonth"\>
-      	<javascript outputpath\="MonthOfJoining"\>
-      		<set-arg name\="DOJ" inputpath\="DOJ" />
-      		<script>
-                  <!\[CDATA\[
-                 		function ExtractMonth(){
-                   		var month \= new Array();
-      				    month\[0\] \= "January";
-      				    month\[1\] \= "February";
-      				    month\[2\] \= "March";
-      				    month\[3\] \= "April";
-      				    month\[4\] \= "May";
-      				    month\[5\] \= "June";
-      				    month\[6\] \= "July";
-      				    month\[7\] \= "August";
-      				    month\[8\] \= "September";
-      				    month\[9\] \= "October";
-      				    month\[10\] \= "November";
-      				    month\[11\] \= "December";
-       					var d \= new Date(DOJ);
-      				    var result \= month\[d.getMonth()\];
-                          return result;
-                     }
-                	   ExtractMonth();
-                  \]\]>
-      		</script>
-      	</javascript>
-      </function>
-
-      <create-lookup>
-
-  <lookup-key inputpath\="Id"/>
-  <lookup-key inputpath\="Domain"/>
-  </create-lookup>
-  <map inputpath\="response_in" outputpath\="response_out"\>
-  <map outputpath\="CustomerOrders" inputpath\="Orders"\>
-  <set-param outputpath\="OrderId" inputpath\="OrderId" />
-  <lookup input\="$vars" inputpath\="customerMap" outputpath\="customerRef" output\="$vars"\>
-  <lookup-key inputpath\="CustomerId" />
-  <lookup-key inputpath\="OrderDomain" />
-  </lookup>
-  <set-param outputpath\="CustomerName" inputpath\="$vars/customerRef/Name" />
-    		<set-param outputpath\="Phone" inputpath\="$vars/customerRef/Phone" />
-  <set-param outputpath\="ProductId" inputpath\="ProductId" />
-  <set-param outputpath\="Quantity" inputpath\="Quantity" />
-  </map>
-  </map>
-  </mapper>
-
-- **MixedFunctions**
-
-  **Input**
-
-  {
-  "A": \[
-  {
-  "FirstName": "bill",
-  "MiddleName": "tom",
-  "LastName": "sam"
-  }
-  \]
-  }
-
-  **Output**
-
-  {
-  "A": \[
-  {
-  "Q1": "bill-tom-sam",
-  "NameInUpperCase": "BILL-TOM-SAM"
-  }
-  \]
-  }
-
-  **Mapping**
-
-   <?xml version\="1.0" encoding\="UTF-8" standalone\="yes"?>
-
-  <mapper xmlns\="http://www.voltmx.com/ns/mapper"\>
-
-      <function name\="DisplayInUpperCase"\>
-      	<javascript outputpath\="NameInUpperCase"\>
-      		<set-arg name\="firstName" inputpath\="FirstName" />
-      		<set-arg name\="middleName" inputpath\="MiddleName" />
-      		<set-arg name\="lastName" inputpath\="LastName" />
-      		<script>
-                  <!\[CDATA\[
-                     function convertToUppercase(){
-                        var result \= firstName + '-'+ middleName +'-'+ lastName;
-                        return result.toUpperCase();
-                     }
-                     convertToUppercase();
-                  \]\]>
-               </script>
-      	</javascript>
-      </function>
-
-  <create-lookup>
-  <lookup-key inputpath\="Id"/>
-  <lookup-key inputpath\="Domain"/>
-  	</create-lookup>
-  	<map inputpath\="response\_in" outputpath\="response\_out"\>
-  	<map outputpath\="CustomerOrders" inputpath\="Orders"\>
-  		<set-param outputpath\="OrderId" inputpath\="OrderId" />
-  		<lookup input\="$vars" inputpath\="customerMap" outputpath\="customerRef" output\="$vars"\>
-  			<lookup-key inputpath\="CustomerId" />
-  			<lookup-key inputpath\="OrderDomain" />
-  		</lookup>
-  		<set-param outputpath\="CustomerName" inputpath\="$vars/customerRef/Name" />
-  		<set-param outputpath\="Phone" inputpath\="$vars/customerRef/Phone" />
-  		<set-param outputpath\="ProductId" inputpath\="ProductId" />
-  		<set-param outputpath\="Quantity" inputpath\="Quantity" />
-  </map>
-  </map>
-  </mapper>
-
-- **JSFunctionWithZeroInputs**
-
-  **Input**
-
-  {
-  "Person": \[
-  {
-  "Id": "1021"
-  }
-  \]
-  }
-
-  **Output**
-
-  {
-  "PersonInfo": \[
-  {
-  "Id": "1021",
-  "Name": "Bill Tom Sam"
-  }
-  \]
-  }
-
-  **Mapping**
-
-   <?xml version\="1.0" encoding\="UTF-8" standalone\="yes"?>
-
-  <mapper xmlns\="http://www.voltmx.com/ns/mapper"\>
-
-      <function name\="GiveSomeText"\>
-      	<javascript outputpath\="Name"\>
-      		<script>
-                 <!\[CDATA\[
-                   function concat(){
-                      return 'Bill Tom Sam';
+<p>JavaScript support in mapper helps you write JavaScript code to manipulate return values into the format that is expected from the app data model, or manipulate input values from the app data model into back-end LOB. You can use JavaScript support in mapper based on the following scenarios:</p>
+<ul>
+  <li>LOB returns data in one format (such as dates, currency, arrays) and an <b>App Data</b> model expects the data in another format.</li>  
+  <li>Attributes returned from LOB either to be clubbed or split before assigning the attributes to an <b>App Data</b> model.</li>
+</ul>
+<p>To enable JavaScript support in mapper, you need to write standalone JavaScript code snippets in mapper. Each standalone JavaScript snippet should be self-contained code and not dependent on other JavaScript files. JavaScript snippets can have multiple functions. A standalone JS snippet must be written <code>HTML CDATA</code>. ECMA 5.1 standard is supported JavaScript.</p>
+<blockquote><b><em>Important:</em></b> In the <b>Methods</b> tab, <b>Request Mapping</b> tab, and Response Mapping tab, click the <b>Validate</b> button to validate whether the XML is proper. The action does not validate the JavaScript snippet code.</blockquote>
+
+<p><b>JavaScript Snippet Rules</b></p>
+<ul>
+  <li>The Function element can occur zero or more times as a child element to the mapper element.</li>  
+  <li>The JavaScript element must occur one time only as a child element to the Function element.</li> 
+  <li>Set-arg and Script elements can occur as child elements to the JavaScript element.
+    <ul>
+      <li>The Set-arg element is optional, and can occur zero or more times. The element is a parameter for JS snippet.<br/>
+        <p>For example:</p>
+        <pre><code>&lt;set-arg name="firstName" inputpath="FirstName" /&gt;</code></pre>
+        <ul>
+          <li>inputpath - A field in LOB data</li>          
+          <li>name - A JavaScript function argument that holds a field of LOB data.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>The Script element is mandatory and must occur only once. The JavaScript snippet should be written in the CDATA section of the element.</li> 
+  <li>The <code>Exec-function</code> element invokes the JavaScript function. The exec-function name and function name should match.</li>
+</ul>
+<p>Sample JavaScript</p>
+<p><b>Sample JavaScript Use Case</b></p>
+<ul>
+  <li>
+    <b>LOB data</b> has the following attributes:
+    <ul>
+      <li>FirstName (for example, Bill)</li>      
+      <li>MiddleName (for example, Tom)</li>      
+      <li>LastName (for example, Sam)</li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <b>App Model Object</b> has the following attributes:
+    <ul>
+      <li>FirstName (for example, Bill)</li>      
+      <li>MiddleName (for example, Tom)</li>      
+      <li>LastName (for example, Sam)</li>
+      <li><b>FullName</b><br/>
+        <p>The <b>FullName</b> attribute is derived from FirstName, MiddleName and LastName - for example, <code>FullName = FirstName + MiddlName + first letter of LastName + “. “</code></p><br>
+        <p>The result: <b>Bill Tom S.</b></p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><b>Sample JavaScript mapping.xml</b></p>
+<p>The following sample mapping.xml contains JavaScript code can be used as a reference. The following highlighted XML code shows how JavaScript code can be written and used to achieve the scenario.</p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+	<mark>&lt;function name="NameConcat"&gt;
+		&lt;javascript outputpath="FullName"&gt;
+			&lt;set-arg name="firstName" inputpath="FirstName" /&gt;
+			&lt;set-arg name="middleName" inputpath="MiddleName" /&gt;
+			&lt;set-arg name="lastName" inputpath="LastName" /&gt;
+			&lt;script&gt;
+			&lt;![CDATA[
+			  function concat(){
+			   var result = firstName+' '+ middleName + ' '+lastName.substring(0, 1).toUpperCase() + '. '
+			    return result;
+  			    }
+			   concat();
+			 ]]&gt;
+			&lt;/script&gt;
+		&lt;/javascript&gt;
+	&lt;/function&gt;</mark>
+	&lt;create-lookup&gt;
+&lt;lookup-key inputpath="Id"/&gt;
+&lt;lookup-key inputpath="Domain"/&gt;
+	&lt;/create-lookup&gt;
+	&lt;map inputpath="response_in" outputpath="response_out"&gt;
+	&lt;map outputpath="CustomerOrders" inputpath="Orders"&gt;
+		&lt;set-param outputpath="OrderId" inputpath="OrderId" /&gt;
+		&lt;lookup input="$vars" inputpath="customerMap" outputpath="customerRef" output="$vars"&gt;
+			&lt;lookup-key inputpath="CustomerId" /&gt;
+			&lt;lookup-key inputpath="OrderDomain" /&gt;
+		&lt;/lookup&gt;
+		&lt;set-param outputpath="CustomerName" inputpath="$vars/customerRef/Name" /&gt;
+		&lt;set-param outputpath="Phone" inputpath="$vars/customerRef/Phone" /&gt;
+		&lt;set-param outputpath="ProductId" inputpath="ProductId" /&gt;
+		&lt;set-param outputpath="Quantity" inputpath="Quantity" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+<br>
+<p><b><u>Examples for JavaScript Support in Mapper</u></b></p>   
+<ul>
+<li><b>SimpleJSFunction</b></li>
+<table>
+    <tr>
+      <td><b>Input</b></td>    
+        <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "Person": [
+        {
+            "Id": "1021",
+            "FirstName": "bill",
+            "MiddleName": "tom",
+            "LastName": "sam"
+        }
+    ]
+}</code></pre>
+      </td>
+    </tr>
+    <tr>      
+        <td><b>Output</b></td>  
+        <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+    "PersonInfo": [
+        {
+            "Id": "1021",
+            "FullName": "bill T. sam"
+        }
+    ]
+}</code></pre>
+    </td>
+    </tr>    
+      <tr>      
+      <td><b>Mapping</b></td>  
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+    &lt;function name="NameConcat"&gt;
+    	&lt;javascript outputpath="FullName"&gt;
+    		&lt;set-arg name="firstName" inputpath="FirstName" /&gt;
+    		&lt;set-arg name="middleName" inputpath="MiddleName" /&gt;
+    		&lt;set-arg name="lastName" inputpath="LastName" /&gt;
+    		&lt;script&gt;
+    				&lt;![CDATA[
+    		              function concat(){
+    		                 var result = firstName +' ' + middleName.substring(0, 1).toUpperCase() + '. ' + lastName
+    		                 return result;
+    		              }
+    		              concat();
+    		        ]]&gt;
+    		&lt;/script&gt;
+    	&lt;/javascript&gt;
+    &lt;/function&gt;
+&lt;create-lookup&gt;
+&lt;lookup-key inputpath="Id"/&gt;
+&lt;lookup-key inputpath="Domain"/&gt;
+&lt;/create-lookup&gt;
+&lt;map inputpath="response_in" outputpath="response_out"&gt;
+&lt;map outputpath="CustomerOrders" inputpath="Orders"&gt;
+&lt;set-param outputpath="OrderId" inputpath="OrderId" /&gt;
+&lt;lookup input="$vars" inputpath="customerMap" outputpath="customerRef" output="$vars"&gt;
+&lt;lookup-key inputpath="CustomerId" /&gt;
+&lt;lookup-key inputpath="OrderDomain" /&gt;
+&lt;/lookup&gt;
+&lt;set-param outputpath="CustomerName" inputpath="$vars/customerRef/Name" /&gt;
+&lt;set-param outputpath="Phone" inputpath="$vars/customerRef/Phone" /&gt;
+&lt;set-param outputpath="ProductId" inputpath="ProductId" /&gt;
+&lt;set-param outputpath="Quantity" inputpath="Quantity" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+</td>
+</tr>
+</table>
+
+<li><b>MixedFunctions</b></li>
+<table>
+    <tr>
+        <td><b>Input</b></td>    
+        <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "A": [
+        {
+            "FirstName": "bill",
+            "MiddleName": "tom",
+            "LastName": "sam"
+        }
+    ]
+}</code></pre>
+    </td>
+    </tr>
+    <tr>      
+        <td><b>Output</b></td>  
+        <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "A": [
+        {
+            "Q1": "bill-tom-sam",
+            "NameInUpperCase": "BILL-TOM-SAM"
+        }
+    ]
+}</code></pre>
+    </td>
+    </tr>    
+    <tr>      
+    <td><b>Mapping</b></td>  
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+    &lt;function name="DisplayInUpperCase"&gt;
+    	&lt;javascript outputpath="NameInUpperCase"&gt;
+    		&lt;set-arg name="firstName" inputpath="FirstName" /&gt;
+    		&lt;set-arg name="middleName" inputpath="MiddleName" /&gt;
+    		&lt;set-arg name="lastName" inputpath="LastName" /&gt;
+    		&lt;script&gt;
+                &lt;![CDATA[
+                   function convertToUppercase(){
+                      var result = firstName + '-'+ middleName +'-'+ lastName;
+                      return result.toUpperCase();
                    }
-                   concat();
-                 \]\]>
-            </script>
-      	</javascript>
-      </function>
+                   convertToUppercase();
+                ]]&gt;
+             &lt;/script&gt;
+    	&lt;/javascript&gt;
+    &lt;/function&gt;
+&lt;create-lookup&gt;
+&lt;lookup-key inputpath="Id"/&gt;
+&lt;lookup-key inputpath="Domain"/&gt;
+&lt;/create-lookup&gt;
+&lt;map inputpath="response_in" outputpath="response_out"&gt;
+&lt;map outputpath="CustomerOrders" inputpath="Orders"&gt;
+&lt;set-param outputpath="OrderId" inputpath="OrderId" /&gt;
+&lt;lookup input="$vars" inputpath="customerMap" outputpath="customerRef" output="$vars"&gt;
+&lt;lookup-key inputpath="CustomerId" /&gt;
+&lt;lookup-key inputpath="OrderDomain" /&gt;
+&lt;/lookup&gt;
+&lt;set-param outputpath="CustomerName" inputpath="$vars/customerRef/Name" /&gt;
+		&lt;set-param outputpath="Phone" inputpath="$vars/customerRef/Phone" /&gt;
+&lt;set-param outputpath="ProductId" inputpath="ProductId" /&gt;
+&lt;set-param outputpath="Quantity" inputpath="Quantity" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+</td>
+</tr>
+</table>
 
-      <create-lookup>
+<li><b>JSFunctionWithZeroInputs</b></li>
+<table>
+    <tr>
+        <td><b>Input</b></td>    
+        <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "Person": [
+        {
+            "Id": "1021"
+        }
+    ]
+}</code></pre>
+    </td>
+    </tr>
+    <tr>      
+        <td><b>Output</b></td>  
+        <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "PersonInfo": [
+        {
+            "Id": "1021",
+            "Name": "Bill Tom Sam"
+        }
+    ]
+}</code></pre>
+    </td>
+    </tr>    
+    <tr>      
+    <td><b>Mapping</b></td>  
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+    &lt;function name="GiveSomeText"&gt;
+    	&lt;javascript outputpath="Name"&gt;
+    		&lt;script&gt;
+               &lt;![CDATA[
+                 function concat(){
+                    return 'Bill Tom Sam';
+                 }
+                 concat();
+               ]]&gt;
+          &lt;/script&gt;
+    	&lt;/javascript&gt;
+    &lt;/function&gt;
+    &lt;create-lookup&gt;
+&lt;lookup-key inputpath="Id"/&gt;
+&lt;lookup-key inputpath="Domain"/&gt;
+&lt;/create-lookup&gt;
+&lt;map inputpath="response_in" outputpath="response_out"&gt;
+&lt;map outputpath="CustomerOrders" inputpath="Orders"&gt;
+&lt;set-param outputpath="OrderId" inputpath="OrderId" /&gt;
+&lt;lookup input="$vars" inputpath="customerMap" outputpath="customerRef" output="$vars"&gt;
+&lt;lookup-key inputpath="CustomerId" /&gt;
+&lt;lookup-key inputpath="OrderDomain" /&gt;
+&lt;/lookup&gt;
+&lt;set-param outputpath="CustomerName" inputpath="$vars/customerRef/Name" /&gt;
+&lt;set-param outputpath="Phone" inputpath="$vars/customerRef/Phone" /&gt;
+&lt;set-param outputpath="ProductId" inputpath="ProductId" /&gt;
+&lt;set-param outputpath="Quantity" inputpath="Quantity" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+</td>
+</tr>
+ </table>
 
-  <lookup-key inputpath\="Id"/>
-  <lookup-key inputpath\="Domain"/>
-  </create-lookup>
-  <map inputpath\="response_in" outputpath\="response_out"\>
-  <map outputpath\="CustomerOrders" inputpath\="Orders"\>
-  <set-param outputpath\="OrderId" inputpath\="OrderId" />
-  <lookup input\="$vars" inputpath\="customerMap" outputpath\="customerRef" output\="$vars"\>
-  <lookup-key inputpath\="CustomerId" />
-  <lookup-key inputpath\="OrderDomain" />
-  </lookup>
-  <set-param outputpath\="CustomerName" inputpath\="$vars/customerRef/Name" />
-    		<set-param outputpath\="Phone" inputpath\="$vars/customerRef/Phone" />
-  <set-param outputpath\="ProductId" inputpath\="ProductId" />
-  <set-param outputpath\="Quantity" inputpath\="Quantity" />
-  </map>
-  </map>
-  </mapper>
+<li><b>JSCodeNotAvailable</b></li>
+    <table>
+    <tr>
+        <td><b>Input</b></td>    
+        <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "Person": [
+        {
+            "Id": "1021"
+        }
+    ]
+}</code></pre>
+    </td>
+    </tr>
+    <tr>      
+        <td><b>Output</b></td>  
+        <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "PersonInfo": [
+        {
+            "Id": "1021",
+            "Name": ""
+        }
+    ]
+}</code></pre>
+    </td>
+    </tr>    
+    <tr>      
+    <td><b>Mapping</b></td>  
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+    &lt;function name="someText"&gt;
+    	&lt;javascript outputpath="Name"&gt;
+    	&lt;script&gt;
+               &lt;![CDATA[
+                      -
+                    ]]&gt;
+        &lt;/script&gt;
+    	&lt;/javascript&gt;
+    &lt;/function&gt;
+    &lt;create-lookup&gt;
+&lt;lookup-key inputpath="Id"/&gt;
+&lt;lookup-key inputpath="Domain"/&gt;
+&lt;/create-lookup&gt;
+&lt;map inputpath="response_in" outputpath="response_out"&gt;
+&lt;map outputpath="CustomerOrders" inputpath="Orders"&gt;
+&lt;set-param outputpath="OrderId" inputpath="OrderId" /&gt;
+&lt;lookup input="$vars" inputpath="customerMap" outputpath="customerRef" output="$vars"&gt;
+&lt;lookup-key inputpath="CustomerId" /&gt;
+&lt;lookup-key inputpath="OrderDomain" /&gt;
+&lt;/lookup&gt;
+&lt;set-param outputpath="CustomerName" inputpath="$vars/customerRef/Name" /&gt;
+		&lt;set-param outputpath="Phone" inputpath="$vars/customerRef/Phone" /&gt;
+&lt;set-param outputpath="ProductId" inputpath="ProductId" /&gt;
+&lt;set-param outputpath="Quantity" inputpath="Quantity" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+</td>
+</tr>
+ </table>
 
-- **JSCodeNotAvailable**
+<li><b>MapperExceptionWhenScriptTagMissedInJS</b></li>
+    <table>
+    <tr>
+        <td><b>Input</b></td>    
+        <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "Person": [
+        {
+            "Id": "1021"
+        }
+    ]
+}</code></pre>
+    </td>
+    </tr>
+    <tr>      
+        <td><b>Output</b></td>  
+        <td>null script</td>
+    </tr>    
+    <tr>      
+    <td><b>Mapping</b></td>  
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+    &lt;function name="someText"&gt;
+    	&lt;javascript>
+           &lt;![CDATA[
+             function concat(){
+                return NoElement.text;
+             }
+             concat();
+           ]]&gt;
+    	&lt;/javascript&gt;
+    &lt;/function&gt;
+    &lt;create-lookup&gt;
+&lt;lookup-key inputpath="Id"/&gt;
+&lt;lookup-key inputpath="Domain"/&gt;
+&lt;/create-lookup&gt;
+&lt;map inputpath="response_in" outputpath="response_out"&gt;
+&lt;map outputpath="CustomerOrders" inputpath="Orders"&gt;
+&lt;set-param outputpath="OrderId" inputpath="OrderId" /&gt;
+&lt;lookup input="$vars" inputpath="customerMap" outputpath="customerRef" output="$vars"&gt;
+&lt;lookup-key inputpath="CustomerId" /&gt;
+&lt;lookup-key inputpath="OrderDomain" /&gt;
+&lt;/lookup&gt;
+&lt;set-param outputpath="CustomerName" inputpath="$vars/customerRef/Name" /&gt;
+		&lt;set-param outputpath="Phone" inputpath="$vars/customerRef/Phone" /&gt;
+&lt;set-param outputpath="ProductId" inputpath="ProductId" /&gt;
+&lt;set-param outputpath="Quantity" inputpath="Quantity" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+</td>
+</tr>
+</table>
 
-  **Input**
-
-  {
-  "Person": \[
-  {
-  "Id": "1021"
-  }
-  \]
-  }
-
-  **Output**
-
-  {
-  "PersonInfo": \[
-  {
-  "Id": "1021",
-  "Name": ""
-  }
-  \]
-  }
-
-  **Mapping**
-
-   <?xml version\="1.0" encoding\="UTF-8" standalone\="yes"?>
-
-  <mapper xmlns\="http://www.voltmx.com/ns/mapper"\>
-
-      <function name\="sometext"\>
-      	<javascript outputpath\="Name"\>
-      	<script>
-                 <!\[CDATA\[
-
-                 \]\]>
-            </script>
-
-      	</javascript>
-      </function>
-
-      <create-lookup>
-
-  <lookup-key inputpath\="Id"/>
-  <lookup-key inputpath\="Domain"/>
-  </create-lookup>
-  <map inputpath\="response_in" outputpath\="response_out"\>
-  <map outputpath\="CustomerOrders" inputpath\="Orders"\>
-  <set-param outputpath\="OrderId" inputpath\="OrderId" />
-  <lookup input\="$vars" inputpath\="customerMap" outputpath\="customerRef" output\="$vars"\>
-  <lookup-key inputpath\="CustomerId" />
-  <lookup-key inputpath\="OrderDomain" />
-  </lookup>
-  <set-param outputpath\="CustomerName" inputpath\="$vars/customerRef/Name" />
-    		<set-param outputpath\="Phone" inputpath\="$vars/customerRef/Phone" />
-  <set-param outputpath\="ProductId" inputpath\="ProductId" />
-  <set-param outputpath\="Quantity" inputpath\="Quantity" />
-  </map>
-  </map>
-  </mapper>
-
-- **MapperExceptionWhenScriptTagMissedInJS**
-
-  **Input**
-
-  {
-  "Person": \[
-  {
-  "Id": "1021"
-  }
-  \]
-  }
-
-  **Output**
-
-  null script
-
-  **Mapping**
-
-   <?xml version\="1.0" encoding\="UTF-8" standalone\="yes"?>
-
-  <mapper xmlns\="http://www.voltmx.com/ns/mapper"\>
-
-      <function name\="sometext"\>
-      	<javascript>
-             <!\[CDATA\[
-               function concat(){
-
-                  return NoElement.text;
-               }
-               concat();
-             \]\]>
-      	</javascript>
-      </function>
-
-      <create-lookup>
-
-  <lookup-key inputpath\="Id"/>
-  <lookup-key inputpath\="Domain"/>
-  </create-lookup>
-  <map inputpath\="response_in" outputpath\="response_out"\>
-  <map outputpath\="CustomerOrders" inputpath\="Orders"\>
-  <set-param outputpath\="OrderId" inputpath\="OrderId" />
-  <lookup input\="$vars" inputpath\="customerMap" outputpath\="customerRef" output\="$vars"\>
-  <lookup-key inputpath\="CustomerId" />
-  <lookup-key inputpath\="OrderDomain" />
-  </lookup>
-  <set-param outputpath\="CustomerName" inputpath\="$vars/customerRef/Name" />
-    		<set-param outputpath\="Phone" inputpath\="$vars/customerRef/Phone" />
-  <set-param outputpath\="ProductId" inputpath\="ProductId" />
-  <set-param outputpath\="Quantity" inputpath\="Quantity" />
-  </map>
-  </map>
-  </mapper>
-
-- **MapperExceptionForErrorProneJS**
-
-  **Input**
-
-  {
-  "Person": \[
-  {
-  "Id": "1021"
-  }
-  \]
-  }
-
-  **Output**
-
-  sun.org.mozilla.javascript.internal.EcmaError: ReferenceError: "NoElement" is not defined. (<Unknown source\>#5) in <Unknown source> at line number 5
-
-  **Mapping**
-
-   <?xml version\="1.0" encoding\="UTF-8" standalone\="yes"?>
-
-  <mapper xmlns\="http://www.voltmx.com/ns/mapper"\>
-
-      <function name\="sometext"\>
-      	<javascript>
-      	<script>
-             <!\[CDATA\[
-               function concat(){
-
-                  return NoElement.text;
-               }
-               concat();
-             \]\]>
-            </script>
-      	</javascript>
-      </function>
-
-      <create-lookup>
-
-  <lookup-key inputpath\="Id"/>
-  <lookup-key inputpath\="Domain"/>
-  </create-lookup>
-  <map inputpath\="response_in" outputpath\="response_out"\>
-  <map outputpath\="CustomerOrders" inputpath\="Orders"\>
-  <set-param outputpath\="OrderId" inputpath\="OrderId" />
-  <lookup input\="$vars" inputpath\="customerMap" outputpath\="customerRef" output\="$vars"\>
-  <lookup-key inputpath\="CustomerId" />
-  <lookup-key inputpath\="OrderDomain" />
-  </lookup>
-  <set-param outputpath\="CustomerName" inputpath\="$vars/customerRef/Name" />
-    		<set-param outputpath\="Phone" inputpath\="$vars/customerRef/Phone" />
-  <set-param outputpath\="ProductId" inputpath\="ProductId" />
-  <set-param outputpath\="Quantity" inputpath\="Quantity" />
-  </map>
-  </map>
-  </mapper>
-
-/\*<!\[CDATA\[\*/// format date as dd-mmm-yy // example: 12-Jan-99 // function date_ddmmmyy(date) { var d = date.getDate(); var m = date.getMonth() + 1; var y = date.getFullYear(); // handle different year values // returned by IE and NS in // the year 2000. // if(y >= 2000) // { // y -= 2000; // } // if(y >= 100) // { // y -= 100; // } // could use splitString() here // but the following method is // more compatible var mmm = ( 1==m)?'January':( 2==m)?'February':(3==m)?'March': ( 4==m)?'April':( 5==m)?'May':(6==m)?'June': ( 7==m)?'July':( 8==m)?'August':(9==m)?'September': (10==m)?'October':(11==m)?'November':'December'; return "" + (d<10?"0"+d:d) + " " + mmm + ", " + (y<10?"0"+y:y); } // // get last modified date of the // current document. // function date_lastmodified() { var lmd = document.lastModified; var s = "Unknown"; var d1; // check if we have a valid date // before proceeding if(0 != (d1=Date.parse(lmd))) { s = "" + date_ddmmmyy(new Date(d1)); } return s; } // // finally display the last modified date // as DD-MMM-YY // document.write(//"Last updated on : 30 September, 2013"); "Last updated on : " + date_lastmodified() ); // --> /\*\]\]>\*/Last updated on : 01 March, 2022
-
-[Copyright](Copyright.htm) © 2020 Temenos AG. All rights reserved.
+<li><b>MapperExceptionForErrorProneJS</b></li>
+<table>
+    <tr>
+        <td><b>Input</b></td>    
+        <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+    "Person": [
+        {
+            "Id": "1021"
+        }
+    ]
+}</code></pre>
+    </td>
+    </tr>
+    <tr>      
+        <td><b>Output</b></td>  
+        <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">sun.org.mozilla.javascript.internal.EcmaError: ReferenceError: "NoElement" is not defined. (&lt;Unknown source&gt;#5) in &lt;Unknown source&gt; at line number 5</code></pre>
+    </td>
+    </tr>    
+    <tr>      
+    <td><b>Mapping</b></td>  
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+    &lt;function name="someText"&gt;
+    	&lt;javascript>
+    	&lt;script&gt;
+           &lt;![CDATA[
+             function concat(){
+                return NoElement.text;
+             }
+             concat();
+           ]]&gt;
+          &lt;/script&gt;
+    	&lt;/javascript&gt;
+    &lt;/function&gt;
+    &lt;create-lookup&gt;
+&lt;lookup-key inputpath="Id"/&gt;
+&lt;lookup-key inputpath="Domain"/&gt;
+&lt;/create-lookup&gt;
+&lt;map inputpath="response_in" outputpath="response_out"&gt;
+&lt;map outputpath="CustomerOrders" inputpath="Orders"&gt;
+&lt;set-param outputpath="OrderId" inputpath="OrderId" /&gt;
+&lt;lookup input="$vars" inputpath="customerMap" outputpath="customerRef" output="$vars"&gt;
+&lt;lookup-key inputpath="CustomerId" /&gt;
+&lt;lookup-key inputpath="OrderDomain" /&gt;
+&lt;/lookup&gt;
+&lt;set-param outputpath="CustomerName" inputpath="$vars/customerRef/Name" /&gt;
+		&lt;set-param outputpath="Phone" inputpath="$vars/customerRef/Phone" /&gt;
+&lt;set-param outputpath="ProductId" inputpath="ProductId" /&gt;
+&lt;set-param outputpath="Quantity" inputpath="Quantity" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+</td>
+</tr>
+</table>
+</ul>
