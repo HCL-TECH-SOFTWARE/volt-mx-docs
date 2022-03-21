@@ -51,7 +51,7 @@ This is an example of attribute to object mapping.
 <b>Input</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
-"WorkOrder": \[
+"WorkOrder": [
 {
 "WorkOrderId": "1",
 "AddressId": "101"
@@ -60,34 +60,34 @@ This is an example of attribute to object mapping.
 "WorkOrderId": "2",
 "AddressId": "202"
 }
-\]
+]
 }</code></pre>
 
 <b>Output</b>
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
-"WorkOrder": \[
+"WorkOrder": [
 {
 "WorkOrderId": "1",
-"Address": \[
+"Address": [
 {
 "WorkOrderId": "1",
 "AddressId": "101",
 "AddressType": "ORD"
 }
-\]
+]
 },
 {
 "WorkOrderId": "2",
-"Address": \[
+"Address": [
 {
 "WorkOrderId": "2",
 "AddressId": "202",
 "AddressType": "ORD"
 }
-\]
+]
 }
-\]
+]
 }</code></pre>
 
 <b>Mapping</b>
@@ -111,7 +111,7 @@ This is an example of mapping an attribute to an object with empty fields.
 
 <b>Input</b>
 
-<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{"WorkOrder": \[
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{"WorkOrder": [
 
 {
 
@@ -134,8 +134,7 @@ This is an example of mapping an attribute to an object with empty fields.
 "WorkOrderId": "3",
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -143,13 +142,13 @@ This is an example of mapping an attribute to an object with empty fields.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"WorkOrder": \[
+"WorkOrder": [
 
 {
 
 "WorkOrderId": "1",
 
-"Address": \[
+"Address": [
 
 {
 
@@ -160,8 +159,7 @@ This is an example of mapping an attribute to an object with empty fields.
 "AddressType": "ORD"
 
 }
-
-\]
+]
 
 },
 
@@ -169,7 +167,7 @@ This is an example of mapping an attribute to an object with empty fields.
 
 "WorkOrderId": "2",
 
-"Address": \[
+"Address": [
 
 {
 
@@ -180,8 +178,7 @@ This is an example of mapping an attribute to an object with empty fields.
 "AddressType": "ORD"
 
 }
-
-\]
+]
 
 },
 
@@ -189,7 +186,7 @@ This is an example of mapping an attribute to an object with empty fields.
 
 "WorkOrderId": "3",
 
-"Address": \[
+"Address": [
 
 {
 
@@ -198,12 +195,10 @@ This is an example of mapping an attribute to an object with empty fields.
 "AddressType": "ORD"
 
 }
-
-\]
+]
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -229,7 +224,7 @@ This is an example of mapping an attribute to an object with missing fields.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"WorkOrder": \[
+"WorkOrder": [
 
 {
 
@@ -252,8 +247,7 @@ This is an example of mapping an attribute to an object with missing fields.
 "WorkOrderId": "3",
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -261,13 +255,13 @@ This is an example of mapping an attribute to an object with missing fields.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"WorkOrder": \[
+"WorkOrder": [
 
 {
 
 "WorkOrderId": "1",
 
-"Address": \[
+"Address": [
 
 {
 
@@ -278,8 +272,7 @@ This is an example of mapping an attribute to an object with missing fields.
 "AddressType": "ORD"
 
 }
-
-\]
+]
 
 },
 
@@ -287,7 +280,7 @@ This is an example of mapping an attribute to an object with missing fields.
 
 "WorkOrderId": "2",
 
-"Address": \[
+"Address": [
 
 {
 
@@ -298,8 +291,7 @@ This is an example of mapping an attribute to an object with missing fields.
 "AddressType": "ORD"
 
 }
-
-\]
+]
 
 },
 
@@ -307,7 +299,7 @@ This is an example of mapping an attribute to an object with missing fields.
 
 "WorkOrderId": "3",
 
-"Address": \[
+"Address": [
 
 {
 
@@ -316,12 +308,10 @@ This is an example of mapping an attribute to an object with missing fields.
 "AddressType": "ORD"
 
 }
-
-\]
+]
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -347,7 +337,7 @@ This is an example of mapping an attribute to an object with a null field value.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"WorkOrder": \[
+"WorkOrder": [
 
 {
 
@@ -372,8 +362,7 @@ This is an example of mapping an attribute to an object with a null field value.
 "AddressId": null
 
 }
-
-\]
+]
 
 }
 
@@ -381,13 +370,13 @@ Output
 
 {
 
-"WorkOrder": \[
+"WorkOrder": [
 
 {
 
 "WorkOrderId": "1",
 
-"Address": \[
+"Address": [
 
 {
 
@@ -398,8 +387,7 @@ Output
 "AddressType": "ORD"
 
 }
-
-\]
+]
 
 },
 
@@ -407,7 +395,7 @@ Output
 
 "WorkOrderId": "2",
 
-"Address": \[
+"Address": [
 
 {
 
@@ -418,8 +406,7 @@ Output
 "AddressType": "ORD"
 
 }
-
-\]
+]
 
 },
 
@@ -427,7 +414,7 @@ Output
 
 "WorkOrderId": "3",
 
-"Address": \[
+"Address": [
 
 {
 
@@ -436,12 +423,10 @@ Output
 "AddressType": "ORD"
 
 }
-
-\]
+]
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -463,7 +448,7 @@ This is an example of concatenation mapping from a child.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"Customers": \[
+"Customers": [
 
 {
 
@@ -506,8 +491,7 @@ This is an example of concatenation mapping from a child.
 }
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -515,7 +499,7 @@ This is an example of concatenation mapping from a child.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"Customers": \[
+"Customers": [
 
 {
 
@@ -540,8 +524,7 @@ This is an example of concatenation mapping from a child.
 "Name": "First3 Last3"
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -570,7 +553,7 @@ This is an example of concatenation mapping.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"A": \[
+"A": [
 
 {
 
@@ -579,8 +562,7 @@ This is an example of concatenation mapping.
 "P2": "value2"
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -588,15 +570,14 @@ This is an example of concatenation mapping.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"A": \[
+"A": [
 
 {
 
 "Q1": "value1-value2",
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -622,11 +603,11 @@ This is an example of mapping concatenation with a child attribute.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"EAM_WO_HDR": \[
+"EAM_WO_HDR": [
 
 {
 
-"EAM_WO_Address": \[
+"EAM_WO_Address": [
 
 {
 
@@ -635,12 +616,10 @@ This is an example of mapping concatenation with a child attribute.
 "P2": "value2"
 
 }
-
-\]
+]
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -648,15 +627,14 @@ This is an example of mapping concatenation with a child attribute.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"Address": \[
+"Address": [
 
 {
 
 "Q1": "value1-value2"
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -682,7 +660,7 @@ This is an example of concatenation with dollar mapping.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"A": \[
+"A": [
 
 {
 
@@ -691,8 +669,7 @@ This is an example of concatenation with dollar mapping.
 "P2": "value2"
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -700,15 +677,14 @@ This is an example of concatenation with dollar mapping.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"A": \[
+"A": [
 
 {
 
 "Q1": "value1$value2"
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -734,7 +710,7 @@ This is an example of conditional mapping.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"Customers": \[
+"Customers": [
 
 {
 
@@ -777,8 +753,7 @@ This is an example of conditional mapping.
 "Completed": "",
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -786,7 +761,7 @@ This is an example of conditional mapping.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"Customers": \[
+"Customers": [
 
 {
 
@@ -811,8 +786,7 @@ This is an example of conditional mapping.
 "Status": "InProgress"
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -863,7 +837,7 @@ This is an example of conditional mapping that uses a choose-when-otherwise bloc
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"Customers": \[
+"Customers": [
 
 {
 
@@ -920,8 +894,7 @@ This is an example of conditional mapping that uses a choose-when-otherwise bloc
 "Completed": "",
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -929,7 +902,7 @@ This is an example of conditional mapping that uses a choose-when-otherwise bloc
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"Customers": \[
+"Customers": [
 
 {
 
@@ -963,7 +936,7 @@ This is an example of conditional mapping that uses a choose-when-otherwise bloc
 
 },
 
-\]
+]
 
 }</code></pre>
 
@@ -1018,7 +991,7 @@ This is an example of field mapping.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"A": \[
+"A": [
 
 {
 
@@ -1035,8 +1008,7 @@ This is an example of field mapping.
 "P2": "A-row2-p2"
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -1044,7 +1016,7 @@ This is an example of field mapping.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"M": \[
+"M": [
 
 {
 
@@ -1061,8 +1033,7 @@ This is an example of field mapping.
 "Q2": "A-row2-p2"
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -1094,7 +1065,7 @@ This is an example of global mapper output mapping.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"Customers": \[
+"Customers": [
 
 {
 
@@ -1151,8 +1122,7 @@ This is an example of global mapper output mapping.
 "Completed": "",
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -1162,7 +1132,7 @@ This is an example of global mapper output mapping.
 
 "Error-Message": "Unknown element.",
 
-"Customers": \[
+"Customers": [
 
 {
 
@@ -1193,8 +1163,7 @@ This is an example of global mapper output mapping.
 "Id": "104",
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -1248,7 +1217,7 @@ This is an example of mapping a second global mapper output.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"Customers": \[
+"Customers": [
 
 {
 
@@ -1305,8 +1274,7 @@ This is an example of mapping a second global mapper output.
 "Completed": "",
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -1316,7 +1284,7 @@ This is an example of mapping a second global mapper output.
 
 "Error-Message": "Unknown element.",
 
-"Customers": \[
+"Customers": [
 
 {
 
@@ -1349,8 +1317,7 @@ This is an example of mapping a second global mapper output.
 },
 
 {}
-
-\]
+]
 
 }</code></pre>
 
@@ -1407,11 +1374,11 @@ This is an example of mapping an independent object structure.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"WorkOrder": \[
+"WorkOrder": [
 
 {
 
-"Address": \[
+"Address": [
 
 {
 
@@ -1436,14 +1403,13 @@ This is an example of mapping an independent object structure.
 "SecondaryContactId": "123457"
 
 }
-
-\]
+]
 
 },
 
 {
 
-"workOrderContacts": \[
+"workOrderContacts": [
 
 {
 
@@ -1468,14 +1434,12 @@ This is an example of mapping an independent object structure.
 "SecondaryContactId": "1234568"
 
 }
+]
 
-\]
-
-\]
+]
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -1483,11 +1447,11 @@ This is an example of mapping an independent object structure.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"WorkOrderContacts": \[
+"WorkOrderContacts": [
 
 {
 
-"Contacts": \[
+"Contacts": [
 
 {
 
@@ -1504,14 +1468,13 @@ This is an example of mapping an independent object structure.
 "SecondaryContactId": "1234567"
 
 }
-
-\]
+]
 
 },
 
 {
 
-"Contacts": \[
+"Contacts": [
 
 {
 
@@ -1528,12 +1491,10 @@ This is an example of mapping an independent object structure.
 "SecondaryContactId": "1234568"
 
 }
-
-\]
+]
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -1563,7 +1524,7 @@ This is an example of mapping a looping filter.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"Persons": \[
+"Persons": [
 
 {
 
@@ -1604,8 +1565,7 @@ This is an example of mapping a looping filter.
 "Name": "Customer2",
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -1613,7 +1573,7 @@ This is an example of mapping a looping filter.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"Employee": \[
+"Employee": [
 
 {
 
@@ -1633,7 +1593,7 @@ This is an example of mapping a looping filter.
 
 {
 
-"Customer": \[
+"Customer": [
 
 {
 
@@ -1689,7 +1649,7 @@ This is an example of one to N split mapping.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"WorkOrder": \[
+"WorkOrder": [
 
 {
 
@@ -1699,7 +1659,7 @@ This is an example of one to N split mapping.
 
 "CustomerId": "201",
 
-"Contacts": \[
+"Contacts": [
 
 {
 
@@ -1712,8 +1672,7 @@ This is an example of one to N split mapping.
 "Id": "401"
 
 }
-
-\]
+]
 
 },
 
@@ -1725,7 +1684,7 @@ This is an example of one to N split mapping.
 
 "CustomerId": "601",
 
-"Contacts": \[
+"Contacts": [
 
 {
 
@@ -1739,7 +1698,7 @@ This is an example of one to N split mapping.
 
 },
 
-\]
+]
 
 },
 
@@ -1751,7 +1710,7 @@ This is an example of one to N split mapping.
 
 "CustomerId": "202",
 
-"Contacts": \[
+"Contacts": [
 
 {
 
@@ -1764,12 +1723,10 @@ This is an example of one to N split mapping.
 "Id": "402"
 
 }
-
-\]
+]
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -1777,13 +1734,13 @@ This is an example of one to N split mapping.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"WorkOrder": \[
+"WorkOrder": [
 
 {
 
 "WorkOrderId": "1",
 
-"Address": \[
+"Address": [
 
 {
 
@@ -1817,7 +1774,7 @@ This is an example of one to N split mapping.
 
 },
 
-\]
+]
 
 },
 
@@ -1825,7 +1782,7 @@ This is an example of one to N split mapping.
 
 "WorkOrderId": "3",
 
-"Address": \[
+"Address": [
 
 {
 
@@ -1850,8 +1807,7 @@ This is an example of one to N split mapping.
 "AddressType": "CONTACT"
 
 }
-
-\]
+]
 
 },
 
@@ -1859,7 +1815,7 @@ This is an example of one to N split mapping.
 
 "WorkOrderId": "1",
 
-"Address": \[
+"Address": [
 
 {
 
@@ -1892,12 +1848,10 @@ This is an example of one to N split mapping.
 "AddressType": "CONTACT"
 
 }
-
-\]
+]
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -1939,11 +1893,11 @@ This is an example of mapping an optional input path .
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"WorkOrder": \[
+"WorkOrder": [
 
 {
 
-"Address": \[
+"Address": [
 
 {
 
@@ -1968,14 +1922,13 @@ This is an example of mapping an optional input path .
 "SecondaryContactId": "123457"
 
 }
-
-\]
+]
 
 },
 
 {
 
-"Address": \[
+"Address": [
 
 {
 
@@ -2000,12 +1953,10 @@ This is an example of mapping an optional input path .
 "SecondaryContactId": "1234568"
 
 }
-
-\]
+]
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -2013,7 +1964,7 @@ This is an example of mapping an optional input path .
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"Address": \[
+"Address": [
 
 {
 
@@ -2021,7 +1972,7 @@ This is an example of mapping an optional input path .
 
 "AddressId": "101",
 
-"Contact": \[
+"Contact": [
 
 {
 
@@ -2030,8 +1981,7 @@ This is an example of mapping an optional input path .
 "SecondaryContactId": "123456"
 
 }
-
-\]
+]
 
 },
 
@@ -2041,7 +1991,7 @@ This is an example of mapping an optional input path .
 
 "AddressId": "102",
 
-"Contact": \[
+"Contact": [
 
 {
 
@@ -2050,8 +2000,7 @@ This is an example of mapping an optional input path .
 "SecondaryContactId": "123457"
 
 }
-
-\]
+]
 
 },
 
@@ -2061,7 +2010,7 @@ This is an example of mapping an optional input path .
 
 "AddressId": "103",
 
-"Contact": \[
+"Contact": [
 
 {
 
@@ -2070,8 +2019,7 @@ This is an example of mapping an optional input path .
 "SecondaryContactId": "1234567"
 
 }
-
-\]
+]
 
 },
 
@@ -2081,7 +2029,7 @@ This is an example of mapping an optional input path .
 
 "AddressId": "104",
 
-"Contact": \[
+"Contact": [
 
 {
 
@@ -2090,12 +2038,10 @@ This is an example of mapping an optional input path .
 "SecondaryContactId": "1234568"
 
 }
-
-\]
+]
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -2121,13 +2067,13 @@ This is an example of mapping an optional output path.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"WorkOrder": \[
+"WorkOrder": [
 
 {
 
 "CustomerId": "1",
 
-"Address": \[
+"Address": [
 
 {
 
@@ -2148,8 +2094,7 @@ This is an example of mapping an optional output path.
 "SecondaryContactId": "123457"
 
 }
-
-\]
+]
 
 },
 
@@ -2157,7 +2102,7 @@ This is an example of mapping an optional output path.
 
 "CustomerId": "3",
 
-"Address": \[
+"Address": [
 
 {
 
@@ -2178,12 +2123,10 @@ This is an example of mapping an optional output path.
 "SecondaryContactId": "1234568"
 
 }
-
-\]
+]
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -2191,7 +2134,7 @@ This is an example of mapping an optional output path.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"Address": \[
+"Address": [
 
 {
 
@@ -2216,8 +2159,7 @@ This is an example of mapping an optional output path.
 "SecondaryContactId": "1234568"
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -2243,31 +2185,29 @@ This is an example of mapping parent attributes to different child objects.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"EAM_CONTACTS": \[
+"EAM_CONTACTS": [
 
 {
 
 "ContactNo": "101",
 
-"EAM_CONT_ADDRESS": \[
+"EAM_CONT_ADDRESS": [
 
 {
 
 "Name1": "xyz"
 
 }
+],
 
-\],
-
-"EAM_CONT_MISC": \[
+"EAM_CONT_MISC": [
 
 {
 
 "PREFERENCES": "PrefOne"
 
 }
-
-\]
+]
 
 },
 
@@ -2275,29 +2215,26 @@ This is an example of mapping parent attributes to different child objects.
 
 "ContactNo": "102",
 
-"EAM_CONT_ADDRESS": \[
+"EAM_CONT_ADDRESS": [
 
 {
 
 "Name1": "abc"
 
 }
+],
 
-\],
-
-"EAM_CONT_MISC": \[
+"EAM_CONT_MISC": [
 
 {
 
 "PREFERENCES": "PrefTwo"
 
 }
-
-\]
+]
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -2305,7 +2242,7 @@ This is an example of mapping parent attributes to different child objects.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"Contact": \[
+"Contact": [
 
 {
 
@@ -2326,8 +2263,7 @@ This is an example of mapping parent attributes to different child objects.
 "Preferences": "PrefTwo"
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -2350,11 +2286,11 @@ This is an example of primary to secondary mapping.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"WorkOrder": \[
+"WorkOrder": [
 
 {
 
-"Address": \[
+"Address": [
 
 {
 
@@ -2379,14 +2315,13 @@ This is an example of primary to secondary mapping.
 "SecondaryContactId": "123457"
 
 }
-
-\]
+]
 
 },
 
 {
 
-"Address": \[
+"Address": [
 
 {
 
@@ -2411,12 +2346,10 @@ This is an example of primary to secondary mapping.
 "SecondaryContactId": "1234568"
 
 }
-
-\]
+]
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -2424,7 +2357,7 @@ This is an example of primary to secondary mapping.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"Address": \[
+"Address": [
 
 {
 
@@ -2432,7 +2365,7 @@ This is an example of primary to secondary mapping.
 
 "AddressId": "101",
 
-"WorkOrderContacts": \[
+"WorkOrderContacts": [
 
 {
 
@@ -2441,8 +2374,7 @@ This is an example of primary to secondary mapping.
 "SecondaryContactId": "123456"
 
 }
-
-\]
+]
 
 },
 
@@ -2452,7 +2384,7 @@ This is an example of primary to secondary mapping.
 
 "AddressId": "102",
 
-"WorkOrderContacts": \[
+"WorkOrderContacts": [
 
 {
 
@@ -2461,8 +2393,7 @@ This is an example of primary to secondary mapping.
 "SecondaryContactId": "123457"
 
 }
-
-\]
+]
 
 },
 
@@ -2472,7 +2403,7 @@ This is an example of primary to secondary mapping.
 
 "AddressId": "103",
 
-"WorkOrderContacts": \[
+"WorkOrderContacts": [
 
 {
 
@@ -2481,8 +2412,7 @@ This is an example of primary to secondary mapping.
 "SecondaryContactId": "1234567"
 
 }
-
-\]
+]
 
 },
 
@@ -2492,7 +2422,7 @@ This is an example of primary to secondary mapping.
 
 "AddressId": "104",
 
-"WorkOrderContacts": \[
+"WorkOrderContacts": [
 
 {
 
@@ -2501,12 +2431,10 @@ This is an example of primary to secondary mapping.
 "SecondaryContactId": "1234568"
 
 }
-
-\]
+]
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -2532,7 +2460,7 @@ This is an example of mapping using the random function.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"A": \[
+"A": [
 
 {
 
@@ -2545,8 +2473,7 @@ This is an example of mapping using the random function.
 "P1": "A-row2-p1"
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -2554,7 +2481,7 @@ This is an example of mapping using the random function.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"M": \[
+"M": [
 
 {
 
@@ -2571,8 +2498,7 @@ This is an example of mapping using the random function.
 "Q2": ""
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -2596,11 +2522,11 @@ This is an example of referencing only a child object.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"WorkOrder": \[
+"WorkOrder": [
 
 {
 
-"Address": \[
+"Address": [
 
 {
 
@@ -2625,14 +2551,13 @@ This is an example of referencing only a child object.
 "SecondaryContactId": "123457"
 
 }
-
-\]
+]
 
 },
 
 {
 
-"Address": \[
+"Address": [
 
 {
 
@@ -2657,12 +2582,10 @@ This is an example of referencing only a child object.
 "SecondaryContactId": "1234568"
 
 }
-
-\]
+]
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -2670,7 +2593,7 @@ This is an example of referencing only a child object.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"Address": \[
+"Address": [
 
 {
 
@@ -2719,8 +2642,7 @@ This is an example of referencing only a child object.
 "SecondaryContactId": "1234568"
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -2744,7 +2666,7 @@ This is an example of reverse parent-child mapping.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"WorkOrder": \[
+"WorkOrder": [
 
 {
 
@@ -2752,7 +2674,7 @@ This is an example of reverse parent-child mapping.
 
 "Name": "WorkOrder1",
 
-"Tasks": \[
+"Tasks": [
 
 {
 
@@ -2769,8 +2691,7 @@ This is an example of reverse parent-child mapping.
 "Name": "Task102"
 
 }
-
-\]
+]
 
 },
 
@@ -2780,7 +2701,7 @@ This is an example of reverse parent-child mapping.
 
 "Name": "WorkOrder2",
 
-"Tasks": \[
+"Tasks": [
 
 {
 
@@ -2797,12 +2718,10 @@ This is an example of reverse parent-child mapping.
 "Name": "Task104"
 
 }
-
-\]
+]
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -2810,7 +2729,7 @@ This is an example of reverse parent-child mapping.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"Tasks": \[
+"Tasks": [
 
 {
 
@@ -2818,7 +2737,7 @@ This is an example of reverse parent-child mapping.
 
 "Name": "Task101",
 
-"WorkOrder": \[
+"WorkOrder": [
 
 {
 
@@ -2828,7 +2747,7 @@ This is an example of reverse parent-child mapping.
 
 },
 
-\]
+]
 
 },
 
@@ -2838,7 +2757,7 @@ This is an example of reverse parent-child mapping.
 
 "Name": "Task102",
 
-"WorkOrder": \[
+"WorkOrder": [
 
 {
 
@@ -2848,7 +2767,7 @@ This is an example of reverse parent-child mapping.
 
 },
 
-\]
+]
 
 },
 
@@ -2858,7 +2777,7 @@ This is an example of reverse parent-child mapping.
 
 "Name": "Task103",
 
-"WorkOrder": \[
+"WorkOrder": [
 
 {
 
@@ -2868,7 +2787,7 @@ This is an example of reverse parent-child mapping.
 
 },
 
-\]
+]
 
 },
 
@@ -2878,7 +2797,7 @@ This is an example of reverse parent-child mapping.
 
 "Name": "Task104",
 
-"WorkOrder": \[
+"WorkOrder": [
 
 {
 
@@ -2887,12 +2806,10 @@ This is an example of reverse parent-child mapping.
 "Name": "WorkOrder2"
 
 }
-
-\]
+]
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -2918,7 +2835,7 @@ This is an example of a simple mapping list.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"A": \[
+"A": [
 
 {
 
@@ -2935,8 +2852,7 @@ This is an example of a simple mapping list.
 "P2": "A-row2-p2"
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -2944,7 +2860,7 @@ This is an example of a simple mapping list.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"M": \[
+"M": [
 
 {
 
@@ -2961,8 +2877,7 @@ This is an example of a simple mapping list.
 "Q2": "A-row2-p2"
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -2984,7 +2899,7 @@ This is an example of a simple mapping list with one row.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"A": \[
+"A": [
 
 {
 
@@ -2993,8 +2908,7 @@ This is an example of a simple mapping list with one row.
 "P2": "A-row1-p2"
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -3002,7 +2916,7 @@ This is an example of a simple mapping list with one row.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"M": \[
+"M": [
 
 {
 
@@ -3011,8 +2925,7 @@ This is an example of a simple mapping list with one row.
 "Q2": "A-row1-p2"
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -3034,15 +2947,14 @@ This is an example of simple split mapping using the substringbefore and substri
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"A": \[
+"A": [
 
 {
 
 "Name": "First Last"
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -3050,7 +2962,7 @@ This is an example of simple split mapping using the substringbefore and substri
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"A": \[
+"A": [
 
 {
 
@@ -3059,8 +2971,7 @@ This is an example of simple split mapping using the substringbefore and substri
 "LastName": "Last"
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -3090,7 +3001,7 @@ This is an example of split table mapping.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"Customer": \[
+"Customer": [
 
 {
 
@@ -3107,8 +3018,7 @@ This is an example of split table mapping.
 "AddressID": "Address2"
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -3116,7 +3026,7 @@ This is an example of split table mapping.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"Customer": \[
+"Customer": [
 
 {
 
@@ -3129,10 +3039,9 @@ This is an example of split table mapping.
 "CustomerInfo": "Customer2"
 
 }
+],
 
-\],
-
-"CustomerAddress": \[
+"CustomerAddress": [
 
 {
 
@@ -3145,8 +3054,7 @@ This is an example of split table mapping.
 "AddressID": "Address2"
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -3170,13 +3078,13 @@ This is an example of split table filter mapping.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"WorkOrder": \[
+"WorkOrder": [
 
 {
 
 "Id": "1",
 
-"WorkOrderData": \[
+"WorkOrderData": [
 
 {
 
@@ -3226,7 +3134,7 @@ This is an example of split table filter mapping.
 
 },
 
-\]
+]
 
 },
 
@@ -3234,7 +3142,7 @@ This is an example of split table filter mapping.
 
 "Id": "2",
 
-"WorkOrderData": \[
+"WorkOrderData": [
 
 {
 
@@ -3283,12 +3191,10 @@ This is an example of split table filter mapping.
 "Name": "Contact-2-2"
 
 }
-
-\]
+]
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -3296,7 +3202,7 @@ This is an example of split table filter mapping.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"WorkOrder": \[
+"WorkOrder": [
 
 {
 
@@ -3306,7 +3212,7 @@ This is an example of split table filter mapping.
 
 "AddressId": "102",
 
-"Contacts": \[
+"Contacts": [
 
 {
 
@@ -3323,8 +3229,7 @@ This is an example of split table filter mapping.
 "Name": "Contact-1-2"
 
 }
-
-\]
+]
 
 },
 
@@ -3336,7 +3241,7 @@ This is an example of split table filter mapping.
 
 "AddressId": "202",
 
-"Contacts": \[
+"Contacts": [
 
 {
 
@@ -3353,12 +3258,10 @@ This is an example of split table filter mapping.
 "Name": "Contact-2-2"
 
 }
-
-\]
+]
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -3407,7 +3310,7 @@ This is an example of static lookup mapping.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"WorkOrder": \[
+"WorkOrder": [
 
 {
 
@@ -3424,8 +3327,7 @@ This is an example of static lookup mapping.
 "Status": "InProgress"
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -3433,7 +3335,7 @@ This is an example of static lookup mapping.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"WorkOrder": \[
+"WorkOrder": [
 
 {
 
@@ -3450,8 +3352,7 @@ This is an example of static lookup mapping.
 "Status": "INCOMPLETE"
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -3477,7 +3378,7 @@ This is an example of mapping two child objects to the same entity.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"EAM_WO_OPERATION": \[
+"EAM_WO_OPERATION": [
 
 {
 
@@ -3650,8 +3551,7 @@ This is an example of mapping two child objects to the same entity.
 }
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -3659,7 +3559,7 @@ This is an example of mapping two child objects to the same entity.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"Task": \[
+"Task": [
 
 {
 
@@ -3671,7 +3571,7 @@ This is an example of mapping two child objects to the same entity.
 
 "Code": "000004000121",
 
-"WorkOrderMaterial": \[
+"WorkOrderMaterial": [
 
 {
 
@@ -3704,12 +3604,10 @@ This is an example of mapping two child objects to the same entity.
 "Item": "R"
 
 }
-
-\]
+]
 
 }
-
-\]
+]
 
 }</code></pre>
 
@@ -3749,7 +3647,7 @@ This is an example of enterprise asset management (EAM) notification mapping.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"EAM_NOTIF": \[
+"EAM_NOTIF": [
 
 {
 
@@ -3871,7 +3769,7 @@ This is an example of enterprise asset management (EAM) notification mapping.
 
 "TIMESTAMP": "20150812124739",
 
-"EAM_NOTIFICATION_ADDRESS": \[
+"EAM_NOTIFICATION_ADDRESS": [
 
 {
 
@@ -4030,8 +3928,7 @@ This is an example of enterprise asset management (EAM) notification mapping.
 }
 
 }
-
-\]
+]
 
 },
 
@@ -4155,7 +4052,7 @@ This is an example of enterprise asset management (EAM) notification mapping.
 
 "TIMESTAMP": "20150812124739",
 
-"EAM_NOTIFICATION_ADDRESS": \[
+"EAM_NOTIFICATION_ADDRESS": [
 
 {
 
@@ -4314,8 +4211,7 @@ This is an example of enterprise asset management (EAM) notification mapping.
 }
 
 }
-
-\]
+]
 
 },
 
@@ -4439,7 +4335,7 @@ This is an example of enterprise asset management (EAM) notification mapping.
 
 "TIMESTAMP": "20150812124739",
 
-"EAM_NOTIFICATION_ADDRESS": \[
+"EAM_NOTIFICATION_ADDRESS": [
 
 {
 
@@ -4598,8 +4494,7 @@ This is an example of enterprise asset management (EAM) notification mapping.
 }
 
 }
-
-\]
+]
 
 },
 
@@ -4723,7 +4618,7 @@ This is an example of enterprise asset management (EAM) notification mapping.
 
 "TIMESTAMP": "20150812124739",
 
-"EAM_NOTIFICATION_ADDRESS": \[
+"EAM_NOTIFICATION_ADDRESS": [
 
 {
 
@@ -4882,8 +4777,7 @@ This is an example of enterprise asset management (EAM) notification mapping.
 }
 
 }
-
-\]
+]
 
 },</code></pre>
 
@@ -4891,7 +4785,7 @@ This is an example of enterprise asset management (EAM) notification mapping.
 
 <pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
 
-"Notification": \[
+"Notification": [
 
 {
 
@@ -4995,7 +4889,7 @@ This is an example of enterprise asset management (EAM) notification mapping.
 
 "ADDR_NO_LOC": "23380",
 
-"Address": \[
+"Address": [
 
 {
 
@@ -5074,10 +4968,9 @@ This is an example of enterprise asset management (EAM) notification mapping.
 "TIMESTAMP": "20150921112449"
 
 }
+],
 
-\],
-
-"Contacts": \[
+"Contacts": [
 
 {
 
@@ -5132,8 +5025,7 @@ This is an example of enterprise asset management (EAM) notification mapping.
 "TIMESTAMP": "20150812124739"
 
 }
-
-\]
+]
 
 },
 
@@ -5239,7 +5131,7 @@ This is an example of enterprise asset management (EAM) notification mapping.
 
 "ADDR_NO_LOC": "23380",
 
-"Address": \[
+"Address": [
 
 {
 
@@ -5318,10 +5210,9 @@ This is an example of enterprise asset management (EAM) notification mapping.
 "TIMESTAMP": "20150921112449"
 
 }
+],
 
-\],
-
-"Contacts": \[
+"Contacts": [
 
 {
 
@@ -5376,8 +5267,7 @@ This is an example of enterprise asset management (EAM) notification mapping.
 "TIMESTAMP": "20150812124739"
 
 }
-
-\]
+]
 
 },
 
@@ -5483,7 +5373,7 @@ This is an example of enterprise asset management (EAM) notification mapping.
 
 "ADDR_NO_LOC": "23380",
 
-"Address": \[
+"Address": [
 
 {
 
@@ -5562,10 +5452,9 @@ This is an example of enterprise asset management (EAM) notification mapping.
 "TIMESTAMP": "20150921112449"
 
 }
+],
 
-\],
-
-"Contacts": \[
+"Contacts": [
 
 {
 
@@ -5620,8 +5509,7 @@ This is an example of enterprise asset management (EAM) notification mapping.
 "TIMESTAMP": "20150812124739"
 
 }
-
-\]
+]
 
 },
 
@@ -5727,7 +5615,7 @@ This is an example of enterprise asset management (EAM) notification mapping.
 
 "ADDR_NO_LOC": "23380",
 
-"Address": \[
+"Address": [
 
 {
 
@@ -5806,10 +5694,9 @@ This is an example of enterprise asset management (EAM) notification mapping.
 "TIMESTAMP": "20150921112449"
 
 }
+],
 
-\],
-
-"Contacts": \[
+"Contacts": [
 
 {
 
@@ -5864,12 +5751,10 @@ This is an example of enterprise asset management (EAM) notification mapping.
 "TIMESTAMP": "20150812124739"
 
 }
-
-\]
+]
 
 }
-
-\]
+]
 
 }</code></pre>
 
