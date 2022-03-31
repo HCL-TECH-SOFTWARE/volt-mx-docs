@@ -4,7 +4,7 @@ category: "voltmx_foundry_user_guide"
 ---
                                
 
-User Guide: [APIs in API Management](API_Management.html) > [Logic in API Management](Logic.html) > [Node.js Services Integration in Foundry](Logic.html#node-js-services-integration-in-foundry) > How to Unpublish a Package from Node.js Runtime Server
+User Guide: [APIs in API Management](API_Management.html) > [Logic in API Management](Logic.html) > How to Unpublish a Package from Node.js Runtime Server
 
 ### How to Publish a Node.js Package into Node.js Runtime Server in API Management
 
