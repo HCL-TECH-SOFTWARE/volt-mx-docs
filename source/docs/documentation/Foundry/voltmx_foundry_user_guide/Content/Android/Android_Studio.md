@@ -30,6 +30,7 @@ To configure voltmx-sdk.jar file, follow these steps:
 
 5.  Select the form factors and platforms, and click **Next**.
 6.  Add activity as follows:
+
     - If you select an **Activity**, the **Next** button is activated. Provide the name for the activity and click **Finish**.
     - If you select **Add No Activity**, the **Finish** button is activated. The project is created without user interface.
 
@@ -38,6 +39,7 @@ To configure voltmx-sdk.jar file, follow these steps:
       ![](../Resources/Images/AndStu5_623x413.png)
       <br/>
       Your project is created. Now You need add the required Volt MX SDK libraries to the project.
+
 7.  To import SDK libraries to your project, follow these steps:
     1.  Unzip the `VoltMX Android SDK.zip`.
     2.  Copy the `voltmx-sdk.jar` and paste it to `/app/libs/` folder in your project.
@@ -49,10 +51,10 @@ To configure voltmx-sdk.jar file, follow these steps:
 
 9.  Add the following permissions in your `AndroidManifest.xml`:
 
-    1.  `<uses-permission android:name="android.permission.INTERNET" />`<br/>
-    2.  `<uses-permission android:name="android.permission.ACCESS\_NETWORK\_STATE" />`<br/>
-    3.  `<uses-permission android:name="android.permission.ACCESS\_WIFI\_STATE" />`<br/>
-    4.  `<uses-permission android:name="android.permission.READ\_PHONE\_STATE"/>`<br/>
+    1.  <code class="language-plaintext highlighter-rouge" style="background-color:white; border:none">&lt;uses-permission android:name="android.permission.INTERNET" /&gt;</code>
+    2.  <code class="language-plaintext highlighter-rouge" style="background-color:white; border:none">&lt;uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /&gt;</code>
+    3.  <code class="language-plaintext highlighter-rouge" style="background-color:white; border:none">&lt;uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /&gt;</code>
+    4.  <code class="language-plaintext highlighter-rouge" style="background-color:white; border:none">&lt;uses-permission android:name="android.permission.READ_PHONE_STATE"/&gt;</code>
 
     The `VoltMX-Android-SDK` is now successfully configured in your project. Now you can use Volt MX APIs for Android platform.
 
