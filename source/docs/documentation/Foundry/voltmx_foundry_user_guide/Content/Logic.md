@@ -140,7 +140,7 @@ How Node.js Works in Volt MX Foundry
 1.  Once you build a node.js package (in a .zip file), you need to import the package file into Volt MX Foundry Console.
 2.  Publish the Node.js package into the Node.js runtime server through the console.
     
-    Node.js services published from the package are available in the **VoltMX Foundry Console > Apps > Configure Services > Logic** tab.
+    Node.js services published from the package are available in the **VoltMX Foundry Console > Apps > Configure Services**.
     
 3.  You can then integrate/associate services created in Node.js packages to Volt MX Foundry applications.
 4.  Finally, the app needs to be published by selecting a Node.js environment.
@@ -241,7 +241,7 @@ Troubleshooting
 } 
 {% endhighlight %}
 
-**Error**: If you see the following error, unpublish the user package from the **API Management > Logic** tab, and re-publish it.
+**Error**: If you see the following error, unpublish the user package from the **API Management**, and re-publish it.
 
 {% highlight voltMx %} {
     "error": "Connection error."
