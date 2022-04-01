@@ -336,9 +336,11 @@ Perform the following steps to write a custom query:
     ![](Resources/Images/sql-query2.PNG)
 *   In the right pane, write the required SQL query.
 
-*   To include any input parameters in statement, mark them with @. For example, @inputparam1. Here is the sample code for it.  
-    {% highlight voltMx %}Select * from VOLTMXUNITTESTDATABASE.products where LASTUPDATETIME > @timestamp and SOFTDELETEFLAG = @boolean limit 100;
-    {% endhighlight %}
+*   To include any input parameters in statement, mark them with @. For example, @inputparam1. Here is the sample code for it.
+    <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
+    Select * from VOLTMXUNITTESTDATABASE.products where LASTUPDATETIME > @timestamp and SOFTDELETEFLAG = @boolean limit 100;
+    }</code></pre></figure>
+
     
     > **_Important:_** Make sure that you always provide a limit in the query to prevent server overload.
     

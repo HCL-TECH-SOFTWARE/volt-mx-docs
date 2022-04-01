@@ -170,12 +170,13 @@ The Test panel appears. You can use the Test panel to test the mapping for a met
     
     Implement this interface and write your custom preprocessor logic by overriding execute method. You are provided with _FoundryRequestManager_, _FoundryResponseManager_ and _FoundryRequestChain_ as method arguments.
     
-    {% highlight voltMx %} public interface ObjectServicePreProcessor {  
+    <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
+    public interface ObjectServicePreProcessor {  
     void execute(FoundryRequestManager foundryRequestManager,  
     FoundryResponseManager foundryResponseManager, FoundryRequestChain foundryRequestChain)  
     throws Exception;  
     }
-    {% endhighlight %}
+    }</code></pre></figure>
     
     **Method arguments:  
     _FoundryRequestManager_ :** This argument specifies the different types of handlers to operate on request related information.**  
@@ -188,11 +189,12 @@ The Test panel appears. You can use the Test panel to test the mapping for a met
     
     Implement this interface and write your custom postprocessor logic by overriding execute method. You are provided with _FoundryRequestManager and_ _FoundryResponseManager_ as method arguments.
     
-    {% highlight voltMx %} public interface ObjectServicePostProcessor {  
+    <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
+    public interface ObjectServicePostProcessor {  
     void execute(FoundryRequestManager foundryRequestManager,  
     FoundryResponseManager foundryResponseManager)throws Exception;  
     }
-    {% endhighlight %}
+    }</code></pre></figure> 
     
     **Method arguments:  
     _FoundryRequestManager_ :** This argument specifies the different types of handlers to operate on request related information.**  
