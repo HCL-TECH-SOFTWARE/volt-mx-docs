@@ -3,7 +3,6 @@ layout: "documentation"
 category: "voltmx_foundry_user_guide"
 ---
                               
-
 User Guide: [SDKs](../Foundry_SDKs.html) > [.NET (Visual Studio) SDK](Installing_Windows_SDK.html) > Downloading the .NET (Visual Studio) SDK
 
 Downloading .NET (Visual Studio) SDK Files

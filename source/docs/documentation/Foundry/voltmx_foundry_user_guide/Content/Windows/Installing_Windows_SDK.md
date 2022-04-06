@@ -16,10 +16,4 @@ This section describes how to download the .NET (Visual Studio) SDK files and i
 *   [Invoking an Integration Service](Invoking_Integration_Service_Windows.html)
 *   [Invoking a Metrics Service](Invoking_Metrics_Service_Windows.html)
 *   [Invoking an Object Service](Objects_API_Reference.html)
-
-
-<details close markdown="block"><summary>API Reference</summary>
-
-  To view the API Reference for Plain Windows, click [VoltMX Windows docset](http://docs.voltmx.com/8_x_PDFs/voltmxfoundry/voltmx_docsets/windows/Help/SDK1.0.html/index.html).
-
-</details>
+*   <details close markdown="block"><summary>API Reference</summary>To view the API Reference for Plain Windows, click <a href="http://docs.voltmx.com/8_x_PDFs/voltmxfoundry/voltmx_docsets/windows/Help/SDK1.0.html/index.html" target="_blank">VoltMX Windows docset.</a></details>
