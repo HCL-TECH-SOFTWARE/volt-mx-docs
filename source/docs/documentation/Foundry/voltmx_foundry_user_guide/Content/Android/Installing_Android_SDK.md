@@ -17,5 +17,6 @@ These steps show how to add the VoltMX-Android-SDK to your project and set up Vo
 - [Invoking a Sync Service](Invoking_Sync_Service_Android.html)
 - [Invoking a Metrics Service](Invoking_Metrics_Service_Android.html)
 - [Invoking an Object Service](Invoking_an_Object_Service.html)
-
-- <details close markdown="block"><summary>API Reference</summary>To view the API Reference for Volt MX Android, click <a href="http://docs.voltmx.com/8_x_PDFs/voltmxfoundry/voltmx_docsets/android/voltmx-sdk.doc/index.html" target="_blank">VoltMX Android docset.</a></details>
+- <details close markdown="block"><summary>API Reference</summary>
+  To view the API Reference for Volt MX Android, click <a href="http://docs.voltmx.com/8_x_PDFs/voltmxfoundry/voltmx_docsets/android/voltmx-sdk.doc/index.html" target="_blank">VoltMX Android docset.</a>
+  </details>
