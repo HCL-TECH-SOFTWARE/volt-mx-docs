@@ -311,65 +311,65 @@
 
     <p><img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Resources/Images/iOS/Linked_Binaries_and_Embedded_Frameworks_598x738.png" alt="" /></p>
   </li>
-  <li>For example, if you want to release an app to the AppStore and not include i386 and x86_64 architectures, you must add a script before building your project. To do so, follow these steps.
+  <li>
+    <p>For example, if you want to release an app to the AppStore and not include i386 and x86_64 architectures, you must add a script before building your project. To do so, follow these steps.</p>
+
     <ol>
       <li>Under the <strong>Build Phases</strong> tab, click the <strong>Add (+)</strong> button and select <strong>New Run Script Phase</strong> from the list. The Run Script section appears.</li>
-      <li>Type the following script in the text box.</li>
+      <li>Type the following script in the text box.
+        <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
+    echo "Target architectures: $ARCHS"
+            
+    APP_PATH="${TARGET_BUILD_DIR}/${WRAPPER_NAME}"
+            
+    find "$APP_PATH" -name '*.framework' -type d | while read -r FRAMEWORK
+    do
+    FRAMEWORK_EXECUTABLE_NAME=$(defaults read "$FRAMEWORK/Info.plist" CFBundleExecutable)
+    FRAMEWORK_EXECUTABLE_PATH="$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME"
+    echo "Executable is $FRAMEWORK_EXECUTABLE_PATH"
+    echo $(lipo -info "$FRAMEWORK_EXECUTABLE_PATH")
+            
+    FRAMEWORK_TMP_PATH="$FRAMEWORK_EXECUTABLE_PATH-tmp"
+    #remove simulator's archs if location is not simulator's directory
+    case "${TARGET_BUILD_DIR}" in
+    *"iphonesimulator")
+    echo "No need to remove archs"
+    ;;
+    *)
+    if $(lipo "$FRAMEWORK_EXECUTABLE_PATH" -verify_arch "i386") ; then
+    lipo -output "$FRAMEWORK_TMP_PATH" -remove "i386" "$FRAMEWORK_EXECUTABLE_PATH"
+    echo "i386 architecture removed"
+    rm "$FRAMEWORK_EXECUTABLE_PATH"
+    mv "$FRAMEWORK_TMP_PATH" "$FRAMEWORK_EXECUTABLE_PATH"
+    fi
+    if $(lipo "$FRAMEWORK_EXECUTABLE_PATH" -verify_arch "x86_64") ; then
+    lipo -output "$FRAMEWORK_TMP_PATH" -remove "x86_64" "$FRAMEWORK_EXECUTABLE_PATH"
+    echo "x86_64 architecture removed"
+    rm "$FRAMEWORK_EXECUTABLE_PATH"
+    mv "$FRAMEWORK_TMP_PATH" "$FRAMEWORK_EXECUTABLE_PATH"
+    fi
+    ;;
+    esac
+            
+    echo "Completed for executable $FRAMEWORK_EXECUTABLE_PATH"
+    echo $(lipo -info "$FRAMEWORK_EXECUTABLE_PATH")
+            
+    done
+            
+    cp Resources/* "$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH" &gt; /dev/null 2&gt; /dev/null
+    exit 0
+}</code></pre></figure>
+
+        <blockquote>
+          <p><strong><em>Note:</em></strong> This step should be the final step under the Build Phase. <br />
+    <img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Resources/Images/iOS/script_497x653.png" alt="" /></p>
+        </blockquote>
+      </li>
     </ol>
   </li>
-</ol>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">echo "Target architectures: $ARCHS"
-        
-        APP_PATH="${TARGET_BUILD_DIR}/${WRAPPER_NAME}"
-        
-        find "$APP_PATH" -name '*.framework' -type d | while read -r FRAMEWORK
-        do
-        FRAMEWORK_EXECUTABLE_NAME=$(defaults read "$FRAMEWORK/Info.plist" CFBundleExecutable)
-        FRAMEWORK_EXECUTABLE_PATH="$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME"
-        echo "Executable is $FRAMEWORK_EXECUTABLE_PATH"
-        echo $(lipo -info "$FRAMEWORK_EXECUTABLE_PATH")
-        
-        FRAMEWORK_TMP_PATH="$FRAMEWORK_EXECUTABLE_PATH-tmp"
-        #remove simulator's archs if location is not simulator's directory
-        case "${TARGET_BUILD_DIR}" in
-        *"iphonesimulator")
-        echo "No need to remove archs"
-        ;;
-        *)
-        if $(lipo "$FRAMEWORK_EXECUTABLE_PATH" -verify_arch "i386") ; then
-        lipo -output "$FRAMEWORK_TMP_PATH" -remove "i386" "$FRAMEWORK_EXECUTABLE_PATH"
-        echo "i386 architecture removed"
-        rm "$FRAMEWORK_EXECUTABLE_PATH"
-        mv "$FRAMEWORK_TMP_PATH" "$FRAMEWORK_EXECUTABLE_PATH"
-        fi
-        if $(lipo "$FRAMEWORK_EXECUTABLE_PATH" -verify_arch "x86_64") ; then
-        lipo -output "$FRAMEWORK_TMP_PATH" -remove "x86_64" "$FRAMEWORK_EXECUTABLE_PATH"
-        echo "x86_64 architecture removed"
-        rm "$FRAMEWORK_EXECUTABLE_PATH"
-        mv "$FRAMEWORK_TMP_PATH" "$FRAMEWORK_EXECUTABLE_PATH"
-        fi
-        ;;
-        esac
-        
-        echo "Completed for executable $FRAMEWORK_EXECUTABLE_PATH"
-        echo $(lipo -info "$FRAMEWORK_EXECUTABLE_PATH")
-        
-        done
-        
-        cp Resources/* "$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH" &gt; /dev/null 2&gt; /dev/null
-        exit 0
-        </code></pre></figure>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &gt; **_Note:_** This step should be the final step under the Build Phase.  
-      
-    &gt;![](/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Resources/Images/iOS/script_497x653.png)  
-</code></pre></div></div>
-
-<ol>
   <li>
-    <p>Add dependent libraries to your project, shown below:</p>
-
-    <p><img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Resources/Images/iOS/other_dependent_libraries_592x267.png" alt="" /></p>
+    <p>Add dependent libraries to your project, shown below: <br />
+<img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Resources/Images/iOS/other_dependent_libraries_592x267.png" alt="" /></p>
   </li>
   <li>
     <p>Add linker flags to your project , shown below:</p>
