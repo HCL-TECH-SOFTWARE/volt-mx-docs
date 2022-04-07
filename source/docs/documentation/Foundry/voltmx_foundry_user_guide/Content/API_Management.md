@@ -101,16 +101,6 @@ Volt MX Foundry Object Services enable model-driven application design and devel
     > <br/>
     > Services created under the **APIs** page are not linked to apps. You can link or unlink services to an app only through the **[Existing Services](ObjectsServices/ObjectservicesActions.html#Reuse)** dialog while you are adding apps.
 
-## Logic Service
-
-Volt MX Foundry logic services help you import and integrate Node.js services (APIs) directly into Volt MX Foundry for developing server-side and networking applications.
-
-### How to Integrate Node.js Services into Volt MX Foundry Apps using API Management
-
-1.  [How to Publish Node.js Package into Node.js Runtime Server in API Management](Logic_Publish_API_Management.html). This section details how to import a Node.js package into Volt MX Foundry Console and publish the package to the Node.js Runtime Server.
-2.  [How to Integrate Node.js Services into Volt MX Foundry Apps](Logic_in_Apps.html#how-to-integrate-node-js-services-into-foundry-apps). This section details how to integrate Node.js services to Volt MX Foundry apps.
-
-    > **_Note:_** For more details on how to Publish Node.js Package into Node.js Runtime Server in API Management, prerequisites, use case, limitations, and Node.js package structure, refer [Logic - API Management](Logic.html)
 
 ## How to View Associated Apps in APIs
 
