@@ -132,8 +132,8 @@ To configure the methods mapping, follow these steps:
 13.  In the navigation pane, click the **Orders** object.
 14.  For the **Get** verb, click **Advanced**.
 
-        *   The **Include Related Objects** field and the **Verb Security Level** field appear. The Include Related Objects setting specifies which part of the data model Object's hierarchy can be handled by the verb. This information helps in optimizing the number of calls to the back end in case the verb also deals with other objects in the hierarchy. You can multi-select multiple objects in the drop-down to specify the information.
-            
+        *   The **Include Related Objects** field and the **Verb Security Level** field appear. The Include Related Objects setting specifies which part of the data model Object's hierarchy can be handled by the verb. This information helps in optimizing the number of calls to the back end in case the verb also deals with other objects in the hierarchy. You can multi-select multiple objects in the drop-down to specify the information. 
+        
             ![](../Resources/Images/IncludeRelatedObjects_567x381.png)
             
         *   **Custom Code Invocation** section appears. Configure the parameters for the preprocessor and postprocessor to filter the request and response objects for your business requirements. You can specify multiple preprocessors and postprocessors. This is supported for integration/Orchestration services and Object services.
@@ -371,11 +371,11 @@ To test a published service, follow these steps:
     
     The result dialog displays the **Response** and **Log** tabs:
     
-    *   **Response** tab displays the final response of the service.
+    *   **Response** tab displays the final response of the service. <br />
         
         ![](../Resources/Images/ObjServ_Resp_549x227.png)
         
-    *   **Log** tab displays the following details
+    *   **Log** tab displays the following details <br />
         
         ![](../Resources/Images/ObjServ_Test_515x220.png)
         

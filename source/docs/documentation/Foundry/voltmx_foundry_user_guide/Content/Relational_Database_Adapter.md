@@ -163,7 +163,7 @@ The system displays the selected operation in the edit mode. You can perform fol
     
 
 
-9.<details close markdown="block"><summary> For additional configuration of request (or) response operations, provide the following details in the Advanced section.</summary>    
+5.  <details close markdown="block"><summary> For additional configuration of request (or) response operations, provide the following details in the Advanced section.</summary>    
     <table style="width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('../Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 174px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Custom Code Invocation</td><td class="TableStyle-Basic-BodyD-Column1-Body1">You can add pre and post processing logic to services to modify the request inputs. When you test, the services details of various stages in the service execution are presented to you for better debugging. All options in the Advanced section are optional. For more details, refer to <a href="Java_Preprocessor_Postprocessor_.html" target="_blank">Preprocessor and Postprocessor</a>.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Additional Configuration Properties</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Additional Configuration Properties allows you to configure service call time out cache response. For information on different types of configuration properties, refer <a href="Java_Preprocessor_Postprocessor_.html#timeout_cachable" target="_blank">Properties</a>.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">Front-end API</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Front-end API allows you map your endpoint (or) backend URL of an operation to a front-end URL. For detailed information, refer Custom <a href="FrontEndAPI.html" target="_blank">Front-end URL</a>.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">Server Events</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Using Server Events you can configure this service to trigger or process server side events. For detailed information, refer <a href="ServerEvents.html">Server Events</a>.</td></tr></tbody></table>
 </details>
     
@@ -410,14 +410,11 @@ Perform the following steps to write a custom query:
         *   Download throws an error if there are empty record in the backend.
         *   If you want specific columns to be selected using $select, you must have the ChangeTrackingColumn in $select.
         *   You must not give **$top/$skip** pair along with the **$batchsize/$batchid** pair.
-        
-        > **Note:**  
-          
         *   For the batching to work, in the RDBMS SDO flow, add the following in the **Response Mapping**:  
               
-            *   <set-param inputpath="nextBatchId" outputpath="nextBatchId"/>  
+            * `<set-param inputpath="nextBatchId" outputpath="nextBatchId"/> ` 
                   
-            *   <set-param inputpath="hasMoreRecords" outputpath="hasMoreRecords"/>  
+            *   `<set-param inputpath="hasMoreRecords" outputpath="hasMoreRecords"/>`  
                   
          ![](Resources/Images/Batching_607x362.png)
             
