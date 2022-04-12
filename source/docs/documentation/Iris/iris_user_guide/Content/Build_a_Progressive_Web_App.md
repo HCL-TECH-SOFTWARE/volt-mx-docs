@@ -24,7 +24,7 @@ For more information about Progressive Web Apps, click [here](ProgressiveWebApp.
 3.  Under **Progressive Web App**, select **Enable PWA**. The **Web Manifest JSON** field appears.
 4.  If you want to add information about the Progressive Web app with a manifest file, select **Browse**. The file explorer opens.  
     
-5.  Go to the folder where the JSON file is located, and then select your Web manifest file. The Web Manifest JSON file contains information on the resources that the Progressive Web App requires. The information can be details such as name of the app and app icons. Click [here](http://docs.voltmx.com/voltmxlibrary/iris/zip/user_guide/PWAwebManifest.zip) for a sample.
+5.  Go to the folder where the JSON file is located, and then select your Web manifest file. The Web Manifest JSON file contains information on the resources that the Progressive Web App requires. The information can be details such as name of the app and app icons. Click [here](https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/iris/zip/user_guide/PWAwebManifest.zip) for a sample.
 6.  Click **Done**.  
     
 7.  From the Build menu of Volt MX Iris, select **Build and Publish Web**.  
