@@ -73,15 +73,15 @@ Now do the same thing from JavaScript in Iris using the Native Function API for 
 2.  Add a form to your project.
 3.  Add a [button]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Button.html?Highlight=add a button) and a [label]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Label.html?Highlight=label) to your form.
 4.  Add a JavaScript module to your project.
-5.  In the JavaScript module, create this function, where frmMain is the name of your form, and log is the name of your label.{% highlight voltMx %}function testNativeFunctionAPI() {
-        var String = java.import("("
-            java.lang.String ");
-    	var format = string.format("
-            Hello % s !! Enjoy your day ",["
-            World "]);
-    	frmMain.log.text = format;
-    }
-    {% endhighlight %}
+5.  In the JavaScript module, create this function, where frmMain is the name of your form, and log is the name of your label.
+
+{% highlight voltMx %}
+function testNativeFunctionAPI() {
+    var Str = java.import("java.lang.String"); 
+    var format = Str.format("Hello %s !! Enjoy your day ",["World "]);
+    frmMain.log.text = format; }
+{% endhighlight %}
+
 6.  Set the onClick action of the button to call testNativeFunctionAPI.
 7.  Build and run your application in the Android emulator or on a device. Remember you can not run the application using the Volt MX Iris App.
 8.  Click the button, and observe how the label text changes.
@@ -90,8 +90,9 @@ Now do the same thing from JavaScript in Iris using the Native Function API for 
 
 The two important lines in the code are:
 
-{% highlight voltMx %}            var String = java.import("("java.lang.String");
-	var format = string.format("Hello %s !! Enjoy your day",["World"]);
+{% highlight voltMx %}   
+var Str = java.import("java.lang.String");
+var format = Str.format("Hello %s !! Enjoy your day ",["World "]);
 {% endhighlight %}
 
 The first line imports the java.lang.String object from the Android API, and creates an instance of the object, assigned to the JavaScript variable String. The second line calls the member function string.format, which is used to insert "World" into your output string.
