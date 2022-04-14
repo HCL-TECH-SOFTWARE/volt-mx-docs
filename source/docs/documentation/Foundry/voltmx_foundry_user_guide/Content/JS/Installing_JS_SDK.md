@@ -15,7 +15,6 @@ These steps show how to download JS SDK files and initialize JS client.
 - [Invoking an Identity Service](Invoking_Identity_Service_JS.html)
 - [Invoking an Integration Service](Invoking_Integration_Service_JS.html)
 - [Invoking a Configuration Service](Invoking_Configuration_Service_JS.html)
-- [Invoking a Logic Service](Invoking_Logic_Service_JS.html)
 - [Invoking a Metrics Service](Invoking_Metrics_Object_JS.html)
 - [Messaging Service](MessagingService_JS.html)
 
