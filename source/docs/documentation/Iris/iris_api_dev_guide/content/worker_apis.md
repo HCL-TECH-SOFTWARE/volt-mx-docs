@@ -2,12 +2,10 @@
 layout: "documentation"
 category: "iris_api_dev_guide"
 ---
-                            
 
 You are here: Worker Thread API
 
-Worker Thread API
-=================
+# Worker Thread API
 
 Worker threads are a means to execute different tasks in multiple parallel contexts of execution in a concurrent manner, which can take advantage of multiprocessor and multithreaded environments as well as to keep UI Thread in Application responsive by delegating or offloading work which need not be handled in UI Main thread, to a different secondary thread.
 
@@ -26,112 +24,115 @@ The current specification is inspired from and based on HTML5 Web Worker threads
 </ol>
 </blockquote>   
 
-
 The Worker Thread API contains the following API Elements:
 
 [voltmx.worker Namespace](voltmx.worker_functions.html)
 
-| Function | Description |
-| --- | --- |
-| [voltmx.worker.hasWorkerThreadSupport](voltmx.worker_functions.html#hasWorkerThreadSupport) | Determines whether the current platform environment has worker thread support. |
-| [voltmx.worker.WorkerThread](voltmx.worker_functions.html#WorkerThread) | Creates a WorkerThread object and returns a handle to it. The worker object represents a worker thread. |
+| Function                                                                                    | Description                                                                                             |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| [voltmx.worker.hasWorkerThreadSupport](voltmx.worker_functions.html#hasWorkerThreadSupport) | Determines whether the current platform environment has worker thread support.                          |
+| [voltmx.worker.WorkerThread](voltmx.worker_functions.html#WorkerThread)                     | Creates a WorkerThread object and returns a handle to it. The worker object represents a worker thread. |
 
 [WorkerThread Object](workerthreadobject_methods.html)
 
-| Method | Description |
-| --- | --- |
-| [addEventListener](workerthreadobject_methods.html#addeventlistener) | Event Handlers can be registered using _addEventListener()_ method on the worker Objects and once registered messages and errors from a worker thread can be received in parent thread. |
-| [close](workerthreadobject_methods.html#close) | Worker thread can be terminated from inner scope of the worker by invoking close(). The worker thread is killed immediately without an opportunity to complete its operations or clean up. |
-| [postMessage](workerthreadobject_methods.html#postmessage) | postMessage() sends a JSON object or String message to the Parent/worker's scope by invoking respective registered "message" event handlers. |
-| [removeEventListener](workerthreadobject_methods.html#removeeventlistener) | removeEventListener() is used to remove the previously registered _message_ or _error_ event listener that was registered using _addEventListener_(). |
-| [terminate](workerthreadobject_methods.html#terminate) | When called from parent scope immediately terminates the worker. This does not offer the worker an opportunity to finish its operations. It is simply stopped at once. |
+| Method                                                                     | Description                                                                                                                                                                                |
+| -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [addEventListener](workerthreadobject_methods.html#addeventlistener)       | Event Handlers can be registered using _addEventListener()_ method on the worker Objects and once registered messages and errors from a worker thread can be received in parent thread.    |
+| [close](workerthreadobject_methods.html#close)                             | Worker thread can be terminated from inner scope of the worker by invoking close(). The worker thread is killed immediately without an opportunity to complete its operations or clean up. |
+| [postMessage](workerthreadobject_methods.html#postmessage)                 | postMessage() sends a JSON object or String message to the Parent/worker's scope by invoking respective registered "message" event handlers.                                               |
+| [removeEventListener](workerthreadobject_methods.html#removeeventlistener) | removeEventListener() is used to remove the previously registered _message_ or _error_ event listener that was registered using _addEventListener_().                                      |
+| [terminate](workerthreadobject_methods.html#terminate)                     | When called from parent scope immediately terminates the worker. This does not offer the worker an opportunity to finish its operations. It is simply stopped at once.                     |
 
-Scope
------
+<h2>Scope</h2>
+<ol type="1">
+<li>Volt MX Iris platform version &gt;= 5.6.2.</li>
+<li>Support for JavaScript.</li>
+<li>Supported mobile Platforms:
+<ul>
+<li>iOS</li>
+<li>Android</li>
+<li>SPA: Supported List of browsers starting from versions.</li>
+</ul>
+</li>
+<li>Supported List of Browsers:
+<p style="margin-left:15px;"><b>SPA</b></p>
+<table style="margin-left:20px;">
+<tr>
+<th>iOS</th>
+<th>Android Native</th>
+<th>Android Chrome</th>
+<th>Windows</th>
+</tr>
+<tr>
+<td>5.0-5.1</td>
+<td>4.4</td>
+<td>33.0</td>
+<td>10</td>
+</tr>
+</table>
+<p style="margin-left:15px;"><b>DesktopWeb</b></p>
+<table style="margin-left:20px;">
+<tr>
+<th>IE</th>
+<th>Firefox</th>
+<th>Chrome</th>
+<th>Safari</th>
+</tr>
+<tr>
+<td>10.0</td>
+<td>4.0</td>
+<td>20</td>
+<td>5.0</td>
+</tr>
+</table>
+</li>
+<li>Windows</li>
+</ol>
 
-1.  Volt MX Iris platform version >= 5.6.2.
+## Introduction to Constructor - WorkerThread()
 
-2.  Support for JavaScript.
-
-3.  Supported mobile Platforms:
-
-    a.  iOS
-
-    b.  Android
-
-    c.  SPA: Supported List of browsers starting from versions.
-
-4.  Supported List of Browsers  
-
-    **SPA**
-
-    | iOS | Android Native | Android Chrome | Windows |
-    | --- | --- | --- | --- |
-    | 5.0-5.1 | 4.4 | 33.0 | 10 |
-
-    **DesktopWeb**
-
-    | IE | Firefox | Chrome | Safari |
-    | --- | --- | --- | --- |
-    | 10.0 | 4.0 | 20 | 5.0 |  
-    
-5.  Windows 
-    
-
-Introduction to Constructor - WorkerThread()
---------------------------------------------
-
-*   The _WorkerThread()_ constructor creates and returns the handle to the newly created worker thread. The new worker thread can be used by the Parent thread for any further communication with the worker thread.
-*   To create a worker thread, it requires a JavaScript file name or a functional module name. The _WorkerThread()_ constructor is invoked with the JavaScript file or a functional module name as its only argument and a worker thread instance is then created and returned.
-*   Worker threads may in turn initiate new worker threads.
-*   If a Javascript file name with ".js" extension is passed as _WorkerThread()_ constructor argument, it looks up only in the `workerthreads` directory in `modules/js` path and loads if the file is found. This holds good for functional modules based projects as well as non-functional modules based projects.
-*   If a function module name is provided as an argument for _WorkerThread()_ constructor, in case of functional modules based project then the module will be loaded if found in the modules listing.
+- The _WorkerThread()_ constructor creates and returns the handle to the newly created worker thread. The new worker thread can be used by the Parent thread for any further communication with the worker thread.
+- To create a worker thread, it requires a JavaScript file name or a functional module name. The _WorkerThread()_ constructor is invoked with the JavaScript file or a functional module name as its only argument and a worker thread instance is then created and returned.
+- Worker threads may in turn initiate new worker threads.
+- If a Javascript file name with ".js" extension is passed as _WorkerThread()_ constructor argument, it looks up only in the `workerthreads` directory in `modules/js` path and loads if the file is found. This holds good for functional modules based projects as well as non-functional modules based projects.
+- If a function module name is provided as an argument for _WorkerThread()_ constructor, in case of functional modules based project then the module will be loaded if found in the modules listing.
 
 ### Worker Thread Scenarios
 
 The scenarios of using _WorkerThread()_ constructor are as follows:
 
-*   The _WorkerThread()_ constructor creates a new worker thread and returns a handle to the new worker thread, which can be used by the parent thread for any further communication with the worker thread.<br/>
-Creating a worker thread requires a JavaScript file name or a functional module name. The _WorkerThread()_ constructor is invoked with the JavaScript file or a functional module name as its only argument and a worker thread instance is then created and returned:
-    
-    <pre><code style="display:block;background-color:#eee;">
-    var worker = new voltmx.worker.WorkerThread('helper.js');
-    var worker = new voltmx.worker.WorkerThread('functionModuleName');
-    </code></pre>
+- The _WorkerThread()_ constructor creates a new worker thread and returns a handle to the new worker thread, which can be used by the parent thread for any further communication with the worker thread.<br/>
+  Creating a worker thread requires a JavaScript file name or a functional module name. The _WorkerThread()_ constructor is invoked with the JavaScript file or a functional module name as its only argument and a worker thread instance is then created and returned:
+  <pre><code style="display:block;background-color:#eee;">
+  var worker = new voltmx.worker.WorkerThread('helper.js');
+  var worker = new voltmx.worker.WorkerThread('functionModuleName');
+  </code></pre>
+- A _message_ event handler can be registered with the worker by parent thread to receive messages from the worker thread.
 
-    
-*   A _message_ event handler can be registered with the worker by parent thread to receive messages from the worker thread.
-    
-    <code> worker.addEventListener("message", function (event) { ... }); </code>
-    
-*   To send data from parent to a worker, _postMessage()_ method can be used from parent.
-    
-    <code> worker.postMessage({ operation: 'find-edges', input: 'buffer', threshold: 0.6 } );</code>
-    
-*   To send messages back from worker thread to parent thread scope, _postMessage()_ can be used.
-    
-    <code> postMessage({'msg':'Data'});</code>
-    
-*   To receive a messages inside the worker thread from parent thread, the _message_ event handler can be registered using _addEventListener()_ inside worker thread.
-    
-    <code> self.addEventListener( "message", function (event) { ... });</code>
-    
+  <code> worker.addEventListener("message", function (event) { ... }); </code>
+
+- To send data from parent to a worker, _postMessage()_ method can be used from parent.
+
+  <code> worker.postMessage({ operation: 'find-edges', input: 'buffer', threshold: 0.6 } );</code>
+
+- To send messages back from worker thread to parent thread scope, _postMessage()_ can be used.
+
+  <code> postMessage({'msg':'Data'});</code>
+
+- To receive a messages inside the worker thread from parent thread, the _message_ event handler can be registered using _addEventListener()_ inside worker thread.
+
+  <code> self.addEventListener( "message", function (event) { ... });</code>
 
 ### Worker Thread Life Cycle
 
 The following steps provide the work flow to use worker thread:
 
 1.  Call to Worker constructor will create a new Worker instance and a new parallel execution environment context is created, and immediately starts execution in the new parallel thread of control in an asynchronous manner. In this new thread, first the Worker will try to load the ‘workerjs’ script.
-    
 2.  As a result of the asynchronous parallel nature of execution in worker thread context, invocation of Worker constructor call in Parent thread will return a new Worker instance handle and Parent proceeds with execution of next instructions.
-    
 3.  Every Worker thread will have its own event loop which takes care of the execution of all the received message tasks which are queued for this worker in that order until ‘self.close()’ in worker scope or ‘worker.terminate()’ in parent worker scope are invoked.
-    
 4.  From the moment of successful creation of worker thread and until ‘self.close()’ in worker scope or ‘worker.terminate()’ in parent worker scope are invoked, the worker thread will be alive and can receive and process messages which are sent to this worker form its parent or from its child workers if created, as well as it can send messages using postMessage() to its parent thread and its child worker threads if created.
-    
 
-message event handler
----------------------
+## message event handler
 
 "message" event handler receives an "event" object which contains the JSON or string message that is passed to postMessage() during invocation and the same message can be accessed from its "event.data" field. The data passed to postMessage() should be a String or JSON object.
 
@@ -141,26 +142,26 @@ Multiple "message" event handlers can also be registered in Parent scope and in 
 
 ### Syntax
 
-function(event) { });
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">function(event) { });</code></pre>
 
 ### Input Parameters
 
 String / JSON Object
 
-*   "message" event handler receives an "event" object which contains the JSON or string message that is passed to postMessage() during invocation and the same message can be accessed from its "event.data" field.
-*   The data passed to postMessage() should be a String or JSON object.
-*   Adhering to the JSON standard, the JSON object passed to postMessage() API should be serializable JSON without opaque object handles or function object handles etc.
-*   The data which is passed between the parent thread and worker thread using postMessage() API are copied, not shared, so the end result is that a duplicate is created on each end.
-*   Multiple "message" event handlers can also be registered in Parent scope and in workers inner scope and all the registered event handlers will be invoked in the registered order whenever a postMessage() is called.
+- "message" event handler receives an "event" object which contains the JSON or string message that is passed to postMessage() during invocation and the same message can be accessed from its "event.data" field.
+- The data passed to postMessage() should be a String or JSON object.
+- Adhering to the JSON standard, the JSON object passed to postMessage() API should be serializable JSON without opaque object handles or function object handles etc.
+- The data which is passed between the parent thread and worker thread using postMessage() API are copied, not shared, so the end result is that a duplicate is created on each end.
+- Multiple "message" event handlers can also be registered in Parent scope and in workers inner scope and all the registered event handlers will be invoked in the registered order whenever a postMessage() is called.
 
 ### Example
 
 {% highlight voltMx %}
 var evtMessageHandler_1 = function(event) {
-//In case of JSONvoltmx.print ("Received message :" + event.data["msg"]);" 
+//In case of JSONvoltmx.print ("Received message :" + event.data["msg"]);"
 
 //In case of string
-voltmx.print ("Received message :" + event.data); 
+voltmx.print ("Received message :" + event.data);
 };
 
 {% endhighlight %}
@@ -169,10 +170,9 @@ voltmx.print ("Received message :" + event.data);
 
 Available for iOS, Android, Windows, SPA, and Desktop Web. For more information, see [Scope](#scope).
 
-* * *
+---
 
-error event handler
--------------------
+## error event handler
 
 "error" event handler receives an "event" object which has the has the following three fields: message, filename, lineno. Registered ‘error’ event handler is invoked whenever an unhandled exception arises in worker’s scope. "error" event handler can be registered in parent thread scope on worker object and as well as in worker thread’s inner scope, where both event handlers will be invoked if present whenever an unhandled exception occurs in workers inner scope.
 
@@ -188,10 +188,9 @@ error event object (message, filename, lineno)
 
 ### Example
 
-{% highlight voltMx %}
-	function(event) {
-		voltmx.print ('ERROR: Line '+ event.lineno + ' in ' + event.filename + ': ' + event.message);
-  }
+{% highlight voltMx %}function(event) {
+voltmx.print ('ERROR: Line '+ event.lineno + ' in ' + event.filename + ': ' + event.message);
+}
 
 {% endhighlight %}
 
@@ -199,10 +198,9 @@ error event object (message, filename, lineno)
 
 Available for iOS, Android, Windows, SPA, and Desktop Web. For more information, see [Scope](#scope).
 
-* * *
+---
 
-Importing scripts
------------------
+## Importing scripts
 
 Worker threads can use importScripts() function to import external scripts their scope by providing the JS file name to import. This method takes one or more JavaScript file names to import.
 
@@ -218,11 +216,11 @@ For more information on Functional Module APIs, refer [Functional Modules APIs](
 
 ### Syntax
 
-importScripts(".js\_file\_name");
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">importScripts(".js_file_name");</code></pre>
 
 or
 
-importScripts("functional\_module\_name");
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">importScripts("functional_module_name");</code></pre>
 
 ### Input Parameters
 
@@ -230,17 +228,16 @@ JSFileNames \[Object\]
 
 or
 
-Functional\_Module\_Name \[Object\]
+Functional_Module_Name \[Object\]
 
-*   One or more comma separated list of JavaScript file names.
+- One or more comma separated list of JavaScript file names.
 
 ### Example
 
 {% highlight voltMx %}
 importScripts("Utility.js"); // loads Util.js
 
-
-importScripts("Utility1.js", "Utility2.js", "Utility3.js"); 
+importScripts("Utility1.js", "Utility2.js", "Utility3.js");
 
 {% endhighlight %}
 
@@ -254,40 +251,38 @@ None
 
 When an error is encountered, the VoltMXError JS object is thrown with the following information:
 
-| Error Code | Name | Message | Reason |
-| --- | --- | --- | --- |
-| 3002 | WorkerThreadError | importScripts: InvalidParameter. Invalid script name | This exception occurs when the argument passed is not a string. |
-| 3002 | WorkerThreadError | importScripts: InvalidParameter. Unable to import script. <scriptname> | This exception occurs when it is unable to find and load the JS script. |
+| Error Code | Name              | Message                                                                | Reason                                                                  |
+| ---------- | ----------------- | ---------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| 3002       | WorkerThreadError | importScripts: InvalidParameter. Invalid script name                   | This exception occurs when the argument passed is not a string.         |
+| 3002       | WorkerThreadError | importScripts: InvalidParameter. Unable to import script. <scriptname> | This exception occurs when it is unable to find and load the JS script. |
 
-*   In worker scope, if these exceptions are not handled and if an _error_ event handler is registered in worker’s inner scope or/and in parent scope for this worker object, then it is invoked with an error event object and its message attribute is set as follows:
-    
-    > Exception 1 - message: "importScripts: InvalidParameter. Invalid script name"
-    > 
-    > Exception 2 - message: "importScripts: InvalidParameter. Invalid script name"
-    
+- In worker scope, if these exceptions are not handled and if an _error_ event handler is registered in worker’s inner scope or/and in parent scope for this worker object, then it is invoked with an error event object and its message attribute is set as follows:
 
-Differences in behavior of _importScripts_() and _[_voltmx.modules.loadFunctionalModule_()](voltmx.modules_functions.html#loadfunctionalmodule)_ API with respect to Functional Modules:
+  > Exception 1 - message: "importScripts: InvalidParameter. Invalid script name"
+  >
+  > Exception 2 - message: "importScripts: InvalidParameter. Invalid script name"
 
-| Without Functional Modules | With Functional Modules |
-| --- | --- |
-| From inside Worker context if importScripts() is used to import external JS scripts the search criteria would be : only "workerthreads" directory. | From inside Worker context if importScripts() is used to import external JS scripts the search criteria would be : only "workerthreads" directory. |
-| voltmx.modules.loadFunctionalModule() function cannot be used in workers scope to load any FunctionalModule. | [voltmx.modules.loadFunctionalModule()](voltmx.modules_functions.html#loadfunctionalmodule) function can be used in workers scope to load any JavaScript script which is part of some Functional Module. |
+Differences in behavior of _importScripts_() and _[\_voltmx.modules.loadFunctionalModule_()](voltmx.modules*functions.html#loadfunctionalmodule)* API with respect to Functional Modules:
+
+| Without Functional Modules                                                                                                                         | With Functional Modules                                                                                                                                                                                  |
+| -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| From inside Worker context if importScripts() is used to import external JS scripts the search criteria would be : only "workerthreads" directory. | From inside Worker context if importScripts() is used to import external JS scripts the search criteria would be : only "workerthreads" directory.                                                       |
+| voltmx.modules.loadFunctionalModule() function cannot be used in workers scope to load any FunctionalModule.                                       | [voltmx.modules.loadFunctionalModule()](voltmx.modules_functions.html#loadfunctionalmodule) function can be used in workers scope to load any JavaScript script which is part of some Functional Module. |
 
 ### Platform Availability
 
 Available for iOS, Android, Windows, SPA, and Desktop Web. For more information, see [Scope](#scope).
 
-Using Worker Threads Feature
-----------------------------
+## Using Worker Threads Feature
 
 The following topics helps you to use the worker thread feature:
 
-*   [](#getMonit2)[Communicating and Data Processing Between Threads](#communicating-and-data-processing-between-threads)
-*   [](#getRange)[Nesting of Threads and Performing Parallel Tasks](#nesting-of-threads-and-performing-parallel-tasks)
-*   [Scope Rules and Supported APIs](#scope-rules-and-supported-apis)
-*   [FFI and Custom Widgets](#ffi-and-custom-widgets)
-*   [Guidelines and Limitations](#guidelines-and-limitations)
-*   [Debugger Support](#debugger-support)
+- [](#getMonit2)[Communicating and Data Processing Between Threads](#communicating-and-data-processing-between-threads)
+- [](#getRange)[Nesting of Threads and Performing Parallel Tasks](#nesting-of-threads-and-performing-parallel-tasks)
+- [Scope Rules and Supported APIs](#scope-rules-and-supported-apis)
+- [FFI and Custom Widgets](#ffi-and-custom-widgets)
+- [Guidelines and Limitations](#guidelines-and-limitations)
+- [Debugger Support](#debugger-support)
 
 ### Communicating and Data Processing Between Threads
 
@@ -298,32 +293,32 @@ var worker = new voltmx.worker.WorkerThread('1_worker.js');
 
 //invoked when worker calls postmessage() from its inner scope
 worker.addEventListener("message", function (event) {
-    voltmx.print('Parent Scope : onmessage : event.data : ' + event.data["message"]);
+voltmx.print('Parent Scope : onmessage : event.data : ' + event.data["message"]);
 });
 
 voltmx.print('Parent Scope : Invoking worker.postmessage()');
 //will invoke worker's inner scope onmessage()
 worker.postMessage({
-    'message': 'Hello World From Parent'
+'message': 'Hello World From Parent'
 });
 {% endhighlight %}
 
-1\_worker.js
+1_worker.js
 
 {% highlight voltMx %}//workers inner scope
 //invoked when Parent calls worker.postmessage()
 self.addEventListener("message", function (event) {
-    voltmx.print('Worker Scope : onmessage : event.data : ' + event.data["message"]);
-    //call func
-    do_something_in_worker();
+voltmx.print('Worker Scope : onmessage : event.data : ' + event.data["message"]);
+//call func
+do_something_in_worker();
 });
 
 function do_something_in_worker() {
-    voltmx.print('Worker Scope : invoking postMessage()');
-    //will invoke Parent worker.onmessage()
-    postMessage({
-        'message': "Hello World From Worker "
-    });
+voltmx.print('Worker Scope : invoking postMessage()');
+//will invoke Parent worker.onmessage()
+postMessage({
+'message': "Hello World From Worker "
+});
 };
 {% endhighlight %}
 
@@ -346,8 +341,8 @@ Explanation
 Main.js
 
 {% highlight voltMx %}try {
-    voltmx.print("Parent Scope: Init test_case_parent_thread()");
-    voltmx.print("Parent Scope: In try block");
+voltmx.print("Parent Scope: Init test_case_parent_thread()");
+voltmx.print("Parent Scope: In try block");
 
     //create new voltmx.worker.WorkerThread
     var worker = new voltmx.worker.WorkerThread('WorkerThread.js');
@@ -360,16 +355,16 @@ Main.js
     worker.postMessage("Hello from Parent");
 
 } catch (err) {
-    voltmx.print("Parent Scope: In Catch block");
+voltmx.print("Parent Scope: In Catch block");
 
 }
 
-//invoke a function                
+//invoke a function  
 invoke_timer_task();
 
 //
 function invoke_timer_task() {
-    voltmx.print("Parent Scope :- voltmx.timer.schedule - ");
+voltmx.print("Parent Scope :- voltmx.timer.schedule - ");
 
     var timerId = "mytimer12111";
     var i = 0;
@@ -387,6 +382,7 @@ function invoke_timer_task() {
     //
     voltmx.timer.schedule(timerId, timerFunc, 1, true);
     voltmx.print("Parent Scope :- voltmx.timer.schedule - Done");
+
 };
 voltmx.print("Parent Scope: Exit test_case_parent_thread()");
 {% endhighlight %}
@@ -402,7 +398,7 @@ var worker = new voltmx.worker.WorkerThread('WorkerThread2.js');
 
 //invoked when Parent calls worker.postmessage()
 this.addEventListener("message", function(event) {
-	voltmx.print('Worker Scope : onmessage : event.data : ' + event.data);
+voltmx.print('Worker Scope : onmessage : event.data : ' + event.data);
 });
 
 self.postMessage("Hello from Worker");
@@ -411,17 +407,17 @@ invoke_timer_task();
 
 //
 function invoke_timer_task() {
-    voltmx.print("Worker Scope :- voltmx.timer.schedule - ");
-    
+voltmx.print("Worker Scope :- voltmx.timer.schedule - ");
+
     var timerId = "mytimer121";
     var i = 0;
-    
+
     function timerFunc() {
-    
+
         i++;
         voltmx.print("Worker Scope :- voltmx.timer.schedule - In timerFunc() : " + i);
 
-        
+
         if(i > 20) {
             voltmx.print("Worker Scope :- voltmx.timer.schedule - Stopping timer : ");
             voltmx.timer.cancel(timerId);
@@ -430,6 +426,7 @@ function invoke_timer_task() {
     //
     voltmx.timer.schedule(timerId,timerFunc, 1, true);
     voltmx.print("Worker Scope :- voltmx.timer.schedule - Done");
+
 };
 voltmx.print("Worker Scope: Loading done");
 
@@ -444,7 +441,7 @@ voltmx.print("Grand child: Worker2 Scope: Init");
 
 //invoked when Parent calls worker.postmessage()
 this.addEventListener("message", function(event) {
-	voltmx.print('Grand child: Worker2 Scope : onmessage : event.data : ' + event.data);
+voltmx.print('Grand child: Worker2 Scope : onmessage : event.data : ' + event.data);
 });
 
 self.postMessage("Hello from Worker2");
@@ -453,25 +450,26 @@ invoke_timer_task();
 
 //
 function invoke_timer_task () {
-    voltmx.print("Grand child: Worker2 Scope :- voltmx.timer.schedule - ");
-    
+voltmx.print("Grand child: Worker2 Scope :- voltmx.timer.schedule - ");
+
     var timerId = "mytimer1211";
     var i = 0;
-    
+
     function timerFunc()
     {
         i++;
         voltmx.print("Worker2 Scope :- voltmx.timer.schedule - In timerFunc() : " + i + " : Grand child ");
-        
+
         if(i > 20) {
             voltmx.print("Grand child: Worker2 Scope :- voltmx.timer.schedule - Stopping timer : ");
             voltmx.timer.cancel(timerId);
         }
     };
-    
+
     //
     voltmx.timer.schedule(timerId,timerFunc, 1, true);
     voltmx.print("Grand child: Worker2 Scope :- voltmx.timer.schedule - Done");
+
 };
 voltmx.print("Grand child: Worker2 Scope : Loading done");
 
@@ -617,7 +615,6 @@ Every worker has its own context of execution, which is not shared between the p
 </tr>
 </table>
 
-
 ### FFI and Custom Widgets
 
 With and without Functional Module in Worker context:
@@ -640,7 +637,6 @@ With and without Functional Module in Worker context:
 </tr>
 </table>
 
-
 ### Guidelines and Limitations
 
 The following guidelines are recommended before using worker thread:
@@ -649,8 +645,8 @@ The following guidelines are recommended before using worker thread:
 2.  Event propagation cannot be stopped by using _event.stopPropagation_() as in HTML specification. Where _event.stopPropagation_() stops the DOM event to be propagated further by breaking the event chain.
 3.  Data passed between the main thread and workers are copied, but not shared. Objects are serialized as they are handed to the worker, and subsequently, de-serialized on the other end. The main thread and worker do not share the same instance. So the end result is that a duplicate is created on each end. HTML5 worker threads support transferable objects that allow transferring the objects from one thread to other without making a copy.
 4.  As explicit thread synchronization mechanisms like locking or mutexes are not available in JS environment, you must take required care in scenarios where multiple threads concurrently or simultaneously are trying to access and write/insert data into local database or local datastore using WebSQL or Local datastore APIs, as these are shared resources across the Application context.
-    
-    *   The outcome of these simultaneous or concurrent accesses to database/datastore might push the database/datastore to inconsistent state and is dependent on the individual platforms WebSQL or DataStore implementations. It is always suggested to avoid such scenarios of multiple threads accessing the database/datastore simultaneously/concurrently.
+
+    - The outcome of these simultaneous or concurrent accesses to database/datastore might push the database/datastore to inconsistent state and is dependent on the individual platforms WebSQL or DataStore implementations. It is always suggested to avoid such scenarios of multiple threads accessing the database/datastore simultaneously/concurrently.
 
 **Limitations in SPA and DesktopWeb:**
 
@@ -682,17 +678,16 @@ Debugger support for worker threads is not available in 5.6.2 release.
 
 ### Worker Life Cycle Notes
 
-Following are some worker life cycle notes: 
+Following are some worker life cycle notes:
 
-*   Call to Worker constructor will create a new Worker instance and a new parallel execution environment context is created, and immediately starts execution in the new parallel thread of control in an asynchronous manner. In this new thread, first the Worker will try to load the ‘workerjs’ script.
-*   As a result of the asynchronous parallel nature of execution in worker thread context, invocation of Worker constructor call in Parent thread will return a new Worker instance handle and Parent proceeds with execution of next instructions.
-*   Every Worker thread will have its own event loop which takes care of the execution of all the received message tasks which are queued for this worker in that order until ‘self.close()’ in worker scope or ‘worker.terminate()’ in parent worker scope are invoked.
-*   From the moment of successful creation of worker thread and until ‘self.close()’ in worker scope or ‘worker.terminate()’ in parent worker scope are invoked, the worker thread will be alive and can receive and process messages which are sent to this worker form its parent or from its child workers if created, as well as it can send messages using postMessage() to its parent thread and its child worker threads if created.
-*   In worker thread scope when there is no "message" event handler registered which indicates that no tasks can be posted or queued by parent for this worker, and if no callbacks are registered in this worker scope for network, timer APIs etc, then after postMessage() call in Workers inner scope if any, worker can terminate itself without worker.terminate() being called in Parent scope or self.close() called in inner scope.
-*   In case of orphaned threads if no tasks are queued in message handler and if the worker is not waiting for any callbacks to be returned from network, timer APIs etc then the orphaned thread can be terminated.
-*   If Parent stops either due to unhandled exception raised in it scope, Worker threads still continues to exist and execute.
+- Call to Worker constructor will create a new Worker instance and a new parallel execution environment context is created, and immediately starts execution in the new parallel thread of control in an asynchronous manner. In this new thread, first the Worker will try to load the ‘workerjs’ script.
+- As a result of the asynchronous parallel nature of execution in worker thread context, invocation of Worker constructor call in Parent thread will return a new Worker instance handle and Parent proceeds with execution of next instructions.
+- Every Worker thread will have its own event loop which takes care of the execution of all the received message tasks which are queued for this worker in that order until ‘self.close()’ in worker scope or ‘worker.terminate()’ in parent worker scope are invoked.
+- From the moment of successful creation of worker thread and until ‘self.close()’ in worker scope or ‘worker.terminate()’ in parent worker scope are invoked, the worker thread will be alive and can receive and process messages which are sent to this worker form its parent or from its child workers if created, as well as it can send messages using postMessage() to its parent thread and its child worker threads if created.
+- In worker thread scope when there is no "message" event handler registered which indicates that no tasks can be posted or queued by parent for this worker, and if no callbacks are registered in this worker scope for network, timer APIs etc, then after postMessage() call in Workers inner scope if any, worker can terminate itself without worker.terminate() being called in Parent scope or self.close() called in inner scope.
+- In case of orphaned threads if no tasks are queued in message handler and if the worker is not waiting for any callbacks to be returned from network, timer APIs etc then the orphaned thread can be terminated.
+- If Parent stops either due to unhandled exception raised in it scope, Worker threads still continues to exist and execute.
 
-* * *
+---
 
 ![](resources/prettify/onload.png)
-
