@@ -311,79 +311,57 @@
     </tr>
   </tbody>
 </table>
-      <h2 id="scope">
+      <h2>
         
         
-          <a href="#scope" class="anchor-heading" aria-labelledby="scope"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Scope
+          Scope
         
         
       </h2>
     
-
-<ol>
-  <li>
-    <p>Volt MX Iris platform version &gt;= 5.6.2.</p>
-  </li>
-  <li>
-    <p>Support for JavaScript.</p>
-  </li>
-  <li>
-    <p>Supported mobile Platforms:</p>
-
-    <p>a.  iOS</p>
-
-    <p>b.  Android</p>
-
-    <p>c.  SPA: Supported List of browsers starting from versions.</p>
-  </li>
-  <li>
-    <p>Supported List of Browsers</p>
-
-    <p><strong>SPA</strong></p>
-
-    <table>
-      <thead>
-        <tr>
-          <th>iOS</th>
-          <th>Android Native</th>
-          <th>Android Chrome</th>
-          <th>Windows</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>5.0-5.1</td>
-          <td>4.4</td>
-          <td>33.0</td>
-          <td>10</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <p><strong>DesktopWeb</strong></p>
-
-    <table>
-      <thead>
-        <tr>
-          <th>IE</th>
-          <th>Firefox</th>
-          <th>Chrome</th>
-          <th>Safari</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>10.0</td>
-          <td>4.0</td>
-          <td>20</td>
-          <td>5.0</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
-  <li>
-    <p>Windows</p>
-  </li>
+<ol type="1">
+<li>Volt MX Iris platform version &gt;= 5.6.2.</li>
+<li>Support for JavaScript.</li>
+<li>Supported mobile Platforms:
+<ul>
+<li>iOS</li>
+<li>Android</li>
+<li>SPA: Supported List of browsers starting from versions.</li>
+</ul>
+</li>
+<li>Supported List of Browsers:
+<p style="margin-left:15px;"><b>SPA</b></p>
+<table style="margin-left:20px;">
+<tr>
+<th>iOS</th>
+<th>Android Native</th>
+<th>Android Chrome</th>
+<th>Windows</th>
+</tr>
+<tr>
+<td>5.0-5.1</td>
+<td>4.4</td>
+<td>33.0</td>
+<td>10</td>
+</tr>
+</table>
+<p style="margin-left:15px;"><b>DesktopWeb</b></p>
+<table style="margin-left:20px;">
+<tr>
+<th>IE</th>
+<th>Firefox</th>
+<th>Chrome</th>
+<th>Safari</th>
+</tr>
+<tr>
+<td>10.0</td>
+<td>4.0</td>
+<td>20</td>
+<td>5.0</td>
+</tr>
+</table>
+</li>
+<li>Windows</li>
 </ol>
       <h2 id="introduction-to-constructor---workerthread">
         
@@ -413,10 +391,8 @@
 <p>The scenarios of using <em>WorkerThread()</em> constructor are as follows:</p>
 
 <ul>
-  <li>
-    <p>The <em>WorkerThread()</em> constructor creates a new worker thread and returns a handle to the new worker thread, which can be used by the parent thread for any further communication with the worker thread.<br />
-Creating a worker thread requires a JavaScript file name or a functional module name. The <em>WorkerThread()</em> constructor is invoked with the JavaScript file or a functional module name as its only argument and a worker thread instance is then created and returned:</p>
-
+  <li>The <em>WorkerThread()</em> constructor creates a new worker thread and returns a handle to the new worker thread, which can be used by the parent thread for any further communication with the worker thread.<br />
+Creating a worker thread requires a JavaScript file name or a functional module name. The <em>WorkerThread()</em> constructor is invoked with the JavaScript file or a functional module name as its only argument and a worker thread instance is then created and returned:
     <pre><code style="display:block;background-color:#eee;">
 var worker = new voltmx.worker.WorkerThread('helper.js');
 var worker = new voltmx.worker.WorkerThread('functionModuleName');
@@ -455,18 +431,10 @@ var worker = new voltmx.worker.WorkerThread('functionModuleName');
 <p>The following steps provide the work flow to use worker thread:</p>
 
 <ol>
-  <li>
-    <p>Call to Worker constructor will create a new Worker instance and a new parallel execution environment context is created, and immediately starts execution in the new parallel thread of control in an asynchronous manner. In this new thread, first the Worker will try to load the ‘workerjs’ script.</p>
-  </li>
-  <li>
-    <p>As a result of the asynchronous parallel nature of execution in worker thread context, invocation of Worker constructor call in Parent thread will return a new Worker instance handle and Parent proceeds with execution of next instructions.</p>
-  </li>
-  <li>
-    <p>Every Worker thread will have its own event loop which takes care of the execution of all the received message tasks which are queued for this worker in that order until ‘self.close()’ in worker scope or ‘worker.terminate()’ in parent worker scope are invoked.</p>
-  </li>
-  <li>
-    <p>From the moment of successful creation of worker thread and until ‘self.close()’ in worker scope or ‘worker.terminate()’ in parent worker scope are invoked, the worker thread will be alive and can receive and process messages which are sent to this worker form its parent or from its child workers if created, as well as it can send messages using postMessage() to its parent thread and its child worker threads if created.</p>
-  </li>
+  <li>Call to Worker constructor will create a new Worker instance and a new parallel execution environment context is created, and immediately starts execution in the new parallel thread of control in an asynchronous manner. In this new thread, first the Worker will try to load the ‘workerjs’ script.</li>
+  <li>As a result of the asynchronous parallel nature of execution in worker thread context, invocation of Worker constructor call in Parent thread will return a new Worker instance handle and Parent proceeds with execution of next instructions.</li>
+  <li>Every Worker thread will have its own event loop which takes care of the execution of all the received message tasks which are queued for this worker in that order until ‘self.close()’ in worker scope or ‘worker.terminate()’ in parent worker scope are invoked.</li>
+  <li>From the moment of successful creation of worker thread and until ‘self.close()’ in worker scope or ‘worker.terminate()’ in parent worker scope are invoked, the worker thread will be alive and can receive and process messages which are sent to this worker form its parent or from its child workers if created, as well as it can send messages using postMessage() to its parent thread and its child worker threads if created.</li>
 </ol>
       <h2 id="message-event-handler">
         
@@ -491,7 +459,7 @@ var worker = new voltmx.worker.WorkerThread('functionModuleName');
       </h3>
     
 
-<p>function(event) { });</p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">function(event) { });</code></pre>
       <h3 id="input-parameters">
         
         
@@ -520,10 +488,10 @@ var worker = new voltmx.worker.WorkerThread('functionModuleName');
     
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">var evtMessageHandler_1 = function(event) {
-//In case of JSONvoltmx.print ("Received message :" + event.data["msg"]);" 
+//In case of JSONvoltmx.print ("Received message :" + event.data["msg"]);"
 
 //In case of string
-voltmx.print ("Received message :" + event.data); 
+voltmx.print ("Received message :" + event.data);
 };</code></pre></figure>
       <h3 id="platform-availability">
         
@@ -576,9 +544,9 @@ voltmx.print ("Received message :" + event.data);
       </h3>
     
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">	function(event) {
-		voltmx.print ('ERROR: Line '+ event.lineno + ' in ' + event.filename + ': ' + event.message);
-  }</code></pre></figure>
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">function(event) {
+voltmx.print ('ERROR: Line '+ event.lineno + ' in ' + event.filename + ': ' + event.message);
+}</code></pre></figure>
       <h3 id="platform-availability-1">
         
         
@@ -618,11 +586,11 @@ voltmx.print ("Received message :" + event.data);
       </h3>
     
 
-<p>importScripts(“.js_file_name”);</p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">importScripts(".js_file_name");</code></pre>
 
 <p>or</p>
 
-<p>importScripts(“functional_module_name”);</p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">importScripts("functional_module_name");</code></pre>
       <h3 id="input-parameters-2">
         
         
@@ -652,8 +620,7 @@ voltmx.print ("Received message :" + event.data);
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">importScripts("Utility.js"); // loads Util.js
 
-
-importScripts("Utility1.js", "Utility2.js", "Utility3.js"); </code></pre></figure>
+importScripts("Utility1.js", "Utility2.js", "Utility3.js");</code></pre></figure>
       <h3 id="return-values">
         
         
@@ -716,7 +683,7 @@ importScripts("Utility1.js", "Utility2.js", "Utility3.js"); </code></pre></figur
   </li>
 </ul>
 
-<p>Differences in behavior of <em>importScripts</em>() and <em><a href="voltmx.modules_functions.html#loadfunctionalmodule">_voltmx.modules.loadFunctionalModule_()</a></em> API with respect to Functional Modules:</p>
+<p>Differences in behavior of <em>importScripts</em>() and _<a href="voltmx.modules*functions.html#loadfunctionalmodule">_voltmx.modules.loadFunctionalModule_()</a>* API with respect to Functional Modules:</p>
 
 <table>
   <thead>
@@ -781,13 +748,13 @@ var worker = new voltmx.worker.WorkerThread('1_worker.js');
 
 //invoked when worker calls postmessage() from its inner scope
 worker.addEventListener("message", function (event) {
-    voltmx.print('Parent Scope : onmessage : event.data : ' + event.data["message"]);
+voltmx.print('Parent Scope : onmessage : event.data : ' + event.data["message"]);
 });
 
 voltmx.print('Parent Scope : Invoking worker.postmessage()');
 //will invoke worker's inner scope onmessage()
 worker.postMessage({
-    'message': 'Hello World From Parent'
+'message': 'Hello World From Parent'
 });</code></pre></figure>
 
 <p>1_worker.js</p>
@@ -795,17 +762,17 @@ worker.postMessage({
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">//workers inner scope
 //invoked when Parent calls worker.postmessage()
 self.addEventListener("message", function (event) {
-    voltmx.print('Worker Scope : onmessage : event.data : ' + event.data["message"]);
-    //call func
-    do_something_in_worker();
+voltmx.print('Worker Scope : onmessage : event.data : ' + event.data["message"]);
+//call func
+do_something_in_worker();
 });
 
 function do_something_in_worker() {
-    voltmx.print('Worker Scope : invoking postMessage()');
-    //will invoke Parent worker.onmessage()
-    postMessage({
-        'message': "Hello World From Worker "
-    });
+voltmx.print('Worker Scope : invoking postMessage()');
+//will invoke Parent worker.onmessage()
+postMessage({
+'message': "Hello World From Worker "
+});
 };</code></pre></figure>
 
 <p>Expected Output</p>
@@ -834,8 +801,8 @@ function do_something_in_worker() {
 <p>Main.js</p>
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">try {
-    voltmx.print("Parent Scope: Init test_case_parent_thread()");
-    voltmx.print("Parent Scope: In try block");
+voltmx.print("Parent Scope: Init test_case_parent_thread()");
+voltmx.print("Parent Scope: In try block");
 
     //create new voltmx.worker.WorkerThread
     var worker = new voltmx.worker.WorkerThread('WorkerThread.js');
@@ -848,16 +815,16 @@ function do_something_in_worker() {
     worker.postMessage("Hello from Parent");
 
 } catch (err) {
-    voltmx.print("Parent Scope: In Catch block");
+voltmx.print("Parent Scope: In Catch block");
 
 }
 
-//invoke a function                
+//invoke a function  
 invoke_timer_task();
 
 //
 function invoke_timer_task() {
-    voltmx.print("Parent Scope :- voltmx.timer.schedule - ");
+voltmx.print("Parent Scope :- voltmx.timer.schedule - ");
 
     var timerId = "mytimer12111";
     var i = 0;
@@ -875,6 +842,7 @@ function invoke_timer_task() {
     //
     voltmx.timer.schedule(timerId, timerFunc, 1, true);
     voltmx.print("Parent Scope :- voltmx.timer.schedule - Done");
+
 };
 voltmx.print("Parent Scope: Exit test_case_parent_thread()");</code></pre></figure>
 
@@ -889,7 +857,7 @@ var worker = new voltmx.worker.WorkerThread('WorkerThread2.js');
 
 //invoked when Parent calls worker.postmessage()
 this.addEventListener("message", function(event) {
-	voltmx.print('Worker Scope : onmessage : event.data : ' + event.data);
+voltmx.print('Worker Scope : onmessage : event.data : ' + event.data);
 });
 
 self.postMessage("Hello from Worker");
@@ -898,17 +866,17 @@ invoke_timer_task();
 
 //
 function invoke_timer_task() {
-    voltmx.print("Worker Scope :- voltmx.timer.schedule - ");
-    
+voltmx.print("Worker Scope :- voltmx.timer.schedule - ");
+
     var timerId = "mytimer121";
     var i = 0;
-    
+
     function timerFunc() {
-    
+
         i++;
         voltmx.print("Worker Scope :- voltmx.timer.schedule - In timerFunc() : " + i);
 
-        
+
         if(i &gt; 20) {
             voltmx.print("Worker Scope :- voltmx.timer.schedule - Stopping timer : ");
             voltmx.timer.cancel(timerId);
@@ -917,6 +885,7 @@ function invoke_timer_task() {
     //
     voltmx.timer.schedule(timerId,timerFunc, 1, true);
     voltmx.print("Worker Scope :- voltmx.timer.schedule - Done");
+
 };
 voltmx.print("Worker Scope: Loading done");</code></pre></figure>
 
@@ -929,7 +898,7 @@ voltmx.print("Grand child: Worker2 Scope: Init");
 
 //invoked when Parent calls worker.postmessage()
 this.addEventListener("message", function(event) {
-	voltmx.print('Grand child: Worker2 Scope : onmessage : event.data : ' + event.data);
+voltmx.print('Grand child: Worker2 Scope : onmessage : event.data : ' + event.data);
 });
 
 self.postMessage("Hello from Worker2");
@@ -938,25 +907,26 @@ invoke_timer_task();
 
 //
 function invoke_timer_task () {
-    voltmx.print("Grand child: Worker2 Scope :- voltmx.timer.schedule - ");
-    
+voltmx.print("Grand child: Worker2 Scope :- voltmx.timer.schedule - ");
+
     var timerId = "mytimer1211";
     var i = 0;
-    
+
     function timerFunc()
     {
         i++;
         voltmx.print("Worker2 Scope :- voltmx.timer.schedule - In timerFunc() : " + i + " : Grand child ");
-        
+
         if(i &gt; 20) {
             voltmx.print("Grand child: Worker2 Scope :- voltmx.timer.schedule - Stopping timer : ");
             voltmx.timer.cancel(timerId);
         }
     };
-    
+
     //
     voltmx.timer.schedule(timerId,timerFunc, 1, true);
     voltmx.print("Grand child: Worker2 Scope :- voltmx.timer.schedule - Done");
+
 };
 voltmx.print("Grand child: Worker2 Scope : Loading done");</code></pre></figure>
       <h3 id="scope-rules-and-supported-apis">
@@ -1207,7 +1177,7 @@ voltmx.print("Grand child: Worker2 Scope : Loading done");</code></pre></figure>
       </h3>
     
 
-<p>Following are some worker life cycle notes: </p>
+<p>Following are some worker life cycle notes:</p>
 
 <ul>
   <li>Call to Worker constructor will create a new Worker instance and a new parallel execution environment context is created, and immediately starts execution in the new parallel thread of control in an asynchronous manner. In this new thread, first the Worker will try to load the ‘workerjs’ script.</li>
