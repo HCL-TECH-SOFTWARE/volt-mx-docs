@@ -2,16 +2,12 @@
 layout: "documentation"
 category: "engagement_api_guide"
 ---
-                            
 
-
-Create Geolocation
-==================
+# Create Geolocation
 
 The **Create Geolocation** API adds a geolocation.
 
-Use Case
---------
+## Use Case
 
 The Create Geolocation API defines a high-level interface to a location information such as latitude and longitude. Based on your requirement, you can create required geolocations. The created geolocations can be used in following scenarios:
 
@@ -19,8 +15,7 @@ Applications like Facebook can gather location-based data and show advertisement
 
 Apps related with public transport data create maps that help people to make better decisions while commuting in a city.
 
-URL
----
+## URL
 
 The HTTP URL for **Create Geolocation** API is:
 
@@ -29,88 +24,76 @@ The HTTP URL for **Create Geolocation** API is:
 
 This API implements Gateway Filter for Authentication to authenticate access of the API by a user.
 
-Method
-------
+## Method
 
 POST
 
-Header
-------
+## Header
 
 The payload's request header includes Content-Type as application/json;charset=UTF-8.
 
-Input Parameters
-----------------
+## Input Parameters
 
 The following fields are input parameters:
 
-  
-| Input Parameter | Required | Type | Description |
-| --- | --- | --- | --- |
-| name | Yes | string | Name of the geolocation to be created. |
-| description | Optional | string | Description of the geolocation to be created. |
-| latitude | Yes | long | The latitude of the new geolocation. Latitude is a geographic coordinate that specifies the north–south position of a location on the earth's surface. Geographic coordinates are specified in decimal degrees |
-| longitude | Yes | long | The longitude of the new geolocation. Longitude specifies the east–west position of a location on the earth's surface. Geographic coordinates are specified in decimal degrees. |
-| altitude | Yes | long | The height of the location to be created, in relation to sea level or ground level. |
-| miles | Yes | long | The radius of the geolocation to be created. |
-| clientAction | Optional | string | Possible values are: "Notify Engagement Server" - This is the default value. This means that the client application will need to update its location with the Engagement server when the geoboundary is entered. This could be used in a scenario where the Engagement server will need to send the notifications because of a location-based campaign that is set up. "Local Notification"- This value means that the client application must display a local notification when the geoboundary is entered. All the geoboundaries with this clientAction have a local notification message that is associated and this is the message that is displayed in the local notification. "Custom Client Logic" - This value is any java script code that needs to be executed by the client application. A geoboundary with this clientAction will have a java script code that is associated with it which can be executed on the client side if needed. |
-| customLogic | Optional | string | The java script code to be executed when clientAction is "Custom Client Logic". |
-| locationTags | Optional | string | An array of tags associated with the location. These tags represent additional data that is associated with the geoboundaries. The tags can be used to filter the list of geoboundaries that are returned. For example, geoboundaries can be tagged with an application name and only those geoboundaries associated with the tag can be retrieved when needed. |
-| metadata | Optional | array | An array of key/value pairs that contain metadata about the new geolocation. |
+| Input Parameter | Required | Type   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| --------------- | -------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name            | Yes      | string | Name of the geolocation to be created.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| description     | Optional | string | Description of the geolocation to be created.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| latitude        | Yes      | long   | The latitude of the new geolocation. Latitude is a geographic coordinate that specifies the north–south position of a location on the earth's surface. Geographic coordinates are specified in decimal degrees                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| longitude       | Yes      | long   | The longitude of the new geolocation. Longitude specifies the east–west position of a location on the earth's surface. Geographic coordinates are specified in decimal degrees.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| altitude        | Yes      | long   | The height of the location to be created, in relation to sea level or ground level.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| miles           | Yes      | long   | The radius of the geolocation to be created.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| clientAction    | Optional | string | Possible values are: "Notify Engagement Server" - This is the default value. This means that the client application will need to update its location with the Engagement server when the geoboundary is entered. This could be used in a scenario where the Engagement server will need to send the notifications because of a location-based campaign that is set up. "Local Notification"- This value means that the client application must display a local notification when the geoboundary is entered. All the geoboundaries with this clientAction have a local notification message that is associated and this is the message that is displayed in the local notification. "Custom Client Logic" - This value is any java script code that needs to be executed by the client application. A geoboundary with this clientAction will have a java script code that is associated with it which can be executed on the client side if needed. |
+| customLogic     | Optional | string | The java script code to be executed when clientAction is "Custom Client Logic".                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| locationTags    | Optional | string | An array of tags associated with the location. These tags represent additional data that is associated with the geoboundaries. The tags can be used to filter the list of geoboundaries that are returned. For example, geoboundaries can be tagged with an application name and only those geoboundaries associated with the tag can be retrieved when needed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| metadata        | Optional | array  | An array of key/value pairs that contain metadata about the new geolocation.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
-Sample Request
---------------
+## Sample Request
 
 {% highlight voltMx %}{
-  "name":"Lexington Ave",
-  "description":"Best Luxury Hotels in New York City",
-  "latitude":15.22,
-  "longitude":15.22,
-  "altitude":20.1,
-  "miles":1.1
-  "clientAction":"customLogic/localNotification/notifyEngagementServer",
-  "customLogic": "sdasd",
-  "locationTags": ["tag1", "tag2", "tag3"],
-  "metadata": [{
-      "key": "metaData1",
-	  "value": "metaValue1"
-	}, {
-	  "key": "metaData2",
-	  "value": "metaValue2"
-	}]  
+"name":"Lexington Ave",
+"description":"Best Luxury Hotels in New York City",
+"latitude":15.22,
+"longitude":15.22,
+"altitude":20.1,
+"miles":1.1
+"clientAction":"customLogic/localNotification/notifyEngagementServer",
+"customLogic": "sdasd",
+"locationTags": ["tag1", "tag2", "tag3"],
+"metadata": [{
+"key": "metaData1",
+"value": "metaValue1"
+}, {
+"key": "metaData2",
+"value": "metaValue2"
+}]  
 }
 {% endhighlight %}
 
-Output Parameters
------------------
+## Output Parameters
 
 The following fields are output parameters:
 
-  
-| Output Parameter | Type | Description |
-| --- | --- | --- |
-| message | string | Response status code |
-| id | long | ID of the geolocation that was created. |
+| Output Parameter | Type   | Description                             |
+| ---------------- | ------ | --------------------------------------- |
+| message          | string | Response status code                    |
+| id               | long   | ID of the geolocation that was created. |
 
-Sample Response
----------------
+## Sample Response
 
 {% highlight voltMx %}{  
    "message" : "Details added successfully",  
    "id" : "1"  
-)  
+)
 
 {% endhighlight %}
 
-Response Status
----------------
+## Response Status
 
-  
-| Code | Description |
-| --- | --- |
-| Status 200 | Details added successfully |
+| Code       | Description                                                                             |
+| ---------- | --------------------------------------------------------------------------------------- |
+| Status 200 | Details added successfully                                                              |
 | Status 400 | Name is requiredLatitude is required, Longitude is required, Location Miles is required |
-| Status 401 | Unauthorized request |
-| Status 500 | Server failure to process request |
-
-<table class="TableStyle-RevisionTable" cellspacing="0" style="margin-left: 0;margin-right: auto;mc-table-style: url('../Resources/TableStyles/RevisionTable.css');" data-mc-conditions="Default.HTML"><colgroup><col class="TableStyle-RevisionTable-Column-Column1"> <col class="TableStyle-RevisionTable-Column-Column1"> <col class="TableStyle-RevisionTable-Column-Column1"></colgroup><tbody><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyE-Column1-Body1">Rev</td><td class="TableStyle-RevisionTable-BodyE-Column1-Body1">Author</td><td class="TableStyle-RevisionTable-BodyD-Column1-Body1">Edits</td></tr><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyB-Column1-Body1">7.3</td><td class="TableStyle-RevisionTable-BodyB-Column1-Body1">SS</td><td class="TableStyle-RevisionTable-BodyA-Column1-Body1">SS</td></tr></tbody></table>
+| Status 401 | Unauthorized request                                                                    |
+| Status 500 | Server failure to process request                                                       |

@@ -2,16 +2,12 @@
 layout: "documentation"
 category: "engagement_api_guide"
 ---
-                            
 
-
-Inbound Status API
-==================
+# Inbound Status API
 
 The Inbound Status API lets you query the status of inbound SMS.
 
-URL
----
+## URL
 
 The HTTP URL for Inbound Status API is:
 
@@ -20,68 +16,60 @@ The HTTP URL for Inbound Status API is:
 
 > **_Note:_** Navigate to Settings > Status > Inbound SMS tab > List view > Inbound Status column. Use the SMS ID displayed in the column to use in URL as request ID.
 
-Method
-------
+## Method
 
 GET
 
-Output Parameters
------------------
+## Output Parameters
 
 The following fields are output parameters:
 
-  
-| Output Parameter | Type | Description |
-| --- | --- | --- |
-| audienceId | long | Unique ID assigned to a user |
-| audienceMemberName | string | User name |
-| inbRequestId | long | Inbound request ID |
-| inbNumber | long | inbound number |
-| inbCommand | alphanumeric | inbound command |
-| phoneNumber | long | Phone number of the user |
-| inbCreatedDateStr | string | Date on which the inbound SMS was created |
-| inbUpdatedDateStr | string | Date on which the inbound SMS was updated |
-| inbStatusMessage | string | Inbound SMS status message string |
-| outbStatusMessage | string | Outbound SMS status message string |
-| outbSmsContent | string | Outbound SMS message string |
-| outbSmsId | string | Outbound SMS message ID |
-| outbUpdatedDateStr | string | Date on which the outbound SMS is updated |
-| outbCreatedDateStr | string | Date on which the outbound SMS is created |
-| inbStatus | string | Current inboud SMS message description |
-| outbStatus | string | Current outbound SMS message description |
+| Output Parameter   | Type         | Description                               |
+| ------------------ | ------------ | ----------------------------------------- |
+| audienceId         | long         | Unique ID assigned to a user              |
+| audienceMemberName | string       | User name                                 |
+| inbRequestId       | long         | Inbound request ID                        |
+| inbNumber          | long         | inbound number                            |
+| inbCommand         | alphanumeric | inbound command                           |
+| phoneNumber        | long         | Phone number of the user                  |
+| inbCreatedDateStr  | string       | Date on which the inbound SMS was created |
+| inbUpdatedDateStr  | string       | Date on which the inbound SMS was updated |
+| inbStatusMessage   | string       | Inbound SMS status message string         |
+| outbStatusMessage  | string       | Outbound SMS status message string        |
+| outbSmsContent     | string       | Outbound SMS message string               |
+| outbSmsId          | string       | Outbound SMS message ID                   |
+| outbUpdatedDateStr | string       | Date on which the outbound SMS is updated |
+| outbCreatedDateStr | string       | Date on which the outbound SMS is created |
+| inbStatus          | string       | Current inboud SMS message description    |
+| outbStatus         | string       | Current outbound SMS message description  |
 
-Sample Response
----------------
+## Sample Response
 
 {% highlight voltMx %}{
-  "audienceId" : 2,
-  "audienceMemberName" : "Latha Ganesh",
-  "inbRequestId" : "7131636866524315584",
-  "inbNumber" : "5OCX12769CVB005432X",
-  "inbCommand" : "Bill",
-  "phoneNumber" : "+919648092200",
-  "inbCreatedDateStr" : "08/23/2016 10:15:13 PM IST",
-  "inbUpdatedDateStr" : "08/23/2016 10:15:17 PM IST",
-  "inbStatusMessage" : "No Inbound number found.",
-  "outbStatusMessage" : "Not attempted.",
-  "outbSmsContent" : "",
-  "outbSmsId" : "",
-  "outbUpdatedDateStr" : "",
-  "outbCreatedDateStr" : "",
-  "inbStatus" : "Invalid",
-  "outbStatus" : "Not Attempted"
+"audienceId" : 2,
+"audienceMemberName" : "Latha Ganesh",
+"inbRequestId" : "7131636866524315584",
+"inbNumber" : "5OCX12769CVB005432X",
+"inbCommand" : "Bill",
+"phoneNumber" : "+919648092200",
+"inbCreatedDateStr" : "08/23/2016 10:15:13 PM IST",
+"inbUpdatedDateStr" : "08/23/2016 10:15:17 PM IST",
+"inbStatusMessage" : "No Inbound number found.",
+"outbStatusMessage" : "Not attempted.",
+"outbSmsContent" : "",
+"outbSmsId" : "",
+"outbUpdatedDateStr" : "",
+"outbCreatedDateStr" : "",
+"inbStatus" : "Invalid",
+"outbStatus" : "Not Attempted"
 }
 {% endhighlight %}
 
-Response Status
----------------
+## Response Status
 
-  
-| Code | Description |
-| --- | --- |
-| Status 200 | Inbound status |
-| Status 400 | No data found |
-| Status 401 | Unauthorized request |
+| Code       | Description                       |
+| ---------- | --------------------------------- |
+| Status 200 | Inbound status                    |
+| Status 400 | No data found                     |
+| Status 401 | Unauthorized request              |
 | Status 500 | Server failure to process request |
-
-<table class="TableStyle-RevisionTable" cellspacing="0" style="mc-table-style: url('../Resources/TableStyles/RevisionTable.css');" data-mc-conditions="Default.HTML"><colgroup><col class="TableStyle-RevisionTable-Column-Column1"> <col class="TableStyle-RevisionTable-Column-Column1"> <col class="TableStyle-RevisionTable-Column-Column1"></colgroup><tbody><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyE-Column1-Body1">Rev</td><td class="TableStyle-RevisionTable-BodyE-Column1-Body1">Author</td><td class="TableStyle-RevisionTable-BodyD-Column1-Body1">Edits</td></tr><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyB-Column1-Body1">7.1</td><td class="TableStyle-RevisionTable-BodyB-Column1-Body1">AU</td><td class="TableStyle-RevisionTable-BodyA-Column1-Body1">AU</td></tr></tbody></table>

@@ -2,16 +2,12 @@
 layout: "documentation"
 category: "engagement_api_guide"
 ---
-                            
 
-
-Delete Pass Certificate
-=======================
+# Delete Pass Certificate
 
 The **Delete Pass Certificate** API deletes a pass certificate from Engagement Server. This service accepts pass certificate id to delete a specific pass certificate.
 
-URL
----
+## URL
 
 The HTTP URL for **Delete Pass Certificate** API is:
 
@@ -20,41 +16,33 @@ The HTTP URL for **Delete Pass Certificate** API is:
 
 This service implements ‘Gateway Filter for Authentication’ to authenticate access of the service by a user.
 
-Method
-------
+## Method
 
 DELETE
 
-Input Parameters
-----------------
+## Input Parameters
 
 The following fields are input parameters:
 
-  
-| Input Parameter | Required | Type | Description |
-| --- | --- | --- | --- |
-| ID | Yes | long | The unique ID is generated when a pass certificate is uploaded |
+| Input Parameter | Required | Type | Description                                                    |
+| --------------- | -------- | ---- | -------------------------------------------------------------- |
+| ID              | Yes      | long | The unique ID is generated when a pass certificate is uploaded |
 
-Sample Response
----------------
+## Sample Response
 
 {% highlight voltMx %}{  
-	"message": "Pass Certificate deleted successfully",
-	  "id": "id"
+"message": "Pass Certificate deleted successfully",
+  "id": "id"
 }
 {% endhighlight %}
 
 > **_Note:_** In response pay load ID will be the deleted pass certificate ID.
 
-Response Status
----------------
+## Response Status
 
-  
-| Code | Description |
-| --- | --- |
+| Code       | Description                           |
+| ---------- | ------------------------------------- |
 | Status 200 | Pass certificate deleted successfully |
-| Status 400 | Bad request |
-| Status 401 | Unauthorized request |
-| Status 500 | Server failure to process request |
-
-<table class="TableStyle-RevisionTable" cellspacing="0" style="margin-left: 0;margin-right: auto;mc-table-style: url('../Resources/TableStyles/RevisionTable.css');" data-mc-conditions="Default.HTML"><colgroup><col class="TableStyle-RevisionTable-Column-Column1"> <col class="TableStyle-RevisionTable-Column-Column1"> <col class="TableStyle-RevisionTable-Column-Column1"></colgroup><tbody><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyE-Column1-Body1">Rev</td><td class="TableStyle-RevisionTable-BodyE-Column1-Body1">Author</td><td class="TableStyle-RevisionTable-BodyD-Column1-Body1">Edits</td></tr><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyB-Column1-Body1">7.1</td><td class="TableStyle-RevisionTable-BodyB-Column1-Body1">AU</td><td class="TableStyle-RevisionTable-BodyA-Column1-Body1">AU</td></tr></tbody></table>
+| Status 400 | Bad request                           |
+| Status 401 | Unauthorized request                  |
+| Status 500 | Server failure to process request     |
