@@ -45,7 +45,7 @@ The installation of the Volt MX Foundry software supports the following versions
 
 #### **Tomcat**
 
-*   Tomcat 9.0.33
+*   Tomcat 9.0.45
 
 #### JBoss Enterprise Application Platform (EAP)
 
@@ -70,7 +70,7 @@ The installation of the Volt MX Foundry software supports the following versions
 #### Microsoft SQL Server
 
 *   SQL Server 2017
-*   SQL Server 2016
+*   SQL Server 2016 SP1 and later
 *   Azure SQL
 
 #### MariaDB
