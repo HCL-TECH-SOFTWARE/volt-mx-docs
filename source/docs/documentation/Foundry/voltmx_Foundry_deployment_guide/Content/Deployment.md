@@ -39,7 +39,7 @@ Volt MX Foundry Deployment Glossary
 
 The following are the underlying software requirements for Volt MX Foundry on-premises.
 
-For a complete list operating systems, app servers, databases, and Java Runtime Environment supported by Volt MX Foundry , refer to [Software Requirements by Volt MX Foundry]({{ site.baseurl }}/docs/documentation/Foundry/voltmxfoundry_supported_devices_os_browsers/Content/FoundryV9SP2.html).
+For a complete list operating systems, app servers, databases, and Java Runtime Environment supported by Volt MX Foundry , refer to [Software Requirements by Volt MX Foundry]({{ site.baseurl }}/docs/documentation/Foundry/voltmxfoundry_supported_devices_os_browsers/Content/Supported_Config_Server_EnvV9SP2.html).
 
 | Requirement                  | Supported                                       |
 | ---------------------------- | ----------------------------------------------- |
