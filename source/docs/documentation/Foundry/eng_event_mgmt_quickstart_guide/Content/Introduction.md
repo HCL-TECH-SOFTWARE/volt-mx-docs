@@ -20,4 +20,3 @@ The QuickStart guide provides instructions for configuring and executing a sampl
 *   [Setting Event Message Priority](setting_event_priority.html)
 *   [API Payload](API Payload.html)
 
-You can also access the [Revision History](eng_event_mgmt_quickstart_guide.html).
