@@ -7,7 +7,7 @@ User Guide: How to Create an Identity Service in API Management > APIs
 
 # APIs - API Management
 
-A Volt MX Foundry app comprises a group of services, [shared and non-shared services](Export-Import_Apps.html#Shared-NonSharedServices). With API Management, you can manage (create, edit, and delete) shared services (identity, integration, orchestration, objects, and logic for Node.js services) without linking or configuring them within an app. After configuring the services in the **APIs** page, you can edit, clone, view a sample code, and delete a service. When you create the services in the **APIs** page, the services are not linked to apps automatically. You can link the services across any apps created for that account in Volt MX Foundry Console. The **APIs** page also allows you to view the list of apps or services that are using or referencing a given service. When you make changes to the services in the **APIs** page, the changes will be reflected in the services associated with other apps.
+A Volt MX Foundry app comprises a group of services, [shared and non-shared services](Export-Import_Apps.html#Shared-NonSharedServices). With API Management, you can manage (create, edit, and delete) shared services (identity, integration, orchestration, and objects) without linking or configuring them within an app. After configuring the services in the **APIs** page, you can edit, clone, view a sample code, and delete a service. When you create the services in the **APIs** page, the services are not linked to apps automatically. You can link the services across any apps created for that account in Volt MX Foundry Console. The **APIs** page also allows you to view the list of apps or services that are using or referencing a given service. When you make changes to the services in the **APIs** page, the changes will be reflected in the services associated with other apps.
 
 > **_Note:_**  You can edit a service. When you make a change to the service, the changes will be reflected in the services associated with other apps.<br>  
 > You cannot delete a service if it is associated with an app or a service.
@@ -18,7 +18,7 @@ To create services through the APIs page, follow these steps:
 
     ![](Resources/Images/OnPrem/AppMgmtIdt_670x427.png)
 
-    Under the **APIs** page, the **Identity**, **Integration**, **Orchestration**, **Objects**, and **Logic** tabs appear and display list the existing services (if any). Under the **APIs**, the **Identity**, **Integration**, **Orchestration**, and **Objects** views display the following columns:
+    Under the **APIs** page, the **Identity**, **Integration**, **Orchestration**, and **Objects** tabs appear and display list the existing services (if any). Under the **APIs**, the **Identity**, **Integration**, **Orchestration**, and **Objects** views display the following columns:
 
     | Column                       | Description                                                                                                                                                                                                                                                                                                |
     | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -38,8 +38,6 @@ To create services through the APIs page, follow these steps:
     - [**Orchestration**](#orchestration-service)
 
     - [**Objects**](#object-service)
-
-    - [**Logic**](#logic-service)
 
 ## Identity Service
 
@@ -103,16 +101,6 @@ Volt MX Foundry Object Services enable model-driven application design and devel
     > <br/>
     > Services created under the **APIs** page are not linked to apps. You can link or unlink services to an app only through the **[Existing Services](ObjectsServices/ObjectservicesActions.html#Reuse)** dialog while you are adding apps.
 
-## Logic Service
-
-Volt MX Foundry logic services help you import and integrate Node.js services (APIs) directly into Volt MX Foundry for developing server-side and networking applications.
-
-### How to Integrate Node.js Services into Volt MX Foundry Apps using API Management
-
-1.  [How to Publish Node.js Package into Node.js Runtime Server in API Management](Logic_Publish_API_Management.html). This section details how to import a Node.js package into Volt MX Foundry Console and publish the package to the Node.js Runtime Server.
-2.  [How to Integrate Node.js Services into Volt MX Foundry Apps](Logic_in_Apps.html#how-to-integrate-node-js-services-into-foundry-apps). This section details how to integrate Node.js services to Volt MX Foundry apps.
-
-    > **_Note:_** For more details on how to Publish Node.js Package into Node.js Runtime Server in API Management, prerequisites, use case, limitations, and Node.js package structure, refer [Logic - API Management](Logic.html)
 
 ## How to View Associated Apps in APIs
 
