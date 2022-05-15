@@ -9,7 +9,7 @@ category: "custom_metrics_and_reports"
 Standard Metrics
 ----------------
 
-*   
+  
 <details close markdown="block"><summary>Fields</summary>
     
     1.  Error Message
@@ -44,9 +44,7 @@ Standard Metrics
     30.  Region - Obtained from IP for geolocation mapping. This field is not populated if this detail cannot be resolved from the IP address.
     31.  Zip - Obtained from IP for geolocation mapping. This field is not populated if this detail cannot be resolved from the IP address.
     
-
-*
-   </details>
+</details>
 
 <details close markdown="block"><summary>Measures</summary>
     
