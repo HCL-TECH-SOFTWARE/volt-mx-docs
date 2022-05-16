@@ -20,7 +20,7 @@ To sign into the Volt MX Foundry Analytics mobile app, do the following:
 
 1.  Launch the Volt MX Foundry app.
 
-The banner appears with the app depreciation details and the new app version link to the **VoltMX App**.
+    The banner appears with the app depreciation details and the new app version link to the **VoltMX App**.
 
 2.  To install the new version app from the app store, click **OPEN VOLTMX APP**.
     
