@@ -16,10 +16,6 @@ For successful configuration with reports database, and to access data sources o
 
 > **_Note:_** Volt MX Products support only Jasper Professional or Jasper Enterprise edition and not the community edition.
 
-Purpose
--------
-
-The document explains how to install and set up JasperReports Server 6.0 or 6.2 or 7.1 that runs out-of-the-box reports for Volt MX Server 7.3 for on-premise customers.
 
 Intended Audience
 -----------------
