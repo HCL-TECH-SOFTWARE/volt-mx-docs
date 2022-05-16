@@ -64,18 +64,4 @@ When the system launches an app, it temporarily displays a static launch image o
 
 **For more information see**: [http://developer.android.com/guide/practices/screens\_support.html](http://developer.android.com/guide/practices/screens_support.html)
 
-### Guidelines for Configuring Splash Screen for Windows Applications
 
-For splash screen, image resolutions are provided in the following table. In Volt MX Iris, splash screen images must be placed in `resources` folder .
-
-*   There is no support for Windows splash screen in landscape mode.
-
-  
-| Image format | Resolution | Image Name |
-| --- | --- | --- |
-| WVGA | 480 × 800 | SplashScreenImage.screen\_WVGA.png |
-| WXGA | 768 × 1280 | SplashScreenImage.screen\_WXGA.png |
-| 720p  | 720 x 1280 | SplashScreenImage.screen\_720p.png |
-
-**For more information see**:  
-[https://msdn.microsoft.com/en-us/library/windows/apps/ff769511(v=vs.105).aspx](https://msdn.microsoft.com/en-us/library/windows/apps/ff769511(v=vs.105).aspx)

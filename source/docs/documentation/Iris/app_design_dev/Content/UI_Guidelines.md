@@ -69,29 +69,6 @@ For more information, see
 | --- | --- | --- | --- | --- | --- | --- |
 | App Icon Size | 36 x 36 pixels | 48 x 48 pixels | 72 x 72 pixels | 96 x 96 pixels | 144 x 144 pixels | 192 x 192 pixels |
 
-### Guidelines for Configuring Application Icon for Windows Applications
-
-Following are the application icon resolutions to be used in Windows apps:
-
-*   Application Icon should be 62 x 62 pixels.
-*   Startup pin images should be 173 x 173 pixels.
-
-### Guidelines for Configuring Application Icon for BlackBerry Applications
-
-The following information is taken from BlackBerry website. For more information, see [https://developer.blackberry.com/design/bb10/application\_icons.html](https://developer.blackberry.com/design/bb10/application_icons.html)[](https://developer.blackberry.com/design/bb10/application_icons.html)
-
- [](https://developer.blackberry.com/design/bb10/application_icons.html) 
-
-| Screen size | App Icon Size |
-| --- | --- |
-| 480 x 320 | 80 x 80 pixels |
-| 320 x 240 | 52 x 52 pixels |
-| 480 x 360 | 80 x 80 pixels |
-| 360 x 400 | 72 x 72 pixels |
-| 320 x 240 | 44 x 44 pixels |
-| 360 x 400 | 63 x 63 pixels |
-| 1024 x 600 (landscape) | 86 x 86 pixels |
-
 ### Configure an Application Icon from Volt MX Iris
 
 ![](Resources/Images/configuring_App_Icon_533x219.png)
