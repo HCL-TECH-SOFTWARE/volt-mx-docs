@@ -12,8 +12,8 @@ Custom Metrics APIs for Volt MX Server
 
 This section contains Javadoc information about classes. Classes define the API required for sending custom metrics from Volt MX Server. These classes are as follows:
 
-*   [com.hcl.voltmx.middleware.metrics.VoltMXCustomMetricsDataSet](#com.hcl.voltmx.middleware.metrics.voltmxcustommetricsdataset)
-*   [com.hcl.voltmx.middleware.metrics.VoltMXCustomMetrics](#com.hcl.voltmx.middleware.metrics.voltmxcustommetrics)
+*   [com.hcl.voltmx.middleware.metrics.VoltMXCustomMetricsDataSet](#comhclvoltmxmiddlewaremetricsvoltmxcustommetricsdataset)
+*   [com.hcl.voltmx.middleware.metrics.VoltMXCustomMetrics](#comhclvoltmxmiddlewaremetricsvoltmxcustommetrics)
 *   [MetricsException](#metricsexception)
 
 ### com.hcl.voltmx.middleware.metrics.VoltMXCustomMetricsDataSet
