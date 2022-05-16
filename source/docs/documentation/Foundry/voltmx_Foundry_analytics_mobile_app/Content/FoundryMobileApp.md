@@ -22,17 +22,17 @@ To sign into the Volt MX Foundry Analytics mobile app, do the following:
 
 The banner appears with the app depreciation details and the new app version link to the **VoltMX App**.
 
-3.  To install the new version app from the app store, click **OPEN VOLTMX APP**.
+2.  To install the new version app from the app store, click **OPEN VOLTMX APP**.
     
     > **_Important:_** You can continue to use the same email address and password to use the Volt MX App version.
     
-4.  To continue with the current app version. click the **CLOSE** button.
+3.  To continue with the current app version. click the **CLOSE** button.
     
     The sign in screen for Volt MX Foundry appears.
     
-5.  Enter your username and password and press SIGN IN.
+4.  Enter your username and password and press SIGN IN.
 
-The Home screen appears.
+    The Home screen appears.
 
 Switch Accounts
 ---------------
@@ -43,9 +43,9 @@ To switch accounts, do the following:
 
 1.  Press the accounts menu at the top of the Home page.
 
-A menu of accounts appears.
+    A menu of accounts appears.
 
-3.  Select an account.
+2.  Select an account.
 
 How to Use Standard Reports
 ---------------------------
@@ -56,25 +56,25 @@ To use Standard Reports, do the following:
 
 1.  Press **Standard Reports**.
 
-The list of standard reports appears. The number of standard reports that are available is shown at top of screen. The number of available reports is available after a user’s first visit to the Volt MX Foundry Analytics.
+    The list of standard reports appears. The number of standard reports that are available is shown at top of screen. The number of available reports is available after a user’s first visit to the Volt MX Foundry Analytics.
 
-![](Resources/Images/3_MFmobileAppStandardReports_221x391.png)
+    ![](Resources/Images/3_MFmobileAppStandardReports_221x391.png)
 
-4.  Select a report
+2.  Select a report
 
-The filter criteria pop-up appears .
+    The filter criteria pop-up appears .
 
-![](Resources/Images/4_MFmobileAppCriteria_240x425.png)
+    ![](Resources/Images/4_MFmobileAppCriteria_240x425.png)
 
-7.  Select the filter criteria for the report and click **Generate**.
+3.  Select the filter criteria for the report and click **Generate**.
 
-Volt MX  Foundry generates and opens the report. The report is available in landscape mode only.
+    Volt MX  Foundry generates and opens the report. The report is available in landscape mode only.
 
-![](Resources/Images/5_MFmobileAppWorldMap_554x310.png)
+    ![](Resources/Images/5_MFmobileAppWorldMap_554x310.png)
 
-10.  Click **Favorites** (star icon) to save the report as a favorite.
+4.  Click **Favorites** (star icon) to save the report as a favorite.
 
-Saving a report as a favorite saves the filter criteria that Volt MX Foundry uses to generate the report.
+    Saving a report as a favorite saves the filter criteria that Volt MX Foundry uses to generate the report.
 
 How to Use Custom Reports
 -------------------------
@@ -85,19 +85,19 @@ To use Custom Reports, do the following:
 
 1.  Press **Custom Reports**.
 
-The list of reports that appears are the custom reports that are available to you for the Volt MX Foundry account in private folders. Click Shared to view the list of custom reports that are available in shared folders. The number of custom reports that are available is shown at top of the screen.
+    The list of reports that appears are the custom reports that are available to you for the Volt MX Foundry account in private folders. Click Shared to view the list of custom reports that are available in shared folders. The number of custom reports that are available is shown at top of the screen.
 
-3.  Select a report.
+2.  Select a report.
 
-The filter criteria pop-up appears.
+    The filter criteria pop-up appears.
 
-5.  Select the filter criteria for the report and click **Generate**.
+3.  Select the filter criteria for the report and click **Generate**.
 
-Volt MX  Foundry generates and opens the report. The report is available in landscape mode only.
+    Volt MX  Foundry generates and opens the report. The report is available in landscape mode only.
 
-7.  Click **Favorites** (star icon) if you want to save the report as a favorite.
+4.  Click **Favorites** (star icon) if you want to save the report as a favorite.
 
-Saving a report as a favorite saves the filter criteria that Volt MX Foundry uses to generate the report.
+    Saving a report as a favorite saves the filter criteria that Volt MX Foundry uses to generate the report.
 
 How to Use Favorites
 --------------------
@@ -115,39 +115,39 @@ To edit a user’s level of access to an environment, do the following:
 
 1.  Select a user.
 
-The user account screen appears. You cannot change the email address or role of a user from the Volt MX Foundry mobile app.
+    The user account screen appears. You cannot change the email address or role of a user from the Volt MX Foundry mobile app.
 
-![](Resources/Images/6_MFmobileAppManage_277x491.png)
+    ![](Resources/Images/6_MFmobileAppManage_277x491.png)
 
-4.  Press an environment.
+2.  Press an environment.
 
-A popup appears with the access options. You can grant the user full access or deny the user access to the environment.
+    A popup appears with the access options. You can grant the user full access or deny the user access to the environment.
 
-6.  Select an access option.
-7.  If you do not want to grant the user access to the environment, click **No Access**.
-8.  Click **Save**.
+3.  Select an access option.
+4.  If you do not want to grant the user access to the environment, click **No Access**.
+5.  Click **Save**.
 
 To add a user to the cloud, do the following:
 
 1.  Press **Add** (the plus icon).
 
-The invite user screen appears.
+    The invite user screen appears.
 
-3.  When you are prompted to specify the user role, select a role for the user.
+2.  When you are prompted to specify the user role, select a role for the user.
 
-The available roles are Admin, Billing, and Member.
+    The available roles are Admin, Billing, and Member.
 
-5.  When you are prompted to enter valid details, enter the email address of the user.
+3.  When you are prompted to enter valid details, enter the email address of the user.
 
-Now you can grant the user access to the configured environments for Iris and Volt MX Foundry.
+    Now you can grant the user access to the configured environments for Iris and Volt MX Foundry.
 
-7.  Press an environment.
+4.  Press an environment.
 
-A pop-up appears with the access options. You can grant the user full access to the environment.
+    A pop-up appears with the access options. You can grant the user full access to the environment.
 
-9.  Select **Full Access**.
-10.  If you do not want to grant the user access to the environment, press **No Access**.
-11.  Press **Send**.
+5.  Select **Full Access**.
+6.  If you do not want to grant the user access to the environment, press **No Access**.
+7.  Press **Send**.
 
 Volt MX  Foundry saves the user account and sends an invite email to the user.
 
