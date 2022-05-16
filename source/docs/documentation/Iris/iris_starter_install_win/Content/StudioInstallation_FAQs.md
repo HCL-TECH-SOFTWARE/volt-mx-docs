@@ -30,16 +30,16 @@ You are here: FAQs
 This appendix explains a few Frequently Asked Questions (FAQs) and answers.
 
 <details close markdown="block"><summary>Problems with Volt MX Iris installation</summary>
-<p>In case there were problems with your installation, install complete page shows a warning and the logs location i.e. path to the installation directory.</p>
-<ul>
-<li>In case the installation is canceled, the logs are generated in either desktop or installation path.</li>
-<li>If you cancel the installation before <b>Choose Install Folder</b> screen, the logs are generated in desktop.</li>
-<li>If you cancel the installation after <b>Choose Install Folder</b> screen, the logs are generated in the installation folder.</li>
-</ul>
+In case there were problems with your installation, install complete page shows a warning and the logs location i.e. path to the installation directory
+
+- In case the installation is canceled, the logs are generated in either desktop or installation path.
+
+- If you cancel the installation before **Choose Install Folder** screen, the logs are generated in desktop.
+- If you cancel the installation after **Choose Install Folder** screen, the logs are generated in the installation folder.
 </details>
 
 <details close markdown="block"><summary>How to build and publish an app?</summary>
-After installing Volt MX Iris you can refer to the [Getting Started](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/) page to understand how to create an application.
+After installing Volt MX Iris you can refer to the [Getting Started](https://basecamp.voltmx.com/s/getting-started) page to understand how to create an application.
 
 Once you have created your application, you can refer to [Building and Viewing an Application]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/BuildingAndViewAnApp.html).
 
@@ -47,25 +47,11 @@ If you have created an iOS application and want to publish it to the App Store, 
 
 Certain prerequisites for building and publishing your iOS application to the App Store are:
 
-<ul>
-<li><a href="/docs/documentation/Iris/iris_user_guide/Content/iOS_Automatic_Output_Generation.html#prerequisites">Configure Xcode on your Mac</a></li> 
-<li><a href="/docs/documentation/Iris/iris_user_guide/Content/iOS_Automatic_Output_Generation.html#ipa-generation">Connect your Mac with Iris</a></li> 
-<li><a href="https://developer.apple.com/documentation/">Apple Enterprise Distribution Certificate (Release Mode only)</a>
-<ul><li>Using this feature, you can add your Apple enterprise distribution certificate to the Volt MX Management server. To add the certificate, click <b>+Add</b> to select the certificate from its location and then click <b>Open</b>. The selected certificate with size in KB appears next to Enterprise Distribution Certificate label.</li></ul>
-</li>  
-<li><a href="https://developer.apple.com/documentation/">Apple Enterprise Provisioning Profile (Release Mode only)</a>
-<ul><li>Using this feature, you can add your Apple enterprise store provisioning profile to the Volt MX Management server. Click <b>+Add</b> to select the profile from its location and then click <b>Open</b>. The selected profile with size in KB appears next to enterprise store provisioning profile.</li></ul>
-</li>  
-<li><a href="https://developer.apple.com/documentation/">Apple Application Manager (Launchpad app) Push Certificate (Release Mode only)</a>
-<ul><li>Using this feature, you can add your Apple push certificate to the Volt MX Management server. Click <b>+Add</b> to select the certificate from its location and then click <b>Open</b>. The selected certificate with size in KB appears next to push certificate label.</li></ul>
-</li>  
-</ul>
-
-<!-- - [Configure Xcode on your Mac]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/iOS_Automatic_Output_Generation.html#prerequisites)
+- [Configure Xcode on your Mac]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/iOS_Automatic_Output_Generation.html#prerequisites)
 - [Connect your Mac with Iris]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/iOS_Automatic_Output_Generation.html#ipa-generation)
 - [Apple Enterprise Distribution Certificate (Release Mode only)]({{ site.baseurl }}/docs/documentation/7_0/voltmxlibrary/management/emm_quick_start_guide/Content/Creating_Apple_Certificates.html)
 - [Apple Enterprise Provisioning Profile (Release Mode only)]({{ site.baseurl }}/docs/documentation/7_0/voltmxlibrary/management/emm_quick_start_guide/Content/Creating_the_Apple_Enterprise_Wild_Card_Provisioning_Certificate.html)
-- [Apple Application Manager (Launchpad app) Push Certificate (Release Mode only)]({{ site.baseurl }}/docs/documentation/7_0/voltmxlibrary/management/emm_quick_start_guide/Content/Creating_the_Application_Manager**Launchpad_app**Push_Certificate.html) -->
+- [Apple Application Manager (Launchpad app) Push Certificate (Release Mode only)]({{ site.baseurl }}/docs/documentation/7_0/voltmxlibrary/management/emm_quick_start_guide/Content/Creating_the_Application_Manager**Launchpad_app**Push_Certificate.html)
 
 If you have created an Android application and want to publish it to the Google Play Store, you can refer to [Build an Android Application]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/BuildAnAppForAndroid.html).
 
