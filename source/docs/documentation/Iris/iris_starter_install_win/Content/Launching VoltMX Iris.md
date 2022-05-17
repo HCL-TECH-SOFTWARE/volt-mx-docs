@@ -49,7 +49,9 @@ To launch Iris, follow these steps:
 4.  The Hikes screen appears. The Hikes screen displays links
     to different Hikes available in Volt MX Iris. You can go through these hikes to understand various features of Volt MX.
 
-    [![](Resources/Images/welcome_thumb_0_288.png)](Resources/Images/welcome.png)
+    [![](Resources/Images/welcome_vmx.png)](Resources/Images/welcome_vmx.png)
+
+    <!-- [![](Resources/Images/welcome.png)](Resources/Images/welcome.png) -->
 
 5.  Close the Hikes screen. The Volt MX IQ bot gets activated.
 

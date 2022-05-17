@@ -163,7 +163,7 @@ To roll back to a previous version of Volt MX Iris, follow these steps:
 - If you attempt a download when another download is in progress, Volt MX Iris displays a dialog box with the `A download is currently in progress` message.
 - If you attempt to download a version without installing the previous version that was downloaded, Volt MX Iris displays the `A download Fix Pack is pending install. Install the Fix Pack or delete it to continue` message with the **Install** and **Delete**
 
-- [Prerequisites](Prerequisites.html#prerequisites)
+<!-- - [Prerequisites](Prerequisites.html#prerequisites)
   - [System Requirements](Prerequisites.html#system-requirements)
   - [Download Volt MX Iris](Prerequisites.html#download)
 - [Install Volt MX Iris](Installing VoltMX Iris.html#installing)
@@ -171,4 +171,4 @@ To roll back to a previous version of Volt MX Iris, follow these steps:
 - [Post Installation Tasks](Launching VoltMX Iris.html#post-installation-tasks)
   - [Launching Volt MX Iris](Launching VoltMX Iris.html#launching)
 - [Update Volt MX Iris](#)
-- [FAQs](StudioInstallation_FAQs.html#appendix-frequently-asked-questions-faqs)
+- [FAQs](StudioInstallation_FAQs.html#appendix-frequently-asked-questions-faqs) -->
