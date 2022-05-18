@@ -30,24 +30,25 @@ Note: If your release is not shown on this page, it contains no feature changes.
 #### Iris Enhancements
 
 There are new supported devices in this release in Iris, And they are listed below.
-**iOS**
-        iPhone 12
-        iPhone 12 Pro
-        iPhone 12 Pro Max
-        iPhone 12 Mini
-        iPhone 13
-        iPhone 13 Pro
-        iPhone 13 Pro Max
-        iPhone 13 Mini
+<br />
 
-
-**Android**
-        Google Pixel 4
-        Google Pixel 5
-        Google Pixel 6
-        Samsung Galaxy 9
-        Samsung Galaxy 10
-        Samsung Galaxy 21
+**iOS Devices:**
+        iPhone 12,
+        iPhone 12 Pro,
+        iPhone 12 Pro Max,
+        iPhone 12 Mini,
+        iPhone 13,
+        iPhone 13 Pro,
+        iPhone 13 Pro Max,
+        iPhone 13 Mini,
+        
+**Android Devices:**
+        Google Pixel 4,
+        Google Pixel 5,
+        Google Pixel 6,
+        Samsung Galaxy 9,
+        Samsung Galaxy 10,
+        Samsung Galaxy 21,
         Samsung Galaxy 22
 
 The purpose of this fixpack is to address the log4j threat. For the relevant Support note, see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
