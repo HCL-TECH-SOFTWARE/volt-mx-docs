@@ -40,8 +40,7 @@ There are new supported devices in this release in Iris, And they are listed bel
         iPhone 13,
         iPhone 13 Pro,
         iPhone 13 Pro Max,
-        iPhone 13 Mini,
-        
+        iPhone 13 Mini, <br />       
 **Android Devices:**
         Google Pixel 4,
         Google Pixel 5,
