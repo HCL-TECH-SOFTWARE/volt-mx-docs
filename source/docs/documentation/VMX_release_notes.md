@@ -8,7 +8,7 @@ order: 1
 # Volt MX Release Notes
 
 This topic lists new features, enhancements, and changes in Volt MX.
-Note: If your release is not shown on this page, it contains no feature changes. For detailed information about fixes and known issues in Volt MX, please see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
+For detailed information about fixes and known issues in Volt MX, please see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
 
 [Volt Iris](#volt-iris)
 - [V9 Servicepack 2 Fixpack 45](#v9-servicepack-2-fixpack-45)
@@ -40,7 +40,7 @@ There are new supported devices in this release in Iris, And they are listed bel
         iPhone 13,
         iPhone 13 Pro,
         iPhone 13 Pro Max,
-        iPhone 13 Mini, <br />       
+        iPhone 13 Mini <br />       
 **Android Devices:**
         Google Pixel 4,
         Google Pixel 5,
@@ -50,7 +50,7 @@ There are new supported devices in this release in Iris, And they are listed bel
         Samsung Galaxy 21,
         Samsung Galaxy 22
 
-The purpose of this fixpack is to address the log4j threat. For the relevant Support note, see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
+For detailed information about fixes and known issues in this release, please see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
 
 ### V9 Servicepack 2 Fixpack 38
 
