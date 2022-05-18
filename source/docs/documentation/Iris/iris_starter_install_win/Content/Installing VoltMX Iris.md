@@ -30,7 +30,8 @@ You are here: [Install Volt MX Iris](#installing) > [Configuring Volt MX Iris to
 To install Volt MX Iris, follow these steps:
 
 1.  Navigate to the location where you downloaded the installer file VoltMX-Iris-9.0.exe, and double-click it.  
-    [![](Resources/Images/win_st_install_thumb_0_288.png)](Resources/Images/win_st_install.png)
+    [![](Resources/Images/win_st_install.png)](Resources/Images/win_st_install.png)
+    <!-- [![](Resources/Images/win_st_install_thumb_0_288.png)](Resources/Images/win_st_install.png) -->
 2.  The installer extracts the required files.
 
     After the extraction is complete, the Volt MX Iris installation window appears.
@@ -62,7 +63,9 @@ To install Volt MX Iris, follow these steps:
 
 The **Installing Volt MX Iris** page appears, and the installation begins.
 
-[![](Resources/Images/Installing_thumb_0_288.png)](Resources/Images/Installing.png)
+[![](Resources/Images/Installing.png)](Resources/Images/Installing.png)
+
+<!-- [![](Resources/Images/Installing_thumb_0_288.png)](Resources/Images/Installing.png) -->
 
 11. After the installation is complete, the **Install Complete** pane appears.
 
