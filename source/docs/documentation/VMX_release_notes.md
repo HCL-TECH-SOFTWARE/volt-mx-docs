@@ -29,7 +29,7 @@ For detailed information about fixes and known issues in Volt MX, please see the
 
 #### Iris Enhancements
 
-There are new supported devices in this release in Iris, And they are listed below.
+There are new supported devices in this release in Iris, and they are listed below.
 <br />
 
 **iOS Devices:**
