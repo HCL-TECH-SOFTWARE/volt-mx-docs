@@ -3,9 +3,6 @@ layout: "documentation"
 category: "offline_objects_releasenotes"
 ---
                             
-
-[![](Resources/Images/pdf.png)](http://docs.voltmx.com/7_x_PDFs/mobilefoundry/offline_objects_releasenotes.pdf "VoltMX Offline Objects Release Notes")
-
 Offline Objects Release Notes: Introduction
 
 Introduction
@@ -21,10 +18,3 @@ The Offline Objects feature enables you to download objects data from a Mobilefo
 
 [Open topic with navigation](../Content/Introduction.html)
 
-Comments
-
-[Reply](#)
-
- 
-
-</div> <input class="comment-submit" type="button" value="Submit" > </div> </div> </body> <.html></x-turndown>
