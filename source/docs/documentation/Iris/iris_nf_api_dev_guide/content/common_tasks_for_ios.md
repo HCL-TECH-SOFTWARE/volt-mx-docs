@@ -23,7 +23,7 @@ This API allows you to import any iOS native class into JavaScript. All the APIs
 
 To use this API you will follow these general steps:
 
-*   In Iris Enterprise, add the appropriate frameworks to your project. See: [Add or Import Native Function APIs]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/AddOrImportNativeFunctionAPIs.html)
+*   In Iris, add the appropriate frameworks to your project. See: [Add or Import Native Function APIs]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/AddOrImportNativeFunctionAPIs.html)
 *   In JavaScript, import the classes you wish to use using [objc.import](#objcimport).
 *   [Instantiate the class](#creating-instances-using-designated-initializers) (Not needed for static methods).
 *   Use the objects associated with the class.
