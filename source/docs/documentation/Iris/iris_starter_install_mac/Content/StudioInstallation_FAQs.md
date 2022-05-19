@@ -30,12 +30,12 @@ You are here: FAQs -->
 This appendix explains a few Frequently Asked Questions (FAQs) and answers.
 
 <details close markdown="block"><summary>Problems with Volt MX Iris installation</summary>
-In case there were problems with your installation, install complete page shows a warning and the logs location i.e. path to the installation directory
-
-- In case the installation is canceled, the logs are generated in either desktop or installation path.
-
-- If you cancel the installation before **Choose Install Folder** screen, the logs are generated in desktop.
-- If you cancel the installation after **Choose Install Folder** screen, the logs are generated in the installation folder.
+<p>In case there were problems with your installation, install complete page shows a warning and the logs location i.e. path to the installation directory.</p>
+<ul>
+<li>In case the installation is canceled, the logs are generated in either desktop or installation path.</li>
+<li>If you cancel the installation before <b>Choose Install Folder</b> screen, the logs are generated in desktop.</li>
+<li>If you cancel the installation after <b>Choose Install Folder</b> screen, the logs are generated in the installation folder.</li>
+</ul>
 </details>
 
 <details close markdown="block"><summary>How to build and publish an app?</summary>
