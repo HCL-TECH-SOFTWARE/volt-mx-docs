@@ -33,27 +33,30 @@ To configure Offline Objects in Volt MX Iris, follow these steps.
         
         ![](Resources/Images/Desktop-Web_628x378.png)
         
-8.  Now, set up the app supporting offline objects. To do so, under the Project tab, right-click Modules to select **New JS Module** from the list. The Module.js tab appears. Copy the following code in the Module.js tab.{% highlight voltMx %}var options = {};
-    
-    function onSetupSuccess() {
-        alert("Setup Success");
-    }
-    
-    function onSetupFailed() {
-        alert("Setup Failed");
-    }
-    
-    function setupSync() {
-        VMXFoundry.OfflineObjects.setup(options, onSetupSuccess, onSetupFailed);
-    }  
-    
-    {% endhighlight %}
-9.  Create the required UI and assign the respective actions to the UI elements.
-10.  Set the user action to sync data. You can do this through the following ways:
-    *   Define a process
-    *   Invoke a method on a button click
-    *   Object Models
+8.  Now, set up the app supporting offline objects. To do so, under the Project tab, right-click Modules to select **New JS Module** from the list. The Module.js tab appears. Copy the following code in the Module.js tab.
 
-> **_Note:_** You can also generate the Object Models' code to use in the client application. For more information about integrating offline objects with generated object models, click [here](Offline Objects with Generated Object Models.html).  
-  
+
+    <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
+        function onSetupSuccess() {
+            alert("Setup Success");
+        }
+        
+        function onSetupFailed() {
+            alert("Setup Failed");
+        }
+        
+        function setupSync() {
+            VMXFoundry.OfflineObjects.setup(options, onSetupSuccess, onSetupFailed);
+        }  
+    }</code></pre></figure>
+
+9.  Create the required UI and assign the respective actions to the UI elements.
+
+10.  Set the user action to sync data. You can do this through the following ways:
+    *   **Define a process**
+    *   **Invoke a method on a button click**
+    *   **Object Models**
+
+> **_Note:_** You can also generate the Object Models' code to use in the client application. For more information about integrating offline objects with generated object models, click [here]({{ site.baseurl }}/docs/documentation/Foundry/offline_objects_user_guide/Content/Offline_Objects_with_Generated_Object_Models.html).  
+
 In the case of object models, make sure to change the parameters’ status from **online** to **offline**.
