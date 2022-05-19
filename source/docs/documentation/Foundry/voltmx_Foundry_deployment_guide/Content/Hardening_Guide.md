@@ -195,7 +195,7 @@ name=PBKDF2_ITERATIONS&value=1000
 ### Steps to get Auth token and Tenant ID
 
 1.  Login to Volt MX Foundry using Owner account.
-2.  Goto <code>http://<VoltMX_host>:8080/mfconsole/accountInfo</code>
+2.  Goto <code>http://&lt;VoltMX_host&gt;:8080/mfconsole/accountInfo</code>
 <!-- 2.  Goto [http://securitytestvm.kitspl.com:8080/mfconsole/accountInfo](http://securitytestvm.kitspl.com:8080/mfconsole/accountInfo) -->
 
 3.  Note down the tenant id and auth token as shown in below image.
@@ -251,7 +251,7 @@ name=password_regex&value=^(?=.*[a-z])(?=._[A-Z])(?=._\\d)(?=._(_|[^\\w])).{8,20
 ### Steps to get Auth token and Tenant ID
 
 1.  Login to Volt MX Foundry using Owner account.
-2.  Goto <code>http://<VoltMX_host>:8080/mfconsole/accountInfo</code>
+2.  Goto <code>http://&lt;VoltMX_host&gt;:8080/mfconsole/accountInfo</code>
 <!-- 2.  Goto [http://securitytestvm.kitspl.com:8080/mfconsole/accountInfo](http://securitytestvm.kitspl.com:8080/mfconsole/accountInfo) -->
 3.  Note down the tenant id and auth token as shown in below image.
 
