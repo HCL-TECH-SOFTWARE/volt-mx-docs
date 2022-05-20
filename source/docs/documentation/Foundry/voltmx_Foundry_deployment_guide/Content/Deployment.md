@@ -47,7 +47,7 @@ For a complete list operating systems, app servers, databases, and Java Runtime 
 | Java Runtime Environment     | JDK 1.8                                         |
 | Session/cache management     | Memcached                                       |
 | HTTP servers (reverse proxy) | Apache or Microsoft IIS                         |
-| Application servers          | JBoss, or Tomcat, or WebLogic or WebSphere      |
+| Application servers          | JBoss, or Tomcat, or WebLogic                   |
 | Database                     | MySQL or MariaDB or Oracle or MS SQL or DB2 LUW |
 
 ## Deployment Topology
@@ -203,7 +203,7 @@ The following describes typical scenarios that may occur when you use J2EE in-bu
 
 #### Scenario A
 
-_WebLogic/Websphere Instance is Down_
+_WebLogic Instance is Down_
 
 In this scenario, all the users of this instance will have to re-initiate the transaction.
 

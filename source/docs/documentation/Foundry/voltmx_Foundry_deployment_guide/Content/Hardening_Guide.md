@@ -371,7 +371,7 @@ Follow these steps to get the X-Volt MX-Authorization token:
 
 Volt MX Foundry provides a security feature to block users on multiple failed log-in attempts. If a user tries to sign in multiple times using invalid credentials, Volt MX Foundry blocks their account for a certain period called the Blocking Threshold. They can log on only after the blocking threshold elapses.
 
-> **_Note:_** This feature is applicable for On-Premise installations of Volt MX Foundry 9.0 and above.
+> **_Note:_** This feature is applicable for On-Premise installations of Volt MX Foundry 9.2 and above.
 
 Volt MX Foundry provides an option to configure the following:
 
@@ -577,7 +577,7 @@ The HTTP headers should include the following headers and their respective value
 
 Also, if there no overriding concerns, enable the security settings.
 
-### To set the response header for Volt MX Foundry version V9 SP3 or higher versions, follow these steps.
+### To set the response header for Volt MX Foundry version V9 SP2 or higher versions, follow these steps.
 
 - To overcome these security issues in Volt MX SPA and Desktop Web applications, add custom filter and filter mapping entry in the **web.xml** file.
 - For example:
@@ -609,7 +609,7 @@ Also, if there no overriding concerns, enable the security settings.
 
 > **_Note:_** Usage of the custom filter is the responsibility of the application developer.
 
-### Setting the response header for Volt MX Foundry version V9 SP3 or earlier versions.
+### Setting the response header for Volt MX Foundry version V9 SP2 or earlier versions.
 
 ### To add OWASP Secure Headers to WebApp Static Files, follow these steps.
 
@@ -683,7 +683,7 @@ Also, if there no overriding concerns, enable the security settings.
     }
     {% endhighlight %}
 
-### Setting the response header for Volt MX Foundry version V9 SP4 or later versions.
+### Setting the response header for Volt MX Foundry version V9 SP2 or later versions.
 
 ### To add the OWASP Secure Header to WebApp Static Files, follow these steps.
 
@@ -751,7 +751,7 @@ To avoid storage of sensitive data in cache, applications must contain **caching
 - **Cache-control**: no-store
 - **Pragma**: no-cache
 
-### To set the header for Volt MX Foundry version V9 SP3 or earlier versions, do the following:
+### To set the header for Volt MX Foundry version V9 SP2 or earlier versions, do the following:
 
 Use custom filters to add cache-control as a response-header
 
@@ -886,7 +886,7 @@ private static final Logger LOGGER = LogManager.getLogger(CacheHeaderFilter.clas
 
 For more information about how to implement a custom filter, refer to [Custom User Filter Guide](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0083514).
 
-**Setting the header for Volt MX Foundry version V9 SP4 Hotfix version or later versions.**
+**Setting the header for Volt MX Foundry version V9 SP2 Hotfix version or later versions.**
 
 **To add response headers to middleware services, follow these steps.**
 
