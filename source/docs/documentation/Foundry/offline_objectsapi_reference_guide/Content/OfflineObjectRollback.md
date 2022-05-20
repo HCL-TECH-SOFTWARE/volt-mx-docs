@@ -2,20 +2,12 @@
 layout: "documentation"
 category: "offline_objectsapi_reference_guide"
 ---
-                               
 
-
-VMXFoundry.OfflineObjects.rollback
-=======================================
+# VMXFoundry.OfflineObjects.rollback
 
 Offline Objects rollback function rolls back all changes of the application in the device local database to its previous sync state.
 
-Volt MX  Iris (JavaScript)
--------------------------------
-
-> **Note:**  
-*   Supported for iOS and Android channels from V8 SP2 onwards.  
-*   Supported for all channels from V8 SP4 onwards.  
+## Volt MX Iris (JavaScript)
 
 ### Signature
 
@@ -33,24 +25,22 @@ void
 ### Example
 
 {% highlight voltMx %}function successCallback(result) {
-    //result contains boolean true
-    voltmx.print("Application rollback successful");
+//result contains boolean true
+voltmx.print("Application rollback successful");
 }
 
 function failureCallback(error) {
-    voltmx.print("Application rollback failed with error:" + error.code);
+voltmx.print("Application rollback failed with error:" + error.code);
 }
 VMXFoundry.OfflineObjects.rollback(successCallback, failureCallback);
 
-
 {% endhighlight %}
 
-Android (Java)
---------------
+## Android (Java)
 
 ### Signature
 
-{% highlight voltMx %}void <OfflineObjects>.rollback(final VMXCallback callback) 
+{% highlight voltMx %}void <OfflineObjects>.rollback(final VMXCallback callback)
 {% endhighlight %}
 
 ### Parameters
@@ -78,12 +68,12 @@ appSync.rollback(new VMXCallback() {
         OfflineObjectsException e = (OfflineObjectsException) error;
         Log.e("Application Rollback ", "Application Rollback failed with error :" + e.getMessage());
     }
+
 });
 
 {% endhighlight %}
 
-iOS (Objective C)
------------------
+## iOS (Objective C)
 
 ### Signature
 
@@ -101,15 +91,15 @@ void
 
 ### Example
 
-{% highlight voltMx %}VMXClient * sdk = [VMXClient sharedClient];
-OfflineObjects * applicationSync = [sdk getOfflineObjects];
+{% highlight voltMx %}VMXClient _ sdk = [VMXClient sharedClient];
+OfflineObjects _ applicationSync = [sdk getOfflineObjects];
 
 VMXSuccessCompletionHandler onSuccess = ^ void(id object) {
-    NSLog(@"Application rollback successful");
+NSLog(@"Application rollback successful");
 };
 
 VMXFailureCompletionHandler onFailure = ^ void(id object) {
-    NSLog(@"Application rollback failed");
+NSLog(@"Application rollback failed");
 };
 
 [applicationSync rollback: onSuccess onFailure: onFailure];

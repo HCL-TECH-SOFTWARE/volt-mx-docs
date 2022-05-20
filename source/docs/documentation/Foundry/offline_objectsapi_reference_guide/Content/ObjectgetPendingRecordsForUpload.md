@@ -10,9 +10,6 @@ category: "offline_objectsapi_reference_guide"
 The **\<object\>.getPendingRecordsForUpload** API fetches the list of records that are yet to be uploaded.
 
 > **Note:**  
-*   This API is supported from V8 SP4 onwards.  
-*   Supported for Windows from V8 SP4 Fix Pack 6 onwards.  
-*   Supported for Mobile Web and Desktop Web channels from V8 SP4 Fix Pack 12 onwards.  
 *   The column names and values provided as key value pairs are case sensitive.  
 
 Volt MX  Iris (JavaScript)
