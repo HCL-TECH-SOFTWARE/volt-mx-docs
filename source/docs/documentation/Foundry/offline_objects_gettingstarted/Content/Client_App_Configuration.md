@@ -53,10 +53,11 @@ To configure Offline Objects in Volt MX Iris, follow these steps.
     }</code></pre></figure>
 
 9. Create the required UI and assign the respective actions to the UI elements.
-10. Set the user action to sync data. You can do this through the following ways:
+10. Set the user action to sync data. You can do this through the following ways.
 	-  **Define a process**
 	-  **Invoke a method on a button click**
 	-  **Object Models**
+
 
 > **_Note:_** You can also generate the Object Models' code to use in the client application. For more information about integrating offline objects with generated object models, click [here]({{ site.baseurl }}/docs/documentation/Foundry/offline_objects_user_guide/Content/Offline_Objects_with_Generated_Object_Models.html).  
 
