@@ -8,10 +8,10 @@ order: 1
 # Volt MX Release Notes
 
 This topic lists new features, enhancements, and changes in Volt MX.
-Note: If your release is not shown on this page, it contains no feature changes. For detailed information about fixes and known issues in Volt MX, please see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
+For detailed information about fixes and known issues in Volt MX, please see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
 
 [Volt Iris](#volt-iris)
-
+- [V9 Servicepack 2 Fixpack 45](#v9-servicepack-2-fixpack-45)
 - [V9 Servicepack 2 Fixpack 38](#v9-servicepack-2-fixpack-38)
 - [V9 Servicepack 2 Fixpack 37](#v9-servicepack-2-fixpack-37)
 - [Earlier Iris releases](#earlier-iris-releases)
@@ -24,6 +24,33 @@ Note: If your release is not shown on this page, it contains no feature changes.
 - [Earlier Foundry releases](#earlier-foundry-releases)
 
 ## Volt Iris
+
+### V9 Servicepack 2 Fixpack 45
+
+#### Iris Enhancements
+
+There are new supported devices in this release in Iris, and they are listed below.
+<br />
+
+**iOS Devices:**
+        iPhone 12,
+        iPhone 12 Pro,
+        iPhone 12 Pro Max,
+        iPhone 12 Mini,
+        iPhone 13,
+        iPhone 13 Pro,
+        iPhone 13 Pro Max,
+        iPhone 13 Mini <br />       
+**Android Devices:**
+        Google Pixel 4,
+        Google Pixel 5,
+        Google Pixel 6,
+        Samsung Galaxy 9,
+        Samsung Galaxy 10,
+        Samsung Galaxy 21,
+        Samsung Galaxy 22
+
+For detailed information about fixes and known issues in this release, please see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
 
 ### V9 Servicepack 2 Fixpack 38
 
