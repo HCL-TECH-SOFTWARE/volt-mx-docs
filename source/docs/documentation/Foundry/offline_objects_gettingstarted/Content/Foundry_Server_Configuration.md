@@ -37,13 +37,11 @@ Service Driven Objects
 10.  The generated data model is created with the relevant fields and relationships.
 11.  Configure the Fields, Relationships, and Change Tracking as required.
     
-    > **_Note:_** Enable primary key for the fields.
+       > **_Note:_** Enable primary key for the fields.
     
 12.  Save the changes and publish the app.
 13.  Now, link your Foundry application to the client application.
-    
-    For more information about how to configure your client application, click [here](#ClientApp).
-    
+
 
 Line-of-Business Adapters
 -------------------------
@@ -72,5 +70,3 @@ Line-of-Business Adapters
         
 9.  Save the changes and publish the app.
 10.  Now, link your Foundry application to the client application.
-    
-    For more information about how to configure your client application, click [here](#ClientApp).
