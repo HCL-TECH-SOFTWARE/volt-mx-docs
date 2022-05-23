@@ -21,10 +21,3 @@ You can also access the [Preface](Overview1.html) and the [Revision History](Rev
 
 [Open topic with navigation](../Content/Integration_Services_Troubleshooting_Guide.html)
 
-Comments
-
-[Reply](#)
-
- 
-
-</div> <input class="comment-submit" type="button" value="Submit" > </div> </div> </body> <.html></x-turndown>

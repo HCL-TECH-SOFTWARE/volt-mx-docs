@@ -13,45 +13,58 @@ This chapter explains how to troubleshoot specific properties that you may encou
 Properties in Volt MX Foundry Integration Service
 ---------------------------------------------
 
-> **_Note:_** In license validation on WebSphere, Volt MX supports only Oracle JDK. Middleware license does not get validated on WebSphere if the server has IBM JDK. This is an expected behavior for license validation on WebSphere. This behavior is present in Middleware 5.0 and higher versions.
+   > **_Note:_** In license validation on WebSphere, Volt MX supports only Oracle JDK. Middleware license does not get validated on WebSphere if the server has IBM JDK. This is an expected behavior for license validation on WebSphere. This behavior is present in Middleware 5.0 and higher versions.
 
-  
-| Property in Volt MX Foundry Integration Service | Troubleshooting Tip |
-| --- | --- |
-| cacheid.transport=PARAM\_ONLY > **_Note:_** This property is applicable only to Volt MX Foundry Integration Service with memcached builds | The property is only for memcached. Instead of HTTP session, Volt MX Foundry Integration Service maintains session values in memcached. Memcached provides a cacheid. You can set the following values for cacheid:
-PARAM\_ONLY: PARAM\_ONLY is defined in `middleware.properties` file, by default. This represents that the cacheid is passed as param in every result sent to the device. COOKIE\_ONLY: To pass the cacheid as cookie to the device or browser. You can use this property if you are running memcached in your Application Server. Set the PARAM\_ONLY to COOKIE\_ONLY to enable the application to set a cookie on the users’ device. EITHER: To pass the cacheid sometimes as PARAM\_ONLY and sometimes as COOKIE\_ONLY.
+<style>
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    border:2px solid #ccc;
+}
 
- |
-| log.description.error=true | The SOAP fault details are logged, by default. If you do not want to log SOAP fault details, then change it false. |
-| p.exclude=password | If you do not want to log any sensitive information in request / response parameters, specify the key name. For example, if you specify password=jack123, it masks and shows as password=\*\*\*\*. |
-| do.not.log= | If you do not want to log specific values into report database, then specify do.not.log=<key>. For example, if you specify do.not.log=SESSIONID, then, sessionid is not inserted into database. |
-| ssl.SocketFactory.hostname.verifierBROWSER\_COMPATIBLE\_HOSTNAME\_VERIFIER | If the application has self signed certificates, then use ssl.SocketFactory.hostname.verifier=ALLOW\_ALL\_HOSTNAME\_VERIFIER |
-| dontEscapeXMLSpecialChars= | If you want to send the special characters; **<**,**\>**,**\\****'**, **\\****"**, **&** in the xml request as is, set dontEscapeXMLSpecialChars= any of the above specified special character.For example, In, "jhonson & jhonson", if you want to send the special character, **&**, then specify:fault : jhonson &amp; jhonsondontEscapeXMLSpecialChars=& thenhexpected : jhonson & jhonson |
-| deployment-config.properties | If you are unable to publish an application to the server hosted on Tomcat 7.0.X:
+th{
+    border:2px solid #000000;
+}
 
-In `deployment-config.properties`, provide the URL as shown in the below example.http://<ipaddress or host>:<port>/manager/text In `conf/tomcat-users.xml`, the manager should have the following roles: admin-gui,manager-gui,manager-script,manager-jmx,manager-status.
+td{
+    border:1px solid #000000;
+}
 
- |
-| antisamy.xml | If you are unable to upload images of large size, then in `antisamy.xml` located at `<middleware.home>/middleware/middleware_bootconfig` folder, modify the below tag value to your size; <directive name="maxInputSize" value="<size value>"/>.For example, if you want to upload images of maximum size, 21,000 bytes, then modify the below tag as: <directive name="maxInputSize" value="21,000"/> |
-| SUN JSSE Security Provider | While connecting Secured Socket Layer (SSL) to HTTPS based end point URLs, in `middleware.log`, if the following exception occurs:java.net.SocketException: java.lang.ClassNotFoundException: com.sun.net.ssl.internal.ssl.SSLSocketFactoryImpl then, in `middleware.properties` file, change the following Secured Socket Layer (SSL) Factory provider setting :ssl.SocketFactory.provider=sun.security.ssl.SSLSocketFactoryImplssl.ServerSocketFactory.provider=sun.security.ssl.SSLSocketFactoryImpl to:ssl.SocketFactory.provider=com.sun.net.ssl.internal.ssl.SSLSocketFactoryImpl ssl.ServerSocketFactory.provider=com.sun.net.ssl.internal.ssl. SSLServerSocketFactoryImpl |
+</style>
+
+
+| Property in Volt MX Foundry Integration Service      | Troubleshooting Tip |
+| ----------- | ----------- |
+| cacheid.transport=PARAM\_ONLY      | The property is only for memcached. Instead of HTTP session, Volt MX Foundry Integration Service maintains session values in memcached. Memcached provides a cacheid. You can set the following values for cacheid: PARAM\_ONLY: PARAM\_ONLY is defined in `middleware.properties` file, by default. This represents that the cacheid is passed as param in every result sent to the device. COOKIE\_ONLY: To pass the cacheid as cookie to the device or browser. You can use this property if you are running memcached in your Application Server. Set the PARAM\_ONLY to COOKIE\_ONLY to enable the application to set a cookie on the users’ device. EITHER: To pass the cacheid sometimes as PARAM\_ONLY and sometimes as COOKIE\_ONLY.       |
+| log.description.error=true   | The SOAP fault details are logged, by default. If you do not want to log SOAP fault details, then change it false.        |
+| p.exclude=password      | If you do not want to log any sensitive information in request / response parameters, specify the key name. For example, if you specify password=jack123, it masks and shows as password=\*\*\*\*.       |
+| do.not.log   | If you do not want to log specific values into report database, then specify do.not.log=<key>. For example, if you specify do.not.log=SESSIONID, then, sessionid is not inserted into database.        |
+| ssl.SocketFactory.hostname.verifierBROWSER\_COMPATIBLE\_HOSTNAME\_VERIFIER      | If the application has self signed certificates, then use ssl.SocketFactory.hostname.verifier=ALLOW\_ALL\_HOSTNAME\_VERIFIER       |
+| dontEscapeXMLSpecialChars=   | If you want to send the special characters; **<**,**\>**,**\\****'**, **\\****"**, **&** in the xml request as is, set dontEscapeXMLSpecialChars= any of the above specified special character.For example, In, "jhonson & jhonson", if you want to send the special character, **&**, then specify:fault : jhonson &amp; jhonsondontEscapeXMLSpecialChars=& thenhexpected : jhonson & jhonson        |
+| deployment-config.properties      | If you are unable to publish an application to the server hosted on Tomcat 7.0.X: In `deployment-config.properties`, provide the URL as shown in the below example.http://<ipaddress  or  host>:<port>/manager/text In `conf/tomcat-users.xml`, the manager should have the following roles: admin-gui,manager-gui,manager-script,manager-jmx,manager-status.       |
+| antisamy.xml   | If you are unable to upload images of large size, then in `antisamy.xml` located at `<middleware.home>/middleware/middleware_bootconfig` folder, modify the below tag value to your size; <directive  name="maxInputSize"  value="<size value>"/>.For example, if you want to upload images of maximum size, 21,000 bytes, then modify the below tag as: <directive  name="maxInputSize"  value="21,000"/>        |
+| SUN JSSE Security Provider      | While connecting Secured Socket Layer (SSL) to HTTPS based end point URLs, in `middleware.log`, if the following exception occurs:java.net.SocketException: java.lang.ClassNotFoundException: com.sun.net.ssl.internal.ssl.SSLSocketFactoryImpl then, in `middleware.properties` file, change the following Secured Socket Layer (SSL) Factory provider setting :ssl.SocketFactory.provider=sun.security.ssl.SSLSocketFactoryImplssl.ServerSocketFactory.provider=sun.security.ssl.SSLSocketFactoryImpl to:ssl.SocketFactory.provider=com.sun.net.ssl.internal.ssl.SSLSocketFactoryImpl ssl.ServerSocketFactory.provider=com.sun.net.ssl.internal.ssl. SSLServerSocketFactoryImpl       |
+
 
 Other Features
 --------------
 
-1.  **What is the Standard way in which I can handle HTTP status codes (401, and 404) from Volt MX Foundry Integration Service?**
+-  **What is the Standard way in which I can handle HTTP status codes (401, and 404) from Volt MX Foundry Integration Service?**
     
     **Solution**
     
     In PostProcessor, Result object is available. In that, you can use the following code snippet to find the httpStatus code:
     
-    {% highlight voltMx %}Param statusCodeparam = result.findParam("httpStatusCode");
-          int httpStatusCode = Integer.parseInt(statusCodeparam.getValue());
-    {% endhighlight %}
+    <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
+        Param statusCodeparam = result.findParam("httpStatusCode");
+        int httpStatusCode = Integer.parseInt(statusCodeparam.getValue());
+    }</code></pre></figure>
     
     By default, Volt MX Foundry Integration Service passes the HTTP status code in the resultset json format to device. The following is the sample output string:
     
-    {% highlight voltMx %}resultset =  {"httpStatusCode":200,"marketIndex":[{"indName":"Dow Jones Ind.","indVal":"15618.22","symbol":"0DJIA","indValChg":"            -20.90"},{"indName":"Nasdaq Comp.","indVal":"3939.86","symbol":"0NDQC","indValChg":"3.27"},{"indName":"NYSE Composite","indVal":"          10011.65","symbol":"0NYC","indValChg":"-52.46"},{"indName":"S & P 500","indVal":"1762.97","symbol":"0S&P5","indValChg":"             -4.96"}],"opstatus":0}
-    {% endhighlight %}
+    <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
+        resultset =  {"httpStatusCode":200,"marketIndex":[{"indName":"Dow Jones Ind.","indVal":"15618.22","symbol":"0DJIA","indValChg":"            -20.90"},{"indName":"Nasdaq Comp.","indVal":"3939.86","symbol":"0NDQC","indValChg":"3.27"},{"indName":"NYSE Composite","indVal":"          10011.65","symbol":"0NYC","indValChg":"-52.46"},{"indName":"S & P 500","indVal":"1762.97","symbol":"0S&P5","indValChg":"             -4.96"}],"opstatus":0}
+    }</code></pre></figure>
     
     You can use the following snippet in `.js` file to get the httpStatusCode from JSON resultset object.
     
@@ -60,7 +73,7 @@ Other Features
 
 * * *
 
-1.  **How can I use Basic Authenticate in RESTful service with dynamic userids in request? When working with service definitions in Volt MX Iris, I need to be able to dynamically assign those values in code, that is, do I have to authenticate with Active Directory and then with REST endpoints?**
+-  **How can I use Basic Authenticate in RESTful service with dynamic userids in request? When working with service definitions in Volt MX Iris, I need to be able to dynamically assign those values in code, that is, do I have to authenticate with Active Directory and then with REST endpoints?**
     
     **Solution**
     
@@ -103,7 +116,7 @@ Other Features
 
 * * *
 
-1.  **If end server has proxy enabled authentication, then what should I do?**
+-  **If end server has proxy enabled authentication, then what should I do?**
     
     **Solution**
     
@@ -122,12 +135,12 @@ Other Features
 
 * * *
 
-1.  **How can I** **add Headers?**
+-  **How can I** **add Headers?**
     
     **Solution**
     
 
-1.  For example, to add "Content-Type" as a header:
+-  For example, to add "Content-Type" as a header:
     
     In the **Service Definition** editor -> **Http Headers** tab, under **Id**, declare _Content-Type_ as header type and under **Session**, select _session_ from the drop-down list as shown:
     
@@ -138,7 +151,8 @@ Other Features
     {% highlight voltMx %}Session session = request.getSession();
        session.setAttribute("Content-Type"," application/json");
     {% endhighlight %}
-2.  If you want to pass header values in "request" parameters,
+  
+    If you want to pass header values in "request" parameters,
     
     In the **Service Definition** editor -> **Http Headers** tab, under **Scope**, select _request_ from the drop-down list, then pass the header value with same key that you defined in Header section with _request_ as scope.
     
@@ -155,13 +169,13 @@ Other Features
 
 * * *
 
-5.  **How can I add Custom Cookies in header?**
+-  **How can I add Custom Cookies in header?**
     
     **Solution**
     
 
-1.  Create cookie object using HTTP client 4.1 API, org.apache.http.cookie.Cookie
-2.  In pre or post processor, use the following snippet:
+    1.  Create cookie object using HTTP client 4.1 API, org.apache.http.cookie.Cookie
+    2.  In pre or post processor, use the following snippet:
     
     {% highlight voltMx %}Session session = request.getSession(false);
     	    session.setAttribute("KCookie",cookie);
@@ -169,7 +183,7 @@ Other Features
 
 * * *
 
-6.  **How can I change the url or user authentication details dynamically?**
+-  **How can I change the url or user authentication details dynamically?**
     
     **Solution**
     
@@ -178,7 +192,7 @@ Other Features
 
 * * *
 
-1.  **If request data is more than 1024 MB, then Linux default values do not allow to forward the request. What do I need to do so that Linux values allow to forward the request?**
+-  **If request data is more than 1024 MB, then Linux default values do not allow to forward the request. What do I need to do so that Linux values allow to forward the request?**
     
     **Solution**
     
@@ -195,7 +209,7 @@ Other Features
 
 * * *
 
-10.  **If a SOAP response has an embedded xml, then what do I need to do?**
+-  **If a SOAP response has an embedded xml, then what do I need to do?**
     
     **Solution**
     
@@ -228,7 +242,7 @@ Other Features
 
 * * *
 
-10.  **What should I do when I get a message as "Maximum offline sessions exceeded?"**
+-  **What should I do when I get a message as "Maximum offline sessions exceeded?"**
     
     **Solution**
     
@@ -237,7 +251,7 @@ Other Features
 
 * * *
 
-10.  **What is the solution when middleware logs are not rolling consistently in windows environment?**
+-  **What is the solution when middleware logs are not rolling consistently in windows environment?**
     
     **Solution**
     
@@ -246,7 +260,7 @@ Other Features
 
 * * *
 
-10.  **What should I do when I get "null" as the value for $<placeholder> and if the entry is deleted from the request template when I send the request to the endpoint service?**
+-  **What should I do when I get "null" as the value for $<placeholder> and if the entry is deleted from the request template when I send the request to the endpoint service?**
     
     **Solution**
     
@@ -262,7 +276,7 @@ Other Features
 
 * * *
 
-10.  **What is the process of Secured Socket Layer (SSL) setup in Volt MX Foundry Integration Service?**
+-  **What is the process of Secured Socket Layer (SSL) setup in Volt MX Foundry Integration Service?**
     
     **Solution**
     
@@ -309,7 +323,7 @@ Other Features
 Java Messaging Service (JMS) Issue
 ----------------------------------
 
-1.  **If you are unable to start JBoss 5.1.0 with JDK 1.7.X and in `Server.log` and if you come across the below error:**{% highlight voltMx %}3:53:10,693 ERROR [AbstractKernelController] Error installing to Instantiated: name=AttachmentStore state=Described
+-  **If you are unable to start JBoss 5.1.0 with JDK 1.7.X and in `Server.log` and if you come across the below error:**{% highlight voltMx %}3:53:10,693 ERROR [AbstractKernelController] Error installing to Instantiated: name=AttachmentStore state=Described
     java.lang.IllegalArgumentException: Wrong arguments. new for target java.lang.reflect.Constructor expected=[java.net.URI] actual=[java.io.File]
     at org.jboss.reflect.plugins.introspection.ReflectionUtils.handleErrors(ReflectionUtils.java:395)
     at org.jboss.reflect.plugins.introspection.ReflectionUtils.newInstance(ReflectionUtils.java:153)
@@ -336,10 +350,4 @@ Java Messaging Service (JMS) Issue
 
 [Open topic with navigation](../Content/Troubleshooting.html)
 
-Comments
 
-[Reply](#)
-
- 
-
-</div> <input class="comment-submit" type="button" value="Submit" > </div> </div> </body> <.html></x-turndown>
