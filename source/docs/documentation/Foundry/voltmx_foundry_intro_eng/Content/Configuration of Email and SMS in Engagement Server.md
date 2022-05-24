@@ -26,7 +26,7 @@ Configuration of the Email Server
     *   The **Port** number is associated with the SMTP or the SMTPS Server that you will configure. In this example, the port number is 25 as SMTP Server was chosen.
     *   The **Default Sender Id** is needed for the SMTP Server that you will configure. Contact the Server admin and enter the value.
     *   Choose the **Security Mode** as applicable for the Server that you will configure. If not sure, contact the Server admin and select the value.
-    *   Setting the value of **Allow Unsubscribe** to **Yes** allows a user to unsubscribe from email notifications. You can leave this option as it does not matter for this tutorial.
+    *   Setting the value of **Allow Unsubscribe** to **Yes** allows a user to unsubscribe from email notifications.
         
         ![](Resources/Images/emailsmtp_552x335.png)
         
