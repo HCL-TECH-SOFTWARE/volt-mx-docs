@@ -745,7 +745,7 @@ An JavaScript object that contains key-value pairs. This parameter is optional. 
 
 | Key | Value |
 | --- | --- |
-| nodeId | A string containing the ID of the node to send the message to.Your app can use this to reply to the sender. For more information, see the **[Remarks](#sendMessage_Remarks)** section below. |
+| nodeId | A string containing the ID of the node to send the message to.Your app can use this to reply to the sender. For more information, see the Remarks section below. |
 
 ### Return Values
 
