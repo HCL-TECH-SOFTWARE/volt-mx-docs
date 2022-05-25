@@ -25,19 +25,19 @@ cache.cacheTimeoutInterval = 20; // so data is cached for 20 seconds
 
 Following are the APIs available for the VoltMXDataCache class:
 
-*   [initWithName:(NSString\*)cacheName](#initWithName:(nsstring*)cacheName)
-*   [(instancetype)sharedInstance](#(instancetype)sharedInstance)
-*   [(void)setObject:(id)value forKey:(id)key](#(void)setObject:(id)value-forKey:(id)key)
-*   [(id)getObjectForKey:(id)key](#(id)getObjectForKey:(id)key)
-*   [(void)setCacheWithDictionary:(NSDictionary\*)dict](#(void)setCacheWithDictionary:(NSDictionary*)dict)
-*   [(NSDictionary)getDictionaryFromCache](#(NSDictionary)getDictionaryFromCache)
-*   [(void)setString:(NSString\*)string forKey:(NSString\*)key](#(void)setString:(NSString*)string-forKey:(NSString*)key)
-*   [(NSString\*)getStringforKey:(NSString\*)key](#(NSString*)getStringforKey:(NSString*)key)
-*   [(void)setImage:(UIImage\*)image forKey:(NSString\*)key](#(void)setImage:(UIImage*)image-forKey:(NSString*)key)
-*   [(UIImage\*)getImageForKey:(NSString\*)key](#(UIImage*)getImageForKey:(NSString*)key)
-*   [(NSArray\*)getAllkeys](#(NSArray*)getAllkeys)
-*   [(void)clearCache](#(void)clearCache)
-*   [(void)removeCacheForKey:(NSString\*)key](#(void)removeCacheForKey:(NSString*)key)
+*   [initWithName:(NSString\*)cacheName](#initwithnamensstringcachename)
+*   [(instancetype)sharedInstance](#instancetypesharedinstance)
+*   [(void)setObject:(id)value forKey:(id)key](#voidsetobjectidvalue-forkeyidkey)
+*   [(id)getObjectForKey:(id)key](#idgetobjectforkeyidkey)
+*   [(void)setCacheWithDictionary:(NSDictionary\*)dict](#voidsetcachewithdictionarynsdictionarydict)
+*   [(NSDictionary)getDictionaryFromCache](#nsdictionarygetdictionaryfromcache)
+*   [(void)setString:(NSString\*)string forKey:(NSString\*)key](#voidsetstringnsstringstring-forkeynsstringkey)
+*   [(NSString\*)getStringforKey:(NSString\*)key](#nsstringgetstringforkeynsstringkey)
+*   [(void)setImage:(UIImage\*)image forKey:(NSString\*)key](#voidsetimageuiimageimage-forkeynsstringkey)
+*   [(UIImage\*)getImageForKey:(NSString\*)key](#uiimagegetimageforkeynsstringkey)
+*   [(NSArray\*)getAllkeys](#nsarraygetallkeys)
+*   [(void)clearCache](#voidclearcache)
+*   [(void)removeCacheForKey:(NSString\*)key](#voidremovecacheforkeynsstringkey)
 
 initWithName:(NSString\*)cacheName
 ----------------------------------
