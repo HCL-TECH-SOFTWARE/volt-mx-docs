@@ -68,7 +68,7 @@ To cancel the installation, type 'quit' at any time.
   
 For troubleshooting & help on the installation, use [{{ site.baseurl }}/docs/documentation/Foundry/resources/installer.html]({{ site.baseurl }}/docs/documentation/Foundry/resources/installer.html)  
   
-For getting started on Volt MX Foundry, refer [http://community.hclvoltmx.com/documentation](http://community.hclvoltmx.com/documentation)  
+For getting started on Volt MX Foundry, refer [https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/)  
   
 For upgrading Volt MX Foundry, refer [online documentation]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_linux_install_guide/Content/Upgrading_VoltMX_Foundry_on_Linux.html).  
   
