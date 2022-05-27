@@ -70,8 +70,8 @@ For Oracle Java 7 and Java 8, configure the heap settings for your application s
 
 To install Volt MX Foundry on an existing standalone JBoss, follow the steps to configure the standalone JBoss:
 
-1.  Open the `standalone.xml` from the `<JBoss_Home>/standalone/configuration`.
-2.  Configure Hostname/IP in the `standalone.xml` file for JBoss, as below:{% highlight voltMx %}	<interfaces>
+-  Open the `standalone.xml` from the `<JBoss_Home>/standalone/configuration`.
+-  Configure Hostname/IP in the `standalone.xml` file for JBoss, as below:{% highlight voltMx %}	<interfaces>
     		<interface name="management">
     			<inet-address value="127.0.0.1"/>
     		</interface>
@@ -80,22 +80,26 @@ To install Volt MX Foundry on an existing standalone JBoss, follow the steps to 
     		</interface>
     	</interfaces>
     {% endhighlight %}
-3.  Configure JBoss to listen for remote management requests as below:
+-  Configure JBoss to listen for remote management requests as below:
     *   Add `<socket-binding name="management-native" interface="management" port="${jboss.management.native.port:9999}"/>` under the `<socket-binding-group>`
     *   Add following section under the `<management-interfaces>`{% highlight voltMx %}<native-interface security-realm="ManagementRealm">  
         <socket-binding native="management-native"/>  
         </native-interface>
         {% endhighlight %}
-4.  For Engagement Services to work, remove the following subsystem:{% highlight voltMx %}<subsystem xmlns="urn:jboss:domain:jpa:1.1">
+-  For Engagement Services to work, remove the following subsystem:{% highlight voltMx %}<subsystem xmlns="urn:jboss:domain:jpa:1.1">
     <jpa default-datasource="" default-extended-persistence-inheritance="DEEP"/>|
     </subsystem>
     {% endhighlight %}
 
-1.  In case of installing all the Volt MX Foundry components, follow these steps to increase heap size by setting the `JAVA_OPTS` in the `<JBOSS_DIR>\standalone\bin\standalone.sh/bat`:
-    *   standalone.bat:{% highlight voltMx %}set "JAVA_OPTS= -server -Xms2048m -Xmx2048m"
-        {% endhighlight %}
-    *   **standalone.sh**:{% highlight voltMx %}JAVA_OPTS="-server -Xms1024M -Xmx1024M"
-        {% endhighlight %}
+-  In case of installing all the Volt MX Foundry components, follow these steps to increase heap size by setting the `JAVA_OPTS` in the `<JBOSS_DIR>\standalone\bin\standalone.sh/bat`:
+    -   **standalone.bat**:
+        <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
+            set "JAVA_OPTS= -server -Xms2048m -Xmx2048m"
+        }</code></pre></figure>
+    -   **standalone.sh**:
+        <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
+            JAVA_OPTS="-server -Xms1024M -Xmx1024M"
+        }</code></pre></figure>
 
 ### Configure the Log Locations - JBoss
 
