@@ -353,10 +353,10 @@
 
 <p>To install Volt MX Foundry on an existing standalone JBoss, follow the steps to configure the standalone JBoss:</p>
 
-<ol>
+<ul>
   <li>Open the <code class="language-plaintext highlighter-rouge">standalone.xml</code> from the <code class="language-plaintext highlighter-rouge">&lt;JBoss_Home&gt;/standalone/configuration</code>.</li>
   <li>Configure Hostname/IP in the <code class="language-plaintext highlighter-rouge">standalone.xml</code> file for JBoss, as below:</li>
-</ol>
+</ul>
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">	&lt;interfaces&gt;
     		&lt;interface name="management"&gt;
     			&lt;inet-address value="127.0.0.1"/&gt;
@@ -367,41 +367,43 @@
     	&lt;/interfaces&gt;
     </code></pre></figure>
 
-<ol>
+<ul>
   <li>Configure JBoss to listen for remote management requests as below:
     <ul>
       <li>Add <code class="language-plaintext highlighter-rouge">&lt;socket-binding name="management-native" interface="management" port="${jboss.management.native.port:9999}"/&gt;</code> under the <code class="language-plaintext highlighter-rouge">&lt;socket-binding-group&gt;</code></li>
       <li>Add following section under the <code class="language-plaintext highlighter-rouge">&lt;management-interfaces&gt;</code></li>
     </ul>
   </li>
-</ol>
+</ul>
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">&lt;native-interface security-realm="ManagementRealm"&gt;  
         &lt;socket-binding native="management-native"/&gt;  
         &lt;/native-interface&gt;
         </code></pre></figure>
 
-<ol>
+<ul>
   <li>For Engagement Services to work, remove the following subsystem:</li>
-</ol>
+</ul>
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">&lt;subsystem xmlns="urn:jboss:domain:jpa:1.1"&gt;
     &lt;jpa default-datasource="" default-extended-persistence-inheritance="DEEP"/&gt;|
     &lt;/subsystem&gt;
     </code></pre></figure>
 
-<ol>
+<ul>
   <li>In case of installing all the Volt MX Foundry components, follow these steps to increase heap size by setting the <code class="language-plaintext highlighter-rouge">JAVA_OPTS</code> in the <code class="language-plaintext highlighter-rouge">&lt;JBOSS_DIR&gt;\standalone\bin\standalone.sh/bat</code>:
     <ul>
-      <li>standalone.bat:</li>
+      <li><strong>standalone.bat</strong>:
+        <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
+    set "JAVA_OPTS= -server -Xms2048m -Xmx2048m"
+}</code></pre></figure>
+      </li>
+      <li><strong>standalone.sh</strong>:
+        <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
+    JAVA_OPTS="-server -Xms1024M -Xmx1024M"
+}</code></pre></figure>
+      </li>
     </ul>
   </li>
-</ol>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">set "JAVA_OPTS= -server -Xms2048m -Xmx2048m"
-        </code></pre></figure>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*   **standalone.sh**:
-</code></pre></div></div>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">JAVA_OPTS="-server -Xms1024M -Xmx1024M"
-        </code></pre></figure>
+</ul>
       <h3 id="configure-the-log-locations---jboss">
         
         
