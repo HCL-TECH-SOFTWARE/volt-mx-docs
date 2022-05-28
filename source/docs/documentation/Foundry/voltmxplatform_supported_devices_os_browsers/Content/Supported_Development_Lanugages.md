@@ -12,7 +12,7 @@ Supported Development Languages
 Native Apps
 -----------
 
-HCL supported development languages for Native Apps:
+Volt MX Iris supported development languages for Native Apps:
 
  
 
@@ -30,7 +30,7 @@ HCL supported development languages for Native Apps:
 Mobile Web
 ----------
 
-HCL supported development languages for Mobile Web:
+Volt MX Iris supported development languages for Mobile Web:
 
  
 
