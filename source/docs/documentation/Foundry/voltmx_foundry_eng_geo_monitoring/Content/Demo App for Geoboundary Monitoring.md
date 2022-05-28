@@ -13,57 +13,7 @@ In this lesson, we will take you thru the installation of the enhanced Engagemen
 
 Refer to the chapter one of this course if not already done. The chapter one covers the steps needed to create the geoboundaries and also explains the concepts of the geoboundary monitoring.
 
-It is assumed that you have access to the Engagement server of Volt MX Foundry and configured the Engagement server with the GCM/FCM key that is needed to send the notifications.
-
-Installing Engagement Demo Application
---------------------------------------
-
-In this section, we will take you thru the steps to download and install the android binary of the VoltMX’s Geoboundary monitoring Application.
-
-1.  Refer to to the following URL to download the application binary on your device. As of this writing, this binary has been currently tested on android version 6.0.1 of Samsung S5.
-    
-    [Binaries](https://github.com/voltmx/VoltMX-Engagement-Service-Demo-Iris-GeoBoundries-/tree/master/Binaries)
-    
-    ![](Resources/Images/figure14_606x168.png)
-    
-2.  After the binary has been downloaded on to your machine, connect the device to the computer and run the adb command to install the binary.
-    
-    It is assumed that you already have android SDK installed before running this command. This is just one method of installing the binary. You can use any other alternative to install the binary on your device.
-    
-    ![](Resources/Images/figure15_592x173.png)
-    
-3.  Click the application icon, on your device, after the installation is complete. This action will display the following screen and request your permission to send push notifications. Click Ok to accept push notifications.
-    
-    ![](Resources/Images/figure16.png)
-    
-4.  The next screen will be a native notification requesting you to accept push notifications. Click Ok to continue.
-    
-    ![](Resources/Images/figure17.png)
-    
-5.  In the next screen, you will be prompted to enter your provisionedEngagement server URL, application ID and sender ID. Additional details of each of field is given below:
-    *   URL: This is the provisioned URL of the Engagement server when you signed up for Volt MX Foundry. For example: `https://mfreddy.messaging.voltmxcloud.com`.
-    *   Application Id: An application id uniquely identifies an application in the Engagement server. As you may recall, this id was created in the earlier course.
-    *   Sender Id: This id is generated when you create the GCM/FCM key with Google so that you can configure your application in the Engagement server. As you may recall, this was also discussed in the earlier course.
-    *   It is important that the sender ID used with the application is the same as the one associated with the GCM key that was used to configure the application in the Engagement server.
-    *   Click **Done** after all the details were successfully entered. This will navigate you to the user creation screen.
-
-        
-    ![](Resources/Images/figure18_308x535.png)
-         
-        
-6.  The User creation screen is shown below, where you need to enter the first name, last name, phone number, email, country and state (if country is US only) information.
-7.  Click **Done** after all the information is entered. This action will create a user in the Engagement server.
-    
-    ![](Resources/Images/figure19.png)
-    
-8.  You will see the following screen once the user has been created successfully. Click **Ok** and **Done** again to navigate to the next screen of the application.
-    
-    ![](Resources/Images/figure20.png)
-    
-9.  In the next screen, you will see that you are already subscribed to receive push notifications. Click **SMS** and **E-Mail** options and click **Done**. This will update your preferences to receive all the notifications types and navigates to the next screen.
-    
-    ![](Resources/Images/figure21.png)
-    
+It is assumed that you have access to the Engagement server of Volt MX Foundry and configured the Engagement server with the FCM key that is needed to send the notifications.
 
 Geoboundary Monitoring
 ----------------------
