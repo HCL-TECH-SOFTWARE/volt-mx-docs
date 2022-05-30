@@ -142,7 +142,7 @@ Steps to Install Volt MX Foundry on MS Azure:
 2.  Switch to the root user, install the **unzip** package for extracting contents, and download the `voltmx-foundry-containers-azure.zip` file:  
     **$ sudo -s**  
     **$ apt-get install unzip** 
-    **$ curl -o voltmx-foundry-containers-azure.zip -L**[voltmx-foundry-containers-azure_9.2.0.1_GA.zip](https://download.hcl-cloud.com/onpremise/mobilefoundry/docker/9.2.0.1/VoltMXFoundryContainersAzure-9.2.0.1_GA.zip)
+    **$ curl -o HCL VoltMX-Foundry-Container-Installer”** [ HCL Volt MX Foundry Container Installer (Kubernetes cluster)](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.2.x&orgId=HCL&fromRecentFile=false&fromRecentPkg=true&fromDL=false)
 3.  Unzip the downloaded artifacts:  
     **$ unzip voltmx-foundry-containers-azure.zip -d \<directory-name\>**
     **The structure of the document will be as shown below:**  
