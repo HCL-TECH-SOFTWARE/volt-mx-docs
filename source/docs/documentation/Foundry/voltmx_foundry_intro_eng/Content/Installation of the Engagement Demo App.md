@@ -5,7 +5,7 @@ category: "voltmx_foundry_intro_eng"
                            
 
 
-Installation of the Engagement Demo App
+<!-- Installation of the Engagement Demo App
 =======================================
 
 In this section, we will take you thru the installation of the Engagement Demo Application and show you the steps to create a user and receive the notifications on your Android device.
@@ -64,7 +64,7 @@ In this section, we will take you thru the steps to download and install the And
     
 11.  In the next screen, you will see that you are already subscribed to receive push notifications. Select **SMS** and **E-Mail** options and click **Done**. This will update your preferences to receive all the notifications types and navigates you to the next screen.
     
-      ![](Resources/Images/app7.png)
+      ![](Resources/Images/app7.png) -->
     
 
 Sending Push, Email, and SMS Notifications

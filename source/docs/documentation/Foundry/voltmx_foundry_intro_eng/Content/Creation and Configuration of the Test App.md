@@ -1,4 +1,4 @@
----
+<!-- ---
 layout: "documentation"
 category: "voltmx_foundry_intro_eng"
 ---
@@ -52,4 +52,4 @@ Follow the steps below:
     ![](Resources/Images/publishedapps2_600x178.png)
     
 
-That’s it! This completes the configuration of the application in the Engagement Server.
+That’s it! This completes the configuration of the application in the Engagement Server. -->
