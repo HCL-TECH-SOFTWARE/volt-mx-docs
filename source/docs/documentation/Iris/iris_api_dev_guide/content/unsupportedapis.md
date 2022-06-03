@@ -9,7 +9,7 @@ You are here: Deprecated/Unsupported APIs
 Unsupported APIs
 ================
 
-The following list of APIs are not supported from VoltMX Iris V9:
+The following list of APIs are not supported from VoltMX Iris V9.2:
 
 *   Streaming API
 *   Application API

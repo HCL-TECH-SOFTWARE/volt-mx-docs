@@ -124,9 +124,9 @@ What are the certificates that are treated as trusted and work cross-platform?
 
 iPhone
 
-[http://support.apple.com/kb/HT3580](http://support.apple.com/kb/HT3580)
+[http://support.apple.com/kb/HT3580](https://discussions.apple.com/thread/2681215)
 
-[http://support.apple.com/kb/HT4415](http://support.apple.com/kb/HT4415).
+[http://support.apple.com/kb/HT4415](https://discussions.apple.com/thread/3336519).
 
 Android
 

@@ -223,7 +223,8 @@ The time zone of events that your app adds is the same as the device's current t
 
 * * *
 
-This API stops the ongoing vibration pattern on a device. This API is available from V8 SP3 onwards.
+This API stops the ongoing vibration pattern on a device. This API is available from V9 SP2 onwards.
+<!-- This API stops the ongoing vibration pattern on a device. This API is available from V8 SP3 onwards. -->
 
 > **_Important:_** For Android, you must define the VIBRATE permission under Manifest Properties.  
 **<uses-permission android:name="android.permission.VIBRATE" />**
@@ -281,7 +282,7 @@ voltmx.phone.clearSMSListeners()
 
 <table style="width: 100%;mc-table-style: url('resources/tablestyles/basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Description</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">SMSListenerType [Constant] - Optional</td><td class="TableStyle-Basic-BodyA-Column1-Body1">The SMSListenerType value can be any of the following: voltmx.phone.SMS_WITH_USER_CONSENT voltmx.phone.SMS_WITHOUT_USER_CONSENT Depending on the parameter value, a specific listener type is cleared. If no type is specified, both type of listeners(if any) are cleared.</td></tr></tbody></table>
 
-> **_Note:_** Ensure that you create an androidbuild.properties file in the project folder of your Volt MX Irisworkspace, and add the following key: `addSMSRetrieverSupport = UI`.  
+> **_Note:_** Ensure that you create an androidbuild.properties file in the project folder of your Volt MX Iris workspace, and add the following key: `addSMSRetrieverSupport = UI`.  
 You can set the key to `UI` or `Non-UI` to fetch the required Gradle entries. To know more about adding Android properties to the androidbuild.properties file, click [here]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Native_App_Properties.html#add-android-properties-to-androidbuild-properties-file).  
 
 ### Example
@@ -331,7 +332,7 @@ voltmx.phone.generateAppHashKey()
 
 None.
 
-> **_Note:_** Ensure that you create an androidbuild.properties file in the project folder of your Volt MX Irisworkspace, and add the following key: `addSMSRetrieverSupport = UI`.  
+> **_Note:_** Ensure that you create an androidbuild.properties file in the project folder of your Volt MX Iris workspace, and add the following key: `addSMSRetrieverSupport = UI`.  
 You can set the key to `UI` or `Non-UI` to fetch the required Gradle entries. To know more about adding Android properties to the androidbuild.properties file, click [here]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Native_App_Properties.html#add-android-properties-to-androidbuild-properties-file).  
 
 ### Example
@@ -552,7 +553,7 @@ An array with possible constant values depending on native support in devices. T
 
 * * *
 
-This API returns whether vibrator is supported on a device. This API is available from V8 SP3 onwards.
+This API returns whether vibrator is supported on a device. This API is available from V9 SP2 onwards.
 
 > **_Important:_** For Android, you must define the VIBRATE permission under Manifest Properties.  
 **<uses-permission android:name="android.permission.VIBRATE" />**
@@ -618,59 +619,101 @@ This API allows the application to launch the native email client with predefine
 voltmx.phone.openEmail**([torecipients,](#torecipients)[ccrecipients](#ccrecipients), [bccrecipients](#bccrecipients), [subject](#subject), [messagebody](#messagebody), [ismessagebod.html](#ismessagebod.html), [attachments](#attachments), [viewMode](#viewMode)**, **[filterEmailAppsOnly](#filterEmailAppsOnly))**
 {% endhighlight %}
 
-### Input Parameters
+### Input Parameters  
 
-  
-| Parameter | Description |
-| --- | --- |
-| 
-torecipients \[Array of Strings\] - Mandatory
+<table>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>torecipients [Array of Strings] - Mandatory</td>
+<td>List of email addresses to be included in the “to” list. For example, “john@example.com”,”stephen.joseph@voltmx.com”, and “test@somecompany.com”.</td>
+</tr>
+<tr>
+<td>ccrecipients [Array of Strings] - Optional</td>
+<td>List of email addresses to be included in the “cc” list. For example, “john@example.com”,”stephen.joseph@voltmx.com”, and “test@somecompany.com”. If you do not want to use this parameter, you can pass null value.</td>
+</tr>
+<tr>
+<td>bccrecipients [Array of Strings] - Optional</td>
+<td>List of email addresses to be included in the “bcc” list. For example, “john@example.com”, “stephen.joseph@voltmx.com”, and “test@somecompany.com”.If you do not want to use this parameter, you can pass null value.</td>
+</tr>
+<tr>
+<td>subject [String]- Optional</td>
+<td>Subject to be part of the email. If you do not want to use this parameter, you can pass null value.</td>
+</tr>
+<tr>
+<td>messagebody [String] -Optional</td>
+<td>Body to be part of the email. If you do not want to use this parameter, you can pass null value.</td>
+</tr>
+<tr>
+<td>ismessagebod.html [Boolean] - Optional</td>
+<td>
+<p>If you do not want to use this parameter, you can pass null value. When you pass null value, this parameter defaults to false. true: message body must be treated as HTML content false: message body must not be treated as HTML content</p>
+<ul>
+<li><b>true</b>:message body must be treated as HTML content</li>
+<li><b>false</b>:message body must not be treated as HTML content</li>
+</ul>
+<blockquote>
+<em><b>Note</b></em>: Windows 10 platform do not support HTML body. This is an underlying SDK limitation.
+</blockquote>
+</td>
+</tr>
+<tr>
+<td>attachments [Array of Objects] - Optional</td>
+<td>
+<p>Each attachment is a Hash-table with the following key-value pairs. If you do not want to use the attachments parameter, you can pass null value.</p>
+<ul>
+<li><b>mimetype [String]</b>Standard mime types like image/png or image/jpg or image/* etc.</li>
+<li><b>attachment [Object]</b>Rawbytes received from the camera, image widget, or openmediagallery api.</li>
+<li><b>filename (Optional) [String]</b>name of the file to appear as attachment.</li>
+</ul>
+<blockquote>
+<em><b>Note</b></em>:
+<ul>
+<li>In Android, filename property is not supported.The Android SDK does not provide any provision for giving file name in attachments while launching native email Application.</li>
+<li>For more information on how to attach files in Android, click <a href="sharefilesandroid.html">here</a>
+</li>
+</ul>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td>viewMode [Integer] - Optional</td>
+<td>
+<p>Defines the possible view preferences for an email client window. This is a Windows-specific parameter. The values of viewMode are as follows:</p>
+<ul>
+<li>0 - Default value Defaults to half, which means, the window uses 50% (half) of the available horizontal screen pixels.</li>
+<li>1 - UseLess The window uses less than 50% of the available horizontal screen pixels.</li>
+<li>2 - UseHalf The window uses 50% (half) of the available horizontal screen pixels.</li>
+<li>3 - UseMore The window uses more than 50% of the available horizontal screen pixels.</li>
+<li>4 - UseMinimum The window uses the minimum horizontal pixel width (either 320 or 500 pixels) specified in the app's manifest file.</li>
+<li>5 - UseNone The window uses no visible component.</li>
+</ul>
+<p>If you pass any value other than an integer, the "openEmail : mode must be integer" error message is displayed.</p>
+<blockquote>
+<em><b>Note</b></em>: viewMode is specific only to Windows and is ignored for all other platforms. For all other devices, the viewMode parameter falls back to its default behavior.
+</blockquote>
+</td>
+</tr>
+<tr>
+<td>filterEmailAppsOnly [Boolean] - Optional</td>
+<td>
+<p>Set this parameter to true to filter and list only email applications, which are shown in the Chooser dialog box. By default, the value of this parameter is false. If you do not want to use this parameter, you can pass a null value.</p>
+<blockquote>
+<em><b>Note</b></em>: This property is only available on the Android platform.
+</blockquote>
+<p>On Android 11 (Target SDK version 30, or later) devices, if you want to view a filtered list of email applications, add the following entry in the Project Settings &gt; Native &gt; Android Mobile/Tablet &gt; Child tag entries under &lt;manifest&gt; tag field:</p>
+<pre><code style="display:block;background-color:#eee;">&lt;queries&gt;
+&lt;intent&gt;
+&lt;action android:name="android.intent.action.SENDTO" /&gt;
+&lt;data android:scheme="mailto"/&gt;
+&lt;/intent&gt;
+&lt;/queries&gt;</code></pre>
+</td>
+</tr>
+</table>
 
- | List of email addresses to be included in the "to" list. For example, "john@example.com","stephen.joseph@voltmx.com", and "test@somecompany.com". |
-| 
-
-ccrecipients \[Array of Strings\] - Optional
-
- | List of email addresses to be included in the "cc" list. For example, "john@example.com","stephen.joseph@voltmx.com", and "test@somecompany.com". If you do not want to use this parameter, you can pass null value. |
-| 
-
-bccrecipients \[Array of Strings\] - Optional
-
- | List of email addresses to be included in the "bcc" list. For example, "john@example.com", "stephen.joseph@voltmx.com", and "test@somecompany.com".If you do not want to use this parameter, you can pass null value. |
-| 
-
-subject \[String\]- Optional
-
- | Subject to be part of the email. If you do not want to use this parameter, you can pass null value. |
-| 
-
-messagebody \[String\] -Optional
-
- | Body to be part of the email. If you do not want to use this parameter, you can pass null value. |
-| 
-
-ismessagebod.html \[Boolean\] - Optional
-
- | If you do not want to use this parameter, you can pass null value. When you pass null value, this parameter defaults to false. **true**: message body must be treated as HTML content **false**: message body must not be treated as HTML content
-
-> **_Note:_** Windows 10 platform do not support HTML body. This is an underlying SDK limitation.
-
- |
-| 
-
-attachments \[Array of Objects\] - Optional
-
-
-
- | Each attachment is a Hash-table with the following key-value pairs. If you do not want to use the **attachments** parameter, you can pass null value. **mimetype \[String\]** Standard mime types like image/png or image/jpg or image/\* etc. **attachment \[Object\]** Rawbytes received from the camera, image widget, or openmediagallery api. **filename (Optional) \[String\]** name of the file to appear as attachment.
-
-> **_Note:_**   In Android, _filename_ property is not supported.The Android SDK does not provide any provision for giving file name in attachments while launching native email Application. For more information on how to attach files in Android, click [here]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/sharefilesandroid.html).
-
- |
-| 
-
-viewMode \[Integer\] - Optional | Defines the possible view preferences for an email client window. This is a Windows-specific parameter. The values of viewMode are as follows: 0 - Default valueDefaults to half, which means, the window uses 50% (half) of the available horizontal screen pixels. 1 - UseLess The window uses less than 50% of the available horizontal screen pixels. 2 - UseHalf The window uses 50% (half) of the available horizontal screen pixels. 3 - UseMore The window uses more than 50% of the available horizontal screen pixels. 4 - UseMinimum The window uses the minimum horizontal pixel width (either 320 or 500 pixels) specified in the app's manifest file. 5 - UseNone The window uses no visible component. If you pass any value other than an integer, the "openEmail : mode must be integer" error message is displayed. > **_Note:_** viewMode is specific only to Windows and is ignored for all other platforms. For all other devices, the viewMode parameter falls back to its default behavior. |
-| filterEmailAppsOnly \[Boolean\] - Optional | Set this parameter to true to filter and list only email applications, which are shown in the Chooser dialog box. By default, the value of this parameter is false. If you do not want to use this parameter, you can pass a null value. > **_Note:_** This property is only available on the Android platform. On Android 11 (Target SDK version 30, or later) devices, if you want to view a filtered list of email applications, add the following entry in the **Project Settings** > **Native** > **Android Mobile/Tablet** > **Child tag entries under <manifest> tag** field:<queries> <intent> <action android:name="android.intent.action.SENDTO" /> <data android:scheme="mailto"/> </intent> </queries> |
 
 ### Example
 
@@ -728,8 +771,8 @@ voltmx.phone.openMediaGallery([onselectioncallback](#onselectioncallback), [quer
 
 | Parameter | Description |
 | --- | --- |
-| onselectioncallback \[Function\] - Mandatory | This callback function is invoked when a media is selected. The function receives rawbytes and permStatus as parameters. **rawbytes:** Raw bytes of a selected file. **permStatus:** Permission status whether an app has permission to access the media gallery of the device. **For iOS**: Generally, an app needs [runtime permission](runtime_permissions.html) from the end-user to access the media gallery. If you call the API without obtaining the permission, platform automatically pops up a system permission dialog box with "Allow" and "Deny" options, asking the end-user to grant permission to add a contact to the device.If the end-user taps the "Allow" option, platform proceeds to access the underlying OS API. If the end-user taps the "Deny" option, the rawbytes parameter carries null value and the permStatus parameter holds the voltmx.application.PERMISSION\_DENIED constant value indicates the permission to access the media gallery is denied.**For Android**: This parameter reads the external storage permission that is required to read contents from the media gallery. If you call the API without obtaining the required permission, the platform automatically pops up a system permission dialog containing 'Allow' and 'Deny' options, asking the end user to grant the necessary permission. If the end user taps the 'Allow' option, the platform proceeds to access the underlying OS API. If the end user taps the 'Deny' option, the rawbytes parameter carries null value and the permStatus parameter holds the voltmx.application.PERMISSION\_DENIED constant value, which indicates that the permission to access the media gallery has been denied. **mimeType:** The file format of a selected file. For more information on the standard mime types, refer to the [IANA](http://www.iana.org/assignments/media-types/media-types..html). Examplefunction onSelectionCallback(rawbytes, permStatus, mimeType) { if(rawbytes != null) { //access the rawbytes alert(“file format: ”++mimeType); } else if (permStatus == voltmx.application.PERMISSION\_DENIED) { alert(“Permission Denied to Access the Photo Gallery”); } } var querycontext = { mimeType: "video/\*" }; var returnStatus = voltmx.phone.openMediaGallery(onSelectionCallback, querycontext); |
-| querycontext \[Table\] - Optional | Query context is an Object that can be populated with key-value pairs for fine tuning the media items for display (currently only one key **"mimetype"** supported to query the gallery items ). The possible values of the mimetype key can be **image/\*, video/\*, audio/\***. rawbytes.getRawbytesType () This API returns the type of rawbytes that are obtained from onSelectionCallback of openMediaGallery. Rawbytes can be of different types such as image, audio, video, file, bytes, and livePhoto. This API is available from V8 SP3 onwards. var rawbytesType = rawbytes.getRawbytesType(); To check the obtained rawbyte type, the following constants can be used: constants. RAWBYTES \_IMAGE: rawbytes related to image constants. RAWBYTES \_VIDEO: rawbytes related to video constants. RAWBYTES \_AUDIO: rawbytes related to audio constants. RAWBYTES \_FILE: rawbytes related to files constants. RAWBYTES \_BYTES: rawbytes related to bytes constants. RAWBYTES \_LIVEPHOTO: rawbytes related to livePhoto if(rawbytes.getRawbytesType() == constants. RAWBYTES\_LIVEPHOTO) { // app logic } livePhotoResources - Rawbytes Property Returns both image and file paths, using this property you can get the both image and video paths. This property returns a json containing both video and image paths, and is available from V8 SP3 onwards. It contains the following keys: imageURL: path of stored image related to livePhoto. videoURL: path of stored video related to livePhoto. var livePhotoResources = Rawbytes.livePhotoResources;//Example for creating Live photos using FFIFunction onSelectionCallback(){ if (rawbytes !== null) { if (rawbytes.getRawbytesType() == constants.RAWBYTES\_LIVEPHOTO) { globalArrOFURLS = rawbytes.livePhotoResources; alert(globalArrOFURLS); var livePhotosFFIObject = new PHVFFI.livePhotosFFI(); //Invokes method 'createLivePhoto' on the object livePhotosFFIObject.createLivePhoto(globalArrOFURLS); } frmHome.imgOne.rawBytes = rawbytes; } else if (permStatus == voltmx.application.PERMISSION\_DENIED) { alert("PERMISSION\_DENIED"); } } } var returnStatus = voltmx.phone.openMediaGallery(onSelectionCallback, querycontext); |
+| onselectioncallback \[Function\] - Mandatory | This callback function is invoked when a media is selected. The function receives rawbytes and permStatus as parameters. **rawbytes:** Raw bytes of a selected file. **permStatus:** Permission status whether an app has permission to access the media gallery of the device. **For iOS**: Generally, an app needs [runtime permission](runtime_permissions.html) from the end-user to access the media gallery. If you call the API without obtaining the permission, platform automatically pops up a system permission dialog box with "Allow" and "Deny" options, asking the end-user to grant permission to add a contact to the device.If the end-user taps the "Allow" option, platform proceeds to access the underlying OS API. If the end-user taps the "Deny" option, the rawbytes parameter carries null value and the permStatus parameter holds the voltmx.application.PERMISSION\_DENIED constant value indicates the permission to access the media gallery is denied.**For Android**: This parameter reads the external storage permission that is required to read contents from the media gallery. If you call the API without obtaining the required permission, the platform automatically pops up a system permission dialog containing 'Allow' and 'Deny' options, asking the end user to grant the necessary permission. If the end user taps the 'Allow' option, the platform proceeds to access the underlying OS API. If the end user taps the 'Deny' option, the rawbytes parameter carries null value and the permStatus parameter holds the voltmx.application.PERMISSION\_DENIED constant value, which indicates that the permission to access the media gallery has been denied. **mimeType:** The file format of a selected file. For more information on the standard mime types, refer to the [IANA](https://www.iana.org/assignments/media-types/media-types.xhtml). Examplefunction onSelectionCallback(rawbytes, permStatus, mimeType) { if(rawbytes != null) { //access the rawbytes alert(“file format: ”++mimeType); } else if (permStatus == voltmx.application.PERMISSION\_DENIED) { alert(“Permission Denied to Access the Photo Gallery”); } } var querycontext = { mimeType: "video/\*" }; var returnStatus = voltmx.phone.openMediaGallery(onSelectionCallback, querycontext); |
+| querycontext \[Table\] - Optional | Query context is an Object that can be populated with key-value pairs for fine tuning the media items for display (currently only one key **"mimetype"** supported to query the gallery items ). The possible values of the mimetype key can be **image/\*, video/\*, audio/\***. rawbytes.getRawbytesType () This API returns the type of rawbytes that are obtained from onSelectionCallback of openMediaGallery. Rawbytes can be of different types such as image, audio, video, file, bytes, and livePhoto. This API is available from V9 SP2 onwards. var rawbytesType = rawbytes.getRawbytesType(); To check the obtained rawbyte type, the following constants can be used: constants. RAWBYTES \_IMAGE: rawbytes related to image constants. RAWBYTES \_VIDEO: rawbytes related to video constants. RAWBYTES \_AUDIO: rawbytes related to audio constants. RAWBYTES \_FILE: rawbytes related to files constants. RAWBYTES \_BYTES: rawbytes related to bytes constants. RAWBYTES \_LIVEPHOTO: rawbytes related to livePhoto if(rawbytes.getRawbytesType() == constants. RAWBYTES\_LIVEPHOTO) { // app logic } livePhotoResources - Rawbytes Property Returns both image and file paths, using this property you can get the both image and video paths. This property returns a json containing both video and image paths, and is available from V9 SP2 onwards. It contains the following keys: imageURL: path of stored image related to livePhoto. videoURL: path of stored video related to livePhoto. var livePhotoResources = Rawbytes.livePhotoResources;//Example for creating Live photos using FFIFunction onSelectionCallback(){ if (rawbytes !== null) { if (rawbytes.getRawbytesType() == constants.RAWBYTES\_LIVEPHOTO) { globalArrOFURLS = rawbytes.livePhotoResources; alert(globalArrOFURLS); var livePhotosFFIObject = new PHVFFI.livePhotosFFI(); //Invokes method 'createLivePhoto' on the object livePhotosFFIObject.createLivePhoto(globalArrOFURLS); } frmHome.imgOne.rawBytes = rawbytes; } else if (permStatus == voltmx.application.PERMISSION\_DENIED) { alert("PERMISSION\_DENIED"); } } } var returnStatus = voltmx.phone.openMediaGallery(onSelectionCallback, querycontext); |
 | PSP \[Table\] - Optional | The PSP parameter is a dictionary with the following properties. _widgetref \[Widget Reference\]_: Applicable only on iPad. The widget to which the pop-up will be anchored to. For example, _formname.widgetname_. _compressionlevel_: Compression level is a float value. Specify 0.0 for most compressed images and 1.0 for least compressed images. |
 
 ### Example
@@ -768,7 +811,7 @@ Supported on all platforms except Mobile Web, SPA, and Desktop Web.
 
 * * *
 
-This API provides various haptic feedback to users, and is available from V8 SP3 onwards.
+This API provides various haptic feedback to users, and is available from V9 SP2 onwards.
 
 ### Syntax
 
@@ -963,7 +1006,7 @@ The following codes are applicable only after voltmx.phone.SMS\_LISTENER\_REGIST
 
  
 
-> **_Note:_** Ensure that you create an androidbuild.properties file in the project folder of your Volt MX Irisworkspace, and add the following key: `addSMSRetrieverSupport = UI`.  
+> **_Note:_** Ensure that you create an androidbuild.properties file in the project folder of your Volt MX Iris workspace, and add the following key: `addSMSRetrieverSupport = UI`.  
 You can set the key to `UI` or `Non-UI` to fetch the required Gradle entries. To know more about adding Android properties to the androidbuild.properties file, click [here]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Native_App_Properties.html#add-android-properties-to-androidbuild-properties-file).  
 
 ### Example
@@ -1100,7 +1143,7 @@ Available on all platforms except Desktop Web,SPA, Mobile Web, Android Tablets, 
 
 * * *
 
-This API starts the vibration feature on a device, provided that device supports vibration. If the device does not support vibration, this API has no effect. If a vibration pattern is already in progress when this API is called, the previous pattern is halted and the new one begins. This API is available from V8 SP3 onwards.
+This API starts the vibration feature on a device, provided that device supports vibration. If the device does not support vibration, this API has no effect. If a vibration pattern is already in progress when this API is called, the previous pattern is halted and the new one begins. This API is available from V9 SP2 onwards.
 
 > **_Important:_** For Android, you must define the VIBRATE permission under Manifest Properties.  
 **<uses-permission android:name = "android.permission.VIBRATE" />**

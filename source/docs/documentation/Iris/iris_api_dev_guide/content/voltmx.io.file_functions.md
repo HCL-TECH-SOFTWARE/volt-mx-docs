@@ -6,7 +6,7 @@ category: "iris_api_dev_guide"
 voltmx.io.File Namespace
 ======================
 
-The voltmx,io.File namespace provides functions and properties for doing various operations related on files, such as copying them, renaming them , deleting them, and so on.
+The voltmx.io.File namespace provides functions and properties for doing various operations related on files, such as copying them, renaming them , deleting them, and so on.
 
 Overview
 --------

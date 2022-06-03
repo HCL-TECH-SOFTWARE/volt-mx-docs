@@ -12,9 +12,9 @@ The voltmx.intentExtension namespace provides you with the ability to add Siri-r
 
 Intent extensions enable your iOS app to interface with Siri. An Intent contains the data that Siri gathered from the user. The callback functions that your app sets with the [setExtensionsCallbacks Function](#setExtensionsCallbacks) process the input in the Intent.
 
-By default, an Intent extension in Volt MX Irisdoes not have a UI. However, Iris also enables you to create an IntentUI extension that does provide a UI. When you create an IntentUI with Volt MX Iris, it generates an empty view. Whether you use an Intent extension or an IntentUI extension, you add your business logic to the extension's callback functions. Your JavaScript code accesses native functionality on iOS devices by using objects and invoking functions in the [Native Functions API](native_function.html#native_function_api_for_ios_reference.html).
+By default, an Intent extension in Volt MX Iris does not have a UI. However, Iris also enables you to create an IntentUI extension that does provide a UI. When you create an IntentUI with Volt MX Iris, it generates an empty view. Whether you use an Intent extension or an IntentUI extension, you add your business logic to the extension's callback functions. Your JavaScript code accesses native functionality on iOS devices by using objects and invoking functions in the [Native Functions API](native_function.html#native_function_api_for_ios_reference.html).
 
-Volt MX Irissupports following functionality in the Intent (or IntentUI) extensions.
+Volt MX Iris supports following functionality in the Intent (or IntentUI) extensions.
 
 *   VoIP calling
 *   Messaging
@@ -101,7 +101,7 @@ Functions
 The voltmx.intentExtension namespace provides the following function.
 
 
-<details close markdown="block"><summary>voltmx.intentExtension.setExtensionsCallbacks Function</summary> 
+<details close markdown="block"><summary id="setExtensionsCallbacks">voltmx.intentExtension.setExtensionsCallbacks Function</summary> 
 
 * * *
 

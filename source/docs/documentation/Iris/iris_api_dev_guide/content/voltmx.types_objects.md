@@ -8,29 +8,29 @@ category: "iris_api_dev_guide"
 Secure Text Exchange between Native Android Code and JavaScript
 ---------------------------------------------------------------
 
-From Volt MX Iris V9 SP1, the following RawBytes class methods have been introduced on the Android platform. Using the RawBytes interface, you can pass secure or sensitive text between Native Android Code and JavaScript code. You can create a RawBytes Object from the content of the secure text, which can then be passed to JavaScript. Similarly, a JavaScript RawBytes Object can be used to retrieve secure text from Native Android Code.
+From Volt MX Iris V9 SP2, the following RawBytes class methods have been introduced on the Android platform. Using the RawBytes interface, you can pass secure or sensitive text between Native Android Code and JavaScript code. You can create a RawBytes Object from the content of the secure text, which can then be passed to JavaScript. Similarly, a JavaScript RawBytes Object can be used to retrieve secure text from Native Android Code.
 
-Package
+<b>Package</b>
 
 com.konylabs.api.io
 
-Class
+<b>Class</b>
 
 RawBytes
 
-Constructor
+<b> Constructor </b>
 
 _RawBytes(Object secureText)_
 
 The constructor takes an Object that is either a Character array (char\[\]) or a Byte array(byte\[\]) as an input parameter.
 
-Example
+<b>Example</b>
 
 {% highlight voltMx %}char[] sensitiveText= {'p','a','s','s','w','o','r','d'};   
 RawBytes rawBytes = new RawBytes(sensitiveText);
 {% endhighlight %}
 
-Constants
+<b>Constants</b>
 
 The following Native Android constant identifiers are used to retrieve the content type of the RawBytes Object:
 
@@ -40,7 +40,7 @@ The following Native Android constant identifiers are used to retrieve the conte
 > | RawBytes.CONTENT\_TYPE\_BYTE\_ARRAY | Constant Identifier that specifies the content type of the RawBytes Object as a Byte array. |
 > | RawBytes.CONTENT\_TYPE\_CHAR\_ARRAY | Constant Identifier that specifies the content type of the RawBytes Object as a Character array. |
 
-**Methods**
+<b>Methods</b>
 
 *   **createJSObject**
     
@@ -87,7 +87,7 @@ The following Native Android constant identifiers are used to retrieve the conte
     {% highlight voltMx %}public void clear();
     {% endhighlight %}
 
-Example
+<b>Example</b>
 
 {% highlight voltMx %}// This JavaScript code demonstrates the following:  
 // 1) Retrieves a character array password from the Native layer in the form of RawBytes.  
@@ -136,7 +136,7 @@ public class NativeClass {
 }
 {% endhighlight %}
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 

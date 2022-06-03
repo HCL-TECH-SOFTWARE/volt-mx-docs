@@ -8,7 +8,8 @@ category: "iris_api_dev_guide"
 React Native APIs
 =================
 
-The following React Native APIs are utilized for the communication between the React Native app framework and the VoltMX Iris Framework. These React Native APIs are available from V8 SP4 onwards.
+The following React Native APIs are utilized for the communication between the React Native app framework and the VoltMX Iris Framework. These React Native APIs are available from V9 SP2 onwards.
+<!-- The following React Native APIs are utilized for the communication between the React Native app framework and the VoltMX Iris Framework. These React Native APIs are available from V8 SP4 onwards. -->
 
 
 <details close markdown="block"><summary>reactNative.invokeVoltMXCallback</summary>

@@ -562,7 +562,8 @@ Returns a string that determines the data type of the specified input. Possible 
 
 * * *
 
-This API helps you to manage the sharing of a one-time login credentials between the Safari web browser and an app. The one-time login credentials can also be used to automatically log on to associated apps. The voltmx.web.WebAuthenticationSession API is available from V8 SP4 onwards.
+This API helps you to manage the sharing of a one-time login credentials between the Safari web browser and an app. The one-time login credentials can also be used to automatically log on to associated apps. The voltmx.web.WebAuthenticationSession API is available from V9 SP2 onwards.
+<!-- This API helps you to manage the sharing of a one-time login credentials between the Safari web browser and an app. The one-time login credentials can also be used to automatically log on to associated apps. The voltmx.web.WebAuthenticationSession API is available from V8 SP4 onwards. -->
 
 In addition, this API facilitates a single sign-on (SSO) experience when used with standards such as OAuth. It puts users in control of whether they want to use their existing logged-in session from Safari browser.
 

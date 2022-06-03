@@ -287,7 +287,7 @@ Available only on iOS.
 * * *
 
 </details>
-<details close markdown="block"><summary>setMonitoringStartedForRegionCallback</summary> 
+<details close markdown="block"><summary id="setMonit">setMonitoringStartedForRegionCallback</summary> 
 
 * * *
 
@@ -333,7 +333,7 @@ Available only on iOS.
 * * *
 
 </details>
-<details close markdown="block"><summary>startMonitoringBeaconRegion</summary> 
+<details close markdown="block"><summary id="startMon">startMonitoringBeaconRegion</summary> 
 
 * * *
 

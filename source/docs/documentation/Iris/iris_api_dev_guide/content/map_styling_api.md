@@ -11,7 +11,8 @@ Map Styling API
 
 The Map Styling API helps to provide various custom styling options for maps. By using these style options, you can customize the presentation of the standard Google map styles, thereby changing the visual display of features such as roads, businesses, parks, and other points of interest.
 
-This feature is applicable for Android platform only and is available on Volt MX Irisfrom V8.2 onwards.
+This feature is applicable for Android platform only and is available on Volt MX Irisfrom V9.2 onwards.
+<!-- This feature is applicable for Android platform only and is available on Volt MX Irisfrom V8.2 onwards. -->
 
 Create custom Map style
 -----------------------

@@ -49,6 +49,7 @@ Further, a URLs can be sent over the internet in ASCII format only. To convert a
 
 Please note that the `voltmx.net.invokeServiceAsync` and `voltmx.net.invokeservice` are deprecated and should not be used in new software. However, [documentation for them is still available](voltmx.net_deprecated.html) to help with the maintenance of legacy software.
 
-> **_Note:_** From V8 SP4 onwards, for etag caching of Network APIs, the data in a Volt MX App child app is stored in child app data and not under the parent app. This feature is applicable for iOS, Windows, and Android platforms.
+> **_Note:_** From V9 SP2 onwards, for etag caching of Network APIs, the data in a Volt MX App child app is stored in child app data and not under the parent app. This feature is applicable for iOS, Windows, and Android platforms.
+<!-- > **_Note:_** From V8 SP4 onwards, for etag caching of Network APIs, the data in a Volt MX App child app is stored in child app data and not under the parent app. This feature is applicable for iOS, Windows, and Android platforms. -->
 
 ![](resources/prettify/onload.png)
