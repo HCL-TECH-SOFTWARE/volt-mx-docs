@@ -13,12 +13,16 @@ Download Volt MX Foundry Installer
 
 ------------------------------------
 
-*   Download `VoltMXFoundrySetup.tar.gz` file from [](http://developer.voltmx.com/VoltMXReleases)[downloads site](http://community.hclvoltmx.com/downloads) and extract the file. To download Volt MX Foundry installer from the community portal, follow these steps:
-    1.   Log in to [](http://developer.voltmx.com/VoltMXReleases)[Downloads](http://community.hclvoltmx.com/downloads). You can obtain a user name and password from your sales representative or partner.
-    2.  Click the **VoltMX Foundry** tab.
-    3.  Select the specific release version from the **VoltMX Foundry Installer (Consolidated Installer for all features)** drop-down list and then click on the specific release related files you want to download. For example, if you want to download `VoltMX Foundry 9.0.0.0 GA installer`, select the `9.0.0.0 GA` version from the drop-down list, and then click the **Installer\_Linux** link. .
-        
-        The `VoltMXFoundrySetup.tar.gz` file contains the following files:
+*   Download `VoltMXFoundrySetup.tar.gz` file from [](http://developer.voltmx.com/VoltMXReleases)[downloads site](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.2.x&orgId=HCL&fromRecentFile=false&fromRecentPkg=true&fromDL=false) and extract the file. To download Volt MX Foundry installer from the community portal, follow these steps:
+    1.   Log in to [](http://developer.voltmx.com/VoltMXReleases)[Downloads](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.2.x&orgId=HCL&fromRecentFile=false&fromRecentPkg=true&fromDL=false). You can obtain a user name and password from your sales representative or partner.
+         ![FNO_Foundry_Downloads](Resources/Images/FNO_Foundry_Downloads.png)  
+
+    2.  Click the **Files** tab.
+
+    3.  Click on the specific file name to download the Foundry Installer file. 
+    <!-- 3.  Select the specific release version from the **VoltMX Foundry Installer (Consolidated Installer for all features)** drop-down list and then click on the specific release related files you want to download. For example, if you want to download `VoltMX Foundry 9.0.0.0 GA installer`, select the `9.0.0.0 GA` version from the drop-down list, and then click the **Installer\_Linux** link. . -->
+
+    The `VoltMXFoundrySetup.tar.gz` file contains the following files:
         
         *   `VoltMXFoundryInstaller-x.x.x.x_GA.bin`
         *   `installer.properties` - This file is required for silent installation.
