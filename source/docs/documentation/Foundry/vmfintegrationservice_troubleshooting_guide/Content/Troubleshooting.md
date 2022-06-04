@@ -50,256 +50,262 @@ Other Features
 --------------
 
 -  **What is the Standard way in which I can handle HTTP status codes (401, and 404) from Volt MX Foundry Integration Service?**
-    
-    **Solution**
-    
-    In PostProcessor, Result object is available. In that, you can use the following code snippet to find the httpStatus code:
-    
-    <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
-        Param statusCodeparam = result.findParam("httpStatusCode");
-        int httpStatusCode = Integer.parseInt(statusCodeparam.getValue());
-    }</code></pre></figure>
-    
-    By default, Volt MX Foundry Integration Service passes the HTTP status code in the resultset json format to device. The following is the sample output string:
-    
-    <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
-        resultset =  {"httpStatusCode":200,"marketIndex":[{"indName":"Dow Jones Ind.","indVal":"15618.22","symbol":"0DJIA","indValChg":"            -20.90"},{"indName":"Nasdaq Comp.","indVal":"3939.86","symbol":"0NDQC","indValChg":"3.27"},{"indName":"NYSE Composite","indVal":"          10011.65","symbol":"0NYC","indValChg":"-52.46"},{"indName":"S & P 500","indVal":"1762.97","symbol":"0S&P5","indValChg":"             -4.96"}],"opstatus":0}
-    }</code></pre></figure>
-    
-    You can use the following snippet in `.js` file to get the httpStatusCode from JSON resultset object.
-    
-    int statusCode = resultset\["httpStatusCode "\];
+
+**Solution**
+
+In PostProcessor, Result object is available. In that, you can use the following code snippet to find the httpStatus code:
+
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">
+    Param statusCodeparam = result.findParam("httpStatusCode");
+    int httpStatusCode = Integer.parseInt(statusCodeparam.getValue());
+</code></pre></figure>
+
+By default, Volt MX Foundry Integration Service passes the HTTP status code in the resultset json format to device. The following is the sample output string:
+
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">
+    resultset =  {"httpStatusCode":200,"marketIndex":[{"indName":"Dow Jones Ind.","indVal":"15618.22","symbol":"0DJIA","indValChg":"            -20.90"},{"indName":"Nasdaq Comp.","indVal":"3939.86","symbol":"0NDQC","indValChg":"3.27"},{"indName":"NYSE Composite","indVal":"          10011.65","symbol":"0NYC","indValChg":"-52.46"},{"indName":"S & P 500","indVal":"1762.97","symbol":"0S&P5","indValChg":"             -4.96"}],"opstatus":0}
+</code></pre></figure>
+
+You can use the following snippet in `.js` file to get the httpStatusCode from JSON resultset object.
+
+int statusCode = resultset\["httpStatusCode "\];
     
 
 * * *
 
 -  **How can I use Basic Authenticate in RESTful service with dynamic userids in request? When working with service definitions in Volt MX Iris, I need to be able to dynamically assign those values in code, that is, do I have to authenticate with Active Directory and then with REST endpoints?**
     
-    **Solution**
-    
-    Dynamically, in basic authentication, in every request, you can pass the username and password in request params with the following specified param names:
-    
-    1.  userid
-    2.  pwd
-    
-    If you have any domain and hostname, then use the following specified param names:
-    
-    1.  domain
-    2.  hname
-    
-    Volt MX Foundry Integration Service first checks in:
-    
-    1.  request parameters
-    2.  if not available, it checks in session, that is, _session.getAttribute(userid)_
-    3.  if not available in request and session, then it takes from the service definition file.
-    
-    In JS code level:
-    
-    {% highlight voltMx %}var inputParamTable={};                  
+**Solution**
+
+Dynamically, in basic authentication, in every request, you can pass the username and password in request params with the following specified param names:
+
+*  userid
+*  pwd
+
+If you have any domain and hostname, then use the following specified param names:
+
+*  domain
+*  hname
+
+Volt MX Foundry Integration Service first checks in:
+
+*  request parameters
+*  if not available, it checks in session, that is, _session.getAttribute(userid)_
+*  if not available in request and session, then it takes from the service definition file.
+
+In JS code level:
+
+{% highlight voltMx %}
+    var inputParamTable={};                  
     inputParamTable["appID"] = "ServicesApp";                 
     inputParamTable["serviceID"] = "BasicAuthService";
                     inputParamTable["userid"] = "steve";                  
     inputParamTable["pwd"] = "apple";  
     inputParamTable["domain"] = "kits";                  
     inputParamTable["hname"] = "apple";  
-    
-    {% endhighlight %}
-    
-    If you want to store userid and password in HTTP session, write the below code in pre / post processor:
-    
-    {% highlight voltMx %}Session session = request.getSession(false);
-    
+{% endhighlight %}
+
+If you want to store userid and password in HTTP session, write the below code in pre / post processor:
+
+{% highlight voltMx %}
+    Session session = request.getSession(false);
     session.setAttribute("userid", "steve");
     session.setAttribute("pwd", "******");
-    
-    {% endhighlight %}
+{% endhighlight %}
 
 * * *
 
 -  **If end server has proxy enabled authentication, then what should I do?**
-    
-    **Solution**
-    
-    You need to configure the below -D parameters:
-    
-    {% highlight voltMx %}voltmx.http.proxyHost
+
+**Solution**
+
+You need to configure the below -D parameters:
+
+{% highlight voltMx %}
+    voltmx.http.proxyHost
     voltmx.http.proxyPort
     voltmx.http.proxyUser  
     voltmx.http.proxyPassword
-    {% endhighlight %}
-    
-    If end server is with NTLM enabled authentication, then you need to configure the additional below -D parameter:
-    
-    {% highlight voltMx %}voltmx.proxy.ntlm.domainName
-    {% endhighlight %}
+{% endhighlight %}
+
+If end server is with NTLM enabled authentication, then you need to configure the additional below -D parameter:
+
+{% highlight voltMx %}
+    voltmx.proxy.ntlm.domainName
+{% endhighlight %}
 
 * * *
 
 -  **How can I** **add Headers?**
-    
-    **Solution**
-    
 
--  For example, to add "Content-Type" as a header:
-    
-    In the **Service Definition** editor -> **Http Headers** tab, under **Id**, declare _Content-Type_ as header type and under **Session**, select _session_ from the drop-down list as shown:
-    
-    ![](Resources/Images/headers.png)
-    
-    Write preprocessor for the service and use the following snippet in preprocessor:
-    
-    {% highlight voltMx %}Session session = request.getSession();
-       session.setAttribute("Content-Type"," application/json");
-    {% endhighlight %}
-  
-    If you want to pass header values in "request" parameters,
-    
-    In the **Service Definition** editor -> **Http Headers** tab, under **Scope**, select _request_ from the drop-down list, then pass the header value with same key that you defined in Header section with _request_ as scope.
-    
-    ![](Resources/Images/headers_request.png)
-    
-    For example,
-    
-    {% highlight voltMx %}1)Content-Type - request scope in Volt MX Iris Header section  
+**Solution**
+
+
+For example, to add "Content-Type" as a header:
+
+In the **Service Definition** editor -> **Http Headers** tab, under **Id**, declare _Content-Type_ as header type and under **Session**, select _session_ from the drop-down list as shown: <br/>
+
+![](Resources/Images/headers.png)
+
+Write preprocessor for the service and use the following snippet in preprocessor:
+
+{% highlight voltMx %}
+    Session session = request.getSession();
+    session.setAttribute("Content-Type"," application/json");
+{% endhighlight %}
+
+If you want to pass header values in "request" parameters,
+
+In the **Service Definition** editor -> **Http Headers** tab, under **Scope**, select _request_ from the drop-down list, then pass the header value with same key that you defined in Header section with _request_ as scope. <br/>
+
+![](Resources/Images/headers_request.png)
+
+For example,
+
+{% highlight voltMx %}1)
+    Content-Type - request scope in Volt MX Iris Header section  
     2)Use the below code in JavaScript  
     var inputParamTable={};             
     inputParamTable["Content-Type"] = "application/json";  
-    
-    {% endhighlight %}
+{% endhighlight %}
 
 * * *
 
 -  **How can I add Custom Cookies in header?**
     
-    **Solution**
-    
+**Solution**
 
-    1.  Create cookie object using HTTP client 4.1 API, org.apache.http.cookie.Cookie
-    2.  In pre or post processor, use the following snippet:
-    
-    {% highlight voltMx %}Session session = request.getSession(false);
-    	    session.setAttribute("KCookie",cookie);
-    {% endhighlight %}
+
+*  Create cookie object using HTTP client 4.1 API, org.apache.http.cookie.Cookie
+*  In pre or post processor, use the following snippet:
+
+{% highlight voltMx %}
+    Session session = request.getSession(false);
+    session.setAttribute("KCookie",cookie);
+{% endhighlight %}
 
 * * *
 
 -  **How can I change the url or user authentication details dynamically?**
     
-    **Solution**
-    
-    Implement URLProvider2 class and write your own logic to override the service definition values.
+**Solution**
+
+Implement URLProvider2 class and write your own logic to override the service definition values.
     
 
 * * *
 
 -  **If request data is more than 1024 MB, then Linux default values do not allow to forward the request. What do I need to do so that Linux values allow to forward the request?**
-    
-    **Solution**
-    
-    Login to Linux shell with root privileges.
-    
-    Set the following in Linux Operating System:
-    
-    > **_Note:_** Below changes apply on QNBDEV server to resolve the BRE service issue.
-    
-    \# vi /etc/sysctl.conf ( Add the below values)  
-    #increase TCP max buffer size settable using setsockopt()net.core.rmem\_max = 16777216 net.core.wmem\_max = 16777216  
-    #recommended for hosts with jumbo frames enabled net.ipv4.tcp\_mtu\_probing=1
-    
+
+**Solution**
+
+Login to Linux shell with root privileges.
+
+Set the following in Linux Operating System:
+
+> **_Note:_** Below changes apply on QNBDEV server to resolve the BRE service issue.
+
+\# vi /etc/sysctl.conf ( Add the below values)  
+#increase TCP max buffer size settable using setsockopt()net.core.rmem\_max = 16777216 net.core.wmem\_max = 16777216  
+#recommended for hosts with jumbo frames enabled net.ipv4.tcp\_mtu\_probing=1
+
 
 * * *
 
 -  **If a SOAP response has an embedded xml, then what do I need to do?**
-    
-    **Solution**
-    
-    Select the **Escape embedded xml in response** check box in the SOAP service definition editor in Volt MX Iris to enable it.
-    
-    Sample HTTP Response from end server:
-    
-    {% highlight voltMx %}<soapenv:Envelope xmlns:Soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-         
-     <soapenv:Body>  
-       
-     <lmsSOAPResponse xmlns="HYPERLINK "http://lms.sbi.com/"http://lms.sbi.com">
-             <lmsPReturn>&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;&lt;LMS&gt;&lt;record id="0"&gt;&lt;CO_APP2_GMI&gt;![CDATA[Google check]]&lt;/CO_APP2_GMI&gt;&lt;NMI_ELG_CAL&gt;&lt;/record&gt;&lt;/LMS&gt;</lmsReturn>
-          </lmsSOAPResponse>
-       </soapenv:Body>
-    </soapenv:Envelope>
-    {% endhighlight %}
-    
-    The sample embedded xml in SOAP response is converted into valid SOAP response for parsing as shown:
-    
-    {% highlight voltMx %}<soapenv:Envelope xmlns:Soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-       <soapenv:Body>
-          <lmsSOAPResponse xmlns="HYPERLINK "http://lms.sbi.com/"http://l   
-    ms.sbi.com">
-             <lmsPReturn>&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;&lt;LMS&gt;&lt;record id="0"&gt;&lt;CO_APP2_GMI&gt;![CDATA[Google check]]&lt;/CO_APP2_GMI&gt;&lt;NMI_ELG_CAL&gt;&lt;/record&gt;&lt;/LMS&gt;</lmsReturn>
-          </lmsSOAPResponse>
-       </soapenv:Body>
-    </soapenv:Envelope>
-    {% endhighlight %}
+
+**Solution**
+
+Select the **Escape embedded xml in response** check box in the SOAP service definition editor in Volt MX Iris to enable it.
+
+Sample HTTP Response from end server:
+
+{% highlight voltMx %}
+<soapenv:Envelope xmlns:Soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">     
+<soapenv:Body>     
+    <lmsSOAPResponse xmlns="HYPERLINK "http://lms.sbi.com/"http://lms.sbi.com">
+         <lmsPReturn>&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;&lt;LMS&gt;&lt;record id="0"&gt;&lt;CO_APP2_GMI&gt;![CDATA[Google check]]&lt;/CO_APP2_GMI&gt;&lt;NMI_ELG_CAL&gt;&lt;/record&gt;&lt;/LMS&gt;</lmsReturn>
+      </lmsSOAPResponse>
+   </soapenv:Body>
+</soapenv:Envelope>
+{% endhighlight %}
+
+The sample embedded xml in SOAP response is converted into valid SOAP response for parsing as shown:
+
+{% highlight voltMx %}
+<soapenv:Envelope xmlns:Soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <soapenv:Body>
+      <lmsSOAPResponse xmlns="HYPERLINK "http://lms.sbi.com/"http://l   
+ms.sbi.com">
+         <lmsPReturn>&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;&lt;LMS&gt;&lt;record id="0"&gt;&lt;CO_APP2_GMI&gt;![CDATA[Google check]]&lt;/CO_APP2_GMI&gt;&lt;NMI_ELG_CAL&gt;&lt;/record&gt;&lt;/LMS&gt;</lmsReturn>
+      </lmsSOAPResponse>
+   </soapenv:Body>
+</soapenv:Envelope>
+{% endhighlight %}
 
 * * *
 
 -  **What should I do when I get a message as "Maximum offline sessions exceeded?"**
     
-    **Solution**
-    
-    This message displays when you have upgraded the Volt MX Iris to version 6.0 but the server is still an older version 5.6.2. To overcome this message, you need to contact Volt MX Support team. If you are a cloud user, you have to contact the Volt MX Customer Representative and plan for the server upgrade.
-    
+**Solution**
+
+This message displays when you have upgraded the Volt MX Iris to a version 2 service pack releases higher than the server. To overcome this message, you need to contact Volt MX Support team. If you are a cloud user, you have to contact the Volt MX Customer Representative and plan for the server upgrade.
+
 
 * * *
 
 -  **What is the solution when middleware logs are not rolling consistently in windows environment?**
     
-    **Solution**
-    
-    Check whether you have User and Administrator permissions for the folders where middleware logs are logged. If you do not have permissions, get the permissions for the folders.
-    
+**Solution**
+
+Check whether you have User and Administrator permissions for the folders where middleware logs are logged. If you do not have permissions, get the permissions for the folders.
+
 
 * * *
 
 -  **What should I do when I get "null" as the value for $<placeholder> and if the entry is deleted from the request template when I send the request to the endpoint service?**
     
-    **Solution**
+**Solution**
+
+If the run-time value for $<placeholder> appears as "null", replace $ with $! to get an empty string in place of "null" to avoid the entry getting deleted.
+
+While you replace with $! in the request body template, follow these guidelines:
+
+*  Use $! in only the request template body. Do not use $! while you define the URL parameters in the endpoint URL.
+*  If you use "foreach" in the request template body, you should not mention $! for "foreach" parameters.
     
-    If the run-time value for $<placeholder> appears as "null", replace $ with $! to get an empty string in place of "null" to avoid the entry getting deleted.
+    For example: #foreach ($rec in $ZashpayAccount.records)
     
-    While you replace with $! in the request body template, follow these guidelines:
-    
-    1.  Use $! in only the request template body. Do not use $! while you define the URL parameters in the endpoint URL.
-    2.  If you use "foreach" in the request template body, you should not mention $! for "foreach" parameters.
-        
-        For example: #foreach ($rec in $ZashpayAccount.records)
-        
 
 * * *
 
 -  **What is the process of Secured Socket Layer (SSL) setup in Volt MX Foundry Integration Service?**
     
-    **Solution**
+**Solution**
+
+The process of SSL setup is as follows:
+
+**Pre-requisities**: Volt MX Foundry Integration Service Installation
+
+**Steps for setting up SSL:**
+
+*  Configure https port in catalina.properties for the property https\_port in the path <VoltMX server installation location>\\tomcat\\instance1\\conf (Ex: D:\\Workspaces\\VoltMXServer\\tomcat\\instance1\\conf,https\_port = 8443 ).
+*  Add the <security-constraint> tag to middleware web.xml
     
-    The process of SSL setup is as follows:
-    
-    **Pre-requisities**: Volt MX Foundry Integration Service Installation
-    
-    **Steps for setting up SSL:**
-    
-    1.  Configure https port in catalina.properties for the property https\_port in the path <VoltMX server installation location>\\tomcat\\instance1\\conf (Ex: D:\\Workspaces\\VoltMXServer\\tomcat\\instance1\\conf,https\_port = 8443 ).
-    2.  Add the <security-constraint> tag to middleware web.xml
-        
-        {% highlight voltMx %}<security-constraint>
-            <web-resource-collection>
-                <web-resource-name>middleware</web-resource-name>
-                <url-pattern>/*</url-pattern>
-            </web-resource-collection>
-            <user-data-constraint>
-                <transport-guarantee>CONFIDENTIAL</transport-guarantee>
-            </user-data-constraint>
-        </security-constraint>
-        {% endhighlight %}
-    3.  Copy the below connector configuration for SSL enabling in server.xml:{% highlight voltMx %}<Connector address="${TOMCAT.BIND.IP}" port="${https_port}" 
+    {% highlight voltMx %}
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>middleware</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    {% endhighlight %}
+*  Copy the below connector configuration for SSL enabling in server.xml:
+{% highlight voltMx %}
+    <Connector address="${TOMCAT.BIND.IP}" port="${https_port}" 
         maxHttpHeaderSize="8192" maxThreads="150" enableLookups="false" 
         acceptCount="25" disableUploadTimeout="true" server="VoltMX" 
         tcpNoDelay="true" compression="on" 
@@ -309,13 +315,12 @@ Other Features
         clientAuth="false" sslProtocol="TLS" 
         keystoreFile="D:/ssl/tomcat.jks" keystorePass="password" 
         truststoreFile="D:/ssl/tomcat.jks" truststorePass="password"/>
-        
-        {% endhighlight %}
-    
-    > **_Note:_** D:/ssl/tomcat.jks is the **keystore** and **truststore** location. You can point this to java cacerts also.  
-    TOMCAT.BIND.IP is the IP configured in catalina.properties file.  
-    
-    > **_Important:_** The above mentioned steps are for one-way SSL. If you want to enable two-way SSL on Volt MX Foundry Integration Service, please make clientAuth = true.
+{% endhighlight %}
+
+> **_Note:_** D:/ssl/tomcat.jks is the **keystore** and **truststore** location. You can point this to java cacerts also.  
+TOMCAT.BIND.IP is the IP configured in catalina.properties file.  
+
+> **_Important:_** The above mentioned steps are for one-way SSL. If you want to enable two-way SSL on Volt MX Foundry Integration Service, please make clientAuth = true.
     
 
 * * *
@@ -323,7 +328,9 @@ Other Features
 Java Messaging Service (JMS) Issue
 ----------------------------------
 
--  **If you are unable to start JBoss 5.1.0 with JDK 1.7.X and in `Server.log` and if you come across the below error:**{% highlight voltMx %}3:53:10,693 ERROR [AbstractKernelController] Error installing to Instantiated: name=AttachmentStore state=Described
+-  **If you are unable to start JBoss 5.1.0 with JDK 1.7.X and in `Server.log` and if you come across the below error:**
+{% highlight voltMx %}
+    3:53:10,693 ERROR [AbstractKernelController] Error installing to Instantiated: name=AttachmentStore state=Described
     java.lang.IllegalArgumentException: Wrong arguments. new for target java.lang.reflect.Constructor expected=[java.net.URI] actual=[java.io.File]
     at org.jboss.reflect.plugins.introspection.ReflectionUtils.handleErrors(ReflectionUtils.java:395)
     at org.jboss.reflect.plugins.introspection.ReflectionUtils.newInstance(ReflectionUtils.java:153)
@@ -334,19 +341,19 @@ Java Messaging Service (JMS) Issue
     at org.jboss.kernel.plugins.dependency.KernelControllerContextAction$JoinpointDispatchWrapper.execute(KernelControllerContextAction.java:241)
     at org.jboss.kernel.plugins.dependency.ExecutionWrapper.execute(ExecutionWrapper.java:47)
     at org.jboss.kernel.plugins.dependency.KernelControllerContextAction.dispatchExecutionWrapper(KernelControllerContextAction.java:109)
-    {% endhighlight %}
+{% endhighlight %}
     
-    **Solution**
-    
-    In `/jboss_jms/server/default/conf/bootstrap/profile.xml` file, change the following:
-    
-    {% highlight voltMx %}<constructor><parameter><inject bean="BootstrapProfileFactory" property="attachmentStoreRoot" /></parameter></constructor>
-    {% endhighlight %}
-    
-    to:
-    
-    {% highlight voltMx %}<constructor><parameter class="java.io.File"><inject bean="BootstrapProfileFactory" property="attachmentStoreRoot" /></parameter></constructor>
-    {% endhighlight %}
+**Solution**
+
+In `/jboss_jms/server/default/conf/bootstrap/profile.xml` file, change the following:
+
+{% highlight voltMx %}<constructor><parameter><inject bean="BootstrapProfileFactory" property="attachmentStoreRoot" /></parameter></constructor>
+{% endhighlight %}
+
+to:
+
+{% highlight voltMx %}<constructor><parameter class="java.io.File"><inject bean="BootstrapProfileFactory" property="attachmentStoreRoot" /></parameter></constructor>
+{% endhighlight %}
 
 [Open topic with navigation](../Content/Troubleshooting.html)
 
