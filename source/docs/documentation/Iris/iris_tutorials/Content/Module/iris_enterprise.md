@@ -6,20 +6,20 @@ category: "iris_tutorials"
 
 Volt MX  Iris Tutorials
 
-iris enterprise
+Iris 
 ---------------------
 
 {% include youtube.html id='W9vb8pIE-7I' %}
   
 
-1\. Import A Project Created In Iris Starter Edition
+1\. Import A Project Created In Iris
 ----------------------------------------------------------
 
 ![](../Resources/Images/VE1.png)
 
 1.  Click on Import.
     
-2.  Select the archive file. Check the **Copy Designer Actions to Developer Actions** option to copy the actions defined in Starter Edition into Enterprise Edition.
+2.  Select the archive file. Check the **Copy Designer Actions to Developer Actions** option to copy the actions defined.
     
 
 2\. Add Splash
