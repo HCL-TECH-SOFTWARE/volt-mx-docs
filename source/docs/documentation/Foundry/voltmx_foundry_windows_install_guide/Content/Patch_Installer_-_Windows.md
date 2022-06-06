@@ -40,7 +40,7 @@ Prerequisites
       
     For example, if you are required to install hotfix archive for Console version V 7.0.1, you must have the Foundry 7.0.1 GA with Console installed on your system.
     
-*   Download the `patchinstaller(binary)` and `hotfix archives` from [http://community.hclvoltmx.com/downloads/manual/](http://community.hclvoltmx.com/downloads/manual/) with your credentials.
+*   Download the `patchinstaller(binary)` and `hotfix archives` from [https://hclsoftware.flexnetoperations.com](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.2.x&orgId=HCL&fromRecentFile=false&fromRecentPkg=true&fromDL=false) with your credentials.
 *   Ensure that  `VoltMXFoundryPatchInstaller.exe`  file has execute permission.
     
     
@@ -48,7 +48,7 @@ Prerequisites
     
 To download Volt MX Foundry Patch Installer and hotfixes, follow these steps:
 
-1.   Log in to [](http://developer.voltmx.com/VoltMXReleases)[http://community.hclvoltmx.com/downloads/manual/](http://community.hclvoltmx.com/downloads/manual/). You can obtain a user name and password from your sales representative or partner.
+1.   Log in to [](http://developer.voltmx.com/VoltMXReleases)[https://hclsoftware.flexnetoperations.com](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.2.x&orgId=HCL&fromRecentFile=false&fromRecentPkg=true&fromDL=false). You can obtain a user name and password from your sales representative or partner.
 2.  Navigate to the **Volt MX Foundry** section.
 3.  From the **Volt MX Foundry Patch Installer**, select the specific release from the **Version** drop-down list and then click on the specific release related files you want to download based on your platform (Windows or Linux).  
     For example, if you want to download `Volt MX Foundry Patch Installer 8.0 GA`, select the `8.0 GA` version from the drop-down list, and then click the **Installer\_Windows** link.

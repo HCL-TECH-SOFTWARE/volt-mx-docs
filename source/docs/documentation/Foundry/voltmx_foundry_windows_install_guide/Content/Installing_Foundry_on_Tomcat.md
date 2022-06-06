@@ -40,8 +40,9 @@ To install Volt MX Foundry on Tomcat using the installer, follow these steps:
     
     ![](Resources/Images/Install4.png)  
     
+    <p id="InstallComponents"></p>
 6.  Click **Next**. The **Install Components** window appears with the following supported installation types:
-    
+
     *   **Development** for single machine instance.
     *   **Non-Production** for larger environments like Staging or Testing.
         
@@ -113,17 +114,19 @@ To install Volt MX Foundry on Tomcat using the installer, follow these steps:
 		Once the password is encrypted, replace the encrypted value in the `prop_value` column in the row where prop\_value is `management_server_password` of `<DatabasePrefix>admindb<DatabaseSuffix>` database in the `server_configuration` table.
     
 14. Click **Next**.
-    
-    The **HTTP or HTTPS** window appears asking you to choose the HTTP or HTTPS. By default, this option is set to **HTTP**.
+
+    <p id="Step13"></p>
+    The <b>HTTP or HTTPS</b> window appears asking you to choose the HTTP or HTTPS. By default, this option is set to <b>HTTP</b>.
     
     ![](Resources/Images/HTTP.png)
     
-
-    * Between HTTP and HTTPS, if you select HTTP, the following window appears. Enter the **Hostname/IP Address**, **HTTP Port**, and **Tomcat Shutdown Port**. Click **Next**.
+    <p id="Step10a"></p> 
+    a) Between HTTP and HTTPS, if you select HTTP, the following window appears. Enter the <b>Hostname/IP Address</b>, <b>HTTP Port</b>, and <b>Tomcat Shutdown Port</b>. Click <b>Next</b>.
     
     ![](Resources/Images/HTTP1.png)
     
-    * Between HTTP and HTTPS, if you select HTTPS, the following window appears. Enter the **Hostname/IP Address**, **HTTP Port**, **HTTPS Port**, and **Tomcat Shutdown Port**. Click **Next.**
+    <p id="Step10b"></p> 
+    b) Between HTTP and HTTPS, if you select HTTPS, the following window appears. Enter the <b>Hostname/IP Address</b> <b>HTTP Port</b> <b>HTTPS Port</b> and <b>Tomcat Shutdown Port</b> Click <b>Next.</b>
     
     ![](Resources/Images/HTTPs.png)
     
@@ -191,12 +194,13 @@ To install Volt MX Foundry on Tomcat using the installer, follow these steps:
             
             ![](Resources/Images/invalid_cert.png)
             
-    
+
 17. Click **Next** to display the **Service Details** window.
     
     ![](Resources/Images/Service_details.png)
     
-18. Click **Next**. The **Database Details** window appears. From the **Choose Database Provider** drop-down, select one of the databases to display database details and fill the details. By default, this option is set to MySQL.  
+    <p id="DatabaseDetails"></p> 
+18. Click **Next**. The **Database Details** window appears. From the **Choose Database Provider** drop-down, select one of the databases to display database details and fill the details. By default, this option is set to MySQL. 
     
     *   Enter the following database details for **MySQL**.
         

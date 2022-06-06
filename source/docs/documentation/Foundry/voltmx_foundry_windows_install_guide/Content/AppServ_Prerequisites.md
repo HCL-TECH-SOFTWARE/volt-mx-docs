@@ -44,7 +44,7 @@ For Oracle Java 7 and Java 8, configure the heap settings for your application s
 
 ### Configuration of Database Driver Module
 
-1.  Extract the  [com.zip](http://docs.voltmx.com/8_x_PDFs/com.zip)  file.
+1.  Extract the  [com.zip](https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/foundry/zip/user_guide/com.zip)  file.
 
     The unzipped folder structure will be `com\mysql\main`.
 
@@ -107,7 +107,8 @@ To specify the log location where the logs for all Volt MX Foundry components wi
 
 \-Duser.home="<log location>"
 
-### Configure the Standalone Existing JBoss with Self-Signed Certificate (JBoss 7.1)
+
+<h3 id="configure-the-standalone-existing-jboss-with-self-signed-certificate-jboss-7-1">Configure the Standalone Existing JBoss with Self-Signed Certificate (JBoss 7.1)</h3>
 
 If you need to use existing JBoss with self-signed certificate, follow these steps:
 
@@ -138,7 +139,7 @@ If you need to use existing JBoss with self-signed certificate, follow these ste
 
 Before installing Volt MX Foundry on an application server, for the application server to communicate with a Web Server properly, you must open the port 80.
 
-#### How to Disable Weak Ciphers in JBoss
+<h3 id="how-to-disable-weak-ciphers-in-jboss">How to Disable Weak Ciphers in JBoss</h3>
 
 To disable weak ciphers, replace the `https-listener` under JBoss `subsystem/undertow`, for example, `<subsystem xmlns="urn:jboss:domain:undertow:3.1">`
 
@@ -167,7 +168,7 @@ Refer to [WebLogic heap and PermGen settings](Troubleshooting.html#configuring-h
 
 After configuring the `security-configuration` tag, restart the server from WebLogic console. In case of WebLogic cluster, restart all servers from WebLogic console.
 
-### Configure the Log Locations - WebLogic
+<h3 id="configure-the-log-locations-weblogic">Configure the Log Locations - WebLogic</h3>
 
 To specify the log location where the logs for all Volt MX Foundry components will be generated, you must add the following parameter in the JVM arguments present in `bin/startWebLogic.cmd`( for Windows) or `bin/startWebLogic.sh`(for Unix):
 
