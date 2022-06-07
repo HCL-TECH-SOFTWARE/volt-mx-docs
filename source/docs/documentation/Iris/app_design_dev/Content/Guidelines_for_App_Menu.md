@@ -39,6 +39,15 @@ Guidelines for the image resolutions to be used:
 *   Do not provide an Exit button in the application unless it is absolutely required. Android is a multi-tasking platform and the application can exist in the background. This allows the users to get back to the application quickly.
 *   Be sure to avoid using images that replicate Android products in your designs. These symbols are copyrighted and product designs can change frequently.
 
+### Windows
+Guidelines for Windows App menu:
+
+* App menu items should have an icon and should have a text hint.
+* App menu items should be 48 x 48 pixels and have a white
+  foreground on a transparent background using an alpha channel.
+* The number of items displayed in an app menu is limited to five.
+* Do not provide an Exit button for the application.
+
 ### General Guidelines for App Menu
 
 General guidelines for App menu:

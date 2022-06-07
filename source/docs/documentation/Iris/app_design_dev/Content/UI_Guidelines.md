@@ -69,6 +69,13 @@ For more information, see
 | --- | --- | --- | --- | --- | --- | --- |
 | App Icon Size | 36 x 36 pixels | 48 x 48 pixels | 72 x 72 pixels | 96 x 96 pixels | 144 x 144 pixels | 192 x 192 pixels |
 
+### Guidelines for Configuring Application Icon for Windows Applications
+
+Following are the application icon resolutions to be used in Windows apps:
+
+* Application Icon should be 62 x 62 pixels.
+* Startup pin images should be 173 x 173 pixels.
+
 ### Configure an Application Icon from Volt MX Iris
 
 ![](Resources/Images/configuring_App_Icon_533x219.png)
