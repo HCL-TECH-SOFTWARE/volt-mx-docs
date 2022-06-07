@@ -48,21 +48,21 @@ Standard VoltMX APIs - Support for the following Generic APIs is provided for ba
 
 This API allows you to set header at the application level with the given input values.
 
-Syntax
+<b>Syntax</b>
 
 voltmx.application.setAppHeaders([headerlist](#headerlist))
 
-Input Parameters
+<b>Input Parameters</b>
 
 headerlist \[Array\] - Mandatory
 
 Specifies the list of attributes for the header
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms.
 
@@ -73,27 +73,27 @@ This API allows you to set footer at the application level with the given input 
 
 > **_Note:_** This API is deprecated and only works for backward compatibility.
 
-Syntax
+<b>Syntax</b>
 
 voltmx.application.setAppFooters([footerlist](#footerlist))
 
-Input Parameters
+<b>Input Parameters</b>
 
 footerlist \[Array\] - Mandatory
 
 Specifies the list of attributes for the footer
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Implementation Details
+<b>Implementation Details</b>
 
 To access the footer elements, use the following syntax:
 
 app.footers.hboxID.widgetID
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all Platforms.
 
@@ -104,23 +104,23 @@ This API is used to reset the application. When this method is called, the data 
 
 > **_Note:_** This API is deprecated and only works for backward compatibility.
 
-Syntax
+<b>Syntax</b>
 
 voltmx.application.appReset()
 
-Input Parameters
+<b>Input Parameters</b>
 
 None
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms.
 
-Example
+<b>Example</b>
 
 {% highlight VoltMx %}voltmx.application.appReset(); Resets the application data.
 {% endhighlight %}
@@ -130,11 +130,11 @@ Example
 
 This API provides you the ability to read rawbytes from a base 64 encoded string.
 
-Syntax
+<b>Syntax</b>
 
 readfrombase64()
 
-Input Parameters
+<b>Input Parameters</b>
 
 The following table explains the input parameters for this API:
 
@@ -144,7 +144,7 @@ The following table explains the input parameters for this API:
 | base64String \[String\] | yes | The base64 encoded string from which you want to read the rawbytes |
 |  |  |  |
 
-Return Values
+<b>Return Values</b>
 
 The following are the return values for this API:
 
@@ -154,11 +154,11 @@ The following are the return values for this API:
 | myrawbytes \[JSObject\] | The rawbytes of the specified base64 encoded string |  |
 | nil | _nil_ is returned if the input is not a base64 encoded string |  |
 
-Platform Availability
+<b>Platform Availability</b>
 
 Android, Windows, and SPA.
 
-Example
+<b>Example</b>
 
 \-- Converts the base64String to rawbytes.
 
