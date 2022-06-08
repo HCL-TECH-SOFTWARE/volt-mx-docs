@@ -238,10 +238,10 @@
     
 
 <p>Offline Objects drop function deletes the database schema along with all its data. Success or failure is reported through callbacks provided to the drop API.</p>
-      <h2 id="volt-mx--iris-javascript">
+      <h2 id="volt-mx-iris-javascript">
         
         
-          <a href="#volt-mx--iris-javascript" class="anchor-heading" aria-labelledby="volt-mx--iris-javascript"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Volt MX  Iris (JavaScript)
+          <a href="#volt-mx-iris-javascript" class="anchor-heading" aria-labelledby="volt-mx-iris-javascript"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Volt MX Iris (JavaScript)
         
         
       </h2>
@@ -255,7 +255,7 @@
       </h3>
     
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">VMXFoundry.OfflineObjects.drop(options, successCallback, failureCallback) </code></pre></figure>
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">VMXFoundry.OfflineObjects.drop(options, successCallback, failureCallback)</code></pre></figure>
       <h3 id="parameters">
         
         
@@ -280,13 +280,13 @@
     <tr>
       <td>deviceDbEncryptionKey</td>
       <td>String</td>
-      <td>Encryption passphrase must be a string of six characters long. For further information, refer <a href="/volt-mx-docs/docs/documentation/Foundry/offline_objects_gettingstarted/Content/Offline_Objects_Getting_Started.html">Offline Objects Getting Started Guide</a>. <br /><br /> <strong><em>Note:</em></strong> Not applicable for Mobile Web and Desktop Web channels.</td>
+      <td>Encryption passphrase must be a string of six characters long. For further information, refer <a href="/volt-mx-docs/docs/documentation/Foundry/offline*objects_gettingstarted/Content/Offline_Objects_Getting_Started.html">Offline Objects Getting Started Guide</a>. <br /><br /> **_Note:*** Not applicable for Mobile Web and Desktop Web channels.</td>
       <td>No</td>
     </tr>
     <tr>
       <td>deviceDbPath</td>
       <td>String</td>
-      <td>Device database is created at the given deviceDbPath location. The default Offline Objects database path for Windows Kiosk applications is <code class="language-plaintext highlighter-rouge">C:\Users\User\AppData\Local</code>. You can use the deviceDbPath option to override the default path. This options helps you to install more than one Offline enabled application by using the Offline Objects database at desired location. <br /><br /> <strong><em>Note:</em></strong> This parameter is supported only for Windows Kiosk applications from V8 SP4 Fix Pack 44 onwards. <br /> <strong><em>Important:</em></strong> The default Offline Objects database location for Windows Kiosk has been changed from <code class="language-plaintext highlighter-rouge">C:\Users\User\AppData\Local</code> to <code class="language-plaintext highlighter-rouge">C:\Users\User\AppData\Local\AppID\Database</code> from V8 SP4 Fix Pack 44. This impacts application upgrades that were built with the earlier versions of pluginTo retain the existing Offline Objects database, rebuild the Kiosk application with the deviceDbPath option and pass the <code class="language-plaintext highlighter-rouge">C:\Users\User\AppData\Local</code> location as an input to the setup, reset, and drop APIs.</td>
+      <td>Device database is created at the given deviceDbPath location. The default Offline Objects database path for Windows Kiosk applications is <code class="language-plaintext highlighter-rouge">C:\Users\User\AppData\Local</code>. You can use the deviceDbPath option to override the default path. This options helps you to install more than one Offline enabled application by using the Offline Objects database at desired location. <br /><br /> <strong><em>Important:</em></strong> The default Offline Objects database location for Windows Kiosk is <code class="language-plaintext highlighter-rouge">C:\Users\User\AppData\Local\AppID\Database</code>. This impacts application upgrades that were built with the earlier versions of the plugin to retain the existing Offline Objects database, rebuild the Kiosk application with the deviceDbPath option and pass the <code class="language-plaintext highlighter-rouge">C:\Users\User\AppData\Local</code> location as an input to the setup, reset, and drop APIs.</td>
       <td>No</td>
     </tr>
   </tbody>
@@ -311,16 +311,16 @@
     
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">function successCallback() {
-    voltmx.print("Application drop success")
+voltmx.print("Application drop success")
 }
 
 function failureCallback(error) {
-    voltmx.print("Application drop failed with error" + error.code);
+voltmx.print("Application drop failed with error" + error.code);
 }
 
 //Decrypt the device database, if encrypted
 var options = {
-    "deviceDbEncryptionKey": "myencryptionpa$$phrase1"
+"deviceDbEncryptionKey": "myencryptionpa$$phrase1"
 };
 
 VMXFoundry.OfflineObjects.drop(options, successCallback, failureCallback);</code></pre></figure>
@@ -405,16 +405,17 @@ IVoltMXApplicationSync appSync = sdk.getOfflineObjects();
 HashMap &lt; String, object &gt; options = new HashMap &lt; String, object &gt; ();
 options.put("deviceDbEncryptionKey", "myencryptionpa$$phrase1");
 appSync.drop(options, new VMXCallback() {
-    @Override
-    public void onSuccess(Object object) {
-        Log.d("Application DROP", "Application drop Successful");
-    }
+@Override
+public void onSuccess(Object object) {
+Log.d("Application DROP", "Application drop Successful");
+}
 
     @Override
     public void onFailure(Object error) {
         OfflineObjectsException e = (OfflineObjectsException) error;
         Log.e("Application DROP", "Application drop failed with error:" + e.getMessage());
     }
+
 });</code></pre></figure>
       <h2 id="ios-objective-c">
         
@@ -433,7 +434,7 @@ appSync.drop(options, new VMXCallback() {
       </h3>
     
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">void &lt;OfflineObjects&gt; drop:(NSDictionary *) options onSuccess: VMXSuccessCompletionHandler)OnSuccess  
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">void &lt;OfflineObjects&gt; drop:(NSDictionary \*) options onSuccess: VMXSuccessCompletionHandler)OnSuccess  
 onFailure:(VMXFailureCompletionHandler)onFailure</code></pre></figure>
       <h3 id="parameters-2">
         
@@ -491,26 +492,26 @@ onFailure:(VMXFailureCompletionHandler)onFailure</code></pre></figure>
       </h3>
     
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">VMXClient * sdk = [VMXClient sharedClient];
-OfflineObjects * applicationSync = [sdk getOfflineObjects];
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">VMXClient _ sdk = [VMXClient sharedClient];
+OfflineObjects _ applicationSync = [sdk getOfflineObjects];
 
 //Decrypt the device database if encrypted
-NSMutableDictionary &lt; NSString * , id &gt; * Options = [NSMutableDictionary new];
+NSMutableDictionary &lt; NSString _ , id &gt; _ Options = [NSMutableDictionary new];
 [options setObject: @"myencryptionpa$$phrase1"
-    forKey: @"deviceDbEncryptionKey"
+forKey: @"deviceDbEncryptionKey"
 ];
 
 VMXSuccessCompletionHandler onSuccess = ^ void(id object) {
-    NSLog(@"Application drop successful");
+NSLog(@"Application drop successful");
 };
 
 VMXFailureCompletionHandler onFailure = ^ void(id object) {
-    NSLog(@"Application drop failed");
+NSLog(@"Application drop failed");
 };
 
 [applicationSync drop: options
-    onSuccess: onSuccess
-    onFailure: onFailure
+onSuccess: onSuccess
+onFailure: onFailure
 ];</code></pre></figure>
 
         
