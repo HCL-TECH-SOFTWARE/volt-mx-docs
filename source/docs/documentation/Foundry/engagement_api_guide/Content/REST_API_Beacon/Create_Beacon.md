@@ -2,16 +2,12 @@
 layout: "documentation"
 category: "engagement_api_guide"
 ---
-                            
 
-
-Create Beacon
-=============
+# Create Beacon
 
 The **Create Beacon** API adds beacons into Engagement Services.
 
-URL
----
+## URL
 
 The HTTP URL for **Create Beacon** API is:
 
@@ -20,75 +16,62 @@ The HTTP URL for **Create Beacon** API is:
 
 This service implements Gateway Filter for Authentication to authenticate access of the service by a user.
 
-Method
-------
+## Method
 
 POST
 
-Header
-------
+## Header
 
 The payload's request header includes Content-Type as application/json;charset=UTF-8.
 
-Input Parameters
-----------------
+## Input Parameters
 
 The following fields are input parameters:
 
-  
-| Input Parameter | Required | Type | Description |
-| --- | --- | --- | --- |
-| name | Yes | string | The unique name assigned to a beacon |
-| details | Optional | string | Description of the beacon |
-| uuid | Optional | alphanumeric | Universally Unique Identifier Number (UUID) assigned to the Beacon. UUID contains 32 hexadecimal digits, split into 5 groups, and separated by dashes, for example, f7826da6-4fa2-4e98-8024- bc5b71e0893e |
-| major | Optional | long | Major ID is a major identifier of a Bluetooth beacon |
-| minor | Optional | long | Minor ID is a minor identifier of a Bluetooth beacon |
+| Input Parameter | Required | Type         | Description                                                                                                                                                                                               |
+| --------------- | -------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name            | Yes      | string       | The unique name assigned to a beacon                                                                                                                                                                      |
+| details         | Optional | string       | Description of the beacon                                                                                                                                                                                 |
+| uuid            | Optional | alphanumeric | Universally Unique Identifier Number (UUID) assigned to the Beacon. UUID contains 32 hexadecimal digits, split into 5 groups, and separated by dashes, for example, f7826da6-4fa2-4e98-8024- bc5b71e0893e |
+| major           | Optional | long         | Major ID is a major identifier of a Bluetooth beacon                                                                                                                                                      |
+| minor           | Optional | long         | Minor ID is a minor identifier of a Bluetooth beacon                                                                                                                                                      |
 
-Sample Request
---------------
+## Sample Request
 
 {% highlight voltMx %}{
-	"name": "BeaconCreateName",
-	"details": "BeaconCreateDetails",
-	"uuid": "Beacon-Create-UUID",
-	"major": 500,
-	"minor": 100
+"name": "BeaconCreateName",
+"details": "BeaconCreateDetails",
+"uuid": "Beacon-Create-UUID",
+"major": 500,
+"minor": 100
 }
 {% endhighlight %}
 
-Output Parameters
------------------
+## Output Parameters
 
 The following fields are output parameters:
 
-  
-| Output Parameter | Type | Description |
-| --- | --- | --- |
-| id | int | Unique ID assigned to a beacon |
-| message | string | Response status message |
+| Output Parameter | Type   | Description                    |
+| ---------------- | ------ | ------------------------------ |
+| id               | int    | Unique ID assigned to a beacon |
+| message          | string | Response status message        |
 
-Sample Response
----------------
+## Sample Response
 
 {% highlight voltMx %}
 
 {
-  "id" : "3",
-  "message" : "Beacon Created Successfully"
+"id" : "3",
+"message" : "Beacon Created Successfully"
 }
-
 
 {% endhighlight %}
 
-Response Status
----------------
+## Response Status
 
-  
-| Code | Description |
-| --- | --- |
-| Status 200 | Beacon created successfully |
-| Status 400 | Name is required |
-| Status 401 | Unauthorized request |
+| Code       | Description                       |
+| ---------- | --------------------------------- |
+| Status 200 | Beacon created successfully       |
+| Status 400 | Name is required                  |
+| Status 401 | Unauthorized request              |
 | Status 500 | Server failure to process request |
-
-<table class="TableStyle-RevisionTable" cellspacing="0" style="mc-table-style: url('../Resources/TableStyles/RevisionTable.css');" data-mc-conditions="Default.HTML"><colgroup><col class="TableStyle-RevisionTable-Column-Column1"> <col class="TableStyle-RevisionTable-Column-Column1"> <col class="TableStyle-RevisionTable-Column-Column1"></colgroup><tbody><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyE-Column1-Body1">Rev</td><td class="TableStyle-RevisionTable-BodyE-Column1-Body1">Author</td><td class="TableStyle-RevisionTable-BodyD-Column1-Body1">Edits</td></tr><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyB-Column1-Body1">7.1</td><td class="TableStyle-RevisionTable-BodyB-Column1-Body1">AU</td><td class="TableStyle-RevisionTable-BodyA-Column1-Body1">AU</td></tr></tbody></table>

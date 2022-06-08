@@ -24,7 +24,7 @@ The **<Install Location>** directory contains the log files documenting each inv
 Prerequisites
 -------------
 
-*   You can download the Volt MX Foundry Installer from [http://community.hclvoltmx.com/downloads](http://community.hclvoltmx.com/downloads) with your credentials.
+*   You can download the Volt MX Foundry Installer from [https://hclsoftware.flexnetoperations.com](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.2.x&orgId=HCL&fromRecentFile=false&fromRecentPkg=true&fromDL=false) with your credentials.
 *   Ensure that VoltMXFoundryInstaller.exe file has execute permission.
 *   Ensure that you have the path of your Previous Installation Directory.
 

@@ -2,54 +2,47 @@
 layout: "documentation"
 category: "engagement_api_guide"
 ---
-                            
 
+# Event Message Request Payload with Common Properties
 
-Event Message Request Payload with Common Properties
-====================================================
-
-The **Event Message Request Payload with Common Properties** API enables you to send event notifications with audience member properties through Push, SMS, Email, and Pass channels. The ****Event Message Request Payload with Common Properties**** API triggers events with any audience member properties in Volt MX Foundry Engagement Services console.
+The **Event Message Request Payload with Common Properties** API enables you to send event notifications with audience member properties through Push, SMS, Email, and Pass channels. The \***\*Event Message Request Payload with Common Properties\*\*** API triggers events with any audience member properties in Volt MX Foundry Engagement Services console.
 
 > **_Important:_** The Event Message Request Payload with Common Properties API is maintained here to preserve backward compatibility.  
-We encourage you to use [Event Message Request Payload with Common Properties](../REST_API_Event/Event_JSON_Messge_request_payload_with_audience_properties__Global_Audience_property_.html)
+> We encourage you to use [Event Message Request Payload with Common Properties](../REST_API_Event/Event_JSON_Messge_request_payload_with_audience_properties__Global_Audience_property_.html)
 
-URL
----
+## URL
 
 The HTTP URL for Event Message Request Payload with Common Properties API is:
 
-{% highlight voltMx %}            
-            http://<host or ip>:<port>/service/eventpushmessage
+{% highlight voltMx %}  
+ http://<host or ip>:<port>/service/eventpushmessage
 {% endhighlight %}
 
 The **Event Message Request Payload with Common Properties** API applies the Gateway Filter for Authentication to authenticate the user credentials and allow access to the service.
 
-Method
-------
+## Method
 
 POST
 
-Header
-------
+## Header
 
 The payload's request header includes Content-Type for JSON as application/json;charset=UTF-8.
 
-Sample Request
---------------
+## Sample Request
 
 Sample request payloads are sent in the following formats:
 
-*   [JSON](#json)
-*   [XML](#xml)
+- [JSON](#json)
+- [XML](#xml)
 
 ### JSON
 
 The following sample payload request includes audience member properties for sending an event message request with Push, SMS, Email and Pass channels:
 
 {% highlight voltMx %}{
-  "event": {
-    "eventNamePairs": {
-      
+"event": {
+"eventNamePairs": {
+
     },
     "eventid": "${event_id}",
     "message": {
@@ -167,26 +160,27 @@ The following sample payload request includes audience member properties for sen
         ]
       }
     }
-  }
+
+}
 }
 {% endhighlight %}
 
 The following table displays JSON request properties with description.
 
-  
-| Properties | Description |
-| --- | --- |
-| ${event\_id} | This is the event ID |
+| Properties   | Description                                                                      |
+| ------------ | -------------------------------------------------------------------------------- |
+| ${event_id}  | This is the event ID                                                             |
 | ${property1} | Audience member’s properties (static/dynamic, for example, email, mobile number) |
 | ${property2} | Audience member's properties (static/dynamic, for example, email, mobile number) |
-| ${value1} | Audience member's value (for example, email ID: aron.hale@gmail.com ) |
-| ${value2} | Audience member's value (for example, email ID : aron.hale@gmail.com) |
+| ${value1}    | Audience member's value (for example, email ID: aron.hale@gmail.com )            |
+| ${value2}    | Audience member's value (for example, email ID : aron.hale@gmail.com)            |
 
 ### XML
 
 The following sample payload request includes audience members properties for sending event message request with Push, SMS, Email, and Pass channels:
 
 {% highlight voltMx %}
+
 <?xml version="1.0" encoding="UTF-8"?>
 <event>
     <eventid>${event_id}</eventid>
@@ -241,49 +235,48 @@ The following sample payload request includes audience members properties for se
 </event>
 {% endhighlight %}
 
-Sample Responses
-----------------
+## Sample Responses
 
 Sample response payloads are received in the following formats:
 
-*   [JSON](#json)
-*   [XML](#xml)
+- [JSON](#json)
+- [XML](#xml)
 
 ### JSON
 
 The following sample response payload returns request IDs for each request.
 
 {% highlight voltMx %}{
-  "event": {
-    "smsResponse": {
-      "response": {
-        "message": "Request Queued. ",
-        "id": "5769244567376011206"
-      },
-      "status": 200
-    },
-    "emailResponse": {
-      "response": {
-        "message": "Request Queued. ",
-        "id": 2365011587565306649
-      },
-      "status": 200
-    },
-    "messageResponse": {
-      "response": {
-        "message": "Request Queued. ",
-        "id": 7599706893432389638
-      },
-      "status": 200
-    },
-    "passResponse": {
-      "response": {
-        "message": "Request Queued. ",
-        "id": 3402221074572385797
-      },
-      "status": 200
-    }
-  }
+"event": {
+"smsResponse": {
+"response": {
+"message": "Request Queued. ",
+"id": "5769244567376011206"
+},
+"status": 200
+},
+"emailResponse": {
+"response": {
+"message": "Request Queued. ",
+"id": 2365011587565306649
+},
+"status": 200
+},
+"messageResponse": {
+"response": {
+"message": "Request Queued. ",
+"id": 7599706893432389638
+},
+"status": 200
+},
+"passResponse": {
+"response": {
+"message": "Request Queued. ",
+"id": 3402221074572385797
+},
+"status": 200
+}
+}
 }
 {% endhighlight %}
 
@@ -293,30 +286,28 @@ The following sample response payload returns request IDs for each request.
 
 {% highlight voltMx %}<?xml version="1.0" encoding="UTF-8"?>
 <event>
-    <messageResponse>
-        <code>200</code>
-        <description>Request Queued.</description>
-        <requestId>7599706892396396547</requestId>
-        <messages>
-            <message msgId="7599706892396396548" description="Queued" />
-        </messages>
-    </messageResponse>
-    <emailResponse>
-        <code>200</code>
-        <description>Request Queued.</description>
-        <requestId>2365628586553189762</requestId>
-    </emailResponse>
-    <smsResponse>
-        <code>200</code>
-        <description>Request Queued.</description>
-        <requestId>1227058458646255055</requestId>
-    </smsResponse>
-    <passResponse>
-        <code>200</code>
-        <description>Request Queued.</description>
-        <requestId>4014527877948457928</requestId>
-    </passResponse>
+<messageResponse>
+<code>200</code>
+<description>Request Queued.</description>
+<requestId>7599706892396396547</requestId>
+<messages>
+<message msgId="7599706892396396548" description="Queued" />
+</messages>
+</messageResponse>
+<emailResponse>
+<code>200</code>
+<description>Request Queued.</description>
+<requestId>2365628586553189762</requestId>
+</emailResponse>
+<smsResponse>
+<code>200</code>
+<description>Request Queued.</description>
+<requestId>1227058458646255055</requestId>
+</smsResponse>
+<passResponse>
+<code>200</code>
+<description>Request Queued.</description>
+<requestId>4014527877948457928</requestId>
+</passResponse>
 </event>
 {% endhighlight %}
-
-<table class="TableStyle-RevisionTable" cellspacing="0" style="margin-left: 0;margin-right: auto;mc-table-style: url('../Resources/TableStyles/RevisionTable.css');" data-mc-conditions="Default.HTML"><colgroup><col class="TableStyle-RevisionTable-Column-Column1"> <col class="TableStyle-RevisionTable-Column-Column1"> <col class="TableStyle-RevisionTable-Column-Column1"></colgroup><tbody><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyE-Column1-Body1">Rev</td><td class="TableStyle-RevisionTable-BodyE-Column1-Body1">Author</td><td class="TableStyle-RevisionTable-BodyD-Column1-Body1">Edits</td></tr><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyB-Column1-Body1">7.1</td><td class="TableStyle-RevisionTable-BodyB-Column1-Body1">AU</td><td class="TableStyle-RevisionTable-BodyA-Column1-Body1">AU</td></tr></tbody></table>

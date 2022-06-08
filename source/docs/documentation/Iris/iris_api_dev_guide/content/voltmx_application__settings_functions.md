@@ -96,7 +96,7 @@ None.
 
 This function reads an app's settings from the settings file that is bundled with the application's binary. Your app can use this function to read, among other things, the user-defined values such as the preferred locations.
 
-This is an asynchronous call so it returns immediately. Upon successfully reading the app's settings, the VoltMX IrisAPI framework automatically invokes the callback your app passes in the _onsuccesscallback_ parameter. The callback function has the following signature.
+This is an asynchronous call so it returns immediately. Upon successfully reading the app’s settings, the Volt MX Iris API framework automatically invokes the callback your app passes in the _onsuccesscallback_ parameter. The callback function has the following signature.
 
 onsuccess(key, value);
 
@@ -104,7 +104,7 @@ When this callback function is invoked, the _key_ parameter contains a string th
 
 The _value_ parameter contains the settings that were read. It can be `Boolean`, `string`, `double`, or an object. It contains an object when _Display option_ is set to multiselect.
 
-If the VoltMX IrisAPI framework cannot read the settings associated with the _key_ parameter to the `voltmx.application.settings.read` function, then the framework automatically invokes the function in the _onfailurecallback_ parameter. The callback function has the following signature.
+If the Volt MX Iris API framework cannot read the settings associated with the _key_ parameter to the `voltmx.application.settings.read` function, then the framework automatically invokes the function in the _onfailurecallback_ parameter. The callback function has the following signature.
 
 onfailure(errorcode,errormessage);
 

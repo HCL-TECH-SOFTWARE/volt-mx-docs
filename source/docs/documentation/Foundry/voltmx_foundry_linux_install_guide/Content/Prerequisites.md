@@ -59,7 +59,7 @@ To add an Integration Service Environment when the proxy is set at an App Server
 *   Dvoltmx.http.proxyUser= websphere
 *   Dvoltmx.http.proxyPassword= 3MqGU9e5nv3B
 
-### Network Settings - Licensing
+### Network Settings - Licensing              
 
 The on-premises server should allow outbound requests to [https://manage.hclvoltmx.com](https://manage.hclvoltmx.com/) and allow inbound requests from our License servers (IPs, mentioned at the end, can be whitelisted in a customer’s firewall).
 

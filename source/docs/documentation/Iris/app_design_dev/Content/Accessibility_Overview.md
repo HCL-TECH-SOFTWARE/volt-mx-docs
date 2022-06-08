@@ -58,12 +58,4 @@ The following table maps different platforms and their assistive technology:
 | [Android](http://developer.android.com/guide/topics/ui/accessibility/index.html) | TalkBack |
 | [SPA](http://www.w3.org/WAI/) | WAI-ARIA |
 
- 
 
-For more information, refer the following links:
-
-[http://breakthroughdesign.com/section-508-compliance-in-plain-english/](http://breakthroughdesign.com/section-508-compliance-in-plain-english/)
-
-[http://www.atsc.com/documents/white-papers/atsc-white-paper-going-mobile.pdf](http://www.atsc.com/documents/white-papers/atsc-white-paper-going-mobile.pdf)
-
-[WebAccessibility](https://www.webaccessibility.com/best_practices.php?technology_platform_id=1)

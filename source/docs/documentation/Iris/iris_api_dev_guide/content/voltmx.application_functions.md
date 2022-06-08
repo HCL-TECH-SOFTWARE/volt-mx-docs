@@ -20,7 +20,8 @@ The voltmx.application namespace provides the following constants.
 
 * * *
 
-These application constants are available from V8 SP3 onwards.
+These application constants are available from V9 SP2 onwards.
+<!-- These application constants are available from V8 SP3 onwards. -->
 
 | Constant | Description |
 | --- | --- |
@@ -69,7 +70,8 @@ The voltmx.application namespace contains the following functions.
 
 * * *
 
-The voltmx.application.addApplicationCallbacks API helps you to register multiple callbacks for the same event. This API is available from V8 SP4 onwards.
+<!-- The voltmx.application.addApplicationCallbacks API helps you to register multiple callbacks for the same event. This API is available from V8 SP4 onwards. -->
+The voltmx.application.addApplicationCallbacks API helps you to register multiple callbacks for the same event. This API is available from V9 SP2 onwards.
 
 ### Syntax
 
@@ -778,9 +780,11 @@ Available on all platforms except for Server side Mobile Web and Desktop Web. SP
 
 * * *
 
-This API provides you the ability to exit the library. After exiting the library, the control moves to the Native app UI. This API is available from V8 SP3 onwards.
+<!-- This API provides you the ability to exit the library. After exiting the library, the control moves to the Native app UI. This API is available from V8 SP3 onwards. -->
+This API provides you the ability to exit the library. After exiting the library, the control moves to the Native app UI. This API is available from V9 SP2 onwards.
 
-For more information on Library mode, click [here]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Build_nativeLibrary.html).
+For more information on Library mode, click [here](https://support.hcltechsw.com/community?id=community_question&sys_id=9b84d0151b58e8142518542f0a4bcb01&view_source=searchResult).
+<!-- For more information on Library mode, click [here]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Build_nativeLibrary.html). -->
 
 ### Syntax
 
@@ -1481,7 +1485,7 @@ The setting to be queried must be passed in this parameter. Following are the se
 
 | Settings | Description |
 | --- | --- |
-| applicationAppearanceStyle | iOS 13 provides support for dark mode in iOS devices. This key enables you to identify the appearance mode of iOS devices. When the voltmx.application.getSettingValue API is called with this key, any of the following values are returned: voltmx.application.APPEARANCESTYLE\_DARK: The current mode of appearance is dark mode. voltmx.application.APPEARANCESTYLE\_LIGHT:The current mode of appearance is light mode. voltmx.application.APPEARANCESTYLE\_UNKNOWN: The current mode of appearance is unknown. This is applicable from Volt MX IrisV8 SP3 FP 58 and Volt MX IrisV8 SP4 FP 45. > **_Note:_** By default, the dark and light modes are supported for apps that are built on iOS 13 devices. If you want to limit the appearance of your app to a single mode, navigate to: <app\_name>/resources/common/infoplist\_configuration.json. Then, add the `UIUserInterfaceStyle` key with the dark or light value as required. |
+| applicationAppearanceStyle | iOS 13 provides support for dark mode in iOS devices. This key enables you to identify the appearance mode of iOS devices. When the voltmx.application.getSettingValue API is called with this key, any of the following values are returned: voltmx.application.APPEARANCESTYLE\_DARK: The current mode of appearance is dark mode. voltmx.application.APPEARANCESTYLE\_LIGHT:The current mode of appearance is light mode. voltmx.application.APPEARANCESTYLE\_UNKNOWN: The current mode of appearance is unknown. This is applicable from Volt MX IrisV9 SP2. > **_Note:_** By default, the dark and light modes are supported for apps that are built on iOS 13 devices. If you want to limit the appearance of your app to a single mode, navigate to: <app\_name>/resources/common/infoplist\_configuration.json. Then, add the `UIUserInterfaceStyle` key with the dark or light value as required. |
 
 _args \[object \[ \] \]_ - Optional
 
@@ -2474,7 +2478,8 @@ voltmx.application.registerOnSettingsChangeCallback(["device_locale", "time_zone
 
 * * *
 
-The voltmx.application.removeApplicationCallbacks API helps you to clear callback functions associated with the specified appstates. This API is available from V8 SP4 onwards.
+<!-- The voltmx.application.removeApplicationCallbacks API helps you to clear callback functions associated with the specified appstates. This API is available from V8 SP4 onwards. -->
+The voltmx.application.removeApplicationCallbacks API helps you to clear callback functions associated with the specified appstates. This API is available from V9 SP2 onwards.
 
 ### Syntax
 
@@ -3130,9 +3135,11 @@ Supported for SPA and Desktop Web.
 
 * * *
 
-This API allows you to send an acknowledgment to a Native app that launched this library. This API is available from V8 SP3 onwards.
+<!-- This API allows you to send an acknowledgment to a Native app that launched this library. This API is available from V8 SP3 onwards. -->
+This API allows you to send an acknowledgment to a Native app that launched this library. This API is available from V9 SP2 onwards.
 
-For more information on Library mode, click [here]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Build_nativeLibrary.html).
+For more information on Library mode, click [here](https://support.hcltechsw.com/community?id=community_question&sys_id=9b84d0151b58e8142518542f0a4bcb01&view_source=searchResult).
+<!-- For more information on Library mode, click [here]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Build_nativeLibrary.html). -->
 
 > **_Note:_** Calling this API invokes the onLibraryResult() interface/protocol method, which is passed in the [Native Start API](start_library.html) of Volt MX Iris Library.
 
@@ -3213,7 +3220,7 @@ A JavaScript object that contains key-value pairs which specify the app's respo
 | hideStatusBar | A Boolean value that hides the status bar when set to `true`, or shows it when set to `false`. The hideStatusBar property is available only on Windows (8 and later versions) and it is supported in Volt MX Iris GA 5.6.4.11 and in GA 6.0.2.3. |
 | invokePreshowPostShowEventsOnDeviceBack | A Boolean value that selects whether the pre-show or post-show events are triggered when the user presses the **Back** option on a device. |
 | isGestureEventsAsync | A Boolean value that specifies that all gesture events are executed asynchronously when your app sets this value to `true`. Otherwise, they are executed synchronously. Available on only Windows. |
-| isI18nLayoutConfigEnabled | A Boolean value that enables or disables the layout mirroring support for Volt MX Iris Applications. It is a global application-level parameter. This parameter is passed as an input for the voltmx.application.setApplicationBehaviors API, and is available from V8 SP4 onwards. If you assign the isI18nLayoutConfigEnabled key as **false**, the layout mirroring feature of your application is disabled. If you assign the isI18nLayoutConfigEnabled key as **true**, the layout mirroring feature of your application is enabled. Available on Windows, iOS, Android, and SPA. For Windows, if you use the **isI18nLayoutConfigEnabled** key and the **voltmx.application.setApplicationLayout** API together in a single application, the application does not function as expected. |
+| isI18nLayoutConfigEnabled | A Boolean value that enables or disables the layout mirroring support for Volt MX Iris Applications. It is a global application-level parameter. This parameter is passed as an input for the voltmx.application.setApplicationBehaviors API, and is available from V9 SP2 onwards. If you assign the isI18nLayoutConfigEnabled key as **false**, the layout mirroring feature of your application is disabled. If you assign the isI18nLayoutConfigEnabled key as **true**, the layout mirroring feature of your application is enabled. Available on Windows, iOS, Android, and SPA. For Windows, if you use the **isI18nLayoutConfigEnabled** key and the **voltmx.application.setApplicationLayout** API together in a single application, the application does not function as expected. |
 | isLowLevelEventsAsync | A Boolean value that specifies that the  `onTouchStart`, `onTouchMove`, `onTouchEnd` , and `onTouchCancel` events are executed asynchronously when your app sets this value to `true`. Otherwise, they are executed synchronously. Available on only Windows. |
 | isPopupModel | A Boolean value that specifies whether the pop-up is modal. The value set as the property for a pop-up takes precedence over the value set dynamically. |
 | isScrollEventsAsync | A Boolean value that, if set to `true`, indicates that scroll events are executed asynchronously. Volt MX Iris recommends that you set this value to `false` and execute the scroll events synchronously. Available on only Windows. |
@@ -4248,9 +4255,12 @@ None
 
 * * *
 
-This API is used to register a listener or a callback that receives request from a Native app to launch the Volt MX Iris Library without UI or in headless mode. The voltmx.application.setLibraryHeadlessModeCallback API is available from V8 SP3 onwards.
+<!-- This API is used to register a listener or a callback that receives request from a Native app to launch the Volt MX Iris Library without UI or in headless mode. The voltmx.application.setLibraryHeadlessModeCallback API is available from V8 SP3 onwards. -->
+This API is used to register a listener or a callback that receives request from a Native app to launch the Volt MX Iris Library without UI or in headless mode. The voltmx.application.setLibraryHeadlessModeCallback API is available from V9 SP2 onwards.
 
-For more information about how to build an application in library mode, click [here]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Build_nativeLibrary.html).
+For more information about how to build an application in library mode, click [here](https://support.hcltechsw.com/community?id=community_question&sys_id=9b84d0151b58e8142518542f0a4bcb01&view_source=searchResult).
+
+<!-- For more information about how to build an application in library mode, click [here]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Build_nativeLibrary.html). -->
 
 > **_Note:_** The voltmx.application.setLibraryHeadlessModeCallback API is only applicable when the app is launched in library mode.
 

@@ -413,81 +413,368 @@
 
 <blockquote>
   <p><strong><em>Note:</em></strong></p>
+  <ul>
+    <li>To use the in-app update APIs, you must add the <code class="language-plaintext highlighter-rouge">supportGooglePlayCoreLib = true</code> and <code class="language-plaintext highlighter-rouge">supportGooglePlayBaseLib = true</code> entries in the <strong>androidbuild.properties</strong> file.</li>
+    <li>The following APIs will only work in an app that is downloaded from the Google Play store. If you install an app through Volt MX Iris, and invoke the APIs, the UPDATE_ERROR status code is returned. Follow the steps mentioned <a href="https://developer.android.com/guide/playcore/in-app-updates#internal-app-sharing">here</a> to test an app.</li>
+  </ul>
 </blockquote>
 
-<ul>
-  <li>To use the in-app update APIs, you must add the <code class="language-plaintext highlighter-rouge">supportGooglePlayCoreLib = true</code> and <code class="language-plaintext highlighter-rouge">supportGooglePlayBaseLib = true</code> entries in the <strong>androidbuild.properties</strong> file.</li>
-  <li>The following APIs will only work in an app that is downloaded from the Google Play store. If you install an app through Volt MX Iris, and invoke the APIs, the UPDATE_ERROR status code is returned. Follow the steps mentioned <a href="https://developer.android.com/guide/playcore/in-app-updates#internal-app-sharing">here</a> to test an app.</li>
-</ul>
+<details close="">
+  <summary>voltmx.gms.checkForAppUpdate</summary>
+  <p>The checkForAppUpdate API checks if an update is available for the app, while the app is in use.</p>
 
-<p><a href="javascript:void(0);"><img src="/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/Skins/Default/Stylesheets/Images/transparent.gif" alt="Closed" /></a><a href="javascript:void(0);">voltmx.gms.checkForAppUpdate</a></p><hr />
+  <p><b>Syntax</b></p>
 
-<p>The checkForAppUpdate API checks if an update is available for the app, while the app is in use.</p>
+  <p><code class="language-plaintext highlighter-rouge">voltmx.gms.checkForAppUpdate({"statusCallback" : statusCallback})</code></p>
 
-<p>Syntax</p>
+  <p><b>Input Parameters</b></p>
 
-<p>voltmx.gms.checkForAppUpdate({“statusCallback” : statusCallback})</p>
+  <p><strong>statusCallback</strong> - A mandatory callback function that is executed after the execution of the API call is complete. When the API call is successful, the API returns the voltmx.gms.UPDATE_INFO_RETRIEVED statusCode.</p>
 
-<p>Input Parameters</p>
+  <p>The <strong>statusCallback</strong> function contains the result info JS Object that has the following details:</p>
 
-<p><strong>statusCallback</strong> - A mandatory callback function that is executed after the execution of the API call is complete. When the API call is successful, the API returns the voltmx.gms.UPDATE_INFO_RETRIEVED statusCode.</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>updateAvailabilityStatus [Integer]</td>
+        <td>The status of availability of an update for the app. The parameter can return any of the <a href="#update-constants">Update Constants</a>.</td>
+      </tr>
+      <tr>
+        <td>updateTypesAllowed [List]</td>
+        <td>The type of updates allowed. Following are the supported types of updates: APP_UPDATE_TYPE_FLEXIBLE APP_UPDATE_TYPE_IMMEDIATE If there are no updates allowed, this parameter returns an empty list.</td>
+      </tr>
+      <tr>
+        <td>updateVersionCode [Integer]</td>
+        <td>The version code of the app available for update, if an update is available.</td>
+      </tr>
+      <tr>
+        <td>stalenessDays [Integer]</td>
+        <td>Number of days that have passed since the Google Play Store learns of an update. This information helps the app decide whether it must initiate a flexible or immediate update. If there is no update available or if there is no information on staleness, this parameter returns a null value.</td>
+      </tr>
+      <tr>
+        <td>updatePriority [Integer]</td>
+        <td>The in-app update priority that is defined by the developer (for the update) in the Google Play Developer API .</td>
+      </tr>
+      <tr>
+        <td>totalBytes [Long]</td>
+        <td>Total number of bytes to be downloaded for the update.</td>
+      </tr>
+      <tr>
+        <td>bytesDownloaded [Long]</td>
+        <td>Number of bytes downloaded so far.</td>
+      </tr>
+      <tr>
+        <td>installStatus [Constant]</td>
+        <td>The install status of the app update. The parameter can return any of the <a href="#install-constants">Install Constants</a>.</td>
+      </tr>
+      <tr>
+        <td>packageName [String]</td>
+        <td>Package name of the app that is to be updated.</td>
+      </tr>
+      <tr>
+        <td>statusCode [Constant]</td>
+        <td>The parameter can return any of the following <a href="#common-constants">Common constants</a>: voltmx.gms.UPDATE_INFO_RETRIEVED voltmx.gms.NO_ACTIVE_NETWORK voltmx.gms.UPDATE_ERROR voltmx.gms.PLAY_CORE_LIBRARY_MISSING voltmx.gms.GMS_LIBRARY_MISSING voltmx.gms.GOOGLE_PLAY_SERVICE_UNAVAILABLE When the statusCode is voltmx.gms.GOOGLE_PLAY_SERVICE_UNAVAILABLE, the API returns the GMSErrorCode key, an integer value. When the statusCode is voltmx.gms.UPDATE_ERROR, the API returns the updateErrorCode and updateErrorMessage keys.</td>
+      </tr>
+    </tbody>
+  </table>
 
-<p>The <strong>statusCallback</strong> function contains the result info JS Object that has the following details:</p>
+  <p>  </p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>updateAvailabilityStatus [Integer]</td>
-      <td>The status of availability of an update for the app. The parameter can return any of the <a href="#update-constants">Update Constants</a>.</td>
-    </tr>
-    <tr>
-      <td>updateTypesAllowed [List]</td>
-      <td>The type of updates allowed. Following are the supported types of updates: APP_UPDATE_TYPE_FLEXIBLE APP_UPDATE_TYPE_IMMEDIATE If there are no updates allowed, this parameter returns an empty list.</td>
-    </tr>
-    <tr>
-      <td>updateVersionCode [Integer]</td>
-      <td>The version code of the app available for update, if an update is available.</td>
-    </tr>
-    <tr>
-      <td>stalenessDays [Integer]</td>
-      <td>Number of days that have passed since the Google Play Store learns of an update. This information helps the app decide whether it must initiate a flexible or immediate update. If there is no update available or if there is no information on staleness, this parameter returns a null value.</td>
-    </tr>
-    <tr>
-      <td>updatePriority [Integer]</td>
-      <td>The in-app update priority that is defined by the developer (for the update) in the Google Play Developer API .</td>
-    </tr>
-    <tr>
-      <td>totalBytes [Long]</td>
-      <td>Total number of bytes to be downloaded for the update.</td>
-    </tr>
-    <tr>
-      <td>bytesDownloaded [Long]</td>
-      <td>Number of bytes downloaded so far.</td>
-    </tr>
-    <tr>
-      <td>installStatus [Constant]</td>
-      <td>The install status of the app update. The parameter can return any of the <a href="#install-constants">Install Constants</a>.</td>
-    </tr>
-    <tr>
-      <td>packageName [String]</td>
-      <td>Package name of the app that is to be updated.</td>
-    </tr>
-    <tr>
-      <td>statusCode [Constant]</td>
-      <td>The parameter can return any of the following <a href="#common-constants">Common constants</a>: voltmx.gms.UPDATE_INFO_RETRIEVED voltmx.gms.NO_ACTIVE_NETWORK voltmx.gms.UPDATE_ERROR voltmx.gms.PLAY_CORE_LIBRARY_MISSING voltmx.gms.GMS_LIBRARY_MISSING voltmx.gms.GOOGLE_PLAY_SERVICE_UNAVAILABLE When the statusCode is voltmx.gms.GOOGLE_PLAY_SERVICE_UNAVAILABLE, the API returns the GMSErrorCode key, an integer value. When the statusCode is voltmx.gms.UPDATE_ERROR, the API returns the updateErrorCode and updateErrorMessage keys.</td>
-    </tr>
-  </tbody>
-</table>
+  <p><b>Example</b></p>
 
-<p>  </p>
+  <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">function statusCallback(info) {  
+	voltmx.print("updateAvailabilityStatus: " + info.updateAvailabilityStatus)  
+	voltmx.print("updateTypesAllowed: " + info.updateTypesAllowed)  
+	voltmx.print("updateVersionCode: " + info.updateVersionCode)  
+	voltmx.print("stalenessDays: " + info.stalenessDays)  
+	voltmx.print("updatePriority: " + info.updatePriority)  
+	voltmx.print("totalBytes: " + info.totalBytes)  
+	voltmx.print("bytesDownloaded: " + info.bytesDownloaded)  
+	voltmx.print("installStatus: " + info.installStatus)  
+	voltmx.print("packageName: " + info.packageName)  
+        voltmx.print("statusCode: " + info.statusCode)  
+}
+  
+voltmx.gms.checkForAppUpdate({"statusCallback" : statusCallback})</code></pre></figure>
 
-<p>Example</p>
+  <p><b>Return Value</b></p>
+
+  <p>None</p>
+
+  <p><b>Platform Availability</b></p>
+
+  <p>Android</p>
+</details>
+
+<details close="">
+  <summary id="completeAppUpdate">voltmx.gms.completeAppUpdate</summary>
+  <p>The completeAppUpdate API must be invoked in case of a flexible app update flow, to complete the app update. Invoke this API to complete an app update that was started by using the <a href="#requestForAppUpdate">voltmx.gms.requestForAppUpdate API</a> and is in the DOWNLOADED state.</p>
+
+  <p><b>Syntax</b></p>
+
+  <p><code class="language-plaintext highlighter-rouge">voltmx.gms.completeAppUpdate({"statusCallback" : statusCallback});</code></p>
+
+  <p><b>Input Parameters</b></p>
+
+  <p><strong>statusCallback</strong> - A mandatory callback function that is executed after the execution of the API call is complete. The callback function contains the result info JS Object that has the following details:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>statusCode [Constant]</td>
+        <td>A <a href="#constants">staus code</a> constant. The parameter can return any of the following <a href="#common-constants">Common constants</a>: voltmx.gms.UPDATE_ERROR voltmx.gms.PLAY_CORE_LIBRARY_MISSING voltmx.gms.GMS_LIBRARY_MISSING voltmx.gms.GOOGLE_PLAY_SERVICE_UNAVAILABLE</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p> </p>
+
+  <p><b>Example</b></p>
+
+  <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">function statusCallback(info) {  
+                    voltmx.print(info)  
+        }  
+        voltmx.gms.completeAppUpdate({"statusCallback" : statusCallback})</code></pre></figure>
+
+  <p><b>Return Value</b></p>
+
+  <p>None</p>
+
+  <p><b>Remarks</b></p>
+
+  <p>In case of flexible update, when you invoke the completeAppUpdate API in the foreground, a full-screen UI appears and the app restarts in the background. After the update is installed, the app restarts in the foreground. If you invoke the completeAppUpdate API in the background, the app update is silently installed in the background, without obscuring the app experience.</p>
+
+  <p>When the user moves the app into the foreground, HCL recommends that you check if an app update is waiting to be installed. If the app has an update in the INSTALL_STATUS_DOWNLOADED state, you must display a notification to the user requesting that they install the update, as the update data occupies space on the device storage.</p>
+
+  <p><b>Platform Availability</b></p>
+
+  <p>Android</p>
+</details>
+
+<details close="">
+  <summary id="registerAppUpdateListener">voltmx.gms.registerAppUpdateListener</summary>
+  <p>The registerAppUpdateListener API is used to register to callbacks that monitor the install status of the app update.</p>
+
+  <blockquote>
+    <p><strong><em>Note:</em></strong> Monitoring the update state is only required for flexible updates. Once the flexible download begins, the app must monitor the update state to recognize when the update can be installed, and to display the update progress on the app UI. For immediate updates, Google Play handles the download and installation of the update.</p>
+  </blockquote>
+
+  <p>Syntax</p>
+
+  <p><code class="language-plaintext highlighter-rouge">voltmx.gms.registerAppUpdateListener({"statusCallback" : statusCallback})</code></p>
+
+  <p>Input Parameters</p>
+
+  <p><strong>statusCallback</strong> - A mandatory callback function that is executed after the execution of the API call is complete. The callback function contains the result info JS Object that has the following details:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>statusCode [Constant]</td>
+        <td>An <a href="#install-constants">Install Constant</a>.</td>
+      </tr>
+      <tr>
+        <td>downloadingInfo</td>
+        <td>This parameter is only populated when the <strong>statusCode</strong> is INSTALL_STATUS_DOWNLOADING and contains the following information: <strong>totalBytes</strong> [Long]: Total number of bytes to be downloaded for the update. <strong>bytesDownloaded</strong> [Long]: Number of bytes downloaded so far.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>  </p>
+
+  <p>Example</p>
+
+  <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">function statusCallback(info) {  
+          voltmx.print(info.statusCode)  
+          voltmx.print(info.statusMessage)  
+          if(info.statusCode == voltmx.gms.INSTALL_STATUS_DOWNLOADING){  
+              voltmx.print(info.downloadingInfo.bytesDownloaded)  
+              voltmx.print(info.downloadingInfo.totalBytes)                  
+          }  
+  }  
+  voltmx.gms.registerAppUpdateListener({"statusCallback" : statusCallback})</code></pre></figure>
+
+  <p>Return Value</p>
+
+  <p>None</p>
+
+  <p>Remarks</p>
+
+  <ul>
+    <li>After the task is complete, HCL recommends that you unregister from the callbacks by using the voltmx.gms.unRegisterAppUpdateListener API.</li>
+    <li>When you invoke the registerAppUpdateListener API, any registered callbacks are overridden.</li>
+  </ul>
+
+  <p>Platform Availability</p>
+
+  <p>Android</p>
+</details>
+
+<details close="">
+  <summary id="requestForAppUpdate">voltmx.gms.requestForAppUpdate</summary>
+  <p>The requestForAppUpdate API starts the specified app update flow, if an update is available, while the app is in use.</p>
+
+  <p>In case of flexible update, when you invoke the requestForAppUpdate API, the app update is downloaded. You must then invoke the <a href="#completeAppUpdate">voltmx.gms.completeAppUpdate API</a> to install and restart the app.</p>
+
+  <p>In case of immediate update, when you invoke the requestForAppUpdate API, the app update is downloaded and installed, and then the app restarts.</p>
+
+  <p>Syntax</p>
+
+  <p><code class="language-plaintext highlighter-rouge">voltmx.gms.requestForAppUpdate({"statusCallback" : statusCallback, "updateType" : voltmx.gms.APP\_UPDATE\_TYPE\_IMMEDIATE})</code></p>
+
+  <p>Input Parameters</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>statusCallback [Dictionary]</td>
+        <td>A mandatory callback function that is executed after the execution of the API call is complete. The callback function contains the result info JS Object that has the following details: <strong>statusCode</strong> [Constant]: An <a href="#common-constants">Common constant</a> or an <a href="#update-constants">Update Constant</a> (except the voltmx.gms.UPDATE_AVAILABLE Constant ).</td>
+      </tr>
+      <tr>
+        <td>updateType [Object] - Optional</td>
+        <td>An Object that specifies the type of update flow. Following are the supported types of updates: APP_UPDATE_TYPE_FLEXIBLE: A constant that specifies the update type as flexible. APP_UPDATE_TYPE_IMMEDIATE: A constant that specifies the update type as immediate. The default type is APP_UPDATE_TYPE_FLEXIBLE.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>  
+Example</p>
+
+  <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">function statusCallback(info) {  
+            voltmx.print("statusCallback" + info)  
+        }  
+        voltmx.gms.requestForAppUpdate({"statusCallback" : statusCallback, "updateType" : voltmx.gms.APP_UPDATE_TYPE_IMMEDIATE})</code></pre></figure>
+
+  <p>Return Value</p>
+
+  <p>None</p>
+
+  <p>Remarks</p>
+
+  <ul>
+    <li>
+      <p>In case of flexible flow ,the API returns one of the following status codes in the statusCallback:</p>
+    </li>
+    <li><strong>UPDATE_FLOW_CONFIRMED_BY_USER</strong>: The user has accepted the update request.</li>
+    <li><strong>UPDATE_FLOW_CANCELLED_BY_USER</strong>: The user has denied the update request.</li>
+    <li>
+      <p><strong>RESULT_IN_APP_UPDATE_FAILED</strong>: Something failed during the confirmation of the request. For example, the user terminates the app before responding to the update request.</p>
+    </li>
+    <li>
+      <p>In case of immediate flow, the API returns one of the following status codes in the statusCallback:</p>
+    </li>
+    <li><strong>UPDATE_FLOW_CONFIRMED_BY_USER</strong>: The user has accepted the update request, and the update is successful. (In practice, the app must not receive this status code, as it is already updated)</li>
+    <li><strong>UPDATE_FLOW_CANCELLED_BY_USER</strong>: The user has denied or canceled the update.</li>
+    <li>
+      <p><strong>RESULT_IN_APP_UPDATE_FAILED</strong>: The flow failed either during the confirmation of the request, the download, or the installation of the update.</p>
+    </li>
+    <li>If you invoke this API when the <a href="#checkForAppUpdate">voltmx.gms.checkForAppUpdate</a> API returns the <strong>UPDATE_NOT_AVAILABLE</strong> or <strong>UPDATE_UNKNOWN</strong> status codes, the API call is ignored and the same statusCode is returned.</li>
+    <li>In case of flexible update flow, if you invoke this API when the <a href="#checkForAppUpdate">voltmx.gms.checkForAppUpdate</a> API returns the <strong>UPDATE_IN_PROGRESS</strong> status code, the <strong>UPDATE_IN_PROGRESS</strong> status code is returned.</li>
+    <li>If you invoke this API when the app is running in the background, the API call is ignored and the <strong>UPDATE_NOT_ALLOWED_IN_BACKGROUND</strong> status code is returned.</li>
+    <li>
+      <p>In case of immediate update flow, when the user provides consent to install the update, Google Play displays the app update progress in full-screen mode for the entire duration of the update.</p>
+
+      <p>During the update, if the user closes or terminates the app, the update must continue to be downloaded and installed in the background, without any additional confirmation from the user.</p>
+
+      <p>However, when the app returns to the foreground, you must verify that the update is not stalled in the <strong>UPDATE_IN_PROGRESS</strong> state. If the update is stalled, you must invoke the <strong>requestForAppUpdate</strong> API as follows:</p>
+
+      <p>voltmx.gms.requestForAppUpdate({“statusCallback” : statusCallback, “updateType” : voltmx.gms.APP_UPDATE_TYPE_IMMEDIATE})</p>
+
+      <p>You can track the foregroud state by registering for the onforeground callback, by using the <a href="voltmx.application_functions.html#setappli">voltmx.application.setApplicationCallbacks</a> API.</p>
+    </li>
+  </ul>
+
+  <p>Platform Availability</p>
+
+  <p>Android</p>
+</details>
+
+<details close="">
+  <summary>voltmx.gms.unRegisterAppUpdateListener</summary>
+  <p>The unRegisterAppUpdateListener API is used to unregister from callbacks that were registered to by using the <a href="#registerAppUpdateListener">voltmx.gms.registerAppUpdateListener</a> API.</p>
+
+  <p>Syntax</p>
+
+  <p><code class="language-plaintext highlighter-rouge">voltmx.gms.unRegisterAppUpdateListener()</code></p>
+
+  <p>Input Parameters</p>
+
+  <p>None</p>
+
+  <p>  </p>
+
+  <p>Example</p>
+
+  <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">voltmx.gms.unRegisterAppUpdateListener()  
+}</code></pre></figure>
+
+  <p>Return Value</p>
+
+  <p>None</p>
+
+  <p>Platform Availability</p>
+
+  <p>Android</p>
+</details>
+
+<!-- [![Closed](/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.gms.checkForAppUpdate](javascript:void(0);) 
+
+* * *
+
+The checkForAppUpdate API checks if an update is available for the app, while the app is in use.
+
+Syntax
+
+voltmx.gms.checkForAppUpdate({"statusCallback" : statusCallback})
+
+Input Parameters
+
+**statusCallback** - A mandatory callback function that is executed after the execution of the API call is complete. When the API call is successful, the API returns the voltmx.gms.UPDATE\_INFO\_RETRIEVED statusCode.
+
+The **statusCallback** function contains the result info JS Object that has the following details:
+
+  
+| Parameter | Description |
+| --- | --- |
+| updateAvailabilityStatus \[Integer\] | The status of availability of an update for the app. The parameter can return any of the [Update Constants](#update-constants). |
+| updateTypesAllowed \[List\] | The type of updates allowed. Following are the supported types of updates: APP\_UPDATE\_TYPE\_FLEXIBLE APP\_UPDATE\_TYPE\_IMMEDIATE If there are no updates allowed, this parameter returns an empty list. |
+| updateVersionCode \[Integer\] | The version code of the app available for update, if an update is available. |
+| stalenessDays \[Integer\] | Number of days that have passed since the Google Play Store learns of an update. This information helps the app decide whether it must initiate a flexible or immediate update. If there is no update available or if there is no information on staleness, this parameter returns a null value. |
+| updatePriority \[Integer\] | The in-app update priority that is defined by the developer (for the update) in the Google Play Developer API . |
+| totalBytes \[Long\] | Total number of bytes to be downloaded for the update. |
+| bytesDownloaded \[Long\] | Number of bytes downloaded so far. |
+| installStatus \[Constant\] | The install status of the app update. The parameter can return any of the [Install Constants](#install-constants). |
+| packageName \[String\] | Package name of the app that is to be updated. |
+| statusCode \[Constant\] | The parameter can return any of the following [Common constants](#common-constants): voltmx.gms.UPDATE\_INFO\_RETRIEVED voltmx.gms.NO\_ACTIVE\_NETWORK voltmx.gms.UPDATE\_ERROR voltmx.gms.PLAY\_CORE\_LIBRARY\_MISSING voltmx.gms.GMS\_LIBRARY\_MISSING voltmx.gms.GOOGLE\_PLAY\_SERVICE\_UNAVAILABLE When the statusCode is voltmx.gms.GOOGLE\_PLAY\_SERVICE\_UNAVAILABLE, the API returns the GMSErrorCode key, an integer value. When the statusCode is voltmx.gms.UPDATE\_ERROR, the API returns the updateErrorCode and updateErrorMessage keys. |
+
+  
+
+Example
+
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">function statusCallback(info) {  
 	voltmx.print("updateAvailabilityStatus: " + info.updateAvailabilityStatus)  
@@ -504,102 +791,85 @@
   
 voltmx.gms.checkForAppUpdate({"statusCallback" : statusCallback})</code></pre></figure>
 
-<p>Return Value</p>
 
-<p>None</p>
+Return Value
 
-<p>Platform Availability</p>
+None
 
-<p>Android</p>
+Platform Availability
 
-<p><a href="javascript:void(0);"><img src="/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/Skins/Default/Stylesheets/Images/transparent.gif" alt="Closed" /></a><a href="javascript:void(0);">voltmx.gms.completeAppUpdate</a></p><hr />
+Android
 
-<p>The completeAppUpdate API must be invoked in case of a flexible app update flow, to complete the app update. Invoke this API to complete an app update that was started by using the <a href="#requestForAppUpdate">voltmx.gms.requestForAppUpdate API</a> and is in the DOWNLOADED state.</p>
+[![Closed](/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.gms.completeAppUpdate](javascript:void(0);) 
 
-<p>Syntax</p>
+* * *
 
-<p>voltmx.gms.completeAppUpdate({“statusCallback” : statusCallback});</p>
+The completeAppUpdate API must be invoked in case of a flexible app update flow, to complete the app update. Invoke this API to complete an app update that was started by using the [voltmx.gms.requestForAppUpdate API](#requestForAppUpdate) and is in the DOWNLOADED state.
 
-<p>Input Parameters</p>
+Syntax
 
-<p><strong>statusCallback</strong> - A mandatory callback function that is executed after the execution of the API call is complete. The callback function contains the result info JS Object that has the following details:</p>
+voltmx.gms.completeAppUpdate({"statusCallback" : statusCallback});
 
-<table>
-  <thead>
-    <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>statusCode [Constant]</td>
-      <td>A <a href="#constants">staus code</a> constant. The parameter can return any of the following <a href="#common-constants">Common constants</a>: voltmx.gms.UPDATE_ERROR voltmx.gms.PLAY_CORE_LIBRARY_MISSING voltmx.gms.GMS_LIBRARY_MISSING voltmx.gms.GOOGLE_PLAY_SERVICE_UNAVAILABLE</td>
-    </tr>
-  </tbody>
-</table>
+Input Parameters
 
-<p> </p>
+**statusCallback** - A mandatory callback function that is executed after the execution of the API call is complete. The callback function contains the result info JS Object that has the following details:
 
-<p>Example</p>
+  
+| Parameter | Description |
+| --- | --- |
+| statusCode \[Constant\] | A [staus code](#constants) constant. The parameter can return any of the following [Common constants](#common-constants): voltmx.gms.UPDATE\_ERROR voltmx.gms.PLAY\_CORE\_LIBRARY\_MISSING voltmx.gms.GMS\_LIBRARY\_MISSING voltmx.gms.GOOGLE\_PLAY\_SERVICE\_UNAVAILABLE |
+
+ 
+
+Example
+
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">function statusCallback(info) {  
                     voltmx.print(info)  
         }  
         voltmx.gms.completeAppUpdate({"statusCallback" : statusCallback})</code></pre></figure>
 
-<p>Return Value</p>
 
-<p>None</p>
+Return Value
 
-<p>Remarks</p>
+None
 
-<p>In case of flexible update, when you invoke the completeAppUpdate API in the foreground, a full-screen UI appears and the app restarts in the background. After the update is installed, the app restarts in the foreground. If you invoke the completeAppUpdate API in the background, the app update is silently installed in the background, without obscuring the app experience.</p>
+Remarks
 
-<p>When the user moves the app into the foreground, HCL recommends that you check if an app update is waiting to be installed. If the app has an update in the INSTALL_STATUS_DOWNLOADED state, you must display a notification to the user requesting that they install the update, as the update data occupies space on the device storage.</p>
+In case of flexible update, when you invoke the completeAppUpdate API in the foreground, a full-screen UI appears and the app restarts in the background. After the update is installed, the app restarts in the foreground. If you invoke the completeAppUpdate API in the background, the app update is silently installed in the background, without obscuring the app experience.
 
-<p>Platform Availability</p>
+When the user moves the app into the foreground, HCL recommends that you check if an app update is waiting to be installed. If the app has an update in the INSTALL\_STATUS\_DOWNLOADED state, you must display a notification to the user requesting that they install the update, as the update data occupies space on the device storage.
 
-<p>Android</p>
+Platform Availability
 
-<p><a href="javascript:void(0);"><img src="/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/Skins/Default/Stylesheets/Images/transparent.gif" alt="Closed" /></a><a href="javascript:void(0);">voltmx.gms.registerAppUpdateListener</a></p><hr />
+Android
 
-<p>The registerAppUpdateListener API is used to register to callbacks that monitor the install status of the app update.</p>
+[![Closed](/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.gms.registerAppUpdateListener](javascript:void(0);) 
 
-<blockquote>
-  <p><strong><em>Note:</em></strong> Monitoring the update state is only required for flexible updates. Once the flexible download begins, the app must monitor the update state to recognize when the update can be installed, and to display the update progress on the app UI. For immediate updates, Google Play handles the download and installation of the update.</p>
-</blockquote>
+* * *
 
-<p>Syntax</p>
+The registerAppUpdateListener API is used to register to callbacks that monitor the install status of the app update.
 
-<p>voltmx.gms.registerAppUpdateListener({“statusCallback” : statusCallback})</p>
+> **_Note:_** Monitoring the update state is only required for flexible updates. Once the flexible download begins, the app must monitor the update state to recognize when the update can be installed, and to display the update progress on the app UI. For immediate updates, Google Play handles the download and installation of the update.
 
-<p>Input Parameters</p>
+Syntax
 
-<p><strong>statusCallback</strong> - A mandatory callback function that is executed after the execution of the API call is complete. The callback function contains the result info JS Object that has the following details:</p>
+voltmx.gms.registerAppUpdateListener({"statusCallback" : statusCallback})
 
-<table>
-  <thead>
-    <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>statusCode [Constant]</td>
-      <td>An <a href="#install-constants">Install Constant</a>.</td>
-    </tr>
-    <tr>
-      <td>downloadingInfo</td>
-      <td>This parameter is only populated when the <strong>statusCode</strong> is INSTALL_STATUS_DOWNLOADING and contains the following information: <strong>totalBytes</strong> [Long]: Total number of bytes to be downloaded for the update. <strong>bytesDownloaded</strong> [Long]: Number of bytes downloaded so far.</td>
-    </tr>
-  </tbody>
-</table>
+Input Parameters
 
-<p>  </p>
+**statusCallback** - A mandatory callback function that is executed after the execution of the API call is complete. The callback function contains the result info JS Object that has the following details:
 
-<p>Example</p>
+  
+| Parameter | Description |
+| --- | --- |
+| statusCode \[Constant\] | An [Install Constant](#install-constants). |
+| downloadingInfo | This parameter is only populated when the **statusCode** is INSTALL\_STATUS\_DOWNLOADING and contains the following information: **totalBytes** \[Long\]: Total number of bytes to be downloaded for the update. **bytesDownloaded** \[Long\]: Number of bytes downloaded so far. |
+
+  
+
+Example
+
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">function statusCallback(info) {  
           voltmx.print(info.statusCode)  
@@ -611,132 +881,119 @@ voltmx.gms.checkForAppUpdate({"statusCallback" : statusCallback})</code></pre></
   }  
   voltmx.gms.registerAppUpdateListener({"statusCallback" : statusCallback})</code></pre></figure>
 
-<p>Return Value</p>
 
-<p>None</p>
+Return Value
 
-<p>Remarks</p>
+None
 
-<ul>
-  <li>After the task is complete, HCL recommends that you unregister from the callbacks by using the voltmx.gms.unRegisterAppUpdateListener API.</li>
-  <li>When you invoke the registerAppUpdateListener API, any registered callbacks are overridden.</li>
-</ul>
+Remarks
 
-<p>Platform Availability</p>
+*   After the task is complete, HCL recommends that you unregister from the callbacks by using the voltmx.gms.unRegisterAppUpdateListener API.
+*   When you invoke the registerAppUpdateListener API, any registered callbacks are overridden.
 
-<p>Android</p>
+Platform Availability
 
-<p><a href="javascript:void(0);"><img src="/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/Skins/Default/Stylesheets/Images/transparent.gif" alt="Closed" /></a><a href="javascript:void(0);">voltmx.gms.requestForAppUpdate</a></p><hr />
+Android
 
-<p>The requestForAppUpdate API starts the specified app update flow, if an update is available, while the app is in use.</p>
+[![Closed](/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.gms.requestForAppUpdate](javascript:void(0);) 
 
-<p>In case of flexible update, when you invoke the requestForAppUpdate API, the app update is downloaded. You must then invoke the <a href="#completeAppUpdate">voltmx.gms.completeAppUpdate API</a> to install and restart the app.</p>
+* * *
 
-<p>In case of immediate update, when you invoke the requestForAppUpdate API, the app update is downloaded and installed, and then the app restarts.</p>
+The requestForAppUpdate API starts the specified app update flow, if an update is available, while the app is in use.
 
-<p>Syntax</p>
+In case of flexible update, when you invoke the requestForAppUpdate API, the app update is downloaded. You must then invoke the [voltmx.gms.completeAppUpdate API](#completeAppUpdate) to install and restart the app.
 
-<p>voltmx.gms.requestForAppUpdate({“statusCallback” : statusCallback, “updateType” : voltmx.gms.APP_UPDATE_TYPE_IMMEDIATE})</p>
+In case of immediate update, when you invoke the requestForAppUpdate API, the app update is downloaded and installed, and then the app restarts.
 
-<p>Input Parameters</p>
+Syntax
 
-<table>
-  <thead>
-    <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>statusCallback [Dictionary]</td>
-      <td>A mandatory callback function that is executed after the execution of the API call is complete. The callback function contains the result info JS Object that has the following details: <strong>statusCode</strong> [Constant]: An <a href="#common-constants">Common constant</a> or an <a href="#update-constants">Update Constant</a> (except the voltmx.gms.UPDATE_AVAILABLE Constant ).</td>
-    </tr>
-    <tr>
-      <td>updateType [Object] - Optional</td>
-      <td>An Object that specifies the type of update flow. Following are the supported types of updates: APP_UPDATE_TYPE_FLEXIBLE: A constant that specifies the update type as flexible. APP_UPDATE_TYPE_IMMEDIATE: A constant that specifies the update type as immediate. The default type is APP_UPDATE_TYPE_FLEXIBLE.</td>
-    </tr>
-  </tbody>
-</table>
+voltmx.gms.requestForAppUpdate({"statusCallback" : statusCallback, "updateType" : voltmx.gms.APP\_UPDATE\_TYPE\_IMMEDIATE})
 
-<p>  </p>
+Input Parameters
 
-<p>Example</p>
+  
+| Parameter | Description |
+| --- | --- |
+| statusCallback \[Dictionary\] | A mandatory callback function that is executed after the execution of the API call is complete. The callback function contains the result info JS Object that has the following details: **statusCode** \[Constant\]: An [Common constant](#common-constants) or an [Update Constant](#update-constants) (except the voltmx.gms.UPDATE\_AVAILABLE Constant ). |
+| updateType \[Object\] - Optional | An Object that specifies the type of update flow. Following are the supported types of updates: APP\_UPDATE\_TYPE\_FLEXIBLE: A constant that specifies the update type as flexible. APP\_UPDATE\_TYPE\_IMMEDIATE: A constant that specifies the update type as immediate. The default type is APP\_UPDATE\_TYPE\_FLEXIBLE. |
+
+  
+
+Example
+
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">function statusCallback(info) {  
             voltmx.print("statusCallback" + info)  
         }  
         voltmx.gms.requestForAppUpdate({"statusCallback" : statusCallback, "updateType" : voltmx.gms.APP_UPDATE_TYPE_IMMEDIATE})</code></pre></figure>
 
-<p>Return Value</p>
 
-<p>None</p>
+Return Value
 
-<p>Remarks</p>
+None
 
-<ul>
-  <li>
-    <p>In case of flexible flow ,the API returns one of the following status codes in the statusCallback:</p>
-  </li>
-  <li><strong>UPDATE_FLOW_CONFIRMED_BY_USER</strong>: The user has accepted the update request.</li>
-  <li><strong>UPDATE_FLOW_CANCELLED_BY_USER</strong>: The user has denied the update request.</li>
-  <li>
-    <p><strong>RESULT_IN_APP_UPDATE_FAILED</strong>: Something failed during the confirmation of the request. For example, the user terminates the app before responding to the update request.</p>
-  </li>
-  <li>
-    <p>In case of immediate flow, the API returns one of the following status codes in the statusCallback:</p>
-  </li>
-  <li><strong>UPDATE_FLOW_CONFIRMED_BY_USER</strong>: The user has accepted the update request, and the update is successful. (In practice, the app must not receive this status code, as it is already updated)</li>
-  <li><strong>UPDATE_FLOW_CANCELLED_BY_USER</strong>: The user has denied or canceled the update.</li>
-  <li>
-    <p><strong>RESULT_IN_APP_UPDATE_FAILED</strong>: The flow failed either during the confirmation of the request, the download, or the installation of the update.</p>
-  </li>
-  <li>If you invoke this API when the <a href="#checkForAppUpdate">voltmx.gms.checkForAppUpdate</a> API returns the <strong>UPDATE_NOT_AVAILABLE</strong> or <strong>UPDATE_UNKNOWN</strong> status codes, the API call is ignored and the same statusCode is returned.</li>
-  <li>In case of flexible update flow, if you invoke this API when the <a href="#checkForAppUpdate">voltmx.gms.checkForAppUpdate</a> API returns the <strong>UPDATE_IN_PROGRESS</strong> status code, the <strong>UPDATE_IN_PROGRESS</strong> status code is returned.</li>
-  <li>If you invoke this API when the app is running in the background, the API call is ignored and the <strong>UPDATE_NOT_ALLOWED_IN_BACKGROUND</strong> status code is returned.</li>
-  <li>
-    <p>In case of immediate update flow, when the user provides consent to install the update, Google Play displays the app update progress in full-screen mode for the entire duration of the update.</p>
+Remarks
 
-    <p>During the update, if the user closes or terminates the app, the update must continue to be downloaded and installed in the background, without any additional confirmation from the user.</p>
+*   In case of flexible flow ,the API returns one of the following status codes in the statusCallback:
 
-    <p>However, when the app returns to the foreground, you must verify that the update is not stalled in the <strong>UPDATE_IN_PROGRESS</strong> state. If the update is stalled, you must invoke the <strong>requestForAppUpdate</strong> API as follows:</p>
+*   **UPDATE\_FLOW\_CONFIRMED\_BY\_USER**: The user has accepted the update request.
+*   **UPDATE\_FLOW\_CANCELLED\_BY\_USER**: The user has denied the update request.
+*   **RESULT\_IN\_APP\_UPDATE\_FAILED**: Something failed during the confirmation of the request. For example, the user terminates the app before responding to the update request.
 
-    <p>voltmx.gms.requestForAppUpdate({“statusCallback” : statusCallback, “updateType” : voltmx.gms.APP_UPDATE_TYPE_IMMEDIATE})</p>
+*   In case of immediate flow, the API returns one of the following status codes in the statusCallback:
 
-    <p>You can track the foregroud state by registering for the onforeground callback, by using the <a href="voltmx.application_functions.html#setappli">voltmx.application.setApplicationCallbacks</a> API.</p>
-  </li>
-</ul>
+*   **UPDATE\_FLOW\_CONFIRMED\_BY\_USER**: The user has accepted the update request, and the update is successful. (In practice, the app must not receive this status code, as it is already updated)
+*   **UPDATE\_FLOW\_CANCELLED\_BY\_USER**: The user has denied or canceled the update.
+*   **RESULT\_IN\_APP\_UPDATE\_FAILED**: The flow failed either during the confirmation of the request, the download, or the installation of the update.
 
-<p>Platform Availability</p>
+*   If you invoke this API when the [voltmx.gms.checkForAppUpdate](#checkForAppUpdate) API returns the **UPDATE\_NOT\_AVAILABLE** or **UPDATE\_UNKNOWN** status codes, the API call is ignored and the same statusCode is returned.
+*   In case of flexible update flow, if you invoke this API when the [voltmx.gms.checkForAppUpdate](#checkForAppUpdate) API returns the **UPDATE\_IN\_PROGRESS** status code, the **UPDATE\_IN\_PROGRESS** status code is returned.
+*   If you invoke this API when the app is running in the background, the API call is ignored and the **UPDATE\_NOT\_ALLOWED\_IN\_BACKGROUND** status code is returned.
+*   In case of immediate update flow, when the user provides consent to install the update, Google Play displays the app update progress in full-screen mode for the entire duration of the update.
+    
+    During the update, if the user closes or terminates the app, the update must continue to be downloaded and installed in the background, without any additional confirmation from the user.
+    
+    However, when the app returns to the foreground, you must verify that the update is not stalled in the **UPDATE\_IN\_PROGRESS** state. If the update is stalled, you must invoke the **requestForAppUpdate** API as follows:
+    
+    voltmx.gms.requestForAppUpdate({"statusCallback" : statusCallback, "updateType" : voltmx.gms.APP\_UPDATE\_TYPE\_IMMEDIATE})
+    
+    You can track the foregroud state by registering for the onforeground callback, by using the [voltmx.application.setApplicationCallbacks](voltmx.application_functions.html#setappli) API.
+    
 
-<p>Android</p>
+Platform Availability
 
-<p><a href="javascript:void(0);"><img src="/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/Skins/Default/Stylesheets/Images/transparent.gif" alt="Closed" /></a><a href="javascript:void(0);">voltmx.gms.unRegisterAppUpdateListener</a></p><hr />
+Android
 
-<p>The unRegisterAppUpdateListener API is used to unregister from callbacks that were registered to by using the <a href="#registerAppUpdateListener">voltmx.gms.registerAppUpdateListener</a> API.</p>
+[![Closed](/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[voltmx.gms.unRegisterAppUpdateListener](javascript:void(0);) 
 
-<p>Syntax</p>
+* * *
 
-<p>voltmx.gms.unRegisterAppUpdateListener()</p>
+The unRegisterAppUpdateListener API is used to unregister from callbacks that were registered to by using the [voltmx.gms.registerAppUpdateListener](#registerAppUpdateListener) API.
 
-<p>Input Parameters</p>
+Syntax
 
-<p>None</p>
+voltmx.gms.unRegisterAppUpdateListener()
 
-<p>  </p>
+Input Parameters
 
-<p>Example</p>
+None
+
+  
+
+Example
+
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">voltmx.gms.unRegisterAppUpdateListener()  
 }</code></pre></figure>
 
-<p>Return Value</p>
 
-<p>None</p>
+Return Value
 
-<p>Platform Availability</p>
+None
 
-<p>Android</p>
+Platform Availability
+
+Android -->
 
 <p><img src="resources/prettify/onload.png" alt="" /></p>
 

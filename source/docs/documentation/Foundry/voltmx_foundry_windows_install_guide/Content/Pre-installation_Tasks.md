@@ -126,8 +126,10 @@ In accordance with the United States of America export restrictions, Java that i
 
 To Configure Unrestricted JCE Policy Files for Tomcat, JBoss, or WebLogic, follow these steps:
 
-1.  Go to the Oracle Java SE download page [http://www.oracle.com/technetwork/java/javase/downloads/index.html](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
-2.  Scroll down to **Additional Resources** section. You will find **Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy File**.
+<!-- 1.  Go to the Oracle Java SE download page [http://www.oracle.com/technetwork/java/javase/downloads/index.html](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+2.  Scroll down to **Additional Resources** section. You will find **Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy File**. -->
+1. Go to Oracle Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files download page [https://www.oracle.com/java/technologies/javase-jce-all-downloads.html](https://www.oracle.com/java/technologies/javase-jce-all-downloads.html).
+2. You will find **Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy File**. 
     
 3.  Download the JCE version that matches your installed JVM, for example, `UnlimitedJCEPolicyJDK<Version>.zip`
 4.  Extract the downloaded zip file. The `UnlimitedJCEPolicyJDK<Version>.zip` file contains the following files:

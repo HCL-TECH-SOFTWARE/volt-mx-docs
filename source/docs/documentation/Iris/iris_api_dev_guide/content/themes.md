@@ -9,7 +9,7 @@ You are here: Theme API
 Theme API
 =========
 
-A theme is a set of skins available at the application level that let you specify common skins for widgets in different states (normal, focus, and so on). You can define your own themes in Volt MX Irisor download themes from the network (a specific URL) and use them in the application.
+A theme is a set of skins available at the application level that let you specify common skins for widgets in different states (normal, focus, and so on). You can define your own themes in Volt MX Iris or download themes from the network (a specific URL) and use them in the application.
 
 The  Theme API uses the `voltmx.theme Namespace` and related API elements:
 
@@ -31,7 +31,7 @@ A theme is represented as a file containing a JSON string. The JSON string has t
 
 > **_Note:_** The themes or the skins must be pre-defined in the IDE or should have been downloaded over the network.
 
-> **_Note:_** Every application must have a "default" theme (stored in the in the default.theme file). Deleting or overriding the contents of this file may lead to undesired behavior. Volt MX Irisdoes not allow the developer to delete this theme. All other user defined themes can be deleted.
+> **_Note:_** Every application must have a "default" theme (stored in the in the default.theme file). Deleting or overriding the contents of this file may lead to undesired behavior. Volt MX Iris does not allow the developer to delete this theme. All other user defined themes can be deleted.
 
 The Theme API enables you to customize, set, and delete themes in an application. If you already have all the attributes of a theme such as the font size, font colour and so on, listed in a JSON string, you can use a URL to point to the JSON String using the [voltmx.theme.createTheme](voltmx.theme_functions.html#theme.cr) function. If you want to define the attributes while creating the theme, use the [voltmx.theme.createThemeFromJSONString](voltmx.theme_functions.html#voltmx.the) function. Use the [voltmx.theme.getCurrentTheme](voltmx.theme_functions.html#theme.ge2) function and the [voltmx.theme.getCurrentThemeData](voltmx.theme_functions.html#theme.ge) function to return the current theme and the current theme’s meta data respectively. Return all the themes available in your application using the [voltmx.theme.getAllThemes](voltmx.theme_functions.html#theme.al) function, and then use the [voltmx.theme.setCurrentTheme](voltmx.theme_functions.html#theme.se) function to select a theme to apply it in your application. You can also check if a specific theme is present in your application using the [voltmx.theme.isThemePresent](voltmx.theme_functions.html#theme.is) function, and delete the theme using the [voltmx.theme.deleteTheme](voltmx.theme_functions.html#theme.de) function, if required.
 

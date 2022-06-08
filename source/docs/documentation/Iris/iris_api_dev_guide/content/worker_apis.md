@@ -45,7 +45,8 @@ The Worker Thread API contains the following API Elements:
 
 <h2>Scope</h2>
 <ol type="1">
-<li>Volt MX Iris platform version &gt;= 5.6.2.</li>
+<li>&lt;Volt MX Iris platform version &gt;= 9.2</li>
+<!-- <li>&lt;Volt MX Iris platform version &gt;= 5.6.2.</li> -->
 <li>Support for JavaScript.</li>
 <li>Supported mobile Platforms:
 <ul>
@@ -672,9 +673,9 @@ As the worker threading model is mapped to underlying native threading models in
 3.  When close () is invoked in worker scope, and if there are pending tasks waiting in the message queues for this worker to perform, some platforms might discard all the pending tasks without accepting them for execution and terminate, and on some platform all the pending tasks are executed to completion and then the worker terminates.
 4.  Hence it is to be noted that to achieve cross platform consistency, it is always advised that close() be invoked in worker scope once all the tasks in message queues are completed.
 
-### Debugger Support
+<!-- ### Debugger Support
 
-Debugger support for worker threads is not available in 5.6.2 release.
+Debugger support for worker threads is not available in 5.6.2 release. -->
 
 ### Worker Life Cycle Notes
 

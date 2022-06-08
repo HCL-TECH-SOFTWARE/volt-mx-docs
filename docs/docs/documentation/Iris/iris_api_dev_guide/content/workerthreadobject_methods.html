@@ -262,8 +262,14 @@
 <p>Event Handlers can be registered using <em>addEventListener()</em> method on the worker Objects and once registered messages and errors from a worker thread can be received in parent thread.</p>
 
 <p>Due to the asynchronous parallel execution nature of the newly created worker thread, which starts executing the worker JS script upon creation. It is always advisable to immediately register the ‘message’ event handler as well as ‘error’ event handler on the worker handle in parent thread context after creation of the worker. This ensures that posted messages or errors in worker scope are handed over to the respective ‘message’ or ‘error’ event listeners in parent scope.</p>
-
-<p><em>message</em> event handler:</p>
+      <h3>
+        
+        
+          <em>message</em> event handler:
+        
+        
+      </h3>
+    
 
 <p>Registered “message” event handler will be invoked in Parent or Worker thread whenever postMessage() is called from inner scope of Worker or Parent thread.</p>
 
@@ -273,8 +279,14 @@
 </ol>
 
 <p>Multiple <em>message</em> event handlers can also be registered in parent scope and workers inner scope and all the registered event handlers will be invoked in the registered order whenever a postMessage() is called.</p>
-
-<p><em>error</em> event listener:</p>
+      <h3>
+        
+        
+          <em>error</em> event listener:
+        
+        
+      </h3>
+    
 
 <p>The <em>error</em> handler can also be registered using <em>addEventListener</em> () in parent thread scope on worker object and as well as in worker thread’s inner scope, which will be invoked whenever an unhandled exception occurs in workers inner scope.</p>
 
@@ -287,20 +299,32 @@
 <p>If an <em>error</em> event handler is not registered for a worker in parent scope or in worker inner scope and if an unhandled exception arises in worker’s inner scope then worker halts execution and no error info is propagated.</p>
 
 <p>The <em>error</em> event handlers work for unhandled exceptions occurring only in worker scope but not in main parent scope.</p>
-
-<p>Syntax</p>
+      <h3>
+        
+        
+          Syntax
+        
+        
+      </h3>
+    
 
 <p>Parent Scope:</p>
 
-<p>worker.addEventListener(key,listener)</p>
+<p><code class="language-plaintext highlighter-rouge">worker.addEventListener(key,listener)</code></p>
 
 <p>Worker Scope:</p>
 
-<p>addEventListener(key,listener)<br />
-self.addEventListener(key,listener)<br />
-this.addEventListener(key, listener)</p>
-
-<p>Input Parameters</p>
+<pre><code style="display:block;background-color:#eee;">addEventListener(key,listener)  
+self.addEventListener(key,listener)  
+this.addEventListener(key, listener)</code></pre>
+      <h3>
+        
+        
+          Input Parameters
+        
+        
+      </h3>
+    
 
 <table>
   <thead>
@@ -322,10 +346,16 @@ this.addEventListener(key, listener)</p>
 </table>
 
 <p> </p>
+      <h3>
+        
+        
+          Example
+        
+        
+      </h3>
+    
 
-<p>Example</p>
-
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">//Parent Scope
+<pre><code style="display:block;background-color:#eee;">//Parent Scope
 var worker = new voltmx.worker.WorkerThread("worker1.js");
 
 var evtMessageHandler_1 = function(event) {
@@ -335,9 +365,12 @@ var evtErrorHandler_1 = function(event) {
     voltmx.print("Parent Scope: In error handler 1");
 
     voltmx.print('ERROR: Line ' + event.lineno + ' in ' + event.filename + ': ' + event.message);
-};</code></pre></figure>
+};
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">//"message" event handler:
+</code></pre>
+
+<pre><code style="display:block;background-color:#eee;">
+//"message" event handler:
 
 
 //Parent Scope
@@ -365,9 +398,12 @@ self.addEventListener("message", evtMessageHandler\_1);
 //or
 this.addEventListener("message", evtMessageHandler\_1);
 //or
-addEventListener("message", evtMessageHandler\_1);</code></pre></figure>
+addEventListener("message", evtMessageHandler\_1);
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">//"error" event listener:
+</code></pre>
+
+<pre><code style="display:block;background-color:#eee;">
+//"error" event listener:
 
 
 //Parent Scope
@@ -402,47 +438,80 @@ self.addEventListener("error", evtErrorHandler\_1);
 this.addEventListener("error", evtErrorHandler\_1);
 
 //or
-addEventListener("error", evtErrorHandler\_1);</code></pre></figure>
+addEventListener("error", evtErrorHandler\_1);
 
-<p>Return Values</p>
+</code></pre>
+      <h3>
+        
+        
+          Return Values
+        
+        
+      </h3>
+    
 
 <p>None</p>
-
-<p>Exceptions</p>
-
-<ol>
-  <li>If no argument is given or if the number of arguments are less than two, it raises an exception and throws a “VoltMXError” JS Object with the following attributes:</li>
-</ol>
-
-<p>errorCode: 3001.<br />
-name: “WorkerThreadError”.<br />
-message: “addEventListener: MissingMandatoryParameter. Mandatory arguments missing”</p>
+      <h3>
+        
+        
+          Exceptions
+        
+        
+      </h3>
+    
 
 <ol>
-  <li>If the first argument is not equal to “message” or “error” and if second argument is not a function object, it raises an exception and throws a “VoltMXError” JS Object with the following attributes:</li>
-</ol>
-
-<p>errorCode: 3002.<br />
-name: “WorkerThreadError”.<br />
-message: “addEventListener: InvalidParameter. Invalid arguments”</p>
-
-<ol>
-  <li>In Worker scope if these exceptions are not handled and if an “error” event handler is registered in worker’s inner scope or/and in Parent scope for this worker object then it is invoked with an error event object and its message attribute set to following.</li>
-</ol>
-
+<li>If no argument is given or if the number of arguments are less than two, it raises an exception and throws a “VoltMXError” JS Object with the following attributes:
+<pre><code style="display:block;background-color:#eee;">errorCode: 3001.  
+name: "WorkerThreadError".  
+message: "addEventListener: MissingMandatoryParameter. Mandatory arguments missing"</code></pre>
+</li>
+<li>If the first argument is not equal to “message” or “error” and if second argument is not a function object, it raises an exception and throws a “VoltMXError” JS Object with the following attributes:
+<pre><code style="display:block;background-color:#eee;">errorCode: 3002.
+name: “WorkerThreadError”.
+message: “addEventListener: InvalidParameter. Invalid arguments”</code></pre>
+</li>
+<li>
+<p>In Worker scope if these exceptions are not handled and if an “error” event handler is registered in worker’s inner scope or/and in Parent scope for this worker object then it is invoked with an error event object and its message attribute set to following.</p>
 <p>In case of exception 1)</p>
-
-<p>message: “addEventListener: MissingMandatoryParameter . Mandatory arguments missing”</p>
-
+<code>message: “addEventListener: MissingMandatoryParameter . Mandatory arguments missing”</code>
 <p>In case of exception 2)</p>
-
-<p>message: “addEventListener: InvalidParameter. Invalid arguments”</p>
-
-<ol>
-  <li>In Parent(not a worker to some other parent) scope if these exceptions are not handled registered “error” event handler will not be invoked.</li>
+<code>message: “addEventListener: InvalidParameter. Invalid arguments”</code>
+</li>
+<li>In Parent(not a worker to some other parent) scope if these exceptions are not handled registered “error” event handler will not be invoked.</li>
 </ol>
 
-<p>Platform Availability</p>
+<!-- 1.  If no argument is given or if the number of arguments are less than two, it raises an exception and throws a “VoltMXError” JS Object with the following attributes:
+
+<pre><code style="display:block;background-color:#eee;">errorCode: 3001.  
+name: "WorkerThreadError".  
+message: "addEventListener: MissingMandatoryParameter. Mandatory arguments missing"</code></pre>
+
+2.  If the first argument is not equal to "message" or "error" and if second argument is not a function object, it raises an exception and throws a "VoltMXError" JS Object with the following attributes:
+
+errorCode: 3002.  
+name: "WorkerThreadError".  
+message: "addEventListener: InvalidParameter. Invalid arguments"
+
+5.  In Worker scope if these exceptions are not handled and if an "error" event handler is registered in worker’s inner scope or/and in Parent scope for this worker object then it is invoked with an error event object and its message attribute set to following.
+
+In case of exception 1)
+
+message: "addEventListener: MissingMandatoryParameter . Mandatory arguments missing"
+
+In case of exception 2)
+
+message: "addEventListener: InvalidParameter. Invalid arguments"
+
+10.  In Parent(not a worker to some other parent) scope if these exceptions are not handled registered "error" event handler will not be invoked. -->
+      <h3>
+        
+        
+          Platform Availability
+        
+        
+      </h3>
+    
 
 <p>Available for iOS, Android, Windows, SPA, and Desktop Web. For more information, see <a href="worker_apis.html#scope">Scope</a>.</p><hr />
       <h2 id="close">
@@ -457,22 +526,41 @@ message: “addEventListener: InvalidParameter. Invalid arguments”</p>
 <p>Worker thread can be terminated from inner scope of the worker by invoking close(). The worker thread is killed immediately without an opportunity to complete its operations or clean up.</p>
 
 <p>The tasks pending in the message queue and callbacks registered for network, timer APIs etc are discarded without wait until completion.</p>
-
-<p>Syntax</p>
+      <h3>
+        
+        
+          Syntax
+        
+        
+      </h3>
+    
 
 <p>Worker Scope:</p>
 
-<p>close()<br />
-self.close()<br />
-this.close()</p>
-
-<p>Input Parameters</p>
+<pre><code style="display:block;background-color:#eee;">close()  
+self.close()  
+this.close()</code></pre>
+      <h3>
+        
+        
+          Input Parameters
+        
+        
+      </h3>
+    
 
 <p>None</p>
+      <h3>
+        
+        
+          Example
+        
+        
+      </h3>
+    
 
-<p>Example</p>
-
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">//worker init
+<pre><code style="display:block;background-color:#eee;">
+//worker init
 
 //post a message to parent
 self.postMessage("Hello from Worker");
@@ -480,13 +568,27 @@ self.postMessage("Hello from Worker");
 //do some work
 
 //terminate this worker from inner scope
-self.close();</code></pre></figure>
+self.close();
 
-<p>Return Values</p>
+</code></pre>
+      <h3>
+        
+        
+          Return Values
+        
+        
+      </h3>
+    
 
 <p>None</p>
-
-<p>Platform Availability</p>
+      <h3>
+        
+        
+          Platform Availability
+        
+        
+      </h3>
+    
 
 <p>Available for iOS, Android, Windows, SPA, and Desktop Web. For more information, see <a href="worker_apis.html#scope">Scope</a>.</p>
 
@@ -518,28 +620,40 @@ self.close();</code></pre></figure>
 <p>The JSON or string object passed to <em>postMessage()</em> is delivered to the registered “message” event handler. The “event” object “data” attribute will have the message passed: “event.data”.</p>
 
 <p>Adhering to the JSON standard, the JSON object passed to postMessage() API should be serializeble JSON without opaque object handles or function object handles.</p>
+      <h3>
+        
+        
+          Syntax
+        
+        
+      </h3>
+    
 
-<p>Syntax</p>
-
-<p>postMessage(<String> or <JSON>)</JSON></String></p>
+<p><code class="language-plaintext highlighter-rouge">postMessage(&lt;String&gt; or &lt;JSON&gt;)</code></p>
 
 <p>Parent Scope:</p>
 
-<p>//JSON Object<br />
-worker.postMessage({‘msg’ : ‘hello’})</p>
+<pre><code style="display:block;background-color:#eee;">//JSON Object  
+worker.postMessage({‘msg’ : ‘hello’})
 
-<p>//String<br />
-worker.postMessage(“messsage hello”)</p>
+//String  
+worker.postMessage("messsage hello")</code></pre>
 
 <p>Worker Scope:</p>
 
-<p>//JSON Object<br />
-postMessage({‘msg’ : ‘hello’})</p>
+<pre><code style="display:block;background-color:#eee;">//JSON Object  
+postMessage({‘msg’ : ‘hello’})
 
-<p>//String<br />
-postMessage(“messsage hello”)</p>
-
-<p>Input Parameters</p>
+//String  
+postMessage("messsage hello")</code></pre>
+      <h3>
+        
+        
+          Input Parameters
+        
+        
+      </h3>
+    
 
 <table>
   <thead>
@@ -559,10 +673,16 @@ postMessage(“messsage hello”)</p>
     </tr>
   </tbody>
 </table>
+      <h3>
+        
+        
+          Example
+        
+        
+      </h3>
+    
 
-<p>Example</p>
-
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">var worker = new voltmx.worker.WorkerThread("worker1.js");
+<pre><code style="display:block;background-color:#eee;">var worker = new voltmx.worker.WorkerThread("worker1.js");
 
 // Parent scope:
 //JSON Object
@@ -594,47 +714,58 @@ postMessage('message hello');
 //or
 this.postMessage('message hello');
 //or
-self.postMessage('message hello'); </code></pre></figure>
-
-<p>Return Values</p>
+self.postMessage('message hello'); </code></pre>
+      <h3>
+        
+        
+          Return Values
+        
+        
+      </h3>
+    
 
 <p>None</p>
-
-<p>Exceptions</p>
-
-<ol>
-  <li>If no argument is given it raises an exception and throws a “VoltMXError” JS Object with the following attributes:</li>
-</ol>
-
-<p>errorCode: 3001.<br />
-name: “WorkerThreadError”.<br />
-message: “postMessage: MissingMandatoryParameter. Message undefined”</p>
+      <h3>
+        
+        
+          Exceptions
+        
+        
+      </h3>
+    
 
 <ol>
-  <li>If the message argument passed is not String or JSON object, it raises an exception and throws a “VoltMXError” JS Object with the following attributes:</li>
-</ol>
-
-<p>errorCode: 3002.<br />
-name: “WorkerThreadError”.<br />
-message: “postMessage: InvalidParameter. Invalid Message”</p>
-
-<ol>
-  <li>In Worker scope if these exceptions are not handled and if an “error” event handler is registered in worker’s inner scope or/and in Parent scope for this worker object then it is invoked with an error event object and its message attribute set to following.</li>
-</ol>
-
+<li>If no argument is given it raises an exception and throws a "VoltMXError" JS Object with the following attributes:
+<pre><code style="display:block;background-color:#eee;">
+errorCode: 3001.  
+name: "WorkerThreadError".  
+message: "postMessage: MissingMandatoryParameter. Message undefined"</code></pre>
+</li>
+<li>
+If the message argument passed is not String or JSON object, it raises an exception and throws a "VoltMXError" JS Object with the following attributes:
+<pre><code style="display:block;background-color:#eee;">errorCode: 3002.  
+name: "WorkerThreadError".  
+message: "postMessage: InvalidParameter. Invalid Message"</code></pre>
+</li>
+<li>
+<p>In Worker scope if these exceptions are not handled and if an "error" event handler is registered in worker’s inner scope or/and in Parent scope for this worker object then it is invoked with an error event object and its message attribute set to following.</p>
 <p>In case of exception 1:</p>
-
-<p>message: “postMessage: MissingMandatoryParameter. Message undefined”</p>
-
+<code>message: "postMessage: MissingMandatoryParameter. Message undefined"</code>
 <p>In case of exception 2:</p>
-
-<p>message: “postMessage: InvalidParameter. Invalid Message”</p>
-
-<ol>
-  <li>In Parent (not a worker to some other parent) scope if these exceptions are not handled registered “error” event handler will not be invoked.</li>
+<code>message: "postMessage: InvalidParameter. Invalid Message"</code>
+</li>
+<li>
+In Parent (not a worker to some other parent) scope if these exceptions are not handled registered "error" event handler will not be invoked.
+</li>
 </ol>
-
-<p>Platform Availability</p>
+      <h3>
+        
+        
+          Platform Availability
+        
+        
+      </h3>
+    
 
 <p>Available for iOS, Android, Windows, SPA, and Desktop Web. For more information, see <a href="worker_apis.html#scope">Scope</a>.</p><hr />
       <h2 id="removeeventlistener">
@@ -649,8 +780,14 @@ message: “postMessage: InvalidParameter. Invalid Message”</p>
 <p>This API is used to remove the previously registered <em>message</em> or <em>error</em> event listener that was registered using <em>addEventListener</em>().</p>
 
 <p>This API can be used in both parent and worker scope.</p>
-
-<p>Syntax</p>
+      <h3>
+        
+        
+          Syntax
+        
+        
+      </h3>
+    
 
 <p>Parent Scope:</p>
 
@@ -661,8 +798,14 @@ message: “postMessage: InvalidParameter. Invalid Message”</p>
 <p>removeEventListener(key,listener)<br />
 self.removeEventListener(key,listener)<br />
 this.removeEventListener(key, listener)</p>
-
-<p>Input Parameters</p>
+      <h3>
+        
+        
+          Input Parameters
+        
+        
+      </h3>
+    
 
 <p>key</p>
 
@@ -690,10 +833,16 @@ this.removeEventListener(key, listener)</p>
 </table>
 
 <p> </p>
+      <h3>
+        
+        
+          Example
+        
+        
+      </h3>
+    
 
-<p>Example</p>
-
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">"message" event handler:
+<pre><code style="display:block;background-color:#eee;"> "message" event handler:
 
 //Parent Scopevar worker = new voltmx.worker.WorkerThread("worker1.js");
 
@@ -727,9 +876,9 @@ self.addEventListener("message", evtMessageHandler_1);
 self.addEventListener("message", evtMessageHandler_2);
 
 //Removing event listener
-self.removeEventListener("message", evtMessageHandler_2);</code></pre></figure>
+self.removeEventListener("message", evtMessageHandler_2);</code></pre>
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">"error" event listener:
+<pre><code style="display:block;background-color:#eee;"> "error" event listener:
 
 //Parent Scope
 var worker = new voltmx.worker.WorkerThread("worker1.js");
@@ -764,43 +913,44 @@ self.addEventListener("error", evtErrorHandler\_1);
 self.addEventListener("error", evtErrorHandler\_2);
 
 //removing event listener
-self.removeEventListener("error", evtErrorHandler\_2);</code></pre></figure>
-
-<p>Exceptions</p>
-
-<ol>
-  <li>If no argument is given or if the number of arguments are less than two, it raises an exception and throws a “VoltMXError” JS Object with the following attributes:</li>
-</ol>
-
-<p>errorCode: 3001.<br />
-name: “WorkerThreadError”.<br />
-message: “removeEventListener: MissingMandatoryParameter. Mandatory arguments missing”</p>
+self.removeEventListener("error", evtErrorHandler\_2);</code></pre>
+      <h3>
+        
+        
+          Exceptions
+        
+        
+      </h3>
+    
 
 <ol>
-  <li>If the first argument is not equal to “message” or “error” and if second argument is not a function object, it raises an exception and throws a “VoltMXError” JS Object with the following attributes:</li>
-</ol>
-
-<p>errorCode: 3002.<br />
-name: “WorkerThreadError”.<br />
-message: “removeEventListener: InvalidParameter. Invalid arguments”</p>
-
-<ol>
-  <li>In Worker scope if these exceptions are not handled and if an “error” event handler is registered in worker’s inner scope or/and in Parent scope for this worker object then it is invoked with an error event object and its message attribute set to following.</li>
-</ol>
-
+<li>If no argument is given or if the number of arguments are less than two, it raises an exception and throws a "VoltMXError" JS Object with the following attributes:
+<pre><code style="display:block;background-color:#eee;">errorCode: 3001.  
+name: "WorkerThreadError".  
+message: "removeEventListener: MissingMandatoryParameter. Mandatory arguments missing"</code></pre>
+</li>
+<li>If the first argument is not equal to "message" or "error" and if second argument is not a function object, it raises an exception and throws a "VoltMXError" JS Object with the following attributes:
+<pre><code style="display:block;background-color:#eee;">errorCode: 3002.  
+name: "WorkerThreadError".  
+message: "removeEventListener: InvalidParameter. Invalid arguments"</code></pre>
+</li>
+<li>
+<p>In Worker scope if these exceptions are not handled and if an "error" event handler is registered in worker’s inner scope or/and in Parent scope for this worker object then it is invoked with an error event object and its message attribute set to following.</p>
 <p>In case of exception 1:</p>
-
-<p>message: “removeEventListener: MissingMandatoryParameter. Mandatory arguments missing”</p>
-
+<code>message: "removeEventListener: MissingMandatoryParameter. Mandatory arguments missing"</code>
 <p>In case of exception 2:</p>
-
-<p>message: “removeEventListener: InvalidParameter. Invalid arguments”</p>
-
-<ol>
-  <li>In Parent(not a worker to some other parent) scope if these exceptions are not handled registered “error” event handler will not be invoked.</li>
+<code>message: "removeEventListener: InvalidParameter. Invalid arguments"</code>
+</li>
+<li>In Parent(not a worker to some other parent) scope if these exceptions are not handled registered "error" event handler will not be invoked.</li>
 </ol>
-
-<p>Platform Availability</p>
+      <h3>
+        
+        
+          Platform Availability
+        
+        
+      </h3>
+    
 
 <p>Available for iOS, Android, Windows, SPA, and Desktop Web. For more information, see <a href="worker_apis.html#scope">Scope</a>.</p><hr />
       <h2 id="terminate">
@@ -815,34 +965,70 @@ message: “removeEventListener: InvalidParameter. Invalid arguments”</p>
 <p>When called from parent scope immediately terminates the worker. This does not offer the worker an opportunity to finish its operations. It is simply stopped at once.</p>
 
 <p>The tasks pending in the message queue and callbacks registered for network, timer APIs are discarded without wait until completion.</p>
-
-<p>Syntax</p>
+      <h3>
+        
+        
+          Syntax
+        
+        
+      </h3>
+    
 
 <p>worker.terminate()</p>
-
-<p>Input Parameters</p>
+      <h3>
+        
+        
+          Input Parameters
+        
+        
+      </h3>
+    
 
 <p>None</p>
+      <h3>
+        
+        
+          Example
+        
+        
+      </h3>
+    
 
-<p>Example</p>
-
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">var worker = new voltmx.worker.WorkerThread("worker1.js");
+<pre><code style="display:block;background-color:#eee;">var worker = new voltmx.worker.WorkerThread("worker1.js");
 
 //Post a message to the worker
 worker.postMessage("Hello from Parent");
 
 //Terminate the worker
-worker.terminate();</code></pre></figure>
-
-<p>Return Values</p>
+worker.terminate();</code></pre>
+      <h3>
+        
+        
+          Return Values
+        
+        
+      </h3>
+    
 
 <p>None</p>
-
-<p>Platform Availability</p>
+      <h3>
+        
+        
+          Platform Availability
+        
+        
+      </h3>
+    
 
 <p>Available for iOS, Android, Windows, SPA, and Desktop Web. For more information, see <a href="worker_apis.html#scope">Scope</a>.</p>
-
-<p>Limitations</p>
+      <h3>
+        
+        
+          Limitations
+        
+        
+      </h3>
+    
 
 <p>As the worker threading model is mapped to underlying native threading models in native platforms, there can be some deviations from what specification says, this is due to technical limitations in the underlying platforms which include:</p>
 

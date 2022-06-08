@@ -110,7 +110,7 @@ Input Parameters
 | Parameter | Description |
 | --- | --- |
 | badgeValue \[String\] - Mandatory | Value of the badge. The value that you specify in the badgeValue parameter appears within the badge. Do not pass any other value except a numerical value. For example, to set a badge value for an appicon, specify the value as "2" instead of 2. If the length of the badge value is greater than 1 the badge is a rounded rectangle. For example, if you specify the value of the badge as 88, the number appears in a rounded rectangular badge. If the length of the badge value is 1, the badge is always a circle. |
-| tileID \[String\] - Optional | The tile ID defined for the secondary tile using the [setSecondaryTile](#setsecon) API. The parameter is applicable only for Windows. |
+| tileID \[String\] - Optional | The tile ID defined for the secondary tile using the [setSecondaryTile](voltmx.application_functions_livetiles.html#setsecon) API. The parameter is applicable only for Windows. |
 
  
 

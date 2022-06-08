@@ -3,10 +3,9 @@ layout: "documentation"
 category: "offline_objectsapi_reference_guide"
 ---
 
-Volt MX  Foundry console User Guide: [Application-level APIs](Application_Level_APIs.html) > VMXFoundry.OfflineObjects.executeSelectQuery
+Volt MX Foundry console User Guide: [Application-level APIs](Application_Level_APIs.html) > VMXFoundry.OfflineObjects.executeSelectQuery
 
-VMXFoundry.OfflineObjects.executeSelectQuery
-=================================================
+# VMXFoundry.OfflineObjects.executeSelectQuery
 
 The application-level API, **executeSelectQuery** allows the user to execute any select query on device database. The API executes the query provided as an argument on the device database and returns the response in successCallback.
 
@@ -16,12 +15,9 @@ The failureCallback is invoked in case of errors such as invalid query and so on
 
 > **_Note:_** **executeSelectQuery** supports only **read** or **select** queries. The API does not support **create** or **update** or **delete** operations on the device database.
 
-Volt MX  Iris (JavaScript)
--------------------------------
+## Volt MX Iris (JavaScript)
 
 > **_Note:_** Not supported for Mobile Web, and Desktop Web channels.
-
-> **_Note:_** Supported for Windows from V8 SP4 Fix Pack 6 onwards.
 
 ### Signature
 
@@ -30,12 +26,11 @@ Volt MX  Iris (JavaScript)
 
 ### Parameters
 
-  
-| Parameter | Type | Description | Required |
-| --- | --- | --- | --- |
-| query | String | Select query to be executed on device DB. | Yes |
-| successCallback | Function | The function is invoked upon successful query execution. | Yes |
-| failureCallback | Function | The function is invoked on failure. | Yes |
+| Parameter       | Type     | Description                                              | Required |
+| --------------- | -------- | -------------------------------------------------------- | -------- |
+| query           | String   | Select query to be executed on device DB.                | Yes      |
+| successCallback | Function | The function is invoked upon successful query execution. | Yes      |
+| failureCallback | Function | The function is invoked on failure.                      | Yes      |
 
 ### Return Type
 
@@ -44,18 +39,17 @@ void
 ### Example
 
 {% highlight voltMx %}function successCallback(response) {
-    //response contains records returned from device db for query executed.
+//response contains records returned from device db for query executed.
 }
 
 function failureCallback(error) {
-    voltmx.print("executeSelectQuery failed with error:" + error.code);
+voltmx.print("executeSelectQuery failed with error:" + error.code);
 }
-var query = "Select * from Employee where EmployeeID=5";
+var query = "Select \* from Employee where EmployeeID=5";
 VMXFoundry.OfflineObjects.executeSelectQuery(query, successCallback, failureCallback);
 {% endhighlight %}
 
-Android (Java)
---------------
+## Android (Java)
 
 ### Signature
 
@@ -64,11 +58,10 @@ Android (Java)
 
 ### Parameters
 
-  
-| Parameter | Type | Description | Required |
-| --- | --- | --- | --- |
-| query | String | Select query to be executed on device DB. | Yes |
-| callback | VMXCallback | The application must implement **onSuccess** and **onFailure** methods of VMXCallback interface. | Yes |
+| Parameter | Type        | Description                                                                                      | Required |
+| --------- | ----------- | ------------------------------------------------------------------------------------------------ | -------- |
+| query     | String      | Select query to be executed on device DB.                                                        | Yes      |
+| callback  | VMXCallback | The application must implement **onSuccess** and **onFailure** methods of VMXCallback interface. | Yes      |
 
 ### Return Type
 
@@ -78,38 +71,36 @@ void
 
 {% highlight voltMx %}VoltMXClient sdk = new VoltMXClient();
 IVoltMXApplicationSync appSync = sdk.getOfflineObjects();
-String query = "Select * from Employee where EmployeeID=5";
+String query = "Select \* from Employee where EmployeeID=5";
 appSync.executeSelectQuery(query, new VMXCallback() {
-    @Override
-    public void onSuccess(Object object) {
-        //response contains records returned from device db for query executed.
-    }
-    @Override
-    public void onFailure(Object error) {
-        OfflineObjectsException e = (OfflineObjectsException) error;
-        Log.d("executeSelectQuery", "executeSelectQuery failed with error:" + e.getMessage() + "callstack: " + e.getStackTrace());
-    }
+@Override
+public void onSuccess(Object object) {
+//response contains records returned from device db for query executed.
+}
+@Override
+public void onFailure(Object error) {
+OfflineObjectsException e = (OfflineObjectsException) error;
+Log.d("executeSelectQuery", "executeSelectQuery failed with error:" + e.getMessage() + "callstack: " + e.getStackTrace());
+}
 });
 {% endhighlight %}
 
-iOS (Objective C)
------------------
+## iOS (Objective C)
 
 ### Signature
 
-{% highlight voltMx %}(void) <OfflineObjects>.executeSelectQuery:(NSString *)query
-			onSuccess:(VMXSuccessCompletionHandler)onSuccess
-			onFailure:(VMXFailureCompletionHandler)onFailure
+{% highlight voltMx %}(void) <OfflineObjects>.executeSelectQuery:(NSString \*)query
+onSuccess:(VMXSuccessCompletionHandler)onSuccess
+onFailure:(VMXFailureCompletionHandler)onFailure
 {% endhighlight %}
 
 ### Parameters
 
-  
-| Parameter | Type | Description | Required |
-| --- | --- | --- | --- |
-| query | NSString\* | Select the query to be executed on device DB. | Yes |
-| onSuccess | VMXSuccessCompletionHandler | The function is invoked on successful query execution. | Yes |
-| onFailure | VMXFailureCompletionHandler | The function is invoked on failure. | Yes |
+| Parameter | Type                        | Description                                            | Required |
+| --------- | --------------------------- | ------------------------------------------------------ | -------- |
+| query     | NSString\*                  | Select the query to be executed on device DB.          | Yes      |
+| onSuccess | VMXSuccessCompletionHandler | The function is invoked on successful query execution. | Yes      |
+| onFailure | VMXFailureCompletionHandler | The function is invoked on failure.                    | Yes      |
 
 ### Return Type
 
@@ -117,18 +108,18 @@ void
 
 ### Example
 
-{% highlight voltMx %}VMXClient * sdk = [VMXClient sharedClient];
-OfflineObjects * applicationSync = [sdk getOfflineObjects];
-NSString * query = @"Select * from Employee where EmployeeID=5"
+{% highlight voltMx %}VMXClient _ sdk = [VMXClient sharedClient];
+OfflineObjects _ applicationSync = [sdk getOfflineObjects];
+NSString _ query = @"Select _ from Employee where EmployeeID=5"
 VMXSuccessCompletionHandler onSuccess = ^ void(id object) {
-    NSLog(@"executeSelectQuery successful");
+NSLog(@"executeSelectQuery successful");
 };
 
 VMXFailureCompletionHandler onFailure = ^ void(id object) {
-    NSLog(@"executeSelectQuery failed");
+NSLog(@"executeSelectQuery failed");
 };
 [applicationSync executeSelectQuery: query
-    onSuccess: onSuccess
-    onFailure: onFailure
+onSuccess: onSuccess
+onFailure: onFailure
 ];
 {% endhighlight %}

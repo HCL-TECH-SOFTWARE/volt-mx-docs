@@ -336,8 +336,7 @@ Upgrade Issue: FoundryAdminAdapterTest Fails with JWT error
         Now you can execute the aforementioned services successfully.
         
 
-Hostname/Port changes for Tomcat Application Server
----------------------------------------------------
+<h2 id="hostname-port-changes-for-tomcat-application-server">Hostname/Port changes for Tomcat Application Server</h2>
 
 Volt MX  Foundry On-Premises Installer provides a script to change the Hostname or Port of the installed Volt MX Foundry instance. In your installed Tomcat Application Server, you must also perform the following changes:
 
@@ -355,8 +354,7 @@ In `//tomcat/webapps/accounts/WEB-INF/classes/accounts.properties`, replace the 
 *   `VOLTMX_INTEGRATION_SERVICE_PORT=`
 *   `VOLTMX_MESSAGING_SERVICE_PORT=`
 
-Hostname/Port changes for JBoss Application Server
---------------------------------------------------
+<h2 id="hostname-port-changes-for-jboss-application-server">Hostname/Port changes for JBoss Application Server</h2>
 
 Volt MX  Foundry On-Premises Installer provides a script to change the Hostname or Port of the installed Volt MX Foundry instance. The script can be found in the installation folder. In your installed JBoss Application Server, you must follow the instructions in the script and also perform the following steps:
 

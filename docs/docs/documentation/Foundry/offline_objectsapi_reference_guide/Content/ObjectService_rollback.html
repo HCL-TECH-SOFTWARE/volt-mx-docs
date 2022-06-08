@@ -238,22 +238,14 @@
     
 
 <p>The <strong>&lt;objectService&gt;.rollback</strong> API rolls back all changes of all objects of an object service to its previous sync state.</p>
-      <h2 id="volt-mx--iris-javascript">
+      <h2 id="volt-mx-iris-javascript">
         
         
-          <a href="#volt-mx--iris-javascript" class="anchor-heading" aria-labelledby="volt-mx--iris-javascript"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Volt MX  Iris (JavaScript)
+          <a href="#volt-mx-iris-javascript" class="anchor-heading" aria-labelledby="volt-mx-iris-javascript"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Volt MX Iris (JavaScript)
         
         
       </h2>
     
-
-<blockquote>
-  <p><strong>Note:</strong></p>
-  <ul>
-    <li>Supported for iOS and Android channels from V8 SP2 onwards.</li>
-    <li>Supported for all channels from V8 SP4 onwards.</li>
-  </ul>
-</blockquote>
       <h3 id="signature">
         
         
@@ -296,12 +288,12 @@
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">var orgObjectService = new voltmx.sdk.VMXObjSvc("Organization");
 
 function successCallback(result) {
-    //result contains boolean true
-    voltmx.print("ObjectService level rollback successful")
+//result contains boolean true
+voltmx.print("ObjectService level rollback successful")
 }
 
 function failureCallback(error) {
-    voltmx.print("ObjectService rollback failed with error: " + JSON.stringify(error));
+voltmx.print("ObjectService rollback failed with error: " + JSON.stringify(error));
 }
 
 orgObjectService.rollback(successCallback, failureCallback);</code></pre></figure>
@@ -355,7 +347,7 @@ orgObjectService.rollback(successCallback, failureCallback);</code></pre></figur
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">VMXObjSvc orgObjectService = new VMXObjSvc("Organization");
 
 try {
-    orgObjectService.rollback(new VMXCallback() {
+orgObjectService.rollback(new VMXCallback() {
 
         @Override
         public void onSuccess(Object object) {
@@ -368,8 +360,9 @@ try {
             Log.e("ObjectServiceSync", "ObjectService rollback failed with error: " + e.getMessage());
         }
     });
+
 } catch (Exception e) {
-    Log.e("ObjectServiceSync", "ObjectService rollback failed with error:" + e.getMessage());
+Log.e("ObjectServiceSync", "ObjectService rollback failed with error:" + e.getMessage());
 }</code></pre></figure>
       <h2 id="ios-objective-c">
         
@@ -388,8 +381,8 @@ try {
       </h3>
     
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">void &lt;VMXObjSvc&gt;   
-rollback:(VMXSuccessCompletionHandler)onSuccess       
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">void &lt;VMXObjSvc&gt;  
+rollback:(VMXSuccessCompletionHandler)onSuccess  
 onFailure:(VMXFailureCompletionHandler)onFailure</code></pre></figure>
       <h3 id="parameters-2">
         
@@ -420,18 +413,18 @@ onFailure:(VMXFailureCompletionHandler)onFailure</code></pre></figure>
       </h3>
     
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">VMXObjSvc * orgObjectService = [
-    [VMXObjSvc alloc] initWithName: @"Organization"
-    error: &amp; ;error
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">VMXObjSvc \* orgObjectService = [
+[VMXObjSvc alloc] initWithName: @"Organization"
+error: &amp; ;error
 ];
 
 [orgObjectService rollback: ^ (id object) {
-        NSLog(@"Object service rollback successful");
-    }
-    onFailure: ^ (id object) {
-        OfflineObjectsError * error = (OfflineObjectsError) object;
-        NSLog(@"Rollback failed with error: %@", [error.userInfo localizedDescription]);
-    }
+NSLog(@"Object service rollback successful");
+}
+onFailure: ^ (id object) {
+OfflineObjectsError \* error = (OfflineObjectsError) object;
+NSLog(@"Rollback failed with error: %@", [error.userInfo localizedDescription]);
+}
 ];</code></pre></figure>
 
         

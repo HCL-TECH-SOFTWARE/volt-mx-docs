@@ -10,13 +10,13 @@ You are here: Custom Metrics APIs
 Custom Metrics APIs for Volt MX Server
 ======================================
 
-This section contains Javadoc information about classes. Class define the API required for sending custom metrics from Volt MX Server. These classes are as follows:
+This section contains Javadoc information about classes. Classes define the API required for sending custom metrics from Volt MX Server. These classes are as follows:
 
-*   [com.hcl.voltmx.middleware.metrics.VoltMXCustomMetricsDataSet](#com-hcl-middleware-metrics-voltmxcustommetricsdataset)
-*   [com.hcl.voltmx.middleware.metrics.VoltMXCustomMetrics](#com-hcl-middleware-metrics-voltmxcustommetrics)
+*   [com.hcl.voltmx.middleware.metrics.VoltMXCustomMetricsDataSet](#comhclvoltmxmiddlewaremetricsvoltmxcustommetricsdataset)
+*   [com.hcl.voltmx.middleware.metrics.VoltMXCustomMetrics](#comhclvoltmxmiddlewaremetricsvoltmxcustommetrics)
 *   [MetricsException](#metricsexception)
 
-com.hcl.voltmx.middleware.metrics.VoltMXCustomMetricsDataSet
+### com.hcl.voltmx.middleware.metrics.VoltMXCustomMetricsDataSet
 --------------------------------------------------------
 
 The **com.hcl.voltmx.middleware.metrics.VoltMXCustomMetricsDataSet** class contains methods required for setting custom metrics. To enable custom metrics from server, the following methods are available.
@@ -26,9 +26,6 @@ The **com.hcl.voltmx.middleware.metrics.VoltMXCustomMetricsDataSet** class conta
 *   [setMetricsLong](#setmetricslong)
 *   [setMetricsDouble](#setmetricsdouble)
 *   [setMetricsDate](#setmetricsdate)
-*   [setMetricsDate](#setmetricsdate)
-*   [setMetricsDate](#setmetricsdate)
-*   [setMetricsTimestamp](#setmetricstimestamp)
 *   [setMetricsTimestamp](#setmetricstimestamp)
 *   [getMetricsMap](#getmetricsmap)
 *   [get](#get)
@@ -379,7 +376,7 @@ toString in class Object
 
 None
 
-com.hcl.voltmx.middleware.metrics.VoltMXCustomMetrics
+### com.hcl.voltmx.middleware.metrics.VoltMXCustomMetrics
 -------------------------------------------------
 
 The **com.hcl.voltmx.middleware.metrics.VoltMXCustomMetrics** class contains methods required for adding and getting customMetrics. These methods can be added to Preprocessor and PostProcessor class by the App developer to send custom metrics. Custom metrics is converted into a JSON string before sending it to the back end for processing.

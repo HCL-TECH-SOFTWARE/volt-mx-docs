@@ -22,12 +22,12 @@ The Background agent API uses the `voltmx.backgroundtasks Namespace` and the fol
   
 | Function | Description |
 | --- | --- |
-| [voltmx.backgrondtasks.getTaskDetails](voltmx.background_functions.html#getTaskDetails) | Returns the task details of already registered background task. |
+| [voltmx.backgroundtasks.getTaskDetails](voltmx.background_functions.html#getTaskDetails) | Returns the task details of already registered background task. |
 | [voltmx.backgroundtasks.startTask](voltmx.background_functions.html#startTask) | Registers a scheduled action with the Operating System. |
 | [voltmx.backgroundtasks.stopTask](voltmx.background_functions.html#stopTask) | Unregisters the already registered scheduled action with the Operating System. |
 
  
 
-To begin a background task and set the success and failure callbacks, use the [voltmx.backgroundtasks.startTask](voltmx.background_functions.html#startTask) function. A success message appears when the appyou begins a task successfully. If the task fails to begin, an error message appears. After the background task begins, the app can retrieve the details of the task by using the [voltmx.backgrondtasks.getTaskDetails](voltmx.background_functions.html#getTaskDetails) function. To terminate a background task, use the [voltmx.backgroundtasks.stopTask](voltmx.background_functions.html#stopTask) function.
+To begin a background task and set the success and failure callbacks, use the [voltmx.backgroundtasks.startTask](voltmx.background_functions.html#startTask) function. A success message appears when the app begins a task successfully. If the task fails to begin, an error message appears. After the background task begins, the app can retrieve the details of the task by using the [voltmx.backgroundtasks.getTaskDetails](voltmx.background_functions.html#getTaskDetails) function. To terminate a background task, use the [voltmx.backgroundtasks.stopTask](voltmx.background_functions.html#stopTask) function.
 
 ![](resources/prettify/onload.png)

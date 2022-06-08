@@ -72,125 +72,101 @@ This overview provides the how-tos that demonstrate the use of the Beacon API in
 *   [Determining the Proximity of a Beacon Using Ranging](#determining-the-proximity-of-a-beacon-using-ranging)
 *   [Turning an iOS Device Into an iBeacon](#turning-an-ios-device-into-an-ibeacon)
 
-Determining the Availability of Region Monitoring
--------------------------------------------------
-
-Before monitoring a Beacon Region on a device, the developer should check for the availability of the region monitoring and the authorization status.To determine the availability, follow these steps:
-
-1.  Check the availability of the [Beacon Region](com.voltmx.beaconregion.html) Monitoring.
-    
-    The [isMonitoringAvailableForBeaconRegions](beaconmanager_methods.html#isMonitor) method helps determine whether a device supports Beacon Region Monitoring. If the method returns false, the application cannot use Beacon Region Monitoring. If the method returns true, the developer must check the authorization status of the Beacon Region Monitoring.
-    
-    {% highlight voltMx %}if (beaconManager.isMonitoringAvailableForBeaconRegions()) {
-         voltmx.print("Monitoring is available");
-         // Check for authorization status
-    }
-    {% endhighlight %}
-2.  Check the [Beacon Region](com.voltmx.beaconregion.html) Monitoring Authorization Status.
-    
-    The [authorizationStatus](beaconmanager_methods.html#authoriz) method of [BeaconManager](beacon_manager.html#beaconmanager-object) object determines whether the application is currently authorized to use iOS location services for monitoring the beacons. If the authorization status is `BeaconManagerAuthorizationStatusAuthorized`, the application will receive boundary-crossing notifications for any region it is monitoring. If the authorization status is any other value, the application does not receive those notifications.
-    
-    If the application is not authorized to use Beacon Region Monitoring, it can still register Beacon Regions for later use. If the user grants authorization to the application, monitoring for those regions will begin and will generate subsequent boundary-crossing notifications.
-    
-    {% highlight voltMx %}if (beaconManager.authorizationStatus() == "BeaconManagerAuthorizationStatusAuthorized") {
+<h2>Determining the Availability of Region Monitoring</h2>
+<p>Before monitoring a Beacon Region on a device, the developer should check for the availability of the region monitoring and the authorization status.To determine the availability, follow these steps:</p>
+<ol>
+<li>
+<p>Check the availability of the <a href="com.voltmx.beaconregion.html">Beacon Region</a> Monitoring.</p>
+<p>The <a href="beaconmanager_methods.html#isMonitor">isMonitoringAvailableForBeaconRegions</a> method helps determine whether a device supports Beacon Region Monitoring. If the method returns false, the application cannot use Beacon Region Monitoring. If the method returns true, the developer must check the authorization status of the Beacon Region Monitoring.</p>
+<pre><code style="display:block; background-color:#eee;">if (beaconManager.isMonitoringAvailableForBeaconRegions()) {
+voltmx.print("Monitoring is available");
+// Check for authorization status
+}</code></pre>
+</li>
+<li>
+<p>Check the <a href="com.voltmx.beaconregion.html">Beacon Region</a> Monitoring Authorization Status.</p>
+<p>The <a href="beaconmanager_methods.html#authoriz">authorizationStatus</a> method of <a href="beacon_manager.html#beaconmanager-object">BeaconManager</a> object determines whether the application is currently authorized to use iOS location services for monitoring the beacons. If the authorization status is <code>BeaconManagerAuthorizationStatusAuthorized</code>, the application will receive boundary-crossing notifications for any region it is monitoring. If the authorization status is any other value, the application does not receive those notifications.</p>
+<p>If the application is not authorized to use Beacon Region Monitoring, it can still register Beacon Regions for later use. If the user grants authorization to the application, monitoring for those regions will begin and will generate subsequent boundary-crossing notifications.</p>
+<pre><code style="display:block; background-color:#eee;">if (beaconManager.authorizationStatus() == "BeaconManagerAuthorizationStatusAuthorized") {
         voltmx.print("Authorized to use location services");
-    }
-    {% endhighlight %}
-    
-    You can use [BeaconManager](beacon_manager.html#beaconmanager-object)’s `authorizationStatusChanged` callback to detect changes in authorization status to the application.
-    
-    Refer to the [Apple’s Location and Maps Programming Guide](https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/LocationAwarenessPG/Introduction/Introduction.html) for more information.
-    
-
-Monitoring Beacon Regions
--------------------------
-
-When a Beacon Region is monitored, respective callbacks are fired when the device crosses the boundary of the region. You can define a Beacon Region using the [BeaconRegion](beacon_manager.html) class with proximityUUID, major, minor and identifier methods. The identifier is required and provides a way to refer to a particular beacon in your code. To register a Beacon Region for monitoring, call the [startMonitoringBeaconRegion](beaconmanager_methods.html#startMon) method of the [BeaconManager](beacon_manager.html#beaconmanager-object) object.
-
-To monitoring Beacon Regions, follow these steps:
-
-1.  Create a [Beacon Region](com.voltmx.beaconregion.html) object with beacon identifying information.
-    
-    {% highlight voltMx %}var aBeaconRegion = new com.voltmx.BeaconRegion(aProximityUUID, aMajor, aMinor, anIdentifier);
-    {% endhighlight %}
-2.  Create a Beacon Manager object with event callback functions.
-    
-    {% highlight voltMx %}function monitoringCallback(beaconRegion, state) {}
+}</code></pre>
+<p>You can use <a href="beacon_manager.html#beaconmanager-object">BeaconManager’s</a> authorizationStatusChanged callback to detect changes in authorization status to the application.</p>
+<p>Refer to the <a href="https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/LocationAwarenessPG/Introduction/Introduction.html">Apple’s Location and Maps Programming Guide</a> for more information.</p>
+</li>
+</ol>
+<h2>Monitoring Beacon Regions</h2>
+<p>When a Beacon Region is monitored, respective callbacks are fired when the device crosses the boundary of the region. You can define a <a href="beacon_manager.html">Beacon Region</a> using the BeaconRegion class with proximityUUID, major, minor and identifier methods. The identifier is required and provides a way to refer to a particular beacon in your code. To register a Beacon Region for monitoring, call the <a href="beaconmanager_methods.html#startMon">startMonitoringBeaconRegion</a> method of the <a href="beacon_manager.html#beaconmanager-object">BeaconManager</a> object.</p>
+<p>To monitoring Beacon Regions, follow these steps:</p>
+<ol>
+<li>
+<p>Create a <a href="com.voltmx.beaconregion.html">Beacon Region</a> object with beacon identifying information.</p>
+<pre><code style="display:block; background-color:#eee;">var aBeaconRegion = new com.voltmx.BeaconRegion(aProximityUUID, aMajor, aMinor, anIdentifier);</code></pre>
+</li>
+<li>
+<p>Create a Beacon Manager object with event callback functions.</p>
+<pre><code style="display:block; background-color:#eee;">function monitoringCallback(beaconRegion, state) {}
     
     function rangingCallback(beaconRegion, beacons) {}
     
     function errorCallback(beaconManagerError, errorName, errorDictionary, beaconRegion) {}
     var aBeaconManager = new com.voltmx.BeaconManager(monitoringCallback, rangingCallback, errorCallback);
-    {% endhighlight %}
-3.  Start monitoring the beacon region by calling the [startMonitoringBeaconRegion](beaconmanager_methods.html#startMon) method of the BeaconManager object.
-    
-    {% highlight voltMx %}aBeaconManager.startMonitoringBeaconRegion(aBeaconRegion);
-    {% endhighlight %}
-
-Handling Boundary-Crossing Events
----------------------------------
-
-If the device enters or exits a Beacon Region, you will be notified through the `monitoringCallback` of BeaconManager object. A developer can postpone these notifications until the user turns on the device’s display by calling setNotifyEntryStateOnDisplay with true.
-
-To handle boundary-crossing events, follow these steps:
-
-1.  Define a monitoring callback.
-    
-    A monitoring callback should accept two arguments, [BeaconRegion](com.voltmx.beaconregion.html) object and Device State, of the Beacon Region. The monitoring callback is called on detection of any boundary-crossing event.
-    
-    {% highlight voltMx %}function monitoringCallback(beaconRegion, beaconRegionState) {
+</code></pre>
+</li>
+<li>
+<p>Start monitoring the beacon region by calling the <a href="beaconmanager_methods.html#startMon">startMonitoringBeaconRegion</a> method of the BeaconManager object.</p>
+<pre><code style="display:block; background-color:#eee;">aBeaconManager.startMonitoringBeaconRegion(aBeaconRegion);</code></pre>
+</li>
+</ol>
+<h2>Handling Boundary-Crossing Events</h2>
+<p>If the device enters or exits a Beacon Region, you will be notified through the <code>monitoringCallback</code> of BeaconManager object. A developer can postpone these notifications until the user turns on the device’s display by calling setNotifyEntryStateOnDisplay with true.</p>
+<p>To handle boundary-crossing events, follow these steps:</p>
+<ol>
+<li>
+<p>Define a monitoring callback.</p>
+<p>A monitoring callback should accept two arguments, <a href="com.voltmx.beaconregion.html">BeaconRegion</a> object and Device State, of the Beacon Region. The monitoring callback is called on detection of any boundary-crossing event.</p>
+<pre><code style="display:block; background-color:#eee;">function monitoringCallback(beaconRegion, beaconRegionState) {
     ...
-    }
-    {% endhighlight %}
-2.  Handle events.
-    
-    If the device enters a Beacon Region, `beaconRegionState` will be `BeaconRegionStateInside`.
-    
-    If the device exits a Beacon Region, `beaconRegionState` will be `BeaconRegionStateOutside`.
-    
-    {% highlight voltMx %}function monitoringCallback(beaconRegion, beaconRegionState) {
+}</code></pre>
+</li>
+<li>
+<p>Handle events.</p>
+<p>If the device enters a Beacon Region, <code>beaconRegionState</code> will be <code>BeaconRegionStateInside.</code></p>
+<p>If the device exits a Beacon Region, <code>beaconRegionState</code> will be <code>BeaconRegionStateOutside.</code></p>
+<pre><code style="display:block; background-color:#eee;">function monitoringCallback(beaconRegion, beaconRegionState) {
         if (beaconRegionState == "BeaconRegionStateInside") {
             // Device is inside the beacon region -- start ranging beacons
         }
-    }
-    {% endhighlight %}
-
-Determining the Proximity of a Beacon Using Ranging
----------------------------------------------------
-
-A [Beacon Region](com.voltmx.beaconregion.html) can be ranged to determine the proximity of the beacon from the device using the `startRangingBeaconsRegion` method of the [BeaconManager](beacon_manager.html) object.
-
-You should call the [isRangingAvailableForBeaconRegions](beaconmanager_methods.html#isRangin) method of the [BeaconManager](beacon_manager.html) before attempting to range beacons.
-
-Whenever the beacons come within range or go out of range, the [BeaconManager](beacon_manager.html) object will notify you through rangingCallback with an array of [Beacon](beacon.html) objects. The beacon objects are detected in the order of closest to farthest. Use the [getProximity](beaconmethods.html#getProxi) property to determine relative distance of the beacon to the device. Determine the beacon identifying information using other properties of the beacon object.
-
-To determine proximity, follow these steps:
-
-1.  Determining the availability of beacon ranging.
-    
-    The [isRangingAvailableForBeaconRegions](beaconmanager_methods.html#isRangin) method determines whether the current device supports beacon region ranging. If the method returns false, the application cannot use beacon region ranging.
-    
-2.  Define ranging callback for notifications.
-    
-    Ranging callback should accept two arguments, a [beaconRegion](com.voltmx.beaconregion.html) and array beacons, which are in range.
-    
-    {% highlight voltMx %}function rangingCallback(beaconRegion, beacons) {
+}</code></pre>
+</li>
+</ol>
+<h2>Determining the Proximity of a Beacon Using Ranging</h2>
+<p>A <a href="com.voltmx.beaconregion.html">Beacon Region</a> can be ranged to determine the proximity of the beacon from the device using the <code>startRangingBeaconsRegion</code> method of the <a href="beacon_manager.html">BeaconManager</a> object.</p>
+<p>You should call the <a href="beaconmanager_methods.html#isRangin">isRangingAvailableForBeaconRegions</a> method of the <a href="beacon_manager.html">BeaconManager</a> before attempting to range beacons.</p>
+<p>Whenever the beacons come within range or go out of range, the <a href="beacon_manager.html">BeaconManager</a> object will notify you through rangingCallback with an array of <a href="beacon.html">Beacon</a> objects. The beacon objects are detected in the order of closest to farthest. Use the <a href="beaconmethods.html#getProxi">getProximity</a> property to determine relative distance of the beacon to the device. Determine the beacon identifying information using other properties of the beacon object.</p>
+<p>To determine proximity, follow these steps:</p>
+<ol>
+<li>
+<p>Determining the availability of beacon ranging.</p>
+<p>The <a href="beaconmanager_methods.html#isRangin">isRangingAvailableForBeaconRegions</a> method determines whether the current device supports beacon region ranging. If the method returns false, the application cannot use beacon region ranging.</p>
+</li>
+<li>
+<p>Define ranging callback for notifications.</p>
+<p>Ranging callback should accept two arguments, a <a href="com.voltmx.beaconregion.html">beaconRegion</a> and array beacons, which are in range.</p>
+<pre><code style="display:block; background-color:#eee;">function rangingCallback(beaconRegion, beacons) {
         // Determine the proximity of beacons to the device.
-    }
-    {% endhighlight %}
-3.  Ranging beacons in a region.
-    
-    To start ranging beacons in a beacon region, use `startRangingBeaconsInRegion` method to start ranging updates for beacons in that region.
-    
-    {% highlight voltMx %}var aBeaconRegion = new com.voltmx.BeaconRegion(aProximityUUID, aMajor, aMinor, anIdentifier);
+}</code></pre>
+</li>
+<li>
+<p>Ranging beacons in a region.</p>
+<p>To start ranging beacons in a beacon region, use <code>startRangingBeaconsInRegion</code> method to start ranging updates for beacons in that region.</p>
+<pre><code style="display:block; background-color:#eee;">var aBeaconRegion = new com.voltmx.BeaconRegion(aProximityUUID, aMajor, aMinor, anIdentifier);
     var aBeaconManager = new com.voltmx.BeaconManager(monitoringCallback, rangingCallback, errorCallback);
-    aBeaconManager.startRangingBeaconsInRegion(aBeaconRegion);
-    {% endhighlight %}
-4.  Determine proximity and other properties.
-    
-    In the `rangingCallback`, the developer can determine the relative distance of the beacon from the device.
-    
-    {% highlight voltMx %}function rangingCallback(beaconRegion, beacons) {
+    aBeaconManager.startRangingBeaconsInRegion(aBeaconRegion);</code></pre>
+</li>
+<li>
+<p>Determine proximity and other properties.</p>
+<p>In the <code>rangingCallback</code>, the developer can determine the relative distance of the beacon from the device.</p>
+<pre><code style="display:block; background-color:#eee;">function rangingCallback(beaconRegion, beacons) {
         for (var beacon in beacons) {
             if (beacon.getProximity() == "BeaconProximityImmediate") {
                 // Immediate
@@ -201,42 +177,34 @@ To determine proximity, follow these steps:
                 // Far
             }
         }
-      }
-    
-    {% endhighlight %}
-
-Turning an iOS Device Into an iBeacon
--------------------------------------
-
-Any iOS device that supports sharing data using Bluetooth low energy can be used as an iBeacon. Because the application you write must run in the foreground, iBeacon support on iOS devices is intended for testing purposes and for applications that always run in the foreground, such as point-of-sale apps. For other types of iBeacon implementations, you need to acquire dedicated beacon hardware from third-party manufacturers.
-
-To turn an iOS device into an iBeacon, follow these steps:
-
-1.  Create a [Beacon Region](com.voltmx.beaconregion.html) object.
-    
-    To use your iOS device as a beacon, you first generate a 128-bit UUID that will be your Beacon Region’s proximity UUID. Open Terminal(in Mac OS) and type uuidgen on the command line. You receive a unique 128-bit value in an ASCII string that is punctuated by hyphens, as in this example.
-    
-    {% highlight voltMx %}$ uuidgen
-    
+}</code></pre>
+</li>
+</ol>
+<h2>Turning an iOS Device Into an iBeacon</h2>
+<p>Any iOS device that supports sharing data using Bluetooth low energy can be used as an iBeacon. Because the application you write must run in the foreground, iBeacon support on iOS devices is intended for testing purposes and for applications that always run in the foreground, such as point-of-sale apps. For other types of iBeacon implementations, you need to acquire dedicated beacon hardware from third-party manufacturers.</p>
+<p>To turn an iOS device into an iBeacon, follow these steps:</p>
+<ol>
+<li>
+<p>Create a <a href="com.voltmx.peripheralmanager.html">Beacon Region</a> object.</p>
+<p>To use your iOS device as a beacon, you first generate a 128-bit UUID that will be your Beacon Region’s proximity UUID. Open Terminal(in Mac OS) and type uuidgen on the command line. You receive a unique 128-bit value in an ASCII string that is punctuated by hyphens, as in this example.</p>
+<pre><code style="display:block;background-color:#eee;">$ uuidgen
     
     FBA1FFE5-7CD6-451B-8F1F-22B2AC70AA45
-    {% endhighlight %}
-    
-    Next, create a Beacon Region with the UUID you generated for the beacon’s proximity UUID, defining the major and minor values as needed. Be sure to also use a unique string identifier for the new region. This code shows how to create a new Beacon Region using the example UUID above.
-    
-    {% highlight voltMx %}var proximityUUID = "FBA1FFE5-7CD6-451B-8F1F-22B2AC70AA45";
-    var major = 10;
-    var minor = 12;
-    var identifier = "VoltMXBeaconSample";
-    var beaconRegion = new com.voltmx.BeaconRegion(proximityUUID, major, minor, identifier);
-    {% endhighlight %}
-2.  Advertise the beacon information using the [peripheral manager](com.voltmx.peripheralmanager.html).
-    
-    Now that you have created a Beacon Region, you need to advertise your beacon’s proximity UUID (and any major or minor value you specified) using the com.voltmx.PeripheralManager object.
-    
-    {% highlight voltMx %}var peripheralManager = new com.voltmx.PeripheralManager(stateUpdatedCallback, advertisingStatusCallback);
-    
-    peripheralManager.startAdvertisingWithMeasuredPower(beaconRegion, null);
-    {% endhighlight %}
+</code></pre>
+<p>Next, create a Beacon Region with the UUID you generated for the beacon’s proximity UUID, defining the major and minor values as needed. Be sure to also use a unique string identifier for the new region. This code shows how to create a new Beacon Region using the example UUID above.</p>
+<pre><code style="display:block; background-color:#eee;">var proximityUUID = "FBA1FFE5-7CD6-451B-8F1F-22B2AC70AA45";
+var major = 10;
+var minor = 12;
+var identifier = "KonyBeaconSample";
+var beaconRegion = new com.kony.BeaconRegion(proximityUUID, major, minor, identifier);</code></pre>
+</li>
+<li>
+<p>Advertise the beacon information using the <a href="com.voltmx.peripheralmanager.html">peripheral manager</a>.</p>
+<p>Now that you have created a Beacon Region, you need to advertise your beacon’s proximity UUID (and any major or minor value you specified) using the com.kony.PeripheralManager object.</p>
+<pre><code style="display:block; background-color:#eee;">var peripheralManager = new com.kony.PeripheralManager(stateUpdatedCallback, advertisingStatusCallback);
 
-![](resources/prettify/onload.png)
+peripheralManager.startAdvertisingWithMeasuredPower(beaconRegion, null);</code></pre>
+</li>
+</ol>
+
+<!-- ![](resources/prettify/onload.png) -->

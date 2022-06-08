@@ -230,7 +230,7 @@
         
           <p><a href="http://docs.voltmx.com/8_x_PDFs/voltmxfoundry/voltmx_foundry_roles_access_control_guide.pdf" title="VoltMX Foundry Roles Access Control Guide"><img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_roles_access_control_guide/Content/Resources/Images/pdf.png" alt="" /></a></p>
 
-<p>Volt MX  Foundry Console Access Control Guide: <a href="#console-access-control">Console Access Control</a> &gt; <a href="#how-to-use-access-control">How to Use Access Control</a> &gt; Use Case</p>
+<p>Volt MX Foundry Console Access Control Guide: <a href="#console-access-control">Console Access Control</a> &gt; <a href="#how-to-use-access-control">How to Use Access Control</a> &gt; Use Case</p>
       <h1 id="console-access-control">
         
         
@@ -240,7 +240,7 @@
       </h1>
     
 
-<p>Volt MX  Foundry supports access controls for Volt MX Foundry applications and services. Volt MX Foundry users who have the permission to create Volt MX Foundry apps and services can control the access to the applications and services.</p>
+<p>Volt MX Foundry supports access controls for Volt MX Foundry applications and services. Volt MX Foundry users who have the permission to create Volt MX Foundry apps and services can control the access to the applications and services.</p>
 
 <p>For example, an owner invites a new user to the Volt MX Foundry account. The new user can create a Volt MX Foundry application and services, and can then control the access by other users to the application. The role of a user determines the access the user has to applications and services, the access control the user can set, and the access control that other users can set for that user. For example, a user who has a member role can create an app and then give full access to the app to specific member users, while setting read-only access for all other member users. Users who have an owner or admin role always have full access to all Volt MX Foundry apps and services.</p>
       <h2 id="use-case">
@@ -254,56 +254,48 @@
 
 <p>The following describes a use case for access control of Volt MX Foundry applications and services. The scenarios in the use case help you understand how users can control access to applications and services. The use case also shows how the role of a user determines the level of access the user can control, and the user’s level of access that other users can control.</p>
 
-<p>Account Owner</p>
+<p><strong>Account Owner</strong></p>
 
 <ol>
-  <li>A user creates a new Volt MX Foundry account. The user who created the account is the first user and is assigned the Owner role. The user is referred to as the AccountOwner.</li>
+<li>A user creates a new Volt MX Foundry account. The user who created the account is the first user and is assigned the Owner role. The user is referred to as the Account Owner.<br />
+An owner of a Volt MX Foundry account has full access rights to all Volt MX Foundry apps that are created on the account. The owner also has permissions to perform create, retrieve, update, and delete (CRUD) operations in all the services in all the apps.</li>
+<li>The Account Owner invites AppUser1 and AppUser2 to the Volt MX Foundry account as members.<br />
+By default, AppUser1 and AppUser2 have the rights to create new apps and services, and have full access to existing apps and services.</li>
 </ol>
 
-<p>An owner of a Volt MX Foundry account has full access rights to all Volt MX Foundry apps that are created on the account. The owner also has permissions to perform create, retrieve, update, and delete (CRUD) operations in all the services in all the apps.</p>
+<p><strong>Create Applications</strong></p>
 
 <ol>
-  <li>The AccountOwner invites AppUser1 and AppUser2 to the Volt MX Foundry account as members.</li>
+<li>AppUser1 creates App A that has a Weather Service and a News Service.</li>
+<li>AppUser2 creates App B that has a GeoLocation Service and ATM Locator Service.
+<br />
+By default, the applications and services that users create have global read-write access for all users of the account.</li>
 </ol>
 
-<p>By default, AppUser1 and AppUser2 have the rights to create new apps and services, and have full access to existing apps and services.</p>
-
-<p>Create Applications</p>
+<p><strong>Control Access to Applications</strong></p>
 
 <ol>
-  <li>AppUser1 creates App A that has a Weather Service and a News Service.</li>
-  <li>AppUser2 creates App B that has a GeoLocation Service and ATM Locator Service.</li>
+<li>AppUser2 decides that he needs to protect his App B.</li>  
+<li>From the apps page, AppUser2 selects Console Access Control from the App menu.</li>  
+<li>AppUser2 removes general access for all users and adds himself as a specific access user.<br />
+AppUser3 logs in and can no longer see App B in the console. If AppUser2 had set read-only for All Users, then AppUser3 could see the application, but not modify its configuration (for example, add or remove services).
+</li>
 </ol>
 
-<p>By default, the applications and services that users create have global read-write access for all users of the account.</p>
-
-<p>Control Access to Applications</p>
+<p><strong>Control Access to Services</strong></p>
 
 <ol>
-  <li>AppUser2 decides that he needs to protect his App B.</li>
-  <li>From the apps page, AppUser2 selects Console Access Control from the App menu.</li>
-  <li>AppUser2 removes general access for all users and adds himself as a specific access user.</li>
+<li>AppUser2 decides that he needs to control access to a service in his App B from other users.<br />
+Identity, Integration and Orchestration services are shared components. AppUser3 can still go and modify any of those services that would affect the functionality of App B. If AppUser2 wants to completely lock down App B, he would also have to change the access control of all the services associated with the app.
+</li>
+<li>AppUser2 opens App A and selects Console Access Control from the Settings menu for a service.</li>  
+<li>AppUser2 adds himself as a specific-access user to the service just as he did for App B.</li>  
+<li>AppUser2 downgrades general access for all users to Read Only.<br />
+AppUser2 cannot completely remove access for all users to the service. AppUser2 can only downgrade all users from Full Access to Read Only. This is because other users have access to an app, but they do not have access to all the associated services.
+</li>
 </ol>
 
-<p>AppUser3 logs in and can no longer see App B in the console. If AppUser2 had set read-only for All Users, then AppUser3 could see the application, but not modify its configuration (for example, add or remove services).</p>
-
-<p>Control Access to Services</p>
-
-<ol>
-  <li>AppUser2 decides that he needs to control access to a service in his App B from other users.</li>
-</ol>
-
-<p>Identity, Integration and Orchestration services are shared components. AppUser3 can still go and modify any of those services that would affect the functionality of App B. If AppUser2 wants to completely lock down App B, he would also have to change the access control of all the services associated with the app.</p>
-
-<ol>
-  <li>AppUser2 opens App A and selects Console Access Control from the Settings menu for a service.</li>
-  <li>AppUser2 adds himself as a specific-access user to the service just as he did for App B.</li>
-  <li>AppUser2 downgrades general access for all users to Read Only.</li>
-</ol>
-
-<p>AppUser2 cannot completely remove access for all users to the service. AppUser2 can only downgrade all users from Full Access to Read Only. This is because other users have access to an app, but they do not have access to all the associated services.</p>
-
-<p>Full Access to App and Full Access to Service</p>
+<p><strong>Full Access to App and Full Access to Service</strong></p>
 
 <p>In the case where a user has full access to the app and full access to the service:</p>
 
@@ -312,7 +304,7 @@
   <li>The user can switch between the versions of a service, but cannot save the service or unlink the service regardless of whether the user has read only or full access to the service.</li>
 </ul>
 
-<p>Full Access to App and Read Only Access to Service</p>
+<p><strong>Full Access to App and Read Only Access to Service</strong></p>
 
 <p>In the case where a user has full access to the app and read only access to the service:</p>
 
@@ -325,7 +317,7 @@
   <li>The user can switch between the versions of the service within the app, as he is configuring the app and not the service. The user can also unlink the same service. However, the user cannot create a new version of the service or delete a version because the user does not have full access to the service.</li>
 </ul>
 
-<p>Read-Only Access to App and Full Access to Service</p>
+<p><strong>Read-Only Access to App and Full Access to Service</strong></p>
 
 <p>In the case where a user has read-only access to the app and full access to the service:</p>
 
@@ -336,7 +328,7 @@
   <li>The user cannot change the version of the service within the app.</li>
 </ul>
 
-<p>Read-Only Access to App and Read-Only Access to Service</p>
+<p><strong>Read-Only Access to App and Read-Only Access to Service</strong></p>
 
 <p>In the case where a user has read-only access to both the app and service:</p>
 
@@ -366,34 +358,37 @@
 
 <p>You can access the Apps Console Access Control page from the Applications page or from within an app.</p>
 
-<p>To set access control from the Applications page, do the following:</p>
+<p><strong>To set access control from the Applications page, do the following:</strong></p>
 
 <ol>
   <li>From Volt MX Foundry Console, click <strong>Apps</strong> to display the Applications page.</li>
-  <li>In the <strong>Applications</strong> page, hover your cursor over the <strong>App menu</strong> button of an app.</li>
+  <li>
+    <p>In the <strong>Applications</strong> page, hover your cursor over the <strong>App menu</strong> button of an app.</p>
+
+    <p><img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_roles_access_control_guide/Content/Resources/Images/AccessControl_appPageMenu_211x230.png" alt="" /></p>
+  </li>
+  <li>
+    <p>Click <strong>Console Access Control</strong>.</p>
+
+    <p>The Apps Console Access Control page appears.</p>
+  </li>
 </ol>
 
-<p><img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_roles_access_control_guide/Content/Resources/Images/AccessControl_appPageMenu_211x230.png" alt="" /></p>
-
-<ol>
-  <li>Click <strong>Console Access Control</strong>.</li>
-</ol>
-
-<p>The Apps Console Access Control page appears.</p>
-
-<p>To set access control from an app, do the following:</p>
+<p><strong>To set access control from an app, do the following:</strong></p>
 
 <ol>
   <li>From Volt MX Foundry Console, click <strong>Apps</strong> to display the Applications page.</li>
   <li>In the <strong>Applications</strong> page, select an app.</li>
-  <li>Click the Console Access Control button (the lock icon).</li>
+  <li>
+    <p>Click the Console Access Control button (the lock icon).</p>
+
+    <p>The Apps Console Access Control page appears.</p>
+
+    <p><img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_roles_access_control_guide/Content/Resources/Images/AppsConsoleAccessControlpage_594x267.png" alt="" /></p>
+  </li>
 </ol>
 
-<p>The Apps Console Access Control page appears.</p>
-
-<p><img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_roles_access_control_guide/Content/Resources/Images/AppsConsoleAccessControlpage_594x267.png" alt="" /></p>
-
-<p>To set general access to an app for all users, do the following:</p>
+<p><strong>To set general access to an app for all users, do the following:</strong></p>
 
 <ul>
   <li>In the <strong>General Access</strong> area, for <strong>All Users</strong>, select an access control option.</li>
@@ -403,65 +398,61 @@
 
 <p>Before you select No Access on the General Access level, add yourself or another user on the Specific Access level.</p>
 
-<p>To set specific access to users for an app, do the following:</p>
+<p><strong>To set specific access to users for an app, do the following:</strong></p>
 
 <ol>
-  <li>In the <strong>Specific Access</strong> area, click <strong>Add</strong>.</li>
+  <li>
+    <p>In the <strong>Specific Access</strong> area, click <strong>Add</strong>.</p>
+
+    <p>The Select User windows appears. All the owners and admins might not be shown in the list of Specific Access users.</p>
+  </li>
+  <li>
+    <p>Select the users that you want to add to the Specific Access list.</p>
+
+    <p>The Select User window appears.</p>
+
+    <p><img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_roles_access_control_guide/Content/Resources/Images/AccessControl_AddSelectUser_580x387.png" alt="" /></p>
+  </li>
+  <li>
+    <p>Click <strong>Add</strong>.</p>
+
+    <p>The users that you selected are added to the Specific Access list.</p>
+  </li>
+  <li>
+    <p>Select the access control option.</p>
+
+    <p>Note that the read-only option for a user is disabled if the general access permission is set to full access. You cannot set access control for specific access at a setting lower than the general access setting.</p>
+  </li>
+  <li>
+    <p>Click <strong>Save</strong>.</p>
+
+    <p>If a member user gives a second member user Full Access permission for an app, both member users have the same permissions for the app.</p>
+  </li>
 </ol>
 
-<p>The Select User windows appears. All the owners and admins might not be shown in the list of Specific Access users.</p>
-
-<ol>
-  <li>Select the users that you want to add to the Specific Access list.</li>
-</ol>
-
-<p>The Select User window appears.</p>
-
-<p><img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_roles_access_control_guide/Content/Resources/Images/AccessControl_AddSelectUser_580x387.png" alt="" /></p>
-
-<ol>
-  <li>Click <strong>Add</strong>.</li>
-</ol>
-
-<p>The users that you selected are added to the Specific Access list.</p>
-
-<ol>
-  <li>Select the access control option.</li>
-</ol>
-
-<p>Note that the read-only option for a user is disabled if the general access permission is set to full access. You cannot set access control for specific access at a setting lower than the general access setting.</p>
-
-<ol>
-  <li>Click <strong>Save</strong>.</li>
-</ol>
-
-<p>If a member user gives a second member user Full Access permission for an app, both member users have the same permissions for the app.</p>
-
-<p>To remove specific access to users for an app, do the following:</p>
+<p><strong>To remove specific access to users for an app, do the following:</strong></p>
 
 <ol>
   <li>In Specific Access, select the users that you want to remove.</li>
-  <li>Click the <strong>Delete</strong> button.</li>
+  <li>
+    <p>Click the <strong>Delete</strong> button.</p>
+
+    <p>You can hover your cursor over a user, and then click the Delete icon.</p>
+  </li>
 </ol>
 
-<p>You can hover your cursor over a user, and then click the Delete icon.</p>
-
-<p>What Full Access Permission for an App Means</p>
+<p><strong>What Full Access Permission for an App Means</strong></p>
 
 <ul>
   <li>A user with full access can link or unlink any services to the app. The user can publish the app if the user has permissions to publish for that environment.</li>
   <li>A user with full access has permission to configure and change the control access list.</li>
 </ul>
 
-<p>What Read-Only Permission for an App Means</p>
+<p><strong>What Read-Only Permission for an App Means</strong></p>
 
 <ul>
-  <li>
-    <p>A user with read-only access cannot link or unlink any services to the app.</p>
-  </li>
-  <li>
-    <p>A user with read-only access cannot configure or change the control access list for the app.</p>
-  </li>
+  <li>A user with read-only access cannot link or unlink any services to the app.</li>
+  <li>A user with read-only access cannot configure or change the control access list for the app.</li>
 </ul>
       <h3 id="how-to-use-access-control-for-services">
         
@@ -482,60 +473,64 @@
   <li>From Volt MX Foundry Console, click <strong>Apps</strong> to display the Applications page.</li>
   <li>In the <strong>Applications</strong> page, open an app.</li>
   <li>In the <strong>Configure Services</strong> tab, click the Integration, Orchestration, or Objects service tab.</li>
-  <li>Hover your cursor over the required service, click the <strong>Settings</strong> menu. Click Console Access Control.</li>
+  <li>
+    <p>Hover your cursor over the required service, click the <strong>Settings</strong> menu. Click Console Access Control.</p>
+
+    <p>The Services Console Access Control page appears.</p>
+
+    <p><img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_roles_access_control_guide/Content/Resources/Images/ServicesConsoleAccessControlpage_583x280.png" alt="" /></p>
+  </li>
 </ol>
 
-<p>The Services Console Access Control page appears.</p>
-
-<p><img src="/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_roles_access_control_guide/Content/Resources/Images/ServicesConsoleAccessControlpage_583x280.png" alt="" /></p>
-
-<p>To set access control for a service from API Management, do the following:</p>
+<p><strong>To set access control for a service from API Management, do the following:</strong></p>
 
 <ol>
   <li>From Volt MX Foundry Console, click <strong>Apps</strong> to display the Applications page.</li>
   <li>In the <strong>Applications</strong> page, click <strong>API Management</strong>.</li>
   <li>Click the Integration or Orchestration service tab.</li>
-  <li>Hover your cursor over the required service, click the <strong>Settings</strong> menu.Click <strong>Console Access Control</strong>.</li>
+  <li>
+    <p>Hover your cursor over the required service, click the <strong>Settings</strong> menu.Click <strong>Console Access Control</strong>.</p>
+
+    <p>The Services Console Access Control page appears.</p>
+  </li>
 </ol>
 
-<p>The Services Console Access Control page appears.</p>
-
-<p>To set general access to a service for all users, do the following:</p>
+<p><strong>To set general access to a service for all users, do the following:</strong></p>
 
 <ul>
-  <li>In the <strong>General Access</strong> area, for <strong>All Users</strong>, select an access control option.</li>
+  <li>
+    <p>In the <strong>General Access</strong> area, for <strong>All Users</strong>, select an access control option.</p>
+
+    <p>By default, all users have full access rights to create and access services. Before setting the general access to read-only for all users, give specific access to at least one user. For example, UserA adds UserB to the Specific Access user list and gives UserB full access. Then UserA sets Read Only for General Access. UserB now has full access to the weather services but another member user, User3, has read-only access.</p>
+  </li>
 </ul>
 
-<p>By default, all users have full access rights to create and access services. Before setting the general access to read-only for all users, give specific access to at least one user. For example, UserA adds UserB to the Specific Access user list and gives UserB full access. Then UserA sets Read Only for General Access. UserB now has full access to the weather services but another member user, User3, has read-only access.</p>
-
-<p>To give specific access to users for an app, do the following:</p>
+<p><strong>To give specific access to users for an app, do the following:</strong></p>
 
 <ol>
-  <li>In the <strong>Specific Access</strong> area, click <strong>Add</strong>.</li>
-</ol>
+  <li>
+    <p>In the <strong>Specific Access</strong> area, click <strong>Add</strong>.</p>
 
-<p>The Select User windows appears. All the owners and admins might not be shown in the list of Specific Access users.</p>
+    <p>The Select User windows appears. All the owners and admins might not be shown in the list of Specific Access users.</p>
+  </li>
+  <li>
+    <p>Select the users that you want to add to the Specific Access list.</p>
 
-<ol>
-  <li>Select the users that you want to add to the Specific Access list.</li>
-</ol>
+    <p>The Select User window appears.</p>
+  </li>
+  <li>
+    <p>Click <strong>Add</strong>.</p>
 
-<p>The Select User window appears.</p>
+    <p>The users that you selected are added to the Specific Access list.</p>
+  </li>
+  <li>
+    <p>Select the access control option.</p>
 
-<ol>
-  <li>Click <strong>Add</strong>.</li>
-</ol>
-
-<p>The users that you selected are added to the Specific Access list.</p>
-
-<ol>
-  <li>Select the access control option.</li>
-</ol>
-
-<p>Note that the read-only option for a user is disabled if the general-access permission is set to full access. You cannot set access control for specific access at a setting lower than general access setting.</p>
-
-<ol>
-  <li>Click <strong>Save</strong>.</li>
+    <p>Note that the read-only option for a user is disabled if the general-access permission is set to full access. You cannot set access control for specific access at a setting lower than general access setting.</p>
+  </li>
+  <li>
+    <p>Click <strong>Save</strong>.</p>
+  </li>
 </ol>
 
         

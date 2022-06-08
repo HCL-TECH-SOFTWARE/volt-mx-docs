@@ -45,7 +45,7 @@ On the dashboard, you can also view information about various reports that are p
 
 #### Apps
 
-The apps option provides you the high level view of all the applications currently installed in your Engagement Server. You can also install new applications from here. You will also notice that many apps have the status as **Published**. You need to make sure that applications are published so that notifications can be sent to the devices that have installed the apps.
+The apps option provides you the high level view of all the applications currently installed in your Engagement Server. You will also notice that many apps have the status as **Published**. You need to make sure that applications are published so that notifications can be sent to the devices that have installed the apps.
 
 ![](Resources/Images/apps_630x320.png)
 

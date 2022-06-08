@@ -238,10 +238,10 @@
     
 
 <p>The <strong>&lt;objectService&gt;.cancelSync</strong> function cancels an in progress object service sync operation. The operation fails if the task syncing is already finished, throws an error, or does not support the <strong>Cancel</strong> operation.</p>
-      <h2 id="volt-mx--iris-javascript">
+      <h2 id="volt-mx-iris-javascript">
         
         
-          <a href="#volt-mx--iris-javascript" class="anchor-heading" aria-labelledby="volt-mx--iris-javascript"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Volt MX  Iris (JavaScript)
+          <a href="#volt-mx-iris-javascript" class="anchor-heading" aria-labelledby="volt-mx-iris-javascript"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Volt MX Iris (JavaScript)
         
         
       </h2>
@@ -249,11 +249,11 @@
 
 <blockquote>
   <p><strong>Note:</strong></p>
-  <ul>
-    <li>Not supported for Mobile Web and Desktop Web channels.</li>
-    <li>Supported for Windows from V8 SP4 Fix Pack 12 onwards.</li>
-  </ul>
 </blockquote>
+
+<ul>
+  <li>Not supported for Mobile Web and Desktop Web channels.</li>
+</ul>
       <h3 id="signature">
         
         
@@ -332,24 +332,24 @@ syncOptions.getSyncStats = true;
 
 // Start Sync asynchronously
 syncObjectSvc.startSync(syncOptions,
-    function(res) {
-        alert("ObjectService sync successful");
-    },
-    function(err) {
-        alert("ObjectService sync failed with error: " + JSON.stringify(err));
-    },
-    function(progressCallback) {
-        alert("ObjectService sync progress event received");
-    });
+function(res) {
+alert("ObjectService sync successful");
+},
+function(err) {
+alert("ObjectService sync failed with error: " + JSON.stringify(err));
+},
+function(progressCallback) {
+alert("ObjectService sync progress event received");
+});
 
 // Now attempt to Cancel Sync// passing an empty map for options parameter
 syncObjectSvc.cancelSync({},
-    function(res) {
-        alert("ObjectService sync cancellation successful");
-    },
-    function(err) {
-        alert("ObjectService sync failed with error : " + JSON.stringify(err));
-    });</code></pre></figure>
+function(res) {
+alert("ObjectService sync cancellation successful");
+},
+function(err) {
+alert("ObjectService sync failed with error : " + JSON.stringify(err));
+});</code></pre></figure>
       <h2 id="android-java">
         
         
@@ -427,15 +427,15 @@ HashMap &lt; String, Object &gt; syncOptions = new HashMap &lt; String, Object &
 syncOptions.put("downloadBatchSize", "100");
 syncOptions.put("uploadBatchSize", "200");
 syncOptions.put("getSyncStats"
-    "true");
+"true");
 
 // Start Sync asynchronously
 syncObjectSvc.startSync(syncOptions,
-    new VMXCallback() {
-        @Override
-        public void onSuccess(Object object) {
-            Log.d("ObjectServiceSync", "ObjectService sync successful");
-        }
+new VMXCallback() {
+@Override
+public void onSuccess(Object object) {
+Log.d("ObjectServiceSync", "ObjectService sync successful");
+}
 
         @Override
         public void onFailure(Object error) {
@@ -449,15 +449,14 @@ syncObjectSvc.startSync(syncOptions,
         }
     });
 
-
 // Now attempt to Cancel Sync
 // passing an empty HashMap for options parameter
 syncObjectSvc.cancelSync(new HashMap &lt; String, Object &gt; (),
-    new VMXCallback() {
-        @Override
-        public void onSuccess(Object object) {
-            Log.d("ObjectServiceSync Cancellation", "ObjectService sync cancellation successful");
-        }
+new VMXCallback() {
+@Override
+public void onSuccess(Object object) {
+Log.d("ObjectServiceSync Cancellation", "ObjectService sync cancellation successful");
+}
 
         @Override
         public void onFailure(Object error) {
@@ -481,9 +480,9 @@ syncObjectSvc.cancelSync(new HashMap &lt; String, Object &gt; (),
       </h3>
     
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">(void)cancelSync:(NSDictionary *)options
-              onSuccess:(VMXSuccessCompletionHandler)onSuccess
-              onFailure:(VMXFailureCompletionHandler)onFailure</code></pre></figure>
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">(void)cancelSync:(NSDictionary \*)options
+onSuccess:(VMXSuccessCompletionHandler)onSuccess
+onFailure:(VMXFailureCompletionHandler)onFailure</code></pre></figure>
       <h3 id="parameters-2">
         
         
@@ -513,45 +512,45 @@ syncObjectSvc.cancelSync(new HashMap &lt; String, Object &gt; (),
       </h3>
     
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">NSError * error;
-VMXObjSvc * syncObjectSvc = [
-    [VMXObjSvc alloc] initWithName: @"Organization"
-    error: &amp; error
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">NSError _ error;
+VMXObjSvc _ syncObjectSvc = [
+[VMXObjSvc alloc] initWithName: @"Organization"
+error: &amp; error
 ];
 
 // Define Sync options
-NSMutableDictionary * syncOptions = [NSMutableDictionary new];
+NSMutableDictionary \* syncOptions = [NSMutableDictionary new];
 [syncOptions setObject: @"100"
-    forKey: @"downloadBatchSize"
+forKey: @"downloadBatchSize"
 ];
 [syncOptions setObject: @"200"
-    forKey: @"uploadBatchSize"
+forKey: @"uploadBatchSize"
 ];
 [syncOptions setObject: @"true"
-    forKey: @"getSyncStats"
+forKey: @"getSyncStats"
 ];
 
 // Start Sync asynchronously
 [syncObjectSvc startSync: syncOptions
-    onSuccess: ^ (id object) {
-        NSLog(@"ObjectService sync successful");
-    }
-    onFailure: ^ (NSError * error) {
-        NSLog(@"ObjectService sync failed with error :%@", [error description]);
-    }
-    onProgress: ^ (id object) {
-        NSLog(@"ObjectService sync progress event received");
-    }
+onSuccess: ^ (id object) {
+NSLog(@"ObjectService sync successful");
+}
+onFailure: ^ (NSError \* error) {
+NSLog(@"ObjectService sync failed with error :%@", [error description]);
+}
+onProgress: ^ (id object) {
+NSLog(@"ObjectService sync progress event received");
+}
 ];
 
 // Now attempt to Cancel Sync// passing an empty dictionary for options parameter
-NSMutableDictionary * cancelSyncOptions = [NSMutableDictionary new];
+NSMutableDictionary _ cancelSyncOptions = [NSMutableDictionary new];
 syncObjectSvc cancelSync: cancelSyncOptions
 onSuccess: ^ (id object) {
-    NSLog(@"ObjectService sync cancellation successful");
+NSLog(@"ObjectService sync cancellation successful");
 }
-onFailure: ^ (NSError * error) {
-    NSLog(@"ObjectService sync cancellation failed with error: %@", [error description]);
+onFailure: ^ (NSError _ error) {
+NSLog(@"ObjectService sync cancellation failed with error: %@", [error description]);
 }];</code></pre></figure>
 
         

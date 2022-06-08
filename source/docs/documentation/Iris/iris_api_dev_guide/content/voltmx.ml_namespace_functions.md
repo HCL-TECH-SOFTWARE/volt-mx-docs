@@ -8,7 +8,7 @@ category: "iris_api_dev_guide"
 voltmx.ml Namespace
 =================
 
-The koy.ml Namespace provides your app an ability to classify images taken from the camera, a file or the device gallery.
+The voltmx.ml Namespace provides your app an ability to classify images taken from the camera, a file or the device gallery.
 
 Functions
 ---------

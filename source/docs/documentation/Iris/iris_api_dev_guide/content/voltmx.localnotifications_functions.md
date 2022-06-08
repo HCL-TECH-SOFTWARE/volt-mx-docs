@@ -22,19 +22,17 @@ The voltmx.localnotifications namespace contains the following functions.
 
 Cancels the specified notifications.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.localnotifications.cancel(notificationId)
+`voltmx.localnotifications.cancel(notificationId)`
 
-Input Parameters
+<b>Input Parameters</b>
 
 | Parameter | Description |
 | --- | --- |
 | notificationId | An array of notification IDs that selects the notifications to cancel. |
 
- 
-
-Example
+<b>Example</b>
 
 {% highlight VoltMx %}/*************************************************************************************
 * Function:cancelLocalnotifications()
@@ -48,11 +46,11 @@ function cancelLocalnotifications(){
  }
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on iOS and Android platforms.
 
@@ -65,17 +63,18 @@ Available on iOS and Android platforms.
 
 Creates a local notification.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.localnotifications.create(  
+{% highlight VoltMx %}voltmx.localnotifications.create(  
     notificationId,  
     datetime,  
     message,  
     title,  
     categoryId,  
     pspConfig)
+{% endhighlight %}
 
-Input Parameters
+<b>Input Parameters</b>
 
 | Parameter | Description |
 | --- | --- |
@@ -86,9 +85,7 @@ Input Parameters
 | categoryId | A string that specifies the category ID to associate this local notification with, or null in case no actions are to be displayed. |
 | pspConfig | An optional JavaScript object containing key-value pairs that set the platform-specific options. Used on iOS platform only. The following keys are supported. badge: An optional number that displays the number of notifications on the app icon. sound: An optional string that specifies the sound to play. For more information, see the **Remarks** section below. |
 
- 
-
-Example
+<b>Example</b>
 
 {% highlight VoltMx %}/*************************************************************************************
 * Function:createLocalnotification()
@@ -122,15 +119,15 @@ function createLocalnotification(){
 }	
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Remarks
+<b>Remarks</b>
 
 To play a sound when a notification arrives, your app must specify the sound using the "sound" key in the JavaScript object contained in the _pspConfig_ parameter. Your app must assign a sound file from the app's main bundle. If the sound file is not available or the provided file name is incorrect, it will play a default sound from the system (`voltmx.localnotifications.DEFAULT_SOUND`). To know the see file formats, [click here](https://developer.apple.com/library/ios/documentation/MusicAudio/Conceptual/CoreAudioOverview/SupportedAudioFormatsMacOSX/SupportedAudioFormatsMacOSX.html)
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on
 
@@ -146,19 +143,17 @@ Available on
 
 Retrieves the pending local notifications.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.localnotifications.getNotifications(notificationObjects)
+`voltmx.localnotifications.getNotifications(notificationObjects)`
 
-Input Parameters
+<b>Input Parameters</b>
 
 | Parameter | Description |
 | --- | --- |
 | notificationObjects | An optional array of notification objects if there are pending notifications, or an empty array if there are not. This parameter is only used on iOS. |
 
- 
-
-Example
+<b>Example</b>
 
 {% highlight VoltMx %}// iOS Example. The callback function is not used on Android.
 function callback(arrayOfNotificationObjects)
@@ -174,11 +169,11 @@ voltmx.localnotifications.getNotifications(callback);
 				
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on iOS and Android platforms.
 
@@ -191,20 +186,18 @@ Available on iOS and Android platforms.
 
 Associates online and offline callbacks for local notifications.
 
-Syntax
+<b>Syntax</b>
 
-voltmx.localnotifications.setCallbacks(onlinenotification,offlinenotification)
+`voltmx.localnotifications.setCallbacks(onlinenotification,offlinenotification)`
 
-Input Parameters
+<b>Input Parameters</b>
 
 | Parameter | Description |
 | --- | --- |
 | onlinenotification | A callback function that is invoked when the online notification is triggered. For more information, see the **Remarks** section below. |
 | offlineNotification | A callback function that is invoked when the offline notification is triggered. For more information, see the **Remarks** section below. |
 
- 
-
-Example
+<b>Example</b>
 
 {% highlight VoltMx %}/*************************************************************************************
 * Function:localNotCallBacks()
@@ -234,27 +227,27 @@ function onlinenotification(notificationobject,actionid){
 }	
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Remarks
+<b>Remarks</b>
 
 The callbacks that this function sets are invoked when notifications are raised by the underlying system. The online notification callback is involved when the application is running. The offline callbacks are invoked when the application is not running. This function should be called inside the `post app init` event handler when your app starts.
 
 The callback function in the _onlinenotification_ parameter must have the following signature.
 
-onlineNotificationCallback(actionID,notificationObject);
+`onlineNotificationCallback(actionID,notificationObject);`
 
 where _actionId_ is a unique ID for the action, and _notificationobject_ is a JavaScript object that contains platform-specific notification information.
 
 The callback function in the _offlinenotification_ parameter must have the following signature.
 
-offlineNotificationCallback(actionID,notificationObject);
+`offlineNotificationCallback(actionID,notificationObject);`
 
 where _actionId_ is a unique ID for the action, and _notificationobject_ is a JavaScript object that contains platform-specific notification information.
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on iOS and Android platforms.
 
