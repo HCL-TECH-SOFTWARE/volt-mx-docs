@@ -2,84 +2,74 @@
 layout: "documentation"
 category: "engagement_api_guide"
 ---
-                            
 
-
-Unsubscription
-==============
+# Unsubscription
 
 The Unsubscription API is used to send unsubscription request from the device. You can unsubscribe a device either through the ksid or with a combination of appId and deviceId.
 
 > **_Important:_** The Subscription API is maintained here to preserve backward compatibility. We encourage you to use [Delete Subscriber](../REST_API_Subscribers/Delete_Subscriber.html)
 
-URL
----
+## URL
 
 The HTTP URL for Unsubscription API is:
 
 {% highlight voltMx %}http://<host or ip>:<port>/vpns/subscription
 {% endhighlight %}
 
-Method
-------
+## Method
 
 POST
 
-Content Type
-------------
+## Content Type
 
 Based on the content format, the payload's request header includes "Content-Type" for:
 
-*   **XML** is text/xml;charset=UTF-8
-*   **JSON** is application/json;charset=UTF-8
+- **XML** is text/xml;charset=UTF-8
+- **JSON** is application/json;charset=UTF-8
 
-Sample Request
---------------
+## Sample Request
 
 ### XML
 
 {% highlight voltMx %}<?xml version='1.0' encoding='UTF-8'?>
 <subscriptionService>
-    <unsubscribe>
-        <ksid>xxx</ksid>
-        <appId>xxxxx</appId>
-        <deviceId>xxxx</deviceId>
-        <!-- enable authToken if you want to enable security -->
-        <authToken>xxxx</authToken>
-    </unsubscribe>
+<unsubscribe>
+<ksid>xxx</ksid>
+<appId>xxxxx</appId>
+<deviceId>xxxx</deviceId>
+<!-- enable authToken if you want to enable security -->
+<authToken>xxxx</authToken>
+</unsubscribe>
 </subscriptionService>
 {% endhighlight %}
 
 ### JSON
 
-{% highlight voltMx %}            {
-  "subscriptionService": {
-    "unsubscribe": {
-      "appId": "xxxxx",
-      //Enable authToken if you want to enable security  
+{% highlight voltMx %} {
+"subscriptionService": {
+"unsubscribe": {
+"appId": "xxxxx",
+//Enable authToken if you want to enable security  
        "authToken": "xxxx",
-      "ksid": "xxxx",
-      "deviceId": "xxxx"
-    }
-  }
+"ksid": "xxxx",
+"deviceId": "xxxx"
+}
+}
 }
 {% endhighlight %}
 
-Input Parameters
-----------------
+## Input Parameters
 
 The following fields are input parameters:
 
-  
-| Parameter | Required | Description |
-| --- | --- | --- |
-| ksid | Mandatory | ksid of the subscriber for de-registering for the pushes |
-| appId | Mandatory | App ID configured in VMS for your App. |
-| deviceId | Mandatory | This is the device ID used for sending the pushes to the device. For iOS devices, this value is same as sid. For other devices use Volt MX JavaScript API (voltmx.os.deviceInfo().deviceid) to get these details from app.For BlackBerry, the returned device ID is in hex decimal format and BlackBerry accepts pushes for the values by omitting first two characters from the device ID. You must send device ID by omitting the first two characters. For example, Device ID returned from BlackBerry device is 0x2b631c8d, but the device ID to be sent to Volt MX Foundry Engagement Services (or in fact to send pushes to BlackBerry devices) must be 2b631c8d |
-| authToken | Mandatory if security is enabled for Volt MX Foundry Engagement Servicessubscription. | This value ensures, if the subscription request is from a valid source. The validity of the subscription request is ensured by matching auth token value provided in subscription service with the value configured in the Volt MX Foundry Engagement Services. This value is configured in Volt MX Foundry Engagement Services using basic details API or from Settings section from Console "Auth token for subscription API". |
+| Parameter | Required                                                                              | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| --------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ksid      | Mandatory                                                                             | ksid of the subscriber for de-registering for the pushes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| appId     | Mandatory                                                                             | App ID configured in VMS for your App.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| deviceId  | Mandatory                                                                             | This is the device ID used for sending the pushes to the device. For iOS devices, this value is same as sid. For other devices use Volt MX JavaScript API (voltmx.os.deviceInfo().deviceid) to get these details from app.For BlackBerry, the returned device ID is in hex decimal format and BlackBerry accepts pushes for the values by omitting first two characters from the device ID. You must send device ID by omitting the first two characters. For example, Device ID returned from BlackBerry device is 0x2b631c8d, but the device ID to be sent to Volt MX Foundry Engagement Services (or in fact to send pushes to BlackBerry devices) must be 2b631c8d |
+| authToken | Mandatory if security is enabled for Volt MX Foundry Engagement Servicessubscription. | This value ensures, if the subscription request is from a valid source. The validity of the subscription request is ensured by matching auth token value provided in subscription service with the value configured in the Volt MX Foundry Engagement Services. This value is configured in Volt MX Foundry Engagement Services using basic details API or from Settings section from Console "Auth token for subscription API".                                                                                                                                                                                                                                       |
 
-Sample Responses
-----------------
+## Sample Responses
 
 ### XML
 
@@ -91,7 +81,7 @@ Sample Responses
     <message>Unsubscription successful. </message>
 </subscriptionResponse>
 
-2. If already unsubscribed: 
+2. If already unsubscribed:
 
 <subscriptionResponse>
     <statusCode>200</statusCode>
@@ -99,7 +89,7 @@ Sample Responses
     <message>Already unsubscribed. </message>
 </subscriptionResponse>
 
-3. If Application ID is Invalid: 
+3. If Application ID is Invalid:
 
 <subscriptionResponse>
     <statusCode>404</statusCode>
@@ -107,7 +97,7 @@ Sample Responses
     <message>Invalid Volt MX Application ID. </message>
 </subscriptionResponse>
 
-4. If Request is invalid: 
+4. If Request is invalid:
 
 <subscriptionResponse>
     <statusCode>400</statusCode>
@@ -115,7 +105,7 @@ Sample Responses
     <message>Invalid request format.  </message>
 </subscriptionResponse>
 
-5. If Authentical Token is invalid: 
+5. If Authentical Token is invalid:
 
 <subscriptionResponse>
     <statusCode>401</statusCode>
@@ -123,7 +113,7 @@ Sample Responses
     <message>Unauthorized request. The authToken is invalid.   </message>
 </subscriptionResponse>
 
-6. If subscription is unclear: 
+6. If subscription is unclear:
 
 <subscriptionResponse>
     <statusCode>403</statusCode>
@@ -131,7 +121,7 @@ Sample Responses
     <message>Subscription unclear. Found multiple subscriptions with given input. Check your SID and DEVICE ID</message>
 </subscriptionResponse>
 
-7. Server Error: 
+7. Server Error:
 
 <subscriptionResponse>
     <statusCode>500</statusCode>
@@ -143,67 +133,63 @@ Sample Responses
 ### JSON
 
 {% highlight voltMx %}1.UnsubscriptionSuccessReponse: {
-  "subscriptionResponse": {
-    "statusCode": "200",
-    "ksid": "xxxx",
-    "message": "Unsubscription successful. "
-  }
+"subscriptionResponse": {
+"statusCode": "200",
+"ksid": "xxxx",
+"message": "Unsubscription successful. "
+}
 }  
 2.Ifalreadyunsubscribed: {
-  "subscriptionResponse": {
-    "statusCode": "200",
-    "ksid": "xxxx",
-    "message": "Already unsubscribed. "
-  }
+"subscriptionResponse": {
+"statusCode": "200",
+"ksid": "xxxx",
+"message": "Already unsubscribed. "
+}
 }  
 3.IfApplicationIdisInvalid: {
-  "subscriptionResponse": {
-    "statusCode": "404",
-    "ksid": "-1",
-    "message": "Invalid Volt MX Application ID. "
-  }
+"subscriptionResponse": {
+"statusCode": "404",
+"ksid": "-1",
+"message": "Invalid Volt MX Application ID. "
+}
 }  
 4.IfRequestisinvalid: {
-  "subscriptionResponse": {
-    "statusCode": "400",
-    "ksid": "-1",
-    "message": "Invalid request format.  "
-  }
+"subscriptionResponse": {
+"statusCode": "400",
+"ksid": "-1",
+"message": "Invalid request format. "
+}
 }  
 5.IfAuthenticalTokenisinvalid: {
-  "subscriptionResponse": {
-    "statusCode": "401",
-    "ksid": "-1",
-    "message": "Unauthorized request. The authToken is invalid.   "
-  }
+"subscriptionResponse": {
+"statusCode": "401",
+"ksid": "-1",
+"message": "Unauthorized request. The authToken is invalid. "
+}
 }  
 6.Ifsubscriptionisunclear: {
-  "subscriptionResponse": {
-    "statusCode": "403",
-    "ksid": "-1",
-    "message": "Subscription unclear. Found multiple subscriptions with given input. Check your SID and DEVICE ID"
-  }
+"subscriptionResponse": {
+"statusCode": "403",
+"ksid": "-1",
+"message": "Subscription unclear. Found multiple subscriptions with given input. Check your SID and DEVICE ID"
+}
 }  
 7.ServerError: {
-  "subscriptionResponse": {
-    "statusCode": "500",
-    "ksid": "-1",
-    "message": "Server failed to process the request. "
-  }
+"subscriptionResponse": {
+"statusCode": "500",
+"ksid": "-1",
+"message": "Server failed to process the request. "
+}
 }
 {% endhighlight %}
 
-Response Status
----------------
+## Response Status
 
-  
-| Code | Description |
-| --- | --- |
-| 200 | Unsubscription successful |
-| 200 | Already unsubscribed |
-| 400 | Invalid request format |
-| 404 | Invalid Volt MX Application ID |
-| 404 | No valid subscription exists. |
-| 500 | Server failed to process the request |
-
-<table class="TableStyle-RevisionTable" cellspacing="0" style="margin-left: 0;margin-right: auto;mc-table-style: url('../Resources/TableStyles/RevisionTable.css');" data-mc-conditions="Default.HTML"><colgroup><col class="TableStyle-RevisionTable-Column-Column1"> <col class="TableStyle-RevisionTable-Column-Column1"> <col class="TableStyle-RevisionTable-Column-Column1"></colgroup><tbody><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyE-Column1-Body1">Rev</td><td class="TableStyle-RevisionTable-BodyE-Column1-Body1">Author</td><td class="TableStyle-RevisionTable-BodyD-Column1-Body1">Edits</td></tr><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyB-Column1-Body1">7.1</td><td class="TableStyle-RevisionTable-BodyB-Column1-Body1">AU</td><td class="TableStyle-RevisionTable-BodyA-Column1-Body1">AU</td></tr></tbody></table>
+| Code | Description                          |
+| ---- | ------------------------------------ |
+| 200  | Unsubscription successful            |
+| 200  | Already unsubscribed                 |
+| 400  | Invalid request format               |
+| 404  | Invalid Volt MX Application ID       |
+| 404  | No valid subscription exists.        |
+| 500  | Server failed to process the request |

@@ -10,7 +10,8 @@ voltmx.i18n Namespace
 
 The voltmx,i18n Namespace, which forms the [Internationalization API](internationalization.html), provides the following API elements.
 
-> **_Note:_** From V8 SP4 onwards, the i18n database data for a VoltMX App child app is stored in child app data and not under the parent app. This feature is applicable for iOS, Windows, and Android platforms.
+> **_Note:_** From V9 SP2 onwards, the i18n database data for a VoltMX App child app is stored in child app data and not under the parent app. This feature is applicable for iOS, Windows, and Android platforms.
+<!-- > **_Note:_** From V8 SP4 onwards, the i18n database data for a VoltMX App child app is stored in child app data and not under the parent app. This feature is applicable for iOS, Windows, and Android platforms. -->
 
 Functions
 ---------
@@ -626,7 +627,7 @@ None
 
 Available on all platforms.
 
-Deprecated Functions
+<!-- Deprecated Functions
 ====================
 
 The following APIs have been deprecated from 5.0 onwards and are only supported for backward compatibility.
@@ -716,4 +717,4 @@ Available on all platforms except J2ME.
 
 </details>
 
-![](resources/prettify/onload.png)
+![](resources/prettify/onload.png) -->

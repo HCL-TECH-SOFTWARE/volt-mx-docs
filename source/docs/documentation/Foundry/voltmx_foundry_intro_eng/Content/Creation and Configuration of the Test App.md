@@ -1,4 +1,4 @@
----
+<!-- ---
 layout: "documentation"
 category: "voltmx_foundry_intro_eng"
 ---
@@ -37,7 +37,7 @@ Follow the steps below:
     
     ![](Resources/Images/addnewapp_594x422.png)
     
-4.  In the **Settings** section, click **Android**. In the **GCM/FCM Authentication Key** field, enter the FCM key that was created in the beginning of this section. After the key is entered, you can click **Test Connectivity with Cloud** to check if the key entered is valid. Click **Save** to save the application configuration.
+4.  In the **Settings** section, click **Android**. In the **FCM Authentication Key** field, enter the FCM key that was created in the beginning of this section. After the key is entered, you can click **Test Connectivity with Cloud** to check if the key entered is valid. Click **Save** to save the application configuration.
     
     ![](Resources/Images/addnewapp2_595x285.png)
     
@@ -52,4 +52,4 @@ Follow the steps below:
     ![](Resources/Images/publishedapps2_600x178.png)
     
 
-That’s it! This completes the configuration of the application in the Engagement Server.
+That’s it! This completes the configuration of the application in the Engagement Server. -->

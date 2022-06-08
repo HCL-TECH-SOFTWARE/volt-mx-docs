@@ -54,13 +54,15 @@ A maximum of four Quick Actions, both dynamic and static, are displayed on the h
 
 In addition, each widget supports the following methods for 3D Touch support.
 
-*   <widget>.registerForPeekAndPop
-*   <widget>.unregisterForPeekAndPop
-*   <widget>.setOnPeek
-*   <widget>.setOnPop
-*   <flexformwidget>.setPreviewActionItems
+*   \<widget>.registerForPeekAndPop
+*   \<widget>.unregisterForPeekAndPop
+*   \<widget>.setOnPeek
+*   \<widget>.setOnPop
+*   \<flexformwidget>.setPreviewActionItems
 
-Here <widget> is the name of the widget, such as Button or Label, and <flexformwidget> is the name of the Flex Form widget, such as FlexForm or FlexScrollContainer. For more information about the methods, refer [in Volt MX Iris Widget User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/homepage.html).
+Here \<widget> is the name of the widget, such as Button or Label, and \<flexformwidget> is the name of the Flex Form widget, such as FlexForm or FlexScrollContainer. For more information about the methods, refer [in Volt MX Iris Widget User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Overview.html)
+
+
 
 For more information about 3D Touch and Quick Actions, see the [Apple documentation](https://developer.apple.com/library/content/documentation/UserExperience/Conceptual/Adopting3DTouchOniPhone/).
 

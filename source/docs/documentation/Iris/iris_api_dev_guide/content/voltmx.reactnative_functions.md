@@ -8,7 +8,8 @@ category: "iris_api_dev_guide"
 voltmx.reactNative Namespace
 ==========================
 
-The voltmx.reactNative APIs namespace contains the following JavaScript APIs. The voltmx.reactNative APIs are available from V8 SP4 onwards.
+The voltmx.reactNative APIs namespace contains the following JavaScript APIs. The voltmx.reactNative APIs are available from V9 SP2 onwards.
+<!-- The voltmx.reactNative APIs namespace contains the following JavaScript APIs. The voltmx.reactNative APIs are available from V8 SP4 onwards. -->
 
 Functions
 ---------
@@ -16,7 +17,7 @@ Functions
 The voltmx.reactNative namespace contains the following functions.
 
 
-<details close markdown="block"><summary>voltmx.reactNative.setCallback</summary>
+<details close markdown="block"><summary id="setCallback">voltmx.reactNative.setCallback</summary>
 
 * * *
 

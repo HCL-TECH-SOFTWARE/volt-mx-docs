@@ -18,7 +18,8 @@ The voltmx.crypto namespace contains the following functions.
 
 * * *
 
-This API encrypts the input string and returns the encrypted text. This API is available from V8 SP3 onwards.
+This API encrypts the input string and returns the encrypted text. This API is available from V9 SP2 onwards.
+<!-- This API encrypts the input string and returns the encrypted text. This API is available from V8 SP3 onwards. -->
 
 ### Syntax
 
@@ -89,7 +90,8 @@ rawbytes \[Object\] - The rawbytes for the encrypted version of the input text.
 
 * * *
 
-This API decrypts the input encrypted string. This API is available from V8 SP3 onwards.
+This API decrypts the input encrypted string. This API is available from V9 SP2 onwards.
+<!-- This API decrypts the input encrypted string. This API is available from V8 SP3 onwards. -->
 
 ### Syntax
 
@@ -318,7 +320,7 @@ The following table lists algorithms supported for each platform.
 
 > **_Note:_** If you build a Web or Native App with strict mode enabled, the SHA1, MD2, MD4, and MD5 hashing algorithms are not supported. If you use any of those algorithms in strict mode, you will receive an "Unsupported algorithm" error message.
 
-> **_Note:_** From Volt MX IrisV8 release, the MD5 support is done through Java and not through the Bundle OpenSSL Library.
+> **_Note:_** From Volt MX IrisV9 release, the MD5 support is done through Java and not through the Bundle OpenSSL Library.
 
 On Android, the _Bundle OpenSSL Library_ option is available in the **Application Properties > Native > Android** section. If this option is selected, OpenSSL library is bundled along with the application and use by this function. If the _Bundle OpenSSL Library_ option is not selected in Volt MX Iris, the default Java implementation offered by the underlying native Android platform is used.
 
@@ -389,7 +391,7 @@ The following table shows the error codes for the exceptions that this function 
 
 ### Remarks
 
-voltmx.crypto.createPBKDF2Key API does not support md5 algorithm from Volt MX IrisV8 release.
+voltmx.crypto.createPBKDF2Key API does not support md5 algorithm from Volt MX IrisV9 release.
 
 If you build a Web or Native App with strict mode enabled, the SHA1, MD2, MD4, and MD5 hashing algorithms are not supported. If you use any of those algorithms in strict mode, you will receive an "Unsupported algorithm" error message.
 
@@ -706,7 +708,8 @@ Available on all platforms.
 
 * * *
 
-This API is used to generate public and private keys for encryption and decryption processes. Typically, you can use the Public key to verify the digital signature and plain text data, whereas you can use the Private key to create a digital signature and to decrypt the text. This API is available from V8 SP3 onwards.
+This API is used to generate public and private keys for encryption and decryption processes. Typically, you can use the Public key to verify the digital signature and plain text data, whereas you can use the Private key to create a digital signature and to decrypt the text. This API is available from V9 SP2 onwards.
+<!-- This API is used to generate public and private keys for encryption and decryption processes. Typically, you can use the Public key to verify the digital signature and plain text data, whereas you can use the Private key to create a digital signature and to decrypt the text. This API is available from V8 SP3 onwards. -->
 
 ### Syntax
 
@@ -780,7 +783,8 @@ Status of the key value generation.
 
 * * *
 
-This API is used to generate cryptographically secure random numbers. This API is available from V8 SP3 onwards.
+This API is used to generate cryptographically secure random numbers. This API is available from V9 SP2 onwards.
+<!-- This API is used to generate cryptographically secure random numbers. This API is available from V8 SP3 onwards. -->
 
 ### Syntax
 
@@ -911,7 +915,8 @@ Available on all platforms except J2ME.
 
 This API provides you the ability to read the key from the device store.
 
-> **_Note:_** From V8 SP4 onwards, the readKey data for a Volt MX App child app is stored in child app data and not under the parent app. This feature is applicable for iOS, Windows, and Android platforms.
+> **_Note:_** From V9 SP2 onwards, the readKey data for a Volt MX App child app is stored in child app data and not under the parent app. This feature is applicable for iOS, Windows, and Android platforms.
+<!-- > **_Note:_** From V8 SP4 onwards, the readKey data for a Volt MX App child app is stored in child app data and not under the parent app. This feature is applicable for iOS, Windows, and Android platforms. -->
 
 > **_Note:_** Device store in case of iOS is Keychain. Keychain in iOS is the most secured place to store the crypto keys. saveKey and readKey APIs save and read from the Keychain. The Keychain can be shared between the applications provisioned and signed by the same certificate vendor.
 
@@ -990,7 +995,8 @@ Available on all platforms.
 
 * * *
 
-This API returns the public key for the alias that you provide. This API is available from V8 SP3 onwards.
+This API returns the public key for the alias that you provide. This API is available from V9 SP2 onwards.
+<!-- This API returns the public key for the alias that you provide. This API is available from V8 SP3 onwards. -->
 
 ### Syntax
 
@@ -1102,7 +1108,8 @@ Available on all platforms except Windows, Service Side Mobile Web, Desktop Web,
 
 This function allows your app to save a generated key on the device's storage.
 
-> **_Note:_** From V8 SP4 onwards, the saveKey data for a Volt MX App child app is stored in child app data and not under the parent app. This feature is applicable for iOS, Windows, and Android platforms.
+> **_Note:_** From V9 SP2 onwards, the saveKey data for a Volt MX App child app is stored in child app data and not under the parent app. This feature is applicable for iOS, Windows, and Android platforms.
+<!-- > **_Note:_** From V8 SP4 onwards, the saveKey data for a Volt MX App child app is stored in child app data and not under the parent app. This feature is applicable for iOS, Windows, and Android platforms. -->
 
 ### Syntax
 

@@ -44,9 +44,10 @@ The following is the list of platforms and their corresponding Push Notification
   
 | Platform | Push Notifications Service |
 | --- | --- |
-| Android/Android Tablet | Google Cloud Messaging (GCM) Deprecated:Android Cloud to Device Messaging (C2DM) |
+| Android/Android Tablet | Android Cloud to Device Messaging (C2DM) |
 | iPhone | Apple Push Notification Service (APNS) |
 | Desktop Web | Google Firebase Cloud Messaging (FCM) |
+
 
 ### Enabling Push Notifications
 
@@ -63,7 +64,7 @@ To enable Push Notifications for an application do the following:
   
 | Push Notifications Service | Returned Unique Identifier |
 | --- | --- |
-| Google Cloud Messaging(GCM) Deprecated: Android Cloud to Device Messaging (C2DM) Firebase Cloud Messaging (FCM) | Registration ID |
+| Android Cloud to Device Messaging (C2DM) Firebase Cloud Messaging (FCM) | Registration ID |
 | Apple Push Notification Service (APNS) | DeviceToken |
 | Microsoft Push Notification Service (MPNS) | Unique URL |
 
@@ -143,8 +144,9 @@ Important Considerations for Android
 
 The following are the important considerations you must be aware for Android platform:
 
-*   Before you build the application for Android, navigate to the Project Properties of the application and navigate to _Native App_ -> _Android_ tab, and select the _GCM_ under the _Push Notification_ section. Selecting this option will copy the required Push Notification libraries into the application during build time."
-*   For C2DM to GCM conversion refer, [http://developer.android.com/guide/google/gcm/c2dm.html](http://developer.android.com/guide/google/gcm/c2dm.html)
+*   Before you build the application for Android, navigate to the Project Properties of the application and navigate to _Native App_ -> _Android_ tab. Selecting this option will copy the required Push Notification libraries into the application during build time."
+<!-- *   Before you build the application for Android, navigate to the Project Properties of the application and navigate to _Native App_ -> _Android_ tab, and select the _GCM_ under the _Push Notification_ section. Selecting this option will copy the required Push Notification libraries into the application during build time." -->
+<!-- *   For C2DM to GCM conversion refer, [http://developer.android.com/guide/google/gcm/c2dm.html](http://developer.android.com/guide/google/gcm/c2dm.html) -->
     
 *   Google may occasionally refresh the Registration ID. Hence, you must design the application to update the third-party Application server with the new ID.  
       
@@ -153,16 +155,17 @@ The following are the important considerations you must be aware for Android pla
     *   If the application is not running - a status bar notification is displayed. If you select the notification, the application is launched and _onsuccessfulregistration_ function is called.
 *   If the Volt MX Android platform receives a new Push notification message, the following takes place:
     *   If the application is running in the foreground:
-        *   GCM - Online callback is triggered without any notification.
+        <!-- *   GCM - Online callback is triggered without any notification. -->
         *   FCM - Online callback is triggered without any notification.
     *   If the application is running in the background:
-        *   GCM - A status bar notification is displayed. If you click the notification, the application is brought to the foreground and its _onlinenotification_ function is called.
+        <!-- *   GCM - A status bar notification is displayed. If you click the notification, the application is brought to the foreground and its _onlinenotification_ function is called. -->
         *   FCM - A status bar notification is displayed. If you click the notification, the application is brought to the foreground and its _onlinenotification_ function is called.
     *   If the application is not running:
-        *   GCM - A status bar notification is displayed. If you click the notification, the application is launched and its _offlinenotification_ function is called.
+        <!-- *   GCM - A status bar notification is displayed. If you click the notification, the application is launched and its _offlinenotification_ function is called. -->
         *   FCM - Any of the following can occur:
-            *   If the payload contains a notification key (for example, when the 'Enable GCM v3.0 Payload for Android' check box is selected in VMS console), a status bar notification is displayed by the system. If you click the notification, the application is launched and its _onlinenotification_ function is called.
-            *   If the payload does not contain a notification key (for example, when the 'Enable GCM v3.0 Payload for Android' check box is not selected in VMS console), a status bar notification is displayed by Framework. If you click the notification, the application is launched and its _offlinenotification_ function is called.
+            *   If the payload contains a notification key, a status bar notification is displayed by the system. If you click the notification, the application is launched and its _onlinenotification_ function is called.
+            *   If the payload does not contain a notification key, a status bar notification is displayed by Framework. If you click the notification, the application is launched and its _offlinenotification_ function is called.  
+        
 *   The status bar notification is displayed by the platform with the default settings.  
     The default settings are in the _pushconfig.xml_ file (available after the application is built) in the 'dist{APP-ID}\\res\\values' location. You can modify these settings by using a regular expression replacement task that is written in the _androidprecompiletask.xml_ file.  
     For example, if you want to update the value of the 'notify\_push\_msg\_title\_keys' key to 'title,' you must use the following code snippet, which replaces the value  
@@ -174,7 +177,7 @@ The following are the important considerations you must be aware for Android pla
     
       
     Similarly, you can configure other keys by using the _androidprecompiletask.xml_ file.
-*   To customize GCM broadcast receiver, refer [VoltMX IrisUser Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Custom_GCM.html).
+<!-- *   To customize GCM broadcast receiver, refer [VoltMX IrisUser Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Custom_GCM.html). -->
 
 * * *
 
@@ -191,7 +194,8 @@ Important Considerations for Desktop Web
     
     > **_Important:_** Desktop web push notifications are not supported on localhost.
     
-*   The Push notifications feature for the Desktop Web channel is supported from V8 SP4 onwards.
+*   The Push notifications feature for the Desktop Web channel is supported from V9 SP2 onwards.
+<!-- *   The Push notifications feature for the Desktop Web channel is supported from V8 SP4 onwards. -->
     
 *   Push notifications for the Desktop Web channel is not supported in:
     

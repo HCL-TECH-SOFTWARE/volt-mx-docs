@@ -21,7 +21,7 @@ To subscribe for the ad hoc notifications follow these steps:
     
 2.  Tap **Ok** to receive the push notifications.
     
-    ![](Resources/Images/image086.gif)
+    ![](Resources/Images/image086.png)
     
     The **VoltMX Engagement Services Would Like to Send You**... alert message appears.
     

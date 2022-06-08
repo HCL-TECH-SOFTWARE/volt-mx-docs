@@ -27,6 +27,5 @@ If there is no check mark in the **Watch Compatibility Mode** checkbox, click it
 
 ![](resources/images/watchcompatibilitymodecheckbox_707x500.png)
 
-For more detailed instructions on importing your Volt MX Studio 6.5 projects, please see [Migrating Watch Apps from Watch OS1 to Watch OS2]({{ site.baseurl }}/docs/documentation/6_5/voltmxlibrary/studio/voltmx_studio_api_reference_guide/Content/migrating_watchos1-watchos2.html) in the [VoltMX Studio 6.5 documentation](http://docs.voltmx.com/6_5/voltmxlibrary/studio/voltmx_studio_api_reference_guide/Content/wearable_ios.html#apple-watch).
 
 <table style="margin-left: 0;margin-right: auto;" data-mc-conditions="Default.HTML5 Only"><colgroup><col style="width: 41px;"> <col> <col></colgroup><tbody><tr><td>Rev</td><td>Author</td><td>Edits</td></tr><tr><td>7.0.3</td><td>DC</td><td>&nbsp;</td></tr></tbody></table>

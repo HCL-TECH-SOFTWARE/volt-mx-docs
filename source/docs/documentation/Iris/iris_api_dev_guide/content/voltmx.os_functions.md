@@ -32,8 +32,6 @@ These constants specify the current state of the device battery.
 | BATTERY\_STATE\_FULL | Indicates that the state of the device battery charge is completely full. |
 | BATTERY\_STATE\_UNKNOWN | Indicates that the state of the device battery charge as not known. |
 
-  
-
 Example
 
 When you query for the state of the device battery as shown in this example, any of the four available battery states is returned.
@@ -1223,7 +1221,7 @@ This API converts the argument to a number. If the argument is already a number 
 
 <b>Syntax</b>
 
-**k**ony.os.toNumber**([argument](#argument))**
+`voltmx.os.toNumber**([argument](#argument))`
 
 <b>Input Parameters</b>
 
@@ -1409,8 +1407,7 @@ Device ID \[String\]
 
 Any of the available Device ID is returned in the order Device Model, OS Version, Browser Version, Java Capabilities, and Manufacturer.
 
-> > **_Note:_**  
-> 
+> **_Note:_**  
 > *   For Android and Android Tablet, device model is returned as an user agent.
 > *   For iOS Devices, user agent is returned as a string.
 
@@ -1419,6 +1416,6 @@ Any of the available Device ID is returned in the order Device Model, OS Version
 Available on all platforms.
 
 * * *
-</deatils>
+</details>
 
 ![](resources/prettify/onload.png)

@@ -61,4 +61,4 @@ To change log levels for `Engagement Services logs`, follow these steps:
 2.  Change the log level to the required value.
 3.  Restart the server.
 
-For more details on Logs in Volt MX Foundry, refer to [Basecamp](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0083536).
+For more details on Logs in Volt MX Foundry, refer to [Volt MX Resources](https://support.hcltechsw.com/csm?id=volt_mx_support).

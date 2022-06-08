@@ -13,4 +13,4 @@ This document helps you learn about the operating systems, application servers, 
 
 - [VoltMX Foundry V9 SP2 Software Requirements](FoundryV9SP2.html)
 
-You can also access the [Revision History](homepage.html).
+

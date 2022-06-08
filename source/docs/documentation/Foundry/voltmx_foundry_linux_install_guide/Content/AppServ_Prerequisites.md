@@ -40,7 +40,8 @@ For Oracle Java 11, configure the heap settings for your application servers. [J
 
 ### Configuration of Database Driver module
 
-1.  Extract the  [com.zip](http://docs.voltmx.com/8_x_PDFs/com.zip)  file.
+<!-- 1.  Extract the  [com.zip](http://docs.voltmx.com/8_x_PDFs/com.zip)  file. -->
+1.  Extract the  [com.zip](https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/foundry/zip/user_guide/com.zip)  file.
     
     The unzipped folder structure will be `com\mysql\main`.
     
@@ -129,9 +130,10 @@ If you need to use existing JBoss with self-signed certificate, follow these ste
 
 ### Configure Port Settings for Multinode Loadbalancer Setups
 
-Before installing Volt MX Foundry on an application server, for the application server to communicate with a Web Server properly, you must open the port 80.
+Before installing Volt MX Foundry on an application server, for the application server to communicate with a Web Server properly, you must open the port 80.  
 
-#### How to Disable Weak Ciphers in JBoss
+
+### How to Disable Weak Ciphers in JBoss
 
 To disable weak ciphers, replace the `https-listener` under JBoss `subsystem/undertow`, for example, `<subsystem xmlns="urn:jboss:domain:undertow:3.1">`
 

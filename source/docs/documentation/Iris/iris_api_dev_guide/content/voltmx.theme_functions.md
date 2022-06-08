@@ -399,132 +399,385 @@ Available on all platforms.
 
 * * *
 
-This API allows you to modify the skin properties of a Skin Object at run time. All the widgets that use the specified skins are rendered with the modified values of the skin properties.
-
-You can also modify the properties for multiple skin objects.
-
-### Syntax
-{% highlight VoltMx %}
-voltmx.theme.setSkinsProperties({“skinName”: propertiesObject},...);
-{% endhighlight %}
-
-### Input Parameters
-
-| Parameter | Description |
-| --- | --- |
-| skinName \[String\] | A string that specifies the name of the skin for which the properties are to be changed. The skin must already be present in the current theme, and must be defined. > **_Note:_** If the specified skin is not present in the current theme, the skin properties will not be updated. |
-| propertiesObject \[JSON Object\] | A JSON Object with key-value pair attributes. The keys are the names of pre-defined properties of the Skin. You can set the key-value pair attributes for the following Skin properties: [background](#Background) [border](#Border) [fonts](#Fonts) [shadow](#Shadow) [textShadow](#TextShadow) |
-
-
-background \[JSON Object\]
-
-The Background parameter contains the key-value pair attributes of the properties related to the background of the Skin. The background parameter is a JSON object that contains the following keys:
-
-| Key | Value |
-| --- | --- |
-| backgroundType \[Constant\] | Specifies the type of background (either singe color, two-step gradient, multi-step gradient, or image) to be applied. This parameter can have the following constant values:`voltmx.skin.BACKGROUND_TYPE_SINGLE_COLOR` : Constant for single background color.`voltmx.skin.BACKGROUND_TYPE_TWO_STEP_GRADIENT`: Constant for two-step gradient.`voltmx.skin.BACKGROUND_TYPE_MULTI_STEP_GRADIENT`: Constant for multi-step gradient.`voltmx.skin.BACKGROUND_TYPE_IMAGE`: Constant for the background image.> **_Note:_** If you do not specify a value for this parameter, the background property of the specified skin is not updated. |
-| backgroundColor \[Constant or Hex\] | Specifies the color (single color) for the background. The value of this parameter can be a hexadecimal number (in String format) that represents a color or a color constant that is defined at the theme level.
-> **_Note:_** Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).For example, red complete opaque is FF000000. Red complete transparent is FF000065. The values 0x and # are not allowed in the string.A color constant is a String that is defined at the theme level. Ensure that you append the **$** symbol at the beginning of the color constant.
-
- |
-| backgroundColorTwoStepGradient \[JSON Object\] | A JSON Object that specifies the two-step gradient color for the background. The backgroundColorTwoStepGradient object contains the following keys:**topColor** \[Constant or Hex\]: Specifies the top color of the two-step gradient. The value of this parameter can be a hexadecimal number (in String format) that represents a color or a color constant that is defined at the theme level.**bottomColor** \[Constant or Hex\]: Specifies the bottom color of the two-step gradient. The value of this parameter can be a hexadecimal number (in String format) that represents a color or a color constant that is defined at the theme level.
-
-> **_Note:_** Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).For example, red complete opaque is FF000000. Red complete transparent is FF000065. The values 0x and # are not allowed in the string.A color constant is a String that is defined at the theme level. Ensure that you append the **$** symbol at the beginning of the color constant.
-
-**style** \[Constant\]: Specifies the configuration style of the two-step gradient. This parameter can have the following constant values:`voltmx.skin.TWO_STEP_GRADIENT_STYLE_VERTICAL_GRADIENT`: Constant for the vertical gradient style.`voltmx.skin.TWO_STEP_GRADIENT_STYLE_VERTICAL_SPLIT`: Constant for the vertical split style.`voltmx.skin.TWO_STEP_GRADIENT_STYLE_HORIZONTAL_GRADIENT`: Constant for the horizontal gradient style. This constant is only available on the Desktop Web channel.`voltmx.skin.TWO_STEP_GRADIENT_STYLE_HORIZONTAL_SPLIT`: Constant for the horizontal split style. This constant is only available on the Desktop Web channel.
-
-> **_Note:_** The default value of the **style** key is `voltmx.skin.TWO_STEP_GRADIENT_STYLE_VERTICAL_GRADIENT`.If you do not provide values (or provide invalid values) for the **topColor** and **bottomColor** attributes, the backgroundColorTwoStepGradient property of the specified skin is not updated.
-
- |
-| backgroundColorMultiStepGradient \[JSON Object\] | A JSON Object that specifies the multi-step gradient color for the background. The backgroundColorMultiStepGradient object contains the following keys:**gradientType** \[Constant\]: Specifies the configuration type of the gradient. This parameter can have the following constant values:`voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_TOP`: Constant for the gradient type toTop.`voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_RIGHT`: Constant for the gradient type toRight.`voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_BOTTOM`: Constant for the gradient type toBottom.`voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_LEFT`: Constant for the gradient type toLeft.`voltmx.skin.MULTI_STEP_GRADIENT_TYPE_CUSTOM`: Constant for the gradient type custom.For the custom gradient type, you must specify the angle by using the [angle](#angle) property.**angle** \[Number\]: Specifies the angle for the gradient in degrees, counted counter-clockwise. This property is only applicable for the custom gradient type.**colors** \[Array\]: Specifies the colors for the multi-step gradient.  This parameter contains an array of hexadecimal numbers that represent the colors or constants defined at the theme level.**colorStops** \[Array\]: Specifies the color stops for the multi-step gradient. Color Stops are the locations of the reference colors on the gradient, from 0 (the start of the gradient) to 100 (the final value of the gradient). This parameter contains an array of numbers that represent the color stops.
-
-> **_Note:_** The default value of the **gradientType** key is `voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_TOP`.Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).For example, red complete opaque is FF000000. Red complete transparent is FF000065. The values 0x and # are not allowed in the string.A color constant is a String that is defined at the theme level. Ensure that you append the **$** symbol at the beginning of the color constant. If you do not provide values (or provide invalid values) for the **color** and **colorStops** attributes, the backgroundColorMultiStepGradient property of the specified skin is not updated.
-
- |
-| backgroundImage \[String\] | Sets the specified image as the background. |
-
- 
-
-border \[JSON Object\]
-
-The Border parameter contains the key-value pair attributes of the properties related to the border of the Skin. The border parameter is a JSON object that contains the following keys:
-
-| Key | Value |
-| --- | --- |
-| borderType \[Constant\] | Specifies the type of border (either singe color or multi-step gradient) to be applied. This parameter can have the following constant values:**voltmx.skin.BORDER\_TYPE\_SINGLE\_COLOR** : Constant for single border color.**voltmx.skin.BORDER\_TYPE\_MULTI\_STEP\_GRADIENT**: Constant for multi-step gradient.> **_Note:_** The voltmx.skin.BORDER\_TYPE\_MULTI\_STEP\_GRADIENT constant is only available on the Android and iOS channels. |
-| borderColor \[Constant or Hex\] | Specifies the color (single color) for the border. The value of this parameter can be a hexadecimal number (in String format) that represents a color or a color constant that is defined at the theme level.
-> **_Note:_** Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).For example, red complete opaque is FF000000. Red complete transparent is FF000065. The values 0x and # are not allowed in the string.A color constant is a String that is defined at the theme level. Ensure that you append the **$** symbol at the beginning of the color constant.
-
- |
-| borderColorGradient \[JSON Object\] | A JSON Object that specifies the multi-step gradient color for the border. The borderColorGradient object contains the following keys:**gradientType** \[Constant\]: Specifies the configuration type of the gradient. This parameter can have the following constant values:`voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_TOP`: Constant for the gradient type toTop.`voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_RIGHT`: Constant for the gradient type toRight.`voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_BOTTOM`: Constant for the gradient type toBottom.`voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_LEFT`: Constant for the gradient type toLeft.`voltmx.skin.MULTI_STEP_GRADIENT_TYPE_CUSTOM`: Constant for the gradient type custom.For the custom gradient type, you must specify the angle by using the [angle](#angle) property.**angle** \[Number\]: Specifies the angle for the gradient. This property is only applicable for the custom gradient type.**colors** \[Array\]: Specifies the colors for the multi-step gradient. This parameter contains an array of hexadecimal numbers that represent the colors or constants defined at the theme level.**colorStops** \[Array\]: Specifies the color stops for the multi-step gradient. This parameter contains an array of numbers that represent the color stops.
-
-> **_Note:_** This property is only available on the Android and iOS platforms.The default value of the **gradientType** key is `voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_TOP`.If you do not provide values (or provide invalid values) for the **color** and **colorStops** attributes, the borderColorGradient property of the specified skin is not updated.
-
- |
-| borderWidth \[JSON Object or Number\] | Specifies the width of the border.> **_Note:_** The Desktop Web platform supports both Number and JSON Object (with the top, bottom, right, and left keys) values for the borderWidth parameter. The Android and iOS platforms support only Number values for the borderWidth parameter. |
-| borderStyle \[Constant\] | Specifies the border style of the border for the widget. This parameter can have the following constant values:**voltmx.skin.BORDER\_STYLE\_PLAIN**: Constant for the plain border style.**voltmx.skin.BORDER\_STYLE\_ROUNDED\_CORNER**: Constant for the rounded corner style.**voltmx.skin.BORDER\_STYLE\_COMPLETE\_ROUNDED\_CORNER**: Constant for the complete rounded corner style.**voltmx.skin.BORDER\_STYLE\_CUSTOM**: Constant for the custom border style.
-
-> **_Note:_** For Android and iOS apps, the [cornerRadius](#cornerRadius) property is only applicable when the borderStyle is voltmx.skin.BORDER\_STYLE\_CUSTOM. For Desktop Web apps, the [cornerRadius](#cornerRadius) property is only applicable when the borderStyle is voltmx.skin.BORDER\_STYLE\_ROUNDED\_CORNER.The borderStyle parameter is only available on the Android and iOS platforms.
-
- |
-| cornerRadius \[JSON Object or Number\] | Specifies the radius of the border.
-
-> **_Note:_** For Android and iOS apps, the cornerRadius property is only applicable when the [borderStyle](#borderStyle) is voltmx.skin.BORDER\_STYLE\_CUSTOM. For Desktop Web apps, the cornerRadius property is only applicable when the [borderStyle](#borderStyle) is voltmx.skin.BORDER\_STYLE\_ROUNDED\_CORNER.The Android and Desktop Web platforms support both Number and JSON Object (with the top, bottom, right, and left keys) values for the cornerRadius parameter. The iOS platform supports only Number values for the cornerRadius parameter.
-
- |
-
- 
-
-fonts \[JSON Object\]
-
-The Fonts parameter contains the key-value pair attributes of the properties related to the fonts of the Skin. The fonts parameter is a JSON object that contains the following keys:
-
-| Key | Value |
-| --- | --- |
-| fontColor \[Constant or Hex\] | Specifies the color for the font. The value of this parameter can be a hexadecimal number (in String format) that represents a color or a color constant that is defined at the theme level.
-> **_Note:_** Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).For example, red complete opaque is FF000000. Red complete transparent is FF000065. The values 0x and # are not allowed in the string.A color constant is a String that is defined at the theme level. Ensure that you append the **$** symbol at the beginning of the color constant.
-
- |
-| fontSize \[Number\] | Specifies the font size in percentage (%) units. |
-| fontFamily \[String\] | Specifies the font family for the font. You must specify the font family based on the platform being used. |
-| fontStyle \[Constant\] | Specifies the font style. This parameter can have the following constant values:**voltmx.skin.FONT\_STYLE\_NONE**: Constant for the normal font style.**voltmx.skin.FONT\_STYLE\_ITALIC**: Constant for the italic font style.**voltmx.skin.FONT\_STYLE\_UNDERLINE**: Constant for the underline font style.> **_Note:_** The fontStyle parameter is only available on the Android and Desktop Web platforms. |
-| fontWeight \[Constant\] | Specifies the weight of the font. This parameter can have the following constant values:**voltmx.skin.FONT\_WEIGHT\_NORMAL**: Constant for the normal font weight.**voltmx.skin.FONT\_WEIGHT\_BOLD**: Constant for the bold font weight.> **_Note:_** The fontWeight parameter is only available on the Android and Desktop Web platforms. |
-
- 
-
-shadow \[JSON Object\]
-
-The Shadow parameter contains the key-value pair attributes of the properties related to the shadow of the Skin. The shadow parameter is a JSON object that contains the following keys:
-
-| Key | Value |
-| --- | --- |
-| shadowRadius \[Number\] | Specifies the blur value for the shadow in pixels. |
-| shadowColor \[Constant or Hex\] | Specifies the color for the shadow. The value of this parameter can be a hexadecimal number (in String format) that represents a color or a color constant that is defined at the theme level.
-> **_Note:_** If you do not provide a value (or provide an invalid value) for the **shadowColor** attribute, the shadow property of the specified skin is not updated.Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).For example, red complete opaque is FF000000. Red complete transparent is FF000065. The values 0x and # are not allowed in the string.A color constant is a String that is defined at the theme level. Ensure that you append the **$** symbol at the beginning of the color constant.
-
- |
-| shadowOffset \[JSON Object\] | A JSON Object that specifies the offset value for the shadow. The JSON Object contains the X-coordinate and Y-coordinates for the offset.The values for the X and Y coordinates must be provided in the following format:`{x: Number value in px, y: Number value in px}` |
-
-> **_Note:_** The shadow property is only available on the iOS and Desktop Web platforms.
-
-textShadow \[JSON Object\]
-
-The Text Shadow parameter contains the key-value pair attributes of the properties related to the text shadow of the Skin. The textshadow parameter is a JSON object that contains the following keys:
-
-| Key | Value |
-| --- | --- |
-| textShadowRadius \[Number\] | Specifies the blur value for the text shadow in pixels. |
-| textShadowColor \[Constant or Hex\] | Specifies the color for the text shadow. The value of this parameter can be a hexadecimal number (in String format) that represents a color or a color constant that is defined at the theme level.
-> **_Note:_** If you do not provide a value (or provide an invalid value) for the **textShadowColor** attribute, the textShadow property of the specified skin is not updated.Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).For example, red complete opaque is FF000000. Red complete transparent is FF000065. The values 0x and # are not allowed in the string.A color constant is a String that is defined at the theme level. Ensure that you append the **$** symbol at the beginning of the color constant.
-
- |
-| textShadowOffset \[JSON Object\] | A JSON Object that specifies the offset value for the text shadow. The JSON Object contains the X-coordinate and Y-coordinates for the offset.The values for the X and Y coordinates must be provided in the following format:`{x: Number value in px, y: Number value in px}` |
-
-
-### Example 1
-
-{% highlight VoltMx %}
-var skinPropertiesObj = {  
+<p>This API allows you to modify the skin properties of a Skin Object at run time. All the widgets that use the specified skins are rendered with the modified values of the skin properties.</p>
+<p>You can also modify the properties for multiple skin objects.</p>
+<h3>Syntax</h3>
+<pre><code style="display:block;background-color:#eee;">voltmx.theme.setSkinsProperties({“skinName”: propertiesObject},...);</code></pre>
+<h3>Input Parameters</h3>
+<table>
+  <tr>
+    <th>Parameter</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>skinName [String]</td>
+    <td>
+      <p>A string that specifies the name of the skin for which the properties are to be changed. The skin must already be present in the current theme, and must be defined.</p>
+      <blockquote>
+        <em><b>Note:</b></em> If the specified skin is not present in the current theme, the skin properties will not be updated.
+      </blockquote>
+    </td>
+  </tr>
+  <tr>
+    <td>propertiesObject [JSON Object]</td>
+    <td>
+      A JSON Object with key-value pair attributes. The keys are the names of pre-defined properties of the Skin. You can set the key-value pair attributes for the following Skin properties:
+      <ul>
+        <li>
+          <a href="#Background">background</a>
+        </li>
+        <li>
+          <a href="#Border">border</a>
+        </li>
+        <li>
+          <a href="#Fonts">fonts</a>
+        </li>
+        <li>
+          <a href="#Shadow">shadow</a>
+        </li>
+        <li>
+          <a href="#TextShadow">textShadow</a>
+        </li>
+      </ul>
+    </td>
+  </tr>
+</table>
+<h3 id="Background">background [JSON Object]</h3>
+<p>The Background parameter contains the key-value pair attributes of the properties related to the background of the Skin. The background parameter is a JSON object that contains the following keys:</p>
+<table>
+  <tr>
+    <th>Key</th>
+    <th>Value</th>
+  </tr>
+  <tr>
+    <td>backgroundType [Constant]</td>
+    <td>
+      <p>Specifies the type of background (either singe color, two-step gradient, multi-step gradient, or image) to be applied. This parameter can have the following constant values:</p>
+      <ul>
+        <li>voltmx.skin.BACKGROUND_TYPE_SINGLE_COLOR : Constant for single background color.</li>
+        <li>voltmx.skin.BACKGROUND_TYPE_TWO_STEP_GRADIENT: Constant for two-step gradient.</li>
+        <li>voltmx.skin.BACKGROUND_TYPE_MULTI_STEP_GRADIENT: Constant for multi-step gradient.</li>
+        <li>voltmx.skin.BACKGROUND_TYPE_IMAGE: Constant for the background image.</li>
+      </ul>
+      <blockquote>
+        <em><b>Note:</b></em> If you do not specify a value for this parameter, the background property of the specified skin is not updated.
+      </blockquote>
+    </td>
+  </tr>
+  <tr>
+    <td>backgroundColor [Constant or Hex]</td>
+    <td>
+      <p>Specifies the color (single color) for the background. The value of this parameter can be a hexadecimal number (in String format) that represents a color or a color constant that is defined at the theme level.</p>
+      <blockquote>
+        <em><b>Note:</b></em>
+        <ul>
+          <li>Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.</li>
+          <li>When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).<br>
+          For example, red complete opaque is FF000000. Red complete transparent is FF000065. The values 0x and # are not allowed in the string.</li>
+          <li>A color constant is a String that is defined at the theme level. Ensure that you append the <b>$</b> symbol at the beginning of the color constant.</li>
+        </ul>
+      </blockquote>
+    </td>
+  </tr>
+  <tr>
+    <td>backgroundColorTwoStepGradient [JSON Object]</td>
+    <td>
+      <p>A JSON Object that specifies the two-step gradient color for the background. The backgroundColorTwoStepGradient object contains the following keys:</p>
+      <p><b>topColor</b> [Constant or Hex]: Specifies the top color of the two-step gradient. The value of this parameter can be a hexadecimal number (in String format) that represents a color or a color constant that is defined at the theme level.</p>
+      <p><b>bottomColor</b> [Constant or Hex]: Specifies the bottom color of the two-step gradient. The value of this parameter can be a hexadecimal number (in String format) that represents a color or a color constant that is defined at the theme level.</p>
+      <blockquote>
+        <em><b>Note:</b></em>
+        <ul>
+          <li>Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.</li>
+          <li>When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).<br>
+          For example, red complete opaque is FF000000. Red complete transparent is FF000065. The values 0x and # are not allowed in the string.</li>
+          <li>A color constant is a String that is defined at the theme level. Ensure that you append the <b>$</b> symbol at the beginning of the color constant.</li>
+        </ul>
+      </blockquote>
+      <p><b>style</b> [Constant]: Specifies the configuration style of the two-step gradient. This parameter can have the following constant values:</p>
+      <ul>
+        <li>voltmx.skin.TWO_STEP_GRADIENT_STYLE_VERTICAL_GRADIENT: Constant for the vertical gradient style.</li>
+        <li>voltmx.skin.TWO_STEP_GRADIENT_STYLE_VERTICAL_SPLIT: Constant for the vertical split style.</li>
+        <li>voltmx.skin.TWO_STEP_GRADIENT_STYLE_HORIZONTAL_GRADIENT: Constant for the horizontal gradient style. This constant is only available on the Desktop Web channel.</li>
+        <li>voltmx.skin.TWO_STEP_GRADIENT_STYLE_HORIZONTAL_SPLIT: Constant for the horizontal split style. This constant is only available on the Desktop Web channel.</li>
+      </ul>
+      <blockquote>
+        <em><b>Note:</b></em>
+        <ul>
+          <li>The default value of the style key is voltmx.skin.TWO_STEP_GRADIENT_STYLE_VERTICAL_GRADIENT.</li>
+          <li>If you do not provide values (or provide invalid values) for the <b>topColor</b> and <b>bottomColor</b> attributes, the backgroundColorTwoStepGradient property of the specified skin is not updated.</li>
+        </ul>
+      </blockquote>
+    </td>
+  </tr>
+  <tr>
+    <td>backgroundColorMultiStepGradient [JSON Object]</td>
+    <td>
+      <p>A JSON Object that specifies the multi-step gradient color for the background. The backgroundColorMultiStepGradient object contains the following keys:</p>
+      <p><b>gradientType</b> [Constant]: Specifies the configuration type of the gradient. This parameter can have the following constant values:</p>
+      <ul>
+        <li>voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_TOP: Constant for the gradient type toTop.</li>
+        <li>voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_RIGHT: Constant for the gradient type toRight.</li>
+        <li>voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_BOTTOM: Constant for the gradient type toBottom.</li>
+        <li>voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_LEFT: Constant for the gradient type toLeft.</li>
+        <li>voltmx.skin.MULTI_STEP_GRADIENT_TYPE_CUSTOM: Constant for the gradient type custom. For the custom gradient type, you must specify the angle by using the angle property.</li>
+      </ul>
+      <p><b>angle</b> [Number]: Specifies the angle for the gradient in degrees, counted counter-clockwise. This property is only applicable for the custom gradient type.</p>
+      <p><b>colors</b> [Array]: Specifies the colors for the multi-step gradient. This parameter contains an array of hexadecimal numbers that represent the colors or constants defined at the theme level.</p>
+      <p><b>colorStops</b> [Array]: Specifies the color stops for the multi-step gradient. Color Stops are the locations of the reference colors on the gradient, from 0 (the start of the gradient) to 100 (the final value of the gradient). This parameter contains an array of numbers that represent the color stops.</p>
+      <blockquote>
+        <em><b>Note:</b></em>
+        <ul>
+          <li>The default value of the gradientType key is voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_TOP.</li>
+          <li>Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.</li>
+          <li>When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).<br>
+          For example, red complete opaque is FF000000. Red complete transparent is FF000065. The values 0x and # are not allowed in the string.</li>
+          <li>A color constant is a String that is defined at the theme level. Ensure that you append the <b>$</b> symbol at the beginning of the color constant.</li>
+          <li>If you do not provide values (or provide invalid values) for the <b>color</b> and <b>colorStops</b> attributes, the backgroundColorMultiStepGradient property of the specified skin is not updated.</li>
+        </ul>
+      </blockquote>
+    </td>
+  </tr>
+  <tr>
+    <td>backgroundImage [String]</td>
+    <td>Sets the specified image as the background.</td>
+  </tr>
+</table>
+<h3 id="Border">border [JSON Object]</h3>
+<p>The Border parameter contains the key-value pair attributes of the properties related to the border of the Skin. The border parameter is a JSON object that contains the following keys:</p>
+<table>
+  <tr>
+    <th>Key</th>
+    <th>Value</th>
+  </tr>
+  <tr>
+    <td>borderType [Constant]</td>
+    <td>
+      <p>Specifies the type of border (either singe color or multi-step gradient) to be applied. This parameter can have the following constant values:</p>
+      <ul>
+        <li>voltmx.skin.BORDER_TYPE_SINGLE_COLOR : Constant for single border color.</li>
+        <li>voltmx.skin.BORDER_TYPE_MULTI_STEP_GRADIENT: Constant for multi-step gradient.</li>
+      </ul>
+      <blockquote>
+        <em><b>Note:</b></em> The voltmx.skin.BORDER_TYPE_MULTI_STEP_GRADIENT constant is only available on the Android and iOS channels.
+      </blockquote>
+    </td>
+  </tr>
+  <tr>
+    <td>borderColor [Constant or Hex]</td>
+    <td>
+      <p>Specifies the color (single color) for the border. The value of this parameter can be a hexadecimal number (in String format) that represents a color or a color constant that is defined at the theme level.</p>
+      <blockquote>
+        <em><b>Note:</b></em>
+        <ul>
+          <li>Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.</li>
+          <li>When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).<br>
+          For example, red complete opaque is FF000000. Red complete transparent is FF000065. The values 0x and # are not allowed in the string.</li>
+          <li>A color constant is a String that is defined at the theme level. Ensure that you append the <b>$</b> symbol at the beginning of the color constant.</li>
+        </ul>
+      </blockquote>
+    </td>
+  </tr>
+  <tr>
+    <td>borderColorGradient [JSON Object]</td>
+    <td>
+      <p>A JSON Object that specifies the multi-step gradient color for the background. The backgroundColorMultiStepGradient object contains the following keys:</p>
+      <p><b>gradientType</b> [Constant]: Specifies the configuration type of the gradient. This parameter can have the following constant values:</p>
+      <ul>
+        <li>voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_TOP: Constant for the gradient type toTop.</li>
+        <li>voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_RIGHT: Constant for the gradient type toRight.</li>
+        <li>voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_BOTTOM: Constant for the gradient type toBottom.</li>
+        <li>voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_LEFT: Constant for the gradient type toLeft.</li>
+        <li>voltmx.skin.MULTI_STEP_GRADIENT_TYPE_CUSTOM: Constant for the gradient type custom. For the custom gradient type, you must specify the angle by using the angle property.</li>
+      </ul>
+      <p><b>angle</b> [Number]: Specifies the angle for the gradient in degrees, counted counter-clockwise. This property is only applicable for the custom gradient type.</p>
+      <p><b>colors</b> [Array]: Specifies the colors for the multi-step gradient. This parameter contains an array of hexadecimal numbers that represent the colors or constants defined at the theme level.</p>
+      <p><b>colorStops</b> [Array]: Specifies the color stops for the multi-step gradient. Color Stops are the locations of the reference colors on the gradient, from 0 (the start of the gradient) to 100 (the final value of the gradient). This parameter contains an array of numbers that represent the color stops.</p>
+      <blockquote>
+        <em><b>Note:</b></em>
+        <ul>
+          <li>This property is only available on the Android and iOS platforms.</li>
+          <li>The default value of the gradientType key is voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_TOP.</li>
+          <li>If you do not provide values (or provide invalid values) for the <b>color</b> and <b>colorStops</b> attributes, the backgroundColorMultiStepGradient property of the specified skin is not updated.</li>
+        </ul>
+      </blockquote>
+    </td>
+  </tr>
+  <tr>
+    <td>borderWidth [JSON Object or Number]</td>
+    <td>
+      <p>Specifies the width of the border.</p>
+      <blockquote>
+        <em><b>Note:</b></em> The Desktop Web platform supports both Number and JSON Object (with the top, bottom, right, and left keys) values for the borderWidth parameter. The Android and iOS platforms support only Number values for the borderWidth parameter.
+      </blockquote>
+    </td>
+  </tr>
+  <tr>
+    <td>borderStyle [Constant]</td>
+    <td>
+      <p>Specifies the border style of the border for the widget. This parameter can have the following constant values:</p>
+      <ul>
+        <li>voltmx.skin.BORDER_STYLE_PLAIN: Constant for the plain border style.</li>
+        <li>voltmx.skin.BORDER_STYLE_ROUNDED_CORNER: Constant for the rounded corner style.</li>
+        <li>voltmx.skin.BORDER_STYLE_COMPLETE_ROUNDED_CORNER: Constant for the complete rounded corner style.</li>
+        <li>voltmx.skin.BORDER_STYLE_CUSTOM: Constant for the custom border style.</li>
+      </ul>
+      <blockquote>
+        <em><b>Note:</b></em>
+        <ul>
+          <li>For Android and iOS apps, the cornerRadius property is only applicable when the borderStyle is voltmx.skin.BORDER_STYLE_CUSTOM. For Desktop Web apps, the cornerRadius property is only applicable when the borderStyle is voltmx.skin.BORDER_STYLE_ROUNDED_CORNER.</li>
+          <li>The borderStyle parameter is only available on the Android and iOS platforms.</li>
+        </ul>
+      </blockquote>
+    </td>
+  </tr>
+  <tr>
+    <td>cornerRadius [JSON Object or Number]</td>
+    <td>
+      <p>Specifies the radius of the border.</p>
+      <blockquote>
+        <em><b>Note:</b></em>
+        <ul>
+          <li>For Android and iOS apps, the cornerRadius property is only applicable when the borderStyle is voltmx.skin.BORDER_STYLE_CUSTOM. For Desktop Web apps, the cornerRadius property is only applicable when the borderStyle is voltmx.skin.BORDER_STYLE_ROUNDED_CORNER.</li>
+          <li>The Android and Desktop Web platforms support both Number and JSON Object (with the top, bottom, right, and left keys) values for the cornerRadius parameter. The iOS platform supports only Number values for the cornerRadius parameter.</li>
+        </ul>
+      </blockquote>
+    </td>
+  </tr>
+</table>
+<h3 id="Fonts">fonts [JSON Object]</h3>
+<p>The Fonts parameter contains the key-value pair attributes of the properties related to the fonts of the Skin. The fonts parameter is a JSON object that contains the following keys:</p>
+<table>
+  <tr>
+    <th>Key</th>
+    <th>Value</th>
+  </tr>
+  <tr>
+    <td>fontColor [Constant or Hex]</td>
+    <td>
+      <p>Specifies the color for the font. The value of this parameter can be a hexadecimal number (in String format) that represents a color or a color constant that is defined at the theme level.</p>
+      <blockquote>
+        <em><b>Note:</b></em>
+        <ul>
+          <li>Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.</li>
+          <li>When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).<br>
+          For example, red complete opaque is FF000000. Red complete transparent is FF000065. The values 0x and # are not allowed in the string.</li>
+          <li>A color constant is a String that is defined at the theme level. Ensure that you append the <b>$</b> symbol at the beginning of the color constant.</li>
+        </ul>
+      </blockquote>
+    </td>
+  </tr>
+  <tr>
+    <td>fontSize [Number]</td>
+    <td>Specifies the font size in percentage (%) units.</td>
+  </tr>
+  <tr>
+    <td>fontFamily [String]</td>
+    <td>Specifies the font family for the font. You must specify the font family based on the platform being used.</td>
+  </tr>
+  <tr>
+    <td>fontStyle [Constant]</td>
+    <td>
+      <p>Specifies the font style. This parameter can have the following constant values:</p>
+      <ul>
+        <li>voltmx.skin.FONT_STYLE_NONE: Constant for the normal font style.</li>
+        <li>voltmx.skin.FONT_STYLE_ITALIC: Constant for the italic font style.</li>
+        <li>voltmx.skin.FONT_STYLE_UNDERLINE: Constant for the underline font style.</li>
+      </ul>
+      <blockquote>
+        <em><b>Note:</b></em> The fontStyle parameter is only available on the Android and Desktop Web platforms.
+      </blockquote>
+    </td>
+  </tr>
+  <tr>
+    <td>fontWeight [Constant]</td>
+    <td>
+      <p>Specifies the weight of the font. This parameter can have the following constant values:</p>
+      <ul>
+        <li>voltmx.skin.FONT_WEIGHT_NORMAL: Constant for the normal font weight.</li>
+        <li>voltmx.skin.skin.FONT_WEIGHT_BOLD: Constant for the bold font weight.</li>
+      </ul>
+      <blockquote>
+        <em><b>Note:</b></em> The fontWeight parameter is only available on the Android and Desktop Web platforms.
+      </blockquote>
+    </td>
+  </tr>
+</table>
+<h3 id="Shadow">shadow [JSON Object]</h3>
+<p>The Shadow parameter contains the key-value pair attributes of the properties related to the shadow of the Skin. The shadow parameter is a JSON object that contains the following keys:</p>
+<table>
+  <tr>
+    <th>Key</th>
+    <th>Value</th>
+  </tr>
+  <tr>
+    <td>shadowRadius [Number]</td>
+    <td>Specifies the blur value for the shadow in pixels.</td>
+  </tr>
+  <tr>
+    <td>shadowColor [Constant or Hex]</td>
+    <td>
+      <p>Specifies the color for the shadow. The value of this parameter can be a hexadecimal number (in String format) that represents a color or a color constant that is defined at the theme level.</p>
+      <blockquote>
+        <em><b>Note:</b></em>
+        <ul>
+          <li>If you do not provide a value (or provide an invalid value) for the <b>shadowColor</b> attribute, the shadow property of the specified skin is not updated.</li>
+          <li>Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.</li>
+          <li>When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).<br>
+          For example, red complete opaque is FF000000. Red complete transparent is FF000065. The values 0x and # are not allowed in the string.</li>
+          <li>A color constant is a String that is defined at the theme level. Ensure that you append the <b>$</b> symbol at the beginning of the color constant.</li>
+        </ul>
+      </blockquote>
+    </td>
+  </tr>
+  <tr>
+    <td>shadowOffset [JSON Object]</td>
+    <td>
+      <p>A JSON Object that specifies the offset value for the shadow. The JSON Object contains the X-coordinate and Y-coordinates for the offset.</p>
+      <p>The values for the X and Y coordinates must be provided in the following format: <code>{x: Number value in px, y: Number value in px}</code></p>
+    </td>
+  </tr>
+</table>
+<blockquote>
+  <em><b>Note:</b></em> On the Android platform, for the child widgets of a Form, the shadow appears only when the clipBounds property is disabled for the parent Form.
+</blockquote>
+<h3 id="TextShadow">textShadow [JSON Object]</h3>
+<p>The Text Shadow parameter contains the key-value pair attributes of the properties related to the text shadow of the Skin. The textshadow parameter is a JSON object that contains the following keys:</p>
+<table>
+  <tr>
+    <th>Key</th>
+    <th>Value</th>
+  </tr>
+  <tr>
+    <td>textShadowRadius [Number]</td>
+    <td>Specifies the blur value for the text shadow in pixels.</td>
+  </tr>
+  <tr>
+    <td>textShadowColor [Constant or Hex]</td>
+    <td>
+      <p>Specifies the color for the text shadow. The value of this parameter can be a hexadecimal number (in String format) that represents a color or a color constant that is defined at the theme level.</p>
+      <blockquote>
+        <em><b>Note:</b></em>
+        <ul>
+          <li>If you do not provide a value (or provide an invalid value) for the <b>textShadowColor</b> attribute, the textShadow property of the specified skin is not updated.</li>
+          <li>Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.</li>
+          <li>When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).<br>
+          For example, red complete opaque is FF000000. Red complete transparent is FF000065. The values 0x and # are not allowed in the string.</li>
+          <li>A color constant is a String that is defined at the theme level. Ensure that you append the <b>$</b> symbol at the beginning of the color constant.</li>
+        </ul>
+      </blockquote>
+    </td>
+  </tr>
+  <tr>
+    <td>textShadowOffset [JSON Object]</td>
+    <td>
+      <p>A JSON Object that specifies the offset value for the shadow. The JSON Object contains the X-coordinate and Y-coordinates for the offset.</p>
+      <p>The values for the X and Y coordinates must be provided in the following format: <code>{x: Number value in px, y: Number value in px}</code></p>
+    </td>
+  </tr>
+</table>
+<h3>Example 1</h3>
+<pre><code style="display:block;background-color:#eee;">var skinPropertiesObj = {  
     background: {  
         backgroundType: voltmx.skin.BACKGROUND_TYPE_MULTI_STEP_GRADIENT,  
         backgroundColorMultiStepGradient : {  
@@ -562,13 +815,9 @@ var skinPropertiesObj = {
             y: 4  
         }  
     }  
-voltmx.theme.setSkinsProperties({“blueSkinWithBorder”:skinPropertiesObj});
-{% endhighlight %}
-
-Example 2
-
-{% highlight VoltMx %}
-var skinPropertiesObj1 = {  
+voltmx.theme.setSkinsProperties({“blueSkinWithBorder”:skinPropertiesObj});</code></pre>
+<h3>Example 2</h3>
+<pre><code style="display:block;background-color:#eee;">var skinPropertiesObj1 = {  
     background: {  
         backgroundType: voltmx.skin.BACKGROUND_TYPE_MULTI_STEP_GRADIENT,  
         backgroundColorMultiStepGradient : {  
@@ -645,25 +894,19 @@ var skinPropertiesObj2 = {
             y: 24  
         }  
     }  
-voltmx.theme.setSkinsProperties({“blueSkinWithBorder”:skinPropertiesObj1, "redSkinWithBorder":skinPropertiesObj2});
-{% endhighlight %}
-
-### Return Values
-
-None
-
-### Remarks
-
-*   Ensure that you provide appropriate values for all the properties and keys. If you provide invalid values, the properties will not be updated.
-*   Using this API affects the performance of the app.
-*   When you invoke this API in an Android or iOS app, the Form is refreshed for the changes to reflect on the canvas.
-
-### Platform Availability
-
-*   Android
-*   iOS
-*   Desktop Web (Not available on Desktop Web Legacy SDK)
-
-* * *
-
-![](resources/prettify/onload.png)
+voltmx.theme.setSkinsProperties({“blueSkinWithBorder”:skinPropertiesObj1, "redSkinWithBorder":skinPropertiesObj2});</code></pre>
+<h3>Return Values</h3>
+<p>None</p>
+<h3>Remarks</h3>
+<ul>
+  <li>Ensure that you provide appropriate values for all the properties and keys. If you provide invalid values, the properties will not be updated.</li>
+  <li>Using this API affects the performance of the app.</li>
+  <li>When you invoke this API in an Android or iOS app, the Form is refreshed for the changes to reflect on the canvas.</li>
+</ul>
+<h3>Platform Availability</h3>
+<ul>
+  <li>Android</li>
+  <li>iOS</li>
+  <li>Desktop Web (Not available on Desktop Web Legacy SDK)</li>
+</ul>
+</details>

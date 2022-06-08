@@ -32,29 +32,28 @@ Presents UI to add pass.
 
 If the status is VoltMXPKPassLibraryShouldReviewPasses in completionCallback, present an instance of com.voltmx.AddPassesViewController with the same pass, to let the user review and add them.
 
-Syntax
+<b>Syntax</b>
 
 <<PassObject>>.addPassWithCompletionCallback([pass](#pass), [completionCallback](#completionCallback))
 
-Input Parameters
+<b>Input Parameters</b>
 
-  
 | Parameter | Description |
 | --- | --- |
 | pass \[Object\] - com.voltmx.Pass - Mandatory | The pass being added. |
 | completionCallback \[Function\] - Mandatory | The completion callback called after the user. status \[String\] Status of the passes adding task to PassLibrary. One of the below values: VoltMXPKPassLibraryDidAddPasses VoltMXPKPassLibraryShouldReviewPasses VoltMXPKPassLibraryDidCancelAddPasses |
 
-Example
+<b>Example</b>
 
 {% highlight voltMx %}passbook1.addPassWithCompletionCallback(pass, completionCallback); 
 
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available only on iOS
 
@@ -65,29 +64,28 @@ Presents UI to add multiple passes.
 
 If the status is VoltMXPKPassLibraryShouldReviewPasses in completionCallback, present an instance of com.voltmx.AddPassesViewController with the same pass, to let the user review and add them.
 
-Syntax
+<b>Syntax</b>
 
 <<PassObject>>.addPassesWithCompletionCallback()
 
-Input Parameters
+<b>Input Parameters</b>
 
-  
 | Parameter | Description |
 | --- | --- |
 | passes \[Array\] - Mandatory | The pass being added. |
 | completionCallback \[Function\] - Mandatory | The completion callback called after the user. status \[String\] Status of the passes adding task to PassLibrary. One of the below values: VoltMXPKPassLibraryDidAddPasses VoltMXPKPassLibraryShouldReviewPasses VoltMXPKPassLibraryDidCancelAddPasses |
 
-Example
+<b>Example</b>
 
 {% highlight voltMx %}passbook1.addPassWithCompletionCallback(passes, completionCallback); 
 
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 Number
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available only on iOS
 
@@ -98,20 +96,17 @@ containsPass
 
 Returns whether the user’s pass library contains a pass. This method lets you determine that the pass library contains a pass even though your app wouldn’t be able to read or modify the pass.
 
-Syntax
+<b>Syntax</b>
 
 <<PassObject>>.containsPass()
 
-Input Parameters
+<b>Input Parameters</b>
 
-  
 | Parameter | Description |
 | --- | --- |
 | pass \[Object\] - com.voltmx.Pass - Mandatory | The pass being queried. |
 
- 
-
-Example
+<b>Example</b>
 
 {% highlight voltMx %}passbook1.addPassWithCompletionCallback(passes, completionCallback); 
 ...
@@ -119,15 +114,13 @@ var passbook1 = passbook1.addPassWithCompletionCallback(passes, completionCallba
 
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 | Return Value | Description |
 | --- | --- |
 | Boolean | True if pass is in the PassLibrary. |
 
- 
-
-Platform Availability
+<b>Platform Availability</b>
 
 Available only on iOS
 
@@ -138,20 +131,18 @@ getPassWithTypeIdentifierAndSerialNumber
 
 The proximity value gives a general sense of the relative distance to the beacon. Use it to quickly identify beacons that are nearer to the user rather than farther away.
 
-Syntax
+<b>Syntax</b>
 
 <<PassObject>>.getPassWithTypeIdentifierAndSerialNumber([identifier](#identifier), [serailNumber](#serailNumber))
 
-Input Parameters
+<b>Input Parameters</b>
 
 | Parameter | Description |
 | --- | --- |
 | identifier \[String\] - Mandatory | The pass’s pass type identifier. |
 | serailNumber \[String\] | The pass’s serial number. |
 
- 
-
-Example
+<b>Example</b>
 
 {% highlight voltMx %}passbook1.getPassWithTypeIdentifierAndSerialNumber(identifier, serailNumber); 
 ...
@@ -159,15 +150,13 @@ var passbook1 = passbook1.getPassWithTypeIdentifierAndSerialNumber(identifier, s
 
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 | Return Value | Description |
 | --- | --- |
 | com.voltmx.Pass \[Object\] | The pass with the given pass type identifier and serial number, or nil if there is no such pass or if the app doesn’t have the appropriate entitlement. |
 
- 
-
-Platform Availability
+<b>Platform Availability</b>
 
 Available only on iOS
 
@@ -178,24 +167,22 @@ Returns the passes in the user’s pass library.
 
 Your app only has access to certain passes, based on its entitlements. Passes that your app doesn’t have access to are not returned. The ordering of the passes is not fixed; calling this method multiple times may return the same passes but in a different order.
 
-Syntax
+<b>Syntax</b>
 
 <<PassObject>>.getPasses()
 
-Example
+<b>Example</b>
 
 {% highlight voltMx %}var passbook1 = passbook1.getPasses(); 
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 | Return Value | Description |
 | --- | --- |
 | Array | An array of com.voltmx.Pass objects. |
 
- 
-
-Platform Availability
+<b>Platform Availability</b>
 
 Available only on iOS
 
@@ -206,29 +193,27 @@ removePass( )
 
 Removes the pass from the user’s pass library. This method does nothing if your app doesn’t have the appropriate entitlement. The new pass replaces the existing pass with the same pass type identifier and serial number. If there is no such pass in the user’s pass library, the replacement fails.
 
-Syntax
+<b>Syntax</b>
 
 <<PassObject>>.removePass()
 
-Input Parameters
+<b>Input Parameters</b>
 
 | Parameter | Description |
 | --- | --- |
 | identifier \[String\] - Mandatory | The pass’s pass type identifier. |
 | serailNumber \[String\] | The pass’s serial number. |
 
- 
-
-Example
+<b>Example</b>
 
 {% highlight voltMx %}passbook1.removePass(identifier, serailNumber); 
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available only on iOS
 
@@ -241,15 +226,13 @@ Replaces a pass in the user’s pass library with the given pass.
 
 <<PassObject>>.replacePassWithPass()
 
-Input Parameters
+<b>Input Parameters</b>
 
 | Parameter | Description |
 | --- | --- |
 | pass \[Object\] - Mandatory | The new pass. |
 
- 
-
-Example
+<b>Example</b>
 
 {% highlight voltMx %}passbook1.replacePassWithPass(pass); 
 ...
@@ -257,15 +240,13 @@ var passbook1 = passbook1.replacePassWithPass(pass);
 
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 | Return Value | Description |
 | --- | --- |
 | Boolean | True if the pass was replaced successfully; otherwise false. |
 
- 
-
-Platform Availability
+<b>Platform Availability</b>
 
 Available only on iOS
 

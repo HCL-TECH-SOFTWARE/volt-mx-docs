@@ -89,7 +89,7 @@ You have already reviewed the setup of the geoboundaries in the Engagement serve
         
 10. Next, you will create a geoboundary with the **Custom Business Logic** option. In the screen below, enter the same address you have used before and pick the address from the drop down list. The following image displays Volt MX office in Orlando as a sample address.
     
-    *   Enter the location name as `TestWithCustomBusinessLogi`c.
+    *   Enter the location name as `TestWithCustomBusinessLogic`.
     *   Enter the description as needed.
     *   Choose the **Custom Business Logic** as the client action. The system displays a text area where the java script that need to be executed on the client application is entered.  
     You can just enter an alert or a more complex code as shown below. So when this geoboundary is monitored by a client application, the application can execute this code on the client and display the notification. Enter **OrlandoLocation** as the tag value.

@@ -65,15 +65,21 @@ To proceed with installation, please confirm that the following prerequisites ha
   
 To change input, type 'back' to go back to the previous step.  
 To cancel the installation, type 'quit' at any time.  
+
+For getting started on Volt MX Foundry, please refer to [Volt MX Resources](https://support.hcltechsw.com/csm?id=volt_mx_support).
+
+Access our forum community [here](https://support.hcltechsw.com/community?id=community_home). 
+
+If you have more questions or feedback, you can join our [forum community](https://support.hcltechsw.com/community?id=community_forum&sys_id=1cdf6e1a1bf31898beab64e6ec4bcbae) or raise a [support case](https://support.hcltechsw.com/csm).
   
-For troubleshooting & help on the installation, use [{{ site.baseurl }}/docs/documentation/Foundry/resources/installer.html]({{ site.baseurl }}/docs/documentation/Foundry/resources/installer.html)  
+<!-- For troubleshooting & help on the installation, use [{{ site.baseurl }}/docs/documentation/Foundry/resources/installer.html]({{ site.baseurl }}/docs/documentation/Foundry/resources/installer.html)  
   
-For getting started on Volt MX Foundry, refer [http://community.hclvoltmx.com/documentation](http://community.hclvoltmx.com/documentation)  
+For getting started on Volt MX Foundry, refer [https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/)  
   
 For upgrading Volt MX Foundry, refer [online documentation]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_linux_install_guide/Content/Upgrading_VoltMX_Foundry_on_Linux.html).  
   
-If you have more questions or feedback, you can join our [http://community.hclvoltmx.com/](http://community.hclvoltmx.com/) or, raise a [http://support.voltmx.com/](http://support.voltmx.com/).  
-  
+If you have more questions or feedback, you can join our [http://community.hclvoltmx.com/](http://community.hclvoltmx.com/) or, raise a [http://support.voltmx.com/](http://support.voltmx.com/).   -->
+
 \->1- Continue with Installation.  
    2- Abort Installation.  
   

@@ -64,6 +64,7 @@ When the system launches an app, it temporarily displays a static launch image o
 
 **For more information see**: [http://developer.android.com/guide/practices/screens\_support.html](http://developer.android.com/guide/practices/screens_support.html)
 
+
 ### Guidelines for Configuring Splash Screen for Windows Applications
 
 For splash screen, image resolutions are provided in the following table. In Volt MX Iris, splash screen images must be placed in `resources` folder .

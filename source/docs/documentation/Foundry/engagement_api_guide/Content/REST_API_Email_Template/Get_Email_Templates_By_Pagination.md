@@ -2,57 +2,50 @@
 layout: "documentation"
 category: "engagement_api_guide"
 ---
-                            
 
-
-Get Email Templates by Pagination
-=================================
+# Get Email Templates by Pagination
 
 The **Get Email Templates by Pagination** API accepts start and pageSize as input parameters and returns all the email template details. The pageSize represents the maximum number of the email templates for which the details are to be returned. If the start is specified, the number of the email templates that are returned are from start position to pageSize value. For example: if the start is zero and pageSize is five, then six email templates from position zero to five are returned.
 
-URL
----
+## URL
 
 The HTTP URL for Get Email Templates by Pagination API is:
 
 {% highlight voltMx %}http://<host>:<port>/api/v1/templates/emails?start=0&pageSize=10
 {% endhighlight %}
 
-Method
-------
+## Method
 
 GET
 
-Output Parameters
------------------
+## Output Parameters
 
 The following fields are output parameters:
 
-  
-| Output Parameter | Level – Two | Type | Description |
-| --- | --- | --- | --- |
-| total |   | long | Total number of email templates |
-| mailTemplates |   |   | An array of mailTemplates objects |
-|   | id | long | Unique ID assigned to the email template |
-|   | templateName | string | Email template name |
-|   | mailSubject | string | Email title |
-|   | templateType | string | Template type as basic or code a template |
-|   | mailContent | string | Email content: It can include images and text |
-|   | lastModifiedDateStr | string | Date on which the email template was last modified |
-|   | lastModifiedBy | string | A user name that shows who last modified the email template |
-|   | createdDateStr | string | Date on which the email template is created |
-|   | createdBy | string | A user name that shows who created the email template |
+| Output Parameter | Level – Two         | Type   | Description                                                 |
+| ---------------- | ------------------- | ------ | ----------------------------------------------------------- |
+| total            |                     | long   | Total number of email templates                             |
+| mailTemplates    |                     |        | An array of mailTemplates objects                           |
+|                  | id                  | long   | Unique ID assigned to the email template                    |
+|                  | templateName        | string | Email template name                                         |
+|                  | mailSubject         | string | Email title                                                 |
+|                  | templateType        | string | Template type as basic or code a template                   |
+|                  | mailContent         | string | Email content: It can include images and text               |
+|                  | lastModifiedDateStr | string | Date on which the email template was last modified          |
+|                  | lastModifiedBy      | string | A user name that shows who last modified the email template |
+|                  | createdDateStr      | string | Date on which the email template is created                 |
+|                  | createdBy           | string | A user name that shows who created the email template       |
 
-Sample Response
----------------
+## Sample Response
 
 {% highlight voltMx %}{
-  "mailTemplates" : [ {
-    "id" : 1,
-    "templateName" : "Flipkart shopping sale",
-    "mailSubject" : "Flipkart shopping sale",
-    "templateType" : "Basic",
-    "mailContent" : "
+"mailTemplates" : [ {
+"id" : 1,
+"templateName" : "Flipkart shopping sale",
+"mailSubject" : "Flipkart shopping sale",
+"templateType" : "Basic",
+"mailContent" : "
+
 <style>div#pagediv { background-color:#f6f5f5; }</style>
 <div id=\"pagediv\" style=\"background-color:#f6f5f5;padding:10px 5px;\">
     <div id=\"preheaderdiv\" style=\"background-color :none;color:#7CA9E4;font-family: Arial;font-size: 14px;line-height: normal;text-align: left;margin:10px 5px;\"></div>
@@ -113,14 +106,10 @@ Sample Response
 }
 {% endhighlight %}
 
-Response Status
----------------
+## Response Status
 
-  
-| Code | Description |
-| --- | --- |
-| Status 200 | Array of email templates |
-| Status 400 | No mail templates found |
+| Code       | Description                       |
+| ---------- | --------------------------------- |
+| Status 200 | Array of email templates          |
+| Status 400 | No mail templates found           |
 | Status 500 | Server failure to process request |
-
-<table class="TableStyle-RevisionTable" cellspacing="0" style="margin-left: 0;margin-right: auto;mc-table-style: url('../Resources/TableStyles/RevisionTable.css');" data-mc-conditions="Default.HTML"><colgroup><col class="TableStyle-RevisionTable-Column-Column1"> <col class="TableStyle-RevisionTable-Column-Column1"> <col class="TableStyle-RevisionTable-Column-Column1"></colgroup><tbody><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyE-Column1-Body1">Rev</td><td class="TableStyle-RevisionTable-BodyE-Column1-Body1">Author</td><td class="TableStyle-RevisionTable-BodyD-Column1-Body1">Edits</td></tr><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyB-Column1-Body1">7.1</td><td class="TableStyle-RevisionTable-BodyB-Column1-Body1">AU</td><td class="TableStyle-RevisionTable-BodyA-Column1-Body1">AU</td></tr></tbody></table>

@@ -72,6 +72,7 @@ After granting privileges, disconnect existing session, and use new session in o
 *   But if your database is 11g or 12c without PDB, then you can use `ORACLE_SID` in the JDBC URL such as  `orcl`  or  `mfdb`.{% highlight voltMx %}jdbc:oracle:thin:@<Database_Host_IP>:1521:mfdb
         {% endhighlight %}<br>For example: jdbc:oracle:thin:@192.168.1.2:1521:mfdb
         
+</details>
 
 ### Prerequisites for Volt MX Foundry with SQL Server
 

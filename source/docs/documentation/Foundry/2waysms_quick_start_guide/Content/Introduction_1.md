@@ -20,4 +20,4 @@ This QuickStart guide explains how to set up Volt MX Foundry Engagement Services
 *   [Initiating an Outbound 2 way SMS via Adhoc Messaging](MessageService _QuickStartGuide_2WaySMS/Initiating an outbound 2 way.html)
 *   [Responding to the 2 way SMS Request of the User](MessageService _QuickStartGuide_2WaySMS/Responding to the 2 way SMS.html)
 
-You can also access the [Revision History](2waysms_quick_start_guide.html).
+

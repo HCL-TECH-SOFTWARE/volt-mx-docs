@@ -47,7 +47,7 @@ Volt MX  Iris APIs comprises a collection of APIs that you can use in apps writt
 *   **[Map API](mapapi.html)**: The **voltmx.map** namespace provides constants and functions that are used in conjunction with the Map widget.
 *   **[Math API](math_library.html)**: The Math API has functions that you can use to perform mathematical operations.
 *   **[Media API](media_api.html)**: The Media API enables your app to play and record audio files.
-*   **[Native Function API]({{ site.baseurl }}/docs/documentation/Iris/iris_nf_api_dev_guide/content/native_function_api_developers__guide.html)** : Volt MX Iris provides Native Function APIs that allow you to use native functions of iOS and Android platforms in Volt MX Iris Classic. Access to the native functions is provided through a JavaScript API.
+*   **[Native Function API]({{ site.baseurl }}/docs/documentation/Iris/iris_nf_api_dev_guide/content/native_function_api_developers__guide.html)** : Volt MX Iris provides Native Function APIs that allow you to use native functions of iOS and Android platforms in Volt MX Iris. Access to the native functions is provided through a JavaScript API.
 *   **[Network](network_apis.html)**: The Network APIs enable you to invoke service calls or cancel network calls. The chapter comprises all the APIs with the namespace **voltmx.net**.
 *   **[Notifications API](notifications.html)**: The notification system allows users to keep informed about relevant and timely events in your app.
 *   **[Offline Data Access API](data_store_library.html)**: This API allows you to store data onto the device data store persistently.

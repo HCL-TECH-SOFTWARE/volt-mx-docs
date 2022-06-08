@@ -31,7 +31,8 @@ To stop and start JBoss Server, follow these steps:
 
 Start the services for the appropriate service groups that you have configured through the JBoss Management Console from the master node.
 
-For more detailed information on administration of the app server, refer to the [JBoss Server Documentation](https://docs.jboss.org/author/display/AS7/Getting+Started+Guide#GettingStartedGuide-StartingJBossApplicationServer7).
+<!-- For more detailed information on administration of the app server, refer to the [JBoss Server Documentation](https://docs.jboss.org/author/display/AS7/Getting+Started+Guide#GettingStartedGuide-StartingJBossApplicationServer7). -->
+For more detailed information on administration of the app server, refer to the [JBoss Server Documentation](https://docs.jboss.org/author/display/AS71/).
 
 WebLogic Server
 ---------------

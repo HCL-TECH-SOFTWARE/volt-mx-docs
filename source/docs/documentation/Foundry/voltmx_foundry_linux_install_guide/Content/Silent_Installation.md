@@ -24,7 +24,7 @@ The **<Install Location>** directory contains the log files logging each invocat
 
 To install Volt MX Foundry Unattended/Silent Installation, follow these steps:
 
-1.  Download `VoltMXFoundrySetup.tar.gz` file from [](http://developer.voltmx.com/VoltMXReleases)[http://community.VoltMX.com/downloads](http://community.hclvoltmx.com/downloads), and extract the file.
+1.  Download `VoltMXFoundrySetup.tar.gz` file from [](http://developer.voltmx.com/VoltMXReleases)[https://hclsoftware.flexnetoperations.com](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.2.x&orgId=HCL&fromRecentFile=false&fromRecentPkg=true&fromDL=false), and extract the file.
 2.  Open the Linux terminal, and navigate to the location where the installer is located.
 3.  Open the `installer.properties` file and provide inputs for the required properties. You can follow the comments in the .properties file for more details.
 4.  Save the `installer.properties` file.

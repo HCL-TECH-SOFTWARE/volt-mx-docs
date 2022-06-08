@@ -14,10 +14,6 @@ The markForUpload flag is set to true, by default.
 Volt MX  Iris (JavaScript)
 -------------------------------
 
-> **Note:**  
-*   Supported for Windows from V8 SP4 Fix Pack 6 onwards.  
-*   Supported for Mobile Web and Desktop Web channels from V8 SP4 Fixpack 12 onwards.  
-
 ### Signature
 
 {% highlight voltMx %}<object>.markForUpload(options, successCallback, failureCallback)
@@ -279,8 +275,6 @@ The API returns all the deferred records primary keys for a particular object.
 ### Volt MX Iris (JavaScript)
 
 > **_Note:_** Not supported for Mobile Web, and Desktop Web channels.
-
-> **_Note:_** Supported for Windows from V8 SP4 Fix Pack 6 onwards.
 
 #### Signature
 

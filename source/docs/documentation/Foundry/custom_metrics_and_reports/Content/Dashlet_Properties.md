@@ -28,7 +28,6 @@ To view and edit the dashlet properties, follow these steps:
 The Dashlet Properties window displays the following properties. The properties are applicable for dashlets containing the custom reports, and reports (standard reports).
 
 **Properties of the dashlets containing the custom reports, and reports (standard reports) include the following:**
-
   
 | Property | Description |
 | --- | --- |
@@ -42,30 +41,19 @@ The Dashlet Properties window displays the following properties. The properties 
 | ![http://community-static.jaspersoft.com/doc_images/966621/js-Dashboard-icon-Maximize.png](Resources/Images/customdashboards/Input_control_Parameter_Mapping_10.png) | Maximize | Click to open the dashlet as a larger view. |
 | ![http://community-static.jaspersoft.com/doc_images/966621/js-Dashlet-icon-Refresh.png](Resources/Images/customdashboards/Input_control_Parameter_Mapping_11.png) | Refresh | Click to refresh the dashlet. |
 
- |
+**Properties of dashlets containing the text include:**
+
+| Property | Description |
+| --- | --- |
 | Scale to Fit | The menu list to determine how the element is scaled in the dashlet. |
-| Refresh Settings | 
-
-Select or deselect to enable or disable auto-refresh. Use the text entry and menu list to set the time between each content refresh.
-
-The setting overrides refresh properties set at the dashboard level.
-
- |
-| Apply | 
-
-Click to view the changes.
-
- |
+| Refresh Settings | Select or deselect to enable or disable auto-refresh. Use the text entry and menu list to set the time between each content refresh. The setting overrides refresh properties set at the dashboard level. |
+| Apply | Click to view the changes. |
 | OK | Click to accept the changes. |
 | Cancel | Click to discard the changes. |
 
-**Properties of dashlets containing the text include:**
-
-  **Properties of dashlets containing the text include:**
 
 **Properties of dashlets containing the text include:**
 
-  
 | Property | Description |
 | --- | --- |
 | Dashlet Name | Editable field for the displayed dashlet name. |
@@ -75,7 +63,6 @@ Click to view the changes.
 | Font | Use the selection lists and buttons to set the font, font size, font style, alignment, and font color for the text displayed in the dashlet. |
 
 **Properties of dashlets containing a web page include:**
-
   
 | Property | Description |
 | --- | --- |
@@ -90,8 +77,7 @@ Click to view the changes.
 If the page has **X-Frame-Options HTTP** response header, the page will be blocked by the browser.  
 
 **Properties for dashlets containing an image include:**
-
-  
+ 
 | Property | Description |
 | --- | --- |
 | Dashlet Name | Editable field for the displayed dashlet name. |
@@ -101,7 +87,6 @@ If the page has **X-Frame-Options HTTP** response header, the page will be block
 | Scale to Fit | The menu list to determine how the image is scaled in the dashlet. |
 
 **Properties of dashlets containing a filter include:**
-
   
 | Property | Description |
 | --- | --- |

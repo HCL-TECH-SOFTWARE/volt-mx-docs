@@ -8,8 +8,7 @@ category: "custom_metrics_and_reports"
 
 Standard Metrics and Events
 ---------------------------
-
-*   
+   
 <details close markdown="block"><summary>Fields</summary>
     
     1.  Application Name - Name of the application.
@@ -72,12 +71,9 @@ Standard Metrics and Events
     58.  Integration service version – Version of the integration service served by the application server for a service request.
     59.  Network Type - Mobile Network vs WiFi (networktype) - indicates the type of network during the time of the crash. Valid values are `mobilenetwork` and `WiFi`.
     
+</details>
 
-
-*
-   </details>
-<details close markdown="block"><summary>Measures</summary>
-    
+<details close markdown="block"><summary>Measures</summary>    
     1.  Internal Duration - Time spent by the service call in Volt MX App Services for internal processing.
     2.  Total Duration
     3.  External Duration
@@ -101,7 +97,7 @@ Standard Metrics and Events
     21.  CPU usage - indicates the % of CPU being used at the time of the crash.
     22.  Form Duration - The amount of time spent in a particular form in milliseconds.
     23.  Count
-    </details>
+</details>
     
 
 > **Note:**  

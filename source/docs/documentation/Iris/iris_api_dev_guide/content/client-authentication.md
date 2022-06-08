@@ -11,7 +11,7 @@ Client Authentication
 
 The Client Authentication API provides your apps with the ability to authenticate clients that want to access an HTTPS servers. Client authentication is required in cases where HTTPS servers ( optionally) request the client to authenticate itself using a Digital Certificate before establishing SSL connection.
 
-To authentication client itself to HTTPS server, you need to load the required client certificate into the application. Once the certificate is loaded, the client can perform all HTTPS communications using the service invoker and HTTP request APIs till the application is alive.
+To authenticate the client itself to HTTPS server, you need to load the required client certificate into the application. Once the certificate is loaded, the client can perform all HTTPS communications using the service invoker and HTTP request APIs till the application is alive.
 
 The loaded client certificate is sent to a server for authentication in the SSL Handshake phase only when the server challenges the client to authenticate itself. If the server does not challenge the client to authenticate, the certificate is not shared with server.
 

@@ -11,10 +11,6 @@ The **\<object\>.rollback** function rolls back all changes of an object in a de
 Volt MX  Iris (JavaScript)
 -------------------------------
 
-> **Note:**  
-*   Supported in iOS and Android channels from V8 SP2 onwards.  
-*   Supported in all channels from V8 SP4 onwards.  
-
 ### Signature
 
 {% highlight voltMx %}<VMXObj>.rollback(primaryKeyValueMap, successCallback, failureCallback)

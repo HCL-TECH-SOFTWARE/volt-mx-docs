@@ -51,7 +51,7 @@ Methods
 The com.voltmx.PeripheralManager class has the following methods:
 
 
-<details close markdown="block"><summary>authorizationStatus</summary>
+<details close markdown="block"><summary id="authoriz">authorizationStatus</summary>
 
 The authorization status of an application is managed by the system and determined by several factors. Applications must be clearly authorized to share data using Bluetooth services while in the background state. The system automatically displays a request for user authorization when your app first attempts to use Bluetooth services to share data.
 
@@ -92,7 +92,7 @@ Available only on iOS.
 * * *
 
 </details>
-<details close markdown="block"><summary>isAdvertising</summary>
+<details close markdown="block"><summary id="isAdvert">isAdvertising</summary>
 
 To determine if the Peripheral Manager is currently advertising data.
 
@@ -120,7 +120,7 @@ Available only on iOS.
 * * *
 
 </details>
-<details close markdown="block"><summary>startAdvertisingWithMeasuredPower</summary>
+<details close markdown="block"><summary id="startAdv">startAdvertisingWithMeasuredPower</summary>
 
 Starts advertising beacon data with Measured Power.
 
@@ -153,7 +153,7 @@ Available only on iOS.
 * * *
 
 </details>
-<details close markdown="block"><summary>stopAdvertising</summary>
+<details close markdown="block"><summary id="stopAdve">stopAdvertising</summary>
 
 Stops advertising Peripheral Manager data.
 

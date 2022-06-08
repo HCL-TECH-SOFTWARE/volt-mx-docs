@@ -20,11 +20,11 @@ voltmx.timer.cancel
 
 This API cancels the timer that has already been scheduled for execution.
 
-Syntax
+<h3>Syntax</h3>
 
 voltmx.timer.cancel([timerid](#timerid1))
 
-Input Parameters
+<h3>Input Parameters</h3>
 
   
 | Parameter | Description |
@@ -33,7 +33,7 @@ Input Parameters
 
  
 
-Example
+<h3>Example</h3>
 
 {% highlight voltMx %} /*To cancel the scheduled timer use the below code snipppet. Use the Timer ID of the
   scheduled timer to cancel the timer.
@@ -45,24 +45,24 @@ Example
 
 {% endhighlight %}
 
-Return Values
+<h3>Return Values</h3>
 
 None
 
-Exceptions
+<h3>Exceptions</h3>
 
 Error
 
-Error Codes
+<h3>Error Codes</h3>
 
 *   100 - invalid arguments
 *   101 - internal error
 
-Implementation Details
+<h3>Implementation Details</h3>
 
 If the timer is waiting to be run, it will not be run the next time. If the timer is in the middle of execution, it will be allowed to complete and then canceled.
 
-Platform Availability
+<h3>Platform Availability</h3>
 
 Available on all platforms\*. \*Dummy Implementation on Mobile Web.
 
@@ -71,11 +71,11 @@ voltmx.timer.setCallBack
 
 This API specifies the callback function that needs to be executed for a scheduled timer. The callback function handles the logic that needs to be executed after a scheduled timer was run successfully or the scheduled timer failed to execute. The setCallBack timer API is provided to override the existing time call back function which is defined in the "schedule" timer API.
 
-Syntax
+<h3>Syntax</h3>
 
 voltmx.timer.setCallBack([timerid](#timerid), [callbackfunction](#callbackfunction))
 
-Input Parameters
+<h3>Input Parameters</h3>
 
 | Parameter | Description |
 | --- | --- |
@@ -84,7 +84,7 @@ Input Parameters
 
  
 
-Example
+<h3>Example</h3>
 
 {% highlight voltMx %}//This function is called when you use the setCallBack Timer API  
   callbackfunction: function(){
@@ -97,15 +97,15 @@ Example
   },
 {% endhighlight %}
 
-Return Values
+<h3>Return Values</h3>
 
 None
 
-Exceptions
+<h3>Exceptions</h3>
 
 Error
 
-Platform Availability
+<h3>Platform Availability</h3>
 
 Available on all platforms\*. \*Dummy Implementation on Mobile Web.
 
@@ -116,15 +116,15 @@ voltmx.timer.schedule
 
 This API executes the given function after a specified interval of time.
 
-Use Cases
+<h3>Use Cases</h3>
 
 You can use this API when you want to execute a function after a specified interval of time. i.e, for example to run a specific function for every 15 seconds.
 
-Syntax
+<h3>Syntax</h3>
 
 voltmx.timer.schedule([timerid](#timerid2), [functionObj](#functionObj), [interval](#interval), [repeat](#repeat))
 
-Input Parameters
+<h3>Input Parameters</h3>
 
 | Parameter | Description |
 | --- | --- |
@@ -133,7 +133,7 @@ Input Parameters
 | interval \[Number\] - Mandatory | Specifies the time in seconds after which the function needs to be executed. |
 | repeat \[Boolean\] - Mandatory | Specifies a flag that indicates if the function needs to executed once or repeated._true_ - indicates that the execution of the function needs to repeated at regular intervals_false_ - indicates that the function needs to be executed just once |
 
-Example
+<h3>Example</h3>
 
 {% highlight voltMx %}  //This function is called when you schedule the timer
   generateAlert: function(){
@@ -146,15 +146,15 @@ Example
 
 {% endhighlight %}
 
-Return Values
+<h3>Return Values</h3>
 
 None
 
-Exceptions
+<h3>Exceptions</h3>
 
 Error
 
-Platform Availability
+<h3>Platform Availability</h3>
 
 Available on all platforms\*. \*Dummy Implementation on Mobile Web.
 

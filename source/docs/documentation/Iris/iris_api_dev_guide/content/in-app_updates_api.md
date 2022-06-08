@@ -4,7 +4,8 @@ category: "iris_api_dev_guide"
 ---
                             
 
-You are here: In-APp Updates API
+You are here: In-App Updates API
+
 
 In-App Updates
 ==============
@@ -16,7 +17,7 @@ The Google Play Core library offers the following methods to notify a user about
 *   [Flexible approach](#Flexible)
 *   [Immediate approach](#Immediate)
 
-Flexible approach
+<h3 id="Flexible">Flexible approach</h3>
 
 The flexible approach provides a user experience that supports the download and installation of the update in the background and has a graceful state monitoring. Developers can use this approach when an app update does not affect the core functionality of the app, or contains a new feature. Use this approach when it is acceptable for the user to continue using the app while the update is downloaded and installed in the background.
 
@@ -24,7 +25,7 @@ Here is an example flow of the flexible app update approach:
 
 ![](resources/images/flexibleupdate.png)
 
-Immediate approach
+<h3 id="Immediate">Immediate approach</h3>
 
 The immediate approach provides a full-screen user experience that requires a user to update and restart the app to continue using the app. Developers can use this approach when an app update is critical and affects the core functionality of the app.
 

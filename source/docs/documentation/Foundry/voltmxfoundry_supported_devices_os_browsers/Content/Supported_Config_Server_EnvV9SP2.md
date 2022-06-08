@@ -34,6 +34,7 @@ The installation of the Volt MX Foundry software supports the following versions
     *   RHEL 8
     *   RHEL 7.7 (Maipo)
     *   RHEL 7.6
+    *   RHEL 7.8
 *   Ubuntu 19.04
 *   Ubuntu 18.04.2 LTS
 

@@ -108,8 +108,8 @@ To create Locator or MDSYS schema, follow the steps mentioned in either option #
     **Doc ID 1066837.1** :- Oracle Spatial and Oracle Locator Licensing Information.
     
 
-MariaDB
--------
+<h2 id="maria-db">MariaDB</h2>
+
 
 ### Increase the table\_definition\_cache and table\_open\_cache values
 

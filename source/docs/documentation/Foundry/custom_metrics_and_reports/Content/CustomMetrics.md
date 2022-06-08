@@ -48,7 +48,7 @@ To create a custom metric, follow these steps: 
 
 ![](Resources/Images/AddCMPane_574x223.png)
 
-3.  Enter a name in the **Name (key)** area. Each metric is identified by a key that must to be unique within the application. The application code must use the same Name for sending data in the key-value pairs in [JSON string](#MetricsClientAPI) . The key is case insensitive.
+3.  Enter a name in the **Name (key)** area. Each metric is identified by a key that must to be unique within the application. The application code must use the same Name for sending data in the key-value pairs in JSON string. The key is case insensitive.
 4.  Select a **Data Type** from the list. The available values are Long (integer values), Double (values with decimal points like 12.5), String, and Date.
 
 > **_Note:_** The data type mentioned here must match the data type sent from the application for the metric name.

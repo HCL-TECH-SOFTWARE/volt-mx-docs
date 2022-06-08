@@ -57,11 +57,15 @@ Use the following steps to import your existing certificate to cacerts with the 
 
 1.  Run the following command to import the `intermediate.crt` certificate file into your Volt MX Foundry Installer's JRE trusted certificate authority (CA) certificates file:
     
-    <USERINSTALLDIR>\\jre\\bin\\keytool -import -noprompt -trustcacerts -alias "<yourcertificate\_domain>" -file <USERINSTALLDIR>\\intermediate.crt -keystore <USERINSTALLDIR>\\jre\\lib\\security\\cacerts -storepass changeit
+    \<USERINSTALLDIR>\\jre\\bin\\keytool -import -noprompt -trustcacerts -alias "<yourcertificate\_domain>" -file  
+     
+    \<USERINSTALLDIR>\\intermediate.crt -keystore 
+    
+    \<USERINSTALLDIR>\\jre\\lib\\security\\cacerts -storepass changeit
     
 
-JDK Version Compatibility
--------------------------
+
+<h3 id="jdk-version-compatibility">JDK Version Compatibility</h3>
 
 In case if you upgrade your JDK version in your middleware server, to enable JDK version compatibility, make the appropriate changes in an app server's  `middleware.properties` file located in your middleware server installation folder.
 
@@ -79,8 +83,8 @@ For example: When you upgrade JDK V 1.6 to JDK V 1.7 (vice-versa), you can still
     *   `ssl.trustStore=<java_home>/jre/lib/security/cacerts`
     *   `ssl.keyStore=<java_home>/jre/lib/security/cacerts`
 
-How to Update Security Configuration in Config.xml (Required in case of WebLogic installation)
-----------------------------------------------------------------------------------------------
+
+<h2 id="how-to-update-security-configuration-in-config-xml-required-in-case-of-weblogic-installation">How to Update Security Configuration in Config.xml (Required in case of WebLogic installation)</h2>
 
 When you install Volt MX Foundry on WebLogic, with default configuration in the WebLogic's config.xml file, Volt MX Foundry fails to register with environments.
 
@@ -100,8 +104,8 @@ To update security configuration in the config.xml file in WebLogic, follow thes
         <enforce-valid-basic-auth-credentials>false</enforce-valid-basic-auth-credentials> 
     {% endhighlight %}
 
-How to Configure Memcache for Integration Services
---------------------------------------------------
+
+<h2 id="how-to-turn-off-the-send-usage-data-anonymously-feature">How to Configure Memcache for Integration Services</h2>
 
 *   For Volt MX Foundry version 7.3 or above, you can configure the memcache from Admin console.
     
@@ -136,8 +140,7 @@ How to Configure Memcache for Integration Services
         https://<server-host>:<server-port>/admin/healthcheck?output=json<br>![](Resources/Images/HC2_412x242.png)
         
 
-Configure Deployment of mbaasportal.war File for Multi-Node
------------------------------------------------------------
+<h2 id="configure-deployment-of-mbaasportal-war-file-for-multi-node">Configure Deployment of mbaasportal.war File for Multi-Node</h2>
 
 Once Volt MX Foundry installation succeeds, the Volt MX Foundry Console will not be displayed as the **enable-welcome-root** value is set **true** in the`domain.xml` file**.**
 
@@ -146,8 +149,7 @@ To configure mbaasportal.war, follow these steps:
 1.  In the master node, open the `domain.xml` file from `JBOSSDIR\domain\configuration`, and search for enable-welcome-root="true."
 2.  Replace enable-welcome-root="true" with enable-welcome-root="false."
 
-Remote Installation Prerequisites
----------------------------------
+<h2 id="remote-installation-pre-requisites">Remote Installation Prerequisites</h2>
 
 After you have installed Volt MX Foundry, you must retain the **Installation** folder for upgrades. While upgrading, the Volt MX Foundry installer requires the `installvariables.properties` file under the `<USER_INSTALL_DIR>/_VoltMX Foundry_installation` folder.
 

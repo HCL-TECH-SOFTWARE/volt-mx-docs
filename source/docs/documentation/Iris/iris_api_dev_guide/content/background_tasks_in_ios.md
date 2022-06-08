@@ -98,7 +98,7 @@ Supported Versions and Platforms
 
 The Background Job feature: 
 
-*   Available in Volt MX iOS platform versions above 5.6.2.
+<!-- *   Available in Volt MX iOS platform versions above 5.6.2. -->
 *   Supports iOS7 and the platforms above.
 *   Supported only in JavaScript.
 
@@ -127,7 +127,7 @@ registerBackgroundFetch can be used to register a background fetch job. A JavaSc
 
   1. constants.BACKGROUND\_TASK\_FETCH\_INTERVAL\_MINIMUM
 
-     \* This is the default value. System decides the fetch interval depending on the usage prediction for the app.
+     This is the default value. System decides the fetch interval depending on the usage prediction for the app.
 
   2. constants.BACKGROUND\_TASK\_FETCH\_INTERVAL\_NEVER
 
