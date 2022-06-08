@@ -22,11 +22,11 @@ The _changeVersion_ method allows scripts to automatically verify the version nu
 
 When you invoke this API, it returns immediately and asynchronously reads the transaction.
 
-Syntax
+<b>Syntax</b>
 
 voltmx.db.changeVersion([dbaseObjectId](#dbaseObjectId25), [oldVersion, newVersion, SQLTransactionCallback, SQLTransactionErrorCallback, SQLTransactionVoidCallback](#dbaseObjectId1))
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -38,7 +38,7 @@ Input Parameters
 | SQLTransactionErrorCallback \[Function\] - Optional | Specifies the callback that must be executed if there is an error in executing the transaction. This callback function is used to roll back the updates to the database. For example:function errorCallback(SQLError){//code} |
 | SQLVoidCallback \[Function\] - Optional | Specifies the callback that must be executed if the transaction is successful. For example:function successCallback(){//code} |
 
-Example
+<b>Example</b>
 
 {% highlight voltMx %}changeVersion: function() {
     this.baseObjectId = voltmx.db.openDatabase("webSqlDB",
@@ -50,11 +50,11 @@ Example
 }
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms\* except SPA for desktop IE8, IE9, IE10 browsers. \*Dummy implementation on Mobile Web.
 
@@ -63,18 +63,18 @@ voltmx.db.closeDatabase
 
 This API allows you to close the database handler of the specified version of a database.
 
-Syntax
+<b>Syntax</b>
 
 voltmx.db.closeDatabase([dbaseObjectId](#closedbaseObjectId))
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
 | --- | --- |
 | dbaseObjectId \[String\] - Mandatory | Specifies the unique ID of the database |
 
-Example
+<b>Example</b>
 
 {% highlight voltMx %}//The following function invokes the closeDatabase API
 function closeDatabase() {
@@ -88,11 +88,11 @@ function closeDatabase() {
 }
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on iOS platform.
 
@@ -103,11 +103,11 @@ This API allows you to execute a specified SQL statement on the given database. 
 
 > **_Important:_** The table names and column names are case sensitive.
 
-Syntax
+<b>Syntax</b>
 
 voltmx.db.executeSql([transactionId](#transactionId),[SQLStatement](#SQLStatement), [arguments](#arguments),[SQLStatementSuccessCallback](#SQLStatementSuccessCallback),[SQLStatementErrorCallback](#SQLStatementErrorCallback))
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -118,7 +118,7 @@ Input Parameters
 | SQLStatementSuccessCallback \[Function\] - Optional | Specifies the callback function that must be executed when the execution of the SQL statement is a success. |
 | SQLStatementErrorCallback \[Function\] - Optional | Specifies the callback function that must be executed when the execution of the SQL statement is a failure.This callback returns a boolean value._true_ - ends the execution of the transaction. _true_ is returned if there is no callback function specified as a parameter.> **_Important:_** When _true_ is returned, the transaction is rolled back._false_ - continues executing the transaction.The default return value is _false_ for this callback. |
 
-Example
+<b>Example</b>
 
 {% highlight voltMx %}The below function inserts 3 rows into the 'employee_details' table.   
 var insertTable = [
@@ -139,11 +139,11 @@ for (i = 1;
 }
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Error Codes
+<b>Error Codes</b>
 
 The following table lists the error codes along with its corresponding error messages:
 
@@ -160,7 +160,7 @@ The following table lists the error codes along with its corresponding error mes
 
 For more information, refer [SQL Error Codes](http://www.w3.org/TR/webdatabase#dom-sqlexception-code-unknown)
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms\* except for SPA in Windows Phone 7.5 and windows Phone 8 browsers, for desktop IE8, IE9, IE10 browsers.\*Dummy Implementation on Mobile Web.
 
@@ -169,13 +169,13 @@ voltmx.db.openDatabase
 
 This API allows you to open the specified version of a database. This is an asynchronous API.
 
-> **_Important:_** The passphrase parameter in this API is not supported in 6.5 plugins, so database encryption is not available in 6.5 plugins.
+<!-- > **_Important:_** The passphrase parameter in this API is not supported in 6.5 plugins, so database encryption is not available in 6.5 plugins. -->
 
-Syntax
+<b>Syntax</b>
 
 voltmx.db.openDatabase([dbname](#name),[version](#version),[displayName](#displayName), [estimatedSize](#estimatedsize), [passphrase](#passphrase))
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -185,17 +185,17 @@ Input Parameters
 | displayName \[String\] - Mandatory | Specifies the display name of the database that you want to open. |
 | estimatedSize \[Number\] - Optional | Specifies the approximate size of the database in bytes.> **_Note:_** This parameter is applicable only on the SPA platform. |
 
-passphrase
+<b>passphrase</b>
 
 This is applicable for [iOS](#passphraseiOS) and [Android](#passphraseAndroid)
 
-iOS
+<b>iOS</b>
 
-      **passphrase**\[Array\] - Optional
+**passphrase\[Array\] - Optional**
 
         In iOS, this argument is used to specify Pragma statements (Array) to encrypt database.
 
-   **Usage**
+**Usage**
 
 *   To link the SQLCipher library, extract the KAR file with **\-sqlcipher** option. After the extraction, pass the **passphrase** for the SQL engine to encrypt the database.  
 
@@ -203,15 +203,17 @@ perl extract.pl /Users/PLATFROM/Downloads/voltmxappipad.KAR –sqlcipher
 
 > **_Note:_** For more information on this parameter and Pragma statements, see [https://www.zetetic.net/sqlcipher/sqlcipher-api/](https://www.zetetic.net/sqlcipher/sqlcipher-api/).
 
-Android
+**Android**
 
-passphrase \[String\] - Optional
+**passphrase \[String\] - Optional**
 
 In Android, this argument is used to specify password (String) to encrypt database.
 
-The developer needs to enable **Support SQL DB Encryption (FIPS)** option in **VoltMX Iris\> Application Properties > Native > Android** section in order to support database encryption using passphrase.
+<!-- The developer needs to enable **Support SQL DB Encryption (FIPS)** option in **VoltMX Iris\> Application Properties > Native > Android** section in order to support database encryption using passphrase. -->
+The developer needs to enable **Support SQL DB Encryption (FIPS)** option in **VoltMX Iris \> Project Settings > Native > Android** section in order to support database encryption using passphrase.
 
-Windows 10
+
+**Windows 10**
 
 A free version of the sqlite library is available to support encryption. Therefore a license is not needed and you do not need to copy the zip files.
 
@@ -227,7 +229,7 @@ The database will not be encrypted in the following conditions: 
 
 > **_Important:_** The framework does not store the passphrase argument to `voltmx.db.openDatabase()` API, it is responsibility of application developer to secure the password.
 
-Example
+<b>Example</b>
 
 {% highlight voltMx %}//The below function will invoke openDatabase
 function openDatabase() {
@@ -248,7 +250,7 @@ function openDatabase() {
 }
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
   
 | Return Value | Description |
@@ -257,11 +259,11 @@ Return Values
 
  
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms(dummy implementation on MobileWeb) except for SPA in desktop IE8, IE9, and IE10 browsers.
 
-Using the Pre Bundled Database
+<b>Using the Pre Bundled Database</b>
 
 **Bundling:** For information about how to bundle a database, refer to the Pre Bundling the Files.
 
@@ -307,12 +309,12 @@ When you invoke this API, it returns immediately and asynchronously reads the tr
 
 > **_Important:_** The table names and column names are case sensitive.
 
-Syntax
+<b>Syntax</b>
 
 voltmx.db.readTransaction([dbaseObjectId](#dbaseObjectId1),[TransactionCallback](#TransactionCallback1),[TransactionErrorCallback](#TransactionErrorCallback1),  
 [SuccessCallback](#SuccessCallback1))
 
-Input Parameters
+<b>Input Parameters</b>
 
 | Parameter | Description |
 | --- | --- |
@@ -321,7 +323,7 @@ Input Parameters
 | TransactionErrorCallback \[Function\] - Optional | Specifies the callback that must be executed if there is an error in executing the transaction. This callback function is used to roll back the updates to the database.For example:function errorCallback(SQLError){//Code} |
 | SuccessCallback \[Function\] - Optional | Specifies the callback that must be executed if the transaction is successful.For example:function successCallback(){//code} |
 
-Example
+<b>Example</b>
 
 {% highlight voltMx %}//The below function specifies the callback function that contains the transactions.
 function myTransactionCallback(dbId) {
@@ -348,11 +350,11 @@ function readTransaction() {
 }
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms\* except for SPA for desktop IE8, IE9, IE10 browsers.\*Dummy Implementation on Mobile Web.
 
@@ -363,11 +365,11 @@ This API returns the row available at the specified index. If there is no such r
 
 > **_Important:_** The table names and column names are case sensitive.
 
-Syntax
+<b>Syntax</b>
 
 voltmx.db.sqlResultsetRowItem([transactionID](#transactionId),[SQLResultSet](#SQLResultSet),[index](#index))
 
-Input Parameters
+<b>Input Parameters</b>
 
 | Parameters | Description |
 | --- | --- |
@@ -377,7 +379,7 @@ Input Parameters
 
   
 
-Example
+<b>Example</b>
 
 {% highlight voltMx %}//The below function specifies the callback function that must be executed when the execution of the SQL statement is a success also invokes sqlResultsetRowItem.
 function sql_success(transactionId, resultset){
@@ -395,7 +397,7 @@ function sql_success(transactionId, resultset){
 
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 | Return Value | Description |
 | --- | --- |
@@ -404,7 +406,7 @@ Return Values
 
  
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms\* except for SPA for desktop IE8, IE9, IE10 browsers.\*Dummy Implementation on Mobile Web.
 
@@ -417,12 +419,12 @@ This is an asynchronous API. This API creates an `SQLTransaction` object.
 
 > **_Important:_** The table names and column names are case sensitive.
 
-Syntax
+<b>Syntax</b>
 
 voltmx.db.transaction([dbaseObjectId](#dbaseObjectId),[transactionCallback](#TransactionCallback),[transactionErrorCallback](#TransactionErrorCallback),  
 [successCallback](#SuccessCallback))
 
-Input Parameters
+<b>Input Parameters</b>
 
 | Parameter | Description |
 | --- | --- |
@@ -431,7 +433,7 @@ Input Parameters
 | transactionErrorCallback \[Function\] - Optional | Specifies the callback that must be executed if there is an error in executing the transaction. This callback function is used to roll back the updates to the database.For example:function errorCallback(SQLError){//write code here} |
 | successCallback \[Function\] - Optional | Specifies the callback that must be executed if the transaction is successful.For example:function successCallback(){//code here}When the transaction is successful, this callback is executed along with the callback function of the _voltmx.db.executeSql_ API. |
 
-Example
+<b>Example</b>
 
 {% highlight voltMx %}//The below function specifies the callback function that contains the transactions.
 function myTransactionCallback(dbId) {
@@ -459,11 +461,11 @@ function transaction() {
 }
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms\* except for SPA for desktop IE8, IE9, IE10 browsers.\*Dummy Implementation on Mobile Web.
 

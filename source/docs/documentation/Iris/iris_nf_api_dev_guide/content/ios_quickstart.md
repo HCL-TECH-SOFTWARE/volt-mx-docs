@@ -20,7 +20,6 @@ Prerequisites
 The following are the prerequisites to use Native APIs:
 
 *   A computer running a recent version of Mac OS.
-*   Volt MX Iris Version 7.2.
 *   Xcode and a configured emulator or device. The Volt MX Iris Preview app can not be used to run this application.
 *   Some knowledge of Objective C development.
 
@@ -62,21 +61,25 @@ Now do the same thing from JavaScript in Iris.
 
 ### The JavaScript Project
 
-1.  [Create a New Project]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/CreateNewProject.html?Highlight=Create a project) in Iris.
-    
+1.  [Create a New Project]({{ site.baseurl }}/docs/
+    documentation/Iris/iris_user_guide/Content/CreateNewProject.html?Highlight=Create a project) in Iris.   
 2.  Add the iOS **Foundation** framework for to the project.
 3.  Add a form to your project.
 4.  Add a **button** and a **label** to the form.
 5.  Add a JavaScript **module** to the project.
-6.  In the JavaScript module, create this function, where `frmMain` is the name of your form, and `log` is the name of your label.{% highlight voltMx %}function testNativeFunctionAPI(){
-      var NSString = objc.import("NSString");
-      var format = NSString.stringWithFormat("Hello %@ !! Enjoy your day"  ,["World"]);
-      frmMain.log.text = format;
-    }
-    
-    {% endhighlight %}
-7.  Set the `onClick` action of the button to call `testNativeFunctionAPI`.
-8.  Build and run your application in the iOS emulator or on a device.You can not run the application using the Volt MX Iris App.
+6.  In the JavaScript module, create this function,
+    where`frmMain` is the name of your form, and `log` is the name of your label.
+
+           function testNativeFunctionAPI(){
+           var NSString = objc.import("NSString");
+           var format = NSString.stringWithFormat("Hello %@ !! Enjoy your day"  ,["World"]);
+           frmMain.log.text = format;
+           }
+           
+   7.    Set the `onClick` action of the button to call
+       `testNativeFunctionAPI`.
+   8.    Build and run your application in the iOS emulator
+         or on a device.You can not run the application using the Volt MX Iris App.
 
 ### What just happened?
 

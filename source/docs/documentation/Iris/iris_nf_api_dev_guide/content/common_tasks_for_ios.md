@@ -23,35 +23,35 @@ This API allows you to import any iOS native class into JavaScript. All the APIs
 
 To use this API you will follow these general steps:
 
-*   In Iris Enterprise, add the appropriate frameworks to your project. See: [Add or Import Native Function APIs]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/AddOrImportNativeFunctionAPIs.html)
+*   In Iris, add the appropriate frameworks to your project. See: [Add or Import Native Function APIs]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/AddOrImportNativeFunctionAPIs.html)
 *   In JavaScript, import the classes you wish to use using [objc.import](#objcimport).
 *   [Instantiate the class](#creating-instances-using-designated-initializers) (Not needed for static methods).
 *   Use the objects associated with the class.
 
-#### Signature
+### Signature
 
 JavaScript: objc.import (objectiveC\_class\_name)
 
-#### Input Parameters
+### Input Parameters
 
 objc.import (objectiveC\_class\_name) - Mandatory
 
 Specifies the native class name including the package name that you want to use in JavaScript.
 
-#### Return Values
+### Return Values
 
 Returns a JavaScript object
 
-#### Platform Availability
+### Platform Availability
 
 Available for iOS.
 
-#### JavaScript Example
+### JavaScript Example
 
 {% highlight voltMx %}var HKHealthStore = objc.import('HKHealthStore');
 {% endhighlight %}
 
-#### Invoking Static Methods
+### Invoking Static Methods
 
 Static methods can be accessed as properties of the JavaScript object returned by objc.import. For example, the static method isHealthDataAvailable from the class HKHealthStore can be invoked using the following syntax:
 
@@ -63,7 +63,7 @@ For the methods that take one or more arguments in JavaScript, refer to [Method 
 
 For the methods that are supported, refer to [Type support](#type-support).
 
-#### Creating Instances Using Designated Initializers
+### Creating Instances Using Designated Initializers
 
 In Objective-C, instances of a class are created by using the alloc/init combination or convenience constructors. The alloc and convenience constructors are static methods that can be invoked as described in the [previous](#invoking-static-methods) section. Invoking theinit method is described in the [next](#invoking-instance-methods) section.
 
@@ -74,7 +74,7 @@ var unit = HKUnit.unitFromString('count');
 
 {% endhighlight %}
 
-#### Invoking Instance Methods
+### Invoking Instance Methods
 
 Instance methods of an Objective-C object are available as properties of the JavaScript object that represents the Objective-C object. For example, the instance method reciprocalUnit of HKUnit can be invoked as:
 
@@ -84,7 +84,7 @@ var runit = unit.reciprocalUnit();
 
 {% endhighlight %}
 
-#### Accessing Properties of Objective-C Objects
+### Accessing Properties of Objective-C Objects
 
 The properties of an Objective-C object are available as properties of the JavaScript object that wraps the Objective-C object.
 
@@ -106,7 +106,7 @@ var batteryLevel = currentDevice.batteryLevel;
 
 {% endhighlight %}
 
-#### Constants
+### Constants
 
 Both enums and global constants are available as JavaScript globals.
 
@@ -123,7 +123,7 @@ Example 2:
 
 The global constant HKCorrelationTypeIdentifierFood is available as the JavaScript global value of type string with the same name.
 
-#### Method Name Convention
+### Method Name Convention
 
 A selector that takes one or more arguments can be invoked by using a JavaScript property name that is arrived at by removing all colons and capitalizing any lowercase letter that follows a colon. For example, doFoo:withBar: becomes doFooWithBar.
 
@@ -133,7 +133,7 @@ Prefixed methods:
 *   Any instance method that starts with init and accepts no parameters mu7st be prefixed by js.
 *   Any method that returns a selector and accepts no parameters has to be prefixed by js.
 
-#### Type Support
+### Type Support
 
 Type conversions for Objective-C to JavaScript  
 
@@ -251,11 +251,11 @@ var EventHandler = objc.newClass("EventHandler", "NSObject", null, {
 });
 {% endhighlight %}
 
-#### Memory Management
+### Memory Management
 
 Memory management occurs automatically. You need not invoke release/retain/autorelease.
 
-#### NSError
+### NSError
 
 For API calls which expect an NSError\* as input, it is necessary that we pass a JavaScript object as input when making the call using the Native Function API.
 
@@ -294,11 +294,11 @@ In addition, instances also have access to a super method when a method is overr
 
 Inside a JavaScript function that defines or overrides a native instance method, the instance can be accessed by "this".
 
-#### Signature
+### Signature
 
 JavaScript: objc.newClass(native\_class\_name, base\_class\_name, interface\_name, interface\_name\_to\_override)
 
-#### Input Parameters
+### Input Parameters
 
 native\_class\_name \[String\] - Mandatory
 
@@ -316,15 +316,15 @@ interface\_name\_to\_override \[String\] - Mandatory
 
 Specifies the interface name that must be overridden or implemented by the new class.
 
-#### Return Values
+### Return Values
 
 Returns the class that is extended.
 
-#### Platform Availability
+### Platform Availability
 
 Available on iOS platform.
 
-#### JavaScript Example
+### JavaScript Example
 
 {% highlight voltMx %}//Sample code  
 var ViewController = objc.newClass('ViewController', 'UIViewController', ['PKPaymentAuthorizationViewControllerDelegate'], {	paymentAuthorizationViewControllerDidAuthorizePaymentCompletion: function(controller, payment, completion) {},								paymentAuthorizationViewControllerDidFinish: function(controller) {},paymentAuthorizationViewControllerDidSelectShippingMethodCompletion: function(controller, shippingmethod, completion) {}
@@ -333,11 +333,11 @@ var ViewController = objc.newClass('ViewController', 'UIViewController', ['PKPay
 
 > **_Note:_** A handle to the JavaScript object has to be retained to be able to add properties that represents an instance of a class created using objc.newClass API. If the handle is not retained, you will lose the properties that are added as part of callback functions.
 
-#### Variadic Methods
+### Variadic Methods
 
 Support for variadic methods is limited. You can pass a maximum of 10 arguments.
 
-#### Auto-Converted Types
+### Auto-Converted Types
 
 The instances of NSNull, NSString, NSNumber, NSDictionary, NSArray, and NSDate and their derivatives are not available in JavaScript because they are automatically converted to and from null, string, number, object, array, and date JavaScript types.
 
@@ -345,17 +345,17 @@ For example, an Objective-C method, (void) doFooWithId: (NSString\*) id data: (N
 
 > **_Note:_** A "NSNull" in Objective-C is mapped to a "null" in JavaScript, and "nil" in Objective-C is mapped to "undefined in JavaScript."
 
-#### Zones
+### Zones
 
 Zones are not available.
 
-#### Threads
+### Threads
 
 In an application developed using Volt MX Iris, most of the JavaScript execution happens on a separate thread (referred to as JavaScript thread). When you need to invoke a Java API that can only be called from the main thread, use the API [voltmx.runOnMainThread]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_functions.html#voltmx.run). To resume execution back on JavaScript thread, use the API[voltmx.runOnWorkerThread.]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx_functions.html#voltmx.run2)
 
 For more information on Threading APIs, [click here](#Threadin).
 
-#### Presenting viewController
+### Presenting viewController
 
 If you want to present your own viewController, you have to present it as a modal View Controller on top of the existing rootView Controller. The current rootViewController can be accessed as UIApplication.sharedApplication().keyWindow.rootViewController.
 

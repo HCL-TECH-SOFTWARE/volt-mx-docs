@@ -20,11 +20,11 @@ sync.getPendingAcknowledgement
 
 This API is used to fetch pending acknowledgment for all objects.
 
-Syntax
+<h3>Syntax</h3>
 
 sync.getPendingAcknowledgement ([successCallback](#successCallback2), [errorCallback](#errorCallback2))
 
-Input Parameters
+<h3>Input Parameters</h3>
 
   
 | Parameter | Description |
@@ -32,9 +32,7 @@ Input Parameters
 | successCallback \[function\] - Optional | Specifies the function which will get invoked on success. |
 | errorCallback \[function\] - Optional | Specifies the function which will get invoked on error. |
 
- 
-
-Example
+<h3>Example</h3>
 
 {% highlight voltMx %}function SyncGetPendingAcknowledgement()
 sync.getPendingAcknowledgement(successCallback, errorFailCallback)
@@ -50,7 +48,7 @@ end
 
 {% endhighlight %}
 
-Platform Availability
+<h3>Platform Availability</h3>
 
 Available on all platforms.
 
@@ -59,20 +57,18 @@ sync.getPendingUpload
 
 This API fetches all the rows for all objects those are pending for upload.
 
-Syntax
+<h3>Syntax</h3>
 
 sync.getPendingUpload [(successCallback](#successCallback3), [errorCallback](#errorCallback3))
 
-Input Parameters
+<h3>Input Parameters</h3>
 
 | Parameter | Description |
 | --- | --- |
 | successCallback \[function\] - Optional | Specifies the function which will get invoked on success. |
 | errorCallback \[function\] - Optional | Specifies the function which will get invoked on error. |
 
- 
-
-Example
+<h3>Example</h3>
 
 {% highlight voltMx %}function SyncGetPendingUpload()
 sync.getPendingUpload(successCallback, errorFailCallback)
@@ -88,7 +84,7 @@ end
 
 {% endhighlight %}
 
-Platform Availability
+<h3>Platform Availability</h3>
 
 Available on all platforms.
 
@@ -97,20 +93,18 @@ sync.init
 
 This API is used to initialize the creation of device database for sync.
 
-Syntax
+<h3>Syntax</h3>
 
 sync.init ([initSuccessCallback](#initSuccessCallback) , [initFailCallback](#initFailCallback))
 
-Input Parameters
+<h3>Input Parameters</h3>
 
 | Parameter | Description |
 | --- | --- |
 | initSuccessCallback \[function\] - Optional | Specifies the function which will get invoked on success. |
 | initFailCallback \[function\] - Optional | Specifies the function which will get invoked on failure. |
 
- 
-
-Example
+<h3>Example</h3>
 
 {% highlight voltMx %}function SyncInit()
 sync.init(initSuccessCallback ,initFailCallback)
@@ -126,7 +120,7 @@ end
 
 {% endhighlight %}
 
-Platform Availability
+<h3>Platform Availability</h3>
 
 Available on all platforms
 
@@ -135,20 +129,18 @@ sync.reset
 
 This API is used to reset the device database to initial state. This API will remove all data from the database.
 
-Syntax
+<h3>Syntax</h3>
 
 sync.reset ([successCallback](#successCallback), [errorCallback](#errorCallback))
 
-Input Parameters
+<h3>Input Parameters</h3>
 
 | Parameter | Description |
 | --- | --- |
 | successCallback \[function\] - Optional | Specifies the function which will get invoked on success. |
 | errorCallback \[function\] - Optional | Specifies the function which will get invoked on error. |
 
- 
-
-Example
+<h3>Example</h3>
 
 {% highlight voltMx %}function SyncReset()
 sync.reset(successCallback ,errorFailCallback)
@@ -164,7 +156,7 @@ end
 
 {% endhighlight %}
 
-Platform Availability
+<h3>Platform Availability</h3>
 
 Available on all platforms.
 
@@ -173,18 +165,18 @@ sync.rollbackPendingLocalChanges
 
 This API is used to roll back the application level pending changes which are not synchronized.
 
-Syntax
+<h3>Syntax</h3>
 
 sync.rollbackPendingLocalChanges ([successCallback](#successCallback1), [errorCallback](#errorCallback1))
 
-Input Parameters
+<h3>Input Parameters</h3>
 
 | Parameter | Description |
 | --- | --- |
 | successCallback \[function\] - Optional | Specifies the function which will get invoked on success. |
 | errorCallback \[function\] - Optional | Specifies the function which will get invoked on error. |
 
-Example
+<h3>Example</h3>
 
 {% highlight voltMx %}function SyncRollbackPendingChanges()
 sync.rollbackPendingLocalChanges(successCallback, errorFailCallback)
@@ -200,7 +192,7 @@ end
 
 {% endhighlight %}
 
-Platform Availability
+<h3>Platform Availability</h3>
 
 Available on all platforms.
 
@@ -209,11 +201,11 @@ sync.startSession
 
 This API is used to start the sync process and download the data from the Enterprise Data Source to the device database.
 
-Syntax
+<h3>Syntax</h3>
 
 sync.startSession([config](#config))
 
-Input Parameters
+<h3>Input Parameters</h3>
 
 | Parameter | Description |
 | --- | --- |
@@ -221,7 +213,7 @@ Input Parameters
 
  
 
-Example
+<h3>Example</h3>
 
 {% highlight voltMx %}function startSyncSession(config)
 local config = {}
@@ -256,8 +248,8 @@ sync.startSession(config) //starting sync session
 end
 {% endhighlight %}
 
-Platform Availability
+<h3>Platform Availability</h3>
 
 Available on all platforms.
 
-![](resources/prettify/onload.png)
+<!-- ![](resources/prettify/onload.png) -->

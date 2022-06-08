@@ -286,26 +286,36 @@ IGNORE_ROW <strong>:</strong> A Boolean value. If true, the first row of the fil
   <li>The first row in the CSV file can be with or without a header line. The ideal file format in a sample CSV file is displayed below:</li>
 </ul>
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">YourAppID|8630109080499911406|This is message content|0|1611568995000|iphone#%title=Amazing offers!%customkey_applink=https\://yourwebsite?id\=2890902%customKey=customValue%badge=1:android#%title=Amazing offers!%title_loc_args=[tla1, tla2]%color=color%sound=soundname%icon=icon%title_loc_key=tlk%priority=high%click_action=onclick action%collapse_key=7298982893234%body_loc_args=[bla1, bla2]%delay_while_idle=TRUE%customkey_applink=https\://yourwebsite?id\=2890902%tag=tag
-    YourAppID|8630100908499911406|Yes \| No What do you choose? |0|1611568995000|iphone#%title=10\% off on all products!!%locArgs=[locArg1, locarg2]%customkey_applink=https\://yourwebsite?id\=2890902%customKey=customValue%badge=1%actionLocKey=alk%titleLocKey=Play!%sound=soundname%launchImage=launchimage.jpg%locKey=alk2%titleLocArgs=[tla1, tla2]%category=offers:android#%title=10\% off on all products!!%title_loc_args=[tla1, tla2]%color=color%sound=soundname%icon=icon%title_loc_key=tlk%priority=high%click_action=click action%collapse_key=7298982893234%body_loc_args=[bla1, bla2]%delay_while_idle=TRUE%customkey_applink=https\://yourwebsite?id\=2890902%tag=tag
-    YourAppID|7201994900097393916|Yes \| No What do you choose?|0|1611568995000|windows#%text1=10\% off on all products!!%toastScreenName=yourscreenname%text2=Yes \| No What do you choose?%windowsParams=p1=v1~p2=v2%notificationType=TOAST:windows8#%template=wnsTemplate%tileTextValue=text1~text2%text1=10\% off on all products!!%tileImageSource=image1~image2%text2=Text 2 content%wnsTileBadge=1%notificationType=TILE%fallback=wnsfallback%version=2.1:blackberry#customkey_applink=https\://yourwebsite?id\=2890902
-    
-    </code></pre></figure>
+  YourAppID|8630100908499911406|Yes \| No What do you choose? |0|1611568995000|iphone#%title=10\% off on all products!!%locArgs=[locArg1, locarg2]%customkey_applink=https\://yourwebsite?id\=2890902%customKey=customValue%badge=1%actionLocKey=alk%titleLocKey=Play!%sound=soundname%launchImage=launchimage.jpg%locKey=alk2%titleLocArgs=[tla1, tla2]%category=offers:android#%title=10\% off on all products!!%title_loc_args=[tla1, tla2]%color=color%sound=soundname%icon=icon%title_loc_key=tlk%priority=high%click_action=click action%collapse_key=7298982893234%body_loc_args=[bla1, bla2]%delay_while_idle=TRUE%customkey_applink=https\://yourwebsite?id\=2890902%tag=tag
+  YourAppID|7201994900097393916|Yes \| No What do you choose?|0|1611568995000|windows#%text1=10\% off on all products!!%toastScreenName=yourscreenname%text2=Yes \| No What do you choose?%windowsParams=p1=v1~p2=v2%notificationType=TOAST:windows8#%template=wnsTemplate%tileTextValue=text1~text2%text1=10\% off on all products!!%tileImageSource=image1~image2%text2=Text 2 content%wnsTileBadge=1%notificationType=TILE%fallback=wnsfallback%version=2.1:blackberry#customkey_applink=https\://yourwebsite?id\=2890902
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Every row contains one subscriber for which the push needs to be sent. The columns are separated with the Delimiter specified in the API URL.
+  </code></pre></figure>
 
-In this example PIPE | is the delimiter. If the delimiter needs to be used as a part of the message content or device specific properties, it has to be escaped by a backslash \\ .
+<p>Every row contains one subscriber for which the push needs to be sent. The columns are separated with the Delimiter specified in the API URL.</p>
 
-The device specific properties section under column DEVICE\_PROPRS needs to be provided in a specific format only. The supported platforms are "android, iphone, androidjpush, windows, windows8, and webfcm". Only these keys are allowed to be used for platforms. There are different separators within DEVICE\_PROPRS.
+<table>
+  <tbody>
+    <tr>
+      <td>In this example PIPE</td>
+      <td>is the delimiter. If the delimiter needs to be used as a part of the message content or device specific properties, it has to be escaped by a backslash \ .</td>
+    </tr>
+  </tbody>
+</table>
 
-*   Colon : is used to separate platforms if multiple platforms are used for DEVICE\_PROPRS for a row.
-*   Hash # is used to separate the platform key with the list of key value pairs.
-*   Percentile % is used to separate key-value pairs from each other.
-*   Equal = is used to separate key from its value.
+<p>The device specific properties section under column DEVICE_PROPRS needs to be provided in a specific format only. The supported platforms are “android, iphone, androidjpush, windows, windows8, and webfcm”. Only these keys are allowed to be used for platforms. There are different separators within DEVICE_PROPRS.</p>
 
-If any of these special characters **: # % =** need to be used in the DEVICE\_PROPRS block, then you need to escape them with back slash \\. However, before sending the push to a device these specific back slash characters are removed. Though multiple platforms are allowed for a row, the considered platform will be based on osType of the subscriber in that row.
+<ul>
+  <li>Colon : is used to separate platforms if multiple platforms are used for DEVICE_PROPRS for a row.</li>
+  <li>Hash # is used to separate the platform key with the list of key value pairs.</li>
+  <li>Percentile % is used to separate key-value pairs from each other.</li>
+  <li>Equal = is used to separate key from its value.</li>
+</ul>
 
-&gt; **_Important:_** Start Time and expiry time should be given in milliseconds. Start time, if provided, refers to the time in milliseconds at which the message will be sent. If expiry time is provided, the message will not be attempted for delivery after the time in milliseconds is passed. If you provide the start time as zero, then it indicates that the push message will be sent immediately.
-</code></pre></div></div>
+<p>If any of these special characters <strong>: # % =</strong> need to be used in the DEVICE_PROPRS block, then you need to escape them with back slash \. However, before sending the push to a device these specific back slash characters are removed. Though multiple platforms are allowed for a row, the considered platform will be based on osType of the subscriber in that row.</p>
+
+<blockquote>
+  <p><strong><em>Important:</em></strong> Start Time and expiry time should be given in milliseconds. Start time, if provided, refers to the time in milliseconds at which the message will be sent. If expiry time is provided, the message will not be attempted for delivery after the time in milliseconds is passed. If you provide the start time as zero, then it indicates that the push message will be sent immediately.</p>
+</blockquote>
       <h2 id="method">
         
         
@@ -339,7 +349,8 @@ If any of these special characters **: # % =** need to be used in the DEVICE\_PR
   <li>uploadFile - Points to the name of the file that is uploaded.</li>
 </ul>
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">uploadFile: filename.csv</code></pre></figure>
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">uploadFile: filename.csv
+  </code></pre></figure>
       <h2 id="input-parameters">
         
         
@@ -409,8 +420,8 @@ If any of these special characters **: # % =** need to be used in the DEVICE\_PR
     
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
-  "id" : "6284799310563122587",
-  "message" : "File uploaded successfully, processing is in progress."
+"id" : "6284799310563122587",
+"message" : "File uploaded successfully, processing is in progress."
 }</code></pre></figure>
       <h2 id="response-code">
         
@@ -443,8 +454,6 @@ If any of these special characters **: # % =** need to be used in the DEVICE\_PR
 <p>The status of the bulk push message upload can be viewed under Settings &gt; Status &gt; File Upload section in console or refer Administration &gt; <a href="../REST_API_Audience_Member/Get_File_Upload_Status_by_Id.html#bulk-push">Get File Upload Status by ID API</a></p>
 
 <p><img src="/volt-mx-docs/docs/documentation/Foundry/engagement_api_guide/Content/Resources/Images/Common_Images/bulkfileupload_620x157.png" alt="" /></p>
-
-<table class="TableStyle-RevisionTable" cellspacing="0" style="margin-left: 0;margin-right: auto;mc-table-style: url('../Resources/TableStyles/RevisionTable.css');" data-mc-conditions="Default.HTML"><colgroup><col class="TableStyle-RevisionTable-Column-Column1" /> <col class="TableStyle-RevisionTable-Column-Column1" /> <col class="TableStyle-RevisionTable-Column-Column1" /></colgroup><tbody><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyE-Column1-Body1">Rev</td><td class="TableStyle-RevisionTable-BodyE-Column1-Body1">Author</td><td class="TableStyle-RevisionTable-BodyD-Column1-Body1">Edits</td></tr><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyB-Column1-Body1">7.1</td><td class="TableStyle-RevisionTable-BodyB-Column1-Body1">AU</td><td class="TableStyle-RevisionTable-BodyA-Column1-Body1">AU</td></tr></tbody></table>
 
         
 

@@ -2,16 +2,12 @@
 layout: "documentation"
 category: "engagement_api_guide"
 ---
-                            
 
-
-Import Users
-============
+# Import Users
 
 The **Import Users** API adds and/or updates multiple users. To do this, you create a CSV (comma separated values) file that contains a user's data.
 
-URL
----
+## URL
 
 The HTTP URL for the Import Users API is:
 
@@ -20,35 +16,31 @@ The HTTP URL for the Import Users API is:
 
 The service implements Gateway Filter for Authentication to authenticate access of the service by a user.
 
-Method
-------
+## Method
 
 POST
 
 Because this API uploads a file, you must use the "multipart/form-data" encoding format. You must also provide the following request headers with the request.
 
-*   DELIMITER
-    
-    The possible values for **DELIMITER** are:
-    
+- DELIMITER
 
-*   COMMA
-*   SEMI\_COLON
-*   PIPE
-*   HYPHEN
+  The possible values for **DELIMITER** are:
 
-*   uploadFile - Points to the name of the file that is uploaded.
-*   importType - Default value is **insert**.
-    
-    The possible values for **importType** are:
-    
+- COMMA
+- SEMI_COLON
+- PIPE
+- HYPHEN
 
-*   **insert** - This option reads the data in the CSV file and attempts to perform an insert. If the insert fails, an error is thrown.
-*   **upsert** - This option reads the data in the CSV file and attempts to perform an update of each record. If the update fails, the record is inserted.
-*   **delsert** - This option deletes all existing data and performs an insert of the data in the CSV file. It is strongly recommended that you back up your data before choosing this option.
+- uploadFile - Points to the name of the file that is uploaded.
+- importType - Default value is **insert**.
 
-Input Parameters
-----------------
+  The possible values for **importType** are:
+
+- **insert** - This option reads the data in the CSV file and attempts to perform an insert. If the insert fails, an error is thrown.
+- **upsert** - This option reads the data in the CSV file and attempts to perform an update of each record. If the update fails, the record is inserted.
+- **delsert** - This option deletes all existing data and performs an insert of the data in the CSV file. It is strongly recommended that you back up your data before choosing this option.
+
+## Input Parameters
 
 The Import Users API accepts the `CSV` file. If you create a `CSV` file, then data entered in your .CSV file should have all the mandatory fields. For example, the First Name, Last Name, Email, Mobile Number, Country, State, and Last Active Date. You can use alphanumeric and special characters to fill in the data.
 
@@ -58,27 +50,22 @@ You can either enter the current date in the `CSV` file or ignore it. If you do 
 
 > **_Note:_** **mobileNumber** is an optional input parameter. If **mobileNumber** is specified as the [reconciliationKey](../REST_API_Administration/Modify_Details_General_.html), then it is a required value and must be specified for all users. An empty value will cause an error.
 
-Sample Response
----------------
+## Sample Response
 
 {% highlight voltMx %}{
-  "id" : "8784592478968094060",
-  "message" : "File uploaded successfully, import is in progress."
+"id" : "8784592478968094060",
+"message" : "File uploaded successfully, import is in progress."
 }
 
 {% endhighlight %}
 
-Response Status
----------------
+## Response Status
 
-  
-| Code | Description |
-| --- | --- |
+| Code       | Description                                        |
+| ---------- | -------------------------------------------------- |
 | Status 200 | File uploaded successfully, import is in progress. |
-| Status 400 | Please upload a valid CSV file |
-| Status 401 | Unauthorized request |
-| Status 500 | Server failure to process request |
+| Status 400 | Please upload a valid CSV file                     |
+| Status 401 | Unauthorized request                               |
+| Status 500 | Server failure to process request                  |
 
 > **_Important:_** For all the HTTP Response Statuses refer Administration > [Get File Upload Status by ID](../REST_API_Audience_Member/Get_File_Upload_Status_by_Id.html#import-users) API
-
-<table class="TableStyle-RevisionTable" cellspacing="0" style="mc-table-style: url('../Resources/TableStyles/RevisionTable.css');" data-mc-conditions="Default.HTML"><colgroup><col class="TableStyle-RevisionTable-Column-Column1"> <col class="TableStyle-RevisionTable-Column-Column1"> <col class="TableStyle-RevisionTable-Column-Column1"></colgroup><tbody><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyE-Column1-Body1">Rev</td><td class="TableStyle-RevisionTable-BodyE-Column1-Body1">Author</td><td class="TableStyle-RevisionTable-BodyD-Column1-Body1">Edits</td></tr><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyE-Column1-Body1">8.0</td><td class="TableStyle-RevisionTable-BodyE-Column1-Body1">AU</td><td class="TableStyle-RevisionTable-BodyD-Column1-Body1">AU</td></tr><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyB-Column1-Body1">7.1</td><td class="TableStyle-RevisionTable-BodyB-Column1-Body1">AU</td><td class="TableStyle-RevisionTable-BodyA-Column1-Body1">AU</td></tr></tbody></table>

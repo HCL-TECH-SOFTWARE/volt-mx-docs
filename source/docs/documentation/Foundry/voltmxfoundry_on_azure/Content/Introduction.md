@@ -13,9 +13,3 @@ Volt MX  Foundry is a back-end service provider that helps developers build omni
 
 This document helps you install and configure Volt MX Foundry (Console, Identity Services, Integration Services, and Engagement Services) on Azure Cloud.
 
-*   [Overview](VoltMX_Foundry_on_Azure.html#overview)
-*   [VoltMX Foundry V9 SP1 onwards on Azure](VoltMX_Foundry_on_Azure.html#prerequisites) - This section helps you install and configure Volt MX Foundry V9 SP1 onwards.
-*   [VoltMX Foundry on Azure](VoltMX_Foundry_on_Azure.html#volt-mx-foundry-v9-on-azure) - This section helps you install and configure Volt MX Foundry V9 until V9 SP1.
-*   [Appendices](Appendices.html)
-
-You can also access the [Revision History](Installation_of_VoltMX_Foundry_on_Azure.html) and [FAQs](Frequently_Asked_Questions__FAQs_.html).

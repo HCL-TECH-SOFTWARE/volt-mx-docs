@@ -3,18 +3,11 @@ layout: "documentation"
 category: "offline_objectsapi_reference_guide"
 ---
 
-
-\<objectService\>.rollback
-========================
+# \<objectService\>.rollback
 
 The **\<objectService\>.rollback** API rolls back all changes of all objects of an object service to its previous sync state.
 
-Volt MX  Iris (JavaScript)
--------------------------------
-
-> **Note:**  
-*   Supported for iOS and Android channels from V8 SP2 onwards.  
-*   Supported for all channels from V8 SP4 onwards.  
+## Volt MX Iris (JavaScript)
 
 ### Signature
 
@@ -34,21 +27,19 @@ void
 {% highlight voltMx %}var orgObjectService = new voltmx.sdk.VMXObjSvc("Organization");
 
 function successCallback(result) {
-    //result contains boolean true
-    voltmx.print("ObjectService level rollback successful")
+//result contains boolean true
+voltmx.print("ObjectService level rollback successful")
 }
 
 function failureCallback(error) {
-    voltmx.print("ObjectService rollback failed with error: " + JSON.stringify(error));
+voltmx.print("ObjectService rollback failed with error: " + JSON.stringify(error));
 }
 
 orgObjectService.rollback(successCallback, failureCallback);
 
-
 {% endhighlight %}
 
-Android (Java)
---------------
+## Android (Java)
 
 ### Signature
 
@@ -68,7 +59,7 @@ void
 {% highlight voltMx %}VMXObjSvc orgObjectService = new VMXObjSvc("Organization");
 
 try {
-    orgObjectService.rollback(new VMXCallback() {
+orgObjectService.rollback(new VMXCallback() {
 
         @Override
         public void onSuccess(Object object) {
@@ -81,18 +72,18 @@ try {
             Log.e("ObjectServiceSync", "ObjectService rollback failed with error: " + e.getMessage());
         }
     });
+
 } catch (Exception e) {
-    Log.e("ObjectServiceSync", "ObjectService rollback failed with error:" + e.getMessage());
+Log.e("ObjectServiceSync", "ObjectService rollback failed with error:" + e.getMessage());
 }
 {% endhighlight %}
 
-iOS (Objective C)
------------------
+## iOS (Objective C)
 
 ### Signature
 
-{% highlight voltMx %}void <VMXObjSvc>   
-rollback:(VMXSuccessCompletionHandler)onSuccess       
+{% highlight voltMx %}void <VMXObjSvc>  
+rollback:(VMXSuccessCompletionHandler)onSuccess  
 onFailure:(VMXFailureCompletionHandler)onFailure
 {% endhighlight %}
 
@@ -106,17 +97,17 @@ void
 
 ### Example
 
-{% highlight voltMx %}VMXObjSvc * orgObjectService = [
-    [VMXObjSvc alloc] initWithName: @"Organization"
-    error: & ;error
+{% highlight voltMx %}VMXObjSvc \* orgObjectService = [
+[VMXObjSvc alloc] initWithName: @"Organization"
+error: & ;error
 ];
 
 [orgObjectService rollback: ^ (id object) {
-        NSLog(@"Object service rollback successful");
-    }
-    onFailure: ^ (id object) {
-        OfflineObjectsError * error = (OfflineObjectsError) object;
-        NSLog(@"Rollback failed with error: %@", [error.userInfo localizedDescription]);
-    }
+NSLog(@"Object service rollback successful");
+}
+onFailure: ^ (id object) {
+OfflineObjectsError \* error = (OfflineObjectsError) object;
+NSLog(@"Rollback failed with error: %@", [error.userInfo localizedDescription]);
+}
 ];
 {% endhighlight %}

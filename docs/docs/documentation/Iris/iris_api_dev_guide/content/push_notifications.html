@@ -297,7 +297,7 @@ The application then uses the <a href="voltmx.push_functions.html#volt-mx-push-r
   <tbody>
     <tr>
       <td>Android/Android Tablet</td>
-      <td>Google Cloud Messaging (GCM) Deprecated:Android Cloud to Device Messaging (C2DM)</td>
+      <td>Android Cloud to Device Messaging (C2DM)</td>
     </tr>
     <tr>
       <td>iPhone</td>
@@ -339,7 +339,7 @@ The application then uses the <a href="voltmx.push_functions.html#volt-mx-push-r
   </thead>
   <tbody>
     <tr>
-      <td>Google Cloud Messaging(GCM) Deprecated: Android Cloud to Device Messaging (C2DM) Firebase Cloud Messaging (FCM)</td>
+      <td>Android Cloud to Device Messaging (C2DM) Firebase Cloud Messaging (FCM)</td>
       <td>Registration ID</td>
     </tr>
     <tr>
@@ -494,9 +494,10 @@ The application then uses the <a href="voltmx.push_functions.html#volt-mx-push-r
 <p>The following are the important considerations you must be aware for Android platform:</p>
 
 <ul>
-  <li>Before you build the application for Android, navigate to the Project Properties of the application and navigate to <em>Native App</em> -&gt; <em>Android</em> tab, and select the <em>GCM</em> under the <em>Push Notification</em> section. Selecting this option will copy the required Push Notification libraries into the application during build time.”</li>
   <li>
-    <p>For C2DM to GCM conversion refer, <a href="http://developer.android.com/guide/google/gcm/c2dm.html">http://developer.android.com/guide/google/gcm/c2dm.html</a></p>
+    <p>Before you build the application for Android, navigate to the Project Properties of the application and navigate to <em>Native App</em> -&gt; <em>Android</em> tab. Selecting this option will copy the required Push Notification libraries into the application during build time.”
+<!-- *   Before you build the application for Android, navigate to the Project Properties of the application and navigate to _Native App_ -> _Android_ tab, and select the _GCM_ under the _Push Notification_ section. Selecting this option will copy the required Push Notification libraries into the application during build time." -->
+<!-- *   For C2DM to GCM conversion refer, [http://developer.android.com/guide/google/gcm/c2dm.html](http://developer.android.com/guide/google/gcm/c2dm.html) --></p>
   </li>
   <li>
     <p>Google may occasionally refresh the Registration ID. Hence, you must design the application to update the third-party Application server with the new ID.</p>
@@ -510,24 +511,24 @@ The application then uses the <a href="voltmx.push_functions.html#volt-mx-push-r
   <li>If the Volt MX Android platform receives a new Push notification message, the following takes place:
     <ul>
       <li>If the application is running in the foreground:
+<!-- *   GCM - Online callback is triggered without any notification. -->
         <ul>
-          <li>GCM - Online callback is triggered without any notification.</li>
           <li>FCM - Online callback is triggered without any notification.</li>
         </ul>
       </li>
       <li>If the application is running in the background:
+<!-- *   GCM - A status bar notification is displayed. If you click the notification, the application is brought to the foreground and its _onlinenotification_ function is called. -->
         <ul>
-          <li>GCM - A status bar notification is displayed. If you click the notification, the application is brought to the foreground and its <em>onlinenotification</em> function is called.</li>
           <li>FCM - A status bar notification is displayed. If you click the notification, the application is brought to the foreground and its <em>onlinenotification</em> function is called.</li>
         </ul>
       </li>
       <li>If the application is not running:
+<!-- *   GCM - A status bar notification is displayed. If you click the notification, the application is launched and its _offlinenotification_ function is called. -->
         <ul>
-          <li>GCM - A status bar notification is displayed. If you click the notification, the application is launched and its <em>offlinenotification</em> function is called.</li>
           <li>FCM - Any of the following can occur:
             <ul>
-              <li>If the payload contains a notification key (for example, when the ‘Enable GCM v3.0 Payload for Android’ check box is selected in VMS console), a status bar notification is displayed by the system. If you click the notification, the application is launched and its <em>onlinenotification</em> function is called.</li>
-              <li>If the payload does not contain a notification key (for example, when the ‘Enable GCM v3.0 Payload for Android’ check box is not selected in VMS console), a status bar notification is displayed by Framework. If you click the notification, the application is launched and its <em>offlinenotification</em> function is called.</li>
+              <li>If the payload contains a notification key, a status bar notification is displayed by the system. If you click the notification, the application is launched and its <em>onlinenotification</em> function is called.</li>
+              <li>If the payload does not contain a notification key, a status bar notification is displayed by Framework. If you click the notification, the application is launched and its <em>offlinenotification</em> function is called.</li>
             </ul>
           </li>
         </ul>
@@ -544,9 +545,9 @@ directly in the file.</p>
 token=”<string name="notify\_push\_msg\_title\_keys">"  
 value="<string name="notify\_push\_msg\_title\_keys">title"/&gt;</string></string></p>
 
-    <p>Similarly, you can configure other keys by using the <em>androidprecompiletask.xml</em> file.</p>
+    <p>Similarly, you can configure other keys by using the <em>androidprecompiletask.xml</em> file.
+<!-- *   To customize GCM broadcast receiver, refer [VoltMX IrisUser Guide](/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Custom_GCM.html). --></p>
   </li>
-  <li>To customize GCM broadcast receiver, refer <a href="/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Custom_GCM.html">VoltMX IrisUser Guide</a>.</li>
 </ul><hr />
       <h2 id="important-considerations-for-desktop-web">
         
@@ -576,7 +577,8 @@ value="<string name="notify\_push\_msg\_title\_keys">title"/&gt;</string></strin
     </blockquote>
   </li>
   <li>
-    <p>The Push notifications feature for the Desktop Web channel is supported from V8 SP4 onwards.</p>
+    <p>The Push notifications feature for the Desktop Web channel is supported from V9 SP2 onwards.
+<!-- *   The Push notifications feature for the Desktop Web channel is supported from V8 SP4 onwards. --></p>
   </li>
   <li>
     <p>Push notifications for the Desktop Web channel is not supported in:</p>

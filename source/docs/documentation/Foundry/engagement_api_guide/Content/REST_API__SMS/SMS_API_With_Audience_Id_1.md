@@ -2,16 +2,12 @@
 layout: "documentation"
 category: "engagement_api_guide"
 ---
-                            
 
-
-Send SMS API using Audience ID or an Array of Segment
-=====================================================
+# Send SMS API using Audience ID or an Array of Segment
 
 The **Send SMS API using Audience ID or an Array of Segment** accepts either **audience ID** or a **segment array** as an input parameters and sends SMS messages.
 
-URL
----
+## URL
 
 The HTTP URL for the Send SMS API using Audience ID or an Array of Segment is:
 
@@ -20,42 +16,37 @@ The HTTP URL for the Send SMS API using Audience ID or an Array of Segment is:
 
 This service implements ‘Gateway Filter for Authentication’ to authenticate access of the service by a user.
 
-Method
-------
+## Method
 
 POST
 
-Header
-------
+## Header
 
 Based on the content format, the payload's request header includes Content-Type for:
 
-*   XML is text/xml;charset=UTF-8
-*   JSON is application/json;charset=UTF-8
+- XML is text/xml;charset=UTF-8
+- JSON is application/json;charset=UTF-8
 
-Input Parameters
-----------------
+## Input Parameters
 
 The following fields are input parameters:
 
-  
-| Input Parameter | Level – Two | Level – Three | Level – Four | Required | Type | Description |
-| --- | --- | --- | --- | --- | --- | --- |
-| smsServiceRequest |   |   |   |   |   | An array of smsServiceRequest objects |
-|   | messages |   |   |   |   | An array of messages objects |
-|   |   | message |   |   |   | An array of message objects |
-|   |   |   | startTimestamp | Optional | string | Time relative to a starting point |
-|   |   |   | expiryTimestamp | Optional | string | Time relative to an ending point |
-|   |   |   | priorityService | Required | boolean | If priority service or not |
-|   |   |   | recipients | id (Optional) |   | An array of recipients objects: -id |
-|   |   |   | segment | criteria (Required) |   | An array of segment objects: criteria |
-|   |   |   | content | Optional | string | SMS description |
-|   |   |   | channel | Optional | string | Used to define type of SMS. For example Voice SMS or Text SMS. |
+| Input Parameter   | Level – Two | Level – Three | Level – Four    | Required            | Type    | Description                                                    |
+| ----------------- | ----------- | ------------- | --------------- | ------------------- | ------- | -------------------------------------------------------------- |
+| smsServiceRequest |             |               |                 |                     |         | An array of smsServiceRequest objects                          |
+|                   | messages    |               |                 |                     |         | An array of messages objects                                   |
+|                   |             | message       |                 |                     |         | An array of message objects                                    |
+|                   |             |               | startTimestamp  | Optional            | string  | Time relative to a starting point                              |
+|                   |             |               | expiryTimestamp | Optional            | string  | Time relative to an ending point                               |
+|                   |             |               | priorityService | Required            | boolean | If priority service or not                                     |
+|                   |             |               | recipients      | id (Optional)       |         | An array of recipients objects: -id                            |
+|                   |             |               | segment         | criteria (Required) |         | An array of segment objects: criteria                          |
+|                   |             |               | content         | Optional            | string  | SMS description                                                |
+|                   |             |               | channel         | Optional            | string  | Used to define type of SMS. For example Voice SMS or Text SMS. |
 
-Sample Request
---------------
+## Sample Request
 
-### XML  
+### XML
 
 {% highlight voltMx %}
 
@@ -86,7 +77,6 @@ Sample Request
 </messages>
 
 </smsServiceRequest>
-
 
 {% endhighlight %}
 
@@ -124,7 +114,6 @@ Sample Request
 
 </smsServiceRequest>
 
-
 {% endhighlight %}
 
 ### JSON
@@ -132,77 +121,78 @@ Sample Request
 #### Sample Request with Audience ID
 
 {% highlight voltMx %}{
-  "smsServiceRequest": {
-    "messages": {
-      "message": {
-        "startTimestamp": "0",
-        "expiryTimestamp": "0",
-        "priorityService": "true",
-        "recipients": {
-          "recipient": {
-            "id": "1"
-          },
-          "segment": {
-            "criteria": "##4##"
-          }
-        },
-        "content": "sample sms message",
-	  }
-    }
-  }
+"smsServiceRequest": {
+"messages": {
+"message": {
+"startTimestamp": "0",
+"expiryTimestamp": "0",
+"priorityService": "true",
+"recipients": {
+"recipient": {
+"id": "1"
+},
+"segment": {
+"criteria": "##4##"
+}
+},
+"content": "sample sms message",
+}
+}
+}
 }
 {% endhighlight %}
 
 #### Sample Request with an array of Segment
 
 {% highlight voltMx %}{
-	"smsServiceRequest": {
-		"messages": {
-			"message": {
-				"startTimestamp": "0",
-				"expiryTimestamp": "0",
-				"priorityService": "true",
-				"recipients": {
+"smsServiceRequest": {
+"messages": {
+"message": {
+"startTimestamp": "0",
+"expiryTimestamp": "0",
+"priorityService": "true",
+"recipients": {
 
-					"segment": {
-						"criteria": "##4##"
-					}
-				},
-				"content": "sample sms message",			}
-		}
-	}
+    				"segment": {
+    					"criteria": "##4##"
+    				}
+    			},
+    			"content": "sample sms message",			}
+    	}
+    }
+
 }
 {% endhighlight %}
 
 #### Sample Request with Audience ID for Voice SMS
 
 {% highlight voltMx %}{
-  "smsServiceRequest": {
-    "messages": {
-      "message": {
-        "startTimestamp": "0",
-        "expiryTimestamp": "0",
-        "priorityService": "true",
-        "recipients": {
-          "recipient": {
-            "id": "1"
-          },
-          "segment": {
-            "criteria": "##4##"
-          }
-        },
-        "content": "sample sms message",
-	  },
-        "channel": "voicesms",
-	  }
+"smsServiceRequest": {
+"messages": {
+"message": {
+"startTimestamp": "0",
+"expiryTimestamp": "0",
+"priorityService": "true",
+"recipients": {
+"recipient": {
+"id": "1"
+},
+"segment": {
+"criteria": "##4##"
+}
+},
+"content": "sample sms message",
+},
+"channel": "voicesms",
+}
 
     }
-  }
+
+}
 }
 {% endhighlight %}
 
-Sample Response
----------------
+## Sample Response
 
 ### XML
 
@@ -218,7 +208,6 @@ Sample Response
 
 </smsResponse>
 
-
 {% endhighlight %}
 
 ### JSON
@@ -226,15 +215,11 @@ Sample Response
 {% highlight voltMx %}{"id":"4714177579502718932","message":"Request Queued. "}
 {% endhighlight %}
 
-Response Status
----------------
+## Response Status
 
-  
-| Code | Description |
-| --- | --- |
-| Status 200 | Request queued |
+| Code       | Description                                                                                                                                                                              |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Status 200 | Request queued                                                                                                                                                                           |
 | Status 400 | Either recipient list or segment criteria is allowed, not both @ messageFailed to parse the input requestInvalid request format, Error messages :\[invalid segment criteria @ message :1 |
-| Status 401 | Unauthorized request |
-| Status 500 | Server failure to process request |
-
-<table class="TableStyle-RevisionTable" cellspacing="0" style="margin-left: 0;margin-right: auto;mc-table-style: url('../Resources/TableStyles/RevisionTable.css');" data-mc-conditions="Default.HTML"><colgroup><col class="TableStyle-RevisionTable-Column-Column1"> <col class="TableStyle-RevisionTable-Column-Column1"> <col class="TableStyle-RevisionTable-Column-Column1"></colgroup><tbody><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyE-Column1-Body1">Rev</td><td class="TableStyle-RevisionTable-BodyE-Column1-Body1">Author</td><td class="TableStyle-RevisionTable-BodyD-Column1-Body1">Edits</td></tr><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyB-Column1-Body1">7.1</td><td class="TableStyle-RevisionTable-BodyB-Column1-Body1">AU</td><td class="TableStyle-RevisionTable-BodyA-Column1-Body1">AU</td></tr></tbody></table>
+| Status 401 | Unauthorized request                                                                                                                                                                     |
+| Status 500 | Server failure to process request                                                                                                                                                        |

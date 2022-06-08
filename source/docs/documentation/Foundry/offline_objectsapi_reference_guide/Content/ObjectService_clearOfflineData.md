@@ -3,20 +3,17 @@ layout: "documentation"
 category: "offline_objectsapi_reference_guide"
 ---
 
-
-\<objectService\>.clearOfflineData
-================================
+# \<objectService\>.clearOfflineData
 
 The **\<objectService\>.clearOfflineData** API clears all the offline data persisted in the object service tables and associated sync context. As the sync context is cleared, the next sync on this object service will fetch complete data from the server.
 
 > **_Note:_** The clearOfflineData API is considered as device only operation. Deleted records are not tracked and not sent to the server as part of next sync session.
 
-Volt MX  Iris (JavaScript)
--------------------------------
+## Volt MX Iris (JavaScript)
 
-> **Note:**  
-*   Supported for Windows from V8 SP4 Fix Pack 6 onwards.  
-*   Supported for Mobile Web and Desktop Web channels from V8 SP4 Fix Pack 28 onwards.  
+> **Note:**
+
+- Supported for Windows from V8 SP4 Fix Pack 6 onwards.
 
 ### Signature
 
@@ -25,12 +22,11 @@ Volt MX  Iris (JavaScript)
 
 ### Parameters
 
-  
-| Parameter | Type | Description | Required |
-| --- | --- | --- | --- |
-| options | JSON | Reserved for future use, so the parameter is insignificant. But, the developer must pass some value such as null or { }. | Yes |
-| successCallback | Function | The successCallback method is invoked after successfully clearing the offline data of the object service. | Yes |
-| failureCallback | Function | The failureCallback method is invoked during failure, with the cause of failure as an argument. | Yes |
+| Parameter       | Type     | Description                                                                                                              | Required |
+| --------------- | -------- | ------------------------------------------------------------------------------------------------------------------------ | -------- |
+| options         | JSON     | Reserved for future use, so the parameter is insignificant. But, the developer must pass some value such as null or { }. | Yes      |
+| successCallback | Function | The successCallback method is invoked after successfully clearing the offline data of the object service.                | Yes      |
+| failureCallback | Function | The failureCallback method is invoked during failure, with the cause of failure as an argument.                          | Yes      |
 
 ### Return Type
 
@@ -39,9 +35,9 @@ void
 ### Example
 
 {% highlight voltMx %}try {
-    var orgObjectService = new voltmx.sdk.VMXObjSvc("Organization");
-    var options = {};
-    orgObjectService.clearOfflineData(options, onSuccess, onFailure);
+var orgObjectService = new voltmx.sdk.VMXObjSvc("Organization");
+var options = {};
+orgObjectService.clearOfflineData(options, onSuccess, onFailure);
 
     function onSuccess() {
         voltmx.print("Successfully cleared offline data for Object Service: " + objectServiceName);
@@ -53,10 +49,10 @@ void
     } catch (Exception e) {
         voltmx.print("An exception occurred while trying to execute clearOfflineData API. Exception:" + e);
     }
+
 {% endhighlight %}
 
-Android (Java)
---------------
+## Android (Java)
 
 ### Signature
 
@@ -65,11 +61,10 @@ Android (Java)
 
 ### Parameters
 
-  
-| Parameter | Type | Description | Required |
-| --- | --- | --- | --- |
-| options | HashMap<String, Object> | Reserved for future use, so the parameter is insignificant. But, the developer must pass some value such as null or new HashMap<String, Object>(). | Yes |
-| Callback | VMXCallback | Application implements **onSuccess** and **onFailure** methods of **VMXCallback** interface. | Yes |
+| Parameter | Type                    | Description                                                                                                                                        | Required |
+| --------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| options   | HashMap<String, Object> | Reserved for future use, so the parameter is insignificant. But, the developer must pass some value such as null or new HashMap<String, Object>(). | Yes      |
+| Callback  | VMXCallback             | Application implements **onSuccess** and **onFailure** methods of **VMXCallback** interface.                                                       | Yes      |
 
 ### Return Type
 
@@ -78,44 +73,42 @@ void
 ### Example
 
 {% highlight voltMx %}try {
-    VMXObjSvc orgObjectService = newVMXObjSvc("Organization");
-    orgObjectService.clearOfflineData(null, newVMXCallback() {
-        @Override
-        public void onSuccess(Object object) {
-            Log.d("ObjectServiceSync", "Cleared offline data for Object 
+VMXObjSvc orgObjectService = newVMXObjSvc("Organization");
+orgObjectService.clearOfflineData(null, newVMXCallback() {
+@Override
+public void onSuccess(Object object) {
+Log.d("ObjectServiceSync", "Cleared offline data for Object
 Service.");
-        }
-        @Override
-        public void onFailure(Object error) {
-            OfflineObjectsException e = (OfflineObjectsException) error;
-            Log.e("ObjectServiceSync", "Failed to clear offline data with 
+}
+@Override
+public void onFailure(Object error) {
+OfflineObjectsException e = (OfflineObjectsException) error;
+Log.e("ObjectServiceSync", "Failed to clear offline data with
 exception: " + e.getMessage());
-        }
-    });
+}
+});
 } catch (Exception e) {
-    Log.e("ObjectServiceSync", "Failed to clear offline data with exception:" + e.getMessage());
+Log.e("ObjectServiceSync", "Failed to clear offline data with exception:" + e.getMessage());
 }
 {% endhighlight %}
 
-iOS (Objective C)
------------------
+## iOS (Objective C)
 
 ### Signature
 
 {% highlight voltMx %}(void)[<VMXObjSvc> clearOfflineData:(NSDictionary *)options
-			 onSuccess:(VMXSuccessCompletionHandler)onSuccess
-			 onFailure:(VMXFailureCompletionHandler)onFailure]
+onSuccess:(VMXSuccessCompletionHandler)onSuccess
+onFailure:(VMXFailureCompletionHandler)onFailure]
 
 {% endhighlight %}
 
 ### Parameters
 
-  
-| Parameter | Type | Description | Required |
-| --- | --- | --- | --- |
-| options | NSDictionary | Reserved for future use, so the parameter is insignificant. But, the developer must pass some value such as null or @{ }. | Yes |
-| onSuccess | VMXSuccessCompletionHandler | The method is invoked after successfully clearing the offline data of the object service, | Yes |
-| onFailure | VMXFailureCompletionHandler | The method is invoked on failure while clearing the offline data of the object service. | Yes |
+| Parameter | Type                        | Description                                                                                                               | Required |
+| --------- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------- | -------- |
+| options   | NSDictionary                | Reserved for future use, so the parameter is insignificant. But, the developer must pass some value such as null or @{ }. | Yes      |
+| onSuccess | VMXSuccessCompletionHandler | The method is invoked after successfully clearing the offline data of the object service,                                 | Yes      |
+| onFailure | VMXFailureCompletionHandler | The method is invoked on failure while clearing the offline data of the object service.                                   | Yes      |
 
 ### Return Type
 
@@ -123,21 +116,21 @@ void
 
 ### Example
 
-{% highlight voltMx %}OfflineObjectsError * error = nil;
-NSDictionary * options = @ {};
-VMXObjSvc * orgObjectService = [
-    [VMXObjSvc alloc] initWithName: @"Organization"
-    error: & error
+{% highlight voltMx %}OfflineObjectsError _ error = nil;
+NSDictionary _ options = @ {};
+VMXObjSvc _ orgObjectService = [
+[VMXObjSvc alloc] initWithName: @"Organization"
+error: & error
 ];
 [orgObjectService clearOfflineData: options
-    onSuccess: ^ (id object) {
-        NSLog(@"Clearing offline data successful for OrganizationObjectService!");
-    }
-    onFailure: ^ (id object) {
-        OfflineObjectsError * error = (OfflineObjectsError * )
-        object;
-        NSLog(@"Unable to clear offline data for Organization 
+onSuccess: ^ (id object) {
+NSLog(@"Clearing offline data successful for OrganizationObjectService!");
+}
+onFailure: ^ (id object) {
+OfflineObjectsError _ error = (OfflineObjectsError \* )
+object;
+NSLog(@"Unable to clear offline data for Organization
 due to error: %@", [error description]);
-    }
+}
 ];
 {% endhighlight %}

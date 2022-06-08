@@ -11,7 +11,7 @@ Internationalization API
 
 Internationalization is the process of enhancing an application to support multiple languages across various regions. Internationalization is abbreviated as i18n. The `voltmx.i18n` namespace provides a comprehensive set of functions for developing multilingual applications.
 
-The Internationalization API uses `` `voltmx.i18n` `` `Namespace` and the following API elements.
+The Internationalization API uses `voltmx.i18n Namespace` and the following API elements.
 
 | Function | Description |
 | --- | --- |
@@ -38,7 +38,8 @@ Every locale comprises of a resource bundle. Check whether the selected locale c
 
 Before you get started with using the voltmx.i18n namespace and functions, you should get to know a few things. They are, [Resource bundle](#resource-bundle) and [Implementing i18N](#implementation-details).
 
-> **_Note:_** From V8 SP4 onwards, the i18n database data for a Volt MX App child app is stored in child app data and not under the parent app. This feature is applicable for iOS, Windows, and Android platforms.
+> **_Note:_** From V9 SP2 onwards, the i18n database data for a Volt MX App child app is stored in child app data and not under the parent app. This feature is applicable for iOS, Windows, and Android platforms.
+<!-- > **_Note:_** From V8 SP4 onwards, the i18n database data for a Volt MX App child app is stored in child app data and not under the parent app. This feature is applicable for iOS, Windows, and Android platforms. -->
 
 Resource Bundle
 ---------------

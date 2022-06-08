@@ -48,7 +48,10 @@ None
 *   Android
 
 * * *
+
 </details>
+
+
 Properties
 ----------
 

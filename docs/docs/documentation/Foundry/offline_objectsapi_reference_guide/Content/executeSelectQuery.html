@@ -228,7 +228,7 @@
       
       <div id="main-content" class="main-content" role="main">
         
-          <p>Volt MX  Foundry console User Guide: <a href="Application_Level_APIs.html">Application-level APIs</a> &gt; VMXFoundry.OfflineObjects.executeSelectQuery</p>
+          <p>Volt MX Foundry console User Guide: <a href="Application_Level_APIs.html">Application-level APIs</a> &gt; VMXFoundry.OfflineObjects.executeSelectQuery</p>
       <h1 id="vmxfoundryofflineobjectsexecuteselectquery">
         
         
@@ -249,10 +249,10 @@
 <blockquote>
   <p><strong><em>Note:</em></strong> <strong>executeSelectQuery</strong> supports only <strong>read</strong> or <strong>select</strong> queries. The API does not support <strong>create</strong> or <strong>update</strong> or <strong>delete</strong> operations on the device database.</p>
 </blockquote>
-      <h2 id="volt-mx--iris-javascript">
+      <h2 id="volt-mx-iris-javascript">
         
         
-          <a href="#volt-mx--iris-javascript" class="anchor-heading" aria-labelledby="volt-mx--iris-javascript"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Volt MX  Iris (JavaScript)
+          <a href="#volt-mx-iris-javascript" class="anchor-heading" aria-labelledby="volt-mx-iris-javascript"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Volt MX Iris (JavaScript)
         
         
       </h2>
@@ -260,10 +260,6 @@
 
 <blockquote>
   <p><strong><em>Note:</em></strong> Not supported for Mobile Web, and Desktop Web channels.</p>
-</blockquote>
-
-<blockquote>
-  <p><strong><em>Note:</em></strong> Supported for Windows from V8 SP4 Fix Pack 6 onwards.</p>
 </blockquote>
       <h3 id="signature">
         
@@ -334,13 +330,13 @@
     
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">function successCallback(response) {
-    //response contains records returned from device db for query executed.
+//response contains records returned from device db for query executed.
 }
 
 function failureCallback(error) {
-    voltmx.print("executeSelectQuery failed with error:" + error.code);
+voltmx.print("executeSelectQuery failed with error:" + error.code);
 }
-var query = "Select * from Employee where EmployeeID=5";
+var query = "Select \* from Employee where EmployeeID=5";
 VMXFoundry.OfflineObjects.executeSelectQuery(query, successCallback, failureCallback);</code></pre></figure>
       <h2 id="android-java">
         
@@ -414,17 +410,17 @@ VMXFoundry.OfflineObjects.executeSelectQuery(query, successCallback, failureCall
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">VoltMXClient sdk = new VoltMXClient();
 IVoltMXApplicationSync appSync = sdk.getOfflineObjects();
-String query = "Select * from Employee where EmployeeID=5";
+String query = "Select \* from Employee where EmployeeID=5";
 appSync.executeSelectQuery(query, new VMXCallback() {
-    @Override
-    public void onSuccess(Object object) {
-        //response contains records returned from device db for query executed.
-    }
-    @Override
-    public void onFailure(Object error) {
-        OfflineObjectsException e = (OfflineObjectsException) error;
-        Log.d("executeSelectQuery", "executeSelectQuery failed with error:" + e.getMessage() + "callstack: " + e.getStackTrace());
-    }
+@Override
+public void onSuccess(Object object) {
+//response contains records returned from device db for query executed.
+}
+@Override
+public void onFailure(Object error) {
+OfflineObjectsException e = (OfflineObjectsException) error;
+Log.d("executeSelectQuery", "executeSelectQuery failed with error:" + e.getMessage() + "callstack: " + e.getStackTrace());
+}
 });</code></pre></figure>
       <h2 id="ios-objective-c">
         
@@ -443,9 +439,9 @@ appSync.executeSelectQuery(query, new VMXCallback() {
       </h3>
     
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">(void) &lt;OfflineObjects&gt;.executeSelectQuery:(NSString *)query
-			onSuccess:(VMXSuccessCompletionHandler)onSuccess
-			onFailure:(VMXFailureCompletionHandler)onFailure</code></pre></figure>
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">(void) &lt;OfflineObjects&gt;.executeSelectQuery:(NSString \*)query
+onSuccess:(VMXSuccessCompletionHandler)onSuccess
+onFailure:(VMXFailureCompletionHandler)onFailure</code></pre></figure>
       <h3 id="parameters-2">
         
         
@@ -504,19 +500,19 @@ appSync.executeSelectQuery(query, new VMXCallback() {
       </h3>
     
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">VMXClient * sdk = [VMXClient sharedClient];
-OfflineObjects * applicationSync = [sdk getOfflineObjects];
-NSString * query = @"Select * from Employee where EmployeeID=5"
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">VMXClient _ sdk = [VMXClient sharedClient];
+OfflineObjects _ applicationSync = [sdk getOfflineObjects];
+NSString _ query = @"Select _ from Employee where EmployeeID=5"
 VMXSuccessCompletionHandler onSuccess = ^ void(id object) {
-    NSLog(@"executeSelectQuery successful");
+NSLog(@"executeSelectQuery successful");
 };
 
 VMXFailureCompletionHandler onFailure = ^ void(id object) {
-    NSLog(@"executeSelectQuery failed");
+NSLog(@"executeSelectQuery failed");
 };
 [applicationSync executeSelectQuery: query
-    onSuccess: onSuccess
-    onFailure: onFailure
+onSuccess: onSuccess
+onFailure: onFailure
 ];</code></pre></figure>
 
         

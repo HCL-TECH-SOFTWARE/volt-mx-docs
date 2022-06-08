@@ -2,11 +2,8 @@
 layout: "documentation"
 category: "offline_objectsapi_reference_guide"
 ---
-                               
 
-
-VMXFoundry.OfflineObjects.setup
-====================================
+# VMXFoundry.OfflineObjects.setup
 
 Offline Objects setup function initializes the creation of device database and sync environment. After the setup is successful, the database structure is created without any data in the device database. After the client database is created, subsequent calls to VMXFoundry.OfflineObjects setup initializes the sync environment.
 
@@ -14,8 +11,7 @@ Before performing any offline operation other than drop or reset, invoke eithe
 
 > **_Note:_** Initial setup (launching after first time installation (after drop or reset)) requires network connection. Subsequent setups can initialize offline environment without network connectivity.
 
-Volt MX  Iris (JavaScript)
--------------------------------
+## Volt MX Iris (JavaScript)
 
 ### Signature
 
@@ -28,12 +24,11 @@ Volt MX  Iris (JavaScript)
 
 #### Setup Options
 
-  
-| Option | Type | Description | Required |
-| --- | --- | --- | --- |
-| deviceDbEncryptionKey | String | Encryption passphrase must be a string with at least six characters long. For more information, refer to [Offline Objects Getting Started Guide]({{ site.baseurl }}/docs/documentation/Foundry/offline_objects_gettingstarted/Content/Offline_Objects_Getting_Started.html). <br> **_Note:_** Not applicable for Mobile Web and Desktop Web channels. | No |
-| deviceDbPath | String | Device database is created at the given deviceDbPath location. The default Offline Objects database path for Windows Kiosk applications is `C:\Users\User\AppData\Local`. You can use the deviceDbPath option to override the default path. This options helps you to install more than one Offline enabled application by using the Offline Objects database at desired location. <br> **_Note:_** This parameter is supported only for Windows Kiosk applications from V8 SP4 Fix Pack 44 onwards. <br> **_Important:_** The default Offline Objects database location for Windows Kiosk has been changed from `C:\Users\User\AppData\Local` to `C:\Users\User\AppData\Local\AppID\Database` from V8 SP4 Fix Pack 44. This impacts application upgrades that were built with the earlier versions of pluginTo retain the existing Offline Objects database, rebuild the Kiosk application with the deviceDbPath option and pass the **C:\\Users\\User\\AppData\\Local** location as an input to the setup, reset, and drop APIs. | No |
-| treatBooleanFieldValuesAsNumeric | Boolean | If the **treatBooleanFieldValuesAsNumeric** key is set to false, all the boolean field values are converted to boolean type (true or false) during upload session or on reading records from local device database. When the option is set to true, fallbacks to default implementation (uploading and reading boolean field values as numeric). By default, the key is set to True. <br> **_Note:_** Supported for iOS, Android and Windows from V8 SP4 Fix Pack 102 onwards | No |
+| Option                           | Type    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Required |
+| -------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- |
+| deviceDbEncryptionKey            | String  | Encryption passphrase must be a string with at least six characters long. For more information, refer to [Offline Objects Getting Started Guide]({{ site.baseurl }}/docs/documentation/Foundry/offline*objects_gettingstarted/Content/Offline_Objects_Getting_Started.html). <br> \*\*\_Note:*\*\* Not applicable for Mobile Web and Desktop Web channels.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | No       |
+| deviceDbPath                     | String  | Device database is created at the given deviceDbPath location. The default Offline Objects database path for Windows Kiosk applications is `C:\Users\User\AppData\Local`. You can use the deviceDbPath option to override the default path. This options helps you to install more than one Offline enabled application by using the Offline Objects database at desired location. <br> **_Note:_** This parameter is supported only for Windows Kiosk applications from V8 SP4 Fix Pack 44 onwards. <br> **_Important:_** The default Offline Objects database location for Windows Kiosk is `C:\Users\User\AppData\Local\AppID\Database`. This impacts application upgrades that were built with the earlier versions of pluginTo retain the existing Offline Objects database, rebuild the Kiosk application with the deviceDbPath option and pass the **C:\\Users\\User\\AppData\\Local** location as an input to the setup, reset, and drop APIs. | No       |
+| treatBooleanFieldValuesAsNumeric | Boolean | If the **treatBooleanFieldValuesAsNumeric** key is set to false, all the boolean field values are converted to boolean type (true or false) during upload session or on reading records from local device database. When the option is set to true, fallbacks to default implementation (uploading and reading boolean field values as numeric). By default, the key is set to True.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | No       |
 
 ### Return Type
 
@@ -46,25 +41,24 @@ void
 ### Example
 
 {% highlight voltMx %}function successCallback(status) {
-    voltmx.print("Application setup successful");
+voltmx.print("Application setup successful");
 }
 
 function failureCallback(error) {
-    voltmx.print("Application setup failed with error:" + error.code);
+voltmx.print("Application setup failed with error:" + error.code);
 }
 //Encrypt the device database using a passphrase
 var options = {
-    "deviceDbEncryptionKey": "myencryptionpa$$phrase1"
+"deviceDbEncryptionKey": "myencryptionpa$$phrase1"
 };
 VMXFoundry.OfflineObjects.setup(options, successCallback, failureCallback);
 {% endhighlight %}
 
-Android (Java)
---------------
+## Android (Java)
 
 ### Signature
 
-{% highlight voltMx %}void <OfflineObjects>.setup(final HashMap<String, object> options, final VMXCallback callback) 
+{% highlight voltMx %}void <OfflineObjects>.setup(final HashMap<String, object> options, final VMXCallback callback)
 {% endhighlight %}
 
 ### Parameters
@@ -73,11 +67,10 @@ Android (Java)
 
 #### Setup Options
 
-  
-| Option | Type | Description | Required |
-| --- | --- | --- | --- |
-| deviceDbEncryptionKey | String | Encryption passphrase must be a string with at least six characters long. For more information, refer to [Offline Objects Getting Started Guide]({{ site.baseurl }}/docs/documentation/Foundry/offline_objects_gettingstarted/Content/Offline_Objects_Getting_Started.html). | No |
-| treatBooleanFieldValuesAsNumeric | Boolean | If the **treatBooleanFieldValuesAsNumeric** key is set to false, all the boolean field values are converted to boolean type (true or false) during upload session or on reading records from local device database. When the option is set to true, fallbacks to default implementation (uploading and reading boolean field values as numeric). By default, the key is set to True. <br> **_Note:_** Supported for iOS, Android and Windows from V8 SP4 Fix Pack 102 onwards | No |
+| Option                           | Type    | Description                                                                                                                                                                                                                                                                                                                                                                          | Required |
+| -------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- |
+| deviceDbEncryptionKey            | String  | Encryption passphrase must be a string with at least six characters long. For more information, refer to [Offline Objects Getting Started Guide]({{ site.baseurl }}/docs/documentation/Foundry/offline_objects_gettingstarted/Content/Offline_Objects_Getting_Started.html).                                                                                                         | No       |
+| treatBooleanFieldValuesAsNumeric | Boolean | If the **treatBooleanFieldValuesAsNumeric** key is set to false, all the boolean field values are converted to boolean type (true or false) during upload session or on reading records from local device database. When the option is set to true, fallbacks to default implementation (uploading and reading boolean field values as numeric). By default, the key is set to True. | No       |
 
 ### Return Type
 
@@ -97,24 +90,23 @@ IVoltMXApplicationSync appSync = sdk.getOfflineObjects();
 HashMap < String, object > options = new HashMap < String, object > ();
 options.put("deviceDbEncryptionKey", "myencryptionpa$$phrase1");
 appSync.setup(options, new VMXCallback() {
-    @Override
-    public void onSuccess(Object object) {
-        Log.d("Application Setup", "Application setup successful");
-    }
-    @Override
-    public void onFailure(Object error) {
-        OfflineObjectsException e = (OfflineObjectsException) error;
-        Log.e("Application Setup", "Application setup failed with error:" + e.getMessage() + "callstack: " + e.getStackTrace());
-    }
+@Override
+public void onSuccess(Object object) {
+Log.d("Application Setup", "Application setup successful");
+}
+@Override
+public void onFailure(Object error) {
+OfflineObjectsException e = (OfflineObjectsException) error;
+Log.e("Application Setup", "Application setup failed with error:" + e.getMessage() + "callstack: " + e.getStackTrace());
+}
 });
 {% endhighlight %}
 
-iOS (Objective C)
------------------
+## iOS (Objective C)
 
 ### Signature
 
-{% highlight voltMx %}void <OfflineObjects> setup:(NSDictionary *) options  
+{% highlight voltMx %}void <OfflineObjects> setup:(NSDictionary \*) options  
 onSuccess:(VMXSuccessCompletionHandler)onSuccess  
 onFailure:(VMXFailureCompletionHandler)onFailure;
 {% endhighlight %}
@@ -125,11 +117,10 @@ onFailure:(VMXFailureCompletionHandler)onFailure;
 
 #### Setup Options
 
-  
-| Option | Type | Description | Required |
-| --- | --- | --- | --- |
-| deviceDbEncryptionKey | NSString | Encryption passphrase must be a string with at least six characters long. Refer [Offline Objects Getting started Guide]({{ site.baseurl }}/docs/documentation/Foundry/offline_objects_gettingstarted/Content/Offline_Objects_Getting_Started.html) for more details. | No |
-| treatBooleanFieldValuesAsNumeric | Boolean | If the **treatBooleanFieldValuesAsNumeric** key is set to false, all the boolean field values are converted to boolean type (true or false) during upload session or on reading records from local device database. When the option is set to true, fallbacks to default implementation (uploading and reading boolean field values as numeric). By default, the key is set to True. <br> **_Note:_** Supported for iOS, Android and Windows from V8 SP4 Fix Pack 102 onwards | No |
+| Option                           | Type     | Description                                                                                                                                                                                                                                                                                                                                                                          | Required |
+| -------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- |
+| deviceDbEncryptionKey            | NSString | Encryption passphrase must be a string with at least six characters long. Refer [Offline Objects Getting started Guide]({{ site.baseurl }}/docs/documentation/Foundry/offline_objects_gettingstarted/Content/Offline_Objects_Getting_Started.html) for more details.                                                                                                                 | No       |
+| treatBooleanFieldValuesAsNumeric | Boolean  | If the **treatBooleanFieldValuesAsNumeric** key is set to false, all the boolean field values are converted to boolean type (true or false) during upload session or on reading records from local device database. When the option is set to true, fallbacks to default implementation (uploading and reading boolean field values as numeric). By default, the key is set to True. | No       |
 
 ### Return Type
 
@@ -141,22 +132,22 @@ void
 
 ### Example
 
-{% highlight voltMx %}VMXClient * sdk = [VMXClient sharedClient];
-OfflineObjects * applicationSync = [sdk getOfflineObjects];
+{% highlight voltMx %}VMXClient _ sdk = [VMXClient sharedClient];
+OfflineObjects _ applicationSync = [sdk getOfflineObjects];
 //Encrypt the device database using a passphrase
-NSMutableDictionary < NSString * , id > * options = [NSMutableDictionary new];
+NSMutableDictionary < NSString _ , id > _ options = [NSMutableDictionary new];
 [options setobject: @"myencryptionpa$$phrase1"
-    forKey: @"deviceDbEncryptionKey"
+forKey: @"deviceDbEncryptionKey"
 ];
 VMXSuccessCompletionHandler onSuccess = ^ void(id object) {
-    NSLog(@"Application setup successful");
+NSLog(@"Application setup successful");
 };
 
 VMXFailureCompletionHandler onFailure = ^ void(id object) {
-    NSLog(@"Application setup failed");
+NSLog(@"Application setup failed");
 };
 [applicationSync setup: options onSuccess: onSuccess
-    onFailure: onFailure
+onFailure: onFailure
 ];
 
 {% endhighlight %}

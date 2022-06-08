@@ -240,7 +240,8 @@
 <p>The voltmx,i18n Namespace, which forms the <a href="internationalization.html">Internationalization API</a>, provides the following API elements.</p>
 
 <blockquote>
-  <p><strong><em>Note:</em></strong> From V8 SP4 onwards, the i18n database data for a VoltMX App child app is stored in child app data and not under the parent app. This feature is applicable for iOS, Windows, and Android platforms.</p>
+  <p><strong><em>Note:</em></strong> From V9 SP2 onwards, the i18n database data for a VoltMX App child app is stored in child app data and not under the parent app. This feature is applicable for iOS, Windows, and Android platforms.
+<!-- > **_Note:_** From V8 SP4 onwards, the i18n database data for a VoltMX App child app is stored in child app data and not under the parent app. This feature is applicable for iOS, Windows, and Android platforms. --></p>
 </blockquote>
       <h2 id="functions">
         
@@ -1573,185 +1574,98 @@ setlocaleListbox: function() {
     
 
 <p>Available on all platforms.</p>
-      <h1 id="deprecated-functions">
-        
-        
-          <a href="#deprecated-functions" class="anchor-heading" aria-labelledby="deprecated-functions"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Deprecated Functions
-        
-        
-      </h1>
-    
 
-<p>The following APIs have been deprecated from 5.0 onwards and are only supported for backward compatibility.</p>
+<!-- Deprecated Functions
+====================
 
-<details close="">
-  <summary>voltmx.i18n.setCurrentLocale</summary>
+The following APIs have been deprecated from 5.0 onwards and are only supported for backward compatibility.
 
-  <p>This API provides you the ability to set the specified locale as the current locale of the application. If the locale is not supported by the device, junk characters will be displayed on the screen for the locale specific string.</p>
-      <h3 id="syntax">
-        
-        
-          <a href="#syntax" class="anchor-heading" aria-labelledby="syntax"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Syntax
-        
-        
-      </h3>
-    
 
-  <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">voltmx.i18n.setCurrentLocale([locale](#locale14))</code></pre></figure>
-      <h3 id="input-parameters">
-        
-        
-          <a href="#input-parameters" class="anchor-heading" aria-labelledby="input-parameters"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Input Parameters
-        
-        
-      </h3>
-    
+<details close markdown="block"><summary>voltmx.i18n.setCurrentLocale</summary>
 
-  <p>locale [String] - Mandatory</p>
+This API provides you the ability to set the specified locale as the current locale of the application. If the locale is not supported by the device, junk characters will be displayed on the screen for the locale specific string.
 
-  <p>Specifies the locale that must be set as the current locale of the application</p>
-      <h3 id="return-values">
-        
-        
-          <a href="#return-values" class="anchor-heading" aria-labelledby="return-values"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Return Values
-        
-        
-      </h3>
-    
+### Syntax
 
-  <p>errorcode [Number]</p>
 
-  <p>A number that denotes the error.</p>
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">voltmx.i18n.setCurrentLocale([locale](#locale14))</code></pre></figure>
 
-  <ul>
-    <li>0 - Locale is successfully applied</li>
-    <li>100 - The supplied locale is not available in the device.</li>
-    <li>101 - The supplied locale is not available in application</li>
-  </ul>
-      <h4 id="error-codes">
-        
-        
-          <a href="#error-codes" class="anchor-heading" aria-labelledby="error-codes"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Error Codes
-        
-        
-      </h4>
-    
 
-  <ul>
-    <li>100 - if the locale is not supported by device</li>
-    <li>101 - if the locale is supported by device but not by the application</li>
-  </ul>
-      <h4 id="implementation-details">
-        
-        
-          <a href="#implementation-details" class="anchor-heading" aria-labelledby="implementation-details"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Implementation Details
-        
-        
-      </h4>
-    
+### Input Parameters
 
-  <p>This section explains how this API is implemented. This API:</p>
+locale \[String\] - Mandatory
 
-  <ul>
-    <li>sets the appropriate display language and region for displaying content and images in the application</li>
-    <li>sets the specified locale as the input locale (keyboard and calendar display) if the specified locale is available - on Android</li>
-    <li>displays junk characters for the locale specific string if the specified locale is not supported by the device</li>
-    <li>does not re-initialize the widgets that have already loaded the i18n content. For example, assume that an application has 2 forms frmA and frmB.
-      <ul>
-        <li><em>frmA</em> is the startup form and loads the content using <em>i18n.getlocalizedstring</em> API. The current locale for the device is <em>en_US</em> and English text is populated on the form.</li>
-        <li><em>onclick</em> event of the button on this form invokes <em>i18n.setcurrentlocale(“fr_FR”)</em></li>
-        <li>Invoking this API at this stage will not cause the widgets to reload the data for <em>frmA</em> widgets from <em>fr_FR</em> resource bundle.</li>
-      </ul>
-    </li>
-  </ul>
-      <h3 id="platform-availability">
-        
-        
-          <a href="#platform-availability" class="anchor-heading" aria-labelledby="platform-availability"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Platform Availability
-        
-        
-      </h3>
-    
+Specifies the locale that must be set as the current locale of the application
 
-  <ul>
-    <li>Android</li>
-  </ul>
+### Return Values
+
+errorcode \[Number\]
+
+A number that denotes the error.
+
+*   0 - Locale is successfully applied
+*   100 - The supplied locale is not available in the device.
+*   101 - The supplied locale is not available in application
+
+#### Error Codes
+
+*   100 - if the locale is not supported by device
+*   101 - if the locale is supported by device but not by the application
+
+#### Implementation Details
+
+This section explains how this API is implemented. This API:
+
+*   sets the appropriate display language and region for displaying content and images in the application
+*   sets the specified locale as the input locale (keyboard and calendar display) if the specified locale is available - on Android
+*   displays junk characters for the locale specific string if the specified locale is not supported by the device
+*   does not re-initialize the widgets that have already loaded the i18n content. For example, assume that an application has 2 forms frmA and frmB.
+    *   _frmA_ is the startup form and loads the content using _i18n.getlocalizedstring_ API. The current locale for the device is _en\_US_ and English text is populated on the form.
+    *   _onclick_ event of the button on this form invokes _i18n.setcurrentlocale("fr\_FR")_
+    *   Invoking this API at this stage will not cause the widgets to reload the data for _frmA_ widgets from _fr\_FR_ resource bundle.
+
+### Platform Availability
+
+*   Android
 
 </details>
 
-<details close="">
-  <summary>voltmx.i18n.setDefaultLocale</summary>
+<details close markdown="block"><summary>voltmx.i18n.setDefaultLocale</summary>
 
-  <p>Every application that has support for internationalization needs a locale to be set as a default locale. This API allows you to set the specified locale as the default locale for the application. You can also set the default locale from the IDE. However, this API allows you to perform that task programmatically.</p>
-      <h3 id="syntax-1">
-        
-        
-          <a href="#syntax-1" class="anchor-heading" aria-labelledby="syntax-1"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Syntax
-        
-        
-      </h3>
-    
+Every application that has support for internationalization needs a locale to be set as a default locale. This API allows you to set the specified locale as the default locale for the application. You can also set the default locale from the IDE. However, this API allows you to perform that task programmatically.
 
-  <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">voltmx.i18n.setDefaultLocale([locale](#locale2))</code></pre></figure>
-      <h3 id="input-parameters-1">
-        
-        
-          <a href="#input-parameters-1" class="anchor-heading" aria-labelledby="input-parameters-1"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Input Parameters
-        
-        
-      </h3>
-    
+### Syntax
 
-  <p>locale [String] - Mandatory</p>
 
-  <p>Specifies the locale that needs to be set as default locale for the application</p>
-      <h3 id="return-values-1">
-        
-        
-          <a href="#return-values-1" class="anchor-heading" aria-labelledby="return-values-1"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Return Values
-        
-        
-      </h3>
-    
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">voltmx.i18n.setDefaultLocale([locale](#locale2))</code></pre></figure>
 
-  <p>None.</p>
-      <h3 id="error-codes-1">
-        
-        
-          <a href="#error-codes-1" class="anchor-heading" aria-labelledby="error-codes-1"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Error Codes
-        
-        
-      </h3>
-    
 
-  <ul>
-    <li>100 - if the locale is not supported by device</li>
-    <li>101 - if the locale is supported by device but not by the application</li>
-  </ul>
-      <h3 id="implementation-details-1">
-        
-        
-          <a href="#implementation-details-1" class="anchor-heading" aria-labelledby="implementation-details-1"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Implementation Details
-        
-        
-      </h3>
-    
+### Input Parameters
 
-  <p>This API is invoked in the background when the code is generated for an application to set the default locale.</p>
-      <h3 id="platform-availability-1">
-        
-        
-          <a href="#platform-availability-1" class="anchor-heading" aria-labelledby="platform-availability-1"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Platform Availability
-        
-        
-      </h3>
-    
+locale \[String\] - Mandatory
 
-  <p>Available on all platforms except J2ME.</p>
+Specifies the locale that needs to be set as default locale for the application
+
+### Return Values
+
+None.
+
+### Error Codes
+
+*   100 - if the locale is not supported by device
+*   101 - if the locale is supported by device but not by the application
+
+### Implementation Details
+
+This API is invoked in the background when the code is generated for an application to set the default locale.
+
+### Platform Availability
+
+Available on all platforms except J2ME.
 
 </details>
 
-<p><img src="resources/prettify/onload.png" alt="" /></p>
+![](resources/prettify/onload.png) -->
 
         
 

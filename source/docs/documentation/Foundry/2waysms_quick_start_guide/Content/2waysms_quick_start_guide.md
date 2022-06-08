@@ -10,13 +10,6 @@ Volt MX  Foundry Engagement Services Demo App QuickStart Guide (Getting Started 
 
 This QuickStart guide explains how to set up Volt MX Foundry Engagement Services to send 2-way SMS to an application on a user’s device. The installed application will subscribe to the Volt MX Engagement server instance and will receive 2-way SMS notifications.
 
-Revision History
-
-  
-| **Date** | **Document Version** | **Description of Modifications/Release** |
-| --- | --- | --- |
-| 01/22/2018 | 2.0 | Document release for Volt MX Foundry Engagement Services Quick Start Guide V8 SP1 |
-| 09/08/2017 | 1.0 | Document release for Volt MX Foundry Engagement Services Quick Start Guide V8 |
 
 Getting Started Options
 

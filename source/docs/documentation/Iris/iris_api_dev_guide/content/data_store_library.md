@@ -18,7 +18,8 @@ Allows users to store and retrieve data in HTML pages from all the windows in th
 
 The data stored using the LocalStorage APIs is accessible only from the client-side as opposed to the data stored in cookies (accessible from both client-side and server-side).
 
-> **_Note:_** From V8 SP4 onwards, the Local Storage APIs' data for a Volt MX Iris App Viewer child app is stored in child app data and not under the parent app. This feature is applicable for iOS, Windows, and Android platforms.
+> **_Note:_** From V9 SP2 onwards, the Local Storage APIs' data for a Volt MX Iris App Viewer child app is stored in child app data and not under the parent app. This feature is applicable for iOS, Windows, and Android platforms.
+<!-- > **_Note:_** From V8 SP4 onwards, the Local Storage APIs' data for a Volt MX Iris App Viewer child app is stored in child app data and not under the parent app. This feature is applicable for iOS, Windows, and Android platforms. -->
 
 The Local Storage API Library contains the `voltmx.store Namespace` and related functions:
 

@@ -60,11 +60,11 @@ If you are installing Volt MX Engagement Services on JBoss domain mode installat
             </subsystem> \-->
 {% endhighlight %}
 
-### How to Configure Connector - JBoss
+<h3 id="how-to-configure-connector-jboss">How to Configure Connector - JBoss</h3>
 
 For importing an app to Volt MX Foundry Console properly, you must have set the enough value for the `max-post-size` in the `standalone.xml` file. For more details, refer to [Configure Connectors - JBoss]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_manual_install_guide/Content/Configuring_Connectors_and_WAR_JBoss.html)
 
-### How to Increase Timeout and Maximum Heap Size Settings - JBoss
+<h3 id="how-to-increase-timeout-and-maximum-heap-size-settings-jboss">How to Increase Timeout and Maximum Heap Size Settings - JBoss</h3>
 
 Restarting JBoss can cause deployment failures. To avoid these failures, you must increase the JBoss timeout and maximum heap size settings for cluster.
 
@@ -91,7 +91,7 @@ To increase memory and timeout settings in JBoss Multinode, follow these steps:
         {% highlight voltMx %}<heap size="2048m" max-size="4096m"/>
         {% endhighlight %}
 
-### How to Configure Engagement Services - JBoss
+<h3 id="how-to-configure-engagement-services-jboss">How to Configure Engagement Services - JBoss</h3>
 
 When Engagement is selected as Foundry Component, based on the selected JBoss mode, you must add the following parameter in the JVM arguments present in `standalone.bat/domain.bat`( for Windows) or `standalone.sh/domain.sh`(for Unix):
 
@@ -156,7 +156,7 @@ To add `mysql-connector-java-8.0.12.jar` file in the WebLogic Server, follow the
 
 > **_Note:_** **<WL\_HOME>** is the folder in which WebLogic is installed.
 
-### How to Configure Engagement Services - WebLogic
+<h3 id="how-to-configure-engagement-services-weblogic">How to Configure Engagement Services - WebLogic</h3>
 
 When Engagement is selected as Foundry Component, you must add the following parameter in the JVM arguments present in `domain-name\StartWebLogic.cmd` (for Windows) or `domain-name\StartWebLogic.sh` (for Unix):
 

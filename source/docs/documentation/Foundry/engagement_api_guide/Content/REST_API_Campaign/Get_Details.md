@@ -2,16 +2,12 @@
 layout: "documentation"
 category: "engagement_api_guide"
 ---
-                            
 
-
-Get Campaign Details by ID
-==========================
+# Get Campaign Details by ID
 
 The **Get Campaign Details by ID** API provides details of a campaign. This API accepts the **Campaign ID** as an input parameter and responds with a campaign details matching the Campaign ID.
 
-URL
----
+## URL
 
 The HTTP URL for **Get Campaign Details by ID** API is:
 
@@ -20,77 +16,74 @@ The HTTP URL for **Get Campaign Details by ID** API is:
 
 This API implements Gateway Filter for Authentication/Basic Authentication to authenticate access of the API by a user.
 
-Method
-------
+## Method
 
 GET
 
-Output Parameters
------------------
+## Output Parameters
 
 The following fields are output parameters:
 
-  
-| Output Parameter | Level - Two | Level - Three | Type | Description |
-| --- | --- | --- | --- | --- |
-| id |   |   | long | Unique ID assigned to the campaign |
-| name |   |   | string | Campaign name |
-| campaignType |   |   | string | Campaign type |
-| zone |   |   | string | The selected time zone for the campaign dates |
-| startDateStr |   |   | string | Date on which the campaign starts |
-| endDateStr |   |   | string | Date on which the campaign ends |
-| terminatedDateStr |   |   | string | Date on which the campaign is terminated |
-| pausedDateStr |   |   | string | Date on which the campaign was paused |
-| lastModifiedBy |   |   | string | User name showing who last modified the campaign data |
-| lastModifiedDateStr |   |   | string | Date and time at which the campaign was last modified |
-| createdBy |   |   | string | User name showing who created the campaign data |
-| createdDateStr |   |   | string | Date on which the campaign was created |
-| campaignSegments |   |   |   | An array of campaign segments |
-|   | segment |   | array | Provides information about a campaign segment, including: id name |
-| campaignMessages |   |   | array | An array of compaign message information, for more details, [see](Campaign.html#campaignmessages) |
-|   |   | platformSpecificProps |   | An array of platform specific properties, for more details, [see](Campaign.html#platformspecificprops-input-output-parameters) |
-| campaignMails |   |   | Array | An array of campaign mail objects, for more details, [see](Campaign.html#campaignmails) |
-| campaignSms |   |   | array | An array of campaign SMS objects, for more details, [see](Campaign.html#campaignsms) |
-| campaignVoiceSms |   |   | array | An array of campaign Voice SMS objects, for more details, [see](Campaign.html#campaignvoicesms) |
-| campaignPasses |   |   | array | An array of campaign passes, for more details, [see](Campaign.html#campaignvoicesms) |
-| campaignChannelPriorities |   |   | array | An array of campaign channel (push, email and SMS ) priorities |
-| status |   |   | string | The current status of the campaign as draft, pending or running |
+| Output Parameter          | Level - Two | Level - Three         | Type   | Description                                                                                                                    |
+| ------------------------- | ----------- | --------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| id                        |             |                       | long   | Unique ID assigned to the campaign                                                                                             |
+| name                      |             |                       | string | Campaign name                                                                                                                  |
+| campaignType              |             |                       | string | Campaign type                                                                                                                  |
+| zone                      |             |                       | string | The selected time zone for the campaign dates                                                                                  |
+| startDateStr              |             |                       | string | Date on which the campaign starts                                                                                              |
+| endDateStr                |             |                       | string | Date on which the campaign ends                                                                                                |
+| terminatedDateStr         |             |                       | string | Date on which the campaign is terminated                                                                                       |
+| pausedDateStr             |             |                       | string | Date on which the campaign was paused                                                                                          |
+| lastModifiedBy            |             |                       | string | User name showing who last modified the campaign data                                                                          |
+| lastModifiedDateStr       |             |                       | string | Date and time at which the campaign was last modified                                                                          |
+| createdBy                 |             |                       | string | User name showing who created the campaign data                                                                                |
+| createdDateStr            |             |                       | string | Date on which the campaign was created                                                                                         |
+| campaignSegments          |             |                       |        | An array of campaign segments                                                                                                  |
+|                           | segment     |                       | array  | Provides information about a campaign segment, including: id name                                                              |
+| campaignMessages          |             |                       | array  | An array of compaign message information, for more details, [see](Campaign.html#campaignmessages)                              |
+|                           |             | platformSpecificProps |        | An array of platform specific properties, for more details, [see](Campaign.html#platformspecificprops-input-output-parameters) |
+| campaignMails             |             |                       | Array  | An array of campaign mail objects, for more details, [see](Campaign.html#campaignmails)                                        |
+| campaignSms               |             |                       | array  | An array of campaign SMS objects, for more details, [see](Campaign.html#campaignsms)                                           |
+| campaignVoiceSms          |             |                       | array  | An array of campaign Voice SMS objects, for more details, [see](Campaign.html#campaignvoicesms)                                |
+| campaignPasses            |             |                       | array  | An array of campaign passes, for more details, [see](Campaign.html#campaignvoicesms)                                           |
+| campaignChannelPriorities |             |                       | array  | An array of campaign channel (push, email and SMS ) priorities                                                                 |
+| status                    |             |                       | string | The current status of the campaign as draft, pending or running                                                                |
 
-Sample Response
----------------
+## Sample Response
 
 {% highlight voltMx %}{
-    "id": 109,
-    "name": "CompleteAPIForCampaign",
-    "campaignType": "Promotions",
-    "zone": "(GMT+05:30) Chennai, Mumbai, New Delhi",
-    "startDateStr": "03/04/2016 05:44:57 PM",
-    "endDateStr": "03/05/2016 09:03:08 AM",
-    "terminatedDateStr": "",
-    "pausedDateStr": "",
-    "lastModifiedBy": "admin",
-    "lastModifiedDateStr": "03/04/2016 05:44:58 PM IST",
-    "createdBy": "admin",
-    "createdDateStr": "03/04/2016 05:44:57 PM IST",
-    "campaignSegments": [
-        {
-            "segment": {
-                "id": 2,
-                "name": "SegGeolocation152"
-            }
-        },
-        {
-            "segment": {
-                "id": 1,
-                "name": "SegEmailContiansCom173"
-            }
-        }
-    ],
-    "campaignMessages": [
-        {
-            "name": "iphone India Promotion",
-            "message": "Hi ##First Name##, We are glad to announce flat 20% discount on iphone 6S. The offer ends by 30th March 2016. Hurry!!",
-            "richContent": "
+"id": 109,
+"name": "CompleteAPIForCampaign",
+"campaignType": "Promotions",
+"zone": "(GMT+05:30) Chennai, Mumbai, New Delhi",
+"startDateStr": "03/04/2016 05:44:57 PM",
+"endDateStr": "03/05/2016 09:03:08 AM",
+"terminatedDateStr": "",
+"pausedDateStr": "",
+"lastModifiedBy": "admin",
+"lastModifiedDateStr": "03/04/2016 05:44:58 PM IST",
+"createdBy": "admin",
+"createdDateStr": "03/04/2016 05:44:57 PM IST",
+"campaignSegments": [
+{
+"segment": {
+"id": 2,
+"name": "SegGeolocation152"
+}
+},
+{
+"segment": {
+"id": 1,
+"name": "SegEmailContiansCom173"
+}
+}
+],
+"campaignMessages": [
+{
+"name": "iphone India Promotion",
+"message": "Hi ##First Name##, We are glad to announce flat 20% discount on iphone 6S. The offer ends by 30th March 2016. Hurry!!",
+"richContent": "
+
 <p>
     <s>
         <strong>Some Rich Content to promote the offer</strong>
@@ -587,40 +580,41 @@ Hi, ##First Name## ##Last Name## Hurry!! 20% discount on iphone 6s. The offer en
                     {
                         "channel": "EMAIL",
                         "enabled": true,
-                        "messageContent": "Pass Issue content Email  
+                        "messageContent": "Pass Issue content Email
+
 < a href = '##Email Pass Link##' > click here < /a>",
-                        "subject": "Sending Boarding Pass Automation - Test case-01",
-                        "senderName": "",
-                        "senderEmail": ""
-                    }
-                ],
-                "passUpdateNotificationDetails": [
-                    {
-                        "channel": "EMAIL",
-                        "enabled": true,
-                        "messageContent": "Pass Updated into the device",
-                        "subject": "Boarding Pass Updated - Automation - TestCase -01",
-                        "senderName": "",
-                        "senderEmail": ""
-                    }
-                ]
-            },
-            "passContent": {
-                "basicDetails": {
-                    "passTypeIdentifier": "pass.com.vms.passbook1",
-                    "passSerialNumber": "",
-                    "groupIdentifier": "",
-                    "appLaunchURL": "",
-                    "ituneIdentifiers": "823580694",
-                    "webServiceUrl": "http://10.10.24.48:9091/vpns/",
-                    "timezone": "(GMT+05:30) Chennai, Mumbai, New Delhi",
-                    "passType": "BOARDING",
-                    "organizationName": "VoltMX Automation",
-                    "description": "Creating Boarding Pass Template Through API",
-                    "passSerialNumberType": "AUTO_GEN",
-                    "eventTicketType": "",
-                    "customJsonData": {
-                        
+"subject": "Sending Boarding Pass Automation - Test case-01",
+"senderName": "",
+"senderEmail": ""
+}
+],
+"passUpdateNotificationDetails": [
+{
+"channel": "EMAIL",
+"enabled": true,
+"messageContent": "Pass Updated into the device",
+"subject": "Boarding Pass Updated - Automation - TestCase -01",
+"senderName": "",
+"senderEmail": ""
+}
+]
+},
+"passContent": {
+"basicDetails": {
+"passTypeIdentifier": "pass.com.vms.passbook1",
+"passSerialNumber": "",
+"groupIdentifier": "",
+"appLaunchURL": "",
+"ituneIdentifiers": "823580694",
+"webServiceUrl": "http://10.10.24.48:9091/vpns/",
+"timezone": "(GMT+05:30) Chennai, Mumbai, New Delhi",
+"passType": "BOARDING",
+"organizationName": "VoltMX Automation",
+"description": "Creating Boarding Pass Template Through API",
+"passSerialNumberType": "AUTO_GEN",
+"eventTicketType": "",
+"customJsonData": {
+
                     }
                 },
                 "appearance": {
@@ -638,33 +632,34 @@ Hi, ##First Name## ##Last Name## Hurry!! 20% discount on iphone 6s. The offer en
                             "imageId": ""
                         },
                         {
-                            "url": 
+                            "url":
+
 "http://icons.iconarchive.com/icons/martz90/circle-addon2/256/plane-flight-icon.png",
-                            "blob": false,
-                            "size": 20376,
-                            "extension": "png",
-                            "imageType": "ICON",
-                            "imageId": ""
-                        }
-                    ]
-                },
-                "frontLayout": {
-                    "logoText": "Brd-Auto-1",
-                    "headerFields": [
-                        {
-                            "label": "header1",
-                            "data": "GATE",
-                            "changeMessage": "",
-                            "displayRelatively": false,
-                            "ignoreTimezone": false,
-                            "key": "header1",
-                            "dataType": "TEXT",
-                            "numberFormat": "",
-                            "currency": "",
-                            "dateTimeFormat": "",
-                            "alignment": "CENTER",
-                            "autolink": [
-                                
+"blob": false,
+"size": 20376,
+"extension": "png",
+"imageType": "ICON",
+"imageId": ""
+}
+]
+},
+"frontLayout": {
+"logoText": "Brd-Auto-1",
+"headerFields": [
+{
+"label": "header1",
+"data": "GATE",
+"changeMessage": "",
+"displayRelatively": false,
+"ignoreTimezone": false,
+"key": "header1",
+"dataType": "TEXT",
+"numberFormat": "",
+"currency": "",
+"dateTimeFormat": "",
+"alignment": "CENTER",
+"autolink": [
+
                             ]
                         },
                         {
@@ -680,15 +675,15 @@ Hi, ##First Name## ##Last Name## Hurry!! 20% discount on iphone 6s. The offer en
                             "dateTimeFormat": "",
                             "alignment": "LEFT",
                             "autolink": [
-                                
+
                             ]
                         }
                     ],
                     "primaryFields": [
-                        
+
                     ],
                     "auxiliaryFields": [
-                        
+
                     ],
                     "secondaryFields": [
                         {
@@ -704,7 +699,7 @@ Hi, ##First Name## ##Last Name## Hurry!! 20% discount on iphone 6s. The offer en
                             "dateTimeFormat": "",
                             "alignment": "LEFT",
                             "autolink": [
-                                
+
                             ]
                         },
                         {
@@ -720,7 +715,7 @@ Hi, ##First Name## ##Last Name## Hurry!! 20% discount on iphone 6s. The offer en
                             "dateTimeFormat": "",
                             "alignment": "LEFT",
                             "autolink": [
-                                
+
                             ]
                         }
                     ],
@@ -749,7 +744,7 @@ Hi, ##First Name## ##Last Name## Hurry!! 20% discount on iphone 6s. The offer en
                             "dateTimeFormat": "",
                             "alignment": "",
                             "autolink": [
-                                
+
                             ]
                         },
                         {
@@ -765,7 +760,7 @@ Hi, ##First Name## ##Last Name## Hurry!! 20% discount on iphone 6s. The offer en
                             "dateTimeFormat": "",
                             "alignment": "",
                             "autolink": [
-                                
+
                             ]
                         }
                     ],
@@ -775,10 +770,10 @@ Hi, ##First Name## ##Last Name## Hurry!! 20% discount on iphone 6s. The offer en
                     "relevantDate": "",
                     "ignoreTimezone": false,
                     "relevantLocations": [
-                        
+
                     ],
                     "relevantBeacons": [
-                        
+
                     ],
                     "maxDistance": 10.0
                 },
@@ -790,10 +785,10 @@ Hi, ##First Name## ##Last Name## Hurry!! 20% discount on iphone 6s. The offer en
                 },
                 "languageDetails": {
                     "originalFields": [
-                        
+
                     ],
                     "languageEntries": [
-                        
+
                     ],
                     "passLanguage": "EN"
                 }
@@ -812,18 +807,15 @@ Hi, ##First Name## ##Last Name## Hurry!! 20% discount on iphone 6s. The offer en
         }
     ],
     "status": "Running"
+
 }
 {% endhighlight %}
 
-Response Status
----------------
+## Response Status
 
-  
-| Code | Description |
-| --- | --- |
-| Status 200 | Array of campaigns info |
+| Code       | Description                                                     |
+| ---------- | --------------------------------------------------------------- |
+| Status 200 | Array of campaigns info                                         |
 | Status 400 | Invalid campaign ID provided or no campaign found with given ID |
-| Status 401 | Unauthorized request |
-| Status 500 | Server failure to process request |
-
-<table class="TableStyle-RevisionTable" cellspacing="0" style="margin-left: 0;margin-right: auto;mc-table-style: url('../Resources/TableStyles/RevisionTable.css');" data-mc-conditions="Default.HTML"><colgroup><col class="TableStyle-RevisionTable-Column-Column1"> <col class="TableStyle-RevisionTable-Column-Column1"> <col class="TableStyle-RevisionTable-Column-Column1"></colgroup><tbody><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyE-Column1-Body1">Rev</td><td class="TableStyle-RevisionTable-BodyE-Column1-Body1">Author</td><td class="TableStyle-RevisionTable-BodyD-Column1-Body1">Edits</td></tr><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyB-Column1-Body1">7.1</td><td class="TableStyle-RevisionTable-BodyB-Column1-Body1">AU</td><td class="TableStyle-RevisionTable-BodyA-Column1-Body1">DR</td></tr></tbody></table>
+| Status 401 | Unauthorized request                                            |
+| Status 500 | Server failure to process request                               |

@@ -10,7 +10,6 @@ category: "offline_objectsapi_reference_guide"
 The **\<object\>.getBinaryStatus** returns an array of primary keys based on the query for status.
 
 > **Note:**  
-*   This API is supported from V8 SP4 onwards.  
 *   For the \<object\>.getBinaryStatus API to work, ensure that the object definition in Volt MX Foundry has a defined binary column.  
 
 Volt MX  Iris (JavaScript)
@@ -71,7 +70,7 @@ function onFailure(error) {
 }
 {% endhighlight %}
 
-Android (Java)
+<!-- Android (Java)
 --------------
 
 > **_Note:_** Not supported in the current version.
@@ -79,4 +78,4 @@ Android (Java)
 iOS (Objective C)
 -----------------
 
-> **_Note:_** Not supported in the current version.
+> **_Note:_** Not supported in the current version. -->

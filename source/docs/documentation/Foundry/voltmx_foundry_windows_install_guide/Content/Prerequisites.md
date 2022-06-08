@@ -59,6 +59,8 @@ To add an Integration Service Environment when the proxy is set at an App Server
 *   Dvoltmx.http.proxyUser= websphere
 *   Dvoltmx.http.proxyPassword= 3MqGU9e5nv3B
 
+<blockquote><em><b>Note: </b></em>Proxy settings values provided above are only for examples, should be used as per the configuration.</blockquote>
+
 ### Network Settings Licensing
 
 If the on-premises Foundry server has outbound access to the HCL Cloud License Server, please use the Cloud License Server. Otherwise, set up the HCL Common Local License Server in your own network. You can use your HCL Software ID to download the installer for the HCL Common Local License Server from the HCL License and Download Portal ([https://hclsoftware-fno.flexnetoperations.com/flexnet/operations/](https://hclsoftware-fno.flexnetoperations.com/flexnet/operations/)), along with set-up instructions for [Linux](https://support.hcltechsw.com/csm?sys_kb_id=83893782db5cf410cc426275ca961958&id=kb_article_view&sysparm_rank=4&sysparm_tsqueryId=0ead29fb1b68b810a67e9759bc4bcb41) and [Windows](https://support.hcltechsw.com/csm?sys_kb_id=5a0832b6db98b050cc426275ca961958&id=kb_article_view&sysparm_rank=14&sysparm_tsqueryId=2a7531f71be8b810a67e9759bc4bcb9e).

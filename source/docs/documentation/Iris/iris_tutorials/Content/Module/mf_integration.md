@@ -6,7 +6,7 @@ category: "iris_tutorials"
 
 Volt MX  Iris Tutorials
 
-Foundry integration
+Foundry Integration
 ------------------------
 
 {% include youtube.html id='830t8QWcDO8' %}

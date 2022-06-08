@@ -20,15 +20,15 @@ voltmx.store.clear
 
 This API allows you to empty the database by clearing all the key-value pairs. If there are no key-value pairs, then the API does not do anything.
 
-Syntax
+<b>Syntax</b>
 
 voltmx.store.clear()
 
-Input Parameters
+<b>Input Parameters</b>
 
 None
 
-Example
+<b>Example</b>
 
 {% highlight voltMx %}try {
     voltmx.store.clear();
@@ -38,21 +38,21 @@ Example
 }
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Exceptions
+<b>Exceptions</b>
 
-LocalStorageError
+* LocalStorageError
 
-Error
+* Error
 
-Implementation Details
+<b>Implementation Details</b>
 
 For implementation details, see [http://www.w3.org/TR/webstorage/#the-localstorage-attribute](http://www.w3.org/TR/webstorage#the-localstorage-attribute).
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms\*. \*Dummy Implementation on Mobile Web.
 
@@ -61,11 +61,11 @@ voltmx.store.getItem
 
 This API returns a structured clone of the current value associated with the given key. If the given key does not exist in the list associated with the object then this method returns **null** for JavaScript.
 
-Syntax
+<b>Syntax</b>
 
 voltmx.store.getItem([keyname](#keyname))
 
-Input Parameters
+<b>Input Parameters</b>
 
   
 | Parameter | Description |
@@ -74,13 +74,13 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
 {% highlight voltMx %}var myValue = voltmx.store.getItem("name");
 alert("name is " + myValue);
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 | Return Value | Description |
 | --- | --- |
@@ -88,17 +88,17 @@ Return Values
 
  
 
-Exceptions
+<b>Exceptions</b>
 
-LocalStorageError
+* LocalStorageError
 
-Error
+* Error
 
-Implementation Details
+<b>Implementation Details</b>
 
 For implementation details, see [http://www.w3.org/TR/webstorage/#the-localstorage-attribute](http://www.w3.org/TR/webstorage#the-localstorage-attribute).
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms\*. \*Dummy Implementation on Mobile Web.
 
@@ -107,11 +107,11 @@ voltmx.store.removeItem
 
 This API removes the item identified by the key, if it exists. If no item with that key exists, the method does not perform any action.
 
-Syntax
+<b>Syntax</b>
 
 voltmx.store.removeItem([keyname](#keyname_removeitem))
 
-Input Parameters
+<b>Input Parameters</b>
 
 | Parameter | Description |
 | --- | --- |
@@ -119,27 +119,27 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
 {% highlight voltMx %}voltmx.store.removeItem("name");
 alert("name removed");
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 This API does not return a value.
 
-Exceptions
+<b>Exceptions</b>
 
-LocalStorageError
+* LocalStorageError
 
-Error
+* Error
 
-Implementation Details
+<b>Implementation Details</b>
 
 For implementation details, see [http://www.w3.org/TR/webstorage/#the-localstorage-attribute](http://www.w3.org/TR/webstorage#the-localstorage-attribute).
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms\*. \*Dummy Implementation on Mobile Web.
 
@@ -148,11 +148,11 @@ voltmx.store.key
 
 This API returns the name of the nth key in the list. If n is greater than the number of key/value pairs in the object, then this method returns **null** for JavaScript.
 
-Syntax
+<b>Syntax</b>
 
 voltmx.store.key([index](#index))
 
-Input Parameters
+<b>Input Parameters</b>
 
 | Parameter | Description |
 | --- | --- |
@@ -160,13 +160,13 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
 {% highlight voltMx %}var keyName = voltmx.store.key(0);
 alert("first key name is " + keyName);
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 | Return Value | Description |
 | --- | --- |
@@ -175,17 +175,17 @@ Return Values
 
  
 
-Exceptions
+<b>Exceptions</b>
 
-LocalStorageError
+* LocalStorageError
 
-Error
+* Error
 
-Implementation Details
+<b>Implementation Details</b>
 
 For implementation details, see [http://www.w3.org/TR/webstorage/#the-localstorage-attribute](http://www.w3.org/TR/webstorage#the-localstorage-attribute).
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms\*. \*Dummy Implementation on Mobile Web.
 
@@ -194,11 +194,11 @@ voltmx.store.setItem
 
 This API creates a structured clone of the given value. If this raises an exception then the list associated with the object is left unchanged.
 
-Syntax
+<b>Syntax</b>
 
 voltmx.store.setItem([key](#index), [value](#value))
 
-Input Parameters
+<b>Input Parameters</b>
 
 | Parameter | Description |
 | --- | --- |
@@ -207,28 +207,28 @@ Input Parameters
 
  
 
-Example
+<b>Example</b>
 
 {% highlight voltMx %}voltmx.store.setItem("keyValue5", "this is a key value");
 voltmx.store.setItem("keyValue4", true);
 
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 None.
 
-Exceptions
+<b>Exceptions</b>
 
-LocalStorageError
+* LocalStorageError
 
-Error
+* Error
 
-Implementation Details
+<b>Implementation Details</b>
 
 For implementation details, see [http://www.w3.org/TR/webstorage/#the-localstorage-attribute](http://www.w3.org/TR/webstorage#the-localstorage-attribute).
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms\*. \*Dummy Implementation on Mobile Web.
 
@@ -237,21 +237,21 @@ voltmx.store.length
 
 This API returns the length of the local storage.
 
-Syntax
+<b>Syntax</b>
 
 voltmx.store.length()
 
-Input Parameters
+<b>Input Parameters</b>
 
 None
 
-Example
+<b>Example</b>
 
 {% highlight voltMx %}mylength = voltmx.store.length();
 alert("length is " + mylength);
 {% endhighlight %}
 
-Return Values
+<b>Return Values</b>
 
 | Return Value | Description |
 | --- | --- |
@@ -259,17 +259,17 @@ Return Values
 
  
 
-Exceptions
+<b>Exceptions</b>
 
-LocalStorageError
+* LocalStorageError
 
-Error
+* Error
 
-Implementation Details
+<b>Implementation Details</b>
 
 For implementation details, see [http://www.w3.org/TR/webstorage/#the-localstorage-attribute](http://www.w3.org/TR/webstorage#the-localstorage-attribute).
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms\*. \*Dummy Implementation on Mobile Web.
 

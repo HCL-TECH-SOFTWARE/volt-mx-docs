@@ -238,22 +238,14 @@
     
 
 <p>Offline Objects rollback function rolls back all changes of the application in the device local database to its previous sync state.</p>
-      <h2 id="volt-mx--iris-javascript">
+      <h2 id="volt-mx-iris-javascript">
         
         
-          <a href="#volt-mx--iris-javascript" class="anchor-heading" aria-labelledby="volt-mx--iris-javascript"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Volt MX  Iris (JavaScript)
+          <a href="#volt-mx-iris-javascript" class="anchor-heading" aria-labelledby="volt-mx-iris-javascript"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Volt MX Iris (JavaScript)
         
         
       </h2>
     
-
-<blockquote>
-  <p><strong>Note:</strong></p>
-  <ul>
-    <li>Supported for iOS and Android channels from V8 SP2 onwards.</li>
-    <li>Supported for all channels from V8 SP4 onwards.</li>
-  </ul>
-</blockquote>
       <h3 id="signature">
         
         
@@ -294,12 +286,12 @@
     
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">function successCallback(result) {
-    //result contains boolean true
-    voltmx.print("Application rollback successful");
+//result contains boolean true
+voltmx.print("Application rollback successful");
 }
 
 function failureCallback(error) {
-    voltmx.print("Application rollback failed with error:" + error.code);
+voltmx.print("Application rollback failed with error:" + error.code);
 }
 VMXFoundry.OfflineObjects.rollback(successCallback, failureCallback);</code></pre></figure>
       <h2 id="android-java">
@@ -319,7 +311,7 @@ VMXFoundry.OfflineObjects.rollback(successCallback, failureCallback);</code></pr
       </h3>
     
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">void &lt;OfflineObjects&gt;.rollback(final VMXCallback callback) </code></pre></figure>
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">void &lt;OfflineObjects&gt;.rollback(final VMXCallback callback)</code></pre></figure>
       <h3 id="parameters">
         
         
@@ -364,6 +356,7 @@ appSync.rollback(new VMXCallback() {
         OfflineObjectsException e = (OfflineObjectsException) error;
         Log.e("Application Rollback ", "Application Rollback failed with error :" + e.getMessage());
     }
+
 });</code></pre></figure>
       <h2 id="ios-objective-c">
         
@@ -413,15 +406,15 @@ onFailure:(VMXFailureCompletionHandler)onFailure</code></pre></figure>
       </h3>
     
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">VMXClient * sdk = [VMXClient sharedClient];
-OfflineObjects * applicationSync = [sdk getOfflineObjects];
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">VMXClient _ sdk = [VMXClient sharedClient];
+OfflineObjects _ applicationSync = [sdk getOfflineObjects];
 
 VMXSuccessCompletionHandler onSuccess = ^ void(id object) {
-    NSLog(@"Application rollback successful");
+NSLog(@"Application rollback successful");
 };
 
 VMXFailureCompletionHandler onFailure = ^ void(id object) {
-    NSLog(@"Application rollback failed");
+NSLog(@"Application rollback failed");
 };
 
 [applicationSync rollback: onSuccess onFailure: onFailure];</code></pre></figure>

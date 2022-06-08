@@ -2,16 +2,12 @@
 layout: "documentation"
 category: "engagement_api_guide"
 ---
-                            
 
-
-Export Email Templates
-======================
+# Export Email Templates
 
 The **Export Email Templates** API exports all or selected email templates to a zip file of compressed JSON files. The selected email template IDs are identified by the template ID which was returned by the [Create Email Template](Create_Email_Template.html) API. For information about the structure of the JSON files see [JSON Files for Import and Export](../JSON_Files.html).
 
-URL
----
+## URL
 
 To export selected email templates, the HTTP URL is:
 
@@ -25,37 +21,29 @@ To export all email templates, the HTTP URL is:
 
 This API is secure and implements Gateway Filter for Authentication/Basic Authentication to authenticate access of the API by a user.
 
-Method
-------
+## Method
 
 GET
 
-Header
-------
+## Header
 
 The payload's request header includes Content-Type as application/x-www-form-urlencoded.
 
-Output Parameters
------------------
+## Output Parameters
 
 If the export is successful, a zip file of compressed JSON files is returned. Otherwise, an error message is returned.
 
 The following fields are the output parameters when an error occurs.
 
-  
-| Output Parameter | Type | Description |
-| --- | --- | --- |
-| message | string | Message associated with response status code |
+| Output Parameter | Type   | Description                                  |
+| ---------------- | ------ | -------------------------------------------- |
+| message          | string | Message associated with response status code |
 
-Response Status
----------------
+## Response Status
 
-  
-| Code | Description |
-| --- | --- |
-| Status 200 | Successful export |
-| Status 400 | Bad request |
-| Status 401 | Unauthorized request |
+| Code       | Description               |
+| ---------- | ------------------------- |
+| Status 200 | Successful export         |
+| Status 400 | Bad request               |
+| Status 401 | Unauthorized request      |
 | Status 500 | Failed to export the data |
-
-<table class="TableStyle-RevisionTable" cellspacing="0" style="margin-left: 0;margin-right: auto;mc-table-style: url('../Resources/TableStyles/RevisionTable.css');" data-mc-conditions="Default.HTML"><colgroup><col class="TableStyle-RevisionTable-Column-Column1"> <col class="TableStyle-RevisionTable-Column-Column1"> <col class="TableStyle-RevisionTable-Column-Column1"></colgroup><tbody><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyE-Column1-Body1">Rev</td><td class="TableStyle-RevisionTable-BodyE-Column1-Body1">Author</td><td class="TableStyle-RevisionTable-BodyD-Column1-Body1">Edits</td></tr><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyB-Column1-Body1">7.3</td><td class="TableStyle-RevisionTable-BodyB-Column1-Body1">SS</td><td class="TableStyle-RevisionTable-BodyA-Column1-Body1">SS</td></tr></tbody></table>

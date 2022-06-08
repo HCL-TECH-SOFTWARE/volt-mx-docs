@@ -9,8 +9,9 @@ You are here: Communication API for React Native App
 Communication API for React Native App
 ======================================
 
-When you embed a react native app into an app you are developing using Volt MX Iris, the Communication API for the React Native app helps in the interaction between the React Native app and app you are developing using Volt MX Iris. This feature is available from V8 SP4 onwards.
+When you embed a react native app into an app you are developing using Volt MX Iris, the Communication API for the React Native app helps in the interaction between the React Native app and app you are developing using Volt MX Iris. This feature is available from V9 SP2 onwards.
 
+<!-- When you embed a react native app into an app you are developing using Volt MX Iris, the Communication API for the React Native app helps in the interaction between the React Native app and app you are developing using Volt MX Iris. This feature is available from V8 SP4 onwards. -->
 The following React Native APIs help you in communicating from the React Native app to the Volt MX Iris app:
 
 | Function | Description |

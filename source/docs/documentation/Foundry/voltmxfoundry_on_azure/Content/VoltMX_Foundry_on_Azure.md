@@ -59,11 +59,9 @@ Prerequisites
     Steps to check the permissions of your Azure subscription:  
     
     a.  In the Azure Portal, select your account from the upper right corner, and select **My permissions**.  
-        ![](Resources/Images/AzureAcc_3.png)  
-
+        ![](Resources/Images/AzureAcc_3.png)
     b.  From the drop-down list, select **Subscription**. Select **Click here to view complete access details for this subscription.  
-        ![](Resources/Images/AzureAcc_4.png)**  
-        
+        ![](Resources/Images/AzureAcc_4.png)**
     c.  View the roles assigned to you. In the following image, the user has the role of the **Owner**, which means that the user has adequate permissions.  
         ![](Resources/Images/AzureAcc_5_521x199.png)
     
@@ -74,10 +72,9 @@ Prerequisites
     To check your Azure AD permissions:
     
     a.  Select **Azure Active Directory**.  
-        ![](Resources/Images/AzureAcc_1.png)  
-
+        ![](Resources/Images/AzureAcc_1.png)
     b.  In Azure Active Directory, select **Overview** and look at your user information. You should have the role of a **Global Administrator** to proceed further. If you do not have this role, contact your administrator to assign this role to you.  
-        ![](Resources/Images/AzureAcc_2_525x185.png)  
+        ![](Resources/Images/AzureAcc_2_525x185.png)
     </details>
 
 2.  **Prerequisite packages** - The Volt MX Foundry Containers on Azure Solution does not need any additional software to be pre-installed, as the prerequisite packages are downloaded as a part of the setup scripts.
@@ -86,8 +83,7 @@ Prerequisites
 
     > **_Note:_** To make sure that the script is able to download all the necessary software, you might need to open outbound connections to the respective sites. For more information, refer to the [Appendices](Appendices.html#appendices) section of this document.
 
-
-3.  <b><text id="Generate">Generate an SSH Public Key</text></b> – Using the SSH protocol, you can connect and authenticate to remote servers and services. Volt MX Foundry setup expects an SSH key pair for authentication. The SSH public key is used for creating the Azure Virtual Machine, and for installing the Volt MX Foundry Setup. You need to specify the SSH Public Key in the properties file.
+3.  **Generate an SSH Public Key** – Using the SSH protocol, you can connect and authenticate to remote servers and services. Volt MX Foundry setup expects an SSH key pair for authentication. The SSH public key is used for creating the Azure Virtual Machine, and for installing the Volt MX Foundry Setup. You need to specify the SSH Public Key in the properties file.
     
     On Ubuntu terminal, use the `ssh-keygen` command to generate SSH public and private key files that are created by default in the `~/.ssh` directory. This command can be executed from your local (Ubuntu) machine:
     
@@ -146,7 +142,7 @@ Steps to Install Volt MX Foundry on MS Azure:
 2.  Switch to the root user, install the **unzip** package for extracting contents, and download the `voltmx-foundry-containers-azure.zip` file:  
     **$ sudo -s**  
     **$ apt-get install unzip** 
-    **$ curl -o voltmx-foundry-containers-azure.zip -L**[voltmx-foundry-containers-azure_9.2.0.1_GA.zip](https://download.hcl-cloud.com/onpremise/mobilefoundry/docker/9.2.0.1/VoltMXFoundryContainersAzure-9.2.0.1_GA.zip)
+    **$ curl -o HCL VoltMX-Foundry-Container-Installer”** [ HCL Volt MX Foundry Container Installer (Kubernetes cluster)](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.2.x&orgId=HCL&fromRecentFile=false&fromRecentPkg=true&fromDL=false)
 3.  Unzip the downloaded artifacts:  
     **$ unzip voltmx-foundry-containers-azure.zip -d \<directory-name\>**
     **The structure of the document will be as shown below:**  
@@ -171,417 +167,185 @@ There are two types of input properties:
 
 You need to provide the following parameters during Installation:
 
-> **_Note:_** None of the values for parameters in the properties file should contain quotes.  
+> **_Note:_** None of the values for parameters in the properties file should contain quotes.
 
-
-<table>
-<tr>
-<th>PARAMETER</th>
-<th>DESCRIPTION</th>
-<th>EXAMPLE</th>
-</tr>
-<tr>
-<th>SHARED_SERVER_DOMAIN_NAME</th>
-<td>This is the domain name property for Foundry Console component. This is not required if shared cluster is already created in previous installations.</td>
-<td><code>kfazure-console.hcl.net</code></td>
-</tr>
-<tr>
-<th>INTEGRATION_SERVER_DOMAIN_NAME</th>
-<td>This is the domain name property for Foundry Integration component.</td>
-<td><code>kfazure-integration.hcl.net</code></td>
-</tr>
-<tr>
-<th>VMS_DOMAIN_NAME</th>
-<td>This is the domain name property for Foundry Engagement Service Component. This is not required in case of Production because Engagement will also use SHARED_SERVER_DOMAIN_NAME incase of production.</td>
-<td><code>kfazure-engagement.hcl.net</code></td>
-</tr>
-<tr>
-<th>AZURE_SUBSCRIPTION_ID</th>
-<td>This is the Azure subscription ID. Steps to know this are in the <a href="#subId">next section</a>.</td>
-<td>da28307f-55ae-42de-995a-fcc6608d1bd4</td>
-</tr>
-<tr>
-<th>AZURE_LOCATION</th>
-<td>The region in which the AKS cluster should be created. For more details refer to, <a href="Appendices.html#features-and-supported-regions">Features and Supported Regions</a>.</td>
-<td>eastus</td>
-</tr>
-<tr>
-<th>SERVICE_PRINCIPAL_CLIENT_ID</th>
-<td>Application ID of the service principal created for the Azure installation.</td>
-<td>716f6434-1315-4acb-3184-d9a23efa3613</td>
-</tr>
-<tr>
-<th>SERVICE_PRINCIPAL_CLIENT_SECRET</th>
-<td>Password of the Service Principal.</td>
-<td>34a10627-308d-4697-9ea2-e379f8e33bb0</td>
-</tr>
-<tr>
-<th>SERVICE_PRINCIPAL_OBJECT_ID</th>
-<td>Service principal object ID. Steps to know this are in the <a href="#servicePObj">next section</a>.</td>
-<td>c3afcb93-46ed-21c4-98e0-7bb639297f21</td>
-</tr>
-<tr>
-<th>TENANT_ID</th>
-<td>Tenant ID of the Azure account. Steps to know this are in the <a href="#tenantID">next section</a>.</td>
-<td>a5a1f617-3b00-1e81-8190-c4a5136ba396</td>
-</tr>
-<tr>
-<th>SSH_PUBLIC_KEY</th>
-<td>This is required for creation of the AKS. Steps to create SSH key is provided in the <a href="#Generate">pre-requisites section</a>. <blockquote><em><b>Note: </b></em>You cannot use the same SSH key for all the Non-Production installations within a subscription.</blockquote></td>
-<td>ssh-rsa SAAWB3NzaC1yc2…</td>
-</tr>
-<tr>
-<th>SHARED_AZURE_RESOURCE_GROUP</th>
-<td>Specify name of resource group to be created for the cluster of SHARED components (Console, Identity, and Engagement). Enter a name which does not conflict with any of the existing resource groups. This is not required for Non-Production if the shared cluster is already installed for the same subscription.</td>
-<td>FoundrySharedXYZ</td>
-</tr>
-<tr>
-<th>INTEGRATION_AZURE_RESOURCE_GROUP</th>
-<td>Specify name of resource group to be created for the Integration (INT) cluster. This will be the resource group where AKS cluster for Foundry Integration is created. Enter a name which does not conflict with any existing resource group. This is mandatory for all installations.</td>
-<td>FoundryIntXYZ</td>
-</tr>
-<tr>
-<th>DATABASE_TYPE</th>
-<td>Specify the database type you want to use for hosting Volt MX Foundry on Azure.The Volt MX Foundry Containers on Azure Solution supports the MS SQL and MySQL Server Databases.</td>
-<td>mysql</td>
-</tr>
-<tr>
-<th>SHARED_DATABASE_USER_NAME</th>
-<td>Specify a username for the database used by the Foundry console, identity and engagement components. This is not required in Non-Production installation if a shared cluster is already created in the previous installation.</td>
-<td>dbclient</td>
-</tr>
-<tr>
-<th>SHARED_DATABASE_PASSWORD</th>
-<td>Specify a password for the database used by the shared Foundry components. <blockquote><em><b>Note: </b></em>The following special character &#36;&#44; &#42;&#44; &amp;&#44; &#33;&#44; &#40;&#44; &#41;&#44; &#92; are not supported in DB password.</blockquote></td>
-<td>Test#/123</td>
-</tr>
-<tr>
-<th>INTEGRATION_DATABASE_USER_NAME</th>
-<td>Specify a username for your INT database</td>
-<td>dbclient</td>
-</tr>
-<tr>
-<th>INTEGRATION_DATABASE_PASSWORD</th>
-<td>Specify a database password for your integration database.
-<blockquote><em><b>Note: </b></em> If you are using Volt MX Foundry 9.0.0.1 GA docker images, you must specify the same value for SHARED_DATABASE_PASSWORD and INTEGRATION_DATABASE_PASSWORD.<br/>Integration docker image does not support multiple passwords.<br/>You can use different passwords for your databases from Volt MX Foundry V9.0.1.0 GA onwards.<br/>The following special character &#36;&#44; &#42;&#44; &amp;&#44; &#33;&#44; &#40;&#44; &#41;&#44; &#92; are not supported in DB password.</blockquote></td>
-<td>FabR^c123</td>
-</tr>
-<tr>
-<th>APPGATEWAY_SSL_CERT_PASSWORD</th>
-<td>Password of the SSL PFX certificate.This is the Password is used for getting the <b>pfx</b> key for the SSL offloading.</td>
-<td>Test@1234</td>
-</tr>
-<tr>
-<th>Automatic Registration Details:</th>
-<td>Auto registration inputs are not required to be provided for Non-Production if the Shared cluster is already created in a previous installation.</td>
-<td></td>
-</tr>
-<tr>
-<th>AUTO_REGISTRATION_USER_ID</th>
-<td>The email ID used for Volt MX Foundry Registration. After the installation is complete, you can add more users from the Foundry console.</td>
-<td>micheal.doe@xyz.com</td>
-</tr>
-<tr>
-<th>AUTO_REGISTRATION_PASSWORD</th>
-<td>The password used for Volt MX Foundry Registration.</td>
-<td>Test@5264!</td>
-</tr>
-<tr>
-<th>AUTO_REGISTRATION_FIRST_NAME</th>
-<td>The first name used for Volt MX Foundry Registration.</td>
-<td>Micheal</td>
-</tr>
-<tr>
-<th>AUTO_REGISTRATION_LAST_NAME</th>
-<td>The last name used for Volt MX Foundry Registration.</td>
-<td>Doe</td>
-</tr>
-<tr>
-<th>AZURE_CDN_ENABLED</th>
-<td>Specify whether to install CDN for the apps component or not. If you have chosen a region where CDN Profile is not supported, CDN will not be configured. For more details refer to, <a href="Appendices.html#features-and-supported-regions">Features and Supported Regions</a>.</td>
-<td>true Supported values include: true or false.</td>
-</tr>
-<tr>
-<th>ALERT_NOTIFICATION_ENABLED</th>
-<td>Specify whether to enable notification for Alerts. For example sending an alert when the CPU Usage crosses 90% on integration pod, etc.</td>
-<td>true Supported values include: true or false.</td>
-</tr>
-<tr>
-<th>AZURE_ACTION_GROUP_NAME</th>
-<td>Specify name of the action group.</td>
-<td>admin</td>
-</tr>
-<tr>
-<th>USER_EMAIL_ID</th>
-<td>Specify the default email ID to which alert notification should be sent.</td>
-<td>micheal.doe@xyz.com</td>
-</tr>
-<tr>
-<th>ARRAY_TO_WHITELIST_IPS_TO_ACCESS_FILE_SHARE</th>
-<td>Specify the public Foundry IP of the machine where the installation script would be running. To specify multiple IPs use space separated values like (“w1.x1.y1.z1” “w2.x2.y2.z2” “w3.x3.y3.z3”).</td>
-<td>(“103.140.124.130”)</td>
-</tr>
-<tr>
-<th>COMMON_RESOURCE_GROUP</th>
-<td>Specify the name of the resource group where few subscription level shared resources would be created. This needs to be a separate value for Production and for Non-Production. This is the resource group under which PCI related function app gets created.</td>
-<td>VoltMXInfra</td>
-</tr>
-<tr>
-<th>MARKETING_CATALOG_MS</th>
-<td>Specify whether to enable Marketing Catalog Microservice or not.</td>
-<td>false Supported values include: true or false.</td>
-</tr>
-<tr>
-<th>MARKETING_CATALOG_RESOURCE_GROUP</th>
-<td>Specify the name of the resource group where the marketing catalog microservice resources would be created.</td>
-<td>marketingcatalog-ms</td>
-</tr>
-<tr>
-<th>MONGO_PATH</th>
-<td>Enter the path where Mongo Shell is installed.</td>
-<td><code>/opt/mongodb-linux-x86_64-ubuntu1804-4.2.10/bin</code></td>
-</tr>
-<tr>
-<th>MONGO_CONNECTION</th>
-<td>Enter the connection string for Mongo Shell from Altas.</td>
-<td>mongodb+srv://mongo-cluster-1.jonig.mongodb.net</td>
-</tr>
-<tr>
-<th>MONGO_USER_NAME</th>
-<td>Enter the Mongo Database user name which has been created earlier by you.</td>
-<td>mongodbuser</td>
-</tr>
-<tr>
-<th>MONGO_PASSWORD</th>
-<td>Enter the Mongo Database password which has been given by you while creating the mongodb user.</td>
-<td>Root@123</td>
-</tr>
-<tr>
-<th>MONGODB_DBNAME</th>
-<td>Enter the preferred Database name.</td>
-<td>marketingcatalogdb</td>
-</tr>
-<tr>
-<th>MONGODB_CONNECTIONSTR</th>
-<td>Provide mongo DB connection string.<br/><blockquote><em><b>Note: </b></em>Ensure that you are providing URL encoded mongodb username and password values if they contain special characters like &#92;&#44; &#42;&#44; &#64;&#44; &#58;&#44; &#63;&#44; &#46; etc&#46;</blockquote><em>It can be formed using the following string: mongodb://&lt; MONGO\_USER\_NAME&gt;&#58;&lt; MONGO\_PASSWORD&gt; @&lt;cluster-shard-0&gt;&#58;&lt;port-number&gt;,&lt;cluster-shard-1&gt;&#58;&lt;port-number&gt; &#44; &lt;cluster-shard-2&gt;&#58;&lt;port-number&gt;/&lt; MONGODB\_DBNAME&gt;?ssl=true&amp;replicaSet= &lt;value&gt; &amp;authSource=admin&amp;retryWrites=true&amp;w=majority</em></td>
-<td>mongodb://mongodbuser:Root%40123@mongo-cluster-1-shard-00-01.jonig.mongodb.net:27017,mongo-cluster-1-shard-00-02.jonig.mongodb.net:27017,mongo-cluster-1-shard-00-00.jonig.mongodb.net:27017/marketingcatalogdb?ssl=true&amp;replicaSet=atlas-qxcm8s-shard-0&amp;authSource=admin&amp;retryWrites=true&amp;w=majority</td>
-</tr>
-<tr>
-<th>EVENT_HUB_NAME_SPACE</th>
-<td>Enter the preferred Event hub namespace.</td>
-<td>marketingcatalogkafkaapp</td>
-</tr>
-<tr>
-<th>CAMPAIGN_MS</th>
-<td>Specify whether to enable Campaign Microservice or not.</td>
-<td>false Supported values include: true or false.</td>
-</tr>
-<tr>
-<th>CAMPAIGN_RESOURCE_GROUP</th>
-<td>Specify the name of the resource group where campaign microservice resources would be created.</td>
-<td>nas-ssl-campaign</td>
-</tr>
-<tr>
-<th>CAMPAIGN_DB_SERVER_NAME</th>
-<td>Specify the server name for your MySQL Database.</td>
-<td>sqlcampaigndb</td>
-</tr>
-<tr>
-<th>CAMPAIGN_DB_USER_NAME</th>
-<td>Enter the preferred Database username.</td>
-<td>campaign</td>
-</tr>
-<tr>
-<th>CAMPAIGN_DB_PASSWORD</th>
-<td>Enter the preferred Database password. It should be a String containing a minimum of 8 characters and combination of alpha-numeric and non-alpha-numeric characters.</td>
-<td>root@123</td>
-</tr>
-<tr>
-<th>ARRAY_TO_WHITELIST_IPS_TO_ACCESS_CAMPAIGN_DB</th>
-<td>Specify the outbound public IP of the machine where the installation script would be running. To specify multiple IPs you can use space separated values like (“w1.x1.y1.z1” “w2.x2.y2.z2” “w3.x3.y3.z3”).</td>
-<td>(“103.140.124.130”)</td>
-</tr>
-<tr>
-<th>New Relic Monitoring details:</th>
-<td>New Relic Monitoring for AKS Cluster. Enable New Relic monitoring for Infrastructure monitoring. Make sure a proper new relic subscription is available before enabling this feature.</td>
-<td></td>
-</tr>
-<tr>
-<th>NEW_RELIC_INFRA_MONITORING_ENABLED</th>
-<td>Set to true if you have a new relic license key and if new relic infra monitoring needs to be enabled. This would monitor the node level performance metrics such as CPU, memory, etc.</td>
-<td>true Supported values include: true or false.</td>
-</tr>
-<tr>
-<th>NEW_RELIC_APP_PERF_MONITORING_ENABLED</th>
-<td>Set to true if you have a new relic license and if pod level monitoring needs to be enabled. This would monitor the pod level metrics.</td>
-<td>true Supported values include: true or false.</td>
-</tr>
-<tr>
-<th>NEW_RELIC_LICENSE_KEY</th>
-<td>Specify the new relic license key.</td>
-<td>9e3f3112fb39c130a75c407ab0b4ba153f30NRAL</td>
-</tr>
-<tr>
-<th>AKS_NODE_COUNT</th>
-<td>Specify the number of worker nodes in the cluster. This is the minimum number of nodes to be created in the Shared AKS agent pool.</td>
-<td>2</td>
-</tr>
-<tr>
-<th>AKS_MAX_NODE_COUNT</th>
-<td>Specify the maximum number of worker nodes that can be provisioned by Autoscaling. The max number of nodes for the Shared AKS to create in case load increases.</td>
-<td>6</td>
-</tr>
-<tr>
-<th>SHARED_AKS_NODE_SIZE_NON_PROD</th>
-<td>This is for a Non Production instance. Type of the Azure instance created for Shared cluster in which Foundry components console, identity, engagement pods will be created. Refer to the <a href="https://docs.microsoft.com/en-us/azure/aks/use-multiple-node-pools">Azure documentation</a> for instance sizes and codes.</td>
-<td>Standard_D4_v3</td>
-</tr>
-<tr>
-<th>SHARED_AKS_NODE_SIZE_PROD</th>
-<td>This is for a Production instance. Type of the Azure instance created for Shared cluster in which Foundry components console, identity, engagement pods will be created. Refer to the <a href="https://docs.microsoft.com/en-us/azure/aks/use-multiple-node-pools">Azure documentation</a> for instance sizes and codes.</td>
-<td>Standard_D4_v3</td>
-</tr>
-<tr>
-<th>INTEGRATION_AKS_NODE_SIZE</th>
-<td>Type of the Azure instance to be created for Integration Cluster.</td>
-<td>Standard_B2MS</td>
-</tr>
-<tr>
-<th>AKS_MASTER_NODE_COUNT</th>
-<td>This is the AKS Master Node Count. Specify the number of Master nodes to create.</td>
-<td>1</td>
-</tr>
-<tr>
-<th>INTEGRATION_AKS_NODE_COUNT</th>
-<td>The minimum number of nodes to be created in the Integration AKS agent/node pool.</td>
-<td>2</td>
-</tr>
-<tr>
-<th>INTEGRATION_AKS_MAX_NODE_COUNT</th>
-<td>The maximum number of nodes to be created in the Integration AKS agent/node pool.</td>
-<td>6</td>
-</tr>
-</table>
-
+  
+| PARAMETER | DESCRIPTION | EXAMPLE |
+| --- | --- | --- |
+| **SHARED\_SERVER\_DOMAIN\_NAME** | This is the domain name property for Foundry Console component. This is not required if shared cluster is already created in previous installations. | `kfazure-console.hcl.net` |
+| **INTEGRATION\_SERVER\_DOMAIN\_NAME** | This is the domain name property for Foundry Integration component. | `kfazure-integration.hcl.net` |
+| **VMS\_DOMAIN\_NAME** | This is the domain name property for Foundry Engagement Service Component. This is not required in case of Production because Engagement will also use SHARED\_SERVER\_DOMAIN\_NAME incase of production. | `kfazure-engagement.hcl.net` |
+| **AZURE\_SUBSCRIPTION\_ID** | This is the Azure subscription ID. Steps to know this are in the [next section](#subId). | da28307f-55ae-42de-995a-fcc6608d1bd4 |
+| **AZURE\_LOCATION** | The region in which the AKS cluster should be created. For more details refer to, [Features and Supported Regions](Appendices.html#features-and-supported-regions). | eastus |
+| **SERVICE\_PRINCIPAL\_CLIENT\_ID** | Application ID of the service principal created for the Azure installation. | 716f6434-1315-4acb-3184-d9a23efa3613 |
+| **SERVICE\_PRINCIPAL\_CLIENT\_SECRET** | Password of the Service Principal. | 34a10627-308d-4697-9ea2-e379f8e33bb0 |
+| **SERVICE\_PRINCIPAL\_OBJECT\_ID** | Service principal object ID. Steps to know this are in the [next section](#servicePObj). | c3afcb93-46ed-21c4-98e0-7bb639297f21 |
+| **TENANT\_ID** | Tenant ID of the Azure account. Steps to know this are in the [next section](#tenantID). | a5a1f617-3b00-1e81-8190-c4a5136ba396 |
+| **SSH\_PUBLIC\_KEY** | This is required for creation of the AKS. Steps to create SSH key is provided in the [pre-requisites section](#Generate). > **_Note:_** You cannot use the same SSH key for all the Non-Production installations within a subscription. | ssh-rsa SAAWB3NzaC1yc2... |
+| **SHARED\_AZURE\_RESOURCE\_GROUP** | Specify name of resource group to be created for the cluster of SHARED components (Console, Identity, and Engagement). Enter a name which does not conflict with any of the existing resource groups. This is not required for Non-Production if the shared cluster is already installed for the same subscription. | FoundrySharedXYZ |
+| **INTEGRATION\_AZURE\_RESOURCE\_GROUP** | Specify name of resource group to be created for the Integration (INT) cluster. This will be the resource group where AKS cluster for Foundry Integration is created. Enter a name which does not conflict with any existing resource group. This is mandatory for all installations. | FoundryIntXYZ |
+| **DATABASE\_TYPE** | Specify the database type you want to use for hosting Volt MX Foundry on Azure.The Volt MX Foundry Containers on Azure Solution supports the MS SQL and MySQL Server Databases. | mysql |
+| **SHARED\_DATABASE\_USER\_NAME** | Specify a username for the database used by the Foundry console, identity and engagement components. This is not required in Non-Production installation if a shared cluster is already created in the previous installation. | dbclient |
+| **SHARED\_DATABASE\_PASSWORD** | Specify a password for the database used by the shared Foundry components. > **_Note:_** The following special character $, \*, &, !, (, ), \\ are not supported in DB password. | Test#/123 |
+| **INTEGRATION\_DATABASE\_USER\_NAME** | Specify a username for your INT database. | dbclient |
+| **INTEGRATION\_DATABASE\_PASSWORD** | Specify a database password for your integration database.> **_Note:_** If you are using Volt MX Foundry 9.0.0.1 GA docker images, you must specify the same value for SHARED\_DATABASE\_PASSWORD and INTEGRATION\_DATABASE\_PASSWORD. Integration docker image does not support multiple passwords.You can use different passwords for your databases from Volt MX Foundry V9.0.1.0 GA onwards.The following special character $, \*, &, !, (, ), \\ are not supported in DB password. | FabR^c123 |
+| **APPGATEWAY\_SSL\_CERT\_PASSWORD** | Password of the SSL PFX certificate.This is the Password is used for getting the **pfx** key for the SSL offloading. | Test@1234 |
+| **Automatic Registration Details:** | Auto registration inputs are not required to be provided for Non-Production if the Shared cluster is already created in a previous installation. |   |
+| **AUTO\_REGISTRATION\_USER\_ID** | The email ID used for Volt MX Foundry Registration. After the installation is complete, you can add more users from the Foundry console. | micheal.doe@xyz.com |
+| **AUTO\_REGISTRATION\_PASSWORD** | The password used for Volt MX Foundry Registration. | Test@5264! |
+| **AUTO\_REGISTRATION\_FIRST\_NAME** | The first name used for Volt MX Foundry Registration. | Micheal |
+| **AUTO\_REGISTRATION\_LAST\_NAME** | The last name used for Volt MX Foundry Registration. | Doe |
+| **AZURE\_CDN\_ENABLED** | Specify whether to install CDN for the apps component or not. If you have chosen a region where CDN Profile is not supported, CDN will not be configured. For more details refer to, [Features and Supported Regions](Appendices.html#features-and-supported-regions). | true Supported values include: true or false. |
+| **ALERT\_NOTIFICATION\_ENABLED** | Specify whether to enable notification for Alerts. For example sending an alert when the CPU Usage crosses 90% on integration pod, etc. | true Supported values include: true or false. |
+| **AZURE\_ACTION\_GROUP\_NAME** | Specify name of the action group. | admin |
+| **USER\_EMAIL\_ID** | Specify the default email ID to which alert notification should be sent. | micheal.doe@xyz.com |
+| **ARRAY\_TO\_WHITELIST\_IPS\_TO\_ACCESS\_FILE\_SHARE** | Specify the public Foundry IP of the machine where the installation script would be running. To specify multiple IPs use space separated values like ("w1.x1.y1.z1" "w2.x2.y2.z2" "w3.x3.y3.z3"). | ("103.140.124.130") |
+| **COMMON\_RESOURCE\_GROUP** | Specify the name of the resource group where few subscription level shared resources would be created. This needs to be a separate value for Production and for Non-Production. This is the resource group under which PCI related function app gets created. | VoltMXInfra |
+| **MARKETING\_CATALOG\_MS** | Specify whether to enable Marketing Catalog Microservice or not. | false Supported values include: true or false. |
+| **MARKETING\_CATALOG\_RESOURCE\_GROUP** | Specify the name of the resource group where the marketing catalog microservice resources would be created. | marketingcatalog-ms |
+| **MONGO\_PATH** | Enter the path where Mongo Shell is installed. | `/opt/mongodb-linux-x86_64-ubuntu1804-4.2.10/bin` |
+| **MONGO\_CONNECTION** | Enter the connection string for Mongo Shell from Altas. | mongodb+srv://mongo-cluster-1.jonig.mongodb.net |
+| **MONGO\_USER\_NAME** | Enter the Mongo Database user name which has been created earlier by you. | mongodbuser |
+| **MONGO\_PASSWORD** | Enter the Mongo Database password which has been given by you while creating the mongodb user. | Root@123 |
+| **MONGODB\_DBNAME** | Enter the preferred Database name. | marketingcatalogdb |
+| **MONGODB\_CONNECTIONSTR** | Provide mongo DB connection string. <br> **Note:** Ensure that you are providing URL encoded mongodb username and password values if they contain special characters like \*,@,:,?,. etc. <br><br>It can be formed using the following string: mongodb://< MONGO\_USER\_NAME>:< MONGO\_PASSWORD> @<cluster-shard-0>:<port-number>,<cluster-shard-1>:<port-number> , <cluster-shard-2>:<port-number>/< MONGODB\_DBNAME>?ssl=true&replicaSet=<value> &authSource=admin&retryWrites=true&w=majority | mongodb://mongodbuser:Root%40123@mongo-cluster-1-shard-00-01.jonig.mongodb.net:27017,mongo-cluster-1-shard-00-02.jonig.mongodb.net:27017,mongo-cluster-1-shard-00-00.jonig.mongodb.net:27017/marketingcatalogdb?ssl=true&replicaSet=atlas-qxcm8s-shard-0&authSource=admin&retryWrites=true&w=majority |
+| **EVENT\_HUB\_NAME\_SPACE** | Enter the preferred Event hub namespace. | marketingcatalogkafkaapp |
+| **CAMPAIGN\_MS** | Specify whether to enable Campaign Microservice or not. | false Supported values include: true or false. |
+| **CAMPAIGN\_RESOURCE\_GROUP** | Specify the name of the resource group where campaign microservice resources would be created. | nas-ssl-campaign |
+| **CAMPAIGN\_DB\_SERVER\_NAME** | Specify the server name for your MySQL Database. | sqlcampaigndb |
+| **CAMPAIGN\_DB\_USER\_NAME** | Enter the preferred Database username. | campaign |
+| **CAMPAIGN\_DB\_PASSWORD** | Enter the preferred Database password. It should be a String containing a minimum of 8 characters and combination of alpha-numeric and non-alpha-numeric characters. | root@123 |
+| **ARRAY\_TO\_WHITELIST\_IPS\_TO\_ACCESS\_CAMPAIGN\_DB** | Specify the outbound public IP of the machine where the installation script would be running. To specify multiple IPs you can use space separated values like ("w1.x1.y1.z1" "w2.x2.y2.z2" "w3.x3.y3.z3"). | ("103.140.124.130") |
+| **New Relic Monitoring details:** | New Relic Monitoring for AKS Cluster. Enable New Relic monitoring for Infrastructure monitoring. Make sure a proper new relic subscription is available before enabling this feature. |   |
+| **NEW\_RELIC\_INFRA\_MONITORING\_ENABLED** | Set to true if you have a new relic license key and if new relic infra monitoring needs to be enabled. This would monitor the node level performance metrics such as CPU, memory, etc. | true Supported values include: true or false. |
+| **NEW\_RELIC\_APP\_PERF\_MONITORING\_ENABLED** | Set to true if you have a new relic license and if pod level monitoring needs to be enabled. This would monitor the pod level metrics. | true Supported values include: true or false. |
+| **NEW\_RELIC\_LICENSE\_KEY** | Specify the new relic license key. | 9e3f3112fb39c130a75c407ab0b4ba153f30NRAL |
+| **AKS\_NODE\_COUNT** | Specify the number of worker nodes in the cluster. This is the minimum number of nodes to be created in the Shared AKS agent pool. | 2 |
+| **AKS\_MAX\_NODE\_COUNT** | Specify the maximum number of worker nodes that can be provisioned by Autoscaling. The max number of nodes for the Shared AKS to create in case load increases. | 6 |
+| **SHARED\_AKS\_NODE\_SIZE\_NON\_PROD** | This is for a Non Production instance. Type of the Azure instance created for Shared cluster in which Foundry components console, identity, engagement pods will be created. Refer to the [Azure documentation](https://docs.microsoft.com/en-us/azure/aks/use-multiple-node-pools) for instance sizes and codes. | Standard\_D4\_v3 |
+| **SHARED\_AKS\_NODE\_SIZE\_PROD** | This is for a Production instance. Type of the Azure instance created for Shared cluster in which Foundry components console, identity, engagement pods will be created. Refer to the [Azure documentation](https://docs.microsoft.com/en-us/azure/aks/use-multiple-node-pools) for instance sizes and codes. | Standard\_D4\_v3 |
+| **INTEGRATION\_AKS\_NODE\_SIZE** | Type of the Azure instance to be created for Integration Cluster. | Standard\_B2MS |
+| **AKS\_MASTER\_NODE\_COUNT** | This is the AKS Master Node Count. Specify the number of Master nodes to create. | 1 |
+| **INTEGRATION\_AKS\_NODE\_COUNT** | The minimum number of nodes to be created in the Integration AKS agent/node pool. | 2 |
+| **INTEGRATION\_AKS\_MAX\_NODE\_COUNT** | The maximum number of nodes to be created in the Integration AKS agent/node pool. | 6 |
 
 <a name="userProperties"></a>    
-<details open markdown="block"><summary>Click here to view details of the User Defined Properties <strong>(Azure Subscription ID, Azure Service Principal ID Name, Azure Service Principal ID Secret, Service Principal Object ID, and Tenant ID)</strong></summary>
-<p></p>
-<p>Azure Subscription ID is a GUID that uniquely identifies your subscription to use Azure services. The Application needs the Service Principal to access or configure resources through the Azure Resource Manager (ARM) in the Azure Stack.</p>
-<p>You must have an Azure account with the permissions of a <b>Global Administrator</b> and the role of a <b>User</b>. Without these privileges, it is not possible to create the AKS clusters (or other resources).</p>
-<p>The following section describes fetching <b>Azure Subscription ID</b>, generating <b>Azure Service Principal ID Name, Azure Service Principal ID Secret, Service Principal Object ID</b>, and <b>Tenant ID</b>.</p>
-<ol type = "i">
-<li id="subId">Steps to get the <b>Subscription ID</b>:</li>
-<ul type="square">
-<li>Navigate to http://portal.azure.com/.</li>
-<li>Navigate to Browse.</li>
-<li>In the search box, begin to type subscription.</li>
-<li>Select Subscriptions from the search results.</li>
-<p></p>
-<img src="Resources/Images/ASP_1_459x653.png">
-<br/>
-<p>Find the appropriate subscription to check your Azure subscription GUID.</p>
-<img src="Resources/Images/ASP_2_463x131.png">
-<br/>
-</ul>
-<li>Steps to generate <b>Azure Service Principal</b> with Contributor role at subscription level: </li>
-<p></p>
-<p>Login to Azure Portal and click on <b>Cloud Shell</b> as shown:</p>
-<img src="Resources/Images/Execute_1_542x106.png">
-<br/>
-<ol type = "a">
-<li>Execute:</li>
-<pre><code style="display:block;background-color:#eee;">$ az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/&lt;subscription_id&gt;"</code></pre>
-<br/>
-<img src="Resources/Images/Execute_3_478x135.png">
-<br/>
-<p>After executing the above command, a json response will be displayed on the command prompt.</p>
-<pre><code style="display:block;background-color:#eee;">{
-"appId": "APP_ID",
-"displayName": "ServicePrincipalName",
-"name": "http://ServicePrincipalName",
-"password": ...,
-"tenant": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-}</code></pre>
-<br/>
-<p>In the properties file of the <b>conf</b> directory:</p>
-<ul type="square">
-<li>SERVICE_PRINCIPAL_CLIENT_ID is the value of the appId.</li>
-<li>SERVICE_PRINCIPAL_CLIENT_SECRET is the value of the password.</li>
-</ul>
-<blockquote><em>Note: </em>The values of the SERVICE_PRINCIPAL_CLIENT_ID and SERVICE_PRINCIPAL_CLIENT_SECRET should not contain any quotation marks. For example:
-<ul>
-<li>SERVICE_PRINCIPAL_CLIENT_ID = a5afa829-525c-436c-ca4f-f442027cfd2e</li>
-<li>SERVICE_PRINCIPAL_CLIENT_SECRET = cx4q44eq-fq7a-450v-zf41-4049183d1eb8</li>
-</ul>
-</blockquote>
-</ol>
-<li id="servicePObj">Steps to generate the <b>Service Principal Object ID</b>:</li>
-<p>Login to Azure Portal and click on <b>Power Shell</b>.</p>
-<p></p>
-<ol type="a">
-<li>Execute:</li>
-<pre><code style="display:block;background-color=#eee;">$(Get-AzureADServicePrincipal -Filter "AppId eq ‘&lt;Service_principle_client_ID&gt;’").ObjectId
-</code></pre>
-<br/>
-<img src="Resources/Images/objectid.PNG">
-<br/>
-</ol>
-<li id="tenantID">Steps to know your <b>Tenant ID</b>:</li>
-<ol type="i">
-<li>Go to Portal.azure.com > Azure Active Directory.</li>
-<li>In the Overview section you can find the Tenant ID.</li>
-<img src="Resources/Images/tenant_id.png">
-<br/>
-</ol>
-</ol>
+<details close markdown="block"><summary>Click here to view details of the User Defined Properties <strong>(Azure Subscription ID, Azure Service Principal ID Name, Azure Service Principal ID Secret, Service Principal Object ID, and Tenant ID)</strong></summary>
+
+**Azure Subscription ID** is a GUID that uniquely identifies your subscription to use Azure services. The Application needs the Service Principal to access or configure resources through the Azure Resource Manager (ARM) in the Azure Stack.  
+    You must have an Azure account with the permissions of a **Global Administrator** and the role of a **User**. Without these privileges, it is not possible to create the AKS clusters (or other resources).  
+    The following section describes fetching **Azure Subscription ID**, generating **Azure Service Principal ID Name**, **Azure Service Principal ID Secret**, **Service Principal Object ID**, and **Tenant ID**.
+<br>
+i. **Steps to get the Subscription ID**
+
+*   Navigate to [http://portal.azure.com/](http://portal.azure.com/).
+*   Navigate to Browse.
+*   In the search box, begin to type subscription.
+*   Select Subscriptions from the search results.<br/>
+![](Resources/Images/ASP_1_459x653.png)
+
+Find the appropriate subscription to check your Azure subscription GUID.<br/>
+![](Resources/Images/ASP_2_463x131.png)
+
+
+ii. **Step to generate Azure Service Principal with Contributor role at subscription level**
+
+Login to Azure Portal and click on **Cloud Shell** as shown:<br/>
+
+![](Resources/Images/Execute_1_542x106.png)
+
+1.  Execute:  
+    {% highlight voltMx %}
+    $ az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/<subscription_id>"
+    {% endhighlight %}<br/>
+![](Resources/Images/Execute_3_478x135.png)
+
+After executing the above command, a json response will be displayed on the command prompt.
+
+{% highlight voltMx %}
+{  
+"appId": "APP_ID",  
+"displayName": "ServicePrincipalName",  
+"name": "http://ServicePrincipalName",  
+"password": ...,  
+"tenant": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"  
+}  
+
+{% endhighlight %}
+
+In the properties file of the **conf** directory:
+
+*   SERVICE\_PRINCIPAL\_CLIENT\_ID is the value of the appId.
+*   SERVICE\_PRINCIPAL\_CLIENT\_SECRET is the value of the password.
+
+> **_Note:_** The values of the SERVICE\_PRINCIPAL\_CLIENT\_ID and SERVICE\_PRINCIPAL\_CLIENT\_SECRET should not contain any quotation marks. For example:
+
+*   SERVICE\_PRINCIPAL\_CLIENT\_ID = a5afa829-525c-436c-ca4f-f442027cfd2e
+*   SERVICE\_PRINCIPAL\_CLIENT\_SECRET = cx4q44eq-fq7a-450v-zf41-4049183d1eb8
+
+iii. **Steps to generate the Service Principal Object ID**
+
+Login to Azure Portal and click on **Power Shell**.
+
+1.  Execute:  
+    {% highlight voltMx %}
+    $(Get-AzureADServicePrincipal -Filter "AppId eq ‘<Service_principle_client_ID>’").ObjectId
+    {% endhighlight %}<br/>
+![](Resources/Images/objectid.PNG)
+
+    
+iv. **Steps to know your Tenant ID**
+
+1.  Go to Portal.azure.com > Azure Active Directory.
+2.  In the Overview section you can find the Tenant ID.<br/>
+![](Resources/Images/tenant_id.png)
+
 </details>
 
-<br/>
+Installation
+------------
 
-<h2 id="installation">Installation</h2>
-<p style="font-weight:bold;">
 Steps to Install Volt MX Foundry on MS Azure
-</p>
-<ol>
-<li value="1">Create an Ubuntu VM or you can use an existing VM. For more details, refer to <a href="#vm-setup">VM Setup.</a></li>
-<li>Extract the downloaded installation zip on that VM. For more details, refer to <a href="#pre-installation-tasks">Pre-Installation Tasks</a>.
-<p><img src="Resources/Images/installfolder.png"></p>
-</li>
-<li>Modify/Enter the required properties in the <b>&lt;Installation Directory&gt;/conf/enterprise.properties</b> file. For more details, refer to <a href="#configuration">Configuration.</a></li>
-<li>Run the installation using command bash <b>install-foundry.sh</b>.
-<p><img src="Resources/Images/new_install1.png"></p>
-</li>
-<li>Choose between a <b>Non-Production</b> or a Production installation mode. In the following prompt a Non-Production mode has been chosen. You can choose Production mode and follow a similar flow to complete the installation.</li>
-<li>Specify a label for the Non-Production installation environment. A label is just a simple string such as dev, qa, uat etc., this will also be appended to the Azure resources created for this environment to identify them easily.
-<p><img src="Resources/Images/new_install2.png"></p>
-<blockquote>
-<em><b>Note: </b> </em>This step is specific to Non-Production mode.
-</blockquote>
-</li>
-<li>The installation begins and towards the end of the installation the following prompt will be displayed.
-<p><img src="Resources/Images/new_install3.png"></p>
-</li>
-<li>Once the domains are mapped to the IPs/CNAME as shown in the prompt, validate the mappings and continue the installation by re-running <b>install-foundry.sh</b>. The CDN configuration will be done and the following prompt will be displayed to complete the manual steps of CDN configuration.
-<p><img src="Resources/Images/CdnSuccessful.png"></p>
-<blockquote>
-<em><b>Note: </b> </em>You must ensure that the domain mapping must reflect with correct mapping from the script client box using <b>nslookup</b>.
-</blockquote>
-</li>
-<li>As shown in the prompt, follow the steps in <a href="VoltMX_Foundry_on_Azure.html#setting-up-azure-content-delivery-network-cdn">Setting up Azure Content Delivery Network (CDN)</a> to perform a custom domain HTTPS configuration.</li>
-<li>Re-run the installation by running the <b>install-foundry.sh</b> again to complete the post-installation tasks.</li>
-<li>Re-run the installation by running the install-foundry.sh again to complete the post-installation tasks.</li>
-<li>At the end of the installation, the following message is displayed which contains the Foundry Console URL. Copy and paste the displayed link on to a browser. Press Enter. The Foundry Console is displayed.</li>
-<p><img src="Resources/Images/new_install4.png"></p>
-</ol>
 
+1.  Create an Ubuntu VM or you can use an existing VM. For more details, refer to [VM Setup](#vm-setup).
+2.  Extract the downloaded installation zip on that VM. For more details, refer to [Pre-Installation Tasks](#pre-installation-tasks).
+
+![](Resources/Images/installfolder.png)
+
+3.  Modify/Enter the required properties in the **<Installation Directory>/conf/enterprise.properties** file. For more details, refer to [Configuration](#configuration).
+4.  Run the installation using command bash **install-foundry.sh**.
+
+![](Resources/Images/new_install1.png)
+
+5.  Choose between a Non-Production or a Production installation mode. In the following prompt a **Non-Production** mode has been chosen. You can choose Production mode and follow a similar flow to complete the installation.
+6.  Specify a label for the Non-Production installation environment. A label is just a simple string such as dev, qa, uat etc., this will also be appended to the Azure resources created for this environment to identify them easily.
+    
+    ![](Resources/Images/new_install2.png)
+    
+    > **_Note:_** This step is specific to Non-Production mode.
+    
+7.  The installation begins and towards the end of the installation the following prompt will be displayed.
+
+![](Resources/Images/new_install3.png)
+
+8.  Once the domains are mapped to the IPs/CNAME as shown in the prompt, validate the mappings and continue the installation by re-running **install-foundry.sh**. The CDN configuration will be done and the following prompt will be displayed to complete the manual steps of CDN configuration.
+    
+    ![](Resources/Images/CdnSuccessful.png)
+    
+    > **_Note:_** You must ensure that the domain mapping must reflect with correct mapping from the script client box using **nslookup**.
+    
+9.  As shown in the prompt, follow the steps in [Setting up Azure Content Delivery Network (CDN)](VoltMX_Foundry_on_Azure.html#setting-up-azure-content-delivery-network-cdn) to perform a custom domain HTTPS configuration.
+10.  Re-run the installation by running the **install-foundry.sh** again to complete the post-installation tasks.
+11.  At the end of the installation, the following message is displayed which contains the Foundry Console URL. Copy and paste the displayed link on to a browser. Press Enter. The Foundry Console is displayed.
+
+![](Resources/Images/new_install4.png)
 
 Post Installation
 -----------------
 
 After the installation and CDN configuration is complete, you can access the Foundry Console using the link displayed on the screen.
 
-1.  Take a backup and keep the installation logs from <b>&lt;Installation Directory&gt;/logs directory</b>.
+1.  Take a backup and keep the installation logs from **<Installation Directory>/logs directory**.
 2.  Copy and paste the displayed link on to a browser. Press Enter. The Foundry Console is displayed.
 3.  Login with the registration credentials provided in the properties file and navigate across various pages. Following is a screenshot of the Environments tab from an Azure test setup after installing 3 environments, namely DEV, UAT2, and QA4.
     
@@ -611,96 +375,92 @@ Azure Content Delivery Network (CDN) offers a global solution for developers to 
 
 > **_Note:_** Azure CDN SKU for AKS cluster is set to Premium Verizon, which supports configuration of cache rules for Volt MX Foundry Apps.
 
-<h3>Enable CDN on Azure AKS cluster</h3>
+### Enable CDN on Azure AKS cluster
+
 <details close markdown="block"><summary>Follow these steps to enable CDN in your AKS cluster .</summary>
-<ol value="1">
-  <li>Set the value of <code>AZURE_CDN_ENABLED</code> to true in the properties file (trail.properties /enterprise.properties).
-  <p><img src="Resources/Images/ClamAV/CDN1.png"></p>
-  </li>
-  <li>Set the CDN Endpoint:
-  <ul><li>FOR SSL ENABLED CLOUD (IS_SSL_ENABLED = true), after creating the CDN endpoint, map the CDN endpoint to a custom domain name.
-  <p></p>
-  <p><img src="Resources/Images/ClamAV/CDN2.png"></p>
-    </li>
-      <li>FOR SSL DISABLED CLOUD (IS_SSL_ENABLED = false), no mapping of server domain name is required.</li>
-    </ul>
-  </li>
-</ol>  
+
+1.  Set the value of `AZURE_CDN_ENABLED` to **true** in the properties file (trail.properties /enterprise.properties).
+    
+![](Resources/Images/ClamAV/CDN1.png)
+    
+2.  Set the CDN Endpoint:
+    *   FOR SSL ENABLED CLOUD (`IS_SSL_ENABLED = true`), after creating the CDN endpoint, map the CDN endpoint to a custom domain name.
+        
+![](Resources/Images/ClamAV/CDN2.png)
+        
+    *   FOR SSL DISABLED CLOUD (IS\_SSL\_ENABLED = false), no mapping of server domain name is required.
+        
+</details>
+Once you create the CDN profile and endpoint, follow these steps to manually configure the CDN settings in the Azure portal:
+
+<details close markdown="block"><summary>Click here for the steps</summary>
+
+1.  Open the Azure portal ([portal.azure.com](http://portal.azure.com/)) and login using your Microsoft account credentials.
+    
+![](Resources/Images/ClamAV/CDN3_600x317.png)
+    
+2.  Select **Resource groups** from the left navigation pane.
+    
+![](Resources/Images/ClamAV/CDN4_597x272.png)
+    
+    All existing resource groups appear.  
+    Select the resource group in which the AKS Cluster is created.
+    
+![](Resources/Images/ClamAV/CDN5_600x274.png)
+    
+3.  If the cloud is SSL enabled, open **CDN Endpoint** from the list of resources in the Azure Resource Group.
+    
+![](Resources/Images/ClamAV/CDN6_596x250.png)
+    
+4.  Click **Custom Domain**.The Custom Domain page appears.
+    
+![](Resources/Images/ClamAV/CDN7_601x252.png)
+    
+5.  Select ON to enable HTTPS for custom domain.
+    
+![](Resources/Images/ClamAV/CDN8.png)
+    
 </details>
 
-<p>Once you create the CDN profile and endpoint, follow these steps to manually configure the CDN settings in the Azure portal:</p>
+### Configuring Caching Rules
 
-<details close markdown="block"><summary>Click here for the steps.</summary>
-  <ol>
-    <li>Open the Azure portal (<a href="http://portal.azure.com/">portal.azure.com</a>) and login using your Microsoft account credentials.
-    <p><img src="Resources/Images/ClamAV/CDN3_600x317.png"></p>
-    </li>
-    <li>Select <b>Resource groups</b> from the left navigation pane.
-    <p><img src="Resources/Images/ClamAV/CDN4_597x272.png"></p>
-    <p></p>
-    <p>All existing resource groups appear.</p>
-    <p>Select the resource group in which the AKS Cluster is created.</p>
-    <p><img src="Resources/Images/ClamAV/CDN5_600x274.png"></p>
-    </li>
-    <li>If the cloud is SSL enabled, open <b>CDN Endpoint</b> from the list of resources in the Azure Resource Group.
-          <p><img src="Resources/Images/ClamAV/CDN6_596x250.png"></p>
-    </li>
-    <li>Click <b>Custom Domain.</b>The Custom Domain page appears.
-          <p><img src="Resources/Images/ClamAV/CDN7_601x252.png"></p>
-    </li>
-    <li>Select ON to enable HTTPS for custom domain.
-      <p><img src="Resources/Images/ClamAV/CDN8.png"></p>
-    </li>    
-  </ol>
-</details>
-
-<h3>Configuring Caching Rules</h3>
-<ol>
-  <li>Go to <b>CDN profile</b> from the list of resources available in the Azure Resource Group (having the created AKS cluster).
-    <p><img src="Resources/Images/ClamAV/CDN9.png"></p>
-  </li>
-  <li>Click <b>Manage</b> from the top navigation bar.
-    <p><img src="Resources/Images/ClamAV/CDN10_599x251.png"></p>
-  </li>
-  <li>Configure all the rules in the <b>CDN Manage Console</b>.
-    <p><img src="Resources/Images/ClamAV/CDN11_599x270.png"></p>
-  </li>
- <li>From the <b>HTTP Large</b> list, select <code>cache settings -> query string caching</code>.
-    <p><img src="Resources/Images/ClamAV/CDN12_599x251.png"></p>
- </li>
- <li>Select <b>no-cache</b> as the <b>query string caching</b> and click <b>Update</b>.
-    <p><img src="Resources/Images/ClamAV/CDN13.png"></p>
-  </li>
-  <li>From the <b>HTTP Large</b> list, select <b>Rules Engine</b>.
-    <p><img src="Resources/Images/ClamAV/CDN14_591x112.png"></p>
-  </li>
-   <li>Configure all the required rules.
-    <p><img src="Resources/Images/ClamAV/CDN15.png"></p>
-     <ul>
-       <li>Rule 1</li>
-        <p><img src="Resources/Images/ClamAV/rule1.png"></p>
-        <li>Rule 2</li>
-        <p><img src="Resources/Images/ClamAV/rule2.png"></p>        
-        <li>Rule 3</li>
-        <p><img src="Resources/Images/ClamAV/rule3.png"></p>        
-        <li>Rule 4</li>
-        <p><img src="Resources/Images/ClamAV/rule4.png"></p>        
-        <li>Rule 5</li>
-        <p><img src="Resources/Images/ClamAV/rule5.png"></p>
-        <li>Rule 6</li>
-        <p><img src="Resources/Images/ClamAV/rule6.png"></p>
-        <li>Rule 7</li>
-        <p><img src="Resources/Images/ClamAV/rule7.png"></p>        
-        <li>Rule 8</li>
-        <p><img src="Resources/Images/ClamAV/rule8.png"></p>        
-        <li>Rule 9</li>
-        <p><img src="Resources/Images/ClamAV/rule9.png"></p>        
-        <li>Rules Order</li>
-        <p><img src="Resources/Images/ClamAV/rules_order.png"></p>
-     </ul>
-  </li>
-</ol>
-
+1.  Go to **CDN profile** from the list of resources available in the Azure Resource Group (having the created AKS cluster).  
+![](Resources/Images/ClamAV/CDN9.png)
+2.  Click **Manage** from the top navigation bar.
+    
+![](Resources/Images/ClamAV/CDN10_599x251.png)
+    
+3.  Configure all the rules in the **CDN Manage Console**.
+    
+![](Resources/Images/ClamAV/CDN11_599x270.png)
+    
+4.  From the **HTTP Large** list, select `cache settings -> query string caching` .  
+![](Resources/Images/ClamAV/CDN12_599x251.png)
+5.  Select **no-cache** as the **query string caching** and click **Update**.  
+![](Resources/Images/ClamAV/CDN13.png)
+6.  From the **HTTP Large** list, select **Rules Engine**.  
+![](Resources/Images/ClamAV/CDN14_591x112.png)
+7.  Configure all the required rules.  
+![](Resources/Images/ClamAV/CDN15.png)
+    *   Rule 1  
+        ![](Resources/Images/ClamAV/rule1.png)
+    *   Rule 2  
+        ![](Resources/Images/ClamAV/rule2.png)
+    *   Rule 3  
+        ![](Resources/Images/ClamAV/rule3.png)
+    *   Rule 4  
+        ![](Resources/Images/ClamAV/rule4.png)
+    *   Rule 5  
+        ![](Resources/Images/ClamAV/rule5.png)
+    *   Rule 6  
+        ![](Resources/Images/ClamAV/rule6.png)
+    *   Rule 7  
+        ![](Resources/Images/ClamAV/rule7.png)
+    *   Rule 8  
+        ![](Resources/Images/ClamAV/rule8.png)
+    *   Rule 9  
+        ![](Resources/Images/ClamAV/rule9.png)
+    *   Rules Order![](Resources/Images/ClamAV/rules_order.png)
 
 Configuring Clam AntiVirus for Azure Virtual Machines
 -----------------------------------------------------
@@ -719,22 +479,22 @@ Follow these steps to install ClamAV on your Azure Virtual Machine:
 2.  Place your SSH private key and SSH public key in the `sshkeys` folder with names **id\_rsa** and **id\_rsa.pub** respectively.
 3.  Set the frequency of the cron job to start the ClamAV scan and push the generated logs to the storage account.
 
-
-<blockquote><em><b>Note:</b></em> Use the following format to set the values for the frequencies of `clamscan_cron_schedule` and `clamscanlogpush_cron_schedule` in the properties file (trail.properties /enterprise.properties).<pre><code style="display:block;background-color:#eee">  *  *  *  *  *
+> **_Note:_**  Use the following format to set the values for the frequencies of `clamscan_cron_schedule` and `clamscanlogpush_cron_schedule` in the properties file (trail.properties /enterprise.properties).{% highlight voltMx %} * * * * *
   |  |  |  |  |
   |  |  |  |  |
-  |  |  |  |  +---- Day of the Week   (range: 1-7, 1 standing for Monday)
-  |  |  |  +------ Month of the Year (range: 1-12)
-  |  |  +-------- Day of the Month  (range: 1-31)
-  |  +---------- Hour (range: 0-23)
+  |  |  |  | +---- Day of the Week   (range: 1-7, 1 standing for Monday)
+  |  |  | +------ Month of the Year (range: 1-12)
+  |  | +-------- Day of the Month  (range: 1-31)
+  | +---------- Hour (range: 0-23)
   +------------ Minute (range: 0-59)
- * = any value</code></pre>
-<p>For example, if you configure the crontab timing as 00 16 * * *, this indicates that the crontab runs every day at 16:00:00 (UTC).</p>
-<ul>
-<li>You must maintain a minimum gap of 02:30 hrs. between the <code>clamscan_cron_schedule</code> and <code>clamscanlogpush_cron_schedule</code>.</li>
-<li>All cron job timings follow UTC timezone.</li>
-</ul>
-</blockquote>
+ * = any value
+
+{% endhighlight %}
+
+For example, if you configure the crontab timing as 00 16 \* \* \*, this indicates that the crontab runs every day at 16:00:00 (UTC).
+
+*   You must maintain a minimum gap of 02:30 hrs. between the `clamscan_cron_schedule` and `clamscanlogpush_cron_schedule`.
+*   All cron job timings follow UTC timezone.
 
 ### Access ClamAV logfiles in the Virtual Machine
 
@@ -751,17 +511,14 @@ This directory contains the `clamscan.log` and `freshclam.log` files that are ge
 
 Another cron job is configured to push the generated logs into the Azure Storage Account.
 
-<h3>Edit the cron job</h3>
-<ul>
-  <li>Use the following command to view existing cron jobs on the VM.<br/>
-  <p><code>crontab -l</code></p>
-  <br/>
-  <p>
-  <img src="Resources/Images/ClamAV/CLAMAV1.png">
-  </p>
-  </li>
-  <li>Use the <code>crontab -e</code> command to open the crontab list in edit mode.</li>
-</ul>
+### Edit the cron job
+
+*   Use the following command to view existing cron jobs on the VM.  
+    `crontab -l`
+    
+    ![](Resources/Images/ClamAV/CLAMAV1.png)
+    
+*   Use the `crontab -e` command to open the crontab list in edit mode.  
     
 
 ### Edit the ClamAV conf file
@@ -771,34 +528,42 @@ The `freshclam.conf` file configures the ClamAV Database Updater.
 *   Go to the `etc/clamav/` directory.
 *   Open the `freshclam.conf` file in any editor to make any required changes to the conf file.
 
+### Accessing Logs in the Azure Storage Account
 
-<h3>Accessing Logs in the Azure Storage Account</h3>
-<p>All the logs generated by CLAMAV are pushed to the Azure Storage Account.</p>
-<ol>
-  <li>Log on to the Azure portal (<a href="http://portal.azure.com/">portal.azure.com</a>) using your Microsoft account credentials.
-  <p><img src="Resources/Images/ClamAV/CLAMAV2.png"></p>
-  </li>
-  <li>Select <b>Resource Groups</b> from the left navigation pane.
-  <p><img src="Resources/Images/ClamAV/CLAMAV3.png"></p>
-  <p>All existing resource groups appear.</p>  
-  <p>Select the resource group in which the AKS Cluster is created.</p> 
-  <p><img src="Resources/Images/ClamAV/CLAMAV4.png"></p>
-  </li>
-  <li>Select the storage account from the list of resources available in the resource group.</li>
-  <li>Click <b>Blobs</b> to see all the containers available in the storage account.
-  <p><img src="Resources/Images/ClamAV/CLAMAV5.png"></p>
-  </li>
-  <li>Select the <b>clamavlogs</b> container from the list of containers available in the storage account.
-  <p><img src="Resources/Images/ClamAV/CLAMAV6.png"></p>
-  <p>This shows all the log files pushed by ClamAV from the virtual machine.</p>
-  </li>
-  <li>Click <b>Download</b> to view the logs in the file.
-  <p><img src="Resources/Images/ClamAV/CLAMAV7.png"></p>
-  </li>
-  <li>Unzip the downloaded .zip file and extract the content.
-  <p>You can now view all the logs that are pushed by CLAMAV from virtual machine.</p>
-  </li>
-</ol>
+All the logs generated by CLAMAV are pushed to the Azure Storage Account.
+
+1.  Log on to the Azure portal ([portal.azure.com](http://portal.azure.com/)) using your Microsoft account credentials.
+    
+    ![](Resources/Images/ClamAV/CLAMAV2.png)
+    
+2.  Select **Resource Groups** from the left navigation pane.
+    
+    ![](Resources/Images/ClamAV/CLAMAV3.png)
+    
+
+All existing resource groups appear.  
+Select the resource group in which the AKS Cluster is created.
+
+![](Resources/Images/ClamAV/CLAMAV4.png)
+
+3.  Select the storage account from the list of resources available in the resource group.
+4.  Click **Blobs** to see all the containers available in the storage account.
+    
+    ![](Resources/Images/ClamAV/CLAMAV5.png)
+    
+5.  Select the **clamavlogs** container from the list of containers available in the storage account.
+    
+    ![](Resources/Images/ClamAV/CLAMAV6.png)
+    
+    This shows all the log files pushed by ClamAV from the virtual machine.
+    
+6.  Click **Download** to view the logs in the file.
+    
+    ![](Resources/Images/ClamAV/CLAMAV7.png)
+    
+7.  Unzip the downloaded .zip file and extract the content.
+    
+    You can now view all the logs that are pushed by CLAMAV from virtual machine.
     
 
 Configuring OSSEC Intrusion Detection
@@ -810,33 +575,32 @@ OSSEC runs as a daemon process. It notifies through alert logs when intrusion at
 
 Provide the following inputs in the properties file to enable OSSEC.
 
+### OSSEC Installation steps
 
-<h3>OSSEC Installation steps</h3>
-<ol>
-  <li>Enable the <code>INSTALL_OSSEC</code> flag in the properties file (trial.properties /enterprise.properties):
-    <p><img src="Resources/Images/ClamAV/OSSEC1.png"></p>
-  </li>
-    <li>As OSSEC is a daemon process, it continuously detects intrusion activities and stores alerts in <code>alerts.log</code> file. A cron job is configured to push the alerts from <code>/var/ossec/logs/alerts/alerts.log</code> to the Azure Storage Account.
-    <blockquote>
-      <em><b>Note: </b></em>Configure the cronjob osseclogpush_cron_schedule in the properties file (trail.properties /enterprise.properties) to set the frequency value of the cron job. Configure the Crontab timing in the following format: <pre><code style="display:block;background-color:#eee">  *  *  *  *  *
+1.  Enable the `INSTALL_OSSEC` flag in the properties file (trial.properties /enterprise.properties):
+    
+    ![](Resources/Images/ClamAV/OSSEC1.png)
+    
+2.  As OSSEC is a daemon process, it continuously detects intrusion activities and stores alerts in `alerts.log` file. A cron job is configured to push the alerts from `/var/ossec/logs/alerts/alerts.log` to the Azure Storage Account.
+
+> **_Note:_** Configure the `cronjob osseclogpush_cron_schedule` in the properties file (trail.properties /enterprise.properties) to set the frequency value of the cron job. Configure the Crontab timing in the following format:{% highlight voltMx %} * * * * *
   |  |  |  |  |
   |  |  |  |  |
-  |  |  |  |  +---- Day of the Week   (range: 1-7, 1 standing for Monday)
-  |  |  |  +------ Month of the Year (range: 1-12)
-  |  |  +-------- Day of the Month  (range: 1-31)
-  |  +---------- Hour (range: 0-23)
+  |  |  |  | +---- Day of the Week   (range: 1-7, 1 standing for Monday)
+  |  |  | +------ Month of the Year (range: 1-12)
+  |  | +-------- Day of the Month  (range: 1-31)
+  | +---------- Hour (range: 0-23)
   +------------ Minute (range: 0-59)
- * = any value</code></pre>
-      <p>For example, if you configure the crontab timing as 00 16 * * *, this indicates that the crontab runs every day at 16:00:00 (UTC).</p>
-      <ul>
-        <li>You can modify the default values of the cron job, if required.</li>
-        <li>All cron job timings follow UTC timezone.</li>
-      </ul>
-    </blockquote>
-  </li>
-  <li>Place your SSH private key in the sshkeys folder with name id_rsa.</li>
-</ol>
+ * = any value
 
+{% endhighlight %}
+
+For example, if you configure the crontab timing as 00 16 \* \* \*, this indicates that the crontab runs every day at 16:00:00 (UTC).
+
+*   You can modify the default values of the cron job, if required.
+*   All cron job timings follow UTC timezone.
+
+3.  Place your SSH private key in the sshkeys folder with name id\_rsa.
 
 ### Access log files of OSSEC in Virtual Machine
 
@@ -875,73 +639,68 @@ Follow these steps to access OSSEC logs in the Virtual Machine.
        `$cat alerts.log`
         
 
-<h3>Edit cron jobs</h3>
-<ul>
-  <li>To view the existing cron jobs use the following command on VM.<br/>
-  <p><code>crontab -l</code></p>
-  <br/>
-  <p>
-  <img src="Resources/Images/ClamAV/OSSEC2.png">
-  </p>
-  </li>
-  <li>Use the <code>crontab -e</code> command to open the crontab list in edit mode.</li>
-</ul>
+### Edit cron jobs
+
+*   To view the existing cron jobs use the following command on VM.
+    
+    $ crontab -l
+    
+    ![](Resources/Images/ClamAV/OSSEC2.png)
+    
+*   Use the `crontab -e` command to open the crontab list in edit mode.  
     
 
-<h3>Accessing Logs in Azure Storage Account</h3>
-<p>All the logs generated by OSSEC are pushed to the Azure Storage Account.</p>
-<ol>
-  <li>Log on to the Azure portal <a href="http://portal.azure.com/">(portal.azure.com)</a> using your Microsoft account credentials.  
-    <p>
-    <img src="Resources/Images/ClamAV/OSSEC3.png">
-    </p>
-  </li>  
-  <li>Select Resource groups from the left navigation pane.
-    <p>
-    <img src="Resources/Images/ClamAV/OSSEC4.png">
-    </p>
-    <p>All existing resource groups appear.</p>
-    <p>Select the resource group in which the AKS Cluster is created.</p>
-    <img src="Resources/Images/ClamAV/OSSEC5.png">
-  </li>  
-  <li>Select the storage account from the list of resources available in the resource group.</li>  
-  <li>Click <b>Blobs</b> to see all the containers available in the storage account.
-    <p>
-    <img src="Resources/Images/ClamAV/OSSEC6.png">
-    </p>
-  </li>  
-  <li>Select the <b>osseclogs</b> container from the list of containers available in the storage account.
-    <p>
-    <img src="Resources/Images/ClamAV/OSSEC7.png">
-    </p>    
-    <p>The page displays the log files pushed by OSSEC from Virtual Machine.</p>
-  </li>
-  <li>Click <b>Download</b> to view the logs file.
-    <p>
-    <img src="Resources/Images/ClamAV/OSSEC8.png">
-    </p>    
-    <p>You can now view all the logs that are pushed by OSSEC from the virtual machine.</p>
-    <blockquote>
-      <em><b>Note: </b></em>Follow these steps to edit the <code>preloaded-vars.conf</code> file to give customized inputs (other than defaults) to install OSSEC.
-      <ol>
-        <li>Login to the specific Virtual Machine (node) using SSH keys in the terminal.</li>
-        <li>Go to the <code>/home/azureuser/ossec-hids-2.9.0/etc/</code> directory by using following command.
-          <code>$ cd /home/azureuser/ossec-hids-2.9.0/etc/</code>
-        </li>
-        <li>Open the <code>preloaded-vars.conf</code> file and edit as required.</li>
-      </ol>
-    </blockquote>    
-    <blockquote>
-      <em><b>Note: </b></em>Follow these steps to edit the ossec.conf file and change the existing configurations of OSSEC.      <ol>
-        <li>Login to the specific Virtual Machine (node) using SSH keys in the terminal.</li>
-        <li>Go to the /var/ossec/etc directory using following command.
-          <code>$ cd /var/ossec/etc</code>
-        </li>
-        <li>Open the <b>ossec.conf</b> file and edit as required.</li>
-      </ol>
-    </blockquote>
-  </li>
-</ol>
+### Accessing Logs in Azure Storage Account
+
+All the logs generated by OSSEC are pushed to the Azure Storage Account.
+
+1.  Log on to the Azure portal ([portal.azure.com](http://portal.azure.com/)) using your Microsoft account credentials..
+    
+    ![](Resources/Images/ClamAV/OSSEC3.png)
+    
+2.  Select **Resource groups** from the left navigation pane.
+    
+    ![](Resources/Images/ClamAV/OSSEC4.png)
+    
+    All existing resource groups appear.  
+    Select the resource group in which the AKS Cluster is created.
+    
+    ![](Resources/Images/ClamAV/OSSEC5.png)
+    
+3.  Select the storage account from the list of resources available in the resource group.
+4.  Click **Blobs** to see all the containers available in the storage account.
+    
+    ![](Resources/Images/ClamAV/OSSEC6.png)
+    
+5.  Select the **osseclogs** container from the list of containers available in the storage account.
+    
+    ![](Resources/Images/ClamAV/OSSEC7.png)
+    
+    The page displays the log files pushed by OSSEC from Virtual Machine.
+    
+6.  Click **Download** to view the logs file.
+    
+    ![](Resources/Images/ClamAV/OSSEC8.png)
+    
+    You can now view all the logs that are pushed by OSSEC from the virtual machine.
+    
+    > **_Note:_** Follow these steps to edit the `preloaded-vars.conf` file to give customized inputs (other than defaults) to install OSSEC.
+    
+    1.  Login to the specific Virtual Machine (node) using SSH keys in the terminal.
+    2.  Go to the `/home/azureuser/ossec-hids-2.9.0/etc/` directory by using following command.
+        
+       `$ cd /home/azureuser/ossec-hids-2.9.0/etc/`
+        
+    3.  Open the `preloaded-vars.conf` file and edit as required.
+    
+    > **_Note:_** Follow these steps to edit the `ossec.conf file` and change the existing configurations of OSSEC.
+    
+    1.  Login to the specific Virtual Machine (node) using SSH keys in the terminal.
+    2.  Go to the `/var/ossec/etc` directory using following command.
+        
+       `$ cd /var/ossec/etc`
+        
+    3.  Open the **ossec.conf** file and edit as required.
     
 
 Marketing Catalog Microservice

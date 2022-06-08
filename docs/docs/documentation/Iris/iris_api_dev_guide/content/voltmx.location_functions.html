@@ -258,11 +258,11 @@
 
   <p>When the errorCallback is invoked with the SETTINGS_RESOLUTION_REQUIRED errorCode, you can display a custom dialog box that explains the reason your app needs location access along with the Accept and Decline options. When the user selects Accept on the custom dialog box to enable location, you can invoke the API again with the same accuracyMode and the requestModifyLocationSettings parameter set to true.</p>
 
-  <p>Syntax</p>
+  <p><strong>Syntax</strong></p>
 
-  <p>voltmx.location.checkLocationSettings(params);</p>
+  <p><code class="language-plaintext highlighter-rouge">voltmx.location.checkLocationSettings(params);</code></p>
 
-  <p>Parameters</p>
+  <p><strong>Parameters</strong></p>
 
   <p><strong>params [Object] - Mandatory</strong></p>
 
@@ -295,32 +295,32 @@
     </tbody>
   </table>
 
-  <p>Example</p>
+  <p><strong>Example</strong></p>
 
   <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">function successcallback1() {
-alert("All location settings are satisfied. The client can initialize location requests now.");
-}
+    alert("All location settings are satisfied. The client can initialize location requests now.");
+  }
 
-function errorcallback1(errorCode) {
-if (errorCode == voltmx.location.SETTINGS_RESOLUTION_REQUIRED) {
-alert("Location settings are not satisfied. Call this API again by setting requestModifyLocationSettings value to true then it will show the user a dialog to resolve location settings.");
-} else if (errorCode == voltmx.location.SETTINGS_MODIFICATION_REQUEST_DENIED) {
-alert("The user denied the settings change.");
-}
-}
-var params = {
-requestModifyLocationSettings: true,
-accuracyMode: constants.ACCURACY_BALANCED_POWER,
-onSuccess: successcallback1,
-onFailure: errorcallback1
-};
-voltmx.location.checkLocationSettings(params);</code></pre></figure>
+  function errorcallback1(errorCode) {
+    if (errorCode == voltmx.location.SETTINGS_RESOLUTION_REQUIRED) {
+        alert("Location settings are not satisfied. Call this API again by setting requestModifyLocationSettings value to true then it will show the user a dialog to resolve location settings.");
+    } else if (errorCode == voltmx.location.SETTINGS_MODIFICATION_REQUEST_DENIED) {
+        alert("The user denied the settings change.");
+    }
+  }
+  var params = {
+    requestModifyLocationSettings: true,
+    accuracyMode: constants.ACCURACY_BALANCED_POWER,
+    onSuccess: successcallback1,
+    onFailure: errorcallback1
+  };
+  voltmx.location.checkLocationSettings(params);</code></pre></figure>
 
-  <p>Return Values</p>
+  <p><strong>Return Values</strong></p>
 
   <p>None.</p>
 
-  <p>Exceptions</p>
+  <p><strong>Exceptions</strong></p>
 
   <p>Location Settings Error Codes</p>
 
@@ -351,14 +351,16 @@ voltmx.location.checkLocationSettings(params);</code></pre></figure>
     </tbody>
   </table>
 
-  <p>Remarks</p>
+  <p> </p>
+
+  <p><strong>Remarks</strong></p>
 
   <ul>
     <li>Ensure that you enable the <strong>Use Google Play Location Services</strong> check box in the <strong>Project Settings</strong> &gt; <strong>Native</strong> &gt; <strong>Android Mobile/Tablet</strong> section.</li>
     <li>You do not need access to location permissions to use this API.</li>
   </ul>
 
-  <p>Platform Availability</p>
+  <p><strong>Platform Availability</strong></p>
 
   <p>Available on Android platform.</p><hr />
 
@@ -368,12 +370,11 @@ voltmx.location.checkLocationSettings(params);</code></pre></figure>
 
   <p>When invoked, the clearWatch first checks the value of the given watchID argument. If this value does not correspond to any previously started watch process, then the method returns immediately without performing any further action. Otherwise, the watch process identified by the watchID argument is stopped immediately and no further callbacks are invoked.</p>
 
-  <p>Syntax</p>
+  <p><strong>Syntax</strong></p>
 
-  <p>voltmx.location.clearWatch(<br />
-    watchID);</p>
+  <p><code class="language-plaintext highlighter-rouge">voltmx.location.clearWatch(watchID);</code></p>
 
-  <p>Parameters</p>
+  <p><strong>Parameters</strong></p>
 
   <table>
     <thead>
@@ -390,46 +391,45 @@ voltmx.location.checkLocationSettings(params);</code></pre></figure>
     </tbody>
   </table>
 
-  <p>Example</p>
+  <p><strong>Example</strong></p>
 
-  <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">voltmx.location.clearWatch(watchID);</code></pre></figure>
+  <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">voltmx.location.clearWatch(watchID);
+  </code></pre></figure>
 
   <p><strong>MVC</strong></p>
 
   <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">stopWatchingPosition: function() {
-try {
-voltmx.location.clearWatch(this.watchID); // clears/stops watching position of the user which was being monitored using watchPosition API
-alert("Cleared !");
-} catch (exception) {
-alert(exception);
-}
+    try {
+        voltmx.location.clearWatch(this.watchID); // clears/stops watching position of the user which was being monitored using watchPosition API
+        alert("Cleared !");
+    } catch (exception) {
+        alert(exception);
+    }
 
     /* Please see example of clearWatch() in "frmTrackingUserLocation" Form of [sample app](http://docs.voltmx.com/voltmxlibrary/iris/zip/sampleapps/LocationApp.zip) */
+  }
+  </code></pre></figure>
 
-}</code></pre></figure>
-
-  <p>Free Form</p>
+  <p><strong>Free Form</strong></p>
 
   <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">function stopWatchingPosition () {
-try{
-voltmx.location.clearWatch(watchID); // clears/stops watching position of the user which was being monitored using watchPosition API
-alert("Cleared !");
-}catch(exception){
-alert(exception);
-}
-}</code></pre></figure>
+  try{
+    voltmx.location.clearWatch(watchID); // clears/stops watching position of the user which was being monitored using watchPosition API
+    alert("Cleared !");
+  }catch(exception){
+    alert(exception);
+  }
+  }</code></pre></figure>
 
-  <p>Return Values</p>
+  <p><strong>Return Values</strong></p>
 
   <p>None.</p>
 
-  <p>Exceptions</p>
+  <p><strong>Exceptions</strong></p>
 
   <p>LocationError</p>
 
-  <p>Error</p>
-
-  <p>Platform Availability</p>
+  <p><strong>Platform Availability</strong></p>
 
   <p>Available on all platforms except Desktop Web.</p><hr />
 
@@ -439,14 +439,10 @@ alert(exception);
 
   <p>Using the getCurrentPostion function, you can get the current location of the device.</p>
 
-  <p>Syntax</p>
+  <p><strong>Syntax</strong>
+  <code class="language-plaintext highlighter-rouge">voltmx.location.getCurrentPosition( successcallback, errorcallback, positionoptions)</code></p>
 
-  <p>voltmx.location.getCurrentPosition(<br />
-    successcallback,<br />
-    errorcallback,<br />
-    positionoptions)</p>
-
-  <p>Parameters</p>
+  <p><strong>Parameters</strong></p>
 
   <p><strong>successcallback [Function] - Mandatory</strong></p>
 
@@ -538,7 +534,7 @@ alert(exception);
     <tbody>
       <tr>
         <td>accuracyMode [Number]</td>
-        <td>Specifies the accuracy and power requirements to be met while fetching the device location. The default value for accuracyMode is constants.ACCURACY_BALANCED_POWER.<br /><br /><strong><em>Note:</em></strong> This property is only available on the Android platform. Ensure that you set the value of the <a href="#enableHighAccuracy">enableHighAccuracy</a> property to <strong>false</strong>.<br /><br />The possible values for accuracyMode are:<br /><br /><strong>constants.ACCURACY_HIGH</strong>: Used to request the most accurate locations available.<br /><strong>constants.ACCURACY_NO_POWER</strong>: Used to request the best accuracy possible with no additional power consumption.<br /><strong>constants.ACCURACY_BALANCED_POWER</strong>: Used to request “block” level accuracy. Block level accuracy is considered to be about 100 meter accuracy. Using a coarse accuracy such as this often consumes less power.<br /><strong>constants.ACCURACY_LOW_POWER</strong>: Used to request “city” level accuracy. City level accuracy is considered to be about 10km accuracy. Using a coarse accuracy such as this often consumes less power. <br /><br /> <strong><em>Important:</em></strong> Ensure that you enable the <strong>Use Google Play Location Services</strong> check box in the <strong>Project Settings</strong> &gt; <strong>Native</strong> &gt; <strong>Android Mobile/Tablet</strong> section.</td>
+        <td>Specifies the accuracy and power requirements to be met while fetching the device location. The default value for accuracyMode is constants.ACCURACY_BALANCED_POWER.<br /><br /><strong><em>Note:</em></strong> This property is only available on the Android platform. Ensure that you set the value of the <a href="#enableHighAccuracy">enableHighAccuracy</a> property to <strong>false</strong>.<br /><br />The possible values for accuracyMode are:<br /><br /><strong>constants.ACCURACY_HIGH</strong>: Used to request the most accurate locations available.<br /><strong>constants.ACCURACY_NO_POWER</strong>: Used to request the best accuracy possible with no additional power consumption.<br /><strong>constants.ACCURACY_BALANCED_POWER</strong>: Used to request “block” level accuracy. Block level accuracy is considered to be about 100 meter accuracy. Using a coarse accuracy such as this often consumes less power.<br /><strong>constants.ACCURACY_LOW_POWER</strong>: Used to request “city” level accuracy. City level accuracy is considered to be about 10km accuracy. Using a coarse accuracy such as this often consumes less power. <br /><br />  <strong><em>Important:</em></strong> Ensure that you enable the <strong>Use Google Play Location Services</strong> check box in the <strong>Project Settings</strong> &gt; <strong>Native</strong> &gt; <strong>Android Mobile/Tablet</strong> section.</td>
       </tr>
       <tr>
         <td>getActiveLocation</td>
@@ -575,115 +571,116 @@ alert(exception);
     </tbody>
   </table>
 
-  <p>Example</p>
+  <p><strong>Example</strong></p>
 
-  <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">/********************************\*\*********************************
-
-- Name : getCurrentPosition function
-- Author : VoltMX
-- Purpose : This function helps to get the current location
-  ********************************\*\*\*********************************/
+  <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">/******************************************************************
+  *	Name   : getCurrentPosition function
+  *	Author  : VoltMX
+  *	Purpose : This function helps to get the current location
+  *******************************************************************/
   function getPosition() {
-  var positionoptions = {
-  timeout: 15000
-  }; // 15 secs
-  positionoptions.enableHighAccuracy = true;
-  voltmx.location.getCurrentPosition(successcallback, errorcallback, positionoptions);
+    var positionoptions = {
+        timeout: 15000
+    }; // 15 secs 
+    positionoptions.enableHighAccuracy = true;
+    voltmx.location.getCurrentPosition(successcallback, errorcallback, positionoptions);
   }
 
-// Callback that is executed on success of getCurrentPosition function.
-function successcallback(position) {
-var geoPosition = "Latitude: " + position.coords.latitude;
-geoPosition = geoPosition + " Longitude: " + position.coords.longitude;
-geoPosition = geoPosition + " Altitude: " + position.coords.altitude;
-geoPosition = geoPosition + " Accuracy: " + position.coords.accuracy;
-geoPosition = geoPosition + " Altitude Accuracy: " + position.coords.altitudeAccuracy;
-geoPosition = geoPosition + " Heading: " + position.coords.heading;
-geoPosition = geoPosition + " Speeding: " + position.coords.speeding;
-geoPosition = geoPosition + " Timestamp: " + position.timestamp;
-alert(geoPosition);
-}
+  // Callback that is executed on success of getCurrentPosition function.
+  function successcallback(position) {
+    var geoPosition = "Latitude: " + position.coords.latitude;
+    geoPosition = geoPosition + " Longitude: " + position.coords.longitude;
+    geoPosition = geoPosition + " Altitude: " + position.coords.altitude;
+    geoPosition = geoPosition + " Accuracy: " + position.coords.accuracy;
+    geoPosition = geoPosition + " Altitude Accuracy: " + position.coords.altitudeAccuracy;
+    geoPosition = geoPosition + " Heading: " + position.coords.heading;
+    geoPosition = geoPosition + " Speeding: " + position.coords.speeding;
+    geoPosition = geoPosition + " Timestamp: " + position.timestamp;
+    alert(geoPosition);
+  }
 
-// Callback that is executed on error of getCurrentPosition function.
-function errorcallback(positionerror) {
-var errorMesg = "Error code: " + positionerror.code;
-errorMesg = errorMesg + " message: " + positionerror.message;
-alert(errorMesg);
-}</code></pre></figure>
+  // Callback that is executed on error of getCurrentPosition function.
+  function errorcallback(positionerror) {
+    var errorMesg = "Error code: " + positionerror.code;
+    errorMesg = errorMesg + " message: " + positionerror.message;
+    alert(errorMesg);
+  }
+  </code></pre></figure>
 
-  <p>MVC Example</p>
+  <p><strong>MVC Example</strong></p>
 
   <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">currentPositionSuccessCallback: function(position) {
-/_
-// position object will have the below properties .
-latitude = position.coords.latitude
-longitude = position.coords.longitude
-altitude = position.coords.altitude
-atitudeAccuracy = position.coords.altitudeAccuracy
-heading = position.coords.heading
-speeding = position.coords.speeding
-timestamp = position.timestamp
-_/
-alert(JSON.stringify(position));
-/_ use the position depending on the use case ,some of the use cases are listed below .  
- 1. Get the nearby events(like ATMs, Restaurants …etc.) based on the user current location 2. In a tracking-based scenario ,use as an initial position of the user .
-_/
+    /* 
+  //  position object will have the below properties .
+         latitude = position.coords.latitude 
+         longitude = position.coords.longitude
+         altitude = position.coords.altitude
+         atitudeAccuracy = position.coords.altitudeAccuracy
+         heading = position.coords.heading
+         speeding = position.coords.speeding
+         timestamp = position.timestamp
+    */
+    alert(JSON.stringify(position));
+    /* use the position depending on the use case ,some of the use cases are listed below .    
+	1. Get the nearby events(like ATMs, Restaurants …etc.)  based on the user current location
+	2. In a tracking-based scenario ,use as an initial position of the user .
+	*/
 
-},
-currentPositionFailureCallback: function(error) {
-alert(JSON.stringify(error));
-},
-getCurrentPositionOfDevice: function() {
-var options = {};
-options.enableHighAccuracy = true; // uses provider that gets accurate location
-options.timeout = 10000; // timeout in milliseconds  
-    options.requireBackgroundAccess = true; // gets the location updates in the background as well
-voltmx.location.getCurrentPosition(this.currentPositionSuccessCallback, this.currentPositionFailureCallback, options);
-}
+  },
+  currentPositionFailureCallback: function(error) {
+    alert(JSON.stringify(error));
+  },
+  getCurrentPositionOfDevice: function() {
+    var options = {};
+    options.enableHighAccuracy = true; //  uses provider that gets accurate location
+    options.timeout = 10000; // timeout in milliseconds  
+    options.requireBackgroundAccess  = true; // gets the location updates in the background as well
+    voltmx.location.getCurrentPosition(this.currentPositionSuccessCallback, this.currentPositionFailureCallback, options);
+  }
 
-/_ Please see example of getCurrentPosition() in "frmTrackingUserLocation" Form of [sample app](http://docs.voltmx.com/voltmxlibrary/iris/zip/sampleapps/LocationApp.zip)_/</code></pre></figure>
+  /* Please see example of getCurrentPosition() in "frmTrackingUserLocation" Form of [sample app](http://docs.voltmx.com/voltmxlibrary/iris/zip/sampleapps/LocationApp.zip)*/
+  </code></pre></figure>
 
-  <p>Free form Example</p>
+  <p><strong>Free form Example</strong></p>
 
   <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">function currentPositionSuccessCallback(position) {
-/_
-// position object will have the below properties .
-latitute = position.coords.latitude
-longitude = position.coords.longitude
-altitude = position.coords.altitude
-atitudeAccuracy = position.coords.altitudeAccuracy
-heading = position.coords.heading
-speeding = position.coords.speeding
-timestamp = position.timestamp
-_/
-alert(JSON.stringify(position));
-/_ use the position depending on the use case ,some of the use cases are listed below .  
- 1. Get the nearby events(like ATMs, Restaurants …etc.) based on the user current location 2. In a tracking-based scenario ,use as an initial position of the user .
-_/
+  /* 
+	// position object will have the below properties .
+   	latitute = position.coords.latitude
+    longitude = position.coords.longitude
+    altitude = position.coords.altitude
+    atitudeAccuracy = position.coords.altitudeAccuracy
+    heading = position.coords.heading
+    speeding = position.coords.speeding
+    timestamp = position.timestamp
+	*/
+  alert(JSON.stringify(position));
+  /* use the position depending on the use case ,some of the use cases are listed below .    
+	1. Get the nearby events(like ATMs, Restaurants …etc.)  based on the user current location
+	2. In a tracking-based scenario ,use as an initial position of the user .
+	*/
 
-}
+  }
 
-function currentPositionFailureCallback(error) {
-alert(JSON.stringify(error));
-}
+  function currentPositionFailureCallback(error) {
+    alert(JSON.stringify(error));
+  }
 
-function getCurrentPositionOfDevice () {
-var options = {};
-options.enableHighAccuracy = true;
-options.timeout = 10000; // timeout in milli seconds  
-  options.requireBackgroundAccess = true; // gets the location updates in the background as well
-voltmx.location.getCurrentPosition(currentPositionSuccessCallback, currentPositionFailureCallback, options);
-}</code></pre></figure>
+  function getCurrentPositionOfDevice () {
+    var options = {};
+    options.enableHighAccuracy = true; 
+    options.timeout = 10000; // timeout in milli seconds      
+   options.requireBackgroundAccess  = true; // gets the location updates in the background as well
+    voltmx.location.getCurrentPosition(currentPositionSuccessCallback, currentPositionFailureCallback, options);
+  }</code></pre></figure>
 
-  <p>Return Values</p>
+  <p><strong>Return Values</strong></p>
 
   <p>None</p>
 
-  <p>Exceptions</p>
+  <p><strong>Exceptions</strong></p>
 
   <p>LocationError</p>
-
-  <p>Error Code</p>
 
   <table>
     <thead>
@@ -707,6 +704,8 @@ voltmx.location.getCurrentPosition(currentPositionSuccessCallback, currentPositi
       </tr>
     </tbody>
   </table>
+
+  <p> </p>
 
   <p>Android-specific Error Codes</p>
 
@@ -737,7 +736,7 @@ voltmx.location.getCurrentPosition(currentPositionSuccessCallback, currentPositi
     </tbody>
   </table>
 
-  <p>Remarks</p>
+  <p><strong>Remarks</strong></p>
 
   <p>This API takes up to three arguments. When invoked, the API returns and asynchronously attempts to obtain the current location of the device. The app on which this API is used must contain <a href="runtime_permissions.html">runtime permission</a> from the end-user to obtain the current location of the device. If the API is invoked without obtaining the permission, device native platforms automatically display a system permission dialog box with <strong>Allow</strong> and <strong>Deny</strong> options. The end-user can grant permission to get the current location.</p>
 
@@ -771,7 +770,7 @@ voltmx.location.getCurrentPosition(currentPositionSuccessCallback, currentPositi
     <p><strong><em>Note:</em></strong> Runtime permissions are applicable only on iOS and Android platforms</p>
   </blockquote>
 
-  <p>Platform Availability</p>
+  <p><strong>Platform Availability</strong></p>
 
   <p>Available on all platforms except prior to IE8 releases.</p><hr />
 
@@ -781,65 +780,60 @@ voltmx.location.getCurrentPosition(currentPositionSuccessCallback, currentPositi
 
   <p>Using the watchPosition function, you can set callbacks that report the device’s position.</p>
 
-  <p>Syntax</p>
+  <p><strong>Syntax</strong></p>
 
-  <p>voltmx.location.watchPosition(<br />
-    successcallback,<br />
-    errorcallback,<br />
-    positionoptions)</p>
+  <p><code class="language-plaintext highlighter-rouge">voltmx.location.watchPosition( successcallback,  errorcallback,  positionoptions)</code></p>
 
-  <p>Parameters</p>
+  <p><strong>Parameters</strong></p>
 
   <p><strong>successcallback [Function] - Mandatory</strong></p>
 
   <p>The successcallback function specifies the callback function that must be executed when the API call is successful. The signature of the callback function is successcallback(position) where, <strong>position</strong> contains the coordinates of the geo-location that are created and returned by the API. It is an object that contains certain key-value pairs.</p>
 
-  <blockquote>
-    <p>coords [Object] - Coordinates that has the following key-value pairs:</p>
+  <p>coords \[Object\] - Coordinates that has the following key-value pairs:</p>
 
-    <table>
-      <thead>
-        <tr>
-          <th>key</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>latitude [Number]</td>
-          <td>Latitude in decimal degrees.</td>
-        </tr>
-        <tr>
-          <td>longitude [Number]</td>
-          <td>Longitude in decimal degrees.</td>
-        </tr>
-        <tr>
-          <td>altitude [Number]</td>
-          <td>Height of the location in meters above the ellipsoid.</td>
-        </tr>
-        <tr>
-          <td>accuracy [Number]</td>
-          <td>Accuracy level of the latitude and longitude coordinates in meters.</td>
-        </tr>
-        <tr>
-          <td>altitudeaccuracy [Number]</td>
-          <td>Accuracy level of the altitude coordinate in meters.</td>
-        </tr>
-        <tr>
-          <td>heading [Number]</td>
-          <td>Direction of travel, specified in degrees counting clockwise relative to the true north.</td>
-        </tr>
-        <tr>
-          <td>speeding [Number]</td>
-          <td>Current ground speed of the device, specified in meters per second.</td>
-        </tr>
-        <tr>
-          <td>timestamp [Number]</td>
-          <td>Represents the time when the Position object was acquired.</td>
-        </tr>
-      </tbody>
-    </table>
-  </blockquote>
+  <table>
+    <thead>
+      <tr>
+        <th>key</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>latitude [Number]</td>
+        <td>Latitude in decimal degrees.</td>
+      </tr>
+      <tr>
+        <td>longitude [Number]</td>
+        <td>Longitude in decimal degrees.</td>
+      </tr>
+      <tr>
+        <td>altitude [Number]</td>
+        <td>Height of the location in meters above the ellipsoid.</td>
+      </tr>
+      <tr>
+        <td>accuracy [Number]</td>
+        <td>Accuracy level of the latitude and longitude coordinates in meters.</td>
+      </tr>
+      <tr>
+        <td>altitudeaccuracy [Number]</td>
+        <td>Accuracy level of the altitude coordinate in meters.</td>
+      </tr>
+      <tr>
+        <td>heading [Number]</td>
+        <td>Direction of travel, specified in degrees counting clockwise relative to the true north.</td>
+      </tr>
+      <tr>
+        <td>speeding [Number]</td>
+        <td>Current ground speed of the device, specified in meters per second.</td>
+      </tr>
+      <tr>
+        <td>timestamp [Number]</td>
+        <td>Represents the time when the Position object was acquired.</td>
+      </tr>
+    </tbody>
+  </table>
 
   <p><strong>errorcallback [Function] - Optional</strong></p>
 
@@ -882,62 +876,50 @@ voltmx.location.getCurrentPosition(currentPositionSuccessCallback, currentPositi
     <tbody>
       <tr>
         <td>accuracyMode [Number]</td>
-        <td>Specifies the accuracy and power requirements to be met while fetching location updates. The default value for accuracyMode is constants.ACCURACY_BALANCED_POWER.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p><strong><em>Note:</em></strong> This property is only available on the Android platform. Ensure that you set the value of the <a href="#enableHighAccuracy1">enableHighAccuracy</a> property to <strong>false</strong>.
-The possible values for accuracyMode are: <strong>constants.ACCURACY_HIGH</strong>: Used to request the most accurate locations available. <strong>constants.ACCURACY_NO_POWER</strong>: Used to request the best accuracy possible with no additional power consumption. <strong>constants.ACCURACY_BALANCED_POWER</strong>: Used to request “block” level accuracy. Block level accuracy is considered to be about 100 meter accuracy. Using a coarse accuracy such as this often consumes less power. <strong>constants.ACCURACY_LOW_POWER</strong>: Used to request “city” level accuracy. City level accuracy is considered to be about 10km accuracy. Using a coarse accuracy such as this often consumes less power. &gt; <strong><em>Important:</em></strong> Ensure that you enable the <strong>Use Google Play Location Services</strong> check box in the <strong>Project Settings</strong> &gt; <strong>Native</strong> &gt; <strong>Android Mobile/Tablet</strong> section. |
-| enableHighAccuracy [Boolean] | Provides a hint to the implementation in order to receive the best possible result. |
-| fastestInterval [Number] | Sets the fastest interval for location updates in milliseconds. The fastestInterval key controls the rate at which your application will receive location updates, which might be faster than minimumTime in some cases.This happens when other apps fetch location updates and the current app receives them passively to save power. &gt; <strong><em>Note:</em></strong> This property is only available on the Android platform. The rate at which the app receives the fastest update will not be less than the value specified for the fastestInterval property. The value for the fastestInterval must be more than zero and less than the value of minimumTime (i.e, 0 &lt; fastestInterval &lt;= minimumTime). If you do not set the value for fastestInterval, the value of minimumTime is set, by default. &gt; <strong><em>Note:</em></strong> Ensure that you have enabled the <strong>Use Google Play Location Services</strong> checkbox in the <strong>Project Settings</strong> &gt; <strong>Native</strong> &gt; <strong>Android</strong> section of VoltMX Iris. |
-| improveBGLocationUpdateFrequency [Boolean] | Set the property to <code class="language-plaintext highlighter-rouge">true</code> to receive location updates with a better frequency in the background. This approach specifically helps when the app goes into Doze mode when it is running in the background. However, there might be a decrease in fetching location updates when the app runs in the foreground with the value of the improveBGLocationUpdateFrequency parameter set to <strong>true</strong>. This is a behavioral issue that occurs as the underlying Android APIs for receiving better foreground and background updates are different. You must de-register from the existing location listener and register again with a value configured for the improveBGLocationUpdateFrequency parameter. Set the value of the parameter to <strong>true</strong> if your app runs in the background, and <strong>false</strong> if your app runs in the foreground. While determining if the app runs in the foreground or background, you must take the following factors into consideration: Determine whether the app is running in the foreground or background by using the <strong>onforeground</strong> and <strong>onbackground</strong> callbacks of the <a href="voltmx.application_functions.html#setappli">voltmx.application.setApplicationCallbacks</a> API. When you start a foreground service by using the <a href="voltmx.application_functions.html#StartForeground">voltmx.application.startForegroundService</a> API (or from a third-party library), the OS treats the application as if it runs in the foreground, even when the user moves the app to the background.</p>
-
-  <blockquote>
-    <p><strong><em>Note:</em></strong> This property is only available on the Android platform. Ensure that you enable the <strong>Use Google Play Location Services</strong> check box in the <strong>Project Settings</strong> &gt; <strong>Native</strong> &gt; <strong>Android Mobile/Tablet</strong> section.</p>
-  </blockquote>
-
-  <table>
-    <tbody>
-      <tr>
-        <td>If your app follows the best practices recommended by Android, the app must not request for background location updates without notifying the user. Therefore, you must set the value of the requireBackgroundAccess parameter to <code class="language-plaintext highlighter-rouge">true</code> and display a notification to the user by using a foreground service (instead of using the improveBGLocationUpdateFrequency parameter). The notification must imply that the app fetches location updates even when it runs in the background. In Android apps that use Target SDK version 29 (and later), to get location updates in the background, you must set the value of the <code class="language-plaintext highlighter-rouge">locationListenerType</code> property to <code class="language-plaintext highlighter-rouge">always</code> or <code class="language-plaintext highlighter-rouge">background</code> in the <strong>androidbuild.properties</strong> file to automatically add necessary AndroidManifest entries.</td>
-        <td> </td>
-        <td> </td>
+        <td>Specifies the accuracy and power requirements to be met while fetching location updates. The default value for accuracyMode is constants.ACCURACY_BALANCED_POWER.<br /><br /> <strong><em>Note:</em></strong> This property is only available on the Android platform. Ensure that you set the value of the <a href="#enableHighAccuracy1">enableHighAccuracy</a> property to <strong>false</strong>. <br />The possible values for accuracyMode are: <strong>constants.ACCURACY_HIGH</strong>: Used to request the most accurate locations available. <strong>constants.ACCURACY_NO_POWER</strong>: Used to request the best accuracy possible with no additional power consumption. <strong>constants.ACCURACY_BALANCED_POWER</strong>: Used to request “block” level accuracy. Block level accuracy is considered to be about 100 meter accuracy. Using a coarse accuracy such as this often consumes less power. <strong>constants.ACCURACY_LOW_POWER</strong>: Used to request “city” level accuracy. City level accuracy is considered to be about 10km accuracy. Using a coarse accuracy such as this often consumes less power. <br /><br /><strong><em>Important:</em></strong> Ensure that you enable the <strong>Use Google Play Location Services</strong> check box in the <strong>Project Settings</strong> &gt; <strong>Native</strong> &gt; <strong>Android Mobile/Tablet</strong> section.</td>
       </tr>
       <tr>
-        <td> </td>
+        <td>enableHighAccuracy [Boolean]</td>
+        <td>Provides a hint to the implementation in order to receive the best possible result.</td>
+      </tr>
+      <tr>
+        <td>fastestInterval [Number]</td>
+        <td>Sets the fastest interval for location updates in milliseconds. The fastestInterval key controls the rate at which your application will receive location updates, which might be faster than minimumTime in some cases.This happens when other apps fetch location updates and the current app receives them passively to save power. <br /><br /><strong><em>Note:</em></strong> This property is only available on the Android platform. The rate at which the app receives the fastest update will not be less than the value specified for the fastestInterval property. The value for the fastestInterval must be more than zero and less than the value of minimumTime (i.e, 0 &lt; fastestInterval &lt;= minimumTime). If you do not set the value for fastestInterval, the value of minimumTime is set, by default. <br /><br /><strong><em>Note:</em></strong> Ensure that you have enabled the <strong>Use Google Play Location Services</strong> checkbox in the <strong>Project Settings</strong> &gt; <strong>Native</strong> &gt; <strong>Android</strong> section of VoltMX Iris.</td>
+      </tr>
+      <tr>
+        <td>improveBGLocationUpdateFrequency [Boolean]</td>
+        <td>Set the property to <code class="language-plaintext highlighter-rouge">true</code> to receive location updates with a better frequency in the background. This approach specifically helps when the app goes into Doze mode when it is running in the background. However, there might be a decrease in fetching location updates when the app runs in the foreground with the value of the improveBGLocationUpdateFrequency parameter set to <strong>true</strong>. This is a behavioral issue that occurs as the underlying Android APIs for receiving better foreground and background updates are different. You must de-register from the existing location listener and register again with a value configured for the improveBGLocationUpdateFrequency parameter. Set the value of the parameter to <strong>true</strong> if your app runs in the background, and <strong>false</strong> if your app runs in the foreground. While determining if the app runs in the foreground or background, you must take the following factors into consideration: Determine whether the app is running in the foreground or background by using the <strong>onforeground</strong> and <strong>onbackground</strong> callbacks of the <a href="voltmx.application_functions.html#setappli">voltmx.application.setApplicationCallbacks</a> API. When you start a foreground service by using the <a href="voltmx.application_functions.html#StartForeground">voltmx.application.startForegroundService</a> API (or from a third-party library), the OS treats the application as if it runs in the foreground, even when the user moves the app to the background. <br /><br /><strong><em>Note:</em></strong> This property is only available on the Android platform. Ensure that you enable the <strong>Use Google Play Location Services</strong> check box in the <strong>Project Settings</strong>  <strong>Native</strong>  &gt;  <strong>Android Mobile/Tablet</strong> section. <br /><br />If your app follows the best practices recommended by Android, the app must not request for background location updates without notifying the user. Therefore, you must set the value of the requireBackgroundAccess parameter to <code class="language-plaintext highlighter-rouge">true</code> and display a notification to the user by using a foreground service (instead of using the improveBGLocationUpdateFrequency parameter). The notification must imply that the app fetches location updates even when it runs in the background. In Android apps that use Target SDK version 29 (and later), to get location updates in the background, you must set the value of the <code class="language-plaintext highlighter-rouge">locationListenerType</code> property to <code class="language-plaintext highlighter-rouge">always</code> or <code class="language-plaintext highlighter-rouge">background</code> in the <strong>androidbuild.properties</strong> file to automatically add necessary AndroidManifest entries.</td>
+      </tr>
+      <tr>
         <td>maximumAge [Number]</td>
         <td>Indicates the application to accept a cached position whose age is no greater than the specified time in milliseconds.</td>
       </tr>
       <tr>
-        <td> </td>
         <td>minimumDistance [Number]</td>
         <td>Minimum distance in meters between location updates.</td>
       </tr>
       <tr>
-        <td> </td>
         <td>minimumTime [Number]</td>
         <td>Minimum time in milliseconds between location updates.</td>
       </tr>
       <tr>
-        <td> </td>
         <td>requestModifyLocationSettings [Boolean]</td>
-        <td>When you set this parameter to true, if the app cannot fetch location updates due to inadequate location settings on the device, the system automatically invokes a dialog box that helps the user enable the necessary location settings with a single tap. However, if you invoke the API (with the requestModifyLocationSettings parameter set to true) when the app runs in the background, based on the Android OS version, the dialog box may not appear on a device. Based on the values of <a href="#enableHighAccuracy">enableHighAccuracy</a> or <a href="#accuracyMode">accuracyMode</a>, the Android system ensures that the required location settings(such as GPS, WIFI Scanning, Mobile Network/Data) are enabled on the device (based on the Android OS version and the device manufacturer). Based on Android Native behavior on Android 9 (API level 28) or later devices, GPS is automatically turned on (by the Android system) for all the accuracy modes except <strong>constants.ACCURACY_LOW_POWER</strong>. &gt; <strong><em>Important:</em></strong> Ensure that you enable the <strong>Use Google Play Location Services</strong> check box in the <strong>Project Settings</strong> &gt; <strong>Native</strong> &gt; <strong>Android Mobile/Tablet</strong> section. &gt; <strong><em>Note:</em></strong> This property is only available on the Android platform.</td>
+        <td>When you set this parameter to true, if the app cannot fetch location updates due to inadequate location settings on the device, the system automatically invokes a dialog box that helps the user enable the necessary location settings with a single tap. However, if you invoke the API (with the requestModifyLocationSettings parameter set to true) when the app runs in the background, based on the Android OS version, the dialog box may not appear on a device. Based on the values of <a href="#enableHighAccuracy">enableHighAccuracy</a> or <a href="#accuracyMode">accuracyMode</a>, the Android system ensures that the required location settings(such as GPS, WIFI Scanning, Mobile Network/Data) are enabled on the device (based on the Android OS version and the device manufacturer). Based on Android Native behavior on Android 9 (API level 28) or later devices, GPS is automatically turned on (by the Android system) for all the accuracy modes except <strong>constants.ACCURACY_LOW_POWER</strong>. <br /><br /> <strong><em>Important:</em></strong> Ensure that you enable the <strong>Use Google Play Location Services</strong> check box in the <strong>Project Settings</strong> &gt; <strong>Native</strong> &gt; <strong>Android Mobile/Tablet</strong> section. <br /><br /> <strong><em>Note:</em></strong> This property is only available on the Android platform.</td>
       </tr>
       <tr>
-        <td> </td>
         <td>requireBackgroundAccess [Boolean]</td>
-        <td>Set to <code class="language-plaintext highlighter-rouge">true</code> to fetch the device location updates even when the app is running in the background. If the value is set to <code class="language-plaintext highlighter-rouge">false</code> (or not specified), to conserve battery power, the app automatically de-registers itself from fetching location updates when the app moves to the background. The app will automatically re-register itself to get location updates when the app moves to the foreground. In order to continue receiving location updates (when a user moves the app to the background), invoke the <a href="voltmx.application_functions.html#StartForeground">voltmx.application.startForegroundService</a> API to start a Foreground Service that displays a notification to the user. The notification must contain information that states that the app has access to the device location while it runs in the background. When you start a foreground service by using the <a href="voltmx.application_functions.html#StartForeground">voltmx.application.startForegroundService</a> API (or from a third-party library), the application is treated as if it runs in the foreground, even when the user moves the app to the background. The app will continue to receive periodic location updates with the same frequency as that of an app running in the foreground. When a user interacts with the app, you can use the <a href="voltmx.application_functions.html#stopForeground">voltmx.application.stopForegroundService</a> API to stop the foreground service and clear the notification. Determine whether the app is running in the foreground or background by using the <strong>onforeground</strong> and <strong>onbackground</strong> callbacks of the <a href="voltmx.application_functions.html#setappli">voltmx.application.setApplicationCallbacks</a> API. In apps that use Target SDK version 29 (and later), you must add the ACCESS_BACKGROUND_LOCATION permission in the Android Manifest file to get location updates in the background. &gt; <strong><em>Note:</em></strong> This property is only available on the Android platform.</td>
+        <td>Set to <code class="language-plaintext highlighter-rouge">true</code> to fetch the device location updates even when the app is running in the background. If the value is set to <code class="language-plaintext highlighter-rouge">false</code> (or not specified), to conserve battery power, the app automatically de-registers itself from fetching location updates when the app moves to the background. The app will automatically re-register itself to get location updates when the app moves to the foreground. In order to continue receiving location updates (when a user moves the app to the background), invoke the <a href="voltmx.application_functions.html#StartForeground">voltmx.application.startForegroundService</a> API to start a Foreground Service that displays a notification to the user. The notification must contain information that states that the app has access to the device location while it runs in the background. When you start a foreground service by using the <a href="voltmx.application_functions.html#StartForeground">voltmx.application.startForegroundService</a> API (or from a third-party library), the application is treated as if it runs in the foreground, even when the user moves the app to the background. The app will continue to receive periodic location updates with the same frequency as that of an app running in the foreground. When a user interacts with the app, you can use the <a href="voltmx.application_functions.html#stopForeground">voltmx.application.stopForegroundService</a> API to stop the foreground service and clear the notification. Determine whether the app is running in the foreground or background by using the <strong>onforeground</strong> and <strong>onbackground</strong> callbacks of the <a href="voltmx.application_functions.html#setappli">voltmx.application.setApplicationCallbacks</a> API. In apps that use Target SDK version 29 (and later), you must add the ACCESS_BACKGROUND_LOCATION permission in the Android Manifest file to get location updates in the background. <br /><br /> <strong><em>Note:</em></strong> This property is only available on the Android platform.</td>
       </tr>
       <tr>
-        <td> </td>
         <td>timeout [Number]</td>
         <td>Denotes the maximum length of time in milliseconds that is allowed to pass from the call.</td>
       </tr>
     </tbody>
   </table>
 
-  <p>Return Values</p>
+  <p><br /></p>
+
+  <p><strong>Return Values</strong></p>
 
   <table>
     <thead>
@@ -954,107 +936,113 @@ The possible values for accuracyMode are: <strong>constants.ACCURACY_HIGH</stron
     </tbody>
   </table>
 
-  <p>Example</p>
+  <p><strong>Example</strong></p>
 
   <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">function successcallback1(position) {
-lblTest.text = "working with watchPosition success full call back";
-var geoPosition = "Latitude: " + position.coords.latitude;
-geoPosition = geoPosition + " Longitude: " + position.coords.longitude;
-geoPosition = geoPosition + " Altitude: " + position.coords.altitude;
-geoPosition = geoPosition + " Accuracy: " + position.coords.accuracy;
-geoPosition = geoPosition + " Altitude Accuracy: " + position.coords.altitudeAccuracy;
-geoPosition = geoPosition + " Heading: " + position.coords.heading;
-geoPosition = geoPosition + " Speeding: " + position.coords.speeding;
-geoPosition = geoPosition + " Timestamp: " + position.timestamp;
-alert(geoPosition);
-}
+      lblTest.text = "working with watchPosition success full call back";
+      var geoPosition = "Latitude: " + position.coords.latitude;
+      geoPosition = geoPosition + " Longitude: " + position.coords.longitude;
+      geoPosition = geoPosition + " Altitude: " + position.coords.altitude;
+      geoPosition = geoPosition + " Accuracy: " + position.coords.accuracy;
+      geoPosition = geoPosition + " Altitude Accuracy: " + position.coords.altitudeAccuracy;
+      geoPosition = geoPosition + " Heading: " + position.coords.heading;
+      geoPosition = geoPosition + " Speeding: " + position.coords.speeding;
+      geoPosition = geoPosition + " Timestamp: " + position.timestamp;
+      alert(geoPosition);
+  }
 
-function errorcallback1(positionerror) {
-lblTest.text = "working with watchPosition err call back";
-var errorMesg = "Error code: " + positionerror.code;
-errorMesg = errorMesg + " message: " + positionerror.message;
-alert(errorMesg);
-}
-var positionoptions = {
-maximumAge: 3000,
-minimumDistance: 5,
-minimumTime: 5000
-};
-watchID = voltmx.location.watchPosition(successcallback1, errorcallback1, positionoptions);</code></pre></figure>
+  function errorcallback1(positionerror) {
+      lblTest.text = "working with watchPosition err call back";
+      var errorMesg = "Error code: " + positionerror.code;
+      errorMesg = errorMesg + " message: " + positionerror.message;
+      alert(errorMesg);
+  }
+  var positionoptions = {
+      maximumAge: 3000,
+      minimumDistance: 5,
+      minimumTime: 5000
+  };
+  watchID = voltmx.location.watchPosition(successcallback1, errorcallback1, positionoptions);
+  </code></pre></figure>
 
-  <p>MVC Example</p>
+  <p><strong>MVC Example</strong></p>
 
   <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">watchID: null,
-watchPositionSuccessCallback: function(position) {
-/_
-// position object will have the below properties .
-latitute = position.coords.latitude
-longitude = position.coords.longitude
-altitude = position.coords.altitude
-atitudeAccuracy = position.coords.altitudeAccuracy
-heading = position.coords.heading
-speeding = position.coords.speeding
-timestamp = position.timestamp
-_/
-alert(JSON.stringify(position));
-},
-watchPositionFailureCallback: function(error) {
-alert(JSON.stringify(error));
-},
-watchPositionOfDevice: function() {
-var self = this;
-var options = {};
-options.maximumAge = 1000;
-options.minimumTime = 2000; // time in milli seconds
-options.minimumDistance = 2; // distance in meters  
-    options.requireBackgroundAccess = true; // gets the location updates in the background as well
-this.watchID = voltmx.location.watchPosition(this.watchPositionSuccessCallback,this.watchPositionFailureCallback, options);
-/_ Use-Cases:
-In tracking-based scenarios, the watchPosition() API can be used to
-monitor a position
-_/
-/_Please see example of watchPosition() in "frmTrackingUserLocation" Form of [sample app](http://docs.voltmx.com/voltmxlibrary/iris/zip/sampleapps/LocationApp.zip)_/
-}</code></pre></figure>
+    watchPositionSuccessCallback: function(position) {
+      /* 
+      // position object will have the below properties .
+          latitute = position.coords.latitude
+        longitude = position.coords.longitude
+        altitude = position.coords.altitude
+        atitudeAccuracy = position.coords.altitudeAccuracy
+        heading = position.coords.heading
+        speeding = position.coords.speeding
+        timestamp = position.timestamp
+      */
+      alert(JSON.stringify(position));
+    },
+    watchPositionFailureCallback: function(error) {
+      alert(JSON.stringify(error));
+    },
+    watchPositionOfDevice: function() {
+      var self = this;
+      var options = {};
+      options.maximumAge = 1000;
+      options.minimumTime = 2000; // time in milli seconds
+      options.minimumDistance = 2; // distance in meters   
+     options.requireBackgroundAccess  = true; // gets the location updates in the background as well
+      this.watchID = voltmx.location.watchPosition(this.watchPositionSuccessCallback,this.watchPositionFailureCallback, options);
+      /* Use-Cases:
+    In tracking-based scenarios, the watchPosition() API can be used to 
+      monitor a position
+    */
+    
+    /*Please see example of watchPosition() in "frmTrackingUserLocation" Form of [sample app](http://docs.voltmx.com/voltmxlibrary/iris/zip/sampleapps/LocationApp.zip)*/
+    }</code></pre></figure>
 
-  <p>Free Form Example</p>
+  <p><strong>Free Form Example</strong></p>
 
   <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">watchID = null;
 
-function watchPositionSuccessCallback(position) {
-/_
-// position object will have the below properties .
-latitute = position.coords.latitude
-longitude = position.coords.longitude
-altitude = position.coords.altitude
-atitudeAccuracy = position.coords.altitudeAccuracy
-heading = position.coords.heading
-speeding = position.coords.speeding
-timestamp = position.timestamp
-_/
+  function watchPositionSuccessCallback(position) {
+      /* 
+          // position object will have the below properties .
+        latitute = position.coords.latitude
+        longitude = position.coords.longitude
+        altitude = position.coords.altitude
+        atitudeAccuracy = position.coords.altitudeAccuracy
+        heading = position.coords.heading
+        speeding = position.coords.speeding
+        timestamp = position.timestamp
+        */
 
-    alert(JSON.stringify(position));
+      alert(JSON.stringify(position));
+  }
 
-}
+  function watchPositionFailureCallback(error) {
+      alert(JSON.stringify(error));
+  }
 
-function watchPositionFailureCallback(error) {
-alert(JSON.stringify(error));
-}
+  function watchPositionOfDevice() {
+      var self = this;
+      var options = {};
+      options.maximumAge = 1000; // use cached position if exists in mentioned time(in milliseconds)
+      options.minimumTime = 2000; // time criteria for location updates
+      options.minimumDistance = 2; // distance criteria for location updates   
+     options.requireBackgroundAccess  = true; // gets the location updates in the background as well
+      watchID = voltmx.location.watchPosition(watchPositionSuccessCallback, watchPositionFailureCallback, options);
+  }</code></pre></figure>
 
-function watchPositionOfDevice() {
-var self = this;
-var options = {};
-options.maximumAge = 1000; // use cached position if exists in mentioned time(in milliseconds)
-options.minimumTime = 2000; // time criteria for location updates
-options.minimumDistance = 2; // distance criteria for location updates  
-    options.requireBackgroundAccess = true; // gets the location updates in the background as well
-watchID = voltmx.location.watchPosition(watchPositionSuccessCallback, watchPositionFailureCallback, options);
-}</code></pre></figure>
+  <p><strong>Exceptions</strong></p>
 
-  <p>Exceptions</p>
-
-  <p>LocationError</p>
-
-  <p>Error Code</p>
+  <ul>
+    <li>
+      <p>LocationError</p>
+    </li>
+    <li>
+      <p>Error Code</p>
+    </li>
+  </ul>
 
   <table>
     <thead>
@@ -1079,7 +1067,9 @@ watchID = voltmx.location.watchPosition(watchPositionSuccessCallback, watchPosit
     </tbody>
   </table>
 
-  <p>Android-specific Error Codes</p>
+  <p> </p>
+
+  <p><strong>Android-specific Error Codes</strong></p>
 
   <table>
     <thead>
@@ -1108,7 +1098,7 @@ watchID = voltmx.location.watchPosition(watchPositionSuccessCallback, watchPosit
     </tbody>
   </table>
 
-  <p>Remarks</p>
+  <p><strong>Remarks</strong></p>
 
   <p>The behavior of this function depends on the underlying hardware platform. For example, if your app is running on Android and you set minimumTime and minimumDistance to their minimum possible values, the callback function in the <em>successcallback</em> parameter will not be called, as per the <a href="https://developers.google.com/android/reference/com/google/android/gms/location/LocationRequest#setInterval(long)">Android documentation</a>.</p>
 
@@ -1126,9 +1116,10 @@ watchID = voltmx.location.watchPosition(watchPositionSuccessCallback, watchPosit
 
   <p>The watch operation continues to monitor the position of the device and invokes the appropriate callback every time this position changes. The watch operation continues until the clearwatch method is called with the corresponding identifier.</p>
 
-  <p>Platform Availability</p>
+  <p><strong>Platform Availability</strong></p>
 
-  <p>Available on all platforms except Desktop Web, IE8 and prior to IE8 releases.</p><hr />
+  <p><!-- Available on all platforms except Desktop Web, IE8 and prior to IE8 releases. -->
+  Available on all platforms except Desktop Web, IE9 and prior to IE9 releases.</p><hr />
 
 </details>
 

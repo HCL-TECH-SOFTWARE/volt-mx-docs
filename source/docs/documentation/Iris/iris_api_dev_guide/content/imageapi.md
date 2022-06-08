@@ -29,7 +29,7 @@ var imageObj = filter.getOutputImage();
 frm.image2.rawBytes = imageObj.getImageAsRawBytes();
 {% endhighlight %}
 
-As of version 8.0 of Volt MX Iris, the Image API supports SVG vector images. Vector images enable your app to zoom in on images without losing image quality. They also enable your app to use the same image files across multiple devices without a degradation of the image's appearance.
+As of version 9.2 of Volt MX Iris, the Image API supports SVG vector images. Vector images enable your app to zoom in on images without losing image quality. They also enable your app to use the same image files across multiple devices without a degradation of the image's appearance.
 
 To supply a SVG file to your app, you must first embed it inside a PDF. You can then include the PDF in your app's bundle.
 

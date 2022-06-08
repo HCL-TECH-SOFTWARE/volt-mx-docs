@@ -229,10 +229,10 @@
       <div id="main-content" class="main-content" role="main">
         
           <p>You are here: Creating a New Subscriber</p>
-      <h1 id="volt-mx--client-side-javascript-functions">
+      <h1 id="volt-mx-client-side-javascript-functions">
         
         
-          <a href="#volt-mx--client-side-javascript-functions" class="anchor-heading" aria-labelledby="volt-mx--client-side-javascript-functions"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Volt MX  Client-side JavaScript Functions
+          <a href="#volt-mx-client-side-javascript-functions" class="anchor-heading" aria-labelledby="volt-mx-client-side-javascript-functions"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Volt MX Client-side JavaScript Functions
         
         
       </h1>
@@ -263,37 +263,37 @@
 <p>You can use the below sample code snippet to subscribe a device to Engagement Services using Iris.</p>
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">function subscribeToEngagementServices() {
- var jsonBody = {
-  "subscriptionService": {
-   "subscribe": {
-    "sid": "subscription_token_from_the_cloud",
-    "appId": "testApp",
-    "ufid": "your_user_friendly_id",
-    "osType": "androidgcm",
-    "deviceId": "device_id",
-    "deviceName": "John's Nexus"
-   }
-  }
- };
- var myHttpHeaders = {
-  "Content-Type": "application/json;charset=UTF-8",
-  "X-Device-AuthToken": "your_auth_token_if_set"
- };
- var paramTab = {
-  postdata: JSON.stringify(jsonBody),
-  httpheaders: myHttpHeaders
- };
- var url = engagementServicesURL + "/api/v1/subscribers";
- voltmx.net.invokeServiceAsync(url, paramTab, EngagementServicesSubCallback);
+var jsonBody = {
+"subscriptionService": {
+"subscribe": {
+"sid": "subscription_token_from_the_cloud",
+"appId": "testApp",
+"ufid": "your_user_friendly_id",
+"osType": "androidgcm",
+"deviceId": "device_id",
+"deviceName": "John's Nexus"
+}
+}
+};
+var myHttpHeaders = {
+"Content-Type": "application/json;charset=UTF-8",
+"X-Device-AuthToken": "your_auth_token_if_set"
+};
+var paramTab = {
+postdata: JSON.stringify(jsonBody),
+httpheaders: myHttpHeaders
+};
+var url = engagementServicesURL + "/api/v1/subscribers";
+voltmx.net.invokeServiceAsync(url, paramTab, EngagementServicesSubCallback);
 }
 function EngagementServicesSubCallback(status, result) {
- if (status == 400) {
-  if (result.httpresponse.responsecode == 200) {
-   var ksid = result.id;
-   alert("Device is now subscribed to Engagement Services. KSID: " + ksid);
-  } else
-   alert("Failed to subscribe to Engagement Services");
- }
+if (status == 400) {
+if (result.httpresponse.responsecode == 200) {
+var ksid = result.id;
+alert("Device is now subscribed to Engagement Services. KSID: " + ksid);
+} else
+alert("Failed to subscribe to Engagement Services");
+}
 }</code></pre></figure>
       <h2 id="unsubscribing-a-device">
         
@@ -309,29 +309,29 @@ function EngagementServicesSubCallback(status, result) {
 <p>You can use the below sample code snippet to unsubscribe a device from Engagement Server using Iris.</p>
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">function unsubscribeFromEngagementServices() {
- var jsonBody = {
-  "subscriptionService": {
-   "unsubscribe": {
-    "ksid": "ksid_of_device"
-   }
-  }
- };
- var myHttpHeaders = {
-  "Content-Type": "application/json;charset=UTF-8",
-  "X-Device-AuthToken": "your_auth_token_if_set"
- };
- var paramTab = {
-  postdata: JSON.stringify(jsonBody),
-  httpheaders: myHttpHeaders
- };
- var url = engagementServicesURL + "/api/v1/subscribers";
- voltmx.net.invokeServiceAsync(url, paramTab, EngagementServicesUnsubCallback);
+var jsonBody = {
+"subscriptionService": {
+"unsubscribe": {
+"ksid": "ksid_of_device"
+}
+}
+};
+var myHttpHeaders = {
+"Content-Type": "application/json;charset=UTF-8",
+"X-Device-AuthToken": "your_auth_token_if_set"
+};
+var paramTab = {
+postdata: JSON.stringify(jsonBody),
+httpheaders: myHttpHeaders
+};
+var url = engagementServicesURL + "/api/v1/subscribers";
+voltmx.net.invokeServiceAsync(url, paramTab, EngagementServicesUnsubCallback);
 }
 function EngagementServicesUnsubCallback(status, result) {
- if (status == 400)
-  alert("Device has been unsubscribed from Engagement Services");
- else
-  alert("Failed to unsubscribe the device from Engagement Services!");
+if (status == 400)
+alert("Device has been unsubscribed from Engagement Services");
+else
+alert("Failed to unsubscribe the device from Engagement Services!");
 }</code></pre></figure>
       <h2 id="creating-a-user-with-ksid">
         
@@ -347,43 +347,43 @@ function EngagementServicesUnsubCallback(status, result) {
 <p>You can use the below sample code snippet to create a user along with KSID in Engagement Server using Iris.</p>
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">function createUserForDevice() {
- var firstName = "John";
- var lastName = "Doe";
- var email = "email@email.com";
- var mobileNumber = "+1123456789";
- var country = "United States";
- var state = "California";
- var emailSubscription = true;
- var smsSubscription = true;
- var jsonBody = {
-  "ksid": ksid,
-  "firstName": firstName,
-  "lastName": lastName,
-  "email": email,
-  "mobileNumber": mobileNumber,
-  "country": country,
-  "state": state,
-  "emailSubscription": emailSubscription,
-  "smsSubscription": smsSubscription
- };
- var myHttpHeaders = {
-  "Content-Type": "application/json;charset=UTF-8",
-  "X-Device-AuthToken": "your_auth_token_if_set"
- };
- var paramTab = {
-  postdata: JSON.stringify(jsonBody),
-  httpheaders: myHttpHeaders
- };
- var url = engagementServicesURL + "/api/v1/subscribeaudience";
- voltmx.net.invokeServiceAsync(url, paramTab, EngagementServicesSubAudCallback);
+var firstName = "John";
+var lastName = "Doe";
+var email = "email@email.com";
+var mobileNumber = "+1123456789";
+var country = "United States";
+var state = "California";
+var emailSubscription = true;
+var smsSubscription = true;
+var jsonBody = {
+"ksid": ksid,
+"firstName": firstName,
+"lastName": lastName,
+"email": email,
+"mobileNumber": mobileNumber,
+"country": country,
+"state": state,
+"emailSubscription": emailSubscription,
+"smsSubscription": smsSubscription
+};
+var myHttpHeaders = {
+"Content-Type": "application/json;charset=UTF-8",
+"X-Device-AuthToken": "your_auth_token_if_set"
+};
+var paramTab = {
+postdata: JSON.stringify(jsonBody),
+httpheaders: myHttpHeaders
+};
+var url = engagementServicesURL + "/api/v1/subscribeaudience";
+voltmx.net.invokeServiceAsync(url, paramTab, EngagementServicesSubAudCallback);
 }
 function EngagementServicesSubAudCallback(status, result) {
 
- if (status == 400) {
-  var id = result.id;
-  alert("User created for the device with registration id: " + id);
- } else
-  alert("User creation failed!");
+if (status == 400) {
+var id = result.id;
+alert("User created for the device with registration id: " + id);
+} else
+alert("User creation failed!");
 }</code></pre></figure>
       <h2 id="updating-geo-location-of-a-device">
         
@@ -399,33 +399,33 @@ function EngagementServicesSubAudCallback(status, result) {
 <p>You can use the below sample code snippet to update geo-location of a device in Engagement Server using Iris.</p>
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">function sendGeoLoction() {
- var lati = position.coords.latitude;
- var longi = position.coords.longitude;
- var locname = "Hyderabad";
- var jsonBody = {
-  "ksid": "ksid_of_device",
-  "latitude": lati,
-  "locname": locname,
-  "longitude": longi
- };
- var myHttpHeaders = {
-  "Content-Type": "application/json;charset=UTF-8",
-  "X-Device-AuthToken": "your_auth_token_if_set"
- };
- var paramTab = {
-  postdata: JSON.stringify(jsonBody),
-  httpheaders: myHttpHeaders
- };
- var url = engagementServicesURL + "/api/v1/location";
- voltmx.net.invokeServiceAsync(url, paramTab, geoRegCallback);
+var lati = position.coords.latitude;
+var longi = position.coords.longitude;
+var locname = "Hyderabad";
+var jsonBody = {
+"ksid": "ksid_of_device",
+"latitude": lati,
+"locname": locname,
+"longitude": longi
+};
+var myHttpHeaders = {
+"Content-Type": "application/json;charset=UTF-8",
+"X-Device-AuthToken": "your_auth_token_if_set"
+};
+var paramTab = {
+postdata: JSON.stringify(jsonBody),
+httpheaders: myHttpHeaders
+};
+var url = engagementServicesURL + "/api/v1/location";
+voltmx.net.invokeServiceAsync(url, paramTab, geoRegCallback);
 }
 function geoRegCallback(status, result) {
- if (status == 400) {
-  if (result.httpresponse.responsecode == 200)
-   alert("Geolocation updated to Engagement Services");
-  else
-   alert("Failed to Update Geolocation to Engagement Services");
- }
+if (status == 400) {
+if (result.httpresponse.responsecode == 200)
+alert("Geolocation updated to Engagement Services");
+else
+alert("Failed to Update Geolocation to Engagement Services");
+}
 }</code></pre></figure>
       <h2 id="updating-beacon-details-of-a-device">
         
@@ -441,32 +441,32 @@ function geoRegCallback(status, result) {
 <p>You can use the below sample code snippet to update beacon details of a device in Engagement Server using Iris.</p>
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">function iBeaconUpdate() {
- var jsonBody = {
-  "ksid": ksid,
-  "beacons": {
-   "beacon": {
-    "uuid": "uuid",
-    "major": "major",
-    "minor": "minor"
-   }
-  }
- };
- var myHttpHeaders = {
-  "Content-Type": "application/json;charset=UTF-8",
-  "X-Device-AuthToken": "your_auth_token_if_set"
- };
- var paramTab = {
-  postdata: JSON.stringify(jsonBody),
-  httpheaders: myHttpHeaders
- };
- var url = engagementServicesURL + "/api/v1/beaconupdate";
- voltmx.net.invokeServiceAsync(url, paramTab, beaconUpCallback);
+var jsonBody = {
+"ksid": ksid,
+"beacons": {
+"beacon": {
+"uuid": "uuid",
+"major": "major",
+"minor": "minor"
+}
+}
+};
+var myHttpHeaders = {
+"Content-Type": "application/json;charset=UTF-8",
+"X-Device-AuthToken": "your_auth_token_if_set"
+};
+var paramTab = {
+postdata: JSON.stringify(jsonBody),
+httpheaders: myHttpHeaders
+};
+var url = engagementServicesURL + "/api/v1/beaconupdate";
+voltmx.net.invokeServiceAsync(url, paramTab, beaconUpCallback);
 }
 function beaconUpCallback(status, result) {
- if (status == 400)
-  alert("Beacon updated successfully");
- else
-  alert("Failed to Update beacon");
+if (status == 400)
+alert("Beacon updated successfully");
+else
+alert("Failed to Update beacon");
 }</code></pre></figure>
       <h2 id="fetching-the-list-of-push-messages">
         
@@ -488,31 +488,31 @@ function beaconUpCallback(status, result) {
 <p>You can use the below sample code snippet to fetch the list of push messages of a particular device based on some input parameters using Iris.</p>
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">function fetchMessages() {
- var start = 0;
- var perpage = 100;
- var jsonBody = {
-  "ufid": "your_ufid",
-  "appId": "testApp",
-  "startElement": start,
-  "elementsPerPage": perpage
- };
- var url = engagementServicesURL + "/api/v1/messages/fetch";
- var request = new voltmx.net.HttpRequest();
- request.onReadyStateChange = fetchMessagesSucessCalllback;
- request.open(constants.HTTP_METHOD_POST, url, true);
- request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
- request.setRequestHeader("X-Device-AuthToken", "your_auth_token_if_set");
- request.send(jsonBody);
+var start = 0;
+var perpage = 100;
+var jsonBody = {
+"ufid": "your_ufid",
+"appId": "testApp",
+"startElement": start,
+"elementsPerPage": perpage
+};
+var url = engagementServicesURL + "/api/v1/messages/fetch";
+var request = new voltmx.net.HttpRequest();
+request.onReadyStateChange = fetchMessagesSucessCalllback;
+request.open(constants.HTTP_METHOD_POST, url, true);
+request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+request.setRequestHeader("X-Device-AuthToken", "your_auth_token_if_set");
+request.send(jsonBody);
 }
 function fetchMessagesSucessCalllback() {
- if (this.readyState == constants.HTTP_READY_STATE_DONE) {
-  var fetchMsgs = this.response;
-  if (this.status == 200) {
-   alert("Fetched All Messages!")
-  } else {
-   alert("Error fetching push records.");
-  }
- }
+if (this.readyState == constants.HTTP_READY_STATE_DONE) {
+var fetchMsgs = this.response;
+if (this.status == 200) {
+alert("Fetched All Messages!")
+} else {
+alert("Error fetching push records.");
+}
+}
 }</code></pre></figure>
       <h2 id="fetching-full-content-of-a-push-message">
         
@@ -528,24 +528,22 @@ function fetchMessagesSucessCalllback() {
 <p>You can use the below sample code snippet to fetch the content of a message using Iris.</p>
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">function fecthFullMessageContent() {
- var url = engagementServicesURL + "/api/v1/messages/content/" + "fetchID_of_message";
- var myhttpheaders = {
-  "X-Device-AuthToken": "your_auth_token_if_set"
- };
- var paramTab = {
-  httpheaders: myhttpheaders
- };
- voltmx.net.invokeServiceAsync(url, paramTab, fetchMsgSuccessCallback);
+var url = engagementServicesURL + "/api/v1/messages/content/" + "fetchID_of_message";
+var myhttpheaders = {
+"X-Device-AuthToken": "your_auth_token_if_set"
+};
+var paramTab = {
+httpheaders: myhttpheaders
+};
+voltmx.net.invokeServiceAsync(url, paramTab, fetchMsgSuccessCallback);
 }
 function fetchMsgSuccessCallback(status, result) {
- if (status == 400) {
-  alert("Full content: " + result.content)
- } else {
-  alert("error fecthing message")
- }
+if (status == 400) {
+alert("Full content: " + result.content)
+} else {
+alert("error fecthing message")
+}
 }</code></pre></figure>
-
-<table class="TableStyle-RevisionTable" cellspacing="0" style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/RevisionTable.css');" data-mc-conditions="Default.HTML"><colgroup><col class="TableStyle-RevisionTable-Column-Column1" /> <col class="TableStyle-RevisionTable-Column-Column1" /> <col class="TableStyle-RevisionTable-Column-Column1" /></colgroup><tbody><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyE-Column1-Body1">Rev</td><td class="TableStyle-RevisionTable-BodyE-Column1-Body1">Author</td><td class="TableStyle-RevisionTable-BodyD-Column1-Body1">Edits</td></tr><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyB-Column1-Body1">7.2</td><td class="TableStyle-RevisionTable-BodyB-Column1-Body1">AU</td><td class="TableStyle-RevisionTable-BodyA-Column1-Body1">AU</td></tr></tbody></table>
 
         
 

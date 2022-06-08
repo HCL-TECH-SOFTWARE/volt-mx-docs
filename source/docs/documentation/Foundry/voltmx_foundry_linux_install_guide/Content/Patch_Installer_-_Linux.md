@@ -40,7 +40,7 @@ Prerequisites
       
     For example, if you are required to install hotfix archive for Console version V 7.0.1, you must have the Foundry 7.0.1 GA with Console installed on your system.
     
-*   Download the `patchinstaller(binary)` and `hotfix archives` from [downloads/manual/](http://community.hclvoltmx.com/downloads/manual/) with your credentials.
+*   Download the `patchinstaller(binary)` and `hotfix archives` from [downloads/manual/](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.2.x&orgId=HCL&fromRecentFile=false&fromRecentPkg=true&fromDL=false) with your credentials.
 *   Ensure that  `VoltMXFoundryPatchInstaller.bin`  file has execute permission.
     
     

@@ -307,7 +307,7 @@ When you have finished adding widgets, actions, code snippets, and code modules 
 
 If the app builds correctly, Volt MX Iris outputs a .KAR file. The .KAR file contains the storyboards for your app, the code for the actions and other event handlers, and any code that you added in custom Swift modules.
 
-To compile, debug, and run your app, you must next extract the .KAR file and load it into Xcode, as described in the Volt MX documentation topic **[View Applications on a Mac]({{ site.baseurl }}/docs/documentation/6_5/voltmxlibrary/studio/voltmx_studio_installation_guide_win/Content/iPhone.html)**. With your app in Xcode, you are ready to compile and debug it. If you make changes to you app's code in Xcode, it is recommend that you copy the changes back into the code editor in Volt MX Iris.
+To compile, debug, and run your app, you must next extract the .KAR file and load it into Xcode,With your app in Xcode, you are ready to compile and debug it. If you make changes to you app's code in Xcode, it is recommend that you copy the changes back into the code editor in Volt MX Iris.
 
 Internationalizing Watch Applications
 -------------------------------------

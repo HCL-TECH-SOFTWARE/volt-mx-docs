@@ -15,7 +15,7 @@ The Live Tiles API contains the following functions, which are part of the [volt
 
 * * *
 
-This API enables you to set the data for an application tile. If the user chooses to pin the application tile, the data set is visible. For more information on pinning a tile, refer [http://www.microsoft.com/windowsphone/en-us/howto/wp7/start/move-or-delete-tile-on-start.aspx](http://www.microsoft.com/windowsphone/en-us/howto/wp7/start/move-or-delete-tile-on-start.aspx).
+This API enables you to set the data for an application tile. If the user chooses to pin the application tile, the data set is visible. For more information on pinning a tile, refer [http://www.microsoft.com/windowsphone/en-us/howto/wp7/start/move-or-delete-tile-on-start.aspx](https://answers.microsoft.com/en-us/mobiledevices/forum/all/how-do-i-remove-tiles-from-windows-phone/3c9e8e45-4f40-4517-8607-8f337752d2af).
 
 ### Syntax
 
@@ -46,7 +46,7 @@ None
 
 ### UI Behavior - Windows 10
 
-The title and the display name of the tile will be displayed in white or black depending on the setting in Volt MX Irisand this behavior cannot be changed even if the user sets a different theme or a background image. Unlike Mango, tiles cannot be flipped on Windows 10. The tile can be updated dynamically in Windows 10.
+The title and the display name of the tile will be displayed in white or black depending on the setting in Volt MX Iris and this behavior cannot be changed even if the user sets a different theme or a background image. Unlike Mango, tiles cannot be flipped on Windows 10. The tile can be updated dynamically in Windows 10.
 
 ![](resources/images/live_tile_win8_142x141.png)
 
@@ -57,7 +57,7 @@ Available on Windows.
 * * *
 
 </details>
-<details close markdown="block"><summary>voltmx.application.setSecondaryTile</summary>
+<details close markdown="block"><summary id="setsecon">voltmx.application.setSecondaryTile</summary>
 
 * * *
 
@@ -94,7 +94,7 @@ None
 
 ### UI Behavior - Windows 10
 
-The title and the display name of the tile will be displayed in white or black depending on the setting in Volt MX Irisand this behavior cannot be changed even if the user sets a different theme or a background image. Unlike Mango, tiles cannot be flipped on Windows 10. The tile can be updated dynamically in Windows 10.
+The title and the display name of the tile will be displayed in white or black depending on the setting in Volt MX Iris and this behavior cannot be changed even if the user sets a different theme or a background image. Unlike Mango, tiles cannot be flipped on Windows 10. The tile can be updated dynamically in Windows 10.
 
 ![](resources/images/live_tile_win8_142x141.png)
 

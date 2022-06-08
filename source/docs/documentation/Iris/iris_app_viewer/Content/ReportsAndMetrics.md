@@ -2,26 +2,23 @@
 layout: "documentation"
 category: "iris_app_viewer"
 ---
-                            
 
 You are here: Reports and Analytics
 
-Reports and Analytics
-=====================
+# Reports and Analytics
 
 Using the Volt MX App, you can access reports and manage your Volt MX Foundry accounts. The following features can be accessed by tapping the **More** tab at the bottom-right of the app.
 
-![](Resources/Images/ReportHomePage_237x432.png)
+![](Resources/Images/ReportHomePage.PNG)
 
-*   **Standard Reports** – lists a set of standard metrics and pre-built reports for the users. The reports include application activity, user activity, geolocation, server requests, and performance.
+- **Standard Reports** – lists a set of standard metrics and pre-built reports for the users. The reports include application activity, user activity, geolocation, server requests, and performance.
 
-*   **Custom Reports** – contains the custom reports created by using the custom data from an application.
-*   **Favorite Reports** – it shows the reports saved as favorites.
-*   **Manage Users** – it contains your user account and those invited by you.
-*   **Accounts** – it shows the accounts associated with your user ID.
+- **Custom Reports** – contains the custom reports created by using the custom data from an application.
+- **Favorite Reports** – it shows the reports saved as favorites.
+- **Manage Users** – it contains your user account and those invited by you.
+- **Accounts** – it shows the accounts associated with your user ID.
 
-Standard Reports
-----------------
+## Standard Reports
 
 The Volt MX App provides all the standard metrics and built-in reports for Volt MX Foundry. For information about Standard Reports, refer to [Standard Reports and Analytics Guide]({{ site.baseurl }}/docs/documentation/Foundry/standard_metrics_reports_guide/Content/standard_metrics_reports_guide.html).
 
@@ -35,7 +32,7 @@ To view a report, select a report. The filter criteria pop-up appears.
 
 Select the filter criteria for the report and click **Generate**.
 
-Volt MX  App generates and opens the report shown in the figure below. The report is available in the Landscape mode only.
+Volt MX App generates and opens the report shown in the figure below. The report is available in the Landscape mode only.
 
 ![](Resources/Images/StandardReportsMap_591x331.png)
 
@@ -43,8 +40,7 @@ Click Favorites (**star**icon) to save the report as a favorite.
 
 Saving a report as a favorite saves the filter criteria that Volt MX App uses to generate the report.
 
-Custom Reports
---------------
+## Custom Reports
 
 The **Custom Reports** tab contains the customized reports created by you on the Volt MX Foundry account. For information about capturing custom metrics from the application and building reports, refer to [Custom Metrics and Reports Guide]({{ site.baseurl }}/docs/documentation/Foundry/custom_metrics_and_reports/Content/Custom_Metrics_and_Reports_Guide.html).
 
@@ -56,8 +52,7 @@ You can view the reports in the Landscape mode only.
 
 ![](Resources/Images/CustomReport_592x331.png)
 
-Favorites Reports
------------------
+## Favorites Reports
 
 The Favorite Reports tab contains the reports saved as favorites. This feature is useful when you want to save the often-used filter criteria as favorites and avoid having to set filter criteria each time you use the report. You can save any standard or custom report as a favorite once it is rendered. Tap on the Favorite (**star** icon) and save the report by providing a name.
 
@@ -65,8 +60,7 @@ The figure below shows a list of reports saved as favorites.
 
 ![](Resources/Images/Favourites_242x471.png)
 
-Manage Users
-------------
+## Manage Users
 
 The **Manage Users** tab contains a list of users having access to the Volt MX Foundry account and the role of each user. Only users with Admin and Owner as account role can access the **Manage Users** tab. You can change a user’s level of access to the cloud environments or invite users to the Volt MX Foundry cloud using this tab. For more information about the user management, refer to [User Management]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Settings_Cloud.html#ManageUsersCloud).
 
@@ -80,8 +74,7 @@ As an Admin or Owner to an account, you can modify a user account from the list.
 
 ![](Resources/Images/UserDetailsEdit_249x577.png)
 
-Accounts
---------
+## Accounts
 
 If you have multiple Volt MX Foundry cloud accounts, you can access any one of them from the **Accounts** tab. The name of your cloud account, which you are presently using, is shown next to **Accounts**. To choose a different account, select the **Accounts** tab. Choose an account from the list in the following page illustrated in the figure below.
 

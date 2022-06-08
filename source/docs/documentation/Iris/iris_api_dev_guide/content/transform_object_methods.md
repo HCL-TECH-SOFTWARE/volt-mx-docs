@@ -304,7 +304,7 @@ SPA
 * * *
 
 </details>
-<details close markdown="block"><summary>setPerspective</summary>
+<details close markdown="block"><summary id="setPersp">setPerspective</summary>
 
 * * *
 

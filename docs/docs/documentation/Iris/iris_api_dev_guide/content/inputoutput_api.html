@@ -471,84 +471,92 @@
 <p><strong>File System Handling</strong></p>
 
 <p>The <code class="language-plaintext highlighter-rouge">voltmx.io.FileSystem</code> Namespace consists of the functions that handles a file system. Use the <a href="voltmx.io.filesystem_functions.html#volt-mx-io-filesystem-getfile">voltmx.io.FileSystem.getFile</a> function to get an instance of a File object. You can browse and select files from the file system using the <a href="voltmx.io.filesystem_functions.html#volt-mx-io-filesystem-browse">voltmx.io.FileSystem.browse</a> function. Then get the root path of an application using the <a href="voltmx.io.filesystem_functions.html#volt-mx-io-filesystem-getapplicationdirectorypath">voltmx.io.FileSystem.getApplicationDirectoryPath</a> and the app group directory path using the <a href="voltmx.io.filesystem_functions.html#volt-mx-io-filesystem-getappgroupdirectorypath">voltmx.io.FileSystem.getAppGroupDirectoryPath</a> function. Use the <a href="voltmx.io.filesystem_functions.html#volt-mx-io-filesystem-getcachedirectorypath">voltmx.io.FileSystem.getCacheDirectoryPath</a> function to get the application cache’s directory path, the <a href="voltmx.io.filesystem_functions.html#volt-mx-io-filesystem-getdatadirectorypath">voltmx.io.FileSystem.getDataDirectoryPath</a> to get the application’s directory path, the <a href="voltmx.io.filesystem_functions.html#volt-mx-io-filesystem-getdatabasedirectorypath">voltmx.io.FileSystem.getDatabaseDirectoryPath</a> to get the application’s database directory path and external storage directory path using the <a href="voltmx.io.filesystem_functions.html#volt-mx-io-filesystem-getexternalstoragedirectorypath">voltmx.io.FileSystem.getExternalStorageDirectoryPath</a> function. For the application’s raw directory path, use the <a href="voltmx.io.filesystem_functions.html#volt-mx-io-filesystem-getrawdirectorypath">voltmx.io.FileSystem.getRawDirectoryPath</a> function and for the application’s support path, use the <a href="voltmx.io.filesystem_functions.html#volt-mx-io-filesystem-getsupportdirectorypath">voltmx.io.FileSystem.getSupportDirectoryPath</a> function. You can also check if the external storage is available and accessible on the device using the <a href="voltmx.io.filesystem_functions.html#volt-mx-io-filesystem-isexternalstorageavailable">voltmx.io.FileSystem.isExternalStorageAvailable</a> function, and upload files using the <a href="voltmx.io.filesystem_functions.html#volt-mx-io-filesystem-uploadfiles">voltmx.io.FileSystem.uploadFiles</a> function.</p>
-      <h3 id="pre-bundling-files">
+      <h3>
         
         
-          <a href="#pre-bundling-files" class="anchor-heading" aria-labelledby="pre-bundling-files"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Pre bundling Files
+          Pre bundling Files
         
         
       </h3>
     
-
-<p>Volt MX  gives an ability to bundle files such as SQLite database (pre-configured), video, image, and so on as part of an application binary. After bundling, the files can be accessed from the app at the run time on the device. You need to follow certain guidelines to bundle the files.</p>
-
+<p>Volt MX gives an ability to bundle files such as SQLite database (pre-configured), video, image, and so on as part of an application binary. After bundling, the files can be accessed from the app at the run time on the device. You need to follow certain guidelines to bundle the files.</p>
 <p>Here are the guidelines:</p>
-
 <ol>
-  <li>Place the files to be bundled in the application workspace at the following locations. When you place the files in these locations, the files will be bundled with the application built for all the platforms.</li>
+  <li>
+    <p>Place the files to be bundled in the application workspace at the following locations. When you place the files in these locations, the files will be bundled with the application built for all the platforms.</p>
+    <p><b>Mobile:</b></p>
+    <p>&lt;WorkSpace&gt;\&lt;App&gt;\resources\mobile\common\raw</p>
+    <p><b>Tablet:</b></p>
+    <p>&lt;WorkSpace&gt;\&lt;App&gt;\resources\tablet\common\raw</p>
+  </li>
+  <li>
+    <p>You can also place the files in the platform-specific folders. When you place the files in platform-specific folders, the files will be bundled only with the application built for that particular platform. For example, if you place the files in the android\raw folder, the files will be bundled only for the application built for the Android platform.</p>
+    <p><b>Android Mobile:</b></p>
+    <p>&lt;WorkSpace&gt;\&lt;App&gt;\resources\mobile\native\android\raw</p>
+    <p><b>Android Tablet:</b></p>
+    <p>&lt;WorkSpace&gt;\&lt;App&gt;\resources\tablet\native\androidtab\raw</p>
+    <p><b>IOS Mobile:</b></p>
+    <p>&lt;WorkSpace&gt;\&lt;App&gt;\resources\mobile\native\iphone\raw</p>
+    <p><b>IOS Tablet:</b></p>
+    <p>&lt;WorkSpace&gt;\&lt;App&gt;\resources\tablet\native\ipad\raw</p>
+    <p><b>Windows 10:</b></p>
+    <p>&lt;WorkSpace&gt;\&lt;App&gt;\resources\tablet\native\windows8\raw</p>
+    <p>After placing the files either in common or platform-specific folder and build the respective application, the files are packaged in the application binary file. Example, .apk, .ipa, and so on.</p>
+    <p>In case same file is located at both common and platform-specific folders, the file in the platform-specific folder will override the file in the common folder.</p>
+  </li>
+  <li>
+    <p>In case of Android, the file name should contain only the following characters:</p>
+    <ul>
+      <li>a – z (lower case)</li>
+      <li>0 – 9</li>
+      <li>_ (underscore)</li>
+      <li>. (period)</li>
+    </ul>
+    <p>This guideline is applicable only for the Android platform.</p>
+  </li>
+  <li>
+    <p>Application binary size limitation: After bundling the files, the size of the application binary should not exceed the size defined for each platform in the table below. These size limits are specified by the platform-specific stores where the apps will be uploaded.</p>
+  </li>
 </ol>
-
-<p><strong>Mobile</strong>:</p>
-
-<p>&lt;WorkSpace&gt;\&lt;App&gt;\resources\mobile\common\raw</p>
-
-<p><strong>Tablet</strong>:</p>
-
-<WorkSpace>\\<App>\\resources\\tablet\\common\\raw
-
-6.  You can also place the files in the platform-specific folders. When you place the files in platform-specific folders, the files will be bundled only with the application built for that particular platform. For example, if you place the files in the android\\raw folder, the files will be bundled only for the application built for the Android platform.
-
-**Android Mobile**:
-
-<WorkSpace>\\<App>\\resources\\mobile\\native\\android\\raw
-
-**Android Tablet**:
-
-<WorkSpace>\\<App>\\resources\\tablet\\native\\androidtab\\raw
-
-**IOS Mobile**:
-
-<WorkSpace>\\<App>\\resources\\mobile\\native\\iphone\\raw
-
-**IOS Tablet**:
-
-<WorkSpace>\\<App>\\resources\\tablet\\native\\ipad\\raw
-
-**Windows 10**:
-
-<WorkSpace>\\<App>\\resources\\tablet\\native\\windows8\\raw
-
-After placing the files either in common or platform-specific folder and build the respective application, the files are packaged in the application binary file. Example, .apk, .ipa, and so on.
-
-In case same file is located at both common and platform-specific folders, the file in the platform-specific folder will override the file in the common folder.
-
-19.  In case of Android, the file name should contain only the following characters:
-
-*   a – z (lower case)
-*   0 – 9
-*   \_ (underscore)
-*   . (period)
-
-This guideline is applicable only for the Android platform.
-
-1.  Application binary size limitation: After bundling the files, the size of the application binary should not exceed the size defined for each platform in the table below. These size limits are specified by the platform-specific stores where the apps will be uploaded.
-
-&gt; **_Note:_** In future these values may vary based on the application store decisions for respective platforms.
-
-| OS | Limit | Binary Type |
-| --- | --- | --- |
-| Android | 100 MB | .apk |
-| IOS | 60 MB | .ipa |
-| Windows | 25 GB | .appxbundle |
-| Silver light applications | 1 GB | .xap packages |
-
-Volt MX  Iris provides the following APIs to support accessing the pre-bundled files programmatically.
-
-*   [voltmx.io.FileSystem.copyBundledRawFileTo](voltmx.io.filesystem_functions.html#volt-mx-io-filesystem-copybundledrawfileto)
-*   [voltmx.io.FileSystem.getDatabaseDirectoryPath](voltmx.io.filesystem_functions.html#volt-mx-io-filesystem-getdatabasedirectorypath)
-
-![](resources/prettify/onload.png)
-</App></WorkSpace></App></WorkSpace></App></WorkSpace></App></WorkSpace></App></WorkSpace></App></WorkSpace>
+<blockquote>
+  <em><b>Note:</b></em> In future these values may vary based on the application store decisions for respective platforms.
+</blockquote>
+<table>
+  <tr>
+    <th>OS</th>
+    <th>Limit</th>
+    <th>Binary Type</th>
+  </tr>
+  <tr>
+    <td>Android</td>
+    <td>100 MB</td>
+    <td>.apk</td>
+  </tr>
+  <tr>
+    <td>IOS</td>
+    <td>60 MB</td>
+    <td>.ipa</td>
+  </tr>
+  <tr>
+    <td>Windows</td>
+    <td>25 GB</td>
+    <td>.appxbundle</td>
+  </tr>
+  <tr>
+    <td>Silver light applications</td>
+    <td>1 GB</td>
+    <td>.xap packages</td>
+  </tr>
+</table>
+<p>Volt MX Iris provides the following APIs to support accessing the pre-bundled files programmatically.</p>
+<ul>
+  <li>
+    <a href="voltmx.io.filesystem_functions.html#volt-mx-io-filesystem-copybundledrawfileto">voltmx.io.FileSystem.copyBundledRawFileTo</a>
+  </li>
+  <li>
+    <a href="voltmx.io.filesystem_functions.html#volt-mx-io-filesystem-getdatabasedirectorypath">voltmx.io.FileSystem.getDatabaseDirectoryPath</a>
+  </li>
+</ul>
 
         
 

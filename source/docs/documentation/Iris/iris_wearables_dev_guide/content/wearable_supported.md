@@ -27,7 +27,7 @@ The next few sections present overviews about how to develop applications for th
 
 To create a Wearables app:
 
-*   You must install Volt MX Iris 7.0 to build a watch app using Volt MX Iris.
+*   You must install Volt MX Iris 9.2 to build a watch app using Volt MX Iris.
 *   You need to access Volt MX Foundry Messaging to test notifications.
 *   It is a good idea to have the target hardware (an Apple Watch or an Android Wear device) for development and testing.
 

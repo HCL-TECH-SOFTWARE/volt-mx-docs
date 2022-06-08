@@ -14,9 +14,11 @@ The Share app extension is one of the types of app extensions provided by Apple 
 
 The share extension app can be accessed by tapping an action button provided in an app to display the activity view. The activity view contains extensions relevant to the current context.
 
-VoltMX Irisprovides integrated support for developing Share app extensions for iOS apps. You develop Share extensions and package them into your app in the same way you do for other types of app extensions. For more information, refer [App Extension API for iOS](app-extension-ios.html).
+VoltMX Iris provides integrated support for developing Share app extensions for iOS apps. You develop Share extensions and package them into your app in the same way you do for other types of app extensions. For more information, refer [App Extension API for iOS](app-extension-ios.html).
 
-For more information about what the Share app extension is and what you can do with it, refer the [Apple developer documentation](app-extension-ios.html).
+<!-- For more information about what the Share app extension is and what you can do with it, refer the [Apple developer documentation](app-extension-ios.html). -->
+
+For more information about what the Share app extension is and what you can do with it, refer the [Apple developer documentation](https://developer.apple.com/design/human-interface-guidelines/macos/extensions/share-extensions/).
 
 A Share extension can use the default UI provided by Apple or a custom UI that you create. When you create a share extension using the Default GUI, a standard compose view UI is used as shown in the figure below.
 

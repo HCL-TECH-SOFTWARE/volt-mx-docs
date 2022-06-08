@@ -134,6 +134,9 @@ To install the Volt MX Foundry console using the installer, follow these steps:
     
 17. Enter server groups separated by commas - for example, 1, 2, shown above. Click **Next**. The system displays the selected groups in the **Selected Server Group** window.
 18. Click **Next**. The **Memcached Server** window appears.
+
+    <p id="DatabaseDetails"></p>
+    
 19. Click **Next**. The **Database Details** window appears. From the **Database Choice** drop-down, choose one of the databases to display database details. By default, this option is set to MySQL.  
       
     

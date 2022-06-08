@@ -23,45 +23,47 @@ To define metrics in Volt MX Iris, follow these steps:
     
     1.  The supported formats for key values are as follows:   
         Each JSON object in the following formats correspond to one set of associated data.
-    {% highlight voltMx %}/* Array of JSON Objects with single key: */  
-    /* The following format is used if data is not associated. For example, **met1** and **met2** are unassociated data points. */
-    [
-    	{
-    		"met1": "metVal1"
-    	},
-    	{
-    		"met2": "metVal2"
-    	}
-    ]
-    						
-    /* JSON Array with single JSON object with multiple keys: */
-    /* The following format is used for sending a single set of associated data. For example, you can check the value of met2 when the value of met1 is metVal1. */
-    
-    [
-    	{
-    		"met1": "metVal1",
-    		"met2": "metVal2"
-    	}
-    ]
-    						
-    /* JSON array with multiple JSON objects: */
-    /* The following format is used for sending or collecting multiple sets of associated data */
-    [
-    	{
-    		"met1": "metVal1",  "met2": "metVal2"
-    	},
-    	{
-    		"met1": "metVal3",  "met2": "metVal4"
-    	}
-    ]  
-    
-    {% endhighlight %}
+    <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
+        /* Array of JSON Objects with single key: */  
+        /* The following format is used if data is not associated. For example, **met1** and **met2** are unassociated data points. */
+        [
+            {
+                "met1": "metVal1"
+            },
+            {
+                "met2": "metVal2"
+            }
+        ]
+                                
+        /* JSON Array with single JSON object with multiple keys: */
+        /* The following format is used for sending a single set of associated data. For example, you can check the value of met2 when the value of met1 is metVal1. */
+        
+        [
+            {
+                "met1": "metVal1",
+                "met2": "metVal2"
+            }
+        ]
+                                
+        /* JSON array with multiple JSON objects: */
+        /* The following format is used for sending or collecting multiple sets of associated data */
+        [
+            {
+                "met1": "metVal1",  "met2": "metVal2"
+            },
+            {
+                "met1": "metVal3",  "met2": "metVal4"
+            }
+        ]  
+        
+    }</code></pre></figure>
     
     The following example shows a custom metrics code defined for an element in Volt MX Iris.
     
-    {% highlight voltMx %}var custmetrics = [{"onSale":true,"prodName":"iPad 16 GB","prodPrice":450.0,"salePrice":400.0,"prodSKU":"1231sdf2","rating":4.5}]
-    HCLMetricsService.sendCustomMetrics("frmProduct", custmetrics)
-    {% endhighlight %}
+    <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
+        var custmetrics = [{"onSale":true,"prodName":"iPad 16 GB","prodPrice":450.0,"salePrice":400.0,"prodSKU":"1231sdf2","rating":4.5}]
+        HCLMetricsService.sendCustomMetrics("frmProduct", custmetrics)
+    }</code></pre></figure>
     
     For more information about metrics APIs, refer to [SDK documentation]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/VoltMXStudio/Installing_VoltMXJS_SDK.html#MetricsS).
     

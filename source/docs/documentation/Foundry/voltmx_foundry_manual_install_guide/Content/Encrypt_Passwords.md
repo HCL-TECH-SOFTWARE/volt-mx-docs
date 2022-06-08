@@ -25,7 +25,7 @@ To encrypt a value, follow these steps:
     
 4.  Add dependency jars to the Library.
     *   `commons-io-2.4.jar` can be found at [https://mvnrepository.com/artifact/commons-io/commons-io/2.4](https://mvnrepository.com/artifact/commons-io/commons-io/2.4)
-    *   `log4j-api-2.8.2.jar` can be found at [https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api/2.8.2](https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api/2.8.2)
+    *   `log4j-api-2.17.1.jar` can be found at [https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api/2.17.1](https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api/2.17.1)
 
 To encrypt a Tomcat value, follow these steps:
 

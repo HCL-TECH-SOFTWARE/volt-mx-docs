@@ -3,15 +3,12 @@ layout: "documentation"
 category: "custom_metrics_and_reports"
 ---
                             
-
-
-
 Standard Metrics V7.2
 =====================
 
 Fields
 
-*   
+   
 <details close markdown="block"><summary>Sessions</summary>
     
     1.  Session Application Name - Name of the application.
@@ -38,12 +35,10 @@ Fields
     22.  Session SDK Type - If an app is built using Volt MX Foundry SDK this will indicate the type of SDK such as iOS and PhoneGap.
     23.  Session SDK Version - Version of the Volt MX Foundry SDK used in the client binary.
     24.  Session Service Group - Integration service name of the service request for applications defined from Volt MX Foundry console.
-    25.  Session User Agent - User agent of the client device from a network call.
-    
-
+    25.  Session User Agent - User agent of the client device from a network call.    
 </details>
-<details close markdown="block"><summary>Requests</summary>
-    
+
+<details close markdown="block"><summary>Requests</summary>    
     1.  Request Application Name - Name of the application.
     2.  Request Application Type - The type of the application. For example, Native and SPA.
     3.  Request Channel - The type of application channel. For example, Mobile and Tablet.
@@ -72,11 +67,10 @@ Fields
     26.  Request Object method – Type of the object method. For example, PUT and POST. Applicable for services with object mapping.
     27.  Request Volt MX User ID - User ID of the end user using the app. Value has to be set using the setUserID API in the application.
     28.  Request Remote IP
-    29.  Request User Agent - User agent of the client device a network call.
-    
+    29.  Request User Agent - User agent of the client device a network call.    
 </details>
-<details close markdown="block"><summary>Events</summary>
-    
+
+<details close markdown="block"><summary>Events</summary>    
     1.  Event Application Name - Name of the application.
     2.  Event Application Type - The type of the application. For example, Native and SPA.
     3.  Event Channel - The type of application channel. For example, Mobile and Tablet.
@@ -108,21 +102,17 @@ Fields
     29.  Event Meta Data – Any metadata sent as part of the events data. Typically this is applicable for event type error, exception, crash, and custom.
     30.  Event TimeStamp\_Local - Timestamp when the service request was received in the timestamp set in a user's profile in the manage cloud portal.
     31.  Event TimeStamp\_UTC - Timestamp of request in UTC.
-    32.  Event Network Type - Mobile Network vs WiFi (networktype) - indicates the type of network during the time of the crash. Valid values are `mobilenetwork` and `WiFi`.
-    
-Measures
-
+    32.  Event Network Type - Mobile Network vs WiFi (networktype) - indicates the type of network during the time of the crash. Valid values are `mobilenetwork` and `WiFi`.    
 </details>
-<details close markdown="block"><summary>Sessions</summary>
-    
+
+<details close markdown="block"><summary>Sessions</summary>    
     1.  Session HTTP Response Code
     2.  Session Response Status Code
     3.  Session Session Key
     4.  Session Total Duration
-    
 </details>
-<details close markdown="block"><summary>Requests</summary>
-    
+
+<details close markdown="block"><summary>Requests</summary>    
     1.  Request HTTP Response Code – HTTP code of the service response obtained by the device.
     2.  Request Response Status Code – Output status of the service response from the Volt MX Foundry server.
     3.  Request Session Key – Unique session identifier for application session data from session init call.
@@ -138,11 +128,10 @@ Measures
     13.  Request Object mapping duration (request) – Time taken to map the object detail into service request by Volt MX app services.
     14.  Request Object mapping duration (response) – Time taken to map the object detail into service response by Volt MX app services.
     15.  Request Request\_Key
-    16.  Request session\_key
-    
+    16.  Request session\_key    
 </details>
-<details close markdown="block"><summary>Events</summary>
-    
+
+<details close markdown="block"><summary>Events</summary>    
     1.  Event Error Line – Line number in application code file where the error occurred. Applicable for event types error/exception.
     2.  Event HTTP Response Code – HTTP code of the service response obtained by the device.
     3.  Event Response Time – Response time as viewed by the client device. That is the time since the service request is sent from device to server and response obtained back in the device.
@@ -156,7 +145,7 @@ Measures
     11.  Event Memory Usage – RAM - indicates the memory used when the app crashes.
     12.  Event CPU Usage - indicates the % of CPU being used at the time of the crash.
     13.  Event Form Duration - The amount of time spent in a particular Form in milliseconds.
-    
+</details>    
 
 > **Note:**  
 *   Not all fields will have values for all scenarios. For example, the SD card is not relevant for iOS and those fields will be empty for iOS. Similarly, if some information is not obtained from a device during an error or crash, the same will reflect in the report.  
@@ -164,4 +153,4 @@ Measures
 *   All duration fields indicate time duration in milliseconds. 
 *   To view only Custom Metrics service-related data for an application, add a pre-filter or filter while creating reports for Service ID equals "capturevoltmxcustommetrics."  
 
-</details>
+

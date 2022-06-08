@@ -47,7 +47,7 @@ The GeoLocation APIs are modeled after W3C GeoLocation specification. For a more
 
 {% include youtube.html id='XEdOHCBBMVw' %}
 
-To get the current position of the device, use the **[voltmx.location.getCurrentPosition](#getCurrentPosition)** function. Continue to watch the position of the device by using the **[voltmx.location.watchPosition](#watchPosition)** function. To stop tracking the device movement, use the **[voltmx.location.clearWatch](#voltmx.loc)** function.
+To get the current position of the device, use the **[voltmx.location.getCurrentPosition](voltmx.location_functions.html#getCurrentPosition)** function. Continue to watch the position of the device by using the **[voltmx.location.watchPosition](voltmx.location_functions.html#watchPosition)** function. To stop tracking the device movement, use the **[voltmx.location.clearWatch](voltmx.location_functions.html#voltmx.loc)** function.
 
 > **_Note:_** The `phone.mylocation` function is deprecated and should not be used in new software. However, there is still [documentation for it](voltmx.location_deprecated.html#phone.my).
 
