@@ -8,7 +8,7 @@ Sample Apps
 
 The following sample apps help you to understand the capabilities of the Offline Objects feature.
 
-You can download the sample apps for Foundry and Iris from the following locations.
+<!--- You can download the sample apps for Foundry and Iris from the following locations. -->
 
 Line of Business Adapter Module
 
