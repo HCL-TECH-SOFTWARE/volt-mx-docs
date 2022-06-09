@@ -13,7 +13,7 @@ Overview
 <!--- 
 As a part of V8SP3, an offline objects feature is released as a beta version for Windows Store and Windows 10 based Kiosk applications. Using this feature, you can enable offline objects for the apps built with Iris.
 -->
-As a part of V8SP3, an offline objects feature is released for Windows Store and Windows 10 based Kiosk applications. Using this feature, you can enable offline objects for the apps built with Iris.
+Volt MX contains an object feature for Windows Store and Windows 10 based Kiosk applications. Using this feature, you can enable offline objects for the apps built with Iris.
 
 Offline Objects allows an application to interact with the data in online or offline mode and sync the data to the backend at a later point in time. Refer [Offline Objects Getting Started Guide]({{ site.baseurl }}/docs/documentation/Foundry/offline_objects_gettingstarted/Content/Offline_Objects_Getting_Started.html) and [API reference Guide]({{ site.baseurl }}/docs/documentation/Foundry/offline_objectsapi_reference_guide/Content/Offline_Objects_API_Reference.html) for better understanding of this feature and its capabilities.
 
