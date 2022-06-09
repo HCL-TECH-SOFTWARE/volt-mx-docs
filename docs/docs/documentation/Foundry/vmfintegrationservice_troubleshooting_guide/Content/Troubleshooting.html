@@ -251,16 +251,34 @@
   <p><strong><em>Note:</em></strong> In license validation on WebSphere, Volt MX supports only Oracle JDK. Middleware license does not get validated on WebSphere if the server has IBM JDK. This is an expected behavior for license validation on WebSphere. This behavior is present in Middleware 5.0 and higher versions.</p>
 </blockquote>
 
-<p>| Property in Volt MX Foundry Integration Service | Troubleshooting Tip |
-| — | — |
-| cacheid.transport=PARAM_ONLY &gt; <strong><em>Note:</em></strong> This property is applicable only to Volt MX Foundry Integration Service with memcached builds | The property is only for memcached. Instead of HTTP session, Volt MX Foundry Integration Service maintains session values in memcached. Memcached provides a cacheid. You can set the following values for cacheid:
-PARAM_ONLY: PARAM_ONLY is defined in <code class="language-plaintext highlighter-rouge">middleware.properties</code> file, by default. This represents that the cacheid is passed as param in every result sent to the device. COOKIE_ONLY: To pass the cacheid as cookie to the device or browser. You can use this property if you are running memcached in your Application Server. Set the PARAM_ONLY to COOKIE_ONLY to enable the application to set a cookie on the users’ device. EITHER: To pass the cacheid sometimes as PARAM_ONLY and sometimes as COOKIE_ONLY.</p>
+<style>
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    border:2px solid #ccc;
+}
+
+th{
+    border:2px solid #000000;
+}
+
+td{
+    border:1px solid #000000;
+}
+
+</style>
 
 <table>
+  <thead>
+    <tr>
+      <th>Property in Volt MX Foundry Integration Service</th>
+      <th>Troubleshooting Tip</th>
+    </tr>
+  </thead>
   <tbody>
     <tr>
-      <td> </td>
-      <td> </td>
+      <td>cacheid.transport=PARAM_ONLY</td>
+      <td>The property is only for memcached. Instead of HTTP session, Volt MX Foundry Integration Service maintains session values in memcached. Memcached provides a cacheid. You can set the following values for cacheid: PARAM_ONLY: PARAM_ONLY is defined in <code class="language-plaintext highlighter-rouge">middleware.properties</code> file, by default. This represents that the cacheid is passed as param in every result sent to the device. COOKIE_ONLY: To pass the cacheid as cookie to the device or browser. You can use this property if you are running memcached in your Application Server. Set the PARAM_ONLY to COOKIE_ONLY to enable the application to set a cookie on the users’ device. EITHER: To pass the cacheid sometimes as PARAM_ONLY and sometimes as COOKIE_ONLY.</td>
     </tr>
     <tr>
       <td>log.description.error=true</td>
@@ -271,7 +289,7 @@ PARAM_ONLY: PARAM_ONLY is defined in <code class="language-plaintext highlighter
       <td>If you do not want to log any sensitive information in request / response parameters, specify the key name. For example, if you specify password=jack123, it masks and shows as password=****.</td>
     </tr>
     <tr>
-      <td>do.not.log=</td>
+      <td>do.not.log</td>
       <td>If you do not want to log specific values into report database, then specify do.not.log=<key>. For example, if you specify do.not.log=SESSIONID, then, sessionid is not inserted into database.</key></td>
     </tr>
     <tr>
@@ -284,18 +302,7 @@ PARAM_ONLY: PARAM_ONLY is defined in <code class="language-plaintext highlighter
     </tr>
     <tr>
       <td>deployment-config.properties</td>
-      <td>If you are unable to publish an application to the server hosted on Tomcat 7.0.X:</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>In <code class="language-plaintext highlighter-rouge">deployment-config.properties</code>, provide the URL as shown in the below example.http://<ipaddress or="" host="">:<port>/manager/text In `conf/tomcat-users.xml`, the manager should have the following roles: admin-gui,manager-gui,manager-script,manager-jmx,manager-status.</port></ipaddress></p>
-
-<table>
-  <tbody>
-    <tr>
-      <td> </td>
-      <td> </td>
+      <td>If you are unable to publish an application to the server hosted on Tomcat 7.0.X: In <code class="language-plaintext highlighter-rouge">deployment-config.properties</code>, provide the URL as shown in the below example.http://<ipaddress or="" host="">:<port>/manager/text In `conf/tomcat-users.xml`, the manager should have the following roles: admin-gui,manager-gui,manager-script,manager-jmx,manager-status.</port></ipaddress></td>
     </tr>
     <tr>
       <td>antisamy.xml</td>
@@ -316,288 +323,258 @@ PARAM_ONLY: PARAM_ONLY is defined in <code class="language-plaintext highlighter
       </h2>
     
 
-<ol>
-  <li>
-    <p><strong>What is the Standard way in which I can handle HTTP status codes (401, and 404) from Volt MX Foundry Integration Service?</strong></p>
+<ul>
+  <li><strong>What is the Standard way in which I can handle HTTP status codes (401, and 404) from Volt MX Foundry Integration Service?</strong></li>
+</ul>
 
-    <p><strong>Solution</strong></p>
+<p><strong>Solution</strong></p>
 
-    <p>In PostProcessor, Result object is available. In that, you can use the following code snippet to find the httpStatus code:</p>
-  </li>
-</ol>
+<p>In PostProcessor, Result object is available. In that, you can use the following code snippet to find the httpStatus code:</p>
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">Param statusCodeparam = result.findParam("httpStatusCode");
-          int httpStatusCode = Integer.parseInt(statusCodeparam.getValue());
-    </code></pre></figure>
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">
+    Param statusCodeparam = result.findParam("httpStatusCode");
+    int httpStatusCode = Integer.parseInt(statusCodeparam.getValue());
+</code></pre></figure>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>By default, Volt MX Foundry Integration Service passes the HTTP status code in the resultset json format to device. The following is the sample output string:
-</code></pre></div></div>
+<p>By default, Volt MX Foundry Integration Service passes the HTTP status code in the resultset json format to device. The following is the sample output string:</p>
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">resultset =  {"httpStatusCode":200,"marketIndex":[{"indName":"Dow Jones Ind.","indVal":"15618.22","symbol":"0DJIA","indValChg":"            -20.90"},{"indName":"Nasdaq Comp.","indVal":"3939.86","symbol":"0NDQC","indValChg":"3.27"},{"indName":"NYSE Composite","indVal":"          10011.65","symbol":"0NYC","indValChg":"-52.46"},{"indName":"S &amp; P 500","indVal":"1762.97","symbol":"0S&amp;P5","indValChg":"             -4.96"}],"opstatus":0}
-    </code></pre></figure>
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">
+    resultset =  {"httpStatusCode":200,"marketIndex":[{"indName":"Dow Jones Ind.","indVal":"15618.22","symbol":"0DJIA","indValChg":"            -20.90"},{"indName":"Nasdaq Comp.","indVal":"3939.86","symbol":"0NDQC","indValChg":"3.27"},{"indName":"NYSE Composite","indVal":"          10011.65","symbol":"0NYC","indValChg":"-52.46"},{"indName":"S &amp; P 500","indVal":"1762.97","symbol":"0S&amp;P5","indValChg":"             -4.96"}],"opstatus":0}
+</code></pre></figure>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>You can use the following snippet in `.js` file to get the httpStatusCode from JSON resultset object.
+<p>You can use the following snippet in <code class="language-plaintext highlighter-rouge">.js</code> file to get the httpStatusCode from JSON resultset object.</p>
 
-int statusCode = resultset\["httpStatusCode "\];
-</code></pre></div></div><hr />
+<p>int statusCode = resultset[“httpStatusCode “];</p><hr />
 
-<ol>
-  <li>
-    <p><strong>How can I use Basic Authenticate in RESTful service with dynamic userids in request? When working with service definitions in Volt MX Iris, I need to be able to dynamically assign those values in code, that is, do I have to authenticate with Active Directory and then with REST endpoints?</strong></p>
+<ul>
+  <li><strong>How can I use Basic Authenticate in RESTful service with dynamic userids in request? When working with service definitions in Volt MX Iris, I need to be able to dynamically assign those values in code, that is, do I have to authenticate with Active Directory and then with REST endpoints?</strong></li>
+</ul>
 
-    <p><strong>Solution</strong></p>
+<p><strong>Solution</strong></p>
 
-    <p>Dynamically, in basic authentication, in every request, you can pass the username and password in request params with the following specified param names:</p>
+<p>Dynamically, in basic authentication, in every request, you can pass the username and password in request params with the following specified param names:</p>
 
-    <ol>
-      <li>userid</li>
-      <li>pwd</li>
-    </ol>
+<ul>
+  <li>userid</li>
+  <li>pwd</li>
+</ul>
 
-    <p>If you have any domain and hostname, then use the following specified param names:</p>
+<p>If you have any domain and hostname, then use the following specified param names:</p>
 
-    <ol>
-      <li>domain</li>
-      <li>hname</li>
-    </ol>
+<ul>
+  <li>domain</li>
+  <li>hname</li>
+</ul>
 
-    <p>Volt MX Foundry Integration Service first checks in:</p>
+<p>Volt MX Foundry Integration Service first checks in:</p>
 
-    <ol>
-      <li>request parameters</li>
-      <li>if not available, it checks in session, that is, <em>session.getAttribute(userid)</em></li>
-      <li>if not available in request and session, then it takes from the service definition file.</li>
-    </ol>
+<ul>
+  <li>request parameters</li>
+  <li>if not available, it checks in session, that is, <em>session.getAttribute(userid)</em></li>
+  <li>if not available in request and session, then it takes from the service definition file.</li>
+</ul>
 
-    <p>In JS code level:</p>
-  </li>
-</ol>
+<p>In JS code level:</p>
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">var inputParamTable={};                  
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">    var inputParamTable={};                  
     inputParamTable["appID"] = "ServicesApp";                 
     inputParamTable["serviceID"] = "BasicAuthService";
                     inputParamTable["userid"] = "steve";                  
     inputParamTable["pwd"] = "apple";  
     inputParamTable["domain"] = "kits";                  
-    inputParamTable["hname"] = "apple";  
-    
-    </code></pre></figure>
+    inputParamTable["hname"] = "apple";  </code></pre></figure>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>If you want to store userid and password in HTTP session, write the below code in pre / post processor:
-</code></pre></div></div>
+<p>If you want to store userid and password in HTTP session, write the below code in pre / post processor:</p>
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">Session session = request.getSession(false);
-    
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">    Session session = request.getSession(false);
     session.setAttribute("userid", "steve");
-    session.setAttribute("pwd", "******");
-    
-    </code></pre></figure><hr />
+    session.setAttribute("pwd", "******");</code></pre></figure><hr />
 
-<ol>
-  <li>
-    <p><strong>If end server has proxy enabled authentication, then what should I do?</strong></p>
+<ul>
+  <li><strong>If end server has proxy enabled authentication, then what should I do?</strong></li>
+</ul>
 
-    <p><strong>Solution</strong></p>
+<p><strong>Solution</strong></p>
 
-    <p>You need to configure the below -D parameters:</p>
-  </li>
-</ol>
+<p>You need to configure the below -D parameters:</p>
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">voltmx.http.proxyHost
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">    voltmx.http.proxyHost
     voltmx.http.proxyPort
     voltmx.http.proxyUser  
-    voltmx.http.proxyPassword
-    </code></pre></figure>
+    voltmx.http.proxyPassword</code></pre></figure>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>If end server is with NTLM enabled authentication, then you need to configure the additional below -D parameter:
-</code></pre></div></div>
+<p>If end server is with NTLM enabled authentication, then you need to configure the additional below -D parameter:</p>
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">voltmx.proxy.ntlm.domainName
-    </code></pre></figure><hr />
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">    voltmx.proxy.ntlm.domainName</code></pre></figure><hr />
 
-<ol>
-  <li>
-    <p><strong>How can I</strong> <strong>add Headers?</strong></p>
+<ul>
+  <li><strong>How can I</strong> <strong>add Headers?</strong></li>
+</ul>
 
-    <p><strong>Solution</strong></p>
-  </li>
-  <li>
-    <p>For example, to add “Content-Type” as a header:</p>
+<p><strong>Solution</strong></p>
 
-    <p>In the <strong>Service Definition</strong> editor -&gt; <strong>Http Headers</strong> tab, under <strong>Id</strong>, declare <em>Content-Type</em> as header type and under <strong>Session</strong>, select <em>session</em> from the drop-down list as shown:</p>
+<p>For example, to add “Content-Type” as a header:</p>
 
-    <p><img src="/volt-mx-docs/docs/documentation/Foundry/vmfintegrationservice_troubleshooting_guide/Content/Resources/Images/headers.png" alt="" /></p>
+<p>In the <strong>Service Definition</strong> editor -&gt; <strong>Http Headers</strong> tab, under <strong>Id</strong>, declare <em>Content-Type</em> as header type and under <strong>Session</strong>, select <em>session</em> from the drop-down list as shown: <br /></p>
 
-    <p>Write preprocessor for the service and use the following snippet in preprocessor:</p>
-  </li>
-</ol>
+<p><img src="/volt-mx-docs/docs/documentation/Foundry/vmfintegrationservice_troubleshooting_guide/Content/Resources/Images/headers.png" alt="" /></p>
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">Session session = request.getSession();
-       session.setAttribute("Content-Type"," application/json");
-    </code></pre></figure>
+<p>Write preprocessor for the service and use the following snippet in preprocessor:</p>
 
-<ol>
-  <li>
-    <p>If you want to pass header values in “request” parameters,</p>
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">    Session session = request.getSession();
+    session.setAttribute("Content-Type"," application/json");</code></pre></figure>
 
-    <p>In the <strong>Service Definition</strong> editor -&gt; <strong>Http Headers</strong> tab, under <strong>Scope</strong>, select <em>request</em> from the drop-down list, then pass the header value with same key that you defined in Header section with <em>request</em> as scope.</p>
+<p>If you want to pass header values in “request” parameters,</p>
 
-    <p><img src="/volt-mx-docs/docs/documentation/Foundry/vmfintegrationservice_troubleshooting_guide/Content/Resources/Images/headers_request.png" alt="" /></p>
+<p>In the <strong>Service Definition</strong> editor -&gt; <strong>Http Headers</strong> tab, under <strong>Scope</strong>, select <em>request</em> from the drop-down list, then pass the header value with same key that you defined in Header section with <em>request</em> as scope. <br /></p>
 
-    <p>For example,</p>
-  </li>
-</ol>
+<p><img src="/volt-mx-docs/docs/documentation/Foundry/vmfintegrationservice_troubleshooting_guide/Content/Resources/Images/headers_request.png" alt="" /></p>
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">1)Content-Type - request scope in Volt MX Iris Header section  
+<p>For example,</p>
+
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">1)
+    Content-Type - request scope in Volt MX Iris Header section  
     2)Use the below code in JavaScript  
     var inputParamTable={};             
-    inputParamTable["Content-Type"] = "application/json";  
-    
-    </code></pre></figure><hr />
+    inputParamTable["Content-Type"] = "application/json";  </code></pre></figure><hr />
 
-<ol>
-  <li>
-    <p><strong>How can I add Custom Cookies in header?</strong></p>
+<ul>
+  <li><strong>How can I add Custom Cookies in header?</strong></li>
+</ul>
 
-    <p><strong>Solution</strong></p>
-  </li>
+<p><strong>Solution</strong></p>
+
+<ul>
   <li>Create cookie object using HTTP client 4.1 API, org.apache.http.cookie.Cookie</li>
   <li>In pre or post processor, use the following snippet:</li>
-</ol>
+</ul>
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">Session session = request.getSession(false);
-    	    session.setAttribute("KCookie",cookie);
-    </code></pre></figure><hr />
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">    Session session = request.getSession(false);
+    session.setAttribute("KCookie",cookie);</code></pre></figure><hr />
 
-<ol>
-  <li>
-    <p><strong>How can I change the url or user authentication details dynamically?</strong></p>
+<ul>
+  <li><strong>How can I change the url or user authentication details dynamically?</strong></li>
+</ul>
 
-    <p><strong>Solution</strong></p>
+<p><strong>Solution</strong></p>
 
-    <p>Implement URLProvider2 class and write your own logic to override the service definition values.</p>
-  </li>
-</ol><hr />
+<p>Implement URLProvider2 class and write your own logic to override the service definition values.</p><hr />
 
-<ol>
-  <li>
-    <p><strong>If request data is more than 1024 MB, then Linux default values do not allow to forward the request. What do I need to do so that Linux values allow to forward the request?</strong></p>
+<ul>
+  <li><strong>If request data is more than 1024 MB, then Linux default values do not allow to forward the request. What do I need to do so that Linux values allow to forward the request?</strong></li>
+</ul>
 
-    <p><strong>Solution</strong></p>
+<p><strong>Solution</strong></p>
 
-    <p>Login to Linux shell with root privileges.</p>
+<p>Login to Linux shell with root privileges.</p>
 
-    <p>Set the following in Linux Operating System:</p>
+<p>Set the following in Linux Operating System:</p>
 
-    <blockquote>
-      <p><strong><em>Note:</em></strong> Below changes apply on QNBDEV server to resolve the BRE service issue.</p>
-    </blockquote>
+<blockquote>
+  <p><strong><em>Note:</em></strong> Below changes apply on QNBDEV server to resolve the BRE service issue.</p>
+</blockquote>
 
-    <p># vi /etc/sysctl.conf ( Add the below values)<br />
+<p># vi /etc/sysctl.conf ( Add the below values)<br />
 #increase TCP max buffer size settable using setsockopt()net.core.rmem_max = 16777216 net.core.wmem_max = 16777216<br />
-#recommended for hosts with jumbo frames enabled net.ipv4.tcp_mtu_probing=1</p>
-  </li>
-</ol><hr />
+#recommended for hosts with jumbo frames enabled net.ipv4.tcp_mtu_probing=1</p><hr />
 
-<ol>
+<ul>
   <li><strong>If a SOAP response has an embedded xml, then what do I need to do?</strong></li>
-</ol>
+</ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>**Solution**
+<p><strong>Solution</strong></p>
 
-Select the **Escape embedded xml in response** check box in the SOAP service definition editor in Volt MX Iris to enable it.
+<p>Select the <strong>Escape embedded xml in response</strong> check box in the SOAP service definition editor in Volt MX Iris to enable it.</p>
 
-Sample HTTP Response from end server:
-</code></pre></div></div>
+<p>Sample HTTP Response from end server:</p>
+
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">&lt;soapenv:Envelope xmlns:Soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;     
+&lt;soapenv:Body&gt;     
+    &lt;lmsSOAPResponse xmlns="HYPERLINK "http://lms.sbi.com/"http://lms.sbi.com"&gt;
+         &lt;lmsPReturn&gt;&amp;lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&amp;gt;&amp;lt;LMS&amp;gt;&amp;lt;record id="0"&amp;gt;&amp;lt;CO_APP2_GMI&amp;gt;![CDATA[Google check]]&amp;lt;/CO_APP2_GMI&amp;gt;&amp;lt;NMI_ELG_CAL&amp;gt;&amp;lt;/record&amp;gt;&amp;lt;/LMS&amp;gt;&lt;/lmsReturn&gt;
+      &lt;/lmsSOAPResponse&gt;
+   &lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;</code></pre></figure>
+
+<p>The sample embedded xml in SOAP response is converted into valid SOAP response for parsing as shown:</p>
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">&lt;soapenv:Envelope xmlns:Soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
-         
-     &lt;soapenv:Body&gt;  
-       
-     &lt;lmsSOAPResponse xmlns="HYPERLINK "http://lms.sbi.com/"http://lms.sbi.com"&gt;
-             &lt;lmsPReturn&gt;&amp;lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&amp;gt;&amp;lt;LMS&amp;gt;&amp;lt;record id="0"&amp;gt;&amp;lt;CO_APP2_GMI&amp;gt;![CDATA[Google check]]&amp;lt;/CO_APP2_GMI&amp;gt;&amp;lt;NMI_ELG_CAL&amp;gt;&amp;lt;/record&amp;gt;&amp;lt;/LMS&amp;gt;&lt;/lmsReturn&gt;
-          &lt;/lmsSOAPResponse&gt;
-       &lt;/soapenv:Body&gt;
-    &lt;/soapenv:Envelope&gt;
+   &lt;soapenv:Body&gt;
+      &lt;lmsSOAPResponse xmlns="HYPERLINK "http://lms.sbi.com/"http://l   
+ms.sbi.com"&gt;
+         &lt;lmsPReturn&gt;&amp;lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&amp;gt;&amp;lt;LMS&amp;gt;&amp;lt;record id="0"&amp;gt;&amp;lt;CO_APP2_GMI&amp;gt;![CDATA[Google check]]&amp;lt;/CO_APP2_GMI&amp;gt;&amp;lt;NMI_ELG_CAL&amp;gt;&amp;lt;/record&amp;gt;&amp;lt;/LMS&amp;gt;&lt;/lmsReturn&gt;
+      &lt;/lmsSOAPResponse&gt;
+   &lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;</code></pre></figure><hr />
+
+<ul>
+  <li><strong>What should I do when I get a message as “Maximum offline sessions exceeded?”</strong></li>
+</ul>
+
+<p><strong>Solution</strong></p>
+
+<p>This message displays when you have upgraded the Volt MX Iris to a version 2 service pack releases higher than the server. To overcome this message, you need to contact Volt MX Support team. If you are a cloud user, you have to contact the Volt MX Customer Representative and plan for the server upgrade.</p><hr />
+
+<ul>
+  <li><strong>What is the solution when middleware logs are not rolling consistently in windows environment?</strong></li>
+</ul>
+
+<p><strong>Solution</strong></p>
+
+<p>Check whether you have User and Administrator permissions for the folders where middleware logs are logged. If you do not have permissions, get the permissions for the folders.</p><hr />
+
+<ul>
+  <li>**What should I do when I get “null” as the value for $<placeholder> and if the entry is deleted from the request template when I send the request to the endpoint service?**</placeholder></li>
+</ul>
+
+<p><strong>Solution</strong></p>
+
+<p>If the run-time value for $<placeholder> appears as "null", replace $ with $! to get an empty string in place of "null" to avoid the entry getting deleted.</placeholder></p>
+
+<p>While you replace with $! in the request body template, follow these guidelines:</p>
+
+<ul>
+  <li>Use $! in only the request template body. Do not use $! while you define the URL parameters in the endpoint URL.</li>
+  <li>
+    <p>If you use “foreach” in the request template body, you should not mention $! for “foreach” parameters.</p>
+
+    <p>For example: #foreach ($rec in $ZashpayAccount.records)</p>
+  </li>
+</ul><hr />
+
+<ul>
+  <li><strong>What is the process of Secured Socket Layer (SSL) setup in Volt MX Foundry Integration Service?</strong></li>
+</ul>
+
+<p><strong>Solution</strong></p>
+
+<p>The process of SSL setup is as follows:</p>
+
+<p><strong>Pre-requisities</strong>: Volt MX Foundry Integration Service Installation</p>
+
+<p><strong>Steps for setting up SSL:</strong></p>
+
+<ul>
+  <li>Configure https port in catalina.properties for the property https_port in the path <VoltMX server="" installation="" location="">\\tomcat\\instance1\\conf (Ex: D:\\Workspaces\\VoltMXServer\\tomcat\\instance1\\conf,https\_port = 8443 ).</VoltMX></li>
+  <li>Add the <security-constraint> tag to middleware web.xml</security-constraint></li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">    &lt;security-constraint&gt;
+        &lt;web-resource-collection&gt;
+            &lt;web-resource-name&gt;middleware&lt;/web-resource-name&gt;
+            &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+        &lt;/web-resource-collection&gt;
+        &lt;user-data-constraint&gt;
+            &lt;transport-guarantee&gt;CONFIDENTIAL&lt;/transport-guarantee&gt;
+        &lt;/user-data-constraint&gt;
+    &lt;/security-constraint&gt;
     </code></pre></figure>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The sample embedded xml in SOAP response is converted into valid SOAP response for parsing as shown:
-</code></pre></div></div>
+<ul>
+  <li>Copy the below connector configuration for SSL enabling in server.xml:</li>
+</ul>
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">&lt;soapenv:Envelope xmlns:Soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
-       &lt;soapenv:Body&gt;
-          &lt;lmsSOAPResponse xmlns="HYPERLINK "http://lms.sbi.com/"http://l   
-    ms.sbi.com"&gt;
-             &lt;lmsPReturn&gt;&amp;lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&amp;gt;&amp;lt;LMS&amp;gt;&amp;lt;record id="0"&amp;gt;&amp;lt;CO_APP2_GMI&amp;gt;![CDATA[Google check]]&amp;lt;/CO_APP2_GMI&amp;gt;&amp;lt;NMI_ELG_CAL&amp;gt;&amp;lt;/record&amp;gt;&amp;lt;/LMS&amp;gt;&lt;/lmsReturn&gt;
-          &lt;/lmsSOAPResponse&gt;
-       &lt;/soapenv:Body&gt;
-    &lt;/soapenv:Envelope&gt;
-    </code></pre></figure><hr />
-
-<ol>
-  <li><strong>What should I do when I get a message as “Maximum offline sessions exceeded?”</strong></li>
-</ol>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>**Solution**
-
-This message displays when you have upgraded the Volt MX Iris to version 6.0 but the server is still an older version 5.6.2. To overcome this message, you need to contact Volt MX Support team. If you are a cloud user, you have to contact the Volt MX Customer Representative and plan for the server upgrade.
-</code></pre></div></div><hr />
-
-<ol>
-  <li><strong>What is the solution when middleware logs are not rolling consistently in windows environment?</strong></li>
-</ol>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>**Solution**
-
-Check whether you have User and Administrator permissions for the folders where middleware logs are logged. If you do not have permissions, get the permissions for the folders.
-</code></pre></div></div><hr />
-
-<ol>
-  <li>**What should I do when I get “null” as the value for $<placeholder> and if the entry is deleted from the request template when I send the request to the endpoint service?**</placeholder></li>
-</ol>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>**Solution**
-
-If the run-time value for $&lt;placeholder&gt; appears as "null", replace $ with $! to get an empty string in place of "null" to avoid the entry getting deleted.
-
-While you replace with $! in the request body template, follow these guidelines:
-
-1.  Use $! in only the request template body. Do not use $! while you define the URL parameters in the endpoint URL.
-2.  If you use "foreach" in the request template body, you should not mention $! for "foreach" parameters.
-    
-    For example: #foreach ($rec in $ZashpayAccount.records)
-</code></pre></div></div><hr />
-
-<ol>
-  <li><strong>What is the process of Secured Socket Layer (SSL) setup in Volt MX Foundry Integration Service?</strong></li>
-</ol>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>**Solution**
-
-The process of SSL setup is as follows:
-
-**Pre-requisities**: Volt MX Foundry Integration Service Installation
-
-**Steps for setting up SSL:**
-
-1.  Configure https port in catalina.properties for the property https\_port in the path &lt;VoltMX server installation location&gt;\\tomcat\\instance1\\conf (Ex: D:\\Workspaces\\VoltMXServer\\tomcat\\instance1\\conf,https\_port = 8443 ).
-2.  Add the &lt;security-constraint&gt; tag to middleware web.xml
-</code></pre></div></div>
-
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">&lt;security-constraint&gt;
-            &lt;web-resource-collection&gt;
-                &lt;web-resource-name&gt;middleware&lt;/web-resource-name&gt;
-                &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
-            &lt;/web-resource-collection&gt;
-            &lt;user-data-constraint&gt;
-                &lt;transport-guarantee&gt;CONFIDENTIAL&lt;/transport-guarantee&gt;
-            &lt;/user-data-constraint&gt;
-        &lt;/security-constraint&gt;
-        </code></pre></figure>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3.  Copy the below connector configuration for SSL enabling in server.xml:
-</code></pre></div></div>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">&lt;Connector address="${TOMCAT.BIND.IP}" port="${https_port}" 
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">    &lt;Connector address="${TOMCAT.BIND.IP}" port="${https_port}" 
         maxHttpHeaderSize="8192" maxThreads="150" enableLookups="false" 
         acceptCount="25" disableUploadTimeout="true" server="VoltMX" 
         tcpNoDelay="true" compression="on" 
@@ -606,15 +583,16 @@ The process of SSL setup is as follows:
         protocol="org.apache.coyote.http11.Http11NioProtocol"
         clientAuth="false" sslProtocol="TLS" 
         keystoreFile="D:/ssl/tomcat.jks" keystorePass="password" 
-        truststoreFile="D:/ssl/tomcat.jks" truststorePass="password"/&gt;
-        
-        </code></pre></figure>
+        truststoreFile="D:/ssl/tomcat.jks" truststorePass="password"/&gt;</code></pre></figure>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; **_Note:_** D:/ssl/tomcat.jks is the **keystore** and **truststore** location. You can point this to java cacerts also.  
-TOMCAT.BIND.IP is the IP configured in catalina.properties file.  
+<blockquote>
+  <p><strong><em>Note:</em></strong> D:/ssl/tomcat.jks is the <strong>keystore</strong> and <strong>truststore</strong> location. You can point this to java cacerts also.<br />
+TOMCAT.BIND.IP is the IP configured in catalina.properties file.</p>
+</blockquote>
 
-&gt; **_Important:_** The above mentioned steps are for one-way SSL. If you want to enable two-way SSL on Volt MX Foundry Integration Service, please make clientAuth = true.
-</code></pre></div></div><hr />
+<blockquote>
+  <p><strong><em>Important:</em></strong> The above mentioned steps are for one-way SSL. If you want to enable two-way SSL on Volt MX Foundry Integration Service, please make clientAuth = true.</p>
+</blockquote><hr />
       <h2 id="java-messaging-service-jms-issue">
         
         
@@ -624,10 +602,11 @@ TOMCAT.BIND.IP is the IP configured in catalina.properties file.
       </h2>
     
 
-<ol>
+<ul>
   <li><strong>If you are unable to start JBoss 5.1.0 with JDK 1.7.X and in <code class="language-plaintext highlighter-rouge">Server.log</code> and if you come across the below error:</strong></li>
-</ol>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">3:53:10,693 ERROR [AbstractKernelController] Error installing to Instantiated: name=AttachmentStore state=Described
+</ul>
+
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">    3:53:10,693 ERROR [AbstractKernelController] Error installing to Instantiated: name=AttachmentStore state=Described
     java.lang.IllegalArgumentException: Wrong arguments. new for target java.lang.reflect.Constructor expected=[java.net.URI] actual=[java.io.File]
     at org.jboss.reflect.plugins.introspection.ReflectionUtils.handleErrors(ReflectionUtils.java:395)
     at org.jboss.reflect.plugins.introspection.ReflectionUtils.newInstance(ReflectionUtils.java:153)
@@ -637,30 +616,19 @@ TOMCAT.BIND.IP is the IP configured in catalina.properties file.
     at org.jboss.aop.microcontainer.integration.AOPConstructorJoinpoint.createTarget(AOPConstructorJoinpoint.java:282) at org.jboss.aop.microcontainer.integration.AOPConstructorJoinpoint.dispatch(AOPConstructorJoinpoint.java:103)
     at org.jboss.kernel.plugins.dependency.KernelControllerContextAction$JoinpointDispatchWrapper.execute(KernelControllerContextAction.java:241)
     at org.jboss.kernel.plugins.dependency.ExecutionWrapper.execute(ExecutionWrapper.java:47)
-    at org.jboss.kernel.plugins.dependency.KernelControllerContextAction.dispatchExecutionWrapper(KernelControllerContextAction.java:109)
-    </code></pre></figure>
+    at org.jboss.kernel.plugins.dependency.KernelControllerContextAction.dispatchExecutionWrapper(KernelControllerContextAction.java:109)</code></pre></figure>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>**Solution**
+<p><strong>Solution</strong></p>
 
-In `/jboss_jms/server/default/conf/bootstrap/profile.xml` file, change the following:
-</code></pre></div></div>
+<p>In <code class="language-plaintext highlighter-rouge">/jboss_jms/server/default/conf/bootstrap/profile.xml</code> file, change the following:</p>
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">&lt;constructor&gt;&lt;parameter&gt;&lt;inject bean="BootstrapProfileFactory" property="attachmentStoreRoot" /&gt;&lt;/parameter&gt;&lt;/constructor&gt;
-    </code></pre></figure>
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">&lt;constructor&gt;&lt;parameter&gt;&lt;inject bean="BootstrapProfileFactory" property="attachmentStoreRoot" /&gt;&lt;/parameter&gt;&lt;/constructor&gt;</code></pre></figure>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>to:
-</code></pre></div></div>
+<p>to:</p>
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">&lt;constructor&gt;&lt;parameter class="java.io.File"&gt;&lt;inject bean="BootstrapProfileFactory" property="attachmentStoreRoot" /&gt;&lt;/parameter&gt;&lt;/constructor&gt;
-    </code></pre></figure>
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">&lt;constructor&gt;&lt;parameter class="java.io.File"&gt;&lt;inject bean="BootstrapProfileFactory" property="attachmentStoreRoot" /&gt;&lt;/parameter&gt;&lt;/constructor&gt;</code></pre></figure>
 
 <p><a href="../Content/Troubleshooting.html">Open topic with navigation</a></p>
-
-<p>Comments</p>
-
-<p><a href="#">Reply</a></p>
-
-<p>&lt;/div&gt; <input class="comment-submit" type="button" value="Submit" /> &lt;/div&gt; &lt;/div&gt; &lt;/body&gt; &lt;.html&gt;&lt;/x-turndown&gt;</p>
 
         
 
