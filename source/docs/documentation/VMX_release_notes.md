@@ -105,7 +105,12 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 
 #### Foundry Enhancements
 
-The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to 9.0.62 to fix spring4shell vulnerabilities and upgraded log4j version to 2.17.1 to fix security vulnerabilities.
+The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to 9.0.62 to fix spring4shell vulnerabilities and upgraded log4j version to 2.17.1 to fix security vulnerabilities. Also, upgrade Spring from 4.3.22.RELEASE to 5.3.18 to resolve Spring4Shell vulnerability CVE-2022-22965 and upgrade Hibernate from 4.3.11.Final to 5.4.33.Final to resolve CVE-2020-25638.
+
+Following dependencies for Spring and Hibernate are also upgraded.
+- Spring security from 5.3.18 to 5.6.1
+- Spring-integration from 4.3.6.RELEASE to 5.5.7
+- Hibernate validator from 4.3.2.Final to 6.0.22.Final.
 
 ### V9 Servicepack 2 Fixpack 1 Hotfix 8
 
