@@ -249,7 +249,7 @@ FAQs and Troubleshooting
     
     To restart a container you must do the following:
     
-    *   Go to Downloads > `VoltMXFoundrySingleContainer-9.x.x.x-GA/foundry/` folder.
+    *   Go to Downloads (The folder you downloaded and extracted it to) > `VoltMXFoundrySingleContainer-9.x.x.x-GA/foundry/` folder.
     *   Run the command: `docker-compose up -d`.
 *   **How to configure the IP address as the hostname to avoid an unknown host exception?**
     
