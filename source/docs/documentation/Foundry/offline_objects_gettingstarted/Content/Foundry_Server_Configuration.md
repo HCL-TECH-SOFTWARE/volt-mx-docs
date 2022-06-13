@@ -21,7 +21,10 @@ Service Driven Objects
 3.  Under the Integration tab, either create a new Integration service or use an existing one. For more information about creating an integration service, click [here]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/ConfigureIntegrationService.html).
 4.  Under the Objects tab, click **CONFIGURE NEW**. A New Object Service page appears.
 5.  Type a name for your object service and select **Integration & Orchestration Services** from the Endpoint Type list.
+<!---
 6.  Select the Offline enabled check box. Upon selecting this check box, options to set [Conflict Resolution Policy](Conflict Resolution.html) and [Enable Upload Cache](Upload Cache.html) are enabled.
+-->
+6.  Select the Offline enabled check box. Upon selecting this check box, options to set **Conflict Resolution Policy** and **Enable Upload Cache** are enabled.
     
     ![](Resources/Images/SDO_661x410.png)
     
@@ -37,13 +40,11 @@ Service Driven Objects
 10.  The generated data model is created with the relevant fields and relationships.
 11.  Configure the Fields, Relationships, and Change Tracking as required.
     
-    > **_Note:_** Enable primary key for the fields.
+       > **_Note:_** Enable primary key for the fields.
     
 12.  Save the changes and publish the app.
 13.  Now, link your Foundry application to the client application.
-    
-    For more information about how to configure your client application, click [here](#ClientApp).
-    
+
 
 Line-of-Business Adapters
 -------------------------
@@ -72,5 +73,3 @@ Line-of-Business Adapters
         
 9.  Save the changes and publish the app.
 10.  Now, link your Foundry application to the client application.
-    
-    For more information about how to configure your client application, click [here](#ClientApp).

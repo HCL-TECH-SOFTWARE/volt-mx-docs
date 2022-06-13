@@ -8,7 +8,7 @@ Prerequisites
 
 For the Offline Objects feature to work, meet the following prerequisites:
 
-*   Install [VoltMX Iris](http://cc2.hcl.net/ciartifacts/IrisStarter/).
+*   Install **VoltMX Iris** <!---  [VoltMX Iris](http://cc2.hcl.net/ciartifacts/IrisStarter/). -->
 *   For Windows 10 (Store & Kiosk apps) platform, install the following software:
     
     *   Windows 10 Fall Creators Update (10.0 Build 16299) or above
