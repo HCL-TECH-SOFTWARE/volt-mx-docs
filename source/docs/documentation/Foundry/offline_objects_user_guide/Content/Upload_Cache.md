@@ -27,5 +27,5 @@ The cached requests and responses are valid only for a period of 24 hours. This 
 *   **upload.responseWaitTime** is the maximum time that the data source waits to re-check the cache for a response. Configure this parameter based on the approximate time taken by the back-end service to respond.
 
 > **Note:**  
-*   Make sure to enable the upload cache feature while configuring the object service. Otherwise, subsequent change to upload cache property will not reflect on the device, by default. The client app must use the [incrementalSetup](IncrementalSetup.html) or the [reset](Database_Encryption.html#Drop) API in the client's sync environment.  
+*   Make sure to enable the upload cache feature while configuring the object service. Otherwise, subsequent change to upload cache property will not reflect on the device, by default. The client app must use the [incrementalSetup](IncrementalSetup.html) or the [reset](Drop_Reset__and_Rollback.html) API in the client's sync environment.  
 *   Upload Cache can have a performance impact because each request needs to be looked up in the cache.  

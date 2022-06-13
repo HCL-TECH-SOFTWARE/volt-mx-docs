@@ -8,7 +8,7 @@ category: "offline_objects_user_guide"
 
 This document helps to familiarize yourself with Offline Objects and provides procedural information to perform various tasks required to build an offline enabled application.
 
-For information about revision history, click [here](Revision_History.html).
+<!--- For information about revision history, click [here](Revision_History.html). -->
 
 References:
 
