@@ -37,7 +37,7 @@ All Controllers have a member variable named `View` that contains the View for t
 
 Each form, template, or master in an app has an associated Controller and only the individual Controllers can directly access their own Views. However, when needed, Controllers can invoke their parent Controller's methods by calling the `executeOnParent` function. This provides both a clean separation of the layers in the hierarchy of Views and a solid encapsulation of each View's functionality.
 
-> **_Important:_** It is possible to define a master without a contract. The complete View hierarchy of a master without a Controller is accessible from both its own Controller and that of its parents. For more information, see [Masters](App_Customization.html#Masters).
+> **_Important:_**  Masters is a feature that was deprecated in 7.x and removed in 9.x
 
 Controllers can also retrieve information from Models, display it in Views, and enable the user interact with it. Based on the user's input, the Controller can send notifications to the Model, which saves the changes onto the data source.
 
@@ -179,7 +179,6 @@ In addition, Volt MX Reference Architecture lets you define namspaces in your ap
     });
 {% endhighlight %}
 
-> **_Important:_** You can only define namespaces for your masters, not for forms.
 
 If your app needs to load a module in the context of a worker thread, it can do so by adding the worker thread before the file name, as shown in the following code.
 
@@ -205,4 +204,4 @@ Use Volt MX Reference Architecture for Volt MX Wearables Apps
 
 It is important to note that you can create a [VoltMX Wearables]({{ site.baseurl }}/docs/documentation/Iris/iris_wearables_dev_guide/content/homehtml.html) app under Volt MX Reference Architecture . For example, Volt MX Wearables enables you to develop apps for the Apple Watch. When you create an Apple Watch app, you can use Volt MX Iris to create the app's forms. However, Volt MX Iris does not create Controllers for the forms in an Apple Watch app because the Apple Watch app has its own specific architecture.
 
-In addition, you can add Apple App Extensions to your Volt MX Reference Architecture project so that it can use Apple App Extensions on iOS and OS X. Volt MX Iris does not generate any Volt MX Reference Architecture for Apple App Extensions. So adding App Extensions does not result, for example, in additional Controllers in your project.
+In addition, you can add Apple App Extensions to your Volt MX Reference Architecture project so that it can use Apple App Extensions on iOS and MacOS. Volt MX Iris does not generate any Volt MX Reference Architecture for Apple App Extensions. So adding App Extensions does not result, for example, in additional Controllers in your project.
