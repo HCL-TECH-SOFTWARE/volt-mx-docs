@@ -112,6 +112,8 @@ Following dependencies for Spring and Hibernate are also upgraded.
 - Spring-integration from 4.3.6.RELEASE to 5.5.7
 - Hibernate validator from 4.3.2.Final to 6.0.22.Final.
 
+For the relevant Support note, see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476#foundry_9219).
+
 ### V9 Servicepack 2 Fixpack 1 Hotfix 8
 
 #### Foundry Enhancements
