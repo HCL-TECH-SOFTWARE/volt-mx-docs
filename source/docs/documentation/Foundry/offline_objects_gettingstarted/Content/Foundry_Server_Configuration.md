@@ -43,7 +43,71 @@ Service Driven Objects
        > **_Note:_** Enable primary key for the fields.
     
 12.  Save the changes and publish the app.
-13.  Now, link your Foundry application to the client application.
+13.  Now, link your Foundry application to the client application.  
+
+<h3>Defining Mapping for Objects in Parent-Child Relationship</h3>
+<p>When two objects are in parent-child relationship, the mapping for verbs (GET/CREATE/UPDATE) can be defined in two ways depending on how the integration services are defined for these objects:</p>
+<ol>
+<li>Parent and Child objects have their own integration services for the verb mapping (GET/CREATE/UPDATE):</li>
+<ul type="disc">
+<li>
+<p>Verbs for parent and child objects are defined as though they are two independent objects.</p>
+<blockquote><em><b>Note:</b></em> verbs should be mapped individually for both parent and child objects.</blockquote>
+</li>
+<li>For the selected parent object and verb, in Advanced &gt; Related Objects &gt; Include Related Objects section, checkboxes should not be turned on for including child objects.</li>
+<li>
+<p>For example, <b>Member</b> (parent object) has one-to-many relationship with <b>Milestone</b> and <b>Sale</b> (child objects) and they have their own integration services that get/create/update them.</p>
+<p>Individual verb (CREATE/UPDATE) mappings are defined for <b>Milestone</b> and <b>Sale</b> objects.</p>
+<p>Checkboxes should not be turned on for <b>Milestone</b> and <b>Sale</b> objects when defining verb mapping for <b>Member</b> object</p>
+<img src="Resources/Images/Own_IntegrationServices1.png">
+</li>
+</ul>
+<li>Parent and Child objects share the same integration service for the verb mapping (GET/CREATE/UPDATE):</li>
+<ul>
+<li>
+<p>Verbs for both parent and child objects should be mapped in parent object only.</p>
+<blockquote>
+<em><b>Note:</b></em> verbs should not be mapped individually in both parent and child objects.
+</blockquote>
+</li>
+<li>
+<p>For example, <b>Sale</b> (parent object) has one-to-many relationship with <b>SaleItem</b> (child object) and they share the same integration services.</p>
+<p>Individual verb (CREATE/UPDATE) mappings are not defined for <b>SaleItem</b>. Mapping these verbs for <b>Sale</b> will create/update <b>SaleItem</b> as well.</p>
+<br>
+<img src="Resources/Images/Shared_IntegrationServices1.png">
+</li>
+<li>
+<p>For the selected parent object and verb, in Advanced &gt; Related Objects &gt; Include Related Objects section, checkboxes should be turned on for both parent, child objects and for all the applicable methods for which the mapping is defined in this verb.</p>
+<p><img src="Resources/Images/Shared_IntegrationServices2.png"></p>
+</li>
+<li>When the check box for child object is turned on, the child object fields become available in visual mapper for mapping the fields to input/output parameters in request/response mapper.</li>
+</ul>
+</ol>
+<h3>Request and Response Mapping with Parent-Child Objects</h3>
+<b>Request Mapping with Parent-Child Objects</b>
+<ul>
+<li><p>In request mapping, child object fields are mapped to integration service input parameters.</p>
+<img src="Resources/Images/RequestMapping1.png">
+</li>
+<li><blockquote><em><b>Note: </b></em>Visual mapper does not allow to map the child object fields to collection inputs in integration service. This can be achieved by editing the request mapper XML.
+</blockquote>
+<img src="Resources/Images/RequestMapping2.png">
+</li>
+</ul>
+<br>
+<b>Response Mapping with Parent-Child Objects</b>
+<ul>
+<li>In response mapping, child object's integration service response parameters are mapped to child object fields.</li>
+<li><p>For example, <b>Items</b> is a collection in the response of <b>“sale_create”</b> integration service. The fields of <b>Items</b> collection are mapped to fields of the child object <b>SaleItem</b> object.</p>
+<img src="Resources/Images/ResponseMapping1.png">
+</li>
+<li><blockquote>
+<em><b>Note:</b></em> Parent object's integration service response output parameters should not be mapped to child object fields.
+</blockquote></li>
+<li><p>For example, below mapping should not be done.</p>
+<img src="Resources/Images/ResponseMapping2.png">
+</li>
+</ul>
 
 
 Line-of-Business Adapters
