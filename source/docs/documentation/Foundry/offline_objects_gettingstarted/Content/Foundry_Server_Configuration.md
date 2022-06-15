@@ -98,13 +98,14 @@ Service Driven Objects
 <b>Response Mapping with Parent-Child Objects</b>
 <ul>
 <li>In response mapping, child object's integration service response parameters are mapped to child object fields.</li>
-<li><p>For example, <b>Items</b> is a collection in the response of <b>“sale_create”</b> integration service. The fields of <b>Items</b> collection are mapped to fields of the child object <b>SaleItem</b> object.</p>
+<li>
+<p>For example, <b>Items</b> is a collection in the response of <b>“sale_create”</b> integration service. The fields of <b>Items</b> collection are mapped to fields of the child object <b>SaleItem</b> object.</p><br/>
 <img src="Resources/Images/ResponseMapping1.png">
 </li>
 <li><blockquote>
 <em><b>Note:</b></em> Parent object's integration service response output parameters should not be mapped to child object fields.
 </blockquote></li>
-<li><p>For example, below mapping should not be done.</p>
+<p>For example, below mapping should not be done.</p>
 <img src="Resources/Images/ResponseMapping2.png">
 </li>
 </ul>
