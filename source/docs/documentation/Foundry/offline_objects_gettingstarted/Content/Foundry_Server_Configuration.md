@@ -105,9 +105,8 @@ Service Driven Objects
 <li><blockquote>
 <em><b>Note:</b></em> Parent object's integration service response output parameters should not be mapped to child object fields.
 </blockquote></li>
-<p>For example, below mapping should not be done.</p>
+<p>For example, below mapping should not be done.</p><br/>
 <img src="Resources/Images/ResponseMapping2.png">
-</li>
 </ul>
 
 
