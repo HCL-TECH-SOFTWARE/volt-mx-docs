@@ -8,7 +8,7 @@ category: "iris_user_guide"
 Types of Projects
 =================
 
-Starting with Volt MX Iris 7.3, you can choose the type of custom project you want to create when you select the **Project** menu in Volt MX Iris) to start the **New Project** wizard. You can also create a project based on pre-built sample applications and components.
+In Volt MX Iris, you can choose the type of custom project you want to create when you select the **Project** menu in Volt MX Iris) to start the **New Project** wizard. You can also create a project based on pre-built sample applications and components.
 
 In addition to creating a project from sample applications and components available on [HCL Forge](http://community.hclvoltmx.com/marketplace) , you can create the following types of custom projects:
 

@@ -23,8 +23,8 @@ This topic consists of the following sections:
 
 *   [Guidelines to Optimize Progressive Web Applications](#guidelines-to-optimize-progressive-web-applications)
 *   [Progressive Web Apps vs. Native Apps vs. Responsive Websites](#progressive-web-apps-vs-native-apps-vs-responsive-websites)
-*   [Progressive Web Apps - Videos](#progressive-web-apps---videos)
-*   [Progressive Web Apps-Caching](#progressive-web-apps-caching)
+*   [Progressive Web Apps Videos](#progressive-web-apps-videos)
+*   [Progressive Web Apps Caching](#progressive-web-apps-caching)
 *   [Progressive Web Apps - FAQs](#progressive-web-apps---faqs)
 
 A Progressive Web App is always up to date as it uses a Service Worker. A Service Worker is a script which ensures that the features that are not required to appear in the web browser or that don't need any user interaction are linked with the web app. This service worker script runs in the background and helps in synchronizing the data in the background and in displaying push notifications.
@@ -97,7 +97,8 @@ Service Workers
 
 When Progressive Web is enabled, the application is not expected to specifically make any changes for the Service workers to be registered and enabled. The web framework within Iris inherently helps your application create and register a service worker. The service worker is created using the default caching mechanism.
 
-<h2>Progressive Web Apps - Videos</h2>
+Progressive Web Apps Videos
+-----------------------------
 <p></p>
 <p>This section contains a series of videos that explain how to create Progressive Web Apps using Volt MX Iris.</p>
 <h3 data-mc-conditions="">Video One</h3>
@@ -112,10 +113,12 @@ When Progressive Web is enabled, the application is not expected to specifically
 <p>In this third video tutorial of the PWA series, we will take the app that we built in our previous videos and add PWA capabilities.</p>
 <p data-mc-conditions="Default.HTML5 Only"><iframe width="560" height="315" src="https://www.youtube.com/embed/HQeAt508bkU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="1"></iframe>
 </p>
-<h2 data-mc-conditions=""><a name="Progress"></a>Progressive Web Apps-Caching</h2>
+
+Progressive Web Apps Caching
+----------------------------
 <p>Caching or offline storage is a method that an application uses to store assets or data in the internal memory of a device temporarily. In Progressive Web applications, this mechanism helps the user to access assets or data from a URL, even when the internet connection is slow.</p>
 <p></p>
-<p>From Iris V9 onwards, you can include custom caching categories in a Progressive Web application.</p>
+<p>In Iris V 9 SP2, you can include custom caching categories in a Progressive Web application.</p>
 <p></p>
 <p>There are two ways to implement caching in a progressive web app using Volt MX Iris.</p>
 

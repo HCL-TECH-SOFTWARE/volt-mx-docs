@@ -53,7 +53,7 @@ The Data & Services panel consists of the following features:
         
     *   [Configure an Object Data Model by Importing an Excel File](DataPanel.html#configure-an-object-data-model-by-importing-an-excel-file)
         
-    *   [Customize the Generation of Data Model Objects](#CustomizetheGenerationofDataModelObjects)
+    *   [Customize the Generation of Data Model Objects](DataPanel.html#customize-the-generation-of-data-model-objects)
 *   [Set Data for the Segment in a Component](DataPanel.html#set-data-for-the-segment-in-a-component)
 *   [Send Data between Two Forms](DataPanel.html#send-data-between-two-forms)
 *   [Associated Data & Services Panel Features](DataPanel.html#associated-data-amp-services-panel-features)

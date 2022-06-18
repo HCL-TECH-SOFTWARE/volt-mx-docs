@@ -12,7 +12,7 @@ Volt MX  Iris provides a default theme that has a set of skins defined for all t
 
 > **_Note:_** Any changes you make to the skins within a theme are limited only to that theme.
 
-Volt MX  Iris provides a set of APIs that allow you to perform different actions with themes. The theme you create using the Volt MX Iris can only be applied using the `voltmx.theme.setCurrentTheme` API. For more information about the APIs related to Theme, see Volt MX Iris API Reference Guide in [VoltMX Documentation Library]({{ site.baseurl }}/docs/documentation/voltmxonpremises/).
+Volt MX  Iris provides a set of APIs that allow you to perform different actions with themes. The theme you create using the Volt MX Iris can only be applied using the `voltmx.theme.setCurrentTheme` API. For more information about the APIs related to Theme, see Volt MX Iris API Reference Guide in [VoltMX Documentation Library](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/introduction.html).
 
 What are themes and why would I want them?
 ------------------------------------------
@@ -35,13 +35,13 @@ To create a new theme, navigate to Skins tab in the project explorer.
 1.  Navigate to **Skins** tab in **Project Explorer**.
 2.  Click the theme list and select **Create New Theme**.
 
-![](Resources/Images/ThemeList_CRR.png)
+    ![](Resources/Images/ThemeList_CRR.png)
 
 A new theme will be created with a random name. This theme contains all the skins you have created in Volt MX Iris.
 
 ![](Resources/Images/ThemeCreated_CRR.png)
 
-6.  Configure the skins as required and save the theme. The skins modified or created will be available for all the applications in Volt MX Iris.
+Configure the skins as required and save the theme. The skins modified or created will be available for all the applications in Volt MX Iris.
 
 > **_Note:_** The themes you have created in Volt MX Iris appear in the Theme drop-down list and you can easily navigate to other themes using the list.
 
@@ -59,12 +59,12 @@ To rename a theme, do the following: 
 1.  Navigate to **Skins** tab in **Project Explorer**.
 2.  Click the theme list and select **Rename**.
 
-![](Resources/Images/RenameTheme_CRR.png)  
+    ![](Resources/Images/RenameTheme_CRR.png)  
 The Rename Theme dialog appears.
 
-![](Resources/Images/RenameThemeDialog_CRR.png)
+    ![](Resources/Images/RenameThemeDialog_CRR.png)
 
-5.  Type a name for the name and click **OK**. The theme will be renamed.
+3.  Type a name for the name and click **OK**. The theme will be renamed.
 
 Duplicate the Current Theme
 ---------------------------
@@ -74,7 +74,7 @@ To duplicate the current theme, do the following: 
 1.  Navigate to **Skins** tab in **Project Explorer**.
 2.  Click the theme list and select **Duplicate Current Theme**. The current theme will be duplicated and a random name is generated. You can rename the theme to a meaningful name.
 
-![](Resources/Images/DuplicateCurrentTheme_CRR.png)
+  ![](Resources/Images/DuplicateCurrentTheme_CRR.png)
 
 Delete a Theme
 --------------
@@ -84,6 +84,6 @@ To delete an existing theme, do the following: 
 1.  Navigate to **Skins** tab in **Project Explorer**.
 2.  Click the theme list and select **Delete Current Theme**. The current theme will be deleted.
 
-![](Resources/Images/DeleteCurrentThemeOption_CRR.png)
+    ![](Resources/Images/DeleteCurrentThemeOption_CRR.png)
 
 > **_Note:_** You can view the theme drop-down list to confirm if the theme is deleted.

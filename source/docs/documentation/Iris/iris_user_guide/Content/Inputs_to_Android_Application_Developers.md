@@ -14,7 +14,7 @@ Android developers can customize and configure Android build environments using 
 1.  [Access the Generated Android Project for Volt MX Iris Application](#access-the-generated-android-project-for-application)
 2.  [Main Activity and its Life Cycle Methods](#main-activity-and-its-life-cycle-methods)
 3.  [Android Pre-compile and Post-compile Ant Tasks Support](#android-pre-compile-and-post-compile-ant-tasks-support)
-4.  [Support for Integrating Android Third-Party Libraries With Volt MX Iris project](#support-for-integrating-android-third-party-libraries-with-project)
+4.  [Support for Integrating Android Third-Party Libraries With Volt MX Iris project](#support-for-integrating-android-third-party-libraries-with-volt-mx-iris-project)
 5.  [Network Security Configuration](#network-security-configuration)
 
 Access the Generated Android Project for Volt MX Iris Application
@@ -28,11 +28,12 @@ To access the generated Android project, do the following: 
 
 1.  In Volt MX Iris, in the Project Explorer, on the Project tab, click the context menu arrow for your platform of choice (e.g. Mobile), and then click Open Build Folder.
 2.  Launch Volt MX Iris.
-3.  In Volt MX Iris, in the Project Explorer, on the **Project** tab, click the context menu arrow for your platform of choice (e.g. Mobile), and then click **Open Build Folder**. Open the build folder. A folder opens with the directory structure `<WorkSpace>\temp\<AppID>`.
+3.  In Volt MX Iris, in the Project Explorer, on the **Project** tab, click the context menu arrow for your platform of choice (e.g. Mobile), and then click **Open Build Folder**. Open the build folder. A folder opens with the directory structure
+     `<WorkSpace>\temp\<AppID>`.
 
-![](Resources/Images/OpenBuildFolder.png)
+     ![](Resources/Images/OpenBuildFolder.png)
 
-5.  Navigate to the respective folder: 
+4.  Navigate to the respective folder: 
     *   **Mobile**: `<WorkSpace>\temp\<AppID>\build\luaandroid\dist\<AppID>`.
     *   **Tablet**: `<WorkSpace>\temp\<AppID>\build\luatabrcandroid\dist\<AppID>`.
 
@@ -91,13 +92,12 @@ If the library format's .aar or .jar file depends on other libraries, add them t
 
 > **_Important:_** If the included dependencies have an associated order among them, they must be added in same order. For more information on dependency order, see [Dependency order](https://developer.android.com/studio/build/dependencies.html#dependency_order).
 
-For Volt MX Iris version 7.3, use the **build.gradle entries to Suffix** Gradle property to add dependencies. For example, if your .aar file or .jar file depends on _Appcompat_ and _Play Services Analytics_, you can add the following dependency entries.
+For Volt MX Iris, use the **build.gradle entries to Suffix** Gradle property to add dependencies. For example, if your .aar file or .jar file depends on _Appcompat_ and _Play Services Analytics_, you can add the following dependency entries.
 
 ![](Resources/Images/ThirdPartyLibraries.png)
 
 For information on Gradle properties, see [Set Native App Properties](Native_App_Properties.html).
 
-For Volt MX Iris version 7.2 and earlier, add dependencies by adding script code to _androidprecompiletask.xml_. For example, the following concatenates the _Appcompat_ and _Play Services Analytics_ entries to the build.gradle file.
 
 {% highlight voltMx %}< concat destfile = "${app.dir}/build.gradle"
 append = "true" > $ {

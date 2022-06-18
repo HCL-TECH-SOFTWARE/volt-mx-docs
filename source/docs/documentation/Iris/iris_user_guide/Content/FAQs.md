@@ -243,7 +243,7 @@ General FAQs
 
 The _Error while downloading plugins, please retry_ error may occur due to the following reasons:
 
-*   Your system is part of a restricted network and you do not have permissions to access [http://download.voltmx.com](http://download.voltmx.com/).  
+*   Your system is part of a restricted network and you do not have permissions to access [http://download.voltmx.com](https://manage.hclvoltmx.com/oauth/authorize?oauth_token=412391110e2659835ebb58abab221976116b61c5&destination=downloads&).  
     In this case, provide the proxy details in the **Edit** > **Preferences** > **[Proxy](UseProxyServer.html#basic-proxy-configuration)** section of Volt MX Iris to resolve the issue.
 *   The plugins have not been downloaded appropriately, or the download has failed.  
     In this case, delete the **<workpace>/.plugins** directory, and restart the build process.

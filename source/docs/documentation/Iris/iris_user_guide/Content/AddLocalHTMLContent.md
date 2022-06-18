@@ -44,7 +44,7 @@ To add existing HTML content to a project, do the following:
 
 Alternately, you can import HTML content by clicking the context menu arrow of the **Localfiles** folder, clicking **Import File(s)**, navigating to the files and folders you want to import, selecting them, and then clicking **Open**.
 
-You can download the sample HTML and JS files from [here](https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/iris/zip/user_guide/chart2.zip) and see the feature in action.
+
 
 Create New HTML Content for a Project
 -------------------------------------
@@ -89,14 +89,14 @@ To add HTML content to an app screen, do the following:
 6.  On the Library Explorer, on the **Widget** tab, under Advanced Widgets, click and drag a Browser widget onto the container widget.
 7.  In the Properties Editor, click the **Browser** tab, and then click the Master Data **Edit** button. The Master Data dialog box displays.
 
-> **_Note:_** You can also open the Master Data dialog box by double-clicking the browser widget.
+     > **_Note:_** You can also open the Master Data dialog box by double-clicking the browser widget.
 
-9.  Select **Local File**, click **Browse**, navigate to and select the HTML file you want, and then click **OK**. The path to the file is represented by a relative path to the HTML content file you want, where the **Localfile** folder is the root. For example, if the file you want is called Home.html and is located in a folder called Source, the relative path would be as follows:  
+8.  Select **Local File**, click **Browse**, navigate to and select the HTML file you want, and then click **OK**. The path to the file is represented by a relative path to the HTML content file you want, where the **Localfile** folder is the root. For example, if the file you want is called Home.html and is located in a folder called Source, the relative path would be as follows:  
     `\Source\Home.html`
-10.  Click **OK**.  
+9.  Click **OK**.  
     You can view the asset details in the browser widget.
-11.  If you want the content to appear as direct DOM and not be embedded within an iframe, under **Desktop web**, for the **Set as content** option, select **On**. If you leave the option to the default setting **Off** to display the content in the iframe.
-12.  Save the project.
+10.  If you want the content to appear as direct DOM and not be embedded within an iframe, under **Desktop web**, for the **Set as content** option, select **On**. If you leave the option to the default setting **Off** to display the content in the iframe.
+11.  Save the project.
 
 Alternately, you can add HTML content to an app screen by doing the following:
 
@@ -105,15 +105,15 @@ Alternately, you can add HTML content to an app screen by doing the following:
 3.  On the Library Explorer, on the **Widget** tab, under Advanced Widgets, click and drag a Browser widget onto the container widget.
 4.  In the Properties Editor, click the **Browser** tab, and then click the Master Data **Edit** button. The Master Data dialog box displays.
 
-> **_Note:_** You can also open the Master Data dialog box by double-click the browser widget.
+    > **_Note:_** You can also open the Master Data dialog box by double-click the browser widget.
 
-6.  Select **Local File**, click **Browse**, navigate to and select the HTML file you want, and then click **OK**. The path to the file is represented by a relative path to the HTML content file you want, where the **Localfile** folder is the root. For example, if the file you want is called Home.html and is located in a folder called Source, the relative path would be as follows:  
+5.  Select **Local File**, click **Browse**, navigate to and select the HTML file you want, and then click **OK**. The path to the file is represented by a relative path to the HTML content file you want, where the **Localfile** folder is the root. For example, if the file you want is called Home.html and is located in a folder called Source, the relative path would be as follows:  
     `\Source\Home.html`
 
-1.  Click **OK**.  
+6.  Click **OK**.  
     You can view the asset details in the browser widget.
-2.  If you want the content to appear as direct DOM and not be embedded within an iframe, under **Desktop web**, for the **Set as content** option, select **On**. If you leave the option to the default setting **Off** to display the content in the iframe.
-3.  Save the project.
+7.  If you want the content to appear as direct DOM and not be embedded within an iframe, under **Desktop web**, for the **Set as content** option, select **On**. If you leave the option to the default setting **Off** to display the content in the iframe.
+8.  Save the project.
 
 Preview HTML Content
 --------------------
@@ -199,6 +199,6 @@ Here are some of the best practices that might help you in avoiding any issues w
 *   Ensure that your startup form contains only those resources that are required. Avoid loading resources that the form does not need.
 *   In your form, ensure that you are loading the required assets using events (init/preshow/postshow) from a basic utility or a small lazy loading library.
 *   Minify and Gzip all the javascript/stylesheet files.
-*   Wherever possible, in the <SCRIPT>/<LINK> tag, use the attributes async or defer.
-*   Ensure that you provide an appropriate media attribute in the <LINK> tag. For more information, click [here](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-blocking-css).
-*   If the application targets the modern browsers which support the loading = “lazy” attribute, developers can leverage the loading = “lazy” attribute in the <SCRIPT>/<LINK> tab.
+*   Wherever possible, in the < SCRIPT >/< LINK > tag, use the attributes async or defer.
+*   Ensure that you provide an appropriate media attribute in the < LINK > tag. For more information, click [here](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-blocking-css).
+*   If the application targets the modern browsers which support the loading = “lazy” attribute, developers can leverage the loading = “lazy” attribute in the < SCRIPT >/< LINK > tab.

@@ -35,7 +35,7 @@ Android 11 introduces restrictions on how apps query and interact with other app
 
 ### Filter Email Apps
 
-While using the [filterEmailAppsOnly]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/filterEmailAppsOnly) parameter of the [voltmx.phone.openEmail]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.phone_functions.html#phone.op2) API, if you want to view a filtered list of email applications, add the following entry in the **Project Settings** > **Native** > **Android Mobile/Tablet** > **Child tag entries under <manifest> tag** field:
+While using the filterEmailAppsOnly  parameter of the [voltmx.phone.openEmail]({{ site.baseurl }}/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.phone_functions.html#phone.op2) API, if you want to view a filtered list of email applications, add the following entry in the **Project Settings** > **Native** > **Android Mobile/Tablet** > **Child tag entries under <manifest> tag** field:
 
 {% highlight voltMx %}<queries>
 <intent>

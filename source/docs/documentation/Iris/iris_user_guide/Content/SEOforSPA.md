@@ -80,13 +80,20 @@ You specify the location of the sitemap file in the project settings, as describ
 
 The following is an example of a sitemap file.
 
-<!-- {% highlight voltMx %}< urlset xmlns = "http://www.sitemaps.org/schemas/sitemap/0.9" > < url >             < loc > http: //localhost:8888/test/p?title=Home</loc>           <changefreq>daily</changefreq>           <priority>1.0</priority>        </url>                 <url>           <loc>http://localhost:8888/test/p?title=products</loc>           <changefreq>daily</changefreq>           <priority>1.0</priority>        </url>                <url>           <loc>http://localhost:8888/test/p?title=categories</loc>           <changefreq>daily</changefreq>           <priority>1.0</priority>        </url>                 <url>           <loc>http://localhost:8888/test/p?title=list</loc>           <changefreq>daily</changefreq>           <priority>1.0</priority>        </url></urlset>
+<!-- {% highlight voltMx %}< urlset xmlns = "http://www.sitemaps.org/schemas/sitemap/0.9" > < url >< loc > http: //localhost:8888/test/p?title=Home</loc><changefreq>daily</changefreq><priority>1.0</priority></url> <url><loc>http://localhost:8888/test/p?title=products</loc><changefreq>daily</changefreq>        <priority>1.0</priority></url> <url> <loc>http://localhost:8888/test/p?title=categories</loc> <changefreq>daily</changefreq>        <priority>1.0</priority> </url> <url> <loc>http://localhost:8888/test/p?title=list</loc> <changefreq>daily</changefreq>        <priority>1.0</priority></url></urlset>
 
 {% endhighlight %} -->
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">  
-< urlset xmlns = "http://www.sitemaps.org/schemas/sitemap/0.9" > < url >             < loc > http: //localhost:8888/test/p?title=Home< /loc>           < changefreq>daily< /changefreq>           < priority>1.0< /priority>        < /url>                 < url>           < loc>http://localhost:8888/test/p?title=products< /loc>           < changefreq>daily< /changefreq>           < priority>1.0< /priority>        < /url>                < url>           < loc>http://localhost:8888/test/p?title=categories< /loc>           < changefreq>daily< /changefreq>           < priority>1.0< /priority>        < /url>                 < url>           < loc>http://localhost:8888/test/p?title=list< /loc>           < changefreq>daily< /changefreq>           < priority>1.0< /priority>        < /url>< /urlset>
-</code></pre></figure>
+<urlset xmlns = "http://www.sitemaps.org/schemas/sitemap/0.9" ><url>
+<loc>http: //localhost:8888/test/p?title=Home</loc>
+<changefreq>daily< /changefreq>< priority>1.0< /priority></url>          <url><loc>http://localhost:8888/test/p?title=products</loc> 
+<changefreq>daily</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8888/test/p?title=categories</loc> 
+<changefreq>daily</changefreq><priority>1.0</priority></url>
+<url><loc>http://localhost:8888/test/p?title=list</loc>
+<changefreq>daily< /changefreq><priority>1.0</priority></url>
+</urlset></code></pre></figure>
 
 Create SEO Functions
 --------------------
@@ -134,9 +141,9 @@ To call the search initialization as an app service, do the following:
 3.  Scroll down in the Actions pane to the Functions section, and then click **Add Snippet**. A code snippet opens in the Code Editor.
 4.  In the Code Editor, invoke the function that initializes the app's data for searching. Using the earlier example, if the function name is initDeeplinkforSEO, the code snippet would be as follows:
 
-return initDeeplinkforSEO (eventobject);
+     return initDeeplinkforSEO (eventobject);
 
-6.  Save the action sequence by pressing **Ctrl+S**.
+5.  Save the action sequence by pressing **Ctrl+S**.
 
 Set the SEO Data Ready Flag
 ---------------------------
@@ -167,7 +174,7 @@ To enable SEO in Volt MX Iris, do the following:
 *   Using your computer's file explorer, navigate to the location of the executable for PhantomJS (i.e. `phantomjs.exe`), copy the folder path, and then in Volt MX Iris, paste it into the **Phantom path** text box of the **Mobile Web** tab.
 *   In the Meta Tags text box, enter meta tags for the web page. The content entered in this text box is added to the Meta tag under the head section of HTML for the associated Web app during its initial page launch.
 
-![](Resources/Images/EnableSEO_603x369.png)
+    ![](Resources/Images/EnableSEO_603x369.png)
 
-4.  Click **Done**.
-5.  Build your app.
+3.  Click **Done**.
+4.  Build your app.

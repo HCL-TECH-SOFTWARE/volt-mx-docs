@@ -11,7 +11,7 @@ Internationalizing (i18n) Application Content
 
 The process of designing or developing an application in such a way that it supports various languages and regions is referred to as _Internationalization_, also known as _i18n_. In Volt MX Iris, the i18n features make it possible to build your app for various language locales without making changes to the application code or logic. By setting up the locales that you want to support and then adding what amounts to a vocabulary list for each locale, your app can become functional in multiple languages. Each entry that you make is called a key, and defines a given term in each of the locales that you want your application to support.
 
-From V9 SP1 GA, Volt MX IQ supports all locales supported by Google Translate. For the locales that are not directly supported by Iris, Google Translate is used for the translation internally, and the locale is added as a custom locale. Iris supports all the locales that are supported by Google Translate except Hebrew and Serbo-Croatian.
+Volt MX IQ supports all locales supported by Google Translate. For the locales that are not directly supported by Iris, Google Translate is used for the translation internally, and the locale is added as a custom locale. Iris supports all the locales that are supported by Google Translate except Hebrew and Serbo-Croatian.
 
 ![](Resources/Images/i18n_new_632x572.png)
 
@@ -49,17 +49,18 @@ To create locales, do the following:
 4.  Click **Configure Locales**.
 5.  On the Predefined tab, select the checkboxes of the locales that you want your app to support. If you do not see the locale you want, click the Custom tab, and then add your own locale, giving it values for Language, Country, and Locale. For these values, use the patterns found in the predefined locales as examples to guide you.
 
-**_Notes:_***   The Locale field must use the format aa\_AA or aa. For example, jp\_JP, or jp would be a valid locale name.
+
+    >**_Notes:_**   The Locale field must use the format aa\_AA or aa. For example, jp\_JP, or jp would be a valid locale name.
+
 *   The Country field can only contain letters.
 *   The Language field must begin with a letter.
 
-7.  Once you have created your locales, click **OK**. The Configure Internationalization dialog box now has a column for each locale you created. For every locale you configure, a corresponding empty folder is created in your workspace using the following path:  
-    `<workspace>\<application>\resources\common`  
-    You can add images to this folder which you can use in the project for corresponding locale.  
+6.  Once you have created your locales, click **OK**. The Configure Internationalization dialog box now has a column for each locale you created. For every locale you configure, a corresponding empty folder is created in your workspace using the following path:  
+      `<workspace>\<application>\resources\common`  
+       You can add images to this folder which you can use in the project for corresponding locale.  
     
-8.  Set the default locale by selecting the locale you want from the Default Locale drop-down list.  
-    
-9.  Click **Finish**.  
+7.  Set the default locale by selecting the locale you want from the Default Locale drop-down list.  
+8.  Click **Finish**.  
     With your locales chosen, you can now define i18n keys for each locale.
 
 Add i18n Content for Each Locale
@@ -80,6 +81,7 @@ To add i18n keys manually, do the following:
 
 1.  In Volt MX Iris, on the navigate the **Project** > **Settings**
 2.  In Application, select **Enable** under **Internationalization (118N)**.  
+
     A few new options appear.  
     
 3.  Click **Configure**.
@@ -88,9 +90,11 @@ To add i18n keys manually, do the following:
 6.  Add a new row for each key you create by clicking the plus sign button.
 7.  Repeat the steps to create a new row again for each new key you want to create.
 
-![](Resources/Images/i18n_new_560x507.png)
 
-9.  Click **Finish**.
+      ![](Resources/Images/i18n_new_560x507.png)
+
+
+8.  Click **Finish**.
 
 ### Add i18n Programmatically Using APIs
 
@@ -140,10 +144,11 @@ To view a locale using the Preview App, do the following:
 5.  Select the locale you want from the Default Locale drop-down list.
 6.  Follow the instructions provided in the topic, [Preview an App on a Device](PreviewAnAppOnADevice.html#FunctionalPreviewEnterprise.html).
 
+
 Export Internationalization Settings
 ------------------------------------
 
-You can export your i18n settings so that you can import them for use in a different Volt MX Iris project. From V8 SP4 onwards, you can export your i18n settings either as a JSON or as a CSV file format.
+You can export your i18n settings so that you can import them for use in a different Volt MX Iris project. From V9 SP2 onwards, you can export your i18n settings either as a JSON or as a CSV file format.
 
 To export i18n settings, you can perform any of the following actions.
 
@@ -151,9 +156,13 @@ To export i18n settings, you can perform any of the following actions.
 
 1.  In Volt MX Iris, on the **Project** menu in Volt MX Iris) , point to **Export**, and then click **i18n resources**.  
       
+
     ![](Resources/Images/Screenshot__109__548x548.png)
+
+
 2.  Select the file format as either **JSON** or **CSV**. The Save As dialog box appears.
 3.  Navigate to the folder where you want to save the i18n settings, and then click **Save**. Volt MX Iris exports the i18n resources as a zipped file.
+
 
 ### From the Configure Internationalization Window
 
@@ -166,12 +175,15 @@ To export i18n settings, you can perform any of the following actions.
 5.  Select the file format as either **JSON** or **CSV**. The Save As dialog box appears.
     
 6.  Navigate to the folder where you want to save the i18n settings, and then click **Save**. Volt MX Iris exports the i18n resources as a zipped file.  
+
+
     ![](Resources/Images/image__1_.png)
+
 
 Import Internationalization Settings
 ------------------------------------
 
-If you have the exported i18n settings from another Volt MX Iris project, you can import them into the project you're working on. From V8 SP4 onwards, you can import i18n settings either as a JSON or as a CSV file format.
+If you have the exported i18n settings from another Volt MX Iris project, you can import them into the project you're working on. From V9 SP2 onwards, you can import i18n settings either as a JSON or as a CSV file format.
 
 To import i18n settings, do the following:
 

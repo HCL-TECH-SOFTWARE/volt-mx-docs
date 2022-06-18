@@ -91,7 +91,8 @@ For more information about applying skins, see [Understanding Skins and Themes](
 
 FlexContainer properties specify properties that are available on any platform supported by Volt MX Iris, and assign platform-specific properties.
 
-![](Resources/Images/Flex/Flex_Container_PSP_new.png)
+
+  ![](Resources/Images/Flex_Container_PSP_new.png)
 
 #### Clip Bounds
 
@@ -148,23 +149,24 @@ From Volt MX Iris V9 onwards, you can configure the swipe functionality for a Se
 9.  On the **Properties** panel, click the **FlexContainer** tab. The **Swipe Config** section appears.
 10.  Under the **Swipe Config** section, select **On** for **Enable Swipe**. The **Enable Swipe Left** and **Enable Swipe Right** settings appear.
     
-    ![](Resources/Images/SwipeConfig_311x415.png)
-    
-11.  To enable a swipe left or swipe right functionality, select **On** for **Enable Swipe Left** or **Enable Swipe Right** respectively. After the selection, right/left FlexContainers are added under the Swipe Container.
+![](Resources/Images/SwipeConfig_311x415.png)
+ 
+11.  To enable a swipe left or swipe right functionality, select **On** for **Enable Swipe Left** or **Enable Swipe Right** 
+    respectively. After the selection, right/left FlexContainers are added under the Swipe Container.
 12.  Then, select the actions that the rows of a Segment must perform on swiping:
     *   **Swipe to Reveal:** Enables you to display the left or right swipe container when you swipe a row to the left or right. The right FlexContainer is visible when you swipe the row to the left and vice-versa.
     *   **Swipe to Dismiss:** Enables you to perform an action on a row when you swipe the row to the left or right.
 13.  From the Templates Explorer, select the FlexContainer under the **Temp1** template.  
     If you select **Swipe to Dismiss**, the **onSwipeLeft** or **onSwipeRight** actions are available and can be configured under the **Action** tab of the Properties panel.
     
-    > **_Note:_** If you have not used a row template but dragged the widgets directly onto the Segment, the **onSwipeLeft**or **onSwipeRight** properties are available on the **Action** tab of the Segment.
+> **_Note:_** If you have not used a row template but dragged the widgets directly onto the Segment, the **onSwipeLeft**or **onSwipeRight** properties are available on the **Action** tab of the Segment.
     
 14.  Click **Edit** beside the **onSwipeLeft** or **onSwipeRight** action. In the Action Editor, add the actions that the row must perform on swiping to left or right.
 15.  To edit the Swipe Config settings, go to the Properties panel, and then click the **Segment** tab. Under **General** settings, click **Edit** beside the **Swipe Config** option.
 
 The swipe functionality can be configured to a row of a segment through code by using the [widgetSwipeMove]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Segment_Properties.html#widgetSwipeMove) property.
 
-> **_Note:_** On Android and SPA/Desktop Web platforms, if you reset the data of a Segment widget, make sure that you include entries for the widgets that are inside the swipe container. Otherwise, the widgets are not rendered at the run time.
+  > **_Note:_** On Android and SPA/Desktop Web platforms, if you reset the data of a Segment widget, make sure that you include entries for the widgets that are inside the swipe container. Otherwise, the widgets are not rendered at the run time.
 
 ### Actions
 

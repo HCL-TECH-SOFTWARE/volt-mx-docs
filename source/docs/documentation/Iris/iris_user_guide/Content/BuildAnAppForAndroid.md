@@ -17,18 +17,18 @@ To build an app with new or different settings, do the following:
 2.  In the Build Generation dialog box, select the channels and platforms for which you want to build your app. For example, you may want to build a native type of app for Mobile (phone) devices and Tablet devices for the iOS and Android platforms. For more information about native and SPA apps, see [Types of Applications](TypesOfApplications.html).
 3.  Select the build mode.
 
-*   **Debug mode** \- To help you identify and fix errors, Volt MX Iris emits the complete symbolic debug information . To lessen the amount of time necessary to complete the build, the build is not optimized for code execution, so it may tend to execute slower than a build optimized for release. Also, the inclusion of the symbolic debug information causes the final executable to be larger than a release build.
-*   **Release mode** - Volt MX Iris optimizes the build for execution, requiring more time to generate the build. It also does not emit the complete symbolic debug information, making the final executable smaller than a debug build.
-*   **Protected Mode** \- Applications built in Volt MX Iris can use the additional security enhancements by building the application in the _Protected Mode_. Volt MX IrisPlatform code for iOS and Android is equipped with mechanisms that can protect your application by detecting attacks like tampering, swizzling, debugging, jail breaking (iOS), rooting (Android), and information disclosure. Additional security mechanisms are provided through the use of White Box Cryptography to protect application business logic and source code. Application reacts to the attack by exiting upon detecting attacks to prevent further attempts.  
+    *   **Debug mode** \- To help you identify and fix errors, Volt MX Iris emits the complete symbolic debug information . To lessen the amount of time necessary to complete the build, the build is not optimized for code execution, so it may tend to execute slower than a build optimized for release. Also, the inclusion of the symbolic debug information causes the final executable to be larger than a release build.
+    *   **Release mode** - Volt MX Iris optimizes the build for execution, requiring more time to generate the build. It also does not emit the complete symbolic debug information, making the final executable smaller than a debug build.
+    *   **Protected Mode** \- Applications built in Volt MX Iris can use the additional security enhancements by building the application in the _Protected Mode_. Volt MX IrisPlatform code for iOS and Android is equipped with mechanisms that can protect your application by detecting attacks like tampering, swizzling, debugging, jail breaking (iOS), rooting (Android), and information disclosure. Additional security mechanisms are provided through the use of White Box Cryptography to protect application business logic and source code. Application reacts to the attack by exiting upon detecting attacks to prevent further attempts.  
     If you choose to build an application in **Protected mode**, then setting the public and private keys is mandatory. To do so, go to **Project Settings** > **Protected Mode**. For more details on how to generate public and private keys, click [here](ApplicationSecurity.html#rsa-key-pair-generation-encryption-and-usage).
-*   **Test Mode** - To help you identify and fix errors, Volt MX Iris provides the ability to Test the application on the device or an emulator. When you build an app using the Test Mode, you can leverage the Jasmine testing framework of Volt MX Iris to thoroughly test your app and ensure your application is errors free. You can run jasmine test cases, test suites and test plans by building an app using the Test mode.
+    *   **Test Mode** - To help you identify and fix errors, Volt MX Iris provides the ability to Test the application on the device or an emulator. When you build an app using the Test Mode, you can leverage the Jasmine testing framework of Volt MX Iris to thoroughly test your app and ensure your application is errors free. You can run jasmine test cases, test suites and test plans by building an app using the Test mode.
 
-5.  Click **Build**.
+4.  Click **Build**.
 
 Build and Sign an Android Application in Release Mode
 -----------------------------------------------------
 
-Volt MX  Iris V 8.1 introduced a new feature for Android application build where you can generate and sign an Android application in the release mode with a keystore certificate.
+Introduced a new feature for Android application build where you can generate and sign an Android application in the release mode with a keystore certificate.
 
 You must configure the settings for the keystore certificate in the Project Settings section.
 
@@ -52,7 +52,7 @@ To configure the keystore certificate, do the following:
 Android SDK and Gradle Dependencies
 -----------------------------------
 
-From Volt MX Iris V8 release, Iris downloads the required dependencies before the Android build. If you have started the build for Android for the first time, all required SDK, support packages, and dependent libraries download in the background. Your build is blocked till the time the downloads are complete.
+From Volt MX release, Iris downloads the required dependencies before the Android build. If you have started the build for Android for the first time, all required SDK, support packages, and dependent libraries download in the background. Your build is blocked till the time the downloads are complete.
 
 **Known Issues**:
 

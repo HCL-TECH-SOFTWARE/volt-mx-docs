@@ -10,7 +10,7 @@ Debug an Application
 
 Volt MX  Iris provides you with a debugger to detect and diagnose errors in your applications.
 
-From **V8 SP4** onwards, you can debug apps in Volt MX Iris.
+You can debug apps in Volt MX Iris.
 
 The debugger allows you to control the execution of your application by:
 
@@ -38,17 +38,17 @@ You must build and debug an iOS app in the Mac environment.
 To build and launch an iOS application for debugging, do the following:
 
 1.  In Volt MX Iris, build the application in debug mode. To do so:
-    *   In Volt MX Iris Classic, from the **Product** menu , click **Build**. In the Build dialog box, select Debug from the Build Mode drop-down list.
+    *   In Volt MX Iris, from the **Product** menu , click **Build**. In the Build dialog box, select Debug from the Build Mode drop-down list.
     *   In Volt MX Iris, from the **Build** menu, click **Build and Publish Native**. In the Build dialog box, select Debug from the Build Mode drop-down list.
 2.  After the build is complete, extract the built _.kar_ file.
 3.  Open an Xcode project.
 4.  Select the target as **Debug**, choose an emulator, and click **Run**. The emulator launches and the following dialog appears:
     
-    ![](Resources/Images/Debugger_199x143.png)
+     ![](Resources/Images/Debugger_199x143.png)
     
 5.  Select **Start** in the emulator. The waiting for debugger dialog appears.
     
-    ![](Resources/Images/debugger_iphone_200x110.png)
+     ![](Resources/Images/debugger_iphone_200x110.png)
     
 6.  Follow the steps in [Debug JavaScript for iOS in Volt MX Iris](#debug-javascript-for-ios-in).
 
@@ -58,17 +58,17 @@ Build and Launch an Android Application
 To build and launch an Android application for debugging, do the following: 
 
 1.  In Volt MX Iris, build the application in debug mode. To do so:
-    *   For Volt MX Iris Classic, from the **Product** menu , click **Build**. In the Build dialog box, select Debug from the Build Mode drop-down list.
+    *   For Volt MX Iris, from the **Product** menu , click **Build**. In the Build dialog box, select Debug from the Build Mode drop-down list.
     *   In Volt MX Iris, from the **Build** menu, click **Build and Publish Native**. In the Build dialog box, select Debug from the Build Mode drop-down list.
 2.  Launch the application in the emulator or device.  
     The device must connected using a USB connection. If you have specified a port other than 9222 as your Android debugger port in:
-    *   Volt MX Iris Classic: In the **Window** menu, click **Preferences**. From the Preferences dialog box, click **VoltMX Iris** and update the Android Debugger Ports setting to use the same port.
+    *   Volt MX Iris: In the **Window** menu, click **Preferences**. From the Preferences dialog box, click **VoltMX Iris** and update the Android Debugger Ports setting to use the same port.
     *   Volt MX Iris: In the **Edit** menu, click **Preferences**. From the Preferences dialog box, click **Build** and update the **Debugger ports** to use the same port.
 
-![](Resources/Images/LaunchAppAndroid_349x218.png)
+      ![](Resources/Images/LaunchAppAndroid_349x218.png)
 
-4.  Click **Start** in the emulator. A Waiting for the Debugger message appears.
-5.  Follow the steps in [Debug JavaScript for Android in Volt MX Iris](#debug-javascript-for-android-in).
+3.  Click **Start** in the emulator. A Waiting for the Debugger message appears.
+4.  Follow the steps in [Debug JavaScript for Android in Volt MX Iris](#debug-javascript-for-android-in).
 
 Debug JavaScript for iOS in Volt MX Iris
 ----------------------------------------------
@@ -79,7 +79,7 @@ With Volt MX Iris, you can perform JavaScript debugging on connected Apple compu
 
 `brew install ios-webkit-debug-proxy`
 
-> **_Important:_** You can debug JavaScript applications in iOS using the Volt MX Iris preview app on your device or on the simulator. The option to debug applications in iOS is available from **Preview** > **Debug** in Volt MX Iris Classic.
+> **_Important:_** You can debug JavaScript applications in iOS using the Volt MX Iris preview app on your device or on the simulator. The option to debug applications in iOS is available from **Preview** > **Debug** in Volt MX Iris .
 
 > **_Important:_** If you are using a Windows machine to connect to a Mac machine for debugging, for iOS applications Functional Preview debugging, a URL will be generated in the console of Volt MX Iris. Ensure that you copy and paste the generated URL in your Chrome browser to start the debugging process.
 
@@ -88,30 +88,30 @@ With Volt MX Iris, you can perform JavaScript debugging on connected Apple compu
 To debug JavaScript applications for iOS on a simulator or device:
 
 1.  In Volt MX Iris, build your application for the [iOS](#build-and-launch-an-ios-application) platform in debug mode. To do so,  
-    *   In Volt MX Iris Classic, from the **Product** menu , click **Build**. In the Build dialog box, select Debug from the Build Mode drop-down list.
+    *   In Volt MX Iris, from the **Product** menu , click **Build**. In the Build dialog box, select Debug from the Build Mode drop-down list.
     *   In Volt MX Iris, from the **Build** menu, click **Build and Publish Native**. In the Build dialog box, select Debug from the Build Mode drop-down list.
 2.  Launch the application in a simulator on your Mac computer, or on the device.
-3.  *   For Volt MX Iris Classic, from the **Product** menu , click **Debug As**, and then select **Debug iOS application on a simulator** or **Debug iOS application on a device**.
+3.  *   For Volt MX Iris , from the **Product** menu , click **Debug As**, and then select **Debug iOS application on a simulator** or **Debug iOS application on a device**.
     *   For Volt MX Iris, from the **Debug** menu, click **Debug Native App**. From the **Debug Native App** drop-down list, select either **iOS Devices** or **iOS Simulators**.
 4.  Volt MX Iris displays a dialog box confirming whether the app is running in an iOS simulator on a Mac computer. .
 
-![](Resources/Images/JSDebugForiOSConfirmRunningOnSimOnMac.png)
+     ![](Resources/Images/JSDebugForiOSConfirmRunningOnSimOnMac.png)
 
-6.  If you click **Yes** in the dialog box and you're running Volt MX Iris on a Windows computer, Volt MX Iris displays a dialog box prompting you for information so that the debugger can connect to the Mac computer running the iOS simulator. Once you have entered the needed information, click Test Connection. If the connection is configured properly, the Result reads **Test connection successful**. Click **OK**.
+4.  If you click **Yes** in the dialog box and you're running Volt MX Iris on a Windows computer, Volt MX Iris displays a dialog box prompting you for information so that the debugger can connect to the Mac computer running the iOS simulator. Once you have entered the needed information, click Test Connection. If the connection is configured properly, the Result reads **Test connection successful**. Click **OK**.
 
-![](Resources/Images/JSDebugForiOSConfigDebugMac.png)
+     ![](Resources/Images/JSDebugForiOSConfigDebugMac.png)
 
-8.  Volt MX Iris tests to see if it can locate Google Chrome on your computer. If it does not find Chrome in the Program Files folder, a Google Chrome Location field appears in the above dialog box. Click its corresponding **Browse** button to locate the Chrome executable.
+5.  Volt MX Iris tests to see if it can locate Google Chrome on your computer. If it does not find Chrome in the Program Files folder, a Google Chrome Location field appears in the above dialog box. Click its corresponding **Browse** button to locate the Chrome executable.
 
-![](Resources/Images/JSDebugForiOSLocateChrome.png)
+     ![](Resources/Images/JSDebugForiOSLocateChrome.png)
 
-10.  Once the connection to the Mac computer running the simulator is established and Volt MX Iris has verified the location of Google Chrome, Volt MX Iris launches the iOS WebKit Debug Proxy tool. If Volt MX Iris does not find the iOS WebKit Debug Proxy tool, it prompts you to manually run the necessary script file on your Mac computer.
+6.  Once the connection to the Mac computer running the simulator is established and Volt MX Iris has verified the location of Google Chrome, Volt MX Iris launches the iOS WebKit Debug Proxy tool. If Volt MX Iris does not find the iOS WebKit Debug Proxy tool, it prompts you to manually run the necessary script file on your Mac computer.
 
-![](Resources/Images/JSDebugForiOSRunScriptToInstallProxyServer.png)
+     ![](Resources/Images/JSDebugForiOSRunScriptToInstallProxyServer.png)
 
-12.  Upon the successful start of the iOS WebKit Debug Proxy tool, Volt MX Iris opens a new Google Chrome debugger window. JavaScript files that you open appear on the Sources panel of the window, and you can add breakpoints and step through the code using the Debugger panel.
+7.  Upon the successful start of the iOS WebKit Debug Proxy tool, Volt MX Iris opens a new Google Chrome debugger window. JavaScript files that you open appear on the Sources panel of the window, and you can add breakpoints and step through the code using the Debugger panel.
 
-![](Resources/Images/JSDebugForiOSChromeDebuggerWindow_706x274.png)
+     ![](Resources/Images/JSDebugForiOSChromeDebuggerWindow_706x274.png)
 
 You can then use the Google Chrome debugger to debug the application. For information on using the Chrome debugger, see [Get Started with Debugging JavaScript in Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/javascript/) on the Google Chrome website.
 
@@ -225,20 +225,20 @@ Debug JavaScript for Android in Volt MX Iris
 With Volt MX Iris, you can perform JavaScript debugging on connected Android computers and devices. This procedure assumes that you have the Google Chrome web browser installed on your computer.
 
 > **_Note:_** By default, the Android debugger uses port 9222. If there is a conflict, you can change the port that the debugger uses.  
-In Volt MX Iris Classic, in the **Window** menu, click **Preferences**. From the Preferences dialog box, click **VoltMX Iris** and update the **Android Debugger Port** settings.  
+In Volt MX Iris, in the **Window** menu, click **Preferences**. From the Preferences dialog box, click **VoltMX Iris** and update the **Android Debugger Port** settings.  
 In Volt MX Iris in the **Edit** menu, click **Preferences**. From the Preferences dialog box, click **Build** and update the **Debugger ports** settings.
 
 > **_Note:_** You can now use Android FP debugger from the Preview menu. This uses the Volt MX App app to debug the app. By default, the Android FP Debugger Port feature uses 9333. If there is a conflict, you can change the port that the debugger uses.  
-In Volt MX Iris Classic, in the **Window** menu, click **Preferences**. From the Preferences dialog box, click **VoltMX Iris** and update the **Android FP Debugger Port** settings.  
+In Volt MX Iris, in the **Window** menu, click **Preferences**. From the Preferences dialog box, click **VoltMX Iris** and update the **Android FP Debugger Port** settings.  
 In Volt MX Iris in the **Edit** menu, click **Preferences**. From the Preferences dialog box, click **Build** and update the **Debugger ports** settings.
 
 To debug JavaScript applications for Android in Volt MX Iris: 
 
 1.  In Volt MX Iris, build your application for the [Android](#build-and-launch-an-android-application) platform in debug mode. To do so,
-    *   In Volt MX Iris Classic, from the **Product** menu , click **Build**. In the Build dialog box, select Debug from the Build Mode drop-down list.
+    *   In Volt MX Iris, from the **Product** menu , click **Build**. In the Build dialog box, select Debug from the Build Mode drop-down list.
     *   In Volt MX Iris, from the **Build** menu, click **Build and Publish Native**. In the Build dialog box, select Debug from the Build Mode drop-down list.
 2.  Launch the application in an emulator or device. The device must be connected using a USB connection.
-3.  *   For Volt MX Iris Classic, from the **Product** menu, point to **Debug As**, and then select **Debug android application**.
+3.  *   For Volt MX Iris, from the **Product** menu, point to **Debug As**, and then select **Debug android application**.
     *   For Volt MX Iris, from the **Debug** menu, click **Debug Native App**. From the **Debug Native App** drop-down list, select **Android Devices/Simulators**.
 4.  A confirmation dialog box appears asking if the project was built with the Debug option. If you know that it was, click **Yes**. Otherwise, click **No**, which ends the debug process.
     

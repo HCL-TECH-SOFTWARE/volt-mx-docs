@@ -11,7 +11,7 @@ Build and Publish in Volt MX Iris
 Overview
 --------
 
-**Build and Publish**, a feature introduced in Volt MX Iris V8 SP4, is used to build and publish apps in Volt MX Iris . So far, Volt MX Iris could be used to preview your apps, now you have the feature to build the app and generate native app binaries.
+**Build and Publish**,  Is used to build and publish apps in Volt MX Iris . So far, Volt MX Iris could be used to preview your apps, now you have the feature to build the app and generate native app binaries.
 
 Volt MX  Iris supports the following types of cloud builds:
 
@@ -46,8 +46,8 @@ Prerequisites
 
 *   Access to a Volt MX Cloud account. If you do not have a cloud account, you can register for it at [VoltMX Cloud Registration](https://manage.hclvoltmx.com/registration).
 *   Access to a Volt MX Cloud Build Environment. By default, new users get access to the Cloud build environment. Existing users need to request for access.
-*   Volt MX Iris V8 SP4 or later.
-*   For publishing to the Enterprise App Store you must have Volt MX Foundry V8 SP4 or later.
+
+
 *   Configure the various Project Settings.  
     Go to **Project** > **Settings** and configure the build settings for each Native platform. For more information on Project Settings, click [here](Project_Properties_in_VoltMX_Iris.html#project-settings-in).
 *   Platform specific prerequisites:
@@ -123,19 +123,19 @@ To build an application, follow these steps:
 5.  You can choose to change the cloud environment on which your app will be published. To do so click on **Change** beside the **Environment** option. By default, the Environment displayed is the one that is last selected.
 6.  From the **Build Mode** drop-down list, select your desired build mode.
 
-*   **Debug mode** \- To help you identify and fix errors, Volt MX Iris emits the complete symbolic debug information . To lessen the amount of time necessary to complete the build, the build is not optimized for code execution, so it may tend to execute slower than a build optimized for release. Also, the inclusion of the symbolic debug information causes the final executable to be larger than a release build.
-*   **Release mode** - Volt MX Iris optimizes the build for execution, requiring more time to generate the build. It also does not emit the complete symbolic debug information, making the final executable smaller than a debug build.
-*   **Protected Mode** \- Applications built in Volt MX Iris can use the additional security enhancements by building the application in the _Protected Mode_. Volt MX IrisPlatform code for iOS and Android is equipped with mechanisms that can protect your application by detecting attacks like tampering, swizzling, debugging, jail breaking (iOS), rooting (Android), and information disclosure. Additional security mechanisms are provided through the use of White Box Cryptography to protect application business logic and source code. Application reacts to the attack by exiting upon detecting attacks to prevent further attempts.  
+    *   **Debug mode** \- To help you identify and fix errors, Volt MX Iris emits the complete symbolic debug information . To lessen the amount of time necessary to complete the build, the build is not optimized for code execution, so it may tend to execute slower than a build optimized for release. Also, the inclusion of the symbolic debug information causes the final executable to be larger than a release build.
+   *   **Release mode** - Volt MX Iris optimizes the build for execution, requiring more time to generate the build. It also does not emit the complete symbolic debug information, making the final executable smaller than a debug build.
+   *   **Protected Mode** \- Applications built in Volt MX Iris can use the additional security enhancements by building the application in the _Protected Mode_. Volt MX IrisPlatform code for iOS and Android is equipped with mechanisms that can protect your application by detecting attacks like tampering, swizzling, debugging, jail breaking (iOS), rooting (Android), and information disclosure. Additional security mechanisms are provided through the use of White Box Cryptography to protect application business logic and source code. Application reacts to the attack by exiting upon detecting attacks to prevent further attempts.  
     If you choose to build an application in **Protected mode**, then setting the public and private keys is mandatory. To do so, go to **Project Settings** > **Protected Mode**. For more details on how to generate public and private keys, click [here](ApplicationSecurity.html#rsa-key-pair-generation-encryption-and-usage).
-*   **Test Mode** - To help you identify and fix errors, Volt MX Iris provides the ability to Test the application on the device or an emulator. When you build an app using the Test Mode, you can leverage the Jasmine testing framework of Volt MX Iris to thoroughly test your app and ensure your application is errors free. You can run jasmine test cases, test suites and test plans by building an app using the Test mode.
+   *   **Test Mode** - To help you identify and fix errors, Volt MX Iris provides the ability to Test the application on the device or an emulator. When you build an app using the Test Mode, you can leverage the Jasmine testing framework of Volt MX Iris to thoroughly test your app and ensure your application is errors free. You can run jasmine test cases, test suites and test plans by building an app using the Test mode.
 
-8.  Click **Build**. The build generation begins. You can check the status of your build in the Build tab. If there are any errors, they appear in the Build tab. Switch to the Console tab to view a detailed log of the errors.
+7.  Click **Build**. The build generation begins. You can check the status of your build in the Build tab. If there are any errors, they appear in the Build tab. Switch to the Console tab to view a detailed log of the errors.
 
-You can check the status of your build in the Build tab. It undergoes various actions, like Project compression, uploading the compressed project to the cloud, then the actual build begins. This process may take some time.
+     You can check the status of your build in the Build tab. It undergoes various actions, like Project compression, uploading the compressed project to the cloud, then the actual build begins. This process may take some time.
 
-If there are any errors, they appear in the Build tab.
+     If there are any errors, they appear in the Build tab.
 
-11.  From the Build tab, click on **View logs** to open the build logs for the build service on your system.
+8.  From the Build tab, click on **View logs** to open the build logs for the build service on your system.
 
 Post Successful Build
 ---------------------

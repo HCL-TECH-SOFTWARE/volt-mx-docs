@@ -19,7 +19,7 @@ In this document, you will learn about the following topics: 
 1.  [Get the Certificate that you want to Pin](#get-the-certificate-that-you-want-to-pin)
 2.  [Enable Certificate Pinning in iOS](#enable-certificate-pinning-in-ios)
 3.  [Enable Certificate Pinning in Android](#enable-certificate-pinning-in-android)
-4.  [Enable Certificate Pinning in Windows](#enable-certificate-pinning-in-windows)
+
 
 Get the Certificate that you want to Pin
 ----------------------------------------
@@ -32,9 +32,9 @@ Follow these steps to use the VoltMXSSLPinningTool.jar file:
 
 1.  Download the zipped [VoltMXSSLPinningTool.zip](https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/VoltMXSSLPinningTool.zip) file to your local system, and then unzip it.
 
-> **_Note:_** You must run the VoltMXSSLPinningTool.jar file with Java 8 or later.
+    > **_Note:_** You must run the VoltMXSSLPinningTool.jar file with Java 8 or later.
 
-1.  Run the following command to save the entire certificate chain from leaf to root individual cert files in der format:  
+2.  Run the following command to save the entire certificate chain from leaf to root individual cert files in der format:  
     **java -jar VoltMXSSLPinningTool.jar --cert\_format DER --ssl\_host HOST\_NAME --ssl\_port PORT**  
     here, HOST\_NAME: The host name of your server.  
     PORT: HTTPS port on which your server is listening. It defaults to 443, if --ssl\_port option is not specified.
@@ -105,16 +105,4 @@ Follow these steps to enable Certificate Pinning in Android:
 4.  From the **Network Trust Config** (or) **Allow Self Signed/Untrusted Certificates** drop-down list, select **Allow Pinned**.
 5.  Build the application for Android platform.
 
-Enable Certificate Pinning in Windows
--------------------------------------
- 
-Follow these steps to enable Certificate Pinning in Windows:
 
-1.  Navigate to the application resources folder.
-2.  Copy the server certificate to the certs folder as shown. Create the folder hierarchy, if required.
-    *   For mobile - \<workspace>/\<app>/resources/mobile/native/winphone8/assets/certs/
-    *   For tablet - \<workspace>/\<app>/resources/tablet/native/windows8/assets/certs/
-3.  For the mobile channel in Volt MX Studio, right-click your application and go to **Properties > Native > Windows Phone > Common**.
-4.  For tablet channel in Volt MX Studio, right-click your application and go to **Properties > Native > Windows Tablet > Application UI**.
-5.  From the **Network Trust Config** (or) **Allow Self Signed/Untrusted Certificates** drop-down list, select **Allow Bundled**.
-6.  Build the application from Windows platform.

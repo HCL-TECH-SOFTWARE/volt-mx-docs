@@ -5,46 +5,44 @@ category: "iris_user_guide"
                           
 
 
-Migrate a Project from an Earlier Version of Volt MX Studio or Iris
-----------------------------------------------------------------------
+Migrate a Project from an Earlier Version of Visualizer to Iris
+------------------------------------------------------------------
 
-You can import projects into Volt MX Iris that were originally created using Volt MX Studio and earlier versions of Volt MX Iris.
 
-If your project was created using a version of Volt MX Studio older than 6.0, you first must import it into Volt MX Studio 6.0 (with the latest hotfix) and then you can import it into Volt MX Iris.
+Visualizer to Iris migration
+-----------------------------
 
-> **_Important:_***   If your project was originally created using Volt MX Iris 2.5 that was then imported into Volt MX Studio 6.5, and you import it into the latest version of Volt MX Iris, the action sequences are not imported.
-*   If yours is a Volt MX Iris 2.5 or earlier project, importing it updates it so that it can take advantage of all the features of Volt MX Iris, but your earlier version of Volt MX Iris you will no longer be able to open it.
+Users from Visualizer 8.4 classic, Viz 9.1, 9.2 can seamlessly migrate to Volt MX 9.2 and continue developing their custom apps. All of the existing projects from Quantum into Volt MX 9.2 and can build their apps for various custom channels.  
 
-To migrate your application to Volt MX Iris, do the following: 
 
-1.  If your application is built in Volt MX Studio versions prior to 6.0, import your application to Volt MX Studio 6.0 GA version (with the latest hotfix applied).  
-    It is recommended that you take a backup of your project before importing it into Volt MX Iris.
-2.  After importing to Volt MX Studio 6.0 GA, do the following:
-    1.  Right-click on the project and select **Utilities**.
-    2.  From the options available, select **Upgrade the project to the current version**.
-    3.  A confirmation message appears. Click **OK**.
-3.  Once the project is upgrade, export your application.
-4.  Import the application to Volt MX Iris. To do so, on the **File** menu (the **Project** menu in Volt MX Iris), click **Import**.
-5.  Do one of the following:
+**Temenos Viz version**
 
-*   If your project is located in a standard project folder structure (i.e. has not been zipped up as an archive (.zip) file), click the **Browse** button for **Select project root**, navigate to the root folder of the project you want to import, and then click **OK**.
-*   If you are importing an archive (.zip) file, click **Select archive file**, click its **Browse** button, navigate to the root folder of the project you want to import, and then click **OK**.
+The version of 9.2 Temenos Quantum Visualizer should not be greater than the latest fixpack delivered by HCL Volt MX. You can find this code level for 9.2 only here
+[support hcltechsw com](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476)
 
-7.  In the case of a Volt MX Iris project, to convert designer actions to developer actions, select **Copy 'Designer Actions' to 'Developer Actions'**. Be aware that in doing so, any developer actions that the project contains are overwritten.
-8.  In the case of a Volt MX Studio project, to import its services to Volt MX Foundry, select **Import services into Volt MX Foundry**. In Volt MX Iris, all services are managed through Volt MX Foundry. Importing them adds them to the Volt MX Foundry workspace.
 
-> **_Important:_** If the app that you are migrating from Volt MX Studio or an earlier version of Volt MX Iris was configured with custom connectors, you need to migrate them to Volt MX Foundry as a consolidated service definition (CSD). For more information, see [Migrate a Consolidated Service Definition to Volt MX Foundry]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/CSD-LegacySerivce.html) in the _VoltMX Foundry Console User Guide_.
 
-10.  Click **Finish**. Volt MX Iris imports the project.
-    
-    For projects imported from Volt MX Studio, all deprecated widgets found in the upgrade process are deleted from the application.
-    
-    *   Duplicate widgets are renamed automatically.
-    *   Duplicate skins are renamed automatically.
-    *   Reserved keywords are renamed automatically.
-    *   You can find all changes in a log file located in the project root folder. For example, **<ApplicationName>\_upgradeLog.log**. If there were no changes in the application, the log file will not be created.
-    *   You must take necessary action on any of the issues in the warning section in the log file.
-    
-    > **_Important:_***   Ensure that you import the splash image when importing projects from Volt MX Studio. Importing the splash image will fix any inconsistencies related to Flex and VBox properties.
-    *   Refresh of model files will take place if **Import service to Volt MX Foundry** is selected while migrating the app. If **Import service to Volt MX Foundry** is cleared at time of migration and later the import to Volt MX Foundry is performed then the refresh of sync client code will not happen automatically. In this case, right-click **VoltMX Foundry** in Project Explorer and select **Refresh Sync Client Code** option.
-11.  In the Migration Report dialog box, click **Save**.  Locate and open the migration report, open the project in Volt MX Studio and, using the migration report to guide you, fix the issues. After all the issues are fixed, export the application from Volt MX Studio. Then in Volt MX Iris, attempt to import the project again.
+Users using Visualizer need to install HCL Volt MX Iris from the download link [FNO Volt MX Iris Installer](https://id.hcltechsw.com/login/login.htm?fromURI=%2Fapp%2Fhclcust_licensedownloadportal_1%2Fexk8jshjulHatp2g8357%2Fsso%2Fsaml%3FSAMLRequest%3DhZLNbtswEIRfReDdoiT%252FgrANKFaMGkiLwGlz6MUgqFXFlCJZ7ip2376UjLTJxT0RGM5w9xtwjbIzXpQ9tfYIv3pASi6dsSjGiw3rgxVOokZhZQcoSImn8vODKNJM%252BODIKWfYu8jthESEQNpZlhyqDTstZvPpbJktdovV7L7ar%252FbLfZFnZVXe3S2z3fyeJc8QMPo3LMZjCLGHg0WSlqKUFcUkW0zyxdc8E7NMFNPvLKkig7aSxlRL5FFwruu0VYZAtXhOleu49J5HRfVIJ6MVWITana1xsvYukDSnnMPl5%252BoF25fefJLkix%252Br6XzJER0fQFmyczE07HGLWF1NQvUhxHOiOx%252FHaWLJ3gUFY%252FEb1kiDMOA9xob0K%252FxVyrfChmF9B%252BEJwmtc99vx4R9c5EDX0FkGSBsDFwvkPISxAhxpOzDGWe4d0hHQDzux7XrAEGOlYfvfN9b8vX19%252FTdfIu%252BhenQR6fcA1MkbdeRpPiq6njSjVfQWPSjdaKgjalzxvAsgKeJT6IHx7XXox%252F%252B5%252FQM%253D%26RelayState%3D%252Fflexnet%252Foperationsportal%252Flogon.do%253Fauthtype%253Dexternal%26SigAlg%3Dhttp%253A%252F%252Fwww.w3.org%252F2001%252F04%252Fxmldsig-more%2523rsa-sha256%26Signature%3DIP7zwsxW18AMw3uB3FICUVlVh%252BD%252BErbdygr1OsHzRn6UzHG%252BlI0%252FrKLS1FTm%252B3cT%252B9Nx40bI3tuvrYKYEqM5LJb0aXokG%252Fk322k4dv8VI%252BDOAgh2HRkPmadYudAObeuEywnWJZgoQPIAM4z1%252BjcdYIneygsGXAB0Hgz9DIn%252FmVYpPfNHI%252FY%252B8UvrCwzThZbnPmA92%252FyqWPE%252FsjEhm6b06Tj66MikbtLQUxoFjSmkWd%252FNuVJqj3Dtkbbo8PFiaBePHPLpq1zHCjmqduEROXO%252FdVl%252BrZPM514ek3ouPWMKbt97j2lNTFksC7sTCjVnpJdtoRNllseKrjyvMZco2BvSHQ%253D%253D)
+
+
+**Re-import projects**
+
+All the projects from Visualizer to be re-imported into Volt MX Iris. Existing Visualizer projects can be imported into Volt MX 9.2 Iris and user can continue developing/building for different channels.
+
+**Deprecated widgets**
+
+If the projects contain any of the deprecated widgets like HBox/VBox etc, they need to be taken care of manually before importing to Volt MX 9.2 Iris (same behaviour as Quantum 9.2 Visualizer
+[Deprecated Widgets](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_widget_prog_guide/Content/Deprecated.html)
+
+**Revised project configuration files**
+
+When existing projects from Quantum Visualizer to Volt MX are imported to Iris there can be some modifications done (during the import process by Iris) on the project source files(json files in general), which need to be committed to the source control where the project source is maintained.
+
+
+**X-Kony references to X-Voltmx**
+
+If there are any references of X-Kony in any of the modules/actions, they should be manually changed to X-Voltmx. 
+
+**App viewer**
+
+HCL Volt MX released Volt MX specific app viewer to both Android & iOS stores. Customers to visualize their apps during development phase should get "HCL Volt MX Appviewer" from respective stores.

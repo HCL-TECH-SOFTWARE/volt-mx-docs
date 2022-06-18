@@ -11,13 +11,13 @@ Live Preview
 Overview
 --------
 
-Live Preview, a feature introduced in Volt MX Iris V8 SP4, provides a seamless in-app preview experience within Volt MX Iris. Live Preview reduces the build and preview time of an adaptive web app. It enables you to view your app as it appears on various devices without having to view the app on those devices.
+Live Preview, a feature introduced in Volt MX Iris, provides a seamless in-app preview experience within Volt MX Iris. Live Preview reduces the build and preview time of an adaptive web app. It enables you to view your app as it appears on various devices without having to view the app on those devices.
 
 Faster Previews:
 
-Before V8 SP4, if one had to view a web app, they had to build the app, publish the app, get the URL, and open the URL in a web browser to test it.
+If one had to view a web app, they had to build the app, publish the app, get the URL, and open the URL in a web browser to test it.
 
-From V8 SP4, this multistep process has been simplified. Now, when a developer selects the Live Preview option, Iris builds the app. Once the build is complete, a Iris Preview window appears which displays the web app.
+This multistep process has been simplified. Now, when a developer selects the Live Preview option, Iris builds the app. Once the build is complete, a Iris Preview window appears which displays the web app.
 
 Preview a Web app on Different Devices on a Single window:
 
@@ -59,7 +59,7 @@ Preview your Web App with Iris
 Debugging in Iris Live Preview
 ------------------------------------
 
-Volt MX  Iris V8 SP4 comes with an in-app debugger that can detect and diagnose errors in applications. Adaptive Web apps can be debugged within the Iris Preview window using the latest Iris debugger.
+Volt MX  Iris  comes with an in-app debugger that can detect and diagnose errors in applications. Adaptive Web apps can be debugged within the Iris Preview window using the latest Iris debugger.
 
 After launching the Live Preview, a debugger window automatically appears within the Iris Preview window.
 

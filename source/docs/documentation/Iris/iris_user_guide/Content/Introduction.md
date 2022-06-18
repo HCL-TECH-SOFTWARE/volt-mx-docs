@@ -7,10 +7,9 @@ category: "iris_user_guide"
 Volt MX  Iris
 
 Iris User Guide
+----------------
 
 This document explains how to use Volt MX Iris, an integrated, intuitive development environment, to build omni-channel digital applications – all from a single code base. Its unified, shared design environment makes it easy to publish and share native prototypes and app designs with real-time app previews and collaboration. And that's just the beginning. Volt MX Iris serves as the front end of VoltMX's powerful, multi-channel JS API framework that enables designers and developers to securely deploy across a multitude of devices ranging from smartphones, tablets, desktops, and wearables on iOS, Android, and Windows operating systems.
-
-For information on the Revision History of this guide, click [here](RevisionHome.html).
 
 Volt MX  Iris is a powerful yet easy-to-use integrated development environment (IDE) for developing, building, testing, debugging, and deploying omni-channel digital applications (apps) for multiple platforms—all from a single code base. Volt MX Iris empowers you to rapidly develop digital apps while giving you the flexibility to integrate with back-end services as and when you need them. What's more, you can integrate into your app the very best of the native, web and hybrid environments.
 
@@ -22,8 +21,8 @@ Iris and Volt MX Foundry both support each other for the current release version
   
 | Product Version | Compatible With |
 | --- | --- |
-| Volt MX Foundry N (For example V8) | Volt MX Iris N (For example V8) Volt MX Iris N-1 (For example, V8 and 7.3) |
-| Volt MX Iris N (For example V8) | Volt MX Foundry N (For example V8) Volt MX Foundry N-1 (For example, V8 and 7.3) |
+| Volt MX Foundry N (For example V9) | Volt MX Iris N (For example V9) Volt MX Iris N-1 (For example, V9 and V8) |
+| Volt MX Iris N (For example V9) | Volt MX Foundry N (For example V8) Volt MX Foundry N-1 (For example, V9 and V8) |
 
 Volt MX  Flare
 ----------

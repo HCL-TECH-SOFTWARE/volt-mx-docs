@@ -19,7 +19,7 @@ In this document, we will walk you through the hardware and software requirement
 *   [Building apps for Windows platform](#windows)
     
 
-Requirements to Instal Volt MX Iris
+Requirements to Install Volt MX Iris
 -----------------------------------------
 
 The hardware and software requirements to install Volt MX Iris vary based on the operating system.

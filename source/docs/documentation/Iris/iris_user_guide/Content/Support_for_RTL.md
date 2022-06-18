@@ -8,7 +8,7 @@ category: "iris_user_guide"
 Supporting Right-to-Left Languages
 ==================================
 
-Volt MX  Iris V8 SP1 supports Right-to-Left (RTL) languages. When RTL layout is enabled, the user interface is mirrored. The text direction changes from right-to-left.
+Volt MX  Iris supports Right-to-Left (RTL) languages. When RTL layout is enabled, the user interface is mirrored. The text direction changes from right-to-left.
 
 The Internationalization section of Iris has a new i18N property (Project Settings > Application in Volt MX Iris). When a user configures locales, the user can define each one of the following:
 
@@ -41,9 +41,8 @@ Important Considerations
 *   For any widget where content alignment is configured to **Right**, content alignment is configured to **Left**.
 *   For any widget, if the **Padding** has a Left value, the Left value will be replaced into the Right value.
 *   For any widget, if the **Padding** has a Right value, the Right value will be replaced into the Left value.
-*   From V8 SP4 onwards,
-    *   For any Container widgets, if the layout type is set to Flow Horizontal, the layout type changes from **Flow Right** to **Flow Left**.
-    *   For any Container widgets, if the layout type is Free form, the Left layout property is converted to Right and Right layout property is converted to Left. Also, the widget order is reversed.
+*   For any Container widgets, if the layout type is set to Flow Horizontal, the layout type changes from **Flow Right** to **Flow Left**.
+*   For any Container widgets, if the layout type is Free form, the Left layout property is converted to Right and Right layout property is converted to Left. Also, the widget order is reversed.
 
 Supported Widgets
 -----------------

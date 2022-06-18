@@ -48,7 +48,7 @@ FlexScrollContainer properties specify properties that are available on any plat
 
 #### Clip Bounds
 
-For Volt MX Iris Version 7.3 and later, specifies whether child widgets are clipped to the bounds of the FlexScrollContainer.
+For Volt MX Iris Version 9.2 and later, specifies whether child widgets are clipped to the bounds of the FlexScrollContainer.
 
 #### Layout Type
 

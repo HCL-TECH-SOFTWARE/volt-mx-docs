@@ -28,8 +28,6 @@ For a smooth build in Volt MX Iris Classic, you'll want to ensure that the follo
 
 [Build a Universal Application](BuildUniversalApp.html)
 
-[Build a Windows 10 Application](BuildApplicationsForWindows10.html)
-
 [Build an SPA Application](BuildAnSPAApplication.html)
 
 [Build a Native App on a Local machine](LocalBuildStarter.html)

@@ -42,7 +42,7 @@ Adding a Java service involves the following steps:
 
 ### Configure a New Java Connector
 
-This procedure assumes that you have already configured Volt MX Foundry in Volt MX Iris. For more information, see [Connect to the Volt MX Foundry Console](Connect_to_VoltMXFoundry.html).
+This procedure assumes that you have already configured Volt MX Foundry in Volt MX Iris. 
 
 To configure your Java Adapter, follow these steps:
 
@@ -50,20 +50,20 @@ To configure your Java Adapter, follow these steps:
 2.  If you have not done so already, log in to your Volt MX account. To do so, in the top right corner of the Volt MX Iris window, click **Login**. The Volt MX Account sign-in window opens. Enter your email and password credentials for your Volt MX user account, and then click **Sign in**.
 3.  Create a new Volt MX Foundry application or use an existing one. To do so, on the **Data and Services** panel, click the context menu arrow, and then click either **Create New App**, or **Use Existing App**, and then select from the Volt MX Foundry Application dialog box the services application that you want to publish. The Volt MX Foundry Console opens.
 
-![](MFinAppPane.png)
+    ![](MFinAppPane.png)
 
-> **_Note:_** If you want to associate your Volt MX Iris project with a different Volt MX Foundry app, on the **Project** tab of the Project Explorer, click the context menu arrow for **VoltMX Foundry**, and then click **Unlink App**. To link to a different Volt MX Foundryapp, click the context menu arrow for **VoltMX Foundry**, and then click either **Create New App**, or **Use Existing App**.
+    > **_Note:_** If you want to associate your Volt MX Iris project with a different Volt MX Foundry app, on the **Project** tab of the Project Explorer, click the context menu arrow for **VoltMX Foundry**, and then click **Unlink App**. To link to a different Volt MX Foundryapp, click the context menu arrow for **VoltMX Foundry**, and then click either **Create New App**, or **Use Existing App**.
 
 The Volt MX Foundry Console opens. To create a new integration service, on the **Integration** tab, click **CONFIGURE NEW**. The **Service Definition** section appears.
 
-7.  Click the **Integration** tab, click **CONFIGURE NEW** to create an integration service.
-8.  In the **Name** box, type a unique name for the service.
-9.  From the **Service Type** list, select **Java**.  
+4.  Click the **Integration** tab, click **CONFIGURE NEW** to create an integration service.
+5.  In the **Name** box, type a unique name for the service.
+6.  From the **Service Type** list, select **Java**.  
     By default, XML is selected. If you select **Java**, the **Specify Java Connector Jar** section appears.
     
     ![](Resources/Images/JavaService_CRR_553x343.png)
     
-10. From the **Specify Java Connector Jar** list, select a JAR file, or click **Upload New** to select the JARs from your local machine.
+7. From the **Specify Java Connector Jar** list, select a JAR file, or click **Upload New** to select the JARs from your local machine.
     1.  The system adds your main JAR file to the console. The system displays the added JAR file's name under the **Specify Java Connector Jar** field.
         
         ![](JavaService1_CRR.png)
@@ -74,7 +74,7 @@ The Volt MX Foundry Console opens. To create a new integration service, on the *
         
         > **_Important:_** To upload an updated JAR file, upload the new file, which must have the same name as the old JAR file. The new JAR file overrides the existing file.
         
-11. Under the **Specify Dependent Jar** list, select one or more JAR files if the main JAR depends only on external JARs. You can also click **Upload New** to select the JARs from your local machine. The system adds JAR files to the console.
+8. Under the **Specify Dependent Jar** list, select one or more JAR files if the main JAR depends only on external JARs. You can also click **Upload New** to select the JARs from your local machine. The system adds JAR files to the console.
     
     ![](JavaService2_CRR_335x169.png)
     
@@ -84,7 +84,7 @@ The Volt MX Foundry Console opens. To create a new integration service, on the *
     
     > **_Important:_** To update a JAR file, you must upload the JAR file with name matching your previous JAR file. The existing JAR file gets replaced by the new JAR file.
     
-12. Click the **Advanced** tab to specify dependent JAR and API throttling. All configurable parameters in the Advanced section are optional.
+9. Click the **Advanced** tab to specify dependent JAR and API throttling. All configurable parameters in the Advanced section are optional.
     
     *   **To specify dependent JAR, follow these steps**:
         
@@ -103,11 +103,11 @@ The Volt MX Foundry Console opens. To create a new integration service, on the *
             To override throttling, refer to [Override API Throttling Configuration]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/API_Throttling_Override.html).
             
     
-13. Click **SAVE** to save your service definition. The system displays the success message: Service Saved Successfully.  
+10. Click **SAVE** to save your service definition. The system displays the success message: Service Saved Successfully.  
     The **Operations List** tab appears only after the **Service Definition** is saved. The **ADD OPERATION** button in the Service Definition page is active only after you click the **SAVE** button.
-14. Click **ADD OPERATION**. The Operations List tab appears.  
+11. Click **ADD OPERATION**. The Operations List tab appears.  
     Based on your JAR files, the system loads all Java classes into the console.
-15. In the **Operation List** section, follow these steps to configure operations for your Java service:
+12. In the **Operation List** section, follow these steps to configure operations for your Java service:
     
     In the **Operation** name text box, enter a name. For example, Java\_operation.
     
@@ -115,7 +115,7 @@ The Volt MX Foundry Console opens. To create a new integration service, on the *
     
     Click **ADD OPERATION** to display the Operation Modal tab.
     
-16. In the **Operation Modal** tab, follow these steps:
+13. In the **Operation Modal** tab, follow these steps:
     
     The following dialog contains the request input, response output, and advanced tabs. The input values are data types, scope, and format types. By default, the system will display the **Request Input** tab.  
     
@@ -139,7 +139,7 @@ The Volt MX Foundry Console opens. To create a new integration service, on the *
         
         **Public** – indicates that this operation require no special security.
         
-17. In the **Request Input** > **Body** tab, to configure parameters in the clients body, provide the following details:  
+14. In the **Request Input** > **Body** tab, to configure parameters in the clients body, provide the following details:  
     
     To forward the body of the client's request to backend as it is, select the **Enable pass-through input body** check box. For more details on API Proxy service, refer to [](#APIProxyCheckBox)[How to Enable Pass-through Proxy for Operations]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Services.html#APIProxyCheckBox).
     
@@ -168,7 +168,7 @@ The Volt MX Foundry Console opens. To create a new integration service, on the *
         *   **Collection** - A group of data or data set.
     6.  Select the **Encode** check box to enable an input parameter to be encoded. For example, the name New York Times would be encoded as _New_York_Times_  when the encoding is set to True. The encoding must also adhere to the HTML URL encoding standards.
     7.  In the **Description**, provide the description.
-18. Click the **Response Output** tab, and enter the values for required fields such as name, scope, data type, collection ID, record ID, format and format value.
+15. Click the **Response Output** tab, and enter the values for required fields such as name, scope, data type, collection ID, record ID, format and format value.
     
     > **_Note:_** If you define parameters inside a record as the session, the session scope will not get reflected for the parameters.
     
@@ -215,7 +215,7 @@ The Volt MX Foundry Console opens. To create a new integration service, on the *
         *   **Currency** - For currency format, refer to [java.text.DecimalFormat](http://docs.oracle.com/javase/7/docs/api/java/text/DecimalFormat.html).
         *   **Number** - For number format, refer to [java.text.DecimalFormat](http://docs.oracle.com/javase/7/docs/api/java/text/DecimalFormat.html).
         *   **Date** - For date format, refer to [java.text.SimpleDateFormat](http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html).
-19. Click the **Advanced** tab to configure the following options for request or response operations.  
+16. Click the **Advanced** tab to configure the following options for request or response operations.  
     
     > **_Note:_** All options in the **Advanced** section for operations are optional.
     
@@ -238,20 +238,20 @@ The Volt MX Foundry Console opens. To create a new integration service, on the *
         
     
     *   [Front End API]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/FrontEndAPI.html) allows you map your endpoint or back-end URL of an operation to a front-end URL.
-20. Click **Save Operation** to save the operation. The system adds your operation under the **Configured Operations** section. The system also adds your new Java service to the **Integration** page.
+17. Click **Save Operation** to save the operation. The system adds your operation under the **Configured Operations** section. The system also adds your new Java service to the **Integration** page.
     
     If you click **Cancel**, the **Edit Service Parameters** window will close without saving any information.
     
     > **_Note:_** To add more operations for your Java service, repeat steps for [Configure New](#CONFIGURE_NEW).
     
-21. From the **Operation** section, click **Done** to complete the configuration and go to the **Integration** page.
-22. To close the Volt MX Foundry Console and return to the panes, views, and tabs of the Volt MX Iris integrated development environment (IDE), from the Quick Launch Bar along the upper left edge of Volt MX Iris, click the Workspace icon ![](Resources/Images/S7Persp_QkLaunch01b_20x19.png). Since you are still logged in to your Volt MX account, Volt MX Iris continues to have access to your Volt MX Foundry services.
+18. From the **Operation** section, click **Done** to complete the configuration and go to the **Integration** page.
+19. To close the Volt MX Foundry Console and return to the panes, views, and tabs of the Volt MX Iris integrated development environment (IDE), from the Quick Launch Bar along the upper left edge of Volt MX Iris, click the Workspace icon ![](Resources/Images/S7Persp_QkLaunch01b_20x19.png). Since you are still logged in to your Volt MX account, Volt MX Iris continues to have access to your Volt MX Foundry services.
 
 ### How to Edit an Existing Java Connector Integration Service
 
 If you want to edit an existing Java service, you can edit details such as service name, JAR files, operation modal details. While editing a Java service, you can change the Java service type. A Java service must be available in the Integration home screen.
 
-This procedure assumes that you have already configured Volt MX Foundry in Volt MX Iris. For more information, see [Connect to the Volt MX Foundry Console](Connect to Volt MX Foundry.html).
+This procedure assumes that you have already configured Volt MX Foundry in Volt MX Iris. 
 
 To edit an existing Java service, follow these steps:
 

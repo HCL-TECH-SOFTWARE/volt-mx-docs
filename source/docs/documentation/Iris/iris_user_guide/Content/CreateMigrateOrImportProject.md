@@ -8,7 +8,7 @@ category: "iris_user_guide"
 Create, Migrate, or Import a Project
 ====================================
 
-Whether it's an application for phones, tablets, wearables, or desktops, the process of creating an application in Volt MX Iris involves creating a _project_. You can create a project from sample applications and components, or from scratch. You can also import an existing project into your project, or migrate a project that was created in an earlier version of Volt MX Iris, or in Volt MX Studio.
+Whether it's an application for phones, tablets, wearables, or desktops, the process of creating an application in Volt MX Iris involves creating a _project_. You can create a project from sample applications and components, or from scratch. You can also import an existing project into your project, or migrate a project that was created in an earlier version of Volt MX Iris.
 
 The following topics describe how to create, import, or migrate a project:
 

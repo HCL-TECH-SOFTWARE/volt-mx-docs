@@ -57,7 +57,7 @@ Ensure that the same Android SDK version is used in Iris.
 
 Ensure that your environment variables are set correctly from [here](SUG_Android.html#manually-set-the-android-environment-variables).
 
-Now your Android device is successfully connected to your Windows 10 PC and can be used to debug your application in Volt MX Iris Classic.
+Now your Android device is successfully connected to your Windows 10 PC and can be used to debug your application in Volt MX Iris.
 
 > **_Important:_** Before you do start debugging your Android app on the Windows 10 machine, ensure that Google Chrome is version 62 or earlier. Debugging will not work with version 63 and later.
 

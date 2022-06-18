@@ -20,7 +20,7 @@ This topic covers the following topics:
 
 [About App Transport Security (ATS)](#about-app-transport-security-ats)
 
-[Automatically Modify info.plist with Custom Key Value Pairs](#automatically-modify-info-plist-with-custom-key-value-pairs)
+[Automatically Modify info.plist with Custom Key Value Pairs](#automatically-modify-infoplist-with-custom-key-value-pairs)
 
 [Using Application Reference Counting](#using-application-reference-counting)
 
@@ -74,10 +74,14 @@ When you use FFIs with Volt MX Iris, if the FFI has dependencies on any system f
 1.  Navigate to the common folder in your Volt MX Iris project. For example, <Workspace Name>/<Project Name>/resources/common
 2.  In the folder, create a JSON file and name it **voltmx\_frameworks.json**.
 3.  Open the JSON file in any text editor.
-4.  Add a JSON object with the key as systemframeworks and value as an array containing all the system frameworks that are dependencies for FFI’s. For example,{% highlight voltMx %}{  
-    "systemframeworks" : ["AVFoundation", ”Security”, ”LocalAuthentication”]  
-    }
-    {% endhighlight %}
+4.  Add a JSON object with the key as systemframeworks and value as an array containing all the system frameworks that are dependencies for FFI’s. For example 
+
+    ```
+     {  
+     "systemframeworks" : ["AVFoundation", ”Security”, ”LocalAuthentication”]  
+     }
+     
+     ```
 5.  In Volt MX Iris, build the app.  
     The JSON file is incorporated into the KAR file. When the KAR file is extracted, system frameworks provided in the JSON is added to the XCode project.
 
@@ -89,13 +93,13 @@ To build an app with new or different settings, do the following:
 2.  In the Build Generation dialog box, select the channels and platforms for which you want to build your app. For example, you may want to build a native type of app for Mobile (phone) devices and Tablet devices for the iOS and Android platforms. For more information about native and SPA apps, see [Types of Applications](TypesOfApplications.html).
 3.  Select the build mode.
 
-*   **Debug mode** \- To help you identify and fix errors, Volt MX Iris emits the complete symbolic debug information . To lessen the amount of time necessary to complete the build, the build is not optimized for code execution, so it may tend to execute slower than a build optimized for release. Also, the inclusion of the symbolic debug information causes the final executable to be larger than a release build.
-*   **Release mode** - Volt MX Iris optimizes the build for execution, requiring more time to generate the build. It also does not emit the complete symbolic debug information, making the final executable smaller than a debug build.
-*   **Protected Mode** \- Applications built in Volt MX Iris can use the additional security enhancements by building the application in the _Protected Mode_. Volt MX IrisPlatform code for iOS and Android is equipped with mechanisms that can protect your application by detecting attacks like tampering, swizzling, debugging, jail breaking (iOS), rooting (Android), and information disclosure. Additional security mechanisms are provided through the use of White Box Cryptography to protect application business logic and source code. Application reacts to the attack by exiting upon detecting attacks to prevent further attempts.  
+    *   **Debug mode** \- To help you identify and fix errors, Volt MX Iris emits the complete symbolic debug information . To lessen the amount of time necessary to complete the build, the build is not optimized for code execution, so it may tend to execute slower than a build optimized for release. Also, the inclusion of the symbolic debug information causes the final executable to be larger than a release build.
+    *   **Release mode** - Volt MX Iris optimizes the build for execution, requiring more time to generate the build. It also does not emit the complete symbolic debug information, making the final executable smaller than a debug build.
+    *   **Protected Mode** \- Applications built in Volt MX Iris can use the additional security enhancements by building the application in the _Protected Mode_. Volt MX IrisPlatform code for iOS and Android is equipped with mechanisms that can protect your application by detecting attacks like tampering, swizzling, debugging, jail breaking (iOS), rooting (Android), and information disclosure. Additional security mechanisms are provided through the use of White Box Cryptography to protect application business logic and source code. Application reacts to the attack by exiting upon detecting attacks to prevent further attempts.  
     If you choose to build an application in **Protected mode**, then setting the public and private keys is mandatory. To do so, go to **Project Settings** > **Protected Mode**. For more details on how to generate public and private keys, click [here](ApplicationSecurity.html#rsa-key-pair-generation-encryption-and-usage).
-*   **Test Mode** - To help you identify and fix errors, Volt MX Iris provides the ability to Test the application on the device or an emulator. When you build an app using the Test Mode, you can leverage the Jasmine testing framework of Volt MX Iris to thoroughly test your app and ensure your application is errors free. You can run jasmine test cases, test suites and test plans by building an app using the Test mode.
+   *   **Test Mode** - To help you identify and fix errors, Volt MX Iris provides the ability to Test the application on the device or an emulator. When you build an app using the Test Mode, you can leverage the Jasmine testing framework of Volt MX Iris to thoroughly test your app and ensure your application is errors free. You can run jasmine test cases, test suites and test plans by building an app using the Test mode.
 
-5.  Click **Build**.
+4.  Click **Build**.
 
 > **_Important:_** If you want to build your iOS app with multiple workspaces, you must select the **Support Multiple iOS Workspaces** from the Build section (**Edit** > **Preferences** > **Build**). If this option is not checked, the workspace is replaced for every build. When this option is checked, a separate workspace is created for each application. It will reduce the time and effort required for building applications every time you switch from one application to another.  
   
@@ -113,5 +117,6 @@ To exclude the app from the backup, do the following:
 4.  Set the type of the key to **Boolean**  
     The default value for this property is No.
 5.  Configure the value to **Yes**.  
-    The application will be excluded from iCloud backups.  
+    The application will be excluded from iCloud backups.
+      
     ![](Resources/Images/excludeFileBackupiCloud.png)

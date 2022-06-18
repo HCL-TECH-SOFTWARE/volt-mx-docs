@@ -8,7 +8,7 @@ category: "iris_user_guide"
 Components Overview
 ===================
 
-Components provide a powerful way to create complex applications quickly. You can download a rich assortment of components from HCL Forge , or create your own reusable components, and then drag and drop the components into your application to create sophisticated, full-featured applications without writing all of the code. From V8 SP4 Fixpack 20, you can also [leverage several Data & Services panel features for components](C_CreatingComponent.html#data-amp-services-panel-support-for-components).
+Components provide a powerful way to create complex applications quickly. You can download a rich assortment of components from HCL Forge , or create your own reusable components, and then drag and drop the components into your application to create sophisticated, full-featured applications without writing all of the code.you can also [leverage several Data & Services panel features for components](C_CreatingComponent.html#data-amp-services-panel-support-for-components).
 
 For example, suppose you want to create a digital application that lets users log in to their account and display an account overview. You can build a log-in screen by downloading a log-in component from HCL Forge , and then dragging and dropping it onto a form.
 

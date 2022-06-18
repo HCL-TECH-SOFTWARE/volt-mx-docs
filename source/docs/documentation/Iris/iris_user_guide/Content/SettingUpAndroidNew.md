@@ -34,9 +34,9 @@ This section explains how to set up new Android Environment on Windows.
     ![](Resources/Images/setupAndrNew6.png)
 17.  Once the download completes, finish the setup with defaults.
 18.  Launch the emulator from the **AVD window**.
-19.  Open Volt MX Iris V8.
-20.  Navigate to **Window** > **Preferences**.
-21.  Select **VoltMXIris** > **Build**.
+19.  Open Volt MX Iris.
+20.  Navigate to **Edit** > **Preferences**.
+21.  Select > **Build**.
 22.  Set the Android Home field to the same location as the SDK install location of Android Studio and then click **Apply**.
     
     If you have trouble finding this, in Android studio open the SDK Manager and look at the Android SDK Location.
