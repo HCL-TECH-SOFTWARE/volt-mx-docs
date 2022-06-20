@@ -46,7 +46,8 @@ The installation of the Volt MX Foundry software supports the following versions
 
 #### **Tomcat**
 
-*   Tomcat 9.2.1.9
+*   Tomcat 9.0.62
+    *   Tomcat 9.0.45 prior to HCL Volt MX version 9.2.1.9
 
 
 #### JBoss Enterprise Application Platform (EAP)
