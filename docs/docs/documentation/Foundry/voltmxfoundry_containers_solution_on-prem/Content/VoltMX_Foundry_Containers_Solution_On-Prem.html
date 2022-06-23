@@ -240,14 +240,14 @@
 
 <p>The Volt MX Foundry Container Cluster Solution provides a flexible and scalable solution for deploying Volt MX Foundry on your on-premises setup, including scaling the installation to multi-node systems and robust logging capabilities.</p>
 
-<p>Volt MX  Foundry Container Cluster Solution On-Premises setup occurs with minimal manual intervention and leverages the following technologies:</p>
+<p>Volt MX Foundry Container Cluster Solution On-Premises setup occurs with minimal manual intervention and leverages the following technologies:</p>
 
 <ul>
   <li><strong>Docker</strong> - To package different components as portable container images (with all the required binaries and libs).</li>
   <li><strong>Kubernetes</strong> - To orchestrate and maintain all the running containers. It will also have features like auto-scaling, secrets, deployment upgrades, and rollbacks.</li>
 </ul>
 
-<p>You should use this installation if you plan to use docker to setup your on-premise production grade installation of Volt MX Foundry. If you want to setup a developer instance, please refer to the install instructions at <a href="/volt-mx-docs/docs/documentation/Foundry/voltmxfoundry_single_container/Content/VoltMX_Foundry_Single_Container_Solution_On-Prem_.html">Single container setup (On-Prem)</a>.</p>
+<p>You should use this installation if you plan to use docker to setup your on-premise production grade installation of Volt MX Foundry. If you want to setup a developer instance, please refer to the install instructions at <a href="/volt-mx-docs/docs/documentation/Foundry/voltmxfoundry*single_container/Content/VoltMX_Foundry_Single_Container_Solution_On-Prem*.html">Single container setup (On-Prem)</a>.</p>
       <h2 id="salient-features">
         
         
@@ -303,7 +303,7 @@
       </h3>
     
 
-<p>Volt MX  Foundry Container Cluster Solution supports only the Tomcat Application server. The Tomcat server comes bundled along with the installer.</p>
+<p>Volt MX Foundry Container Cluster Solution supports only the Tomcat Application server. The Tomcat server comes bundled along with the installer.</p>
 
 <p>All the Docker images built for Volt MX Foundry are built using the Tomcat version 9.0.22-jdk11 as the base image.</p>
       <h3 id="supported-databases">
@@ -315,7 +315,7 @@
       </h3>
     
 
-<p>Volt MX  Foundry Container Cluster Solution supports the following database servers:</p>
+<p>Volt MX Foundry Container Cluster Solution supports the following database servers:</p>
 
 <table>
   <thead>
@@ -352,7 +352,7 @@
       </h3>
     
 
-<p>Volt MX  Foundry Container Cluster Solution supports the following Kubernetes package versions:</p>
+<p>Volt MX Foundry Container Cluster Solution supports the following Kubernetes package versions:</p>
 
 <table>
   <thead>
@@ -479,8 +479,8 @@
 
 <p>Run the following commands to open the ports:</p>
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">sudo firewall-cmd --permanent --add-port=30000-32767/tcp --zone=public   
-sudo firewall-cmd --permanent --add-port=6443-10252/tcp --zone=public   
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">sudo firewall-cmd --permanent --add-port=30000-32767/tcp --zone=public  
+sudo firewall-cmd --permanent --add-port=6443-10252/tcp --zone=public  
 sudo firewall-cmd --permanent --add-port=2379-2380/tcp --zone=public</code></pre></figure>
 
 <p>The following ports must be opened explicitly when a firewall is enabled on all nodes. These are required by Weave CNI to avoid hostname issues.</p>
@@ -567,7 +567,7 @@ sudo firewall-cmd --permanent --add-port=80/tcp --zone=public</code></pre></figu
         </code></pre></figure>
 <p><br />
     2.  Run the following command to update fstab so that the swap remains disabled even after a reboot.</p>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">sudo sed -i '/ swap / s/^\(.\*\)$/#\1/g' /etc/fstab
         </code></pre></figure>
 <p><br />
     3.  Restart the node after the swap is disabled.</p>
@@ -610,15 +610,14 @@ sudo firewall-cmd --permanent --add-port=80/tcp --zone=public</code></pre></figu
   <li>Foundry Console (Contains <code class="language-plaintext highlighter-rouge">mfconsole.war</code>,   <code class="language-plaintext highlighter-rouge">workspace.war</code>,  and  <code class="language-plaintext highlighter-rouge">accounts.war</code>)</li>
   <li>API Developer Portal (Contains <code class="language-plaintext highlighter-rouge">apiportal.war</code>)</li>
   <li>Identity (Contains <code class="language-plaintext highlighter-rouge">authService.war</code>)</li>
-  <li>Integration (Contains <code class="language-plaintext highlighter-rouge">admin.war</code>, <code class="language-plaintext highlighter-rouge"> services.war</code>,  <code class="language-plaintext highlighter-rouge"> middleware.war</code>, and <code class="language-plaintext highlighter-rouge">apps.war</code>)</li>
+  <li>Integration (Contains <code class="language-plaintext highlighter-rouge">admin.war</code>, ` services.war<code class="language-plaintext highlighter-rouge">,  </code> middleware.war<code class="language-plaintext highlighter-rouge">, and </code>apps.war`)</li>
   <li>Engagement (Contains <code class="language-plaintext highlighter-rouge">vpns.war</code>)</li>
   <li>Database (Contains Database migration scripts)</li>
 </ul>
 
-<p>All these images are pushed into the Volt MX Foundry Docker Hub registry:<br />
-<a href="https://hub.docker.com/r/voltmxfoundry/">hub.docker.com</a></p>
+<p>The docker images will be pulled when you execute the installation scripts in the “HCL Volt MX Foundry Container Installer” found on HCL’s FNO download website: <a href="https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.2.x&amp;orgId=HCL">https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.2.x&amp;orgId=HCL</a></p>
 
-<p>Volt MX  Foundry Container Cluster Solution downloadable bundle contains the following directories and files:</p>
+<p>Volt MX Foundry Container Cluster Solution downloadable bundle contains the following directories and files:</p>
 
 <ul>
   <li><strong>install-foundry.sh</strong> - Installation script</li>
@@ -650,7 +649,7 @@ sudo firewall-cmd --permanent --add-port=80/tcp --zone=public</code></pre></figu
 </ul>
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">sudo ./install-foundry.sh
-    </code></pre></figure>
+  </code></pre></figure>
 <p><br /><img src="/volt-mx-docs/docs/documentation/Foundry/voltmxfoundry_containers_solution_on-prem/Content/Resources/Images/kb1.png" alt="" /></p>
 
 <ul>
@@ -662,7 +661,7 @@ sudo firewall-cmd --permanent --add-port=80/tcp --zone=public</code></pre></figu
 </ul>
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">sudo ./install-foundry.sh config.properties
-    </code></pre></figure>
+  </code></pre></figure>
       <h1 id="configuration">
         
         
@@ -694,7 +693,9 @@ sudo firewall-cmd --permanent --add-port=80/tcp --zone=public</code></pre></figu
       <li>APIPORTAL_ENABLED</li>
     </ul>
   </li>
-  <li><strong>Application Server Details</strong>
+  <li>
+    <p><strong>Application Server Details</strong></p>
+
     <ul>
       <li>
         <p><strong>SERVER_DOMAIN_NAME</strong>: The <strong>Domain Name</strong> for Volt MX Foundry. This value should be the hostname of the LoadBalancer. For example: abc.companyname (DNS name).</p>
@@ -708,7 +709,9 @@ sudo firewall-cmd --permanent --add-port=80/tcp --zone=public</code></pre></figu
       <li><strong>HTTPS_KEY_FILE</strong>: The path to the existing certificate and key files. This value can be empty if the communication protocol is HTTP. The path should point to a valid pem file.</li>
     </ul>
   </li>
-  <li><strong>Database Details</strong>:
+  <li>
+    <p><strong>Database Details</strong>:</p>
+
     <ul>
       <li><strong>DB_TYPE</strong> - This is the Database type you want to use for hosting Volt MX Foundry. The possible values are:
         <ul>
@@ -734,13 +737,11 @@ sudo firewall-cmd --permanent --add-port=80/tcp --zone=public</code></pre></figu
 
     <blockquote>
       <p><strong>Note:</strong></p>
-      <ul>
-        <li>Database Prefix and Suffix are optional inputs.</li>
-        <li>In case of upgrade, ensure that the values of the Database Prefix and Suffix that you provide are the same as you had provided during the initial installation.</li>
-      </ul>
     </blockquote>
 
     <ul>
+      <li>Database Prefix and Suffix are optional inputs.</li>
+      <li>In case of upgrade, ensure that the values of the Database Prefix and Suffix that you provide are the same as you had provided during the initial installation.</li>
       <li>If <strong>DB_TYPE</strong> is set as <strong>oracle</strong>, the following String values need to be provided:
         <ul>
           <li><strong>DB_DATA_TS</strong>: Database Data tablespace name.</li>
@@ -884,9 +885,9 @@ sudo firewall-cmd --permanent --add-port=80/tcp --zone=public</code></pre></figu
 <p>Perform the following steps to setup the HAProxy loadbalancer through a script file.</p>
 
 <ol>
-  <li>Download the <strong>voltmx-foundry-containers-onprem_9.0.0.0_GA.zip</strong> from the <a href="https://community.hclvoltmx.com/downloads">Download Link</a> and extract it.</li>
+  <li>Download the <strong>VoltMXFoundryContainersOnPrem-9.0.0.0_GA.zip</strong> from the <a href="https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.2.x&amp;orgId=HCL&amp;fromRecentFile=false&amp;fromRecentPkg=true&amp;fromDL=false">Download Link</a> and extract it.</li>
 </ol>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">sudo unzip VoltMXFoundryContainersOnPrem-9.0.0.0_GA.zip 
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">sudo unzip VoltMXFoundryContainersOnPrem-9.0.0.0_GA.zip
     -d VoltMXFoundryContainerOnPrem-9.0.0.0_GA
     </code></pre></figure>
 
@@ -942,9 +943,9 @@ sudo firewall-cmd --permanent --add-port=80/tcp --zone=public</code></pre></figu
 <p>In setting up a cluster a minimum of one master can be configured. To improve failure tolerance and ensure cluster availability it is recommended to have an odd number (minimum three) of master nodes. To start cluster setup choose one node as starting point of installation which should be the master node.</p>
 
 <ol>
-  <li>Download the <strong>voltmx-foundry-containers-onprem_9.0.0.0_GA.zip</strong> from the <a href="https://community.hclvoltmx.com/downloads">Download Link</a> and extract it.</li>
+  <li>Download the <strong>voltmx-foundry-containers-onprem_9.0.0.0_GA.zip</strong> from the <a href="https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.2.x&amp;orgId=HCL&amp;fromRecentFile=false&amp;fromRecentPkg=true&amp;fromDL=false">Download Link</a> and extract it.</li>
 </ol>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">sudo unzip VoltMXFoundryContainersOnPrem-9.0.0.0_GA.zip 
+<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">sudo unzip VoltMXFoundryContainersOnPrem-9.0.0.0_GA.zip
     -d VoltMXFoundryContainerOnPrem-9.0.0.0_GA
     </code></pre></figure>
 
@@ -967,7 +968,9 @@ sudo firewall-cmd --permanent --add-port=80/tcp --zone=public</code></pre></figu
 <p><img src="/volt-mx-docs/docs/documentation/Foundry/voltmxfoundry_containers_solution_on-prem/Content/Resources/Images/home1.PNG" alt="" /></p>
 
 <ol>
-  <li>To join other nodes as master/worker, copy the setup-node.zip file which is available in the Foundry Container artifact folder(VoltMXFoundryContainerOnPrem-9.0.0.0_GA) into the node to join as the master/worker and then perform the following steps.
+  <li>
+    <p>To join other nodes as master/worker, copy the setup-node.zip file which is available in the Foundry Container artifact folder(VoltMXFoundryContainerOnPrem-9.0.0.0_GA) into the node to join as the master/worker and then perform the following steps.</p>
+
     <ol>
       <li>
         <p>Extract the <code class="language-plaintext highlighter-rouge">setup-nodes.zip</code> file.</p>
@@ -1049,7 +1052,7 @@ sudo firewall-cmd --permanent --add-port=80/tcp --zone=public</code></pre></figu
       </h2>
     
 
-<p>Volt MX  Foundry Container Cluster Solution has the following known issues and limitations:</p>
+<p>Volt MX Foundry Container Cluster Solution has the following known issues and limitations:</p>
 
 <ul>
   <li>Support for <strong>SPA / Desktop Web</strong> is only available for zipped SPA apps, not for WARs.</li>
