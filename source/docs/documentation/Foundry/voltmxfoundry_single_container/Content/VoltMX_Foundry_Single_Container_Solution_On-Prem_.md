@@ -97,8 +97,9 @@ The following is the list of Docker images used in the VoltMX Foundry Single Co
 *   Foundry (Contains `mfconsole.war`,   `workspace.war`, `accounts.war`, `apiportal.war`, `authService.war`, `admin.war`, `services.war`, `middleware.war`, `apps.war`, and `vpns.war`)
 *   Database (Contains database migration scripts)
 
-Images are pushed into the Volt MX Foundry Docker Hub registry:  
-[https://hclcr.io/voltmx](https://hclcr.io/voltmx)
+
+The docker images will be pulled when you execute the installation scripts in the "HCL Volt MX Foundry Container Installer" found on HCL's FNO download website: [https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.2.x&orgId=HCL](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.2.x&orgId=HCL)
+
 
 To pull the images, use the below command.
 
@@ -175,7 +176,7 @@ Run the Volt MX Foundry Single Container install script to generate and deploy V
 
 **Steps to Install Volt MX Foundry Single Container Solution on On-Premises:**
 
-1.  Download the **voltmx-foundry-containers-onprem\_<version>\_GA.zip** from [downloads](https://community.hclvoltmx.com/download) and extract it. The file structure will be as shown below:
+1.  Download the **`voltmx-foundry-containers-onprem\<version>\GA.zip`** from [downloads](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/startPage.do) and extract it. The file structure will be as shown below:
     
     config.properties install-foundry.sh\* install-actions.sh\* lib/ templates/ foundry/ flyway/
     
@@ -249,7 +250,7 @@ FAQs and Troubleshooting
     
     To restart a container you must do the following:
     
-    *   Go to Downloads > `VoltMXFoundrySingleContainer-9.x.x.x-GA/foundry/` folder.
+    *   Go to Downloads (The folder you downloaded and extracted it to) > `VoltMXFoundrySingleContainer-9.x.x.x-GA/foundry/` folder.
     *   Run the command: `docker-compose up -d`.
 *   **How to configure the IP address as the hostname to avoid an unknown host exception?**
     
@@ -264,11 +265,13 @@ FAQs and Troubleshooting
     2.  Update `docker-compose.yml` file under `Downloads/VoltMXFoundrySingleContainer-9.x.x.x-GA/foundry/`
         *   Add a section under restart key in the following order:
         
-        extra\_hosts:  
-        \- "<HOSTNAME>:<IP>"
+            extra\_hosts:  
+        `\- "<HOSTNAME>:<IP>"`
         
     
-    Once updated, the file will look like the following image:
+        Once updated, the file will look like the following image: 
+        
+    <br/>
     
     ![](Resources/Images/FAQ3.png)
     
