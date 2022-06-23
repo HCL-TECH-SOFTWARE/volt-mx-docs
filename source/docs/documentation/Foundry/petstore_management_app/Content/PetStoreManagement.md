@@ -2,11 +2,8 @@
 layout: "documentation"
 category: "petstore_management_app"
 ---
-                          
 
-
-Pet Store Management Sample
-===========================
+# Pet Store Management Sample
 
 The PetStore Management Sample is a ready to use Sample App developed through OpenAPI Specification(OAS). Swagger is the world’s largest framework of API developer tools for the OpenAPI Specification(OAS), enabling development across the entire API lifecycle, from design and documentation, to test and deployment. The OpenAPI specification creates the RESTful contract for your API, detailing resources and operations in a better readable format for easy development and integration.
 
@@ -16,40 +13,43 @@ The app is built with predefined functionality. You can set the required propert
 
 This following sections explains the functionality of the PetStore Management Sample.
 
-*   [Prerequisites](#prerequisites)
-*   [Importing the PetStore Management Sample](#setting-the-environment)
-*   [Configuring the PetStore Management Sample](#configuring-the-petstore-management-sample)
-    *   [Setting The Environment](#setting-the-environment)
-    *   [Console Access Control](#console-access-control)
-    *   [Configuring Integration Service](#configuring-integration-service)
-*   [Publishing the App](#publishing-the-app)
+- [Prerequisites](#prerequisites)
+- [Importing the PetStore Management Sample](#setting-the-environment)
+- [Configuring the PetStore Management Sample](#configuring-the-petstore-management-sample)
+  - [Setting The Environment](#setting-the-environment)
+  - [Console Access Control](#console-access-control)
+  - [Configuring Integration Service](#configuring-integration-service)
+- [Publishing the App](#publishing-the-app)
 
-Prerequisites
--------------
+## Prerequisites
 
 Before you start using the PetStore Management Sample, ensure you have the following:
 
-*   [VoltMX account](https://manage.hclvoltmx.com/)
-*   Volt MX Foundry V8
+- [VoltMX account](https://manage.hclvoltmx.com/)
 
-Importing the PetStore Management Sample
-----------------------------------------
+## Importing the PetStore Management Sample
 
-The PetStore Management Sample is a readily available app for all new Trail and Starter accounts of the voltmx Foundry. In case the user is not finding the PetStore Management Sample in his account, he can import the app fom Github or from a Local Folder.
+The PetStore Management Sample is a readily available app for all new Trial and Starter accounts of the voltmx Foundry. 
 
 Before you start importing the PetStore Management Sample to Volt MX Foundry, you must download the app to your local folder.
 
 1.  Log on to your [VoltMX account](https://manage.hclvoltmx.com/). The **Dashboard** page appears by default.
 2.  In the left pane, click the **Apps** menu. The **Custom Apps** page appears.
 3.  Click **Import**. A **Import App** dialogue appears.
-![](Resources/Images/petstore_import.png)5.  Drag and Drop the zip folder into the **Import App** window to import the PetStore Management Sample.
-6.  Alternatively, Click **Browse**. The **Open** dialog appears.
-![](Resources/Images/petstore_browse_import.png)8.  Navigate to the location where you downloaded the component (zip file) on your computer, select the component, and click **Open**. The **PetStore Management Sample** is imported into your Volt MX Foundry Account.
+
+    ![](Resources/Images/petstore_import.png)
+
+4.  Drag and Drop the zip folder into the **Import App** window to import the PetStore Management Sample.
+
+5.  Alternatively, Click **Browse**. The **Open** dialog appears.
+
+    ![](Resources/Images/petstore_browse_import.png)
+
+6.  Navigate to the location where you downloaded the component (zip file) on your computer, select the component, and click **Open**. The **PetStore Management Sample** is imported into your Volt MX Foundry Account.
 
 After importing the app, you can access the pre-configured services of the Sample app and view the response output as needed.
 
-Configuring the PetStore Management Sample
-------------------------------------------
+## Configuring the PetStore Management Sample
 
 When you import the PetStore Management Sample into Volt MX Iris, a Volt MX Foundry app, **PetStore Management Sample**, is uploaded to your Volt MX account.
 
@@ -59,13 +59,13 @@ The PetStore Management Sample contains a set of identity, integration, orchestr
 
 The following sections help you configure the PetStore Management Sample.
 
-*   [Setting the Environment](#setting-the-environment)
-*   [Console Access Control](#console-access-control)
-*   [Configuring Integration Service](#configuring-integration-service)
+- [Setting the Environment](#setting-the-environment)
+- [Console Access Control](#console-access-control)
+- [Configuring Integration Service](#configuring-integration-service)
 
 ### Setting the Environment
 
-The PetStore Management Sample is a readily published App.  
+The PetStore Management Sample is a readily published App.
 
 **To select the environment, do the following:**
 
@@ -106,30 +106,28 @@ The PetStore Management Sample contains the following :
 1.  After logging on to your Volt MX account, open the **PetStore Management Sample**.
 2.  Click the **Integration** sub-tab. The **Integration** sub-tab opens with a list of services and corresponding operations.
 3.  From the list of integration services, you can see a service type as **PetStoreServices** which is predefined. The **Service Definition** tab of the selected integration service opens by default.
-![](Resources/Images/petstore_integ_582x245.png)5.  Click the plus icon to expand the **PetStoreServices** section in the left navigation. The list of preconfigured operations appears.
-6.  Click any one of the preconfigured operation. For example, **getPetsByID**.![](Resources/Images/petstore_oper_exec_588x147.png)
-7.  In the **Name** box, the name of the operation is displayed by default.
-8.  On the **Request Input** tab, in the **Body** section, for the following parameters, specify the values in the respective boxes under the **Test Value** column and **Default Value** column.
 
-Mandatory Parameters
+    ![](Resources/Images/petstore_integ_582x245.png)
 
-*   **petID:** It takes number values. Enter the **TEST VALUE** 100.
+4.  Click the plus icon to expand the **PetStoreServices** section in the left navigation. The list of preconfigured operations appears.
 
-11.  Click **SAVE AND FETCH RESPONSE**. The **Output Result** dialog appears with the response. Otherwise, the **Output Result** shows an error if the value entered is invalid.
+5.  Click any one of the preconfigured operation. For example, **getPetsByID**.
+
+    ![](Resources/Images/petstore_oper_exec_588x147.png)
+
+6.  In the **Name** box, the name of the operation is displayed by default.
+7.  On the **Request Input** tab, in the **Body** section, for the following parameters, specify the values in the respective boxes under the **Test Value** column and **Default Value** column.
+
+    Mandatory Parameters
+
+    - **petID:** It takes number values. Enter the **TEST VALUE** 100.
+
+8.  Click **SAVE AND FETCH RESPONSE**. The **Output Result** dialog appears with the response. Otherwise, the **Output Result** shows an error if the value entered is invalid.
 
 > **_Note:_** All the operations are predefined and preconfigured. Provide the corresponding values for the **Test Value** and **Default Value** to fetch the appropriate output responses.
 
-Publishing the App
-------------------
+## Publishing the App
 
 The PetStore Management Sample is readily published as a sample app (scenario). After configuring the necessary configurations, or making new edits you must republish the app to Volt MX Foundry.
 
-[Open topic with navigation](../Content/PetStoreManagement.html)
 
-Comments
-
-[Reply](#)
-
- 
-
-</div> <input class="comment-submit" type="button" value="Submit" > </div> </div> </body> <.html></x-turndown>
