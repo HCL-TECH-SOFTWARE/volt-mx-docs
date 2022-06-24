@@ -176,7 +176,7 @@ You can test the published services using the Admin Console. After you publish a
 
 **References**
 
-*   [Integration with Red Hat Process Automation Manager using KIE APIs](https://access.redhat.com/documentation/en-us/red_hat_process_automation_manager/7.8.html/interacting_with_red_hat_process_automation_manager_using_kie_apis/index)
-*   [Integration of RH-SSO with Red Hat Process Automation Manager](https://access.redhat.com/documentation/en-us/red_hat_process_automation_manager/7.5.html/integrating_red_hat_process_automation_manager_with_red_hat_single_sign-on/sso-int-con)
-*   [Server Administration Guide for Red Hat Single Sign-On](https://access.redhat.com/documentation/en-us/red_hat_single_sign-on/7.3.html-single/server_administration_guide/index#overview)
-*   [Authentication of Third-party Clients Through Red Hat -SSO](https://access.redhat.com/documentation/en-us/red_hat_process_automation_manager/7.5.html/integrating_red_hat_process_automation_manager_with_red_hat_single_sign-on/sso-third-party-proc_integrate-sso#sso-token-auth-proc)
+*   [Integration with Red Hat Process Automation Manager using KIE APIs](https://access.redhat.com/documentation/en-us/red_hat_process_automation_manager/7.8/html-single/interacting_with_red_hat_process_automation_manager_using_kie_apis/index)
+*   [Integration of RH-SSO with Red Hat Process Automation Manager](https://access.redhat.com/documentation/en-us/red_hat_process_automation_manager/7.5/html/integrating_red_hat_process_automation_manager_with_red_hat_single_sign-on/index)
+*   [Server Administration Guide for Red Hat Single Sign-On](https://access.redhat.com/documentation/en-us/red_hat_single_sign-on/7.3/html/server_administration_guide/overview)
+*   [Authentication of Third-party Clients Through Red Hat -SSO]( https://access.redhat.com/documentation/en-us/red_hat_process_automation_manager/7.5/html/integrating_red_hat_process_automation_manager_with_red_hat_single_sign-on/sso-third-party-proc_integrate-sso)

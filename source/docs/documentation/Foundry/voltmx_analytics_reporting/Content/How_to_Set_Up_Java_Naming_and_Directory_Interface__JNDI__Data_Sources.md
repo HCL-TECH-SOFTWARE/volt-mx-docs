@@ -18,7 +18,7 @@ To set up the Jasper data sources, follow these steps:
     
     ![](Resources/Images/SettingJNDI1_580x309.png)
     
-2.  In the `context.xml` file, add the following JNDI configurations for the reports to access the reports database. You must replace the following fields with appropriate values to access the reports database details. For more details, refer to [VoltMX Foundry\_Installer\_Guide > Installing Volt MX Foundry > Database Details window]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Installing_VoltMX_MobileFoundry_on_Windows.html).
+2.  In the `context.xml` file, add the following JNDI configurations for the reports to access the reports database. You must replace the following fields with appropriate values to access the reports database details. For more details, refer to [VoltMX Foundry\_Installer\_Guide > Installing Volt MX Foundry > Database Details window]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Installing_VoltMX_Foundry_on_Windows.html).
     
     > **_Important:_** JasperReports Server V6.2.0 and V7.1.0 uses Tomcat 8 whereas JasperReports Server V 6.0 is bundled with Tomcat 7.  
       

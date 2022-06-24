@@ -89,7 +89,7 @@ While installing Volt MX Foundry, the system creates the reports database, `<pre
 *   If you select **all** (components: Console, Identity Service, and Integration Service) check boxes, the system creates the reports database.
     
 
-For more details, refer to [VoltMX Foundry Installer\_Guide > Installing Volt MX Foundry > Install Components window.]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Installing_VoltMX_MobileFoundry_on_Windows.html)
+For more details, refer to [VoltMX Foundry Installer\_Guide > Installing Volt MX Foundry > Install Components window.]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Installing_VoltMX_Foundry_on_Windows.html)
 
 > **_Note:_**  In the Installing Volt MX Foundry page, scroll down to the **Install Components** window.
 

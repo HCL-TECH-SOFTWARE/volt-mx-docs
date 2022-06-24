@@ -7,7 +7,7 @@ category: "voltmx_foundry_user_guide"
 Use Case Scenarios - App SSO
 ----------------------------
 
-Single sign-on is a feature that permits the user to log in to one application and access the supported applications automatically with out logging again. For more information, refer [Overview of Application SSO](Overview_AppSSO.HTM).
+Single sign-on is a feature that permits the user to log in to one application and access the supported applications automatically with out logging again. For more information, refer [Overview of Application SSO](Overview_AppSSO.html).
 
 The following sections explain the SSO functionality using sample apps with different scenarios and code examples.
 

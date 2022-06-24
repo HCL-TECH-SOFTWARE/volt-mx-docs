@@ -169,8 +169,11 @@ In this procedure, you will create a new data model: **EmployeeModelSchema**, ad
 
 The following procedure helps you how to define relationships between the unique fields in objects in the **EmpolyeeModelSchema** data model.
 
-[![Closed](../../Skins/Default/Stylesheets/Images/transparent.gif)Click here for more details..  
-](javascript:void(0);)
+<!-- [![Closed](../../Skins/Default/Stylesheets/Images/transparent.gif)Click here for more details..  
+](javascript:void(0);) -->
+
+<details>
+<summary close markdown="block">Click here for more details..</summary>
 
 **To configure the relationships, follow these steps:**
 
@@ -195,4 +198,7 @@ The screen for configuring the relationships appears.
 
 > **_Note:_** You can sort fields by clicking the column name header in the data model.
 
+</details>
+
 You can now configure Common Mapping and Methods to the Fields on the Back-End, refer to [Mapping Operations to Back-end Methods](Objectservices_Stage3.html#mapping-operations-to-back-end-methods).
+
