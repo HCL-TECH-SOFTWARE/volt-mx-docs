@@ -244,7 +244,8 @@
   <li><a href="#access-the-generated-android-project-for-application">Access the Generated Android Project for Volt MX Iris Application</a></li>
   <li><a href="#main-activity-and-its-life-cycle-methods">Main Activity and its Life Cycle Methods</a></li>
   <li><a href="#android-pre-compile-and-post-compile-ant-tasks-support">Android Pre-compile and Post-compile Ant Tasks Support</a></li>
-  <li><a href="#support-for-integrating-android-third-party-libraries-with-project">Support for Integrating Android Third-Party Libraries With Volt MX Iris project</a></li>
+  <li><a href="#support-for-integrating-android-third-party-libraries-with-volt-mx-iris-project">Support for Integrating Android Third-Party Libraries With Volt MX Iris project</a></li>
+  <li><a href="#network-security-configuration">Network Security Configuration</a></li>
 </ol>
       <h2 id="access-the-generated-android-project-for-volt-mx-iris-application">
         
@@ -264,12 +265,12 @@
 <ol>
   <li>In Volt MX Iris, in the Project Explorer, on the Project tab, click the context menu arrow for your platform of choice (e.g. Mobile), and then click Open Build Folder.</li>
   <li>Launch Volt MX Iris.</li>
-  <li>In Volt MX Iris, in the Project Explorer, on the <strong>Project</strong> tab, click the context menu arrow for your platform of choice (e.g. Mobile), and then click <strong>Open Build Folder</strong>. Open the build folder. A folder opens with the directory structure <code class="language-plaintext highlighter-rouge">&lt;WorkSpace&gt;\temp\&lt;AppID&gt;</code>.</li>
-</ol>
+  <li>
+    <p>In Volt MX Iris, in the Project Explorer, on the <strong>Project</strong> tab, click the context menu arrow for your platform of choice (e.g. Mobile), and then click <strong>Open Build Folder</strong>. Open the build folder. A folder opens with the directory structure
+ <code class="language-plaintext highlighter-rouge">&lt;WorkSpace&gt;\temp\&lt;AppID&gt;</code>.</p>
 
-<p><img src="/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Resources/Images/OpenBuildFolder.png" alt="" /></p>
-
-<ol>
+    <p><img src="/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Resources/Images/OpenBuildFolder.png" alt="" /></p>
+  </li>
   <li>Navigate to the respective folder: 
     <ul>
       <li><strong>Mobile</strong>: <code class="language-plaintext highlighter-rouge">&lt;WorkSpace&gt;\temp\&lt;AppID&gt;\build\luaandroid\dist\&lt;AppID&gt;</code>.</li>
@@ -362,13 +363,11 @@
   <p><strong><em>Important:</em></strong> If the included dependencies have an associated order among them, they must be added in same order. For more information on dependency order, see <a href="https://developer.android.com/studio/build/dependencies.html#dependency_order">Dependency order</a>.</p>
 </blockquote>
 
-<p>For Volt MX Iris version 7.3, use the <strong>build.gradle entries to Suffix</strong> Gradle property to add dependencies. For example, if your .aar file or .jar file depends on <em>Appcompat</em> and <em>Play Services Analytics</em>, you can add the following dependency entries.</p>
+<p>For Volt MX Iris, use the <strong>build.gradle entries to Suffix</strong> Gradle property to add dependencies. For example, if your .aar file or .jar file depends on <em>Appcompat</em> and <em>Play Services Analytics</em>, you can add the following dependency entries.</p>
 
 <p><img src="/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Resources/Images/ThirdPartyLibraries.png" alt="" /></p>
 
 <p>For information on Gradle properties, see <a href="Native_App_Properties.html">Set Native App Properties</a>.</p>
-
-<p>For Volt MX Iris version 7.2 and earlier, add dependencies by adding script code to <em>androidprecompiletask.xml</em>. For example, the following concatenates the <em>Appcompat</em> and <em>Play Services Analytics</em> entries to the build.gradle file.</p>
 
 <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">&lt; concat destfile = "${app.dir}/build.gradle"
 append = "true" &gt; $ {
@@ -381,6 +380,31 @@ append = "true" &gt; $ {
     line.separator
 }
 dependencies.compile 'com.google.android.gms:play-services-analytics:10.0.0' &lt; /concat&gt;</code></pre></figure>
+      <h2 id="network-security-configuration">
+        
+        
+          <a href="#network-security-configuration" class="anchor-heading" aria-labelledby="network-security-configuration"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Network Security Configuration
+        
+        
+      </h2>
+    
+
+<p>For privacy policy Google Android has changed the network security configuration from Android 9 (API level 28 ) and upper versions.</p>
+
+<p>Starting with Android 9 (API level 28), cleartext support is disabled by default. previous it is by default enabled ( upto Android 8.1(API level 27)) .</p>
+
+<p>So if you want build starting with Android 9 ( API level 28) you have to allow <strong>android:usesCleartextTraffic=”true”</strong> .</p>
+
+<p>Two ways you can allow:</p>
+<ul>
+  <li>
+    <p>You can write code level inside your app - res/xml/network_security_config.xml
+<code class="language-plaintext highlighter-rouge">&lt;?xml version="1.0" encoding="utf-8"?&gt; &lt;network-security-config&gt; &lt;domain-config cleartextTrafficPermitted="true"&gt; &lt;domain includeSubdomains="true"&gt;api.example.com(to be adjusted)&lt;/domain&gt; &lt;/domain-config&gt; &lt;/network-security-config&gt;</code></p>
+  </li>
+  <li>
+    <p>You can use as a TAG in Iris setting</p>
+  </li>
+</ul>
 
         
 
@@ -780,20 +804,6 @@ dependencies.compile 'com.google.android.gms:play-services-analytics:10.0.0' &lt
 
     <li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Internationalization.html#import-internationalization-settings"
     class="nav-list-link">Import Internationalization Resources</a>
-
-    
-
-   </li>
-
-    <li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/ExportImportThemes.html"
-    class="nav-list-link">Export and Import Themes</a>
-
-    
-
-   </li>
-
-    <li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/ExportImportFonts.html"
-    class="nav-list-link">Export and Import Fonts</a>
 
     
 

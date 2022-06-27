@@ -240,7 +240,7 @@
 
 <p>The process of designing or developing an application in such a way that it supports various languages and regions is referred to as <em>Internationalization</em>, also known as <em>i18n</em>. In Volt MX Iris, the i18n features make it possible to build your app for various language locales without making changes to the application code or logic. By setting up the locales that you want to support and then adding what amounts to a vocabulary list for each locale, your app can become functional in multiple languages. Each entry that you make is called a key, and defines a given term in each of the locales that you want your application to support.</p>
 
-<p>From V9 SP1 GA, Volt MX IQ supports all locales supported by Google Translate. For the locales that are not directly supported by Iris, Google Translate is used for the translation internally, and the locale is added as a custom locale. Iris supports all the locales that are supported by Google Translate except Hebrew and Serbo-Croatian.</p>
+<p>Volt MX IQ supports all locales supported by Google Translate. For the locales that are not directly supported by Iris, Google Translate is used for the translation internally, and the locale is added as a custom locale. Iris supports all the locales that are supported by Google Translate except Hebrew and Serbo-Croatian.</p>
 
 <p><img src="/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Resources/Images/i18n_new_632x572.png" alt="" /></p>
 
@@ -283,10 +283,15 @@ A few new options appear.</p>
   </li>
   <li>Click <strong>Configure</strong>.</li>
   <li>Click <strong>Configure Locales</strong>.</li>
-  <li>On the Predefined tab, select the checkboxes of the locales that you want your app to support. If you do not see the locale you want, click the Custom tab, and then add your own locale, giving it values for Language, Country, and Locale. For these values, use the patterns found in the predefined locales as examples to guide you.</li>
+  <li>
+    <p>On the Predefined tab, select the checkboxes of the locales that you want your app to support. If you do not see the locale you want, click the Custom tab, and then add your own locale, giving it values for Language, Country, and Locale. For these values, use the patterns found in the predefined locales as examples to guide you.</p>
+
+    <blockquote>
+      <p><strong><em>Notes:</em></strong>   The Locale field must use the format aa_AA or aa. For example, jp_JP, or jp would be a valid locale name.</p>
+    </blockquote>
+  </li>
 </ol>
 
-<p><strong><em>Notes:</em></strong>*   The Locale field must use the format aa_AA or aa. For example, jp_JP, or jp would be a valid locale name.</p>
 <ul>
   <li>The Country field can only contain letters.</li>
   <li>The Language field must begin with a letter.</li>
@@ -295,16 +300,12 @@ A few new options appear.</p>
 <ol>
   <li>
     <p>Once you have created your locales, click <strong>OK</strong>. The Configure Internationalization dialog box now has a column for each locale you created. For every locale you configure, a corresponding empty folder is created in your workspace using the following path:<br />
-<code class="language-plaintext highlighter-rouge">&lt;workspace&gt;\&lt;application&gt;\resources\common</code><br />
-You can add images to this folder which you can use in the project for corresponding locale.</p>
+  <code class="language-plaintext highlighter-rouge">&lt;workspace&gt;\&lt;application&gt;\resources\common</code><br />
+   You can add images to this folder which you can use in the project for corresponding locale.</p>
   </li>
-  <li>
-    <p>Set the default locale by selecting the locale you want from the Default Locale drop-down list.</p>
-  </li>
-  <li>
-    <p>Click <strong>Finish</strong>.<br />
-With your locales chosen, you can now define i18n keys for each locale.</p>
-  </li>
+  <li>Set the default locale by selecting the locale you want from the Default Locale drop-down list.</li>
+  <li>Click <strong>Finish</strong>.<br />
+With your locales chosen, you can now define i18n keys for each locale.</li>
 </ol>
       <h2 id="add-i18n-content-for-each-locale">
         
@@ -342,19 +343,19 @@ With your locales chosen, you can now define i18n keys for each locale.</p>
 <ol>
   <li>In Volt MX Iris, on the navigate the <strong>Project</strong> &gt; <strong>Settings</strong></li>
   <li>
-    <p>In Application, select <strong>Enable</strong> under <strong>Internationalization (118N)</strong>.<br />
-A few new options appear.</p>
+    <p>In Application, select <strong>Enable</strong> under <strong>Internationalization (118N)</strong>.</p>
+
+    <p>A few new options appear.</p>
   </li>
   <li>Click <strong>Configure</strong>.</li>
   <li>In the Configure Internationalization dialog box, an initial row for an i18n key and the locales you want your app to support is displayed. In the Key field, type a name for your key, such as <em>key001</em>.</li>
   <li>In each locale’s field for the key you just named, enter the word or phrase for the term you’re defining. For instance, if you’re entering the Spanish equivalent for the English phrase <em>Sign In</em>, you would enter <em>Iniciar Sesión</em>.</li>
   <li>Add a new row for each key you create by clicking the plus sign button.</li>
-  <li>Repeat the steps to create a new row again for each new key you want to create.</li>
-</ol>
+  <li>
+    <p>Repeat the steps to create a new row again for each new key you want to create.</p>
 
-<p><img src="/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Resources/Images/i18n_new_560x507.png" alt="" /></p>
-
-<ol>
+    <p><img src="/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Resources/Images/i18n_new_560x507.png" alt="" /></p>
+  </li>
   <li>Click <strong>Finish</strong>.</li>
 </ol>
       <h3 id="add-i18n-programmatically-using-apis">
@@ -447,7 +448,7 @@ A few new options appear.</p>
       </h2>
     
 
-<p>You can export your i18n settings so that you can import them for use in a different Volt MX Iris project. From V8 SP4 onwards, you can export your i18n settings either as a JSON or as a CSV file format.</p>
+<p>You can export your i18n settings so that you can import them for use in a different Volt MX Iris project. From V9 SP2 onwards, you can export your i18n settings either as a JSON or as a CSV file format.</p>
 
 <p>To export i18n settings, you can perform any of the following actions.</p>
       <h3 id="from-the-project-menu">
@@ -488,8 +489,11 @@ A few new options appear.</p>
   <li>
     <p>Select the file format as either <strong>JSON</strong> or <strong>CSV</strong>. The Save As dialog box appears.</p>
   </li>
-  <li>Navigate to the folder where you want to save the i18n settings, and then click <strong>Save</strong>. Volt MX Iris exports the i18n resources as a zipped file.<br />
-<img src="/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Resources/Images/image__1_.png" alt="" /></li>
+  <li>
+    <p>Navigate to the folder where you want to save the i18n settings, and then click <strong>Save</strong>. Volt MX Iris exports the i18n resources as a zipped file.</p>
+
+    <p><img src="/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Resources/Images/image__1_.png" alt="" /></p>
+  </li>
 </ol>
       <h2 id="import-internationalization-settings">
         
@@ -500,7 +504,7 @@ A few new options appear.</p>
       </h2>
     
 
-<p>If you have the exported i18n settings from another Volt MX Iris project, you can import them into the project you’re working on. From V8 SP4 onwards, you can import i18n settings either as a JSON or as a CSV file format.</p>
+<p>If you have the exported i18n settings from another Volt MX Iris project, you can import them into the project you’re working on. From V9 SP2 onwards, you can import i18n settings either as a JSON or as a CSV file format.</p>
 
 <p>To import i18n settings, do the following:</p>
 
@@ -969,20 +973,6 @@ The Android tab contents appear. By default, the Mobile/Tablet tab displays.</li
 
     <li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Internationalization.html#import-internationalization-settings"
     class="nav-list-link">Import Internationalization Resources</a>
-
-    
-
-   </li>
-
-    <li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/ExportImportThemes.html"
-    class="nav-list-link">Export and Import Themes</a>
-
-    
-
-   </li>
-
-    <li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/ExportImportFonts.html"
-    class="nav-list-link">Export and Import Fonts</a>
 
     
 

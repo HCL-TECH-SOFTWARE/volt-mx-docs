@@ -244,20 +244,20 @@
 <p>This document contains the following sections:</p>
 
 <ul>
-  <li><a href="#automatic-addition-of-jetifier-flags-in-file">Automatic addition of Jetifier flags in the <code class="language-plaintext highlighter-rouge">gradle.properties</code> file</a></li>
+  <li><a href="#automatic-addition-of-jetifier-flags-in-gradle-properties-file">Automatic addition of Jetifier flags in the gradle properties file</a></li>
   <li><a href="#issues-while-migrating-to-androidx-and-their-resolutions">Issues while migrating to AndroidX and their resolutions</a></li>
-  <li><a href="#convert-references-by-using-jetifier-tool">Convert <code class="language-plaintext highlighter-rouge">android.support</code> references by using Jetifier tool</a></li>
+  <li><a href="#convert-androidsupport-references-by-using-jetifier-tool">Convert android.support references by using Jetifier tool</a></li>
 </ul>
-      <h2 id="automatic-addition-of-jetifier-flagsin-gradleproperties-file">
+      <h2 id="automatic-addition-of-jetifier-flagsin-gradle-properties-file">
         
         
-          <a href="#automatic-addition-of-jetifier-flagsin-gradleproperties-file" class="anchor-heading" aria-labelledby="automatic-addition-of-jetifier-flagsin-gradleproperties-file"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Automatic Addition of Jetifier Flags in <code class="language-plaintext highlighter-rouge">gradle.properties</code> File
+          <a href="#automatic-addition-of-jetifier-flagsin-gradle-properties-file" class="anchor-heading" aria-labelledby="automatic-addition-of-jetifier-flagsin-gradle-properties-file"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Automatic Addition of Jetifier Flags in gradle properties File
         
         
       </h2>
     
 
-<p>From V8 SP4 Fixpack 47, Volt MX has released AndroidX-supported plugins. As part of these plugins, the following Jetifier flags are specified in the <code class="language-plaintext highlighter-rouge">gradle.properties</code> file:</p>
+<p>From V9 SP2, Volt MX has released AndroidX-supported plugins. As part of these plugins, the following Jetifier flags are specified in the <code class="language-plaintext highlighter-rouge">gradle.properties</code> file:</p>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">android.useAndroidX=true</code>: The Android plugin uses the appropriate AndroidX library, instead of using a Support Library.</li>
@@ -294,13 +294,13 @@
   </li>
   <li>
     <p><strong>For</strong> <code class="language-plaintext highlighter-rouge">android.support</code> <strong>references in NFIs and Android manifest tag entries added through</strong> Volt MX Iris<strong>.</strong><br />
-<strong>Resolution</strong>: You must manually change all <code class="language-plaintext highlighter-rouge">android.support</code> references, and then build the application again. For more information about how to convert <code class="language-plaintext highlighter-rouge">android.support</code> references by using the Jetifier tool, click <a href="#convert-references-by-using-jetifier-tool">here</a>. For more information about the mapping of namespaces from <code class="language-plaintext highlighter-rouge">android.support</code> to <code class="language-plaintext highlighter-rouge">androidx</code>, click <a href="https://developer.android.com/jetpack/androidx/migrate/class-mappings">here</a>.</p>
+<strong>Resolution</strong>: You must manually change all <code class="language-plaintext highlighter-rouge">android.support</code> references, and then build the application again. For more information about how to convert <code class="language-plaintext highlighter-rouge">android.support</code> references by using the Jetifier tool, click here(#convert-references-by-using-jetifier-tool). For more information about the mapping of namespaces from <code class="language-plaintext highlighter-rouge">android.support</code> to <code class="language-plaintext highlighter-rouge">androidx</code>, click <a href="https://developer.android.com/jetpack/androidx/migrate/class-mappings">here</a>.</p>
   </li>
 </ul>
       <h2 id="convert-androidsupport-references-by-using-jetifier-tool">
         
         
-          <a href="#convert-androidsupport-references-by-using-jetifier-tool" class="anchor-heading" aria-labelledby="convert-androidsupport-references-by-using-jetifier-tool"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Convert <code class="language-plaintext highlighter-rouge">android.support</code> References by using Jetifier Tool
+          <a href="#convert-androidsupport-references-by-using-jetifier-tool" class="anchor-heading" aria-labelledby="convert-androidsupport-references-by-using-jetifier-tool"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Convert android.support References by using Jetifier Tool
         
         
       </h2>
@@ -317,15 +317,20 @@
 </blockquote>
 
 <ol>
-  <li>Go to the extracted folder &gt; <code class="language-plaintext highlighter-rouge">bin</code> folder, and then run the following command to get <code class="language-plaintext highlighter-rouge">androidx</code> equivalent references of <code class="language-plaintext highlighter-rouge">android.support</code> in the output file.<br />
-<strong>-i</strong>: The input file with <code class="language-plaintext highlighter-rouge">android.support</code> references.<br />
-<strong>-o</strong>: The output file where the equivalent <code class="language-plaintext highlighter-rouge">androidx</code> references are to be saved.</li>
-</ol>
+  <li>
+    <p>Go to the extracted folder &gt; <code class="language-plaintext highlighter-rouge">bin</code> folder, and then run the 
+following command to get <code class="language-plaintext highlighter-rouge">androidx</code> equivalent references of <code class="language-plaintext highlighter-rouge">android.support</code> in the output file.<br />
+ <strong>-i</strong>: The input file with <code class="language-plaintext highlighter-rouge">android.support</code> references.<br />
+ <strong>-o</strong>: The output file where the equivalent <code class="language-plaintext highlighter-rouge">androidx</code> references are to be saved.</p>
 
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">jetifier-standalone -i &lt;source-library&gt; -o &lt;output-library&gt;</code></pre></figure>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   jetifier-standalone -i &lt;source-library&gt; -o &lt;output-library&gt;
 
-<ol>
-  <li>You can now use the contents of the <code class="language-plaintext highlighter-rouge">androidxstrings.java</code> file to replace all the <code class="language-plaintext highlighter-rouge">android.support</code> references.</li>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>You can now use the contents of the <code class="language-plaintext highlighter-rouge">androidxstrings.java</code> 
+ file to replace all the <code class="language-plaintext highlighter-rouge">android.support</code> references.</p>
+  </li>
 </ol>
 
         
@@ -726,20 +731,6 @@
 
     <li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Internationalization.html#import-internationalization-settings"
     class="nav-list-link">Import Internationalization Resources</a>
-
-    
-
-   </li>
-
-    <li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/ExportImportThemes.html"
-    class="nav-list-link">Export and Import Themes</a>
-
-    
-
-   </li>
-
-    <li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/ExportImportFonts.html"
-    class="nav-list-link">Export and Import Fonts</a>
 
     
 
