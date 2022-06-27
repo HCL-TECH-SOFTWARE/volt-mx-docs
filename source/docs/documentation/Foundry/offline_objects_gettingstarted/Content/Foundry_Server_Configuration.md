@@ -58,7 +58,8 @@ Service Driven Objects
 <li>
 <p>For example, <b>Member</b> (parent object) has one-to-many relationship with <b>Milestone</b> and <b>Sale</b> (child objects) and they have their own integration services that get/create/update them.</p>
 <p>Individual verb (CREATE/UPDATE) mappings are defined for <b>Milestone</b> and <b>Sale</b> objects.</p>
-<p>Checkboxes should not be turned on for <b>Milestone</b> and <b>Sale</b> objects when defining verb mapping for <b>Member</b> object</p>
+<p>Checkboxes should not be turned on for <b>Milestone</b> and <b>Sale</b> objects when defining verb mapping for <b>Member</b> object</p><br/>
+<img src="Resources/Images/Shared_IntegrationServices1.png">
 <img src="Resources/Images/Own_IntegrationServices1.png">
 </li>
 </ul>
