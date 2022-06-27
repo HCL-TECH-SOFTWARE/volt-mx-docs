@@ -27,21 +27,21 @@ For information about creating components, see [Creating a Component](C_Creating
 
 The following topics provide additional information about using components:
 
-*   [Download a Component from HCL Forge](#download-a-component-from)
+*   [Download a Component from HCL Forge](#download-a-component-from-hcl-forge)
 *   [Import a Component into Your Project](#import-a-component-into-your-project)
 *   [Update a Component instance into your Project](#update-a-component-instance)
 *   [Add a Component to a Collection](#add-a-component-to-a-collection)
 *   [Add Dependent Assets to a Component](#add-dependent-assets-to-a-component)
 *   [View Details and Documentation for a Component](#view-details-and-documentation-of-a-component)
 *   [Add a Component to a Form](#add-a-component-to-a-form)
-*   [Import a Master into Your Project](#ImpMast)
+*   [Import a Master into Your Project](#export-a-component)
 *   [Export a Component](#export-a-component)
-*   [Publish a Component to HCL Forge](#publish-a-component-to)
-*   [Work With a Private Section of HCL Forge](#work-with-a-private-section-of)
-*   [Moderator Capabilities for the Private Section of HCL Forge](#moderator-capabilities-for-the-private-section-of)
+*   [Publish a Component to HCL Forge](#publish-a-component-to-hcl-forge)
+*   [Work With a Private Section of HCL Forge](#work-with-a-private-section-of-hcl-forge)
+*   [Moderator Capabilities for the Private Section of HCL Forge](#moderator-capabilities-for-the-private-section-of-hcl-forge)
 *   [Configure Snap Mode for Components](#Configur2)
 *   [Flatten a Component](#customizing-a-component)
-*   [Configure Z Index for Responsive Web Components](#configure-z-index-for-responsive-web-components)
+*   [Configure Z Index for Responsive Web Components](#steps-to-add-components-to-a-segment-template)
 *   [Add Components to Segment Template](#add-components-to-a-segment-template)
 
 Download a Component from HCL Forge
@@ -57,20 +57,21 @@ To download a component from HCL Forge:
 
 1.  Select **Browse** from the **HCL Forge** menu, or navigate to the [HCL Forge](http://community.hclvoltmx.com/marketplace) website in your web browser. If you are not already logged into Volt MX Cloud from the Iris, a login window appears. Enter the Volt MX Cloud account credentials.
 
-![](Resources/Images/LoginCompMktplc_678x397.png)
+      ![](Resources/Images/LoginCompMktplc_678x397.png)
 
-3.  Select the component you want to download to open a web page that describes the component.
+2.  Select the component you want to download to open a web page that describes the component.
 
 From Asset Version, select the version of the component to download. Once you are done selecting the asset version, scroll down.  
   
-![](Resources/Images/asset_version_486x218.png)  
+  ![](Resources/Images/asset_version_486x218.png)  
 
-5.  Click the **Login to Download** button to log in to your Volt MX account and download the component.
-6.  From **Select Destination** list, select one of the options  
+3.  Click the **Login to Download** button to log in to your Volt MX account and download the component.
+
+4.  From **Select Destination** list, select one of the options  
     • Select **Collection Library** to add the component to your library in Iris  
     • Select **Local Drive** to download the component to your local drive. You can import this component later in your Iris project.  
       
-    ![](Resources/Images/destination_560x250.png)
+     ![](Resources/Images/destination_560x250.png)
 
 Import a Component into Your Project
 ------------------------------------
@@ -85,15 +86,15 @@ To import a component to your project, follow these steps:
 
 1.  In the Project Explorer, click the **Templates** tab.
 
-![](Resources/Images/Templates_tab.PNG)
+    ![](Resources/Images/Templates_tab.PNG)
 
-3.  Right-click **Components**, and then select **Import Component**. The **Import Component** dialog box appears.
+2.  Right-click **Components**, and then select **Import Component**. The **Import Component** dialog box appears.
 
-![](Resources/Images/Import_Component.PNG)
+     ![](Resources/Images/Import_Component.PNG)
 
-5.  Click **Browse** to navigate to the location of the component, select the component, and then click **Import**. The component and its associated widgets and modules are added to your project.
+3.  Click **Browse** to navigate to the location of the component, select the component, and then click **Import**. The component and its associated widgets and modules are added to your project.
 
-![](Resources/Images/Imported_Component.PNG)
+     ![](Resources/Images/Imported_Component.PNG)
 
 Once you have imported a component to your project, you can easily add the component to a form. For more information, refer [Add a Component to a Form](#add-a-component-to-a-form).
 
@@ -169,10 +170,10 @@ To update multiple component instances from a template, follow these steps:
     > **_Note:_** The Select Version drop-down displays all the higher versions of the component.
     
 
-![](Resources/Images/update_component_485x511.png)
+    ![](Resources/Images/update_component_485x511.png)
 
-5.  Select the components you want to update.
-6.  Click **Update**  
+4.  Select the components you want to update.
+5.  Click **Update**  
     A confirmation window appears with the Success alert.  
     
 
@@ -212,7 +213,7 @@ You can also add a master created in earlier versions of Volt MX Iris to a colle
 Add Dependent Assets to a Component
 -----------------------------------
 
-Starting with Volt MX Iris V 8.1, you can add skins, media assets, and images to components. In previous releases, when you create a component and export the component to the HCL Forge , associated dynamic skins, and media assets were not added to the collection automatically. These skins and media assets used to be accessed through the code that you customized within the component.
+In Volt MX Iris, you can add skins, media assets, and images to components. In previous releases, when you create a component and export the component to the HCL Forge , associated dynamic skins, and media assets were not added to the collection automatically. These skins and media assets used to be accessed through the code that you customized within the component.
 
 > **_Important:_** When you are importing a component into a project, ensure that the component assets do not have the same name as any of the assets in the project you are importing the component. Iris does not warn you of any duplication, and you may lose some functionality.
 
@@ -266,17 +267,17 @@ View Details and Documentation of a Component
 
 Components downloaded from HCL Forge often include documentation supplied by the component creator. For example, the Rating Prompt component developed by the Volt MX team includes a summary of key details about the component, along with a more complete description of the component and how to use it.
 
-![](Resources/Images/ComponentDetails_677x461.png)
+  ![](Resources/Images/ComponentDetails_677x461.png)
 
-![](Resources/Images/ComponentDoc_674x491.png)
-
+  ![](Resources/Images/ComponentDoc_674x491.png)
+ 
 You can view this documentation, if it exists, from within Library Explorer in the collection where you saved the component.
 
 To view details and documentation about a component:
 
 1.  In Library Explorer, go to the **Default Library** and **Collection** where you saved the component.
 
-1.  Right-click the component name and select **Details**. Volt MX Iris opens a viewing pane and displays the documentation.
+2.  Right-click the component name and select **Details**. Volt MX Iris opens a viewing pane and displays the documentation.
 
 To switch between details and documentation view, click **Details** or **Documentation**.
 
@@ -318,18 +319,18 @@ To prevent your component from being modified by users, you may want to lock the
 
 To export a component, follow these steps:
 
-1.  If you have added the component to a collection, open the library and collection that contains the component in Library Explorer. Then select the component.
+If you have added the component to a collection, open the library and collection that contains the component in Library Explorer. Then select the component.
 
 If the component has been added to the project and appears on the **Templates** tab, select the component there.
 
-3.  Right-click the component, and then select **Export**. Volt MX Iris displays the **Save As** dialog box.
-4.  Navigate to the location where you want to export the component, and then click **Save**. Volt MX Iris exports the component to that location.
+2.  Right-click the component, and then select **Export**. Volt MX Iris displays the **Save As** dialog box.
+3.  Navigate to the location where you want to export the component, and then click **Save**. Volt MX Iris exports the component to that location.
 
 > **_Note:_** While exporting a component, if any project-level properties have been enabled, these properties are automatically applied to the exported component. To avoid this issue, you must first disable the required NFIs for either iOS or Android from Edit > Manage Native Function APIs > iOS/Android and then export the component.
 
 If the component uses any Volt MX Foundry dependencies, including .jar files, service definitions, connectors, or node.js files, a pop-up is displayed with the list services used in the component.
 
-![](Resources/Images/UDW_in_Iris/fetchingservices1.png)
+  ![](Resources/Images/UDW_in_Iris/fetchingservices1.png)
 
 Select the required services by clicking the checkbox and click **Package** to export (or) to add it to the library.
 
@@ -359,7 +360,7 @@ Select the required services by clicking the checkbox and click **Package** to e
     }]
     
     {% endhighlight %}
-5.  Update the corresponding file located in component_package/component/services/services/services/service_type/meta.json with the placeholders. Example, endpoint file for service RDBMS123 is updated as:{% highlight voltMx %}<? xml version = "1.0"
+Update the corresponding file located in component_package/component/services/services/services/service_type/meta.json with the placeholders. Example, endpoint file for service RDBMS123 is updated as:{% highlight voltMx %}<? xml version = "1.0"
     encoding = "UTF-8"
     standalone = "yes" ?> < endpoint dataAdapterId = "1"
     encryptSecureInfo = "false"
@@ -371,7 +372,7 @@ Select the required services by clicking the checkbox and click **Package** to e
     </endpoint >
     
     {% endhighlight %}
-6.  Zip the services folder and the component folder and import the package to Iris. For more information on configuring the parameters in Iris, refer [Configuring Volt MX Foundry service parameters in Iris](#Configure_Services_Params).
+Zip the services folder and the component folder and import the package to Iris. For more information on configuring the parameters in Iris, refer [Configuring Volt MX Foundry service parameters in Iris](#Configure_Services_Params).
 
 Publish a Component to HCL Forge
 ------------------------------------
@@ -426,9 +427,9 @@ To work with a private section of HCL Forge in Volt MX Iris:
 
 mp:{privateMPAccountId: _<MyAccountId>_}
 
-_<MyAccountId>_ is the account identifier of your cloud account. The account identifyer is displayed in the top-right corner of your cloud console on _manage.hclvoltmx.com_.
+  _<MyAccountId>_ is the account identifier of your cloud account. The account identifyer is displayed in the top-right corner of your cloud console on _manage.hclvoltmx.com_.
 
-6.  Save and close the _default.js_ file, and then reopen Volt MX Iris.
+Save and close the _default.js_ file, and then reopen Volt MX Iris.
 
 To work with a private section of HCL Forge in Volt MX Iris Classic:
 
@@ -477,7 +478,7 @@ To Manage components as a moderator, follow these steps.
 Customizing a Component
 -----------------------
 
-With V8 SP3 GA, a new feature is provided to help you to get the UI elements of a component on to a form without affecting the parent component and reuse the component’s UI elements. You can use Component Flattening to:
+With Volt MX Iris V8 SP3 GA, a feature is provided to help you to get the UI elements of a component on to a form without affecting the parent component and reuse the component’s UI elements. You can use Component Flattening to:
 
 *   Use UI elements without the pre-bundled logic
 *   Modify Skin or the UI
@@ -533,7 +534,7 @@ For example, in a banking application, for displaying the date and time of the l
 In this section, the following topics are discussed:
 
 *   [Adding Component without contract](#adding-components-without-contract)
-*   [Adding Component with Contract](#Adding)
+*   [Adding Component with Contract](#limitations-of-adding-components-to-the-segment-template)
 *   [Limitations of Adding Components to the Segment Template](#limitations-of-adding-components-to-the-segment-template)
 *   [Steps to add Components to a Segment Template](#steps-to-add-components-to-a-segment-template)
 

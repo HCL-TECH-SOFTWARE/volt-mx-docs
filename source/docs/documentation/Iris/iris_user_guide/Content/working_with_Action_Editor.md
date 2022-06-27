@@ -145,7 +145,7 @@ The following are limitations you should be aware of relative to actions:
 *   You cannot run the actions on the Iris Canvas.
 *   The Properties Editor always displays the properties of the most recently selected widget. If you switch to an action sequence or code, regardless of what widget it is associated with, the Properties Editor will continue to display the properties of the most recently selected widget, and those properties will not be currently editable.
     
-    > **_Important:_** If your project was originally created using Volt MX Iris 2.5 that was then imported into Volt MX Studio 6.5, and you import it into the latest version of Volt MX Iris, the action sequences are not imported.
+    > **_Note:_** If your project was originally created using Volt MX Iris 2.5 that was then imported into Volt MX Studio 6.5, and you import it into the latest version of Volt MX Iris, the action sequences are not imported.
     
 
 Add Watch Actions
@@ -155,7 +155,7 @@ In Volt MX Iris, you add action sequences for Apple Watch as functions written i
 
 You can access all the Swift code snippets in your project from the Watch folder, located under Modules on the Project pane of the Project Explorer.
 
-> **_Important:_** For projects with Watch action sequences written in JavaScript, created in Volt MX Iris 7.0, to continue working on such a project in Volt MX Iris 7.0.3 or later, those Watch action sequences will have to be rewritten in Swift. When you attempt to open such a project in Volt MX Iris 7.0.3, a dialog box appears stating that continuing will cause all Watch action sequences with JavaScript to be dropped, and they will need to be rewritten. You can choose to continue, which opens the project and drops those Watch action sequences with JavaScript, or cancel, which doesn't open the project and leaves it unchanged.
+> **_Note:_** For projects with Watch action sequences written in JavaScript, created in Volt MX Iris 7.0, to continue working on such a project in Volt MX Iris 7.0.3 or later, those Watch action sequences will have to be rewritten in Swift. When you attempt to open such a project in Volt MX Iris 7.0.3, a dialog box appears stating that continuing will cause all Watch action sequences with JavaScript to be dropped, and they will need to be rewritten. You can choose to continue, which opens the project and drops those Watch action sequences with JavaScript, or cancel, which doesn't open the project and leaves it unchanged.
 
 To add a Swift code snippet, do the following:
 
@@ -174,18 +174,18 @@ To validate the code of an action sequence, do the following:
 1.  Open the action sequence that you want to validate. To do so, select the widget with the action sequence, click the Action tab on the Properties pane, and then click the **Edit** button of the action you want. The action sequence opens on the Iris Canvas.
 2.  In Design View and Diagram View, Volt MX Iris points out statements in the action sequence that are in error or are incomplete with a red information icon. Correct these statements.
 
-![](Resources/Images/ValidateCodeIncompleteSequence_542x123.png)  
+    ![](Resources/Images/ValidateCodeIncompleteSequence_542x123.png)  
   
-![](Resources/Images/Diagram_View_Error.png)
+    ![](Resources/Images/Diagram_View_Error.png)
 
-4.  To validate the action sequence, in the Action Editor window, for Design View/Diagram View click **Validate Code**.
+3.  To validate the action sequence, in the Action Editor window, for Design View/Diagram View click **Validate Code**.
 
 ![](Resources/Images/ValidateCode_540x243.png)
 
-6.  Volt MX Iris evaluates the action sequence. If the code is not valid, Volt MX Iris displays an appropriate error message. Follow the feedback of the validator and correct the sequence.  
+4.  Volt MX Iris evaluates the action sequence. If the code is not valid, Volt MX Iris displays an appropriate error message. Follow the feedback of the validator and correct the sequence.  
       
     ![](Resources/Images/ValidateCodeError_668x299.png)
-7.  After you correctly revise the sequence, Volt MX Iris verifies the validity of the action sequence and displays an appropriate success message.
+5.  After you correctly revise the sequence, Volt MX Iris verifies the validity of the action sequence and displays an appropriate success message.
 
 ![](Resources/Images/Code_Validated_Success_681x308.png)
 

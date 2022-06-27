@@ -16,26 +16,26 @@ To create a conditional statement based on a form's orientation, do the followin
 2.  From the list of actions available along the left column of the Action Editor, click one of the four types of conditions from the Conditions section. The action is added to the action sequence and is the current action of focus.
 3.  In the bottom pane of the Action Editor, from the leftmost drop-down list, set the condition to **Widget Property**.
 
-![](Resources/Images/ConditByFormOrient01.png)
+    ![](Resources/Images/ConditByFormOrient01.png)
 
-5.  Click the next field over, and with the form being the widget of choice, click **displayOrientation**.
+4.  Click the next field over, and with the form being the widget of choice, click **displayOrientation**.
 
-![](Resources/Images/ConditByFormOrient02.png)
+    ![](Resources/Images/ConditByFormOrient02.png)
 
-7.  Set the operator you want, most likely either **Equals** or **Not Equal to**.
+5.  Set the operator you want, most likely either **Equals** or **Not Equal to**.
 
-![](Resources/Images/ConditByFormOrient03.png)
+   ![](Resources/Images/ConditByFormOrient03.png)
 
-9.  Set the second condition to **Value**.
+6.  Set the second condition to **Value**.
 
-![](Resources/Images/ConditByFormOrient04.png)
+    ![](Resources/Images/ConditByFormOrient04.png)
 
-11.  In the last field, enter one of the following values, depending on whether the condition is portrait, landscape, or both:
+7.  In the last field, enter one of the following values, depending on whether the condition is portrait, landscape, or both:
 
-`constants.FORM_DISPLAY_ORIENTATION_PORTRAIT`  
-`constants.FORM_DISPLAY_ORIENTATION_LANDSCAPE`  
-`constants.FORM_DISPLAY_ORIENTATION_BOTH`
+   `constants.FORM_DISPLAY_ORIENTATION_PORTRAIT`  
+   `constants.FORM_DISPLAY_ORIENTATION_LANDSCAPE`  
+   `constants.FORM_DISPLAY_ORIENTATION_BOTH`
 
-![](Resources/Images/ConditByFormOrient05_598x50.png)
+   ![](Resources/Images/ConditByFormOrient05_598x50.png)
 
-14.  Save the action sequence by pressing **Ctrl+S**.
+8.  Save the action sequence by pressing **Ctrl+S**.

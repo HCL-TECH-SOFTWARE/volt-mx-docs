@@ -57,10 +57,10 @@ To set the permissions in the Android Manifest file, follow these steps:
 4.  To enable permissions, select the permissions from the left pane and click **Add >**.  
     For example, If you need to save images to an external storage device such as USB drive or SD card, add the WRITE\_EXTERNAL\_STORAGE setting.
 
-> **_Note:_** To select multiple permissions, hold the **Ctrl** key and click the permissions. To select continuously listed permissions, hold the **Shift** key and click the permissions.
+    > **_Note:_** To select multiple permissions, hold the **Ctrl** key and click the permissions. To select continuously listed permissions, hold the **Shift** key and click the permissions.
 
-6.  To disable permissions, select the permissions from the right pane and click **< Remove**.
-7.  Click **Finish**.  
+5.  To disable permissions, select the permissions from the right pane and click **< Remove**.
+6.  Click **Finish**.  
     When you build the app, Volt MX Iris generates the manifest file with the permissions that you specified.
     
     *   If the app lists _normal_ permissions in its manifest (permissions that don't pose risk to the user's privacy or the device's operation), the system automatically grants those permissions to the app.

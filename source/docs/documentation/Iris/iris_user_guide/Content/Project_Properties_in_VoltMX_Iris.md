@@ -13,7 +13,7 @@ Project Settings in Volt MX Iris
 The project settings in Volt MX Iris are categorized into the following broad sections:
 
 *   [Application](#application-settings)
-*   [Volt MX Foundry](#settings)
+*   [Volt MX Foundry](#volt-mx-foundry-settings)
 *   [Native](#native-settings)
     *   [General](#general-settings)
     *   [Iphone/iPad](#iphone-ipad)

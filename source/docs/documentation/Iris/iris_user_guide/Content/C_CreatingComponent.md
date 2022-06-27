@@ -24,8 +24,8 @@ The following topics provide additional information about creating components:
 
 *   [Create a Component without Contract](#create-a-component-without-contract)
 *   [Create a Component with Contract](#create-a-component-with-contract)
-*   [Expose a Component's Widgets](#expose-a-component-39-s-widgets)
-*   [Data & Services Panel Support for Components](#data-amp-services-panel-support-for-components)
+*   [Expose a Component's Widgets](#expose-a-components-widgets)
+*   [Data & Services Panel Support for Components](#data--services-panel-support-for-components)
 *   [Specify a Container Widget as a Target Container](#specify-a-container-widget-as-a-target-container)
 *   [Expose a Component's Skins](#expose-a-component-39-s-skins)
 *   [Lock a Component](#lock-a-component)
@@ -47,15 +47,17 @@ To create a component without contract, follow these steps:
 
 1.  In the Project Explorer, click the **Templates** tab.
 2.  Right-click **Components**, point to **New**, and then select **w/o Contract**. The **Create new Component without Contract** dialog box appears.
-3.  Enter a **Namespace** ,**Name** and **Version** for the component.  
-    The component must follow this naming convention: _<first part>.<second part>_; for example, _my.namespace_.  
-    The component version helps you track changes or upgrades made to the component.  
+3.  Enter a **Namespace** ,**Name** and **Version** for the component. 
+
+      The component must follow this naming convention: _<first part>.<second part>_; for example, _my.namespace_.  
+      The component version helps you track changes or upgrades made to the component.  
     
 
-The new component without contract is created. The component includes a FlexContainer to contain any widgets that you add to the component and a Modules node, comprising the component's _Controller_ and _Actions Controller_ JavaScript files. The Actions Controller module is auto-generated and contains any defined action sequences.
+      The new component without contract is created. The component includes a FlexContainer to contain any widgets that you add to the component and a Modules node, comprising the component's _Controller_ and _Actions Controller_ JavaScript files. The Actions Controller module is auto-generated and contains any defined action sequences.
 
-5.  Add widgets to the FlexContainer, just as you would for a standard form.
-6.  Add code to the component's controller module or to actions for widgets on the form. To add code to widget actions, select the FlexContainer. On the **Properties** panel, on the **Action** tab, click **Edit** for the event to which you want to add code. For more information, refer [Add Actions](working_with_Action_Editor.html).
+4.  Add widgets to the FlexContainer, just as you would for a
+    standard form.
+5.  Add code to the component's controller module or to actions for widgets on the form. To add code to widget actions, select the FlexContainer. On the **Properties** panel, on the **Action** tab, click **Edit** for the event to which you want to add code. For more information, refer [Add Actions](working_with_Action_Editor.html).
 
 Create a Component With Contract
 --------------------------------
@@ -67,15 +69,18 @@ To create a component with contract, follow these steps:
 1.  In the Project Explorer, click the **Templates** tab.
 2.  Right-click **Components**, point to **New**, and then select **with Contract**. The **Create new Component with Contract** dialog box appears.
 3.  Enter a **Namespace** ,**Name** and **Version** for the component.  
+
+
     The component must follow this naming convention: _<first part>.<second part>_; for example, _my.namespace_.  
     The component version helps you track changes or upgrades made to the component.  
     
 
-The new component with contract is created. The component includes a FlexContainer to contain any widgets that you add to the component and a Modules node, comprising the component's _Controller_ and _Actions Controller_ JavaScript files. The Actions Controller module is auto-generated and contains any defined action sequences.
+     The new component with contract is created. The component includes a FlexContainer to contain any widgets that you add to the component and a Modules node, comprising the component's _Controller_ and _Actions Controller_ JavaScript files. The Actions Controller module is auto-generated and contains any defined action sequences.
 
-5.  Add widgets to the FlexContainer, just as you would for a standard form.
-6.  Add code to the component's controller module or to actions for widgets on the form. To add code to widget actions, select the FlexContainer. On the **Properties** panel, on the **Action** tab, click **Edit** for the event to which you want to add code. For more information, refer [Add Actions](working_with_Action_Editor.html).
-7.  Manage properties, events, and methods for the component with contract. For more information, refer [Manage Properties of a Component with a Contract](#manage-properties-of-a-component-with-a-contract), [Manage Events of a Component with a Contract](#manage-events-of-a-component-with-a-contract), and [Manage Methods of a Component with a Contract](#manage-methods-of-a-component-with-a-contract).
+
+4.  Add widgets to the FlexContainer, just as you would for a standard form.
+5.  Add code to the component's controller module or to actions for widgets on the form. To add code to widget actions, select the FlexContainer. On the **Properties** panel, on the **Action** tab, click **Edit** for the event to which you want to add code. For more information, refer [Add Actions](working_with_Action_Editor.html).
+6.  Manage properties, events, and methods for the component with contract. For more information, refer [Manage Properties of a Component with a Contract](#manage-properties-of-a-component-with-a-contract), [Manage Events of a Component with a Contract](#manage-events-of-a-component-with-a-contract), and [Manage Methods of a Component with a Contract](#manage-methods-of-a-component-with-a-contract).
 
 Each component's controller module contains the JavaScript code associated with the component.  You can add additional modules containing any supporting code to the Modules node. The actions Controller module is auto-generated and should not be modified.
 
@@ -86,21 +91,21 @@ Typically, a component comprises multiple widgets. Once you create a component w
 
 To expose a component's widgets:
 
-1.  Select a component's widget on the Iris canvas or on the **Templates** tab of Project Explorer.
+Select a component's widget on the Iris canvas or on the **Templates** tab of Project Explorer.
 
 You can select a container widget or a child widget of a container widget.
 
-3.  Right-click the widget and select **Expose Widget**, or click on the **Look** tab in the **Properties** pane and set the **Expose Widget** property to _On_.
+Right-click the widget and select **Expose Widget**, or click on the **Look** tab in the **Properties** pane and set the **Expose Widget** property to _On_.
 
 Volt MX  Iris displays the **Programmatic Key** property. You can use the default value or specify a different programmatic key.
 
-> **_Note:_** The Expose property will allow a component creator to make the widget visible in the form or another component. A developer who is using the component cannot access the widget directly through code.
+   > **_Note:_** The Expose property will allow a component creator to make the widget visible in the form or another component. A developer who is using the component cannot access the widget directly through code.
 
-If you select a container widget, all widgets within the container will be exposed. If you do not want to expose an individual widget within the container widget, select the widget and set its **Expose Widget** property to _Off_.
+     If you select a container widget, all widgets within the container will be exposed. If you do not want to expose an individual widget within the container widget, select the widget and set its **Expose Widget** property to _Off_.
 
-> **_Note:_** You can set the **Expose Widget** property of a container widget to _Off_ but expose an individual widget within the container by setting its **Expose Widget** property to _On_.
+   > **_Note:_** You can set the **Expose Widget** property of a container widget to _Off_ but expose an individual widget within the container by setting its **Expose Widget** property to _On_.
 
-8.  Repeat the process for each widget that you want to expose.
+Repeat the process for each widget that you want to expose.
 
 Data & Services Panel Support for Components
 --------------------------------------------
@@ -143,7 +148,7 @@ In this scenario, we will xthe [List-Details (Employee)](https://marketplace.hcl
 1.  In Volt MX Iris, create a new **Sample App** project , and then import the [List-Details (Employee)](https://marketplace.hclvoltmx.com/items/list-details-employee) component from [HCL Forge](https://marketplace.hclvoltmx.com/) .  
     The landing page of the [List-Details (Employee)](https://marketplace.hclvoltmx.com/items/list-details-employee) component is displayed on the Project Canvas and its associated widgets are displayed in the Project Explorer.
 
-1.  To add services to the Employee List screen, follow these steps:
+2.  To add services to the Employee List screen, follow these steps:
     1.  In the Project Explorer, go to **Mobile** > **Forms**, and then click **frmList**. The list screen is displayed on the Project Canvas.
     2.  Go to **Data & Services** panel > **Sample Services**, and then expand **Employee Services**.
     3.  Under the **employees** > **get** > **Response** > **records** operation, drag and drop the following parameters to the respective widgets:
@@ -154,7 +159,7 @@ In this scenario, we will xthe [List-Details (Employee)](https://marketplace.hcl
         
         ![](Resources/Images/List_Data_Panel_155x257.png)
         
-2.  To add services to the Employee Details screen, follow these steps:
+3.  To add services to the Employee Details screen, follow these steps:
     
     1.  In the Project Explorer, go to **Mobile** > **Forms**, and then click **frmDetails**. The details screen is displayed on the Project Canvas.
     2.  Go to **Data & Services** panel > **Sample Services**, and then expand **Employee Services**.
@@ -179,8 +184,8 @@ In this scenario, we will xthe [List-Details (Employee)](https://marketplace.hcl
     
     The parameters are mapped to the corresponding component widgets, and the services are created in your Volt MX Foundry instance. In addition, the mappings are highlighted and displayed under **Project Services** on the Data & Services panel.  
     
-3.  Click **View Mapping** for a service, and then click **Generate Code** to view the respective mappings of the operations in the component. Alternatively, you can go to **Properties panel** > **Component**, click **Edit** for the **onMapping** Event, and then click **Generate Code**.
-4.  You can then reuse the updated component across your Volt MX Iris projects or [publish this customized component to HCL Forge](C_UsingComponents.html#publish-a-component-to) .
+4.  Click **View Mapping** for a service, and then click **Generate Code** to view the respective mappings of the operations in the component. Alternatively, you can go to **Properties panel** > **Component**, click **Edit** for the **onMapping** Event, and then click **Generate Code**.
+5.  You can then reuse the updated component across your Volt MX Iris projects or [publish this customized component to HCL Forge](C_UsingComponents.html#publish-a-component-to) .
 
 ### How to Use a Component with Services
 
@@ -195,9 +200,9 @@ Consider a scenario where Valerie (a user who wants to create a CRM app) imports
 3.  Drag and drop the component from Collection Library to frm1. The component is added to the form and the bundled services are displayed under Project Services of the Data & Services panel.
 4.  For the List and Details screen, add response parameters of the required Object service (that fetches customer data) to the corresponding widgets of the component. Response parameters of other services (such as **Contacts**) can also be used wherever necessary. The new parameters are mapped to the corresponding component widgets, and the services are created in Volt MX Foundry. Furthermore, the mappings are highlighted and displayed under **Project Services** on the Data & Services panel.
 
-1.  Click **View Mapping** for the service, and then click **Generate Code** to view all the mappings of the parameters in the component.  
+5.  Click **View Mapping** for the service, and then click **Generate Code** to view all the mappings of the parameters in the component.  
     Alternatively, you can go to **Properties panel** > **Component**, click **Edit** for the **onMapping** Event, and then click **Generate Code**.
-2.  This component can now be used in the CRM app to display the list of customers on the Customer List screen and specific customers' information on the Customer Details screen.
+6.  This component can now be used in the CRM app to display the list of customers on the Customer List screen and specific customers' information on the Customer Details screen.
 
 Specify a Container Widget as a Target Container
 ------------------------------------------------
@@ -251,9 +256,9 @@ To manage properties of a component with a contract:
 
 Click the plus sign (+) for each pass-through property you want to define. Click the delete symbol (X) to delete an existing property. To define a new pass-through property, specify the following for each property:
 
-*   Source Widget — The widget that contains the property. Click in the **Source Widget** field to display a hierarchical list of the component's widgets, and then select the widget.
+  *   Source Widget — The widget that contains the property. Click in the **Source Widget** field to display a hierarchical list of the component's widgets, and then select the widget.
 
-> **_Note:_** From Volt MX Iris V9 SP1 FP10 version, you can add i18N properties also as a pass-through property. However, the i18N properties cannot be changed dynamically at runtime. When the i18N properties of a text is made pass-through, the corresponding text property is also made pass-through.  
+> **_Note:_** In Volt MX Iris version, you can add i18N properties also as a pass-through property. However, the i18N properties cannot be changed dynamically at runtime. When the i18N properties of a text is made pass-through, the corresponding text property is also made pass-through.  
 From the Volt MX Iris V9 SP2 FP 7 release, you can add the [accessibilityConfig]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Button_Properties.html#accessibilityConfig) property also as a pass-through property using the **Property** panel and **Manage Properties** window. While using **Property** panel, you must make the entire **Accessibility Config** section as pass through and not the individual fields.
 
 *   Widget Property — The property that you want to define as a pass-through property. Click in the **Widget Property** field to display a list of the source widget's properties, and then select the property.
@@ -277,7 +282,7 @@ Click **Apply** to add the pass-through property.
 
 > **_Note:_** You can also designate a widget's property as a pass-through property by navigating to the widget and right-clicking on the property name.
 
-10.  To define custom properties, select the **Custom** tab on the **Manage Properties** dialog box.
+6.  To define custom properties, select the **Custom** tab on the **Manage Properties** dialog box.
 
 Click the plus sign (+) for each custom property you want to define. Click the delete symbol (X) to delete an existing property. To define a new custom property, specify the following for each property:
 
@@ -362,7 +367,7 @@ Click the plus sign (+) for each pass-through event you want to define. To delet
 
 Click **Apply** to add the pass through event. Volt MX Iris adds the event to the **Pass Through** section of the **Properties** pane's **Action** tab.
 
-9.  To define custom events, select the **Custom** tab on the **Manage Events** dialog box.
+6.  To define custom events, select the **Custom** tab on the **Manage Events** dialog box.
 
 Click the plus sign (+) for each custom event you want to define. Click the delete symbol (X) to delete an existing event. To define a new custom event, specify the following for each event:
 
@@ -433,7 +438,7 @@ Click the plus sign (+) for each pass-through method you want to define. Click t
 
 Click **Apply** to add the pass-through method.
 
-9.  To define custom properties, select the **Custom** tab on the **Manage Methods** dialog box.
+To define custom properties, select the **Custom** tab on the **Manage Methods** dialog box.
 
 Click the plus sign (+) for each custom method you want to define. Click the delete symbol (X) to delete an existing method. To define a new custom method, specify the following for each method:
 
@@ -468,38 +473,40 @@ To group properties of a component with a contract:
 1.  Follow the steps in [Manage Properties of a Component with a Contract](#manage-properties-of-a-component-with-a-contract) to define a pass-through or custom property.
 2.  Under **Group**, specify the group where you want the property to be displayed.
 
-If the group name does not exist, click in the **Group** field, select **Manage Group** to open the **Manage Groups** dialog box, and then add the group name.
+    If the group name does not exist, click in the **Group** field, select **Manage Group** to open the **Manage Groups** dialog box, and then add the group name.
 
-4.  Click **Apply** to add the custom property.
+3.  Click **Apply** to add the custom property.
 
-To group events of a component with a contract:
+     To group events of a component with a contract:
 
-1.  Follow the steps in [Manage Events of a Component with a Contract](#manage-events-of-a-component-with-a-contract) to define a pass-through or custom event.
-2.  Under **Group**, specify the group where you want the event to be displayed.
-
-If the group name does not exist, click in the **Group** field, select **Manage Group** to open the **Manage Groups** dialog box, and then add the group name.
-
-4.  Click **Apply** to add the custom event.
-
-To group methods of a component with a contract:
-
-1.  Follow the steps in [Manage Methods of a Component with a Contract](#manage-methods-of-a-component-with-a-contract) to define a pass-through or custom method.
-2.  Under **Group**, specify the group where you want the method to be displayed.
+4.  Follow the steps in [Manage Events of a Component with a Contract](#manage-events-of-a-component-with-a-contract) to define a pass-through or custom event.
+5.  Under **Group**, specify the group where you want the event to be displayed.
 
 If the group name does not exist, click in the **Group** field, select **Manage Group** to open the **Manage Groups** dialog box, and then add the group name.
 
-4.  Click **Apply** to add the custom method.
+6.  Click **Apply** to add the custom event.
 
-Set Data for Components with Contract by using Mapping Editor
--------------------------------------------------------------
+     To group methods of a component with a contract:
+
+7.  Follow the steps in [Manage Methods of a Component with a Contract](#manage-methods-of-a-component-with-a-contract) to define a pass-through or custom method.
+8.  Under **Group**, specify the group where you want the method to be displayed.
+
+     If the group name does not exist, click in the **Group** field, select **Manage Group** to open the **Manage Groups** dialog box, and then add the group name.
+
+     Click **Apply** to add the custom method.
+
+    Set Data for Components with Contract by using Mapping Editor
+----------------------------------------------------------
 
 To set data for a component with contract by using Mapping Editor, follow these steps:
 
-1.  In Volt MX Iris, [create a component with contract](#create-a-component-with-contract), add the required widgets, define the [pass through](#pass_through_Properties) and [custom properties](#Custom_Properties) of the component, and then click **Apply**.  
+In Volt MX Iris, [create a component with contract](#create-a-component-with-contract), add the required widgets, define the [pass through](#pass_through_Properties) and [custom properties](#Custom_Properties) of the component, and then click **Apply**.  
       
-    ![](Resources/Images/Pass_Through_690x438.png)  
+![](Resources/Images/Pass_Through_690x438.png)  
       
-    ![](Resources/Images/Custom_Properties_694x456.png)
+![](Resources/Images/Custom_Properties_694x456.png)
+
+
 2.  In Project Explorer, select the form into which you want to insert the component with contract.
 3.  Go back to **Templates** > **Components**, and right-click the newly created component. A list of options appears.
 4.  Click **Insert Into**. The component with contract is inserted into the selected form.
@@ -514,7 +521,9 @@ To set data for a component with contract by using Mapping Editor, follow these 
     ![](Resources/Images/Mapped_Elements_513x221.png)
 10.  Click **Code View** to see the generated sample code details of the data mappings.  
       
-    ![](Resources/Images/Code_View_Component_474x213.png)
+     ![](Resources/Images/Code_View_Component_474x213.png)
+
+
 11.  Click **Save**. You have successfully set data for the component with contract by using [Mapping Editor](ActionsMapping.html).
 
 Define the Behavior of a Custom Property in Code
@@ -534,9 +543,9 @@ To define the behavior of a custom property, event, or method in code (Beta):
 2.  On the Templates tab, expand the **Modules** node of the component that contains the property, event, or method.
 3.  Open the component's controller module; for example, _loginController.js_.
 
-![](Resources/Images/LoginController_776x192.png)
+    ![](Resources/Images/LoginController_776x192.png)
 
-5.  Add JavaScript code that defines the behavior of the property, event, or method.
+4.  Add JavaScript code that defines the behavior of the property, event, or method.
 
 For example, the following code defines custom properties for the Login component, which can be downloaded from [HCL Forge](http://community.hclvoltmx.com/marketplace) .
 

@@ -159,14 +159,13 @@ To add images to the Assets tab and then use them in a Volt MX Iris project, fol
 1.  In Volt MX Iris, go to **Project Explorer** > **Assets**.
 2.  Expand the channel to which you want to add the image files; whether Common (to be available to all channels), Desktop, Mobile, Tablet, or Wearables.
 3.  Expand the environment that you want the image files to be accessible to; whether Common (to be available for all environments), Native, or Web.
-4.  If you selected the Native environment, expand the platform that you want the SQLite database to be accessible to, whether Common (to be available to all platforms), Android, iOS, or Windows.
-
-Once the node is fully expanded, a **raw** folder is visible.
-
-6.  Click the context menu arrow of the **raw** folder, and then click **Import Media**.
-7.  Navigate to the folder containing the images you want to import, and then select them, holding down the **Ctrl** key as you click to select non-contiguously listed images, or the **Shift** key to select contiguously listed images.
-8.  Click **Open**.
-9.  To see the added files reflected in Volt MX Iris, on the **Project** menu in Volt MX Iris), click **Refresh**.
+4.  If you selected the Native environment, expand the platform that you want the SQLite database to be accessible to, whether Common (to be available to
+     all platforms), Android, iOS, or Windows.
+     Once the node is fully expanded, a **raw** folder is visible.
+5.  Click the context menu arrow of the **raw** folder, and then click **Import Media**.
+6.  Navigate to the folder containing the images you want to import, and then select them, holding down the **Ctrl** key as you click to select non-contiguously listed images, or the **Shift** key to select contiguously listed images.
+7.  Click **Open**.
+8.  To see the added files reflected in Volt MX Iris, on the **Project** menu in Volt MX Iris), click **Refresh**.
 
 ### Directly Import Images into a Widget
 
@@ -184,12 +183,12 @@ Furthermore, you can directly import images into the widgets inside a component.
     
     The **Select Image** dialog box appears, containing the list of available imported images.  
       
-    ![](Resources/Images/Select_Image_361x413.png)
+     ![](Resources/Images/Select_Image_361x413.png)
     
 3.  Click **Import**. The File Explorer of your local computer appears.
 4.  Select the required image, and then click **Open**. The Import Images dialog box appears, indicating that the image has been imported successfully. If required, Volt MX Iris automatically modifies the file name of the imported image according to the Volt MX Irisresource name specification.  
       
-    ![](Resources/Images/Import_Images_398x307.png)
+     ![](Resources/Images/Import_Images_398x307.png)
 5.  The imported image appears in the list of images of the **Select Image** dialog box. Select the image, and then click **OK**. The image is added to the Image widget.
 
 Troubleshoot Invalid Images

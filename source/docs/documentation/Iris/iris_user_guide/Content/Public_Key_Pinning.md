@@ -131,7 +131,6 @@ Example
     
 *   For Android, while using Public Key Pinning, you must set the minimum SDK version as 17 or later.
     
-*   From V8 SP4 onwards, the **Allow Self Signed/ Untrusted Certs** option has been renamed as **Network Trust Config**.
     
 *   The public\_keys.json file specifies a white list of domains and their pins. Consequently, the voltmx.net network calls made to any other domain that is not listed in the public\_keys.json file will fail.
     
@@ -147,9 +146,9 @@ Follow these steps to use the VoltMXSSLPinningTool.jar file and generate SPKI ha
 
 1.  Download the zipped [VoltMXSSLPinningTool.zip](https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/VoltMXSSLPinningTool.zip) file to your local system, and then unzip it.
 
-> **_Note:_** You must run the VoltMXSSLPinningTool.jar file with Java 8 or later.
+    > **_Note:_** You must run the VoltMXSSLPinningTool.jar file with Java 8 or later.
 
-1.  Run the following command to generate SPKI Pins Hashes for the entire certificate chain from leaf to root:  
+2.  Run the following command to generate SPKI Pins Hashes for the entire certificate chain from leaf to root:  
     **java -jar VoltMXSSLPinningTool.jar --cert\_format DER --ssl\_host HOST\_NAME --ssl\_port PORT**  
     here, HOST\_NAME: The host name of your server.  
     PORT: HTTPS port on which your server is listening. It defaults to 443, if --ssl\_port option is not specified.  

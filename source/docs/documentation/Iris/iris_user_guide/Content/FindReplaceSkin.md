@@ -8,13 +8,13 @@ category: "iris_user_guide"
 Rebrand a Project
 =================
 
-As a developer, there might be instances where you create a base application that can later be customized based on the customer requirements. Prior to the V9 Service Pack 1 release, to customize the look of an app, developers had to navigate to each widget and update the Skin properties for each instance.
+As a developer, there might be instances where you create a base application that can later be customized based on the customer requirements.to customize the look of an app, developers had to navigate to each widget and update the Skin properties for each instance.
 
 > **_Note:_** Before getting started with this feature, ensure that you have a good understanding of using [Skins and Themes in Volt MX Iris](Customizing_the_Look_and_Feel_with_Skins.html).
 
 For instance, the HCL Infinity Retail Banking application is used as the base app on which customizations are made based on customer requirements. When a new prospect arrives, using the rebranding feature, you can change the generic branding of the Retail Banking application with a branding that is specific to the prospective customer. Alternatively, an existing customer can use this feature to change their branding, if there have been any changes to their corporate branding. For example, a change in the logo or corporate branding colors, etc.
 
-In the V9 Service Pack 1 release, Volt MX Iris has introduced a new feature to rebrand apps, the **Find and Replace Skin Properties** option. This feature enables developers to customize the skin properties present in a current theme of the project.
+In the V9 Service Pack 2 release, Volt MX Iris has introduced a new feature to rebrand apps, the **Find and Replace Skin Properties** option. This feature enables developers to customize the skin properties present in a current theme of the project.
 
 Using the Find and Replace Skin Properties option, you can customize the **Background**, **Border**, and **Font** properties of the skins available in a theme across the project. The changes made in the **Find and Replace** interface will modify the values for all the instances of the property pertaining to the widget.
 

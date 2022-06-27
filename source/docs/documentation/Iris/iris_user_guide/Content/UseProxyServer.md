@@ -63,51 +63,61 @@ In addition to configuring Volt MX Iris to recognize the proxy server, your oper
 
 To configure a manual proxy for a Mac, do the following:
 
-1.  Click the Apple menu, next click **System Preferences**, and then click **Network**.
-2.  From the list, select the network service you are using, such as Wi-Fi or Ethernet.
+1.  Click the Apple menu, next click **System Preferences**, and
+    then click **Network**.
+2.  From the list, select the network service you are using, such as
+     Wi-Fi or Ethernet.
 3.  Click **Advanced**, and then click **Proxies**.
-4.  From the **Select a protocol to configure** list, clear the check box for Auto Proxy Discovery and Automatic Proxy Configuration.
-5.  From the **Select a protocol to configure** list, check the check box for **Web Proxy (HTTP)**.
-6.  With **Web Proxy (HTTP)** selected, in the **Web Proxy Server** text box, enter the proxyHost value.
+4.  From the **Select a protocol to configure** list, clear the
+    check box for Auto Proxy Discovery and Automatic Proxy Configuration.
+5.  From the **Select a protocol to configure** list, check the
+    check box for **Web Proxy (HTTP)**.
+6.  With **Web Proxy (HTTP)** selected, in the **Web Proxy Server** 
+    text box, enter the proxyHost value.
 
-> **_Important:_** For an NTLM proxy server, the Web Proxy Server value should be `127.0.0.1`.
+     > **_Important:_** For an NTLM proxy server, the Web Proxy Server value should be `127.0.0.1`.
 
-8.  In the accompanying port text box, enter the proxyPort value.
+7.  In the accompanying port text box, enter the proxyPort value.
 
-> **_Important:_** For an NTLM proxy server, the Port value should be `3128`.
+     > **_Important:_** For an NTLM proxy server, the Port value should be `3128`.
 
-10.  Repeat steps 5 through 7 for the **Secure Web Proxy (HTTPS)** protocol and the **FTP Proxy** protocol.
-11.  Check the **Exclude simple host names** check box.
-12.  Click **OK**.
+8.  Repeat steps 5 through 7 for the **Secure Web Proxy (HTTPS)**
+    protocol and the **FTP Proxy** protocol.
+9.  Check the **Exclude simple host names** check box.
+10.  Click **OK**.
 
 #### Configure a Manual Proxy for Windows
 
 To configure a manual proxy for Windows, do the following:
 
-1.  Click the **Start** menu, and then click **Settings** (for Windows 10) or **Control Panel** (for Windows 7 and earlier).
-2.  In the search box, type _Internet options_, and then press **Enter**.
-3.  From the search results, click **Internet options**. Doing so brings up the Internet Properties dialog box.
+1.  Click the **Start** menu, and then click **Settings** (for
+    Windows 10) or **Control Panel** (for Windows 7 and earlier).
+2.  In the search box, type _Internet options_, and then press
+    **Enter**.
+3.  From the search results, click **Internet options**. Doing so
+    brings up the Internet Properties dialog box.
 4.  Click the **Connections** tab, and then click **LAN Settings**.
 
-![](Resources/Images/ManProxyServerWin01.png)
+    ![](Resources/Images/ManProxyServerWin01.png)
 
-6.  Clear the **Automatically detect settings** check box.
-7.  Under Proxy server, check the check box for using a proxy server for your LAN.
-8.  In the **Address** text box, enter the proxyHost value.
+5.  Clear the **Automatically detect settings** check box.
+6.  Under Proxy server, check the check box for using a proxy server 
+    for your LAN.
+7.  In the **Address** text box, enter the proxyHost value.
 
-> **_Important:_** For an NTLM proxy server, the Address value should be `127.0.0.1`.
+    > **_Important:_** For an NTLM proxy server, the Address value should be `127.0.0.1`.
 
-10.  In the Port text box, enter the proxyPort value.
+8.  In the Port text box, enter the proxyPort value.
 
-> **_Important:_** For an NTLM proxy server, the Port value should be `3128`.
+    > **_Important:_** For an NTLM proxy server, the Port value should be `3128`.
 
-12.  Check the check box for **Bypass proxy server for local addresses**.
+9.  Check the check box for **Bypass proxy server for local addresses**.
 
-Your settings should look something like this (settings shown are for an NTLM proxy server):
+      Your settings should look something like this (settings shown are for an NTLM proxy server):
 
-![](Resources/Images/ManProxyServerWin02.png)
+      ![](Resources/Images/ManProxyServerWin02.png)
 
-15.  Click **OK**, and then click **OK** again.
+10.  Click **OK**, and then click **OK** again.
 
 NTLM Proxy Configuration
 ------------------------

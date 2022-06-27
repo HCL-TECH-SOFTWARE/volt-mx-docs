@@ -8,7 +8,7 @@ category: "iris_user_guide"
 Hot Reload Overview
 ===================
 
-Starting with Volt MX Iris V9 SP1 release, Volt MX Iris has introduced the Hot Reload feature in live preview. The Hot Reload feature improves the Live preview experience within Volt MX Iris by reducing the build and preview time of a live preview.
+Starting with  release, Volt MX Iris has introduced the Hot Reload feature in live preview. The Hot Reload feature improves the Live preview experience within Volt MX Iris by reducing the build and preview time of a live preview.
 
 Using the Hot Reload key, developers can view their changes immediately, adjust their UI as required and fix any code issues. Developers can also build their UI incrementally by viewing their changes in the live preview using the Hot reload feature. The Hot reload feature also reduces the application build time. Earlier, to view changes in the live preview, developers always had to build the application.
 
@@ -37,7 +37,7 @@ Limitation of Hot Reload
 Before you get started, ensure that you have following prerequisites.
 
 *   Ensure that you have a working Volt MX account.
-*   Ensure that you have Volt MX Iris V9 SP1 or later installed on your computer.
+*   Ensure that you have installed on your computer.
 
 ### Using Hot Reload
 
@@ -54,10 +54,12 @@ In the following steps, we will take you through the steps of using the Hot Relo
 6.  Select **Responsive Web**.  
     Ensure that any other selected platforms are unselected.
 7.  Click **Save & Run**.  
-    A dialogue with the Iris preview appears.  
+    A dialogue with the Iris preview appears. 
+
     ![](Resources/Images/Live_Preview/Before_HotReload_400x352.png)  
     
 8.  On the Iris canvas, change the button name from **Login** to **Submit**.
 9.  Navigate to the preview window again and click on the Hot Reload key (Ctrl+shift+R).  
     Changes made on the form will reflect in the live preview window.  
+    
     ![](Resources/Images/Live_Preview/After_HotReload_393x344.png)

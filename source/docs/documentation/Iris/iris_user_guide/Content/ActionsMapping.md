@@ -126,7 +126,6 @@ The elements under Source and Target in the Mapping Editor can be sorted by eith
 | I18N | Displays only i18n keys |
 | Services | Displays only services |
 
-1.  To save the changes you have made to the action sequence, press Ctrl+S.
 
 Map Data with the Help of Expressions
 -------------------------------------
@@ -186,9 +185,9 @@ Follow these steps to map the UI elements of a component to data.
 7.  Click **Save**.
 8.  Select the next platform from the drop-down list on top of the canvas (For example, **Desktop: Web**).
 9.  From the **Properties** panel, navigate to the **Action** tab.
-10.  Select the event as mentioned in the previous [steps](#step4).  
+10.  Select the event as mentioned in the previous steps.  
     The **Action Editor** window appears.
-11.  Navigate to the action node added [earlier](#step5).
+11.  Navigate to the action node added earlier.
 12.  Continue to map the data to the UI elements as required.
 13.  Click **Save**.
 
@@ -196,7 +195,7 @@ Refer the **Code View** tab in the **Action Editor** window to get the generated
 
 ### Mapping for Segment with Desktop Web Breakpoints
 
-In Desktop web platforms, you can assign different row templates to a Segment widget for different breakpoints. From V9 Sp1 release onwards, you can use Volt MX Iris to map the data of a Segment widget for each breakpoint. This means that you can map data separately for each breakpoint in a form.
+In Desktop web platforms, you can assign different row templates to a Segment widget for different breakpoints. In Volt MX Iris V9 SP2, you can use Volt MX Iris to map the data of a Segment widget for each breakpoint. This means that you can map data separately for each breakpoint in a form.
 
 Follow these steps to map the UI elements to data for each breakpoint.
 
@@ -216,9 +215,9 @@ Follow these steps to map the UI elements to data for each breakpoint.
 11.  Click **Save**.
 12.  Click on any of the breakpoints in the scale (For example, **640 PX**) .
 13.  From the **Properties** panel, navigate to the **Action** tab.
-14.  Select the event as mentioned in a previous [step](#step7).  
+14.  Select the event as mentioned in a previous step.  
     The **Action Editor** window appears.
-15.  Navigate to the action added [earlier](#step9).
+15.  Navigate to the action added earlier .
 16.  Continue to map the data to the UI elements as required.
 17.  Click **Save**.
 

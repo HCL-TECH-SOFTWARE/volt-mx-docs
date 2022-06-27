@@ -16,4 +16,4 @@ Offline Applications enable you to access services on your device if it is not c
 *   SAP Services
 *   Siebel Services
 
-For more information, see [Synchronization]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Synchronization.html) and [Object Services]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Objectservices.html).
+For more information,[Object Services]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Objectservices.html).

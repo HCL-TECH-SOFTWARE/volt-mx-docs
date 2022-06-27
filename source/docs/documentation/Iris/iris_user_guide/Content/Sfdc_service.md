@@ -25,14 +25,14 @@ To configure your Salesforce service, follow these steps:
 
 1.  Create a new Volt MX Foundry application or use an existing one. To do so, on the **Data and Services** panel, click the context menu arrow, and then click either **Create New App**, or **Use Existing App**, and then select from the Volt MX Foundry Application dialog box the services application that you want to publish. The Volt MX Foundry Console opens.
 
-![](MFinAppPane.png)
+    ![](MFinAppPane.png)
 
-3.  To create a new integration service, on the **Integration** tab, click **CONFIGURE NEW**. The **Service Definition** section appears.
+2.  To create a new integration service, on the **Integration** tab, click **CONFIGURE NEW**. The **Service Definition** section appears.
 
-![](SDAreaMF_CRR_539x270.png)
+    ![](SDAreaMF_CRR_539x270.png)
 
-5.  Click the **Integration** tab, click **CONFIGURE NEW** to create an integration service.
-6.  In the **Service Definition** section, follow these steps:
+3.  Click the **Integration** tab, click **CONFIGURE NEW** to create an integration service.
+4.  In the **Service Definition** section, follow these steps:
     1.  In the **Service Name** text box, enter a unique name for your service.
     2.  From the **Service Type** list, select **Salesforce**.  
         By default, XML is selected. If you select **Salesforce**, the **Choose Salesforce Authentication Type** section is displayed, shown below.
@@ -59,7 +59,7 @@ To configure your Salesforce service, follow these steps:
         3.  In the **Client Secret** box, enter a valid client secret.
         4.  In the **User ID** box, enter a valid user ID.
         5.  In the **Password** box, enter a valid password.
-7.  After you configure the authentication service, click **Save and Continue** to display the **Operation** section. Based on your Salesforce authentication, the system loads all tables such as objects and operations.
+5.  After you configure the authentication service, click **Save and Continue** to display the **Operation** section. Based on your Salesforce authentication, the system loads all tables such as objects and operations.
     
 
 1.  Select an object from the **Object** list that is auto-populated with all the existing Salesforce objects.
@@ -108,7 +108,7 @@ To configure your Salesforce service, follow these steps:
 
 1.  Click the ****Output**** tab, and enter the values for required fields such as ID, scope, data type, collection ID, record ID, format and format value.
 
-1.  Click the **Advanced** tab, and follow these steps:
+2.  Click the **Advanced** tab, and follow these steps:
     1.  Under the **CUSTOM CODE INVOCATION**, upload the JAR file containing the preprocessor class name and postprocessor class name. This step allows you to further filter the data received from a service call.
         *   **Specify Custom Jar** \- Browse and select the JAR containing preprocessor or postprocessor libraries.
         *   **Preprocessor class** - Enables a developer to include any business logic on the data before forwarding the request to the external data source. Select the JAR file from the list.
@@ -127,10 +127,10 @@ To configure your Salesforce service, follow these steps:
         *   **Cachable(sec)** - the duration in seconds within which the service response is fetched from the cache. Select the **Cachable(in sec)** check box and provide the details in the text box.
         *   **Decode Response Body -** To ignore the Salesforce response received in the XMLvalue field, select the Decode Response Body response check box.
         *   **Response Encoding -** select the appropriate response encoding. The default value is UTF-8. For more information about different encoding schemes, refer to [Response Encoding Schemes]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Response_Encoding.html).
-2.  Click **Test** to view the results.
-3.  Click **Save Operation** to save the operation. They system displays the **Operation** section for your service.
-4.  Click **Done** to navigate to the **Integration** page.
-5.  To close the Volt MX Foundry Console and return to the panes, views, and tabs of the Volt MX Iris integrated development environment (IDE), from the Quick Launch Bar along the upper left edge of Volt MX Iris, click the Workspace icon ![](Resources/Images/S7Persp_QkLaunch01b_20x19.png). Since you are still logged in to your Volt MX account, Volt MX Iris continues to have access to your Volt MX Foundry services.
+3.  Click **Test** to view the results.
+4.  Click **Save Operation** to save the operation. They system displays the **Operation** section for your service.
+5.  Click **Done** to navigate to the **Integration** page.
+6.  To close the Volt MX Foundry Console and return to the panes, views, and tabs of the Volt MX Iris integrated development environment (IDE), from the Quick Launch Bar along the upper left edge of Volt MX Iris, click the Workspace icon ![](Resources/Images/S7Persp_QkLaunch01b_20x19.png). Since you are still logged in to your Volt MX account, Volt MX Iris continues to have access to your Volt MX Foundry services.
 
 ### Use Log-in Endpoint with Different Credentials for Design Time and Runtime
 

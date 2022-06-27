@@ -14,9 +14,9 @@ For example, banks maintain a store of users and their details. With Volt MX Fou
 
 In this topic, you will learn about: 
 
-[Advantages of Volt MX Foundry Database Connector](#advantages-of-database-connector)
+[Advantages of Volt MX Foundry Database Connector](#advantages-of-volt-mx-foundry-database-connector)
 
-[Limitations of Volt MX Foundry Database Connector](#limitations-of-database-connector)
+[Limitations of Volt MX Foundry Database Connector](#limitations-of-volt-mx-foundry-database-connector)
 
 [Publishing the Service](PublishVoltMXFoundryServicesApp.html)
 
@@ -68,7 +68,7 @@ Adding a Database Service involves the following steps:
 
 ### Configure a Service Definition for a Database Service
 
-This procedure assumes that you have already configured Volt MX Foundry in Volt MX Iris. For more information, see [Connect to the Volt MX Foundry Console](Connect to Volt MX Foundry.html).
+This procedure assumes that you have already configured Volt MX Foundry in Volt MX Iris. 
 
 To configure a service definition, follow these steps: 
 
@@ -76,22 +76,23 @@ To configure a service definition, follow these steps: 
 2.  If you have not done so already, log in to your Volt MX account. To do so, in the top right corner of the Volt MX Iris window, click **Login**. The Volt MX Account sign-in window opens. Enter your email and password credentials for your Volt MX user account, and then click **Sign in**.
 3.  Create a new Volt MX Foundry application or use an existing one. To do so, on the **Data and Services** panel, click the context menu arrow, and then click either **Create New App**, or **Use Existing App**, and then select from the Volt MX Foundry Application dialog box the services application that you want to publish. The Volt MX Foundry Console opens.
 
-![](MFinAppPane.png)
+    ![](MFinAppPane.png)
 
-> **_Note:_** If you want to associate your Volt MX Iris project with a different Volt MX Foundry app, on the **Project** tab of the Project Explorer, click the context menu arrow for **VoltMX Foundry**, and then click **Unlink App**. To link to a different Volt MX Foundry app, click the context menu arrow for **VoltMX Foundry**, and then click either **Create New App**, or **Use Existing App**.
+    > **_Note:_** If you want to associate your Volt MX Iris project with a different Volt MX Foundry app, on the **Project** tab of the Project Explorer, click the context menu arrow for **VoltMX Foundry**, and then click **Unlink App**. To link to a different Volt MX Foundry app, click the context menu arrow for **VoltMX Foundry**, and then click either **Create New App**, or **Use Existing App**.
 
-6.  To create a new integration service, on the **Integration** tab, click **CONFIGURE NEW**. The **Service Definition** section appears.  
+4.  To create a new integration service, on the **Integration** tab, click **CONFIGURE NEW**. The **Service Definition** section appears.  
       
     
 
-![](Resources/Images/Database_691x331.png)
+      ![](Resources/Images/Database_691x331.png)
 
-8.  In the **Service Definition** section, follow these steps:
+
+5.  In the **Service Definition** section, follow these steps:
     *   In the **Name** text box, enter a unique name for your service. When you enter the name, the name is updated for the active service under the **Services** section in the left pane.
     *   From the **Service Type** list, select **Relational Database**.  
         By default, XML is selected. If you select **Database**, the **Database Type, Database Connection URL**, and other details are displayed, shown below.
     
-    ![](DbSer_CRR_511x244.png)
+      ![](DbSer_CRR_511x244.png)
     
     *   In the **Database Type** list, select **MYSQL**.
     *   In the **Database Connection URL**, enter the database connection URL - for example, `jdbc:mysql://<ip_address>:<port>/`
@@ -132,7 +133,7 @@ To configure a service definition, follow these steps: 
 
 ### Create CRUD Operations for a Database Service
 
-This procedure assumes that you have already configured Volt MX Foundry in Volt MX Iris. For more information, see [Connect to the Volt MX Foundry Console](Connect to Volt MX Foundry.html).
+This procedure assumes that you have already configured Volt MX Foundry in Volt MX Iris. 
 
 To create CRUD operations, follow these steps: 
 
@@ -180,7 +181,7 @@ After you create [CRUD operations](#create-crud-operations-for-a-database-servic
 
 #### How to Create a Database Record with Create Operation
 
-This procedure assumes that you have already configured Volt MX Foundry in Volt MX Iris. For more information, see [Connect to the Volt MX Foundry Console](Connect to Volt MX Foundry.html).
+This procedure assumes that you have already configured Volt MX Foundry in Volt MX Iris. 
 
 To create a database record with create operation, follow these steps: 
 
@@ -264,7 +265,7 @@ To create a database record with create operation, follow these steps: 
 
 #### Query a Database and Display Information with the Read Operation
 
-This procedure assumes that you have already configured Volt MX Foundry in Volt MX Iris. For more information, see [Connect to the Volt MX Foundry Console](Connect to Volt MX Foundry.html).
+This procedure assumes that you have already configured Volt MX Foundry in Volt MX Iris. 
 
 1.  Under **Configured Operations**, hover your cursor over the **Read** operation, click the **Settings** button, and then click **Edit**.The system displays the selected operation in the edit mode. The Read operation has the **Request Input** and **Response Output** tabs.
     
@@ -313,13 +314,13 @@ This procedure assumes that you have already configured Volt MX Foundry in Volt 
     
     The **Name** field in the Response Output tab is pre-populated with database columns.![](ReadResponseParam_CRR_519x133.png)
     
-    1.  Select request or session in the **SCOPE** field. By default, this field is set to **Request**.
+     Select request or session in the **SCOPE** field. By default, this field is set to **Request**.
     
     **Request** - Indicates that the value must be retrieved from the HTTP request received from a mobile device.
     
     **Session** - Indicates that the value must be retrieved from the HTTP session stored on Volt MX Foundry.
     
-    4.  In the **DESCRIPTION**, provide the description.
+    In the **DESCRIPTION**, provide the description.
     
     To validate the details, click **Test**. The result of the operation appears.
     
@@ -327,7 +328,7 @@ This procedure assumes that you have already configured Volt MX Foundry in Volt 
 
 #### Update a Database Record with Update Operation
 
-This procedure assumes that you have already configured Volt MX Foundry in Volt MX Iris. For more information, see [Connect to the Volt MX Foundry Console](Connect to Volt MX Foundry.html).
+This procedure assumes that you have already configured Volt MX Foundry in Volt MX Iris. 
 
 To update a database record with update operation, follow these steps: 
 
@@ -356,7 +357,7 @@ To update a database record with update operation, follow these steps: 
 
 #### How to Delete a Database Record with Delete Operation
 
-This procedure assumes that you have already configured Volt MX Foundry in Volt MX Iris. For more information, see [Connect to the Volt MX Foundry Console](Connect to Volt MX Foundry.html).
+This procedure assumes that you have already configured Volt MX Foundry in Volt MX Iris. 
 
 1.  Under **Configured Operations**, hover your cursor over the **Delete** operation, click the **Settings** button, and then click **Edit**. The system displays the selected operation in the edit mode. The delete operation has the Request Input tab.
     

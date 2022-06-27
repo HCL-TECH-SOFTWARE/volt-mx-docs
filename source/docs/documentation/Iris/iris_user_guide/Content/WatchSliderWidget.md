@@ -173,9 +173,9 @@ Specific to the iOS platform, the Min Image property specifies the image for the
 
 To set the Min Image property, click its **Edit** button. From the Min Image dialog box, you can either select one of the listed images, or provide a URL. The listed images are located in the following folders:
 
-`<Workspace>\<ProjectName>\resources\common  
+<Workspace>\<ProjectName>\resources\common  
 <Workspace>\<ProjectName>\resources\watch\common  
-<Workspace>\<ProjectName>\resources\watch\native\watchos`
+<Workspace>\<ProjectName>\resources\watch\native\watchos
 
 For more information, see [Add and Manage Images and Other Media](Adding_and_Managing_Images.html).
 
@@ -185,9 +185,9 @@ Specific to the iOS platform, the Max Image property specifies the image for the
 
 To set the Max Image property, click its **Edit** button. From the Max Image dialog box, you can either select one of the listed images, or provide a URL. The listed images are located in the following folders:
 
-`<Workspace>\<ProjectName>\resources\common  
+<Workspace>\<ProjectName>\resources\common  
 <Workspace>\<ProjectName>\resources\watch\common  
-<Workspace>\<ProjectName>\resources\watch\native\watchos`
+<Workspace>\<ProjectName>\resources\watch\native\watchos
 
 For more information, see [Add and Manage Images and Other Media](Adding_and_Managing_Images.html).
 

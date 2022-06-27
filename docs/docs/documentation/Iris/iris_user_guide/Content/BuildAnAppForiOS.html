@@ -256,7 +256,7 @@
 
 <p><a href="#about-app-transport-security-ats">About App Transport Security (ATS)</a></p>
 
-<p><a href="#automatically-modify-info-plist-with-custom-key-value-pairs">Automatically Modify info.plist with Custom Key Value Pairs</a></p>
+<p><a href="#automatically-modify-infoplist-with-custom-key-value-pairs">Automatically Modify info.plist with Custom Key Value Pairs</a></p>
 
 <p><a href="#using-application-reference-counting">Using Application Reference Counting</a></p>
 
@@ -338,14 +338,15 @@
   <li>Navigate to the common folder in your Volt MX Iris project. For example, <Workspace Name="">/<Project Name="">/resources/common</Project></Workspace></li>
   <li>In the folder, create a JSON file and name it <strong>voltmx_frameworks.json</strong>.</li>
   <li>Open the JSON file in any text editor.</li>
-  <li>Add a JSON object with the key as systemframeworks and value as an array containing all the system frameworks that are dependencies for FFI’s. For example,</li>
-</ol>
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{  
-    "systemframeworks" : ["AVFoundation", ”Security”, ”LocalAuthentication”]  
-    }
-    </code></pre></figure>
+  <li>
+    <p>Add a JSON object with the key as systemframeworks and value as an array containing all the system frameworks that are dependencies for FFI’s. For example</p>
 
-<ol>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> {  
+ "systemframeworks" : ["AVFoundation", ”Security”, ”LocalAuthentication”]  
+ }
+     
+</code></pre></div>    </div>
+  </li>
   <li>In Volt MX Iris, build the app.<br />
 The JSON file is incorporated into the KAR file. When the KAR file is extracted, system frameworks provided in the JSON is added to the XCode project.</li>
 </ol>
@@ -363,18 +364,17 @@ The JSON file is incorporated into the KAR file. When the KAR file is extracted,
 <ol>
   <li>On the <strong>Build</strong> menu, click <strong>Build and Publish Native</strong>.</li>
   <li>In the Build Generation dialog box, select the channels and platforms for which you want to build your app. For example, you may want to build a native type of app for Mobile (phone) devices and Tablet devices for the iOS and Android platforms. For more information about native and SPA apps, see <a href="TypesOfApplications.html">Types of Applications</a>.</li>
-  <li>Select the build mode.</li>
-</ol>
+  <li>
+    <p>Select the build mode.</p>
 
-<ul>
-  <li><strong>Debug mode</strong> - To help you identify and fix errors, Volt MX Iris emits the complete symbolic debug information . To lessen the amount of time necessary to complete the build, the build is not optimized for code execution, so it may tend to execute slower than a build optimized for release. Also, the inclusion of the symbolic debug information causes the final executable to be larger than a release build.</li>
-  <li><strong>Release mode</strong> - Volt MX Iris optimizes the build for execution, requiring more time to generate the build. It also does not emit the complete symbolic debug information, making the final executable smaller than a debug build.</li>
-  <li><strong>Protected Mode</strong> - Applications built in Volt MX Iris can use the additional security enhancements by building the application in the <em>Protected Mode</em>. Volt MX IrisPlatform code for iOS and Android is equipped with mechanisms that can protect your application by detecting attacks like tampering, swizzling, debugging, jail breaking (iOS), rooting (Android), and information disclosure. Additional security mechanisms are provided through the use of White Box Cryptography to protect application business logic and source code. Application reacts to the attack by exiting upon detecting attacks to prevent further attempts.<br />
-If you choose to build an application in <strong>Protected mode</strong>, then setting the public and private keys is mandatory. To do so, go to <strong>Project Settings</strong> &gt; <strong>Protected Mode</strong>. For more details on how to generate public and private keys, click <a href="ApplicationSecurity.html#rsa-key-pair-generation-encryption-and-usage">here</a>.</li>
-  <li><strong>Test Mode</strong> - To help you identify and fix errors, Volt MX Iris provides the ability to Test the application on the device or an emulator. When you build an app using the Test Mode, you can leverage the Jasmine testing framework of Volt MX Iris to thoroughly test your app and ensure your application is errors free. You can run jasmine test cases, test suites and test plans by building an app using the Test mode.</li>
-</ul>
-
-<ol>
+    <ul>
+      <li><strong>Debug mode</strong> - To help you identify and fix errors, Volt MX Iris emits the complete symbolic debug information . To lessen the amount of time necessary to complete the build, the build is not optimized for code execution, so it may tend to execute slower than a build optimized for release. Also, the inclusion of the symbolic debug information causes the final executable to be larger than a release build.</li>
+      <li><strong>Release mode</strong> - Volt MX Iris optimizes the build for execution, requiring more time to generate the build. It also does not emit the complete symbolic debug information, making the final executable smaller than a debug build.</li>
+      <li><strong>Protected Mode</strong> - Applications built in Volt MX Iris can use the additional security enhancements by building the application in the <em>Protected Mode</em>. Volt MX IrisPlatform code for iOS and Android is equipped with mechanisms that can protect your application by detecting attacks like tampering, swizzling, debugging, jail breaking (iOS), rooting (Android), and information disclosure. Additional security mechanisms are provided through the use of White Box Cryptography to protect application business logic and source code. Application reacts to the attack by exiting upon detecting attacks to prevent further attempts.<br />
+If you choose to build an application in <strong>Protected mode</strong>, then setting the public and private keys is mandatory. To do so, go to <strong>Project Settings</strong> &gt; <strong>Protected Mode</strong>. For more details on how to generate public and private keys, click <a href="ApplicationSecurity.html#rsa-key-pair-generation-encryption-and-usage">here</a>.
+       *   <strong>Test Mode</strong> - To help you identify and fix errors, Volt MX Iris provides the ability to Test the application on the device or an emulator. When you build an app using the Test Mode, you can leverage the Jasmine testing framework of Volt MX Iris to thoroughly test your app and ensure your application is errors free. You can run jasmine test cases, test suites and test plans by building an app using the Test mode.</li>
+    </ul>
+  </li>
   <li>Click <strong>Build</strong>.</li>
 </ol>
 
@@ -402,9 +402,12 @@ If you choose to build an application in <strong>Protected mode</strong>, then s
   <li>Add a new key <strong>fileExcludeFromBackup</strong></li>
   <li>Set the type of the key to <strong>Boolean</strong><br />
 The default value for this property is No.</li>
-  <li>Configure the value to <strong>Yes</strong>.<br />
-The application will be excluded from iCloud backups.<br />
-<img src="/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Resources/Images/excludeFileBackupiCloud.png" alt="" /></li>
+  <li>
+    <p>Configure the value to <strong>Yes</strong>.<br />
+The application will be excluded from iCloud backups.</p>
+
+    <p><img src="/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Resources/Images/excludeFileBackupiCloud.png" alt="" /></p>
+  </li>
 </ol>
 
         
@@ -805,20 +808,6 @@ The application will be excluded from iCloud backups.<br />
 
     <li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Internationalization.html#import-internationalization-settings"
     class="nav-list-link">Import Internationalization Resources</a>
-
-    
-
-   </li>
-
-    <li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/ExportImportThemes.html"
-    class="nav-list-link">Export and Import Themes</a>
-
-    
-
-   </li>
-
-    <li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/ExportImportFonts.html"
-    class="nav-list-link">Export and Import Fonts</a>
 
     
 

@@ -293,8 +293,9 @@ For example, if you have an Android device connected to your system, you can gen
 <p><strong>Following are the prerequisites to build a native app on a local machine within Volt MX Iris</strong>:</p>
 
 <ul>
-  <li>Access to a Volt MX Foundry Environment. You must sign in to Volt MX Iris using the login credentials of either your Volt MX Foundry Cloud or on-premise environments.  If you want to use the Volt MX Foundry on-premise environment, you must <a href="LogInUsingCustAuth.html#ConfigureVoltMXFoundryInIrisEnterprise">configure Volt MX Iris to connect to the Volt MX Foundry URL</a>.</li>
-  <li>Volt MX Iris V9 or later.</li>
+  <li>
+    <p>Access to a Volt MX Foundry Environment. You must sign in to Volt MX Iris using the login credentials of either your Volt MX Foundry Cloud or on-premise environments.  If you want to use the Volt MX Foundry on-premise environment, you must <a href="LogInUsingCustAuth.html#ConfigureVoltMXFoundryInIrisEnterprise">configure Volt MX Iris to connect to the Volt MX Foundry URL</a>.</p>
+  </li>
   <li>For publishing to the Enterprise App Store, you must have Volt MX Foundry V8 SP4 or later.</li>
   <li>Configure the various Project Settings.<br />
 Go to <strong>Project</strong> &gt; <strong>Settings</strong> and configure the build settings for each Native platform. For more information on Project Settings, click <a href="Project_Properties_in_VoltMX_Iris.html#project-settings-in">here</a>.</li>
@@ -431,36 +432,34 @@ Go to <strong>Project</strong> &gt; <strong>Settings</strong> and configure the 
   <li>Select the platforms and channels for which you want to build the application.</li>
   <li>From the <strong>Post Build Action</strong> drop-down menu, select the desired <strong>Post Build Action</strong>. For more details about the Post Build Action, click <a href="#post-build-actions">here</a>.</li>
   <li>You can choose to change the cloud environment on which your app is to be published. To do so, click <strong>Change</strong> beside the <strong>Environment</strong> option. By default, the Environment displayed is the one that was last selected.</li>
-  <li>From the <strong>Build Mode</strong> drop-down list, select your desired build mode.</li>
-</ol>
+  <li>
+    <p>From the <strong>Build Mode</strong> drop-down list, select your desired build mode.</p>
 
-<ul>
-  <li><strong>Debug mode</strong> - To help you identify and fix errors, Volt MX Iris emits the complete symbolic debug information . To lessen the amount of time necessary to complete the build, the build is not optimized for code execution, so it may tend to execute slower than a build optimized for release. Also, the inclusion of the symbolic debug information causes the final executable to be larger than a release build.</li>
-  <li><strong>Release mode</strong> - Volt MX Iris optimizes the build for execution, requiring more time to generate the build. It also does not emit the complete symbolic debug information, making the final executable smaller than a debug build.</li>
-  <li><strong>Protected Mode</strong> - Applications built in Volt MX Iris can use the additional security enhancements by building the application in the <em>Protected Mode</em>. Volt MX IrisPlatform code for iOS and Android is equipped with mechanisms that can protect your application by detecting attacks like tampering, swizzling, debugging, jail breaking (iOS), rooting (Android), and information disclosure. Additional security mechanisms are provided through the use of White Box Cryptography to protect application business logic and source code. Application reacts to the attack by exiting upon detecting attacks to prevent further attempts. If you choose to build an application in <strong>Protected mode</strong>, then setting the public and private keys is mandatory. To do so, go to <strong>Project Settings</strong> &gt; <strong>Protected Mode</strong>. For more details on how to generate public and private keys, click <a href="ApplicationSecurity.html#rsa-key-pair-generation-encryption-and-usage">here</a>.</li>
-  <li><strong>Test Mode</strong> - To help you identify and fix errors, Volt MX Iris provides the ability to Test the application on the device or an emulator. When you build an app using the Test Mode, you can leverage the Jasmine testing framework of Volt MX Iris to thoroughly test your app and ensure your application is errors free. You can run jasmine test cases, test suites and test plans by building an app using the Test mode.</li>
-</ul>
-
-<ol>
+    <ul>
+      <li><strong>Debug mode</strong> - To help you identify and fix errors, Volt MX Iris emits the complete symbolic debug information . To lessen the amount of time necessary to complete the build, the build is not optimized for code execution, so it may tend to execute slower than a build optimized for release. Also, the inclusion of the symbolic debug information causes the final executable to be larger than a release build.</li>
+      <li><strong>Release mode</strong> - Volt MX Iris optimizes the build for execution, requiring more time to generate the build. It also does not emit the complete symbolic debug information, making the final executable smaller than a debug build.</li>
+      <li><strong>Protected Mode</strong> - Applications built in Volt MX Iris can use the additional security enhancements by building the application in the <em>Protected Mode</em>. Volt MX IrisPlatform code for iOS and Android is equipped with mechanisms that can protect your application by detecting attacks like tampering, swizzling, debugging, jail breaking (iOS), rooting (Android), and information disclosure. Additional security mechanisms are provided through the use of White Box Cryptography to protect application business logic and source code. Application reacts to the attack by exiting upon detecting attacks to prevent further attempts. If you choose to build an application in <strong>Protected mode</strong>, then setting the public and private keys is mandatory. To do so, go to <strong>Project Settings</strong> &gt; <strong>Protected Mode</strong>. For more details on how to generate public and private keys, click <a href="ApplicationSecurity.html#rsa-key-pair-generation-encryption-and-usage">here</a>.</li>
+      <li><strong>Test Mode</strong> - To help you identify and fix errors, Volt MX Iris provides the ability to Test the application on the device or an emulator. When you build an app using the Test Mode, you can leverage the Jasmine testing framework of Volt MX Iris to thoroughly test your app and ensure your application is errors free. You can run jasmine test cases, test suites and test plans by building an app using the Test mode.</li>
+    </ul>
+  </li>
   <li>
     <p>If you do not want to use the SHA1, MD2, MD4, and MD5 hashing algorithms in your application, check <strong>Strict Mode</strong>. If you do use any of those algorithms, leave <strong>Strict Mode</strong> unchecked. Otherwise, you will receive an “Unsupported algorithm” error message.</p>
   </li>
   <li>
     <p>Click <strong>Build</strong>. The build generation begins.</p>
+
+    <p>You can check the status of your build in the Build tab. It undergoes various actions, like Project compression, uploading the compressed project to the cloud, and then the actual build begins. This process may take some time.</p>
+
+    <p>If there are any errors, they appear in the Build tab.</p>
+  </li>
+  <li>
+    <p>From the Build tab, click <strong>View logs</strong> to open the build logs for the build service on your system.</p>
+
+    <blockquote>
+      <p><strong><em>Note:</em></strong> The app generated using the Build Native Local option cannot be viewed on the Volt MX VoltMX app.</p>
+    </blockquote>
   </li>
 </ol>
-
-<p>You can check the status of your build in the Build tab. It undergoes various actions, like Project compression, uploading the compressed project to the cloud, and then the actual build begins. This process may take some time.</p>
-
-<p>If there are any errors, they appear in the Build tab.</p>
-
-<ol>
-  <li>From the Build tab, click <strong>View logs</strong> to open the build logs for the build service on your system.</li>
-</ol>
-
-<blockquote>
-  <p><strong><em>Note:</em></strong> The app generated using the Build Native Local option cannot be viewed on the Volt MX VoltMX app.</p>
-</blockquote>
       <h2 id="post-successful-build">
         
         
@@ -883,20 +882,6 @@ Go to <strong>Project</strong> &gt; <strong>Settings</strong> and configure the 
 
     <li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Internationalization.html#import-internationalization-settings"
     class="nav-list-link">Import Internationalization Resources</a>
-
-    
-
-   </li>
-
-    <li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/ExportImportThemes.html"
-    class="nav-list-link">Export and Import Themes</a>
-
-    
-
-   </li>
-
-    <li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/ExportImportFonts.html"
-    class="nav-list-link">Export and Import Fonts</a>
 
     
 

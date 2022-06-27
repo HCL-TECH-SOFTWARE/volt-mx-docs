@@ -44,19 +44,19 @@ To create a SOAP service, follow these steps:
 2.  If you have not done so already, log in to your Volt MX account. To do so, in the top right corner of the Volt MX Iris window, click **Login**. The Volt MX Account sign-in window opens. Enter your email and password credentials for your Volt MX user account, and then click **Sign in**.
 3.  Create a new Volt MX Foundry application or use an existing one. To do so, on the **Data and Services** panel, click the context menu arrow, and then click either **Create New App**, or **Use Existing App**, and then select from the Volt MX Foundry Application dialog box the services application that you want to publish. The Volt MX Foundry Console opens.
 
-![](MFinAppPane.png)
+    ![](MFinAppPane.png)
 
-> **_Note:_** If you want to associate your Volt MX Iris project with a different Volt MX Foundry app, on the **Project** tab of the Project Explorer, click the context menu arrow for **VoltMX Foundry**, and then click **Unlink App**. To link to a different Volt MX Foundry app, click the context menu arrow for **VoltMX Foundry**, and then click either **Create New App**, or **Use Existing App**.
+    > **_Note:_** If you want to associate your Volt MX Iris project with a different Volt MX Foundry app, on the **Project** tab of the Project Explorer, click the context menu arrow for **VoltMX Foundry**, and then click **Unlink App**. To link to a different Volt MX Foundry app, click the context menu arrow for **VoltMX Foundry**, and then click either **Create New App**, or **Use Existing App**.
 
-6.  To create a new integration service, on the **Integration** tab, click **CONFIGURE NEW**. The **Service Definition** section appears.
+4.  To create a new integration service, on the **Integration** tab, click **CONFIGURE NEW**. The **Service Definition** section appears.
 
-![](SOAP_CRR_514x318.png)
+    ![](SOAP_CRR_514x318.png)
 
-8.  In the **Name** box, provide a unique name for your service.
-9.  Select _SOAP_ from the Service Type list.
-10. In the **Base URL**, type or paste the URL from which the SOAP services are extracted.
-11. In the **Client Authentication** list, select a value.
-12. Click the **Advanced** tab to specify dependent JAR and API throttling. All options in the Advanced section are optional.
+5.  In the **Name** box, provide a unique name for your service.
+6.  Select _SOAP_ from the Service Type list.
+7. In the **Base URL**, type or paste the URL from which the SOAP services are extracted.
+8. In the **Client Authentication** list, select a value.
+9. Click the **Advanced** tab to specify dependent JAR and API throttling. All options in the Advanced section are optional.
     *   **To specify dependent JAR, follow these steps**:
         
         Select the JAR containing preprocessor or postprocessor libraries from the drop-down list, or click **Upload New** to browse the JAR file from your local system. The step allows you to further filter the data sent to the back end:
@@ -71,8 +71,6 @@ To create a SOAP service, follow these steps:
             
         2.  In the **Rate Limit Per IP** text box, enter a required value. With this value, you can limit the number of IP address requests configured in your Volt MX Foundry console in terms of Per IP Rate Limit.
             
-            To override throttling, refer to [Override API Throttling Configuration](../../../MBaasDocs/ConsoleAndID/Foundry8.0ConsoleAndIDSrvUG/Content/API_Throttling_Override.html#OverrideAPIThrottling).
-            
             > **_Note:_** In case of On-premises, the number of nodes in a clustered environment is set by configuring the `VOLTMX_SERVER_NUMBER_OF_NODES` property in the Admin Console. This property indicates the number of nodes configured in the cluster. The default value is 1.  
             Refer to [The Runtime Configuration tab on the Settings screen of App Services]({{ site.baseurl }}/docs/documentation/Foundry/vmf_integrationservice_admin_console_userguide/Content/Runtime_Configuration.html).  
               
@@ -80,7 +78,7 @@ To create a SOAP service, follow these steps:
             This is applicable for Cloud and On-premises.
             
     *   Enter the qualified name of the URL Provider Class. For more information, refer [URL Provider Support for XML, JSON, SOAP, and API Proxy](../../../MBaasDocs/ConsoleAndID/Foundry8.0ConsoleAndIDSrvUG/Content/URL Provider Support for XML, JSON, SOAP and API Proxy.html).
-13. In the **Web Service Authentication**, select one of the following modes:
+10. In the **Web Service Authentication**, select one of the following modes:
     
     *   **None**: Select this option if you do not want to provide any authentication for the service.
     *   **Basic**: Provide User ID and Password if the external Web service requires form or basic authentication.
@@ -88,23 +86,23 @@ To create a SOAP service, follow these steps:
     
     > **_Important:_** If you configure an integration service with Basic web service authentication, ensure that reserved IDs are not used as input or header IDs since some key words such as userid, pwd and password are reserved by middleware services.
     
-14. Click **Save**. A new tab titled **Operations List** appears. Click it.
-15. Select an operation from the list of operations.
+11. Click **Save**. A new tab titled **Operations List** appears. Click it.
+12. Select an operation from the list of operations.
 
-![](Services_220x233.png)
+    ![](Services_220x233.png)
 
-17. Click **Add Operation**. The operation is added to the service.
+13. Click **Add Operation**. The operation is added to the service.
 
-> **_Important:_** While configuring an integration service with basic auth mode, ensure that some reserved IDs are not used as input/header IDs. Key words such as userid, pwd and password are reserved by middleware when a user selects basic auth mode.
+    > **_Important:_** While configuring an integration service with basic auth mode, ensure that some reserved IDs are not used as input/header IDs. Key words such as userid, pwd and password are reserved by middleware when a user selects basic auth mode.
 
-19. Click the added service.
-20. Select one of the following security operations in the Operation Security Level field. By default, this field is set to Authenticated App User. You can restrict access to this operation based on the following levels:
+14. Click the added service.
+15. Select one of the following security operations in the Operation Security Level field. By default, this field is set to Authenticated App User. You can restrict access to this operation based on the following levels:
     *   Authenticated App User – indicates that this operation is secured. To use this operation, an app user must be authenticated by an associated identity service.
     *   Anonymous App User – indicates that a user must have the app key and app secret to access this operation.
     *   Public – indicates that this operation requires no special security.
-21. In the **Operation Path** box, modify the path if required.
-22. Select a method for the operation from **HTTP Methods** list.
-23. Click **Request Input** and do the following.
+16. In the **Operation Path** box, modify the path if required.
+17. Select a method for the operation from **HTTP Methods** list.
+18. Click **Request Input** and do the following.
     
     Integration services accept only `form-url-encoded` inputs for all input parameters provided in service input parameters (request input).
     
@@ -128,7 +126,7 @@ To create a SOAP service, follow these steps:
                     User has the option to configure the default value. This default value is taken if the request does not have the header.
                     
                 *   **Session**: If this option is selected, the value of header is picked from session context based on the user configuration.
-                *   **Identity**: If this is selected, you can filter the request parameters based on the response from the identity provider. For more details to configure identity filters, refer to [Enhanced Identity Filters - Integration Services](../../../MBaasDocs/ConsoleAndID/Foundry8.0ConsoleAndIDSrvUG/Content/Identity_Filters_Integration.html).
+                *   **Identity**: If this is selected, you can filter the request parameters based on the response from the identity provider. For more details to configure identity filters.
             3.  **TEST VALUE**: Enter a value. A test value is used for testing the service.
             4.  **DEFAULT VALUE:** enter the value if required. The default value will be used if the test value is empty.
             5.  Select the **ENCODE** check box to enable an input parameter to be encoded. For example, the name New York Times would be encoded as _New_York_Times_  when the encoding is set to True. The encoding must also adhere to the HTML URL encoding standards.
@@ -153,8 +151,7 @@ To create a SOAP service, follow these steps:
                     
                     You cannot edit the default value for expression.
                     
-                *   **Identity**: If this is selected, you can filter the request parameters based on the response from the identity provider. For more details to configure identity filters, refer to [Enhanced Identity Filters - Integration Services](../../../MBaasDocs/ConsoleAndID/Foundry8.0ConsoleAndIDSrvUG/Content/Identity_Filters_Integration.html).
-                    
+                *   **Identity**: If this is selected, you can filter the request parameters based on the response from the identity provider. For more details to configure identity filters.
                     > **_Note:_** If the header value is scoped as a **Request** (or) **Session** and the same header is accessed under the **Expression** header value, then the expression must be represented as $request.header (or) $session.header.  
                       
                     **Example**: If a header 1 value is a request and header 2 value is an expression, then the value of the expression must be $Request.header1.  
@@ -167,7 +164,7 @@ To create a SOAP service, follow these steps:
             
             To validate the details, click **Fetch Response**. The result of the operation appears.
             
-24. In the **Response Output** tab, provide the following details.
+19. In the **Response Output** tab, provide the following details.
 
 Output parameters are the parameters that are fetched from the response of a service call and return to the calling device. You can configure as many or few output parameters as you need. Trimming the dataset saves bandwidth. You can define output parameters as collections or single values. Collections are useful when you have repeating rows of data like the images that appear in your application
 
@@ -195,7 +192,7 @@ Output parameters are the parameters that are fetched from the response of a ser
     *   **Format Value** - Provide the conversion standard for the selected format.
     *   If a parameter row needs to be deleted, select the parameter row to be deleted and click **Delete**. This action removes the parameter row from the list of service parameters.
 
-28. Click **Advanced**.
+20. Click **Advanced**.
     *   **Custom Code Invocation**: Upload a JAR file containing the pre-processor class name and post-processor class name. This step allows you to further filter the data received from a service call.
     
     > **_Note:_** For more information on Pre-processor and Post-processor, see the section [Preprocessor/Post Processor](Preprocessor_Postprocessor.html).
@@ -209,13 +206,13 @@ Output parameters are the parameters that are fetched from the response of a ser
         > **_Note:_** If this service is **Cacheable** and a call is made before the specified time duration, the service response is fetched from the Cache, else a fresh service call is made to fetch response from the server.
         
     *   Click **Save Operation** to the save the operation.
-29. Click **Test** to view the result of the operation. The results are displayed in Output Result area.
+21. Click **Test** to view the result of the operation. The results are displayed in Output Result area.
 
 *   You can view the back-end response in Backend Response tab.
 *   In Backend Response, you can view the raw response or view the response in a tree format. Clicking on a element in the tree displays the Xpath of that tag.
 
-![](SOAPTree_CRR_351x260.png)
+    ![](SOAPTree_CRR_351x260.png)
 
-33. Click **Test**. The Result of the operation appears.
-34. Click **Save Operation** to the save the operation.
-35. To close the Volt MX Foundry Console and return to the panes, views, and tabs of the Volt MX Iris integrated development environment (IDE), from the Quick Launch Bar along the upper left edge of Volt MX Iris, click the Workspace icon ![](Resources/Images/S7Persp_QkLaunch01b_20x19.png). Since you are still logged in to your Volt MX account, Volt MX Iris continues to have access to your Volt MX Foundry services.
+22. Click **Test**. The Result of the operation appears.
+23. Click **Save Operation** to the save the operation.
+24. To close the Volt MX Foundry Console and return to the panes, views, and tabs of the Volt MX Iris integrated development environment (IDE), from the Quick Launch Bar along the upper left edge of Volt MX Iris, click the Workspace icon ![](Resources/Images/S7Persp_QkLaunch01b_20x19.png). Since you are still logged in to your Volt MX account, Volt MX Iris continues to have access to your Volt MX Foundry services.

@@ -23,7 +23,7 @@ Download and Activate the Assets for the Native Container
 
 To download and activate the native function UI API assets for NativeContainer widgets, do the following:
 
-1.  Download the Native Function UI API you want from the [](http://developer.voltmx.com/VoltMXBetaRelease70)[VoltMX install site](http://developer.voltmx.com/VoltMXBetaRelease70). They are located at the bottom of the page under the heading, _Other Downloads_.
+1.  Download the Native Function UI API you want from the VoltMX install site
 2.  On the **Project** menu of Volt MX Iris, click **Add JS Modules**. The **Add JS Modules** dialog box opens.
 3.  In the **Add JS Module** dialog box, click **Browse**, and then navigate and select an native function UI API zip file that you downloaded.
 4.  Click **Finish**. A message box appears indicating that the API was successfully added to your app. Click **OK**.

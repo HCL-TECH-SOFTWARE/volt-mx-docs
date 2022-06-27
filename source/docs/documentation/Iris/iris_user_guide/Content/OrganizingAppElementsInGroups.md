@@ -69,19 +69,19 @@ To hide app groups from the project at the channel level, follow these steps:
     The **App Group Configuration** dialog box appears.
 3.  Select the **Hide in Project** check box for the Application Groups that you want to hide.
 
-> **_Note:_**  
-> *   The **App Group Configuration** dialog box displays a list of all the available app groups in the project.
-> *   For nested app groups, if you hide the parent app group, the child app groups are also hidden from the project.
-> *   Clear the **Hide in Project** check box to show the application groups in the project.
-> *   To hide all available app groups, select the **Hide in Project** check box in the header of the **App Group Configuration** dialog box. To show all available app groups, clear the **Hide in Project** check box in the header of the **App Group Configuration** dialog box.
+     > **_Note:_**  
+     > *   The **App Group Configuration** dialog box displays a list of all the available app groups in the project.
+     > *   For nested app groups, if you hide the parent app group, the child app groups are also hidden from the project.
+     > *   Clear the **Hide in Project** check box to show the application groups in the project.
+     > *   To hide all available app groups, select the **Hide in Project** check box in the header of the **App Group Configuration** dialog box. To show all available app groups, clear the **Hide in Project** check box in the header of the **App Group Configuration** dialog box.
 
 4.  Click **Save**.  
     The selected Application Groups are hidden from the Project Explorer and the Storyboard view.
 
 Alternatively, you can perform the following actions to hide application groups in the project at the app group level:
 
-1.  From the Project Explorer, expand the **Mobile**, **Tablet**, **Desktop**, or **Watch** channel, and expand the **Forms** node.
-2.  Right-click the application group that you want to hide, and select **Hide**.  
+5.  From the Project Explorer, expand the **Mobile**, **Tablet**, **Desktop**, or **Watch** channel, and expand the **Forms** node.
+6.  Right-click the application group that you want to hide, and select **Hide**.  
     The selected Application Group is hidden from the Project Explorer and the Storyboard view.
 
 Exclude an Application Group from the Build Process
@@ -96,10 +96,10 @@ To exclude app groups from the build process at the channel level, follow these 
     The **App Group Configuration** dialog box appears.
 3.  Select the **Exclude from Build** check box for the application groups that you want to exclude from the build process.
 
-> **_Note:_**
-> *   The **App Group Configuration** dialog box displays a list of all the available app groups in the project.
-> *   For nested app groups, if you exclude the parent app group, the child app groups are also excluded from the build process.
-> *   To exclude all available app groups, select the **Exclude from Build** check box in the header of the **App Group Configuration** dialog box.
+    > **_Note:_**
+    > *   The **App Group Configuration** dialog box displays a list of all the available app groups in the project.
+    > *   For nested app groups, if you exclude the parent app group, the child app groups are also excluded from the build process.
+    > *   To exclude all available app groups, select the **Exclude from Build** check box in the header of the **App Group Configuration** dialog box.
 
 4.  Click **Save**.  
     The selected application groups are excluded from the build process.

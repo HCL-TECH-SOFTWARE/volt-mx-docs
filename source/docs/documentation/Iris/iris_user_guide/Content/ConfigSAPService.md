@@ -22,30 +22,30 @@ Adding a Volt MX SAP Gateway service involves the following steps:
 
 ### Configure a New Volt MX SAP Gateway
 
-This procedure assumes that you have already configured Volt MX Foundry in Volt MX Iris. For more information, see [Connect to the Volt MX Foundry Console](Connect to Volt MX Foundry.html).
-
+This procedure assumes that you have already configured Volt MX Foundry in Volt MX Iris. 
 To configure your Volt MX SAP Gateway, follow these steps:
 
 1.  In Volt MX Iris, open either an existing application or create a new one.
 2.  If you have not done so already, log in to your Volt MX account. To do so, in the top right corner of the Volt MX Iris window, click **Login**. The Volt MX Account sign-in window opens. Enter your email and password credentials for your Volt MX user account, and then click **Sign in**.
 3.  Create a new Volt MX Foundry application or use an existing one. To do so, on the **Data and Services** panel, click the context menu arrow, and then click either **Create New App**, or **Use Existing App**, and then select from the Volt MX Foundry Application dialog box the services application that you want to publish. The Volt MX Foundry Console opens.
 
-![](MFinAppPane.png)
+    ![](MFinAppPane.png)
 
-> **_Note:_** If you want to associate your Volt MX Iris project with a different Volt MX Foundry app, on the **Project** tab of the Project Explorer, click the context menu arrow for **VoltMX Foundry**, and then click **Unlink App**. To link to a different Volt MX Foundry app, click the context menu arrow for **VoltMX Foundry**, and then click either **Create New App**, or **Use Existing App**.
+    > **_Note:_** If you want to associate your Volt MX Iris project with a different Volt MX Foundry app, on the **Project** tab of the Project Explorer, click the context menu arrow for **VoltMX Foundry**, and then click **Unlink App**. To link to a different Volt MX Foundry app, click the context menu arrow for **VoltMX Foundry**, and then click either **Create New App**, or **Use Existing App**.
 
-6.  To create a new integration service, on the **Integration** tab, click **CONFIGURE NEW**. The **Service Definition** section appears.  
+4.  To create a new integration service, on the **Integration** tab, click **CONFIGURE NEW**. The **Service Definition** section appears.  
+      
       
     ![](Resources/Images/Integration3_623x432.png)  
       
       
     
-7.  In the **Integration** tab, click **CONFIGURE NEW** to create an integration service.  
+5.  In the **Integration** tab, click **CONFIGURE NEW** to create an integration service.  
       
     ![](Resources/Images/SAP-Onprem_649x517.png)  
       
     
-8.  In the **Service Definition** section, follow these steps:
+6.  In the **Service Definition** section, follow these steps:
     1.  In the **Service Name** text box, enter a unique name for your service.
     2.  From the **Service Type** list, select **VoltMX SAP gateway**.  
         By default, XML is selected. If you select **VoltMX SAP gateway**, the **Select authentication service** section is displayed, shown below.
@@ -73,7 +73,7 @@ To configure your Volt MX SAP Gateway, follow these steps:
               
             ![](Resources/Images/IntegrationIdP_642x457.png)  
             
-9.  Click the **Advanced** tab to specify API throttling. All options in the Advanced section are optional.
+7.  Click the **Advanced** tab to specify API throttling. All options in the Advanced section are optional.
     *   API throttling enables you to limit the number of request calls within a minute. If an API exceeds the throttling limit, the API will not return the service response.**  
         To specify throttling, follow these steps:**  
         1.  In the **Total Rate Limit** text box, enter a required value. With this value, you can limit the number of requests configured in your Volt MX Foundry console in terms of Total Rate Limit.
@@ -88,16 +88,16 @@ To configure your Volt MX SAP Gateway, follow these steps:
             The total limit set in the Volt MX Foundry Console will be divided by the number of configured nodes. For example, a throttling limit of 600 requests/minute with three nodes will be calculated to be 200 requests/minute per node.  
             This is applicable for Cloud and On-premises.
             
-10. To enable the proxy, select the **Use proxy from settings** check box. By default, the check box is cleared.  
-    The **Use proxy from settings** check box dims when no proxy is configured under the ****[Settings > Proxy](../../../MBaasDocs/ConsoleAndID/Foundry8.0ConsoleAndIDSrvUG/Content/Settings.html#Proxy)****.
-11. After you configure the authentication service, click **Save** .  
+8. To enable the proxy, select the **Use proxy from settings** check box. By default, the check box is cleared.  
+    The **Use proxy from settings** check box dims when no proxy is configured under the Settings > Proxy
+9. After you configure the authentication service, click **Save** .  
     
-12. Click **Operations List** tab. Based on your Volt MX SAP Gateway authentication, the system loads all tables such as libraries and objects along with supported HTTP methods
+10. Click **Operations List** tab. Based on your Volt MX SAP Gateway authentication, the system loads all tables such as libraries and objects along with supported HTTP methods
 
-![](SAPService2_CRR_603x249.png)
+    ![](SAPService2_CRR_603x249.png)
 
-14. Select a library form the **Libraries** list. The objects of the selected library will be loaded in the Objects list.
-15. Select an object from the **Objects** list.
+11. Select a library form the **Libraries** list. The objects of the selected library will be loaded in the Objects list.
+12. Select an object from the **Objects** list.
     
     ![](SAPService3_CRR_494x309.png)
     
@@ -111,7 +111,7 @@ To configure your Volt MX SAP Gateway, follow these steps:
     
     ![](SAPService5_CRR_495x281.png)
     
-16. To configure operations, under **Operations** > **Configured Operations**, hover your cursor over the required service, click the **Settings** button, and then click **Edit**.
+13. To configure operations, under **Operations** > **Configured Operations**, hover your cursor over the required service, click the **Settings** button, and then click **Edit**.
     
     ![](SAPService6_CRR_618x193.png)
     
@@ -119,16 +119,16 @@ To configure your Volt MX SAP Gateway, follow these steps:
     
     ![](SAPService7_CRR_616x434.png)
     
-17. In the **Name** box, modify the name if required.
-18. Select one of the following security operations in the **Operation Security Level** field. By default, this field is set to **Authenticated App User.**
+14. In the **Name** box, modify the name if required.
+15. Select one of the following security operations in the **Operation Security Level** field. By default, this field is set to **Authenticated App User.**
     *   **Authenticated App User** – indicates that this operation is secured. To use this operation, an app user must be authenticated by an associated identity service.
     *   **Anonymous App User** – indicates that a user must have the app key and app secret to access this operation.
     *   **Public** – indicates that this operation requires no special security.
-19. In the **Operation Path** box, modify the path if required.
+16. In the **Operation Path** box, modify the path if required.
     
     > **_Note:_** You can add an entry by clicking the **Add** button if entries for the input and the advanced tabs do not exist. You can also delete an existing entry by clicking the **Delete** button.
     
-20. In the **Request Input** tab, provide the following information:
+17. In the **Request Input** tab, provide the following information:
     1.  The **ID** field contains a unique identifier for a parameter. Change the identifier if required.
     2.  The **Test value** field contains a value to be used to test the service. Change the syntax if required.
     3.  In the **Default value** field, change the syntax if required.
@@ -150,25 +150,25 @@ To configure your Volt MX SAP Gateway, follow these steps:
                 
         3.  Select the **Encode** check box to enable an input parameter to be encoded. For example, the name New York Times would be encoded as _New_York_Times_ when the encoding is set to True. The encoding must also adhere to the HTML URL encoding standards.
         4.  Click **Submit**. The input parameter is saved with additional properties.
-21. Click the **Attributes** tab to view schema. This is a meta-data schema for which user has configured at Volt MX SAP. The schema is in XML format.
+18. Click the **Attributes** tab to view schema. This is a meta-data schema for which user has configured at Volt MX SAP. The schema is in XML format.
     
     For example, the schema includes elements for the configured tables, such as, table name, description, library name, group name, URL, methods.
     
     ![](AttributesSAPService8_CRR_256x340.png)
     
-22. Click the **Response Output** tab to view the output test values, such as ID, scope, data type. You cannot edit these values.
+19. Click the **Response Output** tab to view the output test values, such as ID, scope, data type. You cannot edit these values.
     
     ![](OutputParams_CRR_693x112.png)
     
-23. Based on the operation - for example, post or get - provide custom HTTP headers.  
+20. Based on the operation - for example, post or get - provide custom HTTP headers.  
     To provide customer headers, click **Advanced**. In the **Test values** text box, provide custom HTTP headers required by the external data source, shown below:
 
 *   **ID**: The rows are created based on the selected operation. Change the value if required.
 *   **Test value**: Enter a value. A test value is used for testing the service.
 
-25. Click **Save Operation** to save the operation. They system displays the **Operation** section for your service.
-26. Click **Done** to navigate to the **Integration** page.
-27. To close the Volt MX Foundry Console and return to the panes, views, and tabs of the Volt MX Iris integrated development environment (IDE), from the Quick Launch Bar along the upper left edge of Volt MX Iris, click the Workspace icon ![](Resources/Images/S7Persp_QkLaunch01b_20x19.png). Since you are still logged in to your Volt MX account, Volt MX Iris continues to have access to your Volt MX Foundry services.
+21. Click **Save Operation** to save the operation. They system displays the **Operation** section for your service.
+22. Click **Done** to navigate to the **Integration** page.
+23. To close the Volt MX Foundry Console and return to the panes, views, and tabs of the Volt MX Iris integrated development environment (IDE), from the Quick Launch Bar along the upper left edge of Volt MX Iris, click the Workspace icon ![](Resources/Images/S7Persp_QkLaunch01b_20x19.png). Since you are still logged in to your Volt MX account, Volt MX Iris continues to have access to your Volt MX Foundry services.
 
 ### Edit or Test an Existing Volt MX SAP Gateway Integration Service
 
@@ -179,7 +179,7 @@ Each operation contains four tabs, including input, attributes, output, and adva
 To edit or test an existing Volt MX SAP integration service, follow these steps:
 
 1.  In the **Integration** page, click one of your SAP services.
-2.  Make the necessary changes in the **Service Definition** and **Operations** sections. You can test an operation by inputting values. To test an operation, refer to **[How to configure Volt MX SAP Gateway Operations](#TotestSAPOperation)**.
+2.  Make the necessary changes in the **Service Definition** and **Operations** sections. You can test an operation by inputting values. 
 3.  Click **Done** to save the changes. The system displays the **Integration** page.
 
 ### Configure a Identity Provider

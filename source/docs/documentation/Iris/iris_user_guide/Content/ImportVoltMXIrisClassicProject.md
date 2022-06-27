@@ -46,15 +46,23 @@ To import a local Iris Classic project, follow these steps:
     *   Click **Open as New Project** to import the local project as a new Volt MX Iris project.
     *   Click **Add to Current Project** to import the local project to the current Volt MX Iris project.
     
-    The **Import into project** dialog box appears.  
+    The **Import into project** dialog box appears. 
+
     ![](Resources/Images/Employee_Directory_Import_into_Project.PNG)
     
+
 3.  Click **Browse** to locate the archive file that you want to import, select it, and then click **Import**. The project is imported to your new or current project. On successful import of the local project, Volt MX Iris does the following:
     *   The startup form is highlighted in the Project Explorer. Here, **Employee Directory** is the imported sample app and **frmHome** is the startup form.  
+
         ![](Resources/Images/Employee_Directory_Project_Explorer.PNG)
+
+
     *   The startup form of the imported project is displayed on the Project Canvas.
     *   The **Look** tab is auto-selected and displayed on the **Properties** panel.  
+
+
         ![](Resources/Images/Employee_Directory_Properties_Panel.PNG)
+
 
 > **_Note:_** If a project with the same name exists already, the **Conflict** dialog box appears, asking you if you want to overwrite the existing project. Click **OK** to overwrite the existing project. Click **Cancel** to end the import process.
 
@@ -70,12 +78,18 @@ To import a Iris Classic project from a cloud account, follow these steps:
     
 3.  In the list of projects, hover over the project you want to import. The project's field highlights, and an Import button appears along the right-edge of the project's field. Click **Import**. The project is imported to your current project. On successful import of the local project, Volt MX Iris does the following:
     *   The startup form is highlighted in the Project Explorer. Here, **Employee Directory** is the imported sample app and **frmHome** is the startup form.  
+
+
         ![](Resources/Images/Employee_Directory_Project_Explorer.PNG)
-    *   The startup form of the imported project is displayed on the Project Canvas.
+
+
+*   The startup form of the imported project is displayed on the Project Canvas.
         
-    *   The **Look** tab is auto-selected and displayed on the **Properties** panel.  
+*   The **Look** tab is auto-selected and displayed on the **Properties** panel.  
           
+
         ![](Resources/Images/Employee_Directory_Properties_Panel.PNG)
+
 
 > **_Note:_** If a project with the same name exists already, a dialog box appears, asking if you want to overwrite the existing project or rename the project you're importing with a different name. Click **Overwrite** to overwrite the existing project. Click **Rename** to open a dialog box where you can enter a new name for the app that you are importing. Then you can either click **OK** to proceed with the import process from the cloud or click **Cancel** to end the import process without downloading the project from the cloud.
 
@@ -125,6 +139,8 @@ To manually resolve conflicts between Designer and Developer actions, follow the
 3.  Click the Unlink icon against the action that you do not want to associate with the widget or form, and then click Done.  
     
     ![](Resources/Images/Unlink_Action_526x259.png)  
+
+
     The action that you choose to retain is associated with the widget and is considered as a Developer action.
     
 

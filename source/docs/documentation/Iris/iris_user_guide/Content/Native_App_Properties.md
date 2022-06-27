@@ -10,7 +10,7 @@ Set Native App Properties
 
 Native app properties are divided into two categories: those that are common to all platforms, and those that are platform-specific. These properties range from the logo image your app displays to the types of screens and SDKs the app supports, and how certificates are handled.
 
-From Volt MX Iris V8 SP4, you can also enable certain Android features [by manually adding the corresponding properties to the androidbuild.properties file](#add-android-properties-to-androidbuild-properties-file).
+In Volt MX Iris V9 SP 2, you can also enable certain Android features [by manually adding the corresponding properties to the androidbuild.properties file](#add-android-properties-to-androidbuild-properties-file).
 
 To set Native app properties, follow these steps:
 
@@ -196,7 +196,7 @@ To set Native app properties, follow these steps:
     *   **production**: Select this option to receive push notifications when in the production environment.
     *   **None**: Select this option to disable push notifications in any environment.
     
-    > **_Note:_** This feature is available from Volt MX Iris V8 SP4 FP19 onwards, and is available in both Volt MX Iris Classic and Volt MX Iris.  
+    > **_Note:_** This feature is available In Volt MX Iris V9 SP 2 FP19 onwards, and is available in both Volt MX Iris Classic and Volt MX Iris.  
     
 6.  **Application Launch Mode for iPad** - specifies the default mode of launching the application on iPad. _Portrait_ is the default value.
 7.  **Supported Orientations for iPad** - specifies the supported orientations for the iPad. This depends on the launch mode. The different orientations for a form and at application level are listed at
@@ -267,8 +267,8 @@ The developerSigningKeyHash key helps you to utilize the APK Tamper Protection f
 
 ##### Important Points
 
-1.  If you specify KeyStore entries through Volt MX Iris, the KeyStore entries will take precedence over the developerSigningKeyHash key until Volt MX Iris V8 SP4 Fixpack 19.
-2.  From Volt MX Iris V8 SP4 Fixpack 20 onwards, if you specify Iris KeyStore entries and developerSigningKeyHash, both items are respected simultaneously and the app is launched if any one of these items matches. This enhancement helps you to test the APK locally before uploading it to Google Play.
+1.  If you specify KeyStore entries through Volt MX Iris, the KeyStore entries will take precedence over the developerSigningKeyHash key until In Volt MX Iris V9 SP 2 Fixpack 19.
+2.  In Volt MX Iris V9 SP 2Fixpack 20 onwards, if you specify Iris KeyStore entries and developerSigningKeyHash, both items are respected simultaneously and the app is launched if any one of these items matches. This enhancement helps you to test the APK locally before uploading it to Google Play.
 3.  If you do not want to upload the Upload Signing key to the CI cloud, use the `uploadSigningKeyHash` property in the **androidbuild.properties** file as an alternative to specifying KeyStore entries.
 4.  You must provide either the KeyStore or uploadSigningKeyHash to test Google Play App Signing locally for the enrolled APK, which is tamper-protected. If you do not provide any of those values, the test APK that is generated will be signed by the debug key and the APK will not boot as the hash validation process fails at run time.
 
@@ -280,9 +280,9 @@ To manually sign the application by using your own keystore file, follow these s
 2.  Locate and open the `PrintApkSignatureHash.jar` file.
 3.  Run either of the following commands to generate the developerSigningKeyHash:
     
-    *   For apps built in Volt MX Iris V8 SP4 Fixpack 19 or earlier, use the following command. This command generates the hash with SHA-1 algorithm.  
+    *   For apps built In Volt MX Iris V9 SP 2Fixpack 19 or earlier, use the following command. This command generates the hash with SHA-1 algorithm.  
         `java -jar PrintApkSignatureHash.jar keyStorePath keyStorePassword keyAlias`
-    *   For apps built in Volt MX Iris V8 SP4 Fixpack 20 or later, use the following command. This command generates the hash with either SHA-1 or SHA-256 algorithm, depending on the `-- algorithm` input parameter.  
+    *   For apps built In Volt MX Iris V9 SP 2 Fixpack 20 or later, use the following command. This command generates the hash with either SHA-1 or SHA-256 algorithm, depending on the `-- algorithm` input parameter.  
         `java -jar PrintApkSignatureHash.jar –-storepath keyStorePath –-storepass keyStorePassword –-alias keyAlias --algorithm hash-logo`
     
     Here, the items are as follows:
@@ -292,7 +292,7 @@ To manually sign the application by using your own keystore file, follow these s
     *   **keyAlias**: Signing key alias of your developer KeyStore.
     *   **hash-algo**: Hashing algorithm that is used to generate the signing key hash. It can either be `SHA-1` or `SHA-256`.
         
-        > **_Note:_** If the hash is generated with SHA-256 algorithm, the hash will not work for apps built in Volt MX Iris V8 SP4 Fixpack 19 or earlier. However, if the hash is generated with SHA-1 or SHA-256 algorithm, the hash will work for apps built in Volt MX Iris V8 SP4 Fixpack 20 or later.
+        > **_Note:_** If the hash is generated with SHA-256 algorithm, the hash will not work for apps built In Volt MX Iris V9 SP 2 Fixpack 19 or earlier. However, if the hash is generated with SHA-1 or SHA-256 algorithm, the hash will work for apps built In Volt MX Iris V9 SP 2 Fixpack 20 or later.
         
 4.  Here is a sample output that is generated.
     
@@ -436,7 +436,7 @@ If the developer does not set the value for the property, the default value is f
 
 #### Bundle a Customized Cordova-Generated Android Project
 
-To bundle the [manually customized version of your Cordova-generated Android project](CreateCordovaApplications.html#manually-customize-the-cordova-generated-android-project), you must set the `cordovabuildmode` property as `incremental` in the [androidbuild.properties file](#add-android-properties-to-androidbuild-properties-file). This feature is available from Volt MX Iris V8 SP4 Fixpack 47.
+To bundle the [manually customized version of your Cordova-generated Android project](CreateCordovaApplications.html#manually-customize-the-cordova-generated-android-project), you must set the `cordovabuildmode` property as `incremental` in the [androidbuild.properties file](#add-android-properties-to-androidbuild-properties-file). This feature is available In Volt MX Iris V9 SP 2 Fixpack 47.
 
 {% highlight voltMx %}cordovabuildmode = incremental
 {% endhighlight %}
@@ -502,13 +502,14 @@ You can customize the auto-generated Main activity to add additional functionali
     
     For example:
     
-    {% highlight voltMx %}CustomMainActivity extends com.konylabs.android.KonyMain{  
+    ```
+    CustomMainActivity extends com.konylabs.android.KonyMain{  
     public void onCreate(Bundle savedInstanceState) {  
     super.onCreate(Bundle savedInstanceState);  
     //Your custom functionality  
     }  
     }
-    {% endhighlight %}
+    ```
 2.  Add related Activity tags in the Android Manifest file. For example, `android:name = <CustomMainActivity>`.
     
     *   In case of a `.aar` file, add the activity tag as part of the AndroidManifest.xml in the .aar file.

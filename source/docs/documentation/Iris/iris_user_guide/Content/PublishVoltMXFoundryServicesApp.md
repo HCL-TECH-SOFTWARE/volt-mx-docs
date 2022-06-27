@@ -18,35 +18,35 @@ Before you can publish an app to Volt MX Foundry, you must meet the following pr
 *   Configure Volt MX Foundry in Volt MX Iris.
 *   Create a Volt MX Foundry app corresponding to the Volt MX Iris app that you are publishing.
 
-For more information, refer [Connecting to Services](Connecting_to_Services.html) and [Getting Started with Volt MX Foundry]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_quickstart_guide/Content/How_to_access_VoltMX_Foundry_Portal_on-Prem.html).
+
 
 > **_Important:_** If your app contains deprecated widgets, it is possible that their skins may refer to the Helvetica font. If you are not explicitly using Helvetica in your app, you must verify your app's configuration and manually remove references to Helvetica before submitting it to the store.
 
 This topic contains the following sections:
 
-*   [Directly publish an app to Volt MX Foundry](#directly-publish-an-app-to)
-*   [Publish the app from Volt MX Foundry](#publish-the-app-from)
+*   [Directly publish an app to Volt MX Foundry](#directly-publish-an-app-to-volt-mx-foundry)
+*   [Publish the app from Volt MX Foundry](#publish-the-app-from-volt-mx-foundry)
 
 Directly Publish an App to Volt MX Foundry
 -----------------------------------------
 
-From Volt MX Iris V8 SP4 FP 35 onwards, an option to directly publish your app to Volt MX Foundry has been provided.
+From Volt MX Iris FP 35 onwards, an option to directly publish your app to Volt MX Foundry has been provided.
 
 To directly publish an app to Volt MX Foundry, follow these steps:
 
 1.  In Volt MX Iris, sign in to your Volt MX Cloud account. To do so, from the upper-right corner of the Volt MX Iris window, click **Login**. The Volt MX Account sign-in window opens. Type your Volt MX Cloud email and password credentials, and then click **Sign in**. Volt MX Iris uses the configured Volt MX Foundry URL to sign in to Volt MX Foundry.
 
-> **_Note:_** You can configure the Volt MX Foundry URL by going to: **Edit > Preferences > Volt MX Foundry**.
+    > **_Note:_** You can configure the Volt MX Foundry URL by going to: **Edit > Preferences > Volt MX Foundry**.
 
-> **_Important:_** If you are not able to get beyond the login page for the Volt MX Foundry Console, it could be because you set up Volt MX Foundryby using a **self-signed certificate**. The self-signed certificate allows you to install Volt MX Foundry, however, which Windows and Google Chrome do not trust the allow you to sign in. To resolve this issue, locate the certificate (you may need to contact your system administrator to do so), and then import it to the **Trusted Root Certification Authorities** folder of the Windows Certificate Store. For more information on how to import a certificate into the Windows Store, refer [Import or export certificates and private keys](http://windows.microsoft.com/en-us/windows/import-export-certificates-private-keys#1TC=windows-7) on the Microsoft web site.
+    > **_Important:_** If you are not able to get beyond the login page for the Volt MX Foundry Console, it could be because you set up Volt MX Foundryby using a **self-signed certificate**. The self-signed certificate allows you to install Volt MX Foundry, however, which Windows and Google Chrome do not trust the allow you to sign in. To resolve this issue, locate the certificate (you may need to contact your system administrator to do so), and then import it to the **Trusted Root Certification Authorities** folder of the Windows Certificate Store. For more information on how to import a certificate into the Windows Store, refer Import or export certificates and private keys on the Microsoft web site.
 
-1.  Select a default environment for Volt MX Foundry. To do so, on the **Project Explorer**, click **Project Settings**.
-2.  Click **VoltMX Foundry**.  
+2.  Select a default environment for Volt MX Foundry. To do so, on the **Project Explorer**, click **Project Settings**.
+3.  Click **VoltMX Foundry**.  
     At the top of this tab, under Volt MX Foundry Environment, select an environment from the drop-down list. Click **Done**. If you do not see any environments listed, you need to create one. For more information, refer [Environments]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Environments.html) in the Volt MX Foundry Console User Guide.
 
-> **_Note:_** If an environment contains an alias hostname, the alias is used in the generated [App Service Document]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Publish_LifeCycle.html#App2). The alias is used to make service calls from the client app.
+    > **_Note:_** If an environment contains an alias hostname, the alias is used in the generated [App Service Document]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Publish_LifeCycle.html#App2). The alias is used to make service calls from the client app.
 
-1.  To publish to Volt MX Foundry, your Volt MX Iris client app must be associated with a Volt MX Foundry app, which means that you need to either create a new Volt MX Foundry app or use an existing one. To do so, at the upper-right corner of the **Data & Services** panel, click the hamburger menu icon hamburger menu icon ![](Resources/Images/Hamburger_Menu_icon_29x31.png), and then click either **Create New App** or **Link to Existing App**. From the Volt MX Foundry Application dialog box, select the app to which you want to associate your Volt MX Iris app. For more information about how to create a new Volt MX Foundry app, refer [How to Add Applications]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Adding_Applications.html) in the Volt MX Foundry Console User Guide.  
+4.  To publish to Volt MX Foundry, your Volt MX Iris client app must be associated with a Volt MX Foundry app, which means that you need to either create a new Volt MX Foundry app or use an existing one. To do so, at the upper-right corner of the **Data & Services** panel, click the hamburger menu icon hamburger menu icon ![](Resources/Images/Hamburger_Menu_icon_29x31.png), and then click either **Create New App** or **Link to Existing App**. From the Volt MX Foundry Application dialog box, select the app to which you want to associate your Volt MX Iris app. For more information about how to create a new Volt MX Foundry app, refer [How to Add Applications]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Adding_Applications.html) in the Volt MX Foundry Console User Guide.  
       
     ![](Resources/Images/VoltMX_Foundry_Starter.PNG)  
       
@@ -54,9 +54,9 @@ To directly publish an app to Volt MX Foundry, follow these steps:
       
     ![](Resources/Images/Linked_Foundry_App.png)
 
-1.  Right-click Volt MX Foundry for the linked app, and then click **Publish Project Services**. The app is successfully published to Volt MX Foundry.
+5.  Right-click Volt MX Foundry for the linked app, and then click **Publish Project Services**. The app is successfully published to Volt MX Foundry.
 
-> **_Note:_** If you have not done so earlier, a dialog box appears asking you to select a valid Volt MX Foundry environment.
+     > **_Note:_** If you have not done so earlier, a dialog box appears asking you to select a valid Volt MX Foundry environment.
 
 Publish the App from Volt MX Foundry
 -----------------------------------
@@ -65,7 +65,7 @@ After you have published your app to Volt MX Foundry from Volt MX Iris, you can 
 
 To publish your app from Volt MX Foundry, follow these steps:
 
-1.  Once you have selected a Volt MX Foundry app to which you want to bind your Volt MX Iris app, the Volt MX Foundry Console opens. On the Volt MX Foundry console, click the **Publish** tab.
+ Once you have selected a Volt MX Foundry app to which you want to bind your Volt MX Iris app, the Volt MX Foundry Console opens. On the Volt MX Foundry console, click the **Publish** tab.
 
 ![](Publish_CRR_478x235.png)
 
@@ -73,33 +73,33 @@ The status of the environment to which you want to publish the client app indica
 
 <table style="border-left-style: solid;border-left-width: 0px;border-left-color: #ccc;border-right-style: solid;border-right-width: 0pt;border-right-color: #ccc;border-top-style: solid;border-top-width: 0pt;border-top-color: #ccc;border-bottom-style: solid;border-bottom-width: 0pt;border-bottom-color: #ccc;margin-left: 0;margin-right: auto;"><colgroup><col> <col></colgroup><tbody><tr><td><b>Status when Not Published</b></td><td><b>Status when Published</b></td></tr><tr><td><img src="Resources/Images/VoltMXFoundryAppNotPublished.png"></td><td><img src="Resources/Images/VoltMXFoundryAppPublished.png"></td></tr></tbody></table>
 
-5.  If the Volt MX Foundry app to which you have bound the client app has not yet been published, select the app for publish.
+1.  If the Volt MX Foundry app to which you have bound the client app has not yet been published, select the app for publish.
 
-![](Resources/Images/VoltMXFoundrySelectingForPublish_562x129.png)
+      ![](Resources/Images/VoltMXFoundrySelectingForPublish_562x129.png)
 
-7.  Click **Next**. The **Environments** page appears.
+2.  Click **Next**. The **Environments** page appears.
 
-![](EnvionrmentsPage_CRR_471x101.png)
+       ![](EnvionrmentsPage_CRR_471x101.png)
 
-9.  The **Configure** page displays options to change the configuration of your Services. To make any changes, click **+ Service Configuration**., and then click any of the blue-text fields.
+3.  The **Configure** page displays options to change the configuration of your Services. To make any changes, click **+ Service Configuration**., and then click any of the blue-text fields.
 
-> **_Note:_** If your app is an upload of web app ( such as SPA, Desktop Web/Responsive Web, or Progressive Web App) binary , the Configure page displays a drop-down list of options specific to the web client environment.
+    > **_Note:_** If your app is an upload of web app ( such as SPA, Desktop Web/Responsive Web, or Progressive Web App) binary , the Configure page displays a drop-down list of options specific to the web client environment.
 
-11.  If available, you can reconfigure the application-level settings and service configuration settings from this page .
-12.  Click **Save and Publish**. The app and any associated services are published to the selected environment.
+4.  If available, you can reconfigure the application-level settings and service configuration settings from this page .
+5.  Click **Save and Publish**. The app and any associated services are published to the selected environment.
 
-> **_Note:_** If you are building a Volt MX Iris web app ( such as SPA, Desktop Web/Responsive Web, or Progressive Web App), you must first define and publish any required Volt MX Foundry services. After you build any web application and upload its binaries to Volt MX Foundry, you cannot publish a service to it.  
+    > **_Note:_** If you are building a Volt MX Iris web app ( such as SPA, Desktop Web/Responsive Web, or Progressive Web App), you must first define and publish any required Volt MX Foundry services. After you build any web application and upload its binaries to Volt MX Foundry, you cannot publish a service to it.  
 If you encounter an error while publishing the Volt MX Foundry, try publishing again.  
 
-![](ServicesPublished_CRR_402x221.png)
+    ![](ServicesPublished_CRR_402x221.png)
 
-15.  To close the Volt MX Foundry Console and return to Volt MX Iris, from the Quick Launch Bar along the upper left edge of Volt MX Iris, click the Iris icon ![](Resources/Images/Iris-FoundryIcon_51x42.png). Since you are still logged in to your Volt MX account, Volt MX Iris continues to have access to your Volt MX Foundry apps and services.
-16.  Launch the app. To do so, on the **Product** menu, navigate to **Run As**, and then select an emulator to run the app on.
+6.  To close the Volt MX Foundry Console and return to Volt MX Iris, from the Quick Launch Bar along the upper left edge of Volt MX Iris, click the Iris icon ![](Resources/Images/Iris-FoundryIcon_51x42.png). Since you are still logged in to your Volt MX account, Volt MX Iris continues to have access to your Volt MX Foundry apps and services.
+7.  Launch the app. To do so, on the **Product** menu, navigate to **Run As**, and then select an emulator to run the app on.
 
 Environment List in Iris
 ------------------------------
 
-Prior to Iris V9 release, it lists only the environments to which you have full access. From Iris V9 onwards, you can view the list of all environments associated with your Foundry account. This list includes the environment with both full and read-only access.
+It lists only the environments to which you have full access. In Volt MX Iris, you can view the list of all environments associated with your Foundry account. This list includes the environment with both full and read-only access.
 
 The different types of access that a cloud account admin can provide, are:
 

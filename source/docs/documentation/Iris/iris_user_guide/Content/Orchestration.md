@@ -59,23 +59,23 @@ To create a composite service, follow these steps:
 2.  If you have not done so already, log in to your Volt MX account. To do so, in the top right corner of the Volt MX Iris window, click **Login**. The Volt MX Account sign-in window opens. Enter your email and password credentials for your Volt MX user account, and then click **Sign in**.
 3.  Create a new Volt MX Foundry application or use an existing one. To do so, on the **Data and Services** panel, click the context menu arrow, and then click either **Create New App**, or **Use Existing App**, and then select from the Volt MX Foundry Application dialog box the services application that you want to publish. The Volt MX Foundry Console opens.
 
-![](MFinAppPane.png)
+    ![](MFinAppPane.png)
 
-> **_Note:_** If you want to associate your Volt MX Iris project with a different Volt MX Foundry app, on the **Project** tab of the Project Explorer, click the context menu arrow for **VoltMX Foundry**, and then click **Unlink App**. To link to a different Volt MX Foundry app, click the context menu arrow for **VoltMX Foundry**, and then click either **Create New App**, or **Use Existing App**.
+    > **_Note:_** If you want to associate your Volt MX Iris project with a different Volt MX Foundry app, on the **Project** tab of the Project Explorer, click the context menu arrow for **VoltMX Foundry**, and then click **Unlink App**. To link to a different Volt MX Foundry app, click the context menu arrow for **VoltMX Foundry**, and then click either **Create New App**, or **Use Existing App**.
 
-6.  To create a new integration service, on the **Integration** tab, click **CONFIGURE NEW**. The **Service Definition** section appears.
+4.  To create a new integration service, on the **Integration** tab, click **CONFIGURE NEW**. The **Service Definition** section appears.
 
-![](SDAreaMF_CRR_539x270.png)
+    ![](SDAreaMF_CRR_539x270.png)
 
-8.  Go to the **Orchestration** tab. The page lists the existing services (if any).
+5.  Go to the **Orchestration** tab. The page lists the existing services (if any).
     
-    ![](Orch_CRR_541x150.png)
+     ![](Orch_CRR_541x150.png)
     
-9.  Click **CONFIGURE NEW**.
+6.  Click **CONFIGURE NEW**.
 
-![](Orch1_CRR_537x291.png)
+      ![](Orch1_CRR_537x291.png)
 
-11.  The **Composite Services Configuration** page is displayed. Update the following details :
+7.  The **Composite Services Configuration** page is displayed. Update the following details :
     1.  **Name** : Type a new name for this service. Ensure that name is unique and does not conflict with an existing service.
         
         > **_Note:_** Service name should not contain special characters, must begin with a letter, and should be between 4 and 30 characters long.
@@ -86,13 +86,13 @@ To create a composite service, follow these steps:
         
     3.  Add a description for the service in **Description** text area.
     4.  Click **Save**.
-12.  Click **Add Operation**. The New Operation tab appears.
-13.  Provide a name and security level for the operation.
-14.  In the Operation Type list, select **Composite**.
-15.  Select a service execution mode from the list.
-16.  Click **Advanced** link and provide a custom code if required.
-17.  Click **Save Operation**.
-18.  To close the Volt MX Foundry Console and return to the panes, views, and tabs of the Volt MX Iris integrated development environment (IDE), from the Quick Launch Bar along the upper left edge of Volt MX Iris, click the Workspace icon ![](Resources/Images/S7Persp_QkLaunch01b_20x19.png). Since you are still logged in to your Volt MX account, Volt MX Iris continues to have access to your Volt MX Foundry services.
+8.  Click **Add Operation**. The New Operation tab appears.
+9.  Provide a name and security level for the operation.
+10.  In the Operation Type list, select **Composite**.
+11.  Select a service execution mode from the list.
+12.  Click **Advanced** link and provide a custom code if required.
+13.  Click **Save Operation**.
+14.  To close the Volt MX Foundry Console and return to the panes, views, and tabs of the Volt MX Iris integrated development environment (IDE), from the Quick Launch Bar along the upper left edge of Volt MX Iris, click the Workspace icon ![](Resources/Images/S7Persp_QkLaunch01b_20x19.png). Since you are still logged in to your Volt MX account, Volt MX Iris continues to have access to your Volt MX Foundry services.
 
 Creating a New Looping Service
 ------------------------------
@@ -103,13 +103,13 @@ To create a Looping service, follow these steps:
 2.  If you have not done so already, log in to your Volt MX account. To do so, in the top right corner of the Volt MX Iris window, click **Login**. The Volt MX Account sign-in window opens. Enter your email and password credentials for your Volt MX Cloud account, and then click **Sign in**.
 3.  Create a new Volt MX Foundry application or use an existing one. To do so, on the **Data and Services** panel, click the context menu arrow, and then click either **Create New App**, or **Use Existing App**, and then select from the Volt MX Foundry Application dialog box the services application that you want to publish. The Volt MX Foundry Console opens.
 
-![](MFinAppPane.png)
+    ![](MFinAppPane.png)
 
-> **_Note:_** If you want to associate your Volt MX Iris project with a different Volt MX Foundry app, on the **Project** tab of the Project Explorer, click the context menu arrow for **VoltMX Foundry**, and then click **Unlink App**. To link to a different Volt MX Foundry app, click the context menu arrow for **VoltMX Foundry**, and then click either **Create New App**, or **Use Existing App**.
+    > **_Note:_** If you want to associate your Volt MX Iris project with a different Volt MX Foundry app, on the **Project** tab of the Project Explorer, click the context menu arrow for **VoltMX Foundry**, and then click **Unlink App**. To link to a different Volt MX Foundry app, click the context menu arrow for **VoltMX Foundry**, and then click either **Create New App**, or **Use Existing App**.
 
-6.  Go to the **Orchestration** tab. The page lists the existing services (if any).
-7.  In the **Add Orchestration**, click **Create Looping**.
-8.   The **Looping Services Configuration** page is displayed. Update the following details :
+4.  Go to the **Orchestration** tab. The page lists the existing services (if any).
+5.  In the **Add Orchestration**, click **Create Looping**.
+6.   The **Looping Services Configuration** page is displayed. Update the following details :
     1.  **Name of the service**: Type a new name for this service. Ensure that name is unique and does not conflict with an existing service name.
     2.  **Left Pane**: Lists all the existing Integration Service and Orchestration Services available for the app. From here, select an orchestration Service or an operation from an integration service by clicking **Add**.
     3.  **Central Pane**: Displays the operation or the orchestration service added from the left pane. You can delete an operation or a service by clicking the **Delete** button.

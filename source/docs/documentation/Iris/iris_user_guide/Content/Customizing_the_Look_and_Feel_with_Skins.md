@@ -16,7 +16,7 @@ You interact with widgets in two primary ways: on the widget level, using the Sk
 
 Volt MX  Iris also provides a default theme that has a set of skins defined for all the widgets within an application. The skins in this theme can be applied to widgets to get a different look and feel for the widgets. Themes are accessed from the Skins tab of the Project Explorer.
 
-For information on impact of upgrade from any previous Volt MX Iris to Volt MX Iris V8, click [here](#impact-of-upgrade-to-v8-on-skins-in-widgets).
+
 
 The following topics describe how to work with skins and themes:
 
@@ -30,7 +30,7 @@ The following topics describe how to work with skins and themes:
 
 [Apply a Skin](#apply-a-skin)
 
-[Reuse Skins](#How10)
+[Reuse Skins](#reuse-skins)
 
 [Fork a Skin](#fork-a-skin)
 
@@ -66,7 +66,7 @@ To create a new skin, do the following: 
 2.  On the **Skins** tab, locate the type of widget that you want to create the new skin for, such as a Button, and then click that widget type’s context menu arrow ![](Resources/Images/FormMenuArrow.png).
 3.  From the menu, click **New Skin**, and then click the type of new skin you want to create. Many widget types offer just the standard Skin, while others also offer a Focus Skin, or some variation.
 
-![](Resources/Images/CreateNewSkin_CRR.png)
+    ![](Resources/Images/CreateNewSkin_CRR.png)
 
 Your new skin is created and is ready for you to configure.
 
@@ -129,10 +129,10 @@ Single Color
 
 1.  Click the square color icon to open the Color Palette window.
 
-![](Resources/Images/BackgroundProp_Skin_CRR_442x254.png)
+      ![](Resources/Images/BackgroundProp_Skin_CRR_442x254.png)
 
-3.  To select a particular hue, on the vertical color bar drag the two opposing arrows to the hue you want, and then change the hue’s lightness, darkness, and saturation by dragging to the desired location on the large color square. You can also assign a color by changing the RGB values, the HSB values, or pasting a hexadecimal value from another program into the **#** text box. To close the Color Palette window, click anywhere outside of it.
-4.  By default, the opacity is set to 100, making the background completely opaque with no transparency. However, if you want the background to have a degree of transparency, you can decrease its opacity. To do so, type a value between 0 and 100 in the Opacity text box, or drag the opacity slider to the degree of opacity that you want.
+2.  To select a particular hue, on the vertical color bar drag the two opposing arrows to the hue you want, and then change the hue’s lightness, darkness, and saturation by dragging to the desired location on the large color square. You can also assign a color by changing the RGB values, the HSB values, or pasting a hexadecimal value from another program into the **#** text box. To close the Color Palette window, click anywhere outside of it.
+3.  By default, the opacity is set to 100, making the background completely opaque with no transparency. However, if you want the background to have a degree of transparency, you can decrease its opacity. To do so, type a value between 0 and 100 in the Opacity text box, or drag the opacity slider to the degree of opacity that you want.
 
 Two Step Gradient
 
@@ -140,12 +140,12 @@ Two Step Gradient
 2.  Click the left gradient icon.
 3.  Click the square of color next to **Color** to open the Color Palette window.
 
-![](Resources/Images/BackgroundProp_Skin_CRR_435x250.png)
+     ![](Resources/Images/BackgroundProp_Skin_CRR_435x250.png)
 
-5.  To select a particular hue, on the vertical color bar drag the two opposing arrows to the hue you want, and then change the hue’s lightness, darkness, and saturation by dragging to the desired location on the large color square. You can also assign a color by changing the RGB values, the HSB values, or pasting a hexadecimal value from another program into the **#** text box. To close the Color Palette window, click anywhere outside of it.
-6.  By default, the opacity is set to 100, making the background completely opaque with no transparency. However, if you want the background to have a degree of transparency, you can decrease its opacity. To do so, type a value between 0 and 100 in the Opacity text box, or click the arrow just to the right of the text box to display the opacity slider, and then drag the opacity slider to the degree of opacity that you want.
-7.  Click the right gradient icon, and then repeat steps 3 through 5 for the right gradient step.
-8.  When you have completed configuring the colors and their opacity, click **Apply**.
+4.  To select a particular hue, on the vertical color bar drag the two opposing arrows to the hue you want, and then change the hue’s lightness, darkness, and saturation by dragging to the desired location on the large color square. You can also assign a color by changing the RGB values, the HSB values, or pasting a hexadecimal value from another program into the **#** text box. To close the Color Palette window, click anywhere outside of it.
+5.  By default, the opacity is set to 100, making the background completely opaque with no transparency. However, if you want the background to have a degree of transparency, you can decrease its opacity. To do so, type a value between 0 and 100 in the Opacity text box, or click the arrow just to the right of the text box to display the opacity slider, and then drag the opacity slider to the degree of opacity that you want.
+6.  Click the right gradient icon, and then repeat steps 3 through 5 for the right gradient step.
+7.  When you have completed configuring the colors and their opacity, click **Apply**.
 
 Image
 
@@ -165,18 +165,18 @@ Multi-Step Gradient
 2.  Click one of the gradient step icons ![](Resources/Images/GradientStepIcon.png).
 3.  Click the square of color next to **Color** to open the Color Palette window.
 
-![](Resources/Images/BackgroundProp_Skin_CRR_437x252.png)
+       ![](Resources/Images/BackgroundProp_Skin_CRR_437x252.png)
 
-5.  To select a particular hue, on the vertical color bar drag the two opposing arrows to the hue you want, and then change the hue’s lightness, darkness, and saturation by dragging to the desired location on the large color square. You can also assign a color by changing the RGB values, the HSB values, or pasting a hexadecimal value from another program into the **#** text box. To close the Color Palette window, click anywhere outside of it.
-6.  By default, the opacity is set to 100, making the background completely opaque with no transparency. However, if you want the background to have a degree of transparency, you can decrease its opacity. To do so, type a value between 0 and 100 in the Opacity text box, or click the arrow just to the right of the text box to display the opacity slider, and then drag the opacity slider to the degree of opacity that you want.
-7.  Repeat steps 3 through 5 for the other gradient steps.
-8.  Add additional gradient steps by clicking anywhere just below the color bar, and you can delete a step by selecting it and then clicking **Delete**.
-9.  Change the portion of the background that the gradient color affects by dragging its gradient step icon to a different position on the color bar.
-10.  Change the orientation of the colors by trying out the Angle options, and then press **Enter** to apply the change. The available orientations are as follows:
+4.  To select a particular hue, on the vertical color bar drag the two opposing arrows to the hue you want, and then change the hue’s lightness, darkness, and saturation by dragging to the desired location on the large color square. You can also assign a color by changing the RGB values, the HSB values, or pasting a hexadecimal value from another program into the **#** text box. To close the Color Palette window, click anywhere outside of it.
+5.  By default, the opacity is set to 100, making the background completely opaque with no transparency. However, if you want the background to have a degree of transparency, you can decrease its opacity. To do so, type a value between 0 and 100 in the Opacity text box, or click the arrow just to the right of the text box to display the opacity slider, and then drag the opacity slider to the degree of opacity that you want.
+6.  Repeat steps 3 through 5 for the other gradient steps.
+7.  Add additional gradient steps by clicking anywhere just below the color bar, and you can delete a step by selecting it and then clicking **Delete**.
+8.  Change the portion of the background that the gradient color affects by dragging its gradient step icon to a different position on the color bar.
+9.  Change the orientation of the colors by trying out the Angle options, and then press **Enter** to apply the change. The available orientations are as follows:
 
 <table style="width: 100%;mc-table-style: url('Resources/TableStyles/2015DefinitiveBasicTable.css');" class="TableStyle-2015DefinitiveBasicTable" cellspacing="0"><colgroup><col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 109px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1"></colgroup><tbody><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Angle</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">Description</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">To top ↑</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">Orients the bottom color to be the topmost color.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">To right →</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">Orients the bottom color to be the rightmost color.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">To bottom ↓</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">Orients the bottom color to be the bottommost color.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">To left ←</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">Orients the bottom color to be the leftmost color.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">Custom</td><td class="TableStyle-2015DefinitiveBasicTable-BodyA-Column1-Body1">Orients the bottom color to the degree you specify in the numeric field that appears, along a 360 degree axis. For example, 225 orients the bottom color half way between the bottom angle (180), and the left angle (270).</td></tr></tbody></table>
 
-12.  When you have completed configuring the colors and their opacity, click **Apply**.
+When you have completed configuring the colors and their opacity, click **Apply**.
 
 ### Set the Skin Border
 
@@ -193,10 +193,10 @@ Single Color
 
 1.  Click the square color icon to open the Color Palette window.
 
-![](Resources/Images/BackgroundProp_Skin_CRR_435x250.png)
+     ![](Resources/Images/BackgroundProp_Skin_CRR_435x250.png)
 
-3.  To select a particular hue, on the vertical color bar drag the two opposing arrows to the hue you want, and then change the hue’s lightness, darkness, and saturation by dragging to the desired location on the large color square. You can also assign a color by changing the RGB values, the HSB values, or pasting a hexadecimal value from another program into the **#** text box. To close the Color Palette window, click anywhere outside of it.
-4.  By default, the opacity is set to 100, making the background completely opaque with no transparency. However, if you want the background to have a degree of transparency, you can decrease its opacity. To do so, type a value between 0 and 100 in the Opacity text box, or drag the opacity slider to the degree of opacity that you want.
+2.  To select a particular hue, on the vertical color bar drag the two opposing arrows to the hue you want, and then change the hue’s lightness, darkness, and saturation by dragging to the desired location on the large color square. You can also assign a color by changing the RGB values, the HSB values, or pasting a hexadecimal value from another program into the **#** text box. To close the Color Palette window, click anywhere outside of it.
+3.  By default, the opacity is set to 100, making the background completely opaque with no transparency. However, if you want the background to have a degree of transparency, you can decrease its opacity. To do so, type a value between 0 and 100 in the Opacity text box, or drag the opacity slider to the degree of opacity that you want.
 
 **Multi Step Gradient**
 
@@ -204,20 +204,20 @@ Single Color
 2.  Click one of the gradient step icons ![](Resources/Images/GradientStepIcon.png).
 3.  Click the square of color next to **Color** to open the Color Palette window.
 
-![](Resources/Images/BackgroundProp_Skin_CRR_434x250.png)
+     ![](Resources/Images/BackgroundProp_Skin_CRR_434x250.png)
 
-5.  To select a particular hue, on the vertical color bar drag the two opposing arrows to the hue you want, and then change the hue’s lightness, darkness, and saturation by dragging to the desired location on the large color square. You can also assign a color by changing the RGB values, the HSB values, or pasting a hexadecimal value from another program into the **#** text box. To close the Color Palette window, click anywhere outside of it.
-6.  By default, the opacity is set to 100, making the border completely opaque with no transparency. However, if you want the border to have a degree of transparency, you can decrease its opacity. To do so, type a value between 0 and 100 in the Opacity text box, or click the arrow just to the right of the text box to display the opacity slider, and then drag the opacity slider to the degree of opacity that you want.
-7.  Repeat steps 3 through 5 for the other gradient steps.
-8.  Add additional gradient steps by clicking anywhere just below the color bar, and you can delete a step by selecting it and then clicking **Delete**.
-9.  Change the portion of the border that the gradient color affects by dragging its gradient step icon to a different position on the color bar.
-10.  Change the orientation of the colors by trying out the Angle options, and then press **Enter** to apply the change. The available orientations are as follows:
+4.  To select a particular hue, on the vertical color bar drag the two opposing arrows to the hue you want, and then change the hue’s lightness, darkness, and saturation by dragging to the desired location on the large color square. You can also assign a color by changing the RGB values, the HSB values, or pasting a hexadecimal value from another program into the **#** text box. To close the Color Palette window, click anywhere outside of it.
+5.  By default, the opacity is set to 100, making the border completely opaque with no transparency. However, if you want the border to have a degree of transparency, you can decrease its opacity. To do so, type a value between 0 and 100 in the Opacity text box, or click the arrow just to the right of the text box to display the opacity slider, and then drag the opacity slider to the degree of opacity that you want.
+6.  Repeat steps 3 through 5 for the other gradient steps.
+7.  Add additional gradient steps by clicking anywhere just below the color bar, and you can delete a step by selecting it and then clicking **Delete**.
+8.  Change the portion of the border that the gradient color affects by dragging its gradient step icon to a different position on the color bar.
+9.  Change the orientation of the colors by trying out the Angle options, and then press **Enter** to apply the change. The available orientations are as follows:
 
-<table style="width: 100%;mc-table-style: url('Resources/TableStyles/2015DefinitiveBasicTable.css');" class="TableStyle-2015DefinitiveBasicTable" cellspacing="0"><colgroup><col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 109px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1"></colgroup><tbody><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Angle</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">Description</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">To top ↑</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">Orients the bottom color to be the topmost color.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">To right →</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">Orients the bottom color to be the rightmost color.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">To bottom ↓</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">Orients the bottom color to be the bottommost color.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">To left ←</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">Orients the bottom color to be the leftmost color.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">Custom</td><td class="TableStyle-2015DefinitiveBasicTable-BodyA-Column1-Body1">Orients the bottom color to the degree you specify in the numeric field that appears, along a 360 degree axis. For example, 225 orients the bottom color half way between the bottom angle (180), and the left angle (270).</td></tr></tbody></table>
+  <table style="width: 100%;mc-table-style: url('Resources/TableStyles/2015DefinitiveBasicTable.css');" class="TableStyle-2015DefinitiveBasicTable" cellspacing="0"><colgroup><col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 109px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1"></colgroup><tbody><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Angle</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">Description</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">To top ↑</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">Orients the bottom color to be the topmost color.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">To right →</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">Orients the bottom color to be the rightmost color.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">To bottom ↓</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">Orients the bottom color to be the bottommost color.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">To left ←</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">Orients the bottom color to be the leftmost color.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">Custom</td><td class="TableStyle-2015DefinitiveBasicTable-BodyA-Column1-Body1">Orients the bottom color to the degree you specify in the numeric field that appears, along a 360 degree axis. For example, 225 orients the bottom color half way between the bottom angle (180), and the left angle (270).</td></tr></tbody></table>
 
-12.  When you have completed configuring the colors and their opacity, click **Apply**.
+10.  When you have completed configuring the colors and their opacity, click **Apply**.
 
-7.  In the Border section of the Skins tab, click the Style drop-down list and select the type of corners you want, either Plain, Rounded Corner, Complete Rounded Corner, or Custom. Instructions for how to configure each type are found in the following table.
+1.  In the Border section of the Skins tab, click the Style drop-down list and select the type of corners you want, either Plain, Rounded Corner, Complete Rounded Corner, or Custom. Instructions for how to configure each type are found in the following table.
 
 <table style="width: 100%;mc-table-style: url('Resources/TableStyles/2015DefinitiveBasicTable.css');" class="TableStyle-2015DefinitiveBasicTable" cellspacing="0"><colgroup><col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 170px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1"></colgroup><tbody><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1"><b>Border Style</b></td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1"><b>Instructions</b></td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Plain</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">Plain border corners have a sharp 90 degree angle. To give a border plain border corners, click the Style drop-down list, and then select <b>Plain</b>.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Rounded Corner</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">Rounded border corners with an opacity of 0 look like this: <img src="Resources/Images/BorderRoundedCorners.png"> Click the Style drop-down list, and then select <b>Rounded Corner</b>.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Complete Rounded Corner</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">Complete Rounded border corners with an opacity of 0 look like this: <img src="Resources/Images/BorderCompleteRoundedCorners.png"> Click the Style drop-down list, and then select <b>Complete Rounded Corner</b>.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">Custom</td><td class="TableStyle-2015DefinitiveBasicTable-BodyA-Column1-Body1">With Custom border corners you can round the corners as deeply or shallowly as you want.<ol>Click the Style drop-down list, and then select <b>Custom</b>. Set the Custom rounded property between 1 and 100 pixels by entering a number in the Px text box, or by moving the Radius slider to the desired position.</ol></td></tr></tbody></table>
 
@@ -225,7 +225,7 @@ Single Color
 
 SPA borders can be applied when you have forked a form to the SPA platform. For more information, see [Forking a Form](Forking.html#forking-a-form).
 
-![](Resources/Images/SPABorder.png)
+  ![](Resources/Images/SPABorder.png)
 
 You can modify the following border properties of a widget on an SPA platform:
 
@@ -242,7 +242,7 @@ You can modify the following border properties of a widget on an SPA platform:
     1.  Click the border indicator ![](Resources/Images/SPABorderUniform.png) . The indicator changes from grey to blue.
     2.  Either type the value or using the slider, set the uniform border values.
     
-    > **_Note:_** Border values are not retained if you unfork a widget skin.
+      > **_Note:_** Border values are not retained if you unfork a widget skin.
     
 2.  **Color**: To modify the border color, do one of the following:
     *   Update the border color of the widget.
@@ -267,9 +267,9 @@ You can modify the following border properties of a widget on an SPA platform:
 
 Rounded edges can be applied for widgets on skins forked for Android and Windows native platforms.
 
-> **_Note:_** Android/Windows native platforms support configuring individual corner radius. Configuring border properties for each of the four edges of a given widget is not supported by Android/Windows native platforms.
+  > **_Note:_** Android/Windows native platforms support configuring individual corner radius. Configuring border properties for each of the four edges of a given widget is not supported by Android/Windows native platforms.
 
-![](Resources/Images/set_indvdl_corner_border.png)
+   ![](Resources/Images/set_indvdl_corner_border.png)
 
 **To set unique values for each corner, do the following:** 
 
@@ -280,9 +280,9 @@ Rounded edges can be applied for widgets on skins forked for Android and Windows
 
 ### Set the Skin Shadow
 
-![](Resources/Images/shadow.png)
+   ![](Resources/Images/shadow.png)
 
-> **_Note:_** Shadow feature is available only when a skin is forked.
+   > **_Note:_** Shadow feature is available only when a skin is forked.
 
 You can modify the following shadow properties of a widget:
 
@@ -302,7 +302,7 @@ You can modify the following font properties of a widget:
 *   **Opacity**: You can change the opacity level of the font color.
 *   **Size**: You can set the font size by pixels (0 to 600) or as a percentage (0 to 600) of the baseline font size of 28 pixels.
 
-> **_Note:_** The Volt MX Iris framework, however, consumes only percentage-based values for font size. As the px values are purely representational, you must use percentage-based values while setting the skin's font size.
+   > **_Note:_** The Volt MX Iris framework, however, consumes only percentage-based values for font size. As the px values are purely representational, you must use percentage-based values while setting the skin's font size.
 
 > **_Note:_** In iOS devices with OS 13, for certain font sizes, you will observe spacing.
 
@@ -334,7 +334,7 @@ You can modify the following font properties of a widget:
 
 Configure the text properties of a skin using Distance X, Distance Y, Blur, and Color properties -
 
-![](Resources/Images/TextShadow_CRR.png)
+   ![](Resources/Images/TextShadow_CRR.png)
 
 > **_Note:_** The Text Shadow feature is available only for specific widgets such as Button, Label, and TextBox2.
 
@@ -364,13 +364,13 @@ To edit a skin you created in Volt MX Iris, do the following:
 
 1.  Right-click the skin, and select **Edit As**.
 
-![](Resources/Images/EditSkinOptions_CRR.png)
+     ![](Resources/Images/EditSkinOptions_CRR.png)
 
-3.  Select an option from the menu. The options are: 
+2.  Select an option from the menu. The options are: 
     1.  **Skin**: Skin of the widget when it is not focused.
     2.  **Menu Focus Skin**: Skin of the widget when it is focused by the user.
-4.  Configure the skin as required.
-5.  Save the skin. After you save the skin, a new skin file is created in Project Explorer. You can use this skin for widgets in your application.
+3.  Configure the skin as required.
+4.  Save the skin. After you save the skin, a new skin file is created in Project Explorer. You can use this skin for widgets in your application.
 
 Apply a Skin
 ------------
@@ -450,22 +450,22 @@ To fork a skin, do the following: 
 
 1.  From the Application Canvas, select the platform for which you want to fork.
 
-![](Resources/Images/AppCanvas_CRR.png)
+     ![](Resources/Images/AppCanvas_CRR.png)
 
-3.  In the Properties Editor on the **Skin** tab, in the General section, click the **Fork** icon to fork the skin for a selected platform. If the option is selected, the fork icon turns blue. The platform for which the skin is forked also appears at the platform.
+2.  In the Properties Editor on the **Skin** tab, in the General section, click the **Fork** icon to fork the skin for a selected platform. If the option is selected, the fork icon turns blue. The platform for which the skin is forked also appears at the platform.
 
-> **_Note:_** You can also go to the Skins tab in Project Explorer, and right-click a skin to fork the skin.
+    > **_Note:_** You can also go to the Skins tab in Project Explorer, and right-click a skin to fork the skin.
 
-![](Resources/Images/ForkOptions_CRR.png)
+   ![](Resources/Images/ForkOptions_CRR.png)
 
-6.  Click the lock icon to lock a skin. If you lock a skin, changes made to a widget's skin in one platform are applied to the remaining platforms.
-7.  Click the ellipsis icon. The Fork Skin dialog appears.
+3.  Click the lock icon to lock a skin. If you lock a skin, changes made to a widget's skin in one platform are applied to the remaining platforms.
+4.  Click the ellipsis icon. The Fork Skin dialog appears.
 
-![](Resources/Images/ForkSkinsDialog_CRR_421x233.png)
+    ![](Resources/Images/ForkSkinsDialog_CRR_421x233.png)
 
-> **_Note:_** For widgets like Calendar, which has the View Type property while forking. You can set the View Type property to different values.
+   > **_Note:_** For widgets like Calendar, which has the View Type property while forking. You can set the View Type property to different values.
 
-10.  Select the platforms to fork and click **OK**. The skin will be forked for selected platforms.
+ Select the platforms to fork and click **OK**. The skin will be forked for selected platforms.
 
 ### Important Considerations in Forking
 
@@ -487,9 +487,9 @@ To delete a skin from the project library in Volt MX Iris, do the following: 
 2.  Select the widget that has the skin you want to delete.
 3.  Right-click the skin, and then click **Delete**.
 
-![](Resources/Images/DeleteSkin_CRR.png)
+      ![](Resources/Images/DeleteSkin_CRR.png)
 
-5.  Select **Yes** in the confirmation window that appears. The selected skin is deleted.
+4.  Select **Yes** in the confirmation window that appears. The selected skin is deleted.
 
 > **_Note:_** If a skin is deleted, widgets attached to the skin revert to the default skins.
 

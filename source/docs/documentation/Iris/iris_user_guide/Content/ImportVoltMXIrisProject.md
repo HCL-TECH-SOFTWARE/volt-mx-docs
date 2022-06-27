@@ -12,12 +12,15 @@ You can import a project that is located locally on your computer or you can imp
 
 For more information, click any of the following sections:
 
-[Import a Local Volt MX Iris Project](#import-a-local-project)
+[Import a Local Volt MX Iris Project](#import-a-local-volt-mx-iris-project)
 
-[Import a Volt MX Iris Project from a Cloud Account](#import-a-project-from-a-cloud-account)
+
+[Import a Volt MX Iris Project from a Cloud Account](#import-a-volt-mx-iris-project-from-a-cloud-account)
+
 
 > **_Important:_**  
 If the project you are importing includes Cordova content, ensure the following:
+
 
 *   The Cordova content needs to be in the following location:  
     `<ProjectName>/web/cordova`
@@ -53,17 +56,24 @@ To import a local Volt MX Iris project, follow these steps:
 ### Important Considerations
 
 *   If the project contains Volt MX Foundry Services associated with the app, Volt MX Iris displays a dialog box, prompting if you want to import the Services as part of the project import. Click **Continue** to import the Volt MX Foundry Services associated with the app. Click **Skip** to import the project without importing the Volt MX Foundry Services associated with the app.
+
     
-    ![](Resources/Images/ImportServices.PNG)
+
+     ![](Resources/Images/ImportServices.PNG)
     
-    > **_Note:_** You can import the Volt MX Foundry services at any time by using the **Data Panel** > **Export App** option.  
-    The Export App option is only enabled if the Volt MX Foundry app is not linked to the project, and the `<workspace>/<project>/Foundry/Apps` folder is present in the project's workspace.
+
+     > **_Note:_** You can import the Volt MX Foundry services at any time by using the **Data Panel** > **Export App** option.  
+     The Export App option is only enabled if the Volt MX Foundry app is not linked to the project, and the `<workspace>/<project>/Foundry/Apps` folder is present in the project's workspace.
     
+
 *   If your Volt MX Foundry account contains Services with the same name as the Services present in the imported project, Volt MX Iris displays a dialog box, prompting if you want to import the Services as part of the project import. Click **Replace** to import and associate the Volt MX Foundry Services associated with the app. Click **Skip** to use the Services present in your Volt MX Foundry account.
     
+
     ![](Resources/Images/Import_ServiceConflict.PNG)
     
+
 *   If a project with the same name exists already, the **Conflict** dialog box appears, prompting you if you want to overwrite the existing project. Click **OK** to overwrite the existing project. Click **Cancel** to end the import process.
+    
     
     ![](Resources/Images/Import_NameConflict_405x150.png)
     

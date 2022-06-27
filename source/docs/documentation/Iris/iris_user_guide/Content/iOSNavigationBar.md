@@ -8,7 +8,7 @@ category: "iris_user_guide"
 iOS Navigation Bar
 ==================
 
-With Volt MX IrisV8 SP1 release, you can customize the navigation bar in iOS. Before Volt MX Iris V8 SP1 release, a user could only modify the Left button, Right button, and the title. However, iOS natively provides an option to add other UI controls to the navigation bar. To support the UI controls in the navigation bar, Volt MX has modified the navigation bar to provide the same features in Volt MX Iris.
+With Volt MX IrisV8 SP1 release, you can customize the navigation bar in iOS. Before release, a user could only modify the Left button, Right button, and the title. However, iOS natively provides an option to add other UI controls to the navigation bar. To support the UI controls in the navigation bar, Volt MX has modified the navigation bar to provide the same features in Volt MX Iris.
 
 TitleBar properties for forms created on older version of Iris (< V8 SP1) will be carried over to the new NavigationBar when the projects is migrated to Iris V8 SP1.
 

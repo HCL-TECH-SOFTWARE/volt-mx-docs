@@ -226,7 +226,7 @@ Following are the options:
 
 #### Enable Reordering
 
-For Volt MX Iris Version 7.3 and later, specifies whether to enable or disable reordering rows in a segment.
+For Volt MX Iris Version 9.2 and later, specifies whether to enable or disable reordering rows in a segment.
 
 #### Autogrow Mode
 
@@ -444,7 +444,7 @@ To map the widgets of the Section Header Template of a Segment by using Mapping 
 
 #### Remarks
 
-*   For Volt MX Iris V8 SP4 or earlier projects, the elements that had been mapped to the widgets of Segment Master Data will now be mapped to the widgets of Segment Section Data.
+*   For Visualizer V8 SP4 or earlier projects, the elements that had been mapped to the widgets of Segment Master Data will now be mapped to the widgets of Segment Section Data.
 *   If you change any of the Segment Templates, all their associated mappings will be automatically deleted.
 
 ### Widget Appearance on Platforms

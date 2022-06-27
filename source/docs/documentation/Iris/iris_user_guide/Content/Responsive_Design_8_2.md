@@ -18,7 +18,7 @@ Responsive Web Design Overview
 
 Responsive Web Design is an approach to web-page creation that makes use of flexible layouts, flexible images, and cascading style sheet (CSS) media queries. The goal of Responsive Web Design is to build web pages that can detect a user's screen size and orientation, and then change the layout accordingly. Responsive Web Design is about using HTML and CSS to automatically resize, hide, shrink, or enlarge a website, to make it look good on all devices (desktops, tablets, and phones).
 
-From Volt MX Iris V8 onwards, the Responsive Web Design feature has been implemented in Volt MX Iris. When you resize a web browser screen, content in the browser resizes based on the resizing design. Using Responsive design, you can design a web page for different form factors in a single FlexForm.
+The Responsive Web Design feature has been implemented in Volt MX Iris. When you resize a web browser screen, content in the browser resizes based on the resizing design. Using Responsive design, you can design a web page for different form factors in a single FlexForm.
 
 Responsive Web Design supports the following features:
 
@@ -28,7 +28,7 @@ Responsive Web Design supports the following features:
 
 > **_Note:_** A **Progressive Web App** (PWA) acts as a progression of a Responsive Web app. For example, if you have a website (web page/web app) that is mobile responsive, you can leverage the new features supported by modern web browsers to make it a Progressive Web App. For more information about Progressive Web Apps, click [here](ProgressiveWebApp.html).
 
-From Volt MX Iris V8 SP2, the existing Responsive Web Design feature has been enhanced. Prior to Volt MX Iris V8 SP2, Responsive Web Design was achieved through code. From Volt MX Iris V8 SP2 onwards, you can build Responsive Web desktop applications from within Volt MX Iris.
+From Volt MX Iris V9 SP2, the existing Responsive Web Design feature has been enhanced. Prior to Volt MX Iris V8 SP2, Responsive Web Design was achieved through code. From Volt MX Iris V9 SP2 onwards, you can build Responsive Web desktop applications from within Volt MX Iris.
 
 {% include youtube.html id='qfdRonVOStU' %}
 
@@ -81,15 +81,17 @@ Enable Grid Lines
 
 You can choose to enable grid lines on your Responsive Web canvas. These grid lines help you to properly align widgets and other elements of your Responsive Web app. You can use grid lines as reference points while placing various app elements according to the breakpoints that you have specified.
 
-After you enable or disable grid lines for one Responsive Web form, the corresponding setting is applied for all Responsive Web forms in Volt MX Iris. Grid lines for Responsive Web forms are disabled by default. Both these behaviors are applicable from Volt MX Iris V8 SP4 Fixpack 28 onwards.
+After you enable or disable grid lines for one Responsive Web form, the corresponding setting is applied for all Responsive Web forms in Volt MX Iris. Grid lines for Responsive Web forms are disabled by default.
 
 **To enable grid lines for Responsive Web, follow these steps:**
 
 1.  Select a Responsive Web form.
 2.  At the upper-right corner of the Project Canvas, click the down-arrow icon ![](Resources/Images/Drop-down_Arrow.PNG). A list of options appears.  
       
-    ![](Resources/Images/Show_Grid.png)
-3.  Click **Show Grid**.  
+       ![](Resources/Images/Show_Grid.png)
+
+
+Click **Show Grid**.  
     
 
 > **_Note:_** If grid lines are already enabled and you want to disable this feature, click **Hide Grid** from the down-arrow icon list.
@@ -107,7 +109,7 @@ When you drag and drop a widget to the form and make changes, unless you have se
 
 When you drag and drop a widget on any breakpoint, the widget is added to all breakpoints. When you delete or rename a widget on a breakpoint, the widget is deleted or renamed on all breakpoints. You can change properties of a widget specific to each breakpoint.
 
-From Volt MX Iris V9 SP1 version onwards, for a Segment widget, you can change the values of the following properties for each breakpoint.
+In Volt MX Iris V9 SP2, for a Segment widget, you can change the values of the following properties for each breakpoint.
 
 *   [rowTemplate]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Segment_Properties.html#rowTempl)
 *   [sectionHeaderTemplate]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Segment_Properties.html#sectionH2)
@@ -167,17 +169,22 @@ Create a Breakpoint
 *   A project name should contain fewer than 14 characters.
     
 *   A project name can be alphanumeric. However, the first character of a project should always be a letter.
-*   Do not use any of the following reserved keywords as a project name: authService, workspace, mfconsole, vpns, middleware, accounts, syncservice, syncconsole, services, admin, middleware, and appdownload.
+*   Do not use any of the following reserved keywords as a project name: authService, workspace, mfconsole, vpns, middleware, accounts, syncservice,
+    syncconsole, services, admin, middleware, and appdownload.
 
-6.  Click **Create**. As this is a new project, in the Project Explorer, you will see Responsive Web / Desktop.  
+5.  Click **Create**. As this is a new project, in the Project Explorer, you will see Responsive Web / Desktop.  
+
+
     ![](Resources/Images/responsive_design_projectexplorer.png)
-7.  Right-click **Form** > **New Form**. This results in creating a new form with a default name assigned to it.
-8.  You will have three different breakpoints by default.  
+
+
+6.  Right-click **Form** > **New Form**. This results in creating a new form with a default name assigned to it.
+7.  You will have three different breakpoints by default.  
     You can view these breakpoints in the Properties pane.  
     
-9.  To add a new breakpoint, click **Add New**. A new row appears.  
+8.  To add a new breakpoint, click **Add New**. A new row appears.  
     
-10.  Enter the breakpoint details. You will see that the new breakpoint is added.  
+9.  Enter the breakpoint details. You will see that the new breakpoint is added.  
       
     The breakpoint is added and it reflects in the Properties pane and the Canvas.
 
@@ -237,7 +244,7 @@ To invoke any function that is not supported by Iris, you can do it through code
 Impact of Using CSS 3.0 on Responsive Web
 -----------------------------------------
 
-In Iris V9 GA, CSS 3.0 Flex engine is used. The usage of CSS 3.0 impacts apps designed for Responsive Web output. If your Responsive Web was creating using a Iris version prior to V9 GA and if you import the app into Iris V9 GA, the following are the implications:
+In Visualizer V9 GA, CSS 3.0 Flex engine is used. The usage of CSS 3.0 impacts apps designed for Responsive Web output. If your Responsive Web was creating using a Visualizer version prior to V9 GA and if you import the app into Iris V9.2, the following are the implications:
 
 *   If you have created any custom CSS feature, it will break. You must make the application side code changes again to restore the feature.
 *   From the FlexRule engine perspective, implicit height calculation of a widget would result to 0, if the parent height is AUTOGROW.

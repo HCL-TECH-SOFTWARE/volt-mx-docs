@@ -35,7 +35,7 @@ In the Collab Server, you can configure the sever security to Http or Https. Fol
 
 Follow these steps to download and configure the Collab Server:
 
-1.  Download the Collab server from [here](https://download.voltmx.com/onpremise/collabserver/9.0.0/CollabServer_Win.zip).  
+1.  Download the Collab server from here.  
     The installer is downloaded as a zip file to your computer.  
     
 2.  Extract the contents of the zip file.
@@ -49,7 +49,7 @@ Follow these steps to download and configure the Collab Server:
 
 Follow these steps to download and configure the Collab Server:
 
-1.  Download the Collab server from [here](https://download.voltmx.com/onpremise/collabserver/9.0.0/CollabServer_Win.zip).  
+1.  Download the Collab server from here 
     The installer is downloaded as a zip file to your computer.
 2.  Extract the contents of the zip file.  
     
