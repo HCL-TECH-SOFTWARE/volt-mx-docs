@@ -8,7 +8,7 @@ category: "iris_user_guide"
 Workspaces: Repositories for Your Projects
 ==========================================
 
-A workspace is a repository for the projects that you create, and it resides on your computer as a folder. You can keep all your projects in one workspace, or you can cluster related projects together by creating multiple workspaces. When you launch Volt MX Iris, it prompts you to indicate the workspace that you want to work in. The default workspace is home to the Volt MX Iris sample app, which resides in _C:\\Users\\<USERNAME>\\VoltMXIrisEWS_.
+A workspace is a repository for the projects that you create, and it resides on your computer as a folder. You can keep all your projects in one workspace, or you can cluster related projects together by creating multiple workspaces. When you launch Volt MX Iris, it prompts you to indicate the workspace that you want to work in. The default workspace is home to the Volt MX Iris sample app.
 
 You can switch your workspace either during the [VoltMX Iris startup process](#During) or [from within Volt MX Iris](#From). This feature helps you to switch the workspace when the default workspace has an issue or is not valid. Furthermore, you can switch the workspace if you want to access projects that are located in another workspace.
 

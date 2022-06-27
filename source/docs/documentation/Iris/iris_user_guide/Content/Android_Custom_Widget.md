@@ -172,9 +172,33 @@ To import files for a third-party widget, execute the following:
 10.  Now that you have the library imported, you can add any additional properties that you want the custom widget to have in addition to the default properties that Volt MX Iris provides. To do so, in the left pane of the Custom Widget Interface dialog box, click the arrow ![](Resources/Images/BuildArrow.png) of the widget you created to reveal its properties, and then click **Widget Properties**. Click ![](Resources/Images/add_button.png), and then specify the JavaScript Type, the IDE Data Type, the Default Value for the property, indicate whether or not the property is Writable, and specify any Event Parameters (if applicable). Click **Finish**.
 11.  On the Native Mappings tab, map each of the property to its corresponding datatype in the Native platform. To define an event in the Widgets Properties tab, you must specify datatype as **Function**. Volt MX Iris automatically assigns this datatype as **Callback** in the Native Mapping tab.
     
-    The following table explains the datatype mapping for Android:
+The following table explains the datatype mapping for Android:
     
-    | JavaScript Type | Native Type |
+| JavaScript Type | Native Type |
+| --- | --- |
+| Number | int, long,float, double , java.lang.Integer, java.lang.Long, java.lang.Double, java.lang.Float(Depending on the metadata provided) |
+| String | java.lang.String |
+| Boolean | java.lang.Boolean, boolean |
+| Array | java.util.Vector |
+| Object | java.lang.Object, java.lang.Hashtable |
+| Function | com.voltmx.vm.Function |
+    
+To define a method associated with a widget, do the following:
+    
+*   In left pane, right-click the defined widget, and select **Add JavaScript Method**. The widget method, is added in the left pane
+        
+    ![](Resources/Images/Js_method.png)
+        
+    *   In the right pane, in the **Custom Widget Method Definition** tab, you can define the parameters and corresponding datatypes of a particular method. You can also set a return type of a method.
+        
+    ![](Resources/Images/Widget_method_455x459.png)
+        
+    
+    *   Under the Native Mappings tab, map each of the parameter to its corresponding datatype in the Native platform. JavaScript data types are represented as Object counter parts in the Native SDK as against primitive types. For example, _java.lang.Double_ is used instead of _double_ and _java.lang.Boolean_ instead of _boolean_.
+        
+    The following table explains the datatype mapping for Android:
+        
+     JavaScript Type | Native Type |
     | --- | --- |
     | Number | int, long,float, double , java.lang.Integer, java.lang.Long, java.lang.Double, java.lang.Float(Depending on the metadata provided) |
     | String | java.lang.String |
@@ -182,30 +206,6 @@ To import files for a third-party widget, execute the following:
     | Array | java.util.Vector |
     | Object | java.lang.Object, java.lang.Hashtable |
     | Function | com.voltmx.vm.Function |
-    
-12.  To define a method associated with a widget, do the following:
-    
-    *   In left pane, right-click the defined widget, and select **Add JavaScript Method**. The widget method, is added in the left pane
-        
-        ![](Resources/Images/Js_method.png)
-        
-    *   In the right pane, in the **Custom Widget Method Definition** tab, you can define the parameters and corresponding datatypes of a particular method. You can also set a return type of a method.
-        
-        ![](Resources/Images/Widget_method_455x459.png)
-        
-    
-    *   Under the Native Mappings tab, map each of the parameter to its corresponding datatype in the Native platform. JavaScript data types are represented as Object counter parts in the Native SDK as against primitive types. For example, _java.lang.Double_ is used instead of _double_ and _java.lang.Boolean_ instead of _boolean_.
-        
-        The following table explains the datatype mapping for Android:
-        
-        | JavaScript Type | Native Type |
-        | --- | --- |
-        | Number | int, long,float, double , java.lang.Integer, java.lang.Long, java.lang.Double, java.lang.Float(Depending on the metadata provided) |
-        | String | java.lang.String |
-        | Boolean | java.lang.Boolean, boolean |
-        | Array | java.util.Vector |
-        | Object | java.lang.Object, java.lang.Hashtable |
-        | Function | com.voltmx.vm.Function |
         
     *   Based on the datatypes specified for the parameter and the return type, all the fields in the **Native Mappings** tab are populated. You can change the datatype for a parameter if the JavaScript type is set as Number or Object. Enter a name for the instance method in which the parameters are passed. If any property or parameter to the method is of type Function, then this function/method/callback can be executed from the Java class with the help of a wrapper method provided by the platform.
         
@@ -225,13 +225,13 @@ To import files for a third-party widget, execute the following:
     execute”. And it is always advised not to perform time taking tasks in these callbacks.Also use "executeAsync” as much as possible.try {			callbackJS.executeAsync(new Object[] {infotable});}catch(Exception e) {e.printStackTrace();}}					
     
     {% endhighlight %}
-13.  Click **Finish** to import the Custom Widget. A confirmation dialog appears. Click **Yes**.
+Click **Finish** to import the Custom Widget. A confirmation dialog appears. Click **Yes**.
     
-    The custom widget is now available at the bottom of the Widget tab, located on the Volt MX IrisLibrary pane, and you can drag it into a container like any other widget, and view its properties on the Properties pane.
+The custom widget is now available at the bottom of the Widget tab, located on the Volt MX IrisLibrary pane, and you can drag it into a container like any other widget, and view its properties on the Properties pane.
     
-    The Preview feature is not available for custom widgets. After you build the application you can view the library files which are built in the _....webapps/<appname>/platform/jslib/thirdparty/widgets_ folder.
+The Preview feature is not available for custom widgets. After you build the application you can view the library files which are built in the _....webapps/<appname>/platform/jslib/thirdparty/widgets_ folder.
     
-    > **_Important:_** If you edit the properties of a defined custom widget after you drag and drop it on a form, ensure that you delete the added instances of the custom widget on the form and add it on the form again, since the custom widgets added on the form before the edit will not reflect the newly changed properties.
+> **_Important:_** If you edit the properties of a defined custom widget after you drag and drop it on a form, ensure that you delete the added instances of the custom widget on the form and add it on the form again, since the custom widgets added on the form before the edit will not reflect the newly changed properties.
     
 
 ### Important Considerations

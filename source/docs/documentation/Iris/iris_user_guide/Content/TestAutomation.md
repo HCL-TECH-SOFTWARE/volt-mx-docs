@@ -13,7 +13,7 @@ From V9 onwards, Volt MX Irisintroduces the test automation feature using which 
 The following topics describe the tasks related to Jasmine automation in Volt MX Iris.
 
 *   [Create Test Resources](#create-test-resources)
-*   [VoltMXAutomator](#automator)
+*   [VoltMXAutomator](#volt-mx-automator)
 *   [Deploy the Test Resources](#deploy-the-test-resources)
 
 Create Test Resources
@@ -49,8 +49,12 @@ You can create a test case by recording your activity on the app. The app must b
 If you use the live preview feature to view your app, follow these steps to create a test case for the app:
 
 1.  In Iris, from the main menu, navigate to **Build** > **Live Preview Settings**.  
-    The **Live Preview Settings** window appears.  
+    The **Live Preview Settings** window appears. 
+
+
     ![](Resources/Images/Live_Preview_Settings_01_323x431.png)
+
+
 2.  Select the platforms and channels for which you want to build the application.
 3.  From the **Preview Mode** drop-down list, select the **Test** mode.
     
@@ -178,7 +182,7 @@ Using the Test Recorder, you can edit a test case while creating the test case o
     
     *   **Assert:** Validates the value of a specified property for any widget.
     
-    From Volt MX Iris V9 SP2 GA, when you add an assert action in the Test Case Recorder window, you can view the link icon ![](Resources/Images/assert_icon.png) in the assert statement. Click the icon to view a list of options that you can use to customize the type of assertion to be applied on the specified property of the widget.
+    In Volt MX Iris V9 SP 2 GA, when you add an assert action in the Test Case Recorder window, you can view the link icon ![](Resources/Images/assert_icon.png) in the assert statement. Click the icon to view a list of options that you can use to customize the type of assertion to be applied on the specified property of the widget.
     
     This feature allows you to add custom matches for any test case that improves the test automation.
     
@@ -219,7 +223,7 @@ Using the Test Recorder, you can edit a test case while creating the test case o
     *   **Wait:** Delays the next action for a specified period after the selected action is performed. The time period is in milliseconds.
     *   **Wait For:** This is applied to the widget involved in the selected user activity. Delays the selected action until the widget being awaited appears.
     
-    > **_Note:_** From Volt MX Iris V9 SP2 GA, on a new form, when a new action is performed, the Test Case Recorder automatically adds the **Wait For** statement to the recording.
+    > **_Note:_** In Volt MX Iris V9 SP 2 GA, on a new form, when a new action is performed, the Test Case Recorder automatically adds the **Wait For** statement to the recording.
     
     *   **Scroll To Widget:** Scrolls to a specified widget on the application.
     *   **Scroll To Row:** Scrolls to a specified row of the Segment widget.
@@ -249,7 +253,7 @@ You have successfully edited the test case. To run the edited recording, click *
 
  
 
-From Volt MX Iris V9 SP2 onwards, a developer can configure the timeout for a test case in the Test Case Recorder window. Prior to the V9 SP2 release, a default timeout of five seconds (in the milliseconds unit, 5000 MS) was configured, and developers couldn't customize the timeout value.
+In Volt MX Iris V9 SP 2 onwards, a developer can configure the timeout for a test case in the Test Case Recorder window. Prior to the V9 SP2 release, a default timeout of five seconds (in the milliseconds unit, 5000 MS) was configured, and developers couldn't customize the timeout value.
 
 > **_Note:_** If the test case takes longer than the configured time, Jasmine interrupts the test case and the test case fails.
 
@@ -360,7 +364,7 @@ Test plan is a collection of several test suites. You can create a test plan to 
 The following topics provide more information about how to create, edit, and invoke test plans.
 
 *   [Create a Test Plan](#create-a-test-plan)
-*   [Modify the **testPlan.js** file](#modify-the-testplan-js-file)
+*   [Modify the **testPlan.js** file](#modify-the-testplanjs-file)
 
 #### Create a Test Plan
 
@@ -422,8 +426,9 @@ Follow these steps to execute a test plan:
 1.  From the Project Explorer, navigate to **Test Resources** > **Jasmine**\> **< Channel >** > **Test Plans**
 2.  From the **Test Plans** folder, open the `TestPlan.js` file.
 3.  In the `TestPlan.js` file, modify the default code in the following format.  
-    {% highlight voltMx %}require([<Test Plans/ file>]);// Write the name of a test plan that you want to execute. 
-    {% endhighlight %}
+         {% highlight voltMx %}
+         require([<Test Plans file>]);// Write the name of a test plan that you want to execute. 
+         {% endhighlight %}
 4.  Save the file.  
     When the test plan is run next time, the plan defied by you in the previous step will be executed.
 
@@ -482,13 +487,15 @@ The Dashboard window displays the following details for each of the five tests t
 *   **Failed:** The number of test cases that failed due to errors.
 *   **Results:** Click on the file to view the test results of each test suite.
     
+
     ![](Resources/Images/DashboardResult_681x547.png)
+    
     
     The number of passed test cases, failed test cases, and pending test cases are displayed across each test suite. Furthermore, you can expand the test result of each test suite to view more information such as:
     *   **Spec description:** Displays the name of the test case.
     *   **Failed exceptions:** Displays the location of errors in the test case along with the file location.
     
-    From Volt MX Iris V9 SP2 , in the Results window, when you click **View Details** option, details of failed expectations appear. Details include the name of the test case, code line number, column number, jasmine message, stack trace, and the associated screen-shot of the failure. When you click on the screen shot, the image maximizes.
+    In Volt MX Iris V9 SP 2 , in the Results window, when you click **View Details** option, details of failed expectations appear. Details include the name of the test case, code line number, column number, jasmine message, stack trace, and the associated screen-shot of the failure. When you click on the screen shot, the image maximizes.
     
     ![](Resources/Images/FailedExpectation.gif)
     

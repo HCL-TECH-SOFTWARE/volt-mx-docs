@@ -22,17 +22,17 @@ With Volt MX Iris, you can create an app that supports Windows 10 universal Wind
 
 Getting your system set up to build and test Windows 10 applications in Volt MX Iris involves the following tasks.
 
-1.  [Confirm your system meets Windows 10 development requirements](#confirm-your-system-meets-windows-10-development-requirements)
-2.  [Create and/or sign in to your Microsoft account](#create-and-or-sign-in-to-your-microsoft-account)
-3.  [Install and Configure the Windows SDK 10](#install-and-configure-the-windows-sdk-10)
+1.  [Confirm your system meets Windows 10 development requirements](#confirm-your-system-meets-windows10-development-requirements)
+2.  [Create and/or sign in to your Microsoft account](#create-andor-sign-in-to-your-microsoft-account)
+3.  [Install and Configure the Windows SDK 10](#install-and-configure-the-windows-sdk10)
 
 ### Confirm Your System Meets Windows 10 Development Requirements
 
 To develop for the Windows 10 platform and run its emulator, your computer needs to meet certain hardware and software requirements. The procedures in this section guide you through confirming that your system meets them. At a minimum, it needs to be capable of running Microsoft Windows 8.
 
-[Confirm that your computer's CPU supports SLAT](#confirm-that-your-computer-39-s-cpu-supports-slat).
+1. [Confirm that your computer's CPU supports SLAT](#confirm-that-your-computers-cpu-supports-slat).
 
-[Confirm other system requirements for Windows 10](#confirm-other-system-requirements-for-windows-10).
+2. [Confirm other system requirements for Windows 10](#confirm-other-system-requirements-for-windows-10).
 
 #### Confirm that your computer's CPU supports SLAT
 

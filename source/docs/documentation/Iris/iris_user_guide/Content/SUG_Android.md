@@ -12,47 +12,23 @@ Building and testing Android applications in Volt MX Iris requires two primary r
 
 **Prerequisites that you need to download**:
 
-*   For V8 SP2
-    *   Required Android SDK Build Tool version is 26.0.2
-        
-    *   Required Android SDK Platform API level is 26
-        
-*   For V8 SP3
-    *   Required Android SDK Build Tool version is 27.0.3
-        
-    *   Required Android SDK Platform API level is 26
-        
-*   For V8 SP4
-    *   Required Android SDK Build Tool version is 28.0.3
-    *   Required Android SDK Platform API level is 28
-*   For V9
-    *   Required Android SDK Build Tool version is Android 29.0.2
-    *   Required Android SDK Platform API level is 29
-*   For V9 SP1
-    *   Required Android SDK Build Tool version is Android 29.0.2
-    *   Required Android SDK Platform API level is 29
-
 For any queries you may have about installing Android SDKs and Android Studio, see [Android SDK and Platform FAQs](FAQs.html#android-sdk-and-emulator-setup-faqs).
 
 To build and view applications on the Android platform, do the following:
 
 *   [Download and install Android Studio](#download-and-install-android-studio)
 *   [Download and unzip the Android SDK and setup necessary support packages](#download-and-unzip-the-android-sdk-and-support-packages)
-*   [Configure Volt MX Iris to build for the Android platform](#configure-to-build-for-the-android-platform)
+*   [Configure Volt MX Iris to build for the Android platform](#configure-volt-mx-iris-to-build-for-the-android-platform)
 *   [Set the Android SDK Home Environment Variable](#set-the-android-sdk-home-environment-variable)
 *   [Manually Set the Android Environment Variables](#manually-set-the-android-environment-variables)  
+
     (This is necessary only if the Android SDK was installed after installing Volt MX Iris)
 *   [Configure Device for USB debugging](#enable-usb-debugging-on-your-android-device)
 *   [Listing devices and viewing logs](#list-devices-and-view-logs)
 *   [Configure an Android emulator](#configure-an-android-emulator)
 *   [Launch the app using Run on My Device or the Emulator Menu](#launch-the-app-using-run-on-my-device-or-the-emulator-menu)
 *   [Launch the App from the Post Successful build](#launch-the-app-post-successful-build)
-*   [Follow Gradle-related Changes for different Volt MX Iris Versions](#follow-gradle-related-changes-for-different-versions):
-    *   [V8 SP2](#v8-sp2-changes)
-    *   [V8 SP3](#v8-sp3-changes)
-    *   [V8 SP4](#v8-sp4-changes)
-    *   [V9](#v9-changes)
-    *   [V9 SP1](#v9-sp1-changes)
+
 *   [Follow Gradle Recommendations:](#follow-gradle-recommendations)
     *   [General Recommendations](#general-recommendations)
         
@@ -158,17 +134,14 @@ To manually set the Android environment variables for a Windows computer, do the
 3.  Click **Advanced system settings**.
 4.  On the Advanced tab, click **Environment Variables**.
 5.  Under System Variables, double-click **Path**.
-6.  Add to the Path variable the location of the `/bin` folder in your installation of the JDK. For example:
-
-`C:\Java\jdk1.7.0_79\bin`
-
-8.  Add to the Path variable the locations of the `/emulators, /tools`, and `/platform-tools` folders in your installation of the Android SDK. For example:  
-    
-
-`C:\Android\android-sdk\emulator; C:\Android\android-sdk\tools;C:\Android\android-sdk\platform-tools`
-
-10.  Click **OK** until you have closed all dialog boxes. Do not click **Cancel**.
-11.  Restart your computer.
+6.  Add to the Path variable the location of the `/bin` folder in 
+    your installation of the JDK. For example:
+   `C:\Java\jdk1.7.0_79\bin`
+7.  Add to the Path variable the locations of the `/emulators, / tools`, and `/platform-tools` folders in your installation of the Android SDK. For
+    example:  
+   `C:\Android\android-sdk\emulator; C:\Android\android-sdk\tools;C:\Android\android-sdk\platform-tools`
+8.  Click **OK** until you have closed all dialog boxes. Do not click **Cancel**.
+9.  Restart your computer.
 
 ### Add Mac Android Environment Variables Manually
 
@@ -209,7 +182,7 @@ To connect to an Android device on your Windows machine, do the following:
 Configure an Android Emulator
 -----------------------------
 
-Google has stopped supporting the standalone AVD manager and SDK Manager GUI tools, with latest Android SDK tools. When using, latest Android SDK tools >= 25.3.0, support for launching AVD Manager GUI to create android emulators and SDK manager to download missing components are deprecated from Volt MX Iris V8 release. You must install Android Studio on your machine to get GUI to create and use Android emulators. Click [here](https://developer.android.com/studio/run/managing-avds.html) for more information.
+Google has stopped supporting the standalone AVD manager and SDK Manager GUI tools, with latest Android SDK tools. When using, latest Android SDK tools >= 25.3.0, support for launching AVD Manager GUI to create android emulators and SDK manager to download missing components are deprecated from Volt MX Iris V9 release. You must install Android Studio on your machine to get GUI to create and use Android emulators. Click [here](https://developer.android.com/studio/run/managing-avds.html) for more information.
 
 Alternatively, you can use avdmanager command line utility to create the emulators. Refer [https://developer.android.com/studio/command-line/avdmanager.html](https://developer.android.com/studio/command-line/avdmanager.html) for avdmanager command usage.
 
@@ -255,6 +228,8 @@ Launch the App Post Successful Build
 6.  Under the **Build** tab, you can see two sections: General and Mobile. Launch Emulators appear under the General, and Mobile platforms appear under Mobile. The mobile platform list appears based on your selection from the Build Native Local tab. This includes devices, emulators, and AVDs.  
       
     ![](Resources/Images/Emulators_AVDs2.png)
+
+    
 7.  Click **Run** to launch the app on your AVD.
 
 Limitations
@@ -267,66 +242,6 @@ Follow Gradle-related Changes for different Volt MX Iris Versions
 
 This section describes the various Gradle-related changes pertaining to different versions of Volt MX Iris.
 
-### V8 SP2 Changes
-
-*   The Android plugin version has been updated to 3.0.1.
-    
-*   Gradle version has been updated to 4.3.
-    
-*   compileSdkVersion has been changed to 26.
-    
-*   buildToolsVersion has been changed to 26.0.2.
-    
-*   Support library dependencies changed to 26.0.0.
-    
-
-### V8 SP3 Changes
-
-*   The Android plugin version has been updated to 3.1.0.
-*   Gradle version has been updated to 4.4.
-*   buildToolsVersion has been changed to 27.0.3.
-
-### V8 SP4 Changes
-
-*   The Android plugin version has been updated to 3.2.1.
-*   Gradle version has been updated to 4.6.
-*   compileSdkVersion has been changed to 28.
-*   buildToolsVersion has been changed to 28.0.3.
-*   Support library dependencies changed to 28.0.0.
-*   Volt MX minsdkversion has been changed to API level 17 (4.2).
-
-#### Important Considerations
-
-*   minsdkversion change has been made because of the following reasons:
-    *   A very small percentage of all Android devices are using API levels earlier than 16. Currently that figure is 1.1% or fewer. Click [here](https://developer.android.com/about/dashboards) for more information.
-        
-    *   Google Play is discontinuing updates for lower API levels. Click [here](https://android-developers.googleblog.com/2018/12/google-play-services-discontinuing.html) for more information.
-        
-*   Support libraries, Recycler View, and AppCompat have been updated to 28.0.0.
-    *   Any support library dependencies, existing or newly added, (for example, com.android.support:support: or com.android.support:design:) in the build.gradle file must be of version 28.0.0.  
-        Mismatch in versions may result in version conflicts and gradle build will fail. To resolve this issue, follow the [Compilation dependencies and Java symbol conflicts resolution methodology](#compilation-dependencies-and-gradle-build-java-symbol-conflicts-resolution-methodology).
-*   New Gradle 3.2.1 strictly checks some of the Lint issues and leads to Gradle build failure with Lint errors in Release mode.  
-    The following Lint errors are observed:
-    *   **ExpiredTargetSdkVersion**: If the application target sdk version is earlier than the Google Play-mandated targetsdk version(Currently 26), then this leads to build failure in Release mode. Click [here](https://developer.android.com/distribute/best-practices/develop/target-sdk) for more information. You must set the targetsdk version as Google Play-mandated version in release builds.
-    *   **MissingDefaultResource**: If a resource is only defined in folders with qualifiers such as **\-l** and or **\-en** (for example, drawable-en-hdpi) and there is no default declaration in the base folder (for example, drawable), layout, or values, then the app will crash. The app crashes when that resource is accessed on a device where the device is in a configuration, where the specified qualifier is missing. Click [here](http://tools.android.com/tips/lint-checks) for more information.
-
-### V9 Changes
-
-*   The Android plugin version has been updated to 4.0.0
-*   Gradle version has been updated to 6.5.
-*   compileSdkVersion has been changed to 29.
-    
-*   buildToolsVersion has been changed to 29.0.2.
-    
-*   Support library dependencies changed to Android X.
-    
-*   Volt MX minsdkversion has been changed to API level 19 (4.4).
-    
-
-### V9 SP1 Changes
-
-*   The Android plugin version has been updated to 4.0.0
-*   Gradle version has been updated to 6.5.
 
 #### Important Considerations
 
@@ -400,7 +315,7 @@ For using Gradle, you must go through the following sections:
 *   [General Recommendations](#general-recommendations)
 *   [Build-related Recommendations](#build-related-recommendations)
 
-> **_Important:_** When you upgrade to Volt MX Iris 8.2 and later, ensure that there are no conflicts in the dependencies of the build.gradle and libs folder. For example, appcompat-v7 added to the build.gradle is X version and if the same file is in the libs folder is of Y version. Due to differences in versions of the file, following build exceptions occur.  
+> **_Important:_** When you upgrade to Volt MX Iris 9.2 and later, ensure that there are no conflicts in the dependencies of the build.gradle and libs folder. For example, appcompat-v7 added to the build.gradle is X version and if the same file is in the libs folder is of Y version. Due to differences in versions of the file, following build exceptions occur.  
 **duplicate entry exception or com.android.builder.dexing.DexArchiveMergerException: Unable to merge dex**  
 For more information on how to debug these type of conflicts, click [here](#compilation-dependencies-and-gradle-build-java-symbol-conflicts-resolution-methodology).
 
@@ -438,15 +353,15 @@ The debugging procedure for these build issues is as follows:
 
 1.  Find the two jars/dependencies that are conflicting by making the following changes in the generated native Android build project. These latest tools will print exactly which classes conflict and their sources/origins. These are taken from [Google's suggestions form](https://issuetracker.google.com/issues/122429716):
     
-    1.  Go to the folder where the native Android project is generated:
-        *   For Mobile: **<workspace>\\temp\\<appid folder>\\build\\luaandroid\\dist\\<appid folder>\\**
+    a.  Go to the folder where the native Android project is generated:
+       *   For Mobile: **<workspace>\\temp\\<appid folder>\\build\\luaandroid\\dist\\<appid folder>\\**
             
-        *   For Tablet: **<workspace>\\temp\\<appid folder>\\build\\luatabandroid\\dist\\<appid folder>\\**
+       *   For Tablet: **<workspace>\\temp\\<appid folder>\\build\\luatabandroid\\dist\\<appid folder>\\**
             
-    2.  Change `com.android.tools.build:gradle version` to **3.4.0-beta03** in the `build.gradle` file:  
+    b.  Change `com.android.tools.build:gradle version` to **3.4.0-beta03** in the `build.gradle` file:  
         `buildscript {dependencies{classpath 'com.android.tools.build:gradle:3.4.0-beta03'}}`
-    3.  Change the `distributionUrl` in the `gradle-wrapper.properties` file (available in **dist\\<appid folder>\\gradle\\wrapper**) to **https://services.gradle.org/distributions/gradle-5.1.1-all.zip**.
-    4.  Type the following command in the command prompt, with the same directory as the native Android project: `gradlew assembleDebug`
+    c.  Change the `distributionUrl` in the `gradle-wrapper.properties` file (available in **dist\\<appid folder>\\gradle\\wrapper**) to **https://services.gradle.org/distributions/gradle-5.1.1-all.zip**.
+    d.  Type the following command in the command prompt, with the same directory as the native Android project: `gradlew assembleDebug`
     
     The build log then prints the complete details of all the conflicting libraries that fetch duplicate classes.
     
@@ -454,7 +369,7 @@ The debugging procedure for these build issues is as follows:
     This command helps you to view the dependency tree hierarchy in your project. You can then locate the dependency version that was enforced by the relevant compilation dependency.
 3.  Resolve the conflicts by following these steps:
     
-    1.  Adopt the conflict resolution strategy, if dependency version conflicts is the reason. For example, if the project specifies design dependency version (say X) and another version of design dependency (say version Y) is pulled form recursive dependencies of another dependency (say appcompat-v7), then the build fails.  
+    a.  Adopt the conflict resolution strategy, if dependency version conflicts is the reason. For example, if the project specifies design dependency version (say X) and another version of design dependency (say version Y) is pulled form recursive dependencies of another dependency (say appcompat-v7), then the build fails.  
         To resolve this build issue, you can force the build to use only the Y version, regardless of any version included by the dependency tree by adding a snippet as shown in the build.gradle.
     
     > {% highlight voltMx %}configurations.all {
@@ -465,7 +380,7 @@ The debugging procedure for these build issues is as follows:
     > 
     > {% endhighlight %}
     
-    1.  Remove any duplicate jars or classes found in any of the .aar files and libraries.  
+    b.  Remove any duplicate jars or classes found in any of the .aar files and libraries.  
         For example, you can use the following script to delete the volley and gson-2.2.4 jar files from libs if they conflict with your dependencies in the build.gradle file.
         
         {% highlight voltMx %}task deleteJars
@@ -495,13 +410,15 @@ To create a gradle.properties file, do the following:
     **For the Mac**  
     `/Users/<UserName>/.gradle`  
     
-2.  Create a new text file using a text editor such as Notepad or TextEdit, and save it with the following file name:  
+2.  Create a new text file using a text editor such as Notepad or
+    TextEdit, and save it with the following file name:  
     `gradle.properties`
-3.  Edit the `gradle.properties` file to include the following settings (replace the values given in the example with your own settings).
+3.  Edit the `gradle.properties` file to include the following
+    settings (replace the values given in the example with your own settings).
 
-![](GradleImahe.png)
+    ![](GradleImahe.png)
 
-5.  Replace _http_ with _https_, based on the proxy server settings.
+4.  Replace _http_ with _https_, based on the proxy server settings.
 
 For more information, see [The Build Environment](https://docs.gradle.org/current/userguide/build_environment.html) on the Gradle web site.
 
@@ -550,11 +467,11 @@ To manually make the necessary changes at the project level, do the following:
 2.  If you haven't done so already, edit the `gradle.properties` file to include the proxy settings mentioned earlier.
 3.  Open a command or terminal window.
 
-*   To open a terminal on a Mac, from the Dock, select **Finder**, double-click **Applications**, next double-click **Utilities**, and then double-click **Terminal**.
-*   To open a command window in Windows, Click **Start**, and then in the **Search programs and files** text box, type _cmd.exe_. When it appears in the search results, right-click it, and then click **Run as administrator**.
+    *   To open a terminal on a Mac, from the Dock, select **Finder**, double-click **Applications**, next double-click **Utilities**, and then double-click **Terminal**.
+    *   To open a command window in Windows, Click **Start**, and then in the **Search programs and files** text box, type _cmd.exe_. When it appears in the search results, right-click it, and then click **Run as administrator**.
 
-5.  Navigate to the path in step 1.
-6.  Build the application using the following command line:  
+4.  Navigate to the path in step 1.
+5.  Build the application using the following command line:  
     `gradle assembleDebug`
 
 #### Packaging Error Build Recommendations
@@ -565,19 +482,19 @@ Android generates a packaging error if one or more JAR files have duplicate file
 
 1.  Open a command or terminal window.
 
-*   To open a terminal on a Mac, from the Dock at the top of the screen, select **Finder**, double-click **Applications**, next double-click **Utilities**, and then double-click **Terminal**.
-*   To open a command window in Windows, Click **Start**, and then in the **Search programs and files** text box, type `cmd.exe`. When it appears in the search results, right-click it, and then click **Run as administrator**.
+    *   To open a terminal on a Mac, from the Dock at the top of the screen, select **Finder**, double-click **Applications**, next double-click **Utilities**, and then double-click **Terminal**.
+    *   To open a command window in Windows, Click **Start**, and then in the **Search programs and files** text box, type `cmd.exe`. When it appears in the search results, right-click it, and then click **Run as administrator**.
 
-3.  Navigate to the following path:  
+2.  Navigate to the following path:  
     **For Windows**  
     `<Workspace>\temp\<ProjectName>\build\luaandroid\dist\<ProjectName>`  
       
     **For the Mac**  
     `/Users/<UserName>/<Workspace>/temp/<ProjectName>/build/luaandroid/dist/<ProjectName>`  
     
-4.  Run the following command:  
+3.  Run the following command:  
     `gradle assembleDebug`
-5.  Install the generated APK file.
+4.  Install the generated APK file.
 
 *   Use the post compile task and exclude the duplicate files from getting packaged by adding the `packagingOptions` tag in the `build.gradle` file. To do so, do the following:
     
@@ -606,11 +523,11 @@ To use the Python JPG conversion tool, do the following:
 
 1.  Install the following Python executables: 
 
-[https://www.python.org/ftp/python/2.7.10/python-2.7.10.msi](https://www.python.org/ftp/python/2.7.10/python-2.7.10.msi)
+     [https://www.python.org/ftp/python/2.7.10/python-2.7.10.msi](https://www.python.org/ftp/python/2.7.10/python-2.7.10.msi)
 
-[http://effbot.org/downloads/PIL-1.1.7.win32-py2.7.exe](http://effbot.org/downloads/PIL-1.1.7.win32-py2.7.exe)
+     [http://effbot.org/downloads/PIL-1.1.7.win32-py2.7.exe](http://effbot.org/downloads/PIL-1.1.7.win32-py2.7.exe)
 
-4.  Download the following archive from [here]({{site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/pngConversion.zip) and execute the following command: 
+2.  Download the following archive from [here]({{site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/pngConversion.zip) and execute the following command: 
 
 $ python pngConversion.py -p E:\\res\\drawable(replace with the folder)
 

@@ -21,7 +21,7 @@ On platforms where a native map widget is not available, the Map widget integrat
 
 To learn how to use this widget programmatically, refer [VoltMX Iris Widget guide]({{ site.baseurl }}/docs/documentation/Iris/iris_widget_prog_guide/Content/Map.html).
 
-> **_Note:_**
+
 
 *   Mobile Web (basic) and Non-Touch HTML devices support only static maps.
 *   On the Android platform, the Map widget is not available in a popup window.
@@ -109,7 +109,7 @@ Specifies the width of the callout on the map. You can specify a value between 1
 
 #### Height
 
-Specifies the height of the map as a percentage relative to the value of the [](#height-reference)[Height Reference](#Height_Reference) property.
+Specifies the height of the map as a percentage relative to the value of the [](#height-reference)[Height Reference](#height-reference) property.
 
 > **_Note:_** This property is not available on Flex Forms.
 

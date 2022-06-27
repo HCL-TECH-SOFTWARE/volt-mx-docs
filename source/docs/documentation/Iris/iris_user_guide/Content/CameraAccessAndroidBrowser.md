@@ -87,7 +87,7 @@ You can configure an alternate folder to save captured images. This is optional.
 2.  Open the file and change the path attribute to a different value.  
     For example, **path="images1"**. Another example is **path="browsercache/images1"**.
 
-> **_Note:_** When you specify a different folder path, ensure that the path value does not begin or end with **"/".**
+    > **_Note:_** When you specify a different folder path, ensure that the path value does not begin or end with **"/".**
 
 ### Create a New fileproviderattr.xml File
 

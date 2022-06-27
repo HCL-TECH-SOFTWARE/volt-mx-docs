@@ -42,7 +42,8 @@ To add a widget to a form, do the following:
 
 To add a widget to a form, follow these steps:
 
-1.  From the Widget Library, drag the required widget and drop it on a form on the Iris Canvas.
+1.  From the Widget Library, drag the required widget and drop it on
+    a form on the Iris Canvas.
 2.  If you want, rename the widget.
 3.  Save the form.
 
@@ -54,9 +55,9 @@ To duplicate a form, do the following:
 
 1.  Right-click the form you want to duplicate, and then click **Duplicate**.
 
-A duplicate form is created.
+    A duplicate form is created.
 
-3.  If you want, rename the form.
+2.  If you want, rename the form.
 
 #### Delete a Form
 
@@ -71,7 +72,7 @@ To delete a form, do the following:
 
 To navigate to the location where the form assets are available on your computer, do the following:
 
-1.  Right-click the required form and click **Resources Location**.
+Right-click the required form and click **Resources Location**.
     
     The Windows Explorer where the form assets are located appears.
     
@@ -113,7 +114,7 @@ On this tab, you define properties such as background color, borders, and shadow
 
 For more information on skin properties, see [Understanding Skins and Themes](Customizing_the_Look_and_Feel_with_Skins.html).
 
-> **_Note:_** Custom themes developed in Volt MX Iris are not supported on Apple Watch. Apple Watch applications support the default theme of Volt MX Iris.
+  > **_Note:_** Custom themes developed in Volt MX Iris are not supported on Apple Watch. Apple Watch applications support the default theme of Volt MX Iris.
 
 #### Form
 

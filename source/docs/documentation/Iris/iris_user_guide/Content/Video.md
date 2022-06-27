@@ -55,7 +55,7 @@ Specifies the video's source. You can add the videos that you want to be part of
 
 ![](Resources/Images/video_folder.png)
 
-Prior to Volt MX Iris V8 SP1 release, video files were inside the **raw** folder. Video files are now moved into a separate **video** folder. Project built on versions lower that 8.1 will continue to work without any changes.
+Prior to Visualizer V8 SP1 release, video files were inside the **raw** folder. Video files are now moved into a separate **video** folder. Project built on versions lower that 8.1 will continue to work without any changes.
 
 > **_Note:_** The supported video formats are MP4, WebM and OGV. The device will play video only if the format is compatible with the underlying SDK
 
@@ -82,12 +82,9 @@ The following table summarizes where a Video widget can be placed:
   
 | Widget | Video placement inside a widget |
 | --- | --- |
-| Flex Form | Yes |
 | VBox Form | Yes |
 | FlexContainer | Yes |
 | FlexScrollContainer | Yes |
-| HBox | Yes |
-| VBox | Yes |
 | ScrollBox | Horizontal Orientation -YesVertical Orientation- Yes |
 | Tab | Yes |
 | Segment | No |
@@ -101,9 +98,9 @@ To specify a video:
 1.  Click the **Edit** button to open the Source dialog box.
 2.  Do one of the following:
 
-*   Locate and select the video you want from the list of available videos.
-*   In the video URL text box, enter a video URL.
+    *   Locate and select the video you want from the list of available videos.
+    *   In the video URL text box, enter a video URL.
 
-4.  Click **Open**. The Source property displays the file name or URL of the video.
+3.  Click **Open**. The Source property displays the file name or URL of the video.
 
 <table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/RevisionTable.css');" class="TableStyle-RevisionTable" cellspacing="0" data-mc-conditions="Default.HTML5 Only"><colgroup><col class="TableStyle-RevisionTable-Column-Column1" style="width: 42px;"> <col class="TableStyle-RevisionTable-Column-Column1"> <col class="TableStyle-RevisionTable-Column-Column1"></colgroup><tbody><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyE-Column1-Body1" data-mc-conditions="Default.HTML5 Only,Default.Iris7-1,Default.Iris7-1-1,Default.Iris7-2">Rev</td><td class="TableStyle-RevisionTable-BodyE-Column1-Body1" data-mc-conditions="Default.HTML5 Only,Default.Iris7-1,Default.Iris7-1-1,Default.Iris7-2">Author</td><td class="TableStyle-RevisionTable-BodyD-Column1-Body1" data-mc-conditions="Default.HTML5 Only,Default.Iris7-1,Default.Iris7-1-1,Default.Iris7-2">Edits</td></tr><tr class="TableStyle-RevisionTable-Body-Body1"><td class="TableStyle-RevisionTable-BodyB-Column1-Body1" data-mc-conditions="Default.HTML5 Only,Default.Iris7-1,Default.Iris7-1-1,Default.Iris7-2">8</td><td class="TableStyle-RevisionTable-BodyB-Column1-Body1" data-mc-conditions="Default.HTML5 Only,Default.Iris7-1,Default.Iris7-1-1,Default.Iris7-2">SHS</td><td class="TableStyle-RevisionTable-BodyA-Column1-Body1" data-mc-conditions="Default.HTML5 Only,Default.Iris7-1,Default.Iris7-1-1,Default.Iris7-2">SHS</td></tr></tbody></table>

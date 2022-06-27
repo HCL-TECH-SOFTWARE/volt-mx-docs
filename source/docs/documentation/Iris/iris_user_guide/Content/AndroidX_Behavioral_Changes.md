@@ -14,14 +14,14 @@ In this document, we will explain about Volt MX Iris's AndroidX-supported plugin
 
 This document contains the following sections:
 
-*   [Automatic addition of Jetifier flags in the `gradle.properties` file](#automatic-addition-of-jetifier-flags-in-file)
+*   [Automatic addition of Jetifier flags in the gradle properties file](#automatic-addition-of-jetifier-flags-in-gradle-properties-file)
 *   [Issues while migrating to AndroidX and their resolutions](#issues-while-migrating-to-androidx-and-their-resolutions)
-*   [Convert `android.support` references by using Jetifier tool](#convert-references-by-using-jetifier-tool)
+*   [Convert android.support references by using Jetifier tool](#convert-androidsupport-references-by-using-jetifier-tool)
 
-Automatic Addition of Jetifier Flags in `gradle.properties` File
+Automatic Addition of Jetifier Flags in gradle properties File
 ----------------------------------------------------------------
 
-From V8 SP4 Fixpack 47, Volt MX has released AndroidX-supported plugins. As part of these plugins, the following Jetifier flags are specified in the `gradle.properties` file:
+From V9 SP2, Volt MX has released AndroidX-supported plugins. As part of these plugins, the following Jetifier flags are specified in the `gradle.properties` file:
 
 *   `android.useAndroidX=true`: The Android plugin uses the appropriate AndroidX library, instead of using a Support Library.
 *   `android.enableJetifier=true`: The Android plugin automatically migrates existing third-party libraries (such as, JAR and AAR) to use AndroidX by rewriting their binaries.
@@ -42,10 +42,10 @@ While consuming VoltMX's AndroidX-supported plugins and migrating your project t
     *   **Cordova**: Volt MX has provided you the control of the cordova `android` build folder (which gets generated during build time) to make the necessary changes. You can [manually customize the Cordova-generated Android project](CreateCordovaApplications.html#manually-customize-the-cordova-generated-android-project), [bundle this customized project](Native_App_Properties.html#bundle-a-customized-cordova-generated-android-project), and then check in the modified cordova `android` build folder. For more information about the details of this resolution, click [here](CreateCordovaApplications.html#ManuallyCustomizetheCordova-GeneratedAndroidProject).
     *   **ReactNative**: Because you already have control of the react-native `android` project folder, you can directly integrate the AndroidX-migrated project. This folder gets integrated into the Volt MX Iris project as a library project during build time.
 *   **For** `android.support` **references in NFIs and Android manifest tag entries added through** Volt MX Iris**.**  
-    **Resolution**: You must manually change all `android.support` references, and then build the application again. For more information about how to convert `android.support` references by using the Jetifier tool, click [here](#convert-references-by-using-jetifier-tool). For more information about the mapping of namespaces from `android.support` to `androidx`, click [here](https://developer.android.com/jetpack/androidx/migrate/class-mappings).
+    **Resolution**: You must manually change all `android.support` references, and then build the application again. For more information about how to convert `android.support` references by using the Jetifier tool, click here(#convert-references-by-using-jetifier-tool). For more information about the mapping of namespaces from `android.support` to `androidx`, click [here](https://developer.android.com/jetpack/androidx/migrate/class-mappings).
     
 
-Convert `android.support` References by using Jetifier Tool
+Convert android.support References by using Jetifier Tool
 -----------------------------------------------------------
 
 1.  Search the JavaScript files, Android Manifest tag entries, and XML files for the occurrence of the `android.support` string.
@@ -54,12 +54,15 @@ Convert `android.support` References by using Jetifier Tool
 
 > **_Note:_** Your must install Java version 1.8 in your system to run the Jetifier standalone tool.
 
-1.  Go to the extracted folder > `bin` folder, and then run the following command to get `androidx` equivalent references of `android.support` in the output file.  
-    **\-i**: The input file with `android.support` references.  
-    **\-o**: The output file where the equivalent `androidx` references are to be saved.
+  4.  Go to the extracted folder > `bin` folder, and then run the 
+      following command to get `androidx` equivalent references of `android.support` in the output file.  
+       **\-i**: The input file with `android.support` references.  
+       **\-o**: The output file where the equivalent `androidx` references are to be saved.
 
-{% highlight voltMx %}jetifier-standalone -i <source-library> -o <output-library>
+         ```
+         jetifier-standalone -i <source-library> -o <output-library>
 
-{% endhighlight %}
+        ```
 
-1.  You can now use the contents of the `androidxstrings.java` file to replace all the `android.support` references.
+  5.  You can now use the contents of the `androidxstrings.java` 
+       file to replace all the `android.support` references.

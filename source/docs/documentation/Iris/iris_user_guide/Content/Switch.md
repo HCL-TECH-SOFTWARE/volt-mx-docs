@@ -92,8 +92,6 @@ The following table summarizes where a Switch widget can be placed:
 | VBox Form | Yes |
 | FlexContainer | Yes |
 | FlexScrollContainer | Yes |
-| HBox | Yes |
-| VBox | Yes |
 | ScrollBox | Horizontal Orientation - yesVertical Orientation- Yes |
 | Tab | Yes |
 | Segment | Yes |

@@ -29,7 +29,7 @@ Prerequisites
 
 *   Access to a Volt MX Cloud account. If you do not have a cloud account, you can register for it at [VoltMX Cloud Registration](https://manage.hclvoltmx.com/registration).
 *   Access to a Volt MX Cloud Build Environment. By default, new users get access to the Cloud build environment. Existing users need to request for access.
-*   Volt MX Iris V9 or later.
+
 *   Configure the various Project Settings.  
     Go to **Project** > **Settings** and configure the build settings for each Native platform. For more information on Project Settings, click [here](Project_Properties_In_Iris_Starter.html#project-settings-in).
 *   Platform specific prerequisites:

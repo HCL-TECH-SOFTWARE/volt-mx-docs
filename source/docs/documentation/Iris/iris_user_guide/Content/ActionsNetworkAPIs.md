@@ -61,11 +61,11 @@ To define an action sequence for invoking an Identity service, follow these step
 5.  The check boxes of all the service types are selected by default. Keep only the **Identity** check box selected, and clear the check boxes of all the other service types.
 6.  For the **Select Service** box, click the Search icon. The list of all available Identity services is displayed.
 
-> **_Note:_** Identity services are displayed with this icon: ![](Resources/Images/Identity_Service_Iccon_29x34.png). This icon is displayed beside all Identity services in the search results, and in the Select Service box after you select an Identity service. The presence of this icon helps you to easily identify the type of service that you want to select. So if different types of services have duplicate names, the accompanying icons help you in not selecting the wrong service by mistake.
+    > **_Note:_** Identity services are displayed with this icon: ![](Resources/Images/Identity_Service_Iccon_29x34.png). This icon is displayed beside all Identity services in the search results, and in the Select Service box after you select an Identity service. The presence of this icon helps you to easily identify the type of service that you want to select. So if different types of services have duplicate names, the accompanying icons help you in not selecting the wrong service by mistake.
 
-1.  Select the required Identity service; for example, _MicrosoftActiveDirectory$login_. The **Open Mapping Editor** button is displayed.
-2.  The [Mapping Editor](ActionsMapping.html) opens. [Map](Working_with_Mapping_Editor.html#Mapping) the service parameters to the required form, variable, or widget on the form from which the service was invoked.
-3.  Click **Save**. An action sequence for invoking an Identity service is defined in the selected widget.
+7.  Select the required Identity service; for example, _MicrosoftActiveDirectory$login_. The **Open Mapping Editor** button is displayed.
+8.  The [Mapping Editor](ActionsMapping.html) opens. [Map](Working_with_Mapping_Editor.html#Mapping) the service parameters to the required form, variable, or widget on the form from which the service was invoked.
+9.  Click **Save**. An action sequence for invoking an Identity service is defined in the selected widget.
 
 ### Invoke an Integration Service
 
@@ -80,14 +80,14 @@ To define an action sequence for invoking an Integration service, follow these s
 5.  The check boxes of all the service types are selected by default. Keep only the **Integration** check box selected, and clear the check boxes of all the other service types.
 6.  For the **Select Service** box, click the Search icon. The list of all available Integration services is displayed.
 
-> **_Note:_** Integration services are displayed with this icon: ![](Resources/Images/Integration_Service_Icon.png). This icon is displayed beside all Integration services in the search results, and in the Select Service box after you select an Integration service. The presence of this icon helps you to easily identify the type of service that you want to select. So if different types of services have duplicate names, the accompanying icons help you in not selecting the wrong service by mistake.
+    > **_Note:_** Integration services are displayed with this icon: ![](Resources/Images/Integration_Service_Icon.png). This icon is displayed beside all Integration services in the search results, and in the Select Service box after you select an Integration service. The presence of this icon helps you to easily identify the type of service that you want to select. So if different types of services have duplicate names, the accompanying icons help you in not selecting the wrong service by mistake.
 
-1.  Select the required Integration service. The **Open Mapping Editor** button and the **Custom HTTP Headers** and **HTTP Config Parameters** sections are displayed.
-2.  You can perform any of the following actions:
+7.  Select the required Integration service. The **Open Mapping Editor** button and the **Custom HTTP Headers** and **HTTP Config Parameters** sections are displayed.
+8.  You can perform any of the following actions:
     *   Click **Open Mapping Editor**. The [Mapping Editor](ActionsMapping.html) opens. [Map](Working_with_Mapping_Editor.html#Mapping) the service parameters to the required form, variable, or widget on the form from which the service was invoked.
     *   Add your own **Custom HTTP Headers**. Define any information that you want to pass in the header of the service call, apart from the default header parameters. Each row allows you to add a custom header parameter along with its value. Click the **+** icon to add more rows, and click the **X** icon to delete existing rows.
     *   In the **timeout** box, enter a value for the time in milliseconds (ms) after which the timeout of the action sequence must occur. 
-3.  Click **Save**. An action sequence for invoking an Integration service is defined in the form or widget.
+9.  Click **Save**. An action sequence for invoking an Integration service is defined in the form or widget.
 
 ### Invoke an Orchestration Service
 
@@ -102,14 +102,14 @@ To define an action sequence for invoking an Orchestration service, follow these
 5.  The check boxes of all the service types are selected by default. Keep only the **Orchestration** check box selected, and clear the check boxes of all the other service types.
 6.  For the **Select Service** box, click the Search icon. The list of all available Orchestration services is displayed.
 
-> **_Note:_** Orchestration services are displayed with this icon: ![](Resources/Images/Orchestration_Services_Icon_29x29.png). This icon is displayed beside all Orchestration services in the search results, and in the Select Service box after you select an Orchestration service. The presence of this icon helps you to easily identify the type of service that you want to select. So if different types of services have duplicate names, the accompanying icons help you in not selecting the wrong service by mistake.
+    > **_Note:_** Orchestration services are displayed with this icon: ![](Resources/Images/Orchestration_Services_Icon_29x29.png). This icon is displayed beside all Orchestration services in the search results, and in the Select Service box after you select an Orchestration service. The presence of this icon helps you to easily identify the type of service that you want to select. So if different types of services have duplicate names, the accompanying icons help you in not selecting the wrong service by mistake.
 
-1.  Select the required Orchestration service. The **Open Mapping Editor** button and the **Custom HTTP Headers** and **HTTP Config Parameters** sections are displayed.
-2.  You can perform any of the following actions:
+7.  Select the required Orchestration service. The **Open Mapping Editor** button and the **Custom HTTP Headers** and **HTTP Config Parameters** sections are displayed.
+8.  You can perform any of the following actions:
     *   Click **Open Mapping Editor**. The [Mapping Editor](ActionsMapping.html) opens. [Map](Working_with_Mapping_Editor.html#Mapping) the service parameters to the required form, variable, or widget on the form from which the service was invoked.
     *   Add your own **Custom HTTP Headers**. Define any information that you want to pass in the header of the service call, apart from the default header parameters. Each row allows you to add a custom header parameter along with its value. Click the **+** icon to add more rows, and click the **X** icon to delete existing rows.
     *   In the **timeout** box, enter a value for the time in milliseconds (ms) after which the timeout of the action sequence must occur. 
-3.  Click **Save**. An action sequence for invoking an Orchestration service is defined in the form or widget.
+9.  Click **Save**. An action sequence for invoking an Orchestration service is defined in the form or widget.
 
 ### Invoke an Object Service
 

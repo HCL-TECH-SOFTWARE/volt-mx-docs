@@ -16,7 +16,7 @@ In this topic, you will learn about:
 
 [JSON Connector Basics](#json-connector-basics)
 
-[Create a JSON Service](#creating-a-json-service)
+[Create a JSON Service](#json-connector-basics)
 
 [Publish the Service](PublishVoltMXFoundryServicesApp.html)
 
@@ -139,24 +139,23 @@ Operators
 
 ### Creating a JSON Service
 
-This procedure assumes that you have already configured Volt MX Foundry in Volt MX Iris. For more information, see [Connect to the Volt MX Foundry Console](Connect to Volt MX Foundry.html).
-
+This procedure assumes that you have already configured Volt MX Foundry in Volt MX Iris.
 To create a JSON service, do the following:
 
 1.  In Volt MX Iris, open either an existing application or create a new one.
 2.  If you have not done so already, log in to your Volt MX account. To do so, in the top right corner of the Volt MX Iris window, click **Login**. The Volt MX Account sign-in window opens. Enter your email and password credentials for your Volt MX user account, and then click **Sign in**.
 3.  Create a new Volt MX Foundry application or use an existing one. To do so, on the **Data and Services** panel, click the context menu arrow, and then click either **Create New App**, or **Use Existing App**, and then select from the Volt MX Foundry Application dialog box the services application that you want to publish. The Volt MX Foundry Console opens.
 
-![](MFinAppPane.png)
+    ![](MFinAppPane.png)
 
-> **_Note:_** If you want to associate your Volt MX Iris project with a different Volt MX Foundry app, on the **Project** tab of the Project Explorer, click the context menu arrow for **VoltMX Foundry**, and then click **Unlink App**. To link to a different Volt MX Foundry app, click the context menu arrow for **VoltMX Foundry**, and then click either **Create New App**, or **Use Existing App**.
+    > **_Note:_** If you want to associate your Volt MX Iris project with a different Volt MX Foundry app, on the **Project** tab of the Project Explorer, click the context menu arrow for **VoltMX Foundry**, and then click **Unlink App**. To link to a different Volt MX Foundry app, click the context menu arrow for **VoltMX Foundry**, and then click either **Create New App**, or **Use Existing App**.
 
-6.  To create a new integration service, on the **Integration** tab, click **CONFIGURE NEW**. The **Service Definition** section appears.
+4.  To create a new integration service, on the **Integration** tab, click **CONFIGURE NEW**. The **Service Definition** section appears.
 
-![](Resources/Images/JSONService_588x344.png)
+    ![](Resources/Images/JSONService_588x344.png)
 
-8.  In the **Base URL**, type the URL.
-9.  Under the **Web Service Authentication**, select one of the following modes:
+5.  In the **Base URL**, type the URL.
+6.  Under the **Web Service Authentication**, select one of the following modes:
     *   **None**: Select this option if you do not want to provide any authentication for the service.
     *   **Basic**: Provide User ID and Password if the external Web service requires form or basic authentication.
     *   **NTLM**: Your service follows the NT LAN Manager authentication process. You are required to provide the User ID, Password, NTLM Host and NTLM Domain.
@@ -165,54 +164,60 @@ To create a JSON service, do the following:
         
         ![](OperationBox_300x109.png)
         
-10.  Click **CONFIGURE OPERATION**. The New Operation tab appears.
+7.  Click **CONFIGURE OPERATION**. The New Operation tab appears.
     
     > **_Important:_** While configuring an integration service with basic auth mode, ensure that some reserved IDs are not used as input/header IDs. Key words such as userid, pwd and password are reserved by middleware when a user selects basic auth mode.
     
     ![](JSONOper_CRR_529x289.png)
     
-11.  In the **Operation Name** text box, modify the name if required.
-12.  Select one of the following security operations in the **Operation Security Level** field. By default, this field is set to **Authenticated App User.**
+8.  In the **Operation Name** text box, modify the name if required.
+9.  Select one of the following security operations in the **Operation Security Level** field. By default, this field is set to **Authenticated App User.**
     
     You can restrict access to this operation based on the following levels:
     
     *   **Authenticated App User** – indicates that this operation is secured. To use this operation, an app user must be authenticated by an associated identity service.
     *   **Anonymous App User** – indicates that a user must have the app key and app secret to access this operation.
     *   **Public** – indicates that this operation requires no special security.
-13.  In the **Operation Path** text box, modify the path if required.
-14.  Select the required method for this operation from the **HTTP Methods** field.
+10.  In the **Operation Path** text box, modify the path if required.
+
+11.  Select the required method for this operation from the 
+      **HTTP Methods** field.
     
-15.  Click the **Request Input** tab to provide the required details.
+12.  Click the **Request Input** tab to provide the required
+     details.
+
+
+     ![](JSONInput_CRR_546x151.png)
     
-    ![](JSONInput_CRR_546x151.png)
-    
-16.  Click **Response Output** and provide the required details.
+
+13.  Click **Response Output** and provide the required details.
 
   
-| ID | Path |
-| --- | --- |
-| city | //current\_observation/display\_location/city |
-| latitude | //current\_observation/display\_location/latitude |
-| longitude | //current\_observation/display\_location/longitude |
-| temperature | //current\_observation/temp\_c |
-| relative\_humidity | //current\_observation/relative\_humidity |
-| windspeed | //current\_observation/wind\_string |
-| icon | //current\_observation/icon |
-| icon\_url | //current\_observation/icon\_url |
-| forecast\_url | //current\_observation/forecast\_url |
+     | ID | Path |
+     | --- | --- |
+     | city | //current\_observation/display\_location/city |
+     | latitude | //current\_observation/display\_location/latitude |
+     | longitude | //current\_observation/display\_location/longitude |
+     | temperature | //current\_observation/temp\_c |
+     | relative\_humidity | //current\_observation/relative\_humidity |
+     | windspeed | //current\_observation/wind\_string |
+     | icon | //current\_observation/icon |
+     | icon\_url | //current\_observation/icon\_url |
+     | forecast\_url | //current\_observation/forecast\_url |
 
-18.  Click **Advanced** to configure the following:
+14.  Click **Advanced** to configure the following:
+
     
-    **Custom Code Invocation**: Upload the JAR file containing the preprocessor class name and postprocessor class name. This step allows you to further filter the data received from a service call.
+**Custom Code Invocation**: Upload the JAR file containing the preprocessor class name and postprocessor class name. This step allows you to further filter the data received from a service call.
     
-    **HTTP Headers**: You can provide the HTTP Headers for the call.
+   **HTTP Headers**: You can provide the HTTP Headers for the call.
     
-    **Properties**: You can configure various advanced service properties.
+   **Properties**: You can configure various advanced service properties.
     
-19.  Click **Test** to view the result of the operation.
+15.  Click **Test** to view the result of the operation.
     
-    ![](JSONResults_CRR_502x230.png)
+     ![](JSONResults_CRR_502x230.png)
     
-20.  Click **Save Operation** to the save the operation.
-21.  Click **Done** to save the service.
-22.  To close the Volt MX Foundry Console and return to the panes, views, and tabs of the Volt MX Iris integrated development environment (IDE), from the Quick Launch Bar along the upper left edge of Volt MX Iris, click the Workspace icon ![](Resources/Images/S7Persp_QkLaunch01b_20x19.png). Since you are still logged in to your Volt MX account, Volt MX Iris continues to have access to your Volt MX Foundry services.
+16.  Click **Save Operation** to the save the operation.
+17.  Click **Done** to save the service.
+18.  To close the Volt MX Foundry Console and return to the panes, views, and tabs of the Volt MX Iris integrated development environment (IDE), from the Quick Launch Bar along the upper left edge of Volt MX Iris, click the Workspace icon ![](Resources/Images/S7Persp_QkLaunch01b_20x19.png). Since you are still logged in to your Volt MX account, Volt MX Iris continues to have access to your Volt MX Foundry services.

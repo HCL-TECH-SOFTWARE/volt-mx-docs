@@ -11,11 +11,11 @@ Publishing a Web App in Volt MX Iris
 Overview
 --------
 
-Web Publish, a feature introduced in Volt MX Iris V8 SP4, enables you to build and publish a web app from Volt MX Iris to your Volt MX Foundry cloud.
+Web Publish, enables you to build and publish a web app from Volt MX Iris to your Volt MX Foundry cloud.
 
 Seamless in-app Build and Publish Experience
 
-Starting with Volt MX Iris V8 SP4, you can publish a web app to Volt MX Foundry, without leaving the Iris window. Earlier, one had to design their web app in Iris and then open the Volt MX Foundry console to the publish the web app. This process has now been simplified.
+Starting with Volt MX Iris V9 SP2, you can publish a web app to Volt MX Foundry, without leaving the Iris window. Earlier, one had to design their web app in Iris and then open the Volt MX Foundry console to the publish the web app. This process has now been simplified.
 
 The Build and Publish Web feature is available in the Build menu of the Volt MX Iris application.
 
@@ -104,31 +104,33 @@ Before you publish a web app, ensure that you have a project in which you have a
 5. Click either **Create New App** or **Link to Existing App**. The Volt MX Foundry console appears.
 6. If you have not already, sign in to your Volt MX Foundry account by using your cloud credentials.
 7. If you choose:
-  * **Create New App**, a new Foundry app with the same name as the Iris Project is created.
-  * **Link to Existing App**, a list of existing apps from your Volt MX Foundry account are displayed.
+   * **Create New App**, a new Foundry app with the same name as the Iris Project is created.
+   * **Link to Existing App**, a list of existing apps from your Volt MX Foundry account are displayed.
 8. To select the Volt MX Foundry app that you want to associate your Volt MX Iris app with, click **Associate** beside the App Name.
 
-   ![](Resources/Images/AssociateFoundryApp_638x384.png)  
+   ![](Resources/Images/AssociateFoundryApp_638x384.png) 
+   
+    
    The app you chose/created is successfully linked to your Iris Project.
 
 9.  Close the Volt MX Foundry window and return to Volt MX Iris by clicking on the Iris icon on the left navigation pane.
 10.  From the main menu of Volt MX Iris, select **Build** > **Build and Publish Web**.  
     The Build and Publish Web window appears.  
 
-<img src="Resources/Images/publishWebApp_389x413.png" alt="" style="width: 85%">
+   ![](Resources/Images/publishWebApp_389x413.png)
     
 11.  Select the required Platforms and Channels for which you want to build and publish your web app.
 12.  From the **Post Build Action** drop-down menu, select the desired **Post Build Action**. For more details about the Post Build Action, click [here](#post-build-actions).
 13.  From the **Build Mode** drop-down list, select your desired build mode.
 
-*   **Debug mode** \- To help you identify and fix errors, Volt MX Iris emits the complete symbolic debug information . To lessen the amount of time necessary to complete the build, the build is not optimized for code execution, so it may tend to execute slower than a build optimized for release. Also, the inclusion of the symbolic debug information causes the final executable to be larger than a release build.
-*   **Release mode** - Volt MX Iris optimizes the build for execution, requiring more time to generate the build. It also does not emit the complete symbolic debug information, making the final executable smaller than a debug build.
-*   **Protected Mode** - Applications built in Volt MX Iris can use the additional security enhancements by building the application in the _Protected Mode_. Volt MX IrisPlatform code for iOS and Android is equipped with mechanisms that can protect your application by detecting attacks like tampering, swizzling, debugging, jail breaking (iOS), rooting (Android), and information disclosure. Additional security mechanisms are provided through the use of White Box Cryptography to protect application business logic and source code. Application reacts to the attack by exiting upon detecting attacks to prevent further attempts. If you choose to build an application in **Protected mode**, then setting the public and private keys is mandatory. To do so, go to **Project Settings** > **Protected Mode**. For more details on how to generate public and private keys, click [here](ApplicationSecurity.html#rsa-key-pair-generation-encryption-and-usage).
-*   **Test Mode** - To help you identify and fix errors, Volt MX Iris provides the ability to Test the application on the device or an emulator. When you build an app using the Test Mode, you can leverage the Jasmine testing framework of Volt MX Iris to thoroughly test your app and ensure your application is errors free. You can run jasmine test cases, test suites and test plans by building an app using the Test mode.
+  *   **Debug mode** \- To help you identify and fix errors, Volt MX Iris emits the complete symbolic debug information . To lessen the amount of time necessary to complete the build, the build is not optimized for code execution, so it may tend to execute slower than a build optimized for release. Also, the inclusion of the symbolic debug information causes the final executable to be larger than a release build.
+  *   **Release mode** - Volt MX Iris optimizes the build for execution, requiring more time to generate the build. It also does not emit the complete symbolic debug information, making the final executable smaller than a debug build.
+  *   **Protected Mode** - Applications built in Volt MX Iris can use the additional security enhancements by building the application in the _Protected Mode_. Volt MX IrisPlatform code for iOS and Android is equipped with mechanisms that can protect your application by detecting attacks like tampering, swizzling, debugging, jail breaking (iOS), rooting (Android), and information disclosure. Additional security mechanisms are provided through the use of White Box Cryptography to protect application business logic and source code. Application reacts to the attack by exiting upon detecting attacks to prevent further attempts. If you choose to build an application in **Protected mode**, then setting the public and private keys is mandatory. To do so, go to **Project Settings** > **Protected Mode**. For more details on how to generate public and private keys, click [here](ApplicationSecurity.html#rsa-key-pair-generation-encryption-and-usage).
+  *   **Test Mode** - To help you identify and fix errors, Volt MX Iris provides the ability to Test the application on the device or an emulator. When you build an app using the Test Mode, you can leverage the Jasmine testing framework of Volt MX Iris to thoroughly test your app and ensure your application is errors free. You can run jasmine test cases, test suites and test plans by building an app using the Test mode.
 
-15.  You can choose to change the cloud environment on which your app will be published. To do so click on **Change** beside the **Environment** option.
+14.  You can choose to change the cloud environment on which your app will be published. To do so click on **Change** beside the **Environment** option.
 
-7. If you do not want to use the SHA1, MD2, MD4, and MD5 hashing algorithms in your application, check **Strict Mode**. If you do use any of those algorithms, leave **Strict Mode** unchecked. Otherwise, you will receive an "Unsupported algorithm" error message.
+15. If you do not want to use the SHA1, MD2, MD4, and MD5 hashing algorithms in your application, check **Strict Mode**. If you do use any of those algorithms, leave **Strict Mode** unchecked. Otherwise, you will receive an "Unsupported algorithm" error message.
 
 16.  Once all the required settings are ready, click **Build**.  
     The progress of the Web App Publish is displayed in the Build tab of Iris.  

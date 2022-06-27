@@ -26,7 +26,7 @@ Creating a Cordova app involves the following tasks:
 *   [Import or Create Cordova Assets](#import-or-create-cordova-assets)
 *   [Add a Cordova Browser Widget to a Form](#add-a-cordova-browser-widget-to-a-form)
 *   [Add or Import Cordova Plugins](#add-or-import-cordova-plugins)
-*   [Default Cordova Plugins for Volt MX App](#default-cordova-plugins-for)
+*   [Default Cordova Plugins for Volt MX App](#default-cordova-plugins-for-volt-mx-app)
     
 *   [Best Practices for Creating Cordova Applications](#best-practices-for-creating-cordova-applications)
 *   [Manually Customize the Cordova-Generated Android Project](#manually-customize-the-cordova-generated-android-project)
@@ -41,9 +41,9 @@ To enable Cordova, do the following:
 2.  On the Application tab, select the **Enable Cordova Settings** checkbox.
 3.  By default, Volt MX Iris uses the version of Cordova that you have installed, as indicated by the checkbox **Use globally installed Cordova version** being checked. However, if you want to use a different version of the Cordova command line interface (CLI), clear the **Use globally installed Cordova version** checkbox, and then from the **Cordova CLI** drop-down list, select the version you want. After you close the dialog box, Volt MX Iris installs the version of Cordova that you selected. Volt MX Iris supports Cordova version 4.2 and up.
 
-> **_Important:_** Changing the Cordova CLI version may affect your application code.
+    > **_Important:_** Changing the Cordova CLI version may affect your application code.
 
-5.  Click **Finish** (**Apply** in Volt MX Iris).
+4.  Click **Finish** (**Apply** in Volt MX Iris).
 
 Volt MX  Iris creates a Cordova folder structure accessible on the Project tab of the Project Explorer, under the **Web** section.
 
@@ -146,7 +146,7 @@ To prevent the execution of any unverified JavaScript functions on a device, any
 Manually Customize the Cordova-Generated Android Project
 --------------------------------------------------------
 
-While integrating your Cordova-generated Android project, certain gradle dependency conflicts or `android.support` to `androidx` conversion issues can arise. From Volt MX Iris V8 SP4 Fixpack 47, you can manually customize this Cordova project and then resolve these issues.
+While integrating your Cordova-generated Android project, certain gradle dependency conflicts or `android.support` to `androidx` conversion issues can arise. From In Volt MX Iris, you can manually customize this Cordova project and then resolve these issues.
 
 You can bundle this customized Cordova project by specifying the `cordovabuildmode` property as `incremental` in the [`androidbuild.properties` file](Native_App_Properties.html#add-android-properties-to-androidbuild-properties-file). For more information about the `cordovabuildmode` property, click [here](Native_App_Properties.html#bundle-a-customized-cordova-generated-android-project).
 

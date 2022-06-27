@@ -36,9 +36,6 @@ CI Build allows the user to build and publish an app from the command line witho
 
 ### CI Build for Volt MX Iris
 
-Starting with Volt MX Iris V8 SP3 GA, CI build is supported in Volt MX Iris.
-
-> **_Note:_** You must upgrade to V 8 SP3 to get CI build in applications created with a lower version of Volt MX Iris than SP3
 
 The following properties have a default value. You can configure them if required.
 
@@ -66,7 +63,6 @@ HeadlessBuild.properties file is present in the project location.
 
 #### New Entries
 
-**Upgrade Volt MX Iris project to 8.3.x or add the below new entries in** **HeadlessBuild.properties** **file**:
 
 <table style="width: 100%;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 363px;"><col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><span style="font-family: monospace;">protectedmodeenabled.ios</span></td><td class="TableStyle-Basic-BodyD-Column1-Body1">If the user wants to build for iOS in protected mode, change the value to true.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><span style="font-family: monospace;">protectedmodeenabled.android</span></td><td class="TableStyle-Basic-BodyD-Column1-Body1">If the user wants to build for android in protected mode, change the value to true.</td></tr><tr class="TableStyle-Basic-Body-Body1" data-mc-conditions="Default.V9 SP2"><td class="TableStyle-Basic-BodyE-Column1-Body1"><span>protectedmodeenabled.web</span></td><td class="TableStyle-Basic-BodyD-Column1-Body1">If the user wants to build a web application in the protected mode, change the value to true.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><span style="font-family: monospace;">plugin.dir</span></td><td class="TableStyle-Basic-BodyD-Column1-Body1">Points to the directory, where the plugins required for the build are copied.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><span style="font-family: monospace;">javaloc</span></td><td class="TableStyle-Basic-BodyD-Column1-Body1">Java home (provide the folder location consisting bin where the Java is installed.)Example: <span style="font-family: monospace;">&lt;Install_location&gt;\VoltMXIrisEnterprise8.0\Java\jdk</span></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><span style="font-family: monospace;">androidHome</span></td><td class="TableStyle-Basic-BodyD-Column1-Body1">Android SDK path</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">For Proxy setup, the following new entries are applicable:<span style="font-family: monospace;">proxy.host</span><span style="font-family: monospace;">proxy.port</span><span style="font-family: monospace;">proxy.username</span><span style="font-family: monospace;">proxy.password</span></td><td class="TableStyle-Basic-BodyA-Column1-Body1">If you are running CI build on a system behind a proxy, provide proxy details.</td></tr></tbody></table>
 

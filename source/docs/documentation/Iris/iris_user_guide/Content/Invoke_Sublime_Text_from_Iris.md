@@ -8,7 +8,7 @@ category: "iris_user_guide"
 Invoke Sublime Text from Volt MX Iris
 ===========================================
 
-From V8 SP4, you can invoke the latest version of Sublime Text (a third-party source code editor) from within Volt MX Iris. This feature ensures that developers have the option to use an alternative tool to write and modify code within Iris, in addition to Iris's in-built code editor. You can also make use of the auto-complete Intellisense feature for Volt MX UI, API, and SDK functions while working with Sublime Text.
+From V9 SP 2, you can invoke the latest version of Sublime Text (a third-party source code editor) from within Volt MX Iris. This feature ensures that developers have the option to use an alternative tool to write and modify code within Iris, in addition to Iris's in-built code editor. You can also make use of the auto-complete Intellisense feature for Volt MX UI, API, and SDK functions while working with Sublime Text.
 
 Sublime Text is a proprietary cross-platform source code editor with a Python API. This source code editor natively supports various programming and markup languages. You can use Sublime Text to add functions with plugins, which are typically community-built and maintained under free-software licenses.
 
@@ -17,7 +17,7 @@ Prerequisites
 
 Before you can start using Sublime Text from Iris, you must meet the following prerequisites:
 
-*   Use Volt MX Iris V8 SP4 or later
+*   Use Volt MX Iris V9 SP2 or later
 *   Install the latest version of [Sublime Text](https://www.sublimetext.com/3)
 *   Install [Package Control](https://packagecontrol.io/installation)
 *   Install [Ternjs for Sublime Text](https://github.com/ternjs/tern_for_sublime) (to add Intellisense for Volt MX Iris APIs)
@@ -56,6 +56,8 @@ To do so, follow these steps:
 1.  In your Volt MX Iris project, in the Project Explorer, right-click a JavaScript file/folder. A context menu appears.  
       
     ![](Resources/Images/Open_with_Sublime.PNG)
+
+
 2.  Click **Open with Sublime**. The Sublime Text source code editor appears with the code snippet of that particular JavaScript file/folder.  
       
     ![](Resources/Images/Sublime_375x308.png)
@@ -73,12 +75,11 @@ To install Ternjs, follow these steps:
 2.  Check out the following code into a sub-directory of your Sublime Text's Packages directory.
     
 
-{% highlight voltMx %}cd /path/to/sublime-text-N/Packages
-git clone [https://github.com/ternjs/tern_for_sublime.git](https://github.com/ternjs/tern_for_sublime.git)
+     {% highlight voltMx %}cd /path/to/sublime-text-N/Packages
+     git clone [https://github.com/ternjs/tern_for_sublime.git](https://github.com/ternjs/tern_for_sublime.git)
+     {% endhighlight %}
 
-{% endhighlight %}
-
-1.  Ensure that you have installed [node.js](https://nodejs.org/en/) and [npm](https://www.npmjs.com/) (Tern is a JavaScript program), and then install the dependencies of the package.
+Ensure that you have installed [node.js](https://nodejs.org/en/) and [npm](https://www.npmjs.com/) (Tern is a JavaScript program), and then install the dependencies of the package.
 
 {% highlight voltMx %}cd tern_for_sublime
 npm install

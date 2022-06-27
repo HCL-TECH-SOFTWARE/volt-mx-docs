@@ -8,7 +8,7 @@ category: "iris_user_guide"
 Image2 Widget for Watch
 =======================
 
-The Image2 widget is a non-interactive widget that you can use to display a local image file. Volt MX Iris version 7.3 suppcrts PNG, JPEG, and GIF image formats. Volt MX Iris version 7.2 and earlier supported PNG image format only.
+The Image2 widget is a non-interactive widget that you can use to display a local image file. Volt MX Iris version 9.2 suppcrts PNG, JPEG, and GIF image formats.
 
 To use images in Volt MX Iris, you copy the images to a specific folder in the Workspace and then use the Image2 widget to insert the image in a form. You can see what images are a part of your project on the **Assets** tab of the Project Explorer. You can also specify images for a specific channel and then use them in your application. For more information, see [Adding and Managing Images and Other Media](Adding_and_Managing_Images.html).
 
@@ -27,9 +27,8 @@ Click any of the following to learn about the properties found on the tabs of th
 Image Naming Conventions
 ------------------------
 
-If an image file has an invalid file name, Volt MX Iris does not list it in the Media folder of the **Assets** tab. In Volt MX Iris version 7.2 and earlier, Volt MX Iris does not list it the file in the Media folder of the **Assets** tab if it is not a PNG file. You will want to be sure to use the following conventions when naming image files:
+If an image file has an invalid file name, Volt MX Iris does not list it in the Media folder of the **Assets** tab. You will want to be sure to use the following conventions when naming image files:
 
-*   For Volt MX Iris version 7.2 and earlier, the file format for images must be PNG.
 *   The file name must contain only lowercase characters.
 *   The file name must start with a letter.
 *   Numbers are allowed as long as they are not the first character in the file name.

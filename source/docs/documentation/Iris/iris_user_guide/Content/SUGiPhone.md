@@ -10,7 +10,7 @@ iOS SDK and Emulator
 
 Building and testing iOS applications in Volt MX Iris requires two primary resources: Java SE 7 runtime, which is required by Eclipse, the hosting application of Volt MX Iris; and XCode, the SDK for iOS and Mac OS. You are prompted to install these two resources the first time you launch Volt MX Iris.
 
-Starting with Volt MX Iris V9 SP1 GA version, you can view the list of emulators within Iris and run your apps on the emulators directly from Iris. When you open any project in Iris, you can view emulators from the Build menu. Previously, if you wanted to preview an app, you had to create a binary file, install it on a device, and then launch the application. With this new capability to view the emulators within Iris, you can skip the process of creating a binary and installing it directly on the device/emulators. You can now directly go to the last step of launching the app in an emulator to view the app in action.
+In Volt MX Iris V9 SP2 GA version, you can view the list of emulators within Iris and run your apps on the emulators directly from Iris. When you open any project in Iris, you can view emulators from the Build menu. Previously, if you wanted to preview an app, you had to create a binary file, install it on a device, and then launch the application. With this new capability to view the emulators within Iris, you can skip the process of creating a binary and installing it directly on the device/emulators. You can now directly go to the last step of launching the app in an emulator to view the app in action.
 
 You cannot create the emulators directly within Volt MX Iris. However, you can view the emulators on the system using XCode (emulators). So, before you get started with using the emulators, you must first ensure that you have a few emulators configured in XCode.
 
@@ -19,7 +19,7 @@ You cannot create the emulators directly within Volt MX Iris. However, you can v
 Prerequisites
 -------------
 
-*   Volt MX Iris V9 SP1 GA or later
+*   Volt MX Iris V9 SP2 GA or later
 *   Access to a Volt MX Cloud account
 
 *   Install XCode on your Mac
@@ -51,7 +51,7 @@ To develop for the iOS platform and run its emulators, your computer needs to me
 Download and install Java SE 7 Runtime
 --------------------------------------
 
-Eclipse, the integrated development environment (IDE) application that hosts Volt MX Iris, requires Java SE 7 to run, but it is not automatically installed when you install Volt MX Iris. You are prompted to install it when you first launch Volt MX Iris.
+Eclipse, the integrated development environment (IDE) application, requires Java SE 7 to run, but it is not automatically installed when you install Volt MX Iris. You are prompted to install it when you first launch Volt MX Iris.
 
 To download and install Java SE 7, do the following:
 
@@ -92,7 +92,7 @@ Launch the App Using Run on My Device or the Emulator Menu
     
 3.  From the **Post Build Action** drop-down list, select **Run on my Device/Emulator**.  
     A new category **Configured Devices & Emulators** appears.  
-    The **Configured Devices & Emulators** window displays available devices and emulators. Mobile Emulators appear under the Mobile section, and Table Emulators appear below the Tablets section.  
+    The **Configured Devices & Emulators** window displays available devices and emulators. Mobile Emulators appear under the Mobile section, and Tablet Emulators appear below the Tablets section.  
       
     ![](Resources/Images/Emulators_AVDs1.png)
 4.  Select the Emulator on which you want to test the app.

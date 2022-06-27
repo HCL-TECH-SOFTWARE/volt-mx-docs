@@ -8,11 +8,10 @@ category: "iris_user_guide"
 Integrate a React Native App to Volt MX App
 ===========================================
 
-Using this feature, you can integrate a React Native app (which is developed in React Native framework) to an app (which is developed in Volt MX Iris framework). The React Native app is embedded into the Volt MX Iris form through a container, called as the React Native Container. Furthermore, some APIs are used to communicate between the React Native app's JavaScript framework and the Volt MX app's Volt MX Iris framework. This feature is available from Volt MX Iris V8 SP4 onwards.
+Using this feature, you can integrate a React Native app (which is developed in React Native framework) to an app (which is developed in Volt MX Iris framework). The React Native app is embedded into the Volt MX Iris form through a container, called as the React Native Container. Furthermore, some APIs are used to communicate between the React Native app's JavaScript framework and the Volt MX app's Volt MX Iris framework.
 
 React Native is a framework developed by Facebook. React Native is used to create cross-platform mobile applications.
 
-To gain a more hands-on experience on the React Native Integration process, download and use the [TaskListSample app](https://github.com/voltmx/ReactNativeIntegration_TaskListSample) from [GitHub](https://github.com/).
 
 For more information on the container and communication APIs that are essential to integrate a React Native app to a Volt MX Iris app, refer these sections:
 
@@ -188,7 +187,7 @@ For Android, React Native apps are added as libraries to the Volt MX Iris app, w
 VoltMX's Gradle Plugin, Build Tools, and Gradle Dependencies
 -------------------------------------------------------------
 
-The relevant information on VoltMX's Gradle Plugin, Build Tools, and Gradle Dependencies for V8 SP4 is as follows.
+The relevant information on VoltMX's Gradle Plugin, Build Tools, and Gradle Dependencies for V9 SP2 is as follows.
 
 > **_Note:_** The versions will change based on the plugins, so always refer the plugin corresponding to the build.gradle file for the exact Volt MX Iris versions used .
 

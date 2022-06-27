@@ -38,20 +38,25 @@ To publish your project to the cloud, do the following:
 2.  Enter your email and password credentials for your Volt MX account, and then click **Continue**. Once you are signed in, your account name displays in the top right corner of the Volt MX Iris window.
 3.  From the **Project** menu, go to **Export** > **Cloud Project**.
 
-The Share Project dialog box displays.
+    The Share Project dialog box displays.
 
-![](Resources/Images/shareproject.png)
 
-6.  From the **Account** drop-down list, select the cloud account to which you want the project published.
+     ![](Resources/Images/shareproject.png)
 
-> **_Note:_** If your profile is linked to a single account, the Share Project dialog box does not contain a list for the Account field.
 
-8.  In the **Name** text box, the project name is populated automatically. To change this, enter the name that you want people to see when they log in to the cloud account to download the project.
-9.  If you want, in the **Description** text box, type a brief description of your project, such as a version number or something about what's new in this iteration.
-10. Click **Apply**. The upload begins.
-11. Depending on the size of your project and the speed of your internet connection, uploading the project may take some time. After the project is uploaded, Volt MX Iris displays a confirmation message. Click **Close** to complete the process of sharing the project.
+4.  From the **Account** drop-down list, select the cloud account to which you want the project published.
+
+    > **_Note:_** If your profile is linked to a single account, the Share Project dialog box does not contain a list for the Account field.
+
+5.  In the **Name** text box, the project name is populated automatically. To change this, enter the name that you want people to see when they log in to the cloud account to download the project.
+6.  If you want, in the **Description** text box, type a brief description of your project, such as a version number or something about what's new in this iteration.
+7. Click **Apply**. The upload begins.
+8. Depending on the size of your project and the speed of your internet connection, uploading the project may take some time. After the project is uploaded, Volt MX Iris displays a confirmation message. Click **Close** to complete the process of sharing the project.
     
+
     ![](Resources/Images/ShareProjectUploadComplete.png)  
+
+    
     The maximum allowed file size is 256 MB (in .zip format).
     
 
@@ -68,10 +73,10 @@ To invite users to a cloud account, do the following:
 1.  Visit http://manage.hclvoltmx.com and enter your Volt MX account credentials.
 2.  After validating your login credentials, click the **Settings** icon along the left edge of the page.
 
-![](Resources/Images/VoltMXCloudSettings.png)
+    ![](Resources/Images/VoltMXCloudSettings.png)
 
-4.  Click **Invite User**.
-5.  In the **Invite User** dialog box,
+3.  Click **Invite User**.
+4.  In the **Invite User** dialog box,
     *   Enter the email address of the user you're inviting.
     *   Select an account role to be assigned to the user. Available roles include: Owner, Admin, Billing, and Member.
     *   From the existing cloud accounts, select the type of access to be provided to the user. Selecting the **Full Access** option results in adding the user to the cloud account.
@@ -91,11 +96,11 @@ To modify a shared project, do the following:
 4.  On the **Publish** menu, click **Project**.
 5.  Volt MX Iris prompts you to confirm that you want to replace the existing project on the cloud. Click **Apply** to upload the modified project.
     
-    ![](Resources/Images/ShareProject_replace.png)
+     ![](Resources/Images/ShareProject_replace.png)
     
 6.  Depending on the size of your project and the speed of your internet connection, uploading the project may take some time. After the project is uploaded, Volt MX Iris displays a confirmation message. Click **Close** to complete the process of sharing the project.
     
-    ![](Resources/Images/ShareProjectUploadComplete.png)
+     ![](Resources/Images/ShareProjectUploadComplete.png)
     
 
 ### Shared Project Limitations

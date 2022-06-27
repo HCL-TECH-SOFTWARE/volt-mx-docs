@@ -8,7 +8,7 @@ category: "iris_user_guide"
 Use Test Scripts in Volt MX Iris
 ======================================
 
-You can create test scripts and use them in Volt MX Iris from Volt MX Iris SP3 GA onwards. Even though testing scripts were supported by Volt MX Iris earlier, they were never supported in Volt MX Iris directly. In previous releases of Volt MX Iris, you could create scripts and place them in the Other Resources folder in the Project View of Volt MX Iris.
+You can create test scripts and use them . Even though testing scripts were supported by Volt MX Iris earlier, they were never supported in Volt MX Iris directly. In previous releases of Volt MX Iris, you could create scripts and place them in the Other Resources folder in the Project View of Volt MX Iris.
 
 The new Test Resources folder in Volt MX Iris allows you to create test scripts for specific channels such as Mobile, Tablet, Desktop Web etc. The new feature also allows you to use multiple testing frameworks. For each one of the testing framework, the test resources folder has separate child folders for each channel. This allows you to easily identify the script types and use the ones which are appropriate for the channel you are testing. You can now manage your scripts directly from the Volt MX Iris UI.
 

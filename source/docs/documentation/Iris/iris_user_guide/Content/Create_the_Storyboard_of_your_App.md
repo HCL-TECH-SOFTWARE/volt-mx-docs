@@ -47,22 +47,28 @@ Rename a Form
 
 1.  In Storyboard view, click the **Form1** text. A box appears in which you can enter the new name for Form1.  
       
-    ![](Resources/Images/Rename_Form1_192x388.png)
 
-> **_Note:_** In Storyboard view, it is not possible to rename the App Group to which a form is associated; you can only rename a form.
+     ![](Resources/Images/Rename_Form1_192x388.png)
 
-1.  Type the required text in the box as the field name (here, _frmStartUp_), and press Enter. The form is displayed with the updated name in both Storyboard view and Design view.  
+
+    > **_Note:_** In Storyboard view, it is not possible to rename the App Group to which a form is associated; you can only rename a form.
+
+
+2.  Type the required text in the box as the field name (here, _frmStartUp_), and press Enter. The form is displayed with the updated name in both Storyboard view and Design view.  
       
+
     ![](Resources/Images/Form_rename_184x368.png)  
       
+
     ![](Resources/Images/Form_Rename_Design_View.png)
+
 
 Add a Widget to a Form
 ----------------------
 
 You can drag and drop any item or widget from the Default Library to a form in Storyboard view.
 
-It is also possible to drag and drop services from the **Data & Services** panel onto the Storyboard view. When you drag and drop a method, object, or service anywhere on the Storyboard view canvas, the relevant forms and associated [hard navigation links](#hardnavigationlink) between the forms are automatically generated.
+It is also possible to drag and drop services from the **Data & Services** panel onto the Storyboard view. When you drag and drop a method, object, or service anywhere on the Storyboard view canvas, the relevant forms and associated hard navigation links between the forms are automatically generated.
 
 ![](Resources/Images/Generate_Forms_in_Storyboard_View_662x418.png)
 
@@ -75,7 +81,9 @@ In the following scenario, we have added a SquaredButton widget to the form:
 3.  If you want to delete or create a copy of the button, right-click the button on the project canvas and click **Delete** or **Duplicate** respectively.
 4.  To view the details of the button that you added to the form, click the **Design** view tab on the project canvas. You can select the button on the Project Explorer, and then view or modify its details on the Properties panel.  
       
+
     ![](Resources/Images/Button_Design_View.png)
+
 
 Add a New Form with Navigation Link
 -----------------------------------
@@ -101,19 +109,25 @@ To add a new form with a navigation link to the existing form in Storyboard view
       
     ![](Resources/Images/Create_New_Form/NewFormAppGroup1_536x344.png)
 
-> **_Note:_** This type of navigation link is called as a [soft link](#SoftNavigationLink). It is just a visual representation of the navigation action between two forms; there is no actual navigation action involved between the forms through code.
 
-1.  You can perform any of the following actions on Form2:
+> **_Note:_** This type of navigation link is called as a soft link. It is just a visual representation of the navigation action between two forms; there is no actual navigation action involved between the forms through code.
+
+3.  You can perform any of the following actions on Form2:
     *   **Mark as Startup**: Right-click Form2, and then click **Mark as Startup**. Form2 is selected as the landing page of the app, and the arrow that indicates this appears under Form2.  
           
+
         ![](Resources/Images/Form2_as_Startup_574x354.png)
+
+
     *   **Duplicate**: Right-click Form2, and then click **Duplicate**. A copy of Form 2 (named _CopyForm2_ by default) is created without a navigation link, and appears beside it.
     *   **Delete**: Right-click Form2, and then click **Delete**. Form2 and its navigation link to Form1 are removed.
-2.  If you want to just delete the navigation link between Form1 and Form2, click the navigation link and press the **Delete** key from your keyboard.
+4.  If you want to just delete the navigation link between Form1 and Form2, click the navigation link and press the **Delete** key from your keyboard.
 
-1.  To view the details of Form2, click the **Design** view tab on the project canvas. You can select **Form2** on the Project Explorer, and then view or modify its details on the Properties panel.  
+5.  To view the details of Form2, click the **Design** view tab on the project canvas. You can select **Form2** on the Project Explorer, and then view or modify its details on the Properties panel.  
       
+
     ![](Resources/Images/Form2_364x257.png)
+
 
 Add a Navigation Link between Two Forms
 ---------------------------------------
@@ -134,11 +148,12 @@ To add a hard link between two forms in Design view, follow these steps:
       
     ![](Resources/Images/Hard_Navigation_Link_467x331.png)
 
-> **_Note:_** If a soft navigation link already exists between two forms and later you define a hard navigation link between those two forms, the hard navigation link replaces the soft navigation one.
+    > **_Note:_** If a soft navigation link already exists between two forms and later you define a hard navigation link between those two forms, the hard navigation link replaces the soft navigation one.
 
-> **_Note:_** You cannot delete a hard navigation link; only soft navigation links can be deleted.
+    > **_Note:_** You cannot delete a hard navigation link; only soft navigation links can be deleted.
 
-1.  If you want to view or modify the details of the navigation action between the two forms in the Action Editor, click the Open Action icon ![](Resources/Images/Open_Action_Icon_31x30.png). The Action Editor opens with details of the navigation action.
+6.  If you want to view or modify the details of the navigation action between the two forms in the Action Editor, click the Open Action icon ![](Resources/Images/Open_Action_Icon_31x30.png). The Action Editor opens with details of the navigation action.
+
 
 > **_Note:_** If there are multiple navigation actions between two forms, when you click the Open Action icon ![](Resources/Images/Open_Action_Icon_31x30.png), all the created actions are displayed. You can click the required navigation action to view or modify the details in the Action Editor.
 
@@ -148,9 +163,10 @@ To add a soft link between two forms in Storyboard view, follow these steps:
 2.  Click the Add icon ![](Resources/Images/Add_Icon_33x32.png). A new form, named **Form3** by default, appears with a navigation link connecting to Form2.
 3.  To add a visual navigation link from Form1 to Form3, click **Form1** and then click the Draw Navigation Link icon ![](Resources/Images/Draw_Navigation_Link_32x32.png).
 
-> **_Note:_** You can only create soft navigation links between forms that do not have any hard navigation links between them.
 
-1.  Drag the navigation link from Form1 to Form3. The visual representation of a navigation action between two forms is created.  
+    > **_Note:_** You can only create soft navigation links between forms that do not have any hard navigation links between them.
+
+4.  Drag the navigation link from Form1 to Form3. The visual representation of a navigation action between two forms is created.  
     If you want to delete the navigation link between Form1 and Form3, click the navigation link and press the **Delete** key from your keyboard.
 
 > **_Note:_** A soft link is just a visual representation of the navigation action between two forms; there is no actual navigation action involved between the forms through code.

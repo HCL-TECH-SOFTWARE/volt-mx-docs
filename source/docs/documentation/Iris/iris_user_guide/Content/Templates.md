@@ -41,7 +41,7 @@ A header is a section of the form that is docked at the top of the form, and can
 2.  Expand **Mobile**, **Tablet**, or **Desktop** (depending on which channel you want to create a header template), point to **Headers** to display a down-arrow. Click this down-arrow and then click **New Template**. Rename the template, if required.
 3.  Drag and drop a container widget on the template.
     
-    > **_Note:_** A template requires that you add a container widget (for Flex form: **FlexContainer** and for VBox form: **HBox**) before adding other widgets.
+    > **_Note:_** A template requires that you add a container widget (for Flex form: **FlexContainer** )before adding other widgets.
     
 4.  Drag and drop the required widgets on the container.
     
@@ -58,7 +58,7 @@ To create a footer template, follow these steps:
 2.  Expand **Mobile**, **Tablet**, or **Desktop** (depending on which channel you want to create a map template), point to **Footers** to display a down-arrow. Click this down-arrow and then click **New Template**. Rename the template, if required.
 3.  Drag and drop a container widget on the template.
     
-    > **_Note:_** A template requires that you add a container widget (for Flex form: **FlexContainer** and for VBox form: **HBox**) before adding other widgets.
+    > **_Note:_** A template requires that you add a container widget (for Flex form: **FlexContainer** ) before adding other widgets.
     
 4.  Drag and drop the required widgets on the container.
     
@@ -80,7 +80,7 @@ To create a footer template, follow these steps:
 
 ### Segments
 
-A Segment template enables you to define a template for section headers and rows of the segment. This is primarily useful for achieving common look and feel of section headers along with few widgets added as part of section header of a segment. For Segment, two sample templates are available starting from Volt MX Iris V8 SP3 GA. One sample for the row and another for the header.  
+A Segment template enables you to define a template for section headers and rows of the segment. This is primarily useful for achieving common look and feel of section headers along with few widgets added as part of section header of a segment. For Segment, two sample templates are available. One sample for the row and another for the header.  
 
 > **_Important:_** When you add a segment to a form, you can create a new template without going to the Templates section using the **Create New** option from the drop-down list. You can also edit a template inline in the segment.
 
@@ -93,7 +93,7 @@ A Segment template enables you to define a template for section headers and rows
 2.  Expand **Mobile**, **Tablet**, or **Desktop** (depending on which channel you want to create a map template), point to **Segments** to display a down-arrow. Click this down-arrow and then click **New Template**. Rename the template, if required.
 3.  Drag and drop a container widget on the template.
     
-    > **_Note:_** A template requires that you add a container widget (for Flex form: **FlexContainer** and for VBox form: **HBox**) before you can add other widgets.
+    > **_Note:_** A template requires that you add a container widget (for Flex form: **FlexContainer**) before you can add other widgets.
     
 4.  Drag and drop the required widgets on the container.
 5.  Set the properties of these widgets and save the Segment template.
@@ -202,7 +202,7 @@ A Gridcalendar template enables you to define a template for Calendar Day cell. 
 2.  Expand **Mobile** or **Tablet** (depending on which channel you want to create a Gridcalendar template), point to **Gridcalendar** to display a down-arrow. Click this down-arrow, and then click **New Template**. Rename the template, if required.
 3.  Drag and drop a container widget onto a template.
     
-    > **_Note:_** You need to add a FlexContainer or HBox to a template before adding other widgets.
+    > **_Note:_** You need to add a FlexContainer to a template before adding other widgets.
     
 4.  Drag and drop the required widgets on the HBox.
 5.  Set the properties of these widgets and save the Gridcalendars template.
@@ -251,7 +251,7 @@ To create a Tab Header template at the application-level, follow these steps:
 2.  Expand **Desktop**, point to **Tab Header** to display a down-arrow. Click this down-arrow, and then click **New Template**. Rename the template, if required.
 3.  Drag and drop a container widget on the template.
     
-    > **_Note:_** A template requires that you add a container widget ( **HBox**) before you can add other widgets.
+    > **_Note:_** A template requires that you add a container widget before you can add other widgets.
     
 4.  Drag and drop the required widgets.
 5.  Set the properties of these widgets and save the **Tab Header** template.

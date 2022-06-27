@@ -120,12 +120,18 @@ To create a Responsive Grid Layout for a mobile or tablet, do the following:
     
 Using the steps in the section, add five more FlexContainers. The following table provides the configuration details.  
       
-<table style="width: 100%; margin-left: 0; margin-right: auto;"><colgroup><col><col><col><col><col><col></colgroup><tbody><tr><td style="font-weight: bold;">Type</td><td>Single Color</td><td>Single Color</td><td>Single Color</td><td>Single Color</td><td>Single Color</td></tr><tr><td style="font-weight: bold;">Color</td><td>3eadcf</td><td>b352b3</td><td>239651</td><td>b83e6b</td><td>8cc74a</td></tr><tr><td style="font-weight: bold;">Opacity</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td></tr><tr><td style="font-weight: bold;">ID</td><td>FlxTwo</td><td>FlxThree</td><td>FlxFour</td><td>FlxFive</td><td>FlxSix</td></tr><tr><td style="font-weight: bold;">Height</td><td>50%</td><td>50%</td><td>200 DP</td><td>200 DP</td><td>200 DP</td></tr><tr><td style="font-weight: bold;">Portrait Span</td><td>4</td><td>4</td><td>8</td><td>6</td><td>6</td></tr><tr><td style="font-weight: bold;">Landscape Span</td><td>6</td><td>6</td><td>6</td><td>6</td><td>6</td></tr><tr><td style="font-weight: bold;">Offset Portrait</td><td>NA</td><td>NA</td><td>2</td><td>NA</td><td>NA</td></tr></tbody></table>
+  | Type          | Color         | Opacity       | ID          |Height        |Portrait Span | Landscape Span | Offset Portrait | 
+  |-------------  |-------------  | ------------- |-------------| -------------|------------- |------------- |------------- |
+  | Single Color      | 3eadcf     | 100%      | FlxTwo     |50%     |4   |6   |NA   |
+  | Single Color      | b352b3     | 100%      | FlxThree    |50%     |4   |6   |NA   |
+  | Single Color      | 239651   | 100%     | FlxFour     |200 DP     |8   |6   |2   |
+  | Single Color      | b83e6b     | 100%      | FlxFive     |200 DP     |6   |6   |NA   |
+  | Single Color      | 8cc74a     | 100%      | FlxSix     |200 DP    |6   |6   |NA   |
     
 20.  From the top of the canvas, select the button **Toggle Orientation**, to view this form in the **Landscape** mode.
 21.  Build your app and view the app on your device.
     
-    Play around with the app in the portrait mode and landscape mode to see the responsive behaviour.
+Play around with the app in the portrait mode and landscape mode to see the responsive behaviour.
     
 
 Responsive Grid Layout – Web
@@ -159,7 +165,13 @@ To create a Responsive Grid Layout for web, do the following:
     
 Using the steps in the section, add five more FlexContainers. The following table provides the configuration details.
     
-<table style="width: 100%; margin-left: 0; margin-right: auto;"><colgroup><col><col><col><col><col><col></colgroup><tbody><tr><td style="font-weight: bold;">Type</td><td>Single Color</td><td>Single Color</td><td>Single Color</td><td>Single Color</td><td>Single Color</td></tr><tr><td style="font-weight: bold;">Color</td><td>3eadcf</td><td>b352b3</td><td>239651</td><td>b83e6b</td><td>8cc74a</td></tr><tr><td style="font-weight: bold;">Opacity</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td><td>100%</td></tr><tr><td style="font-weight: bold;">ID</td><td>FlxTwo</td><td>FlxThree</td><td>FlxFour</td><td>FlxFive</td><td>FlxSix</td></tr><tr><td style="font-weight: bold;">Height</td><td>33.33%</td><td>33.33%</td><td>33.33%</td><td>33.33%</td><td>33.33%</td></tr><tr><td style="font-weight: bold;">First breakpoint Span</td><td>4</td><td>4</td><td>8</td><td>6</td><td>6</td></tr><tr><td style="font-weight: bold;">Second breakpoint Span</td><td>6</td><td>6</td><td>6</td><td>6</td><td>6</td></tr><tr><td style="font-weight: bold;">Third breakpoint Span</td><td>3</td><td>3</td><td>3</td><td>12</td><td>8</td></tr><tr><td style="font-weight: bold;">First breakpoint Offset</td><td>0</td><td>0</td><td>2</td><td>0</td><td>0</td></tr><tr><td style="font-weight: bold;">Second breakpoint Offset</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td style="font-weight: bold;">Third breakpoint Offset</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2</td></tr></tbody></table>
+| Type          | Color         | Opacity       | ID          |Height        |First breakpoint Span | Second breakpoint Span | Third breakpoint Span | First breakpoint Offset | Second breakpoint Offset  | Third breakpoint Offset | 
+|-------------  |-------------  | ------------- |-------------| -------------|------------- |------------- |------------- |------------- |------------- |------------- |
+| Single Color      | 3eadcf     | 100%      | FlxTwo     |33.33%    |4   |6   |3   | 0|0 | 0|
+| Single Color      | b352b3     | 100%      | FlxThree    |33.33%   |4   |6   |3   |0 | 0| 0| 
+| Single Color      | 239651   | 100%     | FlxFour     |33.33%     |8   |6   |3   | 2| 0| 0|
+| Single Color      | b83e6b     | 100%      | FlxFive     |33.33%     |6   |6   |12   |0 | 0|0 |
+| Single Color      | 8cc74a     | 100%      | FlxSix     |33.33%    |6   |6   |8   |0 | 0| 2|
     
 15.  From the top of the canvas, select different breakpoints to view the responsive behavior.
 16.  Build your app and view the app on your device.  

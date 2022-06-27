@@ -19,9 +19,9 @@ To disable the generation of print statements during a build, do the following:
     The Build options appear in the right pane.
 3.  Do one or both of the following, depending on whether you want to disable print statements for Debug Mode and Release Mode builds:
 
-*   **Release Mode builds.** To disable the generation of print statements during Release Mode builds, select the check box of the option titled **Stub the print statements in custom modules during release build**.
-*   **Debug Mode builds.** To disable the generation of print statements during Debug Mode builds, select the check box of the option titled **Stub the print statements in custom modules during debug build**.
+    *   **Release Mode builds.** To disable the generation of print statements during Release Mode builds, select the check box of the option titled **Stub the print statements in custom modules during release build**.
+    *   **Debug Mode builds.** To disable the generation of print statements during Debug Mode builds, select the check box of the option titled **Stub the print statements in custom modules during debug build**.
 
-![](Resources/Images/DisablePrintStatementOptions.png)
+    ![](Resources/Images/DisablePrintStatementOptions.png)
 
-5.  Click **Done**.
+4.  Click **Done**.

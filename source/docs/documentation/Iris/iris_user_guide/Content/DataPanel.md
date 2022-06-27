@@ -249,7 +249,7 @@ To create a new Object service, follow these steps:
 3.  Click **Configure New**. A list of services that you can add appears.
 4.  Under the Data Integration section, select an Object service. Here, **Data Storage** is the Object service.
     
-    > **_Note:_** From Volt MX Iris V9, the Data Storage Object service is available under the **Data Integration** section in the list of services.
+    > **_Note:_** In Volt MX Iris V9 SP 2, the Data Storage Object service is available under the **Data Integration** section in the list of services.
     
     ![](Resources/Images/Data_Storage_Service.png)
     
@@ -403,7 +403,7 @@ To use a Rules service, do the following:
 
 ### Disable/Enable the Categorization of Project Services
 
-From Volt MX Iris V9, the service categories are displayed under Project Services only when a service is linked from the Data & Services panel. In addition, an option to disable/enable the categorization of linked services under Project Services has been provided in the **Iris Preferences** window.
+In Volt MX Iris V9 SP 2, the service categories are displayed under Project Services only when a service is linked from the Data & Services panel. In addition, an option to disable/enable the categorization of linked services under Project Services has been provided in the **Iris Preferences** window.
 
 To disable/enable the categorization of linked services under Project Services, follow these steps:
 
@@ -465,7 +465,7 @@ You can use the Data & Services panel to perform the following actions related t
 
 ### Generate Object Services UI for Responsive Web
 
-From Volt MX Iris V9, when you drag and drop service operations from the Data & Services panel onto Responsive Web forms, the following types of forms can be generated:
+In Volt MX Iris V9 SP 2, when you drag and drop service operations from the Data & Services panel onto Responsive Web forms, the following types of forms can be generated:
 
 *   [List and Details Using Response](#list-and-details-using-response-form) (for Get operations)
 *   [Grid Using Response](#grid-using-response-form) (for Get operations)
@@ -533,7 +533,7 @@ The following image illustrates the Update Incident screen of the Incident Manag
 
 ### Generate CRUD Forms for an Object Service
 
-From Volt MX Iris V9, you can generate CRUD forms and associated form-navigation links for an Object service. If you have configured the data model for an Object service or linked your Volt MX Iris project to a Volt MX Foundry app with a defined Object service data model, you can leverage this feature. This enhancement is applicable for Object services on Mobile, Tablet, and Responsive Web (Desktop) channels.
+In Volt MX Iris V9 SP 2, you can generate CRUD forms and associated form-navigation links for an Object service. If you have configured the data model for an Object service or linked your Volt MX Iris project to a Volt MX Foundry app with a defined Object service data model, you can leverage this feature. This enhancement is applicable for Object services on Mobile, Tablet, and Responsive Web (Desktop) channels.
 
 You can generate CRUD forms at method-level, object-level, and at service-level.
 
@@ -547,7 +547,7 @@ In case of other types of services, the Data & Services panel does not auto-gene
   
 ![](Resources/Images/Generate_Forms_in_Storyboard_View_620x391.png)
 
-> **_Note:_** From Volt MX Iris V9 SP2, when you select a **Generated Form** in the Data and Services panel at the Service-level, forms ignore the child objects.
+> **_Note:_** In Volt MX Iris V9 SP 2 SP2, when you select a **Generated Form** in the Data and Services panel at the Service-level, forms ignore the child objects.
 
 **To generate CRUD forms for an Object service for Responsive Web (Desktop) channel, follow these steps:**
 
@@ -563,36 +563,49 @@ In case of other types of services, the Data & Services panel does not auto-gene
           
         **Grid Form**  
           
+
         ![](Resources/Images/Grid_552x347.png)  
           
           
         **Details Form**  
-          
+        
+
         ![](Resources/Images/Details_487x337.png)  
           
           
         If you perform the **Generate Forms** action for the **create** or **update** methods, only the Create/Update entry form is generated.  
           
+
         ![](Resources/Images/Method_Create_557x471.png)  
           
+
         ![](Resources/Images/Method_Update_530x448.png)
+
+
     *   **Object-level**: Right-click **Incident**, and then select **Generate Forms** > **Desktop**. Four types of forms (Grid, Details, Create entry form, and Update entry form) are generated with the respective navigation links among each other. An appropriate breadcrumb link is also displayed at the top of the Details, Create, and Update forms. Users can click the breadcrumb link to go back to the Grid screen of the app.  
           
         **Grid Form**  
           
         ![](Resources/Images/Object_Grid_627x388.png)  
           
+
         **Details Form**  
           
         ![](Resources/Images/Object_Details_547x479.png)  
+
           
         **Create Form**  
+
           
         ![](Resources/Images/Object_Create_551x473.png)  
+
           
         **Update Form**  
           
+
         ![](Resources/Images/Object_Update_Form_478x409.png)
+
+
     *   **The Object service**: Right-click **CopyIncidentData**, and then select **Generate Forms** > **Desktop**. Five types of forms (Dashboard form, Grid, Details, Create entry form, and Update entry form) for each object in the Object service are generated, with the respective navigation links among each other.  
           
         The Dashboard form displays all the objects that are part of the selected Object service. From the Dashboard screen, app users can navigate to the respective Grid, Details, Create, and Update forms of the objects. If you have not defined the startup form of the app, the Dashboard form is made the startup form by default.  
@@ -618,6 +631,7 @@ In case of other types of services, the Data & Services panel does not auto-gene
         **Update Form**  
           
         ![](Resources/Images/Update_Form_587x469.png)
+        
     
     > **_Note:_** If an Object service contains multiple data model objects, then all available forms and navigation links for each data model object are generated.  
     For example, in the following image, the **excelInOrderManagement** Object service contains three data model objects: contact, department, and employee. So if you try to generate CRUD forms for the **excelInOrderManagement** Object service, all available forms and associated navigation links are generated for the contact, department, and employee data model objects.  
@@ -627,7 +641,7 @@ In case of other types of services, the Data & Services panel does not auto-gene
 
 ### Create a Data Table for an Object Service
 
-From Volt MX Iris V9, you can create a data table for an Object service. Several details such as data type, Primary key, nullable, and maximum length can also be specified for the fields of the Object Service.
+In Volt MX Iris V9 SP 2, you can create a data table for an Object service. Several details such as data type, Primary key, nullable, and maximum length can also be specified for the fields of the Object Service.
 
 > **_Note:_** You can create a data table for either an existing Volt MX Foundry app or for a new one.
 
@@ -645,7 +659,7 @@ From Volt MX Iris V9, you can create a data table for an Object service. Several
 2.  Under the **Name** column, type the required name of the field. Here, **Version** is the field name.
 3.  Under the **Type** column, select the data type of the field. The available data types include string, date, boolean, number, binary, and enum. The string data type is selected by default.
 
-> **_Note:_** The Enumeration (**enum**) data type enables you to add a maximum of 50 comma-separated options as valid values in a field. For example, a field called **Priority** can have enumeration values such as Critical, High, Medium, Low and a field called **Gender** can have valid values such as Male, Female, Other. The enum data type is rendered as a drop-down list containing only those valid values that you defined, and users can choose only one option at a time for that field. This data type is available from Volt MX Iris V9. For more information on how to configure the enum data type, click [here]({{ site.baseurl }}/docs/documentation/voltmxlibrary/voltmx_foundry_user_guide/Content/ObjectsServices/enumDatatypes.html).
+> **_Note:_** The Enumeration (**enum**) data type enables you to add a maximum of 50 comma-separated options as valid values in a field. For example, a field called **Priority** can have enumeration values such as Critical, High, Medium, Low and a field called **Gender** can have valid values such as Male, Female, Other. The enum data type is rendered as a drop-down list containing only those valid values that you defined, and users can choose only one option at a time for that field. This data type is available In Volt MX Iris V9 SP 2. For more information on how to configure the enum data type, click [here]({{ site.baseurl }}/docs/documentation/voltmxlibrary/voltmx_foundry_user_guide/Content/ObjectsServices/enumDatatypes.html).
 
 1.  If you want to set the field as a Primary Key, select **Primary Key** as **True**. The Primary Key value is False by default.  
       
@@ -661,7 +675,7 @@ From Volt MX Iris V9, you can create a data table for an Object service. Several
 
 ### Configure an Object Data Model by Importing an Excel File
 
-From Volt MX Iris V9, you can create an object data model for an Object service by importing a locally-stored Microsoft Excel file. With this feature, low-code developers have an easy and faster way to import an object data model from a locally-stored Excel file.
+In Volt MX Iris V9 SP 2, you can create an object data model for an Object service by importing a locally-stored Microsoft Excel file. With this feature, low-code developers have an easy and faster way to import an object data model from a locally-stored Excel file.
 
 > **_Note:_** You can import an Excel file for either an existing Volt MX Foundry app or for a new one.
 
@@ -705,7 +719,7 @@ From Volt MX Iris V9, you can create an object data model for an Object service 
 
 ### Customize the Generation of Data Model Objects
 
-From Volt MX Iris V9, you can configure the generation of data model objects while designing your app. This enhancement enables you to select, reorder, and customize various properties of all the fields that you want to be displayed on the required screen of your app.
+In Volt MX Iris V9 SP 2, you can configure the generation of data model objects while designing your app. This enhancement enables you to select, reorder, and customize various properties of all the fields that you want to be displayed on the required screen of your app.
 
 > **_Important:_** To dynamically configure the fields of the object model, you must click the parent container of the request/response parameter on the form. Then go to **Properties** panel > **Look** tab > **Dynamic Form** section, and click **Edit** beside **Customize fields**.  
 In the following image, **flexIncident** is the parent container of the service parameter on the **frmStartUp** form. **Only while the parent container is selected, the Dynamic Form section appears under Properties panel > Look tab.**  
@@ -890,7 +904,7 @@ To map data for the Segment in a component for different channels, follow these 
 Send Data between Two Forms
 ---------------------------
 
-Previously, if you wanted to send data from one form to another, you had to save the data in a global variable first and then you would be able to use it. From Volt MX Iris V8 SP4, you can send data between two forms by using Action Editor. You can enter any data, such as an object or a variable, in the Action Editor UI and then send it to another form.
+Previously, if you wanted to send data from one form to another, you had to save the data in a global variable first and then you would be able to use it. From In Volt MX Iris, you can send data between two forms by using Action Editor. You can enter any data, such as an object or a variable, in the Action Editor UI and then send it to another form.
 
 To send data between two forms, follow these steps:
 
@@ -928,7 +942,7 @@ To use the data that is received from frm1, follow these steps:
 Custom Verbs in Data and Services Panel
 ---------------------------------------
 
-From Volt MX Iris V9 SP2, the Data and Services panel lists the fields or attributes of a Custom Verb. You can drag and drop a Custom Verb from the Data and Services panel onto any Form. When a Custom Verb is added to a form, Volt MX Iris displays a pop-up to select the templates for both **Request** and **Response** UI generation. This allows you to generate the Form UI for the Custom Verbs.
+In Volt MX Iris V9 SP 2 SP2, the Data and Services panel lists the fields or attributes of a Custom Verb. You can drag and drop a Custom Verb from the Data and Services panel onto any Form. When a Custom Verb is added to a form, Volt MX Iris displays a pop-up to select the templates for both **Request** and **Response** UI generation. This allows you to generate the Form UI for the Custom Verbs.
 
 If Custom Verb fields are not available in the Data and Services panel, or if you drag and drop a Custom Verb onto a Form, Volt MX Iris displays the following warning:
 
@@ -946,7 +960,7 @@ The UI / Form generation for the Custom Verb is not considered while executing *
 Add Child Objects to a Form
 ---------------------------
 
-From Volt MX Iris V9 SP2, the Data and Service panel lists the Child objects. you can drag and drop the Child Objects from the Data and Services panel onto a form. Iris generates a custom UI for the Child Object and sends the metadata to the Volt MX Foundry Console. This allows Iris to populate Object Service Response fields in the Data and Services panel.
+In Volt MX Iris V9 SP 2 SP2, the Data and Service panel lists the Child objects. you can drag and drop the Child Objects from the Data and Services panel onto a form. Iris generates a custom UI for the Child Object and sends the metadata to the Volt MX Foundry Console. This allows Iris to populate Object Service Response fields in the Data and Services panel.
 
 When you add the Parent Object which contains Child Object onto a Form, UI is generated for Parent Object. Similarly, when you add the Child Object onto a Form, UI is generated for Child Object.
 
@@ -957,7 +971,7 @@ Associated Data & Services Panel Features
 
 ### Volt MX Foundry Node on the Data & Services Panel
 
-From Volt MX Iris V9, the **VoltMX Foundry node** and associated actions have been shifted from the Project Explorer to the Data & Services panel. This feature has been introduced to enable a unified and enhanced user experience of using Volt MX Foundry data and services from within Volt MX Iris.
+In Volt MX Iris V9 SP 2, the **VoltMX Foundry node** and associated actions have been shifted from the Project Explorer to the Data & Services panel. This feature has been introduced to enable a unified and enhanced user experience of using Volt MX Foundry data and services from within Volt MX Iris.
 
 Click the hamburger menu icon ![](Resources/Images/Hamburger_Menu_icon_27x28.png) at the upper-right corner of the Data & Services panel. From the list of options that appears, you can perform the following Volt MX Foundry\-related actions:
 

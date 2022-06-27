@@ -83,7 +83,7 @@ The notification properties contain the following tabs:
 2.  [Skin](#skin)
 3.  [Static Notification](#static-notification) (available only on Static Notifications)
 4.  [Action](#action)
-5.  [Review](#Review)
+5.  [Review](#notification-label)
 
 ### Look
 

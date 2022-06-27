@@ -56,7 +56,7 @@ To configure the splash screen for the mobile channel, do the following:
 
 ### Native iOS Configuration for Xcode Launch Storyboard
 
-As Apple has deprecated support for Splash images from April 2020, support for creating and launching an Xcode Storyboard through Iris has been added from Volt MX Iris V9 Fixpack3.
+As Apple has deprecated support for Splash images from April 2020, support for creating and launching an Xcode Storyboard through Iris has been added from Visualizer V9 Fixpack3.
 
 Volt MX  Iris has deprecated support for the iOS Splash screens. You must use the Launch Storyboard feature to configure splash screens for iOS devices. The launch storyboard feature supports all the existing functionality of the splash screen such as support for video, active indicator, and others. However, the Splash image that you set will not work.
 
@@ -319,7 +319,7 @@ To configure the splash screen for the Desktop channel, do the following:
 
 ### Configure a Splash Screen by using Custom CSS/HTML
 
-Prior to the V9 Service Pack 2 release, you could only use images to implement the splash screen for Responsive Web apps. From Volt MX Iris V9 Service Pack 2, you can utilize CSS and HTML capabilities to implement a splash screen for Responsive web apps by using Custom CSS and Custom HTML code.
+In Volt MX Iris V9 Service Pack 2, you can utilize CSS and HTML capabilities to implement a splash screen for Responsive web apps by using Custom CSS and Custom HTML code.
 
 > **_Note:_** Ensure that you use the V9 Service Pack 2 version of both Volt MX Iris and Volt MX Foundry to utilize this feature.
 

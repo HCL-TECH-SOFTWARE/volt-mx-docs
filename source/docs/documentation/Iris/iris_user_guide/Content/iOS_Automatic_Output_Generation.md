@@ -88,7 +88,7 @@ To configure Volt MX Iris to make a remote connection to a Mac machine, follow t
     *   **Username**: The user name of the Mac system you want to remotely access to build your application.
     *   **Password**: The password of the Mac system you want to remotely access to build your application.
     
-    ![](Resources/Images/Mac_Details.png)
+       ![](Resources/Images/Mac_Details.png)
     
 4.  Click **Test Connection** to validate the connection to the Mac device.
 5.  Click **Done**.

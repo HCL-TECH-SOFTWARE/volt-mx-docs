@@ -8,7 +8,7 @@ category: "iris_user_guide"
 Types of Applications
 =====================
 
-From Volt MX Iris 7.3, you can create several different types of digital application projects.
+In Volt MX Iris, you can create several different types of digital application projects.
 
 You can create, build, and deploy applications using various approaches. At one extreme, you can use a given platform’s native SDK, while at the other extreme, you can use traditional web technologies. And in between these extremes, you can use a combination of the two. The build and deployment modes available in Volt MX Iris are as follows:
 

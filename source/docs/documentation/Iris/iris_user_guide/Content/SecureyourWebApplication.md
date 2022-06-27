@@ -8,7 +8,7 @@ category: "iris_user_guide"
 Securing your Web Applications
 ==============================
 
-Client- side attacks leave your web applications vulnerable, allowing attackers to steal data. Obfuscators protect your apps from reverse engineering and malware attacks. Using Volt MX Iris V8 SP4, you can create a post-build hook for your Adaptive Web or Desktop Web applications.
+Client- side attacks leave your web applications vulnerable, allowing attackers to steal data. Obfuscators protect your apps from reverse engineering and malware attacks. Using Volt MX Iris V9 SP2, you can create a post-build hook for your Adaptive Web or Desktop Web applications.
 
 > **_Note:_** Ensure that the Volt MX Iris Application is working before you implement obfuscation.  
 Also, make sure that the obfuscation of the web artifact works before importing it into Volt MX Iris.
@@ -58,11 +58,12 @@ To implement obfuscation in your web apps, do the following:
         </target>
     </project>
     {% endhighlight %}
-5.  Once you create the ANT task, save and close the file.
+    
+    5. Once you create the ANT task, save and close the file.
 
-> **_Note:_** Ensure that you exclude any variables with global scope from obfuscation.
-
-7.  Build the project. After the project is built, the protected binary is uploaded to Volt MX Foundry.  
+      > **_Note:_** Ensure that you exclude any variables with global scope from obfuscation.
+      
+    6.  Build the project. After the project is built, the protected binary is uploaded to Volt MX Foundry.  
     Once the build is completed, you must publish the app to your [Foundry environment](PublishVoltMXFoundryServicesApp.html). Once you publish the app, you will get the Web Application URL.
 
  
@@ -116,25 +117,26 @@ Before you get started, raise a ticket with the support team to get a **securejs
     
     Here is how a sample **Headlessbuild.properties** file looks.
     
-{% highlight voltMx %}  
+    {% highlight voltMx %}  
   
-#properties for doing Web Protected build.  
-#This feature only supports web platforms  
-#Set the value to true to enable Web obfuscation  
-protectedmodeenabled.web=true  
-#Provide full path of securejs properties file  
-web.protection.properties=<path_to_securejs_properties>  
-#Provide full path of web encryption keys directory  
-web.encryption.dir= <path_to_encryption_keys>  
-#Provide Web Protection Configuration Options: BASIC,MODERATE,CUSTOM  
-web.protection.preset =BASIC  
-#Provide Absolute path of custom protection blueprint json file web.custom.protection.blueprint.path=<path_to_custom_blueprint_file>  
-#Provide Absolute path of excludelist.txt file  
-web.exclude.file.list.path=<path_to_excludelist_text_file>  
+    #properties for doing Web Protected build.  
+   #This feature only supports web platforms  
+   #Set the value to true to enable Web obfuscation  
+   protectedmodeenabled.web=true  
+   #Provide full path of securejs properties file  
+   web.protection.properties=<path_to_securejs_properties>  
+   #Provide full path of web encryption keys directory  
+   web.encryption.dir= <path_to_encryption_keys>  
+   #Provide Web Protection Configuration Options: BASIC,MODERATE,CUSTOM  
+   web.protection.preset =BASIC  
+   #Provide Absolute path of custom protection blueprint json file web.custom.protection.blueprint.path=<path_to_custom_blueprint_file>  
+   #Provide Absolute path of excludelist.txt file  
+   web.exclude.file.list.path=<path_to_excludelist_text_file>  
+   {% endhighlight %}
 
-{% endhighlight %}6.  Build the application.  
-    Iris takes some time to build the project.  
-    After the build completes, Iris displays a success message.
+  6.  Build the application.  
+      Iris takes some time to build the project.  
+      After the build completes, Iris displays a success message.
 
 Implement Obfuscation for Web Apps
 ----------------------------------

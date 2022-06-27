@@ -13,10 +13,10 @@ The behaviors that you can assign are as follows:
   
 | Action | Property |
 | --- | --- |
-| [If Condition](#Conditio) | Specifies an action to be executed when one or more conditions are satisfied. |
-| [Else If Condition](#Conditio) | Specifies an action to be executed when one or more conditions (in addition to the **If** condition) are satisfied. |
-| [Else Condition](#Conditio) | Specifies an action to be executed when an **If** or **Else If** condition is not satisfied. |
-| [Channel Condition](#Conditio) | Specifies for which channels an action is executed. |
+| **If Condition** | Specifies an action to be executed when one or more conditions are satisfied. |
+| **Else If Condition** | Specifies an action to be executed when one or more conditions (in addition to the **If** condition) are satisfied. |
+| **Else Condition** | Specifies an action to be executed when an **If** or **Else If** condition is not satisfied. |
+| **Channel Condition** | Specifies for which channels an action is executed. |
 
 To add conditional behavior (if condition, or elseif condition, or else condition, or channel condition) to an action sequence, do the following:
 

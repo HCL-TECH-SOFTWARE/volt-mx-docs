@@ -24,7 +24,7 @@ Click a topic for more information. 
 
 [Populate Forms with Widgets](#populate-forms-with-widgets)
 
-[Occupy the Parent Widget’s Entire Area](#occupy-the-parent-widget-s-entire-area)
+[Occupy the Parent Widget’s Entire Area](#occupy-the-parent-widgets-entire-area)
 
 [Convert Flex Container Widgets](#convert-flex-container-widgets)
 

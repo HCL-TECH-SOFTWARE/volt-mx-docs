@@ -40,7 +40,7 @@ To define an action sequence for executing a loop action, do the following:
     4.  In the **Step By** field, enter the value for the step.
     5.  Select the direction of the count, either `Increment` or `Decrement`.
     
-    ![](Resources/Images/LoopAction_304x320.png)
+        ![](Resources/Images/LoopAction_304x320.png)
     
 5.  Click **Save** to save the action sequence, and then close the Action Editor window.
 
@@ -58,9 +58,9 @@ To define an action sequence to add a local variable, do the following:
 5.  From the **Value Type** list, select a value type, either **Constant** or **Expression**.
 6.  In the **Value** field, enter the value of the local variable.
 
-![](Resources/Images/Add_local_variable.PNG)
+     ![](Resources/Images/Add_local_variable.PNG)
 
-8.  Click **Save** to save the action sequence, and then close the Action Editor window.
+7.  Click **Save** to save the action sequence, and then close the Action Editor window.
 
 ### Modify Variable
 
@@ -77,9 +77,9 @@ To define an action sequence to modify an existing variable, do the following:
 
 If you choose to set a value for the variable, select a value type from the **Type** list, either **Constant** or **Expression**, and then enter the value of the variable in the text box provided below.
 
-![](Resources/Images/ModifyLocalVariable.PNG)
+   ![](Resources/Images/ModifyLocalVariable.PNG)
 
-8.  Click **Save** to save the action sequence, and then close the Action Editor window.
+Click **Save** to save the action sequence, and then close the Action Editor window.
 
 ### String Operation
 
@@ -94,10 +94,14 @@ To define an action sequence to execute a String operation, do the following:
 4.  In the properties pane of the Action Editor, in the **Type** field, select the type of String operation, either **Combine** or **Split**.
 5.  In the **String 1** field, you can choose to either `set` a value for the string or select `choose` and select a string from a list of existing strings.
 6.  The second field varies depending on the type of String operation you select.
-    *   If you select the **Combine** option, in the **String 2** field, you can choose to either `set` a value for the string or select `choose` and select a string from a list of existing strings. To add additional strings, click the green + icon. To delete a string, click its corresponding red x icon.  
+    *   If you select the **Combine** option, in the **String 2** field, you can choose to either `set` a value for the string or select `choose` and select a string from a list of existing strings. To add additional strings, click the green + icon. To delete a string, click its corresponding red x icon. 
+
         ![](Resources/Images/String_Combine.PNG)
+        
     *   If you select the **Split** option, in the **Delimiter** field, you can choose to either `set` a delimiter for the string or select `choose` and select a string from a list of existing strings.  
+
         ![](Resources/Images/String_Split.PNG)
+
 7.  In the **Assign To** list, select the variable to which you want to assign the resulting String.
 8.  Click **Save** to save the action sequence, and then close the Action Editor window.
 
@@ -115,8 +119,10 @@ To define an action sequence to execute a try-catch block of code, do the follow
     *   The **try** statement allows you to define a block of code to be tested for errors while it is being executed.
     *   The **catch** statement allows you to define a block of code to be executed, if an error occurs in the try block.
     *   The **finally** statement lets you execute code, after try and catch, regardless of the result.
-5.  ![](Resources/Images/Try-Catch.PNG)
-6.  Click **Save** to save the action sequence, and then close the Action Editor window.
+
+         ![](Resources/Images/Try-Catch.PNG)
+
+5.  Click **Save** to save the action sequence, and then close the Action Editor window.
 
 ### Navigation
 
@@ -128,8 +134,10 @@ To define an action sequence for navigating to a form, or exit an app, do the fo
     The Action Editor window opens and an action sequence is created.
 3.  From the **General** section along the left column of the Action Editor, click one of the two navigation actions.  
     The action is added to the action sequence and is the current action of focus.
-4.  In the properties pane of the Action Editor, select the **Form** that the navigational action applies to (this step isn't used for the Exit App action).  
+4.  In the properties pane of the Action Editor, select the **Form** that the navigational action applies to (this step isn't used for the Exit App action). 
+
     ![](Resources/Images/NavigateToForm.PNG)
+
 5.  Click **Save** to save the action sequence, and then close the Action Editor window.
 
 ### Set Timeout
@@ -144,7 +152,9 @@ To define an action sequence to set a timeout, do the following:
     The action is added to the action sequence and is the current action of focus.
 4.  In the properties pane of the Action Editor, in the **Delay** field, enter a value for the time in milliseconds (ms) after which the timeout must occur.
 5.  In the **Assign To** list, select the variable that you want to use to set the timeout.  
+
     ![](Resources/Images/Timeout_Set.PNG)
+
 6.  Click **Save** to save the action sequence, and then close the Action Editor window.
 
 ### Clear Timeout
@@ -158,5 +168,7 @@ To define an action sequence to clear a timeout that has already been set, do th
 3.  From the **Client** section along the left column of the Action Editor, click **ClearTimeout**.  
     The action is added to the action sequence and is the current action of focus.
 4.  In the properties pane of the Action Editor, from the **Timeout Handle** list, select the variable that you want to use to clear the timeout.  
+
     ![](Resources/Images/Timeout_Clear.PNG)
+    
 5.  Click **Save** to save the action sequence, and then close the Action Editor window.

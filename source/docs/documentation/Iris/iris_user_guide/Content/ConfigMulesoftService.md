@@ -49,16 +49,16 @@ To configure a service definition for a MuleSoft service, do the following:
 2.  If you have not done so already, log in to your Volt MX account. To do so, in the top right corner of the Volt MX Iris window, click **Login**. The Volt MX Account sign-in window opens. Enter your email and password credentials for your Volt MX user account, and then click **Sign in**.
 3.  Create a new Volt MX Foundry application or use an existing one. To do so, on the **Data and Services** panel, click the context menu arrow, and then click either **Create New App**, or **Use Existing App**, and then select from the Volt MX Foundry Application dialog box the services application that you want to publish. The Volt MX Foundry Console opens.
 
-![](MFinAppPane.png)
+    ![](MFinAppPane.png)
 
-> **_Note:_** If you want to associate your Volt MX Iris project with a different Volt MX Foundry app, on the **Project** tab of the Project Explorer, click the context menu arrow for **VoltMX Foundry**, and then click **Unlink App**. To link to a different Volt MX Foundry app, click the context menu arrow for **VoltMX Foundry**, and then click either **Create New App**, or **Use Existing App**.
+    > **_Note:_** If you want to associate your Volt MX Iris project with a different Volt MX Foundry app, on the **Project** tab of the Project Explorer, click the context menu arrow for **VoltMX Foundry**, and then click **Unlink App**. To link to a different Volt MX Foundry app, click the context menu arrow for **VoltMX Foundry**, and then click either **Create New App**, or **Use Existing App**.
 
-6.  To create a new integration service, on the **Integration** tab, click **CONFIGURE NEW**. The **Service Definition** section appears.
+4.  To create a new integration service, on the **Integration** tab, click **CONFIGURE NEW**. The **Service Definition** section appears.
 
-![](SDAreaMF_CRR_539x270.png)
+    ![](SDAreaMF_CRR_539x270.png)
 
-8.  On the **Integration** tab, click **CONFIGURE NEW** to create an integration service.
-9.  In the **Service Definition** section, follow these steps:
+5.  On the **Integration** tab, click **CONFIGURE NEW** to create an integration service.
+6.  In the **Service Definition** section, follow these steps:
     1.  In the **Name** text box, enter a unique name for your service. When you enter the name, the name is updated for the active service under the **Services** section in the left pane.
     2.  From the **Service Type** list, select **MuleSoft**.  
         By default, XML is selected. If you select **MuleSoft**, the below details are displayed, shown below.
@@ -98,7 +98,6 @@ To configure a service definition for a MuleSoft service, do the following:
                 
             2.  In the **Rate Limit Per IP** text box, enter a required value. With this value, you can limit the number of IP address requests configured in your Volt MX Foundry console in terms of Per IP Rate Limit.
                 
-                To override throttling, refer to [Override API Throttling Configuration](../../../MBaasDocs/ConsoleAndID/Foundry8.0ConsoleAndIDSrvUG/Content/API_Throttling_Override.html#OverrideAPIThrottling).
                 
                 > **_Note:_** In case of On-premises, the number of nodes in a clustered environment is set by configuring the `VOLTMX_SERVER_NUMBER_OF_NODES` property in the Admin Console. This property indicates the number of nodes configured in the cluster. The default value is 1.  
                 Refer to [The Runtime Configuration tab on the Settings screen of App Services]({{ site.baseurl }}/docs/documentation/Foundry/vmf_integrationservice_admin_console_userguide/Content/Runtime_Configuration.html).  
@@ -192,7 +191,7 @@ To configure operations for a MuleSoft service, do the following:
     \-  To delete an entry, select the check box for an entry, and then click the **Delete** button.Integration services accept only `form-url-encoded` inputs for all input parameters provided in service input parameters (request input).
     
 
-1.  Under the **Body** tab, do the following:
+5.  Under the **Body** tab, do the following:
     
     1.  In the **NAME** field, enter the name for the request input parameter.
         
@@ -209,7 +208,7 @@ To configure operations for a MuleSoft service, do the following:
         The default data type for the selected column is loaded under the **DATATYPE** field.
         
     3.  Select the **Encode** check box to enable an input parameter to be encoded. For example, the name New York Times would be encoded as _New_York_Times_  when the encoding is set to True. The encoding must also adhere to the HTML URL encoding standards.
-2.  Under the **Header**, do the following:  
+6.  Under the **Header**, do the following:  
     Based on the operation - for example, post or get -, provide custom HTTP headers.  
     To provide customer headers, click **Header**.
     
@@ -221,7 +220,7 @@ To configure operations for a MuleSoft service, do the following:
     To validate the details, click **Fetch Response**. The result of the operation appears.
     
 
-6.  In the **Response Output** tab, configure the fields of the table for displaying the data:
+7.  In the **Response Output** tab, configure the fields of the table for displaying the data:
     
     ![](RDBMSReadRespParam_499x128.png)
     
@@ -231,5 +230,5 @@ To configure operations for a MuleSoft service, do the following:
     
     To validate the details, click **Test**. The result of the operation appears.
     
-7.  Click **SAVE OPERATION** to save the changes in the create operation.
-8.  To close the Volt MX Foundry Console and return to the panes, views, and tabs of the Volt MX Iris integrated development environment (IDE), from the Quick Launch Bar along the upper left edge of Volt MX Iris, click the Workspace icon ![](Resources/Images/S7Persp_QkLaunch01b_20x19.png). Since you are still logged in to your Volt MX account, Volt MX Iris continues to have access to your Volt MX Foundry services.
+8.  Click **SAVE OPERATION** to save the changes in the create operation.
+9.  To close the Volt MX Foundry Console and return to the panes, views, and tabs of the Volt MX Iris integrated development environment (IDE), from the Quick Launch Bar along the upper left edge of Volt MX Iris, click the Workspace icon ![](Resources/Images/S7Persp_QkLaunch01b_20x19.png). Since you are still logged in to your Volt MX account, Volt MX Iris continues to have access to your Volt MX Foundry services.
