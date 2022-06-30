@@ -11,6 +11,7 @@ This topic lists new features, enhancements, and changes in Volt MX.
 For detailed information about fixes and known issues in Volt MX, please see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
 
 [Volt Iris](#volt-iris)
+- [V9 Servicepack 2 Fixpack 46](#v9-servicepack-2-fixpack-46)
 - [V9 Servicepack 2 Fixpack 45](#v9-servicepack-2-fixpack-45)
 - [V9 Servicepack 2 Fixpack 38](#v9-servicepack-2-fixpack-38)
 - [V9 Servicepack 2 Fixpack 37](#v9-servicepack-2-fixpack-37)
@@ -24,6 +25,19 @@ For detailed information about fixes and known issues in Volt MX, please see the
 - [Earlier Foundry releases](#earlier-foundry-releases)
 
 ## Volt Iris
+
+### V9 Servicepack 2 Fixpack 46
+
+#### Iris Enhancements
+
+Starting with Mac OS Monterey version 12.3, Apple has removed Python 2.7 as being bundled by default. This version of Python is required for iOS builds from Iris.
+
+To enable customers to download Python version 2.7 and make use of the same for iOS application builds in Iris, a new preference is available in Iris preferences to
+set the path to Python installation. Details of the preference are as follows.
+
+- [Setting the Python Installation Path](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_starter_install_mac/Content/Preferences.html).
+
+For detailed information about fixes and known issues in this release, please see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
 
 ### V9 Servicepack 2 Fixpack 45
 
