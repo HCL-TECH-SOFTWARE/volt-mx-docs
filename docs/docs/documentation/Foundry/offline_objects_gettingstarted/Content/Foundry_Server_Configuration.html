@@ -290,6 +290,84 @@
   <li>Save the changes and publish the app.</li>
   <li>Now, link your Foundry application to the client application.</li>
 </ol>
+      <h3 id="map1">
+        
+        
+          <a href="#map1" class="anchor-heading" aria-labelledby="map1"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Defining Mapping for Objects in Parent-Child Relationship
+        
+        
+      </h3>
+    
+<p>When two objects are in parent-child relationship, the mapping for verbs (GET/CREATE/UPDATE) can be defined in two ways depending on how the integration services are defined for these objects:</p>
+<ol>
+<li>Parent and Child objects have their own integration services for the verb mapping (GET/CREATE/UPDATE):</li>
+<ul type="disc">
+<li>
+<p>Verbs for parent and child objects are defined as though they are two independent objects.</p>
+<blockquote><em><b>Note:</b></em> verbs should be mapped individually for both parent and child objects.</blockquote>
+</li>
+<li>For the selected parent object and verb, in Advanced &gt; Related Objects &gt; Include Related Objects section, checkboxes should not be turned on for including child objects.</li>
+<li>
+<p>For example, <b>Member</b> (parent object) has one-to-many relationship with <b>Milestone</b> and <b>Sale</b> (child objects) and they have their own integration services that get/create/update them.</p>
+<p>Individual verb (CREATE/UPDATE) mappings are defined for <b>Milestone</b> and <b>Sale</b> objects.</p>
+<p>Checkboxes should not be turned on for <b>Milestone</b> and <b>Sale</b> objects when defining verb mapping for <b>Member</b> object</p><br />
+<img src="Resources/Images/Shared_IntegrationServices1.png" />
+<img src="Resources/Images/Own_IntegrationServices1.png" />
+</li>
+</ul>
+<li>Parent and Child objects share the same integration service for the verb mapping (GET/CREATE/UPDATE):</li>
+<ul>
+<li>
+<p>Verbs for both parent and child objects should be mapped in parent object only.</p>
+<blockquote>
+<em><b>Note:</b></em> verbs should not be mapped individually in both parent and child objects.
+</blockquote>
+</li>
+<li>
+<p>For example, <b>Sale</b> (parent object) has one-to-many relationship with <b>SaleItem</b> (child object) and they share the same integration services.</p>
+<p>Individual verb (CREATE/UPDATE) mappings are not defined for <b>SaleItem</b>. Mapping these verbs for <b>Sale</b> will create/update <b>SaleItem</b> as well.</p>
+<br />
+<img src="Resources/Images/Shared_IntegrationServices1.png" />
+</li>
+<li>
+<p>For the selected parent object and verb, in Advanced &gt; Related Objects &gt; Include Related Objects section, checkboxes should be turned on for both parent, child objects and for all the applicable methods for which the mapping is defined in this verb.</p>
+<p><img src="Resources/Images/Shared_IntegrationServices2.png" /></p>
+</li>
+<li>When the check box for child object is turned on, the child object fields become available in visual mapper for mapping the fields to input/output parameters in request/response mapper.</li>
+</ul>
+</ol>
+      <h3 id="map2">
+        
+        
+          <a href="#map2" class="anchor-heading" aria-labelledby="map2"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Request and Response Mapping with Parent-Child Objects
+        
+        
+      </h3>
+    
+<p><b>Request Mapping with Parent-Child Objects</b></p>
+<ul>
+<li><p>In request mapping, child object fields are mapped to integration service input parameters.</p>
+<img src="Resources/Images/RequestMapping1.png" />
+</li>
+<li><blockquote><em><b>Note: </b></em>Visual mapper does not allow to map the child object fields to collection inputs in integration service. This can be achieved by editing the request mapper XML.
+</blockquote>
+<img src="Resources/Images/RequestMapping2.png" />
+</li>
+</ul>
+<p><br />
+<b>Response Mapping with Parent-Child Objects</b></p>
+<ul>
+<li>In response mapping, child object's integration service response parameters are mapped to child object fields.</li>
+<li>
+<p>For example, <b>Items</b> is a collection in the response of <b>“sale_create”</b> integration service. The fields of <b>Items</b> collection are mapped to fields of the child object <b>SaleItem</b> object.</p><br />
+<img src="Resources/Images/ResponseMapping1.png" />
+</li>
+<li><blockquote>
+<em><b>Note:</b></em> Parent object's integration service response output parameters should not be mapped to child object fields.
+</blockquote></li>
+<p>For example, below mapping should not be done.</p><br />
+<img src="Resources/Images/ResponseMapping2.png" />
+</ul>
       <h2 id="line-of-business-adapters">
         
         
@@ -394,9 +472,30 @@
           <use xlink:href="#svg-arrow-right"></use>
           </svg></a><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/offline_objects_gettingstarted/Content/Foundry_Server_Configuration.html" class="nav-list-link active">Configuring Volt MX Foundry Server</a>
 
-  <ul class="nav-list "><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/offline_objects_gettingstarted/Content/Foundry_Server_Configuration.html#service-driven-objects"
+  <ul class="nav-list "><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24">
+      <use xlink:href="#svg-arrow-right"></use>
+      </svg>
+    </a><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/offline_objects_gettingstarted/Content/Foundry_Server_Configuration.html#service-driven-objects"
     class="nav-list-link">Service Driven Objects</a>
 
+    <ul class="nav-list "><li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/offline_objects_gettingstarted/Content/Foundry_Server_Configuration.html#map1"
+      class="nav-list-link">Defining Mapping for Objects in Parent-Child Relationship</a>
+
+      
+
+     </li>
+  
+      <li class="nav-list-item"><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Foundry/offline_objects_gettingstarted/Content/Foundry_Server_Configuration.html#map2"
+      class="nav-list-link">Request and Response Mapping with Parent-Child Objects</a>
+
+      
+
+     </li>
+  
+      
+  
+      </ul>
+    
     
 
    </li>
