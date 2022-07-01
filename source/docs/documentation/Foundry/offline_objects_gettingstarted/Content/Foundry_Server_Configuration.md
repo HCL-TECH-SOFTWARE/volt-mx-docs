@@ -45,7 +45,7 @@ Service Driven Objects
 12.  Save the changes and publish the app.
 13.  Now, link your Foundry application to the client application.  
 
-<h3>Defining Mapping for Objects in Parent-Child Relationship</h3>
+<h3 id="map1">Defining Mapping for Objects in Parent-Child Relationship</h3>
 <p>When two objects are in parent-child relationship, the mapping for verbs (GET/CREATE/UPDATE) can be defined in two ways depending on how the integration services are defined for these objects:</p>
 <ol>
 <li>Parent and Child objects have their own integration services for the verb mapping (GET/CREATE/UPDATE):</li>
@@ -84,7 +84,7 @@ Service Driven Objects
 <li>When the check box for child object is turned on, the child object fields become available in visual mapper for mapping the fields to input/output parameters in request/response mapper.</li>
 </ul>
 </ol>
-<h3>Request and Response Mapping with Parent-Child Objects</h3>
+<h3 id="map2">Request and Response Mapping with Parent-Child Objects</h3>
 <b>Request Mapping with Parent-Child Objects</b>
 <ul>
 <li><p>In request mapping, child object fields are mapped to integration service input parameters.</p>
