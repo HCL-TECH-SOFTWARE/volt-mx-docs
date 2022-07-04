@@ -204,7 +204,7 @@ All errors reported by this callback:
 
 This event is called only for the given request URL, but not for the subsequent web navigation request failures.
 
-This event is also not called when .htmlString](Browser_Properties.html.htmlString) is set to the web widget.
+This event is also not called when [htmlString](Browser_Properties.html#htmlString) is set to the web widget.
 
 ### Example
 
@@ -637,7 +637,7 @@ Read + Write
 
 ### Remarks
 
-This event is called every time the page is loaded. This event is not called when .htmlString](Browser_Properties.html.htmlString) is set to the web widget.
+This event is called every time the page is loaded. This event is not called when [.htmlString](Browser_Properties.html#htmlString) is set to the web widget.
 
 This event gets called whenever the URL is loaded, or you navigate from one URL to another, or the browser URL internally redirects to another URL. This event is also called whenever the content is loaded, and when a URL contains any third party content using an iframe.
 

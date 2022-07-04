@@ -19,7 +19,7 @@ The properties for Browser widget are as follows:
 
 Enables you to control accessibility behavior and alternative text for the widget.
 
-For more information on using accessibility features in your app, see the [Accessibility]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Accessibility_Overview.html) appendix in the Volt MX IrisUser Guide.
+For more information on using accessibility features in your app, see the [Accessibility]({{ site.baseurl }}/docs/documentation/Iris/app_design_dev/Content/Accessibility_Overview.html) appendix in the Volt MX IrisUser Guide.
 
 ### Syntax
 
@@ -1113,7 +1113,7 @@ frmHome.browser1. height="10px";
 * * *
 
 </details>
-<details close markdown="block"><summary>.htmlString Property</summary>
+<details close markdown="block"><summary id="htmlString">.htmlString Property</summary>
 
 * * *
 
