@@ -1,3 +1,4 @@
+<!-- 
 ---
 layout: "documentation"
 category: "voltmxfoundry_on_azure"
@@ -754,3 +755,4 @@ The Campaign microservice allows the branch user to create and store Campaign de
     1.  Copy the `campaigns` folder from VoltMXFoundryContainersAzure-\_/lib/microservices/ path.
     2.  Provide the required inputs in the `conf/campaign_ms.properties` file.
     3.  Execute the `install_campaign_ms.sh` file present under `campaigns` folder.
+-->
