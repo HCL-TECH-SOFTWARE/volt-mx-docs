@@ -11,8 +11,10 @@ FAQs and Troubleshooting
 
 This section lists the troubleshooting tips to resolve problems that you may encounter during installation.
 
-*   **Issue**: If you have upgraded from Foundry V8.x or lower versions to V9 GA or higher versions, some of the services fail to work because of an internal authentication error. These services, such as the **Foundry Admin Adapter**, **Email Adapter**, and **Workflow Email** services, fail with the following error:{% highlight voltMx %}returned HTTP [400], Response Body [{"details":{"message":"Could not find trust security group for given envId","errcode":0,"errmsg":"Could not find trust security group for given envId"},"httpstatus":"Bad Request","requestid":"5e36d604-09ab-4fbb-9437-42c1d828140f;98","domain":"AUTH","code":-65,"mfcode":"Auth-65","message":"Some of the input parameters provided are invalid"}]
-    {% endhighlight %}
+*   **Issue**: If you have upgraded from Foundry V8.x or lower versions to V9 GA or higher versions, some of the services fail to work because of an internal authentication error. These services, such as the **Foundry Admin Adapter**, **Email Adapter**, and **Workflow Email** services, fail with the following error:
+    <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
+    returned HTTP [400], Response Body [{"details":{"message":"Could not find trust security group for given envId","errcode":0,"errmsg":"Could not find trust security group for given envId"},"httpstatus":"Bad Request","requestid":"5e36d604-09ab-4fbb-9437-42c1d828140f;98","domain":"AUTH","code":-65,"mfcode":"Auth-65","message":"Some of the input parameters provided are invalid"}]
+    }</code></pre></figure>
     
     **Workaround**
     
@@ -60,12 +62,12 @@ This section lists the troubleshooting tips to resolve problems that you may enc
     
     If you upgrade the integration service or install on new server using the existing database but with a different server details like fully qualified URL port, and when you publish an app, the app publish fails.
     
-    Workaround
+    **Workaround**
     
     You must update management server details in the `server_configuration` table in admin database.
     
 
-*   **How to change the **Hostname/IP address** and **port** details of the existing Volt MX Foundry Server.**
+*   **How to change the Hostname/IP address** and **port** details of the existing Volt MX Foundry Server.
     
     After the installation of Volt MX Foundry, if you want to change the existing Hostname/IP address that was used during the installation of Volt MX Foundry, follow these steps:
     
@@ -91,12 +93,13 @@ This section lists the troubleshooting tips to resolve problems that you may enc
     
     If the `java.sql. BatchUpdateException: Prepared statement needs to be re-prepared` error is logged in the Identity service logs or if certain operations fail to work properly when an identity service is invoked, do the following.
     
-    Workaround
+    **Workaround**
     
     Add the following server variable in MariaDB ini file located in the MariaDB installation folder.
     
-    {% highlight voltMx %}table_open_cache=64
-    {% endhighlight %}
+    <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">
+        table_open_cache=64
+    </code></pre></figure>
     
     Path for MariaDB ini file, `<USER_INSTALL_DIR>\MariaDB 10.1\data\my.ini`
     
@@ -107,7 +110,7 @@ This section lists the troubleshooting tips to resolve problems that you may enc
     
     Volt MX Foundry Patch Installer runs with your system's default Java. If an user machine has Java 8 installed, then check if the machine's `System Environment Path for Java`  or  `JAVA_HOME`  is set to `c:\programdata\oracle\java\javapath`
     
-    Workaround
+    **Workaround**
     
     1.  Remove the current path from `JAVA_HOME` and set the new path as `C:\Program Files (x86)\Java\jre1.8.0_40\bin`
     2.  Launch the Volt MX Foundry Patch Installer.
@@ -117,7 +120,7 @@ This section lists the troubleshooting tips to resolve problems that you may enc
     
     If your service provider's certificate is not configured, the system displays an error - "peer not authenticated."
     
-    Workaround
+    **Workaround**
     
     For trusted certification issues, refer to [SSL Certificate Issues](Post-Installation_Tasks.html#Service_Provider's_Certificate_Issues).
     
@@ -126,7 +129,7 @@ This section lists the troubleshooting tips to resolve problems that you may enc
     
     For example:
     
-    Workaround
+    **Workaround**
     
     Update some of the default kernel parameter settings in your Linux environment. For more details, refer to [Tuning File Descriptor Limits on Linux](Pre-installation_Tasks.html#Tuning)
     
@@ -135,7 +138,7 @@ This section lists the troubleshooting tips to resolve problems that you may enc
     
     When customer wants to install Volt MX Foundry with Oracle as database type, the system throws the error: `Invalid Data Type SDO_GEOMENTRY`
     
-    Workaround
+    **Workaround**
     
     Install Oracle locator, which is required for Volt MX Foundry installation. For more details, refer to [Pre-installation Tasks > Create Locator Component for Oracle Database](DB_Pre-installation_Tasks.html#create-locator-component-for-oracle-database)
     
@@ -150,10 +153,10 @@ This section lists the troubleshooting tips to resolve problems that you may enc
     
     Remove the `version_rank` column from `schema_version` table in each schema by following queries before upgrade.
     
-    {% highlight voltMx %}drop index schema_version_vr_idx on master.<SCHEMA_NAME>.schema_version;  
-      
-    alter table master.<SCHEMA_NAME>.schema_version drop column version_rank;
-    {% endhighlight %}
+    <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
+        drop index schema_version_vr_idx on master.<SCHEMA_NAME>.schema_version;
+        alter table master.<SCHEMA_NAME>.schema_version drop column version_rank;
+    }
 
 *   **Issue**
     
@@ -166,180 +169,299 @@ This section lists the troubleshooting tips to resolve problems that you may enc
 
 *   **Issue**
     
-    If you have installed Foundry 7.3 or older, and when you use the existing database for Volt MX Foundry V8 on JBoss, the Web Application publish fails.
-    
+    If you have installed Foundry 7.3 or older, and when you use the existing database for Volt MX Foundry V8 on JBoss, the Web Application publish fails. 
+    <br/>
     **Workaround**
-    
+    <br/>
     Update the `management_server_port` in the `server_configuration` table of `admindb` with the `jboss.management.http.port` in the `<USER_INSTALL_DIR>\jboss\standalone\configuration\standalone.xml`.
     
 
 *   **Issue**
     
-    If you do not want to use a DB user with DBA role or Equivalent privileges for the Volt MX Foundry installation on ORACLE database, follow these steps:
-    
-    Workaround
-    
+    If you do not want to use a DB user with DBA role or Equivalent privileges for the Volt MX Foundry installation on ORACLE database, follow these steps:
+
+    <br/>
+
+    **Workaround**
+
+    <br/>
+
     Manual Steps:
-    
-    1\. Create Component Users (schema) with the required grants as below.
-    
-    CREATE USER <prefix>MFCONSOLEDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;  
-    ALTER USER <prefix>MFCONSOLEDB<suffix> QUOTA UNLIMITED ON USERS;  
-    GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>MFCONSOLEDB<suffix>;  
-    GRANT CREATE JOB TO <prefix>MFCONSOLEDB<suffix>;  
-    GRANT MANAGE SCHEDULER TO <prefix>MFCONSOLEDB<suffix>;
-    
-    CREATE USER <prefix>MFACCOUNTSDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;  
-    ALTER USER <prefix>MFACCOUNTSDB<suffix> QUOTA UNLIMITED ON USERS;  
-    GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>MFACCOUNTSDB<suffix>;  
-    GRANT CREATE JOB TO <prefix>MFACCOUNTSDB<suffix>;  
-    GRANT MANAGE SCHEDULER TO <prefix>MFACCOUNTSDB<suffix>;
-    
-    CREATE USER <prefix>MFREPORTSDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;  
-    ALTER USER <prefix>MFREPORTSDB<suffix> QUOTA UNLIMITED ON USERS;  
-    GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>MFREPORTSDB<suffix>;  
-    GRANT CREATE JOB TO <prefix>MFREPORTSDB<suffix>;  
-    GRANT MANAGE SCHEDULER TO <prefix>MFREPORTSDB<suffix>;
-    
-    CREATE USER <prefix>IDCONFIGDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;  
-    ALTER USER <prefix>IDCONFIGDB<suffix> QUOTA UNLIMITED ON USERS;  
-    GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>IDCONFIGDB<suffix>;  
-    GRANT CREATE JOB TO <prefix>IDCONFIGDB<suffix>;  
-    GRANT MANAGE SCHEDULER TO <prefix>IDCONFIGDB<suffix>;  
-    GRANT CREATE TABLE TO <prefix>IDCONFIGDB<suffix>;  
-    GRANT CREATE ANY INDEX TO <prefix>IDCONFIGDB<suffix>;  
-    GRANT ALTER ANY TABLE TO <prefix>IDCONFIGDB<suffix>;
-    
-    CREATE USER <prefix>ADMINDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;  
-    ALTER USER <prefix>ADMINDB<suffix> QUOTA UNLIMITED ON USERS;  
-    GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>ADMINDB<suffix>;  
-    GRANT CREATE JOB TO <prefix>ADMINDB<suffix>;  
-    GRANT MANAGE SCHEDULER TO <prefix>ADMINDB<suffix>;
-    
-    CREATE USER <prefix>VPNSDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;  
-    ALTER USER <prefix>VPNSDB<suffix> QUOTA UNLIMITED ON USERS;  
-    GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>VPNSDB<suffix>;  
-    GRANT CREATE JOB TO <prefix>VPNSDB<suffix>;  
-    GRANT MANAGE SCHEDULER TO <prefix>VPNSDB<suffix>;
-    
-    2\. Create a non DBA user with the below grants. This user will be given to the Installer.
-    
-    CREATE USER <INSTALLER\_USER> IDENTIFIED BY <password>;  
-    GRANT CREATE SESSION TO <INSTALLER\_USER> WITH ADMIN OPTION;  
-    GRANT SELECT ANY DICTIONARY TO <INSTALLER\_USER>;  
-    ALTER USER <INSTALLER\_USER> QUOTA UNLIMITED ON <dataTablespace>;  
-    ALTER USER <INSTALLER\_USER> QUOTA UNLIMITED ON <indexTablespace>;  
-    ALTER USER <INSTALLER\_USER> QUOTA UNLIMITED ON <lobTablespace>;
-    
-    > **_Note:_**   The password for the component users and the installer user have to be same.
-    
+
+    1. Create Component Users (schema) with the required grants as below.
+    <figure  class="highlight"><pre><code  class="language-voltmx"  data-lang="voltmx">{
+        
+        CREATE USER <prefix>MFCONSOLEDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;
+
+        ALTER USER <prefix>MFCONSOLEDB<suffix> QUOTA UNLIMITED ON USERS;
+
+        GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>MFCONSOLEDB<suffix>;
+
+        GRANT CREATE JOB TO <prefix>MFCONSOLEDB<suffix>;
+
+        GRANT MANAGE SCHEDULER TO <prefix>MFCONSOLEDB<suffix>;
+
+        CREATE USER <prefix>MFACCOUNTSDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;
+
+        ALTER USER <prefix>MFACCOUNTSDB<suffix> QUOTA UNLIMITED ON USERS;
+
+        GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>MFACCOUNTSDB<suffix>;
+
+        GRANT CREATE JOB TO <prefix>MFACCOUNTSDB<suffix>;
+
+        GRANT MANAGE SCHEDULER TO <prefix>MFACCOUNTSDB<suffix>;
+
+        
+
+        CREATE USER <prefix>MFREPORTSDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;
+
+        ALTER USER <prefix>MFREPORTSDB<suffix> QUOTA UNLIMITED ON USERS;
+
+        GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>MFREPORTSDB<suffix>;
+
+        GRANT CREATE JOB TO <prefix>MFREPORTSDB<suffix>;
+
+        GRANT MANAGE SCHEDULER TO <prefix>MFREPORTSDB<suffix>;
+
+        
+
+        CREATE USER <prefix>IDCONFIGDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;
+
+        ALTER USER <prefix>IDCONFIGDB<suffix> QUOTA UNLIMITED ON USERS;
+
+        GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>IDCONFIGDB<suffix>;
+
+        GRANT CREATE JOB TO <prefix>IDCONFIGDB<suffix>;
+
+        GRANT MANAGE SCHEDULER TO <prefix>IDCONFIGDB<suffix>;
+
+        GRANT CREATE TABLE TO <prefix>IDCONFIGDB<suffix>;
+
+        GRANT CREATE ANY INDEX TO <prefix>IDCONFIGDB<suffix>;
+
+        GRANT ALTER ANY TABLE TO <prefix>IDCONFIGDB<suffix>;
+
+        
+
+        CREATE USER <prefix>ADMINDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;
+
+        ALTER USER <prefix>ADMINDB<suffix> QUOTA UNLIMITED ON USERS;
+
+        GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>ADMINDB<suffix>;
+
+        GRANT CREATE JOB TO <prefix>ADMINDB<suffix>;
+
+        GRANT MANAGE SCHEDULER TO <prefix>ADMINDB<suffix>;
+
+        
+
+        CREATE USER <prefix>VPNSDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;
+
+        ALTER USER <prefix>VPNSDB<suffix> QUOTA UNLIMITED ON USERS;
+
+        GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>VPNSDB<suffix>;
+
+        GRANT CREATE JOB TO <prefix>VPNSDB<suffix>;
+
+        GRANT MANAGE SCHEDULER TO <prefix>VPNSDB<suffix>;
+
+    }</code></pre></figure>
+
+    2. Create a non DBA user with the below grants. This user will be given to the Installer.
+    <figure  class="highlight">
+    <pre><code  class="language-voltmx"  data-lang="voltmx">{
+
+        CREATE USER <INSTALLER\_USER> IDENTIFIED BY <password>;
+
+        GRANT CREATE SESSION TO <INSTALLER\_USER> WITH ADMIN OPTION;
+
+        GRANT SELECT ANY DICTIONARY TO <INSTALLER\_USER>;
+
+        ALTER USER <INSTALLER\_USER> QUOTA UNLIMITED ON <dataTablespace>;
+
+        ALTER USER <INSTALLER\_USER> QUOTA UNLIMITED ON <indexTablespace>;
+
+        ALTER USER <INSTALLER\_USER> QUOTA UNLIMITED ON <lobTablespace>;
+
+    }</code></pre>
+    </figure> 
+    >  **_Note:_** The password for the component users and the installer user have to be same.    
 
 *   **Issue** 
     
     For storage services to work, change the following storagedb entries in the admindb.
     
-    Workaround
+    <br/>
+    **Workaround**
+    <br/>
     
     Manual Steps:
-    
-    storage\_database\_type - oracle  
-    storage\_database\_hostname - Database hostname/IP  
-    storage\_database\_port - Database Port  
-    storage\_database\_username - DBA username  
-    storage\_database\_password - DBA Password  
-    storage\_database\_instance - service ID/service name  
-    storage\_data\_tablespace - Data Tablespace name  
-    storage\_index\_tablespace - Index Tablespace name  
-    storage\_lob\_tablespace - Lob Tablespace name
-    
+    <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{    
+        storage\_database\_type - oracle  
+        storage\_database\_hostname - Database hostname/IP  
+        storage\_database\_port - Database Port  
+        storage\_database\_username - DBA username  
+        storage\_database\_password - DBA Password  
+        storage\_database\_instance - service ID/service name  
+        storage\_data\_tablespace - Data Tablespace name  
+        storage\_index\_tablespace - Index Tablespace name  
+        storage\_lob\_tablespace - Lob Tablespace name
+    }</code></pre></figure>
+        
 
 *   **Issue**
-    
+        
     If you do not want to use a DB user with DBA role or Equivalent privileges for the Volt MX Foundry installation on MSSQL, follow these steps:
-    
-    Workaround
-    
+
+    <br/>
+
+    **Workaround**
+
+    <br/>
+
     Manual Steps:
-    
-    Create database <prefix>mfreportsdb<suffix>;  
-    Create database <prefix>mfaccountsdb<suffix>;  
-    Create database <prefix>mfconsoledb<suffix>;  
-    Create database <prefix>admindb<suffix>;  
-      
-    Create database <prefix>vpnsdb<suffix>;  
-    Create database <prefix>idconfigdb<suffix>;  
-    CREATE LOGIN loginId WITH PASSWORD = 'loginpwd'  
-    GO  
-    use msdb  
-    GO  
-    create user userId from LOGIN loginId;  
-    GO  
-    EXEC sp\_addrolemember 'SQLAgentUserRole', 'userId'  
-    EXEC sp\_addrolemember 'SQLAgentReaderRole', 'userId'  
-    EXEC sp\_addrolemember 'SQLAgentOperatorRole', 'userId'  
-    GO  
-    use <prefix>mfreportsdbAN<suffix>  
-    GO  
-    create user userId from LOGIN loginId;  
-    GO  
-    GRANT ALTER ANY DATABASE DDL TRIGGER TO userId  
-    GO  
-    GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER,VIEW Definition TO userId  
-    GO  
-    use <prefix>mfaccountsdb<suffix>  
-    GO  
-    create user userId from LOGIN loginId;  
-    GO  
-    GRANT ALTER ANY DATABASE DDL TRIGGER TO userId  
-    GO  
-    GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER,VIEW Definition TO userId  
-    GO  
-    use <prefix>mfconsoledb<suffix>  
-    GO  
-    create user userId from LOGIN loginId;  
-    GO  
-    GRANT ALTER ANY DATABASE DDL TRIGGER TO userId  
-    GO  
-    GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER,VIEW Definition TO userId  
-    GO  
-    use <prefix>admindb<suffix>  
-    GO  
-    create user userId from LOGIN loginId;  
-    GO  
-    GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId  
-    GO  
-      
-    use <prefix>vpnsdb<suffix>  
-    GO  
-    CREATE SCHEMA <prefix>vpnsdb<suffix>;  
-    GO  
-    create user userId from LOGIN loginId;  
-    GO  
-    GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId  
-    GO  
-    use <prefix>idconfigdb<suffix>  
-    GO  
-    create user userId from LOGIN loginId;  
-    GO  
-    GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId  
-    GO
-    
-    > **_Note:_** The whole script must be run at once.
-    
-    > **_Note:_** The loginId and password must be the same as used for Volt MX Foundry Installation.
-    
-    > **_Note:_** The <prefix> and <suffix> provided must be the same across the script and must also be provided at the time of the Volt MX foundry Installation.
-    
-    > **_Note:_** You can use the same loginId and userId to avoid confusion.
-    
-    > **_Note:_** The userId must be same across the script.
-    
+    <figure  class="highlight">
+    <pre><code  class="language-voltmx"  data-lang="voltmx">
+        Create database <prefix>mfreportsdb<suffix>;
+
+        Create database <prefix>mfaccountsdb<suffix>;
+
+        Create database <prefix>mfconsoledb<suffix>;
+
+        Create database <prefix>admindb<suffix>;
+
+        Create database <prefix>vpnsdb<suffix>;
+
+        Create database <prefix>idconfigdb<suffix>;
+
+        CREATE LOGIN loginId WITH PASSWORD = 'loginpwd'
+
+        GO
+
+        use msdb
+
+        GO
+
+        create user userId from LOGIN loginId;
+
+        GO
+
+        EXEC sp\_addrolemember 'SQLAgentUserRole', 'userId'
+
+        EXEC sp\_addrolemember 'SQLAgentReaderRole', 'userId'
+
+        EXEC sp\_addrolemember 'SQLAgentOperatorRole', 'userId'
+
+        GO
+
+        use <prefix>mfreportsdbAN<suffix>
+
+        GO
+
+        create user userId from LOGIN loginId;
+
+        GO
+
+        GRANT ALTER ANY DATABASE DDL TRIGGER TO userId
+
+        GO
+
+        GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER,VIEW Definition TO userId
+
+        GO
+
+        use <prefix>mfaccountsdb<suffix>
+
+        GO
+
+        create user userId from LOGIN loginId;
+
+        GO
+
+        GRANT ALTER ANY DATABASE DDL TRIGGER TO userId
+
+        GO
+
+        GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER,VIEW Definition TO userId
+
+        GO
+
+        use <prefix>mfconsoledb<suffix>
+
+        GO
+
+        create user userId from LOGIN loginId;
+
+        GO
+
+        GRANT ALTER ANY DATABASE DDL TRIGGER TO userId
+
+        GO
+
+        GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER,VIEW Definition TO userId
+
+        GO
+
+        use <prefix>admindb<suffix>
+
+        GO
+
+        create user userId from LOGIN loginId;
+
+        GO
+
+        GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId
+
+        GO
+
+        use <prefix>vpnsdb<suffix>
+
+        GO
+
+        CREATE SCHEMA <prefix>vpnsdb<suffix>;
+
+        GO
+
+        create user userId from LOGIN loginId;
+
+        GO
+
+        GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId
+
+        GO
+
+        use <prefix>idconfigdb<suffix>
+
+        GO
+
+        create user userId from LOGIN loginId;
+
+        GO
+
+        GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId
+
+        GO
+    </code></pre>
+    </figure>
+
+    >  **_Note:_** The whole script must be run at once.
+
+    >  **_Note:_** The loginId and password must be the same as used for Volt MX Foundry Installation.
+
+    >  **_Note:_** The <prefix> and <suffix> provided must be the same across the script and must also be provided at the time of the Volt MX foundry Installation.
+
+    >  **_Note:_** You can use the same loginId and userId to avoid confusion.
+
+    >  **_Note:_** The userId must be same across the script.
+
 
 *   **Issue**
     
     If you do not want to use a DB user with DBA role or Equivalent privileges for the Volt MX Foundry installation on IBM DB2, follow these steps:
     
-    Workaround
+    <br/>
+    **Workaround**
+    <br/>
     
     Manual Steps:
     
@@ -350,29 +472,30 @@ This section lists the troubleshooting tips to resolve problems that you may enc
         *   Refer for linux: [Creating group and user IDs for a DB2 database installation (Linux and UNIX)](https://www.ibm.com/support/knowledgecenter/en/SSEPGG_9.5.0/com.ibm.db2.luw.qb.server.doc/doc/t0006742.html)
         *   Refer for Windows: [Creating a dedicated DB2 user (Windows)](https://www.ibm.com/support/knowledgecenter/en/SSYGQH_5.5.0/admin/install/t_db_create_lcuser.html)
     2.  Create databases by logging as Admin with following queries:
+        <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
         
-        CREATE SCHEMA <prefix>ADMINDB<suffix> AUTHORIZATION userid  
-        CREATE SCHEMA <prefix>MFCONSOLEDB<suffix> AUTHORIZATION userid  
-        CREATE SCHEMA <prefix>MFACCOUNTSDB<suffix> AUTHORIZATION userid  
-        CREATE SCHEMA <prefix>MFREPORTSDB<suffix> AUTHORIZATION userid  
-        CREATE SCHEMA <prefix>VPNSDB<suffix> AUTHORIZATION userid  
-          
-        CREATE SCHEMA <prefix>IDCONFIGDB<suffix> AUTHORIZATION userid  
-        
+            CREATE SCHEMA <prefix>ADMINDB<suffix> AUTHORIZATION userid  
+            CREATE SCHEMA <prefix>MFCONSOLEDB<suffix> AUTHORIZATION userid  
+            CREATE SCHEMA <prefix>MFACCOUNTSDB<suffix> AUTHORIZATION userid  
+            CREATE SCHEMA <prefix>MFREPORTSDB<suffix> AUTHORIZATION userid  
+            CREATE SCHEMA <prefix>VPNSDB<suffix> AUTHORIZATION userid  
+            
+            CREATE SCHEMA <prefix>IDCONFIGDB<suffix> AUTHORIZATION userid  
+        }    
     3.  Grant database level permissions to the user:
-        
-        GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>ADMINDB<suffix> TO userid;  
-        GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>MFCONSOLEDB<suffix TO userid;  
-        GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>MFACCOUNTSDB<suffix> TO userid;  
-        GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>MFREPORTSDB<suffix> TO userid;  
-        GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>VPNSDB<suffix> TO userid;  
-          
-        GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>IDCONFIGDB<suffix> TO userid;  
-        
+        <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{    
+            GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>ADMINDB<suffix> TO userid;  
+            GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>MFCONSOLEDB<suffix TO userid;  
+            GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>MFACCOUNTSDB<suffix> TO userid;  
+            GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>MFREPORTSDB<suffix> TO userid;  
+            GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>VPNSDB<suffix> TO userid;  
+            
+            GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>IDCONFIGDB<suffix> TO userid;  
+        }   
     4.  Grant schema level permissions to the user:
-        
-        GRANT createtab,CONNECT,DATAACCESS,IMPLICIT\_SCHEMA,ACCESSCTRL ON database TO USER userid;
-        
+        <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
+            GRANT createtab,CONNECT,DATAACCESS,IMPLICIT\_SCHEMA,ACCESSCTRL ON database TO USER userid;
+        }</code></pre></figure>    
     
     > **_Note:_** The loginId and password must be the same as used for Volt MX Foundry Installation.
     
@@ -382,10 +505,12 @@ This section lists the troubleshooting tips to resolve problems that you may enc
 *   **Issue**
     
     After entering Database details the DB connection fails with the following error:
-    
+    <br/>
     ![](Resources/Images/error_troubleshooting.png)
-    
-    Workaround
+    <br/>
+    <br/>
+    **Workaround**
+    <br/>
     
     The password used for the Database must not contain exclamation marks (!).
     
@@ -402,7 +527,9 @@ This section lists the troubleshooting tips to resolve problems that you may enc
     *   **Error Message**: You can't specify target table 'users' for update in FROM clause
     *   **Location**: <Location where the installation is done>
     
-    **Workaround**  
+    <br/>
+    **Workaround**
+    <br/>
     
     To resolve this issue, refer [Prerequisites for Volt MX Foundry with MySQL- Applicable for Identity Services](DB_PRe-reqs.html).  
       
@@ -542,5 +669,5 @@ If you are installing Volt MX Foundry on Tomcat on HTTP and wants to route reque
 proxyName="<ProxyHost>" proxyPort="<ProxyPort>" scheme="https" secure="true"
 
 Example:
-
-<Connector server="VoltMXTEST" port="8080" protocol="HTTP/1.1" proxyName="mbaastest10.hcl.net" proxyPort="443" scheme="https" secure="true" maxHttpHeaderSize="8192" maxThreads="150" enableLookups="false" acceptCount="25" disableUploadTimeout="true" tcpNoDelay="true" compression="on" compressableMimeType="text/css,text/javascript,text.html" connectionTimeout="20000" URIEncoding="UTF-8"/>
+``
+    `<Connector server="VoltMXTEST" port="8080" protocol="HTTP/1.1" proxyName="mbaastest10.hcl.net" proxyPort="443" scheme="https" secure="true" maxHttpHeaderSize="8192" maxThreads="150" enableLookups="false" acceptCount="25" disableUploadTimeout="true" tcpNoDelay="true" compression="on" compressableMimeType="text/css,text/javascript,text.html" connectionTimeout="20000" URIEncoding="UTF-8"/>` ``
