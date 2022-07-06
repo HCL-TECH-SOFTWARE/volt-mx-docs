@@ -189,8 +189,7 @@ This section lists the troubleshooting tips to resolve problems that you may enc
     Manual Steps:
 
     1. Create Component Users (schema) with the required grants as below.
-    <figure  class="highlight"><pre><code  class="language-voltmx"  data-lang="voltmx">{
-        
+        <figure  class="highlight"><pre><code  class="language-voltmx"  data-lang="voltmx">{
         CREATE USER <prefix>MFCONSOLEDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;
 
         ALTER USER <prefix>MFCONSOLEDB<suffix> QUOTA UNLIMITED ON USERS;
@@ -265,26 +264,18 @@ This section lists the troubleshooting tips to resolve problems that you may enc
 
         GRANT MANAGE SCHEDULER TO <prefix>VPNSDB<suffix>;
 
-    }</code></pre></figure>
+        }</code></pre></figure>
 
     2. Create a non DBA user with the below grants. This user will be given to the Installer.
-    <figure  class="highlight">
-    <pre><code  class="language-voltmx"  data-lang="voltmx">{
-
+        <figure  class="highlight"><pre><code  class="language-voltmx"  data-lang="voltmx">{
         CREATE USER <INSTALLER\_USER> IDENTIFIED BY <password>;
-
         GRANT CREATE SESSION TO <INSTALLER\_USER> WITH ADMIN OPTION;
-
         GRANT SELECT ANY DICTIONARY TO <INSTALLER\_USER>;
-
         ALTER USER <INSTALLER\_USER> QUOTA UNLIMITED ON <dataTablespace>;
-
         ALTER USER <INSTALLER\_USER> QUOTA UNLIMITED ON <indexTablespace>;
-
         ALTER USER <INSTALLER\_USER> QUOTA UNLIMITED ON <lobTablespace>;
-
-    }</code></pre>
-    </figure> 
+        }</code></pre></figure> 
+    
     >  **_Note:_** The password for the component users and the installer user have to be same.    
 
 *   **Issue** 
@@ -320,129 +311,68 @@ This section lists the troubleshooting tips to resolve problems that you may enc
     <br/>
 
     Manual Steps:
-    <figure  class="highlight">
-    <pre><code  class="language-voltmx"  data-lang="voltmx">
-        Create database <prefix>mfreportsdb<suffix>;
-
-        Create database <prefix>mfaccountsdb<suffix>;
-
-        Create database <prefix>mfconsoledb<suffix>;
-
-        Create database <prefix>admindb<suffix>;
-
-        Create database <prefix>vpnsdb<suffix>;
-
-        Create database <prefix>idconfigdb<suffix>;
-
-        CREATE LOGIN loginId WITH PASSWORD = 'loginpwd'
-
-        GO
-
-        use msdb
-
-        GO
-
-        create user userId from LOGIN loginId;
-
-        GO
-
-        EXEC sp\_addrolemember 'SQLAgentUserRole', 'userId'
-
-        EXEC sp\_addrolemember 'SQLAgentReaderRole', 'userId'
-
-        EXEC sp\_addrolemember 'SQLAgentOperatorRole', 'userId'
-
-        GO
-
-        use <prefix>mfreportsdbAN<suffix>
-
-        GO
-
-        create user userId from LOGIN loginId;
-
-        GO
-
-        GRANT ALTER ANY DATABASE DDL TRIGGER TO userId
-
-        GO
-
-        GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER,VIEW Definition TO userId
-
-        GO
-
-        use <prefix>mfaccountsdb<suffix>
-
-        GO
-
-        create user userId from LOGIN loginId;
-
-        GO
-
-        GRANT ALTER ANY DATABASE DDL TRIGGER TO userId
-
-        GO
-
-        GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER,VIEW Definition TO userId
-
-        GO
-
-        use <prefix>mfconsoledb<suffix>
-
-        GO
-
-        create user userId from LOGIN loginId;
-
-        GO
-
-        GRANT ALTER ANY DATABASE DDL TRIGGER TO userId
-
-        GO
-
-        GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER,VIEW Definition TO userId
-
-        GO
-
-        use <prefix>admindb<suffix>
-
-        GO
-
-        create user userId from LOGIN loginId;
-
-        GO
-
-        GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId
-
-        GO
-
-        use <prefix>vpnsdb<suffix>
-
-        GO
-
-        CREATE SCHEMA <prefix>vpnsdb<suffix>;
-
-        GO
-
-        create user userId from LOGIN loginId;
-
-        GO
-
-        GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId
-
-        GO
-
-        use <prefix>idconfigdb<suffix>
-
-        GO
-
-        create user userId from LOGIN loginId;
-
-        GO
-
-        GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId
-
-        GO
-    </code></pre>
-    </figure>
+        <figure  class="highlight"><pre><code  class="language-voltmx"  data-lang="voltmx">
+            Create database <prefix>mfreportsdb<suffix>;
+            Create database <prefix>mfaccountsdb<suffix>;
+            Create database <prefix>mfconsoledb<suffix>;
+            Create database <prefix>admindb<suffix>;
+            Create database <prefix>vpnsdb<suffix>;
+            Create database <prefix>idconfigdb<suffix>;
+            CREATE LOGIN loginId WITH PASSWORD = 'loginpwd'
+            GO
+            use msdb
+            GO
+            create user userId from LOGIN loginId;
+            GO
+            EXEC sp\_addrolemember 'SQLAgentUserRole', 'userId'
+            EXEC sp\_addrolemember 'SQLAgentReaderRole', 'userId'
+            EXEC sp\_addrolemember 'SQLAgentOperatorRole', 'userId'
+            GO
+            use <prefix>mfreportsdbAN<suffix>
+            GO
+            create user userId from LOGIN loginId;
+            GO
+            GRANT ALTER ANY DATABASE DDL TRIGGER TO userId
+            GO
+            GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER,VIEW Definition TO userId
+            GO
+            use <prefix>mfaccountsdb<suffix>
+            GO
+            create user userId from LOGIN loginId;
+            GO
+            GRANT ALTER ANY DATABASE DDL TRIGGER TO userId
+            GO
+            GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER,VIEW Definition TO userId
+            GO
+            use <prefix>mfconsoledb<suffix>
+            GO
+            create user userId from LOGIN loginId;
+            GO
+            GRANT ALTER ANY DATABASE DDL TRIGGER TO userId
+            GO
+            GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER,VIEW Definition TO userId
+            GO
+            use <prefix>admindb<suffix>
+            GO
+            create user userId from LOGIN loginId;
+            GO
+            GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId
+            GO
+            use <prefix>vpnsdb<suffix>
+            GO
+            CREATE SCHEMA <prefix>vpnsdb<suffix>;
+            GO
+            create user userId from LOGIN loginId;
+            GO
+            GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId
+            GO
+            use <prefix>idconfigdb<suffix>
+            GO
+            create user userId from LOGIN loginId;
+            GO
+            GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId
+            GO
+        </code></pre></figure>
 
     >  **_Note:_** The whole script must be run at once.
 
