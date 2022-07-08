@@ -18,6 +18,7 @@ For detailed information about fixes and known issues in Volt MX, please see the
 - [Earlier Iris releases](#earlier-iris-releases)
 
 [Volt Foundry](#volt-foundry)
+- [V9 Servicepack 2 Fixpack 1 Hotfix 10](#v9-servicepack-2-fixpack-1-hotfix-10)
 - [V9 Servicepack 2 Fixpack 1 Hotfix 9](#v9-servicepack-2-fixpack-1-hotfix-9)
 - [V9 Servicepack 2 Fixpack 1 Hotfix 8](#v9-servicepack-2-fixpack-1-hotfix-8)
 - [V9 Servicepack 2 Fixpack 1 Hotfix 7](#v9-servicepack-2-fixpack-1-hotfix-7)
@@ -115,6 +116,14 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 
 ## Volt Foundry
 
+### V9 Servicepack 2 Fixpack 1 Hotfix 10
+
+#### Foundry Enhancements
+
+We have added support for Oracle overloaded stored procedures in the RDBMS adapter.
+
+For detailed information about any fixes and known issues in this release, please see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
+
 ### V9 Servicepack 2 Fixpack 1 Hotfix 9
 
 #### Foundry Enhancements
@@ -126,7 +135,7 @@ Following dependencies for Spring and Hibernate are also upgraded.
 - Spring-integration from 4.3.6.RELEASE to 5.5.7
 - Hibernate validator from 4.3.2.Final to 6.0.22.Final.
 
-For the relevant Support note, see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476#foundry_9219).
+For the relevant Support note, see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
 
 ### V9 Servicepack 2 Fixpack 1 Hotfix 8
 
