@@ -19,10 +19,10 @@ The apps built for this platform work on Windows 7, Windows 8/8.1, and Windows 1
   
 | Release | JavaScript Engine | Lua Engine |
 | --- | --- | --- |
-| All 5.0 and 5.5 releases | Jurassic ([https://jurassic.codeplex.com/](https://jurassic.codeplex.com/) ) | Lua VM |
+| All 5.0 and 5.5 releases | Jurassic ([https://jurassic.codeplex.com/](https://github.com/paulbartrum/jurassic) ) | Lua VM |
 | 5.6 and 5.6.1 | Web Browser control as JavaScript interpreter | Lua VM |
-| 5.6.2 and above | V8.Net ([https://v8dotnet.codeplex.com/](https://v8dotnet.codeplex.com/) ) | Lua VM |
-| 6.0 and above | V8.Net ([https://v8dotnet.codeplex.com/](https://v8dotnet.codeplex.com/) ) | Lua VM |
+| 5.6.2 and above | V8.Net ([https://v8dotnet.codeplex.com/](https://github.com/rjamesnw/v8dotnet) ) | Lua VM |
+| 6.0 and above | V8.Net ([https://v8dotnet.codeplex.com/](https://github.com/rjamesnw/v8dotnet) ) | Lua VM |
 | 8.0 and above | Chakra engine | N/A |
 
 #### Sync Support

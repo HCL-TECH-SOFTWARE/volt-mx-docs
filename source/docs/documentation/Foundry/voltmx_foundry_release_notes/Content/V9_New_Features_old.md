@@ -159,7 +159,7 @@ Installer
     *   Volt MX Foundry installer is bundled with an updated version of Tomcat 9.0.22.
     *   Support for installing Volt MX Foundry on MySQL 8.
     
-    For more information about this feature, click [here]({{ site.baseurl }}/docs/documentation/Foundry/voltmxfoundry_supported_devices_os_browsers/Content/FoundryV9.html).
+    For more information about this feature, click [here]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/ObjectsServices/Storage_ObjectServices.html).
     
 
 Cloud Installer on MS Azure

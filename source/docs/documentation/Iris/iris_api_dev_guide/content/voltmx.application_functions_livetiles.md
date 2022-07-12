@@ -15,7 +15,8 @@ The Live Tiles API contains the following functions, which are part of the [volt
 
 * * *
 
-This API enables you to set the data for an application tile. If the user chooses to pin the application tile, the data set is visible. For more information on pinning a tile, refer [http://www.microsoft.com/windowsphone/en-us/howto/wp7/start/move-or-delete-tile-on-start.aspx](https://answers.microsoft.com/en-us/mobiledevices/forum/all/how-do-i-remove-tiles-from-windows-phone/3c9e8e45-4f40-4517-8607-8f337752d2af).
+<!-- This API enables you to set the data for an application tile. If the user chooses to pin the application tile, the data set is visible. For more information on pinning a tile, refer [http://www.microsoft.com/windowsphone/en-us/howto/wp7/start/move-or-delete-tile-on-start.aspx](https://answers.microsoft.com/en-us/mobiledevices/forum/all/how-do-i-remove-tiles-from-windows-phone/3c9e8e45-4f40-4517-8607-8f337752d2af). -->
+This API enables you to set the data for an application tile. If the user chooses to pin the application tile, the data set is visible. For more information on pinning a tile, refer [https://answers.microsoft.com/en-us/windows/forum/all/deleting-and-moving-tiles-from-the-start-screen](https://answers.microsoft.com/en-us/windows/forum/all/deleting-and-moving-tiles-from-the-start-screen/0bcd891d-87cb-44fc-8f87-f65a18ea1327).
 
 ### Syntax
 
