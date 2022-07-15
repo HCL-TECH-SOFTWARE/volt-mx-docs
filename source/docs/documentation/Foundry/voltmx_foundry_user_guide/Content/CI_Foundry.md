@@ -212,9 +212,7 @@ Click here for more details on the import-config command</a>
 <code>license</code>   Gets the license information from the Volt MX Foundry installation. Applicable for on-premise installation only.
 
 <code>lock-config</code>   Command to lock services given a lock configuration json and an App zip. Creates a clone of the provided app with lock configuration applied.
-<a href="../../voltmx_foundry_user_guide/Content/Lock_Unlock_Fields_ObjectServices_MFCLI.html)[  
-](Lock_Unlock_Fields_ObjectServices_MFCLI.html">
-Click here for more details on lock-config command</a>
+<a href="Lock_Unlock_Fields_ObjectServices_MFCLI.html">Click here for more details on lock-config command</a>
 
 <code>merge-service-zip</code>   Merges a given service package with a template package.
 

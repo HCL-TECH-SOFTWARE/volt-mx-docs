@@ -30,7 +30,7 @@ For general information on the Map widget see the [Map]({{ site.baseurl }}/docs/
 
 For a more hands-on approach on the functions of Map widget and features provided by the Map API, import and preview the **Map Feature** sample app by using Volt MX Iris.
 
-[![](Resources/Images/Download_Button_10_230x35.png)](https://marketplace.hclvoltmx.com/items/voltmx-map-feature-app)
+[![](Resources/Images/Download_Button_10_230x35.png)](https://marketplace.hclvoltmx.com/items/voltmx-map-feature-app) 
 
 The Map widget capabilities can be broadly categorized into the following:
 

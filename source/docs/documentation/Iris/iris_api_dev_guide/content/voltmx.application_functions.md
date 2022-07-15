@@ -3982,7 +3982,8 @@ Available only on iPhone and iPad.
 
 * * *
 
-This API enables you to set the data for an application tile. If the user chooses to pin the application tile, the data set is visible. For more information on pinning a tile, refer [http://www.microsoft.com/windowsphone/en-us/howto/wp7/start/move-or-delete-tile-on-start.aspx](http://www.microsoft.com/windowsphone/en-us/howto/wp7/start/move-or-delete-tile-on-start.aspx).
+<!-- This API enables you to set the data for an application tile. If the user chooses to pin the application tile, the data set is visible. For more information on pinning a tile, refer [http://www.microsoft.com/windowsphone/en-us/howto/wp7/start/move-or-delete-tile-on-start.aspx](http://www.microsoft.com/windowsphone/en-us/howto/wp7/start/move-or-delete-tile-on-start.aspx). -->
+This API enables you to set the data for an application tile. If the user chooses to pin the application tile, the data set is visible. For more information on pinning a tile, refer [https://answers.microsoft.com/en-us/windows/forum/all/deleting-and-moving-tiles-from-the-start-screen](https://answers.microsoft.com/en-us/windows/forum/all/deleting-and-moving-tiles-from-the-start-screen/0bcd891d-87cb-44fc-8f87-f65a18ea1327).
 
 ### Syntax
 

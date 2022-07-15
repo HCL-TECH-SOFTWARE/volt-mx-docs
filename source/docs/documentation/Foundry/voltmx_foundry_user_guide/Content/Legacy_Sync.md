@@ -234,18 +234,21 @@ Defining Sync Objects
     
     ![](Resources/Images/FS_Filters_501x339.png)
     
-    > **_Note:_**   [OAuth 2.0](Identity10_VoltMX_OAuth2.html#foundry-oauth-2-0-identity-service) provides ability to retrieve and save user attributes in VoltMX Foundry  Identity Sessions after a successful login response and uses them as client filters during Legacy Sync calls. For example, User Role (one of the attributes of the user profile) received as part of User Profile after a successful [OAuth 2.0](Identity10_VoltMX_OAuth2.html#OAuth2ID) login can be used as client-side filter for Legacy Sync. For more details, refer to [Synchronization > client-side filters](Synchronization.html).
+    <!-- > **_Note:_**   [OAuth 2.0](Identity10_VoltMX_OAuth2.html#foundry-oauth-2-0-identity-service) provides ability to retrieve and save user attributes in VoltMX Foundry  Identity Sessions after a successful login response and uses them as client filters during Legacy Sync calls. For example, User Role (one of the attributes of the user profile) received as part of User Profile after a successful [OAuth 2.0](Identity10_VoltMX_OAuth2.html#OAuth2ID) login can be used as client-side filter for Legacy Sync. For more details, refer to [Synchronization > client-side filters](Synchronization.html). -->
+    > **_Note:_**   [OAuth 2.0](Identity10_VoltMX_OAuth2.html#foundry-oauth-2-0-identity-service) provides ability to retrieve and save user attributes in VoltMX Foundry  Identity Sessions after a successful login response and uses them as client filters during Legacy Sync calls. For example, User Role (one of the attributes of the user profile) received as part of User Profile after a successful [OAuth 2.0](Identity10_VoltMX_OAuth2.html#OAuth2ID) login can be used as client-side filter for Legacy Sync. For more details, refer to [Synchronization > client-side filters](#filters).
     
+    <p id="filters"></p>
+
     1.  In the **Client Side Filters**, from the **Attribute List**, select an attribute.
     2.  Select a scope for the client-side filter:
         
-        *   **Request**: Filters data for the attribute by using the condition that you specify. Client Filter values can be set from the client app when the type is Request.
+        a.   **Request**: Filters data for the attribute by using the condition that you specify. Client Filter values can be set from the client app when the type is Request.
             
-        *   **Constant**: Filters data for the attribute based on the constant value and the condition that you specify.
+        b.   **Constant**: Filters data for the attribute based on the constant value and the condition that you specify.
             
-        *   **Context**: Filters the attribute based on the context value and the condition that you specify. Context is content that you are tracking on the device side. You filter the attribute by the context that you specify.
+        c.   **Context**: Filters the attribute based on the context value and the condition that you specify. Context is content that you are tracking on the device side. You filter the attribute by the context that you specify.
             
-        *   **Identity**: Filters profile data for the attribute based on the value and the condition that you specify. When you create a user profile for an Identity service, you get some additional data as part of the profile information, which you can use to filter additional attributes. The device owner cannot modify these attributes.
+        d.   **Identity**: Filters profile data for the attribute based on the value and the condition that you specify. When you create a user profile for an Identity service, you get some additional data as part of the profile information, which you can use to filter additional attributes. The device owner cannot modify these attributes.
             
     3.  For the selected attribute, provide a condition.
     4.  To save the current filter and add another filter, click the **Plus** button.

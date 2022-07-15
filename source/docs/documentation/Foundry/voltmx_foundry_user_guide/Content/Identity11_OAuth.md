@@ -77,7 +77,7 @@ For more information about integrating the **OAuth Provider**, **User Repository
 > **_Important:_**  
 From V9 ServicePack 2, Foundry supports PKCE for the Authorization code flow of OAuth 2.0.  
   
-If your back-end source does not follow the [rfc7636](https://tools.ietf.org.html/rfc7636) naming convention for PKCE parameters, you need to configure additional parameters in your OAuth client. For more information, refer to [PKCE Support in Foundry](Identity10_VoltMX_OAuth2.html#pkce-support-in-foundry).
+If your back-end source does not follow the [rfc7636](https://datatracker.ietf.org/doc/html/rfc7636) naming convention for PKCE parameters, you need to configure additional parameters in your OAuth client. For more information, refer to [PKCE Support in Foundry](Identity10_VoltMX_OAuth2.html#pkce-support-in-foundry).
 
 </details>
 <details close markdown="block"><summary>Profile Flow</summary>

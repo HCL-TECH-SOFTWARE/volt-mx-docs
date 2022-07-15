@@ -158,7 +158,7 @@ iii.    The **include\_profile** parameter set to **true**. This parameter speci
 
 ### Additional Settings
 
-From V9 ServicePack 2, Foundry supports [rfc7636](https://tools.ietf.org.html/rfc7636) for OAuth providers that use PKCE in the Authorization Code grant flow. For more information, refer to [PKCE Support in Foundry](../Identity10_VoltMX_OAuth2.html#pkce-support-in-foundry).
+From V9 ServicePack 2, Foundry supports [rfc7636](https://datatracker.ietf.org/doc/html/rfc7636) for OAuth providers that use PKCE in the Authorization Code grant flow. For more information, refer to [PKCE Support in Foundry](../Identity10_VoltMX_OAuth2.html#pkce-support-in-foundry).
 
 **Android**
 
@@ -304,7 +304,7 @@ identitySvc.logout(function(response) {
 }, options);
 {% endhighlight %}
 
-> **_Note:_**<br><br>i.    The authClient is the IdentityService object for the loggedIn provider.<br/>ii.    To log out from all applications, the user must log out of every Identity service that they are logged on to.<br/>iii.    The code sample shows the parameter **slo** set to **true**, indicating that all apps will be logged out when SSO is enabled.<br/>iv.    If **slo** is set to **false**, or if the app does not send **slo**, the user is logged out of the app. The user is not logged out of the other apps that are logged in using SSO.<br/>v.    Any apps that use SSO based services must log in by entering credentials and re-initiating SSO.For more information, refer to [Single Sign-On](../single_Sign-On.HTM).
+> **_Note:_**<br><br>i.    The authClient is the IdentityService object for the loggedIn provider.<br/>ii.    To log out from all applications, the user must log out of every Identity service that they are logged on to.<br/>iii.    The code sample shows the parameter **slo** set to **true**, indicating that all apps will be logged out when SSO is enabled.<br/>iv.    If **slo** is set to **false**, or if the app does not send **slo**, the user is logged out of the app. The user is not logged out of the other apps that are logged in using SSO.<br/>v.    Any apps that use SSO based services must log in by entering credentials and re-initiating SSO.For more information, refer to [Single Sign-On](../single_Sign-On.html).
 
 Refresh Login
 -------------

@@ -607,7 +607,7 @@ Boolean is the return value.
 * * *
 </details>
 
-<details close markdown="block"><summary>voltmx.phone.openEmail</summary>
+<details close markdown="block"><summary id="phone.op2">voltmx.phone.openEmail</summary>
 
 * * *
 
@@ -615,9 +615,7 @@ This API allows the application to launch the native email client with predefine
 
 ### Syntax
 
-{% highlight VoltMx %}
-voltmx.phone.openEmail**([torecipients,](#torecipients)[ccrecipients](#ccrecipients), [bccrecipients](#bccrecipients), [subject](#subject), [messagebody](#messagebody), [ismessagebod.html](#ismessagebod.html), [attachments](#attachments), [viewMode](#viewMode)**, **[filterEmailAppsOnly](#filterEmailAppsOnly))**
-{% endhighlight %}
+<pre><code style="display:block;background-color:#eee;">voltmx.phone.openEmail(<a href="#torecipients">torecipients</a>,<a href="#ccrecipients">ccrecipients</a>, <a href="#bccrecipients">bccrecipients</a>, <a href="#subject">subject</a>, <a href="#messagebody">messagebody</a>, <a href="#ismessagebodyhtml">ismessagebodyhtml</a>, <a href="#attachments">attachments</a>, <a href="#viewMode">viewMode</a>, <a href="#filterEmailAppsOnly">filterEmailAppsOnly</a>)</code></pre>
 
 ### Input Parameters  
 
@@ -627,27 +625,27 @@ voltmx.phone.openEmail**([torecipients,](#torecipients)[ccrecipients](#ccrecipie
 <th>Description</th>
 </tr>
 <tr>
-<td>torecipients [Array of Strings] - Mandatory</td>
+<td id="torecipients">torecipients [Array of Strings] - Mandatory</td>
 <td>List of email addresses to be included in the “to” list. For example, “john@example.com”,”stephen.joseph@voltmx.com”, and “test@somecompany.com”.</td>
 </tr>
 <tr>
-<td>ccrecipients [Array of Strings] - Optional</td>
+<td id="ccrecipients">ccrecipients [Array of Strings] - Optional</td>
 <td>List of email addresses to be included in the “cc” list. For example, “john@example.com”,”stephen.joseph@voltmx.com”, and “test@somecompany.com”. If you do not want to use this parameter, you can pass null value.</td>
 </tr>
 <tr>
-<td>bccrecipients [Array of Strings] - Optional</td>
+<td id="bccrecipients">bccrecipients [Array of Strings] - Optional</td>
 <td>List of email addresses to be included in the “bcc” list. For example, “john@example.com”, “stephen.joseph@voltmx.com”, and “test@somecompany.com”.If you do not want to use this parameter, you can pass null value.</td>
 </tr>
 <tr>
-<td>subject [String]- Optional</td>
+<td id="subject">subject [String]- Optional</td>
 <td>Subject to be part of the email. If you do not want to use this parameter, you can pass null value.</td>
 </tr>
 <tr>
-<td>messagebody [String] -Optional</td>
+<td id="messagebody">messagebody [String] -Optional</td>
 <td>Body to be part of the email. If you do not want to use this parameter, you can pass null value.</td>
 </tr>
 <tr>
-<td>ismessagebod.html [Boolean] - Optional</td>
+<td id="ismessagebodyhtml">ismessagebod.html [Boolean] - Optional</td>
 <td>
 <p>If you do not want to use this parameter, you can pass null value. When you pass null value, this parameter defaults to false. true: message body must be treated as HTML content false: message body must not be treated as HTML content</p>
 <ul>
@@ -660,7 +658,7 @@ voltmx.phone.openEmail**([torecipients,](#torecipients)[ccrecipients](#ccrecipie
 </td>
 </tr>
 <tr>
-<td>attachments [Array of Objects] - Optional</td>
+<td id="attachments">attachments [Array of Objects] - Optional</td>
 <td>
 <p>Each attachment is a Hash-table with the following key-value pairs. If you do not want to use the attachments parameter, you can pass null value.</p>
 <ul>
@@ -679,7 +677,7 @@ voltmx.phone.openEmail**([torecipients,](#torecipients)[ccrecipients](#ccrecipie
 </td>
 </tr>
 <tr>
-<td>viewMode [Integer] - Optional</td>
+<td id="viewMode">viewMode [Integer] - Optional</td>
 <td>
 <p>Defines the possible view preferences for an email client window. This is a Windows-specific parameter. The values of viewMode are as follows:</p>
 <ul>
@@ -697,7 +695,7 @@ voltmx.phone.openEmail**([torecipients,](#torecipients)[ccrecipients](#ccrecipie
 </td>
 </tr>
 <tr>
-<td>filterEmailAppsOnly [Boolean] - Optional</td>
+<td id="filterEmailAppsOnly">filterEmailAppsOnly [Boolean] - Optional</td>
 <td>
 <p>Set this parameter to true to filter and list only email applications, which are shown in the Chooser dialog box. By default, the value of this parameter is false. If you do not want to use this parameter, you can pass a null value.</p>
 <blockquote>

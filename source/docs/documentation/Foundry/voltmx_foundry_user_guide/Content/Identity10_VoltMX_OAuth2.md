@@ -9,7 +9,7 @@ User Guide: [Identity](Identity.html) > [Configure the Identity Service](Configu
 Volt MX  Foundry OAuth 2.0 Identity Service
 -----------------------------------------
 
-Volt MX  Foundry identity supports OAuth 2.0 protocol for authenticating back-end identity providers that support `RFC6749`. For more details, refer to [https://tools.ietf.org.html/rfc6749](https://tools.ietf.org.html/rfc6749)
+Volt MX  Foundry identity supports OAuth 2.0 protocol for authenticating back-end identity providers that support `RFC6749`. For more details, refer to [https://tools.ietf.org.html/rfc6749](https://datatracker.ietf.org/doc/html/rfc6749)
 
 With **VoltMX Foundry OAuth 2.0** identity service, a user can access some of the external OAuth service providers such as Salesforce, Google, Amazon, Microsoft, Instagram, Yahoo, and Box for authentication.
 
@@ -63,7 +63,7 @@ To configure an identity service using Volt MX Foundry OAuth authentication mode
     1.  **Grant Type**: A new authorization grant type is defined by providing a grant type parameter in Volt MX Foundry Console. Select the required grant type from the drop-down menu. The following are the different grant types you can select:
         1.  **Authorization code**: An authorization code grant type is used if the client wants to request access to protected resources on behalf of another third-party user. When the client requests for the authorization, the authorization server redirects to the third party URL. The client enters the authorization code and gains access to the protected resources.  
               
-            From V9 ServicePack 2, Foundry supports [rfc7636](https://tools.ietf.org.html/rfc7636) for OAuth providers that use PKCE in the Authorization Code grant flow. For more information, refer to [PKCE Support in Foundry](#pkce-support-in-foundry).
+            From V9 ServicePack 2, Foundry supports [rfc7636](https://datatracker.ietf.org/doc/html/rfc7636) for OAuth providers that use PKCE in the Authorization Code grant flow. For more information, refer to [PKCE Support in Foundry](#pkce-support-in-foundry).
             
         2.  **Password**: On selecting this grant type, the client needs to provide the **Token Endpoint**. The client provides their access credentials to access the URL provided in the Token Endpoint. These credentials are validated by the back-end server. If the credentials are valid, it redirects back to the Console.
             
@@ -87,7 +87,7 @@ To configure an identity service using Volt MX Foundry OAuth authentication mode
           
         ![](Resources/Images/AppDomain_411x195.png)  
         
-    5.  In the **Scope** text box, enter the list of permissions that a user needs to agree to while in the user log-in page of the OAuth 2.0 service provider - for example, Gmail. The list can contain more than one permission and depends on the authorization server. For a sample of full list of permissions, refer to [OAuth 2.0 standards](https://tools.ietf.org.html/rfc6749).
+    5.  In the **Scope** text box, enter the list of permissions that a user needs to agree to while in the user log-in page of the OAuth 2.0 service provider - for example, Gmail. The list can contain more than one permission and depends on the authorization server. For a sample of full list of permissions, refer to [OAuth 2.0 standards](https://datatracker.ietf.org/doc/html/rfc6749).
         
         For example, if you configure the `email`   permission as scope, after you log in Google for the first time, Google displays the **Log in with Google** dialog with the configured permissions. Click **OK** to share your permissions (public profile and email) with Volt MX Foundry.
         
@@ -282,9 +282,9 @@ For back-end providers that use PKCE, the Identity service acts as a passthrough
 
 ![](Resources/Images/PKCE_Services.png)
 
-If the PKCE parameters from the back-end OAuth provider follow the [rfc7636](https://tools.ietf.org.html/rfc7636) naming convention `(code_challenge, code_challenge_method, code_verifier)`, you don’t need any additional configuration and you can use the [VoltMX Iris SDK](VoltMXStudio/Invoking_Identity_Service_Iris.html#login-with-provider-type-as-oauth-saml) to invoke the identity service from your client app.
+If the PKCE parameters from the back-end OAuth provider follow the [rfc7636](https://datatracker.ietf.org/doc/html/rfc7636) naming convention `(code_challenge, code_challenge_method, code_verifier)`, you don’t need any additional configuration and you can use the [VoltMX Iris SDK](VoltMXStudio/Invoking_Identity_Service_Iris.html#login-with-provider-type-as-oauth-saml) to invoke the identity service from your client app.
 
-But, if the PKCE parameters from the back-end OAuth provider do not follow the [rfc7636](https://tools.ietf.org.html/rfc7636) naming convention, you need to configure the PKCE parameters in the Additional Parameters of the Advanced section. For more information, refer to the following image.
+But, if the PKCE parameters from the back-end OAuth provider do not follow the [rfc7636](https://datatracker.ietf.org/doc/html/rfc7636) naming convention, you need to configure the PKCE parameters in the Additional Parameters of the Advanced section. For more information, refer to the following image.
 
 > **_Important:_**
 
