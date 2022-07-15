@@ -259,7 +259,7 @@ To enable the **registerGeoBoundaries** API for the iOS platform, add the follow
 * "NSLocationAlwaysUsageDescription":"< ThisMessageWillBeDisplayedToUser >"
 * "UIBackgroundModes":["location"]
 
-For information about how to access and edit the info.plist file, refer to [Build an App for iOS](BuildanAppforiOS_JS.html)
+For information about how to access and edit the info.plist file, refer to [Build an App for iOS]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Introduction.html)
 
 > **_Important:_** <br>
 Include the NSLocationWhenInUseUsageDescription and NSLocationAlwaysAndWhenInUseUsageDescription keys in your app's Info.plist file.<br> If the deployment target is iOS10 or below, the NSLocationAlwaysUsageDescription key is required. If those keys are not present, authorization requests fail immediately.

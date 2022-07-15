@@ -31,7 +31,7 @@ The following procedures describe how you would configure an XML service to carr
 
 ### Create an XML Service
 
-This procedure assumes that you have already configured Volt MX Foundry in Volt MX Iris. For more information, see [Connect to the Volt MX Foundry Console](Connect to Volt MX Foundry.html).
+This procedure assumes that you have already configured Volt MX Foundry in Volt MX Iris. For more information, see [Connect to the Volt MX Foundry Console](Connect_to_VoltMXFoundry.html).
 
 To create an XML service, do the following:
 

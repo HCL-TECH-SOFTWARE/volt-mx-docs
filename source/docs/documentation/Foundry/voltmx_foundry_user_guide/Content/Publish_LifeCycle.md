@@ -150,7 +150,8 @@ A published app provides link to the following services consoles:
 *   **Integration Service**: For more information, refer [Appendix - App Services.html.](Appendix_-_App_Services.html)
 *   **Orchestration Service**: For more information, refer [Appendix - App Services.html.](Appendix_-_App_Services.html)
 *   **Synchronization Service**: For more information, refer [Synchronization Service]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_sync_console_user_guide/Content/Homepage.html)
-*   **Engagement  Service**: For more information, refer [Engagement  Service]({{ site.baseurl }}/docs/documentation/Foundry/vms_console_user_guide_cloud/Default.html).
+<!-- *   **Engagement  Service**: For more information, refer [Engagement  Service]({{ site.baseurl }}/docs/documentation/Foundry/vms_console_user_guide_cloud/Default.html). -->
+*   **Engagement  Service**: For more information, refer [Engagement  Service]({{ site.baseurl }}/docs/documentation/Foundry/vms_console_user_guide/Content/Introduction_1.html).
 
 ### Snapshots
 

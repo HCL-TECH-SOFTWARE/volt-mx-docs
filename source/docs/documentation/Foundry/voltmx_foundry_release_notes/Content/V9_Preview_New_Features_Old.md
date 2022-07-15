@@ -209,7 +209,7 @@ Installer
     *   Support for installing Volt MX Foundry on MySQL 8.0.16, Oracle 18.c (18.3).
     *   Support for installing Volt MX Foundry on MacOS has been deprecated.
     
-    For more information about this feature, click [here]({{ site.baseurl }}/docs/documentation/Foundry/voltmxfoundry_supported_devices_os_browsers/Content/FoundryV9.html).
+    For more information about this feature, click [here]({{ site.baseurl }}/docs/documentation/Foundry/voltmxfoundry_supported_devices_os_browsers/Content/Introduction.html).
     
 
 Cloud Installer on MS Azure

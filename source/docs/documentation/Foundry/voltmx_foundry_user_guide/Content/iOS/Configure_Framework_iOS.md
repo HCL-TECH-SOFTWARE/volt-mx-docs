@@ -10,7 +10,7 @@ Before using Volt MX Foundry APIs for iOS, you must configure Volt MX iOS SDK in
 
 1.  [Configuring VoltMXSDK.framework to Project](#configuring-voltmxsdk-framework-to-project)
 2.  [Adding Framework Dependencies](#adding-framework-dependencies)
-3.  [Installing com.voltmx.VoltMXSDK.docset in Xcode](iOS/Installing.html)
+3.  [Installing com.voltmx.VoltMXSDK.docset in Xcode](Installing.html)
 
 Configuring VoltMXSDK.framework to Project
 ----------------------------------------
