@@ -525,7 +525,7 @@ To use the Python JPG conversion tool, do the following:
 
      [https://www.python.org/ftp/python/2.7.10/python-2.7.10.msi](https://www.python.org/ftp/python/2.7.10/python-2.7.10.msi)
 
-     [http://effbot.org/downloads/PIL-1.1.7.win32-py2.7.exe](http://effbot.org/downloads/PIL-1.1.7.win32-py2.7.exe)
+     [http://effbot.org/downloads/PIL-1.1.7.win32-py2.7.exe](http://effbot.org/downloads/PIL-1.1.7.win32-py2.7.exe) 
 
 2.  Download the following archive from [here]({{site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/pngConversion.zip) and execute the following command: 
 

@@ -19,7 +19,7 @@ The basic properties of PickerView widget are:
 
 Enables you to control accessibility behavior and alternative text for the widget.
 
-For more information on using accessibility features in your app, see the [Accessibility]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Accessibility_Overview.html) appendix in the VoltMX IrisUser Guide.
+For more information on using accessibility features in your app, see the [Accessibility]({{ site.baseurl }}/docs/documentation/Iris/app_design_dev/Content/Accessibility_Overview.html) appendix in the VoltMX IrisUser Guide.
 
 ### Syntax 
 

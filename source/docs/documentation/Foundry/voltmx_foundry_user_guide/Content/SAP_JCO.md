@@ -37,7 +37,8 @@ To use NON-SSO login, the Login Type must be set to NON-SSO in connection proper
 
 ### Configure SAP JCo End-point Adapter
 
-**To configure your SAP JCO Service in the [](Configure the Service.html)[Integration Service Definition](Configure the Service.html#IntegrationSDpage) tab, follow these steps:**
+<!-- **To configure your SAP JCO Service in the [](Configure the Service.html)[Integration Service Definition](Configure the Service.html#IntegrationSDpage) tab, follow these steps:** -->
+To configure your SAP JCO Service in the **[Integration Service Definition](ConfigureIntegrationService.html)** tab, follow these steps:
 
 1.   In the **Service Name** field, enter a unique name for your service.
 2.   From the **Service Type** list, select **SAP JCO**.  
