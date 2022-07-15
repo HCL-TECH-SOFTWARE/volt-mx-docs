@@ -106,7 +106,7 @@ environment{
           sh "git status"
           sh "git checkout -b feature/HPHX"
           sh "git push volt-mx-docs feature/HPHX"
-          sh "gh pr create -t 'Merging changes done for doc build email notifications test' -b 'Merging changes done for doc build email notifications test'"
+          sh "gh pr create -t 'HPHX-19207, 19347, 19349: Merging changes done for fixing Broken URLs in doc pages' -b 'HPHX-19207, 19347, 19349: Merging changes done for fixing Broken URLs in doc pages'"
           sh "gh pr status"
           sh "gh pr merge --merge"
           sh "git checkout master"
