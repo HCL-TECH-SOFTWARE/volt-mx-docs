@@ -1,11 +1,14 @@
 pipeline{
 
+// Consider any agent
 // agent any
 
+// Consider only agent
 agent {
   label 'agent2'
 } 
 
+// Exclude an agent
 // agent {
 //   label '!agent1'
 // } 
@@ -15,9 +18,9 @@ environment{
   PROJECT_NAME = "Volt MX Document External Server"
 }
 
-  // options{
-  //     buildDiscarder(logRotator(numToKeepStr: "10"))    
-  // }
+options{
+      buildDiscarder(logRotator(numToKeepStr: "10"))    
+  }
 
   stages{
       stage('Build'){
@@ -73,7 +76,8 @@ environment{
           echo "files Successfully copied to target location.."
           echo "Committing the Changes..."
           sh('git add .')
-          sh('git commit --allow-empty -am "Release Build"')
+          //sh('git commit --allow-empty -am "Release Build"')
+          sh('git commit -am "Release Build"')
           sh('git pull origin release')
           sh('git push origin release')
           
@@ -106,14 +110,12 @@ environment{
           sh "git status"
           sh "git checkout -b feature/HPHX"
           sh "git push volt-mx-docs feature/HPHX"
-          sh "gh pr create -t 'HPHX-19207, 19347, 19349: Merging changes done for fixing Broken URLs in doc pages' -b 'HPHX-19207, 19347, 19349: Merging changes done for fixing Broken URLs in doc pages'"
+          sh "gh pr create -t 'HPHX-pipeline_automation_code: Merging changes done for pipeline_code - email notifications' -b 'HPHX-pipeline_code: Merging changes done for pipeline_code - email notifications'"
           sh "gh pr status"
           sh "gh pr merge --merge"
           sh "git checkout master"
           sh "git status"
           sh "git branch -D feature/HPHX"
- 
-          
           //emailext attachLog: true, body: "${env.PROJECT_NAME} - Build # ${env.BUILD_NUMBER} - ${currentBuild.currentResult}: Check console output at ${env.BUILD_URL} to view the results.", replyTo: 'vishwanathan.m@hcl.com', subject: "${env.PROJECT_NAME} - Build # ${env.BUILD_NUMBER} - ${currentBuild.currentResult}!", to: 'vishwanathan.m@hcl.com'
         }
       }
@@ -137,10 +139,20 @@ environment{
              def commit_date = sh script: "git show -s --pretty=\"%ar\" ${GIT_COMMIT}", returnStdout: true 		 
              def commit_message = sh script: "git show -s --pretty=\"%s\" ${GIT_COMMIT}", returnStdout: true     
              def commit_message2 = sh script: "git show -s --pretty=\"%b\" ${GIT_COMMIT}", returnStdout: true     
-             emailext attachLog: true, compressLog:true, body:"<p>*******************************************************************</p><h2>${env.PROJECT_NAME} - Build Status: </h2><table><tr><th>Build Number: </th><td><code>${env.BUILD_NUMBER}</code></td></tr><tr><th>Build Status: </th><td><code>${currentBuild.currentResult}</code></td></tr><tr><th>Author Name: </th><td><code>${author_name}</code></td></tr><tr><th>Author Email Id: </th><td><code>${author_email_id}</code></td></tr><tr><th>Changes: </th><td><code>${commit_message}</code></td></tr><tr><th>Change Description: </th><td><code>${commit_message2}</code></td></tr><tr><th>Committed Time: </th><td><code>${commit_date}</code></td></tr><tr><th>Commit Hash ID: </th><td><code>${commit_hash}</code></td></tr><tr><th>Build Duration: </th><td><code>${currentBuild.durationString}</code></td></tr></table><p>Please check the attached build logs and output to view the results in detail.</p><p>Verify your changes published externally from this base URL: <br>https://opensource.hcltechsw.com/volt-mx-docs/ .</p><p>*******************************************************************</p>", replyTo: 'vishwanathan.m@hcl.com', subject: "${env.PROJECT_NAME} - Build # ${env.BUILD_NUMBER} - ${currentBuild.currentResult}!", to: 'vishwanathan.m@hcl.com'
+             println("${author_email_id}")
+             sh "echo 'Last 5 commit/change history'"
+             def n1 = sh script: "git show -s --pretty=format:'Author_Name: %an, Author_Email_Id: %ae, Committed_Time: %ar, Changes: %s, Change_Description: %b, Commit_Hash_Id: %h'. ${GIT_COMMIT} -5 ", returnStdout: true 
+             println("${n1}")
+             println("Datatype of n1 is :")
+             println(n1.getClass().getName())
+             def (h1,h2,h3,h4,h5) = "${n1}".tokenize('\n')
+             println("Commit History 1: ${h1}")            
+             println("Commit History 2: ${h2}")             
+             println("Commit History 3: ${h3}")             
+             println("Commit History 4: ${h4}")             
+             println("Commit History 5: ${h5}")
+             emailext attachLog: true, compressLog:true, body:"<p>***********************************************************************************</p><h2>${env.PROJECT_NAME} - Build Status: </h2><h3><u>Present Build Updates:</u></h3><table><tr><th>Build Number: </th><td><code>${env.BUILD_NUMBER}</code></td></tr><tr><th>Build Status: </th><td><code>${currentBuild.currentResult}</code></td></tr><tr><th>Build Duration: </th><td><code>${currentBuild.durationString}</code></td></tr></table><h3><u>Last 5 ChangeSets/History:</u></h3><table><tr><th>Commit History-1:   </th><td><code>${h1}</code></td></tr><tr><th>Commit History-2:   </th><td><code>${h2}</code></td></tr><tr><th>Commit History-3:   </th><td><code>${h3}</code></td></tr><tr><th>Commit History-4:   </th><td><code>${h4}</code></td></tr><tr><th>Commit History-5:   </th><td><code>${h5}</code></td></tr></table><p>Please check the attached build logs and output to view the results in detail.</p><p>Verify your changes published externally from this base URL: <br>https://opensource.hcltechsw.com/volt-mx-docs/ .</p><p>***********************************************************************************</p>", replyTo: 'vishwanathan.m@hcl.com', subject: "${env.PROJECT_NAME} - Build # ${env.BUILD_NUMBER} - ${currentBuild.currentResult}!", to: 'vishwanathan.m@hcl.com'
             }
-          //emailext attachLog: true, compressLog:true, body: "<p>*******************************************************************</p><h2>${env.PROJECT_NAME} - Build Status: </h2><table><tr><th>Build Number: </th><td><code>${env.BUILD_NUMBER}</code></td></tr><tr><th>Build Status: </th><td><code>${currentBuild.currentResult}</code></td></tr></table><p>Please check the attached build logs and output to view the results in detail.</p><p>Verify your changes published externally from this base URL: <br>https://opensource.hcltechsw.com/volt-mx-docs/ .</p><p>*******************************************************************</p>", replyTo: 'vishwanathan.m@hcl.com', subject: "${env.PROJECT_NAME} - Build # ${env.BUILD_NUMBER} - ${currentBuild.currentResult}!", to: 'vishwanathan.m@hcl.com'
-          
         }
     }
 }
