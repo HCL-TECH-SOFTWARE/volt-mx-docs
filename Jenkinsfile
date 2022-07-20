@@ -18,9 +18,9 @@ environment{
   PROJECT_NAME = "Volt MX Document External Server"
 }
 
-//options{
-     // buildDiscarder(logRotator(numToKeepStr: "10"))    
-  //}
+options{
+     buildDiscarder(logRotator(numToKeepStr: "10"))    
+  }
 
   stages{
       stage('Build'){
