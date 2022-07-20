@@ -39,48 +39,42 @@ options{
           // sh "git checkout -b rel/HPHX"          
           //-------
           
-          // ------- fetch branches from remote ------- 
-          echo "fetch branches from remote.."
-          sh "git fetch origin rel/HPHX:rel/HPHX"
-          // sh "git fetch origin Doc-Revamp-Release:Doc-Revamp-Release"
+          // ------- fetch branches from remote -------
+
+          //comments----- 
+          // echo "fetch branches from remote.."
+          // sh "git fetch origin rel/HPHX:rel/HPHX"
           
-          
-          
-          //-------
-          //sh "git checkout rel/HPHX"
-          //sh "git push origin rel/HPHX"
-          //-------
-          
-          echo "checkout to release branch"
-          sh "git checkout release"
-          sh "git fetch origin release"
-          sh "git pull origin release"
-          
-          sh "git merge rel/HPHX"
-          //sh "git merge Doc-Revamp-Release"
-          sh "git pull origin release"
-          sh "git push origin release"
-          
-          echo "changing to source directory.."
-          dir("${env.WORKSPACE}/source"){
-              sh "pwd"
-              sh "git status"
-              sh "ruby -v"
-              sh "which ruby"
-              sh "echo Building VoltMX Docs Site.."
-              sh "sh buildDocs.sh" 
-              echo "Build completed Successfully"
-          }
-          echo "copying files from _site to docs folder.."
-          sh "cp -R ${WORKSPACE}/source/_site/*  ${WORKSPACE}/docs"
-          echo "files Successfully copied to target location.."
-          echo "Committing the Changes..."
-          sh('git add .')
+          // echo "checkout to release branch"
+          // sh "git checkout release"
+          // sh "git fetch origin release"
+          // sh "git pull origin release"
+          // sh "git merge rel/HPHX"
+          // sh "git pull origin release"
+          // sh "git push origin release"
+          // echo "changing to source directory.."
+          // dir("${env.WORKSPACE}/source"){
+          //     sh "pwd"
+          //     sh "git status"
+          //     sh "ruby -v"
+          //     sh "which ruby"
+          //     sh "echo Building VoltMX Docs Site.."
+          //     sh "sh buildDocs.sh" 
+          //     echo "Build completed Successfully"
+          // }
+          // echo "copying files from _site to docs folder.."
+          // sh "cp -R ${WORKSPACE}/source/_site/*  ${WORKSPACE}/docs"
+          // echo "files Successfully copied to target location.."
+          // echo "Committing the Changes..."
+          // sh('git add .')
           //sh('git commit --allow-empty -am "Release Build"')
-          sh('git commit -am "Release Build"')
-          sh('git pull origin release')
-          sh('git push origin release')
-          
+          // sh('git commit -am "Release Build"')
+          // sh('git pull origin release')
+          // sh('git push origin release')
+
+          //comments----- 
+
+
           // ----- creating a new feature branch -----
           //sh "git status"
          //sh "git checkout -b feature/HPHX"
@@ -107,16 +101,17 @@ options{
           //sh "git push volt-mx-docs master"
           
           // ----------------------------------------------------//
-          sh "git status"
-          sh "git checkout -b feature/HPHX"
-          sh "git push volt-mx-docs feature/HPHX"
-          sh "gh pr create -t 'HPHX-pipeline_automation_code: Merging changes done for pipeline_code - email notifications' -b 'HPHX-pipeline_code: Merging changes done for pipeline_code - email notifications'"
-          sh "gh pr status"
-          sh "gh pr merge --merge"
-          sh "git checkout master"
-          sh "git status"
-          sh "git branch -D feature/HPHX"
-          //emailext attachLog: true, body: "${env.PROJECT_NAME} - Build # ${env.BUILD_NUMBER} - ${currentBuild.currentResult}: Check console output at ${env.BUILD_URL} to view the results.", replyTo: 'vishwanathan.m@hcl.com', subject: "${env.PROJECT_NAME} - Build # ${env.BUILD_NUMBER} - ${currentBuild.currentResult}!", to: 'vishwanathan.m@hcl.com'
+
+          //comments -----
+          // sh "git status"
+          // sh "git checkout -b feature/HPHX"
+          // sh "git push volt-mx-docs feature/HPHX"
+          // sh "gh pr create -t 'HPHX-pipeline_automation_code: Merging changes done for pipeline_code - email notifications' -b 'HPHX-pipeline_code: Merging changes done for pipeline_code - email notifications'"
+          // sh "gh pr status"
+          // sh "gh pr merge --merge"
+          // sh "git checkout master"
+          // sh "git status"
+          // sh "git branch -D feature/HPHX"
         }
       }
   
