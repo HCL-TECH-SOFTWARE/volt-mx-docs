@@ -18,9 +18,9 @@ environment{
   PROJECT_NAME = "Volt MX Document External Server"
 }
 
-options{
-      buildDiscarder(logRotator(numToKeepStr: "10"))    
-  }
+//options{
+     // buildDiscarder(logRotator(numToKeepStr: "10"))    
+  //}
 
   stages{
       stage('Build'){
@@ -136,7 +136,7 @@ options{
              def commit_message2 = sh script: "git show -s --pretty=\"%b\" ${GIT_COMMIT}", returnStdout: true     
              println("${author_email_id}")
              sh "echo 'Last 5 commit/change history'"
-             def n1 = sh script: "git show -s --pretty=format:'Author_Name: %an, Author_Email_Id: %ae, Committed_Time: %ar, Changes: %s\., Change_Description: %b\., Commit_Hash_Id: %h'.${GIT_COMMIT} -5 ", returnStdout: true 
+             def n1 = sh script: "git show -s --pretty=format:'Author_Name: %an, Author_Email_Id: %ae, Committed_Time: %ar, Changes: %s, Change_Description: %b, Commit_Hash_Id: %h'. ${GIT_COMMIT} -5 ", returnStdout: true 
              println("${n1}")
              println("Datatype of n1 is :")
              println(n1.getClass().getName())
