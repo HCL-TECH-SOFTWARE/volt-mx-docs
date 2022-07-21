@@ -43,35 +43,35 @@ options{
 
           // ------- fetch branches from remote -------
           //----- 
-          echo "fetch branches from remote.."
-          sh "git fetch origin rel/HPHX:rel/HPHX"
+//           echo "fetch branches from remote.."
+//           sh "git fetch origin rel/HPHX:rel/HPHX"
           
-          echo "checkout to release branch"
-          sh "git checkout release"
-          sh "git fetch origin release"
-          sh "git pull origin release"
-          sh "git merge rel/HPHX"
-          sh "git pull origin release"
-          sh "git push origin release"
-          echo "changing to source directory.."
-          dir("${env.WORKSPACE}/source"){
-              sh "pwd"
-              sh "git status"
-              sh "ruby -v"
-              sh "which ruby"
-              sh "echo Building VoltMX Docs Site.."
-              sh "sh buildDocs.sh" 
-              echo "Build completed Successfully"
-          }
-          echo "copying files from _site to docs folder.."
-          sh "cp -R ${WORKSPACE}/source/_site/*  ${WORKSPACE}/docs"
-          echo "files Successfully copied to target location.."
-          echo "Committing the Changes..."
-          sh('git add .')
-          // sh('git commit --allow-empty -am "Release Build"')    //empty commits
-          sh('git commit -am "Release Build"')
-          sh('git pull origin release')
-          sh('git push origin release')
+//           echo "checkout to release branch"
+//           sh "git checkout release"
+//           sh "git fetch origin release"
+//           sh "git pull origin release"
+//           sh "git merge rel/HPHX"
+//           sh "git pull origin release"
+//           sh "git push origin release"
+//           echo "changing to source directory.."
+//           dir("${env.WORKSPACE}/source"){
+//               sh "pwd"
+//               sh "git status"
+//               sh "ruby -v"
+//               sh "which ruby"
+//               sh "echo Building VoltMX Docs Site.."
+//               sh "sh buildDocs.sh" 
+//               echo "Build completed Successfully"
+//           }
+//           echo "copying files from _site to docs folder.."
+//           sh "cp -R ${WORKSPACE}/source/_site/*  ${WORKSPACE}/docs"
+//           echo "files Successfully copied to target location.."
+//           echo "Committing the Changes..."
+//           sh('git add .')
+//           // sh('git commit --allow-empty -am "Release Build"')    //empty commits
+//           sh('git commit -am "Release Build"')
+//           sh('git pull origin release')
+//           sh('git push origin release')
           //----- 
           // ----- creating a new feature branch -----
           //sh "git status"
@@ -100,15 +100,15 @@ options{
           
           // ----------------------------------------------------//
           // -----
-          sh "git status"
-          sh "git checkout -b feature/HPHX"
-          sh "git push volt-mx-docs feature/HPHX"
-          sh "gh pr create -t 'HPHX-pipeline_automation_code: Merging changes done for pipeline_code - email notifications' -b 'HPHX-pipeline_code: Merging changes done for pipeline_code - email notifications'"
-          sh "gh pr status"
-          sh "gh pr merge --merge"
-          sh "git checkout master"
-          sh "git status"
-          sh "git branch -D feature/HPHX"
+          //sh "git status"
+          //sh "git checkout -b feature/HPHX"
+          //sh "git push volt-mx-docs feature/HPHX"
+          //sh "gh pr create -t 'HPHX-pipeline_automation_code: Merging changes done for pipeline_code - email notifications' -b 'HPHX-pipeline_code: Merging changes done for pipeline_code - email notifications'"
+          //sh "gh pr status"
+          //sh "gh pr merge --merge"
+          //sh "git checkout master"
+          //sh "git status"
+          //sh "git branch -D feature/HPHX"
           // -----
         }
       }
@@ -133,7 +133,7 @@ options{
              def commit_message2 = sh script: "git show -s --pretty=\"%b\" ${GIT_COMMIT}", returnStdout: true     
              println("${author_email_id}")
              sh "echo 'Last 5 commit/change history'"
-             def n1 = sh script: "git show -s --pretty=format:'Author_Name: %an, Author_Email_Id: %ae, Committed_Time: %ar, Changes: %s, Change_Description: %b, Commit_Hash_Id: %h'. ${GIT_COMMIT} -5 ", returnStdout: true 
+             def n1 = sh script: "git show -s --pretty=format:'Author_Name: %an, Author_Email_Id: %ae, Committed_Time: %ar, Changes: %s, Change_Description: %b, Commit_Hash_Id: %h .' ${GIT_COMMIT} -5 ", returnStdout: true 
              println("${n1}")
              println("Datatype of n1 is :")
              println(n1.getClass().getName())
