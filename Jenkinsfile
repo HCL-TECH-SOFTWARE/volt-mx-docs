@@ -40,7 +40,6 @@ options{
           //-------
 
 
-
           // ------- fetch branches from remote -------
           //----- 
           echo "fetch branches from remote.."
@@ -73,6 +72,8 @@ options{
           sh('git pull origin release')
           sh('git push origin release')
           //----- 
+          
+                    // ----------------------------------------------------//
           // ----- creating a new feature branch -----
           //sh "git status"
          //sh "git checkout -b feature/HPHX"
@@ -98,7 +99,8 @@ options{
           //sh "git pull volt-mx-docs master"
           //sh "git push volt-mx-docs master"
           
-          // ----------------------------------------------------//
+                    // ----------------------------------------------------//
+          
           // -----
           sh "git status"
           sh "git checkout -b feature/HPHX"
@@ -133,7 +135,8 @@ options{
              def commit_message2 = sh script: "git show -s --pretty=\"%b\" ${GIT_COMMIT}", returnStdout: true     
              println("${author_email_id}")
              sh "echo 'Last 5 commit/change history'"
-             def n1 = sh script: "git show -s --pretty=format:'Author_Name: %an, Author_Email_Id: %ae, Committed_Time: %ar, Changes: %s, Change_Description: %b, Commit_Hash_Id: %h'. ${GIT_COMMIT} -5 ", returnStdout: true 
+             //def n1 = sh script: "git show -s --pretty=format:'Author_Name: %an, Author_Email_Id: %ae, Committed_Time: %ar, Changes: %s, Change_Description: %b, Commit_Hash_Id: %h .' ${GIT_COMMIT} -5 ", returnStdout: true 
+             def n1 = sh script: "git show -s --pretty=format:'Author_Name: %an, Author_Email_Id: %ae, Committed_Time: %ar, Changes: %s, Commit_Hash_Id: %h.' ${GIT_COMMIT} -5 ", returnStdout: true 
              println("${n1}")
              println("Datatype of n1 is :")
              println(n1.getClass().getName())
