@@ -40,39 +40,40 @@ options{
           //-------
 
 
-
           // ------- fetch branches from remote -------
           //----- 
-//           echo "fetch branches from remote.."
-//           sh "git fetch origin rel/HPHX:rel/HPHX"
+          echo "fetch branches from remote.."
+          sh "git fetch origin rel/HPHX:rel/HPHX"
           
-//           echo "checkout to release branch"
-//           sh "git checkout release"
-//           sh "git fetch origin release"
-//           sh "git pull origin release"
-//           sh "git merge rel/HPHX"
-//           sh "git pull origin release"
-//           sh "git push origin release"
-//           echo "changing to source directory.."
-//           dir("${env.WORKSPACE}/source"){
-//               sh "pwd"
-//               sh "git status"
-//               sh "ruby -v"
-//               sh "which ruby"
-//               sh "echo Building VoltMX Docs Site.."
-//               sh "sh buildDocs.sh" 
-//               echo "Build completed Successfully"
-//           }
-//           echo "copying files from _site to docs folder.."
-//           sh "cp -R ${WORKSPACE}/source/_site/*  ${WORKSPACE}/docs"
-//           echo "files Successfully copied to target location.."
-//           echo "Committing the Changes..."
-//           sh('git add .')
-//           // sh('git commit --allow-empty -am "Release Build"')    //empty commits
-//           sh('git commit -am "Release Build"')
-//           sh('git pull origin release')
-//           sh('git push origin release')
+          echo "checkout to release branch"
+          sh "git checkout release"
+          sh "git fetch origin release"
+          sh "git pull origin release"
+          sh "git merge rel/HPHX"
+          sh "git pull origin release"
+          sh "git push origin release"
+          echo "changing to source directory.."
+          dir("${env.WORKSPACE}/source"){
+              sh "pwd"
+              sh "git status"
+              sh "ruby -v"
+              sh "which ruby"
+              sh "echo Building VoltMX Docs Site.."
+              sh "sh buildDocs.sh" 
+              echo "Build completed Successfully"
+          }
+          echo "copying files from _site to docs folder.."
+          sh "cp -R ${WORKSPACE}/source/_site/*  ${WORKSPACE}/docs"
+          echo "files Successfully copied to target location.."
+          echo "Committing the Changes..."
+          sh('git add .')
+          // sh('git commit --allow-empty -am "Release Build"')    //empty commits
+          sh('git commit -am "Release Build"')
+          sh('git pull origin release')
+          sh('git push origin release')
           //----- 
+          
+                    // ----------------------------------------------------//
           // ----- creating a new feature branch -----
           //sh "git status"
          //sh "git checkout -b feature/HPHX"
@@ -98,17 +99,18 @@ options{
           //sh "git pull volt-mx-docs master"
           //sh "git push volt-mx-docs master"
           
-          // ----------------------------------------------------//
+                    // ----------------------------------------------------//
+          
           // -----
-          //sh "git status"
-          //sh "git checkout -b feature/HPHX"
-          //sh "git push volt-mx-docs feature/HPHX"
-          //sh "gh pr create -t 'HPHX-pipeline_automation_code: Merging changes done for pipeline_code - email notifications' -b 'HPHX-pipeline_code: Merging changes done for pipeline_code - email notifications'"
-          //sh "gh pr status"
-          //sh "gh pr merge --merge"
-          //sh "git checkout master"
-          //sh "git status"
-          //sh "git branch -D feature/HPHX"
+          sh "git status"
+          sh "git checkout -b feature/HPHX"
+          sh "git push volt-mx-docs feature/HPHX"
+          sh "gh pr create -t 'HPHX-pipeline_automation_code: Merging changes done for pipeline_code - email notifications' -b 'HPHX-pipeline_code: Merging changes done for pipeline_code - email notifications'"
+          sh "gh pr status"
+          sh "gh pr merge --merge"
+          sh "git checkout master"
+          sh "git status"
+          sh "git branch -D feature/HPHX"
           // -----
         }
       }
