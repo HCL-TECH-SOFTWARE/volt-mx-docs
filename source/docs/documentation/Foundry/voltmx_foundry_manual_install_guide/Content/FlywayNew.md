@@ -12,7 +12,7 @@ Configuring Flyway Command-line Tool
 
 The following section helps you configure placeholders and properties in the `flyway.conf` file and execute SQL scripts for your database. The details that are required to configure flyway properties for a component's database are available in the database sections of an app server in the document.
 
-> **_Note:_** Before configuring flyway properties for your database, download the Flyway Command-line Tool from [https://flywaydb.org/getstarted/download.html](https://flywaydb.org/getstarted/download.html) to your local system, and unzip the `flyway-commandline-<x.x.x>-<Operating_Platform>`. You can download the Flyway Command-line Tool specific to your Operating System. The supported version is Flyway 4.0.3.
+> **_Note:_** Before configuring flyway properties for your database, download the Flyway Command-line Tool from [https://flywaydb.org/getstarted/download.html](https://flywaydb.org/download) to your local system, and unzip the `flyway-commandline-<x.x.x>-<Operating_Platform>`. You can download the Flyway Command-line Tool specific to your Operating System. The supported version is Flyway 4.0.3.
 
 1.  Go to the `\flyway\conf` folder and open the `flyway.conf` file.
 2.  Configure your database properties for the current module with relevant data in the `flyway.conf` file.

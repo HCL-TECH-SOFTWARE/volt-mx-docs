@@ -48,8 +48,8 @@ If you have created an iOS application and want to publish it to the App Store, 
 Certain prerequisites for building and publishing your iOS application to the App Store are:
 
 <ul>
-<li><a href="/docs/documentation/Iris/iris_user_guide/Content/iOS_Automatic_Output_Generation.html#prerequisites">Configure Xcode on your Mac</a></li> 
-<li><a href="/docs/documentation/Iris/iris_user_guide/Content/iOS_Automatic_Output_Generation.html#ipa-generation">Connect your Mac with Iris</a></li> 
+<li><a href="../../../Iris/iris_user_guide/Content/iOS_Automatic_Output_Generation.html#prerequisites">Configure Xcode on your Mac</a></li> 
+<li><a href="../../../Iris/iris_user_guide/Content/iOS_Automatic_Output_Generation.html#ipa-generation">Connect your Mac with Iris</a></li> 
 <li><a href="https://developer.apple.com/documentation/">Apple Enterprise Distribution Certificate (Release Mode only)</a>
 <ul><li>Using this feature, you can add your Apple enterprise distribution certificate to the Volt MX Management server. To add the certificate, click <b>+Add</b> to select the certificate from its location and then click <b>Open</b>. The selected certificate with size in KB appears next to Enterprise Distribution Certificate label.</li></ul>
 </li>  
