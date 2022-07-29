@@ -105,7 +105,7 @@ options{
           sh "git status"
           sh "git checkout -b feature/HPHX"
           sh "git push volt-mx-docs feature/HPHX"
-          sh "gh pr create -t 'HPHX-pipeline_automation_code: Merging changes done for pipeline_code - email notifications' -b 'HPHX-pipeline_code: Merging changes done for pipeline_code - email notifications'"
+          sh "gh pr create -t 'HPHX-14010,14011,16635: Merging 9.2 version_next doc changes' -b 'HPHX-14010,14011,16635: Merging 9.2 version_next doc changes'"
           sh "gh pr status"
           sh "gh pr merge --merge"
           sh "git checkout master"
@@ -146,8 +146,8 @@ options{
              println("Commit History 3: ${h3}")             
              println("Commit History 4: ${h4}")             
              println("Commit History 5: ${h5}")
-            emailext attachLog: true, compressLog:true, body:"<p>***********************************************************************************</p><h2>${env.PROJECT_NAME} - Build Status: </h2><h3><u>Present Build Updates:</u></h3><table><tr><th>Build Number: </th><td><code>${env.BUILD_NUMBER}</code></td></tr><tr><th>Build Status: </th><td><code>${currentBuild.currentResult}</code></td></tr><tr><th>Build Duration: </th><td><code>${currentBuild.durationString}</code></td></tr></table><h3><u>Last 5 ChangeSets/History:</u></h3><table><tr><th>Commit History-1: </th><td><code>${h1}</code></td></tr><tr><th>Commit History-2:   </th><td><code>${h2}</code></td></tr><tr><th>Commit History-3:   </th><td><code>${h3}</code></td></tr><tr><th>Commit History-4:   </th><td><code>${h4}</code></td></tr><tr><th>Commit History-5:   </th><td><code>${h5}</code></td></tr></table><p>Please check the attached build logs and output to view the results in detail.</p><p>Verify your changes published externally from this base URL: <br>https://opensource.hcltechsw.com/volt-mx-docs/ .</p><p>***********************************************************************************</p>", replyTo: 'vishwanathan.m@hcl.com', subject: "${env.PROJECT_NAME} - Build # ${env.BUILD_NUMBER} - ${currentBuild.currentResult}!", to: 'vishwanathan.m@hcl.com'
-            }
+            emailext attachLog: true, compressLog:true, body:"<p>***********************************************************************************</p><h2>${env.PROJECT_NAME} - Build Status: </h2><h3><u>Present Build Updates:</u></h3><table><tr><th>Build Number: </th><td><code>${env.BUILD_NUMBER}</code></td></tr><tr><th>Build Status: </th><td><code>${currentBuild.currentResult}</code></td></tr><tr><th>Build Duration: </th><td><code>${currentBuild.durationString}</code></td></tr></table><h3><u>Last 5 ChangeSets/History:</u></h3><table><tr><th>Commit History-1:</th><td><code>${h1}</code></td></tr><tr><th>Commit History-2:</th><td><code>${h2}</code></td></tr><tr><th>Commit History-3:</th><td><code>${h3}</code></td></tr><tr><th>Commit History-4:</th><td><code>${h4}</code></td></tr><tr><th>Commit History-5:</th><td><code>${h5}</code></td></tr></table><p>Please check the attached build logs and output to view the results in detail.</p><p>Verify your changes published externally from this base URL: <br>https://opensource.hcltechsw.com/volt-mx-docs/ .</p><p>***********************************************************************************</p>", replyTo: 'vishwanathan.m@hcl.com', subject: "${env.PROJECT_NAME} - Build # ${env.BUILD_NUMBER} - ${currentBuild.currentResult}!", to: 'michael.stewart@hcl.com, david.sayer@hcl.com, amita.g@hcl.com, kumari.h@hcl.com, sanjay-c@hcl.com, vishwanathan.m@hcl.com' 
+           }
         }
     }
 }
