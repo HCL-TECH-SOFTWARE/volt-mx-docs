@@ -19,6 +19,6 @@ Revision History
 Getting Started Options
 
 *   [Release Notes]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_release_notes/Content/VoltMX_Foundry_Release_Notes.html)
-*   [Video Tutorials](http://docs.voltmx.com/voltmxlibrary/mobilefoundry/mf_video_tutorials/Default.html)
-*   [QuickStart Guide](http://docs.voltmx.com/voltmxlibrary/mobilefoundry/voltmx_mobilefoundry_quickstart_guide/voltmx_mobilefoundry_quick_start_guide.html)
-*   [Sample Apps](https://github.com/voltmx/)
+*   [Video Tutorials]({{ site.baseurl }}/docs/tutorials/appFactory.html)
+*   [QuickStart Guide]({{ site.baseurl }}/docs/tutorials/voltmxFoundryOverview.html).
+*   [Sample Apps](https://github.com/HCL-TECH-SOFTWARE/volt-mx-samples)

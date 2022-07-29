@@ -21,4 +21,4 @@ Getting Started Options
 *   [Release Notes](https://docs.voltmx.com/voltmxlibrary/voltmxfoundry/voltmx_foundry_release_notes/Default.html)
 *   [Video Tutorials](https://docs.voltmx.com/voltmxlibrary/voltmxfoundry/mf_video_tutorials/Default.html)
 *   [QuickStart Guides](https://docs.voltmx.com/voltmxlibrary/voltmxfoundry/voltmx_foundry_crm_quick_start_guide/Default.html)
-*   [Sample Apps](https://github.com/voltmx/)
+*   [Sample Apps](https://github.com/HCL-TECH-SOFTWARE/volt-mx-samples)

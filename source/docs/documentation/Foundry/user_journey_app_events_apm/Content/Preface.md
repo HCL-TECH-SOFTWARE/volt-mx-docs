@@ -20,10 +20,10 @@ Following are the auto reported events supported by Volt MX APM:
 *   FormEntry – when preshow event is triggered
 *   FormExit – when formHide event is triggered
 *   Button Click – when onTouchEnd or onClick event is triggered
-*   ServiceRequest  - When service request is triggered or any other network call is invoked from the app.
+*   ServiceRequest - When service request is triggered or any other network call is invoked from the app.
 *   ServiceResponse – When response arrives for service request or any other network call is invoked from the app.
 *   Gesture – when a gesture event is triggered. This will tracked only for a widget that has a function configured to act on that gesture.  
-    The subtype will follow the pattern GESTURETYPE\_NUMBEROFINPUTS\_DIRECTION. For example a two finger tap would be TAP\_2 and a three finger swipe would be SWIPE\_3\_RIGHT.
+    The subtype will follow the pattern GESTURETYPE\_NUMBEROFINPUTS\_DIRECTION. For example a two finger tap would be TAP\_2 and a three finger swipe would be SWIPE\_3\_RIGHT.
 *   Orientation – when the device orientation change event is triggered. The subtype must be one of PORTRAIT\_TO\_LANDSCAPE or LANDSCAPE\_TO\_PORTRAIT where the new orientation of the device that caused the trigger is indicated last.
 
 > **_Note:_** The developer must register at [manage.hclvoltmx.com](https://manage.hclvoltmx.com/) to access the Custom Metrics page.
@@ -44,7 +44,7 @@ The following formatting conventions are used throughout the document:
 | Monospace | User input text, system prompts, and responses File path Commands Program code File names |
 | _Italic_ | Emphasis Names of books and documents New terminology |
 | **Bold** | Windows Menus Buttons Icons Fields Tabs |
-| [URL](http://a/) | Active link to a URL |
+| [URL](##) | Active link to a URL |
 | > **_Note:_**   | Provides helpful hints or additional information |
 | > **_Important:_**   | Highlights actions or information that might cause problems to systems or data |
 
