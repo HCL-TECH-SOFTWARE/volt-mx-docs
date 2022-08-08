@@ -24,5 +24,7 @@ Getting Started Options
 - [QuickStart Guides]({{ site.baseurl }}/docs/tutorials/voltmxFoundryOverview.html): Helps you create a basic set of back-end services for authenticating a user and then access a simple integration and orchestration service.
 - [Installer Guide Windows]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Introduction.html): Applicable to on-premises. Explains how to install Console, Identity, Integration Services, Engagement Services, and Sync Services on Windows using an installer program.
 - [Installer Guide Linux]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_linux_install_guide/Content/Introduction.html): Applicable to on-premises. Explains how to install Console, Identity, Integration Services, Engagement Services, and Sync Services on Linux using an installer program.
+
 <!-- - [Installer Guide Mac]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_mac_install_guide/Default.html): Applicable to on-premises. Explains how to install Console, Identity, Integration Services, Engagement Services, and Sync Services on Mac using an installer program. -->
+
 - [Manual Install Guide]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_manual_install_guide/Content/Introduction.html): Applicable to on-premises. Explains how to install Console, Identity, Integration Services, Engagement Services, and Sync Services manually for secured environments and Tomcat multi-node installation

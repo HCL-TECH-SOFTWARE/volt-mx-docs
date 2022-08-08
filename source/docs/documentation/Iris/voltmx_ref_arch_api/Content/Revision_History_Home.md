@@ -29,7 +29,7 @@ The following typographical conventions have been used throughout the document:
 | Monospace | User input text, system prompts, and responses File Path Commands Program Code File Names. |
 | _Italic_ | Emphasis Names of books and documents New Terminology. |
 | **Bold** | Windows Menus Buttons Icons Fields Tabs Folders. |
-| [URL](http://a/) | Active link to a URL. |
+| [URL](##) | Active link to a URL. |
 | <b>_Note:_ </b>| Provides helpful hints or additional information. |
 
 </details>

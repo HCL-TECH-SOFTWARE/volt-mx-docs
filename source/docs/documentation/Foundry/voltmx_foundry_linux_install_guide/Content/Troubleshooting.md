@@ -502,7 +502,7 @@ How to Configure JBoss Cluster
 ------------------------------
 
 *   Refer to [https://access.redhat.com/solutions/218053](https://access.redhat.com/solutions/218053) to setup EAP in Domain mode.
-*   Refer to [https://docs.jboss.org/mod\_cluster/1.1.0.html/Quick\_Start\_Guide.html](https://docs.jboss.org/mod_cluster/1.1.0.html/Quick_Start_Guide.html) to configure the mod\_cluster.
+*   Refer to [https://docs.jboss.org/mod\_cluster/1.1.0.html/Quick\_Start\_Guide.html](https://docs.modcluster.io/#jboss-as) to configure the mod\_cluster.
     *   Refer to [https://access.redhat.com/solutions/2332111](https://access.redhat.com/solutions/2332111) to integrate the mod\_cluster with JBoss.
 
 How to Configure a Custom JAR File on WebLogic
