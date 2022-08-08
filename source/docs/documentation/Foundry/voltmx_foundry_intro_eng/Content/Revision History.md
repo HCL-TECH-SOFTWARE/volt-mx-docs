@@ -20,7 +20,6 @@ Getting Started Options
 
 *   [Manual Install Guide]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_manual_install_guide/Content/Introduction.html): Applicable to on-premises. Explains how to install Console, Identity, Integration Services, Engagement Services, and Sync Services manually for secured environments and Tomcat multi-node installation.
 
-
 <!-- *   [Release Notes]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_release_notes/Content/VoltMX_Foundry_Release_Notes.html): Provides release details and information on the new features, known issues, and limitations.
 *   [Tutorials and Videos]({{ site.baseurl }}/docs/documentation/Foundry/mf_video_tutorials/Default.html): Step-by-step instructions to set up a trial Volt MX Foundry account; how to configure Volt MX mobile services such as identity, integration, Engagement, and sync services; how to add backend services to your application; and how to invoke backend services by using Volt MX Foundry SDKs.
 *   [QuickStart Guides]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_quickstart_guide/Content/voltmx_foundry_quickstart_guide.html): Helps you create a basic set of back-end services for authenticating a user and then access a simple integration and orchestration service.
