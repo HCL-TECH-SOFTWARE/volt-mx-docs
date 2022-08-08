@@ -226,7 +226,7 @@ You can specify the read-only files from the **projectProperties.json** file. In
 
 ### Build the App's User Interface
 
-Your client app's user interface displays one or more screens, also called views. Views can be forms, templates, or masters. Every view must have at least one of these. More typically, a view requires multiple forms, templates, or masters. The process of creating views is described in the [VoltMX Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Adding_Forms_to_a_New_Application.html).
+Your client app’s user interface displays one or more screens, also called views. Views can be forms or templates. Every view must have at least one of these. More typically, a view requires multiple forms or templates. The process of creating views is described in the [VoltMX Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Adding_Forms_to_a_New_Application.html).
 
 After creating at least one screen for your app using forms, you can add widgets to the forms. Widgets provide your app with the user interface elements that it needs. These include buttons, menus, text labels, calendars, and more. They also give your app access to the functionality of the user's device through the use of a camera widget, a phone, widget, and so forth. The process of populating your app's forms with widgets is presented in the [VoltMX Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/PopulatingWidgets.html).
 
