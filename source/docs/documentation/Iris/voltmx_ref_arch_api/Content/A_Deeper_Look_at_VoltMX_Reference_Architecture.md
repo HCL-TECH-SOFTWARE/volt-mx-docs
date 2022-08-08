@@ -38,30 +38,25 @@ Your code accesses these objects by using appropriate names.
 Views
 -----
 
-Views in an app can be forms, templates, or masters. Apps under Volt MX Reference Architecture must have at least one form that functions as a View. More typically, apps have several forms, each one containing a variety of widgets for displaying information and for enabling user interaction. You create your app's forms in Volt MX Iris and add widgets as needed.
+Views in an app are provided by forms. Forms can be built using templates or components. Apps under Volt MX Reference Architecture must have at least one form that functions as a View. More typically, apps have several forms, each one containing a variety of widgets for displaying information and for enabling user interaction. You create your app’s forms in Volt MX Iris and add widgets as needed. 
 
-Templates enable you to provide your app with a uniform user interface. For instance, you can create a template for all of the buttons your app displays to make them all have the same colors, fonts, and shapes. If you make changes to the template, the changes propagate to all of the buttons that you have applied the template to.
+Templates enable you to provide your app with a uniform user interface. For instance, you can create a template for all of the buttons your app displays to make them all have the same colors, fonts, and shapes. If you make changes to the template, the changes propagate to all of the buttons that you have applied the template to. 
 
-Masters are a type of master form. In some ways they are similar to templates in that they provide a rapid way to add a standard user interface element to your app. However, masters are a forms. Therefore, you can encapsulate more into a master than you can encapsulate into a template. When building masters, you can add in forms, widgets, templates, code, and even other masters. This enables you to build highly complex standard components that you can just drop into as many projects as you want.
+Views are never global under Volt MX Reference Architecture . They can only be accessed by their Controllers. In fact, each View is stored in a member variable in the class of its Controller. 
 
-For example, you could create a master that provides all of the user interface elements and code needed to log into backend services that your company offers. Once this master is built and tested, you can easily add it to any app that you create, thus saving yourself large amounts of time.
-
-Views are never global under Volt MX Reference Architecture . They can only be accessed by their Controllers. In fact, each View is stored in a member variable in the class of its Controller.
-
-Volt MX  Iris stores the forms for your Views in the Forms folder under the respective channels that you're developing your app for. So, for instance, forms for mobile devices are stored in a Forms folder under the Mobile channel.  
+Volt MX Iris stores the forms for your Views in the Forms folder under the respective channels that you’re developing your app for. So, for instance, forms for mobile devices are stored in a Forms folder under the Mobile channel.
 
 Controllers
 -----------
 
-Every View requires an associated Controller. Therefore, your app's code can have form Controllers, master Controllers, and template Controllers in it.  They are all implemented as JavaScript modules. Controllers contain the business logic of an app. They communicate with the data Model objects to retrieve, update, and process the app's data. Controller can communicate with as many Models as needed.
+Every View requires an associated Controller. Therefore, your app’s code can have form Controllers, component Controllers, and template Controllers in it.  They are all implemented as JavaScript modules. Controllers contain the business logic of an app. They communicate with the data Model objects to retrieve, update, and process the app’s data. Controller can communicate with as many Models as needed. 
 
-When Controllers operate on an app's data, they also send the data to the View to be displayed in the corresponding form, template, or master. In this way, it updates the user interface whenever there is a change in the displayed data from the Model.
+When Controllers operate on an app’s data, they also send the data to the View to be displayed in the corresponding form, template, or component. In this way, it updates the user interface whenever there is a change in the displayed data from the Model. 
 
-In addition to form Controllers and template Controllers, VoltMXReference Architecture also provides Controller extensions. You can write Controller extensions in JavaScript modules to provide specialized or enhanced functionality for components. For example, suppose that you create a master that encapsulates all of the functionality for logging onto your backend database. Imagine that you are creating a new app and you drop the login master into your new app. Now you want to add the ability to log in using Facebook. With a Controller extension, you can add the Facebook login functionality to your login master without changing the base login master itself. You just add in some new UI elements and add the new functionality for logging in with Facebook to a Controller extension that you write. That way, none of your new code impacts the standard login master that you've created and that you use in all of your apps. Each individual app can enhance the standard login master in any way you need without you having to modify the standard login master itself.
+In addition to form Controllers and template Controllers, Volt MX Reference Architecture also provides Controller extensions. You can write Controller extensions in JavaScript modules to provide specialized or enhanced functionality for components. For example, suppose that you create a component that encapsulates all of the functionality for logging onto your backend database. Imagine that you are creating a new app and you drop the login component into your new app. Now you want to add the ability to log in using Facebook. With a Controller extension, you can add the Facebook login functionality to your login componen without changing the base login componen itself. You just add in some new UI elements and add the new functionality for logging in with Facebook to a Controller extension that you write. That way, none of your new code impacts the standard login component that you’ve created and that you use in all of your apps. Each individual app can enhance the standard login component in any way you need without you having to modify the standard login component itself. 
 
-Controllers for Views are typically stored together with their forms, as the following figure shows.
-
-However, shared Controllers are stored in the `Shared` folder, which appears after you create a shared Controller. When it is empty, the `Shared` folder is not shown.
+ (There is no figure in the doc so hat line has to go) 
+ (This doesn't exist in 8.4 or 9, it's a Look properties setting, so this has to go) 
 
 Models
 ------

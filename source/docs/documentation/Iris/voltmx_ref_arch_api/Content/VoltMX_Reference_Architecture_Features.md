@@ -35,9 +35,9 @@ The Controller responds to user actions that it receives from its associated Vie
 
 All Controllers have a member variable named `View` that contains the View for that specific Controller. Views are only accessible from within their corresponding Controllers by using the statement `this.View`.
 
-Each form, template, or master in an app has an associated Controller and only the individual Controllers can directly access their own Views. However, when needed, Controllers can invoke their parent Controller's methods by calling the `executeOnParent` function. This provides both a clean separation of the layers in the hierarchy of Views and a solid encapsulation of each View's functionality.
+Each form, template, or component in an app has an associated Controller and only the individual Controllers can directly access their own Views. However, when needed, Controllers can invoke their parent Controller’s methods by calling the executeOnParent function. This provides both a clean separation of the layers in the hierarchy of Views and a solid encapsulation of each View’s functionality. 
 
-> **_Important:_**  Masters is a feature that was deprecated in 7.x and removed in 9.x
+With all references to masters removed from the guide, there is no need for this note.
 
 Controllers can also retrieve information from Models, display it in Views, and enable the user interact with it. Based on the user's input, the Controller can send notifications to the Model, which saves the changes onto the data source.
 
@@ -169,7 +169,7 @@ Volt MX  Reference Architecture also supports module dependencies. So if your ap
 Define Namespaces in Apps
 -------------------------
 
-In addition, Volt MX Reference Architecture lets you define namspaces in your apps for the masters that you create. Each fragment inside the namspace's name is a folder name. For example, suppose you create the namespace mycompany.ui in your app. Further imagine that the mycompany.ui namespace contains a file called `ChartControll.js`. The path to the file would then be `mycompany\ui\ChartControl.js`. The name for this file in RequireJS notation would be `"mycompany/ui/chartcontrol"`. To load this file, your app would need code similar to the following example.
+In addition, Volt MX Reference Architecture lets you define namspaces in your apps for the component that you create. Each fragment inside the namspace’s name is a folder name. For example, suppose you create the namespace mycompany.ui in your app. Further imagine that the mycompany.ui namespace contains a file called `ChartControll.js`. The path to the file would then be `mycompany\ui\ChartControl.js`. The name for this file in RequireJS notation would be `"mycompany/ui/chartcontrol"`. To load this file, your app would need code similar to the following example.
 
 {% highlight voltMx %}require(
     [“mycompany/ui/chartcontrol”], 
