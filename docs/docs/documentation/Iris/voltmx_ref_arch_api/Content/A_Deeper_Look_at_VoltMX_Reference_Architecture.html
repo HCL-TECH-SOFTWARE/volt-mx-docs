@@ -246,7 +246,7 @@
 
 <p>In Volt MX Reference Architecture , the actual implementation of the MVC architecture generally uses forms, with their widgets, as the View. The Controller and the Model are JavaScript code modules that implement their respective functionality.</p>
 
-<p>Both the Controller and the Model are JavaScript modules. Volt MX Iris has a default naming scheme for your app’s objects and files. So if you create a form in Volt MX Iris and set its name to <code class="language-plaintext highlighter-rouge">frmLogin</code>, then the Controller for that form is called <code class="language-plaintext highlighter-rouge">formLoginController</code> and it will be stored in a file called <code class="language-plaintext highlighter-rouge">frmLoginController.js</code>. Likewise, the file for the Model is named f<code class="language-plaintext highlighter-rouge">rmLoginModel.js</code>. You can change these names in Volt MX Iris if you want to.</p>
+<p>Both the Controller and the Model are JavaScript modules. Volt MX Iris has a default naming scheme for your app’s objects and files. So if you create a form in Volt MX Iris and set its name to <code class="language-plaintext highlighter-rouge">frmLogin</code>, then the Controller for that form is called <code class="language-plaintext highlighter-rouge">formLoginController</code> and it will be stored in a file called <code class="language-plaintext highlighter-rouge">frmLoginController.js</code>. Likewise, the file for the Model is named <code class="language-plaintext highlighter-rouge">frmLoginModel.js</code>. You can change these names in Volt MX Iris if you want to.</p>
 
 <p>The default naming scheme is important to keep in mind when you’re using the <a href="References.html">References</a> section of this SDK’s documentation. For instance, the <strong>References</strong> section contains documentation for the following objects.</p>
 
@@ -275,17 +275,13 @@
       </h2>
     
 
-<p>Views in an app can be forms, templates, or masters. Apps under Volt MX Reference Architecture must have at least one form that functions as a View. More typically, apps have several forms, each one containing a variety of widgets for displaying information and for enabling user interaction. You create your app’s forms in Volt MX Iris and add widgets as needed.</p>
+<p>Views in an app are provided by forms. Forms can be built using templates or components. Apps under Volt MX Reference Architecture must have at least one form that functions as a View. More typically, apps have several forms, each one containing a variety of widgets for displaying information and for enabling user interaction. You create your app’s forms in Volt MX Iris and add widgets as needed.</p>
 
 <p>Templates enable you to provide your app with a uniform user interface. For instance, you can create a template for all of the buttons your app displays to make them all have the same colors, fonts, and shapes. If you make changes to the template, the changes propagate to all of the buttons that you have applied the template to.</p>
 
-<p>Masters are a type of master form. In some ways they are similar to templates in that they provide a rapid way to add a standard user interface element to your app. However, masters are a forms. Therefore, you can encapsulate more into a master than you can encapsulate into a template. When building masters, you can add in forms, widgets, templates, code, and even other masters. This enables you to build highly complex standard components that you can just drop into as many projects as you want.</p>
-
-<p>For example, you could create a master that provides all of the user interface elements and code needed to log into backend services that your company offers. Once this master is built and tested, you can easily add it to any app that you create, thus saving yourself large amounts of time.</p>
-
 <p>Views are never global under Volt MX Reference Architecture . They can only be accessed by their Controllers. In fact, each View is stored in a member variable in the class of its Controller.</p>
 
-<p>Volt MX  Iris stores the forms for your Views in the Forms folder under the respective channels that you’re developing your app for. So, for instance, forms for mobile devices are stored in a Forms folder under the Mobile channel.</p>
+<p>Volt MX Iris stores the forms for your Views in the Forms folder under the respective channels that you’re developing your app for. So, for instance, forms for mobile devices are stored in a Forms folder under the Mobile channel.</p>
       <h2 id="controllers">
         
         
@@ -295,15 +291,14 @@
       </h2>
     
 
-<p>Every View requires an associated Controller. Therefore, your app’s code can have form Controllers, master Controllers, and template Controllers in it.  They are all implemented as JavaScript modules. Controllers contain the business logic of an app. They communicate with the data Model objects to retrieve, update, and process the app’s data. Controller can communicate with as many Models as needed.</p>
+<p>Every View requires an associated Controller. Therefore, your app’s code can have form Controllers, component Controllers, and template Controllers in it.  They are all implemented as JavaScript modules. Controllers contain the business logic of an app. They communicate with the data Model objects to retrieve, update, and process the app’s data. Controller can communicate with as many Models as needed.</p>
 
-<p>When Controllers operate on an app’s data, they also send the data to the View to be displayed in the corresponding form, template, or master. In this way, it updates the user interface whenever there is a change in the displayed data from the Model.</p>
+<p>When Controllers operate on an app’s data, they also send the data to the View to be displayed in the corresponding form, template, or component. In this way, it updates the user interface whenever there is a change in the displayed data from the Model.</p>
 
-<p>In addition to form Controllers and template Controllers, VoltMXReference Architecture also provides Controller extensions. You can write Controller extensions in JavaScript modules to provide specialized or enhanced functionality for components. For example, suppose that you create a master that encapsulates all of the functionality for logging onto your backend database. Imagine that you are creating a new app and you drop the login master into your new app. Now you want to add the ability to log in using Facebook. With a Controller extension, you can add the Facebook login functionality to your login master without changing the base login master itself. You just add in some new UI elements and add the new functionality for logging in with Facebook to a Controller extension that you write. That way, none of your new code impacts the standard login master that you’ve created and that you use in all of your apps. Each individual app can enhance the standard login master in any way you need without you having to modify the standard login master itself.</p>
+<p>In addition to form Controllers and template Controllers, Volt MX Reference Architecture also provides Controller extensions. You can write Controller extensions in JavaScript modules to provide specialized or enhanced functionality for components. For example, suppose that you create a component that encapsulates all of the functionality for logging onto your backend database. Imagine that you are creating a new app and you drop the login component into your new app. Now you want to add the ability to log in using Facebook. With a Controller extension, you can add the Facebook login functionality to your login componen without changing the base login componen itself. You just add in some new UI elements and add the new functionality for logging in with Facebook to a Controller extension that you write. That way, none of your new code impacts the standard login component that you’ve created and that you use in all of your apps. Each individual app can enhance the standard login component in any way you need without you having to modify the standard login component itself.</p>
 
-<p>Controllers for Views are typically stored together with their forms, as the following figure shows.</p>
-
-<p>However, shared Controllers are stored in the <code class="language-plaintext highlighter-rouge">Shared</code> folder, which appears after you create a shared Controller. When it is empty, the <code class="language-plaintext highlighter-rouge">Shared</code> folder is not shown.</p>
+<p>(There is no figure in the doc so hat line has to go) 
+ (This doesn’t exist in 8.4 or 9, it’s a Look properties setting, so this has to go)</p>
       <h2 id="models">
         
         
@@ -317,7 +312,7 @@
 
 <p>Models are optional in your apps. Simple apps might not use them. For example, a calculator app would not need Models because the data it operates on is probably nothing more than a few variables containing some numbers.</p>
 
-<p>Most enterprise-level apps use Models to interface to backend data sources. Typically, developers who create their apps with Volt MX Iris will also use <a href="http://community.hclvoltmx.com/documentation/integrate-data">VoltMX Foundry to create their server-side apps</a> that provide access to their backend data sources. This is not required, it’s just the easiest way to build your app. If you decide to use Volt MX Foundry for your backend app, you can get it to generate your Models for you. More specifically, you create your backend app by building object services with Volt MX Foundry . Utilizing the Volt MX Foundry console, you can then generate Models, called object Models, that provide your front-end Volt MX Iris app with access to your backend app’s object services. After you generate your object Models for all of your backend data sources, Volt MX Iris downloads them into your front-end Volt MX Reference Architecture project that you are building in Volt MX Iris on your local development PC . The object Models provide your front-end app with code that enables the app to retrieve data from the backend object services, update, create, or delete the data, and save the changes to the backend object services.</p>
+<p>Most enterprise-level apps use Models to interface to backend data sources. Typically, developers who create their apps with Volt MX Iris will also use VoltMX Foundry to create their server-side apps that provide access to their backend data sources. This is not required, it’s just the easiest way to build your app. If you decide to use Volt MX Foundry for your backend app, you can get it to generate your Models for you. More specifically, you create your backend app by building object services with Volt MX Foundry . Utilizing the Volt MX Foundry console, you can then generate Models, called object Models, that provide your front-end Volt MX Iris app with access to your backend app’s object services. After you generate your object Models for all of your backend data sources, Volt MX Iris downloads them into your front-end Volt MX Reference Architecture project that you are building in Volt MX Iris on your local development PC . The object Models provide your front-end app with code that enables the app to retrieve data from the backend object services, update, create, or delete the data, and save the changes to the backend object services.</p>
 
 <p>One of the many advantages of using Models to represent your data sources is that designers and developers working on the front-end app don’t have to wait until the backend Volt MX Foundry app is complete before they start their work. Developers on the front-end app can build objects that provide <em>mock services</em> to the app. That is, developers can create Models to use in the front-end app that simulate the interaction that the front-end Volt MX Reference Architecture app will have with the backend Volt MX Foundry app when the backend app is complete. Using these mock services, both the front-end app and the backend app can be under development at the same time.</p>
 
@@ -618,7 +613,7 @@
  </li>
   <li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24">
           <use xlink:href="#svg-arrow-right"></use>
-          </svg></a><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/voltmx_ref_arch_api___l" class="nav-list-link">Create an App with Volt MX Reference Architecture</a>
+          </svg></a><a href="https://hcl-tech-software.github.io/volt-mx-docs/docs/documentation/Iris/voltmx_ref_arch_api/Content/Create_an_App_with_VoltMX_Reference_Architecture.html#build-your-front-end-client-app" class="nav-list-link">Create an App with Volt MX Reference Architecture</a>
 
   <ul class="nav-list "><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24">
       <use xlink:href="#svg-arrow-right"></use>
