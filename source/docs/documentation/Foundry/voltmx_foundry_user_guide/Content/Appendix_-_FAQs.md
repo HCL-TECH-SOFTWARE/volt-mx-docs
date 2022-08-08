@@ -65,7 +65,7 @@ Appendix - Frequently Asked Questions (FAQs)
     
     You can resolve this issue by any of the following two ways:
     
-    *   Update the mysql jar in WebLogic itself. For more details, refer to [https://docs.oracle.com/middleware/1212/wls/JDBCA/third\_party\_drivers.html#JDBCA233](https://docs.oracle.com/middleware/1212/wls/JDBCA/third_party_drivers.html#JDBCA233)
+    *   Update the mysql jar in WebLogic itself. For more details, refer to [https://docs.oracle.com/middleware/1212/wls/JDBCA/third\_party\_drivers.html#JDBCA233](https://docs.oracle.com/middleware/1212/wls/JDBCA/third_party_drivers.htm#JDBCA233)
     
                        Or
     

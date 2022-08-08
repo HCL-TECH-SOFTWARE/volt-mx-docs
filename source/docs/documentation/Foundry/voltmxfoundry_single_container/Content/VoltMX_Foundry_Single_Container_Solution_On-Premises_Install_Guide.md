@@ -25,4 +25,4 @@ Getting Started Options
 *   [VoltMX Downloads](https://community.hclvoltmx.com/downloads)
 *   [VoltMX Foundry User Guide]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Introduction.html)
 *   [Iris User Guide]({{ site.baseurl }}/docs/documentation/Iris/iris_user_guide/Content/Introduction.html)
-*   [Sample Apps](https://github.com/voltmx/)
+*   [Sample Apps](https://github.com/HCL-TECH-SOFTWARE/volt-mx-samples)

@@ -105,7 +105,7 @@ options{
           sh "git status"
           sh "git checkout -b feature/HPHX"
           sh "git push volt-mx-docs feature/HPHX"
-          sh "gh pr create -t 'HPHX-14010,14011,16635: Merging 9.2 version_next doc changes' -b 'HPHX-14010,14011,16635: Merging 9.2 version_next doc changes'"
+          sh "gh pr create -t 'HPHX-19240,19241,19350: Merging broken url fixes' -b 'HPHX-19240,19241,19350: Merging broken url fixes'"
           sh "gh pr status"
           sh "gh pr merge --merge"
           sh "git checkout master"

@@ -14,7 +14,7 @@ Volt MX Foundry Container Cluster Solution On-Premises setup occurs with minimal
 - **Docker** - To package different components as portable container images (with all the required binaries and libs).
 - **Kubernetes** - To orchestrate and maintain all the running containers. It will also have features like auto-scaling, secrets, deployment upgrades, and rollbacks.
 
-You should use this installation if you plan to use docker to setup your on-premise production grade installation of Volt MX Foundry. If you want to setup a developer instance, please refer to the install instructions at [Single container setup (On-Prem)]({{ site.baseurl }}/docs/documentation/Foundry/voltmxfoundry*single_container/Content/VoltMX_Foundry_Single_Container_Solution_On-Prem*.html).
+You should use this installation if you plan to use docker to setup your on-premise production grade installation of Volt MX Foundry. If you want to setup a developer instance, please refer to the install instructions at [Single container setup (On-Prem)]({{ site.baseurl }}/docs/documentation/Foundry/voltmxfoundry_single_container/Content/VoltMX_Foundry_Single_Container_Solution_On-Prem_.html).
 
 ## Salient Features
 

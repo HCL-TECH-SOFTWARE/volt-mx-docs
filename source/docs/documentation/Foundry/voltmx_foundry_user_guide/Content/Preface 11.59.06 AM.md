@@ -77,7 +77,7 @@ The following formatting conventions are used throughout the document:
 | Monospace | &#8226; User input text, system prompts, and responses <br><br> &#8226; File path <br><br> &#8226; Commands Program code <br><br> &#8226; File names |
 | _Italic_ | &#8226; Emphasis <br><br> &#8226; Names of books and documents <br><br> &#8226; New terminology |
 | **Bold** | &#8226; Windows <br><br> &#8226; Menus <br><br> &#8226; Buttons <br><br> &#8226; Icons <br><br>&#8226; Fields <br><br> &#8226; Tabs <br><br> &#8226; Folders |
-| [URL](http://a/) | Active link to a URL. |
+| [URL](##) | Active link to a URL. |
 | **_Note:_**  | Provides helpful hints or additional information. |
 | **_Important:_**   | Highlights actions or information that might cause problems to systems or data |
 

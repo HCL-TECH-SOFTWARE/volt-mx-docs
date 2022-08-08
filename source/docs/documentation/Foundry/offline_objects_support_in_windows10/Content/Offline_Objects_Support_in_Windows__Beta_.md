@@ -63,7 +63,7 @@ Prerequisites
 | RAM (Min) | 8 GB or more for development |
 | Hard Disk (Min) | 40 GB or more |
 
-You can configure applications data model using Offline Enabled Object Services through Volt MX Foundry. For detailed information, refer [Configure Offline Objects Services Server]({{ site.baseurl }}/docs/documentation/Foundry/offline_objects_gettingstarted/Content/offline_objects_server.html).
+You can configure applications data model using Offline Enabled Object Services through Volt MX Foundry. For detailed information, refer [Configure Offline Objects Services Server]({{ site.baseurl}}docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Offline_Enable_Objectservices.html).
 
 Enabling Offline Objects in Volt MX Iris
 -------------------------------------------
