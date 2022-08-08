@@ -193,8 +193,8 @@ You must use this API to register the application and the device for Push Notifi
 
 * * *
 
-voltmx.push.setCallbacks
-----------------------
+<h2 id=cb1>voltmx.push.setCallbacks</h2>
+
 
 When an application on a device registers or deregisters for Push Notifications, or if the device receives a notification, the device executes the function of your choice.  
 You can specify the functions to be executed for Push Notification in an object of the voltmx.push.setCallbacks API.

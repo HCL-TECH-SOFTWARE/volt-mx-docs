@@ -80,7 +80,7 @@ To configure your Volt MX SAP Gateway, follow these steps:
             
         2.  In the **Rate Limit Per IP** text box, enter a required value. With this value, you can limit the number of IP address requests configured in your Volt MX Foundry console in terms of Per IP Rate Limit.
             
-            To override throttling, refer to [Override API Throttling Configuration](../../../MBaasDocs/ConsoleAndID/Foundry8.0ConsoleAndIDSrvUG/Content/API_Throttling_Override.html#OverrideAPIThrottling).
+            To override throttling, refer to [Override API Throttling Configuration]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/API_Throttling_Override.html).
             
             > **_Note:_** In case of On-premises, the number of nodes in a clustered environment is set by configuring the `VOLTMX_SERVER_NUMBER_OF_NODES` property in the Admin Console. This property indicates the number of nodes configured in the cluster. The default value is 1.  
             Refer to [The Runtime Configuration tab on the Settings screen of App Services]({{ site.baseurl }}/docs/documentation/Foundry/vmf_integrationservice_admin_console_userguide/Content/Runtime_Configuration.html).  

@@ -106,7 +106,7 @@ Command Line Installer
 
 From Volt MX Foundry V9 SP1, you can install Foundry via the command line installer on Liberty v20.0.0.4.
 
-For more information about this, click [here]({{ site.baseurl }}/docs/documentation/Foundry/voltmxfoundry_supported_devices_os_browsers/Content/FoundryV9SP1.html).
+For more information about this, click [here]({{ site.baseurl}}/docs/documentation/Foundry/voltmx_foundry_manual_install_guide/Content/Installing_Foundry_WebSphereLiberty.html).
 
 HCL App Factory
 -------------------

@@ -6,7 +6,7 @@ category: "offline_objects_gettingstarted"
 Configuring Volt MX Foundry Server
 =================================
 
-Offline Objects supports the following modules:
+Offline Objects supports the following modules: 
 
 *   **Service Driven Objects (SDO)**: Object services can interact with the backend through service-driven objects derived from Integration services, which wraps the backend end-points such as REST API.
 *   **Line-of-Business (LOB) Adapters**: You can use Object Services to create data models from line-of-business (LOB) objects. You can access LOB objects by using Volt MX Foundry business adapters such as SAP, Salesforce, and RDBMS. These business adapters enable you to visually discover and select the entities exposed by the LOB system.
@@ -21,14 +21,12 @@ Service Driven Objects
 3.  Under the Integration tab, either create a new Integration service or use an existing one. For more information about creating an integration service, click [here]({{ site.baseurl }}/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/ConfigureIntegrationService.html).
 4.  Under the Objects tab, click **CONFIGURE NEW**. A New Object Service page appears.
 5.  Type a name for your object service and select **Integration & Orchestration Services** from the Endpoint Type list.
-<!---
-6.  Select the Offline enabled check box. Upon selecting this check box, options to set [Conflict Resolution Policy](Conflict Resolution.html) and [Enable Upload Cache](Upload Cache.html) are enabled.
--->
-6.  Select the Offline enabled check box. Upon selecting this check box, options to set **Conflict Resolution Policy** and **Enable Upload Cache** are enabled.
+
+6.  Select the Offline enabled check box. Upon selecting this check box, options to set **[Conflict Resolution Policy]**({{ site.baseurl }}/docs/documentation/Foundry/offline_objects_user_guide/Content/Conflict_Resolution.html) and **[Enable Upload Cache]**({{ site.baseurl}}docs/documentation/Foundry/offline_objects_user_guide/Content/Upload_Cache.html) are enabled.
     
     ![](Resources/Images/SDO_661x410.png)
     
-7.  Configure the [Conflict Resolution Policy](Conflict Resolution.html) and Enable Upload Cache features as required and save the service.
+7.  Configure the [Conflict Resolution Policy]({{ site.baseurl }}/docs/documentation/Foundry/offline_objects_user_guide/Content/Conflict_Resolution.html) and [Enable Upload Cache]({{ site.baseurl}}docs/documentation/Foundry/offline_objects_user_guide/Content/Upload_Cache.html) features as required and save the service.
 8.  To link your integration service to your object service, click **Generate** under the Data Models’ section. The **Generate App Data Model from Existing Services** tab appears.
     
     ![](Resources/Images/DataModel_640x220.png)
@@ -118,7 +116,7 @@ Line-of-Business Adapters
 2.  Create a new application by clicking **ADD NEW** in the applications' page. A new app is created, and the **Configure Services** page opens, by default.
 3.  Under the Objects tab, click **CONFIGURE NEW**. A New Object Service page appears.
 4.  Type a name for your object service and select the required business adapter from the Endpoint Type list.
-5.  Select the Offline enabled check box. Upon selecting this check box, options to set [Conflict Resolution Policy](Conflict Resolution.html) and [Enable Upload Cache](Upload Cache.html) are enabled. Configure these fields as required.
+5.  Select the Offline enabled check box. Upon selecting this check box, options to set [Conflict Resolution Policy]({{ site.baseurl }}/docs/documentation/Foundry/offline_objects_user_guide/Content/Conflict_Resolution.html) and [Enable Upload Cache]({{ site.baseurl}}docs/documentation/Foundry/offline_objects_user_guide/Content/Upload_Cache.html) are enabled. Configure these fields as required.
     
     ![](Resources/Images/Object_Services_645x369.png)
     

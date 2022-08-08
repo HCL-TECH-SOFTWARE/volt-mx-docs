@@ -59,7 +59,8 @@ To set Native app properties, do the following:
         *   **Key Password** - Use this option to enter the password for the key.
         *   **Store File** - Use this option to locate and configure the store file.
         *   **Store Password** - Use this option to enter the password for the store.
-    7.  **Support x86 Devices** - Select this option to support any Android-x86 devices. For more information on devices, see the [Porting Android to x86 Hardware List](http://www.android-x86.org/hardware-list).
+    <!-- 7.  **Support x86 Devices** - Select this option to support any Android-x86 devices. For more information on devices, see the [Porting Android to x86 Hardware List](http://www.android-x86.org/hardware-list). -->
+    7.  **Support x86 Devices** - Select this option to support any Android-x86 devices. For more information on devices, see the [Porting Android to x86 Hardware List](https://www.android-x86.org/).
     8.  **Support 64-bit Devices** - Select this option to build Android APK with 64-bit support. If Support 64 bit option is not selected by a developer, 32 bit libraries/.so files (armeabi-v7a and x86) are packed by default. Once you select this option, only 64 bit .so files (arm64-v8a and x86\_64 ) are packed with the application leaving out 32 bit .so files(armeabi-v7a and x86).  
           
         Image manipulation APIs are not supported.  

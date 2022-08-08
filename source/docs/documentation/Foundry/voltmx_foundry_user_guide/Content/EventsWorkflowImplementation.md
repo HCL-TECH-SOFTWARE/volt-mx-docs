@@ -63,7 +63,9 @@ Loan Application Event Triggered Workflow
 
 To create a workflow for the steps that were discussed in this example, you must have the necessary Integration Services configured in your Volt MX Foundry console.
 
-[Click here](https://docs.voltmx.com/9_x_PDFs/voltmxfoundry/EventTriggeredWorkflow(v1.0).zip) to download the EventTriggeredWorkflow sample app required to create the workflow and import the same into your Volt MX Foundry console.
+<!-- [Click here](https://docs.voltmx.com/9_x_PDFs/voltmxfoundry/EventTriggeredWorkflow(v1.0).zip) to download the EventTriggeredWorkflow sample app required to create the workflow and import the same into your Volt MX Foundry console.  -->
+
+[Click here](https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/foundry/zip/user_guide/EventTriggeredWorkflow(v1.0).zip) to download the EventTriggeredWorkflow sample app required to create the workflow and import the same into your Volt MX Foundry console. 
 
 ### Create Workflow
 

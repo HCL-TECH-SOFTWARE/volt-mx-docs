@@ -49,7 +49,7 @@ The following are the formatting conventions used throughout the document:
 | Monospace | User input text, system prompts, and responses File path Commands Program code File names. |
 | _Italic_ | Emphasis Names of books and documents New terminology. |
 | **Bold** | Windows Menus Buttons Icons Fields Tabs Folders. |
-| [URL](http://a/) | An active link to an URL. |
+| [URL](##) | An active link to an URL. |
 | > **_Note:_**   | Provides helpful hints or additional information. |
 | > **_Important:_**   | Highlights actions or information that might cause problems to systems or data. |
 
