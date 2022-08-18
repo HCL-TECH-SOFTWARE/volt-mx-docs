@@ -5,12 +5,15 @@ has_children: false
 order: 1
 ---
 
+
 # Volt MX Release Notes
 
 This topic lists new features, enhancements, and changes in Volt MX.
 For detailed information about fixes and known issues in Volt MX, please see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
 
 [Volt Iris](#volt-iris)
+
+- [V9 Servicepack 2 Fixpack 47](#v9-servicepack-2-fixpack-47)
 - [V9 Servicepack 2 Fixpack 46](#v9-servicepack-2-fixpack-46)
 - [V9 Servicepack 2 Fixpack 45](#v9-servicepack-2-fixpack-45)
 - [V9 Servicepack 2 Fixpack 38](#v9-servicepack-2-fixpack-38)
@@ -18,6 +21,7 @@ For detailed information about fixes and known issues in Volt MX, please see the
 - [Earlier Iris releases](#earlier-iris-releases)
 
 [Volt Foundry](#volt-foundry)
+
 - [V9 Servicepack 2 Fixpack 1 Hotfix 10](#v9-servicepack-2-fixpack-1-hotfix-10)
 - [V9 Servicepack 2 Fixpack 1 Hotfix 9](#v9-servicepack-2-fixpack-1-hotfix-9)
 - [V9 Servicepack 2 Fixpack 1 Hotfix 8](#v9-servicepack-2-fixpack-1-hotfix-8)
@@ -26,6 +30,17 @@ For detailed information about fixes and known issues in Volt MX, please see the
 - [Earlier Foundry releases](#earlier-foundry-releases)
 
 ## Volt Iris
+
+### V9 Servicepack 2 Fixpack 47
+
+#### SDK Support
+
+**Summary** : In an app that uses Offline Objects, when a user invokes the object-level sync by passing the uploadBatchSize in the options, the sync operation fails if the number of records is a multiple of the configured batch size.
+
+**RCA & Solution** : Product Fix - Defect Fix - Fixed the issue in this build.
+
+ **Impacted Areas** : Offline Objects
+
 
 ### V9 Servicepack 2 Fixpack 46
 
@@ -36,7 +51,7 @@ Starting with Mac OS Monterey version 12.3, Apple has removed Python 2.7 as bein
 To enable customers to download Python version 2.7 and make use of the same for iOS application builds in Iris, a new preference is available in Iris preferences to
 set the path to Python installation. Details of the preference are as follows.
 
-- [Setting the Python Installation Path](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_starter_install_mac/Content/Preferences.html).
+- [Setting the Python Installation Path](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_starter_install_mac/Content/Preferences.md).
 
 For detailed information about fixes and known issues in this release, please see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
 
@@ -99,15 +114,15 @@ There are no new features or enhancements in this release. The purpose of this f
 
 | **Date** | **Description of Modifications/Release** |
 | --- | --- |
-| 10/29/2021 | Document updated for [V9 SP2 FP 5](Iris/iris_rel_notes/Content/V9SP2FP5.html) |
-| 10/13/2021 | Document updated for [V9 SP2 FP 4](Iris/iris_rel_notes/Content/V9SP2FP4.html) |
-| 08/18/2021 | Document updated for [V9.2](Iris/iris_rel_notes/Content/V92.html). |
-| 12/21/2020 | Document updated for the V9 Service Pack 2 release with [New Features](Iris/iris_rel_notes/Content/V9SP2.html#new-features-and-enhancements-in-v9-service-pack-2) and [Known Issues](Iris/iris_rel_notes/Content/V9SP2_Known_Issues.html#top). |
+| 10/29/2021 | Document updated for [V9 SP2 FP 5](Iris/iris_rel_notes/Content/V9SP2FP5.md) |
+| 10/13/2021 | Document updated for [V9 SP2 FP 4](Iris/iris_rel_notes/Content/V9SP2FP4.md) |
+| 08/18/2021 | Document updated for [V9.2](Iris/iris_rel_notes/Content/V92.md). |
+| 12/21/2020 | Document updated for the V9 Service Pack 2 release with [New Features](Iris/iris_rel_notes/Content/V9SP2.md#new-features-and-enhancements-in-v9-service-pack-2) and [Known Issues](Iris/iris_rel_notes/Content/V9SP2_Known_Issues.md#top). |
 
 <!--
-| 10/28/2020 | 1.2 | Document updated for the release with [V9 SP1 FP 10](Iris/iris_rel_notes/Content/V9SP1.html#v9sp1-fixpack-10-features) release. |
-| 08/24/2020 | 1.1 | Document updated for the V9 Service Pack 1 release with [New Features](Iris/iris_rel_notes/Content/V9SP1.html#new-features-and-enhancements-in-v9-service-pack-1) and [Known Issues](Iris/iris_rel_notes/Content/V9-SP1_Known_Issues.html#top). |
-| 04/06/2020 | 1.0 | Document updated for the V9 release with [New Features](Iris/iris_rel_notes/Content/V9.html#new-features-and-enhancements-in-v9) and [Known Issues](Iris/iris_rel_notes/Content/V9_Known_Issues.html#limitations-and-known-issues-in-v9). |
+| 10/28/2020 | 1.2 | Document updated for the release with [V9 SP1 FP 10](Iris/iris_rel_notes/Content/V9SP1.md#v9sp1-fixpack-10-features) release. |
+| 08/24/2020 | 1.1 | Document updated for the V9 Service Pack 1 release with [New Features](Iris/iris_rel_notes/Content/V9SP1.md#new-features-and-enhancements-in-v9-service-pack-1) and [Known Issues](Iris/iris_rel_notes/Content/V9-SP1_Known_Issues.md#top). |
+| 04/06/2020 | 1.0 | Document updated for the V9 release with [New Features](Iris/iris_rel_notes/Content/V9.md#new-features-and-enhancements-in-v9) and [Known Issues](Iris/iris_rel_notes/Content/V9_Known_Issues.md#limitations-and-known-issues-in-v9). |
 
 FOUNDRY ENHANCEMENTS
 The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to 9.0.62 to fix spring4shell vulnerabilities and upgraded log4j version to 2.17.1 to fix security vulnerabilities.
@@ -179,23 +194,23 @@ Single Container Solution
 
 | **Date** | **Description of Releases and Updates** |
 | --- | --- |
-| 10/29/2021 | Document published for [Volt Foundry V9 SP2 HF2](Foundry/voltmx_foundry_release_notes/Content/V9SP2HF2.html). |
-| 02/03/2021 | Document published for [Volt Foundry Fix Pack V9.2.1](Foundry/voltmx_foundry_release_notes/Content/V9.2.1_New_Features.html). |
-| 08/18/2021 | Document published for [Volt Foundry V9.2](Foundry/voltmx_foundry_release_notes/Content/V92.html). |
+| 10/29/2021 | Document published for [Volt Foundry V9 SP2 HF2](Foundry/voltmx_foundry_release_notes/Content/V9SP2HF2.md). |
+| 02/03/2021 | Document published for [Volt Foundry Fix Pack V9.2.1](Foundry/voltmx_foundry_release_notes/Content/V9.2.1_New_Features.md). |
+| 08/18/2021 | Document published for [Volt Foundry V9.2](Foundry/voltmx_foundry_release_notes/Content/V92.md). |
 
-<!--| 12/18/2020 | 2.6 | Document published for [VoltMX Foundry Identity Service Hotfix V9.1.0.4](Foundry/voltmx_foundry_release_notes/Content/IntegrationHotFix9.1.0.4.html). |
-| 10/17/2020 | 2.5 | Document published for [VoltMX Foundry Identity Service Hotfix V9.1.0.3](Foundry/voltmx_foundry_release_notes/Content/IdentityHotFix9.1.0.3.html). |
-| 11/10/2020 | 2.4 | Document published for [VoltMX Foundry Integration Service Hotfix V9.0.1.1](Foundry/voltmx_foundry_release_notes/Content/IntegrationHotFix9.0.1.1.html). |
-| 11/09/2020 | 2.3 | Document published for the following releases: <br><br>[VoltMX Foundry Integration Service Hotfix V9.1.0.3](Foundry/voltmx_foundry_release_notes/Content/IntegrationHotFix9.1.0.3.html) <br><br>[VoltMX Foundry Integration Service Hotfix V9.0.0.6](Foundry/voltmx_foundry_release_notes/Content/IntegrationHotFix9.0.0.6.html) |
-| 10/23/2020 | 2.2 | Document published for [VoltMX Foundry Installer Hotfix 9.1.0.3 (On-Premises)](Foundry/voltmx_foundry_release_notes/Content/InstallerHotFix9.1.0.3.html). |
-| 09/22/2020 | 2.1 | Document published for [](V9SP1_Main.html)[VoltMX Foundry Integration Service Hotfix V9.1.0.1](Foundry/voltmx_foundry_release_notes/Content/IntegrationHotFix9.1.0.1.html). |
-| 08/24/2020 | 2.0 | Document published for [VoltMX Foundry V9 Service Pack 1](Foundry/voltmx_foundry_release_notes/Content/V9SP1_Main.html). |
-| 07/13/2020 | 1.6 | Document published for [VoltMX Foundry Installer Fix Pack 9.0.1](Foundry/voltmx_foundry_release_notes/Content/V9.0.1_New_Features.html). |
-| 06/22/2020 | 1.5 | Document published for [VoltMX Foundry Integration Service Hotfix V9.0.0.5](Foundry/voltmx_foundry_release_notes/Content/IntegrationHotFix9.0.0.5.html). |
-| 05/21/2020 | 1.4 | Document published for [VoltMX Foundry Installer Hotfix 9.0.0.2 (On-Premises)](Foundry/voltmx_foundry_release_notes/Content/InstallerHotFix9.0.0.2.html). |
-| 05/07/2020 | 1.3 | Document published for [VoltMX Foundry Integration Service Hotfic V9.0.0.4](Foundry/voltmx_foundry_release_notes/Content/IntegrationHotFix9.0.0.4.html). |
-| 04/27/2020 | 1.2 | Document published to append [VoltMX Foundry V9 Known Issues on Console](Foundry/voltmx_foundry_release_notes/Content/V9_Knownissues.html#console). |
-| 04/20/2020 | 1.1 | Document published for [VoltMX Foundry V9.0.0.1 on MS Azure](Foundry/voltmx_foundry_release_notes/Content/Azure9.0.0.1GA.html) release. |
-| 04/06/2020 | 1.0 | Document published for [V9 GA](Foundry/voltmx_foundry_release_notes/Content/V9_Main.html) release. |
+<!--| 12/18/2020 | 2.6 | Document published for [VoltMX Foundry Identity Service Hotfix V9.1.0.4](Foundry/voltmx_foundry_release_notes/Content/IntegrationHotFix9.1.0.4.md). |
+| 10/17/2020 | 2.5 | Document published for [VoltMX Foundry Identity Service Hotfix V9.1.0.3](Foundry/voltmx_foundry_release_notes/Content/IdentityHotFix9.1.0.3.md). |
+| 11/10/2020 | 2.4 | Document published for [VoltMX Foundry Integration Service Hotfix V9.0.1.1](Foundry/voltmx_foundry_release_notes/Content/IntegrationHotFix9.0.1.1.md). |
+| 11/09/2020 | 2.3 | Document published for the following releases: <br><br>[VoltMX Foundry Integration Service Hotfix V9.1.0.3](Foundry/voltmx_foundry_release_notes/Content/IntegrationHotFix9.1.0.3.md) <br><br>[VoltMX Foundry Integration Service Hotfix V9.0.0.6](Foundry/voltmx_foundry_release_notes/Content/IntegrationHotFix9.0.0.6.md) |
+| 10/23/2020 | 2.2 | Document published for [VoltMX Foundry Installer Hotfix 9.1.0.3 (On-Premises)](Foundry/voltmx_foundry_release_notes/Content/InstallerHotFix9.1.0.3.md). |
+| 09/22/2020 | 2.1 | Document published for [](V9SP1_Main.md)[VoltMX Foundry Integration Service Hotfix V9.1.0.1](Foundry/voltmx_foundry_release_notes/Content/IntegrationHotFix9.1.0.1.md). |
+| 08/24/2020 | 2.0 | Document published for [VoltMX Foundry V9 Service Pack 1](Foundry/voltmx_foundry_release_notes/Content/V9SP1_Main.md). |
+| 07/13/2020 | 1.6 | Document published for [VoltMX Foundry Installer Fix Pack 9.0.1](Foundry/voltmx_foundry_release_notes/Content/V9.0.1_New_Features.md). |
+| 06/22/2020 | 1.5 | Document published for [VoltMX Foundry Integration Service Hotfix V9.0.0.5](Foundry/voltmx_foundry_release_notes/Content/IntegrationHotFix9.0.0.5.md). |
+| 05/21/2020 | 1.4 | Document published for [VoltMX Foundry Installer Hotfix 9.0.0.2 (On-Premises)](Foundry/voltmx_foundry_release_notes/Content/InstallerHotFix9.0.0.2.md). |
+| 05/07/2020 | 1.3 | Document published for [VoltMX Foundry Integration Service Hotfic V9.0.0.4](Foundry/voltmx_foundry_release_notes/Content/IntegrationHotFix9.0.0.4.md). |
+| 04/27/2020 | 1.2 | Document published to append [VoltMX Foundry V9 Known Issues on Console](Foundry/voltmx_foundry_release_notes/Content/V9_Knownissues.md#console). |
+| 04/20/2020 | 1.1 | Document published for [VoltMX Foundry V9.0.0.1 on MS Azure](Foundry/voltmx_foundry_release_notes/Content/Azure9.0.0.1GA.md) release. |
+| 04/06/2020 | 1.0 | Document published for [V9 GA](Foundry/voltmx_foundry_release_notes/Content/V9_Main.md) release. |
 -->
 
