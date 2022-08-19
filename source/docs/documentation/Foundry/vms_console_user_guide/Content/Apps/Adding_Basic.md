@@ -8,7 +8,7 @@ category: "vms_console_user_guide"
 ### App Info
 
 1.  Enter the following details in the **App Info** tab:
-    *   **Application Name**: Enter the application name. Length of the application name can be a maximum of 100 characters.
+    *   **Application Name**: Enter the application name. Length of the application name can be a maximum of length 100 containing alphabets and numbers with no special characters allowed.
     *   **Application ID**: Click the **Generate** button to populate the system- generated application ID in the field. You can even enter the application ID manually in the text field.
         
         Every application name (when an application is added) has a unique application ID. The application ID cannot be modified once the application is created and saved.
