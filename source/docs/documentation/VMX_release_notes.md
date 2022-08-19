@@ -33,14 +33,8 @@ For detailed information about fixes and known issues in Volt MX, please see the
 
 ### V9 Servicepack 2 Fixpack 47
 
-#### SDK Support
-
-**Summary** : In an app that uses Offline Objects, when a user invokes the object-level sync by passing the uploadBatchSize in the options, the sync operation fails if the number of records is a multiple of the configured batch size.
-
-**RCA & Solution** : Product Fix - Defect Fix - Fixed the issue in this build.
-
- **Impacted Areas** : Offline Objects
-
+There are no new features or enhancements in this release. The purpose of this fixpack is to address a sync operation failure in apps that use Offline Objects. For the relevant Support note, see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
+Knowledge Article View HCL - Customer Support
 
 ### V9 Servicepack 2 Fixpack 46
 
