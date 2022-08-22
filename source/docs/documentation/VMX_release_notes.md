@@ -21,7 +21,7 @@ For detailed information about fixes and known issues in Volt MX, please see the
 - [Earlier Iris releases](#earlier-iris-releases)
 
 [Volt Foundry](#volt-foundry)
-
+- [V9 Servicepack 2 Fixpack 1 Hotfix 11](#v9-servicepack-2-fixpack-1-hotfix-11)
 - [V9 Servicepack 2 Fixpack 1 Hotfix 10](#v9-servicepack-2-fixpack-1-hotfix-10)
 - [V9 Servicepack 2 Fixpack 1 Hotfix 9](#v9-servicepack-2-fixpack-1-hotfix-9)
 - [V9 Servicepack 2 Fixpack 1 Hotfix 8](#v9-servicepack-2-fixpack-1-hotfix-8)
@@ -34,7 +34,7 @@ For detailed information about fixes and known issues in Volt MX, please see the
 ### V9 Servicepack 2 Fixpack 47
 
 There are no new features or enhancements in this release. The purpose of this fixpack is to address a sync operation failure in apps that use Offline Objects. For the relevant Support note, see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
-Knowledge Article View HCL - Customer Support
+
 
 ### V9 Servicepack 2 Fixpack 46
 
@@ -124,6 +124,11 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 -->
 
 ## Volt Foundry
+
+### V9 Servicepack 2 Fixpack 1 Hotfix 11
+
+There are no new features or enhancements in this release. The purpose
+of this fixpack is to address a problem with user re-registration. For the relevant Support note, see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
 
 ### V9 Servicepack 2 Fixpack 1 Hotfix 10
 
