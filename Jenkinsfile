@@ -105,7 +105,7 @@ options{
           sh "git status"
           sh "git checkout -b feature/HPHX"
           sh "git push volt-mx-docs feature/HPHX"
-          sh "gh pr create -t 'Merging 9.2.47 release notes changes' -b 'Merging 9.2.47 release notes changes'"
+          sh "gh pr create -t 'Merging 9.2.1.13 release notes and doc changes' -b 'Merging 9.2.1.13 release notes and doc changes.(HPHX:21559)'"
           sh "gh pr status"
           sh "gh pr merge --merge"
           sh "git checkout release"
