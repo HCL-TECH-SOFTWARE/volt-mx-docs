@@ -13,6 +13,7 @@ For detailed information about fixes and known issues in Volt MX, please see the
 
 [Volt Iris](#volt-iris)
 
+- [V9 Servicepack 2 Fixpack 54](#v9-servicepack-2-fixpack-54)
 - [V9 Servicepack 2 Fixpack 47](#v9-servicepack-2-fixpack-47)
 - [V9 Servicepack 2 Fixpack 46](#v9-servicepack-2-fixpack-46)
 - [V9 Servicepack 2 Fixpack 45](#v9-servicepack-2-fixpack-45)
@@ -21,6 +22,8 @@ For detailed information about fixes and known issues in Volt MX, please see the
 - [Earlier Iris releases](#earlier-iris-releases)
 
 [Volt Foundry](#volt-foundry)
+
+- [V9 Servicepack 2 Fixpack 1 Hotfix 13](#v9-servicepack-2-fixpack-1-hotfix-13)
 - [V9 Servicepack 2 Fixpack 1 Hotfix 11](#v9-servicepack-2-fixpack-1-hotfix-11)
 - [V9 Servicepack 2 Fixpack 1 Hotfix 10](#v9-servicepack-2-fixpack-1-hotfix-10)
 - [V9 Servicepack 2 Fixpack 1 Hotfix 9](#v9-servicepack-2-fixpack-1-hotfix-9)
@@ -30,6 +33,26 @@ For detailed information about fixes and known issues in Volt MX, please see the
 - [Earlier Foundry releases](#earlier-foundry-releases)
 
 ## Volt Iris
+### V9 Servicepack 2 Fixpack 54
+
+- The App Viewer has been upgraded to support the latest iOS and Android plugins on tablets.
+- We have updated Iris libraries to address security vulnerabilities including Open SSL.
+- Iris now supports Windows 11.
+- Iris now supports macOS Monterey on M1 chipsets.
+- Volt MX Iris has introduced the **useExternalBouncyCastleLibrary** property to support the usage of the [voltmx.crypto.newKey API](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.crypto_functions.html#crypto.newkey) on Android 12 devices, with the tripleDES algorithm and the keysize as 192. Enable this property in the androidbuild.properties file to use the voltmx.crypto.newKey API.
+- On Android 12 devices, a generic web intent resolves to an activity only if the app is approved for a specific domain that is contained in that web intent. Therefore, Volt MX Iris has introduced the [voltmx.net.getDomainVerificationUserState API](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.net_functions.html#voltmx.net8) to query the the status of a domain. In addition, the following constants have been added to get the status of a domain:
+
+  * voltmx.constants.DOMAIN_STATE_VERIFIED
+  * voltmx.constants.DOMAIN_STATE_SELECTED
+  * voltmx.constants.DOMAIN_STATE_NONE
+
+- A new action, **ACTION_APP_OPEN_BY_DEFAULT_SETTINGS**, has been added in the [voltmx.application.openSettings API](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.application_functions.html#voltmx.app6) to open the Default Settings Screen, where a user can associate an app with a Domain.
+
+- Support for the [voltmx.automation.webSocket.sendMessage](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.automation_namespace.html#volt-mx-automation-namespace) and the [voltmx.automation.webSocket.waitForMessage](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.automation_namespace.html#volt-mx-automation-namespace) APIs has been added in Volt MX Iris to support cross-app testing between apps that use the same WebSocket Server. 
+  
+
+For detailed information about fixes and known issues in this release, please see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
+
 
 ### V9 Servicepack 2 Fixpack 47
 
@@ -124,6 +147,19 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 -->
 
 ## Volt Foundry
+
+### V9 Servicepack 2 Fixpack 1 Hotfix 13
+
+- Foundry libraries have been updated to address security vulnerabilities.
+- OpenJDK 11 is now supported on HCL Volt MX Cloud.
+- Foundry now supports Microsoft SQL Server 2019.We have removed support for Microsoft SQL Server 2016.
+- Foundry container is now supported on Openshift and Amazon Elastic Kubernetes Service cluster in production.
+- The option to enable PKCE between Volt MX Foundry and back-end OAuth Services has now been added to the OAuth 2.0 Identity Services. For more information about this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Identity10_VoltMX_OAuth2.html).
+- Added the following parameter to the service.bat file for Windows services:
+-Dlog4j2.enableJndiJdbc=true.
+
+For detailed information about fixes and known issues in this release, please see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
+
 
 ### V9 Servicepack 2 Fixpack 1 Hotfix 11
 
