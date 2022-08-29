@@ -9,20 +9,20 @@
 
 Bug reports on **product documentation** and pull requests are welcome on GitHub at https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs. This is Volt MX product documentation site not product support platform, all bug reports and pull requests shall pertain to product documentation. Updates shall be performed only to markdown files under **volt-mx-docs/source**.
 
+- Install [MkDocs](https://github.com/squidfunk/mkdocs-material)
+- Clone [Volt MX docs repository](https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs)
+- Create a new branch.
+- Update files as needed.
+
+### Validate document
+
+To perform updated document check before raising pull request, run volt-mx-docs\build.bat or volt-mx-docs/build-mac.sh. Output index.html is available in volt-mx-docs/docs/documentation.
+
 ### Submitting code changes:
 
 - Open a [Pull Request](https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/pulls)
 - Await markdown files review, merge and a build
 - Version number is increased post each build. \<MAJOR.MINOR\> versioning scheme is being followed for Volt MX documentation release.
-
-### Validate document
-
-To perform updated document check before raising pull request, follow below steps
-
-- Install [Jekyll](https://jekyllrb.com/) and support libraries doing `bundle install` post jekyll installation
-- clone [Volt MX docs repository](https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs)
-- Update markdown and perform [jekyll serve](https://jekyllrb.com/docs/) to validate changes on user system
-- Raise [Pull Request](https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/pulls) post update validations
 
 ## License
 
