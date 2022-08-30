@@ -23,6 +23,8 @@ _data\voltmx_foundry_linux_install_guide.yml+^
 _data\voltmx_foundry_manual_install_guide.yml+^
 _data\voltmx_foundry_windows_install_guide.yml+^
 _data\voltmxfoundry_containers_solution_on-prem.yml+^
+_data\voltmxfoundry_on_amazon_eks.yml+^
+_data\voltmxfoundry_on_openshift.yml+^
 _data\voltmxfoundry_single_container.yml+^
 _data\voltmx_foundry_user_guide.yml+^
 _data\KF_Services_OAuth_Sample.yml+^
