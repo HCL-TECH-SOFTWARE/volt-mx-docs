@@ -1,3 +1,7 @@
+---
+layout: "documentation"
+category: "iris_user_guide"
+---
                           
 
 
@@ -31,7 +35,7 @@ In the Collab Server, you can configure the sever security to Http or Https. Fol
 
 Follow these steps to download and configure the Collab Server:
 
-1.  Download the Collab server from here.  
+1.  Download the Collab server from [here](https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/iris/zip/user_guide/CollabServer_Win.zip).  
     The installer is downloaded as a zip file to your computer.  
     
 2.  Extract the contents of the zip file.
@@ -45,26 +49,26 @@ Follow these steps to download and configure the Collab Server:
 
 Follow these steps to download and configure the Collab Server:
 
-1.  Download the Collab server from here 
+1.  Download the Collab server from [here](https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/iris/zip/user_guide/CollabServer_Win.zip) 
     The installer is downloaded as a zip file to your computer.
 2.  Extract the contents of the zip file.  
     
 
-> **_Note:_** Ensure you have your HTTPS server key and server certificate with you.  
+    > **_Note:_** Ensure you have your HTTPS server key and server certificate with you.  
 
-4.  Place your HTTPS server key and server certificate in the collabConfig (specific to the OS you are using) folder.
+3.  Place your HTTPS server key and server certificate in the collabConfig (specific to the OS you are using) folder.
     1.  On a Windows machine, navigate to the **CollabServer** > **CollabServer\_WIN** > **collabConfig**
     2.  On a Mac machine, navigate to the **CollabServer** > **CollabServer\_MACOS** > **collabConfig**
-5.  Navigate to the folder specific to the OS you are using and open the **collabConfig.json** file with a text editor.
+4.  Navigate to the folder specific to the OS you are using and open the **collabConfig.json** file with a text editor.
     
     1.  On a Windows machine, navigate to the **CollabServer** > **CollabServer\_WIN** > **collabConfig** > **collabConfig.json** file.
     2.  On a Mac machine, navigate to the **CollabServer** > **CollabServer\_MACOS** > **collabConfig** > **collabConfig.json** file.
     
-6.  In the **CollabConfig.json** file, configure the **Server\_protocol** key to **Https**.
-7.  Enter the server key and the server certificate file names for the **Server\_key** and **Server\_cert** keys respectively.
-8.  Configure the **Port** key to an available port number on the server. By default, the Port key is set to 30000.
+5.  In the **CollabConfig.json** file, configure the **Server\_protocol** key to **Https**.
+6.  Enter the server key and the server certificate file names for the **Server\_key** and **Server\_cert** keys respectively.
+7.  Configure the **Port** key to an available port number on the server. By default, the Port key is set to 30000.
     
-9.  Save and close the file.
+8.  Save and close the file.
     
 
 ### Run the Collab Server
@@ -110,9 +114,9 @@ To install and configure Git for the first time, follow these steps:
 2.  Open the terminal.
 3.  Enter the following command to configure your username:
 
-git config --global user.name "UserName"
+     git config --global user.name "UserName"
 
-5.  Enter the following command to configure your email address:
+4.  Enter the following command to configure your email address:
 
 git config --global user.email "emailID"
 
@@ -150,12 +154,12 @@ To clone an existing project from a repository, follow these steps:
 1.  Open the Iris project.
 2.  In the **Terminal** tab of Volt MX Iris, enter the following commands:
 
-pwd //opens current working directory is the workspace git clone <URL of the project in the repository>
+    pwd //opens current working directory is the workspace git clone <URL of the project in the repository>
 
-4.  From the main menu, navigate to **Project** > **Open**, and click **Refresh**.
-5.  Navigate to **Project** > **Open** > **VoltMX Iris Reference Architecture**/**Free Form JavaScript**.
-6.  You will see the cloned project in the list of projects that appears.
-7.  Select the project that you have downloaded.  
+3.  From the main menu, navigate to **Project** > **Open**, and click **Refresh**.
+4.  Navigate to **Project** > **Open** > **VoltMX Iris Reference Architecture**/**Free Form JavaScript**.
+5.  You will see the cloned project in the list of projects that appears.
+6.  Select the project that you have downloaded.  
     The cloned project opens.  
     The developers can further work on the local project and push the changes to the remote project in Git repository.  
     

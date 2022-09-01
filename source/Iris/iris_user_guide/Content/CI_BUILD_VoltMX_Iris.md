@@ -107,12 +107,12 @@ Encrypted password is: en1801f1abee7b9e12426c062509e1b18epd`
 
 1.  Open the command prompt in the project location.
 2.  Run the node command node build.js in any of the following formats. These commands will download the required plugins as well as build the application.
-    *   node build.js --voltmxirisversion <version number> // This command will download the specified plugin version to'plugin.dir' location and build the app.
+    *   node build.js --irisversion <version number> // This command will download the specified plugin version to'plugin.dir' location and build the app.
     *   node build.js // This command will build the app with existing plugins located in 'plugin.dir'.
     *   node build.js -clean // This command will re-extract the plugins from plugin.dir folder
     
     > **_Note:_** For Delta download or when the 'plugin.dir' location already has a set of plugins then, run the following command  
-    node build.js -c --voltmxirisversion <version number>  
+    node build.js -c --irisversion <version number>  
       
     This command will download the upgraded plugins and build the project.
     
@@ -128,10 +128,10 @@ Encrypted password is: en1801f1abee7b9e12426c062509e1b18epd`
 | --- | --- |
 | \--help -h | Help for the build.js arguments |
 | \--clean -c -clean | Cleans extracted bundles folder and extracts plugins again. |
-| \--voltmxirisversion -kvv | To download plug-ins of specified Iris version. |
+| \--irisversion -iv| To download plug-ins of specified Iris version. |
 | \--proxy | Forwards the request through the HTTP(s) proxy server if the script is running on a restricted network. You must provide proxy server details along with credentials if required. |
 
-**Usage:**`node build.js --clean --voltmxirisversion 9.0.3 --proxy http://user_name:password@proxy.server.com:proxy_port`
+**Usage:**`node build.js --clean --irisversion 9.0.3 --proxy http://user_name:password@proxy.server.com:proxy_port`
 
 ### Error Codes
 
