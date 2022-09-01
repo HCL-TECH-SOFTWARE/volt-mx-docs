@@ -1,10 +1,3 @@
----
-title: Volt MX Release Notes 
-layout: documentation
-has_children: false
-order: 1
----
-
 
 # Volt MX Release Notes
 
@@ -36,20 +29,18 @@ For detailed information about fixes and known issues in Volt MX, please see the
 
 ### V9 Servicepack 2 Fixpack 54
 
-- The App Viewer has been upgraded to support the latest iOS and Android plugins on tablets.
-- We have updated Iris libraries to address security vulnerabilities including Open SSL.
-- Iris now supports Windows 11.
-- Iris now supports macOS Monterey on M1 chipsets.
-- Volt MX Iris has introduced the **useExternalBouncyCastleLibrary** property to support the usage of the [voltmx.crypto.newKey API](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.crypto_functions.html#crypto.newkey) on Android 12 devices, with the tripleDES algorithm and the keysize as 192. Enable this property in the androidbuild.properties file to use the voltmx.crypto.newKey API.
+- Windows 11 support added for Iris.
+- MacOS Monterey (on M1 chipsets) support added for Iris.
+- Added support for [voltmx.crypto.newKey API](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.crypto_functions.html#crypto.newkey) in Volt MX Iris for Android 12 devices, with tripleDES algorithm and 192 key-size via a new property **useExternalBouncyCastleLibrary** as part of the androidbuild.properties.
 - On Android 12 devices, a generic web intent resolves to an activity only if the app is approved for a specific domain that is contained in that web intent. Therefore, Volt MX Iris has introduced the [voltmx.net.getDomainVerificationUserState API](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.net_functions.html#voltmx.net8) to query the the status of a domain. In addition, the following constants have been added to get the status of a domain:
 
-  * voltmx.constants.DOMAIN_STATE_VERIFIED
-  * voltmx.constants.DOMAIN_STATE_SELECTED
-  * voltmx.constants.DOMAIN_STATE_NONE
+    - voltmx.constants.DOMAIN_STATE_VERIFIED
+    - voltmx.constants.DOMAIN_STATE_SELECTED
+    - voltmx.constants.DOMAIN_STATE_NONE
 
 - A new action, **ACTION_APP_OPEN_BY_DEFAULT_SETTINGS**, has been added in the [voltmx.application.openSettings API](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.application_functions.html#voltmx.app6) to open the Default Settings Screen, where a user can associate an app with a Domain.
 
-- Support for the [voltmx.automation.webSocket.sendMessage](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.automation_namespace.html#volt-mx-automation-namespace) and the [voltmx.automation.webSocket.waitForMessage](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.automation_namespace.html#volt-mx-automation-namespace) APIs has been added in Volt MX Iris to support cross-app testing between apps that use the same WebSocket Server. 
+- Support has been added for the [voltmx.automation.webSocket.sendMessage](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.automation_namespace.html#volt-mx-automation-namespace) and the [voltmx.automation.webSocket.waitForMessage](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.automation_namespace.html#volt-mx-automation-namespace) APIs in Volt MX Iris to support cross-app testing between apps that use the same WebSocket Server. 
   
 
 For detailed information about fixes and known issues in this release, please see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
@@ -151,13 +142,11 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ### V9 Servicepack 2 Fixpack 1 Hotfix 13
 
 - Foundry libraries have been updated to address security vulnerabilities.
-- OpenJDK 11 is now supported on HCL Volt MX Cloud.
-- Foundry now supports Microsoft SQL Server 2019.We have removed support for Microsoft SQL Server 2016.
+- OpenJDK 11 support added for HCL Volt MX Cloud.
+- Certified configurations for Foundry has been updated with the addition of Microsoft SQL Server 2019 and deprecation of Microsoft SQL Server 2016.
 - Foundry container is now supported on Openshift and Amazon Elastic Kubernetes Service cluster in production.
-- The option to enable PKCE between Volt MX Foundry and back-end OAuth Services has now been added to the OAuth 2.0 Identity Services. For more information about this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Identity10_VoltMX_OAuth2.html).
-- Added the following parameter to the service.bat file for Windows services:
-
-    -Dlog4j2.enableJndiJdbc=true.
+- The OAuth 2.0 type Identity Service on Volt MX Foundry has been enhanced with an option to enable/disable PKCE between Foundry and OAuth back-end. For more information about this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Identity10_VoltMX_OAuth2.html).
+- Added the following parameter to the service.bat file for Windows services: -Dlog4j2.enableJndiJdbc=true. Please refer to [Log4j – Configuring Log4j 2 (apache.org)](https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Flogging.apache.org%2Flog4j%2F2.x%2Fmanual%2Fconfiguration.html&data=05%7C01%7Cmichael.stewart%40hcl.com%7C2d917881b40c411c2ca108da8c47ca98%7C189de737c93a4f5a8b686f4ca9941912%7C0%7C0%7C637976537243993648%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=ouslgKpofvB07LPqichtY%2Fg2%2BeNazpYWdg02Y3gB1Qo%3D&reserved=0) for details.
 
 For detailed information about fixes and known issues in this release, please see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
 
@@ -249,3 +238,4 @@ Single Container Solution
 | 04/06/2020 | 1.0 | Document published for [V9 GA](Foundry/voltmx_foundry_release_notes/Content/V9_Main.md) release. |
 -->
 
+<!--- The App Viewer has been upgraded to support the latest iOS and Android plugins on tablets. -->
