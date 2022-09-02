@@ -146,7 +146,7 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 - Certified configurations for Foundry has been updated with the addition of Microsoft SQL Server 2019 and deprecation of Microsoft SQL Server 2016.
 - Foundry container is now supported on Openshift and Amazon Elastic Kubernetes Service cluster in production.
 - The OAuth 2.0 type Identity Service on Volt MX Foundry has been enhanced with an option to enable/disable PKCE between Foundry and OAuth back-end. For more information about this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Identity10_VoltMX_OAuth2.html).
-- Added the following parameter to the service.bat file for Windows services: -Dlog4j2.enableJndiJdbc=true. Please refer to [Log4j – Configuring Log4j 2 (apache.org)](https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Flogging.apache.org%2Flog4j%2F2.x%2Fmanual%2Fconfiguration.html&data=05%7C01%7Cmichael.stewart%40hcl.com%7C2d917881b40c411c2ca108da8c47ca98%7C189de737c93a4f5a8b686f4ca9941912%7C0%7C0%7C637976537243993648%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=ouslgKpofvB07LPqichtY%2Fg2%2BeNazpYWdg02Y3gB1Qo%3D&reserved=0) for details.
+- Added the following parameter to the service.bat file for Windows services: -Dlog4j2.enableJndiJdbc=true. Please refer to [Log4j – Configuring Log4j 2 (apache.org)](https://logging.apache.org/log4j/2.x/manual/configuration.html) for details.
 
 For detailed information about fixes and known issues in this release, please see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
 
