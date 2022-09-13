@@ -32,9 +32,12 @@ Service Driven Objects
     ![](Resources/Images/Data_Model_639x211.png)
     
 10.  The generated data model is created with the relevant fields and relationships.
-11.  Configure the Fields, Relationships, and Change Tracking as required.
-    
+       
        > **_Note:_** Enable primary key for the fields.
+
+11.  Configure the Fields, Relationships, and ChangeTracking as required.
+
+     >  ***Note:*** *ChangeTracking* column: At present, this column supports only string type. Another type, like date, can be used, but it would require a postprocessor to convert to string format.
     
 12.  Save the changes and publish the app.
 13.  Now, link your Foundry application to the client application.  
@@ -124,10 +127,12 @@ Line-of-Business Adapters
     
     *   To create a new data model and add a mapping, click **Configure New** under the Data Model section. For more information about how to create a data model and add a mapping, click [here](../../../Foundry/voltmx_foundry_user_guide/Content/ObjectsServices/Stage_2.md#creating-objects-39-definition-and-map-to-back-end-objects-manually).
     *   To import objects from your backend, click **Generate** under the Data Model section. For more information about importing objects from the metadata of your backend provider, click [here](../../../Foundry/voltmx_foundry_user_guide/Content/ObjectsServices/Objectservices_Stage3.md).
-    
-    > **Note:**  
-    *   Configure the Fields, Relationships, and Change Tracking as required.  
-    *   Enable Primary Key for the fields.  
+
+    > **_Note:_** Enable primary key for the fields.
+
+9. Configure the Fields, Relationships, and ChangeTracking as required.  
+        
+    >  ***Note:*** *ChangeTracking* column: At present, this column supports only string type. Another type, like date, can be used, but it would require a postprocessor to convert to string format.
         
 9.  Save the changes and publish the app.
 10.  Now, link your Foundry application to the client application.
