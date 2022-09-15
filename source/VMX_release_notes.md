@@ -6,6 +6,7 @@ For detailed information about fixes and known issues in Volt MX, please see the
 
 [Volt Iris](#volt-iris)
 
+- [V9 Servicepack 2 Fixpack 55](#v9-servicepack-2-fixpack-55)
 - [V9 Servicepack 2 Fixpack 54](#v9-servicepack-2-fixpack-54)
 - [V9 Servicepack 2 Fixpack 47](#v9-servicepack-2-fixpack-47)
 - [V9 Servicepack 2 Fixpack 46](#v9-servicepack-2-fixpack-46)
@@ -26,6 +27,12 @@ For detailed information about fixes and known issues in Volt MX, please see the
 - [Earlier Foundry releases](#earlier-foundry-releases)
 
 ## Volt Iris
+
+### V9 Servicepack 2 Fixpack 55
+
+There are no new features or enhancements in this release. The purpose of this fixpack is to address the Object Service Sync upload going in loop for ProgressCallBack. For the relevant Support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476" target="_blank">Cumulative fix list for HCL Volt MX.</a>
+
+
 
 ### V9 Servicepack 2 Fixpack 54
 
