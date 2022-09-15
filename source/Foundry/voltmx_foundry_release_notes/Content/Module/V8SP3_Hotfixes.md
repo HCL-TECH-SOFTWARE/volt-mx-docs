@@ -7,7 +7,9 @@ Click any of the following to learn about the minor enhancements and fixes made 
 
 *   [VoltMX Foundry Hotfix 8.3.1.2 (On-Premises)](HotFix8.3.1.2.md)
 *   [VoltMX Foundry Engagement Services Hotfix 8.3.1.1 (On Premises)](8.3.1.1_EngagementServices.md)
-*   [VoltMX Foundry on Microsoft Azure Cloud Hotfix 8.3.1.1](Azure_8.3.1.1.md)
+
+<!-- *   [VoltMX Foundry on Microsoft Azure Cloud Hotfix 8.3.1.1](Azure_8.3.1.1.md) -->
+
 *   [VoltMX Foundry Integration Services Hotfix 8.3.1.1](V8SP3HotFix8.3.1.1.md)
 *   [VoltMX Foundry Installer Hotfix 8.3.1.1](InstallerHotFix8.3.1.1.md)
 *   [VoltMX Foundry Engagement Services Hotfix 8.3.1.2 (Patch Installer - On Premises)](8.3.1.2_EngagementServices.md)
