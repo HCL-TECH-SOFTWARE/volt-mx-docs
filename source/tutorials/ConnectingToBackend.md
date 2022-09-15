@@ -3,7 +3,7 @@
 
 From Volt MX Iris you can access features of the Volt MX Foundry Console and use them in your application.
 
-![](Resources/Marketplace.png) [Foundry Integration](../../Iris/iris_tutorials/Content/Module/mf_integration.md)
+![](Resources/Marketplace.png) [Foundry Integration](../Iris/iris_tutorials/Content/Module/mf_integration.md)
 
 ![](Resources/overview_video.png) [Volt MX Iris for Amazon Web Services](https://youtu.be/qQvRPwttrvE)
 
