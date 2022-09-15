@@ -1106,7 +1106,7 @@ The following are the error codes that Volt MX Foundry Integration Service throw
 | **RESOLUTION** | Check the device database properties in the `middleware.properties` file and check if the `middleware.properties` file is present in the correct location. Check the existence of the database and manually check, if you can connect to the database. |
 | POINT OF CONTACT | VOLTMX |
 
-WebLogic Server Logs
+<!-- WebLogic Server Logs
 --------------------
 
 The following table contains the problem scenarios that you may encounter on a WebLogic Server and the resolutions:
@@ -1117,5 +1117,5 @@ The following table contains the problem scenarios that you may encounter on a W
 | DataSource is paused | weblogic.jdbc.extensions.PoolDisabledSQLException: weblogic.common.resourcepool.ResourceDisabledException: Pool voltmxdevicedb is suspended and cannot allocate resources to applications. | The Connection pool on the datasource can no longer offer the application server any more connections to connect to the database. Release the connections and check the database server. |
 | JMS Server/JMS Topic is paused | weblogic.jms.common.IllegalStateException: Destination SystemModule1!VoltMXLogTopic is paused for new message production. | Check the JMS Queue on the server. Restart the JMS Queue. |
 
-[Open topic with navigation](../Content/App_Server_Error_Codes.md)
+[Open topic with navigation](../Content/App_Server_Error_Codes.md) -->
 

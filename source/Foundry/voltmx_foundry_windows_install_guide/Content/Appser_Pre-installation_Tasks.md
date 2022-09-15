@@ -102,7 +102,9 @@ When Engagement is selected as Foundry Component, based on the selected JBoss mo
 
 \-DVMS\_CORE\_VERSION=2
 
-WebLogic
+
+
+<!-- WebLogic
 --------
 
 ### Customizing the WebLogic JVM heap size
@@ -175,4 +177,4 @@ set SAVE_CLASSPATH=%WL_HOME%/server/lib/`mysql-connector-java-8.0.12.jar`;%CLASS
 
 When Engagement is selected as Foundry Component, you must add the following parameter in the JVM arguments present in `domain-name\StartWebLogic.cmd` (for Windows) or `domain-name\StartWebLogic.sh` (for Unix):
 
-\-DVMS\_CORE\_VERSION=2
+\-DVMS\_CORE\_VERSION=2 -->

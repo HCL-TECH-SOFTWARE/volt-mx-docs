@@ -110,7 +110,7 @@ When Engagement is selected as Foundry Component, based on the selected JBoss mo
 ```
 
 
-WebLogic
+<!-- WebLogic
 --------
 
 ### Increase JVM memory for WebLogic Server
@@ -184,4 +184,4 @@ When Engagement is selected as Foundry Component, you must add the following par
 
     “com.ibm.websphere.jaxrs.server.DisableIBMJAXRSEngine=true”
 ```
-
+ -->

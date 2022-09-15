@@ -53,7 +53,7 @@ Appendix - Frequently Asked Questions (FAQs)
     For more details to enable CORS, refer to [API Management > Identity > SERVICE CONFIGURATION > Identity Service Cross Domain Security (CORS)](App_User_Session.md#identity-service-security-settings).
     
 
-*   **Issue**
+<!-- *   **Issue**
     
     Volt MX Foundry Console is unable to explore MySQL stored procedures from integration service for WebLogic with MSSQL,Oracle as consoleDB. Because WebLogic loads 5.1.22 mysql jar by default. (This jar is older version).
     
@@ -72,7 +72,7 @@ Appendix - Frequently Asked Questions (FAQs)
     1.  Open the WebLogic.xml file. For example, WEB-INF->INF->Weblogic.xml.
     2.  Add the following property in the four war files (mfconsole.war, middleware.war, admin.war, and services.war) located in Weblogic.xml.
         
-        `<package-name>com.mysql.jdbc.*</package-name>`
+        `<package-name>com.mysql.jdbc.*</package-name>` -->
         
 
 *   **Issue**
@@ -265,7 +265,7 @@ Issues Publishing an Application Using Volt MX Foundry Console
         `keytool -import -alias somealias -file <cert-file> -keystore C:\VoltMXFoundry\jre\lib\security\cacerts`
         
 
-*   **Issue**
+<!-- *   **Issue**
     
     If your Volt MX Foundry is installed on the WebLogic Server, when a user builds an app in IDE and tries to publish the app, the system fails to deploy the app.
     
@@ -288,4 +288,4 @@ Issues Publishing an Application Using Volt MX Foundry Console
     4.  In the **Web Applications** section, select the **Archived Real Path Enabled** check box.
     5.  Click **Save** to save the configuration.
     6.  Restart the WebLogic Server.
-    7.  Republish the app.
+    7.  Republish the app. -->

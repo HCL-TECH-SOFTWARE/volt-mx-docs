@@ -107,11 +107,11 @@ For example:
 *   For **Apache**: preserveHost On
 *   For **HAProxy**: preserve host flag is not required.
 
-### Configure Hibernate Dialect in WebLogic (only for WebLogic)
+<!-- ### Configure Hibernate Dialect in WebLogic (only for WebLogic)
 
 For the Engagement Services to work with Oracle DB, set the following parameter in the `setDomainEnv`.cmd and run the `setDomainEnv.cmd` before starting the WebLogic server.
 
-`-Dhibernate.dialect=org.hibernate.dialect.Oracle10gDialect`
+`-Dhibernate.dialect=org.hibernate.dialect.Oracle10gDialect` -->
 
 ### Download and Install the Unrestricted JCE Policy Files
 
@@ -120,7 +120,9 @@ In accordance with the United States of America export restrictions, Java that i
 *   `local_policy.jar`
 *   `US_export_policy.jar`
 
-To Configure Unrestricted JCE Policy Files for Tomcat, JBoss, or WebLogic, follow these steps:
+<!-- To Configure Unrestricted JCE Policy Files for Tomcat, JBoss, or WebLogic, follow these steps: -->
+
+To Configure Unrestricted JCE Policy Files for Tomcat, or JBoss, follow these steps:
 
 <!-- 1.  Go to the Oracle Java SE download page [http://www.oracle.com/technetwork/java/javase/downloads/index.html](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 2.  Scroll down to **Additional Resources** section. You will find **Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy File**. -->

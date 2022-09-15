@@ -14,4 +14,5 @@ You can install Volt MX Foundry on Tomcat or JBoss servers.
     *   [](#)[Standalone Mode (Single Node installation in Bundled JBoss)](Installing_Foundry_on_JBoss1.md)
     *   [Standalone Mode (Single Node Installation in pre-configured JBoss)](Installing_Foundry_JBoss_existing.md)
     *   [Domain Mode (Multi Node installation in pre-configured JBoss cluster)](Multi-Node_Installation.md)
-*   [Installing Volt MX Foundry on **WebLogic** (V9 SP2 FP1 or later)](Installing_Foundry_on_WebLogic.md)
+
+<!-- *   [Installing Volt MX Foundry on **WebLogic** (V9 SP2 FP1 or later)](Installing_Foundry_on_WebLogic.md) -->

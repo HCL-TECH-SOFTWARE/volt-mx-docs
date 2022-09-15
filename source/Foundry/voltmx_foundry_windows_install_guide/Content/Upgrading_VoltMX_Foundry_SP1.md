@@ -13,7 +13,10 @@ This section explains upgrading Volt MX Foundry Components through the installer
 *   After the upgrade, you must republish your Volt MX Foundry applications. The application WAR artifacts maybe required to be built with the latest plugins.
 *   If the application server setup is a clustered setup then the installation needs to done by connecting to the Management Server and port.
 *   For bundled Tomcat and Standalone JBoss, stop the running app server, start a fresh installation, and ensure that you provide the same Hostname, Ports, and Database schema prefix and suffix as the previous installation.
-*   For remote servers such as Pre-Configured JBoss, Multi-Node JBoss, or WebLogic, perform a cleanup of the app server artifacts, start a fresh installation, and ensure that you provide the same Hostname, Ports, and Database schema prefix and suffix as the previous installation. HCL recommends performing the cleanup of the app server by using the Management Console.
+
+<!-- *   For remote servers such as Pre-Configured JBoss, Multi-Node JBoss, or WebLogic, perform a cleanup of the app server artifacts, start a fresh installation, and ensure that you provide the same Hostname, Ports, and Database schema prefix and suffix as the previous installation. HCL recommends performing the cleanup of the app server by using the Management Console. -->
+
+*   For remote servers such as Pre-Configured JBoss, or Multi-Node JBoss, perform a cleanup of the app server artifacts, start a fresh installation, and ensure that you provide the same Hostname, Ports, and Database schema prefix and suffix as the previous installation. HCL recommends performing the cleanup of the app server by using the Management Console.
 
 The **<Install Location>** directory contains the log files documenting each invocation of the installer or uninstaller. To make problem identification easier, provide these log files to HCL when reporting an issue.
 

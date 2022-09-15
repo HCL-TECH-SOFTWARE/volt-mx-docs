@@ -397,7 +397,8 @@ In case of multinode, do the following:
 
 In case of single node, configure the settings in `{ Install directory }/jboss/standalone/configuration/standalone.xml`
 
-### Configuring Heap and PermGen Size for WebLogic
+
+<!-- ### Configuring Heap and PermGen Size for WebLogic
 
 Configure the Min -`Xms6144m` / Max - `Xmx6144m` heap settings in the file: `{Server directory }/user_projects/domains/bin/setDomainEnv.cmd`
 
@@ -410,7 +411,8 @@ Configure the Min -`Xms6144m` / Max - `Xmx6144m` heap settings in the file: `{S
 ```
 set USER_MEM_ARGS=-Xms6144m -Xmx6144m
 ```
-4.  Save the file, and then restart the WebLogic Server.
+4.  Save the file, and then restart the WebLogic Server. -->
+
 
 How to Configure Volt MX Foundry Behind a Reverse Proxy
 ------------------------------------------------------
@@ -430,7 +432,9 @@ If you want to access everything via a proxy URL, including Volt MX Foundry Cons
         *   **Tomcat**: In `mfconsole.war/WEB-INF/classes`, open the `config.properties` file, and update the `VOLTMX_ACCOUNT_API_BASE_URL=<PUBLIC_URL_OF_YOUR_APACHE>/accounts/api/v1_0/` property with a public URL instead of the private URL that was generated during installation.
         *   **JBoss - Standalone (Bundled JBoss)**: In `Standalone/deployments/mfconsole.war`, open the `config.properties` file, and update the `VOLTMX_ACCOUNT_API_BASE_URL=<PUBLIC_URL_OF_YOUR_APACHE>/accounts/api/v1_0/` property with a public URL instead of the private URL that was generated during installation.
         *   **JBoss - Pre-configured and Domain mode**: Take a backup of the existing war. Undeploy `mfconsole.war`. In `mfconsole.war/WEB-INF/classes`, open the `config.properties` file, update the `VOLTMX_ACCOUNT_API_BASE_URL=<PUBLIC_URL_OF_YOUR_APACHE>/accounts/api/v1_0/` property with a public URL instead of the private URL that was generated during installation, and re-deploy the war file.
-        *   **WebLogic**: In `mfconsole.war/WEB-INF/classes`, open the `config.properties` file, and update the `VOLTMX_ACCOUNT_API_BASE_URL=<PUBLIC_URL_OF_YOUR_APACHE>/accounts/api/v1_0/` property with a public URL instead of the private URL that was generated during installation.
+
+        <!-- *   **WebLogic**: In `mfconsole.war/WEB-INF/classes`, open the `config.properties` file, and update the `VOLTMX_ACCOUNT_API_BASE_URL=<PUBLIC_URL_OF_YOUR_APACHE>/accounts/api/v1_0/` property with a public URL instead of the private URL that was generated during installation. -->
+
 3.  Start Volt MX Foundry Console.
 4.  Launch your Volt MX Foundry Console in browser by using `<PUBLIC_URL_OF_YOUR_APACHE>/mfconsole`. The auth setup page appears.
 5.  Enter the auth URL with public URL like `<PUBLIC_URL_OF_YOUR_APACHE>/authService`. If you provide an internal IP here, appconfig will show internal IPs.

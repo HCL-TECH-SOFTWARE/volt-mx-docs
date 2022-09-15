@@ -36,7 +36,7 @@ Log Location for Single Node Installation
 *   To check JBoss Server logs, refer to the following location:  
     **<JBOSS\_DIR>\\standalone\\logs**
 
-### For WebLogic
+<!-- ### For WebLogic
 
  If you select the single node in the Installation Mode window, the logs folder will be created at the following locations:
 
@@ -55,4 +55,4 @@ Log Location for Single Node Installation
       
     If the Server File Name field contains only a filename, the log file is located in the root-directory\\server-name directory.  
       
-    For more details, refer to [http://docs.oracle.com/cd/E13222\_01/wls/docs81/ConsoleHelp/logging.html#1045661](http://docs.oracle.com/cd/E13222_01/wls/docs81/ConsoleHelp/logging.html#1045661)
+    For more details, refer to [http://docs.oracle.com/cd/E13222\_01/wls/docs81/ConsoleHelp/logging.html#1045661](http://docs.oracle.com/cd/E13222_01/wls/docs81/ConsoleHelp/logging.html#1045661) -->

@@ -17,7 +17,8 @@ Read the following limitations for legacy services before migrating your apps to
 
 <details close markdown="block"><summary>Click here for more details</summary>
 
-- Due to limitations of the SAP JCo connector, Volt MX Foundry does not support middleware and services together to connect to same or different SAP systems on WebLogic, JBoss, and WebSphere. SAP JCo connector can be enabled either on middleware or services.
+- Due to limitations of the SAP JCo connector, Volt MX Foundry does not support middleware and services together to connect to same or different SAP systems on JBoss, and WebSphere. SAP JCo connector can be enabled either on middleware or services.
+
 - When an app that contains an SAP JCo service is migrated, the **Service Type** field is filled in **SAP JCO Legacy** in the [integration](Services.md#integration) tab of the Volt MX Foundry Console, shown below: <br/>
 
   ![](Resources/Images/Scraper1_617x361.png)
@@ -128,3 +129,18 @@ The following sections help you migrate apps with legacy services into Volt MX F
 - [Migrate a Consolidated Service Definition (CSD) to Volt MX Foundry](CSD-LegacySerivce.md)
 
 <table style="margin-left: 0;margin-right: auto;" data-mc-conditions="Default.HTML5 Only"><colgroup><col> <col> <col></colgroup><tbody><tr><td>Rev</td><td>Author</td><td>Edits</td></tr><tr><td>7.1</td><td>SD</td><td>SD</td></tr></tbody></table>
+
+
+
+
+
+
+
+
+<!-- ### Limitations - SAP JCo Connector
+
+<details close markdown="block"><summary>Click here for more details</summary>
+
+- Due to limitations of the SAP JCo connector, Volt MX Foundry does not support middleware and services together to connect to same or different SAP systems on WebLogic, JBoss, and WebSphere. SAP JCo connector can be enabled either on middleware or services.
+
+- When an app that contains an SAP JCo service is migrated, the **Service Type** field is filled in **SAP JCO Legacy** in the [integration](Services.md#integration) tab of the Volt MX Foundry Console, shown below: <br/> -->

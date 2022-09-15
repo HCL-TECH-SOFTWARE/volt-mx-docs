@@ -80,7 +80,7 @@ For example: When you upgrade JDK V 1.6 to JDK V 1.7 (vice-versa), you can still
     *   `ssl.keyStore=<java_home>/jre/lib/security/cacerts`
 
 
-<h2 id="how-to-update-security-configuration-in-config-xml-required-in-case-of-weblogic-installation">How to Update Security Configuration in Config.xml (Required in case of WebLogic installation)</h2>
+<!-- <h2 id="how-to-update-security-configuration-in-config-xml-required-in-case-of-weblogic-installation">How to Update Security Configuration in Config.xml (Required in case of WebLogic installation)</h2>
 
 When you install Volt MX Foundry on WebLogic, with default configuration in the WebLogic's config.xml file, Volt MX Foundry fails to register with environments.
 
@@ -99,7 +99,7 @@ To update security configuration in the config.xml file in WebLogic, follow thes
         <node-manager-username>weblogic</node-manager-username>
         <node-manager-password-encrypted>{AES}R2P+dzOm5y1ODB8e3aMj6spUrJet6h6aUv91umUe5q4=</node-manager-password-encrypted>
         <enforce-valid-basic-auth-credentials>false</enforce-valid-basic-auth-credentials> 
-```
+``` -->
 
 
 <h2 id="how-to-turn-off-the-send-usage-data-anonymously-feature">How to Configure Memcache for Integration Services</h2>
@@ -158,7 +158,8 @@ You can install Volt MX Foundry remotely on the following supported application 
 
 *   JBoss Multi-node
 *   JBoss Standalone Existing
-*   WebLogic
+
+<!-- *   WebLogic -->
 
 How to Turn off the Send usage data anonymously feature
 -------------------------------------------------------
@@ -273,7 +274,7 @@ The Module.xml can be located at:
 </global-modules>
 ```
 
-### Steps for Weblogic
+<!-- ### Steps for Weblogic
 
 1.  Navigate to `<WL_HOME>/wlserver/server/lib`, and add the following files:
     *   **sapjco3.jar**
@@ -289,4 +290,4 @@ The Module.xml can be located at:
     
     `SAVE_CLASSPATH="${WL_HOME}/server/lib/SapJCoDestinationProvider.jar:${WL_HOME}/server/lib/sapjco3.jar:${WL_HOME}/server/lib/libsapjco3.so:${CLASSPATH}"`.
     
-4.  Restart the server.
+4.  Restart the server. -->

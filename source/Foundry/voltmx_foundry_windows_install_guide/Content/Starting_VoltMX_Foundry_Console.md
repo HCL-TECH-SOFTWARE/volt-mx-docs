@@ -30,7 +30,7 @@ Start the services for the appropriate service groups that you have configured t
 <!-- For more detailed information on administration of the app server, refer to the [JBoss Server Documentation](https://docs.jboss.org/author/display/AS7/Getting+Started+Guide#GettingStartedGuide-StartingJBossApplicationServer7). -->
 For more detailed information on administration of the app server, refer to the [JBoss Server Documentation](https://docs.jboss.org/author/display/AS71/).
 
-WebLogic Server
+<!-- WebLogic Server
 ---------------
 
 To stop and start WebLogic Server, follow these steps:
@@ -38,4 +38,4 @@ To stop and start WebLogic Server, follow these steps:
 1.  Stop server: `{WebLogic Installation}/User Projects/domain_name/bin>stopWebLogic.cmd`
 2.  Start server: `{WebLogic Installation}/User Projects/domain_name>startWebLogic.cmd`
 
-For more detailed information on administration of the app server, refer to the [WebLogic Server documentation](https://docs.oracle.com/cd/E13222_01/wls/docs70/adminguide/startstop.md).
+For more detailed information on administration of the app server, refer to the [WebLogic Server documentation](https://docs.oracle.com/cd/E13222_01/wls/docs70/adminguide/startstop.md). -->

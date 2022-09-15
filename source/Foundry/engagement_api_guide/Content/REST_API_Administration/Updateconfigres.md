@@ -12,7 +12,7 @@ Input Parameters
 | Input Parameter | Required | Type | Description |
 | --- | --- | --- | --- |
 | encrypt.token | Yes | alphanumeric | Token based user authentication |
-| apple.notification.keymanager.algorithm | Yes | aplhanumeric | Apple cloud configuration Property enabled for Tomcat, Weblogic and JBoss servers |
+| apple.notification.keymanager.algorithm | Yes | aplhanumeric | Apple cloud configuration Property enabled for Tomcat, and JBoss servers |
 | smpp.request.expirationTime | Yes | long | Expiration job frequency in minutes - one hour. Nexmo and Clickatell keep alive job frequency in seconds |
 | apple.feedback.server.port | Yes | long | Apple cloud configuration. Feedback server port number |
 | http.idle.connection.timeout | Yes | long | http client connection configuration |
