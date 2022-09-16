@@ -29,12 +29,14 @@ For detailed information about fixes and known issues in Volt MX, please see the
 ## Volt Iris
 
 ### V9 Servicepack 2 Fixpack 55
+September 19, 2022
 
 There are no new features or enhancements in this release. The purpose of this fixpack is to address the Object Service Sync upload going in loop for ProgressCallBack. For the relevant Support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476" target="_blank">Cumulative fix list for HCL Volt MX.</a>
 
 
 
-### V9 Servicepack 2 Fixpack 54
+### V9 Servicepack 2 Fixpack 54 
+August 29, 2022
 
 - Windows 11 support added for Iris.
 - MacOS Monterey (on M1 chipsets) support added for Iris.
@@ -53,11 +55,13 @@ There are no new features or enhancements in this release. The purpose of this f
 For detailed information about fixes and known issues in this release, please see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
 
 ### V9 Servicepack 2 Fixpack 47
+August 18, 2022
 
 There are no new features or enhancements in this release. The purpose of this fixpack is to address a sync operation failure in apps that use Offline Objects. For the relevant Support note, see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
 
 
 ### V9 Servicepack 2 Fixpack 46
+July 5, 2022
 
 #### Iris Enhancements
 
@@ -71,6 +75,7 @@ set the path to Python installation. Details of the preference are as follows.
 For detailed information about fixes and known issues in this release, please see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
 
 ### V9 Servicepack 2 Fixpack 45
+May 21, 2022
 
 #### Iris Enhancements
 
@@ -98,12 +103,14 @@ There are new supported devices in this release in Iris, and they are listed bel
 For detailed information about fixes and known issues in this release, please see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
 
 ### V9 Servicepack 2 Fixpack 38
+December 17, 2021
 
 #### Iris Enhancements
 
 There are no new features or enhancements in this release. The purpose of this fixpack is to address the log4j threat. For the relevant Support note, see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
 
 ### V9 Servicepack 2 Fixpack 37
+November 22, 2021
 
 #### Iris Enhancements
 
@@ -147,6 +154,7 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ## Volt Foundry
 
 ### V9 Servicepack 2 Fixpack 1 Hotfix 13
+August 29, 2022
 
 - Foundry libraries have been updated to address security vulnerabilities.
 - OpenJDK 11 support added for HCL Volt MX Cloud.
@@ -158,11 +166,13 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 For detailed information about fixes and known issues in this release, please see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
 
 ### V9 Servicepack 2 Fixpack 1 Hotfix 11
+August 19, 2022
 
 There are no new features or enhancements in this release. The purpose
 of this fixpack is to address a problem with user re-registration. For the relevant Support note, see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
 
 ### V9 Servicepack 2 Fixpack 1 Hotfix 10
+July 8, 2022
 
 #### Foundry Enhancements
 
@@ -171,6 +181,7 @@ We have added support for Oracle overloaded stored procedures in the RDBMS adapt
 For detailed information about any fixes and known issues in this release, please see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
 
 ### V9 Servicepack 2 Fixpack 1 Hotfix 9
+June 15, 2022
 
 #### Foundry Enhancements
 
@@ -184,18 +195,21 @@ Following dependencies for Spring and Hibernate are also upgraded.
 For the relevant Support note, see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
 
 ### V9 Servicepack 2 Fixpack 1 Hotfix 8
+May 3, 2022
 
 #### Foundry Enhancements
 
 There are no new features or enhancements in this release. For the relevant Support note, see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
 
 ### V9 Servicepack 2 Fixpack 1 Hotfix 7
+December 17, 2021
 
 #### Foundry Enhancements
 
 There are no new features or enhancements in this release. The purpose of this fixpack is to address the log4j threat. For the relevant Support note, see the [Cumulative fix list for HCL Volt MX](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476).
 
 ### V9 Servicepack 2 Fixpack 1 Hotfix 6
+November 22, 2021
 
 #### Foundry Enhancements
 
