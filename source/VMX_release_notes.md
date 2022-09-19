@@ -31,7 +31,7 @@ For detailed information about fixes and known issues in Volt MX, please see the
 ### V9 Servicepack 2 Fixpack 55
 September 19, 2022
 
-This fixpack addresses an issue with Sync for Object Services running in loops for ProgressCallback. Refer to the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476" target="_blank">Cumulative fix list for HCL Volt MX.</a> for relevant details.
+This fixpack addresses an issue with Sync for Object Services running in loops for ProgressCallback. Refer to the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476" target="_blank">Cumulative fix list for HCL Volt MX</a> for relevant details.
 
 No other features or enhancements have been made part of this release.
 
