@@ -1,7 +1,7 @@
 copy /b mkdocs-intro.yml+^
 _data\volt_mx_release_notes.yml+^
 _data\app_platform_overview.yml+^
-_data\general_tutorials.yml+^
+_data\tutorials.yml+^
 _data\iris_documentation.yml+^
 _data\installing_iris.yml+^
 _data\voltmxplatform_supported_devices_os_browsers.yml+^
