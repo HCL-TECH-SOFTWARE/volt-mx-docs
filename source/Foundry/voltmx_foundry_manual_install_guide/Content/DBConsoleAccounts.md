@@ -63,7 +63,7 @@ for example: <mark style="background:lightgrey"><strong>NEW</strong></mark> or <
 flyway.placeholders.SELECTED_COMP=< enter Volt MX Foundry components to be installed such as <strong>Console Services,Identity Services, Integration Services, Engagement Services</strong>>
         
 flyway.placeholders.DISP_APP_SERVER=< enter application server details 
-such as <strong>Tomcat 7.0.70, JBoss 6.4, WebLogic 12c, or WebSphere 8.5.5.5</strong>>
+such as <strong>Tomcat 7.0.70, JBoss 6.4, or WebSphere 8.5.5.5</strong>>
         
 flyway.placeholders.DISP_INSTALL_MODE=< enter install mode, 
 for example: <mark style="background:lightgrey"><strong>Standalone</strong></mark> or <mark style="background:lightgrey"><strong>Domain</strong></mark>>

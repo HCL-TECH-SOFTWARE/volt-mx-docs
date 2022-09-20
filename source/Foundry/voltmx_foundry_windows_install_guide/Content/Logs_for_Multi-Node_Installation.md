@@ -36,7 +36,7 @@ Log Location for Multinode Installation
 *   To check JBoss Server logs, refer to the following location:  
     **<JBOSS\_Install\_DIR>\\standalone\\log**
 
-### For WebLogic
+<!-- ### For WebLogic
 
  If you select domain mode (multi node) in the Installation Mode option, the logs folder will be created at the following locations:
 
@@ -55,4 +55,4 @@ Log Location for Multinode Installation
       
     If the Server File Name field contains only a filename, the log file is located in the root-directory\\server-name directory.  
       
-    For more details, refer to [docs.oracle.com](http://docs.oracle.com/cd/E13222_01/wls/docs81/ConsoleHelp/logging.html#1045661).
+    For more details, refer to [docs.oracle.com](http://docs.oracle.com/cd/E13222_01/wls/docs81/ConsoleHelp/logging.html#1045661). -->

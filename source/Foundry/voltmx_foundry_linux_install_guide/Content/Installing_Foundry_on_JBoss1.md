@@ -226,7 +226,8 @@ ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
     Enter requested information
     \->1- Tomcat
        2- JBoss
-    3- WebLogic
+
+    <!-- 3- WebLogic -->
 
     ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 

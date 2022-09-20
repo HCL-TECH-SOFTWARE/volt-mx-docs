@@ -487,11 +487,15 @@ Follow these steps to secure the tomcat manager to the localhost.
 
 ## Secure your Cookies (Secure and HttpOnly flags)
 
-### For Tomcat/WebLogic as Web Server
+<!-- ### For Tomcat/WebLogic as Web Server -->
+
+### For Tomcat as Web Server
 
 Cookies let websites store data directly on the web browser of a user. Websites primarily use cookies to identify the user session based on their browsing. Cookies contain sensitive data that must be protected.
 
-To make your cookies secure, modify the **web.xml** and **weblogic.xml** files of the webapp for the required components.
+<!-- To make your cookies secure, modify the **web.xml** and **weblogic.xml** files of the webapp for the required components. -->
+
+To make your cookies secure, modify the **web.xml** files of the webapp for the required components.
 
 - `WebApps > mfconsole` for Volt MX Foundry Console
 - `WebApps > admin` for Volt MX Foundry Admin Console
@@ -506,18 +510,7 @@ Add the following code in the **web.xml** file:
 <secure>true</secure>
 </cookie-config>
 
-```
-
-Add the following code in the **weblogic.xml** file:
-
-```
-<session-descriptor>
-<cookie-secure>true</cookie-secure>
-</session-descriptor>
-
 ```\* Restart the Application Server.
-
-![](Resources/Images/HTTPtoHTTPS_591x104.png)
 
 You can use developer tools to verify the changes.
 

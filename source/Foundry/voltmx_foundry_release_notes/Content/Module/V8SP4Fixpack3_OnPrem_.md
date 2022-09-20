@@ -111,10 +111,10 @@ DROP INDEX schema_version_ir_idx ON dbo.schema_version
     
     Run the migrate DB command from a Windows machine.
     
-*   **Issue #8**
+<!-- *   **Issue #8**
     
     Installation of Volt MX Foundry on WebLogic is paused with an error message in logs. The error message reads: “Caused By: weblogic.application.ModuleException: Context path '/mfconsole' is already in use by the module: mfconsole.war application: mfconsole.war”.
     
     **Workaround**
     
-    Go to the WebLogic Console and click **activate changes** that will allow the installation to proceed.
+    Go to the WebLogic Console and click **activate changes** that will allow the installation to proceed. -->

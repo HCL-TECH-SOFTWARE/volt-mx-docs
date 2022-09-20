@@ -66,14 +66,14 @@ With this release, we have introduced a unified Foundry experience for the desig
 
 *   Persistent Sync is not supported for Object Services.
 
-*   When Volt MX Foundry Messaging is installed on WebLogic, the Messaging service fails to start with Oracle database.  
+<!-- *   When Volt MX Foundry Messaging is installed on WebLogic, the Messaging service fails to start with Oracle database.  
     
     **Workaround  
     **
     
     For the Messaging service to work with Oracle DB, set the following parameter in the `setDomainEnv.sh` or `cmd` and run the `setDomainEnv.sh` before starting the WebLogic server.
     
-    `-Dhibernate.dialect=org.hibernate.dialect.Oracle10gDialect`
+    `-Dhibernate.dialect=org.hibernate.dialect.Oracle10gDialect` -->
     
 
 *   When Foundry is installed on WebSphere with Java 1.6, performing create, remove, update, and delete (CRUD) operations on Object Services through runtime results in an error.

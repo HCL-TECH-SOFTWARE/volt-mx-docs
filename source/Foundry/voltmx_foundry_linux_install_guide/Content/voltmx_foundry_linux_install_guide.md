@@ -6,14 +6,14 @@ Volt MX  Foundry Installation Guide - Linux
 
 Applicable to on-premises. This document explains how to install Console, Identity, Integration Services, and Engagement Services, on Linux using an installer program.
 
-Revision History
+<!-- Revision History -->
 
-  
-| Date | Document Version | Description of Modifications/Release |
+<!-- | Date | Document Version | Description of Modifications/Release |
 | --- | --- | --- |
 | 02/03/2020 | 2.1 | Document published for the V9 SP2 FixPack 1 release. The following modifications have been made: Added support for WebLogic 14c |
 | 12/14/2020 | 2.0 | Document published for V9 SP2 release. The following modifications have been made: Support for Oracle 19.c Support for MySQL 5.7.31. Support for MySQL Cluster with Group Replication. Support for case sensitive collations on MSSQL Server. |
-| 04/06/2020 | 1.0 | Document published for V9 release. |
+| 04/06/2020 | 1.0 | Document published for V9 release. | -->
+
 
 Getting Started Options
 
