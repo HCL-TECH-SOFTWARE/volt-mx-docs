@@ -43,7 +43,7 @@ For a complete list operating systems, app servers, databases, and Java Runtime 
 | Java Runtime Environment     | JDK 1.8                                         |
 | Session/cache management     | Memcached                                       |
 | HTTP servers (reverse proxy) | Apache or Microsoft IIS                         |
-| Application servers          | JBoss, or Tomcat, or WebLogic                   |
+| Application servers          | JBoss, or Tomcat                   |
 | Database                     | MySQL or MariaDB or Oracle or MS SQL or DB2 LUW |
 
 ## Deployment Topology
@@ -197,13 +197,13 @@ The following diagram illustrates this scenario.
 
 The following describes typical scenarios that may occur when you use J2EE in-built session management and how it handles sessions:
 
-#### Scenario A
+<!-- #### Scenario A
 
 _WebLogic Instance is Down_
 
-In this scenario, all the users of this instance will have to re-initiate the transaction.
+In this scenario, all the users of this instance will have to re-initiate the transaction. -->
 
-#### Scenario B
+#### Scenario A
 
 _Physical Computer is Down_
 

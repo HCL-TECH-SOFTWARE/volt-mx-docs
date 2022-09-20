@@ -132,7 +132,8 @@ You can install Volt MX Foundry remotely on the following supported application 
 
 *   JBoss Multi-node
 *   JBoss Standalone pre-existing
-*   WebLogic
+
+<!-- *   WebLogic -->
 
 How to Turn off the Send usage data anonymously feature
 =======================================================
@@ -249,7 +250,7 @@ Steps for JBoss
 </global-modules>
 ```
 
-Steps for Weblogic
+<!-- Steps for Weblogic
 ------------------
 
 1.  Navigate to `<WL_HOME>/wlserver/server/lib`, and add the following files:
@@ -266,4 +267,4 @@ Steps for Weblogic
     
     `SAVE_CLASSPATH="${WL_HOME}/server/lib/SapJCoDestinationProvider.jar:${WL_HOME}/server/lib/sapjco3.jar:${WL_HOME}/server/lib/libsapjco3.so:${CLASSPATH}"`.
     
-4.  Restart the server.
+4.  Restart the server. -->

@@ -501,7 +501,7 @@ How to Configure JBoss Cluster
 *   Refer to [https://docs.jboss.org/mod\_cluster/1.1.0.html/Quick\_Start\_Guide.html](https://docs.modcluster.io/#jboss-as) to configure the mod\_cluster.
     *   Refer to [https://access.redhat.com/solutions/2332111](https://access.redhat.com/solutions/2332111) to integrate the mod\_cluster with JBoss.
 
-How to Configure a Custom JAR File on WebLogic
+<!-- How to Configure a Custom JAR File on WebLogic
 ----------------------------------------------
 
 When an administrator installs only integration services on Weblogic and would like to use it as a standalone server (without integrating to Volt MX Foundry) for Volt MX Studio apps, then app services which use custom code for pre-processor and post-processor will fail. For these services to work properly, add the custom code jar file to middleware.war and redeploy.
@@ -513,7 +513,8 @@ To add custom jar to middleware.war after installation, follow these steps:
 3.  Open the middleware.war file and do the following:
 4.  In the `middleware.war`  file, go to `WEB-INF/lib` folder and add custom jar file.
 5.  Save the  `middleware.war`  file.
-6.  Deploy the  `middleware.war`  file back to server.
+6.  Deploy the  `middleware.war`  file back to server. -->
+
 
 How to Configure Heap and PermGen Size
 --------------------------------------
@@ -542,7 +543,8 @@ In case of multinode, do the following:
 
 In case of single node, configure the settings in `{ Install directory }/jboss/standalone/configuration/standalone.xml`
 
-Configuring Heap and PermGen Size for WebLogic
+
+<!-- Configuring Heap and PermGen Size for WebLogic
 ----------------------------------------------
 
 *   Configure the Min -`Xms6144m` / Max - `Xmx6144m` heap settings in the file: `{Server directory }/user_projects/domains/bin/setDomainEnv.sh`
@@ -557,7 +559,8 @@ Configuring Heap and PermGen Size for WebLogic
 ```
 export USER_MEM_ARGS="-Xms6144m -Xmx6144m"
 ```
-4.  Save the file, and then restart the WebLogic Server.
+4.  Save the file, and then restart the WebLogic Server. -->
+
 
 How to Configure Volt MX Foundry Behind a Reverse Proxy
 ------------------------------------------------------
@@ -577,7 +580,9 @@ If you want to access everything via a proxy URL, including Volt MX Foundry Cons
         *   **Tomcat**: In `mfconsole.war/WEB-INF/classes`, open the `config.properties` file, and update the `VOLTMX_ACCOUNT_API_BASE_URL=<PUBLIC_URL_OF_YOUR_APACHE>/accounts/api/v1_0/` property with a public URL instead of the private URL that was generated during installation.
         *   **JBoss - Standalone (Bundled JBoss)**: In `Standalone/deployments/mfconsole.war`, open the `config.properties` file, and update the `VOLTMX_ACCOUNT_API_BASE_URL=<PUBLIC_URL_OF_YOUR_APACHE>/accounts/api/v1_0/` property with a public URL instead of the private URL that was generated during installation.
         *   **JBoss - Pre-configured and Domain mode**: Take a backup of the existing war. Undeploy `mfconsole.war`. In `mfconsole.war/WEB-INF/classes`, open the `config.properties` file, update the `VOLTMX_ACCOUNT_API_BASE_URL=<PUBLIC_URL_OF_YOUR_APACHE>/accounts/api/v1_0/` property with a public URL instead of the private URL that was generated during installation, and re-deploy the war file.
-        *   **WebLogic**: In `mfconsole.war/WEB-INF/classes`, open the `config.properties` file, and update the `VOLTMX_ACCOUNT_API_BASE_URL=<PUBLIC_URL_OF_YOUR_APACHE>/accounts/api/v1_0/` property with a public URL instead of the private URL that was generated during installation.
+
+        <!-- *   **WebLogic**: In `mfconsole.war/WEB-INF/classes`, open the `config.properties` file, and update the `VOLTMX_ACCOUNT_API_BASE_URL=<PUBLIC_URL_OF_YOUR_APACHE>/accounts/api/v1_0/` property with a public URL instead of the private URL that was generated during installation. -->
+
 3.  Start Volt MX Foundry Console.
 4.  Launch your Volt MX Foundry Console in browser by using `<PUBLIC_URL_OF_YOUR_APACHE>/mfconsole`. Now auth setup pages comes up.
 5.  Enter auth URL with public URL like `<PUBLIC_URL_OF_YOUR_APACHE>/authService`. If you provide an internal IP here, appconfig will show internal IPs.

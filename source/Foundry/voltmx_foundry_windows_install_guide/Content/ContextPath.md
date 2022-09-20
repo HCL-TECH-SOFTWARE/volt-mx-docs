@@ -11,7 +11,10 @@ Approach 1: Changing Context Root Path after the installation using the Installe
 2.  Rename the war files for required components.
 
 *   For **Tomcat standalone** and **JBoss standalone** modes, rename the WARs directly from proper install location.
-*   For **WebLogic** and **WebSphere**, and **JBoss** **domain** mode, follow these steps to rename WARs:
+
+<!-- *   For **WebLogic** and **WebSphere**, and **JBoss** **domain** mode, follow these steps to rename WARs: -->
+
+*   For **WebSphere**, and **JBoss** **domain** mode, follow these steps to rename WARs:
     
     1.  Rename the required WARs from the installation location.
     2.  Go to Console.

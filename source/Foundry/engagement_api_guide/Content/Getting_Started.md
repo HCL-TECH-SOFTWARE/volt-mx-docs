@@ -16,7 +16,10 @@ You need to perform the following tasks to install Volt MX Foundry Engagement Se
 
 *   Setup Volt MX Foundry Engagement Service
 *   Database Setup
-*   Configure WebLogic or Configure JBoss Server or Configure WebSphere
+
+<!-- *   Configure WebLogic or Configure JBoss Server or Configure WebSphere -->
+
+*   Configure JBoss Server or Configure WebSphere
 
 Prerequisites
 -------------
@@ -38,11 +41,18 @@ Read this information to understand the System requirements and necessary Softwa
 ### Software System Requirements (per physical instance)
 
   
-| Purpose | Server Name |
+<!-- | Purpose | Server Name |
 | --- | --- |
 | J2EE Web Container | Tomcat 6.x or 7.x/WebLogic 10.3 /JBoss 5.1/WebSphere 6.1 onwards |
 | Java Runtime Environment | jdk1.6.0\_12 |
+| Database (Metrics / Device Database) \*Database is shared across instances. | MySQL 5.1 / Oracle 10g , 11g / MSSQL/ DB2 | -->
+
+| Purpose | Server Name |
+| --- | --- |
+| J2EE Web Container | Tomcat 6.x or 7.x /JBoss 5.1/WebSphere 6.1 onwards |
+| Java Runtime Environment | jdk1.6.0\_12 |
 | Database (Metrics / Device Database) \*Database is shared across instances. | MySQL 5.1 / Oracle 10g , 11g / MSSQL/ DB2 |
+
 
 ### Database System Requirements (per physical instance)
 

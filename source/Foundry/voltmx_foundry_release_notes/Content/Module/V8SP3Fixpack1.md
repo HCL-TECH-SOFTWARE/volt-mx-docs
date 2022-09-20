@@ -19,7 +19,8 @@ Fixed Issues
 
 ### Integration
 
-*   Fixed an issue where deployment of `apps.war`  fails in WebLogic.
+<!-- *   Fixed an issue where deployment of `apps.war`  fails in WebLogic. -->
+
 *   Fixed an issue where Admin Console test did not honor proxy settings or restrictions.
 *   Fixed an issue where throttling changes from Admin Console did not reflect on the service call.
 *   Added support to display the default cache expiry time in the Admin Console UI.

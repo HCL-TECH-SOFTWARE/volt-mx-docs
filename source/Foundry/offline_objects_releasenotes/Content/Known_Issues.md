@@ -11,14 +11,14 @@ The known issues in 7.0 are:
 *   Persistent Sync is not supported for Object Services
 *   Mule soft connector is not supported in Beta
 
-*   When Volt MX Foundry Messaging is installed on WebLogic, the Messaging service fails to start with Oracle database.  
+<!-- *   When Volt MX Foundry Messaging is installed on WebLogic, the Messaging service fails to start with Oracle database.  
     
     **Workaround  
     **
     
     For the Messaging service to work with Oracle DB, set the following parameter in the `setDomainEnv.sh` or `cmd` and run the `setDomainEnv.sh` before starting the WebLogic server.
     
-    `-Dhibernate.dialect=org.hibernate.dialect.Oracle10gDialect`
+    `-Dhibernate.dialect=org.hibernate.dialect.Oracle10gDialect` -->
     
 
 *   Sometimes, even after showing 100% installation progress, Foundry Installer takes around 20 more minutes to complete installation on Windows.
