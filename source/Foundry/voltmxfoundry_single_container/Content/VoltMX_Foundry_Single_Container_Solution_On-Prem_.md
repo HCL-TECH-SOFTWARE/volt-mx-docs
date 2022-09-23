@@ -100,7 +100,9 @@ The docker images will be pulled when you execute the installation scripts in th
 To pull the images, use the below command.
 
 For example:  
-`docker pull hclcr.io/voltmx/voltmx-foundry-console:9.2.0.0_GA`
+<!-- `docker pull hclcr.io/voltmx/voltmx-foundry-console:9.2.0.0_GA` -->
+
+`docker pull https://hclcr.io/harbor/projects/47/repositories/voltmx-foundry-all`
 
 Volt MX  Foundry Single Container Solution downloadable bundle contains the following directories and files.
 
@@ -174,7 +176,8 @@ Run the Volt MX Foundry Single Container install script to generate and deploy V
 
 1.  Download the **`voltmx-foundry-containers-onprem\<version>\GA.zip`** from [downloads](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/startPage.do) and extract it. The file structure will be as shown below:
     
-    config.properties install-foundry.sh\* install-actions.sh\* lib/ templates/ foundry/ flyway/
+    <pre><code style="display:block;background-color:#eee;">config.properties install-foundry.sh\* install-actions.sh\* lib/ templates/ foundry/ flyway/</code></pre>
+
     
 2.  Run the `install-foundry.sh` file.
 
@@ -238,7 +241,7 @@ Volt MX  Foundry Single Container Solution has the following limitations:
 FAQs and Troubleshooting
 ========================
 
-*   **Do I need to have an account with the Docker Hub to pull the Volt MX Foundry Images?**
+*   **Do I need to have an account with the HCL Harbor to pull the Volt MX Foundry Images?**
     
     No. The images are public, and you do not need any authorization to download them.
     
