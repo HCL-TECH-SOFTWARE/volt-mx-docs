@@ -14,7 +14,7 @@ Based on the user's request made by using SDKs, the Volt MX Foundry OAuth 2.0 id
 *   **Example for 3-legged OAuth**: When a user logs into a Volt MX Foundry application by using the Google OAuth endpoint, the authorization service (for example, Google OAuth endpoint) redirects the user to Google login page. During this stage, the callback URL is also set. The user enters login details such as userID and password. After successful authentication, the user is logged into Google account. Based on the Volt MX Foundry OAuth 2.0 identity configuration, identity service filters the user profile data from Google and stores the details in the identity session.
     
 
-User Profiles in Volt MX Foundry OAuth 2.0
+**User Profiles in Volt MX Foundry OAuth 2.0**
 
 Different service providers implement user profiles as per their own standards. Volt MX Foundry OAuth 2.0 identity service retrieves user attributes from a user profile and saves these attributes in VoltMX Foundry Identity Sessions after successful login response.
 
@@ -46,11 +46,12 @@ To configure an identity service using Volt MX Foundry OAuth authentication mode
 
 1.  Under the **[**Identity** service designer](ConfigureIdentiryService.md#IdentitySDpage)** page, type a name for the service in the **Name** text box.
     
-<details close markdown="block"><summary>Click to View image</summary>
+    <details close markdown="block"><summary>Click to View image</summary>
 
-   ![](Resources/Images/OAuth_322x629.png)
-</details>
+    ![](Resources/Images/OAuth_322x629.png)
+    </details>
     
+
 2.  From the **Type of Identity** list, select **OAuth2.0**.
     
     > **_Note:_** Fields marked with an asterisk are required.
@@ -68,8 +69,10 @@ To configure an identity service using Volt MX Foundry OAuth authentication mode
         4.  **Extension**: When the extension grant type is selected, the system displays the **Extension Grant** text box to enter the grant type value. For extension grant type, the oAuth does not have any fixed value. The grant type value is dynamic, which is a client specified parameter.
             
         5.  **Client Credentials**: When the client credentials grant type is selected, the client can request an access token using only its client credentials when the client is requesting access to the protected resources under its control, or to those of another resource owner that has been previously set up with the authorization server.
+
     2.  **Authorize Endpoint**: Enter the URL that is provided by the endpoint service provider. For example, Salesforce or Google.  
-        Sample authorize endpoint for Google: `https://accounts.google.com/o/oauth2/auth`
+        Sample authorize endpoint for Google: `https://accounts.google.com/o/oauth2/auth`  
+
     3.  **Token Endpoint**: Enter the token URL that is provided by the endpoint service provider.  
         Sample token endpoint for Google: `https://accounts.google.com/o/oauth2/token`  
         
@@ -77,15 +80,20 @@ To configure an identity service using Volt MX Foundry OAuth authentication mode
           
         Sample callback URL: `https://<accountID>.auth.voltmxcloud.com/OAuth2/Callback`
         
-        > **_Note:_**  Provide domain as a service URL.  
-          
-        For example, configure your Google app to accept requests from authentication service by typing the `auth.voltmxcloud.com`  in the **App Domain** text field.  
-          
-        ![](Resources/Images/AppDomain_411x195.png)  
+        > **_Note:_**  Provide domain as a service URL.  <br><br>
+        > For example, configure your Google app to accept requests from authentication service by typing the `auth.voltmxcloud.com`  in the **App Domain** text field.  <br><br>
+        > ![](Resources/Images/AppDomain_411x195.png)  
         
     5.  In the **Scope** text box, enter the list of permissions that a user needs to agree to while in the user log-in page of the OAuth 2.0 service provider - for example, Gmail. The list can contain more than one permission and depends on the authorization server. For a sample of full list of permissions, refer to [OAuth 2.0 standards](https://datatracker.ietf.org/doc.md/rfc6749).
         
         For example, if you configure the `email`   permission as scope, after you log in Google for the first time, Google displays the **Log in with Google** dialog with the configured permissions. Click **OK** to share your permissions (public profile and email) with Volt MX Foundry.
+
+    6. **Logout URL** : Enter the Logout URL that is provided by the endpoint service provider.
+
+         Sample Logout URL for Google: <code>https://accounts.google.com/logout</code>    
+
+    7. **Revoke URL** : Enter the Revoke URL that is provided by the endpoint service provider.
+     
         
 4.  Under **Client Details**, configure the following parameters. The client details are used by a service provider to identify which app the authorization service is trying to access:
     1.  In the **Client ID** text box, enter the client ID (for Google, app key) of the app instance that you created in service provider's developer console. For example, Google Developers Console.
@@ -93,6 +101,7 @@ To configure an identity service using Volt MX Foundry OAuth authentication mode
     3.  In the **Client Authentication Scheme**, select one of the following options to the client details as headers or form parameters:
         *   **Request Header**: To send client details as a header.
         *   **Form Param**: To send client details as form parameters.
+
 5.  Under **User Profile Endpoint Details**, configure the following parameters to get the user profile from a service provider - for example, Google.  
     Different service providers implement user profiles as per their own standards. Volt MX Foundry OAuth 2.0 identity service retrieves user attributes from a user profile and saves these attributes in VoltMX Foundry identity sessions after a successful login response.
     
@@ -127,66 +136,64 @@ To configure an identity service using Volt MX Foundry OAuth authentication mode
                 *   **Request Header**: To send access token to profile endpoint as a header.
                 *   **Form Param**: To send access token to profile endpoint as form parameters.
                 *   **Query Parameter**: To send access token to profile endpoint as query.
-            3.  Under **Profile Request Method**, click the **GET** or **POST** option.
+            3.  Under **Profile Request Method**, click the **GET** or **POST** option.  
+
 6.  Under **User Attribute Selectors**, configure the following fields to extract the required information from the response:
     
     1.  **Federation ID**: Enter the federation ID of the user. The federation ID is a mandatory field and it is unique ID of the user at the service provider.
+
     2.  **First Name**: Enter the JSON path to extract the first name from the user profile information.
-    3.  **Last Name**: Enter the JSON path to extract the last name from the user profile information.
-    4.  **Email ID**: Enter the JSON path to extract the email ID from the user profile information.
-    5.  **Phone**: Enter the JSON path to extract the phone number from the user profile information.
-    6.  **Display Name**: Enter the JSON path to extract the display name from the user profile information.
-    7.  **Custom User Attribute Selectors**: Enter custom attributes to add more attributes in addition to the ones defined above. For example, `groups=user.groups` to define a custom attribute with name `groups` and maps to `user.groups` JSON path in backend profile response.
+
+    3.  **Last Name**: Enter the JSON path to extract the last name from the user profile information.  
+
+    4.  **Email ID**: Enter the JSON path to extract the email ID from the user profile information.  
+
+    5.  **Phone**: Enter the JSON path to extract the phone number from the user profile information.  
+
+    6.  **Display Name**: Enter the JSON path to extract the display name from the user profile information.  
+
+    7.  **Custom User Attribute Selectors**: Enter custom attributes to add more attributes in addition to the ones defined above. For example, `groups=user.groups` to define a custom attribute with name `groups` and maps to `user.groups` JSON path in backend profile response.  
         
     
     > **_Note:_**  The parameters in **User Attribute Selectors** are supported in JSON path format.
     
-```
-
-    // Sample profile response in JSON format  
-      
-    {
-    	"id": "0001", // federation ID of the user
-    	"name":
-    		{
-    			"first":"John", // first name of the user
-    			"last":"Doe", // last name of the user
-    			"display":"john.doe" // display name of the user
-    		},
-    	"email": // email ID of the user
-    		[
-    			"john.doe@gmail.com",
-    			"john.doe@hotmail.com"			
-    		],
-    	"phone": "1234567890", // phone number of the user  
-           "picture": "picture", //"https://my-company.com/profile/picture/1002"  
-    } 
-```
+    <pre><code style="display:block;background-color:#eee;">// Sample profile response in JSON format  
+        {
+            "id": "0001", // federation ID of the user
+            "name":
+                {
+                    "first":"John", // first name of the user
+                    "last":"Doe", // last name of the user
+                    "display":"john.doe" // display name of the user
+                },
+            "email": // email ID of the user
+                [
+                    "john.doe@gmail.com",
+                    "john.doe@hotmail.com"			
+                ],
+            "phone": "1234567890", // phone number of the user  
+               "picture": "picture", //"https://my-company.com/profile/picture/1002"  
+        }</code></pre>
     
-```
+    <pre><code style="display:block;background-color:#eee;">// Sample profile attributes selectors for the above response  
+        "federation id": "id"
+        "first name":"name.first"
+        "last name": "name.last"
+        "display name":"name.display"
+        "phone":"phone"
+        "email":"email\[0\]" 
+    </code></pre>
 
-    // Sample profile attributes selectors for the above response  
-      
-    "federation id": "id"
-    "first name":"name.first"
-    "last name": "name.last"
-    "display name":"name.display"
-    "phone":"phone"
-    "email":"email\[0\]" 
-```
+    <pre><code style="display:block;background-color:#eee;">// Sample custom attributes selectors for the above response  
+        "federation id": "id"
+        "first name":"name.first"
+        "last name": "name.last"
+        "display name":"name.display"
+        "phone":"phone"
+        "email":"email\[0\]"   
+        "picture": "https://my-company.com/profile/picture/1002" 
+    </code></pre>  
 
-```
- 
-    // Sample custom attributes selectors for the above response  
-      
-    "federation id": "id"
-    "first name":"name.first"
-    "last name": "name.last"
-    "display name":"name.display"
-    "phone":"phone"
-    "email":"email\[0\]"   
-    "picture": "https://my-company.com/profile/picture/1002"
-```
 7.  **Redirect URL on successful authentication**:
     
     *   **Any URL**: Select this to use any URL on successful authentication.
@@ -231,20 +238,26 @@ To configure an identity service using Volt MX Foundry OAuth authentication mode
         *   QueryParam
         *   FormParam
     8.  Under the **AUTHORIZE REQUEST** field, click and select the following options from the drop-down list. By default, this field is set to **None**.
-        *   QueryParam
+        *   QueryParam  
+        *   PathParam
+
+        > ***Note***: If you select PathParam as the type of parameter for a request, make sure that the parameter name matches with the parameter in the respective endpoint URL. For example: if your endpoint URL is `<authURL>/authService/token/{$authkey}`, your parameter name must be <code>authKey</code>. <br><br>
+        > You can use the same additional parameters for the logout and revoke endpoint URLs. 
+
 9.  After entering the above details, click on the **TEST LOGIN** button to verify the credentials.
     
     If you have not logged in to your the social identity service (for example: Gmail), the Console redirects you to the back-end identity provider’s log-in page. Enter your credentials as required.
     
-    The test results are displayed in the **Identity Response** dialog.
+    The test results are displayed in the **Identity Response** dialog.  
+
     
-10.  Click the **Advanced** to provide additional configuration of your service definition:
+10. Click the **Advanced** to provide additional configuration of your service definition:
     
-      <table style="width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 910px;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1" data-mc-conditions="Default.V9SP2HFP"><td class="TableStyle-Basic-BodyD-Column1-Body1"><b>Enable Refresh Login</b>Select the Enable Refresh Login check box for extending an active app user login session through a oauth2 refresh token. OAuth2 efresh token obtained in OAuth2 token fetching API will be capable of supplying a new claims token in the event of expiry of currently held claims token.This is required because every time when a user opens the app, the user is forced to enter credentials to access the app. This can be avoided if you make use of OAuth2.0 Refresh Token Grant Type Flow. The Refresh Token Grant Type is a feature of OAuth2 services which enables exchange of backend <code class="codefirst">oauth2 refresh_token</code> for new bearer tokens (access_tokens).For example, you have selected the <b>Enable Refresh Login</b> check box in your Foundry app and built the client app. When a user logs into the app for the first time, the identity provider sends the <code class="codefirst">oauth2 refresh_token</code> in the response to the SDKs. <code class="codefirst">OAuth2 refresh_token</code> is stored by the SDKs in device data store, which is used for subsequent refresh logins.The <code class="codefirst">Refresh Token grant type /grant type (Refresh)</code> is used by clients (SDKs) to exchange a <code class="codefirst">refresh_token</code> for an <code class="codefirst">access_token</code> when the <b>access_token</b> has expired. So that, the app user is allowed to continue to have the app login session until the <code class="codefirst">refresh_token</code> expires.<span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>After the refresh_token expires, once user uses the refresh login API, the app login session is logged out automatically and the refresh will fail.<span style="background-color: #ffff00;">Maximum Session Duration for Refresh Login</span><b>Login + refresh login (in case of active sessions)</b>The active session gets expired if the user is not active within idle timeout or max session duration reached.In the scenario where the user does refresh login to an active session then the active session will be extended by maximum session duration.<b>logout + refresh login: </b>In this scenario, user is given a new session with maximum session duration.Based on the value set in for Maximum Session Duration, if the extended active login session reaches the value, the refresh login will not be possible, and the user must log in again. For example, In the following settings, if user wants to grant refresh login after 6.00 Hours, the refresh login will not be possible even though the backend refresh_token is valid for weeks. For more information, refer to <a href="ServiceConfig-Identiy-Apps.html#AppSessionMFApps" target="_blank">How to Configure App Session Settings</a>.<img src="Resources/Images/IdentitySessionideltime.png" style="mc-thumbnail-max-width: 600px;mc-thumbnail-max-height: auto;border-left-style: solid;border-left-width: 1px;border-left-color: ;border-right-style: solid;border-right-width: 1px;border-right-color: ;border-top-style: solid;border-top-width: 1px;border-top-color: ;border-bottom-style: solid;border-bottom-width: 1px;border-bottom-color: ;"><b>Limitations</b>No validation to check whether same user who made a fresh login is trying for refresh a backend login. We You can do this by asking a user to set-up security pin while logging-in under refresh grant mode later.When a user does backend refresh login after an expiry of max-session limit, all other linked multi-login provider information is no longer valid and will be lost. Just the current provider will remain active.For more information on how to configure SDKs, refer to <a href="VoltMXStudio/Invoking_Identity_Service_Iris.html#RefreshLogin" target="_blank">Refresh Login API</a>.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyD-Column1-Body1">Now you can enable or disable the integrity check for an identity service at the provider level. If the integrity is disabled at the provider level, then the provider is meant for server-to-server communication only. To disable the integrity check, In <b>Advanced</b>, select the <b>Restrict to Foundry Server to Server Authentication</b> check box. This setting blocks a traditional client app from using an identity service. It will only allow the identity service to be used from a <span class="MyVariablesVoltMX">VoltMX</span> Foundry Server to authenticate and invoke services.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyA-Column1-Body1"><b>Concurrent User Logins</b>: Select one of the following three options to configure concurrent user login sessions. For more information, refer to <a href="ConcurrentUserLogins.html" target="_blank">Concurrent User Logins</a>.</td></tr></tbody></table>
+      <table style="width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 910px;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1" data-mc-conditions="Default.V9SP2HFP"><td class="TableStyle-Basic-BodyD-Column1-Body1"><b>Enable Refresh Login: </b>Select the Enable Refresh Login check box for extending an active app user login session through a oauth2 refresh token. OAuth2 efresh token obtained in OAuth2 token fetching API will be capable of supplying a new claims token in the event of expiry of currently held claims token.This is required because every time when a user opens the app, the user is forced to enter credentials to access the app. This can be avoided if you make use of OAuth2.0 Refresh Token Grant Type Flow. The Refresh Token Grant Type is a feature of OAuth2 services which enables exchange of backend <code class="codefirst">oauth2 refresh_token</code> for new bearer tokens (access_tokens).For example, you have selected the <b>Enable Refresh Login</b> check box in your Foundry app and built the client app. When a user logs into the app for the first time, the identity provider sends the <code class="codefirst">oauth2 refresh_token</code> in the response to the SDKs. <code class="codefirst">OAuth2 refresh_token</code> is stored by the SDKs in device data store, which is used for subsequent refresh logins.The <code class="codefirst">Refresh Token grant type /grant type (Refresh)</code> is used by clients (SDKs) to exchange a <code class="codefirst">refresh_token</code> for an <code class="codefirst">access_token</code> when the <b>access_token</b> has expired. So that, the app user is allowed to continue to have the app login session until the <code class="codefirst">refresh_token</code> expires.<br><span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>After the refresh_token expires, once user uses the refresh login API, the app login session is logged out automatically and the refresh will fail.<span style="background-color: #ffff00;"><br>Maximum Session Duration for Refresh Login</span><b>Login + refresh login (in case of active sessions)</b>The active session gets expired if the user is not active within idle timeout or max session duration reached.In the scenario where the user does refresh login to an active session then the active session will be extended by maximum session duration.<br><b>logout + refresh login: </b>In this scenario, user is given a new session with maximum session duration.Based on the value set in for Maximum Session Duration, if the extended active login session reaches the value, the refresh login will not be possible, and the user must log in again. For example, In the following settings, if user wants to grant refresh login after 6.00 Hours, the refresh login will not be possible even though the backend refresh_token is valid for weeks. For more information, refer to <a href="ServiceConfig-Identiy-Apps.html#AppSessionMFApps" target="_blank">How to Configure App Session Settings</a>.<br><br><img src="Resources/Images/IdentitySessionideltime.png" style="mc-thumbnail-max-width: 600px;mc-thumbnail-max-height: auto;border-left-style: solid;border-left-width: 1px;border-left-color: ;border-right-style: solid;border-right-width: 1px;border-right-color: ;border-top-style: solid;border-top-width: 1px;border-top-color: ;border-bottom-style: solid;border-bottom-width: 1px;border-bottom-color: ;"><br><b>Limitations: </b>No validation to check whether same user who made a fresh login is trying for refresh a backend login. We You can do this by asking a user to set-up security pin while logging-in under refresh grant mode later.When a user does backend refresh login after an expiry of max-session limit, all other linked multi-login provider information is no longer valid and will be lost. Just the current provider will remain active.For more information on how to configure SDKs, refer to <a href="VoltMXStudio/Invoking_Identity_Service_Iris.html#RefreshLogin" target="_blank">Refresh Login API</a>.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyD-Column1-Body1">Now you can enable or disable the integrity check for an identity service at the provider level. If the integrity is disabled at the provider level, then the provider is meant for server-to-server communication only. To disable the integrity check, In <b>Advanced</b>, select the <b>Restrict to Foundry Server to Server Authentication</b> check box. This setting blocks a traditional client app from using an identity service. It will only allow the identity service to be used from a <span class="MyVariablesVoltMX">VoltMX</span> Foundry Server to authenticate and invoke services.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyA-Column1-Body1"><b>Concurrent User Logins</b>: Select one of the following three options to configure concurrent user login sessions. For more information, refer to <a href="ConcurrentUserLogins.html" target="_blank">Concurrent User Logins</a>.</td></tr></tbody></table>
     
 11.  After entering the above details, click **SAVE** to save the service. The system displays the **Identity** page. The Volt MX Foundry OAuth 2.0 identity service is configured.
     
-   > **_Note:_** You can view the service in the Data Panel feature of Volt MX Iris. By using the Data Panel, you can link back-end data services to your application UI elements seamlessly with low-code to no code. For more information on Data Panel, click [here](../../../Iris/iris_user_guide/Content/DataPanel.md#top).
+     > **_Note:_** You can view the service in the Data Panel feature of Volt MX Iris. By using the Data Panel, you can link back-end data services to your application UI elements seamlessly with low-code to no code. For more information on Data Panel, click [here](../../../Iris/iris_user_guide/Content/DataPanel.md#top).
     
 
 ### How to Test a Volt MX Foundry OAuth 2.0 Identity Service
@@ -257,19 +270,16 @@ To test a Volt MX Foundry OAuth 2.0 identity service, do the following:
 
 1.  In the Identity service configuration page, click **Test Login**.
 
-A sign in screen for the OAuth 2.0 service appears. For example, the sign in screen for your Google account.
+    A sign in screen for the OAuth 2.0 service appears. For example, the sign in screen for your Google account.
 
 3.  Enter your credentials and click **Sign in**.
 
-An alert indicates a successful login and a pane appears that has tabs for Backend Token Response, Backend Profile Response, Identity Response. If your sign in failed, the error message that appears provides information about the failure.
+    An alert indicates a successful login and a pane appears that has tabs for Backend Token Response, Backend Profile Response, Identity Response. If your sign in failed, the error message that appears provides information about the failure.
 
-> **_Important:_** If a custom integration service (for example, MongoDB or RAML) is linked to an OAuth2 identity service, while testing an operation of the integration service from VoltMX Foundry Console, you must pass the `x-volt-mx-oauth2-access-token` as a header and `access_token` as a header value.  
-  
-Also, If a custom integration service (for example, MongoDB or RAML) is linked to an OAuth2 identity service, while testing an operation of the integration service from Admin Console, you must pass the `x-volt-mx-oauth2-access-token`  as a header and `access_token` as a header value.  
-  
-For example:  
-  
-![](Resources/Images/s-volt-mx-oauth2-access-integration__620x229.png)
+    > **_Important:_** If a custom integration service (for example, MongoDB or RAML) is linked to an OAuth2 identity service, while testing an operation of the integration service from VoltMX Foundry Console, you must pass the `x-volt-mx-oauth2-access-token` as a header and `access_token` as a header value.  <br><br>
+    > Also, If a custom integration service (for example, MongoDB or RAML) is linked to an OAuth2 identity service, while testing an operation of the integration service from Admin Console, you must pass the `x-volt-mx-oauth2-access-token`  as a header and `access_token` as a header value.  
+    > For example:  <br><br>
+    > ![](Resources/Images/s-volt-mx-oauth2-access-integration__620x229.png)
 
 > **_Note:_** For more information on how you can integrate Volt MX OAuth Provider, User Repository, and OAuth 2.0 Identity services to create a basic login form, refer to a Base Camp article: [Exploring Volt MX OAuth Provider](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0083892).
 
