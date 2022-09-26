@@ -38,7 +38,7 @@ To create a new developer portal, do the following:
     1.  Go to the **Apps** tab.
     2.  Select the required check boxes for **the apps** that you want to add to the Dev Portal.
 
-        > **_Note:_** To select **all apps** that you want to add to the Dev Portal, select the **Include all current and future apps** check box.
+        > **_Note:_** To select **all apps** that you want to add to the Dev Portal, select the **Include all current and future apps** check box
 
     3.  click **SAVE** to add the selected apps with services to Developer portal.
 
@@ -83,11 +83,11 @@ To edit a Dev Portal, do the following:
 1.  Hover your cursor over the required portal, click the **Settings** button, and then click **Edit**.  
     ![](Resources/Images/Dev_Portal_EditPortal_659x229.png)
 
-1.  Under the **Definition** tab, in **Name**, type the name for your portal.
+2.  Under the **Definition** tab, in **Name**, type the name for your portal.
 
     ![](Resources/Images/Edit_DevPortal_676x375.png)
 
-1.  If you want to add a custom logo to your Dev Portal, click on **Logo**, select the image file containing your logo, and then click **Open**.
+3.  If you want to add a custom logo to your Dev Portal, click on **Logo**, select the image file containing your logo, and then click **Open**.
 1.  If you want your Dev Portal to have a different font color or header color, click **Header Color** and **Font Color**.
 
 > **_Note:_** You can view the header color and font color in the preview section before saving.
