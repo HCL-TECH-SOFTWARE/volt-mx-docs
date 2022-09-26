@@ -43,43 +43,43 @@ options{
           // ------- fetch branches from remote -------
           //----- 
           echo "fetching branches from remote to automation server.."
-          sh "git fetch origin rel/Auto:rel/Auto" 
-          sh "git checkout rel/Auto"
-          sh "git fetch origin rel/Auto"
-          sh "git pull origin rel/Auto"
+          sh "git fetch origin ${params.Auto_Branch}:${params.Auto_Branch}" 
+          sh "git checkout ${params.Auto_Branch}"
+          sh "git fetch origin ${params.Auto_Branch}"
+          sh "git pull origin ${params.Auto_Branch}"
           
-          echo "checkout to release-mkdocs branch and merge changes from rel/Auto branch"
-          sh "git checkout release-mkdocs"
-          sh "git fetch origin release-mkdocs"
-          sh "git pull origin release-mkdocs"
-          sh "git merge rel/Auto"
-          sh "git pull origin release-mkdocs"
-          sh "git push origin release-mkdocs"
+          echo "checkout to ${params.Release_Branch} branch and merge changes from ${params.Release_Branch} branch"
+          sh "git checkout ${params.Release_Branch}"
+          sh "git fetch origin ${params.Release_Branch}"
+          sh "git pull origin ${params.Release_Branch}"
+          sh "git merge ${params.Auto_Branch}"
+          sh "git pull origin ${params.Release_Branch}"
+          sh "git push origin ${params.Release_Branch}"
          
           sh "git status"
-          sh "git fetch origin release-mkdocs"
-          sh "git pull origin release-mkdocs"
+          sh "git fetch origin ${params.Release_Branch}"
+          sh "git pull origin ${params.Release_Branch}"
           echo "Building Volt MX Docs Site..."
           sh "sh buildDocs.sh" 
           echo "Build completed Successfully..."
           echo "Staging and Committing the Changes..."
           sh "git add ."
           sh "git commit --allow-empty -am 'Release Build'"
-          sh "git pull origin release-mkdocs"
-          sh "git push origin release-mkdocs"
+          sh "git pull origin ${params.Release_Branch}"
+          sh "git push origin ${params.Release_Branch}"
           
           // ----------------------------------------------------//
           
           // -----
           sh "git status"
-          sh "git checkout -b feature/HPHX"
-          sh "git push volt-mx-docs feature/HPHX"
-          sh "gh pr create -t 'HPHX-0002: Testing changes for build automation' -b 'HPHX-0002: Testing Changes in detail'"
+          sh "git checkout -b ${params.New_Branch}"
+          sh "git push volt-mx-docs ${params.New_Branch}"
+          sh "gh pr create -t '${params.Commit_Summary}' -b '${params.Commit_Description}'"
           sh "gh pr status"
           sh "gh pr merge --merge"
-          sh "git checkout master"
+          sh "git checkout {params.Main_Branch}"
           sh "git status"
-          sh "git branch -D feature/HPHX"
+          sh "git branch -D ${params.New_Branch}"
           // -----
         }
       }
