@@ -87,7 +87,7 @@ To edit a Dev Portal, do the following:
 
     ![](Resources/Images/Edit_DevPortal_676x375.png)
 
-1.  If you want to add a custom logo to your Dev Portal, click on **Logo**, select the image file containing your logo, and then click **Open**.
+3.  If you want to add a custom logo to your Dev Portal, click on **Logo**, select the image file containing your logo, and then click **Open**.
 1.  If you want your Dev Portal to have a different font color or header color, click **Header Color** and **Font Color**.
 
 > **_Note:_** You can view the header color and font color in the preview section before saving.
