@@ -174,7 +174,7 @@ Run the Volt MX Foundry Single Container install script to generate and deploy V
 
 **Steps to Install Volt MX Foundry Single Container Solution on On-Premises:**
 
-1.  Download the **`voltmx-foundry-containers-onprem\<version>\GA.zip`** from [downloads](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/startPage.do) and extract it. The file structure will be as shown below:
+1.  Download the **`voltmx-foundry-containers-onprem_<version>_GA.zip`** from [downloads](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/startPage.do) and extract it. The file structure will be as shown below:
     
     <pre><code style="display:block;background-color:#eee;">config.properties install-foundry.sh\* install-actions.sh\* lib/ templates/ foundry/ flyway/</code></pre>
 
