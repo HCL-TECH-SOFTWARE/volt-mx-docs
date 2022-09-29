@@ -42,7 +42,7 @@ To create a new developer portal, do the following:
 
     3.  click **SAVE** to add the selected apps with services to Developer portal.
 
-4.  (From Volt MX Foundry V8 SP4 onwards) To **add specific services** of an app to Developer portal, do the following:
+4.  (From Volt MX Foundry V8 SP4 onwards) To **add specific services** of an app to Developer portal, do the following: 
 
     1.  Go to the **Apps** tab.
 
