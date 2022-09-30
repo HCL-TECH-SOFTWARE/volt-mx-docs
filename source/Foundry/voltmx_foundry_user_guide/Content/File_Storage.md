@@ -28,8 +28,8 @@ To configure a File Storage adapter in [](Configure the Service.md)[Integration 
     | Fields | Description |
     | --- | --- |
     | Expiry Time in milliseconds | The expiration period of the objects in the S3 bucket.This parameter is optional. |
-    | Service Namespace | The namespace of the resource that you want to use. For more information, refer to [Amazon Resource Names](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.md). |
-    | Advanced Settings | Additional settings that are configured for the S3 bucket. For more information, refer to [Advanced Settings for S3 Bucket Properties](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/setup-advanced-bucket-properties.md).This parameter is optional. |
+    | Service Namespace | The namespace of the resource that you want to use. For more information, refer to [Amazon Resource Names](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html). |
+    | Advanced Settings | Additional settings that are configured for the S3 bucket. For more information, refer to [Advanced Settings for S3 Bucket Properties](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/setup-advanced-bucket-properties.html).This parameter is optional. |
     
 4.  [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)For additional configuration of your service definition, provide the following details in the **Advanced** section.](javascript:void(0);) 
     

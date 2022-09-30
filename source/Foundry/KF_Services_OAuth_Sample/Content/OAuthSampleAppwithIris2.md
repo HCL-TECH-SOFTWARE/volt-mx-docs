@@ -480,7 +480,7 @@ This section of the document discusses the details of the creation and usage of 
     
 7.  Your Volt MX Cloud account is now ready to use.
     
-8.  Creating Volt MX Foundry service to access Volt MX Cloud account. The Volt MX OAuth application uses an integration service to connect to the Volt MX OAuth endpoint. You can connect to this service by using the endpoint: [https://accounts.auth.voltmxcloud.com/login](https://accounts.auth.voltmxcloud.com/login).
+8.  Creating Volt MX Foundry service to access Volt MX Cloud account. The Volt MX OAuth application uses an integration service to connect to the Volt MX OAuth endpoint. You can connect to this service by using the endpoint: [https://manage.hclvoltmx.com](https://manage.hclvoltmx.com).
     
     ![](Resources/Images/voltmx8.png)
     

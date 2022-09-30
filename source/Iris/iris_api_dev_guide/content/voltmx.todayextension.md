@@ -6,7 +6,7 @@ voltmx.todayExtension Namespace
 
 The voltmx.todayExtension Namespace provides support for the iOS Today extension, which is a type of iOS app extension.
 
-The Today extensions in Today view are called widgets. Widgets give users quick access to information that is important at the current moment. For example, users open the Today view to check items such as current stock prices or that day's weather forecast. For more information on Today extensions and how you can use them, refer the relevant [Apple developer documentation](https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Today.md#//apple_ref/doc/uid/TP40014214-CH11-SW1).
+The Today extensions in Today view are called widgets. Widgets give users quick access to information that is important at the current moment. For example, users open the Today view to check items such as current stock prices or that day's weather forecast. For more information on Today extensions and how you can use them, refer the relevant [Apple developer documentation](https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Today.html#//apple_ref/doc/uid/TP40014214-CH11-SW1).
 
 You can add a Today extension to your app in the same way that you add any other type of iOS app extension. For more information on how to add iOS app extensions, refer [App Extension API for iOS](../../../Iris/iris_api_dev_guide/content/app-extension-ios.md).
 

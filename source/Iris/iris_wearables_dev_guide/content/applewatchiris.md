@@ -189,7 +189,7 @@ To process remote notifications, it uses the functions in the [voltmx.push names
 You add notification handlers in your Swift code by selecting the **Action** tab in the **Properties** pane, and then choosing the **Edit** button followed by **Add Swift Snippet**. Your code must handle the notifications in accordance with Apple guidelines. For more information, please see the following Apple documentation.
 
 *   [Notifications](https://developer.apple.com/library/ios/documentation/General/Conceptual/WatchKitProgrammingGuide/BasicSupport.md#//apple_ref/doc/uid/TP40014969-CH18-SW1)
-*   [Local and Remote Notification Programming Guide](https://developer.apple.com/library/prerelease/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/Introduction.md)
+*   [Local and Remote Notification Programming Guide](https://developer.apple.com/library/prerelease/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/Introduction.html)
 
 Many notification event handlers have a parameter named _completionHandler_, as indicated by the red circle in the figure below.
 

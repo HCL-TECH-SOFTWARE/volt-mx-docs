@@ -418,7 +418,7 @@ To create a gradle.properties file, do the following:
 
 4.  Replace _http_ with _https_, based on the proxy server settings.
 
-For more information, see [The Build Environment](https://docs.gradle.org/current/userguide/build_environment.md) on the Gradle web site.
+For more information, see [The Build Environment](https://docs.gradle.org/current/userguide/build_environment.html) on the Gradle web site.
 
 ##### Project-Level Automated Recommendations
 

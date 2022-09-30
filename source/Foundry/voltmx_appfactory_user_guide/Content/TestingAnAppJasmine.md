@@ -41,7 +41,7 @@ Jasmine tests always run in a Custom Test Environment. App Factory uses the defa
 
 ### Custom Test Environment Run (Raw Mode)
 
-In a custom test environment, you can select the Appium version on which you want to run your tests. Make sure that you provide an appropriate Appium version. For more information, refer to [AWS Device Farm](https://docs.aws.amazon.com/devicefarm/latest/developerguide/test-types-android-appium-java-junit.md).
+In a custom test environment, you can select the Appium version on which you want to run your tests. Make sure that you provide an appropriate Appium version. For more information, refer to [AWS Device Farm](https://docs.aws.amazon.com/devicefarm/latest/developerguide/test-types-android-appium-java-junit.html).
 
 ### Native Testing related Parameters
 

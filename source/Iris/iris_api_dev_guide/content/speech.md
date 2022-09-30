@@ -14,11 +14,11 @@ The Text-to-speech functionality allows you to create applications that can conv
 APIs
 ----
 
-Click [here](http://docs.voltmx.com/7_0_PDFs/Android_docs/index.html#!/api/android.speech.tts.TextToSpeech) to view Speech APIs.
+Click [here](https://github.com/HCL-TECH-SOFTWARE/volt-mx-native-function-docs/blob/main/docs/Android/android.speech.tts-Android-10.0/index.html) to view Speech APIs.
 
 Sample Application
 ------------------
 
-Click [here](https://github.com/voltmx/KNF_Speech) to download a sample application for Speech.
+Click [here](https://github.com/kony/KNF_Speech) to download a sample application for Speech.
 
-![](resources/prettify/onload.png)
+

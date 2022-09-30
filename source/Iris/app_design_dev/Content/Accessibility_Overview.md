@@ -50,7 +50,7 @@ The following table maps different platforms and their assistive technology:
   
 | Platform | Assistive Technology |
 | --- | --- |
-| [iOS](https://developer.apple.com/library/mac/documentation/Accessibility/Conceptual/AccessibilityMacOSX/OSXAXIntro/OSXAXintro.md) | VoiceOver |
+| [iOS](https://developer.apple.com/library/archive/documentation/Accessibility/Conceptual/AccessibilityMacOSX/index.html) | VoiceOver |
 | [Android](http://developer.android.com/guide/topics/ui/accessibility/index.html) | TalkBack |
 | [SPA](http://www.w3.org/WAI/) | WAI-ARIA |
 

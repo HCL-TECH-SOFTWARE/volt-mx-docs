@@ -6,7 +6,7 @@ voltmx.actionExtension Namespace
 
 The voltmx.actionExtension Namespace provides support for the iOS Action extension, which is a kind of iOS app extension.
 
-An Action extension helps users view or update content originating in a host app. For example, an Action extension might help users edit an image in a document that they're viewing in a document editor. For more information about what Action extensions are and what you can use them for, please see the [Apple developer documentation](https://developer.apple.com/library/content/documentation/General/Conceptual/ExtensibilityPG/Action.md).
+An Action extension helps users view or update content originating in a host app. For example, an Action extension might help users edit an image in a document that they're viewing in a document editor. For more information about what Action extensions are and what you can use them for, please see the [Apple developer documentation](https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Action.html).
 
 You add an Action extension to your app in the same way that you add any other type of iOS app extension. For more details, refer [App Extension API for iOS](app-extension-ios.md).
 

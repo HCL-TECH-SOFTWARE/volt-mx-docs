@@ -245,7 +245,7 @@ To debug JavaScript applications for Android in Volt MX Iris: 
 5.  Volt MX Iris displays a popup that the debugging has started. Open your Google Chrome browser and enter the URL displayed in the popup into the address bar of the browser.  
     The URL will be as follows, **chrome-devtools://devtools/bundled/inspector.html?experiments=true&v8only=true&ws=127.0.0.1:<port\_number>**  
     For example,  
-    [chrome-devtools://devtools/bundled/inspector.html?experiments=true&v8only=true&ws=127.0.0.1:9222](chrome-devtools://devtools/bundled/inspector.md?experiments=true&amp;v8only=true&amp;ws=127.0.0.1:9222)  
+    [chrome-devtools://devtools/bundled/inspector.html?experiments=true&v8only=true&ws=127.0.0.1:9222](https://developer.chrome.com/docs/devtools/)  
     JavaScript files that you open appear in **Sources** panel. You can add breakpoints and step through the code using the Debugger panel.
 
 ![](Resources/Images/JSDebugForAndroidChromeDebuggerWindow_530x265.png)

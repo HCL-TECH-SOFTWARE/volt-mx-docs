@@ -21,21 +21,20 @@ Some benefits of Apple Pay are:
 
 For more information on Apple Pay, follow the links:
 
-*   [Configuring Your Environment](https://developer.apple.com/library/ios/ApplePay_Guide/Configuration.md#//apple_ref/doc/uid/TP40014764-CH2-SW1)
-*   [Creating a Payment Request](https://developer.apple.com/library/ios/ApplePay_Guide/CreateRequest.md#//apple_ref/doc/uid/TP40014764-CH3-SW2)
-*   [Authorizing a Payment](https://developer.apple.com/library/ios/ApplePay_Guide/Authorization.md#//apple_ref/doc/uid/TP40014764-CH4-SW3)
-*   [Payment Processing](https://developer.apple.com/library/ios/ApplePay_Guide/ProcessPayment.md#//apple_ref/doc/uid/TP40014764-CH5-SW4)
+*   [Configuring Your Environment](https://developer.apple.com/library/archive/ApplePay_Guide/Configuration.html#//apple_ref/doc/uid/TP40014764-CH2-SW1)
+*   [Creating a Payment Request](https://developer.apple.com/library/archive/ApplePay_Guide/CreateRequest.html#//apple_ref/doc/uid/TP40014764-CH3-SW2)
+*   [Authorizing a Payment](https://developer.apple.com/library/archive/ApplePay_Guide/Authorization.html#//apple_ref/doc/uid/TP40014764-CH4-SW3)
+*   [Payment Processing](https://developer.apple.com/library/archive/ApplePay_Guide/ProcessPayment.html#//apple_ref/doc/uid/TP40014764-CH5-SW4)
 
 APIs
 ----
 
-Click [here](http://docs.voltmx.com/7_0_PDFs/iosdocs/index.html#!/api/PKObject), to view Apple Pay APIs.
+Click [here](https://github.com/HCL-TECH-SOFTWARE/volt-mx-samples/tree/main/SampleApplePayAPI), to view Apple Pay APIs.
 
 > **_Note:_** The PKPaymentButton class is not available in JavaScript. Alternatively, you have to download the Apple Pay button resources and use them on a Volt MX button to achieve the look desired for an Apple Pay button.
 
 Sample Application
 ------------------
 
-Click [here](https://github.com/voltmx/SampleApplePay) to download sample application for Apple Pay.
+Click [here](https://github.com/HCL-TECH-SOFTWARE/volt-mx-samples/blob/main/SampleApplePayAPI/sampleApplePay.zip) to download sample application for Apple Pay.
 
-![](resources/prettify/onload.png)
