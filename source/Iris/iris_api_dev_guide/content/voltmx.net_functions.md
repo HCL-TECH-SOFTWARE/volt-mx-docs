@@ -309,6 +309,59 @@ Android, iOS, Windows, and SPA
 * * *
 
 </details>
+
+<details close markdown="block"><summary>voltmx.net.getDomainVerificationUserState</summary>
+
+* * *
+
+Determines the verification status of the specified domain.
+
+### Syntax
+
+```
+voltmx.net.getDomainVerificationUserState(domainString);
+```
+
+### Input Parameters
+
+  
+| Constant | Description |
+| --- | --- |
+| domainString | The domain for which the verification status is to be determined.|
+
+
+ 
+### Example
+
+```
+
+var state = voltmx.net.getDomainVerificationUserState("google.com");
+if (state == constants.DOMAIN_STATE_NONE) {
+    // show the dialog to provide some context to user to navigate settings screen.
+} else if (state == constants.DOMAIN_STATE_VERIFIED) {
+
+}
+
+```
+
+### Return Values
+
+A constant that determines the verification status of the specified domain. Following are the supported constants:
+
+| Constant | Description |
+| --- | --- |
+| voltmx.constants.DOMAIN_STATE_VERIFIED | Indicates that the domain has passed the Android App Links verification.|
+| voltmx.constants.DOMAIN_STATE_SELECTED | Indicates that the domain has not passed Android App Links verification. However, it indicates that the user has associated with an app.|
+| voltmx.constants.DOMAIN_STATE_NONE | Indicates that the domain has neither passed the Android App Links verification nor has a user associated with an app.|
+
+
+### Platform Availability
+
+* Android
+
+* * *
+
+</details>
 <details close markdown="block"><summary>voltmx.net.hasCapability</summary>
 
 * * *
