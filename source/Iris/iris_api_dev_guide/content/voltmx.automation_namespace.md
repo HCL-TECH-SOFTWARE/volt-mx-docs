@@ -113,8 +113,7 @@ Support for the record and playback features for this API is available from the 
 
 
 * * *
-
-
+</details>
 <details close markdown="block"><summary>voltmx.automation.alert.click</summary> 
 
 * * *
@@ -2070,7 +2069,7 @@ await voltmx.automation.webSocket.waitForMessage(
 
 From the V9 Service Pack 5 release, Volt MX Iris introduces support for the following APIs to support the Page Object Model approach in Jasmine Test Automation:
 
-<details close markdown="block"><summary>voltmx.automation.pageObjectModel.getPageObjects</summary>
+<details close markdown="block"><summary id="getPageObjects">voltmx.automation.pageObjectModel.getPageObjects</summary>
 
 * * *
 
