@@ -1651,7 +1651,7 @@ None
 
 * * *
 
-This API allows the framework to capture a screenshot and send it to the Quantum Automator tool along with a filename for the screenshot. The API then waits for the Automator tool to compare the screenshot with the baseline image and returns the result. This is an awaitable API.
+This API allows the framework to capture a screenshot and send it to the Volt MX Automator tool along with a filename for the screenshot. The API then waits for the Automator tool to compare the screenshot with the baseline image and returns the result. This is an awaitable API.
 
 <b>Syntax</b>
 
@@ -1994,7 +1994,7 @@ voltmx.automation.webSocket.sendMessage(options);
   | --- | --- |
   |eventName [String]|The name of the event that must be executed in Temenos App Factory.|
   |data [String/Number/Object]|Additional data that must be passed in the message.|
-  |to [String] - Optional|The Selenium client receiver of the non-quantum app that uses the same WebSocket for communication.<br>The default value of this parameter is the clientID of the app from Temenos App Factory.<br>To send a message to a client app that is not on App Factory, set the value of this parameter as the clientID of the app.|
+  |to [String] - Optional|The Selenium client receiver of the non-voltmx app that uses the same WebSocket for communication.<br>The default value of this parameter is the clientID of the app from Temenos App Factory.<br>To send a message to a client app that is not on App Factory, set the value of this parameter as the clientID of the app.|
 
 
 <b>Example</b>
