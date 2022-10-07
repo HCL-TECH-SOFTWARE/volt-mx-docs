@@ -105,7 +105,7 @@ Volt MX  Iris provides support for the following Apple App Extensions.
 *   Share Extensions
 *   Today Extensions
 
-For more information about what app extension are and what you can do with them, refer Apple's [App Extension Programming Guide](https://developer.apple.com/library/content/documentation/General/Conceptual/ExtensibilityPG/index.md#//apple_ref/doc/uid/TP40014214).
+For more information about what app extension are and what you can do with them, refer Apple's [App Extension Programming Guide](https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/index.html#//apple_ref/doc/uid/TP40014214).
 
 Volt MX  Iris Classic allows you to create app extensions directly in its workspace. Each app extension within the workspace will be treated as a Iris Classic project within the project and stored in a folder called  `appextensions`.
 
@@ -131,7 +131,7 @@ You can then import an existing app extension into your project. To learn about 
 
 Even though the app extension is packaged within the containing app bundle, you must explicitly set up a share container so that the app extension and the containing app can share data among themselves.
 
-The shared container can be created using the [App Group AP](sharedappgroupcontainerapi.md)I and the [Native Function API](native_function.md). For more about sharing data, refer to the **Sharing Data with Your Containing App** section in the [Apple documentation](https://developer.apple.com/library/content/documentation/General/Conceptual/ExtensibilityPG/ExtensionScenarios.md). Also, see the [App Group API](sharedappgroupcontainerapi.md) overview in the [VoltMX Iris API Developer’s Guide](../../../Iris/iris_api_dev_guide/content/introduction.md).
+The shared container can be created using the [App Group AP](sharedappgroupcontainerapi.md)I and the [Native Function API](native_function.md). For more about sharing data, refer to the **Sharing Data with Your Containing App** section in the [Apple documentation](https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/ExtensionScenarios.html). Also, see the [App Group API](sharedappgroupcontainerapi.md) overview in the [VoltMX Iris API Developer’s Guide](../../../Iris/iris_api_dev_guide/content/introduction.md).
 
 ### Deleting an App Extension from a Project
 

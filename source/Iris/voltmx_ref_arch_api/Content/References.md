@@ -1,9 +1,4 @@
                         
-
-[![](Resources/Images/pdf.png)](http://docs.voltmx.com/9_x_PDFs/iris/voltmx_ref_arch_ap_internali.pdf)
-
-You are here: References
-
 References
 ==========
 

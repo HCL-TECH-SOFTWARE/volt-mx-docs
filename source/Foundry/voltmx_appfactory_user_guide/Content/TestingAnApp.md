@@ -132,7 +132,7 @@ When you customize the test environment, you can specify the commands that must 
 
 In a Custom test environment, you can select the Appium version on which the test must be run. All the TestNG annotations, such as grouping and parallel tests/methods, are supported.
 
-> **_Note:_** Make sure that you provide an appropriate Appium version. For more information, refer to [AWS Device Farm](https://docs.aws.amazon.com/devicefarm/latest/developerguide/test-types-android-appium-java-junit.md).
+> **_Note:_** Make sure that you provide an appropriate Appium version. For more information, refer to [AWS Device Farm](https://docs.aws.amazon.com/devicefarm/latest/developerguide/test-types-android-appium-java-junit.html).
 
 Including a testng.xml File in the tests.jar File for Device Farm
 

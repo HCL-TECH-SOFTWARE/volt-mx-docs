@@ -83,7 +83,7 @@ Notifications
 Apple Watch apps support both local notifications and remote notifications. Remote notifications, which originate on a server and are transmitted over the internet to the watch, are also known as push notifications. For more information on notifications, refer to the following links:
 
 *   [Notifications](https://developer.apple.com/library/ios/documentation/General/Conceptual/WatchKitProgrammingGuide/BasicSupport.md#//apple_ref/doc/uid/TP40014969-CH18-SW1)
-*   [Local and Remote Notification Programming Guide](https://developer.apple.com/library/prerelease/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/Introduction.md)
+*   [Local and Remote Notification Programming Guide](https://developer.apple.com/library/prerelease/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/Introduction.html)
 *   [Testing your notifications](https://developer.apple.com/library/ios/documentation/General/Conceptual/WatchKitProgrammingGuide/ConfiguringYourXcodeProject.md#//apple_ref/doc/uid/TP40014969-CH2-SW8)
 *   [Notification guidelines](https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/MobileHIG/NotificationCenter.md)
 *   [Dynamic notifications](https://developer.apple.com/library/ios/documentation/General/Conceptual/WatchKitProgrammingGuide/CustomzingthePushNotificationInterface.md)

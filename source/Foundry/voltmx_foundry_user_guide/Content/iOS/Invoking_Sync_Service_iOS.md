@@ -122,16 +122,16 @@ The following is a list of error codes for iOS platform along with the correspon
 | HCL1009E |   | Cannot delete as child record(s) with cascades false exist for this record |   |
 | HCL8888E |   | whatever message comes from server |   |
 | HCL1010E |   | UpgradeRequired In Progress |   |
-| HCL2006E | sync.initSync | class not found exception | [Supported Doc](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/Exceptions/Concepts/PredefinedExceptions.md#//apple_ref/doc/uid/20000057-BCIGHECA) |
+| HCL2006E | sync.initSync | class not found exception | [Supported Doc](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Exceptions/Concepts/PredefinedExceptions.html#//apple_ref/doc/uid/20000057-BCIGHECA) |
 | HCL3000E | any native NSExceptoin | native iOS error |   |
 
 > **_Important:_** For asynchronous APIs, NSError Codes are the same as other error codes. However, the NSError Codes will not have a HCL prefix or an E suffix, because as errors have errorcode as numbers, not string. Also, all errors will have com.voltmx.mobileFoundry.sync as their ErrorDomain.
 
 ### Predefined iOS Exception
 
-If any API throws a predefined iOS exception, refer to the below link: [https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/Exceptions/Concepts/PredefinedExceptions.html #//apple\_ref/doc/uid/20000057-BCIGHECA](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/Exceptions/Concepts/PredefinedExceptions.md#//apple_ref/doc/uid/20000057-BCIGHECA)
+If any API throws a predefined iOS exception, refer to the below link: [https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/Exceptions/Concepts/PredefinedExceptions.html #//apple\_ref/doc/uid/20000057-BCIGHECA](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Exceptions/Concepts/PredefinedExceptions.html#//apple_ref/doc/uid/20000057-BCIGHECA)
 
-For any network errors, refer to the below link: [https://developer.apple.com/library/mac/documentation/Networking/Reference/CFNetworkErrors/index.html#//apple\_ref /c/tdef/CFNetworkErrors](https://developer.apple.com/library/mac/documentation/Networking/Reference/CFNetworkErrors/index.md#//apple_ref/c/tdef/CFNetworkErrors)
+For any network errors, refer to the below link: [https://developer.apple.com/library/mac/documentation/Networking/Reference/CFNetworkErrors/index.html#//apple\_ref /c/tdef/CFNetworkErrors](https://developer.apple.com/documentation/cfnetwork/cfnetworkerrors/)
 
 Create, Read, Update, and Delete (CRUD) operations in Native SDK
 ----------------------------------------------------------------

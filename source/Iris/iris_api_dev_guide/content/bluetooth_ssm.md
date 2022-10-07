@@ -16,6 +16,6 @@ Using the Bluetooth feature, the iOS applications can:
 APIs
 ----
 
-For more information on Bluetooth APIs for iOS, [click here](http://docs.voltmx.com/7_0_PDFs/CoreBluetooth/index.html).
+For more information on Bluetooth APIs for iOS, [click here](https://github.com/HCL-TECH-SOFTWARE/volt-mx-native-ios-function-docs/tree/main/docs/iOS13/CoreBluetooth-iOS-13.0).
 
-![](resources/prettify/onload.png)
+

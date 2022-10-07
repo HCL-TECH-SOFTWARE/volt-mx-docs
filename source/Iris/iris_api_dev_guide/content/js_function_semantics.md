@@ -18,7 +18,7 @@ Nested functions and closures are allowed as it is first class feature of the Ja
 
 The following URL will help in the understanding of closures and nested functions:
 
-[http://blog.morrisjohns.com/javascript\_closures\_for\_dummies](http://blog.morrisjohns.com/javascript_closures_for_dummies)
+[http://blog.morrisjohns.com/javascript\_closures\_for\_dummies](https://archive.ph/BgFak)
 
 Functions that contain the nested functions can be passed to the Volt MX Iris APIs (as a callback to the events) and the underlying platforms use the ECAM-262 v3 compatible engine to execute the functions. Closures can also be passed to the Volt MX Iris APIs (as a callback to the events.
 
