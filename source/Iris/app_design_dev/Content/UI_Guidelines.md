@@ -54,7 +54,7 @@ For more information, see
 
  
 
-> **_Important:_** iTunesArtwork icon images should be in PNG format. Name the images without the **.png** extension after importing them into the Xcode project. For more information, see [https://developer.apple.com/library/content/qa/qa1686/\_index.html](https://developer.apple.com/library/content/qa/qa1686/_index.md)
+> **_Important:_** iTunesArtwork icon images should be in PNG format. Name the images without the **.png** extension after importing them into the Xcode project. For more information, see [https://developer.apple.com/library/content/qa/qa1686/\_index.html](https://developer.apple.com/library/content/qa/qa1686/_index.html)
 
 ### Guidelines for Configuring Application Icon for Android Applications
 

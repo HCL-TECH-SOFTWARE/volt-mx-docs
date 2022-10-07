@@ -20,11 +20,11 @@ For more information on HealthKit, [click here](https://developer.apple.com/libr
 APIs
 ----
 
-Click [here](http://docs.voltmx.com/7_0_PDFs/iosdocs/index.html#!/api/HKObject), to view HealthKit APIs.
+Click [here](https://github.com/HCL-TECH-SOFTWARE/volt-mx-samples/tree/main/HealthKitAPI), to view HealthKit APIs.
 
 Sample Application
 ------------------
 
-Click [here](https://github.com/voltmx/VoltMXJSBindings_HealthKit) to download sample health application.
+Click [here](https://github.com/HCL-TECH-SOFTWARE/volt-mx-samples/blob/main/HealthKitAPI/HealthKitQA.zip) to download sample health application.
 
-![](resources/prettify/onload.png)
+

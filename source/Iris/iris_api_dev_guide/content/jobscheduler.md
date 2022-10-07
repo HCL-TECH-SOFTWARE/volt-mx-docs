@@ -22,7 +22,7 @@ For more information on JobScheduler APIs, [click here](https://developer.androi
 
 ### APIs
 
-Click [here](http://docs.voltmx.com/7_0_PDFs/Android_docs/index.html#!/api/android.app.job.JobScheduler) to view JobScheduler APIs.
+Click [here](https://developer.android.com/reference/android/app/job/JobScheduler.html) to view JobScheduler APIs.
 
 ### Limitations
 

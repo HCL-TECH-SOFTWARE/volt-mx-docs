@@ -220,7 +220,9 @@ Issues Publishing an Application Using Volt MX Foundry Console
     *   BLOB content is sent over the wire from Volt MX Foundry to MySQL Serve in hexadecimal encoding. Hence the size of the MySQL query doubles. There is a limit to the packet size of the MySQL query. Hence adjusting the packet size to accommodate the whole binary would solve the problem.
     *   Redo log writes for large, externally stored BLOB fields could overwrite the most recent checkpoint. The 5.6.20 patch limits the size of redo log BLOB writes to 10% of the redo log file size. The 5.7.5 patch addresses the bug without imposing a limitation. For MySQL 5.5, the bug remains a known limitation. As a result of the redo log BLOB write limit introduced for MySQL 5.6, innodb\_log\_file\_size should be set to a value greater than 10 times the largest BLOB data size found in the rows of your tables plus the length of other variable length fields (VARCHAR, VARBINARY, and TEXT type fields). Failing to do so could result in “Row size too large” errors. No action is required if your `innodb_log_file_size` setting is already sufficiently large or your tables contain no BLOB data.
         
-        Related Links: [https://dev.mysql.com/doc/refman/5.5/en/packet-too-large.html http://stackoverflow.com/questions/25246074/row-size-too-large-8126-exception-on-adding-appcenter-application](https://dev.mysql.com/doc/refman/5.5/en/packet-too-large.md http://stackoverflow.com/questions/25246074/row-size-too-large-8126-exception-on-adding-appcenter-application)
+        Related Links: 
+        * [https://dev.mysql.com/doc/refman/8.0/en/packet-too-large.html](https://dev.mysql.com/doc/refman/8.0/en/packet-too-large.html)
+        * [http://stackoverflow.com/questions/25246074/row-size-too-large-8126-exception-on-adding-appcenter-application](http://stackoverflow.com/questions/25246074/row-size-too-large-8126-exception-on-adding-appcenter-application)
         
     
     **Workaround**

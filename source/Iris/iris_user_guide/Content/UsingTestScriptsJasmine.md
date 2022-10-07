@@ -115,7 +115,7 @@ To debug an Android application while using Jasmine test scripts, follow these s
 6.  Start the app on your device. The **Waiting for Debugger to connect...** dialog box appears on your device.
 7.  From Volt MX Iris, go to **Product**\>**Debug As**\>**Debug android application**. The Google Chrome web browser opens with the chrome devtools URL.  
     For example,  
-    [chrome-devtools://devtools/bundled/inspector.html?experiments=true&v8only=true&ws=127.0.0.1:9222](chrome-devtools://devtools/bundled/inspector.md?experiments=true&amp;v8only=true&amp;ws=127.0.0.1:9222)  
+    [chrome-devtools://devtools/bundled/inspector.html?experiments=true&v8only=true&ws=127.0.0.1:9222](https://developer.chrome.com/docs/devtools/)  
       
     For more information about how to debug an Android application, click [here](Inline_Debugger.md#debug-javascript-for-android-in).
 

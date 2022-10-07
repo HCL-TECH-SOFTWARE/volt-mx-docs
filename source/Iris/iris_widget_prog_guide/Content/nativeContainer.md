@@ -131,7 +131,7 @@ The NativeContainer Widget adheres to the flex container semantics as the Native
 The actual layout view displayed on the screen is platform-specific. The platform-specific layouts differ from platform to platform and are displayed only for the respective platforms. For Android, RelativeLayout is used whereas for iOS, Auto Layout is used. The following links provide more information on the platform-specific layouts.
 
 *   RelativeLayout: [http://developer.Android.com/reference/Android/widget/RelativeLayout.html](http://developer.android.com/reference/android/widget/RelativeLayout.html)
-*   Auto Layout: [https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/AutolayoutPG/index.html#//apple\_ref/doc/uid/TP40010853-CH7-SW1](https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/AutolayoutPG/index.md#//apple_ref/doc/uid/TP40010853-CH7-SW1)
+*   Auto Layout: [https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/AutolayoutPG/index.html#//apple\_ref/doc/uid/TP40010853-CH7-SW1](https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/AutolayoutPG/index.html#//apple_ref/doc/uid/TP40010853-CH7-SW1)
 
 All the APIs, constants, and properties of these layouts can be used on the Layout returned using the NativeContainer’s Events and Methods.
 

@@ -119,7 +119,7 @@ Installing com.voltmx.VoltMXSDK.docset in Xcode
 
 Volt MX  provides Xcode docset to search and browse API documentation within Xcode. The docset also provides quick help in the code completion popup.
 
-To view Volt MX iOS Docset help in native format, click [com.voltmx.VoltMXSDK.docset.](http://docs.voltmx.com/8_x_PDFs/voltmxfoundry/voltmx_docsets/ios/com.voltmx.VoltMXSDK.docset/Contents/Resources/Documents/index.html)
+To view Volt MX iOS Docset help in native format, click [com.voltmx.VoltMXSDK.docset.](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/iOS/Download_VoltMX_SDK_iOS.html)
 
 To install the com.voltmx.VoltMXSDK.docset in Xcode, follow these steps:
 

@@ -1,11 +1,8 @@
                          
 
-[![](Resources/Images/pdf.png)](http://docs.voltmx.com/9_x_PDFs/iris/voltmx_ref_arch_ap_internali.pdf)
 
-You are here: Reference Architecture SDK API Programmers' Guide - Overviews
 
-Overviews
-=========
+# Overviews
 
 Earlier, Volt MX apps were developed only with the [Freeform JavaScript technique](../../../Iris/iris_user_guide/Content/CreateNewProject.md). JavaScript is a powerful language that provides developers with a lot of flexibility. It is an extremely accessible language that allows developers to start a project easily. However, all of these JavaScript features can create problems as a project grows in size and complexity. From Volt MX Iris 7.3 onwards, an MVC-based Reference Architecture has been integrated directly in to Volt MX Iris, which helps to improve the organization and consistency of the application code.
 

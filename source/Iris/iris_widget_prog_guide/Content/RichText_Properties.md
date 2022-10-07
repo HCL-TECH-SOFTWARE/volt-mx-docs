@@ -151,7 +151,7 @@ Form1.widget1.anchorPoint = {
 
 When the `appendsHTTPForHyperLinks` property is enabled for a RichText widget, HTTP is added to the beginning of every hyperlink provided in the text of the widget.
 
-For example, the text provided in a RichText widget has the following script: <a href=\\"google.com\\"> Google</a>. When you enable `appendsHTTPForHyperLinks` property, HTTP is automatically added to the google.com before the link is invoked. If the script already has HTTP in the link such as, <a href=\\"http://google.com\\"> Google</a>, then nothing is added to the link.
+For example, the text provided in a RichText widget has the following script: `<a href=\"google.com\"> Google</a>`. When you enable `appendsHTTPForHyperLinks` property, HTTP is automatically added to the google.com before the link is invoked. If the script already has HTTP in the link such as, `<a href=\"http://google.com\"> Google</a>`, then nothing is added to the link.
 
 This property is available only from Iris V9 SP0 FP1 version.
 

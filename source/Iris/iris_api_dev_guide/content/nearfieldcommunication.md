@@ -18,6 +18,6 @@ The data is stored in tags in a standard format. You can also store data in diff
 APIs
 ----
 
-Click [here](http://docs.voltmx.com/8_x_PDFs/Android_docs/index.html#!/api/android.nfc.NfcAdapter) to view Near Field Communication APIs.
+Click [here](https://github.com/HCL-TECH-SOFTWARE/volt-mx-native-function-docs/tree/main/docs/Android/android.nfc-Android-10.0) to view Near Field Communication APIs.
 
-![](resources/prettify/onload.png)
+

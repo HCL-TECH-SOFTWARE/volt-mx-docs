@@ -32,7 +32,7 @@ Custom Data Adapters are readily available as connectors. Moreover, you can add 
 
 You can also create a Custom Data Adapter directly from your backend API definitions if they are compatible with Volt MX Foundry. The compatible definitions can be in an XML file that you can structure according to the [Custom Data Adapter Zip Structure](#custom-data-adapter-structure).
 
-You can also **upload** your Custom Data Adapters to the [VoltMX Marketplace](https://community.voltmx.com/marketplace), so that other users will be able to use it.
+You can also **upload** your Custom Data Adapters to the [VoltMX Marketplace](https://marketplace.demo-hclvoltmx.com/items/news-and-weather?search=Google%20News), so that other users will be able to use it.
 
 Getting Started
 ---------------
@@ -115,7 +115,7 @@ Follow the given steps to import an existing Custom Data Adapter to Volt MX Foun
 3.  **Drag and Drop** a zip file into the upload window.  
     Alternatively, you can **browse** for a file on your system.
     
-    > **_Note:_** You can also import Custom Data Adapters from the [VoltMX Marketplace](https://community.voltmx.com/marketplace) by clicking the **IMPORT FROM VoltMX MARKETPLACE** button.
+    > **_Note:_** You can also import Custom Data Adapters from the [VoltMX Marketplace](https://marketplace.demo-hclvoltmx.com) by clicking the **IMPORT FROM VoltMX MARKETPLACE** button.
     
 4.  Click **IMPORT** on the next window. This window also shows the metadata that you configured for your Custom Data Adapter.  
     ![](Resources/Images/adapter_news_411x205.png)
@@ -131,7 +131,7 @@ The structure of your Custom Data Adapter depends on whether it is **RAML/Swagge
 
 If your Custom Data Adapter is based on RAML or Swagger, your zip file should contain the respective file at the root location. Let us take the same example of the [Swagger PetStore Data Adapter](#api-based-custom-data-adapter-example).
 
-You can use a [sample PetStore.zip](http://docs.voltmx.com/8_x_PDFs/DataAdapter-sampleApps/PetStore.zip) file for this example.
+You can use a [sample PetStore.zip](https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/foundry/zip/user_guide/PetStoreJSON.zip) file for this example.
 
 Ensure that the root location of your zip contains the following files.
 
@@ -199,7 +199,7 @@ You can then compress these files into a zip file and [import](#importing-a-cust
 
 If your Custom Data Adapter is based on Service Definitions from Volt MX Foundry, you need to create folders for each service that you want to include. Let us take a sample **Google News Custom Data Adapter**.
 
-You can use a [sample Googlenews.zip](http://docs.voltmx.com/8_x_PDFs/DataAdapter-sampleApps/GoogleNews.zip) file for this example.
+You can use a [sample Googlenews.zip](https://marketplace.demo-hclvoltmx.com/items/news-and-weather?search=Google%20News) file for this example.
 
 The root location of the zip files should contain the following files.
 
@@ -285,7 +285,7 @@ You have some additional options available under the **ellipsis** menu, that is 
 
 ![](Resources/Images/adapter_delete_620x276.png)
 
-*   **Upload to Marketplace** - Publish the Custom Data Adapter to the [VoltMX Marketplace](https://community.voltmx.com/marketplace).
+*   **Upload to Marketplace** - Publish the Custom Data Adapter to the [VoltMX Marketplace](https://marketplace.hclvoltmx.com/).
 *   **Update** - Update the existing Custom Data Adapter. Clicking on this option will open a window to [import](#importing-a-custom-data-adapter) a Custom Data Adapter.
 *   **Download** - Download the Custom Data Adapter as a **zip** file. The downloaded archive follows the structure mentioned in the [Custom Data Adapter Zip Structure](#custom-data-adapter-structure) section of this document.
 *   **Delete** - Delete the Custom Data Adapter.

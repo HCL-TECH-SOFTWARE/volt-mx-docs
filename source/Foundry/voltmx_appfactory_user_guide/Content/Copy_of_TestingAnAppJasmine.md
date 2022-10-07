@@ -86,7 +86,7 @@ You must meet the following prerequisites to test the application:
 
 In a custom test environment, you can select the Appium version to run your test.
 
-> **_Note:_** Please make sure that you provide an appropriate Appium version. For more information refer to [AWS Device Farm](https://docs.aws.amazon.com/devicefarm/latest/developerguide/test-types-android-appium-java-junit.md).
+> **_Note:_** Please make sure that you provide an appropriate Appium version. For more information refer to [AWS Device Farm](https://docs.aws.amazon.com/devicefarm/latest/developerguide/test-types-android-appium-java-junit.html).
 
 Configuring Parameters
 

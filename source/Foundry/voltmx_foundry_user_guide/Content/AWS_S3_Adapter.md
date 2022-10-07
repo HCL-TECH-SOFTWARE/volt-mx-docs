@@ -28,9 +28,9 @@ To configure an AWS S3 adapter, follow these steps:
     | Access Secret | The secret access key of your AWS account. For more information, refer to [Managing Access Keys for Your AWS Account Root User](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.md). |
     | Backend URL | The URL of the service endpoint on AWS. For more information, refer to [AWS Service Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.md). |
     | Region | The region code of your endpoint. For more information, refer to [Regional Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.md#regional-endpoints). |
-    | Bucket Path | The path of the S3 bucket that you want to use. For more information, refer to [Path-Style Access](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.md#path-style-url-ex). |
-    | Service Namespace | The namespace of the resource that you want to use. For more information, refer to [Amazon Resource Names](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.md). |
-    | Advanced Settings | Additional settings that are configured for the S3 bucket. For more information, refer to [Advanced Settings for S3 Bucket Properties](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/setup-advanced-bucket-properties.md).This parameter is optional. |
+    | Bucket Path | The path of the S3 bucket that you want to use. For more information, refer to [Path-Style Access](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html#path-style-url-ex). |
+    | Service Namespace | The namespace of the resource that you want to use. For more information, refer to [Amazon Resource Names](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html). |
+    | Advanced Settings | Additional settings that are configured for the S3 bucket. For more information, refer to [Advanced Settings for S3 Bucket Properties](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/setup-advanced-bucket-properties.html).This parameter is optional. |
     
 4.  
 <details close markdown="block"><summary>For additional configuration of your service definition, provide the following details in the **Advanced** section.</summary> 

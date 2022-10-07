@@ -4,7 +4,7 @@
 Configuring JBoss in Domain mode
 ================================
 
-1.  Extract the  [com.zip](http://docs.voltmx.com/8_x_PDFs/com.zip)  file.
+1.  Extract the  [com.zip](https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/foundry/zip/user_guide/com.zip)  file.
     
     The unzipped folder structure will be `com\mysql\main`.
     

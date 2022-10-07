@@ -72,7 +72,7 @@ Volt MX  provides the following application and code-level mechanisms to protect
 
 Prerequisites
 
-For OpenSSL command to work, for the Windows environment, you can use a couple of different third-party tools, such as Git Bash, which is available [here](https://git-scm.com/download/win), and Cygwin, which is available [here](https://cygwin.com/install.md).
+For OpenSSL command to work, for the Windows environment, you can use a couple of different third-party tools, such as Git Bash, which is available [here](https://git-scm.com/download/win), and Cygwin, which is available [here](https://cygwin.com/install.html).
 
 To generate, encrypt, and use the RSA key pair, follow these steps: 
    

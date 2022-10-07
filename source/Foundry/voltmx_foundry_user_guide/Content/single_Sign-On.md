@@ -35,6 +35,8 @@ The workflow of these applications is as follows:
 9.  After the SSO token is validated, Volt MX Foundry Identity authenticates the user and sends the SSO token to the Task app.
 10.  Finally, the Task app is launched without the user having to log on.
 
+
+<a id="sso-configuration"></a>
 SSO Configuration
 -----------------
 
@@ -85,6 +87,7 @@ identitySvc.login(options, function(response) {
 });
 ```
 
+<a id="configuring-sso-permissions-for-native-platforms"></a>
 ### Configuring SSO permissions for Native Platforms
 
 The SSO tokens are stored in shared space/keychains of the devices. You must configure application settings to ensure that these tokens are shared among all the SSO enabled apps so that the SSO is implemented and other applications can access these tokens.
