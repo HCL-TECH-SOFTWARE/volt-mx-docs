@@ -2065,7 +2065,7 @@ await voltmx.automation.webSocket.waitForMessage(
 
 
 
-## <a name="pom"></a> Page Object Model APIs
+<!-- ## <a name="pom"></a> Page Object Model APIs
 
 From the V9 Service Pack 5 release, Volt MX Iris introduces support for the following APIs to support the Page Object Model approach in Jasmine Test Automation:
 
@@ -2158,7 +2158,7 @@ it("testCase1", async function () {
 
 * * *
 </details>
-
+ -->
 
 
 
