@@ -13,7 +13,9 @@ Widget APIs
 
 Widget ID from root element (form, and master, etc.). Comma-separated strings from root to widget represented in an array. It is applicable for almost all widget APIs.
 
-> **_Note:_** When you build an app in Test Mode, if the app contains components (with contract), the programmatic names of the properties must be unique. Ensure that the properties do not have the same name as that of any child widgets in the component or the parent FlexContainer widget. If a property and a widget (child or parent) have the same name, the property will not be honored.
+> **_Note:_** When you build an app in Test Mode, if the app contains components (with contract), the programmatic names of the properties must be unique. Ensure that the properties do not have the same name as that of any child widgets in the component or the parent FlexContainer widget. If a property and a widget (child or parent) have the same name, the property will not be honored. 
+
+<br>
 
 > **_Note:_** Whenever a Segment row is a part of Widget path, it refers to the top level flex. This flex ID should not be provided in the subsequent path.
 
@@ -21,7 +23,7 @@ Widget ID from root element (form, and master, etc.). Comma-separated strings fr
 
 ```
 
-<widgetpath> \[array of strings\];
+<widgetpath> [array of strings];
 ```
 
 <b>Mandatory/Optional</b>
@@ -69,7 +71,49 @@ voltmx.automation.button.click(["Login Page", "userwidget1", "btnLogin"]);
 
 The voltmx.automation Namespace comprises of the following Widget APIs.
 
+<details close markdown="block"><summary>voltmx.automation.actionSheet.click</summary> 
 
+* * *
+
+Triggers the click event on the provided action item, if it is visible. If the action item is not available, this API returns the No matching actionItem found message.
+
+<b>Syntax</b>
+
+```
+
+voltmx.automation.actionSheet.click("actionItemTitle");
+```
+
+<b>Input Parameters</b>
+
+  
+| Parameters | Description |
+| --- | --- |
+| actionItemTitle [string] [Mandatory] | The name of the actionSheet item.|
+
+ 
+
+<b>Example</b>
+
+```
+voltmx.automation.actionSheet.click("actionItemTitle");
+```
+
+<b>Return Values</b>
+
+None
+
+<b>Remarks</b>
+
+Support for the record and playback features for this API is available from the V9 Service Pack 2 Fixpack 16 version of Volt MX Iris.
+
+<b>Platform Availability</b>
+
+*   iOS
+
+
+* * *
+</details>
 <details close markdown="block"><summary>voltmx.automation.alert.click</summary> 
 
 * * *
@@ -397,6 +441,50 @@ voltmx.automation.listbox.selectItem(["frmHomeLogin","listbox"], "key1");
 *   iOS
 *   Windows
 *   SPA and ResponsiveWeb
+
+* * *
+
+</details>
+<details close markdown="block"><summary>voltmx.automation.navigationBar.click</summary>
+
+* * *
+
+Triggers the click event on the barButton item of the navigation bar, if it is visible and enabled.
+
+<b>Syntax</b>
+
+```
+
+voltmx.automation.navigationBar.click("barButtonId");
+```
+
+<b>Input Parameters</b>
+
+  
+| Parameters | Description |
+| --- | --- |
+| barButtonId [string] [Mandatory] | The ID of the BarButtonItem.|
+
+
+<b>Return Values</b>
+
+None
+
+<b>Example</b>
+
+```
+
+voltmx.automation.navigationBar.click("barButtonId");
+
+```
+
+<b>Remarks</b>
+
+Support for the record and playback features for this API is available from the V9 Service Pack 2 Fixpack 16 version of Volt MX Iris.
+
+<b>Platform Availability</b>
+
+*   iOS
 
 * * *
 
@@ -986,6 +1074,144 @@ None
 * * *
 </details>
 
+<details close markdown="block"><summary>voltmx.automation.gesture.swipe</summary>
+
+* * *
+
+Use this API to automate the Swipe gesture on the specified widget, if it is visible and enabled.
+
+<b>Syntax</b>
+
+```
+
+voltmx.automation.gesture.swipe([<widgetpath>], <gestureInfo>);
+```
+
+<b>Parameters</b>
+
+<table>
+<tr>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>widgetpath [array of strings] [Mandatory]</td>
+<td>Widget ID from root element (such as form, master, etc.). It is an array of comma-separated strings from root to widget.</td>
+</tr>
+<tr>
+<td>gestureInfo [object] [Mandatory]</td>
+<td>
+<p>A JSON object that contains the following key-value pairs:</p>
+<ul>
+<li><b>point</b> [X co-ordinate, Y co-ordinate]: The coordinates at which the gesture must be applied.</li>
+<li>
+<b>swipeDirection</b> [Integer]: The direction in which the swipe gesture must be applied. You can provide the following values for the swipeDirection key:
+<ul>
+<li>1 → Right to left</li>
+<li>2 → Left to right</li>
+<li>3 → Bottom to top</li>
+<li>4 → Top to bottom</li>
+</ul>
+</li>
+<li><b>fingers</b> [Number]: The number of fingers to be used for the gesture.</li>
+</ul>
+</td>
+</tr>
+</table>
+
+
+<b>Return Values</b>
+
+None
+ 
+
+<b>Example</b>
+
+```
+voltmx.automation.gesture.swipe(["Home Page", "appMenuOption2"], {
+   “point”:[30,1],
+  “swipeDirection”: 2, 
+  “fingers”:1
+});
+```
+
+
+
+<b>Platform Availability</b>
+
+*   Android
+*   iOS
+
+
+* * *
+</details>
+
+<details close markdown="block"><summary>voltmx.automation.gesture.tap</summary>
+
+* * *
+
+Use this API to automate the Tap gesture on the specified widget, if it is visible and enabled.
+
+<b>Syntax</b>
+
+```
+
+voltmx.automation.gesture.tap([<widgetpath>], <gestureInfo>);
+```
+
+<b>Parameters</b>
+
+<table>
+<tr>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>widgetpath [array of strings] [Mandatory]</td>
+<td>Widget ID from root element (such as form, master, etc.). It is an array of comma-separated strings from root to widget.</td>
+</tr>
+<tr>
+<td>gestureInfo [object] [Mandatory]</td>
+<td>
+<p>A JSON object that contains the following key-value pairs:</p>
+<ul>
+<li><b>point</b> [X co-ordinate, Y co-ordinate]: The coordinates at which the gesture must be applied.</li>
+<li><b>taps</b> [Number]: The number of taps for the gesture to be applied.</li>
+<li><b>fingers</b> [Number]: The number of fingers to be used for the gesture.</li>
+</ul>
+</td>
+</tr>
+</table>
+
+
+<b>Return Values</b>
+
+None
+ 
+
+<b>Example</b>
+
+```
+voltmx.automation.gesture.tap(["Home Page", "appMenuOption2"], {
+“point”:[30,1],
+“taps”: 2,
+“fingers”:1
+});
+```
+
+
+
+<b>Platform Availability</b>
+
+*   Android
+*   iOS
+
+
+* * *
+</details>
+
+
+
 Miscellaneous Automation APIs
 -----------------------------
 
@@ -1420,6 +1646,521 @@ None
 
 * * *
 </details>
+
+<details close markdown="block"><summary>voltmx.automation.takeScreenshotAndCompare</summary>
+
+* * *
+
+This API allows the framework to capture a screenshot and send it to the Volt MX Automator tool along with a filename for the screenshot. The API then waits for the Automator tool to compare the screenshot with the baseline image and returns the result. This is an awaitable API.
+
+<b>Syntax</b>
+
+```
+
+voltmx.automation.takeScreenshotAndCompare(screenshotFilename, options);
+```
+
+<b>Input Parameters</b>
+
+  
+<table>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>screenshotFilename [String] [Mandatory]</td>
+<td>The file name for the screenshot. Volt MX Iris saves the screenshot for a particular platform (and channel) in the respective folder with this file name.</td>
+</tr>
+<tr>
+<td>options [JSON Object] [Mandatory]</td>
+<td>
+<p>The configuration details used to capture and compare the screenshot. A JSON Object that contains the following key-value pairs:</p>
+<ul>
+<li><b>threshold</b>[Number]: The threshold value used to compare the images. The value must be a number between 0 and 100 in percentage (for example, if you provide the value as 20, the threshold is 20%). The default value of this parameter is 0.</li>
+<li><b>screenshotType</b>: The type of screenshot to be captured. The supported values for this parameter are fullscreen and widget.
+<li><b>widgetpath</b>[array of strings]: The path of the widget (Widget ID) from the root element (for example, form or master) represented in an array of comma-separated strings. You must provide the value for this parameter in case of widget-level screenshots. If you do not specify this parameter, Volt MX Iris captures the screenshot of the entire current screen.</li>
+</ul>
+</td>
+</tr>
+</table>
+
+ 
+
+<b>Example</b>
+
+```
+var options = {
+    threshold = 1000,
+    screenshotType = widget,
+    widgetpath = ["frmHomeLogin", "btnLogin"]
+}
+voltmx.automation.takeScreenshotAndCompare("TestScreen", options);
+```
+
+<b>Return Values</b>
+
+Boolean
+
+* Returns true if both the images match.
+* Returns false if the images do not match or if the images are not available.
+
+<b>Platform Availability</b>
+
+*   Android
+*   iOS
+*   Responsive Web
+
+* * *
+</details>
+
+
+
+## <a id="cross"></a> Cross App Testing APIs
+
+
+From the V9 Service Pack 2 Fixpack 16 release, Volt MX Iris introduces support for the following APIs for cross-app testing:
+
+<details close markdown="block"><summary id ="getParentInfo">voltmx.automation.getParentInfo</summary>
+
+* * *
+
+This API returns a JSON Object (dictionary) that contains the details of the application that launched the current app.
+
+<b>Syntax</b>
+
+```
+
+voltmx.automation.getParentInfo();
+```
+
+<b>Return Values</b>  
+  
+  A JSON Object that contains the following keys:
+  
+  |Parameters|Description|
+  | --- | --- |
+  |appName [String]|The name of the parent application.|
+  |windowRef [Object]|A window reference object of the parent application.|
+  |queryParams [JSON Object]|A JSON Object that contains all the queryParams that are passed while launching the current application. The return value is null if no params are passed.|
+  
+  
+<b>Platform Availability</b>
+
+*   Responsive Web
+
+* * *
+</details>
+
+
+<details close markdown="block"><summary id="launchApp">voltmx.automation.launchApp</summary>
+
+* * *
+
+This API is used to launch a new app from the current app .Each time you invoke this API with a proper URL, a new window is launched with the specified URL.
+
+This API retrieves the following keys from the `IntegrationTests.json` file:
+
+
+The **Application URL** to be launched is derived from the **URL** key.
+
+The **testresources URL** is derived from **protocol** and **ScriptURL** keys.
+
+These keys are associated with the **appName** and are appended to the query parameters as the **parentApp** parameter, which is the name of the current application.
+
+
+<b>Syntax</b>
+
+```
+
+voltmx.automation.launchApp(options);
+```
+
+<b>Input Parameters</b>  
+  
+  A JSON Object that contains the following keys:
+  
+  |Parameters|Description|
+  | --- | --- |
+  |appName [String] - Mandatory|The name of the application to be launched.|
+  |queryParams [JSON Object] - Optional|A JSON Object that contains a list of all the parameters to be sent in the queryParams that are passed to the application being launched. The JSON Object contains the following key that can be passed along with other custom keys: <br> . <b>testPlan</b> [Optional]: The Test Plan that is to be used by the app after it is launched. If this parameter is not specified, the API uses the testPlan.js file for execution.|
+
+
+<b>Example</b>
+
+```
+var options = {
+    "appName": "AppTwo",
+    "queryParams": {
+        "testPlan": "signUpPlan"
+    }
+}
+var targetWindow = voltmx.automation.launchApp(options);
+```
+
+<b>Return Values</b> 
+
+A WindowProxy (window reference) object which is a reference to the newly opened window.
+
+If the specified window is not opened, the API returns a Null value.
+
+  
+<b>Platform Availability</b>
+
+*   Responsive Web
+
+* * *
+</details>
+
+
+<details close markdown="block"><summary id ="sendEvent">voltmx.automation.sendEvent</summary>
+
+* * *
+
+This API is used to send a message to another app that is associated with the current app. By using this API, you can resume the second application from the first and vice versa.
+
+
+<b>Syntax</b>
+
+```
+
+voltmx.automation.sendEvent(options);
+```
+
+<b>Input Parameters</b>  
+  
+  _options_ - A JSON Object that contains the following keys:
+  
+  |Parameters|Description|
+  | --- | --- |
+  |windowRef [Object]|A window reference object returned from the [launchApp](#launchApp) API.|
+  |eventName [String]|The name of the event for which the API must wait. The event name can be any user-defined string.|
+  |appName [String]|The name of the app to which the event must be sent.|
+  |data|The data that needs to be sent to the other app. The data can be of any datatype.|
+
+<b>Example</b>
+
+```
+var options = {
+    "windowRef": targetWindow,
+    "eventName": 'emailid',
+    "appName": "AppTwo",
+    "data": {
+        "email": "test@test.com"
+    }
+}
+voltmx.automation.sendEvent(options);
+```
+
+<b>Return Values</b> 
+
+Boolean
+
+Returns true if the app is already launched and the message is posted.
+
+Returns false if the recipient app is not launched and open.
+
+  
+<b>Platform Availability</b>
+
+*   Responsive Web
+
+* * *
+</details>
+
+
+<details close markdown="block"><summary id="sendEventToParent">voltmx.automation.sendEventToParent</summary>
+
+* * *
+
+This API is used to send a message to the parent app that is associated with the current app. By using this API, you can resume the application that launched the current application.
+
+
+<b>Syntax</b>
+
+```
+
+voltmx.automation.sendEventToParent(options);;
+```
+
+<b>Input Parameters</b>  
+  
+  _options_ - A JSON Object that contains the following keys:
+  
+  |Parameters|Description|
+  | --- | --- |
+  |eventName [String]|The name of the event for which the API must wait. The event name can be any user-defined string.|
+  |data|The data that needs to be sent to the other app. The data can be of any datatype.|
+
+
+<b>Example</b>
+
+```
+var options = {     
+  "eventName": 'emailid',
+    "data": {
+        "email": "test@test.com"
+    }
+}
+voltmx.automation.sendEventToParent(options);
+```
+
+<b>Return Values</b> 
+
+Boolean
+
+Returns true if the app is already launched and the message is posted.
+
+Returns false if the recipient app is not launched and open.
+
+  
+<b>Platform Availability</b>
+
+*   Responsive Web
+
+* * *
+</details>
+
+
+<details close markdown="block"><summary id="waitForEvent">voltmx.automation.waitForEvent</summary>
+
+* * *
+
+This API waits for the instructions from the other app that this API is used for. This API waits indefinitely to receive the instruction (with the same eventName) from the other app to resume execution.
+
+
+<b>Syntax</b>
+
+```
+
+voltmx.automation.waitForEvent(options);
+```
+
+<b>Input Parameters</b>  
+  
+  _options_ - A JSON Object that contains the following keys:
+  
+  |Parameters|Description|
+  | --- | --- |
+  |maxWait[number]|It is an optional parameter. The maximum time in milliseconds for which the API must wait for the specified event to occur.|
+  |eventName [String]|The name of the event for which the API must wait. The event name can be any user-defined string.|
+
+
+<b>Example</b>
+
+```
+var options = {
+maxWait : 2000,
+eventName : "resume"
+}
+voltmx.automation.waitForEvent(options);
+```
+
+<b>Return Values</b> 
+
+A JSON Object with the following key-value pairs:
+
+* **eventReceived**: A boolean value that indicates if the event is received in time or not.
+* **data**: A data object that is sent from the second app.
+
+  
+<b>Platform Availability</b>
+
+*   Responsive Web
+
+* * *
+</details>
+
+
+<details close markdown="block"><summary id="sendMessage">voltmx.automation.webSocket.sendMessage</summary>
+
+* * *
+
+This API is used to send messages to other client apps that are connected to the same WebSocket Server.
+
+
+<b>Syntax</b>
+
+```
+
+voltmx.automation.webSocket.sendMessage(options);
+```
+
+<b>Input Parameters</b>  
+  
+  _options_ - A JSON Object that contains the following keys:
+  
+  |Parameters|Description|
+  | --- | --- |
+  |eventName [String]|The name of the event that must be executed in Temenos App Factory.|
+  |data [String/Number/Object]|Additional data that must be passed in the message.|
+  |to [String] - Optional|The Selenium client receiver of the non-voltmx app that uses the same WebSocket for communication.<br>The default value of this parameter is the clientID of the app from Temenos App Factory.<br>To send a message to a client app that is not on App Factory, set the value of this parameter as the clientID of the app.|
+
+
+<b>Example</b>
+
+```
+voltmx.automation.webSocket.sendMessage ({
+  "eventName": "<authenticate>",
+ "data":string/number/object,
+ "to": "<seleniumClientId/AppiumClientId>"
+ }
+);
+```
+
+  
+<b>Platform Availability</b>
+
+*  Android
+*  iOS
+*  Responsive Web
+
+* * *
+</details>
+
+<details close markdown="block"><summary id="waitForMessage">voltmx.automation.webSocket.waitForMessage</summary>
+
+* * *
+
+This API waits until the specified event is received. This is an awaitable API.
+
+
+<b>Syntax</b>
+
+```
+
+voltmx.automation.webSocket.waitForMessage(options);
+```
+
+<b>Input Parameters</b>  
+  
+  _options_ - A JSON Object that contains the following keys:
+  
+  |Parameters|Description|
+  | --- | --- |
+  |eventName [String] - Mandatory|The event that needs to be executed.<br>The API internally waits until it receives a message from the Selenium client with the same eventName.|
+  |maxWait [Number] - Optional|The maximum amount of time (in milliseconds) that the API must wait for the event to be received.|
+
+
+
+<b>Example</b>
+
+```
+await voltmx.automation.webSocket.waitForMessage(
+{
+ "eventName" : "executionDone"
+ }
+);
+```
+
+  
+<b>Platform Availability</b>
+
+*  Android
+*  iOS
+*  Responsive Web
+
+* * *
+</details>
+
+
+
+<!-- ## <a name="pom"></a> Page Object Model APIs
+
+From the V9 Service Pack 5 release, Volt MX Iris introduces support for the following APIs to support the Page Object Model approach in Jasmine Test Automation:
+
+<details close markdown="block"><summary id="getPageObjects">voltmx.automation.pageObjectModel.getPageObjects</summary>
+
+* * *
+
+Use this API to retrieve and return the Page Objects for a specified Page.
+
+
+<b>Syntax</b>
+
+```
+
+voltmx.automation.pageObjectModel.getPageObjects();
+```
+
+<b>Input Parameters</b>  
+  
+An array of JavaScript Objects that contains the following keys:
+  
+  |Parameters|Description|
+  | --- | --- |
+  |appName [String] [Mandatory]|The name of the app or project that the Page Object Model belongs to.|
+  |id [String] [Mandatory]|The name of the Form, Template, or Component for which the Page Object Model is to be retrieved.|
+  |type [Constant] [Optional]|It is an optional parameter. The type of Page for which the Page Objects are to be retrieved.<br>The type parameter can have the following values:<br> **.** ***voltmx.automation.pageObjectModel.TYPE_FORM*** [Constant]: Retrieve Page Objects for Forms.<br> **.** ***voltmx.automation.pageObjectModel.TYPE_COMPONENT*** [Constant]: Retrieve Page Objects for Components.<br> **.** ***voltmx.automation.pageObjectModel.TYPE_TEMPLATE*** [Constant]: Retrieve Page Objects for Templates.|
+
+
+<b>Example 1</b>
+
+```
+var pageobjects = voltmx.automation.pageObjectModel.getPageObjects([
+    {"appName" : "App1",  "id": "Form1", "type" : voltmx.automation.pageObjectModel.TYPE_FORM},
+    {"appName" : "App1", "id": "comp.jasmineComp.comp1.comp1", "type" : voltmx.automation.pageObjectModel.TYPE_COMPONENT},
+    {"appName" : "App1",  "id": "segRowTemplate1", "type" : voltmx.automation.pageObjectModel.TYPE_TEMPLATE}
+]);
+```
+
+<b>Example 2</b>
+
+```
+var [form1_pom, form2_pom] = voltmx.automation.pageObjectModel.getPageObjects([
+	{"appName" : "App1",  "id": "Form1"},
+	{"appName" : "App1",  "id": "Form2"}
+]);
+```
+
+<b>Return Values</b>
+
+An array of Page Objects for the specified Pages in the JavaScript Object format. The order of the Page Objects returned and the size of the array returned is the same as the input array.
+
+The API returns a Null value if a Page Object is not found for the specified Page.
+
+
+<b>Remarks</b>
+
+Use this API in a Test Case that uses Page Objects.
+
+Here is a sample Test Case that uses the voltmx.automation.pageObjectModel.getPageObjects API to retrieve Page Object Models:
+
+```
+it("testCase1", async function () {
+    var _pageobjects = voltmx.automation.pageObjectModel.getPageObjects([
+ 
+        { "appName": "App1", "id": "Form1", "type": voltmx.automation.pageObjectModel.TYPE_FORM },
+ 
+        { "appName": "App1", "id": "comp.jasmineComp.comp1.comp1", "type": voltmx.automation.pageObjectModel.TYPE_COMPONENT },
+ 
+        { "appName": "App1", "id": "segRowTemplate1", "type": voltmx.automation.pageObjectModel.TYPE_TEMPLATE }
+    ]);
+    var Form1_pom = _pageobjects[0];
+    var comp1_pom = _pageobjects[1];
+    var template1_pom = _pageobjects[2];
+ 
+    await voltmx.automation.playback.waitFor([Form1_pom._path, Form1_pom.Button1]);
+    voltmx.automation.button.click([Form1_pom._path, Form1_pom.Button1]); //Form
+ 
+    voltmx.automation.button.click([Form1_pom._path, Form1_pom.comp1Id, comp1_pom.BtnInComponent]); //Component
+ 
+    voltmx.automation.button.click([Form1_pom._path, template1_pom.BtnInTemplate]); //Template	
+});
+]);
+```
+
+<b>Platform Availability</b>
+
+*  Android
+*  iOS
+*  Responsive Web
+
+* * *
+</details>
+ -->
+
+
 
 Existing Volt MX Iris APIs
 --------------------------------
