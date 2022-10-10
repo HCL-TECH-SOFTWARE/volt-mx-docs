@@ -2096,11 +2096,39 @@ voltmx.application.openSettings(config);
 
 **config** - A JSON Object that contains the following keys:
 
-| Key | Description |
-| --- | --- |
-| intentAction \[String\] | A String that specifies the desired settings screen. The intentAction parameter can have the following values: ACTION\_SETTINGS ACTION\_APPLICATION\_DETAILS\_SETTINGS ACTION\_SECURITY\_SETTINGS The default value of this parameter is ACTIONS\_SETTINGS. > **_Note:_** If the intentAction is set as ACTION\_APPLICATION\_DETAILS\_SETTINGS, the API does not return a callback. |
-| statusCallback \[Function\] | A callback function that specifies the launch status of the settings screen. The callback function is a JSON Object that contains the following keys: **statusCode**: A constant that specifies the launch status of the settings screen. The statusCode can have any of the values defined in [Status Code Constants](#StatusCode). |
-
+<table>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>intentAction [String]</td>
+<td>
+<p>A String that specifies the desired settings screen. The intentAction parameter can have the following values:</p>
+<ul>
+<li>ACTION_SETTINGS</li>
+<li>ACTION_APPLICATION_DETAILS_SETTINGS</li>
+<li>ACTION_SECURITY_SETTINGS</li>
+<li>ACTION_APP_OPEN_BY_DEFAULT_SETTINGS</li>
+</ul>
+<p>The default value of this parameter is ACTION_SETTINGS.</p>
+<blockquote>
+<em><b>Note:</b></em> If the intentAction is set as ACTION_APPLICATION_DETAILS_SETTINGS, the API does not return a callback.
+</blockquote>
+</td>
+</tr>
+<tr>
+<td>statusCallback [Function]</td>
+<td>
+<p>A callback function that specifies the launch status of the settings screen. The callback function is a JSON Object that contains the following keys:</p>
+<ul>
+<li>
+<b>statusCode</b>: A constant that specifies the launch status of the settings screen. The statusCode can have any of the values defined in <a href="#StatusCode">Status Code Constants</a>.
+</li>
+</ul>
+</td>
+</tr>
+</table>
  
 
 ### Example
@@ -2123,7 +2151,7 @@ myCallback : function(info){
 
 None
 
-### Status Code Constants
+### <a id="StatusCode"></a> Status Code Constants
 
 | Constant | Description |
 | --- | --- |
@@ -2134,7 +2162,7 @@ None
 
 ### Platform Availability
 
-Available Android platform
+* Android
 
 * * *
 
