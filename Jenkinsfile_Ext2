@@ -31,28 +31,19 @@ options{
           sh "pwd"
           sh "git status"              
           
-   
-          //-------
-          // note: cherry-pick PRs from 'master' branch to 'rel/HPHX' branch created from "release" branch , and publish/push changes from this branch "rel/HPHX" to remote. 
-          // note: before above step, PRs should be ready in master branch
-          // note: for testing, create a branch "rel1" in master branch, do the changes, cherrypick commit from "rel1" to "rel/HPHX" branch created in release.
-          // sh "git checkout -b rel/HPHX"          
-          //-------
-
-
           // ------- fetch branches from remote -------
           //----- 
           echo "fetching branches from remote to automation server.."
-          sh "git fetch origin ${params.Auto_Branch}:${params.Auto_Branch}" 
-          sh "git checkout ${params.Auto_Branch}"
-          sh "git fetch origin ${params.Auto_Branch}"
-          sh "git pull origin ${params.Auto_Branch}"
+          sh "git fetch origin ${params.GA_Release_Branch}:${params.GA_Release_Branch}" 
+          sh "git checkout ${params.GA_Release_Branch}"
+          sh "git fetch origin ${params.GA_Release_Branch}"
+          sh "git pull origin ${params.GA_Release_Branch}"
           
-          echo "checkout to ${params.Release_Branch} branch and merge changes from ${params.Release_Branch} branch"
+          echo "checkout to ${params.Release_Branch} branch and merge changes from ${params.GA_Release_Branch} branch"
           sh "git checkout ${params.Release_Branch}"
           sh "git fetch origin ${params.Release_Branch}"
           sh "git pull origin ${params.Release_Branch}"
-          sh "git merge ${params.Auto_Branch}"
+          sh "git merge ${params.GA_Release_Branch}"
           sh "git pull origin ${params.Release_Branch}"
           sh "git push origin ${params.Release_Branch}"
          
@@ -77,7 +68,7 @@ options{
           sh "gh pr create -t '${params.Commit_Summary}' -b '${params.Commit_Description}'"
           sh "gh pr status"
           sh "gh pr merge --merge"
-          sh "git checkout ${params.Auto_Branch}"
+          sh "git checkout ${params.GA_Release_Branch}"
           sh "git status"
           sh "git branch -D ${params.New_Branch}"
           // -----
