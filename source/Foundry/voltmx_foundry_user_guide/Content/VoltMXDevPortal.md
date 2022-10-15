@@ -33,7 +33,7 @@ To create a new developer portal, do the following:
 
     By default all the apps are linked to Developer portal.
 
-3.  To **add specific apps** to Developer portal, do the following:
+4.  To **add specific apps** to Developer portal, do the following:
 
     1.  Go to the **Apps** tab.
     2.  Select the required check boxes for **the apps** that you want to add to the Dev Portal.
