@@ -46,7 +46,7 @@ To create a new developer portal, do the following:
 
     1.  Go to the **Apps** tab.
 
-        1.  Select the required check box for **the app**. If you want to add **multiple versions of the app**, you can select the available app versions from the **Version** list. The **Manage APIs** link is enabled for the selected app.
+        2.  Select the required check box for **the app**. If you want to add **multiple versions of the app**, you can select the available app versions from the **Version** list. The **Manage APIs** link is enabled for the selected app.
 
             ![](Resources/Images/SelectAppVersion-Apps_272x222.png)
 

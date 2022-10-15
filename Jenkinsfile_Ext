@@ -77,9 +77,11 @@ options{
           sh "gh pr create -t '${params.Commit_Summary}' -b '${params.Commit_Description}'"
           sh "gh pr status"
           sh "gh pr merge --merge"
-          sh "git checkout ${params.Main_Branch}"
+          sh "git checkout ${params.Release_Branch}"
           sh "git status"
           sh "git branch -D ${params.New_Branch}"
+          sh "git status"
+          sh "git branch -D ${params.Auto_Branch}"
           // -----
         }
       }
