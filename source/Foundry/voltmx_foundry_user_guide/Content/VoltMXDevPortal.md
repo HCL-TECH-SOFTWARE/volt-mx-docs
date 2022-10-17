@@ -66,7 +66,7 @@ To create a new developer portal, do the following:
 
     2.  In the **Apps** tab, click **SAVE** to add app with services to Developer portal.
 
-> **_Note:_** You can also search for specific apps by entering an app name in the **Search** box.
+> **_Note:_** You can also search for specific apps by entering an app name in the **Search** box
 
 Now you can log into your Developer portal account and can view the add apps with services.
 
