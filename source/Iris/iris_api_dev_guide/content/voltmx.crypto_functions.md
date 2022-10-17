@@ -10,7 +10,7 @@ Functions
 The voltmx.crypto namespace contains the following functions.
 
 
-<details close markdown="block"><summary>voltmx.crypto.asymmetricEncrypt</summary>
+<details close markdown="block"><summary id = "asymmetricEncrypt">voltmx.crypto.asymmetricEncrypt</summary>
 
 * * *
 
@@ -84,7 +84,7 @@ rawbytes \[Object\] - The rawbytes for the encrypted version of the input text.
 * * *
 
 </details>
-<details close markdown="block"><summary>voltmx.crypto.asymmetricDecrypt</summary>
+<details close markdown="block"><summary id="asymmetricDecrypt">voltmx.crypto.asymmetricDecrypt</summary>
 
 * * *
 
@@ -150,7 +150,7 @@ Returns the decrypted/cipher text.
 * * *
 
 </details>
-<details close markdown="block"><summary>voltmx.crypto.createHash</summary>
+<details close markdown="block"><summary id="createHash">voltmx.crypto.createHash</summary>
 
 * * *
 
@@ -242,7 +242,7 @@ The `voltmx.crypto.createHash` function encrypts data by creating a hash of it. 
 * * *
 
 </details>
-<details close markdown="block"><summary>voltmx.crypto.createHMacHash</summary>
+<details close markdown="block"><summary id="createHMacHash">voltmx.crypto.createHMacHash</summary>
 
 * * *
 
@@ -337,7 +337,7 @@ If the device under testing does not support a the hashing algorithm your app se
 * * *
 
 </details>
-<details close markdown="block"><summary>voltmx.crypto.createPBKDF2Key</summary>
+<details close markdown="block"><summary id="createPBKDF2Key">voltmx.crypto.createPBKDF2Key</summary>
 
 * * *
 
@@ -428,7 +428,7 @@ Available in iOS, Android , and Windows.
 * * *
 
 </details>
-<details close markdown="block"><summary>voltmx.crypto.decrypt</summary>
+<details close markdown="block"><summary id="decrypt">voltmx.crypto.decrypt</summary>
 
 * * *
 
@@ -556,7 +556,7 @@ Available on all platforms except J2ME.
 * * *
 
 </details>
-<details close markdown="block"><summary>voltmx.crypto.deleteKey</summary>
+<details close markdown="block"><summary id="deleteKey">voltmx.crypto.deleteKey</summary>
 
 * * *
 
@@ -618,7 +618,7 @@ Available on all platforms.
 * * *
 
 </details>
-<details close markdown="block"><summary>voltmx.crypto.encrypt</summary>
+<details close markdown="block"><summary id="encrypt">voltmx.crypto.encrypt</summary>
 
 * * *
 
@@ -716,7 +716,7 @@ Available on all platforms.
 * * *
 
 </details>
-<details close markdown="block"><summary>voltmx.crypto.generateAsymmetricKeyPair</summary>
+<details close markdown="block"><summary id="generateAsymmetricKeyPair">voltmx.crypto.generateAsymmetricKeyPair</summary>
 
 * * *
 
@@ -793,7 +793,7 @@ Status of the key value generation.
 * * *
 
 </details>
-<details close markdown="block"><summary>voltmx.crypto.generateSecureRandom</summary>
+<details close markdown="block"><summary id="generateSecureRandom">voltmx.crypto.generateSecureRandom</summary>
 
 * * *
 
@@ -846,7 +846,7 @@ Secure random key of the bytes array or Base64 string of the specified length.
 * * *
 
 </details>
-<details close markdown="block"><summary>voltmx.crypto.newKey</summary>
+<details close markdown="block"><summary id="newKey">voltmx.crypto.newKey</summary>
 
 * * *
 
@@ -860,7 +860,7 @@ You can use this API to generate cryptographic keys when you want to transmit in
 
 ```
 
-voltmx.crypto.newKey([algo](#algo), [keystrength](#keystrength), [propertiesTable](#propertiesTable))
+voltmx.crypto.newKey(algo, keystrength, propertiesTable);
 ```
 
 ### Input Parameters
@@ -868,12 +868,9 @@ voltmx.crypto.newKey([algo](#algo), [keystrength](#keystrength), [propertiesTabl
   
 | Parameters | Description |
 | --- | --- |
-| algo \[String\] - Mandatory | Scheme using which the key is to be created. Possible values are: _securerandom -_ uses a secure random number as the scheme to generate a key. This scheme always produces a unique key. _random -_ uses a random number as the scheme to generate a key. This scheme always produces a unique key.> **_Note:_** _random_ and _securerandom_ are supported only on iPhone.> **_Note:_** There is no differentiation between _securerandom_ and _random_ on Android. _passphrase_ - if this is the scheme, you need to pass the exact passphrase using which the key needs to be generated. The _passphrasetext_ (an array of strings) is passed in the _properties_ (JavaScript) parameter. The _passphrase_ scheme always produces the same key for the same passphrase text. > **_Note:_** Only Passphrase is supported on SPA. |
-| keystrength \[Number\] - Mandatory | Number of bits that indicate the key strength. If the _subalgo_ is: _aes_ - possible value is 128, 192, 256. _tripledes_ - possible value is 192.
-> **_Important:_**   _tripledes_ Algorithm is not supported in Windows Platforms. On iPhone platform, keystrength of 192 is supported only if the algorithm is _random_ or _securerandom_. You cannot apply a _passphrasehashlogo_ to the key when the algorithm is _random_ or _securerandom_. _tripledes_ - In Android and iOS, if the supplied key length is not equal to 192 an exception will be thrown with error message `Invalid Keystrength` and error code `104`.
-
- |
-| propertiesTable \[Table\] - Mandatory | _passphrasetext_ \[Array of Strings \]- the exact passphrase using which the key needs to be generated if the scheme is _passphrase_.> **_Note:_** This value in the table is mandatory only if the scheme is _passphrase_. If the subalgo is aes, it contains a single string, whereas if the subalgo is tripledes, it contains three strings.For example: for _aes_, passphrasetext = {"inputstring1"}for _tripledes_, passphrasetext = \["TestStr1","TestStr2","TestStr3"\]> **_Note:_** _passphrase_ should contain at least 3 characters (24 bytes), else the API throws an _illegalargument_ exception.> **_Note:_** _tripledes_ - in Android, if the passphrase length is less than 24 bytes or greater than 24 bytes an exception will be thrown with error message Invalid Keystrength and error code 104. _subalgo_ - represents the key algorithm that is used to create the key. This is a mandatory parameter (irrespective of the scheme). Possible values are: _aes_ and _tripledes_. _passphrasehashlogo_ - hashing algorithm to be applied for the passphrase text. (applicable only on iPhone). > **_Note:_** This value in the table is applicable only if the scheme is _passphrase_.Possible values for the hash algorithm are: _md2_ (for key strength of 128)_md4_ (for key strength of 128)_md5_ (for key strength of 128)_sha2_ (for key strength of 256) |
+| algo \[String\] - Mandatory | Scheme using which the key is to be created. Possible values are: <br/> <b>.</b> _securerandom -_ uses a secure random number as the scheme to generate a key.<br/> This scheme always produces a unique key. <br/> <b>.</b> _random -_ uses a random number as the scheme to generate a key. This scheme always produces a unique key.<br/> **_Note:_** _random_ and _securerandom_ are supported only on iPhone.<br/> **_Note:_** There is no differentiation between _securerandom_ and _random_ on Android. <br/> <b>.</b> _passphrase_ - if this is the scheme, you need to pass the exact passphrase using which the key needs to be generated. The _passphrasetext_ (an array of strings) is passed in the _properties_ (JavaScript) parameter. The _passphrase_ scheme always produces the same key for the same passphrase text. <br/> **_Note:_** Only Passphrase is supported on SPA. |
+| keystrength \[Number\] - Mandatory | Number of bits that indicate the key strength. If the _subalgo_ is:<br/> <b>.</b> _aes_ - possible value is 128, 192, 256.<br/> <b>.</b> _tripledes_ - possible value is 192.<br/> **_Note:_**<br/> <b>.</b> _tripledes_ Algorithm is not supported in Windows Platforms.<br/> <b>.</b> _tripledes_ - In Android and iOS, if the supplied key length is not equal to 192 an exception will be thrown with error message Invalid Keystrength and error code 104.<br/> <b>.</b> On iPhone platform, keystrength of 192 is supported only if the algorithm is _random_ or _securerandom_.You cannot apply a _passphrasehashlogo_ to the key when the algorithm is _random_ or _securerandom_. <br/> <b>.</b> As Android has deprecated support for various BouncyCastle implementations, the voltmx.crypto.newKey API that uses the tripledes algorithm with the keystrength of 192 is not supported on Android 12 devices. To use the voltmx.crypto.newKey API with the tripleDES algorithm and the keystrength of 192 on Android 12, enable the **useExternalBouncyCastleLibrary** property in the androidbuild.properties file.|
+| propertiesTable \[Table\] - Mandatory | <b>.</b> _passphrasetext_ \[Array of Strings \]- the exact passphrase using which the key needs to be generated if the scheme is _passphrase_.<br/> **_Note:_** This value in the table is mandatory only if the scheme is _passphrase_.<br/> If the subalgo is aes, it contains a single string, whereas if the subalgo is tripledes, it contains three strings.<br/>For example:<br/> <b>.</b> for _aes_, passphrasetext = {"inputstring1"}<br/> <b>.</b> for _tripledes_, passphrasetext = \["TestStr1","TestStr2","TestStr3"\]<br/> **_Note:_** _passphrase_ should contain at least 3 characters (24 bytes), else the API throws an _illegalargument_ exception.<br/> **_Note:_** _tripledes_ - in Android, if the passphrase length is less than 24 bytes or greater than 24 bytes an exception will be thrown with error message Invalid Keystrength and error code 104. <br/> <b>.</b> _subalgo_ - represents the key algorithm that is used to create the key. This is a mandatory parameter (irrespective of the scheme). Possible values are: _aes_ and _tripledes_.<br/> <b>.</b> _passphrasehashlogo_ - hashing algorithm to be applied for the passphrase text. (applicable only on iPhone). <br/> **_Note:_** This value in the table is applicable only if the scheme is _passphrase_.<br/> Possible values for the hash algorithm are:<br/> <b>.</b> _md2_ (for key strength of 128)<br/> <b>.</b> _md4_ (for key strength of 128)<br/> <b>.</b> _md5_ (for key strength of 128)<br/> <b>.</b> _sha2_ (for key strength of 256) |
 
 ### Example
 
@@ -927,7 +924,7 @@ Available on all platforms except J2ME.
 * * *
 
 </details>
-<details close markdown="block"><summary>voltmx.crypto.readKey</summary>
+<details close markdown="block"><summary id="readKey">voltmx.crypto.readKey</summary>
 
 * * *
 
@@ -1011,7 +1008,7 @@ Available on all platforms.
 * * *
 
 </details>
-<details close markdown="block"><summary>voltmx.crypto.retrieveAsymmetricPublicKey</summary>
+<details close markdown="block"><summary id="retrieveAsymmetricPublicKey">voltmx.crypto.retrieveAsymmetricPublicKey</summary>
 
 * * *
 
@@ -1062,7 +1059,7 @@ Returns the public part of the asymmetric key-pair for the provided alias.
 * * *
 
 </details>
-<details close markdown="block"><summary>voltmx.crypto.retrievePublicKey</summary>
+<details close markdown="block"><summary id="retrievePublicKey">voltmx.crypto.retrievePublicKey</summary>
 
 * * *
 
@@ -1126,7 +1123,7 @@ Available on all platforms except Windows, Service Side Mobile Web, Desktop Web,
 * * *
 
 </details>
-<details close markdown="block"><summary>voltmx.crypto.saveKey</summary>
+<details close markdown="block"><summary id="saveKey">voltmx.crypto.saveKey</summary>
 
 * * *
 
