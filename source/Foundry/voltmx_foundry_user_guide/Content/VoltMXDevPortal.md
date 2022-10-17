@@ -68,7 +68,7 @@ To create a new developer portal, do the following:
 
 > **_Note:_** You can also search for specific apps by entering an app name in the **Search** box
 
-Now you can log into your Developer portal account and can view the add apps with services.
+Now you can log into your Developer portal account and can view the add apps with services
 
 The selected services of an app are listed in the swagger file of the app. You can click API Documentation in Developer Portal to download services details.
 
