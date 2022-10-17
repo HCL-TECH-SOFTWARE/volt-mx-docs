@@ -1804,23 +1804,34 @@ TABPANE\_VIEW\_TYPE\_PAGEVIEW:
 The viewConfig property accepts a JSObject with the below key-value pairs.
 
 *   **needPageIndicator** - Boolean value indicates whether the page indicator required or not.
-*   **pageOnDotImage** - Name of the image. String identifier for a local resource or an image Object (voltmx.image). Valid only if needPageIndicator is true. You can create an image Object by using voltmx.image Namespace functions.
-*   **pageOffDotImage** - Name of the image. String identifier for a local resource or an image Object (voltmx.image). Valid only if needPageIndicator is true. You can create an image Object by using voltmx.image Namespace functions.
+*   **pageOnDotImage** - Name of the image. String identifier for a local resource or an image Object (voltmx.image). Valid only if needPageIndicator is true. You can create an image Object by using voltmx.image Namespace functions. <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; On iOS 14 (and later) devices, the page control displays an opaque version of the image provided for the pageOnDotImage, without the colors. Support to apply colors to page dots has been provided by the iOS native platform and can be implemented in Volt MX Iris by using the <b>pageOnTintColor</b> property in the preShow event.<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The default color for the pageOnTintColor is an opaque white dot.<br/>
+    **_Note_**: Support for the pageOnTintColor property is available from the following releases:<br/>
+    **.** Volt MX Iris V9 Service Pack 2 Fixpack 54.<br/> 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; When the TabPane is rendered, the size of the dots is decided by the size of the image provided for the pageOnDotImage property. The width and height of the page dot is the same as the resolution of the image passed as the input. If you do not provide an image, the default dot is displayed. To display a dot with a custom size, the image for the dot must be set in the widget properties.
 
-TABPANE\_VIEW\_TYPE\_PANORAMAVIEW:
 
-The viewConfig property accepts a JSObject with the below key-value pairs.
+*   **pageOffDotImage** - Name of the image. String identifier for a local resource or an image Object (voltmx.image). Valid only if needPageIndicator is true. You can create an image Object by using voltmx.image Namespace functions.<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; On iOS 14 (and later) devices, the page control displays an opaque version of the image provided for the pageOffDotImage, without the colors. Support to apply colors to page dots has been provided by the iOS native platform and can be implemented in Volt MX Iris by using the **pageOffTintColor** property in the preShow event.<br/>The default color for the pageOffTintColor is a translucent white (or gray) dot.<br/>
+    **_Note_**: Support for the pageOffTintColor property is available from the following releases:<br/>
+    **.** Volt MX Iris V9 Service Pack 2 Fixpack 54.<br/> 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; When the TabPane is rendered, the size of the dots is decided by the size of the image provided for the pageOffDotImage property. The width and height of the page dot is the same as the resolution of the image passed as the input. If you do not provide an image, the default dot is displayed. To display a dot with a custom size, the image for the dot must be set in the widget properties.
 
-*   **panoramaTitle** - String value indicates the title of the panorama.
-*   **panoramaTitleImage** - String value indicates the name of the image to be displayed in the title.
-*   **panoramaImage** - String value indicates the name of the panorama image.
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TABPANE\_VIEW\_TYPE\_PANORAMAVIEW:
 
-TABPANE\_VIEW\_TYPE\_TABVIEW:
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The viewConfig property accepts a JSObject with the below key-value pairs.
 
-The viewConfig property accepts JSObject with the below key-value pairs.
+    *   **panoramaTitle** - String value indicates the title of the panorama.
+    *   **panoramaTitleImage** - String value indicates the name of the image to be displayed in the title.
+    *   **panoramaImage** - String value indicates the name of the panorama image.
 
-*   **headerPosition**: Specifies the position of the header.It can be set to :TAB\_HEADER\_POSITION\_TOP, TAB\_HEADER\_POSITION\_BOTTOM, TAB\_HEADER\_POSITION\_LEFT, and TAB\_HEADER\_POSITION\_RIGHT.
-*   **headerContainerWeight:** Specifies percentage of width to be allocated to the header. Type: Number, Default: 50%.
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TABPANE\_VIEW\_TYPE\_TABVIEW:
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The viewConfig property accepts JSObject with the below key-value pairs.
+
+    *   **headerPosition**: Specifies the position of the header.It can be set to :TAB\_HEADER\_POSITION\_TOP, TAB\_HEADER\_POSITION\_BOTTOM, TAB\_HEADER\_POSITION\_LEFT, and TAB\_HEADER\_POSITION\_RIGHT.
+    *   **headerContainerWeight:** Specifies percentage of width to be allocated to the header. Type: Number, Default: 50%.
 
 <b>Example</b>
 
