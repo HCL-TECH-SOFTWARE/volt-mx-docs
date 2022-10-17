@@ -29,22 +29,22 @@ To create a new developer portal, do the following:
 > **_Note:_** The logo, header color, and font color can all be changed after the Dev Portal is created. For more information, see the Customizing a Developer Portal section later in this topic.
 
 1.  In Description, type a short description of your Developer Portal.
-2.  Click **Next**.
+3.  Click **Next**.
 
     By default all the apps are linked to Developer portal.
 
-3.  To **add specific apps** to Developer portal, do the following:
+4.  To **add specific apps** to Developer portal, do the following:
 
     1.  Go to the **Apps** tab.
     2.  Select the required check boxes for **the apps** that you want to add to the Dev Portal.
 
-        > **_Note:_** To select **all apps** that you want to add to the Dev Portal, select the **Include all current and future apps** check box
+        > **_Note:_** To select **all apps** that you want to add to the Dev Portal, select the **Include all current and future apps** check box.
 
-    4.  click **SAVE** to add the selected apps with services to Developer portal.
+    3.  click **SAVE** to add the selected apps with services to Developer portal.
 
 5.  (From Volt MX Foundry V8 SP4 onwards) To **add specific services** of an app to Developer portal, do the following: 
 
-    1.  Go to the **Apps** tab.
+    1.  Go to the **Apps** tab
 
         2.  Select the required check box for **the app**. If you want to add **multiple versions of the app**, you can select the available app versions from the **Version** list. The **Manage APIs** link is enabled for the selected app.
 
@@ -66,9 +66,9 @@ To create a new developer portal, do the following:
 
     2.  In the **Apps** tab, click **SAVE** to add app with services to Developer portal.
 
-> **_Note:_** You can also search for specific apps by entering an app name in the **Search** box.
+> **_Note:_** You can also search for specific apps by entering an app name in the **Search** box
 
-Now you can log into your Developer portal account and can view the add apps with services.
+Now you can log into your Developer portal account and can view the add apps with services
 
 The selected services of an app are listed in the swagger file of the app. You can click API Documentation in Developer Portal to download services details.
 
