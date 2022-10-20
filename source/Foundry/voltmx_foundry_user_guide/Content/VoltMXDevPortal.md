@@ -29,7 +29,7 @@ To create a new developer portal, do the following:
 > **_Note:_** The logo, header color, and font color can all be changed after the Dev Portal is created. For more information, see the Customizing a Developer Portal section later in this topic.
 
 1.  In Description, type a short description of your Developer Portal.
-3.  Click **Next**.
+2.  Click **Next**.
 
     By default all the apps are linked to Developer portal.
 
