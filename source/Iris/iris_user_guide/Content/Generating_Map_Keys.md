@@ -67,8 +67,8 @@ To obtain and configure Google Maps API Key v2 for Android, follow these steps:
         2.  Click the **Native** tab, and then click the **Android** sub-tab.
         3.  Scroll down in the dialog box, and under Manifest Properties, click the **Tags** tab.
         4.  In the **Child tag entries under <application> tag** text box, add the following tag:
-        
-        **<meta-data android:name="com.google.android.gms.version" android:value="@integer/google\_play\_services\_version" />**.
+
+        < **meta-data android:name="com.google.android.gms.version" android:value="@integer/google\_play\_services\_version"** >.
         
 
 Important Considerations:
