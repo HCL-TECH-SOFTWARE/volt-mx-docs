@@ -2442,13 +2442,13 @@ Read + Write
 
 This property is available only when the [viewType](#viewType) is selected as pageview. By default a black/grey dot indicates the currently viewed page.
 
+You can create an image Object by using volt mx.image Namespace functions.
+
 * iOS - The image size should be 7x7 px for non-retina devices, and 14x14 px for retina devices.
 
 * On iOS 14 (and later) devices, the page control displays an opaque version of the image provided for the pageOffDotImage, without the colors. Support to apply colors to page dots has been provided by the iOS native platform and can be implemented in Volt MX Iris by using the pageOffTintColor property in the preShow event.
 The default color for the pageOffTintColor is a translucent white (or gray) dot.
 
-
-You can create an image Object by using volt mx.image Namespace functions.
 
 > **_Note:_** Support for the pageOffTintColor property is available from the following releases:<br><br>
 Volt MX Iris V9 ServicePack2 Fixpack 54</br>
@@ -2474,12 +2474,16 @@ Using an image object (voltmx.image) to set pageOffDotImage:
 var imgObjRef = voltmx.image.createImage("local.png");
 var segment = new voltmx.ui.SegmentedUI2(segBasic, segLayout, segPSP);
 segment.pageOffDotImage=imgObjRef;
+if (this.view.seg.viewType == constants.SEGUI_VIEW_TYPE_PAGEVIEW) {
+this.view.seg.pageOffTintColor = "bababa";
+}
+
 ```
 
 ### Platform Availability
 
-Available in the IDE
 
+*   Available in the IDE
 *   iOS
 *   Android
 *   Windows
