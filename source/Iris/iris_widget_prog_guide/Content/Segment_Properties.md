@@ -2424,8 +2424,7 @@ this.view.seg.pageOnTintColor = "ffb812";
 <details close markdown="block"><summary>pageOffDotImage Property</summary>
 
 * * *
-
-Specifies the image to indicate that the pages that are not been currently viewed.
+Specifies the image to indicate that the page is currently being viewed.
 
 ### Syntax
 
