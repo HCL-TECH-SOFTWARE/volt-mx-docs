@@ -2426,6 +2426,7 @@ this.view.seg.pageOnTintColor = "ffb812";
 * * *
 Specifies the image to indicate that the page is currently being viewed.
 
+
 ### Syntax
 
 ```
