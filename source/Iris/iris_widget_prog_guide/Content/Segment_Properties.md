@@ -2375,9 +2375,19 @@ Read + Write
 
 This property is available only when the [viewType](#viewType) is selected as pageview. By default a white dot indicates the currently viewed page.
 
-iOS - The image size should be 7x7 px for non-retina devices, and 14x14 px for retina devices.
+You can create an image Object by using voltmx.image Namespace 
+functions.
 
-You can create an image Object by using voltmx.image Namespace functions.
+
+* iOS - The image size should be 7x7 px for non-retina devices, and 14x14 px for retina devices.
+
+* On iOS 14 (and later) devices, the page control displays an opaque version of the image provided for the pageOnDotImage, without the colors. Support to apply colors to page dots has been provided by the iOS native platform and can be implemented in Volt MX Iris by using the pageOnTintColor property in the preShow event.The default color for the pageOnTintColor is an opaque white dot.
+
+> **_Note:_** Support for the pageOnTintColor Property is available from the following releases:<br><br>
+Volt MX Iris V9 ServicePack2 Fixpack 54</br>
+
+When the Segment is rendered, the size of the dots is decided by the size of the image provided for the pageOnDotImage property. The width and height of the page dot is the same as the resolution of the image passed as the input. If you do not provide an image, the default dot is displayed. To display a dot with a custom size, the image for the dot must be set in the widget properties.
+
 
 ### Example
 
@@ -2395,12 +2405,15 @@ Using an image object (voltmx.image) to specify the pageOnDotImage image
 var imgObjRef = voltmx.image.createImage("local.png");
 var segment = new voltmx.ui.SegmentedUI2(segBasic, segLayout, segPSP);
 segment.pageOnDotImage=imgObjRef;
+if (this.view.seg.viewType == constants.SEGUI_VIEW_TYPE_PAGEVIEW) {
+this.view.seg.pageOnTintColor = "ffb812";
+}
 ```
 
 ### Platform Availability
 
-Available in the IDE
 
+*   Available in the IDE
 *   iOS
 *   Android
 *   Windows
@@ -2411,8 +2424,8 @@ Available in the IDE
 <details close markdown="block"><summary>pageOffDotImage Property</summary>
 
 * * *
+Specifies the image to indicate that the page is currently not being viewed. 
 
-Specifies the image to indicate that the pages that are not been currently viewed.
 
 ### Syntax
 
@@ -2433,9 +2446,21 @@ Read + Write
 
 This property is available only when the [viewType](#viewType) is selected as pageview. By default a black/grey dot indicates the currently viewed page.
 
-iOS - The image size should be 7x7 px for non-retina devices, and 14x14 px for retina devices.
+You can create an image Object by using volt mx.image Namespace functions.
 
-You can create an image Object by using voltmx.image Namespace functions.
+* iOS - The image size should be 7x7 px for non-retina devices, and 14x14 px for retina devices.
+
+* On iOS 14 (and later) devices, the page control displays an opaque version of the image provided for the pageOffDotImage, without the colors. Support to apply colors to page dots has been provided by the iOS native platform and can be implemented in Volt MX Iris by using the pageOffTintColor property in the preShow event.
+The default color for the pageOffTintColor is a translucent white (or gray) dot.
+
+
+> **_Note:_** Support for the pageOffTintColor property is available from the following releases:<br><br>
+Volt MX Iris V9 ServicePack2 Fixpack 54</br>
+
+When the Segment is rendered, the size of the dots is decided by the size of the image provided for the pageOffDotImage property. The width and height of the page dot is the same as the resolution of the image passed as the input. If you do not provide an image, the default dot is displayed. To display a dot with a custom size, the image for the dot must be set in the widget properties.
+
+
+
 
 ### Example
 
@@ -2453,12 +2478,16 @@ Using an image object (voltmx.image) to set pageOffDotImage:
 var imgObjRef = voltmx.image.createImage("local.png");
 var segment = new voltmx.ui.SegmentedUI2(segBasic, segLayout, segPSP);
 segment.pageOffDotImage=imgObjRef;
+if (this.view.seg.viewType == constants.SEGUI_VIEW_TYPE_PAGEVIEW) {
+this.view.seg.pageOffTintColor = "bababa";
+}
+
 ```
 
 ### Platform Availability
 
-Available in the IDE
 
+*   Available in the IDE
 *   iOS
 *   Android
 *   Windows
