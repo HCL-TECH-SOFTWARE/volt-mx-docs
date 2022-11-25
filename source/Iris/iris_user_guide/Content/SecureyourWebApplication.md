@@ -145,7 +145,7 @@ Before you get started, raise a ticket with the support team to get a **securejs
 
 1.  Navigate to the location of your project. The path may look like `<your workspace folder>/<appid>/`  
     
-2.  Download the [custombuild.zip](https://docs.voltmx.com/voltmxlibrary/iris/zip/user_guide/custombuild.zip) file
+2.  Download the [custombuild.zip](https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/iris/zip/user_guide/custombuild.zip) file
 3.  Copy the**securejs.properties** file received over customer service ticket into `<your workspace folder>/<appid>/custombuild` folder.
 4.  To exempt certain files from protection do the following, in the custombuild folder, create a text file excludefilelist.txt. In the text file, add sections of the application(you can add both files and/or directors) to exclude.
     *   Ensure that each path is defined in a new line. For example,  
