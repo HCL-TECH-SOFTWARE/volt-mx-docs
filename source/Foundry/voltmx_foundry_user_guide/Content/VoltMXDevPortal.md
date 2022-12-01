@@ -50,9 +50,9 @@ To create a new developer portal, do the following:
 
             ![](Resources/Images/SelectAppVersion-Apps_272x222.png)
 
-        1.  Click the **Manage APIs** link. The **API Services** dialog appears and displays services tabs such as Identity, Integration, Orchestration and Objects tabs for the selected app version. By default all the configured services for each app version are selected in each service tab.
+        1.  Click the **Manage APIs** link. The **API Services** dialog appears and displays services tabs such as Identity, Integration, Orchestration and Objects tabs for the selected app version. By default all the configured services for each app version are selected in each service tab
 
-            You can view the services from each version by selecting the required version.
+            You can view the services from each version by selecting the required version
 
             ![](Resources/Images/SelectServices-Apps_421x277.png)
 
