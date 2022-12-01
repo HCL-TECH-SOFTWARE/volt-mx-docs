@@ -38,7 +38,7 @@ To create a new developer portal, do the following:
     1.  Go to the **Apps** tab.
     2.  Select the required check boxes for **the apps** that you want to add to the Dev Portal.
 
-        > **_Note:_** To select **all apps** that you want to add to the Dev Portal, select the **Include all current and future apps** check box.
+        > **_Note:_** To select **all apps** that you want to add to the Dev Portal, select the **Include all current and future apps** check box
 
     3.  click **SAVE** to add the selected apps with services to Developer portal.
 
@@ -50,9 +50,9 @@ To create a new developer portal, do the following:
 
             ![](Resources/Images/SelectAppVersion-Apps_272x222.png)
 
-        1.  Click the **Manage APIs** link. The **API Services** dialog appears and displays services tabs such as Identity, Integration, Orchestration and Objects tabs for the selected app version. By default all the configured services for each app version are selected in each service tab.
+        1.  Click the **Manage APIs** link. The **API Services** dialog appears and displays services tabs such as Identity, Integration, Orchestration and Objects tabs for the selected app version. By default all the configured services for each app version are selected in each service tab
 
-            You can view the services from each version by selecting the required version.
+            You can view the services from each version by selecting the required version
 
             ![](Resources/Images/SelectServices-Apps_421x277.png)
 
