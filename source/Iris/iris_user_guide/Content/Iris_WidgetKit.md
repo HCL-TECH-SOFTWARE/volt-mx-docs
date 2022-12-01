@@ -1,37 +1,31 @@
----
-layout: "documentation"
-category: "undefined"
----
-﻿ 
-
-Configure iOS Home Screen Widgets in
-====================================
+Configure iOS Home Screen Widgets in Volt MX Iris
+=================================================
 
 A widget elevates key content from an app and displays it on the home screen of an iPhone or iPad, where users can see it at a glance. With three different sizes available (small, medium, and large), widgets can display a wide range of information. Users can personalize widgets to see details specific to their needs, and arrange their widgets in whatever way works best for them.
 
-Widgets can be designed on any Form in . To create a home screen widget for an app, follow these steps:
+Widgets can be designed on any Form in Volt MX Iris. To create a home screen widget for an app, follow these steps:
 
-1.  In the project, create a new Form.
+1.  In the Volt MX Iris project, create a new Form.
 2.  Add a FlexContainer widget to the Form.
 3.  Resize the FlexContainer widget based on the size of the widget that you want to create. Provide the following dimensions for the FlexContainer widget:
     
      
-    | Widget size | Dimensions (width x height) |
-    | --- | --- |
-    | Small | 
+    
+    Widget size
+    
+    Dimensions (width x height)
+    
+    Small
+    
     169dp x 169dp
     
-     |
-    | Medium | 
+    Medium
     
     360dp x 169dp
     
-     |
-    | Large | 
+    Large
     
     360dp x 376dp
-    
-     |
     
 4.  Create the UI of the widget by adding child widgets (for example, Label, Image, and FlexContainer widgets) to the FlexContainer widget.
 
@@ -43,23 +37,23 @@ Important Considerations
 *   The child UI elements (such as Label, Image, or FlexContainer widgets) must have fixed layout properties, such as fixed height and width.  
     If you do not provide values for the **Width** and **Height** properties of the child widget, you must provide values for other layout properties such as values for Top, Bottom, Left, or Right along with the CenterX or CenterY values.  
     For example, if you provide values for the Top and Bottom, the height of the widget can be determined. Similarly, if you provide values for the Left and CenterX properties, the width of the widget can be determined.
-*   From the V9 Service Pack 5 release, has introduced support for the **Flex Horizontal** and **Flex Vertical** layouts for the child widgets of a Home Screen widget. In addition, support for the reverse layout direction has been added for both the Flex Horizontal and Flex Vertical layouts.  
+*   From the V9 Service Pack 5 release, Volt MX Iris has introduced support for the **Flex Horizontal** and **Flex Vertical** layouts for the child widgets of a Home Screen widget. In addition, support for the reverse layout direction has been added for both the Flex Horizontal and Flex Vertical layouts.  
     The default alignment of the child widgets is in the left-to-right and top-to-bottom directions for the Flex Horizontal and the Flex Vertical layouts respectively.  
     If you enable the reverse layout direction, the alignment of the child widgets is in the right-to-left direction for the Flex Horizontal layout, and the bottom-to-top direction for the Flex Vertical layout.
 
 Integrate Home Screen Widgets with an iOS App
 ---------------------------------------------
 
-To use iOS Home Screen Widgets in , you must include the widget configuration in the .kar file of the app. Follow these steps to include the widget configuration in the .kar file:
+To use iOS Home Screen Widgets in Volt MX Iris, you must include the widget configuration in the .kar file of the app. Follow these steps to include the widget configuration in the .kar file:
 
 1.  Include the following key in the `application.properties` file of the project:
     
-    {% highlight voltMx %}enableiOSNativeWidgets = true
-    {% endhighlight %}
+    enableiOSNativeWidgets \= true
+    
 2.  Widgets and iOS apps communicate with each other through iOS Shared Containers or App Groups. For communication through iOS Shared Containers or App Groups, both the app and the widget must include the **App Group Entitlement**. You can provide an input app group container ID for an app as follows:
     
-    {% highlight voltMx %}applicationGroups = group.widget.testWidget //CSV format of all shared application groups
-    {% endhighlight %}
+    applicationGroups \= group.widget.testWidget //CSV format of all shared application groups
+    
 3.  Create a new folder in the KAR file, and name it **VoltMXWidgets**. Within the VoltMXWidgets folder, add the following files/folders:
     
     *   **Images** - A folder that contains the assets in PNG/JPEG format.
@@ -67,16 +61,16 @@ To use iOS Home Screen Widgets in , you must include the widget configuration in
         
         *   **JSScripts**: A folder that contains a widget.js file with two async functions passed with a callback. Here is a sample code snippet with the two functions:
             
-            {% highlight voltMx %}function getSnapshot(callback, widgetSize){
-              var entry = new Entry(new Date(), {});
+            function getSnapshot(callback, widgetSize){
+              var entry \= new Entry(new Date(), {});
               callback(entry);
             }
             
             function getTimelines(callback, widgetSize){
-              var entry = new Entry(new Date(), {});
+              var entry \= new Entry(new Date(), {});
               callback(\[entry\], TimelinePolicy.never());
             }
-            {% endhighlight %}
+            
         *   **Views**: A folder that contains either the form.sm folders or a composite form.json structure file. The views folder must also contain the themes folder packaged with it if the form.json file is not present in the project.
             
     *   **widgetProperties.json** - A file that contains the metadata of the widgets. The widgetProperties.json file contains a JSON Object that contains the **widgets** key, which is an array of JSON Objects that contain the meta data for each widget. Each widget meta JSON object contains the following key-value pairs:
@@ -97,7 +91,7 @@ To use iOS Home Screen Widgets in , you must include the widget configuration in
 
 Here is a sample `widgetProperties.json` file:
 
-{% highlight voltMx %}{
+{
     "widgets":\[
         {
             "widgetID":"accountsWidget",
@@ -140,7 +134,6 @@ Here is a sample `widgetProperties.json` file:
         }
     \]
 }
-{% endhighlight %}
 
 Widgets use the following two important functions:
 
@@ -169,13 +162,13 @@ The Entry object is a JavaScript object instance that is used by widgets for bot
 
 Here is a sample code snippet that showcases the getSnapshot and getTimeline functions:
 
-{% highlight voltMx %}// Snapshot should call the callback with the immediate time or current time
+// Snapshot should call the callback with the immediate time or current time
 // And also provide the data along with this current entry
 function getSnapshot(callback, widgetSize){
     //entry date is the point when you want to show the widget view with below data
-    var entryDate = new Date();
+    var entryDate \= new Date();
     
-    var widgetDataModel = {
+    var widgetDataModel \= {
         "lblAccountHolderName" : "Michael",
         "lblAccountType" : "Brokerage Account",
         "lblAccountBalance" : "$350,500",
@@ -184,7 +177,7 @@ function getSnapshot(callback, widgetSize){
         "lblAccountNumber" : "AADFEW-112235Z-FFGRWS"
     };
     
-    var entry = new Entry(entryDate, widgetDataModel);
+    var entry \= new Entry(entryDate, widgetDataModel);
     callback(entry);
 }
 
@@ -195,34 +188,33 @@ function getSnapshot(callback, widgetSize){
 // Either a widget can provide series of entries and then reload after the last entry
 function getTimelines(callback, widgetSize){
     // Entry date now means that you want to display this view now
-    var entryDate = new Date();
+    var entryDate \= new Date();
     
-    var widgetDataModel = {};
+    var widgetDataModel \= {};
 
-    var accountHolderName = getAccountHolderName();
-    var accounts = getAccounts();
-    var brokerageAccount = accounts\[2\];
+    var accountHolderName \= getAccountHolderName();
+    var accounts \= getAccounts();
+    var brokerageAccount \= accounts\[2\];
 
-    var dsAccountBalance = getAccountBalance();
-    var balanceToShow = (dsAccountBalance==null) ? brokerageAccount.accountBalance : dsAccountBalance;
+    var dsAccountBalance \= getAccountBalance();
+    var balanceToShow \= (dsAccountBalance\==null) ? brokerageAccount.accountBalance : dsAccountBalance;
     
 
     // Adding brokerage account to widgetDataModel
-    widgetDataModel\["lblAccountHolderName"\] = accountHolderName;
-    widgetDataModel\["lblAccountType"\] = brokerageAccount.accountType+" Account";
-    widgetDataModel\["lblAccountBalance"\] = "$"+balanceToShow;
-    widgetDataModel\["imgLastIncrease"\] = brokerageAccount.transactions\[0\].transactionFlow == "inflow" ? "arrowup1" : "arrowdown1";
-    widgetDataModel\["lblBankName"\] = brokerageAccount.bankName;
-    widgetDataModel\["lblAccountNumber"\] = brokerageAccount.accountNumber;
+    widgetDataModel\["lblAccountHolderName"\] \= accountHolderName;
+    widgetDataModel\["lblAccountType"\] \= brokerageAccount.accountType+" Account";
+    widgetDataModel\["lblAccountBalance"\] \= "$"+balanceToShow;
+    widgetDataModel\["imgLastIncrease"\] \= brokerageAccount.transactions\[0\].transactionFlow \== "inflow" ? "arrowup1" : "arrowdown1";
+    widgetDataModel\["lblBankName"\] \= brokerageAccount.bankName;
+    widgetDataModel\["lblAccountNumber"\] \= brokerageAccount.accountNumber;
 
-    var entry = new Entry(entryDate, widgetDataModel);
+    var entry \= new Entry(entryDate, widgetDataModel);
     callback(\[entry\], TimelinePolicy.never());
 }
-{% endhighlight %}
 
 ### Data retrieval for Widgets
 
-Widgets can receive data from network requests by using the [VoltMX Networking APIs](https://docs.voltmx.com/voltmxlibrary/iris/iris_api_dev_guide/content/voltmx.net_functions.html#HttpRequ) or through the [Shared App Group APIs](https://docs.voltmx.com/voltmxlibrary/iris/iris_api_dev_guide/content/sharedappgroupcontainerapi.html).
+Widgets can receive data from network requests by using the [Volt MX Networking APIs](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.net_functions.html) or through the [Shared App Group APIs](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/sharedappgroupcontainerapi.html).
 
 ### Widgets with Multiple Timelines
 
@@ -232,13 +224,13 @@ When any server-side changes must be notified to the widget, you can notify the 
 
 **Notifications**: If the application receives a notification about any server change, the application callback can invoke the widget reload methods to update this new change across all the widgets.
 
-If the widget had already invoked timeline methods before, the new invocation of the timeline method takes precedence over the old invocations, and the updated data is displayed on the widget.
+**NOTE:** If the widget had already invoked timeline methods before, the new invocation of the timeline method takes precedence over the old invocations, and the updated data is displayed on the widget.
 
 ### Deep Linking Widgets
 
 You can implement the deep link functionality for Widgets. When a user taps a widget that has a configured URL, the application callback methods are invoked with the parameters of the URL. Appropriate action can be taken on the application when this URL is received. For example, when a user taps on the accounts widget, you can display the dashboard from where the accounts widget URL is received.
 
-From the V9 Service Pack 5 release, you can provide multiple URLs for specific tap targets. During the widget view construction, you can provide the deeplink URLs for specific tap targets in the `flex.json` file, which must be passed to the app on tapping the FlexContainer.
+**NOTE:** From the V9 Service Pack 5 release, you can provide multiple URLs for specific tap targets. During the widget view construction, you can provide the deeplink URLs for specific tap targets in the `flex.json` file, which must be passed to the app on tapping the FlexContainer.
 
 The number of URLs that you can provide varies based on the size of the widget as follows:
 
