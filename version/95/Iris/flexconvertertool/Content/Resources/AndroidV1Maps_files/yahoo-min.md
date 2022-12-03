@@ -1,0 +1,4 @@
+Not Found
+=========
+
+The requested URL /twiki/pub/TWiki/YahooUserInterfaceContrib/build/yahoo/yahoo-min.js was not found on this server.
