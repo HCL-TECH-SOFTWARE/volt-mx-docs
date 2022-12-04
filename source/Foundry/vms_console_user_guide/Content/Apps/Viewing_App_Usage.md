@@ -1,4 +1,0 @@
-                           
-
-Viewing App Usage
-=================
