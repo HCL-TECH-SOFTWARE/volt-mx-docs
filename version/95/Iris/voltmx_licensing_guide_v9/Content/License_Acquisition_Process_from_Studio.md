@@ -1,0 +1,4 @@
+﻿
+
+License Acquisition Process
+===========================
