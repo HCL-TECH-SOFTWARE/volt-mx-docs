@@ -450,7 +450,7 @@ For detailed information about fixes and known issues in this release, please se
 ### V9 Servicepack 2 Fixpack 56
 December 1, 2022
 
-There are no new features or enhancements in this release. The purpose of this fix-pack is to enable Volt Iris upgrade from 9.2.55 or lower to 9.5.x or higher.Existing installations of Volt Iris at versions 9.2.55 or lower will not have an option to upgrade to 9.5.x and must be upgraded to 9.2.56 (or higher) first to have the 9.5.x upgrade option available. For relevant Support note, see the<a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+There are no new features or enhancements in this release. The purpose of this fix-pack is to enable Volt Iris upgrade from 9.2.55 or lower to 9.5.x or higher. Existing installations of Volt Iris at versions 9.2.55 or lower will not have an option to upgrade to 9.5.x and must be upgraded to 9.2.56 (or higher) first to have the 9.5.x upgrade option available. For relevant Support note, see the<a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476" target="_blank"> Cumulative fix list for HCL Volt MX</a>.
 
 
 ### V9 Servicepack 2 Fixpack 55
