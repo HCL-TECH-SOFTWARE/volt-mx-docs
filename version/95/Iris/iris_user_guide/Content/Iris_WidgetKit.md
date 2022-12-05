@@ -37,11 +37,15 @@ To use iOS Home Screen Widgets in Volt MX Iris, you must include the widget conf
 
 1.  Include the following key in the `application.properties` file of the project:
     
-    ```enableiOSNativeWidgets \= true```
+    ```
+    enableiOSNativeWidgets = true
+    ```
     
 2.  Widgets and iOS apps communicate with each other through iOS Shared Containers or App Groups. For communication through iOS Shared Containers or App Groups, both the app and the widget must include the **App Group Entitlement**. You can provide an input app group container ID for an app as follows:
     
-    ```applicationGroups \= group.widget.testWidget //CSV format of all shared application groups```
+    ```
+    applicationGroups = group.widget.testWidget //CSV format of all shared application groups
+    ```
     
 3.  Create a new folder in the KAR file, and name it **VoltmxWidgets**. Within the VoltmxWidgets folder, add the following files/folders:
     
@@ -51,13 +55,13 @@ To use iOS Home Screen Widgets in Volt MX Iris, you must include the widget conf
         *   **JSScripts**: A folder that contains a widget.js file with two async functions passed with a callback. Here is a sample code snippet with the two functions:
             ```
             function getSnapshot(callback, widgetSize){
-              var entry \= new Entry(new Date(), {});
+              var entry = new Entry(new Date(), {});
               callback(entry);
             }
             
             function getTimelines(callback, widgetSize){
-              var entry \= new Entry(new Date(), {});
-              callback(\[entry\], TimelinePolicy.never());
+              var entry = new Entry(new Date(), {});
+              callback([entry], TimelinePolicy.never());
             }
             ```
         *   **Views**: A folder that contains either the form.sm folders or a composite form.json structure file. The views folder must also contain the themes folder packaged with it if the form.json file is not present in the project.
@@ -157,9 +161,9 @@ Here is a sample code snippet that showcases the getSnapshot and getTimeline fun
 // And also provide the data along with this current entry
 function getSnapshot(callback, widgetSize){
     //entry date is the point when you want to show the widget view with below data
-    var entryDate \= new Date();
+    var entryDate = new Date();
     
-    var widgetDataModel \= {
+    var widgetDataModel = {
         "lblAccountHolderName" : "Michael",
         "lblAccountType" : "Brokerage Account",
         "lblAccountBalance" : "$350,500",
@@ -168,7 +172,7 @@ function getSnapshot(callback, widgetSize){
         "lblAccountNumber" : "AADFEW-112235Z-FFGRWS"
     };
     
-    var entry \= new Entry(entryDate, widgetDataModel);
+    var entry = new Entry(entryDate, widgetDataModel);
     callback(entry);
 }
 
@@ -179,28 +183,28 @@ function getSnapshot(callback, widgetSize){
 // Either a widget can provide series of entries and then reload after the last entry
 function getTimelines(callback, widgetSize){
     // Entry date now means that you want to display this view now
-    var entryDate \= new Date();
+    var entryDate = new Date();
     
-    var widgetDataModel \= {};
+    var widgetDataModel = {};
 
-    var accountHolderName \= getAccountHolderName();
-    var accounts \= getAccounts();
-    var brokerageAccount \= accounts\[2\];
+    var accountHolderName = getAccountHolderName();
+    var accounts = getAccounts();
+    var brokerageAccount = accounts[2];
 
-    var dsAccountBalance \= getAccountBalance();
-    var balanceToShow \= (dsAccountBalance\==null) ? brokerageAccount.accountBalance : dsAccountBalance;
+    var dsAccountBalance = getAccountBalance();
+    var balanceToShow = (dsAccountBalance==null) ? brokerageAccount.accountBalance : dsAccountBalance;
     
 
     // Adding brokerage account to widgetDataModel
-    widgetDataModel\["lblAccountHolderName"\] \= accountHolderName;
-    widgetDataModel\["lblAccountType"\] \= brokerageAccount.accountType+" Account";
-    widgetDataModel\["lblAccountBalance"\] \= "$"+balanceToShow;
-    widgetDataModel\["imgLastIncrease"\] \= brokerageAccount.transactions\[0\].transactionFlow \== "inflow" ? "arrowup1" : "arrowdown1";
-    widgetDataModel\["lblBankName"\] \= brokerageAccount.bankName;
-    widgetDataModel\["lblAccountNumber"\] \= brokerageAccount.accountNumber;
+    widgetDataModel["lblAccountHolderName"] = accountHolderName;
+    widgetDataModel["lblAccountType"] = brokerageAccount.accountType+" Account";
+    widgetDataModel["lblAccountBalance"] = "$"+balanceToShow;
+    widgetDataModel["imgLastIncrease"] = brokerageAccount.transactions[0].transactionFlow == "inflow" ? "arrowup1" : "arrowdown1";
+    widgetDataModel["lblBankName"] = brokerageAccount.bankName;
+    widgetDataModel["lblAccountNumber"] = brokerageAccount.accountNumber;
 
-    var entry \= new Entry(entryDate, widgetDataModel);
-    callback(\[entry\], TimelinePolicy.never());
+    var entry = new Entry(entryDate, widgetDataModel);
+    callback([entry], TimelinePolicy.never());
 }
 ```
 ### Data retrieval for Widgets
