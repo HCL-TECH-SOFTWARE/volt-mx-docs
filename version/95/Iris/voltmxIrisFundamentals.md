@@ -12,7 +12,6 @@ Learn about various widgets and Application Programming Interfaces (APIs) to bet
 
 ### [Micro Apps](../Iris/iris_microapps/Content/MicroApp.md)
 Large applications can now be modularized into smaller applications using the Micro apps architecture.
-at end.
 
 ### [Data and Backend Integration](../Iris/iris_user_guide/Content/dataBackEndIntergration.md)
 
