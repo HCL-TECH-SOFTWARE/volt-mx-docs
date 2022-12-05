@@ -76,7 +76,7 @@ Developers are able to export logic for a wearable app (such as Forms, Glances, 
 
 It is now possible to define a model-driven navigation via the new Navigation Manager, where the entire navigation flow of the app resides in a single place. Users can use the Navigation Manager to define the navigations between the forms and between multiple Micro Apps. The model-driven navigation approach enhances the readability of the application flow and the maintainability of the application code.
 
-In addition, support for the voltmx.mvc.resolveNameFromContext, the voltmx.mvc.getNavigationManager, and the voltmx.mvc.getApplicationManager APIs has been added in Volt MX Iris to support the usage of the Navigation Manager.
+In addition, support for the [voltmx.mvc.resolveNameFromContext](./Iris/voltmx_ref_arch_api/Content/NavigationManager.html#navigation-manager), the [voltmx.mvc.getNavigationManager](./Iris/voltmx_ref_arch_api/Content/NavigationManager.html#navigation-manager), and the [voltmx.mvc.getApplicationManager](./Iris/voltmx_ref_arch_api/Content/NavigationManager.html#navigation-manager) APIs has been added in Volt MX Iris to support the usage of the Navigation Manager.
 
 </details>
 
@@ -89,7 +89,7 @@ Further, from Volt MX Iris V9 Service Pack 5, developers can select a color for 
 
 #### Style Constant Enhancements 
 
-Volt MX Iris has introduced support to [Import](./Iris/iris_microapps/Content/MicroApp.md#import-a-project-with-micro-apps#import-a-project-with-micro-apps) and [Export](./Iris/iris_microapps/Content/MicroApp.md#export-a-project-with-micro-apps#export-a-project-with-micro-apps) Style Constants along with the associated resources.
+Volt MX Iris has introduced support to [Import](./Iris/iris_microapps/Content/MicroApp.html#import-a-project-with-micro-apps#import-a-project-with-micro-apps) and [Export](./Iris/iris_microapps/Content/MicroApp.html#import-a-project-with-micro-apps#export-a-project-with-micro-apps) Style Constants along with the associated resources.
 
 In addition, support to define Style Constants for Color with the Two Step Gradient and Multi Step Gradient Color Types has been added in Volt MX Iris.
 
@@ -245,7 +245,7 @@ Support for the [Universal App Tablet Breakpoint setting.](./Iris/iris_user_guid
 
 #### Support for Sensor Rotation Control
 
-Support for the [splashOrientationClassifier](,/Iris/iris_user_guide/Content/Native_App_Properties.md#splashOrientationClassifier#set-native-app-properties) property that provides screen orientation modes at a granular-level for a particular Splash Screen Orientation mode. In addition, support for the [displayOrientationClassifier](./Iris/iris_widget_prog_guide/Content/FlexForm_Properties.md#displayOrientationClassifier#flexform-properties) property has been added to the FlexForm widget. The displayOrientationClassifier provides screen orientation modes at a granular-level for a particular Form.
+Support for the [splashOrientationClassifier](./Iris/iris_user_guide/Content/Native_App_Properties.md#splashOrientationClassifier#set-native-app-properties) property that provides screen orientation modes at a granular-level for a particular Splash Screen Orientation mode. In addition, support for the [displayOrientationClassifier](./Iris/iris_widget_prog_guide/Content/FlexForm_Properties.md#displayOrientationClassifier#flexform-properties) property has been added to the FlexForm widget. The displayOrientationClassifier provides screen orientation modes at a granular-level for a particular Form.
 
 #### Support to Enable SMS Retriever
 
@@ -260,11 +260,11 @@ Support for the auto-fill feature while entering an OTP in the TextArea and Text
 
 #### Local Authentication API Enhancements
 
-Volt MX Iris has introduced support for the [voltmx.localAuthentication.requestBiometricsEnroll API ]() that directs users to the device settings page, where they can enroll for biometrics.
+Volt MX Iris has introduced support for the [voltmx.localAuthentication.requestBiometricsEnroll API ](./Iris/iris_api_dev_guide/content/voltmx.localauthentication_functions.html#requestBiometricsEnroll#voltmxlocalauthentication-namespace) that directs users to the device settings page, where they can enroll for biometrics.
 
 #### Support for Shadow Properties
 
-Volt MX Iris has introduced support for the [shadowColor](), [shadowOffset](), and [shadowRadius]() properties on the Android platform for the following widgets:
+Volt MX Iris has introduced support for the [shadowColor](./Iris/iris_widget_prog_guide/Content/FlexContainer_Properties.html#shadowColor#shadowColor-Property), [shadowOffset](./Iris/iris_widget_prog_guide/Content/FlexContainer_Properties.html#shadowColor#shadowOffset-Property), and [shadowRadius](./Iris/iris_widget_prog_guide/Content/FlexContainer_Properties.html#shadowColor#shadowOffset-Property#shadowRadius-Property) properties on the Android platform for the following widgets:
 
 * [FlexContainer](./Iris/iris_widget_prog_guide/Content/FlexContainer_Properties.md#shouldGroup#flexcontainer-properties)
 * [FlexScrollContainer](./Iris/iris_widget_prog_guide/Content/FlexScrollContainer_Properties.md#shouldGroup#flexscrollcontainer-properties)
@@ -283,9 +283,9 @@ The following enhancements have been made on Volt MX Iris V9 Service Pack 5 for 
 
 Support for the following properties to provide spacing within a Responsive Container:
 
-* Padding
-* GutterX
-* GutterY
+* [Padding](./Iris/iris_user_guide/Content/ResponsiveGridLayout.html#Padding#responsive-design)
+* [GutterX](./Iris/iris_user_guide/Content/ResponsiveGridLayout.html#Padding#responsive-design)
+* [GutterY](./Iris/iris_user_guide/Content/ResponsiveGridLayout.html#Padding#responsive-design)
 
 In addition, from the Volt MX Iris V9 Service Pack 5 release, support for Breakpoint Forking is available for a component's custom properties in a Responsive Web app.
 
@@ -312,7 +312,7 @@ Volt MX Iris has introduced support for the mirrorFlowHorizontalAlignment and re
 
 #### Support for PBKDF2 Key in Crypto APIs
 
-Volt MX Iris has introduced support for the [voltmx.crypto.createPBKDF2Key API]() to enhance password protection on Responsive Web Apps.
+Volt MX Iris has introduced support for the voltmx.crypto.createPBKDF2Key API to enhance password protection on Responsive Web Apps.
 
 </details>
 
@@ -341,7 +341,7 @@ To this end, the following APIs have been introduced.
 
 Support for Page Object Models (POM) has been added in the Jasmine Test Automation Framework. A Page Object is a JSON Object that contains information about all the elements (widgets) present on a particular Page (Form, Component, or Template).
 
-In addition, the [voltmx.automation.pageObjectModel.getPageObjects API]() has been added to retrieve and return the specified Page Objects after deploying the Page Object Model files.
+In addition, the [voltmx.automation.pageObjectModel.getPageObjects API](./Iris/iris_api_dev_guide/content/voltmx.automation_namespace.html#getPageObjects#voltmxautomation-namespace) has been added to retrieve and return the specified Page Objects after deploying the Page Object Model files.
 
 #### Automation APIs for Gestures
 
@@ -374,7 +374,7 @@ In addition, if developers want to generate the Object Models during a CI build,
 
 Form Controller Extensions, which are JavaScript modules that provide specialized or enhanced functionality for FormControllers, are now available for use.
 
-Volt MX Iris has added support for a new [Syntax]() in the [ voltmx.mvc.registry.add API]() to create Form Controller Extensions for MVC projects.
+Volt MX Iris has added support for a new Syntax in the [voltmx.mvc.registry.add API](./Iris/iris_user_guide/Content/HotReload.html#Component#hot-reload-overview) to create Form Controller Extensions for MVC projects.
 
 </details>
 
@@ -429,7 +429,7 @@ Volt MX Iris has extended support for the Hot Reload feature to MVC 2.0 apps, Fo
 
 Support to integrate the Volt MX Framework with Angular apps. Users can now embed Volt MX Components with Angular Components as Webpack 5 modules.
 
-In addition, support for the Listener APIs has been added in Volt MX Iris to enable communication and pass data between the components. The Volt MX [Listener API]() enables application developers to create, subscribe, and broadcast events between components.
+In addition, support for the Listener APIs has been added in Volt MX Iris to enable communication and pass data between the components. The Volt MX [Listener API](./Iris/iris_api_dev_guide/content/voltmxlistener_api.html#voltmx-listener-api) enables application developers to create, subscribe, and broadcast events between components.
 
 </details>
 
@@ -724,7 +724,7 @@ Support for the Version Upgrade mechanism has been added to MFCLI. This feature 
 
 * **Enhancement to merging applications with MFCLI**
 
-Support to merge Infinity template apps (L2) with base locked apps (L1) and extensions (L3) has been added to the `merge-app-zip` command in MFCLI. 
+Support to merge Infinity template apps (L2) with base locked apps (L1) and extensions (L3) has been added to the merge-app-zip command in MFCLI. 
 
 </details>
 
@@ -794,8 +794,8 @@ Support to override the test data has been added to Jasmine tests. You can uploa
 
 Support to encrypt the database password has been added to the Volt MX Foundry Installers. To encrypt a password, use the Encryption Utility that is provided with the installer. You can then use the encrypted password and the encryption key during installation. 
 
-   *  For the Windows installer, click [here]().
-   *  For the Linux installer, click [here]().  
+   *  For the Windows installer.
+   *  For the Linux installer.  
 
 </details>
 
@@ -807,10 +807,10 @@ Support to encrypt the database password has been added to the Volt MX Foundry C
 
 For information about this feature, refer to the following links: 
 
-   * For the On-Premises Containers solution click [here]().
-   * For the Single-container solution click [here]().
-   * For the Amazon EKS solution click [here]().
-   * For the Red Hat OpenShift solution click [here]().
+   * For the On-Premises Containers solution.
+   * For the Single-container solution.
+   * For the Amazon EKS solution.
+   * For the Red Hat OpenShift solution.
 
 
 * **Support extension for Red Hat UBI**
@@ -819,11 +819,11 @@ Containers for the Foundry components run on the Red Hat Universal Base Image (U
 
 For information about this feature, refer to the following links: 
 
-   * For the On-Premises Containers solution click [here]().
-   * For the Single-container solution click [here]().
-   * For the Microsoft Azure solution click [here]().
-   * For the Amazon EKS solution click [here]().
-   * For the Red Hat OpenShift solution click [here]().
+   * For the On-Premises Containers solution.
+   * For the Single-container solution.
+   * For the Microsoft Azure solution.
+   * For the Amazon EKS solution.
+   * For the Red Hat OpenShift solution.
 
 </details>
 

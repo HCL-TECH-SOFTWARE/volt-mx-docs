@@ -2,8 +2,8 @@
 
 Volt MX  Iris Suppported Devices, OSes, and Browsers Guide: Native Apps
 
-Supported Development Languages 9.5
-===================================
+Supported Development Languages for Volt MX 9.5
+================================================
 
 Native Apps
 -----------

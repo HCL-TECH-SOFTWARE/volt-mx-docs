@@ -9,7 +9,7 @@ Helm is like a Unix package manager but for Kubernetes. In this sense, Helm is s
 
 You should use this installation path if you plan to use containers to setup your on-premise or Cloud based production grade installation of Volt MX Foundry and you have an existing cluster to install into.
 
-Helm can also deploy to a development or test cluster (i.e. a single node with no high availability), but you should also be aware of lighter weight options that only require Docker (see our Docker solution at [Single container setup (On-Prem)](../../../Foundry/voltmxfoundry_single_container/Content/VoltMX_Foundry_Single_Container_Solution_On-Prem.md)).
+Helm can also deploy to a development or test cluster (i.e. a single node with no high availability), but you should also be aware of lighter weight options that only require Docker (see our Docker solution at [Single container setup (On-Prem)](../../../Foundry/voltmxfoundry_single_container/Content/VoltMX_Foundry_Single_Container_Solution_On-Prem_.md)).
 
 If you are doing an On-Prem Kubernetes installation and you want scripts to create your cluster, please utilize the solution documented at [Volt MX Foundry Container Cluster Solution](../../../Foundry/voltmxfoundry_containers_solution_on-prem/Content/VoltMX_Foundry_Containers_Solution_On-Prem.md#overview)
 
@@ -18,6 +18,7 @@ More details about Helm and the Helm binaries can be found at <https://helm.sh>
 ## Salient Features
 
 You can use the information to deploy Foundry to an existing Kubernetes clusters.  This solution will not create a Kubernetes deployment or new cluster for you.
+
 
 # Prerequisites
 
@@ -32,6 +33,7 @@ You can use the information to deploy Foundry to an existing Kubernetes clusters
 Foundry is supported on certified Kubernetes clusters.  Generally certified clusters are running a variant of Linux.  Please refer to the prerequisites listed in [VoltMX Foundry Containers Solution On Prem](../../../Foundry/voltmxfoundry_containers_solution_on-prem/Content/VoltMX_Foundry_Containers_Solution_On-Prem.md#prerequisites) for more details and specifics.
 
 Download the Foundry Helm chart from from [HCL Flexnet software portal](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.5.x&orgId=HCL).
+
 
 # Configuration
 
@@ -105,20 +107,23 @@ The following parameters are specified in the values.yaml file within the Helm C
      - **dbSuffix** – This is the Database server suffix for Volt MX Foundry databases.
      - **useExistingDb**: If you want to use existing databases from a previous Volt MX Foundry instance set this variable to true,  otherwise it should be false.
 
-<br/><br/>
->  **Notes:**
->
-> If you use an IP address for dbHost, make certain it is a static IP address and does not change.
+    <br/>
 
-> Database Prefix and Suffix are optional inputs.
-> - In case of upgrade, ensure that the values of the Database Prefix and Suffix that you provide are the same as you had provided during the initial installation.
+    >  **Notes:**
+    >
+    > If you use an IP address for dbHost, make certain it is a static IP address and does not change.
 
-> If **dbType** is set as **oracle**, the following String values need to be provided:
->
-> - **dbDataTS**: Database Data tablespace name.
-> - **dbIndexTS**: Database Index tablespace name.
-> - **dbLobTS**: Database LOB tablespace name.
-> - **dbService**: Database service name.
+    > Database Prefix and Suffix are optional inputs.
+    > - In case of upgrade, ensure that the values of the Database Prefix and Suffix that you provide are the same as you had provided during the initial installation.
+
+    > If **dbType** is set as **oracle**, the following String values need to be provided:
+    >
+    > - **dbDataTS**: Database Data tablespace name.
+    > - **dbIndexTS**: Database Index tablespace name.
+    > - **dbLobTS**: Database LOB tablespace name.
+    > - **dbService**: Database service name.
+
+    <br/>
 
 8. **timeZone** - The Time Zone of the Database used for Volt MX Foundry installation. The Time Zone variable must be set to maintain consistency between the Application server and the Database server. For determining what value to set for the time zone you can refer to [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) on Wikipedia.
 
@@ -144,25 +149,25 @@ The following parameters are specified in the values.yaml file within the Helm C
 
     - resourceMemoryLimit:  specifies the maximum amount of memory the container can consume. If the container tries to allocate more memory than this limit, the Linux kernel out-of-memory subsystem activates and, typically, intervenes by stopping one of the processes in the container that tried to allocate memory.
 
-This table documents the defaults for each container.
+    This table documents the defaults for each container.
 
-| App Container      | Resource | Default |
-| ----------- | ----------- | ------- |
-| Identity    | resourceMemoryLimit    | "1.2G"  |
-| Identity    | resourceRequestsMemory | "1G" |
-| Identity    | resourceRequestsCpu    | "200m" |
-| Console     | resourceMemoryLimit    | "2.2G"  |
-| Console     | resourceRequestsMemory | "2G" |
-| Console     | resourceRequestsCpu    | "300m" |
-| API Portal  | resourceMemoryLimit    | "1.2G" |
-| API Portal  | resourceRequestsMemory | "1G"   |
-| API Portal  | resourceRequestsCpu    | "200m" |
-| Integration | resourceMemoryLimit    | "2.2G" |
-| Integration | resourceRequestsMemory | "2G"   |
-| Integration | resourceRequestsCpu    | "300m" |
-| Engagement  | resourceMemoryLimit    | "1.2G" |
-| Engagement  | resourceRequestsMemory | "1G"   |
-| Engagement  | resourceRequestsCpu    | "200m" |
+    | App Container      | Resource | Default |
+    | ----------- | ----------- | ------- |
+    | Identity    | resourceMemoryLimit    | "1.2G"  |
+    | Identity    | resourceRequestsMemory | "1G" |
+    | Identity    | resourceRequestsCpu    | "200m" |
+    | Console     | resourceMemoryLimit    | "2.2G"  |
+    | Console     | resourceRequestsMemory | "2G" |
+    | Console     | resourceRequestsCpu    | "300m" |
+    | API Portal  | resourceMemoryLimit    | "1.2G" |
+    | API Portal  | resourceRequestsMemory | "1G"   |
+    | API Portal  | resourceRequestsCpu    | "200m" |
+    | Integration | resourceMemoryLimit    | "2.2G" |
+    | Integration | resourceRequestsMemory | "2G"   |
+    | Integration | resourceRequestsCpu    | "300m" |
+    | Engagement  | resourceMemoryLimit    | "1.2G" |
+    | Engagement  | resourceRequestsMemory | "1G"   |
+    | Engagement  | resourceRequestsCpu    | "200m" |
 
 12. **Custom JAVA_OPTS Details**: Each application can be set with a custom Java options which will be used to configure the JVM.  Under each application locate the variable called `customJavaOpts`.
 
@@ -170,169 +175,160 @@ This table documents the defaults for each container.
 
 14. **VoltMX Foundry Account Registration Details**: Software license registration must be done after installation with Helm (prior version of install were capable of doing the registration during install).  After logging into the newly deployed console a link at the top of every page will take you to the registration page to activate the software license.
 
+
 # Installation
 
 **Steps to Install Volt MX Foundry Container Cluster Solution:**
 
 1. Download the Helm charts from [HCL Flexnet software portal](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.5.x&orgId=HCL) and unzip the contents.   With a command prompt, cd to the root of the unzipped content (you will see `Chart.yaml` and `values.yaml` here).
 
-```bash
- mkdir ~/Foundry-9.5.0.0_GA
- cd ~/Foundry-9.5.0.0_GA
- tar -xzf ~/Downloads/VoltMXFoundryHelmChart-9.5.0.0_GA.tar.gz
-```
+    ```bash
+    mkdir ~/Foundry-9.5.0.0_GA
+    cd ~/Foundry-9.5.0.0_GA
+    tar -xzf ~/Downloads/VoltMXFoundryHelmChart-9.5.0.0_GA.tar.gz
+    ```
 
  2. Execute `init-guids.sh` to initialize account details.  Specify --upgrade if you are upgrading an existing installation.
 
- ```bash
-$ ./init-guid.sh --new
-ACCOUNTS_ENCRYPTION_KEY=b28e44b3-a5c6-8561-12cd-ef95b37f5f3c
-WAAS_MASTER_KEY=a7d6b717-07f8-011a-8095-755c340dc976
-WAAS_MASTER_KEY_ID=7d58a92c-e9db-1ebc-084f-6f0640fb5b42
-AUTH_MASTER_KEY=84635bf0-bc1b-7139-bf95-f64afb1673a1
-AUTH_MASTER_KEY_ID=ec376ad5-4b29-b013-d8d6-b1b7d6fd5559
-useExistingDb=false
-New keys have been saved to values.yaml, you may proceed with 'helm install'.
-$
-```
-
+     ```bash
+    $ ./init-guid.sh --new
+    ACCOUNTS_ENCRYPTION_KEY=b28e44b3-a5c6-8561-12cd-ef95b37f5f3c
+    WAAS_MASTER_KEY=a7d6b717-07f8-011a-8095-755c340dc976
+    WAAS_MASTER_KEY_ID=7d58a92c-e9db-1ebc-084f-6f0640fb5b42
+    AUTH_MASTER_KEY=84635bf0-bc1b-7139-bf95-f64afb1673a1
+    AUTH_MASTER_KEY_ID=ec376ad5-4b29-b013-d8d6-b1b7d6fd5559
+    useExistingDb=false
+    New keys have been saved to values.yaml, you may proceed with 'helm install'.
+ 
  3. Customize values.yaml with your deployment details.  Consult the configuration section above.
 
-  ```bash
-vi values.yaml
-```
+    ```bash
+    vi values.yaml
+    ```
 
  4. Verify you have access to the Kubernetes cluster with `kubectl`.
 
-  ```bash
-$ kubectl get nodes
-NAME              STATUS   ROLES                  AGE   VERSION
-master            Ready    control-plane,master   1h   v1.24.0+dc5a2fd
-worker1           Ready    worker                 1h   v1.24.0+dc5a2fd
-worker2           Ready    worker                 1h   v1.24.0+dc5a2fd
-....
-```
+    ```bash
+    $ kubectl get nodes
+    NAME              STATUS   ROLES                  AGE   VERSION
+    master            Ready    control-plane,master   1h   v1.24.0+dc5a2fd
+    worker1           Ready    worker                 1h   v1.24.0+dc5a2fd
+    worker2           Ready    worker                 1h   v1.24.0+dc5a2fd
+    ....
+    ```
 
  5. Create the Foundry namespace and set it your current context.  This step is optional but suggested.
 
-```bash
-$ kubectl create namespace foundry
-namespace/foundry created
-$
-$ kubectl config set-context --current --namespace=foundry
-Context "kube-cluster1" modified.
-$
-```
+    ```bash
+    $ kubectl create namespace foundry
+    namespace/foundry created
+
+    $ kubectl config set-context --current --namespace=foundry
+    Context "kube-cluster1" modified.
+    ```
 
  6. Install Foundry with Helm.
 
-```bash
-$ helm install foundry . -n foundry
-NAME: foundry
-LAST DEPLOYED: Mon Nov 21 22:23:54 2022
-NAMESPACE: foundry
-STATUS: deployed
-REVISION: 1
-TEST SUITE: None
-$
-```
+    ```bash
+    $ helm install foundry . -n foundry
+    NAME: foundry
+    LAST DEPLOYED: Mon Nov 21 22:23:54 2022
+    NAMESPACE: foundry
+    STATUS: deployed
+    REVISION: 1
+    TEST SUITE: None
+    ```
 
  7. The deployment will take some time.  Six container images must be downloaded from the HCL container repository and then the database must be created.  After this, each container will be started and Tomcat initialized.  You can watch the progress of the deployment with a variety of commands.   The command below watches the pod status and updates the output as the deployment progresses:
 
-```bash
-$ kubectl get pods -w
-NAME                                         READY   STATUS     RESTARTS   AGE
-foundry-db-update-zfd4b                      1/1     Running    0          28s
-voltmx-foundry-apiportal-fff6c987b-nv5pw     0/1     Init:0/1   0          28s
-voltmx-foundry-console-64d579d5f7-c6p8r      0/1     Init:0/1   0          28s
-voltmx-foundry-engagement-569dcb594-9bt2s    0/1     Init:0/1   0          28s
-voltmx-foundry-identity-5454597447-jgd6b     0/1     Init:0/1   0          28s
-voltmx-foundry-integration-fb5b78bc9-j2n5q   0/1     Init:0/1   0          28s
-foundry-db-update-zfd4b                      0/1     Completed   0          81s
-foundry-db-update-zfd4b                      0/1     Completed   0          83s
-voltmx-foundry-identity-5454597447-jgd6b     0/1     PodInitializing   0          85s
-voltmx-foundry-integration-fb5b78bc9-j2n5q   0/1     PodInitializing   0          85s
-voltmx-foundry-apiportal-fff6c987b-nv5pw     0/1     PodInitializing   0          85s
-voltmx-foundry-console-64d579d5f7-c6p8r      0/1     PodInitializing   0          85s
-voltmx-foundry-engagement-569dcb594-9bt2s    0/1     PodInitializing   0          85s
-voltmx-foundry-console-64d579d5f7-c6p8r      0/1     Running           0          2m15s
-voltmx-foundry-identity-5454597447-jgd6b     0/1     Running           0          2m15s
-voltmx-foundry-integration-fb5b78bc9-j2n5q   0/1     Running           0          2m15s
-voltmx-foundry-apiportal-fff6c987b-nv5pw     0/1     Running           0          2m15s
-voltmx-foundry-apiportal-fff6c987b-nv5pw     1/1     Running           0          3m
-voltmx-foundry-identity-5454597447-jgd6b     1/1     Running           0          3m1s
-voltmx-foundry-engagement-569dcb594-9bt2s    0/1     Running           0          3m2s
-voltmx-foundry-integration-fb5b78bc9-j2n5q   1/1     Running           0          3m2s
-voltmx-foundry-console-64d579d5f7-c6p8r      1/1     Running           0          3m19s
-voltmx-foundry-engagement-569dcb594-9bt2s    1/1     Running           0          3m30s
-^C
-$
-```
+    ```bash
+    $ kubectl get pods -w
+    NAME                                         READY   STATUS     RESTARTS   AGE
+    foundry-db-update-zfd4b                      1/1     Running    0          28s
+    voltmx-foundry-apiportal-fff6c987b-nv5pw     0/1     Init:0/1   0          28s
+    voltmx-foundry-console-64d579d5f7-c6p8r      0/1     Init:0/1   0          28s
+    voltmx-foundry-engagement-569dcb594-9bt2s    0/1     Init:0/1   0          28s
+    voltmx-foundry-identity-5454597447-jgd6b     0/1     Init:0/1   0          28s
+    voltmx-foundry-integration-fb5b78bc9-j2n5q   0/1     Init:0/1   0          28s
+    foundry-db-update-zfd4b                      0/1     Completed   0          81s
+    foundry-db-update-zfd4b                      0/1     Completed   0          83s
+    voltmx-foundry-identity-5454597447-jgd6b     0/1     PodInitializing   0          85s
+    voltmx-foundry-integration-fb5b78bc9-j2n5q   0/1     PodInitializing   0          85s
+    voltmx-foundry-apiportal-fff6c987b-nv5pw     0/1     PodInitializing   0          85s
+    voltmx-foundry-console-64d579d5f7-c6p8r      0/1     PodInitializing   0          85s
+    voltmx-foundry-engagement-569dcb594-9bt2s    0/1     PodInitializing   0          85s
+    voltmx-foundry-console-64d579d5f7-c6p8r      0/1     Running           0          2m15s
+    voltmx-foundry-identity-5454597447-jgd6b     0/1     Running           0          2m15s
+    voltmx-foundry-integration-fb5b78bc9-j2n5q   0/1     Running           0          2m15s
+    voltmx-foundry-apiportal-fff6c987b-nv5pw     0/1     Running           0          2m15s
+    voltmx-foundry-apiportal-fff6c987b-nv5pw     1/1     Running           0          3m
+    voltmx-foundry-identity-5454597447-jgd6b     1/1     Running           0          3m1s
+    voltmx-foundry-engagement-569dcb594-9bt2s    0/1     Running           0          3m2s
+    voltmx-foundry-integration-fb5b78bc9-j2n5q   1/1     Running           0          3m2s
+    voltmx-foundry-console-64d579d5f7-c6p8r      1/1     Running           0          3m19s
+    voltmx-foundry-engagement-569dcb594-9bt2s    1/1     Running           0          3m30s
+    ^C
+    ```
 
-The `-w` option is short for `watch` and it causes kubectl to monitor the status and update the output with any changes.  You must press `ctrl-c` to terminate this command.
+    The `-w` option is short for `watch` and it causes kubectl to monitor the status and update the output with any changes.  You must press `ctrl-c` to terminate this command.
 
  8. Verify the deployment.   Using the commands below, you should see similar output:
 
-```bash
-$ kubectl get pods
-NAME                                         READY   STATUS      RESTARTS   AGE
-foundry-db-update-zfd4b                      0/1     Completed   0          8m7s
-voltmx-foundry-apiportal-fff6c987b-nv5pw     1/1     Running     0          8m7s
-voltmx-foundry-console-64d579d5f7-c6p8r      1/1     Running     0          8m7s
-voltmx-foundry-engagement-569dcb594-9bt2s    1/1     Running     0          8m7s
-voltmx-foundry-identity-5454597447-jgd6b     1/1     Running     0          8m7s
-voltmx-foundry-integration-fb5b78bc9-j2n5q   1/1     Running     0          8m7s
-$
-```
+    ```bash
+    $ kubectl get pods
+    NAME                                         READY   STATUS      RESTARTS   AGE
+    foundry-db-update-zfd4b                      0/1     Completed   0          8m7s
+    voltmx-foundry-apiportal-fff6c987b-nv5pw     1/1     Running     0          8m7s
+    voltmx-foundry-console-64d579d5f7-c6p8r      1/1     Running     0          8m7s
+    voltmx-foundry-engagement-569dcb594-9bt2s    1/1     Running     0          8m7s
+    voltmx-foundry-identity-5454597447-jgd6b     1/1     Running     0          8m7s
+    voltmx-foundry-integration-fb5b78bc9-j2n5q   1/1     Running     0          8m7s
+    ```
 
-Each pod should show a status of `Running` and it should indicate 1/1 in the Ready column indicating each pod has 1 out of 1 container in the Ready status.
+    Each pod should show a status of `Running` and it should indicate 1/1 in the Ready column indicating each pod has 1 out of 1 container in the Ready status.
 
-```bash
-$ $ kubectl get endpoints
-NAME                         ENDPOINTS           AGE
-mysql-service                10.131.0.109:3306   5d11h
-voltmx-foundry-apiportal     10.130.3.124:8080   14m
-voltmx-foundry-console       10.130.3.125:8080   14m
-voltmx-foundry-engagement    10.130.3.129:8080   14m
-voltmx-foundry-identity      10.130.3.127:8080   14m
-voltmx-foundry-integration   10.130.3.126:8080   14m
-```
+    ```bash
+    $ kubectl get endpoints
+    NAME                         ENDPOINTS           AGE
+    mysql-service                10.131.0.109:3306   5d11h
+    voltmx-foundry-apiportal     10.130.3.124:8080   14m
+    voltmx-foundry-console       10.130.3.125:8080   14m
+    voltmx-foundry-engagement    10.130.3.129:8080   14m
+    voltmx-foundry-identity      10.130.3.127:8080   14m
+    voltmx-foundry-integration   10.130.3.126:8080   14m
+    ```
 
-Endpoints show what IP Address/port each service will route requests to.  If you change the replica count you should see an associated endpoint address for each replica.
+    Endpoints show what IP Address/port each service will route requests to.  If you change the replica count you should see an associated endpoint address for each replica.
 
-```
-$ kubectl get ingress
-NAME          CLASS    HOSTS                                   ADDRESS                                        PORTS   AGE
-auth          <none>   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
-console       <none>   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
-engagement    <none>   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
-integration   <none>   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
-portal        <none>   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
-$
-```
+    ```
+    $ kubectl get ingress
+    NAME          CLASS    HOSTS                                   ADDRESS                                        PORTS   AGE
+    auth          <none>   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
+    console       <none>   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
+    engagement    <none>   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
+    integration   <none>   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
+    portal        <none>   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
+    ```
 
-For each Ingress we should see that an address has been assigned.  If there is no address listed, Ingress will not function.  Generally a lack of address means that no ingress controller has determined it should setup the ingress.  This is usually caused by incorrectly specifying the ingressClass in values.yaml.  You can correct this and then run `helm upgrade foundry .` and Helm will apply the class name change for you.
+    For each Ingress we should see that an address has been assigned.  If there is no address listed, Ingress will not function.  Generally a lack of address means that no ingress controller has determined it should setup the ingress.  This is usually caused by incorrectly specifying the ingressClass in values.yaml.  You can correct this and then run `helm upgrade foundry .` and Helm will apply the class name change for you.
 
+    If the pods are all showing ready and your Ingress has shows addresses, you should be ready to open the Foundry Console in your browser.   Using the **host name** shown in the output, open the console in your browser.  From the output above, we would use <http://foundry.apps.dsocp.nonprod.hclpnp.com/mfconsole>.
 
-If the pods are all showing ready and your Ingress has shows addresses, you should be ready to open the Foundry Console in your browser.   Using the **host name** shown in the output, open the console in your browser.  From the output above, we would use <http://foundry.apps.dsocp.nonprod.hclpnp.com/mfconsole>.
 
 ## Uninstalling Foundry
 Foundry can be uninstalled with the command `helm uninstall foundry`.  If your Kubernetes context is not set to the foundry namespace you may need to specify the `-n <namespace>` parameter as in `helm uninstall foundry -n foundry`.   This will uninstall the deployment of Foundry in Kubernetes (it will stop the containers and pods and delete them from the work load, along with any secrets, configmaps, ingress and other metadata).  This will not do anything to remove databases that were created during install: those must be manually deleted with database tools.
 
+
 ## Modifying Foundry configuration
 With the exception of database changes (any database related parameters), you can usually modify the values.yaml file and then run `helm upgrade foundry . -n foundry` and Helm will update configuration and restart any impacted pods.   For instance, if you install foundry but find you failed to properly specify the ingressClass name, you could edit values.yaml, update the ingressClass parameter and then run `helm upgrade foundry . -n foundry`.
+
 
 ## Troubleshooting
 Review the general Foundry with Kubernetes troubleshooting section in [Volt MX Foundry Container Cluster Solution](../../../Foundry/voltmxfoundry_containers_solution_on-prem/Content/Containers_Solution_FAQs_and_Troubleshooting.md
 )
 
 
-
-
-
-
 ## Known Issues and Limitations
-
 Volt MX Foundry Container Cluster Solution has the following known issues and limitations:
 
 - Support for **SPA / Desktop Web** is only available for zipped SPA apps, not for WARs.

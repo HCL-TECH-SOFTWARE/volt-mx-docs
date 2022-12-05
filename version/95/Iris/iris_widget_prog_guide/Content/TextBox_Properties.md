@@ -1,5 +1,5 @@
                                   
-## <a id="textbox-properties">TextBox Properties
+## <a id="textbox-properties"></a> TextBox Properties
 
 
 The properties for TextBox widget are as follows.

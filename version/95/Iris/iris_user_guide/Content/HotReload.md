@@ -1,8 +1,8 @@
                          
 
 
-Hot Reload Overview
-===================
+## <a id="hot-reload-overview"></a> Hot Reload Overview
+
 
 Starting with  release, Volt MX Iris has introduced the Hot Reload feature in live preview. The Hot Reload feature improves the Live preview experience within Volt MX Iris by reducing the build and preview time of a live preview.
 

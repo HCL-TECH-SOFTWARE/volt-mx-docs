@@ -107,7 +107,7 @@ None
 
 Support for the record and playback features for this API is available from the V9 Service Pack 2 Fixpack 16 version of Volt MX Iris.
 
-<b>Platform Availability</b>
+### <a id=“Platform Availability”></a> Platform Availability
 
 *   iOS
 
@@ -1015,8 +1015,7 @@ None
 * * *
 </details>
 
-Low-level Touch and Gesture APIs
---------------------------------
+### <a id=“low-level-touch-and-gesture-apis”></a> Low-level Touch and Gesture APIs
 
 The voltmx.automation Namespace comprises of the following Low-level Touch and Gesture APIs.
 
@@ -1716,7 +1715,7 @@ Boolean
 
 
 
-## <a id="cross"></a> Cross App Testing APIs
+### <a id=“cross-app-testing-apis”></a> Cross App Testing APIs
 
 
 From the V9 Service Pack 2 Fixpack 16 release, Volt MX Iris introduces support for the following APIs for cross-app testing:
@@ -1732,6 +1731,7 @@ This API returns a JSON Object (dictionary) that contains the details of the app
 ```
 
 voltmx.automation.getParentInfo();
+
 ```
 
 <b>Return Values</b>  

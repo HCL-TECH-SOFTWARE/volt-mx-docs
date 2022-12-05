@@ -1,8 +1,8 @@
                          
 
 
-Responsive Design
-=================
+## <a id="responsive-design"></a> Responsive Design
+
 
 Responsive design enables developers to create applications that can fit their contents based on the form factor of the device. Using Volt MX Iris, you can develop Mobile (Native and Adaptive Web), Tablet (Native and Adaptive Web), and Responsive Web applications, that are responsive in nature.
 

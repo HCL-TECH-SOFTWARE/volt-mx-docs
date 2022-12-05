@@ -7,21 +7,25 @@ This section contains information about important features that are not enabled 
 The Kubernetes Metrics Server is an aggregator of resource usage data in your cluster. For more information, see Kubernetes Metrics Server on GitHub. The Metrics Server is commonly used by other Kubernetes add ons, such as the Horizontal Pod Autoscaler or the Kubernetes Dashboard. It may already be deployed in your cluster, which is the case for Rancher Desktop, and if not, you can deploy it using these steps.
 
 1. Deploy the Metrics Server with the following command:
-```
-kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
-```
+
+    ```
+    $ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+    ```
+
 2. Verify that the metrics-server deployment is running the desired number of pods with the following command:
-```
-kubectl get deployment metrics-server -n kube-system
-NAME             READY   UP-TO-DATE   AVAILABLE   AGE
-metrics-server   1/1     1            1           6m
-```
+
+    ```
+    $ kubectl get deployment metrics-server -n kube-system
+    NAME             READY   UP-TO-DATE   AVAILABLE   AGE
+    metrics-server   1/1     1            1           6m
+    ```
 
 ## Elastic Stack Helm Charts
 
 Elastic stack is a group of open source products from Elastic designed to help users sample data from any type of source, in any format, and via any search where they can analyze and visualize the data in real time.
 
 The following are the core products of Elastic Stack:
+
 1. Elasticsearch - the main component of the elastic stack
 2. Kibana
 3. Beats - Metricbeat and Filebeat
@@ -61,11 +65,13 @@ $ helm repo update
 
 #### Example Command Line Commands
 
-**Note:** Update the volumeClaimTemplate.storageClassName to match the storage class provided by your cluster via a command line argument. For example, the storage class name to be used when installing in Rancher Desktop is "local-path" while for an OpenShift installation, the storage class name to be used is "thin".
+**Notes:** 
 
-**Note 2:** The default Ingress class name is "nginx". Update ingress.className to match the Ingress class provided by your cluster via a command line argument. Use the command 'kubectl get ingress --namespace your-foundry-namespace' to display the the Ingress class provided by your cluster.
+- Update the volumeClaimTemplate.storageClassName to match the storage class provided by your cluster via a command line argument. For example, the storage class name to be used when installing in Rancher Desktop is "local-path" while for an OpenShift installation, the storage class name to be used is "thin".
 
-**Note 3:** You may need to modify the resources requests cpu and memory as well as the resources limits cpu and memory to accomodate the limitations of your Kubernetes environment such as Rancher Desktop.
+- The default Ingress class name is "nginx". Update ingress.className to match the Ingress class provided by your cluster via a command line argument. Use the command 'kubectl get ingress --namespace your-foundry-namespace' to display the the Ingress class provided by your cluster.
+
+- You may need to modify the resources requests cpu and memory as well as the resources limits cpu and memory to accomodate the limitations of your Kubernetes environment such as Rancher Desktop.
 
 ```bash
 
@@ -95,7 +101,7 @@ elasticsearch-master-1   1/1     Running   0          2m7s
 elasticsearch-master-2   1/1     Running   0          2m7s
 
 # Retrieve elastic user's password
-kubectl get secrets --namespace=elastic elasticsearch-master-credentials -ojsonpath='{.data.password}' | base64 -d
+$ kubectl get secrets --namespace=elastic elasticsearch-master-credentials -ojsonpath='{.data.password}' | base64 -d
 **secret**
 
 # Test cluster health using Helm test
@@ -222,20 +228,22 @@ Kuberhealthy is an operator for running synthetic checks. By creating a custom r
 
 ### Prerequisites
 
-**Note:** OpenShift provides out-of-the-box support for Prometheus, Prometheus Operator, AlertManager, NodeExporter, Kube State Metrics, and Grafana. Kuberhealthy is not required as OpenShift provides other [health checking mechanisms](https://docs.openshift.com/container-platform/4.6/applications/application-health.md).
+**Note:** OpenShift provides out-of-the-box support for Prometheus, Prometheus Operator, AlertManager, NodeExporter, Kube State Metrics, and Grafana. Kuberhealthy is not required as OpenShift provides other [health checking mechanisms](https://docs.openshift.com/container-platform/4.6/applications/application-health.html).
 
 Use the following steps to install via Helm:
-1) Add the prometheus-community repo and request a repo update
-2) Install the [Kube Prometheus Stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack#kube-prometheus-stack)
+
+1. Add the prometheus-community repo and request a repo update
+2. Install the [Kube Prometheus Stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack#kube-prometheus-stack)
 
 **Note:** The components included in the Kube Prometheus Stack install are as follows:
-* The Prometheus Operator
-* Highly available Prometheus
-* Highly available Alertmanager
-* Prometheus node-exporter
-* Prometheus Adapter for Kubernetes Metrics APIs
-* kube-state-metrics
-* Grafana
+
+- The Prometheus Operator
+- Highly available Prometheus
+- Highly available Alertmanager
+- Prometheus node-exporter
+- Prometheus Adapter for Kubernetes Metrics APIs
+- kube-state-metrics
+- Grafana
 
 #### Example Command Line Commands
 **Note:** Replace the host, paths and default timezone setting using your values. In this example, the urls listed will be used to provide ingress to these applications.
@@ -250,9 +258,9 @@ $ helm repo update
 Update Complete. ⎈Happy Helming!⎈
 
 $ helm install -n kube-prometheus-stack --create-namespace kube-prometheus-stack prometheus-community/kube-prometheus-stack \
---set alertmanager.ingress.enabled=true --set alertmanager.ingress.hosts[0]=alertmanager.hostname.com --set alertmanager.ingress.paths[0]=/ \
---set grafana.defaultDashboardsTimezone=et --set grafana.ingress.enabled=true --set grafana.ingress.hosts[0]=grafana.hostname.com \
---set prometheus.ingress.enabled=true --set prometheus.ingress.hosts[0]=prometheus.hostname.com --set prometheus.ingress.paths[0]=/
+--set alertmanager.ingress.enabled=true --set alertmanager.ingress.hosts[0]=alertmanager.example.com --set alertmanager.ingress.paths[0]=/ \
+--set grafana.defaultDashboardsTimezone=et --set grafana.ingress.enabled=true --set grafana.ingress.hosts[0]=grafana.example.com \
+--set prometheus.ingress.enabled=true --set prometheus.ingress.hosts[0]=prometheus.example.com --set prometheus.ingress.paths[0]=/
 NAME: kube-prometheus-stack
 LAST DEPLOYED: Thu Oct  6 12:48:53 2022
 NAMESPACE: kube-prometheus-stack
@@ -277,21 +285,20 @@ kube-prometheus-stack-kube-state-metrics-77cdf9bbfd-xpzzt   1/1     Running   0 
 Use the following URLs to confirm that each service is available:
 
 * AlertManager
-  * https://alertmanager.hostname.com/#/status
+    *    https://alertmanager.example.com/#/status
 * Grafana
-  * https://grafana.hostname.com/login
-    * Use the following username/password: admin/prom-operator
+    *    https://grafana.example.com/login
+    *    Use the following username/password: admin/prom-operator
 * Prometheus
-  * https://prometheus.hostname.com/graph
-
-
+    *    https://prometheus.example.com/graph
 
 
 ### Installing Kuberhealthy
 
 Use the following steps to install via Helm:
-1) Add the kuberhealthy repo
-2) Install [Kuberhealthy with kube-prometheus](https://github.com/kuberhealthy/kuberhealthy/tree/6bb2601ba00f266d5bf2f4445d9309b321b3d564/deploy#helm).
+
+1. Add the kuberhealthy repo
+2. Install [Kuberhealthy with kube-prometheus](https://github.com/kuberhealthy/kuberhealthy/tree/6bb2601ba00f266d5bf2f4445d9309b321b3d564/deploy#helm).
 
 **Note:** The Grafana Dashboard is enabled as part of the Kuberhealthy install.
 
@@ -321,9 +328,10 @@ TEST SUITE: None
 ```
 
 Use Grafana to confirm that the Kuberhealthy support is available:
-1) Login to Grafana
-2) Select Search from the Left-hand Menu
-3) Select Kuberhealthy from the list
+
+1. Login to Grafana
+2. Select Search from the Left-hand Menu
+3. Select Kuberhealthy from the list
 
 The Kuberhealthy Running Box should show Running and the Cluster Health Box should show Healthy.
 
@@ -338,29 +346,5 @@ Although the Kibana dashboard is provided as a default option with the Volt MX F
 
 Perform the following steps to enable Stern:
 
-1.  Download the latest binary from [GitHub - Stern Releases](https://github.com/wercker/stern/releases).
-2.  Refer to [GitHub - Stern](https://github.com/wercker/stern) for the Stern commands. You can run the stern commands as required.
-
-## Specifying the PodDisruptionBudget
-
-### TBD - Use a Helm Chart to enable PodDisruptionBudget support?
-
-A **PodDisruptionBudget** is an indicator of the number of disruptions that can be tolerated at a given time for a class of pods (a budget of faults). Whenever a disruption to the pods in a service is calculated to cause the service to drop below the budget, the operation is paused until it can maintain the budget. For example, a drain event could be temporarily halted while it waits for more pods to become available such that the budget isn’t crossed by evicting the pods.
-
-To configure a PodDisruptionBudget, you must create a `PodDisruptionBudget` resource that matches the pods in the service. Run the following yml file to create a PodDisruptionBudget. You can change the **minAvailable** to denote the minimum number of available pods at given point of time.
-
-```
-apiVersion: policy/v1beta1
-kind: PodDisruptionBudget
-metadata:
-  name: voltmx-poddisruption
-spec:
-  minAvailable: 1
-  selector:
-    matchLabels:
-      app: voltmx-foundry-identity
-      app: voltmx-foundry-console
-      app: voltmx-foundry-apiportal
-      app: voltmx-foundry-integration
-      app: voltmx-foundry-engagement
-```
+1.  Download the latest binary from [GitHub - Stern Releases](https://github.com/stern/stern/releases).
+2.  Refer to [GitHub - Stern](https://github.com/stern/stern) for the Stern commands. You can run the stern commands as required.

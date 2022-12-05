@@ -1,6 +1,6 @@
 ﻿      
 
-## <a id=""></a> FlexContainer Properties
+ FlexContainer Properties
 
 
 The properties for FlexContainer widget are as follows.
@@ -1568,7 +1568,7 @@ Platform Availability
 
 * * *
 
-<a name="shadowColor">shadowColor Property
+## <a id="shadowColor-Property"></a>shadowColor Property
 
 * * *
 
@@ -1671,7 +1671,7 @@ Platform Availability
 
 * * *
 
-<a name="shadowOffset">shadowOffset Property
+ ## <a id="hadowOffset-Property"></a>shadowOffset Property
 
 * * *
 
@@ -1718,7 +1718,7 @@ Platform Availability
 
 * * *
 
-<a name="shadowRadius">shadowRadius Property* * *
+## <a id="shadowRadius-Property"></a>shadowRadius Property
 
 Specifies the radius for the blur value of the shadow.
 

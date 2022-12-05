@@ -1,6 +1,6 @@
 ﻿        
 
-## <a id="label-properties">Label Properties
+## <a id="label-properties"></a>Label Properties
 
 
 The basic properties for Label widget are:

@@ -207,7 +207,7 @@ Allows you to define how the widget content is aligned. Following alignment opti
 
 You can define the content alignment of a widget specific to a platform by forking **Content Align**. For more information, see [Fork a Widget Property](Forking.md#fork-a-widget-property).
 
-### Widget Align
+### <a id=“widget-align”></a> Widget Align
 
 Specifies how a widget is aligned with respect to its boundaries and its neighboring widgets (within the same container widget). Following alignments options are available:
 

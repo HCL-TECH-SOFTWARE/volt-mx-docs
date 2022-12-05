@@ -259,8 +259,8 @@ Alternatively, you can change the order of the Micro App from the Project Explor
     *   **Move Up**: To move the Micro App above the previous Micro App.
     *   **Move Down**: To move the Micro App below the Micro App following it.
 
-Export a Project with Micro Apps
---------------------------------
+## <a id="export-a-project-with-micro-apps"></a> Export a Project with Micro Apps
+
 
 Follow these steps to export a project that contains Micro Apps:
 
@@ -280,8 +280,8 @@ Follow these steps to export a project that contains Micro Apps:
 4.  Click **Proceed**.  
     The selected Micro App is exported from the project.
 
-Import a Project with Micro Apps
---------------------------------
+## <a id="import-a-project-with-micro-apps"></a>Import a Project with Micro Apps
+
 
 Follow these steps to import a project with linked Micro Apps:
 
