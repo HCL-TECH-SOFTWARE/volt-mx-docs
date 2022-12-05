@@ -1271,6 +1271,52 @@ voltmx.print("Browser info ::" + frmBrowser.myBrowser.info);
 
 * * *
 
+* * *
+
+</details>
+<details close markdown="block"><summary>isPopUpBlockEnabled Property</summary>
+
+* * *
+
+This property indicates whether pop-ups invoked by the Window.open() API are blocked in the WKWebView browser.
+
+### Syntax
+
+isPopUpBlockEnabled
+
+### Type
+
+Boolean
+
+### Read/Write
+
+Read + Write
+
+### Remarks
+
+*   If the value is set to true, the pop-up web page that is invoked by the Window.open() API is blocked and does not open.
+*   If the value is set to false, the pop-up web page opens in the same browser window, invoked by an event of the Window.open() API.
+*   The default value for this property is false.
+*   When the Window.close() API is invoked, the page navigates back to the space that the pop-up event was triggered from.
+
+
+### Example
+
+```
+
+// Sample Code to block pop-ups
+var browser0 \= new kony.ui.Browser({
+"isPopUpBlockEnabled": true
+)};
+```
+
+### Platform Availability
+
+*   Available on the iOS platform
+ 
+
+* * *
+
 </details>
 <details close markdown="block"><summary>isVisible Property</summary>
 
