@@ -14,6 +14,6 @@ This document helps you learn about the operating systems, devices, and browsers
 *   [Supported Devices for Volt MX AppPlatform](Supported_Devices.md#Architecture)
 *   [Supported Development Languages](Supported_Development_Lanugages.md)
 *   [VoltMX Iris Supported Browsers for Desktop Web](Supported_Browsers_DesktopWeb.md)
-*   [VoltMX Iris Supported Versions for HTML5 Single Page Apps](SPA.md5_SPA.md)
+*   [VoltMX Iris Supported Versions for HTML5 Single Page Apps](HTML5_SPA.md)
 
 You can also access the [Revision History](VoltMX_Iris_-_Supported_OSes__Devices__and_Browsers_Guide.md).
