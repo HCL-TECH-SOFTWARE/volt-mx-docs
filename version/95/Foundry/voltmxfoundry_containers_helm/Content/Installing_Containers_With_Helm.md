@@ -32,7 +32,7 @@ You can use the information to deploy Foundry to an existing Kubernetes clusters
 
 Foundry is supported on certified Kubernetes clusters.  Generally certified clusters are running a variant of Linux.  Please refer to the prerequisites listed in [VoltMX Foundry Containers Solution On Prem](../../../Foundry/voltmxfoundry_containers_solution_on-prem/Content/VoltMX_Foundry_Containers_Solution_On-Prem.md#prerequisites) for more details and specifics.
 
-Download the Foundry Helm chart from from [HCL Flexnet software portal](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.5.x&orgId=HCL).
+Download the Foundry Helm chart from [HCL Flexnet software portal](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.5.x&orgId=HCL).
 
 
 # Configuration
@@ -44,7 +44,7 @@ The following parameters are specified in the values.yaml file within the Helm C
     Upgrading from a prior version of Foundry:
 
     - Obtain the `upgrade.properties` file from your prior deployment copying it into the same directory as values.yaml.
-    - Invoke the init-guid script specifying the file path of the prior deployment's upgrade.properties:  `./init-guid.sh --upgrade upgrade.properties`
+    - Invoke the init-guid script specifying the file path of the prior deployment's upgrade.properties:  `./init-guid.sh --upgrade .`
 
     For a new deployment (non upgrade):
 
@@ -131,7 +131,7 @@ The following parameters are specified in the values.yaml file within the Helm C
 
 9. **Readiness and Liveness Probes Details**: The following variables are set with default values in seconds. Readiness probes are used to determine if a service is available to handle requests. If it fails the configured thresholds, the service is marked as not ready and will not be routed requests. The liveness problem is similar, but when it fails the configured thresholds, the container is killed and restarted. These probes are present for each application and may be customized.
     - readinessInitDelay: The readiness probe initial delay. The default value is 30.  This is the number of seconds after the container has started before readiness probes are initiated.
-    - livenessInitDelay: The liveness probe initial delay for Identity, in seconds. The default value is 600. This is the number of seconds after the container has started before liveness probes are initiated.
+    - livenessInitDelay: The liveness probe initial delay in seconds. The default value is 600. This is the number of seconds after the container has started before liveness probes are initiated.
     - readinessPeriodSeconds: The readiness period seconds parameter signifies how frequently the kubelet will execute a readiness probe.  The default is 30 indicating that once every 30 seconds a readiness probe will be executed.
     - readinessTimeoutSeconds:  The readiness timeout seconds parameter signifies how long kubelet will let a probe run before it times out and assumes the probe failed.  The default is 120 indicating 120 seconds.
     - livenessPeriodSeconds:  The liveness period seconds parameter signifies how frequently the kubelet will execute a liveness probe.  The default is 30 indicating that once every 30 seconds a liveness probe will be executed.
@@ -182,15 +182,15 @@ The following parameters are specified in the values.yaml file within the Helm C
 
 1. Download the Helm charts from [HCL Flexnet software portal](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.5.x&orgId=HCL) and unzip the contents.   With a command prompt, cd to the root of the unzipped content (you will see `Chart.yaml` and `values.yaml` here).
 
-    ```bash
-    mkdir ~/Foundry-9.5.0.0_GA
-    cd ~/Foundry-9.5.0.0_GA
-    tar -xzf ~/Downloads/VoltMXFoundryHelmChart-9.5.0.0_GA.tar.gz
-    ```
+    <pre><code>
+    $ mkdir ~/Foundry-9.5.0.0_GA
+    $ cd ~/Foundry-9.5.0.0_GA
+    $ unzip ~/Downloads/HelmChart-9.5.0.0_GA.zip
+    </code></pre>
 
  2. Execute `init-guids.sh` to initialize account details.  Specify --upgrade if you are upgrading an existing installation.
 
-     ```bash
+    <pre><code>
     $ ./init-guid.sh --new
     ACCOUNTS_ENCRYPTION_KEY=b28e44b3-a5c6-8561-12cd-ef95b37f5f3c
     WAAS_MASTER_KEY=a7d6b717-07f8-011a-8095-755c340dc976
@@ -199,37 +199,38 @@ The following parameters are specified in the values.yaml file within the Helm C
     AUTH_MASTER_KEY_ID=ec376ad5-4b29-b013-d8d6-b1b7d6fd5559
     useExistingDb=false
     New keys have been saved to values.yaml, you may proceed with 'helm install'.
+    </code></pre>
  
  3. Customize values.yaml with your deployment details.  Consult the configuration section above.
 
-    ```bash
-    vi values.yaml
-    ```
+    <pre><code>
+    $ vi values.yaml
+    </code></pre>
 
  4. Verify you have access to the Kubernetes cluster with `kubectl`.
 
-    ```bash
+    <pre><code>
     $ kubectl get nodes
     NAME              STATUS   ROLES                  AGE   VERSION
     master            Ready    control-plane,master   1h   v1.24.0+dc5a2fd
     worker1           Ready    worker                 1h   v1.24.0+dc5a2fd
     worker2           Ready    worker                 1h   v1.24.0+dc5a2fd
     ....
-    ```
+    </code></pre>
 
- 5. Create the Foundry namespace and set it your current context.  This step is optional but suggested.
+ 5. Create the Foundry namespace and make it your current context.  This step is optional but suggested.
 
-    ```bash
+    <pre><code>
     $ kubectl create namespace foundry
     namespace/foundry created
 
     $ kubectl config set-context --current --namespace=foundry
     Context "kube-cluster1" modified.
-    ```
+    </code></pre>
 
  6. Install Foundry with Helm.
 
-    ```bash
+    <pre><code>
     $ helm install foundry . -n foundry
     NAME: foundry
     LAST DEPLOYED: Mon Nov 21 22:23:54 2022
@@ -237,11 +238,11 @@ The following parameters are specified in the values.yaml file within the Helm C
     STATUS: deployed
     REVISION: 1
     TEST SUITE: None
-    ```
+    </code></pre>
 
  7. The deployment will take some time.  Six container images must be downloaded from the HCL container repository and then the database must be created.  After this, each container will be started and Tomcat initialized.  You can watch the progress of the deployment with a variety of commands.   The command below watches the pod status and updates the output as the deployment progresses:
 
-    ```bash
+    <pre><code>
     $ kubectl get pods -w
     NAME                                         READY   STATUS     RESTARTS   AGE
     foundry-db-update-zfd4b                      1/1     Running    0          28s
@@ -268,13 +269,13 @@ The following parameters are specified in the values.yaml file within the Helm C
     voltmx-foundry-console-64d579d5f7-c6p8r      1/1     Running           0          3m19s
     voltmx-foundry-engagement-569dcb594-9bt2s    1/1     Running           0          3m30s
     ^C
-    ```
+    </code></pre>
 
     The `-w` option is short for `watch` and it causes kubectl to monitor the status and update the output with any changes.  You must press `ctrl-c` to terminate this command.
 
  8. Verify the deployment.   Using the commands below, you should see similar output:
 
-    ```bash
+    <pre><code>
     $ kubectl get pods
     NAME                                         READY   STATUS      RESTARTS   AGE
     foundry-db-update-zfd4b                      0/1     Completed   0          8m7s
@@ -283,11 +284,11 @@ The following parameters are specified in the values.yaml file within the Helm C
     voltmx-foundry-engagement-569dcb594-9bt2s    1/1     Running     0          8m7s
     voltmx-foundry-identity-5454597447-jgd6b     1/1     Running     0          8m7s
     voltmx-foundry-integration-fb5b78bc9-j2n5q   1/1     Running     0          8m7s
-    ```
+    </code></pre>
 
     Each pod should show a status of `Running` and it should indicate 1/1 in the Ready column indicating each pod has 1 out of 1 container in the Ready status.
 
-    ```bash
+    <pre><code>
     $ kubectl get endpoints
     NAME                         ENDPOINTS           AGE
     mysql-service                10.131.0.109:3306   5d11h
@@ -296,11 +297,11 @@ The following parameters are specified in the values.yaml file within the Helm C
     voltmx-foundry-engagement    10.130.3.129:8080   14m
     voltmx-foundry-identity      10.130.3.127:8080   14m
     voltmx-foundry-integration   10.130.3.126:8080   14m
-    ```
+    </code></pre>
 
     Endpoints show what IP Address/port each service will route requests to.  If you change the replica count you should see an associated endpoint address for each replica.
 
-    ```
+    <pre><code>
     $ kubectl get ingress
     NAME          CLASS    HOSTS                                   ADDRESS                                        PORTS   AGE
     auth          <none>   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
@@ -308,11 +309,11 @@ The following parameters are specified in the values.yaml file within the Helm C
     engagement    <none>   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
     integration   <none>   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
     portal        <none>   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
-    ```
+    </code></pre>
 
     For each Ingress we should see that an address has been assigned.  If there is no address listed, Ingress will not function.  Generally a lack of address means that no ingress controller has determined it should setup the ingress.  This is usually caused by incorrectly specifying the ingressClass in values.yaml.  You can correct this and then run `helm upgrade foundry .` and Helm will apply the class name change for you.
 
-    If the pods are all showing ready and your Ingress has shows addresses, you should be ready to open the Foundry Console in your browser.   Using the **host name** shown in the output, open the console in your browser.  From the output above, we would use <http://foundry.apps.dsocp.nonprod.hclpnp.com/mfconsole>.
+    If the pods are all showing ready and your Ingress shows addresses, you should be ready to open the Foundry Console in your browser.   Using the **host name** shown in the output, open the console in your browser.  From the output above, we would use <http://foundry.apps.dsocp.nonprod.hclpnp.com/mfconsole>.
 
 
 ## Uninstalling Foundry
