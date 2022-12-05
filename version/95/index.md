@@ -1,8 +1,4 @@
----
-hide:
-  - navigation
-  - toc
----
+
 
 <html>
 <head>
@@ -213,4 +209,4 @@ display:none;
 </table>
 
 </body>
-</html>
+</html> 
