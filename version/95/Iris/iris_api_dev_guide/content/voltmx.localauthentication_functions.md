@@ -1,8 +1,8 @@
                             
 
 
-voltmx.localAuthentication Namespace
-==================================
+## <a id="voltmxlocalauthentication-namespace"></a> voltmx.localAuthentication Namespace
+
 
 The voltmx.localAuthentication namespace provides the functions to authenticate, get the status of the authentication, and cancel authentication.
 

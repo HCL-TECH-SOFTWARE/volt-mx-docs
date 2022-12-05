@@ -17,7 +17,7 @@ To create a new developer portal, do the following:
 
 1.  In **Developer Portal**, click **CONFIGURE NEW**.  
     ![](Resources/Images/Dev_Portal_2_ConfigureNewPortal_689x374.png)
-2.  Under the **Definition** tab, in **Name**, type the name for your portal.  
+3.  Under the **Definition** tab, in **Name**, type the name for your portal.  
     ![](Resources/Images/Dev_Portal_3_NameNewPortal_696x385.png)
 
 > **_Note:_** As you type a name for your portal in the **Name** field, the **URL** field populates the name to create the URL for the new portal, by default. You can edit the URL while creating the portal. Once the portal is created you cannot change the URL. Any special characters in the Name field will be ignored for the URL.  
@@ -42,11 +42,11 @@ To create a new developer portal, do the following:
 
     3.  click **SAVE** to add the selected apps with services to Developer portal.
 
-5.  (From Volt MX Foundry V8 SP4 onwards) To **add specific services** of an app to Developer portal, do the following: 
+4.  (From Volt MX Foundry V8 SP4 onwards) To **add specific services** of an app to Developer portal, do the following: 
 
     1.  Go to the **Apps** tab
 
-        2.  Select the required check box for **the app**. If you want to add **multiple versions of the app**, you can select the available app versions from the **Version** list. The **Manage APIs** link is enabled for the selected app.
+        2.  Select the required check box for **the app**. If you want to add **multiple versions of the app**, you can select the available app versions from the **Version** list. The **Manage APIs** link is enabled for the selected app
 
             ![](Resources/Images/SelectAppVersion-Apps_272x222.png)
 

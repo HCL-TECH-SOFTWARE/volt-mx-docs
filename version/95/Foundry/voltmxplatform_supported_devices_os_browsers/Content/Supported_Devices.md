@@ -87,8 +87,8 @@ The following is a list of supported devices for the iOS platform along with the
 | iOS 12.x | ![](Resources/Images/yes_17x17.png) | 
 | iOS 13.x | ![](Resources/Images/yes_17x17.png) | 
 | iOS 14.x | ![](Resources/Images/yes_17x17.png)  | 
-| iOS 15.x | ![](Resources/Images/yes_17x17.png) V9 Service Pack 2 Fix Pack 5  |
-| iOS 16.x | ![](Resources/Images/yes_17x17.png) V9 Service Pack 2 Fix Pack 45   |
+| iOS 15.x | ![](Resources/Images/yes_17x17.png) V9 Service Pack 2 |
+| iOS 16.x | ![](Resources/Images/yes_17x17.png) V9 Service Pack 5   |
 
 
 #### App submission with iOS 12
@@ -112,21 +112,21 @@ Volt MX  Iris supported versions for Android OS
 
 | Android Versions |   | Volt MX Iris Release Versions |
 | --- | --- | --- | 
-|  | 8.4 |  V9|   | 
-| 4.0 - 4.0.2 | ![](Resources/Images/no.png) | ![](Resources/Images/no.png) | 
-| 4.0.3 - 4.0.4 | ![](Resources/Images/no.png) | ![](Resources/Images/no.png) | 
-| 4.1 | ![](Resources/Images/no.png) | ![](Resources/Images/no.png) | 
-| 4.2 | ![](Resources/Images/yes.png) | ![](Resources/Images/yes.png) | 
-| 4.3 | ![](Resources/Images/yes.png) | ![](Resources/Images/yes.png) |
-| 4.4 | ![](Resources/Images/yes.png) | ![](Resources/Images/yes.png) |
-| 5.0 | ![](Resources/Images/yes.png) | ![](Resources/Images/yes.png) |
-| 6.0 | ![](Resources/Images/yes.png) | ![](Resources/Images/yes.png) |
-| 7.0 | ![](Resources/Images/yes.png) | ![](Resources/Images/yes.png) |
-| 8.0 | ![](Resources/Images/yes.png) | ![](Resources/Images/yes.png) |
-| 9.0 | ![](Resources/Images/yes.png) | ![](Resources/Images/yes.png) |
-| 10.0 | ![](Resources/Images/yes.png) Compatibility Support | ![](Resources/Images/yes.png)
-| 11.0 | ![](Resources/Images/yes.png)  | ![](Resources/Images/yes.png) Compatibility Support
-| 12.0 | ![](Resources/Images/yes.png)  | ![](Resources/Images/yes.png) Compatibility Support
+|  |  |  9.x|   | 
+| 4.0 - 4.0.2 | | ![](Resources/Images/no.png) | 
+| 4.0.3 - 4.0.4 | | ![](Resources/Images/no.png) | 
+| 4.1 | | ![](Resources/Images/no.png) | 
+| 4.2 | | ![](Resources/Images/yes.png) | 
+| 4.3 |  | ![](Resources/Images/yes.png) |
+| 4.4 |  | ![](Resources/Images/yes.png) |
+| 5.0 |  | ![](Resources/Images/yes.png) |
+| 6.0 | | ![](Resources/Images/yes.png) |
+| 7.0 | | ![](Resources/Images/yes.png) |
+| 8.0 | | ![](Resources/Images/yes.png) |
+| 9.0 |  | ![](Resources/Images/yes.png) |
+| 10.0 |  | ![](Resources/Images/yes.png)
+| 11.0 | | ![](Resources/Images/yes.png) Compatibility Support
+| 12.0 |  | ![](Resources/Images/yes.png) Compatibility Support
 
 
 Windows Platform
@@ -142,12 +142,12 @@ Volt MX  Iris supported versions for Windows
 
 | Windows Phone Versions | Volt MX Iris Release Versions |   |
 | --- | --- | --- |
-| | V8  | V9 |
-| --- | --- |
-| Windows Desktop | ![](Resources/Images/yes.png) | ![](Resources/Images/no.png) |
-| Windows 8.1 Tablets | ![](Resources/Images/yes.png) | ![](Resources/Images/no.png) |
-| Windows 10 Tablets | ![](Resources/Images/yes.png) | ![](Resources/Images/yes.png) |
-| Windows 10 Mobile | ![](Resources/Images/yes.png) | ![](Resources/Images/yes.png) |
+| |  | 9.x |
+|  |  |
+| Windows Desktop | | ![](Resources/Images/no.png) |
+| Windows 8.1 Tablets | | ![](Resources/Images/no.png) |
+| Windows 10 Tablets | | ![](Resources/Images/yes.png) |
+| Windows 10 Mobile |  | ![](Resources/Images/yes.png) |
 
 Features for Windows Tablet/Desktop
 

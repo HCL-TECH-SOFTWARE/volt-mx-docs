@@ -25,7 +25,7 @@ Prerequisites
 *   Ensure that VoltMXFoundryInstaller.bin (x.x) file has execute permission.
 *   Ensure that you have the path of your Previous Install Directory.
 *   Ensure that you stop the application server of your existing Foundry/VoltMX Foundry instance, which you want to upgrade.
-*   Ensure that data base is upgraded as per V9.x supported database versions. Refer [https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_manual_install_guide/Content/Database_Prerequsites.html](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_manual_install_guide/Content/Database_Prerequsites.html)
+*   Ensure that data base is upgraded as per V9.x supported database versions. Refer [https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_manual_install_guide/Content/Database_Prerequsites.html](https://github01.hclpnp.com/pages/phoenix-temenos/volt-mx-doc-opnsrc/docs/documentation/Foundry/voltmx_foundry_linux_install_guide/Content/Upgrading_VoltMX_Foundry_SP1.md)
 
 To upgrade Volt MX Foundry Console using the installer, follow these steps:
 

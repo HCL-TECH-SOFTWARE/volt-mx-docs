@@ -35,7 +35,7 @@ In the Collab Server, you can configure the sever security to Http or Https. Fol
 
 Follow these steps to download and configure the Collab Server:
 
-1.  Download the Collab server from [here](https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/iris/zip/user_guide/CollabServer_Win.zip).  
+1.  Download the Collab server from [here](https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/iris/zip/user_guide/CollabServer_Win.zip).   
     The installer is downloaded as a zip file to your computer.  
     
 2.  Extract the contents of the zip file.
@@ -49,8 +49,9 @@ Follow these steps to download and configure the Collab Server:
 
 Follow these steps to download and configure the Collab Server:
 
-1.  Download the Collab server from [here](https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/iris/zip/user_guide/CollabServer_Win.zip) 
-    The installer is downloaded as a zip file to your computer.
+1.  Download the Collab server from [here](https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/iris/zip/user_guide/CollabServer_Win.zip).
+    The installer is downloaded as a zip file to your computer.  
+
 2.  Extract the contents of the zip file.  
     
 

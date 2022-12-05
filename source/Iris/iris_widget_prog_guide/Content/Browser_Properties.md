@@ -1393,7 +1393,8 @@ The default value of this property is false.
 
 ### Example
 
-```limitsNavigationsToAppBoundDomains = true;
+```
+limitsNavigationsToAppBoundDomains = true;
 ```
 
 ### Platform Availability

@@ -312,3 +312,104 @@ But, if the PKCE parameters from the back-end OAuth provider do not follow the [
 
 *   Foundry does not support PKCE for public clients (without the Client Secret).
 *   The PKCE feature on the client device is only applicable for the Volt MX Iris SDK. For more information, refer to PKCE Support in Iris SDK.The PKCE feature on the client device is only applicable for the Volt MX Iris SDK. For more information, refer to PKCE Support in Iris SDK.
+
+
+### PKCE Support in Foundry 9.2.1.13
+
+
+From 9.2.1.13, Foundry supports a two-layer PKCE authentication mechanism **Authorization code** flow of OAuth 2.0. This feature is supported for back-end providers that use PKCE, such as Google, Linkedin, Microsoft, Amazon, Okta, and Salesforce.
+
+
+> **_Important:_**  You can use two-layer PKCE only if you are using 9.2.1.13 (or later) for both Foundry and Iris.
+
+
+![](Resources/Images/PKCE_Services.png)
+
+
+On the Identity service configuration page, Foundry provides the **Enable PKCE from Confidential Client** check box.
+
+
+![](Resources/Images/PKCE-Checkbox.png)
+
+
+* If the check box is enabled, the client app (SDK) communicates with Foundry by using client-sided PKCE parameters; and Foundry communicates with the back-end identity provider by using the `code_verifier` and `code_challenge` parameters.
+
+* If the check box is disabled, PKCE will be disabled for your app and the client app (SDK) will not send any PKCE related parameters to Foundry.
+
+> **_Important:_**  
+
+*   You can disable PKCE only if you are using 9.2.1.13 FixPack 1 (or later) for both Foundry and Iris.
+
+*  If you are using Foundry  versions earlier than 9.2.1.13 FixPack 1, PKCE will not be disabled for your app. Instead, the `code_verifier` and `code_challenge` parameters are sent directly from the client app to the back-end provider while the identity service acts as a passthrough.
+
+*  If the Foundry version is 9.2.1.13, and the Iris version is earlier than 9.2.1.13 FixPack 1, PKCE will not be disabled for the app, even if the check box is cleared.
+
+### CORS Configuration
+
+To use PKCE in Web Apps, you need to enable Cross-Origin Resource Sharing (CORS) settings with Echo. To do so, follow these steps.
+
+1. From the left panel of Volt MX Foundry, go to **API Management**.
+2. Under **Identity**, click **Service Configuration**.
+3. In the **Identity Service Security section**, select **Enable Cross-Origin Resource Sharing (CORS)**.
+4. From the **Settings** section, select **Echo**.
+
+
+![](Resources/Images/PKCE_CORS.png)
+
+
+For more information, refer to [Service Configuration]().
+
+### Admin Configurations (On-Premises)
+
+To use PKCE if you are running an on-premise instance of Volt MX Foundry you need to set up the CORS Configuration and Cache Configuration in the [App Services Console](). For more information, refer to the following sections.
+
+### CORS Configuration (On-Premises)
+
+1. Navigate to **Settings → Runtime Configuration → CORS Configuration**.
+2. Select the **CORS Enabled** check box.
+3. From the **Manage Access-Control-Allow-Origin header** list, select **ECHO**.
+4. In the **Whitelist domains for Manage Access-Control-Allow-Origin header** box, add any domains that need to be white listed.
+5. For **Manage Access-Control-Allow-Credentials headers**, select true
+6. For **Manage Vary header**, select **Origin**.
+
+
+![](Resources/Images/plainJS_AdminConsole_CORS.png)
+
+
+**Cache Configuration (On-Premises)**
+
+> **_Important:_** Make sure that cache server is accessible from Volt MX  Foundry server.
+
+1. Navigate to **Settings → Runtime Configuration → Cache Configuration**
+2. From the **Cache Type** list, select the type of caching that you want to use. For example, **MEMCACHED**.
+3. In the **Cache Server URLs** box, type the URLs for your cache servers. For example, `localhost:11211.`
+
+
+![](Resources/Images/plainJS_AdminConsole_cache.png)
+
+
+> **_Important:_**
+
+* Foundry supports login without the PKCE parameters for backward compatibility with clients that do not support PKCE.
+* PKCE requires both the **Client ID** and **Client Secret** to be passed to the service.
+
+If the PKCE parameters from the back-end OAuth provider follow the [rfc7636](https://datatracker.ietf.org/doc.md/rfc7636) naming convention `(code_challenge, code_challenge_method, code_verifier)`, you don’t need any additional configuration and you can use the [VoltMX Iris SDK](VoltMXStudio/Invoking_Identity_Service_Iris.md#login-with-provider-type-as-oauth-saml) to invoke the identity service from your client app.
+
+But, if the PKCE parameters from the back-end OAuth provider do not follow the [rfc7636](https://datatracker.ietf.org/doc.md/rfc7636) naming convention, you need to configure the PKCE parameters in the Additional Parameters of the Advanced section. For more information, refer to the following image.
+
+
+![](Resources/Images/PKCE_Params.png)
+
+
+> **_Important:_**
+
+*   Make sure that the source for the parameters is **Client Specified**.
+*   The [VoltMX Iris SDK](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/VoltMXStudio/Invoking_Identity_Service_Iris.html#login-with-provider-type-as-oauth-saml) only supports the rfc7636 naming convention for PKCE parameters. Therefore, if your OAuth provider uses custom parameters to implement PKCE, your client app must contain custom code to send the parameters to the back end by using the Additional Parameters in Foundry.
+*   The Iris SDK continues to send the PKCE parameters with the rfc7636 naming convention, even if Additional Parameters are configured in Foundry. However, the additional parameters override the incoming request parameters from the SDK.
+
+The PKCE feature on the client device is applicable for the Volt MX Iris SDK. For more information, refer to [PKCE Support in Iris SDK.](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/VoltMXStudio/Invoking_Identity_Service_Iris.html#login-with-provider-type-as-oauth-saml)
+
+
+#### Limitations
+
+*   Foundry does not support PKCE for public clients (without the Client Secret).
