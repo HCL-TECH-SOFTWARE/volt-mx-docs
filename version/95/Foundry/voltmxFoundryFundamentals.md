@@ -34,6 +34,5 @@ Learn how to use the built-in Volt MX User Repository (User Store) to authentica
 
 ### [Micro Apps](../Foundry/voltmx_foundry_user_guide/Content/ManagingLinkedAppsinCompositeFoundryApp.md)
 Large applications can now be modularized into smaller applications using the Micro apps architecture.
-at end.
 
 
