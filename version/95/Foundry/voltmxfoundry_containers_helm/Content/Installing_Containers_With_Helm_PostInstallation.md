@@ -59,8 +59,6 @@ Configuring Alert Manager
 
 The Prometheus Alert Manager is installed as part of the Helm install for kube-prometheus-stack. The Prometheus Alert Manager configuration is an optional configuration that can be done if the administrator wishes to receive email alerts on critical events. It can be configured as part of Prometheus to send email alerts to the administrator when certain predefined conditions are met or exceeded. 
 
-Use the existing documentation for [Configuring the Alert Manager](../../voltmxfoundry_containers_solution_on-prem/Content/Containers_Solution_PostInstallation.md#configuring-alert-manager)
-
 
 How to access the Kubernetes Dashboard
 --------------------------------------

@@ -1,7 +1,7 @@
 ﻿
 
-Navigation Manager
-==================
+## <a id="navigation-manager"></a> Navigation Manager
+
 
 Before the introduction of the Navigation Manager, form navigation was either from one-to-one (always to the same form) or one-to-many (conditional form navigation), where the action performed on the source form decides the target form that must be displayed. This approach where the current form decides the next form to be displayed means that there is a tightly-coupled UI centric form navigation which complicates the maintainability of the code as the developer must remember the entire app flow.
 

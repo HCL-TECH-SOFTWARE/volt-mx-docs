@@ -1,7 +1,8 @@
 ---
 hide:
   - toc
---- 
+---
+
 
 <html>
 <head>
@@ -118,10 +119,14 @@ td.qr-label-cell {
 border-top: 0 !important; 
 padding: 0 0 5px 4px !important;
 }
+
+.md-sidebar md-sidebar--secondary {
+display:none;
+}
+
 </style>
 </head>
 <body>
-<div class="welcome-page-main" style="width: 100%">
 <div><img src="VoltMX documentation banner_2.png" alt="overview"></div>
 <br/>
 <p style="font-size:16px; font-family: Roboto !important; margin-bottom: 0 !important; margin-top: 0 !important">Welcome to the HCL Volt MX product documentation. Here professional developers, enterprise architects, and digital designers find information about developing an industry-leading low-code app-dev platform. Using this, users can easily create, customise, and rapidly deliver multi experience, consumer-grade apps.</p>
@@ -206,6 +211,6 @@ padding: 0 0 5px 4px !important;
     </td>
   </tr>
 </table>
-</div>
+
 </body>
 </html>

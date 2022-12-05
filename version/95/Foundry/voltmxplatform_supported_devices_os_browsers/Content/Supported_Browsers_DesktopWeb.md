@@ -2,8 +2,8 @@
 
 Volt MX  Iris Suppported Devices, OSes, and Browsers Guide: Supported Browsers for Desktop Web
 
-Volt MX  Iris Supported Browsers for Desktop Web 9.5
-=====================================================
+Volt MX  Iris Supported Browsers for Desktop Web for Volt MX 9.5
+=================================================================
 
 Volt MX  Iris supports the following browsers for Desktop Web:
 

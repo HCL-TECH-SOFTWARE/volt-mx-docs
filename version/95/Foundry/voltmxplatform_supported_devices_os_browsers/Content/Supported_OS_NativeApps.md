@@ -2,8 +2,8 @@
 
 Volt MX  Iris Suppported Devices, OSes, and Browsers Guide: Supported Operating Systems for Native Apps
 
-Supported Operating Systems for Native Apps 9.5
-================================================
+Supported Operating Systems for Native Apps for Volt MX 9.5
+=============================================================
 
 Volt MX  Iris Enterprise Edition version V9 supports the following operating systems:
 

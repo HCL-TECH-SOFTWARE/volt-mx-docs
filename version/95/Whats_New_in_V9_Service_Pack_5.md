@@ -257,7 +257,7 @@ For more information about this feature, click [here](Iris/app_design_dev/Conte
 *   Volt MX Iris is now supported on MacBooks that run the MacOS monterey.
 *   Support for XCFramework has been added for iOS apps.
 
-## Hot Reload Enhancement
+## <a id="hot-reload-enhancement"></a>  Hot Reload Enhancement
 
 The Hot Reload feature in Responsive Web Apps can now be used to view updates made in Reference Architecture Extensions, Form Controllers (including Form Controller Extensions), Segment Templates, and Components (including component controller modules, component controller extensions, and widget actions).
 

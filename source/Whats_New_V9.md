@@ -356,7 +356,7 @@ VoltMX Iris V9 includes many new developer productivity features like Enhanced p
 
 ## Digital Experiences
 
-This release packages some sample applications to showcase modern digital experiences integrated within Iris like Chatbot for native & web apps, Artificial Intelligence & Augmented Reality using the native AI & AR frameworks.
+This release packages some sample applications to showcase modern digital experiences integrated within Iris like Chatbot for native & web apps & Augmented Reality using the native AR frameworks.
 
 ## Security Enhancements
 

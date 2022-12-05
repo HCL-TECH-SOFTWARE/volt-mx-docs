@@ -2,8 +2,8 @@
 
 Volt MX  Iris Suppported Devices, OSes, and Browsers Guide: Volt MX Overview
 
-Volt MX  Overview 9.5
-====================
+Volt MX 9.5 \-  Overview 
+======================
 
 Product Compatibility Chart
 ---------------------------

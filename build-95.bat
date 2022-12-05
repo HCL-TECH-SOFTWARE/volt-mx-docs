@@ -2,9 +2,9 @@ copy /b mkdocs-intro_95.yml+^
 _data\volt_mx_release_notes_95.yml+^
 _data\app_platform_overview_95.yml+^
 _data\tutorials_95.yml+^
-_data\general_tutorials_95.yml+^
 _data\iris_documentation_95.yml+^
 _data\voltmxplatform_supported_devices_os_browsers_95.yml+^
+_data\installing_iris_95.yml+^
 _data\iris_starter_install_mac_95.yml+^
 _data\iris_starter_install_win_95.yml+^
 _data\iris_tutorials_95.yml+^
@@ -32,7 +32,6 @@ _data\voltmxfoundry_containers_helm_95.yml+^
 _data\voltmx_foundry_user_guide_95.yml+^
 _data\KF_Services_OAuth_Sample_95.yml+^
 _data\integration_services_95.yml+^
-_data\voltmx_foundry_workflow_95.yml+^
 _data\offline_objects_95.yml+^
 _data\offline_objectsapi_reference_guide_95.yml+^
 _data\offline_objects_gettingstarted_95.yml+^
@@ -51,6 +50,7 @@ _data\voltmx_foundry_eng_geo_monitoring_95.yml+^
 _data\engagement_api_guide_95.yml+^
 _data\eng_event_mgmt_quickstart_guide_95.yml+^
 _data\2waysms_quick_start_guide_95.yml+^
+_data\voltmx_foundry_workflow_95.yml+^
 _data\administering_foundry_95.yml+^
 _data\settings_and_configuration_95.yml+^
 _data\voltmx_licensing_guide_95.yml+^
@@ -70,7 +70,7 @@ _data\vmfintegrationservice_troubleshooting_guide_95.yml^
 
  mkdocs.yml 
 
-mkdocs build 2>errors.txt
+mkdocs serve 2>errors.txt
 
 :: _data\flexconvertertool-95.yml+^
 :: _data\VoltMX_Licensing_Guide_V9-95.yml+^

@@ -1,6 +1,6 @@
 ﻿     
 
-## <a id="textarea-properties"> TextArea Properties
+## <a id="textarea-properties"></a>TextArea Properties
 
 
 The properties for TextArea widget are:
