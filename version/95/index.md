@@ -1,8 +1,4 @@
----
-hide:
-  - navigation
-  - toc
----
+
 
 <html>
 <head>
