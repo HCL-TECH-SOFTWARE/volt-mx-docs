@@ -1,4 +1,7 @@
-
+---
+hide:
+  - toc
+---
 
 <html>
 <head>
