@@ -379,12 +379,6 @@ Volt MX Iris has added support for a new Syntax in the [voltmx.mvc.registry.add 
 
 </details>
 
-<details close markdown="block"><summary>NFI Tool for Native Library Integration</summary>
-
-Developers will now have access to an NFI generator tool which enables the conversion of any third-party iOS and Android libraries to an NFI which can then be integrated into apps using JavaScript. The NFI generator tool can be requested through a support ticket using the support portal.
-
-</details>
-
 <details close markdown="block"><summary>Support and Maintenance updates</summary>
 
 * Support for XCFramework has been added for iOS apps.
