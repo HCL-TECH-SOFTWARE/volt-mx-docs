@@ -52,8 +52,11 @@ To use iOS Home Screen Widgets in Volt MX Iris, you must include the widget conf
     *   **Images** - A folder that contains the assets in PNG/JPEG format.
     *   **WidgetFolders** - One or multiple folders that contain the configuration of the widget. For example, AccountsWidget, TransactionsWidget. Each WidgetFolder contains the following folders:
         
-        *   **JSScripts**: A folder that contains a widget.js file with two async functions passed with a callback. Here is a sample code snippet with the two functions:
-            ```
+        *   **JSScripts**: A folder that contains a widget.js file with two async functions passed with a callback. 
+        
+        Here is a sample code snippet with the two functions:
+            
+        ```
             function getSnapshot(callback, widgetSize){
               var entry = new Entry(new Date(), {});
               callback(entry);
@@ -63,7 +66,8 @@ To use iOS Home Screen Widgets in Volt MX Iris, you must include the widget conf
               var entry = new Entry(new Date(), {});
               callback([entry], TimelinePolicy.never());
             }
-            ```
+        ```
+            
         *   **Views**: A folder that contains either the form.sm folders or a composite form.json structure file. The views folder must also contain the themes folder packaged with it if the form.json file is not present in the project.
             
     *   **widgetProperties.json** - A file that contains the metadata of the widgets. The widgetProperties.json file contains a JSON Object that contains the **widgets** key, which is an array of JSON Objects that contain the meta data for each widget. Each widget meta JSON object contains the following key-value pairs:
