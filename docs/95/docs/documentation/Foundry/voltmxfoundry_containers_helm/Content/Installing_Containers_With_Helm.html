@@ -1073,7 +1073,7 @@
 </ul>
 <h3 id="supported-os-platform-databases">Supported OS Platform &amp; Databases</h3>
 <p>Foundry is supported on certified Kubernetes clusters.  Generally certified clusters are running a variant of Linux.  Please refer to the prerequisites listed in <a href="../../voltmxfoundry_containers_solution_on-prem/Content/VoltMX_Foundry_Containers_Solution_On-Prem.html#prerequisites">VoltMX Foundry Containers Solution On Prem</a> for more details and specifics.</p>
-<p>Download the Foundry Helm chart from from <a href="https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.5.x&amp;orgId=HCL">HCL Flexnet software portal</a>.</p>
+<p>Download the Foundry Helm chart from <a href="https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.5.x&amp;orgId=HCL">HCL Flexnet software portal</a>.</p>
 <h1 id="configuration">Configuration</h1>
 <p>The following parameters are specified in the values.yaml file within the Helm Chart and should be reviewed and customized.  Alternatively, values can be overridden and specified with <code>--set parameterName=value</code> arguments with <code>helm install</code> but we encourage you to persist your changes in values.yaml.</p>
 <ol>
@@ -1082,7 +1082,7 @@
 <p>Upgrading from a prior version of Foundry:</p>
 <ul>
 <li>Obtain the <code>upgrade.properties</code> file from your prior deployment copying it into the same directory as values.yaml.</li>
-<li>Invoke the init-guid script specifying the file path of the prior deployment's upgrade.properties:  <code>./init-guid.sh --upgrade upgrade.properties</code></li>
+<li>Invoke the init-guid script specifying the file path of the prior deployment's upgrade.properties:  <code>./init-guid.sh --upgrade .</code></li>
 </ul>
 <p>For a new deployment (non upgrade):</p>
 <ul>
@@ -1191,7 +1191,7 @@
 <p><strong>Readiness and Liveness Probes Details</strong>: The following variables are set with default values in seconds. Readiness probes are used to determine if a service is available to handle requests. If it fails the configured thresholds, the service is marked as not ready and will not be routed requests. The liveness problem is similar, but when it fails the configured thresholds, the container is killed and restarted. These probes are present for each application and may be customized.</p>
 <ul>
 <li>readinessInitDelay: The readiness probe initial delay. The default value is 30.  This is the number of seconds after the container has started before readiness probes are initiated.</li>
-<li>livenessInitDelay: The liveness probe initial delay for Identity, in seconds. The default value is 600. This is the number of seconds after the container has started before liveness probes are initiated.</li>
+<li>livenessInitDelay: The liveness probe initial delay in seconds. The default value is 600. This is the number of seconds after the container has started before liveness probes are initiated.</li>
 <li>readinessPeriodSeconds: The readiness period seconds parameter signifies how frequently the kubelet will execute a readiness probe.  The default is 30 indicating that once every 30 seconds a readiness probe will be executed.</li>
 <li>readinessTimeoutSeconds:  The readiness timeout seconds parameter signifies how long kubelet will let a probe run before it times out and assumes the probe failed.  The default is 120 indicating 120 seconds.</li>
 <li>livenessPeriodSeconds:  The liveness period seconds parameter signifies how frequently the kubelet will execute a liveness probe.  The default is 30 indicating that once every 30 seconds a liveness probe will be executed.</li>
@@ -1321,14 +1321,15 @@
 <ol>
 <li>
 <p>Download the Helm charts from <a href="https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.5.x&amp;orgId=HCL">HCL Flexnet software portal</a> and unzip the contents.   With a command prompt, cd to the root of the unzipped content (you will see <code>Chart.yaml</code> and <code>values.yaml</code> here).</p>
-<p><code>bash
-mkdir ~/Foundry-9.5.0.0_GA
-cd ~/Foundry-9.5.0.0_GA
-tar -xzf ~/Downloads/VoltMXFoundryHelmChart-9.5.0.0_GA.tar.gz</code></p>
+<p><pre><code>
+$ mkdir ~/Foundry-9.5.0.0_GA
+$ cd ~/Foundry-9.5.0.0_GA
+$ unzip ~/Downloads/HelmChart-9.5.0.0_GA.zip
+</code></pre></p>
 </li>
 <li>
 <p>Execute <code>init-guids.sh</code> to initialize account details.  Specify --upgrade if you are upgrading an existing installation.</p>
-<p>```bash
+<p><pre><code>
 $ ./init-guid.sh --new
 ACCOUNTS_ENCRYPTION_KEY=b28e44b3-a5c6-8561-12cd-ef95b37f5f3c
 WAAS_MASTER_KEY=a7d6b717-07f8-011a-8095-755c340dc976
@@ -1336,46 +1337,50 @@ WAAS_MASTER_KEY_ID=7d58a92c-e9db-1ebc-084f-6f0640fb5b42
 AUTH_MASTER_KEY=84635bf0-bc1b-7139-bf95-f64afb1673a1
 AUTH_MASTER_KEY_ID=ec376ad5-4b29-b013-d8d6-b1b7d6fd5559
 useExistingDb=false
-New keys have been saved to values.yaml, you may proceed with 'helm install'.</p>
+New keys have been saved to values.yaml, you may proceed with 'helm install'.
+</code></pre></p>
 </li>
 <li>
 <p>Customize values.yaml with your deployment details.  Consult the configuration section above.</p>
-<p><code>bash
-vi values.yaml</code></p>
+<p><pre><code>
+$ vi values.yaml
+</code></pre></p>
 </li>
 <li>
 <p>Verify you have access to the Kubernetes cluster with <code>kubectl</code>.</p>
-<p><code>bash
+<p><pre><code>
 $ kubectl get nodes
 NAME              STATUS   ROLES                  AGE   VERSION
 master            Ready    control-plane,master   1h   v1.24.0+dc5a2fd
 worker1           Ready    worker                 1h   v1.24.0+dc5a2fd
 worker2           Ready    worker                 1h   v1.24.0+dc5a2fd
-....</code></p>
+....
+</code></pre></p>
 </li>
 <li>
-<p>Create the Foundry namespace and set it your current context.  This step is optional but suggested.</p>
-<p>```bash
+<p>Create the Foundry namespace and make it your current context.  This step is optional but suggested.</p>
+<p><pre><code>
 $ kubectl create namespace foundry
 namespace/foundry created</p>
 <p>$ kubectl config set-context --current --namespace=foundry
 Context "kube-cluster1" modified.
-```</p>
+</code></pre></p>
 </li>
 <li>
 <p>Install Foundry with Helm.</p>
-<p><code>bash
+<p><pre><code>
 $ helm install foundry . -n foundry
 NAME: foundry
 LAST DEPLOYED: Mon Nov 21 22:23:54 2022
 NAMESPACE: foundry
 STATUS: deployed
 REVISION: 1
-TEST SUITE: None</code></p>
+TEST SUITE: None
+</code></pre></p>
 </li>
 <li>
 <p>The deployment will take some time.  Six container images must be downloaded from the HCL container repository and then the database must be created.  After this, each container will be started and Tomcat initialized.  You can watch the progress of the deployment with a variety of commands.   The command below watches the pod status and updates the output as the deployment progresses:</p>
-<p><code>bash
+<p><pre><code>
 $ kubectl get pods -w
 NAME                                         READY   STATUS     RESTARTS   AGE
 foundry-db-update-zfd4b                      1/1     Running    0          28s
@@ -1401,12 +1406,13 @@ voltmx-foundry-engagement-569dcb594-9bt2s    0/1     Running           0        
 voltmx-foundry-integration-fb5b78bc9-j2n5q   1/1     Running           0          3m2s
 voltmx-foundry-console-64d579d5f7-c6p8r      1/1     Running           0          3m19s
 voltmx-foundry-engagement-569dcb594-9bt2s    1/1     Running           0          3m30s
-^C</code></p>
+^C
+</code></pre></p>
 <p>The <code>-w</code> option is short for <code>watch</code> and it causes kubectl to monitor the status and update the output with any changes.  You must press <code>ctrl-c</code> to terminate this command.</p>
 </li>
 <li>
 <p>Verify the deployment.   Using the commands below, you should see similar output:</p>
-<p><code>bash
+<p><pre><code>
 $ kubectl get pods
 NAME                                         READY   STATUS      RESTARTS   AGE
 foundry-db-update-zfd4b                      0/1     Completed   0          8m7s
@@ -1414,9 +1420,10 @@ voltmx-foundry-apiportal-fff6c987b-nv5pw     1/1     Running     0          8m7s
 voltmx-foundry-console-64d579d5f7-c6p8r      1/1     Running     0          8m7s
 voltmx-foundry-engagement-569dcb594-9bt2s    1/1     Running     0          8m7s
 voltmx-foundry-identity-5454597447-jgd6b     1/1     Running     0          8m7s
-voltmx-foundry-integration-fb5b78bc9-j2n5q   1/1     Running     0          8m7s</code></p>
+voltmx-foundry-integration-fb5b78bc9-j2n5q   1/1     Running     0          8m7s
+</code></pre></p>
 <p>Each pod should show a status of <code>Running</code> and it should indicate 1/1 in the Ready column indicating each pod has 1 out of 1 container in the Ready status.</p>
-<p><code>bash
+<p><pre><code>
 $ kubectl get endpoints
 NAME                         ENDPOINTS           AGE
 mysql-service                10.131.0.109:3306   5d11h
@@ -1424,17 +1431,20 @@ voltmx-foundry-apiportal     10.130.3.124:8080   14m
 voltmx-foundry-console       10.130.3.125:8080   14m
 voltmx-foundry-engagement    10.130.3.129:8080   14m
 voltmx-foundry-identity      10.130.3.127:8080   14m
-voltmx-foundry-integration   10.130.3.126:8080   14m</code></p>
+voltmx-foundry-integration   10.130.3.126:8080   14m
+</code></pre></p>
 <p>Endpoints show what IP Address/port each service will route requests to.  If you change the replica count you should see an associated endpoint address for each replica.</p>
-<p><code>$ kubectl get ingress
+<p><pre><code>
+$ kubectl get ingress
 NAME          CLASS    HOSTS                                   ADDRESS                                        PORTS   AGE
-auth          &lt;none&gt;   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
-console       &lt;none&gt;   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
-engagement    &lt;none&gt;   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
-integration   &lt;none&gt;   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
-portal        &lt;none&gt;   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m</code></p>
+auth          <none>   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
+console       <none>   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
+engagement    <none>   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
+integration   <none>   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
+portal        <none>   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
+</code></pre></p>
 <p>For each Ingress we should see that an address has been assigned.  If there is no address listed, Ingress will not function.  Generally a lack of address means that no ingress controller has determined it should setup the ingress.  This is usually caused by incorrectly specifying the ingressClass in values.yaml.  You can correct this and then run <code>helm upgrade foundry .</code> and Helm will apply the class name change for you.</p>
-<p>If the pods are all showing ready and your Ingress has shows addresses, you should be ready to open the Foundry Console in your browser.   Using the <strong>host name</strong> shown in the output, open the console in your browser.  From the output above, we would use <a href="http://foundry.apps.dsocp.nonprod.hclpnp.com/mfconsole">http://foundry.apps.dsocp.nonprod.hclpnp.com/mfconsole</a>.</p>
+<p>If the pods are all showing ready and your Ingress shows addresses, you should be ready to open the Foundry Console in your browser.   Using the <strong>host name</strong> shown in the output, open the console in your browser.  From the output above, we would use <a href="http://foundry.apps.dsocp.nonprod.hclpnp.com/mfconsole">http://foundry.apps.dsocp.nonprod.hclpnp.com/mfconsole</a>.</p>
 </li>
 </ol>
 <h2 id="uninstalling-foundry">Uninstalling Foundry</h2>
