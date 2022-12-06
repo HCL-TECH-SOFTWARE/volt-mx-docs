@@ -44,7 +44,7 @@ Preview your Web App with Iris
     Once the build for the selected platforms is completed, a new **Iris Preview** window appears.
 5.  From the Iris Preview window, you can select specific platform models from the drop-down menu and adjust their dimensions as required.  
       
-    ![](Resources/Images/LivePreview_707x373.png)  
+    <!-- ![](Resources/Images/LivePreview_707x373.png)  VM -->
       
     In Iris, you can see a **Live Preview is ready** window. The window contains App Details and QR code for the web app. Using the details, you can preview the web app on your device. For more details on how to view the app on your device, go to [Preview an App on a Device](../../../Iris/iris_app_viewer/Content/PreviewAnAppOnADevice.md).  
       

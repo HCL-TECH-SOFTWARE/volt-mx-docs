@@ -68,7 +68,7 @@ The Build and Publish Web app option also publishes the Volt MX Foundry app to t
 
 To publish an app to the Volt MX Cloud, logging in to your Volt MX Account is mandatory.
 
-<img src="Resources/Images/publishWebApp_389x413.png" alt="" style="width:85%">
+<!-- <img src="Resources/Images/publishWebApp_389x413.png" alt="" style="width:85%"> vm-->
 
 ### Publish to my App Store
 
@@ -113,7 +113,7 @@ Before you publish a web app, ensure that you have a project in which you have a
 10.  From the main menu of Volt MX Iris, select **Build** > **Build and Publish Web**.  
     The Build and Publish Web window appears.  
 
-   ![](Resources/Images/publishWebApp_389x413.png)
+   <!-- ![](Resources/Images/publishWebApp_389x413.png) VM -->
     
 11.  Select the required Platforms and Channels for which you want to build and publish your web app.
 12.  From the **Post Build Action** drop-down menu, select the desired **Post Build Action**. For more details about the Post Build Action, click [here](#post-build-actions).
