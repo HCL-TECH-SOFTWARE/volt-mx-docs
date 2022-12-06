@@ -229,11 +229,6 @@ Volt MX Iris has introduced support to embed videos present in the device's loca
 
 For more information about this feature, click [here](Iris/iris_widget_prog_guide/Content/Video.md#Limitati).
 
-## NFI Tool for Native Library Integration
-
-With the V9 SP5 release, developers will now have access to an NFI generator tool which enables the conversion of any third-party iOS and Android libraries to an NFI which can then be integrated into apps using JavaScript. The NFI generator tool can be requested through a support ticket using the support portal.
-
-<!--For more information on this feature, click [here](Iris/ThirdParty/Content/Default.md).-->
 
 ## Accessibility Enhancements
 
