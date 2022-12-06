@@ -8,17 +8,17 @@ The Kubernetes Metrics Server is an aggregator of resource usage data in your cl
 
 1. Deploy the Metrics Server with the following command:
 
-    ```
+    <pre><code>
     $ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
-    ```
+    </code></pre>
 
 2. Verify that the metrics-server deployment is running the desired number of pods with the following command:
 
-    ```
+    <pre><code>
     $ kubectl get deployment metrics-server -n kube-system
     NAME             READY   UP-TO-DATE   AVAILABLE   AGE
     metrics-server   1/1     1            1           6m
-    ```
+    </code></pre>
 
 ## Elastic Stack Helm Charts
 
