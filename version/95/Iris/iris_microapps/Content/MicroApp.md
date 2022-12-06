@@ -376,7 +376,7 @@ You can build Micro Apps individually along with the Base App or build the compl
 
 The Base App is always included during the build. You cannot exclude the Base App from the build process.
 
-When you build a composite app for the Native channel, Volt Iris generates the JS code for all the Micro Apps and merges them into a single folder during the generation of the binary. At the end of the build process, a single native binary is generated for the selected native platforms, and one zip/war file is generated for the selected web platforms. The Web binary is published via the linkeVolt Foundry Base Application.
+When you build a composite app for the Native channel, Volt Iris generates the JS code for all the Micro Apps and merges them into a single folder during the generation of the binary. At the end of the build process, a single native binary is generated for the selected native platforms, and one zip/war file is generated for the selected web platforms. The Web binary is published via the linked Volt Foundry Base Application.
 
 From the Volt Iris V9 Service Pack 5 release, support for the Incremental Build option has been added for Micro Apps projects.
 
