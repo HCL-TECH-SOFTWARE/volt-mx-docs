@@ -54,19 +54,29 @@ To use iOS Home Screen Widgets in Volt MX Iris, you must include the widget conf
         
         *   **JSScripts**: A folder that contains a widget.js file with two async functions passed with a callback. 
         
-        Here is a sample code snippet with the two functions:
-            
-        ```
+        
+            Here is a sample code snippet with the two functions:
+
+            ```
+
             function getSnapshot(callback, widgetSize){
-              var entry = new Entry(new Date(), {});
-              callback(entry);
+
+            var entry = new Entry(new Date(), {});
+
+            callback(entry);
+
             }
-            
+
             function getTimelines(callback, widgetSize){
-              var entry = new Entry(new Date(), {});
-              callback([entry], TimelinePolicy.never());
+
+            var entry = new Entry(new Date(), {});
+
+            callback([entry], TimelinePolicy.never());
+
             }
-        ```
+
+            ```
+
             
         *   **Views**: A folder that contains either the form.sm folders or a composite form.json structure file. The views folder must also contain the themes folder packaged with it if the form.json file is not present in the project.
             
