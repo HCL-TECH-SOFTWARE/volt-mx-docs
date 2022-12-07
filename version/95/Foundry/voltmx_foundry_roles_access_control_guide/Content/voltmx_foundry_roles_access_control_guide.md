@@ -1,9 +1,5 @@
 
-Volt MX Foundry
-
-[![](Resources/Images/pdf.png)](http://docs.voltmx.com/8_x_PDFs/voltmxfoundry/voltmx_foundry_roles_access_control_guide.pdf "VoltMX Foundry Roles Access Control Guide")
-
-Roles and Access Control Guide
+# Roles and Access Control Guide
 
 This document provides an overview and use case for Console Access Control in Volt MX Foundry, and describes how to control access to Volt MX Foundry apps and services.
 

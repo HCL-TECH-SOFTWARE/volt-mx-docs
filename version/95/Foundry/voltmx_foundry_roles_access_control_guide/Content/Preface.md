@@ -1,7 +1,4 @@
 
-[![](Resources/Images/pdf.png)](http://docs.voltmx.com/8_x_PDFs/voltmxfoundry/voltmx_foundry_roles_access_control_guide.pdf "VoltMX Foundry Roles Access Control Guide")
-
-Volt MX Foundry Console Access Control Guide: Preface
 
 # Preface
 
