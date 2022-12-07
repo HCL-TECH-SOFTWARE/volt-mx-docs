@@ -70,7 +70,7 @@ _data\vmfintegrationservice_troubleshooting_guide_95.yml^
 
  mkdocs.yml 
 
-mkdocs serve 2>errors.txt
+mkdocs build 2>errors.txt
 
 :: _data\flexconvertertool-95.yml+^
 :: _data\VoltMX_Licensing_Guide_V9-95.yml+^
