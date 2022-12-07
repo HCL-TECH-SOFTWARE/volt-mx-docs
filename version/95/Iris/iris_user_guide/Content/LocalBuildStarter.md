@@ -19,13 +19,13 @@ After you develop an application, you must build the application to do the follo
 *   Test the application for its performance and appearance on a device or on emulators.
 *   Install the application on devices.
 
-> **_Note:_** The plugins for the native builds will be downloaded when you build the app for the first time. Hence, it may take longer to build the app for the first time. Any subsequent builds will be [incremental](#Incremen) and faster.
+> **_Note:_** The plugins for the native builds will be downloaded when you build the app for the first time. Hence, it may take longer to build the app for the first time. Any subsequent builds will be [incremental](#incremental-build) and faster.
 
 If you add an external asset or library to the Iris project after a full build, you must clean up the project using the **Clean Build** option. The **Clean Build** option erases files that were generated during the previous build and makes the project ready for the subsequent build. Once the project is cleaned, Iris will perform a full build the next time you trigger a build.
 
 If you do not clean the project and perform a build, Iris will not take into consideration the assets and libraries added while performing the build.
 
-Incremental Build
+### Incremental Build
 
 When an app is built for the first time, a full build is performed. The subsequent builds are incremental. In an incremental build, the previously built state of the project is used and only those resources that are changed since the last build are regenerated.
 
@@ -41,11 +41,11 @@ Prerequisites
 
 **Following are the prerequisites to build a native app on a local machine within Volt MX Iris**:
 
-*   Access to a Volt MX Foundry Environment. You must sign in to Volt MX Iris using the login credentials of either your Volt MX Foundry Cloud or on-premise environments.  If you want to use the Volt MX Foundry on-premise environment, you must [configure Volt MX Iris to connect to the Volt MX Foundry URL](LogInUsingCustAuth.md#ConfigureVoltMXFoundryInIrisEnterprise).
+*   Access to a Volt MX Foundry Environment. You must sign in to Volt MX Iris using the login credentials of either your Volt MX Foundry Cloud or on-premise environments.  If you want to use the Volt MX Foundry on-premise environment, you must [configure Volt MX Iris to connect to the Volt MX Foundry URL](LogInUsingCustAuth.md)	.
 
 *   For publishing to the Enterprise App Store, you must have Volt MX Foundry V8 SP4 or later.
 *   Configure the various Project Settings.  
-    Go to **Project** > **Settings** and configure the build settings for each Native platform. For more information on Project Settings, click [here](Project_Properties_in_VoltMX_Iris.md#project-settings-in).
+    Go to **Project** > **Settings** and configure the build settings for each Native platform. For more information on Project Settings, click [here](Project_Properties_in_VoltMX_Iris.md#project-settings-in-volt-mx-iris).
 *   Platform specific prerequisites:
     *   If you choose to build an application for the **iOS** platform, you must provide the Development method, Development Team ID and Keychain password. To do so, go to **Project Settings** > **Native** > **iPhone/iPad**. For more details on the iOS configurations, click [here](iOS_Automatic_Output_Generation.md).
     

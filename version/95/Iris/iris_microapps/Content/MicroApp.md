@@ -382,15 +382,15 @@ From the Volt Iris V9 Service Pack 5 release, support for the Incremental Build 
 
 The following build types are supported for Micro Apps:
 
-*   [Build Native Local](../iris_user_guide/Content/LocalBuildStarter.md)
-*   [Build and Publish Web](../iris_user_guide/Content/WebPublish.md#Run)  
+*   [Build Native Local](../../iris_user_guide/Content/LocalBuildStarter.md)
+*   [Build and Publish Web](../../iris_user_guide/Content/WebPublish.md)  
     
 
 The Build and Publish Web option is disabled if a Volt Foundry app is not linked to the Base App.
 
-*   [Run Live Preview](../iris_user_guide/Content/LivePreview.md)
-*   [Publish Live Preview](../iris_user_guide/Content/LivePreview.md)
-*   The [CI build](../iris_user_guide/Content/CI_BUILD_VoltMX_Iris.md) tool validates the dependencies of the app and generates a single application binary for the Native or Web channels based on the platforms that you select for the build. If there are missing dependencies in the project, the CI build tool displays an error message.
+*   [Run Live Preview](../../iris_user_guide/Content/LivePreview.md)
+*   [Publish Live Preview](../../iris_user_guide/Content/LivePreview.md)
+*   The [CI build](../../iris_user_guide/Content/CI_BUILD_VoltMX_Iris.md) tool validates the dependencies of the app and generates a single application binary for the Native or Web channels based on the platforms that you select for the build. If there are missing dependencies in the project, the CI build tool displays an error message.
 
 The Micro Apps architecture does not support builds for the following platforms:
 
@@ -563,7 +563,7 @@ If a Theme (or Skin) with the same name exists in both the Base App and a linked
 
 Following are a few Guidelines to handle themes in a Micro App architecture project:
 
-Before getting started with this feature, ensure that you have a good understanding of using [Skins and Themes in Volt Iris](../iris_user_guide/Content/Customizing_the_Look_and_Feel_with_Skins.md).
+Before getting started with this feature, ensure that you have a good understanding of using [Skins and Themes in Volt Iris](../../iris_user_guide/Content/Customizing_the_Look_and_Feel_with_Skins.md).
 
 *   During the Micro App import process, if the Base App has a higher number of themes than the themes present in the dependent Micro App, Volt Iris automatically creates the missing themes in the imported Micro App to maintain identical themes across the Base App and its dependent Micro Apps.
 *   During the Micro App import process, if the dependent Micro App has a higher number of themes than the themes in the composite app, Volt Iris ignores the extra themes present in the imported Micro App.
