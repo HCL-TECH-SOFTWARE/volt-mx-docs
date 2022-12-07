@@ -1,8 +1,4 @@
 
-[![](Resources/Images/pdf.png)](http://docs.voltmx.com/8_x_PDFs/voltmxfoundry/voltmx_foundry_roles_access_control_guide.pdf "VoltMX Foundry Roles Access Control Guide")
-
-Volt MX Foundry Console Access Control Guide: [Console Access Control](#console-access-control) > [How to Use Access Control](#how-to-use-access-control) > Use Case
-
 # Console Access Control
 
 Volt MX Foundry supports access controls for Volt MX Foundry applications and services. Volt MX Foundry users who have the permission to create Volt MX Foundry apps and services can control the access to the applications and services.
