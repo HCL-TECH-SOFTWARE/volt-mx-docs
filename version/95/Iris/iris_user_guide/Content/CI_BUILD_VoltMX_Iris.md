@@ -51,7 +51,7 @@ The following properties have a default value. You can configure them if require
 
   
 
-In case you want to modify any of the listed properties, you can find them in the following location: <workspace name>/<application name>.
+In case you want to modify any of the listed properties, you can find them in the following location: &lt;workspace name&gt;/&lt;application name&gt;.
 
 ### Configure HeadlessBuild.Properties
 
