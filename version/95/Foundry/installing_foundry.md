@@ -1,4 +1,3 @@
-# Installing Foundry
 
 These topics provide information about operating system, server, and database support, and shows you how to install Foundry in several different scenarios.
 
@@ -15,6 +14,4 @@ These topics provide information about operating system, server, and database su
 <!-- * [Installation Guide for Volt MX Foundry on Azure](voltmxfoundry_on_azure/Content/Introduction.md) -->
 
 * [Installation Guide for Volt MX Foundry Single Container Solution (On-Premises)](voltmxfoundry_single_container/Content/Introduction_Single.md)
-
-* [Installation Guide for Volt MX Foundry Containers Helm Installation](voltmxfoundry_containers_helm/Content/Introduction.md)
 
