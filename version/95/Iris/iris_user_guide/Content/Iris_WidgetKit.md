@@ -1,37 +1,24 @@
-﻿ 
 
 Configure iOS Home Screen Widgets in
 ====================================
 
 A widget elevates key content from an app and displays it on the home screen of an iPhone or iPad, where users can see it at a glance. With three different sizes available (small, medium, and large), widgets can display a wide range of information. Users can personalize widgets to see details specific to their needs, and arrange their widgets in whatever way works best for them.
 
-Widgets can be designed on any Form in . To create a home screen widget for an app, follow these steps:
+Widgets can be designed on any Form in Volt MX Iris. To create a home screen widget for an app, follow these steps:
 
-1.  In the project, create a new Form.
+1.  In the Volt MX Iris project, create a new Form.
 2.  Add a FlexContainer widget to the Form.
 3.  Resize the FlexContainer widget based on the size of the widget that you want to create. Provide the following dimensions for the FlexContainer widget:
     
-     
     | Widget size | Dimensions (width x height) |
-    | --- | --- |
-    | Small | 
-    169dp x 169dp
-    
-     |
-    | Medium | 
-    
-    360dp x 169dp
-    
-     |
-    | Large | 
-    
-    360dp x 376dp
-    
-     |
+    |:------------|:----------------------------|
+    | Small  |  169dp x 169dp  |
+    | Medium |  360dp x 169dp  |
+    | Large  |  360dp x 376dp  |
     
 4.  Create the UI of the widget by adding child widgets (for example, Label, Image, and FlexContainer widgets) to the FlexContainer widget.
 
-Important Considerations
+**Important Considerations**
 
 *   Designing widgets is similar to designing the elements of a Form. The layout type supported for the iOS Home Screen widgets is the Free Form Flex layout.  
     All the Flex properties (such as left, centerX, right, top, centerY, bottom, width, height) for the layout must be specified in **dp** or **%** units.  
@@ -39,43 +26,58 @@ Important Considerations
 *   The child UI elements (such as Label, Image, or FlexContainer widgets) must have fixed layout properties, such as fixed height and width.  
     If you do not provide values for the **Width** and **Height** properties of the child widget, you must provide values for other layout properties such as values for Top, Bottom, Left, or Right along with the CenterX or CenterY values.  
     For example, if you provide values for the Top and Bottom, the height of the widget can be determined. Similarly, if you provide values for the Left and CenterX properties, the width of the widget can be determined.
-*   From the V9 Service Pack 5 release, has introduced support for the **Flex Horizontal** and **Flex Vertical** layouts for the child widgets of a Home Screen widget. In addition, support for the reverse layout direction has been added for both the Flex Horizontal and Flex Vertical layouts.  
+*   From the V9 Service Pack 5 release, Volt MX Iris has introduced support for the **Flex Horizontal** and **Flex Vertical** layouts for the child widgets of a Home Screen widget. In addition, support for the reverse layout direction has been added for both the Flex Horizontal and Flex Vertical layouts.  
     The default alignment of the child widgets is in the left-to-right and top-to-bottom directions for the Flex Horizontal and the Flex Vertical layouts respectively.  
     If you enable the reverse layout direction, the alignment of the child widgets is in the right-to-left direction for the Flex Horizontal layout, and the bottom-to-top direction for the Flex Vertical layout.
 
 Integrate Home Screen Widgets with an iOS App
 ---------------------------------------------
 
-To use iOS Home Screen Widgets in , you must include the widget configuration in the .kar file of the app. Follow these steps to include the widget configuration in the .kar file:
+To use iOS Home Screen Widgets in Volt MX Iris, you must include the widget configuration in the .kar file of the app. Follow these steps to include the widget configuration in the .kar file:
 
 1.  Include the following key in the `application.properties` file of the project:
     
-```
-enableiOSNativeWidgets = true
-```
+    ```
+    enableiOSNativeWidgets = true
+    ```
+    
 2.  Widgets and iOS apps communicate with each other through iOS Shared Containers or App Groups. For communication through iOS Shared Containers or App Groups, both the app and the widget must include the **App Group Entitlement**. You can provide an input app group container ID for an app as follows:
     
-```
-applicationGroups = group.widget.testWidget //CSV format of all shared application groups
-```
-3.  Create a new folder in the KAR file, and name it **VoltMXWidgets**. Within the VoltMXWidgets folder, add the following files/folders:
+    ```
+    applicationGroups = group.widget.testWidget //CSV format of all shared application groups
+    ```
+    
+3.  Create a new folder in the KAR file, and name it **VoltmxWidgets**. Within the VoltmxWidgets folder, add the following files/folders:
     
     *   **Images** - A folder that contains the assets in PNG/JPEG format.
     *   **WidgetFolders** - One or multiple folders that contain the configuration of the widget. For example, AccountsWidget, TransactionsWidget. Each WidgetFolder contains the following folders:
         
-        *   **JSScripts**: A folder that contains a widget.js file with two async functions passed with a callback. Here is a sample code snippet with the two functions:
-            
-```
-function getSnapshot(callback, widgetSize){
-              var entry = new Entry(new Date(), {});
-              callback(entry);
+        *   **JSScripts**: A folder that contains a widget.js file with two async functions passed with a callback. 
+        
+        
+            Here is a sample code snippet with the two functions:
+
+            ```
+
+            function getSnapshot(callback, widgetSize){
+
+            var entry = new Entry(new Date(), {});
+
+            callback(entry);
+
             }
-            
+
             function getTimelines(callback, widgetSize){
-              var entry = new Entry(new Date(), {});
-              callback(\[entry\], TimelinePolicy.never());
+
+            var entry = new Entry(new Date(), {});
+
+            callback([entry], TimelinePolicy.never());
+
             }
-```
+
+            ```
+
+            
         *   **Views**: A folder that contains either the form.sm folders or a composite form.json structure file. The views folder must also contain the themes folder packaged with it if the form.json file is not present in the project.
             
     *   **widgetProperties.json** - A file that contains the metadata of the widgets. The widgetProperties.json file contains a JSON Object that contains the **widgets** key, which is an array of JSON Objects that contain the meta data for each widget. Each widget meta JSON object contains the following key-value pairs:
@@ -84,7 +86,7 @@ function getSnapshot(callback, widgetSize){
         2.  **widgetName**: The display name for the widget that appears on the device in string format.
         3.  **widgetDescription**: The description for the widget that appears on the device in string format.
         4.  **widgetSizes**: All the supported sizes of the developed widget in an array of constant strings. For example, \[“SMALL", "MEDIUM", "LARGE"\]. You can provide one or many values in the array.
-        5.  **widgetDir**: The name of the widget directory in string format (to be packaged in the `KAR` \> `VoltMXWidgets` folder)
+        5.  **widgetDir**: The name of the widget directory in string format (to be packaged in the `KAR` \> `VoltmxWidgets` folder)
         6.  **widgetViews**: A JSON object that contains the following key-value pairs:
             *   **SMALL** key: The value for this key is the name of the composite form.json structure of the small widget.
             *   **MEDIUM** key: The value for this key is the form.json structure of the medium widget.
@@ -95,15 +97,14 @@ function getSnapshot(callback, widgetSize){
     *   **CommonJSScripts** - A folder that contains the common JS files used by both the main iOS application and the widget (both the app and the widget use different environments).
 
 Here is a sample `widgetProperties.json` file:
-
 ```
 {
-    "widgets":\[
+    "widgets":[
         {
             "widgetID":"accountsWidget",
             "widgetName": "Accounts Widget",
             "widgetDescription" : "Check your accounts balance and updates at a glance",
-            "widgetSizes":\["SMALL", "MEDIUM", "LARGE"\],
+            "widgetSizes":["SMALL", "MEDIUM", "LARGE"],
             "widgetDir": "AccountsWidget",
             "widgetViews":{
                 "SMALL" : "accountsWidgetSmall.json",
@@ -116,7 +117,7 @@ Here is a sample `widgetProperties.json` file:
             "widgetID" : "scheduledTransactionsWidget",
             "widgetName" : "Upcoming transactions",
             "widgetDescription" : "Check when your next transaction is schduled at",
-            "widgetSizes" : \["SMALL"\],
+            "widgetSizes" : ["SMALL"\],
             "widgetDir" : "ScheduledTransactionsWidget",
             "widgetViews" : {
                 "SMALL" : "scheduledTransactionsWidgetSmall.json",
@@ -129,7 +130,7 @@ Here is a sample `widgetProperties.json` file:
             "widgetID" : "transactionsWidget",
             "widgetName" : "Transactions",
             "widgetDescription" : "Check your latest transactions",
-            "widgetSizes" : \["MEDIUM", "LARGE"\],
+            "widgetSizes" : ["MEDIUM", "LARGE"],
             "widgetDir" : "TransactionsWidget",
             "widgetViews" : {
                 "SMALL" : "",
@@ -138,7 +139,7 @@ Here is a sample `widgetProperties.json` file:
             },
             "widgetURL" : "widget://transactions"
         }
-    \]
+    ]
 }
 ```
 
@@ -147,13 +148,13 @@ Widgets use the following two important functions:
 *   [getSnapshot](#getSnapshot)
 *   [getTimeline](#getTimeline)
 
-getSnapshot
+**getSnapshot**
 
 The getSnapshot function returns a single snap of data, as the name indicates. Usually, the getSnapshot function provides a representation of the widget for better user understanding.
 
 The getSnapshot function is invoked by the native framework when the widget must appear on the widget gallery. When the getSnapshot function is invoked, the widget.js file of the widget is triggered. As the getSnapshot function returns a single snap of data, you must pass a single [Entry object](#Entry) (with data) as an input for the getSnapshot callback function. The expected data at that particular moment is then displayed on the widget.
 
-getTimeline
+**getTimeline**
 
 The getTimeline function returns a series of data entries. The widgets on the home screen display the data with respect to the number of entries that you provide as the input. For example, if you pass 10 entries with each entry differing by one hour, the timeline for the widget is defined for 10 hours, and the system refreshes the widget views on the home screen according to the data that is passed for each entry.
 
@@ -163,7 +164,7 @@ The getTimeline function is invoked by the native framework when the widget is a
 *   **Reload At End**: The getTimeline function for input data of the widget is reloaded after the widget displays the last entry that was passed as the input. AFter the last entry is displayed, the getTimeline function is triggered with a request for the new data to be displayed.
 *   **Reload After (date)**: The getTimeline function is triggered at a particular moment that you provide as the input (with the date-time object).
 
-Entry Object - Entry Class
+**Entry Object - Entry Class**
 
 The Entry object is a JavaScript object instance that is used by widgets for both the getSnapshot and the getTimeline functions. The Entry object contains a **date** object(date-time object) and the **data** to be displayed at a particular date-time.
 
@@ -202,28 +203,28 @@ function getTimelines(callback, widgetSize){
 
     var accountHolderName = getAccountHolderName();
     var accounts = getAccounts();
-    var brokerageAccount = accounts\[2\];
+    var brokerageAccount = accounts[2];
 
     var dsAccountBalance = getAccountBalance();
     var balanceToShow = (dsAccountBalance==null) ? brokerageAccount.accountBalance : dsAccountBalance;
     
 
     // Adding brokerage account to widgetDataModel
-    widgetDataModel\["lblAccountHolderName"\] = accountHolderName;
-    widgetDataModel\["lblAccountType"\] = brokerageAccount.accountType+" Account";
-    widgetDataModel\["lblAccountBalance"\] = "$"+balanceToShow;
-    widgetDataModel\["imgLastIncrease"\] = brokerageAccount.transactions\[0\].transactionFlow == "inflow" ? "arrowup1" : "arrowdown1";
-    widgetDataModel\["lblBankName"\] = brokerageAccount.bankName;
-    widgetDataModel\["lblAccountNumber"\] = brokerageAccount.accountNumber;
+    widgetDataModel["lblAccountHolderName"] = accountHolderName;
+    widgetDataModel["lblAccountType"] = brokerageAccount.accountType+" Account";
+    widgetDataModel["lblAccountBalance"] = "$"+balanceToShow;
+    widgetDataModel["imgLastIncrease"] = brokerageAccount.transactions[0].transactionFlow == "inflow" ? "arrowup1" : "arrowdown1";
+    widgetDataModel["lblBankName"] = brokerageAccount.bankName;
+    widgetDataModel["lblAccountNumber"] = brokerageAccount.accountNumber;
 
     var entry = new Entry(entryDate, widgetDataModel);
-    callback(\[entry\], TimelinePolicy.never());
+    callback([entry], TimelinePolicy.never());
 }
 ```
-
 ### Data retrieval for Widgets
 
-Widgets can receive data from network requests by using the [VoltMX Networking APIs](https://docs.voltmx.com/voltmxlibrary/iris/iris_api_dev_guide/content/voltmx.net_functions.md#HttpRequ) or through the [Shared App Group APIs](https://docs.voltmx.com/voltmxlibrary/iris/iris_api_dev_guide/content/sharedappgroupcontainerapi.md).
+Widgets can receive data from network requests by using the [Volt MX Networking APIs](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.net_functions.html) or through the [Shared App Group APIs](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/sharedappgroupcontainerapi.html).
+
 
 ### Widgets with Multiple Timelines
 
@@ -233,13 +234,13 @@ When any server-side changes must be notified to the widget, you can notify the 
 
 **Notifications**: If the application receives a notification about any server change, the application callback can invoke the widget reload methods to update this new change across all the widgets.
 
-If the widget had already invoked timeline methods before, the new invocation of the timeline method takes precedence over the old invocations, and the updated data is displayed on the widget.
+**NOTE:** If the widget had already invoked timeline methods before, the new invocation of the timeline method takes precedence over the old invocations, and the updated data is displayed on the widget.
 
 ### Deep Linking Widgets
 
 You can implement the deep link functionality for Widgets. When a user taps a widget that has a configured URL, the application callback methods are invoked with the parameters of the URL. Appropriate action can be taken on the application when this URL is received. For example, when a user taps on the accounts widget, you can display the dashboard from where the accounts widget URL is received.
 
-From the V9 Service Pack 5 release, you can provide multiple URLs for specific tap targets. During the widget view construction, you can provide the deeplink URLs for specific tap targets in the `flex.json` file, which must be passed to the app on tapping the FlexContainer.
+**NOTE:** From the V9 Service Pack 5 release, you can provide multiple URLs for specific tap targets. During the widget view construction, you can provide the deeplink URLs for specific tap targets in the `flex.json` file, which must be passed to the app on tapping the FlexContainer.
 
 The number of URLs that you can provide varies based on the size of the widget as follows:
 
