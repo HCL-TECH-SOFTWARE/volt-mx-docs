@@ -828,7 +828,8 @@ For information about this feature, refer to the following links:
 
 </details>
 
-* Support of Volt Foundry container config through Helmchart.  
+* Support for the installation and configuration of Volt MX Foundry
+  Containers using a Helm chart.  
 * Upgraded Kubernetes supported version till 1.24.7 for 
   on-premise (via script-based installation). Support for Kubernetes versions below 1.21.3 dropped.
 * Upgraded Docker (single container, on-premise) version to 20.10.17
