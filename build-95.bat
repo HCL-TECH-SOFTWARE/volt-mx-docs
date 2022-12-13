@@ -3,8 +3,8 @@ _data\volt_mx_release_notes_95.yml+^
 _data\app_platform_overview_95.yml+^
 _data\tutorials_95.yml+^
 _data\iris_documentation_95.yml+^
-_data\voltmxplatform_supported_devices_os_browsers_95.yml+^
 _data\installing_iris_95.yml+^
+_data\voltmxplatform_supported_devices_os_browsers_95.yml+^
 _data\iris_starter_install_mac_95.yml+^
 _data\iris_starter_install_win_95.yml+^
 _data\iris_tutorials_95.yml+^
