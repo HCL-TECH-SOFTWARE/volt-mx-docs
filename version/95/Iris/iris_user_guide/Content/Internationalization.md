@@ -7,9 +7,9 @@ Internationalizing (i18n) Application Content
 
 The process of designing or developing an application in such a way that it supports various languages and regions is referred to as _Internationalization_, also known as _i18n_. In Volt MX Iris, the i18n features make it possible to build your app for various language locales without making changes to the application code or logic. By setting up the locales that you want to support and then adding what amounts to a vocabulary list for each locale, your app can become functional in multiple languages. Each entry that you make is called a key, and defines a given term in each of the locales that you want your application to support.
 
-Volt MX IQ supports all locales supported by Google Translate. For the locales that are not directly supported by Iris, Google Translate is used for the translation internally, and the locale is added as a custom locale. Iris supports all the locales that are supported by Google Translate except Hebrew and Serbo-Croatian.
+<!-- AI Volt MX IQ supports all locales supported by Google Translate. For the locales that are not directly supported by Iris, Google Translate is used for the translation internally, and the locale is added as a custom locale. Iris supports all the locales that are supported by Google Translate except Hebrew and Serbo-Croatian.
 
-![](Resources/Images/i18n_new_632x572.png)
+![](Resources/Images/i18n_new_632x572.png)-->
 
 The following topics lead you through the process of implementing i18n functionality in an app:
 

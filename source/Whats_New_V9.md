@@ -169,7 +169,7 @@ New fuzzy search functionality has been added to search for actions in the Actio
   
   For more information about this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/working_with_Action_Editor.html).
 
-## Volt MX IQ Enhancements
+<!--AI ## Volt MX IQ Enhancements
 
 * The translation feature has been enhanced to convert the text used for properties of a widget that have been set through code into equivalent i18n keys in the target language. 
 
@@ -199,6 +199,7 @@ New fuzzy search functionality has been added to search for actions in the Actio
 * Ability to enable or disable Design Suggestions from the Help menu. 
 
     For more information about this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/VoltMX_IQ.html#Enabling).
+-->
 
 ## Android Enhancements
 
@@ -230,11 +231,12 @@ From Volt MX Iris V9, an option to sign in to an on-premise Volt MX Foundry envi
 
 For more information about this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/LogInUsingCustAuth.html#Connect).
 
-## Support For Kslint
+<!-- AI ## Support For Kslint
 
 VoltMX Iris V9 provides support for a new linter, KSLint. KSLint identifies errors in code and also any deviations from basic JavaScript code guidelines. KSLint allows developers to configure default rules and add new custom rules. 
 
 For more information on KSLint, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/KSLint.html).
+-->
 
 ## Resolve Conflicts in Designer and Developer actions
 
@@ -357,6 +359,8 @@ VoltMX Iris V9 includes many new developer productivity features like Enhanced p
 ## Digital Experiences
 
 This release packages some sample applications to showcase modern digital experiences integrated within Iris like Chatbot for native & web apps & Augmented Reality using the native AR frameworks.
+
+<!--AI This release packages some sample applications to showcase modern digital experiences integrated within Iris like Chatbot for native & web apps & Augmented Reality using the native AI & AR frameworks.-->
 
 ## Security Enhancements
 
