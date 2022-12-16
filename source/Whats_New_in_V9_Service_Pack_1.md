@@ -25,11 +25,12 @@ The Responsive Grid Layout feature provides a quick and convenient way to create
 
 For more information on this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/ResponsiveGridLayout.html).
 
-## AI Assisted Development
+<!-- AI ## AI Assisted Development
 
 VoltMX Iris has introduced an AI Assisted Development feature to help developers with many commonly required Best practices. AI Assisted development works in combination with Volt MX IQ. This new feature helps review applications for unused resources, skins, and widgets. It also helps developers check for design best practices like if the same font family is used across the application. 
 
 For more information about AI Assisted development, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/AIAssisted.html).
+-->
 
 ## Find & Replace Skin Properties
 
@@ -99,11 +100,12 @@ The Test Automation feature is enhanced with new fetch and edit a widget path fe
 
   For more information on this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/TestAutomation.html#fetchWidget). 
 
-**Integration with Volt MX IQ**
+<!-- AI **Integration with Volt MX IQ**
 
 Added support to access the Testing framework through Volt MX IQ in Iris. You can now open, create, and run, test cases, test plans and test suites using Volt MX IQ. 
 
   For more information on this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/VoltMX_IQ.html#Test). 
+-->
 
 **Added Intellisense support for the Testing Framework APIs in Volt MX Iris.**
 

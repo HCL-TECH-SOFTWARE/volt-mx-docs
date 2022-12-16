@@ -328,9 +328,10 @@ Yes, you can populate a Segment from bottom to top by following these steps:
         *   **data**: The data that you want to add to the row
         *   **rowIndex**: The current index of the segment
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)How do I remove unused or duplicate skins from my project?](javascript:void(0);) 
+<!-- AI [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)How do I remove unused or duplicate skins from my project?](javascript:void(0);) 
 
 Type the **list unused skins** command in the Volt MX IQ chat window. For the list of supported commands, refer to [Iris actions in Volt MX IQ](VoltMXIQCommands.md#top).
+-->
 
 [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Is it possible to get a linear table (rows stacked horizontally) in a Segment?](javascript:void(0);) 
 

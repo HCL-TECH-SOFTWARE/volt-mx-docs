@@ -43,16 +43,18 @@ To launch Volt MX Iris, follow these steps:
 
     [![](Resources/Mac_installatioguideimages/Hikes.png)](Resources/Mac_installatioguideimages/Hikes.png)
 
-5.  Close the Hikes screen. The IQ bot gets activated.  
+<!-- AI 5.  Close the Hikes screen. The IQ bot gets activated.  
     Use the bot to guide you in the process of developing applications in Volt MX Iris.
 
     [![](Resources/Mac_installatioguideimages/VoltMX_IQ_thumb_288_192.png)](Resources/Mac_installatioguideimages/VoltMX_IQ.png)
 
-6.  After the Volt MX IQ bot disappears, a Sample application loads in the application canvas.
+6.  After the Volt MX IQ bot disappears, a Sample application loads in the application canvas.-->
+
+5.  A Sample application loads in the application canvas.
 
     [![](Resources/Mac_installatioguideimages/v8sample_thumb_288_192.png)](Resources/Mac_installatioguideimages/v8sample.png)
 
-7.  Click **Project** \> **New Project** to create a new Iris project.
+6.  Click **Project** \> **New Project** to create a new Iris project.
 
 For details on how to uninstall the Volt MX Iris application from your system, refer [Uninstall Volt MX Iris.](Uninstalling VoltMX Iris.md)
 
