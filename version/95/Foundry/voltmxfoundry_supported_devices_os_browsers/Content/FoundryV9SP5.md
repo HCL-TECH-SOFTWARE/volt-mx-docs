@@ -47,6 +47,10 @@ The installation of the Volt Foundry software supports the following versions of
 
 ### Application Servers
 
+#### **WebSphereLiberty**
+
+*   WebSphereLiberty ND 22.0.
+
 #### **Tomcat**
 
 *   Tomcat 9.0.62

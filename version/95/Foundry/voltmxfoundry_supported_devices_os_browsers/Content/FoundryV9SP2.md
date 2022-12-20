@@ -40,6 +40,11 @@ The installation of the Volt MX Foundry software supports the following versions
 
 ### Application Servers
 
+#### **WebSphereLiberty**
+
+*   WebSphereLiberty ND 22.0.
+
+
 #### **Tomcat**
 
 *   Tomcat 9.0.62
