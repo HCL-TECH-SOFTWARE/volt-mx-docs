@@ -36,7 +36,7 @@ For detailed information about fixes and known issues in Volt MX, please see the
 
 
 ### V9 Servicepack 2 Fixpack 57
-December 15, 2022
+December 19, 2022
 
 There are no new features or enhancements in this release.
 For relevant Support note, see the<a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476" target="_blank"> Cumulative fix list for HCL Volt MX</a>.
@@ -174,7 +174,7 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 
 
 ### V9 Servicepack 2 Fixpack 1 Hotfix 14
-December 15, 2022
+December 19, 2022
 
 There are no new features or enhancements in this release.
 For relevant Support note, see the<a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476" target="_blank"> Cumulative fix list for HCL Volt MX</a>.
