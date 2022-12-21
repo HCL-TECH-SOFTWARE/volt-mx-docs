@@ -52,6 +52,13 @@ The installation of the Volt MX Foundry software supports the following versions
 
 > **_Important:_**  If you are running JBoss in Domain node (multi node) for a production setup, get the appropriate licenses from Red Hat.
 
+
+#### **WebSphereLiberty**
+
+*   WebSphereLiberty ND 22.0.
+
+
+
 ### Database Servers
 
 #### MySQL
