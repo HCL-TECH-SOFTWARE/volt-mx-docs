@@ -47,9 +47,6 @@ The installation of the Volt Foundry software supports the following versions of
 
 ### Application Servers
 
-#### **WebSphereLiberty**
-
-*   WebSphereLiberty ND 22.0.
 
 #### **Tomcat**
 
@@ -62,6 +59,12 @@ The installation of the Volt Foundry software supports the following versions of
 *   EAP 7.3
 
 > **_Important:_**  If you are running JBoss in Domain node (multi node) for a production setup, get the appropriate licenses from Red Hat.
+
+
+#### **WebSphereLiberty**
+
+*   WebSphereLiberty ND 22.0.
+
 
 ### Database Servers
 
