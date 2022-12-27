@@ -62,9 +62,7 @@ _data\vmf_integrationservice_admin_console_userguide_95.yml+^
 _data\voltmx_appfactory_user_guide_95.yml+^
 _data\voltmx_Foundry_deployment_guide_95.yml+^
 _data\VoltMX_Analytics_Cloud_FAQs_95.yml+^
-_data\vmfintegrationservice_troubleshooting_guide_95.yml+^
-_data\voltmxfoundry_on_amazon_eks_95.yml+^
-_data\voltmxfoundry_on_openshift_95.yml^
+_data\vmfintegrationservice_troubleshooting_guide_95.yml^
 
  mkdocs.yml 
 
