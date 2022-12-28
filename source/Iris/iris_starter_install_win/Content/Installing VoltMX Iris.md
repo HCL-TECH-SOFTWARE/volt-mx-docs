@@ -229,11 +229,11 @@ PassNTLMv2      XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</code></pre></li>
 
 Ensure that you contact your system administrator and white-list the following domain URLs:
 
-- https://manage.hclvoltmx.com
-- https://api.hclvoltmx.com
-- https://visualization.hclvoltmx.com
-- https://accounts.auth.hclvoltmx.net
-- https://hclvoltmx-prototypetransit.s3.amazonaws.com
+- [https://manage.hclvoltmx.com](https://manage.hclvoltmx.com/oauth/authorize?oauth_token=d29221cc54d3c1b9f871bba62d5f5590460f299d)
+- [https://api.hclvoltmx.com](https://api.hclvoltmx.com/console)
+- [https://visualization.hclvoltmx.com](https://visualization.hclvoltmx.com/)
+- [https://accounts.auth.hclvoltmx.net](https://accounts.auth.hclvoltmx.net/)
+- [https://hclvoltmx-prototypetransit.s3.amazonaws.com](https://hclvoltmx-prototypetransit.s3.amazonaws.com/)
 
 - [Prerequisites](Prerequisites.md#prerequisites)
   - [System Requirements](Prerequisites.md#system-requirements)
