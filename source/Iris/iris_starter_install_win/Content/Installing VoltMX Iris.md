@@ -225,6 +225,7 @@ PassNTLMv2      XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</code></pre></li>
   <li>Move the <em>cntlm.ini</em> file to User Profile folder\user name\Iris\irisdata (for example, C:\Users\Iris\irisdata).</li>
 </ol>
 
+
 ## White-list Essential Domains
 
 Ensure that you contact your system administrator and white-list the following domain URLs:
