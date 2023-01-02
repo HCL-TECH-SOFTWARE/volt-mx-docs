@@ -225,15 +225,16 @@ PassNTLMv2      XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</code></pre></li>
   <li>Move the <em>cntlm.ini</em> file to User Profile folder\user name\Iris\irisdata (for example, C:\Users\Iris\irisdata).</li>
 </ol>
 
+
 ## White-list Essential Domains
 
 Ensure that you contact your system administrator and white-list the following domain URLs:
 
-- https://manage.hclvoltmx.com
-- https://api.voltmx.com
-- https://visualization.voltmx.com
-- https://prototypetransit.voltmx.com.s3.amazonaws.com
-- https://accounts.auth.voltmxcloud.com
+- [https://manage.hclvoltmx.com](https://manage.hclvoltmx.com/oauth/authorize?oauth_token=d29221cc54d3c1b9f871bba62d5f5590460f299d)
+- [https://api.hclvoltmx.com](https://api.hclvoltmx.com/console)
+- [https://visualization.hclvoltmx.com](https://visualization.hclvoltmx.com/)
+- [https://accounts.auth.hclvoltmx.net](https://accounts.auth.hclvoltmx.net/)
+- [https://hclvoltmx-prototypetransit.s3.amazonaws.com](https://hclvoltmx-prototypetransit.s3.amazonaws.com/)
 
 - [Prerequisites](Prerequisites.md#prerequisites)
   - [System Requirements](Prerequisites.md#system-requirements)
