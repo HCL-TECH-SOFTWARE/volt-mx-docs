@@ -42,7 +42,7 @@ If you try to publish the app, even when you do not have an associated app, you 
 
 ![](Resources/Images/LinkFoundry.png)
 
-To change the selected Cloud account or Environment, go to **Project Settings** > . hen, click the tab. At the top of this tab, under Environment, select an environment from the drop-down list. Click **Done**. If you do not see any environments listed, you need to create one. For more information, refer [Environments](http://opensource.voltmxtechsw.com/volt-mx-docs/voltmxlibrary/voltmxfoundry/voltmx_foundry_user_guide/Default.htmll#Environments.htmll) in the Console User Guide.
+To change the selected Cloud account or Environment, go to **Project Settings** > . hen, click the tab. At the top of this tab, under Environment, select an environment from the drop-down list. Click **Done**. If you do not see any environments listed, you need to create one. For more information, refer [Environments](../../../Foundry/voltmx_foundry_user_guide/Content/Environments.md) in the Console User Guide.
 
 To publish the web app to , the app needs to be associated with a app.
 

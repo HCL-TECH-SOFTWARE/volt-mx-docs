@@ -49,7 +49,7 @@ Before you run a Live Preview, ensure that you have a project in which you have 
       
     ![](Resources/Images/LivePreview.PNG)  
       
-    In Iris, you can see a **Live Preview is ready** window. The window contains App Details and QR code for the web app. Using the details, you can preview the web app on your device. For more details on how to view the app on your device, go to [Preview an App on a Device](http://opensource.voltmxtechsw.com/volt-mx-docs/voltmxlibrary/iris/iris_app_viewer/Default.htmll#PreviewAnAppOnADevice.htmll).  
+    In Iris, you can see a **Live Preview is ready** window. The window contains App Details and QR code for the web app. Using the details, you can preview the web app on your device. For more details on how to view the app on your device, go to [Preview an App on a Device](../../iris_app_viewer/Content/FunctionalPreviewStarter.md).  
       
     ![](Resources/Images/wifi-qr-preview.png)  
       

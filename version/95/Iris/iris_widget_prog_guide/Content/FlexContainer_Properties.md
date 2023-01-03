@@ -929,7 +929,7 @@ Read Only after initialization.
 
 Remarks
 
-If the `isMaster` property is true, the current widget is a master container and all of the rules and limitations of master containers apply to it. For more information, please see [Masters](Masters.mdl) in the Overviews section of this guide, as well as [Using Masters](http://opensource.voltmxtechsw.com/volt-mx-docs/voltmxlibrary/iris/iris_user_guide/Default.htmll#Masters.mdl?Highlight=Masters) in the [Iris User Guide](http://opensource.voltmxtechsw.com/volt-mx-docs/voltmxlibrary/iris/iris_user_guide/Default.htmll).
+If the `isMaster` property is true, the current widget is a master container and all of the rules and limitations of master containers apply to it. For more information, please see [Masters](Masters.md) in the Overviews section of this guide.
 
 Your app can set the `isMaster` property in this container's constructor. After that, this property is read-only.
 
