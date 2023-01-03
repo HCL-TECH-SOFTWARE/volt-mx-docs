@@ -1321,7 +1321,7 @@ pullToRefreshI18NKey Property
 
 * * *
 
-This property specifies the i18N key for the "Pull to refresh" text when the FlexScrollContainer is pulled from the top. **pullToRefreshI18NKey** is applicable only when the value of the [scrollDirection](FlexScrollContainer_Properties.mdl#scrollDi) Property is vertical.
+This property specifies the i18N key for the "Pull to refresh" text when the FlexScrollContainer is pulled from the top. **pullToRefreshI18NKey** is applicable only when the value of the [scrollDirection](FlexScrollContainer_Properties.md#scrollDi) Property is vertical.
 
 Syntax
 
@@ -1344,9 +1344,9 @@ Form1.flxScroll.pullToRefreshI18NKey= "Pull To Refresh";
 Remarks
 
 *   The default value of this key is **Pull to refresh**.
-*   The value for the i18N key is got from the existing application locale specific i18N resource bundle. If the key is not found in the resource bundle, then the default (english locale) title text is used. For more internationalization APIs, refer the [Internationalization APIs](http://opensource.voltmxtechsw.com/volt-mx-docs/voltmxlibrary/iris/iris_api_dev_guide/content/internationalization.htmll).
-*   When the [scrollDirection](FlexScrollContainer_Properties.mdl#scrollDi) Property of the **FlexScrollContainer** is set as vertical, the text provided in the **pullToRefreshI18NKey** and **[pushToRefreshI18NKey](#pushToRefreshI18NKey)** attributes takes precedence over the icons provided in **[pullToRefreshIcon](#pullToRefreshIcon)** and **[pushToRefreshIcon](#pushToRefreshIcon)**.
-*   When the [scrollDirection](FlexScrollContainer_Properties.mdl#scrollDi) Property of the **FlexScrollContainer** is set as horizontal, only the icons provided in **[pullToRefreshIcon](#pullToRefreshIcon)** and **[pushToRefreshIcon](#pushToRefreshIcon)** are displayed.
+*   The value for the i18N key is got from the existing application locale specific i18N resource bundle. If the key is not found in the resource bundle, then the default (english locale) title text is used. For more internationalization APIs, refer the [Internationalization APIs](http://opensource.voltmxtechsw.com/volt-mx-docs/voltmxlibrary/iris/iris_api_dev_guide/content/internationalization.html).
+*   When the [scrollDirection](FlexScrollContainer_Properties.md#scrollDi) Property of the **FlexScrollContainer** is set as vertical, the text provided in the **pullToRefreshI18NKey** and **[pushToRefreshI18NKey](#pushToRefreshI18NKey)** attributes takes precedence over the icons provided in **[pullToRefreshIcon](#pullToRefreshIcon)** and **[pushToRefreshIcon](#pushToRefreshIcon)**.
+*   When the [scrollDirection](FlexScrollContainer_Properties.md#scrollDi) Property of the **FlexScrollContainer** is set as horizontal, only the icons provided in **[pullToRefreshIcon](#pullToRefreshIcon)** and **[pushToRefreshIcon](#pushToRefreshIcon)** are displayed.
 
 Platform Availability
 
@@ -1383,8 +1383,8 @@ Form1.flxScroll.pullToRefreshIcon = "topArrow.png";
 
 Remarks
 
-*   When the [scrollDirection](FlexScrollContainer_Properties.mdl#scrollDi) Property of the **FlexScrollContainer** is set as vertical, the text provided in the **[pullToRefreshI18NKey](#pullToRefreshI18NKey)** and **[pushToRefreshI18NKey](#pushToRefreshI18NKey)** attributes takes precedence over the icons provided in **[pullToRefreshIcon](#pullToRefreshIcon)** and **[pushToRefreshIcon](#pushToRefreshIcon)**.
-*   When the [scrollDirection](FlexScrollContainer_Properties.mdl#scrollDi) Property of the **FlexScrollContainer** is set as horizontal, only the icons provided in **[pullToRefreshIcon](#pullToRefreshIcon)** and **[pushToRefreshIcon](#pushToRefreshIcon)** are displayed.
+*   When the [scrollDirection](FlexScrollContainer_Properties.md#scrollDi) Property of the **FlexScrollContainer** is set as vertical, the text provided in the **[pullToRefreshI18NKey](#pullToRefreshI18NKey)** and **[pushToRefreshI18NKey](#pushToRefreshI18NKey)** attributes takes precedence over the icons provided in **[pullToRefreshIcon](#pullToRefreshIcon)** and **[pushToRefreshIcon](#pushToRefreshIcon)**.
+*   When the [scrollDirection](FlexScrollContainer_Properties.md#scrollDi) Property of the **FlexScrollContainer** is set as horizontal, only the icons provided in **[pullToRefreshIcon](#pullToRefreshIcon)** and **[pushToRefreshIcon](#pushToRefreshIcon)** are displayed.
 
 Platform Availability
 
@@ -1399,7 +1399,7 @@ pullToRefreshSkin Property
 
 * * *
 
-This property specifies the skin to be applied to the text that is displayed when the FlexScrollContainer is pulled from the top. **pullToRefreshSkin** property is applicable only when the value of the [scrollDirection](FlexScrollContainer_Properties.mdl#scrollDi) Property is vertical and when the text is displayed.
+This property specifies the skin to be applied to the text that is displayed when the FlexScrollContainer is pulled from the top. **pullToRefreshSkin** property is applicable only when the value of the [scrollDirection](FlexScrollContainer_Properties.md#scrollDi) Property is vertical and when the text is displayed.
 
 Syntax
 
@@ -1432,7 +1432,7 @@ pushToRefreshI18NKey Property
 
 * * *
 
-This property specifies the i18N key for the "Push to refresh" text when the FlexScrollContainer is pushed from the bottom. **pushToRefreshI18NKey** is applicable only when the value of the [scrollDirection](FlexScrollContainer_Properties.mdl#scrollDi) Property is vertical.
+This property specifies the i18N key for the "Push to refresh" text when the FlexScrollContainer is pushed from the bottom. **pushToRefreshI18NKey** is applicable only when the value of the [scrollDirection](FlexScrollContainer_Properties.md#scrollDi) Property is vertical.
 
 Syntax
 
@@ -1455,9 +1455,9 @@ Form1.flxScroll.pushToRefreshI18NKey= "Push To Refresh";
 Remarks
 
 *   The default value of this key is **Push to refresh**.
-*   The value for the i18N key is got from the existing application locale specific i18N resource bundle. If the key is not found in the resource bundle, then the default (english locale) title text is used. For more internationalization APIs, refer the [Internationalization APIs](http://opensource.voltmxtechsw.com/volt-mx-docs/voltmxlibrary/iris/iris_api_dev_guide/content/internationalization.htmll).
-*   When the [scrollDirection](FlexScrollContainer_Properties.mdl#scrollDi) Property of the **FlexScrollContainer** is set as vertical, the text provided in the **[pullToRefreshI18NKey](#pullToRefreshI18NKey)** and **[pushToRefreshI18NKey](#pushToRefreshI18NKey)** attributes takes precedence over the icons provided in **[pullToRefreshIcon](#pullToRefreshIcon)** and **[pushToRefreshIcon](#pushToRefreshIcon)**.
-*   When the [scrollDirection](FlexScrollContainer_Properties.mdl#scrollDi) Property of the **FlexScrollContainer** is set as horizontal, only the icons provided in **[pullToRefreshIcon](#pullToRefreshIcon)** and **[pushToRefreshIcon](#pushToRefreshIcon)** are displayed.
+*   The value for the i18N key is got from the existing application locale specific i18N resource bundle. If the key is not found in the resource bundle, then the default (english locale) title text is used. For more internationalization APIs, refer the [Internationalization APIs](http://opensource.voltmxtechsw.com/volt-mx-docs/voltmxlibrary/iris/iris_api_dev_guide/content/internationalization.html).
+*   When the [scrollDirection](FlexScrollContainer_Properties.md#scrollDi) Property of the **FlexScrollContainer** is set as vertical, the text provided in the **[pullToRefreshI18NKey](#pullToRefreshI18NKey)** and **[pushToRefreshI18NKey](#pushToRefreshI18NKey)** attributes takes precedence over the icons provided in **[pullToRefreshIcon](#pullToRefreshIcon)** and **[pushToRefreshIcon](#pushToRefreshIcon)**.
+*   When the [scrollDirection](FlexScrollContainer_Properties.md#scrollDi) Property of the **FlexScrollContainer** is set as horizontal, only the icons provided in **[pullToRefreshIcon](#pullToRefreshIcon)** and **[pushToRefreshIcon](#pushToRefreshIcon)** are displayed.
 
 Platform Availability
 
@@ -1494,8 +1494,8 @@ Form1.flxScroll.pushToRefreshIcon = "downArrow.png";
 
 Remarks
 
-*   When the [scrollDirection](FlexScrollContainer_Properties.mdl#scrollDi) Property of the **FlexScrollContainer** is set as vertical, the text provided in the **[pullToRefreshI18NKey](#pullToRefreshI18NKey)** and **[pushToRefreshI18NKey](#pushToRefreshI18NKey)** attributes takes precedence over the icons provided in **[pullToRefreshIcon](#pullToRefreshIcon)** and **[pushToRefreshIcon](#pushToRefreshIcon)**.
-*   When the [scrollDirection](FlexScrollContainer_Properties.mdl#scrollDi) Property of the **FlexScrollContainer** is set as horizontal, only the icons provided in **[pullToRefreshIcon](#pullToRefreshIcon)** and **[pushToRefreshIcon](#pushToRefreshIcon)** are displayed.
+*   When the [scrollDirection](FlexScrollContainer_Properties.md#scrollDi) Property of the **FlexScrollContainer** is set as vertical, the text provided in the **[pullToRefreshI18NKey](#pullToRefreshI18NKey)** and **[pushToRefreshI18NKey](#pushToRefreshI18NKey)** attributes takes precedence over the icons provided in **[pullToRefreshIcon](#pullToRefreshIcon)** and **[pushToRefreshIcon](#pushToRefreshIcon)**.
+*   When the [scrollDirection](FlexScrollContainer_Properties.md#scrollDi) Property of the **FlexScrollContainer** is set as horizontal, only the icons provided in **[pullToRefreshIcon](#pullToRefreshIcon)** and **[pushToRefreshIcon](#pushToRefreshIcon)** are displayed.
 
 Platform Availability
 
@@ -1510,7 +1510,7 @@ pushToRefreshSkin Property
 
 * * *
 
-This property specifies the skin to be applied to the text that is displayed when the FlexScrollContainer is pushed from the bottom. **pushToRefreshSkin** property is applicable only when the value of the [scrollDirection](FlexScrollContainer_Properties.mdl#scrollDi) Property is vertical and when the text is displayed.
+This property specifies the skin to be applied to the text that is displayed when the FlexScrollContainer is pushed from the bottom. **pushToRefreshSkin** property is applicable only when the value of the [scrollDirection](FlexScrollContainer_Properties.md#scrollDi) Property is vertical and when the text is displayed.
 
 Syntax
 
@@ -1543,7 +1543,7 @@ releaseToPullRefreshI18NKey Property
 
 * * *
 
-This property specifies the i18N key for the "Release to refresh" text, when the FlexScrollContainer is pulled from the top. **releaseToPullRefreshI18NKey** is applicable only when the value of the [scrollDirection](FlexScrollContainer_Properties.mdl#scrollDi) Property is vertical.
+This property specifies the i18N key for the "Release to refresh" text, when the FlexScrollContainer is pulled from the top. **releaseToPullRefreshI18NKey** is applicable only when the value of the [scrollDirection](FlexScrollContainer_Properties.md#scrollDi) Property is vertical.
 
 Syntax
 
@@ -1566,7 +1566,7 @@ Form1.flxScroll.releaseToPullRefreshI18NKey = "Release To Refresh";
 Remarks
 
 *   The default value of this key is **Release to refresh**.
-*   The value for the i18N key is got from the existing application locale specific i18N resource bundle. If the key is not found in the resource bundle, then the default (english locale) title text is used. For more internationalization APIs, refer the [Internationalization APIs](http://opensource.voltmxtechsw.com/volt-mx-docs/voltmxlibrary/iris/iris_api_dev_guide/content/internationalization.htmll).
+*   The value for the i18N key is got from the existing application locale specific i18N resource bundle. If the key is not found in the resource bundle, then the default (english locale) title text is used. For more internationalization APIs, refer the [Internationalization APIs](http://opensource.voltmxtechsw.com/volt-mx-docs/voltmxlibrary/iris/iris_api_dev_guide/content/internationalization.html).
 
 Platform Availability
 
@@ -1581,7 +1581,7 @@ releaseToPushRefreshI18NKey Property
 
 * * *
 
-This property specifies the i18N key for the "Release to refresh" text, when the FlexScrollContainer is pushed from the bottom. **releaseToPushRefreshI18NKey** is applicable only when the value of the [scrollDirection](FlexScrollContainer_Properties.mdl#scrollDi) Property is vertical.
+This property specifies the i18N key for the "Release to refresh" text, when the FlexScrollContainer is pushed from the bottom. **releaseToPushRefreshI18NKey** is applicable only when the value of the [scrollDirection](FlexScrollContainer_Properties.md#scrollDi) Property is vertical.
 
 Syntax
 
@@ -1604,7 +1604,7 @@ Form1.flxScroll.releaseToPushRefreshI18NKey = "Release To Refresh";
 Remarks
 
 *   The default value of this key is **Release to refresh**.
-*   The value for the i18N key is got from the existing application locale specific i18N resource bundle. If the key is not found in the resource bundle, then the default (english locale) title text is used. For more internationalization APIs, refer the [Internationalization APIs](http://opensource.voltmxtechsw.com/volt-mx-docs/voltmxlibrary/iris/iris_api_dev_guide/content/internationalization.htmll).
+*   The value for the i18N key is got from the existing application locale specific i18N resource bundle. If the key is not found in the resource bundle, then the default (english locale) title text is used. For more internationalization APIs, refer the [Internationalization APIs](http://opensource.voltmxtechsw.com/volt-mx-docs/voltmxlibrary/iris/iris_api_dev_guide/content/internationalization.html).
 
 Platform Availability
 

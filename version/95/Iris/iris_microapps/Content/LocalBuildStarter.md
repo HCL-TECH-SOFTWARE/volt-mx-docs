@@ -24,7 +24,7 @@ You must sign in to using the login credentials of either your Cloud or on-premi
 
 With the Build Native local feature, the dependency on Xcode for building iOS applications and the dependency on Android SDK for building Android applications has been removed.
 
-The _publish_ process makes the built application accessible from [VoltMX Enterprise App Store](EAS.htmll#Publishing). When you build and publish a native application, it is hosted on the Enterprise App Store associated to your Cloud account and can be accessed from the server.
+The _publish_ process makes the built application accessible from [VoltMX Enterprise App Store](EAS.html#Publishing). When you build and publish a native application, it is hosted on the Enterprise App Store associated to your Cloud account and can be accessed from the server.
 
 The plugins for the native builds will be downloaded when you build the app for the first time. Hence, it may take longer to build the app for the first time. Any subsequent builds will be [incremental](#Incremen) and faster.
 
@@ -50,13 +50,13 @@ Prerequisites
 
 **Following are the prerequisites to build a native app on a local machine within** :
 
-*   Access to a Environment. You must sign in to using the login credentials of either your Cloud or on-premise environments.  If you want to use the on-premise environment, you must [configure to connect to the URL](LogInUsingCustAuth.htmll#ConfigureVoltMXFoundryInIrisEnterprise).
+*   Access to a Environment. You must sign in to using the login credentials of either your Cloud or on-premise environments.  If you want to use the on-premise environment, you must [configure to connect to the URL](LogInUsingCustAuth.html#ConfigureVoltMXFoundryInIrisEnterprise).
 *   V9 or later.
 *   For publishing to the Enterprise App Store, you must have V8 SP4 or later.
 *   Configure the various Project Settings.  
-    Go to **Project** > **Settings** and configure the build settings for each Native platform. For more information on Project Settings, click [here](Project Properties in VoltMX Iris.htmll#top).
+    Go to **Project** > **Settings** and configure the build settings for each Native platform. For more information on Project Settings, click [here](Project Properties in VoltMX Iris.html#top).
 *   Platform specific prerequisites:
-    *   If you choose to build an application for the **iOS** platform, you must provide the Development method, Development Team ID and Keychain password. To do so, go to **Project Settings** > **Native** > **iPhone/iPad**. For more details on the iOS configurations, click [here](iOS Automatic Output Generation.htmll).
+    *   If you choose to build an application for the **iOS** platform, you must provide the Development method, Development Team ID and Keychain password. To do so, go to **Project Settings** > **Native** > **iPhone/iPad**. For more details on the iOS configurations, click [here](iOS Automatic Output Generation.html).
     
     If you do not configure the project settings, the Build process generates a .kar file.
     
@@ -65,12 +65,12 @@ Prerequisites
         On Mac machines, while browsing from Iris Preferences, you can use **Command + Shift +.** to view hidden folders such as the Library, System, etc.
         
     *   If you choose to build an application for the **Android** platform in **Release mode**, then the Android signing details are mandatory. To do so, go to **Project Settings** > **Native** > **Android Mobile/Tablet**. For more details on Android signing details, click [here](https://basecamp.voltmx.com/s/article-detail/a046A00000DkadFQAR/android-signing-configuration-in-iris-playstoreenterprise-distribution).
-    *   If you choose to build an application for the **Windows** platform, you must ensure that you have [Setup the Development Environment](BuildApplicationsForWindows10.htmll#Developm) on your machine, and provide the windows application settings at ****Project Settings** > **Native** > **Windows****. For more details, click [here](Project Properties in VoltMX Iris.htmll#Windows).
-        *   A Universal Windows app can be generated through a PWA app. Hence, ensure that you provide the PWA URL in the **Project Settings** > **Native** > **[Windows](Project Properties in VoltMX Iris.htmll#Windows)** settings. In addition to the PWA URL, and the Development Environment Setup, you must also have Windows SDK version 10.0.17763.0 or later installed on your device.
+    *   If you choose to build an application for the **Windows** platform, you must ensure that you have [Setup the Development Environment](BuildApplicationsForWindows10.html#Developm) on your machine, and provide the windows application settings at ****Project Settings** > **Native** > **Windows****. For more details, click [here](Project Properties in VoltMX Iris.html#Windows).
+        *   A Universal Windows app can be generated through a PWA app. Hence, ensure that you provide the PWA URL in the **Project Settings** > **Native** > **[Windows](Project Properties in VoltMX Iris.html#Windows)** settings. In addition to the PWA URL, and the Development Environment Setup, you must also have Windows SDK version 10.0.17763.0 or later installed on your device.
     
     You can generate a binary for a Windows app only on a Windows machine.
     
-*   If you choose to build an application in **Protected mode**, then setting the public and private keys is mandatory. To do so, go to **Project Settings** > **Protected Mode**. For more details on how to generate public and private keys, click [here](ApplicationSecurity.htmll#Key).
+*   If you choose to build an application in **Protected mode**, then setting the public and private keys is mandatory. To do so, go to **Project Settings** > **Protected Mode**. For more details on how to generate public and private keys, click [here](ApplicationSecurity.html#Key).
 
 Post Build Actions
 ------------------
@@ -110,7 +110,7 @@ To publish an app to the Enterprise App Store, logging in to your Account is man
 
 You cannot build apps for the universal channel using this option.
 
-For more information on Publish to my App Store, click [here](EAS.htmll#Publishing).
+For more information on Publish to my App Store, click [here](EAS.html#Publishing).
 
 ### Run on my device
 

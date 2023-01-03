@@ -1240,7 +1240,7 @@ responsiveConfig Property
 
 This property is used to make different layouts for different breakpoints in FlexContainer widgets. You can assign the width and space between FlexContainers for each breakpoint as per your requirement.
 
-For more information about the Simple Responsive design, click [here](https://{../../../Iris/iris_user_guide/Content/SimpleResponsiveDesign.mdl).
+For more information about the Simple Responsive design, click [here](https://{../../../Iris/iris_user_guide/Content/SimpleResponsiveDesign.md).
 
 Syntax
 
@@ -1392,7 +1392,7 @@ Remarks
 
 Limitations
 
-*   When the value of _reverseLayoutDirection_ property is true, the frame values of the child widgets are calculated with respect to the [left](FlexScrollContainer_Properties.mdl#left) property of FlexContainer. The frame values given for different features of FlexContainer widget, such as animation, must reflect this change.
+*   When the value of _reverseLayoutDirection_ property is true, the frame values of the child widgets are calculated with respect to the [left](FlexScrollContainer_Properties.md#left) property of FlexContainer. The frame values given for different features of FlexContainer widget, such as animation, must reflect this change.
 
 Example
 

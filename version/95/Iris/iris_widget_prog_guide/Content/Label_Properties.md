@@ -697,7 +697,7 @@ Remarks
 
 The default value for this property is true. If set to _false_, the label is not displayed on the Form. If set to _true_, the label is displayed on the Form.
 
-This property is not applicable if the widget is placed in a [Segment](Segment.mdl). When the widget is placed in a Segment, the visibility of the widget is controlled by the [data](Segment_Properties.mdl#data) property of the segment.
+This property is not applicable if the widget is placed in a [Segment](Segment.md). When the widget is placed in a Segment, the visibility of the widget is controlled by the [data](Segment_Properties.md#data) property of the segment.
 
 Example
 
