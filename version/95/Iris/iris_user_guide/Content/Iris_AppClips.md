@@ -1,7 +1,7 @@
 ﻿
 
-Configure iOS App Clips in
-==========================
+Configuring iOS App Clips
+=======================
 
 An app clip is a lightweight part of an app that is discoverable at the moment it is needed, and lets users perform everyday tasks swiftly, without downloading and installing the app. App clips are a great way for users to quickly access and experience what your app has to offer.
 
@@ -18,7 +18,7 @@ Integrate App Clips in a Project
 
 To integrate app clips in a project, follow these steps:
 
-1.  In , create a new project to develop the app clip.
+1.  In Iris, create a new project to develop the app clip.
 2.  Create the app clip, and generate the KAR file.
 3.  During the perl extraction in the terminal, pass the KAR file of the app clip with the **\-appClip** flag along with the KAR file of the parent app as follows:  
     `perl extract.pl <path to parent KAR> --appClip <path to app clip KAR>`
