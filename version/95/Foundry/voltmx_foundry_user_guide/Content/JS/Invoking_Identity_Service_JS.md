@@ -49,7 +49,7 @@ To use User Repository as authentication service, ensure that the value for `pro
 Login with provider type as OAuth/SAML
 --------------------------------------
 
-For Foundry version V9 ServicePack 3 ](or later), the JS SDK supports [rfc7636](https://tools.ietf.org.mdl/rfc7636) for OAuth providers that use PKCE in the Authorization Code grant flow. For more information, refer to [PKCE Support in Foundry](../Identity10_VoltMX_OAuth2.mdl#PKCE).
+For Foundry version V9 ServicePack 3 ](or later), the JS SDK supports [rfc7636](https://www.rfc-editor.org/rfc/rfc7636) for OAuth providers that use PKCE in the Authorization Code grant flow. For more information, refer to [PKCE Support in Foundry](../Identity10_VoltMX_OAuth2.md#PKCE).
 
 ```
  // Sample code to authenticate to  Foundry Client
@@ -135,12 +135,12 @@ window.onload = function() {
 };
 ```
 
-For more information on deep links, click [here](http://opensource.voltmxtechsw.com/volt-mx-docs/voltmxlibrary/iris/iris_user_guide/Default.htmll).
+For more information on deep links, click [here](http://opensource.voltmxtechsw.com/volt-mx-docs/voltmxlibrary/iris/iris_user_guide/Default.html).
 
 Login with provider type as OAuth 2.0 in the same browser window
 ----------------------------------------------------------------
 
-*   For Foundry version V9 ServicePack 3 ](or later), the JS SDK supports [rfc7636](https://tools.ietf.org.mdl/rfc7636) for OAuth providers that use PKCE in the Authorization Code grant flow. For more information, refer to [PKCE Support in Foundry](../Identity10_VoltMX_OAuth2.mdl#PKCE).
+*   For Foundry version V9 ServicePack 3 ](or later), the JS SDK supports [rfc7636](https://www.rfc-editor.org/rfc/rfc7636) for OAuth providers that use PKCE in the Authorization Code grant flow. For more information, refer to [PKCE Support in Foundry](../Identity10_VoltMX_OAuth2.md#PKCE).
     
 *   Login in the same browser window is supported for Foundry versions V9 ServicePack 3 or later.
     

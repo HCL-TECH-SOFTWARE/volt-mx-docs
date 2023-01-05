@@ -27,9 +27,9 @@ Let’s take a detailed look at each workflow type.
 
 *   **Object model triggered workflow**. This type of workflow has a tight coupling to an object model and is triggered through state transitions on the linked object’s `workflowstate` field.
     
-    You can link a Workflow service with an object either while creating a workflow or through object service. It is linked to a “state” field in the object, and whenever the state field is changed with a create or update on the object ](either by using PUT or POST call, or any [custom verb](ObjectsServices/Objectservices Stage3.mdl#MappingVerbs) based on PUT/POST), the workflow is triggered. The workflow will execute all the subsequent tasks that were defined within it and completes the entire backend process that is related to the linked object. To get a quick overview of workflow, refer to [Workflow - An Overview](https://basecamp.voltmx.com/s/article-detail/a042K00001IF9eoQAD/workflow-an-overview).
+    You can link a Workflow service with an object either while creating a workflow or through object service. It is linked to a “state” field in the object, and whenever the state field is changed with a create or update on the object ](either by using PUT or POST call, or any [custom verb](ObjectsServices/Objectservices Stage3.md#MappingVerbs) based on PUT/POST), the workflow is triggered. The workflow will execute all the subsequent tasks that were defined within it and completes the entire backend process that is related to the linked object. To get a quick overview of workflow, refer to [Workflow - An Overview](https://basecamp.voltmx.com/s/article-detail/a042K00001IF9eoQAD/workflow-an-overview).
     
-*   **Event triggered workflow**: This type of workflow as the name suggests can be made to trigger by listening to Events on Foundry. You can configure Workflow service to listen to an existing Server-event Topic of integration/object service verb invocations or via custom code. An event triggered workflow is initialized through the Signal Start node, which is listening to a [Server Event](https://{../../../Foundry/voltmx_foundry_user_guide/Content/ServerEvents.mdl) that is raised on the Foundry event bus.
+*   **Event triggered workflow**: This type of workflow as the name suggests can be made to trigger by listening to Events on Foundry. You can configure Workflow service to listen to an existing Server-event Topic of integration/object service verb invocations or via custom code. An event triggered workflow is initialized through the Signal Start node, which is listening to a [Server Event](https://{../../../Foundry/voltmx_foundry_user_guide/Content/ServerEvents.md) that is raised on the Foundry event bus.
     
     **When to use event triggered workflows:**
     
@@ -91,7 +91,7 @@ Let’s take a detailed look at each workflow type.
         *   Private client response: Client-only event type allows you to raise a private event on configured Topic Name over a web socket channel associated with a specific client.
             
             Only clients subscribed to the Topic Name over a web socket channel will receive private responses to the workflow execution.  
-            For more details, refer to [Server Event APIs SDKs - VoltMX Iris](VoltMXStudio/ServerEventAPIs.mdl).
+            For more details, refer to [Server Event APIs SDKs - VoltMX Iris](VoltMXStudio/ServerEventAPIs.md).
             
         *   Each output path may have a Throw signal with output response mapper. The websocket message event will contain the output response mapped via the Throw signal mapper. However configuring a Throw signal and sending Async response to clients via websocket is optional and dependent upon the business use-case.
         
@@ -250,7 +250,7 @@ You can do the following in the **Configure New** screen:
           
         Click **Use Existing**, and from the **Existing Services** screen select the required Object service, Object, Field, and then click **Add**. The new Workflow is linked to an existing Object service.
         
-        Make sure that you designate a Field or create a new Field in the required object to store the workflow state if you want to use an existing workflow. For more information, refer to [Object Services](ObjectsServices/Stage 2.mdl#objectsdatatype).
+        Make sure that you designate a Field or create a new Field in the required object to store the workflow state if you want to use an existing workflow. For more information, refer to [Object Services](ObjectsServices/Stage 2.md#objectsdatatype).
         
 *   From the **Nodes** pane, double click on required nodes and drag and drop them on the canvas area. To know more about the activities that you need to perform for each node type, refer to [Nodes](#Nodes).
     
@@ -290,7 +290,7 @@ You can do the following in the **Configure New** screen:
         
 2.  **Create the Foundry Workflow Integration Service and operations.**
     
-    For more information on how to create operations for the Foundry Workflow Adapter, on Refer to [Foundry Workflow Adapter](FoundryWorkflowAdapter.mdl).
+    For more information on how to create operations for the Foundry Workflow Adapter, on Refer to [Foundry Workflow Adapter](FoundryWorkflowAdapter.md).
     
 
 ### Creating an Object triggered Workflow
@@ -316,7 +316,7 @@ You can do the following in the **Configure New** screen:
           
         Click **Use Existing**, and from the **Existing Services** screen select the required Object service, Object, Field, and then click **Add**. The new Workflow is linked to an existing Object service.
         
-        Make sure that you designate a Field or create a new Field in the required object to store the workflow state if you want to use an existing workflow. For more information, refer to [Object Services](ObjectsServices/Stage 2.mdl#objectsdatatype).
+        Make sure that you designate a Field or create a new Field in the required object to store the workflow state if you want to use an existing workflow. For more information, refer to [Object Services](ObjectsServices/Stage 2.md#objectsdatatype).
         
 *   From the **Nodes** pane, double click on required nodes and drag and drop them on the canvas area. To know more about the activities that you need to perform for each node type, refer to [Nodes](#Nodes).
     
@@ -396,7 +396,7 @@ The User Task’s property pane contains the following fields:
     
     ![](Resources/Images/UserTaskOP.png)
     
-    For more information on using the best practices for workflow, refer to [Workflow Best Practices](Workflow_BestPractices.mdl).
+    For more information on using the best practices for workflow, refer to [Workflow Best Practices](Workflow_BestPractices.md).
     
     Refer to [Namespaces](#Namespaces).  
     
@@ -486,7 +486,7 @@ The Start Event’s property pane contains the following fields:
         
         ![](Resources/Images/SyncStartIncomingPayload.png)
         
-        For more information on using the best practices for workflow, refer to [Workflow Best Practices](Workflow_BestPractices.mdl).
+        For more information on using the best practices for workflow, refer to [Workflow Best Practices](Workflow_BestPractices.md).
         
         Refer to [Namespaces](#Namespaces).
         
@@ -569,7 +569,7 @@ The Start Event’s property pane contains the following fields:
     
     A Correlation ID can only be set on DEVICE\_REQUEST parameters.
     
-    For more information on using the best practices for workflow, refer to [Workflow Best Practices](Workflow_BestPractices.mdl).
+    For more information on using the best practices for workflow, refer to [Workflow Best Practices](Workflow_BestPractices.md).
     
 *   **Description**: You can write description for this node.
     
@@ -622,7 +622,7 @@ Throw Signal node is used to raise (publish) Events from workflow during or at t
         
     *   **Server Broadcast** event type allows you to raise a server event (on Foundry bus) that can be listened by other Foundry services.
     *   Only clients subscribed to the Topic Name over a web socket channel will receive private responses to the workflow execution.  
-        For more details, refer to [Server Event APIs SDKs - VoltMX Iris](VoltMXStudio/ServerEventAPIs.mdl).
+        For more details, refer to [Server Event APIs SDKs - VoltMX Iris](VoltMXStudio/ServerEventAPIs.md).
         
 *   **Configure Event Payload**: You can use this mapping editor to populate data from workflow namespaces to send in outgoing Event payload.
     
@@ -736,16 +736,16 @@ FOUNDRY\_WORKFLOW\_CONTEXT.timer.timerVal \* 2
             
             The starting time of the workflow instance can be retrieved by using the expression `FOUNDRY_WORKFLOW_CONTEXT.CURRENT_INSTANCE.startTimeInMillis`. This expression stores the instance start time in Date/Timestamp format.
             
-            You can use majority of the `java.lang.System` class's useful class fields and methods in defining your expression for setting the Timer value. For more information refer to, [java.lang.System Documentation](https://docs.oracle.com/javase/7/docs/api/java/lang/System.mdl#currentTimeMillis()).
+            You can use majority of the `java.lang.System` class's useful class fields and methods in defining your expression for setting the Timer value. For more information refer to, [java.lang.System Documentation](https://docs.oracle.com/javase/7/docs/api/java/lang/System.md#currentTimeMillis()).
             
 *   **Description**: You can write the description for this node.
 
 #### Message Task
 
-A pre-requisite to send email notifications from workflow, is to configure the Email provider/ SMTP server details in Engagement console. Refer to [Email Configuration](https://{../../../Foundry/vms_console_user_guide/Content/Administration/Email_Configuration.mdl) to know more about setting Email configuration in Engagement console.
+A pre-requisite to send email notifications from workflow, is to configure the Email provider/ SMTP server details in Engagement console. Refer to [Email Configuration](https://{../../../Foundry/vms_console_user_guide/Content/Administration/Email_Configuration.md) to know more about setting Email configuration in Engagement console.
 
 If you are using on-premise Foundry setup, it is mandatory that you setup the Email configuration in Engagement before using workflow message task.  
-If you are using Foundry on cloud, setting Email configuration in Engagement is optional. By default, customers can send upto 100 mails per day through workflow message task or [Email adapter](Email_Adapter.mdl) in Foundry. If customers are not using their Email server configured through Engagement tenant level settings, the default sender id for notifications would be noreply@<tenanthostname>.messaging.voltmxcloud.com .  
+If you are using Foundry on cloud, setting Email configuration in Engagement is optional. By default, customers can send upto 100 mails per day through workflow message task or [Email adapter](Email_Adapter.md) in Foundry. If customers are not using their Email server configured through Engagement tenant level settings, the default sender id for notifications would be noreply@<tenanthostname>.messaging.voltmxcloud.com .  
 It is recommended to set up in Email configuration in the Engagement console to have following benefits:
 
 *   To have a sender Id that is based on your organization’s email domain.
@@ -962,7 +962,7 @@ For more details, refer to [Advanced Configuration > Enable Looping](#EnableLoop
 ``` |
         
 
-For more information on using the best practices for workflow, refer to [Workflow Best Practices](Workflow_BestPractices.mdl).  
+For more information on using the best practices for workflow, refer to [Workflow Best Practices](Workflow_BestPractices.md).  
 
 Advanced Configurations - Workflow
 ----------------------------------
@@ -1116,12 +1116,12 @@ You can manage the details of a service from the Contextual menu available adjac
         
     
 
-*   **Console Access Control** – You can manage the users who can access this service from here. To know more, refer to [Console Access Control](ConsoleAccessControl.mdl).
+*   **Console Access Control** – You can manage the users who can access this service from here. To know more, refer to [Console Access Control](ConsoleAccessControl.md).
 *   **Export as XML** - Exports the current version of a service in the form of an XML file.
-*   **Export** – Exports the service details in the form of a zip file. You can import this zip file to another Foundry app and use it. For more information, refer to [Export and Import an Application](Export-Import Apps.mdl).
+*   **Export** – Exports the service details in the form of a zip file. You can import this zip file to another Foundry app and use it. For more information, refer to [Export and Import an Application](Export-Import Apps.md).
 
-To view the Usecase related to Object Triggered Workflow and the implementation of the Usecase, refer to [Object Triggered Workflow Implementation](Workflow Implementation.mdl).
+To view the Usecase related to Object Triggered Workflow and the implementation of the Usecase, refer to [Object Triggered Workflow Implementation](Workflow Implementation.md).
 
-To view the Usecase related to Event Triggeed Workflow and the implementation of the Usecase, refer to [Event Triggered Workflow Implementation](EventsWorkflowImplementation.mdl).
+To view the Usecase related to Event Triggeed Workflow and the implementation of the Usecase, refer to [Event Triggered Workflow Implementation](EventsWorkflowImplementation.md).
 
-To view the execution status of a workflow service by using App Services Console, refer to [App Services Console > Workflow Services](https://{../../../Foundry/vmf_integrationservice_admin_console_userguide/Content/Workflow.mdl) section.
+To view the execution status of a workflow service by using App Services Console, refer to [App Services Console > Workflow Services](https://{../../../Foundry/vmf_integrationservice_admin_console_userguide/Content/Workflow.md) section.

@@ -47,7 +47,7 @@ Remarks
 
 The default value for this property is TEXTAREA\_AUTO\_CAPITALIZE\_NONE.
 
-For Desktop Web platform, autoCapitalize property is not supported, use the events [onBeginEditing, onEndEditing, onKeyUp, and onKeyDown, and onDone](TextArea_Events.mdl) as necessary.
+For Desktop Web platform, autoCapitalize property is not supported, use the events [onBeginEditing, onEndEditing, onKeyUp, and onKeyDown, and onDone](TextArea_Events.md) as necessary.
 
 Following are the options available:
 
@@ -950,7 +950,7 @@ This property, allows you to specify the type of accessory view that will be sho
 
 For iOS, a header with 'Prev' and Next' buttons is added to the keypad by default. You can turn off this header at three levels: application-level, form-level, and widget-level.
 
-To know more about how to set inputAccessoryViewType property at application-level and form-level, you can refer the [inputAccessoryViewType](FlexForm_Properties.mdl#inputAcc) property under Flexform widget.
+To know more about how to set inputAccessoryViewType property at application-level and form-level, you can refer the [inputAccessoryViewType](FlexForm_Properties.md#inputAcc) property under Flexform widget.
 
 To turn on/off the header at widget-level, assign any of the following constants to inputAccessoryViewType property. You must specify each constant with the ‘constants.xx’ prefix.
 
@@ -1327,7 +1327,7 @@ You can use this property to select the type of keyboard that you want to displa
 
 Keys on the keyboard style may vary from platform to platform.
 
-On Desktop Web platform, `keyBoardStyle` property is not supported, use the events [onBeginEditing](TextArea_Events.mdl#onBeginE), [onEndEditing](TextArea_Events.mdl#onEndEdi), [onKeyUp](TextArea_Events.mdl#onKeyUp), [onKeyDown](TextArea_Events.mdl#onKeyDow), and [onDone](TextArea_Events.mdl#onDone) as necessary.
+On Desktop Web platform, `keyBoardStyle` property is not supported, use the events [onBeginEditing](TextArea_Events.md#onBeginE), [onEndEditing](TextArea_Events.md#onEndEdi), [onKeyUp](TextArea_Events.md#onKeyUp), [onKeyDown](TextArea_Events.md#onKeyDow), and [onDone](TextArea_Events.md#onDone) as necessary.
 
 iPad device does not support constants.TEXTAREA\_KEY\_BOARD\_STYLE\_DECIMAL.
 
@@ -2354,9 +2354,9 @@ String
 
 From V9 SP1 onwards, when you enable the [isSensitiveText](#isSensitiveText) property,
 
-1.  In Android platform, the text property returns an instance of the [RawBytes](https://{../../../Iris/iris_api_dev_guide/Content/voltmx.types_Objects_RawBytes.mdl) object. Then you can use the [readAsText](https://{../../../Iris/iris_api_dev_guide/Content/voltmx.io.file_functions.mdl#readAsText) API on the RawBytes object to retrieve the actual string in JavaScript to process the string. However, ensure that you set the JavaScript variable as null after the string operations are done.
+1.  In Android platform, the text property returns an instance of the [RawBytes](https://{../../../Iris/iris_api_dev_guide/Content/voltmx.types_Objects_RawBytes.md) object. Then you can use the [readAsText](https://{../../../Iris/iris_api_dev_guide/Content/voltmx.io.file_functions.md#readAsText) API on the RawBytes object to retrieve the actual string in JavaScript to process the string. However, ensure that you set the JavaScript variable as null after the string operations are done.
 2.  You must set the JavaScript text references to null after the text is no longer required. This will enable the Garbage Collection to delete the text references from the memory. This is valid for all platforms.
-3.  In Android platform, you must also use the [clear](https://{../../../Iris/iris_api_dev_guide/Content/voltmx.types_Objects_RawBytes.mdl#clear) API of the Rawbytes object, to clear the text reference in the Native Android RawBytes object
+3.  In Android platform, you must also use the [clear](https://{../../../Iris/iris_api_dev_guide/Content/voltmx.types_Objects_RawBytes.md#clear) API of the Rawbytes object, to clear the text reference in the Native Android RawBytes object
 
 Read/ Write
 

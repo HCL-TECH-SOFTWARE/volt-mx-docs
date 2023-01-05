@@ -22,7 +22,7 @@ The publish process occurs in the background, and you can continue to use the Ir
 
 Access to the Published URL within
 
-Once the publish is complete, the published URL is displayed on the Build tab in . When you click the URL, the Iris Preview window opens. For more information on the Iris Preview window, click [here](LivePreview.htmll).
+Once the publish is complete, the published URL is displayed on the Build tab in . When you click the URL, the Iris Preview window opens. For more information on the Iris Preview window, click [here](LivePreview.html).
 
 You can also click on **Copy** beside the URL to copy it and view the app in a web browser of your choice.
 
@@ -42,7 +42,7 @@ If you try to publish the app, even when you do not have an associated app, you 
 
 ![](Resources/Images/LinkFoundry.png)
 
-To change the selected Cloud account or Environment, go to **Project Settings** > . hen, click the tab. At the top of this tab, under Environment, select an environment from the drop-down list. Click **Done**. If you do not see any environments listed, you need to create one. For more information, refer [Environments](http://opensource.voltmxtechsw.com/volt-mx-docs/voltmxlibrary/voltmxfoundry/voltmx_foundry_user_guide/Default.htmll#Environments.htmll) in the Console User Guide.
+To change the selected Cloud account or Environment, go to **Project Settings** > . hen, click the tab. At the top of this tab, under Environment, select an environment from the drop-down list. Click **Done**. If you do not see any environments listed, you need to create one. For more information, refer [Environments](../../../Foundry/voltmx_foundry_user_guide/Content/Environments.md) in the Console User Guide.
 
 To publish the web app to , the app needs to be associated with a app.
 
@@ -50,7 +50,7 @@ If no Foundry App is associated to your Iris project, an error message is displa
 
 ![](Resources/Images/NoFoundryAppLink.png)
 
-You must either create a new app or use an existing one. For information on how to create a new app, see [How to Add Applications](http://opensource.voltmxtechsw.com/volt-mx-docs/voltmxlibrary/voltmxfoundry/voltmx_foundry_user_guide/Content/Adding_Applications.htmll) in the Console User Guide.
+You must either create a new app or use an existing one. For information on how to create a new app, see [How to Add Applications](http://opensource.voltmxtechsw.com/volt-mx-docs/voltmxlibrary/voltmxfoundry/voltmx_foundry_user_guide/Content/Adding_Applications.html) in the Console User Guide.
 
 Post Build Actions
 ------------------
@@ -81,7 +81,7 @@ To publish an app to the Enterprise App Store, logging in to your Account is man
 
 ![](Resources/Images/PublishEAS.png)
 
-For more information on Publish to my App Store, click [here](EAS.htmll#Publishing).
+For more information on Publish to my App Store, click [here](EAS.html#Publishing).
 
 ### Generate Web App
 
@@ -128,7 +128,7 @@ Before you publish a web app, ensure that you have a project in which you have a
 *   Once all the required settings are ready, click **Build**.  
     The progress of the Web App Publish is displayed in the Build tab of Iris.  
     Once the publish process is complete, a Web App URL appears on the Build tab.
-*   Click on the generated URL to preview your Web app in the [**Live Preview** mode](LivePreview.htmll#Live_Preview).  
+*   Click on the generated URL to preview your Web app in the [**Live Preview** mode](LivePreview.html#Live_Preview).  
     The Iris Preview window appears. You can use this window to debug the application.
 *   You can also click on **Copy** to copy the URL to your clipboard and view it in a web browser of your choice.  
     ![](Resources/Images/WebPublishURL.png)

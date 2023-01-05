@@ -929,7 +929,7 @@ Read Only after initialization.
 
 Remarks
 
-If the `isMaster` property is true, the current widget is a master container and all of the rules and limitations of master containers apply to it. For more information, please see [Masters](Masters.mdl) in the Overviews section of this guide, as well as [Using Masters](http://opensource.voltmxtechsw.com/volt-mx-docs/voltmxlibrary/iris/iris_user_guide/Default.htmll#Masters.mdl?Highlight=Masters) in the [Iris User Guide](http://opensource.voltmxtechsw.com/volt-mx-docs/voltmxlibrary/iris/iris_user_guide/Default.htmll).
+If the `isMaster` property is true, the current widget is a master container and all of the rules and limitations of master containers apply to it. For more information, please see [Masters](Masters.md) in the Overviews section of this guide.
 
 Your app can set the `isMaster` property in this container's constructor. After that, this property is read-only.
 
@@ -1240,7 +1240,7 @@ responsiveConfig Property
 
 This property is used to make different layouts for different breakpoints in FlexContainer widgets. You can assign the width and space between FlexContainers for each breakpoint as per your requirement.
 
-For more information about the Simple Responsive design, click [here](https://{../../../Iris/iris_user_guide/Content/SimpleResponsiveDesign.mdl).
+For more information about the Simple Responsive design, click [here](https://{../../../Iris/iris_user_guide/Content/SimpleResponsiveDesign.md).
 
 Syntax
 
@@ -1392,7 +1392,7 @@ Remarks
 
 Limitations
 
-*   When the value of _reverseLayoutDirection_ property is true, the frame values of the child widgets are calculated with respect to the [left](FlexScrollContainer_Properties.mdl#left) property of FlexContainer. The frame values given for different features of FlexContainer widget, such as animation, must reflect this change.
+*   When the value of _reverseLayoutDirection_ property is true, the frame values of the child widgets are calculated with respect to the [left](FlexScrollContainer_Properties.md#left) property of FlexContainer. The frame values given for different features of FlexContainer widget, such as animation, must reflect this change.
 
 Example
 
