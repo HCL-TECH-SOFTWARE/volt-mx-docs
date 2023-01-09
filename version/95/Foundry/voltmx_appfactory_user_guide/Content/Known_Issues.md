@@ -11,7 +11,7 @@ Known Issues
 *   Upgrading an older project that contains Foundry jobs to V9 ServicePack 1 causes duplication of the Foundry jobs in the **Foundry** and **FoundryTasks** sub-folders of the project.  
     To use features of Foundry V9 ServicePack 1, HCL recommends that you create a new project for Foundry jobs. For more information, refer to [Create a New App Factory Project](Setup.md).
 
-*   Prior to 9.5 release, for the upgrade process, the credentials created by the user that was saved in master instance will be retained post upgrade. But to upgrade to App Factory 9.5, due to infrastructure changes, the master instance will also be upgraded to the latest where the existing Apple Certs may not work and would recommend the user to recreate Apple certificates.
+*   After upgrade from App Factory 9.2 to 9.5 release, you need to manually recreate Apple Certificates.
 
 
 Limitations
