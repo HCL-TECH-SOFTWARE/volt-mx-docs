@@ -116,14 +116,7 @@ To generate, encrypt, and use the RSA key pair, follow these steps: 
     a.  Your private key. The private key must be named as `private_key.pem`.
     
     b.  Encrypted public keys provided by Volt MX Iris.
-        
-    > **_Note:_**  Once you have updated your Iris version to V8 SP3 or later, you can delete the `fin` keys folder from your **\_\_encryptionkeys** folder.
-        
-    c. For iOS, the `fin` keys provided by Volt MX Iris. These keys are provided to protect iOS applications. `fin` keys are applicable until the Volt MX Iris V8 SP2 version.
-    
-
-    ![](Resources/Images/FinKeys1_696x388.png)
-    
+                   
 
 ### Configure Project Settings in Volt MX Iris
 
