@@ -114,10 +114,6 @@ mf.appname =
 mf.app.version=
 upLoadBinary =
 
-#web.binary.upload = true by default. Set to false to stop web binary upload to Foundry.
-
-web.binary.upload = false
-
 #Specify the environment you want to publish Ex:qa,dev,stg
 cloud.environment=q
 
@@ -318,8 +314,7 @@ voltmxfoundry.url=https://mbaastest25.hcl.net:443
 environment.name=
 
 #web.binary.upload = true by default. Set to false to stop web binary upload to Foundry.
-
-web.binary.upload = false
+web.binary.upload = True
 
 ```
 
