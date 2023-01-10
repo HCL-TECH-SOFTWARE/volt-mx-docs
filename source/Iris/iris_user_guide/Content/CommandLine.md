@@ -314,7 +314,7 @@ voltmxfoundry.url=https://mbaastest25.hcl.net:443
 environment.name=
 
 #web.binary.upload = true by default. Set to false to stop web binary upload to Foundry.
-web.binary.upload = True
+web.binary.upload = true
 
 ```
 
