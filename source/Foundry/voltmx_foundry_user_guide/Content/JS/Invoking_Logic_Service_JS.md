@@ -11,12 +11,12 @@ The getLogicService API creates an instance of logic service that is configured 
 var serviceName = "logic_service_name";
 
 //Get an instance of the SDK
-var client = Volt MX.sdk.getCurrentInstance();
+var client = voltmx.sdk.getCurrentInstance();
 var logicSvc = client.getLogicService(serviceName);
-Volt MX.print("Response is :" + logicSvc.getLogicServiceUrl());
+voltmx.print("Response is :" + logicSvc.getLogicServiceUrl());
 
 //Configure the arguments
-var path = "path_defined_on_Volt MX Foundry";  
+var path = "path_defined_on_voltmx Foundry";  
 var HttpMethodType = "POST"; //Supported methods: "POST", "PUT", "GET", "DELETE"
 var params =
 {
@@ -31,10 +31,10 @@ var headers =
 //Invoke the operation
 logicSvc.invokeOperation(serviceName, path, HttpMethodType, headers, params, function(response)
 {
-	Volt MX.print("Successfully fetched logic service: " + JSON.stringify(response));
+	voltmx.print("Successfully fetched logic service: " + JSON.stringify(response));
 }, function(error)
 {
-	Volt MX.print("error occurred in fetching logic service: " + JSON.stringify(error));
+	voltmx.print("error occurred in fetching logic service: " + JSON.stringify(error));
 });
 
 ```
