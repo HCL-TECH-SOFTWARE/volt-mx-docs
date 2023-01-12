@@ -23,6 +23,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 [Volt Foundry](#volt-foundry)
 
 
+- [V9 Servicepack 5 Fixpack 1 Hotfix 0](#v9-servicepack-5-fixpack-1-hotfix-0)
 - [V9 Servicepack 5](#v9-servicepack-5)
 - [V9 Servicepack 2 Fixpack 1 Hotfix 13](#v9-servicepack-2-fixpack-1-hotfix-13)
 - [V9 Servicepack 2 Fixpack 1 Hotfix 11](#v9-servicepack-2-fixpack-1-hotfix-11)
@@ -581,6 +582,14 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 -->
 
 ## Volt Foundry
+
+
+### V9 Servicepack 5 Fixpack 1 Hotfix 0
+
+January 17, 2023
+
+There are no new features or enhancements in this release.
+For relevant Support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 ### V9 Servicepack 5
 
