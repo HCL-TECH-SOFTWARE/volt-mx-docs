@@ -32,7 +32,7 @@ Most of the effort in preparing a headless build involves configuring these file
 
 - **Mode 0** - The application is built, and all the binaries are generated.
 - **Mode 1** - The application is published on Volt MX Foundry.
-- **Mode 2** - Through this combination of modes 0 and 1, the application is built and published on the Volt MX Foundry.
+- **Mode 2** - Application will be built for selected build platforms and Foundry app publish will be performed, Binary upload conditional on "web.binary.upload" flag".
 - **Mode 3** - This mode generates a web archive file that is combined with the Volt MX Foundry archive and also generates either a `.war` or `.ear` file, depending on what you specify. You must manually deploy the app on the server, or use a separate script.
 - **Mode 4.** A combination of modes 0 and 3. The application is built and a web archive file that is combined with the Volt MX Foundry archive also is generated, along with either a `.war` or `.ear` file, depending on what you specify. You must manually deploy the app on the server, or use a separate script.
 
@@ -72,14 +72,14 @@ Following is an example of sections that are present in the `HeadlessBuild.prope
 ```
 #Note: Please escape '\' with '\\' in all file paths#
 #This file represents the Application level properties used by headless build.
-project.name=app1
+project.name=CIBuildProject
 
-#mode 0-Build; 1-Publish; 2-Build & Publish; 3-Combine Web Application+VoltMX Server Archive; 4-Build & Combine Web Application+VoltMX Server Archive;
+#mode 0-Build; 1-Publish; 2-Build & Publish; 3-Combine Web Application+Kony Server Archive; 4-Build & Combine Web Application+Kony Server Archive;
 #mode-0: Application will be built for the selected build platforms
-#mode-1: Based on publish.web, publish.service properties, app will be published & services will be published
-#mode-2: Application will be built for selected build platforms and publish will be performed.
-#mode-3: Combines web archive of app & voltmx server archive and generates combined war/ear file
-#mode-4: Application will be built & Generated web archive will be combined with Volt MX server archive and final war/ear will be generated
+#mode-1: Foundry app will be published along with services and web archive.
+#mode-2: Application will be built for selected build platforms Foundry app publish will be performed, Binary upload conditional on "web.binary.upload" flag
+#mode-3: Combines web archive of app & kony server archive and generates combined war/ear file
+#mode-4: Application will be built & Generated web archive will be combined with Kony server archive and final war/ear will be generated
 mode=0
 
 #build mode [release | debug]
@@ -93,40 +93,59 @@ map_google_key=
 default_locale=
 #The android packagename can follow the pattern com.<orgname>.<appid>
 android.packagename=com.orgname.app1
+android.versioncode=1
 
-#Cloud Mode credentials (Applicable only for cloud)
+ios.bundleversion=1.0
+
+#Foundry credentials, applicable for on-premise/cloud Foundry
 cloud.username=
 cloud.password=
 
-#Provide Volt MX Foundry specific details
-voltmxfoundry.url=
+#Foundry claims token if not providing user credentials, user can pass the token for authentication.
+fabric.token=
 
-#Environment.Name used for publishing example using the format LocalDevEnv  
-#For example, if your Volt MX Foundry Environment URL is:  
-#https://mycompany.voltmxcloud.com  
-#then the value is as follows: environment.name=mycompany
-environment.name=  
-account.id=  
-mf.appname=
+#Provide mobilefabric specific details 
+mobilefabric.url=
 
+#These are required if your application is using services and needs Foundry integration.
+environment.name=
+account.id =
+mf.appname =
+mf.app.version=
+upLoadBinary =
+
+#Specify the environment you want to publish Ex:qa,dev,stg
+cloud.environment=q
+
+#Specify the web binary extension to upload into cloud
+#possible values war, zip. Note zip can only be published to runtime version 8.2 and above. 
+web.binary.extension = 
+#web.binary.upload = true by default. Set to false to stop web binary upload to Foundry.
+web.binary.upload = true
 #Specify the platforms for which the headless build needs to run.
 #Mobile Channel.
 iphone=false
 android=false
+androidwearos=false
+windowsphone81s=false
+windowsphone10=false
 
 spa.iphone=false
 spa.android=false
+spa.winphone=false
 
 #Tablet Channel.
 ipad=false
 androidtablet=false
 
-#Selecting Windows10 will also trigger builds for X86,X64,ARM architectures.
+#Selecting Windows8.1 or Windows10 will also trigger builds for X86,X64,ARM architectures.
+windows8.1=false
 windows10=false
 
 spa.ipad=false
 spa.androidtablet=false
 spa.windowstablet=false
+
 
 #Desktop Channel.
 desktop_kiosk=false
@@ -156,34 +175,33 @@ mac.ipaddress=
 mac.username=
 mac.password=
 
-keychain.password=  
-#Possible values for method are "app-store", "ad-hoc", "enterprise", "development"
-method=  
-#Examples for development.team are "G9B5P7QDV2", "PM7453S8QE"  
-development.team=  
+ 
+ 
+keychain.password=
+development.team.id=
+#Possible value  Ex:  method= "app-store","package","ad-hoc","enterprise","development","developer-id"
+method=
+
+
 #Possible values are true/false
 genipaiphone=false
 genipaipad=false
 
-#middleware server properties
-middleware_server_ip=192.168.251.1
-middleware_http_port=80
-middleware_https_port=443
-#used in cloud mode
-cloud.middleware.url=
 
-middleware_web_context=middleware
-mobileweb_web_context=app1
+#iOS push certificate type. Possible values are none, development, production
+pushcertificatetype=
 
-#To build binaries with protected mode enabled.  
-protectedmodeenabled.ios=true  
-protectedmodeenabled.android=true  
-protectedmodeenabled.web=true  
 #If not specified, by default final binaries will be copied to 'binaries' folder inside project
 binaries.location=
 
-#Combine Web Application+VoltMX Server Archive. Applicable for mode = 3 or 4 #
-#Full path of middleware archive (war/ear).If project has Volt MX session Manager,
+#Specify to skip porting of project
+skip.porting=
+
+#Stub the print statements in custom modules during release build (Recommended setting for production release)
+stub.kony.print=true
+
+#Combine Web Application+Kony Server Archive. Applicable for mode = 3 or 4 #
+#Full path of middleware archive (war/ear).If project has Kony session Manager, 
 #provide with-cache archive, for Http session Manager, provide without-cache archive.
 combinewar.middlewarearchive=
 combinewar.context=
@@ -192,15 +210,67 @@ combinewar.war=false
 combinewar.ear=false
 #Provide full path of dependant libraries,Separate with semicolon(;) if there are multiple libraries
 combinewar.dependencylibraries=
+ 
 
-#Supported context paths for Volt MX Foundry components, if customized.  
-context.path.identity
-context.path.workspace
-context.path.accounts  
-context.path.console
+#Specify contexts for Foundry components
+context.path.identity=
+context.path.workspace=
+context.path.accounts=
+context.path.console=
 
-#Siteminder login URL if your on-premise Volt MX Foundry is protected by siteminder.  
-login.siteminder.url
+#To build binaries with protected mode enabled.
+protectedmodeenabled.ios=false
+protectedmodeenabled.android=false
+
+#Siteminder login url if Foundry instance is protected by SiteMinder
+login.siteminder.url=
+
+#Android Signing Keys
+keyAlias=
+keyPassword=
+keyStoreFilePath=
+keyStorePassword=
+
+#Test Automation Server URL
+test.automation.server.url=
+
+#Set the value to true to fetch automation scripts from local device storage
+test.automation.storage.local=
+
+#properties for doing Web Protected build.
+#This feature only supports web platforms
+
+#Set the value to true to enable Web obfuscation
+protectedmodeenabled.web=false
+
+#Provide Absolute path of securejs properties file
+web.protection.properties=
+
+#Provide Absolute path of web encryption directory
+web.encryption.dirs=
+
+#Provide Web Protection Configuration Options: BASIC,MODERATE
+web.protection.preset=BASIC
+
+#Provide Absolute path of custom protection blueprint json file
+web.protection.custom.blueprint=
+
+#Provide Absolute path of excludelist.txt file
+web.protection.excludelist=
+
+#used for CI App Factory
+plugin.dir=
+javaloc=
+androidHome=
+proxy.host=
+proxy.port=
+proxy.username=
+proxy.password=
+proxy.bypass.list=
+proxy.scheme=
+
+#Configure path to Python installation. Applicable for Mac Monterey version >= 12.3.
+PYTHON_HOME=
 
 ```
 
@@ -243,9 +313,13 @@ voltmxfoundry.url=https://mbaastest25.hcl.net:443
 #then the value is as follows: environment.name=mycompany
 environment.name=
 
+#web.binary.upload = true by default. Set to false to stop web binary upload to Foundry.
+web.binary.upload = true
+
+
 ```
 
-<h6>Mode 3 Properties</h6>
+###### Mode 3 Properties
 <p>In mode 3, Volt MX Iris combines the web archive and the Volt MX Foundry archive which presumes the web archive is already built and generates a combined war/ear file. If the application is not built or the web archive is not available, then Volt MX Iris displays an error. To configure <code>HeadlessBuild.properties</code> for mode 3, in addition to setting <code>mode=3</code>, the following properties must be set:</p>
 <pre><code style="display:block;background-color:#eee;"><p>Full path of middleware archive (war/ear). If project has Volt MX session Manager, provide with-cache archive, for Http session Manager, provide without-cache</p>
 <p>archive.combinewar.middlewarearchive= &lt;Path to middleware archive (war/ear, based on whether combinewar.ear / combinewar.war properties)&gt;<br/>combinewar.context= &lt;Provide context name with which final war/ear will be generated.&gt;</p>

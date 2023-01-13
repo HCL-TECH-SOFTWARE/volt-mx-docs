@@ -23,7 +23,7 @@ During the installation you would be prompted to choose between the installation
 *   When you select a Non-Production instance, every time you run it to setup another environment such as qa, uat, etc., only the Integration (INT) cluster gets created again, while the rest of the Foundry components are shared for all the Non-Production instances within the subscription.
 *   When you select a Production instance, each installation is treated as a fresh installation where both the Shared cluster and the Integration cluster will be created again.
 
-In case of a Non-Production setup the information about the shared resources which are required for installing the new environments is stored as [installation metadata](Frequently Asked Questions (FAQs).md#Installa) in Azure Cosmos DB and Azure Key Vault.
+In case of a Non-Production setup the information about the shared resources which are required for installing the new environments is stored as [installation metadata](Frequently_Asked_Questions__FAQs_.md#Installa) in Azure Cosmos DB and Azure Key Vault.
 
 Salient Features
 

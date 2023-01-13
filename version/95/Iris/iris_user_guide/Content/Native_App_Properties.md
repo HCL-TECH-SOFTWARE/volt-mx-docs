@@ -587,3 +587,94 @@ To configure the threshold value that identifies a device as a Tablet, add the f
 The default value for the **tabletBreakPointInInches** key is 6 inches.
 
 > **_Note:_** This feature is available from the Volt MX Iris V9 ServicePack2 Fixpack 7 release.
+
+#### Support for splashOrientationClassifier Property
+
+The **splashOrientationClassifier** property is a sub-level property of the **Splash Screen Orientation Mode** (specified in the **Project Settings > Android** section) that provides screen orientation modes at a granular-level for a particular Splash Screen Orientation mode.
+
+You can specify the **splashOrientationClassifier property** in the **androidbuild.properties** file as follows:
+
+```
+splashOrientationClassifier =  "SCREEN_ORIENTATION_USER_LANDSCAPE";
+```
+Based on the value of the Splash Screen Orientation Mode property, the values of the splashOrientationClassifier property are as follows:
+
+
+<table>
+    <colgroup><col style="width: 35%;" class="TableStyle-TemenosTables-Column-Column1">
+    
+    <col style="width: 70%;" class="TableStyle-TemenosTables-Column-Column1">
+    
+    </colgroup><thead>
+        <tr class="TableStyle-TemenosTables-Head-Header1" data-mc-conditions="">
+            <th class="TableStyle-TemenosTables-HeadE-Column1-Header1" style="text-align: center;" data-mc-conditions="Default.V9SP3" scope="col" valign="middle"><b>Splash Screen Orientation Mode</b>
+            </th>
+            <th class="TableStyle-TemenosTables-HeadD-Column1-Header1" style="text-align: center;" data-mc-conditions="Default.V9SP3" scope="col" valign="middle"><b>splashOrientationClassifier</b>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="TableStyle-TemenosTables-Body-Body1" style="height: 56px;" data-mc-conditions="">
+            <td class="TableStyle-TemenosTables-BodyE-Column1-Body1" data-mc-conditions="Default.V9SP3">landscape</td>
+            <td class="TableStyle-TemenosTables-BodyD-Column1-Body1">
+                <p data-mc-conditions="Default.V9SP3">SCREEN_ORIENTATION_LANDSCAPE</p>
+                <p data-mc-conditions="Default.V9SP3">SCREEN_ORIENTATION_REVERSE_LANDSCAPE</p>
+                <p data-mc-conditions="Default.V9SP3">SCREEN_ORIENTATION_SENSOR_LANDSCAPE</p>
+                <p data-mc-conditions="Default.V9SP3">SCREEN_ORIENTATION_USER_LANDSCAPE</p>
+            </td>
+        </tr>
+        <tr class="TableStyle-TemenosTables-Body-Body1" style="height: 56px;" data-mc-conditions="">
+            <td class="TableStyle-TemenosTables-BodyE-Column1-Body1" data-mc-conditions="Default.V9SP3">portrait</td>
+            <td class="TableStyle-TemenosTables-BodyD-Column1-Body1">
+                <p data-mc-conditions="Default.V9SP3">SCREEN_ORIENTATION_PORTRAIT</p>
+                <p data-mc-conditions="Default.V9SP3">SCREEN_ORIENTATION_REVERSE_PORTRAIT</p>
+                <p data-mc-conditions="Default.V9SP3">SCREEN_ORIENTATION_SENSOR_PORTRAIT</p>
+                <p data-mc-conditions="Default.V9SP3">SCREEN_ORIENTATION_USER_PORTRAIT</p>
+            </td>
+        </tr>
+        <tr class="TableStyle-TemenosTables-Body-Body1" style="height: 56px;" data-mc-conditions="">
+            <td class="TableStyle-TemenosTables-BodyE-Column1-Body1" data-mc-conditions="Default.V9SP3">Device Default</td>
+            <td class="TableStyle-TemenosTables-BodyD-Column1-Body1">
+                <p data-mc-conditions="Default.V9SP3">SCREEN_ORIENTATION_UNSPECIFIED</p>
+                <p data-mc-conditions="Default.V9SP3">SCREEN_ORIENTATION_FULL_SENSOR</p>
+                <p data-mc-conditions="Default.V9SP3">SCREEN_ORIENTATION_SENSOR</p>
+            </td>
+        </tr>
+        <tr class="TableStyle-TemenosTables-Body-Body1" style="height: 56px;" data-mc-conditions="">
+            <td class="TableStyle-TemenosTables-BodyB-Column1-Body1" data-mc-conditions="Default.V9SP3">Both</td>
+            <td class="TableStyle-TemenosTables-BodyA-Column1-Body1">
+                <p data-mc-conditions="Default.V9SP3">SCREEN_ORIENTATION_BEHIND</p>
+                <p data-mc-conditions="Default.V9SP3">SCREEN_ORIENTATION_FULL_USER</p>
+                <p data-mc-conditions="Default.V9SP3">SCREEN_ORIENTATION_LOCKED</p>
+                <p data-mc-conditions="Default.V9SP3">SCREEN_ORIENTATION_NOSENSOR</p>
+                <p data-mc-conditions="Default.V9SP3">SCREEN_ORIENTATION_USER</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+> **_Note:_** The value of the splashOrientationClassifier property is only respected when you provide a valid value corresponding to a particular Splash Screen Orientation Mode (as specified in the table). For example, if you are using the portrait Splash Screen Orientation Mode, you can only provide a value for the splashOrientationClassifier property from the following:
+
+*   SCREEN_ORIENTATION_PORTRAIT
+*   SCREEN_ORIENTATION_REVERSE_PORTRAIT
+*   SCREEN_ORIENTATION_SENSOR_PORTRAIT
+*   SCREEN_ORIENTATION_USER_PORTRAIT
+
+<!--
+For more information on the values of the splashOrientationClassifier property, refer Android Screen Orientation Values.
+-->
+
+#### Enable Support for SMS Retriever
+
+By using the SMS Retriever, you can implement SMS-based user verification in an app without requesting users to manually type verification codes, and without requesting for any additional app permissions.
+
+
+To enable support for SMS Retriever, add the **addSMSRetrieverSupport** key in the androidbuild.properties file:
+
+```
+addSMSRetrieverSupport = <UI or Non-UI>
+```
+
+Set the value of the addSMSRetrieverSupport key to **UI** or **Non-UI** to fetch the required Gradle entries.
+
+For more information on the SMS Retriever API, refer [voltmx.phone.retrieveSMS API](../../iris_api_dev_guide/content/voltmx.phone_functions.html).
