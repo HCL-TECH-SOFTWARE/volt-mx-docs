@@ -1005,7 +1005,7 @@ Follow these steps to generate the Page Object Model Files for a specific channe
 
 
 
-    ![](Resources/Images/Jasmine03.png)
+    ![](Resources/Images/jasmine03.png)
 
 
 
@@ -1031,7 +1031,7 @@ Volt MX Iris generates the POM files, and the files appear in the Test Resources
 
 
 
-    ![](Resources/Images/Jasmine04.png)
+    ![](Resources/Images/jasmine04.png)
 
 
 
@@ -1051,14 +1051,14 @@ Follow these steps to regenerate the Page Object Model Files:
 
 4.  From the context menu that appears, select Re-Generate.
 
-    ![](Resources/Images/Jasmine05.png)
+    ![](Resources/Images/jasmine05.png)
 
 
 
 Volt MX Iris regenerates the specified Page Object Model file, and the updated POM file appears in the Test Resources > Jasmine > <Channel> (Mobile, Tablet, Responsive Web, or Common)> Page Object Models section of the Project Explorer.
 
 > **_Note:_** You can also regenerate the Page Object Model files for the complete project. To do so, navigate to the Project Explorer > Test Resources section, right-click Jasmine, and then select Generate POM Files. In the Regenerating POM Files dialog box that appears, click Yes to regenerate and overwrite the existing POM files.  
-> ![](Resources/Images/Jasmine07.png)
+> ![](Resources/Images/jasmine07.png)
 
 ### Deploy Page Object Model Files
 
@@ -1077,7 +1077,7 @@ After deploying the Page Object Model files, you can use the voltmx.automation.p
  3. From the context menu that appears, select Deploy POM Files.  
 
 
-    ![](Resources/Images/Jasmine08.png)
+    ![](Resources/Images/jasmine08.png)
 
 
  Volt MX Iris deploys the POM files, and a deployment success message appears in the Console.
@@ -1096,7 +1096,7 @@ After deploying the Page Object Model files, you can use the voltmx.automation.p
 
 * In an app that uses the Micro App Architecture, you can only deploy the Page Object Model files at the Composite App-level (the Deploy option is disabled at the Micro App level).
 
-    ![](Resources/Images/Jasmine09.png)  
+    ![](Resources/Images/jasmine09.png)  
     
 
 However, if you have already generated the Page Object Model files for the linked Micro Apps, those files are deployed as part of the Deployment process of the Composite App.
