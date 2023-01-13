@@ -318,7 +318,7 @@ web.binary.upload = true
 
 ```
 
-<h6>Mode 3 Properties</h6>
+###### Mode 3 Properties
 <p>In mode 3, Volt MX Iris combines the web archive and the Volt MX Foundry archive which presumes the web archive is already built and generates a combined war/ear file. If the application is not built or the web archive is not available, then Volt MX Iris displays an error. To configure <code>HeadlessBuild.properties</code> for mode 3, in addition to setting <code>mode=3</code>, the following properties must be set:</p>
 <pre><code style="display:block;background-color:#eee;"><p>Full path of middleware archive (war/ear). If project has Volt MX session Manager, provide with-cache archive, for Http session Manager, provide without-cache</p>
 <p>archive.combinewar.middlewarearchive= &lt;Path to middleware archive (war/ear, based on whether combinewar.ear / combinewar.war properties)&gt;<br/>combinewar.context= &lt;Provide context name with which final war/ear will be generated.&gt;</p>
