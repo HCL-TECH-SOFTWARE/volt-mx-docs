@@ -148,6 +148,44 @@ Form1.widget1.anchorPoint = {
 * * *
 
 </details>
+<details close markdown="block"><summary>applyCellSkinsFontStyles Property</summary>
+
+* * *
+
+Specifies whether font attributes (such as Font Size, Font Family, Font Weight, and Font Style) must be applied to the Calendar widget. 
+
+### Syntax
+
+```
+
+applyCellSkinsFontStyles 
+```
+
+### Type
+
+Boolean
+
+### Read/Write
+
+Read + Write
+
+### Remarks
+
+Before using the applyCellSkinsFontStyles property, ensure that you set the value of the viewType property of the Calendar widget as CALENDAR_VIEW_TYPE_ GRID_ONSCREEN or CALENDAR_VIEW_TYPE_ GRID_POPUP.
+
+### Example
+
+```
+Form1.Calendar1.applyCellSkinsFontStyles = true;
+```
+
+### Platform Availability
+
+*   Android
+
+* * *
+
+</details>
 <details close markdown="block"><summary>appointmentData Property</summary>
 
 * * *
@@ -945,6 +983,57 @@ Form1.calendar1.calendarLanguage="GregorianCalendar";
 ### Platform Availability
 
 *   Windows
+
+* * *
+
+</details>
+<details close markdown="block"><summary>calendarStyle Property</summary>
+
+* * *
+
+Defines the style of the calendar to be displayed.
+
+### Syntax
+
+```
+
+calendarStyle
+```
+
+### Type
+
+String Constant
+
+### Read/Write
+
+Read + Write
+
+### Remarks
+
+This property is applicable only when the viewType is set as CALENDAR_VIEW_TYPE_NATIVE.
+
+Following are the supported calendarStyles:
+
+*   CALENDAR_STYLE_AUTOMATIC (Default)
+*   CALENDAR_STYLE_INLINE
+*   CALENDAR_STYLE_COMPACT
+*   CALENDAR_STYLE_WHEEL
+
+### Example
+
+
+```
+//Sample code to set the calendarStyle property for a Calendar widget.
+
+frmCalendar.myCalendar.calendarStyle= constants.CALENDAR_STYLE_AUTOMATIC;
+```
+
+### Platform Availability
+
+
+*   Not available in the IDE
+*   iOS
+
 
 * * *
 
@@ -4211,6 +4300,52 @@ frmCalendar.myCalendar.selectionType=constants.CALENDAR_SELECTION_TYPE_RANGE_SEL
 
 *   Not available in the IDE
 *   Desktop Web
+
+* * *
+
+</details>
+<details close markdown="block"><summary>shadowColor Property</summary>
+
+* * *
+
+Specifies the color for the shadow of the widget.
+
+### Syntax
+
+shadowColor
+
+### Type
+
+Color constant or Hexadecimal number
+### Read/Write
+
+Read + Write
+
+### Remarks
+
+*   Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.
+*   When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).
+*   For example, red complete opaque is FF000000. Red complete transparent is FF000065. The values 0x and # are not allowed in the string.
+*   A color constant is a String that is defined at the theme level. Ensure that you append the $ symbol at the beginning of the color constant.
+*   This property does not have a default value.
+*   This property has more priority than (and overrides) the shadow property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.
+
+### Example
+
+This example uses the button widget, but the principle remains the same for all widgets that have the shadowColor property.
+
+```
+
+Form1.btn1.shadowColor = "ea5075";
+
+```
+
+### Platform Availability
+
+
+*   iOS
+*   Desktop Web (Not available on Desktop Web Legacy SDK)
+
 
 * * *
 

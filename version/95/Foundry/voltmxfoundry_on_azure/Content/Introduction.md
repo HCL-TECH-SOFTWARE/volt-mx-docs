@@ -9,4 +9,4 @@ This document helps you install and configure VoltMX Foundry (Console, Identity 
 *   [VoltMX Foundry on Azure](VoltMX Foundry on Azure.md#On1) - This section helps you install and configure VoltMX Foundry V9 until V9 SP1.
 *   [Appendices](Appendices.md)
 
-You can also access the [Revision History](Installation of VoltMX Foundry on Azure.md) and [FAQs](Frequently Asked Questions (FAQs).md).
+You can also access the [Revision History](Installation of VoltMX Foundry on Azure.md) and [FAQs](Frequently_Asked_Questions__FAQs_.md).
