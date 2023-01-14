@@ -327,6 +327,103 @@ Even when the `getStatusForAuthenticationMode(constants.LOCAL_AUTHENTICATION_MOD
 
 * * *
 
+</details>
+<details close markdown="block"><summary>voltmx.localAuthentication.requestBiometricsEnroll</summary>
+
+* * *
+
+When biometrics are not enrolled on the device, and you invoke the authenticate() API, the **5007** (Authentication does not start because biometrics are not enrolled on the device) error code is returned. In such cases, developers can use the requestBiometricsEnroll API to direct app users to the device settings page, where they can enroll for biometrics and setup device credentials such as PIN/Pattern/Password, if necessary.
+
+<b>Syntax</b>
+
+```
+kony.localAuthentication.requestBiometricsEnroll(statusCallback,configMap);
+```
+
+<b>Input Parameters</b>
+
+<table style="width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('resources/tablestyles/basic.css');" class="TableStyle-TemenosTables" cellspacing="0">
+    <colgroup><col class="TableStyle-TemenosTables-Column-Column1">
+    <col class="TableStyle-TemenosTables-Column-Column1">
+    </colgroup><thead>
+        <tr class="TableStyle-TemenosTables-Head-Header1">
+            <th class="TableStyle-TemenosTables-HeadE-Column1-Header1" scope="col">Parameter</th>
+            <th class="TableStyle-TemenosTables-HeadD-Column1-Header1" scope="col">Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="TableStyle-TemenosTables-Body-Body1">
+            <td class="TableStyle-TemenosTables-BodyE-Column1-Body1">statusCallBack (status, message, info) [function]</td>
+            <td class="TableStyle-TemenosTables-BodyD-Column1-Body1">
+                <p>A callback function that conveys the status of the authentication with an appropriate status code. The API returns one of the following status codes:</p>
+                <ul>
+                    <li><b>5018</b>: This is returned when any of the specified authenticators is already enrolled.</li>
+                    <li><b>5019</b>: This is returned when all the specified authenticators are not supported.</li>
+                    <li><b>5020</b>: This is returned on successful enrollment of the given authenticator.</li>
+                    <li><b>5021</b>: This is returned on failure in the enrollment of the given authenticator.</li>
+                </ul>
+            </td>
+        </tr>
+        <tr class="TableStyle-TemenosTables-Body-Body1">
+            <td class="TableStyle-TemenosTables-BodyB-Column1-Body1">configMap [dictionary]</td>
+            <td class="TableStyle-TemenosTables-BodyA-Column1-Body1">
+                <p>Specifies the configuration dictionary for the API. The configMap parameter uses the following keys:</p>
+                <ul>
+                    <li>
+                        <p><b><a name="authenticators"></a>authenticators</b>: Use this key to specify the type of <a href="#authenticators">authenticators</a> required in the device. You can also specify multiple (a combination of) authenticators as a list. When the specified authenticators are present in the device but the device has not been enrolled for biometrics, the system displays the biometric enrollment settings screen to the user.</p>
+                        <p> If authenticators are not specified, the device picks the default value for the authenticator, DEVICE_CREDENTIAL. This is an optional key applicable only for the Android platform. </p>
+                    </li>
+                </ul>
+                <div class="Note" data-mc-autonum="<b><span style=&quot;color: #293276;&quot; class=&quot;mcFormatColor&quot;>NOTE: </span></b>"><span class="autonumber"><span><b><span style="color: #293276;" class="mcFormatColor">NOTE: </span></b></span></span>
+                    <ul>
+                        <li>On Android 11 (API level 30, or later) devices, the API supports the kony.localAuthentication.BIOMETRIC_STRONG, kony.localAuthentication.BIOMETRIC_WEAK, and the kony.localAuthentication.DEVICE_CREDENTIAL authenticators.</li>
+                        <li> On Android 9 and Android 10 (API level 28 and 29) devices, the API supports the kony.localAuthentication.BIOMETRIC_WEAK and the kony.localAuthentication.DEVICE_CREDENTIAL authenticators.</li>
+                        <li> On devices that use Android versions prior to Android 8.1 (API level 27), the API supports only the  kony.localAuthentication.DEVICE_CREDENTIAL authenticator.</li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<b>Example</b>
+
+```
+resultCallback: function(info) {
+      alert("status code : "+ info.status);
+},
+enrommBiometric : function(){
+      var configMap = {
+          "authenticators": [kony.localAuthentication.BIOMETRIC_WEAK, kony.localAuthentication DEVICE_CREDENTIAL],
+          "callback" : this.resultCallback
+      };
+      kony.localAuthentication.enrollBiometrics(configMap);
+}
+```
+
+<b>Return Values</b>
+
+None
+
+<b>API Behavior</b>
+
+Based on the authenticator specified in the configMap parameter, and the configuration status of device credentials, the behavior of the API varies as follows:
+
+<table style="width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('resources/tablestyles/basic.css');" class="TableStyle-TemenosTables" cellspacing="0"><colgroup><col class="TableStyle-TemenosTables-Column-Column1"><col class="TableStyle-TemenosTables-Column-Column1"><col class="TableStyle-TemenosTables-Column-Column1"></colgroup><thead><tr class="TableStyle-TemenosTables-Head-Header1"><th class="TableStyle-TemenosTables-HeadE-Column1-Header1" scope="col">Input Authenticator</th><th class="TableStyle-TemenosTables-HeadE-Column1-Header1" scope="col">Output Behavior when Device Credentials are not set </th><th class="TableStyle-TemenosTables-HeadD-Column1-Header1" scope="col">Output Behavior when Device Credentials are already set </th></tr></thead><tbody><tr class="TableStyle-TemenosTables-Body-Body1"><td class="TableStyle-TemenosTables-BodyE-Column1-Body1">[kony.localAuthentication.DEVICE_CREDENTIAL]</td><td class="TableStyle-TemenosTables-BodyE-Column1-Body1"><p>The user is directed to the settings screen to register for device credentials such as PIN, Pattern, or Password.</p><p><img src="resources/images/devcred.png" style="width: 177;height: 115;"></p></td><td class="TableStyle-TemenosTables-BodyD-Column1-Body1"><p>The API returns the 5018 status code.</p></td></tr><tr class="TableStyle-TemenosTables-Body-Body1"><td class="TableStyle-TemenosTables-BodyE-Column1-Body1">[kony.localAuthentication.BIOMETRIC_WEAK]</td><td class="TableStyle-TemenosTables-BodyE-Column1-Body1"><p> In devices that use Android API levels less than or equal to 27 (&lt;= 27), the API returns the 5019 status code.</p><p> In devices that use Android API levels greater than or equal to 28 (&gt;=28), the following system prompt appears.</p><p><img src="resources/images/biometric+devcred.png"></p><p>If the device does not support the BIOMETRIC_WEAK authenticator, the API returns the 5019 status code.</p></td><td class="TableStyle-TemenosTables-BodyD-Column1-Body1"><p> In devices that use Android API levels less than or equal to 27 (&lt;= 27), the API returns the 5019 status code.</p><p> In devices that use Android API levels greater than or equal to 28 (&gt;=28), the user must first authenticate with the current credential (such as PIN, pattern, or password) used on the device. After confirmation, the user is directed to register for biometrics on the device.</p><p><img src="resources/images/reenterpin.png"></p><p><img src="resources/images/fingerprint.png"></p><p><img src="resources/images/configurebiometric.png"></p><p>If the device does not support the BIOMETRIC_WEAK authenticator, the API returns the 5019 status code.</p></td></tr><tr class="TableStyle-TemenosTables-Body-Body1"><td class="TableStyle-TemenosTables-BodyE-Column1-Body1">[kony.localAuthentication.BIOMETRIC_STRONG]</td><td class="TableStyle-TemenosTables-BodyE-Column1-Body1"><p> In devices that use Android API levels less than or equal to 29 (&lt;= 29), the API returns the 5019 status code.</p><p> In devices that use Android API levels greater than or equal to 30 (&gt;=30), the following system prompt appears.</p><p><img src="resources/images/biometric+devcred.png"></p><p>If the device does not support the BIOMETRIC_STRONG authenticator, the API returns the 5019 status code.</p></td><td class="TableStyle-TemenosTables-BodyD-Column1-Body1"><p> In devices that use Android API levels less than or equal to 29 (&lt;= 29), the API returns the 5019 status code.</p><p> In devices that use Android API levels greater than or equal to 30 (&gt;=30), the user must first authenticate with the current credential (such as PIN, pattern, or password) used on the device. After confirmation, the user is directed to register for biometrics on the device.</p><p><img src="resources/images/reenterpin.png"></p><p><img src="resources/images/fingerprint.png"></p><p><img src="resources/images/configurebiometric.png"></p><p>If the device does not support the BIOMETRIC_STRONG authenticator, the API returns the 5019 status code.</p></td></tr><tr class="TableStyle-TemenosTables-Body-Body1"><td class="TableStyle-TemenosTables-BodyE-Column1-Body1"><p>[kony.localAuthentication.BIOMETRIC_WEAK,  kony.localAuthentication.BIOMETRIC_STRONG, kony.localAuthentication.DEVICE_CREDENTIAL]
+
+</p><p class="Note" data-mc-autonum="<b><span style=&quot;color: #293276;&quot; class=&quot;mcFormatColor&quot;>NOTE: </span></b>"><span class="autonumber"><span><b><span style="color: #293276;" class="mcFormatColor">NOTE: </span></b></span></span>BIOMETRIC_WEAK is a superset of BIOMETRIC_STRONG and is defined such that BIOMETRIC_STRONG | BIOMETRIC_WEAK == BIOMETRIC_WEAK</p></td><td class="TableStyle-TemenosTables-BodyE-Column1-Body1"><p> In devices that use Android API levels less than or equal to 27 (&lt;= 27), the API only considers the DEVICE_CREDENTIAL authenticator.</p><p> In devices that use Android API levels greater than or equal to 28 (&gt;=30), the following system prompt appears.</p><p><img src="resources/images/biometric+devcred.png"></p><p>If the device does not support the BIOMETRIC_WEAK or BIOMETRIC_STRONG authenticators, the user is directed to the settings screen to register for device credentials such as PIN, Pattern, or Password.</p><p><img src="resources/images/devcred.png" style="width: 177;height: 115;"></p></td><td class="TableStyle-TemenosTables-BodyD-Column1-Body1"><p>The API displays the following message:</p><p>One of the specified authenticator (kony.localAuthentication.DEVICE_CREDENTIAL) is already enrolled.</p><p>If the device does not support the BIOMETRIC_WEAK or BIOMETRIC_STRONG authenticators, the API returns the 5018 status code.</p></td></tr><tr class="TableStyle-TemenosTables-Body-Body1"><td class="TableStyle-TemenosTables-BodyE-Column1-Body1"><p>[kony.localAuthentication.BIOMETRIC_WEAK, kony.localAuthentication.BIOMETRIC_STRONG]</p><p class="Note" data-mc-autonum="<b><span style=&quot;color: #293276;&quot; class=&quot;mcFormatColor&quot;>NOTE: </span></b>"><span class="autonumber"><span><b><span style="color: #293276;" class="mcFormatColor">NOTE: </span></b></span></span>BIOMETRIC_WEAK is a superset of BIOMETRIC_STRONG and is defined such that BIOMETRIC_STRONG | BIOMETRIC_WEAK == BIOMETRIC_WEAK</p></td><td class="TableStyle-TemenosTables-BodyE-Column1-Body1"><p> In devices that use Android API levels less than or equal to 27 (&lt;= 27), the API returns the 5019 status code.</p><p> In devices that use Android API levels greater than or equal to 28 (&gt;=28), the following system prompt appears.</p><p><img src="resources/images/biometric+devcred.png"></p><p>If the device does not support the BIOMETRIC_WEAK or BIOMETRIC_STRONG authenticators, the user is directed to the settings screen to register for device credentials such as PIN, Pattern, or Password.</p><p><img src="resources/images/devcred.png" style="width: 177;height: 115;"></p></td><td class="TableStyle-TemenosTables-BodyD-Column1-Body1"><p> In devices that use Android API levels less than or equal to 27 (&lt;= 27), the API returns the 5019 status code.</p><p> In devices that use Android API levels greater than or equal to 28 (&gt;=28), the user must first authenticate with the current credential (such as PIN, pattern, or password) used on the device. After confirmation, the user is directed to register for biometrics on the device.</p><p><img src="resources/images/reenterpin.png"></p><p><img src="resources/images/fingerprint.png"></p><p><img src="resources/images/configurebiometric.png"></p></td></tr><tr class="TableStyle-TemenosTables-Body-Body1"><td class="TableStyle-TemenosTables-BodyE-Column1-Body1">[kony.localAuthentication.BIOMETRIC_WEAK, kony.localAuthentication.DEVICE_CREDENTIAL] </td><td class="TableStyle-TemenosTables-BodyE-Column1-Body1"><p> In devices that use Android API levels less than or equal to 27 (&lt;= 27), the API only considers the DEVICE_CREDENTIAL authenticator.</p><p> In devices that use Android API levels greater than or equal to 28 (&gt;=28), the following system prompt appears.</p><p><img src="resources/images/biometric+devcred.png"></p><p>If the device does not support the BIOMETRIC_WEAK authenticator, the user is directed to the settings screen to register for device credentials such as PIN, Pattern, or Password.</p><p><img src="resources/images/devcred.png" style="width: 177;height: 115;"></p></td><td class="TableStyle-TemenosTables-BodyD-Column1-Body1"><p>The API displays the following message:</p><p>One of the specified authenticator (kony.localAuthentication.DEVICE_CREDENTIAL) is already enrolled.</p><p>If the device does not support the BIOMETRIC_WEAK or BIOMETRIC_STRONG authenticators, the API returns the 5018 status code.</p></td></tr><tr class="TableStyle-TemenosTables-Body-Body1"><td class="TableStyle-TemenosTables-BodyB-Column1-Body1">[kony.localAuthentication.BIOMETRIC_STRONG, kony.localAuthentication.DEVICE_CREDENTIAL]</td><td class="TableStyle-TemenosTables-BodyB-Column1-Body1"><p> In devices that use Android API levels less than or equal to 29 (&lt;= 29), the API only considers the DEVICE_CREDENTIAL authenticator.</p><p> In devices that use Android API levels greater than or equal to 30 (&gt;=30), the following system prompt appears.</p><p><img src="resources/images/biometric+devcred.png"></p><p>If the device does not support the BIOMETRIC_STRONG authenticator, the user is directed to the settings screen to register for device credentials such as PIN, Pattern, or Password.</p><p><img src="resources/images/devcred.png" style="width: 177;height: 115;"></p></td><td class="TableStyle-TemenosTables-BodyA-Column1-Body1"><p>The API displays the following message:</p><p>One of the specified authenticator (kony.localAuthentication.DEVICE_CREDENTIAL) is already enrolled.</p><p>If the device does not support the BIOMETRIC_WEAK or BIOMETRIC_STRONG authenticators, the API returns the 5018 status code.</p></td></tr></tbody></table>
+
+> NOTE: The screens are only for the purpose of illustration, and may differ from device to device.
+> The screenshots displayed in the table have been captured on an Android emulator that uses Android API level 30.
+
+<b>Platform Availability</b>
+
+*   Android
+
+* * *
+
+</details>
+
 Authentication Modes
 --------------------
 
