@@ -1305,7 +1305,7 @@ Read + Write
 ```
 
 // Sample Code to block pop-ups
-var browser0 \= new kony.ui.Browser({
+var browser0 \= new voltmx.ui.Browser({
 "isPopUpBlockEnabled": true
 )};
 ```
