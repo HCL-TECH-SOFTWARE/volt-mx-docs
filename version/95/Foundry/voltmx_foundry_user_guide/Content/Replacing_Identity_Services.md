@@ -19,7 +19,7 @@ Foundry apps can be implemented using several services which are authenticated b
 From V9 SP3, MFCLI is enhanced with the `replace-identity-service-references` command. This command can replace existing Identity Service references in the Foundry app with another Identity Service. This command replaces the Identity Service references for Backend Token and Enhanced Identity filters.
 
 For more information on Identity Services, refer to [Foundry Identity Services](Identity.md#Enhanced)  
-For more information on Identity Filters, refer to [Enhanced Identity Filters](https://docs.voltmx.com/voltmxlibrary/voltmxfoundry/voltmx_foundry_user_guide/Content/Identity_Filters_Integration.md#Enhanced).
+
 
 Identity References in Foundry Services
 --------------------------------------
@@ -33,11 +33,7 @@ The following section details on the references to Identity Services configurati
 *   Authentication for the Existing Identity Provider
     
     ![](Resources/Images/IdentityforBackendAuthentication.png)
-    
-*   Enhanced Identity Filters
-    
-    ![](Resources/Images/IdentityforRequestBodyHeader.png)
-    
+       
 
 Prerequisites
 -------------
