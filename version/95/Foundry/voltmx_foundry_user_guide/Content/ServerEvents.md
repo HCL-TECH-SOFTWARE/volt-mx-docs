@@ -68,16 +68,16 @@ For example, Parent service name can be “transaction” and its child can be �
 request.getServicesManager().getEventManager()
 ```
     
-    This class contains the following APIs:
+This class contains the following APIs:
     
-    *   **subscribe**: Subscribes the given event subscriber to all events with the specified topic.
+*   **subscribe**: Subscribes the given event subscriber to all events with the specified topic.
     
 ```
 request.getServicesManager().getEventManager().subscribe(<topic>, <subscriber>);  
     
 ```
     
-    *   **unsubscribe**: Unsubscribes the given event subscriber to all events with the specified topic.
+*   **unsubscribe**: Unsubscribes the given event subscriber to all events with the specified topic.
         
 ```
 request.getServicesManager().getEventManager().unsubscribe(<topic>, <subscriber>);
@@ -88,14 +88,14 @@ request.getServicesManager().getEventManager().unsubscribe(<topic>, <subscriber>
 request.getServicesManager().getEventNotifier();
 ```
     
-    This class contains the following APIs:
+This class contains the following APIs:
     
-    *   **notify (with event data)**: Notify all subscribers of the given event based on the topic.
+*   **notify (with event data)**: Notify all subscribers of the given event based on the topic.
         
 ```
 request.getServicesManager().getEventNotifier().notify(<event_data>);
 ```
-    *   **notify (with topic and data)**: Creates event data internally and notifies all subscribers of the given event based on the topic.
+*   **notify (with topic and data)**: Creates event data internally and notifies all subscribers of the given event based on the topic.
         
 ```
 request.getServicesManager().getEventNotifier().notify(<topic>, <data>);
