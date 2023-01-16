@@ -625,5 +625,5 @@ Quantum Fabric provides a 256-bit AES/GCM/NoPadding encryption utility, which ca
 3. In the **Enter Password to be Encrypted** field, type the password that is used to access your database.
 4. In the **Enter Key to be Encrypted** field, type the key that must be used to encrypt the password.
 
-The console then displays the **Encrypted Password** and **Encrypted Key**. These values must be typed in the ```Database Password``` and ```Encrypted Rotational Key``` boxes on the [Database Details](../../voltmx_foundry_windows_install_guide/Content/Installing_Fabric_on_Tomcat.html#DatabaseDetails) screen.
+The console then displays the **Encrypted Password** and **Encrypted Key**. These values must be typed in the `Database Password` and `Encrypted Rotational Key` boxes on the [Database Details](../../voltmx_foundry_windows_install_guide/Content/Installing_Fabric_on_Tomcat.html#DatabaseDetails) screen.
 
