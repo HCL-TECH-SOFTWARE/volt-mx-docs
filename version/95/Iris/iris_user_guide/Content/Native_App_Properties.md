@@ -654,11 +654,11 @@ Based on the value of the Splash Screen Orientation Mode property, the values of
 </table>
 
 > **_Note:_** The value of the splashOrientationClassifier property is only respected when you provide a valid value corresponding to a particular Splash Screen Orientation Mode (as specified in the table). For example, if you are using the portrait Splash Screen Orientation Mode, you can only provide a value for the splashOrientationClassifier property from the following:
-
-*   SCREEN_ORIENTATION_PORTRAIT
-*   SCREEN_ORIENTATION_REVERSE_PORTRAIT
-*   SCREEN_ORIENTATION_SENSOR_PORTRAIT
-*   SCREEN_ORIENTATION_USER_PORTRAIT
+>
+>*   SCREEN_ORIENTATION_PORTRAIT
+>*   SCREEN_ORIENTATION_REVERSE_PORTRAIT
+>*   SCREEN_ORIENTATION_SENSOR_PORTRAIT
+>*   SCREEN_ORIENTATION_USER_PORTRAIT
 
 <!--
 For more information on the values of the splashOrientationClassifier property, refer Android Screen Orientation Values.
