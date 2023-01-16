@@ -39,6 +39,20 @@ Span and Offset properties override the positional and width properties of direc
 *   Max Height
 *   Z Index
 
+From the V9 Service Pack 3 release, Quantum Visualizer has introduced support for the following properties to provide spacing within a Responsive Container:
+
+* **Padding:** The Padding property provides space between the Responsive Container and its child widgets. The values for the Padding property must be provided in % units. For example, if you provide a padding of 10 px for the left, right, top, and bottom, the spacing is applied as follows:
+
+![](Resources/Images/Padding_ResponsiveGrid.png)
+
+* ** GutterX:** The GutterX property provides horizontal spacing (on the left and right of a widget) between the child widgets of the Responsive Container. The value for the GutterX property must be provided in px, dp, and % units. For example, if you provide a GutterX value of 10 px, the spacing is applied as follows:
+
+![](Resources/Images/GutterX_RespGrid.png)
+
+* **GutterY:** The GutterY property provides vertical spacing (only on the top of a widget) between the child widgets of the Responsive Container. The value for the GutterY property must be provided in px, dp, and % units. For example, if you provide a GutterY value of 10 px, the spacing is applied as follows:
+
+![](Resources/Images/GutterY_RespGrid.png)
+
 Responsive Container for Web
 ----------------------------
 

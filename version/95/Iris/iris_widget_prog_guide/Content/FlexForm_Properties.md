@@ -682,6 +682,62 @@ Windows
 * * *
 
 </details>
+
+<details close markdown="block"><summary>displayOrientationClassifier Property</summary>
+
+* * *
+
+A sub-level property of the **displayOrientation** property of a form, that provides screen orientation modes at a granular-level for the particular Form. 
+
+### Syntax
+
+```
+
+displayOrientationClassifier
+```
+
+### Type
+
+String
+
+### Read/Write
+
+Read + Write
+
+### Remarks
+
+Based on the value of the displayOrientation property , the values of the displayOrientationClassifier property are as follows:
+
+<table style="border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;border-left-style: solid;border-left-width: 2px;border-left-color: #a9a9a9;border-right-style: solid;border-right-width: 2px;border-right-color: #a9a9a9;border-top-style: solid;border-top-width: 2px;border-top-color: #a9a9a9;border-bottom-style: solid;border-bottom-width: 2px;border-bottom-color: #a9a9a9;width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-TemenosTables" cellspacing="0"><colgroup><col style="width: 35%;" class="TableStyle-TemenosTables-Column-Column1"><col style="width: 70%;" class="TableStyle-TemenosTables-Column-Column1"></colgroup><thead><tr class="TableStyle-TemenosTables-Head-Header1" data-mc-conditions=""><th class="TableStyle-TemenosTables-HeadE-Column1-Header1" style="text-align: center;" scope="col" valign="middle"><b>displayOrientation</b></th><th class="TableStyle-TemenosTables-HeadD-Column1-Header1" style="text-align: center;" scope="col" valign="middle"><b>displayOrientationClassifier </b></th></tr></thead><tbody><tr class="TableStyle-TemenosTables-Body-Body1" style="height: 56px;" data-mc-conditions=""><td class="TableStyle-TemenosTables-BodyE-Column1-Body1">FORM_DISPLAY_ORIENTATION_LANDSCAPE</td><td class="TableStyle-TemenosTables-BodyD-Column1-Body1"><p><a href="#LANDSCAPE">SCREEN_ORIENTATION_LANDSCAPE</a></p><p><a href="#REVERSE_LANDSCAPE">SCREEN_ORIENTATION_REVERSE_LANDSCAPE</a></p><p><a href="#SENSOR_LANDSCAPE">SCREEN_ORIENTATION_SENSOR_LANDSCAPE</a></p><p><a href="#USER_LANDSCAPE">SCREEN_ORIENTATION_USER_LANDSCAPE</a></p></td></tr><tr class="TableStyle-TemenosTables-Body-Body1" style="height: 56px;" data-mc-conditions=""><td class="TableStyle-TemenosTables-BodyE-Column1-Body1">FORM_DISPLAY_ORIENTATION_PORTRAIT</td><td class="TableStyle-TemenosTables-BodyD-Column1-Body1"><p><a href="#PORTRAIT">SCREEN_ORIENTATION_PORTRAIT</a></p><p><a href="#REVERSE_PORTRAIT">SCREEN_ORIENTATION_REVERSE_PORTRAIT</a></p><p><a href="#SENSOR_PORTRAIT">SCREEN_ORIENTATION_SENSOR_PORTRAIT</a></p><p><a href="#USER_PORTRAIT">SCREEN_ORIENTATION_USER_PORTRAIT</a></p></td></tr><tr class="TableStyle-TemenosTables-Body-Body1" style="height: 56px;" data-mc-conditions=""><td class="TableStyle-TemenosTables-BodyB-Column1-Body1">FORM_DISPLAY_ORIENTATION_BOTH</td><td class="TableStyle-TemenosTables-BodyA-Column1-Body1"><p><a href="#UNSPECIFIED">SCREEN_ORIENTATION_UNSPECIFIED</a></p><p><a href="#BEHIND">SCREEN_ORIENTATION_BEHIND</a></p><p><a href="#FULL_SENSOR">SCREEN_ORIENTATION_FULL_SENSOR</a></p><p><a href="#FULL_SENSOR"></a><a href="#FULL_USER">SCREEN_ORIENTATION_FULL_USER</a></p><p><a href="#LOCKED">SCREEN_ORIENTATION_LOCKED</a></p><p><a href="#NOSENSOR">SCREEN_ORIENTATION_NOSENSOR</a></p><p><a href="#SENSOR">SCREEN_ORIENTATION_SENSOR</a></p><p><a href="#USER">SCREEN_ORIENTATION_USER</a></p></td></tr></tbody></table>
+
+> **_Note:_** 
+>* The value of the **displayOrientationClassifier** property is only respected when you provide a valid value corresponding to a particular **displayOrientation** (as specified in the table). For example, if you are using the **FORM_DISPLAY_ORIENTATION_PORTRAIT** Display Orientation, you can only provide a value for the displayOrientationClassifier property from the following:
+>
+>   *   SCREEN_ORIENTATION_PORTRAIT
+>   *   SCREEN_ORIENTATION_REVERSE_PORTRAIT
+>   *   SCREEN_ORIENTATION_SENSOR_PORTRAIT
+>   *   SCREEN_ORIENTATION_USER_PORTRAIT.
+>
+>* The displayOrientationClassifier property is ignored if the Form is assigned to a Camera widget as an Overlay Form.
+
+### Example
+
+```
+
+//Sample code to disable zoom in a FlexForm.  
+  
+Form1.disableZoom = true;
+```
+
+### Platform Availability
+
+* Android
+
+* * *
+
+</details>
+
+
 <details close markdown="block"><summary>drawerLayout Property</summary>
 
 * * *
