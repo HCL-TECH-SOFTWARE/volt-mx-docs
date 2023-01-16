@@ -5,6 +5,8 @@ Building an Iris app
 
 To build an Iris app, you need to run the **buildIrisApp** job from your project. To perform a build for the first time, you need to configure the build parameters for the job. For future builds, App Factory stores the settings from the previous build.
 
+From V9 ServicePack 3, App Factory supports building Micro Apps in Iris projects. For information about the recommended repository structure for Micro Apps, refer to [Micro Apps Best Practices](MicroApps_BestPractices.md). To include Micro Apps in the build process, make sure that you provide the path to the Base App under Iris Project Settings → Source Control → Project Path.
+
 To run the **buildIrisApp** job, follow these steps.
 
 1.  From the folder of your App Factory project, navigate to **Iris** → **Builds** → **buildIrisApp**
