@@ -10413,8 +10413,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#login-with-provider-type-as-oauthsaml" class="md-nav__link">
-    Login with provider type as OAuth/SAML
+  <a href="#login-with-provider-type-as-oauth-saml" class="md-nav__link">
+    Login with provider type as OAuth SAML
   </a>
   
 </li>
@@ -10436,6 +10436,27 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#login-in-the-same-browser-window-with-provider-type-as-oauth-20" class="md-nav__link">
+    Login in the same browser window with provider type as OAuth 2.0
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-issues-and-limitations" class="md-nav__link">
+    Known Issues and Limitations
+  </a>
   
 </li>
       
@@ -36233,8 +36254,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#login-with-provider-type-as-oauthsaml" class="md-nav__link">
-    Login with provider type as OAuth/SAML
+  <a href="#login-with-provider-type-as-oauth-saml" class="md-nav__link">
+    Login with provider type as OAuth SAML
   </a>
   
 </li>
@@ -36256,6 +36277,27 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#login-in-the-same-browser-window-with-provider-type-as-oauth-20" class="md-nav__link">
+    Login in the same browser window with provider type as OAuth 2.0
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-issues-and-limitations" class="md-nav__link">
+    Known Issues and Limitations
+  </a>
   
 </li>
       
@@ -36353,8 +36395,9 @@
 <p>The following are the methods you can use for an identity service.</p>
 <ul>
 <li><a href="#login-with-provider-type-as-basic">Login with provider type as Basic</a></li>
-<li><a href="#login-with-provider-type-as-oauth-saml">Login with provider type as OAuth/SAML</a></li>
+<li><a href="#login-with-provider-type-as-oauth-saml">Login with provider type as OAuth SAML</a></li>
 <li><a href="#login-with-provider-type-as-oauth-2-0-with-deep-link-url">Login with provider type as OAuth 2.0 with Deep link URL</a></li>
+<li><a href="#login-in-the-same-browser-window-with-provider-type-as-oauth-2.0">Login in the same browser window with provider type as OAuth 2.0</a></li>
 <li><a href="#get-backend-token">Get Backend Token</a></li>
 <li><a href="#user-profile">User Profile</a></li>
 <li><a href="#get-provider-name">Get Provider Name</a></li>
@@ -36385,9 +36428,11 @@ identitySvc.login(options, function(response) {
 });
 </code></pre>
 <p><strong>Please note the following:</strong></p>
-<ol>
-<li>The <strong>isSSOEnabled</strong> flag set to true, indicating that Single Sign-On ](SSO) is enabled. This parameter must be passed every time the user logs in. The parameters <strong>userid</strong> and <strong>password</strong> are required only for the first login. For more information about SSO, refer to [Single Sign-On] (../single_Sign-On.md).  </li>
-</ol>
+<blockquote>
+<ul>
+<li>The <strong>isSSOEnabled</strong> flag set to true, indicating that Single Sign-On ](SSO) is enabled. This parameter must be passed every time the user logs in. The parameters <strong>userid</strong> and <strong>password</strong> are required only for the first login. For more information about SSO, refer to <a href="../single_Sign-On.html">Single Sign-On</a>.</li>
+</ul>
+</blockquote>
 <table>
 <thead>
 <tr>
@@ -36415,10 +36460,21 @@ identitySvc.login(options, function(response) {
 </tbody>
 </table>
 <p>Support for Multi-Login with SSO is available from V8 SP4 and higher versions.</p>
-<ol>
-<li>The earlier code sample provides the following information:<br><br>i.    The <strong>include_profile</strong> parameter is set to true. This parameter specifies whether to encode the user profile as part of the claims token.<br/>ii.     The <strong>continueOnRefreshError</strong> flag is set to false. The default value is <strong>true</strong>. If the <strong>continueOnRefreshError</strong> is set to <strong>false</strong> and the previous identity provider session has expired, error 1017 is thrown. The error message is "Transient Login failed. Previous Identity Token expired in backend."<br/>iii.    From version 7.2.5 onward Volt MX Foundry apps allow users to use services protected by different Identity services in the same application session as long as users have authenticated to the Identity service. This allows a user to login to Google and Facebook, for example, via identity services and use integration services dependent on those identity services in the same application session, without having to logout of either.<br/>iv.    The <strong>isOfflineEnabled</strong> flag is set to true.The default value is false. This option allows users to use previous login information when they are in offline mode. Typically the login details are lost when the app is in offline mode. This option stores the user ID and password to be used if authentication is needed when there is no network connection.<br><br>    To use the <strong>isOfflineEnabled</strong> option, you must enable the "Bundle OpenSSL Library" option in Project Settings. For information about this setting see <a href="#additional-settings">Additional Settings</a>.<br/>    This option is valid for iOS and Android platforms only.<br/>    This option is available for basic login only. It is not available for OAuth/SAML login.<br><br>v.    The <strong>persistLoginResponse</strong> flag is set to true. The default value is false. This option allows users to login to an app once and reuse the response across multiple app sessions. Typically the login details are lost when the app is closed. The <strong>persistLoginResponse</strong> option stores the claims token in the data store of the client device. This allows the app developer to use the token to invoke the integration or object services without prompting the user to authenticate again. If the token has expired, the login will fail.<br><br>    To use this option, the Volt MX Foundry server must be configured so that the Identity session is enabled for the entire time the persisted response is needed. For more information about configuration settings see <a href="../ServiceConfig-Identiy-Apps.html#how-to-configure-app-session-settings">How to Configure App Session Settings</a>.<br/>    In the Android platform, you must also enable the "Bundle OpenSSL Library" option in Project Settings. For information about this setting see <a href="#additional-settings">Additional Settings</a>.<br/>    To retrieve the claims token from the data store, use the <a href="#use-persisted-login">usePersistedLogin() API</a>.m</li>
-</ol>
 <blockquote>
+<ul>
+<li>The earlier code sample provides the following information:</li>
+<li>The <strong>include_profile</strong> parameter is set to true. This parameter specifies whether to encode the user profile as part of the claims token.</li>
+<li>The <strong>continueOnRefreshError</strong> flag is set to false. The default value is <strong>true</strong>. If the <strong>continueOnRefreshError</strong> is set to <strong>false</strong> and the previous identity provider session has expired, error 1017 is thrown. The error message is "Transient Login failed. Previous Identity Token expired in backend."</li>
+<li>From version 7.2.5 onward Volt MX Foundry apps allow users to use services protected by different Identity services in the same application session as long as users have authenticated to the Identity service. This allows a user to login to Google and Facebook, for example, via identity services and use integration services dependent on those identity services in the same application session, without having to logout of either.
+<em>The </em><em>isOfflineEnabled</em>* flag is set to true.The default value is false. This option allows users to use previous login information when they are in offline mode. Typically the login details are lost when the app is in offline mode. This option stores the user ID and password to be used if authentication is needed when there is no network connection.</li>
+<li>To use the <strong>isOfflineEnabled</strong> option, you must enable the "Bundle OpenSSL Library" option in Project Settings. For information about this setting see <a href="#additional-settings">Additional Settings</a>. </li>
+<li>This option is valid for iOS and Android platforms only.</li>
+<li>This option is available for basic login only. It is not available for OAuth/SAML login.</li>
+<li>The <strong>persistLoginResponse</strong> flag is set to true. The default value is false. This option allows users to login to an app once and reuse the response across multiple app sessions. Typically the login details are lost when the app is closed. The <strong>persistLoginResponse</strong> option stores the claims token in the data store of the client device. This allows the app developer to use the token to invoke the integration or object services without prompting the user to authenticate again. If the token has expired, the login will fail.</li>
+<li>To use this option, the Volt MX Foundry server must be configured so that the Identity session is enabled for the entire time the persisted response is needed. For more information about configuration settings see <a href="../ServiceConfig-Identiy-Apps.html#how-to-configure-app-session-settings">How to Configure App Session Settings</a>.</li>
+<li>In the Android platform, you must also enable the "Bundle OpenSSL Library" option in Project Settings. For information about this setting see <a href="#additional-settings">Additional Settings</a>.</li>
+<li>To retrieve the claims token from the data store, use the <a href="#use-persisted-login">usePersistedLogin() API</a>.m</li>
+</ul>
 <p><strong><em>Note:</em></strong> Please add the same identity provider name that you configured in Foundry's Identity Service tab against providerName. For example, here the identity provider name is <code>SampleUserStore</code>.<br><br />
 <img alt="" src="../Resources/Images/UserStoreNaming.png" /></p>
 </blockquote>
@@ -36432,7 +36488,7 @@ identitySvc.login(options, function(response) {
 </ol>
 <p>The page will look like the following example.</p>
 <p><img alt="" src="../Resources/Images/Android_OfflineLogin_and_PersistLogin_700x422.jpg" /></p>
-<h2 id="login-with-provider-type-as-oauthsaml">Login with provider type as OAuth/SAML</h2>
+<h2 id="login-with-provider-type-as-oauth-saml">Login with provider type as OAuth SAML</h2>
 <pre><code>// Sample code to authenticate to Volt MX Foundry Client
 var serviceName = &quot;identity_service_name&quot;;   
 // Get an instance of SDK
@@ -36446,6 +36502,11 @@ var loginOptions = {};
 loginOptions.isSSOEnabled = true;
 loginOptions.continueOnRefreshError = false;
 loginOptions.persistLoginResponse = true;
+options.customOAuthParams =
+{
+    &quot;key2&quot;:&quot;value2&quot;,
+    &quot;key3&quot;:&quot;value3&quot;
+};
 options.loginOptions = loginOptions;
 identitySvc.login(options, function(response) {
     voltmx.print(&quot;Login success: &quot; + JSON.stringify(response));
@@ -36454,7 +36515,32 @@ identitySvc.login(options, function(response) {
 });
 </code></pre>
 <blockquote>
-<p><strong>Note:</strong><br><br>i.    The client is the <strong>voltmx.sdk();</strong> object.<br><br>The earlier code provides the following information:<br><br>ii.    The <strong>isSSOEnabled</strong> flag set to true, indicating that Single Sign-On (SSO) is enabled. This parameter must be passed every time the user logs in. For more information about SSO, refer to <a href="../single_Sign-On.html">Single Sign-On.</a><br/>iii.    The <strong>include_profile</strong> parameter set to <strong>true</strong>. This parameter specifies whether to encode the user profile as part of the claims token.<br/>iv.    The <strong>continueOnRefreshError</strong> flag set to <strong>false</strong>. The default value is <strong>true</strong>. This flag throws error 1017 with error message "Transient Login failed, Previous Identity Token expired in backend". This error is thrown when the <strong>continueOnRefreshError</strong> is set to <strong>false</strong> and the previous identity provider session has expired.<br><br>From version 7.2.5 onward Volt MX Foundry apps allow users to use services protected by different Identity services in the same application session as long as users have authenticated to the Identity service. This allows a user to login to Google and Facebook, for example, via identity services and use integration services dependent on those identity services in the same application session, without having to logout of either.<br><br>v.    The <strong>persistLoginResponse</strong> flag is set to true. The default value is false. This option allows users to login to an app once and reuse the response across multiple app sessions. Typically the login details are lost when the app is closed. The <strong>persistLoginResponse</strong> option stores the claims token in the data store of the client device. This allows the app developer to use the token to invoke the integration or object services without prompting the user to authenticate again. If the token has expired, the login will fail.<br/>vi.    When SSO is enabled, log out with SLO = true does not log out the OAuth provider.<br><br>To use this option, the Volt MX Foundry server must be configured so that the Identity session is enabled for the entire time the persisted response is needed. For more information about configuration settings see <a href="App_User_Session.md"></a><a href="../ServiceConfig-Identiy-Apps.html#how-to-configure-app-session-settings">How to Configure App Session Settings</a>.<br/>    For the Android platform, you must also enable the "Bundle OpenSSL Library" option in Project Settings. For information about this setting see <a href="#additional-settings">Additional Settings</a>.<br><br>vii.    To retrieve the claims token from the data store, use the <a href="#use-persisted-login">usePersistedLogin() API</a>.<br><br>From version 7.2.02 onward Volt MX Foundry SDK provides an option to customize the OAuth login form using a user-defined form with a browser widget inside it. The browserWidget parameter accepts a voltmx.ui.Browser instance. The SDK will run oAuth related logic on the provided browserWidget instance. This parameter enables a developer to provide a customized oAuth UI. If the provided value is not defined or if it is not an instance of the voltmx.ui.browserWidget, the SDK will create its own browser window with default configuration/customization for oAuth Login.<br/>The browserWidget field is mandatory for Volt MX Applications built by using the MVC architecture on Volt MX Iris.</p>
+<p><strong>Note:</strong>   </p>
+<ul>
+<li>The client is the <strong>voltmx.sdk();</strong> object.</li>
+<li>The earlier code provides the following information:</li>
+<li>The <strong>isSSOEnabled</strong> flag set to true, indicating that Single Sign-On (SSO) is enabled. This parameter must be passed every time the user logs in. For more information about SSO, refer to <a href="../single_Sign-On.html">Single Sign-On.</a></li>
+<li>The <strong>include_profile</strong> parameter set to <strong>true</strong>. This parameter specifies whether to encode the user profile as part of the claims token.</li>
+<li>
+<p>The <strong>continueOnRefreshError</strong> flag set to <strong>false</strong>. The default value is <strong>true</strong>. This flag throws error 1017 with error message "Transient Login failed, Previous Identity Token expired in backend". This error is thrown when the <strong>continueOnRefreshError</strong> is set to <strong>false</strong> and the previous identity provider session has expired.
+<br><br>From version 7.2.5 onward Volt MX Foundry apps allow users to use services protected by different Identity services in the same application session as long as users have authenticated to the Identity service. This allows a user to login to Google and Facebook, for example, via identity services and use integration services dependent on those identity services in the same application session, without having to logout of either.</br></br></p>
+</li>
+<li>
+<p>The <strong>persistLoginResponse</strong> flag is set to true. The default value is false. This option allows users to login to an app once and reuse the response across multiple app sessions. Typically the login details are lost when the app is closed. The <strong>persistLoginResponse</strong> option stores the claims token in the data store of the client device. This allows the app developer to use the token to invoke the integration or object services without prompting the user to authenticate again. If the token has expired, the login will fail.</p>
+</li>
+<li>
+<p>When SSO is enabled, log out with SLO = true does not log out the OAuth provider.
+<br>To use this option, the Volt MX Foundry server must be configured so that the Identity session is enabled for the entire time the persisted response is needed. For more information about configuration settings see <a href="App_User_Session.md"></a><a href="../ServiceConfig-Identiy-Apps.html#how-to-configure-app-session-settings">How to Configure App Session Settings</a>.</br>
+<br>For the Android platform, you must also enable the "Bundle OpenSSL Library" option in Project Settings. For information about this setting see <a href="#additional-settings">Additional Settings</a>.</br></p>
+</li>
+<li>
+<p>To retrieve the claims token from the data store, use the <a href="#use-persisted-login">usePersistedLogin() API</a>.
+<br>From version 7.2.02 onward Volt MX Foundry SDK provides an option to customize the OAuth login form using a user-defined form with a browser widget inside it. The browserWidget parameter accepts a voltmx.ui.Browser instance. The SDK will run oAuth related logic on the provided browserWidget instance. This parameter enables a developer to provide a customized oAuth UI. If the provided value is not defined or if it is not an instance of the voltmx.ui.browserWidget, the SDK will create its own browser window with default configuration/customization for oAuth Login.</br></p>
+</li>
+<li>
+<p>The browserWidget field is mandatory for Volt MX Applications built by using the MVC architecture on Volt MX Iris.</p>
+</li>
+</ul>
 </blockquote>
 <h2 id="login-with-provider-type-as-oauth-20-with-deep-link-url">Login with provider type as OAuth 2.0 with Deep link URL</h2>
 <pre><code>// Sample code to authenticate to Volt MX Foundry Client
@@ -36469,6 +36555,11 @@ var options = {};
 options[&quot;userid&quot;] = username;
 options[&quot;password&quot;] = password;
 options[&quot;UseDeviceBrowser&quot;] = true;
+options[&quot;customOAuthParams&quot;] =
+{
+    &quot;key2&quot;:&quot;value2&quot;,
+    &quot;key3&quot;:&quot;value3&quot;
+};
 // This parameter in options will open the login url in native browser. 
 // This is a deeplink url, where the control will be redirected after login.
 //#ifdef android    
@@ -36493,15 +36584,38 @@ identitySvc.login(options, function(response) {
 // This method will be called after the deeplink redirection. 
 //Need to register a call in the App services tab in App Events.
 
-![](../Resources/Images/projectexplorer_728x197.png)
-function appservicereq(params) {
-    handleDeeplinkCallback(params); // Required validations are done and proceed with rest of login flow.                                  }
+</code></pre>
+<p><img alt="" src="../Resources/Images/projectexplorer_728x197.png" /></p>
+<pre><code>function appservicereq(params) {
+    handleDeeplinkCallback(params); // Required validations are done and proceed with rest of login flow.                                }
+
 </code></pre>
 <p>For more information on deep links, click <a href="../../../../Iris/iris_user_guide/Content/Introduction.html">here</a>.</p>
 <blockquote>
-<p><strong><em>Note:</em></strong><br><br>
-i.    The client is the <strong>voltmx.sdk();</strong> object.<br><br>The earlier code sample provides the following information:<br><br>ii.    The <strong>isSSOEnabled</strong> flag set to true, indicating that Single Sign-On (SSO) is enabled. This parameter must be passed every time the user logs in. For more information about SSO, refer to <a href="../single_Sign-On.html">Single Sign-On</a>.<br/>
-iii.    The <strong>include_profile</strong> parameter set to <strong>true</strong>. This parameter specifies whether to encode the user profile as part of the claims token.<br/>iv.    The <strong>continueOnRefreshError</strong> flag set to <strong>false</strong>. The default value is <strong>true</strong>. This flag throws error 1017 with error message "Transient Login failed, Previous Identity Token expired in backend". This error is thrown when the <strong>continueOnRefreshError</strong> is set to <strong>false</strong> and the previous identity provider session has expired.<br><br> From version 7.2.5 onward Volt MX Foundry apps allow users to use services protected by different Identity services in the same application session as long as users have authenticated to the Identity service. This allows a user to login to Google and Facebook, for example, via identity services and use integration services dependent on those identity services in the same application session, without having to logout of either.<br><br>v.     The <strong>persistLoginResponse</strong> flag is set to true. The default value is false. This option allows users to login to an app once and reuse the response across multiple app sessions. Typically the login details are lost when the app is closed.<br><br> The <strong>persistLoginResponse</strong> option stores the claims token in the data store of the client device. This allows the app developer to use the token to invoke the integration or object services without prompting the user to authenticate again. If the token has expired, the login will fail.<br><br>vi.    When SSO is enabled, logging out with SLO = true does not log out the OAuth provider.<br/>vii.    The Deeplink API helps the device browser to authenticate the OAuth This can be used for any OAuth2.0 providers. If an OAuth provider does not allow embedded browsers, such as Google OAuth, you must use the Deeplink API, which launches the device browser instead of the embedded browser.<br><br>To use this option, the Volt MX Foundry server must be configured so that the Identity session is enabled for the entire time the persisted response is needed. For more information about configuration settings see <a href="App_User_Session.md"></a><a href="../ServiceConfig-Identiy-Apps.html#how-to-configure-app-session-settings">How to Configure App Session Settings</a>.<br/>For the Android platform, you must also enable the "Bundle OpenSSL Library" option in Project Settings. For information about this setting see <a href="#additional-settings">Additional Settings</a>.<br><br>viii.    To retrieve the claims token from the data store, use the <a href="#use-persisted-login">usePersistedLogin() API</a>.<br><br> From version 7.2.02 onward Volt MX Foundry SDK provides an option to customize the OAuth login form using a user-defined form with a browser widget inside it. The browserWidget parameter accepts a voltmx.ui.Browser instance. The SDK will run oAuth related logic on the provided browserWidget instance. This parameter enables a developer to provide a customized oAuth UI. If the provided value is not defined or if it is not an instance of the voltmx.ui.browserWidget, the SDK will create its own browser window with default configuration/customization for oAuth Login.</p>
+<p><strong><em>Note:</em></strong></p>
+<ul>
+<li>The client is the <strong>voltmx.sdk();</strong> object.
+The earlier code sample provides the following information:</li>
+<li>The <strong>isSSOEnabled</strong> flag set to true, indicating that Single Sign-On (SSO) is enabled. This parameter must be passed every time the user logs in. For more information about SSO, refer to <a href="../single_Sign-On.html">Single Sign-On</a>.</li>
+<li>The <strong>include_profile</strong> parameter set to <strong>true</strong>. This parameter specifies whether to encode the user profile as part of the claims token.</li>
+<li>
+<p>The <strong>continueOnRefreshError</strong> flag set to <strong>false</strong>. The default value is <strong>true</strong>. This flag throws error 1017 with error message "Transient Login failed, Previous Identity Token expired in backend". This error is thrown when the <strong>continueOnRefreshError</strong> is set to <strong>false</strong> and the previous identity provider session has expired.
+<br><br>From version 7.2.5 onward Volt MX Foundry apps allow users to use services protected by different Identity services in the same application session as long as users have authenticated to the Identity service. This allows a user to login to Google and Facebook, for example, via identity services and use integration services dependent on those identity services in the same application session, without having to logout of either.</br></br></p>
+</li>
+<li>
+<p>The <strong>persistLoginResponse</strong> flag is set to true. The default value is false. This option allows users to login to an app once and reuse the response across multiple app sessions. Typically the login details are lost when the app is closed.The <strong>persistLoginResponse</strong> option stores the claims token in the data store of the client device. This allows the app developer to use the token to invoke the integration or object services without prompting the user to authenticate again. If the token has expired, the login will fail.</p>
+</li>
+<li>When SSO is enabled, logging out with SLO = true does not log out the OAuth provider.   </li>
+<li>
+<p>The Deeplink API helps the device browser to authenticate the OAuth This can be used for any OAuth2.0 providers. If an OAuth provider does not allow embedded browsers, such as Google OAuth, you must use the Deeplink API, which launches the device browser instead of the embedded browser.
+<br><br>To use this option, the Volt MX Foundry server must be configured so that the Identity session is enabled for the entire time the persisted response is needed. For more information about configuration settings see <a href="App_User_Session.md"></a><a href="../ServiceConfig-Identiy-Apps.html#how-to-configure-app-session-settings">How to Configure App Session Settings</a>.<br/><br/>
+<br>For the Android platform, you must also enable the "Bundle OpenSSL Library" option in Project Settings. For information about this setting see <a href="#additional-settings">Additional Settings</a>.<br/></p>
+</li>
+<li>
+<p>To retrieve the claims token from the data store, use the <a href="#use-persisted-login">usePersistedLogin() API</a>.
+<br> From version 7.2.02 onward Volt MX Foundry SDK provides an option to customize the OAuth login form using a user-defined form with a browser widget inside it. The browserWidget parameter accepts a voltmx.ui.Browser instance. The SDK will run oAuth related logic on the provided browserWidget instance. This parameter enables a developer to provide a customized oAuth UI. If the provided value is not defined or if it is not an instance of the voltmx.ui.browserWidget, the SDK will create its own browser window with default configuration/customization for oAuth Login.</br></p>
+</li>
+</ul>
 </blockquote>
 <h3 id="additional-settings_1">Additional Settings</h3>
 <p>From V9 ServicePack 2, Foundry supports <a href="https://datatracker.ietf.org/doc.md/rfc7636">rfc7636</a> for OAuth providers that use PKCE in the Authorization Code grant flow. For more information, refer to <a href="../Identity10_VoltMX_OAuth2.html#pkce-support-in-foundry">PKCE Support in Foundry</a>.</p>
@@ -36523,6 +36637,129 @@ iii.    The <strong>include_profile</strong> parameter set to <strong>true</stro
 <li>Under <strong>General Settings</strong>, clear <strong>JS Library Mode (Legacy)</strong>.</li>
 </ol>
 <p><img alt="" src="../Resources/Images/PKCE_ProjectSettings_ResponsiveWeb.png" /></p>
+<h2 id="login-in-the-same-browser-window-with-provider-type-as-oauth-20">Login in the same browser window with provider type as OAuth 2.0</h2>
+<p>In the existing design of OAuth login in Volt MX, the login page of an OAuth Identity provider (such as Keycloak, Google, or Okta) opens in a new window (or a new tab) on the browser. The new design implements login in the same browser window.</p>
+<p>As the existing design does not contain any full app redirection, the SDK and Client app states do not need to be reinitialized. However, Volt MX uses an SPA architecture for web apps. Therefore, in the new design, the Foundry SDK object and the client app state are reinitialized when the browser redirects to the app from the login page in the same window. To avoid losing the app state and data, make sure that you store the client app data (if any) to the local storage before invoking the Login API.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Iris V9 SP2 FP21, or later</li>
+<li>Foundry V9 SP2 FP1 HF4 (9.2.1.4), or later</li>
+</ul>
+<blockquote>
+<p><strong><em>Note:</em></strong> If you are using versions earlier than V9 SP2, download and install version 9.2.1.x from the Volt MX Downloads page. After installing the 9.2.1.x version, install the 9.2.1.4 hotfix for the Integration Server by following the steps in the Integration Services Hotfix 9.2.1.4 release notes.</p>
+</blockquote>
+<p>Follow these steps before you consume the enhancement</p>
+<ol>
+<li>
+<p>If you are using Volt MX Foundry 9.1, make sure that you upgrade to Volt MX Foundry 9.2.1.4.</p>
+</li>
+<li>
+<p>Implement the OAuth Login functionality based on the existing design, where the login page opens in a new window (new tab), and then redirects to the original window of the web app.</p>
+</li>
+<li>
+<p>Use the existing framework APIs to store the client app data before you invoke the login API.</p>
+</li>
+<li>
+<p>After a successful login, call the framework APIs to retrieve the client app data before proceeding with the app functionality.</p>
+</li>
+</ol>
+<p>Steps to implement login in the same browser window</p>
+<ol>
+<li>Invoking the Login SDK function</li>
+</ol>
+<p>In the client code that invokes the login API, include "noPopup": true as part of the login options.</p>
+<p>For Example:</p>
+<pre><code>var sdkObject = Volt MX.sdk.getDefaultInstance();
+var identityServiceObject = sdkObject.getIdentityService(&quot;&lt;providerNameOauth&gt;&quot;);
+var options = {};
+options[&quot;loginOptions&quot;] = {}; 
+options[&quot;loginOptions&quot;][&quot;noPopup&quot;] = true; 
+options[&quot;loginOptions&quot;][&quot;customQueryParamsForOAuth&quot;] = {&quot;success_url&quot;: &quot;&lt;app-url&gt;&quot;}; /* For example -&gt; http://example.com/apps/appName// */options[&quot;customOAuthParams&quot;] =
+{
+    &quot;key2&quot;:&quot;value2&quot;,
+    &quot;key3&quot;:&quot;value3&quot;
+};
+identityServiceObject.login(options, function (res) { 
+   alert(&quot;login passed without redirection&quot;); 
+}, function (err) { 
+   alert(&quot;login failed due to&quot; + JSON.stringify(err)); 
+});
+
+</code></pre>
+<p>Ideally, you must save the app data or app state before calling the login API. However, if you need to save some data during the login invocation, you can add your save handle function in the options of the login API.</p>
+<p>For example:</p>
+<pre><code>options[&quot;loginOptions&quot;][&quot;customDataSaveHandle&quot;] = function(successCallback,failureCallback)
+{
+    /* Perform a task
+    successCallback(); //Call successCallback if the task is completed successfully
+    failureCallback(); //Call failureCallback  if you want to abort the login as you were not able to save custom data or state */
+}
+
+</code></pre>
+<blockquote>
+<p><strong><em>Note:</em></strong> </p>
+<ul>
+<li>In the login options, you must pass the Success URL parameter (which is the web app URL) as part of the "customQueryParamsForOAuth" key.</li>
+<li>In the Identity console, under Advanced → Redirect URL on successful authentication</li>
+<li>If you have selected Allowed URL list, make sure that the specified Success URL is whitelisted.</li>
+<li>If you have selected Any URL, you do not need to whitelist any URLs.</li>
+</ul>
+</blockquote>
+<p><img alt="" src="../Resources/Images/authentication.png" /></p>
+<ol>
+<li>Configuring an App Service event in the App Lifecycle in the Iris project</li>
+</ol>
+<p>In your Iris project, in the App Events section, select the App Service and then attach a function, for example: CustomerAppServiceFunction.</p>
+<p><img alt="" src="../Resources/Images/AppServiceFunction.png" /></p>
+<p>Make sure that you define the specified function (CustomerAppServiceFunction) in a JS Module.</p>
+<p>For example:</p>
+<pre><code>function customerAppServiceFunction(eventObject)
+{
+var loginResponse = eventObject.loginResponse;
+if (loginResponse)
+{
+    if (loginResponse.isError == false)
+    {
+      //login complete, can return next form
+      return FormAccountDetails;
+    }
+    else
+    {
+      //login failed, can return error/retry form
+      return FormError;
+    }
+}
+}
+
+</code></pre>
+<blockquote>
+<p><strong><em>Note:</em></strong> </p>
+<ul>
+<li>After a successful login, you can restore the state or data in the lifecycle events (such preshow or postShow) of the respective form.</li>
+<li>After a successful login, make sure that you always use Volt MX.sdk.getDefaultInstance() as the sdk instance. This must be used to fetch instances such as Integration service instance and Object service instance.</li>
+</ul>
+</blockquote>
+<h2 id="known-issues-and-limitations">Known Issues and Limitations</h2>
+<ul>
+<li>
+<p>To test the OAuth login flow in same browser window, you must publish the web app to a Foundry server, and then run tests on the published web app URL.</p>
+</li>
+<li>
+<p>This feature cannot be tested on Iris Live Preview.</p>
+</li>
+<li>
+<p>This feature is not supported if your app has http integrity enabled.</p>
+</li>
+<li>
+<p>Manual initialization of the SDK is not supported for this feature. Therefore, make sure that the Iris app is linked to the Foundry app before building or generating a live preview.</p>
+</li>
+<li>
+<p>Login must be completed after all the lifecycle events of the Iris app have been invoked.</p>
+</li>
+<li>
+<p>Transient login (multi-login) is not supported in this feature.</p>
+</li>
+</ul>
 <h2 id="get-backend-token">Get Backend Token</h2>
 <blockquote>
 <p><strong><em>Important:</em></strong> The Get Backend Token API is deprecated.</p>
@@ -36545,7 +36782,12 @@ identitySvc.getBackendToken(forceFromServer, options, function(response) {
 });
 </code></pre>
 <blockquote>
-<p><strong><em>Note:</em></strong><br><br>i.    If forceFromServer is true, then the SDK fetches the token from the server. If forceFromServer is false, then the SDK gives you the token present in localStorage. Please note that only few backend providers such as Salesforce support refresh. If a backend provider does not support refresh, passing <code>forceRefreshFromServer=true</code> would result in empty response from this api.<br/>ii. The authClient is the IdentityService object.<br/>iii.    The “Allow Clients to Access Secure Attributes” should be marked as true for working of this API.</p>
+<p><strong><em>Note:</em></strong></p>
+<ul>
+<li>If forceFromServer is true, then the SDK fetches the token from the server. If forceFromServer is false, then the SDK gives you the token present in localStorage. Please note that only few backend providers such as Salesforce support refresh. If a backend provider does not support refresh, passing <code>forceRefreshFromServer=true</code> would result in empty response from this api.</li>
+<li>The authClient is the IdentityService object.</li>
+<li>The “Allow Clients to Access Secure Attributes” should be marked as true for working of this API.</li>
+</ul>
 </blockquote>
 <p><img alt="" src="../Resources/Images/AllowclientstoAccesssecarr.png" />  </p>
 <p>For more information on how to configure session timeouts, refer to <a href="../ServiceConfig-Identiy-Apps.html#how-to-configure-app-session-settings">How to Configure App Session Settings</a>.</p>
@@ -36575,7 +36817,11 @@ identitySvc.getProfile(forceFromServer, function(response) {
 });
 </code></pre>
 <blockquote>
-<p><strong><em>Note:</em></strong><br><br>i.    If forceFromServer is true, then the SDK fetches the token from the server. If forceFromServer is false, then the SDK gives you the token present in localStorage.<br/>ii.    The authClient is the IdentityService object.</p>
+<p><strong><em>Note:</em></strong> </p>
+<ul>
+<li>If forceFromServer is true, then the SDK fetches the token from the server. If forceFromServer is false, then the SDK gives you the token present in localStorage.</li>
+<li>The authClient is the IdentityService object.</li>
+</ul>
 </blockquote>
 <h2 id="get-provider-name">Get Provider Name</h2>
 <pre><code>//Sample code to get provider name
@@ -36616,6 +36862,11 @@ var identitySvc = client.getIdentityService(serviceName);
 var options = {};
 options[&quot;slo&quot;] = true;
 options[&quot;browserWidget&quot;] = myForm.browserWidget;
+options[&quot;logoutOptions&quot;][&quot;customOAuthParams&quot;] =
+{
+    &quot;key2&quot;:&quot;value2&quot;,
+    &quot;key3&quot;:&quot;value3&quot;
+};
 identitySvc.logout(function(response) {
     voltmx.print(&quot;Logout success: &quot; + JSON.stringify(response));
 }, function(error) {
@@ -36623,7 +36874,14 @@ identitySvc.logout(function(response) {
 }, options);
 </code></pre>
 <blockquote>
-<p><strong><em>Note:</em></strong><br><br>i.    The authClient is the IdentityService object for the loggedIn provider.<br/>ii.    To log out from all applications, the user must log out of every Identity service that they are logged on to.<br/>iii.    The code sample shows the parameter <strong>slo</strong> set to <strong>true</strong>, indicating that all apps will be logged out when SSO is enabled.<br/>iv.    If <strong>slo</strong> is set to <strong>false</strong>, or if the app does not send <strong>slo</strong>, the user is logged out of the app. The user is not logged out of the other apps that are logged in using SSO.<br/>v.    Any apps that use SSO based services must log in by entering credentials and re-initiating SSO.For more information, refer to <a href="../single_Sign-On.html">Single Sign-On</a>.</p>
+<p><strong><em>Note:</em></strong></p>
+<ul>
+<li>The authClient is the IdentityService object for the loggedIn provider.</li>
+<li>To log out from all applications, the user must log out of every Identity service that they are logged on to.</li>
+<li>The code sample shows the parameter <strong>slo</strong> set to <strong>true</strong>, indicating that all apps will be logged out when SSO is enabled.</li>
+<li>If <strong>slo</strong> is set to <strong>false</strong>, or if the app does not send <strong>slo</strong>, the user is logged out of the app. The user is not logged out of the other apps that are logged in using SSO.</li>
+<li>Any apps that use SSO based services must log in by entering credentials and re-initiating SSO.For more information, refer to <a href="../single_Sign-On.html">Single Sign-On</a>.</li>
+</ul>
 </blockquote>
 <h2 id="refresh-login">Refresh Login</h2>
 <p>Refresh login API refreshes the identity session (enabled for refresh) with backend auth server to give new internal auth tokens that are mapped with refreshed backend tokens.</p>
@@ -36631,41 +36889,58 @@ identitySvc.logout(function(response) {
 <ul>
 <li>successcallback : Function</li>
 <li>failureCallback : Function</li>
+<li>options: JSON</li>
 </ul>
+<blockquote>
+<p><strong><em>Note:</em></strong> </p>
+<ul>
+<li>From V9 ServicePack 1 FixPack 30 and V9 ServicePack 2 FixPack 15, the refreshLogin API contains an optional input parameter called options. The options parameter contains a retain_backend_refresh_token flag.</li>
+<li>The default value of the retain_backend_refresh_token flag is false. If the flag is set to true, the refresh tokens are not deleted irrespective of the backend response code.</li>
+<li>If the retain_backend_refresh_token flag is not specified or set to false, and the backend sends the error code 400 or 401, the refresh tokens are deleted.</li>
+<li>For error response codes other than 400 and 401, the refresh tokens are not deleted irrespective of the flag value; and the back-end response is not modified based on the flag setup.</li>
+</ul>
+</blockquote>
 <pre><code>// Sample code to invoke refresh login
-
-var sdkObject = voltmx.sdk.getCurrentInstance();
+var sdkObject = Volt MX.sdk.getCurrentInstance();
 var identityObject = sdkObject.getIdentityService(&quot;&lt;&lt;Identity-Provider-Name&gt;&gt;&quot;);
+var options = {};
+options[&quot;retain_backend_refresh_token&quot;] = true;
+options[&quot;customOAuthParams&quot;] =
+{
+    &quot;key2&quot;:&quot;value2&quot;,
+    &quot;key3&quot;:&quot;value3&quot;
+};
 identityObject.refreshLogin(function(res) {
-    alert('refresh login success');
+    alert('refresh login success');
 }, function(err) {
-    alert('refresh login failed' + JSON.stringify(err));
-});
+    alert('refresh login failed' + JSON.stringify(err));
+}, options );
 
 </code></pre>
 <blockquote>
-<p><strong><em>Note:</em></strong> <br><br>1. This Refresh Login API will not work until login is done on same identity provider with refresh enabled mode.<br><br>i.    The API is supported from App Services version 9.1.0.3 or higher.<br/>ii.    The API is not supported from On-premies V9.1 hotfix onwards</p>
+<p><strong><em>Note:</em></strong> <br>This Refresh Login API will not work until login is done on same identity provider with refresh enabled mode.</br>
+<br>The API is supported from App Services version 9.1.0.3 or higher.</br>
+<br>The API is not supported from On-premies V9.1 hotfix onwards</br></p>
 </blockquote>
 <p>An error information will be shown in following cases:</p>
 <ul>
 <li>When refreshLogin is invoked without performing login with loginOptions containing the <code>enable_refresh_login</code> key equals to true, following error will be shown.</li>
 </ul>
 <pre><code>/*sample code for performing login with refresh enabled options to enable working of refreshLogin API*/
-    var sdkObject = voltmx.sdk.getCurrentInstance();
-    var identityObject = sdkObject.getIdentityService(&quot;&lt;&lt;Identity-Provider-Name&gt;&gt;&quot;);
-    var options = {
-        &quot;loginOptions&quot;:
-            {
-                &quot;enable_refresh_login&quot;: true
-            }
-    };
+var sdkObject = Volt MX.sdk.getCurrentInstance();
+var identityObject = sdkObject.getIdentityService(&quot;&lt;&lt;Identity-Provider-Name&gt;&gt;&quot;);
+var options = {
+    &quot;loginOptions&quot;:
+        {
+            &quot;enable_refresh_login&quot;: true
+        }
+};
 
-    identityObject.login(options, function (response) {
-        alert('login success');
-    }, function (error_response) {
-        alert('login failed due to' + JSON.stringify(error_response));
-    });
-
+identityObject.login(options, function (response) {
+    alert('login success');
+}, function (error_response) {
+    alert('login failed due to' + JSON.stringify(error_response));
+});
 
 </code></pre>
 <ul>
