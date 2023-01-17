@@ -8,9 +8,13 @@ FAQs and Troubleshooting
 This section lists the troubleshooting tips to resolve problems that you may encounter during installation.
 
 *   **Issue**: If you have upgraded from Foundry V8.x or lower versions to V9 GA or higher versions, some of the services fail to work because of an internal authentication error. These services, such as the **Foundry Admin Adapter**, **Email Adapter**, and **Workflow Email** services, fail with the following error:
-    <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
+    
+	```
+	{
     returned HTTP [400], Response Body [{"details":{"message":"Could not find trust security group for given envId","errcode":0,"errmsg":"Could not find trust security group for given envId"},"httpstatus":"Bad Request","requestid":"5e36d604-09ab-4fbb-9437-42c1d828140f;98","domain":"AUTH","code":-65,"mfcode":"Auth-65","message":"Some of the input parameters provided are invalid"}]
-    }</code></pre></figure>
+    }
+	```
+	
     
     **Workaround**
     
@@ -93,9 +97,9 @@ This section lists the troubleshooting tips to resolve problems that you may enc
     
     Add the following server variable in MariaDB ini file located in the MariaDB installation folder.
     
-    <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">
+    ```
         table_open_cache=64
-    </code></pre></figure>
+    ```
     
     Path for MariaDB ini file, `<USER_INSTALL_DIR>\MariaDB 10.1\data\my.ini`
     
@@ -149,10 +153,12 @@ This section lists the troubleshooting tips to resolve problems that you may enc
     
     Remove the `version_rank` column from `schema_version` table in each schema by following queries before upgrade.
     
-    <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
+    ```
+    {
         drop index schema_version_vr_idx on master.<SCHEMA_NAME>.schema_version;
         alter table master.<SCHEMA_NAME>.schema_version drop column version_rank;
     }
+    ```
 
 *   **Issue**
     
@@ -185,7 +191,9 @@ This section lists the troubleshooting tips to resolve problems that you may enc
     Manual Steps:
 
     1. Create Component Users (schema) with the required grants as below.
-        <figure  class="highlight"><pre><code  class="language-voltmx"  data-lang="voltmx">{
+
+        ```
+        {
         CREATE USER <prefix>MFCONSOLEDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;
 
         ALTER USER <prefix>MFCONSOLEDB<suffix> QUOTA UNLIMITED ON USERS;
@@ -260,17 +268,21 @@ This section lists the troubleshooting tips to resolve problems that you may enc
 
         GRANT MANAGE SCHEDULER TO <prefix>VPNSDB<suffix>;
 
-        }</code></pre></figure>
+        }
+        ```
 
     2. Create a non DBA user with the below grants. This user will be given to the Installer.
-        <figure  class="highlight"><pre><code  class="language-voltmx"  data-lang="voltmx">{
+
+        ```
+        {
         CREATE USER <INSTALLER\_USER> IDENTIFIED BY <password>;
         GRANT CREATE SESSION TO <INSTALLER\_USER> WITH ADMIN OPTION;
         GRANT SELECT ANY DICTIONARY TO <INSTALLER\_USER>;
         ALTER USER <INSTALLER\_USER> QUOTA UNLIMITED ON <dataTablespace>;
         ALTER USER <INSTALLER\_USER> QUOTA UNLIMITED ON <indexTablespace>;
         ALTER USER <INSTALLER\_USER> QUOTA UNLIMITED ON <lobTablespace>;
-        }</code></pre></figure> 
+        }
+        ```
     
     >  **_Note:_** The password for the component users and the installer user have to be same.    
 
@@ -278,12 +290,13 @@ This section lists the troubleshooting tips to resolve problems that you may enc
     
     For storage services to work, change the following storagedb entries in the admindb.
     
-    <br/>
+    
     **Workaround**
-    <br/>
     
     Manual Steps:
-    <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{    
+    
+    ```
+    {    
         storage\_database\_type - oracle  
         storage\_database\_hostname - Database hostname/IP  
         storage\_database\_port - Database Port  
@@ -293,7 +306,8 @@ This section lists the troubleshooting tips to resolve problems that you may enc
         storage\_data\_tablespace - Data Tablespace name  
         storage\_index\_tablespace - Index Tablespace name  
         storage\_lob\_tablespace - Lob Tablespace name
-    }</code></pre></figure>
+    }
+    ````
         
 
 *   **Issue**
@@ -307,68 +321,69 @@ This section lists the troubleshooting tips to resolve problems that you may enc
     <br/>
 
     Manual Steps:
-        <figure  class="highlight"><pre><code  class="language-voltmx"  data-lang="voltmx">
-            Create database <prefix>mfreportsdb<suffix>;
-            Create database <prefix>mfaccountsdb<suffix>;
-            Create database <prefix>mfconsoledb<suffix>;
-            Create database <prefix>admindb<suffix>;
-            Create database <prefix>vpnsdb<suffix>;
-            Create database <prefix>idconfigdb<suffix>;
-            CREATE LOGIN loginId WITH PASSWORD = 'loginpwd'
-            GO
-            use msdb
-            GO
-            create user userId from LOGIN loginId;
-            GO
-            EXEC sp\_addrolemember 'SQLAgentUserRole', 'userId'
-            EXEC sp\_addrolemember 'SQLAgentReaderRole', 'userId'
-            EXEC sp\_addrolemember 'SQLAgentOperatorRole', 'userId'
-            GO
-            use <prefix>mfreportsdbAN<suffix>
-            GO
-            create user userId from LOGIN loginId;
-            GO
-            GRANT ALTER ANY DATABASE DDL TRIGGER TO userId
-            GO
-            GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER,VIEW Definition TO userId
-            GO
-            use <prefix>mfaccountsdb<suffix>
-            GO
-            create user userId from LOGIN loginId;
-            GO
-            GRANT ALTER ANY DATABASE DDL TRIGGER TO userId
-            GO
-            GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER,VIEW Definition TO userId
-            GO
-            use <prefix>mfconsoledb<suffix>
-            GO
-            create user userId from LOGIN loginId;
-            GO
-            GRANT ALTER ANY DATABASE DDL TRIGGER TO userId
-            GO
-            GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER,VIEW Definition TO userId
-            GO
-            use <prefix>admindb<suffix>
-            GO
-            create user userId from LOGIN loginId;
-            GO
-            GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId
-            GO
-            use <prefix>vpnsdb<suffix>
-            GO
-            CREATE SCHEMA <prefix>vpnsdb<suffix>;
-            GO
-            create user userId from LOGIN loginId;
-            GO
-            GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId
-            GO
-            use <prefix>idconfigdb<suffix>
-            GO
-            create user userId from LOGIN loginId;
-            GO
-            GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId
-            GO
-        </code></pre></figure>
+        
+    ```
+    Create database <prefix>mfreportsdb<suffix>;
+    Create database <prefix>mfaccountsdb<suffix>;
+    Create database <prefix>mfconsoledb<suffix>;
+    Create database <prefix>admindb<suffix>;
+    Create database <prefix>vpnsdb<suffix>;
+    Create database <prefix>idconfigdb<suffix>;
+    CREATE LOGIN loginId WITH PASSWORD = 'loginpwd'
+    GO
+    use msdb
+    GO
+    create user userId from LOGIN loginId;
+    GO
+    EXEC sp\_addrolemember 'SQLAgentUserRole', 'userId'
+    EXEC sp\_addrolemember 'SQLAgentReaderRole', 'userId'
+    EXEC sp\_addrolemember 'SQLAgentOperatorRole', 'userId'
+    GO
+    use <prefix>mfreportsdbAN<suffix>
+    GO
+    create user userId from LOGIN loginId;
+    GO
+    GRANT ALTER ANY DATABASE DDL TRIGGER TO userId
+    GO
+    GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER,VIEW Definition TO userId
+    GO
+    use <prefix>mfaccountsdb<suffix>
+    GO
+    create user userId from LOGIN loginId;
+    GO
+    GRANT ALTER ANY DATABASE DDL TRIGGER TO userId
+    GO
+    GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER,VIEW Definition TO userId
+    GO
+    use <prefix>mfconsoledb<suffix>
+    GO
+    create user userId from LOGIN loginId;
+    GO
+    GRANT ALTER ANY DATABASE DDL TRIGGER TO userId
+    GO
+    GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER,VIEW Definition TO userId
+    GO
+    use <prefix>admindb<suffix>
+    GO
+    create user userId from LOGIN loginId;
+    GO
+    GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId
+    GO
+    use <prefix>vpnsdb<suffix>
+    GO
+    CREATE SCHEMA <prefix>vpnsdb<suffix>;
+    GO
+    create user userId from LOGIN loginId;
+    GO
+    GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId
+    GO
+    use <prefix>idconfigdb<suffix>
+    GO
+    create user userId from LOGIN loginId;
+    GO
+    GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId
+    GO
+    ```
 
     >  **_Note:_** The whole script must be run at once.
 
@@ -385,9 +400,9 @@ This section lists the troubleshooting tips to resolve problems that you may enc
     
     If you do not want to use a DB user with DBA role or Equivalent privileges for the Volt MX Foundry installation on IBM DB2, follow these steps:
     
-    <br/>
+    
     **Workaround**
-    <br/>
+    
     
     Manual Steps:
     
@@ -398,7 +413,9 @@ This section lists the troubleshooting tips to resolve problems that you may enc
         *   Refer for linux: [Creating group and user IDs for a DB2 database installation (Linux and UNIX)](https://www.ibm.com/support/knowledgecenter/en/SSEPGG_9.5.0/com.ibm.db2.luw.qb.server.doc/doc/t0006742.md)
         *   Refer for Windows: [Creating a dedicated DB2 user (Windows)](https://www.ibm.com/support/knowledgecenter/en/SSYGQH_5.5.0/admin/install/t_db_create_lcuser.md)
     2.  Create databases by logging as Admin with following queries:
-        <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
+        
+        ```
+        {
         
             CREATE SCHEMA <prefix>ADMINDB<suffix> AUTHORIZATION userid  
             CREATE SCHEMA <prefix>MFCONSOLEDB<suffix> AUTHORIZATION userid  
@@ -407,9 +424,13 @@ This section lists the troubleshooting tips to resolve problems that you may enc
             CREATE SCHEMA <prefix>VPNSDB<suffix> AUTHORIZATION userid  
             
             CREATE SCHEMA <prefix>IDCONFIGDB<suffix> AUTHORIZATION userid  
-        }    
+        }
+        ```
+
     3.  Grant database level permissions to the user:
-        <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{    
+        
+        ```
+        {    
             GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>ADMINDB<suffix> TO userid;  
             GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>MFCONSOLEDB<suffix TO userid;  
             GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>MFACCOUNTSDB<suffix> TO userid;  
@@ -417,11 +438,16 @@ This section lists the troubleshooting tips to resolve problems that you may enc
             GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>VPNSDB<suffix> TO userid;  
             
             GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>IDCONFIGDB<suffix> TO userid;  
-        }   
+        }
+        ```
+		
     4.  Grant schema level permissions to the user:
-        <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
+
+        ```
+        {
             GRANT createtab,CONNECT,DATAACCESS,IMPLICIT\_SCHEMA,ACCESSCTRL ON database TO USER userid;
-        }</code></pre></figure>    
+        }
+        ```
     
     > **_Note:_** The loginId and password must be the same as used for Volt MX Foundry Installation.
     
@@ -451,17 +477,13 @@ This section lists the troubleshooting tips to resolve problems that you may enc
     *   **SQL State**: HY000
     *   **Error Code**: 1093
     *   **Error Message**: You can't specify target table 'users' for update in FROM clause
-    *   **Location**: <Location where the installation is done>
-    
-    <br/>
+    *   **Location**: Location where the installation is done
+
     **Workaround**
-    <br/>
+    
     
     To resolve this issue, refer [Prerequisites for Volt MX Foundry with MySQL- Applicable for Identity Services](DB_PRe-reqs.md).  
       
-    
-
- 
 
 Hostname/Port changes for Tomcat Application Server
 ---------------------------------------------------
@@ -516,9 +538,6 @@ To add custom jar to middleware.war after installation, follow these steps:
 6.  Deploy the  `middleware.war`  file back to server. -->
 
 
-How to Configure Heap and PermGen Size
---------------------------------------
-
 Configuring Heap and PermGen Size for Tomcat
 --------------------------------------------
 
@@ -541,7 +560,7 @@ In case of multinode, do the following:
 *   Configure the Min -`Xms2048m` / Max - `Xmx4096m` heap settings in the file: `{ Server directory }/domain/configuration/domain.xml`
 *   Configure permgen settings : -XX:PermSize=`1024m` -XX:MaxPermSize=`2048m`
 
-In case of single node, configure the settings in `{ Install directory }/jboss/standalone/configuration/standalone.xml`
+In case of single node, configure the settings in `<Install directory>/jboss/standalone/configuration/standalone.xml`
 
 
 <!-- Configuring Heap and PermGen Size for WebLogic
@@ -625,5 +644,5 @@ Quantum Fabric provides a 256-bit AES/GCM/NoPadding encryption utility, which ca
 3. In the **Enter Password to be Encrypted** field, type the password that is used to access your database.
 4. In the **Enter Key to be Encrypted** field, type the key that must be used to encrypt the password.
 
-The console then displays the **Encrypted Password** and **Encrypted Key**. These values must be typed in the `Database Password` and `Encrypted Rotational Key` boxes on the [Database Details](../../voltmx_foundry_windows_install_guide/Content/Installing_Fabric_on_Tomcat.html#DatabaseDetails) screen.
+The console then displays the **Encrypted Password** and **Encrypted Key**. These values must be typed in the `Database Password` and `Encrypted Rotational Key` boxes on the [Database Details](../../voltmx_foundry_windows_install_guide/Content/Installing_Foundry_on_Tomcat.html#DatabaseDetails) screen.
 
