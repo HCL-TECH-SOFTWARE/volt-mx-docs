@@ -44,7 +44,7 @@ For more information about the properties, refer to the following section.
     *   **KEYSTORE_FILE**: The path to an existing keystore file, which must be a valid jks file. This parameter can be left empty for HTTP and HTTPS without passthrough.   
     *   **KEYSTORE_FILE_PASS**: The password for the jks file that is specified in the KEYSTORE_FILE parameter.  
     *   **KEYSTORE_FILE_PASS_SECRET_KEY**: The secret key for the Keystore password. This parameter is required if you are using an encrypted Keystore password.
-6.  **Database Details** <a href="#Database"></a>
+6.  **Database Details** <a id="Database"></a>
     *   **DB_TYPE** - The Database type that is used to host Volt MX Foundry. The possible values are:
         *   For MySQL DB server: `mysql`
         *   For Azure MSSQL or SQL Server: `sqlserver`

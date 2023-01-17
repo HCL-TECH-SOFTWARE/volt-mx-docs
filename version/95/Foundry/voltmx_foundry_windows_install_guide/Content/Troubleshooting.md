@@ -473,3 +473,22 @@ Example:
 <Connector server="VoltMXTEST" port="8080" protocol="HTTP/1.1" 
 proxyName="mbaastest10.hcl.net" proxyPort="443" scheme="https" secure="true" maxHttpHeaderSize="8192" maxThreads="150" enableLookups="false" acceptCount="25" disableUploadTimeout="true" tcpNoDelay="true" compression="on" compressableMimeType="text/css,text/javascript,text.html" connectionTimeout="20000" URIEncoding="UTF-8"/>
 ```
+
+How to encrypt the database password
+------------------------------------
+
+> **IMPORTANT:** Encryption is only supported for Tomcat application servers.
+
+Quantum Fabric provides a 256-bit AES/GCM/NoPadding encryption utility, which can be used to encrypt your database password. To encrypt your database password, follow these steps:
+
+1. Download and extract the installation zip file or tar file.
+2. From the extracted folder, open a terminal (console), and then execute the following command:
+
+    ```
+    java -jar EncryptionUtility.jar
+    ```
+
+3. In the **Enter Password to be Encrypted** field, type the password that is used to access your database.
+4. In the **Enter Key to be Encrypted** field, type the key that must be used to encrypt the password.
+
+The console then displays the **Encrypted Password** and **Encrypted Key**. These values must be typed in the ```Database Password``` and ```Encrypted Rotational Key``` boxes on the [Database Details](Installing_Fabric_on_Tomcat.html#DatabaseDetails) screen.
