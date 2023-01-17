@@ -308,7 +308,7 @@
     <!-- Recurse, if the first item has further nested items -->
     
       <li class="md-nav__item">
-      <a href="../../../Whats_New_Main_Page.html" class="md-nav__link">
+      <a href="../../../Whats_New_in_V9_Service_Pack_5.html" class="md-nav__link">
         What&apos;s New
       </a>
     </li>
@@ -1736,13 +1736,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#how-to-configure-heap-and-permgen-size" class="md-nav__link">
-    How to Configure Heap and PermGen Size
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#configuring-heap-and-permgen-size-for-tomcat" class="md-nav__link">
     Configuring Heap and PermGen Size for Tomcat
   </a>
@@ -1766,6 +1759,13 @@
         <li class="md-nav__item">
   <a href="#how-to-configure-frontend-https-to-tomcat-http-redirection" class="md-nav__link">
     How to Configure Frontend HTTPS to Tomcat HTTP Redirection
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-encrypt-the-database-password" class="md-nav__link">
+    How to encrypt the database password
   </a>
   
 </li>
@@ -8368,6 +8368,23 @@
     <li class="md-nav__item">      
       <a href="../../voltmx_foundry_user_guide/Content/ServerEvents.html" class="md-nav__link">
         Server Events
+      </a>
+    </li>
+  
+            
+          
+            
+              
+
+  <!-- Determine class according to state -->
+  
+  
+
+    <!-- Main navigation item with nested items -->
+  
+    <li class="md-nav__item">      
+      <a href="../../voltmx_foundry_user_guide/Content/FrontEndAPIURL_Objects.html" class="md-nav__link">
+        Front End API
       </a>
     </li>
   
@@ -36151,13 +36168,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#how-to-configure-heap-and-permgen-size" class="md-nav__link">
-    How to Configure Heap and PermGen Size
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#configuring-heap-and-permgen-size-for-tomcat" class="md-nav__link">
     Configuring Heap and PermGen Size for Tomcat
   </a>
@@ -36185,6 +36195,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#how-to-encrypt-the-database-password" class="md-nav__link">
+    How to encrypt the database password
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -36204,10 +36221,10 @@
 <p>This section lists the troubleshooting tips to resolve problems that you may encounter during installation.</p>
 <ul>
 <li>
-<p><strong>Issue</strong>: If you have upgraded from Foundry V8.x or lower versions to V9 GA or higher versions, some of the services fail to work because of an internal authentication error. These services, such as the <strong>Foundry Admin Adapter</strong>, <strong>Email Adapter</strong>, and <strong>Workflow Email</strong> services, fail with the following error:
-    <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
-    returned HTTP [400], Response Body [{"details":{"message":"Could not find trust security group for given envId","errcode":0,"errmsg":"Could not find trust security group for given envId"},"httpstatus":"Bad Request","requestid":"5e36d604-09ab-4fbb-9437-42c1d828140f;98","domain":"AUTH","code":-65,"mfcode":"Auth-65","message":"Some of the input parameters provided are invalid"}]
-    }</code></pre></figure></p>
+<p><strong>Issue</strong>: If you have upgraded from Foundry V8.x or lower versions to V9 GA or higher versions, some of the services fail to work because of an internal authentication error. These services, such as the <strong>Foundry Admin Adapter</strong>, <strong>Email Adapter</strong>, and <strong>Workflow Email</strong> services, fail with the following error:</p>
+<p><code>{
+returned HTTP [400], Response Body [{"details":{"message":"Could not find trust security group for given envId","errcode":0,"errmsg":"Could not find trust security group for given envId"},"httpstatus":"Bad Request","requestid":"5e36d604-09ab-4fbb-9437-42c1d828140f;98","domain":"AUTH","code":-65,"mfcode":"Auth-65","message":"Some of the input parameters provided are invalid"}]
+}</code></p>
 <p><strong>Workaround</strong></p>
 <p>To avoid the error, you must perform the following:</p>
 <ol>
@@ -36284,9 +36301,7 @@ delete from <admindb>.schema_version where script = 'V62.1__voltmxadmin-oracle-8
 <p>If the <code>java.sql. BatchUpdateException: Prepared statement needs to be re-prepared</code> error is logged in the Identity service logs or if certain operations fail to work properly when an identity service is invoked, do the following.</p>
 <p><strong>Workaround</strong></p>
 <p>Add the following server variable in MariaDB ini file located in the MariaDB installation folder.</p>
-<p><figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">
-    table_open_cache=64
-</code></pre></figure></p>
+<p><code>table_open_cache=64</code></p>
 <p>Path for MariaDB ini file, <code>&lt;USER_INSTALL_DIR&gt;\MariaDB 10.1\data\my.ini</code></p>
 </li>
 <li>
@@ -36324,10 +36339,10 @@ delete from <admindb>.schema_version where script = 'V62.1__voltmxadmin-oracle-8
 <p><strong>Workaround</strong></p>
 <p>To avoid this issue, follow these step:</p>
 <p>Remove the <code>version_rank</code> column from <code>schema_version</code> table in each schema by following queries before upgrade.</p>
-<p><figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
-    drop index schema_version_vr_idx on master.<SCHEMA_NAME>.schema_version;
-    alter table master.<SCHEMA_NAME>.schema_version drop column version_rank;
-}</p>
+<p><code>{
+    drop index schema_version_vr_idx on master.&lt;SCHEMA_NAME&gt;.schema_version;
+    alter table master.&lt;SCHEMA_NAME&gt;.schema_version drop column version_rank;
+}</code></p>
 </li>
 <li>
 <p><strong>Issue</strong></p>
@@ -36352,9 +36367,10 @@ Update the <code>management_server_port</code> in the <code>server_configuration
 <p>Manual Steps:</p>
 <ol>
 <li>
-<p>Create Component Users (schema) with the required grants as below.
-    <figure  class="highlight"><pre><code  class="language-voltmx"  data-lang="voltmx">{
-    CREATE USER <prefix>MFCONSOLEDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;</p>
+<p>Create Component Users (schema) with the required grants as below.</p>
+<p>```
+{
+CREATE USER <prefix>MFCONSOLEDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;</p>
 <p>ALTER USER <prefix>MFCONSOLEDB<suffix> QUOTA UNLIMITED ON USERS;</p>
 <p>GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>MFCONSOLEDB<suffix>;</p>
 <p>GRANT CREATE JOB TO <prefix>MFCONSOLEDB<suffix>;</p>
@@ -36387,18 +36403,19 @@ Update the <code>management_server_port</code> in the <code>server_configuration
 <p>GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>VPNSDB<suffix>;</p>
 <p>GRANT CREATE JOB TO <prefix>VPNSDB<suffix>;</p>
 <p>GRANT MANAGE SCHEDULER TO <prefix>VPNSDB<suffix>;</p>
-<p>}</code></pre></figure></p>
+<p>}
+```</p>
 </li>
 <li>
-<p>Create a non DBA user with the below grants. This user will be given to the Installer.
-    <figure  class="highlight"><pre><code  class="language-voltmx"  data-lang="voltmx">{
-    CREATE USER <INSTALLER\_USER> IDENTIFIED BY <password>;
-    GRANT CREATE SESSION TO <INSTALLER\_USER> WITH ADMIN OPTION;
-    GRANT SELECT ANY DICTIONARY TO <INSTALLER\_USER>;
-    ALTER USER <INSTALLER\_USER> QUOTA UNLIMITED ON <dataTablespace>;
-    ALTER USER <INSTALLER\_USER> QUOTA UNLIMITED ON <indexTablespace>;
-    ALTER USER <INSTALLER\_USER> QUOTA UNLIMITED ON <lobTablespace>;
-    }</code></pre></figure> </p>
+<p>Create a non DBA user with the below grants. This user will be given to the Installer.</p>
+<p><code>{
+CREATE USER &lt;INSTALLER\_USER&gt; IDENTIFIED BY &lt;password&gt;;
+GRANT CREATE SESSION TO &lt;INSTALLER\_USER&gt; WITH ADMIN OPTION;
+GRANT SELECT ANY DICTIONARY TO &lt;INSTALLER\_USER&gt;;
+ALTER USER &lt;INSTALLER\_USER&gt; QUOTA UNLIMITED ON &lt;dataTablespace&gt;;
+ALTER USER &lt;INSTALLER\_USER&gt; QUOTA UNLIMITED ON &lt;indexTablespace&gt;;
+ALTER USER &lt;INSTALLER\_USER&gt; QUOTA UNLIMITED ON &lt;lobTablespace&gt;;
+}</code></p>
 </li>
 </ol>
 <blockquote>
@@ -36408,11 +36425,10 @@ Update the <code>management_server_port</code> in the <code>server_configuration
 <li>
 <p><strong>Issue</strong> </p>
 <p>For storage services to work, change the following storagedb entries in the admindb.</p>
-<p><br/>
-<strong>Workaround</strong>
-<br/></p>
-<p>Manual Steps:
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{  <br />
+<p><strong>Workaround</strong></p>
+<p>Manual Steps:</p>
+<p>```
+{  <br />
     storage_database_type - oracle<br />
     storage_database_hostname - Database hostname/IP<br />
     storage_database_port - Database Port<br />
@@ -36422,7 +36438,8 @@ Update the <code>management_server_port</code> in the <code>server_configuration
     storage_data_tablespace - Data Tablespace name<br />
     storage_index_tablespace - Index Tablespace name<br />
     storage_lob_tablespace - Lob Tablespace name
-}</code></pre></figure></p>
+}
+````</p>
 </li>
 <li>
 <p><strong>Issue</strong></p>
@@ -36430,69 +36447,67 @@ Update the <code>management_server_port</code> in the <code>server_configuration
 <p><br/></p>
 <p><strong>Workaround</strong></p>
 <p><br/></p>
-<p>Manual Steps:
-    <figure  class="highlight"><pre><code  class="language-voltmx"  data-lang="voltmx">
-        Create database <prefix>mfreportsdb<suffix>;
-        Create database <prefix>mfaccountsdb<suffix>;
-        Create database <prefix>mfconsoledb<suffix>;
-        Create database <prefix>admindb<suffix>;
-        Create database <prefix>vpnsdb<suffix>;
-        Create database <prefix>idconfigdb<suffix>;
-        CREATE LOGIN loginId WITH PASSWORD = 'loginpwd'
-        GO
-        use msdb
-        GO
-        create user userId from LOGIN loginId;
-        GO
-        EXEC sp_addrolemember 'SQLAgentUserRole', 'userId'
-        EXEC sp_addrolemember 'SQLAgentReaderRole', 'userId'
-        EXEC sp_addrolemember 'SQLAgentOperatorRole', 'userId'
-        GO
-        use <prefix>mfreportsdbAN<suffix>
-        GO
-        create user userId from LOGIN loginId;
-        GO
-        GRANT ALTER ANY DATABASE DDL TRIGGER TO userId
-        GO
-        GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER,VIEW Definition TO userId
-        GO
-        use <prefix>mfaccountsdb<suffix>
-        GO
-        create user userId from LOGIN loginId;
-        GO
-        GRANT ALTER ANY DATABASE DDL TRIGGER TO userId
-        GO
-        GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER,VIEW Definition TO userId
-        GO
-        use <prefix>mfconsoledb<suffix>
-        GO
-        create user userId from LOGIN loginId;
-        GO
-        GRANT ALTER ANY DATABASE DDL TRIGGER TO userId
-        GO
-        GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER,VIEW Definition TO userId
-        GO
-        use <prefix>admindb<suffix>
-        GO
-        create user userId from LOGIN loginId;
-        GO
-        GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId
-        GO
-        use <prefix>vpnsdb<suffix>
-        GO
-        CREATE SCHEMA <prefix>vpnsdb<suffix>;
-        GO
-        create user userId from LOGIN loginId;
-        GO
-        GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId
-        GO
-        use <prefix>idconfigdb<suffix>
-        GO
-        create user userId from LOGIN loginId;
-        GO
-        GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId
-        GO
-    </code></pre></figure></p>
+<p>Manual Steps:</p>
+<p><code>Create database &lt;prefix&gt;mfreportsdb&lt;suffix&gt;;
+Create database &lt;prefix&gt;mfaccountsdb&lt;suffix&gt;;
+Create database &lt;prefix&gt;mfconsoledb&lt;suffix&gt;;
+Create database &lt;prefix&gt;admindb&lt;suffix&gt;;
+Create database &lt;prefix&gt;vpnsdb&lt;suffix&gt;;
+Create database &lt;prefix&gt;idconfigdb&lt;suffix&gt;;
+CREATE LOGIN loginId WITH PASSWORD = 'loginpwd'
+GO
+use msdb
+GO
+create user userId from LOGIN loginId;
+GO
+EXEC sp\_addrolemember 'SQLAgentUserRole', 'userId'
+EXEC sp\_addrolemember 'SQLAgentReaderRole', 'userId'
+EXEC sp\_addrolemember 'SQLAgentOperatorRole', 'userId'
+GO
+use &lt;prefix&gt;mfreportsdbAN&lt;suffix&gt;
+GO
+create user userId from LOGIN loginId;
+GO
+GRANT ALTER ANY DATABASE DDL TRIGGER TO userId
+GO
+GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER,VIEW Definition TO userId
+GO
+use &lt;prefix&gt;mfaccountsdb&lt;suffix&gt;
+GO
+create user userId from LOGIN loginId;
+GO
+GRANT ALTER ANY DATABASE DDL TRIGGER TO userId
+GO
+GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER,VIEW Definition TO userId
+GO
+use &lt;prefix&gt;mfconsoledb&lt;suffix&gt;
+GO
+create user userId from LOGIN loginId;
+GO
+GRANT ALTER ANY DATABASE DDL TRIGGER TO userId
+GO
+GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER,VIEW Definition TO userId
+GO
+use &lt;prefix&gt;admindb&lt;suffix&gt;
+GO
+create user userId from LOGIN loginId;
+GO
+GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId
+GO
+use &lt;prefix&gt;vpnsdb&lt;suffix&gt;
+GO
+CREATE SCHEMA &lt;prefix&gt;vpnsdb&lt;suffix&gt;;
+GO
+create user userId from LOGIN loginId;
+GO
+GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId
+GO
+use &lt;prefix&gt;idconfigdb&lt;suffix&gt;
+GO
+create user userId from LOGIN loginId;
+GO
+GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId
+GO</code></p>
 <blockquote>
 <p><strong><em>Note:</em></strong> The whole script must be run at once.</p>
 <p><strong><em>Note:</em></strong> The loginId and password must be the same as used for Volt MX Foundry Installation.</p>
@@ -36504,9 +36519,7 @@ Update the <code>management_server_port</code> in the <code>server_configuration
 <li>
 <p><strong>Issue</strong></p>
 <p>If you do not want to use a DB user with DBA role or Equivalent privileges for the Volt MX Foundry installation on IBM DB2, follow these steps:</p>
-<p><br/>
-<strong>Workaround</strong>
-<br/></p>
+<p><strong>Workaround</strong></p>
 <p>Manual Steps:</p>
 <blockquote>
 <p><strong><em>Important:</em></strong> Only DB2 database administrator (DBA) or equivalent DB user will have access to a create database.</p>
@@ -36516,34 +36529,43 @@ Update the <code>management_server_port</code> in the <code>server_configuration
 <p>Create a user based on your Operating System level.</p>
 <ul>
 <li>Refer for linux: <a href="https://www.ibm.com/support/knowledgecenter/en/SSEPGG_9.5.0/com.ibm.db2.luw.qb.server.doc/doc/t0006742.md">Creating group and user IDs for a DB2 database installation (Linux and UNIX)</a></li>
-<li>
-<p>Refer for Windows: <a href="https://www.ibm.com/support/knowledgecenter/en/SSYGQH_5.5.0/admin/install/t_db_create_lcuser.md">Creating a dedicated DB2 user (Windows)</a></p>
-<ol>
-<li>Create databases by logging as Admin with following queries:
-<figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{</li>
+<li>Refer for Windows: <a href="https://www.ibm.com/support/knowledgecenter/en/SSYGQH_5.5.0/admin/install/t_db_create_lcuser.md">Creating a dedicated DB2 user (Windows)</a><ol>
+<li>Create databases by logging as Admin with following queries:</li>
 </ol>
-<p>CREATE SCHEMA <prefix>ADMINDB<suffix> AUTHORIZATION userid<br />
-CREATE SCHEMA <prefix>MFCONSOLEDB<suffix> AUTHORIZATION userid<br />
-CREATE SCHEMA <prefix>MFACCOUNTSDB<suffix> AUTHORIZATION userid<br />
-CREATE SCHEMA <prefix>MFREPORTSDB<suffix> AUTHORIZATION userid<br />
-CREATE SCHEMA <prefix>VPNSDB<suffix> AUTHORIZATION userid  </p>
-<p>CREATE SCHEMA <prefix>IDCONFIGDB<suffix> AUTHORIZATION userid<br />
-        }  <br />
-    3.  Grant database level permissions to the user:
-        <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{  <br />
-GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>ADMINDB<suffix> TO userid;<br />
-GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>MFCONSOLEDB&lt;suffix TO userid;<br />
-GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>MFACCOUNTSDB<suffix> TO userid;<br />
-GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>MFREPORTSDB<suffix> TO userid;<br />
-GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>VPNSDB<suffix> TO userid;  </p>
-<p>GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>IDCONFIGDB<suffix> TO userid;<br />
-        } <br />
-    4.  Grant schema level permissions to the user:
-        <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
-GRANT createtab,CONNECT,DATAACCESS,IMPLICIT_SCHEMA,ACCESSCTRL ON database TO USER userid;
-        }</code></pre></figure>    </p>
 </li>
 </ul>
+<p>```
+{</p>
+<pre><code>CREATE SCHEMA &lt;prefix&gt;ADMINDB&lt;suffix&gt; AUTHORIZATION userid  
+CREATE SCHEMA &lt;prefix&gt;MFCONSOLEDB&lt;suffix&gt; AUTHORIZATION userid  
+CREATE SCHEMA &lt;prefix&gt;MFACCOUNTSDB&lt;suffix&gt; AUTHORIZATION userid  
+CREATE SCHEMA &lt;prefix&gt;MFREPORTSDB&lt;suffix&gt; AUTHORIZATION userid  
+CREATE SCHEMA &lt;prefix&gt;VPNSDB&lt;suffix&gt; AUTHORIZATION userid
+
+CREATE SCHEMA &lt;prefix&gt;IDCONFIGDB&lt;suffix&gt; AUTHORIZATION userid
+</code></pre>
+<p>}
+```</p>
+</li>
+<li>
+<p>Grant database level permissions to the user:</p>
+<p>```
+{  <br />
+    GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>ADMINDB<suffix> TO userid;<br />
+    GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>MFCONSOLEDB&lt;suffix TO userid;<br />
+    GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>MFACCOUNTSDB<suffix> TO userid;<br />
+    GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>MFREPORTSDB<suffix> TO userid;<br />
+    GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>VPNSDB<suffix> TO userid;  </p>
+<pre><code>GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA &lt;prefix&gt;IDCONFIGDB&lt;suffix&gt; TO userid;
+</code></pre>
+<p>}
+```</p>
+</li>
+<li>
+<p>Grant schema level permissions to the user:</p>
+<p><code>{
+    GRANT createtab,CONNECT,DATAACCESS,IMPLICIT\_SCHEMA,ACCESSCTRL ON database TO USER userid;
+}</code></p>
 </li>
 </ol>
 <blockquote>
@@ -36572,11 +36594,9 @@ For more information, refer <a href="https://bugs.mysql.com/bug.php?id=79286">My
 <li><strong>SQL State</strong>: HY000</li>
 <li><strong>Error Code</strong>: 1093</li>
 <li><strong>Error Message</strong>: You can't specify target table 'users' for update in FROM clause</li>
-<li><strong>Location</strong>: <Location where the installation is done></li>
+<li><strong>Location</strong>: Location where the installation is done</li>
 </ul>
-<p><br/>
-<strong>Workaround</strong>
-<br/></p>
+<p><strong>Workaround</strong></p>
 <p>To resolve this issue, refer <a href="DB_PRe-reqs.html">Prerequisites for Volt MX Foundry with MySQL- Applicable for Identity Services</a>.  </p>
 </li>
 </ul>
@@ -36628,7 +36648,6 @@ To add custom jar to middleware.war after installation, follow these steps:
 5.  Save the  `middleware.war`  file.
 6.  Deploy the  `middleware.war`  file back to server. -->
 
-<h2 id="how-to-configure-heap-and-permgen-size">How to Configure Heap and PermGen Size</h2>
 <h2 id="configuring-heap-and-permgen-size-for-tomcat">Configuring Heap and PermGen Size for Tomcat</h2>
 <p>By default, the heap settings for Tomcat allocated are Min -<code>Xms1024m</code> / Max - <code>Xmx2048m</code>, and default permgen settings are: -XX:PermSize=<code>1024m</code> -XX:MaxPermSize=<code>1024</code>m</p>
 <p>For better performance in case of several publishes, update the following heap and permgen settings  in the file: <code>{Installation directory}/tomcat/bin/catalina.sh</code></p>
@@ -36650,7 +36669,7 @@ To add custom jar to middleware.war after installation, follow these steps:
 <li>Configure the Min -<code>Xms2048m</code> / Max - <code>Xmx4096m</code> heap settings in the file: <code>{ Server directory }/domain/configuration/domain.xml</code></li>
 <li>Configure permgen settings : -XX:PermSize=<code>1024m</code> -XX:MaxPermSize=<code>2048m</code></li>
 </ul>
-<p>In case of single node, configure the settings in <code>{ Install directory }/jboss/standalone/configuration/standalone.xml</code></p>
+<p>In case of single node, configure the settings in <code>&lt;Install directory&gt;/jboss/standalone/configuration/standalone.xml</code></p>
 <!-- Configuring Heap and PermGen Size for WebLogic
 ----------------------------------------------
 
@@ -36712,8 +36731,26 @@ To add custom jar to middleware.war after installation, follow these steps:
 <h2 id="how-to-configure-frontend-https-to-tomcat-http-redirection">How to Configure Frontend HTTPS to Tomcat HTTP Redirection</h2>
 <p>If you are installing Volt MX Foundry on Tomcat on HTTP and wants to route requests via HTTPS apache or loadbalancer, add a connector in the <code>tomcat/server.xml</code> with the following attributes:</p>
 <p>proxyName="<ProxyHost>" proxyPort="<ProxyPort>" scheme="https" secure="true"</p>
-<p>Example:
-<code>`&lt;Connector server="VoltMXTEST" port="8080" protocol="HTTP/1.1" proxyName="mbaastest10.hcl.net" proxyPort="443" scheme="https" secure="true" maxHttpHeaderSize="8192" maxThreads="150" enableLookups="false" acceptCount="25" disableUploadTimeout="true" tcpNoDelay="true" compression="on" compressableMimeType="text/css,text/javascript,text.html" connectionTimeout="20000" URIEncoding="UTF-8"/&gt;`</code></p>
+<p>Example:</p>
+<pre><code>&lt;Connector server=&quot;VoltMXTEST&quot; port=&quot;8080&quot; protocol=&quot;HTTP/1.1&quot; proxyName=&quot;mbaastest10.hcl.net&quot; proxyPort=&quot;443&quot; scheme=&quot;https&quot; secure=&quot;true&quot; maxHttpHeaderSize=&quot;8192&quot; maxThreads=&quot;150&quot; enableLookups=&quot;false&quot; acceptCount=&quot;25&quot; disableUploadTimeout=&quot;true&quot; tcpNoDelay=&quot;true&quot; compression=&quot;on&quot; compressableMimeType=&quot;text/css,text/javascript,text.html&quot; connectionTimeout=&quot;20000&quot; URIEncoding=&quot;UTF-8&quot;/&gt;
+</code></pre>
+<h2 id="how-to-encrypt-the-database-password">How to encrypt the database password</h2>
+<blockquote>
+<p><strong>IMPORTANT:</strong> Encryption is only supported for Tomcat application servers.</p>
+</blockquote>
+<p>Quantum Fabric provides a 256-bit AES/GCM/NoPadding encryption utility, which can be used to encrypt your database password. To encrypt your database password, follow these steps:</p>
+<ol>
+<li>Download and extract the installation zip file or tar file.</li>
+<li>
+<p>From the extracted folder, open a terminal (console), and then execute the following command:</p>
+<p><code>java -jar EncryptionUtility.jar</code></p>
+</li>
+<li>
+<p>In the <strong>Enter Password to be Encrypted</strong> field, type the password that is used to access your database.</p>
+</li>
+<li>In the <strong>Enter Key to be Encrypted</strong> field, type the key that must be used to encrypt the password.</li>
+</ol>
+<p>The console then displays the <strong>Encrypted Password</strong> and <strong>Encrypted Key</strong>. These values must be typed in the <code>Database Password</code> and <code>Encrypted Rotational Key</code> boxes on the <a href="../../voltmx_foundry_windows_install_guide/Content/Installing_Foundry_on_Tomcat.html#DatabaseDetails">Database Details</a> screen.</p>
 
               
             </article>
