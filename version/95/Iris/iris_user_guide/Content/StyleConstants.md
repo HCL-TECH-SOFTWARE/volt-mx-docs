@@ -5,7 +5,7 @@ Configure Style Constants in
 
 From VoltMX Iris V9 SP3 GA, the **Skins** tab in the project explorer has been renamed as the **Themes** tab. In the Themes tab, you can configure new **Style Constants** for Colors and Fonts, Borders, and Shadow in addition to the existing Skin functionalities. By using the Style Constants feature, you can create and apply pre-defined styles for colors and fonts, borders, and shadows for use throughout the project. Using a **Style Constant for Color**, you can define the values for the type, color, and opacity for a background. Using the **Style Constant for Font**, you can define the values the for color, type, opacity, family, weight, style, and size for a font. Using a **Style Constant for Border**, you can define the values for the size, type (Single Color), color, opacity, and style for a border. Using the **Style Constant for Shadow**, you can define the values for the dist X, dist Y, blur, and color for a shadow.
 
-From the V9 Service Pack 5 release, support to define Style Constants for Color with the **Two Step Gradient** and **Multi Step Gradient** Color Types has been added in . For more information on how to configure the background type, refer [Set the Skin Background](https://docs.voltmx.com/voltmxlibrary/iris/iris_user_guide/Default.md#Customizing_the_Look_and_Feel_with_Skins.html#Set).
+From the V9 Service Pack 5 release, support to define Style Constants for Color with the **Two Step Gradient** and **Multi Step Gradient** Color Types has been added in . For more information on how to configure the background type, refer [Set the Skin Background](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Iris/iris_user_guide/Content/Customizing_the_Look_and_Feel_with_Skins.html).
 
 For instance, the Infinity Retail Banking application is used as the base app on which customizations are made based on customer requirements. When a new prospect arrives, using the Style Constants feature, you can change the generic branding of the Retail Banking application with a branding that is specific to the prospective customer. Alternatively, an existing customer can use this feature to change their branding, if there have been any changes to their corporate branding. For example, a change in the logo or corporate branding colors, etc.
 
@@ -59,7 +59,7 @@ To configure the style constant for color, follow these steps:
         
         ![](Resources/Images/ColorConst.png)
         
-        For more information on how to configure the background type and color, refer [Set the Skin Background](https://docs.voltmx.com/voltmxlibrary/iris/iris_user_guide/Default.md#Customizing_the_Look_and_Feel_with_Skins.html#Set).
+        For more information on how to configure the background type and color, refer [Set the Skin Background](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Iris/iris_user_guide/Content/Customizing_the_Look_and_Feel_with_Skins.html).
         
     *   Select the **Opacity** for the background color.
         
@@ -134,7 +134,7 @@ To configure the style constant for border, follow these steps:
     *   Configure the border size from the **Size** field.
     *   Select the border type from the **Type** list, and configure the border **Color**.  
           
-        For more information on how to configure the color, refer [Set the Skin Background](https://docs.voltmx.com/voltmxlibrary/iris/iris_user_guide/Default.md#Customizing_the_Look_and_Feel_with_Skins.html).
+        For more information on how to configure the color, refer [Set the Skin Background](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Iris/iris_user_guide/Content/Customizing_the_Look_and_Feel_with_Skins.html).
     *   Configure the **Opacity** for the border color.
     *   Select the style for border from the **Style** list.
     
@@ -175,7 +175,7 @@ To configure the style constant for shadow, follow these steps:
     *   Configure the **Blur** for the shadow.
     *   From the **Color** list, select the type of color, and configure the shadow color.  
           
-        For more information on how to configure the color, refer [Set the Skin Background](https://docs.voltmx.com/voltmxlibrary/iris/iris_user_guide/Default.md#Customizing_the_Look_and_Feel_with_Skins.html).
+        For more information on how to configure the color, refer [Set the Skin Background](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Iris/iris_user_guide/Content/Customizing_the_Look_and_Feel_with_Skins.html).
     
     The Style Constant for Shadow is updated.
     
