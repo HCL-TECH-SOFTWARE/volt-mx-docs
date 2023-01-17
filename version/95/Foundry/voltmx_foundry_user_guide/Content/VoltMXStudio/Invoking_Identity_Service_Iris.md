@@ -8,8 +8,9 @@ Invoking an Identity Service
 The following are the methods you can use for an identity service.
 
 *   [Login with provider type as Basic](#login-with-provider-type-as-basic)
-*   [Login with provider type as OAuth/SAML](#login-with-provider-type-as-oauth-saml)
+*   [Login with provider type as OAuth SAML](#login-with-provider-type-as-oauth-saml)
 *   [Login with provider type as OAuth 2.0 with Deep link URL](#login-with-provider-type-as-oauth-2-0-with-deep-link-url)
+*   [Login in the same browser window with provider type as OAuth 2.0](#login-in-the-same-browser-window-with-provider-type-as-oauth-2.0)
 *   [Get Backend Token](#get-backend-token)
 *   [User Profile](#user-profile)
 *   [Get Provider Name](#get-provider-name)
@@ -45,7 +46,7 @@ identitySvc.login(options, function(response) {
 
 **Please note the following:**
 
-1. The **isSSOEnabled** flag set to true, indicating that Single Sign-On ](SSO) is enabled. This parameter must be passed every time the user logs in. The parameters **userid** and **password** are required only for the first login. For more information about SSO, refer to [Single Sign-On].  
+> * The **isSSOEnabled** flag set to true, indicating that Single Sign-On ](SSO) is enabled. This parameter must be passed every time the user logs in. The parameters **userid** and **password** are required only for the first login. For more information about SSO, refer to [Single Sign-On](../single_Sign-On.md).
 
 | Supported Platforms for SSO ||
 | --- | --- |
@@ -56,7 +57,7 @@ identitySvc.login(options, function(response) {
     
    Support for Multi-Login with SSO is available from V8 SP4 and higher versions.
     
-1. The earlier code sample provides the following information:
+> * The earlier code sample provides the following information:
 > *    The **include\_profile** parameter is set to true. This parameter specifies whether to encode the user profile as part of the claims token.
 > * The **continueOnRefreshError** flag is set to false. The default value is **true**. If the **continueOnRefreshError** is set to **false** and the previous identity provider session has expired, error 1017 is thrown. The error message is "Transient Login failed. Previous Identity Token expired in backend."
 > * From version 7.2.5 onward Volt MX Foundry apps allow users to use services protected by different Identity services in the same application session as long as users have authenticated to the Identity service. This allows a user to login to Google and Facebook, for example, via identity services and use integration services dependent on those identity services in the same application session, without having to logout of either.
@@ -88,7 +89,7 @@ The page will look like the following example.
 
 
 
-Login with provider type as OAuth/SAML
+Login with provider type as OAuth SAML
 --------------------------------------
 
 ```
@@ -321,17 +322,18 @@ options["loginOptions"]["customDataSaveHandle"] = function(successCallback,failu
 ![](../Resources/Images/authentication.png)
 
 
-Configuring an App Service event in the App Lifecycle in the Iris project
 
-In your Iris project, in the App Events section, select the App Service and then attach a function, for example: CustomerAppServiceFunction.
+2. Configuring an App Service event in the App Lifecycle in the Iris project
 
-
-
-![](../Resources/Images/AppServiceFunction.png)
+   In your Iris project, in the App Events section, select the App Service and then attach a function, for example: CustomerAppServiceFunction.
 
 
 
-Make sure that you define the specified function (CustomerAppServiceFunction) in a JS Module.
+   ![](../Resources/Images/AppServiceFunction.png)
+
+
+
+   Make sure that you define the specified function (CustomerAppServiceFunction) in a JS Module.
 
 For example:
 
