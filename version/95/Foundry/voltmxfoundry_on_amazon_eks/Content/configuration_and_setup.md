@@ -42,7 +42,7 @@ For more information about the properties, refer to the following section.
 5.  **Application Server Details**
     *   **SERVER_DOMAIN_NAME**: The **Domain Name** for Volt MX Foundry. This value should be the hostname of the LoadBalancer. For example: abc.companyname (DNS name).
     *   **COM_PROTOCOL**: The communication protocol for Volt MX Foundry. This value can be either http or https.
-6.  **Database Details** <a href="#Database"></a>
+6.  **Database Details** <a id="Database"></a>
     *   **DB_TYPE** - The Database type that is used to host Volt MX Foundry. The possible values are:
         *   For MySQL DB server: `mysql`
         *   For Azure MSSQL or SQL Server: `sqlserver`
