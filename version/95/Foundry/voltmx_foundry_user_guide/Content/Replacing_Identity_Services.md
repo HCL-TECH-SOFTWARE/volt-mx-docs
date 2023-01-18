@@ -21,19 +21,6 @@ From V9 SP3, MFCLI is enhanced with the `replace-identity-service-references` co
 For more information on Identity Services, refer to [Foundry Identity Services](Identity.md#Enhanced)  
 
 
-Identity References in Foundry Services
---------------------------------------
-
-The following section details on the references to Identity Services configurations for back-end services and operations in a Foundry app.
-
-*   Identity Service for Backend Token
-    
-    ![](Resources/Images/IdentityforBackendToken.png)
-    
-*   Authentication for the Existing Identity Provider
-    
-    ![](Resources/Images/IdentityforBackendAuthentication.png)
-       
 
 Prerequisites
 -------------
