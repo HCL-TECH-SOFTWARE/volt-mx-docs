@@ -9,8 +9,8 @@ The following are the methods you can use for an identity service.
 
 *   [Login with provider type as Basic](#login-with-provider-type-as-basic)
 *   [Login with provider type as OAuth SAML](#login-with-provider-type-as-oauth-saml)
-*   [Login with provider type as OAuth 2.0 with Deep link URL](#login-with-provider-type-as-oauth-2-0-with-deep-link-url)
-*   [Login in the same browser window with provider type as OAuth 2.0](#login-in-the-same-browser-window-with-provider-type-as-oauth-2.0)
+*   [Login with provider type as OAuth 2.0 with Deep link URL](#login-with-provider-type-as-oauth-with-deep-link-url)
+*   [Login in the same browser window with provider type as OAuth 2.0](#login-in-the-same-browser-window-with-provider-type-as-oauth)
 *   [Get Backend Token](#get-backend-token)
 *   [User Profile](#user-profile)
 *   [Get Provider Name](#get-provider-name)
@@ -138,7 +138,7 @@ identitySvc.login(options, function(response) {
 
 > * The browserWidget field is mandatory for Volt MX Applications built by using the MVC architecture on Volt MX Iris.
 
-Login with provider type as OAuth 2.0 with Deep link URL
+Login with provider type as OAuth  with Deep link URL
 --------------------------------------------------------
 
 ```
@@ -246,8 +246,8 @@ For projects that are upgraded from earlier versions of Iris to V9 ServicePack 2
 
 ![](../Resources/Images/PKCE_ProjectSettings_ResponsiveWeb.png)
 
-Login in the same browser window with provider type as OAuth 2.0
------------------------------------------------------------------
+Login in the same browser window with provider type as OAuth 
+-------------------------------------------------------------
 
 In the existing design of OAuth login in Volt MX, the login page of an OAuth Identity provider (such as Keycloak, Google, or Okta) opens in a new window (or a new tab) on the browser. The new design implements login in the same browser window.
 
@@ -272,11 +272,16 @@ Follow these steps before you consume the enhancement
 
 Steps to implement login in the same browser window
 
-1. Invoking the Login SDK function
+<ol>
 
-In the client code that invokes the login API, include "noPopup": true as part of the login options.
+<li>Invoking the Login SDK function</li>
+</ol> 
+
+
+ In the client code that invokes the login API, include "noPopup": true as part of the login options.
 
 For Example:
+
 
 ```
 var sdkObject = Volt MX.sdk.getDefaultInstance();
@@ -285,51 +290,58 @@ var options = {};
 options["loginOptions"] = {}; 
 options["loginOptions"]["noPopup"] = true; 
 options["loginOptions"]["customQueryParamsForOAuth"] = {"success_url": "<app-url>"}; /* For example -> http://example.com/apps/appName// */options["customOAuthParams"] =
-{
-	"key2":"value2",
+{ 
+"key2":"value2",
 	"key3":"value3"
 };
 identityServiceObject.login(options, function (res) { 
-   alert("login passed without redirection"); 
+alert("login passed without redirection"); 
 }, function (err) { 
-   alert("login failed due to" + JSON.stringify(err)); 
+alert("login failed due to" + JSON.stringify(err)); 
 });
 
 ```
+
 
 Ideally, you must save the app data or app state before calling the login API. However, if you need to save some data during the login invocation, you can add your save handle function in the options of the login API.
 
 For example:
 
+
 ```
 options["loginOptions"]["customDataSaveHandle"] = function(successCallback,failureCallback)
 {
-	/* Perform a task
-	successCallback(); //Call successCallback if the task is completed successfully
-	failureCallback(); //Call failureCallback  if you want to abort the login as you were not able to save custom data or state */
+/* Perform a task
+successCallback(); //Call successCallback if the task is completed successfully
+failureCallback(); //Call failureCallback  if you want to abort the login as you were not able to save custom data or state */
 }
 
 ```
-> **_Note:_** 
 
-> * In the login options, you must pass the Success URL parameter (which is the web app URL) as part of the "customQueryParamsForOAuth" key.
-> * In the Identity console, under Advanced → Redirect URL on successful authentication
-> * If you have selected Allowed URL list, make sure that the specified Success URL is whitelisted.
+> **_Note:_**  
+
+> * In the login options, you must pass the Success URL parameter (which is the web
+    app URL) as part of the "customQueryParamsForOAuth" key.
+> * In the Identity console, under Advanced → Redirect URL on successful
+    authentication
+> * If you have selected Allowed URL list, make sure that the specified Success URL
+    is whitelisted.
 > * If you have selected Any URL, you do not need to whitelist any URLs.
-
 
 
 ![](../Resources/Images/authentication.png)
 
 
 
-2. Configuring an App Service event in the App Lifecycle in the Iris project
+<dl>
+  <dt>2. Configuring an App Service event in the App Lifecycle in the Iris project</dt>
+</dl>
 
-   In your Iris project, in the App Events section, select the App Service and then attach a function, for example: CustomerAppServiceFunction.
+In your Iris project, in the App Events section, select the App Service and then attach a function, for example: CustomerAppServiceFunction.
 
 
 
-   ![](../Resources/Images/AppServiceFunction.png)
+![](../Resources/Images/AppServiceFunction.png)
 
 
 
