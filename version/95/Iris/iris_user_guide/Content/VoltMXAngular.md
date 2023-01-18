@@ -21,20 +21,20 @@ Integrate Components with Angular Components
 
 Follow these steps to integrate Components with Angular Components:
 
-1.  [Create the Component](#create-the)
-2.  [Setup the Micro Front End (MFE) App](#setup-the)
-3.  [Create the Micro Front End (MFE) Components](#create-the)
+1.  [Create the Component](#create-the-component)
+2.  [Setup the Micro Front End (MFE) App](#setup-the-micro-front-end-app)
+3.  [Create the Micro Front End (MFE) Components](#create-the-micro-front-end-components)
 4.  [Configure the Webpack 5 Module](#configure-the-webpack-5-module)
-5.  [Integrate the Micro Front End (MFE) Components with the Angular App](#integrate-the)
+5.  [Integrate the Micro Front End (MFE) Components with the Angular App](#integrate-the-micro-front-end-components-with-the-angular-app)
 6.  [Enable Communication between the Components](#enable-communication-between-the-components)
 
 ### Create the Component
 
 Follow these steps to create the Components:
 
-1.  [Create a project for the Web platform](https://basecamp.hcl.com/s/getting-started?tid=a056A00000LqrlUQAR)
-2.  [Create a Component](https://docs.voltmx.com/voltmxlibrary/iris/iris_user_guide/Default.md#C_CreatingComponent.html)
-3.  [Publish the app to](https://docs.voltmx.com/voltmxlibrary/iris/iris_user_guide/Default.md#PublishVoltMXFoundryServicesApp.html)
+1.  [Create a project for the Web platform](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Iris/iris_user_guide/Content/Responsive_Design_8_2.html)
+2.  [Create a Component](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Iris/iris_user_guide/Content/C_CreatingComponent.html)
+3.  [Publish the app to Foundry App](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_appfactory_user_guide/Content/FoundryPublish.html)
 
 You have successfully created a component and published the app to .
 
@@ -55,13 +55,13 @@ Follow these steps to configure the Micro Front End App:
 8.  In the Micro Front End App, create an Angular Resolver, and add the code snippet from the **Snippet** section.
 9.  In the Micro Front End App, create an Angular app routes file with the name **voltmx-app.routes**, and provide the class name as **VOLTMX\_APP\_ROUTES**.  
     You can use these routes to execute standalone routing components.
-10.  In the ******VOLTMX\_APP\_ROUTES****** file, add the code snippet from the **Snippet** section.
+10.  In the **VOLTMX\_APP\_ROUTES** file, add the code snippet from the **Snippet** section.
 11.  In the Micro Front End App, create an Angular Module with the name **voltmx-mfe.module.ts**, and provide the class name as **VoltMXMfeModule**.
-12.  In the ******VoltMXMfeModule****** file, add the code snippet from the **Snippet** section.
+12.  In the **VoltMXMfeModule** file, add the code snippet from the **Snippet** section.
 13.  In the Micro Front End App, create an Angular app routes file with the name **voltmx-mfe.routes**, and provide the class name as **VOLTMX\_MFE\_ROUTES**.  
     You can use these routes to execute MFE routing components.
-14.  In the ******VOLTMX\_MFE\_ROUTES****** file, add a code snippet from the **Snippet** section.
-15.  In the ****voltmx-app.module**** file, add a code snippet from the **Snippet** section.
+14.  In the **VOLTMX\_MFE\_ROUTES** file, add a code snippet from the **Snippet** section.
+15.  In the **voltmx-app.module** file, add a code snippet from the **Snippet** section.
 
 You have successfully set up the Micro Front End App.
 
@@ -69,7 +69,7 @@ You have successfully set up the Micro Front End App.
 
 This section provides details on embedding the components ](with and without contract) into Angular apps. To integrate components with Angular components, you must create an angular component that contains a placeholder in the.md code.
 
-When you follow the steps mentioned in the [Create the Component](#create-the) section, a new component instance is created in the **Component** class. The [voltmx.ui.renderTo API](https://docs.voltmx.com/voltmxlibrary/iris/iris_api_dev_guide/content/voltmx.ui_functions.md#renderTo) then renders the component and the placeholder. The **voltmx.ui.renderTo** API accepts two parameters - `model` (the component instance object), and `elementRefById` (the placeholder Element ID).
+When you follow the steps mentioned in the Create the Component section, a new component instance is created in the **Component** class. The voltmx.ui.renderTo API then renders the component and the placeholder. The **voltmx.ui.renderTo** API accepts two parameters - `model` (the component instance object), and `elementRefById` (the placeholder Element ID).
 
 Ensure that you maintain unique class names for the component and placeholder to avoid any conflicts that may arise.
 
@@ -98,7 +98,7 @@ You have successfully configured the Webpack 5 Module.
 
 To dynamically render the Micro Front End (MFE) Components when the Angular App loads, follow these steps:
 
-1.  Ensure that you create a remote entry for Micro Front End Components by following the steps in the [Configure the Webpack 5 Module](#configure-the-webpack-5-module) section.
+1.  Ensure that you create a remote entry for Micro Front End Components by following the steps in the Configure the Webpack 5 Module section.
 2.  Create a new file (or use an existing file) with the name `dec.d.ts`, and declare the modules and components.
 3.  Navigate to the **Routes** section in the Angular project, and load the modules in the routing section including the components in the **Components** section, if required.
 
@@ -108,11 +108,11 @@ You have successfully integrated the Micro Front End Components with the Angular
 
 After integrating the Micro Front End Components with the Angular App, you must configure a communication channel between the components (VoltMX Component-Angular Component, Angular Component-Angular Component, and VoltMX Component-VoltMX Component). To enable communication between the components, has introduced support for the following voltmx.listener APIs:
 
-*   [voltmx.listener.create](https://docs.voltmx.com/voltmxlibrary/iris/iris_api_dev_guide/content/voltmx.listener_functions.md#create)
-*   [voltmx.listener.broadcast](https://docs.voltmx.com/voltmxlibrary/iris/iris_api_dev_guide/content/voltmx.listener_functions.md#broadcast)
-*   [voltmx.listener.subscribe](https://docs.voltmx.com/voltmxlibrary/iris/iris_api_dev_guide/content/voltmx.listener_functions.md#subscribe)
-*   [voltmx.listener.unsubscribe](https://docs.voltmx.com/voltmxlibrary/iris/iris_api_dev_guide/content/voltmx.listener_functions.md#unsubscribe)
-*   [voltmx.listener.destroy](https://docs.voltmx.com/voltmxlibrary/iris/iris_api_dev_guide/content/voltmx.listener_functions.md#destroy)
+*   [voltmx.listener.create](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Iris/iris_api_dev_guide/content/voltmxlistener_api.html)
+*   [voltmx.listener.broadcast](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Iris/iris_api_dev_guide/content/voltmxlistener_api.html)
+*   [voltmx.listener.subscribe](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Iris/iris_api_dev_guide/content/voltmxlistener_api.html)
+*   [voltmx.listener.unsubscribe](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Iris/iris_api_dev_guide/content/voltmxlistener_api.html)
+*   [voltmx.listener.destroy](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Iris/iris_api_dev_guide/content/voltmxlistener_api.html)
 
 Sample Code Snippets
 --------------------
@@ -286,7 +286,9 @@ export class VoltMXMfeModule {
 
 VoltMX Component (with/without contract):
 
-{% highlight voltMx %.html:
+```
+
+html:
 "<div (click)="getElement()"> Click here </div>
 <div class="one" id="one" #one></div>
 "
