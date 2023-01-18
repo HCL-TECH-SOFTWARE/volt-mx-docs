@@ -88,3 +88,40 @@ To configure Volt MX Iris to make a remote connection to a Mac machine, follow t
     
 4.  Click **Test Connection** to validate the connection to the Mac device.
 5.  Click **Done**.
+
+Enable Data Protection for an iOS App
+--------------------------------------
+
+Data protection is an iOS feature that prevents unauthorized access to the files of an app by encrypting user data. While creating an app, you must specify the level of data protection that you want to apply to the app. There are four levels of data protection (Complete, Complete unless open, Complete until first user authentication, and No protection) that determine when you may access files of the app. If you do not specify a protection level when you create a file, Volt MX Iris User Guide applies the default protection level automatically.
+
+To enable data protection entitlement for an app in Volt MX Iris, follow these steps:
+
+> **_Important:_**  Before you start using data protection entitlement for an app, ensure that you have added (or enabled) the data protection capabilities in the provision profile that you have associated with the app.
+
+   1. From the **Workspace** folder of the app, navigate to the resources/common directory.
+
+   2. Open the **quantum_nitro_configuration.json** file.
+
+   3. Add the **Data Protection** key, and provide any of the following values to the key, based on the level of data protection that you want to provide for the app:
+
+
+      * <b>NSFileProtectionComplete</b>: The file is stored in an encrypted format on the disk, and cannot be read from or written to while the device is locked or is booting. For more information, ,refer [NSFileProtectionComplete](https://developer.apple.com/documentation/foundation/nsfileprotectioncomplete).
+
+      * <b>NSFileProtectionCompleteUnlessOpen</b>: The file is stored in an encrypted format on the disk, after it is closed. For more information,refer [NSFileProtectionCompleteUnlessOpen](https://developer.apple.com/documentation/foundation/nsfileprotectioncompleteunlessopen).
+
+
+      * <b>NSFileProtectionCompleteUntilFirstUserAuthentication</b>: The file is stored in an encrypted format on the disk, and cannot be accessed until after the device has competed booting. For more information, ,refer [NSFileProtectionCompleteUntilFirstUserAuthentication](https://developer.apple.com/documentation/foundation/nsfileprotectioncompleteuntilfirstuserauthentication).
+
+      * <b>Null</b>: The file has no special protections associated with it.
+
+
+> **_NOTE:_**  The default value for the Data Protection key is Null.
+
+Here is a sample **quantum_nitro_configuration.json** file entry that enables complete data protection for the app:
+
+```
+"Capabilites": {
+    "Data Protection": "NSFileProtectionComplete"
+},
+
+```

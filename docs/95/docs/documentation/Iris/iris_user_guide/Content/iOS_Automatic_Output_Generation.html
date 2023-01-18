@@ -8353,6 +8353,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#enable-data-protection-for-an-ios-app" class="md-nav__link">
+    Enable Data Protection for an iOS App
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -34842,6 +34849,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#enable-data-protection-for-an-ios-app" class="md-nav__link">
+    Enable Data Protection for an iOS App
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -34944,6 +34958,46 @@
 </li>
 <li>Click <strong>Done</strong>.</li>
 </ol>
+<h2 id="enable-data-protection-for-an-ios-app">Enable Data Protection for an iOS App</h2>
+<p>Data protection is an iOS feature that prevents unauthorized access to the files of an app by encrypting user data. While creating an app, you must specify the level of data protection that you want to apply to the app. There are four levels of data protection (Complete, Complete unless open, Complete until first user authentication, and No protection) that determine when you may access files of the app. If you do not specify a protection level when you create a file, Volt MX Iris User Guide applies the default protection level automatically.</p>
+<p>To enable data protection entitlement for an app in Volt MX Iris, follow these steps:</p>
+<blockquote>
+<p><strong><em>Important:</em></strong>  Before you start using data protection entitlement for an app, ensure that you have added (or enabled) the data protection capabilities in the provision profile that you have associated with the app.</p>
+</blockquote>
+<ol>
+<li>
+<p>From the <strong>Workspace</strong> folder of the app, navigate to the resources/common directory.</p>
+</li>
+<li>
+<p>Open the <strong>quantum_nitro_configuration.json</strong> file.</p>
+</li>
+<li>
+<p>Add the <strong>Data Protection</strong> key, and provide any of the following values to the key, based on the level of data protection that you want to provide for the app:</p>
+<ul>
+<li>
+<p><b>NSFileProtectionComplete</b>: The file is stored in an encrypted format on the disk, and cannot be read from or written to while the device is locked or is booting. For more information, ,refer <a href="https://developer.apple.com/documentation/foundation/nsfileprotectioncomplete">NSFileProtectionComplete</a>.</p>
+</li>
+<li>
+<p><b>NSFileProtectionCompleteUnlessOpen</b>: The file is stored in an encrypted format on the disk, after it is closed. For more information,refer <a href="https://developer.apple.com/documentation/foundation/nsfileprotectioncompleteunlessopen">NSFileProtectionCompleteUnlessOpen</a>.</p>
+</li>
+<li>
+<p><b>NSFileProtectionCompleteUntilFirstUserAuthentication</b>: The file is stored in an encrypted format on the disk, and cannot be accessed until after the device has competed booting. For more information, ,refer <a href="https://developer.apple.com/documentation/foundation/nsfileprotectioncompleteuntilfirstuserauthentication">NSFileProtectionCompleteUntilFirstUserAuthentication</a>.</p>
+</li>
+<li>
+<p><b>Null</b>: The file has no special protections associated with it.</p>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong><em>NOTE:</em></strong>  The default value for the Data Protection key is Null.</p>
+</blockquote>
+<p>Here is a sample <strong>quantum_nitro_configuration.json</strong> file entry that enables complete data protection for the app:</p>
+<pre><code>&quot;Capabilites&quot;: {
+    &quot;Data Protection&quot;: &quot;NSFileProtectionComplete&quot;
+},
+
+</code></pre>
 
               
             </article>

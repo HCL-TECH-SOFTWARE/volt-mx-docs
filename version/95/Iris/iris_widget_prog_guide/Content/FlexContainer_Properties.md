@@ -5,23 +5,11 @@
 
 The properties for FlexContainer widget are as follows.
 
-* * *
-
 accessibilityConfig Property
-
-* * *
-
-* * *
 
 activeStateSkin Property
 
-* * *
-
-* * *
-
 a11yNavigationMode
-
-* * *
 
 The property helps to specify the type of navigation order that should be used in the FlexContainer.
 

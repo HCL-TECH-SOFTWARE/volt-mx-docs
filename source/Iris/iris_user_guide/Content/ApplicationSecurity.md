@@ -12,7 +12,7 @@ Volt MX  Iris protects all applications using methods like design time security,
 For enhanced security, Volt MX provides strong application protection solutions by using anti-tampering mechanisms, White Box Cryptography (WBC), Cryptography and Encryption APIs, and also can secure network communications. Following are two methods you can use to enhance security in your application.
 
 *   **VoltMX APIs** - You can make your application more secure by protecting the data in your application using the security APIs provided by Volt MX Iris. Data can be encrypted using [Cryptography APIs](../../../Iris/iris_api_dev_guide/content/cryptography.md), offline data can be encrypted and stored using [SQL Database Encryption APIs](../../../Iris/iris_api_dev_guide/content/data_store_library.md), and network communications can be secured using two-way SSL/Mutual Authentication (SSL Pinning + Client Authentication).
-*   **Protected Mode option** - Applications built in Volt MX Iris can use the additional security enhancements by building the application in the _Protected Mode_. Volt MX IrisPlatform code for iOS and Android is equipped with mechanisms that can protect your application by detecting attacks like tampering, swizzling, debugging, jail breaking (iOS), rooting (Android), and information disclosure. Additional security mechanisms are provided through the use of White Box Cryptography to protect application business logic and source code. Application reacts to the attack by exiting upon detecting attacks to prevent further attempts.
+*   **Protected Mode option** - Applications built in Volt MX Iris can use the additional security enhancements by building the application in the _Protected Mode_. Volt MX Iris Platform code for iOS and Android is equipped with mechanisms that can protect your application by detecting attacks like tampering, swizzling, debugging, jail breaking (iOS), rooting (Android), and information disclosure. Additional security mechanisms are provided through the use of White Box Cryptography to protect application business logic and source code. Application reacts to the attack by exiting upon detecting attacks to prevent further attempts.
 
 This topic covers the following:
 
@@ -105,25 +105,16 @@ To generate, encrypt, and use the RSA key pair, follow these steps: 
 4. For Android and iOS platforms, VoltMX's security team validates the details and encrypts your public key.  
     For the Responsive Web/SPA platform, VoltMX's security team validates the information and shares the unique **clientID** and **clientSecret** through email. You must then use these details to [create a postbuild task](BuildAnSPAApplication.md#securing-your-web-applications).
 5. VoltMX's security team then returns the encrypted public key to you through email.
-    1.  For iOS, Volt MX provides a set of `fin` keys along with the public key to protect iOS applications.
-
-    > **_Note:_** Starting with Volt MX will not provide the `fin` keys folder if your Iris version is V8 SP3 or later.
 
     > **_Important:_** You must not share your private key with anyone including Volt MX. In case of a key compromise for the Android, iOS and Responsive Web/SPA platforms, generate a new set of keys and send the public key to [voltmxlicensing@hcl.com](mailto:voltmxlicensing@hcl.com?subject=Keys). 
+    
 6. Navigate to your Volt MX Iris workspace and create a **\_\_encryptionkeys** folder.
 7. Place the following keys received from Volt MX in **\_\_encryptionkeys** folder.
     
     a.  Your private key. The private key must be named as `private_key.pem`.
     
     b.  Encrypted public keys provided by Volt MX Iris.
-        
-    > **_Note:_**  Once you have updated your Iris version to V8 SP3 or later, you can delete the `fin` keys folder from your **\_\_encryptionkeys** folder.
-        
-    c. For iOS, the `fin` keys provided by Volt MX Iris. These keys are provided to protect iOS applications. `fin` keys are applicable until the Volt MX Iris V8 SP2 version.
-    
-
-    ![](Resources/Images/FinKeys1_696x388.png)
-    
+                   
 
 ### Configure Project Settings in Volt MX Iris
 
