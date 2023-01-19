@@ -69,7 +69,7 @@ voltmx.automation.button.click(["Login Page", "userwidget1", "btnLogin"]);
 *   Windows
 *   SPA and ResponsiveWeb
 
-The voltmx.automation Namespace comprises of the following Widget APIs.
+The voltmx.automation Namespace comprises the following Widget APIs.
 
 <details close markdown="block"><summary>voltmx.automation.actionSheet.click</summary> 
 
@@ -1479,17 +1479,16 @@ Returns false if the wdget is not found within the timeout period.
 * * *
 
 </details>
-<details close markdown="block"><summary>voltmx.automation.playback.waitForLoadingScreenToBeDismissed</summary>
+<details close markdown="block"><summary>voltmx.automation.playback.waitForLoadingScreenToDismiss</summary>
 
 * * *
 
-Waits for the loading screen to be dismissed or disappear. It is an awaitable API.
+This API blocks user action until the loading screen is dismissed (or disappears). This is an awaitable API.
 
 <b>Syntax</b>
 
 ```
-
-voltmx.automation.playback.waitForLoadingScreenToBeDismissed(<timeout in ms>);
+voltmx.automation.playback.waitForLoadingScreenToDismiss(<timeout in ms>);
 ```
 
 <b>Input Parameters</b>
@@ -1497,29 +1496,30 @@ voltmx.automation.playback.waitForLoadingScreenToBeDismissed(<timeout in ms>);
   
 | Parameters | Description |
 | --- | --- |
-| timeout \[number\] | It is an optional parameter. The timeout parameter must be specified in milliseconds. If the timeout is not specified, the API waits until the widget appears. |
+| timeout \[number\] | It is an optional parameter. The timeout parameter must be specified in milliseconds. If the timeout is not specified, the API waits until the loading screen disappears. |
 
  
 
 <b>Example</b>
 
 ```
-await voltmx.automation.playback.waitForLoadingScreenToBeDismissed("amountSpentLabel");
+await voltmx.automation.playback.waitForLoadingScreenToDismiss("amountSpentLabel");
 ```
 
 <b>Return Values</b>
 
 Boolean
 
-Returns true if there is no loading screen or the loading screen has disappeared.
+Returns true if the loading screen has disappeared or the loading screen has not been rendered.
 
-Returns false if the loading screen is visible on the screen.
+Returns false when the timeout is reached.
 
 <b>Platform Availability</b>
 
 *   Android
 *   iOS
-*   SPA and ResponsiveWeb
+*   SPA
+*   ResponsiveWeb
 
 * * *
 
