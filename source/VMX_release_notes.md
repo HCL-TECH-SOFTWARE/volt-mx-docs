@@ -32,6 +32,7 @@ For detailed information about fixes and known issues in Volt MX, please see the
 - [V9 Servicepack 2 Fixpack 1 Hotfix 6](#v9-servicepack-2-fixpack-1-hotfix-6)
 - [Earlier Foundry releases](#earlier-foundry-releases)
 
+
 ## Volt Iris
 
 
@@ -59,7 +60,6 @@ September 19, 2022
 Added support for Volt Iris to target Android API level 31(Android 12) for generating binaries in compliance with latest Google Play Store guidelines.
 
 This release also addresses an issue with offline objects for object services in ProgressCallback.Refer to the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>  for further info.
-
 
 
 ### V9 Servicepack 2 Fixpack 54 
