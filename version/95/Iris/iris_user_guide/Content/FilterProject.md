@@ -11,6 +11,7 @@ To filter resources in the **Project** tab of the Project Explorer, follow these
 2.  From the hamburger menu in the Project Explorer, click **Filter**.  
     The **Project Filter** dialog box appears.  
     ![](Resources/Images/FilterAppResources.png)
+
 3.  From the **Micro Apps** field, select the micro apps that you want to filter.
 4.  From the **Resources** section, select the filters that you want to apply for the micro apps.
 5.  Click **Save**.  
@@ -20,11 +21,10 @@ To filter resources in the **Project** tab of the Project Explorer, follow these
 To filter resources in the **Themes** tab of the Project Explorer, follow these steps:
 
 1.  In the Project Explorer, navigate to the **Themes** tab.
-2.  From the hamburger menu in the Project Explorer, click **Filter**.  
-      
+2.  From the hamburger menu in the Project Explorer, click **Filter**.        
     The **Project Filter** dialog box appears.  
-      
     ![](Resources/Images/ThemesFilter.png)
+
 3.  From the **Micro Apps** field, select the micro apps that you want to filter.
 4.  From the **Themes** section, select the filters that you want to apply for the micro apps.
 5.  Click **Save**.  
@@ -34,10 +34,9 @@ To filter resources in the **Templates** tab of the Project Explorer, follow the
 
 1.  In the Project Explorer, navigate to the **Templates** tab.
 2.  From the hamburger menu in the Project Explorer, click **Filter**.  
-      
     The **Project Filter** dialog box appears.  
-      
     ![](Resources/Images/TemplatesFilter.png)
+
 3.  From the **Micro Apps** field, select the micro apps that you want to filter.
 4.  From the **Entities** section, select the filters that you want to apply for the micro apps.
 5.  Click **Save**.  
@@ -47,10 +46,9 @@ To filter resources in the **Assets** tab of the Project Explorer, follow these 
 
 1.  In the Project Explorer, navigate to the **Assets** tab.
 2.  From the hamburger menu in the Project Explorer, click **Filter**.  
-      
     The **Project Filter** dialog box appears.  
-      
-    ![](Resources/Images/AssetsFilter.png)
+    ![](Resources/Images/AssetsFilter.png) 
+
 3.  From the **Micro Apps** field, select the micro apps that you want to filter.
 4.  From the **Assets** section, select the filters that you want to apply for the micro apps.
 5.  Click **Save**.  
