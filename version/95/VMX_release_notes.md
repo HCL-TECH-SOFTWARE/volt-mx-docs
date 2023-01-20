@@ -39,7 +39,7 @@ For detailed information about fixes and known issues in Volt MX, please see the
 
 ### V9 Servicepack 5 Fixpack 5
 
-January 17, 2023
+January 20, 2023
 
 There are no new features or enhancements in this release.
 For relevant Support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
