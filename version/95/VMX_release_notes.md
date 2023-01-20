@@ -2,7 +2,7 @@
 # Volt MX Release Notes
 
 This topic lists new features, enhancements, and changes in Volt MX.
-For detailed information about fixes and known issues in Volt MX, please see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+For detailed information about fixes and known issues in Volt MX, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 
 
@@ -42,7 +42,7 @@ For detailed information about fixes and known issues in Volt MX, please see the
 January 20, 2023
 
 There are no new features or enhancements in this release.
-For relevant Support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+For relevant support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 ### V9 Servicepack 5 Fixpack 4
 
@@ -449,12 +449,12 @@ In addition, support for the Listener APIs has been added in Volt MX Iris to ena
    Android App Bundle format starting August 2021. The default Android application format built by Volt MX Iris is AAB instead of APK.
 
 
-For detailed information about fixes and known issues in this release, please see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 ### V9 Servicepack 2 Fixpack 56
 December 1, 2022
 
-There are no new features or enhancements in this release. The purpose of this fix-pack is to enable Volt Iris upgrade from 9.2.55 or lower to 9.5.x or higher. Existing installations of Volt Iris at versions 9.2.55 or lower will not have an option to upgrade to 9.5.x and must be upgraded to 9.2.56 (or higher) first to have the 9.5.x upgrade option available. For relevant Support note, see the<a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476" target="_blank"> Cumulative fix list for HCL Volt MX</a>.
+There are no new features or enhancements in this release. The purpose of this fix-pack is to enable Volt Iris upgrade from 9.2.55 or lower to 9.5.x or higher. Existing installations of Volt Iris at versions 9.2.55 or lower will not have an option to upgrade to 9.5.x and must be upgraded to 9.2.56 (or higher) first to have the 9.5.x upgrade option available. For relevant support note, see the<a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476" target="_blank"> Cumulative fix list for HCL Volt MX</a>.
 
 
 ### V9 Servicepack 2 Fixpack 55
@@ -483,11 +483,11 @@ August 29, 2022
 - Support has been added for the [voltmx.automation.webSocket.sendMessage](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.automation_namespace.md#volt-mx-automation-namespace) and the [voltmx.automation.webSocket.waitForMessage](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.automation_namespace.md#volt-mx-automation-namespace) APIs in Volt MX Iris to support cross-app testing between apps that use the same WebSocket Server. 
   
 
-For detailed information about fixes and known issues in this release, please see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 ### V9 Servicepack 2 Fixpack 47
 August 18, 2022
 
-There are no new features or enhancements in this release. The purpose of this fixpack is to address a sync operation failure in apps that use Offline Objects. For the relevant Support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+There are no new features or enhancements in this release. The purpose of this fixpack is to address a sync operation failure in apps that use Offline Objects. For the relevant support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 
 ### V9 Servicepack 2 Fixpack 46
@@ -502,7 +502,7 @@ set the path to Python installation. Details of the preference are as follows.
 
 - [Setting the Python Installation Path](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_starter_install_mac/Content/Preferences.md).
 
-For detailed information about fixes and known issues in this release, please see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+For detailed information about fixes and known issues in this release,  see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 ### V9 Servicepack 2 Fixpack 45
 May 21, 2022
@@ -530,14 +530,14 @@ There are new supported devices in this release in Iris, and they are listed bel
         Samsung Galaxy 21,
         Samsung Galaxy 22
 
-For detailed information about fixes and known issues in this release, please see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 ### V9 Servicepack 2 Fixpack 38
 December 17, 2021
 
 #### Iris Enhancements
 
-There are no new features or enhancements in this release. The purpose of this fixpack is to address the log4j threat. For the relevant Support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+There are no new features or enhancements in this release. The purpose of this fixpack is to address the log4j threat. For the relevant support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 ### V9 Servicepack 2 Fixpack 37
 November 22, 2021
@@ -844,7 +844,7 @@ For information about this feature, refer to the following links:
   on-premise (via script-based installation). Support for Kubernetes versions below 1.21.3 dropped.
 * Upgraded Docker (single container, on-premise) version to 20.10.17
 
-  For detailed information about fixes and known issues in this release, please see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+  For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 
 ### V9 Servicepack 2 Fixpack 1 Hotfix 13
@@ -857,13 +857,13 @@ August 29, 2022
 - The OAuth 2.0 type Identity Service on Volt MX Foundry has been enhanced with an option to enable/disable PKCE between Foundry and OAuth back-end. For more information about this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Identity10_VoltMX_OAuth2.md).
 - Added the following parameter to the service.bat file for Windows services: -Dlog4j2.enableJndiJdbc=true. Please refer to [Log4j – Configuring Log4j 2 ](apache.org)](https://logging.apache.org/log4j/2.x/manual/configuration.md) for details.
 
-For detailed information about fixes and known issues in this release, please see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 ### V9 Servicepack 2 Fixpack 1 Hotfix 11
 August 19, 2022
 
 There are no new features or enhancements in this release. The purpose
-of this fixpack is to address a problem with user re-registration. For the relevant Support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+of this fixpack is to address a problem with user re-registration. For the relevant support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 ### V9 Servicepack 2 Fixpack 1 Hotfix 10
 July 8, 2022
@@ -872,7 +872,7 @@ July 8, 2022
 
 We have added support for Oracle overloaded stored procedures in the RDBMS adapter.
 
-For detailed information about any fixes and known issues in this release, please see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+For detailed information about any fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 ### V9 Servicepack 2 Fixpack 1 Hotfix 9
 June 15, 2022
@@ -886,21 +886,21 @@ Following dependencies for Spring and Hibernate are also upgraded.
 - Spring-integration from 4.3.6.RELEASE to 5.5.7
 - Hibernate validator from 4.3.2.Final to 6.0.22.Final.
 
-For the relevant Support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+For the relevant support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 ### V9 Servicepack 2 Fixpack 1 Hotfix 8
 May 3, 2022
 
 #### Foundry Enhancements
 
-There are no new features or enhancements in this release. For the relevant Support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+There are no new features or enhancements in this release. For the relevant support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 ### V9 Servicepack 2 Fixpack 1 Hotfix 7
 December 17, 2021
 
 #### Foundry Enhancements
 
-There are no new features or enhancements in this release. The purpose of this fixpack is to address the log4j threat. For the relevant Support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+There are no new features or enhancements in this release. The purpose of this fixpack is to address the log4j threat. For the relevant support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 ### V9 Servicepack 2 Fixpack 1 Hotfix 6
 November 22, 2021
