@@ -5,7 +5,6 @@ This topic lists new features, enhancements, and changes in Volt MX.
 For detailed information about fixes and known issues in Volt MX, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 
-
 [Volt Iris](#volt-iris)
 
 
@@ -954,3 +953,4 @@ Single Container Solution
 -->
 
 <!--- The App Viewer has been upgraded to support the latest iOS and Android plugins on tablets. -->
+<!-- added a comment-->
