@@ -5690,6 +5690,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#deploy-fabric-using-helm-charts" class="md-nav__link">
+    Deploy Fabric using Helm Charts
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#launch-the-foundry-console" class="md-nav__link">
     Launch the Foundry Console
   </a>
@@ -36185,6 +36192,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#deploy-fabric-using-helm-charts" class="md-nav__link">
+    Deploy Fabric using Helm Charts
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#launch-the-foundry-console" class="md-nav__link">
     Launch the Foundry Console
   </a>
@@ -36585,13 +36599,42 @@ The &lt;INSTALL_ENV_NAME&gt; is the name of the install environment that you pro
   </li>
 </ol>
 
-<h2 data-mc-conditions="Default.V9SP6" id="DeployFabricusingHelmCharts" data-magellan-target="DeployFabricusingHelmCharts"><a name="Deploying_Helm"></a>Deploy Foundry using Helm Charts</h2>
-<p data-mc-conditions="Default.V9SP6">To deploy Foundry by using Helm charts, make sure that you have <a href="foundry_on_openShift.htm#Helm" target="_blank">installed Helm</a>, and then follow these steps:</p>
-<ol data-mc-conditions="Default.V9SP6"><li value="1">Open a terminal console and navigate to the <a href="#Configuring">extracted folder</a>.</li><li value="2">Generate the Foundry services by running the following command:<pre class="prettyprint prettyprinted" style=""><span class="pun">./</span><span class="pln">generate</span><span class="pun">-</span><span class="pln">kube</span><span class="pun">-</span><span class="pln">artifacts</span><span class="pun">.</span><span class="pln">sh config</span><span class="pun">.</span><span class="pln">properties svcs</span></pre><br>To generate the services configuration, you only need to fill the <code class="codefirst" style="font-size: 11pt;">INSTALL_ENV_NAME</code> property and the <b>## Install Components ###</b> section in the <code class="file_names" style="font-size: 11pt;">config.properties</code> file.</li><li value="3">Navigate to the <code class="file_names">helm_charts</code> folder by executing the following command.<pre class="prettyprint prettyprinted" xml:space="preserve" style=""><span class="pln">cd helm_charts</span></pre></li><li value="4">Create the <code class="file_names">foundrydb</code> and <code class="file_names">foundryapp</code> Helm charts by executing the following commands.<pre class="prettyprint prettyprinted" xml:space="preserve" style=""><span class="pln">helm </span><span class="kwd">package</span><span class="pln"> foundry_db</span><span class="pun">/</span></pre><pre class="prettyprint prettyprinted" xml:space="preserve" style=""><span class="pln">helm </span><span class="kwd">package</span><span class="pln"> foundry_app</span><span class="pun">/</span></pre></li><li value="5">Install the <code class="file_names">foundrydb</code> Helm chart by executing the following command.<pre class="prettyprint prettyprinted" xml:space="preserve" style=""><span class="pln">helm install foundrydb  foundry</span><span class="pun">-</span><span class="pln">db</span><span class="pun">-&lt;</span><span class="typ">Version</span><span class="pun">&gt;.</span><span class="pln">tgz</span></pre></li><li value="6">Install the <code class="file_names">foundryapp</code> Helm chart by executing the following command.<pre class="prettyprint prettyprinted" xml:space="preserve" style=""><span class="pln">helm install foundryapp  foundry</span><span class="pun">-</span><span class="pln">app</span><span class="pun">-&lt;</span><span class="typ">Version</span><span class="pun">&gt;.</span><span class="pln">tgz</span></pre></li></ol>
-<p><span class="autonumber"><span><b><span style="color: #293276;" class="mcFormatColor">IMPORTANT: </span></b></span></span></p>
-<ul><li>Make sure that you generate the artifacts (generate-artifacts.sh) before creating the Helm charts.</li><li>Make sure that the <code class="file_names">foundrydb</code> Helm chart installation is complete before installing the <code class="file_names">foundryapp</code> Helm chart.</li>
+<h2 id="deploy-fabric-using-helm-charts">Deploy Fabric using Helm Charts</h2>
+<p>To deploy Fabric by using Helm charts, make sure that you have installed Helm, and then follow these steps:</p>
+<ol>
+<li>
+<p>Open a terminal console and navigate to the extracted folder.</p>
+</li>
+<li>
+<p>Generate the Fabric services by running the following command:</p>
+<p><code>./generate-kube-artifacts.sh config.properties svcs</code></p>
+<p>To generate the services configuration, you only need to fill the <code>INSTALL_ENV_NAME</code> property and the ## Install Components ### section in the <code>config.properties</code> file.</p>
+</li>
+<li>
+<p>Navigate to the <code>helm_charts</code> folder by executing the following command.</p>
+<p><code>cd helm_charts</code></p>
+</li>
+<li>
+<p>Create the <code>fabricdb</code> and <code>fabricapp</code> Helm charts by executing the following commands.</p>
+<p><code>helm package fabric_db/</code></p>
+<p><code>helm package fabric_app/</code></p>
+</li>
+<li>
+<p>Install the <code>fabricdb</code> Helm chart by executing the following command.</p>
+<p><code>helm install fabricdb  fabric-db-&lt;Version&gt;.tgz</code></p>
+</li>
+<li>
+<p>Install the fabricapp Helm chart by executing the following command.</p>
+<p><code>helm install fabricapp  fabric-app-&lt;Version&gt;.tgz</code></p>
+</li>
+</ol>
+<blockquote>
+<p><strong>IMPORTANT:</strong></p>
+<ul>
+<li>Make sure that you generate the artifacts (generate-artifacts.sh) before creating the Helm charts.</li>
+<li>Make sure that the fabricdb Helm chart installation is complete before installing the fabricapp Helm chart.</li>
 </ul>
-</div>
+</blockquote>
 <h2 id="launch-the-foundry-console"><a name="Launching"></a>Launch the Foundry Console</h2>
 <ol>
 <li>
@@ -36601,9 +36644,11 @@ The &lt;INSTALL_ENV_NAME&gt; is the name of the install environment that you pro
 </li>
 <li>
 <p>After you launch the Foundry Console, create an administrator account by providing the appropriate details.</p>
-<p><img alt="" src="Resources/Images/OpenShift_FoundryAccount.png" /></p>
 </li>
 </ol>
+<!--
+    ![](Resources/Images/OpenShift_FoundryAccount.png)
+-->
 <p>After you create an administrator account, you can sign-in to the Foundry Console by using the credentials that you provided.</p>
 <h2 id="logging-considerations">Logging Considerations</h2>
 <p>All Foundry application logs will be streamed to the Standard Output (stdout). You can view the logs by using the <code>kubectl logs</code> command. For more details refer to <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet#interacting-with-running-pods">Interacting with running Pods</a>.</p>

@@ -37,8 +37,6 @@ When you try to publish the app without logging into Volt MX Foundry, the login 
 
 If you try to publish the app, even when you do not have an associated Volt MX Foundry app, you will get a prompt to link a Volt MX Foundry app.
 
-![](Resources/Images/LinkFoundry_451x165.png)
-
 To change the selected Cloud account or Environment, go to **Project Settings** > **VoltMX Foundry**. hen, click the **VoltMX Foundry** tab. At the top of this tab, under Volt MX Foundry Environment, select an environment from the drop-down list. Click **Done**. If you do not see any environments listed, you need to create one. For more information, refer [Environments](../../../Foundry/voltmx_foundry_user_guide/Content/Environments.md) in the Volt MX Foundry Console User Guide.
 
 To publish the Volt MX Iris web app to Volt MX Foundry, the app needs to be associated with a Volt MX Foundry app.
@@ -137,3 +135,31 @@ Before you publish a web app, ensure that you have a project in which you have a
     ![](Resources/Images/WebPublishURL_603x200.png)
 19.  Click on **View Logs** to access the logs of the publish process.
 20.  An **Application was deployed mail** will also be sent to your registered e-mail account. This mail will contain the App details along with the App URL. Click on the URL in the mail to open the web app in your default web browser.
+
+### Enable Node Build for Responsive Web Apps
+
+From the V9 ServicePack4 Fixpack 21, the build performance of Responsive Web Apps (that use the CSS Library mode) has been enhanced to use Node builds. With the introduction of Node builds, the time taken to build a Responsive Web App has reduced significantly.
+
+Follow these steps to enable Node Builds for Responsive Web Apps:
+
+1. Navigate to the location of your project. For example, `<your workspace folder>/<appid>/`.
+
+2. Create a New Folder with the name **custombuild** (if it doesn’t already exist).
+
+3. In the custombuild folder, create a new file, **spadw.properties**.
+
+4. In the spadw.properties file, add the following entry:
+
+    **desktopwebNodeBuild=true**
+
+5. Save and close the file.
+
+6. Build and Publish the project as usual.
+
+Observe the time taken to build the app is less than half the time it used to take.
+
+> NOTE: From the V9 Service Pack 7 release, the build performance of Responsive Web Apps (that use the CSS Library mode) has been enhanced to reduce the build time. However, the new build process does not have support for the following features:
+>
+> * Functional Modules
+> * Search Engine Optimization
+> * Minification of CSS files in Release Mode

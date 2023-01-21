@@ -363,10 +363,52 @@ The &lt;INSTALL_ENV_NAME&gt; is the name of the install environment that you pro
   </li>
 </ol>
 
-<h2 data-mc-conditions="Default.V9SP6" id="DeployFabricusingHelmCharts" data-magellan-target="DeployFabricusingHelmCharts"><a name="Deploying_Helm"></a>Deploy Foundry using Helm Charts</h2>
-<p data-mc-conditions="Default.V9SP6">To deploy Foundry by using Helm charts, make sure that you have <a href="foundry_on_openShift.htm#Helm" target="_blank">installed Helm</a>, and then follow these steps:</p><ol data-mc-conditions="Default.V9SP6"><li value="1">Open a terminal console and navigate to the <a href="#Configuring">extracted folder</a>.</li><li value="2">Generate the Foundry services by running the following command:<pre class="prettyprint prettyprinted" style=""><span class="pun">./</span><span class="pln">generate</span><span class="pun">-</span><span class="pln">kube</span><span class="pun">-</span><span class="pln">artifacts</span><span class="pun">.</span><span class="pln">sh config</span><span class="pun">.</span><span class="pln">properties svcs</span></pre><br>To generate the services configuration, you only need to fill the <code class="codefirst" style="font-size: 11pt;">INSTALL_ENV_NAME</code> property and the <b>## Install Components ###</b> section in the <code class="file_names" style="font-size: 11pt;">config.properties</code> file.</li><li value="3">Navigate to the <code class="file_names">helm_charts</code> folder by executing the following command.<pre class="prettyprint prettyprinted" xml:space="preserve" style=""><span class="pln">cd helm_charts</span></pre></li><li value="4">Create the <code class="file_names">foundrydb</code> and <code class="file_names">foundryapp</code> Helm charts by executing the following commands.<pre class="prettyprint prettyprinted" xml:space="preserve" style=""><span class="pln">helm </span><span class="kwd">package</span><span class="pln"> foundry_db</span><span class="pun">/</span></pre><pre class="prettyprint prettyprinted" xml:space="preserve" style=""><span class="pln">helm </span><span class="kwd">package</span><span class="pln"> foundry_app</span><span class="pun">/</span></pre></li><li value="5">Install the <code class="file_names">foundrydb</code> Helm chart by executing the following command.<pre class="prettyprint prettyprinted" xml:space="preserve" style=""><span class="pln">helm install foundrydb  foundry</span><span class="pun">-</span><span class="pln">db</span><span class="pun">-&lt;</span><span class="typ">Version</span><span class="pun">&gt;.</span><span class="pln">tgz</span></pre></li><li value="6">Install the <code class="file_names">foundryapp</code> Helm chart by executing the following command.<pre class="prettyprint prettyprinted" xml:space="preserve" style=""><span class="pln">helm install foundryapp  foundry</span><span class="pun">-</span><span class="pln">app</span><span class="pun">-&lt;</span><span class="typ">Version</span><span class="pun">&gt;.</span><span class="pln">tgz</span></pre></li></ol><span class="autonumber"><span><b><span style="color: #293276;" class="mcFormatColor">IMPORTANT: </span></b></span></span><ul><li>Make sure that you generate the artifacts (generate-artifacts.sh) before creating the Helm charts.</li><li>Make sure that the <code class="file_names">foundrydb</code> Helm chart installation is complete before installing the <code class="file_names">foundryapp</code> Helm chart.</li>
-</ul>
-</div>
+## Deploy Fabric using Helm Charts
+
+To deploy Fabric by using Helm charts, make sure that you have installed Helm, and then follow these steps:
+
+1. Open a terminal console and navigate to the extracted folder.
+
+2. Generate the Fabric services by running the following command:
+
+    ```
+    ./generate-kube-artifacts.sh config.properties svcs
+    ```
+
+    To generate the services configuration, you only need to fill the `INSTALL_ENV_NAME` property and the ## Install Components ### section in the `config.properties` file.
+
+3. Navigate to the `helm_charts` folder by executing the following command.
+
+    ```
+    cd helm_charts
+    ```
+
+4. Create the `fabricdb` and `fabricapp` Helm charts by executing the following commands.
+
+    ```
+    helm package fabric_db/
+    ```
+
+    ```
+    helm package fabric_app/
+    ```
+
+5. Install the `fabricdb` Helm chart by executing the following command.
+
+    ```
+    helm install fabricdb  fabric-db-<Version>.tgz
+    ```
+
+6. Install the fabricapp Helm chart by executing the following command.
+
+    ```
+    helm install fabricapp  fabric-app-<Version>.tgz
+    ```
+
+> **IMPORTANT:**
+>
+> * Make sure that you generate the artifacts (generate-artifacts.sh) before creating the Helm charts.
+> * Make sure that the fabricdb Helm chart installation is complete before installing the fabricapp Helm chart.
 
 ## <a name="Launching"></a>Launch the Foundry Console
 
@@ -377,9 +419,9 @@ The &lt;INSTALL_ENV_NAME&gt; is the name of the install environment that you pro
     The <code>&lt;scheme&gt;</code> is <code>&lt;http&gt;</code> or <code>&lt;https&gt;</code> based on your domain. The <code>&lt;foundry-hostname&gt;</code> is the host name of your publicly accessible Foundry domain.
 
 2.  After you launch the Foundry Console, create an administrator account by providing the appropriate details.
-
+<!--
     ![](Resources/Images/OpenShift_FoundryAccount.png)
-
+-->
 After you create an administrator account, you can sign-in to the Foundry Console by using the credentials that you provided.
 
 ## Logging Considerations
