@@ -96,6 +96,8 @@ The Publish to my App Store action generates native app binaries and publishes t
 
 To publish an app to the Enterprise App Store, logging in to your Volt MX Account is mandatory.
 
+<img src="Resources/Images/LocalBuild_EASPub_345x431.png" alt="" style="width: 85%">
+
 > **_Note:_** You cannot build apps for the universal channel using this option.
 
 For more information on Publish to my App Store, click [here](EAS.md#publish-apps-to-the-enterprise-app-store).
