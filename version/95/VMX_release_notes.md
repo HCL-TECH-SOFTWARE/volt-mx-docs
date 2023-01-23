@@ -10,6 +10,8 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 - [V9 Servicepack 5 Fixpack 5](#v9-servicepack-5-fixpack-5)
 - [V9 Servicepack 5 Fixpack 4](#v9-servicepack-5-fixpack-4)
+- [V9 Servicepack 2 Fixpack 58](#v9-servicepack-2-fixpack-58)
+- [V9 Servicepack 2 Fixpack 57](#v9-servicepack-2-fixpack-57)
 - [V9 Servicepack 2 Fixpack 56](#v9-servicepack-2-fixpack-56)
 - [V9 Servicepack 2 Fixpack 55](#v9-servicepack-2-fixpack-55)
 - [V9 Servicepack 2 Fixpack 54](#v9-servicepack-2-fixpack-54)
@@ -451,6 +453,19 @@ In addition, support for the Listener APIs has been added in Volt MX Iris to ena
 
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+
+### V9 Servicepack 2 Fixpack 58
+January 19, 2023
+
+There are no new features or enhancements in this release.
+For relevant support note, see the<a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476" target="_blank"> Cumulative fix list for HCL Volt MX</a>.
+
+
+### V9 Servicepack 2 Fixpack 57
+December 19, 2022
+
+There are no new features or enhancements in this release.
+For relevant support note, see the<a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476" target="_blank"> Cumulative fix list for HCL Volt MX</a>.
 
 ### V9 Servicepack 2 Fixpack 56
 December 1, 2022
