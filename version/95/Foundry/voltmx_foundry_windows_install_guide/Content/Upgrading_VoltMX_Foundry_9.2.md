@@ -1,7 +1,7 @@
                            
 
 
-Upgrading Volt MX Foundry 9.2 with MySQL 5.7 to Volt MX Foundry 9.5 with MySQL 8.0
+Upgrading Foundry from 9.2 to 9.5 with MySQL upgrade from 5.7 to 8.0
 ==============================================================================
 
 Prerequisites
