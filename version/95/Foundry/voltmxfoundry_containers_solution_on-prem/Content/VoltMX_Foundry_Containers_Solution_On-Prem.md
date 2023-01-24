@@ -150,20 +150,22 @@ Some of the app services in Foundry cluster use specific node ports to expose th
 Following are the preinstallation tasks to be performed on all nodes before starting installation.
 
 1.  All Kubernetes masters and nodes must have the swap disabled. This is the recommended deployment as per the Kubernetes community.
-    1.  Run the following command to disable swap.
-```
-sudo swapoff -a
-```<br>
-    2.  Run the following command to update fstab so that the swap remains disabled even after a reboot.
-```
-sudo sed -i '/ swap / s/^\(.\*\)$/#\1/g' /etc/fstab
-```<br>
-    3.  Restart the node after the swap is disabled.
+    a.  Run the following command to disable swap.
+    ```
+    sudo swapoff -a
+    ```
+
+    b.  Run the following command to update fstab so that the swap remains disabled even after a reboot.
+    ```
+    sudo sed -i '/ swap / s/^\(.\*\)$/#\1/g' /etc/fstab
+    ```
+
+    c.  Restart the node after the swap is disabled.
+
 2.  Download Foundry container artifacts from [VoltMX Downloads](https://community.hclvoltmx.com/downloads).
+
 3.  If the Foundry cluster is being reinstalled, you must execute the following command on all nodes and delete the **.kube** folder present in the root directory from all the master nodes.
-```
-sudo kubeadm reset
-```<br>
+    `sudo kubeadm reset`
 
 # Architecture
 
@@ -211,18 +213,18 @@ Inputs for installation can be gathered through two modes. Any of the following 
 - **Command Line** - Volt MX Foundry Container Cluster Solution can be installed using the bundled install shell script, which will prompt the user for required values.
 
   The syntax for installing through the Command Line:
-
-  ```
-sudo ./install-foundry.sh
-  ```<br>![](Resources/Images/kb1.png)
+    ```
+    sudo ./install-foundry.sh
+    ```
+    ![](Resources/Images/kb1.png)
 
 - **Silent Installation** - The installation script also supports silent installation if the config.properties file is passed as an argument (for example, /path/install-foundry.sh config.properties). Using this, you can have additional ability to pass custom Tomcat JAVA_OPTS, Heap memory settings, and time-zone settings as well.
 
   The syntax for installing using the config.properties:
 
-  ```
-sudo ./install-foundry.sh config.properties
-  ```
+    ```
+    sudo ./install-foundry.sh config.properties
+    ```
 
 # Configuration
 
@@ -365,57 +367,57 @@ Before starting the cluster installation, a loadbalancer must be set up. Without
 Perform the following steps to setup the HAProxy loadbalancer through a script file.
 
 1.  Download the **VoltMXFoundryContainersOnPrem-9.0.0.0_GA.zip** from the [Download Link](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.2.x&orgId=HCL&fromRecentFile=false&fromRecentPkg=true&fromDL=false) and extract it.
-```
-sudo unzip VoltMXFoundryContainersOnPrem-9.0.0.0_GA.zip
-    -d VoltMXFoundryContainerOnPrem-9.0.0.0_GA
-```
+    ```
+    sudo unzip VoltMXFoundryContainersOnPrem-9.0.0.0_GA.zip
+        -d VoltMXFoundryContainerOnPrem-9.0.0.0_GA
+    ```
 2.  Navigate to foundry container artifact folder.
-```
-cd VoltMXFoundryContainerOnPrem-9.0.0.0_GA
-```
+    ```
+    cd VoltMXFoundryContainerOnPrem-9.0.0.0_GA
+    ```
 3.  Run `setup-loadbalancer.sh`. It prompts for master node hostname and communication protocol. The loadbalancer is then installed and configured.
-```
-sudo ./setup-loadbalancer.sh
-```
+    ```
+    sudo ./setup-loadbalancer.sh
+    ```
 4.  Check if haproxy gets successfully started by executing the `systemctl status haproxy` command. If it throws the "_cannot bind socket [0.0.0.0:xxxx|https://stackoverflow.com/questions/34793885/haproxy-cannot-bind-socket-0-0-0-08888]_" error. Run the following command and restart haproxy.
-```
-setsebool -P haproxy_connect_any=1
-```
+    ```
+    setsebool -P haproxy_connect_any=1
+    ```
 
 Before setting up master nodes, all the IPs of master nodes should be configured in HAProxy loadbalancer. If any master node IP is not listed and you try to set the master node, that node will not be added to cluster. To add master node IPs, edit the file `/etc/haproxy/haproxy.cfg` and make the following two changes for each master node IP to be added.
 
 1.  In the **Configure HAProxy SecureBackend** section, add the following line at the end. List all the other master node IPs in the same way.
-```
-server k8s-api-2 <IP-ADDRESS>:6443 check
-```
+    ```
+    server k8s-api-2 <IP-ADDRESS>:6443 check
+    ```
 2.  In the **Configure HAProxy Foundry Backend** section, add the following line at the end. List all the other master node IPs in the same way.
-```
-server foundry-1 <IP-ADDRESS>:30200 check
-```
+    ```
+    server foundry-1 <IP-ADDRESS>:30200 check
+    ```
 
 ## Setting up Cluster
 
 In setting up a cluster a minimum of one master can be configured. To improve failure tolerance and ensure cluster availability it is recommended to have an odd number (minimum three) of master nodes. To start cluster setup choose one node as starting point of installation which should be the master node.
 
 1.  Download the **voltmx-foundry-containers-onprem_9.0.0.0_GA.zip** from the [Download Link](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.2.x&orgId=HCL&fromRecentFile=false&fromRecentPkg=true&fromDL=false) and extract it.
-```
-sudo unzip VoltMXFoundryContainersOnPrem-9.0.0.0_GA.zip
-    -d VoltMXFoundryContainerOnPrem-9.0.0.0_GA
-```
+    ```
+    sudo unzip VoltMXFoundryContainersOnPrem-9.0.0.0_GA.zip
+        -d VoltMXFoundryContainerOnPrem-9.0.0.0_GA
+    ```
 2.  Navigate to foundry container artifact folder.
-```
-cd VoltMXFoundryContainerOnPrem-9.0.0.0_GA
-```
+    ```
+    cd VoltMXFoundryContainerOnPrem-9.0.0.0_GA
+    ```
 3.  Run the following command to setup the master. It downloads and installs cluster packages, initializes kubeadm, sets up Weave CNI, generates token and waits for the worker node to join the master to proceed further.
-```
-sudo ./install-foundry.sh config.properties
-```
+    ```
+    sudo ./install-foundry.sh config.properties
+    ```
 
-> **_Note:_** You must provide **execute** permissions to run the `install-foundry.sh` file on Linux.
+    > **_Note:_** You must provide **execute** permissions to run the `install-foundry.sh` file on Linux.
 
-![](Resources/Images/home1.PNG)
+    ![](Resources/Images/home1.PNG)
 
-6.  To join other nodes as master/worker, copy the setup-node.zip file which is available in the Foundry Container artifact folder(VoltMXFoundryContainerOnPrem-9.0.0.0_GA) into the node to join as the master/worker and then perform the following steps.
+4.  To join other nodes as master/worker, copy the setup-node.zip file which is available in the Foundry Container artifact folder(VoltMXFoundryContainerOnPrem-9.0.0.0_GA) into the node to join as the master/worker and then perform the following steps.
 
     1.  Extract the `setup-nodes.zip` file.
 
@@ -435,7 +437,7 @@ sudo ./install-foundry.sh config.properties
 
         `sudo ./setup-node.sh`
 
-7.  After the cluster setup is done to get the list of nodes in cluster, use below command.
+5.  After the cluster setup is done to get the list of nodes in cluster, use below command.
 
     `kubectl get nodes`
 
