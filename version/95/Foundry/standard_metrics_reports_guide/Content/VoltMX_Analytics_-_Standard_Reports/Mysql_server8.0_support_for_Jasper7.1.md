@@ -2,8 +2,8 @@
 
 You are here: Jasper Reports
 
-Configuration to support Mysql server 8.0 for Jasper Reports Server 7.1 
-================
+Jasper Reports Server 7.1 Configuration 
+=======================================
 
 ### Stop Jasper server
 
@@ -30,7 +30,8 @@ Configuration to support Mysql server 8.0 for Jasper Reports Server 7.1
     <Resource auth="Container" driverClassName="org.mariadb.jdbc.Driver" factory="com.jaspersoft.jasperserver.tomcat.jndi.JSBasicDataSourceFactory" maxActive="125" maxIdle="20" maxWait="360000" name="jdbc/onpremaccounts" password="Password" testOnBorrow="true" type="javax.sql.DataSource" url="jdbc:mysql://10.115.192.111:3306/VoltMXmfaccountsdb2022?serverTimezone=UTC" username="root" validationQuery="SELECT 1"/>
     ```
 
-
 ### Start Jasper server
 
 
+
+Refere [How to Set Up JNDI Data Sources - HCL Volt MX Documentation (hcltechsw.com)](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_analytics_reporting/Content/How_to_Set_Up_Java_Naming_and_Directory_Interface__JNDI__Data_Sources.html) for Jasper configuration with MySQL 5.7
