@@ -47,7 +47,10 @@ The Syntax of the `Forms` Object is as follows:
     }  
   }  
 }
-```preConditionConfig
+```
+
+
+preConditionConfig
 
 * * *
 
@@ -204,7 +207,9 @@ The Syntax of the `UIModules` Object is as follows:
 "<Module Name>" : {"destinationConfig" : {"friendlyName" : ""}},
 "<Module Name>" : {"destinationConfig" : { "callback" : ""  , "targetForms" : \[ { "friendlyName" : "" } , { "friendlyName" : "" , "appName" : ""}\] }}
 }
-```destinationConfig
+```
+
+destinationConfig
 
 * * *
 
