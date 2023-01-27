@@ -555,7 +555,7 @@ A Helm chart has been added to facilitate installing Foundry to an existing Kube
 
 For more information about this feature, click [here](Foundry/voltmxfoundry_containers_helm/Content/Introduction.md).
 
-## Volt MX App Factory
+### Volt MX App Factory
 
 **Cucumber testing support for Foundry apps**
 
