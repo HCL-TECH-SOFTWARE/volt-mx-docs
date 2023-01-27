@@ -7,14 +7,14 @@ Configure Connectors - Tomcat
 2.  In the `server.xml`, under the `<Service name="Catalina">` tag, add the connector tag:
     
     *   **For HTTP**
-        
+        ```
         <Connector server="VoltMX" port="$HTTP\_PORT$" protocol="HTTP/1.1" maxHttpHeaderSize="8192" maxThreads="150" enableLookups="false" acceptCount="25" disableUploadTimeout="true" tcpNoDelay="true" compression="on" compressionMinSize="512000" compressableMimeType="text.html,text/xml,text/css,text/plain,text/javascript,application/x-javascript,application/javascript,application/json,application/xml" connectionTimeout="20000" />
-        
+        ```
     
     *   **For HTTPS**
-        
+        ```
         <Connector server="VoltMX" port="$HTTP\_PORT$" protocol="HTTP/1.1" maxHttpHeaderSize="8192" maxThreads="150" enableLookups="false" acceptCount="25" disableUploadTimeout="true" tcpNoDelay="true" compression="on" compressableMimeType="text/css,text/javascript,text.html" connectionTimeout="20000" redirectPort="$HTTPS\_PORT$"/> <Connector port="$HTTPS\_PORT$" protocol="HTTP/1.1" SSLEnabled="true" maxThreads="150" minSpareThreads="25" maxSpareThreads="150" maxHttpHeaderSize="8192" connectionTimeout="20000" scheme="https" secure="true" clientAuth="false" enableLookups="false" acceptCount="25" disableUploadTimeout="true" server="VoltMX" tcpNoDelay="true" compression="on" compressionMinSize="512000" compressableMimeType="text.html,text/xml,text/css,text/plain,text/javascript,application/x-javascript,application/javascript,application/json,application/xml" sslProtocol="TLS" keystoreFile="$APPSERVER\_KEYSTORE\_FILE$" keystorePass="$APPSERVER\_KEYSTORE\_PASS$" keystoreType="$APPSERVER\_KEYSTORE\_TYPE$"/>
-        
+        ```
 
 How to Configure Batch Files
 ----------------------------
@@ -26,16 +26,17 @@ How to Configure Batch Files
 1.  From the `<User_Install_Directory>\apache-tomcat-9.0.33\bin`, open the `catalina.bat`.
 2.  Before the `@echo off` command, add the following JVM memory configuration.
     *   For Windows:
-        
+        ```
         set JAVA\_OPTS= -server -Xms<bytes> -Xmx<bytes> -XX:NewSize=256m -XX:MaxNewSize=512m -XX:PermSize=512m -XX:MaxPermSize=1024m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC -XX:+CMSIncrementalMode -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=$LOG\_LOCATION$/heapdumps -Djava.awt.headless=true -Djava.net.preferIPv4Stack=true -Dnet.spy.log.LoggerImpl=net.spy.memcached.compat.log.Log4JLogger -Dfile.encoding=UTF8 -Dhttps.protocols=TLSv1.2
-        
+        ```
         > **_Important:_**  While installing Volt MX Foundry Components without Integration services (VoltMX Foundry Console, Identity Services, and Engagement Services), set the heap settings to: Min -Xms1024m / Max - Xmx1024m.
         
         > **_Important:_** While installing Volt MX Foundry Components including Integration services, set the heap settings to: Min -Xms2048m / Max - Xmx2048m.
         
     *   For Linux:
-        
+        ```
         JAVA\_OPTS="-Dhttps.protocols=TLSv1.2 -server -Xms<bytes> -Xmx<bytes> -XX:NewSize=256m -XX:MaxNewSize=512m -XX:PermSize=512m -XX:MaxPermSize=1024m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC -XX:+CMSIncrementalMode -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=$LOG\_LOCATION$/heapdumps -Djava.awt.headless=true -Djava.net.preferIPv4Stack=true -Dnet.spy.log.LoggerImpl=net.spy.memcached.compat.log.Log4JLogger -Dfile.encoding=UTF8"
+        ```
         
 3.  Set JRE home if it is not set. For example, use the following command:
     
@@ -54,12 +55,12 @@ If you wish to configure a Windows service for this server, follow these steps
     
 3.  Set catalina home if it is not set. For example, use the following command:
     
-    set "CATALINA\_HOME=<User\_Install\_Directory>\\tomcat"
+    `set "CATALINA\_HOME=<User\_Install\_Directory>\\tomcat"`
     
 4.  To configure the service name for the service you install, use the following commands:
     
-    set SERVICE\_NAME=<Service\_Name>\_SVC  
-    set PR\_DISPLAYNAME=<Service\_Name>
+    `set SERVICE\_NAME=<Service\_Name>\_SVC`  
+    `set PR\_DISPLAYNAME=<Service\_Name>`
     
 5.  Save the `service.bat` file.
 
