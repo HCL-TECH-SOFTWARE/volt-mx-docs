@@ -11,9 +11,9 @@ For detailed information in a specific component, see below.
 
 >**_Note:_** See all the defects' fix list [here](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101356).
 
-# Volt MX Iris
+## Volt MX Iris
 
-## Micro Apps Architecture
+### Micro Apps Architecture
 
 Large applications are easier to be modularized into smaller applications using the Micro apps architecture. Using Micro Apps, users can create standalone and independent apps that can be combined together to form a larger application. Micro apps reduce the complexity for application developers by dividing large apps into smaller and easily manageable apps.
 
@@ -29,13 +29,13 @@ Following on the Micro Apps capability, Volt MX Iris has further enhanced the Mi
 
 For more information on this feature, click [here](Iris/iris_microapps/Content/MicroApp.md).
 
-## Navigation Manager
+### Navigation Manager
 
 Volt MX Iris has added support for a Navigation Manager which enables the concept of model-driven navigation, where the entire navigation flow of the app resides in a single place. Users can use the Navigation Manager to define the navigation paths between forms and between multiple Micro Apps. The model-driven navigation approach enhances the readability of the application flow and the maintainability of the application code.
 
 For more information on this feature, click [here](Iris/voltmx_ref_arch_api/Content/NavigationManager.md).
 
-## Test Automation Enhancements
+### Test Automation Enhancements
 
 The following new features have been added in the Volt MX Test Automation framework:
 
@@ -72,7 +72,7 @@ Additionally, you can use the [voltmx.automation.pageObjectModel.getPageObjects
 The [voltmx.automation.gesture.swipe](Iris/iris_api_dev_guide/content/voltmx.automation_namespace.md#gesture.swipe) and [voltmx.automation.gesture.tap](Iris/iris_api_dev_guide/content/voltmx.automation_namespace.md#gesture.tap) APIs have been added 
 to support the Swipe and Tap Gestures on the Android platform.
 
-## Configure Style Constants
+### Configure Style Constants
 
 Volt MX Iris has introduced support to configure Style Constants for Colors and Fonts. Using the Style Constants feature, users can create and apply pre-defined styles for colors and fonts, and use these styles in the skins throughout the project. This helps the app developers to easily manage their application branding through the style constants.
 
@@ -84,13 +84,13 @@ Additionally, you can define Style Constants for Color with the **Two Step Gradi
 
 For more information on this feature, click [here](Iris/iris_user_guide/Content/StyleConstants.md).
 
-## Filters for Project Explorer
+### Filters for Project Explorer
 
 Volt MX Iris now provides the capability to optimize the project explorer view for each tab by configuring the visibility of different entities and channels. This filter can be applied to nodes in a project and for each Micro App in case of a larger application. The filter enables users to declutter the project explorer palette by hiding unused or empty nodes.
 
 For more information on this feature, click [here](Iris/iris_user_guide/Content/FilterProject.md).
 
-## Productivity Enhancements
+### Productivity Enhancements
 
 The V9 SP5 release includes several new features in Volt MX Iris to further simplify the app design and development experience and enable better productivity for app developers.
 
@@ -105,7 +105,7 @@ The V9 SP5 release includes several new features in Volt MX Iris to further simp
 
 For more information about this feature, click [here](Iris/iris_user_guide/Content/Project_Properties_in_VoltMX_Iris.md#BuildFormat).
 
-## Component Enhancements
+### Component Enhancements
 
 *   Support to configure [Color as a Property type](Iris/iris_user_guide/Content/C_CreatingComponent.md#Color) for custom properties of components with contract has been added in Volt MX Iris.
 *   Volt MX Iris has enhanced the support to [Delete a component](Iris/iris_user_guide/Content/C_CreatingComponent.md#Delete) where all of its associated assets are cleanly deleted along with the component.
@@ -117,25 +117,25 @@ For more information about this feature, click [here](Iris/iris_user_guide/Cont
   *   Added support to [create a business controller](Iris/iris_user_guide/Content/C_CreatingComponent.md#BusinessController) for a component with a contract.
   *   The business controller can further be extended by creating a business controller extension
 
-## Support for iOS App Clips 
+### Support for iOS App Clips 
 
 Support to integrate iOS App Clips has been added in Volt MX Iris. An app clip is a lightweight part of an app that is discoverable, when needed, and lets users perform everyday tasks swiftly, without downloading and installing the whole app.
 
 For more information on this feature, click [here](Iris/iris_user_guide/Content/Iris_AppClips.md#top).
 
-## Configure iOS Home Screen Widgets
+### Configure iOS Home Screen Widgets
 
 Support to integrate iOS Home Screen Widgets has been added in Volt MX Iris. A widget elevates key content from an app and displays it on the home screen of an iPhone or iPad, where users can see it at a glance.
 
 For more information on this feature, click [here](Iris/iris_user_guide/Content/Iris_WidgetKit.md).
 
-## Support for App Level Containers
+### Support for App Level Containers
 
 Support for the [voltmx.application.setAppLevelWidget API](Iris/iris_api_dev_guide/content/voltmx.application_functions.md#setAppLevelWidget) that configures a container widget at the application level has been added in Volt MX Iris. This enables app developers to design Headers and Footers consistently in iOS and Android apps that span across multiple forms.
 
 In addition, support for the [appLevelWidgetConfig property](Iris/iris_widget_prog_guide/Content/FlexForm_Properties.md#appLevelWidgetConfig) has been added in the FlexForm widget to enable or disable the header or footer of the app for that particular Form.
 
-## Widget Enhancements
+### Widget Enhancements
 
 **Group Elements in Container Widgets**
 
@@ -170,7 +170,7 @@ Volt MX Iris has introduced support for the [shadowColor](Iris/iris_widget_prog_
 
 For more information on this feature, click [here](Iris/iris_user_guide/Content/UsingExtendedWidgets.md#Widget).
 
-## iOS Home Screen Widget Enhancements
+### iOS Home Screen Widget Enhancements
 
 You can now apply the Flex Horizontal and Flex Vertical directional layouts to an iOS Home Screen widget to align its child widgets.
 
@@ -182,7 +182,7 @@ For more information on providing multiple URLs for tap targets, click [here](I
 
 
 
-## iOS Enhancements
+### iOS Enhancements
 
 **Enable Data Protection for iOS Apps**
 
@@ -196,7 +196,7 @@ For more information on providing multiple URLs for tap targets, click [here](I
 
 *   Support to generate the third-party native bindings for .xcFramework projects, generate native bindings for supported architectures in System Frameworks, and generate outputs for NFI Frameworks has been added through the NFI Generation Tool.
 
-## Android Enhancements
+### Android Enhancements
 
 *   Volt MX Iris has introduced support for the [Universal App Tablet Breakpoint](Iris/iris_user_guide/Content/Project_Properties_in_VoltMX_Iris.md#UniversalAndroid) setting that configures the minimum length threshold for identifying a device as a Tablet for an Android Universal Binary.
 *   Volt MX Iris has introduced support for the [splashOrientationClassifier](Iris/iris_user_guide/Content/Native_App_Properties.md#splashOrientationClassifier) property that provides screen orientation modes at a granular-level for a particular Splash Screen Orientation mode. In addition, support for the [displayOrientationClassifier](Iris/iris_widget_prog_guide/Content/FlexForm_Properties.md#displayOrientationClassifier) property has been added to the FlexForm widget.
@@ -205,7 +205,7 @@ For more information on providing multiple URLs for tap targets, click [here](I
     *   [setImportantForAutoFill](Iris/iris_widget_prog_guide/Content/TextArea_Properties.md#setImportantForAutofill) property in the TextArea widget
     *   [textContentType](Iris/iris_widget_prog_guide/Content/TextBox_Properties.md#textcontenttype) property in the TextBox widget
 
-## Responsive Web Enhancements
+### Responsive Web Enhancements
 
 Volt MX Iris has introduced support for the following properties to provide spacing within a Responsive Container in the Responsive Grid Layout:
 
@@ -230,7 +230,7 @@ Volt MX Iris has introduced support to embed videos present in the device's loca
 For more information about this feature, click [here](Iris/iris_widget_prog_guide/Content/Video.md#Limitati).
 
 
-## Accessibility Enhancements
+### Accessibility Enhancements
 
 As part of the ongoing Accessibility enhancements, the following enhancements have been made in Volt MX Iris:
 
@@ -241,32 +241,32 @@ As part of the ongoing Accessibility enhancements, the following enhancements ha
 For more information about this feature, click [here](Iris/app_design_dev/Content/Accessibility_Iris.md#tagName1). 
 
 
-## Integrate Volt MX Components in Angular Apps
+### Integrate Volt MX Components in Angular Apps
 
 *   You can now integrate the Volt MX Framework with Angular apps by embedding Volt MX Components in Angular Components as Webpack 5 modules. For more information on this feature, click [here](Iris/iris_user_guide/Content/VoltMXAngular.md).
 *   Additionally, you can use the new [Volt MX Listener APIs](Iris/iris_api_dev_guide/content/voltmxlistener_api.md) to enable communication and pass data between the component
 
-## Support and Maintenance Updates
+### Support and Maintenance Updates
 
 *   Volt MX Iris is now supported on MacBooks that use M1 processors.
 *   Volt MX Iris is now supported on MacBooks that run the MacOS monterey.
 *   Support for XCFramework has been added for iOS apps.
 
-## <a id="hot-reload-enhancement"></a>  Hot Reload Enhancement
+### <a id="hot-reload-enhancement"></a>  Hot Reload Enhancement
 
 The Hot Reload feature in Responsive Web Apps can now be used to view updates made in Reference Architecture Extensions, Form Controllers (including Form Controller Extensions), Segment Templates, and Components (including component controller modules, component controller extensions, and widget actions).
 
 For more information on this feature, click [here](Iris/iris_user_guide/Content/HotReload.md#Component).
 
 
-## Pop-up Title for Rooted Devices
+### Pop-up Title for Rooted Devices
 
 You can now use the **ROOT\_DETECTION\_TITLE** key in the Internationalization Configuration to provide a title for the pop-up of rooted (or jail-broken) devices.
 
 For more information on this feature, click [here](Iris/iris_user_guide/Content/Internationalization.md#rootDetection).
 
 
-## Expose Child Components in a Nested Component
+### Expose Child Components in a Nested Component
 
 You can now expose a child component within another component. The pass-through and custom properties, events, and methods of the child component then appear in the Properties panel when you select the child component.
 
@@ -274,7 +274,7 @@ For more information on this feature, click [here](Iris/iris_user_guide/Content/
 
 
 
-## OS Compatibility Support
+### OS Compatibility Support
 
 **iOS 16 Support**
 
@@ -285,22 +285,22 @@ Support for iOS 16 has been added in Volt MX Iris.
 Iris builds are compatible with Android 13.
 
 
-## Android Framework Enhancements
+### Android Framework Enhancements
 
 *  Local Authentication API Enhancements
 *   Added support for the [voltmx.localAuthentication.requestBiometricsEnroll API](Iris/iris_api_dev_guide/content/voltmx.localauthentication_functions.md#requestBiometricsEnroll) that directs users to the device settings page, where they can enroll for biometrics.
 *   In addition, support for the voltmx.localAuthentication APIs has been enhanced by adding the [authenticators](Iris/iris_api_dev_guide/content/voltmx.localauthentication_functions.md#authenticators) parameter.
 
 
-## Volt MX App Updates
+### Volt MX App Updates
 For Volt MX App (both mobile and tablets) updates will be made available in Appstore and Google Play Store in phases following the release. 
 
 
 
-# Volt Foundry
+## Volt Foundry
 
 
-## SSL Pinning Support for Native Channels
+### SSL Pinning Support for Native Channels
 
 SSL Pinning is now supported for the Android and iOS channels, which can be used to connect to WebSockets on Volt Foundry.
 
@@ -308,51 +308,51 @@ For more information about this feature, click [here](Foundry/voltmx_foundry_use
 
 
 
-## Volt MX Microservices Adapter
+### Volt MX Microservices Adapter
 
 You can now use the Volt MX Microservices Adapter in Object Services to create and reuse data models, access back-end operations, enable authorization APIs, and manage API definitions from a single source file.
 
 For more information about this feature, click [here](Foundry/voltmx_foundry_user_guide/Content/HCLMicroservicesAdapter.md).
 
 
-## Improved Service Monitoring
+### Improved Service Monitoring
 
 The service monitoring table now contains a new column called **service type**.
 
 For more information about this feature, click [here](Foundry/vmf_integrationservice_admin_console_userguide/Content/Monitoring.md).
 
 
-## Looping support in Workflows
+### Looping support in Workflows
 
 You can use looping in Service tasks, Script tasks, and Rule tasks to invoke a service for a collection of items and combine all the responses.
 
 For more information about this feature, click [here](Foundry/voltmx_foundry_workflow/Content/Workflow.md#advanced-configurations-workflow).
 
-## Added Parallel Gateway node to Workflows 
+### Added Parallel Gateway node to Workflows 
 
 You can now use the Parallel Gateway node in Workflows to fork into multiple paths of execution or to join multiple incoming paths of execution.
 
 For more information about this feature, click [here](Foundry/voltmx_foundry_workflow/Content/Workflow.md#parallel-gateways-_sync-workflow_).
 
-## Enhancements to Workflow Audit history
+### Enhancements to Workflow Audit history
 
 Support to display the trigger type in case of Integration linked workflows has been added to the Workflow Audit history.
 
 For more information about this feature, click [here](Foundry/vmf_integrationservice_admin_console_userguide/Content/Workflow.md).
 
-## Workflow Adapter in Integration Services
+### Workflow Adapter in Integration Services
 
 The Foundry Workflow adapter has been introduced for Integration Services in Volt Foundry.
 
 For more information about this feature, click [here](Foundry/voltmx_foundry_user_guide/Content/FoundryWorkflowAdapter.md).
 
-## Integration Service trigger type in Workflow services
+### Integration Service trigger type in Workflow services
 
 The Integration Service trigger type has been introduced in Workflow services. Workflows that are of the Integration Service (Sync/Async) type must be linked to an Integration Service that uses the Foundry Workflow adapter.
 
 For more information about this feature, click [here](Foundry/voltmx_foundry_workflow/Content/Workflow.md#supported-workflow-types).
 
-## Enhancements to JavaScript SDK
+### Enhancements to JavaScript SDK
 
 
 *   Enhanced support to use PKCE for the end-to-end authorization code flow.
@@ -367,70 +367,70 @@ For more information about this feature, click [here](Foundry/voltmx_foundry_wo
 
     For more information about this feature, click [here](Foundry/voltmx_foundry_user_guide/Content/JS/ServerEventAPIs_JS.md).
 
-## Add operations and verbs to Locked Apps
+### Add operations and verbs to Locked Apps
 
 Locked apps now support adding new operations in Integration services and adding verbs in Object services.
 
 For more information about this feature, click [here](Foundry/voltmx_foundry_user_guide/Content/LockApp.md).
 
-## Enhanced Security for caching
+### Enhanced Security for caching
 
 Added support to enable an SSL connection between the Authentication Service and Redis to allow secure connections for caching.
 
 For more information about this feature, click [here](Foundry/voltmxfoundry_on_azure/Content/VoltMX_Foundry_on_Azure.md#configuration).
 
 
-## Private Key JWT in OAuth 2.0 Services
+### Private Key JWT in OAuth 2.0 Services
 
 You can now use Private Key JWT in OAuth 2.0 Identity services to enhance the security of token requests.
 
 For more information about this feature, click [here](Foundry/voltmx_foundry_user_guide/Content/Identity10_VoltMX_OAuth2.md).
 
 
-## View the Pre and Post Processors linked to a Foundry app
+### View the Pre and Post Processors linked to a Foundry app
 
 You can now view all the Java Pre and Post Processors that are linked to the services of an app on a single screen.
 
 For more information about this feature, click [here](Foundry/voltmx_foundry_user_guide/Content/ViewingVerbsandPrePostProcessors.md).
 
-## Modularity support for Foundry apps
+### Modularity support for Foundry apps
 
 Support to manage the dependent apps of a Composite Foundry app has been added to the Volt Foundry Console.
 
 For more information about this feature, click [here](Foundry/voltmx_foundry_user_guide/Content/ManagingLinkedAppsinCompositeFoundryApp.md).
 
-## PKCE support for the JavaScript SDK
+### PKCE support for the JavaScript SDK
 
 Support for PKCE (Proof Key for Code Exchange) has been added to the JavaScript SDK.
 
 For more information about this feature, click [here](Foundry/voltmx_foundry_user_guide/Content/JS/Invoking_Identity_Service_JS.md#login-with-provider-type-as-oauth-2_0-with-deep-link-url).
 
 
-## PKCE support between Volt Foundry and the back-end OAuth Service
+### PKCE support between Volt Foundry and the back-end OAuth Service
 
 You can now enable PKCE between Volt Foundry and back-end OAuth Services has been added to the OAuth 2.0 Identity Services.
 
 For more information about this feature, click [here](Foundry/voltmx_foundry_user_guide/Content/Identity10_VoltMX_OAuth2.md#pkce-support-in-foundry).
 
-## OpenAPI Specification support for Object Verb Mapping
+### OpenAPI Specification support for Object Verb Mapping
 
 The OpenAPI Specification feature has been added to the Object Verb Mapping. With the OpenAPI Specification tab, you can customize the documentation of the Request and Response parameters for your APIs.
 
 For more information about this feature, click [here](Foundry/voltmx_foundry_user_guide/Content/OpenAPISpec_Objects.md).
 
-## Support to replace Identity Service references in MFCLI
+### Support to replace Identity Service references in MFCLI
 
 The replace-identity-service-references command has been added to MFCLI. You can use this command to replace existing Identity Service references, such as Backend Token and Enhanced Identity filters, with another Identity Service.
 
 For more information about this feature, click [here](Foundry/voltmx_foundry_user_guide/Content/Replacing_Identity_Services.md).
 
-## Version Upgrade mechanism in MFCLI
+### Version Upgrade mechanism in MFCLI
 
 Support for the Version Upgrade mechanism has been added to MFCLI. You can use this feature to update the versions for Foundry apps and services.
 
 For more information about this feature, click [here](Foundry/voltmx_foundry_user_guide/Content/Version_Upgrade_Apps_Services_MFCLI.md).
 
-## Updates to Server Events APIs
+### Updates to Server Events APIs
 
 *   Added the setupServerEvents API, which can be used to establish a connection between a client app and a WebSocket on Volt Foundry.
 
@@ -445,56 +445,56 @@ For more information about this feature, click [here](Foundry/voltmx_foundry_us
 
  For more information about this feature, click [here](Foundry/voltmx_foundry_user_guide/Content/VoltMXStudio/ServerEventAPIs.md).
 
-## Enhancements to the Engagement Adapter
+### Enhancements to the Engagement Adapter
 
 Support to invoke services by using an API key has been added to the Engagement adapter.
 
 For more information about this feature, click [here](Foundry/engagement_api_guide/Content/Engagement_Adapter/Adapter_Overview.md).
 
-## Reconfigure scheme for Swagger 2.0 services
+### Reconfigure scheme for Swagger 2.0 services
 
 Support to reconfigure the scheme property has been added to services that use Swagger 2.0. The scheme can be reconfigured at the design time from the Foundry Console, or while publishing an app to the run time.
 
 For more information, click [here](Foundry/voltmx_foundry_user_guide/Content/Open_API__Swagger_.md).
 
-## Path Parameters support in OAuth 2.0
+### Path Parameters support in OAuth 2.0
 
 Support to add path parameters has been added to the OAuth 2.0 Identity Service.
 
 For more information about this feature, click [here](Foundry/voltmx_foundry_user_guide/Content/Identity10_VoltMX_OAuth2.md).
 
-## Custom Front-End URLs support in Object Services
+### Custom Front-End URLs support in Object Services
 
 Support to map an object verb to a custom Front End URL has been added to Object Services. The Front-End URL is exposed for the object verbs as part of the API developer portal. With this feature, you can expose the objects and their associated verbs as URLs that follow the REST API convention.
 
 For more information about this feature, click [here](Foundry/voltmx_foundry_user_guide/Content/FrontEndAPIURL_Objects.md).
 
-## Enhancements to Cloud Installer on MS Azure
+### Enhancements to Cloud Installer on MS Azure
 
 Added support to use multiple nodepools in a single cluster on Azure Kubernetes Service (AKS).
 
 For more information about this feature, click [here](Foundry/voltmxfoundry_on_azure/Content/VoltMX_Foundry_on_Azure.md#multiple-node-pools-in-azure-kubernetes-service).
 
-## Support for WebSockets to the Volt Foundry Cloud
+### Support for WebSockets to the Volt Foundry Cloud
 
 You can now use WebSockets to connect to the Volt Foundry Cloud.
 
 For more information about this feature, click [here](Foundry/voltmx_foundry_user_guide/Content/ServerEvents.md#websocket-endpoint-for-events-__serverevents_stream_).
 
-## Enhancements to Foundry on Red Hat OpenShift
+### Enhancements to Foundry on Red Hat OpenShift
 
 Added support to enable HTTPS passthrough mode for creating routes on OpenShift.
 
 For more information about this feature, click [here](Foundry/voltmxfoundry_on_openshift/Content/configuration_and_setup.md#application-server-details).
 
-## External Authentication with Azure-SAML
+### External Authentication with Azure-SAML
 
 Volt Foundry now supports external authentication by using Azure-SAML.
 
 For more information about this feature, click [here](Foundry/voltmx_foundry_user_guide/Content/Settings_Cloud.md#Azure-SAML).
 
 
-## Enhancements to Volt Foundry Installer
+### Enhancements to Volt Foundry Installer
 
 
 **Encryption support for passwords**
@@ -514,7 +514,7 @@ Added following support from Volt Foundry V9 SP5 onwards:
 
 For more information on this feature, click [here](Foundry/voltmxfoundry_supported_devices_os_browsers/Content/FoundryV9SP5.md).
 
-## Volt Foundry Containers
+### Volt Foundry Containers
 
 **Support extension for Red Hat UBI**
 
@@ -549,7 +549,7 @@ Added support for installing Volt Foundry Kubernetes container on Azure from Vol
 
 For more information on this feature, click [here](Foundry/voltmxfoundry_supported_devices_os_browsers/Content/FoundryV9SP5.md).
 
-## Helm Charts for installing Foundry to existing Kubernetes cluster
+### Helm Charts for installing Foundry to existing Kubernetes cluster
 
 A Helm chart has been added to facilitate installing Foundry to an existing Kubernetes cluster.  This support is in addition to the existing Single Container and Containers Solution.
 
