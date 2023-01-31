@@ -213,21 +213,21 @@ Inputs for installation can be gathered through two modes. Any of the following 
 
 - **Command Line** - Volt MX Foundry Container Cluster Solution can be installed using the bundled install shell script, which will prompt the user for required values.
 
-  The syntax for installing through the Command Line: 
+    The syntax for installing through the Command Line: 
 
-  ```
-  sudo ./install-foundry.sh
-  ```
+    ```
+    sudo ./install-foundry.sh
+    ```
 
-  ![](Resources/Images/kb1.png)
+    ![](Resources/Images/kb1.png)
 
 - **Silent Installation** - The installation script also supports silent installation if the config.properties file is passed as an argument (for example, /path/install-foundry.sh config.properties). Using this, you can have additional ability to pass custom Tomcat JAVA_OPTS, Heap memory settings, and time-zone settings as well.
 
-  The syntax for installing using the config.properties:
-  
-  ```
-  sudo ./install-foundry.sh config.properties
-  ```
+    The syntax for installing using the config.properties:
+    
+    ```
+    sudo ./install-foundry.sh config.properties
+    ```
 
 # Configuration
 
