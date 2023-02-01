@@ -13,13 +13,13 @@ For detailed information in a specific component, see below.
 
 ## Volt MX Iris
 
-## Performance Improvements
+### Performance Improvements
 
 Several enhancements have been made at the core of Volt MX Iris to improve the performance. Volt MX Iris has implemented an on-demand approach to load assets that reduces the time taken to load and refresh a project. 
 
 This enhancement is especially noticeable in larger projects. In addition, users will also notice faster Form saves and rectification. The memory footprint of Volt MX Iris has also been significantly reduced.
 
-## Component Updates
+### Component Updates
 
 * [Reorder Properties and Groups of a Component](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/C_CreatingComponent.md#Reorder) 
 
@@ -30,17 +30,17 @@ This enhancement is especially noticeable in larger projects. In addition, users
 * [Support for JSON as a Property Type for Components with Contract](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/C_CreatingComponent.md#JSON)
 * [ Support for i18N as a Pass-through Property for Components with Contract](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/C_CreatingComponent.md#i18N)
 
-## Create and Use Form Templates
+### Create and Use Form Templates
 
 Volt MX Iris has introduced the Form Template feature that provides an easy way to reuse a form as a template across the project. Using Form Templates, you can display the same UI pattern across multiple forms, platforms, and projects.
 
 For more information on this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/FormTemplates.md) 
 
-## Sign in with Apple
+### Sign in with Apple
 
 Support for the [SigninWithApple widget](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_widget_prog_guide/Content/SigninWithApple.md) has been introduced in Volt MX Iris. The widget enables application users to sign in to apps and websites by using their Apple ID.
 
-## Data and Services Panel Enhancements
+### Data and Services Panel Enhancements
 
 The Data and Services Panel now lists the Custom Verbs in Object Services. Developers can drag and drop Custom Verbs onto a form to generate the UI, and also map data to the attributes from the Mapping Editor in an action sequence.
 
@@ -50,7 +50,7 @@ Developers can now drag and drop Child Objects from the Data and Services panel 
 
 For more information on this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/DataPanel.md#Child).
 
-## Test Automation Enhancements
+### Test Automation Enhancements
 
 **Configure Timeout for a Test Case** 
 
@@ -76,7 +76,7 @@ For more information on this feature, click [here](https://opensource.hcltechsw.
   
   For more information on this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/TestAutomation.md#screenshot).
 
-## Android Enhancements
+### Android Enhancements
 
 **Support for Android Target SDK 30**
 
@@ -118,7 +118,7 @@ Volt MX Iris has introduced support for the [voltmx.application.getInstallerSour
 
 VoltMX Iris has introduced support for the [voltmx.application.getBackgroundPermissionOptionLabel](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.application_functions_runtimepermissionsapi.md#getBackgroundPermissionOptionLabel) API that displays an educational UI to the user to grant background access permission.
 
-## Widget Enhancements
+### Widget Enhancements
 
 **Save and Retrieve Real World position in the ARRenderer widget** 
 
@@ -196,44 +196,44 @@ VoltMX Iris has introduced support for the [voltmx.application.getBackgroundPerm
    
    The [voltmx.phone.addCalendarEvent](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.phone_functions.md#phone.ad) API is enhanced to accept [Interval](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.phone_functions.md#Interval) as an input parameter that lets developers configure an event on the calendar to repeat on a biweekly, quarterly, or semi-annual basis.
 
-## Support for Widget Extensions
+### Support for Widget Extensions
 
 Support to customize existing Volt MX Flare widgets ](by using the [voltmx.ui.defineExtendedWidge](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.ui_functions.md#ExtendedWidget) API) to create and use a new widget with additional functionality has been introduced in Volt MX Iris.
 
-## Protected Mode CI Build for Responsive Web Apps
+### Protected Mode CI Build for Responsive Web Apps
 
 Support to build web applications in the Protected mode by using the CI (Continuous Integration) build feature has been introduced in Volt MX Iris.
 
 For more information on this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/SecureyourWebApplication.md#Secure).
 
-## Custom CSS Splash Screen for Responsive Web Apps
+### Custom CSS Splash Screen for Responsive Web Apps
 
 VoltMX Iris has introduced support to implement CSS and HTML capabilities in the splash screen for Responsive web apps, by using Custom CSS and Custom HTML code. For more information on this feature, click here. 
 
 For more information on this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Splash_Screen_Properties.md#CustomCSS).
 
-## Haptic Feedback Support for watchOS
+### Haptic Feedback Support for watchOS
 
 VoltMX Iris has introduced support for the [didAppear](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Watch.md#didAppear), [interfaceDidScrollToTop](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Watch.md#interfaceDidScrollToTop), [interfaceOffsetDidScrollToBottom](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Watch.md#interfaceOffsetDidScrollToBottom), and [interfaceOffsetDidScrollToTop](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Watch.md#interfaceOffsetDidScrollToTop) events that can be used to provide haptic feedback on the watchOS.
 
-## Modify Skin Properties at Run Time
+### Modify Skin Properties at Run Time
 
 Developers can dynamically modify the Skin properties for a Skin Object by using the [voltmx.theme.setSkinsProperties](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.theme_functions.md#setSkinsProperties) API. In addition, support to modify the Skin properties of a widget has been introduced in Volt MX Iris.
 
-## Accessibility Enhancement
+### Accessibility Enhancement
 
 VoltMX Iris has introduced support to provide 0 or -1 as a value for the tab order.
 
 For more information about this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/app_design_dev/Content/Accessibility_Iris.md#taborder2).
 
-## Component to Integrate Vector Animations - HCL Forge
+### Component to Integrate Vector Animations - HCL Forge
 
 A new component has been added to HCL Forge that can be used to integrate vector animations in Volt MX apps. This component simplifies the integration with Lottie and provides the necessary tooling that enhances the user experience of integrating vector animations into apps.
 
 For more information about this feature, click [here](https://marketplace.hclvoltmx.com/items/lottieanimator).
 
 
-## Security Enhancements
+### Security Enhancements
 
 The following security enhancements have been made in the V9 Service Pack 2 release of Volt MX Iris: Enable Android Verify Apps Prevent Android Tapjacking.
 
@@ -241,25 +241,25 @@ The following security enhancements have been made in the V9 Service Pack 2 rele
 ## Volt MX Foundry
 
 
-## Added a new Red Hat PAM Adapter in Integration services
+### Added a new Red Hat PAM Adapter in Integration services
 
 From Volt MX Foundry V9 SP2 onwards, a new Red Hat PAM adapter is added in the Volt MX Foundry Console. You can use this adapter to explore Rules, Process, and Cases defined in your Red Hat Process Automation Manager instance and create Services and Operations in the Foundry Console.
 
 For more information on this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Red_Hat_PAM_Adapter.md).
 
-## Support for OpenAPI 3.0 files in the OpenAPI (Swagger) adapter
+### Support for OpenAPI 3.0 files in the OpenAPI (Swagger) adapter
 
 From Volt MX Foundry V9 SP2 onwards, you can import OpenAPI 3.0 files to create Integration services and operations.
 
 For more information on this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Open_API__Swagger_.md).
 
-## Enhanced reconfiguration file
+### Enhanced reconfiguration file
 
 From Volt MX Foundry V9 SP2 onwards, a new simplified format of reconfiguration file is supported to improve the readability and simplify the editing of the file.
 
 For more information on this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/ServiceConfigProfile.md#JSONFileStructure).
 
-## Added a new type of Workflow service – Event triggered
+### Added a new type of Workflow service – Event triggered
 
 From Volt MX Foundry V9 SP2 onwards, Foundry Workflow can now be initiated by listening to Foundry Events. The following three new Signal Events are introduced to support Event based invocations. 
 
@@ -269,7 +269,7 @@ From Volt MX Foundry V9 SP2 onwards, Foundry Workflow can now be initiated by li
 
  For more information on this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Workflow.md).
 
-## Enhancements to Object linked workflows
+### Enhancements to Object linked workflows
 
 From Volt MX Foundry V9 SP2 onwards, the ability to access parameters based on array index in the workflow designer while configuring conditional logic has been added.
 
@@ -279,7 +279,7 @@ Also, added the ability to store the Identity and Session scope parameters from 
 
 For more information on this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Workflow.md#UserTaskWorkFlow).
 
-## Enhancements to Workflow Audit history
+### Enhancements to Workflow Audit history
 
 The Workflow Audit history has been enhanced for the following:
 
@@ -289,55 +289,55 @@ The Workflow Audit history has been enhanced for the following:
 
 For more information on this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/vmf_integrationservice_admin_console_userguide/Content/Workflow.md).
 
-## Added a new application Promotion Mechanism
+### Added a new application Promotion Mechanism
 
 From Volt MX Foundry V9 SP2 onwards, a new application promotion mechanism is introduced. From the snapshot page of an environment, a user can download a deployment package containing the application archive at the publish time and reconfiguration file. The Deployment package can be directly promoted to an environment without being impacted by the changes in console.
 
 For more information on this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/AppPromotion.md).
 
-## Support for PKCE in OAuth 2.0 Identity Providers
+### Support for PKCE in OAuth 2.0 Identity Providers
 
 From Volt MX Foundry V9 SP2 onwards, all OAuth Identity providers support PKCE (proof key for code exchange) in authorization code flow. For backend Identity providers that support PKCE, Iris SDK and Identity will honor additional PKCE mechanism implicitly without any code changes. For the providers that do not support PKCE or in case of clients that use Volt MX V9.1 or lesser, the authorization code grant flow will continue to be honored without the PKCE enhancement. 
 
 For more information on this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Identity10_VoltMX_OAuth2.md).
 
-## Support for Refresh Token Grant type in OAuth 2.0 Identity Providers
+### Support for Refresh Token Grant type in OAuth 2.0 Identity Providers
 
 From Volt MX Foundry V9 SP2 onwards, Refresh Token Grant Type support is added for OAuth 2.0 Identity services. The Refresh Token grant type is used by clients to exchange a refresh token for an access token when the access token has expired. This allows clients to continue to have a valid access token without further interaction with the user. A new Refresh login API is added in SDK to support the refresh login flow.
 
 For more information on this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/VoltMXStudio/Invoking_Identity_Service_Iris.md#RefreshLogin).
 
-## Added Console Access Control for Identity services
+### Added Console Access Control for Identity services
 
 From Volt MX Foundry V9 SP2 onwards, console access control is added for Identity services. You can now control who can access and edit a particular Identity service.
 
 For more information on this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/ConsoleAccessControl.md).
 
-## Support for Remember consent in OAuth Provider
+### Support for Remember consent in OAuth Provider
 
 In OAuth Provider client consent dialogue, from Volt MX Foundry V9 SP2 onwards, a new option is added to remember the Consent provided by the user.
 
 For more information on this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Identity11_OAuth.md).
 
-## Enhancements to External User Authentication
+### Enhancements to External User Authentication
 
 From Volt MX Foundry V9 SP2 onwards, External User Authentication has been enhanced to support configuring multiple identity providers. You can now configure more than one Identity providers in a single Foundry account, which allows the users to log in to Foundry console by using multiple types of authentication providers.
 
 For more information on this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Settings_Cloud.md#Accounts-Cloud).
 
-## Enhancements to support application merger from Foundry CLI
+### Enhancements to support application merger from Foundry CLI
 
 From Volt MX Foundry V9 SP2 onwards, a new command is added in Foundry CLI to support application merge.
 
 For more information on this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Merge_Templates_using_MFCLI.md).
 
-## Support for Oracle 19c
+### Support for Oracle 19c
 
 From Volt MX Foundry V9 SP2 onwards, support for installing Volt MX Foundry on Oracle 19.c is added.
 
 For more information on this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmxfoundry_supported_devices_os_browsers/Content/FoundryV9SP2.md).
 
-## Enhancements to the MySQL support
+### Enhancements to the MySQL support
 
 From Volt MX Foundry V9 SP2 onwards, support for the following is added: 
 
@@ -347,7 +347,7 @@ From Volt MX Foundry V9 SP2 onwards, support for the following is added:
 
 For more information on this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmxfoundry_supported_devices_os_browsers/Content/FoundryV9SP2.md).
 
-## Enhancements to Foundry application Publish
+### Enhancements to Foundry application Publish
 
 * The Publish section has been enhanced to display environments status such as Available, Busy, and Unknown. This is a quick feedback mechanism to inform a user in case the server is busy publishing another application. 
 
