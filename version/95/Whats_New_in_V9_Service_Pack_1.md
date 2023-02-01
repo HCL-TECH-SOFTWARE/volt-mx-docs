@@ -250,7 +250,7 @@ From Volt MX Foundry V9 Service Pack 1, you can install Foundry via the command 
 
 For more information about this, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_rel_notes/Content/(/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_manual_install_guide/Content/Installing_Foundry_WebSphereLiberty.md)).
 
-## HCL AppFactory
+### HCL AppFactory
 
 **Device Filtering** 
 

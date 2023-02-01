@@ -474,7 +474,7 @@ Added support to enable the use of a static key approach to send push notificati
 
 For more information about this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/vms_console_user_guide/Content/Apps/AppAPIKey.md#Archival).
 
-## VoltMX AppFactory
+### VoltMX AppFactory
 
 * Build and publish apps across clouds and cloud accounts using AppFactory. 
 * Allows you to build and publish apps to Docker images and Azure Cloud from the AppFactory console. 

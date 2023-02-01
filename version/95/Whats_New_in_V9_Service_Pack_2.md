@@ -355,7 +355,7 @@ For more information on this feature, click [here](https://opensource.hcltechsw.
 * Added a new reconfiguration option to skip swagger generation steps during publish. 
 * Improved error messaging in case of publish failures.
 
-## HCL App Factory
+### HCL App Factory
 
 **Added support for Flyway Migration**
 
