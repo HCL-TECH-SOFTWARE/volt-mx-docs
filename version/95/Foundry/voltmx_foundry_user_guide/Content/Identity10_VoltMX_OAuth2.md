@@ -3,7 +3,7 @@
 User Guide: [Identity](Identity.md) > [Configure the Identity Service](ConfigureIdentiryService.md) > Volt MX Foundry OAuth 2.0
 
 Volt MX  Foundry OAuth 2.0 Identity Service
------------------------------------------
+--------------------------------------------
 
 Volt MX  Foundry identity supports OAuth 2.0 protocol for authenticating back-end identity providers that support `RFC6749`. For more details, refer to <a href="https://www.rfc-editor.org/rfc/rfc6749" target="_blank"> https://tools.ietf.org/html/rfc6749</a>.
 
@@ -31,19 +31,20 @@ Volt MX  Foundry OAuth 2.0 helps users to configure authorization provider to ac
     *   In the token response
 *   User profile data is available as part of the token response.
 
-Advantages of Volt MX Foundry OAuth 2.0 identity service
+### Advantages of Volt MX Foundry OAuth 2.0 identity service
 
 *   You can use the OAuth 2.0 identity service to retrieve and save user attributes in Volt MX Foundry identity sessions after a successful login response, and then use the attributes as client filters during Offline Sync calls.
     
-    > **_Note:_**  If you enable synchronization capability in your app, Volt MX Foundry OAuth 2.0 identity service uses the user attributes retrieved from the user profile as client filters during Offline Sync calls.  
+    > **_Note:_**  If you enable synchronization capability in your app, Volt MX Foundry OAuth 2.0 identity service uses the user attributes retrieved from the user profile as client filters during Offline Sync calls.<br>  
     For example, the logged in user's role (such as Manager or Employee of an organization) received as part of a User Profile after a successful OAuth login can be used as a client side filter for Offline Sync. For more details, see the <a href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Legacy_Sync.html#SyncClientsideFilters" target="_blank">Synchronization > client side filters</a>. topic.
+    
     
     > **_Note:_** To configure Okta identity service, you can the same steps provided for the Auth 2.0 Identity Service section as well.
     
 
 ### How to Configure a Volt MX Foundry OAuth 2.0 Identity Service
 
-To configure an identity service using Volt MX Foundry OAuth authentication mode, follow these steps:
+<b> To configure an identity service using Volt MX Foundry OAuth authentication mode, follow these steps:</b>
 
 1.  Under the **[**Identity** service designer](ConfigureIdentiryService.md#IdentitySDpage)** page, type a name for the service in the **Name** text box.
     
@@ -223,7 +224,7 @@ To configure an identity service using Volt MX Foundry OAuth authentication mode
             
         4.  **Identity Session**: In this mode, Volt MX Foundry picks up the value of the custom header from the identity session. The identity session contains the details of the identity providers logged into by the application. Identity session contains two different types of attributes for each provider: **Profile** and **Security**.
             
-            For this mode to work, Volt MX Foundry should at least have two identity providers associated with it. The value in the provider configuration will be of the following pattern:<Provider Name>.<profile|security>.<Attribute Name>.
+            For this mode to work, Volt MX Foundry should at least have two identity providers associated with it. The value in the provider configuration will be of the following pattern:< Provider Name >.< profile|security >.< Attribute Name >.
             
             Based on the above configuration, the value is picked up from the identity session.
             
@@ -232,14 +233,17 @@ To configure an identity service using Volt MX Foundry OAuth authentication mode
         *   Header
         *   QueryParam
         *   FormParam
+        *   PathParam
     6.  Under the **REFRESH TOKEN** field, click and select one of the following options from the drop-down list. By default, this field is set to **None**.
         *   Header
         *   QueryParam
         *   FormParam
+        *   PathParam
     7.  Under the **PROFILE REQUEST** field, click and select one of the following options from the drop-down list. By default, this field is set to **None**.
         *   Header
         *   QueryParam
         *   FormParam
+        *   PathParam
     8.  Under the **AUTHORIZE REQUEST** field, click and select the following options from the drop-down list. By default, this field is set to **None**.
         *   QueryParam  
         *   PathParam
@@ -256,14 +260,32 @@ To configure an identity service using Volt MX Foundry OAuth authentication mode
     
 10. Click the **Advanced** to provide additional configuration of your service definition:
     
-      <table style="width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 910px;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1" data-mc-conditions="Default.V9SP2HFP"><td class="TableStyle-Basic-BodyD-Column1-Body1"><b>Enable Refresh Login: </b>Select the Enable Refresh Login check box for extending an active app user login session through a oauth2 refresh token. OAuth2 efresh token obtained in OAuth2 token fetching API will be capable of supplying a new claims token in the event of expiry of currently held claims token.This is required because every time when a user opens the app, the user is forced to enter credentials to access the app. This can be avoided if you make use of OAuth2.0 Refresh Token Grant Type Flow. The Refresh Token Grant Type is a feature of OAuth2 services which enables exchange of backend <code class="codefirst">oauth2 refresh_token</code> for new bearer tokens (access_tokens).For example, you have selected the <b>Enable Refresh Login</b> check box in your Foundry app and built the client app. When a user logs into the app for the first time, the identity provider sends the <code class="codefirst">oauth2 refresh_token</code> in the response to the SDKs. <code class="codefirst">OAuth2 refresh_token</code> is stored by the SDKs in device data store, which is used for subsequent refresh logins.The <code class="codefirst">Refresh Token grant type /grant type (Refresh)</code> is used by clients (SDKs) to exchange a <code class="codefirst">refresh_token</code> for an <code class="codefirst">access_token</code> when the <b>access_token</b> has expired. So that, the app user is allowed to continue to have the app login session until the <code class="codefirst">refresh_token</code> expires.<br><span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>After the refresh_token expires, once user uses the refresh login API, the app login session is logged out automatically and the refresh will fail.<span style="background-color: #ffff00;"><br>Maximum Session Duration for Refresh Login</span><b>Login + refresh login (in case of active sessions)</b>The active session gets expired if the user is not active within idle timeout or max session duration reached.In the scenario where the user does refresh login to an active session then the active session will be extended by maximum session duration.<br><b>logout + refresh login: </b>In this scenario, user is given a new session with maximum session duration.Based on the value set in for Maximum Session Duration, if the extended active login session reaches the value, the refresh login will not be possible, and the user must log in again. For example, In the following settings, if user wants to grant refresh login after 6.00 Hours, the refresh login will not be possible even though the backend refresh_token is valid for weeks. For more information, refer to <a href="ServiceConfig-Identiy-Apps.html#AppSessionMFApps" target="_blank">How to Configure App Session Settings</a>.<br><br><img src="Resources/Images/IdentitySessionideltime.png" style="mc-thumbnail-max-width: 600px;mc-thumbnail-max-height: auto;border-left-style: solid;border-left-width: 1px;border-left-color: ;border-right-style: solid;border-right-width: 1px;border-right-color: ;border-top-style: solid;border-top-width: 1px;border-top-color: ;border-bottom-style: solid;border-bottom-width: 1px;border-bottom-color: ;"><br><b>Limitations: </b>No validation to check whether same user who made a fresh login is trying for refresh a backend login. We You can do this by asking a user to set-up security pin while logging-in under refresh grant mode later.When a user does backend refresh login after an expiry of max-session limit, all other linked multi-login provider information is no longer valid and will be lost. Just the current provider will remain active.For more information on how to configure SDKs, refer to Refresh Login API.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyD-Column1-Body1">Now you can enable or disable the integrity check for an identity service at the provider level. If the integrity is disabled at the provider level, then the provider is meant for server-to-server communication only. To disable the integrity check, In <b>Advanced</b>, select the <b>Restrict to Foundry Server to Server Authentication</b> check box. This setting blocks a traditional client app from using an identity service. It will only allow the identity service to be used from a <span class="MyVariablesVolt MX">Volt MX</span> Foundry Server to authenticate and invoke services.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyA-Column1-Body1"><b>Concurrent User Logins</b>: Select one of the following three options to configure concurrent user login sessions. For more information, refer to <a href="ConcurrentUserLogins.html" target="_blank">Concurrent User Logins</a>.</td></tr></tbody></table>
+      <table style="width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 910px;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1" data-mc-conditions="Default.V9SP2HFP"><td class="TableStyle-Basic-BodyD-Column1-Body1"><b>Enable Refresh Login: </b>Select the Enable Refresh Login check box for extending an active app user login session through a oauth2 refresh token. OAuth2 efresh token obtained in OAuth2 token fetching API will be capable of supplying a new claims token in the event of expiry of currently held claims token.This is required because every time when a user opens the app, the user is forced to enter credentials to access the app. This can be avoided if you make use of OAuth2.0 Refresh Token Grant Type Flow. The Refresh Token Grant Type is a feature of OAuth2 services which enables exchange of backend <code class="codefirst">oauth2 refresh_token</code> for new bearer tokens (access_tokens).For example, you have selected the <b>Enable Refresh Login</b> check box in your Foundry app and built the client app. When a user logs into the app for the first time, the identity provider sends the <code class="codefirst">oauth2 refresh_token</code> in the response to the SDKs. <code class="codefirst">OAuth2 refresh_token</code> is stored by the SDKs in device data store, which is used for subsequent refresh logins.The <code class="codefirst">Refresh Token grant type /grant type (Refresh)</code> is used by clients (SDKs) to exchange a <code class="codefirst">refresh_token</code> for an <code class="codefirst">access_token</code> when the <b>access_token</b> has expired. So that, the app user is allowed to continue to have the app login session until the <code class="codefirst">refresh_token</code> expires.<br><span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>After the refresh_token expires, once user uses the refresh login API, the app login session is logged out automatically and the refresh will fail.<span style="background-color: #ffff00;"><br>Maximum Session Duration for Refresh Login</span>
+      <ul>
+      <li><b>Login + refresh login (in case of active sessions)</b>The active session gets expired if the user is not active within idle timeout or max session duration reached.In the scenario where the user does refresh login to an active session then the active session will be extended by maximum session duration.</li>
+      </ul>
+      <ul>
+      <li><b>logout + refresh login: </b>In this scenario, user is given a new session with maximum session duration.</li>
+      </ul>
+      Based on the value set in for Maximum Session Duration, if the extended active login session reaches the value, the refresh login will not be possible, and the user must log in again. For example, In the following settings, if user wants to grant refresh login after 6.00 Hours, the refresh login will not be possible even though the backend refresh_token is valid for weeks. For more information, refer to <a href="ServiceConfig-Identiy-Apps.html#AppSessionMFApps" target="_blank">How to Configure App Session Settings</a>.<br><br><img src="Resources/Images/IdentitySessionideltime.png" style="mc-thumbnail-max-width: 600px;mc-thumbnail-max-height: auto;border-left-style: solid;border-left-width: 1px;border-left-color: ;border-right-style: solid;border-right-width: 1px;border-right-color: ;border-top-style: solid;border-top-width: 1px;border-top-color: ;border-bottom-style: solid;border-bottom-width: 1px;border-bottom-color: ;"><br><b>Limitations:</b>
+      <ul>
+      <li>No validation to check whether same user who made a fresh login is trying for refresh a backend login. We You can do this by asking a user to set-up security pin while logging-in under refresh grant mode later.</li>
+      <li>When a user does backend refresh login after an expiry of max-session limit, all other linked multi-login provider information is no longer valid and will be lost. Just the current provider will remain active.</li>
+
+      For more information on how to configure SDKs, refer to Refresh Login API.
+      <br>
+      <li>Now you can enable or disable the integrity check for an identity service at the provider level. If the integrity is disabled at the provider level, then the provider is meant for server-to-server communication only. To disable the integrity check, In <b>Advanced</b>, select the <b>Restrict to Foundry Server to Server Authentication</b> check box. This setting blocks a traditional client app from using an identity service. It will only allow the identity service to be used from a <span class="MyVariablesVolt MX">Volt MX</span> Foundry Server to authenticate and invoke services.</li>
+      <li>Concurrent User Logins</b>: Select one of the following three options to configure concurrent user login sessions. For more information, refer to <a href="ConcurrentUserLogins.html" target="_blank">Concurrent User Logins</a>.</td></tr></tbody></table></li>
+      </ul>
+11.   After entering the above details, click <b>SAVE</b> to save the service. The
+      system displays the <b>Identity</b>page. The Volt MX Foundry OAuth 2.0 identity service is configured.
     
-11.  After entering the above details, click **SAVE** to save the service. The system displays the **Identity** page. The Volt MX Foundry OAuth 2.0 identity service is configured.
-    
-     > **_Note:_** You can view the service in the Data Panel feature of Volt MX Iris. By using the Data Panel, you can link back-end data services to your application UI elements seamlessly with low-code to no code. For more information on Data Panel, click [here](../../../Iris/iris_user_guide/Content/DataPanel.md#top).
+
+> **_Note:_** You can view the service in the Data Panel feature of Volt MX Iris. By using the Data Panel, you can link back-end data services to your application UI elements seamlessly with low-code to no code. For more information on Data Panel, click [here](../../../Iris/iris_user_guide/Content/DataPanel.md#top).
     
 
 ### How to Test a Volt MX Foundry OAuth 2.0 Identity Service
+
 
 If you configure an OAuth 2.0 identity service in Volt MX Foundry for a mobile app, the mobile app needs to use OAuth to authorize and authenticate users before they access any APIs. You can test the login for the OAuth identity provider in the OAuth Identity service definition tab. As a response to the login, you can view the identity response and the profile and token response that you get from the backend. Also, you can use the information from the backend profile response to help you configure the user profile under User Attribute Selectors.
 
@@ -271,18 +293,21 @@ The primary benefit of testing the login is that you will know if there is a pro
 
 To test a Volt MX Foundry OAuth 2.0 identity service, do the following:
 
-1.  In the Identity service configuration page, click **Test Login**.
-
+<ol>
+<li>In the Identity service configuration page, click <b>Test Login</b>.</li>
     A sign in screen for the OAuth 2.0 service appears. For example, the sign in screen for your Google account.
+<li>Enter your credentials and click <b>Sign in</b>.</li>
+</ol> 
 
-3.  Enter your credentials and click **Sign in**.
+An alert indicates a successful login and a pane appears that has tabs for Backend Token Response, Backend Profile Response, Identity Response. If your sign in failed, the error message that appears provides information about the failure.
 
-    An alert indicates a successful login and a pane appears that has tabs for Backend Token Response, Backend Profile Response, Identity Response. If your sign in failed, the error message that appears provides information about the failure.
+> **_Important:_** If a custom integration service (for example, MongoDB or RAML) is linked to an OAuth2 identity service, while testing an operation of the integration service from Volt MX Foundry Console, you must pass the `x-volt-mx-oauth2-access-token` as a header and `access_token` as a header value.
+<br><br>Also, If a custom integration service (for example, MongoDB or RAML) is linked to an OAuth2 identity service, while testing an operation of the integration service from Admin Console, you must pass the `x-volt-mx-oauth2-access-token`  as a header and `access_token` as a header value.  
+<b>For example:</b>
 
-    > **_Important:_** If a custom integration service (for example, MongoDB or RAML) is linked to an OAuth2 identity service, while testing an operation of the integration service from Volt MX Foundry Console, you must pass the `x-volt-mx-oauth2-access-token` as a header and `access_token` as a header value.  <br><br>
-    > Also, If a custom integration service (for example, MongoDB or RAML) is linked to an OAuth2 identity service, while testing an operation of the integration service from Admin Console, you must pass the `x-volt-mx-oauth2-access-token`  as a header and `access_token` as a header value.  
-    > For example:  <br><br>
-    > ![](Resources/Images/s-volt-mx-oauth2-access-integration__620x229.png)
+![](Resources/Images/s-voltmx-oauth2-access-integration__620x229.png)
+
+<br>
 
 > **_Note:_** For more information on how you can integrate Volt MX OAuth Provider, User Repository, and OAuth 2.0 Identity services to create a basic login form, refer to a Base Camp article: [Exploring Volt MX OAuth Provider](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0083892).
 
@@ -294,10 +319,35 @@ For back-end providers that use PKCE, the Identity service acts as a passthrough
 
 ![](Resources/Images/PKCE_Services.png)
 
+To use PKCE in Web Apps, you need to enable Cross-Origin Resource Sharing (CORS) settings with Echo. To do so, follow these steps.
+
+1. From the left panel of Volt MX Foundry, go to <b>API Management.</b>
+2. Under <b>Identity</b>, click <b>Service Configuration.</b>
+3. In the <b>Identity Service Security</b> section, select <b>Enable
+   Cross-Origin Resource Sharing (CORS).</b>
+4. From the <b>Settings</b> section, select <b>Echo.</b>
+
+
+![](Resources/Images/1s-voltmx-oauth2-access-integration__620x229.png)
+
+
+For more information, refer to Service Configuration.
+
+> **_Note:_** 
+
+> * Foundry supports login without the PKCE parameters for backward
+    compatibility with clients that do not support PKCE.
+> * PKCE requires both the Client ID and Client Secret to be passed to the
+    service.
+
+
 If the PKCE parameters from the back-end OAuth provider follow the <a href="https://www.rfc-editor.org/rfc/rfc7636" target="_blank">rfc7636</a>. naming convention `(code_challenge, code_challenge_method, code_verifier)`, you don’t need any additional configuration and you can use the <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/VoltMXStudio/Invoking_Identity_Service_Iris.html#login-with-provider-type-as-oauth-saml
 " target="_blank">Volt MX Iris SDK</a>. to invoke the identity service from your client app.
 
 But, if the PKCE parameters from the back-end OAuth provider do not follow the <a href="https://www.rfc-editor.org/rfc/rfc7636" target="_blank">rfc7636</a>. naming convention, you need to configure the PKCE parameters in the Additional Parameters of the Advanced section. For more information, refer to the following image.
+
+[![](Resources/Images/PKCE_Params_thumb_900_0.png)](Resources/Images/PKCE_Params.png)
+
 
 > **_Important:_**
 
@@ -306,12 +356,6 @@ But, if the PKCE parameters from the back-end OAuth provider do not follow the <
 " target="_blank">Volt MX Iris SDK</a>. only supports the rfc7636 naming convention for PKCE parameters. Therefore, if your OAuth provider uses custom parameters to implement PKCE, your client app must contain custom code to send the parameters to the back end by using the Additional Parameters in Foundry.
 *   The Iris SDK continues to send the PKCE parameters with the rfc7636 naming convention, even if Additional Parameters are configured in Foundry. However, the additional parameters override the incoming request parameters from the SDK.
 
-[![](Resources/Images/PKCE_Params_thumb_900_0.png)](Resources/Images/PKCE_Params.png)
-
-> **_Note:_**
-
-*   Foundry supports login without the PKCE parameters for backward compatibility with clients that do not support PKCE.
-*   PKCE requires both the **Client ID** and **Client Secret** to be passed to the service.
 
 #### Limitations
 
@@ -343,21 +387,22 @@ On the Identity service configuration page, Foundry provides the **Enable PKCE f
 
 > **_Important:_**  
 
-*   You can disable PKCE only if you are using 9.2.1.13 FixPack 1 (or later) for both Foundry and Iris.
+*   You can disable PKCE only if you are using 9.2.1.13 (or later) for both Foundry and Iris.
 
-*  If you are using Foundry  versions earlier than 9.2.1.13 FixPack 1, PKCE will not be disabled for your app. Instead, the `code_verifier` and `code_challenge` parameters are sent directly from the client app to the back-end provider while the identity service acts as a passthrough.
+*  If you are using Foundry  versions earlier than 9.2.1.13 , PKCE will not be disabled for your app. Instead, the `code_verifier` and `code_challenge` parameters are sent directly from the client app to the back-end provider while the identity service acts as a passthrough.
 
-*  If the Foundry version is 9.2.1.13, and the Iris version is earlier than 9.2.1.13 FixPack 1, PKCE will not be disabled for the app, even if the check box is cleared.
+*  If the Foundry version is 9.2.1.13, and the Iris version is earlier than 9.2.1.13, PKCE will not be disabled for the app, even if the check box is cleared.
 
 ### CORS Configuration
 
 To use PKCE in Web Apps, you need to enable Cross-Origin Resource Sharing (CORS) settings with Echo. To do so, follow these steps.
 
-1. From the left panel of Volt MX Foundry, go to **API Management**.
-2. Under **Identity**, click **Service Configuration**.
-3. In the **Identity Service Security section**, select **Enable Cross-Origin Resource Sharing (CORS)**.
-4. From the **Settings** section, select **Echo**.
-
+<ol>
+<li>From the left panel of Volt MX Foundry, go to <b>API Management</b>.</li>
+<li>Under <b>Identity</b>, click <b>Service Configuration</b>.</li>
+<li>In the <b>Identity Service Security section</b>, select <b>Enable Cross-Origin Resource Sharing (CORS)</b>.</li>
+<li>From the <b>Settings</b> section, select <b>Echo</b>.</li>
+</ol>  
 
 ![](Resources/Images/PKCE_CORS.png)
 
@@ -366,17 +411,18 @@ For more information, refer to [Service Configuration]().
 
 ### Admin Configurations (On-Premises)
 
-To use PKCE if you are running an on-premise instance of Volt MX Foundry you need to set up the CORS Configuration and Cache Configuration in the [App Services Console](). For more information, refer to the following sections.
+To use PKCE if you are running an on-premise instance of Volt MX Foundry you need to set up the CORS Configuration and Cache Configuration in the <a href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/vmf_integrationservice_admin_console_userguide/Content/App_Services_User_Guide.html" target="_blank">App Services Console </a>. For more information, refer to the following sections.
 
 ### CORS Configuration (On-Premises)
 
-1. Navigate to **Settings → Runtime Configuration → CORS Configuration**.
-2. Select the **CORS Enabled** check box.
-3. From the **Manage Access-Control-Allow-Origin header** list, select **ECHO**.
-4. In the **Whitelist domains for Manage Access-Control-Allow-Origin header** box, add any domains that need to be white listed.
-5. For **Manage Access-Control-Allow-Credentials headers**, select true
-6. For **Manage Vary header**, select **Origin**.
-
+<ol>
+<li>Navigate to <b>Settings → Runtime Configuration → CORS Configuration</b>.</li>
+<li>Select the <b>CORS Enabled</b> check box.</li>
+<li>From the <b>Manage Access-Control-Allow-Origin header</b> list, select <b>ECHO</b>.</li>
+<li>In the <b>Whitelist domains for Manage Access-Control-Allow-Origin header</b> box, add any domains that need to be white listed.</li>
+<li>For <b>Manage Access-Control-Allow-Credentials headers</b>, select true</li>
+<li>For <b>Manage Vary header</b>, select <b>Origin</b>.</li>
+</ol>  
 
 ![](Resources/Images/plainJS_AdminConsole_CORS.png)
 
@@ -385,13 +431,13 @@ To use PKCE if you are running an on-premise instance of Volt MX Foundry you nee
 
 > **_Important:_** Make sure that cache server is accessible from Volt MX  Foundry server.
 
-1. Navigate to **Settings → Runtime Configuration → Cache Configuration**
-2. From the **Cache Type** list, select the type of caching that you want to use. For example, **MEMCACHED**.
-3. In the **Cache Server URLs** box, type the URLs for your cache servers. For example, `localhost:11211.`
-
+<ol>
+<li>Navigate to <b>Settings → Runtime Configuration → Cache Configuration</b>.</li>
+<li>From the <b>Cache Type</b> list, select the type of caching that you want to use. For example, <b>MEMCACHED</b>.</li>
+<li>In the <b>Cache Server URLs</b> box, type the URLs for your cache servers. For example, `localhost:11211.`</li>
+</ol> 
 
 ![](Resources/Images/plainJS_AdminConsole_cache.png)
-
 
 > **_Important:_**
 
