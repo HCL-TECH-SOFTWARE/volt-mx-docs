@@ -65,7 +65,7 @@ $ helm repo update
 
 #### Example Command Line Commands
 
-**Notes:** 
+**Notes:**
 
 - Update the volumeClaimTemplate.storageClassName to match the storage class provided by your cluster via a command line argument. For example, the storage class name to be used when installing in Rancher Desktop is "local-path" while for an OpenShift installation, the storage class name to be used is "thin".
 
@@ -245,9 +245,10 @@ Use the following steps to install via Helm:
 - kube-state-metrics
 - Grafana
 
-#### Example Command Line Commands
-**Note:** Replace the host, paths and default timezone setting using your values. In this example, the urls listed will be used to provide ingress to these applications.
+#### Install Example Showing Ingress Enablement
+The following example shows how to install kube-prometheus-stack with Ingress enablement for Alertmanager, Grafana, and Prometheus using command line parameters.
 
+**Note:** Replace the host, paths and default timezone setting using your values. In this example, the urls listed will be used to provide ingress to these applications.
 
 ```bash
 $ helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
@@ -272,6 +273,200 @@ kube-prometheus-stack has been installed. Check its status by running:
 
 Visit https://github.com/prometheus-operator/kube-prometheus for instructions on how to create & configure Alertmanager and Prometheus instances using the Operator.
 
+$ kubectl --namespace kube-prometheus-stack get pods -l "release=kube-prometheus-stack"
+NAME                                                        READY   STATUS    RESTARTS   AGE
+kube-prometheus-stack-prometheus-node-exporter-9dq9s        1/1     Running   0          7m14s
+kube-prometheus-stack-operator-7868bc5fc5-wkct4             1/1     Running   0          7m14s
+kube-prometheus-stack-kube-state-metrics-77cdf9bbfd-xpzzt   1/1     Running   0          7m14s
+
+```
+
+
+#### Advanced Install Example Showing Ingress Enablement and Alert Manager Configuration
+In the example above we installed kube-prometheus-stack without customizations. You will most likely need to customize your configuration for things like Alertmanager to work properly. This example walks through how to customize the configuration of kube-prometheus-stack to enable Ingress for Alertmanager, Grafana, and Prometheus and add the Alertmanager Configuration.
+
+**Note:** If you installed kube-prometheus-stack using the previous example, simply update the values.yaml for kube-prometheus-stack using the same values, and use helm upgrade instead of helm install. This advanced example will show you how to to update the values.
+
+See the [Kube Prometheus Stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack#kube-prometheus-stack) README for more details.
+
+##### Prerequisites Steps for Advanced Install
+```bash
+#  Add the repo and update it if you have not already done so previously
+$ helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+"prometheus-community" has been added to your repositories
+
+$ helm repo update
+...Successfully got an update from the "prometheus-community" chart repository
+Update Complete. ⎈Happy Helming!⎈
+
+# Create a new directory for kube-prometheus-stack and change to it
+$ mkdir custom-kube-prometheus-stack
+$ cd custom-kube-prometheus-stack
+
+# Download the values.yaml file for kube-prometheus-stack
+$ helm show values prometheus-community/kube-prometheus-stack >values.yaml
+
+```
+
+##### Ingress Enablement Example
+The following example shows how to enable Ingress for Alertmanager, Grafana, and Prometheus.
+Edit the values.yaml file for kube-prometheus-stack that you downloaded per the prerequisite steps, set Ingress enabled to true, and provide a hostname and a path:
+
+```
+alertmanager:
+
+  ingress:
+    enabled: true
+
+    # Replace with your host(s)
+    hosts:
+    - alertmanager.example.com
+
+    # Replace with your custom path for Alertmanager if you customized this during deployment
+    paths
+    - /
+.
+.
+.
+grafana:
+
+  defaultDashboardsTimezone: et
+
+  ingress:
+    enabled: true
+
+    # Replace with your host(s)
+    hosts:
+    - grafana.example.com
+
+    # Replace with your custom path for Grafana if you customized this during deployment
+    path: /
+.
+.
+.
+prometheus:
+
+  ingress:
+    enabled: true
+
+    # Replace with your host(s)
+    hosts:
+    - prometheus.example.com
+
+    # Replace with your custom path for Prometheus if you customized this during deployment
+    paths
+    - /
+```
+
+##### Alertmanager Configuration
+The following example shows how to configure Alertmanager for Volt MX Foundry.
+
+1. Edit values.yaml for kube-prometheus-stack that you downloaded per the prerequisite steps, and search for and replace the **additionalPrometheusRulesMap** setting with the Foundry Custom Rules using the following values:
+
+    <pre><code>
+    additionalPrometheusRulesMap:
+      rule-name:
+        groups:
+        - name: Pods
+          rules:
+          - alert: Container restarted
+            annotations:
+              summary: Container named {{$labels.container}} in {{$labels.pod}} in {{$labels.namespace}} was restarted
+            expr: |
+              sum(increase(kube_pod_container_status_restarts_total{container=~"kony.*"}[1m])) by (pod,namespace,container) > 0
+            for: 0m
+            labels:
+              severity: 'High'<br />
+          - alert: High Memory Usage of Container
+            annotations:
+              summary: Container named {{$labels.container}} in {{$labels.pod}}
+                       in {{$labels.namespace}} is using more than 80% of Memory Limit
+            expr: |
+              ((( sum(container_memory_usage_bytes{image!="",container_name!="POD", container=~"kony.*"}) by
+              (namespace,container_name,pod_name)  / sum(container_spec_memory_limit_bytes{image!="",container_name!="POD",
+              namespace!="kube-system"}) by (namespace,container_name,pod_name) ) * 100 ) < +Inf ) > 80
+            for: 5m
+            labels:
+              severity: 'Critical'<br />
+          - alert: High CPU Usage of Container
+            annotations:
+              summary: Container named {{$labels.container}} in {{$labels.pod}} in {{$labels.namespace}} is using more than 80% of CPU Limit
+            expr: |
+              ((sum(irate(container_cpu_usage_seconds_total{image!="",container_name!="POD", container=~"kony.*"}[30s]))
+              by (namespace,container_name,pod_name) / sum(container_spec_cpu_quota{image!="",container_name!="POD",
+              container=~"kony.*"} / container_spec_cpu_period{image!="",container_name!="POD", container=~"kony.*"})
+              by (namespace,container_name,pod_name) ) * 100)  > 80
+            for: 5m
+            labels:
+              severity: 'Critical'<br />
+        - name: Nodes
+          rules:
+          - alert: High Node Memory Usage
+            annotations:
+              summary: Node {{$labels.kubernetes_io_hostname}} has more than 80% memory used. Plan Capacity
+            expr: |
+              (sum (container_memory_working_set_bytes{id="/",container_name!="POD"}) by (kubernetes_io_hostname) / sum
+              (machine_memory_bytes{}) by (kubernetes_io_hostname) * 100) > 80
+            for: 5m
+            labels:
+              severity: 'High'<br />
+          - alert: High Node CPU Usage
+            annotations:
+              summary: Node {{$labels.kubernetes_io_hostname}} has more than 80% allocatable cpu used. Plan Capacity.
+            expr: |
+              (sum(rate(container_cpu_usage_seconds_total{id="/", container_name!="POD"}[1m])) by (kubernetes_io_hostname) /
+              sum(machine_cpu_cores) by (kubernetes_io_hostname)  * 100) > 80
+            for: 5m
+            labels:
+              severity: 'High'<br />
+          - alert: High Node Disk Usage
+            annotations:
+              summary: Node {{$labels.kubernetes_io_hostname}} has more than 85% disk used. Plan Capacity.
+            expr: |
+              (sum(container_fs_usage_bytes{id="/",container_name!="POD"}) by (kubernetes_io_hostname) / sum
+              (container_fs_limit_bytes{container_name!="POD",id="/"}) by (kubernetes_io_hostname)) * 100 > 85
+            for: 5m
+            labels:
+              severity: 'High'
+    </code></pre>
+
+2. Search for the **receivers** section, and add the **Foundry_Alerts** receiver for your email configuration. **Note:** Uncomment and update **auth_username** and **auth_password** if they are required. Otherwise, you can remove them.
+
+    <pre><code>
+    receivers:
+    - name: 'Foundry_Alerts'
+      email_configs:
+        - to: email_recipient_address
+          from: email_sender_address
+          smarthost: smtp_smarthost_for_sending_emails
+          # auth_username: sender_username
+          # auth_password: sender_authentication_password
+          headers:
+            Subject: 'Alert'
+    </code></pre>
+
+3. Save your changes and exit your editor.
+
+4. Do the helm install of kube-prometheus-stack using your customized values.yaml. **Note:** Use helm upgrade if you have already installed kube-prometheus-stack.
+
+```bash
+# Install kube-prometheus-stack using customized values.yaml file
+$ helm install -n kube-prometheus-stack --create-namespace \
+-f values.yaml kube-prometheus-stack prometheus-community/kube-prometheus-stack
+
+Release "kube-prometheus-stack" has been upgraded. Happy Helming!
+NAME: kube-prometheus-stack
+LAST DEPLOYED: Wed Jan 11 13:55:37 2023
+NAMESPACE: kube-prometheus-stack
+STATUS: deployed
+REVISION: 1
+NOTES:
+kube-prometheus-stack has been installed. Check its status by running:
+  kubectl --namespace kube-prometheus-stack get pods -l "release=kube-prometheus-stack"
+
+Visit https://github.com/prometheus-operator/kube-prometheus for instructions on how to create & configure Alertmanager and Prometheus instances using the Operator.
+
+# Check its status
 $ kubectl --namespace kube-prometheus-stack get pods -l "release=kube-prometheus-stack"
 NAME                                                        READY   STATUS    RESTARTS   AGE
 kube-prometheus-stack-prometheus-node-exporter-9dq9s        1/1     Running   0          7m14s
