@@ -39,7 +39,7 @@ To create a new developer portal, do the following:
 
     2.  Select the required check boxes for **the apps** that you want to add to the Dev Portal.
 
-        > **_Note:_** To select **all apps** that you want to add to the Dev Portal, select the **Include all current and future apps** check box
+        > **_Note:_** To select **all apps** that you want to add to the Dev Portal, select the **Include all current and future apps** check box.
 
     3.  click **SAVE** to add the selected apps with services to Developer portal.
 
