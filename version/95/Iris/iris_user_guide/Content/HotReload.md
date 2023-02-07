@@ -10,30 +10,16 @@ Using the Hot Reload key, developers can view their changes immediately, adjust 
 
 While in the Iris canvas, you can use the Ctrl+Shift+R combination to invoke the Hot reload feature in the Live Preview window.
 
-Limitation of Hot Reload
-------------------------
+## Use the Hot Reload feature in Volt MX Iris
 
-*   Hot reload is only supported for MVC applications, changes are reflected in forms and controllers.
-*   Hot Reload support only on the responsive web. This is to avoid any release mode security issues.
-    
-*   Hot reload works only on a top-level form that you are viewing.
-    
-*   If you make any changes to your Volt MX Foundry, the Hot Reload feature will not work. If foundry app changes are made, then you need to re initiate the preview.
-*   Hot Reload will not reflect the changes in the items below.
-    
-    *   i18N resources
-    *   Themes
-    *   Custom widgets
-    *   Custom fonts
-    *   Templates
-    *   Components
-    *   Changes to module files except for form controllers.
-        
+### Prerequisites
 
-Before you get started, ensure that you have following prerequisites.
+Following are the prerequisites to use the Hot Reload feature in Volt MX Iris :
 
-*   Ensure that you have a working Volt MX account.
-*   Ensure that you have installed on your computer.
+* Ensure that you have a working Volt MX account.
+
+* Ensure that you have Volt MX Iris V9 Service Pack 1 or later
+  installed on your computer.
 
 ### Using Hot Reload
 
@@ -59,3 +45,32 @@ In the following steps, we will take you through the steps of using the Hot Relo
     Changes made on the form will reflect in the live preview window.  
     
     ![](Resources/Images/Live_Preview/After_HotReload_393x344.png)
+
+
+
+Limitation 
+-----------
+
+*   Hot reload is only supported for MVC applications, changes are reflected in forms and controllers.
+*   Hot Reload support only on the responsive web. This is to avoid any release mode security issues.
+    
+*   Hot reload works only on a top-level form that you are viewing.
+    
+*   If you make any changes to your Volt MX Foundry, the Hot Reload feature will not work. If foundry app changes are made, then you need to re initiate the preview.
+*   Hot Reload will not reflect the changes in the items below.
+    
+    *   i18N resources
+    *   Themes
+    *   Custom widgets
+    *   Custom fonts
+    *   Templates
+    *   Components
+    *   Changes to module files except for form controllers.
+        
+
+Before you get started, ensure that you have following prerequisites.
+
+*   Ensure that you have a working Volt MX account.
+*   Ensure that you have installed on your computer.
+
+> **_Note:_** From the V9 Service Pack 5 release, support for the Hot Reload feature has been added to MVC 2.0 apps, Form Controllers (including Form Controller Extensions), Segment Templates, and Components (including component controller modules, component controller extensions, and widget actions).
