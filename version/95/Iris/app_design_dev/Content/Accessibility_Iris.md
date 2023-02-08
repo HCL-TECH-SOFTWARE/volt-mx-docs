@@ -65,24 +65,24 @@ accessibilityConfig Property
 
 In order to support accessibility in Iris, a common property, accessibilityConfig is available in all widgets. This property enables you to control accessibility behavior and alternative text for the widget.
 
-Syntax
-
+**Syntax**
+```
 accessibilityConfig = {  
 "a11yLabel" = "string value",  
 "a11yValue" = "string value",  
 "a11yHint" = "string value",  
 "a11yHidden" = true/false  
 }
-
-Type
+```
+**Type**
 
 Object
 
-Read/Write
+**Read/Write**
 
 Read + Write
 
-Remarks
+**Remarks**
 
 The accessibilityConfig property is enabled for all the widgets which are supported under the Flex Layout.
 
@@ -121,10 +121,10 @@ SPA/ Desktop Web limitations
 
 | Widget Name | Supported tags | Example | Remarks |
 | --- | --- | --- | --- |
-| Label | <li>label (default)  <li>div  <li>span  <li>h1, h2, h3, h4, h5, h6| The following example shows how to assign the tags to the Label widget.<br>```/*Sample code to assign the span tag to the Label widget*/"accessibilityConfig": {"tagName": "span"}```<br> |  |
-| Segment | <li>ul (default)  <li>ol  <li>div  <li>table| The following example uses the role and tagName attributes to modify the HTML tag of Segment widget.<br>```/*Sample code to assign the span tag to the Label widget*/"accessibilityConfig": {"tagName": "span"}``` | <li>You can assign values to the role attribute inside the a11yARIA only while modifying the tag to div.  <li>You can only assign the following values to the role attribute of a Segment widget: grid, table, and button. |
-| FlexContainer | <li>div (default)  <li>th  <li>td  <li>tr | The following example uses the role and tagName attributes to modify the HTML tag of a FlexContainer widget.<br>```/*Sample code to assign the td tag to a FlexContainer widget*/var flx = new kony.ui.FlexContainer({ "accessibilityConfig": { "tagName": "td" } });``` | <li>This is a read-only property.  <li>When you specify the value as tr for the tagName property of a FlexContainer widget, ensure that you use the Flex Horizontal Layout Type. The height of the FlexContainer widget is inherited from the height of the child widgets present inside it. |
-| FlexScrollContainer | <li>div (default)  <li>th  <li>td | The following example uses the role and tagName attributes to modify the HTML tag of a FlexScrollContainer widget.<br>```/*Sample code to assign the td tag to a FlexScrollContainer widget*/var flx = new kony.ui.FlexScrollContainer({"accessibilityConfig": {"tagName": "td" } });``` | <li>This is a read-only property. |
+| Label | <li>label (default)  <li>div  <li>span  <li>h1, h2, h3, h4, h5, h6| The following example shows how to assign the tags to the Label widget.<br> ```/*Sample code to assign the span tag to the Label widget*/"accessibilityConfig": {"tagName": "span"}``` <br> |  |
+| Segment | <li>ul (default)  <li>ol  <li>div  <li>table| The following example uses the role and tagName attributes to modify the HTML tag of Segment widget.<br> ```/*Sample code to assign the span tag to the Label widget*/"accessibilityConfig": {"tagName": "span"}``` | <li>You can assign values to the role attribute inside the a11yARIA only while modifying the tag to div.  <li>You can only assign the following values to the role attribute of a Segment widget: grid, table, and button. |
+| FlexContainer | <li>div (default)  <li>th  <li>td  <li>tr | The following example uses the role and tagName attributes to modify the HTML tag of a FlexContainer widget.<br> ```/*Sample code to assign the td tag to a FlexContainer widget*/var flx = new kony.ui.FlexContainer({ "accessibilityConfig": { "tagName": "td" } });``` | <li>This is a read-only property.  <li>When you specify the value as tr for the tagName property of a FlexContainer widget, ensure that you use the Flex Horizontal Layout Type. The height of the FlexContainer widget is inherited from the height of the child widgets present inside it. |
+| FlexScrollContainer | <li>div (default)  <li>th  <li>td | The following example uses the role and tagName attributes to modify the HTML tag of a FlexScrollContainer widget.<br> ```/*Sample code to assign the td tag to a FlexScrollContainer widget*/var flx = new kony.ui.FlexScrollContainer({"accessibilityConfig": {"tagName": "td" } });``` | <li>This is a read-only property. |
 
 
 Example 1
