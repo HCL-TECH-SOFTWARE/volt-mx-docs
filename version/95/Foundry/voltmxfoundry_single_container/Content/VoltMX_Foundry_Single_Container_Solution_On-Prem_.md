@@ -119,7 +119,8 @@ Installation Types
 ------------------
 
 *   **Command Line or GUI Installation** - Volt MX Foundry Single Container Solution can be installed using the bundled install shell script, which will prompt the user for the required values.
-*   **Silent Installation** - The installation script also supports silent installation if the config.properties file is passed as an argument (for example, /path/install-foundry.sh config.properties). Using this, you can have additional ability to pass custom Tomcat JAVA\_OPTS, and time-zone settings as well.
+*   **Silent Installation** - The installation script also supports silent installation if the config.properties file is passed as an argument (for example, /path/install-foundry.sh config.properties). Using this, you can have additional ability to pass custom Tomcat JAVA\_OPTS, and time-zone settings as well.  
+
 
 Configuration
 =============
@@ -128,9 +129,10 @@ The following parameters must be provided by the user during Installation:
 
 1.  **Install Environment Name** - The install environment name can be anything, for example, `dev`, `qa`, `prod`, or `eastusprod`.
 
-> **_Note:_** The Install Environment Name must not contain numbers.
+    > **_Note:_** The Install Environment Name must not contain numbers.
 
 3.  **Application Server Details**:
+    
     *   **Domain Name**: The Domain Name for Volt MX Foundry.  
         
         > **_Note:_** Domain name must not be a dynamic IP address or 'localhost'. Although, the domain name can be a static IP address.
@@ -140,28 +142,41 @@ The following parameters must be provided by the user during Installation:
         > **_Note:_** Ensure that the specified port is not being used by another service.
         
     *   **COM\_PROTOCOL**: The communication protocol that is used for Volt MX Foundry. This value can be either **http** or **https**.
-    *   **KEYSTORE\_FILE** : The path to the existing Keystore file. The path should point to a valid `JKS` file. This value can be empty if the communication protocol is HTTP.
-    *   **KEYSTORE\_FILE\_PASS**: Password for the Keystore (`JKS`) file. This value can be empty if the communication protocol is HTTP.
-4.  **Database Details**:
-    *   **Database Type** - This is the Database Type you want to use for hosting Volt MX Foundry.
-    *   **Database Hostname** - This is the Database Server hostname used to connect to the Database Server.
-    *   **Database Port Number**– This is the Port Number used to connect to the Database Server.
-    *   **Database Username** - This is the preferred Database Username used to connect to the Database Server.
-    *   **Database Password** - This is the Database Password used to connect to the Database Server.
     
-    > **_Important:_** The Password must be a string containing at least 8 characters, and must include at least one uppercase letter, one lowercase letter, one digit and one special character.
+    *   **KEYSTORE\_FILE** : The path to the existing Keystore file. The path should point to a valid `JKS` file. This value can be empty if the communication protocol is HTTP.
+    
+    *   **KEYSTORE\_FILE\_PASS**: Password for the Keystore (`JKS`) file. This value can be empty if the communication protocol is HTTP.  
+
+    <a name="DatabaseDetails"></a> 
+    
+3.  **Database Details**:
+    
+    *   **Database Type** - This is the Database Type you want to use for hosting Volt MX Foundry. 
+
+    *   **Database Hostname** - This is the Database Server hostname used to connect to the Database Server.
+
+    *   **Database Port Number**– This is the Port Number used to connect to the Database Server.
+
+    *   **Database Username** - This is the preferred Database Username used to connect to the Database Server.
+
+    *   **Database Password** - This is the Database Password used to connect to the Database Server.  
+        
+        > **_Note:_** The Password must be a string containing at least 8 characters, and must include at least one uppercase letter, one lowercase letter, one digit and one special character.       
     
     *   **Database Prefix** – This is the Database server prefix for Volt MX Foundry Schemas/Databases.
-    *   **Database Suffix** – This is the Database server suffix for Volt MX Foundry Schemas/Databases.
-    
-    > **_Note:_** In case of upgrade, ensure that the values of the Database Prefix and Suffix that you provide are the same as you had provided during the initial installation.
+
+    *   **Database Suffix** – This is the Database server suffix for Volt MX Foundry Schemas/Databases.  
+
+        > **_Note:_** In case of upgrade, ensure that the values of the Database Prefix and Suffix that you provide are the same as you had provided during the initial installation.
     
 5.  **Automatic Registration Details** (not applicable for upgrade):
+
     *   **User Id** – E-mail ID used for Volt MX Foundry Registration.
     *   **Password** – Password used for Volt MX Foundry Registration.
     *   **First Name** – First Name used for Volt MX Foundry Registration.
     *   **Last Name** – Last Name used for Volt MX Foundry Registration.
     *   **Environment Name** – The Volt MX Foundry Environment to publish generated applications.
+
 6.  **Time Zone** - The Time Zone of the Database used for Volt MX Foundry installation.
     
     > **_Note:_** The Time Zone is an optional value. If you do not provide any Time Zone, it is set to Etc/UTC.
