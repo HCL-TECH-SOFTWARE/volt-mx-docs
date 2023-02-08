@@ -4478,12 +4478,17 @@ textAsString = null;
 
 * * *
 
-The textContentType property is used to specify the keyboard and system information based on the text type entered by the application user.
+The `textContentType` property is used to specify the type of soft keyboard and system information to be displayed when the user enters the data in a TextBox widget.
+
+> **NOTE:** In the Android platform, you can assign only the `TEXTBOX_TEXT_CONTENT_TYPE_OTP` constant to the `textContentType` property. To use this feature, add the following code in the &lt;workspace location>/&lt;project name> androidbuild.properties file.
+>
+>```
+> supportGoogleAutofillLib = true
+>```
 
 ### Syntax
 
 ```
-
 textContentType
 ```
 
@@ -4491,35 +4496,37 @@ textContentType
 
 Constant
 
+The default value of the `textContentType` property is `TEXTBOX_TEXT_CONTENT_TYPE_DEFAULT`.
+
+To change the content type of the text, assign any of the following constants to `textContentType` property. You must specify each constant with the 'constants.xx' prefix.
+
+*   TEXTBOX\_TEXT\_CONTENT\_TYPE\_DEFAULT: Use this value if no action is required on the input string.
+*   TEXTBOX\_TEXT\_CONTENT\_TYPE\_USERNAME: Use this value when the TextBox widget is used to specify an account or a login name. When you use this value, the suggestions for username are available. This constant is applicable from iOS 11.0 onwards.
+*   TEXTBOX\_TEXT\_CONTENT\_TYPE\_PASSWORD: Use this value when the TextBox widget is used to type a password. When you use this value, the suggestions for password are available. This constant is applicable from iOS 11.0 onwards.
+*   TEXTBOX\_TEXT\_CONTENT\_TYPE\_OTP: Use this value when the TextBox widget is used to specify a single factor SMS login code or OTP. In iOS platform, the suggestions for the OTP are provided only if the system keyboard is in use.This constant is applicable from iOS 12.0 and Android Oreo onwards.
+
 ### Read/Write
 
 Read + Write
 
 ### Remarks
 
-The default value of the textContentType property is TEXTBOX\_TEXT\_CONTENT\_TYPE\_DEFAULT.
-
-To change the content type of the text, assign any of the following constants to textContentType property. You must specify each constant with the ‘constants.xx’ prefix.
-
-*   TEXTBOX\_TEXT\_CONTENT\_TYPE\_DEFAULT: Use this value if no action is required on the input string.
-*   TEXTBOX\_TEXT\_CONTENT\_TYPE\_USERNAME: Use this value when the TextBox widget is used to specify an account or a login name. When you use this value, the suggestions for username are available. This constant is applicable from iOS 11.0 onwards.
-*   TEXTBOX\_TEXT\_CONTENT\_TYPE\_PASSWORD: Use this value when the TextBox widget is used to type a password. When you use this value, the suggestions for password are available. This constant is applicable from iOS 11.0 onwards.
-*   TEXTBOX\_TEXT\_CONTENT\_TYPE\_OTP: Use this value when the TextBox widget is used to specify a single factor SMS login code or OTP. When you use this value, the suggestions for the OTP are provided only if the system keyboard is in use.This constant is applicable from iOS 12.0 onwards.
+* In Android platform, if a TextBox widget has set both `setImportantForAutofill` property and `textContentType` property, the value in the `textContentType` property overrides the value in `setImportantForAutoFill` property. The value of `setImportantForAutoFill` property is overridden as `TEXT_IMPORTANT_FOR_AUTOFILL_YES`.
+* In Android platform, if the value in `textContentType` property is incorrect or null, the `setImportantForAutoFill` property is overridden to `TEXT_IMPORTANT_FOR_AUTOFILL_NO` and the auto-fill dialog box is not displayed.
+* To enable the OTP auto-fill feature in Android devices, you must navigate to **Settings > Google > Autofill** of the device and turn on both **Autofill Service** and **SMS Verification Codes**.
 
 ### Example
 
 ```
-
 //Sample code to set the textContentType property of a TextBox widget.  
   
 frmTextBox.myTextBox.textContentType=constants.TEXTBOX_TEXT_CONTENT_TYPE_ DEFAULT;  
-
 ```
 
 ### Platform Availability
 
 *   Available in the IDE
-*   iOS
+*   iOS and Android Oreo onwards
 
 * * *
 
