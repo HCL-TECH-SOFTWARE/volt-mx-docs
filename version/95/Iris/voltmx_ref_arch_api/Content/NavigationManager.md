@@ -40,7 +40,7 @@ The Syntax of the `Forms` Object is as follows:
 ```
 "Forms": {  
 "Form Friendly Name": {  
-    "preConditionConfig": \['', ''\],  
+    "preConditionConfig": ['', ''],  
     "destinationConfig": {  
       "friendlyName": "",  
       "appName": ""  
@@ -60,7 +60,7 @@ During form navigation, if the target form has preconditions declared, the sourc
 
 **Syntax**
 
-`"preConditionConfig" : \[ \]`
+`"preConditionConfig" : [ ]`
 
 **Input Parameters**
 
@@ -70,7 +70,7 @@ None.
 
 **Example**
 
-`"preConditionConfig" : \[ "token" \]`
+`"preConditionConfig" : [ "token" ]`
 
 
 **Return Values**
@@ -98,7 +98,7 @@ In case of one-to-one navigation
 
 In case of one-to-many navigation
 
-`"destinationConfig" : { "callback" : "" , "targetForms" : \[ { "friendlyName" : "" } , { "friendlyName" : "" , "appName" : ""}\] }`
+`"destinationConfig" : { "callback" : "" , "targetForms" : [ { "friendlyName" : "" } , { "friendlyName" : "" , "appName" : ""}] }`
 
 **Input Parameters**
 
@@ -116,7 +116,7 @@ In case of one-to-many navigation
 **Example**
 
 ```
-"destinationConfig" : { "callback" : ""  , "targetForms" : \[  { "friendlyName" : "Form1" } , { "friendlyName" : "Form2" , "appName" : "App2"}\] }
+"destinationConfig" : { "callback" : ""  , "targetForms" : [  { "friendlyName" : "Form1" } , { "friendlyName" : "Form2" , "appName" : "App2"}] }
 ```
 
 **Return Values**
@@ -142,7 +142,7 @@ The preconditions of a micro app are configured in the Application Object. Durin
 The Syntax of the `Application` Object is as follows:
 
 ```
-"Application": {"preConditionConfig" : \[ "" \]},
+"Application": {"preConditionConfig" : [ "" ]},
 ```
 
 Even if the source app does not set the mandatory preconditions of the target app, the navigation is successful if the target app already has the preconditions set in its app data (if the preconditions are already set by another micro app).
@@ -156,7 +156,7 @@ The preConditionConfig object specifies a list of preconditions.
 
 **Syntax**
 
-`"preConditionConfig" : \[ \]`
+`"preConditionConfig" : [ ]`
 
 **Input Parameters**
 
@@ -167,7 +167,7 @@ None.
 **Example**
 
 ```
-"preConditionConfig" : \[ "token" \]
+"preConditionConfig" : [ "token" ]
 ```
 
 **Return Values**
@@ -190,7 +190,7 @@ The Syntax of the `UIModules` Object is as follows:
 ```
 "UIModules" : {
 "<Module Name>" : {"destinationConfig" : {"friendlyName" : ""}},
-"<Module Name>" : {"destinationConfig" : { "callback" : ""  , "targetForms" : \[ { "friendlyName" : "" } , { "friendlyName" : "" , "appName" : ""}\] }}
+"<Module Name>" : {"destinationConfig" : { "callback" : ""  , "targetForms" : [ { "friendlyName" : "" } , { "friendlyName" : "" , "appName" : ""}] }}
 }
 ```
 <details close markdown="block"><summary>destinationConfig</summary>
@@ -207,7 +207,7 @@ In case of one-to-one navigation
 
 In case of one-to-many navigation
 
-`"destinationConfig" : { "callback" : "" , "targetForms" : \[ { "friendlyName" : "" } , { "friendlyName" : "" , "appName" : ""}\] }`
+`"destinationConfig" : { "callback" : "" , "targetForms" : [ { "friendlyName" : "" } , { "friendlyName" : "" , "appName" : ""}] }`
 
 Input Parameters
 
@@ -224,7 +224,7 @@ Input Parameters
 **Example**
 
 ```
-"destinationConfig" : { "callback" : ""  , "targetForms" : \[  { "friendlyName" : "Form1" } , { "friendlyName" : "Form2" , "appName" : "App2"}\] }
+"destinationConfig" : { "callback" : ""  , "targetForms" : [  { "friendlyName" : "Form1" } , { "friendlyName" : "Form2" , "appName" : "App2"}] }
 ```
 
 **Return Values**
@@ -247,28 +247,28 @@ Here is a sample NavigationModel.json file:
 define("Accounts/navigation/NavigationModel", {
 
     "Application": {
-        "preConditionConfig": \["token"\]
+        "preConditionConfig": ["token"]
     },
 
     "Forms": {
 
         "frmAccountSummary": {
-            "preConditionConfig": \['accountID', 'profile'\],
+            "preConditionConfig": ['accountID', 'profile'],
             "destinationConfig": {
                 "friendlyName": "frmAccountDetails",
                 "appName": "Accounts"
             }
         },
         "frmAccountDetails": {
-            "preConditionConfig": \[\],
+            "preConditionConfig": [ ],
             "destinationConfig": {
                 "callback": "handleFrmAccountDetails",
-                "targetForms": \[{
+                "targetForms": [{
                     "friendlyName": "frmProfile"
                 }, {
                     "friendlyName": "frmTransact",
                     "appName": "Transactions"
-                }\]
+                }]
             }
         }
     },
@@ -284,12 +284,12 @@ define("Accounts/navigation/NavigationModel", {
         "AccountsUIModule": {
             "destinationConfig": {
                 "callback": "fun1",
-                "targetForms": \[{
+                "targetForms": [{
                     "friendlyName": "frmProfile"
                 }, {
                     "friendlyName": "frmTransact",
                     "appName": "Transactions"
-                }\]
+                }]
             }
         }
     }
