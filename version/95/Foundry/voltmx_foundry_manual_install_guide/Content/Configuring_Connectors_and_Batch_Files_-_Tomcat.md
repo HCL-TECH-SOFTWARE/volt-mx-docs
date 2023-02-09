@@ -45,9 +45,9 @@ How to Configure Batch Files
         
 3.  Set JRE home if it is not set. For example, use the following command:
     
-```
-set "JRE_HOME=<User_Install_Directory>\jre"
-```
+    ```
+    set "JRE_HOME=<User_Install_Directory>\jre"
+    ```
     
 4.  Save the `catalina.bat` file.
 
@@ -58,22 +58,22 @@ set "JRE_HOME=<User_Install_Directory>\jre"
 1.  From the `<User_Install_Directory>\apache-tomcat-9.0.33\bin`, open the `service.bat`.
 2.  Set JRE home if it is not set. For example, use the following command:
     
-```
-set "JRE_HOME=<User_Install_Directory>\jre"
-```
+    ```
+    set "JRE_HOME=<User_Install_Directory>\jre"
+    ```
     
 3.  Set catalina home if it is not set. For example, use the following command:
     
-```
-set "CATALINA\_HOME=<User\_Install\_Directory>\\tomcat"
-```
+    ```
+    set "CATALINA\_HOME=<User\_Install\_Directory>\\tomcat"
+    ```
     
 4.  To configure the service name for the service you install, use the following commands:
     
-```
-set SERVICE\_NAME=<Service\_Name>\_SVC 
-set PR\_DISPLAYNAME=<Service\_Name>
-```
+    ```
+    set SERVICE\_NAME=<Service\_Name>\_SVC 
+    set PR\_DISPLAYNAME=<Service\_Name>
+    ```
     
 5.  Save the `service.bat` file.
 
