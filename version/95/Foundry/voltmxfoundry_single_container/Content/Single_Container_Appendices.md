@@ -18,4 +18,4 @@ java -jar EncryptionUtility.jar
 3.  In the **Enter Password to be Encrypted** field, type the password that is used to access your database.
 4.  In the **Enter Key to be Encrypted** field, type the key that must be used to encrypt the password.
 
-The console then displays the **Encrypted Password** and **Encrypted Key**. These values must be added to the `DB_PASS` and `DB_PASS_SECRET_KEY` parameters in the `config.properties` file. For more information, refer to [Database Details](VoltMX Foundry Single Container Solution(On-Prem).md#Database).
+The console then displays the **Encrypted Password** and **Encrypted Key**. These values must be added to the `DB_PASS` and `DB_PASS_SECRET_KEY` parameters in the `config.properties` file. For more information, refer to [Database Details](VoltMX_Foundry_Single_Container_Solution_On-Prem_.html#DatabaseDetails).
