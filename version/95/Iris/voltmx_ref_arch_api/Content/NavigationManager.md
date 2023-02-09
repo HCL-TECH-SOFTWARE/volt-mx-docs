@@ -40,14 +40,17 @@ The Syntax of the `Forms` Object is as follows:
 ```
 "Forms": {  
 "Form Friendly Name": {  
-    "preConditionConfig": \['', ''\],  
+    "preConditionConfig": ['', ''],  
     "destinationConfig": {  
       "friendlyName": "",  
       "appName": ""  
     }  
   }  
 }
-```preConditionConfig
+```
+
+
+<details close markdown="block"><summary>preConditionConfig</summary>
 
 * * *
 
@@ -55,96 +58,81 @@ The preconditions of a Form are declared in the preConditionConfig list. The pre
 
 During form navigation, if the target form has preconditions declared, the source form must include the preconditions as part of the navigation params object.
 
-Syntax
+**Syntax**
 
-"preConditionConfig" : \[ \]
+`"preConditionConfig" : [ ]`
 
-Input Parameters
+**Input Parameters**
 
 None.
 
  
 
-Example
+**Example**
 
-```
-"preConditionConfig" : \[ "token" \]
-```
+`"preConditionConfig" : [ "token" ]`
 
-Return Values
+
+**Return Values**
 
 None.
 
-Remarks
+**Remarks**
 
-In case of intra-app navigation, if you use the voltmx.mvc.navigation API or the app service event or the postAppInit event for form navigation, the preconditions of a form are ignored.
+In case of intra-app navigation, if you use the voltmx.mvc.navigation API or the app service event or the postAppInit event for form navigation, the preconditions of a form are ignored. 
 
-* * *
+</details>
 
-destinationConfig
+
+<details close markdown="block"><summary>destinationConfig</summary>
 
 * * *
 
 The destination forms of a Form are declared in the destinationConfig object.
 
-Syntax
+**Syntax**
 
 In case of one-to-one navigation
 
-"destinationConfig" : { "appName" : "", "friendlyName" : ""}
+`"destinationConfig" : { "appName" : "", "friendlyName" : ""}`
 
 In case of one-to-many navigation
 
-"destinationConfig" : { "callback" : "" , "targetForms" : \[ { "friendlyName" : "" } , { "friendlyName" : "" , "appName" : ""}\] }
+`"destinationConfig" : { "callback" : "" , "targetForms" : [ { "friendlyName" : "" } , { "friendlyName" : "" , "appName" : ""}] }`
 
-Input Parameters
+**Input Parameters**
 
  
 | Parameter | Description |
 | --- | --- |
-| _appName_ \[String\] \[Mandatory\] | 
-The name of the app in the project to which navigation must be done in case of inter-app navigation.
-
-In case of intra-app navigation, the appName is an optional parameter.
-
- |
+| _appName_ \[String\] \[Mandatory\] | The name of the app in the project to which navigation must be done in case of inter-app navigation. <br/>In case of intra-app navigation, the appName is an optional parameter.
 | _friendlyName_ \[String\] \[Mandatory\] | The friendly name of the target form. |
-| _callback_ \[String\] \[Mandatory\] | 
-
-The callback parameter specifies the name of the function that must be fetched from the NavigationController. The value of the __[callbackModelConfig](voltmx.mvc NavigationManager.md#callbackModelConfig)__ that is passed in the Navigation Manager APIs is passed to the callback function. The conditional logic is then framed on the value of _callbackModelConfig_ in the callback function, and the _[destinationConfig](#destinationConfig)_ is returned.
-
-The callback parameter is mandatory for one-to-many form navigation.
-
- |
-| _targetForms_ \[Object\] \[Mandatory\] | 
-
-An object that contains a list of target forms of the destinationConfig. The destination forms that are returned in the callback function must be present in the list of targetForms.
-
-The targetForms parameter is mandatory for one-to-many form navigation.
-
- |
+| _callback_ \[String\] \[Mandatory\] | The callback parameter specifies the name of the function that must be fetched from the NavigationController. The value of the __[callbackModelConfig](voltmx.mvc NavigationManager.md#callbackModelConfig)__ that is passed in the Navigation Manager APIs is passed to the callback function. The conditional logic is then framed on the value of _callbackModelConfig_ in the callback function, and the _[destinationConfig](#destinationConfig)_ is returned. <br/>The callback parameter is mandatory for one-to-many form navigation.
+| _targetForms_ \[Object\] \[Mandatory\] | An object that contains a list of target forms of the destinationConfig. The destination forms that are returned in the callback function must be present in the list of targetForms. <br/>The targetForms parameter is mandatory for one-to-many form navigation.
+|
 
  
 
-Example
+**Example**
 
 ```
-"destinationConfig" : { "callback" : ""  , "targetForms" : \[  { "friendlyName" : "Form1" } , { "friendlyName" : "Form2" , "appName" : "App2"}\] }
+"destinationConfig" : { "callback" : ""  , "targetForms" : [  { "friendlyName" : "Form1" } , { "friendlyName" : "Form2" , "appName" : "App2"}] }
 ```
 
-Return Values
+**Return Values**
 
 None.
 
-Remarks
+**Remarks**
 
 In case of one-to-one form navigation, you must specify the appName and friendlyName of the form in the destinationConfig object.
 
 In case of one-to-many form navigation, in addition to the appName and friendlyName of the form, you must specify the callback and targetForms parameter in the destinationConfig object.
 
 The function that is specified in the callback parameter must be present in the Navigation Controller, and it must return the destinationConfig object.
+</details>
 
-* * *
+
 
 Application Object
 ------------------
@@ -154,43 +142,43 @@ The preconditions of a micro app are configured in the Application Object. Durin
 The Syntax of the `Application` Object is as follows:
 
 ```
-"Application": {"preConditionConfig" : \[ "" \]},
+"Application": {"preConditionConfig" : [ "" ]},
 ```
 
 Even if the source app does not set the mandatory preconditions of the target app, the navigation is successful if the target app already has the preconditions set in its app data (if the preconditions are already set by another micro app).
 
-preConditionConfig
+<details close markdown="block"><summary>preConditionConfig</summary>
 
 * * *
 
 The preconditions of an app are declared in the preConditionConfig object.  
 The preConditionConfig object specifies a list of preconditions.
 
-Syntax
+**Syntax**
 
-"preConditionConfig" : \[ \]
+`"preConditionConfig" : [ ]`
 
-Input Parameters
+**Input Parameters**
 
 None.
 
  
 
-Example
+**Example**
 
 ```
-"preConditionConfig" : \[ "token" \]
+"preConditionConfig" : [ "token" ]
 ```
 
-Return Values
+**Return Values**
 
 None.
 
-Remarks
+**Remarks**
 
 In case of inter-app navigation, if you use the voltmx.mvc.Navigation API or the app service event or the postAppInit event for form navigation, the preconditions of the app are ignored.
 
-* * *
+</details>
 
 UIModules Object
 ----------------
@@ -202,64 +190,48 @@ The Syntax of the `UIModules` Object is as follows:
 ```
 "UIModules" : {
 "<Module Name>" : {"destinationConfig" : {"friendlyName" : ""}},
-"<Module Name>" : {"destinationConfig" : { "callback" : ""  , "targetForms" : \[ { "friendlyName" : "" } , { "friendlyName" : "" , "appName" : ""}\] }}
+"<Module Name>" : {"destinationConfig" : { "callback" : ""  , "targetForms" : [ { "friendlyName" : "" } , { "friendlyName" : "" , "appName" : ""}] }}
 }
-```destinationConfig
+```
+<details close markdown="block"><summary>destinationConfig</summary>
 
 * * *
 
 The destination forms of a UI Module are declared in the destinationConfig object.
 
-Syntax
+**Syntax**
 
 In case of one-to-one navigation
 
-"destinationConfig" : { "appName" : "", "friendlyName" : ""}
+`"destinationConfig" : { "appName" : "", "friendlyName" : ""}`
 
 In case of one-to-many navigation
 
-"destinationConfig" : { "callback" : "" , "targetForms" : \[ { "friendlyName" : "" } , { "friendlyName" : "" , "appName" : ""}\] }
+`"destinationConfig" : { "callback" : "" , "targetForms" : [ { "friendlyName" : "" } , { "friendlyName" : "" , "appName" : ""}] }`
 
 Input Parameters
 
  
 | Parameter | Description |
 | --- | --- |
-| _appName_ \[String\] \[Mandatory\] | 
-The name of the app in the project to which navigation must be done in case of inter-app navigation.
-
-In case of intra-app navigation, the appName is an optional parameter.
-
- |
+| _appName_ \[String\] \[Mandatory\] | The name of the app in the project to which navigation must be done in case of inter-app navigation. <br/>In case of intra-app navigation, the appName is an optional parameter. |
 | _friendlyName_ \[String\] \[Mandatory\] | The friendly name of the target form. |
-| _callback_ \[String\] \[Mandatory\] | 
-
-The callback parameter specifies the name of the function that must be fetched from the NavigationController. The value of the _[callbackModelConfig](voltmx.mvc NavigationManager.md#callbackModelConfig)_ that is passed in the Navigation Manager APIs is passed to the callback function. The conditional logic is then framed on the value of _callbackModelConfig_ in the callback function, and the [destinationConfig](#destinationConfig) is returned.
-
-The callback parameter is mandatory for one-to-many form navigation.
-
- |
-| _targetForms_ \[Object\] \[Mandatory\] | 
-
-An object that contains a list of target forms of the destinationConfig. The destination form that is returned in the callback function must be present in the list of targetForms.
-
-The targetForms parameter is mandatory for one-to-many form navigation.
-
- |
+| _callback_ \[String\] \[Mandatory\] | The callback parameter specifies the name of the function that must be fetched from the NavigationController. The value of the _[callbackModelConfig](voltmx.mvc NavigationManager.md#callbackModelConfig)_ that is passed in the Navigation Manager APIs is passed to the callback function. The conditional logic is then framed on the value of _callbackModelConfig_ in the callback function, and the [destinationConfig](#destinationConfig) is returned. <br/>The callback parameter is mandatory for one-to-many form navigation. |
+| _targetForms_ \[Object\] \[Mandatory\] | An object that contains a list of target forms of the destinationConfig. The destination form that is returned in the callback function must be present in the list of targetForms. <br/>The targetForms parameter is mandatory for one-to-many form navigation. |
 
  
 
-Example
+**Example**
 
 ```
-"destinationConfig" : { "callback" : ""  , "targetForms" : \[  { "friendlyName" : "Form1" } , { "friendlyName" : "Form2" , "appName" : "App2"}\] }
+"destinationConfig" : { "callback" : ""  , "targetForms" : [  { "friendlyName" : "Form1" } , { "friendlyName" : "Form2" , "appName" : "App2"}] }
 ```
 
-Return Values
+**Return Values**
 
 None.
 
-Remarks
+**Remarks**
 
 In case of one-to-one form navigation, you must specify the appName and friendlyName of the form in the destinationConfig object.
 
@@ -267,7 +239,7 @@ In case of one-to-many navigation, in addition to the appName and friendlyName o
 
 The function that is specified in the callback parameter must be present in the Navigation Controller, and it must return the destinationConfig object.
 
-* * *
+</details>
 
 Here is a sample NavigationModel.json file:
 
@@ -275,28 +247,28 @@ Here is a sample NavigationModel.json file:
 define("Accounts/navigation/NavigationModel", {
 
     "Application": {
-        "preConditionConfig": \["token"\]
+        "preConditionConfig": ["token"]
     },
 
     "Forms": {
 
         "frmAccountSummary": {
-            "preConditionConfig": \['accountID', 'profile'\],
+            "preConditionConfig": ['accountID', 'profile'],
             "destinationConfig": {
                 "friendlyName": "frmAccountDetails",
                 "appName": "Accounts"
             }
         },
         "frmAccountDetails": {
-            "preConditionConfig": \[\],
+            "preConditionConfig": [ ],
             "destinationConfig": {
                 "callback": "handleFrmAccountDetails",
-                "targetForms": \[{
+                "targetForms": [{
                     "friendlyName": "frmProfile"
                 }, {
                     "friendlyName": "frmTransact",
                     "appName": "Transactions"
-                }\]
+                }]
             }
         }
     },
@@ -312,12 +284,12 @@ define("Accounts/navigation/NavigationModel", {
         "AccountsUIModule": {
             "destinationConfig": {
                 "callback": "fun1",
-                "targetForms": \[{
+                "targetForms": [{
                     "friendlyName": "frmProfile"
                 }, {
                     "friendlyName": "frmTransact",
                     "appName": "Transactions"
-                }\]
+                }]
             }
         }
     }
