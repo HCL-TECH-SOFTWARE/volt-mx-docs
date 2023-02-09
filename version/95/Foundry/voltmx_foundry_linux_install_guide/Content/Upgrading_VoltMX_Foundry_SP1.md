@@ -1,10 +1,10 @@
                           
 
 
-Upgrading Volt MX Foundry to V9
-==============================
+Upgrading Volt MX Foundry to V9.X
+==================================
 
-This section explains upgrading Volt MX Foundry Components through the installer. For an upgrade to work, the minimum installation version should be Foundry 7.x.GA / 8.4.X.GA.
+This section explains upgrading Volt MX Foundry Components through the installer. For an upgrade to work, the minimum installation version should be Foundry 8.4.X.GA.
 
 > **_Important:_** The new Volt MX Foundry Upgrade process works by upgrading the existing database to the latest version and by installing fresh application server artifacts, such as data sources, WARs, etc. For installation details such as hostname, database port, prefix, suffix, etc., you must refer to the installation logs of your previous setup.
 
