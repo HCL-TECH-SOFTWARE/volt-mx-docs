@@ -9,28 +9,26 @@ For example, in a banking application that lists the transactions of a user in a
 
 From V9 SP2 release, you can extend the following basic widgets, Button, Image, Label, Switch, TextArea, and TextBox.
 
-You can add properties to an extended widget only using the [initializeProperties](https://docs.voltmx.com/voltmxlibrary/iris/iris_api_dev_guide/content/voltmx.ui_functions.md#ExtendedWidget) function. You cannot add new properties to the Extended widgets after the widget initialization.
+You can add properties to an extended widget only using the [initializeProperties](../../iris_api_dev_guide/content/voltmx.ui_functions.html#ExtendedWidget) function. You cannot add new properties to the Extended widgets after the widget initialization.
 
 In this section, you can learn the following topics related to extended widgets.
 
 *   [Create Widget Extension](#create-widget-extension)
-*   [Edit Widget Extensions](#edit-widget-extensions)
+<!-- *   [Edit Widget Extensions](#edit-widget-extensions)
 *   [Using Widget Extensions in an App](#using-widget-extensions-in-an-app)
-*   [Importing and Exporting the Widget Extension](#importing-and-exporting-widget-extensions)
+*   [Importing and Exporting the Widget Extension](#importing-and-exporting-widget-extensions) -->
 *   [Widget Extensions in Segment Template](#widget-extensions-in-segment-template)
 
 Create Widget Extension
 -----------------------
 
-You can create a Widget Extension dynamically by using code. When you create a widget extension, you must use the ``[`voltmx.ui.defineExtendedWidget` API](https://docs.voltmx.com/voltmxlibrary/iris/iris_api_dev_guide/content/voltmx.ui_functions.md#ExtendedWidget)`` in .
+You can create a Widget Extension dynamically by using code. When you create a widget extension, you must use the [`voltmx.ui.defineExtendedWidget` API](../../iris_api_dev_guide/content/voltmx.ui_functions.md#ExtendedWidget) in Iris .
 
-For more information about this API, refer the [voltmx.ui.defineExtendedWidget](https://docs.voltmx.com/voltmxlibrary/iris/iris_api_dev_guide/content/voltmx.ui_functions.md#ExtendedWidget), in the .
 
-While using widget extensions, ensure that you do not modify the existing functionalities of a widget.
+> **_Note:_** While using widget extensions, ensure that you do not modify the existing functionalities of a widget.
 
-You can create Widget Extension, either by dynamically using code or by using . When you are creating the widget extension you must use the `voltmx.ui.defineExtendedWidget`. For more information about this API, refer the voltmx.ui.defineExtendedWidget, in the .
 
-Follow these steps to extend a widget using .
+Follow these steps to extend a widget.
 
 1.  Open your project in the .
 2.  From the **Templates** explorer, navigate to the **Component** node.
@@ -46,14 +44,14 @@ Follow these steps to extend a widget using .
     You can now add new functionalities to the widget.
     
 
-Edit Widget Extensions
+<!-- Edit Widget Extensions
 ----------------------
 
 Using Widget Extensions in an App
 ---------------------------------
 
 Importing and Exporting Widget Extensions
------------------------------------------
+----------------------------------------- -->
 
 Widget Extensions in Segment Template
 -------------------------------------
@@ -71,92 +69,98 @@ In this section, the following topics are discussed:
 
 To provide data to a Segment with an Extended widget follow these steps.
 
-1.  Initialize the extended widget using the [voltmx.ui.defineExtendedWidget](https://docs.voltmx.com/voltmxlibrary/iris/iris_api_dev_guide/content/voltmx.ui_functions.md#ExtendedWidget) API. You must define the setter and getter methods for the custom properties used inside the extended widget.
+1.  Initialize the extended widget using the [voltmx.ui.defineExtendedWidget](../../iris_api_dev_guide/content/voltmx.ui_functions.md#ExtendedWidget) API. You must define the setter and getter methods for the custom properties used inside the extended widget.
 
-Here is the sample code to initialize the Extended widget to append a dollar sign to the text inside the Label widget using the custom property `BindingPath`.
+    Here is the sample code to initialize the Extended widget to append a dollar sign to the text inside the Label widget using the custom property `BindingPath`.
 
-```
-voltmx.ui.defineExtendedWidget("voltmx.ui2.Label2", voltmx.ui.Label, {
-  preInitializeCall: function() {
-    var bconfig = arguments\[0\];
-    var lconfig = arguments\[1\];
-    var pspconfig = arguments\[2\];
-    this.initialize = function(bconfig, lconfig, pspconfig) {
-      this.initializeProperties();
-    }
-    this.initializeProperties = function() {
-      //Add the properties here.
-      var \_DummyProperty = "";
-      //Setter method for BindingPath custom property.
-      defineSetter(this, "BindingPath", function(val) {
-        //alert(val)
-        this.text = val + " #";
-        \_DummyProperty = val;
-      });
-      //Getter method for BindingPath custom property.
-      defineGetter(this, "BindingPath", function() {
-        return \_DummyProperty;
-      });
-    };
-    // Add your functions here.
-    this.setData = function(data) {
-      this.text = "$ " + data; //Appending the dollar sign.
-    };
-    voltmx.ui.Label.call(this, bconfig, lconfig, pspconfig);
-    this.initialize(bconfig, lconfig, pspconfig);
-  },
-  setProp: function(propName, propValue) {
-    this\[propName\] = propValue;
-  }
-});
-```
+    ```
+    voltmx.ui.defineExtendedWidget("voltmx.ui2.Label2", voltmx.ui.Label, {
+      preInitializeCall: function() {
+        var bconfig = arguments[0];
+        var lconfig = arguments[1];
+        var pspconfig = arguments[2];
+        this.initialize = function(bconfig, lconfig, pspconfig) {
+          this.initializeProperties();
+        }
+        this.initializeProperties = function() {
+          //Add the properties here.
+          var _DummyProperty = "";
+          //Setter method for BindingPath custom property.
+          defineSetter(this, "BindingPath", function(val) {
+            //alert(val)
+            this.text = val + " #";
+            _DummyProperty = val;
+          });
+          //Getter method for BindingPath custom property.
+          defineGetter(this, "BindingPath", function() {
+            return _DummyProperty;
+          });
+        };
+        // Add your functions here.
+        this.setData = function(data) {
+          this.text = "$ " + data; //Appending the dollar sign.
+        };
+        voltmx.ui.Label.call(this, bconfig, lconfig, pspconfig);
+        this.initialize(bconfig, lconfig, pspconfig);
+      },
+      setProp: function(propName, propValue) {
+        this[propName] = propValue;
+      }
+    });
+    ```
 
 1.  Add the extended label widget to the Segment Template.  
-    For more information about adding an extended widget to a Segment Template, refer [voltmx.ui.defineExtendedWidget](https://docs.voltmx.com/voltmxlibrary/iris/iris_api_dev_guide/content/voltmx.ui_functions.md#ExtendedWidget).
+    For more information about adding an extended widget to a Segment Template, refer [voltmx.ui.defineExtendedWidget](../../iris_api_dev_guide/content/voltmx.ui_functions.md#ExtendedWidget).
+
 2.  After adding the extended widget to the template, map the widget to the data using the widgetdatamap property of the Segment widget.
 
-Here is the sample code to map the widgets inside the Segment row template with the data map key where `extwdglbl` is the Id of the extended widget and `dmapextwdglbl` is the data map key.
+    Here is the sample code to map the widgets inside the Segment row template with the data map key where `extwdglbl` is the Id of the extended widget and `dmapextwdglbl` is the data map key.
 
-```
-this.view.segSample.widgetdatamap =  {   
-    "img1" : "img1",
-    "extwdglbl" : "dmapextwdglbl"
-} 
-```
+    ```
+    this.view.segSample.widgetdatamap =  {   
+        "img1" : "img1",
+        "extwdglbl" : "dmapextwdglbl"
+    } 
+    ```
 
-1.  Assign data to the Segment widget using the [setData](https://docs.voltmx.com/voltmxlibrary/iris/iris_widget_prog_guide/default.md#Segment_Methods.html#setData) method of the Segment widget.
+1.  Assign data to the Segment widget using the [setData](../../iris_widget_prog_guide/Content/Segment_Methods.html#setData) method of the Segment widget.
 
-```
-var data = \[{
-      img1: "emp.png",
-      "dmapextwdglbl": {
-        "BindingPath": "R0 - WC Lbl"
-      },
-      {
-        img1: "emp.png",
-        "dmapextwdglbl": {
-          "BindingPath": "R1 - WC Lbl"
-        }
-      }\];
-this.view.segSample.setData(data);
-```
+    ```
+    var data = [{
+          img1: "emp.png",
+          "dmapextwdglbl": {
+            "BindingPath": "R0 - WC Lbl"
+          },
+          {
+            img1: "emp.png",
+            "dmapextwdglbl": {
+              "BindingPath": "R1 - WC Lbl"
+            }
+          }];
+    this.view.segSample.setData(data);
+    ```
 
 ### Important Considerations
 
 *   An Extended widget cannot be used as a template to a Segment widget. You must add the Extended widget as a child widget to a Template.
+
 *   The component must contain only those widgets that are supported by Segment widget. These widgets are **Button**, **Calendar**, **Image**, **Label**, **RichText**, **Phone**, **Slider**, **Switch**, **TextArea**, and **TextBox** widgets. In the Desktop Web platform, you can also add **CheckBoxGroup** and **RadioButtonGroup** widgets.
-*   When input widgets such as TextArea, TextBox, and Switch widgets are used inside an extended widget, the data entered in the widgets are not updated to the masterdata of the Segment. When the user enters a value in any of the widgets, the value is replaced with the default value, after the user scrolls the Segment widget.
+
+*   When input widgets such as TextArea, TextBox, and Switch widgets are used inside an extended widget, the data entered in the widgets are not updated to the masterdata of the Segment. When the user enters a value in any of the widgets, the value is replaced with the default value, after the user scrolls the Segment widget.  
+
 *   To modify the values of properties of an extended widget, you must provide the properties as a JSON object.  
     
-    The following sample code shows how to assign values to two properties of an extended Label widget.
+    The following sample code shows how to assign values to two properties of an extended Label widget.  
+
     
-```
-/\*Here dmapextwdglbl is the widget id of the extended widget and BindingPath is the custom property\*/
-    
-    {
-      "dmapextwdglbl": {
-        "BindingPath": "R1 - WC Lbl",
-        "skin": "sknlbl1"
-      }
-    }
-```
+    ```  
+
+    /*Here dmapextwdglbl is the widget id of the extended widget and BindingPath is the custom property*/
+        
+        {
+          "dmapextwdglbl": {
+            "BindingPath": "R1 - WC Lbl",
+            "skin": "sknlbl1"
+          }
+        }
+    ```

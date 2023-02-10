@@ -971,6 +971,7 @@ All writable properties can be optionally passed inside dictionary objects to th
 * * *
 
 </details>
+
 <details close markdown="block"><summary>voltmx.ui.CheckBoxGroup</summary> 
 
 * * *
@@ -980,8 +981,7 @@ Creates a [CheckBoxGroup](../../../Iris/iris_widget_prog_guide/Content/CheckBox.
 ### Syntax
 
 ```
-
-voltmx.ui.CheckBoxGroup(  
+ voltmx.ui.CheckBoxGroup(  
     basicConf,  
     layoutConf,  
     pspConf);
@@ -1142,7 +1142,6 @@ Creates an object that defines an animation.
 ### Syntax
 
 ```
- 
 voltmx.ui.createAnimation(  
     animationDefinition);
 ```
@@ -1157,7 +1156,6 @@ voltmx.ui.createAnimation(
 ### Example
 
 ```
-
 var transformObject = voltmx.ui.makeAffineTransform();
 transformObject.translate(10, 0);
 transformObject.scale(0.1, 1);
@@ -1280,7 +1278,9 @@ All writable properties can be optionally passed inside dictionary objects to th
 * * *
 
 </details>
-<details close markdown="block"><summary>voltmx.ui.defineExtendedWidget</summary> 
+
+
+<details close markdown="block"><summary id= "ExtendedWidget">voltmx.ui.defineExtendedWidget</summary>
 
 * * *
 

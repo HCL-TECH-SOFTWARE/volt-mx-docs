@@ -5,15 +5,17 @@ HCL Microservices Adapter for Object Services
 
 The HCL Microservices Adapter is an interface supported in Object Services from Foundry V9SP5 GA onwards. The adapter allows you to connect to the back-end HCL Microservices via Object Services.
 
-The HCL Microservices adapter only supports Open API (Swagger) 3.0 specification. It supports uploading a Swagger file along with external reference files.
+> **_Important:_** The HCL Microservices adapter only supports Open API (Swagger) 3.0 specification. It supports uploading a Swagger file along with external reference files.  
 
-Supports more than one Swagger definition file in a . ZIP file.
+<br>
+
+> **_Important:_** Supports more than one Swagger definition file in a . ZIP file.
 
 **Use Case**:
 
 Currently, any team trying to connect to HCL microservice must use Foundry JSON services to implement microservices manually. When the team should modify request payloads, each required JSON template must be changed manually, which is time-consuming as well.
 
-Using the HCL Microservices adapter in object services, you can upload a valid Swagger JSON file containing all APIs to connect to the hosted microservices. The object service retrieves the metadata from the uploaded Swagger file and displays all the APIs as back-end operations in the Object services. You can use an existing Swagger engine to connect to hosted back-end APIs. So you can use the object services capabilities to link microservices APIs for these objects. For more information on Foundry Object Services, refer to [Object Services](https://docs.voltmx.com/voltmxlibrary/voltmxfoundry/voltmx_foundry_user_guide/Default.md#Objectservices.html).
+Using the HCL Microservices adapter in object services, you can upload a valid Swagger JSON file containing all APIs to connect to the hosted microservices. The object service retrieves the metadata from the uploaded Swagger file and displays all the APIs as back-end operations in the Object services. You can use an existing Swagger engine to connect to hosted back-end APIs. So you can use the object services capabilities to link microservices APIs for these objects. For more information on Foundry Object Services, refer to [Object Services](Objectservices.html).
 
 The HCL Microservices adapter helps you to improve the Foundry app development aspects as follows:
 
@@ -47,16 +49,13 @@ To configure a HCL Microservices in object service, you need to upload a Swagger
     
     <table style="mc-table-style: url('Resources/TableStyles/Basic.css');width: 80%;" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 15%;"><col class="TableStyle-Basic-Column-Column1" style="width: 65%;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">Swagger File</td><td class="TableStyle-Basic-BodyA-Column1-Body1"><p>Specifies the JSON,or YAML file that contains the required API specifications. You can also upload a zip file that contains the JSON or YAML file along with external reference files, if any.</p><p>To upload an OpenAPI specification file, click <b>UPLOAD FILE</b>, and then select a file from your local system.</p><p madcap:conditions="Default.V9SP2M1">After you upload a file, Foundry displays connection parameters based on the OpenAPI spec version that is mentioned in the file.</p><p class="Note" madcap:autonum="<b><i><span style=&quot;color: #0a9c4a;&quot; class=&quot;mcFormatColor&quot;>Note: </span></i></b>">In the following sections, all references (screen-shots, objects, operations, and mapping) are based on the sample Swagger JSON file for the Service Request microservice.</p></td></tr></tbody></table>
     
-    It supports uploading a Swagger file along with external reference files.
+    > **_Important:_** It supports uploading a Swagger file along with external reference files.
     
-    OpenAPI uploaded with External Reference Files  
-    
-    If the extension files are empty and there are references in the main JSON file to schemas/custom fields of these extensions, an error message will be popped up. To prevent the error message, you need to add dummy schemas/custom fields to the extension files.
-    
-    If the main OpenAPI file contains a reference to a schema from external files, for example:
-    
-```
-   ServiceRequest: 
+    <details close markdown="block"><summary>OpenAPI uploaded with External Reference Files</summary>
+    <blockquote><em><b>Important: </b></em>If the extension files are empty and there are references in the main JSON file to schemas/custom fields of these extensions, an error message will be popped up. To prevent the error message, you need to add dummy schemas/custom fields to the extension files.<br/>
+    </blockquote>
+    <p>If the main OpenAPI file contains a reference to a schema from external files, for example:</p>
+    <pre><code style="display:block;background-color:#eee;">ServiceRequest: 
           properties: 
             account: 
               type: string 
@@ -68,124 +67,107 @@ To configure a HCL Microservices in object service, you need to upload a Swagger
               type: string 
               description: signatory Approved or Not 
               example: true  
-```
-    
-    *   Make sure the external reference file exists in the zip.
-    *   The schema should be present in that file. Otherwise the console will throw an error when you try to create a verb and map an operation.
-        
-        The `srmsExternalRef.yaml` file would look like this:
-        
-```
-Components: 
-          schemas: 
-            serviceReqRequestIn: 
-                  type: object 
-                  properties: 
-                    xyz: 
-                        type: string 
-                        description: Generic serviceReq ID 
-                        example: ORD127REDFDSAS 
-                  description: Request In for ServiceReq 
-                  example: 
-                    checkIssueId: SB.2406 
-                    note: CreateNew 
-            requestIn: 
-                  type: object 
-                  properties: 
-                  description: Request Load for Creating ServiceReq 
-                  example: 
-                    checkIssueId: SB.2406 
-                    note: CreateNew
-```
-    
-    *   If you do not have fields in a schema, you can keep an empty `properties` field, as mentioned in the `requestIn` schema of the above example.
+    </code></pre>
+    <ul>
+    <li>Make sure the external reference file exists in the zip.</li>
+    <li>The schema should be present in that file. Otherwise the console will throw an error when you try to create a verb and map an operation.<br/>
+    The <code>srmsExternalRef.yaml</code> file would look like this:
+    <pre><code style="display:block;background-color:#eee;">ServiceRequest: 
+      Components: 
+                schemas: 
+                  serviceReqRequestIn: 
+                        type: object 
+                        properties: 
+                          xyz: 
+                              type: string 
+                              description: Generic serviceReq ID 
+                              example: ORD127REDFDSAS 
+                        description: Request In for ServiceReq 
+                        example: 
+                          checkIssueId: SB.2406 
+                          note: CreateNew 
+                  requestIn: 
+                        type: object 
+                        properties: 
+                        description: Request Load for Creating ServiceReq 
+                        example: 
+                          checkIssueId: SB.2406 
+                          note: CreateNew
+    </code></pre>
+    </li>
+    <li>If you do not have fields in a schema, you can keep an empty properties field, as mentioned in the requestIn schema of the above example.</li>
+    </ul>
+    </details>
+
     
 6.  Enter the following connection parameters. The adapter will provide an option for you to enter an header Key and value:  
-    Connection Parameters
-    
+
+    <details close markdown="block"><summary>Connection Parameters</summary>
     <table style="mc-table-style: url('Resources/TableStyles/Basic.css');width: 80%;" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 15%;"><col class="TableStyle-Basic-Column-Column1" style="width: 65%;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><p>xapikey</p></td><td class="TableStyle-Basic-BodyD-Column1-Body1"><p>Specify the header value "xapikey" for AWS. If you want to have AWS authentication, you can add this value in the service configuration. This value will be added to the header parameters while connecting to the microservice.</p></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><p>xfunctionkey</p></td><td class="TableStyle-Basic-BodyD-Column1-Body1"><p>Specify the header value "xfunctionkey" for Azure. This is a common value for all Microsoft Azure deployments.</p><p>If you want to have Azure authentication, you can add this value in the service configuration. This value will be added to the header parameters while connecting to the microservice.</p></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><p>Authorization</p></td><td class="TableStyle-Basic-BodyD-Column1-Body1">These details are generated by the adapter itself, for Docker on-premises.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><p>Server URL</p></td><td class="TableStyle-Basic-BodyD-Column1-Body1"><p>Specifies the URL of the server that hosts the APIs. The default URL is the first Server URL in the specification file.</p><p>For information about how Foundry parses the URLs, refer to the <a href="#Miscellaneous">Miscellaneous</a> section.</p><p>For example: <code class="codefirst" style="font-size: 11pt;">https://subdomain.site.com/version</code></p></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1"><p>Server Description</p></td><td class="TableStyle-Basic-BodyA-Column1-Body1"><p>Specifies the description for the server that is specified by the URL.</p><p>For example: <code class="codefirst" style="font-size: 11pt;">Development Server</code></p></td></tr></tbody></table>
+    <b>Authentication</b>
+    <table style="mc-table-style: url]('Resources/TableStyles/Basic.css');width: 80%;" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 15%;"><col class="TableStyle-Basic-Column-Column1" style="width: 65%;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1"><p>Use Existing Identity Provider</p></td><td class="TableStyle-Basic-BodyA-Column1-Body1"><p>Specifies the identity provider that you want to use to authenticate users for the service.</p><p>You can select any Identity Service that is created on the <madcap:variable name="MyVariables.VoltMX">Foundry cloud.</madcap:variable></p><p>For information about creating an Identity Service, refer to <a href="ConfigureIdentiryService.md" target="_blank">Configure Identity Service</a>.</p><p class="Note" madcap:conditions="Default.V9SP3" madcap:autonum="<b><i><span style=&quot;color: #0a9c4a;&quot; class=&quot;mcFormatColor&quot;>Note: </span></i></b>">For more information on Externalizing Identity Services, refer to <a href="Replacing Identity Services.html" target="_blank">Replace the Identity Service references in a Foundry app</a>.</p></td></tr></tbody></table>  
+    </details>
     
-    Authentication
-    
-    <table style="mc-table-style: url]('Resources/TableStyles/Basic.css');width: 80%;" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 15%;"><col class="TableStyle-Basic-Column-Column1" style="width: 65%;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1"><p>Use Existing Identity Provider</p></td><td class="TableStyle-Basic-BodyA-Column1-Body1"><p>Specifies the identity provider that you want to use to authenticate users for the service.</p><p>You can select any Identity Service that is created on the <madcap:variable name="MyVariables.VoltMX">Foundry cloud.</madcap:variable></p><p>For information about creating an Identity Service, refer to <a href="ConfigureIdentiryService.md" target="_blank">Configure Identity Service</a>.</p><p class="Note" madcap:conditions="Default.V9SP3" madcap:autonum="<b><i><span style=&quot;color: #0a9c4a;&quot; class=&quot;mcFormatColor&quot;>Note: </span></i></b>">For more information on Externalizing Identity Services, refer to <a href="Replacing Identity Services.html" target="_blank">Replace the Identity Service references in a Foundry app</a>.</p></td></tr></tbody></table>
-    
-    Advanced  
-    
-    | Field | Description |
-    | --- | --- |
-    | 
-    Custom code
-    
-     | 
-    
-    Specifies any custom JAR files that you want to associate with the service.
-    
-    To associate a JAR file with the service, follow either of the following steps.
-    
-    *   From the **Select Existing JAR** list, select a JAR file from the Foundry cloud
-    *   Click **Upload New**, and then select a JAR file from the file explorer
-    
-    For on-premises instances of Foundry, make sure that the JAR file that is built on the same JDK version that is used to install the Foundry Integration.
-    
-     |
-    | 
-    
-    API Throttling
-    
-     | 
-    
-    Specifies whether Foundry must limit the number of request calls in a minute.
-    
-    To use **API Throttling**, follow these steps.
-    
-    1.  In the **Total Rate Limit** box, type a required value. This limits the total number of requests that are processed by the service.
-    2.  In the **Rate Limit Per IP** box, type a required value. This limits the number of requests based on the IP Address of the request.
-    
-    You can also override throttling from the Foundry App Services Console. For more information, refer to [Override API Throttling Configuration](API_Throttling_Override.md#OverrideAPIThrottling).
-    
-     |
+    <details close markdown="block"><summary>Advanced</summary><table>
+      <tr>
+      <th>Field</th>      
+      <th>Description</th>
+      </tr>      
+      <tr>
+      <td>Custom code</td>      
+      <td>
+      <p>Specifies any custom JAR files that you want to associate with the service.To associate a JAR file with the service, follow either of the following steps.</p>
+      <ul>
+      <li>From the Select Existing JAR list, <b>select a JAR file</b> from the Foundry cloud</li>            
+      <li>Click <b>Upload New</b>, and then select a JAR file from the file explorer</li>    
+      </ul>
+      <blockquote><em><b>Note: </b></em>For on-premises instances of Foundry, make sure that the JAR file that is built on the same JDK version that is used to install the Foundry Integration.</blockquote>
+      </td>
+      </tr>      
+      <tr>
+      <td>API Throttling</td>      
+      <td>
+      <p>Specifies whether Foundry must limit the number of request calls in a minute.To use <b>API Throttling</b>, follow these steps.</p>
+      <ol>
+      <li>In the <b>Total Rate Limit</b> box, type a required value. This limits the total number of requests that are processed by the service.</li>            
+      <li>In the <b>Rate Limit Per IP</b> box, type a required value. This limits the number of requests based on the IP Address of the request.</li>    
+      </ol>
+      <p>You can also override throttling from the Foundry App Services Console. For more information, refer to <a href= "API_Throttling_Override.html#OverrideAPIThrottling">Override API Throttling Configuration.</a></p>
+      </td>
+      </tr>
+    </table>
+    </details>
     
 7.  After you configure all the parameters, click **SAVE**.  
     
-    If you want to create objects to the service, click **SAVE & CONFIGURE**.
+    > **_Note:_** If you want to create objects to the service, click **SAVE & CONFIGURE**.
     
 
 ### Configuring a Data Model for HCL Microservices
 
-In the following sections, all references to screen-shots, objects, operations, and mapping are based on the sample Swagger JSON file for the Service Request microservice.
+   > **_Note:_** In the following sections, all references to screen-shots, objects, operations, and mapping are based on the sample Swagger JSON file for the Service Request microservice.
 
-1.  Click the **Data Model** tab.
-2.  Click **Add** to create an object and fields as per your Swagger details. The following sample object is created for GetRequestDetails and fields:
+   1.  Click the **Data Model** tab.
+
+   2.  Click **Add** to create an object and fields as per your Swagger details. The following sample object is created for GetRequestDetails and fields:
+
+        <table>
+        <tr>
+        <th>Object</th>
+        <th>Fields</th>
+        </tr>
+        <tr>
+        <td><code>GetRequestDetails</code></td>        
+        <td><ul><li>account</li><li>dateFrom</li><li>dateTo</li><li>partyId</li><li>status</li><li>subType</li><li>type</li></ul></td>
+        </tr>
+        </table>     
     
-    | Object | Fields |
-    | --- | --- |
-    | 
-    `GetRequestDetails`
+ ![](Resources/Images/DataModel_Microservice_Object.png)
+
     
-     | 
+  > **_Note:_** Currently, the option to auto-generate the data model is not supported for this adapter.
     
-    *   `account`
-        
-    
-    *   `dateFrom`
-        
-    *   `dateTo`
-        
-    *   `partyId`
-        
-    *   `status`
-        
-    *   `subType`
-        
-    *   `type`
-        
-    
-     |
-    | ![](Resources/Images/DataModel_Microservice_Object.png) |
-    
-    Currently, the option to auto-generate the data model is not supported for this adapter.
-    
-    For more information on creating objects and fields, refer to [Configuring a Data Model](https://docs.voltmx.com/voltmxlibrary/voltmxfoundry/voltmx_foundry_user_guide/Default.md#ObjectsServices/Stage_2.html#createobj).
+    For more information on creating objects and fields, refer to [Configuring a Data Model](ObjectsServices/Stage_2.html#creating-objects-definition-and-map-to-back-end-objects-manually).
     
 
 ### Mapping Operations to Back-end Methods for HCL Microservices
@@ -195,7 +177,7 @@ In the following sections, all references to screen-shots, objects, operations, 
     
 3.  Associate a back-end operation to the object verb. To do this, select the **Data Model Verb** from the list and select a back-end operation from the **Operations** list.
     
-    All the operations listed in the Swagger file are displayed here. You can map the required back-end operations to verbs for objects.
+    > **_Note:_** All the operations listed in the Swagger file are displayed here. You can map the required back-end operations to verbs for objects.
     
     ![](Resources/Images/Back_endOperations_Microservice_Object.png)
     
@@ -222,13 +204,13 @@ For object response calls, you can now map the back-end operations to the object
 
 ![](Resources/Images/ResponseVisaualMapper_MicroserviceAdapter_Object.png)
 
-For more information on mapping, methods ](verbs) mapping, custom verbs, and mapper elements, refer to [Mapping Operations to Back-end Methods](https://docs.voltmx.com/voltmxlibrary/voltmxfoundry/voltmx_foundry_user_guide/Default.md#ObjectsServices/Objectservices_Stage3.html).
+For more information on mapping, methods ](verbs) mapping, custom verbs, and mapper elements, refer to [Mapping Operations to Back-end Methods](ObjectsServices/Objectservices_Stage3.html).
 
 ### Testing the Operation
 
 After creating an operation and configuring the request and response mapping, you can test the operation and validate the configuration details.
 
-Select an environment from the **Select Environment** list and then click **SAVE AND FETCH RESPONSE** to test an operation. The result of the operation appears. For more details, refer to [Test a Service Operation](Test a Service Operation.md).
+Select an environment from the **Select Environment** list and then click **SAVE AND FETCH RESPONSE** to test an operation. The result of the operation appears. For more details, refer to [Test a Service Operation](Test_a_Service_Operation.md).
 
 For Post or Put methods that contain nested payloads, you cannot test the service from the Foundry Console. You can only send a request from the App Services Console, or from [Postman](https://www.postman.com/).
 
@@ -316,7 +298,7 @@ To achieve this case, use the custom XML mapper and generate the XML as below:
 
 When a backend response is a dataset (array), the Visual Mapper generates wrong XML mapper. To achieve this case, use the custom XML mapper and generate the XML as below:
 
-Responses with Datasets cannot be generated by the Visual Mapper.
+> **_Important:_** Responses with Datasets cannot be generated by the Visual Mapper.
 
 For example, Backend Response sample code:
 
@@ -345,7 +327,7 @@ For example, Backend Response sample code:
 
 The sample visual mapper looks something like this:
 
-![](Resources/Images/MicroservicesAdapterLimitations1_visual mapper.png)
+![](Resources/Images/MicroservicesAdapterLimitations1_visual_mapper.png)
 
 The XML generated sample code is as follows:
 
@@ -497,10 +479,15 @@ For more information about OpenAPI 3.0, you can refer to the following articles:
     }
 ```
 *   The **trace** HTTP method is not supported and the APIs that use the trace method are ignored.  
-      
-    APIs that use other HTTP methods are parsed by Foundry to create operations.
-*   If the HTTP response code is not **200**, the console displays the response from the back-end server as is.
-*   **OpenID Connect** (OIDC) is not supported for authentication.
-*   **Callbacks**, which are used to define Webhooks, are not supported. **Links**, which are used to define the output of one operation as input for another operation, are not supported. Make sure that you remove Callbacks and Links from your OpenAPI 3.0 spec before you uploading it to Foundry.
-*   Serialization of parameters, which includes **style** (defines the delimiter for multiple parameters) and **explode** (specifies whether objects of an array are generated as separate parameters), is not supported.
-*   Foundry does not parse or validate **examples** from the specification file.
+    APIs that use other HTTP methods are parsed by Foundry to create operations.  
+
+*   If the HTTP response code is not **200**, the console displays the response from the back-end server as is.  
+
+*   **OpenID Connect** (OIDC) is not supported for authentication.  
+
+*   **Callbacks**, which are used to define Webhooks, are not supported. **Links**, which are used to define the output of one operation as input for another operation, are not supported. Make sure that you remove Callbacks and Links from your OpenAPI 3.0 spec before you uploading it to Foundry.  
+
+*   Serialization of parameters, which includes **style** (defines the delimiter for multiple parameters) and **explode** (specifies whether objects of an array are generated as separate parameters), is not supported.  
+
+*   Foundry does not parse or validate **examples** from the specification file.  
+
