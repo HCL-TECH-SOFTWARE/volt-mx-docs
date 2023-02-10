@@ -58,7 +58,7 @@ The following parameters are specified in the values.yaml file within the Helm c
 
 3. **foundryInstallType**: The deployment must be marked as either production or non production.  This parameter must be specified and it must be either "PRODUCTION" or "NON-PRODUCTION".
 
-4. **Install Components**: The following properties must be set to either true or false.  They specify if the component will be install or not.
+4. **Install Components**: The following properties must be set to either true or false.  They specify if the component will be installed or not.
 
     - identityEnabled
     - consoleEnabled
@@ -181,7 +181,7 @@ The following parameters are specified in the values.yaml file within the Helm c
 
 13. **Number of instances to be deployed for each component**: Each application can be configured to specify the number of container replicas.  The default value is 1.  Under each application locate the variable called `replicas`.
 
-14. **VoltMX Foundry Account Registration Details**: Software license registration must be done after installation with Helm (prior version of install were capable of doing the registration during install).  After logging into the newly deployed console a link at the top of every page will take you to the registration page to activate the software license.
+14. **VoltMX Foundry Account Registration Details**: Software license registration must be done after installation with Helm (prior versions of the install were capable of doing the registration during install).  After logging into the newly deployed console a link at the top of every page will take you to the registration page to activate the software license.
 
 
 # Installation
@@ -314,7 +314,7 @@ The following parameters are specified in the values.yaml file within the Helm c
     voltmx-foundry-integration-fb5b78bc9-j2n5q   1/1     Running     0          8m7s
     </code></pre>
 
-    Each pod should show a status of `Running` and it should indicate 1/1 in the Ready column indicating each pod has 1 out of 1 container in the Ready status.
+    Each pod should show a status of `Running` and it should display 1/1 in the Ready column indicating each pod has 1 out of 1 container in the Ready status.
 
     <pre><code>
     $ kubectl get endpoints

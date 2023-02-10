@@ -10,7 +10,7 @@ You can use the Helm chart to install Foundry to a Kubernetes cluster hosted in 
 
     A. Liveness and Readiness probes must be configured with periodSeconds greater than timeoutSeconds.
 
-    B. The pod resource requests and resource limits must be configured with the same value. The `request` parameter specifies a minimum amount used during pod scheduling, the `limit` specifies the maximum amount of resource the container will be granted during runtime.  Prior to installing Foundry, edit values.yaml and locate the parameters for `ephemeralStorageRequest` and `ephemeralStorageLimit` (there is a set of parameters for each Foundry container) and update these so the values are equal.  Similarly, resourceRequestsMemory and resourceMemoryLimit parameters need to be updated to the same value so that the size for request is equal to the size you specify for the limit.
+    B. The pod resource requests and resource limits must be configured with the same value. The `request` parameter specifies a minimum amount used during pod scheduling, the `limit` specifies the maximum amount of resource the container will be granted during runtime.  Prior to installing Foundry, edit values.yaml and locate the parameters for `ephemeralStorageRequest` and `ephemeralStorageLimit` (there is a set of parameters for each Foundry container) and update these so the values are equal.  Similarly, `resourceRequestsMemory` and `resourceMemoryLimit` parameters need to be updated to the same value so that the size for request is equal to the size you specify for the limit.
 
 ## Use Cases for Helm Upgrade
 
@@ -27,67 +27,66 @@ Please see [How to Upgrade Individual Foundry Components](Installing_Containers_
 
 ### Enabling or disabling Foundry components
 
-The following example shows how to enable the Engagement component assuming its currently disabled:
+The following steps show how to enable the Engagement component assuming its currently disabled:
 
-```bash
-$ cd <directory containing the values.yaml>
-#
-# Let's assume your deployment currently has `engagementEnabled=false` and you now want
-# to enable it. Edit your values.yaml file, locate the `engagementEnabled` parameter and
-# change it to true and save the file.
-#
-# Now use `helm upgrade` which will cause Helm to compute any differences between what
-# is installed vs your changes in values.yaml.  Helm will apply the necessary
-# differences (add/updates or deletes) to the kubernetes objects.
-#
-# Also, use the atomic option while upgrading which rolls back any changes if the
-# upgrade fails
-#
-$ helm upgrade foundry apps --namespace foundry --atomic
-Release "foundry" has been upgraded. Happy Helming!
-NAME: foundry
-LAST DEPLOYED: Mon Nov 21 22:23:54 2022
-NAMESPACE: foundry
-STATUS: deployed
-REVISION: 2
-TEST SUITE: None
+1.  Open a command prompt, change to the root of your Foundry helm directory, open the `values.yaml` file in your editor, locate the `engagementEnabled` parameter, change it to **true**, and save the file.
 
-# Determine if the Engagement component is ready for use
-$ kubectl get pods --namespace foundry
-NAME                                          READY   STATUS      RESTARTS   AGE
-foundry-db-update-hchqf                       0/1     Completed   0          3h35m
-voltmx-foundry-apiportal-554f666486-dfg5m     1/1     Running     0          3h35m
-voltmx-foundry-identity-68f98c564f-kmdkb      1/1     Running     0          3h35m
-voltmx-foundry-integration-7848b49c99-pmcmd   1/1     Running     0          3h35m
-voltmx-foundry-console-6c44866955-ct86f       1/1     Running     0          3h35m
-voltmx-foundry-engagement-57475d8946-hq2kt    1/1     Running     0          71s
-#
-#  The output above shows that the engagement service was successfully started and is ready.
-```
+2.  Run `helm upgrade` as shown in the following example, which will cause Helm to compute any differences between what is installed versus your changes in values.yaml. Helm will apply the necessary
+differences (add/updates or deletes) to the kubernetes objects. **Note:** Use the atomic option while upgrading which rolls back any changes if the upgrade fails.
+
+    <pre><code>
+    $ helm upgrade foundry apps -n foundry --atomic
+    Release "foundry" has been upgraded. Happy Helming!
+    NAME: foundry
+    LAST DEPLOYED: Mon Nov 21 22:23:54 2022
+    NAMESPACE: foundry
+    STATUS: deployed
+    REVISION: 2
+    TEST SUITE: None
+    </code></pre>
+
+3.  Determine if the Engagement component is ready for use via the following command:
+
+    <pre><code>
+    $ kubectl get pods -n foundry
+    NAME                                          READY   STATUS      RESTARTS   AGE
+    foundry-db-update-hchqf                       0/1     Completed   0          3h35m
+    voltmx-foundry-apiportal-554f666486-dfg5m     1/1     Running     0          3h35m
+    voltmx-foundry-identity-68f98c564f-kmdkb      1/1     Running     0          3h35m
+    voltmx-foundry-integration-7848b49c99-pmcmd   1/1     Running     0          3h35m
+    voltmx-foundry-console-6c44866955-ct86f       1/1     Running     0          3h35m
+    voltmx-foundry-engagement-57475d8946-hq2kt    1/1     Running     0          71s
+    </code></pre>
+
+    The output above shows that the engagement service was successfully started and is ready for use.
+
 
 ### Enabling Ingress
 
-The following example shows how to enable Ingress if you disabled it to prevent access to your environment before it was ready:
+The following steps show how to enable Ingress if you disabled it to prevent access to your environment before it was ready:
 
-```bash
-$ cd <directory containing the values.yaml>
-#
-# Edit your values.yaml file, locate the `ingress.enabled` parameter and change
-# it to true and save the file.
-#
-# Also, use the atomic option while upgrading which rolls back any changes if the
-# upgrade fails
-#
-$ helm upgrade foundry apps --namespace foundry --set ingress.enabled=true --atomic
-Release "foundry" has been upgraded. Happy Helming!
-NAME: foundry
-LAST DEPLOYED: Mon Nov 21 22:23:54 2022
-NAMESPACE: foundry
-STATUS: deployed
-REVISION: 3
-TEST SUITE: None
+1.  Open a command prompt, change to the root of your Foundry helm directory, open the `values.yaml` file in your editor, locate the `ingress.enabled` parameter, change it to **true**, and save the file.
 
-```
+2.  Run `helm upgrade` as shown in the following example, which will cause Helm to compute any differences between what is installed versus your changes in values.yaml. Helm will apply the necessary
+differences (add/updates or deletes) to the kubernetes objects. **Note:** Use the atomic option while upgrading which rolls back any changes if the upgrade fails.
+
+    <pre><code>
+    $ helm upgrade foundry apps -n foundry --atomic
+    Release "foundry" has been upgraded. Happy Helming!
+    NAME: foundry
+    LAST DEPLOYED: Mon Nov 21 22:23:54 2022
+    NAMESPACE: foundry
+    STATUS: deployed
+    REVISION: 3
+    TEST SUITE: None
+    </code></pre>
+
+3.  Determine if Ingress is ready for use via the following command: `kubectl get ingress -n foundry`.
+
+    For each Ingress you should see that an address has been assigned.  If there is no address listed, Ingress will not function.  Generally a lack of address means that no ingress controller has determined it should setup the ingress. This is usually caused by incorrectly specifying the `ingress.class` in values.yaml. You can correct this setting, run `helm upgrade foundry apps -n foundry`, and Helm will apply the class name change for you.
+
+    If the pods are all showing ready and your Ingress shows addresses, you should be ready to open the Foundry Console in your browser. Using the **host name** shown in the output, open the console in your browser.
+
 
 ## Specifying the Pod Disruption Budget
 

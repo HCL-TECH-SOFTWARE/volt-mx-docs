@@ -74,28 +74,66 @@ How to Upgrade Individual Foundry Components
 
 To upgrade individual Volt MX Foundry components, perform the following steps.
 
-1.  Go to the Foundry helm folder.
-2.  Open the `values.yaml` file and update the version value of **imageTagOverride** to the desired  version for the component(s) that you want to upgrade. **Note:** imageTagOverride is provided in the following component sections:
+1.  Download the latest version of the Helm charts from [HCL Flexnet software portal](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.5.n&orgId=HCL), open a command prompt, and unzip the contents as shown in the following example. From the root of the unzipped content you will see `values.yaml` along with Charts in the subdirectories named `apps` and `dbupdate`.
+
+    <pre><code>
+    $ mkdir ~/Foundry-9.5.n.0_GA
+    $ cd ~/Foundry-9.5.n.0_GA
+    $ unzip ~/Downloads/HelmChart-9.5.n.0_GA.zip
+    </code></pre>
+
+2.  Compare the `values.yaml` from your old install with the latest version, copy the custom settings from your old install into the latest version of the `values.yaml` file, and save the updates.
+
+3.  Keep the latest version of the `values.yaml` file open, update the version value of **imageTagOverride** to the desired version for the component(s) that you want to upgrade, and save the updates. **Note:** imageTagOverride is provided in the following component sections:
     * apiportal
     * console
     * engagement
     * identity
     * integration
-3.  Before you upgrade the applications, you must upgrade the database.  The one exception is the apiportal - there is no database component for portal.  Only one version is handled by database update at a time.  If upgrading multiple components to different versions, you must do the following steps for each target version:
 
-    A.  In values.yaml, locate the "advancedMode" under dbupdate.  Toggle the "enabled" parameter to true.  Update the "versionTag" to your target version.  Just below the "versionTag" locate the updateXXXXSchema parameters.   For each component that is being updated to this new version, change the Update Schema tag to true.   For example, if updating only the Console component, set `updateConsoleSchema: true`.  After making the necessary changes here, save the file.
+4.  Before you upgrade the applications, you must upgrade the database. The one exception is the apiportal - there is no database component for portal. Only one version is handled by database update at a time. If upgrading multiple components to different versions, you must do the following steps for each target version:
 
-    B.  Trigger the database update to run again to update the neccessary component databases.  Do this with the command `helm upgrade dbupdate dbupdate -n foundry` from within the root of your Foundry helm directory (where you have `values.yaml` and the subdirectories `apps` and `dbupdate`).
+    A.  In values.yaml, locate the "advancedMode" under dbupdate. Toggle the "enabled" parameter to true. Update the "versionTag" to your target version. Just below the "versionTag" locate the updateXXXXSchema parameters.   For each component that is being updated to this new version, change the Update Schema tag to true. For example, if updating only the Console component, set `updateConsoleSchema: true`. After making the necessary changes here, save the file.
 
-    C.  Ensure the database update completes successfully.  Locate the database update pod with the command `kubectl get pods -l job-name=foundry-db-update -n foundry` and then review the database update log output with `kubectl logs -n foundry <pod-name> | less` where < pod-name > is the name you identified for the database update pod.
+    B.  Trigger the database update to run in order to update the specified component databases. Do this with the command `helm upgrade dbupdate dbupdate -n foundry` from within the root of your Foundry helm directory (where you have `values.yaml` and the subdirectories `apps` and `dbupdate`).
+
+    C.  Ensure the database update completes successfully. Locate the database update pod with the command `kubectl get pods -l job-name=foundry-db-update -n foundry` and then review the database update log output with `kubectl logs -n foundry <pod-name> | less` where < pod-name > is the name you identified for the database update pod.
 
     D.  If there are errors, correct the error and rerun the `helm upgrade` command and validation (steps B-D).
 
     E.  If there are additional Foundry components you are upgrading repeat Steps A-E but first change all updateXXXSchema parameters to `false`.
 
+5.  Once you have run database update for all necessary Foundry components being updated, run the following command to install the new version(s) of the application components:
+
+    <pre><code>
+    helm upgrade foundry apps -n foundry
+    </code></pre>
+
+    This should terminate any applications that are being upgraded and download and deploy your specified new versions. Observe the pod status for each of the applications via `kubectl get pods -w -n foundry`, and review pod logs to ensure they are healthy via `kubectl logs podName`.
+
+How to Upgrade All Foundry Components
+-------------------------------------
+
+**Note:** If you are upgrading a version of Volt MX Foundry that you had installed with Volt MX Foundry Container Cluster Solution scripts and templates, ensure you follow the steps to run *init-guids.sh* as part of an upgrade so your current properties are preserved.
+
+To upgrade all Volt MX Foundry components, perform the following steps.
+
+1.  Use Steps 1 and 2 from [How to Upgrade Individual Foundry Components](#how-to-upgrade-individual-foundry-components).
+
+2.  Keep the latest version of the `values.yaml` file open, update the version value of **foundryBuildVer** to the desired version for the upgrade, and save the updates.
+
+3.  Before you upgrade the applications, you must upgrade the database. The one exception is the apiportal - there is no database component for portal.
+
+    A.  Trigger the database update to run in order to update all of the component databases. Do this with the command `helm upgrade dbupdate dbupdate -n foundry` from within the root of your Foundry helm directory (where you have `values.yaml` and the subdirectories `apps` and `dbupdate`).
+
+    B.  Ensure the database update completes successfully. Locate the database update pod with the command `kubectl get pods -l job-name=foundry-db-update -n foundry` and then review the database update log output with `kubectl logs -n foundry <pod-name> | less` where < pod-name > is the name you identified for the database update pod.
+
+    C.  If there are errors, correct the error and rerun the `helm upgrade` command and validation (steps A-C).
 
 4.  Once you have run database update for all necessary Foundry components being updated, run the following command to install the new version(s) of the application components:
-```
-helm upgrade foundry apps -n foundry
-```
-This should terminate any applications that are being upgraded and download and deploy your specified new versions.  Observe the pod status for each of the applications via `kubectl get pods -w -n foundry`, and review pod logs to ensure they are healthy via `kubectl logs podName`.
+
+    <pre><code>
+    helm upgrade foundry apps -n foundry
+    </code></pre>
+
+    This should terminate any applications that are being upgraded and download and deploy your specified new versions. Observe the pod status for each of the applications via `kubectl get pods -w -n foundry`, and review pod logs to ensure they are healthy via `kubectl logs podName`.
