@@ -495,7 +495,7 @@ You can do the following in the **Configure New** screen:
           
         Click **Use Existing**, and from the **Existing Services** screen select the required Object service, Object, Field, and then click **Add**. The new Workflow is linked to an existing Object service.
         
-        Make sure that you designate a Field or create a new Field in the required object to store the workflow state if you want to use an existing workflow. For more information, refer to [Object Services](../../voltmx_foundry_user_guide/Content/ObjectsServices/Stage 2.md).
+        Make sure that you designate a Field or create a new Field in the required object to store the workflow state if you want to use an existing workflow. For more information, refer to [Object Services](../../voltmx_foundry_user_guide/Content/ObjectsServices/Stage_2.md).
         
 *   From the **Nodes** pane, double click on required nodes and drag and drop them on the canvas area. To know more about the activities that you need to perform for each node type, refer to <a href="#nodes_tasks">Nodes</a>.
     
@@ -559,7 +559,7 @@ You can do the following in the **Configure New** screen:
           
         Click **Use Existing**, and from the **Existing Services** screen select the required Object service, Object, Field, and then click **Add**. The new Workflow is linked to an existing Object service.
         
-        Make sure that you designate a Field or create a new Field in the required object to store the workflow state if you want to use an existing workflow. For more information, refer to [Object Services](../../voltmx_foundry_user_guide/Content/ObjectsServices/Stage 2.md).
+        Make sure that you designate a Field or create a new Field in the required object to store the workflow state if you want to use an existing workflow. For more information, refer to [Object Services](../../voltmx_foundry_user_guide/Content/ObjectsServices/Stage_2.md).
         
 *   From the **Nodes** pane, double click on required nodes and drag and drop them on the canvas area. To know more about the activities that you need to perform for each node type, refer to <a href="#nodes_tasks">Nodes</a>.
     
@@ -1114,8 +1114,8 @@ For more details, refer to [Advanced Configuration > Enable Looping](#enable-loo
 
         **User Details in FOUNDRY\_WORKFLOW\_CONTEXT**
 		
-        ```
-        {"Users":\[
+        <code><pre>
+        {"Users":[
               {
                  "Userid":"123"
               },
@@ -1125,9 +1125,9 @@ For more details, refer to [Advanced Configuration > Enable Looping](#enable-loo
               {
                  "Userid":"345"
               }
-              \]
+              ]
             }
-        ```
+            </pre></code>
 
         **Input Configuration for Service Task**
 
@@ -1360,4 +1360,4 @@ To view the Usecase related to Object Triggered Workflow and the implementation 
 
 To view the Usecase related to Event Triggeed Workflow and the implementation of the Usecase, refer to [Event Triggered Workflow Implementation](EventsWorkflowImplementation.md).
 
-To view the execution status of a workflow service by using App Services Console, refer to [App Services Console > Workflow Services](https://{../../../Foundry/vmf_integrationservice_admin_console_userguide/Content/Workflow.md) section.
+To view the execution status of a workflow service by using App Services Console, refer to [App Services Console > Workflow Services](../../vmf_integrationservice_admin_console_userguide/Content/Workflow.md) section.
