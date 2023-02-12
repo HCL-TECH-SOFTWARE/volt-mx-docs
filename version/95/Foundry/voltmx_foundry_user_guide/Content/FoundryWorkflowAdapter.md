@@ -11,13 +11,13 @@ Using the Foundry Workflow adapter, you can map Integration Trigger Workflows to
 
 The following flow diagram details how the Sync Workflow works:
 
-![](Resources/Images/SyncWorkflowFlow.png)
+![](../../voltmx_foundry_workflow/Content/Resources/Images/SyncWorkflowFlow.png)
 
 The following flow diagram details how the Async Workflow works:
 
-![](Resources/Images/AsyncWorkflowFlow.png)
+![](../../voltmx_foundry_workflow/Content/Resources/Images/AsyncWorkflowFlow.png)
 
-For more information on how to create Integration ](Sync/Async) Workflows, refer to the [Integration Service Trigger Workflow](Workflow.md#top).
+For more information on how to create Integration ](Sync/Async) Workflows, refer to the [Integration Service Trigger Workflow](../../voltmx_foundry_workflow/Content/Workflow.md).
 
 ### Prerequisites
 
@@ -37,38 +37,40 @@ To configure a Foundry Workflow adapter in the [Integration Service Definition](
 2.  From the **Service Type** list, select _`Foundry Workflow`_.
 3.  In the **Authentication** section, you can select an identity provider from **Use Existing Identity Provider**. This drop-down lists the identity providers created on the Identity page. If you select any identity provider, you have to enter valid login credentials.
     
-    The Authentication section is optional.
+    >The Authentication section is optional.
     
-    For more information on Externalizing Identity Services, refer to [Replace the Identity Service references in a Foundry app](Replacing Identity Services.md).
+    > For more information on Externalizing Identity Services, refer to [Replace the Identity Service references in a Foundry app](Replacing_Identity_Services.md).
     
-4.  For additional configuration of your service definition, provide the following details in the **Advanced** section. | Field | Description |
-    | --- | --- |
-    | Custom code | 
-    To specify a JAR associated to the service, select one from the **Select Existing JAR** drop-down menu or click **Upload New** to add a new JAR file. Make sure that you upload a custom JAR file that is built on the same JDK version used for installing Foundry Integration.
-    
-    Make sure that you upload a custom JAR file that is built on the same JDK version used for installing Foundry Integration.  
-      
-    For example, if the JDK version on the machine where Foundry Integration is installed is 1.6, you must use the same JDK version to build your custom jar files. If the JDK version is different, an unsupported class version error will appear when a service is used from a device.
-    
-     |
-    | API Throttling | 
-    
-    *   If you want to use **API throttling** in Foundry Console, to limit the number of request calls within a minute. do the following:  
-        1.  In the **Total Rate Limit** text box, enter a required value. This will limit the total number of requests processed by this API.
-            
-        2.  In the **Rate Limit Per IP** field, enter a required value. With this value, you can limit the number of IP address requests configured in your Foundry console in terms of Per IP Rate Limit.
-            
-    *   To override throttling from Foundry App Services Console, refer to [Override API Throttling Configuration](API_Throttling_Override.md#OverrideAPIThrottling).
-        
-        In case of On-premises, the number of nodes in a clustered environment is set by configuring the `VOLTMX_SERVER_NUMBER_OF_NODES` property in the Admin Console. This property indicates the number of nodes configured in the cluster. The default value is 1.  
-        Refer to [The Runtime Configuration tab on the Settings screen of App Services](http://opensource.voltmxtechsw.com/volt-mx-docs/voltmxlibrary/integration/vmf_integrationservice_admin_console_userguide/Default.html#Runtime_Configuration.md).  
-          
-        The total limit set in the Foundry Console will be divided by the number of configured nodes. For example, a throttling limit of 600 requests/minute with three nodes will be calculated to be 200 requests/minute per node.  
-        This is applicable for Cloud and On-premises.
-        
-    
-     |
-    
+4.  For additional configuration of your service definition, provide the following details in the **Advanced** section.
+
+    <table style="mc-table-style: url('Resources/TableStyles/Basic.css');margin-left: 0;margin-right: auto;" class="TableStyle-TemenosTables" cellspacing="0">
+    <colgroup><col class="TableStyle-TemenosTables-Column-Column1">  
+    <col class="TableStyle-TemenosTables-Column-Column1">
+    </colgroup><thead>
+        <tr class="TableStyle-TemenosTables-Head-Header1">
+            <th class="TableStyle-TemenosTables-HeadE-Column1-Header1" scope="col">Field</th>
+            <th class="TableStyle-TemenosTables-HeadD-Column1-Header1" scope="col">Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="TableStyle-TemenosTables-Body-Body1">
+            <td class="TableStyle-TemenosTables-BodyE-Column1-Body1">Custom code</td>
+            <td class="TableStyle-TemenosTables-BodyD-Column1-Body1">
+                <p>To specify a JAR&nbsp;associated to the service, select one from the <b>Select Existing JAR</b> drop-down menu or click <b>Upload New</b> to add a new JAR file. Make sure that you upload a custom JAR file that is built on the same JDK version  used for installing 
+                Foundry Integration.</p>
+                <p>For example, if the JDK version on the machine where Foundry Integration is installed is 1.6, you must use the same JDK version to build your custom jar files. If the JDK version is different, an unsupported class version error will appear when a service is used from a device.</p>
+            </td>
+        </tr>
+        <tr class="TableStyle-TemenosTables-Body-Body1">
+            <td class="TableStyle-TemenosTables-BodyB-Column1-Body1">API Throttling</td>
+            <td class="TableStyle-TemenosTables-BodyA-Column1-Body1">
+            If you want to use <a name="APIThrottling"></a><b>API throttling</b> in Foundry Console, to limit the number of request calls within a minute, do the following:<br>
+            <ol style="list-style-type: lower-roman;"><li value="1"><p>In the <b>Total Rate Limit</b> text box, enter a required value.  This will limit the total number of requests processed by this API.</p></li><li value="2"><p>In the <b>Rate Limit Per IP</b> field, enter a required value. With this value, you can limit the number of IP address requests configured in your  Foundry console in terms of Per IP Rate Limit.</p></li></ol>
+            To override throttling from Foundry App Services Console, refer to <a href="API_Throttling_Override.html" target="_blank">Override API Throttling Configuration</a>.<p class="Note" data-mc-autonum="<b><span style=&quot;color: #293276;&quot; class=&quot;mcFormatColor&quot;>NOTE: </span></b>"><span class="autonumber"><span><b><span style="color: #293276;" class="mcFormatColor">NOTE: </span></b></span></span>In case of On-premises, <span>the number of nodes in a clustered environment is set by configuring the </span><code style="font-family: monospace;" class="codefirst">VOLTMX_SERVER_NUMBER_OF_NODES</code><span> property in the Admin Console</span>. This property indicates the number of nodes configured in the cluster. The default value is 1. <br>Refer to <a href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/vmf_integrationservice_admin_console_userguide/Content/Runtime_Configuration.html" target="_blank">The Runtime Configuration tab on the Settings screen of App Services</a>. <br><br>The total limit set in the Foundry Console will be divided by the number of configured nodes. For example, a throttling limit of 600 requests/minute with three nodes will be calculated to be 200 requests/minute per node. <br>This is applicable for Cloud and On-premises.</p>
+            </td>
+        </tr>
+    </tbody>
+    </table>    
     All options in the Advanced section are optional.
     
 5.  Enter the **Description** for the service.
@@ -97,21 +99,64 @@ To create an operation, follow these steps:
     
     The system displays the selected operation in the edit mode. Provide the following details to configure the operation.
     
-    | Fields | Description |
-    | --- | --- |
-    | Name | The **Name** field is pre-populated with field names of the selected operation. You can edit this field. |
-    | Operation Security Level | 
-    It specifies how a client must authenticate to invoke this operation.
-    
-    Select one of the following security operations in the **Operation Security Level** field.  
-    
-    The field is set to Authenticated App User, by default.
-    
-     |
-    | Front End HTTP Method | The Front End HTTP Method specifies the HTTP method that is used to invoke the Service operation from an HTTP Client. Iris and Other SDKs use POST method for communicating with VoltMX Foundry. |
-    | Associated Workflow | The **Name** field is pre-populated with workflow names. You cannot edit this field. |
-    
-6.  For additional configuration of request ](or) response operations, provide the following details in the Advanced section. <table style="width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('../Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 174px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Custom Code Invocation</td><td class="TableStyle-Basic-BodyD-Column1-Body1">You can add pre and post processing logic to services to modify the request inputs. When you test, the services details of various stages in the service execution are presented to you for better debugging. All options in the Advanced section are optional. For more details, refer to <a href="Java_Preprocessor_Postprocessor_.md" target="_blank">Preprocessor and Postprocessor</a>.</td></tr><tr class="TableStyle-Basic-Body-Body1" madcap:conditions="Default.Not Ready for Publish"><td class="TableStyle-Basic-BodyE-Column1-Body1" style="background-color: #7cfc00;">Additional Configuration Properties</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="background-color: #7cfc00;">Additional Configuration Properties allows you to configure service call time out cache response. For information on different types of configuration properties, refer <a href="Java_Preprocessor_Postprocessor_.html#timeout_cachable" target="_blank">Properties</a>.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">Front-end API</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Front-end API allows you map your endpoint ](or) backend URL of an operation to a front-end URL. For detailed information, refer Custom <a href="FrontEndAPI.md" target="_blank">Front-end URL</a>.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">Server Events</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Using Server Events you can configure this service to trigger or process server side events. For detailed information, refer <a href="ServerEvents.html">Server Events</a>.</td></tr></tbody></table>
+    <table style="width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-TemenosTables" cellspacing="0">
+	<colgroup>
+		<col class="TableStyle-TemenosTables-Column-Column1" style="width: 265px;">
+			<col class="TableStyle-TemenosTables-Column-Column1">
+			</colgroup>
+			<thead>
+				<tr class="TableStyle-TemenosTables-Head-Header1">
+					<th class="TableStyle-TemenosTables-HeadE-Column1-Header1" scope="col">Fields</th>
+					<th class="TableStyle-TemenosTables-HeadD-Column1-Header1" scope="col">Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="TableStyle-TemenosTables-Body-Body1">
+					<td class="TableStyle-TemenosTables-BodyE-Column1-Body1">Name</td>
+					<td class="TableStyle-TemenosTables-BodyD-Column1-Body1">The <b>Name</b> field is pre-populated with field names of the selected operation. You can edit this field.</td>
+				</tr>
+				<tr class="TableStyle-TemenosTables-Body-Body1">
+					<td class="TableStyle-TemenosTables-BodyE-Column1-Body1">Operation Security Level</td>
+					<td class="TableStyle-TemenosTables-BodyD-Column1-Body1">
+						<p>It specifies how a client must authenticate to invoke this operation.</p>
+											<p>Select one of the following security operations in the <b>Operation Security Level</b> field.  </p>	<ol>
+											<ul>
+												<li>
+													<b>Authenticated App User</b> – It restricts the access to clients who have successfully authenticated using an Identity Service associated with the app.</li>
+												<li>
+													<b>Anonymous App User</b> – It allows the access from trusted clients that have the required App Key and App Secret. Authentication through an Identity Service is not required.</li>
+												<li>
+													<b>Public</b> – It allows any client to invoke this operation without any authentication. This setting does not provide any security to invoke this operation and you should avoid this authentication type if possible.</li>
+												<li>
+													<b>Private</b> - It blocks the access to this operation from any external client. It allows invocation either from an Orchestration/Object Service, or from the custom code in the same run-time environment.</li>
+											</ul>
+										</ol>
+								<p class="Note" data-mc-autonum="<b>
+											<span style=&quot;color: #293276;&quot; class=&quot;mcFormatColor&quot;>NOTE: </span>
+										</b>">
+									<span class="autonumber">
+										<span>
+											<b>
+												<span style="color: #293276;" class="mcFormatColor">NOTE: </span>
+											</b>
+										</span>
+									</span> The field is set to Authenticated App User, by default.</p>
+							</td>
+						</tr>
+						<tr class="TableStyle-TemenosTables-Body-Body1">
+							<td class="TableStyle-TemenosTables-BodyE-Column1-Body1">Front End HTTP Method</td>
+							<td class="TableStyle-TemenosTables-BodyD-Column1-Body1">The Front End HTTP Method specifies the HTTP method that is used to invoke the Service operation from an HTTP Client. Iris and Other SDKs use POST method for communicating with Foundry.</td>
+						</tr>
+						<tr class="TableStyle-TemenosTables-Body-Body1">
+							<td class="TableStyle-TemenosTables-BodyB-Column1-Body1">Associated Workflow</td>
+							<td class="TableStyle-TemenosTables-BodyA-Column1-Body1">The <b>Name</b> field is pre-populated with workflow names. You cannot edit this field.</td>
+						</tr>
+					</tbody>
+				</table> 
+				
+6.  For additional configuration of request or response operations, provide the following details in the Advanced section. 
+
+    <table style="width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('../Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 174px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Custom Code Invocation</td><td class="TableStyle-Basic-BodyD-Column1-Body1">You can add pre and post processing logic to services to modify the request inputs. When you test, the services details of various stages in the service execution are presented to you for better debugging. All options in the Advanced section are optional. For more details, refer to <a href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Java_Preprocessor_Postprocessor_.html">Preprocessor and Postprocessor</a>.</td></tr><tr class="TableStyle-Basic-Body-Body1" madcap:conditions="Default.Not Ready for Publish"><td class="TableStyle-Basic-BodyE-Column1-Body1">Additional Configuration Properties</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Additional Configuration Properties allows you to configure service call time out cache response. For information on different types of configuration properties, refer <a href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Java_Preprocessor_Postprocessor_.html#timeout_cachable" target="_blank">Properties</a>.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">Front-end API</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Front-end API allows you map your endpoint ](or) backend URL of an operation to a front-end URL. For detailed information, refer Custom <a href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/FrontEndAPI.html">Front-end URL</a>.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">Server Events</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Using Server Events you can configure this service to trigger or process server side events. For detailed information, refer <a href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/ServerEvents.html">Server Events</a>.</td></tr></tbody></table>
     
     All options in the **Advanced** section for operations are optional.
     
