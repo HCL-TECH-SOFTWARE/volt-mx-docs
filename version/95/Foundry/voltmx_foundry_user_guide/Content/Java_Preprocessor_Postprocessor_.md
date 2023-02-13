@@ -123,7 +123,7 @@ The step allows you to further filter the data received from a service call.
             *   If you do not want to validate the JavaScript code for the Postprocessor, and want to save the operation, do not click **Validate**.
         *   Select **Rules** to open a text box. Here, you can write rules for the postprocessor.
 
-2.  Under the **Properties** section, provide details for the following advanced service properties:
+2.  <a id="timeout_cachable"></a>Under the **Properties** section, provide details for the following advanced service properties:
     *   **Timeout (in ms)** - the duration in milliseconds after which the service call times out. Provide the details in the text box.
     *   **Cache Response** - the duration in seconds within which the service response is fetched from the cache. Select the **Cache Response** check box, and provide the details in the text box.
     *   **Unescape embedded xml in response -** To ignore the MuleSoft response received in the XML value field, select the **Unescape embedded xml in response** check box.
