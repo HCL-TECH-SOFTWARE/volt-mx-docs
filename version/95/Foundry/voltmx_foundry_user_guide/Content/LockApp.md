@@ -24,7 +24,7 @@ The following sections detail you with more information on Lock App functionalit
     *   [How to Extend an Object Service of a Locked Foundry App](#how-to-extend-an-object-service-of-a-locked-foundry-app)
 *   [Upgrading Locked Base Foundry Apps](#upgrading-locked-base-foundry-apps)
     *   [How to Upgrade a custom Foundry App version by using Locked Base Foundry App version](#how-to-upgrade-a-custom-locked-foundry-app-version-with-a-higher-locked-base-foundry-app-version)
-*   [How to Lock a Foundry App using MFCLI](#LockFoundryAppMFCLI)
+*   [How to Lock a Foundry App using MFCLI](#how-to-lock-a-foundry-app-using-mfcli)
 
 ### How to Lock a Foundry App
 
@@ -39,8 +39,9 @@ To lock an app, follow these steps:
     
 3.  Click **Export Locked App**. The base app configurations are locked and the app from the current workspace gets exported to your local system. The app is downloaded with a new name, for example `<SampleAppName>_locked`.
     
-    You can access the Export Locked App option within the app when the app is selected.  
-    ![](Resources/Images/AppLockinApp.png)
+    > **Note:** You can access the Export Locked App option within the app when the app is selected.  
+    >
+    > ![](Resources/Images/AppLockinApp.png)
     
     If you have imported a locked app with the Owner role, the Export Locked App feature is disabled for that app.
     
@@ -74,12 +75,14 @@ For example,
     *   **Configurability of custom JARs:  
         In Advanced > Custom Code:** Select existing JARs or click **Upload New** to add new JARs.
         
-        Locked apps do not support these Advanced Configurations: Throttling and URL Provider Class.
+        > **Note:** Locked apps do not support these Advanced Configurations: Throttling and URL Provider Class.
         
-        From V9SP4, you can add new operations to the locked apps.  
-        ![](Resources/Images/LockedBackendAddoperations.png)
+        > **Note:** From V9SP4, you can add new operations to the locked apps.  
+		>
+        > ![](Resources/Images/LockedBackendAddoperations.png)
         
-5.  In **Operations** list, you cannot add new operations.
+    In **Operations** list, you cannot add new operations.
+   
 6.  Click an operation to add an extended configuration as follows:
     *   **Operation Security Level**: Select the security level, if required.
         
@@ -100,7 +103,7 @@ For example,
         
 7.  Click **SAVE** to save the configuration.
 
-For more information on Integration Services, refer to [Integration Services](Services.md)
+> For more information on Integration Services, refer to [Integration Services](Services.md).
 
 #### How to Extend an Object Service of a Locked Foundry App
 
@@ -114,16 +117,17 @@ For more information on Integration Services, refer to [Integration Services](Se
     *   To add new fields to the locked objects, click **Add**. The new fields in the locked objects are categorized as CUSTOM FIELDS.
     *   You can delete locked base objects, if required.
     
-    For Locked Base objects, you cannot do the following in the Data Model tab:
-    
-    *   Modifying the locked object name.
-    *   Adding new objects.
-    *   Modifying or deleting locked base object fields. The locked base fields of objects are categorized as BASE FIELDS.
+    > **Note:** For Locked Base objects, you cannot do the following in the Data Model tab:
+    >
+    > *   Modify the locked object name.
+    > *   Add new objects.
+    > *   Modify or delete locked base object fields. The locked base fields of objects are categorized as BASE FIELDS.
     
 6.  In the **Mapping** tab, you can configure the following:
     
-    From V9SP4, you can add verbs to the locked apps.  
-    ![](Resources/Images/LockedObjectAddverbs.png)
+    > **Note:** From V9SP4, you can add verbs to the locked apps.  
+	> 
+    > ![](Resources/Images/LockedObjectAddverbs.png)
     
     *   **Configurability of Java pre-processors and post-processors:**  
         In **Advanced > Custom Code Invocation > Preprocessor and Postprocessor:** The locked Java pre-processors and post-processors are enabled by default. You can choose to enable/disable them.
@@ -134,7 +138,8 @@ For more information on Integration Services, refer to [Integration Services](Se
         
         Locked apps do not support these Advanced Configurations: Stub Backend Response, Front End API, Pass-through Cookies, and Server Events.
         
-7.  **Extensibility of Object data mappings**:  
+7.  **Extensibility of Object data mappings**:
+
     In **Visual/XML mapper** section, you can configure the following:
     
     *   All locked Visual/XML mapper/s are disabled for editing and deleting. By default, locked mappers are selected with the **Enabled** option to be included in the custom app by default. You can choose to enable/disable them.
@@ -147,11 +152,11 @@ For more information on Integration Services, refer to [Integration Services](Se
         2.  Specify the mapper name and click **SAVE**. A new mapper placeholder is created.
         3.  Click **EDIT** to configure mappers.
     
-    ![](Resources/Images/LockedMapperExtended.png)
+    <!-- ![](Resources/Images/LockedMapperExtended.png)-->
     
 8.  Click **SAVE** to save the mapper configuration and the changes.
 
-For more information on Object Services, refer to [Object Services](Objectservices.md).
+> **Note:** For more information on Object Services, refer to [Object Services](Objectservices.md).
 
 ### Upgrading Locked Base Foundry Apps
 
@@ -183,32 +188,35 @@ While upgrading locked custom apps with the higher versions of locked base apps,
     
     Your custom locked app version has been upgraded with a higher locked base app version.
     
-    For more information on importing apps, refer to [Importing a Foundry Application](Export-Import Apps.md#How2).
+    For more information on importing apps, refer to [Importing a Foundry Application](Export-Import_Apps.md).
     
 
-**How to Lock a Foundry App using MFCLI**
+### How to Lock a Foundry App using MFCLI
 
 The lock-app command locks the app from the current environment and returns a locked app zip in the specified location:
 
 *   for Cloud environment:
-```
-java -jar mfcli.jar lock-app -u <user> -p <password> -t <account id> -clurl <cloud url> \[-f <file name> | -r <directory name>\] -a <app name> \[ -v <app version> \]
-```
+
+    ```
+    java -jar mfcli.jar lock-app -u <user> -p <password> -t <account id> -clurl <cloud url> [-f <file name> | -r <directory name>\] -a <app name> [ -v <app version> \]
+    ```
     
     For example,
     
-```
-java -jar mfcli.jar lock-app -u abc@voltmx.com -p password -t 100054321 -clurl https://manage.hcl-cloud.com -f "C:\\\\tmp\\\\Sample.zip" -a MyApp -v 2.0
-```
+    ```
+    java -jar mfcli.jar lock-app -u abc@voltmx.com -p password -t 100054321 -clurl https://manage.hcl-cloud.com -f "C:\\\\tmp\\\\Sample.zip" -a MyApp -v 2.0
+    ```
+    
 *   for on-premise installation:
-```
-java -jar mfcli.jar lock-app -u <user> -p <password> -au <Identity URL> -cu <Console URL> \[-f <file name> | -r <directory name>\] -a <app name> \[ -v <app version> \]
-```
+    
+    ```
+    java -jar mfcli.jar lock-app -u <user> -p <password> -au <Identity URL> -cu <Console URL> [-f <file name> | -r <directory name>] -a <app name> [ -v <app version> ]
+    ```
     
     For example,
     
-```
-java -jar mfcli.jar lock-app -u abc@voltmx.com -p password -au http://10.10.24.79:8080 -cu http://10.10.24.78:8081 -f "C:\\\\tmp\\\\Sample.zip" -a MyApp -v 2.0
-```
+    ```
+    java -jar mfcli.jar lock-app -u abc@voltmx.com -p password -au http://10.10.24.79:8080 -cu http://10.10.24.78:8081 -f "C:\\tmp\\Sample.zip" -a MyApp -v 2.0
+    ```
     
     For more information on MFCLI commands, refer to [Continuous Integration with VoltMX Foundry](CI_Foundry.md).
