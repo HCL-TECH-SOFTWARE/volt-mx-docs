@@ -1,6 +1,4 @@
-﻿        
-                            
-Label Properties
+﻿Label Properties
 ================
 
 The basic properties for Label widget are:
