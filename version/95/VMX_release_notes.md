@@ -345,32 +345,32 @@ It is now possible to conduct cross-application testing in situations where deve
 To this end, the following APIs have been introduced.
 
 
-* [voltmx.automation.getParentInfo](./Iris/iris_api_dev_guide/content/voltmx.automation_namespace.md#cross-app-testing-apis)
-* [voltmx.automation.launchApp](./Iris/iris_api_dev_guide/content/voltmx.automation_namespace.md#cross-app-testing-apis)
-* [voltmx.automation.sendEvent](./Iris/iris_api_dev_guide/content/voltmx.automation_namespace.md#cross-app-testing-apis)
-* [voltmx.automation.sendEventToParent](./Iris/iris_api_dev_guide/content/voltmx.automation_namespace.md#cross-app-testing-apis)
-* [voltmx.automation.waitForEvent](./Iris/iris_api_dev_guide/content/voltmx.automation_namespace.md#cross-app-testing-apis)
+* [voltmx.automation.getParentInfo](./Iris/iris_api_dev_guide/content/voltmx.automation_namespace.md#getParentInfo)
+* [voltmx.automation.launchApp](./Iris/iris_api_dev_guide/content/voltmx.automation_namespace.md#launchApp)
+* [voltmx.automation.sendEvent](./Iris/iris_api_dev_guide/content/voltmx.automation_namespace.md#sendEvent)
+* [voltmx.automation.sendEventToParent](./Iris/iris_api_dev_guide/content/voltmx.automation_namespace.md#sendEventToParent)
+* [voltmx.automation.waitForEvent](./Iris/iris_api_dev_guide/content/voltmx.automation_namespace.md#waitForEvent)
 
 #### Support for Page Object Models
 
 Support for Page Object Models (POM) has been added in the Jasmine Test Automation Framework. A Page Object is a JSON Object that contains information about all the elements (widgets) present on a particular Page (Form, Component, or Template).
 
-In addition, the [voltmx.automation.pageObjectModel.getPageObjects API](./Iris/iris_api_dev_guide/content/voltmx.automation_namespace.html#getPageObjects#voltmxautomation-namespace) has been added to retrieve and return the specified Page Objects after deploying the Page Object Model files.
+In addition, the [voltmx.automation.pageObjectModel.getPageObjects API](./Iris/iris_api_dev_guide/content/voltmx.automation_namespace.html#getPageObjects) has been added to retrieve and return the specified Page Objects after deploying the Page Object Model files.
 
 #### Automation APIs for Gestures
 
 Support for the following Automation APIs for Gestures on the Android platform:
 
-* [voltmx.automation.gesture.swipe API](./Iris/iris_api_dev_guide/content/voltmx.automation_namespace.md#low-level-touch-and-gesture-apis)
-* [voltmx.automation.gesture.tap API](./Iris/iris_api_dev_guide/content/voltmx.automation_namespace.md#low-level-touch-and-gesture-apis))
+* [voltmx.automation.gesture.swipe API](./Iris/iris_api_dev_guide/content/voltmx.automation_namespace.md#gestureswipe)
+* [voltmx.automation.gesture.tap API](./Iris/iris_api_dev_guide/content/voltmx.automation_namespace.md#gesturetap)
 
 #### Automation API Enhancements
 
  The following APIs have been added:
 
-* [voltmx.automation.actionSheet.click](./Iris/iris_api_dev_guide/content/voltmx.automation_namespace.md#Platform Availability)
-* [voltmx.automation.isLoadingScreenVisible](./Iris/iris_api_dev_guide/content/voltmx.automation_namespace.md#Platform Availability)
-* [voltmx.automation.waitForLoadingScreenToDismiss](./Iris/iris_api_dev_guide/content/voltmx.automation_namespace.md#Platform Availability)
+* [voltmx.automation.actionSheet.click](./Iris/iris_api_dev_guide/content/voltmx.automation_namespace.md#actionSheetclick)
+* [voltmx.automation.isLoadingScreenVisible](./Iris/iris_api_dev_guide/content/voltmx.automation_namespace.md#isLoadingScreenVisible)
+* [voltmx.automation.waitForLoadingScreenToDismiss](./Iris/iris_api_dev_guide/content/voltmx.automation_namespace.md#waitForLoadingScreenToDismiss)
 
 </details>
 
