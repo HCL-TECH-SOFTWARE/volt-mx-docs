@@ -12,8 +12,8 @@ From VoltMX Foundry V9 SP3, MFCLI now the supports **Version Upgrade**. This fea
 
 MFCLI is enhanced with the `app-upgrade` and `service-upgrade` commands. Using these, you can upgrade a version of an app zip or a service zip to higher versions as required.  These commands are applicable only to those services which support versioning.
 
-For more information on how to version a Foundry API, refer to [VoltMX Foundry API Versioning](https://docs.voltmx.com/voltmxlibrary/voltmxfoundry/voltmx_foundry_user_guide/Default.md#API_Versioning.html)  
-For more information on how to version a Foundry App, refer to [VoltMX Foundry Application Versioning](https://docs.voltmx.com/voltmxlibrary/voltmxfoundry/voltmx_foundry_user_guide/Default.md#App_Versioning.html)
+For more information on how to version a Foundry API, refer to [VoltMX Foundry API Versioning](API_Versioning.md)  
+For more information on how to version a Foundry App, refer to [VoltMX Foundry Application Versioning](App_Versioning.md)
 
 Prerequisites
 -------------
@@ -30,63 +30,83 @@ When you upgrade a Foundry app, a new version of the app.zip is created in your 
 
 The following table details a sample app with services, and the result of the app-upgrade command.
 
+
+<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');width: 870px;" class="TableStyle-TemenosTables" cellspacing="0">
+<colgroup><col class="TableStyle-TemenosTables-Column-Column1" style="width: 334px;">
+    
+<col class="TableStyle-TemenosTables-Column-Column1" style="width: 532px;">
+    
+</colgroup><thead>
+        <tr class="TableStyle-TemenosTables-Head-Header1">
+            <th class="TableStyle-TemenosTables-HeadE-Column1-Header1" scope="col">Sample Foundry App has services with versions</th>
+            <th class="TableStyle-TemenosTables-HeadD-Column1-Header1" scope="col">App-upgrade to a Major Version</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="TableStyle-TemenosTables-Body-Body1">
+            <td class="TableStyle-TemenosTables-BodyE-Column1-Body1" style="text-align: center;" rowspan="3">
+                <p style="text-align: left;">App v3.0</p>
+                <ul>
+                    <li style="text-align: left;">IdentityService </li>
+                    <li style="text-align: left;">IntegrationServiceOne v3.0 </li>
+                    <li style="text-align: left;">IntegrationServiceTwo v4.1 </li>
+                    <li style="text-align: left;">ObjectServiceOne v6.0 </li>
+                </ul>
+            </td>
+            <td class="TableStyle-TemenosTables-BodyD-Column1-Body1" style="text-align: center;">
+                <p style="text-align: left;">App v4.0</p>
+                <ul>
+                    <li style="text-align: left;">IdentityService</li>
+                    <li style="text-align: left;">IntegrationServiceOne v4.0</li>
+                    <li style="text-align: left;"> IntegrationServiceTwo v5.0</li>
+                    <li style="text-align: left;"> ObjectServiceOne v7.0</li>
+                </ul>
+            </td>
+        </tr>
+        <tr class="TableStyle-TemenosTables-Body-Body1" style="height: 5px;">
+            <td class="TableStyle-TemenosTables-BodyD-Column1-Body1" style="text-align: left;"><b>App-upgrade to a Minor Version</b></td>
+        </tr>
+        <tr class="TableStyle-TemenosTables-Body-Body1">
+            <td class="TableStyle-TemenosTables-BodyA-Column1-Body1" style="text-align: center;">
+                <p style="text-align: left;">App v3.1<br><br></p>
+                <ul>
+                    <li style="text-align: left;">IdentityService</li>
+                    <li style="text-align: left;">IntegrationServiceOne v3.1</li>
+                    <li style="text-align: left;">IntegrationServiceTwo v4.2</li>
+                    <li style="text-align: left;">ObjectServiceOne v6.1</li>
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>
  
-| Sample Foundry App has services with versions | App-upgrade to a Major Version |
-| --- | --- |
-| 
-App v3.0
-
-*   IdentityService
-*   IntegrationServiceOne v3.0
-*   IntegrationServiceTwo v4.1
-*   ObjectServiceOne v6.0
-
- | 
-
-App v4.0
-
-*   IdentityService
-*   IntegrationServiceOne v4.0
-*   IntegrationServiceTwo v5.0
-*   ObjectServiceOne v7.0
-
- |
-| App-upgrade to a Minor Version |
-| 
-
-App v3.1  
-
-*   IdentityService
-*   IntegrationServiceOne v3.1
-*   IntegrationServiceTwo v4.2
-*   ObjectServiceOne v6.1
-
- |
-
 Use the following command to upgrade the app.zip. An output app.zip file with the new version (upgrade app zip from the previous version of the app) is created.
 
+For Cloud environment:
+
 ```
-For Cloud environment,  
  java -jar mfcli.jar app-upgrade -u <user> -p <password> -t <account id> -clurl <cloud url> -r <output-directory> -a <app name> -v <app version> -ut <major/minor> -to <timeout in mins>  
 ```
+
+For on-premise installation:
+
 ```
-For on-premise installation,
  java -jar mfcli.jar app-upgrade -u <user> -p <password> -au <Identity URL> -cu <Console URL> -r <output-directory> -a <app name> -v <app version> -ut <major/minor> -to <timeout in mins>
 ```
 
-*   \-t, --account: 9 digit id of the VoltMX Cloud account (visible in top right corner in Console) for e.g. 100054321. Not relevant for an on-premise installation.
+*   \-t, --account: 9 digit id of the VoltMX Cloud account (visible in top right corner in Console), for example, 100054321. Not relevant for an on-premise installation.
     
 *   \* -a, --app: Name of the app which needs to be upgraded
     
 *   \-clurl, --cloud-url: URL of cloud instance Default: <empty string>
     
-*   \-cu, --console: URL of VoltMX Foundry Console (without context path), relevant for on-premise installation only. For e.g. http://10.10.24.78:8081
+*   \-cu, --console: URL of VoltMX Foundry Console (without context path), relevant for on-premise installation only. For example, `http://10.10.24.78:8081`.
     
-*   \-r, --directory: Name of the directory to export to or import from. For e.g. C:\\\\src\\\\Sample. Either -f or -r has to be specified.
+*   \-r, --directory: Name of the directory to export to or import from. For example, C:\\\\src\\\\Sample. Either -f or -r has to be specified.
     
-*   \-f, --file: Name of the file to export or import. For e.g. C:\\\\tmp\\\\Sample.zip. Either -f or -r has to be specified.
+*   \-f, --file: Name of the file to export or import. For example, C:\\\\tmp\\\\Sample.zip. Either -f or -r has to be specified.
     
-*   \-au, --identity: URL of VoltMX Foundry Identity Services (without context path), relevant for on-premise installation only. For e.g. http://10.10.24.79:8080
+*   \-au, --identity: URL of VoltMX Foundry Identity Services (without context path), relevant for on-premise installation only. For example, `http://10.10.24.79:8080`.
     
 *   \--mfa: If specified, multi-factor authentication is enabled. The secret key for multi-factor authentication required for generating one time password (OTP) needs to be specified in the properties file. Default: false
     
@@ -100,7 +120,7 @@ For on-premise installation,
         
     *   `-ut minor` generates an upgraded zip to the nearest minor version. All services in zip will be upgraded to their nearest minor version
         
-*   \-u, --user: VoltMX user required for authentication, for e.g. abc@voltmx.com. This is mandatory.
+*   \-u, --user: VoltMX user required for authentication, for example, abc@voltmx.com. This is mandatory.
     
 *   \* -v, --version: Version of the app which needs to be upgraded
     
@@ -120,40 +140,61 @@ When you upgrade a Foundry service version, a new version of the service.zip is 
 
 For example, the following table details a sample service zip version, and the result of the service-upgrade command.
 
- 
-| Sample Foundry Service Version | Service-upgrade to a Major Version |
-| --- | --- |
-| 
-Service v1.1
-
- | Service v2.0 |
-| Service-upgrade to a Minor Version |
-| Service v1.2 |
+<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');width: 653px;" class="TableStyle-TemenosTables" cellspacing="0">
+<colgroup><col class="TableStyle-TemenosTables-Column-Column1" style="width: 194px;">
+    
+<col class="TableStyle-TemenosTables-Column-Column1" style="width: 217px;">
+    
+</colgroup><thead>
+        <tr class="TableStyle-TemenosTables-Head-Header1">
+            <th style="font-size: 11pt;" class="TableStyle-TemenosTables-HeadE-Column1-Header1" scope="col">Sample Foundry Service Version</th>
+            <th class="TableStyle-TemenosTables-HeadD-Column1-Header1" style="font-size: 11pt;" scope="col">Service-upgrade to a Major Version</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="TableStyle-TemenosTables-Body-Body1">
+            <td class="TableStyle-TemenosTables-BodyE-Column1-Body1" style="text-align: center;" rowspan="3">
+                <p rowspan="5" style="text-align: left;">Service v1.1 </p>
+            </td>
+            <td class="TableStyle-TemenosTables-BodyD-Column1-Body1" style="text-align: left;">Service v2.0</td>
+        </tr>
+        <tr class="TableStyle-TemenosTables-Body-Body1">
+		    <td class="TableStyle-TemenosTables-BodyD-Column1-Body1" style="text-align: left;"><b>Service-upgrade to a Minor Version</b></td>
+            </th>
+        </tr>
+        <tr class="TableStyle-TemenosTables-Body-Body1">
+            <td class="TableStyle-TemenosTables-BodyA-Column1-Body1" style="text-align: left;">Service v1.2</td>
+        </tr>
+    </tbody>
+</table>
 
 Use the following command to upgrade the service.zip. An output zip file with new version (upgrade service zip from the previous version of the service) is created.
 
+For Cloud environment:
+
 ```
-For Cloud environment,  
  java -jar mfcli.jar service-upgrade -u <user> -p <password> -t <account id> -clurl <cloud url> -r <output-directory> -s <service name> -v <service version> -ut <major/minor> -to <timeout in mins>
 ```
+
+For on-premise environment:
+
 ```
-For on-premise environment,  
  java -jar mfcli.jar service-upgrade -u <user> -p <password> -au <Identity URL> -cu <Console URL> -r <output-directory> -s <service name> -v <service version> -ut <major/minor> -to <timeout in mins>
 ```
 
-*   \-t, --account: 9 digit id of the VoltMX Cloud account (visible in top right corner in Console) for e.g. 100054321. Not relevant for an on-premise installation.
+*   \-t, --account: 9 digit id of the VoltMX Cloud account (visible in top right corner in Console), for example, 100054321. Not relevant for an on-premise installation.
     
 *   \* -a, --app: Name of the app which needs to be upgraded
     
 *   \-clurl, --cloud-url: URL of cloud instance Default: <empty string>
     
-*   \-cu, --console: URL of VoltMX Foundry Console (without context path), relevant for on-premise installation only. For e.g. http://10.10.24.78:8081
+*   \-cu, --console: URL of VoltMX Foundry Console (without context path), relevant for on-premise installation only. For example, `http://10.10.24.78:8081`.
     
-*   \-r, --directory: Name of the directory to export to or import from. For e.g. C:\\\\src\\\\Sample. Either -f or -r has to be specified.
+*   \-r, --directory: Name of the directory to export to or import from. For example, C:\\\\src\\\\Sample. Either -f or -r has to be specified.
     
-*   \-f, --file: Name of the file to export or import. For e.g. C:\\\\tmp\\\\Sample.zip. Either -f or -r has to be specified.
+*   \-f, --file: Name of the file to export or import. For example, C:\\\\tmp\\\\Sample.zip. Either -f or -r has to be specified.
     
-*   \-au, --identity: URL of VoltMX Foundry Identity Services (without context path), relevant for on-premise installation only. For e.g. http://10.10.24.79:8080
+*   \-au, --identity: URL of VoltMX Foundry Identity Services (without context path), relevant for on-premise installation only. For example, `http://10.10.24.79:8080`.
     
 *   \--mfa: If specified, multi-factor authentication is enabled. The secret key for multi-factor authentication required for generating one time password (OTP) needs to be specified in the properties file. Default: false
     
@@ -168,9 +209,9 @@ For on-premise environment,
         
     *   `-ut minor` generates an upgraded zip to the nearest minor version. All services in zip will be upgraded to their nearest minor version
         
-*   \-u, --user: VoltMX user required for authentication, for e.g. abc@voltmx.com. This is mandatory.
+*   \-u, --user: VoltMX user required for authentication, for example, `abc@voltmx.com`. This is mandatory.
     
 *   \* -v, --version: Version of the app which needs to be upgraded
     
 
-If the Foundry service has versions v1.0, v2.0, and v3.0 configured in the same account, and when you try to update any of these versions to a major upgrade, the service is upgraded to the next available higher version. In this case, the Service v4.0.
+> **Note:** If the Foundry service has versions v1.0, v2.0, and v3.0 configured in the same account, and when you try to update any of these versions to a major upgrade, the service is upgraded to the next available higher version. In this case, the Service v4.0.
