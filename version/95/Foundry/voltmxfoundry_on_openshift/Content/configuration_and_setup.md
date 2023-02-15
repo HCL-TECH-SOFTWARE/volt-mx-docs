@@ -23,7 +23,7 @@
 For more information about the properties, refer to the following section.
 
 
-<details close markdown="block"><summary>config.properties</summary>
+<details close markdown="block"><summary id="config-properties">config.properties</summary>
 
 1.  **INSTALL_ENV_NAME**: The install environment name must be a in string value in lowercase. For example: `dev`, `qa`, `prod`, or `eastusprod`.
 2.  **VOLTMX_FOUNDRY_BUILD_VER**: The build version of Foundry that you want to install. While upgrading, this specifies the build version to which you want to upgrade.
@@ -37,7 +37,7 @@ For more information about the properties, refer to the following section.
     *   MESSAGING_ENABLED
     *   CONSOLE_ENABLED
     *   APIPORTAL_ENABLED
-5.  **Application Server Details**
+5.  **Application Server Details**  <a id="Application-Server-Details"></a> 
     *   **SERVER_DOMAIN_NAME**: The **Domain Name** for Volt MX Foundry. This value should be the hostname of the LoadBalancer. For example: abc.companyname (DNS name).
     *   **COM_PROTOCOL**: The communication protocol for Volt MX Foundry. This value can be either http or https.
     *   **PASSTHROUGH_ENABLED**: Enables HTTPS passthrough mode while creating routes from the OpenShift Console.    
@@ -176,6 +176,24 @@ After you update the `config.properties` file, follow these steps to deploy Volt
     </ul>
   </li>
 </ol>  
+
+
+### <a name="ConfigurePassthroughRoutes"></a>Configure Passthrough Routes
+
+To configure the passthrough, you need to create a secure route for the Foundry component. To do so, follow these steps:
+
+1. On the **Create Route** page, configure details for the Foundry component.
+   ![](Resources/Images/createRoute_field.png)
+
+    > **_Note:_** The details in the screenshot are specific to the API Portal component and use a specific domain. Make sure that you change the details for other routes. For more information, refer to [Context paths and Service Names for Fabric components](#Context).  
+
+
+2. Under **Security**, select the **Secure Route** check box.
+
+3. From the **TLS termination** list, select **Passthrough**.
+    ![](Resources/Images/createRoute_security.png)
+
+4. Provide the required values in the [Application Server Details](#Application-Server-Details) section of the [config.properties](#config-properties) file.
 
 
 ### <a name="Context"></a>Context paths and Service Names for Foundry components
