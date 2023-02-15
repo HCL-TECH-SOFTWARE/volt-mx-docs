@@ -71,7 +71,7 @@ voltmx.automation.button.click(["Login Page", "userwidget1", "btnLogin"]);
 
 The voltmx.automation Namespace comprises the following Widget APIs.
 
-<details close markdown="block"><summary>voltmx.automation.actionSheet.click</summary> 
+<details close markdown="block"><summary id="actionSheetclick">voltmx.automation.actionSheet.click</summary> 
 
 * * *
 
@@ -1074,7 +1074,7 @@ None
 * * *
 </details>
 
-<details close markdown="block"><summary>voltmx.automation.gesture.swipe</summary>
+<details close markdown="block"><summary id="gestureswipe">voltmx.automation.gesture.swipe</summary>
 
 * * *
 
@@ -1146,7 +1146,7 @@ voltmx.automation.gesture.swipe(["Home Page", "appMenuOption2"], {
 * * *
 </details>
 
-<details close markdown="block"><summary>voltmx.automation.gesture.tap</summary>
+<details close markdown="block"><summary id="gesturetap">voltmx.automation.gesture.tap</summary>
 
 * * *
 
@@ -1348,7 +1348,7 @@ For Example, `[ [“Form1”, “bnt1”], [“Form2”, “btn2”] ]`
 * * *
 
 </details>
-<details close markdown="block"><summary>voltmx.automation.playback.isLoadingScreenVisible</summary>
+<details close markdown="block"><summary id="isLoadingScreenVisible">voltmx.automation.playback.isLoadingScreenVisible</summary>
 
 * * *
 
@@ -1479,7 +1479,7 @@ Returns false if the wdget is not found within the timeout period.
 * * *
 
 </details>
-<details close markdown="block"><summary>voltmx.automation.playback.waitForLoadingScreenToDismiss</summary>
+<details close markdown="block"><summary id="waitForLoadingScreenToDismiss">voltmx.automation.playback.waitForLoadingScreenToDismiss</summary>
 
 * * *
 
