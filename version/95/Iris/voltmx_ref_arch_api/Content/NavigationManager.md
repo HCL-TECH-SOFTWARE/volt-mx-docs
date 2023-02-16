@@ -30,7 +30,7 @@ The Syntax of the `NavigationModel.json` file is as follows:
 }
 ```
 
-Forms Object
+### Forms Object
 ------------
 
 The Forms object contains a group of objects that each provide the metadata of individual forms present in the project. Each Form Object contains key-value pairs where the key is the friendly name of the form and the value contains the metadata of the form that provides information about the preconditions and destinations for the specific form.
@@ -84,7 +84,7 @@ In case of intra-app navigation, if you use the voltmx.mvc.navigation API or the
 </details>
 
 
-<details close markdown="block"><summary>destinationConfig</summary>
+<details close markdown="block"><summary id="destinationConfig">destinationConfig</summary>
 
 * * *
 
@@ -107,7 +107,7 @@ In case of one-to-many navigation
 | --- | --- |
 | _appName_ \[String\] \[Mandatory\] | The name of the app in the project to which navigation must be done in case of inter-app navigation. <br/>In case of intra-app navigation, the appName is an optional parameter.
 | _friendlyName_ \[String\] \[Mandatory\] | The friendly name of the target form. |
-| _callback_ \[String\] \[Mandatory\] | The callback parameter specifies the name of the function that must be fetched from the NavigationController. The value of the __[callbackModelConfig](voltmx.mvc NavigationManager.md#callbackModelConfig)__ that is passed in the Navigation Manager APIs is passed to the callback function. The conditional logic is then framed on the value of _callbackModelConfig_ in the callback function, and the _[destinationConfig](#destinationConfig)_ is returned. <br/>The callback parameter is mandatory for one-to-many form navigation.
+| _callback_ \[String\] \[Mandatory\] | The callback parameter specifies the name of the function that must be fetched from the NavigationController. The value of the __callbackModelConfig__ that is passed in the Navigation Manager APIs is passed to the callback function. The conditional logic is then framed on the value of _callbackModelConfig_ in the callback function, and the `destinationConfig` is returned. <br/>The callback parameter is mandatory for one-to-many form navigation.
 | _targetForms_ \[Object\] \[Mandatory\] | An object that contains a list of target forms of the destinationConfig. The destination forms that are returned in the callback function must be present in the list of targetForms. <br/>The targetForms parameter is mandatory for one-to-many form navigation.
 |
 
@@ -134,8 +134,7 @@ The function that is specified in the callback parameter must be present in the 
 
 
 
-Application Object
-------------------
+### Application Object
 
 The preconditions of a micro app are configured in the Application Object. During app navigation, if the target app has preconditions declared, the source app must set the preconditions of the target app by using the Application Manager APIs. and include those preconditions as part of its app data. Therefore, before the navigation action is invoked, the source app must set the mandatory precondition of the target app by using the application manager APIs.
 
@@ -145,7 +144,7 @@ The Syntax of the `Application` Object is as follows:
 "Application": {"preConditionConfig" : [ "" ]},
 ```
 
-Even if the source app does not set the mandatory preconditions of the target app, the navigation is successful if the target app already has the preconditions set in its app data (if the preconditions are already set by another micro app).
+> **Note:** Even if the source app does not set the mandatory preconditions of the target app, the navigation is successful if the target app already has the preconditions set in its app data (if the preconditions are already set by another micro app).
 
 <details close markdown="block"><summary>preConditionConfig</summary>
 
@@ -180,8 +179,7 @@ In case of inter-app navigation, if you use the voltmx.mvc.Navigation API or the
 
 </details>
 
-UIModules Object
-----------------
+### UIModules Object
 
 The UIModules Object contains a group of objects that each provide the metadata of individual MDA modules. Each UIModules Object contains key-value pairs where the key is the name of the MDA module and the value contains the metadata of the MDA modules that provides information about the destinations of the specific MDA module.
 
@@ -216,7 +214,7 @@ Input Parameters
 | --- | --- |
 | _appName_ \[String\] \[Mandatory\] | The name of the app in the project to which navigation must be done in case of inter-app navigation. <br/>In case of intra-app navigation, the appName is an optional parameter. |
 | _friendlyName_ \[String\] \[Mandatory\] | The friendly name of the target form. |
-| _callback_ \[String\] \[Mandatory\] | The callback parameter specifies the name of the function that must be fetched from the NavigationController. The value of the _[callbackModelConfig](voltmx.mvc NavigationManager.md#callbackModelConfig)_ that is passed in the Navigation Manager APIs is passed to the callback function. The conditional logic is then framed on the value of _callbackModelConfig_ in the callback function, and the [destinationConfig](#destinationConfig) is returned. <br/>The callback parameter is mandatory for one-to-many form navigation. |
+| _callback_ \[String\] \[Mandatory\] | The callback parameter specifies the name of the function that must be fetched from the NavigationController. The value of the _callbackModelConfig_ that is passed in the Navigation Manager APIs is passed to the callback function. The conditional logic is then framed on the value of _callbackModelConfig_ in the callback function, and the [destinationConfig](#destinationConfig) is returned. <br/>The callback parameter is mandatory for one-to-many form navigation. |
 | _targetForms_ \[Object\] \[Mandatory\] | An object that contains a list of target forms of the destinationConfig. The destination form that is returned in the callback function must be present in the list of targetForms. <br/>The targetForms parameter is mandatory for one-to-many form navigation. |
 
  
@@ -237,7 +235,7 @@ In case of one-to-one form navigation, you must specify the appName and friendly
 
 In case of one-to-many navigation, in addition to the appName and friendlyName of the form, you must specify the callback and targetForms parameter in the destinationConfig object.
 
-The function that is specified in the callback parameter must be present in the Navigation Controller, and it must return the destinationConfig object.
+> **Note:** The function that is specified in the callback parameter must be present in the Navigation Controller, and it must return the destinationConfig object.
 
 </details>
 
