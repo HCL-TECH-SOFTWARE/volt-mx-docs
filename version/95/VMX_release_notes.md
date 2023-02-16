@@ -361,8 +361,8 @@ In addition, the [voltmx.automation.pageObjectModel.getPageObjects API](./Iris/i
 
 Support for the following Automation APIs for Gestures on the Android platform:
 
-* [voltmx.automation.gesture.swipe API](./Iris/iris_api_dev_guide/content/voltmx.automation_namespace.md#gestureswipe)
-* [voltmx.automation.gesture.tap API](./Iris/iris_api_dev_guide/content/voltmx.automation_namespace.md#gesturetap)
+* [voltmx.automation.gesture.swipe API](./Iris/iris_api_dev_guide/content/voltmx.automation_namespace.md#gesture.swipe)
+* [voltmx.automation.gesture.tap API](./Iris/iris_api_dev_guide/content/voltmx.automation_namespace.md#gesture.tap)
 
 #### Automation API Enhancements
 
