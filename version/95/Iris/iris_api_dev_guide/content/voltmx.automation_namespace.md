@@ -1074,7 +1074,7 @@ None
 * * *
 </details>
 
-<details close markdown="block"><summary id="gestureswipe">voltmx.automation.gesture.swipe</summary>
+<details close markdown="block"><summary id="gesture.swipe">voltmx.automation.gesture.swipe</summary>
 
 * * *
 
@@ -1146,7 +1146,7 @@ voltmx.automation.gesture.swipe(["Home Page", "appMenuOption2"], {
 * * *
 </details>
 
-<details close markdown="block"><summary id="gesturetap">voltmx.automation.gesture.tap</summary>
+<details close markdown="block"><summary id="gesture.tap">voltmx.automation.gesture.tap</summary>
 
 * * *
 
