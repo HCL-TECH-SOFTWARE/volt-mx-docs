@@ -36,7 +36,7 @@ The following steps show how to enable the Engagement component assuming its cur
 differences (add/updates or deletes) to the kubernetes objects. **Note:** Use the atomic option while upgrading which rolls back any changes if the upgrade fails.
 
     <pre><code>
-    $ helm upgrade foundry apps -n foundry --atomic
+    $ helm upgrade foundry apps -f values.yaml -n foundry --atomic
     Release "foundry" has been upgraded. Happy Helming!
     NAME: foundry
     LAST DEPLOYED: Mon Nov 21 22:23:54 2022
@@ -72,7 +72,7 @@ The following steps show how to enable Ingress if you disabled it to prevent acc
 differences (add/updates or deletes) to the kubernetes objects. **Note:** Use the atomic option while upgrading which rolls back any changes if the upgrade fails.
 
     <pre><code>
-    $ helm upgrade foundry apps -n foundry --atomic
+    $ helm upgrade foundry apps -f values.yaml -n foundry --atomic
     Release "foundry" has been upgraded. Happy Helming!
     NAME: foundry
     LAST DEPLOYED: Mon Nov 21 22:23:54 2022
@@ -84,7 +84,7 @@ differences (add/updates or deletes) to the kubernetes objects. **Note:** Use th
 
 3.  Determine if Ingress is ready for use via the following command: `kubectl get ingress -n foundry`.
 
-    For each Ingress you should see that an address has been assigned.  If there is no address listed, Ingress will not function.  Generally a lack of address means that no ingress controller has determined it should setup the ingress. This is usually caused by incorrectly specifying the `ingress.class` in values.yaml. You can correct this setting, run `helm upgrade foundry apps -n foundry`, and Helm will apply the class name change for you.
+    For each Ingress you should see that an address has been assigned.  If there is no address listed, Ingress will not function.  Generally a lack of address means that no ingress controller has determined it should setup the ingress. This is usually caused by incorrectly specifying the `ingress.class` in values.yaml. You can correct this setting, run `helm upgrade foundry apps -f values.yaml -n foundry`, and Helm will apply the class name change for you.
 
     If the pods are all showing ready and your Ingress shows addresses, you should be ready to open the Foundry Console in your browser. Using the **host name** shown in the output, open the console in your browser.
 

@@ -226,7 +226,7 @@ The following parameters are specified in the values.yaml file within the Helm c
     ....
     </code></pre>
 
- 5. Create the Foundry namespace and make it your current context.  This step is optional but suggested.
+ 5. Create the Foundry namespace and make it your current context.  This step is optional but suggested. **Note:** If you do not create the namespace and make it the current context, you will need to use the option to create the namespace on your first helm command and specify the namespace option on each of your subsequent helm and kubectl commands. The namespace option is shown on the helm commands on the following steps as an example.
 
     <pre><code>
     $ kubectl create namespace foundry
@@ -238,7 +238,7 @@ The following parameters are specified in the values.yaml file within the Helm c
  6. Install the Foundry DB Update application with Helm.
 
     <pre><code>
-    $ helm install dbupdate dbupdate -n foundry
+    $ helm install dbupdate dbupdate -f values.yaml -n foundry
     NAME: dbupdate
     LAST DEPLOYED: Fri Jan 20 08:10:15 2023
     NAMESPACE: foundry
@@ -261,13 +261,20 @@ The following parameters are specified in the values.yaml file within the Helm c
  8. Install the Foundry applications with Helm (make certain step 6 completed successfully).
 
     <pre><code>
-    $ helm install foundry apps -n foundry
+    $ helm install foundry apps -f values.yaml -n foundry
     NAME: foundry
     LAST DEPLOYED: Fri Jan 20 08:21:36 2023
     NAMESPACE: foundry
     STATUS: deployed
     REVISION: 1
     TEST SUITE: None
+    NOTES:
+    Application has been deployed successfully.
+    .
+    .
+    .
+    To verify application is running visit the url below;
+    http://foundry.example.com/mfconsole
     </code></pre>
 
  9. The deployment will take some time.  Container images must be downloaded from the HCL container repository and then started and applications initialized.  You can watch the progress of the deployment with a variety of commands.   The command below watches the pod status and updates the output as the deployment progresses:
@@ -338,7 +345,7 @@ The following parameters are specified in the values.yaml file within the Helm c
     portal                 foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
     </code></pre>
 
-    For each Ingress we should see that an address has been assigned.  If there is no address listed, Ingress will not function.  Generally a lack of address means that no ingress controller has determined it should setup the ingress.  This is usually caused by incorrectly specifying the ingress.class in values.yaml.  You can correct this and then run `helm upgrade foundry apps -n foundry` and Helm will apply the class name change for you.
+    For each Ingress we should see that an address has been assigned.  If there is no address listed, Ingress will not function.  Generally a lack of address means that no ingress controller has determined it should setup the ingress.  This is usually caused by incorrectly specifying the ingress.class in values.yaml.  You can correct this and then run `helm upgrade foundry apps -f values.yaml -n foundry` and Helm will apply the class name change for you.
 
     If the pods are all showing ready and your Ingress shows addresses, you should be ready to open the Foundry Console in your browser.   Using the **host name** shown in the output, open the console in your browser.  From the output above, we would use <http://foundry.apps.dsocp.nonprod.hclpnp.com/mfconsole>.
 
@@ -348,7 +355,7 @@ The Foundry database update job and Foundry applications can be uninstalled with
 
 
 ## Modifying Foundry configuration
-With the exception of database changes (any database related parameters), you can usually modify the values.yaml file and then run `helm upgrade foundry apps -n foundry` and Helm will update configuration and restart any impacted pods.   For instance, if you install foundry but find you failed to properly specify the ingress.class name, you could edit values.yaml, update the ingress.class parameter and then run `helm upgrade foundry apps -n foundry`.  In the event that `helm upgrade` does not work for you, you could uninstall foundry with `helm uninstall foundry -n foundry` and then re-install the Foundry applications.
+With the exception of database changes (any database related parameters), you can usually modify the values.yaml file and then run `helm upgrade foundry apps -f values.yaml -n foundry` and Helm will update configuration and restart any impacted pods.   For instance, if you install foundry but find you failed to properly specify the ingress.class name, you could edit values.yaml, update the ingress.class parameter and then run `helm upgrade foundry apps -f values.yaml -n foundry`.  In the event that `helm upgrade` does not work for you, you could uninstall foundry with `helm uninstall foundry -n foundry` and then re-install the Foundry applications.
 
 
 ## Troubleshooting
