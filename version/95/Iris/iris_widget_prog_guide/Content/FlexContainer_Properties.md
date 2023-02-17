@@ -3234,7 +3234,7 @@ myForm.myFlexContainer.rippleBackground = {
 * * *
 
 </details>
-<details close markdown="block"><summary>shadowColor Property</summary>
+<details close markdown="block"><summary id="shadowColor">shadowColor Property</summary>
 
 * * *
 
@@ -3370,7 +3370,7 @@ Form1.btn1.shadowOffset= {
 * * *
 
 </details>
-<details close markdown="block"><summary>shadowRadius Property</summary>
+<details close markdown="block"><summary id="shadowradius-property">shadowRadius Property</summary>
 
 * * *
 
@@ -3456,11 +3456,68 @@ myForm.myFlexContainer.shadowType = constants.VIEW_BOUNDS_SHADOW;
 
 ```
 
-<b>Example</b>
 
 <b>Platform Availability</b>
 
 *   Android 5.0 and later versions.
+
+* * *
+
+</details>
+<details close markdown="block"><summary id="shouldGroup">shouldGroup Property</summary>
+
+* * *
+
+This property enables the grouping of elements within a FlexContainer widget, to mitigate redundancy while invoking multiple elements that have the same context.
+
+<b>Syntax</b>
+
+```
+
+shouldGroup
+```
+
+<b>Type</b>
+
+Boolean
+
+<b>Read/Write</b>
+
+Read + Write
+
+<b>Remarks</b>
+
+Ensure that Accessibility Config is enabled for the app, before you use the shouldGroup property.
+
+<b>Example</b>
+
+```
+//Sample code to enable the shouldGroup property for a FlexContainer widget.  var flxPagesHdr = new kony.ui.FlexContainer({
+                "autogrowMode": kony.flex.AUTOGROW_NONE,
+                "clipBounds": false,
+                "height": "180dp",
+                "id": "flxPagesHdr",
+                "isVisible": false,
+                "layoutType": kony.flex.FREE_FORM,
+                "left": "-1dp",
+                "isModalContainer": false,
+                "skin": "slFbox0jdc689d7cdb74a",
+                "top": "0dp",
+                "width": "100%",
+                "zIndex": 100,
+                "shouldGroup" : true
+            }, {
+                "paddingInPixel": false
+            }, {});
+
+```
+
+
+<b>Platform Availability</b>
+
+*   Available in the IDE
+*   iOS
+*   Android
 
 * * *
 

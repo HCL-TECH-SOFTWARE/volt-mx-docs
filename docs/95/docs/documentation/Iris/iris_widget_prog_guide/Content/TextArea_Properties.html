@@ -1580,41 +1580,11 @@
     id="__toc"
   />
 
-      
-  <label class="md-nav__link md-nav__link--active" for="__toc">
-    Properties
-    <span class="md-nav__icon md-icon"></span>
-  </label>
-  
+       
   <a href="TextArea_Properties.html" class="md-nav__link md-nav__link--active">
     Properties
   </a>
 
-    
-
-  
-
-<nav class="md-nav md-nav--secondary" aria-label="On this page">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      On this page
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#textarea-properties" class="md-nav__link">
-    TextArea Properties
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
   
 </li>
 
@@ -1845,21 +1815,8 @@
   
   
   
+    
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      On this page
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#textarea-properties" class="md-nav__link">
-    TextArea Properties
-  </a>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -1873,30 +1830,192 @@
                 
 
 
-  <h1>Properties</h1>
-
-<h2 id="textarea-properties"><a id="textarea-properties"></a>TextArea Properties</h2>
+<h1 id="textarea-properties">TextArea Properties</h1>
 <p>The properties for TextArea widget are:</p>
 <hr />
-<p>accessibilityConfig Property</p>
+<details close="close">
+<p><summary>accessibilityConfig Property</summary></p>
 <hr />
+<p>Enables you to control accessibility behavior and alternative text for the widget.</p>
+<p>For more information on using accessibility features in your app, see the <a href="../../app_design_dev/Content/Accessibility_Overview.html">Accessibility</a> appendix in the VoltMX IrisUser Guide.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+accessibilityConfig
+</code></pre>
+<p><b>Type</b></p>
+<p>Object</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<ul>
+<li>The accessibilityConfig property is enabled for all the widgets which are supported under the Flex Layout.</li>
+</ul>
+<blockquote>
+<p><strong><em>Note:</em></strong> From VoltMX Iris V9 SP2 GA version, you can provide i18n keys as values to all the attributes used inside the <code>accessibilityConfig</code> property. Values provided in the i18n keys take precedence over values provided in <code>a11yLabel</code>, <code>a11yValue</code>, and <code>a11yHint</code> fields.</p>
+</blockquote>
+<p>The accessibilityConfig property is a JavaScript object which can contain the following key-value pairs.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+<th>ARIA Equivalent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a11yIndex</td>
+<td>Integer with no floating or decimal number.</td>
+<td>This is an optional parameter. Specifies the order in which the widgets are focused on a screen.</td>
+<td>For all widgets, this parameter maps to the <code>aria-index</code>, <code>index</code>, or <code>taborder</code> properties.</td>
+</tr>
+<tr>
+<td>a11yLabel</td>
+<td>String</td>
+<td>This is an optional parameter. Specifies alternate text to identify the widget. Generally the label should be the text that is displayed on the screen.</td>
+<td>For all widgets, this parameter maps to the <code>aria-labelledby</code> property of ARIA in HTML. <strong><em>Note:</em></strong> For the Image widget, this parameter maps to the <strong>alt</strong> attribute of ARIA in HTML.</td>
+</tr>
+<tr>
+<td>a11yValue</td>
+<td>String</td>
+<td>This is an optional parameter. Specifies the descriptive text that explains the action associated with the widget. On the Android platform, the text specified for a11yValue is prefixed to the a11yHint.</td>
+<td>This parameter is similar to the a11yLabel parameter. If the a11yValue is defined, the value of a11yValue is appended to the value of a11yLabel. These values are separated by a space.</td>
+</tr>
+<tr>
+<td>a11yHint</td>
+<td>String</td>
+<td>This is an optional parameter. Specifies the descriptive text that explains the action associated with the widget. On the Android platform, the text specified for a11yValue is prefixed to the a11yHint.</td>
+<td>For all widgets, this parameter maps to the <code>aria-describedby</code> property of ARIA in HTML.</td>
+</tr>
+<tr>
+<td>a11yHidden</td>
+<td>Boolean</td>
+<td>This is an optional parameter. Specifies if the widget should be ignored by assistive technology. The default option is set to <em>false</em>. This option is supported on iOS 5.0 and above, Android 4.1 and above, and SPA</td>
+<td>For all widgets, this parameter maps to the <code>aria-hidden</code> property of ARIA in HTML.</td>
+</tr>
+<tr>
+<td>a11yARIA</td>
+<td>Object</td>
+<td>This is an optional parameter. For each widget, the key and value provided in this object are added as the attribute and value of the HTML tags respectively. Any values provided for attributes such as <code>aria-labelledby</code> and <code>aria-describedby</code> using this attribute, takes precedence over values given in <code>a11yLabel</code> and <code>a11yHint</code> fields. When a widget is provided with the following key value pair or attribute using the a11yARIA object, the tabIndex of the widget is automatically appended as zero.<code>{"role": "main"}``aria-label</code></td>
+<td>This parameter is only available on the Desktop Web platform.</td>
+</tr>
+</tbody>
+</table>
+<p>Android limitations</p>
+<ul>
+<li>If the results of the concatenation of a11y fields result in an empty string, then <code>accessibilityConfig</code> is ignored and the text that is on widget is read out.</li>
+<li>The soft keypad does not gain accessibility focus during the right/left swipe gesture when the keypad appears.</li>
+</ul>
+<p>SPA/Desktop Web limitations</p>
+<ul>
+<li>When <code>accessibilityConfig</code> property is configured for any widget, the <code>tabIndex</code> attribute is added automatically to the <code>accessibilityConfig</code> property.</li>
+<li>The behavior of accessibility depends on the Web browser, Web browser version, Voice Over Assistant, and Voice Over Assistant version.</li>
+<li>Currently SPA/Desktop web applications support only a few ARIA tags. To achieve more accessibility features, use the attribute a11yARIA. The corresponding tags will be added to the DOM as per these configurations.</li>
+</ul>
+<p><b>Example 1</b></p>
+<p>This example uses the button widget, but the principle remains the same for all widgets that have an accessibilityConfig property.</p>
+<pre><code>//This is a generic property that is applicable for various widgets.
+//Here, we have shown how to use the accessibilityConfig Property for button widget.
+/*You need to make a corresponding use of the accessibilityConfig property for other applicable widgets.*/
+
+Form1.myButton.accessibilityConfig = {
+    &quot;a11yLabel&quot;: &quot;Label&quot;,
+    &quot;a11yValue&quot;: &quot;Value&quot;,
+    &quot;a11yHint&quot;: &quot;Hint&quot;    
+};
+</code></pre>
+<p><b>Example 2</b></p>
+<p>This example uses the button widget to implement internationalization in <code>accessibilityConfig</code> property, but the principle remains the same for all widgets.</p>
+<pre><code>/*Sample code to implement internationalization in accessibilityConfig property in Native platform.*/
+
+Form1.myButton.accessibilityConfig = {
+    &quot;a11yLabel&quot;: voltmx.i18n.getLocalizedString(&quot;key1&quot;)     
+};  
+/*Sample code to implement internationalization in accessibilityConfig property in Desktop Web platform.*/
+
+Form1.myButton.accessibilityConfig = {
+    &quot;a11yLabel&quot;: &quot;voltmx.i18n.getLocalizedString(\&quot;key3\&quot;)&quot;
+};
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Available in the IDE</li>
+<li>iOS, Android, SPA, and Desktop Web</li>
+</ul>
 <hr />
-<p>activeStateSkin Property</p>
+</details>
+<details close="close">
+<p><summary>activeStateSkin Property</summary></p>
 <hr />
+<p>Specifies the look and feel of a widget when the widget is in focus.
+When the activeStateSkin property is configured for a widget, the activeStateSkin is applied to the widget when a user focuses on the widget (either by using the TAB key, mouse-click, or by using the setActive API programmatically).</p>
+<p><b>Syntax</b></p>
+<pre><code>
+activeStateSkin
+</code></pre>
+<p><b>Type</b></p>
+<p>String</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<p>If a widget has the activeStateSkin, focusSkin, and the hoverSkin properties configured, the skins are applied based on the mouse-action performed on the widget:</p>
+<ul>
+<li>The <strong>focusSkin</strong> is applied on the mouse-down action on the widget.</li>
+<li>The <strong>hoverSkin</strong> is applied on the mouse-over action on the widget.</li>
+<li>The <strong>activeStateSkin</strong> is applied on the mouse-release action on the widget.</li>
+</ul>
+<p><b>Example</b> </p>
+<p>Setting the activeStateSkin property on an existing widget</p>
+<pre><code>//The Active State Skin is a skin created under the Skins tabfrmButton.myButton.activeStateSkin= 'btnActiveStateSkin';
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Available in the IDE</li>
+<li>Available on the Responsive Web platform</li>
+</ul>
 <hr />
-<p>anchorPoint Property</p>
+</details>
+<details close="close">
+<p><summary>anchorPoint Property</summary></p>
 <hr />
+<p>Specifies the anchor point of the widget bounds rectangle using the widget's coordinate space.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+anchorPoint
+</code></pre>
+<p><b>Type</b></p>
+<p>JSObject</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<p>The value for this property is a JavaScript dictionary object with the keys "x" and "y". The values for the "x" and "y" keys are floating-point numbers ranging from 0 to 1. All geometric manipulations to the widget occur about the specified point. For example, applying a rotation transform to a widget with the default anchor point causes the widget to rotate around its center.</p>
+<p>The default value for this property is center ( {"x":0.5, "y":0.5} ), that represents the center of the widgets bounds rectangle. The behavior is undefined if the values are outside the range zero (0) to one (1).</p>
+<p><b>Example</b></p>
+<pre><code>Form1.widget1.anchorPoint = {
+    &quot;x&quot;: 0.5,
+    &quot;y&quot;: 0.5
+};
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>iOS, Android, Windows, and SPA</li>
+</ul>
 <hr />
-<p>autoCapitalize Property</p>
+</details>
+<details close="close">
+<p><summary>autoCapitalize Property</summary></p>
 <hr />
 <p>Specifies the character capitalization behavior.</p>
-<p>Syntax</p>
-<p>autoCapitalize</p>
-<p>Type</p>
+<p><b>Syntax</b></p>
+<pre><code>
+autoCapitalize
+</code></pre>
+<p><b>Type</b></p>
 <p>Number</p>
-<p>Read/Write</p>
+<p><b>Read/Write</b></p>
 <p>Read + Write</p>
-<p>Remarks</p>
+<p><b>Remarks</b></p>
 <p>The default value for this property is TEXTAREA_AUTO_CAPITALIZE_NONE.</p>
 <p>For Desktop Web platform, autoCapitalize property is not supported, use the events <a href="TextArea_Events.html">onBeginEditing, onEndEditing, onKeyUp, and onKeyDown, and onDone</a> as necessary.</p>
 <p>Following are the options available:</p>
@@ -1918,292 +2037,825 @@
     Example:THIS IS SAMPLE TEXT.</p>
 </li>
 </ul>
-<p>Example</p>
-<pre><code>/\*Defining properties for a TextArea with the 
-autoCapitalize:constants.TEXTAREA\_AUTO\_CAPITALIZE\_ALL\*/
-var tAreaBasic = {
-    id: &quot;txtArea&quot;,
-    text: &quot;Text&quot;,
-    isVisible: true,
-    secureTextEntry: true,
-    autoCapitalize: constants.TEXTAREA\_AUTO\_CAPITALIZE\_ALL
-};
-
-var tAreaLayout = {
-    padding: \[5, 5, 5, 5\],
-    margin: \[5, 5, 5, 5\],
-    containerWeight: 100,
-    hExpand: true,
-    widgetAlignment: constants.WIDGET\_ALIGN\_TOP\_LEFT
-};
-
-var tAreaPSP = {};
-
-//Creating the TextArea.
-var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
-
-//Reading the autoCapitalize of the TextArea
-alert(&quot;TextArea autoCapitalize ::&quot; + txtArea.autoCapitalize);
-</code></pre>
+<p><b>Example</b></p>
 <pre><code>//Sample code to set the autoCapitalize property of TextArea widget.
 
-frmTxtArea.myTxtArea.autoCapitalize=constants.TEXTAREA\_AUTO\_CAPITALIZE\_ALL;
+frmTxtArea.myTxtArea.autoCapitalize=constants.TEXTAREA_AUTO_CAPITALIZE_ALL;
 </code></pre>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Available in the IDE</li>
 <li>Available on all platforms</li>
 <li>Available on the Desktop Web, SPA</li>
 </ul>
 <hr />
-<p>autoCorrect Property</p>
+</details>
+<details close="close">
+<p><summary>autoCorrect Property</summary></p>
 <hr />
 <p>This property determines whether auto-correction is enabled or disabled during typing.</p>
-<p>Syntax</p>
-<p>autoCorrect</p>
-<p>Type</p>
+<p><b>Syntax</b></p>
+<pre><code>
+autoCorrect
+</code></pre>
+<p><b>Type</b></p>
 <p>Boolean</p>
-<p>Read/Write</p>
+<p><b>Read/Write</b></p>
 <p>Read + Write</p>
-<p>Remarks</p>
+<p><b>Remarks</b></p>
 <p>With auto-correction enabled, the text object tracks unknown words and suggests a more suitable replacement candidate to the user, replacing the typed text automatically unless the user explicitly overrides the action.</p>
 <p>The default value for this property is false.</p>
 <ul>
 <li>If set to <em>true</em>, the auto correction option is enabled.</li>
 <li>If set to <em>false</em>, the auto correction option is not enabled.</li>
 </ul>
-<p>Example</p>
-<pre><code>//Defining the properties for a TextArea with autoCorrect:true.
-var tAreaBasic = {
-    id: &quot;txtArea&quot;,
-    skin: &quot;txtSkin&quot;,
-    focusSkin: &quot;txtFSkin&quot;,
-    text: &quot;Text&quot;,
-    maxTextLength: 20,
-    isVisible: true
-};
-
-var tAreaLayout = {
-    padding: \[5, 5, 5, 5\],
-    margin: \[5, 5, 5, 5\],
-    containerWeight: 100,
-    hExpand: true,
-    widgetAlignment: constants.WIDGET\_ALIGN\_TOP\_LEFT
-};
-
-var tAreaPSP = {
-    autoCorrect: true
-};
-
-//Creating the TextArea.
-var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
-</code></pre>
+<p><b>Example</b></p>
 <pre><code>//Sample code to set the autoCorrect property of TextArea widget.
 
 frmTxtArea.myTxtArea.autoCorrect=true;
 </code></pre>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Available in the IDE</li>
 <li>iOS</li>
 </ul>
 <hr />
-<p>autoResize Property</p>
+</details>
+<details close="close">
+<p><summary id="autoResize">autoResize Property</summary></p>
 <hr />
 <p>This property supports dynamic resizing of the TextArea widget until it reaches the specified max height. If the text crosses the maximum height threshold, the TextArea widget displays a scroll bar.</p>
-<p>If you enable the autoResize property, you must set the height property of the TextArea widget to <strong>Preferred</strong>.</p>
-<p>Syntax</p>
-<p>autoResize</p>
-<p>Type</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> If you enable the autoResize property, you must set the height property of the TextArea widget to <strong>Preferred</strong>.</p>
+</blockquote>
+<p><b>Syntax</b></p>
+<pre><code>
+autoResize
+</code></pre>
+<p><b>Type</b></p>
 <p>Boolean</p>
-<p>Read/Write</p>
+<p><b>Read/Write</b></p>
 <p>Read + Write</p>
-<p>Remarks</p>
+<p><b>Remarks</b></p>
 <p>The default value for this property is false.</p>
 <ul>
-<li>If set to <em>true</em>, the auto resize option is enabled.</li>
-<li>If set to <em>false</em>, the auto resize option is not enabled.</li>
+<li>If set to true, the auto resize option is enabled.</li>
+<li>If set to false, the auto resize option is not enabled.</li>
 </ul>
-<p>Limitations</p>
+<p><b>Limitations</b></p>
 <ul>
-<li><strong>Desktop Web</strong>
-If you set the value of the minHeight, maxHeight, or the height parameter to 0, the value is not respected on the Desktop Web platform as every browser has a default minimum value of its own.</li>
+<li>
+<p><strong>Desktop Web</strong>  </p>
+<p>If you set the value of the minHeight, maxHeight, or the height parameter to 0, the value is not respected on the Desktop Web platform as every browser has a default minimum value of its own.</p>
+</li>
 </ul>
-<p>Example</p>
+<p><b>Example</b> </p>
 <pre><code>//Sample code to set the autoResize property of the TextArea widget.
 
 frmTxtArea.myTxtArea.autoResize=true;
 </code></pre>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Android</li>
 <li>iOS</li>
 <li>Desktop Web</li>
 </ul>
 <hr />
-<p>autoSuggestions Property</p>
+</details>
+<details close="close">
+<p><summary>autoSuggestions Property</summary></p>
 <hr />
-<hr />
-<p>backgroundColor Property</p>
-<hr />
-<hr />
-<p>backgroundColorMultiStepGradient Property</p>
-<hr />
-<hr />
-<p>backgroundColorTwoStepGradient Property</p>
-<hr />
-<hr />
-<p>backgroundImage Property</p>
-<hr />
-<hr />
-<p>blockedUISkin Property-Deprecated as per DOC-3942</p>
-<hr />
-<p>Specifies the skin that must be used to block the interface until the action in progress (for example, a service call) is completed.</p>
-<p>Syntax</p>
-<p>blockedUISkin</p>
-<p>Type</p>
-<p>String</p>
-<p>Read/Write</p>
+<p>The autoSuggestions property is used to enable or disable suggestions such as spell checker, predictive text and corrections in the application.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+autoSuggestions
+</code></pre>
+<p><b>Type</b></p>
+<p>Boolean</p>
+<p><b>Read/Write</b></p>
 <p>Read + Write</p>
-<p>Remarks</p>
-<p>For the skin to be available in the list, you must add a skin for Blocked UI under Widget Skins.</p>
-<p>The default value for this property is None (No skin is applied).</p>
-<p>To specify a skin, select a skin from the list.</p>
-<p>Example</p>
-<pre><code>//Defining the properties for a TextArea with blockedUISkin:&quot;blockedUISkin&quot;.
-var tAreaBasic = {
-    id: &quot;txtArea&quot;,
-    skin: &quot;txtSkin&quot;,
-    focusSkin: &quot;txtFSkin&quot;,
-    text: &quot;Text&quot;,
-    isVisible: true
-};
-
-var tAreaLayout = {
-    padding: \[5, 5, 5, 5\],
-    margin: \[5, 5, 5, 5\],
-    containerWeight: 100,
-    hExpand: true,
-    widgetAlignment: constants.WIDGET\_ALIGN\_TOP\_LEFT
-};
-
-var tAreaPSP = {
-    blockedUISkin: &quot;blockedUISkin&quot;
-};
-
-/\*Creating the TextArea.var txtArea = new voltmx.ui.TextArea2(tAreaBasic,
-tAreaLayout, tAreaPSP);\*/
-
-//Reading the blockedUISkin of the TextArea.
-alert(&quot;TextArea blockedUISkin ::&quot; + txtArea.blockedUISkin);
+<p><b>Remarks</b></p>
+<p>The default value for this property is true.</p>
+<ul>
+<li>If set to true, the autoSuggestions property is enabled.</li>
+<li>If set to false, the autoSuggestions property is disabled.</li>
+</ul>
+<p>The autoSuggestions property works only when auto suggestion options are enabled in device settings.</p>
+<p>This property works only on devices which have Google keyboard. For example, Google Nexus.</p>
+<p><b>Example</b></p>
+<p>This example uses the textBox widget, but the principle remains the same for all widgets that have an autoSuggestions property.</p>
+<pre><code>//Setting the autoSuggestions property on an existing widget
+Form1.textBox1.autoSuggestions = true;
 </code></pre>
-<pre><code>//Sample code to set the blockedUISkin property of TextArea widget.
-
-frmTxtArea.myTxtArea.blockedUISkin=&quot;blockUISkin&quot;;
-</code></pre>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Available in the IDE</li>
-<li>SPA</li>
+<li>Android</li>
 </ul>
 <hr />
-<p>borderColor Property</p>
+</details>
+<details close="close">
+<p><summary>backgroundColor Property</summary></p>
 <hr />
+<p>Specifies the background color of the widget.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+backgroundColor
+</code></pre>
+<p><b>Type</b></p>
+<p>Color constant or Hexadecimal number</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<ul>
+<li>The initial value of backgroundColor has to be specified explicitly. If not, Iris will not deduce the values from the existing skin and this will lead to undefined behavior.</li>
+<li>Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.</li>
+<li>When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).<br />
+    For example, red complete opaque is FF000000. Red complete transparent is FF000065. The values 0x and # are not allowed in the string.</li>
+<li>A color constant is a String that is defined at the theme level. Ensure that you append the <strong>$</strong> symbol at the beginning of the color constant.</li>
+<li>This property does not have a default value.</li>
+<li>This property has more priority than (and overrides) the background property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.</li>
+<li>The backgroundColor, backgroundColorTwoStepGradient, backgroundColoMultiStepGradient, and backgroundImage properties are mutually exclusive. The property that was set most recently is given higher priority over other properties.</li>
+</ul>
+<p><b>Example</b></p>
+<p>This example uses the button widget, but the principle remains the same for all widgets that have the backgroundColor property.</p>
+<pre><code>Form1.btn1.backgroundColor = &quot;ea5075&quot;;
+
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Android</li>
+<li>iOS</li>
+<li>Desktop Web (Not available on Desktop Web Legacy SDK)</li>
+</ul>
 <hr />
-<p>borderColorGradient Property</p>
+</details>
+<details close="close">
+<p><summary>backgroundColorMultiStepGradient Property</summary></p>
 <hr />
+<p>Specifies the multi-step gradient color for the background of the widget.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+backgroundColorMultiStepGradient
+</code></pre>
+<p><b>Type</b></p>
+<p>JSON Object</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p>Input Parameters</p>
+<ul>
+<li>
+<p><strong>gradientType</strong> [Constant]: Specifies the configuration type of the gradient. This parameter can have the following constant values:</p>
+<ul>
+<li><code>voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_TOP</code>: Constant for the gradient type toTop.</li>
+<li><code>voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_RIGHT</code>: Constant for the gradient type toRight.</li>
+<li><code>voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_BOTTOM</code>: Constant for the gradient type toBottom.</li>
+<li><code>voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_LEFT</code>: Constant for the gradient type toLeft.</li>
+<li><code>voltmx.skin.MULTI_STEP_GRADIENT_TYPE_CUSTOM</code>: Constant for the gradient type custom.<br />
+    For the custom gradient type, you must specify the angle by using the <a href="#angle">angle</a> property.</li>
+<li><strong>angle</strong> [Number]: Specifies the angle for the gradient in degrees, counted counter-clockwise. This property is only applicable for the custom gradient type.</li>
+<li><strong>colors</strong> [Array]: Specifies the colors for the multi-step gradient. Colors is an array of color hex values that indicate the reference color values of the gradient. This parameter contains an array of hexadecimal numbers that represent the colors or constants defined at the theme level.</li>
+<li><strong>colorStops</strong> [Array]: Specifies the color stops for the multi-step gradient. Color Stops are the locations of the reference colors on the gradient, from 0 (the start of the gradient) to 100 (the final value of the gradient). This parameter contains an array of numbers that represent the color stops.</li>
+</ul>
+</li>
+</ul>
+<p><b>Remarks</b></p>
+<ul>
+<li>The default value of the gradientType key is <code>voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_TOP</code>.</li>
+<li>Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.</li>
+<li>When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).<br />
+    For example, red complete opaque is FF000000. Red complete transparent is FF000065. The values 0x and # are not allowed in the string.</li>
+<li>A color constant is a String that is defined at the theme level. Ensure that you append the <strong>$</strong> symbol at the beginning of the color constant.</li>
+<li>This property does not have a default value.</li>
+<li>This property has more priority than (and overrides) the background property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.</li>
+<li>The backgroundColor, backgroundColorTwoStepGradient, backgroundColoMultiStepGradient, and backgroundImage properties are mutually exclusive. The property that was set most recently is given higher priority over other properties.</li>
+</ul>
+<p><b>Example</b></p>
+<p>This example uses the button widget, but the principle remains the same for all widgets that have the backgroundColorMultiStepGradient property.</p>
+<pre><code>Form1.btn1.backgroundColorMultiStepGradient = {
+    &quot;gradientType&quot;: voltmx.skin.MULTI_STEP_GRADIENT_TYPE_CUSTOM  
+    &quot;angle&quot;: 45,
+    &quot;colors&quot;: [&quot;ea5075&quot;, &quot;f1fa70&quot;, &quot;eefd04&quot;],
+    &quot;colorStops&quot;: [0, 90, 100]
+};
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Android</li>
+<li>iOS</li>
+<li>Desktop Web (Not available on Desktop Web Legacy SDK)</li>
+</ul>
 <hr />
-<p>borderStyle Property</p>
+</details>
+<details close="close">
+<p><summary>backgroundColorTwoStepGradient Property</summary></p>
 <hr />
+<p>Specifies the two-step gradient color for the background of the widget.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+backgroundColorTwoStepGradient
+</code></pre>
+<p><b>Type</b></p>
+<p>JSON Object</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p>Input Parameters</p>
+<ul>
+<li>
+<p><strong>topColor</strong> [Constant or Hex]: Specifies the top color of the two-step gradient. The value of this parameter can be a hexadecimal number that represents a color or a constant that is defined at the theme level.</p>
+</li>
+<li>
+<p><strong>bottomColor</strong> [Constant or Hex]:Specifies the bottom color of the two-step gradient. The value of this parameter can be a hexadecimal number that represents a color or a constant that is defined at the theme level.</p>
+</li>
+<li>
+<p><strong>style</strong> [Constant]: Specifies the configuration style of the two-step gradient. This parameter can have the following constant values:</p>
+<ul>
+<li><code>voltmx.skin.TWO_STEP_GRADIENT_STYLE_VERTICAL_GRADIENT</code>: Constant for the vertical gradient style.</li>
+<li><code>voltmx.skin.TWO_STEP_GRADIENT_STYLE_VERTICAL_SPLIT</code>: Constant for the vertical split style.</li>
+<li><code>voltmx.skin.TWO_STEP_GRADIENT_STYLE_HORIZONTAL_GRADIENT</code>: Constant for the horizontal gradient style.</li>
+<li><code>voltmx.skin.TWO_STEP_GRADIENT_STYLE_HORIZONTAL_SPLIT</code>: Constant for the horizontal split style.</li>
+</ul>
+</li>
+</ul>
+<p><b>Remarks</b></p>
+<ul>
+<li>The default value of the style key is <code>voltmx.skin.TWO_STEP_GRADIENT_STYLE_VERTICAL_GRADIENT</code>.</li>
+<li>Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.</li>
+<li>When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).<br />
+    For example, red complete opaque is FF000000. Red complete transparent is FF000065. The values 0x and # are not allowed in the string.</li>
+<li>A color constant is a String that is defined at the theme level. Ensure that you append the <strong>$</strong> symbol at the beginning of the color constant.</li>
+<li>This property does not have a default value.</li>
+<li>This property has more priority than (and overrides) the background property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.</li>
+<li>The backgroundColor, backgroundColorTwoStepGradient, backgroundColoMultiStepGradient, and backgroundImage properties are mutually exclusive. The property that was set most recently is given higher priority over other properties.</li>
+</ul>
+<p><b>Example</b></p>
+<p>This example uses the button widget, but the principle remains the same for all widgets that have the backgroundColorTwoStepGradient property.</p>
+<pre><code>Form1.btn1.backgroundColorTwoStepGradient = {  
+     &quot;topColor&quot;: &quot;ea5075&quot;,  
+    &quot;bottomColor&quot;: &quot;eefd04&quot;,  
+    &quot;style&quot;: voltmx.skin.TWO_STEP_GRADIENT_STYLE_VERTICAL_GRADIENT  
+};
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Android</li>
+<li>iOS</li>
+<li>Desktop Web (Not available on Desktop Web Legacy SDK)</li>
+</ul>
 <hr />
-<p>borderWidth Property</p>
+</details>
+<details close="close">
+<p><summary>backgroundImage Property</summary></p>
 <hr />
+<p>Sets the image for the background of the widget.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+backgroundImage
+</code></pre>
+<p><b>Type</b></p>
+<p>String</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<ul>
+<li>This property does not have a default value.</li>
+<li>This property has more priority than (and overrides) the background property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.</li>
+<li>The backgroundColor, backgroundColorTwoStepGradient, backgroundColoMultiStepGradient, and backgroundImage properties are mutually exclusive. The property that was set most recently is given higher priority over other properties.</li>
+</ul>
+<p><b>Example</b></p>
+<p>This example uses the button widget, but the principle remains the same for all widgets that have the backgroundImage property.</p>
+<pre><code>Form1.btn1.backgroundImage = &quot;bgImg.png&quot;;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Android</li>
+<li>iOS</li>
+<li>Desktop Web (Not available on Desktop Web Legacy SDK)</li>
+</ul>
 <hr />
-<p>bottom Property</p>
+</details>
+<details close="close">
+<p><summary>borderColor Property</summary></p>
 <hr />
+<p>Specifies the border color of the widget.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+borderColor
+</code></pre>
+<p><b>Type</b></p>
+<p>Color constant or Hexadecimal number</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<ul>
+<li>Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.</li>
+<li>When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).<br />
+    For example, red complete opaque is FF000000. Red complete transparent is FF000065. The values 0x and # are not allowed in the string.</li>
+<li>A color constant is a String that is defined at the theme level. Ensure that you append the <strong>$</strong> symbol at the beginning of the color constant.</li>
+<li>This property does not have a default value.</li>
+<li>This property has more priority than (and overrides) the border property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.</li>
+</ul>
+<p><b>Example</b></p>
+<p>This example uses the button widget, but the principle remains the same for all widgets that have the borderColor property.</p>
+<pre><code>Form1.btn1.borderColor = &quot;ea5075&quot;;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Android</li>
+<li>iOS</li>
+<li>Desktop Web (Not available on Desktop Web Legacy SDK)</li>
+</ul>
 <hr />
-<p>centerX Property</p>
+</details>
+<details close="close">
+<p><summary>borderColorGradient Property</summary></p>
 <hr />
+<p>Specifies the multi-step gradient color for the border of the widget.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+borderColorGradient
+</code></pre>
+<p><b>Type</b></p>
+<p>JSON Object</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p>Input Parameters</p>
+<ul>
+<li>
+<p><strong>gradientType</strong> [Constant]: Specifies the configuration type of the gradient. This parameter can have the following constant values:</p>
+<ul>
+<li><code>voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_TOP</code>: Constant for the gradient type toTop.</li>
+<li><code>voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_RIGHT</code>: Constant for the gradient type toRight.</li>
+<li><code>voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_BOTTOM</code>: Constant for the gradient type toBottom.</li>
+<li><code>voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_LEFT</code>: Constant for the gradient type toLeft.</li>
+<li><code>voltmx.skin.MULTI_STEP_GRADIENT_TYPE_CUSTOM</code>: Constant for the gradient type custom.<br />
+    For the custom gradient type, you must specify the angle by using the <a href="#angle">angle</a> property.</li>
+<li><strong>angle</strong> [Number]: Specifies the angle for the gradient in degrees, counted counter-clockwise. This property is only applicable for the custom gradient type.</li>
+<li><strong>colors</strong> [Array]: Specifies the colors for the multi-step gradient. Colors is an array of color hex values that indicate the reference color values of the gradient. This parameter contains an array of hexadecimal numbers that represent the colors or constants defined at the theme level.</li>
+<li><strong>colorStops</strong> [Array]: Specifies the color stops for the multi-step gradient. Color Stops are the locations of the reference colors on the gradient, from 0 (the start of the gradient) to 100 (the final value of the gradient). This parameter contains an array of numbers that represent the color stops.</li>
+</ul>
+</li>
+</ul>
+<p><b>Remarks</b></p>
+<ul>
+<li>The default value of the gradientType key is <code>voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_TOP</code>.</li>
+<li>Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.</li>
+<li>When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).<br />
+    For example, red complete opaque is FF000000. Red complete transparent is FF000065. The values 0x and # are not allowed in the string.</li>
+<li>A color constant is a String that is defined at the theme level. Ensure that you append the <strong>$</strong> symbol at the beginning of the color constant.</li>
+<li>This property does not have a default value.</li>
+<li>This property has more priority than (and overrides) the border property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.</li>
+</ul>
+<p><b>Example</b></p>
+<p>This example uses the button widget, but the principle remains the same for all widgets that have the borderColorGradient property.</p>
+<pre><code>Form1.btn1.borderColorGradient = {
+    &quot;gradientType&quot;: voltmx.skin.MULTI_STEP_GRADIENT_TYPE_CUSTOM  
+    &quot;angle&quot;: 45,
+    &quot;colors&quot;: [&quot;ea5075&quot;, &quot;f1fa70&quot;, &quot;eefd04&quot;],
+    &quot;colorStops&quot;: [0, 90, 100]
+};
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Android</li>
+<li>iOS</li>
+</ul>
 <hr />
-<p>centerY Property</p>
+</details>
+<details close="close">
+<p><summary>borderStyle Property</summary></p>
 <hr />
+<p>Specifies the border style for the widget.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+borderStyle
+</code></pre>
+<p><b>Type</b></p>
+<p>Constant</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<ul>
+<li>
+<p>This property can have the following constant values:</p>
+<ul>
+<li><strong>voltmx.skin.BORDER_STYLE_PLAIN</strong>: Constant for the plain border style.</li>
+<li><strong>voltmx.skin.BORDER_STYLE_ROUNDED_CORNER</strong>: Constant for the rounded corner style.</li>
+<li><strong>voltmx.skin.BORDER_STYLE_COMPLETE_ROUNDED_CORNER</strong>: Constant for the complete rounded corner style.</li>
+<li><strong>voltmx.skin.BORDER_STYLE_CUSTOM</strong>: Constant for the custom border style.</li>
+<li>The cornerRadius property is only applicable when the borderStyle is voltmx.skin.BORDER_STYLE_CUSTOM.</li>
+<li>This property does not have a default value.</li>
+<li>This property has more priority than (and overrides) the border property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.</li>
+</ul>
+</li>
+</ul>
+<p><b>Example</b></p>
+<p>This example uses the button widget, but the principle remains the same for all widgets that have the borderStyle property.</p>
+<pre><code>Form1.btn1.borderStyle = voltmx.skin.BORDER_STYLE_PLAIN;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Android</li>
+<li>iOS</li>
+</ul>
 <hr />
-<p>closeButtonText Property</p>
+</details>
+<details close="close">
+<p><summary>borderWidth Property</summary></p>
+<hr />
+<p>Specifies the width of the border for the widget in pixels.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+borderWidth
+</code></pre>
+<p><b>Type</b></p>
+<p>Number or JSON Object</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<ul>
+<li>This property does not have a default value.</li>
+<li>The default unit for the value of this property is pixels.</li>
+<li>The Desktop Web platform supports both Number and JSON Object (with the top, bottom, right, and left keys) values for the borderWidth parameter. The Android and iOS platforms support only Number values for the borderWidth parameter.</li>
+<li>This property has more priority than (and overrides) the border property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.</li>
+</ul>
+<p><b>Example</b></p>
+<p>This example uses the button widget, but the principle remains the same for all widgets that have the borderWidth property.</p>
+<pre><code> Form1.btn1.borderWidth = 2;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Android</li>
+<li>iOS</li>
+<li>Desktop Web (Not available on Desktop Web Legacy SDK)</li>
+</ul>
+<hr />
+</details>
+<details close="close">
+<p><summary>bottom Property</summary></p>
+<hr />
+<p>This property determines the bottom edge of the widget and is measured from the bottom bounds of the parent container.</p>
+<p>The bottom property determines the position of the bottom edge of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the bottom edge of the parent container. In flow-vertical layout, the value is ignored. In flow-horizontal layout, the value is ignored.</p>
+<p>The bottom property is used only if the Height property is not provided.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+bottom
+</code></pre>
+<p><b>Type</b></p>
+<p>String</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<p>The property determines the bottom edge of the widget and is measured from the bottom bounds of the parent container.</p>
+<p>If the layoutType is set as voltmx.flex.FLOW_VERTICAL, the bottom property is measured from the top edge of bottom sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and the top of the bottom sibling widget.</p>
+<p><b>Example</b></p>
+<pre><code>//Sample code to set the bottom property for widgets by using DP, Percentage and Pixels.
+frmHome.widgetID.bottom = &quot;50dp&quot;;
+
+frmHome.widgetID.bottom = &quot;10%&quot;;
+
+frmHome.widgetID.bottom = &quot;10px&quot;;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Available in the IDE</li>
+<li>iOS, Android, Windows, SPA , and Desktop Web</li>
+</ul>
+<hr />
+</details>
+<details close="close">
+<p><summary>centerX Property</summary></p>
+<hr />
+<p>This property determines the center of a widget measured from the left bounds of the parent container.</p>
+<p>The centerX property determines the horizontal center of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the left edge of the parent container. In flow-vertical layout, the distance is measured from the left edge of the parent container. In flow-horizontal layout, the distance is measured from the right edge of the previous sibling widget in the hierarchy.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+centerX
+</code></pre>
+<p><b>Type</b></p>
+<p>String</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<p>If the layoutType is set as voltmx.flex.FLOW_HORIZONTAL, the centerX property is measured from right edge of the left sibling widget.</p>
+<p><b>Example</b></p>
+<pre><code>//Sample code to set the centerX property for widgets by using DP, Percentage and Pixels.
+frmHome.widgetID.centerX = &quot;50dp&quot;;
+
+frmHome.widgetID.centerX = &quot;10%&quot;;
+
+frmHome.widgetID.centerX = &quot;10px&quot;;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Available in the IDE</li>
+<li>iOS, Android, Windows, SPA, and Desktop Web</li>
+</ul>
+<hr />
+</details>
+<details close="close">
+<p><summary>centerY Property</summary></p>
+<hr />
+<p>This property determines the center of a widget measured from the top bounds of the parent container.</p>
+<p>The centerY property determines the vertical center of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the top edge of the parent container. In flow-horizontal layout, the distance is measured from the top edge of the parent container. In flow-vertical layout, the distance is measured from the bottom edge of the previous sibling widget in the hierarchy.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+centerY
+</code></pre>
+<p><b>Type</b></p>
+<p>String</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<p>If the layoutType is set as voltmx.flex.FLOW_VERTICAL, the centerY property is measured from bottom edge of the top sibling widget.</p>
+<p><b>Example</b></p>
+<pre><code>//Sample code to set the centerY property for widgets by using DP, Percentage and Pixels.
+frmHome.widgetID.centerY = &quot;50dp&quot;;
+
+frmHome.widgetID.centerY = &quot;10%&quot;;
+
+frmHome.widgetID.centerY = &quot;10px&quot;;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Available in the IDE</li>
+<li>iOS, Android, Windows, SPA, and Desktop Web</li>
+</ul>
+<hr />
+</details>
+<details close="close">
+<p><summary>closeButtonText Property</summary></p>
 <hr />
 <p>Specifies the text to replace the "<em>Done</em>" button that appears in the Keypad (opens when you select a textbox).</p>
-<p>Syntax</p>
-<p>closeButtonText</p>
-<p>Type</p>
+<p><b>Syntax</b></p>
+<pre><code>
+closeButtonText
+</code></pre>
+<p><b>Type</b></p>
 <p>String</p>
-<p>Remarks</p>
+<p><b>Remarks</b></p>
 <p>The default value for this property is Done (The text on the close button is "Done").</p>
 <p>If you want to change the text for the close button, enter the text of your choice. For example, if you want to change the text from Done to Go, enter Go in the property field. The following image illustrates the Keypad when the text in the property is changed to <em>Go</em>:</p>
 <p><img alt="" src="Resources/Images/keypadcustom.png" /></p>
-<p>Example</p>
-<pre><code>//Defining the properties for a TextArea with closeButtonText:&quot;done&quot;
-var tAreaBasic = {
-    id: &quot;txtArea&quot;,
-    skin: &quot;txtSkin&quot;,
-    focusSkin: &quot;txtFSkin&quot;,
-    text: &quot;Text&quot;,
-    maxTextLength: 20,
-    isVisible: true
-};
-
-var tAreaLayout = {
-    padding: \[5, 5, 5, 5\],
-    margin: \[5, 5, 5, 5\],
-    containerWeight: 100,
-    hExpand: true,
-    widgetAlignment: constants.WIDGET\_ALIGN\_TOP\_LEFT
-};
-
-var tAreaPSP = {
-    closeButtonText: &quot;Done&quot;
-};
-
-
-//Creating the TextArea.
-var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
-</code></pre>
+<p><b>Example</b></p>
 <pre><code>//Sample code to set the closeButtonText property of TextArea widget.
 
 frmTxtArea.myTxtArea.closeButtonText=&quot;Done&quot;;
 </code></pre>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <p>Available in the IDE</p>
 <p>Available only on iPhone</p>
 <hr />
-<p>contentAlignment Property</p>
+</details>
+<details close="close">
+<p><summary>contentAlignment Property</summary></p>
+<hr />
+<p>This property specifies the alignment of the text on the widget with respect to its boundaries.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+contentAlignment
+</code></pre>
+<p><b>Type</b></p>
+<p>Number</p>
+<p><b>Read/Write</b></p>
+<p>Read+Write</p>
+<p><b>Remarks</b></p>
+<p>The default value for the property is <em>CONTENT_ALIGN_CENTER</em>.</p>
+<p>The following are the available options:</p>
+<ul>
+<li>constants.CONTENT_ALIGN_TOP_LEFT</li>
+<li>constants.CONTENT_ALIGN_TOP_CENTER</li>
+<li>constants.CONTENT_ALIGN_TOP_RIGHT</li>
+<li>constants.CONTENT_ALIGN_MIDDLE_LEFT</li>
+<li>constants.CONTENT_ALIGN_CENTER</li>
+<li>constants.CONTENT_ALIGN_MIDDLE_RIGHT</li>
+<li>constants.CONTENT_ALIGN_BOTTOM_LEFT</li>
+<li>constants.CONTENT_ALIGN_BOTTOM_CENTER</li>
+<li>constants.CONTENT_ALIGN_BOTTOM_RIGHT</li>
+</ul>
+<p><b>Limitations</b></p>
+<p>Desktop Web/ SPA platforms do not support <em>contentAlignment</em> property in Camera widget, ComboBox widget and ListBox widget.</p>
+<p><b>Example</b></p>
+<pre><code>/*Sample code to set the contentAlignment property of the widgetID Button widget in frmHome Form.*/  
+
+frmHome.widgetID.contentAlignment=constants.CONTENT_ALIGN_TOP_LEFT;  
+
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Available in IDE</li>
+<li>Available on all platforms</li>
+</ul>
+<hr />
+</details>
+<details close="close">
+<p><summary>cornerRadius Property</summary></p>
+<hr />
+<p>Specifies the radius of the border for the widget.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+cornerRadius
+</code></pre>
+<p><b>Type</b></p>
+<p>Number or JSON Object</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<ul>
+<li>The cornerRadius property is only applicable when the borderStyle is voltmx.skin.BORDER_STYLE_CUSTOM.</li>
+<li>For a Responsive Web app, a corner radius of value zero applies a plain border, and a corner radius value greater than zero applies a rounded border.</li>
+<li>The Android and Desktop Web platforms support both Number and JSON Object (with the top, bottom, right, and left keys) values for the cornerRadius parameter. The iOS platform supports only Number values for the cornerRadius parameter.</li>
+<li>The default unit for the value of this property is pixels.</li>
+<li>This property does not have a default value.</li>
+<li>This property has more priority than (and overrides) the border property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.</li>
+</ul>
+<p><b>Example</b></p>
+<p>This example uses the button widget, but the principle remains the same for all widgets that have the cornerRadius property.</p>
+<pre><code> Form1.btn1.cornerRadius = 60;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Android</li>
+<li>iOS</li>
+<li>Desktop Web (Not available on Desktop Web Legacy SDK)</li>
+</ul>
+<hr />
+</details>
+<details close="close">
+<p><summary>cursorType Property</summary></p>
+<hr />
+<p>In Desktop Web applications, when you hover the mouse over any widget, a mouse pointer appears. Using the cursorType property in Iris, you can specify the type of the mouse pointer.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+cursorType
+</code></pre>
+<p><b>Type</b></p>
+<p>String.</p>
+<p>You must provide valid CSS cursor value such as wait, grab, help, etc. to the cursorType property.</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<p>To add the <code>cursorType</code> property using VoltMX Iris in a Desktop Web application, follow these steps.</p>
+<ol>
+<li>In VoltMX Iris, open the Desktop Web application. From the <strong>Project</strong> explorer, expand <strong>Responsive Web/ Desktop</strong>> <strong>Forms</strong> and select the form to which you need to make the changes.</li>
+<li>On the canvas, select the widget for which you want to specify the cursor type. For example, button.</li>
+<li>From the <strong>Properties</strong> panel, navigate to the <strong>Skin</strong> tab &gt; <strong>Hover Skin</strong> tab.<br />
+    You will find that the details of the hover skin is not enabled here.</li>
+<li>Check the <strong>Enable</strong> option to add a hover skin to your widget.<br />
+    The details and configurations of the hover skin is enabled.</li>
+<li>Under the <strong>General</strong> section, for the Platform option, click the ellipsis icon.<br />
+    The <strong>Fork Skin</strong> window appears.</li>
+<li>In the <strong>Fork Skin</strong> window, for <strong>Desktop</strong>, check under <strong>HTML5 SPA</strong>.</li>
+<li>Click <strong>Ok</strong>. You have successfully forked your hover skin for Desktop Web application.<br />
+    You can see that the <strong>Cursor Type</strong> property has been added under the <strong>General</strong> section.</li>
+<li>Select a value from the drop-down list to set the <strong>Cursor Type</strong> for the widget.</li>
+</ol>
+<p><b>Example</b></p>
+<pre><code> //This is a generic property and is applicable for many widgets.  
+
+/*The example provided is for the Button widget. Make the required changes in the example while using other widgets.*/
+
+frmButton.myButton.cursorType = &quot;wait&quot;;
+
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Available in IDE</li>
+<li>Desktop Web</li>
+</ul>
+<hr />
+</details>
+<details close="close">
+<p><summary>disabledStateSkinProperties Property</summary></p>
+<hr />
+<p>Specifies the skin properties that define the look and feel of the widget, when the widget is disabled or blocked.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+disabledStateSkinProperties
+</code></pre>
+<p><b>Type</b></p>
+<p>JSON Object</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<ul>
+<li>This property does not have a default value.</li>
+<li>This property has more priority than (and overrides) the disabledSkin property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.</li>
+</ul>
+<p><b>Example</b></p>
+<p>This example uses the button widget, but the principle remains the same for all widgets that have the disabledStateSkinProperties property.</p>
+<pre><code>Form1.btn1.disabledStateSkinProperties= {  
+     background: {  
+        backgroundType: voltmx.skin.BACKGROUND_TYPE_MULTI_STEP_GRADIENT,  
+        backgroundColorMultiStepGradient : {  
+            gradientType: voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_TOP,  
+            colors: [&quot;ea5075&quot;, &quot;f1fa70&quot;, &quot;eefd04&quot;],  
+            colorStops: [0, 90, 100]  
+        },  
+    },  
+    border: {  
+        borderType: voltmx.skin.BORDER_TYPE_SINGLE_COLOR,  
+        borderColor: &quot;ea5075&quot;,  
+        borderStyle: voltmx.skin.BORDER_STYLE_PLAIN,  
+        borderWidth: 50  
+    },  
+    fonts: {  
+        fontColor: &quot;ea5075&quot;,  
+        fontFamily: &quot;Serif&quot;,  
+        fontSize: '100',  
+        fontStyle: voltmx.skin.FONT_STYLE_NONE,  
+        fontWeight: voltmx.skin.FONT_WEIGHT_NORMAL  
+    },  
+    textShadow: {  
+        textShadowRadius: 5,  
+        textShadowColor: &quot;ea5075&quot;,  
+        textShadowOffset: {  
+            x: 20,  
+            y: 4  
+        }  
+    }
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Android</li>
+</ul>
 <hr />
 <hr />
-<p>cornerRadius Property</p>
+</details>
+<details close="close">
+<p><summary>enable Property</summary></p>
 <hr />
+<p>The <code>enable</code> property is used to control the actionability of the widgets. In a scenario where you want to display a widget but not invoke any action on the widget, configure the <code>enable</code> property to false to achieve it.</p>
+<p>This is a constructor level property and applicable for all widgets in VoltMX Iris.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+enable
+</code></pre>
+<p><b>Type</b></p>
+<p>Boolean</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<p>The default value of this property is true.</p>
+<p>When <code>enable</code> property is configured to true, the action associated with a widget can be invoked by the user in the application.</p>
+<p>When <code>enable</code> property is configured to false, the action associated with a widget cannot be invoked by the user in the application.</p>
+<p><b>Example</b></p>
+<pre><code>//This is a generic property and is applicable for many widgets.  
+
+/*The example provided is for the Button widget. Make the changes required in the example while using other widgets.*/
+
+frmButton.myBtn.enable= true;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Android, iOS, Windows, SPA, and Desktop web</li>
+</ul>
 <hr />
-<p>cursorType Property</p>
+</details>
+<details close="close">
+<p><summary>enableCache Property</summary></p>
 <hr />
+<p>The property enables you to improve the performance of Positional Dimension Animations.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+enableCache
+</code></pre>
+<p><b>Type</b></p>
+<p>Boolean</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<p>The default value for this property is true.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> When the property is used, application consumes more memory. The usage of the property enables tradeoff between performance and visual quality of the content. Use the property cautiously.</p>
+</blockquote>
+<p><b>Example</b></p>
+<pre><code>Form1.widgetID.enableCache = true;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Available in the IDE.</li>
+<li>Windows</li>
+</ul>
 <hr />
-<p>disabledStateSkinProperties Property</p>
-<hr />
-<hr />
-<p>enable Property</p>
-<hr />
-<hr />
-<p>enableCache Property</p>
-<hr />
-<hr />
-<p>enableHapticFeedback Property</p>
+</details>
+<details close="close">
+<p><summary>enableHapticFeedback Property</summary></p>
 <hr />
 <p>Allows you to enable or disable haptic feedback on the TextArea widget.</p>
-<p>Haptic feedback is provided on the Copy, Cut, and Paste options.</p>
-<p>Syntax</p>
-<p>enableHapticFeedback</p>
-<p>Type</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> Haptic feedback is provided on the Copy, Cut, and Paste options.</p>
+</blockquote>
+<p><b>Syntax</b></p>
+<pre><code>
+enableHapticFeedback
+</code></pre>
+<p><b>Type</b></p>
 <p>Boolean.<br />
 If the enableHapticFeedback property is not specified, haptic feedback is not enabled on the TextArea widget.</p>
-<p>Read/Write</p>
+<p><b>Read/Write</b></p>
 <p>Read + Write</p>
-<p>Remarks</p>
+<p><b>Remarks</b></p>
 <ul>
 <li>
 <p>iOS</p>
@@ -2231,121 +2883,281 @@ If the enableHapticFeedback property is not specified, haptic feedback is not en
 </li>
 <li>Haptic Feedback is supported on Windows devices with OS build version 10.0.16299.0 or later.</li>
 </ul>
-<p>Example</p>
-<pre><code>//Setting the enableHapticFeedback property on widget creation
-var tAreaBasic = {
-    &quot;enableHapticFeedback&quot;: true,
-    id: &quot;txtArea&quot;,
-    skin: &quot;txtSkin&quot;,
-    focusSkin: &quot;txtFSkin&quot;,
-    text: &quot;Text&quot;,
-    maxTextLength: 20,
-    isVisible: true,
-    secureTextEntry: true
-};
-var tAreaLayout = {
-    padding: \[5, 5, 5, 5\],
-    margin: \[5, 5, 5, 5\],
-    containerWeight: 100,
-    hExpand: true,
-    widgetAlignment: constants.WIDGET\_ALIGN\_TOP\_LEFT
-};
-var tAreaPSP = {};
-
-//Creating the TextArea
-var txtArea = new voltmx.ui.TextArea2 (tAreaBasic, tAreaLayout, tAreaPSP);
-
-//Setting the enableHapticFeedback property on an existing widget
-Form1.textarea1.enableHapticFeedback = true;
-</code></pre>
+<p><b>Example</b></p>
 <pre><code>//Sample code to set the enableHapticFeedback property of TextArea widget.
 
 frmTxtArea.myTxtArea.enableHapticFeedback=true;
 </code></pre>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>iOS</li>
 <li>Windows</li>
 </ul>
 <hr />
-<p>focusSkin Property</p>
+</details>
+<details close="close">
+<p><summary>focusSkin Property</summary></p>
 <hr />
 <p>Specifies the look and feel of the widget when in focus.</p>
-<p>Syntax</p>
-<p>focusSkin</p>
-<p>Type</p>
+<p><b>Syntax</b></p>
+<pre><code>
+focusSkin
+</code></pre>
+<p><b>Type</b></p>
 <p>String</p>
-<p>Read/Write</p>
+<p><b>Read/Write</b></p>
 <p>Read + Write</p>
-<p>Remarks</p>
+<p><b>Remarks</b></p>
 <ul>
 <li>Mobile Web does not support this property, instead browser specific focus will be applied.</li>
 </ul>
-<p>Example</p>
-<pre><code>//Defining properties for a TextArea with the focusSkin:&quot;txtFSkin&quot;.
-var tAreaBasic = {
-    id: &quot;txtArea&quot;,
-    skin: &quot;txtSkin&quot;,
-    focusSkin: &quot;txtFSkin&quot;,
-    text: &quot;Text&quot;,
-    maxTextLength: 20,
-    isVisible: true,
-    secureTextEntry: true
-};
-
-var tAreaLayout = {
-    padding: \[5, 5, 5, 5\],
-    margin: \[5, 5, 5, 5\],
-    containerWeight: 100,
-    hExpand: true,
-    widgetAlignment: constants.WIDGET\_ALIGN\_TOP\_LEFT
-};
-
-var tAreaPSP = {};
-
-
-//Creating the TextArea.
-var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
-</code></pre>
+<p><b>Example</b></p>
 <pre><code>//Sample code to set the focusSkin property of TextArea widget.
 
 frmTxtArea.myTxtArea.focusSkin=&quot;txtFSkin&quot;;
 </code></pre>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Available in the IDE</li>
 <li>Available on all platforms except and SPA (Android) platforms</li>
 </ul>
 <hr />
-<p>focusStateSkinProperties Property</p>
+</details>
+<details close="close">
+<p><summary>focusStateSkinProperties Property</summary></p>
+<hr />
+<p>Specifies the skin properties that define the look and feel of the widget, when the widget is in focus.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+focusStateSkinProperties
+</code></pre>
+<p><b>Type</b></p>
+<p>JSON Object</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<ul>
+<li>This property does not have a default value.</li>
+<li>This property has more priority than (and overrides) the focusSkin property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.</li>
+</ul>
+<p><b>Example</b></p>
+<p>This example uses the button widget, but the principle remains the same for all widgets that have the focusStateSkinProperties property.</p>
+<pre><code> Form1.btn1.focusStateSkinProperties = {  
+     background: {  
+        backgroundType: voltmx.skin.BACKGROUND_TYPE_MULTI_STEP_GRADIENT,  
+        backgroundColorMultiStepGradient : {  
+            gradientType: voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_TOP,  
+            colors: [&quot;ea5075&quot;, &quot;f1fa70&quot;, &quot;eefd04&quot;],  
+            colorStops: [0, 90, 100]  
+        }  
+    },  
+    border: {  
+        borderType: voltmx.skin.BORDER_TYPE_SINGLE_COLOR,  
+        borderColor: &quot;ea5075&quot;,  
+        borderStyle: voltmx.skin.BORDER_STYLE_PLAIN,  
+        borderWidth: 5  
+    },  
+    fonts: {  
+        fontColor: &quot;ea5075&quot;,  
+        fontFamily: &quot;Serif&quot;,  
+        fontSize: '100',  
+        fontStyle: voltmx.skin.FONT_STYLE_NONE,  
+        fontWeight: voltmx.skin.FONT_WEIGHT_NORMAL  
+    },  
+    textShadow: {  
+        textShadowRadius: 5,  
+        textShadowColor: &quot;ea5075&quot;,  
+        textShadowOffset: {  
+            x: 20,  
+            y: 4  
+        }  
+    }
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Android</li>
+<li>iOS</li>
+<li>Desktop Web (Not available on Desktop Web Legacy SDK)</li>
+</ul>
 <hr />
 <hr />
-<p>fontColor Property</p>
+</details>
+<details close="close">
+<p><summary>fontColor Property</summary></p>
 <hr />
+<p>Specifies the font color of the widget.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+fontColor
+</code></pre>
+<p><b>Type</b></p>
+<p>Color constant or Hexadecimal number</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<ul>
+<li>Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.</li>
+<li>When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).<br />
+    For example, red complete opaque is FF000000. Red complete transparent is FF000065. The values 0x and # are not allowed in the string.</li>
+<li>A color constant is a String that is defined at the theme level. Ensure that you append the <strong>$</strong> symbol at the beginning of the color constant.</li>
+<li>This property does not have a default value.</li>
+<li>This property has more priority than (and overrides) the fonts property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.</li>
+</ul>
+<p><b>Example</b></p>
+<p>This example uses the button widget, but the principle remains the same for all widgets that have the fontColor property.</p>
+<pre><code>Form1.btn1.fontColor = &quot;ea5075&quot;;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Android</li>
+<li>iOS</li>
+<li>Desktop Web (Not available on Desktop Web Legacy SDK)</li>
+</ul>
 <hr />
-<p>fontFamily Property</p>
+</details>
+<details close="close">
+<p><summary>fontFamily Property</summary></p>
 <hr />
+<p>Specifies the font family for the font of the widget.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+fontFamily
+</code></pre>
+<p><b>Type</b></p>
+<p>String</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<ul>
+<li>This property does not have a default value.</li>
+<li>This property has more priority than (and overrides) the fonts property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.</li>
+</ul>
+<p><b>Example</b></p>
+<p>This example uses the button widget, but the principle remains the same for all widgets that have the fontFamily property.</p>
+<pre><code> Form1.btn1.fontFamily = &quot;Serif&quot;;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Android</li>
+<li>iOS</li>
+<li>Desktop Web (Not available on Desktop Web Legacy SDK)</li>
+</ul>
 <hr />
-<p>fontSize Property</p>
+</details>
+<details close="close">
+<p><summary>fontSize Property</summary></p>
 <hr />
+<p>Specifies the font size for the widget in percentage (%) units.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+fontSize
+</code></pre>
+<p><b>Type</b></p>
+<p>Number</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<ul>
+<li>This property does not have a default value.</li>
+<li>This property has more priority than (and overrides) the fonts property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.</li>
+</ul>
+<p><b>Example</b></p>
+<p>This example uses the button widget, but the principle remains the same for all widgets that have the fontSize property.</p>
+<pre><code> Form1.btn1.fontSize = 150;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Android</li>
+<li>iOS</li>
+<li>Desktop Web (Not available on Desktop Web Legacy SDK)</li>
+</ul>
 <hr />
-<p>fontStyle Property</p>
+</details>
+<details close="close">
+<p><summary>fontStyle Property</summary></p>
 <hr />
+<p>Specifies the font style for the widget.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+fontStyle
+</code></pre>
+<p><b>Type</b></p>
+<p>Constant</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<ul>
+<li>
+<p>This property can have the following constant values:</p>
+<ul>
+<li><strong>voltmx.skin.FONT_STYLE_NONE</strong>: Constant for the normal font style.</li>
+<li><strong>voltmx.skin.FONT_STYLE_ITALIC</strong>: Constant for the italic font style.</li>
+<li><strong>voltmx.skin.FONT_STYLE_UNDERLINE</strong>: Constant for the underline font style.</li>
+<li>This property does not have a default value.</li>
+<li>This property has more priority than (and overrides) the fonts property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.</li>
+</ul>
+</li>
+</ul>
+<p><b>Example</b></p>
+<p>This example uses the button widget, but the principle remains the same for all widgets that have the fontStyle property.</p>
+<pre><code>Form1.btn1.fontStyle = voltmx.skin.FONT_STYLE_NONE;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Android</li>
+<li>Desktop Web (Not available on Desktop Web Legacy SDK)</li>
+</ul>
 <hr />
-<p>fontWeight Property</p>
+</details>
+<details close="close">
+<p><summary>fontWeight Property</summary></p>
 <hr />
+<p>Specifies the weight for the font of the widget.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+fontWeight
+</code></pre>
+<p><b>Type</b></p>
+<p>Constant</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<ul>
+<li>
+<p>This property can have the following constant values:</p>
+<ul>
+<li><strong>voltmx.skin.FONT_WEIGHT_NORMAL</strong>: Constant for the normal font weight.</li>
+<li><strong>voltmx.skin.FONT_WEIGHT_BOLD</strong>: Constant for the bold font weight.</li>
+<li>This property does not have a default value.</li>
+<li>This property has more priority than (and overrides) the fonts property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.</li>
+</ul>
+</li>
+</ul>
+<p><b>Example</b></p>
+<p>This example uses the button widget, but the principle remains the same for all widgets that have the fontWeight property.</p>
+<pre><code>Form1.btn1.fontWeight = voltmx.skin.FONT_WEIGHT_NORMAL;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Android</li>
+<li>Desktop Web (Not available on Desktop Web Legacy SDK)</li>
+</ul>
 <hr />
-<p>height Property</p>
+</details>
+<details close="close">
+<p><summary>height Property</summary></p>
 <hr />
 <p>It determines the height of the widget and measured along the y-axis.</p>
 <p>The height property determines the height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. For supported widgets, the height may be derived from either the widget or container’s contents by setting the height to “preferred”.</p>
-<p>Syntax</p>
-<p>height</p>
-<p>Type</p>
+<p><b>Syntax</b></p>
+<pre><code>
+height
+</code></pre>
+<p><b>Type</b></p>
 <p>Number, String, and Constant</p>
-<p>Read/Write</p>
+<p><b>Read/Write</b></p>
 <p>Read + Write</p>
-<p>Remarks</p>
+<p><b>Remarks</b></p>
 <p>Following are the available measurement options:</p>
 <ul>
 <li>%: Specifies the values in percentage relative to the parent dimensions.</li>
@@ -2354,9 +3166,8 @@ frmTxtArea.myTxtArea.focusSkin=&quot;txtFSkin&quot;;
 <li>default: Specifies the default value of the widget.</li>
 <li>voltmx.flex.USE_PREFERED_SIZE: When this option is specified, the layout uses preferred height of the widget as height and preferred size of the widget is determined by the widget and may varies between platforms.</li>
 </ul>
-<p>Example</p>
-<p>Setting the height property on an existing widget</p>
-<pre><code>/\*Sample code to set the height property for a TextArea widget by using DP, Percentage and Pixels.\*/
+<p><b>Example</b></p>
+<pre><code>/*Sample code to set the height property for a TextArea widget by using DP, Percentage and Pixels.*/
 frmTxtArea.myTxtArea.height=&quot;50dp&quot;;
 
 frmTxtArea.myTxtArea.height=&quot;10%&quot;;
@@ -2364,20 +3175,7 @@ frmTxtArea.myTxtArea.height=&quot;10%&quot;;
 frmTxtArea.myTxtArea.height=&quot;10px&quot;;
 
 </code></pre>
-<p>Setting the height property on widget creation</p>
-<pre><code>//Defining the properties for textarea with height: &quot;150dp&quot; 
-var textarea1 = new voltmx.ui.Textarea({
-    &quot;id&quot;: &quot;&amp;lt;ID for the Widget&quot;,
-    &quot;top&quot;: &quot;19dp&quot;,
-    &quot;width&quot;: &quot;200dp&quot;,
-    &quot;height&quot;: &quot;150dp&quot;,
-    &quot;right&quot;: &quot;23dp&quot;,
-    &quot;zIndex&quot;: 1,
-    &quot;isVisible&quot;: true,
-    &quot;clipBounds&quot;: true
-});
-</code></pre>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Available in the IDE</li>
 <li>iOS</li>
@@ -2386,64 +3184,101 @@ var textarea1 = new voltmx.ui.Textarea({
 <li>SPA</li>
 </ul>
 <hr />
-<p>hoverSkin Property</p>
+</details>
+<details close="close">
+<p><summary>hoverSkin Property</summary></p>
 <hr />
 <p>Specifies the look and feel of a widget when the cursor hovers on the widget.</p>
-<p>Syntax</p>
-<p>hoverSkin</p>
-<p>Type</p>
-<p>String</p>
-<p>Read/Write</p>
-<p>Read + Write</p>
-<p>Example</p>
-<pre><code>//Defining the properties for a TextArea with hoverSkin:&quot;hskin&quot;
-var tAreaBasic = {
-    id: &quot;txtArea&quot;,
-    skin: &quot;txtSkin&quot;,
-    focusSkin: &quot;txtFSkin&quot;,
-    text: &quot;Text&quot;,
-    maxTextLength: 20,
-    isVisible: true
-};
-
-var tAreaLayout = {
-    padding: \[5, 5, 5, 5\],
-    margin: \[5, 5, 5, 5\],
-    containerWeight: 100,
-    hExpand: true,
-    widgetAlignment: constants.WIDGET\_ALIGN\_TOP\_LEFT
-};
-
-var tAreaPSP = {
-    hoverSkin: &quot;hskin&quot;
-};
-
-//Creating the TextArea.
-var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+<p><b>Syntax</b></p>
+<pre><code>
+hoverSkin
 </code></pre>
+<p><b>Type</b></p>
+<p>String</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Example</b></p>
 <pre><code>//Sample code to set the hoverSkin property of TextArea widget.
 
 frmTxtArea.myTxtArea.hoverSkin=&quot;hskin&quot;;
 </code></pre>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Available in the IDE</li>
 <li>Windows</li>
 </ul>
 <hr />
-<p>hoverStateSkinProperties Property</p>
+</details>
+<details close="close">
+<p><summary>hoverStateSkinProperties Property</summary></p>
+<hr />
+<p>Specifies the skin properties that define the look and feel of the widget, when the cursor hovers on the widget.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+hoverStateSkinProperties
+</code></pre>
+<p><b>Type</b></p>
+<p>JSON Object</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<ul>
+<li>This property does not have a default value.</li>
+<li>This property has more priority than (and overrides) the hoverSkin property of the configured skin.</li>
+</ul>
+<p><b>Example</b></p>
+<p>This example uses the button widget, but the principle remains the same for all widgets that have the hoverStateSkinProperties property.</p>
+<pre><code> Form1.btn1.hoverStateSkinProperties = {  
+     background: {  
+        backgroundType: voltmx.skin.BACKGROUND_TYPE_MULTI_STEP_GRADIENT,  
+        backgroundColorMultiStepGradient : {  
+            gradientType: voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_TOP,  
+            colors: [&quot;ea5075&quot;, &quot;f1fa70&quot;, &quot;eefd04&quot;],  
+            colorStops: [0, 90, 100]  
+        }  
+    },  
+    border: {  
+        borderType: voltmx.skin.BORDER_TYPE_SINGLE_COLOR,  
+        borderColor: &quot;ea5075&quot;,  
+        borderStyle: voltmx.skin.BORDER_STYLE_PLAIN,  
+        borderWidth: 5  
+    },  
+    fonts: {  
+        fontColor: &quot;ea5075&quot;,  
+        fontFamily: &quot;Serif&quot;,  
+        fontSize: '100',  
+        fontStyle: voltmx.skin.FONT_STYLE_NONE,  
+        fontWeight: voltmx.skin.FONT_WEIGHT_NORMAL  
+    },  
+    textShadow: {  
+        textShadowRadius: 5,  
+        textShadowColor: &quot;ea5075&quot;,  
+        textShadowOffset: {  
+            x: 20,  
+            y: 4  
+        }  
+    }
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Desktop Web (Not available on Desktop Web Legacy SDK)</li>
+</ul>
 <hr />
 <hr />
-<p>id Property</p>
+</details>
+<details close="close">
+<p><summary>id Property</summary></p>
 <hr />
 <p>A unique identifier of TextArea consisting of alpha numeric characters. Every TextArea should have a unique id within a Form.</p>
-<p>Syntax</p>
-<p>id</p>
-<p>Type</p>
+<p><b>Syntax</b></p>
+<pre><code>
+id
+</code></pre>
+<p><b>Type</b></p>
 <p>String</p>
-<p>Read/Write</p>
+<p><b>Read/Write</b></p>
 <p>Read only</p>
-<p>Example</p>
+<p><b>Example</b></p>
 <pre><code>//Defining properties for a TextArea with the id:&quot;txtArea&quot;
 var tAreaBasic = {
     id: &quot;txtArea&quot;,
@@ -2456,11 +3291,11 @@ var tAreaBasic = {
 };
 
 var tAreaLayout = {
-    padding: \[5, 5, 5, 5\],
-    margin: \[5, 5, 5, 5\],
+    padding: [5, 5, 5, 5],
+    margin: [5, 5, 5, 5],
     containerWeight: 100,
     hExpand: true,
-    widgetAlignment: constants.WIDGET\_ALIGN\_TOP\_LEFT
+    widgetAlignment: constants.WIDGET_ALIGN_TOP_LEFT
 };
 
 var tAreaPSP = {};
@@ -2471,22 +3306,26 @@ var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
 //Reading the id of the TextArea        
 alert(&quot;TextArea Id ::&quot; + txtArea.id);
 </code></pre>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Available in the IDE</li>
 <li>Available on all platforms</li>
 </ul>
 <hr />
-<p>info Property</p>
+</details>
+<details close="close">
+<p><summary>info Property</summary></p>
 <hr />
 <p>A custom JSObject with the key value pairs that a developer can use to store the context with the widget.</p>
-<p>Syntax</p>
-<p>info</p>
-<p>Type</p>
+<p><b>Syntax</b></p>
+<pre><code>
+info
+</code></pre>
+<p><b>Type</b></p>
 <p>JSObject</p>
-<p>Read/Write</p>
+<p><b>Read/Write</b></p>
 <p>Read + Write</p>
-<p>Remarks</p>
+<p><b>Remarks</b></p>
 <p>This will help in avoiding the globals to most part of the programming.</p>
 <p>This is a <strong>non-Constructor</strong> property. You cannot set this property through widget constructor. But you can read and write data to it.</p>
 <p>Info property can hold any JSObject. After assigning the JSObject to info property, the JSObject should not be modified. For example,</p>
@@ -2496,40 +3335,10 @@ alert(&quot;TextArea Id ::&quot; + txtArea.id);
 widget.info = inf; //works
 
 widget.info.a = 'hello world';
-/\*This will not update the widget info a property to Hello world. 
-widget.info.a will have old value as hello.\*/
+/*This will not update the widget info a property to Hello world. 
+widget.info.a will have old value as hello.*/
 </code></pre>
-<p>Example</p>
-<pre><code>//Defining properties for a TextArea with the info property.
-var tAreaBasic = {
-    id: &quot;txtArea&quot;,
-    skin: &quot;txtSkin&quot;,
-    focusSkin: &quot;txtFSkin&quot;,
-    text: &quot;Text&quot;,
-    maxTextLength: 20,
-    isVisible: true,
-    secureTextEntry: true
-};
-
-var tAreaLayout = {
-    padding: \[5, 5, 5, 5\],
-    margin: \[5, 5, 5, 5\],
-    containerWeight: 100,
-    hExpand: true,
-    widgetAlignment: constants.WIDGET\_ALIGN\_TOP\_LEFT
-};
-
-var tAreaPSP = {};
-
-//Creating the TextArea.
-var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
-txtArea.info = {
-    key: &quot;text of textarea&quot;
-};
-
-//Reading the info of the TextArea      
-alert(&quot;TextArea info is ::&quot; + txtArea.info);
-</code></pre>
+<p><b>Example</b></p>
 <pre><code>//Sample code to set the info property for a TextArea widget.
 frmTxtArea.myTxtArea.info={
     key: &quot;text of textarea&quot;
@@ -2538,22 +3347,28 @@ frmTxtArea.myTxtArea.info={
 alert(&quot;TextArea widget info is ::&quot; +frmTxtArea.myTxtArea.info);
 
 </code></pre>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <p>Available on all platforms</p>
 <hr />
-<p>inputAccessoryViewType Property</p>
+</details>
+<details close="close">
+<p><summary>inputAccessoryViewType Property</summary></p>
 <hr />
-<p>While building iPhone applications that support or provide text input, it is necessary to create some extra buttons (or other controls) beyond the ones provided by the default keyboard interface. by default, adds the Previous, Next, and Done buttons to the applicable input controls. These buttons allow specific operations needed by your application, such as moving to the next or previous text field, making the keyboard disappear and so on. The area above the keyboard is known as Input Accessory View.</p>
-<p>Syntax</p>
-<p>inputAccessoryViewType</p>
-<p>Type</p>
+<p>While building iPhone applications that support or provide text input, it is necessary to create some extra buttons (or other controls) beyond the ones provided by the default keyboard interface. VoltMX Iris by default, adds the Previous, Next, and Done buttons to the applicable input controls. These buttons allow specific operations needed by your application, such as moving to the next or previous text field, making the keyboard disappear and so on. The area above the keyboard is known as Input Accessory View.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+inputAccessoryViewType
+</code></pre>
+<p><b>Type</b></p>
 <p>Number</p>
-<p>Read/Write</p>
+<p><b>Read/Write</b></p>
 <p>Yes</p>
-<p>Remarks</p>
+<p><b>Remarks</b></p>
 <p>The default value for this property is TEXTAREA_INPUTACCESSORYVIEW_DEFAULT.</p>
 <p>This property, allows you to specify the type of accessory view that will be shown for all the input controls for <strong>TextArea</strong> widget.</p>
-<p>For iOS, a header with 'Prev' and Next' buttons is added to the keypad by default. You can turn off this header at three levels: application-level, form-level, and widget-level.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> For iOS, a header with 'Prev' and Next' buttons is added to the keypad by default. You can turn off this header at three levels: application-level, form-level, and widget-level.</p>
+</blockquote>
 <p>To know more about how to set inputAccessoryViewType property at application-level and form-level, you can refer the <a href="FlexForm_Properties.html#inputAcc">inputAccessoryViewType</a> property under Flexform widget.</p>
 <p>To turn on/off the header at widget-level, assign any of the following constants to inputAccessoryViewType property. You must specify each constant with the ‘constants.xx’ prefix.</p>
 <ul>
@@ -2568,176 +3383,181 @@ alert(&quot;TextArea widget info is ::&quot; +frmTxtArea.myTxtArea.info);
 <p>TEXTAREA_INPUTACCESSORYVIEW_CANCEL: Specifies that the input accessory view has a Cancel button. This option does not trigger any events.</p>
 </li>
 </ul>
-<p>Example</p>
-<pre><code>//Defining the property inputAccessoryViewType in the constructor level
-    var tAreaBasic = {id:&quot;txtArea&quot;, 
-    skin:&quot;txtSkin&quot;, 
-    focusSkin:&quot;txtFSkin&quot;,text:&quot;Text&quot;, 
-    maxTextLength:20, 
-    isVisible:true, 
-    secureTextEntry:true};
-
-var tAreaLayout = {padding:\[5,5,5,5\], 
-    hExpand:true, 
-    widgetAlignment:constants.WIDGET\_ALIGN\_TOP\_LEFT};
-
-var tAreaPSP ={
-  &quot;**inputAccessoryViewType**&quot;:constants.TEXTAREA\_INPUTACCESSORYVIEWTYPE\_DEFAULT
-};
-
-//Creating the TextArea.
-var txtArea = new voltmx.ui.TextArea2 (tAreaBasic, tAreaLayout, tAreaPSP);
-
-//Reading the inputAccessoryViewType of the TextArea        
-voltmx.print(&quot;The value of input Accessory View Type property is:&quot;+txtArea.inputAccessoryViewType);
-//Defining the property inputAccessoryViewType outside the constructor
-
-Form1.textArea1.inputAccessoryViewType=constants.TEXTAREA\_INPUTACCESSORYVIEWTYPE\_DEFAULT;
-</code></pre>
+<p><b>Example</b></p>
 <pre><code>//Sample code to set the inputAccessoryViewType property of TextArea widget.
 
-frmTArea.myTxtArea.inputAccessoryViewType=constants.TEXTAREA\_INPUTACCESSORYVIEWTYPE\_DEFAULT;
+frmTArea.myTxtArea.inputAccessoryViewType=constants.TEXTAREA_INPUTACCESSORYVIEWTYPE_DEFAULT;
 </code></pre>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Available in the IDE</li>
 <li>iPhone</li>
 <li>iPad</li>
 </ul>
 <hr />
-<p>isReadOnly PropertyDeprecated property - Pramod Garikapati 24/7/18</p>
-<hr />
-<p>This property allows you to specify whether text in the TextArea Widget should be read only or can be edited.</p>
-<p>Syntax</p>
-<p>isReadOnly</p>
-<p>Type</p>
-<p>Boolean</p>
-<p>Read/Write</p>
-<p>Read + Write</p>
-<p>Remarks</p>
-<p>The default value for this property is false.</p>
-<ul>
-<li>If set to <em>true</em>, the text in the TextArea Widget will be read only.</li>
-<li>If set to <em>false</em>, the text in the TextArea Widget can be edited.</li>
-</ul>
-<p>Example</p>
-<pre><code>/\* Defining the properties for a Textarea with the
-isReadOnly:constants.TEXTAREA\_KEYBOARD\_LABEL\_SEARCH\*/
-var txtBasic = {
-    id: &quot;textArea1&quot;,
-    isVisible: true,
-    &quot;isReadOnly&quot;: true
-};
-
-var txtLayout = {
-    padding: \[5, 5, 5, 5\],
-    containerWeight: 100,
-    hExpand: true
-};
-
-var txtPSP = {};
-
-//Creating the TextArea.
-var textArea1 = new voltmx.ui.TextArea2(txtBasic, txtLayout, txtPSP);
-
-//Reading the isReadOnly of the Textarea
-alert(&quot;Textarea isReadOnly ::&quot; + textArea1.isReadOnly);
-</code></pre>
-<p>Platform Availability</p>
-<p>This property is available on Windows Desktop</p>
-<hr />
-<p>isSelectable Property</p>
+</details>
+<details close="close">
+<p><summary>isSelectable Property</summary></p>
 <hr />
 <p>isSelectable property allows you to select the content inside a TextArea widget.</p>
-<p>Syntax</p>
-<p>isSelectable</p>
-<p>Type</p>
+<p><b>Syntax</b></p>
+<pre><code>
+isSelectable
+</code></pre>
+<p><b>Type</b></p>
 <p>Boolean</p>
-<p>Read/Write</p>
+<p><b>Read/Write</b></p>
 <p>Read + Write</p>
-<p>Remarks</p>
+<p><b>Remarks</b></p>
 <p>The default value for this property is true.</p>
 <ul>
 <li>If set to <em>true</em>, the text in the TextArea Widget can be selected.</li>
 <li>If set to <em>false</em>, the text in the TextArea Widget cannot be selected.</li>
 </ul>
-<p>Example</p>
+<p><b>Example</b></p>
 <pre><code>myForm.myTextArea.isSelectable = false;  
 
 </code></pre>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Not available from IDE</li>
 <li>iOS</li>
 </ul>
 <hr />
-<p>isSensitiveText Property</p>
+</details>
+<details close="close">
+<p><summary>isSensitiveText Property</summary></p>
 <hr />
+<p>This property secures the text entered in the TextArea and TextBox widgets. This property helps you to control the lifetime of the user entered text in the application runtime memory.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> In Android platform, when you enable the <code>isSensitiveText</code> property, the text property of TextArea and TextBox widget returns an instance of the <a href="../../iris_api_dev_guide/content/voltmx.types_objects_rawbytes.html">RawBytes</a> object. The RawBytes data type internally holds the text as a character array. The instance of the Rawbytes object must be cleared using the <a href="../../iris_api_dev_guide/content/voltmx.types_objects_rawbytes.html#clear">clear</a> API once the text read from the widget is not required.</p>
+</blockquote>
+<p><b>Syntax</b></p>
+<pre><code>
+isSensitiveText
+</code></pre>
+<p><b>Type</b></p>
+<p>Boolean</p>
+<p>The default value of this property is false.</p>
+<p><b>Read/ Write</b></p>
+<p>Read Only (Constructor- level property only)</p>
+<p><b>Remarks</b></p>
+<ul>
+<li>
+<p>When you enable the <code>isSensitiveText</code> property,</p>
+<ul>
+<li>The user entered text is cleared automatically in the TextBox and TextArea widgets, when the user navigates to another Form or when the widget is removed through code. You must assign the entered text to another variable if you want to use the text later in the code.</li>
+<li>
+<p>You must set the JavaScript text references to null, to clear the text from the memory, once the text is no longer required.</p>
+</li>
+<li>
+<p>Once the text is cleared, the string content in the memory will be removed in the next Garbage Collection cycle.</p>
+</li>
+<li>In Android platform, you can use either the <a href="../../iris_api_dev_guide/content/voltmx.types_objects_rawbytes.html#readAsText">readAsText</a> method or the text property to access the user entered text.</li>
+<li>In Android platform, when the TextBox or TextArea widget is placed inside a Segment widget, if you want to access the user entered text even after the widget is destroyed, use any of the following methods on the retrieved RawBytes object:</li>
+<li>Use the <a href="../../iris_api_dev_guide/content/voltmx.types_objects_rawbytes.html#clone">clone</a> API of the RawBytes object to create another RawBytes object. You can pass this cloned object into other APIs as required.</li>
+<li>Use either the <a href="../../iris_api_dev_guide/content/voltmx.types_objects_rawbytes.html#readAsText">readAsText</a> method or the text property.</li>
+<li>When the <code>isSensitiveText</code> property is disabled, the entered text may be retained in the application runtime memory till the Form containing the TextBox or TextArea widget is destroyed.</li>
+</ul>
+</li>
+</ul>
+<p>Following image shows the field corresponding to <code>isSensitiveText</code> property in Iris.</p>
+<p><img alt="" src="Resources/Images/SensitiveText_357x34.png" /></p>
+<p><b>Example</b></p>
+<pre><code>//This property is applicable for TextBox and TextArea widgets.
+
+/*This example demonstrates how to use isSensitiveText property by using myTxtBox TextBox widget in frmTextBox FlexForm. You need to use isSensitiveText property for TextArea widget use voltmx.ui.TextArea2 API in a similar manner.*/
+
+//Defining the properties for a Textbox with text:&quot;Sample Text&quot;.
+var myTxtBox = new voltmx.ui.TextBox2({
+  id: &quot;myTxtBox&quot;,
+  skin: &quot;txtSkin&quot;,
+  focusSkin: &quot;txtFSkin&quot;,
+  text: &quot;Sample Text&quot;,
+  maxTextLength: 20,
+  isVisible: true,
+  isSensitiveText: true
+}, {
+  padding: [5, 5, 5, 5],
+  margin: [5, 5, 5, 5],
+  containerWeight: 100,
+  hExpand: true,
+  widgetAlignment: constants.WIDGET_ALIGN_TOP_LEFT
+} {});
+frmTxtBox.add(myTxtBox);
+
+//Reading the text from the myTxtArea TextArea widget.
+var textContent = frmTxtBox.myTxtBox.text;
+var textAsString;
+
+if (voltmx.type(textContent) == &quot;voltmx.types.RawBytes&quot;) {
+  //Using the readAsText method of the RawBytes object. //Call this method only if you must process the String in JavaScript.
+  textAsString = textContent.readAsText();
+
+  //Perform the required JS String manipulations on textAsString.
+
+}
+/*In Android platform, use the clear method of the Rawbytes object to remove the text references in the native Android RawBytes object.*/
+if (voltmx.type(textContent) == &quot;voltmx.types.RawBytes&quot;) {
+  textContent.clear();
+}   
+/*You must set the JavaScript text references to null, to enable them to be Garbage Collected and cleared from memory*/
+textContent = null;  
+textAsString = null;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Available in IDE</li>
+<li>Android, iOS, and Desktop Web</li>
+</ul>
 <hr />
-<p>isVisible Property</p>
+</details>
+<details close="close">
+<p><summary>isVisible Property</summary></p>
 <hr />
 <p>This property controls the visibility of a widget on the form.</p>
-<p>Syntax</p>
-<p>isVisible</p>
-<p>Type</p>
+<p><b>Syntax</b></p>
+<pre><code>
+isVisible
+</code></pre>
+<p><b>Type</b></p>
 <p>Boolean</p>
-<p>Read/Write</p>
+<p><b>Read/Write</b></p>
 <p>Read + Write</p>
-<p>Remarks</p>
+<p><b>Remarks</b></p>
 <p>The default value for this property is true.</p>
 <ul>
 <li>If set to <em>false,</em> the widget is not displayed.</li>
 <li>If set to <em>true,</em> the widget is displayed.</li>
 </ul>
-<p>Example</p>
-<pre><code>//Defining properties for a TextArea with the isVisible:true.
-var tAreaBasic = {
-    id: &quot;txtArea&quot;,
-    skin: &quot;txtSkin&quot;,
-    focusSkin: &quot;txtFSkin&quot;,
-    text: &quot;Text&quot;,
-    maxTextLength: 20,
-    isVisible: true,
-    secureTextEntry: true
-};
-
-var tAreaLayout = {
-    padding: \[5, 5, 5, 5\],
-    margin: \[5, 5, 5, 5\],
-    containerWeight: 100,
-    hExpand: true,
-    widgetAlignment: constants.WIDGET\_ALIGN\_TOP\_LEFT
-};
-
-var tAreaPSP = {};
-
-//Creating the TextArea.
-var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
-
-//Reading the isVisible of the TextArea     
-alert(&quot;TextArea isVisible ::&quot; + txtArea.isVisible);
-</code></pre>
+<p><b>Example</b></p>
 <pre><code>//Sample code to set the isVisible property of TextArea widget.
 
 frmTxtArea.myTxtArea.isVisible=true;
 </code></pre>
-<p>You can set the visibility of a widget dynamically from code using the setVisibility method.</p>
-<p>Platform Availability</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> You can set the visibility of a widget dynamically from code using the setVisibility method.</p>
+</blockquote>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Available in the IDE</li>
 <li>Available on all platforms.</li>
 </ul>
 <hr />
-<p>keyboardActionLabel Property</p>
+</details>
+<details close="close">
+<p><summary>keyboardActionLabel Property</summary></p>
 <hr />
 <p>Specifies if the text to be displayed in action key of the keyboard.</p>
-<p>Syntax</p>
-<p>keyboardActionLabel</p>
-<p>Type</p>
+<p><b>Syntax</b></p>
+<pre><code>
+keyboardActionLabel
+</code></pre>
+<p><b>Type</b></p>
 <p>Number</p>
-<p>Read/Write</p>
+<p><b>Read/Write</b></p>
 <p>Read + Write</p>
-<p>Remarks</p>
+<p><b>Remarks</b></p>
 <p>The default value for this property is TEXTBOX_KEYBOARD_LABEL_DONE.</p>
 <p>The following are the available options:</p>
 <ul>
@@ -2753,85 +3573,64 @@ frmTxtArea.myTxtArea.isVisible=true;
 <li>TEXTBOX_KEYBOARD_LABEL_CALLs</li>
 </ul>
 <p>The following images illustrate the Keyboard label as <em>Done</em> preserve"&gt;var var <em>Search</em> respectively:</p>
-<p><img alt="" src="Resources/Images/tb-dnelbl.png" /></p>
-<p><img alt="" src="Resources/Images/tb-srchlabel.png" /></p>
-<p>Example</p>
-<pre><code>/\*Defining the properties for a TextArea with 
-keyboardActionLabel:constants.TEXTAREA\_KEYBOARD\_LABEL\_SEND.\*/
-var tAreaBasic = {
-    id: &quot;txtArea&quot;,
-    skin: &quot;txtSkin&quot;,
-    focusSkin: &quot;txtFSkin&quot;,
-    text: &quot;Text&quot;,
-    maxTextLength: 20,
-    isVisible: true
-};
-
-var tAreaLayout = {
-    padding: \[5, 5, 5, 5\],
-    margin: \[5, 5, 5, 5\],
-    containerWeight: 100,
-    hExpand: true,
-    widgetAlignment: constants.WIDGET\_ALIGN\_TOP\_LEFT
-};
-
-var tAreaPSP = {
-    keyboardActionLabel: constants.TEXTAREA\_KEYBOARD\_LABEL\_SEND
-};
-
-//Creating the TextArea.
-var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
-
-//Reading the keyboardActionLabel of the TextArea.      
-alert(&quot;TextArea keyboardActionLabel ::&quot; + txtArea.keyboardActionLabel);
-</code></pre>
+<p><img alt="" src="Resources/Images/tb-dnelbl_267x208.png" /></p>
+<p><img alt="" src="Resources/Images/tb-srchlabel_260x202.png" /></p>
+<p><b>Example</b></p>
 <pre><code>//Sample code to set the keyboardActionLabel property of TextArea widget.
 
-frmTxtArea.myTxtArea.keyboardActionLabel=constants.TEXTAREA\_KEYBOARD\_LABEL\_SEND;
+frmTxtArea.myTxtArea.keyboardActionLabel=constants.TEXTAREA_KEYBOARD_LABEL_SEND;
 </code></pre>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Available in the IDE</li>
 <li>iPhone</li>
 <li>iPad</li>
 </ul>
 <hr />
-<p>keyboardAppearance Property</p>
+</details>
+<details close="close">
+<p><summary>keyboardAppearance Property</summary></p>
 <hr />
 <p>Allows you to set the on screen keyboard to a dark or light color scheme.</p>
-<p>Syntax</p>
-<p>keyboardAppearance</p>
-<p>Type</p>
+<p><b>Syntax</b></p>
+<pre><code>
+keyboardAppearance
+</code></pre>
+<p><b>Type</b></p>
 <p>String</p>
-<p>Read/Write</p>
+<p><b>Read/Write</b></p>
 <p>Read + Write</p>
-<p>Remarks</p>
+<p><b>Remarks</b></p>
 <p>Possible values are:</p>
 <ul>
 <li>constants.TEXTBOX_KEYBOARD_COLOR_LIGHT(Default)</li>
 <li>constants.TEXTBOX_KEYBOARD_COLOR_DARK</li>
 </ul>
-<p>Example</p>
+<p><b>Example</b></p>
 <pre><code>//Sample code to set the keyboardAppearance property of TextArea widget.
 
-frmTxtArea.myTxtArea.keyboardAppearance=constants.TEXTBOX\_KEYBOARD\_COLOR\_DARK;
+frmTxtArea.myTxtArea.keyboardAppearance=constants.TEXTBOX_KEYBOARD_COLOR_DARK;
 </code></pre>
-<p>Availability</p>
+<p><b>Availability</b></p>
 <p>Available in the IDE</p>
 <ul>
 <li>iOS</li>
 </ul>
 <hr />
-<p>keyBoardStyle Property</p>
+</details>
+<details close="close">
+<p><summary>keyBoardStyle Property</summary></p>
 <hr />
 <p>When you interact with a TextArea widget, a keyboard is displayed.</p>
-<p>Syntax</p>
-<p>keyBoardStyle</p>
-<p>Type</p>
+<p><b>Syntax</b></p>
+<pre><code>
+keyBoardStyle
+</code></pre>
+<p><b>Type</b></p>
 <p>Number</p>
-<p>Read/Write</p>
+<p><b>Read/Write</b></p>
 <p>Read + Write</p>
-<p>Remarks</p>
+<p><b>Remarks</b></p>
 <p>You can use this property to select the type of keyboard that you want to display.</p>
 <p>Keys on the keyboard style may vary from platform to platform.</p>
 <p>On Desktop Web platform, <code>keyBoardStyle</code> property is not supported, use the events <a href="TextArea_Events.html#onBeginE">onBeginEditing</a>, <a href="TextArea_Events.html#onEndEdi">onEndEditing</a>, <a href="TextArea_Events.html#onKeyUp">onKeyUp</a>, <a href="TextArea_Events.html#onKeyDow">onKeyDown</a>, and <a href="TextArea_Events.html#onDone">onDone</a> as necessary.</p>
@@ -2839,13 +3638,13 @@ frmTxtArea.myTxtArea.keyboardAppearance=constants.TEXTBOX\_KEYBOARD\_COLOR\_DARK
 <p>The following are the available keyboard types when you select <a href="#textInputmode">textInputMode</a> as constants.TEXTAREA_INPUT_MODE_NUMERIC.</p>
 <ul>
 <li>constants.TEXTAREA_KEY_BOARD_STYLE_DEFAULT: Specifies the default numeric keyboard.<br />
-<img alt="" src="Resources/Images/keyty-n&amp;p.png" /></li>
+<img alt="" src="Resources/Images/keyty-n_p_206x137.png" /></li>
 <li>constants.TEXTAREA_KEY_BOARD_STYLE_DECIMAL: Specifies the keyboard to enter decimals.<br />
-<img alt="" src="Resources/Images/ipstyle_decimal.png" /></li>
+<img alt="" src="Resources/Images/ipstyle_decimal_205x135.png" /></li>
 <li>constants.TEXTAREA_KEY_BOARD_STYLE_NUMBER_PAD: Specifies the keyboard to enter numbers.<br />
-<img alt="" src="Resources/Images/keyty-phn.png" /></li>
+<img alt="" src="Resources/Images/keyty-phn_205x135.png" /></li>
 <li>constants.TEXTAREA_KEY_BOARD_STYLE_PHONE_PAD: Specifies the keyboard to enter phone numbers. (Not supported in Windows platform)<br />
-<img alt="" src="Resources/Images/keyty-num.png" /></li>
+<img alt="" src="Resources/Images/keyty-num_205x134.png" /></li>
 <li>constants.TEXTAREA_KEY_BOARD_STYLE_SIGNED_NUMBER: Specifies the keyboard to enter negative numbers( for example -345). This option is applicable to Android platform only.</li>
 <li>constants.TEXTAREA_KEY_BOARD_STYLE_SIGNED_DECIMAL_NUMBER: Specifies the keyboard to enter negative decimal numbers (for example -345.87). This option is applicable to Android platform only.</li>
 <li>constants.TEXTAREA_KEY_BOARD_STYLE_DEFAULT: Specifies the default numeric keyboard.</li>
@@ -2856,180 +3655,347 @@ frmTxtArea.myTxtArea.keyboardAppearance=constants.TEXTBOX\_KEYBOARD\_COLOR\_DARK
 <li>constants.TEXTAREA_KEY_BOARD_STYLE_DATE</li>
 <li>constants.TEXTAREA_KEY_BOARD_STYLE_TIME</li>
 </ul>
-<p>Example</p>
-<pre><code>//Defining properties for a TextArea with the keyBoardStyle to accept URL address.
-var tAreaBasic = {
-    id: &quot;txtArea&quot;,
-    text: &quot;Text&quot;,
-    maxTextLength: 20,
-    isVisible: true,
-    secureTextEntry: true,
-    keyBoardStyle: constants.TEXTAREA\_KEY\_BOARD\_STYLE\_URL
-};
-
-var tAreaLayout = {
-    padding: \[5, 5, 5, 5\],
-    margin: \[5, 5, 5, 5\],
-    containerWeight: 100,
-    hExpand: true,
-    widgetAlignment: constants.WIDGET\_ALIGN\_TOP\_LEFT
-};
-
-var tAreaPSP = {};
-
-//Creating the TextArea.
-var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
-
-//Reading the keyBoardStyle of the TextArea     
-alert(&quot;TextArea keyBoardStyle ::&quot; + txtArea.keyBoardStyle);
-</code></pre>
+<p><b>Example</b></p>
 <pre><code>//Sample code to set the keyBoardStyle property of TextArea widget.
 
-frmTxtArea.myTxtArea.keyBoardStyle=constants.TEXTAREA\_KEY\_BOARD\_STYLE\_URL;
+frmTxtArea.myTxtArea.keyBoardStyle=constants.TEXTAREA_KEY_BOARD_STYLE_URL;
 </code></pre>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Available in the IDE</li>
 <li>Available on all platforms except SPA and Desktop Web platforms.</li>
 </ul>
 <hr />
-<p>left Property</p>
+</details>
+<details close="close">
+<p><summary>left Property</summary></p>
 <hr />
+<p>This property determines the lower left corner edge of the widget and is measured from the left bounds of the parent container.</p>
+<p>The left property determines the position of the left edge of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the left edge of the parent container. In flow-vertical layout, the distance is measured from the left edge of the parent container. In flow-horizontal layout, the distance is measured from the right edge of the previous sibling widget in the hierarchy.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+left
+</code></pre>
+<p><b>Type</b></p>
+<p>String</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<p>If the layoutType is set as voltmx.flex.FLOW_HORIZONTAL, the left property is measured from right edge of the left sibling widget.</p>
+<p><b>Example</b></p>
+<pre><code>//Sample code to set the left property for widgets by using DP, Percentage and Pixels.
+frmHome.widgetID.left = &quot;50dp&quot;;
+
+frmHome.widgetID.left = &quot;10%&quot;;
+
+frmHome.widgetID.left = &quot;10px&quot;;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Available in the IDE</li>
+<li>iOS, Android, Windows, SPA, and Desktop Web</li>
+</ul>
 <hr />
-<p>maxHeight Property</p>
+</details>
+<details close="close">
+<p><summary>maxHeight Property</summary></p>
 <hr />
+<p>This property specifies the maximum height of the widget and is applicable only when the height property is not specified.</p>
+<p>The maxHeight property determines the maximum height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The maxHeight value overrides the preferred, or “autogrow” height, if the maxHeight is less than the derived content height of the widget.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+maxHeight
+</code></pre>
+<p><b>Type</b></p>
+<p>Number</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Example</b></p>
+<pre><code>//Sample code to set the maxHeight property for widgets by using DP, Percentage and Pixels.
+frmHome.widgetID.maxHeight = &quot;50dp&quot;;
+
+frmHome.widgetID.maxHeight = &quot;10%&quot;;
+
+frmHome.widgetID.maxHeight = &quot;10px&quot;;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Available in the IDE</li>
+<li>iOS, Android, Windows, SPA, and Desktop Web</li>
+</ul>
 <hr />
-<p>maxWidth Property</p>
+</details>
+<details close="close">
+<p><summary>maxWidth Property</summary></p>
 <hr />
+<p>This property specifies the maximum width of the widget and is applicable only when the width property is not specified.</p>
+<p>The Width property determines the maximum width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The maxWidth value overrides the preferred, or “autogrow” width, if the maxWidth is less than the derived content width of the widget.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+maxWidth
+</code></pre>
+<p><b>Type</b></p>
+<p>Number</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Example</b></p>
+<pre><code>//Sample code to set the maxWidth property for widgets by using DP, Percentage and Pixels.
+frmHome.widgetID.maxWidth = &quot;50dp&quot;;
+
+frmHome.widgetID.maxWidth = &quot;10%&quot;;
+
+frmHome.widgetID.maxWidth = &quot;10px&quot;;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Available in the IDE</li>
+<li>iOS, Android, Windows, SPA, and Desktop Web</li>
+</ul>
 <hr />
-<p>maxTextLength Property</p>
+</details>
+<details close="close">
+<p><summary>maxTextLength Property</summary></p>
 <hr />
 <p>Specifies the maximum number of characters that the text field can accept.</p>
-<p>Syntax</p>
-<p>maxTextLength</p>
-<p>Type</p>
+<p><b>Syntax</b></p>
+<pre><code>
+maxTextLength
+</code></pre>
+<p><b>Type</b></p>
 <p>Number</p>
-<p>Read/Write</p>
+<p><b>Read/Write</b></p>
 <p>Read + Write</p>
-<p>Remarks</p>
+<p><b>Remarks</b></p>
 <p>The default value for this property is empty.</p>
 <p>If you specify a number for this property, the number of input characters cannot exceed the specified number.</p>
-<p>Example</p>
-<pre><code>//Defining properties for a TextArea with the maxTextLength:20.
-var tAreaBasic = {
-    id: &quot;txtArea&quot;,
-    skin: &quot;txtSkin&quot;,
-    focusSkin: &quot;txtFSkin&quot;,
-    text: &quot;Text&quot;,
-    maxTextLength: 20,
-    isVisible: true,
-    secureTextEntry: true
-};
-
-var tAreaLayout = {
-    padding: \[5, 5, 5, 5\],
-    margin: \[5, 5, 5, 5\],
-    containerWeight: 100,
-    hExpand: true,
-    widgetAlignment: constants.WIDGET\_ALIGN\_TOP\_LEFT
-};
-
-var tAreaPSP = {};
-
-//Creating the TextArea.
-var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
-
-//Reading the maxTextLength of the TextArea     
-alert(&quot;TextArea maxTextLength ::&quot; + txtArea.maxTextLength);
-</code></pre>
+<p><b>Example</b></p>
 <pre><code>//Sample code to set the maxTextLength property of TextArea widget.
 
 frmTxtArea.myTxtArea.maxTextLength=20;
 </code></pre>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Available in the IDE</li>
 <li>Available on all platforms. platforms</li>
 </ul>
 <hr />
-<p>minHeight Property</p>
+</details>
+<details close="close">
+<p><summary>minHeight Property</summary></p>
 <hr />
+<p>This property specifies the minimum height of the widget and is applicable only when the height property is not specified.</p>
+<p>The minHeight property determines the minimum height of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The minHeight value overrides the preferred, or “autogrow” height, if the minHeight is larger than the derived content height of the widget.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+minHeight
+</code></pre>
+<p><b>Type</b></p>
+<p>Number</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Example</b></p>
+<pre><code>//Sample code to set the minHeight property for widgets by using DP, Percentage and Pixels.
+frmHome.widgetID.minHeight = &quot;50dp&quot;;
+
+frmHome.widgetID.minHeight = &quot;10%&quot;;
+
+frmHome.widgetID.minHeight = &quot;10px&quot;;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Available in the IDE</li>
+<li>iOS, Android, Windows, SPA, and Desktop Web</li>
+</ul>
 <hr />
-<p>minWidth Property</p>
+</details>
+<details close="close">
+<p><summary>minWidth Property</summary></p>
 <hr />
+<p>This property specifies the minimum width of the widget and is applicable only when the width property is not specified.</p>
+<p>The minWidth property determines the minimum width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. The minWidth value overrides the preferred, or “autogrow” width, if the minWidth is larger than the derived content width of the widget.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+minWidth
+</code></pre>
+<p><b>Type</b></p>
+<p>Number</p>
+<p><b>Read/Write</b></p>
+<p>Read only</p>
+<p><b>Example</b></p>
+<pre><code>//Sample code to set the minWidth property for widgets by using DP, Percentage and Pixels.
+frmHome.widgetID.minWidth = &quot;50dp&quot;;
+
+frmHome.widgetID.minWidth = &quot;10%&quot;;
+
+frmHome.widgetID.minWidth = &quot;10px&quot;;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Available in the IDE</li>
+<li>iOS, Android, Windows, SPA, and Desktop Web</li>
+</ul>
 <hr />
-<p>numberOfVisibleLines Property</p>
+</details>
+<details close="close">
+<p><summary>numberOfVisibleLines Property</summary></p>
 <hr />
 <p>Number of lines to be displayed at a given time in the view port of the TextArea.</p>
-<p>Syntax</p>
-<p>numberOfVisibleLines</p>
-<p>Type</p>
+<p><b>Syntax</b></p>
+<pre><code>
+numberOfVisibleLines
+</code></pre>
+<p><b>Type</b></p>
 <p>Number</p>
-<p>Read/Write</p>
+<p><b>Read/Write</b></p>
 <p>Read + Write</p>
-<p>Remarks</p>
+<p><b>Remarks</b></p>
 <p>This essentially decides the height of the text area.</p>
 <p>In Android platform, you cannot fix the height of the TextArea to any value. The form by default is a vertical scroll container, if you restrict the height of TextArea, you will not be able to scroll the content, because of double scrolling issue. For example,<br />
 If the numberOfVisibleLines property is set to 10, then the height of the TextArea will be at least 10 lines tall. As you enter text more than 10 lines, TextArea height expands accordingly.</p>
-<p>Example</p>
-<pre><code>//Defining properties for a TextArea with numberOfVisibleLines:5
-var tAreaBasic = {
-    id: &quot;txtArea&quot;,
-    text: &quot;Text&quot;,
-    maxTextLength: 20,
-    isVisible: true,
-    secureTextEntry: true,
-    numberOfVisibleLines: 5
-};
-
-var tAreaLayout = {
-    padding: \[5, 5, 5, 5\],
-    margin: \[5, 5, 5, 5\],
-    containerWeight: 100,
-    hExpand: true,
-    widgetAlignment: constants.WIDGET\_ALIGN\_TOP\_LEFT
-};
-
-var tAreaPSP = {};
-
-//Creating the TextArea.
-var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
-
-//Reading the numberOfVisibleLines of the TextArea      
-alert(&quot;TextArea numberOfVisibleLines ::&quot; + txtArea.numberOfVisibleLines);
-</code></pre>
+<p><b>Example</b></p>
 <pre><code>//Sample code to set the numberOfVisibleLines property of TextArea widget.
 
 frmTxtArea.myTxtArea.numberOfVisibleLines=5;
 </code></pre>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Available in the IDE</li>
 <li>Available on all platforms.</li>
 </ul>
 <hr />
-<p>opacity Property</p>
+</details>
+<details close="close">
+<p><summary>opacity Property</summary></p>
 <hr />
+<p>Specifies the opacity of the widget. The value of this property must be in the range 0.0 (transparent) to 1.0 (opaque). Any values outside this range are fixed to the nearest minimum or maximum value.</p>
+<p>Specifies the opacity of the widget. Valid opacity values range from 0.0 (transparent), to 1.0 (opaque). Values set to less than zero will default to zero. Values more than 1.0 will default to 1. Interaction events set on a transparent widget will still be fired. To disable the events, also set the “isVisible” property to “false”.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+opacity
+</code></pre>
+<p><b>Type</b></p>
+<p>Number</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<blockquote>
+<p><strong><em>Note:</em></strong> This property has more priority compared to the values coming from the configured skin.</p>
+</blockquote>
+<p><b>Example</b></p>
+<pre><code>//Sample code to make the widget transparent by using the opacity property.
+frmHome.widgetID.opacity = 0;
+
+//Sample code to make the widget opaque by using the opacity property.
+frmHome.widgetID.opacity = 1;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Not available in the IDE.</li>
+<li>iOS, Android, Windows, SPA, and Desktop Web</li>
+</ul>
 <hr />
-<p>padding Property</p>
+</details>
+<details close="close">
+<p><summary>padding Property</summary></p>
 <hr />
+<p>This property defines the space between the content of the widget and the widget boundaries. You can use this option to define the top, left, right, and bottom distance between the widget content and the widget boundary.</p>
+<p>When you are defining the padding (for any platform) the <em>first</em> time, the value that you enter in the padding field (top, left, right, or bottom) is auto-populated across all the platforms.</p>
+<p>The following image illustrates a widget with a defined padding:</p>
+<p><img alt="" src="Resources/Images/Padding.png" /></p>
+<p><b>Syntax</b></p>
+<pre><code>
+padding
+</code></pre>
+<p><b>Type</b></p>
+<p>Array of numbers</p>
+<p><b>Read/Write</b></p>
+<p>Read+Write</p>
+<p><b>Limitations</b></p>
+<ul>
+<li>Desktop Web/ SPA platforms do not support <em>padding</em> property in Image widget, Slider widget and Switch widget.</li>
+<li>If no skin is applied to a Button, then Padding is not supported on iPhone. This is due to iOS Safari browser limitation. If you want the padding to be applied, apply a skin to the button and then apply padding</li>
+</ul>
+<p><b>Example</b></p>
+<pre><code>//Sample code to set the padding property for widgetID Button widget in frmHome Form.
+frmHome.widgetID.padding= [2,2,2,2];
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Available in IDE</li>
+<li>Android, iOS, Desktop Web and SPA</li>
+</ul>
 <hr />
-<p>paddingInPixel Property</p>
+</details>
+<details close="close">
+<p><summary>paddingInPixel Property</summary></p>
 <hr />
+<p>This property specifies whether the padding property is to be applied in pixels or in percentage.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+paddingInPixel
+</code></pre>
+<p><b>Type</b></p>
+<p>Boolean</p>
+<p><b>Read/Write</b></p>
+<p>Read Only</p>
+<p><b>Remarks</b></p>
+<p>The default value of this property is <em>false</em>.</p>
+<p>If the value of this property is <em>true,</em> the padding are applied in pixels.</p>
+<p>If the value of this property is <em>false,</em> the padding are applied as set in <a href="#padding">padding</a> property.</p>
+<p><b>Limitations</b></p>
+<p>Desktop Web/ SPA platforms do not support <em>paddingInPixel</em> property in Image widget, Slider widget and Switch widget.</p>
+<p><b>Example</b></p>
+<pre><code>//Sample code to read paddingInPixel property for widgetID Button widget in frmHome form.
+
+voltmx.print(&quot;PaddingInPixel property value is:&quot;+fromHome.widgetID.paddingInPixel);
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>iOS, Android, Desktop Web and SPA.</li>
+</ul>
 <hr />
-<p>parent Property</p>
+</details>
+<details close="close">
+<p><summary>parent Property</summary></p>
 <hr />
+<p>Helps you access the parent of the widget. If the widget is not part of the widget hierarchy, the parent property returns null.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+parent
+</code></pre>
+<p><b>Read/Write</b></p>
+<p>Read only</p>
+<p><b>Remarks</b></p>
+<blockquote>
+<p><strong><em>Note:</em></strong> The property works for all the widgets inside a FlexForm, FlexContainer or FlexScrollContainer.</p>
+</blockquote>
+<p><b>Example</b></p>
+<pre><code>function func() {
+
+    voltmx.print(&quot;The parent of the widget&quot; + JSON.stringify(Form1.widgetID.parent));
+
+}
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Not available in the IDE</li>
+<li>iOS, Android, Windows, SPA, and Desktop Web</li>
+</ul>
 <hr />
-<p>pasteboardType Property</p>
+</details>
+<details close="close">
+<p><summary>pasteboardType Property</summary></p>
 <hr />
 <p>This property enables an application to share data within the application or with another application using system-wide or application-specific pasteboard.</p>
-<p>Syntax</p>
-<p>pasteboardType</p>
-<p>Type</p>
+<p><b>Syntax</b></p>
+<pre><code>
+pasteboardType
+</code></pre>
+<p><b>Type</b></p>
 <p>Number</p>
-<p>Read/Write</p>
+<p><b>Read/Write</b></p>
 <p>Read + Write</p>
-<p>Remarks</p>
+<p><b>Remarks</b></p>
 <p>Typically, an object in the application writes data to a pasteboard when the user requests a copy or cut operation on a selection in the user interface. Another object in the same or different application then reads that data from the pasteboard and presents it to the user at a new location; this usually happens when the user requests a paste operation.</p>
 <p>You can only paste the text to a textbox with the same pasteboard type as that of the source textbox. For example, if you set the pasteboardType as TEXTAREA_PASTE_BOARD_TYPE_APP_LEVEL_PERSISTENT, you can paste the text only to another textbox whose pasteboard type is set to applevelpersistent.</p>
 <p>The different pasteboard types are:</p>
@@ -3038,179 +4004,523 @@ frmTxtArea.myTxtArea.numberOfVisibleLines=5;
 <p>TEXTAREA_PASTE_BOARD_TYPE_APP_LEVEL_PERSISTENT: If you select this option , the text copied from a TextArea can be pasted in TextArea (with the pasteboard type set as applevel) within the same application. Even if you close the application, the copied text persists in the memory and can be copied to another TextArea whose pasteboard type is applevel, when you restart that application.</p>
 <p>TEXTAREA_PASTE_BOARD_TYPE_APP_LEVEL_NON_PERSISTENT: If you select this option , the text copied from a TextArea can be pasted in TextArea (with the pasteboard type set as applevelnonpersistent) within the same application. This text is not retained in the memory when you close the application.</p>
 <p>TEXTAREA_PASTE_BOARD_TYPE_NO_PASTE_BOARD: Select this option, if you want to disable the content to be copied from a TextArea.</p>
-<p>Example</p>
-<pre><code>/\*Defining the properties for a TextArea with 
-pasteboardType:constants.TEXTAREA\_PASTE\_BOARD\_TYPE\_SYSTEM\_LEVEL\*/
-var tAreaBasic = {
-    id: &quot;txtArea&quot;,
-    skin: &quot;txtSkin&quot;,
-    focusSkin: &quot;txtFSkin&quot;,
-    text: &quot;Text&quot;,
-    maxTextLength: 20,
-    isVisible: true
-};
-
-var tAreaLayout = {
-    padding: \[5, 5, 5, 5\],
-    margin: \[5, 5, 5, 5\],
-    containerWeight: 100,
-    hExpand: true,
-    widgetAlignment: constants.WIDGET\_ALIGN\_TOP\_LEFT
-};
-
-
-var tAreaPSP = {
-    pasteboardType: constants.TEXTAREA\_PASTE\_BOARD\_TYPE\_SYSTEM\_LEVEL
-};
-
-//Creating the TextArea.
-var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
-
-//Reading the pasteboardType of the TextArea.   
-alert(&quot;TextArea pasteboardType ::&quot; + txtArea.pasteboardType);
-</code></pre>
+<p><b>Example</b></p>
 <pre><code>//Sample code to set the pasteboardType property of TextArea widget.
 
-frmTxtArea.myTxtArea.pasteboardType=constants.TEXTAREA\_PASTE\_BOARD\_TYPE\_SYSTEM\_LEVEL;
+frmTxtArea.myTxtArea.pasteboardType=constants.TEXTAREA_PASTE_BOARD_TYPE_SYSTEM_LEVEL;
 </code></pre>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Available in the IDE</li>
 <li>iPhone</li>
 <li>iPad</li>
 </ul>
 <hr />
-<p>placeholder Property</p>
+</details>
+<details close="close">
+<p><summary>placeholder Property</summary></p>
 <hr />
 <p>The placeholder attribute specifies a short hint that describes the expected value of an input field (example, a sample value or a short description of the expected format).</p>
-<p>Syntax</p>
-<p>placeholder</p>
-<p>Type</p>
+<p><b>Syntax</b></p>
+<pre><code>
+placeholder
+</code></pre>
+<p><b>Type</b></p>
 <p>String</p>
-<p>Read/Write</p>
+<p><b>Read/Write</b></p>
 <p>Read + Write</p>
-<p>Remarks</p>
+<p><b>Remarks</b></p>
 <p>The hint is displayed in the input field when it is empty, and disappears when the field gets focus.</p>
 <p>For example, for the Username field, you can enter the placeholder text as <em>Enter User ID or Email Address</em>. The user then clicks on the TextArea widget and enters the Username.</p>
 <p>You must be aware of the following:<br />
 - If you specify text both in the <a href="#text">text</a> property and the <strong>placeholder</strong> property, the text entered in the <a href="#text">text</a> property is displayed when rendered. If the user deletes the text, the placeholder text is displayed.<br />
 - If you programmatically set an empty string for the <a href="#text">text</a> property, the placeholder text is displayed.</p>
-<p>Example</p>
-<pre><code>//Defining properties for a TextArea with placeholder:&quot;Enter text&quot;.
-var tAreaBasic = {
-    id: &quot;txtArea&quot;,
-    skin: &quot;txtSkin&quot;,
-    focusSkin: &quot;txtFSkin&quot;,
-    text: &quot;Text&quot;,
-    maxTextLength: 20,
-    isVisible: true,
-    secureTextEntry: true,
-    placeholder: &quot;Enter text&quot;
-};
-
-var tAreaLayout = {
-    padding: \[5, 5, 5, 5\],
-    margin: \[5, 5, 5, 5\],
-    containerWeight: 100,
-    hExpand: true,
-    widgetAlignment: constants.WIDGET\_ALIGN\_TOP\_LEFT
-};
-
-var tAreaPSP = {};
-
-//Creating the TextArea.
-var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
-
-//Reading the placeholder of the TextArea       
-alert(&quot;TextArea placeholder ::&quot; + txtArea.placeholder);
-</code></pre>
+<p><b>Example</b></p>
 <pre><code>//Sample code to set the placeholder property of TextArea widget.
 
 frmTxtArea.myTxtArea.placeholder=&quot;Enter Text&quot;;
 </code></pre>
-<p>You can set the placeholder text from the code only on iPhone, Android, and Mobile Web Advanced platforms.</p>
-<p>Platform Availability</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> You can set the placeholder text from the code only on iPhone, Android, and Mobile Web Advanced platforms.</p>
+</blockquote>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Available in the IDE</li>
 <li>Available on all platforms.</li>
 </ul>
 <hr />
-<p>placeholderSkin Property</p>
+</details>
+<details close="close">
+<p><summary>placeholderSkin Property</summary></p>
 <hr />
 <p>Specifies the skin to be applied to the placeholder text in the TextArea widget.</p>
-<p>Syntax</p>
-<p>placeholderSkin</p>
-<p>Type</p>
+<p><b>Syntax</b></p>
+<pre><code>
+placeholderSkin
+</code></pre>
+<p><b>Type</b></p>
 <p>String</p>
-<p>Remarks</p>
+<p><b>Remarks</b></p>
 <p>Only the font color skin attribute is applicable.</p>
 <p>The following image illustrates the placeholder text with a placeholder color applied:</p>
 <p><img alt="" src="Resources/Images/tb-placeholdercolor.png" /></p>
-<p>Example</p>
-<pre><code>//Defining the properties for a TextArea with placeholderSkin:&quot;placeholderSkin&quot;
-var tAreaBasic = {
-    id: &quot;txtArea&quot;,
-    skin: &quot;txtSkin&quot;,
-    focusSkin: &quot;txtFSkin&quot;,
-    text: &quot;Text&quot;,
-    maxTextLength: 20,
-    isVisible: true,
-    placeholder: &quot;Enter text&quot;
-};
-
-var tAreaLayout = {
-    padding: \[5, 5, 5, 5\],
-    margin: \[5, 5, 5, 5\],
-    containerWeight: 100,
-    hExpand: true,
-    widgetAlignment: constants.WIDGET\_ALIGN\_TOP\_LEFT
-};
-
-var tAreaPSP = {
-    placeholderSkin: &quot;placeholderSkin&quot;
-};
-
-//Creating the TextArea.
-var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
-</code></pre>
+<p><b>Example</b></p>
 <pre><code>//Sample code to set the placeholderSkin property of TextArea widget.
 
 frmTxtArea.myTxtArea.placeholderSkin=&quot;pSkin&quot;;
 </code></pre>
-<p>You cannot specify an image as a skin for a placeholder as of now.</p>
-<p>Android and Windows support change in font color only.</p>
-<p>Platform Availability</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> You cannot specify an image as a skin for a placeholder as of now.</p>
+<p><strong><em>Note:</em></strong> Android and Windows support change in font color only.</p>
+</blockquote>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Available in the IDE</li>
 <li>Android</li>
 <li>Windows</li>
 </ul>
 <hr />
-<p>pressedStateSkinProperties Property</p>
+</details>
+<details close="close">
+<p><summary>pressedStateSkinProperties Property</summary></p>
+<hr />
+<p>Specifies the skin properties that define the look and feel of the widget, when the widget is pressed or clicked.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+pressedStateSkinProperties
+</code></pre>
+<p><b>Type</b></p>
+<p>JSON Object</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<ul>
+<li>This property does not have a default value.</li>
+<li>This property has more priority than (and overrides) the pressedSkin property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.</li>
+</ul>
+<p><b>Example</b></p>
+<p>This example uses the button widget, but the principle remains the same for all widgets that have the pressedStateSkinProperties property.</p>
+<pre><code>Form1.btn1.pressedStateSkinProperties = {  
+     background: {  
+        backgroundType: voltmx.skin.BACKGROUND_TYPE_MULTI_STEP_GRADIENT,  
+        backgroundColorMultiStepGradient : {  
+            gradientType: voltmx.skin.MULTI_STEP_GRADIENT_TYPE_TO_TOP,  
+            colors: [&quot;ea5075&quot;, &quot;f1fa70&quot;, &quot;eefd04&quot;],  
+            colorStops: [0, 90, 100]  
+        }  
+    },  
+    border: {  
+        borderType: voltmx.skin.BORDER_TYPE_SINGLE_COLOR,  
+        borderColor: &quot;ea5075&quot;,  
+        borderStyle: voltmx.skin.BORDER_STYLE_PLAIN,  
+        borderWidth: 5  
+    },  
+    fonts: {  
+        fontColor: &quot;ea5075&quot;,  
+        fontFamily: &quot;Serif&quot;,  
+        fontSize: '100',  
+        fontStyle: voltmx.skin.FONT_STYLE_NONE,  
+        fontWeight: voltmx.skin.FONT_WEIGHT_NORMAL  
+    },  
+    textShadow: {  
+        textShadowRadius: 5,  
+        textShadowColor: &quot;ea5075&quot;,  
+        textShadowOffset: {  
+            x: 20,  
+            y: 4  
+        }  
+    }
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Android</li>
+</ul>
 <hr />
 <hr />
-<p>retainContentAlignment Property</p>
+</details>
+<details close="close">
+<p><summary>retainContentAlignment Property</summary></p>
 <hr />
+<p>This property is used to retain the content alignment property value, as it was defined.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> Locale-level configurations take priority when invalid values are given to this property, or if it is not defined.</p>
+</blockquote>
+<p>The mirroring widget layout properties should be defined as follows.</p>
+<pre><code>function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+    return (isI18nLayoutConfigEnabled &amp;&amp;
+    localeLayoutConfig[defaultLocale]
+    [&quot;mirrorFlexPositionalProperties&quot;] == true &amp;&amp;
+    !widgetRetainFlexPositionPropertiesValue);
+}
+</code></pre>
+<p>The following table illustrates how widgets consider Local flag and Widget flag values.</p>
+<table>
+<thead>
+<tr>
+<th>Properties</th>
+<th>Local Flag Value</th>
+<th>Widget Flag Value</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mirror/retain FlexPositionProperties</td>
+<td>true</td>
+<td>true</td>
+<td>Use the designed layout from widget for all locales. Widget layout overrides everything else.</td>
+</tr>
+<tr>
+<td>Mirror/retain FlexPositionProperties</td>
+<td>true</td>
+<td>false</td>
+<td>Use Mirror FlexPositionProperties since locale-level Mirror is true.</td>
+</tr>
+<tr>
+<td>Mirror/retain FlexPositionProperties</td>
+<td>true</td>
+<td>not specified</td>
+<td>Use Mirror FlexPositionProperties since locale-level Mirror is true.</td>
+</tr>
+<tr>
+<td>Mirror/retain FlexPositionProperties</td>
+<td>false</td>
+<td>true</td>
+<td>Use the designed layout from widget for all locales. Widget layout overrides everything else.</td>
+</tr>
+<tr>
+<td>Mirror/retain FlexPositionProperties</td>
+<td>false</td>
+<td>false</td>
+<td>Use the Design/Model-specific default layout.</td>
+</tr>
+<tr>
+<td>Mirror/retain FlexPositionProperties</td>
+<td>false</td>
+<td>not specified</td>
+<td>Use the Design/Model-specific default layout.</td>
+</tr>
+<tr>
+<td>Mirror/retain FlexPositionProperties</td>
+<td>not specified</td>
+<td>true</td>
+<td>Use the designed layout from widget for all locales. Widget layout overrides everything else.</td>
+</tr>
+<tr>
+<td>Mirror/retain FlexPositionProperties</td>
+<td>not specified</td>
+<td>false</td>
+<td>Use the Design/Model-specific default layout.</td>
+</tr>
+<tr>
+<td>Mirror/retain FlexPositionProperties</td>
+<td>not specified</td>
+<td>not specified</td>
+<td>Use the Design/Model-specific default layout.</td>
+</tr>
+</tbody>
+</table>
+<p><b>Syntax</b></p>
+<pre><code>
+retainContentAlignment
+</code></pre>
+<p><b>Type</b></p>
+<p>Boolean</p>
+<p><b>Read/Write</b></p>
+<p>No (only during widget-construction time)</p>
+<p><b>Example</b></p>
+<pre><code>//This is a generic property that is applicable for various widgets.
+//Here, we have shown how to use the retainContentAlignment property for Button widget.
+/*You need to make a corresponding use of the 
+retainContentAlignment property for other applicable widgets.*/
+var btn = new voltmx.ui.Button({
+    &quot;focusSkin&quot;: &quot;defBtnFocus&quot;,
+    &quot;height&quot;: &quot;50dp&quot;,
+    &quot;id&quot;: &quot;myButton&quot;,
+    &quot;isVisible&quot;: true,
+    &quot;left&quot;: &quot;0dp&quot;,
+    &quot;skin&quot;: &quot;defBtnNormal&quot;,
+    &quot;text&quot;: &quot;text always from top left&quot;,
+    &quot;top&quot;: &quot;0dp&quot;,
+    &quot;width&quot;: &quot;260dp&quot;,
+    &quot;zIndex&quot;: 1
+}, {
+    &quot;contentAlignment&quot;: constants.CONTENT_ALIGN_TOP_LEFT,
+    &quot;displayText&quot;: true,
+    &quot;padding&quot;: [0, 0, 0, 0],
+    &quot;paddingInPixel&quot;: false,
+    &quot;retainFlexPositionProperties&quot;: false,
+    &quot;retainContentAlignment&quot;: true
+}, {});
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Available in IDE</li>
+<li>Windows, iOS, Android, and SPA</li>
+</ul>
 <hr />
-<p>retainFlexPositionProperties Property</p>
+</details>
+<details close="close">
+<p><summary>retainFlexPositionProperties Property</summary></p>
 <hr />
+<p>This property is used to retain flex positional property values as they were defined. The flex positional properties are left, right, and padding.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> Locale-level configurations take priority when invalid values are given to this property, or if it is not defined.</p>
+</blockquote>
+<p>The mirroring widget layout properties should be defined as follows.</p>
+<pre><code>function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+    return (isI18nLayoutConfigEnabled &amp;&amp;
+    localeLayoutConfig[defaultLocale]
+    [&quot;mirrorFlexPositionalProperties&quot;] == true &amp;&amp;
+    !widgetRetainFlexPositionPropertiesValue);
+}
+</code></pre>
+<p>The following table illustrates how widgets consider Local flag and Widget flag values.</p>
+<table>
+<thead>
+<tr>
+<th>Properties</th>
+<th>Local Flag Value</th>
+<th>Widget Flag Value</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mirror/retain FlexPositionProperties</td>
+<td>true</td>
+<td>true</td>
+<td>Use the designed layout from widget for all locales. Widget layout overrides everything else.</td>
+</tr>
+<tr>
+<td>Mirror/retain FlexPositionProperties</td>
+<td>true</td>
+<td>false</td>
+<td>Use Mirror FlexPositionProperties since locale-level Mirror is true.</td>
+</tr>
+<tr>
+<td>Mirror/retain FlexPositionProperties</td>
+<td>true</td>
+<td>not specified</td>
+<td>Use Mirror FlexPositionProperties since locale-level Mirror is true.</td>
+</tr>
+<tr>
+<td>Mirror/retain FlexPositionProperties</td>
+<td>false</td>
+<td>true</td>
+<td>Use the designed layout from widget for all locales. Widget layout overrides everything else.</td>
+</tr>
+<tr>
+<td>Mirror/retain FlexPositionProperties</td>
+<td>false</td>
+<td>false</td>
+<td>Use the Design/Model-specific default layout.</td>
+</tr>
+<tr>
+<td>Mirror/retain FlexPositionProperties</td>
+<td>false</td>
+<td>not specified</td>
+<td>Use the Design/Model-specific default layout.</td>
+</tr>
+<tr>
+<td>Mirror/retain FlexPositionProperties</td>
+<td>not specified</td>
+<td>true</td>
+<td>Use the designed layout from widget for all locales. Widget layout overrides everything else.</td>
+</tr>
+<tr>
+<td>Mirror/retain FlexPositionProperties</td>
+<td>not specified</td>
+<td>false</td>
+<td>Use the Design/Model-specific default layout.</td>
+</tr>
+<tr>
+<td>Mirror/retain FlexPositionProperties</td>
+<td>not specified</td>
+<td>not specified</td>
+<td>Use the Design/Model-specific default layout.</td>
+</tr>
+</tbody>
+</table>
+<p><b>Syntax</b></p>
+<pre><code>
+retainFlexPositionProperties
+</code></pre>
+<p><b>Type</b></p>
+<p>Boolean</p>
+<p><b>Read/Write</b></p>
+<p>No (only during widget-construction time)</p>
+<p><b>Example</b></p>
+<pre><code>//This is a generic property that is applicable for various widgets.
+//Here, we have shown how to use the retainFlexPositionProperties property for Button widget.
+/*You need to make a corresponding use of the 
+retainFlexPositionProperties property for other applicable widgets.*/
+var btn = new voltmx.ui.Button({
+    &quot;focusSkin&quot;: &quot;defBtnFocus&quot;,
+    &quot;height&quot;: &quot;50dp&quot;,
+    &quot;id&quot;: &quot;myButton&quot;,
+    &quot;isVisible&quot;: true,
+    &quot;left&quot;: &quot;0dp&quot;,
+    &quot;skin&quot;: &quot;defBtnNormal&quot;,
+    &quot;text&quot;: &quot;always left&quot;,
+    &quot;top&quot;: &quot;0dp&quot;,
+    &quot;width&quot;: &quot;260dp&quot;,
+    &quot;zIndex&quot;: 1
+}, {
+    &quot;contentAlignment&quot;: constants.CONTENT_ALIGN_CENTER,
+    &quot;displayText&quot;: true,
+    &quot;padding&quot;: [0, 0, 0, 0],
+    &quot;paddingInPixel&quot;: false,
+    &quot;retainFlexPositionProperties&quot;: true,
+    &quot;retainContentAlignment&quot;: false
+}, {});
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Available in IDE</li>
+<li>Windows, iOS, Android, and SPA</li>
+</ul>
 <hr />
-<p>retainFlowHorizontalAlignment Property</p>
+</details>
+<details close="close">
+<p><summary>retainFlowHorizontalAlignment Property</summary></p>
 <hr />
+<p>This property is used to convert Flow Horizontal Left to Flow Horizontal Right.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> Locale-level configurations take priority when invalid values are given to this property, or if it is not defined.</p>
+</blockquote>
+<p>The mirroring widget layout properties should be defined as follows.</p>
+<pre><code>function getIsFlexPositionalShouldMirror(widgetRetainFlexPositionPropertiesValue) {
+    return (isI18nLayoutConfigEnabled &amp;&amp;
+    localeLayoutConfig[defaultLocale]
+    [&quot;mirrorFlexPositionalProperties&quot;] == true &amp;&amp;
+    !widgetRetainFlexPositionPropertiesValue);
+}
+</code></pre>
+<p>The following table illustrates how widgets consider Local flag and Widget flag values.</p>
+<table>
+<thead>
+<tr>
+<th>Properties</th>
+<th>Local Flag Value</th>
+<th>Widget Flag Value</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mirror/retain FlexPositionProperties</td>
+<td>true</td>
+<td>true</td>
+<td>Use the designed layout from widget for all locales. Widget layout overrides everything else.</td>
+</tr>
+<tr>
+<td>Mirror/retain FlexPositionProperties</td>
+<td>true</td>
+<td>false</td>
+<td>Use Mirror FlexPositionProperties since locale-level Mirror is true.</td>
+</tr>
+<tr>
+<td>Mirror/retain FlexPositionProperties</td>
+<td>true</td>
+<td>not specified</td>
+<td>Use Mirror FlexPositionProperties since locale-level Mirror is true.</td>
+</tr>
+<tr>
+<td>Mirror/retain FlexPositionProperties</td>
+<td>false</td>
+<td>true</td>
+<td>Use the designed layout from widget for all locales. Widget layout overrides everything else.</td>
+</tr>
+<tr>
+<td>Mirror/retain FlexPositionProperties</td>
+<td>false</td>
+<td>false</td>
+<td>Use the Design/Model-specific default layout.</td>
+</tr>
+<tr>
+<td>Mirror/retain FlexPositionProperties</td>
+<td>false</td>
+<td>not specified</td>
+<td>Use the Design/Model-specific default layout.</td>
+</tr>
+<tr>
+<td>Mirror/retain FlexPositionProperties</td>
+<td>not specified</td>
+<td>true</td>
+<td>Use the designed layout from widget for all locales. Widget layout overrides everything else.</td>
+</tr>
+<tr>
+<td>Mirror/retain FlexPositionProperties</td>
+<td>not specified</td>
+<td>false</td>
+<td>Use the Design/Model-specific default layout.</td>
+</tr>
+<tr>
+<td>Mirror/retain FlexPositionProperties</td>
+<td>not specified</td>
+<td>not specified</td>
+<td>Use the Design/Model-specific default layout.</td>
+</tr>
+</tbody>
+</table>
+<p><b>Syntax</b></p>
+<pre><code>
+retainFlowHorizontalAlignment
+</code></pre>
+<p><b>Type</b></p>
+<p>Boolean</p>
+<p><b>Read/Write</b></p>
+<p>No (only during widget-construction time)</p>
+<p><b>Example</b></p>
+<pre><code>//This is a generic property that is applicable for various widgets.
+//Here, we have shown how to use the retainFlowHorizontalAlignment property for Button widget.
+/*You need to make a corresponding use of the 
+retainFlowHorizontalAlignment property for other applicable widgets. */
+var btn = new voltmx.ui.Button({
+ &quot;focusSkin&quot;: &quot;defBtnFocus&quot;,
+ &quot;height&quot;: &quot;50dp&quot;,
+ &quot;id&quot;: &quot;myButton&quot;,
+ &quot;isVisible&quot;: true,
+ &quot;left&quot;: &quot;0dp&quot;,
+ &quot;skin&quot;: &quot;defBtnNormal&quot;,
+ &quot;text&quot;: &quot;always left&quot;,
+ &quot;top&quot;: &quot;0dp&quot;,
+ &quot;width&quot;: &quot;260dp&quot;,
+ &quot;zIndex&quot;: 1
+}, {
+ &quot;contentAlignment&quot;: constants.CONTENT_ALIGN_CENTER,
+ &quot;displayText&quot;: true,
+ &quot;padding&quot;: [0, 0, 0, 0],
+ &quot;paddingInPixel&quot;: false,
+ &quot;retainFlexPositionProperties&quot;: true,
+ &quot;retainContentAlignment&quot;: false,
+ &quot;retainFlowHorizontalAlignment &quot;: false
+}, {});
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Available in IDE</li>
+<li>Windows, iOS, Android, and SPA</li>
+</ul>
 <hr />
-<p>restrictCharactersSet Property</p>
+</details>
+<details close="close">
+<p><summary>restrictCharactersSet Property</summary></p>
 <hr />
 <p>This property restricts users from entering a set of input characters from the soft keyboard in the TextArea widget.</p>
-<p>Syntax</p>
-<p>restrictCharactersSet</p>
-<p>Type</p>
-<p>String</p>
-<p>Read/Write</p>
-<p>Read + Write</p>
-<p>Example</p>
-<pre><code>Form1.textArea1.restrictCharactersSet =  &quot;~#^|$%&amp;\*!&quot;;
+<p><b>Syntax</b></p>
+<pre><code>
+restrictCharactersSet
 </code></pre>
-<p>Platform Availability</p>
+<p><b>Type</b></p>
+<p>String</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Example</b></p>
+<pre><code>Form1.textArea1.restrictCharactersSet =  &quot;~#^|$%&amp;*!&quot;;
+</code></pre>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Available in the IDE</li>
 <li>Android</li>
@@ -3219,49 +4529,58 @@ frmTxtArea.myTxtArea.placeholderSkin=&quot;pSkin&quot;;
 <li>Desktop Web</li>
 </ul>
 <hr />
-<p>right Property</p>
+</details>
+<details close="close">
+<p><summary>right Property</summary></p>
 <hr />
+<p>This property determines the lower right corner of the widget and is measured from the right bounds of the parent container.</p>
+<p>The right property determines the position of the right edge of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the left edge of the parent container. In flow-vertical layout, value is ignored. In flow-horizontal layout, the value is ignored.</p>
+<p>The right property is used only if the width property is not provided.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+right
+</code></pre>
+<p><b>Type</b></p>
+<p>String</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<p>If the layoutType is set as voltmx.flex.FLOW_HORIZONTAL, the right property is measured from left edge of the right sibling widget. The horizontal space between two widgets is measured from right of the left sibling widget and left of the right sibling widget.</p>
+<p><b>Example</b></p>
+<pre><code>//Sample code to set the right property for widgets by using DP, Percentage and Pixels.
+frmHome.widgetID.right = &quot;50dp&quot;;
+
+frmHome.widgetID.right = &quot;10%&quot;;
+
+frmHome.widgetID.right = &quot;10px&quot;;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Available in the IDE</li>
+<li>iOS, Android, Windows, SPA, and Desktop Web</li>
+</ul>
 <hr />
-<p>secureTextEntry Property</p>
+</details>
+<details close="close">
+<p><summary>secureTextEntry Property</summary></p>
 <hr />
 <p>Specifies whether the text entered by the user will be secured using a mask character, such as asterisk or dot.</p>
-<p>Syntax</p>
-<p>secureTextEntry</p>
-<p>Type</p>
+<p><b>Syntax</b></p>
+<pre><code>
+secureTextEntry
+</code></pre>
+<p><b>Type</b></p>
 <p>Boolean</p>
-<p>Read/Write</p>
+<p><b>Read/Write</b></p>
 <p>Read + Write</p>
-<p>Remarks</p>
+<p><b>Remarks</b></p>
 <p>The default value for this property is false.</p>
 <ul>
 <li>If set to <em>true</em>, the text in the TextArea will be masked.</li>
 <li>If set to <em>false</em>, the text in the TextArea will be displayed as clear text.</li>
 </ul>
 <p>This is typically set to <em>true</em> for a password field.</p>
-<p>Example</p>
-<p>Setting the secureTextEntry on widget creation</p>
-<pre><code>//Defining the properties for a Textbox with secureTextEntry:true.
-var txtBasic = {
-    id: &quot;textBox1&quot;,
-    skin: &quot;txtSkin&quot;,
-    focusSkin: &quot;txtFSkin&quot;,
-    text: &quot;Text&quot;,
-    maxTextLength: 20,
-    isVisible: true,
-    secureTextEntry: true,
-    placeholder: &quot;enter text&quot;
-};
-var txtLayout = {
-    padding: \[5, 5, 5, 5\],
-    margin: \[5, 5, 5, 5\],
-    containerWeight: 100,
-    hExpand: true,
-    widgetAlignment: constants.WIDGET\_ALIGN\_TOP\_LEFT
-};
-var txtPSP = {};
-//Creating the Textbox.
-var textBox1 = new voltmx.ui.TextArea2(txtBasic, txtLayout, txtPSP);
-</code></pre>
+<p><b>Example</b></p>
 <pre><code>//Sample code to set the secureTextEntry property of TextArea widget.
 
 frmTxtArea.myTxtArea.secureTextEntry=true;  
@@ -3270,159 +4589,223 @@ frmTxtArea.myTxtArea.secureTextEntry=true;
 alert(&quot;The value of the secureTextEntry is:&quot;+frmTxtArea.myTxtArea.secureTextEntry);  
 
 </code></pre>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Available in the IDE</li>
-<li>Available on all platforms except iOS and Desktop Web</li>
+<li>Available on all platforms except Desktop Web</li>
 </ul>
 <hr />
-<p><a name="setImportantForAutofill"></a>setImportantForAutofill Property</p>
+</details>
+<details close="close">
+<p><summary>setImportantForAutofill Property</summary></p>
 <hr />
-<p>The <code>setImportantForAutoFill</code> property is used to set preference to a TextArea widget to show the suggestions automatically when the user enters a value.</p>
+<p>The <code>setImportantForAutoFill</code> property is used to set preference to a TextArea widget to show the suggestions automatically when the user enters a value.  </p>
 <p>Consider a FlexForm with multiple TextBox and Text Area widgets that have enabled the auto-fill feature and uses an auto-fill service to provide the suggestions. In this scenario, if a TextArea widget has enabled the <code>setImportantForAutoFill</code> property, it is provided the suggestions before other widgets by the auto-fill service.</p>
-<p>If the <code>setImportantForAutoFill</code> property is not enabled for any of the widgets in the form, the importance of the widgets is decided by the platform during run-time.</p>
-<p>Syntax</p>
-<p>setImportantForAutofill</p>
-<p>Type</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> If the <code>setImportantForAutoFill</code> property is not enabled for any of the widgets in the form, the importance of the widgets is decided by the platform during run-time.</p>
+</blockquote>
+<p><b>Syntax</b></p>
+<pre><code>
+setImportantForAutofill
+</code></pre>
+<p><b>Type</b></p>
 <p>Number</p>
-<p>Read/Write</p>
+<p><b>Read/Write</b></p>
 <p>Read + Write</p>
-<p>Remarks</p>
-<p>The default value of <code>setImportantForAutofill</code> property is <em>constants.TEXT_IMPORTANT_FOR_AUTOFILL_AUTO</em>.</p>
+<p><b>Remarks</b></p>
+<p>The default value of <code>setImportantForAutofill</code> property is constants.TEXT_IMPORTANT_FOR_AUTOFILL_AUTO.  </p>
 <p>You can specify any of the following values to this property.</p>
 <ul>
-<li><em>constants.TEXT_IMPORTANT_FOR_AUTOFILL_AUTO</em>: When the <code>setImportantForAutoFill</code> property is set as this value, the platform decides the importance of the TextArea widget automatically.</li>
-<li><em>constants.TEXT_IMPORTANT_FOR_AUTOFILL_NO</em>: When the <code>setImportantForAutoFill</code> property is set as this value for a TextArea widget, the widget is not considered for auto-fill feature.</li>
-<li><em>constants.TEXT_IMPORTANT_FOR_AUTOFILL_YES</em>: When the <code>setImportantForAutoFill</code> property is set as this value for a TextArea widget, the widget is considered for auto-fill feature.</li>
+<li>
+<p><strong>constants.TEXT_IMPORTANT_FOR_AUTOFILL_AUTO</strong>: When the <code>setImportantForAutoFill</code> property is set as this value, the platform decides the importance of the TextArea widget automatically.  </p>
+</li>
+<li>
+<p><strong>constants.TEXT_IMPORTANT_FOR_AUTOFILL_NO</strong>: When the <code>setImportantForAutoFill</code> property is set as this value for a TextArea widget, the widget is not considered for auto-fill feature.  </p>
+</li>
+<li>
+<p><strong>constants.TEXT_IMPORTANT_FOR_AUTOFILL_YES</strong>: When the <code>setImportantForAutoFill</code> property is set as this value for a TextArea widget, the widget is considered for auto-fill feature.  </p>
+</li>
 </ul>
-<p>Example</p>
-<pre><code>/\*Sample code to set the setImportantForAutofill property of TextArea widget.\*/
+<p><b>Example</b> </p>
+<pre><code>/*Sample code to set the setImportantForAutofill property of TextArea widget.*/
 
-frmTxtBox.myTxtArea.setImportantForAutofill=constants.TEXT\_IMPORTANT\_FOR\_AUTOFILL\_AUTO;
+frmTxtBox.myTxtArea.setImportantForAutofill=constants.TEXT_IMPORTANT_FOR_AUTOFILL_AUTO;
 </code></pre>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Android</li>
 </ul>
 <hr />
-<p>shadowColor Property</p>
+</details>
+<details close="close">
+<p><summary>shadowColor Property</summary></p>
 <hr />
+<p>Specifies the color for the shadow of the widget.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+shadowColor
+</code></pre>
+<p><b>Type</b></p>
+<p>Color constant or Hexadecimal number</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<ul>
+<li>Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.</li>
+<li>When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).<br />
+    For example, red complete opaque is FF000000. Red complete transparent is FF000065. The values 0x and # are not allowed in the string.</li>
+<li>A color constant is a String that is defined at the theme level. Ensure that you append the <strong>$</strong> symbol at the beginning of the color constant.</li>
+<li>This property does not have a default value.</li>
+<li>This property has more priority than (and overrides) the shadow property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.</li>
+</ul>
+<p><b>Example</b></p>
+<p>This example uses the button widget, but the principle remains the same for all widgets that have the shadowColor property.</p>
+<pre><code>Form1.btn1.shadowColor = &quot;ea5075&quot;;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>iOS</li>
+<li>Desktop Web (Not available on Desktop Web Legacy SDK)</li>
+</ul>
 <hr />
-<p>shadowDepth Property</p>
+</details>
+<details close="close">
+<p><summary>shadowDepth Property</summary></p>
 <hr />
 <p>Defines the depth of the shadow effect applied to the TextArea Widget.</p>
-<p>Syntax</p>
-<p>shadowDepth</p>
-<p>Type</p>
+<p><b>Syntax</b></p>
+<pre><code>
+shadowDepth
+</code></pre>
+<p><b>Type</b></p>
 <p>Number</p>
-<p>Read/Write</p>
+<p><b>Read/Write</b></p>
 <p>Read + Write</p>
-<p>Remarks</p>
+<p><b>Remarks</b></p>
 <p>The depth of the shadow should be specified in DP (Device Independent Pixels) units. The higher the value of shadowDepth, the appearance of the TextArea Widget is elevated from the screen and the casted shadow becomes soft.</p>
-<p>Example</p>
-<p>Setting the shadowDepth property on an existing widget</p>
+<p><b>Example</b></p>
 <pre><code>//Sample code to set the shadowDepth property of TextArea widget.
 
 frmTxtArea.myTxtArea.shadowDepth=10;
 </code></pre>
-<p>Setting the shadowDepth property on widget creation</p>
-<pre><code>//TextArea Creation.
-var TxtAr1 = new voltmx.ui.TextArea({
-    &quot;id&quot;: &quot;TxtAr1&quot;,
-    &quot;isVisible&quot;: true,
-    &quot;width&quot;: &quot;80%&quot;,
-    &quot;zIndex&quot;: 1,
-    &quot;skin&quot;: &quot;skin3&quot;,
-    &quot;shadowDepth&quot;: 10,
-    &quot;shadowType&quot;: constants.VIEW\_BOUNDS\_SHADOW
-});
-</code></pre>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Android 5.0 and later versions.</li>
 </ul>
 <hr />
-<p>shadowOffset Property</p>
+</details>
+<details close="close">
+<p><summary>shadowOffset Property</summary></p>
 <hr />
+<p>This property specifies the current coordinates of the shadow region in the widget.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+shadowOffset
+</code></pre>
+<p><b>Type</b></p>
+<p>JSON Object</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<ul>
+<li>
+<p>The JSON Object contains the X-coordinate and Y-coordinates for the offset in the following format:</p>
+<p><code>{x: value in pixels, y: value in pixels}</code></p>
+</li>
+<li>
+<p>The default unit for the value of this property is pixels.</p>
+</li>
+<li>This property does not have a default value.</li>
+<li>This property has more priority than (and overrides) the shadow property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.</li>
+</ul>
+<p><b>Example</b></p>
+<p>This example uses the button widget, but the principle remains the same for all widgets that have the shadowOffset property.</p>
+<pre><code>Form1.btn1.shadowOffset= {
+    &quot;x&quot;: &quot;3&quot;,
+    &quot;y&quot;: &quot;27&quot;
+};
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>iOS</li>
+<li>Desktop Web (Not available on Desktop Web Legacy SDK)</li>
+</ul>
 <hr />
-<p>shadowRadius Property</p>
+</details>
+<details close="close">
+<p><summary>shadowRadius Property</summary></p>
 <hr />
+<p>Specifies the radius for the blur value of the shadow.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+shadowRadius
+</code></pre>
+<p><b>Type</b></p>
+<p>Number</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<ul>
+<li>The default value of the shadowRadius property for a Responsive Web app is 0.</li>
+<li>The default unit for the value of this property is pixels.</li>
+<li>This property does not have a default value.</li>
+<li>This property has more priority than (and overrides) the shadow property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.</li>
+</ul>
+<p><b>Example</b></p>
+<p>This example uses the button widget, but the principle remains the same for all widgets that have the shadowRadius property.</p>
+<pre><code> Form1.btn1.shadowRadius = 6;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>iOS</li>
+<li>Desktop Web (Not available on Desktop Web Legacy SDK)</li>
+</ul>
 <hr />
-<p>shadowType Property</p>
+</details>
+<details close="close">
+<p><summary>shadowType Property</summary></p>
 <hr />
 <p>Sets a type of the shadow effect to apply to the TextArea Widget.</p>
-<p>Syntax</p>
-<p>shadowType</p>
-<p>Type</p>
+<p><b>Syntax</b></p>
+<pre><code>
+shadowType
+</code></pre>
+<p><b>Type</b></p>
 <p>Number</p>
-<p>Read/Write</p>
+<p><b>Read/Write</b></p>
 <p>Read + Write</p>
-<p>Remarks</p>
+<p><b>Remarks</b></p>
 <p>The property specifies a shape to the widget's shadow that is cast. You can apply any one of the following shadow types:</p>
 <p><em>VIEW_BOUNDS_SHADOW</em>: Shadow matches the widget's rectangular bounds.</p>
 <p><em>PADDED_VIEW_BOUNDS_SHADOW</em>: Shadow matches the widget's rectangular padded bounds.</p>
 <p><em>BACKGROUND_SHADOW</em>: Shadow matches the widget's background. This is the default value.</p>
-<p>Example</p>
-<p>Setting the shadowType property on an existing widget</p>
+<p><b>Example</b></p>
 <pre><code>//Sample code to set the shadowType property of TextArea widget.
 
-frmTxtArea.myTxtArea.shadowType=constants.VIEW\_BOUNDS\_SHADOW;
+frmTxtArea.myTxtArea.shadowType=constants.VIEW_BOUNDS_SHADOW;
 </code></pre>
-<p>Setting the shadowType property on widget creation</p>
-<pre><code>//TextArea Creation.
-var TxtAr1 = new voltmx.ui.TextArea({
-    &quot;id&quot;: &quot;TxtAr1&quot;,
-    &quot;isVisible&quot;: true,
-    &quot;width&quot;: &quot;80%&quot;,
-    &quot;zIndex&quot;: 1,
-    &quot;skin&quot;: &quot;skin3&quot;,
-    &quot;shadowDepth&quot;: 10,
-    &quot;shadowType&quot;: constants.VIEW\_BOUNDS\_SHADOW
-});
-</code></pre>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Android 5.0 and later versions.</li>
 </ul>
 <hr />
-<p>showCloseButton Property</p>
+</details>
+<details close="close">
+<p><summary>showCloseButton Property</summary></p>
 <hr />
 <p>Specifies if the "<em>Done</em>" button that appears in the keypad (opens when you select text box) must be visible or not.</p>
-<p>Syntax</p>
-<p>showCloseButton</p>
-<p>Type</p>
-<p>Boolean</p>
-<p>Example</p>
-<pre><code>//Defining the properties for a TextArea with showCloseButton:true.
-var tAreaBasic = {
-    id: &quot;txtArea&quot;,
-    skin: &quot;txtSkin&quot;,
-    focusSkin: &quot;txtFSkin&quot;,
-    text: &quot;Text&quot;,
-    maxTextLength: 20,
-    isVisible: true
-};
-
-var tAreaLayout = {
-    padding: \[5, 5, 5, 5\],
-    margin: \[5, 5, 5, 5\],
-    containerWeight: 100,
-    hExpand: true,
-    widgetAlignment: constants.WIDGET\_ALIGN\_TOP\_LEFT
-};
-
-var tAreaPSP = {
-    showCloseButton: true
-};
-
-//Creating the TextArea.
-var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+<p><b>Syntax</b></p>
+<pre><code>
+showCloseButton
 </code></pre>
+<p><b>Type</b></p>
+<p>Boolean</p>
+<p><b>Example</b></p>
 <pre><code>//Sample code to set the showCloseButton property of TextArea widget.
 
 frmTxtArea.myTxtArea.showCloseButton=true;
 </code></pre>
-<p>Remarks</p>
+<p><b>Remarks</b></p>
 <p>The default value for this property is true.</p>
 <ul>
 <li>If set to <em>false</em>, the "<em>Done</em>" button is not visible on the textbox.</li>
@@ -3433,20 +4816,24 @@ frmTxtArea.myTxtArea.showCloseButton=true;
 <p><img alt="" src="Resources/Images/keypadreqd.png" /></p>
 <p>The following image illustrates the Keypad when the property is set to <em>false</em>:</p>
 <p><img alt="" src="Resources/Images/keypadntreqd.png" /></p>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Available in the IDE</li>
 <li>Available on iPhone only</li>
 </ul>
 <hr />
-<p>showProgressIndicator Property</p>
+</details>
+<details close="close">
+<p><summary>showProgressIndicator Property</summary></p>
 <hr />
 <p>Specifies if there must be an indication to the user that the widget content is being loaded.</p>
-<p>Syntax</p>
-<p>showProgressIndicator</p>
-<p>Type</p>
+<p><b>Syntax</b></p>
+<pre><code>
+showProgressIndicator
+</code></pre>
+<p><b>Type</b></p>
 <p>Boolean</p>
-<p>Remarks</p>
+<p><b>Remarks</b></p>
 <p>You can use this property typically for forms that require network calls during post show.</p>
 <p>The default value for this property is true.</p>
 <ul>
@@ -3454,149 +4841,141 @@ frmTxtArea.myTxtArea.showCloseButton=true;
 <li>If set to <em>true</em> the progress indicator is displayed.</li>
 </ul>
 <p>The following image illustrates the progress indicator on iPhone:</p>
-<p><img alt="" src="Resources/Images/Need Loading Indicator During Post Show.png" /></p>
-<p>Example</p>
-<pre><code>//Defining the properties for a TextArea with showProgressIndicator:true.
-var tAreaBasic = {
-    id: &quot;txtArea&quot;,
-    skin: &quot;txtSkin&quot;,
-    focusSkin: &quot;txtFSkin&quot;,
-    text: &quot;Text&quot;,
-    maxTextLength: 20,
-    isVisible: true
-};
-
-var tAreaLayout = {
-    padding: \[5, 5, 5, 5\],
-    margin: \[5, 5, 5, 5\],
-    containerWeight: 100,
-    hExpand: true,
-    widgetAlignment: constants.WIDGET\_ALIGN\_TOP\_LEFT
-};
-
-var tAreaPSP = {
-    showProgressIndicator: true
-};
-
-//Creating the TextArea.
-var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
-</code></pre>
+<p><img alt="" src="Resources/Images/Need_Loading_Indicator_During_Post_Show.png" /></p>
+<p><b>Example</b></p>
 <pre><code>//Sample code to set the showProgressIndicator property of TextArea widget.
 
 frmTxtArea.myTxtArea.showProgressIndicator=true;
 </code></pre>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Available in the IDE</li>
 <li>iPhone</li>
 <li>iPad</li>
 </ul>
 <hr />
-<p>skin Property</p>
+</details>
+<details close="close">
+<p><summary>skin Property</summary></p>
 <hr />
 <p>Specifies the look and feel of the widget when not in focus.</p>
-<p>Syntax</p>
-<p>skin</p>
-<p>Type</p>
-<p>String</p>
-<p>Read/Write</p>
-<p>Read + Write</p>
-<p>Example</p>
-<pre><code>//Defining properties for a TextArea with the skin:&quot;txtSkin&quot;
-var tAreaBasic = {
-    id: &quot;txtArea&quot;,
-    skin: &quot;txtSkin&quot;,
-    focusSkin: &quot;txtFSkin&quot;,
-    text: &quot;Text&quot;,
-    maxTextLength: 20,
-    isVisible: true,
-    secureTextEntry: true
-};
-
-var tAreaLayout = {
-    padding: \[5, 5, 5, 5\],
-    margin: \[5, 5, 5, 5\],
-    containerWeight: 100,
-    hExpand: true,
-    widgetAlignment: constants.WIDGET\_ALIGN\_TOP\_LEFT
-};
-
-var tAreaPSP = {};
-
-//Creating the TextArea.
-var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
-
-//Reading the skin of the TextArea      
-alert(&quot;TextArea skin ::&quot; + txtArea.skin);
+<p><b>Syntax</b></p>
+<pre><code>
+skin
 </code></pre>
+<p><b>Type</b></p>
+<p>String</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Example</b></p>
 <pre><code>//Sample code to set the skin property of TextArea widget.
 
 frmTxtArea.myTxtArea.skin=&quot;txtSkin&quot;;
 </code></pre>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Available in the IDE</li>
 <li>Available on all platforms.</li>
 </ul>
 <hr />
-<p>smartDashes Property</p>
+</details>
+<details close="close">
+<p><summary>smartDashes Property</summary></p>
 <hr />
+<p>(missing or bad snippet)</p>
 <hr />
-<p>smartInsertDelete Property</p>
+</details>
+<details close="close">
+<p><summary>smartInsertDelete Property</summary></p>
 <hr />
+<p>When you copy and paste a text inside a TextBox or a TextArea widget, you can use this property to add a space after the text.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+smartInsertDelete
+</code></pre>
+<p><b>Type</b></p>
+<p>Number</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<p>You can assign any of the following constants to the <code>smartInsertDelete</code> property.</p>
+<ul>
+<li>constants.SMART_INSERT_DELETE_TYPE_DEFAULT: When you use this constant, the spaces after the text are selectively added. It is not added for keyboard types such as email address and password.</li>
+<li>constants.SMART_INSERT_DELETE_TYPE_NO: When you use this constant, no space is added after the text.</li>
+<li>constants.SMART_INSERT_DELETE_TYPE_YES: When you use this constant, the space is added after the text.</li>
+</ul>
+<p><b>Example</b></p>
+<pre><code>//This property is applicable for TextBox and TextArea widgets.
+
+/*This example demonstrates how to use smartInsertDelete property by using myTxtBox TextBox widget in frmTextBox FlexForm. You need to use smartInsertDelete property for TextArea widget in a similar manner.*/
+frmTextBox.myTxtBox.smartInsertDelete = constants.SMART_INSERT_DELETE_TYPE_NO;
+
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>iOS 11 and onwards.</li>
+</ul>
 <hr />
-<p>smartQuotes Property</p>
+</details>
+<details close="close">
+<p><summary>smartQuotes Property</summary></p>
 <hr />
+<p>This property is used to enable or disable the curly quotes, ie,<strong>“ ‘ ’ ”</strong> inside the text of a TextBox or a TextArea widget.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+smartQuotes
+</code></pre>
+<p><b>Type</b></p>
+<p>Number</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<p>You can assign any of the following constants to the <code>smartQuotes</code> property.</p>
+<ul>
+<li>constants.SMART_QUOTES_TYPE_DEFAULT: When you use this constant, the curly quotes are selectively enabled. These quotes will be disabled for keyboard types such as email address and password.</li>
+<li>constants.SMART_QUOTES_TYPE_NO: When you use this constant, the curly quotes is disabled.</li>
+<li>constants.SMART_QUOTES_TYPE_YES: When you use this constant, the curly quotes is enabled for all keyboard types.</li>
+</ul>
+<p><b>Example</b></p>
+<pre><code>//This property is applicable for TextBox and TextArea widgets.
+/*This example demonstrates how to use smartQuotes property by using myTxtBox TextBox widget in frmTextBox FlexForm. You need to use smartQuotes property for TextArea widget in a similar manner.*/
+
+frmTextBox.myTxtBox.smartQuotes = constants.SMART_QUOTES_TYPE_NO;
+
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>iOS 11 and onwards.</li>
+</ul>
 <hr />
-<p>text Property</p>
+</details>
+<details close="close">
+<p><summary>text Property</summary></p>
 <hr />
 <p>Specifies a general or descriptive text for the TextArea widget.</p>
-<p>Syntax</p>
-<p>text</p>
-<p>Type</p>
-<p>String</p>
-<p>From V9 SP1 onwards, when you enable the <a href="#isSensitiveText">isSensitiveText</a> property,</p>
-<ol>
-<li>In Android platform, the text property returns an instance of the <a href="https://{../../../Iris/iris_api_dev_guide/Content/voltmx.types_Objects_RawBytes.md">RawBytes</a> object. Then you can use the <a href="https://{../../../Iris/iris_api_dev_guide/Content/voltmx.io.file_functions.md#readAsText">readAsText</a> API on the RawBytes object to retrieve the actual string in JavaScript to process the string. However, ensure that you set the JavaScript variable as null after the string operations are done.</li>
-<li>You must set the JavaScript text references to null after the text is no longer required. This will enable the Garbage Collection to delete the text references from the memory. This is valid for all platforms.</li>
-<li>In Android platform, you must also use the <a href="https://{../../../Iris/iris_api_dev_guide/Content/voltmx.types_Objects_RawBytes.md#clear">clear</a> API of the Rawbytes object, to clear the text reference in the Native Android RawBytes object</li>
-</ol>
-<p>Read/ Write</p>
-<p>Read + Write</p>
-<p>Example 1</p>
-<pre><code>//Defining properties for a TextArea with the text:&quot;Text&quot;
-var tAreaBasic = {
-    id: &quot;txtArea&quot;,
-    skin: &quot;txtSkin&quot;,
-    focusSkin: &quot;txtFSkin&quot;,
-    text: &quot;Text&quot;,
-    maxTextLength: 20,
-    isVisible: true,
-    secureTextEntry: true
-};
-
-var tAreaLayout = {
-    padding: \[5, 5, 5, 5\],
-    margin: \[5, 5, 5, 5\],
-    containerWeight: 100,
-    hExpand: true,
-    widgetAlignment: constants.WIDGET\_ALIGN\_TOP\_LEFT
-};
-
-var tAreaPSP = {};
-
-//Creating the TextArea.
-var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
-
-//Reading the text of the TextArea      
-alert(&quot;TextArea text ::&quot; + txtArea.text);
+<p><b>Syntax</b></p>
+<pre><code>
+text
 </code></pre>
+<p><b>Type</b></p>
+<p>String</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> From V9 SP1 onwards, when you enable the <a href="#isSensitiveText">isSensitiveText</a> property,</p>
+</blockquote>
+<ol>
+<li>In Android platform, the text property returns an instance of the <a href="../../iris_api_dev_guide/content/voltmx.types_objects_rawbytes.html">RawBytes</a> object. Then you can use the <a href="../../iris_api_dev_guide/content/voltmx.io.file_functions.html#readAsText">readAsText</a> API on the RawBytes object to retrieve the actual string in JavaScript to process the string. However, ensure that you set the JavaScript variable as null after the string operations are done.</li>
+<li>You must set the JavaScript text references to null after the text is no longer required. This will enable the Garbage Collection to delete the text references from the memory. This is valid for all platforms.</li>
+<li>In Android platform, you must also use the <a href="../../iris_api_dev_guide/content/voltmx.types_objects_rawbytes.html#clear">clear</a> API of the Rawbytes object, to clear the text reference in the Native Android RawBytes object</li>
+</ol>
+<p><b>Read/ Write</b></p>
+<p>Read + Write</p>
+<p><b>Example 1</b></p>
 <pre><code>//Sample code to set the text property of TextArea widget.
 
 frmTxtArea.myTxtArea.text=&quot;Enter Username&quot;;
 </code></pre>
-<p>Example 2</p>
-<pre><code>/\*Sample code to read and clear the text property in when the isSensitiveText property is set as true.\*/
+<p><b>Example 2</b></p>
+<pre><code>/*Sample code to read and clear the text property in when the isSensitiveText property is set as true.*/
 
 //Reading the text from the myTxtArea TextArea widget.
 var textContent = frmTxtArea.myTxtArea.text;
@@ -3610,54 +4989,61 @@ if (voltmx.type(textContent) == &quot;voltmx.types.RawBytes&quot;) {
  //Perform the required JS String manipulations on textAsString.
 
 }
-/\*In Android platform, use the clear method of the Rawbytes object to remove the text references in the native Android RawBytes object.\*/
+/*In Android platform, use the clear method of the Rawbytes object to remove the text references in the native Android RawBytes object.*/
 if (voltmx.type(textContent) == &quot;voltmx.types.RawBytes&quot;) {
  textContent.clear();
 }  
-/\*You must set the JavaScript text references to null, to enable them to be Garbage Collected and cleared from memory\*/
+/*You must set the JavaScript text references to null, to enable them to be Garbage Collected and cleared from memory*/
 textContent = null;  
 textAsString = null;
 </code></pre>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Available in the IDE</li>
 <li>Available on all platforms.</li>
 </ul>
 <hr />
-<p>textCopyable Property</p>
+</details>
+<details close="close">
+<p><summary>textCopyable Property</summary></p>
 <hr />
 <p>The textCopyable property is used to enable or disable the cut, copy and, paste of the text present in the TextArea2 widget.</p>
-<p>Syntax</p>
-<p>textCopyable</p>
-<p>Type</p>
+<p><b>Syntax</b></p>
+<pre><code>
+textCopyable
+</code></pre>
+<p><b>Type</b></p>
 <p>Boolean</p>
-<p>Read/Write</p>
+<p><b>Read/Write</b></p>
 <p>Read + Write</p>
-<p>Default value</p>
+<p><b>Default value</b></p>
 <p>True</p>
-<p>Example</p>
+<p><b>Example</b></p>
 <pre><code>//Sample code to set the textcopyable property of TextBox2 widget.  
 
 this.view.textarea.textCopyable = true;  
 
 </code></pre>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <ul>
-<li>Android</li>
-<li>Desktop Web</li>
-<li>Mobile Web</li>
+<li>Available in the Desktop Web</li>
+<li>Available in the SPA</li>
 </ul>
 <hr />
-<p>textInputMode Property</p>
+</details>
+<details close="close">
+<p><summary>textInputMode Property</summary></p>
 <hr />
 <p>This property helps you to specify the type of input characters a user can enter into the TextArea widget.</p>
-<p>Syntax</p>
-<p>textInputMode</p>
-<p>Type</p>
+<p><b>Syntax</b></p>
+<pre><code>
+textInputMode
+</code></pre>
+<p><b>Type</b></p>
 <p>Number</p>
-<p>Read/Write</p>
+<p><b>Read/Write</b></p>
 <p>Read + Write</p>
-<p>Remarks</p>
+<p><b>Remarks</b></p>
 <p>You can use this property to restrict the input characters to only numbers or a combination of alphabets, numbers, and special characters.</p>
 <p>The default value for this property is constants.TEXTAREA_INPUT_MODE_ANY.</p>
 <p>Following are the available options:</p>
@@ -3668,160 +5054,372 @@ this.view.textarea.textCopyable = true;
 </ul>
 <p>The values of <a href="#keyBoardStyle">keyBoardStyle</a> property are dependent on these modes.</p>
 <p>In Android platform, multiple lines for a textbox is displayed only when textInputMode property is set to constants.TEXTAREA_INPUT_MODE_ANY. When the option is set to constants.TEXTAREA_INPUT_MODE_NUMERIC the text is shown as single line.</p>
-<p>Example</p>
-<pre><code>/\*Defining properties for a TextArea with the 
-textInputMode:constants.TEXTAREA\_INPUT\_MODE\_NUMERIC\*/
-var tAreaBasic = {
-    id: &quot;txtArea&quot;,
-    text: &quot;Text&quot;,
-    maxTextLength: 20,
-    isVisible: true,
-    secureTextEntry: true,
-    textInputMode: constants.TEXTAREA\_INPUT\_MODE\_NUMERIC
-};
-
-var tAreaLayout = {
-    padding: \[5, 5, 5, 5\],
-    margin: \[5, 5, 5, 5\],
-    containerWeight: 100,
-    hExpand: true,
-    widgetAlignment: constants.WIDGET\_ALIGN\_TOP\_LEFT
-};
-
-var tAreaPSP = {};
-
-//Creating the TextArea.
-var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
-
-//Reading the textInputMode of the TextArea     
-alert(&quot;TextArea textInputMode ::&quot; + txtArea.textInputMode);
-</code></pre>
+<p><b>Example</b></p>
 <pre><code>//Sample code to set the textInputMode property of TextArea widget.
 
-frmTxtArea.myTxtArea.textInputMode=constants.TEXTAREA\_INPUT\_MODE\_NUMERIC;
+frmTxtArea.myTxtArea.textInputMode=constants.TEXTAREA_INPUT_MODE_NUMERIC;
 </code></pre>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Available in the IDE</li>
 <li>Available on all platforms</li>
 </ul>
 <hr />
-<p>textShadowColor Property</p>
+</details>
+<details close="close">
+<p><summary>textShadowColor Property</summary></p>
 <hr />
+<p>Specifies the color for the text shadow of the widget.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+textShadowColor
+</code></pre>
+<p><b>Type</b></p>
+<p>Color constant or Hexadecimal number</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<ul>
+<li>Colors can be specified using a 6 digit or an 8-digit hex value with alpha position. For example, ffff65 or ffffff00.</li>
+<li>When the 4-byte color format (RGBA) string is used, an alpha (A) value of 65 specifies that the color is transparent. If the value is 00, the color is opaque. The Alpha value is in percentage and must be given in the hexadecimal value for the color (100% in hexadecimal value is 65).<br />
+    For example, red complete opaque is FF000000. Red complete transparent is FF000065. The values 0x and # are not allowed in the string.</li>
+<li>A color constant is a String that is defined at the theme level. Ensure that you append the <strong>$</strong> symbol at the beginning of the color constant.</li>
+<li>This property does not have a default value.</li>
+<li>This property has more priority than (and overrides) the textShadow property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.</li>
+</ul>
+<p><b>Example</b></p>
+<p>This example uses the button widget, but the principle remains the same for all widgets that have the textShadowColor property.</p>
+<pre><code>Form1.btn1.textShadowColor = &quot;ea5075&quot;;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Android</li>
+<li>iOS</li>
+<li>Desktop Web (Not available on Desktop Web Legacy SDK)</li>
+</ul>
 <hr />
-<p>textShadowOffset Property</p>
+</details>
+<details close="close">
+<p><summary>textShadowOffset Property</summary></p>
 <hr />
+<p>This property specifies the current coordinates of the text shadow region in the widget.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+textShadowOffset
+</code></pre>
+<p><b>Type</b></p>
+<p>JSON Object</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<ul>
+<li>
+<p>The JSON Object contains the X-coordinate and Y-coordinates for the offset in the following format:</p>
+<p><code>{x: value in pixels, y: value in pixels}</code></p>
+</li>
+<li>
+<p>The default unit for the value of this property is pixels.</p>
+</li>
+<li>This property does not have a default value.</li>
+<li>This property has more priority than (and overrides) the textShadow property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.</li>
+</ul>
+<p><b>Example</b></p>
+<p>This example uses the button widget, but the principle remains the same for all widgets that have the textShadowOffset property.</p>
+<pre><code>Form1.btn1.textShadowOffset = {
+    &quot;x&quot;: &quot;2&quot;,
+    &quot;y&quot;: &quot;24&quot;
+};
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Android</li>
+<li>iOS</li>
+<li>Desktop Web (Not available on Desktop Web Legacy SDK)</li>
+</ul>
 <hr />
-<p>textShadowRadius Property</p>
+</details>
+<details close="close">
+<p><summary>textShadowRadius Property</summary></p>
 <hr />
+<p>Specifies the radius for the blur value of the text shadow.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+textShadowRadius
+</code></pre>
+<p><b>Type</b></p>
+<p>Number</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<ul>
+<li>The default value of the textShadowRadius property for a Responsive Web app is 0.</li>
+<li>The default unit for the value of this property is pixels.</li>
+<li>This property does not have a default value.</li>
+<li>This property has more priority than (and overrides) the textShadow property of the configured skin. Even if there is no skin configured for the widget, this property updates the skin.</li>
+</ul>
+<p><b>Example</b></p>
+<p>This example uses the button widget, but the principle remains the same for all widgets that have the textShadowRadius property.</p>
+<pre><code> Form1.btn1.textShadowRadius = 6;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Android</li>
+<li>iOS</li>
+<li>Desktop Web (Not available on Desktop Web Legacy SDK)</li>
+</ul>
 <hr />
-<p>toolTip Property</p>
+</details>
+<details close="close">
+<p><summary>toolTip Property</summary></p>
 <hr />
 <p>Specifies the hint text when the cursor hovers over a widget, without clicking it.</p>
-<p>Syntax</p>
-<p>toolTip</p>
-<p>Type</p>
-<p>String</p>
-<p>Read/Write</p>
-<p>Read + Write</p>
-<p>Remarks</p>
-<p>The text entered in the tooltip appears as a small box when the cursor hovers over a widget.</p>
-<p>Example</p>
-<pre><code>//Defining the properties for a TextArea with toolTip:sample text
-var tAreaBasic = {
-    id: &quot;textarea1&quot;,
-    isVisible: true,
-    skin: &quot;txtSkin&quot;,
-    focusSkin: &quot;txtFSkin&quot;,
-    text: &quot;Click Here&quot;
-};
-
-var tAreaLayout = {
-    containerWeight: 100,
-    padding: \[5, 5, 5, 5\],
-    margin: \[5, 5, 5, 5\],
-    hExpand: true,
-    vExpand: false,
-    displayText: true
-};
-
-var tAreaPSP = {
-    toolTip: &quot;sample text&quot;
-};
-
-//Creating the TextArea.
-var textarea1 = new voltmx.ui.TextArea(tAreaBasic, tAreaLayout, tAreaPSP);
+<p><b>Syntax</b></p>
+<pre><code>
+toolTip
 </code></pre>
+<p><b>Type</b></p>
+<p>String</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<p>The text entered in the tooltip appears as a small box when the cursor hovers over a widget.</p>
+<p><b>Example</b></p>
 <pre><code>//Sample code to set the toolTip property of TextArea widget.
 
 frmTxtArea.myTxtArea.toolTip=&quot;Sample text&quot;;
 </code></pre>
-<p>Platform Availability</p>
+<p><b>Platform Availability</b></p>
 <ul>
 <li>Available in the IDE</li>
 <li>Windows</li>
 </ul>
 <hr />
-<p>top Property</p>
+</details>
+<details close="close">
+<p><summary>top Property</summary></p>
 <hr />
-<hr />
-<p>transform Property</p>
-<hr />
-<hr />
-<p>widgetSwipeMove Property</p>
-<hr />
-<hr />
-<p>width Property</p>
-<hr />
-<hr />
-<p>wrapText Property</p>
-<hr />
-<p>This property allows you to specify whether text in the TextArea Widget should be wrapped or not.</p>
-<p>Syntax</p>
-<p>wrapText</p>
-<p>Type</p>
-<p>Boolean</p>
-<p>Read/Write</p>
+<p>This property determines the top edge of the widget and measured from the top bounds of the parent container.</p>
+<p>The top property determines the position of the top edge of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. In freeform layout, the distance is measured from the top edge of the parent container. In flow-vertical layout, the distance is measured from the bottom edge of the previous sibling widget in the hierarchy. In flow-horizontal layout, the distance is measured from the left edge of the parent container.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+top
+</code></pre>
+<p><b>Type</b></p>
+<p>String</p>
+<p><b>Read/Write</b></p>
 <p>Read + Write</p>
-<p>Remarks</p>
-<p>The default value for this property is false.</p>
+<p><b>Remarks</b></p>
+<p>If the layoutType is set as voltmx.flex.FLOW_VERTICAL, the top property is measured from the bottom edge of the top sibling widget. The vertical space between two widgets is measured from bottom of the top sibling widget and top of the bottom sibling widget.</p>
+<p><b>Example</b></p>
+<pre><code>//Sample code to set the top property for widgets by using DP, Percentage and Pixels.
+frmHome.widgetID.top = &quot;50dp&quot;;
+
+frmHome.widgetID.top = &quot;10%&quot;;
+
+frmHome.widgetID.top = &quot;10px&quot;;
+</code></pre>
+<p><b>Platform Availability</b></p>
 <ul>
-<li>If set to <em>true</em>, the text in the TextArea Widget will get wrapped.</li>
-<li>If set to <em>false</em>, the text will be in the same line.</li>
+<li>Available in the IDE</li>
+<li>iOS, Android, Windows, SPA, and Desktop Web</li>
 </ul>
-<p>Example</p>
-<pre><code>// Defining the properties for a Textarea with the
-// wrapText:constants.TEXTAREA\_KEYBOARD\_LABEL\_SEARCH
-var txtBasic = {
-    id: &quot;textArea1&quot;,
-    isVisible: true,
-    &quot;wrapText&quot;: true
-};
-
-var txtLayout = {
-    padding: \[5, 5, 5, 5\],
-    containerWeight: 100,
-    hExpand: true
-};
-
-var txtPSP = {};
-
-//Creating the TextArea.
-var textArea1 = new voltmx.ui.TextArea2(txtBasic, txtLayout, txtPSP);
-
-//Reading the wrapText of the TextArea
-alert(&quot;Textarea wrapText ::&quot; + textArea1.wrapText);
+<hr />
+</details>
+<details close="close">
+<p><summary>transform Property</summary></p>
+<hr />
+<p>Contains an animation transformation that can be used to animate the widget.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+transform
 </code></pre>
-<pre><code>//Sample code to set the wrapText property of TextArea widget.
+<p><b>Type</b></p>
+<p>JSObject</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<p>This property is set to the identify transform by default. Any transformations applied to the widget occur relative to the widget's anchor point. The transformation contained in this property must be created using the <a href="../../iris_api_dev_guide/content/voltmx.ui_functions.html#makeAffi">voltmx.ui.makeAffineTransform</a> function.</p>
+<p><b>Example</b></p>
+<p>This example uses the button widget, but the principle remains the same for all widgets that have a transform property.</p>
+<pre><code>//Animation sample
+var newTransform = voltmx.ui.makeAffineTransform();
+newTransform.translate3D(223, 12, 56);
 
-frmTxtArea.myTxtArea.wrapText=true;
+//translates by 223 xAxis,12 in yAxis,56 in zAxis
+widget.transform = newTransform;
 </code></pre>
-<p>Platform Availability</p>
-<p>This property is available on Windows Desktop</p>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>iOS, Android, Windows, and SPA</li>
+</ul>
 <hr />
-<p>zIndex Property</p>
+</details>
+<details close="close">
+<p><summary>widgetSwipeMove Property</summary></p>
 <hr />
+<p>This property is used to enable and configure left or right swipe actions for a widget. The widgetSwipeMove Property can be used for all widgets . The most common use case is for implementing swipe action for individual rows in Segment.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+widgetSwipeMove
+</code></pre>
+<p><b>Type</b></p>
+<p>String</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Input Parameters</b></p>
+<table cellspacing="0" class="TableStyle-2015DefinitiveBasicTable" style="width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/2015DefinitiveBasicTable.css');"><colgroup><col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 111px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 93px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 184px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1"></colgroup><tbody><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1" style="text-align: center;">Parameter Name</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Type</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1" style="text-align: center;">Default Value</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1" style="text-align: center;">Description</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">translate</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Boolean</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">true</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This is an optional parameter. When the value of this parameter is set as true, the widget moves along with the swipe in the same direction.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Xboundaries</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Array</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Size of the current widget</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This is an optional parameter and it defines the boundaries of the swipe in the X-axis.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">swipeLeft/swipeRight</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">JS Object</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">&nbsp;</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This is an optional parameter and it is used to define the configuration of the widget while swiping to the left/ right. Each <i>swipeLeft</i> or <i>swipeRight</i>parameter is an array of configuration attributes containing <i>translateRange</i> , <i>callback</i> , <i>translatePos</i> , and <i>translate</i>. This JS&nbsp;Object defines the behavior of the widget during the swipe action.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">translateRange</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Array</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Size of the current widget</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This is an optional parameter and it defines the sub-boundaries for the action when the swipe action ends.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">translatePos</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Array</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Previous position of the widget</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This is an optional parameter and it determines the final translation position to be applied to the widget when the widget swipe reaches the <i>translateRange</i> value.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">callback</td><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">JS Object</td><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">null</td><td class="TableStyle-2015DefinitiveBasicTable-BodyA-Column1-Body1">This is an optional parameter and it defines the callback which needs to be triggered when the finger swipe reaches the sub boundary defined in <i>translateRange</i>. The attributes inside this parameter are described in the following table.</td></tr></tbody></table>
+<p>The following table consists of the parameters of the <em>callback</em> parameter:</p>
+<table cellspacing="0" class="TableStyle-2015DefinitiveBasicTable" style="width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/2015DefinitiveBasicTable.css');"><colgroup><col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 111px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1" style="width: 93px;"> <col class="TableStyle-2015DefinitiveBasicTable-Column-Column1"></colgroup><tbody><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1" style="text-align: center;">Parameter Name</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Type</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1" style="text-align: center;">Description</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">widgetHandle</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">&nbsp;</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This parameter consists of the widget handle or ID of the widget on which the swipe action has been performed.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">context</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">JS Object</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This is applicable only for widgets inside the Segment with row templates. Each context parameter consists of <i>rowIndex</i>, <i>sectionIndex</i> and <i>widgetref</i></td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">rowIndex</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Number</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This parameter stores the row index of the Segment containing the swiped widget.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">sectionIndex</td><td class="TableStyle-2015DefinitiveBasicTable-BodyE-Column1-Body1">Number</td><td class="TableStyle-2015DefinitiveBasicTable-BodyD-Column1-Body1">This parameter stores the section index of the Segment containing the swiped widget.</td></tr><tr class="TableStyle-2015DefinitiveBasicTable-Body-Body1"><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">widgetref</td><td class="TableStyle-2015DefinitiveBasicTable-BodyB-Column1-Body1">widgetHandle</td><td class="TableStyle-2015DefinitiveBasicTable-BodyA-Column1-Body1">This parameter stores the handle of the Segment containing the swiped widget.</td></tr></tbody></table>
+<p><b>Remarks</b></p>
+<ul>
+<li>For a Segment, the <strong>widgetSwipeMove</strong> Property is configured while setting the data of the Segment.</li>
+</ul>
+<blockquote>
+<p><strong><em>Note:</em></strong> It is not recommended to assign the widgetSwipeMove property on a top Flex container of the segment template widget.</p>
+</blockquote>
+<p>Limitations</p>
+<ul>
+<li>When a translation animation is applied to the same widget that has <strong>widgetSwipeMove</strong> already configured, the action which has been performed last takes precedence. For example, if you have set a translation animation on a FlexContainer and then set the <em>widgetSwipeMove</em> property, the actions set in <em>widgetSwipeMove</em> take precedence over the translation animation.</li>
+<li>The state of the swipe transition of the widget is not retained.</li>
+<li>
+<p>In a Segment, the <em>widgetSwipeMove</em> Property must be configured for the rows so that they reset to the previous position.</p>
+</li>
+<li>
+<p>If the widgetSwipeMove property is configured on a top level Flex container of a segment template, the onRowClick event will not be triggered. - Applicable on iOS, Android, and SPA.</p>
+</li>
+<li>Android limitation: On Android devices, when the user lifts their finger, the transition occurs immediately.</li>
+</ul>
+<p><b>Example</b></p>
+<p>Following is a code snippet for a mail app. Here we have used a Segment for listing the mail and the <em>widgetSwipeMove</em> Property has been configured for the <em>SwipeFlex</em> FlexContainer.</p>
+<pre><code>//This is a generic property that is applicable for various widgets.  
+//Here, we have shown how to use the widetSwipeMove property for Button widget.
+/*You need to make a corresponding use of the 
+widgetSwipeMove property for other applicable widgets.*/  
+//&lt;b&gt;Example&lt;/b&gt; of a swipe move configuration.  
+var swipeMoveConfig = {
+ &quot;translate&quot;: true,
+ &quot;Xboundaries&quot;: [&quot;-60%&quot;, &quot;60%&quot;],
+ &quot;swipeLeft&quot;: [{
+  &quot;translateRange&quot;: [&quot;-60%&quot;, &quot;0%&quot;],
+  &quot;callback&quot;: null,
+  &quot;translatePos&quot;: &quot;-60%&quot;,
+  &quot;translate&quot;: true
+ }, {
+  &quot;translateRange&quot;: [&quot;0%&quot;, &quot;60%&quot;],
+  &quot;callback&quot;: null,
+  &quot;translatePos&quot;: &quot;0%&quot;,
+  &quot;translate&quot;: true
+ }],
+ &quot;swipeRight&quot;: [{
+  &quot;translateRange&quot;: [&quot;-60%&quot;, &quot;0%&quot;],
+  &quot;callback&quot;: null,
+  &quot;translatePos&quot;: &quot;0%&quot;,
+  &quot;translate&quot;: true
+ }, {
+  &quot;translateRange&quot;: [&quot;0%&quot;, &quot;60%&quot;],
+  &quot;callback&quot;: this.onCallback1,
+  &quot;translatePos&quot;: &quot;60%&quot;,
+  &quot;translate&quot;: true
+ }]
+};  
+
+this.view.myButton.widgetSwipeMove=swipeMoveConfig;  
+
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>iOS, SPA</li>
+</ul>
 <hr />
+</details>
+<details close="close">
+<p><summary>width Property</summary></p>
+<hr />
+<p>This property determines the width of the widget and is measured along the x-axis.</p>
+<p>The width property determines the width of the widget’s bounding box. The value may be set using DP (Device Independent Pixels), Percentage, or Pixels. For supported widgets, the width may be derived from either the widget or container’s contents by setting the width to “preferred”.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+width
+</code></pre>
+<p><b>Type</b></p>
+<p>Number, String, and Constant</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<p>Following are the options that can be used as units of width:</p>
+<ul>
+<li>%: Specifies the values in percentage relative to the parent dimensions.</li>
+<li>px: Specifies the values in terms of device hardware pixels.</li>
+<li>dp: Specifies the values in terms of device independent pixels.</li>
+<li>default: Specifies the default value of the widget.</li>
+<li>voltmx.flex.USE_PREFERED_SIZE: When this option is specified, the layout uses preferred width of the widget as width and preferred size of the widget is determined by the widget and may varies between platforms.</li>
+</ul>
+<p><b>Example</b></p>
+<pre><code>//Sample code to set the width property for widgets by using DP, Percentage and Pixels.
+frmHome.widgetID.width = &quot;50dp&quot;;
+
+frmHome.widgetID.width = &quot;10%&quot;;
+
+frmHome.widgetID.width = &quot;10px&quot;;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Available in the IDE</li>
+<li>iOS, Android, Windows, SPA, and Desktop Web</li>
+</ul>
+<hr />
+</details>
+<details close="close">
+<p><summary>zIndex Property</summary></p>
+<hr />
+<p>This property specifies the stack order of a widget. A widget with a higher zIndex is always in front of a widget with a lower zIndex.</p>
+<p>The zIndex property is used to set the stack, or layer order of a widget. Widgets with higher values will appear “over”, or “on top of” widgets with lower values. Widgets layered over other widgets will override any interaction events tied to widgets beneath. Modifying the zIndex does not modify the order of the widgets in the VoltMX Iris hierarchy, inside of a flexContainer or form. The zIndex property accepts only positive values.</p>
+<p><b>Syntax</b></p>
+<pre><code>
+zIndex
+</code></pre>
+<p><b>Type</b></p>
+<p>Number</p>
+<p><b>Read/Write</b></p>
+<p>Read + Write</p>
+<p><b>Remarks</b></p>
+<p>The default value for this property is 1.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> Modifying the zIndex does not modify the order of the widgets inside the FlexContainer. If zIndex is same for group of overlapping widgets then widget order decides the order of overlapping. The last added widget is displayed on top.</p>
+</blockquote>
+<p>From VoltMX Iris V9 SP2 FP7, developers can configure the Z Index value for a Responsive Web app as <strong>Auto</strong> or <strong>Custom</strong>. When the selected Z Index value is <strong>Auto</strong>, the default Z Index value of 1 is applied. When the selected Z Index value is <strong>Custom</strong>, developers can specify a desired numeric value.</p>
+<p>Prior to the V9 SP2 FP7 release, the default value for the Z Index was <strong>1</strong>. When developers imported any third-party libraries with the Z index set as <strong>Auto</strong>, content overflow was disabled as the value of Auto is less than 1.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> The Z Index value Auto is supported only when the Enable JS Library mode is configured as unchecked.</p>
+</blockquote>
+<p>For existing components, the value of the Z Index is configured as <strong>1</strong> for the Native channel. For the Responsive Web channel, the Z Index will be set as <strong>Custom</strong> with <strong>1</strong> as the value.</p>
+<p>For new components, the value of the Z Index is configured as <strong>1</strong> for the Native channel. For the Responsive Web channel, the Z Index will be set as <strong>Auto</strong> or <strong>1</strong> based on the project level settings.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> If ModalContainer property is set to true in any of the FlexContainer widget, the Z Index value of that container and all of its parent containers should be set to <strong>Custom</strong>.</p>
+</blockquote>
+<p><strong>voltmx.flex.ZINDEX_AUTO</strong> : Constant to configure the Z Index value as <strong>auto</strong> programmatically.</p>
+<pre><code>//Sample code to set the ZIndex value to Auto  
+ var flx = new voltmx.ui.FlexContainer({ 
+  &quot;id&quot;: &quot;flx&quot;
+  &quot;zIndex&quot;: voltmx.flex.ZINDEX_AUTO
+});
+
+</code></pre>
+<pre><code>//Sample code to set the ZIndex value to Auto
+flx.zIndex = voltmx.flex.ZINDEX\_AUTO;
+
+</code></pre>
+<p><b>Example</b></p>
+<pre><code>//Sample code to set the zIndex property for widgets.  
+frmHome.widgetID.zIndex = 300;
+</code></pre>
+<p><b>Platform Availability</b></p>
+<ul>
+<li>Available in the IDE</li>
+<li>iOS, Android, Windows, SPA, and Desktop Web</li>
+</ul>
+<hr />
+</details>
 
               
             </article>
