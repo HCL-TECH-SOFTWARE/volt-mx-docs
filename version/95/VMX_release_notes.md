@@ -7,7 +7,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Iris](#volt-iris)
 
-
+- [V9 Servicepack 5 Fixpack 6](#v9-servicepack-5-fixpack-6)
 - [V9 Servicepack 5 Fixpack 5](#v9-servicepack-5-fixpack-5)
 - [V9 Servicepack 5 Fixpack 4](#v9-servicepack-5-fixpack-4)
 - [V9 Servicepack 2 Fixpack 58](#v9-servicepack-2-fixpack-58)
@@ -39,6 +39,14 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 - [Earlier Foundry releases](#earlier-foundry-releases)
 
 ## Volt Iris
+
+
+### V9 Servicepack 5 Fixpack 6
+
+February 23, 2023
+
+There are no new features or enhancements in this release.
+For relevant support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 
 ### V9 Servicepack 5 Fixpack 5
