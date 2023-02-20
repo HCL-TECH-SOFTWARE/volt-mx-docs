@@ -2167,7 +2167,7 @@ None
 * * *
 
 </details>
-<details close markdown="block"><summary>voltmx.application.openURL</summary>
+<details close markdown="block"><summary id="voltmx.app4">voltmx.application.openURL</summary>
 
 * * *
 
@@ -2211,9 +2211,9 @@ When you use this API, the behavior of the application is as follows on differen
 
 | Platform | Behavior |
 | --- | --- |
-| iPhone | On 4.0 and above versions, the application opens the specified URL in the native browser and the application goes into background On versions below 4.0, the application opens the specified URL in the native browser and the application exits For opening the maps application of iOS, please using following URLs: For iOS 5 :[http://maps.google.com/maps](http://maps.google.com/maps) For iOS 6:[http://maps.apple.com/maps](http://maps.google.com/maps) > **_Note:_** Support for the openURL API has been deprecated for the iPhone platform. To achieve the functionality of the voltmx.application.openURL API in Volt MX Iris V9, use the [voltmx.application.openURLAsync](#openURLAsync) API. |
-| Android | The application opens the specified URL in the native browser and the application goes into background |
-| SPA | The URL opens in the browser The application redirects the existing browser instance to the new URL |
+| iPhone | <ul><li>On 4.0 and above versions, the application opens the specified URL in the native browser and the application goes into background.</li><li>On versions below 4.0, the application opens the specified URL in the native browser and the application exits.</li><li>For opening the maps application of iOS, please using following URLs:<ul><li>For iOS 5: <a href="http://maps.google.com/maps">http://maps.google.com/maps</a></li><li>For iOS 6: <a href="http://maps.apple.com/maps">http://maps.google.com/maps</a></li></ul></li></ul>**_Note:_** Support for the openURL API has been deprecated for the iPhone platform. To achieve the functionality of the voltmx.application.openURL API in Volt MX Iris V9, use the [voltmx.application.openURLAsync](#openURLAsync) API. |
+| Android | The application opens the specified URL in the native browser and the application goes into background. |
+| SPA | The URL opens in the browser and the application redirects the existing browser instance to the new URL. |
 
 
 ### Platform Availability
