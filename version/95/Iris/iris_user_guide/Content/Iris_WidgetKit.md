@@ -1,6 +1,6 @@
 
-Configure iOS Home Screen Widgets in
-====================================
+Configure iOS Home Screen Widgets in Volt MX Iris
+===================================================
 
 A widget elevates key content from an app and displays it on the home screen of an iPhone or iPad, where users can see it at a glance. With three different sizes available (small, medium, and large), widgets can display a wide range of information. Users can personalize widgets to see details specific to their needs, and arrange their widgets in whatever way works best for them.
 
@@ -55,28 +55,28 @@ To use iOS Home Screen Widgets in Volt MX Iris, you must include the widget conf
         *   **JSScripts**: A folder that contains a widget.js file with two async functions passed with a callback. 
         
         
-            Here is a sample code snippet with the two functions:
+            Here is a sample code snippet with the two functions:  
 
-            ```
 
-            function getSnapshot(callback, widgetSize){
+            <pre><code style="display:block;background-color:#eee;">{
 
-            var entry = new Entry(new Date(), {});
+            function getSnapshot(callback, widgetSize){  
 
-            callback(entry);
+            var entry = new Entry(new Date(), {});  
 
-            }
+            callback(entry);  
 
-            function getTimelines(callback, widgetSize){
+            }  
 
-            var entry = new Entry(new Date(), {});
+            function getTimelines(callback, widgetSize){  
 
-            callback([entry], TimelinePolicy.never());
+            var entry = new Entry(new Date(), {});  
 
-            }
-
-            ```
-
+            callback([entry], TimelinePolicy.never());  
+            
+            }</pre> </code>
+            
+    
             
         *   **Views**: A folder that contains either the form.sm folders or a composite form.json structure file. The views folder must also contain the themes folder packaged with it if the form.json file is not present in the project.
             
@@ -148,11 +148,17 @@ Widgets use the following two important functions:
 *   [getSnapshot](#getSnapshot)
 *   [getTimeline](#getTimeline)
 
+
+<a id="getSnapshot"></a>         
+
 **getSnapshot**
 
 The getSnapshot function returns a single snap of data, as the name indicates. Usually, the getSnapshot function provides a representation of the widget for better user understanding.
 
 The getSnapshot function is invoked by the native framework when the widget must appear on the widget gallery. When the getSnapshot function is invoked, the widget.js file of the widget is triggered. As the getSnapshot function returns a single snap of data, you must pass a single [Entry object](#Entry) (with data) as an input for the getSnapshot callback function. The expected data at that particular moment is then displayed on the widget.
+
+
+<a id="getTimeline"></a>  
 
 **getTimeline**
 
@@ -163,6 +169,9 @@ The getTimeline function is invoked by the native framework when the widget is a
 *   **Reload Never**: The widget does not reload the data, and keeps displaying the entries that were passed as the input (with the respective date time objects) to the getTimeline function. The last entry gets displayed perpetually, and the getTimeline function is not triggered after all the entries have been displayed.
 *   **Reload At End**: The getTimeline function for input data of the widget is reloaded after the widget displays the last entry that was passed as the input. AFter the last entry is displayed, the getTimeline function is triggered with a request for the new data to be displayed.
 *   **Reload After (date)**: The getTimeline function is triggered at a particular moment that you provide as the input (with the date-time object).
+
+
+<a id="Entry"></a>
 
 **Entry Object - Entry Class**
 
@@ -223,7 +232,7 @@ function getTimelines(callback, widgetSize){
 ```
 ### Data retrieval for Widgets
 
-Widgets can receive data from network requests by using the [Volt MX Networking APIs](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.net_functions.html) or through the [Shared App Group APIs](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/sharedappgroupcontainerapi.html).
+Widgets can receive data from network requests by using the [Volt MX Networking APIs](../../../Iris/iris_api_dev_guide/content/voltmx.net_functions.md#HttpRequ) or through the [Shared App Group APIs](../../../Iris/iris_api_dev_guide/content/sharedappgroupcontainerapi.md#shared-app-group-container-api-for-ios).
 
 
 ### Widgets with Multiple Timelines
