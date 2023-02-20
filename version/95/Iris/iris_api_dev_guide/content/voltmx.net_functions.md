@@ -406,7 +406,7 @@ Available on Android platform.
 * * *
 
 </details>
-<details markdown="block" id="HttpReq"><summary>voltmx.net.HttpRequest</summary>
+<details markdown="block" id="HttpReq"><summary id="HttpRequ">voltmx.net.HttpRequest</summary>
 
 
 * * *

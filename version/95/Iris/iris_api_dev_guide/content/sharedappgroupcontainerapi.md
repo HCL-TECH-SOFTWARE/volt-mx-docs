@@ -1,6 +1,4 @@
-                            
-
-You are here: Shared App Group Container API for iOS
+<a id="shared-app-group-container-api-for-ios"></a>
 
 Shared App Group Container API for iOS
 ======================================
