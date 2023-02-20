@@ -157,9 +157,3 @@ Follow these steps to enable Node Builds for Responsive Web Apps:
 6. Build and Publish the project as usual.
 
 Observe the time taken to build the app is less than half the time it used to take.
-
-> NOTE: From the V9 Service Pack 7 release, the build performance of Responsive Web Apps (that use the CSS Library mode) has been enhanced to reduce the build time. However, the new build process does not have support for the following features:
->
-> * Functional Modules
-> * Search Engine Optimization
-> * Minification of CSS files in Release Mode
