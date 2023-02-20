@@ -47,7 +47,7 @@ Preview your Web App with Iris
       
     <!-- ![](Resources/Images/LivePreview_707x373.png)  VM -->
       
-    In Iris, you can see a **Live Preview is ready** window. The window contains App Details and QR code for the web app. Using the details, you can preview the web app on your device. For more details on how to view the app on your device, go to [Preview an App on a Device](../../../Iris/iris_app_viewer/Content/PreviewAnAppOnADevice.md).  
+    In Iris, you can see a **Live Preview is ready** window. The window contains App Details and QR code for the web app. Using the details, you can preview the web app on your device. For more details on how to view the app on your device, go to [Preview an App on a Device](../../../Iris/iris_app_viewer/Content/FunctionalPreviewStarter.md).  
       
     ![](Resources/Images/wifi-qr-preview_528x378.png)  
       
