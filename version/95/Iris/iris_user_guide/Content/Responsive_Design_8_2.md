@@ -288,7 +288,7 @@ The fix or workaround for having precedence for `component level properties sett
 
 The solution mentioned in this document is for covering a scenario wherein if a customer(s) expects component level properties setting to be having precedence over form level properties settings.  
 
-In VoltMX 9.2 IRIS, there has been a design change (use case) implemented wherein form level properties settings would take precedence over component level properties settings in below scenarios or cases: 
+In VoltMX 9.2 IRIS (and in 9.5 as well), there has been a design change (use case) implemented wherein form level properties settings would take precedence over component level properties settings in below scenarios or cases: 
 
 1. If the channel selected is responsive web & 
 
