@@ -150,6 +150,7 @@ The following are the APIs, keys, and constants associated with Responsive Web.
 *   [voltmx.application.setApplicationBehaviors (Breakpoint key)](../../../Iris/iris_api_dev_guide/content/voltmx.application_functions.md#voltmx.app)
 *   [voltmx.application.getCurrentBreakpoint();](../../../Iris/iris_api_dev_guide/content/voltmx.application_functions.md#voltmx.application.getCurrentBreakpoint)
 *   [constants.BREAKPOINT\_MAX\_VALUE](../../../Iris/iris_api_dev_guide/content/voltmx.application_functions.md#constants)
+*   [Custom components level properties setting and precedence in context of responsive web apps](#custom-components-level-properties-setting-and-precedence-in-context-of-responsive-web-apps)
 
 Create a Breakpoint
 -------------------
@@ -266,3 +267,45 @@ In Visualizer V9 GA, CSS 3.0 Flex engine is used. The usage of CSS 3.0 impacts a
 *   All deprecated properties and methods (already mention in doc) will not work and would throw errors. (For example, Segment properties like... selectedIndex/selectedIndices and more...)
 *   The Calendar icon image will stretch/shrink to fit the height of calendar by maintaining icon's aspect-ratio.
 *   The Calendar date is a deprecated property and will not be honored anymore, app developer must use the dateComponents property instead.
+
+
+## Custom components level properties setting and precedence in context of responsive web apps
+
+
+### Channel
+
+Responsive Web/Desktop 
+
+### Subject
+
+The fix or workaround for having precedence for `component level properties setting` over form level properties settings through component level controller & constructor specified code.
+
+### Components In Scope
+
+<b>(With Contract/Without Contract)</b>
+
+### Background
+
+The solution mentioned in this document is for covering a scenario wherein if a customer(s) expects component level properties setting to be having precedence over form level properties settings.  
+
+In VoltMX 9.2 IRIS, there has been a design change (use case) implemented wherein form level properties settings would take precedence over component level properties settings in below scenarios or cases: 
+
+1. If the channel selected is responsive web & 
+
+2. If the responsive web application doesn’t include <b>preShow</b> OR <b>onMapping</b> event implemented at app level 
+
+### Workaround Description: 
+
+As stated above, if responsive web app doesn’t include <b>preShow</b> OR <b>onMapping</b> event implemented at app level then, to have component level precedence, follow the below approach: 
+
+1. Inside the Form<b> -> </b>Action Editor<b> -> </b>preShow event<b>
+   -> </b>Add snippet<b> -> </b>add below line: 
+
+     **voltmx.visualizer.syncComponentInstanceDataCache(eventobject);**
+
+2. Click on `Save` button and close action editor
+
+With this addition, whatever properties that are being set at component level through controller & constructor inside the controller, will always take precedence over form level properties settings.  
+
+> **_Note:_** As stated in the beginning of description above, the above addition is only required if either <b>preshow</b> OR <b>onMapping</b> is not implemented by responsive web app. If responsive web app has already had any one of these two events implemented with some code inside them, <b>then this fix is not required</b>, it will work seamlessly.
+ 
