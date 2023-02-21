@@ -282,9 +282,9 @@ On iOS devices, you can use the [PDFView](../../../Iris/iris_api_dev_guide/conte
 
 For Android devices, to access PDF files in your app, you must create an FFI logic that will return the base64 string of the PDF file to the Volt MX server and store the data. Alternatively, you can view the content of a PDF in a Browser widget.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)How do I open an.md link from the Browser widget in an external browser?](javascript:void(0);) 
+[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)How do I open a .md link from the Browser widget in an external browser?](javascript:void(0);) 
 
-You can use the [voltmx.application.openURL](../../../Iris/iris_api_dev_guide/content/voltmx.application_functions.md#voltmx.app4) API to access a link from the Browser widget in an external browser.
+You can use the [voltmx.application.openURL](../../../Iris/iris_api_dev_guide/content/voltmx.application_functions.html#voltmx.app4) API to access a link from the Browser widget in an external browser.
 
 The following code snippet is an example that implements the API:
 
@@ -361,11 +361,3 @@ openExternalApp: function(packageName) {
     }
 }
 ```
-
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Question?](javascript:void(0);) 
-
-Solution.
-
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Question?](javascript:void(0);) 
-
-Solution.
