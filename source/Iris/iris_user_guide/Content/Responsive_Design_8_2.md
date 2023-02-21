@@ -301,7 +301,7 @@ As stated above, if responsive web app doesn’t include <b>preShow</b> OR <b>on
 1. Inside the Form<b> -> </b>Action Editor<b> -> </b>preShow event<b>
    -> </b>Add snippet<b> -> </b>add below line: 
 
-     voltmx.visualizer.syncComponentInstanceDataCache(eventobject);
+     **voltmx.visualizer.syncComponentInstanceDataCache(eventobject);**
 
 2. Click on `Save` button and close action editor
 
