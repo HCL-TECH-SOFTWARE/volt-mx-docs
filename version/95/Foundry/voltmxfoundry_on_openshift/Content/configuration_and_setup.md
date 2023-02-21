@@ -190,7 +190,8 @@ To configure the passthrough, you need to create a secure route for the Foundry 
 
 2. Under **Security**, select the **Secure Route** check box.
 
-3. From the **TLS termination** list, select **Passthrough**.
+3. From the **TLS termination** list, select **Passthrough**. <br/>
+
     ![](Resources/Images/createRoute_security.png)
 
 4. Provide the required values in the [Application Server Details](#Application-Server-Details) section of the [config.properties](#config-properties) file.
