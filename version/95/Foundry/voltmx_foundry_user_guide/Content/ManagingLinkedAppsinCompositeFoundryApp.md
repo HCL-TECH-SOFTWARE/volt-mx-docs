@@ -1,7 +1,5 @@
-﻿  
-
-Managing Linked Apps in a Composite Foundry App
-----------------------------------------------
+﻿Managing Linked Apps in a Composite Foundry App
+================================================
 
 VoltMX Foundry supports Manage Linked Apps (app modularity) feature that allows linking one ore more Foundry apps into another Foundry apps - composite apps. The services of the linked apps will be accessible to the client applications mapped to the composite app.  
 
@@ -239,11 +237,11 @@ During app publishing, Volt MX Foundry allows you to reconfigure certain default
 
 ### <a name="MFCLI"></a>MFCLI Commands for Publishing Composite Apps
 
-#### <a name="--publis"></a>--publishMicroApps parameter for MFCLI Publish Composite Apps
+### <a name="--publis"></a> --publishMicroApps parameter for MFCLI Publish Composite Apps
 
 From V9SP3, Publish command will now accept an additional parameter called ‘publishMicroApps’. If you specify the parameter in the Publish command, it will publish all dependent micro apps as well.
 
-<h5>MFCLI Command to publish a composite app along with dependent linked apps</h5><br/>  
+####  _MFCLI Command to publish a composite app along with dependent linked apps_
 
 `--publishMicroApps:`  
 
@@ -254,11 +252,11 @@ From V9SP3, Publish command will now accept an additional parameter called ‘pu
     `java -jar mfcli.jar publish -a <appName> -e <envName>`
 
 
-#### <a name="-mfConso"></a>-mfConsoleVersion Parameter for MFCLI Publish Foundry Console Version
+### <a name="-mfConso"></a> -mfConsoleVersion Parameter for MFCLI Publish Foundry Console Version
 
 From V9SP3GA, the MFCLI Publish command accepts an additional parameter called ‘mfConsoleVersion’. This console version needs to be specified for older Foundry versions. This param has bee added to support the backward compatibility.
 
-<h5>MFCLI Command to Publish Foundry Console version from V9SP3 GA</h5><br/>  
+#### _MFCLI Command to Publish Foundry Console version from V9SP3 GA_
 
 `mfConsoleVersion`  
 
@@ -273,11 +271,11 @@ For example, if you are using Foundry V9.2 or lower and mfcli.jar V9.3 or higher
 
 
 
-#### <a name="--Includ"></a>--IncludChildApps Parameter for MFCLI object-services-meta command
+### <a name="--Includ"></a> --IncludChildApps Parameter for MFCLI object-services-meta command
 
 From V9SP3, the Object services meta command will now accept an additional parameter called ‘includeChildApps’. If you specify the parameter in object-services-meta command, it will list the object services of the composite app and the linked apps.
 
-<h5>MFCLI Command to get object service meta for acomposite app with linked apps</h5><br/>  
+#### _MFCLI Command to get object service meta for acomposite app with linked apps_ 
 
 `--includeChildApps:`  
 
