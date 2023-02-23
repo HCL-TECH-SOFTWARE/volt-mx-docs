@@ -228,7 +228,7 @@ During app publishing, Volt MX Foundry allows you to reconfigure certain default
 
 [![](Resources/Images/PublishMethodCompoisteApp.png)](Resources/Images/PublishMethodCompoisteApp.png)
 
-> __**Important:**__ [Publish Method > Incremental Publish (Delta Publish)](Publish.htm#Delta). The option selected by the respective app is only applied when publishing a particular composite or linked app. A Composite app’s option does not impact a linked app’s delta publish behavior.  
+> __**Important:**__ [Publish Method > Incremental Publish (Delta Publish)](Publish.md). The option selected by the respective app is only applied when publishing a particular composite or linked app. A Composite app’s option does not impact a linked app’s delta publish behavior.  
 
 <br/>
 
@@ -262,7 +262,7 @@ From V9SP3GA, the MFCLI Publish command accepts an additional parameter called �
 
 *   To publish apps to Foundry Cloud V9.3.0.0. or higher:
     `java -jar mfcli.jar publish -a <appName> -e <envName> --mfConsoleVersion 9.3.0.0`  
-    > _**Note:**_ This is an optional parameter in case you are using the same Foundry version with matching mfcli.jar version. In this case, if the parameter is not specified, the publish command considers your current mfcli jar release version for publishing.
+       _**Note:**_ This is an optional parameter in case you are using the same Foundry version with matching mfcli.jar version. In this case, if the parameter is not specified, the publish command considers your current mfcli jar release version for publishing.
 
 
 *   if the Foundry version and the mfcli.jar version are not the same, you need to specify this parameter indicating which Foundry version the publish is being done to for the publish to be successful. Otherwise, the publish fails.
