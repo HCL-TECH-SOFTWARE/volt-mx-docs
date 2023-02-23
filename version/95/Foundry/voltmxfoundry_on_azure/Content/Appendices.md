@@ -611,7 +611,7 @@ Pod Anti-Affinity
 
 Pod anti-affinity is used to handle the creation of pods in worker nodes in Azure Kubernetes cluster for deploying a resilient application in the Kubernetes cluster. Certain rules are defined in a pod configuration which allows pod to be deployed only on a particular node when the required conditions are satisfied. No two pods of same kind will be deployed on a single node. Pod anti-affinity helps in distributing the pods across the cluster nodes and helps in creating resilient applications.
 
-AKS Autoscaling
+<a id="Autoscaling"></a>AKS Autoscaling
 ---------------
 
 AKS autoscaling feature helps to scale the service in case of a spike or a drop in application traffic. Incase of a spike in traffic new pods need to be created and the cluster should create new worker nodes to deploy additional pods to serve the incoming traffic. Similarly, when there is a drop in traffic, nodes and pods need to scale down. This ability to automatically scale up or down the number of nodes in the AKS cluster helps in running an efficient and cost-effective cluster.

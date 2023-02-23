@@ -512,10 +512,10 @@
 </li>
 </ol>
 <p><strong>The packages that are installed as part of the install scripts are: azure-cli, kubectl, jq, and sponge.</strong></p>
-<p>To make sure that the script is able to download all the necessary software, you might need to open outbound connections to the respective sites. For more information, refer to the <a href="Appendices.html#Appendic">Appendices</a> section of this document.</p>
+<p>To make sure that the script is able to download all the necessary software, you might need to open outbound connections to the respective sites. For more information, refer to the <a href="Appendices.html">Appendices</a> section of this document.</p>
 <ol>
 <li>
-<p><strong>Generate an SSH Public Key</strong> – Using the SSH protocol, you can connect and authenticate to remote servers and services. VoltMX Foundry setup expects an SSH key pair for authentication. The SSH public key is used for creating the Azure Virtual Machine, and for installing the VoltMX Foundry Setup. You need to specify the SSH Public Key in the properties file.</p>
+<p><strong><a id="Generate"></a>Generate an SSH Public Key</strong> – Using the SSH protocol, you can connect and authenticate to remote servers and services. VoltMX Foundry setup expects an SSH key pair for authentication. The SSH public key is used for creating the Azure Virtual Machine, and for installing the VoltMX Foundry Setup. You need to specify the SSH Public Key in the properties file.</p>
 <p>On Ubuntu terminal, use the <code>ssh-keygen</code> command to generate SSH public and private key files that are created by default in the <code>~/.ssh</code> directory. This command can be executed from your local (Ubuntu) machine:</p>
 <p><code>ssh-keygen -t rsa -b 2048</code> - This command is used to generate the SSH key pair using RSA encryption and a bit length of 2048. Name this key to be generated as <strong>id_rsa</strong>.</p>
 <p>You must create and configure a key pair as you need to provide them in the <a href="#SSH">Configuration</a> settings.</p>
@@ -523,9 +523,9 @@
 <p>You must leave the passphrase empty while generating the SSH key. VM logins are protected by other features such as the Google Authenticator.</p>
 </li>
 <li>
-<p><strong>Domain Name</strong>- You can have a Domain Name for the solution, which you can purchase from any third-party organizations, such as GoDaddy, and a proper DNS which you need to map to the public DNS of the Application Gateway. Refer to the <a href="Appendices.html#Appendic">Appendices</a> section, for more details.</p>
+<p><strong>Domain Name</strong>- You can have a Domain Name for the solution, which you can purchase from any third-party organizations, such as GoDaddy, and a proper DNS which you need to map to the public DNS of the Application Gateway. Refer to the <a href="Appendices.html">Appendices</a> section, for more details.</p>
 </li>
-<li><strong>SSL certs</strong>- To secure the communication, acquire the SSL certs ](Azure Application Gateway requires certificates in .pfx format) and provide them during the Installation process. These SSL certs must be associated with the Domain Name that the user has procured. Refer to the <a href="Appendices.html#Appendic">Appendices</a> section on SSL cert pfx format conversion.<ul>
+<li><strong>SSL certs</strong>- To secure the communication, acquire the SSL certs ](Azure Application Gateway requires certificates in .pfx format) and provide them during the Installation process. These SSL certs must be associated with the Domain Name that the user has procured. Refer to the <a href="Appendices.html">Appendices</a> section on SSL cert pfx format conversion.<ul>
 <li>Place the SSL certificate (in a <strong>.pfx</strong> file format) in the ssl-cert folder, and then provide the <strong>Server Domain Name</strong> and <strong>AppGateway SSL Cert Password</strong>.</li>
 <li>For enabling HTTPS on the back-end of appgateway, perform the following steps:<ol>
 <li>The SSL certificates with the cert data and key data should be in separate files (both in a <strong>.pem</strong> file format).</li>
@@ -569,15 +569,17 @@ Follow these steps to create a VM through Azure Portal:</p>
 <h2 id="configuration">Configuration</h2>
 <p>Edit the input parameters in the following files based on the type of solution you want to create.</p>
 <ul>
-<li><strong><Installation Directory>/conf/trial.properties</strong> for Trial solution.</li>
-<li><strong><Installation Directory>/conf/enterprise.properties</strong> for Enterprise solution.<br />
+<li><strong>&lt;Installation Directory&gt;/conf/trial.properties</strong> for Trial solution.</li>
+<li><strong>&lt;Installation Directory&gt;/conf/enterprise.properties</strong> for Enterprise solution.<br />
     For more information, refer to the <a href="sample.zip">sample.properties (zip)</a> file.</li>
-<li><strong><Installation Directory>/conf/enterprise.properties</strong> for Enterprise solution.<br />
-    For more information, refer to the <a href="http://opensource.voltmxtechsw.com/volt-mx-docs/voltmxlibrary/voltmxfoundry/voltmxfoundry_on_azure/Content/sample.zip">sample.properties</a> file.</li>
+<li><strong>&lt;Installation Directory&gt;/conf/enterprise.properties</strong> for Enterprise solution.<br />
+    For more information, refer to the <a href="sample.zip">sample.properties (zip)</a> file.</li>
 </ul>
 <p>VoltMX Foundry setup expects configuration through the properties file available in the <strong>conf</strong> directory of the unzipped artifacts. For the Trial solution, edit the <strong>trial.properties</strong> file. For the Enterprise solution, edit the <strong>enterprise.properties</strong> file.</p>
 <p>You need to provide the following parameters during Installation:</p>
-<p>None of the values for parameters in trial or enterprise properties file should contain quotes.</p>
+<blockquote>
+<p><strong>Important:</strong> None of the values for parameters in trial or enterprise properties file should contain quotes.</p>
+</blockquote>
 <ol>
 <li>
 <p><strong>Azure Subscription ID</strong>, <strong>Azure Service Principal ID Name</strong>, <strong>Azure Service Principal ID Secret</strong>, <strong>Service Principal Object ID</strong>, and <strong>Tenant ID</strong> - Azure Subscription ID is a GUID that uniquely identifies your subscription to use Azure services. The Application needs the Service Principal to access or configure resources through the Azure Resource Manager (ARM) in the Azure Stack.<br />
@@ -601,76 +603,75 @@ Follow these steps to create a VM through Azure Portal:</p>
     Login to Azure Portal and click on <strong>Cloud Shell</strong> as shown:<br />
 <img alt="" src="Resources/Images/Execute_1.png" />  </p>
 <ol>
-<li>Execute:  </li>
-</ol>
+<li>
+<p>Execute:  </p>
+<p><code>$ az group create --name "resource\_group\_name" --location "eastus".</code>  </p>
+<p><img alt="" src="Resources/Images/Execute_2.png" /></p>
+</li>
+<li>
+<p>Execute:</p>
+<p><code>$ az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/&lt;subscription\_id&gt;/resourceGroups/&lt;resource\_group\_name&gt;"</code>  </p>
+<p><img alt="" src="Resources/Images/Execute_3.png" /></p>
+<p>After executing the above command, a json response will be displayed on the command prompt.</p>
+<p><code>{  
+"appId": "APP\_ID",  
+"displayName": "ServicePrincipalName",  
+"name": "http://ServicePrincipalName",  
+"password": ...,  
+"tenant": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"  
+}</code></p>
+<p>In the properties file of the <strong>conf</strong> directory:</p>
+<ul>
+<li>SERVICE_PRINCIPAL_CLIENT_ID is the value of the appId.</li>
+<li>SERVICE_PRINCIPAL_CLIENT_SECRET is the value of the password.</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> The values of the SERVICE_PRINCIPAL_CLIENT_ID and SERVICE_PRINCIPAL_CLIENT_SECRET should not contain any quotation marks. For example:</p>
+<ul>
+<li>SERVICE_PRINCIPAL_CLIENT_ID = a5afa829-525c-436c-ca4f-f442027cfd2e</li>
+<li>SERVICE_PRINCIPAL_CLIENT_SECRET = cx4q44eq-fq7a-450v-zf41-4049183d1eb8</li>
+</ul>
+</blockquote>
 </li>
 </ol>
-<pre><code>$ az group create --name &quot;resource\_group\_name&quot; --location &quot;eastus&quot;.
-</code></pre>
-<pre><code>    ![](Resources/Images/Execute_2.png)
-2.  Execute:
-</code></pre>
-<pre><code>
-        $ az ad sp create-for-rbac --role=&quot;Contributor&quot; --scopes=&quot;/subscriptions/&lt;subscription\_id&gt;/resourceGroups/&lt;resource\_group\_name&gt;&quot;
-</code></pre>
-<pre><code>    ![](Resources/Images/Execute_3.png)
-
-After executing the above command, a json response will be displayed on the command prompt.
-</code></pre>
-<pre><code>{  
-    &quot;appId&quot;: &quot;APP\_ID&quot;,  
-    &quot;displayName&quot;: &quot;ServicePrincipalName&quot;,  
-    &quot;name&quot;: &quot;http://ServicePrincipalName&quot;,  
-    &quot;password&quot;: ...,  
-    &quot;tenant&quot;: &quot;XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX&quot;  
-    }  
-
-</code></pre>
-<pre><code>In the properties file of the **conf** directory:
-
-*   SERVICE\_PRINCIPAL\_CLIENT\_ID is the value of the appId.
-*   SERVICE\_PRINCIPAL\_CLIENT\_SECRET is the value of the password.
-
-The values of the SERVICE\_PRINCIPAL\_CLIENT\_ID and SERVICE\_PRINCIPAL\_CLIENT\_SECRET should not contain any quotation marks. For example:
-
-*   SERVICE\_PRINCIPAL\_CLIENT\_ID = a5afa829-525c-436c-ca4f-f442027cfd2e
-*   SERVICE\_PRINCIPAL\_CLIENT\_SECRET = cx4q44eq-fq7a-450v-zf41-4049183d1eb8
-</code></pre>
+</li>
+<li>
+<p>Generating <strong>Service Principal Object ID</strong><br />
+    Login to Azure Portal and click on <strong>Power Shell</strong>.  </p>
 <ol>
-<li>Generating <strong>Service Principal Object ID</strong><br />
-    Login to Azure Portal and click on <strong>Power Shell</strong>.  <ol>
-<li>Execute:  </li>
-</ol>
+<li>
+<p>Execute: </p>
+<p><code>$(Get-AzureADServicePrincipal -Filter "AppId eq ‘&lt;Service\_principle\_client\_ID&gt;’").ObjectId</code></p>
+<p><img alt="" src="Resources/Images/objectid.PNG" /></p>
 </li>
 </ol>
-<pre><code>$(Get-AzureADServicePrincipal -Filter &quot;AppId eq ‘&lt;Service\_principle\_client\_ID&gt;’&quot;).ObjectId
-
-</code></pre>
-<pre><code>    ![](Resources/Images/objectid.PNG)
-</code></pre>
-<ol>
+</li>
 <li>
 <p><strong>Tenant ID</strong> - Following are the steps to know your Tenant ID:</p>
 <ol>
 <li>Go to Portal.azure.com &gt; Azure Active Directory.</li>
-<li>In the Overview section you can find the Tenant ID.</li>
-</ol>
+<li>
+<p>In the Overview section you can find the Tenant ID.</p>
 <p><img alt="" src="Resources/Images/tenant_id.png" /></p>
+</li>
+</ol>
 </li>
 <li>
 <p><strong>Azure Location</strong> - Azure location is the location of the Azure Resource group.</p>
+<blockquote>
+<p><strong>Note:</strong> Azure AKS is supported in various Azure locations. For more information about Azure locations, refer to <a href="https://azure.microsoft.com/en-gb/global-infrastructure/services?products=kubernetes-service&amp;regions=all">Products available by region</a>.</p>
+</blockquote>
 </li>
-</ol>
-<p>Azure AKS is supported in various Azure locations. For more information about Azure locations, refer to <a href="https://azure.microsoft.com/en-gb/global-infrastructure/services?products=kubernetes-service&amp;regions=all">Products available by region</a>.</p>
-<ol>
 <li>
 <p><strong>SSH_PUBLIC_KEY</strong> - You need this to configure all the Linux machines with the SSH RSA public key string.</p>
 <ul>
 <li>
 <p><strong>ID_RSA_PASSPHRASE</strong> - The passphrase of the SSH key.</p>
-<p>It is advised to avoid having a passphrase for the SSH key.</p>
+<blockquote>
+<p><strong>Note:</strong> It is advised to avoid having a passphrase for the SSH key.</p>
+</blockquote>
 <p>You must use a single set of SSH keys (id_rsa.pub and id_rsa) for the entire subscription to use a single common resource group for PCI. If a new set of SSH keys is being used for cloud creation then you must create a new common resource group for PCI. To create a new common resource group for PCI you must change the default value of the variable <strong>COMMON_RESOURCE_GROUP</strong> in the properties file.</p>
-<p>For information on how to Generate an SSH public key, click <a href="VoltMX Foundry on Azure.md#Generate">here</a>.</p>
+<p>For information on how to Generate an SSH public key, click <a href="VoltMX_Foundry_on_Azure.html#Generate">here</a>.</p>
 </li>
 </ul>
 </li>
@@ -683,7 +684,9 @@ The values of the SERVICE\_PRINCIPAL\_CLIENT\_ID and SERVICE\_PRINCIPAL\_CLIENT\
 <li><strong>DNS_SERVICE_IP</strong>: If custom address space of virtual network is configured, then set the IP address value of the DNS service.</li>
 <li>
 <p><strong>SERVICE_CIDR</strong>: If custom address space of virtual network is configured, then set the IP address value of the Kubernetes internal service.</p>
-<p>If custom address space of virtual network is configured then make sure AKS_SUBNET_ADDRESS_SPACE, APP_GATEWAY_SUBNET_ADDRESS_SPACE, JUMPBOX_SUBNET_ADDRESS_SPACE, DNS_SERVICE_IP, SERVICE_CIDR IP address do not overlap and at the same time exist in the virtual network address space.</p>
+<blockquote>
+<p><strong>Note:</strong> If custom address space of virtual network is configured then make sure AKS_SUBNET_ADDRESS_SPACE, APP_GATEWAY_SUBNET_ADDRESS_SPACE, JUMPBOX_SUBNET_ADDRESS_SPACE, DNS_SERVICE_IP, SERVICE_CIDR IP address do not overlap and at the same time exist in the virtual network address space.</p>
+</blockquote>
 </li>
 <li>
 <p><strong>ALERT_NOTIFICATION_ENABLED</strong>: Flag to enable or disable alert notifications.</p>
@@ -692,7 +695,9 @@ The values of the SERVICE\_PRINCIPAL\_CLIENT\_ID and SERVICE\_PRINCIPAL\_CLIENT\
 <li><strong>USER_EMAIL_ID</strong>: Primary email ID is provided for receiving alert notifications. You can access the Azure portal to add other email IDs, if required.</li>
 <li>
 <p><strong>IS_DB_SSL_ENABLED</strong>: Flag for enabling or disabling SSL connection to access MySQL DB.</p>
-<p>If IS_DB_SSL_ENABLED is set to true then IS_SSL_ENABLED should also be set to true.</p>
+<blockquote>
+<p><strong>Note:</strong> If IS_DB_SSL_ENABLED is set to true then IS_SSL_ENABLED should also be set to true.</p>
+</blockquote>
 </li>
 <li>
 <p><strong>ARRAY_TO_WHITELIST_IPS_TO_ACCESS_DB</strong>: Enter the IP address to be whitelisted to access any database.</p>
@@ -714,28 +719,38 @@ The values of the SERVICE\_PRINCIPAL\_CLIENT\_ID and SERVICE\_PRINCIPAL\_CLIENT\
 <li><strong>AZURE_LOG_ANALYTICS_SERVICE_TIER</strong> - Service tier for Azure log analytics. The allowed values are <strong>Free</strong>, <strong>Standalone</strong>, and <strong>PerNode</strong>. The <strong>Free</strong> Tier is applicable only if you created your Azure account before 02-April-2018. This tier has a 500MB limit on the amount of data collected daily and also has a 7-day limit on data retention. If you created your Azure Account after 02-April-2018, you only have the <strong>Standalone</strong> or <strong>PerNode</strong> options. If you use the <strong>Free</strong> tier, the installation throws an error. For information about the pricing of the <strong>Standalone</strong> and <strong>PerNode</strong> options, refer to the <a href="https://azure.microsoft.com/en-in/pricing/details/log-analytics/">Azure pricing for Log Analytics</a>.</li>
 <li><strong>AZURE_LOG_ANALYTICS_DATA_RETENTION_PERIOD</strong> – This is the data retention period for the logs in log analytics solution (minimum data retention period: 7, maximum data retention period : 738). This value is required if log analytics is enabled. For <strong>Free</strong> tier, data retention period is not allowed for more than 7 days. For <strong>Standalone</strong> and <strong>PerNode</strong> tiers, data is retained at no charge for the first 31 days. There is no daily limit for data upload for <strong>Standalone</strong> or <strong>PerNode</strong> tiers.</li>
 <li><strong>DATABASE_TYPE</strong> - This is the database type you want to use for hosting VoltMX Foundry on Azure.<br />
-    The VoltMX Foundry Containers on Azure Solution supports the MS SQL and MySQL Server Databases.</li>
-<li><strong>DATABASE_USER_NAME</strong> - The preferred Database Username (other than <code>Admin</code>).</li>
-</ol>
-<p>Ensure that the value of the DB_NAME parameter in the properties file is unique. An installation error is thrown when a DB service with the same name already exists.</p>
-<ol>
-<li><strong>DATABASE_PASSWORD</strong> - String containing a minimum of 8 characters and combination of alpha-numeric and non-alpha-numeric characters.</li>
-</ol>
-<p>The Database Username and Database Password provided here must also be used to login to the Database using the Azure Portal.</p>
-<p>You must not use the <strong>$</strong> and <strong>#</strong> characters in the Database password field.</p>
-<ol>
-<li><strong>DB_SKUTIER</strong>: For MySQL DB, the Skutier can be <strong>Basic</strong>, <strong>GeneralPurpose</strong>, or <strong>MemoryOptimized</strong> tier. The default is set to GeneralPurpose.</li>
+    The Volt Foundry Containers on Azure Solution supports the MS SQL and MySQL Server Databases.</li>
+<li>
+<p><strong>DATABASE_USER_NAME</strong> - The preferred Database Username (other than <code>Admin</code>).</p>
+<blockquote>
+<p><strong>Note:</strong> Ensure that the value of the DB_NAME parameter in the properties file is unique. An installation error is thrown when a DB service with the same name already exists.</p>
+</blockquote>
+</li>
+<li>
+<p><strong>DATABASE_PASSWORD</strong> - String containing a minimum of 8 characters and combination of alpha-numeric and non-alpha-numeric characters.</p>
+<blockquote>
+<p><strong>Important:</strong> The Database Username and Database Password provided here must also be used to login to the Database using the Azure Portal.</p>
+<p><strong>Note:</strong> You must not use the <strong>$</strong> and <strong>#</strong> characters in the Database password field.</p>
+</blockquote>
+</li>
+<li>
+<p><strong>DB_SKUTIER</strong>: For MySQL DB, the Skutier can be <strong>Basic</strong>, <strong>GeneralPurpose</strong>, or <strong>MemoryOptimized</strong> tier. The default is set to GeneralPurpose.</p>
+</li>
 <li><strong>DB_SKUCAPACITY</strong>: Specify the vCore capacity. If Skutier is Basic, the possible values include 1,2. If Skutier is GeneralPurpose the possible values include 2, 4, 8, 16, 32 or 64. If Skutier is MemoryOptimized the possible values include 2, 4, 8, 16, 32.</li>
 <li><strong>DB_SKUFAMILY</strong>: Specify the Computer Generation. If Skutier is Basic the possible values include Gen4, Gen5. If Skutier is GeneralPurpose the possible values include Gen4, Gen5. If Skutier is MemoryOptimized the possible values include Gen5.</li>
 <li><strong>DB_SKUNAME</strong> = Specify the Skutier name in the following format: <strong>TierPrefix_family_capacity</strong>. For example, B_Gen5_1, GP_Gen5_16, MO_Gen5_32.</li>
 <li><strong>DB_SKUSIZEMB</strong>: Specify the max provisioned storage size required for the server in megabytes. For example, 5120.</li>
 <li><strong>MYSQL_VERSION</strong>: Specify the MySQL version. Currently supported MySQL versions are 5.6, and 5.7.</li>
 <li><strong>DB_BACKUP_RETENTION_DAYS</strong>: Specify the desired backup retention period in days. If PCI is enabled choose the value as 31 days. If PCI is disabled choose the value as 15 days.</li>
-<li><strong>DB_GEO_REDUNDANT_BACKUP</strong>: To configure the Geo-Redundancy backup for DB snapshots, set the value to <strong>Enabled</strong>. The default value is set as Disabled.</li>
-</ol>
-<p>The DB_SKUTIER, DB_SKUCAPACITY, DB_SKUFAMILY, DB_SKUNAME, DB_SKUSIZEMB, MYSQL_VERSION, DB_BACKUP_RETENTION_DAYS, and DB_GEO_REDUNDANT_BACKUP properties are specific to the <strong>MySQL Database</strong>.</p>
-<ol>
-<li><strong>DATABASE_PORT</strong>: Specify the Database Port. For MySQL it is 3306. For MS SQL it is 1433.</li>
+<li>
+<p><strong>DB_GEO_REDUNDANT_BACKUP</strong>: To configure the Geo-Redundancy backup for DB snapshots, set the value to <strong>Enabled</strong>. The default value is set as Disabled.</p>
+<blockquote>
+<p><strong>Note:</strong> The DB_SKUTIER, DB_SKUCAPACITY, DB_SKUFAMILY, DB_SKUNAME, DB_SKUSIZEMB, MYSQL_VERSION, DB_BACKUP_RETENTION_DAYS, and DB_GEO_REDUNDANT_BACKUP properties are specific to the <strong>MySQL Database</strong>.</p>
+</blockquote>
+</li>
+<li>
+<p><strong>DATABASE_PORT</strong>: Specify the Database Port. For MySQL it is 3306. For MS SQL it is 1433.</p>
+</li>
 <li><strong>AZURE_AUTH_REDIS_CACHE_NAME</strong>: Name for the cache. Name can only contain letters, numbers, and hyphens. The first and last characters must each be a letter or a number. Consecutive hyphens are not allowed.</li>
 <li><strong>AZURE_AUTH_REDIS_SKU_TYPE</strong>: The possible values are <strong>Basic</strong>, <strong>Standard</strong>, <strong>Premium</strong>.</li>
 <li><strong>AZURE_AUTH_REDIS_SKU_FAMILY</strong>: The possible values are: '<strong>C</strong>', '<strong>P</strong>'; where C = Basic/Standard, and P = Premium.</li>
@@ -751,13 +766,13 @@ The values of the SERVICE\_PRINCIPAL\_CLIENT\_ID and SERVICE\_PRINCIPAL\_CLIENT\
 <li><strong>AZURE_SERVER_REDIS_CONNECTION_POOL_SIZE</strong>: This is the maximum pool size for Redis connection. Default value is set to 64.</li>
 <li><strong>AZURE_SERVER_REDIS_CONNECTION_TIMEOUT</strong>: The value for Redis connection timeout in milliseconds. Default value is set to 10000.</li>
 <li>
-<p><strong>JUMPBOX_ENABLED</strong> - Flag to create Jumpbox as a part of the VoltMX Foundry setup. Set this to false if you do not require Jumpbox. Refer to <a href="#Appendic">Appendices</a> for more details on how to connect to the Azure Kubernetes through Jumpbox.</p>
-<p>After completion of installation, you  must whitelist the URLs that the DevOps would use to Log-in.</p>
+<p><strong>JUMPBOX_ENABLED</strong> - Flag to create Jumpbox as a part of the VoltMX Foundry setup. Set this to false if you do not require Jumpbox. Refer to <a href="Appendices.html">Appendices</a> for more details on how to connect to the Azure Kubernetes through Jumpbox.</p>
+<blockquote>
+<p><strong>Important:</strong> After completion of installation, you  must whitelist the URLs that the DevOps would use to Log-in.</p>
+</blockquote>
 </li>
 <li>
 <p><strong>Automatic Registration Details:</strong></p>
-</li>
-</ol>
 <table>
 <thead>
 <tr>
@@ -768,37 +783,43 @@ The values of the SERVICE\_PRINCIPAL\_CLIENT\_ID and SERVICE\_PRINCIPAL\_CLIENT\
 <tbody>
 <tr>
 <td>AUTO_REGISTRATION_USER_ID</td>
-<td>The E-mail id used for VoltMX Foundry Registration.</td>
+<td>The E-mail id used for Volt Foundry Registration.</td>
 </tr>
 <tr>
 <td>AUTO_REGISTRATION_PASSWORD</td>
-<td>The Password used for VoltMX Foundry Registration.</td>
+<td>The Password used for Volt Foundry Registration.</td>
 </tr>
 <tr>
 <td>AUTO_REGISTRATION_FIRST_NAME</td>
-<td>The First Name used for VoltMX Foundry Registration.</td>
+<td>The First Name used for Volt Foundry Registration.</td>
 </tr>
 <tr>
 <td>AUTO_REGISTRATION_LAST_NAME</td>
-<td>The Last Name used for VoltMX Foundry Registration.</td>
+<td>The Last Name used for Volt Foundry Registration.</td>
 </tr>
 </tbody>
 </table>
 <p><strong>AUTO_REGISTRATION_ENV_NAME</strong>: Name of the environment. You can set this in the <strong>.properties</strong> file</p>
-<p>The AUTO_REGISTRATION_USER_ID and AUTO_REGISTRATION_PASSWORD provided here will also be used to login to the VoltMX Foundry Console.</p>
+<blockquote>
+<p><strong>Important:</strong> The AUTO_REGISTRATION_USER_ID and AUTO_REGISTRATION_PASSWORD provided here will also be used to login to the VoltMX Foundry Console.</p>
+</blockquote>
 <p>You must provide the following parameters <strong>additionally</strong> for an Enterprise solution.</p>
 <ul>
 <li><strong>AKS Node Count</strong> - This is the number of worker nodes in the cluster.</li>
 <li><strong>AKS Node Size</strong> - Type of the worker nodes in the cluster.</li>
-<li><strong>AKS Master Node Count</strong> - This is the AKS Master Node Count.</li>
+<li><strong>AKS Master Node Count</strong> - This is the  AKS Master Node Count.</li>
 </ul>
+</li>
+</ol>
 <p>Specify the following parameters in the <strong>trial.properties/enterprise.properties</strong> file to enable <strong>Autoscaling</strong>. For more information on Autoscaling refer to, <a href="Appendices.html#Autoscaling">AKS Autoscaling</a>.</p>
 <ol>
-<li><strong>AKS_MAX_NODE_COUNT</strong>: Specify the maximum number of worker nodes that can be provisioned by Autoscaling.</li>
-</ol>
+<li>
+<p><strong>AKS_MAX_NODE_COUNT</strong>: Specify the maximum number of worker nodes that can be provisioned by Autoscaling.</p>
 <p>The max pod count for all the components should not exceed the max node count.</p>
-<ol>
-<li><strong>AKS_MULTI_AZ_ENABLED</strong>: Specify either true or false to enable or disable the deployment of AKS across multiple availability zones. Azure supports this feature only in <a href="https://docs.microsoft.com/en-us/azure/aks/availability-zones">specific regions</a>. If a region does not support AKS across multiple availability zones, setting this value to true has no effect.</li>
+</li>
+<li>
+<p><strong>AKS_MULTI_AZ_ENABLED</strong>: Specify either true or false to enable or disable the deployment of AKS across multiple availability zones. Azure supports this feature only in <a href="https://docs.microsoft.com/en-us/azure/aks/availability-zones">specific regions</a>. If a region does not support AKS across multiple availability zones, setting this value to true has no effect.</p>
+</li>
 <li><strong>NUM_INGRESS_PODS</strong>: Specify the number of ingress pods, if required. The default and recommended value is 2.</li>
 </ol>
 <p>For the <strong>INTEGRATION</strong> Component:</p>
@@ -856,21 +877,29 @@ The values of the SERVICE\_PRINCIPAL\_CLIENT\_ID and SERVICE\_PRINCIPAL\_CLIENT\
 <li><strong>AZURE_FILE_SHARE_STORAGE_ACCOUNT</strong>: The Azure storage account name must be between 3 and 24 characters in length and must contain alpha-numeric characters in lowercase. The default value is set to voltmxfs.</li>
 <li><strong>AZURE_FILE_SHARE_DIRECTORY_NAME</strong>: The Azure file share directory name must be between 1 and 255 characters in length and must not contain the following special characters <strong>\/:|&lt;&gt;*?</strong>. The default value is set to voltmx.</li>
 <li><strong>STORAGE_ACCOUNT_KIND</strong>: Enter the value for the kind of Storage account. The possible values include StorageV2 and FileStorage. The default value is set to StorageV2 as FileStorage Storage account does not support Zone Redundant Storage(ZRS).</li>
-<li><strong>STORAGE_ACCOUNT_REPLICATION_TYPE</strong>: If Storage Account kind is StorageV2, possible values include Standard_LRS, Standard_GRS, Standard_RAGRS, Standard_ZRS, Premium_LRS, Premium_ZRS, Standard_GZRS, and Standard_RAGZRS. If Storage Account kind is FileStorage, possible values include Premium_LRS. Default value is set to Standard_ZRS.</li>
-</ol>
-<p>Only few regions support Standard_ZRS. Therefore, you must ensure that the region entered in the AZURE_LOCATION param supports Standard_ZRS.</p>
-<ol>
-<li><strong>ACCESS_TIER</strong>: Only the Standard performance has access tiers. The possible values for access tiers include Hot and Cool. The default value is set to Cool.</li>
+<li>
+<p><strong>STORAGE_ACCOUNT_REPLICATION_TYPE</strong>: If Storage Account kind is StorageV2, possible values include Standard_LRS, Standard_GRS, Standard_RAGRS, Standard_ZRS, Premium_LRS, Premium_ZRS, Standard_GZRS, and Standard_RAGZRS. If Storage Account kind is FileStorage, possible values include Premium_LRS. Default value is set to Standard_ZRS.</p>
+<blockquote>
+<p><strong>Note:</strong> Only a few regions support Standard_ZRS. Therefore, you must ensure that the region entered in the AZURE_LOCATION param supports Standard_ZRS.</p>
+</blockquote>
+</li>
+<li>
+<p><strong>ACCESS_TIER</strong>: Only the Standard performance has access tiers. The possible values for access tiers include Hot and Cool. The default value is set to Cool.</p>
+</li>
 <li><strong>AZURE_FILE_SHARE_NAME</strong>: The file share name must be between 3 and 63 characters in length and can use numbers, lower-case letters, and hyphens only. The default value is voltmxfileshare.</li>
-<li><strong>AZURE_FILE_SHARE_QUOTA</strong>: The maximum size of the share in Gigabytes. You can edit the value later in Azure portal. If performance is Standard then its value must be greater than 0, and less than or equal to 5120(5 Terabytes). If performance is Premium then its value must be greater than 0, and less than or equal to 102400(100 Terabytes). The default value is set to 1024.</li>
-</ol>
+<li>
+<p><strong>AZURE_FILE_SHARE_QUOTA</strong>: The maximum size of the share in Gigabytes. You can edit the value later in Azure portal. If performance is Standard then its value must be greater than 0, and less than or equal to 5120(5 Terabytes). If performance is Premium then its value must be greater than 0, and less than or equal to 102400(100 Terabytes). The default value is set to 1024.</p>
 <p><img alt="" src="Resources/Images/AzureFileSharequota.png" /></p>
-<ol>
-<li><strong>AZURE_FILE_SHARE_BACK_UP_VAULT</strong>: The Recovery Services vault name must be between 2 and 50 characters in length, must start with a letter, and should consist only of letters, numbers, and hyphens. The default value is VoltMXRecoveryServiceVault.</li>
+</li>
+<li>
+<p><strong>AZURE_FILE_SHARE_BACK_UP_VAULT</strong>: The Recovery Services vault name must be between 2 and 50 characters in length, must start with a letter, and should consist only of letters, numbers, and hyphens. The default value is VoltMXRecoveryServiceVault.</p>
+</li>
 <li><strong>ARRAY_TO_WHITELIST_IPS_TO_ACCESS_FILE_SHARE</strong>: Enter the IP address that should be whitelisted to access Azure file share. For example: ("103.140.124.130").</li>
 <li><strong>AZURE_STORAGE_ACCOUNT_NAME</strong>: The Azure storage account name must be between 3 and 24 characters in length, must contain only lowercase alphabets. The default value is voltmx.</li>
 </ol>
-<p>The default values for all the above parameters are given in the properties file.</p>
+<blockquote>
+<p><strong>Note:</strong> The default values for all the above parameters are given in the properties file.</p>
+</blockquote>
 <h2 id="script-execution">Script Execution</h2>
 <ol>
 <li>Switch to the directory that contains the kf_setup.sh file and execute the setup script using:<br />

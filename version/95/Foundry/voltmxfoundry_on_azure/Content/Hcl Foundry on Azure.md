@@ -54,9 +54,9 @@ Prerequisites
 
 **The packages that are installed as part of the install scripts are: azure-cli, kubectl, jq, and sponge.**
 
-To make sure that the script is able to download all the necessary software, you might need to open outbound connections to the respective sites. For more information, refer to the [Appendices](Appendices.md#Appendic) section of this document.
+To make sure that the script is able to download all the necessary software, you might need to open outbound connections to the respective sites. For more information, refer to the [Appendices](Appendices.md) section of this document.
 
-7.  **Generate an SSH Public Key** – Using the SSH protocol, you can connect and authenticate to remote servers and services. VoltMX Foundry setup expects an SSH key pair for authentication. The SSH public key is used for creating the Azure Virtual Machine, and for installing the VoltMX Foundry Setup. You need to specify the SSH Public Key in the properties file.
+7.  **<a id="Generate"></a>Generate an SSH Public Key** – Using the SSH protocol, you can connect and authenticate to remote servers and services. VoltMX Foundry setup expects an SSH key pair for authentication. The SSH public key is used for creating the Azure Virtual Machine, and for installing the VoltMX Foundry Setup. You need to specify the SSH Public Key in the properties file.
     
     On Ubuntu terminal, use the `ssh-keygen` command to generate SSH public and private key files that are created by default in the `~/.ssh` directory. This command can be executed from your local (Ubuntu) machine:
     
@@ -68,8 +68,8 @@ To make sure that the script is able to download all the necessary software, you
     
     You must leave the passphrase empty while generating the SSH key. VM logins are protected by other features such as the Google Authenticator.
     
-8.  **Domain Name**\- You can have a Domain Name for the solution, which you can purchase from any third-party organizations, such as GoDaddy, and a proper DNS which you need to map to the public DNS of the Application Gateway. Refer to the [Appendices](Appendices.md#Appendic) section, for more details.
-9.  **SSL certs**\- To secure the communication, acquire the SSL certs ](Azure Application Gateway requires certificates in .pfx format) and provide them during the Installation process. These SSL certs must be associated with the Domain Name that the user has procured. Refer to the [Appendices](Appendices.md#Appendic) section on SSL cert pfx format conversion.
+8.  **Domain Name**\- You can have a Domain Name for the solution, which you can purchase from any third-party organizations, such as GoDaddy, and a proper DNS which you need to map to the public DNS of the Application Gateway. Refer to the [Appendices](Appendices.md) section, for more details.
+9.  **SSL certs**\- To secure the communication, acquire the SSL certs ](Azure Application Gateway requires certificates in .pfx format) and provide them during the Installation process. These SSL certs must be associated with the Domain Name that the user has procured. Refer to the [Appendices](Appendices.md) section on SSL cert pfx format conversion.
     *   Place the SSL certificate (in a **.pfx** file format) in the ssl-cert folder, and then provide the **Server Domain Name** and **AppGateway SSL Cert Password**.
     *   For enabling HTTPS on the back-end of appgateway, perform the following steps:
         1.  The SSL certificates with the cert data and key data should be in separate files (both in a **.pem** file format).
@@ -119,19 +119,19 @@ Configuration
 
 Edit the input parameters in the following files based on the type of solution you want to create.
 
-*   **<Installation Directory>/conf/trial.properties** for Trial solution.
-*   **<Installation Directory>/conf/enterprise.properties** for Enterprise solution.  
+*   **&lt;Installation Directory&gt;/conf/trial.properties** for Trial solution.
+*   **&lt;Installation Directory&gt;/conf/enterprise.properties** for Enterprise solution.  
     For more information, refer to the [sample.properties (zip)](sample.zip) file.
-*   **<Installation Directory>/conf/enterprise.properties** for Enterprise solution.  
-    For more information, refer to the [sample.properties](http://opensource.voltmxtechsw.com/volt-mx-docs/voltmxlibrary/voltmxfoundry/voltmxfoundry_on_azure/Content/sample.zip) file.
+*   **&lt;Installation Directory&gt;/conf/enterprise.properties** for Enterprise solution.  
+    For more information, refer to the [sample.properties (zip)](sample.zip) file.
 
 VoltMX Foundry setup expects configuration through the properties file available in the **conf** directory of the unzipped artifacts. For the Trial solution, edit the **trial.properties** file. For the Enterprise solution, edit the **enterprise.properties** file.
 
 You need to provide the following parameters during Installation:
 
-None of the values for parameters in trial or enterprise properties file should contain quotes.
+> **Important:** None of the values for parameters in trial or enterprise properties file should contain quotes.
 
-1.  **Azure Subscription ID**, **Azure Service Principal ID Name**, **Azure Service Principal ID Secret**, **Service Principal Object ID**, and **Tenant ID** - Azure Subscription ID is a GUID that uniquely identifies your subscription to use Azure services. The Application needs the Service Principal to access or configure resources through the Azure Resource Manager (ARM) in the Azure Stack.  
+1. **Azure Subscription ID**, **Azure Service Principal ID Name**, **Azure Service Principal ID Secret**, **Service Principal Object ID**, and **Tenant ID** - Azure Subscription ID is a GUID that uniquely identifies your subscription to use Azure services. The Application needs the Service Principal to access or configure resources through the Azure Resource Manager (ARM) in the Azure Stack.  
     You must have an Azure account with the permissions of a **Global Administrator** and the role of a **User**. Without these privileges, it is not possible to create the AKS clusters (or other resources).  
     The following section describes fetching **Azure Subscription ID**, generating **Azure Service Principal ID Name**, **Azure Service Principal ID Secret**, **Service Principal Object ID**, and **Tenant ID**.
 
@@ -150,47 +150,50 @@ None of the values for parameters in trial or enterprise properties file should 
     Login to Azure Portal and click on **Cloud Shell** as shown:  
     ![](Resources/Images/Execute_1.png)  
     1.  Execute:  
-```
-$ az group create --name "resource\_group\_name" --location "eastus".
-```  
-        ![](Resources/Images/Execute_2.png)
-    2.  Execute:  
-```
+	
+        ```
+        $ az group create --name "resource\_group\_name" --location "eastus".
+        ```  
 
+        ![](Resources/Images/Execute_2.png)
+
+    2.  Execute:
+
+        ```
         $ az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/<subscription\_id>/resourceGroups/<resource\_group\_name>"
-```  
+        ```  
+
         ![](Resources/Images/Execute_3.png)
     
-    After executing the above command, a json response will be displayed on the command prompt.
+        After executing the above command, a json response will be displayed on the command prompt.
     
-```
-{  
-    "appId": "APP\_ID",  
-    "displayName": "ServicePrincipalName",  
-    "name": "http://ServicePrincipalName",  
-    "password": ...,  
-    "tenant": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"  
-    }  
+        ```
+        {  
+        "appId": "APP\_ID",  
+        "displayName": "ServicePrincipalName",  
+        "name": "http://ServicePrincipalName",  
+        "password": ...,  
+        "tenant": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"  
+        }  
+        ```
     
-```
+        In the properties file of the **conf** directory:
     
-    In the properties file of the **conf** directory:
+        *   SERVICE\_PRINCIPAL\_CLIENT\_ID is the value of the appId.
+        *   SERVICE\_PRINCIPAL\_CLIENT\_SECRET is the value of the password.
     
-    *   SERVICE\_PRINCIPAL\_CLIENT\_ID is the value of the appId.
-    *   SERVICE\_PRINCIPAL\_CLIENT\_SECRET is the value of the password.
-    
-    The values of the SERVICE\_PRINCIPAL\_CLIENT\_ID and SERVICE\_PRINCIPAL\_CLIENT\_SECRET should not contain any quotation marks. For example:
-    
-    *   SERVICE\_PRINCIPAL\_CLIENT\_ID = a5afa829-525c-436c-ca4f-f442027cfd2e
-    *   SERVICE\_PRINCIPAL\_CLIENT\_SECRET = cx4q44eq-fq7a-450v-zf41-4049183d1eb8
+        > **Note:** The values of the SERVICE\_PRINCIPAL\_CLIENT\_ID and SERVICE\_PRINCIPAL\_CLIENT\_SECRET should not contain any quotation marks. For example:
+        >
+        > *   SERVICE\_PRINCIPAL\_CLIENT\_ID = a5afa829-525c-436c-ca4f-f442027cfd2e
+        > *   SERVICE\_PRINCIPAL\_CLIENT\_SECRET = cx4q44eq-fq7a-450v-zf41-4049183d1eb8
     
 3.  Generating **Service Principal Object ID**  
     Login to Azure Portal and click on **Power Shell**.  
-    1.  Execute:  
-```
-$(Get-AzureADServicePrincipal -Filter "AppId eq ‘<Service\_principle\_client\_ID>’").ObjectId
-        
-```
+    1.  Execute: 
+
+        ```
+        $(Get-AzureADServicePrincipal -Filter "AppId eq ‘<Service\_principle\_client\_ID>’").ObjectId
+        ```
         
         ![](Resources/Images/objectid.PNG)
         
@@ -198,21 +201,20 @@ $(Get-AzureADServicePrincipal -Filter "AppId eq ‘<Service\_principle\_client\_
     1.  Go to Portal.azure.com > Azure Active Directory.
     2.  In the Overview section you can find the Tenant ID.
     
-    ![](Resources/Images/tenant_id.png)
+        ![](Resources/Images/tenant_id.png)
     
-
 3.  **Azure Location** - Azure location is the location of the Azure Resource group.
 
-Azure AKS is supported in various Azure locations. For more information about Azure locations, refer to [Products available by region](https://azure.microsoft.com/en-gb/global-infrastructure/services?products=kubernetes-service&regions=all).
+    > **Note:** Azure AKS is supported in various Azure locations. For more information about Azure locations, refer to [Products available by region](https://azure.microsoft.com/en-gb/global-infrastructure/services?products=kubernetes-service&regions=all).
 
-5.  **SSH\_PUBLIC\_KEY** - You need this to configure all the Linux machines with the SSH RSA public key string.
+1.  **SSH\_PUBLIC\_KEY** - You need this to configure all the Linux machines with the SSH RSA public key string.
     *   **ID\_RSA\_PASSPHRASE** - The passphrase of the SSH key.
         
-        It is advised to avoid having a passphrase for the SSH key.
+          > **Note:** It is advised to avoid having a passphrase for the SSH key.
         
         You must use a single set of SSH keys (id\_rsa.pub and id\_rsa) for the entire subscription to use a single common resource group for PCI. If a new set of SSH keys is being used for cloud creation then you must create a new common resource group for PCI. To create a new common resource group for PCI you must change the default value of the variable **COMMON\_RESOURCE\_GROUP** in the properties file.
         
-        For information on how to Generate an SSH public key, click [here](VoltMX Foundry on Azure.md#Generate).
+        For information on how to Generate an SSH public key, click [here](VoltMX_Foundry_on_Azure.md#Generate).
         
 6.  **VNET\_ADDRESS\_SPACE**: Provide custom address space of virtual network, if required.
 7.  **AKS\_SUBNET\_ADDRESS\_SPACE**: If custom address space of virtual network is configured, then set the value of AKS subnet address space.
@@ -221,39 +223,39 @@ Azure AKS is supported in various Azure locations. For more information about Az
 10.  **DNS\_SERVICE\_IP**: If custom address space of virtual network is configured, then set the IP address value of the DNS service.
 11.  **SERVICE\_CIDR**: If custom address space of virtual network is configured, then set the IP address value of the Kubernetes internal service.
     
-    If custom address space of virtual network is configured then make sure AKS\_SUBNET\_ADDRESS\_SPACE, APP\_GATEWAY\_SUBNET\_ADDRESS\_SPACE, JUMPBOX\_SUBNET\_ADDRESS\_SPACE, DNS\_SERVICE\_IP, SERVICE\_CIDR IP address do not overlap and at the same time exist in the virtual network address space.
+     > **Note:** If custom address space of virtual network is configured then make sure AKS\_SUBNET\_ADDRESS\_SPACE, APP\_GATEWAY\_SUBNET\_ADDRESS\_SPACE, JUMPBOX\_SUBNET\_ADDRESS\_SPACE, DNS\_SERVICE\_IP, SERVICE\_CIDR IP address do not overlap and at the same time exist in the virtual network address space.
     
 12.  **ALERT\_NOTIFICATION\_ENABLED**: Flag to enable or disable alert notifications.
 13.  **AZURE\_ACTION\_GROUP\_NAME**: Action group name is the identifier for a set of email IDs to which notifications are sent.
 14.  **USER\_EMAIL\_ID**: Primary email ID is provided for receiving alert notifications. You can access the Azure portal to add other email IDs, if required.
 15.  **IS\_DB\_SSL\_ENABLED**: Flag for enabling or disabling SSL connection to access MySQL DB.
     
-    If IS\_DB\_SSL\_ENABLED is set to true then IS\_SSL\_ENABLED should also be set to true.
+     > **Note:** If IS\_DB\_SSL\_ENABLED is set to true then IS\_SSL\_ENABLED should also be set to true.
     
 16.  **ARRAY\_TO\_WHITELIST\_IPS\_TO\_ACCESS\_DB**: Enter the IP address to be whitelisted to access any database.
 17.  **IS\_SSL\_ENABLED** – Flag to enable or disable SSL on VoltMX Foundry setup. This flag is set to **true** by default. If you do not require SSL, set this parameter to **false**.
-    *   Place the SSL certificate (in a **.pfx** file format) in the ssl-cert folder, and then provide the **Server Domain Name** and **AppGateway SSL Cert Password**.
-    *   For enabling HTTPS on the back-end of appgateway, perform the following steps:
-        1.  The SSL certificates with the cert data and key data should be in separate files (both in a **.pem** file format).
-        2.  Save the Cert file as `ingress.pem`.
-        3.  Save the Key file as `ingress_key.pem`.
-        4.  Place both ingress.pem and ingress\_key.pem files in the **certs** folder of the installation directory.
+     *   Place the SSL certificate (in a **.pfx** file format) in the ssl-cert folder, and then provide the **Server Domain Name** and **AppGateway SSL Cert Password**.
+     *   For enabling HTTPS on the back-end of appgateway, perform the following steps:
+         1.  The SSL certificates with the cert data and key data should be in separate files (both in a **.pem** file format).
+         2.  Save the Cert file as `ingress.pem`.
+         3.  Save the Key file as `ingress_key.pem`.
+         4.  Place both ingress.pem and ingress\_key.pem files in the **certs** folder of the installation directory.
 18.  **Server Domain Name** - This is the external server domain that you need to map with the Azure Application Gateway DNS name.
 19.  **AppGateway SSL Cert Password** – This is the Password used for getting the **pfx** key for the SSL offloading.
 20.  **AZURE\_LOG\_ANALYTICS\_ENABLED** – Flag to enable Azure Operations Management Suite (OMS) Log analytics solution.
 21.  **AZURE\_LOG\_ANALYTICS\_SERVICE\_TIER** - Service tier for Azure log analytics. The allowed values are **Free**, **Standalone**, and **PerNode**. The **Free** Tier is applicable only if you created your Azure account before 02-April-2018. This tier has a 500MB limit on the amount of data collected daily and also has a 7-day limit on data retention. If you created your Azure Account after 02-April-2018, you only have the **Standalone** or **PerNode** options. If you use the **Free** tier, the installation throws an error. For information about the pricing of the **Standalone** and **PerNode** options, refer to the [Azure pricing for Log Analytics](https://azure.microsoft.com/en-in/pricing/details/log-analytics/).
 22.  **AZURE\_LOG\_ANALYTICS\_DATA\_RETENTION\_PERIOD** – This is the data retention period for the logs in log analytics solution (minimum data retention period: 7, maximum data retention period : 738). This value is required if log analytics is enabled. For **Free** tier, data retention period is not allowed for more than 7 days. For **Standalone** and **PerNode** tiers, data is retained at no charge for the first 31 days. There is no daily limit for data upload for **Standalone** or **PerNode** tiers.
 23.  **DATABASE\_TYPE** - This is the database type you want to use for hosting VoltMX Foundry on Azure.  
-    The VoltMX Foundry Containers on Azure Solution supports the MS SQL and MySQL Server Databases.
+    The Volt Foundry Containers on Azure Solution supports the MS SQL and MySQL Server Databases.
 24.  **DATABASE\_USER\_NAME** - The preferred Database Username (other than `Admin`).
 
-Ensure that the value of the DB\_NAME parameter in the properties file is unique. An installation error is thrown when a DB service with the same name already exists.
+     > **Note:** Ensure that the value of the DB\_NAME parameter in the properties file is unique. An installation error is thrown when a DB service with the same name already exists.
 
 28.  **DATABASE\_PASSWORD** - String containing a minimum of 8 characters and combination of alpha-numeric and non-alpha-numeric characters.
 
-The Database Username and Database Password provided here must also be used to login to the Database using the Azure Portal.
+     > **Important:** The Database Username and Database Password provided here must also be used to login to the Database using the Azure Portal.
 
-You must not use the **$** and **#** characters in the Database password field.
+     > **Note:** You must not use the **$** and **#** characters in the Database password field.
 
 31.  **DB\_SKUTIER**: For MySQL DB, the Skutier can be **Basic**, **GeneralPurpose**, or **MemoryOptimized** tier. The default is set to GeneralPurpose.
 32.  **DB\_SKUCAPACITY**: Specify the vCore capacity. If Skutier is Basic, the possible values include 1,2. If Skutier is GeneralPurpose the possible values include 2, 4, 8, 16, 32 or 64. If Skutier is MemoryOptimized the possible values include 2, 4, 8, 16, 32.
@@ -264,7 +266,7 @@ You must not use the **$** and **#** characters in the Database password field.
 37.  **DB\_BACKUP\_RETENTION\_DAYS**: Specify the desired backup retention period in days. If PCI is enabled choose the value as 31 days. If PCI is disabled choose the value as 15 days.
 38.  **DB\_GEO\_REDUNDANT\_BACKUP**: To configure the Geo-Redundancy backup for DB snapshots, set the value to **Enabled**. The default value is set as Disabled.
 
-The DB\_SKUTIER, DB\_SKUCAPACITY, DB\_SKUFAMILY, DB\_SKUNAME, DB\_SKUSIZEMB, MYSQL\_VERSION, DB\_BACKUP\_RETENTION\_DAYS, and DB\_GEO\_REDUNDANT\_BACKUP properties are specific to the **MySQL Database**.
+     > **Note:** The DB\_SKUTIER, DB\_SKUCAPACITY, DB\_SKUFAMILY, DB\_SKUNAME, DB\_SKUSIZEMB, MYSQL\_VERSION, DB\_BACKUP\_RETENTION\_DAYS, and DB\_GEO\_REDUNDANT\_BACKUP properties are specific to the **MySQL Database**.
 
 40.  **DATABASE\_PORT**: Specify the Database Port. For MySQL it is 3306. For MS SQL it is 1433.
 41.  **AZURE\_AUTH\_REDIS\_CACHE\_NAME**: Name for the cache. Name can only contain letters, numbers, and hyphens. The first and last characters must each be a letter or a number. Consecutive hyphens are not allowed.
@@ -281,43 +283,41 @@ The DB\_SKUTIER, DB\_SKUCAPACITY, DB\_SKUFAMILY, DB\_SKUNAME, DB\_SKUSIZEMB, MYS
 52.  **AZURE\_SERVER\_REDIS\_IDLE\_CONNECTION\_TIMEOUT\_IN\_MILLISECONDS**: The value for Redis Idle connection timeout. Default value is set to 10000.
 53.  **AZURE\_SERVER\_REDIS\_CONNECTION\_POOL\_SIZE**: This is the maximum pool size for Redis connection. Default value is set to 64.
 54.  **AZURE\_SERVER\_REDIS\_CONNECTION\_TIMEOUT**: The value for Redis connection timeout in milliseconds. Default value is set to 10000.
-55.  **JUMPBOX\_ENABLED** - Flag to create Jumpbox as a part of the VoltMX Foundry setup. Set this to false if you do not require Jumpbox. Refer to [Appendices](#Appendic) for more details on how to connect to the Azure Kubernetes through Jumpbox.
+55.  **JUMPBOX\_ENABLED** - Flag to create Jumpbox as a part of the VoltMX Foundry setup. Set this to false if you do not require Jumpbox. Refer to [Appendices](Appendices.md) for more details on how to connect to the Azure Kubernetes through Jumpbox.
     
-    After completion of installation, you  must whitelist the URLs that the DevOps would use to Log-in.
+     > **Important:** After completion of installation, you  must whitelist the URLs that the DevOps would use to Log-in.
     
 56.  **Automatic Registration Details:**
-
  
-| PARAMETER | DESCRIPTION |
-| --- | --- |
-| AUTO\_REGISTRATION\_USER\_ID | The E-mail id used for VoltMX Foundry Registration. |
-| AUTO\_REGISTRATION\_PASSWORD | The Password used for VoltMX Foundry Registration. |
-| AUTO\_REGISTRATION\_FIRST\_NAME | The First Name used for VoltMX Foundry Registration. |
-| AUTO\_REGISTRATION\_LAST\_NAME | The Last Name used for VoltMX Foundry Registration. |
+     |PARAMETER | DESCRIPTION |
+     | --- | --- |
+     | AUTO\_REGISTRATION\_USER\_ID | The E-mail id used for Volt Foundry Registration. |
+     | AUTO\_REGISTRATION\_PASSWORD | The Password used for Volt Foundry Registration. |
+     | AUTO\_REGISTRATION\_FIRST\_NAME | The First Name used for Volt Foundry Registration. |
+     | AUTO\_REGISTRATION\_LAST\_NAME | The Last Name used for Volt Foundry Registration. |
 
-  
-**AUTO\_REGISTRATION\_ENV\_NAME**: Name of the environment. You can set this in the **.properties** file
+      **AUTO\_REGISTRATION\_ENV\_NAME**: Name of the environment. You can set this in the **.properties** file
 
-The AUTO\_REGISTRATION\_USER\_ID and AUTO\_REGISTRATION\_PASSWORD provided here will also be used to login to the VoltMX Foundry Console.
+      > **Important:** The AUTO\_REGISTRATION\_USER\_ID and AUTO\_REGISTRATION\_PASSWORD provided here will also be used to login to the VoltMX Foundry Console.
 
-You must provide the following parameters **additionally** for an Enterprise solution.
+     You must provide the following parameters **additionally** for an Enterprise solution.
 
-*   **AKS Node Count** - This is the number of worker nodes in the cluster.
-*   **AKS Node Size** - Type of the worker nodes in the cluster.
-*   **AKS Master Node Count** - This is the AKS Master Node Count.
+     *   **AKS Node Count** - This is the number of worker nodes in the cluster.
+     *   **AKS Node Size** - Type of the worker nodes in the cluster.
+     *   **AKS Master Node Count** - This is the  AKS Master Node Count.
 
 Specify the following parameters in the **trial.properties/enterprise.properties** file to enable **Autoscaling**. For more information on Autoscaling refer to, [AKS Autoscaling](Appendices.md#Autoscaling).
 
-64.  **AKS\_MAX\_NODE\_COUNT**: Specify the maximum number of worker nodes that can be provisioned by Autoscaling.
+1.  **AKS\_MAX\_NODE\_COUNT**: Specify the maximum number of worker nodes that can be provisioned by Autoscaling.
 
-The max pod count for all the components should not exceed the max node count.
+     The max pod count for all the components should not exceed the max node count.
 
 66.  **AKS\_MULTI\_AZ\_ENABLED**: Specify either true or false to enable or disable the deployment of AKS across multiple availability zones. Azure supports this feature only in [specific regions](https://docs.microsoft.com/en-us/azure/aks/availability-zones). If a region does not support AKS across multiple availability zones, setting this value to true has no effect.
 67.  **NUM\_INGRESS\_PODS**: Specify the number of ingress pods, if required. The default and recommended value is 2.
 
 For the **INTEGRATION** Component:
 
-69.  **NUM\_INTEGRATION\_PODS**: The number of minimum pods. For example, the values can be set to: 1, 2, etc.
+1.  **NUM\_INTEGRATION\_PODS**: The number of minimum pods. For example, the values can be set to: 1, 2, etc.
 70.  **INTEGRATION\_POD\_MAX\_REPLICAS**: The maximum number of pods to be scaled. Provide an integer value.
 71.  **INTEGRATION\_POD\_CPU\_USAGE\_THRESHOLD**: The scaling of pods will be triggered if CPU utilization value in percentage crosses the user given threshold value. For example, the values can be set to: 80, 90, etc.
 72.  **INTEGRATION\_POD\_CPU\_USAGE\_REQUESTS**: For pod placement, AKS looks for a node that has enough CPU to handle the pod requests. For example, the values can be set to: 300m, 400m, etc.
@@ -327,7 +327,7 @@ For the **INTEGRATION** Component:
 
 For the **ENGAGEMENT** Component:
 
-77.  **NUM\_ENGAGEMENT\_PODS**: The number of minimum pods. For example, the values can be set to: 1, 2, etc.
+1.  **NUM\_ENGAGEMENT\_PODS**: The number of minimum pods. For example, the values can be set to: 1, 2, etc.
 78.  **ENGAGEMENT\_POD\_MAX\_REPLICAS**: The maximum number of pods to be scaled. For example, the values can be set to: 1, 2, etc.
 79.  **ENGAGEMENT\_POD\_CPU\_USAGE\_THRESHOLD**: The scaling of pods will be triggered if CPU/memory utilization value in percentage crosses the user given threshold value. For example, the values can be set to: 80, 90, etc.
 80.  **ENGAGEMENT\_POD\_CPU\_USAGE\_REQUESTS**: For pod placement, AKS looks for a node that has a CPU that can handle the pods, according to the requests. For example, the values can be set to: 300m, 400m, etc.
@@ -337,7 +337,7 @@ For the **ENGAGEMENT** Component:
 
 For the **IDENTITY** component:
 
-85.  **NUM\_IDENTITY\_PODS**: The number of minimum pods. For example, the values can be set to: 1, 2, etc.
+1.  **NUM\_IDENTITY\_PODS**: The number of minimum pods. For example, the values can be set to: 1, 2, etc.
 86.  **IDENTITY\_POD\_MAX\_REPLICAS**: The maximum number of pods to be scaled. For example, the values can be set to: 1, 2, etc.
 87.  **IDENTITY\_POD\_CPU\_USAGE\_THRESHOLD**: The scaling of pods will be triggered if CPU/memory utilization value in percentage crosses the user given threshold value. For example, the values can be set to: 80, 90, etc.
 88.  **IDENTITY\_POD\_CPU\_USAGE\_REQUESTS**: For pod placement, AKS looks for a node that has a CPU that can handle the pods, according to the requests. For example, the values can be set to: 300m, 400m, etc.
@@ -347,7 +347,7 @@ For the **IDENTITY** component:
 
 For the **CONSOLE** component:
 
-93.  **NUM\_CONSOLE\_PODS**: The number of minimum pods. For example, the values can be set to: 1, 2, etc.
+1.  **NUM\_CONSOLE\_PODS**: The number of minimum pods. For example, the values can be set to: 1, 2, etc.
 94.  **CONSOLE\_POD\_MAX\_REPLICAS**: The maximum number of pods to be scaled. For example, the values can be set to: 1, 2, etc.
 95.  **CONSOLE\_POD\_CPU\_USAGE\_THRESHOLD**: The scaling of pods will be triggered if CPU/memory utilization value in percentage crosses the user given threshold value. For example, the values can be set to: 80, 90, etc.
 96.  **CONSOLE\_POD\_CPU\_USAGE\_REQUESTS**: For pod placement, AKS looks for a node that has a CPU that can handle the pods, according to the requests. For example, the values can be set to: 300m, 400m, etc.
@@ -357,7 +357,7 @@ For the **CONSOLE** component:
 
 For the **APIPORTAL** component:
 
-101.  **NUM\_API\_PORTAL\_PODS**: The number of minimum pods. For example, the values can be set to: 1, 2, etc.
+1.  **NUM\_API\_PORTAL\_PODS**: The number of minimum pods. For example, the values can be set to: 1, 2, etc.
 102.  **APIPORTAL\_POD\_MAX\_REPLICAS**: The maximum number of pods to be scaled. For example, the values can be set to: 1, 2, etc.
 103.  **APIPORTAL\_POD\_CPU\_USAGE\_THRESHOLD**: The scaling of pods will be triggered if CPU/memory utilization value in percentage crosses the user given threshold value. For example, the values can be set to: 80, 90, etc.
 104.  **APIPORTAL\_POD\_CPU\_USAGE\_REQUESTS**: For pod placement, AKS looks for a node that has a CPU that can handle the pods, according to the requests. For example, the values can be set to: 300m, 400m, etc.
@@ -372,19 +372,19 @@ For the **APIPORTAL** component:
 113.  **STORAGE\_ACCOUNT\_KIND**: Enter the value for the kind of Storage account. The possible values include StorageV2 and FileStorage. The default value is set to StorageV2 as FileStorage Storage account does not support Zone Redundant Storage(ZRS).
 114.  **STORAGE\_ACCOUNT\_REPLICATION\_TYPE**: If Storage Account kind is StorageV2, possible values include Standard\_LRS, Standard\_GRS, Standard\_RAGRS, Standard\_ZRS, Premium\_LRS, Premium\_ZRS, Standard\_GZRS, and Standard\_RAGZRS. If Storage Account kind is FileStorage, possible values include Premium\_LRS. Default value is set to Standard\_ZRS.
 
-Only few regions support Standard\_ZRS. Therefore, you must ensure that the region entered in the AZURE\_LOCATION param supports Standard\_ZRS.
+      > **Note:** Only a few regions support Standard\_ZRS. Therefore, you must ensure that the region entered in the AZURE\_LOCATION param supports Standard\_ZRS.
 
 116.  **ACCESS\_TIER**: Only the Standard performance has access tiers. The possible values for access tiers include Hot and Cool. The default value is set to Cool.
 117.  **AZURE\_FILE\_SHARE\_NAME**: The file share name must be between 3 and 63 characters in length and can use numbers, lower-case letters, and hyphens only. The default value is voltmxfileshare.
 118.  **AZURE\_FILE\_SHARE\_QUOTA**: The maximum size of the share in Gigabytes. You can edit the value later in Azure portal. If performance is Standard then its value must be greater than 0, and less than or equal to 5120(5 Terabytes). If performance is Premium then its value must be greater than 0, and less than or equal to 102400(100 Terabytes). The default value is set to 1024.
 
-![](Resources/Images/AzureFileSharequota.png)
+      ![](Resources/Images/AzureFileSharequota.png)
 
 120.  **AZURE\_FILE\_SHARE\_BACK\_UP\_VAULT**: The Recovery Services vault name must be between 2 and 50 characters in length, must start with a letter, and should consist only of letters, numbers, and hyphens. The default value is VoltMXRecoveryServiceVault.
 121.  **ARRAY\_TO\_WHITELIST\_IPS\_TO\_ACCESS\_FILE\_SHARE**: Enter the IP address that should be whitelisted to access Azure file share. For example: ("103.140.124.130").
 122.  **AZURE\_STORAGE\_ACCOUNT\_NAME**: The Azure storage account name must be between 3 and 24 characters in length, must contain only lowercase alphabets. The default value is voltmx.
 
-The default values for all the above parameters are given in the properties file.
+> **Note:** The default values for all the above parameters are given in the properties file.
 
 Script Execution
 ----------------
