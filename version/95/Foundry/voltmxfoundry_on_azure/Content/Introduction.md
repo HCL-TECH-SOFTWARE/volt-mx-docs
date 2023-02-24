@@ -4,9 +4,9 @@ VoltMX Foundry is a back-end service provider that helps developers build omni-c
 
 This document helps you install and configure VoltMX Foundry (Console, Identity Services, Integration Services, and Engagement Services) on Azure Cloud.
 
-*   [Overview](VoltMX Foundry on Azure.md#overview)
-*   [VoltMX Foundry V9 SP1 onwards on Azure](VoltMX Foundry on Azure.md#Cloud_Prereq) - This section helps you install and configure VoltMX Foundry V9 SP1 onwards.
-*   [VoltMX Foundry on Azure](VoltMX Foundry on Azure.md#On1) - This section helps you install and configure VoltMX Foundry V9 until V9 SP1.
+*   [Overview](VoltMX_Foundry_on_Azure.md)
+*   [VoltMX Foundry V9 SP1 onwards on Azure](voltmxfoundry_on_azure_old.md) - This section helps you install and configure VoltMX Foundry V9 SP1 onwards.
+*   [VoltMX Foundry on Azure](VoltMX_Foundry_on_Azure.md) - This section helps you install and configure VoltMX Foundry V9 until V9 SP1.
 *   [Appendices](Appendices.md)
 
-You can also access the [Revision History](Installation of VoltMX Foundry on Azure.md) and [FAQs](Frequently_Asked_Questions__FAQs_.md).
+You can also access the [FAQs](Frequently_Asked_Questions__FAQs_.md) section.
