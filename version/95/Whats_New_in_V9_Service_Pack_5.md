@@ -94,7 +94,7 @@ For more information on this feature, click [here](Iris/iris_user_guide/Content
 
 The V9 SP5 release includes several new features in Volt MX Iris to further simplify the app design and development experience and enable better productivity for app developers.
 
-*   [Pinning and distribution tools](Iris/iris_user_guide/Content/Look.md#PinWidgets) have been added in the Properties panel to align child widgets in reference to the parent widget and the neighboring widgets to simplify the widget layout.
+*   [Pinning and distribution tools](Iris/iris_user_guide/Content/Look.md#widget-pinning) have been added in the Properties panel to align child widgets in reference to the parent widget and the neighboring widgets to simplify the widget layout.
 *   Support for the Color picker has been added to select color swatches from the project.
 *   Support for the Search option has been added to select Fonts from the project.
 *   Enhancements have been made to simplify the development of applications while adhering to Accessibility guidelines.

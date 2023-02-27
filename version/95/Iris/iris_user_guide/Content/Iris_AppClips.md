@@ -11,7 +11,7 @@ App clips provide an in-the-moment experience and focus on offering the quickest
 
 App clips are a small part of an app, and are developed in the same Xcode project as the app by using the iOS SDK. When the app clip is ready for review, you can add and manage it as part of the app present in App Store Connect.
 
-An app can only have one app clip, and must support all the functionality of the app clip. In addition, app clips must be small (less than 10MB in size) so that they launch instantly. Try to keep the size of the app clip well below this limit, if possible.
+> **Note:** An app can only have one app clip, and must support all the functionality of the app clip. In addition, app clips must be small (less than 10MB in size) so that they launch instantly. Try to keep the size of the app clip well below this limit, if possible.
 
 Integrate App Clips in a Project
 --------------------------------
@@ -21,11 +21,15 @@ To integrate app clips in a project, follow these steps:
 1.  In Iris, create a new project to develop the app clip.
 2.  Create the app clip, and generate the KAR file.
 3.  During the perl extraction in the terminal, pass the KAR file of the app clip with the **\-appClip** flag along with the KAR file of the parent app as follows:  
-    `perl extract.pl <path to parent KAR> --appClip <path to app clip KAR>`
+
+    ```
+	perl extract.pl <path to parent KAR> --appClip <path to app clip KAR>
+	```
+	
 4.  After the perl extraction is complete, open the project in **Xcode**.  
     You will see three new entries, **KAppClip**, **KAppClipJS** and **KAppClipNFILoader**, in the Targets section.
 
-![](Resources/Images/AppClipKAR.png)
+<!--![](Resources/Images/AppClipKAR.png)-->
 
 App clips inherit the App Icon, Version Number, and Build Number from the parent app.
 
@@ -35,16 +39,16 @@ Follow these steps to run the app clip:
 2.  Select a destination (either Simulator or Device).
 3.  Click **Run**.
 
-![](Resources/Images/AppClipRun.png)
+<!--![](Resources/Images/AppClipRun.png)-->
 
 Limitations for App Clips
 -------------------------
 
-### Limitations
+### Iris Limitations
 
 *   Integration of app clips with Cordova Plugins is not supported.
 *   Integration of app clips with the React Native feature is not supported.
-*   projects that use NFI version 1.0 cannot run as app clips.
+*   Iris projects that use NFI version 1.0 cannot run as app clips.
 
 ### iOS Native Limitations
 
@@ -91,6 +95,7 @@ Limitations for App Clips
     *   App clips cannot request continuous access to device location. However, they may request for the location when the app is in use (When In Use authorization), that automatically resets at 4:00 a.m on the next day.
     *   App clips cannot request to read passes stored in the Wallet app by using the **Pass Type IDs Entitlement**. However, if the app clip contains functionality to add a pass to the Wallet app, you can check if this pass is already present.
     *   An app clip cannot share data with another app other than its corresponding full app.
+
 *   **Reserve Certain Functionality for the Full App**
     
     As app clips provide an in-the-moment experience as a solution to an everyday task, ensure that you reserve some functionality for the full app. Reserve the following functionality for the full app:
@@ -111,13 +116,15 @@ Limitations for App Clips
     *   Registration of **custom URL schemes**.
     *   Requests for user reviews of the full app by using the **requestReview(in:) method** of StoreKit.
     *   Search for paired Bluetooth devices
+	
 *   To help protect user privacy and preserve resources , app clips cannot perform background activities. For example, app clips cannot make use of the following:
     
     *   Background networking with **URLSession**.
     *   Enabling the **Background Modes** capability for an app.
     *   Maintaining Bluetooth connections while the app clip is not in use.
+	
 *   **Limiting Notifications**
-    
+
     App clips provide an option to schedule and receive notifications for up to 8 hours after launch, enough time to follow up and complete most common tasks. Ensure that you follows these guidelines while providing the notifications capability for an app clip:
     
     *   **Use notifications to help users complete a task**: The notifications of an app clip must directly relate to the task that the app clip helps to accomplish. For example, an app clip that allows users to order food could send notifications related to a scheduled delivery.
