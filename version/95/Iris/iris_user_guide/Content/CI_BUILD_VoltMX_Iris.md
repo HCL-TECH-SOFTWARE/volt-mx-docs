@@ -67,7 +67,7 @@ HeadlessBuild.properties file is present in the project location.
 | plugin.dir | Points to the directory, where the plugins required for the build are copied. |
 | javaloc | Java home (provide the folder location consisting bin where the Java is installed.)Example: <Install_location>\VoltMXIrisEnterprise8.0\Java\jdk |
 | androidHome | Android SDK path |
-| For Proxy setup, the following new entries are applicable :proxy.hostproxy.portproxy.usernameproxy.password | If you are running CI build on a system behind a proxy, provide proxy details. |
+| For Proxy setup, the following new entries are applicable:<br/>proxy.host<br/>proxy.port<br/>proxy.username<br/>proxy.password | If you are running CI build on a system behind a proxy, provide proxy details. |
 
 
 > **_Note:_** Any property which is in the projectProperties.json can be configured via the HeadlessBuild.properties file with the same key.
@@ -83,24 +83,24 @@ HeadlessBuild.properties file is present in the project location.
 | mode | Only modes 0, 1 and 2 are supported |
 | build.mode | The mode of the build. Release or Debug. |
 | appid | ID of the application |
-| **#cloud mode credentials**cloud.usernamecloud.password | Applicable only for cloud |
-| **#mobilefoundry specific details**mobilefoundry.urlenvironment.nameaccountd.idmf.appname | Applicable only when you are trying to publish the app. |
-| **#specify the environment you want to publish** Example:qa cloud.environment | Applicable only when you are trying to publish the app. |
-| #The platforms for which the headless build need to run**#Mobile Channel**iphoneandroidspa.iphonespa.android**#Tablet**ipadandroidtabletspa.ipadspa.androidtabletspa.windowstablet**\# Desktop Channel**desktopweb**\# Wearables**iphonewatchandroidwearos | The value is either true or false. Enter true to build the platform else false.Please note that you cannot build Apple watch alone. When you build for Apple watch ensure that you build for iPhone as well. |
-| #Provide the following details for IPA generation:mac.ipaddressmac.usernamemac.passwordkeychain.passworddevelopment.team.id`method`genipaiphone (to generate IPA for iPhone)genipaipad (to generate IPA for iPad) | Enter true to generate IPA for iPhone and iPad.For the method, possible values supported are **app-store**, **ad-hoc**, **enterprise**, and **development**. |
-| Universal build for iOS:universal.iPhone`universal.android` | Enter true to perform universal build for iPhone.Enter true to perform universal build for Android. |
-| #Windows platform for headless build:**#Mobile Channel**windowsphone10**#Tablet**windows10**#Desktop Channel**desktop\_kiosk | Window platforms |
+| **#cloud mode credentials**<br/>cloud.username<br/>cloud.password< | Applicable only for cloud |
+| **#mobilefoundry specific details**<br/>mobilefoundry.url<br/>environment.name<br/>accountd.id<br/>mf.appname<br/>\[mf.app.version?\] | Applicable only when you are trying to publish the app. |
+| **#environment to publish**<br/>Example: qa cloud.environment | Applicable only when you are trying to publish the app. |
+| \#Platforms to build for<br/>**#Mobile Channel**<br/>iphone<br/>android<br/>spa.iphone<br/>spa.android<br/>**#Tablet**<br/>ipad<br/>androidtablet<br/>spa.ipad<br/>spa.androidtablet<br/>spa.windowstablet**<br/># Desktop Channel**<br/>desktopweb**<br/># Wearables**<br/>iphonewatch<br/>androidwearos | The value is either true or false. Enter true to build the platform else false.Please note that you cannot build Apple watch alone. When you build for Apple watch ensure that you build for iPhone as well. |
+| **#IPA generation details**<br/>mac.ipaddress<br/>mac.username<br/>mac.password<br/>keychain.password<br/>development.team.id<br/>method<br/>genipaiphone (to generate IPA for iPhone)<br/>genipaipad (to generate IPA for iPad) | Enter true to generate IPA for iPhone and iPad.For the method, possible values supported are **app-store**, **ad-hoc**, **enterprise**, and **development**. |
+| Universal build for iOS:<br/>universal.iPhone<br/>universal.android | Enter true to perform universal build for iPhone. Enter true to perform universal build for Android. |
+| \#Windows platform for headless build<br/>**#Mobile Channel**<br/>windowsphone10<br/>**#Tablet**<br/>windows10**<br/>#Desktop Channel**<br/>desktop\_kiosk | Window platforms |
 | binaries.location | Location, where the binaries are saved after the app is successfully built. |
-| `versiondefault_localeandroid.packagenameandroid.versioncodeios.bundleversion` | Support has been added for the following items from V8 SP1 onwards. |
-| `keyAlias keyPasswordkeyStoreFilePathkeyStorePassword` | Support has provided for the Android signing keys from V8 SP1 onwards for signing. |
-| `context.path.identity context.path.workspace context.path.accounts context.path.console` | Supported context paths for Volt MX Foundry components, if customized. |
-| `login.siteminder.url` | Siteminder login URL if your on-premise Volt MX Foundry is protected by siteminder. |
-| `iosappextension` | App extension of the iOS. |
-| `iosappextension` | App extension of the iOS. |
+| version<br/>default_locale<br/>android.packagename<br/>android.versioncode<br/>ios.bundleversion | Support has been added for the following items from V8 SP1 onwards. |
+| keyAlias<br/>keyPassword<br/>keyStoreFilePath<br/>keyStorePassword | Support has provided for the Android signing keys from V8 SP1 onwards for signing. |
+| context.path.identity<br/>context.path.workspace<br/>context.path.accounts<br/>context.path.console | Supported context paths for Volt MX Foundry components, if customized. |
+| login.siteminder.url | Siteminder login URL if your on-premise Volt MX Foundry is protected by siteminder. |
+| iosappextension | App extension of the iOS. |
+| iosappextension | App extension of the iOS. |
 
 > **_Important:_** There are many keys available in the **HeadlessBuild.properties** file. However, not all of them are applicable for the CI Build. The keys mentioned above are the only ones applicable for CI Build.
 
-> **_Important:_** If you do not want to store your password in the headless build.properties file, you can use mfcli to encrypt your password. You can download the mfcli.jar from [https://community.hclvoltmx.com/downloads](https://community.hclvoltmx.com/downloads).  
+> **_Important:_** If you do not want to store your password in the headless build.properties file, you can use mfcli to encrypt your password. You can download the mfcli.jar from [https://hclsoftware-fno.flexnetoperations.com/flexnet/operations/startPage](https://hclsoftware-fno.flexnetoperations.com/flexnet/operations/startPage).  
   
 Ensure that you use the corresponding version of MFCLI as that of the Iris. i.e 7.x iris, 7.x mfcli, 8.x iris, 8.x mfcli.  
   
@@ -108,7 +108,39 @@ To encrypt the password using mfcli (using default password.encryption.key),
 `java -jar mfcli.jar encrypt "VoltMX@1234"  
 Encrypted password is: en1801f1abee7b9e12426c062509e1b18epd`
 
-  
+### Link Native iOS System Frameworks and Exclude built-in iOS Frameworks
+
+As part of the CI/CD process of Iris builds, you must add a few System Frameworks to the VoltMXJS targets for the VMAppWithVoltMXlib Xcode project in a few scenarios. If you are using third-party NFIs, while linking the third-party NFIs to the VoltMXJS target, you must also link the target to the dependent system frameworks of the NFI.
+
+For example, consider that you are using the AlertView NFI that depends on the views of the UIKit framework to display alerts. After you add the AlertView NFI to the VMAppWithVoltMXlib Xcode project, the build might fail depending on the Xcode version due to errors such as the UIKit symbols not being found, or the UIKit internal class symbols not being found. To resolve these errors, you must add the UIKit framework to the system frameworks list.
+
+In addition to adding the third-party dependent system frameworks, you can also mention the built-in Volt MX iOS frameworks that need not be packaged into the application.
+
+To add the system frameworks or exclude built-in Volt MX iOS frameworks in the application, follow these steps:
+
+1. Navigate to the resources/common folder of the Iris project.
+2. Create a json file, and name it voltmx_frameworks.json.
+3. In the voltmx_frameworks.json file, do the following:
+   1. Add the dependent system frameworks in the systemframeworks parameter.
+   2. Add the built-in Volt MX iOS frameworks that need not be packaged into the application in the excludeFrameworks parameter.
+
+      > **Note:** You cannot use the functionality of the built-in framework after you exclude it. If you invoke the dependent functionality of an excluded framework in the app, errors may occur and the app might stop responding.
+4. Save and close the file.
+
+Here is a sample voltmx_frameworks.json file:
+
+```
+{
+    "systemframeworks" : [
+        "UIKit.framework",
+        "Security.framework"
+    ],
+    "excludeFrameworks":[
+        "AR",
+        "SignInWithApple"
+    ]
+}
+```
 
 ### Build the Application for Volt MX Iris
 
@@ -122,13 +154,13 @@ Encrypted password is: en1801f1abee7b9e12426c062509e1b18epd`
     
     > **_Note:_** For Delta download or when the 'plugin.dir' location already has a set of plugins then, run the following command  
     node build.js -c --irisversion <version number>  
-      
-    This command will download the upgraded plugins and build the project.
+    >  
+    > This command will download the upgraded plugins and build the project.
     
 3.  If the app is built successfully, the binaries are saved in the location defined in the binaries section of HeadlessBuild.properties file.
     
-    > **_Note:_** If the binary location is not specified in the file, the binaries are saved in the following default location.  
-    <projectLocation>/Binaries.
+    > **_Note:_** If the binary location is not specified in the file, the binaries are saved in the following default location:  
+    > &lt;projectLocation&gt;/Binaries.
     
 
 ### Build .js Arguments
@@ -153,8 +185,8 @@ The error codes are indicative of failed stage or operation. The actual error me
 | 50 | One or more mandatory fields are missing in HeadlessBuild.properties. |
 | 51 | At least one platform should be selected for the build in HeadlessBuild.properties. |
 | 52 | Plugin extraction failed (or) one or more mandatory plugins are missing. |
-| 53 | Publishing Volt MX Foundry application failed. |
-| 54 | Volt MX Foundry configuration details are missing in HeadlessBuild.properties.Example: error message will be (cloudname, cloudpassword, envname, accountID, mfAppName) is (or) are missing. |
+| 53 | Publishing Volt Foundry application failed. |
+| 54 | Volt Foundry configuration details are missing in HeadlessBuild.properties.Example: error message will be (cloudname, cloudpassword, envname, accountID, mfAppName) is (or) are missing. |
 | 55 | Project porting failed. |
 | 56 | There are no forms created to build the selected channels.Example: There are no forms created for: Desktop |
 | 57 | JAVA\_HOME not found in environment variables (or) expected Java version is not found. |

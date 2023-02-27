@@ -5,18 +5,7 @@ Look Properties
 
 This topic describes the properties located on the **Look** tab of the Properties Editor.
 
-**_Notes:_***   Some of the properties covered in this topic may not be applicable for all widgets.
-*   When a widget is placed on a Flex form, the **Look** tab does not have margin properties, but does when placed on a VBox form.
-*   The **Look** tab of a widget placed on a VBox form does not have a Flex section with its attendant flex properties.
-
-The properties that are available on the **Look** tab vary depending on whether you place a widget on a Flex form or a VBox form.
-
-[Flex Form Look Properties](#flex-form-look-properties)
-
-[VBox Form Look Properties](#vbox-form-look-properties)
-
-Flex Form Look Properties
--------------------------
+**_Note:_** Some of the properties covered in this topic may not be applicable for all widgets.
 
 The following are the Look properties available for widgets placed on a Flex form.
 
@@ -65,11 +54,38 @@ Allows you to define how content lines up within the widget. Following alignment
 
 You can define the content alignment of a widget specific to a platform by forking **Content Align**. For more information, see [Fork a Widget Property](Forking.md#fork-a-widget-property).
 
-### **Text**
+### Widget Pinning
+
+Specifies how a widget is aligned with respect to the boundaries of its parent widget and its neighboring widgets (within the same container widget). The following alignment options are available:
+
+**Horizontal Alignment:**
+
+![](Resources/Images/WidgetAlig1.png)
+
+- **Pin to Left:** Aligns the widget horizontally and pins it to the left boundary of the parent widget. The value of the left property of the widget is set to 0. You can also use the shortcut keys **Shift + Alt + Left Arrow** to pin widgets to the left.
+- **Pin to Center:** Aligns the widget horizontally and pins it at the center of the parent widget. The value of the Center X property of the widget is set to 0. You can also use the shortcut keys **Shift + Alt + C** to pin widgets to the center.
+- **Pin to Right:** Aligns the widget horizontally and pins it to the right boundary of the parent widget. The value of the right property of the widget is set to 0. You can also use the shortcut keys **Shift + Alt + Right Arrow** to pin widgets to the right.
+
+**Vertical Alignment:**
+
+![](Resources/Images/WidgetAlig2.png)
+
+- **Pin to Top:** Aligns the widget vertically and pins it to the top boundary of the parent widget. The value of the top property of the widget is set to 0. You can also use the shortcut keys **Shift + Alt + Top Arrow** to pin widgets to the top.
+- **Pin to Middle:** Aligns the widget vertically and pins it at the center of the parent widget. The value of the Center Y property of the widget is set to 0. You can also use the shortcut keys **Shift + Alt + M** to pin widgets to the middle.
+- **Pin to Bottom:** Aligns the widget vertically and pins it to the bottom boundary of the parent widget. The value of the bottom property of the widget is set to 0. You can also use the shortcut keys **Shift + Alt + Bottom Arrow** to pin widgets to the bottom.
+
+**Distribute Multiple Widgets:**
+
+![](Resources/Images/WidgetAlig3.png)
+
+- **Distribute Horizontally:** Aligns the selected widgets across the horizontal axis of the parent widget with equal spacing between the widgets. You can also use the shortcut keys **Shift + Alt + H** to distribute widgets horizontally.
+- **Distribute Vertically:** Aligns the selected widgets across the vertical axis of the parent widget with equal spacing between the widgets. You can also use the shortcut keys **Shift + Alt + I** to distribute widgets vertically. 
+
+### Text
 
 Specifies the text displayed on a widget.
 
-### **Display Text**
+### Display Text
 
 Specifies whether the text should be displayed on a widget.
 
@@ -78,7 +94,7 @@ Specifies whether the text should be displayed on a widget.
 
 You can choose to display the text specific to a platform by forking **Display Text**. For more information, see [Fork a Widget Property](Forking.md#fork-a-widget-property).
 
-### **Flex Properties**
+### Flex Properties
 
 The Flex properties enables you to resize, move and position a widget.
 
@@ -156,171 +172,3 @@ Specifies the stack order of the widgets. A widget with a higher Z Index is in f
 
 Default:1 (Indicates the widgets is lowest bottom in the layer hierarchy.)
 
-VBox Form Look Properties
--------------------------
-
-The following are the Look properties available for widgets placed on a VBox form.
-
-![](Resources/Images/WidgetLook_CRR.png)
-
-### ID
-
-Denotes the name of a widget. When a widget is added to a form, a unique name is assigned to the widget. You can rename a widget by typing a name in the **ID** box.
-
-> **_Note:_** You can also rename a widget from the Project Explorer by right-clicking a widget, and then clicking **Rename**.
-
-### Visible
-
-Controls the visibility of a widget.
-
-*   To make a widget visible, click **On** .
-*   To make a widget invisible, click **Off**.
-
-### The Render Property
-
-Defines whether a widget appears on a specific platform. By default, a widget is rendered for all the platforms. If you do not want to render a widget for a specific platform, click the **Edit** button against the **Render** field to open the **Fork Platforms** dialog box.
-
-![](Resources/Images/RenderProperty_469x262.png)
-
-Clear the check box of the platforms for which the widget should not be rendered.
-
-**The Difference between Visible and Render**
-
-*   When a Widget is _not_ rendered for a platform, it implies that the widget is hidden from that specific platform.
-*   Whereas, when a widget is set as invisible, it implies that the widget is available, but is invisible. This feature is useful when you wanted to display a widget based on certain conditions.
-
-### Content Align
-
-Allows you to define how the widget content is aligned. Following alignment options are available:
-
-1.  Horizontal Alignment ![](Resources/Images/WidgetAlig1.png): Allows you to align the content horizontal.
-    
-    > **_Note:_** Horizontal alignment of a widget is possible only when the Expand Horiz property is enabled.
-    
-2.  Vertical Alignment ![](Resources/Images/WidgetAlig2.png): Allows you to align the content vertically. This type of alignment is possible only when:
-    *   Two or more widgets are placed inside a container (with horizontal orientation) such as HBox.
-    *   Widget whose content is to be aligned vertically should not occupy maximum height.
-    *   The Expand Vert property is enabled for the widget whose content is to be aligned vertically.
-        
-        > **_Note:_** You can only view the behavior of the Expand Vert property during the Quick Preview and the Functional Preview.
-        
-
-You can define the content alignment of a widget specific to a platform by forking **Content Align**. For more information, see [Fork a Widget Property](Forking.md#fork-a-widget-property).
-
-### Widget Align
-
-Specifies how a widget is aligned with respect to its boundaries and its neighboring widgets (within the same container widget). Following alignments options are available:
-
-1.  Horizontal Alignment ![](Resources/Images/WidgetAlig1.png) : Allows you to align a widget horizontally within its boundaries. This type of alignment is possible only when:
-    
-    *   The Expand Horiz property is disabled.
-    *   The text entered in the Text box should occupy width less than the Width% set for that widget.
-    
-    The following table displays how a **Button** widget is aligned within its boundaries.
-    
-    | Left | Center | Right |
-    | --- | --- | --- |
-    | ![](Resources/Images/WigAligLeft.png) | ![](Resources/Images/WigAligCenter.png) | ![](Resources/Images/WigAligRight.png) |
-    
-2.  Vertical alignment ![](Resources/Images/WidgetAlig2.png): Allows you to align a widget vertically with respect to its neighboring widget. This type of alignment is possible only when:
-    
-    *   Two or more widgets are placed inside a container widget (with horizontal orientation) such as HBox.
-    *   Widget that is being aligned vertically should not occupy maximum height.
-    
-    For example, consider a **Label** widget and a **Button** widget are placed inside an **HBox** widget. The following table demonstrates how the Label widget is aligned with respect to the Button widget.
-    
-    | Left | Center | Right |
-    | --- | --- | --- |
-    | ![](Resources/Images/WigAlignmentLeft.png) | ![](Resources/Images/WigAlignmentCenter.png) | ![](Resources/Images/WigAlignmentRight.png) |
-    
-
-### **Expand Horiz**
-
-Specifies whether widget is allowed to expand horizontally.
-
-### **Expand Vert**
-
-: Specifies whether widget is allowed to expand vertically.
-
-### **Width %**
-
-Specifies the width of a widget.
-
-*   If the widget is directly placed on a form, the widget occupies 100 percent width.
-*   If a widget is placed inside another widget, you can reduce the width of the widget. You can also lock the percentage of the width occupied by the widget.
-
-### **Text**
-
-Specifies the text displayed on a widget.
-
-### **Display Text**
-
-Specifies whether the text should be displayed on a widget.
-
-*   To display text on a widget, click **On**.
-*   To hide the text on a widget, click **Off**.
-
-You can choose to display the text specific to a platform by forking **Display Text**. For more information, see [Fork a Widget Property](Forking.md#fork-a-widget-property).
-
-### Margin
-
-Defines the space around a widget. You can use this option to assign the left, top, right, and bottom distance between the widget and the next element.
-
-  
-| Property | Definition | Action |
-| --- | --- | --- |
-| Top | Top margin | Move the slider to adjust the top margin of the widget. |
-| Right | Right margin | Move the slider to adjust the right margin of the widget. |
-| Bottom | Bottom margin | Move the slider to adjust the bottom margin of the widget. |
-| Left | Left margin | Move the slider to adjust the left margin of the widget. |
-
-> **_Note:_**
-
-*   Uniform margins are applied across the directions by clicking ![](Resources/Images/uniform.png).
-*   When widget margins are modified, it will affect the margins of its parent widget as well as that of the child widgets.  
-    
-
-The following image illustrates the Button widget forking:
-
-  
-| Before Applying Margins ||
-| --- | --- |
-| Iris Canvas | Margin Properties |
-| ![](Resources/Images/margins_app.png) | ![](Resources/Images/Margin-before.png) |
-| **After applying margins** ||
-| Iris Canvas | Margin Properties |
-| ![](Resources/Images/margin_canvas.png) | ![](Resources/Images/Margin_-after.png) |
-
-You can provide margins specify to a platform by forking **Margin**. For more information, see [Fork a Widget Property](Forking.md#fork-a-widget-property).
-
-> **_Note:_** When a **Margin** property is forked, you can apply margins in either Pixels or Percentage for native applications.
-
-### Padding
-
-Defines the space between the content of the widget and the widget boundaries. You can use this option to assign the top, left, right, and bottom distance between the widget content and the widget's boundaries.
-
-> **_Important:_** Default padding for Android is not set, as the devices are manufactured with predefined padding values.
-
-  
-| Property | Definition | Action |
-| --- | --- | --- |
-| Top | Top padding | Move the slider to adjust the top padding of the widget. |
-| Bottom | Bottom padding | Move the slider to adjust the bottom padding of the widget. |
-| Left | Left padding | Move the slider to adjust the left padding of the widget. |
-| Right | Right padding | Move the slider to adjust the right padding of the widget. |
-
-**_Notes:_***   When you click the Uniform Padding button ![](Resources/Images/uniform.png), changing the value for one padding boundary changes all of them to the same value.
-*   Modifying a widget's padding affects the padding of its parent and its children.
-
-You can provide padding specify to a platform by forking a widget's padding, as illustrated in the following table. For more information, see [Fork a Widget Property](Forking.md#fork-a-widget-property).
-
-  
-| Before Applying Padding ||
-| --- | --- |
-| Iris Canvas | Padding Properties |
-| ![](Resources/Images/margins_app.png) | ![](Resources/Images/Margin-before.png) |
-| **After applying paddings** ||
-| Iris Canvas | Margin Properties |
-| ![](Resources/Images/Padding_-aafter.png) | ![](Resources/Images/Margin_-after.png) |
-
-> **_Note:_** When Padding property is forked, you can apply paddings in either Pixels or Percentage for native applications.
