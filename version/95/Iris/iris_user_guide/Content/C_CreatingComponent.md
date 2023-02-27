@@ -19,25 +19,22 @@ The following topics provide additional information about creating components:
 
 *   [Create a Component without Contract](#create-a-component-without-contract)
 *   [Create a Component with Contract](#create-a-component-with-contract)
-
 *   [Manage Properties of a Component with Contract](#manage-properties-of-a-component-with-contract)
 *   [Manage Events of a Component with Contract](#manage-events-of-a-component-with-contract)
 *   [Manage Methods of a Component with Contract](#manage-methods-of-a-component-with-contract)
 *   [Group Properties, Events, and Methods of a Component with Contract](#group-properties_-events_-and-methods-of-a-component-with-contract)
 *   [Set Data for Components with Contract by using Mapping Editor](#set-data-for-components-with-contract-by-using-mapping-editor)
-*   [Map Service Parameters to the Segment in a Component](Segment2.html#map-service-parameters-to-the-segment-in-a-component)
+*   [Map Service Parameters to the Segment in a Component](Segment2.md)
 *   [Define the Behavior of a Custom Property in Code](#define-the-behavior-of-a-custom-property-in-code)
 *   [Define a Custom Event in Code](#define-a-custom-event-in-code)
-
-*   [Data & Services Panel Support for Components](#data-_-services-panel-support-for-components)
-*   [Expose a Component's Widgets](#expose-a-component_s-widgets)
+*   [Data & Services Panel Support for Components](#dataservices-panel-support-for-components)
+*   [Expose a Component's Widgets](#expose-a-components-widgets)
 *   [Specify a Container Widget as a Target Container](#specify-a-container-widget-as-a-target-container)
-*   [Expose a Component's Skins](#expose-a-component_s-skins)
+*   [Expose a Component's Skins](#expose-a-components-skins)
 *   [Lock a Component](#lock-a-component)
 *   [Delete a Component](#delete-a-component)
 
-Create a Component Without Contract
------------------------------------
+## Create a Component Without Contract
 
 A component without contract is similar to a Master in earlier versions of Iris, except that a component includes a Controller module. You can reuse the component within your application and distribute it via Forge. However, you cannot control which of the component's properties, events, and methods are exposed, or create custom properties, events, and methods. To control the exposed properties, events, and methods of a component, [create a component with contract.](#create-a-component-with-contract)
 
@@ -55,8 +52,7 @@ The new component without contract is created. The component includes a FlexCont
 5.  Add widgets to the FlexContainer, just as you would for a standard form.
 6.  Add code to the component's controller module or to actions for widgets on the form. To add code to widget actions, select the FlexContainer. On the **Properties** panel, on the **Action** tab, click **Edit** for the event to which you want to add code. For more information, refer to [Add Actions](working_with_Action_Editor.md).
 
-Create a Component With Contract
---------------------------------
+## Create a Component With Contract
 
 To create a reusable component that can be published to , create a component with contract. Components with a contract use the Reference Architecture: a structured, modular framework based on the Model-View-Controller (MVC) architecture. For more information on how to create a Reference Architecture project, refer [Create a Reference Architecture Project](CreateKRAProject.md).
 
@@ -372,7 +368,7 @@ You can also group both pass-through and custom properties under the same headin
 
 To group properties of a component with a contract:
 
-1.  Follow the steps in [Manage Properties of a Component with a Contract](#Props) to define a pass-through or custom property.
+1.  Follow the steps in [Manage Properties of a Component with a Contract](#manage-properties-of-a-component-with-a-contract) to define a pass-through or custom property.
 2.  Under **Group**, specify the group where you want the property to be displayed.
 
 If the group name does not exist, click in the **Group** field, select **Manage Group** to open the **Manage Groups** dialog box, and then add the group name.
@@ -548,10 +544,9 @@ To create, consume, and invoke a custom event, do the following:
 
 32.  Click **OK** to close the alert.
 
-Data & Services Panel Support for Components
---------------------------------------------
+## Data & Services Panel Support for Components
 
-From V8 SP4 Fixpack 20, you can directly drag and drop services from the Data & Services panel to a component. In addition, you can drag and drop individual parameters of a sample service to a component. This enhancement will enable you to quickly customize components according to your requirement, and reuse them at various places in your and projects. Furthermore, you can [publish customized components to Forge](C_UsingComponents.html#publish-a-component-to-hcl-forge) . You can leverage Data Panel support for both [components with contract](#components-with-contract) and [components without contract](#components-without-contract). For more information on the Data & Services panel, click [here](DataPanel.md).
+From V8 SP4 Fixpack 20, you can directly drag and drop services from the Data & Services panel to a component. In addition, you can drag and drop individual parameters of a sample service to a component. This enhancement will enable you to quickly customize components according to your requirement, and reuse them at various places in your and projects. Furthermore, you can [publish customized components to Forge](C_UsingComponents.html#publish-a-component-to-hcl-forge) . You can leverage Data Panel support for both [components with contract](#create-a-component-with-contract) and [components without contract](#create-a-component-without-contract). For more information on the Data & Services panel, click [here](DataPanel.md).
 
 Once you drag and drop a sample service from the Data & Services panel to a component, a corresponding project service is added. That particular project service and its associated parameters are auto-highlighted in the Data & Services panel. So if multiple components exist and when you select a specific component, only those services which have been added to that component are highlighted in the Project Services of the Data & Services panel. The Data & Services panel also allows you to view the mappings for each project service operation in the component. The **onMapping** Event of the operations in the component is not generated separately in the CodeGen. You can view the onMapping Event in the **preShow** Event of the component
 
@@ -665,8 +660,7 @@ You can drag and drop multiple service parameters to the widgets of a component 
     Alternatively, you can go to **Properties panel** > **Component**, click **Edit** for the **onMapping** Event, and then click **Generate Code**.
 2.  Once you have successfully added the service operation parameters to the component in the form, the form can be [added to a Collection](C_UsingComponents.html#add-a-component-to-a-collection) and then [imported to be used for a particular channel in your project](C_UsingComponents.html#mport-a-component-into-your-project).
 
-Expose a Component's Widgets
-----------------------------
+## Expose a Component's Widgets
 
 Typically, a component comprises multiple widgets. Once you create a component with a contract, you can specify which of the component's widgets to expose to users.
 
@@ -688,8 +682,7 @@ To expose a component's widgets:
 
 8.  Repeat the process for each widget that you want to expose.
 
-Expose Child Components of a Nested Component
----------------------------------------------
+## Expose Child Components of a Nested Component
 
 A component can contain multiple widgets or child components. Once you create a component with a contract, you can specify which of the component's child components to expose to users.
 
@@ -697,9 +690,9 @@ When you expose a child component within another component, all the pass-through
 
 To expose a child component of a nested component, follow these steps:
 
-1.  Select the child component on the Iris canvas or on the **Templates** tab of the **Project Explorer**.
-2.  Right-click the component and select **Expose Component**.  
-    Alternatively, you can navigate to the **Look** tab in the **Properties Pane** and set the **Expose Component** property to ON.
+1.  Select the child component on the Iris canvas or on the **Templates** tab of the **Project Explorer**.
+2.  Right-click the component and select **Expose Component**.  
+    Alternatively, you can navigate to the **Look** tab in the **Properties Pane** and set the **Expose Component** property to ON.
     
     > **Note:** The Expose Component property allows a component creator to make the child component visible in a Form or another component. A developer using the component cannot access the child component directly through code.
     
@@ -707,8 +700,7 @@ To expose a child component of a nested component, follow these steps:
 
     >**Note:** In case of multiple layers of nested components, you can only view properties of the child components that have been exposed within the parent component.
 
-Specify a Container Widget as a Target Container
-------------------------------------------------
+## Specify a Container Widget as a Target Container
 
 A _target container_ is a Container widget that can contain other child widgets. To specify a Container widget as a target container, set both its **Expose Widget** and **Set As Target Container** properties to _On_.
 
@@ -722,8 +714,7 @@ To specify a Container widget as a target container:
 
     Iris displays the **Placeholder** property. The Placeholder property lets you specify further information or direction to a user; for example "Add Content Here" or "Drop Image Here."
 
-Expose a Component's Skins
---------------------------
+## Expose a Component's Skins
 
 In addition to specifying which of a component's widgets to expose to users, you can specify the skins to expose.
 
@@ -734,8 +725,7 @@ To expose a component's skins:
 3.  Set the **Expose Skins** property to _On_.
 4.  Repeat the process for each skin that you want to expose.
 
-Lock a Component
-----------------
+## Lock a Component
 
 To prevent your component from being modified by users, you can lock the component. Users will not be able to view or modify the component's source code.
 
@@ -744,8 +734,7 @@ To lock a component:
 1.  Select the component on the Iris canvas or on the **Templates** tab of Project Explorer.
 2.  Right-click the component and select **Lock**.
 
-Delete a Component
-------------------
+## Delete a Component
 
 Follow these steps to delete a component and the assets associated with the component from the project:
 
