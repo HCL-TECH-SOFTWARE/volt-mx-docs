@@ -23,7 +23,7 @@ How to Configure Batch Files
 
 ### catalina.bat
 
-`Catalin.bat` files are required to be configured in Tomcat server to work properly.
+`Catalina.bat` files are required to be configured in Tomcat server to work properly.
 
 1.  From the `<User_Install_Directory>\apache-tomcat-9.0.33\bin`, open the `catalina.bat`.
 2.  Before the `@echo off` command, add the following JVM memory configuration.
@@ -65,8 +65,8 @@ If you wish to configure a Windows service for this server, follow these steps
 4.  To configure the service name for the service you install, use the following commands:
     
     
-    `set SERVICE\_NAME=<Service\_Name>\_SVC` <br/>
-    `set PR\_DISPLAYNAME=<Service\_Name>`
+    `set SERVICE_NAME=<Service_Name>_SVC` <br/>
+    `set PR_DISPLAYNAME=<Service_Name>`
     
 5.  Save the `service.bat` file.
 
