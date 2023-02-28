@@ -56,29 +56,19 @@ To use iOS Home Screen Widgets in Volt MX Iris, you must include the widget conf
         
         
             Here is a sample code snippet with the two functions:  
-
-
-            <pre><code style="display:block;background-color:#eee;">{
-
-            function getSnapshot(callback, widgetSize){  
-
-            var entry = new Entry(new Date(), {});  
-
-            callback(entry);  
-
+			<pre>
+            function getSnapshot(callback, widgetSize){
+                var entry = new Entry(new Date(), {});
+                callback(entry);
             }  
+ 
+            function getTimelines(callback, widgetSize){
+                var entry = new Entry(new Date(), {});
+                callback([entry], TimelinePolicy.never());
+            }
+            </pre>
 
-            function getTimelines(callback, widgetSize){  
-
-            var entry = new Entry(new Date(), {});  
-
-            callback([entry], TimelinePolicy.never());  
-            
-            }</pre> </code>
-            
-    
-            
-        *   **Views**: A folder that contains either the form.sm folders or a composite form.json structure file. The views folder must also contain the themes folder packaged with it if the form.json file is not present in the project.
+    *   **Views**: A folder that contains either the form.sm folders or a composite form.json structure file. The views folder must also contain the themes folder packaged with it if the form.json file is not present in the project.
             
     *   **widgetProperties.json** - A file that contains the metadata of the widgets. The widgetProperties.json file contains a JSON Object that contains the **widgets** key, which is an array of JSON Objects that contain the meta data for each widget. Each widget meta JSON object contains the following key-value pairs:
         
@@ -91,9 +81,10 @@ To use iOS Home Screen Widgets in Volt MX Iris, you must include the widget conf
             *   **SMALL** key: The value for this key is the name of the composite form.json structure of the small widget.
             *   **MEDIUM** key: The value for this key is the form.json structure of the medium widget.
             *   **LARGE** key: The value for this key is the form.json structure of the large widget.
-            *   If the widget does not support a particular size, the value for that particular key must be an empty string.
-            *   If the composite form.json file does not exist, the composite structure file will be generated from the from.sm folder, and the themes are combined.
+            If the widget does not support a particular size, the value for that particular key must be an empty string.
+            If the composite form.json file does not exist, the composite structure file will be generated from the from.sm folder, and the themes are combined.
         7.  **widgetURL**: A deep link URL that the application is expected to receive when a user taps the widget.
+
     *   **CommonJSScripts** - A folder that contains the common JS files used by both the main iOS application and the widget (both the app and the widget use different environments).
 
 Here is a sample `widgetProperties.json` file:
@@ -149,18 +140,13 @@ Widgets use the following two important functions:
 *   [getTimeline](#getTimeline)
 
 
-<a id="getSnapshot"></a>         
-
-**getSnapshot**
+<a id="getSnapshot"></a>**getSnapshot**
 
 The getSnapshot function returns a single snap of data, as the name indicates. Usually, the getSnapshot function provides a representation of the widget for better user understanding.
 
 The getSnapshot function is invoked by the native framework when the widget must appear on the widget gallery. When the getSnapshot function is invoked, the widget.js file of the widget is triggered. As the getSnapshot function returns a single snap of data, you must pass a single [Entry object](#Entry) (with data) as an input for the getSnapshot callback function. The expected data at that particular moment is then displayed on the widget.
 
-
-<a id="getTimeline"></a>  
-
-**getTimeline**
+<a id="getTimeline"></a>**getTimeline**
 
 The getTimeline function returns a series of data entries. The widgets on the home screen display the data with respect to the number of entries that you provide as the input. For example, if you pass 10 entries with each entry differing by one hour, the timeline for the widget is defined for 10 hours, and the system refreshes the widget views on the home screen according to the data that is passed for each entry.
 
@@ -171,9 +157,7 @@ The getTimeline function is invoked by the native framework when the widget is a
 *   **Reload After (date)**: The getTimeline function is triggered at a particular moment that you provide as the input (with the date-time object).
 
 
-<a id="Entry"></a>
-
-**Entry Object - Entry Class**
+<a id="Entry"></a>**Entry Object - Entry Class**
 
 The Entry object is a JavaScript object instance that is used by widgets for both the getSnapshot and the getTimeline functions. The Entry object contains a **date** object(date-time object) and the **data** to be displayed at a particular date-time.
 

@@ -114,7 +114,7 @@ VoltMX.io.File returns a handle to the File object pointing to the destination f
 *   Android
 *   Windows
 
-### voltmx.io.FileSystem.getAppGroupDirectoryPath
+### <a name="getAppGroupDirectoryPath"></a>voltmx.io.FileSystem.getAppGroupDirectoryPath
 
 This API retrieves the root path of an app group.
 
