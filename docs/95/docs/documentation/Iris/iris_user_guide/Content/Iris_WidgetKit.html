@@ -1646,21 +1646,22 @@
 <ul>
 <li>
 <p><strong>JSScripts</strong>: A folder that contains a widget.js file with two async functions passed with a callback. </p>
-<p>Here is a sample code snippet with the two functions:  </p>
-<p><pre><code style="display:block;background-color:#eee;">{</p>
-<p>function getSnapshot(callback, widgetSize){  </p>
-<p>var entry = new Entry(new Date(), {});  </p>
-<p>callback(entry);  </p>
-<p>}  </p>
-<p>function getTimelines(callback, widgetSize){  </p>
-<p>var entry = new Entry(new Date(), {});  </p>
-<p>callback([entry], TimelinePolicy.never());  </p>
-<p>}</pre> </code></p>
+<p>Here is a sample code snippet with the two functions:<br />
+<pre>
+function getSnapshot(callback, widgetSize){
+    var entry = new Entry(new Date(), {});
+    callback(entry);
+}  </p>
+<p>function getTimelines(callback, widgetSize){
+    var entry = new Entry(new Date(), {});
+    callback([entry], TimelinePolicy.never());
+}
+</pre></p>
+</li>
+</ul>
 </li>
 <li>
 <p><strong>Views</strong>: A folder that contains either the form.sm folders or a composite form.json structure file. The views folder must also contain the themes folder packaged with it if the form.json file is not present in the project.</p>
-</li>
-</ul>
 </li>
 <li>
 <p><strong>widgetProperties.json</strong> - A file that contains the metadata of the widgets. The widgetProperties.json file contains a JSON Object that contains the <strong>widgets</strong> key, which is an array of JSON Objects that contain the meta data for each widget. Each widget meta JSON object contains the following key-value pairs:</p>
@@ -1673,16 +1674,16 @@
 <li><strong>widgetViews</strong>: A JSON object that contains the following key-value pairs:<ul>
 <li><strong>SMALL</strong> key: The value for this key is the name of the composite form.json structure of the small widget.</li>
 <li><strong>MEDIUM</strong> key: The value for this key is the form.json structure of the medium widget.</li>
-<li><strong>LARGE</strong> key: The value for this key is the form.json structure of the large widget.</li>
-<li>If the widget does not support a particular size, the value for that particular key must be an empty string.</li>
-<li>If the composite form.json file does not exist, the composite structure file will be generated from the from.sm folder, and the themes are combined.</li>
+<li><strong>LARGE</strong> key: The value for this key is the form.json structure of the large widget.
+If the widget does not support a particular size, the value for that particular key must be an empty string.
+If the composite form.json file does not exist, the composite structure file will be generated from the from.sm folder, and the themes are combined.</li>
 </ul>
 </li>
-<li><strong>widgetURL</strong>: A deep link URL that the application is expected to receive when a user taps the widget.<ul>
-<li><strong>CommonJSScripts</strong> - A folder that contains the common JS files used by both the main iOS application and the widget (both the app and the widget use different environments).</li>
-</ul>
-</li>
+<li><strong>widgetURL</strong>: A deep link URL that the application is expected to receive when a user taps the widget.</li>
 </ol>
+</li>
+<li>
+<p><strong>CommonJSScripts</strong> - A folder that contains the common JS files used by both the main iOS application and the widget (both the app and the widget use different environments).</p>
 </li>
 </ul>
 </li>
@@ -1737,12 +1738,10 @@
 <li><a href="#getSnapshot">getSnapshot</a></li>
 <li><a href="#getTimeline">getTimeline</a></li>
 </ul>
-<p><a id="getSnapshot"></a>         </p>
-<p><strong>getSnapshot</strong></p>
+<p><a id="getSnapshot"></a><strong>getSnapshot</strong></p>
 <p>The getSnapshot function returns a single snap of data, as the name indicates. Usually, the getSnapshot function provides a representation of the widget for better user understanding.</p>
 <p>The getSnapshot function is invoked by the native framework when the widget must appear on the widget gallery. When the getSnapshot function is invoked, the widget.js file of the widget is triggered. As the getSnapshot function returns a single snap of data, you must pass a single <a href="#Entry">Entry object</a> (with data) as an input for the getSnapshot callback function. The expected data at that particular moment is then displayed on the widget.</p>
-<p><a id="getTimeline"></a>  </p>
-<p><strong>getTimeline</strong></p>
+<p><a id="getTimeline"></a><strong>getTimeline</strong></p>
 <p>The getTimeline function returns a series of data entries. The widgets on the home screen display the data with respect to the number of entries that you provide as the input. For example, if you pass 10 entries with each entry differing by one hour, the timeline for the widget is defined for 10 hours, and the system refreshes the widget views on the home screen according to the data that is passed for each entry.</p>
 <p>The getTimeline function is invoked by the native framework when the widget is added to the home screen. You must provide a series of <a href="#Entry">Entry Objects</a> (with each entry having a <strong>date</strong> object and a <strong>data</strong> object) and a Reload Policy as the input for the getTimeline function. For a specific timeline, a widget can work independently until the timeline expires. When the data for the last entry has been displayed, you can use the following <strong>Widget Reload Policies</strong> to reload the widget at a specific time.</p>
 <ul>
@@ -1750,8 +1749,7 @@
 <li><strong>Reload At End</strong>: The getTimeline function for input data of the widget is reloaded after the widget displays the last entry that was passed as the input. AFter the last entry is displayed, the getTimeline function is triggered with a request for the new data to be displayed.</li>
 <li><strong>Reload After (date)</strong>: The getTimeline function is triggered at a particular moment that you provide as the input (with the date-time object).</li>
 </ul>
-<p><a id="Entry"></a></p>
-<p><strong>Entry Object - Entry Class</strong></p>
+<p><a id="Entry"></a><strong>Entry Object - Entry Class</strong></p>
 <p>The Entry object is a JavaScript object instance that is used by widgets for both the getSnapshot and the getTimeline functions. The Entry object contains a <strong>date</strong> object(date-time object) and the <strong>data</strong> to be displayed at a particular date-time.</p>
 <p>Here is a sample code snippet that showcases the getSnapshot and getTimeline functions:</p>
 <pre><code>// Snapshot should call the callback with the immediate time or current time
