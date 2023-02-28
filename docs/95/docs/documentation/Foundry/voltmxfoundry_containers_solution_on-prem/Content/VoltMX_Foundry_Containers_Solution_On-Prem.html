@@ -487,265 +487,276 @@ sudo firewall-cmd --permanent --add-port=80/tcp --zone=public
 <h1 id="preinstallation-tasks">Preinstallation Tasks</h1>
 <p>Following are the preinstallation tasks to be performed on all nodes before starting installation.</p>
 <ol>
-<li>All Kubernetes masters and nodes must have the swap disabled. This is the recommended deployment as per the Kubernetes community.<ol>
-<li>Run the following command to disable swap.</li>
-</ol>
+<li>
+<p>All Kubernetes masters and nodes must have the swap disabled. This is the recommended deployment as per the Kubernetes community.</p>
+<p>a.  Run the following command to disable swap.
+<code>sudo swapoff -a</code></p>
+<p>b.  Run the following command to update fstab so that the swap remains disabled even after a reboot.
+<code>sudo sed -i '/ swap / s/^\(.\*\)$/#\1/g' /etc/fstab</code></p>
+<p>c.  Restart the node after the swap is disabled.</p>
+</li>
+<li>
+<p>Download Foundry container artifacts from <a href="https://community.hclvoltmx.com/downloads">VoltMX Downloads</a>.</p>
+</li>
+<li>
+<p>If the Foundry cluster is being reinstalled, you must execute the following command on all nodes and delete the <strong>.kube</strong> folder present in the root directory from all the master nodes.
+    <code>sudo kubeadm reset</code></p>
 </li>
 </ol>
-<pre><code>sudo swapoff -a
-```&lt;br&gt;
-    2.  Run the following command to update fstab so that the swap remains disabled even after a reboot.
-</code></pre>
-<p>sudo sed -i '/ swap / s/^(.*)$/#\1/g' /etc/fstab
-```<br>
-    3.  Restart the node after the swap is disabled.
-2.  Download Foundry container artifacts from <a href="https://community.hclvoltmx.com/downloads">VoltMX Downloads</a>.
-3.  If the Foundry cluster is being reinstalled, you must execute the following command on all nodes and delete the <strong>.kube</strong> folder present in the root directory from all the master nodes.</p>
-<pre><code>sudo kubeadm reset
-```&lt;br&gt;
-
-# Architecture
-
-Following is the architecture diagram of the Volt MX Foundry Container Cluster Solution.
-
-![](Resources/Images/ArchDiagram1_767x344.png)
-
-The complete Volt MX Foundry Container Cluster Solution will have a total of six pods.
-
-Following is the list of pods present in the VoltMX Foundry Container Cluster Solution:
-
-- Console
-- API Developer Portal
-- Identity
-- Integration
-- Engagement
-- Database (exits on completion of the Database scripts execution)
-
-The following is the list of Docker images used for the pods in the VoltMX Foundry Container Cluster Solution:
-
-- Foundry Console (Contains `mfconsole.war`,   `workspace.war`,  and  `accounts.war`)
-- API Developer Portal (Contains `apiportal.war`)
-- Identity (Contains `authService.war`)
-- Integration (Contains `admin.war`, ` services.war`,  ` middleware.war`, and `apps.war`)
-- Engagement (Contains `vpns.war`)
-- Database (Contains Database migration scripts)
-
-The docker images will be pulled when you execute the installation scripts in the &quot;HCL Volt MX Foundry Container Installer&quot; found on HCL's FNO download website: [https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.2.x&amp;orgId=HCL](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.2.x&amp;orgId=HCL)
-
-Volt MX Foundry Container Cluster Solution downloadable bundle contains the following directories and files:
-
-- **install-foundry.sh** - Installation script
-- **install-actions.sh** - Installation actions script which is internally used by install-foundry.sh.
-- **templates** - Directory containing the config template files
-- **add-ons directory**\- Directory containing additional deployments and configurations for the Kubernetes cluster.
-- **config.properties** - Properties file to pass the inputs to install-foundry.sh instead of giving inputs in shell prompts.
-- **lib** \- Folder containing the foundry-utils.jar file.
-- **resources** - Folder containing a few resources required for the Kubernetes CNI.
-- **setup-loadbalancer.sh** - Needs to be executed on a different machine to support the load balancer.
-
-## Installation Types
-
-Inputs for installation can be gathered through two modes. Any of the following modes can be chosen for installation.
-
-- **Command Line** - Volt MX Foundry Container Cluster Solution can be installed using the bundled install shell script, which will prompt the user for required values.
-
-  The syntax for installing through the Command Line:
-
-  ```
-sudo ./install-foundry.sh
-  ```&lt;br&gt;![](Resources/Images/kb1.png)
-
-- **Silent Installation** - The installation script also supports silent installation if the config.properties file is passed as an argument (for example, /path/install-foundry.sh config.properties). Using this, you can have additional ability to pass custom Tomcat JAVA_OPTS, Heap memory settings, and time-zone settings as well.
-
-  The syntax for installing using the config.properties:
-
-  ```
-sudo ./install-foundry.sh config.properties
-  ```
-
-# Configuration
-
-The following parameters are to be provided by the user during Installation:
-
-1.  **INSTALL_ENV_NAME** - The install environment name can be anything in lowercase (String). The possible values are: `dev`, `qa`, `prod`, or `eastusprod`.
-
-    &gt; **_Note:_** The Install Environment Name must not contain numbers.
-
-2.  **Install Components**: The following properties must be set to either Y (yes) or N (no). If ALL_COMPONENTS_ENABLED is set to Y, the rest of the inputs can be left empty. If ALL_COMPONENTS_ENABLED is set to N then at least one of the following input properties must be set to Y.
-
-    - ALL_COMPONENTS_ENABLED
-    - INTEGRATION_ENABLED
-    - IDENTITY_ENABLED
-    - MESSAGING_ENABLED
-    - CONSOLE_ENABLED
-    - APIPORTAL_ENABLED
-
-3.  **Application Server Details**
-
-    - **SERVER_DOMAIN_NAME**: The **Domain Name** for Volt MX Foundry. This value should be the hostname of the LoadBalancer. For example: abc.companyname (DNS name).
-
-      &gt; **_Note:_** Domain name cannot be an IP address or 'localhost'.
-
-    - **COM_PROTOCOL**: The communication protocol for Volt MX Foundry. This value can be either http or https.
-    - **HTTPS_CERT_FILE**: The path to the existing certificate and key files. This value can be empty if the communication protocol is HTTP. The path should point to a valid pem file.
-    - **HTTPS_KEY_FILE**: The path to the existing certificate and key files. This value can be empty if the communication protocol is HTTP. The path should point to a valid pem file.
-
-4.  **Database Details**:
-
-    - **DB_TYPE** - This is the Database type you want to use for hosting Volt MX Foundry. The possible values are:
-      - For MySQL DB server: `mysql`
-      - For Azure MSSQL or SQL Server: `sqlserver`
-      - For Oracle DB server: `oracle`
-    - **DB_HOST** - This is the Database Server hostname used to connect to the Database Server.
-
-    &gt; **_Note:_** If the Database Hostname is an IP address, it should be a static IP address.
-
-    - **DB_PORT**– This is the Port Number used to connect to the Database Server. This can be empty for cloud manage service.
-    - **DB_USER** - This is the Database Username used to connect to the Database Server.
-    - **DB_PASS** - This is the Database Password used to connect to the Database Server.
-    - **DB_PREFIX** – This is the Database server prefix for Volt MX Foundry Schemas/Databases.
-    - **DB_SUFFIX** – This is the Database server suffix for Volt MX Foundry Schemas/Databases.
-
-    &gt; **Note:**
-
-    - Database Prefix and Suffix are optional inputs.
-    - In case of upgrade, ensure that the values of the Database Prefix and Suffix that you provide are the same as you had provided during the initial installation.
-    - If **DB_TYPE** is set as **oracle**, the following String values need to be provided:
-      - **DB_DATA_TS**: Database Data tablespace name.
-      - **DB_INDEX_TS**: Database Index tablespace name.
-      - **DB_LOB_TS**: Database LOB tablespace name.
-      - **DB_SERVICE**: Database service name.
-    - **USE_EXISTING_DB**: If you want to use an existing databases from a previous Volt MX Foundry instance set this variable to Y. If not the set the USE_EXISTING_DB variable to N.
-
-      You must provide the location of the previously installed artifacts (the location should contain upgrade.properties file).
-
-      For example: **PREVIOUS_INSTALL_LOCATION** = `/C/voltmx-foundry-containers-onprem/kubernetes`.
-
-5.  **VoltMX Foundry Account Registration Details**: The following properties are required for owner registration. It is not required for an upgrade. If OWNER_REGISTRATION_REQUIRED is set to **Y** (yes), then you must provide all the following inputs:
-    - **OWNER_REGISTRATION_REQUIRED** - Y/N.
-    - **OWNER_USER_ID** – E-mail ID used for Volt MX Foundry Registration.
-    - **OWNER_PASSWORD** – Password used for Volt MX Foundry Registration.
-    - **OWNER_FIRST_NAME** – First Name used for Volt MX Foundry Registration.
-    - **OWNER_LAST_NAME** – Last Name used for Volt MX Foundry Registration.
-    - **OWNER_ENV_NAME** – Environment name to which the generated applications should be published.
-6.  **TIME_ZONE** - The Time Zone of the Database used for Volt MX Foundry installation. The Time Zone variable must be set to maintain consistency between the Application server and the Database server. For determining what value to set for the time zone you can refer to [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) on Wikipedia.
-
-    &gt; **_Note:_** The Time Zone is an optional value. If you do not provide any Time Zone, it is set to Etc/UTC.
-
-7.  **Readiness and Liveness Probes Details**: Following variables are set with default values in seconds. You can modify them in the config.properties file.
-    - IDENTITY_READINESS_INIT_DELAY: The readiness probe initial delay for Identity, in seconds. The default value is 180.
-    - IDENTITY_LIVENESS_INIT_DELAY: The liveness probe initial delay for Identity, in seconds. The default value is 300.
-    - CONSOLE_READINESS_INIT_DELAY: The readiness probe initial delay for Console, in seconds. The default value is 300.
-    - CONSOLE_LIVENESS_INIT_DELAY: Liveness probe initial delay for Console, in seconds. The default value is 600.
-    - INTEGRATION_READINESS_INIT_DELAY: The readiness probe initial delay for Integration, in seconds. The default value is 300.
-    - INTEGRATION_LIVENESS_INIT_DELAY: Liveness probe initial delay for Integration, in seconds. The default value is 600.
-    - ENGAGEMENT_READINESS_INIT_DELAY: The readiness probe initial delay for Engagement, in seconds. The default value is 180.
-    - ENGAGEMENT_LIVENESS_INIT_DELAY: The liveness probe initial delay for Engagement, in seconds. The default value is 300.
-8.  **Minimum and Maximum RAM percentage Details**: The following variables are set with default String values. You can modify them in the config.properties file.
-    - CONSOLE_MIN_RAM_PERCENTAGE: Minimum RAM percentage for Console. The default value is &quot;50&quot;.
-    - CONSOLE_MAX_RAM_PERCENTAGE: Maximum RAM percentage for Console. The default value is &quot;80&quot;.
-    - ENGAGEMENT_MIN_RAM_PERCENTAGE: Minimum RAM percentage for Engagement. The default value is &quot;50&quot;.
-    - ENGAGEMENT_MAX_RAM_PERCENTAGE: Maximum RAM percentage for Engagement. The default value is &quot;80&quot;.
-    - IDENTITY_MIN_RAM_PERCENTAGE: Minimum RAM percentage for Identity. The default value is &quot;50&quot;.
-    - IDENTITY_MAX_RAM_PERCENTAGE: Maximum RAM percentage for Identity. The default value is &quot;80&quot;.
-    - INTEGRATION_MIN_RAM_PERCENTAGE: Minimum RAM percentage for Integration. The default value is &quot;50&quot;.
-    - INTEGRATION_MAX_RAM_PERCENTAGE: Maximum RAM percentage for Integration. The default value is &quot;80&quot;.
-    - APIPORTAL_MIN_RAM_PERCENTAGE: Minimum RAM percentage for API Portal. The default value is &quot;50&quot;.
-    - APIPORTAL_MAX_RAM_PERCENTAGE: Maximum RAM percentage for API Portal. The default value is &quot;80&quot;.
-9.  **Container resource limits for memory and CPU**: The following variables are set with default String values. You can modify them in the config.properties file.
-    - IDENTITY_RESOURCE_MEMORY_LIMIT: The resource memory limit for Identity. The default value is &quot;1.2G&quot;.
-    - IDENTITY_RESOURCE_REQUESTS_MEMORY: The resource memory requests for Identity. The default value is &quot;1G&quot;.
-    - IDENTITY_RESOURCE_REQUESTS_CPU: The resource CPU requests for Identity. The default value is &quot;200m&quot;.
-    - CONSOLE_RESOURCE_MEMORY_LIMIT: The resource memory limit for Console. The default value is &quot;2.2G&quot;.
-    - CONSOLE_RESOURCE_REQUESTS_MEMORY: The resource memory requests for Console. The default value is &quot;2G&quot;.
-    - CONSOLE_RESOURCE_REQUESTS_CPU: The resource CPU requests for Console. The default value is &quot;300m&quot;.
-    - APIPORTAL_RESOURCE_MEMORY_LIMIT: The resource memory limit for API Portal. The default value is &quot;1.2G&quot;,
-    - APIPORTAL_RESOURCE_REQUESTS_MEMORY: The resource memory requests for API Portal. The default value is &quot;1G&quot;.
-    - APIPORTAL_RESOURCE_REQUESTS_CPU: The resource CPU requests for API Portal. The default value is &quot;200m&quot;,
-    - INTEGRATION_RESOURCE_MEMORY_LIMIT: The resource memory limit for Integration. The default value is &quot;2.2G&quot;.
-    - INTEGRATION_RESOURCE_REQUESTS_MEMORY: The resource memory requests for Integration. The default value is &quot;2G&quot;.
-    - INTEGRATION_RESOURCE_REQUESTS_CPU: The resource CPU requests for Integration. The default value is &quot;300m&quot;.
-    - ENGAGEMENT_RESOURCE_MEMORY_LIMIT: The resource memory limit for Engagement. The default value is &quot;1.2G&quot;.
-    - ENGAGEMENT_RESOURCE_REQUESTS_MEMORY: The resource memory requests for Engagement. The default value is &quot;1G&quot;.
-    - ENGAGEMENT_RESOURCE_REQUESTS_CPU: The resource CPU requests for Engagement. The default value is &quot;200m&quot;.
-10. **Custom JAVA_OPTS Details**: The following variables can be set with default String values. You can modify them in the config.properties file.
-    - CONSOLE_CUSTOM_JAVA_OPTS: The custom JAVA_OPTS for Console.
-    - ENGAGEMENT_CUSTOM_JAVA_OPTS: The custom JAVA_OPTS for Engagement
-    - IDENTITY_CUSTOM_JAVA_OPTS: The custom JAVA_OPTS for Identity.
-    - INTEGRATION_CUSTOM_JAVA_OPTS: The custom JAVA_OPTS for Integration.
-    - APIPORTAL_CUSTOM_JAVA_OPTS: The custom JAVA_OPTS for API Portal.
-11. **Number of instances to be deployed for each component**: The following variables can be set with default integer values. You can modify them in the config.properties file.
-    - IDENTITY_REPLICAS: The number of instances of Identity. The default value is 1.
-    - CONSOLE_REPLICAS: The number of instances of Console. The default value is 1.
-    - APIPORTAL_REPLICAS: The number of instances of API Portal. The default value is 1.
-    - INTEGRATION_REPLICAS: The number of instances of Integration. The default value is 1.
-    - ENGAGEMENT_REPLICAS: The number of instances of Engagement. The default value is 1.
-12. The port on which the **Kubernetes Dashboard** can be accessed:
-
-    - KUBERNETES_DASHBOARD_PORT: The default value is 31000.
-
-# Installation
-
-Run the Volt MX Foundry Container Cluster install script to generate and deploy Volt MX Foundry containers.
-
-**Steps to Install Volt MX Foundry Container Cluster Solution on an On-Premises setup:**
-
-1.  [Setting up HAProxy LoadBalancer](#setting-up-haproxy-loadbalancer)
-
-    &gt; **_Note:_** This step is optional if you have your own load balancer setup. You must provide the pre-configured load balancer hostname as the SERVER_DOMAIN_NAME input in the installation process instead of performing the following instructions.
-
-2.  [Setting up Cluster](#setting-up-cluster)
-3.  [Resuming installation in Master Node](#resuming-installation-in-master-node)
-
-## Setting up HAProxy LoadBalancer
-
-Before starting the cluster installation, a loadbalancer must be set up. Without the loadbalancer the cluster setup cannot be started. The HAProxy is a certified external loadbalancer for the Foundry container cluster setup. Installation and configuration of HAProxy is taken care of by the script. Initially, the installation script configures the loadbalancer with one master. Going forward you can edit the `haproxy.cfg` file to add other masters to the loadbalancer.
-
-Perform the following steps to setup the HAProxy loadbalancer through a script file.
-
-1.  Download the **VoltMXFoundryContainersOnPrem-9.0.0.0_GA.zip** from the [Download Link](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.2.x&amp;orgId=HCL&amp;fromRecentFile=false&amp;fromRecentPkg=true&amp;fromDL=false) and extract it.
-</code></pre>
-<p>sudo unzip VoltMXFoundryContainersOnPrem-9.0.0.0_GA.zip
-    -d VoltMXFoundryContainerOnPrem-9.0.0.0_GA</p>
-<pre><code>2.  Navigate to foundry container artifact folder.
-</code></pre>
-<p>cd VoltMXFoundryContainerOnPrem-9.0.0.0_GA</p>
-<pre><code>3.  Run `setup-loadbalancer.sh`. It prompts for master node hostname and communication protocol. The loadbalancer is then installed and configured.
-</code></pre>
-<p>sudo ./setup-loadbalancer.sh</p>
-<pre><code>4.  Check if haproxy gets successfully started by executing the `systemctl status haproxy` command. If it throws the &quot;_cannot bind socket [0.0.0.0:xxxx|https://stackoverflow.com/questions/34793885/haproxy-cannot-bind-socket-0-0-0-08888]_&quot; error. Run the following command and restart haproxy.
-</code></pre>
-<p>setsebool -P haproxy_connect_any=1</p>
-<pre><code>
-Before setting up master nodes, all the IPs of master nodes should be configured in HAProxy loadbalancer. If any master node IP is not listed and you try to set the master node, that node will not be added to cluster. To add master node IPs, edit the file `/etc/haproxy/haproxy.cfg` and make the following two changes for each master node IP to be added.
-
-1.  In the **Configure HAProxy SecureBackend** section, add the following line at the end. List all the other master node IPs in the same way.
-</code></pre>
-<p>server k8s-api-2 <IP-ADDRESS>:6443 check</p>
-<pre><code>2.  In the **Configure HAProxy Foundry Backend** section, add the following line at the end. List all the other master node IPs in the same way.
-</code></pre>
-<p>server foundry-1 <IP-ADDRESS>:30200 check</p>
-<pre><code>
-## Setting up Cluster
-
-In setting up a cluster a minimum of one master can be configured. To improve failure tolerance and ensure cluster availability it is recommended to have an odd number (minimum three) of master nodes. To start cluster setup choose one node as starting point of installation which should be the master node.
-
-1.  Download the **voltmx-foundry-containers-onprem_9.0.0.0_GA.zip** from the [Download Link](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.2.x&amp;orgId=HCL&amp;fromRecentFile=false&amp;fromRecentPkg=true&amp;fromDL=false) and extract it.
-</code></pre>
-<p>sudo unzip VoltMXFoundryContainersOnPrem-9.0.0.0_GA.zip
-    -d VoltMXFoundryContainerOnPrem-9.0.0.0_GA</p>
-<pre><code>2.  Navigate to foundry container artifact folder.
-</code></pre>
-<p>cd VoltMXFoundryContainerOnPrem-9.0.0.0_GA</p>
-<pre><code>3.  Run the following command to setup the master. It downloads and installs cluster packages, initializes kubeadm, sets up Weave CNI, generates token and waits for the worker node to join the master to proceed further.
-</code></pre>
-<p>sudo ./install-foundry.sh config.properties
-```</p>
+<h1 id="architecture">Architecture</h1>
+<p>Following is the architecture diagram of the Volt MX Foundry Container Cluster Solution.</p>
+<p><img alt="" src="Resources/Images/ArchDiagram1_767x344.png" /></p>
+<p>The complete Volt MX Foundry Container Cluster Solution will have a total of six pods.</p>
+<p>Following is the list of pods present in the VoltMX Foundry Container Cluster Solution:</p>
+<ul>
+<li>Console</li>
+<li>API Developer Portal</li>
+<li>Identity</li>
+<li>Integration</li>
+<li>Engagement</li>
+<li>Database (exits on completion of the Database scripts execution)</li>
+</ul>
+<p>The following is the list of Docker images used for the pods in the VoltMX Foundry Container Cluster Solution:</p>
+<ul>
+<li>Foundry Console (Contains <code>mfconsole.war</code>,   <code>workspace.war</code>,  and  <code>accounts.war</code>)</li>
+<li>API Developer Portal (Contains <code>apiportal.war</code>)</li>
+<li>Identity (Contains <code>authService.war</code>)</li>
+<li>Integration (Contains <code>admin.war</code>, <code>services.war</code>,  <code>middleware.war</code>, and <code>apps.war</code>)</li>
+<li>Engagement (Contains <code>vpns.war</code>)</li>
+<li>Database (Contains Database migration scripts)</li>
+</ul>
+<p>The docker images will be pulled when you execute the installation scripts in the "HCL Volt MX Foundry Container Installer" found on HCL's FNO download website: <a href="https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.2.x&amp;orgId=HCL">https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.2.x&amp;orgId=HCL</a></p>
+<p>Volt MX Foundry Container Cluster Solution downloadable bundle contains the following directories and files:</p>
+<ul>
+<li><strong>install-foundry.sh</strong> - Installation script</li>
+<li><strong>install-actions.sh</strong> - Installation actions script which is internally used by install-foundry.sh.</li>
+<li><strong>templates</strong> - Directory containing the config template files</li>
+<li><strong>add-ons directory</strong>- Directory containing additional deployments and configurations for the Kubernetes cluster.</li>
+<li><strong>config.properties</strong> - Properties file to pass the inputs to install-foundry.sh instead of giving inputs in shell prompts.</li>
+<li><strong>lib</strong> - Folder containing the foundry-utils.jar file.</li>
+<li><strong>resources</strong> - Folder containing a few resources required for the Kubernetes CNI.</li>
+<li><strong>setup-loadbalancer.sh</strong> - Needs to be executed on a different machine to support the load balancer.</li>
+</ul>
+<h2 id="installation-types">Installation Types</h2>
+<p>Inputs for installation can be gathered through two modes. Any of the following modes can be chosen for installation.</p>
+<ul>
+<li>
+<p><strong>Command Line</strong> - Volt MX Foundry Container Cluster Solution can be installed using the bundled install shell script, which will prompt the user for required values.</p>
+<p>The syntax for installing through the Command Line: </p>
+<p><code>sudo ./install-foundry.sh</code></p>
+<p><img alt="" src="Resources/Images/kb1.png" /></p>
+</li>
+<li>
+<p><strong>Silent Installation</strong> - The installation script also supports silent installation if the config.properties file is passed as an argument (for example, /path/install-foundry.sh config.properties). Using this, you can have additional ability to pass custom Tomcat JAVA_OPTS, Heap memory settings, and time-zone settings as well.</p>
+<p>The syntax for installing using the config.properties:</p>
+<p><code>sudo ./install-foundry.sh config.properties</code></p>
+</li>
+</ul>
+<h1 id="configuration">Configuration</h1>
+<p>The following parameters are to be provided by the user during Installation:</p>
+<ol>
+<li>
+<p><strong>INSTALL_ENV_NAME</strong> - The install environment name can be anything in lowercase (String). The possible values are: <code>dev</code>, <code>qa</code>, <code>prod</code>, or <code>eastusprod</code>.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> The Install Environment Name must not contain numbers.</p>
+</blockquote>
+</li>
+<li>
+<p><strong>Install Components</strong>: The following properties must be set to either Y (yes) or N (no). If ALL_COMPONENTS_ENABLED is set to Y, the rest of the inputs can be left empty. If ALL_COMPONENTS_ENABLED is set to N then at least one of the following input properties must be set to Y.</p>
+<ul>
+<li>ALL_COMPONENTS_ENABLED</li>
+<li>INTEGRATION_ENABLED</li>
+<li>IDENTITY_ENABLED</li>
+<li>MESSAGING_ENABLED</li>
+<li>CONSOLE_ENABLED</li>
+<li>APIPORTAL_ENABLED</li>
+</ul>
+</li>
+<li>
+<p><strong>Application Server Details</strong></p>
+<ul>
+<li><strong>SERVER_DOMAIN_NAME</strong>: The <strong>Domain Name</strong> for Volt MX Foundry. This value should be the hostname of the LoadBalancer. For example: abc.companyname (DNS name).</li>
+</ul>
+<blockquote>
+<p><strong><em>Note:</em></strong> Domain name cannot be an IP address or 'localhost'.</p>
+</blockquote>
+<ul>
+<li><strong>COM_PROTOCOL</strong>: The communication protocol for Volt MX Foundry. This value can be either http or https.</li>
+<li><strong>HTTPS_CERT_FILE</strong>: The path to the existing certificate and key files. This value can be empty if the communication protocol is HTTP. The path should point to a valid pem file.</li>
+<li><strong>HTTPS_KEY_FILE</strong>: The path to the existing certificate and key files. This value can be empty if the communication protocol is HTTP. The path should point to a valid pem file.</li>
+</ul>
+</li>
+<li>
+<p><strong>Database Details</strong>:</p>
+<ul>
+<li><strong>DB_TYPE</strong> - This is the Database type you want to use for hosting Volt MX Foundry. The possible values are:</li>
+<li>For MySQL DB server: <code>mysql</code></li>
+<li>For Azure MSSQL or SQL Server: <code>sqlserver</code></li>
+<li>For Oracle DB server: <code>oracle</code></li>
+<li><strong>DB_HOST</strong> - This is the Database Server hostname used to connect to the Database Server.</li>
+</ul>
+<blockquote>
+<p><strong><em>Note:</em></strong> If the Database Hostname is an IP address, it should be a static IP address.</p>
+</blockquote>
+<ul>
+<li><strong>DB_PORT</strong>– This is the Port Number used to connect to the Database Server. This can be empty for cloud manage service.</li>
+<li><strong>DB_USER</strong> - This is the Database Username used to connect to the Database Server.</li>
+<li><strong>DB_PASS</strong> - This is the Database Password used to connect to the Database Server.</li>
+<li><strong>DB_PREFIX</strong> – This is the Database server prefix for Volt MX Foundry Schemas/Databases.</li>
+<li><strong>DB_SUFFIX</strong> – This is the Database server suffix for Volt MX Foundry Schemas/Databases.</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong></p>
+</blockquote>
+<ul>
+<li>Database Prefix and Suffix are optional inputs.</li>
+<li>In case of upgrade, ensure that the values of the Database Prefix and Suffix that you provide are the same as you had provided during the initial installation.</li>
+<li>If <strong>DB_TYPE</strong> is set as <strong>oracle</strong>, the following String values need to be provided:</li>
+<li><strong>DB_DATA_TS</strong>: Database Data tablespace name.</li>
+<li><strong>DB_INDEX_TS</strong>: Database Index tablespace name.</li>
+<li><strong>DB_LOB_TS</strong>: Database LOB tablespace name.</li>
+<li><strong>DB_SERVICE</strong>: Database service name.</li>
+<li><strong>USE_EXISTING_DB</strong>: If you want to use an existing databases from a previous Volt MX Foundry instance set this variable to Y. If not the set the USE_EXISTING_DB variable to N.</li>
+</ul>
+<p>You must provide the location of the previously installed artifacts (the location should contain upgrade.properties file).</p>
+<p>For example: <strong>PREVIOUS_INSTALL_LOCATION</strong> = <code>/C/voltmx-foundry-containers-onprem/kubernetes</code>.</p>
+</li>
+<li>
+<p><strong>VoltMX Foundry Account Registration Details</strong>: The following properties are required for owner registration. It is not required for an upgrade. If OWNER_REGISTRATION_REQUIRED is set to <strong>Y</strong> (yes), then you must provide all the following inputs:</p>
+<ul>
+<li><strong>OWNER_REGISTRATION_REQUIRED</strong> - Y/N.</li>
+<li><strong>OWNER_USER_ID</strong> – E-mail ID used for Volt MX Foundry Registration.</li>
+<li><strong>OWNER_PASSWORD</strong> – Password used for Volt MX Foundry Registration.</li>
+<li><strong>OWNER_FIRST_NAME</strong> – First Name used for Volt MX Foundry Registration.</li>
+<li><strong>OWNER_LAST_NAME</strong> – Last Name used for Volt MX Foundry Registration.</li>
+<li><strong>OWNER_ENV_NAME</strong> – Environment name to which the generated applications should be published.</li>
+</ul>
+</li>
+<li>
+<p><strong>TIME_ZONE</strong> - The Time Zone of the Database used for Volt MX Foundry installation. The Time Zone variable must be set to maintain consistency between the Application server and the Database server. For determining what value to set for the time zone you can refer to <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">List of tz database time zones</a> on Wikipedia.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> The Time Zone is an optional value. If you do not provide any Time Zone, it is set to Etc/UTC.</p>
+</blockquote>
+</li>
+<li>
+<p><strong>Readiness and Liveness Probes Details</strong>: Following variables are set with default values in seconds. You can modify them in the config.properties file.</p>
+<ul>
+<li>IDENTITY_READINESS_INIT_DELAY: The readiness probe initial delay for Identity, in seconds. The default value is 180.</li>
+<li>IDENTITY_LIVENESS_INIT_DELAY: The liveness probe initial delay for Identity, in seconds. The default value is 300.</li>
+<li>CONSOLE_READINESS_INIT_DELAY: The readiness probe initial delay for Console, in seconds. The default value is 300.</li>
+<li>CONSOLE_LIVENESS_INIT_DELAY: Liveness probe initial delay for Console, in seconds. The default value is 600.</li>
+<li>INTEGRATION_READINESS_INIT_DELAY: The readiness probe initial delay for Integration, in seconds. The default value is 300.</li>
+<li>INTEGRATION_LIVENESS_INIT_DELAY: Liveness probe initial delay for Integration, in seconds. The default value is 600.</li>
+<li>ENGAGEMENT_READINESS_INIT_DELAY: The readiness probe initial delay for Engagement, in seconds. The default value is 180.</li>
+<li>ENGAGEMENT_LIVENESS_INIT_DELAY: The liveness probe initial delay for Engagement, in seconds. The default value is 300.</li>
+</ul>
+</li>
+<li><strong>Minimum and Maximum RAM percentage Details</strong>: The following variables are set with default String values. You can modify them in the config.properties file.<ul>
+<li>CONSOLE_MIN_RAM_PERCENTAGE: Minimum RAM percentage for Console. The default value is "50".</li>
+<li>CONSOLE_MAX_RAM_PERCENTAGE: Maximum RAM percentage for Console. The default value is "80".</li>
+<li>ENGAGEMENT_MIN_RAM_PERCENTAGE: Minimum RAM percentage for Engagement. The default value is "50".</li>
+<li>ENGAGEMENT_MAX_RAM_PERCENTAGE: Maximum RAM percentage for Engagement. The default value is "80".</li>
+<li>IDENTITY_MIN_RAM_PERCENTAGE: Minimum RAM percentage for Identity. The default value is "50".</li>
+<li>IDENTITY_MAX_RAM_PERCENTAGE: Maximum RAM percentage for Identity. The default value is "80".</li>
+<li>INTEGRATION_MIN_RAM_PERCENTAGE: Minimum RAM percentage for Integration. The default value is "50".</li>
+<li>INTEGRATION_MAX_RAM_PERCENTAGE: Maximum RAM percentage for Integration. The default value is "80".</li>
+<li>APIPORTAL_MIN_RAM_PERCENTAGE: Minimum RAM percentage for API Portal. The default value is "50".</li>
+<li>APIPORTAL_MAX_RAM_PERCENTAGE: Maximum RAM percentage for API Portal. The default value is "80".</li>
+</ul>
+</li>
+<li><strong>Container resource limits for memory and CPU</strong>: The following variables are set with default String values. You can modify them in the config.properties file.<ul>
+<li>IDENTITY_RESOURCE_MEMORY_LIMIT: The resource memory limit for Identity. The default value is "1.2G".</li>
+<li>IDENTITY_RESOURCE_REQUESTS_MEMORY: The resource memory requests for Identity. The default value is "1G".</li>
+<li>IDENTITY_RESOURCE_REQUESTS_CPU: The resource CPU requests for Identity. The default value is "200m".</li>
+<li>CONSOLE_RESOURCE_MEMORY_LIMIT: The resource memory limit for Console. The default value is "2.2G".</li>
+<li>CONSOLE_RESOURCE_REQUESTS_MEMORY: The resource memory requests for Console. The default value is "2G".</li>
+<li>CONSOLE_RESOURCE_REQUESTS_CPU: The resource CPU requests for Console. The default value is "300m".</li>
+<li>APIPORTAL_RESOURCE_MEMORY_LIMIT: The resource memory limit for API Portal. The default value is "1.2G",</li>
+<li>APIPORTAL_RESOURCE_REQUESTS_MEMORY: The resource memory requests for API Portal. The default value is "1G".</li>
+<li>APIPORTAL_RESOURCE_REQUESTS_CPU: The resource CPU requests for API Portal. The default value is "200m",</li>
+<li>INTEGRATION_RESOURCE_MEMORY_LIMIT: The resource memory limit for Integration. The default value is "2.2G".</li>
+<li>INTEGRATION_RESOURCE_REQUESTS_MEMORY: The resource memory requests for Integration. The default value is "2G".</li>
+<li>INTEGRATION_RESOURCE_REQUESTS_CPU: The resource CPU requests for Integration. The default value is "300m".</li>
+<li>ENGAGEMENT_RESOURCE_MEMORY_LIMIT: The resource memory limit for Engagement. The default value is "1.2G".</li>
+<li>ENGAGEMENT_RESOURCE_REQUESTS_MEMORY: The resource memory requests for Engagement. The default value is "1G".</li>
+<li>ENGAGEMENT_RESOURCE_REQUESTS_CPU: The resource CPU requests for Engagement. The default value is "200m".</li>
+</ul>
+</li>
+<li><strong>Custom JAVA_OPTS Details</strong>: The following variables can be set with default String values. You can modify them in the config.properties file.<ul>
+<li>CONSOLE_CUSTOM_JAVA_OPTS: The custom JAVA_OPTS for Console.</li>
+<li>ENGAGEMENT_CUSTOM_JAVA_OPTS: The custom JAVA_OPTS for Engagement</li>
+<li>IDENTITY_CUSTOM_JAVA_OPTS: The custom JAVA_OPTS for Identity.</li>
+<li>INTEGRATION_CUSTOM_JAVA_OPTS: The custom JAVA_OPTS for Integration.</li>
+<li>APIPORTAL_CUSTOM_JAVA_OPTS: The custom JAVA_OPTS for API Portal.</li>
+</ul>
+</li>
+<li><strong>Number of instances to be deployed for each component</strong>: The following variables can be set with default integer values. You can modify them in the config.properties file.<ul>
+<li>IDENTITY_REPLICAS: The number of instances of Identity. The default value is 1.</li>
+<li>CONSOLE_REPLICAS: The number of instances of Console. The default value is 1.</li>
+<li>APIPORTAL_REPLICAS: The number of instances of API Portal. The default value is 1.</li>
+<li>INTEGRATION_REPLICAS: The number of instances of Integration. The default value is 1.</li>
+<li>ENGAGEMENT_REPLICAS: The number of instances of Engagement. The default value is 1.</li>
+</ul>
+</li>
+<li>
+<p>The port on which the <strong>Kubernetes Dashboard</strong> can be accessed:</p>
+<ul>
+<li>KUBERNETES_DASHBOARD_PORT: The default value is 31000.</li>
+</ul>
+</li>
+</ol>
+<h1 id="installation">Installation</h1>
+<p>Run the Volt MX Foundry Container Cluster install script to generate and deploy Volt MX Foundry containers.</p>
+<p><strong>Steps to Install Volt MX Foundry Container Cluster Solution on an On-Premises setup:</strong></p>
+<ol>
+<li>
+<p><a href="#setting-up-haproxy-loadbalancer">Setting up HAProxy LoadBalancer</a></p>
+<blockquote>
+<p><strong><em>Note:</em></strong> This step is optional if you have your own load balancer setup. You must provide the pre-configured load balancer hostname as the SERVER_DOMAIN_NAME input in the installation process instead of performing the following instructions.</p>
+</blockquote>
+</li>
+<li>
+<p><a href="#setting-up-cluster">Setting up Cluster</a></p>
+</li>
+<li><a href="#resuming-installation-in-master-node">Resuming installation in Master Node</a></li>
+</ol>
+<h2 id="setting-up-haproxy-loadbalancer">Setting up HAProxy LoadBalancer</h2>
+<p>Before starting the cluster installation, a loadbalancer must be set up. Without the loadbalancer the cluster setup cannot be started. The HAProxy is a certified external loadbalancer for the Foundry container cluster setup. Installation and configuration of HAProxy is taken care of by the script. Initially, the installation script configures the loadbalancer with one master. Going forward you can edit the <code>haproxy.cfg</code> file to add other masters to the loadbalancer.</p>
+<p>Perform the following steps to setup the HAProxy loadbalancer through a script file.</p>
+<ol>
+<li>Download the <strong>VoltMXFoundryContainersOnPrem-9.0.0.0_GA.zip</strong> from the <a href="https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.2.x&amp;orgId=HCL&amp;fromRecentFile=false&amp;fromRecentPkg=true&amp;fromDL=false">Download Link</a> and extract it.
+    <code>sudo unzip VoltMXFoundryContainersOnPrem-9.0.0.0_GA.zip
+        -d VoltMXFoundryContainerOnPrem-9.0.0.0_GA</code></li>
+<li>Navigate to foundry container artifact folder.
+    <code>cd VoltMXFoundryContainerOnPrem-9.0.0.0_GA</code></li>
+<li>Run <code>setup-loadbalancer.sh</code>. It prompts for master node hostname and communication protocol. The loadbalancer is then installed and configured.
+    <code>sudo ./setup-loadbalancer.sh</code></li>
+<li>Check if haproxy gets successfully started by executing the <code>systemctl status haproxy</code> command. If it throws the "<em>cannot bind socket [0.0.0.0:xxxx|https://stackoverflow.com/questions/34793885/haproxy-cannot-bind-socket-0-0-0-08888]</em>" error. Run the following command and restart haproxy.
+    <code>setsebool -P haproxy_connect_any=1</code></li>
+</ol>
+<p>Before setting up master nodes, all the IPs of master nodes should be configured in HAProxy loadbalancer. If any master node IP is not listed and you try to set the master node, that node will not be added to cluster. To add master node IPs, edit the file <code>/etc/haproxy/haproxy.cfg</code> and make the following two changes for each master node IP to be added.</p>
+<ol>
+<li>In the <strong>Configure HAProxy SecureBackend</strong> section, add the following line at the end. List all the other master node IPs in the same way.
+    <code>server k8s-api-2 &lt;IP-ADDRESS&gt;:6443 check</code></li>
+<li>In the <strong>Configure HAProxy Foundry Backend</strong> section, add the following line at the end. List all the other master node IPs in the same way.
+    <code>server foundry-1 &lt;IP-ADDRESS&gt;:30200 check</code></li>
+</ol>
+<h2 id="setting-up-cluster">Setting up Cluster</h2>
+<p>In setting up a cluster a minimum of one master can be configured. To improve failure tolerance and ensure cluster availability it is recommended to have an odd number (minimum three) of master nodes. To start cluster setup choose one node as starting point of installation which should be the master node.</p>
+<ol>
+<li>Download the <strong>voltmx-foundry-containers-onprem_9.0.0.0_GA.zip</strong> from the <a href="https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.2.x&amp;orgId=HCL&amp;fromRecentFile=false&amp;fromRecentPkg=true&amp;fromDL=false">Download Link</a> and extract it.
+    <code>sudo unzip VoltMXFoundryContainersOnPrem-9.0.0.0_GA.zip
+        -d VoltMXFoundryContainerOnPrem-9.0.0.0_GA</code></li>
+<li>Navigate to foundry container artifact folder.
+    <code>cd VoltMXFoundryContainerOnPrem-9.0.0.0_GA</code></li>
+<li>
+<p>Run the following command to setup the master. It downloads and installs cluster packages, initializes kubeadm, sets up Weave CNI, generates token and waits for the worker node to join the master to proceed further.
+    <code>sudo ./install-foundry.sh config.properties</code></p>
 <blockquote>
 <p><strong><em>Note:</em></strong> You must provide <strong>execute</strong> permissions to run the <code>install-foundry.sh</code> file on Linux.</p>
 </blockquote>
 <p><img alt="" src="Resources/Images/home1.PNG" /></p>
-<ol>
+</li>
 <li>
 <p>To join other nodes as master/worker, copy the setup-node.zip file which is available in the Foundry Container artifact folder(VoltMXFoundryContainerOnPrem-9.0.0.0_GA) into the node to join as the master/worker and then perform the following steps.</p>
 <ol>
