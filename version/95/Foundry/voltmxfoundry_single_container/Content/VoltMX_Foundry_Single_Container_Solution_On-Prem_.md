@@ -22,7 +22,7 @@ The Volt MX Foundry Single Container Solution has the following features:
 Prerequisites
 =============
 
-*   Install `Docker Engine version 19.03.13`, and `Docker Compose version 1.27.4`.
+*   Install `Docker Engine version 20.10.17`, and `Docker Compose version 1.23.2`.
     
     > **Note:**      
     *   For Windows and macOS, you can download and install the package installer for `Docker Desktop version 2.5.0.1 (49550)`.  
@@ -66,7 +66,7 @@ Volt MX  Foundry Single Container Solution supports the following database serve
 | Database Type | Version Supported |
 | --- | --- |
 | MySQL | 5.6, 5.7 |
-| Microsoft SQL Server | 2016, 2017 |
+| Microsoft SQL Server | 2017, 2019 |
 
 > **_Note:_** You must have an existing external database. Databases do not come bundled with the Installer.
 
