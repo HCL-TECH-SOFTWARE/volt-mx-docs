@@ -97,7 +97,7 @@ function onBackKeyPressCallback(wdgRef) {
 * * *
 
 </details>
-<details close markdown="block"><summary>onBeginEditing Event</summary>
+<details close markdown="block"><summary id="onBeginE">onBeginEditing Event</summary>
 
 * * *
 
@@ -134,7 +134,7 @@ function onBeginEditingCallback(txtArea){
 * * *
 
 </details>
-<details close markdown="block"><summary>onDone Event</summary>
+<details close markdown="block"><summary id="onDone">onDone Event</summary>
 
 * * *
 
@@ -175,7 +175,7 @@ function onDoneCallback(txtArea){
 * * *
 
 </details>
-<details close markdown="block"><summary>onEndEditing Event</summary>
+<details close markdown="block"><summary id="onEndEdi">onEndEditing Event</summary>
 
 * * *
 
@@ -393,7 +393,7 @@ function keyboardCallbacksWillShow(wdgRef) {
 * * *
 
 </details>
-<details close markdown="block"><summary>onKeyDown Event</summary>
+<details close markdown="block"><summary id="onKeyDow">onKeyDown Event</summary>
 
 * * *
 
@@ -430,7 +430,7 @@ function onKeyDownCallback(txtArea){
 * * *
 
 </details>
-<details close markdown="block"><summary>onKeyUp Event</summary>
+<details close markdown="block"><summary id="onKeyUp">onKeyUp Event</summary>
 
 * * *
 
