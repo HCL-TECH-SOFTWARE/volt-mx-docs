@@ -255,7 +255,7 @@ var tAreaLayout = {
 var tAreaPSP = {};
 
 //Creating the TextArea.
-var txtArea = new kony.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
 
 //Reading the autoCapitalize of the TextArea
 alert("TextArea autoCapitalize ::" + txtArea.autoCapitalize);
@@ -330,7 +330,7 @@ var tAreaPSP = {
 };
 
 //Creating the TextArea.
-var txtArea = new kony.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
 //Sample code to set the autoCorrect property of TextArea widget.
 
 frmTxtArea.myTxtArea.autoCorrect=true;
@@ -728,7 +728,7 @@ var tAreaPSP = {
     blockedUISkin: "blockedUISkin"
 };
 
-/*Creating the TextArea.var txtArea = new kony.ui.TextArea2(tAreaBasic,
+/*Creating the TextArea.var txtArea = new voltmx.ui.TextArea2(tAreaBasic,
 tAreaLayout, tAreaPSP);*/
 
 //Reading the blockedUISkin of the TextArea.
@@ -1149,7 +1149,7 @@ var tAreaPSP = {
 
 
 //Creating the TextArea.
-var txtArea = new kony.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
 //Sample code to set the closeButtonText property of TextArea widget.
 
 frmTxtArea.myTxtArea.closeButtonText="Done";
@@ -1560,7 +1560,7 @@ var tAreaLayout = {
 var tAreaPSP = {};
 
 //Creating the TextArea
-var txtArea = new kony.ui.TextArea2 (tAreaBasic, tAreaLayout, tAreaPSP);
+var txtArea = new voltmx.ui.TextArea2 (tAreaBasic, tAreaLayout, tAreaPSP);
 
 //Setting the enableHapticFeedback property on an existing widget
 Form1.textarea1.enableHapticFeedback = true;
@@ -1628,7 +1628,7 @@ var tAreaPSP = {};
 
 
 //Creating the TextArea.
-var txtArea = new kony.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
 //Sample code to set the focusSkin property of TextArea widget.
 
 frmTxtArea.myTxtArea.focusSkin="txtFSkin";
@@ -1993,7 +1993,7 @@ frmTxtArea.myTxtArea.height="10px";
 Setting the height property on widget creation
 
 //Defining the properties for textarea with height: "150dp" 
-var textarea1 = new kony.ui.Textarea({
+var textarea1 = new voltmx.ui.Textarea({
     "id": "&lt;ID for the Widget",
     "top": "19dp",
     "width": "200dp",
@@ -2064,7 +2064,7 @@ var tAreaPSP = {
 };
 
 //Creating the TextArea.
-var txtArea = new kony.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
 //Sample code to set the hoverSkin property of TextArea widget.
 
 frmTxtArea.myTxtArea.hoverSkin="hskin";
@@ -2275,7 +2275,7 @@ var tAreaLayout = {
 var tAreaPSP = {};
 
 //Creating the TextArea.
-var txtArea = new kony.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
 txtArea.info = {
     key: "text of textarea"
 };
@@ -2358,10 +2358,10 @@ var tAreaPSP ={
 };
 
 //Creating the TextArea.
-var txtArea = new kony.ui.TextArea2 (tAreaBasic, tAreaLayout, tAreaPSP);
+var txtArea = new voltmx.ui.TextArea2 (tAreaBasic, tAreaLayout, tAreaPSP);
 
 //Reading the inputAccessoryViewType of the TextArea		
-kony.print("The value of input Accessory View Type property is:"+txtArea.inputAccessoryViewType);
+voltmx.print("The value of input Accessory View Type property is:"+txtArea.inputAccessoryViewType);
 //Defining the property inputAccessoryViewType outside the constructor
 
 Form1.textArea1.inputAccessoryViewType=constants.TEXTAREA_INPUTACCESSORYVIEWTYPE_DEFAULT;
@@ -2427,7 +2427,7 @@ var txtLayout = {
 var txtPSP = {};
 
 //Creating the TextArea.
-var textArea1 = new kony.ui.TextArea2(txtBasic, txtLayout, txtPSP);
+var textArea1 = new voltmx.ui.TextArea2(txtBasic, txtLayout, txtPSP);
 
 //Reading the isReadOnly of the Textarea
 alert("Textarea isReadOnly ::" + textArea1.isReadOnly);
@@ -2634,7 +2634,7 @@ var tAreaLayout = {
 var tAreaPSP = {};
 
 //Creating the TextArea.
-var txtArea = new kony.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
 
 //Reading the isVisible of the TextArea		
 alert("TextArea isVisible ::" + txtArea.isVisible);
@@ -2724,7 +2724,7 @@ var tAreaPSP = {
 };
 
 //Creating the TextArea.
-var txtArea = new kony.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
 
 //Reading the keyboardActionLabel of the TextArea.		
 alert("TextArea keyboardActionLabel ::" + txtArea.keyboardActionLabel);
@@ -2862,7 +2862,7 @@ var tAreaLayout = {
 var tAreaPSP = {};
 
 //Creating the TextArea.
-var txtArea = new kony.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
 
 //Reading the keyBoardStyle of the TextArea		
 alert("TextArea keyBoardStyle ::" + txtArea.keyBoardStyle);
@@ -3061,7 +3061,7 @@ var tAreaLayout = {
 var tAreaPSP = {};
 
 //Creating the TextArea.
-var txtArea = new kony.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
 
 //Reading the maxTextLength of the TextArea		
 alert("TextArea maxTextLength ::" + txtArea.maxTextLength);
@@ -3214,7 +3214,7 @@ var tAreaLayout = {
 var tAreaPSP = {};
 
 //Creating the TextArea.
-var txtArea = new kony.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
 
 //Reading the numberOfVisibleLines of the TextArea		
 alert("TextArea numberOfVisibleLines ::" + txtArea.numberOfVisibleLines);
@@ -3478,7 +3478,7 @@ var tAreaPSP = {
 };
 
 //Creating the TextArea.
-var txtArea = new kony.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
 
 //Reading the pasteboardType of the TextArea.	
 alert("TextArea pasteboardType ::" + txtArea.pasteboardType);
@@ -3553,7 +3553,7 @@ var tAreaLayout = {
 var tAreaPSP = {};
 
 //Creating the TextArea.
-var txtArea = new kony.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
 
 //Reading the placeholder of the TextArea		
 alert("TextArea placeholder ::" + txtArea.placeholder);
@@ -3624,7 +3624,7 @@ var tAreaPSP = {
 };
 
 //Creating the TextArea.
-var txtArea = new kony.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
 //Sample code to set the placeholderSkin property of TextArea widget.
 
 frmTxtArea.myTxtArea.placeholderSkin="pSkin";
@@ -4112,7 +4112,7 @@ var txtLayout = {
 };
 var txtPSP = {};
 //Creating the Textbox.
-var textBox1 = new kony.ui.TextArea2(txtBasic, txtLayout, txtPSP);
+var textBox1 = new voltmx.ui.TextArea2(txtBasic, txtLayout, txtPSP);
 //Sample code to set the secureTextEntry property of TextArea widget.
 
 frmTxtArea.myTxtArea.secureTextEntry=true;
@@ -4267,7 +4267,7 @@ frmTxtArea.myTxtArea.shadowDepth=10;
 Setting the shadowDepth property on widget creation
 
 //TextArea Creation.
-var TxtAr1 = new kony.ui.TextArea({
+var TxtAr1 = new voltmx.ui.TextArea({
     "id": "TxtAr1",
     "isVisible": true,
     "width": "80%",
@@ -4423,7 +4423,7 @@ frmTxtArea.myTxtArea.shadowType=constants.VIEW_BOUNDS_SHADOW;
 Setting the shadowType property on widget creation
 
 //TextArea Creation.
-var TxtAr1 = new kony.ui.TextArea({
+var TxtAr1 = new voltmx.ui.TextArea({
     "id": "TxtAr1",
     "isVisible": true,
     "width": "80%",
@@ -4484,7 +4484,7 @@ var tAreaPSP = {
 };
 
 //Creating the TextArea.
-var txtArea = new kony.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
 //Sample code to set the showCloseButton property of TextArea widget.
 
 frmTxtArea.myTxtArea.showCloseButton=true;
@@ -4571,7 +4571,7 @@ var tAreaPSP = {
 };
 
 //Creating the TextArea.
-var txtArea = new kony.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
 //Sample code to set the showProgressIndicator property of TextArea widget.
 
 frmTxtArea.myTxtArea.showProgressIndicator=true;
@@ -4632,7 +4632,7 @@ var tAreaLayout = {
 var tAreaPSP = {};
 
 //Creating the TextArea.
-var txtArea = new kony.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
 
 //Reading the skin of the TextArea		
 alert("TextArea skin ::" + txtArea.skin);
@@ -4808,7 +4808,7 @@ var tAreaLayout = {
 var tAreaPSP = {};
 
 //Creating the TextArea.
-var txtArea = new kony.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
 
 //Reading the text of the TextArea		
 alert("TextArea text ::" + txtArea.text);
@@ -4826,7 +4826,7 @@ frmTxtArea.myTxtArea.text="Enter Username";
 var textContent = frmTxtArea.myTxtArea.text;
 var textAsString;
 
-if (kony.type(textContent) == "kony.types.RawBytes") {
+if (voltmx.type(textContent) == "voltmx.types.RawBytes") {
  //Using the readAsText method of the RawBytes object. 
 //Call this method only if you must process the String in JavaScript.
  textAsString = textContent.readAsText();
@@ -4835,7 +4835,7 @@ if (kony.type(textContent) == "kony.types.RawBytes") {
  
 }
 /*In Android platform, use the clear method of the Rawbytes object to remove the text references in the native Android RawBytes object.*/
-if (kony.type(textContent) == "kony.types.RawBytes") {
+if (voltmx.type(textContent) == "voltmx.types.RawBytes") {
  textContent.clear();
 }
 /*You must set the JavaScript text references to null, to enable them to be Garbage Collected and cleared from memory*/
@@ -4956,7 +4956,7 @@ var tAreaLayout = {
 var tAreaPSP = {};
 
 //Creating the TextArea.
-var txtArea = new kony.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
 
 //Reading the textInputMode of the TextArea		
 alert("TextArea textInputMode ::" + txtArea.textInputMode);
@@ -5169,7 +5169,7 @@ var tAreaPSP = {
 };
 
 //Creating the TextArea.
-var textarea1 = new kony.ui.TextArea(tAreaBasic, tAreaLayout, tAreaPSP);
+var textarea1 = new voltmx.ui.TextArea(tAreaBasic, tAreaLayout, tAreaPSP);
 //Sample code to set the toolTip property of TextArea widget.
 
 frmTxtArea.myTxtArea.toolTip="Sample text";
@@ -5466,7 +5466,7 @@ var txtLayout = {
 var txtPSP = {};
 
 //Creating the TextArea.
-var textArea1 = new kony.ui.TextArea2(txtBasic, txtLayout, txtPSP);
+var textArea1 = new voltmx.ui.TextArea2(txtBasic, txtLayout, txtPSP);
 
 //Reading the wrapText of the TextArea
 alert("Textarea wrapText ::" + textArea1.wrapText);
