@@ -236,6 +236,56 @@ Form1.widget1.anchorPoint = {
 * * *
 
 </details>
+<details close markdown="block"><summary>appLevelWidgetConfig Property</summary>
+
+* * *
+
+This property provides users with the capability to enable or disable the header or footer of the app for that particular Form.
+
+Syntax
+
+```
+appLevelWidgetConfig
+```
+
+Type
+
+JavaScript Object that contains the following keys:
+
+| Key | Value |
+| --- | --- |
+| enabled [Boolean] | A Boolean value that enables the app level widget for the specified Form. The default value for this parameter is **false**. |
+| adjustFormHeight [Boolean] | A Boolean value that specifies if the height of the Form must be adjusted based on the position of the app level widget. When the value of this parameter is set as **false**, the height of the Form will not be adjusted, and the app level widget appears at the top of the Form. The default value for this parameter is **true**. |
+
+Read/Write
+
+Read + Write
+
+Example
+
+```
+Form1.appLevelWidgetConfig = {
+                             "header":
+                             {
+                             "enabled":false,
+                             "adjustFormHeight":false
+                             },
+                             "footer":
+                             {
+                             "enabled":true,
+                             "adjustFormHeight":true
+                             }
+                             };
+```
+
+Platform Availability
+
+* Android
+* iOS
+
+* * *
+
+</details>
 <details close markdown="block"><summary>backgroundColor Property</summary>
 
 * * *
@@ -1613,7 +1663,7 @@ voltmx.print("FlexForm info ::" +myForm.info);
 * * *
 
 </details>
-<details close markdown="block"><summary>inputAccessoryViewType Property</summary>
+<details close markdown="block"><summary id="inputAcc">inputAccessoryViewType Property</summary>
 
 * * *
 
