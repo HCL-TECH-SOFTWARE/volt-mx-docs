@@ -163,6 +163,10 @@ The following parameters must be provided by the user during Installation:
         
         > **_Note:_** The Password must be a string containing at least 8 characters, and must include at least one uppercase letter, one lowercase letter, one digit and one special character.       
     
+    *    **Database Password Secret Key** - This is the decryption key for the database password, which is required only if you are using an encrypted password.
+
+         > **IMPORTANT:** If you are using an encrypted password, use the values that you receive from the encryption utility. For more information, refer to [Encrypting the Database Password](Single_Container_Appendices.md).
+		 
     *   **Database Prefix** – This is the Database server prefix for Volt MX Foundry Schemas/Databases.
 
     *   **Database Suffix** – This is the Database server suffix for Volt MX Foundry Schemas/Databases.  
