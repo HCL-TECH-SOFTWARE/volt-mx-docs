@@ -236,7 +236,7 @@ Form1.widget1.anchorPoint = {
 * * *
 
 </details>
-<details close markdown="block"><summary>appLevelWidgetConfig Property</summary>
+<details close markdown="block"><summary id="appLevelWidgetConfig">appLevelWidgetConfig Property</summary>
 
 * * *
 
