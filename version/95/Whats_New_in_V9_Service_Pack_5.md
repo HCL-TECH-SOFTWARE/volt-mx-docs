@@ -161,7 +161,7 @@ Volt MX Iris has introduced support for the [shadowColor](Iris/iris_widget_prog_
 
 *   Added support to dynamically resize the TextArea widget based on the number of lines of text entered. If the text exceeds the maximum limit, a scroll bar appears in the TextArea widget.
 *   For more information about this feature, click [here](Iris/iris_widget_prog_guide/Content/TextArea_Properties.md#autoResize)
-*   [Provide String Values for the autoComplete property of the TextBox widget](Iris/iris_widget_prog_guide/Content/TextBox_Properties.md#autoComp).
+*   [Provide String Values for the autoComplete property of the TextBox widget](Iris/iris_widget_prog_guide/Content/TextBox_Properties.md#autocomplete-property).
 
 
 **Extended Widget Support in Segment Template**
@@ -535,7 +535,7 @@ You can now use the Encryption Utility provided with the installer to encrypt yo
 For information about this feature, refer to the following links:
 
 *   For the On-Premises Containers solution, click [here](Foundry/voltmxfoundry_containers_solution_on-prem/Content/Containers_Solution_Appendices.md#Encrypting).
-*   For the Single-container solution, click [here](Foundry/voltmxfoundry_single_container/Content/Single_Container_Appendices.md#Encrypting).
+*   For the Single-container solution, click [here](Foundry/voltmxfoundry_single_container/Content/Single_Container_Appendices.md).
 *   For the Amazon EKS solution, click [here](Foundry/voltmxfoundry_on_amazon_eks/Content/additional_considerations.md#encrypt-the-database-password).
 *   For the Red Hat OpenShift solution, click [here](Foundry/voltmxfoundry_on_openshift/Content/additional_considerations.md#encrypt-the-database-password).
 

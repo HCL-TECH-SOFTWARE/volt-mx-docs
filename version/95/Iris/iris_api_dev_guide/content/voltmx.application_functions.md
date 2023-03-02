@@ -3317,6 +3317,151 @@ None.
 * * *
 
 </details>
+<details close markdown="block"><summary>voltmx.application.setAppLevelWidget</summary>
+
+* * *
+
+This API configures a container widget at the application level that can either be used as a header or a footer throughout the app.
+
+### Syntax
+
+```
+voltmx.application.setAppLevelWidget(object);
+```
+
+### Input Parameters
+
+**object**: A JavaScript object that contains the following key-value pairs:
+
+<table>
+    <colgroup><col>
+    <col>
+    </colgroup><thead>
+        <tr>
+            <th>Key</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><i>type</i> [Integer]</td>
+            <td>
+                <p>Specifies the type or position of the widget. The type key can have the following values:</p>
+                <ul>
+                    <li><b>voltmx.application.APP_LEVEL_HEADER</b></li>
+                    <li><b>voltmx.application.APP_LEVEL_FOOTER</b></li>
+                </ul>
+                <p>The default value for the type key is voltmx.application.APP_LEVEL_FOOTER.</p>
+            </td>
+        </tr>
+        <tr>
+            <td><i>container</i> [LuaWidget/ String]</td>
+            <td>
+                <p>A JavaScript FlexContainer object that is to be displayed as the app level widget.</p>
+                <p>You can provide a String value if you are using the MVC architecture.</p>
+            </td>
+        </tr>
+        <tr>
+            <td><i>appName</i> [String]</td>
+            <td>The name of the app in the project. The appName is a mandatory parameter in case of inter-app template access. This is an optional parameter in case of intra-app template access.</td>
+        </tr>
+    </tbody>
+</table>
+
+Example 1
+
+```
+//Sample code to set the Header:
+kony.application.setAppLevelWidget({​​​"type":kony.application.APP_LEVEL_HEADER,"container":FlexHeaderTemplate}​​);
+
+//Sample code to set the Footer:
+kony.application.setAppLevelWidget({​"type":kony.application.APP_LEVEL_FOOTER,"container":FlexFooterTemplate}​​​);
+
+//Sample code for inter-app access:
+var params = {"type": Constant, "container": "", "appName" : "" }
+kony.application.setAppLevelWidget(params);
+```
+
+Example 2 - MVC Project
+
+```
+//Sample code to set the Header:
+kony.application.setAppLevelWidget({​​​"type":kony.application.APP_LEVEL_HEADER,"container":”FlexHeaderTemplateString”}​​);
+
+//Sample code to set the Footer:
+kony.application.setAppLevelWidget({​"type":kony.application.APP_LEVEL_FOOTER,"container":”FlexFooterTemplateString”}​​​);
+```
+
+Return Values
+
+This API may return the following values when invoked:
+
+* 8000 - This constant is returned on successful execution of the API.
+* 8001 - This constant is returned when the API call has invalid number of arguments.
+* 8002 - This constant is returned when the API call has invalid type of arguments.
+* 8003 - This constant is returned when the API call has invalid values for the container.
+* 8004 - This constant is returned when the API call has an invalid Widget Identifier (Incase of MVC project).
+
+Remarks
+
+In MVC projects, you must use the APIs to communicate between the Form and the App Level Widget.
+
+_Communication from the Form to the App Level Widget_
+
+To communicate with the app level widget from the Form, you can use the **executeOnAppLevelWidget** function in the **FormController**:
+
+```
+var param = {
+    "container" : "flxSampleTemplate",
+    "eventName" : "testMethod", 
+    "params" : {"test" : "data"}
+}
+this.executeOnAppLevelWidget(param);
+```
+
+In the code snippet, provide values for the following keys:
+
+* **container**: The Template ID of the App Level Widget
+* **eventName**: The function name of the App Level Widget TemplateController to be executed
+* **params**: Any additional parameters to be passed to the function
+
+_Communication from the App Level Widget to the Form_
+
+To communicate with the Form from the App level widget, you can use the executeOnCurrentForm function in the TemplateController:
+
+```
+var param = {
+   "eventName" : "testMethodInForm", 
+   "params" : {"test" : "data"}
+}
+this.executeOnCurrentForm(param);
+```
+
+In the code snippet, provide values for the following keys:
+
+* **eventName**: The function name of the FormController to be executed.
+* **params**: Any additional parameters to be passed to the function.
+
+Limitations
+
+* The same Template cannot be used for both the Header and Footer in an app.
+* The option to destroy an app level widget is currently not available.
+* The height of the Form cannot be adjusted after the app level widget is rendered.
+* In iOS apps, you must invoke the forcelayout method when you update the UI properties of an app level widget.
+* In iOS apps, when the value of the adjustFormHeight parameter is set as false, you cannot perform actions on the UI that is present behind the app level widget (in cases where the UI overlaps with the app level widget).
+*On Android devices that use OS API levels earlier than version 21, when the value of the adjustFormHeight parameter is set as false, users may observe flickering in the app level widget while navigating between the forms.
+* In Android apps with a FlexContainer widget configured as a popup (the isModalContainer property of the FlexContainer widget is set as true), the app level widget is interact-able. If the area of the FlexContainer widget overlaps with the area of the app level widget, the app level widget appears over the FlexContainer widget.
+
+Platform Availability
+
+* Android
+* iOS
+
+
+* * *
+
+</details>
+
 <details close markdown="block"><summary>voltmx.application.setApplicationBehaviors</summary>
 
 * * *
