@@ -9,10 +9,14 @@ These topics provide information about operating system, server, and database su
 
 * [Volt MX Foundry Install Guide for Windows](voltmx_foundry_windows_install_guide/Content/Introduction.md)
 
-* [Installation Guide for Volt MX Foundry Containers Solution On-Premises](voltmxfoundry_containers_solution_on-prem/Content/Introduction.md)
+* [Volt MX Foundry Install Guide for Amazon EKS](voltmxfoundry_on_amazon_eks/Content/introduction.md)
 
-* [Installation Guide for Volt MX Foundry Single Container Solution (On-Premises)](voltmxfoundry_single_container/Content/Introduction_Single.md)
+* [Volt MX Foundry Install Guide for Azure](voltmxfoundry_on_azure/Content/Introduction.md)
+
+* [Volt MX Foundry Install Guide for Red Hat OpenShift](voltmxfoundry_on_openshift/Content/introduction.md)
 
 * [Installation Guide for Volt MX Foundry Containers Helm Installation](voltmxfoundry_containers_helm/Content/Introduction.md)
 
-<!-- token change to get PR -->
+* [Installation Guide for Volt MX Foundry Containers Solution On-Premises](voltmxfoundry_containers_solution_on-prem/Content/Introduction.md)
+
+* [Installation Guide for Volt MX Foundry Single Container Solution (On-Premises)](voltmxfoundry_single_container/Content/Introduction_Single.md)
