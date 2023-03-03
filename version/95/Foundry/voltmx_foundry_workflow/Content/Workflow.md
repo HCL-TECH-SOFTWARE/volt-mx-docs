@@ -133,7 +133,7 @@ Different types of Workflow Nodes/Tasks are as follows:
         <tbody>
             <tr class="TableStyle-TemenosTables-Body-Body1">
                 <td class="TableStyle-TemenosTables-BodyE-Column1-Body1">
-<b>Start</b> – It is an event that represents where the workflow starts. The Start event has one outgoing flow.
+<b><a href="Workflow.html#Start">Start</a></b> – It is an event that represents where the workflow starts. The Start event has one outgoing flow.
                     <p><b>IMPORTANT:</b> For Integration Service triggered workflow &gt; Sync, the Process Incoming Payload configuration is a mandatory, in the Start node. Refer to <a href="#start-event-_sync-workflow_">Start node for Integration Service workflow > Sync</a>.</p>
                     <p><b>IMPORTANT:</b> For Integration Service triggered workflow &gt; Async, the Process Incoming Payload along with the Correlation ID configuration is a mandatory, in the Start node. Refer to <a href="#start-event-_async-workflow_">Start node for Integration Service workflow > Async</a>.</p>
                 </td>
@@ -152,7 +152,7 @@ Different types of Workflow Nodes/Tasks are as follows:
             </tr>
             <tr class="TableStyle-TemenosTables-Body-Body1">
                 <td class="TableStyle-TemenosTables-BodyE-Column1-Body1">
-<b>User Task</b> – It is used to represent that a user action is required in a Workflow. For example: Submitting a loan application, manager approving expense.
+<b><a href="Workflow.html#UserTaskWorkFlow">User Task</a></b> – It is used to represent that a user action is required in a Workflow. For example: Submitting a loan application, manager approving expense.
                 </td>
                 <td class="TableStyle-TemenosTables-BodyE-Column1-Body1" style="text-align: center;">
                     <img src="Resources/Images/tickY_28x28.jpg" style="width: 28;height: 28;">
@@ -169,7 +169,7 @@ Different types of Workflow Nodes/Tasks are as follows:
             </tr>
             <tr class="TableStyle-TemenosTables-Body-Body1" data-mc-conditions="Default.V9SP2GA">
                 <td class="TableStyle-TemenosTables-BodyE-Column1-Body1">
-<b>Signal Start</b> - Start Signal node is used to start a workflow based on listening to an Event on Fabric bus.
+<b><a href="Workflow.html#SignalStart">Signal Start</a></b> - Start Signal node is used to start a workflow based on listening to an Event on Fabric bus.
                 </td>
                 <td class="TableStyle-TemenosTables-BodyE-Column1-Body1" style="text-align: center;">
                     <img src="Resources/Images/tickN_28x28.jpg" style="width: 28;height: 28;">
@@ -186,7 +186,7 @@ Different types of Workflow Nodes/Tasks are as follows:
             </tr>
             <tr class="TableStyle-TemenosTables-Body-Body1" data-mc-conditions="Default.V9SP2GA">
                 <td class="TableStyle-TemenosTables-BodyE-Column1-Body1">
-<b>Catch Signal - </b>Catch Signal node is used to pause a workflow's execution and resume it based on an event it is listening to on Fabric bus.
+<b><a href="Workflow.html#CatchSignal">Catch Signal</a></b> - Catch Signal node is used to pause a workflow's execution and resume it based on an event it is listening to on Fabric bus.
                 </td>
                 <td class="TableStyle-TemenosTables-BodyE-Column1-Body1" style="text-align: center;">
                     <img src="Resources/Images/tickN_28x28.jpg" style="width: 28;height: 28;">
@@ -203,7 +203,7 @@ Different types of Workflow Nodes/Tasks are as follows:
             </tr>
             <tr class="TableStyle-TemenosTables-Body-Body1" data-mc-conditions="Default.V9SP2GA">
                 <td class="TableStyle-TemenosTables-BodyE-Column1-Body1">
-<b>Throw Signal - </b>Throw Signal node is used to raise (publish) Events from workflow during or at the end of workflow execution
+<b><a href="Workflow.html#ThrowSignal">Throw Signal</a></b> - Throw Signal node is used to raise (publish) Events from workflow during or at the end of workflow execution
                 </td>
                 <td class="TableStyle-TemenosTables-BodyE-Column1-Body1" style="text-align: center;">
                     <img src="Resources/Images/tickN_28x28.jpg" style="width: 28;height: 28;">
@@ -220,7 +220,7 @@ Different types of Workflow Nodes/Tasks are as follows:
             </tr>
             <tr class="TableStyle-TemenosTables-Body-Body1">
                 <td class="TableStyle-TemenosTables-BodyE-Column1-Body1">
-<b>Service Task</b> – A Service task is used to invoke a pre-configured service (Integration, Orchestration, Object and Rules Services) available in the Fabric App.
+<b><a href="Workflow.html#Service">Service Task</a></b> – A Service task is used to invoke a pre-configured service (Integration, Orchestration, Object and Rules Services) available in the Fabric App.
                 </td>
                 <td class="TableStyle-TemenosTables-BodyE-Column1-Body1" style="text-align: center;">
                     <img src="Resources/Images/tickY_28x28.jpg" style="width: 28;height: 28;">
@@ -237,7 +237,7 @@ Different types of Workflow Nodes/Tasks are as follows:
             </tr>
             <tr class="TableStyle-TemenosTables-Body-Body1" data-mc-conditions="Default.V9SP1GA">
                 <td class="TableStyle-TemenosTables-BodyE-Column1-Body1">
-<b>Timer</b> - A Timer is used to create a delay in the workflow to prevent the immediate triggering of a subsequent event/activity. In a workflow whenever a timer node is encountered, then the workflow execution will be paused for the configured amount of minutes/hours and resume from it when the delay time elapses.
+<b><a href="Workflow.html#Timer">Timer</a></b> - A Timer is used to create a delay in the workflow to prevent the immediate triggering of a subsequent event/activity. In a workflow whenever a timer node is encountered, then the workflow execution will be paused for the configured amount of minutes/hours and resume from it when the delay time elapses.
                 </td>
                 <td class="TableStyle-TemenosTables-BodyE-Column1-Body1" style="text-align: center;">
                     <img src="Resources/Images/tickY_28x28.jpg" style="width: 28;height: 28;">
@@ -254,7 +254,7 @@ Different types of Workflow Nodes/Tasks are as follows:
             </tr>
             <tr class="TableStyle-TemenosTables-Body-Body1">
                 <td class="TableStyle-TemenosTables-BodyE-Column1-Body1">
-<b>Message Task</b> – It represents an intermediate event through which you can send notifications to the required recipients. The recipient can be an end user or the manager of the concerned department. For example, if the loan approval is pending from the branch manager, then you can use the Message task to send the notification to the manager.
+<b><a href="Workflow.html#Message">Message Task</a></b> – It represents an intermediate event through which you can send notifications to the required recipients. The recipient can be an end user or the manager of the concerned department. For example, if the loan approval is pending from the branch manager, then you can use the Message task to send the notification to the manager.
                 </td>
                 <td class="TableStyle-TemenosTables-BodyE-Column1-Body1" style="text-align: center;">
                     <img src="Resources/Images/tickY_28x28.jpg" style="width: 28;height: 28;">
@@ -271,7 +271,7 @@ Different types of Workflow Nodes/Tasks are as follows:
             </tr>
             <tr class="TableStyle-TemenosTables-Body-Body1">
                 <td class="TableStyle-TemenosTables-BodyE-Column1-Body1">
-<b>Script Task</b> - You can use this task to execute a business logic in the workflow. You can select a pre-configured JavaScript service to execute the business logic from this type of task.
+<b><a href="Workflow.html#Script">Script Task</a></b> - You can use this task to execute a business logic in the workflow. You can select a pre-configured JavaScript service to execute the business logic from this type of task.
                 </td>
                 <td class="TableStyle-TemenosTables-BodyE-Column1-Body1" style="text-align: center;">
                     <img src="Resources/Images/tickY_28x28.jpg" style="width: 28;height: 28;">
@@ -288,7 +288,7 @@ Different types of Workflow Nodes/Tasks are as follows:
             </tr>
             <tr class="TableStyle-TemenosTables-Body-Body1">
                 <td class="TableStyle-TemenosTables-BodyE-Column1-Body1">
-<b>Business Rule Task</b> - You can use this task to execute a set of rules in the workflow. You can select a pre-configured Rules services available in the Fabric App.
+<b><a href="Workflow.html#Business">Business Rule Task</a></b> - You can use this task to execute a set of rules in the workflow. You can select a pre-configured Rules services available in the Fabric App.
                 </td>
                 <td class="TableStyle-TemenosTables-BodyE-Column1-Body1" style="text-align: center;">
                     <img src="Resources/Images/tickY_28x28.jpg" style="width: 28;height: 28;">
@@ -305,7 +305,7 @@ Different types of Workflow Nodes/Tasks are as follows:
             </tr>
             <tr class="TableStyle-TemenosTables-Body-Body1">
                 <td class="TableStyle-TemenosTables-BodyE-Column1-Body1">
-<b>Exclusive Gateway</b> – Exclusive Gateways are used to model decision in a process by making exclusive (XOR) disjunction. An exclusive gateway can have multiple outgoing sequence flows and each outgoing sequence flow has its own decision condition. It evaluates the decision condition of each outgoing sequence flow and the <b>first</b> matched condition <b><a href="#sequence-flows">sequence flow</a></b> is executed.
+<b><a href="Workflow.html#Exclusive">Exclusive Gateway</a></b> – Exclusive Gateways are used to model decision in a process by making exclusive (XOR) disjunction. An exclusive gateway can have multiple outgoing sequence flows and each outgoing sequence flow has its own decision condition. It evaluates the decision condition of each outgoing sequence flow and the <b>first</b> matched condition <b><a href="#sequence-flows">sequence flow</a></b> is executed.
                 </td>
                 <td class="TableStyle-TemenosTables-BodyE-Column1-Body1" style="text-align: center;">
                     <img src="Resources/Images/tickY_28x28.jpg" style="width: 28;height: 28;">
@@ -322,7 +322,7 @@ Different types of Workflow Nodes/Tasks are as follows:
             </tr>
             <tr class="TableStyle-TemenosTables-Body-Body1" data-mc-conditions="Default.V9SP4GA">
                 <td class="TableStyle-TemenosTables-BodyE-Column1-Body1">
-<b>Parallel Gateway</b> -&nbsp;You can use this node to model concurrency in a process. The  Parallel Gateway node can act as either Fork or Join, which allows forking into multiple paths of execution or joining multiple incoming paths of execution.<br>From V9SP4 GA, you can now create a sequence of parallel tasks (in multiple paths) using the Parallel Gateway.
+<b><a href="Workflow.html#Parallel">Parallel Gateway</a></b> -&nbsp;You can use this node to model concurrency in a process. The  Parallel Gateway node can act as either Fork or Join, which allows forking into multiple paths of execution or joining multiple incoming paths of execution.<br>From V9SP4 GA, you can now create a sequence of parallel tasks (in multiple paths) using the Parallel Gateway.
                 </td>
                 <td class="TableStyle-TemenosTables-BodyE-Column1-Body1" style="text-align: center;">
                     <img src="Resources/Images/tickN_28x28.jpg" style="width: 28;height: 28;">
@@ -339,7 +339,7 @@ Different types of Workflow Nodes/Tasks are as follows:
             </tr>
             <tr class="TableStyle-TemenosTables-Body-Body1">
                 <td class="TableStyle-TemenosTables-BodyB-Column1-Body1">
-<b>End</b> – It is an event that represents the end of a workflow.
+<b><a href="Workflow.html#Endtask">End</a></b> – It is an event that represents the end of a workflow.
                     <p><b>IMPORTANT:</b> For Integration Service triggered workflow &gt; Sync, the Response Output configuration is a mandatory, in the End node. Refer to <a href="#end-event-_sync-workflow_">End node for Integration Service workflow &gt; Sync</a>.</p>
                     <p><b>IMPORTANT:</b> End event that represents the end of an Async workflow. <br>Refer to <a href="#end-event-_async-workflow_">End node for Integration Service workflow &gt; Async</a>.</p>
                 </td>
@@ -466,7 +466,7 @@ Create a New Workflow
     
     ![](Resources/Images/eventselection.png)
     
-    A workflow should begin with a Signal Start event and finish with an End event for Event triggered workflow.
+    > **_Note:_** A workflow should begin with a Signal Start event and finish with an End event for Event triggered workflow.
     
 
 **Object Triggered workflow:**
@@ -489,17 +489,17 @@ You can do the following in the **Configure New** screen:
         
     *   **Use Existing** – You can select this option if you want to link the new workflow with any existing object available in the current Foundry app. The linked object service can be a storage object service, RBMS service or an SDO (Integration or Orchestration service) service. If you want to use SDO as linked object, the **GetByPK** verb is mandatory.
         
-        If you want to use SDO as linked object, the **GetByPK** verb is mandatory.
+        > **_Note:_** If you want to use SDO as linked object, the **GetByPK** verb is mandatory.
         
           
           
         Click **Use Existing**, and from the **Existing Services** screen select the required Object service, Object, Field, and then click **Add**. The new Workflow is linked to an existing Object service.
         
-        Make sure that you designate a Field or create a new Field in the required object to store the workflow state if you want to use an existing workflow. For more information, refer to [Object Services](../../voltmx_foundry_user_guide/Content/ObjectsServices/Stage_2.md).
+        > **_Note:_** Make sure that you designate a Field or create a new Field in the required object to store the workflow state if you want to use an existing workflow. For more information, refer to [Object Services](../../voltmx_foundry_user_guide/Content/ObjectsServices/Stage_2.md).
         
 *   From the **Nodes** pane, double click on required nodes and drag and drop them on the canvas area. To know more about the activities that you need to perform for each node type, refer to <a href="#nodes_tasks">Nodes</a>.
     
-    A workflow should begin with a **Start** event and finish with an **End** event for Object linked workflow.
+    > **_Note:_** A workflow should begin with a **Start** event and finish with an **End** event for Object linked workflow.
     
 *   Link the nodes as per the required flow using **Sequence Flows**. To know more about the activities, you can perform on a Sequence Flow, refer to <a href="#sequence-flows">Sequence Flows</a>.
     
@@ -511,7 +511,7 @@ You can do the following in the **Configure New** screen:
         
     *   **Snap and Grid**: Use the feature to change the canvas layout. Choose **Grid** to get a grid view on the canvas area. If you select **Snapping** and try to place a node on the canvas area, the node would align itself with the closest grid line. This will help you align your nodes properly against each other while creating a workflow.
         
-        Grid Lines exist on the canvas area and are visible only when you choose **Grid** from the **Snap and Grid** list.
+        > **_Note:_** Grid Lines exist on the canvas area and are visible only when you choose **Grid** from the **Snap and Grid** list.
         
 *   Click **Save**. A new Workflow service is created and is added to the Workflow’s landing page.
     
@@ -527,18 +527,18 @@ You can do the following in the **Configure New** screen:
         
     4.  From the **Response Type** list, select the response type to which you want to create the new Workflow service.
         
-        A workflow should begin with a Start event and finish with an End event for Integration Service triggered workflow.
+        > **_Note:_** A workflow should begin with a Start event and finish with an End event for Integration Service triggered workflow.
         
     5.  Configure the required nodes for the workflow.
         
-        The workflow is created and you need to associate the workflow as API for operations in the integration service type **Foundry Workflow**.
+        > **_Note:_** The workflow is created and you need to associate the workflow as API for operations in the integration service type **Foundry Workflow**.
         
 2.  **Create the Foundry Workflow Integration Service and operations.**
     
     For more information on how to create operations for the Foundry Workflow Adapter, on Refer to [Foundry Workflow Adapter](../../voltmx_foundry_user_guide/Content/FoundryWorkflowAdapter.md).
     
 
-### Creating an Object triggered Workflow
+<!-- ### Creating an Object triggered Workflow
 
 Click **Configure New** from the Workflow landing page. The Configure new screen appears.
 
@@ -577,7 +577,7 @@ You can do the following in the **Configure New** screen:
         
         Grid Lines exist on the canvas area and are visible only when you choose **Grid** from the **Snap and Grid** list.
         
-*   Click **Save**. A new Workflow service is created and is added to the Workflow’s landing page.
+*   Click **Save**. A new Workflow service is created and is added to the Workflow’s landing page. -->
     
 
 ### <a id="nodes_tasks"></a>Nodes/Tasks
@@ -587,11 +587,11 @@ After the nodes/tasks are placed in the canvas area, you can manage the properti
 
 **Tasks for Object triggered workflow**
 
-#### Start Event
+#### <a id="Start"></a> Start Event
 
 The Start Event’s property pane contains the following fields:
 
-<!--![](Resources/Images/Workflow1.PNG)-->
+![](Resources/Images/Workflow1.PNG)
 
 *   **Task ID**: A task ID is automatically allotted to the Start and End Event when you drag and drop them in the canvas area. You cannot edit this field.
     
@@ -600,11 +600,11 @@ The Start Event’s property pane contains the following fields:
 *   **Description**: You can write description for this node.
     
 
-#### User Task
+#### <a id="UserTaskWorkFlow"></a> User Task
 
 The User Task’s property pane contains the following fields:
 
-<!--![](Resources/Images/Workflow2.PNG)-->
+![](Resources/Images/Workflow2.PNG)
 
 *   **Task ID**: A task ID is automatically allotted to the User Task when you drag and drop it in the canvas area. You cannot edit this field.
 *   **Name**: Displays the name of the node. You can modify it as per the activity the node performs.
@@ -612,44 +612,45 @@ The User Task’s property pane contains the following fields:
 *   **Allowed States**: It represents the state(s) of the Workflow before the user begins any user task. This represents the state of the process and this information is retrieved from back end. For example: Loan application has to be in Submitted state for the bank manager to review the application.
     *    To elaborate further, Allowed States are the states in which a model must be in as a precondition to being accepted into this workflow User task. To keep the workflow consistent, all user tasks take this value from the valid state transitions of the last preceding user task — for example, If task A precedes task B, and you set the valid state transitions for A to Submitted, then the allowed states for B will automatically be set to Submitted.
         
-        The **Allowed State** in the first user task can be blank as the Allowed State is not applicable for the first user task.
+        > **_Note:_** The **Allowed State** in the first user task can be blank as the Allowed State is not applicable for the first user task.
         
 *   **Valid State Transitions**: Mention the required status that represents the state(s) of the Workflow after the user has executed the user task. In other words, Valid State Transitions represent the states in which a model must be in as a result of this workflow task.
     
     *   This must match with the status in the respective PUT or POST call of the object verb. If the state mentioned in **Valid State Transitions** does not match with state available in the respective POST or PUT call, the workflow will not proceed ahead. For Example: After the bank manager has reviewed the loan application it must be either Approved or Rejected. It cannot move to the Draft state.
     
-    The state mentioned in **Valid State Transitions** must exactly same as the workflow state received from the client app.
+    > **_Note:_** The state mentioned in **Valid State Transitions** must exactly same as the workflow state received from the client app.
     
 	<a id="validationCriteria"></a>
 	
 *   **Entry Validation Criteria**: If you want to provide any additional conditions which you want to evaluate before the task is executed, you can provide it here. For example, if you want an additional validation where you want to execute the task if minimum balance in the account is 10,000, then you can configure a logical expression like BACKEND\_RESPONSE.balance >=10,000.  
     You can do the following to create an expression:
     *   Click **Add**. The **Entry Validation Criteria** screen appears.  
-        <!--![](Resources/Images/workflow-entryvalidation.PNG)-->
+        ![](Resources/Images/workflow-entryvalidation.PNG)
     *   Click **Add Condition** to configure a logical expressions. You can also click **Add Group** and configure a group that can have multiple logical expressions within it.
     *   Each condition or group is associated with a logical operator (**AND**, **OR**). Select the required operator to determine the logic to execute the condition or group. If you select the Not checkbox, the selected condition would be inverted.
     *   Select the [namespace](#namespaces) from the list, and add the related parameter in the **Value** field. For example, if you select BACKEND\_RESPONSE from the namespace list, and add balance in the **Value** field, it would be read as BACKEND\_RESPONSE.balance.
     *   Select a comparison. The available options are ==, == null, >, <, !=, != null, >=, < =. For example, >=
     *   Select the [namespace](#namespaces) from the list, and add the related parameter in the **Value** field. For example, you can select **none** from the namespace list, and add 10,000 in the **Value** field.
     
-        Now as per the example, the complete condition will be read as BACKEND\_RESPONSE.balance >=10,000.
+        > **_Note:_** Now as per the example, the complete condition will be read as BACKEND\_RESPONSE.balance >=10,000.
     
-    *   Click **Save**.
+    *   Click **Save**.  
+
 *   Click **Configure** under **Process Incoming Payload**. You can use the **Process Incoming Payload** mapping editor to copy data from incoming request payload as well as identity/session scope variables into FOUNDRY\_WORKFLOW\_CONTEXT for further processing in the workflow.
     
-    When a workflow needs any kind of attributes from an `IDENTITY` or `SESSION` scope, always try to populate the necessary data from all these scopes to **FOUNDRY\_WORKFLOW\_CONTEXT** and use these values from **FOUNDRY\_WORKFLOW\_CONTEXT**.
+    > **_Note:_** When a workflow needs any kind of attributes from an `IDENTITY` or `SESSION` scope, always try to populate the necessary data from all these scopes to **FOUNDRY\_WORKFLOW\_CONTEXT** and use these values from **FOUNDRY\_WORKFLOW\_CONTEXT**.
     
-    <!--![](Resources/Images/UserTaskOP.png)-->
+     ![](Resources/Images/UserTaskOP.png)
     
-    For more information on using the best practices for workflow, refer to [Workflow Best Practices](Workflow_BestPractices.md).
+    > **_Note:_** For more information on using the best practices for workflow, refer to [Workflow Best Practices](Workflow_BestPractices.md).
     
-    Refer to [Namespaces](#namespaces).  
+    > **_Note:_** Refer to [Namespaces](#namespaces).  
     
 *   **Description**: You can write the description for this node.
 
 **Tasks for Event triggered workflow**
 
-#### Signal Start
+####  <a id="SignalStart"></a> Signal Start
 
 Signal Start node is used to start a workflow based on listening to an Event on Foundry bus. An Event triggered workflow always begins with a Signal Start node. The Signal Event's property pane contains the following fields:
 
@@ -663,7 +664,7 @@ Signal Start node is used to start a workflow based on listening to an Event on 
     
 *   **Event Topic Name**: Type the topic name of the event of Foundry. An event topic name is mapped to the Signal Start event.
     
-    An event Topic name is mandatory for the Signal Start event.
+    > **_Important:_** An event Topic name is mandatory for the Signal Start event.
     
 *   **Process Incoming Payload**: You can use this mapping editor to copy data from incoming Event payload into Foundry\_workflow\_context.
     
@@ -677,7 +678,7 @@ Signal Start node is used to start a workflow based on listening to an Event on 
 *   **Description**: You can write description for this node.
     
 
-#### Catch Signal Event
+#### <a id="CatchSignal"></a> Catch Signal Event
 
 Catch Signal node is used to pause a workflow's execution and resume it based on an event it is listening to on Foundry bus.
 
@@ -687,7 +688,7 @@ Catch Signal node is used to pause a workflow's execution and resume it based on
     
 *   **Event Topic Name**: Type the topic name of Foundry event. The Catch Signal event listens to the event topic and resumes the workflow.
     
-    An event Topic name is mandatory for the Catch Signal event.
+    > **Important:_** An event Topic name is mandatory for the Catch Signal event.
     
 *   **Process Incoming Payload**: You can use this mapping editor to copy data from incoming Event payload into Foundry\_workflow\_context.
     
@@ -696,7 +697,7 @@ Catch Signal node is used to pause a workflow's execution and resume it based on
 *   **Description**: You can write description for this node.
     
 
-#### Throw Signal Event
+#### <a id="ThrowSignal"></a> Throw Signal Event
 
 Throw Signal node is used to raise (publish) Events from workflow during or at the end of workflow execution.
 
@@ -709,6 +710,8 @@ Throw Signal node is used to raise (publish) Events from workflow during or at t
 *   **Description**: You can write description for this node.
     
 
+
+
 **Tasks for Integration Service triggered workflow**
 
 #### For Sync
@@ -717,7 +720,7 @@ Throw Signal node is used to raise (publish) Events from workflow during or at t
 
 The Start Event’s property pane contains the following fields:
 
-<!--![](Resources/Images/SyncStart.png)-->
+![](Resources/Images/SyncStart.png)
 
 *   **Task ID**: A task ID is automatically allotted to the Start and End Event when you drag and drop them in the canvas area. You cannot edit this field.
     
@@ -727,7 +730,7 @@ The Start Event’s property pane contains the following fields:
     *   You can copy identity/session scope variables to workflow\_context in this mapping editor.
     *   Payload of the incoming event is copied and available in DEVICE\_REQUEST scope.
 
-    <!--        ![](Resources/Images/SyncStartIncomingPayload.png)-->
+           ![](Resources/Images/SyncStartIncomingPayload.png)
         
     For more information on using the best practices for workflow, refer to [Workflow Best Practices](Workflow_BestPractices.md).
         
@@ -739,7 +742,7 @@ The Start Event’s property pane contains the following fields:
 
 The End Event’s property pane contains the following fields:
 
-<!--![](Resources/Images/Sync-Endnode_Configre.png)-->
+![](Resources/Images/Sync-Endnode_Configre.png)
 
 *   **Task ID**: A task ID is automatically allotted to the End Event when you drag and drop them in the canvas area. You cannot edit this field.
 *   **Name**: Displays the name of the node. Modify it as per the activity the node performs.
@@ -747,15 +750,15 @@ The End Event’s property pane contains the following fields:
     
     Click **Configure Output** to configure response output parameters for the End node of the Sync workflow such as , name, data type, namespace, and value.
     
-<!--    ![](Resources/Images/Sync-Endnode_ConfigOutput.png)-->
+   ![](Resources/Images/Sync-Endnode_ConfigOutput.png)
     
 *   **Description**: You can write description for this node.
 
-#### Parallel Gateways (Sync Workflow)
+####  <a id="Parallel"></a>  Parallel Gateways (Sync Workflow)
 
 The Parallel Gateway’s property pane contains the following fields:
 
-<!--![](Resources/Images/Workflow4.PNG)-->
+![](Resources/Images/Workflow4.PNG)
 
 *   **Task ID**: A task ID is automatically allotted to the Parallel Gateway when you drag and drop it in the canvas area. You cannot edit this field.
     
@@ -770,7 +773,7 @@ You can use the Parallel Gateway when you are required to split the business pro
 *   Fork - All outgoing sequence flows are followed in parallel. Each of the outgoing sequence flows creates concurrent execution for each sequence flow.
 *   Join – Joins all concurrent executions arriving at the parallel gateway and waits until all incoming sequence flows have completed the execution. Then the process continues past the joining gateway.
 
-Important:
+**Important**:
 
 *   Parallel Gateway is available for workflows of Trigger type - Integration Service and Response type - Sync.
 *   Workflow configured with Parallel Gateway should be closed with only one End node.
@@ -781,7 +784,8 @@ Important:
 *   When the associated workflow execution occurs for the parallel paths asynchronously, the default timeout is set to 300 seconds for the waiting period on the Integration Service.
     
     *   One can change this default timeout by configuring the system property.  
-        For example: `-DVOLTMX_SERVER_WORKFLOW_FUTURE_GET_TIMEOUT_IN_SECS=500`.
+        For example: `-DVOLTMX_SERVER_WORKFLOW_FUTURE_GET_TIMEOUT_IN_SECS=500`.  
+
 *   The parameter name used for preserving the underlying service response on any configured task must be unique. This helps in avoiding data conflicts within a workflow with a parallel gateway.
     
 
@@ -791,7 +795,7 @@ Important:
 
 The Start Event’s property pane contains the following fields:
 
-<!--![](Resources/Images/AsyncStart.png)-->
+![](Resources/Images/AsyncStart.png)
 
 *   **Task ID**: A task ID is automatically allotted to the Start and End Event when you drag and drop them in the canvas area. You cannot edit this field.
     
@@ -799,9 +803,9 @@ The Start Event’s property pane contains the following fields:
     
 *   **Process Incoming Payload**: You can use the Process Incoming Payload mapping editor to copy data from incoming request payload as well as identity/session scope variables into FOUNDRY\_WORKFLOW\_CONTEXT for further processing in the workflow.
     
-    When a workflow needs any kind of attributes from an IDENTITY or SESSION scope, always try to populate the necessary data from all these scopes to FOUNDRY\_WORKFLOW\_CONTEXT and use these values from FOUNDRY\_WORKFLOW\_CONTEXT.
+    > **_Note:_** When a workflow needs any kind of attributes from an IDENTITY or SESSION scope, always try to populate the necessary data from all these scopes to FOUNDRY\_WORKFLOW\_CONTEXT and use these values from FOUNDRY\_WORKFLOW\_CONTEXT.
     
-    <!--    ![](Resources/Images/AsyncStartIncomingPayload.png)-->
+       ![](Resources/Images/AsyncStartIncomingPayload.png)
     
     *   You can copy identity/session scope variables to workflow\_context in this mapping editor.
     *   Payload of the incoming event is copied and available in DEVICE\_REQUEST scope. You can also set params from the Event Payload as Correlation ID.
@@ -818,7 +822,7 @@ The Start Event’s property pane contains the following fields:
 
 The End Event’s property pane contains the following fields:
 
-<!--![](Resources/Images/Async-Endnode.png)-->
+![](Resources/Images/Async-Endnode.png)
 
 *   **Task ID**: A task ID is automatically allotted to the End Event when you drag and drop them in the canvas area. You cannot edit this field.
 *   **Name**: Displays the name of the node. Modify it as per the activity the node performs.
@@ -838,7 +842,7 @@ Catch Signal node is used to pause a workflow's execution and resume it based on
     
 *   **Process Incoming Payload**: You can use this mapping editor to copy data from incoming Event payload into Foundry\_workflow\_context.
     
-    <!--    ![](Resources/Images/CatchsignalAysc.png)-->
+       ![](Resources/Images/CatchsignalAysc.png)
     
     The Correlation ID parameters already configured in Signal Start event will be used in Catch Signal event to identify and resume the workflow instance, please ensure that Event payload contains Correlation ID parameters with same fieldnames as mapped from DEVICE\_REQUEST scope in Signal Start. For example: `applicationId` and `SSN`.
     
@@ -865,18 +869,18 @@ Throw Signal node is used to raise (publish) Events from workflow during or at t
         For more details, refer to [Server Event APIs SDKs - VoltMX Iris](../../voltmx_foundry_user_guide/Content/VoltMXStudio/ServerEventAPIs.md).
 *   **Configure Event Payload**: You can use this mapping editor to populate data from workflow namespaces to send in outgoing Event payload.
     
-<!--    ![](Resources/Images/AsyncThrowsignal.png)-->
+    ![](Resources/Images/AsyncThrowsignal.png)
     
 *   **Description**: You can write description for this node.
     
 
 **Common Tasks for Workflow Services**
 
-#### Service Task
+#### <a id="Service"></a> Service Task
 
 The Service Task’s property pane contains the following fields:
 
-<!--![](Resources/Images/Workflow3.PNG)-->
+![](Resources/Images/Workflow3.PNG)
 
 *   **Task ID**: A task ID is automatically allotted to the Service Task when you drag and drop it in the canvas area. You cannot edit this field.
     
@@ -890,24 +894,24 @@ The Service Task’s property pane contains the following fields:
     
 *   If you have selected Object Services, select the required object and verb from the **Objects** and **Verbs** lists respectively.
 	
-*   <a id="configInputParams"></a>Click **Configure** under **Input Parameters** to manage the Request Input parameters. The Configure Input Parameters screen appears. This screen contains two tabs, namely, **Body** and **Header**. You can configure the following fields in these tabs:  
+*   <a id="configInputParams"></a> Click **Configure** under **Input Parameters** to manage the Request Input parameters. The Configure Input Parameters screen appears. This screen contains two tabs, namely, **Body** and **Header**. You can configure the following fields in these tabs:  
       
-    <!--    ![](Resources/Images/Workflow8.PNG)-->
+       ![](Resources/Images/Workflow8.PNG)
     
     This screen contains two tabs, namely, **Body** and **Header**. You can configure the following fields in these tabs:
     
     *   **Name**: Depending on the type of service and operations selected, the parameters are available in the **Name** list. Select the required input parameter you want to configure. For the parameters that are not configured here, the default values will be taken for them as configured in the service.
         *   **Namespace**: Select the required Namespace from the list. The list contains different sources from which the data can be retrieved. When you select a namespace for any parameter, the selected namespace will be accessed to retrieve the data related to that parameter. For more details, refer to [Namespaces](#namespaces).
             
-    *   **Value**: Type the key note name or variable where the data of the input parameter is stored in the data source. For example: If you need to access Customer\_ID from incoming request, select Device\_Request namespace and type Customer\_ID in the value column.
-    
-    If you have selected **None** in Namespace list, the data provided in the **Value** column will be considered as the data for the respective parameter.
+    *   **Value**: Type the key note name or variable where the data of the input parameter is stored in the data source. For example: If you need to access Customer\_ID from incoming request, select Device\_Request namespace and type Customer\_ID in the value column.  
+
+        > **_Note:_** If you have selected **None** in Namespace list, the data provided in the **Value** column will be considered as the data for the respective parameter.
     
 	
 *   <a id="configOutputParams"/></a>Click **Configure** under **Output Parameters** to manage the output response parameters.
 
-    <!-- The Configure Output Parameters screen appears.-->
-    <!--![](Resources/Images/Workflow9.PNG)-->
+    The Configure Output Parameters screen appears.
+    ![](Resources/Images/Workflow9.PNG)
 
     The output parameters are copied into a single variable under namespace (**FOUNDRY\_WORKFLOW\_CONTEXT**) as JSON. Individual elements of the output can be accessed by using a dot(.) notation with a key.
     
@@ -917,11 +921,11 @@ The Service Task’s property pane contains the following fields:
         
 *   **Description**: You can write the description for this node.
 
-#### <a id="timer-_not-supported-for-integration-sync-typeworkflow_"></a>Timer (not supported for Integration Sync Type Workflow)
+#### <a id="Timer"></a>Timer (not supported for Integration Sync Type Workflow)
 
 The Timer’s property pane contains the following fields:
 
-<!--![](Resources/Images/workflow-timertask.PNG)-->
+![](Resources/Images/workflow-timertask.PNG)
 
 *   **Task ID**: A task ID is automatically allotted to the Timer when you drag and drop it in the canvas area. You cannot edit this field.
 *   **Name**: Displays the name of the node. Modify it as per the activity the node performs.
@@ -936,7 +940,7 @@ The Timer’s property pane contains the following fields:
         1.  Expression:
             
             ```
-            FOUNDRY\_WORKFLOW\_CONTEXT.timer.timerVal
+            FOUNDRY_WORKFLOW_CONTEXT.timer.timerVal
             ```
             
             Result: The **timerVal** is received from the response of an Integration service. If its value is 6 minutes, the workflow is paused for 6 minutes and then resumed.
@@ -944,7 +948,7 @@ The Timer’s property pane contains the following fields:
         2.  Expression:
             
             ```
-            FOUNDRY\_WORKFLOW\_CONTEXT.timer.timerVal - 1
+            FOUNDRY_WORKFLOW_CONTEXT.timer.timerVal - 1
             ```
             
             Result: The **timerVal** is received from the response of an Integration service. If its value is 6 minutes, the workflow is paused for 5 minutes and then resumed.
@@ -952,7 +956,7 @@ The Timer’s property pane contains the following fields:
         3.  Expression:
             
             ```
-            FOUNDRY\_WORKFLOW\_CONTEXT.timer.timerVal \* 2
+            FOUNDRY_WORKFLOW_CONTEXT.timer.timerVal * 2
             ```
             
             Result: The **timerVal** is received from the response of an Integration service. If its value is 6 minutes, the workflow is paused for 12 minutes and then resumed.
@@ -960,25 +964,25 @@ The Timer’s property pane contains the following fields:
         4.  Expression:
             
             ```
-            (FOUNDRY\_WORKFLOW\_CONTEXT.timer.timerVal / 2) \* 3
+            (FOUNDRY_WORKFLOW_CONTEXT.timer.timerVal / 2) * 3
             ```
             
             Result: **timerVal** is received from the response of an Integration service. If its value is 6 minutes, the workflow is paused for 9 minutes and then resumed.
             
         5.  Expression:
             ```
-            90 - (System.currentTimeMillis() - FOUNDRY\_WORKFLOW\_CONTEXT.CURRENT\_INSTANCE.startTimeInMillis)/(1000\*60)
+            90 - (System.currentTimeMillis() - FOUNDRY_WORKFLOW_CONTEXT.CURRENT_INSTANCE.startTimeInMillis)/(1000*60)
             ```
             
             Result: Any task that is configured after the Timer node is set with the aforementioned expression is delayed by 90 minutes from the start of the workflow instance. The task that is immediately succeeding the timer node will be triggered post completion of the 90 minutes delay.
             
             The starting time of the workflow instance can be retrieved by using the expression `FOUNDRY_WORKFLOW_CONTEXT.CURRENT_INSTANCE.startTimeInMillis`. This expression stores the instance start time in Date/Timestamp format.
             
-            You can use majority of the `java.lang.System` class's useful class fields and methods in defining your expression for setting the Timer value. For more information refer to [java.lang.System Documentation](https://docs.oracle.com/javase/7/docs/api/java/lang/System.md#currentTimeMillis()).
+            > **_Note:_** You can use majority of the `java.lang.System` class's useful class fields and methods in defining your expression for setting the Timer value. For more information refer to [java.lang.System Documentation](https://docs.oracle.com/javase/7/docs/api/java/lang/System.html#currentTimeMillis()).
             
 *   **Description**: You can write the description for this node.
 
-#### Message Task
+#### <a id="Message"></a> Message Task
 
 A pre-requisite to send email notifications from workflow, is to configure the Email provider/ SMTP server details in Engagement console. Refer to [Email Configuration](../../vms_console_user_guide/Content/Administration/Email_Configuration.md) to know more about setting Email configuration in Engagement console.
 
@@ -991,27 +995,27 @@ It is recommended to set up in Email configuration in the Engagement console to 
 
 The Message Task’s property pane contains the following fields:
 
-<!--![](Resources/Images/Workflow5.PNG)-->
+![](Resources/Images/Workflow5.PNG)
 
 *   **Task ID**: A task ID is automatically allotted to the Message Task when you drag and drop it in the canvas area. You cannot edit this field.
     
 *   **Name**: Displays the name of the node. Modify it as per the activity the node performs.
 *   **Compose Email**: Click **Compose Email** to create an email notification. The Email Parameters screen appears. It contains **Email-Template** and **Parameters** tab.  
       
-    <!--    ![](Resources/Images/Workflow6.PNG)-->
+    ![](Resources/Images/Workflow6.PNG)
 
     * In the **Email Template** tab, type the details in To, Subject, CC, BCC, and Body fields to configure the required email. You can also set dollar ($) parameters in your email and pass values dynamically at run-time.
         
         You can add a maximum five email IDs each in To, CC and BCC. If you add more, only the first five email IDs will get the email notification and the remaining email IDs will be ignored.
         
-    *   If you have set dollar (\$) parameters in the email, in the **Parameters** tab, you can define the namespace and values for those dollar ($) parameters. For example: If you have used a dollar parameter $amount in the email template, from the Parameters tab you can define the **Name**, **Namespace**, and **Value** as amount, BACKEND\_RESPONSE, and NetAmount respectively.
+    *   If you have set dollar ($) parameters in the email, in the **Parameters** tab, you can define the namespace and values for those dollar ($) parameters. For example: If you have used a dollar parameter $amount in the email template, from the Parameters tab you can define the **Name**, **Namespace**, and **Value** as amount, BACKEND\_RESPONSE, and NetAmount respectively.
 *   **Description**: You can write the description for this node.
 
-#### Script Task
+#### <a id="Script"></a> Script Task
 
 The Script Task’s property pane contains the following fields:
 
-<!--![](Resources/Images/workflow-scripttask.PNG)-->
+![](Resources/Images/workflow-scripttask.PNG)
 
 *   **Task ID**: A task ID is automatically allotted to the Script Task when you drag and drop it in the canvas area. You cannot edit this field.
 *   **Name**: Displays the name of the node. Modify it as per the activity the node performs.
@@ -1025,11 +1029,11 @@ The Script Task’s property pane contains the following fields:
     
 *   **Description**: You can write the description for this node.
 
-#### Business Rule Task
+#### <a id="Business"></a> Business Rule Task
 
 The Business Rule Task's property pane contains the following fields:
 
-<!--![](Resources/Images/workflow-business.PNG)-->
+![](Resources/Images/workflow-business.PNG)
 
 *   **Task ID**: A task ID is automatically allotted to the Business Rule Task when you drag and drop it in the canvas area. You cannot edit this field.
 *   **Name**: Displays the name of the node. Modify it as per the activity the node performs.
@@ -1043,11 +1047,11 @@ The Business Rule Task's property pane contains the following fields:
     
 *   **Description**: You can write the description for this node.
 
-#### Exclusive Gateways
+#### <a id="Exclusive"></a> Exclusive Gateways
 
 The Exclusive Gateway’s property pane contains the following fields:
 
-<!--![](Resources/Images/Workflow4.PNG)-->
+![](Resources/Images/Workflow4.PNG)
 
 *   **Task ID**: A task ID is automatically allotted to the Exclusive Gateway when you drag and drop it in the canvas area. You cannot edit this field.
 *   **Name**: Displays the name of the node. Modify it as per the activity the node performs.
@@ -1061,15 +1065,15 @@ The conditions for decision making are configured at the outgoing sequence flows
 
 Sequence Flows act as connectors between the nodes. Whenever you place a **Sequence Flow**, a sequence ID is allotted to it. You can view this sequence ID from the **Properties** pane and add description for the flow if required.
 
-<!--![](Resources/Images/Workflow11.PNG)-->
+![](Resources/Images/Workflow11.PNG)
 
 The Sequence Flows coming from Exclusive Gateways also contains an additional **[Entry Validation Criteria](#validationCriteria)** field in the Properties pane. You can define the output criteria of the selected **Sequence Flow** here. From the **Exclusive Gateway**, the workflow will be redirected towards the first **Sequence Flow** that meets the output criteria defined in the **Condition** field.
 
-#### End Event
+####  <a id="Endtask"></a> End Event
 
 The End Event’s property pane contains the following fields:
 
-<!--![](Resources/Images/Workflow10.PNG)-->
+![](Resources/Images/Workflow10.PNG)
 
 *   **Task ID**: A task ID is automatically allotted to the End Event when you drag and drop them in the canvas area. You cannot edit this field.
 *   **Name**: Displays the name of the node. Modify it as per the activity the node performs.
@@ -1092,7 +1096,7 @@ The following are namespaces available in workflow for managing workflow data:
 *   **SESSION**: It represents that the data is available in the session data.
 *   **None**: You can use it to pass static values. When you select **None** as the namespace, the value entered in the text-box is passed as a string.
     
-    If you have selected **None** in Namespace list, the data provided in the **Value** column will be considered as the data for the respective parameter.
+    > **_Note:_** If you have selected **None** in Namespace list, the data provided in the **Value** column will be considered as the data for the respective parameter.
     
 
 The following are namespaces available when Looping is enabled:
@@ -1110,98 +1114,106 @@ For more details, refer to [Advanced Configuration > Enable Looping](#enable-loo
     
     For example, let us look into the following scenario:
     
-    1.  A workflow is configured with a service task, which is enabled for looping. Following data available for looping expression configured as `FOUNDRY_WORKFLOW_CONTEXT.Users`.
+    *   A workflow is configured with a service task, which is enabled for looping. Following data available for looping expression configured as `FOUNDRY_WORKFLOW_CONTEXT.Users`.
 
-        **User Details in FOUNDRY\_WORKFLOW\_CONTEXT**
-		
-        <code><pre>
-        {"Users":[
-              {
-                 "Userid":"123"
-              },
-              {
-                 "Userid":"234"
-              },
-              {
-                 "Userid":"345"
-              }
-              ]
+        <b>User Details in FOUNDRY_WORKFLOW_CONTEXT:</b>  
+
+        <pre><code style="display:block;background-color:#eee;">{"Users":[
+            {
+                "Userid":"123"
+            },
+            {
+                "Userid":"234"
+            },
+            {
+                "Userid":"345"
             }
-            </pre></code>
+        ]
+        }</code></pre>  
 
-        **Input Configuration for Service Task**
 
-        ![](Resources/Images/SampleInputParm.png)
 
-        The Userid is extracted while looping and assigned the same to the input parameter of the associated integration service.
+        <b>Input Configuration for Service Task:</b>  
 
-    2.  The response of the integration service for each user ID will be associated to Loop output variable.
+
+         ![](Resources/Images/SampleInputParm.png)  
+
+
+        > **_Note:_** The Userid is extracted while looping and assigned the same to the input parameter of the associated integration service.  
+
+
+    *   The response of the integration service for each user ID will be associated to Loop output variable.
 	
-        **Sample Response of Integration service, which will be populated into the Loop Output Variable on each iteration.**
-		
-		<code><pre>
-        {
+        Sample Response of Integration service, which will be populated into the Loop Output Variable on each iteration.   
+
+
+       <pre><code style="display:block;background-color:#eee;">{
             "id":"123",
             "firstName":"John",
             "lastName":"Matthew",
             "isActive":true
-        }
-        </pre></code>
+        }</code></pre>
 		
-    3.  The Loop exit criteria can be optionally configured to break the loop when the condition is met.
+		
+    *   The Loop exit criteria can be optionally configured to break the loop when the condition is met.  
+
     
-        **Service Responses for each iteration**
-		<code><pre>
-		// Service response from iteration 1
-		
-           "id":"123",
-           "firstName":"John",
-           "lastName":"Matthew",
-           "isActive":true
-        }  
+       <b>Service Responses for each iteration: </b>
 
-        // Service response from iteration 2
+       <pre><code style="display:block;background-color:#eee;"> --- Service response from iteration 1 ---
         {
-           "id":"234",
-           "firstName":"James",
-           "lastName":"Smith",
-           "isActive":false
-        }  
-          
-        /\* Here, the loop exists as the loop condition met
-        (LOOP_OUTPUT_VARIABLE.isActive==false)\*/
-</pre></code>
-		
-        **Loop Exit Condition**
-        
-        ![](Resources/Images/SampleLoopExitCriteria.png)
-
-        The Loop exit criteria is optional and is applicable for Sequential looping.
-        
-        Finally after the loop completes, the individual user data from each integration service execution is combined into the configured output param.
-        
-        Output Parameters
-        
-		<code><pre>
-        {
-           "usersDetails":\[
-              {
-                 "id":"123",
-                 "firstName":"John",
-                 "lastName":"Matthew",
-                 "isActive":true
-              },
-              {
-                 "id":"234",
-                 "firstName":"James",
-                 "lastName":"Smith",
-                 "isActive":false   }
-           \]
+        "id":"123",
+        "firstName":"John",
+        "lastName":"Matthew",
+        "isActive":true
         }
-</pre></code>
-        Final Response in FOUNDRY\_WORKFLOW\_CONTEXT
+        --- Service response from iteration 2 ---
+        {
+        "id":"234",
+        "firstName":"James",
+        "lastName":"Smith",
+        "isActive":false
+        }
+        --- Here, the loop exists as the loop condition met (LOOP_OUTPUT_VARIABLE.isActive==false)--- 
+        </code></pre>         
+
+
+       <b>Loop Exit Condition: </b>  
+
+       ![](Resources/Images/SampleLoopExitCriteria.png)  
+
+
+
+       The Loop exit criteria is optional and is applicable for Sequential looping.
         
-        ![](Resources/Images/Output_LoopDetails.png)
+       Finally after the loop completes, the individual user data from each integration service execution is combined into the configured output param.  
+
+        
+       <b>Output Parameters:</b>  
+
+       ![](Resources/Images/Output_LoopDetails.png)
+        
+
+       <b>Final Response in FOUNDRY\_WORKFLOW\_CONTEXT:</b>
+
+       <pre><code style="display:block;background-color:#eee;">
+        {
+        "usersDetails":\[  
+        {
+        "id":"123",
+        "firstName":"John",
+        "lastName":"Matthew",
+        "isActive":true
+        },
+        {
+        "id":"234",
+        "firstName":"James",
+        "lastName":"Smith",
+        "isActive":false   }
+        \]
+        }
+        </code></pre>  
+
         
 
 For more information on using the best practices for workflow, refer to [Workflow Best Practices](Workflow_BestPractices.md).  
@@ -1237,24 +1249,32 @@ For other scenarios, you can choose Parallel to execute each input value simulta
     
     You can enable Looping from the node's context menu. Right-click the node and then select Parallel or Sequential.  
 
+
     <!--![](Resources/Images/NodeContextMenu.png) --> 
-The following steps details how to manually enable Looping.
+    <!-- The following steps details how to manually enable Looping. -->
     
-1.  Select the **Enable Looping** check box.
+7.  Select the **Enable Looping** check box.
     
     The **Loop Execution Type** list appears. This specifies if the task must be looped Sequentially or Parallelly. For each input value, if the associated service must be processed in order, you can choose Sequential. Otherwise, choose Parallel to execute simultaneously.
     
-    <!--![](Resources/Images/EnableLooping.png)-->
+    ![](Resources/Images/EnableLooping.png)
     
 8.  Select the **Sequential** or the **Parallel** option from the **Loop Execution Type** list.
     
     After you select the **Loop Execution** Type option, the **Loop Condition Type** list appears: This helps the Workflow Engine to decide on how to loop a particular task. The list provides two options: Loop Counter and Loop Collection.
+
+    These options define how many times the loop executes.
+
+     ![](Resources/Images/LoopConditionType.png)  
+
+
+9.  Select one of the options from the **Loop Condition Type** list:
     
     *   The **Loop Counter** option indicates that the task is iterated based on the specified count. The Loop counter expects a static number or an expression, which is evaluated at runtime.
         
         If you select **Loop Counter** from the Loop Condition Type list, the **Count** and **Expression** options are displayed:
             
-        <!--![](Resources/Images/LoopCounter.png)-->
+        ![](Resources/Images/LoopCounter.png)
             
         Configure one of the following:
                 
@@ -1264,13 +1284,13 @@ The following steps details how to manually enable Looping.
                     
             The Expression can be configured by using any Workflow namespace.
                         
-            Text input to enter a loop count can be static text or an expression from workflow\_context.count. This is similar to the Timer node expression. For more details, refer to <a href="#timer-_not-supported-for-integration-sync-typeworkflow_">Timer Node</a>.
+            > **_Note:_** Text input to enter a loop count can be static text or an expression from workflow\_context.count. This is similar to the Timer node expression. For more details, refer to <a href="#timer-_not-supported-for-integration-sync-typeworkflow_">Timer Node</a>.
                 
     *   **Loop Collection** indicates that the task is being iterated based on a specified input collection or an array object.
         
         If you select Loop Collection from the Loop Condition Type list, the **Loop Collection Expression** field is displayed.
         
-        <!--![](Resources/Images/Loop_Expression.png)-->
+        ![](Resources/Images/Loop_Expression.png)
         
         Specify the collection expression from workflow namespace(s) for iteration of the associated service. For example:
             
@@ -1278,9 +1298,11 @@ The following steps details how to manually enable Looping.
         Foundry_workflow_context.userIDs
         ```
             
-8.  This step is required If you have selected Sequential Loop. Configure **Loop Exit Criteria** to specify a condition that (if met) will break the execution out of the loop and proceed to the next workflow step. 
+8.  This step is required If you have selected Sequential Loop. Configure **Loop Exit Criteria** to specify a condition that (if met) will break the execution out of the loop and proceed to the next workflow step.   
 
-    For example, if you want an additional validation where you want to execute the task if minimum balance in the account is 10,000, then you can configure a logical expression such as BACKEND\_RESPONSE.balance >=10,000.
+    ![](Resources/Images/LoopExitCriteria.png)  
+
+    **Loop Exit Criteria:** If you want to break the loop based on certain conditions, you can use the Loop Exit Criteria.For example, if you want an additional validation where you want to execute the task if minimum balance in the account is 10,000, then you can configure a logical expression such as BACKEND\_RESPONSE.balance >=10,000.
   
     To create an expression, follow these steps:
     
@@ -1290,19 +1312,22 @@ The following steps details how to manually enable Looping.
 
     * Click **Add Condition** to configure a logical expression. You can also click **Add Group** and configure a group that can have multiple logical expressions within it.
 
-        *   Each condition or group is associated with a logical operator (**AND**, **OR**). Select the required operator to determine the logic to execute the condition or group. If you select the Not check box, the selected condition is inverted.
-        *   Select the [namespace](#namespaces) from the list, and then add the related parameter in the **Value** field. For example, if you select BACKEND\_RESPONSE from the namespace list, and add balance in the **Value** field, it would be read as BACKEND\_RESPONSE.balance.
-        *   Select a comparison. The available options are ==, == null, >, <, !=, != null, >=, < =. For example, >=
-        *   Select the [namespace](#namespaces) from the list, and then add the related parameter in the **Value** field. For example, you can select **none** from the namespace list, and add 10,000 in the **Value** field.
+    *   Each condition or group is associated with a logical operator (**AND**, **OR**). Select the required operator to determine the logic to execute the condition or group. If you select the Not check box, the selected condition is inverted.
+    *   Select the [namespace](#namespaces) from the list, and then add the related parameter in the **Value** field. For example, if you select BACKEND\_RESPONSE from the namespace list, and add balance in the **Value** field, it would be read as BACKEND\_RESPONSE.balance.
+    *   Select a comparison. The available options are ==, == null, >, <, !=, != null, >=, < =. For example, >=
+    *   Select the [namespace](#namespaces) from the list, and then add the related parameter in the **Value** field. For example, you can select **none** from the namespace list, and add 10,000 in the **Value** field.
 
-            Now based on the example, the complete condition will be read as BACKEND\_RESPONSE.balance >=10,000
+        Now based on the example, the complete condition will be read as BACKEND\_RESPONSE.balance >=10,000
+    
+    *   For Looping, two Name spaces are introduced: `LOOP_INPUT_VAR` and `LOOP_OUTPUT_VAR`.  
+        Refer to [Namespaces](#namespaces) for more details.
         
-        *   For Looping, two Name spaces are introduced: `LOOP_INPUT_VAR` and `LOOP_OUTPUT_VAR`.  
-            Refer to [Namespaces](#namespaces) for more details.
-            
-        *   Click **SAVE**.
-9.  Enter a description for the Loop execution type.
-9.  Click **SAVE** to save these changes for the task.
+    *   Click **SAVE**.  
+
+9.  Enter a description for the Loop execution type.  
+
+9.  Click **SAVE** to save these changes for the task.  
+
 
 Use Existing Workflow Service
 -----------------------------
@@ -1321,9 +1346,9 @@ To use an existing workflow service, perform the following steps:
 
     If the service is part of any published app, you must unpublish the service to rename it.
         
-    If the list is long, you can search for the required service with **Search** option.
+    **_Note:_** If the list is long, you can search for the required service with **Search** option.
     
-    After the **Clone** or **Add** process is complete, the service is added to the Workflow services list.
+3.  After the **Clone** or **Add** process is complete, the service is added to the Workflow services list.
     
 3.   Click the newly added service or open the Contextual menu and click **Edit** to configure the details of the service. For more information on configuring the details, refer to [Create a Workflow](#create-a-new-workflow).
     
@@ -1333,7 +1358,7 @@ Manage Workflows
 
 You can manage the details of a service from the Contextual menu available adjacent to each service. The following options are available in the Contextual Menu:
 
-<!--![](Resources/Images/EventUnlinkDisable.png)-->
+![](Resources/Images/EventUnlinkDisable.png)
 
 *   **Edit** – Click to edit the details of a selected service. After you edit a service, save and republish all the apps that use this service to apply the changes.
     
@@ -1341,7 +1366,7 @@ You can manage the details of a service from the Contextual menu available adjac
 *   **Unlink From App** - Use this option to unlink the required workflow from the linked Foundry app.
 *   **Unlink from Associated Object** - Use this option to unlink the required workflow from the linked object of the Object service.
     
-    This option is disabled for event triggered workflow services.
+    > **_Note:_** This option is disabled for event triggered workflow services.
     
 *   **Delete** - Deletes a selected Workflow from Foundry Console. You cannot delete a service if the service is in use. You must do the following to delete the service:
     
@@ -1356,8 +1381,8 @@ You can manage the details of a service from the Contextual menu available adjac
 *   **Export as XML** - Exports the current version of a service in the form of an XML file.
 *   **Export** – Exports the service details in the form of a zip file. You can import this zip file to another Foundry app and use it. For more information, refer to [Export and Import an Application](../../voltmx_foundry_user_guide/Content/Export-Import_Apps.md).
 
-To view the Usecase related to Object Triggered Workflow and the implementation of the Usecase, refer to [Object Triggered Workflow Implementation](Workflow_Implementation.md).
+> **_Note:_** To view the Usecase related to Object Triggered Workflow and the implementation of the Usecase, refer to [Object Triggered Workflow Implementation](Workflow_Implementation.md).
 
-To view the Usecase related to Event Triggeed Workflow and the implementation of the Usecase, refer to [Event Triggered Workflow Implementation](EventsWorkflowImplementation.md).
+> **_Note:_** To view the Usecase related to Event Triggeed Workflow and the implementation of the Usecase, refer to [Event Triggered Workflow Implementation](EventsWorkflowImplementation.md).
 
-To view the execution status of a workflow service by using App Services Console, refer to [App Services Console > Workflow Services](../../vmf_integrationservice_admin_console_userguide/Content/Workflow.md) section.
+> **_Note:_** To view the execution status of a workflow service by using App Services Console, refer to [App Services Console > Workflow Services](../../vmf_integrationservice_admin_console_userguide/Content/Workflow.md) section.
