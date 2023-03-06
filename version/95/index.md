@@ -178,7 +178,7 @@ display:none;
     <td class="table1_cell" style="min-width: 200px;">
     <div class="links-a-span"><a class="links-a" href="Whats_New_Main_Page.html">What’s New</a></div>
     <div class="links-a-span"><a class="links-a" href="VMX_release_notes.html">Release Notes</a></div>
-    <div class="links-a-span"><a class="links-a" href="Foundry/installationManagement.html">Install Guides</a></div>
+    <div class="links-a-span"><a class="links-a" href="Foundry/installationGuides.html">Install Guides</a></div>
     <div class="links-a-span"><a class="links-a" href="Foundry/voltmxFoundryFundamentals.html">Foundry</a></div>
     <div class="links-a-span"><a class="links-a" href="Iris/voltmxIrisFundamentals.html">Iris</a></div>
     <div class="links-a-span"><a class="links-a" href="Foundry/foundrySDKs.html">SDK</a></div>
