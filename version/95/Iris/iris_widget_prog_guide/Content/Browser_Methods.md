@@ -865,8 +865,11 @@ function (result, voltmxError ){
 };
 
 ### runInSandboxedContext [Boolean] – Optional
-true	: Evaluate Javascript snippet in sandboxed environment.
-false	: Evaluate Javascript snippet in unsandboxed environment.
+If the value of runInSandboxedContext is true, evaluation of javascript will be done in sandboxed environment.
+If the value of runInSandboxedContext is false, evaluation of javascript will not be done in sandboxed environment.
+
+The default value of runInSandboxedContext is false and this optional parameter is only applicable for iOS .
+This parameter only works from V9.5.7.
 
 
 ### The contents of the voltmxError are:
