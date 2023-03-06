@@ -1992,9 +1992,9 @@ voltmx.automation.webSocket.sendMessage(options);
   
   |Parameters|Description|
   | --- | --- |
-  |eventName [String]|The name of the event that must be executed in Temenos App Factory.|
+  |eventName [String]|The name of the event that must be executed in App Factory.|
   |data [String/Number/Object]|Additional data that must be passed in the message.|
-  |to [String] - Optional|The Selenium client receiver of the non-voltmx app that uses the same WebSocket for communication.<br>The default value of this parameter is the clientID of the app from Temenos App Factory.<br>To send a message to a client app that is not on App Factory, set the value of this parameter as the clientID of the app.|
+  |to [String] - Optional|The Selenium client receiver of the non-voltmx app that uses the same WebSocket for communication.<br>The default value of this parameter is the clientID of the app from App Factory.<br>To send a message to a client app that is not on App Factory, set the value of this parameter as the clientID of the app.|
 
 
 <b>Example</b>
