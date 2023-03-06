@@ -358,18 +358,19 @@
 </ul>
 <h2 id="accessibilityconfig-property">accessibilityConfig Property</h2>
 <p>In order to support accessibility in Iris, a common property, accessibilityConfig is available in all widgets. This property enables you to control accessibility behavior and alternative text for the widget.</p>
-<p>Syntax</p>
-<p>accessibilityConfig = {<br />
-"a11yLabel" = "string value",<br />
-"a11yValue" = "string value",<br />
-"a11yHint" = "string value",<br />
-"a11yHidden" = true/false<br />
-}</p>
-<p>Type</p>
+<p><strong>Syntax</strong></p>
+<pre><code>accessibilityConfig = {  
+&quot;a11yLabel&quot; = &quot;string value&quot;,  
+&quot;a11yValue&quot; = &quot;string value&quot;,  
+&quot;a11yHint&quot; = &quot;string value&quot;,  
+&quot;a11yHidden&quot; = true/false  
+}
+</code></pre>
+<p><strong>Type</strong></p>
 <p>Object</p>
-<p>Read/Write</p>
+<p><strong>Read/Write</strong></p>
 <p>Read + Write</p>
-<p>Remarks</p>
+<p><strong>Remarks</strong></p>
 <p>The accessibilityConfig property is enabled for all the widgets which are supported under the Flex Layout.</p>
 <blockquote>
 <p><strong><em>Note:</em></strong> From Volt MX Iris V9 SP2 GA version, you can provide i18n keys as values to all the attributes used inside the <code>accessibilityConfig</code> property. Values provided in the i18n keys take precedence over values provided in <code>a11yLabel</code>, <code>a11yValue</code>, and <code>a11yHint</code> fields.</p>
@@ -469,45 +470,43 @@
 <tr>
 <td>Label</td>
 <td><li>label (default)  <li>div  <li>span  <li>h1, h2, h3, h4, h5, h6</td>
-<td>The following example shows how to assign the tags to the Label widget.<br><code>/*Sample code to assign the span tag to the Label widget*/"accessibilityConfig": {"tagName": "span"}</code><br></td>
+<td>The following example shows how to assign the tags to the Label widget.<br> <code>/*Sample code to assign the span tag to the Label widget*/"accessibilityConfig": {"tagName": "span"}</code> <br></td>
 <td></td>
 </tr>
 <tr>
 <td>Segment</td>
 <td><li>ul (default)  <li>ol  <li>div  <li>table</td>
-<td>The following example uses the role and tagName attributes to modify the HTML tag of Segment widget.<br><code>/*Sample code to assign the span tag to the Label widget*/"accessibilityConfig": {"tagName": "span"}</code></td>
+<td>The following example uses the role and tagName attributes to modify the HTML tag of Segment widget.<br> <code>/*Sample code to assign the div tag to the Segment widget*/"accessibilityConfig": { "a11yARIA": { "role": "grid" }, "tagName": "div" }</code></td>
 <td><li>You can assign values to the role attribute inside the a11yARIA only while modifying the tag to div.  <li>You can only assign the following values to the role attribute of a Segment widget: grid, table, and button.</td>
 </tr>
 <tr>
 <td>FlexContainer</td>
 <td><li>div (default)  <li>th  <li>td  <li>tr</td>
-<td>The following example uses the role and tagName attributes to modify the HTML tag of a FlexContainer widget.<br><code>/*Sample code to assign the td tag to a FlexContainer widget*/var flx = new kony.ui.FlexContainer({ "accessibilityConfig": { "tagName": "td" } });</code></td>
+<td>The following example uses the role and tagName attributes to modify the HTML tag of a FlexContainer widget.<br> <code>/*Sample code to assign the td tag to a FlexContainer widget*/var flx = new kony.ui.FlexContainer({ "accessibilityConfig": { "tagName": "td" } });</code></td>
 <td><li>This is a read-only property.  <li>When you specify the value as tr for the tagName property of a FlexContainer widget, ensure that you use the Flex Horizontal Layout Type. The height of the FlexContainer widget is inherited from the height of the child widgets present inside it.</td>
 </tr>
 <tr>
 <td>FlexScrollContainer</td>
 <td><li>div (default)  <li>th  <li>td</td>
-<td>The following example uses the role and tagName attributes to modify the HTML tag of a FlexScrollContainer widget.<br><code>/*Sample code to assign the td tag to a FlexScrollContainer widget*/var flx = new kony.ui.FlexScrollContainer({"accessibilityConfig": {"tagName": "td" } });</code></td>
+<td>The following example uses the role and tagName attributes to modify the HTML tag of a FlexScrollContainer widget.<br> <code>/*Sample code to assign the td tag to a FlexScrollContainer widget*/var flx = new kony.ui.FlexScrollContainer({"accessibilityConfig": {"tagName": "td" } });</code></td>
 <td><li>This is a read-only property.</td>
 </tr>
 </tbody>
 </table>
 <p>Example 1</p>
-<p>This example uses the button widget, but the principle remains the same for all widgets that have an accessibilityConfig property.</p>
+<p>This example uses the Login scenario to explain how to provide accessibility to the <code>usernameText</code> TextBox widget inside the <code>frmLogin</code> Form. The frmLogin form also contains the <code>usernameLbl</code> Label widget (with the text <strong>Username</strong>) and <code>rulesLbl</code> Label widget (that contains the username policies). </p>
 <pre><code>//This is a generic property that is applicable for various widgets.
-//Here, we have shown how to use the accessibilityConfig Property for button widget.
-/*You need to make a corresponding use of the accessibilityConfig property for other applicable widgets.*/
-
-Form1.myButton.accessibilityConfig = {
-    &quot;a11yLabel&quot;: &quot;Label&quot;,
-    &quot;a11yValue&quot;: &quot;Value&quot;,
-    &quot;a11yHint&quot;: &quot;Hint&quot;,     
-     a11yARIA: {
-        &quot;tabindex&quot; &lt; all lowercase &gt; : integer // no floating/decimal numbers,
-        &quot;role&quot;: 'Prescribed string value as per wcag guidelines', //not encouraged
-        &quot;aria-invalid&quot;: true / false,
-        &quot;aria-keyshortcuts&quot;: &quot;Shift+Space&quot;
-    }
+/*Here, we have shown how to use the accessibilityConfig Property for a TextBox widget.You need to make a corresponding use of the accessibilityConfig property for other applicable widgets.*/
+frmLogin.usernameText.accessibilityConfig = {
+  &quot;a11yLabel&quot;: &quot;Label&quot;,
+  &quot;a11yValue&quot;: &quot;Value&quot;,
+  &quot;a11yHint&quot;: &quot;Hint&quot;,
+  &quot;a11yARIA&quot;: {
+    &quot;tabindex&quot; /* Integer with no floating/decimal numbers*/: 1,
+    &quot;role&quot; /*Prescribed string value as per wcag guidelines*/: &quot;main&quot;,
+    &quot;aria-labelledby&quot;: &quot;usernameLbl&quot;
+    &quot;aria-describedby&quot;: &quot;rulesLbl&quot;
+  }
 };
 </code></pre>
 <p>Example 2</p>
