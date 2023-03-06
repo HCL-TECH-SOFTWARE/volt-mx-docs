@@ -1420,38 +1420,34 @@
 <li>
 <p>In the <code>server.xml</code>, under the <code>&lt;Service name="Catalina"&gt;</code> tag, add the connector tag:</p>
 <ul>
-<li>
-<p><strong>For HTTP</strong></p>
-<p><Connector server="VoltMX" port="$HTTP\_PORT$" protocol="HTTP/1.1" maxHttpHeaderSize="8192" maxThreads="150" enableLookups="false" acceptCount="25" disableUploadTimeout="true" tcpNoDelay="true" compression="on" compressionMinSize="512000" compressableMimeType="text.html,text/xml,text/css,text/plain,text/javascript,application/x-javascript,application/javascript,application/json,application/xml" connectionTimeout="20000" /></p>
-</li>
-<li>
-<p><strong>For HTTPS</strong></p>
-<p><Connector server="VoltMX" port="$HTTP\_PORT$" protocol="HTTP/1.1" maxHttpHeaderSize="8192" maxThreads="150" enableLookups="false" acceptCount="25" disableUploadTimeout="true" tcpNoDelay="true" compression="on" compressableMimeType="text/css,text/javascript,text.html" connectionTimeout="20000" redirectPort="$HTTPS\_PORT$"/> <Connector port="$HTTPS\_PORT$" protocol="HTTP/1.1" SSLEnabled="true" maxThreads="150" minSpareThreads="25" maxSpareThreads="150" maxHttpHeaderSize="8192" connectionTimeout="20000" scheme="https" secure="true" clientAuth="false" enableLookups="false" acceptCount="25" disableUploadTimeout="true" server="VoltMX" tcpNoDelay="true" compression="on" compressionMinSize="512000" compressableMimeType="text.html,text/xml,text/css,text/plain,text/javascript,application/x-javascript,application/javascript,application/json,application/xml" sslProtocol="TLS" keystoreFile="$APPSERVER\_KEYSTORE\_FILE$" keystorePass="$APPSERVER\_KEYSTORE\_PASS$" keystoreType="$APPSERVER\_KEYSTORE\_TYPE$"/></p>
-</li>
+<li><strong>For HTTP</strong></li>
 </ul>
+<p><code>&lt;Connector server="VoltMX" port="$HTTP\_PORT$" protocol="HTTP/1.1" maxHttpHeaderSize="8192" maxThreads="150" enableLookups="false" acceptCount="25" disableUploadTimeout="true" tcpNoDelay="true" compression="on" compressionMinSize="512000" compressableMimeType="text.html,text/xml,text/css,text/plain,text/javascript,application/x-javascript,application/javascript,application/json,application/xml" connectionTimeout="20000" /&gt;</code></p>
+<ul>
+<li><strong>For HTTPS</strong></li>
+</ul>
+<p><code>&lt;Connector server="VoltMX" port="$HTTP\_PORT$" protocol="HTTP/1.1" maxHttpHeaderSize="8192" maxThreads="150" enableLookups="false" acceptCount="25" disableUploadTimeout="true" tcpNoDelay="true" compression="on" compressableMimeType="text/css,text/javascript,text.html" connectionTimeout="20000" redirectPort="$HTTPS\_PORT$"/&gt; &lt;Connector port="$HTTPS\_PORT$" protocol="HTTP/1.1" SSLEnabled="true" maxThreads="150" minSpareThreads="25" maxSpareThreads="150" maxHttpHeaderSize="8192" connectionTimeout="20000" scheme="https" secure="true" clientAuth="false" enableLookups="false" acceptCount="25" disableUploadTimeout="true" server="VoltMX" tcpNoDelay="true" compression="on" compressionMinSize="512000" compressableMimeType="text.html,text/xml,text/css,text/plain,text/javascript,application/x-javascript,application/javascript,application/json,application/xml" sslProtocol="TLS" keystoreFile="$APPSERVER\_KEYSTORE\_FILE$" keystorePass="$APPSERVER\_KEYSTORE\_PASS$" keystoreType="$APPSERVER\_KEYSTORE\_TYPE$"/&gt;</code></p>
 </li>
 </ol>
 <h2 id="how-to-configure-batch-files">How to Configure Batch Files</h2>
 <h3 id="catalinabat">catalina.bat</h3>
-<p><code>Catalin.bat</code> files are required to be configured in Tomcat server to work properly.</p>
+<p><code>Catalina.bat</code> files are required to be configured in Tomcat server to work properly.</p>
 <ol>
 <li>From the <code>&lt;User_Install_Directory&gt;\apache-tomcat-9.0.33\bin</code>, open the <code>catalina.bat</code>.</li>
 <li>
 <p>Before the <code>@echo off</code> command, add the following JVM memory configuration.</p>
 <ul>
-<li>
-<p>For Windows:</p>
-<p>set JAVA_OPTS= -server -Xms<bytes> -Xmx<bytes> -XX:NewSize=256m -XX:MaxNewSize=512m -XX:PermSize=512m -XX:MaxPermSize=1024m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC -XX:+CMSIncrementalMode -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=$LOG_LOCATION$/heapdumps -Djava.awt.headless=true -Djava.net.preferIPv4Stack=true -Dnet.spy.log.LoggerImpl=net.spy.memcached.compat.log.Log4JLogger -Dfile.encoding=UTF8 -Dhttps.protocols=TLSv1.2</p>
+<li>For Windows:</li>
+</ul>
+<p><code>set JAVA\_OPTS= -server -Xms&lt;bytes&gt; -Xmx&lt;bytes&gt; -XX:NewSize=256m -XX:MaxNewSize=512m -XX:PermSize=512m -XX:MaxPermSize=1024m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC -XX:+CMSIncrementalMode -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=$LOG\_LOCATION$/heapdumps -Djava.awt.headless=true -Djava.net.preferIPv4Stack=true -Dnet.spy.log.LoggerImpl=net.spy.memcached.compat.log.Log4JLogger -Dfile.encoding=UTF8 -Dhttps.protocols=TLSv1.2</code></p>
 <blockquote>
 <p><strong><em>Important:</em></strong>  While installing Volt MX Foundry Components without Integration services (VoltMX Foundry Console, Identity Services, and Engagement Services), set the heap settings to: Min -Xms1024m / Max - Xmx1024m.</p>
 <p><strong><em>Important:</em></strong> While installing Volt MX Foundry Components including Integration services, set the heap settings to: Min -Xms2048m / Max - Xmx2048m.</p>
 </blockquote>
-</li>
-<li>
-<p>For Linux:</p>
-<p>JAVA_OPTS="-Dhttps.protocols=TLSv1.2 -server -Xms<bytes> -Xmx<bytes> -XX:NewSize=256m -XX:MaxNewSize=512m -XX:PermSize=512m -XX:MaxPermSize=1024m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC -XX:+CMSIncrementalMode -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=$LOG_LOCATION$/heapdumps -Djava.awt.headless=true -Djava.net.preferIPv4Stack=true -Dnet.spy.log.LoggerImpl=net.spy.memcached.compat.log.Log4JLogger -Dfile.encoding=UTF8"</p>
-</li>
+<ul>
+<li>For Linux:</li>
 </ul>
+<p><code>JAVA\_OPTS="-Dhttps.protocols=TLSv1.2 -server -Xms&lt;bytes&gt; -Xmx&lt;bytes&gt; -XX:NewSize=256m -XX:MaxNewSize=512m -XX:PermSize=512m -XX:MaxPermSize=1024m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC -XX:+CMSIncrementalMode -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=$LOG\_LOCATION$/heapdumps -Djava.awt.headless=true -Djava.net.preferIPv4Stack=true -Dnet.spy.log.LoggerImpl=net.spy.memcached.compat.log.Log4JLogger -Dfile.encoding=UTF8"</code></p>
 </li>
 <li>
 <p>Set JRE home if it is not set. For example, use the following command:</p>
@@ -1467,16 +1463,16 @@
 <li>From the <code>&lt;User_Install_Directory&gt;\apache-tomcat-9.0.33\bin</code>, open the <code>service.bat</code>.</li>
 <li>
 <p>Set JRE home if it is not set. For example, use the following command:</p>
-<p><code>set "JRE_HOME=&lt;User_Install_Directory&gt;\jre</code>"</p>
+<p><code>set "JRE_HOME=&lt;User_Install_Directory&gt;\jre"</code></p>
 </li>
 <li>
 <p>Set catalina home if it is not set. For example, use the following command:</p>
-<p>set "CATALINA_HOME=<User\_Install\_Directory>\tomcat"</p>
+<p><code>set "CATALINA\_HOME=&lt;User\_Install\_Directory&gt;\\tomcat"</code></p>
 </li>
 <li>
 <p>To configure the service name for the service you install, use the following commands:</p>
-<p>set SERVICE_NAME=<Service\_Name>_SVC<br />
-set PR_DISPLAYNAME=<Service\_Name></p>
+<p><code>set SERVICE_NAME=&lt;Service_Name&gt;_SVC</code> <br/>
+<code>set PR_DISPLAYNAME=&lt;Service_Name&gt;</code></p>
 </li>
 <li>
 <p>Save the <code>service.bat</code> file.</p>
