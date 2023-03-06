@@ -8,6 +8,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Iris](#volt-iris)
 
+- [V9 Servicepack 2 Fixpack 59](#v9-servicepack-2-fixpack-59)
 - [V9 Servicepack 2 Fixpack 58](#v9-servicepack-2-fixpack-58)
 - [V9 Servicepack 2 Fixpack 57](#v9-servicepack-2-fixpack-57)
 - [V9 Servicepack 2 Fixpack 56](#v9-servicepack-2-fixpack-56)
@@ -22,6 +23,8 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Foundry](#volt-foundry)
 
+
+- [V9 Servicepack 2 Fixpack 1 Hotfix 15](#v9-servicepack-2-fixpack-1-hotfix-15)
 - [V9 Servicepack 2 Fixpack 1 Hotfix 14](#v9-servicepack-2-fixpack-1-hotfix-14)
 - [V9 Servicepack 2 Fixpack 1 Hotfix 13](#v9-servicepack-2-fixpack-1-hotfix-13)
 - [V9 Servicepack 2 Fixpack 1 Hotfix 11](#v9-servicepack-2-fixpack-1-hotfix-11)
@@ -34,6 +37,13 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 
 ## Volt Iris
+
+
+### V9 Servicepack 2 Fixpack 59
+March 02, 2023
+
+There are no new features or enhancements in this release.
+For relevant support note, see the<a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476" target="_blank"> Cumulative fix list for HCL Volt MX</a>.
 
 
 ### V9 Servicepack 2 Fixpack 58
@@ -178,6 +188,14 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 -->
 
 ## Volt Foundry
+
+
+### V9 Servicepack 2 Fixpack 1 Hotfix 15
+March 06, 2023
+
+There are no new features or enhancements in this release.
+For relevant support note, see the<a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476" target="_blank"> Cumulative fix list for HCL Volt MX</a>.
+
 
 
 ### V9 Servicepack 2 Fixpack 1 Hotfix 14
