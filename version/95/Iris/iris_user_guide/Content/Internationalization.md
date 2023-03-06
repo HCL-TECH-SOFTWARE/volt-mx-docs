@@ -92,6 +92,14 @@ To add i18n keys manually, do the following:
 
 8.  Click **Finish**.
 
+> <a name="rootDetection"></a>**NOTE:** From the Volt MX Iris V9 Service Pack 5 release, you can provide a title for the pop-up of rooted (or jail-broken) devices without changing the AppID. To do so, add a new row in the **Configure Internationalization** dialog box with the key set as `ROOT_DETECTION_TITLE`. Provide the name to be displayed as the pop-up title of the rooted device as the value of the ROOT_DETECTION_TITLE key.
+> You can also set a default title for the pop-up by using the `default_root_detection_title` key in the following locations:
+> 
+> * infoplist_configuration.json file on the iOS platform.
+> * res/values folder of the build folder on the Android platform.
+> 
+> If you do not configure the default key or the custom key, Iris displays the AppID as the pop-up title of rooted devices.
+
 ### Add i18n Programmatically Using APIs
 
 For information on how to use APIs to programmatically add i18n functionality to an app, see the API Guide.
