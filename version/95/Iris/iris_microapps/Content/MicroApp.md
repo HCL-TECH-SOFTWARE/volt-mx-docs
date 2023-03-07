@@ -270,8 +270,8 @@ Follow these steps to export a project that contains Micro Apps:
     
 3.  You can choose to export a Micro App by using the following options:
     
-    *   **Export only <ProjectName> Application**: Exports only the Base App.
-    *   **Export the <ProjectName> along with all its linked Micro Apps**: Exports the entire Composite App along with all the linked Micro Apps.
+    *   **Export only &lt;ProjectName&gt; Application**: Exports only the Base App.
+    *   **Export the &lt;ProjectName&gt; along with all its linked Micro Apps**: Exports the entire Composite App along with all the linked Micro Apps.
     
     Select the **Export Services along with the project** check box to include the Volt Foundry Service associated with the app during the export process.
     
@@ -542,8 +542,8 @@ To export a theme, follow these steps:
     
 2.  Select one of the options to export the Themes:  
     
-    *   **Export only <Base\_App> Themes**: Exports only the Themes present in the Base App.
-    *   **Export <Base\_App> Themes along with all it's linked MicroApps Themes.**: Exports the Themes present in the Base App and it's linked Micro Apps.
+    *   **Export only &lt;Base\_App&gt; Themes**: Exports only the Themes present in the Base App.
+    *   **Export &lt;Base\_App&gt; Themes along with all its linked MicroApps Themes.**: Exports the Themes present in the Base App and its linked Micro Apps.
     
     ![](Resources/Images/ExportBaseTheme.png)
 3.  Click **Proceed**.  

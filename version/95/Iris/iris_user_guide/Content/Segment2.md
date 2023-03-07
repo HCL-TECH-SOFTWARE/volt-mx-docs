@@ -94,7 +94,7 @@ Segment properties specify properties that are available on any platform support
 
 ![](Resources/Images/segmentedUI.png)
 
-#### Master Data
+** Master Data**
 
 The master data is enabled only when the widgets are added to the **Segment** widget.
 
@@ -107,13 +107,13 @@ The following example illustrates using the Master Data property to add an image
 5.  Provide the image and button widget details as shown in the following image.
 6.  Click **OK**.
 
-#### Row Template
+** Row Template**
 
 Indicates the common template to be used for each row while creating the row and filling the data. This can be overridden at the row level when setting the data using the template key.You can create a new template without going to the Templates section using the **Create New** option from the drop-down list. You can also edit a template inline in the segment.
 
 > **_Note:_** Only those templates that are created from **Project Explorer >Templates > Segments** are visible on the **Row Template** drop-down list.
 
-#### Section Header Template
+** Section Header Template**
 
 Specifies the common template to be used for each section while creating the section header and filling the data. This is optional parameter and if not provided the default template provided by each platform will be used. It can also be provided at each section level when setting the data. You can create a new template without going to the Templates section using the **Create New** option from the drop-down list. You can also edit a template inline in the segment.
 
@@ -122,21 +122,21 @@ Specifies the common template to be used for each section while creating the sec
 > **_Note:_** When a Section Header is provided along with the rows/items, the Section Header is "clamped" to the top of the scrollable area (on the Form) as one scrolls through a long list of items (for example, if you have a long list of contacts that all begin with the letter "A", the "A" header will be fixed at the top until you scroll down past the last "A" item). This behavior can be clearly seen iPhone's Contacts application.  
 This behavior of Section Headers is available on iOS and Android platform and is enabled when the Screen Level Widget has been set to true.  
 
-#### Group Cells
+** Group Cells**
 
 Specifies whether all the rows in a segment should be grouped using a rounded corner background and border.
 
 *   If **On** is selected, the cells will not have rounded border.
 *   If **Off** is selected, the cells will have a rounded border.
 
-#### Retain Selection
+** Retain Selection**
 
 Specifies whether the segment should retain the selection made when the user navigates out of the form and revisits the form.
 
 *   If **On** is selected, the selection is retained when the user navigates to different form.
 *   If **Off** is selected, the selection is not retained.
 
-#### Full Screen Widget
+** Full Screen Widget**
 
 Specifies whether the widget should occupy the whole container or not. You must set the value to true if your segment has large data sets (more than 20 records with each record having more than 15 widgets) to facilitate a better reuse of the widgets and a different scrolling behavior.
 
@@ -145,33 +145,33 @@ Specifies whether the widget should occupy the whole container or not. You must 
 
 > **_Note:_** This property is available only when a Segment widget is placed in a VBox form.
 
-#### Separator
+** Separator**
 
 Specifies if the segment should display the separator between the rows.
 
 *   If **On** is selected, the separator appears.
 *   If **Off** is selected, the separator is not displayed.
 
-#### Separator Thickness
+** Separator Thickness**
 
 Specifies the thickness of the separator in pixels.
 
-#### Separator Color
+** Separator Color**
 
 Specifies the color of the separator between rows of a Segment widget. Click the color sampler to open the color picker from where you can select a separator color.
 
-#### Separator Transparency
+** Separator Transparency**
 
 Provide the desired transparency for the separator.
 
-#### Show Scrollbars
+** Show Scrollbars**
 
 Specifies if the scrollbars of the segment must be visible all the time.
 
 *   If **On** is selected, the scrollbars are displayed.
 *   If **Off** is selected, the scrollbars are not displayed.
 
-#### Orientation
+** Orientation**
 
 Specifies how you can stack the widgets within the Segment. You can set the orientation of the Segment as horizontal or vertical.
 
@@ -183,7 +183,7 @@ Following are the options:
 
 > **_Note:_** This property is available only when Segment widget is placed in a VBox form.
 
-#### View Type
+** View Type**
 
 Specifies the view type of a segment. The following are the available view types that you can select and their appearances on iPhone native client:
 
@@ -196,7 +196,7 @@ Specifies the view type of a segment. The following are the available view types
     ![](Resources/Images/image9_CRR_477x135.png)
     
 
-#### Layout Alignment
+** Layout Alignment**
 
 Specifies the direction in which the widgets are laid out.
 
@@ -210,7 +210,7 @@ The options are:
 
 > **_Note:_** This property is avialable only when Segment widget is placed in a VBox form.
 
-#### Selection Behavior
+** Selection Behavior**
 
 Specifies whether the segment will support single or multiple selection.
 
@@ -220,11 +220,11 @@ Following are the options:
 *   Single Select: Indicates that you can make one selection when you have many choices in the segment (the behavior is similar to a RadioButtonGroup).
 *   Multi Select: Indicates that you can make more than one selection when you have many choices in the segment (the behavior is similar to a CheckBoxGroup).
 
-#### Enable Reordering
+** Enable Reordering**
 
 For Volt MX Iris Version 9.2 and later, specifies whether to enable or disable reordering rows in a segment.
 
-#### Autogrow Mode
+** Autogrow Mode**
 
 This property is applicable only when the segment is placed inside a flex container and View Type is set as Table. It specifies the segment to grow when the new content is added.
 
@@ -248,13 +248,13 @@ Rules and Priorities of Autogrow-Mode property
 *   When a Segment is generated using single bucket constructor, height property must be set as undefined for Autogrow Mode property to work.
 *   If the row template height is not specified and the Segment Autogrow Mode property is set as Autogrow-Height, then row height of the Segment is 220dp (preferred height of a flex container).
 
-#### Height
+** Height**
 
 Specifies the height of the Segment in terms of percentage. The percentage is with reference to the value of [Height Reference](#height-reference) property.
 
 > **_Note:_** This property is unavailable on Flex Forms.
 
-#### Height Reference
+** Height Reference**
 
 The Segment height percentage is calculated based on the option selected.
 
@@ -264,7 +264,7 @@ The Segment height percentage is calculated based on the option selected.
     > **_Note:_** This property is unavailable on Flex Forms.
     
 
-#### Dictionary
+** Dictionary**
 
 Specifies whether the dictionary must be enabled for easy navigation.
 
@@ -277,7 +277,7 @@ If the dictionary property is enabled, alphabets from A to Z appear on the scree
 
 > **_Note:_** This property is specific to the iOS platform.
 
-#### Indicator
+** Indicator**
 
 Specifies the indicator type as rowSelect, rowClick, or none. Based on your selection, the behavior is exhibited:
 
@@ -296,7 +296,7 @@ If the user selects the disclosure button, the detailed content appears.
 
 > **_Note:_** This property is specific to the iOS platform.
 
-#### Edit Style
+** Edit Style**
 
 Specifies the way in which the edit feature of Segment can be enabled.
 
@@ -308,7 +308,7 @@ Following are the options:
 
 > **_Note:_** This property is specific to the iOS platform.
 
-#### Progress Indicator
+** Progress Indicator**
 
 Specifies whether the progress indicator is displayed.
 
@@ -319,7 +319,7 @@ Default: true (the progress indicator appears on the widget)
 
 > **_Note:_** This property is specific to the iOS platform.
 
-#### Progress Indicator Color
+** Progress Indicator Color**
 
 Specifies the color of the progress indicator as white or grey.
 
@@ -328,7 +328,7 @@ Specifies the color of the progress indicator as white or grey.
 
 > **_Note:_** This property is specific to the iOS platform.
 
-#### Scroll Bounces
+** Scroll Bounces**
 
 Specifies whether the scroll view bounces past the edge of the content and back again.
 
@@ -337,7 +337,7 @@ Specifies whether the scroll view bounces past the edge of the content and back 
 
 > **_Note:_** This property is specific to the iOS platform.
 
-#### Search Criteria
+** Search Criteria**
 
 Specifies the search criteria to be applied when searching has been enabled.
 
@@ -351,7 +351,7 @@ The options are:
 
 > **_Note:_** This property is specific to the iOS platform.
 
-#### Search By
+** Search By**
 
 Specifies the identifier of the widget placed inside the row of the Segment. Search will be performed against the content present inside the widget.
 
@@ -359,7 +359,7 @@ Specifies the identifier of the widget placed inside the row of the Segment. Sea
 
 > **_Note:_** This property is specific to the iOS platform.
 
-#### Dock Section Header
+** Dock Section Header**
 
 Specifies whether to dock the section header at the top of the segment while scrolling the section content. If you are scrolling the segment data, the next section header will be docked on top of the segment
 
@@ -371,7 +371,7 @@ For example, if you scroll the segment data shown in the following figure, as th
 
 > **_Note:_** This property is specific to the Android platform.
 
-#### Swipe Config
+** Swipe Config**
 
 From Volt MX Iris V9 onwards, you can configure swipe functionality for a Segment widget. The Swipe config settings enable users to dismiss a row or to reveal certain actions when they swipe a row to the left or right.
 
@@ -438,7 +438,7 @@ To map the widgets of the Section Header Template of a Segment by using Mapping 
     ![](Resources/Images/Code_View_section_data_620x283.png)
 2.  Click **Save**. You have successfully mapped the widgets of the Section Header Template and Row Data of a Segment by using [Mapping Editor](ActionsMapping.md).
 
-#### Remarks
+** Remarks**
 
 *   For Visualizer V8 SP4 or earlier projects, the elements that had been mapped to the widgets of Segment Master Data will now be mapped to the widgets of Segment Section Data.
 *   If you change any of the Segment Templates, all their associated mappings will be automatically deleted.
