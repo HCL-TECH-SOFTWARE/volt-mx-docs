@@ -21,15 +21,14 @@ The Patch Installer uses hotfix archives and applies the software updates to an 
 > **_IMPORTANT:_** If you are required to install hotfix archives to a set of components for a specific release, you must have the supported Volt MX Foundry GA version (for example, Volt MX Foundry 9.2.1) with required components installed on your system.<br>
 <b>For example</b>, if you are required to install hotfix archive for Console version V 9.2.1, you must have Foundry 9.2.1 GA with Console installed on your system.</br>
 
-* Download the `patchinstaller(binary)` and `hotfix archives` from [http://community.voltmx.com/downloads/manual/](http://ww1.voltmx.com) with your credentials.
 
 * Ensure that  `Volt MX Foundry PatchInstaller.exe`  file has execute permission
 
 
 <b>To download Volt MX Foundry Patch Installer and hotfixes, follow these steps:</b>
 
-1. Log in to [http://community.voltmx.com/downloads/manual/](http://ww1.voltmx.com). You can
-   obtain a user name and password from your sales representative or partner.
+1. You can obtain a user name and password from your sales
+   representative or partner.
 
 2. Navigate to the Volt MX Foundry section.
 
