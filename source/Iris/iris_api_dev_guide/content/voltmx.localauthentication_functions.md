@@ -8,7 +8,7 @@ The voltmx.localAuthentication namespace provides the functions to authenticate,
 
 > **_Note:_** Applicable for iOS: For information about how to enable the Face ID feature in your VoltMX Iris application, click [here](../../../Iris/iris_user_guide/Content/Support_for_iPhoneX.md). For information about how to detect whether a device supports either the Touch ID or Face ID feature or the Iris authentication, refer the [getBiometryType](#biometryofDevice) API.
 
-> **_Important:_** If you have used the Local authentication API in your VoltMX Iris projects, before moving your project to the V9.2 release, ensure that you read the [Local Authentication Migration guidelines](https://support.hcltechsw.com/community?id=community_question&sys_id=3994d4151b58e8142518542f0a4bcb66&view_source=searchResult) article.
+> **_Important:_** If you have used the Local authentication API in your VoltMX Iris projects, before moving your project to the V9.2 release, ensure that you read the [Local Authentication Migration guidelines](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0103192) article.
 <!-- > **_Important:_** If you have used the Local authentication API in your VoltMX Iris V8 projects, before moving your project to the V9 release, ensure that you read the [Local Authentication Migration guidelines](https://basecamp.voltmx.com/s/feed/0D52K00004LZUWw) article on the Base Camp. -->
 
 This namespace contains the following API elements.

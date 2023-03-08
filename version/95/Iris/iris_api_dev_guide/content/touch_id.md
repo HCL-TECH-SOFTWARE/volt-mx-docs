@@ -22,7 +22,7 @@ In the iOS devices, the dialog box is prompted automatically by the platform its
 
 User needs to register fingerprint at the global settings, and the same secured data is accessed from application to authenticate. You can also set a password at the application level, which acts as an alternative method for authentication.
 
-To use the local authentication feature in the Android platform, you need the USE\_FINGERPRINT permission set to true under the Manifest Properties in the Project Settings>Native>Android tab.
+To use the local authentication APIs in the Android platform, you need add the enableLocalAuthentication=true property in the androidbuild.properties file of the project. In addition, you need to add the Biometric dependency under Project Settings > Native > Android Mobile/Tablet > Gradle Entries > build.gradle entries to Suffix.
 
 Following are the voltmx.localAuthentication APIs:
 
