@@ -70,7 +70,7 @@ To use App Factory with GitHub 2FA (two-factor authentication), follow these ste
     For more information, refer to [Adding New Source Code Repository Credentials](ManagingCredentials.md#Adding_SourceCode).
 
 </details>
-<details close markdown="block"><summary>Apple Signing Certificates (Apple Developer Account or Apple Manual Certs)</summary>
+<details close markdown="block"><summary id="Apple">Apple Signing Certificates (Apple Developer Account or Apple Manual Certs)</summary>
 
 To build apps for iOS, App Factory requires certificates that sign the iOS binaries. You can specify [Apple Developer](https://developer.apple.com/) credentials to generate the certificates, or manually upload the certificates. Based on the type of profile for the app, you also need to generate different profiles. For more information, refer to [Distribution methods](http://help.apple.com/xcode/mac/9.0#/dev31de635e5) in Xcode help.
 

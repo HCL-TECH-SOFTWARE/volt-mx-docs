@@ -36,7 +36,10 @@ To add VoltMX Cloud credentials to your project, follow these steps.
 5.  After you configure the parameters, click **Add**.
 6.  On the **buildIrisApp** job, from the FOUNDRY\_CREDENTIALS\_ID list, select the credentials that you added.
 
-![](Resources/Images/Config_CredSelection.png)
+![](Resources/Images/Config_CredSelection.png)  
+
+
+<a id="Adding_Foundry"></a>
 
 Adding new VoltMX Foundry App Config
 
@@ -308,6 +311,7 @@ Make sure that you add Android\_Keystore password credentials for every Android\
 5.  After you configure the parameters, click **Add**.
 6.  In the **buildIrisApp** job, from the ANDROID\_KEYSTORE\_PASSWORD list, select the credentials that you added.
 
+<a id="Encryption_Keys"></a>
 Adding Keys for Protected Mode Build
 
 App Factory provides an option to build protected binaries for both Android and iOS platform by using VoltMX Iris. To build an app in protected mode, you need to add keys to your project.
@@ -335,6 +339,9 @@ To add protected mode keys to your project, follow these steps.
 5.  After you configure the parameters, click **Add**.
 6.  In the **buildIrisApp** job, from the PROTECTED\_KEYS list, select the credentials that you added.  
     ![](Resources/Images/Selected_Keys.png)
+
+
+<a id="Secure_JS"></a>  
 
 Adding Secure JS properties
 

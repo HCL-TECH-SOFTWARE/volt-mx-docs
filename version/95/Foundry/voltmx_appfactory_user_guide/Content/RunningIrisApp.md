@@ -55,7 +55,10 @@ The Test stage executes the tests of the project from the specified repository. 
 *   Build Tests
 *   Notify on build tests status by e-mail
 *   Run Tests
-*   Notify on tests run status by e-mail
+*   Notify on tests run status by e-mail  
+
+
+<a id="Build"></a>
 
 Build Results Notification
 --------------------------
@@ -111,6 +114,8 @@ This section provides details about the source code repository (such as commit-I
 
 *   To avoid duplication and reduce the size of the table, channels with the same commit-ID are grouped and the corresponding change logs are displayed.
     
+
+<a id="AWS_Custom"></a>  
 
 ### AWS Custom Environment Run
 
