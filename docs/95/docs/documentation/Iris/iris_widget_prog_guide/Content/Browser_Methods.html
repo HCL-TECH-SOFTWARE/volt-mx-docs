@@ -1291,6 +1291,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#runinsandboxedcontext-boolean-optional" class="md-nav__link">
+    runInSandboxedContext [Boolean] – Optional
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#the-contents-of-the-voltmxerror-are" class="md-nav__link">
     The contents of the voltmxError are:
   </a>
@@ -3194,7 +3201,7 @@
     id="__nav_1_8"
     
   />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
 
   <div class="md-nav__link md-nav__link--index">
     <a href="../../../Foundry/voltmxFoundryFundamentals.html"> Foundry </a>
@@ -3665,6 +3672,13 @@
         <li class="md-nav__item">
   <a href="#callback" class="md-nav__link">
     callback
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#runinsandboxedcontext-boolean-optional" class="md-nav__link">
+    runInSandboxedContext [Boolean] – Optional
   </a>
   
 </li>
@@ -5344,10 +5358,10 @@ try {
 <details close="close">
 <p><summary>evaluateJavaScriptAsync Method</summary></p>
 <hr />
-<p>This method accepts a JavaScript snippet and a callback function as inputs.</p>
+<p>This method accepts a JavaScript snippet, a callback function and one more optional parameter to evaluate JavaScript in sandboxed environment.</p>
 <h3 id="syntax_10">Syntax</h3>
 <pre><code>
-evaluateJavaScriptAsync(snippet,callback)
+evaluateJavaScriptAsync(snippet, callback, runInSandboxedContext)
 </code></pre>
 <h3 id="parameters_6">Parameters</h3>
 <p>snippet</p>
@@ -5355,6 +5369,11 @@ evaluateJavaScriptAsync(snippet,callback)
 <h3 id="callback">callback</h3>
 <p>function (result, voltmxError ){</p>
 <p>};</p>
+<h3 id="runinsandboxedcontext-boolean-optional">runInSandboxedContext [Boolean] – Optional</h3>
+<p>If the value of runInSandboxedContext is true, evaluation of javascript will be done in sandboxed environment.
+If the value of runInSandboxedContext is false, evaluation of javascript will not be done in sandboxed environment.</p>
+<p>The default value of runInSandboxedContext is false and this optional parameter is only applicable for iOS .
+This parameter only works from V9.5.7.</p>
 <h3 id="the-contents-of-the-voltmxerror-are">The contents of the voltmxError are:</h3>
 <blockquote>
 <ul>
@@ -5368,6 +5387,7 @@ evaluateJavaScriptAsync(snippet,callback)
 <h3 id="remarks_6">Remarks</h3>
 <p>This method evaluates the snippet and invokes the callback with the result.</p>
 <p>On Android platform, this method accepts a JavaScript snippet in the form of string, and a callback function as inputs and evaluates the snippet and calls the callback with the result and error as null.</p>
+<p>On iOS platform , since iOS 14 , WKWebView introduced WkContentWorld to ensure that the JavaScript injected into the web page will run in a sandboxed environment from the JavaScript originating from the web, which may be untrusted. So this method accepts a JavaScript snippet in the form of string, and a callback function as inputs and third optional parameter to evaluates the snippet in sandboxed environment.</p>
 <h3 id="following-are-the-platform-limitations_1">Following are the platform limitations:</h3>
 <p>Windows</p>
 <ul>
@@ -5432,6 +5452,14 @@ webWidget1.evaluateJavaScriptAsync(&quot;eval(2+3)&quot;,
     function(result, error) {
         voltmx.print(&quot;Result:&quot; + result);
     });
+</code></pre>
+<pre><code>
+//Example2 Script evaluated in sandboxed environment.
+    webWidget1.evaluateJavaScriptAsync(&quot;document.body.style.backgroundcolor =`orange`;, this.callbackname,true);
+</code></pre>
+<pre><code>
+//Example3 Script evaluated in unsandboxed environment.
+    webWidget1.evaluateJavaScriptAsync(&quot;document.body.style.backgroundcolor =`pink`;, this.callbackname,false);
 </code></pre>
 <h3 id="platform-availability_9">Platform Availability</h3>
 <p>Available on iOS, Android, and Windows platforms</p>
