@@ -8,7 +8,7 @@ Migrate a Project from an Earlier Version of Visualizer to Iris
 Visualizer to Iris migration
 -----------------------------
 
-Users from Visualizer 8.4 classic, Viz 9.1, 9.2 can seamlessly migrate to Volt MX 9.2 and continue developing their custom apps. All of the existing projects from Quantum into Volt MX 9.2 and can build their apps for various custom channels.  
+Users from Visualizer 8.4 classic, Viz 9.1, 9.2 can seamlessly migrate to Volt MX 9.5 and continue developing their custom apps. All of the existing projects from Quantum into Volt MX 9.5 and can build their apps for various custom channels.  
 
 
 **Temenos Viz version**
@@ -23,11 +23,11 @@ Users using Visualizer need to install HCL Volt MX Iris from the download link [
 
 **Re-import projects**
 
-All the projects from Visualizer to be re-imported into Volt MX Iris. Existing Visualizer projects can be imported into Volt MX 9.2 Iris and user can continue developing/building for different channels.
+All the projects from Visualizer to be re-imported into Volt MX Iris. Existing Visualizer projects can be imported into Volt MX 9.5 Iris and user can continue developing/building for different channels.
 
 **Deprecated widgets**
 
-If the projects contain any of the deprecated widgets like HBox/VBox etc, they need to be taken care of manually before importing to Volt MX 9.2 Iris (same behaviour as Quantum 9.2 Visualizer
+If the projects contain any of the deprecated widgets like HBox/VBox etc, they need to be taken care of manually before importing to Volt MX 9.5 Iris (same behaviour as Quantum 9.2 Visualizer
 [Deprecated Widgets](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_widget_prog_guide/Content/Deprecated.md)
 
 **Revised project configuration files**
