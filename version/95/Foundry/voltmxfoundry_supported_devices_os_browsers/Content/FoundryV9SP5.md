@@ -56,6 +56,7 @@ The installation of the Volt Foundry software supports the following versions of
 
 #### JBoss Enterprise Application Platform (EAP)
 
+*   EAP 7.2
 *   EAP 7.3
 
 > **_Important:_**  If you are running JBoss in Domain node (multi node) for a production setup, get the appropriate licenses from Red Hat.
