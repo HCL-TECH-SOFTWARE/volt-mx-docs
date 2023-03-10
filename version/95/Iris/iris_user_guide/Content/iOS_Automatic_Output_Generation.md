@@ -105,12 +105,12 @@ To enable data protection entitlement for an app in Volt MX Iris, follow these s
    3. Add the **Data Protection** key, and provide any of the following values to the key, based on the level of data protection that you want to provide for the app:
 
 
-      * <b>NSFileProtectionComplete</b>: The file is stored in an encrypted format on the disk, and cannot be read from or written to while the device is locked or is booting. For more information, ,refer [NSFileProtectionComplete](https://developer.apple.com/documentation/foundation/nsfileprotectioncomplete).
+      * <b>NSFileProtectionComplete</b>: The file is stored in an encrypted format on the disk, and cannot be read from or written to while the device is locked or is booting. For more information, refer to [NSFileProtectionComplete](https://developer.apple.com/documentation/foundation/nsfileprotectioncomplete).
 
-      * <b>NSFileProtectionCompleteUnlessOpen</b>: The file is stored in an encrypted format on the disk, after it is closed. For more information,refer [NSFileProtectionCompleteUnlessOpen](https://developer.apple.com/documentation/foundation/nsfileprotectioncompleteunlessopen).
+      * <b>NSFileProtectionCompleteUnlessOpen</b>: The file is stored in an encrypted format on the disk, after it is closed. For more information, refer to [NSFileProtectionCompleteUnlessOpen](https://developer.apple.com/documentation/foundation/nsfileprotectioncompleteunlessopen).
 
 
-      * <b>NSFileProtectionCompleteUntilFirstUserAuthentication</b>: The file is stored in an encrypted format on the disk, and cannot be accessed until after the device has competed booting. For more information, ,refer [NSFileProtectionCompleteUntilFirstUserAuthentication](https://developer.apple.com/documentation/foundation/nsfileprotectioncompleteuntilfirstuserauthentication).
+      * <b>NSFileProtectionCompleteUntilFirstUserAuthentication</b>: The file is stored in an encrypted format on the disk, and cannot be accessed until after the device has competed booting. For more information, refer to [NSFileProtectionCompleteUntilFirstUserAuthentication](https://developer.apple.com/documentation/foundation/nsfileprotectioncompleteuntilfirstuserauthentication).
 
       * <b>Null</b>: The file has no special protections associated with it.
 
