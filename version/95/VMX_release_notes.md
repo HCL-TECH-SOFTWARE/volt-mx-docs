@@ -24,6 +24,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Foundry](#volt-foundry)
 
+- [V9 Servicepack 5 Fixpack 2 Hotfix 0](#v9-servicepack-5-fixpack-2-hotfix-0)
 - [V9 Servicepack 5 Fixpack 1 Hotfix 1](#v9-servicepack-5-fixpack-1-hotfix-1)
 - [AppFactory V9 Servicepack 5 Fixpack 0 Hotfix 2](#appfactory-v9-servicepack-5-fixpack-0-hotfix-2)
 - [V9 Servicepack 5 Fixpack 1 ](#v9-servicepack-5-fixpack-1)
@@ -598,6 +599,27 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 -->
 
 ## Volt Foundry
+
+### V9 Servicepack 5 Fixpack 2 Hotfix 0
+
+March 20, 2023
+
+#### Foundry Enhancements
+
+Updated Volt MX Foundry Container Helm Installation:
+
+* Implemented Helm Notes support
+* Enabled configuring Kubernetes Ingress with custom SSL certificate support
+* Enabled ability to specify different versions for different Foundry components via `imageTagOverride` settings
+* Separated dbupdate install from the apps install
+* Renamed `init-guid.sh` to `init-guids.sh`
+* Implemented `PodDisruptionBudget (PDB)` support
+* Added Alertmanager configuration
+
+Added support of patch installer for Foundry.
+
+ For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+
 
 ### V9 Servicepack 5 Fixpack 1 Hotfix 1
 
