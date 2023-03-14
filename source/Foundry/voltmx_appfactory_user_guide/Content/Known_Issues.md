@@ -27,5 +27,4 @@ Limitations
         These credentials can only be added at a Global scope (Jenkins scope) by an Admin.
     *   For parameters such as BUILD\_MODE or IOS\_DISTRIBUTION\_TYPE, the screen displays a text box. Improperly editing the text box can lead to failures due to invalid options during the build phase.
 
-*  To install app on iPad's safari browser, user need to set the User Agent to either iPhone or iPad mini , restart the device and do the app installation. 
-Alternatively user can install the app using Chrome browser without any changes.
+*  To install the application on iPad's safari browser, user need to set the User Agent to either iPhone or iPad mini and restart the device. Then you can try application installation. Alternatively, user can install the application using Chrome browser without making user agent changes. 
