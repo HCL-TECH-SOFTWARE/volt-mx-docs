@@ -26,3 +26,5 @@ Limitations
     *   New credentials cannot be added by using the **Add** button or by using credential type parameters such as CLOUD\_CREDENTIALS\_ID/FOUNDRY\_CREDENTIALS\_ID or FOUNDRY\_APP\_CONFIG.  
         These credentials can only be added at a Global scope (Jenkins scope) by an Admin.
     *   For parameters such as BUILD\_MODE or IOS\_DISTRIBUTION\_TYPE, the screen displays a text box. Improperly editing the text box can lead to failures due to invalid options during the build phase.
+
+*  To install the application on iPad's safari browser, user need to set the User Agent to either iPhone or iPad mini and restart the device. Then you can try application installation. Alternatively, user can install the application using Chrome browser without making user agent changes. 
