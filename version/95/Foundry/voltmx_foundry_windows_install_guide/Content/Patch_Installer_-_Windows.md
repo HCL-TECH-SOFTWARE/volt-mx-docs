@@ -27,16 +27,15 @@ The Patch Installer uses hotfix archives and applies the software updates to an 
 
 <b>To download Volt MX Foundry Patch Installer and hotfixes, follow these steps:</b>
 
-1. You can obtain a user name and password from your sales
-   representative or partner.
+1. Login to the <a href="https://id.hcltechsw.com" target="_blank">HCL License & Download Portal.</a>
 
-2. Navigate to the Volt MX Foundry section.
+      If you do not have login credentials, follow the steps discussed in this article, <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0069114">How to register to HCLSoftware portals</a>. For more info on the portal, refer to <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0073344" target="_blank">this article.</a> or contact support by creating a Download Case.
 
-3. From the Volt MX Foundry Patch Installer, select the specific 
-   release from the Version drop-down list and then click on the specific release related files you want to download based on your platform (Windows or Linux).For example, if you want to download `Volt MX Foundry Patch Installer 9.0 GA`, select the `9.0 GA `version from the drop-down list, and then click the Installer_Windows link.
+2. Locate HCL Volt MX in Your Downloads, and select HCL Volt Foundry
+   v9.x.x.
 
-4. For the required hotfix components, select the specific release 
-   from the Version drop-down list and then click Download. The following is a sample screen.
+3. Download the required hotfix components.
+
 
 <b>To install Volt MX Foundry patch using the installer, follow these steps:</b>
 
@@ -66,9 +65,9 @@ The Patch Installer uses hotfix archives and applies the software updates to an 
    *    Please provide the location of the patch file: Provide the
         patch file location of the Volt MX Foundry component that you wish to install to current version. For example, middleware.zip.
         For information about creating a patch file, refer to [Creating a patch file for Foundry components](#creating-a-patch-file-for-foundry-components).
-   *    Please provide the location of existing installation . The
+   *    Please provide the location of existing installation. The
         default install location appears in this field.
-        Provide the location of existing olt MX Foundry installation that you wish to upgrade with the selected patch version.
+        Provide the location of existing Volt MX Foundry installation that you wish to upgrade with the selected patch version.
 
 
    ![](Resources/Images/voltmx_introduction.png)  
