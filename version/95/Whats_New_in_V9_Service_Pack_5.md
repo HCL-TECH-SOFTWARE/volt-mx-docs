@@ -373,12 +373,13 @@ Locked apps now support adding new operations in Integration services and adding
 
 For more information about this feature, click [here](Foundry/voltmx_foundry_user_guide/Content/LockApp.md).
 
+<!--
 ### Enhanced Security for caching
 
 Added support to enable an SSL connection between the Authentication Service and Redis to allow secure connections for caching.
 
 For more information about this feature, click [here](Foundry/voltmxfoundry_on_azure/Content/VoltMX_Foundry_on_Azure.md#configuration).
-
+-->
 
 ### Private Key JWT in OAuth 2.0 Services
 
@@ -469,11 +470,13 @@ Support to map an object verb to a custom Front End URL has been added to Object
 
 For more information about this feature, click [here](Foundry/voltmx_foundry_user_guide/Content/FrontEndAPIURL_Objects.md).
 
+<!--
 ### Enhancements to Cloud Installer on MS Azure
 
 Added support to use multiple nodepools in a single cluster on Azure Kubernetes Service (AKS).
 
 For more information about this feature, click [here](Foundry/voltmxfoundry_on_azure/Content/VoltMX_Foundry_on_Azure.md#multiple-node-pools-in-azure-kubernetes-service).
+-->
 
 ### Support for WebSockets to the Volt Foundry Cloud
 
@@ -524,7 +527,6 @@ For information about this feature, refer to the following links:
 
 *   For the On-Premises Containers solution, click [here](Foundry/voltmxfoundry_containers_solution_on-prem/Content/VoltMX_Foundry_Containers_Solution_On-Prem.md#overview).
 *   For the Single-container solution, click [here](Foundry/voltmxfoundry_single_container/Content/VoltMX_Foundry_Single_Container_Solution_On-Prem_.md#overview).
-*   For the Microsoft Azure solution, click [here](Foundry/voltmxfoundry_on_azure/Content/VoltMX_Foundry_on_Azure.md#overview).
 *   For the Amazon EKS solution, click [here](Foundry/voltmxfoundry_on_amazon_eks/Content/foundry_on_amazon_eks.md).
 *   For the Red Hat OpenShift solution, click [here](Foundry/voltmxfoundry_on_openshift/Content/foundry_on_openShift.md).
 
@@ -544,10 +546,12 @@ Added support for installing Volt Foundry Kubernetes container on GCP from Volt 
 
 For more information on this feature, click [here](Foundry/voltmxfoundry_supported_devices_os_browsers/Content/FoundryV9SP5.md).
 
+<!--
 **Support for Azure**
 Added support for installing Volt Foundry Kubernetes container on Azure from Volt Foundry V9 SP5 onwards:
 
 For more information on this feature, click [here](Foundry/voltmxfoundry_supported_devices_os_browsers/Content/FoundryV9SP5.md).
+-->
 
 ### Helm Charts for installing Foundry to existing Kubernetes cluster
 
