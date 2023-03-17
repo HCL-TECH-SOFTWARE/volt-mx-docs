@@ -10,7 +10,7 @@ Use a Map widget to display locations on a map. Platforms such as iPhone (above 
 | Platform | Mapping Service |
 | --- | --- |
 | Android | Google Maps |
-| iPhone | Google Maps |
+| iPhone | iOS Native Framework Map |
 | Mobile Web (advanced) | Google Static Maps, Native maps of the device, and interactive maps (Java script) |
 
 On platforms where a native map widget is not available, the Map widget integrates with Google Maps to display a static image with zoom and pan controls. You can customize the map view.
