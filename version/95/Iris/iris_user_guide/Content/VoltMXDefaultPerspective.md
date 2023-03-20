@@ -81,11 +81,7 @@ The Data & Services panel contains two lists:
 You can also perform various other actions from the hamburger menu icon ![](Resources/Images/Hamburger_Menu_icon_29x31.png) of the Data & Services panel:
 
 *   [Manually refresh](DataPanel.md#manual-refresh) the data in the Data & Services panel by using the Refresh button.  
-      
-    ![](Resources/Images/Linked_Foundry_App.png)
 *   [Publish your Volt MX Irisapp to Volt MX Foundry](PublishVoltMXFoundryServicesApp.md), and much more.  
-      
-    ![](Resources/Images/VoltMX_Foundry_Starter.PNG)
 
 [Return to the diagram](#the-volt-mx-iris-default-perspective)
 
