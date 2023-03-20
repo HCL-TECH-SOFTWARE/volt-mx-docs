@@ -11,7 +11,9 @@ Revision History
 
 | **Date** | **Document Version** | **Description of Modifications/Release** |
 | --- | --- | --- |
-| 12/02/2022 | 1.0 | Document published for V9.5 GA. |
+| 02/20/2023 | 1.1 | Document published for V9 Servicepack 5 Fixpack 2. |
+| 12/02/2022 | 1.0 | Document published for V9 Servicepack 5. |
+
 
 Getting Started Options
 
