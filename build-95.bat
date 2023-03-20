@@ -25,7 +25,6 @@ _data\voltmx_foundry_manual_install_guide_95.yml+^
 _data\voltmx_foundry_windows_install_guide_95.yml+^
 _data\voltmxfoundry_containers_solution_on-prem_95.yml+^
 _data\voltmxfoundry_on_amazon_eks_95.yml+^
-_data\voltmxfoundry_on_azure_95.yml+^
 _data\voltmxfoundry_on_openshift_95.yml+^
 _data\voltmxfoundry_single_container_95.yml+^
 _data\voltmxfoundry_containers_helm_95.yml+^
