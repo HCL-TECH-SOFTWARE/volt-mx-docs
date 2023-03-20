@@ -27,9 +27,9 @@ The Patch Installer uses hotfix archives and applies the software updates to an 
 
 <b>To download Volt MX Foundry Patch Installer and hotfixes, follow these steps:</b>
 
-1. Login to the <a href="https://id.hcltechsw.com" target="_blank">HCL License & Download Portal.</a>
+1. Login to the <a href="https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/logon.do" target="_blank">HCL License & Download Portal.</a>
 
-      If you do not have login credentials, follow the steps discussed in this article, <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0069114">How to register to HCLSoftware portals</a>. For more info on the portal, refer to <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0073344" target="_blank">this article.</a> or contact support by creating a Download Case.
+      If you do not have login credentials, follow the steps discussed in this article, <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0069114" target="_blank">How to register to HCLSoftware portals.</a> For more info on the portal, refer to <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0073344" target="_blank">this article.</a> or contact support by creating a Download Case.
 
 2. Locate HCL Volt MX in Your Downloads, and select HCL Volt Foundry
    v9.x.x.
