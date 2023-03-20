@@ -23,7 +23,8 @@ Use the Helm upgrade command to upgrade the version of the chart or change the c
 
 ### Applying an updated version of Volt MX Foundry
 
-Please see [How to Upgrade Individual Foundry Components](Installing_Containers_With_Helm_PostInstallation#how-to-upgrade-individual-foundry-components) for more information.
+Please see [How to Upgrade Individual Foundry Components](Installing_Containers_With_Helm_PostInstallation.md#how-to-upgrade-individual-foundry-components) or
+[How to Upgrade All Foundry Components](Installing_Containers_With_Helm_PostInstallation.md#how-to-upgrade-all-foundry-components) for more information.
 
 ### Enabling or disabling Foundry components
 

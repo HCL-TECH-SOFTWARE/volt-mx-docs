@@ -224,7 +224,7 @@ Use the following URLs to confirm that each service is available:
 
 ## Kuberhealthy Helm Charts
 
-Kuberhealthy is an operator for running synthetic checks. By creating a custom resource (a khcheck) in your cluster, you can easily enable various synthetic test containers. Kuberhealthy is not provided as part of Foundry installation as it is an add-on feature. The Kuberhealthy installation requires the following prerequisites: Prometheus, Alert Manager, and Grafana. If you do not already have this support installed in you environment, you can easily do so via Helm Charts.
+Kuberhealthy is an operator for running synthetic checks. By creating a custom resource (a khcheck) in your cluster, you can easily enable various synthetic test containers. Kuberhealthy is not provided as part of Foundry installation as it is an add-on feature. The Kuberhealthy installation requires the following prerequisites: Prometheus, Alert Manager, and Grafana. If you do not already have this support installed in your environment, you can easily do so via Helm Charts.
 
 ### Prerequisites
 
