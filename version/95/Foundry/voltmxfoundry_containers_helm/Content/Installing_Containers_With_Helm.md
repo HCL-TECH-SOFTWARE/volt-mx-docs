@@ -37,18 +37,18 @@ Download the Foundry Helm chart from [HCL Flexnet software portal](https://hclso
 
 # Configuration
 
-The following parameters are specified in the values.yaml file within the Helm Chart and should be reviewed and customized.  Alternatively, values can be overridden and specified with `--set parameterName=value` arguments with `helm install` but we encourage you to persist your changes in values.yaml.
+The following parameters are specified in the values.yaml file within the Helm chart and should be reviewed and customized.  Alternatively, values can be overridden and specified with `--set parameterName=value` arguments with `helm install` but we encourage you to persist your changes in values.yaml.  There are two charts in this solution and both are required.  The database update chart must be installed first and performs the database creation or update.  The second installs the Foundry applications.  Both charts use the same values.yaml file.
 
 1. Foundry uses several Global Unique IDs to distinguish different installations of Foundry. If you are upgrading an existing Volt MX Foundry deployment you should configure this deployment with the same account identifiers from your prior deployment.
 
     Upgrading from a prior version of Foundry:
 
     - Obtain the `upgrade.properties` file from your prior deployment copying it into the same directory as values.yaml.
-    - Invoke the init-guid script specifying the file path of the prior deployment's upgrade.properties:  `./init-guid.sh --upgrade .`
+    - Invoke the init-guids script specifying the file path of the prior deployment's upgrade.properties:  `./init-guids.sh --upgrade .`
 
     For a new deployment (non upgrade):
 
-    - Invoke the init-guid script specifying the --new option:  `./init-guid.sh --new`.  Be aware that this script will create a new file called "upgrade.properties" that you should save in the event you want to later upgrade this deployment.
+    - Invoke the init-guids script specifying the --new option:  `./init-guids.sh --new`.  Be aware that this script will create a new file called "upgrade.properties" that you should save in the event you want to later upgrade this deployment.
 
     Both of these steps will update `values.yaml` with the necessary configuration changes.  This step is required prior to installing with Helm.
 
@@ -58,40 +58,48 @@ The following parameters are specified in the values.yaml file within the Helm C
 
 3. **foundryInstallType**: The deployment must be marked as either production or non production.  This parameter must be specified and it must be either "PRODUCTION" or "NON-PRODUCTION".
 
-4. **Install Components**: The following properties must be set to either true or false.  They specify if the component will be install or not.
+4. **Install Components**: The following properties must be set to either true or false.  They specify if the component will be installed or not.
 
     - identityEnabled
     - consoleEnabled
     - apiPortalEnabled
     - integrationEnabled
-    - messagingEnabled
     - engagementEnabled
     - dbUpdateEnabled
 
 5. **Application Server Details**
 
+    - **enableCaCertsOverride**: If you are utilizing a self signed cert or using a cert that was issued by a certificate authority (CA) not preloaded by the JRE trust store, you will need to add your certificate to the trust store located in `apps/certs/cacerts` and set this property to `true`.  At the present time you must leave the trust store password with the default of "changeit".
+
     - **serverDomainName**: The **Domain Name** for Volt MX Foundry deployment. This value should be the hostname of the LoadBalancer. For example: foundry.example.com  (DNS name).
 
       > **_Note:_** This property cannot be an IP address or 'localhost'.
-
-    - **enableCaCertsOverride**: If you are utilizing a self signed cert or using a cert that was issued by a certificate authority (CA) not preloaded by the JRE trust store, you will need to add your certificate to the trust store located in `certs/cacerts` and set this property to `true`.  At the present time you must leave the trust store password with the default of "changeit".
 
 6. **Ingress Details**
 
     - **Overview**: Ingress provides external access to the services in your Kubernetes cluster.  It is required to enable browsers to access the applications and also used by the backend services to communicate with each other.
 
-    - **ingressEnabled**: true if Ingress should be enabled.  Ingress must be enabled for Foundry to function properly, but there are certain conditions where you may want to temporarily disable Ingress.
+    - **ingress.enabled**: true if Ingress should be enabled.  Ingress must be enabled for Foundry to function properly, but there are certain conditions where you may want to temporarily disable Ingress.
 
-    - **ingressProtocol**: The communication protocol for accessing Volt MX Foundry. This value can be either http or https.  This should reflect the type of traffic you want the Ingress or Load Balancer to accept.
+    - **ingress.protocol**: The communication protocol for accessing Volt MX Foundry. This value can be either http or https.  This should reflect the type of traffic you want the Ingress or Load Balancer to accept. **Note:** If ingress.tls is enabled, this setting should be https or the Foundry setup will fail.
 
-    - **ingressPort**: This port is the port that Ingress will be listening on for requests to Foundry.  Generally this is 80 or 443.  This property is used together with IngressProtocol to build URLs used for end users and for Foundry to communicate between applications.
+    - **ingress.port**: This port is the port that Ingress will be listening on for requests to Foundry.  Generally this is 80 or 443.  This property is used together with ingress.protocol to build URLs used for end users and for Foundry to communicate between applications. **Note:** If tls is enabled this setting should be 443.
 
-    - **ingressClass**: The ingressClass property is used to set the class name on the Ingress object.  The default is empty string which will enable the Ingress objects to be processed by your cluster default Ingress controller.  If your cluster does not have a default Ingress controller or if you want to override that, you can set the class name here.  Common values you might use include "nginx", "traefik", and "openshift-default".
+    - **ingress.class**: The class property is used to set the class name on the Ingress object.  The default is empty string which will enable the Ingress objects to be processed by your cluster default Ingress controller.  If your cluster does not have a default Ingress controller or if you want to override that, you can set the class name here.  Common values you might use include "nginx", "traefik", and "openshift-default". When utilizing Azure Application Gateway in AKS specify "azure/application-gateway".
 
-    - **ingressAnnotations**:  ingressAnnotations allow you to specify additional annotations that will be added to every ingress object.  Add one annotation per line, each annotation should be indented 2 spaces and should be of the format of
-`annotationName: value`.  When rendered, your annotation value will automatically be quoted.
+    - **ingress.annotations**:  ingress.annotations allow you to specify additional annotations that will be added to every ingress object.  Add one annotation per line, each annotation should be indented 2 spaces and should be of the format of `annotationName: value`.  When rendered, your annotation value will automatically be quoted.
 
-    - **enableOpenShiftSSLTermination**: When this property is set to true, an annotation is added to each Ingress object signifying that the annotation `route.openshift.io/termination: "edge"` should be set.  This in turn causes OpenShift to configure routes and Ingress to accept connections on TLS/HTTPS and terminate the SSL connection while proxying the request over HTTP to the backend services.  This property should be used when configuring OpenShift with secured Ingress.
+    - **ingress.tls**: Use this property to configure Ingress with either the Cluster or a Custom SSL certificate.
+
+    - **ingress.tls.enabled**: When this property is set to true, Ingress is configured to use the Cluster SSL Certificate or the specified Custom SSL certificate.
+
+    - **ingress.tls.customCert**: Use this property to specify a Custom SSL certificate. If ingress.tls.customCert.cert and ingress.tls.customCert.key are not set, then the Cluster SSL certificate will be used for tls.
+
+    - **ingress.tls.customCert.cert**: The file name for the custom certificate.  Place your SSL certificate file in the `apps/certs`.  The value of this property should be a file path of the form `certs/my-custom-cert.cert` where certs/ is the subdirectory name and my-custom-cert.cert is the name of your certificate file.  This certificate must be in DER format as per [Section 5.1 of RFC 7468](https://datatracker.ietf.org/doc/html/rfc7468#section-5.1).
+
+    - **ingress.tls.customCert.key**: The file name for the custom key.  Place your SSL certificate key file in the `apps/certs` subdirectory.  The value of this property should be of the form `certs/my-custom-cert.key` where certs/ is the subdirectory and my-custom-cert.key is the name of your private key file.  The key file must be PKCS #8 in DER format [Section 11 of RFC 7468](https://datatracker.ietf.org/doc/html/rfc7468#section-11).
+
+    - **ingress.sslTermination**: This property is specific to OpenShift.  When this property is set to true, an annotation is added to each Ingress object signifying that the annotation `route.openshift.io/termination: "edge"` should be set.  This in turn causes OpenShift to configure routes and Ingress to accept connections on TLS/HTTPS and terminate the SSL connection while proxying the request over HTTP to the backend services.  This property should be used when configuring OpenShift with secured Ingress.
 
 7. **Database Details**
 
@@ -173,14 +181,14 @@ The following parameters are specified in the values.yaml file within the Helm C
 
 13. **Number of instances to be deployed for each component**: Each application can be configured to specify the number of container replicas.  The default value is 1.  Under each application locate the variable called `replicas`.
 
-14. **VoltMX Foundry Account Registration Details**: Software license registration must be done after installation with Helm (prior version of install were capable of doing the registration during install).  After logging into the newly deployed console a link at the top of every page will take you to the registration page to activate the software license.
+14. **VoltMX Foundry Account Registration Details**: Software license registration must be done after installation with Helm (prior versions of the install were capable of doing the registration during install).  After logging into the newly deployed console a link at the top of every page will take you to the registration page to activate the software license.
 
 
 # Installation
 
 **Steps to Install Volt MX Foundry Container Cluster Solution:**
 
-1. Download the Helm charts from [HCL Flexnet software portal](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.5.x&orgId=HCL) and unzip the contents.   With a command prompt, cd to the root of the unzipped content (you will see `Chart.yaml` and `values.yaml` here).
+1. Download the Helm charts from [HCL Flexnet software portal](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.5.x&orgId=HCL) and unzip the contents.   With a command prompt, cd to the root of the unzipped content (you will see `values.yaml` here along with Charts in the subdirectories named `apps` and `dbupdate`).
 
     <pre><code>
     $ mkdir ~/Foundry-9.5.0.0_GA
@@ -191,7 +199,7 @@ The following parameters are specified in the values.yaml file within the Helm C
  2. Execute `init-guids.sh` to initialize account details.  Specify --upgrade if you are upgrading an existing installation.
 
     <pre><code>
-    $ ./init-guid.sh --new
+    $ ./init-guids.sh --new
     ACCOUNTS_ENCRYPTION_KEY=b28e44b3-a5c6-8561-12cd-ef95b37f5f3c
     WAAS_MASTER_KEY=a7d6b717-07f8-011a-8095-755c340dc976
     WAAS_MASTER_KEY_ID=7d58a92c-e9db-1ebc-084f-6f0640fb5b42
@@ -200,7 +208,7 @@ The following parameters are specified in the values.yaml file within the Helm C
     useExistingDb=false
     New keys have been saved to values.yaml, you may proceed with 'helm install'.
     </code></pre>
- 
+
  3. Customize values.yaml with your deployment details.  Consult the configuration section above.
 
     <pre><code>
@@ -218,62 +226,89 @@ The following parameters are specified in the values.yaml file within the Helm C
     ....
     </code></pre>
 
- 5. Create the Foundry namespace and make it your current context.  This step is optional but suggested.
+ 5. Create the Foundry namespace and make it your current context.  This step is optional but suggested. **Note:** If you do not create the namespace and make it the current context, you will need to use the option to create the namespace on your first helm command and specify the namespace option on each of your subsequent helm and kubectl commands. The namespace option is shown on the helm commands on the following steps as an example.
 
     <pre><code>
     $ kubectl create namespace foundry
-    namespace/foundry created
-
+    namespace/foundry created<br />
     $ kubectl config set-context --current --namespace=foundry
     Context "kube-cluster1" modified.
     </code></pre>
 
- 6. Install Foundry with Helm.
+ 6. Install the Foundry DB Update application with Helm.
 
     <pre><code>
-    $ helm install foundry . -n foundry
-    NAME: foundry
-    LAST DEPLOYED: Mon Nov 21 22:23:54 2022
+    $ helm install dbupdate dbupdate -f values.yaml -n foundry
+    NAME: dbupdate
+    LAST DEPLOYED: Fri Jan 20 08:10:15 2023
     NAMESPACE: foundry
     STATUS: deployed
     REVISION: 1
     TEST SUITE: None
     </code></pre>
 
- 7. The deployment will take some time.  Six container images must be downloaded from the HCL container repository and then the database must be created.  After this, each container will be started and Tomcat initialized.  You can watch the progress of the deployment with a variety of commands.   The command below watches the pod status and updates the output as the deployment progresses:
+    This will deploy the Foundry database update application which will perform the necessary steps to create or upgrade your databases for Foundry.
+
+ 7. The database update image will be pulled down from the HCL repository, installed into your cluster, and the database job will be run.   Check the status of the job and verify the logs are error free:
+
+    <pre><code>
+    $ kubectl get pods -n foundry
+    NAME                                READY   STATUS      RESTARTS   AGE
+    foundry-db-update-zfd4b             0/1     Completed   0          16m<br />
+    $ kubectl logs foundry-db-update-zfd4b -n foundry | less
+    </code></pre>
+
+ 8. Install the Foundry applications with Helm (make certain step 6 completed successfully).
+
+    <pre><code>
+    $ helm install foundry apps -f values.yaml -n foundry
+    NAME: foundry
+    LAST DEPLOYED: Fri Jan 20 08:21:36 2023
+    NAMESPACE: foundry
+    STATUS: deployed
+    REVISION: 1
+    TEST SUITE: None
+    NOTES:
+    Application has been deployed successfully.
+    .
+    .
+    .
+    To verify application is running visit the url below;
+    http://foundry.example.com/mfconsole
+    </code></pre>
+
+ 9. The deployment will take some time.  Container images must be downloaded from the HCL container repository and then started and applications initialized.  You can watch the progress of the deployment with a variety of commands.   The command below watches the pod status and updates the output as the deployment progresses:
 
     <pre><code>
     $ kubectl get pods -w
     NAME                                         READY   STATUS     RESTARTS   AGE
-    foundry-db-update-zfd4b                      1/1     Running    0          28s
-    voltmx-foundry-apiportal-fff6c987b-nv5pw     0/1     Init:0/1   0          28s
-    voltmx-foundry-console-64d579d5f7-c6p8r      0/1     Init:0/1   0          28s
-    voltmx-foundry-engagement-569dcb594-9bt2s    0/1     Init:0/1   0          28s
-    voltmx-foundry-identity-5454597447-jgd6b     0/1     Init:0/1   0          28s
-    voltmx-foundry-integration-fb5b78bc9-j2n5q   0/1     Init:0/1   0          28s
-    foundry-db-update-zfd4b                      0/1     Completed   0          81s
-    foundry-db-update-zfd4b                      0/1     Completed   0          83s
+    foundry-db-update-zfd4b                      0/1     Completed  0          28s
+    voltmx-foundry-apiportal-fff6c987b-nv5pw     0/1     Init:0/1   0          62s
+    voltmx-foundry-console-64d579d5f7-c6p8r      0/1     Init:0/1   0          62s
+    voltmx-foundry-engagement-569dcb594-9bt2s    0/1     Init:0/1   0          62s
+    voltmx-foundry-identity-5454597447-jgd6b     0/1     Init:0/1   0          62s
+    voltmx-foundry-integration-fb5b78bc9-j2n5q   0/1     Init:0/1   0          62s
     voltmx-foundry-identity-5454597447-jgd6b     0/1     PodInitializing   0          85s
     voltmx-foundry-integration-fb5b78bc9-j2n5q   0/1     PodInitializing   0          85s
     voltmx-foundry-apiportal-fff6c987b-nv5pw     0/1     PodInitializing   0          85s
     voltmx-foundry-console-64d579d5f7-c6p8r      0/1     PodInitializing   0          85s
     voltmx-foundry-engagement-569dcb594-9bt2s    0/1     PodInitializing   0          85s
-    voltmx-foundry-console-64d579d5f7-c6p8r      0/1     Running           0          2m15s
-    voltmx-foundry-identity-5454597447-jgd6b     0/1     Running           0          2m15s
-    voltmx-foundry-integration-fb5b78bc9-j2n5q   0/1     Running           0          2m15s
-    voltmx-foundry-apiportal-fff6c987b-nv5pw     0/1     Running           0          2m15s
-    voltmx-foundry-apiportal-fff6c987b-nv5pw     1/1     Running           0          3m
-    voltmx-foundry-identity-5454597447-jgd6b     1/1     Running           0          3m1s
-    voltmx-foundry-engagement-569dcb594-9bt2s    0/1     Running           0          3m2s
-    voltmx-foundry-integration-fb5b78bc9-j2n5q   1/1     Running           0          3m2s
-    voltmx-foundry-console-64d579d5f7-c6p8r      1/1     Running           0          3m19s
-    voltmx-foundry-engagement-569dcb594-9bt2s    1/1     Running           0          3m30s
+    voltmx-foundry-console-64d579d5f7-c6p8r      0/1     Running           0          1m15s
+    voltmx-foundry-identity-5454597447-jgd6b     0/1     Running           0          1m15s
+    voltmx-foundry-integration-fb5b78bc9-j2n5q   0/1     Running           0          1m15s
+    voltmx-foundry-apiportal-fff6c987b-nv5pw     0/1     Running           0          1m15s
+    voltmx-foundry-apiportal-fff6c987b-nv5pw     1/1     Running           0          2m
+    voltmx-foundry-identity-5454597447-jgd6b     1/1     Running           0          2m1s
+    voltmx-foundry-engagement-569dcb594-9bt2s    0/1     Running           0          2m2s
+    voltmx-foundry-integration-fb5b78bc9-j2n5q   1/1     Running           0          2m2s
+    voltmx-foundry-console-64d579d5f7-c6p8r      1/1     Running           0          2m19s
+    voltmx-foundry-engagement-569dcb594-9bt2s    1/1     Running           0          2m30s
     ^C
     </code></pre>
 
     The `-w` option is short for `watch` and it causes kubectl to monitor the status and update the output with any changes.  You must press `ctrl-c` to terminate this command.
 
- 8. Verify the deployment.   Using the commands below, you should see similar output:
+ 10. Verify the deployment.   Using the commands below, you should see similar output:
 
     <pre><code>
     $ kubectl get pods
@@ -286,17 +321,16 @@ The following parameters are specified in the values.yaml file within the Helm C
     voltmx-foundry-integration-fb5b78bc9-j2n5q   1/1     Running     0          8m7s
     </code></pre>
 
-    Each pod should show a status of `Running` and it should indicate 1/1 in the Ready column indicating each pod has 1 out of 1 container in the Ready status.
+    Each pod should show a status of `Running` and it should display 1/1 in the Ready column indicating each pod has 1 out of 1 container in the Ready status.
 
     <pre><code>
     $ kubectl get endpoints
     NAME                         ENDPOINTS           AGE
-    mysql-service                10.131.0.109:3306   5d11h
-    voltmx-foundry-apiportal     10.130.3.124:8080   14m
-    voltmx-foundry-console       10.130.3.125:8080   14m
-    voltmx-foundry-engagement    10.130.3.129:8080   14m
-    voltmx-foundry-identity      10.130.3.127:8080   14m
-    voltmx-foundry-integration   10.130.3.126:8080   14m
+    voltmx-foundry-apiportal     10.130.3.124:8080   4m
+    voltmx-foundry-console       10.130.3.125:8080   4m
+    voltmx-foundry-engagement    10.130.3.129:8080   4m
+    voltmx-foundry-identity      10.130.3.127:8080   4m
+    voltmx-foundry-integration   10.130.3.126:8080   4m
     </code></pre>
 
     Endpoints show what IP Address/port each service will route requests to.  If you change the replica count you should see an associated endpoint address for each replica.
@@ -304,24 +338,24 @@ The following parameters are specified in the values.yaml file within the Helm C
     <pre><code>
     $ kubectl get ingress
     NAME          CLASS    HOSTS                                   ADDRESS                                        PORTS   AGE
-    auth          <none>   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
-    console       <none>   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
-    engagement    <none>   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
-    integration   <none>   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
-    portal        <none>   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
+    auth                   foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
+    console                foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
+    engagement             foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
+    integration            foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
+    portal                 foundry.apps.dsocp.nonprod.hclpnp.com   router-default.apps.dsocp.nonprod.hclpnp.com   80      11m
     </code></pre>
 
-    For each Ingress we should see that an address has been assigned.  If there is no address listed, Ingress will not function.  Generally a lack of address means that no ingress controller has determined it should setup the ingress.  This is usually caused by incorrectly specifying the ingressClass in values.yaml.  You can correct this and then run `helm upgrade foundry .` and Helm will apply the class name change for you.
+    For each Ingress we should see that an address has been assigned.  If there is no address listed, Ingress will not function.  Generally a lack of address means that no ingress controller has determined it should setup the ingress.  This is usually caused by incorrectly specifying the ingress.class in values.yaml.  You can correct this and then run `helm upgrade foundry apps -f values.yaml -n foundry` and Helm will apply the class name change for you.
 
     If the pods are all showing ready and your Ingress shows addresses, you should be ready to open the Foundry Console in your browser.   Using the **host name** shown in the output, open the console in your browser.  From the output above, we would use <http://foundry.apps.dsocp.nonprod.hclpnp.com/mfconsole>.
 
 
 ## Uninstalling Foundry
-Foundry can be uninstalled with the command `helm uninstall foundry`.  If your Kubernetes context is not set to the foundry namespace you may need to specify the `-n <namespace>` parameter as in `helm uninstall foundry -n foundry`.   This will uninstall the deployment of Foundry in Kubernetes (it will stop the containers and pods and delete them from the work load, along with any secrets, configmaps, ingress and other metadata).  This will not do anything to remove databases that were created during install: those must be manually deleted with database tools.
+The Foundry database update job and Foundry applications can be uninstalled with two commands: `helm uninstall foundry` and `helm uninstall dbupdate`.  If your Kubernetes context is not set to the foundry namespace you may need to specify the `-n <namespace>` parameter as in `helm uninstall foundry -n foundry`.   This will uninstall the deployment of Foundry in Kubernetes (it will stop the containers and pods and delete them from the work load, along with any secrets, configmaps, ingress and other metadata).  This will not remove databases that were created during install: those must be manually deleted with your database tools.
 
 
 ## Modifying Foundry configuration
-With the exception of database changes (any database related parameters), you can usually modify the values.yaml file and then run `helm upgrade foundry . -n foundry` and Helm will update configuration and restart any impacted pods.   For instance, if you install foundry but find you failed to properly specify the ingressClass name, you could edit values.yaml, update the ingressClass parameter and then run `helm upgrade foundry . -n foundry`.
+With the exception of database changes (any database related parameters), you can usually modify the values.yaml file and then run `helm upgrade foundry apps -f values.yaml -n foundry` and Helm will update configuration and restart any impacted pods.   For instance, if you install foundry but find you failed to properly specify the ingress.class name, you could edit values.yaml, update the ingress.class parameter and then run `helm upgrade foundry apps -f values.yaml -n foundry`.  In the event that `helm upgrade` does not work for you, you could uninstall foundry with `helm uninstall foundry -n foundry` and then re-install the Foundry applications.
 
 
 ## Troubleshooting
