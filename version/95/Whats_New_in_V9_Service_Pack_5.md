@@ -490,15 +490,7 @@ Added support to enable HTTPS passthrough mode for creating routes on OpenShift.
 
 For more information about this feature, click [here](Foundry/voltmxfoundry_on_openshift/Content/configuration_and_setup.md#application-server-details).
 
-### External Authentication with Azure-SAML
-
-Volt Foundry now supports external authentication by using Azure-SAML.
-
-For more information about this feature, click [here](Foundry/voltmx_foundry_user_guide/Content/Settings_Cloud.md#Azure-SAML).
-
-
 ### Enhancements to Volt Foundry Installer
-
 
 **Encryption support for passwords**
 
