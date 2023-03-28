@@ -211,9 +211,9 @@ cat server.crt | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > ./server
 
 
 
-## Specifying the Pod Disruption Budget
+## Specifying the PodDisruptionBudget
 
-A **Pod disruption budget** is an indicator of the number of disruptions that can be tolerated at a given time for a class of pods (a budget of faults). Whenever a disruption to the pods in a service is calculated to cause the service to drop below the budget when using **minAvailable**, the operation is paused until it can maintain the budget. For example, a drain event could be temporarily halted while it waits for more pods to become available such that the budget isn’t crossed by evicting the pods. Likewise, when using **maxUnavailable** the operation is paused if a disruption to the pods exceeds the setting.
+A **PodDisruptionBudget** is an indicator of the number of disruptions that can be tolerated at a given time for a class of pods (a budget of faults). Whenever a disruption to the pods in a service is calculated to cause the service to drop below the budget when using **minAvailable**, the operation is paused until it can maintain the budget. For example, a drain event could be temporarily halted while it waits for more pods to become available such that the budget isn’t crossed by evicting the pods. Likewise, when using **maxUnavailable** the operation is paused if a disruption to the pods exceeds the setting.
 
 To configure a Pod disruption budget, edit the values.yaml file and uncomment the **podDisruptionBudgetSpec** and either the **maxUnavailable** or **minAvailable** setting for your Foundry applications.
 You can change the **maxUnavailable** to denote the maximum number of unavailable pods at given point of time
@@ -235,6 +235,13 @@ or the **minAvailable** setting to denote the minimum number of available pods a
 ## Configuration Updates via Helm Upgrade
 
 You can use Helm upgrade if you need to change a configuration parameter on your Volt MX Foundry deployment. One example is your Ingress is not working, because you forgot to set the Ingress Class name as part of your initial deployment. You could update the class name via `ingress.class` in values.yaml, then run Helm upgrade, and only the Ingress objects would be changed.
+
+
+## Encrypt the Database Password
+
+The steps for encrypting the database password are the same as the steps used for the Volt MX Foundry Containers Solution On-Premises. The exception is that the values displayed for the **Encrypted Password** and **Encrypted Key** must be used for the `dbPass` and `dbPassSecretKey` parameters in the `values.yaml` file. For more information see the documentation for the Volt MX Foundry Containers Solution On-Premises:
+[Encrypt the Database Password](../../../Foundry/voltmxfoundry_containers_solution_on-prem/Content/Containers_Solution_Appendices.md#encrypt-the-database-password).
+
 
 ## Other Issues
 
