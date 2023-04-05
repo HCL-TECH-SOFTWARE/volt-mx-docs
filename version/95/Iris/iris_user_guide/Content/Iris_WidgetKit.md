@@ -83,9 +83,9 @@ To use iOS Home Screen Widgets in Volt MX Iris, you must include the widget conf
             *   **MEDIUM** key: The value for this key is the form.json structure of the medium widget.
             *   **LARGE** key: The value for this key is the form.json structure of the large widget.
             *   **EXTRALARGE** key: The value for this key is the form.json structure of the extralarge widget.
-        7.  If the widget does not support a particular size, the value for that particular key must be an empty string.
+            If the widget does not support a particular size, the value for that particular key must be an empty string.
             If the composite form.json file does not exist, the composite structure file will be generated from the from.sm folder, and the themes are combined.
-        8.  **widgetURL**: A deep link URL that the application is expected to receive when a user taps the widget.
+        7.  **widgetURL**: A deep link URL that the application is expected to receive when a user taps the widget.
 
     *   **CommonJSScripts** - A folder that contains the common JS files used by both the main iOS application and the widget (both the app and the widget use different environments).
 
