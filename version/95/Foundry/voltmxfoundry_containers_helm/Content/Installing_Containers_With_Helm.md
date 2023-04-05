@@ -191,9 +191,9 @@ The following parameters are specified in the values.yaml file within the Helm c
 1. Download the Helm charts from [HCL Flexnet software portal](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.5.x&orgId=HCL) and unzip the contents.   With a command prompt, cd to the root of the unzipped content (you will see `values.yaml` here along with Charts in the subdirectories named `apps` and `dbupdate`).
 
     <pre><code>
-    $ mkdir ~/Foundry-9.5.2.0_GA
-    $ cd ~/Foundry-9.5.2.0_GA
-    $ unzip ~/Downloads/HelmChart-9.5.2.0_GA.zip
+    $ mkdir ~/Foundry-9.5.0.0_GA
+    $ cd ~/Foundry-9.5.0.0_GA
+    $ unzip ~/Downloads/HelmChart-9.5.0.0_GA.zip
     </code></pre>
 
  2. Execute `init-guids.sh` to initialize account details.  Specify --upgrade if you are upgrading an existing installation.
@@ -308,7 +308,7 @@ The following parameters are specified in the values.yaml file within the Helm c
 
     The `-w` option is short for `watch` and it causes kubectl to monitor the status and update the output with any changes.  You must press `ctrl-c` to terminate this command.
 
- 10. Verify the deployment.  Using the commands below, you should see similar output:
+ 10. Verify the deployment.   Using the commands below, you should see similar output:
 
     <pre><code>
     $ kubectl get pods
@@ -348,145 +348,6 @@ The following parameters are specified in the values.yaml file within the Helm c
     For each Ingress we should see that an address has been assigned.  If there is no address listed, Ingress will not function.  Generally a lack of address means that no ingress controller has determined it should setup the ingress.  This is usually caused by incorrectly specifying the ingress.class in values.yaml.  You can correct this and then run `helm upgrade foundry apps -f values.yaml -n foundry` and Helm will apply the class name change for you.
 
     If the pods are all showing ready and your Ingress shows addresses, you should be ready to open the Foundry Console in your browser.   Using the **host name** shown in the output, open the console in your browser.  From the output above, we would use <http://foundry.apps.dsocp.nonprod.hclpnp.com/mfconsole>.
-
-    **Note:** All of these checks (validate pod status, ingress addresses, and health checks) are done for you if you run the command `helm test foundry -n foundry`.  This command will deploy a validation image from HCL which will run all of these tests to validate the application's health.  To see full details (and to help diagnose issues in the event of problems), run the test command and specify the `--logs` parameter.   For example:
-
-    <pre><code>
-      $ helm test foundry -n foundry --logs
-      NAME: foundry
-      LAST DEPLOYED: Tue Jan 31 21:23:43 2023
-      NAMESPACE: foundry
-      STATUS: deployed
-      REVISION: 1
-      TEST SUITE:     foundry-helm-test
-      Last Started:   Wed Feb  1 20:55:52 2023
-      Last Completed: Wed Feb  1 20:56:08 2023
-      Phase:          Succeeded
-      NOTES:
-      Application has been deployed successfully.
-
-        _______________________________________________
-
-                    Release Information
-        _______________________________________________
-
-        RELEASE TYPE: NON-PRODUCTION
-        NAMESPACE: foundry
-        RELEASE NAME: foundry
-        CHART VERSION: 1.1.0
-
-        _______________________________________________
-
-                    Build Information
-        _______________________________________________
-
-        IMAGE REGISTRY: hclcr.io/voltmx
-        BUILD VERSION: 9.5.2.0_GA
-
-        _______________________________________________
-
-                    Database Information
-        _______________________________________________
-
-        DB TYPE: mysql
-        DB HOST: mysql-service
-        DP PORT: 3306
-        DB SERVICE:
-
-        _______________________________________________
-
-                    Application Information
-        _______________________________________________
-
-        TIMEZONE: Etc/UTC
-        INGRESS ENABLED: true
-        PROTOCOL:  http
-
-        To verify application is running visit the url below;
-        http://foundry.apps.dsocp.nonprod.hclpnp.com/mfconsole
-
-        POD LOGS: foundry-helm-test
-        ############################## Foundry Health Check ###############################
-        >> Starting foundry health check...
-        >> Foundry health check completed.
-        >> STATUS: PASSED
-        ###################################################################################
-
-        ########################## Foundry Ingress Address Check ##########################
-        >> Starting foundry ingress address check...
-        >> Enabled services are auth console integration engagement portal
-
-        >> Ingress: auth
-        ++ kubectl describe ingress auth
-        ++ grep Address
-        ++ awk '{print $2}'
-        >> router-default.apps.dsocp.nonprod.hclpnp.com
-        >> STATUS: PASSED
-
-        >> Ingress: console
-        ++ kubectl describe ingress console
-        ++ grep Address
-        ++ awk '{print $2}'
-        >> router-default.apps.dsocp.nonprod.hclpnp.com
-        >> STATUS: PASSED
-
-        >> Ingress: integration
-        ++ kubectl describe ingress integration
-        ++ grep Address
-        ++ awk '{print $2}'
-        >> router-default.apps.dsocp.nonprod.hclpnp.com
-        >> STATUS: PASSED
-
-        >> Ingress: engagement
-        ++ kubectl describe ingress engagement
-        ++ grep Address
-        ++ awk '{print $2}'
-        >> router-default.apps.dsocp.nonprod.hclpnp.com
-        >> STATUS: PASSED
-
-        >> Ingress: portal
-        ++ grep Address
-        ++ kubectl describe ingress portal
-        ++ awk '{print $2}'
-        >> router-default.apps.dsocp.nonprod.hclpnp.com
-        >> STATUS: PASSED
-
-        >> Foundry ingress address check completed.
-        ###################################################################################
-
-        ############################ Foundry Pod Status Check #############################
-        >> Starting foundry pod status check...
-        >> Enabled services are identity console integration engagement apiportal
-
-        >> CONTAINER: voltmx-foundry-identity
-        ++ kubectl wait pods -l app=voltmx-foundry-identity --for condition=Ready --timeout=90s
-        ++ grep -ic 'condition met'
-        >> STATUS: PASSED
-
-        >> CONTAINER: voltmx-foundry-console
-        ++ kubectl wait pods -l app=voltmx-foundry-console --for condition=Ready --timeout=90s
-        ++ grep -ic 'condition met'
-        >> STATUS: PASSED
-
-        >> CONTAINER: voltmx-foundry-integration
-        ++ kubectl wait pods -l app=voltmx-foundry-integration --for condition=Ready --timeout=90s
-        ++ grep -ic 'condition met'
-        >> STATUS: PASSED
-
-        >> CONTAINER: voltmx-foundry-engagement
-        ++ kubectl wait pods -l app=voltmx-foundry-engagement --for condition=Ready --timeout=90s
-        ++ grep -ic 'condition met'
-        >> STATUS: PASSED
-
-        >> CONTAINER: voltmx-foundry-apiportal
-        ++ kubectl wait pods -l app=voltmx-foundry-apiportal --for condition=Ready --timeout=90s
-        ++ grep -ic 'condition met'
-        >> STATUS: PASSED
-
-        >> Foundry pod status check completed.
-        ###################################################################################
-
-    </code></pre>
 
 
 ## Uninstalling Foundry
