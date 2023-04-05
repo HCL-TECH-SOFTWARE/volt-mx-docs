@@ -1587,7 +1587,7 @@
 
 
 <h1 id="configure-ios-home-screen-widgets-in-volt-mx-iris">Configure iOS Home Screen Widgets in Volt MX Iris</h1>
-<p>A widget elevates key content from an app and displays it on the home screen of an iPhone or iPad, where users can see it at a glance. With three different sizes available (small, medium, and large), widgets can display a wide range of information. Users can personalize widgets to see details specific to their needs, and arrange their widgets in whatever way works best for them. From iPadOS 15.0+, the widget is now available in a fourth size – extralarge.</p>
+<p>A widget elevates key content from an app and displays it on the home screen of an iPhone or iPad, where users can see it at a glance. With three different sizes available (small, medium, and large), widgets can display a wide range of information. Users can personalize widgets to see details specific to their needs, and arrange their widgets in whatever way works best for them.</p>
 <p>Widgets can be designed on any Form in Volt MX Iris. To create a home screen widget for an app, follow these steps:</p>
 <ol>
 <li>In the Volt MX Iris project, create a new Form.</li>
@@ -1613,10 +1613,6 @@
 <tr>
 <td align="left">Large</td>
 <td align="left">360dp x 376dp</td>
-</tr>
-<tr>
-<td align="left">Extra Large</td>
-<td align="left">726dp x 350dp</td>
 </tr>
 </tbody>
 </table>
@@ -1680,17 +1676,16 @@ function getSnapshot(callback, widgetSize){
 <li><strong>widgetID</strong>: A unique identifier for the widget in string format. The widgetID should be same as the name of the folder that is created for the configuration of a particular widget. For example, for 'AccountsWidget' and 'TransactionsWidget' folders, widgetID (case-insensitive) could be set as 'accountsWidget' and 'transactionsWidget' respectively.</li>
 <li><strong>widgetName</strong>: The display name for the widget that appears on the device in string format.</li>
 <li><strong>widgetDescription</strong>: The description for the widget that appears on the device in string format.</li>
-<li><strong>widgetSizes</strong>: All the supported sizes of the developed widget in an array of constant strings. For example, [“SMALL", "MEDIUM", "LARGE", "EXTRALARGE"]. You can provide one or many values in the array.</li>
+<li><strong>widgetSizes</strong>: All the supported sizes of the developed widget in an array of constant strings. For example, [“SMALL", "MEDIUM", "LARGE"]. You can provide one or many values in the array.</li>
 <li><strong>widgetDir</strong>: The name of the widget directory in string format (to be packaged in the <code>KAR</code> > <code>VoltmxWidgets</code> folder)</li>
 <li><strong>widgetViews</strong>: A JSON object that contains the following key-value pairs:<ul>
 <li><strong>SMALL</strong> key: The value for this key is the name of the composite form.json structure of the small widget.</li>
 <li><strong>MEDIUM</strong> key: The value for this key is the form.json structure of the medium widget.</li>
-<li><strong>LARGE</strong> key: The value for this key is the form.json structure of the large widget.</li>
-<li><strong>EXTRALARGE</strong> key: The value for this key is the form.json structure of the extralarge widget.</li>
+<li><strong>LARGE</strong> key: The value for this key is the form.json structure of the large widget.
+If the widget does not support a particular size, the value for that particular key must be an empty string.
+If the composite form.json file does not exist, the composite structure file will be generated from the from.sm folder, and the themes are combined.</li>
 </ul>
 </li>
-<li>If the widget does not support a particular size, the value for that particular key must be an empty string.
-    If the composite form.json file does not exist, the composite structure file will be generated from the from.sm folder, and the themes are combined.</li>
 <li><strong>widgetURL</strong>: A deep link URL that the application is expected to receive when a user taps the widget.</li>
 </ol>
 </li>
@@ -1707,13 +1702,12 @@ function getSnapshot(callback, widgetSize){
             &quot;widgetID&quot;:&quot;accountsWidget&quot;,
             &quot;widgetName&quot;: &quot;Accounts Widget&quot;,
             &quot;widgetDescription&quot; : &quot;Check your accounts balance and updates at a glance&quot;,
-            &quot;widgetSizes&quot;:[&quot;SMALL&quot;, &quot;MEDIUM&quot;, &quot;LARGE&quot;, &quot;EXTRALARGE&quot;],
+            &quot;widgetSizes&quot;:[&quot;SMALL&quot;, &quot;MEDIUM&quot;, &quot;LARGE&quot;],
             &quot;widgetDir&quot;: &quot;AccountsWidget&quot;,
             &quot;widgetViews&quot;:{
                 &quot;SMALL&quot; : &quot;accountsWidgetSmall.json&quot;,
                 &quot;MEDIUM&quot; : &quot;accountsWidgetMedium.json&quot;,
-                &quot;LARGE&quot; : &quot;accountsWidgetLarge.json&quot;,
-                &quot;EXTRALARGE&quot; : &quot;accountsWidgetExtraLarge.json&quot;
+                &quot;LARGE&quot; : &quot;accountsWidgetLarge.json&quot;
             },
             &quot;widgetURL&quot;:&quot;widget://accounts&quot;
         },
@@ -1721,13 +1715,12 @@ function getSnapshot(callback, widgetSize){
             &quot;widgetID&quot; : &quot;scheduledTransactionsWidget&quot;,
             &quot;widgetName&quot; : &quot;Upcoming transactions&quot;,
             &quot;widgetDescription&quot; : &quot;Check when your next transaction is schduled at&quot;,
-            &quot;widgetSizes&quot; : [&quot;SMALL&quot;],
+            &quot;widgetSizes&quot; : [&quot;SMALL&quot;\],
             &quot;widgetDir&quot; : &quot;ScheduledTransactionsWidget&quot;,
             &quot;widgetViews&quot; : {
                 &quot;SMALL&quot; : &quot;scheduledTransactionsWidgetSmall.json&quot;,
                 &quot;MEDIUM&quot; : &quot;&quot;,
-                &quot;LARGE&quot; : &quot;&quot;,
-                &quot;EXTRALARGE&quot; : &quot;&quot;
+                &quot;LARGE&quot; : &quot;&quot;
             },
             &quot;widgetURL&quot; : &quot;widget://scheduledTransactions&quot;
         },
@@ -1740,14 +1733,12 @@ function getSnapshot(callback, widgetSize){
             &quot;widgetViews&quot; : {
                 &quot;SMALL&quot; : &quot;&quot;,
                 &quot;MEDIUM&quot; : &quot;transactionWidgetMedium.json&quot;,
-                &quot;LARGE&quot; : &quot;transactionWidgetLarge.json&quot;,
-                 &quot;EXTRALARGE&quot; : &quot;&quot;
+                &quot;LARGE&quot; : &quot;transactionWidgetLarge.json&quot;
             },
             &quot;widgetURL&quot; : &quot;widget://transactions&quot;
         }
     ]
 }
-
 </code></pre>
 <p>Widgets use the following two important functions:</p>
 <ul>
