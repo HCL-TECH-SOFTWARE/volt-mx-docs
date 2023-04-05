@@ -143,11 +143,6 @@ To manage properties of a component with a contract:
 Click the plus sign (+) for each pass-through property you want to define. Click the delete symbol (X) to delete an existing property. To define a new pass-through property, specify the following for each property:
 
 *   Source Widget — The widget that contains the property. Click in the **Source Widget** field to display a hierarchical list of the component's widgets, and then select the widget.
-
-From V9 SP1 FP10 version, you can add i18N properties also as a pass-through property. However, the i18N properties cannot be changed dynamically at runtime. When the i18N properties of a text is made pass-through, the corresponding text property is also made pass-through.  
-  
-From the V9 SP2 FP 7 release, you can add the [accessibilityConfig](../../iris_widget_prog_guide/Content/Button_Properties.html#accessibilityconfig) property also as a pass-through property using the **Property** panel and **Manage Properties** window. While using **Property** panel, you must make the entire **Accessibility Config** section as pass through and not the individual fields.
-
 *   Widget Property — The property that you want to define as a pass-through property. Click in the **Widget Property** field to display a list of the source widget's properties, and then select the property.
 *   Display Name — The name to display in the **Component** tab of the **Properties** pane. Click in the **Display Name** field and enter a name. The display name should start with a non-numeric character, and can contain only alphanumeric characters and spaces.
 *   Programmatic Name — The name to identify the property in code. Click in the **Programmatic Name** field, and enter a name. The programmatic name can contain only alphanumeric characters, and cannot start with a number or contain spaces.
@@ -175,9 +170,6 @@ You can also designate a widget's property as a pass-through property by navigat
 Click the plus sign (+) for each custom property you want to define. Click the delete symbol (X) to delete an existing property. To define a new custom property, specify the following for each property:
 
 *   Property Name — The name you want to give the property. Click in the **Property Name** field and enter a name. The property name can contain only alphanumeric characters, and cannot start with a number or contain spaces. The property name is used to refer to the property in code.
-
-From V9 SP2 version, you can also add i18N properties as a custom property. However, you cannot modify the i18N properties dynamically at runtime.
-
 *   Display Name — The name to display in the **Component** tab of the **Properties** pane. Click in the **Display Name** field and enter a name. The display name should start with a non-numeric character, and can contain only alphanumeric characters and spaces.
 *   Tooltip: Enter the information about the property. Developers can enter detailed information about the property to convey the functionality of the property. When a user hovers over the property of the component, information entered in this property will appear.
 *   Property Type — The data type of the property. Click in the **Property Type** field, and select a value, either _boolean_, _List Selector_, _String_, or _HTML_, _Data Grid_, _Integer_, _JSON_, or Color.
@@ -213,11 +205,9 @@ Click **Apply** to add the custom property.
 
 Unlike a pass-through property, which is based on an existing property of the component, a custom property has no built-in behavior. You must define the property's behavior programmatically. On the Templates tab, expand the component's **Modules** node, open the controller module, and add code defining the property's behavior to the controller code. For more information, see [Define the Behavior of a Custom Property, Event, or Method in Code](#define-the-behavior-of-a-custom-property_-event_-or-method-in-code).
 
-From the V9 Service Pack 3 release, support for Breakpoint Forking is available for the custom properties of a component in a Responsive Web app. You can also configure breakpoint forking for custom properties of a component at runtime. Breakpoint forking is also available for components created on previous versions of that are imported into V9 Service Pack 3.
+From the V9 Service Pack 5 release, support for Breakpoint Forking is available for the custom properties of a component in a Responsive Web app. You can also configure breakpoint forking for custom properties of a component at runtime. Breakpoint forking is also available for components created on previous versions of that are imported into V9 Service Pack 5.
 
 ### Reorder Properties or Groups
-
-From V9 SP2 GA, you can specify the order of the properties or groups in the Properties panel. Within a group you can reorder the properties.
 
 To reorder properties of a component with contract, follow these steps:
 
@@ -280,8 +270,6 @@ Click **Apply** to add the custom event. adds the event to the **Custom** sectio
 Unlike a pass-through event, which is based on an existing event of the component, a custom event has no built-in behavior. You must define the event's behavior programmatically. On the Templates tab, expand the component's **Modules** node, open the controller module, and add code defining the event's behavior to the controller code. For more information, see [Define the Behavior of a Custom Property, Event, or Method in Code](#define-the-behavior-of-a-custom-property_-event_-or-method-in-code).
 
 ### Expose Events of a Component
-
-From V9 Service Pack 2, you can select lifecycle events of the component and events of the child widgets present in the component as a pass-through event. However, you cannot add snippets, expressions (even in the mapping editor), or invoke functions while using these events.
 
 To add a widget's event as a pass-through event in a component, follow these steps:
 
@@ -431,8 +419,6 @@ When you create a component with a contract, you can define pass-through and cus
 First, specify a name for the custom property, event, or method using the **Manage Properties** dialog box. For a custom property, you can also specify a display name, data type, and default value, and whether the property is read-only or read-write. If the property has a list selector, you can specify the key value pairs that make up the list. For more information on working with the **Manage Properties** dialog box, see [Manage Properties of a Component with a Contract](#manage-properties-of-a-component-with-a-contract), [Manage Events of a Component with a Contract](#manage-events-of-a-component-with-a-contract), or [Manage Methods of a Component with a Contract](#manage-methods-of-a-component-with-a-contract).
 
 Once you specify information in the **Manage Properties** dialog box, you can add code to the component's controller module to define the behavior of the custom property, event, or method.
-
-From V9 Service Pack 2, when you create or modify a custom property through the **Manage Properties** dialog box, the getters and setters of the property are automatically added to the `initGettersSetters` function in the controller file of the component. However, when you delete a custom property, you must manually remove the code pertaining to the property.
 
 To define the behavior of a custom property, event, or method in code (Beta):
 
