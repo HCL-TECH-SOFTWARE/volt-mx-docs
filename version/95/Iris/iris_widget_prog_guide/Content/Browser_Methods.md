@@ -844,12 +844,12 @@ Available on iOS, Android, Windows, SPA platforms.
 
 * * *
 
-This method accepts a JavaScript snippet, a callback function and one more optional parameter to evaluate JavaScript in sandboxed environment.
+This method accepts a JavaScript snippet and a callback function as inputs.
 
 ### Syntax
 ```
 
-evaluateJavaScriptAsync(snippet, callback, runInSandboxedContext)
+evaluateJavaScriptAsync(snippet,callback)
 ```
 
 ### Parameters
@@ -863,14 +863,6 @@ The contents of the JavaScript code.
 function (result, voltmxError ){
 
 };
-
-### runInSandboxedContext [Boolean] – Optional
-If the value of runInSandboxedContext is true, evaluation of javascript will be done in sandboxed environment.
-If the value of runInSandboxedContext is false, evaluation of javascript will not be done in sandboxed environment.
-
-The default value of runInSandboxedContext is false and this optional parameter is only applicable for iOS .
-This parameter only works from V9.5.7.
-
 
 ### The contents of the voltmxError are:
 
@@ -887,8 +879,6 @@ Returns the output or generates VoltMXError.
 This method evaluates the snippet and invokes the callback with the result.
 
 On Android platform, this method accepts a JavaScript snippet in the form of string, and a callback function as inputs and evaluates the snippet and calls the callback with the result and error as null.
-
-On iOS platform , since iOS 14 , WKWebView introduced WkContentWorld to ensure that the JavaScript injected into the web page will run in a sandboxed environment from the JavaScript originating from the web, which may be untrusted. So this method accepts a JavaScript snippet in the form of string, and a callback function as inputs and third optional parameter to evaluates the snippet in sandboxed environment.
 
 ### Following are the platform limitations:
 
@@ -945,19 +935,6 @@ webWidget1.evaluateJavaScriptAsync("eval(2+3)",
         voltmx.print("Result:" + result);
     });
 ```
-
-```
-
-//Example2 Script evaluated in sandboxed environment.
-    webWidget1.evaluateJavaScriptAsync("document.body.style.backgroundcolor =`orange`;, this.callbackname,true);
-```
-
-```
-
-//Example3 Script evaluated in unsandboxed environment.
-    webWidget1.evaluateJavaScriptAsync("document.body.style.backgroundcolor =`pink`;, this.callbackname,false);
-```
-
 
 ### Platform Availability
 
