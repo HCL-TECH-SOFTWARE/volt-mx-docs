@@ -2,7 +2,7 @@
 Configure iOS Home Screen Widgets in Volt MX Iris
 ===================================================
 
-A widget elevates key content from an app and displays it on the home screen of an iPhone or iPad, where users can see it at a glance. With three different sizes available (small, medium, and large), widgets can display a wide range of information. Users can personalize widgets to see details specific to their needs, and arrange their widgets in whatever way works best for them. From iPadOS 15.0+, the widget is now available in a fourth size – extralarge.
+A widget elevates key content from an app and displays it on the home screen of an iPhone or iPad, where users can see it at a glance. With three different sizes available (small, medium, and large), widgets can display a wide range of information. Users can personalize widgets to see details specific to their needs, and arrange their widgets in whatever way works best for them.
 
 Widgets can be designed on any Form in Volt MX Iris. To create a home screen widget for an app, follow these steps:
 
@@ -15,7 +15,6 @@ Widgets can be designed on any Form in Volt MX Iris. To create a home screen wid
     | Small  |  169dp x 169dp  |
     | Medium |  360dp x 169dp  |
     | Large  |  360dp x 376dp  |
-    | Extra Large  |  726dp x 350dp  |
     
 4.  Create the UI of the widget by adding child widgets (for example, Label, Image, and FlexContainer widgets) to the FlexContainer widget.
 
@@ -76,13 +75,12 @@ To use iOS Home Screen Widgets in Volt MX Iris, you must include the widget conf
         1.  **widgetID**: A unique identifier for the widget in string format. The widgetID should be same as the name of the folder that is created for the configuration of a particular widget. For example, for 'AccountsWidget' and 'TransactionsWidget' folders, widgetID (case-insensitive) could be set as 'accountsWidget' and 'transactionsWidget' respectively.
         2.  **widgetName**: The display name for the widget that appears on the device in string format.
         3.  **widgetDescription**: The description for the widget that appears on the device in string format.
-        4.  **widgetSizes**: All the supported sizes of the developed widget in an array of constant strings. For example, \[“SMALL", "MEDIUM", "LARGE", "EXTRALARGE"\]. You can provide one or many values in the array.
+        4.  **widgetSizes**: All the supported sizes of the developed widget in an array of constant strings. For example, \[“SMALL", "MEDIUM", "LARGE"\]. You can provide one or many values in the array.
         5.  **widgetDir**: The name of the widget directory in string format (to be packaged in the `KAR` \> `VoltmxWidgets` folder)
         6.  **widgetViews**: A JSON object that contains the following key-value pairs:
             *   **SMALL** key: The value for this key is the name of the composite form.json structure of the small widget.
             *   **MEDIUM** key: The value for this key is the form.json structure of the medium widget.
             *   **LARGE** key: The value for this key is the form.json structure of the large widget.
-            *   **EXTRALARGE** key: The value for this key is the form.json structure of the extralarge widget.
             If the widget does not support a particular size, the value for that particular key must be an empty string.
             If the composite form.json file does not exist, the composite structure file will be generated from the from.sm folder, and the themes are combined.
         7.  **widgetURL**: A deep link URL that the application is expected to receive when a user taps the widget.
@@ -97,13 +95,12 @@ Here is a sample `widgetProperties.json` file:
             "widgetID":"accountsWidget",
             "widgetName": "Accounts Widget",
             "widgetDescription" : "Check your accounts balance and updates at a glance",
-            "widgetSizes":["SMALL", "MEDIUM", "LARGE", "EXTRALARGE"],
+            "widgetSizes":["SMALL", "MEDIUM", "LARGE"],
             "widgetDir": "AccountsWidget",
             "widgetViews":{
                 "SMALL" : "accountsWidgetSmall.json",
                 "MEDIUM" : "accountsWidgetMedium.json",
-                "LARGE" : "accountsWidgetLarge.json",
-                "EXTRALARGE" : "accountsWidgetExtraLarge.json"
+                "LARGE" : "accountsWidgetLarge.json"
             },
             "widgetURL":"widget://accounts"
         },
@@ -111,13 +108,12 @@ Here is a sample `widgetProperties.json` file:
             "widgetID" : "scheduledTransactionsWidget",
             "widgetName" : "Upcoming transactions",
             "widgetDescription" : "Check when your next transaction is schduled at",
-            "widgetSizes" : ["SMALL"],
+            "widgetSizes" : ["SMALL"\],
             "widgetDir" : "ScheduledTransactionsWidget",
             "widgetViews" : {
                 "SMALL" : "scheduledTransactionsWidgetSmall.json",
                 "MEDIUM" : "",
-                "LARGE" : "",
-                "EXTRALARGE" : ""
+                "LARGE" : ""
             },
             "widgetURL" : "widget://scheduledTransactions"
         },
@@ -130,14 +126,12 @@ Here is a sample `widgetProperties.json` file:
             "widgetViews" : {
                 "SMALL" : "",
                 "MEDIUM" : "transactionWidgetMedium.json",
-                "LARGE" : "transactionWidgetLarge.json",
-                 "EXTRALARGE" : ""
+                "LARGE" : "transactionWidgetLarge.json"
             },
             "widgetURL" : "widget://transactions"
         }
     ]
 }
-
 ```
 
 Widgets use the following two important functions:
