@@ -639,6 +639,7 @@ April 10, 2023
 * Upgraded redhat ubi image from `ubi8-minimal:8.5-218` to
   `ubi8-minimal:8.7-1085`
 * Fixed migration issue for mysql cluster
+* Helm support for Encrypted Database Password
 
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
