@@ -27,6 +27,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 [Volt Foundry](#volt-foundry)
 
 
+- [V9 Servicepack 5 Fixpack 3 Hotfix 0](#v9-servicepack-5-fixpack-3-hotfix-0)
 - [V9 Servicepack 5 Fixpack 2 Hotfix 3](#v9-servicepack-5-fixpack-2-hotfix-3)
 - [V9 Servicepack 5 Fixpack 2 Hotfix 2](#v9-servicepack-5-fixpack-2-hotfix-2)
 - [V9 Servicepack 5 Fixpack 2 Hotfix 1](#v9-servicepack-5-fixpack-2-hotfix-1)
@@ -625,6 +626,29 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ## Volt Foundry
 
 
+### V9 Servicepack 5 Fixpack 3 Hotfix 0
+
+April 10, 2023
+
+#### Foundry Enhancements
+
+Foundry Runtime Scope:
+
+* Implementation of OpenAPI Server url listing
+* OpenAPI Server url drop down
+
+Foundry Design Scope:
+
+* AppFactory - Unable to publish multiple version of Foundry App
+
+Foundry Build Scope:
+
+* Update foundry docker redhat ubi base image to latest version
+* Helm test support and document
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+
+
 ### V9 Servicepack 5 Fixpack 2 Hotfix 3
 
 April 11, 2023
@@ -632,13 +656,13 @@ April 11, 2023
 There are no new features or enhancements in this release.
 For relevant support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
+
 ### V9 Servicepack 5 Fixpack 2 Hotfix 2
 
 April 07, 2023
 
 There are no new features or enhancements in this release.
 For relevant support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
-
 
 ### V9 Servicepack 5 Fixpack 2 Hotfix 1
 
