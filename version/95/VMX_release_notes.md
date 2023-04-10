@@ -632,18 +632,18 @@ April 10, 2023
 
 #### Foundry Enhancements
 
-* Added OpenAPI 3.0 parameterized server URL support
+* Parameterized server URL support for OpenAPI 3.0 has been added
 
 #### AppFactory Enhancements
 
-* Added Support to publish multiple versions of Foundry application
+* Publishing multiple versions of Foundry applications is now
+  supported
 
 #### VoltMX Container Enhancements
 
-* Upgraded Foundry docker redhat ubi base image to the latest version
-* Upgraded redhat ubi image from `ubi8-minimal:8.5-218` to
-  `ubi8-minimal:8.7-1085`
-* Added Helm support for Encrypted Database Password
+* Docker Redhat universal base image has been upgraded to the latest
+  version from (ubi8-minimal:8.5-218 to ubi8-minimal:8.7-1085) for Foundry
+* Helm support for Encrypted Database Password has been added
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
