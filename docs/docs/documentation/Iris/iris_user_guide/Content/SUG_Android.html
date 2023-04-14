@@ -2279,6 +2279,49 @@ To resolve, add javaMaxHeapSize (build.gradle), org.gradle.jvmargs(gradle.proper
 To resolve, download the local proxy server certificate and add it to the Java Key store.</p>
 <p><strong>Error: Could not create the Java Virtual Machine</strong><br />
 Usually occurs when Gradle is not able to allocate the required memory to build the project, generally noticed on 32-bit computers. If the error occurs on a 64-bit computer, add javaMaxHeapSize (build.gradle), org.gradle.jvmargs (gradle.properties) values to the script. These are general options, which you can configure according to the needs of your app.</p>
+<p><strong>Gradle Version Upgrade issues</strong><br />
+Current supported version of gradle is 6.5, if developer wants to upgrade higher version need to do below changes.</p>
+<p>For example if developer upgraded gradle to 7.3.3 </p>
+<ol>
+<li>Has to use JAVA 11.</li>
+</ol>
+<p>Add the java path for Java11 in gradle.properties.</p>
+<p><code>like "org.gradle.java.home= &lt;path to your java &gt; "</code></p>
+<p>need to add androidprecompiletask.xml to point 7.3.3 gradle version and some other changes .</p>
+<pre><code>    &lt;replaceregexp file=&quot;${app.dir}/build.gradle&quot;
+
+      match=&quot;com.android.tools.build:gradle:4.0.0&quot;
+
+      replace=&quot;com.android.tools.build:gradle:7.2.2&quot;
+
+      byline=&quot;true&quot;
+
+     /&gt;
+
+    &lt;replaceregexp file=&quot;${app.dir}/gradle/wrapper/gradle-wrapper.properties&quot;
+
+      match=&quot;https://services.gradle.org/distributions/gradle-6.5-all.zip&quot;
+
+      replace=&quot;https://services.gradle.org/distributions/gradle-7.3.3-bin.zip&quot;
+
+      byline=&quot;true&quot;
+
+      /&gt;
+ 
+    &lt;replace file=&quot;${app.dir}/build.gradle&quot; token=&quot;println output.apkData.fullName+&quot;=&quot;output.outputFile&quot; value=&quot;println output.baseName&quot;=&quot;+output.outputFile&quot;/&gt;
+
+    &lt;replace file=&quot;${app.dir}/build.gradle&quot; token=&quot;apkPaths=apkPaths+&quot;\n&quot;(output.apkData.fullName)&quot;=&quot;output.outputFile&quot; value=&quot;apkPaths=apkPaths&quot;\n&quot;(output.getBaseName())&quot;=&quot;+output.outputFile&quot;/&gt;
+
+    &lt;replaceregexp file=&quot;${app.dir}/gradle.properties&quot;
+
+      match=&quot;android.enableR8=false&quot;
+
+      replace=&quot;#android.enableR8=false&quot;
+
+      byline=&quot;true&quot;
+
+      /&gt;
+</code></pre>
 
               
             </article>
