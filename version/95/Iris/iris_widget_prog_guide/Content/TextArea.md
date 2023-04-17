@@ -97,6 +97,7 @@ The TextArea widget capabilities can be broadly categorized into the following:
 | [placeholder](TextArea_Properties.md#placeholder) | Specifies a short hint that describes the expected value of an input field (example, a sample value or a short description of the expected format). |
 | [restrictCharactersSet](TextArea_Properties.md#restrictCharactersSet) | Restricts users from entering a set of input characters from the soft keyboard in the TextArea widget. |
 | [secureTextEntry](TextArea_Properties.md#secureText) | Specifies whether the text entered by the user will be secured using a mask character, such as asterisk or dot. |
+| [setImportantForAutoFill](TextArea_Properties.md#setImportantForAutoFill) | Specifies whether the TextArea widget should get preference to show suggestions while entering data. |
 | [text](TextArea_Properties.md#text) | Specifies a general or descriptive text for the TextArea widget. |
 | [textInputMode](TextArea_Properties.md#textInputmode) | Specifies the type of input characters that a user can enter into the TextArea widget. |
 | [toolTip](TextArea_Properties.md#toolTip) | Specifies the hint text when the cursor hovers over a widget, without clicking it. |

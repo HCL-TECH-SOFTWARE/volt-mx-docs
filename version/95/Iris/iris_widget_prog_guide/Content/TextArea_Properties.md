@@ -2516,10 +2516,14 @@ Read Only (Constructor- level property only)
     *   You must set the JavaScript text references to null, to clear the text from the memory, once the text is no longer required.
     
     *   Once the text is cleared, the string content in the memory will be removed in the next Garbage Collection cycle.
-    *   In Android platform, you can use either the [readAsText](../../../Iris/iris_api_dev_guide/content/voltmx.types_objects_rawbytes.md#readAsText) method or the text property to access the user entered text.
-*   In Android platform, when the TextBox or TextArea widget is placed inside a Segment widget, if you want to access the user entered text even after the widget is destroyed, use any of the following methods on the retrieved RawBytes object:
-    *   Use the [clone](../../../Iris/iris_api_dev_guide/content/voltmx.types_objects_rawbytes.md#clone) API of the RawBytes object to create another RawBytes object. You can pass this cloned object into other APIs as required.
-    *   Use either the [readAsText](../../../Iris/iris_api_dev_guide/content/voltmx.types_objects_rawbytes.md#readAsText) method or the text property.
+    *   In Android platform, you can use either the [readAsText](../../../Iris/iris_api_dev_guide/content/voltmx.types_objects_rawbytes.md#readAsText) method or the text property to access the user entered text.  
+
+*   In Android platform, when the TextBox or TextArea widget is placed inside a Segment widget, if you want to access the user entered text even after the widget is destroyed, use any of the following methods on the retrieved RawBytes object:  
+
+    *   Use the [clone](../../../Iris/iris_api_dev_guide/content/voltmx.types_objects_rawbytes.md#clone) API of the RawBytes object to create another RawBytes object. You can pass this cloned object into other APIs as required.  
+
+    *   Use either the [readAsText](../../../Iris/iris_api_dev_guide/content/voltmx.types_objects_rawbytes.md#readAsText) method or the text property.  
+
 *   When the `isSensitiveText` property is disabled, the entered text may be retained in the application runtime memory till the Form containing the TextBox or TextArea widget is destroyed.
 
 Following image shows the field corresponding to `isSensitiveText` property in Iris.
@@ -4131,7 +4135,7 @@ alert("The value of the secureTextEntry is:"+frmTxtArea.myTxtArea.secureTextEntr
 
 </details>
 
-<details close markdown="block"><summary>setImportantForAutofill Property</summary>
+<details close markdown="block"><summary id="setImportantForAutoFill">setImportantForAutofill Property</summary>
 
 * * *
 

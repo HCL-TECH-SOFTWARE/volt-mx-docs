@@ -15,17 +15,18 @@ TextArea widget has the following events associated with it:
 
 This event is invoked for every widget when the widget position and dimensions are computed.
 
-### Syntax
+<b>Syntax</b>  
+
 ```
 
 doLayout()
 ```
 
-### Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-### Remarks
+<b>Remarks</b>
 
 This event is invoked for all the widgets placed inside flex containers. This event is invoked in the order in which the widgets are added to the widget hierarchy and expect the frame property of the widget is calculated and available for use within this event.
 
@@ -33,7 +34,7 @@ This event is used to set the layout properties of child widgets in the relation
 
 The number of times this event invoked may vary per platform. It is not recommended to write business logic assuming that this function is invoked only once when there is a change in positional or dimensional properties. This event will not trigger when transformations are applied though widget is moved or scaled or rotated from its original location.
 
-### Example
+<b>Example</b>
 
 ```
 
@@ -48,7 +49,7 @@ function doLayoutButton1(){
 }
 ```
 
-### Platform Availability
+<b>Platform Availability</b>
 
 *   iOS, Android, Windows, and SPA
 
@@ -65,17 +66,17 @@ This is event callback is invoked by the Android platform when the soft- keyboar
 
 This event is not be triggered when you use gestures in the mobile device for back navigation.
 
-### Syntax
+<b>Syntax</b>
 ```
 
 onBackKeyPress()
 ```
 
-### Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-### Example
+<b>Example</b>
 
 ```
 
@@ -90,7 +91,7 @@ function onBackKeyPressCallback(wdgRef) {
 }
 ```
 
-### Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 
@@ -103,17 +104,17 @@ function onBackKeyPressCallback(wdgRef) {
 
 This is an event callback that is invoked by the platform when the user clicks within the TextArea and is about to start editing.
 
-### Syntax
+<b>Syntax</b>
 ```
 
 onBeginEditing()
 ```
 
-### Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-### Example
+<b>Example</b>
 
 ```
 
@@ -126,35 +127,82 @@ function onBeginEditingCallback(txtArea){
 }
 ```
 
-### Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS and Android
 
 * * *
 
+</details>  
+
+<details close markdown="block"><summary id="onBlur">onBlur Event</summary>
+
+* * *
+
+An event that accepts a callback function as an input and executes the functionality defined in the callback function when the widget is blurred.
+
+<b>Syntax</b>
+```
+
+onBlur()
+```
+
+<b>Input Parameters</b>
+
+<em>Callback function</em>: A function that contains the logic to be implemented when the widget is blurred.
+
+
+<b>Read/Write</b>
+
+Read + Write
+
+<b>Remarks</b>
+
+Assign a null value to the onBlur event of a widget to remove the blur effect on the widget.
+
+<b>Example</b>
+
+```
+
+//This is a generic event that is applicable for various widgets.
+/*Here, we have shown how to use the onBlur event for a Button widget. You need to make a corresponding use of the onBlur event for other applicable widgets.*/frmButton.myButton.onBlur = onBlurCallBack;
+
+function onBlurCallBack(widget) {
+    console.log('onBlur event triggered');
+}
+```
+
+<b>Platform Availability</b>
+
+*   Available in the IDE
+*   Available on the Responsive Web platform
+
+* * *
+
 </details>
+
 <details close markdown="block"><summary id="onDone">onDone Event</summary>
 
 * * *
 
 This event is triggered when user is done with entering text in textarea and click or touch the _Go_ or _Enter_ option.
 
-### Syntax
+<b>Syntax</b>
 ```
 
 onDone()
 ```
 
-### Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-### Remarks
+<b>Remarks</b>
 
 In Desktop Web platform, this event is fired when the enter key is pressed when the textarea has focus.
 
-### Example
+<b>Example</b>
 
 ```
 
@@ -167,7 +215,7 @@ function onDoneCallback(txtArea){
 }
 ```
 
-### Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Available on all platforms except SPA
@@ -181,17 +229,17 @@ function onDoneCallback(txtArea){
 
 This is an event callback that is invoked by the platform.
 
-### Syntax
+<b>Syntax</b>
 ```
 
 onEndEditing()
 ```
 
-### Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-### Remarks
+<b>Remarks</b>
 
 This is event is invoked when the user performs one of the below actions:
 
@@ -204,7 +252,7 @@ When you click on the **Done** button of the keypad the following events take pl
 *   onendediting
 *   ondone
 
-### Example
+<b>Example</b>
 
 ```
 
@@ -217,7 +265,7 @@ function onEndEditingCallback(txtArea){
 }
 ```
 
-### Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   iOS and Android
@@ -225,6 +273,54 @@ function onEndEditingCallback(txtArea){
 * * *
 
 </details>
+
+<details close markdown="block"><summary id="onFocus">onFocus Event</summary>
+
+* * *
+
+An event that accepts a callback function as an input and executes the functionality defined in the callback function when the widget is in focus.
+
+<b>Syntax</b>
+```
+
+onFocus()
+```
+
+<b>Input Parameters</b>
+
+<em>Callback function</em>: A function that contains the logic to be implemented when the widget is in focus. <br>
+
+
+<b>Read/Write</b>
+
+Read + Write
+
+<b>Remarks</b>
+
+Assign a null value to the onFocus event of a widget to remove focus from the widget.
+
+<b>Example</b>
+
+```
+
+//This is a generic event that is applicable for various widgets.
+/*Here, we have shown how to use the onFocus event for a Button widget. You need to make a corresponding use of the onFocus event for other applicable widgets.*/
+
+frmButton.myButton.onFocus = onFocusCallBack;
+function onFocusCallBack(widget) {    
+console.log('onFocus event triggered');
+}
+```
+
+<b>Platform Availability</b>
+
+*   Available in the IDE
+*   Available on the Responsive Web platform
+
+* * *
+
+</details>
+
 <details close markdown="block"><summary>onKeyboardDidHide Event</summary>
 
 * * *
@@ -233,17 +329,17 @@ function onEndEditingCallback(txtArea){
 
 This is event callback is invoked by the Android platform when the soft keyboard has been closed.
 
-### Syntax
+<b>Syntax</b>
 ```
 
 onKeyboardDidHide()
 ```
 
-### Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-### Example
+<b>Example</b>
 
 ```
 
@@ -258,7 +354,7 @@ function keyboardCallbacksDidHide(wdgRef) {
 }
 ```
 
-### Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 
@@ -273,21 +369,21 @@ function keyboardCallbacksDidHide(wdgRef) {
 
 This is event callback is invoked by the Android platform when the soft keyboard has been just brought into view.
 
-### Syntax
+<b>Syntax</b>
 ```
 
 onKeyboardDidShow()
 ```
 
-### Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-### Limitation
+<b>Limitation</b>
 
 *   In Android platform, when you close the soft keyboard using back button, and then re-select the text by long-press in TextArea and TextBox widget, the `onKeyBoardDidShow` event is not triggered.
 
-### Example
+<b>Example</b>
 
 ```
 
@@ -302,7 +398,7 @@ function keyboardCallbacksDidShow(wdgRef) {
 }
 ```
 
-### Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 
@@ -317,17 +413,17 @@ function keyboardCallbacksDidShow(wdgRef) {
 
 This is event callback is invoked by the Android platform when the soft keyboard is about to be hidden.
 
-### Syntax
+<b>Syntax</b>
 ```
 
 onKeyboardWillHide()
 ```
 
-### Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-### Example
+<b>Example</b>
 
 ```
 
@@ -342,7 +438,7 @@ function keyboardCallbacksWillHide(wdgRef) {
 }
 ```
 
-### Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 
@@ -357,21 +453,21 @@ function keyboardCallbacksWillHide(wdgRef) {
 
 This is event callback is invoked by the Android platform when the soft keyboard is about to be displayed.
 
-### Syntax
+<b>Syntax</b>
 ```
 
 onKeyboardWillShow()
 ```
 
-### Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-### Limitation
+<b>Limitation</b>
 
 *   In Android platform, when you close the soft keyboard using back button, and then re-select the text by long-press in TextArea and TextBox widget, the `onKeyBoardWillShow` event is not triggered.
 
-### Example
+<b>Example</b>
 
 ```
 
@@ -386,7 +482,7 @@ function keyboardCallbacksWillShow(wdgRef) {
 }
 ```
 
-### Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 
@@ -399,17 +495,17 @@ function keyboardCallbacksWillShow(wdgRef) {
 
 This is an event callback that is invoked by the platform when the user presses a key (on the keyboard).
 
-### Syntax
+<b>Syntax</b>
 ```
 
 onKeyDown()
 ```
 
-### Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-### Example
+<b>Example</b>
 
 ```
 
@@ -422,7 +518,7 @@ function onKeyDownCallback(txtArea){
 }
 ```
 
-### Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Desktop Web and SPA
@@ -436,17 +532,17 @@ function onKeyDownCallback(txtArea){
 
 This is an event callback that is invoked by the platform when the user releases a key (on the keyboard).
 
-### Syntax
+<b>Syntax</b>
 ```
 
 onKeyUp()
 ```
 
-### Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-### Example
+<b>Example</b>
 
 ```
 
@@ -459,7 +555,7 @@ function onKeyUpCallback(txtArea){
 }
 ```
 
-### Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Desktop Web and SPA
@@ -473,17 +569,17 @@ function onKeyUpCallback(txtArea){
 
 This event callback is invoked by the platform when the widget location position gets changed on scrolling. The onScrollWidgetPosition event returns the positional coordinates of the widget's location with respect to the screen (screenX and screenY) and the parent container (frameX and frameY). This event is invoked asynchronously, and is not available for FlexForm widget.
 
-### Syntax
+<b>Syntax</b>
 ```
 
 onScrollWidgetPosition()
 ```
 
-### Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-### Example
+<b>Example</b>
 
 ```
 
@@ -501,7 +597,7 @@ coordinates (after downsizing the navigation bar and status bar).*/
 }
 ```
 
-### Platform Availability
+<b>Platform Availability</b>
 
 *   Not Accessible from IDE
 *   Android, iOS, SPA, and Windows
@@ -515,23 +611,23 @@ coordinates (after downsizing the navigation bar and status bar).*/
 
 This is an event callback triggered when text in the TextArea changes.
 
-### Syntax
+<b>Syntax</b>
 ```
 
 onTextChange()
 ```
 
-### Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-### Remarks
+<b>Remarks</b>
 
 This event is not fired when the text is changed programmatically.
 
 On the Desktop Web and SPA platforms, this event is fired when the focus is out of the text area.
 
-### Example
+<b>Example</b>
 
 ```
 
@@ -544,7 +640,7 @@ function onTextChangeCallback(txtArea){
 }
 ```
 
-### Platform Availability
+<b>Platform Availability</b>
 
 *   Available in the IDE
 *   Available on all platforms.
