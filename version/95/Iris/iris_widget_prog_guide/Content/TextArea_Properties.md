@@ -234,6 +234,32 @@ Following are the options available:
 <b>Example</b>
 
 ```
+/*Defining properties for a TextArea with the 
+autoCapitalize:constants.TEXTAREA_AUTO_CAPITALIZE_ALL*/
+var tAreaBasic = {
+    id: "txtArea",
+    text: "Text",
+    isVisible: true,
+    secureTextEntry: true,
+    autoCapitalize: constants.TEXTAREA_AUTO_CAPITALIZE_ALL
+};
+
+var tAreaLayout = {
+    padding: [5, 5, 5, 5],
+    margin: [5, 5, 5, 5],
+    containerWeight: 100,
+    hExpand: true,
+    widgetAlignment: constants.WIDGET_ALIGN_TOP_LEFT
+};
+
+var tAreaPSP = {};
+
+//Creating the TextArea.
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+
+//Reading the autoCapitalize of the TextArea
+alert("TextArea autoCapitalize ::" + txtArea.autoCapitalize);
+
 //Sample code to set the autoCapitalize property of TextArea widget.
 
 frmTxtArea.myTxtArea.autoCapitalize=constants.TEXTAREA_AUTO_CAPITALIZE_ALL;
@@ -281,6 +307,30 @@ The default value for this property is false.
 <b>Example</b>
 
 ```
+//Defining the properties for a TextArea with autoCorrect:true.
+var tAreaBasic = {
+    id: "txtArea",
+    skin: "txtSkin",
+    focusSkin: "txtFSkin",
+    text: "Text",
+    maxTextLength: 20,
+    isVisible: true
+};
+
+var tAreaLayout = {
+    padding: [5, 5, 5, 5],
+    margin: [5, 5, 5, 5],
+    containerWeight: 100,
+    hExpand: true,
+    widgetAlignment: constants.WIDGET_ALIGN_TOP_LEFT
+};
+
+var tAreaPSP = {
+    autoCorrect: true
+};
+
+//Creating the TextArea.
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
 //Sample code to set the autoCorrect property of TextArea widget.
 
 frmTxtArea.myTxtArea.autoCorrect=true;
@@ -623,6 +673,75 @@ Form1.btn1.backgroundImage = "bgImg.png";
 *   Android
 *   iOS
 *   Desktop Web (Not available on Desktop Web Legacy SDK)
+
+* * *
+
+</details>
+<details close markdown="block"><summary>blockedUISkin Property-Deprecated</summary>
+
+* * *
+
+Specifies the skin that must be used to block the interface until the action in progress (for example, a service call) is completed.
+
+<b>Syntax</b>
+
+```
+
+blockedUISkin
+```
+
+<b>Type</b>
+
+String
+
+<b>Read/Write</b>
+
+Read + Write
+
+<b>Remarks</b>
+
+*   For the skin to be available in the list, you must add a skin for Blocked UI under Widget Skins.
+*   The default value for this property is None (No skin is applied).
+*   To specify a skin, select a skin from the list.
+
+<b>Example</b>
+
+```
+//Defining the properties for a TextArea with blockedUISkin:"blockedUISkin".
+var tAreaBasic = {
+    id: "txtArea",
+    skin: "txtSkin",
+    focusSkin: "txtFSkin",
+    text: "Text",
+    isVisible: true
+};
+
+var tAreaLayout = {
+    padding: [5, 5, 5, 5],
+    margin: [5, 5, 5, 5],
+    containerWeight: 100,
+    hExpand: true,
+    widgetAlignment: constants.WIDGET_ALIGN_TOP_LEFT
+};
+
+var tAreaPSP = {
+    blockedUISkin: "blockedUISkin"
+};
+
+/*Creating the TextArea.var txtArea = new voltmx.ui.TextArea2(tAreaBasic,
+tAreaLayout, tAreaPSP);*/
+
+//Reading the blockedUISkin of the TextArea.
+alert("TextArea blockedUISkin ::" + txtArea.blockedUISkin);
+//Sample code to set the blockedUISkin property of TextArea widget.
+
+frmTxtArea.myTxtArea.blockedUISkin="blockUISkin";
+```
+
+<b>Platform Availability</b>
+
+*   Available in the IDE
+*   SPA
 
 * * *
 
@@ -1006,6 +1125,31 @@ If you want to change the text for the close button, enter the text of your choi
 <b>Example</b>
 
 ```
+//Defining the properties for a TextArea with closeButtonText:"done"
+var tAreaBasic = {
+    id: "txtArea",
+    skin: "txtSkin",
+    focusSkin: "txtFSkin",
+    text: "Text",
+    maxTextLength: 20,
+    isVisible: true
+};
+
+var tAreaLayout = {
+    padding: [5, 5, 5, 5],
+    margin: [5, 5, 5, 5],
+    containerWeight: 100,
+    hExpand: true,
+    widgetAlignment: constants.WIDGET_ALIGN_TOP_LEFT
+};
+
+var tAreaPSP = {
+    closeButtonText: "Done"
+};
+
+
+//Creating the TextArea.
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
 //Sample code to set the closeButtonText property of TextArea widget.
 
 frmTxtArea.myTxtArea.closeButtonText="Done";
@@ -1395,6 +1539,31 @@ Limitations and Behavior
 <b>Example</b>
 
 ```
+//Setting the enableHapticFeedback property on widget creation
+var tAreaBasic = {
+    "enableHapticFeedback": true,
+    id: "txtArea",
+    skin: "txtSkin",
+    focusSkin: "txtFSkin",
+    text: "Text",
+    maxTextLength: 20,
+    isVisible: true,
+    secureTextEntry: true
+};
+var tAreaLayout = {
+    padding: [5, 5, 5, 5],
+    margin: [5, 5, 5, 5],
+    containerWeight: 100,
+    hExpand: true,
+    widgetAlignment: constants.WIDGET_ALIGN_TOP_LEFT
+};
+var tAreaPSP = {};
+
+//Creating the TextArea
+var txtArea = new voltmx.ui.TextArea2 (tAreaBasic, tAreaLayout, tAreaPSP);
+
+//Setting the enableHapticFeedback property on an existing widget
+Form1.textarea1.enableHapticFeedback = true;
 //Sample code to set the enableHapticFeedback property of TextArea widget.
 
 frmTxtArea.myTxtArea.enableHapticFeedback=true;
@@ -1436,6 +1605,30 @@ Read + Write
 <b>Example</b>
 
 ```
+//Defining properties for a TextArea with the focusSkin:"txtFSkin".
+var tAreaBasic = {
+    id: "txtArea",
+    skin: "txtSkin",
+    focusSkin: "txtFSkin",
+    text: "Text",
+    maxTextLength: 20,
+    isVisible: true,
+    secureTextEntry: true
+};
+
+var tAreaLayout = {
+    padding: [5, 5, 5, 5],
+    margin: [5, 5, 5, 5],
+    containerWeight: 100,
+    hExpand: true,
+    widgetAlignment: constants.WIDGET_ALIGN_TOP_LEFT
+};
+
+var tAreaPSP = {};
+
+
+//Creating the TextArea.
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
 //Sample code to set the focusSkin property of TextArea widget.
 
 frmTxtArea.myTxtArea.focusSkin="txtFSkin";
@@ -1788,6 +1981,8 @@ Following are the available measurement options:
 
 <b>Example</b>
 
+Setting the height property on an existing widget
+
 ```
 /*Sample code to set the height property for a TextArea widget by using DP, Percentage and Pixels.*/
 frmTxtArea.myTxtArea.height="50dp";
@@ -1795,6 +1990,19 @@ frmTxtArea.myTxtArea.height="50dp";
 frmTxtArea.myTxtArea.height="10%";
 
 frmTxtArea.myTxtArea.height="10px";
+Setting the height property on widget creation
+
+//Defining the properties for textarea with height: "150dp" 
+var textarea1 = new voltmx.ui.Textarea({
+    "id": "&lt;ID for the Widget",
+    "top": "19dp",
+    "width": "200dp",
+    "height": "150dp",
+    "right": "23dp",
+    "zIndex": 1,
+    "isVisible": true,
+    "clipBounds": true
+});
 
 ```
 
@@ -1833,6 +2041,30 @@ Read + Write
 <b>Example</b>
 
 ```
+//Defining the properties for a TextArea with hoverSkin:"hskin"
+var tAreaBasic = {
+    id: "txtArea",
+    skin: "txtSkin",
+    focusSkin: "txtFSkin",
+    text: "Text",
+    maxTextLength: 20,
+    isVisible: true
+};
+
+var tAreaLayout = {
+    padding: [5, 5, 5, 5],
+    margin: [5, 5, 5, 5],
+    containerWeight: 100,
+    hExpand: true,
+    widgetAlignment: constants.WIDGET_ALIGN_TOP_LEFT
+};
+
+var tAreaPSP = {
+    hoverSkin: "hskin"
+};
+
+//Creating the TextArea.
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
 //Sample code to set the hoverSkin property of TextArea widget.
 
 frmTxtArea.myTxtArea.hoverSkin="hskin";
@@ -2021,6 +2253,35 @@ widget.info.a will have old value as hello.*/
 <b>Example</b>
 
 ```
+//Defining properties for a TextArea with the info property.
+var tAreaBasic = {
+    id: "txtArea",
+    skin: "txtSkin",
+    focusSkin: "txtFSkin",
+    text: "Text",
+    maxTextLength: 20,
+    isVisible: true,
+    secureTextEntry: true
+};
+
+var tAreaLayout = {
+    padding: [5, 5, 5, 5],
+    margin: [5, 5, 5, 5],
+    containerWeight: 100,
+    hExpand: true,
+    widgetAlignment: constants.WIDGET_ALIGN_TOP_LEFT
+};
+
+var tAreaPSP = {};
+
+//Creating the TextArea.
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+txtArea.info = {
+    key: "text of textarea"
+};
+
+//Reading the info of the TextArea		
+alert("TextArea info is ::" + txtArea.info);
 //Sample code to set the info property for a TextArea widget.
 frmTxtArea.myTxtArea.info={
     key: "text of textarea"
@@ -2080,6 +2341,30 @@ To turn on/off the header at widget-level, assign any of the following constants
 <b>Example</b>
 
 ```
+//Defining the property inputAccessoryViewType in the constructor level
+	var tAreaBasic = {id:"txtArea", 
+	skin:"txtSkin", 
+	focusSkin:"txtFSkin",text:"Text", 
+	maxTextLength:20, 
+	isVisible:true, 
+	secureTextEntry:true};
+
+var tAreaLayout = {padding:[5,5,5,5], 
+	hExpand:true, 
+	widgetAlignment:constants.WIDGET_ALIGN_TOP_LEFT};
+
+var tAreaPSP ={
+  "inputAccessoryViewType":constants.TEXTAREA_INPUTACCESSORYVIEWTYPE_DEFAULT
+};
+
+//Creating the TextArea.
+var txtArea = new voltmx.ui.TextArea2 (tAreaBasic, tAreaLayout, tAreaPSP);
+
+//Reading the inputAccessoryViewType of the TextArea		
+voltmx.print("The value of input Accessory View Type property is:"+txtArea.inputAccessoryViewType);
+//Defining the property inputAccessoryViewType outside the constructor
+
+Form1.textArea1.inputAccessoryViewType=constants.TEXTAREA_INPUTACCESSORYVIEWTYPE_DEFAULT;
 //Sample code to set the inputAccessoryViewType property of TextArea widget.
 
 frmTArea.myTxtArea.inputAccessoryViewType=constants.TEXTAREA_INPUTACCESSORYVIEWTYPE_DEFAULT;
@@ -2090,6 +2375,67 @@ frmTArea.myTxtArea.inputAccessoryViewType=constants.TEXTAREA_INPUTACCESSORYVIEWT
 *   Available in the IDE
 *   iPhone
 *   iPad
+
+* * *
+
+</details>
+<details close markdown="block"><summary>isReadOnly Property - Deprecated</summary>
+
+* * *
+
+This property allows you to specify whether text in the TextArea Widget should be read only or can be edited.
+
+<b>Syntax</b>
+
+```
+
+isReadOnly
+```
+
+<b>Type</b>
+
+Boolean
+
+<b>Read/Write</b>
+
+Read + Write
+
+<b>Remarks</b>  
+
+The default value for this property is false.
+
+*   If set to true, the text in the TextArea Widget will be read only.
+*   If set to false, the text in the TextArea Widget can be edited.  
+
+<b>Example</b>
+
+```
+/* Defining the properties for a Textarea with the
+isReadOnly:constants.TEXTAREA_KEYBOARD_LABEL_SEARCH*/
+var txtBasic = {
+    id: "textArea1",
+    isVisible: true,
+    "isReadOnly": true
+};
+
+var txtLayout = {
+    padding: [5, 5, 5, 5],
+    containerWeight: 100,
+    hExpand: true
+};
+
+var txtPSP = {};
+
+//Creating the TextArea.
+var textArea1 = new voltmx.ui.TextArea2(txtBasic, txtLayout, txtPSP);
+
+//Reading the isReadOnly of the Textarea
+alert("Textarea isReadOnly ::" + textArea1.isReadOnly);
+```
+
+<b>Platform Availability</b>
+
+*   This property is available on Windows Desktop
 
 * * *
 
@@ -2170,10 +2516,14 @@ Read Only (Constructor- level property only)
     *   You must set the JavaScript text references to null, to clear the text from the memory, once the text is no longer required.
     
     *   Once the text is cleared, the string content in the memory will be removed in the next Garbage Collection cycle.
-    *   In Android platform, you can use either the [readAsText](../../../Iris/iris_api_dev_guide/content/voltmx.types_objects_rawbytes.md#readAsText) method or the text property to access the user entered text.
-*   In Android platform, when the TextBox or TextArea widget is placed inside a Segment widget, if you want to access the user entered text even after the widget is destroyed, use any of the following methods on the retrieved RawBytes object:
-    *   Use the [clone](../../../Iris/iris_api_dev_guide/content/voltmx.types_objects_rawbytes.md#clone) API of the RawBytes object to create another RawBytes object. You can pass this cloned object into other APIs as required.
-    *   Use either the [readAsText](../../../Iris/iris_api_dev_guide/content/voltmx.types_objects_rawbytes.md#readAsText) method or the text property.
+    *   In Android platform, you can use either the [readAsText](../../../Iris/iris_api_dev_guide/content/voltmx.types_objects_rawbytes.md#readAsText) method or the text property to access the user entered text.  
+
+*   In Android platform, when the TextBox or TextArea widget is placed inside a Segment widget, if you want to access the user entered text even after the widget is destroyed, use any of the following methods on the retrieved RawBytes object:  
+
+    *   Use the [clone](../../../Iris/iris_api_dev_guide/content/voltmx.types_objects_rawbytes.md#clone) API of the RawBytes object to create another RawBytes object. You can pass this cloned object into other APIs as required.  
+
+    *   Use either the [readAsText](../../../Iris/iris_api_dev_guide/content/voltmx.types_objects_rawbytes.md#readAsText) method or the text property.  
+
 *   When the `isSensitiveText` property is disabled, the entered text may be retained in the application runtime memory till the Form containing the TextBox or TextArea widget is destroyed.
 
 Following image shows the field corresponding to `isSensitiveText` property in Iris.
@@ -2266,6 +2616,32 @@ The default value for this property is true.
 <b>Example</b>
 
 ```
+//Defining properties for a TextArea with the isVisible:true.
+var tAreaBasic = {
+    id: "txtArea",
+    skin: "txtSkin",
+    focusSkin: "txtFSkin",
+    text: "Text",
+    maxTextLength: 20,
+    isVisible: true,
+    secureTextEntry: true
+};
+
+var tAreaLayout = {
+    padding: [5, 5, 5, 5],
+    margin: [5, 5, 5, 5],
+    containerWeight: 100,
+    hExpand: true,
+    widgetAlignment: constants.WIDGET_ALIGN_TOP_LEFT
+};
+
+var tAreaPSP = {};
+
+//Creating the TextArea.
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+
+//Reading the isVisible of the TextArea		
+alert("TextArea isVisible ::" + txtArea.isVisible);
 //Sample code to set the isVisible property of TextArea widget.
 
 frmTxtArea.myTxtArea.isVisible=true;
@@ -2328,6 +2704,34 @@ The following images illustrate the Keyboard label as _Done_ preserve">var var _
 <b>Example</b>
 
 ```
+/*Defining the properties for a TextArea with 
+keyboardActionLabel:constants.TEXTAREA_KEYBOARD_LABEL_SEND.*/
+var tAreaBasic = {
+    id: "txtArea",
+    skin: "txtSkin",
+    focusSkin: "txtFSkin",
+    text: "Text",
+    maxTextLength: 20,
+    isVisible: true
+};
+
+var tAreaLayout = {
+    padding: [5, 5, 5, 5],
+    margin: [5, 5, 5, 5],
+    containerWeight: 100,
+    hExpand: true,
+    widgetAlignment: constants.WIDGET_ALIGN_TOP_LEFT
+};
+
+var tAreaPSP = {
+    keyboardActionLabel: constants.TEXTAREA_KEYBOARD_LABEL_SEND
+};
+
+//Creating the TextArea.
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+
+//Reading the keyboardActionLabel of the TextArea.		
+alert("TextArea keyboardActionLabel ::" + txtArea.keyboardActionLabel);
 //Sample code to set the keyboardActionLabel property of TextArea widget.
 
 frmTxtArea.myTxtArea.keyboardActionLabel=constants.TEXTAREA_KEYBOARD_LABEL_SEND;
@@ -2387,7 +2791,7 @@ Available in the IDE
 * * *
 
 </details>
-<details close markdown="block"><summary>keyBoardStyle Property</summary>
+<details close markdown="block"><summary id="keyBoardStyle">keyBoardStyle Property</summary>
 
 * * *
 
@@ -2441,6 +2845,31 @@ The following are the available keyboard types when the value is [textInputMode]
 <b>Example</b>
 
 ```
+//Defining properties for a TextArea with the keyBoardStyle to accept URL address.
+var tAreaBasic = {
+    id: "txtArea",
+    text: "Text",
+    maxTextLength: 20,
+    isVisible: true,
+    secureTextEntry: true,
+    keyBoardStyle: constants.TEXTAREA_KEY_BOARD_STYLE_URL
+};
+
+var tAreaLayout = {
+    padding: [5, 5, 5, 5],
+    margin: [5, 5, 5, 5],
+    containerWeight: 100,
+    hExpand: true,
+    widgetAlignment: constants.WIDGET_ALIGN_TOP_LEFT
+};
+
+var tAreaPSP = {};
+
+//Creating the TextArea.
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+
+//Reading the keyBoardStyle of the TextArea		
+alert("TextArea keyBoardStyle ::" + txtArea.keyBoardStyle);
 //Sample code to set the keyBoardStyle property of TextArea widget.
 
 frmTxtArea.myTxtArea.keyBoardStyle=constants.TEXTAREA_KEY_BOARD_STYLE_URL;
@@ -2614,6 +3043,32 @@ If you specify a number for this property, the number of input characters cannot
 <b>Example</b>
 
 ```
+//Defining properties for a TextArea with the maxTextLength:20.
+var tAreaBasic = {
+    id: "txtArea",
+    skin: "txtSkin",
+    focusSkin: "txtFSkin",
+    text: "Text",
+    maxTextLength: 20,
+    isVisible: true,
+    secureTextEntry: true
+};
+
+var tAreaLayout = {
+    padding: [5, 5, 5, 5],
+    margin: [5, 5, 5, 5],
+    containerWeight: 100,
+    hExpand: true,
+    widgetAlignment: constants.WIDGET_ALIGN_TOP_LEFT
+};
+
+var tAreaPSP = {};
+
+//Creating the TextArea.
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+
+//Reading the maxTextLength of the TextArea		
+alert("TextArea maxTextLength ::" + txtArea.maxTextLength);
 //Sample code to set the maxTextLength property of TextArea widget.
 
 frmTxtArea.myTxtArea.maxTextLength=20;
@@ -2742,6 +3197,31 @@ If the numberOfVisibleLines property is set to 10, then the height of the TextAr
 <b>Example</b>
 
 ```
+//Defining properties for a TextArea with numberOfVisibleLines:5
+var tAreaBasic = {
+    id: "txtArea",
+    text: "Text",
+    maxTextLength: 20,
+    isVisible: true,
+    secureTextEntry: true,
+    numberOfVisibleLines: 5
+};
+
+var tAreaLayout = {
+    padding: [5, 5, 5, 5],
+    margin: [5, 5, 5, 5],
+    containerWeight: 100,
+    hExpand: true,
+    widgetAlignment: constants.WIDGET_ALIGN_TOP_LEFT
+};
+
+var tAreaPSP = {};
+
+//Creating the TextArea.
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+
+//Reading the numberOfVisibleLines of the TextArea		
+alert("TextArea numberOfVisibleLines ::" + txtArea.numberOfVisibleLines);
 //Sample code to set the numberOfVisibleLines property of TextArea widget.
 
 frmTxtArea.myTxtArea.numberOfVisibleLines=5;
@@ -2977,6 +3457,35 @@ TEXTAREA\_PASTE\_BOARD\_TYPE\_NO\_PASTE\_BOARD: Select this option, if you want 
 <b>Example</b>
 
 ```
+/*Defining the properties for a TextArea with 
+pasteboardType:constants.TEXTAREA_PASTE_BOARD_TYPE_SYSTEM_LEVEL*/
+var tAreaBasic = {
+    id: "txtArea",
+    skin: "txtSkin",
+    focusSkin: "txtFSkin",
+    text: "Text",
+    maxTextLength: 20,
+    isVisible: true
+};
+
+var tAreaLayout = {
+    padding: [5, 5, 5, 5],
+    margin: [5, 5, 5, 5],
+    containerWeight: 100,
+    hExpand: true,
+    widgetAlignment: constants.WIDGET_ALIGN_TOP_LEFT
+};
+
+
+var tAreaPSP = {
+    pasteboardType: constants.TEXTAREA_PASTE_BOARD_TYPE_SYSTEM_LEVEL
+};
+
+//Creating the TextArea.
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+
+//Reading the pasteboardType of the TextArea.	
+alert("TextArea pasteboardType ::" + txtArea.pasteboardType);
 //Sample code to set the pasteboardType property of TextArea widget.
 
 frmTxtArea.myTxtArea.pasteboardType=constants.TEXTAREA_PASTE_BOARD_TYPE_SYSTEM_LEVEL;
@@ -3025,6 +3534,33 @@ You must be aware of the following:
 <b>Example</b>
 
 ```
+//Defining properties for a TextArea with placeholder:"Enter text".
+var tAreaBasic = {
+    id: "txtArea",
+    skin: "txtSkin",
+    focusSkin: "txtFSkin",
+    text: "Text",
+    maxTextLength: 20,
+    isVisible: true,
+    secureTextEntry: true,
+    placeholder: "Enter text"
+};
+
+var tAreaLayout = {
+    padding: [5, 5, 5, 5],
+    margin: [5, 5, 5, 5],
+    containerWeight: 100,
+    hExpand: true,
+    widgetAlignment: constants.WIDGET_ALIGN_TOP_LEFT
+};
+
+var tAreaPSP = {};
+
+//Creating the TextArea.
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+
+//Reading the placeholder of the TextArea		
+alert("TextArea placeholder ::" + txtArea.placeholder);
 //Sample code to set the placeholder property of TextArea widget.
 
 frmTxtArea.myTxtArea.placeholder="Enter Text";
@@ -3068,6 +3604,31 @@ The following image illustrates the placeholder text with a placeholder color ap
 <b>Example</b>
 
 ```
+//Defining the properties for a TextArea with placeholderSkin:"placeholderSkin"
+var tAreaBasic = {
+    id: "txtArea",
+    skin: "txtSkin",
+    focusSkin: "txtFSkin",
+    text: "Text",
+    maxTextLength: 20,
+    isVisible: true,
+    placeholder: "Enter text"
+};
+
+var tAreaLayout = {
+    padding: [5, 5, 5, 5],
+    margin: [5, 5, 5, 5],
+    containerWeight: 100,
+    hExpand: true,
+    widgetAlignment: constants.WIDGET_ALIGN_TOP_LEFT
+};
+
+var tAreaPSP = {
+    placeholderSkin: "placeholderSkin"
+};
+
+//Creating the TextArea.
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
 //Sample code to set the placeholderSkin property of TextArea widget.
 
 frmTxtArea.myTxtArea.placeholderSkin="pSkin";
@@ -3532,13 +4093,36 @@ This is typically set to _true_ for a password field.
 
 <b>Example</b>
 
+Setting the secureTextEntry on widget creation
+
 ```
+//Defining the properties for a Textbox with secureTextEntry:true.
+var txtBasic = {
+    id: "textBox1",
+    skin: "txtSkin",
+    focusSkin: "txtFSkin",
+    text: "Text",
+    maxTextLength: 20,
+    isVisible: true,
+    secureTextEntry: true,
+    placeholder: "enter text"
+};
+var txtLayout = {
+    padding: [5, 5, 5, 5],
+    margin: [5, 5, 5, 5],
+    containerWeight: 100,
+    hExpand: true,
+    widgetAlignment: constants.WIDGET_ALIGN_TOP_LEFT
+};
+var txtPSP = {};
+//Creating the Textbox.
+var textBox1 = new voltmx.ui.TextArea2(txtBasic, txtLayout, txtPSP);
 //Sample code to set the secureTextEntry property of TextArea widget.
 
-frmTxtArea.myTxtArea.secureTextEntry=true;  
-  
-//Sample code to read the secureTextEntry property of a TextArea widget.  
-alert("The value of the secureTextEntry is:"+frmTxtArea.myTxtArea.secureTextEntry);  
+frmTxtArea.myTxtArea.secureTextEntry=true;
+
+//Sample code to read the secureTextEntry property of a TextArea widget.
+alert("The value of the secureTextEntry is:"+frmTxtArea.myTxtArea.secureTextEntry);
 
 ```
 
@@ -3551,7 +4135,7 @@ alert("The value of the secureTextEntry is:"+frmTxtArea.myTxtArea.secureTextEntr
 
 </details>
 
-<details close markdown="block"><summary>setImportantForAutofill Property</summary>
+<details close markdown="block"><summary id="setImportantForAutoFill">setImportantForAutofill Property</summary>
 
 * * *
 
@@ -3684,6 +4268,18 @@ The depth of the shadow should be specified in DP (Device Independent Pixels) un
 //Sample code to set the shadowDepth property of TextArea widget.
 
 frmTxtArea.myTxtArea.shadowDepth=10;
+Setting the shadowDepth property on widget creation
+
+//TextArea Creation.
+var TxtAr1 = new voltmx.ui.TextArea({
+    "id": "TxtAr1",
+    "isVisible": true,
+    "width": "80%",
+    "zIndex": 1,
+    "skin": "skin3",
+    "shadowDepth": 10,
+    "shadowType": constants.VIEW_BOUNDS_SHADOW
+});
 ```
 
 <b>Platform Availability</b>
@@ -3820,12 +4416,26 @@ _PADDED\_VIEW\_BOUNDS\_SHADOW_: Shadow matches the widget's rectangular padded b
 
 _BACKGROUND\_SHADOW_: Shadow matches the widget's background. This is the default value.
 
-<b>Example</b>
+<b>Example</b>  
+
+Setting the shadowType property on an existing widget
 
 ```
 //Sample code to set the shadowType property of TextArea widget.
 
 frmTxtArea.myTxtArea.shadowType=constants.VIEW_BOUNDS_SHADOW;
+Setting the shadowType property on widget creation
+
+//TextArea Creation.
+var TxtAr1 = new voltmx.ui.TextArea({
+    "id": "TxtAr1",
+    "isVisible": true,
+    "width": "80%",
+    "zIndex": 1,
+    "skin": "skin3",
+    "shadowDepth": 10,
+    "shadowType": constants.VIEW_BOUNDS_SHADOW
+});
 ```
 
 <b>Platform Availability</b>
@@ -3855,6 +4465,30 @@ Boolean
 <b>Example</b>
 
 ```
+//Defining the properties for a TextArea with showCloseButton:true.
+var tAreaBasic = {
+    id: "txtArea",
+    skin: "txtSkin",
+    focusSkin: "txtFSkin",
+    text: "Text",
+    maxTextLength: 20,
+    isVisible: true
+};
+
+var tAreaLayout = {
+    padding: [5, 5, 5, 5],
+    margin: [5, 5, 5, 5],
+    containerWeight: 100,
+    hExpand: true,
+    widgetAlignment: constants.WIDGET_ALIGN_TOP_LEFT
+};
+
+var tAreaPSP = {
+    showCloseButton: true
+};
+
+//Creating the TextArea.
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
 //Sample code to set the showCloseButton property of TextArea widget.
 
 frmTxtArea.myTxtArea.showCloseButton=true;
@@ -3918,6 +4552,30 @@ The following image illustrates the progress indicator on iPhone:
 <b>Example</b>
 
 ```
+//Defining the properties for a TextArea with showProgressIndicator:true.
+var tAreaBasic = {
+    id: "txtArea",
+    skin: "txtSkin",
+    focusSkin: "txtFSkin",
+    text: "Text",
+    maxTextLength: 20,
+    isVisible: true
+};
+
+var tAreaLayout = {
+    padding: [5, 5, 5, 5],
+    margin: [5, 5, 5, 5],
+    containerWeight: 100,
+    hExpand: true,
+    widgetAlignment: constants.WIDGET_ALIGN_TOP_LEFT
+};
+
+var tAreaPSP = {
+    showProgressIndicator: true
+};
+
+//Creating the TextArea.
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
 //Sample code to set the showProgressIndicator property of TextArea widget.
 
 frmTxtArea.myTxtArea.showProgressIndicator=true;
@@ -3956,6 +4614,32 @@ Read + Write
 <b>Example</b>
 
 ```
+//Defining properties for a TextArea with the skin:"txtSkin"
+var tAreaBasic = {
+    id: "txtArea",
+    skin: "txtSkin",
+    focusSkin: "txtFSkin",
+    text: "Text",
+    maxTextLength: 20,
+    isVisible: true,
+    secureTextEntry: true
+};
+
+var tAreaLayout = {
+    padding: [5, 5, 5, 5],
+    margin: [5, 5, 5, 5],
+    containerWeight: 100,
+    hExpand: true,
+    widgetAlignment: constants.WIDGET_ALIGN_TOP_LEFT
+};
+
+var tAreaPSP = {};
+
+//Creating the TextArea.
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+
+//Reading the skin of the TextArea		
+alert("TextArea skin ::" + txtArea.skin);
 //Sample code to set the skin property of TextArea widget.
 
 frmTxtArea.myTxtArea.skin="txtSkin";
@@ -4106,6 +4790,32 @@ Read + Write
 <b>Example 1</b>
 
 ```
+//Defining properties for a TextArea with the text:"Text"
+var tAreaBasic = {
+    id: "txtArea",
+    skin: "txtSkin",
+    focusSkin: "txtFSkin",
+    text: "Text",
+    maxTextLength: 20,
+    isVisible: true,
+    secureTextEntry: true
+};
+
+var tAreaLayout = {
+    padding: [5, 5, 5, 5],
+    margin: [5, 5, 5, 5],
+    containerWeight: 100,
+    hExpand: true,
+    widgetAlignment: constants.WIDGET_ALIGN_TOP_LEFT
+};
+
+var tAreaPSP = {};
+
+//Creating the TextArea.
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+
+//Reading the text of the TextArea		
+alert("TextArea text ::" + txtArea.text);
 //Sample code to set the text property of TextArea widget.
 
 frmTxtArea.myTxtArea.text="Enter Username";
@@ -4121,7 +4831,7 @@ var textContent = frmTxtArea.myTxtArea.text;
 var textAsString;
 
 if (voltmx.type(textContent) == "voltmx.types.RawBytes") {
- //Using the readAsText method of the RawBytes object.   
+ //Using the readAsText method of the RawBytes object. 
 //Call this method only if you must process the String in JavaScript.
  textAsString = textContent.readAsText();
 
@@ -4131,9 +4841,9 @@ if (voltmx.type(textContent) == "voltmx.types.RawBytes") {
 /*In Android platform, use the clear method of the Rawbytes object to remove the text references in the native Android RawBytes object.*/
 if (voltmx.type(textContent) == "voltmx.types.RawBytes") {
  textContent.clear();
-}  
+}
 /*You must set the JavaScript text references to null, to enable them to be Garbage Collected and cleared from memory*/
-textContent = null;  
+textContent = null;
 textAsString = null;
 ```
 
@@ -4181,8 +4891,9 @@ this.view.textarea.textCopyable = true;
 
 <b>Platform Availability</b>
 
-*   Available in the Desktop Web
-*   Available in the SPA
+*   Android
+*   Desktop Web
+*   Mobile Web
 
 * * *
 
@@ -4227,6 +4938,32 @@ In Android platform, multiple lines for a textbox is displayed only when textInp
 <b>Example</b>
 
 ```
+/*Defining properties for a TextArea with the 
+textInputMode:constants.TEXTAREA_INPUT_MODE_NUMERIC*/
+var tAreaBasic = {
+    id: "txtArea",
+    text: "Text",
+    maxTextLength: 20,
+    isVisible: true,
+    secureTextEntry: true,
+    textInputMode: constants.TEXTAREA_INPUT_MODE_NUMERIC
+};
+
+var tAreaLayout = {
+    padding: [5, 5, 5, 5],
+    margin: [5, 5, 5, 5],
+    containerWeight: 100,
+    hExpand: true,
+    widgetAlignment: constants.WIDGET_ALIGN_TOP_LEFT
+};
+
+var tAreaPSP = {};
+
+//Creating the TextArea.
+var txtArea = new voltmx.ui.TextArea2(tAreaBasic, tAreaLayout, tAreaPSP);
+
+//Reading the textInputMode of the TextArea		
+alert("TextArea textInputMode ::" + txtArea.textInputMode);
 //Sample code to set the textInputMode property of TextArea widget.
 
 frmTxtArea.myTxtArea.textInputMode=constants.TEXTAREA_INPUT_MODE_NUMERIC;
@@ -4413,6 +5150,30 @@ The text entered in the tooltip appears as a small box when the cursor hovers ov
 <b>Example</b>
 
 ```
+//Defining the properties for a TextArea with toolTip:sample text
+var tAreaBasic = {
+    id: "textarea1",
+    isVisible: true,
+    skin: "txtSkin",
+    focusSkin: "txtFSkin",
+    text: "Click Here"
+};
+
+var tAreaLayout = {
+    containerWeight: 100,
+    padding: [5, 5, 5, 5],
+    margin: [5, 5, 5, 5],
+    hExpand: true,
+    vExpand: false,
+    displayText: true
+};
+
+var tAreaPSP = {
+    toolTip: "sample text"
+};
+
+//Creating the TextArea.
+var textarea1 = new voltmx.ui.TextArea(tAreaBasic, tAreaLayout, tAreaPSP);
 //Sample code to set the toolTip property of TextArea widget.
 
 frmTxtArea.myTxtArea.toolTip="Sample text";
@@ -4657,6 +5418,70 @@ frmHome.widgetID.width = "10px";
 
 *   Available in the IDE
 *   iOS, Android, Windows, SPA, and Desktop Web
+
+* * *
+
+</details>
+<details close markdown="block"><summary>wrapText Property</summary>
+
+* * *
+
+This property allows you to specify whether text in the TextArea Widget should be wrapped or not.
+
+<b>Syntax</b>
+
+```
+
+wrapText
+```
+
+<b>Type</b>
+
+Boolean
+
+<b>Read/Write</b>
+
+Read + Write
+
+<b>Remarks</b>  
+
+The default value for this property is false.
+
+*   If set to true, the text in the TextArea Widget will get wrapped.
+*   If set to false,  the text will be in the same line.
+
+<b>Example</b>
+
+```
+// Defining the properties for a Textarea with the
+// wrapText:constants.TEXTAREA_KEYBOARD_LABEL_SEARCH
+var txtBasic = {
+    id: "textArea1",
+    isVisible: true,
+    "wrapText": true
+};
+
+var txtLayout = {
+    padding: [5, 5, 5, 5],
+    containerWeight: 100,
+    hExpand: true
+};
+
+var txtPSP = {};
+
+//Creating the TextArea.
+var textArea1 = new voltmx.ui.TextArea2(txtBasic, txtLayout, txtPSP);
+
+//Reading the wrapText of the TextArea
+alert("Textarea wrapText ::" + textArea1.wrapText);
+//Sample code to set the wrapText property of TextArea widget.
+
+frmTxtArea.myTxtArea.wrapText=true;
+```
+
+<b>Platform Availability</b>
+
+*   This property is available on Windows Desktop
 
 * * *
 
