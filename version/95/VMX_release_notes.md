@@ -628,7 +628,7 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 
 ### V9 Servicepack 5 Fixpack 3 Hotfix 0
 
-April 10, 2023
+April 24, 2023
 
 #### Foundry Enhancements
 
@@ -642,7 +642,7 @@ April 10, 2023
 #### VoltMX Container Enhancements
 
 * Docker Redhat universal base image has been upgraded to the latest
-  version from (ubi8-minimal:8.5-218 to ubi8-minimal:8.7-1085) for Foundry
+  version from `(ubi8-minimal:8.5-218` to `ubi8-minimal:8.7-1085)` for Foundry
 * Helm support for Encrypted Database Password has been added
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
