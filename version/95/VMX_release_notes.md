@@ -633,6 +633,8 @@ April 24, 2023
 #### Foundry Enhancements
 
 * Parameterized server URL support for OpenAPI 3.0 has been added
+* SAP Gateway adapter made viewable for accounts that have pre-existing
+  services of this legacy type in their Foundry instance already
 
 #### AppFactory Enhancements
 
