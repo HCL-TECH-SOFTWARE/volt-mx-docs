@@ -7,6 +7,8 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Iris](#volt-iris)
 
+
+- [V9 Servicepack 5 Fixpack 7](#v9-servicepack-5-fixpack-7)
 - [V9 Servicepack 5 Fixpack 6](#v9-servicepack-5-fixpack-6)
 - [V9 Servicepack 5 Fixpack 5](#v9-servicepack-5-fixpack-5)
 - [V9 Servicepack 5 Fixpack 4](#v9-servicepack-5-fixpack-4)
@@ -25,6 +27,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 [Volt Foundry](#volt-foundry)
 
 
+- [V9 Servicepack 5 Fixpack 3 Hotfix 0](#v9-servicepack-5-fixpack-3-hotfix-0)
 - [V9 Servicepack 5 Fixpack 2 Hotfix 3](#v9-servicepack-5-fixpack-2-hotfix-3)
 - [V9 Servicepack 5 Fixpack 2 Hotfix 2](#v9-servicepack-5-fixpack-2-hotfix-2)
 - [V9 Servicepack 5 Fixpack 2 Hotfix 1](#v9-servicepack-5-fixpack-2-hotfix-1)
@@ -43,6 +46,16 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 - [Earlier Foundry releases](#earlier-foundry-releases)
 
 ## Volt Iris
+
+### V9 Servicepack 5 Fixpack 7
+
+April 24, 2023
+
+#### Iris Enhancements
+
+* iOS: Xcode14 support has been added
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 
 ### V9 Servicepack 5 Fixpack 6
@@ -613,6 +626,30 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ## Volt Foundry
 
 
+### V9 Servicepack 5 Fixpack 3 Hotfix 0
+
+April 24, 2023
+
+#### Foundry Enhancements
+
+* Parameterized server URL support for OpenAPI 3.0 has been added
+* SAP Gateway adapter made viewable for accounts that have pre-existing
+  services of this legacy type in their Foundry instance already
+
+#### AppFactory Enhancements
+
+* Publishing multiple versions of Foundry applications is now
+  supported
+
+#### VoltMX Container Enhancements
+
+* Docker Redhat universal base image has been upgraded to the latest
+  version from `(ubi8-minimal:8.5-218` to `ubi8-minimal:8.7-1085)` for Foundry
+* Helm support for Encrypted Database Password has been added
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+
+
 ### V9 Servicepack 5 Fixpack 2 Hotfix 3
 
 April 11, 2023
@@ -620,13 +657,13 @@ April 11, 2023
 There are no new features or enhancements in this release.
 For relevant support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
+
 ### V9 Servicepack 5 Fixpack 2 Hotfix 2
 
 April 07, 2023
 
 There are no new features or enhancements in this release.
 For relevant support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
-
 
 ### V9 Servicepack 5 Fixpack 2 Hotfix 1
 
