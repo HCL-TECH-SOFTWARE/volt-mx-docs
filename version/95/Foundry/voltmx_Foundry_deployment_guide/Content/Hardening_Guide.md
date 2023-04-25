@@ -328,13 +328,12 @@ For security reasons, you must disable the server information disclosure for Tom
 1.  Open the Tomcat Server > `server.xml` file.
 2.  Add the following:
 
-   ```
+```
+   <Valve className="org.apache.catalina.valves.ErrorReportValve"
+    showReport="false" 
+    showServerInfo="false"/>
 
-     <Valve className="org.apache.catalina.valves.ErrorReportValve"
-        showReport="false" 
-        showServerInfo="false"/>
-
-   ```
+```
 3.  Save the server.xml.
 4.  Restart the server.
 
@@ -604,19 +603,19 @@ Also, if there no overriding concerns, enable the security settings.
 - To overcome these security issues in Volt MX SPA and Desktop Web applications, add custom filter and filter mapping entry in the **web.xml** file.
 - For example:
 
-  ```
-   public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
-   throws IOException, ServletException {
-   HttpServletRequest req = (HttpServletRequest) request;
-   HttpServletResponse res = (HttpServletResponse) response;
-   res.setHeader (""""X-Content-Type-Options"""", """"nosniff"""");.... // Similarly add your response headers. ... filterChain.doFilter(request, response);
+```
+     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
+     throws IOException, ServletException {
+     HttpServletRequest req = (HttpServletRequest) request;
+     HttpServletResponse res = (HttpServletResponse) response;
+     res.setHeader (""""X-Content-Type-Options"""", """"nosniff"""");.... // Similarly add your response headers. ... filterChain.doFilter(request, response);
   }
 
-  ```
+```
 
 - Create a jar file using the class that you created.
 
-  ```
+```
   <filter>
   <filter-name>XXXFilter</filter-name>
   <filter-class>com.xyz.web.filter.XXXFilter</filter-class>
@@ -626,7 +625,7 @@ Also, if there no overriding concerns, enable the security settings.
   <url-pattern>/</url-pattern>
   </filter-mapping>
 
-  ```
+```
 
 - Extract the build application War file and add the mentioned lib and entry in web.xml.
 - Volt MX Iris provides an option to add jars and edit the web.xml under `Menu > File > Combine EAR file` option.
