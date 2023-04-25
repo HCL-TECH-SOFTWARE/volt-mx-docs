@@ -825,8 +825,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#specifying-the-pod-disruption-budget" class="md-nav__link">
-    Specifying the Pod Disruption Budget
+  <a href="#specifying-the-poddisruptionbudget" class="md-nav__link">
+    Specifying the PodDisruptionBudget
   </a>
   
 </li>
@@ -834,6 +834,13 @@
         <li class="md-nav__item">
   <a href="#configuration-updates-via-helm-upgrade" class="md-nav__link">
     Configuration Updates via Helm Upgrade
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encrypt-the-database-password" class="md-nav__link">
+    Encrypt the Database Password
   </a>
   
 </li>
@@ -1246,8 +1253,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#specifying-the-pod-disruption-budget" class="md-nav__link">
-    Specifying the Pod Disruption Budget
+  <a href="#specifying-the-poddisruptionbudget" class="md-nav__link">
+    Specifying the PodDisruptionBudget
   </a>
   
 </li>
@@ -1255,6 +1262,13 @@
         <li class="md-nav__item">
   <a href="#configuration-updates-via-helm-upgrade" class="md-nav__link">
     Configuration Updates via Helm Upgrade
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encrypt-the-database-password" class="md-nav__link">
+    Encrypt the Database Password
   </a>
   
 </li>
@@ -1456,8 +1470,8 @@ cat server.crt | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' &gt; ./ser
 <p>Follow the steps to <a href="#import-the-certificate-into-the-truststore-with-keytool">import this into the trust store</a>.</p>
 </li>
 </ol>
-<h2 id="specifying-the-pod-disruption-budget">Specifying the Pod Disruption Budget</h2>
-<p>A <strong>Pod disruption budget</strong> is an indicator of the number of disruptions that can be tolerated at a given time for a class of pods (a budget of faults). Whenever a disruption to the pods in a service is calculated to cause the service to drop below the budget when using <strong>minAvailable</strong>, the operation is paused until it can maintain the budget. For example, a drain event could be temporarily halted while it waits for more pods to become available such that the budget isn’t crossed by evicting the pods. Likewise, when using <strong>maxUnavailable</strong> the operation is paused if a disruption to the pods exceeds the setting.</p>
+<h2 id="specifying-the-poddisruptionbudget">Specifying the PodDisruptionBudget</h2>
+<p>A <strong>PodDisruptionBudget</strong> is an indicator of the number of disruptions that can be tolerated at a given time for a class of pods (a budget of faults). Whenever a disruption to the pods in a service is calculated to cause the service to drop below the budget when using <strong>minAvailable</strong>, the operation is paused until it can maintain the budget. For example, a drain event could be temporarily halted while it waits for more pods to become available such that the budget isn’t crossed by evicting the pods. Likewise, when using <strong>maxUnavailable</strong> the operation is paused if a disruption to the pods exceeds the setting.</p>
 <p>To configure a Pod disruption budget, edit the values.yaml file and uncomment the <strong>podDisruptionBudgetSpec</strong> and either the <strong>maxUnavailable</strong> or <strong>minAvailable</strong> setting for your Foundry applications.
 You can change the <strong>maxUnavailable</strong> to denote the maximum number of unavailable pods at given point of time
 or the <strong>minAvailable</strong> setting to denote the minimum number of available pods at given point of time. The value you use should either be an integer or the number of pods as a percent. Save the values.yaml file once you have finished editing it. The following code shows the values.yaml content for each of the Foundry applications.</p>
@@ -1473,6 +1487,9 @@ or the <strong>minAvailable</strong> setting to denote the minimum number of ava
 <p><strong>Note:</strong> If this configuration change is done after the initial installation with <em>helm install</em> you can apply these changes with <em>helm upgrade foundry apps -f values.yaml -n foundry</em>.</p>
 <h2 id="configuration-updates-via-helm-upgrade">Configuration Updates via Helm Upgrade</h2>
 <p>You can use Helm upgrade if you need to change a configuration parameter on your Volt MX Foundry deployment. One example is your Ingress is not working, because you forgot to set the Ingress Class name as part of your initial deployment. You could update the class name via <code>ingress.class</code> in values.yaml, then run Helm upgrade, and only the Ingress objects would be changed.</p>
+<h2 id="encrypt-the-database-password">Encrypt the Database Password</h2>
+<p>The steps for encrypting the database password are the same as the steps used for the Volt MX Foundry Containers Solution On-Premises. The exception is that the values displayed for the <strong>Encrypted Password</strong> and <strong>Encrypted Key</strong> must be used for the <code>dbPass</code> and <code>dbPassSecretKey</code> parameters in the <code>values.yaml</code> file. For more information see the documentation for the Volt MX Foundry Containers Solution On-Premises:
+<a href="../../voltmxfoundry_containers_solution_on-prem/Content/Containers_Solution_Appendices.html#encrypt-the-database-password">Encrypt the Database Password</a>.</p>
 <h2 id="other-issues">Other Issues</h2>
 <p>For other issues please see
 <a href="../../voltmxfoundry_containers_solution_on-prem/Content/Containers_Solution_FAQs_and_Troubleshooting.html#faqs-and-troubleshooting">FAQs and Troubleshooting</a> for FAQs and troubleshooting around advanced topics related to the cluster environment.</p>
