@@ -46,12 +46,14 @@ Here is a sample of the relevant part of the SSL `connector` tag:
 
 ```
 SSLEnabled="true" sslEnabledProtocols="TLSv1.2" ciphers="TLS_ECDHE_RSA_WITH_RC4_128_SHA, SSL_RSA_WITH_RC4_128_SHA"
+
 ```
 
 Here is a sample modified https `connector` tag:
 
 ```
 <connector port="443" maxhttpheadersize="8192" address="127.0.0.1" enablelookups="false" disableuploadtimeout="true" acceptCount="100" scheme="https" secure="true" clientAuth="false" <mark> SSLEnabled="true" sslEnabledProtocols="TLSv1.2" ciphers="TLS_ECDHE_RSA_WITH_RC4_128_SHA,SSL_RSA_WITH_RC4_128_SHA" </mark> keystoreFile="mydomain.key" keystorePass="password" truststoreFile="mytruststore.truststore" truststorePass="password"/>;
+
 ```
 
 > **_Note:_** Upgrade the SSL Cipher list to the latest available versions.
@@ -475,8 +477,10 @@ Follow these steps to secure the tomcat manager to the localhost.
 2.  write the following code in **manager.xml**:
 ```
 <Context path="/manager" debug="0" privileged="true">
+
     <Valve className="org.apache.catalina.valves.RemoteAddrValve"
     allow="127.0.0.1"/>
+
     <!-- Link to the user database we will get roles from
           <ResourceLink name="users" global="UserDatabase"
     type="org.apache.catalina.UserDatabase"/>
@@ -510,7 +514,9 @@ Add the following code in the **web.xml** file:
 <secure>true</secure>
 </cookie-config>
 
-```\* Restart the Application Server.
+```
+
+* Restart the Application Server.
 
 You can use developer tools to verify the changes.
 
@@ -522,11 +528,13 @@ To enable `secure/Http-only` for all deployed applications, you can add a sessio
 <subsystem xmlns="urn:jboss:domain:undertow:3.1">
 ...
 <servlet-container name="default">
-<jsp-config/>
-<session-cookie http-only="true" secure="true" /> <!-- added -->
-<websockets/>
+         <jsp-config/>
+         <session-cookie http-only="true" secure="true" /> <!-- added -->
+         <websockets/>
 </servlet-container>
+
 ```
+
 
 ### For WebSphere as the Web Server, follow these steps.
 
@@ -592,20 +600,20 @@ Also, if there no overriding concerns, enable the security settings.
 - To overcome these security issues in Volt MX SPA and Desktop Web applications, add custom filter and filter mapping entry in the **web.xml** file.
 - For example:
 
-  ```
-public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
-  throws IOException, ServletException {
-  HttpServletRequest req = (HttpServletRequest) request;
-  HttpServletResponse res = (HttpServletResponse) response;
-  res.setHeader (""""X-Content-Type-Options"""", """"nosniff"""");.... // Similarly add your response headers. ... filterChain.doFilter(request, response);
+```
+     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
+     throws IOException, ServletException {
+     HttpServletRequest req = (HttpServletRequest) request;
+     HttpServletResponse res = (HttpServletResponse) response;
+     res.setHeader (""""X-Content-Type-Options"""", """"nosniff"""");.... // Similarly add your response headers. ... filterChain.doFilter(request, response);
   }
 
-  ```
+```
 
 - Create a jar file using the class that you created.
 
-  ```
-<filter>
+```
+  <filter>
   <filter-name>XXXFilter</filter-name>
   <filter-class>com.xyz.web.filter.XXXFilter</filter-class>
   </filter>
@@ -614,7 +622,7 @@ public void doFilter(ServletRequest request, ServletResponse response, FilterCha
   <url-pattern>/</url-pattern>
   </filter-mapping>
 
-  ```
+```
 
 - Extract the build application War file and add the mentioned lib and entry in web.xml.
 - Volt MX Iris provides an option to add jars and edit the web.xml under `Menu > File > Combine EAR file` option.

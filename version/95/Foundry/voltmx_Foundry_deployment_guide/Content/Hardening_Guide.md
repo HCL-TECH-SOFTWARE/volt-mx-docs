@@ -327,10 +327,12 @@ For security reasons, you must disable the server information disclosure for Tom
 
 1.  Open the Tomcat Server > `server.xml` file.
 2.  Add the following:
+
 ```
-<Valve className="org.apache.catalina.valves.ErrorReportValve"
+   <Valve className="org.apache.catalina.valves.ErrorReportValve"
     showReport="false" 
     showServerInfo="false"/>
+
 ```
 3.  Save the server.xml.
 4.  Restart the server.
@@ -457,13 +459,13 @@ A database admin can unblock a user before the blocking threshold ends. To unblo
 
 ```
 set sql_safe_updates = 0;
-UPDATE users
-SET
-user_status = 'active',
-login_fail_count = 0
-WHERE
-userid = '<the blocked userid here>';
-set sql_safe_updates = 1;
+    UPDATE users
+    SET
+        user_status = 'active',
+        login_fail_count = 0
+    WHERE
+        userid = '<the blocked userid here>';
+    set sql_safe_updates = 1;
 
 ```
 
@@ -475,8 +477,10 @@ Follow these steps to secure the tomcat manager to the localhost.
 2.  write the following code in **manager.xml**:
 ```
 <Context path="/manager" debug="0" privileged="true">
+
     <Valve className="org.apache.catalina.valves.RemoteAddrValve"
     allow="127.0.0.1"/>
+
     <!-- Link to the user database we will get roles from
           <ResourceLink name="users" global="UserDatabase"
     type="org.apache.catalina.UserDatabase"/>
@@ -510,7 +514,9 @@ Add the following code in the **web.xml** file:
 <secure>true</secure>
 </cookie-config>
 
-```\* Restart the Application Server.
+```
+
+* Restart the Application Server.
 
 You can use developer tools to verify the changes.
 
@@ -522,10 +528,11 @@ To enable `secure/Http-only` for all deployed applications, you can add a sessio
 <subsystem xmlns="urn:jboss:domain:undertow:3.1">
 ...
 <servlet-container name="default">
-<jsp-config/>
-<session-cookie http-only="true" secure="true" /> <!-- added -->
-<websockets/>
+         <jsp-config/>
+         <session-cookie http-only="true" secure="true" /> <!-- added -->
+         <websockets/>
 </servlet-container>
+
 ```
 
 ### For WebSphere as the Web Server, follow these steps.
@@ -538,7 +545,11 @@ To enable `secure/Http-only` for all deployed applications, you can add a sessio
     1.  Select your server.
     2.  Go to **Session management** > **Cookies**, enable the cookies .
 
+
+
     ![](Resources/Images/WebSphere-Settings_633x267.jpg)
+
+
 
 ## Redirect Traffic from Non-Secure Protocol (HTTP) to Secure Protocol (HTTPS)
 
@@ -592,20 +603,20 @@ Also, if there no overriding concerns, enable the security settings.
 - To overcome these security issues in Volt MX SPA and Desktop Web applications, add custom filter and filter mapping entry in the **web.xml** file.
 - For example:
 
-  ```
-public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
-  throws IOException, ServletException {
-  HttpServletRequest req = (HttpServletRequest) request;
-  HttpServletResponse res = (HttpServletResponse) response;
-  res.setHeader (""""X-Content-Type-Options"""", """"nosniff"""");.... // Similarly add your response headers. ... filterChain.doFilter(request, response);
+```
+     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
+     throws IOException, ServletException {
+     HttpServletRequest req = (HttpServletRequest) request;
+     HttpServletResponse res = (HttpServletResponse) response;
+     res.setHeader (""""X-Content-Type-Options"""", """"nosniff"""");.... // Similarly add your response headers. ... filterChain.doFilter(request, response);
   }
 
-  ```
+```
 
 - Create a jar file using the class that you created.
 
-  ```
-<filter>
+```
+  <filter>
   <filter-name>XXXFilter</filter-name>
   <filter-class>com.xyz.web.filter.XXXFilter</filter-class>
   </filter>
@@ -614,7 +625,7 @@ public void doFilter(ServletRequest request, ServletResponse response, FilterCha
   <url-pattern>/</url-pattern>
   </filter-mapping>
 
-  ```
+```
 
 - Extract the build application War file and add the mentioned lib and entry in web.xml.
 - Volt MX Iris provides an option to add jars and edit the web.xml under `Menu > File > Combine EAR file` option.
@@ -653,6 +664,7 @@ public void doFilter(ServletRequest request, ServletResponse response, FilterCha
 
 1.  Write a custom filter that adds the response headers to the response.
 2.  Add the following custom filter to preprocessor and postprocessor jar, and publish the app.
+
 ```
 import java.io.IOException;
 
