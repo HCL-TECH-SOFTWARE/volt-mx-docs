@@ -827,7 +827,7 @@ Defines a shape to clip the widget view.
 
 ```
 
-clipView
+clipView(shape,bounds,boundsInPixel,radius)
 ```
 
 ### Type
