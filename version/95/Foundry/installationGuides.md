@@ -19,8 +19,6 @@ Understand the licensing process of the HCL Volt MX product suite.
 
 ### [Install Volt MX Foundry on Amazon EKS](voltmxfoundry_on_amazon_eks/Content/introduction.md)
 
-### [Install Volt MX Foundry on Azure](voltmxfoundry_on_azure/Content/Introduction.md)
-
 ### [Install Volt MX Foundry on Red Hat OpenShift](voltmxfoundry_on_openshift/Content/introduction.md)
 
 ### [Install Volt MX Foundry Containers for Helm](voltmxfoundry_containers_helm/Content/Introduction.md)
