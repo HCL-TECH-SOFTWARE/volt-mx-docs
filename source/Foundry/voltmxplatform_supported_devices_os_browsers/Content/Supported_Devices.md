@@ -49,6 +49,10 @@ The following is a list of supported devices for the iOS platform along with the
 | iPhone 13 Pro | 2532×1170 | Latest iOS 15 |
 | iPhone 13 Pro Max | 2778×1284 | Latest iOS 15 |
 | iPhone 14| 1170 x 2532	 | Latest iOS 16 |
+| iPhone 14 Plus| 2778 x 1284	 | Latest iOS 16 |
+| iPhone 14 Pro| 1179 x 2556	 | Latest iOS 16 |
+| iPhone 14 Pro Max| 1290 x 2796	 | Latest iOS 16 |
+| iPhone SE(3rd Gen)| 1334 × 750	 | Latest iOS 16 |
 | __iPod__ |   |   |
 | iPod (6th Gen) | 1136×640 | Latest iOS 12 |
 | __iPad__ |   |   |
