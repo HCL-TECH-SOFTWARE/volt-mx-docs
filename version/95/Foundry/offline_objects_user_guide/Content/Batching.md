@@ -150,16 +150,74 @@ function setNextBatchID() {
     setNextBatchID();
 ```
     
-    > **_Note:_** While batching with SyncV2, for non-adapter back ends, if empty records are fetched in the current batch, the **hasMoreRecords** key should not be sent from the back end.
+> **_Note:_** While batching with SyncV2, for non-adapter back ends, if empty records are fetched in the current batch, the **hasMoreRecords** key should not be sent from the back end.
     
 3.  The post processor calculates the next batchId by adding the current number of records to the downloaded records.
 4.  Under the Objects tab in Volt MX Foundry Console, go to the Mapping tab of your object.
 5.  For the corresponding object, add the following lines of code in the **Response Mapping** tab of the **GET** operation and save the changes.
     
-```
-<set-param inputpath="nextBatchId" outputpath="nextBatchId"/>           
-    <set-param inputpath="hasMoreRecords" outputpath="hasMoreRecords"/>
-```<br>![](Resources/Images/GET_650x355.png)
+    ```
+    <set-param inputpath="nextBatchId" outputpath="nextBatchId"/>           
+        <set-param inputpath="hasMoreRecords" outputpath="hasMoreRecords"/>
+    ```<br>![](Resources/Images/GET_650x355.png)
     
 
-For more information about sync API and options for the batching, refer to [Offline Objects API Guide](../../../Foundry/offline_objectsapi_reference_guide/Content/Offline_Objects_API_Reference.md).
+    For more information about sync API and options for the batching, refer to [Offline Objects API Guide](../../../Foundry/offline_objectsapi_reference_guide/Content/Offline_Objects_API_Reference.md).
+
+Batching for non-OData supported SDO:
+-------------------------------------
+
+If the object service contains multiple object in it in that case the post-processor code should be as -
+
+JS code snippet:
+```
+function setNextBatchID() {
+    var size = request.getParameter('$batchsize');
+    if(size != null){
+       var count = 0;
+       var resultCount  = result.getAllDatasets().size();
+       for(var i=0; i < resultCount; i++)
+        {           
+            count = Number(count) + Number(result.getAllDatasets().get(i).getAllRecords().size());                 
+        }
+        var total = 0;
+        if(request.getParameter('$batchid') != null)
+        {             
+            total = request.getParameter('$batchid');                  
+        }
+        var batchId = Number(total)+ Number(count);
+        if(count > 0)
+        {                                
+            result.addParam(new com.konylabs.middleware.dataobject.Param("nextBatchId", Number(batchId)));             
+            result.addParam(new com.konylabs.middleware.dataobject.Param("hasMoreRecords",true));                                     
+        }
+    }   
+}
+setNextBatchID();
+```
+
+JAVA code snippet:
+```
+public class BatchPostProcessor implements DataPostProcessor2 {
+
+    @Override
+    public Object execute(Result result, DataControllerRequest request,
+    DataControllerResponse response) throws Exception {
+        String size = request.getParameter("$batchsize");
+        if (size != null) {
+        int count = 0;
+        for (int i = 0; i < result.getAllDatasets().size(); i++)
+            { count = count + result.getAllDatasets().get(i).getAllRecords().size(); }
+        int total = 0;
+        if (request.getParameter("$batchid") != null)
+            { total = java.lang.Integer.parseInt(request.getParameter("$batchid")); }
+        int batchId = total + count;
+        if (count > 0)
+            { result.addParam( new com.konylabs.middleware.dataobject.Param("nextBatchId", String.valueOf(batchId))); result.addParam(new com.konylabs.middleware.dataobject.Param("hasMoreRecords", "true")); }
+        }
+        return result;
+    }
+
+}
+
+```
