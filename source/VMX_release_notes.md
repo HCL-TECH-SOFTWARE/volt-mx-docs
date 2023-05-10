@@ -8,6 +8,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Iris](#volt-iris)
 
+- [V9 Servicepack 2 Fixpack 61](#v9-servicepack-2-fixpack-61)
 - [V9 Servicepack 2 Fixpack 60](#v9-servicepack-2-fixpack-60)
 - [V9 Servicepack 2 Fixpack 59](#v9-servicepack-2-fixpack-59)
 - [V9 Servicepack 2 Fixpack 58](#v9-servicepack-2-fixpack-58)
@@ -38,6 +39,15 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 
 ## Volt Iris
+
+
+### V9 Servicepack 2 Fixpack 61
+May 10, 2023
+
+* JavaScript debugging for iOS 16.4+ devices will work in Debug Mode
+* Xcode 14 support is added
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 
 ### V9 Servicepack 2 Fixpack 60
