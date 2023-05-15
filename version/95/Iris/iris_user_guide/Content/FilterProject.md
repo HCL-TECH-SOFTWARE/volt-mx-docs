@@ -3,7 +3,7 @@
 Apply Filters in the Project Explorer
 =====================================
 
-From V9 Service Pack 3, you can configure the visibility of the nodes in the Project Explorer for the complete project (or for each Micro App) by applying filters. You can apply filters in each tab (the Project, Themes, Templates, and Assets tabs) of the Project Explorer. only displays those resources that you select from the Project Filter dialog box in the Project Explorer.
+From V9 Service Pack 5, you can configure the visibility of the nodes in the Project Explorer for the complete project (or for each Micro App) by applying filters. You can apply filters in each tab (the Project, Themes, Templates, and Assets tabs) of the Project Explorer. only displays those resources that you select from the Project Filter dialog box in the Project Explorer.
 
 To filter resources in the **Project** tab of the Project Explorer, follow these steps:
 
