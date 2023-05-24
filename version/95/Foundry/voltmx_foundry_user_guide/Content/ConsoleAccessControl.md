@@ -162,7 +162,7 @@ What Full Access Permission for an App Means
 
 What Read Only Permission for an App Means
 
-*   A user with read-only access cannot link or unlink any services to the app.
+*   A user with read-only access cannot link or unlink any services to the app. The user can publish the app if the user has permissions to publish for that environment.
     
 *   A user with read-only access cannot configure or change the control access list for the app.
 
