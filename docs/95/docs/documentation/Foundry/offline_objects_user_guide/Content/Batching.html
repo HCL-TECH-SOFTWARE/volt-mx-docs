@@ -1373,19 +1373,16 @@
 </li>
 <li>
 <p>Modify the request mapper and response mapper of the GET operation as follows.</p>
-</li>
-</ol>
 <p>Request Mapper</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;
-&lt;mapper xmlns=&quot;http://www.voltmx.com/ns/mapper&quot;&gt; 
-    &lt;map inputpath=&quot;request_in&quot; outputpath=&quot;request_out&quot;&gt; 
-        &lt;set-param inputpath=&quot;../criteria/filter/__LastModifiedDate__&quot; outputpath=&quot;__from_timestamp__&quot;/&gt; 
-        &lt;set-param inputpath=&quot;/$batchid&quot; outputpath=&quot;__batchid parameter__&quot;/&gt;
-        &lt;set-param inputpath=&quot;/$batchsize&quot; outputpath=&quot;__batchsize param__&quot;/&gt; 
-        &lt;set-param inputpath=&quot;../criteria/filter/__Id__&quot; outputpath=&quot;__Id__&quot;/&gt; 
+<p><code>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt; 
+    &lt;map inputpath="request_in" outputpath="request_out"&gt; 
+        &lt;set-param inputpath="../criteria/filter/__LastModifiedDate__" outputpath="__from_timestamp__"/&gt; 
+        &lt;set-param inputpath="/$batchid" outputpath="__batchid parameter__"/&gt;
+        &lt;set-param inputpath="/$batchsize" outputpath="__batchsize param__"/&gt; 
+        &lt;set-param inputpath="../criteria/filter/__Id__" outputpath="__Id__"/&gt; 
     &lt;/map&gt;
-&lt;/mapper&gt; 
-</code></pre>
+&lt;/mapper&gt;</code></p>
 <p>The code contains the following fields:</p>
 <ul>
 <li><strong>LastModifiedDate</strong> is the column name selected for object update tracking.</li>
@@ -1403,29 +1400,80 @@
 </li>
 </ul>
 <p>Response Mapper</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;
-&lt;mapper xmlns=&quot;http://www.voltmx.com/ns/mapper&quot;&gt; 
-    &lt;map inputpath=&quot;response_in&quot; outputpath=&quot;response_out&quot;&gt; 
-        &lt;set-param inputpath=&quot;hasMoreRecords&quot; outputpath=&quot;__hasMoreRecords__&quot;/&gt; 
-            &lt;exec-function name=&quot;voltmx.string:isNotBlank&quot; outputpath=&quot;notNullBatchID&quot; output=&quot;$vars&quot;&gt; 
-                &lt;set-arg inputpath=&quot;__batchid__&quot; /&gt; 
+<p><code>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt; 
+    &lt;map inputpath="response_in" outputpath="response_out"&gt; 
+        &lt;set-param inputpath="hasMoreRecords" outputpath="__hasMoreRecords__"/&gt; 
+            &lt;exec-function name="voltmx.string:isNotBlank" outputpath="notNullBatchID" output="$vars"&gt; 
+                &lt;set-arg inputpath="__batchid__" /&gt; 
             &lt;/exec-function&gt; 
             &lt;choose&gt; 
-                &lt;when test=&quot;$vars/notNullBatchID&quot;&gt; 
-                    &lt;set-param outputpath=&quot;nextBatchId&quot; inputpath=&quot;__batchid__&quot; /&gt; 
+                &lt;when test="$vars/notNullBatchID"&gt; 
+                    &lt;set-param outputpath="nextBatchId" inputpath="__batchid__" /&gt; 
                 &lt;/when&gt; 
             &lt;/choose&gt; 
-        &lt;map inputpath=&quot;Account&quot; outputpath=&quot;Account&quot;&gt; 
-        &lt;set-param inputpath=&quot;AccountNumber&quot; outputpath=&quot;AccountNumber&quot;/&gt; 
+        &lt;map inputpath="Account" outputpath="Account"&gt; 
+        &lt;set-param inputpath="AccountNumber" outputpath="AccountNumber"/&gt; 
         &lt;default generated mapper continued&gt;
         &lt;/map&gt; 
     &lt;/map&gt;
-&lt;/mapper&gt; 
-</code></pre>
+&lt;/mapper&gt;</code></p>
 <p>In the code, a null check for the batchid parameter must be performed. If the batchid is null, ensure that the <strong>nextBatchId</strong> parameter is not present.</p>
 <blockquote>
 <p><strong><em>Note:</em></strong> The batchid and nextBatchId parameters are case-sensitive.</p>
 </blockquote>
+</li>
+</ol>
+<p>If the object service contains multiple object in it in that case the post-processor code should be as -</p>
+<p>JS code snippet:</p>
+<pre><code>function setNextBatchID() {
+    var size = request.getParameter('$batchsize');
+    if(size != null){
+       var count = 0;
+       var resultCount  = result.getAllDatasets().size();
+       for(var i=0; i &lt; resultCount; i++)
+        {           
+            count = Number(count) + Number(result.getAllDatasets().get(i).getAllRecords().size());                 
+        }
+        var total = 0;
+        if(request.getParameter('$batchid') != null)
+        {             
+            total = request.getParameter('$batchid');                  
+        }
+        var batchId = Number(total)+ Number(count);
+        if(count &gt; 0)
+        {                                
+            result.addParam(new com.konylabs.middleware.dataobject.Param(&quot;nextBatchId&quot;, Number(batchId)));             
+            result.addParam(new com.konylabs.middleware.dataobject.Param(&quot;hasMoreRecords&quot;,true));                                     
+        }
+    }   
+}
+setNextBatchID();
+</code></pre>
+<p>JAVA code snippet:</p>
+<pre><code>public class BatchPostProcessor implements DataPostProcessor2 {
+
+    @Override
+    public Object execute(Result result, DataControllerRequest request,
+    DataControllerResponse response) throws Exception {
+        String size = request.getParameter(&quot;$batchsize&quot;);
+        if (size != null) {
+        int count = 0;
+        for (int i = 0; i &lt; result.getAllDatasets().size(); i++)
+            { count = count + result.getAllDatasets().get(i).getAllRecords().size(); }
+        int total = 0;
+        if (request.getParameter(&quot;$batchid&quot;) != null)
+            { total = java.lang.Integer.parseInt(request.getParameter(&quot;$batchid&quot;)); }
+        int batchId = total + count;
+        if (count &gt; 0)
+            { result.addParam( new com.konylabs.middleware.dataobject.Param(&quot;nextBatchId&quot;, String.valueOf(batchId))); result.addParam(new com.konylabs.middleware.dataobject.Param(&quot;hasMoreRecords&quot;, &quot;true&quot;)); }
+        }
+        return result;
+    }
+
+}
+
+</code></pre>
 <h2 id="batching-for-rdms-adapter">Batching for RDMS Adapter:</h2>
 <p>Since the RDMS adapter supports OData, it supports the $filter parameter but does not support the $batchID parameter. To achieve batching for the RDMS adapter, follow these steps.</p>
 <ol>
@@ -1468,16 +1516,19 @@
 
     setNextBatchID();
 </code></pre>
-<pre><code>&gt; **_Note:_** While batching with SyncV2, for non-adapter back ends, if empty records are fetched in the current batch, the **hasMoreRecords** key should not be sent from the back end.
-</code></pre>
+<blockquote>
+<p><strong><em>Note:</em></strong> While batching with SyncV2, for non-adapter back ends, if empty records are fetched in the current batch, the <strong>hasMoreRecords</strong> key should not be sent from the back end.</p>
+</blockquote>
 <ol>
 <li>The post processor calculates the next batchId by adding the current number of records to the downloaded records.</li>
 <li>Under the Objects tab in Volt MX Foundry Console, go to the Mapping tab of your object.</li>
-<li>For the corresponding object, add the following lines of code in the <strong>Response Mapping</strong> tab of the <strong>GET</strong> operation and save the changes.</li>
-</ol>
+<li>
+<p>For the corresponding object, add the following lines of code in the <strong>Response Mapping</strong> tab of the <strong>GET</strong> operation and save the changes.</p>
 <p><code>&lt;set-param inputpath="nextBatchId" outputpath="nextBatchId"/&gt;           
     &lt;set-param inputpath="hasMoreRecords" outputpath="hasMoreRecords"/&gt;</code><br><img alt="" src="Resources/Images/GET_650x355.png" /></p>
 <p>For more information about sync API and options for the batching, refer to <a href="../../offline_objectsapi_reference_guide/Content/Offline_Objects_API_Reference.html">Offline Objects API Guide</a>.</p>
+</li>
+</ol>
 
               
             </article>
