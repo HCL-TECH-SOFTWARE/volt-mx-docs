@@ -278,13 +278,6 @@ To import a style constant, follow these steps:
 
 If a Style Constant with the same name already exists in the project, appends a number to the name of the imported Style Constant.
 
-Important Considerations
-
-If a style constant with the same name already exists in the project, an alert with a Conflict message appears, prompting you to replace or duplicate the existing micro app.
-
-*   Click **Replace** to overwrite the existing style constant.
-*   Click **Duplicate** to create and keep a copy of the existing style constant.
-*   Alternatively, click **Skip** to abort the import process.
 
 Exporting Style Constants
 -------------------------
