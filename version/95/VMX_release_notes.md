@@ -52,10 +52,11 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 ### V9 Servicepack 5 Fixpack 9
 
-May 30, 2023
+June 05, 2023
 
-There are no new features or enhancements in this release.
-For relevant support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+* Fix ES5 option in Volt MX Iris application settings to enable apps to work in IE mode of MS Edge
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 
 ### V9 Servicepack 5 Fixpack 8
