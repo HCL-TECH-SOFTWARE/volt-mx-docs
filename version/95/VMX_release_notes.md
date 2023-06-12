@@ -8,6 +8,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 [Volt Iris](#volt-iris)
 
 
+- [V9 Servicepack 5 Fixpack 10](#v9-servicepack-5-fixpack-10)
 - [V9 Servicepack 5 Fixpack 9](#v9-servicepack-5-fixpack-9)
 - [V9 Servicepack 5 Fixpack 8](#v9-servicepack-5-fixpack-8)
 - [V9 Servicepack 5 Fixpack 7](#v9-servicepack-5-fixpack-7)
@@ -28,6 +29,8 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Foundry](#volt-foundry)
 
+
+- [V9 Servicepack 5 Fixpack 3 Hotfix 3](#v9-servicepack-5-fixpack-3-hotfix-3)
 - [V9 Servicepack 5 Fixpack 3 Hotfix 2](#v9-servicepack-5-fixpack-3-hotfix-2)
 - [V9 Servicepack 5 Fixpack 3 Hotfix 1](#v9-servicepack-5-fixpack-3-hotfix-1)
 - [V9 Servicepack 5 Fixpack 3 Hotfix 0](#v9-servicepack-5-fixpack-3-hotfix-0)
@@ -49,6 +52,16 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 - [Earlier Foundry releases](#earlier-foundry-releases)
 
 ## Volt Iris
+
+
+### V9 Servicepack 5 Fixpack 10
+
+June 12, 2023
+
+* macOS Ventura (13.x) support has been added
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+
 
 ### V9 Servicepack 5 Fixpack 9
 
@@ -645,6 +658,15 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 -->
 
 ## Volt Foundry
+
+### V9 Servicepack 5 Fixpack 3 Hotfix 3
+
+June 12, 2023
+
+* Healthcheck API has been enhanced
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+
 
 
 ### V9 Servicepack 5 Fixpack 3 Hotfix 2
