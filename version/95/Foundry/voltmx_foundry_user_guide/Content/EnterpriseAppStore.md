@@ -16,7 +16,7 @@ With Volt MX AppPlatform Release V8 Service Pack 4, Volt MX App Server has been 
 
 After an app is built by using Volt MX AppPlatform, Volt MX EAS service allows Volt MX AppPlatform users (**Admin/Member/Owner**) to choose to publish an app to the Volt MX App Server available in their Volt MX Foundry account. AppPlatform users can then allow authenticated access to certain end-users. The authorized end-users can access the published apps directly from Volt MX EAS, just like how you can access apps from the Google Play Store and the Apple App Store.
 
-The following table details Volt MX Foundry roles to manage EAS Apps
+The following table details Volt MX Foundry roles to manage EAS Apps 
 
   
 | **EAS Apps Management** ||||
@@ -64,6 +64,9 @@ Prerequisites for Cloud
 
 Prerequisites for On-premises
 -----------------------------
+
+*   EAS app can be found in the local Foundry install folder, for example: 
+    `C:\VoltMXFoundryInstaller-GA-9.5.2.3\tomcat\webapps\accounts\WEB-INF\classes\EASApps\Volt MX App Store (v1.0)`
 
 *   For publishing apps to the Enterprise App Store, you have to have Volt MX Foundry App Server.
     
