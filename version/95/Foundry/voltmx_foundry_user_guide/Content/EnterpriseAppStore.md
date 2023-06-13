@@ -65,7 +65,7 @@ Prerequisites for Cloud
 Prerequisites for On-premises
 -----------------------------
 
-*   EAS app can be found in the local Foundry install folder:   
+*   EAS app can be found in the local Foundry install folder, for example: 
     `C:\VoltMXFoundryInstaller-GA-9.5.2.3\tomcat\webapps\accounts\WEB-INF\classes\EASApps\Volt MX App Store (v1.0)`
 
 *   For publishing apps to the Enterprise App Store, you have to have Volt MX Foundry App Server.
