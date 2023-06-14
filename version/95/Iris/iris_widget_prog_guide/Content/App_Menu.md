@@ -1,5 +1,10 @@
                                 
-# App Menu Widget (Tab Bar)  
+# App Menu Widget ( Tab Bar )  
+
+<!-- ### Tab Bar -->
+
+### [Tab Bar](#app-menu-widget--tab-bar)
+
 
 The _Application Menu_ _(App Menu)_ is a bar that is displayed at the bottom of an app, containing icons for features that apply to the application, rather than to a specific application screen or window.
 
