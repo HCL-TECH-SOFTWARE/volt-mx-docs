@@ -61,9 +61,9 @@ Following are the options:
 > **_Note:_** <br>
 As per layout behavior changes for  FlexContainer introduced as part of 9.5<br>
 When layout type of FlexContainer is set to <b>Flow Horizontal</b> then<br>
-The <b>Left</b> property of all current child widgets of that FlexContainer will set to 0<br>
+the <b>Left</b> property of all current child widgets of that FlexContainer will set to 0<br>
 When layout type of FlexContainer is set to <b>Flow Vertical</b> then<br>
-The <b>Top</b> property of all current child widgets of that FlexContainer will set to 0    
+the <b>Top</b> property of all current child widgets of that FlexContainer will set to 0    
 
 
 #### Enable Scrolling
