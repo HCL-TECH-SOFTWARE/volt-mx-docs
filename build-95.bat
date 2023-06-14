@@ -22,6 +22,7 @@ _data\installing_foundry_95.yml+^
 _data\voltmxfoundry_supported_devices_os_browsers_95.yml+^
 _data\voltmx_foundry_linux_install_guide_95.yml+^
 _data\voltmx_foundry_manual_install_guide_95.yml+^
+_data\VoltMX_Foundry_CLI-95.yml+^
 _data\voltmx_foundry_windows_install_guide_95.yml+^
 _data\voltmxfoundry_containers_solution_on-prem_95.yml+^
 _data\voltmxfoundry_on_amazon_eks_95.yml+^
@@ -69,8 +70,8 @@ _data\vmfintegrationservice_troubleshooting_guide_95.yml^
 
  mkdocs.yml 
 
-mkdocs build 2>errors.txt
-
+::mkdocs build 2>errors.txt
+mkdocs serve
 :: _data\flexconvertertool-95.yml+^
 :: _data\VoltMX_Licensing_Guide_V9-95.yml+^
 :: _data\debugging-95.yml+^
@@ -83,6 +84,5 @@ mkdocs build 2>errors.txt
 :: _data\MobileFoundry_Video_Tutorials-95.yml+^
 :: _data\Offline_Objects_Release_Notes-95.yml+^
 :: _data\VoltMX_Foundry-ErrorCodes-95.yml+^
-:: _data\VoltMX_Foundry_CLI-95.yml+^
 :: _data\VoltMX_Foundry_Deployments-95.yml+^
 ::_data\VoltMX_MobileFoundry_Supported_Devices_Consolidated-95.yml^
