@@ -11,10 +11,10 @@ The Volt Foundry CLI aids and supplements the manual install process by providin
 
 Following are the prerequisites to install and configure Volt Foundry Command Line Installer on your machine:
 
-*   Java version 1.8 and later
+*   OpenJDK 11
 *   Ant version 1.8.2 and later
 *   An instance of your chosen Application Server and Database must be installed and configured
-*   Download the Manual Install Artifacts from [Volt Downloads](https://community.voltmx.com/downloads/manual).
+*   Download the Manual Install Artifacts from [Flexnet](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal).
 
 ### Supported Application Servers
 
