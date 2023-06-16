@@ -294,15 +294,15 @@ You have some additional options available under the **ellipsis** menu, that is 
 Custom Data Adapter using Java Integration Services
 ----------------------------------------------------
 
-<blockquote><em><b>Known Issues: </b></em>
+<!-- <blockquote><em><b>Known Issues: </b></em>
 	<ul>
 		<li>In custom code section, if we have the jar file with same name as the jar file included in custom data adapter zip file, then we need to delete the existing jar (from custom code section) before importing <code>customAdapter.zip</code> file.</li>
 		<li>At present, multiple jars are not supported in lib folder of <code>customAdapter.zip</code>.</li>
 	</ul>
-</blockquote>
+</blockquote> -->
 <ol>
 <li>
-In “Custom Data Adapter” section, click on Import and Browse for the <code>customAdapter.zip</code> file. This <code>customAdapter.zip</code> file which you are trying to import should have the lib folder and the jar file inside that lib folder. 
+In “Custom Data Adapter” section, click on Import and Browse for the <code><a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/foundry/zip/user_guide/customAdapter.zip">customAdapter.zip</a></code> file. This <code><a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/foundry/zip/user_guide/customAdapter.zip">customAdapter.zip</a></code> file which you are trying to import should have the lib folder and the jar file inside that lib folder. 
 <img src="Resources/Images/CDA_1.png">
 </li>
 <li>
