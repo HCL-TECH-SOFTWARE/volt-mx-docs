@@ -294,9 +294,15 @@ You have some additional options available under the **ellipsis** menu, that is 
 Custom Data Adapter using Java Integration Services
 ----------------------------------------------------
 
+<blockquote><em><b>Known Issues: </b></em>
+	<ul>
+		<li>In custom code section, if we have the jar file with same name as the jar file included in custom data adapter zip file, then we need to delete the existing jar (from custom code section) before importing <code>customAdapter.zip</code> file.</li>
+		<li>At present, multiple jars are not supported in lib folder of <code>customAdapter.zip</code>.</li>
+	</ul>
+</blockquote>
 <ol>
 <li>
-In “Custom Data Adapter” section, click on Import and Browse for the “customAdapter.zip” file having lib folder which has the java jar file inside it.
+In “Custom Data Adapter” section, click on Import and Browse for the <code>customAdapter.zip</code> file. This <code>customAdapter.zip</code> file which you are trying to import should hav lib folder and jar file inside that lib folder. 
 <img src="Resources/Images/CDA_1.png">
 </li>
 <li>
@@ -304,10 +310,10 @@ Notice the “Custom Code” section that is uploaded with the new jar file.
 <img src="Resources/Images/CDA_2.png">
 <blockquote><em><b>Note: </b></em>Here the lib folder is processed, jar file is extracted and it is uploaded in Custom Code section.</blockquote>
 </li>
-<li>Create a new integration service using this custom data adapter. 
+<li>Create a new integration service using this custom data adapter. Save this integration services. 
 <img src="Resources/Images/CDA_3.png">
 </li>
-<li>Click Configure New, Select Service Type value with that custom data adapter 
+<li>Click Configure New, Select Service Type value with that custom data adapter. Save the integration service. 
 <img src="Resources/Images/CDA_4.png">
 </li>
 <li>Select the imported jar file and attach it as below: 
