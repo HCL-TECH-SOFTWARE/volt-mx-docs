@@ -302,7 +302,7 @@ Custom Data Adapter using Java Integration Services
 </blockquote>
 <ol>
 <li>
-In “Custom Data Adapter” section, click on Import and Browse for the <code>customAdapter.zip</code> file. This <code>customAdapter.zip</code> file which you are trying to import should hav lib folder and jar file inside that lib folder. 
+In “Custom Data Adapter” section, click on Import and Browse for the <code>customAdapter.zip</code> file. This <code>customAdapter.zip</code> file which you are trying to import should have the lib folder and the jar file inside that lib folder. 
 <img src="Resources/Images/CDA_1.png">
 </li>
 <li>
