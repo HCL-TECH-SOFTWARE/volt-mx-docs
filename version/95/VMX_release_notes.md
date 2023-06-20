@@ -29,7 +29,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Foundry](#volt-foundry)
 
-
+- [V9 Servicepack 5 Fixpack 3 Hotfix 4](#v9-servicepack-5-fixpack-3-hotfix-4)
 - [V9 Servicepack 5 Fixpack 3 Hotfix 3](#v9-servicepack-5-fixpack-3-hotfix-3)
 - [V9 Servicepack 5 Fixpack 3 Hotfix 2](#v9-servicepack-5-fixpack-3-hotfix-2)
 - [V9 Servicepack 5 Fixpack 3 Hotfix 1](#v9-servicepack-5-fixpack-3-hotfix-1)
@@ -658,6 +658,15 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 -->
 
 ## Volt Foundry
+
+### V9 Servicepack 5 Fixpack 3 Hotfix 4
+
+June 19, 2023
+
+* Support for creating Custom Data Adapters using java services added
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+
 
 ### V9 Servicepack 5 Fixpack 3 Hotfix 3
 

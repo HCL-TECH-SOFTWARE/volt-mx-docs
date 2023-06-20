@@ -272,6 +272,64 @@ The root location of your zip file should be similar to the given image.
 </details>
 Once you've configured all the files and folders, you can compress it into a zip file and [import](#importing-a-custom-data-adapter) it into Volt MX Foundry.
 
+Custom Data Adapter using Java Integration Services
+----------------------------------------------------
+
+Java services based custom data adapter is similar to foundry app based custom data adapter with a difference of 
+Java service library which will get added to lib folder 
+
+<b>Example</b>  <br>Java service custom data adapter folder structure<br>![](Resources/Images/custom_data_adapter.png)
+
+Custom data adapter based on java services available here <code><a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/foundry/zip/user_guide/customAdapter.zip">customAdapter.zip</a></code>
+<blockquote><em><b>Note: </b></em>Multiple jars are not supported in lib folder of custom Data Adapter</blockquote>
+
+How to import java services custom based data adapter <code><a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/foundry/zip/user_guide/customAdapter.zip">customAdapter.zip</a></code> 
+
+<!-- <blockquote><em><b>Known Issues: </b></em>
+	<ul>
+		<li>In custom code section, if we have the jar file with same name as the jar file included in custom data adapter zip file, then we need to delete the existing jar (from custom code section) before importing <code>customAdapter.zip</code> file.</li>
+		<li>At present, multiple jars are not supported in lib folder of <code>customAdapter.zip</code>.</li>
+	</ul>
+</blockquote> -->
+<ol>
+<li>
+In <b>Custom Data Adapter</b> section, click on Import and Browse for the <code><a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/foundry/zip/user_guide/customAdapter.zip">customAdapter.zip</a></code> file. This <code><a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/foundry/zip/user_guide/customAdapter.zip">customAdapter.zip</a></code> file which you are trying to import should have the lib folder and the jar file inside that lib folder. 
+<blockquote><em><b>Note: </b></em>If you are including a jar file under lib folder of custom data adapter, and if it's already present in custom code section then you need to delete existing jar file from custom code section and then import custom data adapter with that jar file, otherwise it will create duplicate instance of jar and will cause ambiguity.</blockquote>
+<img src="Resources/Images/CDA_1.png">
+</li>
+<li>
+Notice the <b>Custom Code</b> section that is uploaded with the new jar file.
+<img src="Resources/Images/CDA_2.png">
+<blockquote><em><b>Note: </b></em>Here the lib folder is processed, jar file is extracted and it is uploaded in Custom Code section.</blockquote>
+</li>
+<li>Create a new integration service using this custom data adapter. Save this integration services. 
+<img src="Resources/Images/CDA_3.png">
+</li>
+<li>Click <b>Configure New</b>, select <b>Service Type</b> value with that custom data adapter Save the integration service. 
+<img src="Resources/Images/CDA_4.png">
+</li>
+<li>Select the imported jar file and attach it as below: 
+<img src="Resources/Images/CDA_5.1.png">
+<img src="Resources/Images/CDA_5.2.png">
+</li>
+<li>Click <b>Save and Add Operation</b> > select the Services as below > and click on <b>Add Operation</b>. 
+<img src="Resources/Images/CDA_6.png">
+</li>
+<li>Select the <b>Configured Operations</b>.
+<img src="Resources/Images/CDA_7.png">
+</li>
+<li>Click on <b>Save and Fetch Response</b>.
+<img src="Resources/Images/CDA_8.png">
+</li>
+<li>Note the Output result.
+<!-- <img src="Resources/Images/CDA_9.png"> -->
+<pre><code style="display:block;background-color:#eee;">{
+	"opstatus": 0;
+	"httpStatusCode": "0"
+}</code></pre>
+</li>
+</ol>
+
 Managing Custom Data Adapters
 -----------------------------
 
@@ -291,49 +349,4 @@ You have some additional options available under the **ellipsis** menu, that is 
 *   **Delete** - Delete the Custom Data Adapter.
 
 
-Custom Data Adapter using Java Integration Services
-----------------------------------------------------
 
-<!-- <blockquote><em><b>Known Issues: </b></em>
-	<ul>
-		<li>In custom code section, if we have the jar file with same name as the jar file included in custom data adapter zip file, then we need to delete the existing jar (from custom code section) before importing <code>customAdapter.zip</code> file.</li>
-		<li>At present, multiple jars are not supported in lib folder of <code>customAdapter.zip</code>.</li>
-	</ul>
-</blockquote> -->
-<ol>
-<li>
-In “Custom Data Adapter” section, click on Import and Browse for the <code><a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/foundry/zip/user_guide/customAdapter.zip">customAdapter.zip</a></code> file. This <code><a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/foundry/zip/user_guide/customAdapter.zip">customAdapter.zip</a></code> file which you are trying to import should have the lib folder and the jar file inside that lib folder. 
-<img src="Resources/Images/CDA_1.png">
-</li>
-<li>
-Notice the “Custom Code” section that is uploaded with the new jar file.
-<img src="Resources/Images/CDA_2.png">
-<blockquote><em><b>Note: </b></em>Here the lib folder is processed, jar file is extracted and it is uploaded in Custom Code section.</blockquote>
-</li>
-<li>Create a new integration service using this custom data adapter. Save this integration services. 
-<img src="Resources/Images/CDA_3.png">
-</li>
-<li>Click Configure New, Select Service Type value with that custom data adapter. Save the integration service. 
-<img src="Resources/Images/CDA_4.png">
-</li>
-<li>Select the imported jar file and attach it as below: 
-<img src="Resources/Images/CDA_5.1.png">
-<img src="Resources/Images/CDA_5.2.png">
-</li>
-<li>Click Save and Add Operation > select the Services as below > and Click on Add Operation. 
-<img src="Resources/Images/CDA_6.png">
-</li>
-<li>Select the Configured Operations  
-<img src="Resources/Images/CDA_7.png">
-</li>
-<li>Click on “Save and Fetch Response” 
-<img src="Resources/Images/CDA_8.png">
-</li>
-<li>Notice the Output result without any error.
-<!-- <img src="Resources/Images/CDA_9.png"> -->
-<pre><code style="display:block;background-color:#eee;">{
-	"opstatus": 0;
-	"httpStatusCode": "0"
-}</code></pre>
-</li>
-</ol>
