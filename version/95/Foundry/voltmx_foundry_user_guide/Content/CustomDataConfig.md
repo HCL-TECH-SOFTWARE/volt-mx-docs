@@ -281,7 +281,7 @@ Java service library which will get added to lib folder
 <b>Example</b>  <br>Java service custom data adapter folder structure<br>![](Resources/Images/custom_data_adapter.png)
 
 Custom data adapter based on java services available here <code><a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/foundry/zip/user_guide/customAdapter.zip">customAdapter.zip</a></code>
-<blockquote><em><b>Note: </b></em>Multiple jars are not supported in lib folder of customDataAdapter</blockquote>
+<blockquote><em><b>Note: </b></em>Multiple jars are not supported in lib folder of custom Data Adapter</blockquote>
 
 How to import java services custom based data adapter <code><a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/foundry/zip/user_guide/customAdapter.zip">customAdapter.zip</a></code> 
 
@@ -293,35 +293,35 @@ How to import java services custom based data adapter <code><a href="https://git
 </blockquote> -->
 <ol>
 <li>
-In “Custom Data Adapter” section, click on Import and Browse for the <code><a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/foundry/zip/user_guide/customAdapter.zip">customAdapter.zip</a></code> file. This <code><a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/foundry/zip/user_guide/customAdapter.zip">customAdapter.zip</a></code> file which you are trying to import should have the lib folder and the jar file inside that lib folder. 
+In <b>Custom Data Adapter</b> section, click on Import and Browse for the <code><a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/foundry/zip/user_guide/customAdapter.zip">customAdapter.zip</a></code> file. This <code><a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/foundry/zip/user_guide/customAdapter.zip">customAdapter.zip</a></code> file which you are trying to import should have the lib folder and the jar file inside that lib folder. 
 <blockquote><em><b>Note: </b></em>If you are including a jar file under lib folder of custom data adapter, and if it's already present in custom code section then you need to delete existing jar file from custom code section and then import custom data adapter with that jar file, otherwise it will create duplicate instance of jar and will cause ambiguity.</blockquote>
 <img src="Resources/Images/CDA_1.png">
 </li>
 <li>
-Notice the “Custom Code” section that is uploaded with the new jar file.
+Notice the <b>Custom Code</b> section that is uploaded with the new jar file.
 <img src="Resources/Images/CDA_2.png">
 <blockquote><em><b>Note: </b></em>Here the lib folder is processed, jar file is extracted and it is uploaded in Custom Code section.</blockquote>
 </li>
 <li>Create a new integration service using this custom data adapter. Save this integration services. 
 <img src="Resources/Images/CDA_3.png">
 </li>
-<li>Click Configure New, Select Service Type value with that custom data adapter. Save the integration service. 
+<li>Click <b>Configure New</b>, select <b>Service Type</b> value with that custom data adapter Save the integration service. 
 <img src="Resources/Images/CDA_4.png">
 </li>
 <li>Select the imported jar file and attach it as below: 
 <img src="Resources/Images/CDA_5.1.png">
 <img src="Resources/Images/CDA_5.2.png">
 </li>
-<li>Click Save and Add Operation > select the Services as below > and Click on Add Operation. 
+<li>Click <b>Save and Add Operation</b> > select the Services as below > and click on <b>Add Operation</b>. 
 <img src="Resources/Images/CDA_6.png">
 </li>
-<li>Select the Configured Operations  
+<li>Select the <b>Configured Operations</b>.
 <img src="Resources/Images/CDA_7.png">
 </li>
-<li>Click on “Save and Fetch Response” 
+<li>Click on <b>Save and Fetch Response</b>.
 <img src="Resources/Images/CDA_8.png">
 </li>
-<li>Notice the Output result without any error.
+<li>Note the Output result.
 <!-- <img src="Resources/Images/CDA_9.png"> -->
 <pre><code style="display:block;background-color:#eee;">{
 	"opstatus": 0;
