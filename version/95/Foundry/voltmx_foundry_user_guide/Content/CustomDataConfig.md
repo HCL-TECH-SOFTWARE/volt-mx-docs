@@ -272,27 +272,18 @@ The root location of your zip file should be similar to the given image.
 </details>
 Once you've configured all the files and folders, you can compress it into a zip file and [import](#importing-a-custom-data-adapter) it into Volt MX Foundry.
 
-Managing Custom Data Adapters
------------------------------
-
-You can manage your Custom Data Adapters from the **API Management** section under the **Custom Data Adapters** tab.
-
-The Custom Data Adapters page on the console has a list of all the existing Custom Data Adapters and their metadata. You can view all the apps associated with any of the Custom Data Adapters. You can also view the **Modified On** and **Modified By** details on this page.
-
-![](Resources/Images/adapter_manage_616x248.png)
-
-You have some additional options available under the **ellipsis** menu, that is the **three dots** menu on the right side, for every Custom Data Adapter.
-
-![](Resources/Images/adapter_delete_620x276.png)
-
-*   **Upload to Marketplace** - Publish the Custom Data Adapter to the [VoltMX Marketplace](https://marketplace.hclvoltmx.com/).
-*   **Update** - Update the existing Custom Data Adapter. Clicking on this option will open a window to [import](#importing-a-custom-data-adapter) a Custom Data Adapter.
-*   **Download** - Download the Custom Data Adapter as a **zip** file. The downloaded archive follows the structure mentioned in the [Custom Data Adapter Zip Structure](#custom-data-adapter-structure) section of this document.
-*   **Delete** - Delete the Custom Data Adapter.
-
-
 Custom Data Adapter using Java Integration Services
 ----------------------------------------------------
+
+Java services based custom data adapter is similar to foundry app based custom data adapter with a difference of 
+Java service library which will get added to lib folder 
+
+<b>Example</b>  <br>Java service custom data adapter folder structure<br>![](Resources/Images/custom_data_adapter.png)
+
+Custom data adapter based on java services available here <code><a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/foundry/zip/user_guide/customAdapter.zip">customAdapter.zip</a></code>
+<blockquote><em><b>Note: </b></em>Multiple jars are not supported in lib folder of customDataAdapter</blockquote>
+
+How to import java services custom based data adapter <code><a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/foundry/zip/user_guide/customAdapter.zip">customAdapter.zip</a></code> 
 
 <!-- <blockquote><em><b>Known Issues: </b></em>
 	<ul>
@@ -303,6 +294,7 @@ Custom Data Adapter using Java Integration Services
 <ol>
 <li>
 In “Custom Data Adapter” section, click on Import and Browse for the <code><a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/foundry/zip/user_guide/customAdapter.zip">customAdapter.zip</a></code> file. This <code><a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/raw/master/voltmxlibrary/foundry/zip/user_guide/customAdapter.zip">customAdapter.zip</a></code> file which you are trying to import should have the lib folder and the jar file inside that lib folder. 
+<blockquote><em><b>Note: </b></em>If you are including a jar file under lib folder of custom data adapter, and if it's already present in custom code section then you need to delete existing jar file from custom code section and then import custom data adapter with that jar file, otherwise it will create duplicate instance of jar and will cause ambiguity.</blockquote>
 <img src="Resources/Images/CDA_1.png">
 </li>
 <li>
@@ -337,3 +329,24 @@ Notice the “Custom Code” section that is uploaded with the new jar file.
 }</code></pre>
 </li>
 </ol>
+
+Managing Custom Data Adapters
+-----------------------------
+
+You can manage your Custom Data Adapters from the **API Management** section under the **Custom Data Adapters** tab.
+
+The Custom Data Adapters page on the console has a list of all the existing Custom Data Adapters and their metadata. You can view all the apps associated with any of the Custom Data Adapters. You can also view the **Modified On** and **Modified By** details on this page.
+
+![](Resources/Images/adapter_manage_616x248.png)
+
+You have some additional options available under the **ellipsis** menu, that is the **three dots** menu on the right side, for every Custom Data Adapter.
+
+![](Resources/Images/adapter_delete_620x276.png)
+
+*   **Upload to Marketplace** - Publish the Custom Data Adapter to the [VoltMX Marketplace](https://marketplace.hclvoltmx.com/).
+*   **Update** - Update the existing Custom Data Adapter. Clicking on this option will open a window to [import](#importing-a-custom-data-adapter) a Custom Data Adapter.
+*   **Download** - Download the Custom Data Adapter as a **zip** file. The downloaded archive follows the structure mentioned in the [Custom Data Adapter Zip Structure](#custom-data-adapter-structure) section of this document.
+*   **Delete** - Delete the Custom Data Adapter.
+
+
+
