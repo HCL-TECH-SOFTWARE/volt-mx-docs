@@ -18,9 +18,9 @@ Understanding Skins
     
 2.  A widget can have different types or modes, based on widget properties or interactions. These types may vary based on the platforms selected.  
       
-      
+3.  In case of nested widgets, interactions are not bubbled to parents when it comes to applying skins. **For example**, if a Hover skin is defined for nested widgets and we hover over the child, only the child’s Hover skin is applied - not the parent’s.  
     
-3.  A skin has several properties such as the widget background and opacity, border settings, font settings, and shadow settings.
+4.  A skin has several properties such as the widget background and opacity, border settings, font settings, and shadow settings.
     
 
   
