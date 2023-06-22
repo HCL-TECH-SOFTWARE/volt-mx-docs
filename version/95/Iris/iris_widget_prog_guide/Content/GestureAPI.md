@@ -35,7 +35,8 @@ On devices that support 3D Touch, developers can take advantage of the pressure 
 
 For more information about using these events, see the [reference section](WidgetReferences.md) of this guide for each widget. For more information about pressure sensitivity touch, see the [Apple documentation](http://www.apple.com/in/iphone-6s/3d-touch/).
 
-### Peek and Pop
+
+<h3 id="enablePe">Peek and Pop</h3>
 
 Peek and Pop are in-app applications of 3D Touch that allow the user to preview content in the app without changing scope, and then take action on that content. As the user applies increasing touch pressure, the app responds to the various pressures by:
 

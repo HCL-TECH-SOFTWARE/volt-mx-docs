@@ -100,8 +100,8 @@ To set Native app properties, follow these steps:
              
             
         *   **Disable Application Screenshot** - This option specifies whether the user can take a screenshot of your application.
-        *   **Enable File Upload** - Enables you to upload files to a remote sever by using the [HttpRequest API](../../../Iris/iris_api_dev_guide/content/voltmx.net_functions.md#HttpRequ).
-        *   **ActionBar** - Enabled only if target SDK is 3.0 or above. Use this option to enable _Action Bar_ feature.
+        *   **Enable File Upload** - Enables you to upload files to a remote sever by using the [HttpRequest API](../../../Iris/iris_api_dev_guide/content/voltmx.net_functions.md#HttpRequ).  <h3 id="actionBa"></h3>  
+        *   **ActionBar** - Enabled only if target SDK is 3.0 or above. Use this option to enable _Action Bar_ feature. 
         *   **Network Trust Config** - Using this option, you can control the certificates that are used.
             *   **None** - No certificates are allowed. This means that if the certificate is present in the Android Trust store, it will allow the N/W call to proceed; otherwise, it throws an exception. With this option, servers having non-trusted or self-signed certificates are not accessible via the app on the device.
             *   **All** - All types of certificates are allowed regardless of whether they are bundled. This option is useful during the development phase of an app, but not for publication. With this option, all servers are accessible regardless of the kind of certificate they hold (i.e. self-signed, non-trusted, trusted). Due to the lack of security inherent in this option, the Google Play store rejects such apps when they are submitted for publication.

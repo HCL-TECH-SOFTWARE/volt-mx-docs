@@ -56,48 +56,47 @@ The following image illustrates the lifecycle of a form:
 
 ![](Resources/Images/Form_lifecycle.png)
 
-A form provides you with an option to set Basic Properties, Layout Properties, Platform Specific Properties, Events, and Methods.
+A form provides you with an option to set Basic Properties, Layout Properties, Platform Specific Properties, Events, and Methods. 
 
   
 | Basic Properties | Layout Properties | Platform Specific Properties |
 | --- | --- | --- |
-| [enabledForIdleTimeout](Form_Basic_Properties.md#enabledforidletimeout-property) | [displayOrientation](Form_Basic_Properties.md#displayO) | [actionBarIcon](Form_Basic_Properties.md#actionBa) |
-| [footers](Form_Basic_Properties.md#footers-property) | [gridCell](Form_Basic_Properties.md#gridCell) | [animateHeaderFooter](Form_Basic_Properties.md#animateH) |
-| [headers](Form_Basic_Properties.md#headers-property) | [layoutMeta](Form_Basic_Properties.md#layoutMe) | [bounces](Form_Basic_Properties.md#bounces) |
-| [id](Form_Basic_Properties.md#id-property) | [layoutType](Form_Basic_Properties.md#layoutTy) | [captureGPS](Form_Basic_Properties.md#captureG) |
-| [info](Form_Basic_Properties.md#info-property) |  | [contextPath](Form_Basic_Properties.md#contextP) |
-| [menuFocusSkin](Form_Basic_Properties.md#menufocusskin-property) |  | [configureExtendTop](Form_Basic_Properties.md#configur) |
-| [menuItems](Form_Basic_Properties.md#menuitems-property) |   | [configureExtendBottom](Form_Basic_Properties.md#configur2) |
-| [menuNormalSkin](Form_Basic_Properties.md#menunormalskin-property) |   | [configureStatusBarStyle](Form_Basic_Properties.md#configur3) |
-| [needAppMenu](Form_Basic_Properties.md#needappmenu-property) |   | [defaultIndicatorColor](Form_Basic_Properties.md#defaultI) |
-| [skin](Form_Basic_Properties.md#skin-property) |   | [enablePeekGesture](Form_Basic_Properties.md#enablePe) |
-|   |   | [extendTop](Form_Basic_Properties.md#extendTo) |
-| [title](Form_Basic_Properties.md#title-property) |   | [extendBottom](Form_Basic_Properties.md#extendBo) |
-| [type](Form_Basic_Properties.md#type-property) |   | [statusBarStyle](Form_Basic_Properties.md#statusBa) |
-|   |   | [footerOverlap](Form_Basic_Properties.md#footerOv) |
-|   |   | [formTransperencyDuringPostShow](Form_Basic_Properties.md#formTran) |
-|   |  | [headerOverlap](Form_Basic_Properties.md#headerOv) |
-|   |  | [inputAccessoryViewType](Form_Basic_Properties.md#inputAcc) |
-|   |  | [inTransitionConfig](Form_Basic_Properties.md#inTransi) |
-|   |  | [layout](Form_Basic_Properties.md#layout) |
-|   |  | [maxAppMenuButtons](Form_Basic_Properties.md#maxAppMe) |
-|   |  | [menuPosition](Form_Basic_Properties.md#menuPosi) |
-|  |  | [needsIndicatorDuringPostShow](Form_Basic_Properties.md#needsInd) |
-|  |  | [noCache](Form_Basic_Properties.md#noCache) |
-|  |  | [outTransitionConfig](Form_Basic_Properties.md#outTrans) |
-|   |   | [retainScrollPosition](Form_Basic_Properties.md#retainSc) |
-|   |   | [scrollDirection](Form_Basic_Properties.md#scrollDi) |
-|   |   | [scrollsToTop](Form_Basic_Properties.md#scrollsT) |
-|   |   | [secureData](Form_Basic_Properties.md#secureDa) |
-|  |  | [showBottomActionBar](Form_Basic_Properties.md#showBott) |
-|  |  | [showActionBar](Form_Basic_Properties.md#showActi) |
-|  |  | [showActionBarIcon](Form_Basic_Properties.md#showActi2) |
-|  |  | [showMiniAppMenu](Form_Basic_Properties.md#showMini) |
-|  |  | [submitSecure](Form_Basic_Properties.md#submitSe) |
-|  |  | [titleBar](Form_Basic_Properties.md#titleBar) |
-|   |   | [titleBarConfig](Form_Basic_Properties.md#titleBar2) |
-|   |   | [titleBarSkin](Form_Basic_Properties.md#titleBar3) |
-|   |   | [windowSoftInputMode](Form_Basic_Properties.md#windowSo) |
+| [enabledForIdleTimeout](Form_Basic_Properties.md#enabledforidletimeout-property) | [displayOrientation](HBox_Properties.md#displayO) | [actionBarIcon](../../iris_user_guide/Content/Native_App_Properties.md#actionBa) |
+| [footers](Form_Basic_Properties.md#footers-property) | [gridCell](HBox_Properties.md#gridCell) | [animateHeaderFooter](../../app_design_dev/Content/Animation.md#animateH) |
+| [headers](Form_Basic_Properties.md#headers-property) | [layoutMeta](HBox_Properties.md#layoutMe) | [bounces](../../iris_widget_prog_guide/Content/ScrollBox_Basic_Properties.md#bounces) |
+| [id](Form_Basic_Properties.md#id-property) | [layoutType](HBox_Properties.md#layoutTy) | [captureGPS](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#captureG) |
+| [info](Form_Basic_Properties.md#info-property) |  | [contextPath](../../iris_widget_prog_guide/Content/Popup_Properties.md#contextP) |
+| [menuFocusSkin](Form_Basic_Properties.md#menufocusskin-property) |  | [configureExtendTop](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#configur) |
+| [menuItems](Form_Basic_Properties.md#menuitems-property) |   | [configureExtendBottom](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#configur2) |
+| [menuNormalSkin](Form_Basic_Properties.md#menunormalskin-property) |   | [configureStatusBarStyle](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#configur3) |
+| [needAppMenu](Form_Basic_Properties.md#needappmenu-property) |   | [defaultIndicatorColor](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#defaultI) |
+| [skin](Form_Basic_Properties.md#skin-property) |   | [enablePeekGesture](../../iris_widget_prog_guide/Content/GestureAPI.md#enablePe) |
+|   |   | [extendTop](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#extendTo) |
+| [title](Form_Basic_Properties.md#title-property) |   | [extendBottom](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#extendBo) |
+| [type](Form_Basic_Properties.md#type-property) |   | [statusBarStyle](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#statusBa) |
+|   |   | [footerOverlap](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#footerOv) |
+|   |   | [formTransperencyDuringPostShow](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#formTran) |
+|   |  | [headerOverlap](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#headerOv) |
+|   |  | [inputAccessoryViewType](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#inputAcc) |
+|   |  | [inTransitionConfig](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#inTransi) |
+|   |  | [layout](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#layout) |
+|   |  | [maxAppMenuButtons](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#maxAppMe) |
+|   |  | [menuPosition](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#menuPosi) |
+|  |  | [needsIndicatorDuringPostShow](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#needsInd) |
+|  |  | [noCache](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#noCache) |
+|  |  | [outTransitionConfig](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#outTrans) |
+|   |   | [retainScrollPosition](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#retainSc) |
+|   |   | [scrollDirection](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#scrollDi) |
+|   |   | [scrollsToTop](../../iris_widget_prog_guide/Content/Popup_Properties.md#scrollsT) |
+|   |   | [secureData](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#secureDa) |
+|  |  | [showActionBar](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#showActi) |
+|  |  | [showActionBarIcon](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#showActi2) |
+|  |  | [showMiniAppMenu](../../iris_widget_prog_guide/Content/Popup_Properties.md#showMini) |
+|  |  | [submitSecure](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#submitSe) |
+|  |  | [titleBar](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#titleBar) |
+|   |   | [titleBarConfig](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#titleBar2) |
+|   |   | [titleBarSkin](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#titleBar3) |
+|   |   | [windowSoftInputMode](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#windowSo) |
 
   
 | Events | Methods |
