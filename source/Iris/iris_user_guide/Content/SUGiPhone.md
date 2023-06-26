@@ -1,10 +1,10 @@
                           
 
 
-iOS SDK and Emulator
-====================
+iOS SDK and simulator
+======================
 
-Building and testing iOS and iPadOS applications on a device or simulator via Volt MX Iris requires XCode, the development environment containing the SDK for iOS, iPadOS, and watchOS
+Building and testing iOS and iPadOS applications on a device or simulator via Volt MX Iris requires Xcode, the development environment containing the SDK for iOS, iPadOS, and watchOS
 
 In Volt MX Iris V9 SP2 GA version and later, you can view the list of simulators within Iris and run your apps on the simulators directly from Iris. When you open any project, you can view simulators from the Build menu. Previously, if you wanted to preview an app, you had to create a binary file, install it on a device, and then launch the application. With this new capability to view the simulators within Iris, you can skip the process of creating a binary and install it directly on the device/simulator. You can now directly go to the last step of launching the app in a simulator to view the app in action.
 
@@ -40,18 +40,18 @@ To develop for the iOS and iPadOS platforms and run on simulators, your computer
 *   Network interface card
 *   Mac OS Catalina version 10.15.6 and higher
 
-Download Install and Configure XCode
+Download Install and Configure Xcode
 --------------------------------------
 
 Xcode, the Apple development environment for creating iOS and iPadOS apps, contains the simulators you need to emulate iOS devices in Volt MX Iris. However, it is not automatically installed when you install Volt MX Iris. Volt MX Iris supports Xcode 12.5,  Xcode 13, and Xcode 14.
 
-To download, install, and configure XCode, do the following:
+To download, install, and configure Xcode, do the following:
 
 1.  In a browser, navigate to the [Apple Developer site](https://developer.apple.com/downloads/index.action), and log in to your Apple developer account. If you do not have one, create one.
 2.  Navigate to the [Apple developer download page](https://developer.apple.com/downloads/index.action).
-3.  From the list of downloads, double-click the listing of the version of XCode you want to download, and then click the listed .dmg file to initiate the download.
+3.  From the list of downloads, double-click the listing of the version of Xcode you want to download, and then click the listed .dmg file to initiate the download.
 4. Once the package has downloaded to your Mac, open the Downloads folder, double-click the file you just downloaded, and then follow the prompts to install Xcode.
-5.  When XCode has finished installing, launch it by opening the _Applications_ folder, and clicking **XCode**.
+5.  When Xcode has finished installing, launch it by opening the _Applications_ folder, and clicking **Xcode**.
     
     > **_Important:_** It is imperative that you launch Xcode so that it runs its initialization and configuration routines. Until it does so, you cannot use iOS simulators in Volt MX Iris.
 
@@ -62,7 +62,7 @@ Launch the App Using Run on My Device or the Emulator Menu
 ------------------------------------------------------------
 
 1.  Open your project in Volt MX Iris; it opens in the default view.
-2. 	From the **Build** menu, select **Build Native Local**. The Build Native Local window appears 
+2. 	From the **Build** menu, select **Build Native Local**. The Build Native Local window appears. 
 3.  From the **Post Build Action** drop-down list, select **Run on my Device/Emulator**. A new category **Configured Devices & Emulators** appears. It displays available devices and emulators/simulators. Mobile simulators appear under the Mobile Emulators section, and Tablet simulators appear below the Tablet Emulators section. Running to a watchOS device/simulator from this menu is not supported.
 
      ![](Resources/Images/Emulators_23AVDs3_672x241.png)
