@@ -362,7 +362,7 @@ frmCalendar.myCalendar.dismiss();
 * * *
 
 </details>
-<details close markdown="block"><summary>clear Method</summary>
+<details close markdown="block"><summary id="clear">clear Method</summary>
 
 * * *
 
