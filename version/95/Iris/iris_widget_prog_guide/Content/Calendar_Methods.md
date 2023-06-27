@@ -2,7 +2,7 @@
 Calendar Methods
 ================
 
-Calendar has the following methods associated with it:
+Calendar has the following methods associated with it: 
 
 <details close markdown="block"><summary>animate Method</summary>
 
@@ -367,6 +367,8 @@ frmCalendar.myCalendar.dismiss();
 * * *
 
 This method enables you to clear the date in the calendar and the date format is shown.
+
+>   **_Note_**: Calendar clear happens at the widget level whereas Textbox clear happens at the model level.   
 
 ### Syntax
 
