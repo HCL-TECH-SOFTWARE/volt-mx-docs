@@ -2,7 +2,7 @@
 Calendar Methods
 ================
 
-Calendar has the following methods associated with it:
+Calendar has the following methods associated with it: 
 
 <details close markdown="block"><summary>animate Method</summary>
 
@@ -362,11 +362,20 @@ frmCalendar.myCalendar.dismiss();
 * * *
 
 </details>
-<details close markdown="block"><summary>clear Method</summary>
+<details close markdown="block"><summary id="clear">clear Method</summary>
 
 * * *
 
 This method enables you to clear the date in the calendar and the date format is shown.
+
+<blockquote><em><b>Note: </b></em>
+    <ul>
+    <li>clear() method does not work if it is executed in the preShow event in Iris as other widgets like the Textbox widget.</li>    
+    <li>Calendar clear happens at the widget level whereas Textbox clear happens at the model level.</li>
+    </ul>
+</blockquote>
+
+
 
 ### Syntax
 
