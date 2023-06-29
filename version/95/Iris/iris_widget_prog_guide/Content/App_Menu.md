@@ -125,10 +125,34 @@ The AppMenu widget capabilities can be broadly categorized into the following:
 
 | Properties | Description |
 | --- | --- |
-| [ID](AppMenu_Properties.md#ID) | A unique identifier of App Menu consisting of alpha numeric characters. |
+| [ID](AppMenu_Properties.md#ID) | A unique identifier of App Menu consisting of alpha numeric characters. |  
+
 
 AppMenu Widget Basics
----------------------
+---------------------  
+
+### Enabling via Low Code
+
+The AppMenu widget can be enabled via low code, but the approach is different than that of other low code widgets. To enable the AppMenu for a form, right click on the form and select “Configure App-Menu”. 
+
+![enabling_via_low_code-1](../Content/Resources/Images//enabling_via_low_code-1.png)  
+
+This will open the App-Menu Master Data editor. This editor allows you to add, delete, and update items, as well as change the Skin and Focus Skin. Update the master data with your desired data and select “OK” to apply any changes.
+
+![enabling_via_low_code-2](../Content/Resources/Images//enabling_via_low_code-2.png)  
+
+Now that the AppMenu is populated with data, it needs to be enabled to show on the form. In the form’s “PROPERTIES” window, select the “Edit” button beside “App Menu”.
+
+![enabling_via_low_code-3](../Content/Resources/Images//enabling_via_low_code-3.png)  
+
+Select all platforms on which you wish to display the AppMenu and select “OK” to apply changes.
+
+![enabling_via_low_code-4](../Content/Resources/Images//enabling_via_low_code-4.png)  
+
+The AppMenu will now appear for the selected platforms.  
+
+![enabling_via_low_code-5](../Content/Resources/Images//enabling_via_low_code-5.png)  
+
 
 ### Android Specific Behavior
 
