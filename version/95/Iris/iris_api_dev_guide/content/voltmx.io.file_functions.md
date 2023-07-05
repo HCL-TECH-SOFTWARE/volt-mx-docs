@@ -86,7 +86,20 @@ Available for iOS, Android, and Windows platforms.
 </details>
 <details close markdown="block"><summary>voltmx.io.File.createDirectory</summary>
 
-The createDirectory API creates a directory on the file system represented by this file object.
+The createDirectory API creates a directory on the file system represented by this file object.  
+
+
+<blockquote>
+    <em><b>Note: </b></em>
+    <ul>      
+        <li>For Android if the target SDK version is 33 and higher, below media permission is required in tags section under Application tags attributes inside android project settings.<br> 
+        <code>&lt;uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/&gt;</code><br>         
+        <code>&lt;uses-permission android:name="android.permission.READ_MEDIA_VIDEO"/&gt;</code><br>        
+        <code>&lt;uses-permission android:name="android.permission.READ_MEDIA_AUDIO"/&gt;</code><br>  
+        </li>
+    </ul>
+</blockquote>
+
 
 ### Syntax
 
@@ -210,7 +223,20 @@ Available for iOS, Android, and Windows platforms.
 </details>
 <details close markdown="block"><summary>voltmx.io.File.getFilesList</summary>
 
-The getFilesList API returns voltmx.io.FileList object representing the files and directories available under this file object directory.
+The getFilesList API returns voltmx.io.FileList object representing the files and directories available under this file object directory.  
+
+
+<blockquote>
+    <em><b>Note: </b></em>
+    <ul>      
+        <li>For Android if the target SDK version is 33 and higher, below media permission is required in tags section under Application tags attributes inside android project settings.<br> 
+        <code>&lt;uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/&gt;</code><br>        
+        <code>&lt;uses-permission android:name="android.permission.READ_MEDIA_VIDEO"/&gt;</code><br>        
+        <code>&lt;uses-permission android:name="android.permission.READ_MEDIA_AUDIO"/&gt;</code><br>
+        </li>
+    </ul>
+</blockquote>
+
 
 ### Syntax
 
@@ -455,7 +481,20 @@ Available for iOS, Android, and Windows platforms.
 </details>
 <details close markdown="block"><summary>voltmx.io.File.remove</summary>
 
-The remove API deletes a file or a directory.
+The remove API deletes a file or a directory.  
+
+
+<blockquote>
+    <em><b>Note: </b></em>
+    <ul>      
+        <li>For Android if the target SDK version is 33 and higher, below media permission is required in tags section under Application tags attributes inside android project settings.<br> 
+        <code>&lt;uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/&gt;</code><br>        
+        <code>&lt;uses-permission android:name="android.permission.READ_MEDIA_VIDEO"/&gt;</code><br>        
+        <code>&lt;uses-permission android:name="android.permission.READ_MEDIA_AUDIO"/&gt;</code><br>
+        </li>
+    </ul>
+</blockquote>
+
 
 ### Syntax
 
@@ -504,7 +543,20 @@ Available for iOS, Android, and Windows platforms.
 </details>
 <details close markdown="block"><summary>voltmx.io.File.rename</summary>
 
-The rename API renames a file or a directory.
+The rename API renames a file or a directory.  
+
+
+<blockquote>
+    <em><b>Note: </b></em>
+    <ul>      
+        <li>For Android if the target SDK version is 33 and higher, below media permission is required in tags section under Application tags attributes inside android project settings.<br> 
+        <code>&lt;uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/&gt;</code><br>        
+        <code>&lt;uses-permission android:name="android.permission.READ_MEDIA_VIDEO"/&gt;</code><br>        
+        <code>&lt;uses-permission android:name="android.permission.READ_MEDIA_AUDIO"/&gt;</code><br>
+        </li>
+    </ul>
+</blockquote>
+
 
 ### Syntax
 

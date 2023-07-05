@@ -102,7 +102,18 @@ Available on iOS and Android.
 
 * * *
 
-Searches for and retrieves and image in the device's gallery of pictures.
+Searches for and retrieves and image in the device's gallery of pictures.  
+
+
+<blockquote>
+    <em><b>Note: </b></em>
+    <ul>      
+        <li>For Android if the target SDK version is 33 and higher, below media permission is required in tags section under Application tags attributes inside android project settings. <br> 
+        <code> &lt;uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/&gt;</code>
+        </li>
+    </ul>
+</blockquote>
+
 
 ### Syntax
 
@@ -418,7 +429,18 @@ Available on iOS and Android.
 
 * * *
 
-Writes an image to device's media gallery.
+Writes an image to device's media gallery.  
+
+
+<blockquote>
+    <em><b>Note: </b></em>
+    <ul>      
+        <li>For Android if the target SDK version is 33 and higher, below media permission is required in tags section under Application tags attributes inside android project settings. <br> 
+        <code> &lt;uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/&gt;</code>
+        </li>
+    </ul>
+</blockquote>
+
 
 ### Syntax
 

@@ -76,9 +76,21 @@ voltmx.push.register
 
 This API allows you to register the application and the mobile device for Push Notifications. This API takes an object as a parameter (the values in the table differ across platforms).  
   
-If the registration is successful, the platform invokes the _onsuccessfulregistration_ function. If the registration is a failure, the platform invokes the _onfailureregistration_ function.
+If the registration is successful, the platform invokes the _onsuccessfulregistration_ function. If the registration is a failure, the platform invokes the _onfailureregistration_ function. 
 
-Syntax
+
+
+<blockquote>
+    <em><b>Note: </b></em> 
+    <ul>      
+        <li>For Android if the target SDK version is 33 and higher, below media permission is required in tags section under Application tags attributes inside android project settings to get the notifications. <br> 
+        <code> &lt;uses-permission android:name="android.permission.POST_NOTIFICATIONS"/&gt;</code>
+        </li>
+    </ul>
+</blockquote>
+
+
+**Syntax**
 
 voltmx.push.register(configObject)([iOS](#iPhone)/[Android](#Android)/[Desktop Web](#DesktopWeb)/[Windows](#Windows))
 

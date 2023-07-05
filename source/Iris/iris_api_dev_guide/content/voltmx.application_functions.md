@@ -4,7 +4,7 @@
 voltmx.application Namespace
 ==========================
 
-The voltmx.application namespace contains the following constants and functions that you can use to manage many aspects of your applications.
+The voltmx.application namespace contains the following constants and functions that you can use to manage many aspects of your applications. 
 
 Constants
 ---------
@@ -4791,11 +4791,18 @@ Foreground service can be started in scenarios which require your app to be acti
 
 Some sample use cases include navigation while driving, tracing the path while running, and playing music. For more information, refer [here](https://developer.android.com/training/location/receive-location-updates#continue-user-initiated-action).
 
-> **_Note:_** Ensure that you have done the following:
+<blockquote>
+    <em><b>Note: </b></em>Ensure that you have done the following: 
+    <ul>
+        <li>In the <b>androidbuild.properties</b> file, set the value of the <code>locationListenerType</code> property to <code>always</code>.  
+      Appropriate entries are added to the <b>AndroidManifest.xml</b> file depending on the type of the location listener. </li>        
+        <li> Enable the <b>Use Google Play Location Services</b> checkbox in the <b>Project Settings</b> > <b>Native</b> > <b>Android</b> section.</li>        
+        <li>For Android if the target SDK version is 33 and higher, below media permission is required in tags section under Application tags attributes inside android project settings to get the notifications.<br>
+        <code> &lt;uses-permission android:name="android.permission.POST_NOTIFICATIONS"/&gt;</code>
+        </li>
+    </ul>
+</blockquote>
 
-*   In the **androidbuild.properties** file, set the value of the `locationListenerType` property to `always`.  
-    Appropriate entries are added to the **AndroidManifest.xml** file depending on the type of the location listener.
-*   Enable the **Use Google Play Location Services** checkbox in the **Project Settings** > **Native** > **Android** section.
 
 ### Syntax
 
