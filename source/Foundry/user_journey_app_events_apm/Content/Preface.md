@@ -19,7 +19,8 @@ Following are the auto reported events supported by Volt MX APM:
     The subtype will follow the patternGESTURETYPE_NUMBEROFINPUTS_DIRECTION. For example a two finger tap would be TAP_2 and a three finger swipe would be SWIPE_3_RIGHT.
 *   Orientation – when the device orientation change event is triggered. The subtype must be one of PORTRAIT_TO_LANDSCAPE or LANDSCAPE_TO_PORTRAIT where the new orientation of the device that caused the trigger is indicated last.
 
-<span class="autonumber"><span>**<span style="color: #293276;" class="mcFormatColor">NOTE:</span> **</span></span>The developer must register at [manage.hclvoltmx.com](https://manage.hclvoltmx.com/) to access the Custom Metrics page.
+>   **_Note:_** The developer must register at [manage.hclvoltmx.com](https://manage.hclvoltmx.com/) to access the Custom Metrics page.
+
 
 This document describes the automated events and their use.
 
