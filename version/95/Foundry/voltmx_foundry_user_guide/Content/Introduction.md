@@ -32,7 +32,7 @@ This document helps you How To use functionality in Volt MX Foundry Console:
 *   [VoltMX Support](Support.md)
 *   [Telemetry](Telemetry.md)
 
-You can also access the [Preface](Preface.md), [Revision History](RevisionHistory.md), [Tutorials](Samples/Samples.md), [Appendix - Sync Strategy](Appendix_-_Sync_Strategy.md), [Appendix - App Services](Appendix_-_App_Services.md), [Appendix - Frequently Asked Questions (FAQs)](Appendix_-_FAQs.md), and [Limitations](Limitations.md)
+You can also access the [Preface](Preface.md), [Tutorials](Samples/Samples.md), [Appendix - Sync Strategy](Appendix_-_Sync_Strategy.md), [Appendix - App Services](Appendix_-_App_Services.md), [Appendix - Frequently Asked Questions (FAQs)](Appendix_-_FAQs.md), and [Limitations](Limitations.md)
 
 For more hands-on approach on how to implement Object Services, import and preview the **Employee Directory** app on to your Volt MX Iris.  
 ![](Resources/Images/Download_Button_08_202x33.png)
