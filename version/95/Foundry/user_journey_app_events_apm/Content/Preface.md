@@ -111,7 +111,7 @@ Highlights actions or information that might cause problems to systems or data
 
 ## Contact Us  
 
-For technical questions, documentation queries or to report issues with the Volt MX product line, contact us at https://support.hcltechsw.com/csm .
+For technical questions, documentation queries or to report issues with the Volt MX product line, contact us at <a href="https://support.hcltechsw.com/csm">https://support.hcltechsw.com/csm</a> .
 
 
 
