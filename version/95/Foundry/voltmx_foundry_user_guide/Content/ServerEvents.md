@@ -1,6 +1,6 @@
                              
 
-User Guide: [Integration](Services.md#integration) \> [Advanced Configurations](Advanced_Configurations.md) > Server Events
+User Guide: [Integration](Services.md#integration) \> [Advanced Configurations](Advanced_Configurations.md) > Server Events 
 
 Server Events
 =============
@@ -99,7 +99,39 @@ request.getServicesManager().getEventNotifier().notify(<event_data>);
         
 ```
 request.getServicesManager().getEventNotifier().notify(<topic>, <data>);
+```  
+
 ```
+package com.event.wf;
+
+import org.json.JSONObject;
+
+import com.hcl.voltmx.middleware.common.JavaService2;
+import com.hcl.voltmx.middleware.controller.DataControllerRequest;
+import com.hcl.voltmx.middleware.controller.DataControllerResponse;
+import com.hcl.voltmx.middleware.dataobject.Param;
+import com.hcl.voltmx.middleware.dataobject.Result;
+
+public class WFEvent implements JavaService2{
+
+	@Override
+	public Object invoke(String arg0, Object[] arg1, DataControllerRequest request, 
+			DataControllerResponse arg3)
+			throws Exception {
+		JSONObject obj = new JSONObject();
+		obj.put("userName", request.getParameter("userName"));
+		Result result = new Result();
+		result.addParam(new Param("opstatus", "0", "number"));
+		result.addParam(new Param("hello", "Hello " + request.getParameter("userName"), "string"));
+		request.getServicesManager().getEventNotifier().notify("signaltestw03js/start",obj);
+		return result;
+	}
+
+}
+
+```  
+
+
 
 Handling Server Side Events
 ---------------------------
