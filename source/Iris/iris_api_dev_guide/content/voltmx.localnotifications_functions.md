@@ -4,7 +4,7 @@
 voltmx.localnotifications Namespace
 =================================
 
-The `voltmx.localnotifications` namespace provides your app the ability to create and receive local, on-device notifications that do not rely on off-device information coming across a network. The voltmx.localnotifications namespace contains the following API elements.
+The `voltmx.localnotifications` namespace provides your app the ability to create and receive local, on-device notifications that do not rely on off-device information coming across a network. The voltmx.localnotifications namespace contains the following API elements. 
 
 Functions
 ---------
@@ -58,7 +58,18 @@ Available on iOS and Android platforms.
 
 * * *
 
-Creates a local notification.
+Creates a local notification.  
+
+<blockquote>
+    <em><b>Note: </b></em>
+    <ul>      
+        <li>For Android if the target SDK version is 33 and higher, below media permission is required in tags section under Application tags attributes inside android project settings to get the notifications.<br> 
+        <code> &lt;uses-permission android:name="android.permission.POST_NOTIFICATIONS"/&gt;</code>
+        </li>
+    </ul>
+</blockquote>  
+
+
 
 <b>Syntax</b>
 
