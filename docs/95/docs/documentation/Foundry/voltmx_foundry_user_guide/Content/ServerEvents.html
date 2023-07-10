@@ -1748,7 +1748,7 @@
                 
 
 
-<p>User Guide: <a href="Services.html#integration">Integration</a> > <a href="Advanced_Configurations.html">Advanced Configurations</a> &gt; Server Events</p>
+<p>User Guide: <a href="Services.html#integration">Integration</a> > <a href="Advanced_Configurations.html">Advanced Configurations</a> &gt; Server Events </p>
 <h1 id="server-events">Server Events</h1>
 <p>Server-side events is a capability of the Volt MX Foundry runtime server that enables backend services or custom business logic to fire events and handle events. Server events are helpful when certain activities can be executed asynchronously such as processing a submitted order or invoking a slow backend API where the client app doesn’t need to wait on the response.</p>
 <h2 id="server-events-processing">Server Events Processing</h2>
@@ -1821,6 +1821,34 @@
 <li><strong>notify (with topic and data)</strong>: Creates event data internally and notifies all subscribers of the given event based on the topic.</li>
 </ul>
 <pre><code>request.getServicesManager().getEventNotifier().notify(&lt;topic&gt;, &lt;data&gt;);
+</code></pre>
+<pre><code>package com.event.wf;
+
+import org.json.JSONObject;
+
+import com.hcl.voltmx.middleware.common.JavaService2;
+import com.hcl.voltmx.middleware.controller.DataControllerRequest;
+import com.hcl.voltmx.middleware.controller.DataControllerResponse;
+import com.hcl.voltmx.middleware.dataobject.Param;
+import com.hcl.voltmx.middleware.dataobject.Result;
+
+public class WFEvent implements JavaService2{
+
+    @Override
+    public Object invoke(String arg0, Object[] arg1, DataControllerRequest request, 
+            DataControllerResponse arg3)
+            throws Exception {
+        JSONObject obj = new JSONObject();
+        obj.put(&quot;userName&quot;, request.getParameter(&quot;userName&quot;));
+        Result result = new Result();
+        result.addParam(new Param(&quot;opstatus&quot;, &quot;0&quot;, &quot;number&quot;));
+        result.addParam(new Param(&quot;hello&quot;, &quot;Hello &quot; + request.getParameter(&quot;userName&quot;), &quot;string&quot;));
+        request.getServicesManager().getEventNotifier().notify(&quot;signaltestw03js/start&quot;,obj);
+        return result;
+    }
+
+}
+
 </code></pre>
 <h2 id="handling-server-side-events">Handling Server Side Events</h2>
 <p>Once an event is created, a service or custom business logic is configured to handle that event. The execution of the event handler occurs asynchronously in a separate thread. If the event is handled by a service, the event payload is passed as the request to the service similar to a client invoking the service as a REST API. If the event is handled by custom code, the event payload is passed into the custom logic as part of the event data.</p>

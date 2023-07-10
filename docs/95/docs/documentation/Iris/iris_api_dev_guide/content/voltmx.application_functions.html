@@ -13649,13 +13649,16 @@ voltmx.application.showLoadingScreen(&quot;loadskin&quot;, &quot;LoadingScreen&q
 <p>Foreground service can be started in scenarios which require your app to be actively running after being placed in the background or after turning the device's display off.</p>
 <p>Some sample use cases include navigation while driving, tracing the path while running, and playing music. For more information, refer <a href="https://developer.android.com/training/location/receive-location-updates#continue-user-initiated-action">here</a>.</p>
 <blockquote>
-<p><strong><em>Note:</em></strong> Ensure that you have done the following:</p>
+    <em><b>Note: </b></em>Ensure that you have done the following: 
+    <ul>
+        <li>In the <b>androidbuild.properties</b> file, set the value of the <code>locationListenerType</code> property to <code>always</code>.  
+      Appropriate entries are added to the <b>AndroidManifest.xml</b> file depending on the type of the location listener. </li>        
+        <li> Enable the <b>Use Google Play Location Services</b> checkbox in the <b>Project Settings</b> &gt; <b>Native</b> &gt; <b>Android</b> section.</li>        
+        <li>For Android if the target SDK version is 33 and higher, below media permission is required in tags section under Application tags attributes inside android project settings to get the notifications.<br>
+        <code> &lt;uses-permission android:name="android.permission.POST_NOTIFICATIONS"/&gt;</code>
+        </li>
+    </ul>
 </blockquote>
-<ul>
-<li>In the <strong>androidbuild.properties</strong> file, set the value of the <code>locationListenerType</code> property to <code>always</code>.<br />
-    Appropriate entries are added to the <strong>AndroidManifest.xml</strong> file depending on the type of the location listener.</li>
-<li>Enable the <strong>Use Google Play Location Services</strong> checkbox in the <strong>Project Settings</strong> &gt; <strong>Native</strong> &gt; <strong>Android</strong> section.</li>
-</ul>
 <h3 id="syntax_76">Syntax</h3>
 <pre><code>
 voltmx.application.startForegroundService(foregroundServiceType,notificationConfig)
