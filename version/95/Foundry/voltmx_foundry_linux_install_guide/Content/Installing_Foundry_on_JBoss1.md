@@ -11,7 +11,7 @@ Make sure you have proper administrative rights to install Volt MX Foundry on yo
 
 You also need a user where Volt MX Foundry will be installed.
 
-The **\<Install Location\>** directory contains the log files logging each invocation of the installer. To make problem identification easier, provide these log files to Volt MX when reporting an issue.
+The **< Install Location >** directory contains the log files logging each invocation of the installer. To make problem identification easier, provide these log files to Volt MX when reporting an issue.
 
 <details close="" markdown="block"><summary>Accessing the live installation logs while the installation is running</summary>
 <ul>
@@ -36,7 +36,7 @@ The **\<Install Location\>** directory contains the log files logging each invoc
 </details>
 <br>
 
-To install Volt MX Foundry Console on bundled JBoss using the installer, follow these steps:
+### To install Volt MX Foundry Console on bundled JBoss using the installer, follow these steps:
 
 1.  Execute the following command to switch to the user that you created.
 
@@ -44,9 +44,12 @@ To install Volt MX Foundry Console on bundled JBoss using the installer, follow 
 
 2.  Press **Enter**. The system prompt you to enter the password.
 3.  Enter the password, and press **Enter**.
-4.  Unzip the `VoltMXFoundrySetup.tar.gz` file, and navigate to the folder _**VoltMXFoundry_Installer_Linux**_.
-5.  Start the **./VoltMXFoundryInstaller-x.x.x.x_GA.bin** file by executing the following command:
+4.  Unzip the `VoltMXFoundrySetup.tar.gz` file, and navigate to the
+    folder _**VoltMXFoundry_Installer_Linux**_.
+5.  Start the **./VoltMXFoundryInstaller-x.x.x.x_GA.bin** file by
+    executing the following command:
 
+```
 Preparing to install...  
 Extracting the JRE from the installer archive...  
 Unpacking the JRE...  
@@ -55,25 +58,31 @@ Configuring the installer for this system's environment...
 
 Launching installer...
 
-\===============================================================================  
+==============================================
 Volt MX Foundry (created with InstallAnywhere)  
-\-------------------------------------------------------------------------------  
+----------------------------------------------
 Preparing CONSOLE Mode Installation...  
-\===============================================================================  
+============================================== 
 Introduction  
-\------------  
+------------  
 This installer will install a new or upgrade an existing instance of Volt MX Foundry.
 
 Volt MX Foundry is a set of enterprise-grade mobile infrastructure services that makes it easy to build amazing apps that integrate and support all of your backend systems. With open, standards-based development, scalable and secure services, and exceptional agility, enterprises can dramatically reduce the cost and complexity of enterprise mobility projects.
 
 To proceed with installation, please confirm that the following prerequisites have been met -
 
-1\. Database server for installation. MySQL, MariaDB, Oracle, and MS SQL Server are the supported databases. MariaDB is supported for Tomcat/JBoss only.  
- 2. Corresponding database user should exist and that user should have all required       
+1.  Database server for installation. MySQL, MariaDB, Oracle, and MS SQL
+    Server are the supported databases. MariaDB is supported for Tomcat/JBoss only.  
+2.  Corresponding database user should exist and that user should have all
+    required       
     privileges as per the documentation.  
- 3. If you want to use your existing SSL certificate then please have the SSL certificate  
+3.  If you want to use your existing SSL certificate then please have the
+    SSL certificate  
+
     mapped to the domain name you want to use.  
-4\. If you want to install with JBoss as an option for application  server, then have the application server preconfigured. Please note that single node JBoss is also bundled as part of the installer, in case you want to install afresh.
+
+4. If you want to install with JBoss as an option for application  server,
+   then have the application server preconfigured. Please note that single node JBoss is also bundled as part of the installer, in case you want to install afresh.
 
 To change input, type 'back' to go back to the previous step.  
 To cancel the installation, type 'quit' at any time.
@@ -86,16 +95,20 @@ For upgrading Volt MX Foundry, refer [online documentation](../../../Foundry/vol
 
 If you have more questions or feedback, you can join our [http://community.hclvoltmx.com/](http://community.hclvoltmx.com/) or, raise a [http://support.voltmx.com/](http://support.voltmx.com/).
 
-\->1- Continue with Installation.  
+ ->1- Continue with Installation.  
    2- Abort Installation.
 
 ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
 
-8.  Press **Enter**. The Software _License Agreement_  details appear.
+```
 
-    \========================================================================  
+6.  Press **Enter**. The Software _License Agreement_  details appear.
+
+  ```
+  =============================================
     License Agreement  
-    \-----------------  
+  -----------------  
+  
     Installation and Use of Volt MX Foundry Console Requires Acceptance of the Following License Agreement:
 
     VOLTMX, INC.  
@@ -107,7 +120,9 @@ ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
 
     DO YOU ACCEPT THE TERMS OF THIS LICENSE AGREEMENT? (Y/N): Y
 
-9.  Press **Enter** to continue with new installation.
+  ```
+
+7.  Press **Enter** to continue with new installation.
 
     The following installation types are supported for new installation:
 
@@ -115,38 +130,47 @@ ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
     - **Non-Production** for larger environments like QA or UAT.
     - **Production** for the production instance.
 
-    \===============================================================================  
+  ```
+  ===================================  
     Licensing Type  
-    \--------------
+  --------------
 
     Please select the type of environment you want to install. Development – Single server instance typically used for development Non-Production – A multi-server environment for testing or staging environments Production – A full production-grade environment
 
-    1- Development  
+         1- Development  
          2- Non-Production  
        ->3- Production
 
     ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
-10. Enter your choice and press **Enter.** The _Send Usage Data Anonymously_ details appear. Allows HCL to collect product usage information to make your Volt MX Foundry experience better. HCL does not save any of your private or application data.
+  ```
 
-    \===============================================================================
+8. Enter your choice and press **Enter.** The _Send Usage Data Anonymously_ details appear. Allows HCL to collect product usage information to make your Volt MX Foundry experience better. HCL does not save any of your private or application data.
+
+
+  ```
+  ==============================
     Send Usage Data Anonymously
-    \-------------- ------------
+  -------------- ------------
 
     Help us make your Volt MX Foundry experience better by allowing us to collect product usage information. We will not save any of your private or application data.
 
     Send usage data anonymously.
 
-    ->1- Yes
+       ->1- Yes
          2- No
 
     ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
-11. Enter your choice and press **Enter.** The _Install Components_ details appear.
+  ```
 
-    \=======================================================================
+9. Enter your choice and press **Enter.** The _Install Components_ details
+   appear.
+ 
+  ```
+  =====================
     Install Components
-    \------------------
+  ------------------
     Please select Volt MX Foundry components to install.
     The Console is the administrative interface to manage your apps, environments and users.
     The Identity Services helps you to use a single gateway for all your authentication and authorization requests.
@@ -157,7 +181,7 @@ ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
     Console, Identity and Integration Services are mandatory components of Volt MX Foundry.
     In a development scenario, all components can be installed on the same server. However, it is recommended to install these components on separate servers for a production environment.
 
-    ->1- Console
+      ->1- Console
       ->2- Identity Services
       ->3- Integration Services
       ->4- API Development Portal
@@ -165,7 +189,9 @@ ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
 
     ENTER A COMMA-SEPARATED LIST OF NUMBERS REPRESENTING THE DESIRED CHOICES, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
-    - **Console** - To install Volt MX Foundry Console, type 1 and press **Enter**.
+  ```
+
+  - **Console** - To install Volt MX Foundry Console, type 1 and press **Enter**.
       The system creates the following databases: `<prefix>mfconsoledb<suffix>`, `<prefix>mfaccountsdb<suffix>`, and  `<prefix>mfreportsdb<suffix>`.
     - **Identity Services** - To install Volt MX Identity Services, type 2 and press **Enter**.
       The system creates the following database: `<prefix>idconfigdb<suffix>`.
@@ -173,7 +199,7 @@ ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
       The system creates the following databases: `voltmxadmindb`  and  `mfreportsdb`.
     - **API Developer Portal** - To install developer portal, type 4 and press **Enter**.
 
-      > **_Note:_** During installation if you have selected **API Developer Portal**, the **API Developer Portal** is created. You can directly access your [VoltMX Developer Portal](../../../Foundry/voltmx_foundry_user_guide/Content/VoltMXDevPortal.md) in Volt MX Foundry Console.
+    > **_Note:_** During installation if you have selected **API Developer Portal**, the **API Developer Portal** is created. You can directly access your [VoltMX Developer Portal](../../../Foundry/voltmx_foundry_user_guide/Content/VoltMXDevPortal.md) in Volt MX Foundry Console.
 
     - **Engagement Services** - To install Volt MX Foundry Engagement Services, type 5 and press **Enter**.
       The system creates the following database: `<prefix>vpnsdb<suffix>`.
@@ -200,11 +226,12 @@ ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
 
     Refer to [creating a reports database, for example, **<prefix>mfreports<suffix>**](#CreatingReportsDB).
 
-12. Press **Enter** to continue the installation. The _Install Folder_ details appear.
+10. Press **Enter** to continue the installation. The _Install Folder_ details appear.
 
-    \=======================================================================
+  ```
+  ============================
     Install Folder
-    \---------------------
+  ---------------------
 
     Please choose a destination folder for this installation.
 
@@ -212,77 +239,88 @@ ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
 
     Default Install Folder: /home/user1/VoltMXFoundry
 
-    ENTER AN ABSOLUTE PATH, OR PRESS <ENTER> TO ACCEPT THE DEFAULT
-    :
+    ENTER AN ABSOLUTE PATH, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
 
-    > **_Note:_**  By default, Volt MX Foundry is installed at the home directory of the user.
+  ```
 
-13. Press **Enter** to continue the installation. The installer prompts for the _Application Server_ details as follows:
+> **_Note:_**  By default, Volt MX Foundry is installed at the home directory of the user.
 
-    \===============================================================================
+
+11. Press **Enter** to continue the installation. The installer prompts for the _Application Server_ details as follows:
+
+  ```
+  ==========================
     Application Server
-    \------------------
+  ------------------
 
     Enter requested information
-    \->1- Tomcat
+     ->1- Tomcat
        2- JBoss
 
-    <!-- 3- WebLogic -->
+      3- WebLogic
 
     ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
-14. In the **Application Server**, type 2.
+  ```
 
-    > **_Note:_** By default Tomcat manager password in used by Volt MX Foundry for Web Application publish. To change the default Tomcat manager password, the new password needs to be replaced in the `password` value for user `manager` in `<tomcat-users>` tag in `tomcat-users.xml`.
+12. In the **Application Server**, type 2.
 
-    Now to replace the value in database, the password value should be encrypted. To encrypt the database password, follow these steps mentioned in the [Encrypt\_Passwords](../../../Foundry/voltmx_foundry_manual_install_guide/Content/Encrypt_Passwords.md) section.
+  > **_Note:_** By default Tomcat manager password in used by Volt MX Foundry for Web Application publish. To change the default Tomcat manager password, the new password needs to be replaced in the `password` value for user `manager` in `<tomcat-users>` tag in `tomcat-users.xml`.
+  <br><br>Now to replace the value in database, the password value should be encrypted. To encrypt the database password, follow these steps mentioned in the [Encrypt\_Passwords](../../../Foundry/voltmx_foundry_manual_install_guide/Content/Encrypt_Passwords.md) section<br><br>Once the password is encrypted, replace the encrypted value in the `prop_value` column in the row where prop_value is `management_server_password` of `<DatabasePrefix>admindb<DatabaseSuffix>` database in the `server_configuration` table.
 
-    Once the password is encrypted, replace the encrypted value in the `prop_value` column in the row where prop_value is `management_server_password` of `<DatabasePrefix>admindb<DatabaseSuffix>` database in the `server_configuration` table.
+13. Press **Enter** to continue the installation. The _Installation Mode_ details appear.
 
-15. Press **Enter** to continue the installation. The _Installation Mode_ details appear.
-
-    \===============================================================================
+  ```
+  ========================
     Installation Mode
-    \-----------------
+  -----------------
     Please select your required installation mode. Standalone mode is for single node deployment whereas domain mode is for multi node deployment in JBoss cluster. Please note that if you want to install in domain mode then JBoss cluster should be preconfigured.
 
     Note: If you are running JBoss in Domain node for a production setup, please procure appropriate licenses from Red Hat, Inc.
 
-    ->1- Standalone Mode (Single Node)
+     ->1- Standalone Mode (Single Node)
        2- Standalone Mode (Existing)
        3- Domain Mode (Multi Node)
 
     ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
-    - **Standalone Mode (Single Node)**: To install Volt MX Foundry on single node on JBoss that is bundled with the Volt MX Foundry installer, choose**Standalone Mode** **(Single Node)**.
-    - **Standalone Mode (Existing)**: To install Volt MX Foundry on single node on JBoss that is installed on your machine, choose **Standalone Mode** **(Existing)**. For more details on how to install Volt MX Foundry on the existing JBoss, refer to [Installing Volt MX Foundry on a pre-configured standalone JBoss - (Single Node)](Installing_Foundry_JBoss_existing.md).
-    - **Domain Mode (Multinode)**: To install Volt MX Foundry on JBoss multinode, choose **Domain Mode**. Before installing domain mode, ensure that the JBoss cluster is configured on your install system. For more details on how to install Volt MX Foundry on Domain mode, refer to [JBoss Multinode Installation Procedure](Multi-Node_Installation.md).
+  ```
 
-      > **_Important:_** Before installing Volt MX Foundry on domain mode, ensure that the JBoss cluster is configured on your install system.
+  - **Standalone Mode (Single Node)**: To install Volt MX Foundry on single node on JBoss that is bundled with the Volt MX Foundry installer, choose**Standalone Mode** **(Single Node)**.
+  - **Standalone Mode (Existing)**: To install Volt MX Foundry on single node on JBoss that is installed on your machine, choose **Standalone Mode** **(Existing)**. For more details on how to install Volt MX Foundry on the existing JBoss, refer to [Installing Volt MX Foundry on a pre-configured standalone JBoss - (Single Node)](Installing_Foundry_JBoss_existing.md).
+  - **Domain Mode (Multinode)**: To install Volt MX Foundry on JBoss multinode, choose **Domain Mode**. Before installing domain mode, ensure that the JBoss cluster is configured on your install system. For more details on how to install Volt MX Foundry on Domain mode, refer to [JBoss Multinode Installation Procedure](Multi-Node_Installation.md).
 
-16. In the Installation Mode if you type 1 and press **Enter**, the _HTTP or HTTPS_ details appear.
+  > **_Important:_** Before installing Volt MX Foundry on domain mode, ensure that the JBoss cluster is configured on your install system.
 
-    \========================================================================
+14. In the Installation Mode if you type 1 and press **Enter**, the _HTTP or HTTPS_ details appear.
+
+  ```
+  ====================
     HTTP or HTTPS
-    \-------------
+  -------------
     Please select the communication protocol you want to use. We recommend that you use HTTPS in production environment.
-    \->1- HTTP
+     ->1- HTTP
        2- HTTPS
 
-    ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
+    ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS < ENTER > TO ACCEPT THE DEFAULT::
+  
+  ```
 
-17. In _HTTP or HTTPS_  if you select 1 and press **Enter**, the following details in the _Details for Application Server_ details appear.
+15. In _HTTP or HTTPS_  if you select 1 and press **Enter**, the following details in the _Details for Application Server_ details appear.
 
-    \===============================================================================  
+  ```
+  ==============================
     Details for Application Server  
-    \------------------------------  
-    \=============================================================================== Please enter the Hostname/IP Address and port you want to use. The default value is the IP Address of this machine.
+  ------------------------------  
+  ==================================== Please enter the Hostname/IP Address and port you want to use. The default value is the IP Address of this machine.
 
     Hostname/IP Address (Default: ): <IP address>
 
     HTTP Port (Default: 8080): 8181
 
-18. In the _HTTP or HTTPS,_ if you type 2 and press **Enter**, the following details in the _Details for Application Server_ details appear.
+  ```
+
+16. In the _HTTP or HTTPS,_ if you type 2 and press **Enter**, the following details in the _Details for Application Server_ details appear.
 
     \===============================================================================  
     Details for Application Server  
