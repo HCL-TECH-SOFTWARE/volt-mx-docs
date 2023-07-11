@@ -1,9 +1,8 @@
                                 
+# App Menu Widget ( Tab Bar ) 
 
-You are here: Android Specific Behavior
+### [Tab Bar](#app-menu-widget--tab-bar)  
 
-App Menu Widget
-===============
 
 The _Application Menu_ _(App Menu)_ is a bar that is displayed at the bottom of an app, containing icons for features that apply to the application, rather than to a specific application screen or window.
 

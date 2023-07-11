@@ -45,7 +45,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 ## Volt Iris
 
 ### V9 Servicepack 2 Fixpack 63
-June 30, 2023
+July 07, 2023
 
 * Added support for Volt Iris to target Android API level 33 (Android 13) for generating binaries in compliance with latest Google Play Store guidelines.
 

@@ -1,9 +1,10 @@
                                 
+# App Menu Widget ( Tab Bar )  
 
-You are here: Android Specific Behavior
+<!-- ### Tab Bar -->
 
-App Menu Widget
-===============
+### [Tab Bar](#app-menu-widget--tab-bar)
+
 
 The _Application Menu_ _(App Menu)_ is a bar that is displayed at the bottom of an app, containing icons for features that apply to the application, rather than to a specific application screen or window.
 
@@ -131,13 +132,19 @@ AppMenu Widget Basics
 
 ### Android Specific Behavior
 
-*   If you add more than six App Menu items, the menu items beyond the fifth App Menu item are grouped under the Menu item _More_ (added automatically by the Android platform) and if you select _More_, the rest of the Menu items are displayed in a list without any icons (even if the icons are set through code). This is a limitation in the Android platform support.
-*   You cannot specify a skin for the App Menu.
+*   AppMenu is not supported for Android : Native.
 
 ### iOS Specific Behavior
 
 *   In iOS 7 and iOS 7.1, AppMenu supports only single color. If the color is not specified, then by default native color ( transparent) is applied to iOS 7 and cyan color is applied to iOS7.1.
-*   If you add more than five App Menu items, the menu items beyond the fourth App Menu item are grouped under the Menu item “More” (added automatically by the iOS platform) and if you select _More_, the rest of the Menu items are displayed in a list with the icons set for them.
+
+*   For Mobile, If you add more than five AppMenu items, the menu items beyond the fifth AppMenu item are grouped under the Menu item “More” (added automatically by the iOS platform) and if you select More, the rest of the Menu items are displayed in a list with the icons set for them.
+
+*   For Tablet, If you add more than eight AppMenu items, the menu items beyond the eigth AppMenu item are grouped under the Menu item “More” (added automatically by the iOS platform) and if you select More, the rest of the Menu items are displayed in a list with the icons set for them.
 
 *   Transition Animations are not supported when a flow of transitions from a form with AppMenu to a form without AppMenu.
+
+### Mobile Web Specific Behavior  
+
+*   For iOS : Web, Android : Web, and Windows : Web, if you add more than four App Menu items, the menu items beyond the fourth AppMenu item are grouped under the Menu item More and if you select More, the rest of the Menu items are displayed in a list without any icons (even if the icons are set through code).
 

@@ -1,9 +1,8 @@
-                                 
 
-You are here: [SegmentedUI Widget](#segmentedui-widget) > [SegmentedUI Widget Basics](#segmentedui-widget-basics) > [Templates](#segmentedui-templates) > SegmentedUI Basics
+# SegmentedUI Widget (Table) 
 
-SegmentedUI Widget
-==================
+## Table  
+
 
 The Segment widget is a UI component commonly used to display lists or pages of data. Segment widget is a container that provides the capability to define a row template that repeats for every row or page of the specific segment.
 
