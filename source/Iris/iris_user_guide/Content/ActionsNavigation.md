@@ -10,7 +10,7 @@ The general actions that you can use in an action sequence are as follows:
 | Action | Property |
 | --- | --- |
 | [Loop Action](#loop-action) | Repeat a set of nested statements for the specified number of times. |
-| [Add Local Variable](#add-local-variable) | Adds a variable that is available within a function. Local variable can be of type Constant or Expression and take the following data type: String, Number, Boolean and or Collection. |
+| [Add Local](#add-local-variable) | Adds a variable that is available within a function. Local variable can be of type Constant or Expression and take the following data type: String, Number, Boolean and or Collection. |
 | [Modify Variable](#modify-variable) | Modify an existing variable. |
 | [Navigate to Form](#navigation) | Navigates from one form to another. |
 | [String Operation](#string-operation) | Perform operations (such as combine or split) on strings. |
@@ -55,8 +55,11 @@ To define an action sequence to add a local variable, do the following:
 6.  In the **Value** field, enter the value of the local variable.
 
      ![](Resources/Images/Add_local_variable.PNG)
+     
 
 7.  Click **Save** to save the action sequence, and then close the Action Editor window.
+
+> **_Note:_** For variable type `Global` also the same steps from #4 to #6 above are applicable
 
 ### Modify Variable
 
