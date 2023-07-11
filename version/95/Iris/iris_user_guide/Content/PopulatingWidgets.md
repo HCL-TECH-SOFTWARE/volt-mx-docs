@@ -36,6 +36,10 @@ Click a topic for more information. 
 
 [Look Properties for Widgets](#look-property-for-widgets)
 
+[App Menu Widget](../../iris_widget_prog_guide/Content/App_Menu.md) 
+
+
+
 Access Widgets from the Widget Tab
 ----------------------------------
 
@@ -220,3 +224,9 @@ Look Property for Widgets
 -------------------------
 
 For information on common properties of widgets, see [Widget Look Properties](Look.md).
+
+
+App Menu Widget
+-------------------------
+
+For information on App Menu widget, see [App Menu Widget](../../iris_widget_prog_guide/Content/App_Menu.md).
