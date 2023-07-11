@@ -12,8 +12,8 @@ This document also explains about the settings to be done in App Services and th
 Getting Started Options
 
 *   [Release Notes](../../../Foundry/voltmx_foundry_release_notes/Content/VoltMX_Foundry_Release_Notes.md)
-*   [Video Tutorials](../../../docs/tutorials/appFactory.md)
-*   [QuickStart Guides](../../../docs/tutorials/voltmxFoundryOverview.md)
+*   [Video Tutorials](../../../tutorials/appFactory.md)
+*   [QuickStart Guides](../../../tutorials/voltmxFoundryOverview.md)
 *   [Security Guide](../../../Foundry/vmfintegrationservice_troubleshooting_guide/Content/Integration_Services_Troubleshooting_Guide.md)
 *   [Sample Apps](https://github.com/HCL-TECH-SOFTWARE/volt-mx-samples)
 
