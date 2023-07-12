@@ -590,7 +590,7 @@ subscribeAudience  =  function (firstName, lastName, emailId, mobileNumber, coun
 | --- | --- | --- | --- |
 | firstName | String | First name of the user | Yes |
 | lastName | String | Last name of the user | Yes |
-| mobileNumber | Number | Mobile number of the user. If **mobileNumber** is specified as the [reconciliationKey](../../../../engagement_api_guide/Content/REST_API_Administration/Modify_Details_General_.md), then it is a required value and must be specified for all users. An empty value will cause an error. | Yes |
+| mobileNumber | Number | Mobile number of the user. If **mobileNumber** is specified as the [reconciliationKey](../../../engagement_api_guide/Content/REST_API_Administration/Modify_Details_General_.md), then it is a required value and must be specified for all users. An empty value will cause an error. | Yes |
 | email | String | Email ID of the user | Yes |
 | state | String | If the selected country is USA, the state option is mandatory | Yes |
 | country | String | Country to which the user belongs | Yes |
