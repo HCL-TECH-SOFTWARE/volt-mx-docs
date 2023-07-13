@@ -29,7 +29,7 @@ Enable Multipath TCP in Project:
     "iOS":{
     "KRelease":{
         "Capabilites":{
-            "Multipath" : true
+            "com.apple.developer.networking.multipath" : true
             },
             "BuildSettings":{
             }
