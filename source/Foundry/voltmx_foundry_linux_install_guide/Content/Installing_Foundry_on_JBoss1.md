@@ -78,7 +78,7 @@ To proceed with installation, please confirm that the following prerequisites ha
 To change input, type 'back' to go back to the previous step.  
 To cancel the installation, type 'quit' at any time.
 
-For troubleshooting & help on the installation, use [../../../Foundry/resources/installer.html](../../../Foundry/resources/installer.md)
+<!--For troubleshooting & help on the installation, use [../../../Foundry/resources/installer.html](../../../Foundry/resources/installer.md)-->
 
 For getting started on Volt MX Foundry, refer [http://community.hclvoltmx.com/documentation](http://community.hclvoltmx.com/documentation)
 

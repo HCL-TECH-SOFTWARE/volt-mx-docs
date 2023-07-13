@@ -7,7 +7,7 @@ Initialize Volt MX Foundry client with the following code, and start using the s
 
 When SDK is initialized, the Volt MX SDK registers a session and sends its information to the Volt MX Foundry Server. If the device is offline, or the server is not reachable, the session information persists on the device until it can successfully send the information to the Volt MX Foundry server.
 
-For more information on application session, refer [Standard Report Docs](../../../../Foundry/standard*metrics_reports_guide/Content/VoltMX_Analytics*-\_Standard_Reports/Application_activity_Reports.md).
+For more information on application session, refer [Standard Report Docs](../../../../Foundry/standard_metrics_reports_guide/Content/VoltMX_Analytics_-_Standard_Reports/Application_activity_Reports.md).
 
 <blockquote><b><em>Note:</em></b>
 <ul>
