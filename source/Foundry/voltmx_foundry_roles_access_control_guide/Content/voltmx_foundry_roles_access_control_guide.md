@@ -16,8 +16,8 @@ Revision History
 Getting Started Options
 
 - [Release Notes](../../../Foundry/voltmx_foundry_release_notes/Content/VoltMX_Foundry_Release_Notes.md): Provides release details and information on the new features, known issues, and limitations.
-- [Tutorials and Videos](../../../docs/tutorials/appFactory.md): Step-by-step instructions to set up a trial Volt MX VoltMX Foundry account; how to configure Volt MX mobile services such as identity, integration, engagement, and sync services; how to add backend services to your application; and how to invoke backend services by using Volt MX Foundry SDKs.
-- [QuickStart Guides](../../../docs/tutorials/voltmxFoundryOverview.md): Helps you create a basic set of back-end services for authenticating a user and then access a simple integration and orchestration service.
+- [Tutorials and Videos](../../../tutorials/appFactory.md): Step-by-step instructions to set up a trial Volt MX VoltMX Foundry account; how to configure Volt MX mobile services such as identity, integration, engagement, and sync services; how to add backend services to your application; and how to invoke backend services by using Volt MX Foundry SDKs.
+- [QuickStart Guides](../../../tutorials/voltmxFoundryOverview.md): Helps you create a basic set of back-end services for authenticating a user and then access a simple integration and orchestration service.
 - [Installer Guide Windows](../../../Foundry/voltmx_foundry_windows_install_guide/Content/Introduction.md): Applicable to on-premises. Explains how to install Console, Identity, Integration Services, Engagement Services, and Sync Services on Windows using an installer program.
 - [Installer Guide Linux](../../../Foundry/voltmx_foundry_linux_install_guide/Content/Introduction.md): Applicable to on-premises. Explains how to install Console, Identity, Integration Services, Engagement Services, and Sync Services on Linux using an installer program.
 
