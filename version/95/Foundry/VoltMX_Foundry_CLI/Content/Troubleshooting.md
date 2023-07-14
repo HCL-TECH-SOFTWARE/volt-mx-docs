@@ -33,7 +33,7 @@ This issue is seen if the Apache ANT environment is not properly setup in Linux.
 Workaround
 
 ```   
-     1.  Download the **bin** release from [Apache Downloads](http://ant.apache.org/bindownload.cgi).
+     1.  Download the bin release from [Apache Downloads](http://ant.apache.org/bindownload.cgi).
      2.  Extract and copy the entire folder (apache-ant-1.9xxxxx) into the following folder location: `/opt/`.  
      Following which the file structure will be `/opt/apache-ant-1.9xxxxxx/`.
      3.  Create a Symlink: ln -s /opt/apache-ant-1.9.xxxxx /opt/ant

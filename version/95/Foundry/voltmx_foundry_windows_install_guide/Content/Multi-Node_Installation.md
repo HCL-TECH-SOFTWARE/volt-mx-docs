@@ -14,7 +14,8 @@ To install the Volt MX Foundry console using the installer, follow these steps:
 
 1.  Unzip the `VoltMXFoundrySetup.zip` file.
 2.  Double-click `VoltMXFoundryInstaller-x.x.x.x.GA.exe` to launch the installer.  
-    The **InstallAnywhere** dialog appears. The **InstallAnyWhere** dialog displays information about the progress of the software installation at run time.
+
+     The **InstallAnywhere** dialog appears. The **InstallAnyWhere** dialog displays information about the progress of the software installation at run time.
     
     ![](Resources/Images/Install1.png)
     
@@ -162,11 +163,11 @@ To install the Volt MX Foundry console using the installer, follow these steps:
         *   **Service ID **/ Service Name**:** Enter Oracle service ID or service name. Service ID is unique alias given to an instance name of Oracle DB.
         *   Select the tablespace for Oracle database:
             
-            > **_Important:_**  If tablespaces were already created, the DBA must grant quota (permissions) on these tablespaces to installer with admin option.  
+        > **_Important:_**  If tablespaces were already created, the DBA must grant quota (permissions) on these tablespaces to installer with admin option.  
               
-            The DBA also must include grant quota on the schemas from installer login.
+        The DBA also must include grant quota on the schemas from installer login.
             
-            *   **Default Tablespace**: If selected, the database schema and SQL scripts migration happens automatically to the default tablespace for example, `USERS`
+        *   **Default Tablespace**: If selected, the database schema and SQL scripts migration happens automatically to the default tablespace for example, `USERS`
             *   **User Defined Tablespace**: If selected, enter the tablespaces for the following:
                 *   **Data Tablespace**:  
                     Enter the name for Data tablespace.  
@@ -199,39 +200,43 @@ To install the Volt MX Foundry console using the installer, follow these steps:
         
         If you want to enable Windows Authentication Support on SQL Server, run the following command to start the installation process after extracting the artefact:
         
-```
-VoltMXFoundryInstaller-9.x.x.x_GA.exe -Dprop.java.library.path=<location of sqljdbc_auth.dll>
-```
+     ```
+        VoltMXFoundryInstaller-9.x.x.x_GA.exe -Dprop.java.library.
+        path=<location of sqljdbc_auth.dll>
+
+     ```
         
-        > **_Note:_** If you choose to enable Windows Authentication support on SQL Server, you do not need to provide the **Database System User** and **Database System Password**.
+    > **_Note:_** If you choose to enable Windows Authentication support on SQL Server, you do not need to provide the **Database System User** and **Database System Password**.
         
-        ![](Resources/Images/SQLServer_504x386.png)
+
+    ![](Resources/Images/SQLServer_504x386.png)
+
         
-        *   **Database Server Hostname/IP**: Enter the DB server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
-        *   **Database Port**: Enter the database port of the SQL Server. By default, this field is set to 1433 for SQL.
-        *   **Database System User**: Enter the user name used while creating the database user - for example, dbclient.
-        *   **Instance Name (optional)**: Enter the instance name for the database. This information is optional.
-        *   **Database System Password**: Enter the user password used while creating the database user.
-        *   **Database Name Prefix**: Enter valid prefix databases - for example, Volt MX.
-        *   **Database Name Suffix**: Enter valid suffix for all databases - for example, 1.
+    *   **Database Server Hostname/IP**: Enter the DB server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
+    *   **Database Port**: Enter the database port of the SQL Server. By default, this field is set to 1433 for SQL.
+    *   **Database System User**: Enter the user name used while creating the database user - for example, dbclient.
+    *   **Instance Name (optional)**: Enter the instance name for the database. This information is optional.
+    *   **Database System Password**: Enter the user password used while creating the database user.
+    *   **Database Name Prefix**: Enter valid prefix databases - for example, Volt MX.
+    *   **Database Name Suffix**: Enter valid suffix for all databases - for example, 1.
         
-        If a database faces connection issues, the system displays an error message. For example:
+    If a database faces connection issues, the system displays an error message. For example:
         
-        ![](Resources/Images/Database_connection_failed.png)
+    ![](Resources/Images/Database_connection_failed.png)
         
     
     ![](Resources/Images/MariaDB_587x451.png)
     
     *   Enter the following database details for **MariaDB**.
-        *   **Database Server Hostname/IP**: Enter the DB server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
-        *   **Database Port**: Enter the database port of the MariaDB. By default, this field is set to 3306 for MariaDB.
-        *   **Database User**: Enter the user name used while creating the database user.
-        *   **Database Password**: Enter the user password used while creating the database user.
+    *   **Database Server Hostname/IP**: Enter the DB server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
+    *   **Database Port**: Enter the database port of the MariaDB. By default, this field is set to 3306 for MariaDB.
+    *   **Database User**: Enter the user name used while creating the database user.
+    *   **Database Password**: Enter the user password used while creating the database user.
             
-            > **_Important:_** The **Reports Database Name** filed appears only if you have selected the Console, Identity, and Integration during [Install Components](#InstallComponents).
+    > **_Important:_** The **Reports Database Name** filed appears only if you have selected the Console, Identity, and Integration during [Install Components](#InstallComponents).
             
-        *   **Database Name Prefix**: Enter the valid prefix databases - for example, jboss.
-        *   **Database Name Suffix**: Enter the valid suffix for all databases - for example, 54.
+    *   **Database Name Prefix**: Enter the valid prefix databases - for example, jboss.
+    *   **Database Name Suffix**: Enter the valid suffix for all databases - for example, 54.
 20. After entering database server details, click **Next**.
     
     If a database exists, the system displays the warning message: `One or more databases already exist. Do you want to use existing databases? If yes, then the schema may be upgraded.` shown below:
@@ -266,16 +271,22 @@ VoltMXFoundryInstaller-9.x.x.x_GA.exe -Dprop.java.library.path=<location of sqlj
     *   **Confirm Password**: Retype the password to ensure the user's identity.
         
 23. Click **Next**. The **Pre-Installation Summary** window appears.
+
     
     ![](Resources/Images/pre-installation_multinode_windows_577x443.jpg)
+
     
 24. Click **Install**. The **Installing Volt MX Foundry Console** window appears.
+
     
     ![](Resources/Images/Installing_583x422.png)
+
     
     Once the installation completes, the **Install Complete** window appears with the confirmation message.
+
     
     ![](Resources/Images/Complete_583x422.png)  
+    
     
 25. Click **Done** to close the window.
     

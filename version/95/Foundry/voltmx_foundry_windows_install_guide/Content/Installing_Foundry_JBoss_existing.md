@@ -152,11 +152,11 @@ To install Volt MX Foundry on a pre-configured JBoss, follow these steps:
         *   **Service ID / Service Name:** Enter Oracle service ID or service name. Service ID is unique alias given to an instance name of Oracle DB.
         *   Select the tablespace for Oracle database:
             
-            > **_Important:_**  If tablespaces were already created, the DBA must grant quota (permissions) on these tablespaces to the installer with admin option.  
+        > **_Important:_**  If tablespaces were already created, the DBA must grant quota (permissions) on these tablespaces to the installer with admin option.  
               
-            The DBA also must include grant quota on the schemas from installer login.
+        The DBA also must include grant quota on the schemas from installer login.
             
-            *   **Default Tablespace**: If selected, the database schema and SQL scripts migration happen automatically to the default tablespace for example, `USERS`
+        *   **Default Tablespace**: If selected, the database schema and SQL scripts migration happen automatically to the default tablespace for example, `USERS`
             *   **User Defined Tablespace**: If selected, enter the tablespaces for the following:
                 *   **Data Tablespace**:  
                     Enter the name for Data tablespace.  
@@ -181,18 +181,18 @@ To install Volt MX Foundry on a pre-configured JBoss, follow these steps:
     *   Enter the following database details for **SQL Server**.
         
         > **_Important:_**
-        
         If you want to enable Windows Authentication Support on SQL Server, run the following command to start the installation process after extracting the artifact:
         
-```
-VoltMXFoundryInstaller-9.x.x.x_GA.exe -Dprop.java.library.path=<location of sqljdbc_auth.dll>
-```
+     ```
+        VoltMXFoundryInstaller-9.x.x.x_GA.exe -Dprop.java.library.path=<location of sqljdbc_auth.dll>
+
+     ```
         
-        > **_Note:_** If you choose to enable Windows Authentication support on SQL Server, you do not need to provide the **Database System User** and **Database System Password**.
+    > **_Note:_** If you choose to enable Windows Authentication support on SQL Server, you do not need to provide the **Database System User** and **Database System Password**.
         
-        ![](Resources/Images/SQLServer_551x422.png)
+    ![](Resources/Images/SQLServer_551x422.png)
         
-        *   **Database Server Hostname/IP**: Enter the DB server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
+    *   **Database Server Hostname/IP**: Enter the DB server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
         *   **Database Port**: Enter the database port of the SQL Server. By default, this field is set to 1433 for SQL.
         *   **Database System User**: Enter the user name used while creating the database user - for example, dbclient.
         *   **Instance Name (optional)**: Enter the instance name for the database. This information is optional.
@@ -201,6 +201,7 @@ VoltMXFoundryInstaller-9.x.x.x_GA.exe -Dprop.java.library.path=<location of sqlj
         *   **Database Name Suffix**: Enter the valid suffix for all databases - for example, 54.
         
         If a database faces connection issues, the system displays an error message. For example:  
+        
         ![](Resources/Images/Database_connection_failed.png)
         
     
@@ -270,7 +271,5 @@ VoltMXFoundryInstaller-9.x.x.x_GA.exe -Dprop.java.library.path=<location of sqlj
     For details, refer to [Troubleshoot with SSL Certificate Issues](Troubleshooting.md#Service_Provider's_Certificate_Issues).
     
     > **_Note:_** You can now access Volt MX Foundry Console by using the URLs. For more details, refer to [Accessing Volt MX Foundry Console - On-premises](../../../Foundry/voltmx_foundry_user_guide/Content/How_to_access_VoltMX_Foundry_Portal_on-Prem.md).  
-      
-      
       
     During installation if you have configured your super administrator account, you can directly [log in to Volt MX Foundry Console](../../../Foundry/voltmx_foundry_user_guide/Content/How_to_access_VoltMX_Foundry_Portal_on-Prem.md) by using the Console URL.
