@@ -7,7 +7,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Iris](#volt-iris)
 
-
+- [V9 Servicepack 5 Fixpack 11](#v9-servicepack-5-fixpack-11)
 - [V9 Servicepack 5 Fixpack 10](#v9-servicepack-5-fixpack-10)
 - [V9 Servicepack 5 Fixpack 9](#v9-servicepack-5-fixpack-9)
 - [V9 Servicepack 5 Fixpack 8](#v9-servicepack-5-fixpack-8)
@@ -53,6 +53,15 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 - [Earlier Foundry releases](#earlier-foundry-releases)
 
 ## Volt Iris
+
+
+### V9 Servicepack 5 Fixpack 11
+
+July 14, 2023
+
+* Added support for Volt Iris to target Android API level 33 (Android 13) for generating binaries in compliance with latest Google Play Store guidelines.
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 
 ### V9 Servicepack 5 Fixpack 10
