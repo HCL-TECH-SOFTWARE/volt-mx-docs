@@ -69,7 +69,7 @@ Following are the environment variables for different platforms in App Factory. 
 | PROJECT\_XCODEPROJECT | iOS |
 
   
-For more information on Environment Variable parameters, refer [Configuring Parameters for Building a Iris App](Configuration.md#configuration).
+For more information on Environment Variable parameters, refer [Configuring Parameters for Building a Iris App](BuildingAnApp.md).
 
 Custom Hook Specific Environment Variables
 ------------------------------------------

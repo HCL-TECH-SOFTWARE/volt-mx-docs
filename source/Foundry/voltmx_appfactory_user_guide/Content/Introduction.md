@@ -11,8 +11,6 @@ If the teams cannot build on demand or use a continuous integration and delivery
 
 This document details the Volt MX App Factory CI and/or CD services and how they can help your organization successfully deliver apps. In this document, you will learn how to configure App Factory to build and test both the front end and the integrations of your multi-experience app, from your source code repository. You will also learn how to build and deploy your first app as well as test your application on your target devices using the HCL App Factory testing services.
 
-You can also access the [Revision History](Revision_History.md) of the document.
-
 > **_Note:_** From V8SP4, App Factory supports Xcode 10 upgrade for building and deploying the apps after Iris framework supports iOS12 with Xcode 10 for app generations. AWS device farm and Appium in App Factory supports iOS12 and Xcode10.  
   
 App Factory upgrades the environment to support Xcode 10 based on the user request.

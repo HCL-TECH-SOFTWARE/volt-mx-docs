@@ -26,7 +26,7 @@ Configuring a Scheduler Job in App Factory
 
 [![](Resources/Images/AT_CreateTrigger_thumb_700_0.png)](Resources/Images/AT_CreateTrigger.png)
 
-7.  Configure the remaining parameters, which are the same as the [buildIris job](Configuration.md).
+7.  Configure the remaining parameters, which are the same as the [buildIris job](BuildingAnApp.md).
 
 Jobs that are triggered by Cron expressions are stored in the **Schedulers** folder. Every Scheduler contains a cron string in the name to simplify searches.
 
