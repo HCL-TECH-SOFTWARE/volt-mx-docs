@@ -23,4 +23,3 @@ Getting Started Options
 *   [Security Guide](../../../Foundry/vmfintegrationservice_troubleshooting_guide/Content/Integration_Services_Troubleshooting_Guide.md)
 *   [Sample Apps](https://github.com/HCL-TECH-SOFTWARE/volt-mx-samples) -->
 
-You can also access the [Preface](Overview.md) and the [Revision History](Revision_History.md) of the document.
