@@ -44,7 +44,7 @@ A Web App need to be published manually, before configuration of the **buildIris
 
 ### Adding New Credentials
 
-Perform the following steps to add new credentials for the **buildVisuazlierApp** job. Credentials are given in the format of Username, password and id/description if necessary.
+Perform the following steps to add new credentials for the **buildIrisApp** job. Credentials are given in the format of Username, password and id/description if necessary.
 
 1.  Press Add button.
 
@@ -78,7 +78,7 @@ A developer want to build and publish a Web App. For that reason he/she needs to
 
 ![](Resources/Images/PWA_Config_BuildWithParams.png)
 
-5.  Set Web App related parameters. See **[Configuration](Configuration.md)** section for more details on each parameter. Parameters should be set accordingly to Configuration of the **buildIrisApp** job.
+5.  Set Web App related parameters. See **[Building an Iris app](BuildingAnApp.md)** section for more details on each parameter. Parameters should be set accordingly to Configuration of the **buildIrisApp** job.
 
 ### Publishing
 

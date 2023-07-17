@@ -22,4 +22,3 @@ This document describes how to add and manage applications, events, campaigns, s
 *   [Best practices for Push Notifications in the Engagement Server](Push_Message_Usage.md)
 *   [Important Considerations for Windows Phone](Apps/Important_Considerations_for_Windows_Phone.md)
 
-You can also access the [Preface](Overview.md), and [Revision History](vms_console_user_guide.md).

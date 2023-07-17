@@ -20,7 +20,7 @@ The `wrap` command adds the analytics capability into the third-party client app
   - **User Activity Reports**: This report provides a count of new users for an application in a given date range and helps explore that data through charts.
   - **Location Reports**: This activity shows user sessions based on geolocation per country on a map of the world.
 
-    For more details on statistics, refer to [Standard Reports](../../../Foundry/standard*metrics_reports_guide/Content/VoltMX_Analytics*-\_Standard_Reports/Application_activity_Reports.md).
+    For more details on statistics, refer to [Standard Reports](../../../Foundry/standard_metrics_reports_guide/Content/VoltMX_Analytics_-_Standard_Reports/Application_activity_Reports.md).
 
 ### Usage
 

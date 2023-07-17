@@ -13,7 +13,4 @@ Getting Started Options
 *   [QuickStart Guide](../../../Foundry/voltmx_foundry_crm_quick_start_guide/Content/homepage.md)
 *   [Sample Apps](https://github.com/HCL-TECH-SOFTWARE/volt-mx-samples)
 
-You can also access the [Preface](Overview1.md) and the [Revision History](Revision_History.md) of the document.
-
-[Open topic with navigation](../Content/Integration_Services_Troubleshooting_Guide.md)
 

@@ -16,7 +16,7 @@ This document provides details about how to build a sample application on Androi
 *   [Configuring the Security Settings of Volt MX Foundry Engagement Server](Configuring the security settings of the Foundry Engagement server.md)
 *   [Configuring the Demo Application using Volt MX Foundry Engagement Console](the VMS demo application using.md)
 *   [Downloading and Configuring the Demo Client Application on an Android Device](Subscribing to Ad hoc Notifications.md)
-*   [Sending Adhoc, Email, SMS and Push Notifications](Sending Adhoc, Email, SMS and Push Notifications - Copy.md)
+*   [Sending Adhoc, Email, SMS and Push Notifications](Sending_Adhoc_Email_SMS_and_Push_Notifications_Copy.md)
 *   [Configuration of the Geoboundaries in the Engagement Sever](Configuration of the Geoboundaries in the Engagement Sever.md)
 *   [Geoboundary Monitoring and Receiving Notifications](Geoboundary Monitoring and Receiving Notifications.md)
 

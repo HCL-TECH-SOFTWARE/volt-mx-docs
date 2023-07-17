@@ -15,4 +15,3 @@ This document describes the APIs used to add and manage applications, events, ca
 - [VoltMX Client-side JavaScript Functions](Client-side_Javascript_Code.md)
 - [VoltMX JavaScript APIs](VoltMX_Development_Cloud_Push_APIs.md#volt-mx-javascript-apis)
 
-You can also access the [Preface](Overview.md).

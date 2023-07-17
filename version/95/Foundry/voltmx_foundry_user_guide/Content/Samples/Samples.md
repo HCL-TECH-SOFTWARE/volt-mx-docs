@@ -7,7 +7,7 @@ Tutorials
 
 Through the following tutorial, you can review the steps of setting up Volt MX Foundry, configuring Volt MX Foundry for your application, and building applications using Volt MX Foundry.
 
-*   [VoltMX Foundry How To Tutorial](../../../docs/tutorials/voltmxFoundryOverview.md)  
+*   [VoltMX Foundry How To Tutorial](../../../../tutorials/voltmxFoundryOverview.md)  
  
 
 <hr style="margin-top:400px;">

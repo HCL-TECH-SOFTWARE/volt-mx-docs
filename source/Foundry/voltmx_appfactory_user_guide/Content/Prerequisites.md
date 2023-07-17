@@ -87,7 +87,7 @@ You can upload existing Apple certificates and profiles instead of sharing the A
 1.  Generate the proper provisioning certificate and profile from the Apple developer portal.
 2.  Download the certificates and manually upload them to App Factory from the Build Parameters screen.
 
-For information about uploading the certificates to App Factory, refer to [APPLE\_SIGNING\_CERTIFICATES.](Configuration.md#Apple)
+For information about uploading the certificates to App Factory, refer to [APPLE\_SIGNING\_CERTIFICATES.](BuildingAnApp.md)
 
 > **_Note:_** If your certificates expire, you need to generate and re-upload them manually.
 

@@ -94,7 +94,7 @@ The section explains how to download Volt MX Foundry Engagement demo application
     
     ![](Resources/Images/addeid.png)
     
-20. Enter the event ID, and click **Trigger Event** to continue. The **Trigger Event** screen shows the confirmation message that the event is triggered successfully. For more information about how to add events, see [Adding an Event](../../../Foundry/vms_console_user_guide/Content/Events/Adding an Event.md)
+20. Enter the event ID, and click **Trigger Event** to continue. The **Trigger Event** screen shows the confirmation message that the event is triggered successfully. For more information about how to add events, see [Adding an Event](../../../Foundry/vms_console_user_guide/Content/Events/Adding_an_Event.md)
 21. Click the back icon on the top left corner to launch the start screen.
 22. Click the gear icon on the **Start** screen to reset the settings for the demo app.
     

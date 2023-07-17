@@ -367,7 +367,7 @@ To view or generate reports, follow these steps.
 For more information on generation reports refer to:
 
 *   Refer to [VoltMX Reporting and Analytics - Standard Metrics and Reports](../../../Foundry/standard_metrics_reports_guide/Content/standard_metrics_reports_guide.md "VoltMX Reporting and Analytics - Standard Reports").
-*   Refer to [VoltMX Reporting and Analytics - Custom Metrics and Reports](../../../Foundry/custom_metrics_and_reports/Content/VoltMX_Cloud_Custom_Metrics_Guide.md)
+*   Refer to [VoltMX Reporting and Analytics - Custom Metrics and Reports](../../../Foundry/custom_metrics_and_reports/Content/Custom_Metrics_and_Reports_Guide.md)
 
 Downloads
 ---------

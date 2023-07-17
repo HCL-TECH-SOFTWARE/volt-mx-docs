@@ -121,12 +121,11 @@ To install Volt MX Foundry patch using the installer, follow these steps:
             
     A copy of your installation will be placed in /root/<Previous-Foundry-install-folder\_PatchName>. To revert to the previous version of your installation, please replace the contents from the above mentioned folder.  
             
-    If you accept terms and conditions [Terms and Condition](../../../Foundry/resources/license.md)  
-            
-    To proceed with the update, please press “enter"  
+    If you accept terms and conditions, to proceed with the update, please press “Enter".  
             
     PRESS <ENTER> TO CONTINUE:
     }</code></pre></figure>
+
 8.  Press **Enter** to continue the installation.
     
     The installer takes backup of the current install folder. The backup folder will have a suffix of `_{Patch_File_Name}`. For example, if the hotfix name is VPNS.XXX, then the suffix of the backup folder will be `_VPNS.XXX`.
