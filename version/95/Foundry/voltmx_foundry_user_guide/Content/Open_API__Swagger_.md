@@ -17,7 +17,7 @@ From V9 ServicePack 2, Volt MX Foundry supports **OpenAPI 3.0**. For more inform
 Configuring an OpenAPI (Swagger) End-point Adapter
 --------------------------------------------------
 
-To configure a OpenAPI (Swagger) adapter in [](Configure the Service.md)[Integration Service Definition](ConfigureIntegrationService.md#IntSD) tab, follow these steps:
+To configure a OpenAPI (Swagger) adapter in [Integration Service Definition](ConfigureIntegrationService.md#IntSD) tab, follow these steps:
 
 1.  On the [Integration Service Definition](ConfigureIntegrationService.md#IntSD) page, from the **Service Type** list, select **OpenAPI (Swagger)**.
 2.  Configure the service definition parameters. For more information, refer to the following sections.  

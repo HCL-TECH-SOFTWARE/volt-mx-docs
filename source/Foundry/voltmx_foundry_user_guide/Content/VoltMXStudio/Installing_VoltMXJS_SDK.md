@@ -26,8 +26,6 @@ These steps show how to add the VoltMX-IDE-SDK to your project and set up Volt M
 
 *   <details close markdown="block"><summary>Invoking Offline Objects APIs</summary>Offline objects is a new capability of Object Services in Volt MX V8 that provides a simplified approach to synchronizing data to a client app for offline access. The APIs can be used at different levels in your applications. All Offline Objects API’s have HCLFoundry as a namespace.  <br/> For more information, see <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/offline_objectsapi_reference_guide/Content/Offline_Objects_API_Reference.html" target="_blank">VoltMX Offline Objects API Reference Guide.</a>
 
-*   <details close markdown="block"><summary>Invoking Sync APIs</summary>For information on sync APIs, refer <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/vmf_sync_orm_api_guide/Content/homepage.html" target="_blank">Sync Framework Documentation.</a>
-    
 *   [Invoking an Object Service](../ObjectsAPIReference/Objects_API_Reference.md)
 *   [](Cache_Service_Response_for_Integaration_and_Object_Services.md)[Cache Service Response for Integration and Object Service](Cache_Service_Response_for_Integaration_and_Object_Services.md)
 *   [](../VoltMX_Logger.md)[Using Log SDK](../VoltMX_Logger.md)
