@@ -13,7 +13,6 @@ For example, you can download the following free components developed by the HCL
 *   **Place Locator**: Provides a powerful map interface that allows you to search for points of interest near a specified location.
 *   **Floating Action**: Represents and promotes the primary action in an application.
 *   **Employee Directory**: Provides standard features associated with an employee directory.
-*   **Amadeus**: Provides a data adapter that helps you rapidly build travel applications.
 
 ![](Resources/Images/CompMarketplaceComps_671x287.png)
 
@@ -202,7 +201,7 @@ To add a component to a collection, follow these steps:
 2.  If it is not expanded already, expand the Components node.
 3.  Click the context menu arrow of the component you want to add to a collection, and hover over **Add to Collection**. Then hover over the library that contains the collection, and click the collection where you want to save the component. If the library or collection does not exist, you can create the library or collection.
 
-If the component uses any Volt MX Foundry services, Volt MX Iris Classic prompts you to select the services that you want to include with the component. Volt MX Iris creates a trial Volt MX Foundry account and includes any required services.
+If the component uses any Volt MX Foundry services, Volt Iris prompts you to select the services that you want to include with the component. Volt MX Iris creates a trial Volt MX Foundry account and includes any required services.
 
 You can also add a master created in earlier versions of Volt MX Iris to a collection.
 
@@ -238,7 +237,7 @@ If you delete an asset from a project, the asset is removed from associated comp
 
 ### Directly Import Images into a Component
 
-From Volt MX Iris V8 SP4 Fixpack 28 onwards, you can directly import an image from your local computer and add it to the widget in a component. Previously, to change the asscoiated image of a Login component, you had to first import the image to the Assets tab and only then you could add it to the component.
+From Volt Quantum V8 SP4 onwards, you can directly import an image from your local computer and add it to the widget in a component. Previously, to change the asscoiated image of a Login component, you had to first import the image to the Assets tab and only then you could add it to the component.
 
 **To directly import an image and add it to a component, follow these steps**:
 
@@ -295,7 +294,7 @@ To add a component to a form:
 1.  On the Project tab of the Project Explorer, locate and open the form where you want to add the component. The form displays on the Iris Canvas and has the focus.
 2.  If you have added the component to a collection, open the library and collection that contains the component in Library Explorer. Then drag and drop the component onto the form.
 
-> **_Note:_** From Volt MX Iris V8 SP4 Fixpack 28 onwards, the Default Library filter has been enhanced to segregate components according to their respective channels. As a result, mobile-only components are displayed in the Default Library when a Mobile form or a Tablet form is open at that time on the Project Canvas. Similarly, web-only components are displayed Default Library when a Web form is open on the Project Canvas. However, when there is no form open on the Project Canvas, all the available components are displayed in the Default Library.
+> **_Note:_** From Volt Quantum V8 SP4 onwards, the Default Library filter has been enhanced to segregate components according to their respective channels. As a result, mobile-only components are displayed in the Default Library when a Mobile form or a Tablet form is open at that time on the Project Canvas. Similarly, web-only components are displayed Default Library when a Web form is open on the Project Canvas. However, when there is no form open on the Project Canvas, all the available components are displayed in the Default Library.
 
 If the component is added to the project and appears on the **Templates** tab, you can also do one of the following:
 
@@ -413,7 +412,7 @@ To publish a component to HCL Forge:
 Work With a Private Section of HCL Forge
 --------------------------------------------
 
-If you are an enterprise customer whose organization uses a private section of HCL Forge, you can download a component from that private section or upload a component to that private section using your organization's cloud account. First, configure Volt MX Iris or Volt MX Iris Classic to use the cloud account.
+If you are an enterprise customer whose organization uses a private section of HCL Forge, you can download a component from that private section or upload a component to that private section using your organization's cloud account. First, configure Volt MX Iris or Volt Iris to use the cloud account.
 
 Click the video to learn about the various features of Private section of HCL Forge ..
 
@@ -430,7 +429,7 @@ mp:{privateMPAccountId: _<MyAccountId>_}
 
 Save and close the _default.js_ file, and then reopen Volt MX Iris.
 
-To work with a private section of HCL Forge in Volt MX Iris Classic:
+To work with a private section of HCL Forge in Volt Iris:
 
 1.  Click **Project Settings** on the **Quick Launch Bar** or in **Project Explorer** to open the **Project Settings** dialog box, and then click the **VoltMX Foundry** tab.
 2.  In the **Cloud Account** box, select your cloud account.
@@ -477,7 +476,7 @@ To Manage components as a moderator, follow these steps.
 Customizing a Component
 -----------------------
 
-With Volt MX Iris V8 SP3 GA, a feature is provided to help you to get the UI elements of a component on to a form without affecting the parent component and reuse the component’s UI elements. You can use Component Flattening to:
+A feature is provided to help you to get the UI elements of a component on to a form without affecting the parent component and reuse the component’s UI elements. You can use Component Flattening to:
 
 *   Use UI elements without the pre-bundled logic
 *   Modify Skin or the UI

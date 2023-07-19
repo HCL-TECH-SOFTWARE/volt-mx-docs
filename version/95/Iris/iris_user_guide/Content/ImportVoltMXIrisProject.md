@@ -34,8 +34,6 @@ Import a Local Volt MX Iris Project
 
 When you import a local Volt MX Iris project, you are essentially locating the project file from your local system, which Volt MX Iris then extracts into the proper location of your workspace.
 
-> **_Important:_** If your project was created using Volt MX Studio version 6.0, you must first import it into Volt MX Iris Classic version 8.4 (with the latest hotfix) and then you can import it into Volt MX Iris.
-
 To import a local Volt MX Iris project, follow these steps:
 
 1.  On the **Project** menu, point to **Import**, and then point to **Local Project**.
