@@ -38,14 +38,11 @@ To create a new custom Free Form JavaScript project, follow these steps: 
         ![](Resources/Images/StartNativeApp_635x348.png)
 
 
-4.  The **Select project type** window appears. Click the **Free Form JavaScript** option, and then click the Close icon ![]
-
-
-         (Resources/Images/CloseIcon_24x28.png).  
+4.  The **Select project type** window appears. Click the **Free Form JavaScript** option, and then click the Close icon ![](Resources/Images/CloseIcon_24x28.png)
          
-      
-         ![](Resources/Images/FreeFormJavaScript_653x313.png)
 
+      
+       ![](Resources/Images/FreeFormJavaScript_653x313.png)
 
 
        > **_Note:_** By default, the **VoltMX Iris Reference Architecture** option is auto-selected in the **Select project type** window.

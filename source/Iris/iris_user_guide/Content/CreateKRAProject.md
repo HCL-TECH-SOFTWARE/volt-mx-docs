@@ -56,14 +56,11 @@ To create a new custom Volt MX Iris Reference Architecture project, follow these
 
 
 
-4.  The **Select project type** window appears. Click the **VoltMX Iris Reference Architecture** option, and then click the Close icon !
-
-
-        ![](Resources/Images/CloseIcon_24x28.png).  
+4.  The **Select project type** window appears. Click the **VoltMX Iris Reference Architecture** option, and then click the Close icon ![](Resources/Images/CloseIcon_24x28.png) 
       
 
 
-        ![](Resources/Images/KRAProject_709x359.png)
+       ![](Resources/Images/KRAProject_709x359.png)
 
 
 
