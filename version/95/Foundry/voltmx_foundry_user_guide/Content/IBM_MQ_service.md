@@ -9,7 +9,7 @@ IBM MQ server 9.0.0 version is a messaging middleware that simplifies and accele
 
 ### Configure IBM MQ End-point Adapter
 
-**To configure your IBM MQ Service in the [](Configure the Service.md)[Integration Service Definition](ConfigureIntegrationService.md#IntegrationSDpage) tab, follow these steps:**
+**To configure your IBM MQ Service in the [Integration Service Definition](ConfigureIntegrationService.md#IntegrationSDpage) tab, follow these steps:**
 
 1.  In the **Service Name** text box, enter a unique name for your service.
 2.  From the **Service Type** list, select **IBM MQ**.  

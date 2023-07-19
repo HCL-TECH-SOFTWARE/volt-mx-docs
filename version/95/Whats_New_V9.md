@@ -388,7 +388,7 @@ For more information about S3 File Storage, click [here](https://opensource.hclt
 
 VoltMX Storage object service provides you the ability to create your own database schema on the relational database hosted on Volt MX Cloud. You can create a data model for objects in an Object Service by importing the column data in MS Excel.
 
-For more information about this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/#ObjectsServices/Storage_ObjectServices.md).
+For more information about this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/ObjectsServices/Storage_ObjectServices.md).
 
 ### Server-side events
 
@@ -406,7 +406,7 @@ For more information about this feature, click [here](http://ww1.voltmx.com/).
 
 You can define granular access to specific features of your Foundry Cloud environment, such as the ability to build only Client App, ability to access only App Services, ability to access only the Engagement services, or only the Logging Console, and so on. The Feature Level Access Permissions (Custom Access) functionality is supported only for Foundry Cloud.
 
-For more information about these features, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/#Settings_Cloud.md#Users-Cloud).
+For more information about these features, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Settings_Cloud.md#Users-Cloud).
 
 ### Multiple Java Pre-processor and Post-processor
 
@@ -418,7 +418,7 @@ For more information about this feature, click [here](https://opensource.hcltech
 
 You can now have different App Key and App Secret for Native and Web apps for enhanced security of the apps. Added the ability to rotate the keys to improve security.
 
-For more information about this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/#SeparateAppKey-Secret.md).
+For more information about this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/SeparateAppKey-Secret.md).
 
 ### Enhanced Relational Database Adapter
 

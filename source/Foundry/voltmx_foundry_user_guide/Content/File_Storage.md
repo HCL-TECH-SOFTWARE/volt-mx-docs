@@ -15,7 +15,7 @@ This document is about the default File Storage adapter for Volt MX Foundry. For
 Configure a service for File Storage
 ------------------------------------
 
-To configure a File Storage adapter in [](Configure the Service.md)[Integration Service Definition](ConfigureIntegrationService.md#IntSD) tab, follow these steps:
+To configure a File Storage adapter in [Integration Service Definition](ConfigureIntegrationService.md#IntSD) tab, follow these steps:
 
 1.  In the **Name** field, provide a unique name for your service.  
     When you enter the name, the name is updated for the active service under the **Services** section on the left pane.  

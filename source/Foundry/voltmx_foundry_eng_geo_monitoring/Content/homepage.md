@@ -10,5 +10,3 @@ Volt MX  Foundry is a back-end service provider that helps developers build omni
 Volt MX  Foundry Engagement Services provides generic notification service that allows you to send push notifications, email, SMS and passes to mobile devices running on different platforms (for example, iPhone, Android, and Windows).
 
 In this module, you will learn how to create geoboundaries and moniter them through your app.
-
-For information on revision history, click [Revision History](Revision History.md).

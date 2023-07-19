@@ -15,7 +15,7 @@ You can use the service in scenarios where you want to store the data for your a
 Configure a service for AWS S3
 ------------------------------
 
-To configure an AWS S3 adapter in [](Configure the Service.md)[Integration Service Definition](ConfigureIntegrationService.md#IntSD) tab, follow these steps:
+To configure an AWS S3 adapter in [Integration Service Definition](ConfigureIntegrationService.md#IntSD) tab, follow these steps:
 
 1.  In the **Name** field, provide a unique name for your service.  
     When you enter the name, the name is updated for the active service under the **Services** section on the left pane.  

@@ -11,4 +11,3 @@ Volt MX  Foundry Engagement Services provides generic notification service that 
 
 In this module, you will learn how to create campaigns and events.
 
-For information on revision history, click [Revision History](Revision History.md).
