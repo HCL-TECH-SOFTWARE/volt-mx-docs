@@ -3,7 +3,7 @@
 #### Resource URL/Front End URL
 
 From Foundry V9 SP3 onwards, using Foundry, you can map an object verb to a custom Front End URL, which is then exposed for those object verbs as part of API Developer portal. With this feature, the objects and their associated verbs can be exposed as URLs that follow the REST API convention.
-
+<!--trivial change for the sake of getting a PR-->
 For example:
 
 The following is a sample format for Foundry exposed runtime endpoint URL of **standard verbs (GET, POST, PUT, DELETE)** to send an object service request:
