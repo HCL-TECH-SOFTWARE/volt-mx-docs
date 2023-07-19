@@ -217,20 +217,14 @@ To reorder properties of a component with contract, follow these steps:
 2.  In the Project explorer, click **Templates**.
 3.  Expand **Components**.
 4.  Select the component for which you want to reorder the properties.  
-      
     The component Properties panel appears on the right-hand side with the **Component** tab open by default.
 5.  Click **Manage Properties**.  
-      
     The Manage Properties window appears.
 6.  Click **Reorder Properties**.  
-      
     The Reorder Properties window appears.  
-      
-    
 7.  Select the group or property that you want to reorder.
 8.  Use the up or down arrow icons to reorder.
 9.  Click **Apply**.  
-      
     The new order is successfully applied.
 
 ### Manage Events of a Component with a Contract
