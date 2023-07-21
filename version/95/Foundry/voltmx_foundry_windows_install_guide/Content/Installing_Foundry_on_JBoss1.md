@@ -16,6 +16,7 @@ To install Volt MX Foundry on bundled JBoss using the installer, follow these st
 
 1.  Unzip the `VoltMXFoundrySetup.zip` file.
 2.  Double-click `VoltMXFoundryInstaller-x.x.xx.x_GA.exe` to launch the installer.  
+
     The **InstallAnywhere** dialog appears. The **InstallAnyWhere** dialog displays information about the progress of the software installation at run time.
     
     ![](Resources/Images/Install1.png)
@@ -46,14 +47,18 @@ To install Volt MX Foundry on bundled JBoss using the installer, follow these st
     *   **Production** for the production instance.
     
     Installation environment is set to Development by default.
+
     
     ![](Resources/Images/MF_InstallType_623x507.png)
+
     
 7.  Choose one of the appropriate install type based on your license - for example, Development, Non-Production, or Production.
 8.  Select the **Send usage data anonymously** check box. Allows HCL to collect product usage information to make your Volt MX Foundry experience better. HCL does not save any of your private or application data. By default this check box is selected.
 9.  Click **Next**. The ****Choose components to install**** window appears.
+
     
     ![](Resources/Images/Choose_Component_601x459.png)
+
     
 10. Select one or more check boxes for the supported components. By default, the **Console**, **Identity Services**, **Integration Services**, **Developer Portal**, and **Engagement Services**  check boxes are selected:
     
@@ -252,15 +257,15 @@ To install Volt MX Foundry on bundled JBoss using the installer, follow these st
         
         If you want to enable Windows Authentication Support on SQL Server, run the following command to start the installation process after extracting the artifact:
         
-```
-VoltMXFoundryInstaller-9.x.x.x_GA.exe -Dprop.java.library.path=<location of sqljdbc_auth.dll>
-```
+     ```
+        VoltMXFoundryInstaller-9.x.x.x_GA.exe -Dprop.java.library.path=<location of sqljdbc_auth.dll>
+     ```
         
-        > **_Note:_** If you choose to enable Windows Authentication support on SQL Server, you do not need to provide the **Database System User** and **Database System Password**.
+    > **_Note:_** If you choose to enable Windows Authentication support on SQL Server, you do not need to provide the **Database System User** and **Database System Password**.
         
-        ![](Resources/Images/SQLServer_551x422.png)
+    ![](Resources/Images/SQLServer_551x422.png)
         
-        *   **Database Server Hostname/IP**: Enter the DB server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
+    *   **Database Server Hostname/IP**: Enter the DB server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
         *   **Database Port**: Enter the database port of the SQL Server. By default, this field is set to 1433 for SQL.
         *   **Database System User**: Enter the user name used while creating the database user - for example, dbclient.
         *   **Instance Name (optional)**: Enter the instance name for the database. This information is optional.
@@ -269,7 +274,9 @@ VoltMXFoundryInstaller-9.x.x.x_GA.exe -Dprop.java.library.path=<location of sqlj
         *   **Database Name Suffix**: Enter the valid suffix for all databases - for example, 54.
         
         If a database faces connection issues, the system displays an error message. For example:  
-        ![](Resources/Images/Database_connection_failed.png)
+
+
+    ![](Resources/Images/Database_connection_failed.png)
         
     
     *   Enter the following database details for **MariaDB**.![](Resources/Images/MariaDB_587x451.png)
@@ -286,7 +293,9 @@ VoltMXFoundryInstaller-9.x.x.x_GA.exe -Dprop.java.library.path=<location of sqlj
     
     If a database exists, the system displays the warning message: `One or more databases already exist. Do you want to use existing databases? If yes, then the schema may be upgraded.` shown below:
     
+    
     ![](Resources/Images/DBexist.png)
+    
     
     > **_Important:_**
     
@@ -323,8 +332,10 @@ VoltMXFoundryInstaller-9.x.x.x_GA.exe -Dprop.java.library.path=<location of sqlj
     *   **Confirm Password**: Retype the password to ensure the user's identity.
         
 24. Enter the databases details, and click **Next**. The **Pre-Installation Summary** window appears.
+
     
     ![](Resources/Images/Pre-install_Summary_580x425.png)
+    
     
 25. Click **Install**. The **Installing Volt MX Foundry** window appears.
     
@@ -345,7 +356,5 @@ VoltMXFoundryInstaller-9.x.x.x_GA.exe -Dprop.java.library.path=<location of sqlj
     For details, refer to [Troubleshoot with SSL Certificate Issues](Troubleshooting.md#Service_Provider's_Certificate_Issues).
     
     > **_Note:_** You can now access Volt MX Foundry Console by using the URLs. For more details, refer to [Accessing Volt MX Foundry Console - On-premises](../../../Foundry/voltmx_foundry_user_guide/Content/How_to_access_VoltMX_Foundry_Portal_on-Prem.md).  
-      
-      
       
     During installation if you have configured your super administrator account, you can directly [log in to Volt MX Foundry Console](../../../Foundry/voltmx_foundry_user_guide/Content/How_to_access_VoltMX_Foundry_Portal_on-Prem.md) by using the Console URL.

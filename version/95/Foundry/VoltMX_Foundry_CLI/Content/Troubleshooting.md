@@ -32,23 +32,25 @@ This issue is seen if the Apache ANT environment is not properly setup in Linux.
     
 Workaround
 
-```   
-     1.  Download the bin release from [Apache Downloads](http://ant.apache.org/bindownload.cgi).
-     2.  Extract and copy the entire folder (apache-ant-1.9xxxxx) into the following folder location: `/opt/`.  
-     Following which the file structure will be `/opt/apache-ant-1.9xxxxxx/`.
-     3.  Create a Symlink: ln -s /opt/apache-ant-1.9.xxxxx /opt/ant
-     4.  Create another Symlink: ln -s /opt/ant/bin/ant /usr/bin/ant
-     5.  Set `ANT_HOME` into the Environment vi /etc/environment and add this line: ANT\_HOME=/opt/ant (without the trailing forward slash).
-     6.  Re-login to initiate the Environment.
+  
+1.  Download the bin release from [Apache Downloads](http://ant.apache.org/bindownload.cgi).
+2.  Extract and copy the entire folder (apache-ant-1.9xxxxx) into the following folder location: `/opt/`.  
+Following which the file structure will be `/opt/apache-ant-1.9xxxxxx/`.
+3.  Create a Symlink: ln -s /opt/apache-ant-1.9.xxxxx /opt/ant
+4.  Create another Symlink: ln -s /opt/ant/bin/ant /usr/bin/ant
+5.  Set `ANT_HOME` into the Environment vi /etc/environment and add this line: ANT\_HOME=/opt/ant (without the trailing forward slash).
+6.  Re-login to initiate the Environment.
 
-```
+
 *   **Issue**
     
     The deployment of WARs fails after executing the `create-data-sources` command when MySQL is the selected database.
     
     This issue is observed when `&amp;amp;` is appended in the data source connection URL instead of just `&amp;` as show in the following image:
     
-![](Resources/Images/troubleshooting2.png)
+
+ ![](Resources/Images/troubleshooting2.png)
+
     
 Workaround
     

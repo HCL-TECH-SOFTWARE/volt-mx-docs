@@ -15,7 +15,10 @@ The **\<Install Location\>** directory contains the log files documenting each i
 To install Volt MX Foundry on Tomcat using the installer, follow these steps:
 
 1.  Unzip the `VoltMXFoundrySetup.zip` file.
-2.  Double-click `VoltMXFoundryInstaller-x.x.x.x_GA.exe` to launch the installer.
+
+2.  Double-click `VoltMXFoundryInstaller-x.x.x.x_GA.exe` to launch the
+    installer.
+    
     The **InstallAnywhere** dialog appears. The **InstallAnyWhere** dialog displays information about the progress of the software installation at run time.
 
     ![](Resources/Images/Install1.png)
@@ -37,7 +40,9 @@ To install Volt MX Foundry on Tomcat using the installer, follow these steps:
     ![](Resources/Images/Install4.png)  
     
     <p id="InstallComponents"></p>
-6.  Click **Next**. The **Install Components** window appears with the following supported installation types:
+
+6.  Click **Next**. The **Install Components** window appears with the
+    following supported installation types:
 
     *   **Development** for single machine instance.
     *   **Non-Production** for larger environments like Staging or Testing.
@@ -46,14 +51,19 @@ To install Volt MX Foundry on Tomcat using the installer, follow these steps:
     
     Installation environment is set to Development by default . Choose one of the install type based on your requirement.
     
+
     ![](Resources/Images/MF_InstallType_577x469.png)
+
     
-7.  Select the **Send usage data anonymously** check box. This allows HCL to collect product usage information to make your Volt MX Foundry experience better. HCL does not save any of your private or application data. By default this check box is selected.
+7.  Select the **Send usage data anonymously** check box. This allows
+    HCL to collect product usage information to make your Volt MX Foundry experience better. HCL does not save any of your private or application data. By default this check box is selected.
+
 8.  Click **Next**. The **Choose components to install** window appears.
     
     ![](Resources/Images/Choose_Component.png)
     
-9.  Select one or more check boxes for the supported components. By default, the **Console**, **Identity Services**, **Integration Services**, **Developer Portal**, and **Engagement Services** check boxes are selected:
+9.  Select one or more check boxes for the supported components. By
+    default, the **Console**, **Identity Services**, **Integration Services**, **Developer Portal**, and **Engagement Services** check boxes are selected:
     
     *   **Console** - To install Volt MX Foundry Console, select the **Console** check box.  
         The system creates the following databases: `<prefix>mfconsoledb<suffix>`, `<prefix>mfaccountsdb<suffix>`, and  `<prefix>mfreportsdb<suffix>`.
@@ -91,14 +101,21 @@ To install Volt MX Foundry on Tomcat using the installer, follow these steps:
       
     Refer to [creating a reports database, for example, **<prefix>mfreports<suffix>**](#CreatingReportsDB).  
     
-10. Click **Next**. The **Install Folder** window appears. The selected path appears in the **Where would you like to install** field.
+10. Click **Next**. The **Install Folder** window appears. The selected
+    path appears in the **Where would you like to install** field.
     
+
     ![](Resources/Images/Install5.png)
+
     
 11. Click **Choose** to browse the required folder from your system.
-12. Click **Next**. The **Application Server** window appears asking you to choose the application server. By default, the Application Sever is set to Tomcat.
+
+12. Click **Next**. The **Application Server** window appears asking you
+    to choose the application server. By default, the Application Sever is set to Tomcat.
     
+
     ![](Resources/Images/App_Server.png)
+
     
 13. In the **Application Server** window, click **Tomcat**.  
     
@@ -136,34 +153,37 @@ To install Volt MX Foundry on Tomcat using the installer, follow these steps:
     
     *   If you provide an invalid hostname/IP address, the following alert is displayed:
         
-        ![](Resources/Images/port.png)
+    ![](Resources/Images/port.png)
         
     *   If a port is in use, the following alert is displayed:
         
-        ![](Resources/Images/Port1.png)
+    ![](Resources/Images/Port1.png)
         
     *   If you provide an invalid Port, the following alert is displayed:
         
-        ![](Resources/Images/Port2.png)
+    ![](Resources/Images/Port2.png)
         
     *   If you provide the same port numbers for HTTP and HTTPS, the following alert is displayed:
         
-        ![](Resources/Images/HTTP-HTTPS.png)
+    ![](Resources/Images/HTTP-HTTPS.png)
         
 
-16. After you configure the application server details in the **[HTTP or HTTPS](#Step13)** window, click **Next**. The **SSL Configuration** for HTTPS Communication option appears only if you select **HTTPS**. By default, the **Generate a self-signed certificate** option is selected. Choose one of the following two options:
-    1.  To generate a self-signed certificate, click **Generate a self-signed certificate**, and click **Next**. The Details for self-signed SSL Certificate window appears.
+16. After you configure the application server details in the **[HTTP or
+    HTTPS](#Step13)** window, click **Next**. The **SSL Configuration** for HTTPS Communication option appears only if you select **HTTPS**. By default, the **Generate a self-signed certificate** option is selected. Choose one of the following two options:
+
+1.  To generate a self-signed certificate, click **Generate a
+    self-signed certificate**, and click **Next**. The Details for self-signed SSL Certificate window appears.
         
-        > **_Important:_**  To add an existing SSL certificate to a cacerts file, refer to [How to Add Your Existing SSL Certificate](Post-Installation_Tasks.md#how-to-add-an-existing-ssl-certificate-to-cacerts).
+    > **_Important:_**  To add an existing SSL certificate to a cacerts file, refer to [How to Add Your Existing SSL Certificate](Post-Installation_Tasks.md#how-to-add-an-existing-ssl-certificate-to-cacerts).
         
-        ![](Resources/Images/SSL1a.png)
+    ![](Resources/Images/SSL1a.png)
         
-        ![](Resources/Images/SSL2.png)
+    ![](Resources/Images/SSL2.png)
         
-        > **_Note:_** The path for a self-signed certificate is in this location: `<install folder>\keystore.jks`
+    > **_Note:_** The path for a self-signed certificate is in this location: `<install folder>\keystore.jks`
         
-        1.  Enter details for the following fields:
-            *   **Organization Unit**: Enter your business unit name.
+    1.  Enter details for the following fields:
+        *   **Organization Unit**: Enter your business unit name.
             *   **Host Name**: Enter your domain name - for example, hcl.net
             *   **Company**: Enter your company name.
             *   **City**: Enter your city name.
@@ -178,14 +198,14 @@ To install Volt MX Foundry on Tomcat using the installer, follow these steps:
             
     2.  To use an existing SSL certificate, click **Use existing certificate**, and click **Next**. The SSL Certificate window appears.
         
-        ![](Resources/Images/SSL1b_544x417.png)
+    ![](Resources/Images/SSL1b_544x417.png)
         
-        ![](Resources/Images/SSL_4_541x391.png)
+    ![](Resources/Images/SSL_4_541x391.png)
         
-        > **_Note:_** Provide path for .jks file as input.
+    > **_Note:_** Provide path for .jks file as input.
         
     
-    1.  In the **SSL Configuration** window, enter the file path for keystore file and password details.
+    3.  In the **SSL Configuration** window, enter the file path for keystore file and password details.
         *   If you enter invalid certificate details, the following error message is displayed:
             
             ![](Resources/Images/invalid_cert.png)
@@ -249,19 +269,20 @@ To install Volt MX Foundry on Tomcat using the installer, follow these steps:
       
     *   Enter the following database details for **SQL Server**.
         
-        > **_Important:_**
+    > **_Important:_**
         
         If you want to enable Windows Authentication Support on SQL Server, run the following command to start the installation process after extracting the artifact:
         
-```
-VoltMXFoundryInstaller-9.0.0.0_GA.exe -Dprop.java.library.path=<location of sqljdbc_auth.dll>
-```
+     ```
+        VoltMXFoundryInstaller-9.0.0.0_GA.exe -Dprop.java.library.path=<location of sqljdbc_auth.dll>
+
+     ```
         
-        > **_Note:_** If you choose to enable Windows Authentication support on SQL Server, you do not need to provide the **Database System User** and **Database System Password**.
+    > **_Note:_** If you choose to enable Windows Authentication support on SQL Server, you do not need to provide the **Database System User** and **Database System Password**.
         
-        ![](Resources/Images/SQLServer_551x422.png)
+    ![](Resources/Images/SQLServer_551x422.png)
         
-        *   **Database Server Hostname/IP**: Enter the DB server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
+    *   **Database Server Hostname/IP**: Enter the DB server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
         *   **Database Port**: Enter the database port of the SQL Server. By default, this field is set to 1433 for SQL.
         *   **Database System User**: Enter the user name used while creating the database user - for example, dbclient.
         *   **Instance Name (Optional)**: Enter the instance name for the database. This information is optional.
@@ -284,21 +305,25 @@ Configure Identity on Tomcat with Microsoft Azure SQL Server
             
 To run identity on Tomcat with Microsoft Azure SQL, you must edit the `authService.xml` file from the existing Tomcat with MSSQL install location.
 
-1.  Open the `authService.xml` file from the existing Tomcat with MSSQL install location.  
-    Sample Location for authService.xml from Tomcat with MSSQL install folder, `<LocalDrive>\VoltMXFoundryInstallerV8\tomcat\conf\Catalina\localhost\authService.xml`
-2.  Modify the following the `authService.xml` file:
-```
- <?xml version="1.0" encoding="utf-8" ?>
-    <!-- The contents of this file will be loaded for each web application -->
-    <Context>
+   1.  Open the `authService.xml` file from the existing Tomcat with
+      MSSQL install location.  
+      Sample Location for authService.xml from Tomcat with MSSQL install folder, `<LocalDrive>\VoltMXFoundryInstallerV8\tomcat\conf\Catalina\localhost\authService.xml`
+   2.  Modify the following the `authService.xml` file:
+
+
+    ```
+       <?xml version="1.0" encoding="utf-8" ?>
+       <!-- The contents of this file will be loaded for each web application -->
+       <Context>
     
-            <Resource auth="Container" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"  
-    factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" initialSize="5" jmxEnabled="true" logAbandoned="true" maxActive="10" maxIdle="5" maxWait="10000" minEvictableIdleTimeMillis="30000" minIdle="2" name="jdbc/authglobaldb" password="<Password>" removeAbandoned="true" removeAbandonedTimeout="600" testOnBorrow="true" testOnReturn="false" testWhileIdle="true" timeBetweenEvictionRunsMillis="30000" type="javax.sql.DataSource" url="jdbc:sqlserver://<DBServerIP:PORT>;databasename=<auth database name>;sendStringParametersAsUnicode=true;" username="<User_Name>" validationInterval="30000" validationQuery="SELECT 1"/>
+       <Resource auth="Container" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"  
+       factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" initialSize="5" jmxEnabled="true" logAbandoned="true" maxActive="10" maxIdle="5" maxWait="10000" minEvictableIdleTimeMillis="30000" minIdle="2" name="jdbc/authglobaldb" password="<Password>" removeAbandoned="true" removeAbandonedTimeout="600" testOnBorrow="true" testOnReturn="false" testWhileIdle="true" timeBetweenEvictionRunsMillis="30000" type="javax.sql.DataSource" url="jdbc:sqlserver://<DBServerIP:PORT>;databasename=<auth database name>;sendStringParametersAsUnicode=true;" username="<User_Name>" validationInterval="30000" validationQuery="SELECT 1"/>
             
-            <Resource auth="Container" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDrive"factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" initialSize="5" jmxEnabled="true" logAbandoned="true" maxActive="10" maxIdle="5" maxWait="10000" minEvictableIdleTimeMillis="30000" minIdle="2" name="jdbc/authconfig" password="<Password>" removeAbandoned="true" removeAbandonedTimeout="600" testOnBorrow="true" testOnReturn="false" testWhileIdle="true" timeBetweenEvictionRunsMillis="30000" type="javax.sql.DataSource" url="jdbc:sqlserver::/<DBServerIP:PORT>;databasename=<auth database name>;sendStringParametersAsUnicode=true;" username="<User_Name>" validationInterval="30000" validationQuery="SELECT 1"/>
+      <Resource auth="Container" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDrive"factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" initialSize="5" jmxEnabled="true" logAbandoned="true" maxActive="10" maxIdle="5" maxWait="10000" minEvictableIdleTimeMillis="30000" minIdle="2" name="jdbc/authconfig" password="<Password>" removeAbandoned="true" removeAbandonedTimeout="600" testOnBorrow="true" testOnReturn="false" testWhileIdle="true" timeBetweenEvictionRunsMillis="30000" type="javax.sql.DataSource" url="jdbc:sqlserver::/<DBServerIP:PORT>;databasename=<auth database name>;sendStringParametersAsUnicode=true;" username="<User_Name>" validationInterval="30000" validationQuery="SELECT 1"/>
             
-    </Context>
-```
+      </Context>
+
+    ```
 
 </details>
 
@@ -368,8 +393,6 @@ To run identity on Tomcat with Microsoft Azure SQL, you must edit the `authServi
     For details, refer to [Troubleshoot with SSL Certificate Issues](Troubleshooting.md#Service_Provider's_Certificate_Issues).
     
     > **_Note:_** You can now access Volt MX Foundry Console by using the URLs. For more details, refer to [Accessing Vol tMX Foundry Console - On-premises](../../../Foundry/voltmx_foundry_user_guide/Content/How_to_access_VoltMX_Foundry_Portal_on-Prem.md).  
-      
-      
       
     During installation if you have configured your super administrator account, you can directly [log in to Volt MX Foundry Console](../../../Foundry/voltmx_foundry_user_guide/Content/How_to_access_VoltMX_Foundry_Portal_on-Prem.md) by using the Console URL.
 
