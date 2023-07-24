@@ -74,11 +74,11 @@ For troubleshooting & help on the installation, use
 [../../../Foundry/resources/installer.html](../../../Foundry/resources/installer.md).
 
 For getting started on Volt MX Foundry, refer
-[https://basecamp.voltmx.com/s/app-platform-documentation](https://basecamp.voltmx.com/s/app-platform-documentation).
+[Volt MX Foundry User Guide](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Introduction.html).
 
 If you have more questions or feedback, you can join our
-community at [https://basecamp.voltmx.com/](https://basecamp.voltmx.com/) or raise a support ticket at
-[https://basecamp.voltmx.com/s/caselistview/](https://basecamp.voltmx.com/s/caselistview/).
+community at [Volt MX Community](https://support.hcltechsw.com/community?id=community_forum&sys_id=1cdf6e1a1bf31898beab64e6ec4bcbae) or raise a support ticket at
+[Customer Support](https://support.hcltechsw.com/csm).
 
   ->1- Continue with Installation.
     2- Abort Installation.
