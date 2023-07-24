@@ -8,7 +8,7 @@ Volt MX  Iris provides a default theme that has a set of skins defined for all t
 
 > **_Note:_** Any changes you make to the skins within a theme are limited only to that theme.
 
-Volt MX  Iris provides a set of APIs that allow you to perform different actions with themes. The theme you create using the Volt MX Iris can only be applied using the `voltmx.theme.setCurrentTheme` API. For more information about the APIs related to Theme, see Volt MX Iris API Reference Guide in [VoltMX Documentation Library](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/introduction.md).
+Volt MX  Iris provides a set of APIs that allow you to perform different actions with themes. The theme you create using the Volt MX Iris can only be applied using the `voltmx.theme.setCurrentTheme` API. For more information about the APIs related to Theme, see Volt MX Iris API Reference Guide in [Volt MX Documentation Library](../../iris_api_dev_guide/content/introduction.md).
 
 What are themes and why would I want them?
 ------------------------------------------
