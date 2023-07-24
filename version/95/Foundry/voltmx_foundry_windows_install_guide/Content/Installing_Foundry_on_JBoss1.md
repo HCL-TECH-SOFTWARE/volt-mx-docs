@@ -10,7 +10,7 @@ This section of the document provides you with the instructions for installing a
 
 Make sure that you have proper administrative rights to install Volt MX Foundry on your computer.
 
-The **<Install Location>** directory contains the log files documenting each invocation of the installer or uninstaller. To make problem identification easier, provide these log files to HCL when reporting an issue.
+The **< Install Location >** directory contains the log files documenting each invocation of the installer or uninstaller. To make problem identification easier, provide these log files to HCL when reporting an issue.
 
 To install Volt MX Foundry on bundled JBoss using the installer, follow these steps:
 
@@ -52,7 +52,8 @@ To install Volt MX Foundry on bundled JBoss using the installer, follow these st
     ![](Resources/Images/MF_InstallType_623x507.png)
 
     
-7.  Choose one of the appropriate install type based on your license - for example, Development, Non-Production, or Production.
+7.  Choose one of the appropriate install type based on your license
+ - for example, Development, Non-Production, or Production.
 8.  Select the **Send usage data anonymously** check box. Allows HCL to collect product usage information to make your Volt MX Foundry experience better. HCL does not save any of your private or application data. By default this check box is selected.
 9.  Click **Next**. The ****Choose components to install**** window appears.
 
@@ -94,9 +95,9 @@ To install Volt MX Foundry on bundled JBoss using the installer, follow these st
     For example:  
     You have installed only Console on one node. The installer creates these three databases such as `<>mfreportsdb<>` along with the `<>mfconsoledb<>` and `<>mfaccountsdb<>`. For example, your report database name is `voltmxmfreportsdb1`  
       
-    When you install the integration with or without one or more components (identity, or Engagement Services) on a separate node, the installer displays the **Reports Database Name** field in the **Database Details** window. If the installer prompts you to enter the existing reports db, enter the reports database name (for example, `voltmxmfreportsdb1`) in the **Database Details window > Reports Database Name** field. Refer to the [Database Details](#DatabaseDetails) window.  
+    When you install the integration with or without one or more components (identity, or Engagement Services) on a separate node, the installer displays the **Reports Database Name** field in the **Database Details** window. If the installer prompts you to enter the existing reports db, enter the reports database name (for example, `voltmxmfreportsdb1`) in the **Database Details window  Reports Database Name** field. Refer to the Database Details window.  
       
-    Refer to [creating a reports database, for example, **<prefix>mfreports<suffix>**](#CreatingReportsDB).  
+    Refer to [creating a reports database, for example : mfreports
     
 11. Click **Next**. The **Install Folder** window appears. The selected path appears in the **Where would you like to install** field.
     
@@ -123,84 +124,84 @@ To install Volt MX Foundry on bundled JBoss using the installer, follow these st
     ![](Resources/Images/HTTP_583x422.png)
     
 
-1.  In HTTP or HTTPS, if you select HTTP, the following window appears. Enter the **Hostname/IP Address**, and **HTTP Port**. Click **Next**.
+a.  In HTTP or HTTPS, if you select HTTP, the following window appears. Enter the **Hostname/IP Address**, and **HTTP Port**. Click **Next**.
     
-    ![](Resources/Images/HTTP1_-_Jboss_552x424.png)
+![](Resources/Images/HTTP1_-_Jboss_552x424.png)
     
-2.  In HTTP or HTTPS, if you select HTTPS, the following window appears. Enter the **Hostname/IP Address**, **HTTP Port**, and **HTTPS Port**. Click **Next.**
+b.  In HTTP or HTTPS, if you select HTTPS, the following window appears. Enter the **Hostname/IP Address**, **HTTP Port**, and **HTTPS Port**. Click **Next.**
     
-    ![](Resources/Images/HTTPs_-Jboss_543x416.png)
+![](Resources/Images/HTTPs_-Jboss_543x416.png)
     
-    > **_Important:_** After installing Volt MX Foundry, import your SSL certificate (for example, `domain.subdomain.crt`) into your Volt MX Foundry Installer's JRE trusted certificate authority (CA) certificates file - for example, `<INSTALL_DIR>\jre\lib\security\cacerts`  
+> **_Important:_** After installing Volt MX Foundry, import your SSL certificate (for example, `domain.subdomain.crt`) into your Volt MX Foundry Installer's JRE trusted certificate authority (CA) certificates file - for example, `<INSTALL_DIR>\jre\lib\security\cacerts`  
       
-    If your SSL certificate is not configured, the system displays an error - for example, "peer not authenticated."  
+If your SSL certificate is not configured, the system displays an error - for example, "peer not authenticated."  
       
-    For details, refer to [Troubleshoot with SSL Certificate Issues](Troubleshooting.md#Service_Provider's_Certificate_Issues).
+For details, refer to [Troubleshoot with SSL Certificate Issues](Troubleshooting.md#Service_Provider's_Certificate_Issues).
     
-    Based on the inputs provided in the previous  [HTTP or HTTPS  >  a](Installing_VoltMX_Foundry_on_Windows.md#Step10a)  or  [HTTP or HTTPS  >  b](Installing_VoltMX_Foundry_on_Windows.md#Step10b), one of the following error messages appears:
+Based on the inputs provided in the previous  [HTTP or HTTPS  >  a](Installing_VoltMX_Foundry_on_Windows.md#Step10a)  or  [HTTP or HTTPS  >  b](Installing_VoltMX_Foundry_on_Windows.md#Step10b), one of the following error messages appears:
     
-    *   If you provide an invalid hostname/IP address, an alert displays:
+*   If you provide an invalid hostname/IP address, an alert displays:
         
-        ![](Resources/Images/port.png)
+    ![](Resources/Images/port.png)
         
-    *   If a port is in use, an alert displays:
+*   If a port is in use, an alert displays:
         
-        ![](Resources/Images/Port1.png)
+    ![](Resources/Images/Port1.png)
         
-    *   If you provide an invalid Port, an alert displays:
+*   If you provide an invalid Port, an alert displays:
         
-        ![](Resources/Images/Port2.png)
+    ![](Resources/Images/Port2.png)
         
-    *   If you provide the same port numbers for HTTP and HTTPS, an alert displays:
+*   If you provide the same port numbers for HTTP and HTTPS, an alert displays:
         
-        ![](Resources/Images/HTTP-HTTPS.png)
+    ![](Resources/Images/HTTP-HTTPS.png)
         
 
-18. After you configure the application server details in the **[HTTP or HTTPS](#Step13)** window, click **Next**. The **SSL Configuration** for HTTPS Communication option appears only if you select **HTTPS**. By default, the **Generate a self-signed certificate** option is selected. Choose one of the following two options:
-    1.  To generate a self-signed certificate, click **Generate a self-signed certificate**, and click **Next**. The Details for self-signed SSL Certificate window appears.
+17. After you configure the application server details in the **[HTTP or HTTPS](#Step13)** window, click **Next**. The **SSL Configuration** for HTTPS Communication option appears only if you select **HTTPS**. By default, the **Generate a self-signed certificate** option is selected. Choose one of the following two options:
+    a.  To generate a self-signed certificate, click **Generate a self-signed certificate**, and click **Next**. The Details for self-signed SSL Certificate window appears.
         
-        > **_Important:_**  To add an existing SSL certificate to a cacerts file, refer to [How to Add Your Existing SSL Certificate](Post-Installation_Tasks.md#how-to-add-an-existing-ssl-certificate-to-cacerts).
+    > **_Important:_**  To add an existing SSL certificate to a cacerts file, refer to [How to Add Your Existing SSL Certificate](Post-Installation_Tasks.md#how-to-add-an-existing-ssl-certificate-to-cacerts).
         
-        ![](Resources/Images/SSL1a_540x414.png)
+    ![](Resources/Images/SSL1a_540x414.png)
         
-        ![](Resources/Images/SSL2_541x391.png)
+    ![](Resources/Images/SSL2_541x391.png)
         
-        > **_Note:_** The path for a self-signed certificate is in this location: `<install folder>\keystore.jks`
+    > **_Note:_** The path for a self-signed certificate is in this location: `<install folder>\keystore.jks`
         
-        1.  Enter details for the following fields:
-            *   **Organization Unit**: Enter your business unit name.
-            *   **Host Name**: Enter your domain name - for example, hcl.net
-            *   **Company**: Enter your company name.
-            *   **City**: Enter your city name.
-            *   **State**: Enter your state name.
-            *   **Country**: Enter your country name.
-            *   **Keystore Password**: Enter the password for the .JKS file that the installer will generate.
+    Enter details for the following fields:
+    *   **Organization Unit**: Enter your business unit name.
+    *   **Host Name**: Enter your domain name - for example, hcl.net
+    *   **Company**: Enter your company name.
+    *   **City**: Enter your city name.
+    *   **State**: Enter your state name.
+    *   **Country**: Enter your country name.
+    *   **Keystore Password**: Enter the password for the .JKS file that the installer will generate.
             
-            *   If you enter invalid details, the following error message is displayed:
+    *   If you enter invalid details, the following error message is displayed:
                 
-                ![](Resources/Images/SSL_error.png)
+        ![](Resources/Images/SSL_error.png)
                 
             
-    2.  To use an existing SSL certificate, click **Use existing certificate**, and click **Next**. The SSL Certificate window appears.
+    b.  To use an existing SSL certificate, click **Use existing certificate**, and click **Next**. The SSL Certificate window appears.
         
-        ![](Resources/Images/SSL1b_544x417.png)
+    ![](Resources/Images/SSL1b_544x417.png)
         
-        ![](Resources/Images/SSL_4_541x391.png)
+    ![](Resources/Images/SSL_4_541x391.png)
         
-        > **_Note:_** Provide path for .jks file as input.
+    > **_Note:_** Provide path for .jks file as input.
         
     
-    1.  In the **SSL Configuration** window, enter the file path for keystore file and password details.
+    In the **SSL Configuration** window, enter the file path for keystore file and password details.
         *   If you enter invalid certificate details, the following error message is displayed:
             
-            ![](Resources/Images/invalid_cert.png)
+    ![](Resources/Images/invalid_cert.png)
             
     
-19. Click **Next** to display the **Service Details** window.
+18. Click **Next** to display the **Service Details** window.
     
     ![](Resources/Images/Service_details_583x422.png)
     
-20. Click **Next**. The **Database Details** window appears. From the **Database Choice** drop-down, choose one of the databases to display database details and fill the details. By default, this option is set to MySQL.  
+19. Click **Next**. The **Database Details** window appears. From the **Database Choice** drop-down, choose one of the databases to display database details and fill the details. By default, this option is set to MySQL.  
     
     *   Enter the following database details for **MySQL**.
         
@@ -225,41 +226,41 @@ To install Volt MX Foundry on bundled JBoss using the installer, follow these st
         *   **Service ID / Service Name:** Enter Oracle service ID or service name. Service ID is unique alias given to an instance name of Oracle DB.
         *   Select the tablespace for Oracle database:
             
-            > **_Important:_**  If tablespaces were already created, the DBA must grant quota (permissions) on these tablespaces to the installer with admin option.  
+        > **_Important:_**  If tablespaces were already created, the DBA must grant quota (permissions) on these tablespaces to the installer with admin option.  
               
-            The DBA also must include grant quota on the schemas from installer login.
+        The DBA also must include grant quota on the schemas from installer login.
             
-            *   **Default Tablespace**: If selected, the database schema and SQL scripts migration happen automatically to the default tablespace for example, `USERS`
-            *   **User Defined Tablespace**: If selected, enter the tablespaces for the following:
-                *   **Data Tablespace**:  
-                    Enter the name for Data tablespace.  
+        *   **Default Tablespace**: If selected, the database schema and SQL scripts migration happen automatically to the default tablespace for example, `USERS`
+        *   **User Defined Tablespace**: If selected, enter the tablespaces for the following:
+        *   **Data Tablespace**:  
+
+        Enter the name for Data tablespace.  
                     
-                    This is a mandatory field. If the Data tablespace field empty, the installer displays the error message:
+        This is a mandatory field. If the Data tablespace field empty, the installer displays the error message:
                     
-                    ![](Resources/Images/TableSpaceError2.png)
+        ![](Resources/Images/TableSpaceError2.png)
                     
-                    If the Data tablespace (for example, SampleData) does not exist, the installer displays the error message:
+        If the Data tablespace (for example, SampleData) does not exist, the installer displays the error message:
                     
-                    ![](Resources/Images/TableSpaceError1.png)
+        ![](Resources/Images/TableSpaceError1.png)
                     
-                *   **Index Tablespace**: Enter the name of Index tablespace.  
-                    If the input for Index Tablespace is not provided, then the value will be set to the provided Datatable space value.
-                *   **LOB Tablespace**: Enter the name for LOB tablespace.  
-                    If the input for LOB Tablespace is not provided, then the value will be set to the provided Datatable space value.
+         *   **Index Tablespace**: Enter the name of Index tablespace.  
+        If the input for Index Tablespace is not provided, then the value will be set to the provided Datatable space value.
+        *   **LOB Tablespace**: Enter the name for LOB tablespace.  
+        If the input for LOB Tablespace is not provided, then the value will be set to the provided Datatable space value.
         *   **Database System User**: Enter the user name used while creating the database user - for example, dbclient.
         *   **Database System Password**: Enter the user password used while creating the database user.
         *   **Database Name Prefix**: Enter the valid prefix databases - for example, jboss.
         *   **Database Name Suffix**: Enter the valid suffix for all databases - for example, 54.
       
-    *   Enter the following database details for **SQL Server**.
+        *   Enter the following database details for **SQL Server**.
         
-        > **_Important:_**
+    > **_Important:_**
+    If you want to enable Windows Authentication Support on SQL Server, run the following command to start the installation process after extracting the artifact:
         
-        If you want to enable Windows Authentication Support on SQL Server, run the following command to start the installation process after extracting the artifact:
-        
-     ```
-        VoltMXFoundryInstaller-9.x.x.x_GA.exe -Dprop.java.library.path=<location of sqljdbc_auth.dll>
-     ```
+    
+    VoltMXFoundryInstaller-9.x.x.x_GA.exe -Dprop.java.library.path=<location of sqljdbc_auth.dll>
+     
         
     > **_Note:_** If you choose to enable Windows Authentication support on SQL Server, you do not need to provide the **Database System User** and **Database System Password**.
         
@@ -285,11 +286,11 @@ To install Volt MX Foundry on bundled JBoss using the installer, follow these st
         *   **Database User**: Enter the user name used while creating the database user.
         *   **Database Password**: Enter the user password used while creating the database user.
             
-            > **_Important:_** The **Reports Database Name** filed appears only if you have selected the Console, Identity, and Integration during [Install Components](#InstallComponents).
+        > **_Important:_** The **Reports Database Name** filed appears only if you have selected the Console, Identity, and Integration during Install Components
             
         *   **Database Name Prefix**: Enter the valid prefix databases - for example, jboss.
         *   **Database Name Suffix**: Enter the valid suffix for all databases - for example, 54.
-21. After entering database server details, click **Next**.
+20. After entering database server details, click **Next**.
     
     If a database exists, the system displays the warning message: `One or more databases already exist. Do you want to use existing databases? If yes, then the schema may be upgraded.` shown below:
     
@@ -298,7 +299,6 @@ To install Volt MX Foundry on bundled JBoss using the installer, follow these st
     
     
     > **_Important:_**
-    
     If you are installing Volt MX Foundry V9 on an application server using the existing database and in case if there is a change in server details, you must update the `management_server` details in the `admin` database along with the application server instance details for the **WebAapp** publish to work. You must update the following fields in the `server_configuration` table of the **admin DB**:
     
     *   management\_server\_host\_name <application\_instance hostname> 
@@ -308,17 +308,17 @@ To install Volt MX Foundry on bundled JBoss using the installer, follow these st
     *   management\_server\_password <application\_instance admin password>
     *   management\_server\_groups <application\_instance groups details>
     
-22. Click **Next**. The **Administrator Account Configuration** window appears.
+21. Click **Next**. The **Administrator Account Configuration** window appears.
     
     The **Administrator Account Configuration** window helps you to configure your super administrator account.
     
-    The **Administrator Account Configuration** window appears only while installing Console and Identity Services along with one or all other Volt MX Foundry components such as Integration Services, and Engagement Services on JBoss on a single node. You can select the components at [Install Components](#InstallComponents).
+    The **Administrator Account Configuration** window appears only while installing Console and Identity Services along with one or all other Volt MX Foundry components such as Integration Services, and Engagement Services on JBoss on a single node. You can select the components at Install Components
     
     ![](Resources/Images/AutoRegistr_583x449.png)
     
     > **_Note:_** During installation if you have configured your super administrator account, you can directly log in to Volt MX Foundry Console.
     
-23. Select the **Create Volt MX Foundry Administrator Account now** check box and enter the following details to create the super administrator account.
+22. Select the **Create Volt MX Foundry Administrator Account now** check box and enter the following details to create the super administrator account.
     *   **Public URL**: The URL field is filled with required details, for example. `<Hostname/IP address>:<port>`. Change these details, if required.
         
     *   **First Name**: Enter the first name of the user.
@@ -331,13 +331,13 @@ To install Volt MX Foundry on bundled JBoss using the installer, follow these st
         
     *   **Confirm Password**: Retype the password to ensure the user's identity.
         
-24. Enter the databases details, and click **Next**. The **Pre-Installation Summary** window appears.
+23. Enter the databases details, and click **Next**. The **Pre-Installation Summary** window appears.
 
     
     ![](Resources/Images/Pre-install_Summary_580x425.png)
     
     
-25. Click **Install**. The **Installing Volt MX Foundry** window appears.
+24. Click **Install**. The **Installing Volt MX Foundry** window appears.
     
     ![](Resources/Images/Installing_583x422.png)
     
@@ -347,7 +347,7 @@ To install Volt MX Foundry on bundled JBoss using the installer, follow these st
     
     ![](Resources/Images/Complete_583x422.png)  
     
-26. Click **Done** to close the window.
+25. Click **Done** to close the window.
     
     > **_Important:_** After installing Volt MX Foundry, import your SSL (for example, `domain.subdomain.crt`) into your Volt MX Foundry Installer's JRE trusted certificate authority (CA) certificates file - for example, `C:\VoltMX Foundry\jre\lib\security\cacerts`  
       

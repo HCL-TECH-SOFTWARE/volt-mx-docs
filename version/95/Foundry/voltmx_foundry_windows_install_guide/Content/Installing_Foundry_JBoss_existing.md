@@ -53,7 +53,7 @@ To install Volt MX Foundry on a pre-configured JBoss, follow these steps:
     
 7.  Choose one of the appropriate install type based on your license - for example, Development, Non-Production, or Production.
 8.  Select the **Send usage data anonymously** check box. Allows HCL to collect product usage information to make your Volt MX Foundry experience better. HCL does not save any of your private or application data. By default this check box is selected.
-9.  Click **Next**. The ****Choose components to install**** window appears.
+9.  Click **Next**. The **Choose components to install** window appears.
     
     ![](Resources/Images/Choose_Component_601x459.png)
     
@@ -91,9 +91,9 @@ To install Volt MX Foundry on a pre-configured JBoss, follow these steps:
     For example:  
     You have installed only Console on one node. The installer creates these three databases such as `<>mfreportsdb<>` along with the `<>mfconsoledb<>` and `<>mfaccountsdb<>`. For example, your report database name is `voltmxmfreportsdb1`  
       
-    When you install the integration with or without one or more components (identity, or Engagement Services) on a separate node, the installer displays the **Reports Database Name** field in the **Database Details** window. If the installer prompts you to enter the existing reports db, enter the reports database name (for example, `voltmxmfreportsdb1`) in the **Database Details window > Reports Database Name** field. Refer to the [Database Details](#DatabaseDetails) window.  
+    When you install the integration with or without one or more components (identity, or Engagement Services) on a separate node, the installer displays the **Reports Database Name** field in the **Database Details** window. If the installer prompts you to enter the existing reports db, enter the reports database name (for example, `voltmxmfreportsdb1`) in the **Database Details window > Reports Database Name** field. Refer to the Database Details window.  
       
-    Refer to [creating a reports database, for example, **<prefix>mfreports<suffix>**](#CreatingReportsDB).  
+    Refer to [creating a reports database, for example : mfreports
     
 11. Click **Next**. The **Install Folder** window appears. The selected path appears in the **Where would you like to install** field.
     
@@ -108,9 +108,9 @@ To install Volt MX Foundry on a pre-configured JBoss, follow these steps:
     
     > **_Important:_** To install Volt MX Foundry on single node on JBoss that is installed along with the Volt MX Foundry Installer, click **Standalone Mode** **(Single Node installation in bundled JBoss)**. For more details, refer to [Standalone Mode (Single Node in bundled JBoss) Installation](Installing_VoltMX_Foundry_on_Windows.md).  
       
-    To install multinode, click **Domain Mode**. Before installing domain mode, ensure that the JBoss cluster is configured on your install system. For more details, refer to [Multi-Node Installation Procedure](Multi-Node_Installation.md).
+    To install multinode, click **Domain Mode**. Before installing domain mode, ensure that the JBoss cluster is configured on your install system. For more details, refer to Multi-Node Installation Procedure.
     
-16. Click **Standalone Mode (Existing)** and then click **Next**. The **The **Application Server Details**** window will appear with the following details:
+16. Click **Standalone Mode (Existing)** and then click **Next**. The **Application Server Details** window will appear with the following details:
     
     ![](Resources/Images/JBOss_existing_585x449.png)
     
@@ -183,10 +183,9 @@ To install Volt MX Foundry on a pre-configured JBoss, follow these steps:
         > **_Important:_**
         If you want to enable Windows Authentication Support on SQL Server, run the following command to start the installation process after extracting the artifact:
         
-     ```
-        VoltMXFoundryInstaller-9.x.x.x_GA.exe -Dprop.java.library.path=<location of sqljdbc_auth.dll>
+     
+        VoltMXFoundryInstaller-9.x.x.x_GA.exe -Dprop.java.library.path=< location of sqljdbc_auth.dll >
 
-     ```
         
     > **_Note:_** If you choose to enable Windows Authentication support on SQL Server, you do not need to provide the **Database System User** and **Database System Password**.
         
@@ -211,7 +210,7 @@ To install Volt MX Foundry on a pre-configured JBoss, follow these steps:
         *   **Database User**: Enter the user name used while creating the database user.
         *   **Database Password**: Enter the user password used while creating the database user.
             
-            > **_Important:_** The **Reports Database Name** filed appears only if you have selected the Console, Identity, and Integration during [Install Components](#InstallComponents).
+            > **_Important:_** The **Reports Database Name** filed appears only if you have selected the Console, Identity, and Integration during Install Components
             
         *   **Database Name Prefix**: Enter the valid prefix databases - for example, jboss.
         *   **Database Name Suffix**: Enter the valid suffix for all databases - for example, 54.
@@ -229,7 +228,7 @@ To install Volt MX Foundry on a pre-configured JBoss, follow these steps:
     
     The **Administrator Account Configuration** window helps you to configure your super administrator account.
     
-    The **Administrator Account Configuration** window appears only while installing Console and Identity Services along with one or all other Volt MX Foundry components such as Integration Services, and Engagement Services on Tomcat or JBoss on a single node. You can select the components at [Install Components](#InstallComponents).
+    The **Administrator Account Configuration** window appears only while installing Console and Identity Services along with one or all other Volt MX Foundry components such as Integration Services, and Engagement Services on Tomcat or JBoss on a single node. You can select the components at Install Components
     
     ![](Resources/Images/AutoRegistr_583x449.png)
     

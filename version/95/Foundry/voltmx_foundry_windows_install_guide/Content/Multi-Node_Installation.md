@@ -50,7 +50,7 @@ To install the Volt MX Foundry console using the installer, follow these steps:
     
 7.  Choose one of the appropriate install type based on your license - for example, Development, Non-Production, or Production.
 8.  Select the **Send usage data anonymously** check box. Allows HCL to collect product usage information to make your Volt MX Foundry experience better. HCL does not save any of your private or application data. By default this check box is selected.
-9.  Click **Next**. The ****Choose components to install**** window appears.
+9.  Click **Next**. The **Choose components to install** window appears.
     
     ![](Resources/Images/Choose_Component_601x459.png)
     
@@ -89,7 +89,7 @@ To install the Volt MX Foundry console using the installer, follow these steps:
       
     When you install the integration with or without one or more components (identity, or Engagement Services) on a separate node, the installer displays the **Reports Database Name** field in the **Database Details** window. If the installer prompts you to enter the existing reports db, enter the reports database name (for example, `voltmxmfreportsdb1`) in the **Database Details window > Reports Database Name** field. Refer to the [Database Details](#DatabaseDetails) window.  
       
-    Refer to [creating a reports database, for example, **<prefix>mfreports<suffix>**](#CreatingReportsDB).
+    Refer to creating a reports database, for example : mfreports
     
 11. Click **Next**. The **Install Folder** window appears. The selected path appears in the **Where would you like to install** field.
     
@@ -107,7 +107,7 @@ To install the Volt MX Foundry console using the installer, follow these steps:
     
     > **_Important:_** To install Volt MX Foundry on single-node on JBoss that is bundled with the Volt MX Foundry installer, choose **1-** **Standalone Mode** (**Single Node**). For more details, refer to [Installing Volt MX Foundry on JBoss - Single Node](Installing_VoltMX_Foundry_on_Windows.md).  
       
-    To install Volt MX Foundry on single node on a pre-configured JBoss, choose **2-** **Standalone Mode** (**Existing**). For more details, refer to [Installing Volt MX Foundry on Existing JBoss](Installing_Foundry_JBoss_existing.md).  
+    To install Volt MX Foundry on single node on a pre-configured JBoss, choose **2-** **Standalone Mode** (**Existing**). For more details, refer to Installing Volt MX Foundry on Existing JBoss  
     
     *   The **Application Server Details** window will appear with the following details:  
         ![](Resources/Images/MN1_556x427.png)
@@ -200,11 +200,11 @@ To install the Volt MX Foundry console using the installer, follow these steps:
         
         If you want to enable Windows Authentication Support on SQL Server, run the following command to start the installation process after extracting the artefact:
         
-     ```
+    
         VoltMXFoundryInstaller-9.x.x.x_GA.exe -Dprop.java.library.
-        path=<location of sqljdbc_auth.dll>
+        path=< location of sqljdbc_auth.dll >
 
-     ```
+    
         
     > **_Note:_** If you choose to enable Windows Authentication support on SQL Server, you do not need to provide the **Database System User** and **Database System Password**.
         
@@ -233,7 +233,7 @@ To install the Volt MX Foundry console using the installer, follow these steps:
     *   **Database User**: Enter the user name used while creating the database user.
     *   **Database Password**: Enter the user password used while creating the database user.
             
-    > **_Important:_** The **Reports Database Name** filed appears only if you have selected the Console, Identity, and Integration during [Install Components](#InstallComponents).
+    > **_Important:_** The **Reports Database Name** filed appears only if you have selected the Console, Identity, and Integration during Install Components.
             
     *   **Database Name Prefix**: Enter the valid prefix databases - for example, jboss.
     *   **Database Name Suffix**: Enter the valid suffix for all databases - for example, 54.
@@ -251,7 +251,7 @@ To install the Volt MX Foundry console using the installer, follow these steps:
     
     The **Administrator Account Configuration** window helps you to configure your super administrator account.
     
-    The **Administrator Account Configuration** window appears only while installing Console and Identity Services along with one or all other Volt MX Foundry components such as Integration Services, and Engagement Service on Tomcat or JBoss on a single node. You can select the components at [Install Components](#InstallComponents).
+    The **Administrator Account Configuration** window appears only while installing Console and Identity Services along with one or all other Volt MX Foundry components such as Integration Services, and Engagement Service on Tomcat or JBoss on a single node. You can select the components at Install Components
     
     ![](Resources/Images/AutoRegistr_583x449.png)
     
