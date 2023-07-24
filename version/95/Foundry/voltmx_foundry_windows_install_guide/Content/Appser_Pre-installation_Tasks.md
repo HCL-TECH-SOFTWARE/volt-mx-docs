@@ -70,36 +70,35 @@ To increase memory and timeout settings in JBoss (pre-configured JBoss), follow 
 
 1.  In the `standalone.bat` or `.sh` file, add the following properties to `Java_opts`:
 
-    ```
+```
     \-Djboss.as.management.blocking.timeout=8400  
     \-Xms2048m  
     \-Xmx4096m
 
-    ```
-2.  In the `<JBoss_Home>/standalone/configuration/standalone.xml` file, add `config deployment-timeout=”8400”` in the `deployment-scanner subsystem`, shown below:
+```
+<ol start="2">
+<li>In the `<JBoss_Home>/standalone/configuration/standalone.xml` file, add `config deployment-timeout=”8400”` in the `deployment-scanner subsystem`, shown below:</li>
 
-    ```
+```
     <subsystem xmlns="urn:jboss:domain:deployment-scanner:2.0">  
     <deployment-scanner path="deployments" relative-to="jboss.server.base.dir" scan-interval="5000" deployment-timeout=”8400” runtime-failure-causes-rollback="${jboss.deployment.scanner.rollback.on.failure:false}"/>  
     </subsystem>
 
-    ```
+```
 
 To increase memory and timeout settings in JBoss Multinode, follow these steps:
 
 1.  In the `domain.bat` or `.sh` file, add the following properties to `Java_opts`:
 
-    ```
-    \-Djboss.as.management.blocking.timeout=8400
-
-    ```
-2.  Set the heap size for the selected server groups as below in the `<JBoss_Home>/domain/configuration/domain.xml`.
-    *   Search for `<server-groups>` tag in the domain.xml and set the heap size in the JVM settings.
+```
+    -Djboss.as.management.blocking.timeout=8400
+```
+Set the heap size for the selected server groups as below in the `<JBoss_Home>/domain/configuration/domain.xml`.
+*   Search for `<server-groups>` tag in the domain.xml and set the heap size in the JVM settings.
         
-    ```
+```
     <heap size="2048m" max-size="4096m"/>
-
-    ```
+```
 
 <h3 id="how-to-configure-engagement-services-jboss">How to Configure Engagement Services - JBoss</h3>
 
