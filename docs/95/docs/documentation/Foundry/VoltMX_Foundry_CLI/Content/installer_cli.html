@@ -1518,7 +1518,7 @@
 <li>MariaDB</li>
 <li>Microsoft SQL Server</li>
 </ul>
-<p>To find out which versions of Application Servers and Databases are supported by Volt Foundry CLI, refer to <a href="https://{../../../Foundry/voltmxfoundry_supported_devices_os_browsers/Content/Introduction.md">Supported Application Servers and Databases Guide</a>.</p>
+<p>To find out which versions of Application Servers and Databases are supported by Volt Foundry CLI, refer to <a href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmxfoundry_supported_devices_os_browsers/Content/Introduction.html">Supported Application Servers and Databases Guide</a>.</p>
 <h2 id="using-the-volt-foundry-command-line-installer">Using the Volt Foundry Command Line Installer</h2>
 <ol>
 <li>Download the <strong>VoltMXFoundryInstaller.zip</strong> file and extract it.</li>
@@ -1528,40 +1528,47 @@
 <h2 id="inputs-in-the-userinputs-properties-file">Inputs in the userInputs properties file</h2>
 <p>Following is the description of the inputs that are required to be provided in the userInputs.properties file to perform any supported installer actions:</p>
 <ol>
-<li><strong>Generic CLI inputs</strong>: Following inputs are common and are required for any of the CLI tasks to be executed.<ul>
 <li>
-<p><strong>USER_INSTALL_DIR</strong>: Specify the location of the User install directory. This is the location where the CLI generated artifacts are placed as a result of the task execution</p>
+<p><strong>Generic CLI inputs</strong>: Following inputs are common and are required for any of the CLI tasks to be executed.</p>
+<ul>
+<li><strong>USER_INSTALL_DIR</strong>: Specify the location of the User install directory. This is the location where the CLI generated artifacts are placed as a result of the task execution</li>
+</ul>
 <p>For example:</p>
 <ul>
 <li><strong>Windows</strong> - USER_INSTALL_DIR= <code>C:/VoltMXFoundry_cli</code></li>
-<li><strong>Linux</strong> - USER_INSTALL_DIR= <code>/home/VoltMXFoundry_cli</code><ul>
-<li><strong>INSTALL_LOG_LOCATION</strong>: Location for storage of the logs generated during the execution of a supported action. By default, this is set to the location of the user install directory. You can edit it to point to any other location on the system.</li>
-</ul>
+<li><strong>Linux</strong> - USER_INSTALL_DIR= <code>/home/VoltMXFoundry_cli</code></li>
+<li>
+<p><strong>INSTALL_LOG_LOCATION</strong>: Location for storage of the logs generated during the execution of a supported action. By default, this is set to the location of the user install directory. You can edit it to point to any other location on the system.</p>
 </li>
-<li><strong>Application Server basic inputs</strong>: Following inputs are required for the generation of application related artifacts.<ul>
+<li>
+<p><strong>Application Server basic inputs</strong>: Following inputs are required for the generation of application related artifacts.</p>
+</li>
 <li><strong>SERVER_CHOICE</strong>: Application servers include JBoss (Standalone/Domain), and WebSphere Liberty profile.</li>
 </ul>
 </li>
-</ul>
-</li>
-</ul>
-</li>
 </ol>
-<pre><code>SERVER\_CHOICE= &lt;appServerType&gt;
-</code></pre>
-<pre><code>    The possible values for &lt;appServerType&gt; are: JBoss or WebSphere.
-
-    *   **JBossServerType**: In case JBoss is chosen as the application server, the mode in which JBoss is configured needs to be provided. The corresponding valid inputs are either standalone or domain.
-*   **FULLY\_QUALIFIED\_PUBLIC\_URL**: Refers to the URL by which Volt Foundry will be accessible post installation. This is an optional field. In case the URL is not provided, it will be derived from the HOST\_NAME, HTTP\_PORT/HTTPS\_PORT properties. This property must be specified in case your Volt Foundry environment setup consists of a load balancer/proxy.
-</code></pre>
-<pre><code>FULLY\_QUALIFIED\_PUBLIC\_URL= &lt;http(s)&gt;://&lt;Fully Qualified Domain Name&gt;:&lt;http(s)port&gt;
-</code></pre>
-<pre><code>*   **HOST\_NAME**: The host name or IP address of the application server.
-*   **HTTP\_PORT**: The HTTP port of the application server.
-*   **HTTPS\_PORT**: The HTTPS port of the application server.
-</code></pre>
+<p><code>SERVER\_CHOICE= &lt; appServerType &gt;</code></p>
+<p>The possible values for <appServerType> are: JBoss or WebSphere.</p>
+<ul>
+<li>
+<p><strong>JBossServerType</strong>: In case JBoss is chosen as the application server, the mode in which JBoss is configured needs to be provided. The corresponding valid inputs are either standalone or domain.</p>
+</li>
+<li>
+<p><strong>FULLY_QUALIFIED_PUBLIC_URL</strong>: Refers to the URL by which Volt Foundry will be accessible post installation. This is an optional field. In case the URL is not provided, it will be derived from the HOST_NAME, HTTP_PORT/HTTPS_PORT properties. This property must be specified in case your Volt Foundry environment setup consists of a load balancer/proxy.</p>
+<p><code>FULLY\_QUALIFIED\_PUBLIC\_URL= &lt;http(s)&gt;://&lt;Fully Qualified Domain Name&gt;:&lt;http(s)port&gt;</code></p>
+</li>
+<li>
+<p><strong>HOST_NAME</strong>: The host name or IP address of the application server.</p>
+<ul>
+<li><strong>HTTP_PORT</strong>: The HTTP port of the application server.</li>
+<li><strong>HTTPS_PORT</strong>: The HTTPS port of the application server.</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
 <ol>
-<li><strong>Application Server management properties</strong>: Following inputs are required for many of the tasks related to actions performed on the application server. For example, fetching of server groups, creation of data sources, and deployment of WARs. These details are also updated in the database and hence, are required to be provided during the execution of database migration scripts.<ul>
+<li><strong>Application Server management properties</strong>: Following inputs
+    are required for many of the tasks related to actions performed on the application server. For example, fetching of server groups, creation of data sources, and deployment of WARs. These details are also updated in the database and hence, are required to be provided during the execution of database migration scripts.<ul>
 <li><strong>MASTER_IP</strong>: This is the application server host name for either JBoss standalone or WebSphere Liberty. In case of a clustered JBoss or Liberty setup, this would correspond to the domain controller host or the collective controller host respectively</li>
 <li><strong>MASTER_PORT</strong>: This is the native management port in case of JBoss. In case of WebSphere Liberty this would be the HTTPS port of the collective controller or server.</li>
 <li><strong>MASTER_USER</strong>: Application server administrative user.</li>
@@ -1569,8 +1576,11 @@
 <li><strong>USER_INPUT_SERVER_GROUPS</strong>: The value of this property is obtained by executing the <code>get-server-groups</code> task. It is only required for JBoss configured in domain mode. You must provide the user input groups separated by the pipe <strong>|</strong> delimiter.</li>
 </ul>
 </li>
-<li><strong>Properties related to the Volt Foundry components</strong>: Following inputs are required for any action which is related to a Foundry component. For example, the generation of WARs or the execution of database scripts.<ol>
-<li><strong>Volt Foundry Component selection properties</strong>: The following properties must be set to either true or false. If ALL_COMPONENTS_ENABLED is set to true, the rest of the inputs can be left empty. If ALL_COMPONENTS_ENABLED is set to false then at least one of the following input properties must be set to true.<ul>
+<li>
+<p><strong>Properties related to the Volt Foundry components</strong>: Following 
+    inputs are required for any action which is related to a Foundry component. For example, the generation of WARs or the execution of database scripts.</p>
+<p>a.  <strong>Volt Foundry Component selection properties</strong>: The following properties must be set to either true or false. If ALL_COMPONENTS_ENABLED is set to true, the rest of the inputs can be left empty. If ALL_COMPONENTS_ENABLED is set to false then at least one of the following input properties must be set to true.</p>
+<ul>
 <li>ALL_COMPONENTS_ENABLED</li>
 <li>INTEGRATION_ENABLED</li>
 <li>IDENTITY_ENABLED</li>
@@ -1578,39 +1588,33 @@
 <li>CONSOLE_ENABLED</li>
 <li>APIPORTAL_ENABLED</li>
 </ul>
-</li>
-<li><strong>Properties specific to a Volt Foundry component</strong>:<ul>
+<p>b.  <strong>Properties specific to a Volt Foundry component</strong>:</p>
+<ul>
 <li><strong>VOLTMX_FOUNDRY_CONSOLE_URL</strong>: This is an optional property that needs to be specified only if API Portal as a component is enabled, and if you want to use a pre-existing Foundry console. For example: http:/foundry.hcl.com:9080/mfconsole.</li>
 </ul>
-</li>
-<li>
-<p><strong>Database Properties</strong>:</p>
+<p>c.  <strong>Database Properties</strong>:</p>
 <ul>
-<li><strong>DB_CHOICE</strong>: Choice of Database. Valid inputs include MySQL, MariaDB, Oracle, and SQLServer.</li>
-<li><strong>PREFIX</strong>: The prefix of the database schema. The entered value is prefixed to the schema created.</li>
-<li><strong>SUFFIX</strong>: The suffix of the database schema. The entered value is appended to the schema created.</li>
-<li><strong>DB_IP</strong>: This input corresponds to the database IP address or host name.</li>
-<li><strong>DB_PORT</strong>: The host port of the database.</li>
-<li>
-<p><strong>DB_USER</strong>: The database user.</p>
+<li>DB_CHOICE : Choice of Database. Valid inputs include MySQL,
+    MariaDB, Oracle, and SQLServer.</li>
+<li>PREFIX : The prefix of the database schema. The entered value
+    is prefixed to the schema created.</li>
+<li>SUFFIX : The suffix of the database schema. The entered value
+    is appended to the schema created.</li>
+<li>DB_IP : This input corresponds to the database IP address or
+    host name.</li>
+<li>DB_PORT : The host port of the database.</li>
+<li>DB_USER : The database user.</li>
+</ul>
 <p>In case of Oracle, you must provide a user which has the permission for creating users for each of the selected Volt Foundry components. The password for all child users would be same as the parent user password.</p>
-</li>
-<li>
-<p><strong>DB_PASS</strong>: The database user password.</p>
-<ol>
-<li><strong>Properties specific to the selected database</strong>:</li>
-</ol>
-</li>
-<li><strong>Oracle specific properties</strong>: These input properties include the Oracle service ID and the Oracle tablespace names. In case the tablespace names are left empty, the default tablespace is used. Following are the various Oracle specific input properties.<ul>
+<ul>
+<li><strong>DB_PASS</strong>: The database user password.
+    <strong>Properties specific to the selected database</strong>:</li>
+<li><strong>Oracle specific properties</strong>: These input properties include the Oracle service ID and the Oracle tablespace names. In case the tablespace names are left empty, the default tablespace is used. Following are the various Oracle specific input properties.</li>
 <li>ORACLE_SERVICEID</li>
 <li>DATA_TABLESPACE</li>
 <li>INDEX_TABLESPACE</li>
 <li>LOB_TABLESPACE</li>
 </ul>
-</li>
-</ul>
-</li>
-</ol>
 </li>
 </ol>
 <h2 id="supported-installer-actions">Supported Installer Actions</h2>

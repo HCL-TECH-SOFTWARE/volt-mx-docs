@@ -1366,37 +1366,46 @@
 <ol>
 <li>In the <code>standalone.bat</code> or <code>.sh</code> file, add the following properties to <code>Java_opts</code>:</li>
 </ol>
-<pre><code>\-Djboss.as.management.blocking.timeout=8400  
+<pre><code>    \-Djboss.as.management.blocking.timeout=8400  
     \-Xms2048m  
     \-Xmx4096m
-</code></pre>
-<ol>
-<li>In the <code>&lt;JBoss_Home&gt;/standalone/configuration/standalone.xml</code> file, add <code>config deployment-timeout=”8400”</code> in the <code>deployment-scanner subsystem</code>, shown below:</li>
-</ol>
-<pre><code>&lt;subsystem xmlns=&quot;urn:jboss:domain:deployment-scanner:2.0&quot;&gt;  
 
+</code></pre>
+<ol start="2">
+<li>In the `<JBoss_Home>/standalone/configuration/standalone.xml` file, add `config deployment-timeout=”8400”` in the `deployment-scanner subsystem`, shown below:</li>
+
+
+<pre><code>    &lt;subsystem xmlns=&quot;urn:jboss:domain:deployment-scanner:2.0&quot;&gt;  
     &lt;deployment-scanner path=&quot;deployments&quot; relative-to=&quot;jboss.server.base.dir&quot; scan-interval=&quot;5000&quot; deployment-timeout=”8400” runtime-failure-causes-rollback=&quot;${jboss.deployment.scanner.rollback.on.failure:false}&quot;/&gt;  
-
     &lt;/subsystem&gt;
+
 </code></pre>
-<p>To increase memory and timeout settings in JBoss Multinode, follow these steps:</p>
-<ol>
-<li>In the <code>domain.bat</code> or <code>.sh</code> file, add the following properties to <code>Java_opts</code>:</li>
-</ol>
-<pre><code>\-Djboss.as.management.blocking.timeout=8400
+
+
+To increase memory and timeout settings in JBoss Multinode, follow these steps:
+
+1.  In the `domain.bat` or `.sh` file, add the following properties to `Java_opts`:
+
+
+<pre><code>    -Djboss.as.management.blocking.timeout=8400
 </code></pre>
-<ol>
-<li>Set the heap size for the selected server groups as below in the <code>&lt;JBoss_Home&gt;/domain/configuration/domain.xml</code>.<ul>
-<li>Search for <code>&lt;server-groups&gt;</code> tag in the domain.xml and set the heap size in the JVM settings.</li>
-</ul>
-</li>
-</ol>
-<pre><code>&lt;heap size=&quot;2048m&quot; max-size=&quot;4096m&quot;/&gt;
+
+Set the heap size for the selected server groups as below in the `<JBoss_Home>/domain/configuration/domain.xml`.
+*   Search for `<server-groups>` tag in the domain.xml and set the heap size in the JVM settings.
+
+
+<pre><code>    &lt;heap size=&quot;2048m&quot; max-size=&quot;4096m&quot;/&gt;
 </code></pre>
+
+
 <h3 id="how-to-configure-engagement-services-jboss">How to Configure Engagement Services - JBoss</h3>
 
-<p>When Engagement is selected as Foundry Component, based on the selected JBoss mode, you must add the following parameter in the JVM arguments present in <code>standalone.bat/domain.bat</code>( for Windows) or <code>standalone.sh/domain.sh</code>(for Unix):</p>
-<p>-DVMS_CORE_VERSION=2</p>
+When Engagement is selected as Foundry Component, based on the selected JBoss mode, you must add the following parameter in the JVM arguments present in `standalone.bat/domain.bat`( for Windows) or `standalone.sh/domain.sh`(for Unix):
+
+\-DVMS\_CORE\_VERSION=2
+
+
+
 <!-- WebLogic
 --------
 
