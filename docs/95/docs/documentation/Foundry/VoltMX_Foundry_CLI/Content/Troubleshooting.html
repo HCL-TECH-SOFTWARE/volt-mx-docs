@@ -1043,7 +1043,7 @@
 <p>The following error occurs after executing <code>execute migrate-db</code> in Linux.</p>
 </li>
 </ul>
-<pre><code>Buildfile: /home/installer/CLI\_FINAL/build.xml
+<pre><code>    Buildfile: /home/installer/CLI\_FINAL/build.xml
     migrate-db:
     BUILD FAILED
     /home/installer/CLI\_FINAL/build.xml:62: 
@@ -1055,30 +1055,29 @@
     using the classloader AntClassLoader
 
 </code></pre>
-<pre><code>This issue is seen if the Apache ANT environment is not properly setup in Linux.
-
-Workaround
-
-1.  Download the **bin** release from [Apache Downloads](http://ant.apache.org/bindownload.cgi).
-2.  Extract and copy the entire folder (apache-ant-1.9xxxxx) into the following folder location: `/opt/`.  
-    Following which the file structure will be `/opt/apache-ant-1.9xxxxxx/`.
-3.  Create a Symlink: ln -s /opt/apache-ant-1.9.xxxxx /opt/ant
-4.  Create another Symlink: ln -s /opt/ant/bin/ant /usr/bin/ant
-5.  Set `ANT_HOME` into the Environment vi /etc/environment and add this line: ANT\_HOME=/opt/ant (without the trailing forward slash).
-6.  Re-login to initiate the Environment.
-</code></pre>
-<ul>
+<p>This issue is seen if the Apache ANT environment is not properly setup in Linux.</p>
+<p>Workaround</p>
+<ol>
+<li>Download the bin release from <a href="http://ant.apache.org/bindownload.cgi">Apache Downloads</a>.</li>
+<li>Extract and copy the entire folder (apache-ant-1.9xxxxx) into the following folder location: <code>/opt/</code>.<br />
+Following which the file structure will be <code>/opt/apache-ant-1.9xxxxxx/</code>.</li>
+<li>Create a Symlink: ln -s /opt/apache-ant-1.9.xxxxx /opt/ant</li>
+<li>Create another Symlink: ln -s /opt/ant/bin/ant /usr/bin/ant</li>
+<li>Set <code>ANT_HOME</code> into the Environment vi /etc/environment and add this line: ANT_HOME=/opt/ant (without the trailing forward slash).</li>
+<li>
+<p>Re-login to initiate the Environment.</p>
+</li>
 <li>
 <p><strong>Issue</strong></p>
 <p>The deployment of WARs fails after executing the <code>create-data-sources</code> command when MySQL is the selected database.</p>
 <p>This issue is observed when <code>&amp;amp;amp;</code> is appended in the data source connection URL instead of just <code>&amp;amp;</code> as show in the following image:</p>
+</li>
+</ol>
 <p><img alt="" src="Resources/Images/troubleshooting2.png" /></p>
 <p>Workaround</p>
 <ul>
 <li>For <strong>JBoss Pre-configured</strong>: You must find and replace all occurrences of <code>&amp;amp;amp;</code> with <code>&amp;amp;</code> in the datasources configuration section of <code>standalone.xml</code>.</li>
 <li>For <strong>JBoss Domain</strong>: You must find and replace all occurrences of <code>&amp;amp;amp;</code> with <code>&amp;amp;</code> in the datasources configuration section of <code>domain.xml</code>.</li>
-</ul>
-</li>
 </ul>
 
               
