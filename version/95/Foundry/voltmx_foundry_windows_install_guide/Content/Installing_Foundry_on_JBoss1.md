@@ -53,15 +53,19 @@ To install Volt MX Foundry on bundled JBoss using the installer, follow these st
 
     
 7.  Choose one of the appropriate install type based on your license
- - for example, Development, Non-Production, or Production.
-8.  Select the **Send usage data anonymously** check box. Allows HCL to collect product usage information to make your Volt MX Foundry experience better. HCL does not save any of your private or application data. By default this check box is selected.
-9.  Click **Next**. The ****Choose components to install**** window appears.
+    - for example, Development, Non-Production, or Production.
+
+8.  Select the **Send usage data anonymously** check box. Allows HCL to
+    collect product usage information to make your Volt MX Foundry experience better. HCL does not save any of your private or application data. By default this check box is selected.
+
+9.  Click **Next**. The **Choose components to install** window appears.
 
     
     ![](Resources/Images/Choose_Component_601x459.png)
 
     
-10. Select one or more check boxes for the supported components. By default, the **Console**, **Identity Services**, **Integration Services**, **Developer Portal**, and **Engagement Services**  check boxes are selected:
+10. Select one or more check boxes for the supported components. By
+    default, the **Console**, **Identity Services**, **Integration Services**, **Developer Portal**, and **Engagement Services**  check boxes are selected:
     
     *   **Console** - To install Volt MX Foundry Console, select the **Console** check box.  
         The system creates the following databases: `<prefix>mfconsoledb<suffix>`, `<prefix>mfaccountsdb<suffix>`, and  `<prefix>mfreportsdb<suffix>`.
@@ -117,6 +121,7 @@ To install Volt MX Foundry on bundled JBoss using the installer, follow these st
         ![](Resources/Images/JBoss1_599x457.png)
         
 15. Click the **Standalone Mode (Single Node installation in bundled JBoss)**.
+
 16. Click **Next**.
     
     The **HTTP or HTTPS** window appears asking you to choose the HTTP or HTTPS. By default, this option is set to **HTTP**.
@@ -124,37 +129,39 @@ To install Volt MX Foundry on bundled JBoss using the installer, follow these st
     ![](Resources/Images/HTTP_583x422.png)
     
 
-a.  In HTTP or HTTPS, if you select HTTP, the following window appears. Enter the **Hostname/IP Address**, and **HTTP Port**. Click **Next**.
+    a.  In HTTP or HTTPS, if you select HTTP, the following window appears. Enter the **Hostname/IP Address**, and **HTTP Port**. Click **Next**.
     
-![](Resources/Images/HTTP1_-_Jboss_552x424.png)
+    ![](Resources/Images/HTTP1_-_Jboss_552x424.png)
     
-b.  In HTTP or HTTPS, if you select HTTPS, the following window appears. Enter the **Hostname/IP Address**, **HTTP Port**, and **HTTPS Port**. Click **Next.**
+    b.  In HTTP or HTTPS, if you select HTTPS, the following window appears. Enter the **Hostname/IP Address**, **HTTP Port**, and **HTTPS Port**. Click **Next.**
     
-![](Resources/Images/HTTPs_-Jboss_543x416.png)
+    ![](Resources/Images/HTTPs_-Jboss_543x416.png)
     
-> **_Important:_** After installing Volt MX Foundry, import your SSL certificate (for example, `domain.subdomain.crt`) into your Volt MX Foundry Installer's JRE trusted certificate authority (CA) certificates file - for example, `<INSTALL_DIR>\jre\lib\security\cacerts`  
+    > **_Important:_** After installing Volt MX Foundry, import your SSL certificate (for example, `domain.subdomain.crt`) into your Volt MX Foundry Installer's JRE trusted certificate authority (CA) certificates file - for example, `<INSTALL_DIR>\jre\lib\security\cacerts`  
       
-If your SSL certificate is not configured, the system displays an error - for example, "peer not authenticated."  
+    If your SSL certificate is not configured, the system displays an error
+     - for example, "peer not authenticated."  
       
-For details, refer to [Troubleshoot with SSL Certificate Issues](Troubleshooting.md#Service_Provider's_Certificate_Issues).
+    For details, refer to [Troubleshoot with SSL Certificate Issues](Troubleshooting.md#Service_Provider's_Certificate_Issues).
     
-Based on the inputs provided in the previous  [HTTP or HTTPS  >  a](Installing_VoltMX_Foundry_on_Windows.md#Step10a)  or  [HTTP or HTTPS  >  b](Installing_VoltMX_Foundry_on_Windows.md#Step10b), one of the following error messages appears:
+    Based on the inputs provided in the previous  [HTTP or HTTPS  >  a](Installing_VoltMX_Foundry_on_Windows.md#Step10a)  or  [HTTP or HTTPS  >  b](Installing_VoltMX_Foundry_on_Windows.md#Step10b), one of the following error messages appears:
     
-*   If you provide an invalid hostname/IP address, an alert displays:
+    *   If you provide an invalid hostname/IP address, an alert displays:
         
-    ![](Resources/Images/port.png)
+        ![](Resources/Images/port.png)
         
-*   If a port is in use, an alert displays:
+    *   If a port is in use, an alert displays:
         
-    ![](Resources/Images/Port1.png)
+        ![](Resources/Images/Port1.png)
         
-*   If you provide an invalid Port, an alert displays:
+    *   If you provide an invalid Port, an alert displays:
         
-    ![](Resources/Images/Port2.png)
+        ![](Resources/Images/Port2.png)
         
-*   If you provide the same port numbers for HTTP and HTTPS, an alert displays:
+    *   If you provide the same port numbers for HTTP and HTTPS, an alert
+        displays:
         
-    ![](Resources/Images/HTTP-HTTPS.png)
+        ![](Resources/Images/HTTP-HTTPS.png)
         
 
 17. After you configure the application server details in the **[HTTP or HTTPS](#Step13)** window, click **Next**. The **SSL Configuration** for HTTPS Communication option appears only if you select **HTTPS**. By default, the **Generate a self-signed certificate** option is selected. Choose one of the following two options:
@@ -169,13 +176,14 @@ Based on the inputs provided in the previous  [HTTP or HTTPS  >  a](Installin
     > **_Note:_** The path for a self-signed certificate is in this location: `<install folder>\keystore.jks`
         
     Enter details for the following fields:
-    *   **Organization Unit**: Enter your business unit name.
-    *   **Host Name**: Enter your domain name - for example, hcl.net
-    *   **Company**: Enter your company name.
-    *   **City**: Enter your city name.
-    *   **State**: Enter your state name.
-    *   **Country**: Enter your country name.
-    *   **Keystore Password**: Enter the password for the .JKS file that the installer will generate.
+    
+    *   Organization Unit: Enter your business unit name.
+    *   Host Name: Enter your domain name - for example, hcl.net
+    *   Company: Enter your company name.
+    *   City: Enter your city name.
+    *   State: Enter your state name.
+    *   Country: Enter your country name.
+    *   Keystore Password: Enter the password for the .JKS file that the installer will generate.
             
     *   If you enter invalid details, the following error message is displayed:
                 
@@ -255,8 +263,7 @@ Based on the inputs provided in the previous  [HTTP or HTTPS  >  a](Installin
       
         *   Enter the following database details for **SQL Server**.
         
-    > **_Important:_**
-    If you want to enable Windows Authentication Support on SQL Server, run the following command to start the installation process after extracting the artifact:
+    > **_Important:_** If you want to enable Windows Authentication Support on SQL Server, run the following command to start the installation process after extracting the artifact:
         
     
     VoltMXFoundryInstaller-9.x.x.x_GA.exe -Dprop.java.library.path=<location of sqljdbc_auth.dll>
@@ -280,7 +287,7 @@ Based on the inputs provided in the previous  [HTTP or HTTPS  >  a](Installin
     ![](Resources/Images/Database_connection_failed.png)
         
     
-    *   Enter the following database details for **MariaDB**.![](Resources/Images/MariaDB_587x451.png)
+       *   Enter the following database details for **MariaDB**.![](Resources/Images/MariaDB_587x451.png)
         *   **Database Server Hostname/IP**: Enter the DB server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
         *   **Database Port**: Enter the database port of the MariaDB. By default, this field is set to 3306 for MariaDB.
         *   **Database User**: Enter the user name used while creating the database user.
@@ -290,6 +297,7 @@ Based on the inputs provided in the previous  [HTTP or HTTPS  >  a](Installin
             
         *   **Database Name Prefix**: Enter the valid prefix databases - for example, jboss.
         *   **Database Name Suffix**: Enter the valid suffix for all databases - for example, 54.
+
 20. After entering database server details, click **Next**.
     
     If a database exists, the system displays the warning message: `One or more databases already exist. Do you want to use existing databases? If yes, then the schema may be upgraded.` shown below:

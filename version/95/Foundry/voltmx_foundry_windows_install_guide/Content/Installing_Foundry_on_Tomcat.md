@@ -272,7 +272,7 @@ To install Volt MX Foundry on Tomcat using the installer, follow these steps:
     > **_Important:_** If you want to enable Windows Authentication Support on SQL Server, run the following command to start the installation process after extracting the artifact:
         
      
-    VoltMXFoundryInstaller-9.0.0.0_GA.exe -Dprop.java.library.path=< location of sqljdbc_auth.dll >
+    VoltMXFoundryInstaller-9.0.0.0_GA.exe -Dprop.java.library.path=< location of sqljdbc_auth.dll>
 
     > **_Note:_** If you choose to enable Windows Authentication support on SQL Server, you do not need to provide the **Database System User** and **Database System Password**.
         
@@ -334,6 +334,7 @@ To run identity on Tomcat with Microsoft Azure SQL, you must edit the `authServi
         
     *   **Database Name Prefix**: Enter the valid prefix databases - for example, Volt MX.
     *   **Database Name Suffix**: Enter the valid suffix for all databases - for example, 54.
+
 19. After entering database server details, click **Next**.
     
     If a database exists, the system displays the warning message: `One or more databases already exist. Do you want to use existing databases? If yes, then the schema may be upgraded.` Shown as follows:
