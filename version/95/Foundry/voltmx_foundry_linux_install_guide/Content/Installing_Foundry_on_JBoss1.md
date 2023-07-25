@@ -40,14 +40,14 @@ The **< Install Location >** directory contains the log files logging each invoc
 
 1.  Execute the following command to switch to the user that you created.
 
-    <code># su - username</code>
+<code># su - username</code>
 
 2.  Press **Enter**. The system prompt you to enter the password.
 3.  Enter the password, and press **Enter**.
 4.  Unzip the `VoltMXFoundrySetup.tar.gz` file, and navigate to the
-    folder _**VoltMXFoundry_Installer_Linux**_.
+folder _**VoltMXFoundry_Installer_Linux**_.
 5.  Start the **./VoltMXFoundryInstaller-x.x.x.x_GA.bin** file by
-    executing the following command:
+executing the following command:
 
 ```
 Preparing to install...  
@@ -71,18 +71,11 @@ Volt MX Foundry is a set of enterprise-grade mobile infrastructure services that
 
 To proceed with installation, please confirm that the following prerequisites have been met -
 
-1.  Database server for installation. MySQL, MariaDB, Oracle, and MS SQL
-    Server are the supported databases. MariaDB is supported for Tomcat/JBoss only.  
-2.  Corresponding database user should exist and that user should have all
-    required       
-    privileges as per the documentation.  
-3.  If you want to use your existing SSL certificate then please have the
-    SSL certificate  
+a.  Database server for installation. MySQL, MariaDB, Oracle, and MS SQL Server are the supported databases. MariaDB is supported for Tomcat/JBoss only.  
+b.  Corresponding database user should exist and that user should have all required privileges as per the documentation.  
+c.  If you want to use your existing SSL certificate then please have the SSL certificate mapped to the domain name you want to use.  
 
-    mapped to the domain name you want to use.  
-
-4. If you want to install with JBoss as an option for application  server,
-   then have the application server preconfigured. Please note that single node JBoss is also bundled as part of the installer, in case you want to install afresh.
+d. If you want to install with JBoss as an option for application  server, then have the application server preconfigured. Please note that single node JBoss is also bundled as part of the installer, in case you want to install afresh.
 
 To change input, type 'back' to go back to the previous step.  
 To cancel the installation, type 'quit' at any time.
@@ -95,8 +88,8 @@ For upgrading Volt MX Foundry, refer [online documentation](../../../Foundry/vol
 
 If you have more questions or feedback, you can join our [http://community.hclvoltmx.com/](http://community.hclvoltmx.com/) or, raise a [http://support.voltmx.com/](http://support.voltmx.com/).
 
- ->1- Continue with Installation.  
-   2- Abort Installation.
+->1- Continue with Installation.  
+ 2- Abort Installation.
 
 ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
 
@@ -105,911 +98,911 @@ ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
 6.  Press **Enter**. The Software _License Agreement_  details appear.
 
 ```
-  =============================================
-  License Agreement  
-  -----------------  
-  
-  Installation and Use of Volt MX Foundry Console Requires Acceptance of the Following License Agreement:
+=============================================
+License Agreement  
+-----------------  
 
-  VOLTMX, INC.  
-  SOFTWARE LICENSE AGREEMENT
+Installation and Use of Volt MX Foundry Console Requires Acceptance of the Following License Agreement:
 
-  THE TERMS AND CONDITIONS CONTAINED HEREIN CONSTITUTE A LEGAL AGREEMENT.
+VOLTMX, INC.  
+SOFTWARE LICENSE AGREEMENT
 
-  THIS AGREEMENT ("AGREEMENT") CONTAINS THE ENTIRE AGREEMENT BETWEEN YOU ("LICENSEE") AND VOLTMX, INC. ("VOLTMX") WITH RESPECT TO THE TERMS AND CONDITIONS DESCRIBED HEREIN. READ THIS AGREEMENT CAREFULLY BEFORE YOU CLICK THE "I ACCEPT" BUTTON BELOW. BY CLICKING ON THE "I ACCEPT" BUTTON, YOU ACKNOWLEDGE THAT (1) YOU ARE AUTHORIZED TO ENTER THIS AGREEMENT FOR AND ON BEHALF OF YOUR COMPANY, AND ARE DOING SO, AND (2) YOU HAVE READ AND UNDERSTAND AND AGREE THAT YOU AND THE COMPANY SHALL BE BOUND BY THESE TERMS AND CONDITIONS AND ALL MODIFICATIONS AND ADDITIONS PROVIDED FOR. IF YOU DO NOT AGREE WITH THESE TERMS AND CONDITIONS, CLICK ON THE "I DO NOT ACCEPT" BUTTON BELOW AND INSTALLATION WILL TERMINATE.
+THE TERMS AND CONDITIONS CONTAINED HEREIN CONSTITUTE A LEGAL AGREEMENT.
 
-  DO YOU ACCEPT THE TERMS OF THIS LICENSE AGREEMENT? (Y/N): Y
+THIS AGREEMENT ("AGREEMENT") CONTAINS THE ENTIRE AGREEMENT BETWEEN YOU ("LICENSEE") AND VOLTMX, INC. ("VOLTMX") WITH RESPECT TO THE TERMS AND CONDITIONS DESCRIBED HEREIN. READ THIS AGREEMENT CAREFULLY BEFORE YOU CLICK THE "I ACCEPT" BUTTON BELOW. BY CLICKING ON THE "I ACCEPT" BUTTON, YOU ACKNOWLEDGE THAT (1) YOU ARE AUTHORIZED TO ENTER THIS AGREEMENT FOR AND ON BEHALF OF YOUR COMPANY, AND ARE DOING SO, AND (2) YOU HAVE READ AND UNDERSTAND AND AGREE THAT YOU AND THE COMPANY SHALL BE BOUND BY THESE TERMS AND CONDITIONS AND ALL MODIFICATIONS AND ADDITIONS PROVIDED FOR. IF YOU DO NOT AGREE WITH THESE TERMS AND CONDITIONS, CLICK ON THE "I DO NOT ACCEPT" BUTTON BELOW AND INSTALLATION WILL TERMINATE.
 
-  ```
+DO YOU ACCEPT THE TERMS OF THIS LICENSE AGREEMENT? (Y/N): Y
+
+```
 
 7.  Press **Enter** to continue with new installation.
 
-    The following installation types are supported for new installation:
+The following installation types are supported for new installation:
 
-    - **Development** for single machine instance.
-    - **Non-Production** for larger environments like QA or UAT.
-    - **Production** for the production instance.
+- **Development** for single machine instance.
+- **Non-Production** for larger environments like QA or UAT.
+- **Production** for the production instance.
 
-  ```
-  ===================================  
-    Licensing Type  
-  --------------
+```
+===================================  
+Licensing Type  
+--------------
 
-    Please select the type of environment you want to install. Development – Single server instance typically used for development Non-Production – A multi-server environment for testing or staging environments Production – A full production-grade environment
+Please select the type of environment you want to install. Development – Single server instance typically used for development Non-Production – A multi-server environment for testing or staging environments Production – A full production-grade environment
 
-         1- Development  
-         2- Non-Production  
-       ->3- Production
+1- Development  
+2- Non-Production  
+->3- Production
 
-    ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
+ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
-  ```
+```
 
 8. Enter your choice and press **Enter.** The _Send Usage Data Anonymously_ details appear. Allows HCL to collect product usage information to make your Volt MX Foundry experience better. HCL does not save any of your private or application data.
 
 
-  ```
-  ==============================
-    Send Usage Data Anonymously
-  -------------- ------------
+```
+==============================
+Send Usage Data Anonymously
+-------------- ------------
 
-    Help us make your Volt MX Foundry experience better by allowing us to collect product usage information. We will not save any of your private or application data.
+Help us make your Volt MX Foundry experience better by allowing us to collect product usage information. We will not save any of your private or application data.
 
-    Send usage data anonymously.
+Send usage data anonymously.
 
-       ->1- Yes
-         2- No
+->1- Yes
+2- No
 
-    ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
+ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
-  ```
+```
 
-9. Enter your choice and press **Enter.** The _Install Components_ details
-   appear.
- 
-  ```
-  =====================
-    Install Components
-  ------------------
-    Please select Volt MX Foundry components to install.
-    The Console is the administrative interface to manage your apps, environments and users.
-    The Identity Services helps you to use a single gateway for all your authentication and authorization requests.
-    The Integration Services helps you connect with any enterprise or third-party system to expose, transform and orchestrate your data as APIs.
-    The API Developer Portal is a console that enables partner teams to discover, test and consume APIs.
-    Engage your app users over sms, email and push using segmentation, location, campaigns and event driven messaging.
-    A specialized component used to manage offline data synchronization between the backend system of record and the front-end app.
-    Console, Identity and Integration Services are mandatory components of Volt MX Foundry.
-    In a development scenario, all components can be installed on the same server. However, it is recommended to install these components on separate servers for a production environment.
+9. Enter your choice and press **Enter.** The _Install Components_ details appear.
 
-      ->1- Console
-      ->2- Identity Services
-      ->3- Integration Services
-      ->4- API Development Portal
-      ->5- Engagement Services
+```
+=====================
+Install Components
+------------------
+Please select Volt MX Foundry components to install.
+The Console is the administrative interface to manage your apps, environments and users.
+The Identity Services helps you to use a single gateway for all your authentication and authorization requests.
+The Integration Services helps you connect with any enterprise or third-party system to expose, transform and orchestrate your data as APIs.
+The API Developer Portal is a console that enables partner teams to discover, test and consume APIs.
+Engage your app users over sms, email and push using segmentation, location, campaigns and event driven messaging.
+A specialized component used to manage offline data synchronization between the backend system of record and the front-end app.
+Console, Identity and Integration Services are mandatory components of Volt MX Foundry.
+In a development scenario, all components can be installed on the same server. However, it is recommended to install these components on separate servers for a production environment.
 
-    ENTER A COMMA-SEPARATED LIST OF NUMBERS REPRESENTING THE DESIRED CHOICES, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
+->1- Console
+->2- Identity Services
+->3- Integration Services
+->4- API Development Portal
+->5- Engagement Services
 
-  ```
+ENTER A COMMA-SEPARATED LIST OF NUMBERS REPRESENTING THE DESIRED CHOICES, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
-  - **Console** - To install Volt MX Foundry Console, type 1 and press **Enter**.
-      The system creates the following databases: `<prefix>mfconsoledb<suffix>`, `<prefix>mfaccountsdb<suffix>`, and  `<prefix>mfreportsdb<suffix>`.
-    - **Identity Services** - To install Volt MX Identity Services, type 2 and press **Enter**.
-      The system creates the following database: `<prefix>idconfigdb<suffix>`.
-    - **Integration Services** - To install Volt MX Foundry Integration, type 3 and press **Enter**.
-      The system creates the following databases: `voltmxadmindb`  and  `mfreportsdb`.
-    - **API Developer Portal** - To install developer portal, type 4 and press **Enter**.
+```
 
-    > **_Note:_** During installation if you have selected **API Developer Portal**, the **API Developer Portal** is created. You can directly access your [VoltMX Developer Portal](../../../Foundry/voltmx_foundry_user_guide/Content/VoltMXDevPortal.md) in Volt MX Foundry Console.
+- **Console** - To install Volt MX Foundry Console, type 1 and press **Enter**.
+The system creates the following databases: `<prefix>mfconsoledb<suffix>`, `<prefix>mfaccountsdb<suffix>`, and  `<prefix>mfreportsdb<suffix>`.
+- **Identity Services** - To install Volt MX Identity Services, type 2 and press **Enter**.
+The system creates the following database: `<prefix>idconfigdb<suffix>`.
+- **Integration Services** - To install Volt MX Foundry Integration, type 3 and press **Enter**.
+The system creates the following databases: `voltmxadmindb`  and  `mfreportsdb`.
+- **API Developer Portal** - To install developer portal, type 4 and press **Enter**.
 
-    - **Engagement Services** - To install Volt MX Foundry Engagement Services, type 5 and press **Enter**.
-      The system creates the following database: `<prefix>vpnsdb<suffix>`.
+> **_Note:_** During installation if you have selected **API Developer Portal**, the **API Developer Portal** is created. You can directly access your [VoltMX Developer Portal](../../../Foundry/voltmx_foundry_user_guide/Content/VoltMXDevPortal.md) in Volt MX Foundry Console.
 
-    **Reports Database**
+- **Engagement Services** - To install Volt MX Foundry Engagement Services, type 5 and press **Enter**.
+The system creates the following database: `<prefix>vpnsdb<suffix>`.
 
-    The reports database is used for configuring reports.
+**Reports Database**
 
-    The Installer creates the `mfreportsdb` if you choose either Console or Integration Services:
+The reports database is used for configuring reports.
 
-    - **Console** without Integration Services (with or without Engagement Services)
-    - **Console** and **Integration Services** (with or without Engagement Services)
-    - **Integration Services** without Console (with or without Engagement Services)
+The Installer creates the `mfreportsdb` if you choose either Console or Integration Services:
 
-    Reports Database for Integration on a Separate Node:
+- **Console** without Integration Services (with or without Engagement Services)
+- **Console** and **Integration Services** (with or without Engagement Services)
+- **Integration Services** without Console (with or without Engagement Services)
 
-    While installing console and integration on separate nodes, the installer prompts you to point the reports database during the integration installation.
+Reports Database for Integration on a Separate Node:
 
-    For example:
+While installing console and integration on separate nodes, the installer prompts you to point the reports database during the integration installation.
 
-    You have installed only Console on one node. The installer creates these three databases such as `<>mfreportsdb<>` along with the `<>mfconsoledb<>` and `<>mfaccountsdb<>`. For example, your report database name is `voltmxmfreportsdb1`
+For example:
 
-    When you install the integration with or without one or more components (identity, or Engagement Services) on a separate node, the installer displays the **Reports Database Name** field in the **Database Details** window. If the installer prompts you to enter the existing reports db, enter the reports database name (for example, `voltmxmfreportsdb1`) in the **Database Details window > Reports Database Name** field.
+You have installed only Console on one node. The installer creates these three databases such as `<>mfreportsdb<>` along with the `<>mfconsoledb<>` and `<>mfaccountsdb<>`. For example, your report database name is `voltmxmfreportsdb1`
 
-    Refer to [creating a reports database, for example, **<prefix>mfreports<suffix>**](#CreatingReportsDB).
+When you install the integration with or without one or more components (identity, or Engagement Services) on a separate node, the installer displays the **Reports Database Name** field in the **Database Details** window. If the installer prompts you to enter the existing reports db, enter the reports database name (for example, `voltmxmfreportsdb1`) in the **Database Details window > Reports Database Name** field.
+
+Refer to [creating a reports database, for example, **<prefix>mfreports<suffix>**](#CreatingReportsDB).
 
 10. Press **Enter** to continue the installation. The _Install Folder_ details appear.
 
-  ```
-  ============================
-    Install Folder
-  ---------------------
+```
+============================
+Install Folder
+---------------------
 
-    Please choose a destination folder for this installation.
+Please choose a destination folder for this installation.
 
-    NOTE: The installation path should not contain any special characters.
+NOTE: The installation path should not contain any special characters.
 
-    Default Install Folder: /home/user1/VoltMXFoundry
+Default Install Folder: /home/user1/VoltMXFoundry
 
-    ENTER AN ABSOLUTE PATH, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
+ENTER AN ABSOLUTE PATH, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
 
-  ```
+```
 
 > **_Note:_**  By default, Volt MX Foundry is installed at the home directory of the user.
 
 
 11. Press **Enter** to continue the installation. The installer prompts for the _Application Server_ details as follows:
 
-  ```
-  ==========================
-    Application Server
-  ------------------
+```
+==========================
+Application Server
+------------------
 
-    Enter requested information
-     ->1- Tomcat
-       2- JBoss
+Enter requested information
+->1- Tomcat
+2- JBoss
 
-      3- WebLogic
+3- WebLogic
 
-    ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
+ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
-  ```
+```
 
 12. In the **Application Server**, type 2.
 
-  > **_Note:_** By default Tomcat manager password in used by Volt MX Foundry for Web Application publish. To change the default Tomcat manager password, the new password needs to be replaced in the `password` value for user `manager` in `<tomcat-users>` tag in `tomcat-users.xml`.
-  <br><br>Now to replace the value in database, the password value should be encrypted. To encrypt the database password, follow these steps mentioned in the [Encrypt\_Passwords](../../../Foundry/voltmx_foundry_manual_install_guide/Content/Encrypt_Passwords.md) section<br><br>Once the password is encrypted, replace the encrypted value in the `prop_value` column in the row where prop_value is `management_server_password` of `<DatabasePrefix>admindb<DatabaseSuffix>` database in the `server_configuration` table.
+> **_Note:_** By default Tomcat manager password in used by Volt MX Foundry for Web Application publish. To change the default Tomcat manager password, the new password needs to be replaced in the `password` value for user `manager` in `<tomcat-users>` tag in `tomcat-users.xml`.
+<br><br>Now to replace the value in database, the password value should be encrypted. To encrypt the database password, follow these steps mentioned in the [Encrypt\_Passwords](../../../Foundry/voltmx_foundry_manual_install_guide/Content/Encrypt_Passwords.md) section<br><br>Once the password is encrypted, replace the encrypted value in the `prop_value` column in the row where prop_value is `management_server_password` of `<DatabasePrefix>admindb<DatabaseSuffix>` database in the `server_configuration` table.
 
 13. Press **Enter** to continue the installation. The _Installation Mode_ details appear.
 
-  ```
-  ========================
-    Installation Mode
-  -----------------
-    Please select your required installation mode. Standalone mode is for single node deployment whereas domain mode is for multi node deployment in JBoss cluster. Please note that if you want to install in domain mode then JBoss cluster should be preconfigured.
+```
+========================
+Installation Mode
+-----------------
+Please select your required installation mode. Standalone mode is for single node deployment whereas domain mode is for multi node deployment in JBoss cluster. Please note that if you want to install in domain mode then JBoss cluster should be preconfigured.
 
-    Note: If you are running JBoss in Domain node for a production setup, please procure appropriate licenses from Red Hat, Inc.
+Note: If you are running JBoss in Domain node for a production setup, please procure appropriate licenses from Red Hat, Inc.
 
-     ->1- Standalone Mode (Single Node)
-       2- Standalone Mode (Existing)
-       3- Domain Mode (Multi Node)
+->1- Standalone Mode (Single Node)
+ 2- Standalone Mode (Existing)
+ 3- Domain Mode (Multi Node)
 
-    ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
+ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
-  ```
+```
 
-  - **Standalone Mode (Single Node)**: To install Volt MX Foundry on single node on JBoss that is bundled with the Volt MX Foundry installer, choose**Standalone Mode** **(Single Node)**.
-  - **Standalone Mode (Existing)**: To install Volt MX Foundry on single node on JBoss that is installed on your machine, choose **Standalone Mode** **(Existing)**. For more details on how to install Volt MX Foundry on the existing JBoss, refer to [Installing Volt MX Foundry on a pre-configured standalone JBoss - (Single Node)](Installing_Foundry_JBoss_existing.md).
-  - **Domain Mode (Multinode)**: To install Volt MX Foundry on JBoss multinode, choose **Domain Mode**. Before installing domain mode, ensure that the JBoss cluster is configured on your install system. For more details on how to install Volt MX Foundry on Domain mode, refer to [JBoss Multinode Installation Procedure](Multi-Node_Installation.md).
+- **Standalone Mode (Single Node)**: To install Volt MX Foundry on single node on JBoss that is bundled with the Volt MX Foundry installer, choose**Standalone Mode** **(Single Node)**.
+- **Standalone Mode (Existing)**: To install Volt MX Foundry on single node on JBoss that is installed on your machine, choose **Standalone Mode** **(Existing)**. For more details on how to install Volt MX Foundry on the existing JBoss, refer to [Installing Volt MX Foundry on a pre-configured standalone JBoss - (Single Node)](Installing_Foundry_JBoss_existing.md).
+- **Domain Mode (Multinode)**: To install Volt MX Foundry on JBoss multinode, choose **Domain Mode**. Before installing domain mode, ensure that the JBoss cluster is configured on your install system. For more details on how to install Volt MX Foundry on Domain mode, refer to [JBoss Multinode Installation Procedure](Multi-Node_Installation.md).
 
-  > **_Important:_** Before installing Volt MX Foundry on domain mode, ensure that the JBoss cluster is configured on your install system.
+> **_Important:_** Before installing Volt MX Foundry on domain mode, ensure that the JBoss cluster is configured on your install system.
 
 14. In the Installation Mode if you type 1 and press **Enter**, the _HTTP or HTTPS_ details appear.
 
-  ```
-  ====================
-    HTTP or HTTPS
-  -------------
-    Please select the communication protocol you want to use. We recommend that you use HTTPS in production environment.
-     ->1- HTTP
-       2- HTTPS
+```
+====================
+HTTP or HTTPS
+-------------
+Please select the communication protocol you want to use. We recommend that you use HTTPS in production environment.
+->1- HTTP
+2- HTTPS
 
-    ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS < ENTER > TO ACCEPT THE DEFAULT::
-  
-  ```
+ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS < ENTER > TO ACCEPT THE DEFAULT::
 
-   a. In _HTTP or HTTPS_  if you select 1 and press **Enter**, the following details in the _Details for Application Server_ details appear.
+```
 
-  ```
-  ==============================
-    Details for Application Server  
-  ------------------------------  
-  ==================================== Please enter the Hostname/IP Address and port you want to use. The default value is the IP Address of this machine.
+a. In _HTTP or HTTPS_  if you select 1 and press **Enter**, the following details in the _Details for Application Server_ details appear.
 
-    Hostname/IP Address (Default: ): <IP address>
+```
+==============================
+Details for Application Server  
+------------------------------  
+==================================== Please enter the Hostname/IP Address and port you want to use. The default value is the IP Address of this machine.
 
-    HTTP Port (Default: 8080): 8181
+Hostname/IP Address (Default: ): <IP address>
 
-  ```
+HTTP Port (Default: 8080): 8181
 
-  b. In the _HTTP or HTTPS,_ if you type 2 and press **Enter**, the following details in the _Details for Application Server_ details appear.
+```
+b. In the _HTTP or HTTPS,_ if you type 2 and press **Enter**, the following details in the _Details for Application Server_ details appear.
 
-  ```
-  =================================
-    Details for Application Server  
-  ---------------------------------
+```
+=================================
+Details for Application Server  
+---------------------------------
 
-    Please enter the Hostname/IP Address and port you want to use. The default value is the IP Address of this machine.
+Please enter the Hostname/IP Address and port you want to use. The default value is the IP Address of this machine.
 
-    NOTE: If you want to use your existing SSL certificate then please have the SSL certificate mapped to the domain name you want to use.
+NOTE: If you want to use your existing SSL certificate then please have the SSL certificate mapped to the domain name you want to use.
 
-    Hostname/IP Address (Default: ): <IP address>
+Hostname/IP Address (Default: ): <IP address>
 
-    HTTP Port (Default: 8080):
+HTTP Port (Default: 8080):
 
-    HTTPS Port (Default: 8443):
+HTTPS Port (Default: 8443):
 
-  ```
+```
 
-  > **_Important:_** After installing Volt MX Foundry, import your SSL certificate (for example, domain.subdomain.crt) into your Volt MX Foundry installer's JRE trusted certificate authority (CA) certificates file - for example, `<INSTALL_DIR>/jre/lib/security/cacerts`<br><br>
-  If your SSL certificate is not configured, the system displays an error - for example, "peer not authenticated".<br><br>
-  For details, refer to [Troubleshoot with SSL Certificate Issues](Troubleshooting.md#Service_Provider's_Certificate_Issues).
+> **_Important:_** After installing Volt MX Foundry, import your SSL certificate (for example, domain.subdomain.crt) into your Volt MX Foundry installer's JRE trusted certificate authority (CA) certificates file - for example, `<INSTALL_DIR>/jre/lib/security/cacerts`<br><br>
+If your SSL certificate is not configured, the system displays an error - for example, "peer not authenticated".<br><br>
+For details, refer to [Troubleshoot with SSL Certificate Issues](Troubleshooting.md#Service_Provider's_Certificate_Issues).
 
-  > **_Note:_**  Based on the inputs provided in the previous  [HTTP or HTTPS  >  a](#Step11a)  or  [HTTP or HTTPS  >  b](#Step11b), one of the following error messages appears:
+> **_Note:_**  Based on the inputs provided in the previous  [HTTP or HTTPS  >  a](#Step11a)  or  [HTTP or HTTPS  >  b](#Step11b), one of the following error messages appears:
 
-  - If a port is already in use, the installer displays the following error message:
-    ```
-    ============================
-      Validation of Host Detail  
-    -------------------------  
-      Port 22 is already in use.
+- If a port is already in use, the installer displays the following error message:
 
-      Please provide a different port.
+```
+============================
+Validation of Host Detail  
+-------------------------  
+Port 22 is already in use.
 
-       ->1- Go back to give valid input.  
-         2- Abort Installation.
+Please provide a different port.
 
-      ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
+->1- Go back to give valid input.  
+2- Abort Installation.
 
-    ```
+ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
 
-  - If you provide an invalid port, the installer displays the following error message:
+```
+
+- If you provide an invalid port, the installer displays the following error message:
 
 
-    ```
+```
 
-    =================== 
-      Port Validation  
-    ---------------  
-      Please enter a valid port. Port should be in between 1-65535.  
-       ->1- Go back to give valid port.  
-         2- Abort Installation.
+=================== 
+Port Validation  
+---------------  
+Please enter a valid port. Port should be in between 1-65535.  
+->1- Go back to give valid port.  
+2- Abort Installation.
 
-      ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
- 
-    ```
+ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
-  - If you provide an invalid Hostname/IP address, the installer displays the following error message:
+```
 
-    ```
-    ==============================
-      Invalid Hostname/IP Address  
-    ---------------------------
+- If you provide an invalid Hostname/IP address, the installer displays the following error message:
 
-      Please enter a valid hostname/IP address.
+```
+==============================
+Invalid Hostname/IP Address  
+---------------------------
 
-       ->1- Go back to give valid details.  
-         2- Abort Installation.
+Please enter a valid hostname/IP address.
 
-      ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
-    ```
+->1- Go back to give valid details.  
+2- Abort Installation.
+
+ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
+
+```
 
 15. Provide the **Hostname/IP Address**, **HTTP Port**, and **HTTPS Port**, and press **Enter**. The _SSL Configuration for HTTPS Communication_ details appear only if you select HTTPS. Choose one of the following two options:
 
 
-  ```
-  ===========================================
-    SSL Configuration for HTTPS Communication
-  -----------------------------------------
+```
+===========================================
+SSL Configuration for HTTPS Communication
+-----------------------------------------
 
-    Please select the appropriate option to proceed.
+Please select the appropriate option to proceed.
 
-     ->1- Create self-signed certificate
-       2- Provide SSL certificate
+->1- Create self-signed certificate
+2- Provide SSL certificate
 
-    ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
-  
-  ```
+ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
-  a.  In the _SSL Configuration for HTTPS Communication_, if you select 1, the _Details for self-signed SSL Certificate_ details appear.
+```
 
-   > **_Important:_** To add an existing SSL certificate to cacerts file, refer to [How to Add Your Existing SSL Certificate](Post-Installation_Tasks.md#how-to-add-an-existing-ssl-certificate-to-cacerts).
+a.  In the _SSL Configuration for HTTPS Communication_, if you select 1, the _Details for self-signed SSL Certificate_ details appear.
 
-   ```
-    =============================================
-        Details for self-signed SSL Certificate
-    ----------------------------------------
+> **_Important:_** To add an existing SSL certificate to cacerts file, refer to [How to Add Your Existing SSL Certificate](Post-Installation_Tasks.md#how-to-add-an-existing-ssl-certificate-to-cacerts).
 
-        Please provide the following details to create self-signed certificate. All the fields are mandatory.
+```
+=============================================
+Details for self-signed SSL Certificate
+----------------------------------------
 
-        Please note that the path of self-signed certificate will be  /root/VoltMXFoundry/keystore.jks.
+Please provide the following details to create self-signed certificate. All the fields are mandatory.
 
-        Organizational Unit (DEFAULT: ): platform
+Please note that the path of self-signed certificate will be  /root/VoltMXFoundry/keystore.jks.
 
-        Host Name (DEFAULT: ): hcl.com
+Organizational Unit (DEFAULT: ): platform
 
-        Company (DEFAULT: ): Volt MX
+Host Name (DEFAULT: ): hcl.com
 
-        City (DEFAULT: ): HYD
+Company (DEFAULT: ): Volt MX
 
-        State (DEFAULT: ): AP
+City (DEFAULT: ): HYD
 
-        Country (DEFAULT: ): IND
+State (DEFAULT: ): AP
 
-   ```
+Country (DEFAULT: ): IND
 
-  > **_Note:_** The path for a self-signed certificate will be in this location: `<install folder>\keystore.jks`
+```
 
-  b.  In the _SSL Configuration for HTTPS Communication_, if you select 2, the _SSL Certificate Details_ details appear.
+> **_Note:_** The path for a self-signed certificate will be in this location: `<install folder>\keystore.jks`
 
-  > **_Note:_** Provide path for .jks file as input.
+b.  In the _SSL Configuration for HTTPS Communication_, if you select 2, the _SSL Certificate Details_ details appear.
 
-  ```
-     ============================
-        SSL Certificate Details
-     -----------------------
-        Please provide the following details
+> **_Note:_** Provide path for .jks file as input.
 
-        Absolute Path to Keystore File (Default: ): /downloads/\_.hcl.net.2016.jks
+```
+============================
+SSL Certificate Details
+-----------------------
+Please provide the following details
 
-  ```
+Absolute Path to Keystore File (Default: ): /downloads/\_.hcl.net.2016.jks
 
-  c.  Type the details. The installer prompts for _Password for keystore file_ details as follows:
+```
 
-  ```
-      =============================
-        Password for keystore file
-      --------------------------
+c.  Type the details. The installer prompts for _Password for keystore file_ details as follows:
 
-        Password should contain minimum six characters and should not contain space.
+```
+=============================
+Password for keystore file
+--------------------------
 
-        Please enter the password:
+Password should contain minimum six characters and should not contain space.
 
-  ```
+Please enter the password:
 
-  - If you enter an incorrect password -- for example, one that is fewer than six characters, contains a space, or is empty -- the following error message for an invalid keystore password is displayed.
+```
 
-    ```  
-        =============================
-        Password for keystore file
-        ------------------------------
+- If you enter an incorrect password -- for example, one that is fewer than six characters, contains a space, or is empty -- the following error message for an invalid keystore password is displayed.
 
-        ==============================
-        Invalid Keystore Password
-        -------------------------------
-        Keystore password must be at least six characters and should not contain space.
+```  
+=============================
+Password for keystore file
+------------------------------
 
-        PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):
+==============================
+Invalid Keystore Password
+-------------------------------
+Keystore password must be at least six characters and should not contain space.
 
-    ```
-  
+PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):
+
+```
+
 
 16. Type the password.
 
 17. Press **Enter**. The _Database Choice_ details appear:
 
-  ```
-    ==========================================
-    Database Choice
-    -----------------------------------------
-    Please select the database provider of your choice.
+```
+==========================================
+Database Choice
+-----------------------------------------
+Please select the database provider of your choice.
 
-  ->1- MySQL 5.7
+->1- MySQL 5.7
 
-    2- MySQL 5.7 Cluster - Group Replication
+2- MySQL 5.7 Cluster - Group Replication
 
-    3- Oracle 19c (19.3.0)
+3- Oracle 19c (19.3.0)
 
-    4- SQL Server 2017
+4- SQL Server 2017
 
-    5- MariaDB 10.3. 13
+5- MariaDB 10.3. 13
 
-    ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
+ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
-  ```
+```
 
 18. In the _Database Choice_, choose the DB:
 
-  - In the *Database Choice* if you select 1, the _MySQL Database Details_ appear.
+- In the *Database Choice* if you select 1, the _MySQL Database Details_ appear.
 
-    ```
-    =============================
-      MySQL Database Details
-    -----------------------------
+```
+=============================
+MySQL Database Details
+-----------------------------
 
-      Please enter MySQL database server details
+Please enter MySQL database server details
 
-      Database Server IP (DEFAULT: localhost): <IP address>
+Database Server IP (DEFAULT: localhost): <IP address>
 
-      Port (DEFAULT: 3306):
+Port (DEFAULT: 3306):
 
-      Username (DEFAULT: ): root
-    
-    ```
+Username (DEFAULT: ): root
 
-    a.  Enter the following details:
+```
 
-      - **Database Server IP**: Enter the server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
-      - **Port**: Enter the database port of the MySQL Server. By default, this field is set to 3306 for MySQL.
-      - **Username**: Enter the user name used while creating the database user - for example, dbclient.
+a.  Enter the following details:
 
-      b.  Provide a password and press **Enter**.
+- **Database Server IP**: Enter the server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
+- **Port**: Enter the database port of the MySQL Server. By default, this field is set to 3306 for MySQL.
+- **Username**: Enter the user name used while creating the database user - for example, dbclient.
 
-      - If the database connection fails, the following error message displays.
+b.  Provide a password and press **Enter**.
 
-          ```
-          =============================
-          Database Connection Failed
-          -----------------------------
-          Database connection failed.
+- If the database connection fails, the following error message displays
 
-          For the following reasons: Communications link failure
+```
+=============================
+Database Connection Failed
+-----------------------------
+Database connection failed.
 
-          The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+For the following reasons: Communications link failure
 
-          PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
 
-          ```
+PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):
 
-      - If the database server not compatible, the following error message displays:
+```
 
-          ```
-          =======================================
-          Incompatible Database Server Version
-          ----------------------------------------
-          Minimum requirement for MySQL database server is 5.7.
+- If the database server not compatible, the following error message displays:
 
-          PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):
+```
+=======================================
+Incompatible Database Server Version
+----------------------------------------
+Minimum requirement for MySQL database server is 5.7.
 
-          ```
+PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):
 
-    - In the *Database Choice* if you select 2, the _Oracle Database Details_ appear.
+```
 
-     ```
-      =========================
-      Oracle Database Details
-      -------------------------
+- In the *Database Choice* if you select 2, the _Oracle Database Details_ appear.
 
-      Please enter Oracle database server details.
+```
+=========================
+Oracle Database Details
+-------------------------
 
-      Database Server Hostname/IP (Default: 10.10.24.51): <Hostname/IP>
+Please enter Oracle database server details.
 
-      Port (Default: 1521):
+Database Server Hostname/IP (Default: 10.10.24.51): <Hostname/IP>
 
-      Service ID / Service Name(Default: ):
+Port (Default: 1521):
 
-      System Username (Default: ):
+Service ID / Service Name(Default: ):
 
-      ```
+System Username (Default: ):
 
-      a.  Enter the following details:
+```
 
-      - **Database Server IP**: Enter the server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
-      - **Port**: Enter the database port of the Oracle Server. By default, this field is set to 1521 for oracle.
-      - **Service ID** **/ Service Name**: Enter Oracle service ID or service name. Service ID is unique alias given to an instance name of Oracle DB.
+a.  Enter the following details:
 
-      - **System Username**: Enter the user name used while creating the database user.
+- **Database Server IP**: Enter the server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
+- **Port**: Enter the database port of the Oracle Server. By default, this field is set to 1521 for oracle.
+- **Service ID** **/ Service Name**: Enter Oracle service ID or service name. Service ID is unique alias given to an instance name of Oracle DB.
 
-      b.  Press **Enter**. The installer prompts for _Enter Password for Database User_ details as follows:
+- **System Username**: Enter the user name used while creating the database user.
 
-      ```
-        ===========================================
-        Enter Password for Database User
-        -------------------------------------------
-        Please enter the password:
+b.  Press **Enter**. The installer prompts for _Enter Password for Database User_ details as follows:
 
-      ```
+```
+===========================================
+Enter Password for Database User
+-------------------------------------------
+Please enter the password:
 
-      c.  Provide a password and press **Enter**.
+```
 
-      - If the database connection fails, the following error message displays.
+c.  Provide a password and press **Enter**.
 
-        ```
-          =============================
-            Database Connection Failed
-          ------------------------------
-            Database connection failed.
+- If the database connection fails, the following error message displays.
 
-            For the following reasons: Communications link failure
+```
+=============================
+Database Connection Failed
+------------------------------
+Database connection failed.
 
-            The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+For the following reasons: Communications link failure
 
-            PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
 
-        ```
+PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):
 
-      - If the database server not compatible, the following error message displays:
+```
 
-          ```
-          =======================================
-          Incompatible Database Server Version
-          ---------------------------------------
+- If the database server not compatible, the following error message displays:
 
-          PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):
+```
+=======================================
+Incompatible Database Server Version
+---------------------------------------
 
-          ```
+PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):
 
-      d.  Select the tablespace for Oracle database:
+```
 
-      > **_Important:_**  If tablespaces were already created, the DBA must grant quota (permissions) on these tablespaces to installer with admin option.<br><br>The DBA also must include grant quota on the schemas from installer login.
+d.  Select the tablespace for Oracle database:
 
+> **_Important:_**  If tablespaces were already created, the DBA must grant quota (permissions) on these tablespaces to installer with admin option.<br><br>The DBA also must include grant quota on the schemas from installer login.
 
-      ```
-        ============================================
-        Tablespace Choice
-        ---------------------------------------------
 
-        Please select the Table Space type
+```
+============================================
+Tablespace Choice
+---------------------------------------------
 
-        ->1- Default Tablespace
-          2- User Defined Tablespace
+Please select the Table Space type
 
-        ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
+->1- Default Tablespace
+2- User Defined Tablespace
 
-      ```
+ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
-      - **Default Tablespace**: If selected, the database schema and SQL scripts migration happens automatically to the default tablespace - for example, `USERS`
-      - **User Defined Tablespace**: If selected, enter the tablespaces for the following:
+```
 
-        ```
-          ========================================================================
-            Ask for the Tablespaces
-            \-----------------------------------------
+- **Default Tablespace**: If selected, the database schema and SQL scripts migration happens automatically to the default tablespace - for example, `USERS`
+- **User Defined Tablespace**: If selected, enter the tablespaces for the following:
 
-            Please enter the names of the Tablespaces
+```
+========================================================================
+Ask for the Tablespaces
+\-----------------------------------------
 
-            Data Tablespace (Default: ): VoltMX123
-            Index Tablespace (Default: ):
-            LOB Table Space (Default: ):
+Please enter the names of the Tablespaces
 
-        ```
+Data Tablespace (Default: ): VoltMX123
+Index Tablespace (Default: ):
+LOB Table Space (Default: ):
 
-         - **Data Tablespace**:
-          Enter the name for Data tablespace.
+```
 
-          This is a mandatory field. If the Data tablespace field is empty, the installers displays the error message:
+- **Data Tablespace**:
+Enter the name for Data tablespace.
 
+This is a mandatory field. If the Data tablespace field is empty, the installers displays the error message:
 
-          ```
-            ====================================
-            TableSpace details not provided
-            ---------------------------------------
-            Please provide a valid Tablespace for at least the Data field for the installation wizard to proceed further. PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):
 
-          ```
+```
+====================================
+TableSpace details not provided
+---------------------------------------
+Please provide a valid Tablespace for at least the Data field for the installation wizard to proceed further. PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):
 
-          If the Data tablespace (for example, VoltMX123) does not exist, the installers displays the error message:
+```
 
+If the Data tablespace (for example, VoltMX123) does not exist, the installers displays the error message:
 
-          ```
-            ================================
-            Invalid TableSpace Details
-            --------------------------------
-              Installation wizard is not able to access the VoltMX123 TableSpace provided with give credentials. Please verify the details again. PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):
 
-          ```
+```
+================================
+Invalid TableSpace Details
+--------------------------------
+Installation wizard is not able to access the VoltMX123 TableSpace provided with give credentials. Please verify the details again. PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):
 
-        - **Index Index Tablespace**: Enter the name for Index tablespace.
-              If input for Index Tablespace is not provided, then the value will be set to the provided Datatable space value.
-        - **LOB Tablespace**: Enter the name for LOB tablespace.
-              If input for LOB Tablespace is not provided, then the value will be set to the provided Datatable space value.
+```
 
-    - In the *Database Choice* if you select 3, the _SQL Server Database Details_ appear.
+- **Index Index Tablespace**: Enter the name for Index tablespace.
+If input for Index Tablespace is not provided, then the value will be set to the provided Datatable space value.
+- **LOB Tablespace**: Enter the name for LOB tablespace.
+If input for LOB Tablespace is not provided, then the value will be set to the provided Datatable space value.
 
-    ```
-    =====================================
-      SQLServer Database Details
-    -------------------------------------
+- In the *Database Choice* if you select 3, the _SQL Server Database Details_ appear.
 
-      Please enter SQL database server details.
+```
+=====================================
+SQLServer Database Details
+-------------------------------------
 
-      Database Server Hostname/IP (Default: 10.10.24.51): <Hostname/IP>
+Please enter SQL database server details.
 
-      Port (Default: 1433):
+Database Server Hostname/IP (Default: 10.10.24.51): <Hostname/IP>
 
-      Username 9Default: ):
+Port (Default: 1433):
 
-      Instance Name (Optional) (Default: ):
+Username 9Default: ):
 
-    ```
+Instance Name (Optional) (Default: ):
 
-    a.  Enter the following details:
+```
 
-      - **Database Server IP**: Enter the server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
-      - **Port**: Enter the database port of the SQL Server. By default, this field is set to 1433 for SQL.
-      - **Username**: Enter the user name used while creating the database user - for example, dbclient.
-      - **Instance Name (Optional)**: Enter the instance name for the database. This information is optional.
+a.  Enter the following details:
 
-    b.  Press **Enter**. The installer prompts for _Enter Password for Database User_ details as follows:
+- **Database Server IP**: Enter the server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
+- **Port**: Enter the database port of the SQL Server. By default, this field is set to 1433 for SQL.
+- **Username**: Enter the user name used while creating the database user - for example, dbclient.
+- **Instance Name (Optional)**: Enter the instance name for the database. This information is optional.
 
-      ```
-        ======================================
-        Enter Password for Database User
-        ---------------------------------------
-        Please enter the password:
+b.  Press **Enter**. The installer prompts for _Enter Password for Database User_ details as follows:
 
-      ```
+```
+======================================
+Enter Password for Database User
+---------------------------------------
+Please enter the password:
 
-    c.  Provide a password and press **Enter**.
+```
 
-    - If the database connection fails, the following error message displays.
+c.  Provide a password and press **Enter**.
 
-        ```
-        ===============================
-        Database Connection Failed
-        -------------------------------
-        Database connection failed.
+- If the database connection fails, the following error message displays.
 
-        For the following reasons: Communications link failure
+```
+===============================
+Database Connection Failed
+-------------------------------
+Database connection failed.
 
-        The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+For the following reasons: Communications link failure
 
-        PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
 
-        ```
+PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):
 
-      - If the database server not compatible, the following error message displays:
+```
 
-          ```
-          =======================================
-          Incompatible Database Server Version
-          ---------------------------------------
+- If the database server not compatible, the following error message displays:
 
-          PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):
+```
+=======================================
+Incompatible Database Server Version
+---------------------------------------
 
-          ```
+PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):
 
-    - In the *Database Choice* if you select 5, the _MariaDB Database Details_ appear.
+```
 
-    ```
-    ==============================
-      MariaDB Database Details
-    -------------------------------
+- In the *Database Choice* if you select 5, the _MariaDB Database Details_ appear.
 
-    Please enter MariaDB database server details.
+```
+==============================
+MariaDB Database Details
+-------------------------------
 
-    Database Server Hostname/IP (Default: 10.10.24.51): <Hostname/IP>
+Please enter MariaDB database server details.
 
-    Database Port (Default: 1433):
+Database Server Hostname/IP (Default: 10.10.24.51): <Hostname/IP>
 
-    Database Username (Default: ):
+Database Port (Default: 1433):
 
-    Instance Name (Optional) (Default: ):
+Database Username (Default: ):
 
-    ```
+Instance Name (Optional) (Default: ):
 
-    a.  Enter the following details:
-    - **Database Server IP**: Enter the server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
-    - **Database Port**: Enter the database port of the MariaDB Server. By default, this field is set to 3306 for MariaDB.
-    - **Database Username**: Enter the user name used while creating the database user - for example, dbclient.
+```
 
-    b.  Press **Enter**. The installer prompts for _Enter Password for Database User_ details as follows:
+a.  Enter the following details:
+- **Database Server IP**: Enter the server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
+- **Database Port**: Enter the database port of the MariaDB Server. By default, this field is set to 3306 for MariaDB.
+- **Database Username**: Enter the user name used while creating the database user - for example, dbclient.
 
+b.  Press **Enter**. The installer prompts for _Enter Password for Database User_ details as follows:
 
-      ```
-        ==========================================
-          Enter Password for Database User
-        -------------------------------------------
-          Please enter the password:
 
-      ```
+```
+==========================================
+Enter Password for Database User
+-------------------------------------------
+Please enter the password:
 
-    c.  Provide a password and press **Enter**.
+```
 
-    - If the database connection fails, the following error message displays.
+c.  Provide a password and press **Enter**.
 
+- If the database connection fails, the following error message displays.
 
-    ```
-    =============================
-    Database Connection Failed
-    -----------------------------
-    Database connection failed.
 
-    For the following reasons: Communications link failure
+```
+=============================
+Database Connection Failed
+-----------------------------
+Database connection failed.
 
-    The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+For the following reasons: Communications link failure
 
-    PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
 
-    ```
+PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):
 
-  - If the database server not compatible, the following error message displays:
- 
-    ```
-    =======================================
-    Incompatible Database Server Version
-    ---------------------------------------
+```
 
-    PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):
+- If the database server not compatible, the following error message displays:
 
-    ```
+```
+=======================================
+Incompatible Database Server Version
+---------------------------------------
+
+PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):
+
+```
 
 19. Press **Enter**. The installation prompts for Database name prefix and suffix details as follows:
 
-  ```
-  ==================================
-  Database name prefix and suffix
-  ----------------------------------
+```
+==================================
+Database name prefix and suffix
+----------------------------------
 
-  Please enter database name prefix and suffix. Please provide existing prefix and suffix if you intend to upgrade to the new Volt MX Foundry Database.
+Please enter database name prefix and suffix. Please provide existing prefix and suffix if you intend to upgrade to the new Volt MX Foundry Database.
 
-  Database Name Prefix (Default: hcl): tomcat
+Database Name Prefix (Default: hcl): tomcat
 
-  Database Name Suffix (Default: 1): 54
+Database Name Suffix (Default: 1): 54
 
-  ```
+```
 
-  - Database Name Prefix: Enter valid prefix databases - for example, HCL.
-  - Database Name Suffix: Enter valid suffix for all databases - for example, 1.
+- Database Name Prefix: Enter valid prefix databases - for example, HCL.
+- Database Name Suffix: Enter valid suffix for all databases - for example, 1.
 
 
 
 20. Enter the prefix and suffix for the database and press **Enter**. The _Administrator Account Configuration_ details appear.
 
-    The **Administrator Account Configuration** details help you to configure your super administrator account.
+The **Administrator Account Configuration** details help you to configure your super administrator account.
 
-    The **Administrator Account Configuration** window appears only while installing Console and Identity Services along with one or all other Volt MX Foundry components such as Integration Services, and Engagement Services on Tomcat or JBoss on a single node. You can select the components at Install Components.
+The **Administrator Account Configuration** window appears only while installing Console and Identity Services along with one or all other Volt MX Foundry components such as Integration Services, and Engagement Services on Tomcat or JBoss on a single node. You can select the components at Install Components.
 
-  ```
-  ======================================
-    Administrator Account Configuration
-  ---------------------------------------
+```
+======================================
+Administrator Account Configuration
+---------------------------------------
 
-    Please configure your Administrator Account. We require your First Name, Last Name, Email Address and Password. Your Name is used for display purposes in the console, the Email address will be used as your login ID and we do not use it to send unsolicited emails.
+Please configure your Administrator Account. We require your First Name, Last Name, Email Address and Password. Your Name is used for display purposes in the console, the Email address will be used as your login ID and we do not use it to send unsolicited emails.
 
-    Public URL (Default: ):
+Public URL (Default: ):
 
-    First Name (Default: ):
+First Name (Default: ):
 
-    Last Name (Default: ):
+Last Name (Default: ):
 
-    Email (Default: ):
+Email (Default: ):
 
-  ```
+```
 
-  a.  In the **Administrator Account Configuration**, enter the following details to create the administrator account.
+a.  In the **Administrator Account Configuration**, enter the following details to create the administrator account.
 
-  - **Public URL**: The URL field is filled with required details, for example. `<Hostname/IP address>:<port>`. Change these details, if required.
+- **Public URL**: The URL field is filled with required details, for example. `<Hostname/IP address>:<port>`. Change these details, if required.
 
-  - **First Name**: Enter the first name of the user.
+- **First Name**: Enter the first name of the user.
 
-  - **Last Name**: Enter the last name of the user.
+- **Last Name**: Enter the last name of the user.
 
-  - **Email**: Enter the email address of the user. It can include alphanumeric and special characters that follow standard email address form.
+- **Email**: Enter the email address of the user. It can include alphanumeric and special characters that follow standard email address form.
 
-  > **_Note:_** During Volt MX Foundry installation if you have configured your super administrator account, you can directly [log in to Volt MX Foundry Console](../../../Foundry/voltmx_foundry_user_guide/Content/How_to_access_VoltMX_Foundry_Portal_on-Prem.md#how-to-log-in-to-foundry-console).
+> **_Note:_** During Volt MX Foundry installation if you have configured your super administrator account, you can directly [log in to Volt MX Foundry Console](../../../Foundry/voltmx_foundry_user_guide/Content/How_to_access_VoltMX_Foundry_Portal_on-Prem.md#how-to-log-in-to-foundry-console).
 
-  b.  Press **Enter**. The _Password for the Administrator Account_ details appear.
+b.  Press **Enter**. The _Password for the Administrator Account_ details appear.
 
-  ```
-        ==========================================
-        Password for the Administrator Account
-        ------------------------------------------
-        Please Enter the Password:
+```
+==========================================
+Password for the Administrator Account
+------------------------------------------
+Please Enter the Password:
 
-        Confirm Password for the Administrator Account Configuration
+Confirm Password for the Administrator Account Configuration
 
-        Please Enter the Password:
+Please Enter the Password:
 
-  ```
+```
 
-  c.  Enter the admin log-in password and press **Enter**. The _Confirm Password for the Administrator Account Configuration_ details appear.
+c.  Enter the admin log-in password and press **Enter**. The _Confirm Password for the Administrator Account Configuration_ details appear.
 
-  ```
-    ================================================================
-    Confirm Password for the Administrator Account Configuration
-    -------------------------------
+```
+================================================================
+Confirm Password for the Administrator Account Configuration
+-------------------------------
 
-    Please Enter the Password:
+Please Enter the Password:
 
-  ```
+```
 
 21. Re-enter the admin log-in password and press **Enter**. The _VoltMX Foundry server startup_ details appear.
 
 ```
-  =========================================
-    Volt MX Foundry server startup details
-  -----------------------------------------
+=========================================
+Volt MX Foundry server startup details
+-----------------------------------------
 
-    Do you want to start the Volt MX Foundry server after successful installation of Volt MX Foundry
-     ->1- Yes
-       2- No
+Do you want to start the Volt MX Foundry server after successful installation of Volt MX Foundry
+->1- Yes
+   2- No
 
-    ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
+ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
-  ```
+```
 
 22. To start the server automatically after the successful installation of Volt MX Foundry, press **Enter**.
 
-  > **_Note:_** To start the server manually after the successful installation of Volt MX Foundry, refer to [Starting Volt MX Foundry Console](../../../Foundry/voltmx_foundry_manual_install_guide/Content/Starting_VoltMX_MobileFoundry_Console.md).
+> **_Note:_** To start the server manually after the successful installation of Volt MX Foundry, refer to [Starting Volt MX Foundry Console](../../../Foundry/voltmx_foundry_manual_install_guide/Content/Starting_VoltMX_MobileFoundry_Console.md).
 
-  The _Pre-Installation Summary_ details appear.
+The _Pre-Installation Summary_ details appear.
 
 
-  ```
-  ===============================================================================
-  Pre-Installation Summary
-  ------------------------
+```
+===============================================================================
+Pre-Installation Summary
+------------------------
 
-  Please review the following before continuing:
+Please review the following before continuing:
 
-  Installation Type:
-  New Installation
+Installation Type:
+New Installation
 
-  Install Components:
-  Console, Developer Portal, Identity Services, Integration Services and Engagement Services
+Install Components:
+Console, Developer Portal, Identity Services, Integration Services and Engagement Services
 
-  Install Folder:
-  /root/VoltMXFoundryInstaller-DEV-8.4.2.6
+Install Folder:
+/root/VoltMXFoundryInstaller-DEV-8.4.2.6
 
-  Application Server:
-  JBoss 7.1, Installation Mode: Standalone Remote
+Application Server:
+JBoss 7.1, Installation Mode: Standalone Remote
 
-  Application Server Details:
-  Hostname/IP Address: , Port: 9999, HTTP/HTTPS Port: 8080
+Application Server Details:
+Hostname/IP Address: , Port: 9999, HTTP/HTTPS Port: 8080
 
-  Database Choice:
-  MySQL 5.7
+Database Choice:
+MySQL 5.7
 
-  Database Details:
-  Hostname/IP Address: , User: mfuser, Port: 3306
+Database Details:
+Hostname/IP Address: , User: mfuser, Port: 3306
 
-  Database Names:
-  testmfconsoledbjboss, testmfaccountsdbjboss, testmfreportsdbjboss, testidconfigdbjboss, testadmindbjboss, and testvpnsdbjboss
+Database Names:
+testmfconsoledbjboss, testmfaccountsdbjboss, testmfreportsdbjboss, testidconfigdbjboss, testadmindbjboss, and testvpnsdbjboss
 
-    PRESS ENTER TO CONTINUE:
+PRESS ENTER TO CONTINUE:
 
-  ```
+```
 
 23. Type the details and press **Enter**. The _Ready To Install_  details appear.
 
-  ```
+```
 
-  =====================
-    Ready To Install
-  ----------------------
+=====================
+Ready To Install
+----------------------
 
-    Installer is now ready to install Volt MX Foundry Console onto your system at the following location:
+Installer is now ready to install Volt MX Foundry Console onto your system at the following location:
 
-    /home/user1/VoltMXFoundry
+/home/user1/VoltMXFoundry
 
-    PRESS <ENTER> TO INSTALL:
+PRESS <ENTER> TO INSTALL:
 
-  ```
+```
 
 24. Press **Enter** to continue the installation.
 
 
-  ```
-    ===============
-    Installing...
-    ---------------
+```
+===============
+Installing...
+---------------
 
-  [==================|==================|==================|  ==================\] \[------------------|------------------|------------------|------------------\]
+[==================|==================|==================|  ==================\] \[------------------|------------------|------------------|------------------\]
 
-  ```
+```
 
 25. Press **Enter**. The _Installation Complete_ details appear.
 
-  ```
-  ============================================
-    Installation Complete
-  --------------------------------------------
+```
+============================================
+Installation Complete
+--------------------------------------------
 
-    Congratulations. Volt MX Foundry has been successfully installed to:
+Congratulations. Volt MX Foundry has been successfully installed to:
 
-    /home/user1/VoltMXFoundry
+/home/user1/VoltMXFoundry
 
-    Console URL: https://00.00.00.00:port/mfconsole
-    Identity Service URL: https://00.00.00.00:port/authService
-    Integration Service URL: https://00.00.00.00:port/admin
-    Engagement Services URL: http://00.00.00.000:port/vpns
+Console URL: https://00.00.00.00:port/mfconsole
+Identity Service URL: https://00.00.00.00:port/authService
+Integration Service URL: https://00.00.00.00:port/admin
+Engagement Services URL: http://00.00.00.000:port/vpns
 
-    PRESS <ENTER> TO EXIT THE INSTALLER: \[user1@cnt6-01c downloads\]$
+PRESS <ENTER> TO EXIT THE INSTALLER: \[user1@cnt6-01c downloads\]$
 
-  ```
+```
 
 26. Press **Enter** to complete the installation. After the installation is completed, the installer creates logs in the install folder.
 
-  > **_Important:_** When you are using a third party tool (for example, PuTTY) for installing Volt MX Foundry remotely, if any network connection issues occur at the end of the installation, the installer stops the installation and the installation log is not created.
+> **_Important:_** When you are using a third party tool (for example, PuTTY) for installing Volt MX Foundry remotely, if any network connection issues occur at the end of the installation, the installer stops the installation and the installation log is not created.
 
 > **_Important:_**  After installing Volt MX Foundry, import your SSL certificate (for example, domain.subdomain.crt) into your Volt MX Foundry installer's JRE trusted certificate authority (CA) certificates file - for example,  
 > `<INSTALL_DIR>/jre/lib/security/cacerts`
