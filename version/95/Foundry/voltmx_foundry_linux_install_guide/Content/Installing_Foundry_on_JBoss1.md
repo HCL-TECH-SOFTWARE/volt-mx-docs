@@ -357,7 +357,6 @@ ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
 
 
 ```
-
 =================== 
 Port Validation  
 ---------------  
@@ -643,9 +642,9 @@ ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 - **User Defined Tablespace**: If selected, enter the tablespaces for the following:
 
 ```
-========================================================================
+=========================
 Ask for the Tablespaces
-\-----------------------------------------
+-------------------------
 
 Please enter the names of the Tablespaces
 
@@ -918,7 +917,7 @@ The _Pre-Installation Summary_ details appear.
 
 
 ```
-===============================================================================
+========================
 Pre-Installation Summary
 ------------------------
 
