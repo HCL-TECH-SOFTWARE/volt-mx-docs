@@ -94,8 +94,9 @@ If you have more questions or feedback, you can join our [http://community.hclvo
 ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
 
 ```
-
-6.  Press **Enter**. The Software _License Agreement_  details appear.
+<ol>
+  <li value="6">Press <b>Enter</b>. The Software _License Agreement_  details appear.</li>
+</ol>
 
 ```
 =============================================
@@ -114,8 +115,9 @@ THIS AGREEMENT ("AGREEMENT") CONTAINS THE ENTIRE AGREEMENT BETWEEN YOU ("LICENSE
 DO YOU ACCEPT THE TERMS OF THIS LICENSE AGREEMENT? (Y/N): Y
 
 ```
-
-7.  Press **Enter** to continue with new installation.
+<ol>
+  <li value="7">Press <b>Enter</b> to continue with new installation.</li>
+</ol> 
 
 The following installation types are supported for new installation:
 
@@ -137,9 +139,9 @@ Please select the type of environment you want to install. Development – Singl
 ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
 ```
-
-8. Enter your choice and press **Enter.** The _Send Usage Data Anonymously_ details appear. Allows HCL to collect product usage information to make your Volt MX Foundry experience better. HCL does not save any of your private or application data.
-
+<ol>
+  <li value="8">Enter your choice and press **Enter.** The _Send Usage Data Anonymously_ details appear. Allows HCL to collect product usage information to make your Volt MX Foundry experience better. HCL does not save any of your private or application data.</li>
+</ol> 
 
 ```
 ==============================
@@ -156,8 +158,9 @@ Send usage data anonymously.
 ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
 ```
-
-9. Enter your choice and press **Enter.** The _Install Components_ details appear.
+<ol>
+  <li value="9">Enter your choice and press <b>Enter.</b> The _Install Components_ details appear.</li>
+</ol> 
 
 ```
 =====================
