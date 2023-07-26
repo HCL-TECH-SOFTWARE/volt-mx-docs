@@ -32,9 +32,8 @@ To install Volt MX Foundry Console using the installer, follow these steps:
 
 1.  Switch to the user that you created by executing the following command:
 
-```
-# su - username
-```
+    `# su - username`
+
 2.  Press **Enter**. The system prompts you to enter the password.
 3.  Enter the password and press **Enter**.
 4.  Unzip the `VoltMXFoundrySetup.tar.gz` file, and navigate to the folder _**VoltMXFoundry_Installer_Linux**_.
@@ -79,7 +78,10 @@ If you have more questions or feedback, you can join our [http://community.hclvo
 ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
 
 ```
-6.  Press **Enter**. The Software _License Agreement_  details appear.
+
+<ol>
+  <li value="6">Press <b>Enter</b>.The Software_License Agreement_details appear.</li>
+</ol>
 
 ```
 ======================== 
@@ -97,14 +99,15 @@ THIS AGREEMENT ("AGREEMENT") CONTAINS THE ENTIRE AGREEMENT BETWEEN YOU ("LICENSE
 DO YOU ACCEPT THE TERMS OF THIS LICENSE AGREEMENT? (Y/N): Y
 
 ```
+<ol>
+  <li value="7">Press <b>Y</b> to accept the agreement. The_Installation Type_details appear.</li>
+</ol>
 
-7.  Press **Y** to accept the agreement. The _Installation Type_ details appear.
+  The following installation types are supported for new installation:
 
-    The following installation types are supported for new installation:
-
-    - **Development** for single machine instance.
-    - **Non-Production** for larger environments like QA or UAT.
-    - **Production** for the production instance.
+  - **Development** for single machine instance.
+  - **Non-Production** for larger environments like QA or UAT.
+  - **Production** for the production instance.
 
 ```
 =================
@@ -120,7 +123,9 @@ ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
 ```
 
-8. Press **Enter** to continue with new installation.
+<ol>
+  <li value="8">Press<b>Enter</b> to continue with new installation.</li>
+</ol>
 
 ```  
 ===============
@@ -137,8 +142,9 @@ Select Development for single machine instance, Non-Production for larger enviro
 ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
 ```
-
-9. Enter your choice and press **Enter.** The _Send Usage Data Anonymously_ details appear. Allows HCL to collect product usage information to make your Volt MX Foundry experience better. HCL does not save any of your private or application data.
+<ol>
+  <li value="9"> Enter your choice and press <b>Enter.</b> The_Send Usage Data Anonymously_details appear.Allows HCL to collect product usage information to make your Volt MX Foundry experience better. HCL does not save any of your private or application data.</li>
+</ol>
 
 ```
 
@@ -157,7 +163,9 @@ ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
 ```
 
-10. Enter your choice and press **Enter.** The _Install Components_ details appear:
+<ol>
+  <li value="10">Enter your choice and press <b>Enter.</b> The_Install Components_details appear:</li>
+</ol>
 
 ```
 ===================
@@ -218,7 +226,9 @@ ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
     Refer to [creating a reports database, for example : mfreports
 
-11. Press **Enter** to continue the installation. The _Install Folder_ details appear.
+<ol>
+  <li value="11">Press <b>Enter</b> to continue the installation. The_Install Folder_details appear.</li>
+</ol>
 
 ```
 ================
@@ -241,7 +251,9 @@ IS THIS CORRECT? (Y/N): y
 
 > **_Note:_** By default, Volt MX Foundry is installed at the home directory of the user.
 
-12. Press **Enter** to continue the installation. The _Application Server_ details appear.
+<ol>
+  <li value="12">Press <b>Enter</b> to continue the installation. The_Application Server_ details appear.</li>
+</ol>
 
 ```
 ====================
@@ -257,10 +269,10 @@ Enter requested information
 ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
 ```
-
-13. In the **Application Server**, choose **2**.
-
-14. Press **Enter** to continue the installation. The _Installation Mode_ details appear.
+<ol>
+  <li value="13">In the <b>Application Server</b>, choose <b>2</b>.</li>
+  <li value="14">Press <b>Enter</b> to continue the installation. The_Installation Mode_ details appear.</li>
+</ol>
 
 ```
 ===================
@@ -278,12 +290,13 @@ ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
 ```
 
-  > **_Important:_** To install Volt MX Foundry on single-node on JBoss that is bundled with the Volt MX Foundry installer, choose **1-** **Standalone Mode** (**Single Node**). For more details, refer to [Installing Volt MX Foundry on JBoss - Single Node](Installing_VoltMX_Foundry_on_Linux.md).
+> **_Important:_** To install Volt MX Foundry on single-node on JBoss that is bundled with the Volt MX Foundry installer, choose **1-** **Standalone Mode** (**Single Node**). For more details, refer to [Installing Volt MX Foundry on JBoss - Single Node](Installing_VoltMX_Foundry_on_Linux.md).
 
-  To install Volt MX Foundry on single node on JBoss that is installed on your machine, choose **2-** **Standalone Mode** (**Existing**). For more details, refer to refer to [Installing Volt MX Foundry on Existing JBoss - Single Node](Installing_Foundry_JBoss_existing.md).
+To install Volt MX Foundry on single node on JBoss that is installed on your machine, choose **2-** **Standalone Mode** (**Existing**). For more details, refer to refer to [Installing Volt MX Foundry on Existing JBoss - Single Node](Installing_Foundry_JBoss_existing.md).
 
-15. In the Installation Mode, type 3 and press **Enter**. The _Application Server Details_ details appear. The **Application Server Details**  details will appear with the following details if have selected All Components or Volt MX Foundry Console at Install Components
-
+<ol>
+  <li value="15">In the Installation Mode, type 3 and press <b>Enter</b>.The_Application Server Details_appear. The <b>Application Server </b>details will appear with the following details if have selected All Components or Volt MX Foundry Console at Install Components</li>
+</ol>
 
 ```
 ==========================
@@ -304,8 +317,10 @@ Master Node HTTP/HTTPs Port (Default:8080): 8081
 User (Default: master):
 
 ```
+<ol>
+  <li value="16">In the_Application Server Details_details, do the following:</li>
+</ol>
 
-16. In the _Application Server Details_ details, do the following:
 
 - **Fully Qualified Public URL of Volt MX Foundry**: Enter Load balancer URL to use public communication.
 - **Master Node Hostname/IP Address**: Enter public Hostname/IP of JBoss master node. The master node should be accessible from your installation system.
@@ -313,7 +328,10 @@ User (Default: master):
 - **Master Node HTTP/HTTPs Port**: Enter port of Volt MX Foundry Console.
 - **User**: Enter user that you configured in master node of JBoss cluster.
 
-17. Press Enter. The installer prompts for _JBoss Master Node User's Password_ details as follows:
+<ol>
+  <li value="17">Press Enter. The installer prompts for_JBoss Master Node User's Password_details as follows:</li>
+</ol>
+
 
 ```
 ===================================
@@ -322,8 +340,9 @@ JBoss Master Node User's Password
 Please enter the password:
 
 ```
-
-18. Type the password that you configured in master node of JBoss cluster. The _Server Groups_  details appear.
+<ol>
+  <li value="18">Type the password that you configured in master node of JBoss cluster. The_Server Groups_details appear.</li>
+</ol>
 
 ```
 ===============
@@ -336,10 +355,11 @@ A server group is set of server instances that will be managed and configured as
 Enter comma separated server groups number you want to use (e.g.: 1,2 or all) (Default: all):
 
 ```
+<ol>
+  <li value="19">Enter server groups with a comma separated-for example, 1, 2, shown above.</li>
+</ol>
 
-19. Enter server groups with a comma separated - for example, 1, 2, shown above.
-
-    The Selected Server Group details appear.
+ The Selected Server Group details appear.
 
 ```
 =======================
@@ -355,7 +375,9 @@ ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
 
 ```
 
-20. Press Enter. The installer prompts the _Database Choice_ details as follows:
+<ol>
+  <li value="20">Press Enter.The installer prompts the_Database Choice_details as follows:</li>
+</ol>
 
 ```
 ===================
@@ -376,10 +398,11 @@ Please select the database provider of your choice.
 ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
 ```
+<ol>
+  <li value="21">In the_Database Choice_,choose the DB:</li>
+</ol>
 
-21. In the _Database Choice_, choose the DB:
-
-  - In the *Database Choice* if you select 1, the _MySQL Database Details_ appear.
+- In the *Database Choice* if you select 1, the _MySQL Database Details_ appear.
 
 ```
 =========================
@@ -488,7 +511,7 @@ PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):
 
 ```
 
- - If the database server not compatible, the following error message displays:
+- If the database server not compatible, the following error message displays:
 
 
 ```
@@ -689,8 +712,9 @@ Incompatible Database Server Version
 PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):
 
 ```
-
-22. Press **Enter**. The  Database name prefix and suffix details appear. Enter the following details:
+<ol>
+  <li value="22">Press <b>Enter</b>. The Database name prefix and suffix details appear. Enter the following details:</li>
+</ol>
 
 ```
 ==================================
@@ -708,8 +732,9 @@ Database Name Suffix (Default: 1): 54
 - Database Name Prefix: Enter valid prefix databases - for example, HCL.
 - Database Name Suffix: Enter valid suffix for all databases - for example, 1.
 
-23. Enter the prefix and suffix for the database and press **Enter**. The _Pre-Installation Summary_ details appear.
-
+<ol>
+  <li value="23">Enter the prefix and suffix for the database and press <b>Enter</b>. The_Pre-Installation Summary_details appear.</li>
+</ol>
 
 ```
 ===============================================================================
@@ -741,8 +766,9 @@ voltmxidconfigdb, voltmxmfconsoledb & voltmxmfaccountsdb
 PRESS <ENTER> TO CONTINUE:
 
 ```
-
-24. Press **Enter**. The _Ready To Install_ details appear.
+<ol>
+  <li value="24">Press <b>Enter</b>. The_Ready To Install_details appear.</li>
+</ol>
 
 ```  
 =================
@@ -756,8 +782,9 @@ Installer is now ready to install Volt MX Foundry Console onto your system at th
 PRESS <ENTER> TO INSTALL:
 
 ```
-
-25. Press **Enter**. The _Installing_ details appear.
+<ol>
+  <li value="25">Press <b>Enter</b>.The_Installing_details appear.</li>
+</ol>
 
 ```
 ===============
@@ -767,9 +794,9 @@ Installing...
 [==================|==================|==================|==================\] \[------------------|------------------|------------------|------------------\]
 
 ```
-
-26. Press **Enter**. The _Installation Complete_ details appear.
-
+<ol>
+  <li value="26">Press<b>Enter</b>.The_Installation Complete_details appear.</li>
+</ol>
 
 ```
 ==========================
@@ -788,8 +815,9 @@ Engagement Services URL: http://00.00.00.000:port/vpns
 PRESS <ENTER> TO EXIT THE INSTALLER: \[user1@cnt6-01c downloads\]$
 
 ```
-
-27. Press **Enter** to complete the installation. After the installation is completed, the installer creates logs in the install folder.
+<ol>
+  <li value="27">Press <b>Enter</b> to complete the installation. After the installation is completed, the installer creates logs in the install folder.</li>
+</ol>
 
 > **_Important:_** When you are using a third party tool (for example, PuTTY) for installing Volt MX Foundry remotely, if any network connection issues occur at the end of the installation, the installer stops the installation and the installation log is not created.
 
