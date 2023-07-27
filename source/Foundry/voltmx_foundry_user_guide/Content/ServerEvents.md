@@ -1,7 +1,3 @@
-                             
-
-User Guide: [Integration](Services.md#integration) \> [Advanced Configurations](Advanced_Configurations.md) > Server Events
-
 Server Events
 =============
 
