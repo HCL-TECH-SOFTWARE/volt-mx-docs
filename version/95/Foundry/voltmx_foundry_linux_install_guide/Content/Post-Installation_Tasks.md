@@ -69,7 +69,7 @@ For example: When you upgrade JDK V 1.6 to JDK V 1.7 (vice-versa), you can still
     *   `ssl.keyStore=/<java_home>/jre/lib/security/cacerts`
 
 How to Configure Memcached for Integration Services
-===================================================
+----------------------------------------------------
 
 *   For Foundry version 7.3 or above, you can configure the memcache from Admin console.
     
@@ -109,7 +109,7 @@ How to Configure Memcached for Integration Services
         
 
 Configure Deployment of mbaasportal.war File for Multi-Node
-===========================================================
+------------------------------------------------------------
 
 Once Volt MX Foundry installation succeeds, the Volt MX Foundry Console will not be displayed as the **enable-welcome-root** value is set **true** in the`domain.xml` file**.**
 
@@ -119,12 +119,12 @@ To configure mbaasportal.war, follow these steps:
 2.  Replace enable-welcome-root="true" with enable-welcome-root="false."
 
 Remote Installation Pre-requisites
-==================================
+----------------------------------
 
 After you have installed Volt MX Foundry, you must retain the **Installation** folder for upgrades. While upgrading, the Volt MX Foundry installer requires the `installvariables.properties` file under the `<USER_INSTALL_DIR>/_VoltMX Foundry_installation` folder.
 
 Installing Volt MX Foundry Remotely
-----------------------------------
+-----------------------------------
 
 You can install Volt MX Foundry remotely on the following supported application servers:
 
@@ -134,7 +134,7 @@ You can install Volt MX Foundry remotely on the following supported application 
 <!-- *   WebLogic -->
 
 How to Turn off the Send usage data anonymously feature
-=======================================================
+--------------------------------------------------------
 
 Allows HCL to collect product usage information to make your Volt MX Foundry experience better.
 
@@ -149,7 +149,7 @@ Allows HCL to collect product usage information to make your Volt MX Foundry exp
     You should be able to figure out if analytics data that is sent/out by trying to check in the **Network** tab in the Browser Developer Tools.
 
 Configuring Datasource for performance improvements for JBoss pre-existing and Domain Mode
-==========================================================================================
+-------------------------------------------------------------------------------------------
 
 While using pre-configured JBoss or JBoss in Domain Mode, add the following snippet to the datasource to improve the performance.
 
@@ -164,7 +164,7 @@ While using pre-configured JBoss or JBoss in Domain Mode, add the following snip
 > **_Note:_** For the bundled version, the installer will add the default size to the datasources.
 
 Health Check URL
-================
+----------------
 
 The following is the Component Health Check URL if the initial setup is success:
 
@@ -189,7 +189,7 @@ Passed
 ```
 
 Steps to enable SAPJCo
-======================
+----------------------
 
 The installer provides the following artifacts:
 
