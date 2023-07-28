@@ -6,7 +6,7 @@ iOS SDK and simulator
 
 Building and testing iOS and iPadOS applications on a device or simulator via Volt MX Iris requires Xcode, the development environment containing the SDK for iOS, iPadOS, and watchOS
 
-In Volt MX Iris V9 SP2 GA version and later, you can view the list of simulators within Iris and run your apps on the simulators directly from Iris. When you open any project, you can view simulators from the Build menu. Previously, if you wanted to preview an app, you had to create a binary file, install it on a device, and then launch the application. With this new capability to view the simulators within Iris, you can skip the process of creating a binary and install it directly on the device/simulator. You can now directly go to the last step of launching the app in a simulator to view the app in action.
+In Volt MX Iris V9 SP2 GA version and later, you can view the list of simulators within Iris and run your apps on the simulators directly from Iris. When you open any project, you can view simulators from the Build menu. Previously, if you wanted to launch an app, you had to create a binary file and install it on a device. With this new capability to view the simulators within Iris, the aforementioned steps are performed by Iris, making the process seamless.
 
 You cannot create simulators directly within Volt MX Iris. However, you can view the simulators running on the system. So, before you can get started using the simulators, you must first ensure that you have at least one simulator configured in Xcode.
 
@@ -34,7 +34,7 @@ Confirm your system meets iOS and iPadOS development requirements
 -------------------------------------------------------------------
 To develop for the iOS and iPadOS platforms and run on simulators, your computer needs to meet certain hardware and software requirements.
 
-*   Apple computer with a x86-64 CPU (64-bit Intel Core 2 Duo, Intel Core i3, Intel Core i5, Intel Core i7, or Xeon processor.)
+*   Apple computer with a x86-64/M1/M2 CPU
 *   150 GB of internal storage
 *   4 GB of memory
 *   Network interface card
@@ -84,14 +84,15 @@ Launch the App Post Successful Build
 2.	From the main menu, navigate to Build, select **Build Native Local**. 
 3.	From the Post Build Action drop-down list, select **Generate Native App or Run on my Device/Emulator**.
 4.	From the **Platforms and Channels** section, choose the channel(s) you want to build.
-5.	Click **Build**. Once the build is complete, details of the generated binaries appear in the Build tab. You can see sections based on what channels you selected (i.e. Mobile, Tablet, Universal, Wearables).
+5.	Click **Build**. Once the build is complete, details of the
+    generated binaries appear in the Build tab. You can see sections based on what channels you selected (i.e. Mobile, Tablet, Universal, Wearables).
 
-If you selected **Run on my Device/Emulator** under the Post Build Action tab, the application installs and runs on the selected simulator.
+    If you selected **Run on my Device/Emulator** under the Post Build Action tab, the application installs and runs on the selected simulator.
 
-If you selected **Generate Native App** under the Post Build Action tab, then Volt MX Iris builds the app, and you will need to run the application manually. 
+    If you selected **Generate Native App** under the Post Build Action tab, then Volt MX Iris builds the app, and you will need to run the application manually. 
 
 
-![](Resources/Images/Emulators_21AVDs3_672x241.png)
+    ![](Resources/Images/Emulators_21AVDs3_672x241.png)
 
 
 6.	Click **Run**. The Run on my local device window appears. This displays the list of simulators on which you can launch your app.
