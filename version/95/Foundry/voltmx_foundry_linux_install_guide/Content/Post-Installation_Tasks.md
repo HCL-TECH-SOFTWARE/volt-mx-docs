@@ -2,11 +2,9 @@
 
 You are here: How to Add an Installer Generated Self-Signed SSL Certificate to Cacerts
 
-Post-Installation Tasks
-=======================
 
-Configuring Secure Sockets Layer (SSL) Certificate
-==================================================
+Configuring Secure Sockets Layer (SSL) Certificate - Post-Installation Tasks
+==============================================================================
 
 You can troubleshoot trusted certification issues.
 
