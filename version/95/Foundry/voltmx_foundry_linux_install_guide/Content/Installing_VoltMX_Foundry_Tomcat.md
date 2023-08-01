@@ -292,7 +292,7 @@ You have installed only Console on one node. The installer creates these three d
       
 When you install the integration with or without one or more components (identity, or Engagement Services ) on a separate node, the installer displays the **Reports Database Name** field in the **Database Details** window. If the installer prompts you to enter the existing reports db, enter the reports database name (for example, `voltmxmfreportsdb1`) in the **Database Details window > Reports Database Name** field.  
       
-Refer to [creating a reports database, for example, **&lt;prefix>mfreports&lt;suffix>**](#reports-database).
+Refer to [creating a reports database](#reports-database), for example, **&lt;prefix>mfreports&lt;suffix>**.
 
 <ol>
   <li value="10">Press <b>Enter</b> to continue the installation. The Install Folder details appear.</li>

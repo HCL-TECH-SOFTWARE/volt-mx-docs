@@ -243,7 +243,7 @@ Additional Configuration Properties allows you to configure service call time ou
 <tr>
 <td>Front-end API</td>
 <td>
-Front-end API allows you map your endpoint ](or) backend URL of an operation to a front-end URL. For detailed information, refer Custom <a href="FrontEndAPI.md">Front-end URL</a>.
+Front-end API allows you map your endpoint ](or) backend URL of an operation to a front-end URL. For detailed information, refer Custom <a href="FrontEndAPI.html">Front-end URL</a>.
 </td>
 </tr>
 <tr>
