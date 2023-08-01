@@ -232,7 +232,7 @@ ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
       
     When you install the integration with or without one or more components (identity, or Engagement Services ) on a separate node, the installer displays the **Reports Database Name** field in the **Database Details** window. If the installer prompts you to enter the existing reports db, enter the reports database name (for example, `voltmxmfreportsdb1`) in the **Database Details window > Reports Database Name** field.  
       
-    Refer to [creating a reports database, for example, **&lt;prefix>mfreports&lt;suffix>**](#reports-database).
+    Refer to [creating a reports database](#reports-database), for example, **&lt;prefix>mfreports&lt;suffix>**.
     
 5.  Press **Enter** to continue the installation. The _Install Folder_ details appear.
     
