@@ -272,7 +272,7 @@ The following installation types are supported for new installation:
 *   **Engagement Services** - To install Volt MX Foundry Engagement Services, type 5 and press **Enter**.  
         The system creates the following database: `<prefix>vpnsdb<suffix>`.
     
-**Reports Database**
+## Reports Database
     
 The reports database is used for configuring reports.
     
@@ -282,7 +282,7 @@ The Installer creates the `mfreportsdb` if you choose either Console or Integrat
 *   **Console** and **Integration Services** (with or without Engagement Services)
 *   **Integration Services** without Console (with or without Engagement Services)
     
-Reports Database for Integration on a Separate Node:
+## Reports Database for Integration on a Separate Node:
     
 While installing console and integration on separate nodes, the installer prompts you to point the reports database during the integration installation.  
       
