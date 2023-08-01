@@ -934,7 +934,7 @@ ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
   <li value="22">To start the server automatically after the successful installation of Volt MX Foundry, press <b>Enter.</b></li>
 </ol>
 
-> **_Note:_** To start the server manually after the successful installation of Volt MX Foundry, refer to [Starting Volt MX Foundry Console](../../../Foundry/voltmx_foundry_manual_install_guide/Content/Starting_VoltMX_MobileFoundry_Console.md).
+> **_Note:_** To start the server manually after the successful installation of Volt MX Foundry, refer to [Starting Volt MX Foundry Console](../../voltmx_foundry_manual_install_guide/Content/Starting_VoltMX_MobileFoundry_Console.md).
 
 The _Pre-Installation Summary_ details appear.
 
