@@ -17,4 +17,4 @@ The document helps you familiarize with the Volt MX Foundry and provide procedur
 - [Security Hardening](Hardening_Guide.md)
 - [Deployment Checklist and Example Case Studies](Deployment_Checklist.md)
 
-You can also access the [Preface](Preface.md), [Revision History](voltmx_Foundry_deployment_guide.md) and [FAQs and Troubleshooting](FAQs.md).
+You can also access the [FAQs](FAQs.md).
