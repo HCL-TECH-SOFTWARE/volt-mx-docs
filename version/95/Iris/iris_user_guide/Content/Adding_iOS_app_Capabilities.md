@@ -39,7 +39,6 @@ The following are the capabilities you can add to **voltmx_iris_configuration.js
 *   com.apple.developer.in-app-payments
 *   com.apple.developer.networking.wifi-info
 *   com.apple.developer.networking.multipath
-*   com.apple.developer.weatherkit
 *   com.apple.developer.storekit.external-link.account
 *   com.apple.developer.storekit.external-purchase
 *   com.apple.developer.weatherkit
