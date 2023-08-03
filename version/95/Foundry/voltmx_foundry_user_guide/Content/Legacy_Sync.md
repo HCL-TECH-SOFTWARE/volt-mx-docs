@@ -231,8 +231,7 @@ Defining Sync Objects
     
     ![](Resources/Images/FS_Filters_501x339.png)
     
-    <!-- > **_Note:_**   [OAuth 2.0](Identity10_VoltMX_OAuth2.md#foundry-oauth-2-0-identity-service) provides ability to retrieve and save user attributes in VoltMX Foundry  Identity Sessions after a successful login response and uses them as client filters during Legacy Sync calls. For example, User Role (one of the attributes of the user profile) received as part of User Profile after a successful [OAuth 2.0](Identity10_VoltMX_OAuth2.md#OAuth2ID) login can be used as client-side filter for Legacy Sync. For more details, refer to [Synchronization > client-side filters](Synchronization.md). -->
-    > **_Note:_**   [OAuth 2.0](Identity10_VoltMX_OAuth2.md#foundry-oauth-2-0-identity-service) provides ability to retrieve and save user attributes in VoltMX Foundry  Identity Sessions after a successful login response and uses them as client filters during Legacy Sync calls. For example, User Role (one of the attributes of the user profile) received as part of User Profile after a successful [OAuth 2.0](Identity10_VoltMX_OAuth2.md#OAuth2ID) login can be used as client-side filter for Legacy Sync. For more details, refer to [Synchronization > client-side filters](#filters).
+    > **_Note:_** [OAuth 2.0](Identity10_VoltMX_OAuth2.md) provides ability to retrieve and save user attributes in Volt MX Foundry Identity Sessions after a successful login response and uses them as client filters during Legacy Sync calls. For example, User Role (one of the attributes of the user profile) received as part of User Profile after a successful [OAuth 2.0](Identity10_VoltMX_OAuth2.md) login can be used as client-side filter for Legacy Sync. For more details, refer to [Synchronization > client-side filters](#filters).
     
     <p id="filters"></p>
 
