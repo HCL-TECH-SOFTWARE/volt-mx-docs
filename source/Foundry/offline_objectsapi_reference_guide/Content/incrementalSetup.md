@@ -7,7 +7,7 @@ The Offline Objects **incrementalSetup** API allows the client application to co
 
 > **_Note:_** Either **setup** or **incrementalSetup** API must be invoked on first time launch of the app.  
 
-> **_Note:_** End user should have the latest schema (to fetch, the app needs to call an incremental setup API) in the device before doing an app upgrade. 
+> **_Note:_** End users should have the latest schema (for the currently installed version) in the device before doing an app upgrade. To fetch the latest schema, the app needs to call an incremental setup API.
 
 **Scenarios that are supported in incrementalSetup:**
 
