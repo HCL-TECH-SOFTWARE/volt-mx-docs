@@ -13,7 +13,6 @@ Before you start using the Micro Apps feature, you must first configure the Base
 
 From the V9 Service Pack 5 release, you can package logic for the app's wearables (such as Forms, Glances, Notifications, and Modules) in a linked Micro App. HCL recommends that you maintain all the logic for the app's wearables in a single Micro App to avoid issues during the build process.
 
-To switch between Micro Apps in the Storyboard view, from the title bar above the canvas, select the Micro App from the app name list.
 
 ![](Resources/Images/CompositeApp.png)
 

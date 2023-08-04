@@ -38,6 +38,8 @@ Components and Volt MX Reference Architecture
 
 When you create a component in either a Free Form Java Script or in a Volt MX Reference Architecture project, Volt MX Iris automatically creates one Controller.js and one ControllerActions.js file. Consequently, any component that is created contains Volt MX Reference Architecture modules by default.
 
+In controller.js file you can add any custom javascript code like custom functions etc. The ControllerActions.js file which is a masked or read only file, gets updated automaticaly, when you opt for adding low code option (actions that can be chosen via action editor), for widgets that you add in your forms in the app.
+
 > **_Note:_** From Iris V9 onwards, the ControllerActions.js files in an application are not committed to GIT to avoid any conflicts. If your application was created before Iris V9 release, you must move the ControllerActions.js files to the .gitignore folder manually.
 
 For more information about components, refer the [Creating Applications With Components](../../../Iris/iris_user_guide/Content/C_DesigningWorkingWithComponents.md) section in the [VoltMX Iris User Guide](../../../Iris/iris_user_guide/Content/Introduction.md).
