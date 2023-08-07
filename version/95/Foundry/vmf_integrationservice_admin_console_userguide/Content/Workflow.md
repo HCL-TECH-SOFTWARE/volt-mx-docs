@@ -5,7 +5,7 @@ Volt MX  Foundry console User Guide: Workflow Instances List Page
 Workflow Services
 =================
 
-It lists all the Workflow Services that were published to the current environment from Volt MX Foundry Console. You can view all the instances of the Workflow that were triggered from here and the run-time status of each triggered instance from here. To know more about Workflow service, refer [Workflow Service](../../../Foundry/voltmx_foundry_user_guide/Content/Workflow.md).
+It lists all the Workflow Services that were published to the current environment from Volt MX Foundry Console. You can view all the instances of the Workflow that were triggered from here and the run-time status of each triggered instance from here. To know more about Workflow service, refer [Workflow Service](../../../Foundry/voltmx_foundry_workflow/Content/Workflow.md).
 
 Click the **Workflow Services** from the left pane of the App Services to view the list of Workflow services.
 
@@ -153,7 +153,7 @@ The following steps help you to fix this data error issue in the runtime and exe
 
 In this case, the issue must be fixed in the Foundry app and republish the app to the runtime server. And then you must Retry the task to be executed again using the **Retry Details** dialog box in Admin Console.
 
-Use Case: In this example, in the [**Loan\_Approval** sample application](../../../Foundry/voltmx_foundry_user_guide/Content/Workflow_Implementation.md), due to a wrong back-end URL, the **Calculate Interest Rate** service task is failed. Here, the back-end server is unable to process the request. In the following sample screen shot, the back-end URL has missing of one `slash (/)`.
+Use Case: In this example, in the [**Loan\_Approval** sample application](../../../Foundry/voltmx_foundry_workflow/Content/Workflow_Implementation.md), due to a wrong back-end URL, the **Calculate Interest Rate** service task is failed. Here, the back-end server is unable to process the request. In the following sample screen shot, the back-end URL has missing of one `slash (/)`.
 
 [![](Resources/Images/ServiceURLFail1_thumb_0_48.png)](Resources/Images/ServiceURLFail1.png)  
 

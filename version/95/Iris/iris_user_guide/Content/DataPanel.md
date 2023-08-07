@@ -280,7 +280,7 @@ The **Configure Workflow Service** window appears.
 7.  From the **Linked Object** list, select the object to which you want to link the new Workflow service. You can either select an existing Object service or Create a new Object service.  
     
 8.  From the **Nodes** pane, drag and drop the required nodes onto the canvas to create a process.  
-    For more information on how to create a Backend Workflow service, click [here](../../../Foundry/voltmx_foundry_user_guide/Content/Workflow.md#Create).
+    For more information on how to create a Backend Workflow service, click [here](../../../Foundry/voltmx_foundry_workflow/Content/Workflow.md#Create).
 9.  Click **Save**. The service is created and appears in the Project Services list. The Workflow service invokes when you drag and drop the associated Object service onto a form and start using it.  
     
 
