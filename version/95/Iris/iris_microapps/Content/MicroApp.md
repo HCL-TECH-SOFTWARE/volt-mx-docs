@@ -50,7 +50,7 @@ Create a Micro App
 Follow these steps to create a new Micro App in Volt MX Iris:
 
 1.  Create a new project as a Base App.
-2.  From the **Project** menu, select **New Micro App**.  
+2.  From the **Project** menu, select **New Project**.  
     The Project Name dialog box appears.
 3.  Type a name for the Micro App, and then click **Create**.
 
