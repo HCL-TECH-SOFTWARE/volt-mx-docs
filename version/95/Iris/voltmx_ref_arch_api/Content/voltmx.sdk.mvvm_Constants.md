@@ -24,7 +24,7 @@ Specifies the operation to be performed.
 
 ### Remarks
 
-Use these constants to specify data model operations when performing form navigation. For more information, see [voltmx.sdk.mvvm.NavigationObject Object](NavigationObject.md).
+Use these constants to specify data model operations when performing form navigation. For more information, see [voltmx.sdk.mvvm.NavigationObject Object](Navigation_Object.md).
 
 * * *
 
