@@ -20,11 +20,11 @@ The **MetricsService** class sets the configuration for APM event reporting.
 
 ```
  //Sample code to create an instance of MetricService with variable name "getMetricsService"
-mVoltMXClient = new VoltMXClient();
+mKonyClient = new KonyClient();
 MetricsService metricsClient = null;
 try {
-    metricsClient = mVoltMXClient.getMetricsService();
-} catch (VoltMXCMSException e) {
+    metricsClient = mKonyClient.getMetricsService();
+} catch (KonyCMSException e) {
     e.printStackTrace();
 ```
 
@@ -45,7 +45,7 @@ metricsClient.setUserId(mUserId);
 The **sendEvent** API allows a developer to send event details from an application to server for analytics and reporting purposes. The event data is added to a buffer and sent to server as per configuration values set by the developer using setEventConfig API.
 
 ```
- //Sample code to send reports
+  //Sample code to send reports
 String eventSubType = "<event-sub-type>";
 String formID = "<form-id>";
 String widgetID = "<widget-id>";
@@ -53,7 +53,7 @@ String flowTag = "<flow-tag>";
 String metaData = "<meta-data>";
 try {
     metricsClient.sendEvent(MetricsService.EventType.EVENT_TYPE_CUSTOM, eventSubType, formID, widgetID, flowTag, metaData);
-} catch (VoltMXCMSException e) {
+} catch (KonyCMSException e) {
     e.printStackTrace();
 }
 ```
@@ -115,7 +115,7 @@ The **setFlowTag** API sets an event flow tag to be associated with all new even
  //Sample code to setFlowTagString myFowTag = "<flow-tag>";
 try {
     metricsClient.setFlowTag(myFowTag);
-} catch (VoltMXCMSException e) {
+} catch (KonyCMSException e) {
     e.printStackTrace();
 }
 ```
@@ -144,14 +144,14 @@ String mFlowTag = metricsClient.getFlowTag();
 The **reportError** API enables an app to report an error event to metrics server.
 
 ```
- //Sample code to reportError
+  //Sample code to reportError
 String errorcode = "<error-code>";
 String errorType = "<error-type>";
 String errorMessage = "<error-message>";
 String errorDetails = "<error-details>";
 try {
     metricsClient.reportError(errorcode, errorType, errorMessage, errorDetails);
-} catch (VoltMXCMSException e) {
+} catch (KonyCMSException e) {
     e.printStackTrace();
 }
 ```
@@ -168,14 +168,14 @@ try {
 The **reportHandledException** API enables apps to report a handled exception event.
 
 ```
- //Sample code to send exception to metrics server
+  //Sample code to send exception to metrics server
 String exceptioncode = "<exception-code>";
 String exceptionType = "<exception-type>";
 String exceptionMessage = "<exception-message>";
 String exceptionDetails = "<exception-details>";
 try {
     metricsClient.reportHandledException(exceptioncode, exceptionType, exceptionMessage, exceptionDetails);
-} catch (VoltMXCMSException e) {
+} catch (KonyCMSException e) {
     e.printStackTrace();
 }
 ```
@@ -192,12 +192,12 @@ try {
 The **setEventConfig** API takes the required values to set the event configuration values. When eventConfigType is - CONF\_TYPE\_BUFFER event autoFlushCount and maxBufferCount are considered.  
 
 ```
- //Sample code to setEventConfig
+  //Sample code to setEventConfig
 int autoFlushCount = 20;
 int maxBufferCount = 800;
 try {
     metricsClient.setEventConfig(MetricsService.EventConfigType.CONF_TYPE_BUFFER, autoFlushCount, maxBufferCount);
-} catch (VoltMXCMSException e) {
+} catch (KonyCMSException e) {
     e.printStackTrace();
 }
 ```
@@ -219,7 +219,7 @@ The **setBatchSize** API allows a developer to specify the batch size to be set 
  //Sample code to set batch size to flush eventsint batchSize = 20;
 try {
     metricsClient.setBatchSize(batchSize);
-} catch (VoltMXCMSException e) {
+} catch (KonyCMSException e) {
     e.printStackTrace();
 }
 ```

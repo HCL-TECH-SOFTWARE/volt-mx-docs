@@ -49,7 +49,7 @@ System.Exception is thrown when not initialized or the service is not defined.
 #### Example
 
 ```
- // Sample code to retrieve the IdentityService instance.VoltMX.IdentityService identity;
+ // Sample code to retrieve the IdentityService instance.Kony.IdentityService identity;
 string providerName = < your - provider - name > ;
 try {
     identity = sdkObject.GetIdentityService(providerName);
@@ -115,9 +115,9 @@ A Volt MX FoundryException is thrown if the provider is Volt MX and **userID** o
 Synchronous
 
 ```
- // Sample code to login synchronously.
+  // Sample code to login synchronously.
 // sdkObject is the SDK object.
-VoltMX.IdentityService identity;
+Kony.IdentityService identity;
 string providerName = < your - provider - name > ;
 string username = < username -
 for -your - provider > ;
@@ -140,8 +140,8 @@ try {
 Asynchronous
 
 ```
- // Sample code to login asynchronously.// sdkObject is the SDK object.
-VoltMX.IdentityService identity;
+  // Sample code to login asynchronously.// sdkObject is the SDK object.
+Kony.IdentityService identity;
 string providerName = < your - provider - name > ;
 string username = < username -
 for -your - provider > ;
@@ -212,7 +212,6 @@ Volt MX  FoundryException is thrown if the provider claims token is invalid.
 Synchronous
 
 ```
- 
 // Sample code to get backend token for provider synchronously.
 string username = < username - for -logged - in -provider > ;
 string password = < password - for -logged - in -provider > ;
@@ -220,7 +219,7 @@ bool fromServer = < true / false > ;
 Dictionary < string, string > parameters = new Dictionary < string, string > ();
 parameters.userid = username;
 parameters.password = password;
-VoltMX.ProviderToken backendToken;
+Kony.ProviderToken backendToken;
 
 try {
     backendToken = userstore.GetBackendToken(fromServer, parameters);
@@ -233,7 +232,6 @@ try {
 Asynchronous
 
 ```
- 
 // Sample code to get backend token for provider asynchronously.
 string username = < username - for -logged - in -provider > ;
 string password = < password - or -logged - in -provider > ;
@@ -241,7 +239,7 @@ bool fromServer = < true / false > ;
 Dictionary < string, string > parameters = new Dictionary < string, string > ();
 parameters.userid = username;
 parameters.password = password;
-VoltMX.ProviderToken backendToken;
+Kony.ProviderToken backendToken;
 
 try {
     backendToken = await userstore.GetBackendTokenAsync(fromServer, parameters);
@@ -298,10 +296,10 @@ Volt MX  Foundry Exception is thrown if the provider claims token is invalid.
 Synchronous
 
 ```
- // Sample code to get user profile details synchronously.
+  // Sample code to get user profile details synchronously.
 // identity is the IdentityService object.
 bool fromServer = < true / false > ;
-VoltMX.Profile profile = identity.GetProfile(fromServer);
+Kony.Profile profile = identity.GetProfile(fromServer);
 if (profile == null) {
     Console.WriteLine("Unable to get profile");
 }
@@ -310,13 +308,13 @@ if (profile == null) {
 Asynchronous
 
 ```
- // Sample code to get user profile details asynchronously.
+  // Sample code to get user profile details asynchronously.
 // identity is the IdentityService object.
 bool fromServer = < true / false > ;
-VoltMX.Profile profile = await identity.GetProfileAsync(fromServer);
+Kony.Profile profile = await identity.GetProfileAsync(fromServer);
 if (profile == null) {
     Console.WriteLine("Unable to get profile");
-}		
+}			
 ```
 
 Get Provider Name

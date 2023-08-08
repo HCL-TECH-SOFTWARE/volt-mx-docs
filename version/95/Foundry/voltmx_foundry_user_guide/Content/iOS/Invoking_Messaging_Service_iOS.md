@@ -22,12 +22,12 @@ Registering and Getting Messages from Volt MX Foundry Messaging
 
 To register, use the following code snippet to call the method. To send a message to the registered device, go to Volt MX Foundry portal and send the message. You will receive a push notification message.
 
-In the - (BOOL)application:(UIApplication \*)application didFinishLaunchingWithOptions:(NSDictionary \*), launchOptions method registers for remote notification and calls the HCLClient Intialize method. For more details, refer [Initializing the Volt MX Foundry Client SDK](#Initiali)
+In the - (BOOL)application:(UIApplication \*)application didFinishLaunchingWithOptions:(NSDictionary \*), launchOptions method registers for remote notification and calls the KNYClient Intialize method. For more details, refer [Initializing the Volt MX Foundry Client SDK](#Initiali)
 
 In the - (void)application:(UIApplication \*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData \*) deviceToken method, call the following code to register and receive push notifications.
 
 ```
- HCLMessagingService * messaging = [HCLMessagingService sharedMessagingService];
+ KNYMessagingService * messaging = [KNYMessagingService sharedMessagingService];
 
 //
 // Register with Messaging Service:
@@ -49,7 +49,7 @@ NSData * deviceToken;
 ];
 ```
 
-> **_Note:_** Call these methods only after successful completion of -\[HCLClient initializeInBackgroundWithAppKey:appSecret:serviceURLString:completion\]. For more details, refer to [Init method](#NoteInit).  
+> **_Note:_** Call these methods only after successful completion of -\[KNYClient initializeInBackgroundWithAppKey:appSecret:serviceURLString:completion\]. For more details, refer to [Init method](#NoteInit).  
 
 Unregistering from Messaging Service
 ------------------------------------
