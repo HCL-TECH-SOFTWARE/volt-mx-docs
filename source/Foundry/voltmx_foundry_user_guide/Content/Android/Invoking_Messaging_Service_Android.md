@@ -33,7 +33,7 @@ Import the following Libraries:
 ### Sample Code
 
 ```
- // Sample code to register to messaging 
+  // Sample code to register to messaging 
 
 Context context = getApplicationContext();
 String SENDER_ID = < your - project - number - from - google > ;
@@ -43,8 +43,8 @@ String deviceId = Secure.getString(context.getContentResolver(), Secure.ANDROID_
 String ufid = < your - ufid > ;
 
 try {
-    messagingClient = new VoltMXClient().getMessagingService();
-} catch (VoltMXException exception) {
+    messagingClient = new KonyClient().getMessagingService();
+} catch (KonyException exception) {
     Log.d("Exception", exception.getMessage());
 }
 messagingClient.registerInBackground(gcmRegistrationID, UFID, deviceID, new MessagingCallback() {

@@ -19,8 +19,8 @@ Login with provider type as Basic
 
 ```
  // Sample code to log in using basic type provider
-HCLIdentityService * identityService = [
-    [HCLIdentityService alloc]
+KNYIdentityService * identityService = [
+    [KNYIdentityService alloc]
     initWithIdentityName: @"<identity-name>"
 ];
 
@@ -47,8 +47,8 @@ Login with provider type as OAuth/SAML
 
 ```
 // Sample code to log in using Oauth/SAML type provider
-HCLIdentityService * identityService = [
-    [HCLIdentityService alloc] initWithIdentityName: @"&lt;identity-name&gt;"
+KNYIdentityService * identityService = [
+    [KNYIdentityService alloc] initWithIdentityName: @"&lt;identity-name&gt;"
 ];
 
 UIView * loginView = nil;
@@ -71,9 +71,9 @@ Custom OAuth Login
 
 ```
  // Sample code to Custom OAuth / Custom login
-HCLIdentityService *identityService = 
+KNYIdentityService *identityService = 
 [
-    [HCLIdentityService alloc]
+    [KNYIdentityService alloc]
     initWithIdentityName: @"<identity-name>"
 ];
 
