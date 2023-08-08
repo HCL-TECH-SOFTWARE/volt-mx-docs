@@ -79,4 +79,4 @@ If the TargetSDK API Level of the app is 33 and app is using below Voltmx api’
 *	ImageObject.writeToMediaGallery
 *	ImageObject.findImageInGallery
 
-If your app was previously granted the **READ_EXTERNAL_STORAGE** permission, then any requested **READ_MEDIA_** permissionsare granted automatically when upgrading.
+If your app was previously granted the **READ_EXTERNAL_STORAGE** permission, then any requested **READ_MEDIA_** * permissions are granted automatically when upgrading.
