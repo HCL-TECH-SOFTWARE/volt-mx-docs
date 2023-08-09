@@ -82,15 +82,10 @@ Launch the App Post Successful Build
 
 1.	Open your project in Volt MX Iris.
 2.	From the main menu, navigate to Build, select **Build Native Local**. 
-3.	From the Post Build Action drop-down list, select **Generate Native App or Run on my Device/Emulator**.
+3.	From the Post Build Action drop-down list, select **Generate Native App**.
 4.	From the **Platforms and Channels** section, choose the channel(s) you want to build.
-5.	Click **Build**. Once the build is complete, details of the
-    generated binaries appear in the Build tab. You can see sections based on what channels you selected (i.e. Mobile, Tablet, Universal, Wearables).
-
-    If you selected **Run on my Device/Emulator** under the Post Build Action tab, the application installs and runs on the selected simulator.
-
-    If you selected **Generate Native App** under the Post Build Action tab, then Volt MX Iris builds the app, and you will need to run the application manually. 
-
+5.	Click **Build**. Once the build is complete, details of the generated binaries appear in the build tab. You can see sections based on what channels you selected (i.e. Mobile, Tablet, Universal, Wearables).
+    
 
     ![](Resources/Images/Emulators_21AVDs3_672x241.png)
 
