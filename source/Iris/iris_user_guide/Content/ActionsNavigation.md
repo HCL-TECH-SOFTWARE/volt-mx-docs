@@ -40,7 +40,7 @@ To define an action sequence for executing a loop action, do the following:
     
 5.  Click **Save** to save the action sequence, and then close the Action Editor window.
 
-### Add Local Variable
+### Add Variable
 
 To define an action sequence to add a local variable, do the following:
 
@@ -48,7 +48,7 @@ To define an action sequence to add a local variable, do the following:
     The widget is highlighted on the Iris Canvas.
 2.  Right-click the widget and then select one of the actions for example, onTouchStart.  
     The Action Editor window opens and an action sequence is created.
-3.  From the **General** section along the left column of the Action Editor, click **Add Local Variable**.  
+3.  From the **General** section along the left column of the Action Editor, click **Add Variable**.  
     The action is added to the action sequence and is the current action of focus.
 4.  In the properties pane of the Action Editor, in the **Name** text box, enter a name for the variable.
 5.  From the **Value Type** list, select a value type, either **Constant** or **Expression**.
