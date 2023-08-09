@@ -379,4 +379,3 @@ To view your Sync Console, click **Sync Services** from your cloud account Envir
 
 ![](Resources/Images/OnPrem/SyncServer-Onpremises_632x227.png)
 
-For more details on Sync Console, refer to the following document: [Sync Console](../../../Foundry/voltmx_sync_console_user_guide/Content/Homepage.md)
