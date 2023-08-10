@@ -446,7 +446,7 @@ Click **Done**.![](Resources/Images/EAS-Anroid-PackageName_587x677.png)
 
 ### Adding Contact Us Form and Support Details
 
-You can add new forms to your EAS App as per your business requirements. For example, to add the **Contact Us** form to your EAS App and provide a link to the new form within the **StoreModule > fromStore** form. The following steps details how to add a **Contact Us** form, provide contact details, and links to the form for a Mobile channel. In this example, you will be using the sample component: **privacypreferences**, which contains ready-to-use text placeholder and action buttons to navigate between forms. > **_Important:_** While modifying the source app, ensure that you follow [VoltMX Reference Architecture and Extensibility Guidelines](../../../Iris/voltmx_ref_arch_api/Content/MVVM_Overviews_DeeperLook.md) lines to support product upgrades. Add new form to the project as follows:
+You can add new forms to your EAS App as per your business requirements. For example, to add the **Contact Us** form to your EAS App and provide a link to the new form within the **StoreModule > fromStore** form. The following steps details how to add a **Contact Us** form, provide contact details, and links to the form for a Mobile channel. In this example, you will be using the sample component: **privacypreferences**, which contains ready-to-use text placeholder and action buttons to navigate between forms. > **_Important:_** While modifying the source app, ensure that you follow [VoltMX Reference Architecture and Extensibility Guidelines](../../../Iris/voltmx_ref_arch_api/Content/A_Deeper_Look_at_VoltMX_Reference_Architecture.md) lines to support product upgrades. Add new form to the project as follows:
 
 In **Iris**, open the **Store** project, and ensure you are in the **DESIGN** mode.Click **Store project > Mobile**, right-click **Forms**, and click **New Group**. Right-click the NewGroup and rename the new group to `ContactUS`.Right-click the ContactUS Group, and click **New Form**. Rename the new form to `frmContactUs`.
 
@@ -581,7 +581,7 @@ You can add new forms to your EAS App as per your business requirements.
 
 For example, to add the **Contact Us** form to your EAS App and provide a link to the new form within the **StoreModule > fromStore** form. The following steps details how to add a **Contact Us** form, provide contact details, and links to the form for a Mobile channel. In this example, you will be using the sample component: **privacypreferences**, which contains ready-to-use text placeholder and action buttons to navigate between forms.
 
-> **_Important:_** While modifying the source app, ensure that you follow [VoltMX Reference Architecture and Extensibility Guidelines](../../../Iris/voltmx_ref_arch_api/Content/MVVM_Overviews_DeeperLook.md) lines to support product upgrades.
+> **_Important:_** While modifying the source app, ensure that you follow [VoltMX Reference Architecture and Extensibility Guidelines](../../../Iris/voltmx_ref_arch_api/Content/A_Deeper_Look_at_VoltMX_Reference_Architecture.md) lines to support product upgrades.
 
 1.  Add new form to the project as follows:
     1.  In **Iris**, open the **Store** project, and ensure you are in the **DESIGN** mode.

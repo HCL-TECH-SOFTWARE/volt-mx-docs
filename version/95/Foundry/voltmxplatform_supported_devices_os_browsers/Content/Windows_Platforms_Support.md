@@ -1,10 +1,7 @@
                             
-
-Volt MX  Iris Suppported Devices, OSes, and Browsers Guide: [Supported Devices for Quatum AppPlatform](Supported_Devices.md) > [Windows Platform](Supported_Devices.md#windows-platform) > Windows Desktop
-
 ### Windows Desktop
 
-The apps built for this platform work on Windows 7, Windows 8/8.1, and Windows 10. Forms are created under the **desktop** section in [VoltMX Iris](../../../Iris/iris_user_guide/Content/NewLocationsOfFamiliarFeatures.md).
+The apps built for this platform work on Windows 7, Windows 8/8.1, and Windows 10.
 
 #### Environment
 
