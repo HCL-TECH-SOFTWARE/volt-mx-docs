@@ -93,8 +93,6 @@ To download Volt MX Iris on your Mac computer, follow these steps:
 
    [![](Resources/Images/download_site.png)](Resources/Images/download_site.png)
 
-You can view the [Preface](Preface.md) and [Revision History](homepage.md) here.
-
 - [Prerequisites](#prerequisites)
   - [System Requirements](#system-requirements)
   - [Download Volt MX Iris](#download)
