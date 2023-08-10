@@ -14,7 +14,7 @@ The arc of activity from the time an app is launched and enters a device's memor
 
 You can exit the Volt MX App from your application using the voltmx.application.exit() API. When you invoke the voltmx.application.exit() API in your application, it terminates the application along with the Volt MX App. For more information on the voltmx.application.exit() API, refer the [API Guide](../../../Iris/iris_api_dev_guide/content/voltmx.application_functions.md#voltmxapp).
 
-The Volt MX App helps in performing all the mentioned app Life cycle events on your app. Open your application with the Volt MX App (refer to [Preview an App on a Device](PreviewAnAppOnADevice.md)), and execute the app Life cycle events existing in your application.
+The Volt MX App helps in performing all the mentioned app Life cycle events on your app. Open your application with the Volt MX App (refer to [Preview an App on a Device](FunctionalPreviewStarter.md)), and execute the app Life cycle events existing in your application.
 
 ## Form Life cycle Events
 
