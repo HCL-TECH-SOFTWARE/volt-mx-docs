@@ -8,8 +8,6 @@ Volt MX  Iris is a powerful yet easy-to-use integrated development environment (
 
 Volt MX  Iris allows you to create applications visually by dragging widgets from the Widget Library, and dropping them onto a form or other container object, quickly creating the user interface for a mobile application. These widgets have properties that can be set in Volt MX Iris, and can also be set and modified by code you write as part of your application.
 
-For information on revision history, click [Revision History](Revision_History_Home.md).
-
 The Volt MX Iris Widget Programmers' Guide describes each widget, its properties, and how you can write JavaScript code to change properties and control the behavior of widgets within your application.
 
 Widgets Overviews
