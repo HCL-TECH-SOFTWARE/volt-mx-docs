@@ -43,7 +43,7 @@ Specifies the content source for the Cordova Browser widget. Click **Edit** butt
 
 *   **Content.** Displays a text field where you enter or paste the HTML content to be displayed.
 *   **URL.** Displays a text box where you specify the URL of an HTML page to display. The URL must begin with http:// .
-*   **Local File.** Displays a text box where you specify a local web-based file for launching local HTML content, such as a web app. For more information, see [Add Local HTML Content](AddLoca.mdContent.md).
+*   **Local File.** Displays a text box where you specify a local web-based file for launching local HTML content, such as a web app. For more information, see [Add Local HTML Content](AddLocalHTMLContent.md).
 
 #### Detect Phone Number
 
