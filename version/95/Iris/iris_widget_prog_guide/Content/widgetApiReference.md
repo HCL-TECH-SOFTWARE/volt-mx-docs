@@ -9,7 +9,7 @@ Learn to access scoped storage on Android apps that use targetSDK version 29 or 
 ### [Widget Programmer's Guide](../../../Iris/iris_widget_prog_guide/Content/Overview.md)
 Familiarize with all the widgets available in Volt MX Iris along with their properties, events, and methods. Learn how to write JavaScript code to change properties and control the behavior of widgets within your application.
 
-### [Wearables Developer's Guide](../../../Iris/iris_wearables_dev_guide/content/hom.md.md)
+### [Wearables Developer's Guide](../../../Iris/iris_wearables_dev_guide/content/homehtml.md)
 Learn how to use Volt MX Iris to develop applications for Apple Watch and receive notifications on Android Wear.
 
 ### [Native Function APIs](../../../Iris/iris_nf_api_dev_guide/content/native_function.md)

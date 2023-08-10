@@ -102,7 +102,7 @@ To configure a service definition for a MuleSoft service, do the following:
                 This is applicable for Cloud and On-premises.
                 
     5.  To enable the proxy, select the **Use proxy from settings** check box. By default, the check box is cleared.  
-        The **Use proxy from settings** check box dims when no proxy is configured under the ****[Settings > Proxy](../../../MBaasDocs/ConsoleAndID/Foundry8.0ConsoleAndIDSrvUG/Content/Settings.md#Proxy)****.
+        The **Use proxy from settings** check box dims when no proxy is configured under the ****[Settings > Proxy](../../../Foundry/voltmx_foundry_user_guide/Content/Settings.md#proxy)****.
     6.  Click **SAVE** to save your service definition. The system displays the success message: Service Saved Successfully.  
         The **Operations List** tab appears only after the **Service Definition** is saved. For creating operations for a MuleSoft service, refer to [How To Create Operations for MuleSoft Service.](#create-operations-for-a-mulesoft-service)  
         

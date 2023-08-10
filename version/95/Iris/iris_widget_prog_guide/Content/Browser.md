@@ -180,7 +180,7 @@ The Browser widget capabilities can be broadly categorized into the following:
 | [enableSafeBrowsing](../../../Iris/iris_widget_prog_guide/Content/Browser_Properties.md#enableSafeBrowsing) | Enables or disables the Safe Browsing feature in a Browser widget. |
 | [enableSoftwareRendering](Browser_Properties.md#enableSoftwareRendering) | Sets the rendering of the browser contents using software, not hardware. |
 | [enableThirdPartyCookies](Browser_Properties.md#enableThirdPartyCookies) | Specifies if third party cookies must be enabled. |
-| [.htmlString](Browser_Properties.md.mdString) | Specifies the HTML content for the Browser widget. |
+| [.htmlString](Browser_Properties.md#htmlString) | Specifies the HTML content for the Browser widget. |
 | [opacity](Browser_Properties.md#opacity) | Specifies the opacity of the widget. |
 | [playVideoInFullScreen](Browser_Properties.md#playVideoInFullScreen) | You can use this property to enable Full Screen viewing of videos in webpages in Browser widget. |
 | [requestURLConfig](Browser_Properties.md#requestURLConfig) | Specifies the configurations for the requested URL in key-value pairs as a JavaScript object. |
