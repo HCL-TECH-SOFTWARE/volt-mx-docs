@@ -200,6 +200,6 @@ The Volt MX Microservices Framework Server Tools provide server-side objects tha
 Use Volt MX Reference Architecture for Volt MX Wearables Apps
 -------------------------------------------------------------
 
-It is important to note that you can create a [VoltMX Wearables](../../../Iris/iris_wearables_dev_guide/content/hom.md.md) app under Volt MX Reference Architecture . For example, Volt MX Wearables enables you to develop apps for the Apple Watch. When you create an Apple Watch app, you can use Volt MX Iris to create the app's forms. However, Volt MX Iris does not create Controllers for the forms in an Apple Watch app because the Apple Watch app has its own specific architecture.
+It is important to note that you can create a [VoltMX Wearables](../../../Iris/iris_wearables_dev_guide/content/homehtml.md) app under Volt MX Reference Architecture . For example, Volt MX Wearables enables you to develop apps for the Apple Watch. When you create an Apple Watch app, you can use Volt MX Iris to create the app's forms. However, Volt MX Iris does not create Controllers for the forms in an Apple Watch app because the Apple Watch app has its own specific architecture.
 
 In addition, you can add Apple App Extensions to your Volt MX Reference Architecture project so that it can use Apple App Extensions on iOS and MacOS. Volt MX Iris does not generate any Volt MX Reference Architecture for Apple App Extensions. So adding App Extensions does not result, for example, in additional Controllers in your project.

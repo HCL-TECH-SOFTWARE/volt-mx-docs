@@ -160,7 +160,7 @@ Read + Write
 
 This event is called only for the given request URL, but not for the subsequent web navigation request failures.
 
-This event is also not called when [.htmlString](Browser_Properties.md.mdString) is set to the web widget.
+This event is also not called when [.htmlString](Browser_Properties.md#htmlString) is set to the web widget.
 
 <b>Example</b>
 

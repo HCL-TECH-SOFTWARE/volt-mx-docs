@@ -73,7 +73,7 @@ To create a SOAP service, follow these steps:
             The total limit set in the Volt MX Foundry Console will be divided by the number of configured nodes. For example, a throttling limit of 600 requests/minute with three nodes will be calculated to be 200 requests/minute per node.  
             This is applicable for Cloud and On-premises.
             
-    *   Enter the qualified name of the URL Provider Class. For more information, refer [URL Provider Support for XML, JSON, SOAP, and API Proxy](../../../MBaasDocs/ConsoleAndID/Foundry8.0ConsoleAndIDSrvUG/Content/URL Provider Support for XML, JSON, SOAP and API Proxy.md).
+    *   Enter the qualified name of the URL Provider Class. For more information, refer [URL Provider Support for XML, JSON, SOAP, and API Proxy](../../../Foundry/voltmx_foundry_user_guide/Content/URL_Provider_Support_for_XML__JSON__SOAP_and_API_Proxy.md).
 10. In the **Web Service Authentication**, select one of the following modes:
     
     *   **None**: Select this option if you do not want to provide any authentication for the service.
