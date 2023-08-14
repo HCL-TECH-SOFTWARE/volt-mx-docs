@@ -5,11 +5,11 @@ To enable capabilities entitlement for an app in Volt MX Iris, follow these step
 
 1. From the <b>Workspace</b> folder of the app, navigate to the resources/common directory.
 
-2. Open the <b>voltmx_iris_configuration.json</b> file.
+2. Open the <b>quantum_nitro_configuration.json</b> file.
 
 3. Add the <b>capability</b> key, and provide value as per apple documentation to the key, based on value that you want to provide for the app.
 
-Here is a sample <b>voltmx_iris_configuration.json</b> file entry that enables Multipath TCP for the app:
+Here is a sample <b>quantum_nitro_configuration.json</b> file entry that enables Multipath TCP for the app:
 
 ```
     {
@@ -30,7 +30,7 @@ Here is a sample <b>voltmx_iris_configuration.json</b> file entry that enables M
 ```
 
 
-The following are the capabilities you can add to **voltmx_iris_configuration.json**
+The following are the capabilities you can add to **quantum_nitro_configuration.json**
 
 *   com.apple.developer.ClassKit-environment
 *   com.apple.developer.default-data-protection
