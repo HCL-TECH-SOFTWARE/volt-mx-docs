@@ -82,7 +82,7 @@ There are three different Protection build presets. Based on your requirements, 
 
 To implement the Secure Web applications using CI build, do the following:
 
-Before you get started, raise a ticket with the support team to get a **securejs.properties** file. To know how to generate the encryption keys, click [here](ApplicationSecurity_Web.md#rsa-key-pair-generation-encryption-and-usage).
+Before you get started, raise a ticket with the support team to get a **securejs.properties** file. To know how to generate the encryption keys, click [here](ApplicationSecurity.md#rsa-key-pair-generation-encryption-and-usage).
 
 1.  On your computer where Volt MX Iris is installed, navigate to Iris workspace.
 2.  Open **HeadlessBuild.properties** in a source code editor.

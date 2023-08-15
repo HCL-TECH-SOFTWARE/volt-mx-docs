@@ -12,7 +12,6 @@ These steps show how to add the VoltMX-Android-SDK to your project and set up Vo
 *   [Invoking an Identity Service](Invoking_Identity_Service_Android.md)
 *   [Invoking an Integration Service](Invoking_Integration_Service_Android.md)
 *   [Invoking a Messaging Service](Invoking_Messaging_Service_Android.md)
-*   [Invoking a Sync Service](Invoking_Sync_Service_Android.md)
 *   [Invoking a Metrics Service](Invoking_Metrics_Service_Android.md)
 *   [Invoking an Object Service](Invoking_an_Object_Service.md)
 *   <details close markdown="block"><summary>API Reference</summary>

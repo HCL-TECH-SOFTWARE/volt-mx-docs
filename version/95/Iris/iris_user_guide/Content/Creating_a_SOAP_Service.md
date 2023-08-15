@@ -16,7 +16,8 @@ The remainder of this topic describes how you would use an SOAP service to retr
 2.  The response is fetched from the SharePoint service and is sent to the application.
 3.  The response is displayed on a form to the user.
 
-To view a video on using web services, see [Using Web Services](../../../video_tutorials/Content/StockTrack.md).
+<!-- MKS 10/11/2023: MISSING TUTORIAL-->
+<!--To view a video on using web services, see [Using Web Services](../../../video_tutorials/Content/StockTrack.md).-->
 
 **_Notes:_***   After you provide the SharePoint server's IP address and port, Volt MX Iris loads all WSDLs exposed by SharePoint server. You can browse the WSDLs and their services associated with WSDLs. Users can view the WSDL service input and output parameters in the Web service definition files.
 *   The input and output parameters can be classes or primitive types.
