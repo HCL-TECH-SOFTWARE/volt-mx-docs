@@ -287,7 +287,7 @@ Read + Write
 
 <b>Remarks</b>
 
-This event is called every time the page is loaded. This event is not called when [.htmlString](Browser_Properties.md.mdString) is set to the web widget.
+This event is called every time the page is loaded. This event is not called when [.htmlString](Browser_Properties.md#htmlString) is set to the web widget.
 
 This event gets called whenever the URL is loaded, or you navigate from one URL to another, or the browser URL internally redirects to another URL. This event is also called whenever the content is loaded, and when a URL contains any third party content using an iframe.
 
