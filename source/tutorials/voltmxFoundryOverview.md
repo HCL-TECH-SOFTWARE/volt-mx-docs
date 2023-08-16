@@ -17,5 +17,3 @@ Volt MX Foundry is a Mobile Backend as a Service that provides various services 
 
 ![](Resources/overview_video.png) [Versioning with Volt MX Foundry and Iris](https://youtu.be/GcOIP5RpXGw)
 
-![](Resources/Marketplace.png) [Debugging with Foundry](../Foundry/voltmx_foundry_debug_app/Content/Homepage.md)
-
