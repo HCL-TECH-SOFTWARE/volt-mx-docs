@@ -738,7 +738,7 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 
 ### V9 Servicepack 5 Fixpack 15
 
-August 18, 2023
+August 21, 2023
 
 ### Foundry Enhancements
 
@@ -751,6 +751,33 @@ August 18, 2023
 
 * MacOS Ventura support
 * Xcode – 14 support
+
+### AppFactory Jenkins Upgrade
+
+AppFactory upgraded Jenkins, its plugins and Java version for Jenkins, a significant upgrade that enhances the security, user experience, and performance of the platform.
+
+### Key Features and Enhancements
+
+* **Security Enhancements** : With this upgrade, all known Jenkins security vulnerabilities have been addressed and resolved.
+
+* **Improved User Experience** : The upgraded Jenkins offers a more seamless and intuitive user interface.
+
+* **Enhanced Performance** : The upgrade optimizes Jenkins performance, providing a stable and reliable environment.
+
+### Post Upgrade Instructions:
+
+There are UI fixes in AppFactory project. The projects created in AppFactory before v9.6 will be required to be updated. 
+
+**How to upgrade AppFactory Project** : Project Settings page for older project will show a banner with 'Upgrade Now' button which which when clicked redirects to a build page which when built, upgrades the project. 
+
+
+
+![](Resources/Images/rel-note02.png)
+
+
+   
+![](Resources/Images/rel-note01.png)
+
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
