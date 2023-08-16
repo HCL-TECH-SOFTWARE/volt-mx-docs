@@ -49,9 +49,9 @@ To add an app to your Volt MX Foundry, follow these steps:
             *   [Integration](Services.md)
             *   [Orchestration](Orchestration.md)
             *   [Objects](Objectservices.md)
-            *   [Logic](Logic.md)
             *   [Offline sync](Legacy_Sync.md)
             *   [Engagement](Engagement.md)
+<!--            *   [Logic](Logic.md)-->
         
         After you add services to your app, you can also do the following from an app page:
         
