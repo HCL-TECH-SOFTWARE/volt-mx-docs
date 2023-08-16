@@ -1,6 +1,4 @@
 
-Volt MX Foundry Deployment Guide: Volt MX Foundry Deployment Guide
-
 # Volt MX Foundry Deployment Guide
 
 Volt MX Foundry is a back-end service provider that helps developers build omni-channel digital applications. Volt MX Foundry allows you to define the back-end to build native mobile apps for iOS, Android and also SPAs and Responsive web apps for browsers. Volt MX Foundry ensures that developers build mobile applications quickly and obtain secured back-end services instantly. Volt MX Foundry has multiple features, such as - Identity, Integration, Objects, Orchestration, and Engagement Services. These features can be accessed through a common, centralized Volt MX Foundry Console.
@@ -17,4 +15,4 @@ The document helps you familiarize with the Volt MX Foundry and provide procedur
 - [Security Hardening](Hardening_Guide.md)
 - [Deployment Checklist and Example Case Studies](Deployment_Checklist.md)
 
-You can also access the [Preface](Preface.md), [Revision History](voltmx_Foundry_deployment_guide.md) and [FAQs and Troubleshooting](FAQs.md).
+You can also access the [FAQs and Troubleshooting](FAQs.md).
