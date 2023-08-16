@@ -15,5 +15,5 @@ Revision History
 
 Getting Started Options
 
-*   [Release Notes](../../../VMX_Release_Notes.md)
+*   [Release Notes](../../../VMX_release_notes.md)
 *   [Wearables](wearable.md)

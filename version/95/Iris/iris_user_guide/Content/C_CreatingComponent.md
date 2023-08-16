@@ -393,11 +393,11 @@ To set data for a component with contract by using Mapping Editor, follow these 
 4.  Click **Insert Into**. The component with contract is inserted into the selected form.
 5.  Select the form, and then go to **Properties** panel > **Action**.
 6.  For any Event (for example, **onMapping**), click **Edit**. The **Action Editor** window appears, with **Diagram View** open by default.
-7.  On the left pane of [Action Editor](Working_with_Action_Editor.md), locate and click the **Add Mapping** action. The Add Mapping action is added to the flow diagram, as shown here.  
+7.  On the left pane of [Action Editor](working_with_Action_Editor.md), locate and click the **Add Mapping** action. The Add Mapping action is added to the flow diagram, as shown here.  
         
     ![](Resources/Images/Add_Mapping.png)
 
-8.  Select **Add Mapping** from the flow diagram. [Mapping Editor](ActionsMapping.md) opens on the right pane of [Action Editor](Working-with-Action-Editor.md).
+8.  Select **Add Mapping** from the flow diagram. [Mapping Editor](ActionsMapping.md) opens on the right pane of [Action Editor](working_with_Action_Editor.md).
 9.  You can use [Mapping Editor](ActionsMapping.md) to expand and create mappings among various form, component, and widget elements as well as [global variables](Global_Variables_and_Data_Store_Keys.md).  
       
     ![](Resources/Images/Mapped_Elements.png)

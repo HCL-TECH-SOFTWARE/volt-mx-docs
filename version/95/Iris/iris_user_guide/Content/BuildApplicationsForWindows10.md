@@ -324,7 +324,7 @@ To build an app with your most recent build settings, do the following:
 To build an app with new or different settings, do the following:
 
 1.  On the **Product** menu, click **Build**.
-2.  In the Build Generation dialog box, select under each applicable [channelDevice types available within a given platform. These include mobile ](i.e. phone), tablet, and desktop.](javascript:void(0);) the Windows versions you are configured to build for, along with the hardware architecture, and environment (e.g. Native,.md SPA). For more information about native and SPA apps, see [Types of Applications](TypesOfApplications.md).
+2.  In the Build Generation dialog box, select under each applicable channel the Windows versions you are configured to build for, along with the hardware architecture, and environment (e.g. Native,.md SPA). For more information about native and SPA apps, see [Types of Applications](TypesOfApplications.md).
 3.  Select the build mode.
 
 *   **Debug mode** \- To help you identify and fix errors, Volt MX Iris emits the complete symbolic debug information . To lessen the amount of time necessary to complete the build, the build is not optimized for code execution, so it may tend to execute slower than a build optimized for release. Also, the inclusion of the symbolic debug information causes the final executable to be larger than a release build.

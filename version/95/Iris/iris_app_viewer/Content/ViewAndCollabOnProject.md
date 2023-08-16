@@ -5,7 +5,7 @@ The Volt MX App provides an easy way of sharing designs with your stakeholders i
 
 Ways of viewing your app and collaborating with your stakeholders are:
 
-- [Preview an App on a Device](PreviewAnAppOnADevice.md): Using the Volt MX App, you and your stakeholders can preview the project you built as a functional app on their devices.
+- [Preview an App on a Device](FunctionalPreviewStarter.md): Using the Volt MX App, you and your stakeholders can preview the project you built as a functional app on their devices.
 - [Execute App Lifecycle Events](ExecuteChildAppEvents.md): You can execute any action events attached to the widgets in your application.
 - [Notes in Volt MX App](Notes.md): Stakeholders can add notes to the different forms (i.e. screens) of the app, which you can then view in App User Guide.
 - [Previewing Apps with NFIs/FFIs in Volt MX App](Previewing_Child_Apps_with_FFIs_in_App_Viewer.md); In general, you cannot use NFI/FFI based apps in native store (Google Play or AppStore) applications. However, you can run NFI/FFI based apps using the **Preview** feature of Volt MX Iris.

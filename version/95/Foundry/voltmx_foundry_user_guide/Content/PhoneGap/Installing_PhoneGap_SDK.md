@@ -44,7 +44,6 @@ To view the Cordova (PhoneGap) Docset in native format, click [Cordova docset.]
 *   [Invoking an Integration Service](Invoking_Integration_Service_PhoneGap.md)
 *   [Invoking a Configuration Service](Invoking_Configuration_Service_PhoneGap.md)
 *   [Invoking a Messaging Service](Invoking_Messaging_Service_PhoneGap.md)
-*   [Invoking a Sync Service](Invoking_Sync_Service_PhoneGap.md)
 *   [Invoking a Reporting Service](Invoking_Reporting_Service_PhoneGap.md)
 *   [Invoking a Metrics Service](Invoking_Metrics_Service_Object_PhoneGap.md)
 *   [Invoking an Object Service](ObjectsAPIReference/Objects_API_Reference.md)

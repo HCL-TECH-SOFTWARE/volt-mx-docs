@@ -44,7 +44,7 @@ For development environment, a developer can preferably install Volt MX Foundry 
 
 > **_Important:_**  VoltMX Foundry Installer supports Tomcat and JBoss.  
   
-Tomcat on single-node only. For multi-node installation on Tomcat, refer to [VoltMX Foundry Manual Install Guide](../../../mf_manual_install.md).  
+Tomcat on single-node only. For multi-node installation on Tomcat, refer to [Volt Foundry Manual Install Guide](../../voltmx_foundry_manual_install_guide/Content/Introduction.md).  
   
 Volt MX  Foundry Consolidated installer supports JBoss on single node (**Standalone Mode**)and multi-node (**Domain Mode**).
 

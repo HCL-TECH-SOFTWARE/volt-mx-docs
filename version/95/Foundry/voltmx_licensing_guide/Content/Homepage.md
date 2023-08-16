@@ -15,8 +15,8 @@ Revision History
 Getting Started Options
 
 *   Volt MX Iris Enterprise Installation Guides.
-    *   [Install On Windows](../../../Iris/iris_starter_install_win/Content/Home.md): This document provides details of how to install Volt MX Iris Enterprise Edition on a Windows machine.
-    *   [Install on Mac](../../../Iris/iris_starter_install_mac/Content/Home.md) : This document provides details of how to install Volt MX Iris Enterprise Edition on a Mac machine.
+    *   [Install On Windows](../../../Iris/iris_starter_install_win/Content/Installing VoltMX Iris.md): This document provides details of how to install Volt MX Iris Enterprise Edition on a Windows machine.
+    *   [Install on Mac](../../../Iris/iris_starter_install_mac/Content/Installing VoltMX Iris.md) : This document provides details of how to install Volt MX Iris Enterprise Edition on a Mac machine.
 *   Volt MX Foundry Installation Guides.
     *   [Install on Windows](../../../Foundry/voltmx_foundry_windows_install_guide/Content/Introduction.md) : This document explains how to install Console, Identity, Integration Services, Engagement Services, and Sync Services on Windows using an installer program.
         
