@@ -18,7 +18,7 @@ When the transformation matrix is identity, the 3D directions are as follows:
 The animation is classified into the following sub classes:
 
 *   [Key Frame Animations](#key-frame-animations)
-*   [Animation Properties Events and Methods](../../Widget User Guide_7.0/Content/Widget animatable properties.md)
+*   [Animation Properties Events and Methods](#animation-properties-events-and-methods)
 
 Key Frame Animations
 --------------------
@@ -110,7 +110,7 @@ An object defined using voltmx.ui.createAnimation() API. Refer voltmx.ui.createA
 
 animationConfig
 
-Optional. As defined in [Animation Configuration](../../Widget User Guide_7.0/Content/Animation_Configurations.md) section.
+Optional. As defined in [Animation Configuration](../../iris_api_dev_guide/content/animationapi.md) section.
 
 animationCallbacks\[JSObject\]
 

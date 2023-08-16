@@ -6,8 +6,6 @@
 
 Volt MX  Iris is a powerful yet easy-to-use integrated development environment (IDE) for developing, building, testing, debugging, and deploying mobile applications (apps) for multiple platforms—all from a single code base. Volt MX Iris empowers you to rapidly develop mobile apps while giving you the flexibility to integrate with back-end services as you need them. What's more, you can integrate into your app the very best of the native, web and hybrid environments.
 
-For information on revision history, click [Revision History](revisionhome.md).
-
 Volt MX  Iris APIs comprises a collection of APIs that you can use in apps written with Volt MX Iris. The APIs enable you to do such tasks as performing various operations on tables, manipulating strings, or invoking a service. The Volt MX Iris API library consists of the following:
 
 *   **[Accelerometer API](accelereometer_apis.md)**: The Accelerometer APIs allows you to capture the device motion acceleration in X, Y, Z directions and also provide out of the box mechanisms to register for shake gestures event. The chapter comprises of all the APIs with the name **voltmx.accelerometer**.
@@ -53,7 +51,6 @@ Volt MX  Iris APIs comprises a collection of APIs that you can use in apps writt
 *   **[Runtime Permission API](runtime_permissions.md)**: With the function in this API, your app can obtain permissions at runtime.
 *   **[Standard Volt MX API](generic_apis.md)**: The generic functions with the namespace **voltmx**.
 *   **[String API](string.md)**: The string Library has APIs that you can use to manipulate strings. The namespace is **voltmx.string**.
-*   **[Sync API](sync_apis.md)**: The Sync API enables your app to perform various operations on Volt MX Sync.
 *   **[Theme API](themes.md)**: The Theme API lets you specify common skins for widgets in different states
 *   **[Threading API](threading_apis.md)**: The Threading API helps JavaScript bindings work on main thread.
 *   **[Timer API](timer.md)**: The Timer API functions provide you the ability to schedule the execution of a function block at regular intervals. The namespace for Timer API is **voltmx.timer**.

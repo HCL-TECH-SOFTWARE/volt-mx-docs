@@ -49,11 +49,11 @@ An object defined using the voltmx.ui.createAnimation() API. Refer to voltmx.ui.
 
 config
 
-As defined in Animation Configuration. For more information, please see the `AnimationConfiguration` object documentation in the [API Developer's Guide](../../../Iris/iris_api_dev_guide/content/introduction.md).
+As defined in Animation Configuration. For more information, please see the `AnimationConfiguration` object documentation in the [API Developer's Guide](../../iris_api_dev_guide/content/animationapi.md).
 
 callbacks
 
-A dictionary that represents JavaScript functions that work as animation call backs. For more information, see `AnimationConfiguration` object documentation in the [API Developer's Guide](../../../Iris/iris_api_dev_guide/content/introduction.md).
+A dictionary that represents JavaScript functions that work as animation call backs. For more information, see `AnimationConfiguration` object documentation in the [API Developer's Guide](../../iris_api_dev_guide/content/animationapi.md).
 
 ### Remarks
 
@@ -156,11 +156,11 @@ An object defined using voltmx.ui.createAnimation() API. Refer to voltmx.ui.crea
 
 config
 
-As defined in Animation Configuration. For more information, please see the `AnimationConfiguration` object documentation in the [API Developer's Guide](../../../Iris/iris_api_dev_guide/content/introduction.md).
+As defined in Animation Configuration. For more information, please see the `AnimationConfiguration` object documentation in the [API Developer's Guide](../../iris_api_dev_guide/content/animationapi.md).
 
 callbacks
 
-A dictionary that represents JavaScript functions that work as animation call backs. For more information, see `AnimationConfiguration` object documentation in the [API Developer's Guide](../../../Iris/iris_api_dev_guide/content/introduction.md).
+A dictionary that represents JavaScript functions that work as animation call backs. For more information, see `AnimationConfiguration` object documentation in the [API Developer's Guide](../../iris_api_dev_guide/content/animationapi.md).
 
 ### Remarks
 
@@ -447,11 +447,11 @@ An object defined using voltmx.ui.createAnimation() API. Refer to voltmx.ui.crea
 
 config
 
-As defined in Animation Configuration. For more information, please see the `AnimationConfiguration` object documentation in the [API Developer's Guide](../../../Iris/iris_api_dev_guide/content/introduction.md).
+As defined in Animation Configuration. For more information, please see the `AnimationConfiguration` object documentation in the [API Developer's Guide](../../iris_api_dev_guide/content/animationapi.md).
 
 callbacks
 
-A dictionary that represents JavaScript functions that work as animation call backs. For more information, see `AnimationConfiguration` object documentation in the [API Developer's Guide](../../../Iris/iris_api_dev_guide/content/introduction.md).
+A dictionary that represents JavaScript functions that work as animation call backs. For more information, see `AnimationConfiguration` object documentation in the [API Developer's Guide](../../iris_api_dev_guide/content/animationapi.md).
 
 ### Remarks
 
@@ -1098,11 +1098,11 @@ An object defined using voltmx.ui.createAnimation() API. Refer to voltmx.ui.crea
 
 config
 
-As defined in Animation Configuration. For more information, please see the `AnimationConfiguration` object documentation in the [API Developer's Guide](../../../Iris/iris_api_dev_guide/content/introduction.md).
+As defined in Animation Configuration. For more information, please see the `AnimationConfiguration` object documentation in the [API Developer's Guide](../../iris_api_dev_guide/content/animationapi.md).
 
 callbacks
 
-A dictionary that represents JavaScript functions that work as animation call backs. For more information, see `AnimationConfiguration` object documentation in the [API Developer's Guide](../../../Iris/iris_api_dev_guide/content/introduction.md).
+A dictionary that represents JavaScript functions that work as animation call backs. For more information, see `AnimationConfiguration` object documentation in the [API Developer's Guide](../../iris_api_dev_guide/content/animationapi.md).
 
 ### Remarks
 
@@ -1175,11 +1175,11 @@ An object defined using voltmx.ui.createAnimation() API. Refer to voltmx.ui.crea
 
 config
 
-As defined in Animation Configuration. For more information, please see the `AnimationConfiguration` object documentation in the [API Developer's Guide](../../../Iris/iris_api_dev_guide/content/introduction.md).
+As defined in Animation Configuration. For more information, please see the `AnimationConfiguration` object documentation in the [API Developer's Guide](../../iris_api_dev_guide/content/animationapi.md).
 
 callbacks
 
-A dictionary that represents JavaScript functions that work as animation call backs. For more information, see `AnimationConfiguration` object documentation in the [API Developer's Guide](../../../Iris/iris_api_dev_guide/content/introduction.md).
+A dictionary that represents JavaScript functions that work as animation call backs. For more information, see `AnimationConfiguration` object documentation in the [API Developer's Guide](../../iris_api_dev_guide/content/animationapi.md).
 
 ### Remarks
 
@@ -1318,11 +1318,11 @@ An object defined using voltmx.ui.createAnimation() API. Refer to voltmx.ui.crea
 
 config
 
-As defined in Animation Configuration. For more information, please see the `AnimationConfiguration` object documentation in the [API Developer's Guide](../../../Iris/iris_api_dev_guide/content/introduction.md).
+As defined in Animation Configuration. For more information, please see the `AnimationConfiguration` object documentation in the [API Developer's Guide](../../iris_api_dev_guide/content/animationapi.md).
 
 callbacks
 
-A dictionary that represents JavaScript functions that work as animation call backs. For more information, see `AnimationConfiguration` object documentation in the [API Developer's Guide](../../../Iris/iris_api_dev_guide/content/introduction.md).
+A dictionary that represents JavaScript functions that work as animation call backs. For more information, see `AnimationConfiguration` object documentation in the [API Developer's Guide](../../iris_api_dev_guide/content/animationapi.md).
 
 ### Remarks
 
@@ -1684,11 +1684,11 @@ An object defined using voltmx.ui.createAnimation() API. Refer to voltmx.ui.crea
 
 config
 
-As defined in Animation Configuration. For more information, please see the `AnimationConfiguration` object documentation in the [API Developer's Guide](../../../Iris/iris_api_dev_guide/content/introduction.md).
+As defined in Animation Configuration. For more information, please see the `AnimationConfiguration` object documentation in the [API Developer's Guide](../../iris_api_dev_guide/content/animationapi.md).
 
 callbacks
 
-A dictionary that represents JavaScript functions that work as animation call backs. For more information, see `AnimationConfiguration` object documentation in the [API Developer's Guide](../../../Iris/iris_api_dev_guide/content/introduction.md).
+A dictionary that represents JavaScript functions that work as animation call backs. For more information, see `AnimationConfiguration` object documentation in the [API Developer's Guide](../../iris_api_dev_guide/content/animationapi.md).
 
 ### Remarks
 
@@ -1797,11 +1797,11 @@ An object defined using voltmx.ui.createAnimation() API. Refer to voltmx.ui.crea
 
 config
 
-As defined in Animation Configuration. For more information on animation configuration, please see the `AnimationConfiguration` object documentation in the [API Developer's Guide](../../../Iris/iris_api_dev_guide/content/introduction.md).
+As defined in Animation Configuration. For more information on animation configuration, please see the `AnimationConfiguration` object documentation in the [API Developer's Guide](../../iris_api_dev_guide/content/animationapi.md).
 
 callbacks
 
-A dictionary that represents JavaScript functions that work as animation call backs. For more information, see `AnimationConfiguration` object documentation in the [API Developer's Guide](../../../Iris/iris_api_dev_guide/content/introduction.md).
+A dictionary that represents JavaScript functions that work as animation call backs. For more information, see `AnimationConfiguration` object documentation in the [API Developer's Guide](../../iris_api_dev_guide/content/animationapi.md).
 
 ### Remarks
 
