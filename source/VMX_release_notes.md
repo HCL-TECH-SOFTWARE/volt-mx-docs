@@ -231,7 +231,7 @@ August 21, 2023
 
 #### Foundry Enhancements
 
-* Enhanced Object Services incremental setup to account for object-model changes between Foundry app versions.
+* Enhanced Object Services *incremental setup* to account for object-model changes between Foundry app versions.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
