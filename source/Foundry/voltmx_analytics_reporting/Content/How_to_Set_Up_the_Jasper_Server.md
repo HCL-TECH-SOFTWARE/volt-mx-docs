@@ -7,7 +7,7 @@ How to Set Up the JasperReports Server
 
 After JasperReports Server is installed, attributes such as timezone, location, and account information must be configured for the logged-in user. The Jasper reports internally use the attributes to give accurate results for account and location.
 
-> **_Important:_**  Ensure that you have the required hardware and access to the supporting software as provided in the [Prerequisites](Prerequisites.md) section.
+> **_Important:_**  Ensure that you have the required hardware and access to the supporting software as provided in the [Prerequisites](Prereqs.md) section.
 
 To set up the JasperReports Server, follow these steps:
 

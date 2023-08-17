@@ -106,7 +106,7 @@ An object defined using voltmx.ui.createAnimation() API. Refer to voltmx.ui.crea
 
 **_config_**
 
-As defined in Animation Configuration. For more information, please see the `AnimationConfiguration` object documentation in the [API Developer's Guide](../../../Iris/iris_api_dev_guide/content/introduction.md).
+As defined in Animation Configuration. For more information, please see the `AnimationConfiguration` object documentation in the [API Developer's Guide](../../iris_api_dev_guide/content/animationapi.md).
 
 ### Return Values
 
@@ -956,7 +956,7 @@ An object defined using voltmx.ui.createAnimation() API. Refer to voltmx.ui.crea
 
 **_config_**
 
-As defined in Animation Configuration. For more information, please see the `AnimationConfiguration` object documentation in the [API Developer's Guide](../../../Iris/iris_api_dev_guide/content/introduction.md).
+As defined in Animation Configuration. For more information, please see the `AnimationConfiguration` object documentation in the [API Developer's Guide](../../iris_api_dev_guide/content/animationapi.md).
 
 **_callbacks_**
 
