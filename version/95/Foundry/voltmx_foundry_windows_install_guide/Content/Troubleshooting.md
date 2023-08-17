@@ -479,7 +479,7 @@ How to encrypt the database password
 
 > **IMPORTANT:** Encryption is only supported for Tomcat application servers.
 
-Quantum Fabric provides a 256-bit AES/GCM/NoPadding encryption utility, which can be used to encrypt your database password. To encrypt your database password, follow these steps:
+Volt Foundry provides a 256-bit AES/GCM/NoPadding encryption utility, which can be used to encrypt your database password. To encrypt your database password, follow these steps:
 
 1. Download and extract the installation zip file or tar file.
 2. From the extracted folder, open a terminal (console), and then execute the following command:
@@ -491,4 +491,4 @@ Quantum Fabric provides a 256-bit AES/GCM/NoPadding encryption utility, which ca
 3. In the **Enter Password to be Encrypted** field, type the password that is used to access your database.
 4. In the **Enter Key to be Encrypted** field, type the key that must be used to encrypt the password.
 
-The console then displays the **Encrypted Password** and **Encrypted Key**. These values must be typed in the ```Database Password``` and ```Encrypted Rotational Key``` boxes on the [Database Details](Installing_Fabric_on_Tomcat.md#DatabaseDetails) screen.
+The console then displays the **Encrypted Password** and **Encrypted Key**. These values must be typed in the ```Database Password``` and ```Encrypted Rotational Key``` boxes on the [Database Details](Installing_Foundry_on_Tomcat.md) screen.

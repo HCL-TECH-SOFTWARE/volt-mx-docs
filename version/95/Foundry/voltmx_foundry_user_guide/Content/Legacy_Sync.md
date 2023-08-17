@@ -367,7 +367,7 @@ To download the Sync configuration file `Syncconfig.xml` file on your computer, 
 For more details on Sync Console, refer to the following document: [Sync Console](../../../Foundry/voltmx_sync_console_user_guide/Content/Homepage.md)
 
 Volt MX  Foundry Sync Console
----------------------------
+-----------------------------
 
 > **_Note:_** The details of your sync scope will be available in Sync Services after you _publish_ the app.
 
