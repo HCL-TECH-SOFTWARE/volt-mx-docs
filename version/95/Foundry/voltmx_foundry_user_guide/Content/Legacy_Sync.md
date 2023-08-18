@@ -364,8 +364,6 @@ To download the `Syncconfig.xml` Sync configuration file on your computer, click
 
 ![](Resources/Images/Sync_Valid.png)
 
-For more details on Sync Console, refer to the following document: [Sync Console](../../../Foundry/voltmx_sync_console_user_guide/Content/Homepage.md)
-
 Volt MX  Foundry Sync Console
 -----------------------------
 
