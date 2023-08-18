@@ -1,7 +1,4 @@
                          
-
-You are here: How to Configure Volt MX Foundry in the JasperReports Server
-
 How to Configure Volt MX Foundry in the JasperReports Server
 -----------------------------------------------------------
 
@@ -23,9 +20,10 @@ To configure Volt MX Foundry in the JasperReports Server, follow these steps:
         
     *   Configure the value for the `<property name>` to enable the JasperServer Professional Edition or JasperServer Enterprise Edition. For example, if you set to the value to `true`, the JasperServer Professional Edition is configured. If you set to the value to `false`, the JasperServer Enterprise Edition is configured.
         
-```
-<property name="singleTenant" value="<enter the value -for example, true or false>" />
-```
+        ```
+        <property name="singleTenant" value="<enter the value -for example, true or false>" />
+        ```  
+
 3.  From your Jasper install location, open the `js.config.properties` file.
     
     For example, `<jasperinstall-dir>/apache-tomcat/webapps/jasperserver-pro/WEB-INF/js.config.properties`.
@@ -36,13 +34,9 @@ To configure Volt MX Foundry in the JasperReports Server, follow these steps:
     
     ![](Resources/Images/JasperURL_658x412.png)
     
-    > **_Note:_**  Enter credentials for jasperadmin. For Jasper Reports Server 6.0/6.2, the default credentials for jasper admin are:  
-    username = `jasperadmin#<organization_name>`. For example, `jasperadmin#organization _1`  
-    In general, the URLs encoding involves the pipe symbol (`|`) to `#`.  
+    > **_Note:_**  Enter credentials for jasperadmin. For Jasper Reports Server V7.9.2/7.1, the default credentials for jasper admin are: <br>
+    username = jasperadmin|&lt;organization_name&gt;.For example, jasperadmin|organization _1 <br>
+    password = jasperadmin
+
       
-    password = `jasperadmin`
     
-    > **_Note:_**  Enter credentials for jasperadmin. For Jasper Reports Server V7.1, the default credentials for jasper admin are:  
-    username = ``jasperadmin`|`<organization_name>``. For example, ``jasperadmin`|`organization _1``  
-      
-    password = `jasperadmin`
