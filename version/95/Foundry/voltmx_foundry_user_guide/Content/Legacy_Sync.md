@@ -360,7 +360,7 @@ Note that the upload batch size used by the client SDK takes a value closer to t
 Download the Sync Configuration
 -------------------------------
 
-To download the Sync configuration file `Syncconfig.xml` file on your computer, click the **Synchronization** page, click the Settings button, and then click **Export all**.
+To download the `Syncconfig.xml` Sync configuration file on your computer, click the **Synchronization** page, click the Settings button, and then click **Export all**.
 
 ![](Resources/Images/Sync_Valid.png)
 
