@@ -461,7 +461,7 @@ For more information, you can refer to [IBM Support](http://www-01.ibm.com/suppo
 How to Configure Frontend HTTPS to Tomcat HTTP Redirection
 ----------------------------------------------------------
 
-If you are installing Volt MX Foundry on Tomcat on HTTP and wants to route requests via HTTPS apache or loadbalancer, add a connector in the `tomcat/server.xml` with the following attributes:
+If you are installing Volt Foundry on Tomcat on HTTP and wants to route requests via HTTPS apache or loadbalancer, add a connector in the `tomcat/server.xml` with the following attributes:
 
 ```
 proxyName="<ProxyHost>" proxyPort="<ProxyPort>" scheme="https" secure="true"
