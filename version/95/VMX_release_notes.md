@@ -746,9 +746,12 @@ August 21, 2023
 * Utf8mb4 support for Mysql databaseRefer < Foundry upgrade to 8.0 with utf8mb4 document link > for Foundry upgrade steps from Mysql 5.7 to Mysql 8.0.x with utf8mb4 support.
 * Support for TIBCO jasper 7.9.2Refer < Jasper upgrade step link > for jasper 7.9.2 setup steps to integrate with Foundry.
 * Security fixes
-* Enabling SAP Gateway Service after Import If SAP Gateway is not visible, user can make it visible by Importing an App which contains SAP Gateway Services OR Importing SAP Gateway Services
+* Enabling SAP Gateway Service after Import 
 
-  * After importing app/service user need to refresh the page. Re-login is not required
+     * If SAP Gateway is not visible, user can make it visible 
+       by Importing an App which contains SAP Gateway Services OR Importing SAP Gateway Services
+
+  > **_Note:_**  After importing app/service user need to refresh the page. Re-login is not required
 
 ### AppFactory Enhancements
 
