@@ -229,6 +229,7 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ### V9 Servicepack 2 Fixpack 1 Hotfix 18
 August 21, 2023
 
+
 #### Foundry Enhancements
 
 * Enhanced Object Services *incremental setup* to account for object-model changes between Foundry app versions.
