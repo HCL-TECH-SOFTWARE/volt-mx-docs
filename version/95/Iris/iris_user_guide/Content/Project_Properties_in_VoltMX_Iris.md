@@ -152,7 +152,7 @@ The following table describes about all the fields in iPhone/ iPad settings.
 <tr>
 <td>Deeplink URL Scheme</td>
 <td>URL Scheme</td>
-<td>Specifies a URL to which the application will deep-link to. For more information about deep-linking, see <a href="AppServiceEvent.html">Appendix E: the App Service Event.</a></td>
+<td>Specifies a URL to which the application will deep-link to. For more information about deep-linking, see <a href="AppServiceEvent.html">Appendix D: The App Service Event.</a></td>
 </tr>
 <tr>
 <td>Target Versions</td>
