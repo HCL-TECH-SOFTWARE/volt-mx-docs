@@ -148,7 +148,7 @@ The following are the development and runtime environment compatibility matrices
 
 ### Windows 10 Tablet
 
-These are Windows Store apps. Forms are created under the **tablet** section in [VoltMX Iris](../../../Iris/iris_user_guide/Content/NewLocationsOfFamiliarFeatures.md).
+These are Windows Store apps. Forms are created under the **tablet** section in Volt Iris.
 
 #### Environment
 
@@ -194,7 +194,7 @@ These are Windows Store apps. Forms are created under the **tablet** section in 
 
 ### Windows 10 Mobile
 
-These are Windows Store apps. Forms are created under the **mobile** section in [VoltMX Iris](../../../Iris/iris_user_guide/Content/NewLocationsOfFamiliarFeatures.md).
+These are Windows Store apps. Forms are created under the **mobile** section in Volt Iris.
 
 #### Environment
 
