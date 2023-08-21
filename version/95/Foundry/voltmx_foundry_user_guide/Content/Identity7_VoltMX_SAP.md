@@ -5,6 +5,8 @@ User Guide: [Identity](Identity.md) > [Configure the Identity Service](Configure
 Volt MX  SAP Gateway Identity Service
 ------------------------------------
 
+Only available if you have SAP Gateway services in your account.
+
 You can enable Volt MX SAP Gateway authentication for your application so that only those users registered with external SAP services can access these services in the application.
 
 The following sections describe how to configure and use a Volt MX SAP Gateway service:

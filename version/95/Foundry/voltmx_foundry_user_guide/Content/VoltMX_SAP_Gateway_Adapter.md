@@ -5,6 +5,8 @@ User Guide: [Integration](Services.md#integration) \> [Configure the Integration
 Volt MX  SAP Gateway Adapter
 ---------------------------
 
+Only available if you have SAP Gateway services in your account.
+
 With Volt MX Foundry, you can access external Volt MX SAP services by using the Volt MX SAP Gateway adapter. Based on your Volt MX SAP Gateway authentication, you can use Volt MX SAP libraries and objects along with the supported HTTP methods in your app.
 
 ### Configure Volt MX SAP Gateway Endpoint Adapter

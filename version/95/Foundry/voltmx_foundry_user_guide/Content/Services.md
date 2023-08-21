@@ -202,7 +202,7 @@ Out of the box Volt MX Foundry Integration Services support connectivity to the 
   </tr>
   <tr>
     <td>
-      <a href="VoltMX_SAP_Gateway_Adapter.html">VoltMX SAP Gateway</a><br>Only available if you have SAP Gateway services in your account</br>
+      <a href="VoltMX_SAP_Gateway_Adapter.html">VoltMX SAP Gateway</a><br>Only available if you have SAP Gateway services in your account
     </td>
     <td>Volt MX SAP Gateway communicates with external SAP services over supported HTTP methods.</td>
     <td>
