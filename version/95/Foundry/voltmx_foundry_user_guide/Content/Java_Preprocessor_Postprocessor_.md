@@ -18,7 +18,7 @@ Configure the parameters for the preprocessor and postprocessor to filter the re
     </tr>
     <tr>
       <td>
-      <h3>S Enhancements - Monaco Editor</h3>
+      <h3>JS Enhancements - Monaco Editor</h3>
       <li>Adding Wrapper JavaScript APIs for commonly used
           middleware API Objects to use them in JavaScript friendly way</li>
       <li>Change Pre and Post Processor Editor from CodeMirror to Monaco (Monaco is the code editor used in Visual Studio)</li>
