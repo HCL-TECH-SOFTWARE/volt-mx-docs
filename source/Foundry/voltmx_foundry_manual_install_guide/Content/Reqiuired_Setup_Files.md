@@ -5,7 +5,8 @@ Required Setup Files
 
 Download `VoltMXFoundry_Plugins` (WAR files and DB scripts).
 
-If you want to install Volt MX Foundry manually due to your business rules and policies, please contact [productsupport@voltmx.com](mailto:productsupport@voltmx.com) for approval and to obtain access to the Volt MX Foundry manual install artifacts. Manual installs not approved by HCL will not be supported.
+If you want to install Volt MX Foundry manually due to your business rules and policies, please contact
+[Customer Support](https://support.hcltechsw.com/csm) for approval and to obtain access to the Volt MX Foundry manual install artifacts. Manual installs not approved by HCL will not be supported.
 
 ### Required Setup Files - Volt MX Foundry Console, Accounts, and Workspace
 
@@ -75,7 +76,6 @@ Path for VMS files: `\VoltMXFoundry_Plugins\vpns`
 
 Download the following jars required for your database.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Click here for more details.](javascript:void(0);)
 
   
 | Database | JARs |
