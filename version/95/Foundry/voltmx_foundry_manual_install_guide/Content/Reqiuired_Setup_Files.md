@@ -76,7 +76,6 @@ Path for VMS files: `\VoltMXFoundry_Plugins\vpns`
 
 Download the following jars required for your database.
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Click here for more details.](javascript:void(0);)
 
   
 | Database | JARs |
