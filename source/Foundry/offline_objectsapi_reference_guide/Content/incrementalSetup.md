@@ -5,7 +5,9 @@ Volt MX Foundry console User Guide: [Application-level APIs](Application_Level_A
 
 The Offline Objects **incrementalSetup** API allows the client application to consume the latest changes made to Volt MX Foundry app’s object services schema after a particular timestamp, without breaking the existing functionality. Similar to setup API, **incrementalSetup** API is also an application-level API with same method arguments.
 
-> **_Note:_** Either **setup** or **incrementalSetup** API must be invoked on first time launch of the app.
+> **_Note:_** Either **setup** or **incrementalSetup** API must be invoked on first time launch of the app.  
+
+> **_Note:_** End users should have the latest schema (for the currently installed version) in the device before doing an app upgrade. To fetch the latest schema, the app needs to call an incremental setup API.
 
 **Scenarios that are supported in incrementalSetup:**
 
@@ -16,7 +18,8 @@ The Offline Objects **incrementalSetup** API allows the client application to co
   - Update properties like nullable, unique, and auto generated on non-primary key attributes.
   - Update change tracking parameters like attributes for identifying a soft delete and change tracking timeStamp field.
 
-    > **_Note:_** If the **timeStamp** attribute is not linked to an object field, the incremental sync and delete operations will fail for records associated with that object.
+    > **_Note:_** If the **timeStamp** attribute is not linked to an object field, the incremental sync and delete operations will fail for records associated with that object.   
+
 
 Unsupported scenarios include:
 
