@@ -19,7 +19,7 @@ Both the Toolbar and the Navigation bar contain and display [BarButtonItems.](..
 
 ### Toolbar
 
-According to Apple documentation, "A toolbar appears at the bottom of an app screen and contains buttons for performing actions relevant to the current view or content within it. Toolbars are translucent, may have a background tint, and often hide when people are unlikely to need them. Use a toolbar when navigation isn’t needed or you want multiple controls for managing content." For more information see the [Toolbars](https://developer.apple.com/ios/human-interface-guidelines/ui-bars/toolbars/) topic in Apple's developer documentation.
+According to Apple documentation, "A toolbar appears at the bottom of an app screen and contains buttons for performing actions relevant to the current view or content within it. Toolbars are translucent, may have a background tint, and often hide when people are unlikely to need them. Use a toolbar when navigation isn’t needed or you want multiple controls for managing content." For more information see the [Toolbars](https://developer.apple.com/design/human-interface-guidelines/toolbars) topic in Apple's developer documentation.
 
 An iOS ToolBar can be added to your app form by adding the Volt MX Iris [ToolBar](Toolbar.md#toolbar-widget) widget. This can only be done from code, and is not supported in the Iris widget pallette.
 
