@@ -236,12 +236,4 @@ Ensure that you contact your system administrator and white-list the following d
 - [https://accounts.auth.hclvoltmx.net](https://accounts.auth.hclvoltmx.net/)
 - [https://hclvoltmx-prototypetransit.s3.amazonaws.com](https://hclvoltmx-prototypetransit.s3.amazonaws.com/)
 
-- [Prerequisites](Prerequisites.md#prerequisites)
-  - [System Requirements](Prerequisites.md#system-requirements)
-  - [Download Volt MX Iris](Prerequisites.md#download)
-- [Install Volt MX Iris](#installing)
-  - [Configuring Volt MX Iris to use a Proxy server](#configuring-iris-to-use-a-proxy-server)
-- [Post Installation Tasks](Launching VoltMX Iris.md#post-installation-tasks)
-  - [Launching Volt MX Iris](Launching VoltMX Iris.md#launching)
-- [Update Volt MX Iris](Upgrade.md)
-- [FAQs](StudioInstallation_FAQs.md#appendix-frequently-asked-questions-faqs)
+
