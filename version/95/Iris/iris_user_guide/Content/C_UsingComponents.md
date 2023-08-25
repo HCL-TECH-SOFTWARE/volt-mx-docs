@@ -412,7 +412,7 @@ To publish a component to HCL Forge:
 Work With a Private Section of HCL Forge
 --------------------------------------------
 
-If you are an enterprise customer whose organization uses a private section of HCL Forge, you can download a component from that private section or upload a component to that private section using your organization's cloud account. First, configure Volt MX Iris or Volt Iris to use the cloud account.
+If you are an enterprise customer whose organization uses a private section of HCL Forge, you can download a component from that private section or upload a component to that private section using your organization's cloud account. First, configure Volt Iris to use the cloud account.
 
 Click the video to learn about the various features of Private section of HCL Forge ..
 
