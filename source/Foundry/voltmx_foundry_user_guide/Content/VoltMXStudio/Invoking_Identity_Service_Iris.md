@@ -1,6 +1,6 @@
                               
 
-User Guide: [SDKs](../Foundry_SDKs.md) > [VoltMX Iris SDK](Installing_VoltMXJS_SDK.md) > Login with provider type as Basic
+User Guide: [SDKs](../Foundry_SDKs.md) > [VoltMX Iris SDK](Installing_VoltMXJS_SDK.md)
 
 Invoking an Identity Service
 ============================
