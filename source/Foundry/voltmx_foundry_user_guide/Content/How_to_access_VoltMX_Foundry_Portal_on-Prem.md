@@ -1,5 +1,5 @@
 Accessing Volt MX Foundry Console - On-premises
-====================================+==========
+===============================================
 
 Before you use various Volt MX Foundry services, you must create a superuser.
 
