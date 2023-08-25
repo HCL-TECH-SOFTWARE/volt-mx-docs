@@ -1,8 +1,3 @@
----
-layout: "documentation"
-category: "voltmx_foundry_user_guide"
----                             
-
 User Guide: [SDKs](../Foundry_SDKs.md) > Prerequisites
 
 

@@ -1,7 +1,3 @@
-                              
-
-User Guide: How to Get Started with Volt MX Foundry Console
-
 Accessing Volt MX Foundry Console - On-premises
 ==============================================
 

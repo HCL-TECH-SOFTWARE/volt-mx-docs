@@ -1,5 +1,3 @@
-                              
-
 User Guide: [SDKs](../../Foundry_SDKs.md) > [Cordova (PhoneGap) SDK](../Installing_PhoneGap_SDK.md) > [Invoking an Object Service](Objects_API_Reference.md) > [Data Transfer Objects](Data_Transfer_Objects.md)
 
 voltmx.sdk.dto.Column Class

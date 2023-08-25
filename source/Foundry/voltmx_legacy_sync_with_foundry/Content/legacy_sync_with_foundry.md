@@ -56,7 +56,7 @@ When prompted for a URL in the Add a New Environment dialog box, use the hostnam
 
 ## Using an existing Sync server with an upgraded Foundry application server
 
-If you have an existing Volt MX installation with Sync Server and want to upgrade the Application Server to 8.4.1.1 and above, follow the normal [Volt MX upgrade procedure](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Upgrading_VoltMX_Foundry_SP1.md). 
+If you have an existing Volt MX installation with Sync Server and want to upgrade the Application Server to 8.4.1.1 and above, follow the normal [Volt MX upgrade procedure](../../voltmx_foundry_windows_install_guide/Content/Upgrading_VoltMX_Foundry_SP1.md). 
 A few points to note:
 * For the Foundry server, use a hostname and HTTP port that differ from the ones for your existing Foundry server.
 * In step 7 (Choose Database Provider), specify the prefix and suffix of your existing Foundry database in the Database Name Prefix and Database Name Suffix fields. For the exact strings, check MYSQL_DB_PREFIX and MYSQL_DB_SUFFIX in Kony_Fabri_Install_*.log in the Fabric installation folder.
