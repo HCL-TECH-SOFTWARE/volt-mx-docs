@@ -1,5 +1,5 @@
-Accessing Volt MX Foundry Console - On-premises
-==============================================
+Accessing Volt MX Foundry Console - On-premises
+===============================================
 
 Before you use various Volt MX Foundry services, you must create a superuser.
 
@@ -89,9 +89,8 @@ If you have configured identity services and created your administrator account 
     *   **Environments**: For more information on **Environments**, refer to [Environments](Environments.md#environments-on-premises).
     *   **Consoles**: The following consoles are available for each cloud account:
     
-    *   **App Services**: For more information, refer to [Appendix - App Services.html.](Appendix_-_App_Services.md)
-    *   **VoltMX Foundry Sync**: For more information, refer to [VoltMX Foundry Sync](../../../Foundry/voltmx_sync_console_user_guide/Content/Homepage.md).
-    *   **VoltMX Foundry Engagement**: For more information, refer to [VoltMX Foundry Engagement](../../../Foundry/vms_console_user_guide/Content/Introduction_1.md).
+        *   App Services**: For more information, refer to [Appendix - App Services.html.](Appendix_-_App_Services.md)
+        *   VoltMX Foundry Engagement**: For more information, refer to [VoltMX Foundry Engagement](../../../Foundry/vms_console_user_guide/Content/Introduction_1.md).
     
     *   For more information on **Reports**, refer to [VoltMX Reporting and Analytics - Standard Metrics and Reports](../../../Foundry/standard_metrics_reports_guide/Content/standard_metrics_reports_guide.md) "VoltMX Reporting and Analytics - Standard Reports".  
           
