@@ -1,7 +1,5 @@
-User Guide: [SDKs](../../Foundry_SDKs.md) > [Cordova (PhoneGap) SDK](../Installing_PhoneGap_SDK.md) > [Invoking an Object Service](Objects_API_Reference.md) > [Data Transfer Objects](Data_Transfer_Objects.md)
-
 voltmx.sdk.dto.Column Class
-=========================
+===========================
 
 This class represents a column in a database table, which is in turn represented by a [voltmx.sdk.dto.Table](voltmx.sdk.dto.Table_Class.md) object. It is used when creating a query.
 
