@@ -18,13 +18,6 @@ Configure the parameters for the preprocessor and postprocessor to filter the re
     </tr>
     <tr>
       <td>
-      <h3>JS Enhancements - Monaco Editor</h3>
-      <li>Adding Wrapper JavaScript APIs for commonly used
-          middleware API Objects to use them in JavaScript friendly way</li>
-      <li>Change Pre and Post Processor Editor from CodeMirror to Monaco (Monaco is the code editor used in Visual Studio)</li>
-      <li>Adding new JavaScript Samples for Pre and Post Processor using new Wrapper APIs</li>
-      <li>Enhancing Editor UI so that Users can access JavaScript Samples from Editor</li>
-      <li>Customize Intellisense in Editor so that it Shows Wrapper Objects and methods</li>
       <p>The preprocessor and postprocessor are Java classes that implement <b>DataPreProcessor</b>&#47;<b>DataPreProcessor2</b> and <b>DataPostProcessor</b>&#47;<b>DataPostProcessor2</b> interfaces. A developer can write custom code in the <b>execute</b> method of the preprocessor or postprocessor class. </p>
       <p>For a sample Java class code, refer to <a href="Java_Pre-Post_Samples.html" target="_blank">Java Sample Code for Preprocessor and Postprocessor</a>. </p>
       <p>For various objects ](session and request) and the methods with sample Java class code, refer to <a href="https://opensource.hcltechsw.com/volt-mx-docs/java_docs_apis/MiddlewareAPI/index.md" target="_blank">Volt MX App Services API</a> 
@@ -47,7 +40,20 @@ Configure the parameters for the preprocessor and postprocessor to filter the re
             </li><li>
             For <b>Preprocessor</b>, you must call <b>resultToJSON</b> API which returns JSON object. You can use the JSON object to modify the result as JSON and reset the result using <b>jsonToResult</b> API. For sample JavaScript code, refer to <a href="JS_Pre-Post_Samples.html#jsontoResultAPI" target="_blank">Sample code for <b>Preprocessor</b></a>.
             </li></ul>
-            <p>You can use these objects and their corresponding methods directly in JavaScript code.For a sample JavaScript code, refer to <a href="JS_Pre-Post_Samples.html">JavaScript Sample Code for Preprocessor and Postprocessor</a>.</p>
+            <p>You can use these objects and their corresponding methods directly in JavaScript code.For a sample JavaScript code, refer to <a href="JS_Pre-Post_Samples.html">JavaScript Sample Code for Preprocessor and Postprocessor</a>.</p>            
+            <blockquote><b><i>Note:</i></b> For details on Foundry Javascript for preprocessor and postprocessor, refer to <a href="../../../javascript_docs_apis/jsdocs/index.html"><code>javascript_docs_apis</code></a></blockquote>
+            <br>
+            <h3>Monaco Editor Enhancement</h3>
+            <li>Adding Wrapper JavaScript APIs for commonly used
+                middleware API Objects to use them in JavaScript friendly way</li>
+            <li>Change Pre and Post Processor Editor from
+                CodeMirror to Monaco (Monaco is the code editor used in Visual Studio)</li>
+           <li>Adding new JavaScript Samples for Pre and Post
+               Processor using new Wrapper APIs</li>
+           <li>Enhancing Editor UI so that Users can access
+               JavaScript Samples from Editor</li>
+           <li>Customize Intellisense in Editor so that it Shows
+               Wrapper Objects and methods</li>
       </td>
     </tr>
     <tr><td><h2 style="text-decoration:underline;">Rules Preprocessor and Postprocessor</h2></td></tr>
