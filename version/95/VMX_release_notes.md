@@ -89,20 +89,33 @@ The chatbot also helps users in optimization, translation, and in helping them c
 *  Five new Apple Watch sizes, listed below, are now supported in
    Iris. 
 
-   * Apple Watch Ultra 49 mm 
-   * Apple Watch 45 mm 
-   * Apple Watch 44 mm 
-   * Apple Watch 42 mm 
-   * Apple Watch 41 mm 
+   <html>
+   <body>
+   <ul style="list-style-type:circle;">
+   <li>Apple Watch Ultra 49 mm</li>
+   <li>Apple Watch 45 mm</li>
+   <li>Apple Watch 44 mm</li>
+   <li>Apple Watch 42 mm </li>
+   <li>Apple Watch 41 mm</li>
+   </ul>  
+   </body>
+   </html>
+
 
 * Four new iPhone devices, listed below, are now supported in
   Iris. 
-
-  * iPhone 14 
-  * iPhone 14 Plus 
-  * iPhone  14 Pro 
-  * iPhone 14 Pro Max 
-
+  
+   <html>
+   <body>
+   <ul style="list-style-type:circle;">
+   <li>iPhone 14</li>
+   <li>iPhone 14 Plus</li>
+   <li>iPhone  14 Pro</li>
+   <li>iPhone 14 Pro Max</li>
+   </ul>
+   </body>
+   </html>
+   
 * For Volt MX App (both mobile and tablets) updates will be made available in App Store and Google Play Store. 
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
