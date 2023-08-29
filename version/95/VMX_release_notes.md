@@ -96,6 +96,7 @@ The chatbot also helps users in optimization, translation, and in helping them c
    <li>Apple Watch 42 mm </li>
    <li>Apple Watch 41 mm</li>
    </ul> 
+
    <li>Four new iPhone devices, listed below, are now supported in  Iris. </li>
    <ul style="list-style-type:circle;">
    <li>iPhone 14</li>
@@ -103,6 +104,7 @@ The chatbot also helps users in optimization, translation, and in helping them c
    <li>iPhone  14 Pro</li>
    <li>iPhone 14 Pro Max</li>
    </ul>
+   
    <li>For Volt MX App (both mobile and tablets) updates will be made available in App Store and Google Play Store.</li>
 </body>
 </html>
