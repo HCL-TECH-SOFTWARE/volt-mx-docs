@@ -88,7 +88,6 @@ The chatbot also helps users in optimization, translation, and in helping them c
 
 *  Five new Apple Watch sizes, listed below, are now supported in
    Iris. 
-
    <html>
    <body>
    <ul style="list-style-type:circle;">
@@ -100,11 +99,8 @@ The chatbot also helps users in optimization, translation, and in helping them c
    </ul>  
    </body>
    </html>
-
-
 * Four new iPhone devices, listed below, are now supported in
   Iris. 
-  
    <html>
    <body>
    <ul style="list-style-type:circle;">
