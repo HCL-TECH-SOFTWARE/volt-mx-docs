@@ -7,6 +7,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Iris](#volt-iris)
 
+- [V9 Servicepack 5 Fixpack 15](#v9-servicepack-5-fixpack-15)
 - [V9 Servicepack 5 Fixpack 12](#v9-servicepack-5-fixpack-12)
 - [V9 Servicepack 5 Fixpack 11](#v9-servicepack-5-fixpack-11)
 - [V9 Servicepack 5 Fixpack 10](#v9-servicepack-5-fixpack-10)
@@ -57,6 +58,54 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 - [Earlier Foundry releases](#earlier-foundry-releases)
 
 ## Volt Iris
+
+
+### V9 Servicepack 5 Fixpack 15
+
+September 05, 2023
+
+#### Iris Enhancements
+
+**Support to build Desktop native applications**
+
+It is now possible to build applications targeted to Windows and Mac Desktops.  Manage window controls, menu bars and desktop tray access for the applications.  Applications can interact with local desktop resources while continuing the client-server application model as well.  Developers can also expand the access to additional desktop resources using Desktop Native Function Interfaces (NFIs). 
+
+**Low-code support for Apple Watch**
+
+It is now possible to build Apple Watch applications using low-code actions in the Action Editor. Open the Action Editor for an Apple Watch widget action and drag and drop one of 22 low-code actions such as `Add Variable` or `Set Master Data` and Swift source code will be automatically generated for your application. 
+
+**Support for Cordova 11**
+
+
+**Android 12 Splash Screen enhancements**
+
+
+**Volt IQ**
+
+Volt IQ is a chatbot designed to help Iris users through their journey to create applications. The chatbot can assist users in various ways: building a binary, importing projects, searching for help materials in the community site and documentation, in a single query, and more. 
+
+The chatbot also helps users in optimization, translation, and in helping them complete many more time-consuming tasks with ease. It uses advanced AI algorithms to provide the best-suited recommendations that enhance users’ app-building experience. 
+
+*  Five new Apple Watch sizes, listed below, are now supported in
+   Iris. 
+
+   * Apple Watch Ultra 49 mm 
+   * Apple Watch 45 mm 
+   * Apple Watch 44 mm 
+   * Apple Watch 42 mm 
+   * Apple Watch 41 mm 
+
+* Four new iPhone devices, listed below, are now supported in
+  Iris. 
+
+  * iPhone 14 
+  * iPhone 14 Plus 
+  * iPhone  14 Pro 
+  * iPhone 14 Pro Max 
+
+* For Volt MX App (both mobile and tablets) updates will be made available in App Store and Google Play Store. 
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 
 ### V9 Servicepack 5 Fixpack 12
