@@ -7,7 +7,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Iris](#volt-iris)
 
-- [V9 Servicepack 5 Fixpack 15](#v9-servicepack-5-fixpack-15)
+- [V9 Servicepack 5 Fixpack 15](#v9-servicepack-5-fixpack-15-iris)
 - [V9 Servicepack 5 Fixpack 12](#v9-servicepack-5-fixpack-12)
 - [V9 Servicepack 5 Fixpack 11](#v9-servicepack-5-fixpack-11)
 - [V9 Servicepack 5 Fixpack 10](#v9-servicepack-5-fixpack-10)
@@ -60,7 +60,8 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 ## Volt Iris
 
 
-### V9 Servicepack 5 Fixpack 15
+<!-- ### V9 Servicepack 5 Fixpack 15 -->
+<h3 id=v9-servicepack-5-fixpack-15-iris>V9 Servicepack 5 Fixpack 15</h3>
 
 September 05, 2023
 
