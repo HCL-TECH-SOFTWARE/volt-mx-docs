@@ -24,15 +24,83 @@ This API encrypts the input string and returns the encrypted text. This API is a
 voltmx.crypto.asymmetricEncrypt(alias, inputstring, propertiesTable)
 ```
 
-### Input Parameters
+
+<h3>Input Parameters</h3> 
 
   
-| Parameters | Description |
+<!-- | Parameters | Description |
 | --- | --- |
 | alias \[String\] - Mandatory | You can generate the value of the alias parameter by using [generateAsymmetricKeyPair API.](#generateAsymmetricKeyPair) |
 | inputstring\[String/ RawBytes\] - Mandatory | The input text to be encrypted. > **_Note:_** RawBytes are only accepted on the Android platform. The content type of the RawBytes must be `voltmx.types.RawBytes.CONTENT_TYPE_CHAR_ARRAY` or `voltmx.types.RawBytes.CONTENT_TYPE_BYTE_ARRAY`. |
 | propertiesTable \[Object\] - Mandatory | The applicable values for this parameter are as follows: **transformation** (String): The cipher transformation to be used. Possible transformation values are as follows:For iOS
-RSA:rawRSA:PKCS1RSA:OAEP:SHA1RSA:OAEP:SHA224RSA:OAEP:SHA256RSA:OAEP:SHA384RSA:OAEP:SHA512RSA:OAEP:SHA1:AESGCMRSA:OAEP:SHA224:AESGCMRSA:OAEP:SHA256:AESGCMRSA:OAEP:SHA384:AESGCMRSA:OAEP:SHA512:AESGCMFor Android and Windows"RSA/ECB/PKCS1Padding""RSA/ECB/OAEPWithSHA-1AndMGF1Padding""RSA/ECB/OAEPWithSHA-224AndMGF1Padding""RSA/ECB/OAEPWithSHA-256AndMGF1Padding""RSA/ECB/OAEPWithSHA-384AndMGF1Padding""RSA/ECB/OAEPWithSHA-512AndMGF1Padding""RSA/ECB/OAEPPadding""RSA/NONE/NoPadding""RSA/NONE/PKCS1Padding""RSA/NONE/OAEPWithSHA-1AndMGF1Padding""RSA/NONE/OAEPWithSHA-224AndMGF1Padding""RSA/NONE/OAEPWithSHA-256AndMGF1Padding""RSA/NONE/OAEPWithSHA-384AndMGF1Padding""RSA/NONE/OAEPWithSHA-512AndMGF1Padding""RSA/NONE/OAEPPadding" |
+RSA:rawRSA:PKCS1RSA:OAEP:SHA1RSA:OAEP:SHA224RSA:OAEP:SHA256RSA:OAEP:SHA384RSA:OAEP:SHA512RSA:OAEP:SHA1:AESGCMRSA:OAEP:SHA224:AESGCMRSA:OAEP:SHA256:AESGCMRSA:OAEP:SHA384:AESGCMRSA:OAEP:SHA512:AESGCMFor Android and Windows"RSA/ECB/PKCS1Padding""RSA/ECB/OAEPWithSHA-1AndMGF1Padding""RSA/ECB/OAEPWithSHA-224AndMGF1Padding""RSA/ECB/OAEPWithSHA-256AndMGF1Padding""RSA/ECB/OAEPWithSHA-384AndMGF1Padding""RSA/ECB/OAEPWithSHA-512AndMGF1Padding""RSA/ECB/OAEPPadding""RSA/NONE/NoPadding""RSA/NONE/PKCS1Padding""RSA/NONE/OAEPWithSHA-1AndMGF1Padding""RSA/NONE/OAEPWithSHA-224AndMGF1Padding""RSA/NONE/OAEPWithSHA-256AndMGF1Padding""RSA/NONE/OAEPWithSHA-384AndMGF1Padding""RSA/NONE/OAEPWithSHA-512AndMGF1Padding""RSA/NONE/OAEPPadding" | -->
+
+<table>
+    <tr>
+        <th>Parameters</th>        
+        <th>Description</th>
+    </tr>    
+    <tr>
+        <td>alias [String] - Mandatory</td>        
+        <td>You can generate the value of the alias parameter by using <a href="#generateAsymmetricKeyPair">generateAsymmetricKeyPair API</a>.</td>
+    </tr>        
+    <tr>
+        <td>inputstring[String/ RawBytes] - Mandatory</td>        
+        <td>The input text to be encrypted.
+        <blockquote><em><b>Note:</b></em> RawBytes are only accepted on the Android platform. The content type of the RawBytes must be <code>voltmx.types.RawBytes.CONTENT_TYPE_CHAR_ARRAY</code> or <code>voltmx.types.RawBytes.CONTENT_TYPE_BYTE_ARRAY</code>.</blockquote>
+        </td>
+    </tr>   
+    <tr>
+        <td>propertiesTable [Object] - Mandatory</td>        
+        <td>The applicable values for this parameter are as follows: <br>
+        <ul>
+        <li><b>transformation</b>(String):The cipher transformation to be used. Possible transformation values are as follows:
+        <ul>
+            <li>For iOS
+                <ul>
+                    <li>RSA:raw</li>                    
+                    <li>RSA:PKCS1</li>                    
+                    <li>RSA:OAEP:SHA1</li>                    
+                    <li>RSA:OAEP:SHA224</li>                    
+                    <li>RSA:OAEP:SHA256</li>                    
+                    <li>RSA:OAEP:SHA384</li>                    
+                    <li>RSA:OAEP:SHA512</li>                    
+                    <li>RSA:OAEP:SHA1:AESGCM</li>                    
+                    <li>RSA:OAEP:SHA224:AESGCM</li>                    
+                    <li>RSA:OAEP:SHA256:AESGCM</li>                    
+                    <li>RSA:OAEP:SHA384:AESGCM</li>                    
+                    <li>RSA:OAEP:SHA512:AESGCM</li>
+                </ul>
+            </li>            
+            <li>For Android
+                <ul>
+                    <ul>
+                    <li>"RSA/ECB/PKCS1Padding"</li>                    
+                    <li>"RSA/ECB/OAEPWithSHA-1AndMGF1Padding"</li>                    
+                    <li>"RSA/ECB/OAEPWithSHA-224AndMGF1Padding"</li>                    
+                    <li>"RSA/ECB/OAEPWithSHA-256AndMGF1Padding"</li>                    
+                    <li>"RSA/ECB/OAEPWithSHA-384AndMGF1Padding"</li>                    
+                    <li>"RSA/ECB/OAEPWithSHA-512AndMGF1Padding"</li>                    
+                    <li>"RSA/ECB/OAEPPadding"</li>                    
+                    <li>"RSA/NONE/NoPadding"</li>                    
+                    <li>"RSA/NONE/PKCS1Padding"</li>                    
+                    <li>"RSA/NONE/OAEPWithSHA-1AndMGF1Padding"</li>                    
+                    <li>"RSA/NONE/OAEPWithSHA-224AndMGF1Padding"</li>                    
+                    <li>"RSA/NONE/OAEPWithSHA-256AndMGF1Padding"</li>                    
+                    <li>"RSA/NONE/OAEPWithSHA-384AndMGF1Padding"</li>                    
+                    <li>"RSA/NONE/OAEPWithSHA-512AndMGF1Padding"</li>                    
+                    <li>"RSA/NONE/OAEPPadding"</li>
+                </ul>
+                </ul>
+            </li>
+        </ul>
+        </li>
+        </ul>
+        </td>
+    </tr>
+</table>
+
+
 
 ### Example
 
@@ -101,11 +169,86 @@ voltmx.crypto.asymmetricDecrypt(alias, encryptedContent, propertiesTable)
 ### Input Parameters
 
   
-| Parameters | Description |
+<!-- | Parameters | Description |
 | --- | --- |
 | alias \[String\] - Mandatory | You can generate the value of the alias parameter by using [generateAsymmetricKeyPair API.](#generateAsymmetricKeyPair) |
 | encryptedContent \[Object\] - Mandatory | An object that contains the encrypted text to be decrypted. |
-| propertiesTable \[Object\] - Mandatory | The applicable values for this parameter are as follows: **transformation (String)**: The cipher transformation to be used. Possible transformation values are as follows: For iOS RSA:raw RSA:PKCS1 RSA:OAEP:SHA1 RSA:OAEP:SHA224 RSA:OAEP:SHA256 RSA:OAEP:SHA384 RSA:OAEP:SHA512 RSA:OAEP:SHA1:AESGCM RSA:OAEP:SHA224:AESGCM RSA:OAEP:SHA256:AESGCM RSA:OAEP:SHA384:AESGCM RSA:OAEP:SHA512:AESGCM For Android and Windows"RSA/ECB/PKCS1Padding""RSA/ECB/OAEPWithSHA-1AndMGF1Padding""RSA/ECB/OAEPWithSHA-224AndMGF1Padding""RSA/ECB/OAEPWithSHA-256AndMGF1Padding""RSA/ECB/OAEPWithSHA-384AndMGF1Padding""RSA/ECB/OAEPWithSHA-512AndMGF1Padding""RSA/ECB/OAEPPadding""RSA/NONE/NoPadding""RSA/NONE/PKCS1Padding""RSA/NONE/OAEPWithSHA-1AndMGF1Padding""RSA/NONE/OAEPWithSHA-224AndMGF1Padding""RSA/NONE/OAEPWithSHA-256AndMGF1Padding""RSA/NONE/OAEPWithSHA-384AndMGF1Padding""RSA/NONE/OAEPWithSHA-512AndMGF1Padding""RSA/NONE/OAEPPadding" **decryptToRawBytes**: An optional Boolean value that specifies whether the input content must be decrypted to RawBytes. > **_Note:_** If you enable the decryptToRawBytes property, the decrypted text does not appear in the application memory in the String format. If the value is true, the encrypted input content is decrypted to RawBytes of the type voltmx.types.RawBytes.CONTENT\_TYPE\_BYTE\_ARRAY.If the value is false, the encrypted input content is decrypted to a String. > **_Note:_** This parameter is only available on the Android platform. |
+| propertiesTable \[Object\] - Mandatory | The applicable values for this parameter are as follows: **transformation (String)**: The cipher transformation to be used. Possible transformation values are as follows: For iOS RSA:raw RSA:PKCS1 RSA:OAEP:SHA1 RSA:OAEP:SHA224 RSA:OAEP:SHA256 RSA:OAEP:SHA384 RSA:OAEP:SHA512 RSA:OAEP:SHA1:AESGCM RSA:OAEP:SHA224:AESGCM RSA:OAEP:SHA256:AESGCM RSA:OAEP:SHA384:AESGCM RSA:OAEP:SHA512:AESGCM For Android and Windows"RSA/ECB/PKCS1Padding""RSA/ECB/OAEPWithSHA-1AndMGF1Padding""RSA/ECB/OAEPWithSHA-224AndMGF1Padding""RSA/ECB/OAEPWithSHA-256AndMGF1Padding""RSA/ECB/OAEPWithSHA-384AndMGF1Padding""RSA/ECB/OAEPWithSHA-512AndMGF1Padding""RSA/ECB/OAEPPadding""RSA/NONE/NoPadding""RSA/NONE/PKCS1Padding""RSA/NONE/OAEPWithSHA-1AndMGF1Padding""RSA/NONE/OAEPWithSHA-224AndMGF1Padding""RSA/NONE/OAEPWithSHA-256AndMGF1Padding""RSA/NONE/OAEPWithSHA-384AndMGF1Padding""RSA/NONE/OAEPWithSHA-512AndMGF1Padding""RSA/NONE/OAEPPadding" **decryptToRawBytes**: An optional Boolean value that specifies whether the input content must be decrypted to RawBytes. > **_Note:_** If you enable the decryptToRawBytes property, the decrypted text does not appear in the application memory in the String format. If the value is true, the encrypted input content is decrypted to RawBytes of the type voltmx.types.RawBytes.CONTENT\_TYPE\_BYTE\_ARRAY.If the value is false, the encrypted input content is decrypted to a String. > **_Note:_** This parameter is only available on the Android platform. | -->
+
+
+<table>
+    <tr>
+        <th>Parameters</th>        
+        <th>Description</th>
+    </tr>    
+    <tr>
+        <td>alias [String] - Mandatory</td>        
+        <td>You can generate the value of the alias parameter by using <a href="#generateAsymmetricKeyPair">generateAsymmetricKeyPair API</a>.</td>
+    </tr>        
+    <tr>
+        <td>inputstring[String/ RawBytes] - Mandatory</td>        
+        <td>An object that contains the encrypted text to be decrypted.
+        </td>
+    </tr>   
+    <tr>
+        <td>propertiesTable [Object] - Mandatory</td>        
+        <td>The applicable values for this parameter are as follows: <br>
+        <ul>
+        <li><b>transformation</b>(String):The cipher transformation to be used. Possible transformation values are as follows:
+        <ul>
+            <li>For iOS
+                <ul>
+                    <li>RSA:raw</li>                    
+                    <li>RSA:PKCS1</li>                    
+                    <li>RSA:OAEP:SHA1</li>                    
+                    <li>RSA:OAEP:SHA224</li>                    
+                    <li>RSA:OAEP:SHA256</li>                    
+                    <li>RSA:OAEP:SHA384</li>                    
+                    <li>RSA:OAEP:SHA512</li>                    
+                    <li>RSA:OAEP:SHA1:AESGCM</li>                    
+                    <li>RSA:OAEP:SHA224:AESGCM</li>                    
+                    <li>RSA:OAEP:SHA256:AESGCM</li>                    
+                    <li>RSA:OAEP:SHA384:AESGCM</li>                    
+                    <li>RSA:OAEP:SHA512:AESGCM</li>
+                </ul>
+            </li>            
+            <li>For Android
+                <ul>
+                    <ul>
+                    <li>"RSA/ECB/PKCS1Padding"</li>                    
+                    <li>"RSA/ECB/OAEPWithSHA-1AndMGF1Padding"</li>                    
+                    <li>"RSA/ECB/OAEPWithSHA-224AndMGF1Padding"</li>                    
+                    <li>"RSA/ECB/OAEPWithSHA-256AndMGF1Padding"</li>                    
+                    <li>"RSA/ECB/OAEPWithSHA-384AndMGF1Padding"</li>                    
+                    <li>"RSA/ECB/OAEPWithSHA-512AndMGF1Padding"</li>                    
+                    <li>"RSA/ECB/OAEPPadding"</li>                    
+                    <li>"RSA/NONE/NoPadding"</li>                    
+                    <li>"RSA/NONE/PKCS1Padding"</li>                    
+                    <li>"RSA/NONE/OAEPWithSHA-1AndMGF1Padding"</li>                    
+                    <li>"RSA/NONE/OAEPWithSHA-224AndMGF1Padding"</li>                    
+                    <li>"RSA/NONE/OAEPWithSHA-256AndMGF1Padding"</li>                    
+                    <li>"RSA/NONE/OAEPWithSHA-384AndMGF1Padding"</li>                    
+                    <li>"RSA/NONE/OAEPWithSHA-512AndMGF1Padding"</li>                    
+                    <li>"RSA/NONE/OAEPPadding"</li>
+                </ul>
+                </ul>
+            </li>
+            <li><b>decryptToRawBytes</b>: An optional Boolean value that specifies whether the input content must be decrypted to RawBytes.
+            <blockquote><em><b>Note:</b></em> If you enable the decryptToRawBytes property, the decrypted text does not appear in the application memory in the String format.</blockquote>
+            If the value is true, the encrypted input content is decrypted to RawBytes of the type voltmx.types.RawBytes.CONTENT_TYPE_BYTE_ARRAY.<br>
+            If the value is false, the encrypted input content is decrypted to a String.
+            <blockquote><em><b>Note:</b></em> This parameter is only available on the Android platform.</blockquote>
+            </li>
+        </ul>
+        </li>
+        </ul>
+        </td>
+    </tr>
+</table>
+
+
+
+
 
 ### Example
 
