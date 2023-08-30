@@ -26,7 +26,7 @@ The following table describes the components of Volt MX Foundry:
 | Environments (Engagement Services, Integration Services) | This component adds runtime capabilities to apps, such as engagement services, and integration services. |
 | Middleware | This component exists between a mobile device and an endpoint server. It receives a request from a mobile device, sends it to an endpoint server, fetches the response from the backend and provides the required information to the device in the JSON format. |
 | Admin | Admin provides the capability to list down the set of services published and test the services shown in Admin Console. Also you can view list of published apps and provides the delete apps functionality. In Volt MX Cloud, changing the log levels and checking the logs features are available as the cloud is managed by Volt MX. You can also view reports if you are using metrics module. This is an optional component. For more details, refer to [Admin Console User Guide](../../../Foundry/vmf_integrationservice_admin_console_userguide/Content/App_Services_User_Guide.md) |
-| Services | Services component is used only when Volt MX Foundry is integrated. It has same runtime capabilities as the middleware. > **_Note:_**  To use Volt MX Server with Volt MX Foundry integrated, you can ignore the middleware.war. Similarly when you use only standalone Volt MX Server, you can ignore the services.war. |
+| Services | Services component is used only when Volt MX Foundry is integrated. It has same runtime capabilities as the middleware. > **_Note:_**  To use Volt MX Server with Volt MX Foundry integrated, you can ignore the middleware.war. Similarly when you use only standalone Volt MX Server, you can ignore the services.war |
 
 > **_Note:_**
 
@@ -40,11 +40,13 @@ For frequently asked questions and troubleshooting, refer to [FAQs and Troublesh
 Developer Environment
 ---------------------
 
-For development environment, a developer can preferably install Volt MX Foundry components in a standalone mode (single node) on a local environment. For more details, refer to [Single Node Installation](Installing_VoltMX_Foundry_on_Linux.md#Single-Node).
+
+For development environment, a developer can preferably install Volt MX Foundry components in a standalone mode (single node) on a local environment. For more details, refer to [Installing Volt Foundry](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_linux_install_guide/Content/Installing_VoltMX_Foundry_on_Linux.html#Single-Node)
 
 > **_Important:_**  VoltMX Foundry Installer supports Tomcat and JBoss.  
   
-Tomcat on single-node only. For multi-node installation on Tomcat, refer to [Volt Foundry Manual Install Guide](../../voltmx_foundry_manual_install_guide/Content/Introduction.md).  
+
+Tomcat on single-node only. For multi-node installation on Tomcat, refer to [Volt Foundry Manual Install Guide](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_manual_install_guide/Content/Introduction.html).  
   
 Volt MX  Foundry Consolidated installer supports JBoss on single node (**Standalone Mode**)and multi-node (**Domain Mode**).
 

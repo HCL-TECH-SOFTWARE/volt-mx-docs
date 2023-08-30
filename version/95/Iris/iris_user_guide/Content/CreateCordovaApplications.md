@@ -8,7 +8,11 @@ Volt MX  Iris supports the creation of Apache Cordova apps. Cordova is an open-s
 
 Volt MX  Iris supports internationalization in Cordova applications.
 
-> **_Important:_***   For Android: maximum Cordova version supported is 9.0.0
+To enable apps to be build with Cordova 11, ability to select Java 11 has been added in Iris preferences.
+
+> **_Note:_** User can now set either Java 8 or Java 11 in Iris preferences.<br>
+
+> **_Important:_***   
 *   For Android: Adding Gradle to the global scope is a pre-requisite for building Cordova applications. For more information, refer to Gradle in [Android Platform Guide](https://cordova.apache.org/docs/en/latest/guide/platforms/android#installing-the-requirements).
 *   For Windows: You must integrate Gradle home into your machine by setting the PATH environment variable.
 *   For Mac: You can integrate Gradle into your Mac using any of the following procedures and verify the command "ls -l /usr/local/bin/gradle" points to the installed Gradle.
