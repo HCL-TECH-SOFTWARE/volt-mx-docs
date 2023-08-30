@@ -44,16 +44,9 @@ Configure the parameters for the preprocessor and postprocessor to filter the re
             <blockquote><b><i>Note:</i></b> For details on Foundry Javascript for preprocessor and postprocessor, refer to <a href="../../../javascript_docs_apis/jsdocs/index.html"><code>javascript_docs_apis</code></a></blockquote>
             <br>
             <h3>Monaco Editor Enhancement</h3>
-            <li>Adding Wrapper JavaScript APIs for commonly used
-                middleware API Objects to use them in JavaScript friendly way</li>
-            <li>Change Pre and Post Processor Editor from
-                CodeMirror to Monaco (Monaco is the code editor used in Visual Studio)</li>
-           <li>Adding new JavaScript Samples for Pre and Post
-               Processor using new Wrapper APIs</li>
-           <li>Enhancing Editor UI so that Users can access
-               JavaScript Samples from Editor</li>
-           <li>Customize Intellisense in Editor so that it Shows
-               Wrapper Objects and methods</li>
+            <li>Changed Pre and Post Processor editor from CodeMirror to Monaco (Monaco is the code editor used in Visual Studio).</li>
+            <li>Added new JavaScript APIs for commonly used middleware API Objects to use them in JavaScript friendly way and added samples and Intellisense support for the same.</li>
+           <li>Enhanced the editor UI so that the users can access JavaScript Samples from the editor.</li>
       </td>
     </tr>
     <tr><td><h2 style="text-decoration:underline;">Rules Preprocessor and Postprocessor</h2></td></tr>
