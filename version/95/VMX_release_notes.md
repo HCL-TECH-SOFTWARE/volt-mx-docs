@@ -749,6 +749,7 @@ August 21, 2023
 
      * If SAP Gateway is not visible, user can make it visible 
        by Importing an App which contains SAP Gateway Services OR Importing SAP Gateway Services
+       
 * java script preprocessor postprocessor enhancement
 
      * Monaco editor support added which allows javascript sample access from Foundry console  along with improved intellisense. Refer [here](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Java_Preprocessor_Postprocessor_.html) for more info
