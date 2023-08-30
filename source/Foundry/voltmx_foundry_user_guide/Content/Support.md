@@ -15,5 +15,5 @@ The following are the Developer resources from Base Camp Library:
 - [Ideation](https://volt-mx.hcltechsw.com/ideas) - Search for, vote on, and create Ideas (feature requests) for HCL products.
 - [Training](https://academy.hcltechsw.com/courses?search=eyJjYXQiOiIxMCIsInRpdGxlIjoiIiwiZmlsdGVyIjoiIn0=) - Up your game by becoming a HCL Certified Designer for free.
 - [Documentation](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/) & [Articles](https://support.hcltechsw.com/csm?id=kb_search&spa=1&kb_category=db382ff1db631c14a45ad9fcd3961936) – Resources the way you want them.
-- [Release Notes - Foundry](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/VMX_release_notes.md#volt-foundry) & [Iris](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/VMX_release_notes.md#volt-iris) - Do not miss a beat when we release new features into the wild.
+- [Release Notes - Foundry](../../../VMX_release_notes.md#volt-foundry) & [Iris](../../../VMX_release_notes.md#volt-iris) - Do not miss a beat when we release new features into the wild.
 <!-- - [HCL Infinity](https://basecamp.voltmx.com/s/dbx) - Visit the DBX page on Base Camp for banking resources. -->
