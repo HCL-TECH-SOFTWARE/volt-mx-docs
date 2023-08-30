@@ -77,8 +77,12 @@ It is now possible to build Apple Watch applications using low-code actions in t
 
 **Support for Cordova 11**
 
+Cordova 11 support introduced and it is mandatory that developer has to migrate to Cordova 11 if they have to embed Cordova in VoltIris
+
 
 **Android 12 Splash Screen enhancements**
+
+Introduced Native Splash Screen support for Android Platform, behavioural changes will be observed from Android 12 and above devices.
 
 
 **Volt IQ**
@@ -95,15 +99,14 @@ The chatbot also helps users in optimization, translation, and in helping them c
    <li>Apple Watch 45 mm</li>
    <li>Apple Watch 44 mm</li>
    <li>Apple Watch 42 mm </li>
-   <li>Apple Watch 41 mm</li>
+   <li>Apple Watch 41 mm</li><br>
    </ul> 
-
    <li>Four new iPhone devices, listed below, are now supported in  Iris. </li>
    <ul style="list-style-type:circle;">
    <li>iPhone 14</li>
    <li>iPhone 14 Plus</li>
    <li>iPhone  14 Pro</li>
-   <li>iPhone 14 Pro Max</li>
+   <li>iPhone 14 Pro Max</li><br>
    </ul>
    
    <li>For Volt MX App (both mobile and tablets) updates will be made available in App Store and Google Play Store.</li>
