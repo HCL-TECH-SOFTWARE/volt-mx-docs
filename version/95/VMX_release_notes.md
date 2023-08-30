@@ -745,13 +745,17 @@ August 21, 2023
 * Text Data Adapter support.Refer < Text data adapter doc link > for more information on text data adapter.
 * Utf8mb4 support for Mysql databaseRefer < Foundry upgrade to 8.0 with utf8mb4 document link > for Foundry upgrade steps from Mysql 5.7 to Mysql 8.0.x with utf8mb4 support.
 * Support for TIBCO jasper 7.9.2Refer < Jasper upgrade step link > for jasper 7.9.2 setup steps to integrate with Foundry.
-* Security fixes
 * Enabling SAP Gateway Service after Import 
 
      * If SAP Gateway is not visible, user can make it visible 
        by Importing an App which contains SAP Gateway Services OR Importing SAP Gateway Services
+* java script preprocessor postprocessor enhancement
+
+     * Monaco editor support added which allows javascript sample access from Foundry console  along with improved intellisense. Refer [here](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Java_Preprocessor_Postprocessor_.html) for more info
 
   > **_Note:_**  After importing app/service user need to refresh the page. Re-login is not required
+
+* Security fixes
 
 ### AppFactory Enhancements
 
@@ -760,9 +764,7 @@ August 21, 2023
 
 ### AppFactory Jenkins Upgrade
 
-AppFactory upgraded Jenkins, its plugins and Java version for Jenkins, a significant upgrade that enhances the security, user experience, and performance of the platform.
-
-### Key Features and Enhancements
+AppFactory upgraded Jenkins, plugins and Java version (for Jenkins) to enhances security, user experience, and performance of the platform.
 
 * **Security Enhancements** : With this upgrade, all known Jenkins security vulnerabilities have been addressed and resolved.
 
