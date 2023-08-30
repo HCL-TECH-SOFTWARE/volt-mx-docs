@@ -3795,8 +3795,8 @@ If data contains the sections then the _selectedIndex_ indicates the selected ro
 ### Example
 
 ```
-//Sample code to set the selectedRowIndex property for a Segment as four.
-frmSegment.mySegment.selectedRowIndex= 4;  
+//Sample code to set the selectedRowIndex property for a Segment [1,4].
+frmSegment.mySegment.selectedRowIndex= [1,4];
   
 //Reading the selectedRowIndex of the Segment widget.
 voltmx.print("SegmentedUI selectedRowIndex ::" + frmSegment.mySegment.selectedRowIndex);  

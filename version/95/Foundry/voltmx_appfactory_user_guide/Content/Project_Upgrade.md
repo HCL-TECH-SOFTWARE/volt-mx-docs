@@ -29,3 +29,19 @@ After you upgrade a project, navigate to the project folder and select **Project
 After saving these settings, you can [Build a Iris app](BuildingAnApp.md) or [Build a Foundry app](BuildingFoundryApp.md) for your Project. You can also use the [Database](Database.md) service and the [Flyway job](RunningFlywayJobs.md) to run Database migrations.
 
 > **_Important:_** If the **Project Settings** are not configured after upgrading an existing project, the build jobs will fail.
+
+
+### Post Upgrade Instructions:
+
+There are UI fixes in AppFactory project.The projects created in the older version of AppFactory will be required to be updated. 
+
+**How to upgrade AppFactory Project** : Project Settings page for older project will show a banner with 'Upgrade Now' button which which when clicked redirects to a build page which when built, upgrades the project. 
+
+
+
+![](Resources/Images/rel-note01.png)
+
+
+   
+![](Resources/Images/rel-note02.png)
+

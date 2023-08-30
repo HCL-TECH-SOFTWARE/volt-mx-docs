@@ -193,6 +193,13 @@ Use Case
 
 An online shopping website can use server events feature to send the order status emails automatically to its customers who have placed orders on their website. The developer can write the custom code to trigger events when an order is either successful or failed. The concerned customer will get an email depending upon the status of the order.
 
+```
+eventData = new EventData("apps/order/success", response.getResponse());
+
+```
+> **_Note:_** response.getResponse() should return json string in order to send this response to event.
+
+
 ### Custom Code to trigger an Event
 
 ```

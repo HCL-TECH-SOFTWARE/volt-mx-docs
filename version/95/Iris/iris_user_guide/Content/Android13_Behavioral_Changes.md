@@ -25,3 +25,58 @@ In Android 13 devices, users can stop foreground services from the Foreground Se
 ### Dismiss Foreground Service Notifications
 
 In Android 13 devices, users can swipe foreground service (FGS) notifications away, by default. If the foreground services of an app have been running for more than 20 hours in a 24-hour window, the OS displays an interactive notification to the user through the Foreground Services Task Manager. However, if the foreground service is of the `FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK` or `FOREGROUND_SERVICE_TYPE_LOCATION` types, the OS does not display the foreground service notification.
+
+
+### Granular media permissions
+
+If your app targets Android 13 or higher and needs to access media files that other apps have created, you must request one or more of the following granular media permissions instead of the READ_EXTERNAL_STORAGE permission:
+
+<html>
+<head>
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+tr:nth-child(even) {
+}
+</style>
+</head>
+<body>
+<table>
+  <tr>
+    <td>Type of media</td>
+    <td>Permission to request</td>
+  </tr>
+  <tr>
+    <td>Images and photos</td>
+    <td>READ_MEDIA_IMAGES</td>
+  </tr>
+  <tr>
+    <td>Videos</td>
+    <td>READ_MEDIA_VIDEO</td>
+  </tr>
+  <tr>
+    <td>Audio files</td>
+    <td>READ_MEDIA_AUDIO</td>
+    </tr>
+</table>
+</body>
+</html>
+
+If the TargetSDK API Level of the app is 33 and app is using below Voltmx api’s, you must add one or more granular media permissions in tags section under Application tags attributes based on the mime type provided to api. Please refer the API Documentation for more details.
+
+*	voltmx.phone.openMediaGallery 
+*	voltmx.io.File.remove
+*	voltmx.io.File.rename
+*	voltmx.io.File.createDirectory
+*	voltmx.io.File.getFileList
+*	ImageObject.writeToMediaGallery
+*	ImageObject.findImageInGallery
+
+If your app was previously granted the **READ_EXTERNAL_STORAGE** permission, then any requested **READ_MEDIA_** * permissions are granted automatically when upgrading.

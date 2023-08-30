@@ -104,7 +104,7 @@ To install and configure Git for the first time, follow these steps:
 
 > **_Note:_** Skip these steps if you already have GIT installed and configured.
 
-1.  Download and install Git from here.  
+1.  Download and install Git from [here](https://git-scm.com/downloads).  
     Ensure you have an account in Git. Create an account if you do not have one already.  
     
 2.  Open the terminal.

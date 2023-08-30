@@ -151,7 +151,11 @@ The following parameters must be provided by the user during Installation:
     
 3.  **Database Details**:
     
-    *   **Database Type** - This is the Database Type you want to use for hosting Volt MX Foundry. 
+    *   **Database Type** - This is the Database Type you want to use for hosting Volt MX Foundry.
+
+     * **IS_MYSQL_CONTAINER_REQUIRED** This value can be true/false  
+
+     > **_Note:_** When the value is true, **MYSQL 8.0.31** will come with Foundry Scripts Please note that the DB_HOST, DB_PORT and DB_USER will be defaulted for MySQL Container and need not be entered
 
     *   **Database Hostname** - This is the Database Server hostname used to connect to the Database Server.
 

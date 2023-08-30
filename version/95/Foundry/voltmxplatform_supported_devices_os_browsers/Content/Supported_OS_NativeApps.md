@@ -11,7 +11,7 @@ Volt MX  Iris Enterprise Edition version V9 supports the following operating sys
 | Platform | Supported Version |
 | --- | --- |
 | Apple iOS | Minimum version 8.x |
-| Apple Watch OS | Minimum version Watch OS 2.0 |
+| Apple Watch OS | Minimum version Watch OS 4 |
 | Google Android | Minimum version 4.2 |
 | Google Android Wear | Minimum version 25 (Wear 2.0) |
 | Windows | Windows 10  Desktop/Tablet Windows 10 Mobile Windows Desktop (also known as Windows Classic or Windows Legacy) |
