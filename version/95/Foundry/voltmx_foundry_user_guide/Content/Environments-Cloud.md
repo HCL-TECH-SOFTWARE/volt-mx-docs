@@ -18,8 +18,6 @@ From the **Environments** (VoltMX Cloud) page, you can navigate to the existing 
     
     *   **App Services**: For more information, refer [Appendix - App Services](Appendix_-_App_Services.md).
     *   **Log Services**: For more information, refer [Log Services](Logging_as_a_Service.md).
-	*   **VoltMX Foundry Sync: For more information, refer VoltMX Foundry Sync.
-
     *   **Volt Foundry Messaging**: For more information, refer [Volt Foundry Messaging](../../../Foundry/vms_console_user_guide/Content/Introduction_1.md).
     
     > **_Note:_** You can view all applications published to a Runtime Environment. [Refer Applications Published to a Runtime Environment](Published_Apps-Environments.md)
