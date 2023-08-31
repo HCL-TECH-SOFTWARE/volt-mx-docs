@@ -67,51 +67,45 @@ September 05, 2023
 
 #### Iris Enhancements
 
-**Support to build Desktop native applications**
+**Volt IQ - AI Assisted Development**
 
-It is now possible to build applications targeted to Windows and Mac Desktops.  Manage window controls, menu bars and desktop tray access for the applications.  Applications can interact with local desktop resources while continuing the client-server application model as well.  Developers can also expand the access to additional desktop resources using Desktop Native Function Interfaces (NFIs). 
+Volt IQ is an AI Assistant designed to help Volt Iris users through their journey to create applications. The Assistant can support users in.
+
+*  Executing Iris commands via Natural Language 
+*  Looking up Technical queries in external knowledge basics
+   like support portal, Hikes and YouTube 
+*  Providing Design suggestions 
+*  Code optimisations, and clean-up of unused resources,
+   performance and best practices
+*  Automated localisation of Application 
+*  Maintaining and Providing responses from an up-to-date FAQ
+
+**Five new Apple Watch sizes, listed below, are now supported in Iris**
+
+Apple Watch Ultra 49 mm, Apple Watch 45 mm, Apple Watch 44 mm,
+Apple Watch 42 mm, Apple Watch 41 mm
+
+**Four new iPhone devices, listed below, are now supported in  Iris**
+
+iPhone 14, iPhone 14 Plus, iPhone  14 Pro, iPhone 14 Pro Max
+
+**Support added for Native Desktop applications**
+
+Iris now supports building applications targeted to Windows (desktop) and macOS devices. Applications can interact with local desktop resources while supporting client-server application model. Developers can also extend the access to additional desktop resources using Native Function Interfaces (NFIs).
 
 **Low-code support for Apple Watch**
 
-It is now possible to build Apple Watch applications using low-code actions in the Action Editor. Open the Action Editor for an Apple Watch widget action and drag and drop one of 22 low-code actions such as `Add Variable` or `Set Master Data` and Swift source code will be automatically generated for your application. 
+Iris now supports building Apple Watch applications in the Action Editor using low-code. Open the Action Editor for an Apple Watch widget action and drag and drop one of 22 low-code actions and source code will be automatically generated for your application.
 
 **Support for Cordova 11**
 
-Cordova 11 support introduced and it is mandatory that developer has to migrate to Cordova 11 if they have to embed Cordova in VoltIris
+Cordova 11 support has been introduced. It is mandatory for developer to migrate to Cordova 11 if they need to embed Cordova in Volt Iris.
 
 
-**Android 12 Splash Screen enhancements**
+Native Android Splash Screen support added for Android 12+
 
-Introduced Native Splash Screen support for Android Platform, behavioural changes will be observed from Android 12 and above devices.
-
-
-**Volt IQ**
-
-Volt IQ is a chatbot designed to help Iris users through their journey to create applications. The chatbot can assist users in various ways: building a binary, importing projects, searching for help materials in the community site and documentation, in a single query, and more. 
-
-The chatbot also helps users in optimization, translation, and in helping them complete many more time-consuming tasks with ease. It uses advanced AI algorithms to provide the best-suited recommendations that enhance users’ app-building experience. 
-
-<html>
-<body>
-   <li>Five new Apple Watch sizes, listed below, are now supported in Iris. </li>
-   <ul style="list-style-type:circle;">
-   <li>Apple Watch Ultra 49 mm</li>
-   <li>Apple Watch 45 mm</li>
-   <li>Apple Watch 44 mm</li>
-   <li>Apple Watch 42 mm </li>
-   <li>Apple Watch 41 mm</li><br>
-   </ul> 
-   <li>Four new iPhone devices, listed below, are now supported in  Iris. </li>
-   <ul style="list-style-type:circle;">
-   <li>iPhone 14</li>
-   <li>iPhone 14 Plus</li>
-   <li>iPhone  14 Pro</li>
-   <li>iPhone 14 Pro Max</li><br>
-   </ul>
    
-   <li>For Volt MX App (both mobile and tablets) updates will be made available in App Store and Google Play Store.</li>
-</body>
-</html>
+For Volt MX App (both mobile and tablets) updates will be made available in App Store and Google Play Store.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
