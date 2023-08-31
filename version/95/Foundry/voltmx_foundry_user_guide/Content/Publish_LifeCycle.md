@@ -145,6 +145,7 @@ A published app provides link to the following services consoles:
 
 *   **Integration Service**: For more information, refer [Appendix - App Services.html.](Appendix_-_App_Services.md)
 *   **Orchestration Service**: For more information, refer [Appendix - App Services.html.](Appendix_-_App_Services.md)
+*   **Orchestration Service**: For more information, refer [Appendix - App Services.html.](Appendix_-_App_Services.md)
 *   **Engagement  Service**: For more information, refer [Engagement  Service](../../../Foundry/vms_console_user_guide/Content/Introduction_1.md).
 
 ### Snapshots
