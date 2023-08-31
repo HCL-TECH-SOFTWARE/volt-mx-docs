@@ -80,6 +80,14 @@ Volt IQ is an AI Assistant designed to help Volt Iris users through their journe
 *  Automated localisation of Application 
 *  Maintaining and Providing responses from an up-to-date FAQ
 
+**Support added for Native Desktop applications**
+
+Iris now supports building applications targeted to Windows (desktop) and macOS devices. Applications can interact with local desktop resources while supporting client-server application model. Developers can also extend the access to additional desktop resources using Native Function Interfaces (NFIs).
+
+**Low-code support for Apple Watch**
+
+Iris now supports building Apple Watch applications in the Action Editor using low-code. Open the Action Editor for an Apple Watch widget action and drag and drop one of 22 low-code actions and source code will be automatically generated for your application.
+
 **Five new Apple Watch sizes, listed below, are now supported in Iris**
 
 Apple Watch Ultra 49 mm, Apple Watch 45 mm, Apple Watch 44 mm,
@@ -89,20 +97,12 @@ Apple Watch 42 mm, Apple Watch 41 mm
 
 iPhone 14, iPhone 14 Plus, iPhone  14 Pro, iPhone 14 Pro Max
 
-**Support added for Native Desktop applications**
-
-Iris now supports building applications targeted to Windows (desktop) and macOS devices. Applications can interact with local desktop resources while supporting client-server application model. Developers can also extend the access to additional desktop resources using Native Function Interfaces (NFIs).
-
-**Low-code support for Apple Watch**
-
-Iris now supports building Apple Watch applications in the Action Editor using low-code. Open the Action Editor for an Apple Watch widget action and drag and drop one of 22 low-code actions and source code will be automatically generated for your application.
-
 **Support for Cordova 11**
 
 Cordova 11 support has been introduced. It is mandatory for developer to migrate to Cordova 11 if they need to embed Cordova in Volt Iris.
 
 
-Native Android Splash Screen support added for Android 12+
+**Native Android Splash Screen support added for Android 12+**
 
    
 For Volt MX App (both mobile and tablets) updates will be made available in App Store and Google Play Store.
