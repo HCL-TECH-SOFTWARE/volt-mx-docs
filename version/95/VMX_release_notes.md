@@ -744,7 +744,7 @@ August 21, 2023
 
 * Text Data Adapter support.Refer < Text data adapter doc link > for more information on text data adapter.
 * Utf8mb4 support for Mysql databaseRefer < Foundry upgrade to 8.0 with utf8mb4 document link > for Foundry upgrade steps from Mysql 5.7 to Mysql 8.0.x with utf8mb4 support.
-* Support for TIBCO jasper 7.9.2Refer < Jasper upgrade step link > for jasper 7.9.2 setup steps to integrate with Foundry.
+* Support for TIBCO jasper 7.9.2Refer [Jasper upgrade step](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_analytics_reporting/Content/How_to_Upgrade_JasperServer.html) for jasper 7.9.2 setup steps to integrate with Foundry.
 * Enabling SAP Gateway Service after Import 
 
      * If SAP Gateway is not visible, user can make it visible 
