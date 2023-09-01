@@ -742,20 +742,23 @@ August 21, 2023
 
 ### Foundry Enhancements
 
-* Text Data Adapter has been made available Refer <here> for more information on text data adapter.
+* Text Data Adapter has been made available Refer [here](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Text_Adapter.html) for more information on text data adapter.
+
 * utf8mb4 support has been introduced for MySQL database. Refer <here> for upgrade steps from MySQL 5.7 to MySQL 8.0.x with utf8mb4 support for Volt Foundry
+
 * Support for Jasper 7.9.2. Refer [here](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_analytics_reporting/Content/How_to_Upgrade_JasperServer.html) for Jasper 7.9.2 steps to integrate with Foundry.
+
 * Enabling SAP Gateway Service after Import.
 
    
-   * If SAP Gateway adapter is not visible, user can turn it on
+     * If SAP Gateway adapter is not visible, user can turn it on
      by Importing an App which contains SAP Gateway Services OR Importing SAP Gateway Services.
      
-   > **_Note:_** : After importing app/service user need to refresh the page. Re-login is not required
+     > **_Note:_** : After importing app/service user need to refresh the page. Re-login is not required
 
 *  JavaScript data-processor enhancement
 
-   * Editing pre and post processor can now be done via an
+     * Editing pre and post processor can now be done via an
      integrated Monaco editor with features to insert sample/framework code, IntelliSense support etc. Refer here for more info
    
 *  Security fixes
@@ -765,20 +768,20 @@ August 21, 2023
 * Xcode 14 is now supported: 
 
    
-   * AppFactory executes iOS builds on Xcode 14.3 to enable app
+     * AppFactory executes iOS builds on Xcode 14.3 to enable app
      submission to the Apple App Store as mandated by Apple guidelines in effect since April 25 2023. Refer < here > for more information.
      
-   > **_Note:_** : Xcode 14 is not supported in AppFactory versions lower than 9.5.15.0
+     > **_Note:_** : Xcode 14 is not supported in AppFactory versions lower than 9.5.15.0
 
 * AppFactory has been upgraded with new Jenkins plugins and Java
   version to enhance security, user experience, and performance of the platform.
 
   
-   *  Security Enhancements : With this upgrade, all known
+     *  Security Enhancements : With this upgrade, all known
       Jenkins security vulnerabilities have been addressed and resolved.
-   *  Improved User Experience : The upgraded Jenkins offers a
+     *  Improved User Experience : The upgraded Jenkins offers a
       more seamless and intuitive user interface.
-   *  Enhanced Performance : The upgrade optimizes Jenkins
+     *  Enhanced Performance : The upgrade optimizes Jenkins
       performance, providing a stable and reliable environment.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
