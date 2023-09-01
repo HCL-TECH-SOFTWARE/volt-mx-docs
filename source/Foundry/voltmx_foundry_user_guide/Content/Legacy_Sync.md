@@ -230,7 +230,7 @@ Defining Sync Objects
 9.  On the **Filters** tab, provide the following details:
     
     ![](Resources/Images/FS_Filters_501x339.png)
-    <!-- dummy comment >>
+    <!-- dummy comment -->
     > **_Note:_**  [OAuth 2.0](Identity10_VoltMX_OAuth2.md#foundry-oauth-2-0-identity-service) provides ability to retrieve and save user attributes in Volt Foundry Identity Sessions after a successful login response and uses them as client filters during Legacy Sync calls. For example, User Role (one of the attributes of the user profile) received as part of User Profile after a successful [OAuth 2.0](Identity10_VoltMX_OAuth2.md#OAuth2ID) login can be used as client-side filter for Legacy Sync. For more details, refer to [Synchronization > client-side filters](#filters).
     
     <p id="filters"></p>
@@ -364,10 +364,11 @@ To download the Sync configuration file `Syncconfig.xml` file on your computer, 
 
 ![](Resources/Images/Sync_Valid.png)
 
-For more details on Sync Console, refer to the following document: [Sync Console](../../../Foundry/voltmx_sync_console_user_guide/Content/Homepage.md)
+bibble
+
 
 Volt MX  Foundry Sync Console
----------------------------
+-----------------------------
 
 > **_Note:_** The details of your sync scope will be available in Sync Services after you _publish_ the app.
 
