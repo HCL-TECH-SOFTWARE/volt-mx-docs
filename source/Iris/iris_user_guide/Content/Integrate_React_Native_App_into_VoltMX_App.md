@@ -2,7 +2,7 @@
 
 
 Integrate a React Native App to Volt MX App
-===========================================
+=========================================== 
 
 Using this feature, you can integrate a React Native app (which is developed in React Native framework) to an app (which is developed in Volt MX Iris framework). The React Native app is embedded into the Volt MX Iris form through a container, called as the React Native Container. Furthermore, some APIs are used to communicate between the React Native app's JavaScript framework and the Volt MX app's Volt MX Iris framework.
 
@@ -64,14 +64,14 @@ In this section, you will learn how to integrate a React Native app to a Volt MX
 3.  Run the following platform-specific React Native command from each ReactNative app root folder to generate the hierarchical JavaScript bundle:
     
     *   For Android:  
-        **react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/<AppName>/index.android.bundle --assets-dest android/app/src/main/res**
+        **react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/&lt;AppName&gt;/index.android.bundle --assets-dest android/app/src/main/res**
     
-    > **_Note:_** Create the assets folder (under <reactNativeApp>/android/app/src/main/) and also <AppName> folder under assets, if they do not exist.
+    > **_Note:_** Create the assets folder (under &lt;reactNativeApp&gt;/android/app/src/main/) and also &lt;AppName&gt; folder under assets, if they do not exist.
     
     *   For iOS:  
-        **react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/<AppName>/main.jsbundle --assets-dest ios**
-    
-    > **_Note:_** Replace <AppName> with the app's **name** key value that is available in the app.json file, which is located at the root folder of the each React Native project.
+        **react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/&lt;AppName&gt;/main.jsbundle --assets-dest ios**
+
+    > **_Note:_** Replace &lt;AppName&gt; with the app's **name** key value that is available in the app.json file, which is located at the root folder of the each ReactNative project.
     
 
 ### Enable React Native for Andorid
@@ -87,6 +87,7 @@ The manual steps to enable the React Native feature for iOS are as follows:
 3.  Click the link. The KAR file location opens.
 4.  Rename the **voltmxappiphone.KAR** file to **voltmxappiphone.zip**
 5.  Unzip the voltmxappiphone.zip file, and then paste the ReactNativeProjects folder (which is present at root folder of app. workspace) in the unzipped folder.
+6.  Include the following key in the **application.properties** file of the project:<br> `enableReactNative = true`
 6.  Compress the contents of the unzipped folder to create an archive (zip).
 7.  Rename the zip with extension as KAR; this creates a KAR file that contains React Native apps.
 8.  Navigate back to Iris, go to **Product** > **Run As**, and then select the iOS emulator. The relevant logs in the Console are generated.
@@ -94,7 +95,7 @@ The manual steps to enable the React Native feature for iOS are as follows:
 10.  Click the link to open the VMAppWithVoltMXlib location.
 11.  Go to the **gen** folder inside the VMAppWithVoltMXlib folder in the terminal.
 12.  Enter the **perl extract.pl modified\_KAR\_file location** command to perform the KAR file extraction.
-13.  After the Perl extract is complete, under the **Edit Scheme Build** options, deselect the **Parallelize Build** option for the release scheme.
+13.  After the Perl extract is complete, under the **Edit Scheme Build** options, Select Build Order as Manual Order option for the release scheme.
 14.  For pods after the Perl extract, the **VMAppWithVoltMXLib.xcworkspace** file will be created; use this file to build the application.  
     If this file is present, the you must add the **$(inherited)** flag under the **Other Linker** flag setting.
 15.  The third-party React Native libs that depend on pods should set the Framework Search Path, Library Search Path, and Header Search Path as **$(SRCROOT)/../../../../../Pods/** recursive.

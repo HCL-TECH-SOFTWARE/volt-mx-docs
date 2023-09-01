@@ -554,6 +554,22 @@ Out of the box Volt MX Foundry Integration Services support connectivity to the 
       </ul>
     </td>
   </tr>
+  <tr>
+    <td>
+      <a href="Text_Adapter.html">Text</a>
+    </td>
+    <td>Text Adapter forwards the request that has Text data and gives response without intermediate transformation (without affecting the actual request and response).</td>
+    <td>
+      <ul>
+        <li>
+          <a href="Text_Adapter.html#configure-text-adapter">Configure Text Adapter</a>
+        </li>
+        <li>
+          <a href="Text_Adapter.html#create-operations-for-text-adapter">Create Operations for Text Adapter</a>
+        </li>
+      </ul>
+    </td>
+  </tr>
 </table>
 
 <!-- | Endpoint Type | Description | Endpoint Configuration |
