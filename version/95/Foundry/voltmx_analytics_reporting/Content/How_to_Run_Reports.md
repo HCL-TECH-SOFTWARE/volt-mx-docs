@@ -11,17 +11,15 @@ To run reports, follow these steps:
 1.  Log in to the JasperReports Server.
 2.  Click **View > Repository**.
     
-    ![](Resources/Images/Jasperreports1_577x318.png)
+    ![](Resources/Images/RunAsReports1.png)
     
 3.  In the left pane, expand **Public**, and then click **Reports**.  
     In the right pane, the **Repository** section displays reports.
     
-    ![](Resources/Images/Jasperreports2_579x222.png)
     
 4.  In the **Repository** section, click the report - for example, `Sessions per Device`.  
     The **Options** left pane for the report displays.
     
-    ![](Resources/Images/Jasperreports3_578x264.png)
     
 5.  In the **Options** pane, configure the following parameters as required.
     
@@ -37,6 +35,6 @@ To run reports, follow these steps:
 1.  After you configure the parameters, click **Save** and **Apply**.
 2.  From the toolbar, click **View** > **Export > As PDF** to export the report to a .PDF file.
     
-    ![](Resources/Images/Jasperreports4a_591x382.png)
+    ![](Resources/Images/RunAsReports2.png)
     
     A .PDF file for the report is created.

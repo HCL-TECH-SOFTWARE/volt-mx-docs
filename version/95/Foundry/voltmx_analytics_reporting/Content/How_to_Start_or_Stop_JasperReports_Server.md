@@ -14,12 +14,14 @@ To start or stop JasperReports Server, follow these steps:
 2.  In the **Run** box, type `service.msc`, and then click **OK**. The **Services** window appears.
     
     > **_Important:_** Ensure that the **Extended** tab is selected.
+
+    Click jasperreportsPostgreSQL
     
-    ![](Resources/Images/Restart_Jasper_tomcat_server_591x263.png)
+    ![](Resources/Images/Restart_Jasper_tomcat_server_591x263_1.png)
     
-3.  From the services list, click `jasperreportsTomcat`.
+3.  From the services list, click `Apache Tomcat8.5 jasperreportsTomcat`.
     
-    ![](Resources/Images/Restart_Jasper_tomcat_server2_591x433.png)
+    ![](Resources/Images/Restart_Jasper_tomcat_server2_591x433_2.png)
     
 4.  Click **Restart**. The system restarts the service.
 
@@ -27,17 +29,17 @@ To start or stop JasperReports Server, follow these steps:
 
 1.  To start the JasperReports Server, run the following command:
     
-    cd <js-install>  
+    cd &lt;js-install&gt;  
     ./ctlscript.sh start
     
 2.  To stop the JasperReports Server, run the following command:
     
-    cd <js-install>  
+    cd &lt;js-install&gt;  
     ./ctlscript.sh stop
     
 3.  To start and stop individual components, run the following command:
     
-    cd <js-install>  
+    cd &lt;js-install&gt;  
     ./ctlscript.sh start|stop postgresql  
     ./ctlscript.sh start|stop tomcat  
     

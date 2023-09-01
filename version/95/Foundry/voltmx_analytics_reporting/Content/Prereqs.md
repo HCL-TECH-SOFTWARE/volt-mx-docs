@@ -10,37 +10,79 @@ The following section explain the software and hardware required to install Jasp
 Software Requirements
 ---------------------
 
-  
-| Purpose | Software Requirement |
-| --- | --- |
-| Installer   > **_Note:_** Volt MX Products support only Jasper Professional or Jasper Enterprise edition and not the community edition. | **Windows**: jasperreports-server-7.1-windows-x64-installer.exe jasperreports-server-6.2-windows-x64-installer.exe jasperreports-server-6.0-windows-x64-installer.exe > **_Important:_** To get access to the reports created with latest features, HCL recommends to install Jasper Enterprise edition 6.2 or 7.1 with Volt MX Foundry V8 or latest. |
-| JasperSoft License | **Linux**: jasperreports-server-7.1-linux-x64-installer.run jasperreports-server-6.2-linux-x64-installer.run jasperreports-server-6.0-linux-x64-installer.run > **_Important:_** To get access to the reports created with latest features, HCL recommends to install Jasper Enterprise edition 6.2 or 7.1 with Volt MX Foundry V8 or latest. |
+<b>Software Requirements for JasperReports Server V 7.9.2</b>
 
-> **_Important:_** Make sure to download TIBCO JasperReports Server version 6.0.0 or 6.2.0 or 7.1.0, and install it before configuring user attributes in [How to Set Up the JasperReports Server](How_to_Set_Up_the_Jasper_Server.md).  
-  
-The license key for JasperSoft on-premises is provided by HCL as part of the software subscription license for Volt MX Foundry Analytics Server.
+<table>
+<tr>
+<th>Purpose</th>
+<th>Software Requirement</th>
+</tr>
+<tr>
+<td>Installer</td>
+<td><b>Windows:</b></td>
+</tr>
+<tr>
+<td></td>
+<td>-&gt; TIB_js-jrs_7.9.0_win_x86_64.exe</td>
+</tr>
+<tr>
+<td></td>
+<td><b>Ubuntu Linux:</b></td>
+</tr>
+<tr>
+<td></td>
+<td>-&gt; TIB_js-jrs_7.9.0_linux_x86_64.run</td>
+</tr>
+<tr>
+<td></td>
+<td>After you install JasperReports Server 7.9.0, you must apply the hotfix_JRSPro7.9.2_cumulative_20221213_0819 hotfix to support the security fixes.</td>
+</tr>
+<tr>
+<td></td>
+<td>
+<ul>
+<li>
+    Follow readme.txt file under JasperReports-Server-v7-9-2-cumulative-hotfix-20221213-0819
+    <a href="https://support.tibco.com/s/article/TIBCO-JasperReports-Server-v7-9-2-cumulative-hotfix-20221213-0819-is-now-available">https://support.tibco.com/s/article/TIBCO-JasperReports-Server-v7-9-2-cumulative-hotfix-20221213-0819-is-now-available</a>
+</li>
+</ul>
+</td>
+</tr>
+</table>
 
-> **_Note:_**  
-For JasperReports Server Installation Documentation, refer to the following:  
-  
-[https://community.jaspersoft.com/documentation/jasperreports-server-install-guide/**v561**/introduction](https://community.jaspersoft.com/documentation/jasperreports-server-install-guide/v561/introduction).  
-  
-[http://community.jaspersoft.com/documentation/tibco-jasperreports-server-installation-guide/**v60**/introduction](http://community.jaspersoft.com/documentation/tibco-jasperreports-server-installation-guide/v60/introduction)  
-  
-[http://community.jaspersoft.com/documentation/tibco-jasperreports-server-installation-guide/**v62**/introduction](http://community.jaspersoft.com/documentation/tibco-jasperreports-server-installation-guide/v62/introduction)  
-  
-[https://community.jaspersoft.com/documentation/tibco-jasperreports-server-user-guide/**v71**/introduction-jasperreports-server](https://community.jaspersoft.com/documentation/tibco-jasperreports-server-user-guide/v71/introduction-jasperreports-server)  
-  
-  
-For JasperReports Server Distributions, refer to the following:  
-  
-[https://community.jaspersoft.com/documentation/jasperreports-server-install-guide/**v561**/jasperreports-server-distributions](https://community.jaspersoft.com/documentation/jasperreports-server-install-guide/v561/jasperreports-server-distributions).  
-  
-[http://community.jaspersoft.com/documentation/tibco-jasperreports-server-installation-guide/**v60**/jasperreports-server-distributions](http://community.jaspersoft.com/documentation/tibco-jasperreports-server-installation-guide/v60/jasperreports-server-distributions)  
-  
-[http://community.jaspersoft.com/documentation/tibco-jasperreports-server-installation-guide/**v62**/jasperreports-server-distributions](http://community.jaspersoft.com/documentation/tibco-jasperreports-server-installation-guide/v62/jasperreports-server-distributions)  
-  
-[https://community.jaspersoft.com/documentation/tibco-jasperreports-server-community-edition-release-notes/**v71**/release-distributions](https://community.jaspersoft.com/documentation/tibco-jasperreports-server-community-edition-release-notes/v71/release-distributions)  
+
+
+Software Requirements for JasperReports Server V 7.x
+-----------------------------------------------------
+<table>
+<tr>
+<th>Purpose</th>
+<th>Software Requirement</th>
+</tr>
+<tr>
+<td>Installer</td>
+<td><b>Windows:</b></td>
+</tr>
+<tr>
+<td></td>
+<td><ul><li>jasperreports-server-7.1-windows-x64-installer.exe</li></ul></td>
+</tr>
+<tr>
+<td></td>
+<td><b>Linux:</b></td>
+</tr>
+<tr>
+<td></td>
+<td><ul><li>jasperreports-server-7.1-linux-x64-installer.run</li></ul></td>
+</tr>
+</table>
+
+> **_Note:_**  HCL VoltMX Foundry Products support only JasperReports Server Professional or Jasper Reports Server Enterprise edition (AWS Cloud) and not the community edition.  
+
+> **_Important:_** Make sure to download TIBCO JasperReports Server version 7.9.2 or 7.1.0 and install it before configuring user attributes in How to Set Up the Jasper Reports Server. <br>
+The license key for JasperReports Server for On-premises, you must procure the license from TIBCO. 
+
+> **_Note:_**  For JasperReports Server Installation Documentation, refer to the following: [https://docs.tibco.com/products/tibco-jasperreports-server-7-9-0](https://docs.tibco.com/products/tibco-jasperreports-server-7-9-0)  
 
 Supported Databases and Drivers
 -------------------------------
@@ -48,10 +90,13 @@ Supported Databases and Drivers
   
 | Database Version | Database Connectivity Drivers |
 | --- | --- |
-| MySQL 5.6.X | mysql-connector-java-5.1.33-bin.jar Click the below link to download the .jar:[http://dev.mysql.com/downloads/connector/j/5.0.html](http://dev.mysql.com/downloads/connector/j/5.0.html) |
-| Microsoft SQL Server 2012, 2014 | sqljdbc4.jar Click the below link to download the .jar:[https://msdn.microsoft.com/en-us/sqlserver/aa937724.aspx](https://msdn.microsoft.com/en-us/sqlserver/aa937724.aspx) |
-| Oracle 11g, 12c | ojdbc7.jar Click the below link to download the .jar:[http://www.oracle.com/technetwork/database/features/jdbc/jdbc-drivers-12c-download-1958347.html](http://www.oracle.com/technetwork/database/features/jdbc/jdbc-drivers-12c-download-1958347.html) |
-| IBM - DB2 10.1 | db2jcc4.jar Click the below link to download the .jar:[http://www-01.ibm.com/support/docview.wss?uid=swg21363866](http://www-01.ibm.com/support/docview.wss?uid=swg21363866) |
+| MySQL 5.7.X and 8.X | mysql-connector-java-8.0.30.jar <br> Click the below link to download the .jar:<br>[https://downloads.mysql.com/archives/c-j/](https://downloads.mysql.com/archives/c-j/) |
+| | mysql-connector-j-8.0.33.jar <br> (For Mysql server  8.0.33 DataBase) |
+| | **In the case of MySQL 8.x Database with JasperReports Server V 7.9.2, ensure that you must delete the mariadb-java-client-2.5.3.jar file if it exist in your system.** |
+| |For example: &lt;jasperinstall-dir&gt;/apache-tomcat/lib/mariadb-java-client-2.5.3.jar|
+| Microsoft SQL Server 2012, 2014 and 2019 | mssql-jdbc-7.2.2.jre8.jar <br> Click the below link to download the .jar: <br> [https://msdn.microsoft.com/en-us/sqlserver/aa937724.aspx](https://msdn.microsoft.com/en-us/sqlserver/aa937724.aspx) |
+| Oracle 11g, 12c | ojdbc8.jar <br> Click the below link to download the .jar: <br>[https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html](https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html) |
+| IBM - DB2 10.1 | db2jcc4.jar<br>Click the below link to download the .jar:<br>[http://www-01.ibm.com/support/docview.wss?uid=swg21363866](http://www-01.ibm.com/support/docview.wss?uid=swg21363866) |
 
 Hardware Requirements
 ---------------------
@@ -72,8 +117,7 @@ Supported Foundry Versions
   
 | Volt MX Foundry Version | Jasper Reports Server Version |
 | --- | --- |
-| For V8 SP2 and earlier versions | JRS 6.2 and JRS 6.0 |
-| For V8 SP3 and later versions | JRS 7.1 and JRS 6.2 |
+| For V9 and later versions | JRS 7.9.2 and JRS 7.1 |
 
 Reports Database
 ----------------
