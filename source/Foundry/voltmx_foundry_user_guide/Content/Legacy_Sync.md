@@ -357,20 +357,6 @@ Note that the upload batch size used by the client SDK takes a value closer to t
     **Workaround**: When deleting a parent with children and Cascade is set to true, send only the Parent.
     
 
-Download the Sync Configuration
--------------------------------
-
-To download the Sync configuration file `Syncconfig.xml` file on your computer, click on the **Synchronization** page, click the Settings button, and then click **Export all**.
-
-![](Resources/Images/Sync_Valid.png)
-
-bibble
-
-
-
-Volt MX  Foundry Sync Console
------------------------------
-
 > **_Note:_** The details of your sync scope will be available in Sync Services after you _publish_ the app.
 
 Volt MX  Foundry Sync Management Console provides a single point of control for monitoring and configuring the Volt MX Foundry Sync console creation process.
