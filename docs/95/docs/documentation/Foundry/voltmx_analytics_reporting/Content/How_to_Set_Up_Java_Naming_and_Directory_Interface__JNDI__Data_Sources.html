@@ -361,7 +361,7 @@
     id="__nav_1_7"
     
   />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
 
   <div class="md-nav__link md-nav__link--index">
     <a href="../../../Iris/voltmxIrisFundamentals.html"> Iris </a>
@@ -745,8 +745,8 @@
     
                 
 <li class="md-nav__item">
-  <a href="How_to_Set_Up_the_Jasper_Server.html" class="md-nav__link">
-    How to Set Up the JasperReports Server
+  <a href="How_to_Set_Up_the_Jasper_Reports_Server.html" class="md-nav__link">
+    How to Set Up the Jasper Reports Server
   </a>
 </li>
     
@@ -862,7 +862,7 @@
                 
 <li class="md-nav__item">
   <a href="How_to_Configure_PhantomJS_and_RequireJS_in_JasperReprots.html" class="md-nav__link">
-    How to Configure PhantomJS and RequireJS in JasperReports Server
+    How to Configure Chromium JS Engine to Download Reports in PDF Format - JasperReports Server V 7.9.2
   </a>
 </li>
     
@@ -1128,23 +1128,21 @@
 <h2 id="how-to-set-up-jndi-data-sources">How to Set Up JNDI Data Sources</h2>
 <p>The Java Naming and Directory Interface (JNDI) configuration allows the JasperReports Server connectivity to appropriate databases using JDBC drivers. To run reports, the JNDI configuration is required.</p>
 <p>To set up the Jasper data sources, follow these steps:</p>
-<ol>
+<ul>
 <li>
 <p>From your Jasper install location, open the <code>context.xml</code> file.</p>
-<p>For example, <code>\Jaspersoft\jasperreports-server-&lt;6.0 or 6.2.0 or 7.1.0&gt;\apache-tomcat\webapps\jasperserver-pro\META-INF\context.xml</code>.</p>
-<p><img alt="" src="Resources/Images/SettingJNDI1_580x309.png" /></p>
+<p>For example, <code>\Jaspersoft\jasperreports-server-&lt;7.9.2 or 7.1.0&gt;\apache-tomcat\webapps\jasperserver-pro\META-INF\context.xml</code>.</p>
+<p><img alt="" src="Resources/Images/JNDI1.png" /></p>
 </li>
 <li>
 <p>In the <code>context.xml</code> file, add the following JNDI configurations for the reports to access the reports database. You must replace the following fields with appropriate values to access the reports database details. For more details, refer to <a href="../../voltmx_foundry_windows_install_guide/Content/Installing_VoltMX_Foundry_on_Windows.html">VoltMX Foundry_Installer_Guide &gt; Installing Volt MX Foundry &gt; Database Details window</a>.</p>
 <blockquote>
-<p><strong><em>Important:</em></strong> JasperReports Server V6.2.0 and V7.1.0 uses Tomcat 8 whereas JasperReports Server V 6.0 is bundled with Tomcat 7.  </p>
-</blockquote>
-<p>And data source factory is different for both Tomcat 7 and Tomcat 8.  </p>
-<p>- For JasperReports Server V6.2.0 and V7.1.0, the data source is as follows:<br />
-<code>factory="com.jaspersoft.jasperserver.tomcat.jndi.JSCommonsBasicDataSourceFactory</code>  </p>
-<p>- For JasperReports Server V6.0, the data source is as follows:<br />
+<p><strong><em>Important:</em></strong> JasperReports Server V7.9.2, V7.1.0, and V6.2.0 use Tomcat 8 whereas JasperReports Server V 6.0 is bundled with Tomcat 7.<br />
+And data source factory is different for both Tomcat 7 and Tomcat 8.<br />
+- For JasperReports Server V7.9.2, V7.1.0 , and V6.2.0, , the data source is as follows:<br />
+<code>com.jaspersoft.jasperserver.tomcat.jndi.JSCommonsBasicDataSourceFactory</code><br />
+- For JasperReports Server V6.0, the data source is as follows:<br />
 <code>factory="com.jaspersoft.jasperserver.tomcat.jndi.JSBasicDataSourceFactory</code></p>
-<blockquote>
 <p><strong><em>Note:</em></strong> In the Installing Volt MX Foundry page, scroll down to the <strong>Database Details window</strong>.</p>
 </blockquote>
 <table>
@@ -1177,66 +1175,94 @@
 <li>
 <p>The following JNDI configuration is for the DB2 Server:</p>
 </li>
-</ol>
-<pre><code>&lt;!-- Add the following to the existing context.xml --&gt;
+</ul>
+<pre><code>&lt;!-- Add the following to the existing context.xml --&gt; For JasperReports Server 7.9.2/7.1
+.
+&lt;Resource name=&quot;jdbc/onpremdb2&quot; auth=&quot;Container&quot;
+    type=&quot;javax.sql.DataSource&quot;
+    maxActive=&quot;100&quot; maxIdle=&quot;30&quot; maxWait=&quot;10000&quot;
+    username=&quot;&lt;username&gt;&quot; password=&quot;&lt;password&gt;&quot;
+    driverClassName=&quot;com.ibm.db2.jcc.DB2Driver&quot;
+    validationQuery=&quot;SELECT 1 from SYSIBM.SYSDUMMY1&quot;
+    testOnBorrow=&quot;true&quot;                   
+     url=&quot;jdbc:db2://&lt;Database Server IP: Database
+    PORT&gt;/&lt;database_name&gt;:driverType=4; currentSchema=&lt;Schema_name&gt;;
+    factory=&quot;com.jaspersoft.jasperserver.tomcat.jndi.JSCommonsBasicDataSourceFactory&quot;/&gt;
+</code></pre>
+<pre><code>&lt;!-- Add the following to the existing context.xml --&gt; For JasperReports Server 6.0
 
-    &lt;Resource name=&quot;jdbc/onpremdb2&quot; auth=&quot;Container&quot;
-        type=&quot;javax.sql.DataSource&quot;
-        maxActive=&quot;100&quot; maxIdle=&quot;30&quot; maxWait=&quot;10000&quot;
-        username=&quot;&lt;username&gt;&quot; password=&quot;&lt;password&gt;&quot;
-        driverClassName=&quot;com.ibm.db2.jcc.DB2Driver&quot;
-        validationQuery=&quot;SELECT 1 from SYSIBM.SYSDUMMY1&quot;
-        testOnBorrow=&quot;true&quot;                   
-         url=&quot;jdbc:db2://&lt;Database Server IP: Database
-        PORT&gt;/&lt;database_name&gt;:driverType=4; currentSchema=&lt;Schema_name&gt;;
-        factory=&quot;com.jaspersoft.jasperserver.tomcat.jndi.JSBasicDataSourceFactory&quot;/&gt;
+&lt;Resource name=&quot;jdbc/onpremdb2&quot; auth=&quot;Container&quot;
+    type=&quot;javax.sql.DataSource&quot;
+    maxActive=&quot;100&quot; maxIdle=&quot;30&quot; maxWait=&quot;10000&quot;
+    username=&quot;&lt;username&gt;&quot; password=&quot;&lt;password&gt;&quot;
+    driverClassName=&quot;com.ibm.db2.jcc.DB2Driver&quot;
+    validationQuery=&quot;SELECT 1 from SYSIBM.SYSDUMMY1&quot;
+    testOnBorrow=&quot;true&quot;                   
+     url=&quot;jdbc:db2://&lt;Database Server IP: Database
+    PORT&gt;/&lt;database_name&gt;:driverType=4; currentSchema=&lt;Schema_name&gt;;
+    factory=&quot;com.jaspersoft.jasperserver.tomcat.jndi.JSBasicDataSourceFactory&quot;/&gt;
 </code></pre>
 <ul>
 <li>The following JNDI configuration is for the MSSQL:</li>
 </ul>
-<pre><code>&lt;!-- Add the following to the existing context.xml --&gt;
+<pre><code>&lt;!-- Add the following to the existing context.xml --&gt; For JasperReports Server 7.9.2/7.1
 
-    &lt;Resource name=&quot;jdbc/onpremmssql&quot; auth=&quot;Container&quot; type=&quot;javax.sql.DataSource&quot;
-            maxActive=&quot;100&quot; maxIdle=&quot;30&quot; maxWait=&quot;10000&quot;
-            username=&quot;&lt;username&gt;&quot; password=&quot;&lt;password&gt;&quot;
-        driverClassName=&quot;com.microsoft.sqlserver.jdbc.SQLServerDriver&quot;
-            validationQuery=&quot;SELECT 1&quot;
-            testOnBorrow=&quot;true&quot;
-        url=&quot;jdbc:sqlserver://&lt;Database Server IP: Database PORT&gt;;databaseName=&lt;database_name&gt;&quot;
-            factory=&quot;com.jaspersoft.jasperserver.tomcat.jndi.JSBasicDataSourceFactory&quot;/&gt;
+&lt;Resource name=&quot;jdbc/onpremmssql&quot; auth=&quot;Container&quot; type=&quot;javax.sql.DataSource&quot;
+        maxActive=&quot;100&quot; maxIdle=&quot;30&quot; maxWait=&quot;10000&quot;
+        username=&quot;&lt;username&gt;&quot; password=&quot;&lt;password&gt;&quot;
+    driverClassName=&quot;com.microsoft.sqlserver.jdbc.SQLServerDriver&quot;
+        validationQuery=&quot;SELECT 1&quot;
+        testOnBorrow=&quot;true&quot;
+    url=&quot;jdbc:sqlserver://&lt;Database Server IP: Database PORT&gt;;databaseName=&lt;database_name&gt;&quot;
+        factory=&quot;com.jaspersoft.jasperserver.tomcat.jndi.JSCommonsBasicDataSourceFactory&quot;/&gt;
+</code></pre>
+<pre><code>&lt;!-- Add the following to the existing context.xml --&gt; For JasperReports Server 6.0
+
+&lt;Resource name=&quot;jdbc/onpremmssql&quot; auth=&quot;Container&quot; type=&quot;javax.sql.DataSource&quot;
+        maxActive=&quot;100&quot; maxIdle=&quot;30&quot; maxWait=&quot;10000&quot;
+        username=&quot;&lt;username&gt;&quot; password=&quot;&lt;password&gt;&quot;
+    driverClassName=&quot;com.microsoft.sqlserver.jdbc.SQLServerDriver&quot;
+        validationQuery=&quot;SELECT 1&quot;
+        testOnBorrow=&quot;true&quot;
+    url=&quot;jdbc:sqlserver://&lt;Database Server IP: Database PORT&gt;;databaseName=&lt;database_name&gt;&quot;
+        factory=&quot;com.jaspersoft.jasperserver.tomcat.jndi.JSBasicDataSourceFactory&quot;/&gt;
 </code></pre>
 <ul>
 <li>The following JNDI configuration is for the MySQL:</li>
 </ul>
-<pre><code>//Sample code for MySQL
-    &lt;Resource name=&quot;jdbc/onpremmysql&quot; auth=&quot;Container&quot; type=&quot;javax.sql.DataSource&quot;
-            maxActive=&quot;100&quot; maxIdle=&quot;30&quot; maxWait=&quot;10000&quot;
-            username=&quot;&lt;username&gt;&quot; password=&quot;&lt;password&gt;&quot;
-            driverClassName=&quot;com.mysql.jdbc.Driver&quot;
-            validationQuery=&quot;SELECT 1&quot;
-            testOnBorrow=&quot;true&quot;
-        url=&quot;jdbc:mysql://&lt;Database Server IP: Database PORT&gt;/&lt;database_name&gt;&quot;
-            factory=&quot;com.jaspersoft.jasperserver.tomcat.jndi.JSBasicDataSourceFactory&quot;/&gt;
+<pre><code>// MySQL For JasperReports Server 7.9.2/7.1
+&lt;Resource name=&quot;jdbc/onpremmysql&quot; auth=&quot;Container&quot; type=&quot;javax.sql.DataSource&quot;
+        maxActive=&quot;100&quot; maxIdle=&quot;30&quot; maxWait=&quot;10000&quot;
+        username=&quot;&lt;username&gt;&quot; password=&quot;&lt;password&gt;&quot;
+        driverClassName=&quot;com.mysql.cj.jdbc.Driver&quot;
+        validationQuery=&quot;SELECT 1&quot;
+        testOnBorrow=&quot;true&quot;
+    url=&quot;jdbc:mysql://&lt;Database Server IP: Database PORT&gt;/&lt;database_name&gt;&quot;
+        factory=&quot;com.jaspersoft.jasperserver.tomcat.jndi.JSCommonsBasicDataSourceFactory&quot;/&gt;
+</code></pre>
+<pre><code>// MySQL For JasperReports Server 6.0
+&lt;Resource name=&quot;jdbc/onpremmysql&quot; auth=&quot;Container&quot; type=&quot;javax.sql.DataSource&quot;
+        maxActive=&quot;100&quot; maxIdle=&quot;30&quot; maxWait=&quot;10000&quot;
+        username=&quot;&lt;username&gt;&quot; password=&quot;&lt;password&gt;&quot;
+        driverClassName=&quot;com.mysql.cj.jdbc.Driver&quot;
+        validationQuery=&quot;SELECT 1&quot;
+        testOnBorrow=&quot;true&quot;
+    url=&quot;jdbc:mysql://&lt;Database Server IP: Database PORT&gt;/&lt;database_name&gt;&quot;
+        factory=&quot;com.jaspersoft.jasperserver.tomcat.jndi.JSBasicDataSourceFactory&quot;/&gt;
 </code></pre>
 <ul>
 <li>
 <p>The following JNDI configuration is for the Oracle:  </p>
 <blockquote>
-<p><strong><em>Important:</em></strong></p>
+<p><strong><em>Important:</em></strong> 
+Based on your Oracle database version, select the following options:<br />
+  * If Oracle database is created with the PDB option of Oracle 12c, use service name pointing to PDB in the JDBC URL such as <strong>pdborcl</strong> or <strong>pdbmfdb</strong>.<br />
+<code>jdbc:oracle:thin:@&lt;Database_Host_IP&gt;:1521/pdbmfdb</code> <br>
+  For example, <code>jdbc:oracle:thin:@192.168.1.2:1521/pdbmfdb</code> <br> 
+ * If your database is either Oracle 11g or Oracle 12c without the PDB option, you can use ORACLE_SID in the JDBC URL such as orcl or mfdb.  <br />
+<code>jdbc:oracle:thin:@&lt;Database_Host_IP&gt;:1521:mfdb</code><br> 
+ For example, <code>jdbc:oracle:thin:@192.168.1.2:1521:mfdb</code></p>
 </blockquote>
-<p>Based on your Oracle database version, select the following options:</p>
-<ul>
-<li>
-<p>If Oracle database is created with the PDB option of Oracle 12c, use service name pointing to PDB in the JDBC URL such as <strong>pdborcl</strong> or <strong>pdbmfdb</strong>.</p>
-<p><code>jdbc:oracle:thin:@&lt;Database_Host_IP&gt;:1521/pdbmfdb</code></p>
-<p>For example, <code>jdbc:oracle:thin:@192.168.1.2:1521/pdbmfdb</code></p>
-</li>
-<li>
-<p>If your database is either Oracle 11g or Oracle 12c without the PDB option, you can use ORACLE_SID in the JDBC URL such as orcl or mfdb.</p>
-<p><code>jdbc:oracle:thin:@&lt;Database_Host_IP&gt;:1521:mfdb</code></p>
-<p>For example, <code>jdbc:oracle:thin:@192.168.1.2:1521:mfdb</code></p>
-</li>
-</ul>
 </li>
 </ul>
 <pre><code>//Sample code for Oracle
@@ -1250,20 +1276,24 @@
         testOnBorrow=&quot;true&quot;
         url=&quot;jdbc:oracle:thin:@ &lt;Database Server IP: Database
         PORT&gt;:Service_ID  
-           factory=&quot;com.jaspersoft.jasperserver.tomcat.jndi.JSBasicDataSourceFactory&quot;/&gt;
+           factory=&quot;com.jaspersoft.jasperserver.tomcat.jndi.JSBasicDataSourceFactory&quot;/&gt;
 </code></pre>
-<pre><code>&gt; **_Important:_** For versions of Oracle 12 c and earlier, where the database service ID is used instead of service name, used the following URL:`  
-"url="jdbc:oracle:thin:@ &lt;Database Server IP: Database PORT&gt;:&lt;database_name&gt;"`
-
-&gt; **_Important:_** If you are using the latest JasperReports Server V6.2 or higher, [add a new JNDI configuration](#Step2) as custom dashboard feature is available in the latest package. The resource name value should be `jdbc/onpremaccounts` for all supported database types.
-</code></pre>
-<ol>
-<li>Download appropriate database drivers for your database from the Jasper website link <a href="http://support.jaspersoft.com/download_preview.php?rl=60">http://support.jaspersoft.com/download_preview.php?rl=60</a></li>
+<blockquote>
+<p><strong><em>Important:</em></strong>  For versions of Oracle 12 c and earlier, where the database service ID is used instead of service name, used the following URL:<code>"url="jdbc:oracle:thin:@ &lt;Database Server IP: Database PORT&gt;:&lt;database_name&gt;"</code> </p>
+<p><strong><em>Important:</em></strong> If you are using the latest JasperReports Server V6.2 or higher, <a href="#Step2">add a new JNDI configuration</a> as custom dashboard feature is available in the latest package. The resource name value should be <code>jdbc/onpremaccounts</code> for all supported database types.  </p>
+</blockquote>
+<ul>
 <li>
-<p>Add appropriate database drivers into the  <code>\Jaspersoft\jasperreports-server-&lt;6.0&gt; or &lt;6.2.0&gt; or &lt;7.1.0&gt;\apachetomcat\lib</code> folder.</p>
-<p><img alt="" src="Resources/Images/Database_drivers_586x333.png" /></p>
+<p>Download appropriate database drivers for your database from the Jasper website link <a href="http://support.jaspersoft.com/download_preview.php?rl=60">http://support.jaspersoft.com/download_preview.php?rl=60</a>  </p>
+<blockquote>
+<p><strong><em>Note:</em></strong> Delete maraidb-java-client-2.5.3.jar in this path C:\Jaspersoft\jasperreports-server-7.9.0\apache-tomcat\lib   </p>
+</blockquote>
 </li>
-</ol>
+<li>
+<p>Add appropriate database drivers into the  <code>\Jaspersoft\jasperreports-server-&lt;7.9.2&gt; or &lt;7.1.0&gt; or &lt;6.2.0&gt; or &lt;6.0&gt;\apachetomcat\lib</code> folder.</p>
+<p><img alt="" src="Resources/Images/JNDI2.png" /></p>
+</li>
+</ul>
 
 
 

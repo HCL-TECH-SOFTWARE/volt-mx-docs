@@ -189,7 +189,8 @@ To set Native app properties, follow these steps:
     > **_Note:_** This feature is available In Volt MX Iris V9 SP 2 FP19 onwards, and is available in both Volt MX Iris Classic and Volt MX Iris.  
     
 6.  **Application Launch Mode for iPad** - specifies the default mode of launching the application on iPad. _Portrait_ is the default value.
-7.  **Supported Orientations for iPad** - specifies the supported orientations for the iPad. This depends on the launch mode. The different orientations for a form and at application level are listed at
+7.  **Supported Orientations for iPad** - specifies the supported orientations for the iPad. This depends on the launch mode. The different orientations for a form and at application level are listed.
+8.  Sets the iOS capabilities with apple defined entitlement key and value based on the application requirements. For more information, refer [the Volt Mx Iris Configuration File](Adding_iOS_app_Capabilities.md).
 
 Add Android Properties to androidbuild.properties File
 ------------------------------------------------------

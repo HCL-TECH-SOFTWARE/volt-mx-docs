@@ -1,123 +1,140 @@
                          
 
-You are here: How to Upgrade the JasperReports Server
-
 How to Upgrade Jasper Reports Server
 ------------------------------------
 
-This section explains how to upgrade Jasper Reports Server from `V 6.0` to `V 6.2`   or   `V 6.2` to `V 7.1`   or  `V 6.0` to `V 7.1`.
+This section explains how to upgrade Jasper Reports Server from `V 7.1` to `V 7.9.2`.
 
-> **_Important:_** To get access to the reports created with latest features, Volt MX recommends to upgrade Jasper Enterprise edition 6.2 or 7.1 with V8 or latest.
 
 To Upgrade JasperReports Server, follow these steps:
 
 1.  Back up your JRS War file, as follows:
     
-    1.  Create a folder where you can save your `jasperserver-pro.war` file. For example, `C:\JS_BACKUP`  or  `/opt/JS_BACKUP`.
+    a.  Create a folder where you can save your `jasperserver-pro.war` file. For example, `C:\JS_BACKUP`  or  `/opt/JS_BACKUP`.
     
-    1.  Copy the `<tomcat>/webapps/jasperserver-pro` to `<path>/JS_BACKUP`.
+    b.  Copy the `<tomcat>/webapps/jasperserver-pro` to `<path>/JS_BACKUP`.  
+    
 2.  Back up your JasperServer Database.
     
-    1.  Create a folder where you can save your JasperServer database. For example, `C:\JS_BACKUP` or `/opt/JS_BACKUP`.
-    2.  Run the following commands for PostgreSQL.
+    a.  Create a folder where you can save your JasperServer database. For example, `C:\JS_BACKUP` or `/opt/JS_BACKUP`.  
+
+    b.  Run the following commands for PostgreSQL.
     
     1.  ```
-cd <path>/JS_BACKUP
-```
+            cd <path>/JS_BACKUP
+        ```
+
     2.  ```
-<jrs-server-home>/postgresql/bin/pg_dump.exe --host=<host> --port=<port> --username=<username> jasperserver  >  js-db-7.1-dump.sql
-```
+           <jrs-server-home>/postgresql/bin/pg_dump.exe --host=<host> --port=<port> --username=<username> jasperserver  >  js-db-7.1-dump.sql
+        ```
+
 3.  Export the current Repository Data, as follows:
-    
+
     *   Command for Windows
-    
+
     1.  ```
-cd <js-install-7.1>/buildomatic
-```
+        cd <js-install-7.1>/buildomatic
+        ```
+
     2.  ```
-js-export.bat --everything --output-zip js-export-7.1.zip
-```
-    
-    *   Command for Linux.
-        1.  ```
-cd <js-install-7.1>/buildomatic
-```
-        2.  ```
-js-export.sh --everything --output-zip js-export-7.1.zip
-            
-```
-4.  Download the JRS 7.1 WAR file from [http://support.jaspersoft.com](http://support.jaspersoft.com/).
-    
-5.  Extract all files from the `jasperreports-server-7.1-bin.zip` to a the local system - for example, `<js-install-7.1>(C:\Jaspersoft on Windows, /home/<user> on Linux)`
-    
-    > **_Important:_** If the system displays the error `` `The filename or extension is too long` ``, change the parent folder name to a smaller one.
-    
+        js-export.bat --everything --output-zip js-export-7.1.zip
+        ```
+
+    *   Command for Linux
+        
+    1.  ```
+        cd <js-install-7.1>/buildomatic
+        ```
+
+    2.  ```
+        js-export.sh --everything --output-zip js-export-7.1.zip
+        ```
+
+4.  Download the JasperReports Server 7.9 WAR File Distribution. The WAR file distribution comes in a compressed ZIP file named TIB_js-jrs_7.9.0_bin.zip.Download the WAR file distribution from TIBCO Jaspersoft edelivery website.
+
+
+5.  Extract all files from the TIB_js-jrs_7.9.0_bin.zip to a local system - for example, &lt;js-install-7.1.0&gt;(C:\Jaspersoft on Windows, /home/&lt;user&gt; on Linux).
+
+    > **_Note:_** If the system displays the error `The filename or extension is too long`, change the parent folder name to a smaller one.
+
 6.  Configure the buildomatic for your Database and Application Server, as follows:
+
+    a.  Copy the `postgresql_master.properties` configuration file located in `<C:\Jaspersoft\TIB_js-jrs_7.9.0_bin\jasperreports-server-pro-7.9.0-bin\ buildomatic/sample_conf/postgresql_master.properties>`  
+
+    b.  Paste the `postgresql_master.properties` file to `<C:\Jaspersoft\TIB_js-jrs_7.9.0_bin\jasperreports-server-pro-7.9.0-bin\ >/buildomatic.` 
+
+    c.  Rename the `postgresql_master.properties`  to  `default_master.properties`.
     
-    1.  Copy the `postgresql_master.properties` configuration file located in `<js-install-7.1>/buildomatic/sample_conf/postgresql_master.properties`
-    2.  Paste the `postgresql_master.properties` file to `<js-install-7.1>/buildomatic`.
-    3.  Rename the `postgresql_master.properties`  to  `default_master.properties`.
-        
-        For example,
-        
-        From `<js-install-7.1>/buildomatic/postgresql_master.properties`
-        
-        to `<js-install-7.1>/buildomatic/``default_master.properties`.
-        
-    4.  Edit the `default_master.properties` with your database and application server details.
-        *   appServerDir=<your Tomcat Server location where you have deployed JasperServer>
-        *   dbUsername=postgres
-        *   dbPassword=postgres
-        *   dbHost=localhost
-        *   dbPort=<port of the database server/postgresql>
-7.  Upgrade to JasperReports Server 7.1
+
+    d.  Edit the `default_master.properties` with your database and application server details.  
+
+      appServerDir=&lt;your Tomcat Server location where you have deployed JasperServer&gt; <br>
+      dbUsername=postgres <br>
+      dbPassword=postgres <br>
+      dbHost=localhost <br>
+      dbPort=&lt;port of the database server/postgresql&gt;  
+
+7.  Upgrade to JasperReports Server 7.9
+
+     a.  Stop your application server (Tomcat Server)
+
+    ```
+          Ubuntu Linux:
+          cd <js-install>
+          ./ctlscript.sh stop tomcat
+    ```
+
+     b.	Start your Database Server(PostgreSQL Server).
+        Make sure that the user running the upgrade commands is the same user that installed the server. <br>
+        cd &lt;TIB_js-jrs_7.9.0_bin&gt;/buildomatic
+        Please use the js-7.1-export.zip ‘file path location’ from above step here: <br>
+        <b>Windows</b>:<br>
+        js-upgrade-newdb.bat <path>\js-7.1-export.zip <br>
+        <b>Ubuntu Linux</b>:<br>
+        ./js-upgrade-newdb.sh <path>/js-7.1-export.zip  <br>
+
+
+     Output Log Location: The output logs are available at &lt;js-install-7.1&gt;/buildomatic/logs/js-upgrade-&lt;date&gt;-&lt;number&gt;.log
+
+8. Download hotfix_JRSPro7.9.2_cumulative_20221213_0819 from TIBCO Support.
+
+9. Apply the hotfix_JRSPro7.9.2_cumulative_20221213_0819 hotfix. Follow readme.txt file in the hotfix_JRSPro7.9.2_cumulative_20221213_0819\jasperserver-pro and hotfix_JRSPro7.9.2_cumulative_20221213_0819\js-install to apply the hotfix.
+
+
+10.	Start and Log into JasperReports Server 7.9.2.
+
+    a.	Start your application server (Tomcat server).
+
+    b.	Clear your browsing cache.  
+
+    Log in to the JasperReports Server. You can view the JasperReports Server version upgraded to V7.9.2. <br>
     
-    1.  Stop your application server (Tomcat Server)
-    2.  Start your database server (Postgres Server)
-    3.  Run the following command:
-        *   Command to run in Windows
-            
-```
-cd <js-install-7.1>/buildomatic  
-              
-            js-upgrade-newdb.bat <path>\js-export-7.1.zip  
-            
-```
-        *   Command to run in Linux
-            
-```
-$ cd <js-install-7.1>/buildomatic  
-              
-            $ ./js-upgrade-newdb.sh <path>/js-export-7.1.zip  
-            
-```
-            
-            Output Log Location: The output logs are available at <js-install-7.1>/buildomatic/logs/js-upgrade-<date>-<number>.log
-            
-8.  Start and Log into JasperReports Server 7.1.
-    
-    1.  Start your application server(Tomcat server).
-    2.  Clear your browsing cache.
-    3.  Log in to the JasperReports Server. You can view the JasperServer version upgraded to V7.1.
-        
-        To check the upgraded version of the Jasper Reports Server, click the link specified in the footer immediately after the upgrade. The **About TIBCO JasperReports Server** dialog appears with upgraded details, shown below:
-        
-        ![](Resources/Images/JasperLicense7_575x400.png)
-        
-9.  Perform the Post-Installation tasks as specified in the [Post-Installation Tasks.](Post-Installation_Tasks.md)
-    
-10.  Clear the application server's **Work** and **Temp** folder.
-    
-    1.  Go to `<tomcat>/work` folder and delete all the files and folders in that directory.
-    2.  Go to `<tomcat>/temp` folder and delete all the files and folders in that directory.
-11.  Clear the **Repository Cache Database** table.
-    
-    1.  Run the following commands in the JasperServer's PostgreSQL DB with `postgres` user.
-        1.  ```
-update JIRepositoryCache set item_reference = null;
-```
-        2.  ```
-delete from JIRepositoryCache;
-```
-    
-    Now your JasperServer is upgraded to V 7.1, and all the analytics information from the previous version is available in the upgraded version.
+    To check the upgraded version of the Jasper Reports Server, click the link specified in the footer immediately after the upgrade. The About TIBCO JasperReports Server dialog appears with upgraded details, shown below:
+
+    ![](Resources/Images/Upgrade1.png)
+
+
+11. Perform the Post-Installation tasks as specified in the Post-Installation Tasks.
+
+12.	Clear the application server's Work and Temp folder.
+
+    Go to  &lt;tomcat&gt;/work folder and delete all the files and folders in that directory.  <br>  
+    Go to  &lt;tomcat&gt;/temp folder and delete all the files and folders in that directory.
+
+13.	Clear the Repository Cache Database table.
+
+    a.	Run the following commands in the JasperServer's PostgreSQL DB with postgres user  
+    i.	update JIRepositoryCache set item_reference = null;  
+    ii.	delete from JIRepositoryCache;  
+
+    Now your JasperReports Server is upgraded to V 7.9.2, and all the analytics information from the previous version is available in the upgraded version.  
+
+
+14.	Configure the JasperReports Server. Refer to How to Configure the JasperReports Server.
+
+15.	Configure VoltMX Foundry in the JasperReports Server. Refer to How to Configure VoltMX Foundry in the JasperReports Server.
+
+
+
+
+
