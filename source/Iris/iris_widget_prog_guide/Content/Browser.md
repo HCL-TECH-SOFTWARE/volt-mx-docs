@@ -412,7 +412,7 @@ The Browser widget has the following important considerations:
 *   You must _not_ use the Browser widget as a RichText widget. It should only be used to display large HTML content.
 *   You must avoid using the Browser widget to create an application which looks and behaves like a mini web browser. Users normally expect to use the native browser to browse web content. Replicating this functionality within your application is not recommended.
 *   On Android, for 4.2 and below the browser widget does not clip correctly to the bounds of a parent flex container with rounded edges. This is a native Android limitation. Clipping works correctly in API Level 18(4.3 and above).
-*   On SPA platform, <script> tag is not supported.
+*   On SPA platform, < script > tag is not supported.
 *   On SPA (Windows) platform, content is rendered using a URL, opening a new tab is not technically possible. It opens in the current tab itself.
 
 ### i18N Keys
