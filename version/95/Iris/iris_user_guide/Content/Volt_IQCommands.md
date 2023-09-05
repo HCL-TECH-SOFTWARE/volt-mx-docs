@@ -1,7 +1,7 @@
 
-# Iris Actions in Volt MX IQ
+# Iris Actions in Volt IQ
 
-Volt MX IQ supports the following list of Iris actions.
+Volt IQ supports the following list of Iris actions.
 
 <table>
     <tr>
@@ -57,7 +57,7 @@ Volt MX IQ supports the following list of Iris actions.
     </tr>    
     <tr>
         <td>Check for updates</td>        
-        <td>Displays the latest version of Volt MX Iris, if any.<br>You can click <b>Download</b> to upgrade your Volt MX Iris to the latest version.</td>        
+        <td>Displays the latest version of Volt Iris, if any.<br>You can click <b>Download</b> to upgrade your Volt Iris to the latest version.</td>        
         <td>
             <ul>
                 <li>Check updates</li>                
@@ -114,7 +114,7 @@ Volt MX IQ supports the following list of Iris actions.
     </tr>    
     <tr>
         <td>Deep linking project properties</td>        
-        <td>Deeplink to a property in Volt MX Iris Classic; opens the tab in which the property is present.</td>        
+        <td>Deeplink to a property in Volt Iris Classic; opens the tab in which the property is present.</td>        
         <td>
             <ul>
                 <li>change app id to &lt;name&gt;</li>                
@@ -176,7 +176,7 @@ Volt MX IQ supports the following list of Iris actions.
     </tr>    
     <tr>
         <td>Import Cordova project</td>        
-        <td>Imports a Cordova project into Volt MX Iris.</td>        
+        <td>Imports a Cordova project into Volt Iris.</td>        
         <td>
             <ul>
                 <li>Import Cordova project</li>                                                                                                 
@@ -287,7 +287,7 @@ Volt MX IQ supports the following list of Iris actions.
     </tr>        
     <tr>
         <td>Open terminal</td>        
-        <td>Opens a terminal tab in the lower pane of Volt MX Iris.</td>        
+        <td>Opens a terminal tab in the lower pane of Volt Iris.</td>        
         <td>
             <ul>
                 <li>enable terminal</li>                        
