@@ -9,7 +9,7 @@ The chatbot also helps users in optimization, translation, and in helping them c
 
 > **_Important_** : Users must have an internet connection for Volt IQ to work. If the network connectivity is lost after launching Volt IQ, users must reconnect to the internet and then click the Refresh icon in the chat window.
 
-## Enable Volt IQ
+<!-- ## Enable Volt IQ
 
 The Volt IQ feature is available by default for all <span class="mc-variable MyVariables.Product variable">Volt MX</span> Developers and users who are **Early adopters** of <span class="mc-variable MyVariables.MADP variable">Volt Iris</span>.
 
@@ -26,7 +26,7 @@ Non-<span class="mc-variable MyVariables.Product variable">Volt MX</span> users 
 
     The Volt IQ icon appears at the lower-left corner of Iris.
 
-    ![](Resources/Images/VoltMXIQIcon.PNG)
+    ![](Resources/Images/VoltMXIQIcon.PNG) -->
 
 ## Interact with Volt IQ
 
@@ -61,7 +61,7 @@ Volt IQ can perform the following tasks:
 
 *   [Design Suggestions](#Pattern)
 *   [Generic search](#Generic)
-    *   [Search from <span class="mc-variable MyVariables.Marketplace variable">HCL Forge</span>](#VoltMXMarketplace)
+    *   [Search from <span class="mc-variable MyVariables.Marketplace variable">HCL Marketplace</span>](#VoltMXMarketplace)
     *   [Search from <span class="mc-variable MyVariables.Product variable">Volt MX</span> Community](#VoltMXBase)
     *   [Search from YouTube](#YouTube)
     *   [Search from Hike Catalog](#Hike)
@@ -73,31 +73,34 @@ Volt IQ can perform the following tasks:
     *   [Run project](#Run)
     *   [Build project](#Build)
     *   [Test Project](#Test)
-    *   [Analyze Project](#Analyze)
+    *   [Analyse Project](#Analyse)
 
 ### <a id="Pattern"></a>Volt IQ Design Suggestions
 
 The Volt IQ Design Suggestions feature assists you to develop applications faster. Volt IQ predicts the UI of your form and recommends relevant designs. These predictions can help you to reuse existing components and designs, without having to create them from scratch.
 
-For instance, if you design a form with two TextBox widgets, and one Button widget, Volt IQ predicts that you could be creating a Login form and recommends designs such as the [Login](https://marketplace.hclvoltmx.com/items/login-advanced?search=login) component from [HCL Forge](https://marketplace.hclvoltmx.com/).
+For instance, if you design a form with two TextBox widgets, and one Button widget, Volt IQ predicts that you could be creating a Login form and recommends designs such as the [Login](https://marketplace.hclvoltmx.com/items/login-advanced?search=login) component from [HCL Marketplace](https://marketplace.hclvoltmx.com/).
 
 <a name="IdentifyDuplicates"></a>Furthermore, Volt IQ can detect duplicate designs in your project. To fetch the duplicates of a design, type a command, such as “identify duplicates”, in the Volt IQ chat window and press Enter. A list of duplicate design groups is displayed in the Volt IQ Design Suggestions window. You can then view each duplicate design and copy it to a form.
 
 #### Interact with Volt IQ Design Suggestions
 
-While you are designing a form, Volt IQ compares the UI of the form with the existing designs from the current project and <span class="mc-variable MyVariables.Marketplace variable">HCL Forge</span> . Volt IQ then generates a list of recommended designs based on the visual, textual, and widget hierarchical similarities of the designs.
+While you are designing a form, Volt IQ compares the UI of the form with the existing designs from the current project and <span class="mc-variable MyVariables.Marketplace variable">HCL Marketplace</span> . Volt IQ then generates a list of recommended designs based on the visual, textual, and widget hierarchical similarities of the designs.
 
 > **_Note_**: For Volt IQ to show design suggestions for a form, you must add at least three widgets to the form.    
 
-![](Resources/Images/imag3.1.png)        
-
-![](Resources/Images/image3.2.png)        
+![](Resources/Images/imag3.1.png)            
 
 ![](Resources/Images/image3.3.png)    
 
 <!-- ![](Resources/Images/PRShowPattern.gif) -->
 
-When similar designs are detected in the current project or in <span class="mc-variable MyVariables.Marketplace variable">HCL Forge</span> , a Volt IQ bubble appears on the lower-left corner of the screen. The bubble provides the following options:
+When similar designs are detected in the current project or in <span class="mc-variable MyVariables.Marketplace variable">HCL Marketplace</span> , a Volt IQ bubble appears on the lower-left corner of the screen.  
+
+![](Resources/Images/image3.2.png)   
+
+
+The bubble provides the following options:
 
 *   **Yes:** Enables you to view a list of design suggestions in the **Volt IQ Design Suggestions** window.
 *   **<a name="Pause"></a>Pause:** Enables you to pause the design suggestions for an hour.
@@ -106,7 +109,7 @@ When similar designs are detected in the current project or in <span class="mc-v
 Here is the list of sources from which you receive the suggestions:
 
 *   [Current project](#CurrentProject)
-*   [<span class="mc-variable MyVariables.Marketplace variable">HCL Forge</span>](#Marketplace)
+*   [<span class="mc-variable MyVariables.Marketplace variable">HCL Marketplace</span>](#Marketplace)
 *   [<span class="mc-variable MyVariables.MADP variable">Volt Iris</span>Library](#Library)
 
 <a name="CurrentProject"></a>**Designs from the Current Project**
@@ -121,21 +124,21 @@ You can perform the following actions on a design suggestion from the current pr
 
 *   **Copy:** Copies the design to the clipboard.
 
-*   **<a name="ConvertToComponent"></a>Convert to component:** Enables you to convert a design suggestion into a component without contract, and imports it into the project.
+<!-- *   **<a name="ConvertToComponent"></a>Convert to component:** Enables you to convert a design suggestion into a component without contract, and imports it into the project. -->
 
     <!-- ![](Resources/Images/PGReplace.gif) -->
 
-<a name="Marketplace"></a>**Components from <span class="mc-variable MyVariables.Marketplace variable">HCL Forge</span>**
+<a name="Marketplace"></a>**Components from <span class="mc-variable MyVariables.Marketplace variable">HCL Marketplace</span>**
 
-You can perform the following actions on a design suggestion from <span class="mc-variable MyVariables.Marketplace variable">HCL Forge</span> :
+You can perform the following actions on a design suggestion from <span class="mc-variable MyVariables.Marketplace variable">HCL Marketplace</span> :
 
-*   **View:** Opens the component in <span class="mc-variable MyVariables.Marketplace variable">HCL Forge</span> and displays details of the component.
+*   **View:** Opens the component in <span class="mc-variable MyVariables.Marketplace variable">HCL Marketplace</span> and displays details of the component.
 
     <!-- ![](Resources/Images/PRView.gif) -->
 
 *   **Download:** Downloads the component into your local system.
 
-    > **_Note_**: Volt IQ Design Suggestions is an offline feature. However, you must have an active Internet connection to download a recommended <span class="mc-variable MyVariables.Marketplace variable">HCL Forge</span> component.
+    > **_Note_**: Volt IQ Design Suggestions is an offline feature. However, you must have an active Internet connection to download a recommended <span class="mc-variable MyVariables.Marketplace variable">HCL Marketplace</span> component.
 
 <a name="Library"></a>**Designs from Default Library**
 
@@ -152,29 +155,28 @@ In Iris, you can enable or disable the design suggestions from the main menu dir
 
     If the design suggestions is already enabled, you will see **Disable Design Suggestions**. Click **Disable Design Suggestions** to stop the design suggestions from being displayed.
 
-You can also enable or disable the design suggestions by using a command in the Volt IQ chat window. For example, you can enter commands such as stop design suggestions, or turn on suggestions.
+You can also enable or disable the design suggestions by using a command in the Volt IQ chat window. For example, you can enter commands such as **turn on suggestions** or **turn off design suggestions**. 
 
 <!-- ![](Resources/Images/GIFS/DS_enableDisable.gif) -->
 
 ### <a id="Generic"></a>Generic Search
 
-The Generic search functionality helps you fetch data from <span class="mc-variable MyVariables.Marketplace variable">HCL Forge</span> , Community, and YouTube, based on the availability of results.
+The Generic search functionality helps you fetch data from <span class="mc-variable MyVariables.Marketplace variable">HCL Marketplace</span> , Community, and YouTube, based on the availability of results.
 
 Here are some generic search queries:
 
-*   Segment
-*   What is DBX?
-*   How to integrate FFI?
+*   How to run on android and iPhone
+*   How to create a sample app in volt iris
 
-#### <a id="VoltMXMarketplace"></a><span class="mc-variable MyVariables.Marketplace variable">HCL Forge</span> Search
+#### <a id="VoltMXMarketplace"></a><span class="mc-variable MyVariables.Marketplace variable">HCL Marketplace</span> Search
 
-The <span class="mc-variable MyVariables.Marketplace variable">HCL Forge</span> search feature is integrated with Volt IQ. Using the bot, you can search for components from <span class="mc-variable MyVariables.Marketplace variable">HCL Forge</span> , and import those components into your Iris project.
+The <span class="mc-variable MyVariables.Marketplace variable">HCL Marketplace</span> search feature is integrated with Volt IQ. Using the bot, you can search for components from <span class="mc-variable MyVariables.Marketplace variable">HCL Marketplace</span> , and import those components into your Iris project.
 
-To fetch results exclusively from <span class="mc-variable MyVariables.Marketplace variable">HCL Forge</span> , enter @marketplace <Text query to search in <span class="mc-variable MyVariables.Marketplace variable">HCL Forge</span> 
+To fetch results exclusively from <span class="mc-variable MyVariables.Marketplace variable">HCL Marketplace</span> , enter @marketplace <Text query to search in <span class="mc-variable MyVariables.Marketplace variable">HCL Marketplace</span> 
 
 <!-- ![](Resources/Images/IQ2.gif) -->
 
-Here are a few <span class="mc-variable MyVariables.Marketplace variable">HCL Forge</span> search queries:
+Here are a few <span class="mc-variable MyVariables.Marketplace variable">HCL Marketplace</span> search queries:
 
 *   @markerplace Placelocator
 *   @marketplace login
@@ -200,8 +202,7 @@ To fetch results exclusively from YouTube, enter @youtube <Text query to search 
 
 Here are a few YouTube search queries:
 
-*   @youtube banking
-*   @youtube javascript
+*   @youtube Getting started with iris
 *   @youtube creating a component
 
 #### <a id="Hike"></a>Hike Search
@@ -239,11 +240,13 @@ Here are a few queries about translation:
 *   Translate this app to Spanish
 *   Localize to Spanish
 *   Can you translate this app?
-*   Translate my app
+*   Translate my app  
+
+![](Resources/Images/Translation1.png)
 
 ### <a id="Utility"></a>Iris Actions
 
-Volt IQ helps you save time by triggering small actions on <span class="mc-variable MyVariables.MADP variable">Volt Iris</span>, using commands in the bot. For the list of Iris actions that are supported on Volt IQ, refer [Iris actions.](VoltMXIQCommands.htm)
+Volt IQ helps you save time by triggering small actions on <span class="mc-variable MyVariables.MADP variable">Volt Iris</span>, using commands in the bot. For the list of Iris actions that are supported on Volt IQ, refer [Iris actions.](../Content/Volt_IQCommands.md)
 
 Following are a few Iris actions.
 
@@ -277,7 +280,7 @@ Here are a few queries about importing a project:
 You can import the following types of components into <span class="mc-variable MyVariables.MADP variable">Volt Iris</span>:
 
 *   **Local components:** These components are imported from the local storage. When you import a local component, the bot shows you a list of components in the file explorer. You can then select the component that you want to import.
-*   **Cloud components:** These components are imported from <span class="mc-variable MyVariables.Marketplace variable">HCL Forge</span> . When you search for a component from cloud, the <span class="mc-variable MyVariables.Marketplace variable">HCL Forge</span> window appears. You can search for a component and import the component from the <span class="mc-variable MyVariables.Marketplace variable">HCL Forge</span> window.
+*   **Cloud components:** These components are imported from <span class="mc-variable MyVariables.Marketplace variable">HCL Marketplace</span> . When you search for a component from cloud, the <span class="mc-variable MyVariables.Marketplace variable">HCL Marketplace</span> window appears. You can search for a component and import the component from the <span class="mc-variable MyVariables.Marketplace variable">HCL Marketplace</span> window.
 
 Here are a few queries on importing components:
 
@@ -301,11 +304,9 @@ Volt IQ helps you build the current project for a required platform. You can gen
 
 Here are the queries on building your project for various platforms:
 
-*   Build project
 *   Build for Android
 *   Build for iPhone
 *   Build for Android tablet
-*   Build project for iPad
 *   Build for Desktop Web
 
 #### <a id="Test"></a>Test Project
@@ -315,50 +316,49 @@ Using Volt IQ, you can create new and open existing **Test Cases**, **Test Suite
 Here are the commands related to Test Cases that you can provide the bot.
 
 *   create test-case
-*   open test-case /<name of the test case.js file>
-*   open test-case for mobile /<name of the test case.js file>
-*   open test-case for tablet /<name of the test case.js file>
-*   open test-case for desktopweb /<name of the test case.js file>
+*   open test-case /< name of the test case.js file >
+*   open test-case for mobile /< name of the test case.js file >
+*   open test-case for tablet /< name of the test case.js file >
+*   open test-case for desktopweb /< name of the test case.js file >
 
 Here are the commands related to Test Suites that you can provide the bot. You must provide the channel for which you are testing while running these commands.
 
 *   create test-suite
-*   open test-suite for mobile /<name of the test suite.js file>
+*   open test-suite for mobile /< name of the test suite.js file >
 
-*   open test-suite for tablet /<name of the test suite.js file>
-*   open test-suite for desktopweb /<name of the test suite.js file>
+*   open test-suite for tablet /< name of the test suite.js file >
+*   open test-suite for desktopweb /< name of the test suite.js file >
 
-*   run test-suite for mobile /<name of the test suite.js file>
+*   run test-suite for mobile /< name of the test suite.js file >
 
-*   run test-suite for tablet /<name of the test suite.js file>
-*   run test-suite for desktopweb /<name of the test suite.js file>
+*   run test-suite for tablet /< name of the test suite.js file >
+*   run test-suite for desktopweb /< name of the test suite.js file >
 
 Here are the commands related to Test Plans that you can provide the bot. You must provide the channel for which you are testing while running these commands.
 
 *   create test-plan
-*   open test-plan for mobile /<name of the test plan.js file>
+*   open test-plan for mobile /< ame of the test plan.js file >
 
-*   open test-plan for tablet /<name of the test plan.js file>
-*   open test-plan for desktopweb /<name of the test plan.js file>
+*   open test-plan for tablet /< name of the test plan.js file >
+*   open test-plan for desktopweb /< name of the test plan.js file >
 
-#### <a id="Analyze"></a>Analyze Project
+#### <a id="Analyse"></a>Analyse Project
 
-Using Volt IQ bot, you can open the <span class="mc-variable MyVariables.AAD variable">AI Assisted Development</span> window to analyze and scan your project for any unused resources, skins, and widgets. You can also increase the performance of your application and check the fonts used throughout the application.
+Using Volt IQ bot, you can open the <span class="mc-variable MyVariables.AAD variable">AI Assisted Development</span> window to Analyse and scan your project for any unused resources, skins, and widgets. You can also increase the performance of your application and check the fonts used throughout the application.
 
 <!-- For more information on <span class="mc-variable MyVariables.AAD variable">AI Assisted Development</span>, click [here](AIAssisted.htm#top). -->
 
 Here are the commands you can use to open the <span class="mc-variable MyVariables.AAD variable">AI Assisted Development</span> window.
 
+*   Run AI Assisted Development
 *   Launch AI Assisted Development
 *   Launch Cop
-*   Launch Volt MX cop
 *   Open AI Assisted Development
 *   Open Cop
-*   Open Volt MX cop
 
 You can also open the <span class="mc-variable MyVariables.AAD variable">AI Assisted Development</span> window to display specific rule categories such as, Best Practices, Performance, and Style Guide. Here are the commands you can use to open the the <span class="mc-variable MyVariables.AAD variable">AI Assisted Development</span> window to specific categories.
 
-*   Analyze <rule category>
+*   Analyse <rule category>
 *   Open <rule category>
 *   Run <rule category>
 

@@ -17,19 +17,16 @@ Volt IQ supports the following list of Iris actions.
                 <li>add project here</li>                
                 <li>import project here</li>                
                 <li>import to current project</li>                
-                <li>add to current project</li>
             </ul>
         </td>
     </tr>    
     <tr>
-        <td>Browse HCL Forge</td>        
-        <td>Opens the HCL Forge window.</td>        
+        <td>Browse Marketplace</td>        
+        <td>Opens the Volt MX Marketplace window.</td>        
         <td>
             <ul>
-                <li>browse HCL Forge</li>                
-                <li>open HCL Forge</li>                
-                <li>open HCL Forge</li>                
-                <li>browse HCL Forge</li>
+                <li>browse Volt MX Marketplace</li>                
+                <li>open Volt MX Marketplace</li>                
             </ul>
         </td>
     </tr>    
@@ -83,8 +80,7 @@ Volt IQ supports the following list of Iris actions.
         <td>
             <ul>
                 <li>create a new form</li>                
-                <li>create a desktop form</li>                           
-                <li>open a mobile form</li>                             
+                <li>create a desktop form</li>                                                     
                 <li>create a new form for tablet</li>               
             </ul>
         </td>
@@ -95,8 +91,7 @@ Volt IQ supports the following list of Iris actions.
         <td>
             <ul>
                 <li>setup a new project</li>                
-                <li>start a new project</li>                           
-                <li>begin a fresh project</li>                                        
+                <li>start a new project</li>                                                             
             </ul>
         </td>
     </tr>    
@@ -111,30 +106,18 @@ Volt IQ supports the following list of Iris actions.
                 <li>Debug live preview on android</li>                                       
             </ul>
         </td>
-    </tr>    
-    <tr>
-        <td>Deep linking project properties</td>        
-        <td>Deeplink to a property in Volt Iris Classic; opens the tab in which the property is present.</td>        
-        <td>
-            <ul>
-                <li>change app id to &lt;name&gt;</li>                
-                <li>set application id to &lt;name&gt;</li>                                                           
-            </ul>
-        </td>
-    </tr>    
+    </tr>
     <tr>
         <td>Download Volt MX App</td>        
         <td>Opens the Volt MX App dialog box.</td>        
         <td>
-            <ul>
-                <li>Download Volt MX App</li>                
-                <li>Download Preview app</li>                            
-                <li>Where can i find Volt MX App?</li>                                                  
+            <ul>             
+                <li>Download Preview app</li>                                                                        
             </ul>
         </td>
     </tr>    
     <tr>
-        <td>Edit i18np</td>        
+        <td>Edit i18n</td>        
         <td>Opens the <b>Configure Internationalization</b> window.</td>        
         <td>
             <ul>
@@ -144,33 +127,12 @@ Volt IQ supports the following list of Iris actions.
         </td>
     </tr>    
     <tr>
-        <td>Export fonts</td>        
-        <td>Exports fonts</td>        
+        <td>Export i18n</td>        
+        <td>Exports Internationalization key/value(s) in selected (JSON or CSV) Format</td>        
         <td>
             <ul>
-                <li>export Font</li>                
-                <li>export Fonts</li>                                                                  
-            </ul>
-        </td>
-    </tr>    
-    <tr>
-        <td>Export i18n resources as JSON, CSV</td>        
-        <td>Exports i18n resources as JSON and CSV.</td>        
-        <td>
-            <ul>
-                <li>export I18N as json</li>                
-                <li>export i18n as csv</li>                           
-                <li>export i18 export i18n</li>                                                             
-            </ul>
-        </td>
-    </tr>    
-    <tr>
-        <td>Export themes</td>        
-        <td>Exports themes</td>        
-        <td>
-            <ul>
-                <li>export theme</li>                
-                <li>export themes</li>                                                                                     
+                <li>export i18</li>                
+                <li>export i18n</li>                                                                                    
             </ul>
         </td>
     </tr>    
@@ -220,8 +182,7 @@ Volt IQ supports the following list of Iris actions.
         <td>
             <ul>
                 <li>Open Live Preview settings</li>
-                <li>Open Preview settings</li>                       
-                <li>Open Live Preview</li>                                                                                              
+                <li>Open Preview settings</li>                                                                              
             </ul>
         </td>
     </tr>        
@@ -231,8 +192,7 @@ Volt IQ supports the following list of Iris actions.
         <td>
             <ul>
                 <li>Manage Cordova Plugins</li>
-                <li>Add Cordova Plugins</li>                       
-                <li>Remove Cordova Plugins</li>                                                                                              
+                <li>Add Cordova Plugins</li>                                                                                      
             </ul>
         </td>
     </tr>        
@@ -258,7 +218,7 @@ Volt IQ supports the following list of Iris actions.
     </tr>      
     <tr>
         <td>Open preferences</td>        
-        <td>Opens the <b>Iris Preferences</b> window.</td>        
+        <td>Opens the <b>Volt Iris Preferences</b> window.</td>        
         <td>
             <ul>
                 <li>Open Preferences</li>                         
@@ -304,17 +264,7 @@ Volt IQ supports the following list of Iris actions.
                 <li>where can i find tutorials?</li>                                                                            
             </ul>
         </td>
-    </tr>       
-    <tr>
-        <td>Publish app to HCL Forges</td>        
-        <td>Opens the <b>Publish to HCL Forge</b> window</td>        
-        <td>
-            <ul>
-                <li>publish to HCL Forge</li>                        
-                <li>publish my app to HCL Forge</li>                                                                            
-            </ul>
-        </td>
-    </tr>       
+    </tr>         
     <tr>
         <td>Publish live preview</td>        
         <td>Opens the <b>Publish Live Preview</b> window.</td>        
@@ -409,47 +359,47 @@ Volt IQ supports the following list of Iris actions.
         </td>
     </tr>    
     <tr>
-        <td>Analyze project</td>        
+        <td>Analyse project</td>        
         <td>Displays the AI Assisted Development window.</td>        
         <td>
             <ul>
                 <li>Launch AI Assisted Development</li>                
                 <li>Launch Cop</li>                
-                <li>Launch Volt MX Cop</li>                
+                <li>Launch Volt Cop</li>                
                 <li>Open AI Assisted Development</li>                
                 <li>Open Cop</li>                
-                <li>Open Volt MX cop</li>                            
+                <li>Open Volt cop</li>                            
             </ul>
         </td>
     </tr>    
     <tr>
-        <td>Analyze project for Best practices</td>        
+        <td>Analyse project for Best practices</td>        
         <td>Displays the best practices rules in the AI Assisted Development window.</td>        
         <td>
             <ul>
-                <li>Analyze best practices</li>                
+                <li>Analyse best practices</li>                
                 <li>Open best practices</li>                
                 <li>Run best practices</li>                                        
             </ul>
         </td>
     </tr>    
     <tr>
-        <td>Analyze project for performance issues</td>        
+        <td>Analyse project for performance issues</td>        
         <td>Displays the performance rules in the AI Assisted Development window.</td>        
         <td>
             <ul>
-                <li>Analyze performance rules</li>                
+                <li>Analyse performance rules</li>                
                 <li>Open performance rules</li>                
                 <li>Run performance rules</li>                                        
             </ul>
         </td>
     </tr>    
     <tr>
-        <td>Analyzes if the text in project use the same font family and size.</td>        
+        <td>Analyses if the text in project uses the same font family and size.</td>        
         <td>Displays the style guide rules in the AI Assisted Development window.</td>        
         <td>
             <ul>
-                <li>Analyze style rules</li>                
+                <li>Analyse style rules</li>                
                 <li>Open style rules</li>                
                 <li>Run style rules</li>                                        
             </ul>
