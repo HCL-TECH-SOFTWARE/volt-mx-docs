@@ -188,12 +188,14 @@ The following parameters are specified in the values.yaml file within the Helm c
 
 **Steps to Install Volt MX Foundry Container Cluster Solution:**
 
-1. Download the Helm charts from [HCL Flexnet software portal](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.5.x&orgId=HCL) and unzip the contents.   With a command prompt, cd to the root of the unzipped content (you will see `values.yaml` here along with Charts in the subdirectories named `apps` and `dbupdate`).
+1. Download the Helm charts from [HCL Flexnet software portal](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.5.x&orgId=HCL) and unzip the contents.   With a command prompt, cd to the root of the unzipped content (you will see `values.yaml` here along with Charts in the subdirectories named `apps` and `dbupdate`).<br><br>
+    **Note:**
+        Substitute the version number for the version of Foundry you downloaded in the command example below such as **Foundry_v9.5.15.0** and **HelmChart-9.5.15.0_GA.zip**.
 
     <pre><code>
-    $ mkdir ~/Foundry-9.5.2.0_GA
-    $ cd ~/Foundry-9.5.2.0_GA
-    $ unzip ~/Downloads/HelmChart-9.5.2.0_GA.zip
+    $ mkdir ~/Foundry-9.5.n.n_GA
+    $ cd ~/Foundry-9.5.n.n_GA
+    $ unzip ~/Downloads/HelmChart-9.5.n.n_GA.zip
     </code></pre>
 
  2. Execute `init-guids.sh` to initialize account details.  Specify --upgrade if you are upgrading an existing installation.
@@ -381,7 +383,7 @@ The following parameters are specified in the values.yaml file within the Helm c
         _______________________________________________
 
         IMAGE REGISTRY: hclcr.io/voltmx
-        BUILD VERSION: 9.5.2.0_GA
+        BUILD VERSION: 9.5.15.0_GA
 
         _______________________________________________
 
