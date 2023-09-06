@@ -126,8 +126,6 @@ You can perform the following actions on a design suggestion from the current pr
 
 <!-- *   **<a name="ConvertToComponent"></a>Convert to component:** Enables you to convert a design suggestion into a component without contract, and imports it into the project. -->
 
-    <!-- ![](Resources/Images/PGReplace.gif) -->
-
 <a name="Marketplace"></a>**Components from <span class="mc-variable MyVariables.Marketplace variable">HCL Marketplace</span>**
 
 You can perform the following actions on a design suggestion from <span class="mc-variable MyVariables.Marketplace variable">HCL Marketplace</span> :
@@ -172,7 +170,7 @@ Here are some generic search queries:
 
 The <span class="mc-variable MyVariables.Marketplace variable">HCL Marketplace</span> search feature is integrated with Volt IQ. Using the bot, you can search for components from <span class="mc-variable MyVariables.Marketplace variable">HCL Marketplace</span> , and import those components into your Iris project.
 
-To fetch results exclusively from <span class="mc-variable MyVariables.Marketplace variable">HCL Marketplace</span> , enter @marketplace <Text query to search in <span class="mc-variable MyVariables.Marketplace variable">HCL Marketplace</span> 
+To fetch results exclusively from <span class="mc-variable MyVariables.Marketplace variable">HCL Marketplace</span> , enter @marketplace \< Text query to search in HCL Marketplace \> </span> 
 
 <!-- ![](Resources/Images/IQ2.gif) -->
 
@@ -275,7 +273,7 @@ Here are a few queries about importing a project:
 *   Import project
 *   Export project
 
-#### <a id="ImportComp"></a>Import Component (Local/ Cloud)
+#### <a id="ImportComp"></a>Import Component (Local/Cloud)
 
 You can import the following types of components into <span class="mc-variable MyVariables.MADP variable">Volt Iris</span>:
 
@@ -337,7 +335,7 @@ Here are the commands related to Test Suites that you can provide the bot. You m
 Here are the commands related to Test Plans that you can provide the bot. You must provide the channel for which you are testing while running these commands.
 
 *   create test-plan
-*   open test-plan for mobile /< ame of the test plan.js file >
+*   open test-plan for mobile /< name of the test plan.js file >
 
 *   open test-plan for tablet /< name of the test plan.js file >
 *   open test-plan for desktopweb /< name of the test plan.js file >
