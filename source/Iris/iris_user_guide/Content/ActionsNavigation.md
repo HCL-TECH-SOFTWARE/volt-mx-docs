@@ -10,7 +10,7 @@ The general actions that you can use in an action sequence are as follows:
 | Action | Property |
 | --- | --- |
 | [Loop Action](#loop-action) | Repeat a set of nested statements for the specified number of times. |
-| [Add Local](#add-local-variable) | Adds a variable that is available within a function. Local variable can be of type Constant or Expression and take the following data type: String, Number, Boolean and or Collection. |
+| [Add Variable](#add-variable) | Adds a variable that is available within a function. Local variable can be of type Constant or Expression and take the following data type: String, Number, Boolean and or Collection. |
 | [Modify Variable](#modify-variable) | Modify an existing variable. |
 | [Navigate to Form](#navigation) | Navigates from one form to another. |
 | [String Operation](#string-operation) | Perform operations (such as combine or split) on strings. |
