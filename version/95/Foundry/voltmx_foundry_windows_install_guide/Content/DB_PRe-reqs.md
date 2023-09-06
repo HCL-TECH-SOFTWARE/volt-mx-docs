@@ -97,6 +97,55 @@ Database collation needs to be set for a database. This is possible while creati
 
 #### Applicable for Engagement Services
 
+MySQL configuration mandated for Foundry 9.5.15 or greater :
+
+To support MySQL utf8mb4 charsets and collation, update the MySQL configuration file of MySQL 8.0 by adding following changes under [client], [mysql] and [mysqld] section and restart the MySQL server.
+
+1. Ensure that you modify the my.cnf or my.ini with the following parameters: 
+[client]
+default-character-set = utf8mb4
+[mysql]
+default-character-set = utf8mb4
+[mysqld]
+character-set-client-handshake = FALSE
+character-set-server=utf8mb4
+collation-server="utf8mb4_unicode_ci"
+2. Next, restart the MySQL service and run the following query to verify the details:
+mysql> show variables like 'collation%';
++----------------------+--------------------+
+| Variable_name        | Value              |
++----------------------+--------------------+
+| collation_connection | utf8mb4_unicode_ci |
+| collation_database   | utf8mb4_unicode_ci |
+| collation_server     | utf8mb4_unicode_ci |
++----------------------+--------------------+
+3 rows in set (0.00 sec)
+mysql> show variables like 'character%';
++--------------------------+---------------------------------------------------------+
+| Variable_name            | Value                                                   |
++--------------------------+---------------------------------------------------------+
+| character_set_client     | utf8mb4                                                 |
+| character_set_connection | utf8mb4                                                 |
+| character_set_database   | utf8mb4                                                 |
+| character_set_filesystem | binary                                                  |
+| character_set_results    | utf8mb4                                                 |
+| character_set_server     | utf8mb4                                                 |
+| character_set_system     | utf8mb3                                                 |
+| character_sets_dir       | C:\Program Files\MySQL\MySQL Server 8.0\share\charsets\ |
++--------------------------+---------------------------------------------------------+
+8 rows in set (0.00 sec)
+
+2. Update applicable for KMS section:
+
+*  Change heading to "Applicable for Engagement Services for Foundry version earlier than 9.5.15"
+
+3. Directly under MySQL section add:
+
+*  MySQL 8.0 is mandatory for Foundry V9.5.15 or above.
+
+ 
+#### Applicable for Engagement Services
+
 1.  Create the database needed for Engagement Services with unicode character set as UTF8. Also ensure that you modify the `my.cnf` or `my.ini` with the following parameters:
  ```
 
