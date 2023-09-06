@@ -112,9 +112,7 @@ default-character-set = utf8mb4
 character-set-client-handshake = FALSE
 character-set-server=utf8mb4
 collation-server="utf8mb4_unicode_ci"
-
 ```
-<br>
 
 2. Next, restart the MySQL service and run the following query to verify the details:
 
@@ -143,7 +141,6 @@ mysql> show variables like 'character%';
 | character_sets_dir       | C:\Program Files\MySQL\MySQL Server 8.0\share\charsets\ |
 +--------------------------+---------------------------------------------------------+
 8 rows in set (0.00 sec)
-
 ```
 
 2. Update applicable for KMS section:
