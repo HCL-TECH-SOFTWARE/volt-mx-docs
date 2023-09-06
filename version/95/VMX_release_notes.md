@@ -63,7 +63,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 <!-- ### V9 Servicepack 5 Fixpack 15 -->
 <h3 id=v9-servicepack-5-fixpack-15-iris>V9 Servicepack 5 Fixpack 15</h3>
 
-September 05, 2023
+September 12, 2023
 
 #### Iris Enhancements
 
