@@ -738,7 +738,7 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 
 ### V9 Servicepack 5 Fixpack 15
 
-August 21, 2023
+September 12, 2023
 
 ### Foundry Enhancements
 
