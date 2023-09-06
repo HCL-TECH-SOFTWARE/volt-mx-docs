@@ -101,8 +101,9 @@ MySQL configuration mandated for Foundry 9.5.15 or greater :
 
 To support MySQL utf8mb4 charsets and collation, update the MySQL configuration file of MySQL 8.0 by adding following changes under [client], [mysql] and [mysqld] section and restart the MySQL server.
 
-1. Ensure that you modify the my.cnf or my.ini with the following parameters: 
 ```
+1. Ensure that you modify the my.cnf or my.ini with the following parameters: 
+
 
     [client]
     default-character-set = utf8mb4
@@ -147,13 +148,13 @@ mysql> show variables like 'character%';
     +--------------------------+---------------------------------------------------------+
     8 rows in set (0.00 sec)
 ```
-
-4. Update applicable for KMS section:
-   *  Change heading to "Applicable for Engagement Services for
+<br>
+1. Update applicable for KMS section:
+*      Change heading to "Applicable for Engagement Services for
        Foundry version earlier than 9.5.15"`
 
-5. Directly under MySQL section add:
-   *  MySQL 8.0 is mandatory for Foundry V9.5.15 or above.`
+2. Directly under MySQL section add:
+*      MySQL 8.0 is mandatory for Foundry V9.5.15 or above.`
 
  
 #### Applicable for Engagement Services
