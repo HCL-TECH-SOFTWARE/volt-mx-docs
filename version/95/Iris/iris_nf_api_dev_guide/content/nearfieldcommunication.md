@@ -24,4 +24,4 @@ The data is stored in tags in a standard format. You can also store data in diff
 Sample Application
 ------------------
 
-Click [here](https://github.com/voltmx/KNF_NFC) to download a sample application for Near Field Communication.
+Click [here](https://github.com/kony/KNF_NFC) to download a sample application for Near Field Communication.
