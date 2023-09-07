@@ -184,7 +184,7 @@ For more information about this feature, click [here](https://opensource.hcltech
 
 From Volt MX Foundry V9 Service Pack 1, you can define upgrade policies for child apps published to the Enterprise App Store. 
 
-For more information about this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/%20AppVersionUpgradePolicyEAS.html).
+For more information about this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/AppVersionUpgradePolicyEAS.html).
 
 ## Timer Task in Foundry Workflow
 
