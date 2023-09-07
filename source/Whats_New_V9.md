@@ -454,7 +454,7 @@ Added the ability to access the Enterprise App Store from Desktop Web. For more 
   
 * Deprecating support to the older version of Volt MX Foundry Mobile App. 
   
-    For more information about this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_Foundry_analytics_mobile_app/Content/MobileFoundryMobileApp.html).
+    For more information about this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_Foundry_analytics_mobile_app/Content/FoundryMobileApp.html).
 
 
 ## Enhanced Email API
