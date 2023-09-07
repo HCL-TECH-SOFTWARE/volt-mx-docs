@@ -242,7 +242,7 @@ For more information on KSLint, click [here](https://opensource.hcltechsw.com/vo
 
 From Volt MX Iris V9, if there are any conflicts in the actions of a widget or form when a project is imported from Iris Classic, Volt MX Iris provides an option to resolve these conflicts in bulk at the time of import or by widget during later stages of the app's development. This feature has been introduced to support the porting of actions from Iris Classic into Volt MX Iris.
 
-For more information about this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/ImportVoltMXIrisClassicProject.html#Resolve).
+For more information about this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/ImportVoltMXIrisProject.html#Resolve).
 
 ## Responsive Support For Collections
 
@@ -307,7 +307,7 @@ For more information on PDF Viewer, click [here](https://opensource.hcltechsw.co
 
 **Zooming support for Map for Responsive Web** 
 
-  From Volt MX Iris V9, support for [zoomLevel](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_widget_prog_guide/content/Map_Properties.html#zoomLeve) and [showZoomControl](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_widget_prog_guide/content/Map_Properties.html#showZoom) properties of the Map widget has been added in the Responsive Web and SPA platforms. This feature helps users control the zoom feature of a map in Responsive Web and SPA platforms. 
+  From Volt MX Iris V9, support for [zoomLevel](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_widget_prog_guide/Content/Map_Properties.html#zoomLeve) and [showZoomControl](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_widget_prog_guide/Content/Map_Properties.html#showZoom) properties of the Map widget has been added in the Responsive Web and SPA platforms. This feature helps users control the zoom feature of a map in Responsive Web and SPA platforms. 
   
 **Microphone API for Responsive Web** 
 
@@ -319,7 +319,7 @@ For more information on PDF Viewer, click [here](https://opensource.hcltechsw.co
 
 ## Widget Enhancements For Android Q
 
-From Volt MX Iris V9, the [hyphenationFrequency](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_widget_prog_guide/content/Label_Properties.html#hyphenationFrequency) and [breakStrategy](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_widget_prog_guide/content/Label_Properties.html#breakStrategy) properties have been introduced for the Android platform. This is to improve the text layout in the Label and RichText widgets. The hyphenationFrequency property specifies the periodicity of the word breaks in a text, and the breakStrategy property specifies the method of line breaking in paragraphs of text.
+From Volt MX Iris V9, the [hyphenationFrequency](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_widget_prog_guide/Content/Label_Properties.html#hyphenationFrequency) and [breakStrategy](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_widget_prog_guide/Content/Label_Properties.html#breakStrategy) properties have been introduced for the Android platform. This is to improve the text layout in the Label and RichText widgets. The hyphenationFrequency property specifies the periodicity of the word breaks in a text, and the breakStrategy property specifies the method of line breaking in paragraphs of text.
 
 ## Support For CSS 3.0
 
@@ -394,7 +394,7 @@ For more information about S3 File Storage, click [here](https://opensource.hclt
 
 VoltMX Storage object service provides you the ability to create your own database schema on the relational database hosted on Volt MX Cloud. You can create a data model for objects in an Object Service by importing the column data in MS Excel.
 
-For more information about this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/ObjectsServices/Storage_ObjectServices.html).
+For more information about this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/ObjectsServices/Storage_ObjectServices.html).
 
 ## Server-side events
 
@@ -424,7 +424,7 @@ For more information about this feature, click [here](https://opensource.hcltech
 
 You can now have different App Key and App Secret for Native and Web apps for enhanced security of the apps. Added the ability to rotate the keys to improve security.
 
-For more information about this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/SeparateAppKey-Secret.html).
+For more information about this feature, click [here](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/SeparateAppKey-Secret.html).
 
 ## Enhanced Relational Database Adapter
 
