@@ -12,7 +12,7 @@ The behaviors that you can assign are as follows:
 | **If Condition** | Specifies an action to be executed when one or more conditions are satisfied. |
 | **Else If Condition** | Specifies an action to be executed when one or more conditions (in addition to the **If** condition) are satisfied. |
 | **Else Condition** | Specifies an action to be executed when an **If** or **Else If** condition is not satisfied. |
-| **Channel Condition** | Specifies for which channels an action is executed. |
+| **Channel Condition** | Specifies for which channels an action is executed. (Not supported for Apple Watch) |
 
 To add conditional behavior (if condition, or elseif condition, or else condition, or channel condition) to an action sequence, do the following:
 
@@ -26,4 +26,4 @@ To add conditional behavior (if condition, or elseif condition, or else conditio
 5.  Add the action or actions that you want to carry out when the condition is met by locating and clicking the action from the list of actions available along the left column of the Action Editor.  
     To subordinate the action under the conditional statement, right-click the action you just added, and then click **Indent In**.
 6.  Repeat steps 2 through 4 for any other general behavior that you want to associate with the action sequence.
-7.  Click **Save** to save the action sequence, and then close the Action Editor window.
+7.  Click **Save** to save the action sequence, and close the Action Editor window.
