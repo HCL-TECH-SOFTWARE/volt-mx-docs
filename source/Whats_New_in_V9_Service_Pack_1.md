@@ -128,20 +128,20 @@ For more information on this feature, click [here](https://opensource.hcltechsw.
 
 If the targetSDK version of an Android app is 29 or later, scoped storage is enabled for the app, by default. Therefore, support for the following APIs has been added in the voltmx.io.filesystem namespace for the Android platform:
 
-* [voltmx.io.FileSystem.getExternalCacheDir](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.io.filesystem_functions.html#getExternalCacheDir) 
-* [voltmx.io.FileSystem.getExternalCacheDirs](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.io.filesystem_functions.html#getExternalCacheDirs) 
-* [voltmx.io.FileSystem.getExternalFilesDir](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.io.filesystem_functions.html#getExternalFilesDir) 
+* [voltmx.io.FileSystem.getExternalCacheDir](Iris/iris_api_dev_guide/content/voltmx.io.filesystem_functions.md#voltmxiofilesystemgetexternalcachedir) 
+* [voltmx.io.FileSystem.getExternalCacheDirs](Iris/iris_api_dev_guide/content/voltmx.io.filesystem_functions.md#voltmxiofilesystemgetexternalcachedirs) 
+* [voltmx.io.FileSystem.getExternalFilesDir](Iris/iris_api_dev_guide/content/voltmx.io.filesystem_functions.md#voltmxiofilesystemgetexternalfilesdir) 
 
-* [voltmx.io.FileSystem.getExternalFilesDirs](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.io.filesystem_functions.html#voltmx.io.FileSystem.getExternalFilesDirs)  
+* [voltmx.io.FileSystem.getExternalFilesDirs](Iris/iris_api_dev_guide/content/voltmx.io.filesystem_functions.md#voltmxiofilesystemgetexternalfilesdirs)  
 
-* [voltmx.io.FileSystem.getNoBackupFilesDir](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.io.filesystem_functions.html#getNoBackupFilesDir)
-*  [voltmx.io.FileSystem.getExternalStorageState](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.io.filesystem_functions.html#getExternalStorageState) 
-* [voltmx.io.FileSystem.getFileSystemStats](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.io.filesystem_functions.html#voltmx.io.) 
+* [voltmx.io.FileSystem.getNoBackupFilesDir](Iris/iris_api_dev_guide/content/voltmx.io.filesystem_functions.md#voltmxiofilesystemgetnobackupfilesdir)
+*  [voltmx.io.FileSystem.getExternalStorageState](Iris/iris_api_dev_guide/content/voltmx.io.filesystem_functions.md#voltmxiofilesystemgetexternalstoragestate) 
+* [voltmx.io.FileSystem.getFileSystemStats](Iris/iris_api_dev_guide/content/voltmx.io.filesystem_functions.md#voltmxiofilesystemgetfilesystemstats) 
 
-* [voltmx.io.FileSystem.isExternalStorageEmulated](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.io.filesystem_functions.html#isExternalStorageEmulated) 
-*  [voltmx.io.FileSystem.isExternalStorageLegacy](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.io.filesystem_functions.html#isExternalStorageLegacy) 
+* [voltmx.io.FileSystem.isExternalStorageEmulated](Iris/iris_api_dev_guide/content/voltmx.io.filesystem_functions.md#voltmxiofilesystemisexternalstorageemulated) 
+*  [voltmx.io.FileSystem.isExternalStorageLegacy](Iris/iris_api_dev_guide/content/voltmx.io.filesystem_functions.md#voltmxiofilesystemisexternalstoragelegacy) 
 
-* [voltmx.io.FileSystem.isExternalStorageRemovable](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/voltmx.io.filesystem_functions.html#isExternalStorageRemovable)
+* [voltmx.io.FileSystem.isExternalStorageRemovable](Iris/iris_api_dev_guide/content/voltmx.io.filesystem_functions.md#voltmxiofilesystemisexternalstorageremovable)
 
 ## Embed Local HTML Content as a Direct DOM Element
 
