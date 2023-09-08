@@ -1713,7 +1713,7 @@ When you are defining the padding (for any platform) the _first_ time, the value
   
 The following image illustrates a widget with a defined padding:
 
-![](../../../8.4/WidgetsProgGuide/Content/Resources/Images/Padding.png)
+![](Resources/Images/Padding.png)
 
 ### Syntax
 
