@@ -1,9 +1,7 @@
 
-[](#)
-
-- [Prerequisites](Prerequisites.md#prerequisites)
-  - [System Requirements](Prerequisites.md#system-requirements)
-  - [Download Volt MX Iris](Prerequisites.md#download)
+- [Prerequisites](#pr)
+- [System Requirements](#sr)
+- [Download Volt MX Iris](#di) 
 - [Install Volt MX Iris](Installing VoltMX Iris.md#installing)
   - [Configuring Volt MX Iris to use a Proxy server](Installing VoltMX Iris.md#configuring-to-use-a-proxy-server)
     - [Basic Proxy](Installing VoltMX Iris.md#basic-proxy)
@@ -15,25 +13,20 @@
 - [Update Volt MX Iris](Upgrade.md)
 - [FAQs](StudioInstallation_FAQs.md#appendix-frequently-asked-questions-faqs)
 
-[](#)
-
-- All Files
-
-You are here: [Prerequisites](#prerequisites) > System Requirements
 
 # Volt MX Iris V9 Mac Install Guide
 
 This document explains how to install Volt MX Iris and the required software on your Macintosh computer, using an installer program.
 
-- [Prerequisites](#prerequisites)
+- [Prerequisites](#pr)
 - [Install Volt MX Iris](Installing VoltMX Iris.md#installing)
 - [Post Installation Tasks](Launching VoltMX Iris.md#post-installation-tasks)
 
-# Prerequisites
+## <a id="pr"></a> Prerequisites
 
 Following are the requirements needed to complete the installation process. They include the hardware and software prerequisites required to complete the process.
 
-## System Requirements
+## <a id="sr"></a> System Requirements
 
 This section helps you understand the system requirements and necessary software required to install Volt MX Iris.
 
@@ -50,7 +43,7 @@ Mac OS X 10.9 and above
 | Internal Storage | 24 GB                                                                                            |
 | Network          | Ethernet Port                                                                                    |
 
-## Download Volt MX Iris
+## <a id="di"></a> Download Volt MX Iris
 
 The following section explains the procedure to download Volt MX Iris:
 
@@ -93,9 +86,9 @@ To download Volt MX Iris on your Mac computer, follow these steps:
 
    [![](Resources/Images/download_site.png)](Resources/Images/download_site.png)
 
-- [Prerequisites](#prerequisites)
-  - [System Requirements](#system-requirements)
-  - [Download Volt MX Iris](#download)
+- [Prerequisites](#pr)
+  - [System Requirements](#sr)
+  - [Download Volt MX Iris](#di)
 - [Install Volt MX Iris](Installing VoltMX Iris.md#installing)
   - [Configuring Volt MX Iris to use a Proxy server](Installing VoltMX Iris.md#configuring-to-use-a-proxy-server)
     - [Basic Proxy](Installing VoltMX Iris.md#basic-proxy)
