@@ -12,8 +12,13 @@ To create a database for Reports, follow these steps:
     CREATE DATABASE reportsdb;
     
     The following is a sample query for creating a database in MySQL:
-    
-    CREATE DATABASE \`<DBNAME>\` DEFAULT CHARACTER SET utf8 COLLATE utf8\_unicode\_ci;
+
+    ### For Foundry version 9.5.15 or greater:
+
+    ```
+    CREATE DATABASE \`< DBNAME >\`DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+    ```
+    CREATE DATABASE \`< DBNAME >\` DEFAULT CHARACTER SET utf8 COLLATE utf8\_unicode\_ci;
     
     > **_Note:_**  For Oracle databases, a schema name should be in capital letters.  
       
@@ -32,7 +37,7 @@ To create a database for Reports, follow these steps:
         flyway.placeholders.VOLTMX_METRICS_LOG_OPTION=logfile
         flyway.placeholders.VOLTMX_METRICS_LOG_LOCATION=<log_location_for_metrics> 
 ```
-    *   Tablespace Placeholders for Oracle:
+*   Tablespace Placeholders for Oracle:
         
 | Product Name | Tablespace Placeholders for Oracle |
 | --- | --- |

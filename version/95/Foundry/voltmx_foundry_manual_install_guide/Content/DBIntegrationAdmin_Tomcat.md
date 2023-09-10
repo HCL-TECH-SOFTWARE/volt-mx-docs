@@ -195,7 +195,14 @@ To create a database for **Admin**, follow these steps:
 
     `CREATE DATABASE admindb;`
 
-    The following is a sample query for creating a database in MySQL:
+    ### For Foundry version 9.5.15 or greater:
+ 
+    The following is a sample query for creating a database in 
+    MySQL:
+
+  ```
+    CREATE DATABASE <DBNAME> DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+  ```
 
     <code>CREATE DATABASE &lt;DBNAME&gt; DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;</code>
 
