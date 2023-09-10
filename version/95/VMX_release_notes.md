@@ -105,7 +105,7 @@ Cordova 11 support has been introduced. It is mandatory for developer to migrate
 **Native Android Splash Screen support added for Android 12+**
 
    
-For Volt MX App (both mobile and tablets) updates will be made available in App Store and Google Play Store.
+**For Volt MX App (both mobile and tablets) updates will be made available in App Store and Google Play Store.**
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
