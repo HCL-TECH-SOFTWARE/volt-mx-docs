@@ -13,7 +13,7 @@ To create a database for Engagement Services, follow these steps:
 
     Create a database with a name `"vpnsdb"` with character set as `"utf8mb4"` and collate as `"utf8mb4_unicode_ci"` using the following command. The database name can contain a custom name along with prefix and suffix. Prefix and suffix are optional. 
 
-    <b>For example</b>: schema name is < prefix >vpnsdb< suffix >.
+    <b>For example</b>: schema name is `<prefix>vpnsdb<suffix>`.
 
     The following is a sample query for creating a database in MySQL
 

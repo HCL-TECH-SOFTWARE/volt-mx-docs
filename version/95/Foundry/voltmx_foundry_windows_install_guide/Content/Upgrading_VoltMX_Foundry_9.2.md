@@ -15,7 +15,7 @@ Upgrade Steps
 To upgrade Volt MX Foundry 9.2 or 9.5 with MySQL 5.7 to Volt MX Foundry 9.5.15 or greater, follow these steps:
  
 1. Stop Foundry 9.2 or 9.5 server.
-2. Backup Foundry data from MySQL 5.7 server. Below is list of Schema should be exported from MySQL 5.7 and imported to MySQL 8.0 server while upgrade. < prefix > admindb< suffix > < prefix > idconfigdb< suffix > < prefix > kpnsdb < suffix > < prefix > mfaccountsdb < suffix > < prefix >mfconsoledb< suffix > < prefix > mfreportsdb < suffix > and other schemas created during runtime
+2. Backup Foundry data from MySQL 5.7 server. Below is list of Schema should be exported from MySQL 5.7 and imported to MySQL 8.0 server while upgrade. `<prefix> admindb<suffix> <prefix> idconfigdb<suffix> <prefix> kpnsdb <suffix> <prefix> mfaccountsdb <suffix> <prefix>mfconsoledb<suffix> <prefix> mfreportsdb <suffix>` and other schemas created during runtime
 3. Stop MySQL 5.7 server.
 4. Install MySQL 8.0.
 5. Update the my.cnf or my.ini file of MySQL 8.0 by adding following changes under [client], [mysql] and [mysqld] section and restart the MySQL server.
@@ -59,7 +59,7 @@ To upgrade Volt MX Foundry 9.2 or 9.5 with MySQL 5.7 to Volt MX Foundry 9.5.15 o
 ```
 6. Import Foundry data exported in step 2 to MySQL 8.0.
 
-7. Alter the character set and collation of foundry schemas(< prefix > admindb < suffix > < prefix > idconfigdb < suffix > < prefix > kpnsdb < suffix > < prefix > mfaccountsdb < suffix > < prefix > mfconsoledb < suffix > < prefix > mfreportsdb < suffix >) with following command:
+7. Alter the character set and collation of foundry schemas`(<prefix> admindb <suffix> <prefix> idconfigdb <suffix> <prefix>kpnsdb <suffix> <prefix> mfaccountsdb <suffix> <prefix> mfconsoledb <suffix> <prefix> mfreportsdb <suffix>)` with following command:
  
 ALTER DATABASE < DATABASE_NAME > CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
  
@@ -121,7 +121,7 @@ To upgrade Volt MX Foundry 9.5.x with MySQL 8.0 to  Volt MX Foundry 9.5.15 or gr
 
 ```
 
-3. Alter the character set and collation of foundry schemas(< prefix >admindb< suffix >, < prefix >idconfigdb< suffix >, < prefix >kpnsdb< suffix >, < prefix >mfaccountsdb< suffix >, < prefix >mfconsoledb< suffix >, < prefix >mfreportsdb< suffix >) with following command:
+3. Alter the character set and collation of foundry schemas`(<prefix>admindb<suffix>, <prefix>idconfigdb<suffix>, <prefix>kpnsdb<suffix>, <prefix>mfaccountsdb<suffix>, <prefix>mfconsoledb<suffix>, <prefix>mfreportsdb<suffix>)` with following command:
  
 ALTER DATABASE < DATABASE_NAME > CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
  
@@ -140,7 +140,7 @@ To upgrade Kony Fabric with MySQL 5.7 to Volt MX Foundry 9.5.15 or greater, foll
 
 1. Stop Kony Fabric 8.4 server.
 
-2. Backup Foundry data from MySQL 5.7 server. Below is list of Schema should be exported from MySQL 5.7 and imported to MySQL 8.0 server while upgrade. < prefix> admindb < suffix > < prefix > idconfigdb < suffix > < prefix > kpnsdb < suffix > < prefix > mfaccountsdb < suffix > < prefix > mfconsoledb < suffix > < prefix > mfreportsdb < suffix > and other schemas created during runtime
+2. Backup Foundry data from MySQL 5.7 server. Below is list of Schema should be exported from MySQL 5.7 and imported to MySQL 8.0 server while upgrade. `<prefix> admindb <suffix> <prefix> idconfigdb <suffix> <prefix> kpnsdb <suffix> <prefix> mfaccountsdb <suffix> <prefix> mfconsoledb <suffix> <prefix> mfreportsdb <suffix>` and other schemas created during runtime
 3. Stop MySQL 5.7 server.  
 4. Install MySQL 8.0. 
 5.  Update the my.cnf or my.ini file of MySQL 8.0 by adding following changes under [client], [mysql] and [mysqld] section and restart the MySQL server. 
@@ -184,7 +184,7 @@ To upgrade Kony Fabric with MySQL 5.7 to Volt MX Foundry 9.5.15 or greater, foll
 
 ```
 5. Import Foundry data exported in step 2 to MySQL 8.0. 
-6. Alter the character set and collation of foundry schemas(< prefix > admindb < suffix > < prefix > idconfigdb < suffix > < prefix > kpnsdb < suffix > < prefix > mfaccountsdb < suffix > < prefix > mfconsoledb < suffix > < prefix > mfreportsdb < suffix > ) with following command: 
+6. Alter the character set and collation of foundry schemas`(<prefix> admindb <suffix> <prefix> idconfigdb <suffix> <prefix> kpnsdb <suffix> <prefix> mfaccountsdb <suffix> <prefix> mfconsoledb <suffix> <prefix> mfreportsdb <suffix> )` with following command: 
 
     ALTER DATABASE < DATABASE_NAME > CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; 
 
