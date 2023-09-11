@@ -744,7 +744,7 @@ September 12, 2023
 
 * Text Data Adapter has been made available Refer [here](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Text_Adapter.html) for more information on text data adapter.
 
-* utf8mb4 support has been introduced for MySQL database. Refer <here> for upgrade steps from MySQL 5.7 to MySQL 8.0.x with utf8mb4 support for Volt Foundry
+* utf8mb4 support has been introduced for MySQL database.
 
 * Support for Jasper 7.9.2. Refer [here](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_analytics_reporting/Content/How_to_Upgrade_JasperServer.html) for Jasper 7.9.2 steps to integrate with Foundry.
 
