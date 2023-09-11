@@ -80,6 +80,8 @@ Volt IQ is an AI Assistant designed to help Volt Iris users through their journe
 *  Automated localisation of Application 
 *  Maintaining and Providing responses from an up-to-date FAQ
 
+> **_Note:_** This feature is not supported for on-premise installations
+
 **Support added for Native Desktop applications**
 
 Iris now supports building applications targeted to Windows (desktop) and macOS devices. Applications can interact with local desktop resources while supporting client-server application model. Developers can also extend the access to additional desktop resources using Native Function Interfaces (NFIs).
