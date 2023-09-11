@@ -754,7 +754,7 @@ September 12, 2023
      * If SAP Gateway adapter is not visible, user can turn it on
      by Importing an App which contains SAP Gateway Services OR Importing SAP Gateway Services.
      
-     > **_Note:_** : After importing app/service user need to refresh the page. Re-login is not required
+     > **_Note:_** After importing app/service user need to refresh the page. Re-login is not required
 
 *  JavaScript data-processor enhancement
 
