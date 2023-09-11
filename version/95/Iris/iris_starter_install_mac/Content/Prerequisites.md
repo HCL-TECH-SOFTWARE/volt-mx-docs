@@ -1,5 +1,29 @@
 
-- [Prerequisites](#pr)
+<ul>
+  <li><a href="#pr">Prerequisites</a></li>
+  <li><a href="#sr">System Requirements</a></li>  
+  <li><a href="#di">Download Volt MX Iris</a></li>  
+  <li><a href="Installing VoltMX Iris.html#installing">Install Volt MX Iris</a></li>  
+  <li><a href="Installing VoltMX Iris.html#configuring-volt-mx-iris-to-use-a-proxy-server">Configuring Volt MX Iris to use a Proxy server</a></li>
+  <ul>
+    <li><a href="Installing VoltMX Iris.html#basic-proxy">Basic Proxy</a></li>    
+    <li><a href="Installing VoltMX Iris.html#ntlm-proxy">NTLM Proxy</a></li>    
+    <li><a href="Installing VoltMX Iris.html#custom-ntlm-proxy">Custom NTLM Proxy</a></li>    
+    <li><a href="Installing VoltMX Iris.html#white-list-essential-domains">White-list Essential Domains</a></li>
+  </ul>  
+  <li><a href="Launching VoltMX Iris.html#post-installation-tasks">Post Installation Tasks</a></li>  
+  <li><a href="Launching VoltMX Iris.html#launching">Launching Volt MX Iris</a></li>  
+  <li><a href="Upgrade.html">Update Volt MX Iris</a></li>  
+  <li><a href="StudioInstallation_FAQs.html#appendix-frequently-asked-questions-faqs">FAQs</a></li>
+</ul>
+
+
+
+
+
+<!-- <a href=#pr>Prerequisites</a>
+
+
 - [System Requirements](#sr)
 - [Download Volt MX Iris](#di) 
 - [Install Volt MX Iris](Installing VoltMX Iris.md#installing)
@@ -11,22 +35,24 @@
 - [Post Installation Tasks](Launching VoltMX Iris.md#post-installation-tasks)
   - [Launching Volt MX Iris](Launching VoltMX Iris.md#launching)
 - [Update Volt MX Iris](Upgrade.md)
-- [FAQs](StudioInstallation_FAQs.md#appendix-frequently-asked-questions-faqs)
+- [FAQs](StudioInstallation_FAQs.md#appendix-frequently-asked-questions-faqs) -->
 
 
 # Volt MX Iris V9 Mac Install Guide
 
 This document explains how to install Volt MX Iris and the required software on your Macintosh computer, using an installer program.
 
-- [Prerequisites](#pr)
-- [Install Volt MX Iris](Installing VoltMX Iris.md#installing)
-- [Post Installation Tasks](Launching VoltMX Iris.md#post-installation-tasks)
-
-## <a id="pr"></a> Prerequisites
+<ul>
+  <li><a href="#pr">Prerequisites</a></li>
+  <li><a href="Installing VoltMX Iris.html#installing">Install Volt MX Iris</a></li>  
+  <li><a href="Launching VoltMX Iris.html#post-installation-tasks">Post Installation Tasks</a></li>
+</ul>
+  
+<h2 id="pr">Prerequisites</h2>
 
 Following are the requirements needed to complete the installation process. They include the hardware and software prerequisites required to complete the process.
 
-## <a id="sr"></a> System Requirements
+<h2 id="sr">System Requirements</h2>
 
 This section helps you understand the system requirements and necessary software required to install Volt MX Iris.
 
@@ -43,7 +69,7 @@ Mac OS X 10.9 and above
 | Internal Storage | 24 GB                                                                                            |
 | Network          | Ethernet Port                                                                                    |
 
-## <a id="di"></a> Download Volt MX Iris
+<h2 id="di">Download Volt MX Iris</h2>
 
 The following section explains the procedure to download Volt MX Iris:
 
@@ -86,7 +112,7 @@ To download Volt MX Iris on your Mac computer, follow these steps:
 
    [![](Resources/Images/download_site.png)](Resources/Images/download_site.png)
 
-- [Prerequisites](#pr)
+<!-- - [Prerequisites](#pr)
   - [System Requirements](#sr)
   - [Download Volt MX Iris](#di)
 - [Install Volt MX Iris](Installing VoltMX Iris.md#installing)
@@ -98,4 +124,25 @@ To download Volt MX Iris on your Mac computer, follow these steps:
 - [Post Installation Tasks](Launching VoltMX Iris.md#post-installation-tasks)
   - [Launching Volt MX Iris](Launching VoltMX Iris.md#launching)
 - [Update Volt MX Iris](Upgrade.md)
-- [FAQs](StudioInstallation_FAQs.md#appendix-frequently-asked-questions-faqs)
+- [FAQs](StudioInstallation_FAQs.md#appendix-frequently-asked-questions-faqs) -->
+
+
+
+
+<ul>
+  <li><a href="#pr">Prerequisites</a></li>
+  <li><a href="#sr">System Requirements</a></li>  
+  <li><a href="#di">Download Volt MX Iris</a></li>  
+  <li><a href="Installing VoltMX Iris.html#installing">Install Volt MX Iris</a></li>  
+  <li><a href="Installing VoltMX Iris.html#configuring-volt-mx-iris-to-use-a-proxy-server">Configuring Volt MX Iris to use a Proxy server</a></li>
+  <ul>
+    <li><a href="Installing VoltMX Iris.html#basic-proxy">Basic Proxy</a></li>    
+    <li><a href="Installing VoltMX Iris.html#ntlm-proxy">NTLM Proxy</a></li>    
+    <li><a href="Installing VoltMX Iris.html#custom-ntlm-proxy">Custom NTLM Proxy</a></li>    
+    <li><a href="Installing VoltMX Iris.html#white-list-essential-domains">White-list Essential Domains</a></li>
+  </ul>  
+  <li><a href="Launching VoltMX Iris.html#post-installation-tasks">Post Installation Tasks</a></li>  
+  <li><a href="Launching VoltMX Iris.html#launching">Launching Volt MX Iris</a></li>  
+  <li><a href="Upgrade.html">Update Volt MX Iris</a></li>  
+  <li><a href="StudioInstallation_FAQs.html#appendix-frequently-asked-questions-faqs">FAQs</a></li>
+</ul>
