@@ -24,17 +24,17 @@ To upgrade Volt MX Foundry 9.2 or 9.5 with MySQL 5.7 to Volt MX Foundry 9.5.15 o
 3. Install MySQL 8.0.
 4. Update the my.cnf or my.ini file of MySQL 8.0 by adding following changes under [client], [mysql] and [mysqld] section and restart the MySQL server.
 
-   1. Ensure that you modify the my.cnf or my.ini with the following parameters: <br>
-   [client]<br>
-   default-character-set = utf8mb4<br>
-   [mysql]<br>
-   default-character-set = utf8mb4<br>
-   [mysqld]<br>
-   character-set-client-handshake = FALSE<br>
-   character-set-server=utf8mb4<br>
-   collation-server="utf8mb4_unicode_ci"<br>
+     1  Ensure that you modify the my.cnf or my.ini with the following parameters: <br>
+     [client]<br>
+     default-character-set = utf8mb4<br>
+     [mysql]<br>
+     default-character-set = utf8mb4<br>
+     [mysqld]<br>
+     character-set-client-handshake = FALSE<br>
+     character-set-server=utf8mb4<br>
+     collation-server="utf8mb4_unicode_ci"<br>
  
-   2. Next, restart the MySQL service and run the following query to verify the details:
+     2  Next, restart the MySQL service and run the following query to verify the details:
 
 ```
     +----------------------+--------------------+
@@ -62,13 +62,11 @@ To upgrade Volt MX Foundry 9.2 or 9.5 with MySQL 5.7 to Volt MX Foundry 9.5.15 o
 
 ```
 
-   
-   4.  Import Foundry data exported in step 2 to MySQL 8.0.
-   5.  Alter the character set and collation of foundry schemas(<prefix>admindb<suffix> <prefix>idconfigdb<suffix> <prefix>kpnsdb<suffix> <prefix>mfaccountsdb<suffix> <prefix>mfconsoledb<suffix> <prefix>mfreportsdb<suffix>) with following command:
+  4  Alter the character set and collation of foundry schemas(<prefix>admindb<suffix> <prefix>idconfigdb<suffix> <prefix>kpnsdb<suffix> <prefix>mfaccountsdb<suffix> <prefix>mfconsoledb<suffix> <prefix>mfreportsdb<suffix>) with following command:
  
    ALTER DATABASE <DATABASE_NAME> CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
  
-   6.  Upgrade Foundry to 9.5.15 or greater. Refer to Upgrading Volt MX Foundry to V9 for upgrade instructions.
+  5 Upgrade Foundry to 9.5.15 or greater. Refer to Upgrading Volt MX Foundry to V9 for upgrade instructions.
 
 Prerequisites
 ---------------
