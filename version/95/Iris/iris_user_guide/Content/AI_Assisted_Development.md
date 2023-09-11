@@ -40,7 +40,9 @@ To start scanning your project, follow these steps:
     These are the different categories of rules that can be used to analyze your project.  
       
     
-    ![](Resources/Images/AAD/Help_212x218.png)
+    ![](Resources/Images/AAD/Help_212x218.png)  
+    
+
 3.  Select one of the options.  
     The **AI Assisted Development** window appears with a table of the rules.  
     ![](Resources/Images/AAD/AAD1_492x375.png)  

@@ -1,9 +1,9 @@
 
-# <a name="top"></a>Volt IQ
+# <a name="top"></a>Volt IQ 
 
 Volt IQ is a chatbot designed to help <span class="mc-variable MyVariables.MADP variable">Volt Iris</span> users through their journey to create applications for various channels on Volt MX AppPlatform. The chatbot can assist users in various ways: building a binary, importing projects, searching for help materials on <span class="mc-variable MyVariables.Product variable">Volt MX</span> Community in a single query, and more.
 
-Volt IQ interacts with users and provides answers for some FAQs. This chatbot can answer casual queries such as "how to upgrade Iris?" and "what is my Iris version?". Using Volt IQ, users can also get information such as the version of Iris and Fabric that is installed on their system.
+Volt IQ interacts with users and provides answers for some FAQs. This chatbot can answer casual queries such as "how to upgrade Iris?" and "what is my Iris version?". Using Volt IQ, users can also get information such as the version of Iris and Foundry that is installed on their system.
 
 The chatbot also helps users in optimization, translation, and in helping them complete many more time-consuming tasks with ease. It uses advanced AI algorithms to provide the best-suited recommendations that enhance users’ app-building experience.
 
@@ -53,7 +53,7 @@ Volt IQ responds in different ways based on the type of query entered in the cha
 *   Prompts for more information. In this case, Volt IQ requires more information to provide the appropriate response for your query. If you do not want to continue the conversation, you can enter **cancel** in the chat box.
 
 > **_Note_**: In <span class="mc-variable MyVariables.MADP variable">Volt Iris</span>, you can move or resize the Volt IQ chat window. Drag the lower-right part of the chat window to resize it.  
-You can also move the Volt IQ chat window out of <span class="mc-variable MyVariables.MADP variable">Volt Iris</span>. Click the pop-out icon at the upper-right corner of the chat window to move it out of <span class="mc-variable MyVariables.MADP variable">Volt Iris</span>. In the popped-out window, you can click the pop-in icon at the upper-right corner of the chat window to move it inside the <span class="mc-variable MyVariables.MADP variable">Volt Iris</span>.
+You can also move the Volt IQ chat window out of <span class="mc-variable MyVariables.MADP variable">Volt Iris</span>. Click the pop-out icon at the upper-right corner of the chat window to move it out of <span class="mc-variable MyVariables.MADP variable">Volt Iris</span>. In the popped-out window, you can click the undock icon at the upper-right corner of the chat window to move it inside the <span class="mc-variable MyVariables.MADP variable">Volt Iris</span>.
 
 ## Capabilities of Volt IQ
 
@@ -81,23 +81,32 @@ The Volt IQ Design Suggestions feature assists you to develop applications faste
 
 For instance, if you design a form with two TextBox widgets, and one Button widget, Volt IQ predicts that you could be creating a Login form and recommends designs such as the [Login](https://marketplace.hclvoltmx.com/items/login-advanced?search=login) component from [HCL Marketplace](https://marketplace.hclvoltmx.com/).
 
-<a name="IdentifyDuplicates"></a>Furthermore, Volt IQ can detect duplicate designs in your project. To fetch the duplicates of a design, type a command, such as “identify duplicates”, in the Volt IQ chat window and press Enter. A list of duplicate design groups is displayed in the Volt IQ Design Suggestions window. You can then view each duplicate design and copy it to a form.
+<a name="IdentifyDuplicates"></a>Furthermore, Volt IQ can detect duplicate designs in your project. To fetch the duplicates of a design, type a command, such as “identify duplicates”, in the Volt IQ chat window and press Enter. A list of duplicate design groups is displayed in the Volt IQ Design Suggestions window. You can then view each duplicate design and copy it to a form.  
+
+![](Resources/Images/image3.3.png)   
 
 #### Interact with Volt IQ Design Suggestions
 
-While you are designing a form, Volt IQ compares the UI of the form with the existing designs from the current project and <span class="mc-variable MyVariables.Marketplace variable">HCL Marketplace</span> . Volt IQ then generates a list of recommended designs based on the visual, textual, and widget hierarchical similarities of the designs.
+While you are designing a form, Volt IQ compares the UI of the form with the existing designs from the current project, HCL Marketplace and default library. Volt IQ then generates a list of recommended designs based on the visual, textual, and widget hierarchical similarities of the designs.  
 
-> **_Note_**: For Volt IQ to show design suggestions for a form, you must add at least three widgets to the form.    
+
+<blockquote><em><b>Note:</b></em>
+<ul>
+<li>For Volt IQ to show design suggestions for a form, you must add at least three widgets to the form.</li>
+<li>Before executing a command, users must refresh the project/projects</li>
+</ul>
+</blockquote>
+
+
+
+![](Resources/Images/image3.2.png)   
 
 ![](Resources/Images/imag3.1.png)            
-
-![](Resources/Images/image3.3.png)    
+ 
 
 <!-- ![](Resources/Images/PRShowPattern.gif) -->
 
-When similar designs are detected in the current project or in <span class="mc-variable MyVariables.Marketplace variable">HCL Marketplace</span> , a Volt IQ bubble appears on the lower-left corner of the screen.  
-
-![](Resources/Images/image3.2.png)   
+When similar designs are detected in the current project or in HCL Marketplace or in default library, a Volt IQ bubble appears on the lower-left corner of the screen.  
 
 
 The bubble provides the following options:
@@ -134,7 +143,7 @@ You can perform the following actions on a design suggestion from <span class="m
 
     <!-- ![](Resources/Images/PRView.gif) -->
 
-*   **Download:** Downloads the component into your local system.
+*   **Download:** Downloads the component into **My Library of Volt Iris**.
 
     > **_Note_**: Volt IQ Design Suggestions is an offline feature. However, you must have an active Internet connection to download a recommended <span class="mc-variable MyVariables.Marketplace variable">HCL Marketplace</span> component.
 
@@ -153,7 +162,7 @@ In Iris, you can enable or disable the design suggestions from the main menu dir
 
     If the design suggestions is already enabled, you will see **Disable Design Suggestions**. Click **Disable Design Suggestions** to stop the design suggestions from being displayed.
 
-You can also enable or disable the design suggestions by using a command in the Volt IQ chat window. For example, you can enter commands such as **turn on suggestions** or **turn off design suggestions**. 
+You can also enable or disable the design suggestions by using a command in the Volt IQ chat window. For example, you can enter commands such as **turn on design suggestions** or **turn off design suggestions**. 
 
 <!-- ![](Resources/Images/GIFS/DS_enableDisable.gif) -->
 
@@ -182,7 +191,7 @@ Here are a few <span class="mc-variable MyVariables.Marketplace variable">HCL Ma
 
 #### <a id="VoltMXBase"></a><span class="mc-variable MyVariables.Product variable">Volt MX</span> Community Search
 
-The <span class="mc-variable MyVariables.Product variable">Volt MX</span> Community search functionality is integrated with Volt IQ. Using the bot, you can search for articles and documents in Community. The bot shows a list of articles that are related to your query.
+The Volt MX Community search functionality is integrated with Volt IQ. Using the bot, you can search for articles from support portal and the product documents in Community.
 
 To fetch results exclusively from <span class="mc-variable MyVariables.Product variable">Volt MX</span> Community, enter @community <Text query to search in Community>
 
@@ -194,7 +203,7 @@ Some Community search queries are as follows:
 
 #### <a id="YouTube"></a>YouTube Search
 
-The search in the <span class="mc-variable MyVariables.Product variable">Volt MX</span> YouTube channel is integrated with Volt IQ. Using the bot, you can search for any videos on the <span class="mc-variable MyVariables.Product variable">Volt MX</span> YouTube channel.
+The YouTube search is integrated with Volt IQ and using the bot, you can search for any videos on the HCL Digital Solutions channel.
 
 To fetch results exclusively from YouTube, enter @youtube <Text query to search in YouTube>
 
@@ -223,7 +232,7 @@ Volt IQ helps you translate an application into different languages by using the
 
 Default locale is the language that is displayed in an app when the app is launched during run time. You can configure or modify the default locale of an app from the Project Settings of Iris. If the default locale is not set already, Volt IQ updates the default locale to the language that you want to translate your app into.
 
-<a name="Locales_Google_Translate"></a>From V9 SP1 GA, Volt IQ supports all locales supported by Google Translate. For the locales that are not directly supported by Iris, Google Translate is used for the translation internally, and the locale is added as a custom locale. Iris supports all the locales that are supported by Google Translate except Hebrew and Serbo-Croatian.
+<a name="Locales_Google_Translate"></a>Volt IQ supports all locales supported by Google Translate. For the locales that are not directly supported by Iris, Google Translate is used for the translation internally, and the locale is added as a custom locale.
 
 Translation can be done in two ways:
 
@@ -317,7 +326,7 @@ Here are the commands related to Test Cases that you can provide the bot.
 *   open test-case /< name of the test case.js file >
 *   open test-case for mobile /< name of the test case.js file >
 *   open test-case for tablet /< name of the test case.js file >
-*   open test-case for desktopweb /< name of the test case.js file >
+*   open test-case for desktop /< name of the test case.js file >
 
 Here are the commands related to Test Suites that you can provide the bot. You must provide the channel for which you are testing while running these commands.
 
@@ -325,12 +334,12 @@ Here are the commands related to Test Suites that you can provide the bot. You m
 *   open test-suite for mobile /< name of the test suite.js file >
 
 *   open test-suite for tablet /< name of the test suite.js file >
-*   open test-suite for desktopweb /< name of the test suite.js file >
+*   open test-suite for desktop /< name of the test suite.js file >
 
 *   run test-suite for mobile /< name of the test suite.js file >
 
 *   run test-suite for tablet /< name of the test suite.js file >
-*   run test-suite for desktopweb /< name of the test suite.js file >
+*   run test-suite for desktop /< name of the test suite.js file >
 
 Here are the commands related to Test Plans that you can provide the bot. You must provide the channel for which you are testing while running these commands.
 
@@ -338,7 +347,7 @@ Here are the commands related to Test Plans that you can provide the bot. You mu
 *   open test-plan for mobile /< name of the test plan.js file >
 
 *   open test-plan for tablet /< name of the test plan.js file >
-*   open test-plan for desktopweb /< name of the test plan.js file >
+*   open test-plan for desktop /< name of the test plan.js file >
 
 #### <a id="Analyse"></a>Analyse Project
 
