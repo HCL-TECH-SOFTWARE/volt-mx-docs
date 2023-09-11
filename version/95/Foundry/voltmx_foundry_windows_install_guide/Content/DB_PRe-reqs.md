@@ -95,9 +95,9 @@ Database collation needs to be set for a database. This is possible while creati
 
 ### Prerequisites for Volt MX Foundry with MySQL
 
-#### Applicable for Engagement Services
+#### MySQL 8.0 is mandatory for Foundry V9.5.15 or above
 
-MySQL configuration mandated for Foundry 9.5.15 or greater :
+#### MySQL configuration mandated for Foundry 9.5.15 or greater :
 
 To support MySQL utf8mb4 charsets and collation, update the MySQL configuration file of MySQL 8.0 by adding following changes under [client], [mysql] and [mysqld] section and restart the MySQL server.
 
@@ -142,18 +142,9 @@ To support MySQL utf8mb4 charsets and collation, update the MySQL configuration 
     +--------------------------+---------------------------------------------------------+
     8 rows in set (0.00 sec)
 ```
-<br>
-1  Update applicable for KMS section:
-<br>
-    `Change heading to "Applicable for Engagement Services for
-       Foundry version earlier than 9.5.15"`
-
-2  Directly under MySQL section add:
-<br>
-    `MySQL 8.0 is mandatory for Foundry V9.5.15 or above.`
 
  
-#### Applicable for Engagement Services
+#### Applicable for Engagement Services for Foundry version earlier than 9.5.15
 
 1.  Create the database needed for Engagement Services with unicode character set as UTF8. Also ensure that you modify the `my.cnf` or `my.ini` with the following parameters:
  ```
