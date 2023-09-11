@@ -44,8 +44,8 @@ This document explains how to install Volt MX Iris and the required software on 
 
 <ul>
   <li><a href="#pr">Prerequisites</a></li>
-  <li><a href="#Installing VoltMX Iris.html#installing">Install Volt MX Iris</a></li>  
-  <li><a href="#Launching VoltMX Iris.html#post-installation-tasks">Post Installation Tasks</a></li>
+  <li><a href="Installing VoltMX Iris.html#installing">Install Volt MX Iris</a></li>  
+  <li><a href="Launching VoltMX Iris.html#post-installation-tasks">Post Installation Tasks</a></li>
 </ul>
   
 <h2 id="pr">Prerequisites</h2>
