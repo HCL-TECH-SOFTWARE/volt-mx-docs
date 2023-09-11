@@ -14,7 +14,7 @@ This section of the document provides you with the instructions for installing a
 
 The **<Install Location>** directory contains the log files logging each invocation of the installer. To make problem identification easier, provide these log files to Volt MX when reporting an issue.
 
-You can install Volt MX Foundry on Tomcat and JBoss servers.
+You can install Volt MX Foundry on Tomcat, JBoss and Websphere liberty servers.
 
 *   [Installing Volt MX Foundry on Tomcat](Installing_VoltMX_Foundry_Tomcat.md)
 *   [Installing Volt MX Foundry on JBoss](Installing_Foundry_on_JBoss.md)
