@@ -57,10 +57,9 @@ Using Volt IQ JS lint, users can also write custom rules. Users can create custo
 To add custom rules to lint configurations in your project, follow these steps:
 
 1.  Navigate to the project folder in your Iris workspace.  
-    For example, C:\\Users\\User1\\Volt Iris\\voltmxworkspace\\EmployeeDirectory  
     
     > **_Note:_** If you want to apply custom rules to all the projects in your Iris workspace, navigate to the Workspace folder.  
-    for example, C:\\Users\\User1\\Volt Iris\\voltmxworkspace
+    
     
 2.  Create a new folder with the name **.kslint**.
 3.  In the folder, create a new file **lintrules.js**.
