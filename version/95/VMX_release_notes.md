@@ -759,7 +759,7 @@ September 12, 2023
 *  JavaScript data-processor enhancement
 
      * Editing pre and post processor can now be done via an
-     integrated Monaco editor with features to insert sample/framework code, IntelliSense support etc. Refer here for more info
+     integrated Monaco editor with features to insert sample/framework code, IntelliSense support etc. Refer [here](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Java_Preprocessor_Postprocessor_.html) for more information.
    
 *  Security fixes
 
