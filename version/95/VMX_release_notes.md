@@ -773,9 +773,9 @@ September 12, 2023
 
    
      * AppFactory executes iOS builds on Xcode 14.3 to enable app
-     submission to the Apple App Store as mandated by Apple guidelines in effect since April 25 2023. Refer [here](https://developer.apple.com/news/?id=jd9wcyov)  for more information.
+     submission to the Apple App Store as mandated by Apple guidelines in effect since April 25 2023. Refer < here > for more information.
      
-       > **_Note_**: Xcode 14 is not supported in AppFactory versions lower than 9.5.15.0
+     > **_Note:_** : Xcode 14 is not supported in AppFactory versions lower than 9.5.15.0
 
 * AppFactory has been upgraded with new Jenkins plugins and Java
   version to enhance security, user experience, and performance of the platform.
