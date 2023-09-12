@@ -35,7 +35,7 @@ Volt MX Foundry Identity Services support connectivity to the following differen
         <li><a href="Identity4_LDAP.html#open-ldap-identity-service">Open LDAP</a></li>        
         <li><a href="Identity5_SAML.html#saml-2-0-identity-service">SAML 2.0</a></li>        
         <li><a href="Identity6_SiteMinder.html#siteminder-identity-service">Siteminder</a></li>        
-        <li><a href="Identity7_VoltMX_SAP.html#sap-gateway-identity-service">VoltMX SAP Gateway</a></li>        
+        <li><a href="Identity7_VoltMX_SAP.html#sap-gateway-identity-service">VoltMX SAP Gateway</a><br>Only available if you have SAP Gateway services in your account</li>        
         <li><a href="Identity12_VoltMXUR.html#user-repository-identity-service">VoltMX User Repository (User Store)</a>
           <br/>(Support is deprecated from V8 SP4 AprilFP onwards)
           <br/>(The Volt MX User Repository identity service is available in every Volt MX Foundry account by default. You are allocated only a single instance of the Volt MX User Repository for a single Volt MX Foundry account. Volt MX User Repository stores meta-data of all users in the account, such as Email, First Name, Last Name, and Password, and Groups.)
@@ -43,9 +43,9 @@ Volt MX Foundry Identity Services support connectivity to the following differen
         <li><a href="UserRepositoryIdentityService.html">User Repository Identity Service</a>
           <br/>(You are allocated to create multiple instances in a one Volt MX Foundry Account. User Repository stores meta-data of users in the account, such as Email, First Name, Last Name, and Password, and Groups.)
         </li>        
-        <li><a href="Identity8_VoltMX_Custom.html#custom-identity-service">VoltMX Custom Identity Service</a></li>        
+        <li><a href="Identity8_VoltMX_Custom.html#custom-identity-service">Volt MX Custom Identity Service</a></li>        
         <li><a href="Identity9_Facebook.html#facebook-identity-service">Facebook</a></li>        
-        <li><a href="Identity10_VoltMX_OAuth2.html#foundry-oauth-2-0-identity-service">VoltMX Foundry OAuth 2.0</a></li>        
+        <li><a href="Identity10_VoltMX_OAuth2.html#foundry-oauth-2-0-identity-service">Volt MX Foundry OAuth 2.0</a></li>        
         <li><a href="Identity11_OAuth.html#oauth-provider-identity-service">OAuth Provider</a></li>        
         <li><a href="Overview_AppSSO.html#AppSSOoverview">Application SSO</a></li>
       </ul>
