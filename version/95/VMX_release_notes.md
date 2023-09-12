@@ -765,11 +765,7 @@ September 12, 2023
 
 ### AppFactory Enhancements
 
-* **Xcode – 14 support**:  App Factory executes iOS builds on XCode 14.3 to leverage app submission to the App Store which is mandated by Apple guidelines since April 25th 2023. Refer here for more information.
-
-   >  **_Note_** :- Xcode 14 is not supported in App Factory versions lower than 9.5.15.0.  
-   
-
+* Xcode 14 is now supported: 
 
    
      * AppFactory executes iOS builds on Xcode 14.3 to enable app
