@@ -1,4 +1,4 @@
-                              
+Only available if you have SAP Gateway services in your account.                              
 
 User Guide: [Identity](Identity.md) > [Configure the Identity Service](ConfigureIdentiryService.md) > Volt MX SAP Gateway
 

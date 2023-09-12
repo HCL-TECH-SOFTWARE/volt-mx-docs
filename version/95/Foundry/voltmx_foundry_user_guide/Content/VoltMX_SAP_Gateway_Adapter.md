@@ -1,4 +1,4 @@
-                                
+Only available if you have SAP Gateway services in your account.                               
 
 User Guide: [Integration](Services.md#integration) \> [Configure the Integration Service](ConfigureIntegrationService.md) > Volt MX SAP Gateway Adapter
 
