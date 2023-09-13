@@ -158,7 +158,7 @@ To support MySQL utf8mb4 charsets and collation, update the MySQL configuration 
     collation_server='utf8_unicode_ci'  
     character_set_server='utf8'  
 ```
-2.  Next, restart the MySQL service and run the following query to verify the details:
+   Next, restart the MySQL service and run the following query to verify the details:
  ```
 
     mysql> show variables like '%coll%';  

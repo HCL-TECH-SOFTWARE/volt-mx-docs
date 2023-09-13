@@ -20,17 +20,17 @@ To upgrade Volt MX Foundry 9.2 or 9.5 with MySQL 5.7 to Volt MX Foundry 9.5.15 o
 4. Install MySQL 8.0.
 5. Update the my.cnf or my.ini file of MySQL 8.0 by adding following changes under [client], [mysql] and [mysqld] section and restart the MySQL server.
 
-        1  Ensure that you modify the my.cnf or my.ini with the following parameters: <br>
-        [client]<br>
-        default-character-set = utf8mb4<br>
-        [mysql]<br>
-        default-character-set = utf8mb4<br>
-        [mysqld]<br>
-        character-set-client-handshake = FALSE<br>
-        character-set-server=utf8mb4<br>
-        collation-server="utf8mb4_unicode_ci"<br>
+    1  Ensure that you modify the my.cnf or my.ini with the following parameters: <br>
+    [client]<br>
+    default-character-set = utf8mb4<br>
+    [mysql]<br>
+    default-character-set = utf8mb4<br>
+    [mysqld]<br>
+    character-set-client-handshake = FALSE<br>
+    character-set-server=utf8mb4<br>
+    collation-server="utf8mb4_unicode_ci"<br>
     
-        2  Next, restart the MySQL service and run the following query to verify the details:
+    2  Next, restart the MySQL service and run the following query to verify the details:
 
 ```
         +----------------------+--------------------+
@@ -57,15 +57,16 @@ To upgrade Volt MX Foundry 9.2 or 9.5 with MySQL 5.7 to Volt MX Foundry 9.5.15 o
         8 rows in set (0.00 sec)
 
 ```
-    
-6. Import Foundry data exported in step 2 to MySQL 8.0.
-
-7. Alter the character set and collation of foundry schemas
-   `(<prefix> admindb <suffix> <prefix> idconfigdb <suffix> <prefix>kpnsdb <suffix> <prefix> mfaccountsdb <suffix> <prefix> mfconsoledb <suffix> <prefix> mfreportsdb <suffix>)` with following command:
- 
-   ALTER DATABASE < DATABASE_NAME > CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
- 
-8. Upgrade Foundry to 9.5.15 or greater. Refer to [Upgrading Volt MX Foundry to V9](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Upgrading_VoltMX_Foundry_SP1.html) for upgrade instructions.
+<html>
+<body>
+<ol start="6">
+  <li>Import Foundry data exported in step 2 to MySQL 8.0.</li>
+  <li>Alter the character set and collation of foundry schemas
+   (<prefix> admindb <suffix> <prefix> idconfigdb <suffix> <prefix>kpnsdb <suffix> <prefix> mfaccountsdb <suffix> <prefix> mfconsoledb <suffix> <prefix> mfreportsdb <suffix>) with following command:<br>   ALTER DATABASE < DATABASE_NAME > CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;</li>
+  <li>Upgrade Foundry to 9.5.15 or greater. Refer to <a href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Upgrading_VoltMX_Foundry_SP1.html">Upgrading Volt MX Foundry to V9</a>  for upgrade instructions.</li>
+</ol>
+</body>
+</html>
 
 #### Upgrading Volt MX Foundry 9.5 with MySQL 8.0 to Volt MX Foundry 9.5.15 or greater
 
@@ -122,13 +123,15 @@ To upgrade Volt MX Foundry 9.5.x with MySQL 8.0 to  Volt MX Foundry 9.5.15 or gr
         8 rows in set (0.00 sec)
 
 ```
-
-3. Alter the character set and collation of foundry schemas  
-    `(<prefix>admindb<suffix>, <prefix>idconfigdb<suffix>,  <prefix>kpnsdb<suffix>, <prefix>mfaccountsdb<suffix>, <prefix>mfconsoledb<suffix>, <prefix>mfreportsdb<suffix>)` with following command:
- 
-    ALTER DATABASE < DATABASE_NAME > CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
- 
-4.   Upgrade Foundry to 9.5.15 or greater . Refer to [Upgrading Volt MX Foundry to V9](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Upgrading_VoltMX_Foundry_SP1.html) for upgrade instructions.
+<html>
+<body>
+<ol start="3">
+  <li>Alter the character set and collation of foundry schemas  
+    `(<prefix>admindb<suffix>, <prefix>idconfigdb<suffix>,  <prefix>kpnsdb<suffix>, <prefix>mfaccountsdb<suffix>, <prefix>mfconsoledb<suffix>, <prefix>mfreportsdb<suffix>)` with following command:<br> ALTER DATABASE < DATABASE_NAME > CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;</br></li>
+  <li>Upgrade Foundry to 9.5.15 or greater . Refer to <a href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Upgrading_VoltMX_Foundry_SP1.html">Upgrading Volt MX Foundry to V9</a>  for upgrade instructions.</li>
+</ol>
+</body>
+</html>
 
 #### Upgrading Kony Fabric 8.4 with MySQL 5.7 to Volt MX Foundry 9.5.15 or greater
 
@@ -186,13 +189,14 @@ To upgrade Kony Fabric with MySQL 5.7 to Volt MX Foundry 9.5.15 or greater, foll
     8 rows in set (0.00 sec) 
 
 ```
-6. Import Foundry data exported in step 2 to MySQL 8.0. 
-7. Alter the character set and collation of foundry schemas`(<prefix> admindb <suffix> <prefix> idconfigdb <suffix> <prefix> kpnsdb <suffix> <prefix> mfaccountsdb <suffix> <prefix> mfconsoledb <suffix> <prefix> mfreportsdb <suffix> )` with following command: 
-
-    ALTER DATABASE < DATABASE_NAME > CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; 
-
-8. Alter the character set and collation of kpnsdb tables by
-   running following script: 
+<ol start="6">
+  <li>Import Foundry data exported in step 2 to MySQL 8.0.</li>
+  <li>Alter the character set and collation of foundry schemas`(<prefix> admindb <suffix> <prefix> idconfigdb <suffix> <prefix> kpnsdb <suffix> <prefix> mfaccountsdb <suffix> <prefix> mfconsoledb <suffix> <prefix> mfreportsdb <suffix> )` with following command:<br> ALTER DATABASE < DATABASE_NAME > CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;</li>
+  <li>Alter the character set and collation of kpnsdb tables by
+   running following script:</li>
+</ol>
+</body>
+</html>
 
     SET FOREIGN_KEY_CHECKS=0; 
 
@@ -220,7 +224,11 @@ To upgrade Kony Fabric with MySQL 5.7 to Volt MX Foundry 9.5.15 or greater, foll
 
     SET FOREIGN_KEY_CHECKS=1; 
 
-9. Upgrade Foundry to 9.5. Refer to [Upgrading Volt MX Foundry to V9 for upgrade instructions](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Upgrading_VoltMX_Foundry_SP1.html). 
+<ol start="9">
+ <li>Upgrade Foundry to 9.5.15 or greater . Refer to <a href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Upgrading_VoltMX_Foundry_SP1.html">Upgrading Volt MX Foundry to V9</a>  for upgrade instructions.</li>
+</ol>
+</body>
+</html>
 
 #### Upgrading Volt MX Foundry 9.2 with MySQL 5.7 to Volt MX Foundry versions earlier than 9.5.15
 
