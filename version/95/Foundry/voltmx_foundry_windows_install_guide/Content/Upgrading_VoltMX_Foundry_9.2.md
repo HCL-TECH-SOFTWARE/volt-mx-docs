@@ -32,7 +32,7 @@ To upgrade Volt MX Foundry 9.2 or 9.5 with MySQL 5.7 to Volt MX Foundry 9.5.15 o
     
         2  Next, restart the MySQL service and run the following query to verify the details:
 
-    ```
+```
         +----------------------+--------------------+
         | Variable_name        | Value              |
         +----------------------+--------------------+
@@ -56,11 +56,12 @@ To upgrade Volt MX Foundry 9.2 or 9.5 with MySQL 5.7 to Volt MX Foundry 9.5.15 o
         +--------------------------+---------------------------------------------------------+
         8 rows in set (0.00 sec)
 
-    ```
+```
     
 6. Import Foundry data exported in step 2 to MySQL 8.0.
 
-7. Alter the character set and collation of foundry schemas`(<prefix> admindb <suffix> <prefix> idconfigdb <suffix> <prefix>kpnsdb <suffix> <prefix> mfaccountsdb <suffix> <prefix> mfconsoledb <suffix> <prefix> mfreportsdb <suffix>)` with following command:
+7. Alter the character set and collation of foundry schemas
+   `(<prefix> admindb <suffix> <prefix> idconfigdb <suffix> <prefix>kpnsdb <suffix> <prefix> mfaccountsdb <suffix> <prefix> mfconsoledb <suffix> <prefix> mfreportsdb <suffix>)` with following command:
  
    ALTER DATABASE < DATABASE_NAME > CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
  
@@ -96,7 +97,7 @@ To upgrade Volt MX Foundry 9.5.x with MySQL 8.0 to  Volt MX Foundry 9.5.15 or gr
 
        mysql> show variables like 'collation%';
 
-    ```
+```
         +----------------------+--------------------+
         | Variable_name        | Value              |
         +----------------------+--------------------+
@@ -120,11 +121,12 @@ To upgrade Volt MX Foundry 9.5.x with MySQL 8.0 to  Volt MX Foundry 9.5.15 or gr
         +--------------------------+---------------------------------------------------------+
         8 rows in set (0.00 sec)
 
-    ```
+```
 
-3. Alter the character set and collation of foundry schemas`(<prefix>admindb<suffix>, <prefix>idconfigdb<suffix>, <prefix>kpnsdb<suffix>, <prefix>mfaccountsdb<suffix>, <prefix>mfconsoledb<suffix>, <prefix>mfreportsdb<suffix>)` with following command:
+3. Alter the character set and collation of foundry schemas  
+    `(<prefix>admindb<suffix>, <prefix>idconfigdb<suffix>,  <prefix>kpnsdb<suffix>, <prefix>mfaccountsdb<suffix>, <prefix>mfconsoledb<suffix>, <prefix>mfreportsdb<suffix>)` with following command:
  
-   ALTER DATABASE < DATABASE_NAME > CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+    ALTER DATABASE < DATABASE_NAME > CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
  
 4.   Upgrade Foundry to 9.5.15 or greater . Refer to [Upgrading Volt MX Foundry to V9](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Upgrading_VoltMX_Foundry_SP1.html) for upgrade instructions.
 
