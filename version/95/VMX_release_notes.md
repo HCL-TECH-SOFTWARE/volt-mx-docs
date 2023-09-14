@@ -792,7 +792,7 @@ September 12, 2023
 * Upgraded MS SQL, Oracle DB and MariaDB connector jars.
 * Added support of JBoss EAP 7.4. Removed EAP 7.2 support.
 
-### Volt MX Foundry Containers
+#### Volt MX Foundry Containers
 
 * MySQL Cluster support added.
 * Bundled MySQL db in single container.
