@@ -768,7 +768,6 @@ September 12, 2023
 
 * Xcode 14 is now supported: 
 
-   
      * AppFactory executes iOS builds on Xcode 14.3 to enable app
      submission to the Apple App Store as mandated by Apple guidelines in effect since April 25 2023. Refer [here](https://developer.apple.com/news/?id=jd9wcyov)  for more information.
      
@@ -777,7 +776,6 @@ September 12, 2023
 * AppFactory has been upgraded with new Jenkins plugins and Java
   version to enhance security, user experience, and performance of the platform.
 
-  
      *  Security Enhancements : With this upgrade, all known
       Jenkins security vulnerabilities have been addressed and resolved.
      *  Improved User Experience : The upgraded Jenkins offers a
