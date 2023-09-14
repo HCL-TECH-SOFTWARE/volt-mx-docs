@@ -740,7 +740,7 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 
 September 12, 2023
 
-### Foundry Enhancements
+#### Foundry Enhancements
 
 * Text Data Adapter has been made available Refer [here](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Text_Adapter.html) for more information on text data adapter.
 
@@ -764,7 +764,7 @@ September 12, 2023
    
 *  Security fixes.
 
-### AppFactory Enhancements
+#### AppFactory Enhancements
 
 * Xcode 14 is now supported: 
 
@@ -785,7 +785,7 @@ September 12, 2023
      *  Enhanced Performance : The upgrade optimizes Jenkins
       performance, providing a stable and reliable environment.
 
-### Installer 
+#### Installer 
 
 * Added support for WebLogic.
 * Added MySQL SSL support.
