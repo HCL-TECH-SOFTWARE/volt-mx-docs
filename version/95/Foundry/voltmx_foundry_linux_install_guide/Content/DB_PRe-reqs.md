@@ -151,8 +151,8 @@ To support MySQL utf8mb4 charsets and collation, update the MySQL configuration 
     8 rows in set (0.00 sec)
 ```
 
-Applicable for Engagement Services
-----------------------------------
+#### Applicable for Engagement Services for Foundry version earlier than 9.5.15
+
 
 1.  Create the database needed for Engagement Services with unicode character set as UTF8. Also ensure that you modify the `my.cnf` or `my.ini` with the following parameters:
 ```

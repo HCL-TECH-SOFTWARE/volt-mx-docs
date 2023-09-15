@@ -22,13 +22,13 @@ The following is a sample query for creating a database in MSSQL:
     
 The following is a sample query for creating a database in MySQL:
 
-`CREATE DATABASE DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`
+`CREATE DATABASE `< DBNAME >` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;`
 
 ### For Foundry version 9.5.15 or greater:
 
 The following is a sample query for creating a database in MySQL:
 
-`CREATE DATABASE `< DBNAME >` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;`
+`CREATE DATABASE `< DBNAME >` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`
 
 The following details are required for Flyway configuration:
     
