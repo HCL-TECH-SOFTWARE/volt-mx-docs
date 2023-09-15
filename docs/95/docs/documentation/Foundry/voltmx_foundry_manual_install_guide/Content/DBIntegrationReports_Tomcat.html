@@ -870,6 +870,19 @@
     Create and Configure a Database for Reports
   </a>
   
+    <nav class="md-nav" aria-label="Create and Configure a Database for Reports">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-foundry-version-9515-or-greater" class="md-nav__link">
+    For Foundry version 9.5.15 or greater:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -1539,6 +1552,19 @@
     Create and Configure a Database for Reports
   </a>
   
+    <nav class="md-nav" aria-label="Create and Configure a Database for Reports">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-foundry-version-9515-or-greater" class="md-nav__link">
+    For Foundry version 9.5.15 or greater:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -1561,12 +1587,18 @@
 <h2 id="create-and-configure-a-database-for-reports">Create and Configure a Database for Reports</h2>
 <p>To create a database for Reports, follow these steps:</p>
 <ol>
-<li>
-<p>Create a database for <strong>reports</strong> with a custom name along with prefix and suffix. Prefix and suffix are optional. For example, database name is <code>&lt;prefix&gt;reportsdb&lt;suffix&gt;</code>.</p>
+<li>Create a database for <strong>reports</strong> with a custom name along with prefix and suffix. Prefix and suffix are optional. For example, database name is <code>&lt;prefix&gt;reportsdb&lt;suffix&gt;</code>.</li>
+</ol>
 <p><strong>The following is sample query for creating a database in MSSQL:</strong></p>
-<p>CREATE DATABASE reportsdb;</p>
+<pre><code>CREATE DATABASE reportsdb;
+</code></pre>
 <p>The following is a sample query for creating a database in MySQL:</p>
-<p>CREATE DATABASE `<DBNAME>` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;</p>
+<pre><code>   CREATE DATABASE \`&lt; DBNAME &gt;\` DEFAULT CHARACTER SET utf8 COLLATE utf8\_unicode\_ci;
+</code></pre>
+<h4 id="for-foundry-version-9515-or-greater">For Foundry version 9.5.15 or greater:</h4>
+<p>The following is a sample query for creating a database in MySQL:</p>
+<pre><code>    CREATE DATABASE \`&lt; DBNAME &gt;\`DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+</code></pre>
 <blockquote>
 <p><strong><em>Note:</em></strong>  For Oracle databases, a schema name should be in capital letters.  </p>
 </blockquote>
@@ -1579,16 +1611,15 @@
 <li>Schema name for reports: <code>reportsdb</code></li>
 <li>Placeholders for Reports:</li>
 </ul>
-</li>
-</ol>
 <pre><code># For Reports (reportsdb), replace the following placeholders in SQL migrations for your database
         flyway.placeholders.VOLTMX_METRICS_LOGGER_JNDI=java:comp/env/jdbc/voltmxreports
         flyway.placeholders.VOLTMX_METRICS_LOG_LEVEL=INFO
         flyway.placeholders.VOLTMX_METRICS_LOG_OPTION=logfile
         flyway.placeholders.VOLTMX_METRICS_LOG_LOCATION=&lt;log_location_for_metrics&gt; 
 </code></pre>
-<pre><code>*   Tablespace Placeholders for Oracle:
-</code></pre>
+<ul>
+<li>Tablespace Placeholders for Oracle:</li>
+</ul>
 <table>
 <thead>
 <tr>

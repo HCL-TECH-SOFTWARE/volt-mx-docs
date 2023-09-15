@@ -12,17 +12,28 @@ To create a database for **Workspace Services**, follow these steps:
     > **_Note:_** For Oracle, create necessary tablespaces and Users before proceeding. Refer to [Prerequisites for Volt MX Foundry with Oracle](Database_Prerequsites.md#prerequisites-for-volt-mx-foundry-with-oracle).
     
     *   **The following is a sample query for creating a database in SQL Server**:
-```CREATE DATABASE mfconsoledb;
+
+```
+CREATE DATABASE mfconsoledb;
 ```
         
-    *   The following is a sample query for creating a database in MySQL:
+*   The following is a sample query for creating a database in MySQL:
     
-   ```CREATE DATABASE \`<DBNAME>\` DEFAULT CHARACTER SET utf8 COLLATE utf8\_unicode\_ci;
 ```
-        
+CREATE DATABASE \`<DBNAME>\` DEFAULT CHARACTER SET utf8 COLLATE utf8\_unicode\_ci;
+```
+### For Foundry version 9.5.15 or greater:
+
+To create mfconsoledb:
+
+```
+The following is a sample query for creating a database in MySQL: CREATE DATABASE `<DBNAME>` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+```
+
     
-    > **_Important:_**  For workspace, you can create database with a custom name instead the default databases such as  `mfconsoledb`.  
-      For example, if you have created a workspace database with a custom name ( `<prefix>mfconsoledb<suffix>`), replace the custom database name in all SQL scripts in the `\VoltMXFoundry_Plugins\scripts\waasdbmigrations\commondbscripts`  folder.  
+> **_Important:_**  For workspace, you can create database with a custom name instead the default databases such as  `mfconsoledb`.  
+For example, if you have created a workspace database with a custom name ( `<prefix>mfconsoledb<suffix>`), replace the custom database name in all SQL scripts in the `\VoltMXFoundry_Plugins\scripts\waasdbmigrations\commondbscripts`  folder.  
     
 2.  Execute all SQL scripts for the component by using the steps provided at [Configuring Flyway Command-line Tool](FlywayNew.md).
     

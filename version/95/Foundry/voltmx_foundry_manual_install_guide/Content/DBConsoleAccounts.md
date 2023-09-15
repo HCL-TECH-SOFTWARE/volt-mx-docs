@@ -9,25 +9,33 @@ To create a database for Volt MX Accounts, follow these steps:
     
     **The following is a sample query for creating a database in MSSQL**:
     
- ```CREATE DATABASE mfaccountsdb;
 ```
-    
-    The following is a sample query for creating a database in MySQL:
-    
-```CREATE DATABASE <DBNAME> DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+CREATE DATABASE mfaccountsdb;
 ```
+The following is a sample query for creating a database in MySQL:
+```
+CREATE DATABASE < DBNAME > DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+```
+
+### For Foundry version 9.5.15 or greater:
+
+To create mfaccountsdb:
+
+```
+The following is a sample query for creating a database in MySQL: CREATE DATABASE <DBNAME> DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+ 
+> **_Note:_**  For Oracle databases a schema name should be in capital letters.  
+Find the word `mfaccountsdb` in SQL files located in the accounts scripts and replace it with `MFACCOUNTSDB`.
     
-    > **_Note:_**  For Oracle databases a schema name should be in capital letters.  
-       Find the word `mfaccountsdb` in SQL files located in the accounts scripts and replace it with `MFACCOUNTSDB`.
+> **_Note:_** For Oracle, create necessary tablespaces and Users before proceeding. Refer to [Prerequisites for Volt MX Foundry with Oracle](Database_Prerequsites.md#prerequisites-for-volt-mx-foundry-with-oracle).
     
-    > **_Note:_** For Oracle, create necessary tablespaces and Users before proceeding. Refer to [Prerequisites for Volt MX Foundry with Oracle](Database_Prerequsites.md#prerequisites-for-volt-mx-foundry-with-oracle).
+> **_Important:_**  If you have created an accounts database with a custom name (for example, `<prefix>mfaccountsdb<suffix>`), prepend the statement `use <prefix>mfaccountsdb<suffix>` in all SQL scripts in the beginning of every file in the `\VoltMXFoundry_Plugins\scripts\accountsdbmigration` folder.
     
-    > **_Important:_**  If you have created an accounts database with a custom name (for example, `<prefix>mfaccountsdb<suffix>`), prepend the statement `use <prefix>mfaccountsdb<suffix>` in all SQL scripts in the beginning of every file in the `\VoltMXFoundry_Plugins\scripts\accountsdbmigration` folder.
+The following details are required for Flyway configuration:
     
-    The following details are required for Flyway configuration:
-    
-    *   Schema name for accounts: `mfaccountsdb`
-    *   Placeholders for Volt MX AccountsDB:
+*   Schema name for accounts: `mfaccountsdb`
+ *   Placeholders for Volt MX AccountsDB:
 
 <pre>
 <code style="display:block;background-color:#eee;border: 1px solid #999;padding: 20px;">

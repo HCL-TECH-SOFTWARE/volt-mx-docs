@@ -8,8 +8,20 @@ To create a database for Engagement Services, follow these steps:
 1.  Create a database with a name `"vpnsdb"` with character set as `"utf8`" and collate as `"utf8_unicode_ci"` using the following command. The database name can contain a custom name along with prefix and suffix. Prefix and suffix are optional. For example, schema name is `<prefix>vpnsdb<suffix>`.
     
     The following is a sample query for creating a database in MySQL
-    
+
     `\-> CREATE DATABASE vpnsdb CHARACTER SET utf8 COLLATE utf8\_unicode\_ci;`
+
+    ### For Foundry version 9.5.15 or greater:
+
+    Create a database with a name `"vpnsdb"` with character set as `"utf8mb4"` and collate as `"utf8mb4_unicode_ci"` using the following command. The database name can contain a custom name along with prefix and suffix. Prefix and suffix are optional. 
+
+    <b>For example</b>: schema name is `<prefix>vpnsdb<suffix>`.
+
+    The following is a sample query for creating a database in MySQL
+
+    ```
+    \-> CREATE DATABASE vpnsdb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+    ```
     
     The following is a sample query for creating a database in DB2
     
