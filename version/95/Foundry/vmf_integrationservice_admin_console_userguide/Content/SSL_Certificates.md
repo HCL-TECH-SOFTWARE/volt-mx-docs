@@ -80,7 +80,7 @@ tr:nth-child(even) {
   </tr>
   <tr>
     <td>Certificate Details</td>
-    <td>Details of the uploaded certificate.<br><img src="Resources/Images/SSL_01_png" width="450" height="270"></td>
+    <td>Details of the uploaded certificate.<br><img src="Resources/Images/SSL_02_png" width="450" height="270"></td>
     <tr>
     <td>Add certificate</td>
     <td>Click Add Certificate to upload the certificate.</td>
