@@ -33,27 +33,66 @@ There are two ways of uploading the certificates to the middleware:
     
 
 The following fields are displayed in this screen:
-
   
-| Field | Description |
-| --- | --- |
-| Certificate Alias | Name of the certificate provided while uploading. > **_Note:_** The field is case-insensitive and must be unique. |
-| Type | Type of the certificate uploaded. SSL certificates are of two types: One-way SSL Two-way SSL |
-| Expires On | The expiry date of the uploaded certificate. |
-| Uploaded On | The uploaded date of the certificate. |
-| Uploaded By | Name of the certificate uploaded user. |
-| Certificate Details | Details of the uploaded certificate.
-  
-| Field | Description |
-| --- | --- |
-| Cert Domain | Domain of the uploaded certificate. |
-| Target Domain | Intended target server to which the data is sent. |
-| Organization | Certificate issuing organization. |
-| Issuer | Certificate issuing authority. |
-
- |
-| Add certificate | Click Add Certificate to upload the certificate. |
-| Delete | Delete the uploaded certificates. |
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+tr:nth-child(even) {
+}
+</style>
+</head>
+<body>
+<table>
+  <tr>
+    <th>Field</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>Certificate Alias</td>
+    <td>Name of the certificate provided while uploading<br><b>Note:</b> The field is case-insensitive and must be unique.</td>
+  </tr>
+  <tr>
+    <td>Type</td>
+    <td>Type of the certificate uploaded. SSL certificates are of two types: One-way SSL Two-way SSL</td>
+  </tr>
+  <tr>
+    <td>Expires On</td>
+    <td>The expiry date of the uploaded certificate.</td>
+  </tr>
+  <tr>
+    <td>Uploaded On</td>
+    <td>The uploaded date of the certificate.</td>
+  </tr>
+  <tr>
+    <td>Uploaded By</td>
+    <td>Name of the certificate uploaded user.</td>
+  </tr>
+  <tr>
+    <td>Certificate Details</td>
+    <td>Details of the uploaded certificate.<br><img src="Resources/Images/SSL_01_png" width="350" height="210"></td>
+    <tr>
+    <td>Add certificate</td>
+    <td>Click Add Certificate to upload the certificate.</td>
+  </tr>
+  <tr>
+    <td>Delete</td>
+    <td>Delete the uploaded certificates.<br></td>
+  </tr>
+  </tr>
+</table>
+</body>
+</html>
 
 You can perform the following actions in this screen:
 
