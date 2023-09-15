@@ -699,8 +699,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#applicable-for-engagement-services" class="md-nav__link">
-    Applicable for Engagement Services
+  <a href="#mysql-80-is-mandatory-for-foundry-v9515-or-above" class="md-nav__link">
+    MySQL 8.0 is mandatory for Foundry V9.5.15 or above
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mysql-configuration-mandated-for-foundry-9515-or-greater" class="md-nav__link">
+    MySQL configuration mandated for Foundry 9.5.15 or greater :
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applicable-for-engagement-services-for-foundry-version-earlier-than-9515" class="md-nav__link">
+    Applicable for Engagement Services for Foundry version earlier than 9.5.15
   </a>
   
 </li>
@@ -1336,8 +1350,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#applicable-for-engagement-services" class="md-nav__link">
-    Applicable for Engagement Services
+  <a href="#mysql-80-is-mandatory-for-foundry-v9515-or-above" class="md-nav__link">
+    MySQL 8.0 is mandatory for Foundry V9.5.15 or above
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mysql-configuration-mandated-for-foundry-9515-or-greater" class="md-nav__link">
+    MySQL configuration mandated for Foundry 9.5.15 or greater :
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applicable-for-engagement-services-for-foundry-version-earlier-than-9515" class="md-nav__link">
+    Applicable for Engagement Services for Foundry version earlier than 9.5.15
   </a>
   
 </li>
@@ -1477,7 +1505,50 @@ After granting privileges, disconnect existing session, and use new session in o
 <h3 id="prerequisites-for-volt-mx-foundry-with-mssql-applicable-for-engagement-services">Prerequisites for Volt MX Foundry with MSSQL - Applicable for Engagement Services</h3>
 <p>Database collation needs to be set for a database. This is possible while creating a database with your required language as database collation. For example, use Database collation as <strong>Arabic_100_CI_AS</strong> for Arabic language support. Similarly for other languages use appropriate collation for support. Use SQL Server Management Studio to create a database with the name as vpnsdb and with appropriate collation support.</p>
 <h3 id="prerequisites-for-volt-mx-foundry-with-mysql">Prerequisites for Volt MX Foundry with MySQL</h3>
-<h4 id="applicable-for-engagement-services">Applicable for Engagement Services</h4>
+<h4 id="mysql-80-is-mandatory-for-foundry-v9515-or-above">MySQL 8.0 is mandatory for Foundry V9.5.15 or above</h4>
+<h4 id="mysql-configuration-mandated-for-foundry-9515-or-greater">MySQL configuration mandated for Foundry 9.5.15 or greater :</h4>
+<p>To support MySQL utf8mb4 charsets and collation, update the MySQL configuration file of MySQL 8.0 by adding following changes under [client], [mysql] and [mysqld] section and restart the MySQL server.</p>
+<pre><code>1. Ensure that you modify the my.cnf or my.ini with the following parameters: 
+
+
+    [client]
+    default-character-set = utf8mb4
+    [mysql]
+    default-character-set = utf8mb4
+    [mysqld]
+    character-set-client-handshake = FALSE
+    character-set-server=utf8mb4
+    collation-server=&quot;utf8mb4_unicode_ci&quot;
+
+2. Next, restart the MySQL service and run the following query to verify the details:
+
+    mysql&gt; show variables like 'collation%';
+    +----------------------+--------------------+
+    | Variable_name        | Value              |
+    +----------------------+--------------------+
+    | collation_connection | utf8mb4_unicode_ci |
+    | collation_database   | utf8mb4_unicode_ci |
+    | collation_server     | utf8mb4_unicode_ci |
+    +----------------------+--------------------+
+
+3. rows in set (0.00 sec)
+   mysql&gt; show variables like 'character%';
+
+    +--------------------------+---------------------------------------------------------+
+    | Variable_name            | Value                                                   |
+    +--------------------------+---------------------------------------------------------+
+    | character_set_client     | utf8mb4                                                 |
+    | character_set_connection | utf8mb4                                                 |
+    | character_set_database   | utf8mb4                                                 |
+    | character_set_filesystem | binary                                                  |
+    | character_set_results    | utf8mb4                                                 |
+    | character_set_server     | utf8mb4                                                 |
+    | character_set_system     | utf8mb3                                                 |
+    | character_sets_dir       | C:\Program Files\MySQL\MySQL Server 8.0\share\charsets\ |
+    +--------------------------+---------------------------------------------------------+
+    8 rows in set (0.00 sec)
+</code></pre>
+<h4 id="applicable-for-engagement-services-for-foundry-version-earlier-than-9515">Applicable for Engagement Services for Foundry version earlier than 9.5.15</h4>
 <ol>
 <li>
 <p>Create the database needed for Engagement Services with unicode character set as UTF8. Also ensure that you modify the <code>my.cnf</code> or <code>my.ini</code> with the following parameters:
@@ -1490,8 +1561,7 @@ default-character-set = utf8<br />
 character-set-client-handshake = FALSE<br />
 collation_server='utf8_unicode_ci'<br />
 character_set_server='utf8'<br />
-<code>&lt;br&gt;
-2.  Next, restart the MySQL service and run the following query to verify the details:</code></p>
+<code>Next, restart the MySQL service and run the following query to verify the details:</code></p>
 <p>mysql&gt; show variables like '%coll%';<br />
 +----------------------+-----------------+<br />
 | Variable_name | Value |<br />
