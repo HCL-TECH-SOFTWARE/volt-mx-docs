@@ -116,7 +116,7 @@ You can upload One-way SSL certificates the root certificate signed by your own 
   
 | Field | Description |
 | --- | --- |
-| Certificate Alias | Enter an alias name to upload the certificate. > **_Note:_** The field is case-insensitive and must be unique. |
+| Certificate Alias | Enter an alias name to upload the certificate. <br> **_Note:_** The field is case-insensitive and must be unique. |
 | Server SSL Certificate | Select the certificate to be uploaded by clicking the **Browse** button. |
 | Submit | Click Submit to upload the certificate. |
 | Cancel | Cancel the operation. |
@@ -137,11 +137,11 @@ The two-way SSL certificate is the client certificate uploaded in the trust stor
   
 | Field | Description |
 | --- | --- |
-| Certificate Alias | An alias name for the certificate to be uploaded. > **_Note:_** The field is case-insensitive and must be unique. |
+| Certificate Alias | An alias name for the certificate to be uploaded. <br> **_Note:_** The field is case-insensitive and must be unique. |
 | Client SSL certificate | Browse to select the client SSL certificate. |
-| Target Domains | Target server to send the data. > **_Note:_** This field is mandatory if you are using SSL Certificates in Community edition. |
+| Target Domains | Target server to send the data. <br> **_Note:_** This field is mandatory if you are using SSL Certificates in Community edition. |
 | Private Key | Private key of the certificate to be uploaded. |
-| Private Key Password (Optional) | Password for the private key. > **_Note:_** This is an optional field. This field is not applicable in community edition. |
+| Private Key Password (Optional) | Password for the private key. <br> **_Note:_** This is an optional field. This field is not applicable in community edition. |
 | Submit | Submit to upload the details entered. |
 | Cancel | Cancel to abort the operation. |
 
