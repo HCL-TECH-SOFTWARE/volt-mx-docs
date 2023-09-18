@@ -113,36 +113,6 @@ You can upload One-way SSL certificates the root certificate signed by your own 
 
 ![](Resources/Images/one-way-ssl.PNG)
 
-  You can perform the following actions in this screen: [Add Certificate](#add-certificate) [Delete a Certificate](#delete-a-certificate)
-
-Add Certificate
----------------
-
-You can add a One-way or Two-way SSL certificates by clicking on **Add Certificate** button. To add a certificate, click **Add Certificate**. An **Add SSL Certificate** pop-up appears with two options: [One-way SSL](#one-way-ssl) [Two-way SSL](#two-way-ssl)
-
-### One-way SSL
-
-You can upload One-way SSL certificates the root certificate signed by your own internal private certificate authority or any intermediate certificates. Enter the required details in the fields provided to upload a one-way SSL certificate: ![](Resources/Images/one-way-ssl.PNG)
-
-You can perform the following actions in this screen:
-
-*   [Add Certificate](#add-certificate)
-*   [Delete a Certificate](#delete-a-certificate)
-
-Add Certificate
----------------
-
-You can add a One-way or Two-way SSL certificates by clicking on **Add Certificate** button. To add a certificate, click **Add Certificate**. An **Add SSL Certificate** pop-up appears with two options:
-
-*   [One-way SSL](#one-way-ssl)
-*   [Two-way SSL](#two-way-ssl)
-
-### One-way SSL
-
-You can upload One-way SSL certificates the root certificate signed by your own internal private certificate authority or any intermediate certificates. Enter the required details in the fields provided to upload a one-way SSL certificate:
-
-![](Resources/Images/one-way-ssl.PNG)
-
   
 | Field | Description |
 | --- | --- |
