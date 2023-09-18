@@ -33,27 +33,66 @@ There are two ways of uploading the certificates to the middleware:
     
 
 The following fields are displayed in this screen:
-
   
-| Field | Description |
-| --- | --- |
-| Certificate Alias | Name of the certificate provided while uploading. > **_Note:_** The field is case-insensitive and must be unique. |
-| Type | Type of the certificate uploaded. SSL certificates are of two types: One-way SSL Two-way SSL |
-| Expires On | The expiry date of the uploaded certificate. |
-| Uploaded On | The uploaded date of the certificate. |
-| Uploaded By | Name of the certificate uploaded user. |
-| Certificate Details | Details of the uploaded certificate.
-  
-| Field | Description |
-| --- | --- |
-| Cert Domain | Domain of the uploaded certificate. |
-| Target Domain | Intended target server to which the data is sent. |
-| Organization | Certificate issuing organization. |
-| Issuer | Certificate issuing authority. |
-
- |
-| Add certificate | Click Add Certificate to upload the certificate. |
-| Delete | Delete the uploaded certificates. |
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+tr:nth-child(even) {
+}
+</style>
+</head>
+<body>
+<table>
+  <tr>
+    <th>Field</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>Certificate Alias</td>
+    <td>Name of the certificate provided while uploading<br><b>Note:</b> The field is case-insensitive and must be unique.</td>
+  </tr>
+  <tr>
+    <td>Type</td>
+    <td>Type of the certificate uploaded. SSL certificates are of two types: One-way SSL Two-way SSL</td>
+  </tr>
+  <tr>
+    <td>Expires On</td>
+    <td>The expiry date of the uploaded certificate.</td>
+  </tr>
+  <tr>
+    <td>Uploaded On</td>
+    <td>The uploaded date of the certificate.</td>
+  </tr>
+  <tr>
+    <td>Uploaded By</td>
+    <td>Name of the certificate uploaded user.</td>
+  </tr>
+  <tr>
+    <td>Certificate Details</td>
+    <td>Details of the uploaded certificate.<br><img src="Resources/Images/SSL_02_png" width="450" height="270"></td>
+    <tr>
+    <td>Add certificate</td>
+    <td>Click Add Certificate to upload the certificate.</td>
+  </tr>
+  <tr>
+    <td>Delete</td>
+    <td>Delete the uploaded certificates.<br></td>
+  </tr>
+  </tr>
+</table>
+</body>
+</html>
 
 You can perform the following actions in this screen:
 
@@ -74,40 +113,10 @@ You can upload One-way SSL certificates the root certificate signed by your own 
 
 ![](Resources/Images/one-way-ssl.PNG)
 
-  You can perform the following actions in this screen: [Add Certificate](#add-certificate) [Delete a Certificate](#delete-a-certificate)
-
-Add Certificate
----------------
-
-You can add a One-way or Two-way SSL certificates by clicking on **Add Certificate** button. To add a certificate, click **Add Certificate**. An **Add SSL Certificate** pop-up appears with two options: [One-way SSL](#one-way-ssl) [Two-way SSL](#two-way-ssl)
-
-### One-way SSL
-
-You can upload One-way SSL certificates the root certificate signed by your own internal private certificate authority or any intermediate certificates. Enter the required details in the fields provided to upload a one-way SSL certificate: ![](Resources/Images/one-way-ssl.PNG)
-
-You can perform the following actions in this screen:
-
-*   [Add Certificate](#add-certificate)
-*   [Delete a Certificate](#delete-a-certificate)
-
-Add Certificate
----------------
-
-You can add a One-way or Two-way SSL certificates by clicking on **Add Certificate** button. To add a certificate, click **Add Certificate**. An **Add SSL Certificate** pop-up appears with two options:
-
-*   [One-way SSL](#one-way-ssl)
-*   [Two-way SSL](#two-way-ssl)
-
-### One-way SSL
-
-You can upload One-way SSL certificates the root certificate signed by your own internal private certificate authority or any intermediate certificates. Enter the required details in the fields provided to upload a one-way SSL certificate:
-
-![](Resources/Images/one-way-ssl.PNG)
-
   
 | Field | Description |
 | --- | --- |
-| Certificate Alias | Enter an alias name to upload the certificate. > **_Note:_** The field is case-insensitive and must be unique. |
+| Certificate Alias | Enter an alias name to upload the certificate. <br> **_Note:_** The field is case-insensitive and must be unique. |
 | Server SSL Certificate | Select the certificate to be uploaded by clicking the **Browse** button. |
 | Submit | Click Submit to upload the certificate. |
 | Cancel | Cancel the operation. |
@@ -128,11 +137,11 @@ The two-way SSL certificate is the client certificate uploaded in the trust stor
   
 | Field | Description |
 | --- | --- |
-| Certificate Alias | An alias name for the certificate to be uploaded. > **_Note:_** The field is case-insensitive and must be unique. |
+| Certificate Alias | An alias name for the certificate to be uploaded. <br> **_Note:_** The field is case-insensitive and must be unique. |
 | Client SSL certificate | Browse to select the client SSL certificate. |
-| Target Domains | Target server to send the data. > **_Note:_** This field is mandatory if you are using SSL Certificates in Community edition. |
+| Target Domains | Target server to send the data. <br> **_Note:_** This field is mandatory if you are using SSL Certificates in Community edition. |
 | Private Key | Private key of the certificate to be uploaded. |
-| Private Key Password (Optional) | Password for the private key. > **_Note:_** This is an optional field. This field is not applicable in community edition. |
+| Private Key Password (Optional) | Password for the private key. <br> **_Note:_** This is an optional field. This field is not applicable in community edition. |
 | Submit | Submit to upload the details entered. |
 | Cancel | Cancel to abort the operation. |
 
