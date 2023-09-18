@@ -43,10 +43,34 @@ To use iOS Home Screen Widgets in Volt MX Iris, you must include the widget conf
     ```
     
 2.  Widgets and iOS apps communicate with each other through iOS Shared Containers or App Groups. For communication through iOS Shared Containers or App Groups, both the app and the widget must include the **App Group Entitlement**. You can provide an input app group container ID for an app as follows:
+
+    The application groups can be added in **quantum_nitro_configuration.json file**. From the Workspace folder of the parent project app, navigate to the resources/common directory. Open 
+    the quantum_nitro_configuration.json file and add app group capability under “KRelease” and “VoltmxWidgetExtension”.
+
+    Here is a sample quantum_nitro_configuration.json file entry that enables app group for communication between the app and home widget:
     
-    ```
-    applicationGroups = group.widget.testWidget //CSV format of all shared application groups
-    ```
+```
+   {
+	"iOS":{
+		"KRelease":{
+			"Capabilites":{
+                "com.apple.security.application-groups" : ["group.com.widget.testWidget"]
+			},
+			"BuildSettings":{
+			}
+		},
+        "VoltmxWidgetExtension":{
+            "Capabilites":{
+                "com.apple.security.application-groups" : ["group.com.widget.testWidget "]
+            }
+        }
+    },
+	"Android":
+	{
+	}
+}
+
+```
     
 3.  Create a new folder in the KAR file, and name it **VoltmxWidgets**. Within the VoltmxWidgets folder, add the following files/folders:
     
