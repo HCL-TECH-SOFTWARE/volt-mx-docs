@@ -1653,8 +1653,33 @@
 </li>
 <li>
 <p>Widgets and iOS apps communicate with each other through iOS Shared Containers or App Groups. For communication through iOS Shared Containers or App Groups, both the app and the widget must include the <strong>App Group Entitlement</strong>. You can provide an input app group container ID for an app as follows:</p>
-<p><code>applicationGroups = group.widget.testWidget //CSV format of all shared application groups</code></p>
+<p>The application groups can be added in <strong>quantum_nitro_configuration.json file</strong>. From the Workspace folder of the parent project app, navigate to the resources/common directory. Open 
+the quantum_nitro_configuration.json file and add app group capability under “KRelease” and “VoltmxWidgetExtension”.</p>
+<p>Here is a sample quantum_nitro_configuration.json file entry that enables app group for communication between the app and home widget:</p>
 </li>
+</ol>
+<pre><code>   {
+    &quot;iOS&quot;:{
+        &quot;KRelease&quot;:{
+            &quot;Capabilites&quot;:{
+                &quot;com.apple.security.application-groups&quot; : [&quot;group.com.widget.testWidget&quot;]
+            },
+            &quot;BuildSettings&quot;:{
+            }
+        },
+        &quot;VoltmxWidgetExtension&quot;:{
+            &quot;Capabilites&quot;:{
+                &quot;com.apple.security.application-groups&quot; : [&quot;group.com.widget.testWidget &quot;]
+            }
+        }
+    },
+    &quot;Android&quot;:
+    {
+    }
+}
+
+</code></pre>
+<ol>
 <li>
 <p>Create a new folder in the KAR file, and name it <strong>VoltmxWidgets</strong>. Within the VoltmxWidgets folder, add the following files/folders:</p>
 <ul>
