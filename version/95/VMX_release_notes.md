@@ -66,8 +66,11 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 September 17, 2023
 
-There are no new features or enhancements in this release.
-For relevant support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+**Volt IQ - AI Assisted Development**
+
+This feature is now supported for on-premise installations.
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 
 <h3 id="v9-servicepack-5-fixpack-16-iris">V9 Servicepack 5 Fixpack 16</h3>
@@ -98,7 +101,7 @@ Volt IQ is an AI Assistant designed to help Volt Iris users through their journe
 *  Automated localisation of Application 
 *  Maintaining and Providing responses from an up-to-date FAQ
 
-> **_Note:_** This feature is not supported for on-premise installations
+> **_Note:_** This feature is not supported for on-premise installations.on-premise support has been added in 9.5.17.
 
 **Support added for Native Desktop applications**
 
