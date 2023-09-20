@@ -101,7 +101,7 @@ Volt IQ is an AI Assistant designed to help Volt Iris users through their journe
 *  Automated localisation of Application 
 *  Maintaining and Providing responses from an up-to-date FAQ
 
-> **_Note:_** This feature is not supported for on-premise installations
+> **_Note:_** This feature is not supported for on-premise installations.on-premise support has been added in 9.5.17.
 
 **Support added for Native Desktop applications**
 
