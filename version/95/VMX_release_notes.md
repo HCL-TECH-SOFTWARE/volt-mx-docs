@@ -68,7 +68,9 @@ September 17, 2023
 
 **Volt IQ - AI Assisted Development**
 
-This feature is now supported for on-premise installations.
+* This feature is now supported for on-premise installations.
+
+**Please refer to [9.5.15 release notes](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_rel_notes/Content/V9SP5FP15.html) for more details on the features of Volt MX Einstein release**.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
