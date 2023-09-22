@@ -762,8 +762,11 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 
 September 25, 2023
 
-There are no new features or enhancements in this release.
-For relevant support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+#### Foundry Enhancements
+
+*  Server security hardening.
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 
 ### V9 Servicepack 5 Fixpack 15
