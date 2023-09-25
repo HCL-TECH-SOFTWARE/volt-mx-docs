@@ -52,7 +52,7 @@ This document explains how to install Volt MX Iris and the required software on 
 
 <ul>
   <li>
-    <a href="#pr">Prerequisites</a>
+    <a href="Prerequisites.html#pr">Prerequisites</a>
   </li>
   <li>
     <a href="Installing%20VoltMX%20Iris.html#installing">Install Volt MX Iris</a>
