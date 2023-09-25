@@ -52,7 +52,7 @@ This document explains how to install Volt MX Iris and the required software on 
 
 <ul>
   <li>
-    <a href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Iris/iris_starter_install_mac/Content/Prerequisites.html#pr">Prerequisites</a>
+    <a href="Prerequisites.html#pr">Prerequisites</a>
   </li>
   <li>
     <a href="Installing%20VoltMX%20Iris.html#installing">Install Volt MX Iris</a>
@@ -62,7 +62,7 @@ This document explains how to install Volt MX Iris and the required software on 
   </li>
 </ul>
 
-## Prerequisites
+<h2 id="pr">Prerequisites</h2>
 
 Following are the requirements needed to complete the installation process. They include the hardware and software prerequisites required to complete the process.
 
