@@ -29,6 +29,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Foundry](#volt-foundry)
 
+- [V9 Servicepack 2 Fixpack 1 Hotfix 19](#v9-servicepack-2-fixpack-1-hotfix-19)
 - [V9 Servicepack 2 Fixpack 1 Hotfix 18](#v9-servicepack-2-fixpack-1-hotfix-18)
 - [V9 Servicepack 2 Fixpack 1 Hotfix 17](#v9-servicepack-2-fixpack-1-hotfix-17)
 - [V9 Servicepack 2 Fixpack 1 Hotfix 16](#v9-servicepack-2-fixpack-1-hotfix-16)
@@ -240,6 +241,16 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 -->
 
 ## Volt Foundry
+
+
+### V9 Servicepack 2 Fixpack 1 Hotfix 19
+September 25, 2023
+
+#### Foundry Enhancements
+
+* Support for incremental setup for Offline Objects across Volt Foundry app versions added.
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 
 ### V9 Servicepack 2 Fixpack 1 Hotfix 18
