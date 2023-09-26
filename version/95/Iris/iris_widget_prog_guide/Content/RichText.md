@@ -269,18 +269,18 @@ The intended use of Rich Text is to display well formatted text using the follow
 
 | Tags | Description |
 | --- | --- |
-| <b>Text </b> | Displays **Text** in Bold. |
-| <i> Text </i> | Displays _Text_ in italics. |
-| <u> Text </u> | Displays Text underlined. |
-| <a href=""> </a> | This tag is used to display a link. It supports optional href attribute.> **_Note:_** The skin attribute of the <a> tag, does not change the skin of the link inside the RichText widget. You must use the [linkSkin](RichText_Properties.md#linkSkin) Property to change the skin of the text given inside the <a> tag. |
-| <img src="" > </img> | This tag is used to display an image and supports src attribute. The path for the image can be local or url based.> **_Note:_** Specify the absolute path of an image for MobileWeb platforms. |
-| <sub>Subscript</sub> | Displays text as Subscript. |
-| <sup>Superscript</sup> | Displays text as Superscript. |
-| <label style="color:#rgbhexformat"> </label> | Displays the text in the color specified. To display a red colored text, enter the following:<label style="color:#FF0000">This is a red colored text</label> |
-| <br/> | Inserts a line break. |
-| <tel number=""></tel> | Displays a telephone number on Native Applications. |
-| <a href="tel:"></a> | Displays a telephone number on Mobile Web platforms. |
-| > **_Note:_** If you need to apply multiple formats on the same text, the tags given in the above table can be nested. For example: <b><i><u>BoldItalicandUnderlined</u></i></b>. ||
+| &lt;b\> Text &lt;/b\> | Displays **Text** in Bold. |
+| &lt;i\> Text &lt;/i\> | Displays _Text_ in italics. |
+| &lt;u\> Text &lt;/u\> | Displays <u>Text</u> underlined. |
+| &lt;a href=""\> &lt;/a\> | This tag is used to display a link. It supports optional href attribute.<br/> **_Note:_** The skin attribute of the &lt;a\> tag, does not change the skin of the link inside the RichText widget. You must use the [linkSkin](RichText_Properties.md#linkSkin) Property to change the skin of the text given inside the &lt;a\> tag. |
+| &lt;img src="" \> &lt;/img\> | This tag is used to display an image and supports src attribute. The path for the image can be local or url based.<br/> **_Note:_** Specify the absolute path of an image for MobileWeb platforms. |
+| &lt;sub\>Subscript&lt;/sub\> | Displays text as <sub>Subscript</sub>. |
+| &lt;sup\>Superscript&lt;/sup\> | Displays text as <sup>Superscript</sup>. |
+| &lt;label style="color:#rgbhexformat"\> &lt;/label\> | Displays the text in the color specified. To display a red colored text, enter the following:<br/><code>&lt;label style="color:#FF0000"\>This is a red colored text&lt;/label\></code> |
+| &lt;br/\> | Inserts a line break. |
+| &lt;tel number=""\>&lt;/tel\> | Displays a telephone number on Native Applications. |
+| &lt;a href="tel:"\>&lt;/a\> | Displays a telephone number on Mobile Web platforms. |
+| **_Note:_** If you need to apply multiple formats on the same text, the tags given in the above table can be nested. For example:  For example: &lt;b\>&lt;i\>&lt;u\>BoldItalicandUnderlined&lt;/u\>&lt;/i\>&lt;/b\>. ||
 
 ### Customizing Appearance
 
