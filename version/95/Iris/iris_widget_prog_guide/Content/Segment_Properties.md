@@ -1148,9 +1148,15 @@ If you want to enable Swipe to delete feature for a row in the SegmentedUI then 
 frmSegment.mySegment.editStyle= constants.SEGUI_EDITING_STYLE_SWIPE;
 ```
 
-The following image illustrates the _Icon_ edit style:
+<!-- The following image illustrates the _Icon_ edit style: -->
 
-![Edit Style set as Icon](Resources/Images/EditStyle_Image.png)
+**Icon Edit Style**
+
+![Edit Style set as Icon](Resources/Images/Icon_EditStyle.gif)
+
+**Swipe Edit Style**
+
+![Edit Style set as Icon](Resources/Images/Swipe_EditStyle.gif)
 
 ### Platform Availability
 
@@ -3646,7 +3652,7 @@ To set the value through code, prefix the option with _constants._ such as _**co
 
 The following image illustrates the search with _startsWith_ criteria:
 
-![search with starts With criteria](Resources/Images/searchCriteria_Image.png)
+![search with starts With criteria](Resources/Images/searchCriteria_GIF.gif)
 
 ### Example
 
@@ -4562,12 +4568,12 @@ The following are the available view types that you can select and their appeara
 > *   **SEGUI\_VIEW\_TYPE\_TABLEVIEW**: The rows of the segment appear in a table as a list.  
 >       
 >     
->     ![](Resources/Images/View_Type_TableView_Image.png)  
+>     ![](Resources/Images/1_TableView_GIF.gif)  
 >     
 > *   **SEGUI\_VIEW\_TYPE\_PAGEVIEW**: The rows of the segment appear in pages and you need to scroll through the pages to view the rows.  
 >       
 >     
->     ![](Resources/Images/View_Type_PageView_Image.png)
+>     ![](Resources/Images/2_PageView_GIF.gif)
 >     
 > 
 > > **_Note:_** To avoid UI issues with segment, ensure that each page of segment with pageview has equal size and also the height of segment should fit into the screen viewport area.
@@ -4576,33 +4582,33 @@ The following are the available view types that you can select and their appeara
 > 
 > *   **SEGUI\_VIEW\_TYPE\_COVERFLOW**: Regular cover flow view. The cover flow view enables you to flip through the widgets placed in a segment and bring the associated widget into view. You can flip through the widgets placed in a segment as shown in the figure.
 
-> > > ![](Resources/Images/View_Type_CoverFlow_Image.png)
+> > > ![](Resources/Images/3_CoverFlow_GIF.gif)
 > 
 > Following are the options applicable to iPhone and iPad only.
 
 > *   **SEGUI\_VIEW\_TYPE\_CYLINDER**: Displays the widgets placed in a segment as a cylinder. All the widgets placed in a segment form a horizontal cylinder (polygon) and the cylinder rotates based on the user's gesture. In the Cylinder view, the widgets appear as if the user is viewing at the cylinder from outside. The widgets gets skewed as you move along the axis of reference of the cylinder. You can rotate the widgets placed in a segment around the axis of reference as shown in the figure.
 
-> > > ![](Resources/Images/View_Type_CylinderView_Image.png)
+> > > ![](Resources/Images/8_CylinderView_GIF.gif)
 
 > *   **SEGUI\_VIEW\_TYPE\_INVERTED\_CYLINDER**: Displays the widgets placed in a segment as a cylinder. All the widgets of the segment form a horizontal cylinder (polygon) and the cylinder rotates based on user's gesture. In the Inverted Cylinder view, the widgets placed in a segment appear as if the user is viewing the cylinder from inside. The widgets in a segment gets skewed as you move the segment along the axis of reference. You can rotate the widgets placed in a segment around the axis of reference as shown in the figure.
 
-> > > ![](Resources/Images/View_Type_Inverted_CylinderView_Image.png)
+> > > ![](Resources/Images/9_Inverted CylinderView_GIF.gif)
 
 > *   **SEGUI\_VIEW\_TYPE\_INVERTED\_ROTARY**: Displays the widgets placed in a segment that rotates around the axis of reference, where the current objects are projected inwards and the other widget appear closer to the user than the current widget. There won't be any widgets skewing or tilting like in the cover flow view.
 
-> > > ![](Resources/Images/View_Type_Inverted_RotaryView_Image.png)
+> > > ![](Resources/Images/7_Inverted RotaryView_GIF.gif)
 
 > *   **SEGUI\_VIEW\_TYPE\_LINEAR**: Displays the widgets placed in a segment in a linear view; which is very similar to the existing views, where you can scroll the widgets horizontally. You can scroll across the widgets by moving them forward or backward as shown in the figure.
 
-> > > ![](Resources/Images/View_Type_LinearView_Image.png)
+> > > ![](Resources/Images/5_LinearView_GIF.gif)
 
 > *   **SEGUI\_VIEW\_TYPE\_ROTARY**: Displays the widgets placed in a segment that rotates around the axis of reference, where the current widget protrudes outwards and other widget appear slightly behind the current widget. There won't be any widget skewing or tilting like in the cover flow view.
 
-> > > ![](Resources/Images/View_Type_RotaryView_Image.png)  
+> > > ![](Resources/Images/6_RotaryView_GIF.gif)  
 
 > *   **SEGUI\_VIEW\_TYPE\_STACK**: Custom stack view where the widgets placed in a segment appear as a stack. The widgets can be moved inside and outside the stack based on the user's gesture as shown in the figure below.
 
-> > > ![](Resources/Images/View_Type_StackView_Image.png)
+> > > ![](Resources/Images/4_StackView_GIF.gif)
 
 ### Example
 
