@@ -1,0 +1,1293 @@
+<!-- Elements added to main will be displayed on all pages -->
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/voltmx_ref_arch_api/Content/A_Deeper_Look_at_VoltMX_Reference_Architecture.html">
+      
+      
+        <link rel="prev" href="Advantages_of_Using_VoltMX_Reference_Architecture.html">
+      
+      
+        <link rel="next" href="VoltMX_Reference_Architecture_Features.html">
+      
+      <link rel="icon" href="../../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
+    
+    
+      
+        <title>A Deeper Look at VoltMX Reference Architecture - HCL Volt MX Documentation V9.2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.26e3688c.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/vmx_style.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#a-deeper-look-at-volt-mx-reference-architecture" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+<div class="content-types-banner">
+    <ul class="sub-nav">
+        <li class="home-link">
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/index.html"  class="sub-link ">Home</a>
+        </li>
+        <li>
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/tutorials/Tutorials.html" class="sub-link">Tutorials</a>
+        </li>
+        <li>
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/index.html" class="sub-link" id="docLink">Documentation</a>
+        </li>
+        <li>
+            <a href="https://support.hcltechsw.com/csm?id=kb_search&spa=1&kb_category=db382ff1db631c14a45ad9fcd3961936" title="Articles" class="sub-link">Articles</a>
+        </li>
+        <li>
+            <a href="https://hclsoftwareu.hcltechsw.com/#VoltMxLearningJourneys" title="Articles" class="sub-link">Software Academy</a>
+        </li>
+        <li style="float:right">
+          <button onclick="myFunction95()" style="color:white; border-radius:5px ;padding:5px 10px 5px 10px; border: 2px solid white;" class="sub-link" id="docLink92">Switch to V9.5</button>
+      </li>
+    </ul>
+</div>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="HCL Volt MX Documentation V9.2" class="md-header__button md-logo" aria-label="HCL Volt MX Documentation V9.2" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HCL Volt MX Documentation V9.2
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              A Deeper Look at VoltMX Reference Architecture
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    HCL-TECH-SOFTWARE/volt-mx-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="HCL Volt MX Documentation V9.2" class="md-nav__button md-logo" aria-label="HCL Volt MX Documentation V9.2" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.png" alt="logo">
+
+    </a>
+    HCL Volt MX Documentation V9.2
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    HCL-TECH-SOFTWARE/volt-mx-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+                 
+  
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1"
+    type="checkbox"
+    id="__nav_1"
+    checked
+  />
+             
+  <nav
+    class="md-nav md-nested-nav"
+    aria-label="Introducing Volt MX"
+    data-md-level="1"
+  >
+    <label class="md-nav__title" for="__nav_1">
+      <span class="md-nav__icon md-icon"></span>
+      Introducing Volt MX
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+       
+                
+<li class="md-nav__item">
+  <a href="../../../index.html" class="md-nav__link">
+    Introducing Volt MX
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_2"
+    type="checkbox"
+    id="__nav_1_2"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../../Whats_New_Main_Page.html"> What&apos;s New </a>
+    <label for="__nav_1_2">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="../../../VMX_release_notes.html" class="md-nav__link">
+    Release Notes
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_4"
+    type="checkbox"
+    id="__nav_1_4"
+    
+  />
+                  
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../app_platform/Content/AppPlatform_Overview.html"> App Platform </a>
+    <label for="__nav_1_4">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_5"
+    type="checkbox"
+    id="__nav_1_5"
+    
+  />
+                                                            
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../../tutorials/Tutorials.html"> Tutorials </a>
+    <label for="__nav_1_5">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="../../../Foundry/installationGuides.html" class="md-nav__link">
+    Installation Guides
+  </a>
+</li>
+    
+               
+  
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7"
+    type="checkbox"
+    id="__nav_1_7"
+    checked
+  />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../voltmxIrisFundamentals.html"> Iris </a>
+    <label for="__nav_1_7">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+  <nav
+    class="md-nav md-nested-nav"
+    aria-label="Iris"
+    data-md-level="2"
+  >
+    <label class="md-nav__title" for="__nav_1_7">
+      <span class="md-nav__icon md-icon"></span>
+      Iris
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+       
+                
+<li class="md-nav__item">
+  <a href="../../voltmxIrisFundamentals.html" class="md-nav__link">
+    Fundamentals
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_2"
+    type="checkbox"
+    id="__nav_1_7_2"
+    
+  />
+                                                                                       
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../installing_iris.html"> Installing Iris </a>
+    <label for="__nav_1_7_2">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_3"
+    type="checkbox"
+    id="__nav_1_7_3"
+    
+  />
+                                                                                                                  
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../iris_tutorials/Content/Introduction.html"> Iris tutorials </a>
+    <label for="__nav_1_7_3">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_4"
+    type="checkbox"
+    id="__nav_1_7_4"
+    
+  />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../iris_user_guide/Content/Introduction.html"> Iris User Guide </a>
+    <label for="__nav_1_7_4">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_5"
+    type="checkbox"
+    id="__nav_1_7_5"
+    
+  />
+                                                                                                                                                                                                                                                                                                                                              
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../app_design_dev/Content/homepage.html"> Application Design and Development Guidelines </a>
+    <label for="__nav_1_7_5">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_6"
+    type="checkbox"
+    id="__nav_1_7_6"
+    
+  />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../iris_api_dev_guide/content/introduction.html"> Volt Iris API Developers Guide </a>
+    <label for="__nav_1_7_6">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_7"
+    type="checkbox"
+    id="__nav_1_7_7"
+    
+  />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../iris_nf_api_dev_guide/content/native_function_api_developers__guide.html"> Native Function API Developers Guide </a>
+    <label for="__nav_1_7_7">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8"
+    type="checkbox"
+    id="__nav_1_7_8"
+    
+  />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../iris_widget_prog_guide/Content/Overview.html"> Iris Widget Programmer Guide </a>
+    <label for="__nav_1_7_8">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_9"
+    type="checkbox"
+    id="__nav_1_7_9"
+    
+  />
+                                                                                                
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../iris_wearables_dev_guide/content/homehtml.html"> Iris Wearables Developer Guide </a>
+    <label for="__nav_1_7_9">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_10"
+    type="checkbox"
+    id="__nav_1_7_10"
+    
+  />
+                                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../iris_app_viewer/Content/Overview.html"> Using the Volt MX App </a>
+    <label for="__nav_1_7_10">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+               
+  
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_11"
+    type="checkbox"
+    id="__nav_1_7_11"
+    checked
+  />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="VoltMX_Reference_Architecture_Guide.html"> Volt MX Reference Architecture Guide </a>
+    <label for="__nav_1_7_11">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+  <nav
+    class="md-nav md-nested-nav"
+    aria-label="Volt MX Reference Architecture Guide"
+    data-md-level="3"
+  >
+    <label class="md-nav__title" for="__nav_1_7_11">
+      <span class="md-nav__icon md-icon"></span>
+      Volt MX Reference Architecture Guide
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+       
+                
+<li class="md-nav__item">
+  <a href="VoltMX_Reference_Architecture_Guide.html" class="md-nav__link">
+    Volt MX Iris Reference Architecture API Programmers' Guide
+  </a>
+</li>
+    
+               
+  
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_11_2"
+    type="checkbox"
+    id="__nav_1_7_11_2"
+    checked
+  />
+                                                                                                    
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Overviews.html"> Overviews </a>
+    <label for="__nav_1_7_11_2">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+  <nav
+    class="md-nav md-nested-nav"
+    aria-label="Overviews"
+    data-md-level="4"
+  >
+    <label class="md-nav__title" for="__nav_1_7_11_2">
+      <span class="md-nav__icon md-icon"></span>
+      Overviews
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+       
+                
+<li class="md-nav__item">
+  <a href="Overviews.html" class="md-nav__link">
+    Overviews
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="VoltMX_Reference_Architecture_Decoded.html" class="md-nav__link">
+    Volt MX Reference Architecture&colon; Decoded
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Advantages_of_Using_VoltMX_Reference_Architecture.html" class="md-nav__link">
+    Advantages of Using Volt MX Reference Architecture
+  </a>
+</li>
+    
+               
+  
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_11_2_4"
+    type="checkbox"
+    id="__nav_1_7_11_2_4"
+    checked
+  />
+                                 
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="A_Deeper_Look_at_VoltMX_Reference_Architecture.html"> A Deeper Look at Volt MX Reference Architecture </a>
+    <label for="__nav_1_7_11_2_4">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+  <nav
+    class="md-nav md-nested-nav"
+    aria-label="A Deeper Look at Volt MX Reference Architecture"
+    data-md-level="5"
+  >
+    <label class="md-nav__title" for="__nav_1_7_11_2_4">
+      <span class="md-nav__icon md-icon"></span>
+      A Deeper Look at Volt MX Reference Architecture
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+       
+                
+<li class="md-nav__item md-nav__item--active">
+   
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="toc"
+    type="checkbox"
+    id="__toc"
+  />
+
+        
+  <label class="md-nav__link md-nav__link--active" for="__toc">
+    A Deeper Look at VoltMX Reference Architecture
+    <span class="md-nav__icon md-icon"></span>
+  </label>
+  
+  <a href="A_Deeper_Look_at_VoltMX_Reference_Architecture.html" class="md-nav__link md-nav__link--active">
+    A Deeper Look at VoltMX Reference Architecture
+  </a>
+
+    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#views" class="md-nav__link">
+    Views
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#controllers" class="md-nav__link">
+    Controllers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#models" class="md-nav__link">
+    Models
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#views-and-controllers" class="md-nav__link">
+    Views and Controllers
+  </a>
+  
+    <nav class="md-nav" aria-label="Views and Controllers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-actions" class="md-nav__link">
+    Add Actions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#share-controllers-between-forms" class="md-nav__link">
+    Share Controllers Between Forms
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#models-and-controllers" class="md-nav__link">
+    Models and Controllers
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+  
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="A_Deeper_Look_at_VoltMX_Reference_Architecture.html#views" class="md-nav__link">
+    Views
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="A_Deeper_Look_at_VoltMX_Reference_Architecture.html#controllers" class="md-nav__link">
+    Controllers
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="A_Deeper_Look_at_VoltMX_Reference_Architecture.html#models" class="md-nav__link">
+    Models
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="A_Deeper_Look_at_VoltMX_Reference_Architecture.html#views-and-controllers" class="md-nav__link">
+    Views and Controllers
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="A_Deeper_Look_at_VoltMX_Reference_Architecture.html#models-and-controllers" class="md-nav__link">
+    Models and Controllers
+  </a>
+</li>
+    
+    </ul>
+  </nav>
+  
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_11_2_5"
+    type="checkbox"
+    id="__nav_1_7_11_2_5"
+    
+  />
+                                       
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="VoltMX_Reference_Architecture_Features.html"> Volt MX Reference Architecture Features </a>
+    <label for="__nav_1_7_11_2_5">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_11_2_6"
+    type="checkbox"
+    id="__nav_1_7_11_2_6"
+    
+  />
+                                     
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Create_an_App_with_VoltMX_Reference_Architecture.html#build-your-front-end-client-app"> Create an App with Volt MX Reference Architecture </a>
+    <label for="__nav_1_7_11_2_6">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+    </ul>
+  </nav>
+  
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_11_3"
+    type="checkbox"
+    id="__nav_1_7_11_3"
+    
+  />
+                                                                                                                                                                                                                                                                                                                                                            
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="References.html"> References </a>
+    <label for="__nav_1_7_11_3">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+    </ul>
+  </nav>
+  
+</li>
+
+   
+    </ul>
+  </nav>
+  
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8"
+    type="checkbox"
+    id="__nav_1_8"
+    
+  />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../../Foundry/voltmxFoundryFundamentals.html"> Foundry </a>
+    <label for="__nav_1_8">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+    </ul>
+  </nav>
+  
+</li>
+
+ 
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#views" class="md-nav__link">
+    Views
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#controllers" class="md-nav__link">
+    Controllers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#models" class="md-nav__link">
+    Models
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#views-and-controllers" class="md-nav__link">
+    Views and Controllers
+  </a>
+  
+    <nav class="md-nav" aria-label="Views and Controllers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-actions" class="md-nav__link">
+    Add Actions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#share-controllers-between-forms" class="md-nav__link">
+    Share Controllers Between Forms
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#models-and-controllers" class="md-nav__link">
+    Models and Controllers
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="a-deeper-look-at-volt-mx-reference-architecture">A Deeper Look at Volt MX Reference Architecture</h1>
+<p>This section provides a more detailed examination of how Volt MX Reference Architecture works.</p>
+<p>The following diagram shows a detailed presentation of the MVC architecture used by Volt MX Reference Architecture.</p>
+<p><img alt="" src="Resources/Images/DetailedMVC_523x348.png" /></p>
+<p>In Volt MX Reference Architecture , the actual implementation of the MVC architecture generally uses forms, with their widgets, as the View. The Controller and the Model are JavaScript code modules that implement their respective functionality.</p>
+<p>Both the Controller and the Model are JavaScript modules. Volt MX Iris has a default naming scheme for your app's objects and files. So if you create a form in Volt MX Iris and set its name to <code>frmLogin</code>, then the Controller for that form is called <code>formLoginController</code> and it will be stored in a file called <code>frmLoginController.js</code>. Likewise, the file for the Model is named <code>frmLoginModel.js</code>. You can change these names in Volt MX Iris if you want to.</p>
+<p>The default naming scheme is important to keep in mind when you're using the <a href="References.html">References</a> section of this SDK's documentation. For instance, the <strong>References</strong> section contains documentation for the following objects.</p>
+<ul>
+<li>FormControllerObject</li>
+<li>TemplateController Object</li>
+</ul>
+<p>You will not actually find objects with these names in your code. Instead, under the default naming scheme, you will find names such as those used above. That is, if you name your form <code>frmLogin</code>, then the <a href="FormController_Object.html">FormController</a> object for that form is called <code>frmLoginController</code>. And if you have a form called <code>frmMain</code>, then that form will have a FormController object called <code>frmMainController</code> that's stored in a file called <code>frmMainController.js</code>. All of your other FormController objects and TemplateController objects will be similarly named.</p>
+<p>Note that there are some objects whose name is exactly what you see in the References section. These are as follows:</p>
+<ul>
+<li>voltmx.Model.Exception Object</li>
+<li>voltmx.Model.VoltMXApplicationContext Object</li>
+<li>Navigation Object</li>
+</ul>
+<p>Your code accesses these objects by using appropriate names.</p>
+<h2 id="views">Views</h2>
+<p>Views in an app are provided by forms. Forms can be built using templates or components. Apps under Volt MX Reference Architecture must have at least one form that functions as a View. More typically, apps have several forms, each one containing a variety of widgets for displaying information and for enabling user interaction. You create your app’s forms in Volt MX Iris and add widgets as needed. </p>
+<p>Templates enable you to provide your app with a uniform user interface. For instance, you can create a template for all of the buttons your app displays to make them all have the same colors, fonts, and shapes. If you make changes to the template, the changes propagate to all of the buttons that you have applied the template to. </p>
+<p>Views are never global under Volt MX Reference Architecture . They can only be accessed by their Controllers. In fact, each View is stored in a member variable in the class of its Controller. </p>
+<p>Volt MX Iris stores the forms for your Views in the Forms folder under the respective channels that you’re developing your app for. So, for instance, forms for mobile devices are stored in a Forms folder under the Mobile channel.</p>
+<h2 id="controllers">Controllers</h2>
+<p>Every View requires an associated Controller. Therefore, your app’s code can have form Controllers, component Controllers, and template Controllers in it.  They are all implemented as JavaScript modules. Controllers contain the business logic of an app. They communicate with the data Model objects to retrieve, update, and process the app’s data. Controller can communicate with as many Models as needed. </p>
+<p>When Controllers operate on an app’s data, they also send the data to the View to be displayed in the corresponding form, template, or component. In this way, it updates the user interface whenever there is a change in the displayed data from the Model. </p>
+<p>In addition to form Controllers and template Controllers, Volt MX Reference Architecture also provides Controller extensions. You can write Controller extensions in JavaScript modules to provide specialized or enhanced functionality for components. For example, suppose that you create a component that encapsulates all of the functionality for logging onto your backend database. Imagine that you are creating a new app and you drop the login component into your new app. Now you want to add the ability to log in using Facebook. With a Controller extension, you can add the Facebook login functionality to your login componen without changing the base login componen itself. You just add in some new UI elements and add the new functionality for logging in with Facebook to a Controller extension that you write. That way, none of your new code impacts the standard login component that you’ve created and that you use in all of your apps. Each individual app can enhance the standard login component in any way you need without you having to modify the standard login component itself. </p>
+<p>(There is no figure in the doc so hat line has to go) 
+ (This doesn't exist in 8.4 or 9, it's a Look properties setting, so this has to go) </p>
+<h2 id="models">Models</h2>
+<p>It's often the case that apps communicate with, retrieve data from, and update multiple data sources. Each data source is represented to the app as a Model. Models encapsulate data sources and make it possible for your app to access them in a standardized way. The data sources that Models encapsulate can be on the user's device or remotely accessible across the Internet.</p>
+<p>Models are optional in your apps. Simple apps might not use them. For example, a calculator app would not need Models because the data it operates on is probably nothing more than a few variables containing some numbers.</p>
+<p>Most enterprise-level apps use Models to interface to backend data sources. Typically, developers who create their apps with Volt MX Iris will also use VoltMX Foundry to create their server-side apps that provide access to their backend data sources. This is not required, it's just the easiest way to build your app. If you decide to use Volt MX Foundry for your backend app, you can get it to generate your Models for you. More specifically, you create your backend app by building object services with Volt MX Foundry . Utilizing the Volt MX Foundry console, you can then generate Models, called object Models, that provide your front-end Volt MX Iris app with access to your backend app's object services. After you generate your object Models for all of your backend data sources, Volt MX Iris downloads them into your front-end Volt MX Reference Architecture project that you are building in Volt MX Iris on your local development PC . The object Models provide your front-end app with code that enables the app to retrieve data from the backend object services, update, create, or delete the data, and save the changes to the backend object services.</p>
+<p>One of the many advantages of using Models to represent your data sources is that designers and developers working on the front-end app don't have to wait until the backend Volt MX Foundry app is complete before they start their work. Developers on the front-end app can build objects that provide <em>mock services</em> to the app. That is, developers can create Models to use in the front-end app that simulate the interaction that the front-end Volt MX Reference Architecture app will have with the backend Volt MX Foundry app when the backend app is complete. Using these mock services, both the front-end app and the backend app can be under development at the same time.</p>
+<p>Volt MX  Reference Architecture also provides you with object Model extensions that you can put custom code into to enable your app to do data validation or process the data before it is displayed or saved. Volt MX Iris generates the object Model extension for you and includes them in your Volt MX Iris project.</p>
+<p>Models are stored as a shared resource in your Volt MX Iris project.</p>
+<h2 id="views-and-controllers">Views and Controllers</h2>
+<p>Forms under VoltMXReference Architecture work very similarly to the way they work in a <a href="../../iris_user_guide/Content/Adding_Forms_to_a_New_Application.html">free form JavaScript app built with Volt MX Iris</a>. For example, whether you're building a VoltMXReference Architecture app or a free form JavaScript app, you can drag and drop forms, widgets, and so forth onto any form using the WYSIWYG editor in Volt MX Iris. You can use forms across multiple channels. That is, you can use the same form for Android phones, iOS phones, and so on, Or, if you prefer, you can use specific forms for specific channels.</p>
+<p>The main difference between forms in Volt MX Reference Architecture and forms in a free form JavaScript application is that forms in Volt MX Reference Architecture have Controllers associated with them. Volt MX Iris automatically generates form Controllers for each form you add to your UI. When you <a href="../../iris_user_guide/Content/working_with_Action_Editor.html">add actions</a> to forms in Volt MX Reference Architecture , Volt MX Iris automatically generates action Controllers for them.</p>
+<p>Views are only available from within the form's Controller. So only the form's Controller can update the form's data. Your app uses the <a href="voltmx.mvc_Functions.html#Navigation">voltmx.mvc.Navigation</a> function to create a <a href="Navigation_Object.html">Navigation object</a>. It can then call the <code>Navigation</code> object's <a href="Navigation_Object_Methods.html#navigate">navigate</a> function to move from form to form. Because access to a form only happens through the form's Controller, your app cannot call a form's <a href="../../iris_widget_prog_guide/Content/FlexForm_Methods.html#show">show</a> or <a href="../../iris_widget_prog_guide/Content/FlexForm_Methods.html#destroy">destroy</a> methods. Only a form's Controller can display the form on the screen. And if your app needs to destroy a form it calls <a href="../../iris_api_dev_guide/content/voltmx.application_functions.html">voltmx.application.destroyForm</a>, which destroys the form, its Controller, all widgets it contains, and its children.</p>
+<h4 id="add-actions">Add Actions</h4>
+<p>Volt MX  Iris enables you to add actions to your app's widgets. In fact, this is the way to add actions to your app's form Controllers. When you add actions to a widget, the <code>this</code> keyword inside the widget's callbacks refers to the form Controller. To add a function in a Controller as the event callback handler for a widget's event, your app uses code similar to the following.</p>
+<p>btntest.onClick = Controller.AS_Button_OnClickEvent;</p>
+<p>In the code snippet shown here, <code>btntest</code> is the name of a <code>Button</code> widget. This snippet sets the <code>Button</code> widget.'s <code>onClick</code> event. The event callback handler is the <code>AS_Button_OnClickEvent</code> function, which is a member of the <code>Controller</code> object. The <code>Controller</code> object is an object that Volt MX Iris generates for your form. The <code>AS_Button_OnClickEvent</code> function is written by you.</p>
+<p>The following code sample demonstrates how an application might add an event callback handler to a button.</p>
+<pre><code>define('frmLogin', function() {
+ return function(Controller) {
+  function addWidgetsfrmLogin() {
+   this.setDefaultUnit(voltmx.flex.DP);
+   var btnSetIPAddress = new voltmx.ui.Button({
+    &quot;height&quot;: &quot;55dp&quot;,
+    &quot;id&quot;: &quot;btnSetIPAddress&quot;,
+    &quot;onClick&quot;: Controller.AS_Button_6c7c9d022bcc4a61a603aa3c89110efe,
+    &quot;skin&quot;: &quot;buttonOnfrmLoginSkin&quot;,
+    &quot;text&quot;: &quot;Set IPAddress&quot;,
+    &quot;width&quot;: &quot;25%&quot;,
+    &quot;zIndex&quot;: 1
+   }, {
+    &quot;contentAlignment&quot;: constants.CONTENT_ALIGN_CENTER,
+    &quot;displayText&quot;: true,
+    &quot;padding&quot;: [0, 0, 0, 0],
+    &quot;paddingInPixel&quot;: false
+   }, {});
+   this.add(btnSetIPAddress);
+  };
+  return [{
+    &quot;addWidgets&quot;: addWidgetsfrmLogin,
+    &quot;id&quot;: &quot;frmLogin&quot;,
+    &quot;layoutType&quot;: voltmx.flex.FLOW_VERTICAL
+   },
+   {
+    &quot;displayOrientation&quot;: constants.FORM_DISPLAY_ORIENTATION_PORTRAIT,
+   },
+   {
+    &quot;retainScrollPosition&quot;: false,
+    &quot;titleBar&quot;: false
+   }
+  ]
+ };
+});
+</code></pre>
+<p>The example above adds a <code>Button</code> widget called <code>btnSetIPAddress</code> to a form called <code>frmLogin</code>, which is a form that is used to display a login screen. For the onClick event, the example sets a function called <code>AS_Button_6c7c9d022bcc4a61a603aa3c89110efe</code> as the event callback handler.</p>
+<h4 id="share-controllers-between-forms">Share Controllers Between Forms</h4>
+<p>Typically, each form has its own Form Controller. However, you can assign a Controller to multiple forms if you choose to do so. If the forms that share the Controller are specific to a particular channel, such as iOS, Volt MX Iris automatically stores the shared Form Controller in a folder under that specific channel.</p>
+<p>It is also possible for forms that are used across channels to share a single Form Controller. Let us suppose that your app has a set of three forms that are used on both the iPhone and Android phones. Furthermore, consider that all three of those forms share the same Controller. In such a scenario, the shared Form Controller can be found in a folder outside of the iOS and Android channels that is specifically for shared Controllers.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> It is not possible to share the <strong>ControllerActions</strong> JavaScript file between multiple forms.</p>
+</blockquote>
+<p>While developing your app, you can specialize existing forms for particular channels. This process is called <em>forking</em> the form because Volt MX Iris actually creates a new version of the form for the specific channel. If you fork the form, it automatically forks its Controller. Forked forms cannot be shared.</p>
+<p><strong>To share a Controller between forms, follow these steps</strong>:</p>
+<ol>
+<li>
+<p>In your <a href="../../iris_user_guide/Content/CreateKRAProject.html">VoltMXReference Architecture project</a>, click the form with which you want to share a Controller. Here, <strong>frmIncidentDetails</strong> is the selected form in the Responsive Web channel.  </p>
+<p><img alt="" src="Resources/Images/Share_Controller_frmIncidentDetails_292x306.png" />
+2.  Go to the <strong>Properties</strong> panel &gt; <strong>Look</strong> tab.
+3.  For the <strong>Controller</strong> field and beside the Form Controller name, click the Ellipsis Menu icon <img alt="" src="Resources/Images/Ellipsis_icon_31x32.png" />. Here, <strong>frmIncidentDetailsController</strong> is the Form Controller of the <strong>frmIncidentDetails</strong> form. The <strong>Switch Controller</strong> window appears, with the list of available Controllers in different channels and <strong>frmIncidentDetailsController</strong> in the Desktop (Responsive Web) channel selected by default.  </p>
+<p><img alt="" src="Resources/Images/Controller_408x232.png" />
+4.  Click the Controller that you want to share with the form. Here, we have selected <strong>frmIncidentDetailsController</strong> of the <strong>frmIncidentDetails</strong> Mobile form.  </p>
+<p><img alt="" src="Resources/Images/Share_Controller_Desktop_344x396.png" />
+5.  Click <strong>Apply</strong>. The <strong>frmIncidentDetailsController</strong> of the <strong>frmIncidentDetails</strong> Mobile form is shared with the <strong>frmIncidentDetails</strong> Responsive Web form. A new folder called <strong>Shared Controllers</strong> is also created in the Project Explorer, with <strong>frmIncidentDetailsController</strong> placed under it. When you write any code in the <strong>frmIncidentDetailsController</strong> JavaScript file, the code is shared with all the forms that this Controller is shared with.  </p>
+<p><img alt="" src="Resources/Images/Shared_Controllers_Folder_268x276.png" />  </p>
+</li>
+</ol>
+<h2 id="models-and-controllers">Models and Controllers</h2>
+<p>Models encapsulate data storage locations and provide a standardized interface for creating data on those data storage locations, reading it into the app, updating it, and deleting it. The data storage locations can be on the user's device or remotely connected across a local network or the Internet. Wherever the data resides, the app uses Models as a standard way of accessing it.</p>
+<p>In VoltMXReference Architecture , Controllers contain the app's business logic. Therefore, an app's Controllers use Models to perform operations on data storage locations, which are often referred to as <em>data sources</em>.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2021 - 2023, HCL America, Inc. | <a href="https://hcltechsw.com/wps/portal/legal/privacy">Privacy Statement</a> | <a href="https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.hcltechsw.com%2Fwps%2Fportal%2Flegal%2Fterms-use&data=04%7C01%7Csuresh.chenji%40hcl.com%7Ca77ebddc51574aff8c6c08d8f056542d%7C189de737c93a4f5a8b686f4ca9941912%7C0%7C0%7C637523600856805537%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&sdata=vLnT466NGuIbvQ0nEwfn2qdXeuhHb6XOnh1pibATDI4%3D&reserved=0">Terms of Use</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+<div class="md-social">
+  <ul class="social-nav">
+    <li><a href="https://www.facebook.com/HCLDigital" class="facebook" target="_blank">Facebook</a></li>
+    <li><a href="https://www.linkedin.com/company/hclsoftware" class="linkedin" target="_blank">LinkedIn</a></li>
+    <li><a href="https://twitter.com/HCLDigital"  class="twitter" target="_blank">Twitter</a></li>
+    <li><a href="https://www.youtube.com/HCLDigitalSolutions" class="youtube" target="_blank">Youtube</a></li>
+    <li>
+      <a href="https://github.com/HCL-TECH-SOFTWARE" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    </li>
+  </ul>    
+</div>
+  </div>
+  <div class="md-footer-meta__inner md-grid">
+  <span class="md-footer__git_legacy">Please report problems with this documentation by <a class="announcement__link" href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/issues">opening issues in Github</a>.</span>
+  <span class="legacy-link md-footer__git_legacy">Can't find a topic? Check the legacy documentation <a class="announcement__link" href="https://opensource.hcltechsw.com/Volt-MX-Documentation-Archive/docs/documentation/" target="_blank">here</a>.</span>
+</span>
+    </div>
+</div>
+    <script>
+      function myFunction95(){
+          var initial_url = document.location.href;
+          var url_stub = initial_url.split( 'docs/documentation' );
+          var fixed_url = url_stub[0]+'95/docs/documentation';
+		  console.log(fixed_url);
+//          var fixed_url = 'https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation'
+          var url = initial_url.split( '/' );
+          var updated_url
+          if ( url[ url.length - 2 ] == "Foundry" || url[ url.length - 2 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 2 ] == "articles" || url[ url.length - 2] == "getting-started" || url[ url.length - 2 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 3 ] == "Foundry" || url[ url.length - 3 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 3 ] == "articles" || url[ url.length - 3 ] == "getting-started" || url[ url.length - 3 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 4 ] == "Foundry" || url[ url.length - 4 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 4 ] == "articles" || url[ url.length - 4 ] == "getting-started" || url[ url.length - 4 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 5 ] == "Foundry" || url[ url.length - 5 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 5 ] == "articles" || url[ url.length - 5 ] == "getting-started" || url[ url.length - 5 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 5 ] + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 6 ] == "Foundry" || url[ url.length - 6 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 6 ] == "articles" || url[ url.length - 6 ] == "getting-started" || url[ url.length - 6 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 6 ] + '/' + url[ url.length - 5 ] + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else{
+            updated_url= fixed_url + '/' + url[ url.length - 1];
+          }
+          window.location.replace(updated_url);
+          }
+    </script>
+
+  
+
+</footer>
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant"], "search": "../../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+    
+  </body>
+</html>

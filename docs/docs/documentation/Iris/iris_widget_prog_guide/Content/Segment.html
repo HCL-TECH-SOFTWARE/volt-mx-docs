@@ -1,0 +1,3530 @@
+<!-- Elements added to main will be displayed on all pages -->
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_widget_prog_guide/Content/Segment.html">
+      
+      
+        <link rel="prev" href="RichText_Properties.html">
+      
+      
+        <link rel="next" href="Segment_Events.html">
+      
+      <link rel="icon" href="../../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
+    
+    
+      
+        <title>SegmentedUI Widget Basics - HCL Volt MX Documentation V9.2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.26e3688c.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/vmx_style.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#segmentedui-widget-table" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+<div class="content-types-banner">
+    <ul class="sub-nav">
+        <li class="home-link">
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/index.html"  class="sub-link ">Home</a>
+        </li>
+        <li>
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/tutorials/Tutorials.html" class="sub-link">Tutorials</a>
+        </li>
+        <li>
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/index.html" class="sub-link" id="docLink">Documentation</a>
+        </li>
+        <li>
+            <a href="https://support.hcltechsw.com/csm?id=kb_search&spa=1&kb_category=db382ff1db631c14a45ad9fcd3961936" title="Articles" class="sub-link">Articles</a>
+        </li>
+        <li>
+            <a href="https://hclsoftwareu.hcltechsw.com/#VoltMxLearningJourneys" title="Articles" class="sub-link">Software Academy</a>
+        </li>
+        <li style="float:right">
+          <button onclick="myFunction95()" style="color:white; border-radius:5px ;padding:5px 10px 5px 10px; border: 2px solid white;" class="sub-link" id="docLink92">Switch to V9.5</button>
+      </li>
+    </ul>
+</div>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="HCL Volt MX Documentation V9.2" class="md-header__button md-logo" aria-label="HCL Volt MX Documentation V9.2" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HCL Volt MX Documentation V9.2
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SegmentedUI Widget Basics
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    HCL-TECH-SOFTWARE/volt-mx-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="HCL Volt MX Documentation V9.2" class="md-nav__button md-logo" aria-label="HCL Volt MX Documentation V9.2" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.png" alt="logo">
+
+    </a>
+    HCL Volt MX Documentation V9.2
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    HCL-TECH-SOFTWARE/volt-mx-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+                 
+  
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1"
+    type="checkbox"
+    id="__nav_1"
+    checked
+  />
+             
+  <nav
+    class="md-nav md-nested-nav"
+    aria-label="Introducing Volt MX"
+    data-md-level="1"
+  >
+    <label class="md-nav__title" for="__nav_1">
+      <span class="md-nav__icon md-icon"></span>
+      Introducing Volt MX
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+       
+                
+<li class="md-nav__item">
+  <a href="../../../index.html" class="md-nav__link">
+    Introducing Volt MX
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_2"
+    type="checkbox"
+    id="__nav_1_2"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../../Whats_New_Main_Page.html"> What&apos;s New </a>
+    <label for="__nav_1_2">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="../../../VMX_release_notes.html" class="md-nav__link">
+    Release Notes
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_4"
+    type="checkbox"
+    id="__nav_1_4"
+    
+  />
+                  
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../app_platform/Content/AppPlatform_Overview.html"> App Platform </a>
+    <label for="__nav_1_4">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_5"
+    type="checkbox"
+    id="__nav_1_5"
+    
+  />
+                                                            
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../../tutorials/Tutorials.html"> Tutorials </a>
+    <label for="__nav_1_5">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="../../../Foundry/installationGuides.html" class="md-nav__link">
+    Installation Guides
+  </a>
+</li>
+    
+               
+  
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7"
+    type="checkbox"
+    id="__nav_1_7"
+    checked
+  />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../voltmxIrisFundamentals.html"> Iris </a>
+    <label for="__nav_1_7">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+  <nav
+    class="md-nav md-nested-nav"
+    aria-label="Iris"
+    data-md-level="2"
+  >
+    <label class="md-nav__title" for="__nav_1_7">
+      <span class="md-nav__icon md-icon"></span>
+      Iris
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+       
+                
+<li class="md-nav__item">
+  <a href="../../voltmxIrisFundamentals.html" class="md-nav__link">
+    Fundamentals
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_2"
+    type="checkbox"
+    id="__nav_1_7_2"
+    
+  />
+                                                                                       
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../installing_iris.html"> Installing Iris </a>
+    <label for="__nav_1_7_2">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_3"
+    type="checkbox"
+    id="__nav_1_7_3"
+    
+  />
+                                                                                                                  
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../iris_tutorials/Content/Introduction.html"> Iris tutorials </a>
+    <label for="__nav_1_7_3">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_4"
+    type="checkbox"
+    id="__nav_1_7_4"
+    
+  />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../iris_user_guide/Content/Introduction.html"> Iris User Guide </a>
+    <label for="__nav_1_7_4">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_5"
+    type="checkbox"
+    id="__nav_1_7_5"
+    
+  />
+                                                                                                                                                                                                                                                                                                                                              
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../app_design_dev/Content/homepage.html"> Application Design and Development Guidelines </a>
+    <label for="__nav_1_7_5">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_6"
+    type="checkbox"
+    id="__nav_1_7_6"
+    
+  />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../iris_api_dev_guide/content/introduction.html"> Volt Iris API Developers Guide </a>
+    <label for="__nav_1_7_6">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_7"
+    type="checkbox"
+    id="__nav_1_7_7"
+    
+  />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../iris_nf_api_dev_guide/content/native_function_api_developers__guide.html"> Native Function API Developers Guide </a>
+    <label for="__nav_1_7_7">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+               
+  
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8"
+    type="checkbox"
+    id="__nav_1_7_8"
+    checked
+  />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Overview.html"> Iris Widget Programmer Guide </a>
+    <label for="__nav_1_7_8">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+  <nav
+    class="md-nav md-nested-nav"
+    aria-label="Iris Widget Programmer Guide"
+    data-md-level="3"
+  >
+    <label class="md-nav__title" for="__nav_1_7_8">
+      <span class="md-nav__icon md-icon"></span>
+      Iris Widget Programmer Guide
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+       
+                
+<li class="md-nav__item">
+  <a href="Overview.html" class="md-nav__link">
+    Overview
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="widgetApiReference.html" class="md-nav__link">
+    Widgets and API reference
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="GestureAPI.html" class="md-nav__link">
+    Gesture Methods and 3D Touch
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Widget_Skins.html" class="md-nav__link">
+    Widget Skins
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Dynamic_Skinning.html" class="md-nav__link">
+    Dynamic Skinning
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Application_Events.html" class="md-nav__link">
+    Application  Initialization Events
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_7"
+    type="checkbox"
+    id="__nav_1_7_8_7"
+    
+  />
+                     
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Animation.html"> Widget Animation Using Flex Forms </a>
+    <label for="__nav_1_7_8_7">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="API_Simplification.html" class="md-nav__link">
+    API Simplification
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Masters.html" class="md-nav__link">
+    Masters
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Widget_Common_Properties.html" class="md-nav__link">
+    Widget Common Properties
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_11"
+    type="checkbox"
+    id="__nav_1_7_8_11"
+    
+  />
+                     
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="PlatformSpecificCapabilities.html#ios"> Platform Specific Capabilities </a>
+    <label for="__nav_1_7_8_11">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="Appendix.html" class="md-nav__link">
+    Platform Specific Limitations
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_13"
+    type="checkbox"
+    id="__nav_1_7_8_13"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Alert.html"> Alert Widget </a>
+    <label for="__nav_1_7_8_13">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_14"
+    type="checkbox"
+    id="__nav_1_7_8_14"
+    
+  />
+                        
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="App_Menu.html"> App Menu Widget </a>
+    <label for="__nav_1_7_8_14">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_15"
+    type="checkbox"
+    id="__nav_1_7_8_15"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="ARRenderer.html"> ARRenderer Widget </a>
+    <label for="__nav_1_7_8_15">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_16"
+    type="checkbox"
+    id="__nav_1_7_8_16"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="BottomSheet.html"> BottomSheet Widget </a>
+    <label for="__nav_1_7_8_16">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_17"
+    type="checkbox"
+    id="__nav_1_7_8_17"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Browser.html"> Browser Widget </a>
+    <label for="__nav_1_7_8_17">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_18"
+    type="checkbox"
+    id="__nav_1_7_8_18"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Button.html"> Button Widget </a>
+    <label for="__nav_1_7_8_18">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_19"
+    type="checkbox"
+    id="__nav_1_7_8_19"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Calendar.html"> Calendar Widget </a>
+    <label for="__nav_1_7_8_19">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_20"
+    type="checkbox"
+    id="__nav_1_7_8_20"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Camera.html"> Camera Widget </a>
+    <label for="__nav_1_7_8_20">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_21"
+    type="checkbox"
+    id="__nav_1_7_8_21"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="canvas.html"> Canvas Widget </a>
+    <label for="__nav_1_7_8_21">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_22"
+    type="checkbox"
+    id="__nav_1_7_8_22"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="CheckBox.html"> CheckBoxGroup Widget </a>
+    <label for="__nav_1_7_8_22">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_23"
+    type="checkbox"
+    id="__nav_1_7_8_23"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="CollectionView.html"> CollectionView Widget </a>
+    <label for="__nav_1_7_8_23">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_24"
+    type="checkbox"
+    id="__nav_1_7_8_24"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="CordovaBrowser.html"> CordovaBrowser Widget </a>
+    <label for="__nav_1_7_8_24">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_25"
+    type="checkbox"
+    id="__nav_1_7_8_25"
+    
+  />
+                              
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="DataGrid.html"> DataGrid Widget </a>
+    <label for="__nav_1_7_8_25">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_26"
+    type="checkbox"
+    id="__nav_1_7_8_26"
+    
+  />
+                                 
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="FlexContainer.html"> FlexContainer Widget </a>
+    <label for="__nav_1_7_8_26">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_27"
+    type="checkbox"
+    id="__nav_1_7_8_27"
+    
+  />
+                                    
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="FlexForm.html"> FlexForm Widget </a>
+    <label for="__nav_1_7_8_27">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_28"
+    type="checkbox"
+    id="__nav_1_7_8_28"
+    
+  />
+                                 
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="FlexScrollContainer.html"> FlexScrollContainer Widget </a>
+    <label for="__nav_1_7_8_28">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_29"
+    type="checkbox"
+    id="__nav_1_7_8_29"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Image.html"> Image Widget </a>
+    <label for="__nav_1_7_8_29">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_30"
+    type="checkbox"
+    id="__nav_1_7_8_30"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="label.html"> Label Widget </a>
+    <label for="__nav_1_7_8_30">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_31"
+    type="checkbox"
+    id="__nav_1_7_8_31"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="ListBox.html"> ListBox Widget </a>
+    <label for="__nav_1_7_8_31">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_32"
+    type="checkbox"
+    id="__nav_1_7_8_32"
+    
+  />
+                                 
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Map.html"> Map Widget </a>
+    <label for="__nav_1_7_8_32">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_33"
+    type="checkbox"
+    id="__nav_1_7_8_33"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="MLCamera.html"> MLCamera Widget </a>
+    <label for="__nav_1_7_8_33">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_34"
+    type="checkbox"
+    id="__nav_1_7_8_34"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="nativeContainer.html"> NativeContainer Widget </a>
+    <label for="__nav_1_7_8_34">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_35"
+    type="checkbox"
+    id="__nav_1_7_8_35"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="PDFView.html"> PDFView Widget </a>
+    <label for="__nav_1_7_8_35">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_36"
+    type="checkbox"
+    id="__nav_1_7_8_36"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Phone.html"> Phone Widget </a>
+    <label for="__nav_1_7_8_36">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_37"
+    type="checkbox"
+    id="__nav_1_7_8_37"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="PickerView.html"> PickerView Widget </a>
+    <label for="__nav_1_7_8_37">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_38"
+    type="checkbox"
+    id="__nav_1_7_8_38"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="RadioButtonGroup.html"> RadioButtonGroup Widget </a>
+    <label for="__nav_1_7_8_38">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_39"
+    type="checkbox"
+    id="__nav_1_7_8_39"
+    
+  />
+                     
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="react_Native_Container.html"> ReactNativeContainer Widget </a>
+    <label for="__nav_1_7_8_39">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_40"
+    type="checkbox"
+    id="__nav_1_7_8_40"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="RichText.html"> RichText Widget </a>
+    <label for="__nav_1_7_8_40">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+               
+  
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_41"
+    type="checkbox"
+    id="__nav_1_7_8_41"
+    checked
+  />
+                              
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Segment.html"> SegmentedUI Widget </a>
+    <label for="__nav_1_7_8_41">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+  <nav
+    class="md-nav md-nested-nav"
+    aria-label="SegmentedUI Widget"
+    data-md-level="4"
+  >
+    <label class="md-nav__title" for="__nav_1_7_8_41">
+      <span class="md-nav__icon md-icon"></span>
+      SegmentedUI Widget
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+       
+                
+<li class="md-nav__item md-nav__item--active">
+   
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="toc"
+    type="checkbox"
+    id="__toc"
+  />
+
+        
+  <label class="md-nav__link md-nav__link--active" for="__toc">
+    SegmentedUI Widget Basics
+    <span class="md-nav__icon md-icon"></span>
+  </label>
+  
+  <a href="Segment.html" class="md-nav__link md-nav__link--active">
+    SegmentedUI Widget Basics
+  </a>
+
+    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table" class="md-nav__link">
+    Table
+  </a>
+  
+    <nav class="md-nav" aria-label="Table">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3d-touch" class="md-nav__link">
+    3D Touch
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#animations" class="md-nav__link">
+    Animations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-management" class="md-nav__link">
+    Data Management
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internationalization" class="md-nav__link">
+    Internationalization
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layout" class="md-nav__link">
+    Layout
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paging" class="md-nav__link">
+    Paging
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state-configurations" class="md-nav__link">
+    State Configurations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ui-appearance" class="md-nav__link">
+    UI Appearance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#user-input-handling" class="md-nav__link">
+    User Input Handling
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enabling-rtl" class="md-nav__link">
+    Enabling RTL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#miscellaneous" class="md-nav__link">
+    Miscellaneous
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurations-common-to-all-widgets" class="md-nav__link">
+    Configurations Common to All widgets
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#segmentedui-widget-basics" class="md-nav__link">
+    SegmentedUI Widget Basics
+  </a>
+  
+    <nav class="md-nav" aria-label="SegmentedUI Widget Basics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-segmentedui-by-using-a-constructor-voltmxuisegmentedui2" class="md-nav__link">
+    Creating a SegmentedUI by using a constructor: voltmx.ui.SegmentedUI2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#important-considerations" class="md-nav__link">
+    Important Considerations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-a-listbox-widget-inside-a-segment" class="md-nav__link">
+    Adding a ListBox Widget inside a Segment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#row-animation" class="md-nav__link">
+    Row Animation
+  </a>
+  
+    <nav class="md-nav" aria-label="Row Animation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#available-animations" class="md-nav__link">
+    Available Animations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#row-animations-and-flex-layout-properties" class="md-nav__link">
+    Row Animations and Flex Layout Properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#row-animation-events" class="md-nav__link">
+    Row Animation Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#row-animation-api-elements" class="md-nav__link">
+    Row Animation API Elements
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#segmentedui-templates" class="md-nav__link">
+    SegmentedUI Templates
+  </a>
+  
+    <nav class="md-nav" aria-label="SegmentedUI Templates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-a-template-for-segmentedui" class="md-nav__link">
+    What is a Template for SegmentedUI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#where-to-use-a-segmentedui-section-template" class="md-nav__link">
+    Where to use a SegmentedUI (section) Template
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-template-for-segmentedui" class="md-nav__link">
+    Creating a Template for SegmentedUI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-segmentedui-section-template" class="md-nav__link">
+    Using SegmentedUI Section Template
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+  
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="Segment_Events.html" class="md-nav__link">
+    Events
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Segment_Methods.html" class="md-nav__link">
+    Methods
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Segment_Properties.html" class="md-nav__link">
+    Properties
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="SegmentedUIObjects.html" class="md-nav__link">
+    Objects
+  </a>
+</li>
+    
+    </ul>
+  </nav>
+  
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_42"
+    type="checkbox"
+    id="__nav_1_7_8_42"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Signature.html"> SignatureCapture Widget </a>
+    <label for="__nav_1_7_8_42">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_43"
+    type="checkbox"
+    id="__nav_1_7_8_43"
+    
+  />
+                        
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="SigninWithApple.html"> SigninWithApple Widget </a>
+    <label for="__nav_1_7_8_43">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_44"
+    type="checkbox"
+    id="__nav_1_7_8_44"
+    
+  />
+                              
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Slider.html"> Slider Widget </a>
+    <label for="__nav_1_7_8_44">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_45"
+    type="checkbox"
+    id="__nav_1_7_8_45"
+    
+  />
+                        
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="SlidingContainer.html"> SlidingContainer Widget </a>
+    <label for="__nav_1_7_8_45">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_46"
+    type="checkbox"
+    id="__nav_1_7_8_46"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Switch.html"> Switch Widget </a>
+    <label for="__nav_1_7_8_46">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_47"
+    type="checkbox"
+    id="__nav_1_7_8_47"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="TabPane.html"> TabPane Widget </a>
+    <label for="__nav_1_7_8_47">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_48"
+    type="checkbox"
+    id="__nav_1_7_8_48"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="TextArea.html"> TextArea2 Widget </a>
+    <label for="__nav_1_7_8_48">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_49"
+    type="checkbox"
+    id="__nav_1_7_8_49"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="TextBox.html"> TextBox2 Widget </a>
+    <label for="__nav_1_7_8_49">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_50"
+    type="checkbox"
+    id="__nav_1_7_8_50"
+    
+  />
+                              
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Toolbar.html"> Toolbar Widget </a>
+    <label for="__nav_1_7_8_50">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_8_51"
+    type="checkbox"
+    id="__nav_1_7_8_51"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Video.html"> Video Widget </a>
+    <label for="__nav_1_7_8_51">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="Deprecated.html" class="md-nav__link">
+    Deprecated Widgets
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Glossary.html" class="md-nav__link">
+    Glossary
+  </a>
+</li>
+    
+    </ul>
+  </nav>
+  
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_9"
+    type="checkbox"
+    id="__nav_1_7_9"
+    
+  />
+                                                                                                
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../iris_wearables_dev_guide/content/homehtml.html"> Iris Wearables Developer Guide </a>
+    <label for="__nav_1_7_9">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_10"
+    type="checkbox"
+    id="__nav_1_7_10"
+    
+  />
+                                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../iris_app_viewer/Content/Overview.html"> Using the Volt MX App </a>
+    <label for="__nav_1_7_10">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7_11"
+    type="checkbox"
+    id="__nav_1_7_11"
+    
+  />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../voltmx_ref_arch_api/Content/VoltMX_Reference_Architecture_Guide.html"> Volt MX Reference Architecture Guide </a>
+    <label for="__nav_1_7_11">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+    </ul>
+  </nav>
+  
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8"
+    type="checkbox"
+    id="__nav_1_8"
+    
+  />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../../Foundry/voltmxFoundryFundamentals.html"> Foundry </a>
+    <label for="__nav_1_8">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+    </ul>
+  </nav>
+  
+</li>
+
+ 
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table" class="md-nav__link">
+    Table
+  </a>
+  
+    <nav class="md-nav" aria-label="Table">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3d-touch" class="md-nav__link">
+    3D Touch
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#animations" class="md-nav__link">
+    Animations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-management" class="md-nav__link">
+    Data Management
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internationalization" class="md-nav__link">
+    Internationalization
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layout" class="md-nav__link">
+    Layout
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paging" class="md-nav__link">
+    Paging
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state-configurations" class="md-nav__link">
+    State Configurations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ui-appearance" class="md-nav__link">
+    UI Appearance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#user-input-handling" class="md-nav__link">
+    User Input Handling
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enabling-rtl" class="md-nav__link">
+    Enabling RTL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#miscellaneous" class="md-nav__link">
+    Miscellaneous
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurations-common-to-all-widgets" class="md-nav__link">
+    Configurations Common to All widgets
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#segmentedui-widget-basics" class="md-nav__link">
+    SegmentedUI Widget Basics
+  </a>
+  
+    <nav class="md-nav" aria-label="SegmentedUI Widget Basics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-segmentedui-by-using-a-constructor-voltmxuisegmentedui2" class="md-nav__link">
+    Creating a SegmentedUI by using a constructor: voltmx.ui.SegmentedUI2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#important-considerations" class="md-nav__link">
+    Important Considerations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-a-listbox-widget-inside-a-segment" class="md-nav__link">
+    Adding a ListBox Widget inside a Segment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#row-animation" class="md-nav__link">
+    Row Animation
+  </a>
+  
+    <nav class="md-nav" aria-label="Row Animation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#available-animations" class="md-nav__link">
+    Available Animations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#row-animations-and-flex-layout-properties" class="md-nav__link">
+    Row Animations and Flex Layout Properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#row-animation-events" class="md-nav__link">
+    Row Animation Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#row-animation-api-elements" class="md-nav__link">
+    Row Animation API Elements
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#segmentedui-templates" class="md-nav__link">
+    SegmentedUI Templates
+  </a>
+  
+    <nav class="md-nav" aria-label="SegmentedUI Templates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-a-template-for-segmentedui" class="md-nav__link">
+    What is a Template for SegmentedUI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#where-to-use-a-segmentedui-section-template" class="md-nav__link">
+    Where to use a SegmentedUI (section) Template
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-template-for-segmentedui" class="md-nav__link">
+    Creating a Template for SegmentedUI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-segmentedui-section-template" class="md-nav__link">
+    Using SegmentedUI Section Template
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="segmentedui-widget-table">SegmentedUI Widget (Table)</h1>
+<h2 id="table">Table</h2>
+<p>The Segment widget is a UI component commonly used to display lists or pages of data. Segment widget is a container that provides the capability to define a row template that repeats for every row or page of the specific segment.</p>
+<p>You can use the Segment widget to display data from services, group services together, use templates to create the layout of each row, perform actions such as animations and form navigation when users click on a record, and more. These features have been explained in detail here:</p>
+<p><strong>Data Handling</strong>: Display data from various services in the Segment. For example, if you have a service that contains the data of all the employees in an organization, you can display it in your application by using a Segment widget.</p>
+<p><img alt="" src="Resources/Images/data_handling_162x286.png" /></p>
+<p><strong>Group Data</strong>: Group data into different sections by using Segment widgets. For example, after you have retrieved all employees’ data from the service mentioned earlier, you can categorize employees based on their respective departments by using another Segment widget.</p>
+<p><strong>Define Templates</strong>: Create templates to define reusable structure for Segment widgets. Templates help you to attain a consistent look-and-feel for the rows and sections of a Segment widget.</p>
+<p><strong>Animations</strong>: Add animation effect to the rows of a Segment widget in order to perform a specific task. One of the main uses of this capability is to enable the option that allows users to delete a Segment row, by swiping the row from right to left.</p>
+<p><strong>Row Click events</strong>: Assign a variety of actions to Segment widgets, which are performed when users click on a Segment row. Actions such as animations, form navigation, and more, can be applied to any row in a Segment. For example, if you have a Segment that contains the list of all employees in an organization, you can click on any row to move to another form where the details of the specific employee are displayed.</p>
+<p>Widgets are normally added to your application using Volt MX Iris, but can also be added from code. For general information on using widgets in Volt MX Iris, see <a href="../../iris_user_guide/Content/Part_II_CreatingAnApplication.html">Designing an Application</a> in the <a href="../../iris_user_guide/Content/Introduction.html">Iris User Guide</a>.</p>
+<p>For general information on the SegmentedUI widget, refer the <a href="../../iris_user_guide/Content/Segment2.html">Segment2</a> topic in the Volt MX Iris User Guide.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> For a more hands-on approach on the functionality of Segment widget, import and preview the <strong>Segment Widget Feature</strong> sample app by using Volt MX Iris.<br />
+<a href="https://marketplace.hclvoltmx.com/items/segment-widget-feature-app"><img alt="" src="Resources/Images/Download_Button_10_230x35.png" /></a></p>
+</blockquote>
+<div class="youtube-wrapper"><iframe src="https://www.youtube.com/embed/v2kut_GA82c" allowfullscreen=""></iframe></div>
+
+<div class="youtube-wrapper"><iframe src="https://www.youtube.com/embed/b1Pe5lK5Vmc" allowfullscreen=""></iframe></div>
+
+<p>The SegmentedUI widget capabilities can be broadly categorized into the following:</p>
+<ul>
+<li><a href="#3d-touch">3D Touch</a></li>
+<li><a href="#animations">Animations</a></li>
+<li><a href="#data-management">Data Management</a></li>
+<li><a href="#internationalization">Internationalization</a></li>
+<li><a href="#layout">Layout</a></li>
+<li><a href="#paging">Paging</a></li>
+<li><a href="#ui-appearance">UI Appearance</a></li>
+<li><a href="#user-input-handling">User Input Handling</a></li>
+<li><a href="#state-configurations">State Configurations</a></li>
+<li><a href="#enabling-rtl">Enabling RTL</a></li>
+<li><a href="#miscellaneous">Miscellaneous</a></li>
+<li><a href="#configurations-common-to-all-widgets">Configurations Common to all Widgets</a></li>
+</ul>
+<h4 id="3d-touch">3D Touch</h4>
+<table>
+<thead>
+<tr>
+<th>Methods</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Segment_Methods.html">registerForPeekandPop</a></td>
+<td>Registers a widget to enable 3D Touch peek and pop gestures.</td>
+</tr>
+<tr>
+<td><a href="Segment_Methods.html#setOnPek">setOnPeek</a></td>
+<td>Sets and overrides the existing onPeekCallback for the widget.</td>
+</tr>
+<tr>
+<td><a href="Segment_Methods.html#setOnPop">setOnPop</a></td>
+<td>Overrides the existing onPopCallback for the widget.</td>
+</tr>
+<tr>
+<td><a href="Segment_Methods.html#unregist">unregisterForPeekandPop</a></td>
+<td>Unregisters a widget from 3D Touch peek and pop gestures.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="animations">Animations</h4>
+<table>
+<thead>
+<tr>
+<th>Methods</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Segment_Methods.html#animate">animate</a></td>
+<td>Applies an animation to the widget.</td>
+</tr>
+<tr>
+<td><a href="Segment_Methods.html#animateRows">animateRows</a></td>
+<td>Associates animations with a specific row and its elements.</td>
+</tr>
+<tr>
+<td><a href="Segment_Methods.html#setAnimations">setAnimations</a></td>
+<td>Associates animations to the rows at each operation.</td>
+</tr>
+<tr>
+<td><a href="Segment_Methods.html#resetSwipeMove">resetSwipeMove</a></td>
+<td>This method is used to reset the widget swipe to its initial state.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Events</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Segment_Events.html#onRowDis">onRowDisplay</a></td>
+<td>Overwrites the rows that are affected because of an operation on rows.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Properties</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Segment_Properties.html#animateFocusChanges">animateFocusChanges</a></td>
+<td>This property is used to bring the row specified in the selectedRowIndex property to the visible region.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#transfor">transform</a></td>
+<td>Contains an animation transformation that can be used to animate the widget.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#widgetSwipeMove">widgetSwipeMove</a></td>
+<td>Used to enable and configure the left or right swipe actions for a widget.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="data-management">Data Management</h4>
+<table>
+<thead>
+<tr>
+<th>Methods</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Segment_Methods.html#addAll">addAll</a></td>
+<td>Enables you to add new data to the segment.</td>
+</tr>
+<tr>
+<td><a href="Segment_Methods.html#addDataA">addDataAt</a></td>
+<td>Enables you to add one row of data at a given ind ex or with in a section.</td>
+</tr>
+<tr>
+<td><a href="Segment_Methods.html#addSecti">addSectionAt</a></td>
+<td>Enables you to add one section with rows to the segment.</td>
+</tr>
+<tr>
+<td><a href="Segment_Methods.html#getFirstVisibleRow">getFirstVisibleRow</a></td>
+<td>Returns a JavaScript object containing the first visible row section index and row index.</td>
+</tr>
+<tr>
+<td><a href="Segment_Methods.html#getLastVisibleRow">getLastVisibleRow</a></td>
+<td>Returns a JavaScript object containing the last visible row's section index and row index.</td>
+</tr>
+<tr>
+<td><a href="Segment_Methods.html#removeAl">removeAll</a></td>
+<td>Enables you to remove all the existing rows and sections in a segment.</td>
+</tr>
+<tr>
+<td><a href="Segment_Methods.html#removeAt">removeAt</a></td>
+<td>Enables you to remove the row at the given index or a row with in a section.</td>
+</tr>
+<tr>
+<td><a href="Segment_Methods.html#removeSe">removeSectionAt</a></td>
+<td>Allows you to remove a section at the given index within a segment.</td>
+</tr>
+<tr>
+<td><a href="Segment_Methods.html#setData">setData</a></td>
+<td>Allows you to set new data to the segment.</td>
+</tr>
+<tr>
+<td><a href="Segment_Methods.html#setDataA">setDataAt</a></td>
+<td>Allows you to set data or modify an existing data of a row or within a section.</td>
+</tr>
+<tr>
+<td><a href="Segment_Methods.html#setSecti">setSectionAt</a></td>
+<td>Allows you to set or modify a section with rows to the segment.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Properties</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Segment_Properties.html#metaInfo">metaInfo</a></td>
+<td>Allows to capture row level attributes.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#stopRerenderOnSetDataAt">stopRerenderOnSetDataAt</a></td>
+<td>Allows only the modified content of a row to be updated when setDataAt method is used.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="internationalization">Internationalization</h4>
+<table>
+<thead>
+<tr>
+<th>Properties</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Segment_Properties.html#pullToRe">pullToRefreshI18NKey</a></td>
+<td>Specifies the i18N key for "pull to refresh" title.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#pullToRe2">pushToRefreshI18NKey</a></td>
+<td>Specifies the i18N key for "push to refresh" title.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#pushToRe">releaseToPullRefreshI18NKey</a></td>
+<td>Specifies the i18N key for "release to refresh" title that appears for pull to refresh.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#pushToRe2">releaseToPushRefreshI18NKey</a></td>
+<td>Specifies the i18N key for "release to refresh" title that appears for push for refresh.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="layout">Layout</h4>
+<table>
+<thead>
+<tr>
+<th>Properties</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Segment_Properties.html#anchorPo">anchorPoint</a></td>
+<td>Specifies the anchor point of the widget bounds rectangle using the widget's coordinate space.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#bottom">bottom</a></td>
+<td>Determines the bottom edge of the widget and is measured from the bottom bounds of the parent container.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#centerX">centerX</a></td>
+<td>Determines the center of a widget measured from the left bounds of the parent container.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#centerY">centerY</a></td>
+<td>Determines the center of a widget measured from the top bounds of the parent container.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#height">height</a></td>
+<td>Determines the height of the widget and measured along the y-axis.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#left">left</a></td>
+<td>Determines the lower left corner edge of the widget and is measured from the left bounds of the parent container.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#maxHeigh">maxHeight</a></td>
+<td>Specifies the maximum height of the widget and is applicable only when the height property is not specified.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#maxWidth">maxWidth</a></td>
+<td>Specifies the maximum width of the widget and is applicable only when the width property is not specified.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#minHeigh">minHeight</a></td>
+<td>Specifies the minimum height of the widget and is applicable only when the height property is not specified.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#minWidth">minWidth</a></td>
+<td>Specifies the minimum width of the widget and is applicable only when the width property is not specified.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#orientat">orientation</a></td>
+<td>Specifies how you can stack the widgets within the SegmentedUI.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#right">right</a></td>
+<td>Determines the lower right corner of the widget and is measured from the right bounds of the parent container.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#rowHeigh">rowHeight</a></td>
+<td>Specifies the height of the row of a SegmentedUI.</td>
+</tr>
+<tr>
+<td>r<a href="Segment_Properties.html#rowWidth">owWidth</a></td>
+<td>Specifies the width of the row of a SegmentedUI.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#top">top</a></td>
+<td>Determines the top edge of the widget and measured from the top bounds of the parent container.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#width">width</a></td>
+<td>Determines the width of the widget and is measured along the x-axis.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#zIndex">zIndex</a></td>
+<td>Specifies the stack order of a widget.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Events</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Segment_Events.html#doLayout">doLayout</a></td>
+<td>Invoked for every widget when the widget position and dimensions are computed.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="paging">Paging</h4>
+<table>
+<thead>
+<tr>
+<th>Properties</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Segment_Properties.html#retainScrolledPage">retainScrolledPage</a></td>
+<td>Enables you to retain the page of the Segment widget after the widget has been reloaded in iOS platform.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#needPage">needPageIndicator</a></td>
+<td>A Page Indicator is a succession of docs centered below the SegmentedUI widget.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#pageOnDo">pageOnDotImage</a></td>
+<td>Specifies the image to indicate that the page is currently being viewed.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#pageOffD">pageOffDotImage</a></td>
+<td>Specifies the image to indicate that the pages that are not been currently viewed.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="state-configurations">State Configurations</h4>
+<table>
+<thead>
+<tr>
+<th>Properties</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Segment_Properties.html#defaultS">defaultSelection</a></td>
+<td>Specifies if the first clickable element (Image or Label) of the segment is selected by default.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#retainSe">retainSelection</a></td>
+<td>Specifies if the segment should retain the selection made even when the user navigates out of the form and revisits the form.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#selected">selectedRowIndex</a></td>
+<td>Indicates the currently selected row in single select or multi select modes in the SegmentedUI.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#selected2">selectedRowIndices</a></td>
+<td>Specifies an array of indexes which indicates the selected rows.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#selected3">selectedRowItems</a></td>
+<td>Returns the data of the selected rows in the segmentedUI.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#selectio">selectionBehavior</a></td>
+<td>Specifies if the segment can support single or multiple selection.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#selectio2">selectionBehaviorConfig</a></td>
+<td>Enabled if you select either singleselect or multiselect.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="ui-appearance">UI Appearance</h4>
+<table>
+<thead>
+<tr>
+<th>Properties</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Segment_Properties.html#alternat">alternateRowSkin</a></td>
+<td>Specifies the skin that is applied to every alternate even numbered row in the segment.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#border">border</a></td>
+<td>Specifies the border to the SegmentedUI.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#displayT">displayType</a></td>
+<td>Specifies the display type of segmentPageView, either in PivotView or FlipView.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#indicato">indicator</a></td>
+<td>Specifies the indicator type as rowSelect, rowClick, or none.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#opacity">opacity</a></td>
+<td>Specifies the opacity of the widget.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#pageSkin">pageSkin</a></td>
+<td>Specifies the skin for page indicator.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#Pressed">pressedSkin</a></td>
+<td>Specifies the skin to indicate that the row of the segment is pressed or clicked.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#progress">progressIndicatorColor</a></td>
+<td>Specifies the color of the progress indicator as white or grey.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#pullToRe">pullToRefreshSkin</a></td>
+<td>Specifies the skin to be applied to the pull to refresh title.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#pushToRe2">pushToRefreshSkin</a></td>
+<td>Specifies the skin to be applied to the push to refresh title.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#rowFocus">rowFocusSkin</a></td>
+<td>Specifies the skin that must be applied when user selects the row.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#rowSkin">rowSkin</a></td>
+<td>Specifies the skin that must be applied for each row.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#sectionH">sectionHeaderSkin</a></td>
+<td>Specifies the skin to be applied to the Section Header.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#separato">separatorColor</a></td>
+<td>Specifies the color of the separator between row of segmentedUI.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#separato3">separatorRequired</a></td>
+<td>Specifies if the segment should display the separator between the rows of the SegmentedUI.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#separato2">separatorThickness</a></td>
+<td>Specifies the thickness of the separator in pixels.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#showProg">showProgressIndicator</a></td>
+<td>Specifies if the progress indicator must be displayed.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#viewType">viewType</a></td>
+<td>You can use this property to select the view type of a segment.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#viewConfig">viewConfig</a></td>
+<td>You can use this property to select the view type of a segment.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#widgetSk">widgetSkin</a></td>
+<td>Specifies the skin to be applied to the entire SegmentedUI.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="user-input-handling">User Input Handling</h4>
+<table>
+<thead>
+<tr>
+<th>Methods</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Segment_Methods.html#addGestureRecognizer">addGestureRecognizer</a></td>
+<td>Allows you to set a gesture recognizer for a specified gesture for a specified widget.</td>
+</tr>
+<tr>
+<td><a href="Segment_Methods.html#removeGestureRecognizer">removeGestureRecognizer</a></td>
+<td>Allows you to remove the specified gesture recognizer for the specified widget.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Events</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Segment_Events.html#onDragCompleted">onDragCompleted</a></td>
+<td>Invoked when the drag and drop of a row in the Segment is complete.</td>
+</tr>
+<tr>
+<td><a href="Segment_Events.html#onReachingBegining">onReachingBeginning</a></td>
+<td>Called when scrolling reaches the beginning of the SegmentedUI widget.</td>
+</tr>
+<tr>
+<td><a href="Segment_Events.html#onReachingEnd">onReachingEnd</a></td>
+<td>Called when scrolling reaches the end of the SegmentedUI widget.</td>
+</tr>
+<tr>
+<td><a href="Segment_Events.html#onRowCli">onRowClick</a></td>
+<td>Triggered when the user click any row of the SegmentedUI.</td>
+</tr>
+<tr>
+<td><a href="Segment_Events.html#onSwipe">onSwipe</a></td>
+<td>Triggered when you swipe a row in a segment.</td>
+</tr>
+<tr>
+<td><a href="Segment_Events.html#onScrollStart">onScrollStart</a></td>
+<td>Indicates that scroll container started scrolling.</td>
+</tr>
+<tr>
+<td><a href="Segment_Events.html#onScrollTouchReleased">onScrollTouchReleased</a></td>
+<td>Indicates that user scrolling touch on the display is released.</td>
+</tr>
+<tr>
+<td><a href="Segment_Events.html#onScrolling">onScrolling</a></td>
+<td>Indicates that segment scrolling is in progress.</td>
+</tr>
+<tr>
+<td><a href="Segment_Events.html#onScrollEnd">onScrollEnd</a></td>
+<td>Indicates that segment scrolling has come to an end.</td>
+</tr>
+<tr>
+<td><a href="Segment_Events.html#onScrollWidgetPosition">onScrollWidgetPosition</a></td>
+<td>Callback is invoked by the platform when the widget location position gets changed on scrolling.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="enabling-rtl">Enabling RTL</h4>
+<table>
+<thead>
+<tr>
+<th>Properties</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Segment_Properties.html#retainContentAlignment">retainContentAlignment</a></td>
+<td>Helps to retain the content alignment of the widget while applying RTL.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#retainFlexPositionProperties">retainFlexPositionProperties</a></td>
+<td>Helps to retain the left, right and padding properties while applying RTL.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#retainFlowHorizontalAlignment">retainFlowHorizontalAlignment</a></td>
+<td>Enables you to change the horizontal flow of the widget from left to right.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="miscellaneous">Miscellaneous</h4>
+<table>
+<thead>
+<tr>
+<th>Methods</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Segment_Methods.html#clearSearch">clearSearch</a></td>
+<td>This method clears the filtered results of the Segment widget.</td>
+</tr>
+<tr>
+<td><a href="Segment_Methods.html#getBadge">getBadge</a></td>
+<td>Enables you to read the badge value (if any) attached to the specified widget.</td>
+</tr>
+<tr>
+<td><a href="Segment_Methods.html#getUpdatedSearchResults">getUpdatedSearchResults</a></td>
+<td>This method is used to return the filtered list after applying search on Segment.</td>
+</tr>
+<tr>
+<td><a href="Segment_Methods.html#searchText">searchText</a></td>
+<td>This method provides a method to search the data given inside the Segment widget.</td>
+</tr>
+<tr>
+<td><a href="Segment_Methods.html#setBadge">setBadge</a></td>
+<td>Enables you to set the badge value to the given widget at the upper, right corner of the widget.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Properties</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Segment_Properties.html#autogrow">autogrowMode Property (Deprecated)</a></td>
+<td>Used to set the height of a widget dynamically based on the derived height of the widget’s content, or from the child widget’s contents.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#bounces">bounces</a></td>
+<td>Specifies whether the scroll view bounces past the edge of the content and back again.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#contentInsetAdjustmentType">contentInsetAdjustmentType</a></td>
+<td>On scroll view, this property automatically adds the required SegmentedUI insets to the scroll view.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#contentOffsetMeasured">contentOffsetMeasured</a></td>
+<td>Returns the current coordinates of the top left corner of the scrollable region in the segment.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#cursorType">cursorType</a></td>
+<td>Specifies the type of the mouse pointer used.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#dockSect">dockSectionHeaders</a></td>
+<td>Enables you to dock or place the section header at the top of the segment while scrolling the section content.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#editStyl">editStyle</a></td>
+<td>Specifies the editing style to be applied to the rows in the SegmentedUI.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#enableCloneControllerForRowTemplates">enableCloneControllerForRowTemplates</a></td>
+<td>Enables the creation of row-specific controllers in Segment row template.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#enableDi">enableDictionary</a></td>
+<td>Specifies if dictionary must be enabled for easy navigation.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#enableHapticFeedback">enableHapticFeedback</a></td>
+<td>Allows you to enable or disable haptic feedback on the Segment widget.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#enableReordering">enableReordering</a></td>
+<td>Allows you enable or disable reordering the rows in a Segment.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#groupCel">groupCells</a></td>
+<td>Specifies if all the rows in the segment should grouped using a rounded corner background and border.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#isMaster">isMaster</a></td>
+<td>Specifies whether the container is a master container.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#rowTempl">rowTemplate</a></td>
+<td>Indicates the common template to be used for each row while creating the row and filling the data.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#sectionH2">sectionHeaderTemplate</a></td>
+<td>Specifies the common template to be used for each section while creating the section header and filling the data.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#screenLe">screenLevelWidget (deprecated)</a></td>
+<td>This property specifies whether the widget should occupy the whole container or not.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#scrollsT">scrollsToTop</a></td>
+<td>This property enables you to scroll the Segment to top on tapping a device’s status bar.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#searchBy">searchBy</a></td>
+<td>Indicates the identifier of the widget placed inside the row of the SegmentedUI.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#searchCr">searchCriteria</a></td>
+<td>Specifies the search criteria to be applied when searching has been enabled on the SegmentedUI.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#showScro">showScrollbars</a></td>
+<td>Specifies if the scrollbars must be visible all the time.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Events</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Segment_Events.html#onDidFin">onDidFinishDataLoading</a></td>
+<td>Triggered when data is finished loading in the segmentedUI using the setData method.</td>
+</tr>
+<tr>
+<td><a href="Segment_Events.html#onEditin">onEditing</a></td>
+<td>Triggered when a user indicates his desire to edit the row (delete or insert).</td>
+</tr>
+</tbody>
+</table>
+<h4 id="configurations-common-to-all-widgets">Configurations Common to All widgets</h4>
+<table>
+<thead>
+<tr>
+<th>Properties</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Segment_Properties.html#accessibilityConfig">accessibilityConfig</a></td>
+<td>Enables you to control accessibility behavior and alternative text for the widget.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#enable">enable</a></td>
+<td>Allows you to make a widget visible but not actionable.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#enableCa">enableCache</a></td>
+<td>Enables you to improve the performance of Positional Dimension Animations.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#id">id</a></td>
+<td>A unique identifier of Segment consisting of alpha numeric characters.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#info">info</a></td>
+<td>A custom JSObject with the key value pairs that a developer can use to store the context with the widget.</td>
+</tr>
+<tr>
+<td><a href="Segment_Properties.html#isVisible">isVisible</a></td>
+<td>Controls the visibility of a widget on the form.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Methods</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Segment_Methods.html#convertPointFromWidget">convertPointFromWidget</a></td>
+<td>Enables you to convert the coordinate system from a widget to a point (receiver's coordinate system).</td>
+</tr>
+<tr>
+<td><a href="Segment_Methods.html#convertPointToWidget">convertPointToWidget</a></td>
+<td>Enables you to convert the coordinate system from a point (receiver's coordinate system) to a widget.</td>
+</tr>
+<tr>
+<td><a href="Segment_Methods.html#removeFromParent">removeFromParent</a></td>
+<td>Allows you to remove a child widget from a parent widget.</td>
+</tr>
+<tr>
+<td><a href="Segment_Methods.html#setEnabled">setEnabled</a></td>
+<td>Specifies the widget that must be enabled or disabled.</td>
+</tr>
+<tr>
+<td><a href="Segment_Methods.html#setFocus">setFocus</a></td>
+<td>Specifies the widget on which there must be focus.</td>
+</tr>
+<tr>
+<td><a href="Segment_Methods.html#setVisibility">setVisibility</a></td>
+<td>Use this method to set the visibility of the widget.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Events</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Segment_Events.html#preOncli">preOnclickJS</a></td>
+<td>Allows the developer to execute custom javascript function before the onClick callback of the widget is invoked.</td>
+</tr>
+<tr>
+<td><a href="Segment_Events.html#postOncl">postOnclickJS</a></td>
+<td>Allows the developer to execute custom javascript function after the onClick callback of the widget is invoked.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="segmentedui-widget-basics">SegmentedUI Widget Basics</h2>
+<p>A SegmentedUI can contain <a href="Button.html">Button,</a> <a href="Calendar.html#calendar-widget">Calendar,</a> <a href="Image.html">Image,</a> <a href="label.html">Label,</a> <a href="RichText.html">RichText,</a> <a href="Phone.html">Phone,</a> <a href="Slider.html">Slider,</a> <a href="Switch.html">Switch,</a> <a href="TextArea.html">TextArea,</a> and <a href="TextBox.html">TextBox</a> widgets. In addition, the following widgets are supported only on the Desktop Web Platform:</p>
+<ul>
+<li><a href="CheckBox.html#checkboxgroup-widget">CheckBoxGroup</a></li>
+<li><a href="RadioButtonGroup.html#top">RadioButtonGroup</a></li>
+</ul>
+<blockquote>
+<p><strong><em>Note:</em></strong> For RadioButton and CheckBox widgets masterData should be provided only if the masterDataMap set to the widget initially is different for a particular row.</p>
+<p><strong><em>Note:</em></strong> Textbox widget in Segment is only supported in Windows10.</p>
+</blockquote>
+<p>The data returned when <em>selectedItem</em> is called on the SegmentedUI widget when the row has the following widgets:</p>
+<table>
+<thead>
+<tr>
+<th>Widget Name</th>
+<th>Properties</th>
+<th></th>
+<th></th>
+<th></th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CheckBoxGroup</td>
+<td>selectedKeys, selectedKeyValues</td>
+<td></td>
+<td></td>
+<td></td>
+<td>An array of key value pairs with the keys as mentioned.</td>
+</tr>
+<tr>
+<td>RadioButtonGroup</td>
+<td>selectedKey, selectedKeyValue</td>
+<td></td>
+<td></td>
+<td></td>
+<td> </td>
+</tr>
+<tr>
+<td>TextBox</td>
+<td>text</td>
+<td></td>
+<td></td>
+<td></td>
+<td> </td>
+</tr>
+<tr>
+<td>TextArea</td>
+<td>text</td>
+<td></td>
+<td></td>
+<td></td>
+<td> </td>
+</tr>
+<tr>
+<td>Calendar</td>
+<td>dataComponents</td>
+<td></td>
+<td></td>
+<td></td>
+<td>An array of the date components</td>
+</tr>
+</tbody>
+</table>
+<p>Each of the above widgets is allowed to have its own skin and control. This gives the flexibility to design a segment with separate interconnected widgets and expose their properties for mapping.</p>
+<p>When a SegmentedUI <a href="#">template</a> is created based on the input data, the segment is repeated in the Segmented UI.</p>
+<h3 id="creating-a-segmentedui-by-using-a-constructor-voltmxuisegmentedui2">Creating a SegmentedUI by using a constructor: voltmx.ui.SegmentedUI2</h3>
+<pre><code>
+var seg = new voltmx.ui.SegmentedUI2 (basicConf, layoutConf, pspConf)
+</code></pre>
+<ul>
+<li><strong>basicConf</strong> is an object with basic properties.</li>
+<li><strong>layoutConf</strong> is an object with layout properties.</li>
+<li><strong>pspConf</strong> is an object with platform specific properties.</li>
+</ul>
+<blockquote>
+<p><strong><em>Note:</em></strong> The configuration properties should be passed only in the respective configuration objects otherwise they are ignored</p>
+</blockquote>
+<p>Example</p>
+<pre><code>//Defining properties for a Segment
+var basicConf = {
+    id: &quot;segId&quot;,
+    isVisible: true,
+    widgetSkin: &quot;widSkin&quot;,
+    rowSkin: &quot;rowSkn&quot;,
+    rowFocusSkin: &quot;rowFSkn&quot;,
+    alternateRowSkin: &quot;altSkin&quot;,
+    sectionHeaderSkin: &quot;secHSkin&quot;,
+    widgetDataMap: {
+        widgetId1: &quot;dataid1&quot;,
+        widgetId2: &quot;dataId2&quot;,
+        widgetId3: &quot;dataId3&quot;,
+        widgetId4: &quot;secDataId1&quot;,
+        widgetId5: &quot;secDataId2&quot;
+    },
+    rowTemplate: box1
+};
+
+var layoutConf = {
+    padding: [5, 5, 5, 5],
+    margin: [5, 5, 5, 5],
+    containerWeight: 100
+};
+
+var pspConf = {
+    border: constants.SEGUI_BORDER_TOP_ONLY,
+    defaultSelection: true
+};
+
+//Creating the Segment
+var segment = new voltmx.ui.SegmentedUI2(basicConf, layoutConf, pspConf);
+
+//Reading the alternateRowSkin of the SegmentedUI   
+alert(&quot;SegmentedUI alternateRowSkin:&quot; + segment.alternateRowSkin);
+</code></pre>
+<p>For backward compatibility with support for all deprecated properties and behaviors, use the constructor <strong>voltmx.ui.SegmentedUI</strong>.</p>
+<pre><code>
+var seg1= new voltmx.ui.SegmentedUI (basicConf, layoutConf, pspConf)
+</code></pre>
+<h3 id="important-considerations">Important Considerations</h3>
+<p>The following are the important considerations for the segment widget:</p>
+<ul>
+<li>
+<p>Segment occupies memory from two perspectives:  </p>
+<ul>
+<li>Amount of data required from number of rows. For example, if you set data for 100 rows, memory for all the 100 records will be in memory.</li>
+<li>View hierarchy (Box and other supported widgets) in each segment row. If the View hierarchy is complex, the memory usage is high.</li>
+</ul>
+<blockquote>
+<p><strong><em>Note:</em></strong> On iPhone, Android, and Windows platforms, if your segment has large data sets (more than 20 records with each record having more than 15 widgets), set the segment as a Screen Level Widget.</p>
+</blockquote>
+</li>
+<li>
+<p>Images in segment are not scaled and are rendered with autosize property set to false. If the image requires lesser space than the allocated space, the image is center aligned.</p>
+</li>
+<li>You cannot add any elements to the widgets dynamically. However, if you want to hide any elements, do not provide any data for that element.</li>
+<li>In the Windows platform, the sections inside the Segment pageview are not supported.</li>
+<li>
+<p>In the Desktopweb and SPA platforms, when you create a segment with table view that has a significant amount of data and multiple rows with a fixed height, the platform internally applies optimization logic at segment level. The optimization helps in loading a few rows initially, and then the remaining rows are sequentially loaded while scrolling.</p>
+<p>If the segment height suffices to contain all the rows of the segment, then the platform loads all the rows at once.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> If you try scrolling too fast, you may experience jerky scrolling. If the rows contain images, they may take time to load based on the image file size.</p>
+</blockquote>
+</li>
+<li>
+<p>You can dynamically change the skin of the widgets in the segment using the <a href="Segment_Methods.html#top">Segment Alternate Methods</a>.</p>
+</li>
+<li>A SegmentedUI cannot be placed directly in a ScrollBox. It can be placed in a ScrollBox with orientation as Vertical and only then you can place a SegmentedUI on a ScrollBox.</li>
+<li>
+<p>The height of the segmentedUI is determined by the content of the widget. If you set the <strong>screenLevelWidget</strong> as <em>true</em>, then the height of the segmentedUI widget is the form height excluding headers and footers.</p>
+<blockquote>
+<p><strong><em>Important:</em></strong> The <strong>screenLevelWidget</strong> property is deprecated for FlexForm. You can achieve the behavior of the screenLevelWidget property using the height property. This property only applicable for box layout.</p>
+</blockquote>
+</li>
+<li>
+<p>Whenever a segmentedUI is set as <strong>screenLevelWidget</strong> there is a reduction in load time of the segmentedUI but scrolling speed reduces. This is because the SegmentedUI loads few rows at the load time and the rest of the rows are loaded as user scrolls through the widget. This is recommended option when you have huge number of records.</p>
+</li>
+<li>When a segmentedUI is not set as <strong>screenLevelWidget</strong>, load time of segmentedUI increases because all the rows are loaded at the beginning, but scrolling speed improves.</li>
+</ul>
+<blockquote>
+<p><strong><em>Note:</em></strong> In general Android SDK does not support the bounce-back feature (rubber band effect). But there are some OEM's which extended the Android SDK to support bounce-back like samsung devices. So to summarize this is a device specific feature rather than an Android SDK feature.</p>
+</blockquote>
+<h3 id="adding-a-listbox-widget-inside-a-segment">Adding a ListBox Widget inside a Segment</h3>
+<p>You can add a ListBox widget inside a Segment by using the onSelection event.</p>
+<p><strong>Note</strong>: By default, a ListBox contains some masterData. If you want to change the data for a particular ListBox row, you must update the required details in the Segment data.</p>
+<p><strong>onSelection Event</strong></p>
+<p>This is an event callback that is invoked by the platform when you select or deselect an item.</p>
+<p>Syntax</p>
+<p>onSelection(widget)</p>
+<p>The onSelection event callback accepts an additional parameter (context) when a ListBox is placed in a Segment row or section template. The syntax for the context parameter is as follows:</p>
+<p>onSelection(widget,context)</p>
+<p>Parameters</p>
+<p>widget [widgetref]</p>
+<p>Handle to the widget instance that raised the event.</p>
+<p>Context [Object]</p>
+<p>This is an optional parameter. It is applicable only when you place a ListBox in a Segment rowTemplate or sectionTemplate. The Context Object argument has the following parameters:</p>
+<ul>
+<li>
+<p><em>rowIndex [Number]</em>: Optional. This is the index of the row that contains the ListBox. It is not available if you place the ListBox in a section header.</p>
+</li>
+<li>
+<p><em>sectionIndex [Number]</em>: This is the index of the section row that contains the ListBox.</p>
+</li>
+<li>
+<p><em>widgetInfo [widgetref]</em>: This is the handle to the parent widget instance (Segment) that contains the ListBox.</p>
+</li>
+</ul>
+<p>Platform Availability</p>
+<ul>
+<li>iOS</li>
+<li>Android</li>
+<li>Windows10</li>
+<li>SPA</li>
+<li>Desktop Web</li>
+</ul>
+<p>Limitations</p>
+<ul>
+<li>
+<p>Android</p>
+<ul>
+<li>While updating the masterData of a particular ListBox row with a different value, you must set the respective values for both selectedKey and selectedKeyValue.</li>
+</ul>
+</li>
+</ul>
+<h3 id="row-animation">Row Animation</h3>
+<p>This section provides a brief introduction to the new row animation features in the following topics.</p>
+<ul>
+<li>Available Animations</li>
+<li>Row Animations and Flex Layout Properties</li>
+<li>Row Height Animation</li>
+<li>Row Animation Events</li>
+</ul>
+<h4 id="available-animations">Available Animations</h4>
+<p>In Segment rows, you can move (translate), rotate, or scale child widgets. For example, you can display a rotating logo or a hand icon that simulates waving by moving back and forth.</p>
+<p>Also, your app can slide interface controls into a row from off screen. Or it can simulate the hands of an analog clock moving onscreen.</p>
+<h4 id="row-animations-and-flex-layout-properties">Row Animations and Flex Layout Properties</h4>
+<p>With the row animation capabilities, users can programmaticaly update the Flex layout properties of widgets in the Segment’s row. Specifically, event handlers and widget methods can change the following properties.</p>
+<ul>
+<li>top</li>
+<li>left</li>
+<li>right</li>
+<li>bottom</li>
+<li>width</li>
+<li>height</li>
+<li>centerX</li>
+<li>centerY</li>
+<li>zIndex</li>
+</ul>
+<p>The values above are set relative to the location of the row that contains them, not the Segment widget. For example, setting the top property to zero means that the top of the child widget is aligned with the top of the row that contains it. This means that whenever your code updates the child widget’s x position or scale, it is relative to the row’s width. Likewise, whenever your app changes the y position or scale of a widget within a row, it does so relative to the row’s height.</p>
+<p>Even though you set the Flex layout properties of child widgets relative to their containing row, you can still specify a position for the child widget that is outside the bounds of the clipping rectangle of the row or page. So you can have some widgets outside the visible area of the row and slide them into the viewable rectangle when a particular event occurs, such as a button click.</p>
+<p>In addition, you can also set the width and height values of child widgets in such a way as to place them outside the viewable area. As with the Flex layout position properties, you can alter the width and height values in the event handlers for events such as button clicks.</p>
+<p>Please note that animating the position or size of widgets only applies to the child widgets within a row, not to the row itself.</p>
+<h4 id="row-animation-events">Row Animation Events</h4>
+<p>The Segment widget now provides events that are specific to row animations. For example, suppose that your app enables a swipe gesture in the rows of a Segment widget. Imagine that the user of your app has just swiped across a row and your app has made visible changes to the row. If the user then swipes or touches in a different row, whatever was happening in the first row should probably be canceled. The row the user swiped should return to its original position and condition.</p>
+<p>In this example, the row that the user first swiped receives an event telling it that the user has touched or swiped something else. Therefore, it knows that the action in progress should not be completed and it restores the row to its original state.</p>
+<p>Essentially, with the SegmentedUI row events, a row being updated can react when properly when the user scrolls the SegmentUI widget or touches something in another row.</p>
+<p>As of version 7.0, the Segment widget also supports animation in its doLayout event. Specifically, the doLayout event now received the context information it needs to perform animation updates.</p>
+<h4 id="row-animation-api-elements">Row Animation API Elements</h4>
+<p>To support SegmentedUI row animations, the Volt MX Iris API includes the following elements.</p>
+<ul>
+<li>voltmx.ui.createAnimation Function</li>
+<li>voltmx.ui.makeAffineTransform Function</li>
+</ul>
+<h3 id="segmentedui-templates">SegmentedUI Templates</h3>
+<p>The SegmentedUI widget enables you to create templates to increase the re-usability of your efforts.</p>
+<h4 id="what-is-a-template-for-segmentedui">What is a Template for SegmentedUI</h4>
+<p>SegmentedUI template enables you to define a template for section headers. Only one template can be used for each segment. This is primarily useful for developers to achieve common look and feel of section headers along with few widgets added as part of section header of a segment.</p>
+<p>On iOS platform, when a FlexContainer is used as a template for SegmentedUI, the below properties are not applicable:</p>
+<table>
+<thead>
+<tr>
+<th>Positional Properties</th>
+<th>Dimensional Properties</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>left</td>
+<td>minWidth</td>
+</tr>
+<tr>
+<td>right</td>
+<td>maxWidth</td>
+</tr>
+<tr>
+<td>top</td>
+<td>minHeight</td>
+</tr>
+<tr>
+<td>bottom</td>
+<td>maxHeight</td>
+</tr>
+<tr>
+<td>centerX</td>
+<td> </td>
+</tr>
+<tr>
+<td>centerY</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<h4 id="where-to-use-a-segmentedui-section-template">Where to use a SegmentedUI (section) Template</h4>
+<p>SegmentedUI sections are used to differentiate or group a set of rows.</p>
+<p>The section templates are used:</p>
+<ul>
+<li>To have uniform look and feel of the section headers.</li>
+<li>To achieve the behavior of having widgets such as an Image and a label for all the section headers of the segment.</li>
+<li>To perform an action on the event of an onclick of an item or a widget in the section header.</li>
+</ul>
+<h4 id="creating-a-template-for-segmentedui">Creating a Template for SegmentedUI</h4>
+<p>When you want the same information to be displayed across all the Section Headers of a Segment in the application, you have a provision to add a Segment Template using Volt MX Iris. For more information about section headers refer <em>VoltMX Iris User Guide</em>.</p>
+<p>To create a segment template at the application-level, follow these steps:</p>
+<ol>
+<li>Go to <strong>Applications View</strong>.</li>
+<li>Expand the application for which you want to create the <em>SegmentTemplate.</em></li>
+<li>Navigate to <strong>templates &gt; segments</strong>, right-click <strong>mobile/desktop/tablet</strong> and select <strong>New Segment Template</strong>. The <strong>Create a New Segment</strong> window appears.</li>
+</ol>
+<blockquote>
+<ol>
+<li>Enter a <strong>Name</strong> for the template.</li>
+<li>Click <strong>Finish</strong>. A new form is created.</li>
+<li>Drag and drop an FlexContainer/FlexScrollContainer onto the form.</li>
+</ol>
+<blockquote>
+<blockquote>
+<p><strong><em>Note:</em></strong> Only HBox and Scrollable box are supported on the form. You can put other widgets within these widgets.</p>
+</blockquote>
+</blockquote>
+<ol>
+<li>Drag and drop the required widgets onto the FlexContainer/FlexScrollContainer. Set the properties of these widgets.</li>
+<li>A segment template is created.</li>
+</ol>
+</blockquote>
+<p>For more information on setting a Section Header template for a segment, click here.</p>
+<h4 id="using-segmentedui-section-template">Using SegmentedUI Section Template</h4>
+<p>You can define only one template for each segment using the above process.</p>
+<p>To use section template in an application, follow these steps:</p>
+<ol>
+<li>Go to <strong>Applications view</strong>.</li>
+<li>Expand the application for which you want to use section template.</li>
+<li>Navigate to <strong>forms &gt; mobile/tablet/desktop</strong> , right-click and select <strong>New Form</strong>. The <strong>Create a New Form</strong> window appears.</li>
+<li>Enter a name for the Form and click <strong>Finish</strong>. A new Form is created.</li>
+<li>If you are building for desktop, select the Form in desktop and right-click on the Form. Select <strong>Fork</strong>. The <strong>Platform Selection</strong> window appears.</li>
+<li>Select <strong>Desktop_web</strong> and click <strong>OK</strong>. The form is now forked for Desktop_web and new window appears as web_<formname>.</li>
+</ol>
+<blockquote>
+<p><strong><em>Note:</em></strong> The development activities for desktop web should happen in web_<formname> only. Although the newly created form, remains accessible in the desktop forms.</p>
+</blockquote>
+<ol>
+<li>Drag-drop a SegmentedUI on the Form and add widgets to the segment as required. Click <strong>Save</strong>.</li>
+<li>To set the template to a segment, select the segment and go to <strong>Properties</strong> window.</li>
+<li>Select <strong>sectionHeaderTemplate</strong> and <strong>Select/Search Segment Template</strong> window appears. Select the template, which you want to set to the segment.</li>
+<li>Click <strong>OK</strong>.</li>
+</ol>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2021 - 2023, HCL America, Inc. | <a href="https://hcltechsw.com/wps/portal/legal/privacy">Privacy Statement</a> | <a href="https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.hcltechsw.com%2Fwps%2Fportal%2Flegal%2Fterms-use&data=04%7C01%7Csuresh.chenji%40hcl.com%7Ca77ebddc51574aff8c6c08d8f056542d%7C189de737c93a4f5a8b686f4ca9941912%7C0%7C0%7C637523600856805537%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&sdata=vLnT466NGuIbvQ0nEwfn2qdXeuhHb6XOnh1pibATDI4%3D&reserved=0">Terms of Use</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+<div class="md-social">
+  <ul class="social-nav">
+    <li><a href="https://www.facebook.com/HCLDigital" class="facebook" target="_blank">Facebook</a></li>
+    <li><a href="https://www.linkedin.com/company/hclsoftware" class="linkedin" target="_blank">LinkedIn</a></li>
+    <li><a href="https://twitter.com/HCLDigital"  class="twitter" target="_blank">Twitter</a></li>
+    <li><a href="https://www.youtube.com/HCLDigitalSolutions" class="youtube" target="_blank">Youtube</a></li>
+    <li>
+      <a href="https://github.com/HCL-TECH-SOFTWARE" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    </li>
+  </ul>    
+</div>
+  </div>
+  <div class="md-footer-meta__inner md-grid">
+  <span class="md-footer__git_legacy">Please report problems with this documentation by <a class="announcement__link" href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/issues">opening issues in Github</a>.</span>
+  <span class="legacy-link md-footer__git_legacy">Can't find a topic? Check the legacy documentation <a class="announcement__link" href="https://opensource.hcltechsw.com/Volt-MX-Documentation-Archive/docs/documentation/" target="_blank">here</a>.</span>
+</span>
+    </div>
+</div>
+    <script>
+      function myFunction95(){
+          var initial_url = document.location.href;
+          var url_stub = initial_url.split( 'docs/documentation' );
+          var fixed_url = url_stub[0]+'95/docs/documentation';
+		  console.log(fixed_url);
+//          var fixed_url = 'https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation'
+          var url = initial_url.split( '/' );
+          var updated_url
+          if ( url[ url.length - 2 ] == "Foundry" || url[ url.length - 2 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 2 ] == "articles" || url[ url.length - 2] == "getting-started" || url[ url.length - 2 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 3 ] == "Foundry" || url[ url.length - 3 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 3 ] == "articles" || url[ url.length - 3 ] == "getting-started" || url[ url.length - 3 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 4 ] == "Foundry" || url[ url.length - 4 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 4 ] == "articles" || url[ url.length - 4 ] == "getting-started" || url[ url.length - 4 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 5 ] == "Foundry" || url[ url.length - 5 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 5 ] == "articles" || url[ url.length - 5 ] == "getting-started" || url[ url.length - 5 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 5 ] + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 6 ] == "Foundry" || url[ url.length - 6 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 6 ] == "articles" || url[ url.length - 6 ] == "getting-started" || url[ url.length - 6 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 6 ] + '/' + url[ url.length - 5 ] + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else{
+            updated_url= fixed_url + '/' + url[ url.length - 1];
+          }
+          window.location.replace(updated_url);
+          }
+    </script>
+
+  
+
+</footer>
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant"], "search": "../../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+    
+  </body>
+</html>
