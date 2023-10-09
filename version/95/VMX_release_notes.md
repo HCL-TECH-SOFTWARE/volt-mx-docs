@@ -7,6 +7,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Iris](#volt-iris)
 
+- [V9 Servicepack 5 Fixpack 18](#v9-servicepack-5-fixpack-18)
 - [V9 Servicepack 5 Fixpack 17](#v9-servicepack-5-fixpack-17)
 - [V9 Servicepack 5 Fixpack 16](#v9-servicepack-5-fixpack-16-iris)
 - [V9 Servicepack 5 Fixpack 15](#v9-servicepack-5-fixpack-15-iris)
@@ -62,6 +63,24 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 - [Earlier Foundry releases](#earlier-foundry-releases)
 
 ## Volt Iris
+
+### V9 Servicepack 5 Fixpack 18
+
+October 09, 2023
+
+#### Iris Enhancements
+
+* Xcode 15 support has been added.
+>**_Note:_** Xcode 15 minimum target is iOS 12.
+
+* iOS 17 target and NFI support. Since support for iOS 12 (and below) has been deprecated from the Xcode required to generate binaries compliant with Apple App Store, iOS 12 and lower versions have been removed from the build target list in Volt Iris.
+
+>**_Note:_** To get the latest list of iOS target versions in project settings, please ensure to build any app for iOS native platforms once, post upgrade.<br><br>
+If a project uses iOS target version less than 12, the version will be updated to 12 during the process of import into Iris.
+
+* Minimum supported watchOS has been updated to 4.0
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 ### V9 Servicepack 5 Fixpack 17
 
