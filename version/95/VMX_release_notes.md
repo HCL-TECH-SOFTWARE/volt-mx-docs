@@ -73,7 +73,7 @@ October 09, 2023
 * Xcode 15 support has been added.
 >**_Note:_** Xcode 15 minimum target is iOS 12.
 
-* iOS 17 target and NFI support. Since support for iOS 12 (and below) has been deprecated from the Xcode required to generate binaries compliant with Apple App Store, iOS 12 and lower versions have been removed from the build target list in Volt Iris.
+* iOS 17 target and NFI support.Since support for lower version than iOS 12 has been deprecated from the Xcode required to generate binaries compliant with Apple App Store, these lower versions have been removed from the build target list in Volt Iris.
 
 >**_Note:_** To get the latest list of iOS target versions in project settings, please ensure to build any app for iOS native platforms once, post upgrade.</p>If a project uses iOS target version less than 12, the version will be updated to 12 during the process of import into Iris.
 
