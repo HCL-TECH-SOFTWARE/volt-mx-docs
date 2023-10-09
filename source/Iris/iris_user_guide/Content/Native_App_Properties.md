@@ -163,6 +163,7 @@ To set Native app properties, follow these steps:
 1.  **Bundle Identifier** - Provide an unique name that identifies the application bundle. This is usually in three parts and follows the convention of `com.voltmx.<appname>`.
 2.  **Bundle Version** - a number that identifies the version of the application bundle.
 3.  **Apply Glossy Effect to App Icon** - specifies if the glossy effect must be applied to the app icon. The default value is _false_.
+4.  **Target Versions** - Choose the deployment target version for your application.<br> _Note_: The minimum iOS deployment target is 12.0.<br>For Watch, the minimum watch OS deployment target is 4.0.
 4.  **Deeplink URL Scheme**: specifies a url to which the application will deep-link to. If the application name is southwest then the url scheme that the other applications can use to launch the southwest application is _southwest://_. For more information about deep-linking, see [Appendix E: the App Service Event](AppServiceEvent.md).
     *   **Platform Settings**: Using the Platform Settings Area, you can set certain default properties for an application for iPhone.
         
