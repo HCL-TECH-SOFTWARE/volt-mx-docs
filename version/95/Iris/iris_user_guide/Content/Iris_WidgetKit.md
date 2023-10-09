@@ -130,7 +130,7 @@ Here is a sample `widgetProperties.json` file:
                 "LARGE" : "accountsWidgetLarge.json",
                 "EXTRALARGE" : "accountsWidgetExtraLarge.json"
             },
-            "widgetURL":"widget://accounts"
+            "widgetURL":"widget://accounts",
             "disableDefaultMargins":"true"
         },
         {
