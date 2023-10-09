@@ -449,7 +449,7 @@ Available on iPhone and iPad.
 
 * * *
 
-Checks and returns the permission status of one or more resources.
+Checks and returns the permission status of one or more resources. Checks the calendar permission status.
 
 ### Syntax
 
@@ -484,6 +484,7 @@ voltmx.application.checkPermission(resourceId\[constant/String\], options\[JSObj
 <li>voltmx.os.RESOURCE_SIRI (iOS-specific)</li>
 <li>voltmx.os.RESOURCE_AUDIO_RECORD (iOS-specific)</li>
 <li>voltmx.os.RESOURCE_NOTIFICATION (iOS-specific)</li>
+<li>voltmx.os.RESOURCE_CALENDAR_WRITE_ONLY <br><em><b>Note: </b></em>returns true when user granted write only access and full access for app. Works only iOS 17 and above.</li>
 </ul>
 </td>
 </tr>
@@ -2965,6 +2966,7 @@ voltmx.application.requestPermission(resourceId\[constant/String\], statusCallba
 <li>voltmx.os.RESOURCE_SIRI (iOS-specific)</li>
 <li>voltmx.os.RESOURCE_AUDIO_RECORD (iOS-specific)</li>
 <li>voltmx.os.RESOURCE_NOTIFICATION (iOS-specific)</li>
+<li>voltmx.os.RESOURCE_CALENDAR_WRITE_ONLY<br><em><b>Note: </b></em>It requests only write access to calendar events. Works only from iOS 17 and above. From iOS 17 voltmx.application.requestPermission with resource id: voltmx.os.RESOURCE_CALENDAR will request the FullAccess. Make sure you have added the corresponding info plist key.</li>
 </ul>
 </td>
 </tr>
