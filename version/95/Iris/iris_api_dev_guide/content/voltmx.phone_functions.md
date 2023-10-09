@@ -208,6 +208,8 @@ Events cannot be added in the past.
 
 When your app calls this function on Android, it must have both the READ\_CALENDAR and WRITE\_CALENDAR permissions. Due to Android limitations, when your app sets an alarm with this function the number of seconds are rounded to the nearest minute. Events are added to the local calendar with the calendar name as the application name. They cannot be synched to email accounts.
 
+When your app calls this function on iOS, the app must have NSCalendarsUsageDescription  in info plist. Starting iOS 17, app must have NSCalendarsWriteOnlyAccessUsageDescription or NSCalendarsFullAccessUsageDescription in info plist. For more details, refer to [Apple documentation](https://developer.apple.com/documentation/eventkit/accessing_the_event_store).
+
 The time zone of events that your app adds is the same as the device's current time zone.
 
 ### Platform Availability
@@ -499,6 +501,9 @@ The search criteria in the type key in the _evtobj_ parameter can be any of the 
 READ\_CALENDAR permission is needed to use this function.
 
 This function is supported on Android 4.0 version and above (that is, Android API 14 and later). Invocation on Android version less than 4.0 ( that is, an Android API level earlier than 14) is ignored.
+
+When your app calls this function on iOS, the app must have NSCalendarsUsageDescription in info plist. Starting iOS 17, app must have  NSCalendarsFullAccessUsageDescription in info plist.
+For more details, refer to [Apple documentation](https://developer.apple.com/documentation/eventkit/accessing_the_event_store).
 
 This function searches only those events that are added by the application.
 
@@ -975,6 +980,7 @@ The following error codes are defined for Phone APIs
 
 *   READ\_CALENDAR and WRITE\_CALENDAR permissions are needed for this API.
 *   This API is supported for Android 4.0 version and above (that is, Android API level later to 13). Invocation on Android version less than 4.0 ( that is, Android API level earlier to 14) will be ignored.
+*   When your app calls this function on iOS, the app must have NSCalendarsUsageDescription  in info plist. Starting iOS 17, app must have NSCalendarsWriteOnlyAccessUsageDescription or NSCalendarsFullAccessUsageDescription in info plist. For more details, refer to [Apple documentation](https://developer.apple.com/documentation/eventkit/accessing_the_event_store).  
 *   If this API removes last calendar event added to local calendar, then the local calendar account will be deleted.
 
 * * *

@@ -49,28 +49,28 @@ To use iOS Home Screen Widgets in Volt MX Iris, you must include the widget conf
 
     Here is a sample quantum_nitro_configuration.json file entry that enables app group for communication between the app and home widget:
     
-```
-   {
-	"iOS":{
-		"KRelease":{
-			"Capabilites":{
-                "com.apple.security.application-groups" : ["group.com.widget.testWidget"]
-			},
-			"BuildSettings":{
-			}
-		},
-        "VoltmxWidgetExtension":{
-            "Capabilites":{
-                "com.apple.security.application-groups" : ["group.com.widget.testWidget "]
+    ```
+    {
+        "iOS":{
+            "KRelease":{
+                "Capabilites":{
+                    "com.apple.security.application-groups" : ["group.com.widget.testWidget"]
+                },
+                "BuildSettings":{
+                }
+            },
+            "VoltmxWidgetExtension":{
+                "Capabilites":{
+                    "com.apple.security.application-groups" : ["group.com.widget.testWidget "]
+                }
             }
+        },
+        "Android":
+        {
         }
-    },
-	"Android":
-	{
-	}
-}
+    }
 
-```
+    ```
     
 3.  Create a new folder in the KAR file, and name it **VoltmxWidgets**. Within the VoltmxWidgets folder, add the following files/folders:
     
@@ -109,7 +109,8 @@ To use iOS Home Screen Widgets in Volt MX Iris, you must include the widget conf
             *   **EXTRALARGE** key: The value for this key is the form.json structure of the extralarge widget.
         7.  If the widget does not support a particular size, the value for that particular key must be an empty string.
             If the composite form.json file does not exist, the composite structure file will be generated from the from.sm folder, and the themes are combined.
-        8.  **widgetURL**: A deep link URL that the application is expected to receive when a user taps the widget.
+        8.  **widgetURL**: A deep link URL that the application is expected to receive when a user taps the widget.        
+        9.  **disableDefaultMargins**: From iOS 17.0, the existing home widgets will have content margins by default. To disable the content margins, that are set by default from iOS 17.0, this key needs to be added for each widget and set to true ("disableDefaultMargins":"true"). The default value for this key is false.
 
     *   **CommonJSScripts** - A folder that contains the common JS files used by both the main iOS application and the widget (both the app and the widget use different environments).
 
@@ -129,7 +130,8 @@ Here is a sample `widgetProperties.json` file:
                 "LARGE" : "accountsWidgetLarge.json",
                 "EXTRALARGE" : "accountsWidgetExtraLarge.json"
             },
-            "widgetURL":"widget://accounts"
+            "widgetURL":"widget://accounts",
+            "disableDefaultMargins":"true"
         },
         {
             "widgetID" : "scheduledTransactionsWidget",
