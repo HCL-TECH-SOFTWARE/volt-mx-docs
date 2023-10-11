@@ -564,9 +564,11 @@ In Android, the _Bundle OpenSSL Library_ option is available in **Application Pr
 
 If the _klen_ parameter is provided to this function, you must make sure that this key length is supported by a corresponding encryption or decryption algorithm. For aes ciphers, the supported key lengths are 128, 192, or 256 bits. For tripledes ciphers, the possible key length is 192.
 
+The PBKDF2 key that you create in a Responsive Web app cannot be used across other platforms.
+
 ### Platform Availability
 
-Available in iOS, Android , and Windows.
+Available in iOS, Android and Responsive Web.
 
 * * *
 

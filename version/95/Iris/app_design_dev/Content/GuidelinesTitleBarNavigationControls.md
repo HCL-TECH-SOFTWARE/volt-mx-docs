@@ -26,4 +26,7 @@ Android’s native way of facilitating the navigation in the application is to u
 
 Page Title Header will be horizontally center-aligned and vertically middle-aligned on the navigation bar by default.
 
-![](Resources/Images/TitleBarExamples_276x444.png)
+![](Resources/Images/TitleBarsExamples_132x222.png)
+
+
+
