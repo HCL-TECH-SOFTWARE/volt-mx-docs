@@ -180,6 +180,8 @@ Callback function
 
 A function that contains the logic to be implemented when the widget is in focus.
 
+The callback function of the onFocus Event contains a new parameter, **activeElement**. The activeElement parameter specifies the widget that is currently in focus.
+
 ### Read/Write
 
 Read + Write
