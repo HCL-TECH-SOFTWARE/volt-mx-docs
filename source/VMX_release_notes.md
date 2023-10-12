@@ -50,7 +50,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 ## Volt Iris
 
 
-### V9 Servicepack 2 Fixpack 65
+### V9 Servicepack 2 Fixpack 66
 October 13, 2023
 
 #### Iris Enhancements
