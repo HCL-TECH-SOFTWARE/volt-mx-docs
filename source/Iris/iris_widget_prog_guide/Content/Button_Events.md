@@ -113,6 +113,56 @@ Platform Availability
 * * *
 
 </details>
+<details close markdown="block"><summary>onFocus Event</summary>
+
+* * *
+
+An event that accepts a callback function as an input and executes the functionality defined in the callback function when the widget is in focus.
+
+### Syntax
+
+```
+
+onFocus()
+```
+
+### Input Parameters
+
+Callback function
+
+A function that contains the logic to be implemented when the widget is in focus.
+
+The callback function of the onFocus Event contains a new parameter, **activeElement**. The activeElement parameter specifies the widget that is currently in focus.
+
+### Read/Write
+
+Read + Write
+
+### Remarks
+
+Assign a null value to the onFocus event of a widget to remove focus from the widget.
+
+### Example
+
+```
+//This is a generic event that is applicable for various widgets.
+/*Here, we have shown how to use the onFocus event for a Button widget. You need to make a corresponding use of the onFocus event for other applicable widgets.*/
+
+frmButton.myButton.onFocus = onFocusCallBack;
+
+function onFocusCallBack(widget, activeElement) {
+    console.log('onFocus event triggered');
+}
+```
+
+Platform Availability
+
+*   Available in the IDE
+*   Available on the Responsive Web platform
+
+* * *
+
+</details>
 <details close markdown="block"><summary>onScrollWidgetPosition Event</summary>
 
 * * *
