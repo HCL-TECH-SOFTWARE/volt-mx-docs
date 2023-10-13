@@ -56,17 +56,10 @@ October 13, 2023
 #### Iris Enhancements
 
 * Xcode 15 support has been added.
->**_Note:_** For Xcode 15 minimum target is iOS version 12.
+  >**_Note:_** For Xcode 15 minimum target is iOS version 12.
 
-<html>
-<body>
-<ul>
-  <li>iOS 17 target and NFI support has been added.Since support for lower version than iOS 12 has been deprecated from the Xcode required to generate binaries compliant with Apple App Store, these lower versions have been removed from the build target list in Volt Iris.</li>
- </ul>
-</body>
-</html>
-
->**_Note:_** To get the latest list of iOS target versions in project settings, please ensure to build any app for iOS native platforms once, post upgrade.</p>If a project uses iOS target version less than 12, the version will be updated to 12 during the process of import into Iris.
+* iOS 17 target and NFI support has been added.Since support for lower version than iOS 12 has been deprecated from the Xcode required to generate binaries compliant with Apple App Store, these lower versions have been removed from the build target list in Volt Iris.
+  >**_Note:_** To get the latest list of iOS target versions in project settings, please ensure to build any app for iOS native platforms once, post upgrade.</p>If a project uses iOS target version less than 12, the version will be updated to 12 during the process of import into Iris.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
