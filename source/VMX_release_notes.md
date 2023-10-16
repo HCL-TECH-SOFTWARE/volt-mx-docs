@@ -265,16 +265,11 @@ October 21, 2023
 
 #### Foundry Enhancements
 
-utf8mb4 support has been introduced for MySQL database.
-
+* utf8mb4 support has been introduced for MySQL database.
 * Support for MySQL 5.7 has been removed as per the DB’s EOL.
 * Support for Jasper 7.9.2. Refer here for Jasper 7.9.2 steps to integrate with Foundry.
+* Security fixes.
 
-
-#### Fixes 
-
-
-#### Security fixes
 
 ### V9 Servicepack 2 Fixpack 1 Hotfix 20
 September 28, 2023
