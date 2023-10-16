@@ -4,7 +4,7 @@
 
 *   [Prerequisites](Prerequisites.md#prerequisites)
     *   [System Requirements](Prerequisites.md#system-requirements)
-    *   [Download Volt MX Iris](Prerequisites.md#download)
+    *   [Download Volt MX Iris](Prerequisites.md#download-volt-mx-iris)
 *   [Install Volt MX Iris](Installing VoltMX Iris.md#installing)
     *   [Configuring Volt MX Iris to use a Proxy server](Installing VoltMX Iris.md#configuring-to-use-a-proxy-server)
         *   [Basic Proxy](Installing VoltMX Iris.md#basic-proxy)
