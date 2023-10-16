@@ -8,7 +8,7 @@ This document provides details of how to install Volt MX Iris on a Windows machi
 *   [Install Iris](Installing VoltMX Iris.md#installing)
 *   [Post Installation Tasks](Launching VoltMX Iris.md#post-installation-tasks)
 
-## Prerequisites
+### Prerequisites
 
 Following are the prerequisites to install and run Volt MX Iris:
 
