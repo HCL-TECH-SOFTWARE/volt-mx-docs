@@ -86,6 +86,8 @@ For detailed information about fixes and known issues in this release, see the <
 
 September 17, 2023
 
+* macOS Sonoma (14.x) support has been added.
+
 **Volt IQ - AI Assisted Development**
 
 * This feature is now supported for on-premise installations.
