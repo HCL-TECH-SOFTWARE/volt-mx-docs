@@ -270,7 +270,9 @@ utf8mb4 support has been introduced for MySQL database.
 * Support for MySQL 5.7 has been removed as per the DB’s EOL.
 * Support for Jasper 7.9.2. Refer here for Jasper 7.9.2 steps to integrate with Foundry.
 
+
 #### Fixes 
+
 
 #### Security fixes
 
