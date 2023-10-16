@@ -3,8 +3,6 @@
 
 This section provides information on how to update and rollback from one version of Volt MX Iris to another version.
 
-
-
 ### Update Volt MX Iris
 
 Volt MX releases an update package with consolidated plug-ins regularly. When Volt MX releases an update, you will receive an update notification on your Iris instance that prompts you to update to the latest version of Volt MX Iris.
