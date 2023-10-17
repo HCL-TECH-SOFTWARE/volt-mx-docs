@@ -30,6 +30,7 @@ The installation of the Volt Foundry software supports the following versions of
 
 *   Red Hat Enterprise Linux (RHEL)
     
+    *   RHEL 9
     *   RHEL 8.5
     *   RHEL 7.8
     *   RHEL 7.7 (Maipo)
@@ -37,6 +38,7 @@ The installation of the Volt Foundry software supports the following versions of
 
 *   Ubuntu
 
+    *   Ubuntu 22.04
     *   Ubuntu 22
     *   Ubuntu 21
     *   Ubuntu 20
