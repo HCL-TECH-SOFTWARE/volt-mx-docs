@@ -12,10 +12,10 @@ The general actions that you can use in an action sequence are as follows:
 | [Loop Action](#loop-action) | Repeat a set of nested statements for the specified number of times. |
 | [Add Variable](#add-variable) | Adds a variable that is available within a function. Local variable can be of type Constant or Expression and take the following data type: String, Number, Boolean and or Collection. |
 | [Modify Variable](#modify-variable) | Modify an existing variable. |
-| [Navigate to Form](#navigation) | Navigates from one form to another. |
+| [Navigate to Form](#navigate-to-form) | Navigates from one form to another. |
 | [String Operation](#string-operation) | Perform operations (such as combine or split) on strings. |
 | [Try-Catch](#try-catch) | Marks a block of statements to try, and specifies a response, should an exception be thrown. |
-| [Exit App](#navigation) | Closes the application. |
+| [Exit App](#exit-app) | Closes the application.(Not supported for Apple Watch) |
 | [Set Timeout](#set-timeout) | Set a timeout variable. |
 | [Clear Timeout](#clear-timeout) | Clear the timeout. |
 
@@ -122,7 +122,9 @@ To define an action sequence to execute a try-catch block of code, do the follow
 
 5.  Click **Save** to save the action sequence, and then close the Action Editor window.
 
-### Navigation
+5.  Click **Save** to save the action sequence and close the Action Editor window.
+
+### Navigate to Form
 
 To define an action sequence for navigating to a form, or exit an app, do the following:
 
