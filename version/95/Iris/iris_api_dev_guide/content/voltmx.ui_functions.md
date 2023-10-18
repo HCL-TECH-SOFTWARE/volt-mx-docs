@@ -2700,6 +2700,72 @@ All writable properties can be optionally passed inside dictionary objects to th
 * * *
 
 </details>
+
+<details close markdown="block"><summary>voltmx.ui.renderTo</summary> 
+
+* * *
+
+Renders the Component instance and the placeholder.
+
+### Syntax
+
+```
+
+voltmx.ui.renderTo(  
+    model,  
+    elementRefById);
+```
+
+### Input Parameters
+
+| Parameter | Description |
+| --- | --- |
+| model [JSON Object] | A JavaScript object that contains the component instance. |
+| elementRefById [String] | The placeholder Element ID. |
+
+
+ 
+### Example
+
+```
+
+getElement() {
+    this.voltmxComp = new VoltMX.Comp({
+        "autogrowMode": voltmx.flex.AUTOGROW_NONE,
+        "height": "730px",
+        "id": "Comp",
+        "isVisible": true,
+        "layoutType": voltmx.flex.FREE_FORM,
+        "left": "0dp",
+        "masterType": constants.MASTER_TYPE_DEFAULT,
+        "isModalContainer": false,
+        "skin": "slFbox",
+        "top": "0dp",
+        "width": "1350px",
+        "appName": "Segement",
+        "overrides": {
+            "Comp": {
+                "height": "115.53%",
+                "width": "105.42%"
+            }
+        }
+    }, {
+        "paddingInPixel": false,
+        "overrides": {}
+    }, {
+        "overrides": {}
+    });
+    voltmx.ui.renderTo(this.VoltMXComp, "one");
+```
+
+### Return Values
+
+Renders the specified component instance.
+
+* * *
+
+</details>
+
 <details close markdown="block"><summary>voltmx.ui.RadioButtonGroup</summary> 
 
 * * *
