@@ -19,7 +19,7 @@ Constructs an `ActionItem` object for use in an [ActionSheet object](actionsheet
 
 ```
 
-new voltmx.ui.ActionItem(actionItemParams)
+new voltmx.ui.ActionItem(actionItemParams);
 ```
 
 ### Input Parameters
@@ -80,7 +80,7 @@ Constructs an `ActionSheet` object that represents an iOS Action Sheet.
 
 ```
 
-voltmx.ui.ActionSheet(actionSheetParams)
+voltmx.ui.ActionSheet(actionSheetParams);
 ```
 
 ### Input Parameters
@@ -146,7 +146,7 @@ All the alerts are modal in nature, i.e., the user cannot proceed with other UI 
 
 ```
 
-voltmx.ui.Alert(basicConfig, pspConfig)
+voltmx.ui.Alert(basicConfig, pspConfig);
 ```
 
 ### Input Parameters
@@ -286,7 +286,7 @@ Creates the ARRenderer widget. It occupies some space on a form depending on its
 
 ```
 
-voltmx.ui.ARRenderer(arBasic, arLayout, arPsp)
+voltmx.ui.ARRenderer(arBasic, arLayout, arPsp);
 ```
 
 ### Input Parameters
@@ -485,7 +485,7 @@ Returns a URL that points to the privacy policy for Safe Browsing reporting, whi
 
 ```
 
-voltmx.ui.BrowserSettings.getSafeBrowsingPrivacyPolicyUrl()
+voltmx.ui.BrowserSettings.getSafeBrowsingPrivacyPolicyUrl();
 ```
 
 ### Example
@@ -619,7 +619,7 @@ All other rules, including wildcards, are not valid. The correct syntax for host
 
 ```
 
-voltmx.ui.BrowserSettings.setSafeBrowsingWhitelist(\[url1,url2\], callback)
+voltmx.ui.BrowserSettings.setSafeBrowsingWhitelist(\[url1,url2\], callback);
 ``` 
 
 ### Type
@@ -901,7 +901,7 @@ Creates a Canvas widget.
 voltmx.ui.Canvas(  
     basicConfig,  
     layoutConfig,  
-    pspConfig)
+    pspConfig);
 ```
 
 ### Input Parameters
@@ -985,7 +985,7 @@ Creates a [CheckBoxGroup](../../../Iris/iris_widget_prog_guide/Content/CheckBox.
     basicConf,  
     layoutConf,  
     pspConf);
- ```
+```
 
 ### Input Parameters
 
@@ -2380,7 +2380,7 @@ Creates a transformation object that can be used in an animation definition.
 
 ```
 
-voltmx.ui.makeAffineTransform()
+voltmx.ui.makeAffineTransform();
 ```
 
 ### Example
@@ -2494,7 +2494,7 @@ Creates the PDFView widget. It occupies some space on a form depending on its po
 
 ```
 
-voltmx.ui.PDFView(pdfBasic, pdfLayout, pdfPsp)
+voltmx.ui.PDFView(pdfBasic, pdfLayout, pdfPsp);
 ```
 
 ### Input Parameters
@@ -2785,7 +2785,7 @@ Creates the SignInWithApple widget.
 
 ```
 
-voltmx.ui.signInWithApple(signInWithAppleBasic, signInWithAppleLayout, signInWithApplePsp)
+voltmx.ui.signInWithApple(signInWithAppleBasic, signInWithAppleLayout, signInWithApplePsp);
 ```
 
 ### Input Parameters
@@ -2842,7 +2842,7 @@ Creates a `Toast` object.
 
 ```
 
-voltmx.ui.Toast(configParams)
+voltmx.ui.Toast(configParams);
 ```
 
 ### Input Parameters
