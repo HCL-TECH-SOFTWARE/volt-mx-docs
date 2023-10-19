@@ -21,7 +21,7 @@
 
 You are here: [Install Volt MX Iris](#installing) > [Configuring Volt MX Iris to use a Proxy server](#configuring-to-use-a-proxy-server) > Basic Proxy -->
 
-# Installing Volt MX Iris
+# Install Volt MX Iris
 
 To install Volt MX Iris on your Mac computer, follow these steps:
 

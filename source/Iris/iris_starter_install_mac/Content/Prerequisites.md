@@ -1,13 +1,10 @@
 
-# Volt MX Iris V9 Mac Install Guide
+# Volt MX Iris V9 Mac Install Guide (Prerequisites)
 
 This document explains how to install Volt MX Iris and the required software on your Macintosh computer, using an installer program.
 
-- [Prerequisites](#prerequisites)
 - [Install Volt MX Iris](Installing VoltMX Iris.md#installing)
 - [Post Installation Tasks](Launching VoltMX Iris.md#post-installation-tasks)
-
-# Prerequisites
 
 Following are the requirements needed to complete the installation process. They include the hardware and software prerequisites required to complete the process.
 

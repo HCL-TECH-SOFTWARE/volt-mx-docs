@@ -1,4 +1,4 @@
-
+<!-- 
 [](Prerequisites.md)
 
 - [Prerequisites](Prerequisites.md#prerequisites)
@@ -19,7 +19,7 @@
 
 - All Files
 
-You are here: FAQs
+You are here: FAQs -->
 
 # Frequently Asked Questions (FAQs)
 
