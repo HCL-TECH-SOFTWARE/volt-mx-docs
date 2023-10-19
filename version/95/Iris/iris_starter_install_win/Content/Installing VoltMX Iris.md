@@ -1,5 +1,5 @@
 
-# Installing Volt MX Iris
+# Install Volt MX Iris
 
 To install Volt MX Iris, follow these steps:
 

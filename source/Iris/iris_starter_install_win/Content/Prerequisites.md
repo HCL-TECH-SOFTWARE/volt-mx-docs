@@ -1,14 +1,13 @@
-Volt MX Iris V9 Windows Install Guide
-======================================
+Volt MX Iris V9 Windows Install Guide (Prerequisites)
+===============================================
 
 This document provides details of how to install Volt MX Iris on a Windows machine.
 
-*   [Prerequisites](#prerequisites)
+
 *   [Downloading Volt MX Iris](#downloading-volt-mx-iris)
 *   [Install Iris](Installing VoltMX Iris.html#installing)
 *   [Post Installation Tasks](Launching VoltMX Iris.html#post-installation-tasks)
 
-## Prerequisites
 
 Following are the prerequisites to install and run Volt MX Iris:
 

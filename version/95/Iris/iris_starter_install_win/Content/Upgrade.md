@@ -1,31 +1,7 @@
-
-[](Prerequisites.md)
-
-- [Prerequisites](Prerequisites.md#prerequisites)
-  - [System Requirements](Prerequisites.md#system-requirements)
-  - [Download Volt MX Iris](Prerequisites.md#download)
-- [Install Volt MX Iris](Installing VoltMX Iris.md#installing)
-  - [Configuring Volt MX Iris to use a Proxy server](Installing VoltMX Iris.md#configuring-to-use-a-proxy-server)
-    - [Basic Proxy](Installing VoltMX Iris.md#basic-proxy)
-    - [NTLM Proxy](Installing VoltMX Iris.md#ntlm-proxy)
-    - [Custom NTLM Proxy](Installing VoltMX Iris.md#custom-ntlm-proxy)
-    - [White-list Essential Domains](Installing VoltMX Iris.md#white-list-essential-domains)
-- [Post Installation Tasks](Launching VoltMX Iris.md#post-installation-tasks)
-  - [Launching Volt MX Iris](Launching VoltMX Iris.md#launching)
-- [Update Volt MX Iris](#)
-- [FAQs](StudioInstallation_FAQs.md#appendix-frequently-asked-questions-faqs)
-
-[](#)
-
-- All Files
-
-You are here: Update Volt MX Iris
-
-# Upgrade or Rollback the Version of Volt MX Iris
+Update Volt MX Iris
+==================
 
 This section provides information on how to update and rollback from one version of Volt MX Iris to another version.
-
-## Update Volt MX Iris
 
 Volt MX releases an update package with consolidated plug-ins regularly. When Volt MX releases an update, you will receive an update notification on your Iris instance that prompts you to update to the latest version of Volt MX Iris.
 
@@ -158,13 +134,3 @@ To roll back to a previous version of Volt MX Iris, follow these steps:
 - If you cancel the installation and try to download the same version again, Volt MX Iris displays a dialog box with the `Already Downloaded` message.
 - If you attempt a download when another download is in progress, Volt MX Iris displays a dialog box with the `A download is currently in progress` message.
 - If you attempt to download a version without installing the previous version that was downloaded, Volt MX Iris displays the `A download Fix Pack is pending install. Install the Fix Pack or delete it to continue` message with the **Install** and **Delete**
-
-<!-- - [Prerequisites](Prerequisites.md#prerequisites)
-  - [System Requirements](Prerequisites.md#system-requirements)
-  - [Download Volt MX Iris](Prerequisites.md#download)
-- [Install Volt MX Iris](Installing VoltMX Iris.md#installing)
-  - [Configuring Volt MX Iris to use a Proxy server](Installing VoltMX Iris.md#configuring-to-use-a-proxy-server)
-- [Post Installation Tasks](Launching VoltMX Iris.md#post-installation-tasks)
-  - [Launching Volt MX Iris](Launching VoltMX Iris.md#launching)
-- [Update Volt MX Iris](#)
-- [FAQs](StudioInstallation_FAQs.md#appendix-frequently-asked-questions-faqs) -->
