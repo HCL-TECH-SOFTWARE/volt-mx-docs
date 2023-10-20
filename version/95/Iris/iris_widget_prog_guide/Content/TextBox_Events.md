@@ -316,7 +316,7 @@ Assign a null value to the onFocus event of a widget to remove focus from the wi
    
 frmButton.myButton.onFocus = onFocusCallBack;
 
-function onFocusCallBack(widget) {
+function onFocusCallBack(widget, activeElement) {
     console.log('onFocus event triggered');
 }
 ```
