@@ -180,6 +180,8 @@ Callback function
 
 A function that contains the logic to be implemented when the widget is in focus.
 
+The callback function of the onFocus Event contains a new parameter, **activeElement**. The activeElement parameter specifies the widget that is currently in focus.
+
 ### Read/Write
 
 Read + Write
@@ -198,7 +200,7 @@ Assign a null value to the onFocus event of a widget to remove focus from the wi
    
 frmButton.myButton.onFocus = onFocusCallBack;
 
-function onFocusCallBack(widget) {
+function onFocusCallBack(widget, activeElement) {
     console.log('onFocus event triggered');
 }
 ```
