@@ -288,7 +288,11 @@ onFocus()
 
 <b>Input Parameters</b>
 
-<em>Callback function</em>: A function that contains the logic to be implemented when the widget is in focus. <br>
+<em>Callback function</em>: 
+
+A function that contains the logic to be implemented when the widget is in focus.
+
+The callback function of the onFocus Event contains a new parameter, **activeElement**. The activeElement parameter specifies the widget that is currently in focus.
 
 
 <b>Read/Write</b>
@@ -307,7 +311,7 @@ Assign a null value to the onFocus event of a widget to remove focus from the wi
 /*Here, we have shown how to use the onFocus event for a Button widget. You need to make a corresponding use of the onFocus event for other applicable widgets.*/
 
 frmButton.myButton.onFocus = onFocusCallBack;
-function onFocusCallBack(widget) {    
+function onFocusCallBack(widget, activeElement) {    
 console.log('onFocus event triggered');
 }
 ```
