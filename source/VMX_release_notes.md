@@ -267,7 +267,7 @@ October 23, 2023
 
 * utf8mb4 support has been introduced for MySQL database.
 * Support for MySQL 5.7 has been removed as per the DB’s EOL.
-* Support for Jasper 7.9.2. Refer here for Jasper 7.9.2 steps to integrate with Foundry.
+* Support for Jasper 7.9.2. Refer [here](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_analytics_reporting/Content/How_to_Upgrade_JasperServer.html) for Jasper 7.9.2 steps to integrate with Foundry.
 * Security fixes.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
