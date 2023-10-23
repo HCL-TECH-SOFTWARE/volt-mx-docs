@@ -261,7 +261,7 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ## Volt Foundry
 
 ### V9 Servicepack 2 Fixpack 2 Hotfix 0
-October 21, 2023
+October 23, 2023
 
 #### Foundry Enhancements
 
@@ -269,6 +269,8 @@ October 21, 2023
 * Support for MySQL 5.7 has been removed as per the DB’s EOL.
 * Support for Jasper 7.9.2. Refer here for Jasper 7.9.2 steps to integrate with Foundry.
 * Security fixes.
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 
 ### V9 Servicepack 2 Fixpack 1 Hotfix 20
