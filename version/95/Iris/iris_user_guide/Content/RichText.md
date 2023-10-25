@@ -62,7 +62,10 @@ Specifies how the label wraps text, either Word Wrap or Character Wrap:
 
 #### Tool Tip
 
-For the Windows Tablet platform, specifies a message that displays when you hover the mouse pointer over the widget .
+For the Windows Tablet platform, specifies a message that displays when you hover the mouse pointer over the widget.
+
+> **_Note:_** As from V9.5.15 onwards, `windows desktop` channel has been removed or not supported, so the `Rich Text` property that was applicable to only this channel, is no longer supported and is not visible.
+
 
 ### Actions
 
