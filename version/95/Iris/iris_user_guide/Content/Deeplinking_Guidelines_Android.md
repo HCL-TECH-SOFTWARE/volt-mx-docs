@@ -16,6 +16,11 @@ HTML Code:
 
 ![](Resources/Images/deeplink_u1.png)  
 
+
+<video width="320" height="240" controls>
+  <source src="Resources/Images/DeepLinkUri_1.mp4" type="video/mp4">
+</video>
+
 Web links
 -----------
 
