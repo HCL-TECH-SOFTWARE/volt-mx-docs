@@ -537,6 +537,34 @@ If an app runs on Android 11 (Target SDK level 30, or later) devices, you must i
 
 Based on the Package Visibility behavior updates, when you build an Android 11 (Target SDK level 30, or later) app in **Protected Mode**, by default, the `<uses-permission android:name=“android.permission.QUERY_ALL_PACKAGES”/>` permission is added in the Android Manifest file for Protected Mode Builds to work seamlessly. If you do not want this permission to be automatically added, you must add the `donotAddQueryAllPackages = true` entry in the **androidbuild.properties** file of the project source directory.
 
+From June 2022, Google is restricting the use of this permission to limit the visibility into other applications installed on the device. Its usage is still officially allowed for apps which has core functionality  of types Security apps , antivirus ,browser apps , device management apps or Accessibility apps. If the core functionality matches any of these  or if you think your application justifies the usage of the current permission by following below android suggested way using the inputs as part of this knowledge article.
+
+#### Android links
+
+[package-visibility](https://developer.android.com/training/package-visibility/declaring) <br>
+[googleplay](https://support.google.com/googleplay/android-developer/answer/10158779#zippy=%2Cinvalid-uses)
+
+For security reasons we strongly suggest re-submitting your apps and appealing to get this permission using our provided materials and explanations why the permission is required for your application , however the usage of this technique is just supportive algorithm that serve only as backup or deprecated technique. So If Android Playstore denies your request we suggest to temporarily disabling the techniques that use this permission by declaring the flag in androidbuild.properties as `donotAddQueryAllPackages = true`. The majority of the guards can function just as efficient in most of the situations even with these techniques disabled. 
+
+### Guidelines for appealing to playstore 
+
+An explanation of why the app requires broad app-visibility? (Playstore question)
+ 
+Volt Iris sdk provides comprehensive solution that ensures that the Android application is running in a secure environment without tampering. Root, Hook, and Emulator detection provide a well-rounded coverage of various attack vectors that can compromise application behavior and put user at risk. Scanning other installed applications is one of key aspects of ensuring a safe execution environment. By examining the actions and permissions of these applications we can determine if an application is malicious or not. Attackers can gain root access to the device and compromise application behavior, stealing user’s private data. These attacks target financial, medical, and similar security-heavy applications that implement payment gateways or uses third party payment sdk's for which  correct and safe execution is critical.
+ 
+Why using a less-wide search is not possible ?
+There are millions of different Android malware in the world and the amount is rapidly growing. Some of those even re-use package names of real applications or randomly generate new ones. It is impossible to list all the malware database in the QUERY_ALL_PACKAGES definition.
+
+Why using SafetyNet Verify Apps API is not enough?
+ 
+There are multiple reasons why the Verify Apps is not a practical solution for financial customers where detection speed and trust are particularly important:
+
+1. The Verify Apps feature must be enabled by the user.
+2. The warning about a malicious app must not be ignored by
+   the user, what most people commonly do.
+3. The Verify Apps feature uses an outdated database that 
+   cannot detect the latest malware. After testing this feature with the latest and most popular malware we found that less than half of the malware samples were reported while our algorithm scored more than 90% detection rate.
+
 #### Security Provider Patching
 
 The Android Framework relies on Security Providers to provide secure network communications. However, you might find intermittent vulnerabilities in the default security provider. To protect against such vulnerabilities, [Google Play Services](https://developer.android.com/google/play-services) provides a way to automatically update the security provider to enhance device protection.
