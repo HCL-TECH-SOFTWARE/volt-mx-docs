@@ -170,8 +170,8 @@ display:none;
     <a class="links-a" href="Iris/iris_tutorials/Content/Module/introduction_to_marketplace.html">Marketplace</a> <span class="links-description">(Ready to use sample apps, widgets, and integrations to accelerate your development and learning)</span>
 </div>
     <ul style="position: relative; top: -10px;">
-    <li class="links-li-first"><a href="https://marketplace.hclvoltmx.com/">Marketplace for Customers</a></li>
-    <li class="links-li"><a href="https://marketplace.demo-hclvoltmx.com/">Marketplace for Trial/Demo Users</a></li>
+    <li class="links-li-first"><a href="https://marketplace.hclvoltmx.com/">Marketplace for Volt MX Cloud Customers</a></li>
+    <li class="links-li"><a href="https://marketplace.demo-hclvoltmx.com/">Marketplace for Trial/Demo Users & Volt MX On-Premises Customers</a></li>
     </ul>
 </div>
     </td>
