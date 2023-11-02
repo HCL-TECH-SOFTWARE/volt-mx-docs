@@ -1,8 +1,9 @@
 
 ### Desktop Native Application Overview
 
-
 A desktop native application is an application that can be installed and run locally on a desktop computer.  The desktop native application is a web application  running in an electron environment with the ability to integrate with the desktop environment and communicate and work with the desktop resources as the application developer permits.  Access to the desktop environment is managed by poly-filling existing Volt MX apis or adding your own using Native Function Interfaces.  As is typically the case with Volt MX built applications, the desktop native applications can be client-server based and interface with the Volt MX Foundry server using services and providers specific to your application needs.   Using Volt MX, desktop native applications can be created for Mac and Windows computers.  
+
+> **_Note:_**  The electron JS based desktop native build doesn’t support “free-form” architecture applications. It supports only MVC architecture applications.
 
 ### Desktop Native Applications
 
