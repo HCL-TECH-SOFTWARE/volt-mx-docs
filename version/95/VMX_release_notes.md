@@ -784,7 +784,7 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 
 November 06, 2023
 
-#### Foundry Enhancements
+#### AppFactory Enhancements
 
 * Support added for channel specific path of Testing test scripts.
 
