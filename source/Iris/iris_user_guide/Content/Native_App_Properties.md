@@ -564,6 +564,35 @@ There are multiple reasons why the Verify Apps is not a practical solution for f
 3. The Verify Apps feature uses an outdated database that 
    cannot detect the latest malware. After testing this feature with the latest and most popular malware we found that less than half of the malware samples were reported while our algorithm scored more than 90% detection rate.
 
+#### QUERY_ALL_PACKAGES permission funcitonality:
+ 
+#### The Flow of the Functionality:
+
+1. The on-device algorithm reads AndroidManifest.xml from other
+   applications and reads the following info:
+
+    * Permissions
+    * Broadcast Receivers
+    * Services
+    * Actions of intent filters
+
+    No personal user data is ever captured or stored.
+
+2. The gathered data is then passed to our internal proprietary
+   algorithm that decides if said application is potentially malicious or not. The algorithm only returns a score and does not store the data.
+
+3. If the algorithm decides that the application can be malicious,
+   the application info is then securely sent to internal sdk servers where its signature is verified against server database. The result is then returned to the device where the proper action can be taken.
+    
+   The algorithm has a low probability of false positives, so in the vast majority of cases the scanned application is considered safe, and all collected data is immediately discarded.
+   Only the data about confirmed malicious applications is stored on the system and presented to the user. All the information (including the app and package name) is discarded if the application is safe.
+ 
+   We detect malicious applications by examining the code, assets or permissions of other installed applications. We only scan for malicious actions, no other data is being searched for or collected.
+
+   VoltIris sdk never accesses any of the user’s private data. All the information about installed legitimate applications is immediately discarded and never stored anywhere .we only collect indications of compromise from malicious apps.
+
+   All the application scanning is performed internally in a protected container. The scanning algorithm is protected from tampering, so information about other installed applications cannot be extracted.
+
 
 #### Security Provider Patching
 
