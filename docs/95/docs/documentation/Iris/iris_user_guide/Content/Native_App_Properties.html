@@ -1146,6 +1146,40 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#android-links" class="md-nav__link">
+    Android links
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#guidelines-for-appealing-to-playstore" class="md-nav__link">
+    Guidelines for appealing to playstore
+  </a>
+  
+    <nav class="md-nav" aria-label="Guidelines for appealing to playstore">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#query_all_packages-permission-funcitonality" class="md-nav__link">
+    QUERY_ALL_PACKAGES permission funcitonality:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-flow-of-the-functionality" class="md-nav__link">
+    The Flow of the Functionality:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#security-provider-patching" class="md-nav__link">
     Security Provider Patching
   </a>
@@ -1872,6 +1906,40 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#android-links" class="md-nav__link">
+    Android links
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#guidelines-for-appealing-to-playstore" class="md-nav__link">
+    Guidelines for appealing to playstore
+  </a>
+  
+    <nav class="md-nav" aria-label="Guidelines for appealing to playstore">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#query_all_packages-permission-funcitonality" class="md-nav__link">
+    QUERY_ALL_PACKAGES permission funcitonality:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-flow-of-the-functionality" class="md-nav__link">
+    The Flow of the Functionality:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#security-provider-patching" class="md-nav__link">
     Security Provider Patching
   </a>
@@ -2544,6 +2612,53 @@ Details of the auto-generated activity and its theme are available in the Androi
 </ul>
 <h5 id="protected-mode-behavior">Protected Mode Behavior</h5>
 <p>Based on the Package Visibility behavior updates, when you build an Android 11 (Target SDK level 30, or later) app in <strong>Protected Mode</strong>, by default, the <code>&lt;uses-permission android:name=“android.permission.QUERY_ALL_PACKAGES”/&gt;</code> permission is added in the Android Manifest file for Protected Mode Builds to work seamlessly. If you do not want this permission to be automatically added, you must add the <code>donotAddQueryAllPackages = true</code> entry in the <strong>androidbuild.properties</strong> file of the project source directory.</p>
+<p>From June 2022, Google is restricting the use of this permission to limit the visibility into other applications installed on the device. Its usage is still officially allowed for apps which has core functionality  of types Security apps , antivirus ,browser apps , device management apps or Accessibility apps. If the core functionality matches any of these  or if you think your application justifies the usage of the current permission by following below android suggested way using the inputs as part of this knowledge article.</p>
+<h4 id="android-links">Android links</h4>
+<p><a href="https://developer.android.com/training/package-visibility/declaring">package-visibility</a> <br>
+<a href="https://support.google.com/googleplay/android-developer/answer/10158779#zippy=%2Cinvalid-uses">googleplay</a></p>
+<p>For security reasons we strongly suggest re-submitting your apps and appealing to get this permission using our provided materials and explanations why the permission is required for your application , however the usage of this technique is just supportive algorithm that serve only as backup or deprecated technique. So If Android Playstore denies your request we suggest to temporarily disabling the techniques that use this permission by declaring the flag in androidbuild.properties as <code>donotAddQueryAllPackages = true</code>. The majority of the guards can function just as efficient in most of the situations even with these techniques disabled. </p>
+<h3 id="guidelines-for-appealing-to-playstore">Guidelines for appealing to playstore</h3>
+<p>An explanation of why the app requires broad app-visibility? (Playstore question)</p>
+<p>Volt Iris sdk provides comprehensive solution that ensures that the Android application is running in a secure environment without tampering. Root, Hook, and Emulator detection provide a well-rounded coverage of various attack vectors that can compromise application behavior and put user at risk. Scanning other installed applications is one of key aspects of ensuring a safe execution environment. By examining the actions and permissions of these applications we can determine if an application is malicious or not. Attackers can gain root access to the device and compromise application behavior, stealing user’s private data. These attacks target financial, medical, and similar security-heavy applications that implement payment gateways or uses third party payment sdk's for which  correct and safe execution is critical.</p>
+<p>Why using a less-wide search is not possible ?
+There are millions of different Android malware in the world and the amount is rapidly growing. Some of those even re-use package names of real applications or randomly generate new ones. It is impossible to list all the malware database in the QUERY_ALL_PACKAGES definition.</p>
+<p>Why using SafetyNet Verify Apps API is not enough?</p>
+<p>There are multiple reasons why the Verify Apps is not a practical solution for financial customers where detection speed and trust are particularly important:</p>
+<ol>
+<li>The Verify Apps feature must be enabled by the user.</li>
+<li>The warning about a malicious app must not be ignored by
+   the user, what most people commonly do.</li>
+<li>The Verify Apps feature uses an outdated database that 
+   cannot detect the latest malware. After testing this feature with the latest and most popular malware we found that less than half of the malware samples were reported while our algorithm scored more than 90% detection rate.</li>
+</ol>
+<h4 id="query_all_packages-permission-funcitonality">QUERY_ALL_PACKAGES permission funcitonality:</h4>
+<h4 id="the-flow-of-the-functionality">The Flow of the Functionality:</h4>
+<ol>
+<li>
+<p>The on-device algorithm reads AndroidManifest.xml from other
+   applications and reads the following info:</p>
+<ul>
+<li>Permissions</li>
+<li>Broadcast Receivers</li>
+<li>Services</li>
+<li>Actions of intent filters</li>
+</ul>
+<p>No personal user data is ever captured or stored.</p>
+</li>
+<li>
+<p>The gathered data is then passed to our internal proprietary
+   algorithm that decides if said application is potentially malicious or not. The algorithm only returns a score and does not store the data.</p>
+</li>
+<li>
+<p>If the algorithm decides that the application can be malicious,
+   the application info is then securely sent to internal sdk servers where its signature is verified against server database. The result is then returned to the device where the proper action can be taken.</p>
+</li>
+</ol>
+<p>The algorithm has a low probability of false positives, so in the vast majority of cases the scanned application is considered safe, and all collected data is immediately discarded.
+   Only the data about confirmed malicious applications is stored on the system and presented to the user. All the information (including the app and package name) is discarded if the application is safe.</p>
+<p>We detect malicious applications by examining the code, assets or permissions of other installed applications. We only scan for malicious actions, no other data is being searched for or collected.</p>
+<p>VoltIris sdk never accesses any of the user’s private data. All the information about installed legitimate applications is immediately discarded and never stored anywhere .we only collect indications of compromise from malicious apps.</p>
+<p>All the application scanning is performed internally in a protected container. The scanning algorithm is protected from tampering, so information about other installed applications cannot be extracted.</p>
 <h4 id="security-provider-patching">Security Provider Patching</h4>
 <p>The Android Framework relies on Security Providers to provide secure network communications. However, you might find intermittent vulnerabilities in the default security provider. To protect against such vulnerabilities, <a href="https://developer.android.com/google/play-services">Google Play Services</a> provides a way to automatically update the security provider to enhance device protection.</p>
 <p>By using the <a href="../../iris_api_dev_guide/content/introduction.html">voltmx.gms.installSecurityProvider</a> or <a href="../../iris_api_dev_guide/content/introduction.html">voltmx.gms.installSecurityProviderAsync</a> APIs, you can ensure that the device has the latest updates that protect against security exploits. These APIs install a new security provider in the application process, <strong>GmsCore_OpenSSL</strong>, that is set as the default security provider for the app. The security provider must be installed every time you restart an application process.</p>
