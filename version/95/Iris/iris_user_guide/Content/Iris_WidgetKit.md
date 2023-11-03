@@ -112,7 +112,14 @@ To use iOS Home Screen Widgets in Volt MX Iris, you must include the widget conf
         8.  **widgetURL**: A deep link URL that the application is expected to receive when a user taps the widget.        
         9.  **disableDefaultMargins**: From iOS 17.0, the existing home widgets will have content margins by default. To disable the content margins, that are set by default from iOS 17.0, this key needs to be added for each widget and set to true ("disableDefaultMargins":"true"). The default value for this key is false.
 
-    *   **CommonJSScripts** - A folder that contains the common JS files used by both the main iOS application and the widget (both the app and the widget use different environments).
+            *   **CommonJSScripts** - A folder that contains the common JS files used by both the main iOS application and the widget (both the app and the widget use different environments).
+
+        10. containerBackgroundColor– From iOS 17.0, this key will be used to set the widget background color, in case the content margins are not disabled. In the presence of "disableDefaultMargins":"true" key, containerBackgroundColor would have no effect. The color should be given in lower case string.
+
+        <b>Example</b> : "containerBackgroundColor":"red"
+        The default value of containerBackgroundColor for the widget is "white".
+
+
 
 Here is a sample `widgetProperties.json` file:
 ```
@@ -145,7 +152,9 @@ Here is a sample `widgetProperties.json` file:
                 "LARGE" : "",
                 "EXTRALARGE" : ""
             },
-            "widgetURL" : "widget://scheduledTransactions"
+            "widgetURL" : "widget://scheduledTransactions",
+            "containerBackgroundColor":"green"
+
         },
         {
             "widgetID" : "transactionsWidget",
@@ -159,10 +168,12 @@ Here is a sample `widgetProperties.json` file:
                 "LARGE" : "transactionWidgetLarge.json",
                  "EXTRALARGE" : ""
             },
-            "widgetURL" : "widget://transactions"
+            "widgetURL" : "widget://transactions",
+            "containerBackgroundColor":"black"
         }
     ]
 }
+
 
 ```
 
