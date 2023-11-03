@@ -65,10 +65,11 @@ Math.max(x,y)
 
 ```
 
-onclickfloor: function(){
-  var a= this.view.tbxOperations.text;
-  var b= Math.floor(a);
-  alert("The converted value is " +b );
+onclickmax: function(){
+  var a=this.view.tbxNumber1.text;
+  var b=this.view.tbxNumber2.text;
+  var c=Math.max(a,b);
+  alert("The maximum value is " +c); 
 },
 ```
 
