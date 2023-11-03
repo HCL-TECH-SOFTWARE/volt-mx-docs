@@ -788,15 +788,13 @@ November 06, 2023
 
 AppFactory now supports native channel specific Appium test code along with common Appium test code. AppFactory requires the the Native channel specific Appium test code to be placed in the test folder of the Iris at the following locations:
 
-```
-< Project-Root >/testresources/TestNG/Mobile for Mobile
-```
-```
-< Project-Root >/testresources/TestNG/Tablet for Tablet
-```
-```
-< Project-Root >/testresources/TestNG/ for Common
-```
+
+```<Project-Root>/testresources/TestNG/Mobile``` for Mobile
+
+```<Project-Root>/testresources/TestNG/Tablet``` for Tablet
+
+```<Project-Root>/testresources/TestNG/``` for Common
+
 
 If Mobile or Tablet specific Appium test code is present, then AppFactory will prioritise it above the Common Appium test code (if present) for the respective channel. 
 
