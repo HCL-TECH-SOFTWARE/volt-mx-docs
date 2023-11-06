@@ -35,6 +35,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 [Volt Foundry](#volt-foundry)
 
 
+- [V9 Servicepack 5 Fixpack 15 Hotfix 3](#v9-servicepack-5-fixpack-15-hotfix-3)
 - [V9 Servicepack 5 Fixpack 15 Hotfix 2](#v9-servicepack-5-fixpack-15-hotfix-2)
 - [V9 Servicepack 5 Fixpack 15 Hotfix 1](#v9-servicepack-5-fixpack-15-hotfix-1)
 - [V9 Servicepack 5 Fixpack 15](#v9-servicepack-5-fixpack-15)
@@ -778,6 +779,20 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 -->
 
 ## Volt Foundry
+
+### V9 Servicepack 5 Fixpack 15 Hotfix 3
+
+November 06, 2023
+
+#### AppFactory Enhancements
+
+AppFactory now supports native-channel-specific Appium test code in addition to common Appium test code. 
+
+If Mobile or Tablet specific Appium test code is present, then AppFactory will prioritise it over the common Appium test code for the corresponding channel. 
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+
+
 
 ### V9 Servicepack 5 Fixpack 15 Hotfix 2
 
