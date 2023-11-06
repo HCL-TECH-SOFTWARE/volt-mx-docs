@@ -398,6 +398,22 @@
 </tr>
 </tbody>
 </table>
+<p>sections = document.querySelectorAll('h3');
+function updateHash() {
+    sections.forEach((section, index) =&gt; {
+        const rect = section.getBoundingClientRect();
+        if(window.scrollY !== 0) {
+                if (rect.top &lt;= 0 &amp;&amp; rect.bottom &gt;= 0) {
+                        window.location.hash = section.id;
+                }
+        } else {
+            debugger;
+            window.location.hash = '';
+        }
+        })
+}
+window.addEventListener('scroll', updateHash);
+updateHash();</p>
 <h3 id="loop-action">Loop Action</h3>
 <p>To define an action sequence for executing a loop action, do the following:</p>
 <ol>
