@@ -19,6 +19,25 @@ The general actions that you can use in an action sequence are as follows:
 | [Set Timeout](#set-timeout) | Set a timeout variable. |
 | [Clear Timeout](#clear-timeout) | Clear the timeout. |
 
+
+sections = document.querySelectorAll('h3');
+function updateHash() {
+    sections.forEach((section, index) => {
+        const rect = section.getBoundingClientRect();
+        if(window.scrollY !== 0) {
+                if (rect.top <= 0 && rect.bottom >= 0) {
+                        window.location.hash = section.id;
+                }
+        } else {
+            debugger;
+            window.location.hash = '';
+        }
+        })
+}
+window.addEventListener('scroll', updateHash);
+updateHash();
+
+
 ### Loop Action
 
 To define an action sequence for executing a loop action, do the following:
