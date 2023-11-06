@@ -784,14 +784,8 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 
 November 06, 2023
 
-#### AppFactory Enhancements
-
-AppFactory now supports native-channel-specific Appium test code in addition to common Appium test code. 
-
-If Mobile or Tablet specific Appium test code is present, then AppFactory will prioritise it over the common Appium test code for the corresponding channel. 
-
-For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
-
+There are no new features or enhancements in this release.
+For relevant support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 
 ### V9 Servicepack 5 Fixpack 15 Hotfix 2
