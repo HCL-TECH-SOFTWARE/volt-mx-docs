@@ -970,7 +970,7 @@ This parameter specifies the JS function that is invoked which returns API resul
   
 | Key name | Default Value | Type of the Value | Description |
 | --- | --- | --- | --- |
-| type |   | String | This parameter specifies the type of overlay configuration. The string function contains the type of overlay which are supported. The following are the supported overlay types: o voltmx.ar.OVERLAY\_IMAGE voltmx.ar.OVERLAY\_VIDEO |
+| type |   | Constants | This parameter specifies the type of overlay configuration. The following are the supported overlay types: o voltmx.ar.OVERLAY\_IMAGE voltmx.ar.OVERLAY\_VIDEO |
 | src |   | String | This attribute specifies the name of the overlay image or video. Ensure that you place the images/videos in the raw inside the workspace. For example resources/mobile/common/raw |
 
 ### Return Values
@@ -984,7 +984,7 @@ None
 //Sample code to add the startARImageDetection method to add the ARRenderer widget.  
 var detection_src1 = "imagedetection_src_hcl.jpg";
 var overlay_src1 = "imagedetection_image_overlay.jpg";
-var overlay_type1 = "image";
+var overlay_type1 = voltmx.ar.OVERLAY_IMAGE;
 var scale_value = 1.0;
 //Detection Image with Video Overlay Config
 var imageOverlay = {
@@ -997,7 +997,7 @@ var imageOverlay = {
 };
 var detection_src2 = "imagedetection_src_voltmx.jpg";
 var overlay_src2 = "imagedetection_video_overlay.mp4";
-var overlay_type2 = "video";
+var overlay_type2 = voltmx.ar.OVERLAY_VIDEO;
 //Detection Image with Video Overlay Config
 var videoOverlay = {
     "referenceImage": detection_src2,
