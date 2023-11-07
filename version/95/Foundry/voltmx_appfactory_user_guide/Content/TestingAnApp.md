@@ -25,6 +25,23 @@ Prerequisites
 *   Tests must be compiled by using a Maven configuration file (pom.xml) that is available in the Tests root folder (`<Project-Root>/test/TestNG`)  
     ![](Resources/Images/TA_AppTestFolder.png)
 
+*   From v9.5.15.3 onwards, AppFactory supports native channel specific Appium test code along with the common Appium test code. AppFactory requires the Native channel specific Appium test code to be placed in the test folder of the Iris at the following locations:
+
+    `<Project-Root>/testresources/TestNG/Mobile` for Mobile  
+
+    `<Project-Root>/testresources/TestNG/Tablet` for Tablet  
+
+    `<Project-Root>/testresources/TestNG/` for Common  
+
+    If Mobile or Tablet specific Appium test code is present, then AppFactory will prioritise it above the Common Appium test code (if present) for the respective channel.
+
+    <blockquote>
+    <em><b>Note: </b></em>
+    App Factory uses the AWS Device farm to run test cases on specific devices. The Device Farm offers two types of environments to run the tests- <br>
+    1. Standard Test Environment <br>
+    2. Custom Test Environment <br>
+    The newly supported channel specific test code will not work on standard environment when triggered together for both the channels with channel specific Appium test code for both the channels.
+    </blockquote>
 </details>
 <details close markdown="block"><summary>Desktop Web Prerequisites</summary>
 
