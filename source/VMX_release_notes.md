@@ -264,13 +264,10 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 
 
 ### V9 Servicepack 2 Fixpack 2 Hotfix 1
-November 08, 2023
+November 09, 2023
 
-#### Foundry Enhancements
-
-* Null Pointer exception while for object services while performing incremental setup.
-
-For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+There are no new features or enhancements in this release.
+For relevant support note, see the<a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476" target="_blank"> Cumulative fix list for HCL Volt MX</a>.
 
 
 ### V9 Servicepack 2 Fixpack 2 Hotfix 0
