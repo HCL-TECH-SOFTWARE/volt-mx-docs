@@ -790,7 +790,7 @@ AppFactory now supports native-channel-specific Appium test code in addition to 
 
 If Mobile or Tablet specific Appium test code is present, then AppFactory will prioritise it over the common Appium test code for the corresponding channel. 
 
-for more details click [here](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_appfactory_user_guide/Content/TestingAnApp.html)
+For more details click [here](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_appfactory_user_guide/Content/TestingAnApp.html)
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
