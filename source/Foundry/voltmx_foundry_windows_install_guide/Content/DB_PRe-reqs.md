@@ -185,6 +185,8 @@ To support MySQL utf8mb4 charsets and collation, update the MySQL configuration 
     +--------------------------+----------------------------+
  ```
 
+
+
 #### Applicable for Identity Services
 
 If you are using any lower versions of MySQL 5.7 such as v5.7.12 or lower during installation, you may encounter an error due to which the installation rolls back. This error occurs due to a bug in the MySQL database.  
