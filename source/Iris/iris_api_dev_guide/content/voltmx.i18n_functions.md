@@ -2,9 +2,9 @@
 
 
 voltmx.i18n Namespace
-===================
+======================
 
-The voltmx,i18n Namespace, which forms the [Internationalization API](internationalization.md), provides the following API elements.
+The voltmx.i18n Namespace, which forms the [Internationalization API](internationalization.md), provides the following API elements.
 
 > **_Note:_** From V9 SP2 onwards, the i18n database data for a VoltMX App child app is stored in child app data and not under the parent app. This feature is applicable for iOS, Windows, and Android platforms.
 <!-- > **_Note:_** From V8 SP4 onwards, the i18n database data for a VoltMX App child app is stored in child app data and not under the parent app. This feature is applicable for iOS, Windows, and Android platforms. -->
@@ -535,7 +535,7 @@ voltmx.i18n.setLocaleLayoutConfig({
         "mirrorFlowHorizontalAlignment": true / false,
     },
 });
-``` 
+```
 
 ### Platform Availability
 
