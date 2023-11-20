@@ -16,13 +16,13 @@ Input Parameters
 
 _actionItemParams_
 
-A JavaScript object containing key-value pairs that define the configuration parameters for the action item. This object must contain the following keys.
+A JavaScript object containing key-value pairs that define the configuration parameters for the action item.the style and action keys are optional.
 
 | Constant | Description |
 | --- | --- |
 | title | A string that specifies the title for the action item. |
 | style | A value from the [](constants_namespace.md#ActionItemStyles)[Action Item Style Constants](constants_namespace.md#ActionItemStyles) that selects the style of the action item. |
-| actionCallback | A JavaScript function that handles user selections from the action item. For more information, see **Remarks** below. |
+| action | A JavaScript function that handles user selections from the action item. For more information, see **Remarks** below. |
 
 Example
 
@@ -31,7 +31,7 @@ Example
   setActionSheet: function(){
     var actionItem = new voltmx.ui.ActionItem({
     "title": "Open Basecamp",
-    "style": constants.ACTION_STYLE_DEFAULT,
+    "style": constants.ACTION_ITEM_STYLE_DEFAULT,
     "action": function(){
      voltmx.application.openURL("https://basecamp.voltmx.com/s/");
     }
