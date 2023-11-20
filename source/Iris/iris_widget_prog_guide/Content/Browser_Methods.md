@@ -720,7 +720,7 @@ iOS
     webWidget1.evaluateJavaScript("document.title", this.callbackname);
     
     //Example3 If the script loaded in the webWidget1 is a var a = "100"; then calling:
-    webWidget1.evaluateJavaScript("a"); //It returns "100"
+    webWidget1.evaluateJavaScript("a", this.callbackname); //"a" value can be accessed in callback
     webWidget1.evaluateJavaScript("return a"); //returns null.
 ```
 
