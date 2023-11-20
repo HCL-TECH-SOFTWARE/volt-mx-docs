@@ -263,4 +263,3 @@ For more hands-on approach on how to implement GetVariants verbs, download and i
 
 If required, replace the Salesforce credentials with yours.
 
-[https://voltmxsolutions.atlassian.net/wiki/pages/SFSoapGetVariants.zip](https://voltmxsolutions.atlassian.net/wiki/pages/viewpageattachments.action?pageId=313229314&preview=/313229314/312607004/SFSoapGetVariants.zip)
