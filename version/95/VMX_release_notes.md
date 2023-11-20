@@ -74,7 +74,7 @@ November 06, 2023
 
 #### Iris Enhancements
 
-* iOS 17 support to enable/disable content margins and adding containerBackgroundColor for iOS Home screen widgets have been added.
+* iOS 17 - Support to enable/disable content margins and adding background color for iOS Home screen widgets have been added.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
