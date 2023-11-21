@@ -16,18 +16,25 @@ To create a database for Identity Services, follow these steps:
       –  grant create any index to idconfig;  
       –  grant alter any table to idconfig;
     
-    The following is a sample query for creating a database in MSSQL:
+The following is a sample query for creating a database in MSSQL:
     
-    `CREATE DATABASE idconfig;`
+`CREATE DATABASE idconfig;`
     
-    The following is a sample query for creating a database in MySQL:
+The following is a sample query for creating a database in MySQL:
+
+`CREATE DATABASE `< DBNAME >` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;`
+
+### For Foundry version V9.2.2.0 or greater:
+
+The following is a sample query for creating a database in MySQL:
+
+`CREATE DATABASE `< DBNAME >` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`
+
+The following details are required for Flyway configuration:
     
-    `CREATE DATABASE `<DBNAME>` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;`
-    
-    The following details are required for Flyway configuration:
-    
-    *   Schema name for Identity: `idconfig`
-    *   Placeholders for Identity Services:
+*   Schema name for Identity: `idconfig`
+*   Placeholders for Identity Services:
+
 ```
  
     # Volt MX Identity Services Database, replace the following placeholders 

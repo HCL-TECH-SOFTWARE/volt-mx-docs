@@ -68,7 +68,8 @@ Alter session set container = PDB<MF_DB> ;
 *   If you are using Volt MX Foundry installer to setup Volt MX Foundry database, then please choose the below options based on your Oracle database version.
     
     *   If Oracle database is created with PDB option of Oracle 12c, use service name pointing to PDB in the JDBC URL such as `pdborcl` or `pdbmfdb
-````
+`
+```
 jdbc:oracle:thin:@<Database_Host_IP>:1521/pdbmfdb 
 ```<br>For example: jdbc:oracle:thin:@192.168.1.2:1521/pdbmfdb<br>
 *   But if your database is 11g or 12c without PDB, then you can use `ORACLE_SID` in the JDBC URL such as  `orcl`  or  `mfdb`.
@@ -93,6 +94,96 @@ jdbc:oracle:thin:@<Database_Host_IP>:1521:mfdb
 Database collation needs to be set for a database. This is possible while creating a database with your required language as database collation. For example, use Database collation as **Arabic\_100\_CI\_AS** for Arabic language support. Similarly for other languages use appropriate collation for support. Use SQL Server Management Studio to create a database with the name as vpnsdb and with appropriate collation support.
 
 ### Prerequisites for Volt MX Foundry with MySQL
+
+#### MySQL 8.0 is mandatory for Foundry V9.2.2.0 or above
+
+#### MySQL configuration mandated for Foundry V9.2.2.0 or greater :
+
+To support MySQL utf8mb4 charsets and collation, update the MySQL configuration file of MySQL 8.0 by adding following changes under [client], [mysql] and [mysqld] section and restart the MySQL server.
+
+```
+1. Ensure that you modify the my.cnf or my.ini with the following parameters: 
+
+
+    [client]
+    default-character-set = utf8mb4
+    [mysql]
+    default-character-set = utf8mb4
+    [mysqld]
+    character-set-client-handshake = FALSE
+    character-set-server=utf8mb4
+    collation-server="utf8mb4_unicode_ci"
+
+2. Next, restart the MySQL service and run the following query to verify the details:
+
+    mysql> show variables like 'collation%';
+    +----------------------+--------------------+
+    | Variable_name        | Value              |
+    +----------------------+--------------------+
+    | collation_connection | utf8mb4_unicode_ci |
+    | collation_database   | utf8mb4_unicode_ci |
+    | collation_server     | utf8mb4_unicode_ci |
+    +----------------------+--------------------+
+
+3. rows in set (0.00 sec)
+   mysql> show variables like 'character%';
+
+    +--------------------------+---------------------------------------------------------+
+    | Variable_name            | Value                                                   |
+    +--------------------------+---------------------------------------------------------+
+    | character_set_client     | utf8mb4                                                 |
+    | character_set_connection | utf8mb4                                                 |
+    | character_set_database   | utf8mb4                                                 |
+    | character_set_filesystem | binary                                                  |
+    | character_set_results    | utf8mb4                                                 |
+    | character_set_server     | utf8mb4                                                 |
+    | character_set_system     | utf8mb3                                                 |
+    | character_sets_dir       | C:\Program Files\MySQL\MySQL Server 8.0\share\charsets\ |
+    +--------------------------+---------------------------------------------------------+
+    8 rows in set (0.00 sec)
+```
+
+ 
+#### Applicable for Engagement Services for Foundry version earlier than V9.2.2.0
+
+1.  Create the database needed for Engagement Services with unicode character set as UTF8. Also ensure that you modify the `my.cnf` or `my.ini` with the following parameters:
+ ```
+
+    [client]  
+    default-character-set = utf8  
+    [mysql]  
+    default-character-set = utf8  
+    [mysqld]|  
+    character-set-client-handshake = FALSE  
+    collation_server='utf8_unicode_ci'  
+    character_set_server='utf8'  
+```
+   Next, restart the MySQL service and run the following query to verify the details:
+ ```
+
+    mysql> show variables like '%coll%';  
+    +----------------------+-----------------+  
+    | Variable_name | Value |  
+    +----------------------+-----------------+  
+    | collation_connection | utf8_unicode_ci |  
+    | collation_database | utf8_unicode_ci |  
+    | collation_server | utf8_unicode_ci |  
+    +----------------------+-----------------+  
+    3 rows in set (0.00 sec)  
+    mysql> show variables like '%char%';  
+    +--------------------------+----------------------------+  
+    | Variable_name | Value |  
+    +--------------------------+----------------------------+  
+    | character_set_client | utf8 |  
+    | character_set_connection | utf8 |  
+    | character_set_database | utf8 |  
+    | character_set_filesystem | binary |  
+    | character_set_results | utf8 |  
+    | character_set_server | utf8 |  
+    | character_set_system | utf8 |  
+    | character_sets_dir | /usr/share/mysql/charsets/ |  
+    +--------------------------+----------------------------+
+ ```
 
 #### Applicable for Identity Services
 
