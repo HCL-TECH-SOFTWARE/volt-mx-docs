@@ -3,11 +3,9 @@
 ### Upgrading Volt MX Foundry 9.2.x or Quantum 9.2 to Volt MX Foundry 9.2.2.0 or greater:
  
 ### Prerequisites
-
 Volt MX Foundry 9.2.x or Quantum 9.2 with MySQL 5.7
  
 ### Upgrade Steps
- 
 To upgrade Volt MX Foundry 9.2.x or Quantum 9.2 with MySQL 5.7 to Volt MX Foundry 9.2.2.0 or greater, follow these steps:
  
 1. Stop Volt MX Foundry 9.2.x or Quantum 9.2 server. 
@@ -52,23 +50,26 @@ mysql> show variables like 'character%';
 +--------------------------+---------------------------------------------------------+
 ```
 
-    8 rows in set (0.00 sec)
- 
-7. Import Foundry data exported in step 2 to MySQL 8.0.
-8. Alter the character set and collation of foundry schemas `<prefix>admindb<suffix> <prefix>idconfigdb<suffix> <prefix>kpnsdb<suffix> <prefix>mfaccountsdb<suffix> <prefix>mfconsoledb<suffix> <prefix>mfreportsdb<suffix>` with following command:
- 
-   ALTER DATABASE `<DATABASE_NAME>` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
- 
-9. Upgrade Foundry to 9.2.2.0 or greater. Refer to Upgrading Volt MX Foundry to V9 for upgrade instructions.
+8 rows in set (0.00 sec)
 
+<html>
+<body>
+<ol start="7">
+  <li>Import Foundry data exported in step 2 to MySQL 8.0.</li>
+  <li>Alter the character set and collation of foundry schemas < prefix > admindb < suffix > < prefix > idconfigdb < suffix > < prefix > kpnsdb < suffix > < prefix > mfaccountsdb < suffix > < prefix > mfconsoledb < suffix > < prefix > mfreportsdb < suffix > with following command:
+ 
+   ALTER DATABASE `<DATABASE_NAME>` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;</li>
+   <li>Upgrade Foundry to 9.2.2.0 or greater. Refer to Upgrading Volt MX Foundry to V9 for upgrade instructions.</li>
+</ol>
+</body>
+</html>
+ 
 <b> Upgrading Kony Fabric 8.4 with MySQL 5.7 to Volt MX Foundry 9.2.2.0 or greater:</b>     
  
 ### Prerequisites
-
 Kony Fabric 8.4 with MySQL 5.7
- 
+
 ### Upgrade Steps
- 
 To upgrade Kony Fabric with MySQL 5.7 to Volt MX Foundry 9.2.2.0 or greater, follow these steps:
  
 1. Stop Kony Fabric 8.4 server.
@@ -86,7 +87,7 @@ character-set-client-handshake = FALSE
 character-set-server=utf8mb4
 collation-server="utf8mb4_unicode_ci"
  
-5. Next, restart the MySQL service and run the following query to verify the details:
+Next, restart the MySQL service and run the following query to verify the details:
 mysql> show variables like 'collation%';
 
 ```
@@ -112,34 +113,39 @@ mysql> show variables like 'character%';
 | character_sets_dir       | C:\Program Files\MySQL\MySQL Server 8.0\share\charsets\ |
 +--------------------------+---------------------------------------------------------+
 ```
-     8 rows in set (0.00 sec)
- 
-6. Import Foundry data exported in step 2 to MySQL 8.0.
-7. Alter the character set and collation of foundry schemas `<prefix>admindb<suffix> <prefix>idconfigdb<suffix> <prefix>kpnsdb<suffix> <prefix>mfaccountsdb<suffix> <prefix>mfconsoledb<suffix> <prefix>mfreportsdb<suffix>` with following command:
- 
-   ALTER DATABASE `<DATABASE_NAME>` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+8 rows in set (0.00 sec)
 
-8. Alter the character set and collation of kpnsdb tables by running following script:
+<html>
+<body>
+<ol start="6">
+  <li>Import Foundry data exported in step 2 to MySQL 8.0.</li>
+  <li>Alter the character set and collation of foundry schemas < prefix >admindb < suffix > < prefix > idconfigdb < suffix >  < prefix > kpnsdb < suffix > < prefix > mfaccountsdb < suffix > < prefix > mfconsoledb < suffix > < prefix > mfreportsdb < suffix > with following command:
+ 
+   ALTER DATABASE `<DATABASE_NAME>` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;</li>
+   <li> Alter the character set and collation of kpnsdb tables by running following script:</li>
+</ol>
+</body>
+</html>
 
 ```
 SET FOREIGN_KEY_CHECKS=0;
  
-USE `<prefix>` kpnsdb `<suffix>`;
+USE <prefix> kpnsdb <suffix>;
  
-ALTER TABLE PNSApps CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;<br>
-ALTER TABLE campaign CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;<br>
+ALTER TABLE PNSApps CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER TABLE campaign CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ALTER TABLE event_stl CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;<br>
-ALTER TABLE events CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;<br>
-ALTER TABLE Subscription CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;<br>
-ALTER TABLE campaign_message CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;<br>
-ALTER TABLE MessageRequest CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;<br>
-ALTER TABLE event_push CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;<br>
-ALTER TABLE event_push_stl CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;<br>
-ALTER TABLE PNSApps_hst CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;<br>
+ALTER TABLE events CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER TABLE Subscription CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER TABLE campaign_message CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER TABLE MessageRequest CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER TABLE event_push CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER TABLE event_push_stl CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER TABLE PNSApps_hst CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
  
 SET FOREIGN_KEY_CHECKS=1;
 ```
- 
+
  
 9. Upgrade Foundry to 9.5. Refer to [Upgrading Volt MX Foundry to V9](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Upgrading_VoltMX_Foundry_SP1.html) for upgrade instructions.
 
@@ -147,11 +153,9 @@ SET FOREIGN_KEY_CHECKS=1;
 <b>Upgrading Volt MX Foundry 9.2.2.0 with MySQL 8.0 to Volt MX Foundry 9.5.15.0 or greater:</b>
 
 ## Prerequisites
-
 Volt MX Foundry 9.2.2.0
 
 ## Upgrade Steps
-
 To upgrade Volt MX Foundry 9.2.2.0 to Volt MX Foundry 9.5.15.0 or greater, follow these steps:
  
 1. Stop Volt MX Foundry 9.2.2.0.
@@ -160,17 +164,17 @@ To upgrade Volt MX Foundry 9.2.2.0 to Volt MX Foundry 9.5.15.0 or greater, follo
 ```
 SET FOREIGN_KEY_CHECKS = 0;
 
-USE < prefix > idconfigdb < suffix >;
+USE <prefix> idconfigdb <suffix>;
 
-ALTER TABLE auth_app_providers CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;<br>
-ALTER TABLE app_config CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;<br>
-ALTER TABLE acs_namespace CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;<br>
-ALTER TABLE app_services CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;<br>
-ALTER TABLE resource_permissions CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;<br>
-ALTER TABLE permissions CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;<br>
-ALTER TABLE scope CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;<br>
-ALTER TABLE resources CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;<br>
-ALTER TABLE roles CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;<br>
+ALTER TABLE auth_app_providers CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE app_config CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE acs_namespace CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE app_services CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE resource_permissions CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE permissions CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE scope CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE resources CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE roles CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 SET FOREIGN_KEY_CHECKS = 1;
 ```
 
