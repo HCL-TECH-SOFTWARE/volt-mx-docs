@@ -28,29 +28,29 @@ collation-server="utf8mb4_unicode_ci"
 6. Next, restart the MySQL service and run the following query to verify the details:
 mysql> show variables like 'collation%';
 
-    ```
-    +----------------------+--------------------+
-    | Variable_name        | Value              |
-    +----------------------+--------------------+
-    | collation_connection | utf8mb4_unicode_ci |
-    | collation_database   | utf8mb4_unicode_ci |
-    | collation_server     | utf8mb4_unicode_ci |
-    +----------------------+--------------------+
-    3 rows in set (0.00 sec)
-    mysql> show variables like 'character%';
-    +--------------------------+---------------------------------------------------------+
-    | Variable_name            | Value                                                   |
-    +--------------------------+---------------------------------------------------------+
-    | character_set_client     | utf8mb4                                                 |
-    | character_set_connection | utf8mb4                                                 |
-    | character_set_database   | utf8mb4                                                 |
-    | character_set_filesystem | binary                                                  |
-    | character_set_results    | utf8mb4                                                 |
-    | character_set_server     | utf8mb4                                                 |
-    | character_set_system     | utf8mb3                                                 |
-    | character_sets_dir       | C:\Program Files\MySQL\MySQL Server 8.0\share\charsets\ |
-    +--------------------------+---------------------------------------------------------+
-    ```
+```
++----------------------+--------------------+
+| Variable_name        | Value              |
++----------------------+--------------------+
+| collation_connection | utf8mb4_unicode_ci |
+| collation_database   | utf8mb4_unicode_ci |
+| collation_server     | utf8mb4_unicode_ci |
++----------------------+--------------------+
+3 rows in set (0.00 sec)
+mysql> show variables like 'character%';
++--------------------------+---------------------------------------------------------+
+| Variable_name            | Value                                                   |
++--------------------------+---------------------------------------------------------+
+| character_set_client     | utf8mb4                                                 |
+| character_set_connection | utf8mb4                                                 |
+| character_set_database   | utf8mb4                                                 |
+| character_set_filesystem | binary                                                  |
+| character_set_results    | utf8mb4                                                 |
+| character_set_server     | utf8mb4                                                 |
+| character_set_system     | utf8mb3                                                 |
+| character_sets_dir       | C:\Program Files\MySQL\MySQL Server 8.0\share\charsets\ |
++--------------------------+---------------------------------------------------------+
+```
 
     8 rows in set (0.00 sec)
  
@@ -89,29 +89,29 @@ collation-server="utf8mb4_unicode_ci"
 5. Next, restart the MySQL service and run the following query to verify the details:
 mysql> show variables like 'collation%';
 
-    ```
-    +----------------------+--------------------+
-    | Variable_name        | Value              |
-    +----------------------+--------------------+
-    | collation_connection | utf8mb4_unicode_ci |
-    | collation_database   | utf8mb4_unicode_ci |
-    | collation_server     | utf8mb4_unicode_ci |
-    +----------------------+--------------------+
-    3 rows in set (0.00 sec)
-    mysql> show variables like 'character%';
-    +--------------------------+---------------------------------------------------------+
-    | Variable_name            | Value                                                   |
-    +--------------------------+---------------------------------------------------------+
-    | character_set_client     | utf8mb4                                                 |
-    | character_set_connection | utf8mb4                                                 |
-    | character_set_database   | utf8mb4                                                 |
-    | character_set_filesystem | binary                                                  |
-    | character_set_results    | utf8mb4                                                 |
-    | character_set_server     | utf8mb4                                                 |
-    | character_set_system     | utf8mb3                                                 |
-    | character_sets_dir       | C:\Program Files\MySQL\MySQL Server 8.0\share\charsets\ |
-    +--------------------------+---------------------------------------------------------+
-    ```
+```
++----------------------+--------------------+
+| Variable_name        | Value              |
++----------------------+--------------------+
+| collation_connection | utf8mb4_unicode_ci |
+| collation_database   | utf8mb4_unicode_ci |
+| collation_server     | utf8mb4_unicode_ci |
++----------------------+--------------------+
+3 rows in set (0.00 sec)
+mysql> show variables like 'character%';
++--------------------------+---------------------------------------------------------+
+| Variable_name            | Value                                                   |
++--------------------------+---------------------------------------------------------+
+| character_set_client     | utf8mb4                                                 |
+| character_set_connection | utf8mb4                                                 |
+| character_set_database   | utf8mb4                                                 |
+| character_set_filesystem | binary                                                  |
+| character_set_results    | utf8mb4                                                 |
+| character_set_server     | utf8mb4                                                 |
+| character_set_system     | utf8mb3                                                 |
+| character_sets_dir       | C:\Program Files\MySQL\MySQL Server 8.0\share\charsets\ |
++--------------------------+---------------------------------------------------------+
+```
      8 rows in set (0.00 sec)
  
 6. Import Foundry data exported in step 2 to MySQL 8.0.
@@ -120,7 +120,8 @@ mysql> show variables like 'collation%';
    ALTER DATABASE `<DATABASE_NAME>` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 8. Alter the character set and collation of kpnsdb tables by running following script:
- 
+
+```
 SET FOREIGN_KEY_CHECKS=0;
  
 USE `<prefix>` kpnsdb `<suffix>`;
@@ -137,6 +138,7 @@ ALTER TABLE event_push_stl CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unic
 ALTER TABLE PNSApps_hst CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;<br>
  
 SET FOREIGN_KEY_CHECKS=1;
+```
  
  
 9. Upgrade Foundry to 9.5. Refer to [Upgrading Volt MX Foundry to V9](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Upgrading_VoltMX_Foundry_SP1.html) for upgrade instructions.
@@ -154,7 +156,8 @@ To upgrade Volt MX Foundry 9.2.2.0 to Volt MX Foundry 9.5.15.0 or greater, follo
  
 1. Stop Volt MX Foundry 9.2.2.0.
 2. Alter the character set and collation of idconfigdb tables by running following script:
- 
+
+```
 SET FOREIGN_KEY_CHECKS = 0;
 
 USE < prefix > idconfigdb < suffix >;
@@ -169,4 +172,5 @@ ALTER TABLE scope CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;<br>
 ALTER TABLE resources CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;<br>
 ALTER TABLE roles CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;<br>
 SET FOREIGN_KEY_CHECKS = 1;
+```
 
