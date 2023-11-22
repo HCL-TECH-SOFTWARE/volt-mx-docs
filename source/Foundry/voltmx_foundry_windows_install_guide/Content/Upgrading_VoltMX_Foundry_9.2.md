@@ -59,10 +59,12 @@ mysql> show variables like 'character%';
   <li>Alter the character set and collation of foundry schemas < prefix > admindb < suffix > < prefix > idconfigdb < suffix > < prefix > kpnsdb < suffix > < prefix > mfaccountsdb < suffix > < prefix > mfconsoledb < suffix > < prefix > mfreportsdb < suffix > with following command:
  
    ALTER DATABASE `<DATABASE_NAME>` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;</li>
-   <li>Upgrade Foundry to 9.2.2.0 or greater. Refer to Upgrading Volt MX Foundry to V9 for upgrade instructions.</li>
-</ol>
-</body>
-</html>
+   </ol>
+   </body>
+   </html>
+
+  9. Upgrade Foundry to 9.5. Refer to [Upgrading Volt MX Foundry to V9](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Upgrading_VoltMX_Foundry_SP1.html) for upgrade instructions.
+
  
 <b> Upgrading Kony Fabric 8.4 with MySQL 5.7 to Volt MX Foundry 9.2.2.0 or greater:</b>     
  
@@ -145,7 +147,15 @@ ALTER TABLE PNSApps_hst CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode
  
 SET FOREIGN_KEY_CHECKS=1;
 ```
-Upgrade Foundry to 9.5. Refer to [Upgrading Volt MX Foundry to V9](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Upgrading_VoltMX_Foundry_SP1.html) for upgrade instructions.
+<html>
+<body>
+<ol start="9">
+  <li>Change the global time for MySQL 8.0 with "SET GLOBAL time_zone = '+3:00';has context menu</li>
+</ol>
+</body>
+</html>
+
+10. Upgrade Foundry to 9.5. Refer to [Upgrading Volt MX Foundry to V9](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Upgrading_VoltMX_Foundry_SP1.html) for upgrade instructions.
 
 
 <b>Upgrading Volt MX Foundry 9.2.2.0 with MySQL 8.0 to Volt MX Foundry 9.5.15.0 or greater:</b>
@@ -158,6 +168,7 @@ To upgrade Volt MX Foundry 9.2.2.0 to Volt MX Foundry 9.5.15.0 or greater, follo
  
 1. Stop Volt MX Foundry 9.2.2.0.
 2. Alter the character set and collation of idconfigdb tables by running following script:
+3. Upgrade Foundry to 9.5. Refer to [Upgrading Volt MX Foundry to V9](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Upgrading_VoltMX_Foundry_SP1.html) for upgrade instructions.
 
 ```
 SET FOREIGN_KEY_CHECKS = 0;
