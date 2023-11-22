@@ -1747,6 +1747,9 @@ function getSnapshot(callback, widgetSize){
     If the composite form.json file does not exist, the composite structure file will be generated from the from.sm folder, and the themes are combined.</li>
 <li><strong>widgetURL</strong>: A deep link URL that the application is expected to receive when a user taps the widget.        </li>
 <li><strong>disableDefaultMargins</strong>: From iOS 17.0, the existing home widgets will have content margins by default. To disable the content margins, that are set by default from iOS 17.0, this key needs to be added for each widget and set to true ("disableDefaultMargins":"true"). The default value for this key is false.</li>
+<li><strong>containerBackgroundColor</strong>: From iOS 17.0, this key will be used to set the widget background color, in case the content margins are not disabled. In the presence of "disableDefaultMargins":"true" key, containerBackgroundColor would have no effect. The color should be given in lower case string.
+Example : "containerBackgroundColor":"red"
+The default value of containerBackgroundColor for the widget is "white".</li>
 </ol>
 </li>
 <li>
@@ -1785,7 +1788,9 @@ function getSnapshot(callback, widgetSize){
                 &quot;LARGE&quot; : &quot;&quot;,
                 &quot;EXTRALARGE&quot; : &quot;&quot;
             },
-            &quot;widgetURL&quot; : &quot;widget://scheduledTransactions&quot;
+            &quot;widgetURL&quot; : &quot;widget://scheduledTransactions&quot;,
+            &quot;containerBackgroundColor&quot;:&quot;green&quot;
+
         },
         {
             &quot;widgetID&quot; : &quot;transactionsWidget&quot;,
@@ -1799,10 +1804,12 @@ function getSnapshot(callback, widgetSize){
                 &quot;LARGE&quot; : &quot;transactionWidgetLarge.json&quot;,
                  &quot;EXTRALARGE&quot; : &quot;&quot;
             },
-            &quot;widgetURL&quot; : &quot;widget://transactions&quot;
+            &quot;widgetURL&quot; : &quot;widget://transactions&quot;,
+            &quot;containerBackgroundColor&quot;:&quot;black&quot;
         }
     ]
 }
+
 
 </code></pre>
 <p>Widgets use the following two important functions:</p>
