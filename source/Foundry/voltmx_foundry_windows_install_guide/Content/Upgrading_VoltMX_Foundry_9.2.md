@@ -63,7 +63,7 @@ mysql> show variables like 'character%';
    </body>
    </html>
 
-  9. Upgrade Foundry to 9.5. Refer to [Upgrading Volt MX Foundry to V9](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Upgrading_VoltMX_Foundry_SP1.html) for upgrade instructions.
+  9.Upgrade Foundry to 9.5. Refer to [Upgrading Volt MX Foundry to V9](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Upgrading_VoltMX_Foundry_SP1.html) for upgrade instructions.
 
  
 <b> Upgrading Kony Fabric 8.4 with MySQL 5.7 to Volt MX Foundry 9.2.2.0 or greater:</b>     
@@ -150,12 +150,12 @@ SET FOREIGN_KEY_CHECKS=1;
 <html>
 <body>
 <ol start="9">
-  <li>Change the global time for MySQL 8.0 with "SET GLOBAL time_zone = '+3:00';has context menu</li>
+  <li>Change the global time for MySQL 8.0 with "SET GLOBAL time_zone = '+3:00';has context menu.</li>
 </ol>
 </body>
 </html>
 
-10. Upgrade Foundry to 9.5. Refer to [Upgrading Volt MX Foundry to V9](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Upgrading_VoltMX_Foundry_SP1.html) for upgrade instructions.
+  10.Upgrade Foundry to 9.5. Refer to [Upgrading Volt MX Foundry to V9](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Upgrading_VoltMX_Foundry_SP1.html) for upgrade instructions.
 
 
 <b>Upgrading Volt MX Foundry 9.2.2.0 with MySQL 8.0 to Volt MX Foundry 9.5.15.0 or greater:</b>
