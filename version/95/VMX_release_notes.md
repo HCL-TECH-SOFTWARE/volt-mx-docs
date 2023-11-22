@@ -76,6 +76,8 @@ November 21, 2023
 
 * iOS 17 - Support to enable/disable content margins and adding background color for iOS Home screen widgets have been added.
 
+* Upgraded Firebase Message service dependency from 17.0.0 to 23.0.0.
+
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 
