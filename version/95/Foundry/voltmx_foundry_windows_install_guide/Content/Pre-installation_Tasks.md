@@ -106,5 +106,5 @@ For example:
 
 *   For **Apache**: preserveHost On
 *   For **HAProxy**: preserve host flag is not required.
-*   [Database Pre-Installation Tasks](DB_Pre-installation_Tasks.md)
-*   [Application Servers Pre-Installation Tasks](Appser_Pre-installation_Tasks.md)
+*   Database Pre-Installation Tasks
+*   Application Servers Pre-Installation Tasks
