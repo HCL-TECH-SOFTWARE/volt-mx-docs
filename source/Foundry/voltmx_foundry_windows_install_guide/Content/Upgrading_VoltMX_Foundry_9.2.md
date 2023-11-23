@@ -168,7 +168,6 @@ To upgrade Volt MX Foundry 9.2.2.0 to Volt MX Foundry 9.5.15.0 or greater, follo
  
 1. Stop Volt MX Foundry 9.2.2.0.
 2. Alter the character set and collation of idconfigdb tables by running following script:
-3. Upgrade Foundry to 9.5. Refer to [Upgrading Volt MX Foundry to V9](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Upgrading_VoltMX_Foundry_SP1.html) for upgrade instructions.
 
 ```
 SET FOREIGN_KEY_CHECKS = 0;
@@ -187,3 +186,4 @@ ALTER TABLE roles CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 SET FOREIGN_KEY_CHECKS = 1;
 ```
 
+3.Upgrade Foundry to 9.5. Refer to [Upgrading Volt MX Foundry to V9](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Upgrading_VoltMX_Foundry_SP1.html) for upgrade instructions.
