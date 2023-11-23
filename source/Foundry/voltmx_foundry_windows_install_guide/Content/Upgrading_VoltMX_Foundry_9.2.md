@@ -1,6 +1,6 @@
 
 
-### Upgrading Volt MX Foundry 9.2.x or Quantum 9.2 to Volt MX Foundry 9.2.2.0 or greater:
+<b>Upgrading Volt MX Foundry 9.2.x or Quantum 9.2 to Volt MX Foundry 9.2.2.0 or greater:</b>
  
 ### Prerequisites
 Volt MX Foundry 9.2.x or Quantum 9.2 with MySQL 5.7
@@ -150,7 +150,7 @@ SET FOREIGN_KEY_CHECKS=1;
 <html>
 <body>
 <ol start="9">
-  <li>Change the global time for MySQL 8.0 with "SET GLOBAL time_zone = '+3:00';has context menu.</li>
+  <li>Change the global time for MySQL 8.0 with "SET GLOBAL time_zone = '+3:00';</li>
 </ol>
 </body>
 </html>
