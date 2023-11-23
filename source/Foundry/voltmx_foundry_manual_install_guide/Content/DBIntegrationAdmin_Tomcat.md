@@ -22,7 +22,7 @@ To create a database for **Admin**, follow these steps:
     
     The following is a sample query for creating a database in MySQL:
     
-    ```CREATE DATABASE \`<DBNAME>\` DEFAULT CHARACTER SET utf8 COLLATE utf8\_unicode\_ci;
+```CREATE DATABASE \`<DBNAME>\` DEFAULT CHARACTER SET utf8 COLLATE utf8\_unicode\_ci;
 
     
 2.  The following details are required for Flyway configuration:
@@ -194,10 +194,21 @@ To create a database for **Admin**, follow these steps:
     **The following is a sample query for creating a database in MSSQL:**
 
     `CREATE DATABASE admindb;`
+ 
+    The following is a sample query for creating a database in 
+    MySQL:
 
-    The following is a sample query for creating a database in MySQL:
+```
+  CREATE DATABASE < DBNAME > DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+```
+  **For Foundry version V9.2.2.0 or greater:**
 
-    <code>CREATE DATABASE &lt;DBNAME&gt; DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;</code>
+  The following is a sample query for creating a database in 
+  MySQL:
+
+```
+  CREATE DATABASE < DBNAME > DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
 
 2.  The following details are required for Flyway configuration:
 

@@ -107,41 +107,6 @@ For example:
 *   For **Apache**: preserveHost On
 *   For **HAProxy**: preserve host flag is not required.
 
-<!-- ### Configure Hibernate Dialect in WebLogic (only for WebLogic)
 
-For the Engagement Services to work with Oracle DB, set the following parameter in the `setDomainEnv`.cmd and run the `setDomainEnv.cmd` before starting the WebLogic server.
-
-`-Dhibernate.dialect=org.hibernate.dialect.Oracle10gDialect` -->
-
-### Download and Install the Unrestricted JCE Policy Files
-
-In accordance with the United States of America export restrictions, Java that is bundled with the server has limited encryption key sizes that can be used in the server operation. In order to successfully convert signed client certificates or sign server Certificate Signing Request for use in the server, you must download the following bundled encryption policy .jar files and replace them with the unrestricted files published by the Java vendor.
-
-*   `local_policy.jar`
-*   `US_export_policy.jar`
-
-<!-- To Configure Unrestricted JCE Policy Files for Tomcat, JBoss, or WebLogic, follow these steps: -->
-
-To Configure Unrestricted JCE Policy Files for Tomcat, or JBoss, follow these steps:
-
-<!-- 1.  Go to the Oracle Java SE download page [http://www.oracle.com/technetwork/java/javase/downloads/index.html](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
-2.  Scroll down to **Additional Resources** section. You will find **Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy File**. -->
-1. Go to Oracle Java Cryptography Extension ](JCE) Unlimited Strength Jurisdiction Policy Files download page [https://www.oracle.com/java/technologies/javase-jce-all-downloads.md](https://www.oracle.com/java/technologies/javase-jce-all-downloads.md).
-2. You will find **Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy File**. 
-    
-3.  Download the JCE version that matches your installed JVM, for example, `UnlimitedJCEPolicyJDK<Version>.zip`
-4.  Extract the downloaded zip file. The `UnlimitedJCEPolicyJDK<Version>.zip` file contains the following files:
-    *   `local_policy.jar`
-    *   `US_export_policy.jar`
-    *   `README.txt`
-5.  Copy the .jar files (`local_policy.jar` and `US_export_policy.jar`) to `<JAVA_HOME>\jre\lib\security`  
-    
-    > **_Note:_** These jars will be already there so you have to overwrite them. Back up the existing jars before you overwrite them with new jars.
-    
-6.  Restart your application server.
-    
-    After the encryption policy files are installed, you should be able to successfully convert signed client certificates for use in the server.
-    
-
-*   [Database Pre-Installation Tasks](DB_Pre-installation_Tasks.md)
-*   [Application Servers Pre-Installation Tasks](Appser_Pre-installation_Tasks.md)
+### [Database Pre-Installation Tasks](DB_Pre-installation_Tasks.md)
+### [Application Servers Pre-Installation Tasks](Appser_Pre-installation_Tasks.md)
