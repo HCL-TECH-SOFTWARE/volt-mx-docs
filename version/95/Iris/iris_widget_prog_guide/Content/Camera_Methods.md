@@ -1696,7 +1696,7 @@ None
 
 In Windows 10 and Android platforms this method is applicable only when an overlay form is enabled and is ignored when overlayForm is disabled.
 
-In Desktop Web/ Responsive Web platforms, after the **takePicture** method has been called, you can access the rawbytes of the image by using the model of the Camera widget.
+In Desktop Web/ Responsive Web platforms, after the **takePicture** method has been called, you can access the rawbytes and base64 of the image by using the model of the Camera widget.
 
 ### Example
 
