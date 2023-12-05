@@ -1,10 +1,10 @@
                                
 
 
-\<object\>.update
+<object\>.update
 ===============
 
-The **\<object\>.update** API updates the records that are qualified for the criteria in the local database.
+The **<object\>.update** API updates the records that are qualified for the criteria in the local database.
 
 <!-- > **Note:**  
 *   This API is supported from V8 SP4 onwards.  
@@ -33,15 +33,11 @@ Volt MX  Iris (JavaScript)
 | primaryKeys | JSON | Specify the primary keys of the record to be updated. **Key Name**: primaryKeys and **values** are column names and their respective values. | No |
 | whereCondition | JSON | Specify the where condition for the update query. **Key Name**: whereCondition and **values** are column names and their respective values. | No |
 | whereConditionAsAString | String | Specify the where condition for the update query. **Key Name**: whereConditionAsAString and the **value** is a string. > **_Note:_** For SPA/Desktop Web channels, each condition must have only one comparison operator (=,!=,>,<,>=,<=). Multiple conditions can be clubbed using conjunctions (AND, OR). Values containing whitespaces are not supported. | No |
-| trackChanges | Boolean | If **trackChanges** is set to **False**, the record level operations are not tracked. When the option is set to false, the CUD operations performed on a record are not synced (uploaded). The key is set to **True**, by default.
+| trackChanges | Boolean | If **trackChanges** is set to **False**, the record level operations are not tracked. When the option is set to false, the CUD operations performed on a record are not synced (uploaded). The key is set to **True**, by default.| No |
+| trackIntermediateUpdates | Boolean | If **trackIntermediateUpdates** is set to **False**, it enables to track the latest update performed on the record. The key is set to **True**, by default.| No |
+| markForUpload | Boolean | If **markForUpload** is set to**False**, the record changes are not uploaded to the server. The key is set to **True**, by default.| No |  
+| syncLatestObjectSnapshot | Boolean | This option, when turned on (set to True), ensures that only the most recent update is sent for a specific primary key, rather than sending two entries when both create and update operations occur for that key. | No |
 
- | No |
-| trackIntermediateUpdates | Boolean | If **trackIntermediateUpdates** is set to **False**, it enables to track the latest update performed on the record. The key is set to **True**, by default.
-
- | No |
-| markForUpload | Boolean | If **markForUpload** is set to**False**, the record changes are not uploaded to the server. The key is set to **True**, by default.
-
- | No |
 
 ### Return Type
 
