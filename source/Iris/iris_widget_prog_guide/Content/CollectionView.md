@@ -1,6 +1,6 @@
                                  
 
-You are here: Creating a CollectionView Using a Constructor: voltmx.ui.collectionview
+You are here: Creating a CollectionView Using a Constructor: voltmx.ui.CollectionView
 
 CollectionView Widget
 =====================
@@ -238,11 +238,11 @@ Each of the above widgets is allowed to have its own skin and control. This give
 
 When a CollectionView [template](#collectionview-templates) is created based on the input data, the template is repeated in the Collection.
 
-### Creating a CollectionView Using a Constructor: voltmx.ui.collectionview
+### Creating a CollectionView Using a Constructor: voltmx.ui.CollectionView
 
 ```
 
-var collection = new voltmx.ui.collectionview (basicConf, layoutConf, pspConf);
+var collection = new voltmx.ui.CollectionView (basicConf, layoutConf, pspConf);
 ```
 
 *   **basicConf** is an object with basic properties.
@@ -283,7 +283,7 @@ var pspConf = {
 };
 
 //Creating the CollectionView
-var collection = new voltmx.ui.collectionview(basicConf,
+var collection = new voltmx.ui.CollectionView(basicConf,
     layoutConf, pspConf);
 
 //Reading the alternateRowSkin of the CollectionView	
