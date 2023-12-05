@@ -16,7 +16,7 @@ Input Parameters
 
 _actionItemParams_
 
-A JavaScript object containing key-value pairs that define the configuration parameters for the action item.the style and action keys are optional.
+A JavaScript object containing key-value pairs that define the configuration parameters for the action item. The style and action keys are optional.
 
 | Constant | Description |
 | --- | --- |
@@ -43,7 +43,7 @@ Returns an `ActionItem` object that can be added to an Action Sheet.
 
 Remarks
 
-The `actionCallback` function, which is passed into this function through the _actionSheetParams_ parameter, must have the following prototype.
+The `The action` function, which is passed into this function through the _actionSheetParams_ parameter, must have the following prototype.
 
 actionItemCallback(actionSheetObject, actionItem1);
 
