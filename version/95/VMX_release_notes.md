@@ -8,6 +8,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 [Volt Iris](#volt-iris)
 
 
+- [V9 Servicepack 5 Fixpack 20](#v9-servicepack-5-fixpack-20)
 - [V9 Servicepack 5 Fixpack 19](#v9-servicepack-5-fixpack-19)
 - [V9 Servicepack 5 Fixpack 18](#v9-servicepack-5-fixpack-18)
 - [V9 Servicepack 5 Fixpack 17](#v9-servicepack-5-fixpack-17)
@@ -68,6 +69,24 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 - [Earlier Foundry releases](#earlier-foundry-releases)
 
 ## Volt Iris
+
+### V9 Servicepack 5 Fixpack 20
+
+December 06, 2023
+
+#### Iris Enhancements
+
+* Added support for Volt Iris to target Android API level 33
+  ( Android 14 )for generating binaries.<br>
+  To have SDK 34 listed in Project Preferences, kindly run a native build first to update local libraries.
+
+* Upgraded Gradle version to 7.5, which requires Java 11.
+  Java 11 is mandatory to build Android applications from this release. 
+
+  Click [here](https://github01.hclpnp.com/pages/phoenix-temenos/volt-mx-doc-opnsrc/95/docs/documentation/Iris/iris_user_guide/Content/Android14_Behavioral_Changes.html) for Android 14 Behavioral Changes
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+
 
 ### V9 Servicepack 5 Fixpack 19
 
