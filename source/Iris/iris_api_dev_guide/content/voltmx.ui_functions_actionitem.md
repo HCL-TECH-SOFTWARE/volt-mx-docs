@@ -43,7 +43,7 @@ Returns an `ActionItem` object that can be added to an Action Sheet.
 
 Remarks
 
-The `The action` function, which is passed into this function through the _actionSheetParams_ parameter, must have the following prototype.
+The `action` function, which is passed into this function through the _actionSheetParams_ parameter, must have the following prototype.
 
 actionItemCallback(actionSheetObject, actionItem1);
 
