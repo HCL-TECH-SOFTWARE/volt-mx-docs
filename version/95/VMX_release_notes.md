@@ -80,7 +80,7 @@ December 06, 2023
   ( Android 14 )for generating binaries.<br>
   To have SDK 34 listed in Project Preferences, kindly run a native build first to update local libraries.
 
-* Upgraded Gradle version to 7.5, which requires Java 11.
+* Upgraded Gradle version to 34, which requires Java 11.
   Java 11 is mandatory to build Android applications from this release. 
 
   Click [here](https://github01.hclpnp.com/pages/phoenix-temenos/volt-mx-doc-opnsrc/95/docs/documentation/Iris/iris_user_guide/Content/Android14_Behavioral_Changes.html) for Android 14 Behavioral Changes
