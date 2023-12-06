@@ -133,6 +133,20 @@ var options = {
 };
 var VMXObject = new voltmx.sdk.VMXObj("CATEGORY");
 VMXObject.update(record, options, successCallback, errorCallback);
+
+//------- update using markForUpload flag --------- 
+var options = {
+    "markForUpload": false
+};
+var VMXObject = new voltmx.sdk.VMXObj("CATEGORY");
+VMXObject.update(record, options, successCallback, errorCallback);
+
+//------- update using syncLatestObjectSnapshot flag --------- 
+var options = {
+    "syncLatestObjectSnapshot": false
+};
+var VMXObject = new voltmx.sdk.VMXObj("CATEGORY");
+VMXObject.update(record, options, successCallback, errorCallback);
 ```
 
 Android (Java)
