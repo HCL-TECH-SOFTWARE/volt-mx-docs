@@ -15,7 +15,8 @@ The installation of the Volt Foundry software supports the following versions of
 
 #### **Windows Server**
 
-*   Windows 2019
+*   Windows 2022
+*   Windows Server 2019
 *   Windows Server 2016 Datacenter
 *   Windows Server 2012 R2
 *   Windows Server 2012
