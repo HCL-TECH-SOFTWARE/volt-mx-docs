@@ -15,7 +15,7 @@ The installation of the Volt Foundry software supports the following versions of
 
 #### **Windows Server**
 
-*   Windows 2022
+*   Windows Server 2022
 *   Windows Server 2019
 *   Windows Server 2016 Datacenter
 *   Windows Server 2012 R2
@@ -24,7 +24,7 @@ The installation of the Volt Foundry software supports the following versions of
 #### Linux
 
 *   CentOS
-
+    *   Centos 9
     *   CentOS 8
     *   CentOS 7.6
     *   CentOS 7.5
