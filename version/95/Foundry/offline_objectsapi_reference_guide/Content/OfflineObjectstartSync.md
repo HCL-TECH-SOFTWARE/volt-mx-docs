@@ -43,7 +43,7 @@ VMXFoundry.OfflineObjects.startSync(options, successCallback, failureCallback, p
 | --------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | syncMode              | String | Option to perform object services sync in sequence or parallel. The values could be{"parallel", "sequential"} <br> **_Note:_** Default sync mode is parallel, if not provided in options.                                                                                                                                                                                                   | No       |
 | objectServicesOptions | JSON   | The user can provide options to customize sync behavior. For example, Filters, downloadBatchSize and so on. For more details, refer [Sync Options](ObjectService_startSync.md#sync-options) for supported options and [Offline Objects Getting Started](../../../Foundry/offline_objects_gettingstarted/Content/Offline_Objects_Getting_Started.md) guide. | No       |
-| removeAfterUpload | Array (list of objects)   | removeAfterUpload flag removes the entries from local DB once upload is successful to backend DB. This flag is passed as option parameter to startSync function as part of sync options. | Optional       |
+| removeAfterUpload | Array (list of objects)   | removeAfterUpload flag removes the entries from local DB once upload is successful to backend DB. This flag is passed as option parameter to startSync function as part of sync options. | No       |
 
 
 #### Success Callback Response
@@ -110,17 +110,12 @@ syncOptions.objectServicesOptions = {
 syncOptions.removeAfterUpload = [<list of objects>];
 syncOptions.isUploadCacheEnabled=true;
 voltmx.sdk.OfflineObjects.startSync(syncOptions, onSuccess, onFailure, onProgress);
-function onSuccess(response) {
-    alert("app level sync success with syncType:  ");
-}
- 
-function onFailure(error) {
-    voltmx.print("app level Sync failed: ");
-}
- 
-function onProgress(object) {
-    voltmx.print("app level Sync progress: ");
-}
+function onSuccess(response)
+{     //Handle sync success response. }
+function onFailure(error)
+{     //Handle sync failure response. }
+function onProgress(object)
+{     //Handle sync progress response. }
 ```
 
 

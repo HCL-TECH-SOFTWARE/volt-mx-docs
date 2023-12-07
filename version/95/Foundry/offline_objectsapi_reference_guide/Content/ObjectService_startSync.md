@@ -46,7 +46,7 @@ VMXObjSvc.startSync(syncOptions, successCallback, failureCallback, progressCallb
 | downloadRequestQueryParams | JSON   | The downloadRequestQueryParams is used to pass the query parameters in download network requests. | No  |
 | downloadReconciliationRequired | Boolean   | This parameter specifies if download reconciliation is required or not. Download reconciliation is used to compare primary keys present in backend with application database primary keys for an object. In scenarios where there are no pending edits, it is advisable to perform startSync by setting **downloadReconciliationRequired** to **false** (as in the case of initial sync). **downloadReconciliationRequired** is set to **true**, by default. | No  |
 | preserveBatchContext | Boolean   | 	**preserveBatchContext** specifies whether to preserve the batchContext of last successful download batch. If batchContext is preserved, the successive download call resumes from the last successful batch, else it starts from the first batch again. Set the option to **True**, to resume the download from last successful batch. Set the option to **False**, to start downloading from the first batch. **preserveBatchContext** is set to false, by default. **_Note_:** This parameter is not supported for Windows, Mobile Web, and Desktop Web channels. | No  |
-| removeAfterUpload | Array (list of objects)   | removeAfterUpload flag removes the entries from local DB once upload is successful to backend DB. This flag is passed as option parameter to startSync function as part of sync options. | Optional       |
+| removeAfterUpload | Array (list of objects)   | removeAfterUpload flag removes the entries from local DB once upload is successful to backend DB. This flag is passed as option parameter to startSync function as part of sync options. | No       |
 
 
 ### Return Type
@@ -111,17 +111,12 @@ syncOptions.removeAfterUpload = [<list of objects>];
 syncOptions.isUploadCacheEnabled=true;
 syncOptions.syncType = "uploadOnly";
 objectServiceSync.startSync(syncOptions, onSuccess, onFailure, onProgress);
-function onSuccess(response) {
-    alert("app level sync success with syncType:  ");
-}
- 
-function onFailure(error) {
-    voltmx.print("app level Sync failed: ");
-}
- 
-function onProgress(object) {
-    voltmx.print("app level Sync progress: ");
-}
+function onSuccess(response)
+{     //Handle sync success response. }
+function onFailure(error)
+{     //Handle sync failure response. }
+function onProgress(object)
+{     //Handle sync progress response. }
 ```
 
 
