@@ -802,20 +802,8 @@ December 11, 2023
 
 #### Foundry Enhancements
 
-* Added Odata filter support for IN operator.
-* Foundry container comming up with feature to support on linux
-  arm64 channel.
-
-#### AppFactory Enhancements
-
-* Xcode 14 is now supported
-  * AppFactory executes iOS builds on Xcode 15 to enable iOS 17 app submission to the Apple App Store as mandated by Apple guidelines. Refer [here](https://developer.apple.com/news/?id=khzvxn8a) for more information.
-
-    > **_Note_**: Xcode 15 is not supported in AppFactory versions lower than 9.5.15.5.
-
-* AppFactory has been upgraded with new Jenkins version to
-  enhance security and performance of the platform.
-  * Security Enhancements : With this upgrade, all known Jenkins security vulnerabilities have been addressed and resolved.
+* Added OData4 filter support for IN operator.
+* Foundry container support on Linux arm64 channel added.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
