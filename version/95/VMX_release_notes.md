@@ -36,7 +36,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Foundry](#volt-foundry)
 
-
+- [V9 Servicepack 5 Fixpack 15 Hotfix 5](#v9-servicepack-5-fixpack-15-hotfix-5)
 - [V9 Servicepack 5 Fixpack 15 Hotfix 4](#v9-servicepack-5-fixpack-15-hotfix-4)
 - [V9 Servicepack 5 Fixpack 15 Hotfix 3](#v9-servicepack-5-fixpack-15-hotfix-3)
 - [V9 Servicepack 5 Fixpack 15 Hotfix 2](#v9-servicepack-5-fixpack-15-hotfix-2)
@@ -795,6 +795,29 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 -->
 
 ## Volt Foundry
+
+
+### V9 Servicepack 5 Fixpack 15 Hotfix 5
+December 11, 2023
+
+#### Foundry Enhancements
+
+* Added Odata filter support for IN operator.
+* Foundry container comming up with feature to support on linux
+  arm64 channel.
+
+#### AppFactory Enhancements
+
+* Xcode 14 is now supported
+  * AppFactory executes iOS builds on Xcode 15 to enable iOS 17 app submission to the Apple App Store as mandated by Apple guidelines. Refer [here](https://developer.apple.com/news/?id=khzvxn8a) for more information.
+
+    > **_Note_**: Xcode 15 is not supported in AppFactory versions lower than 9.5.15.5.
+
+* AppFactory has been upgraded with new Jenkins version to
+  enhance security and performance of the platform.
+  * Security Enhancements : With this upgrade, all known Jenkins security vulnerabilities have been addressed and resolved.
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 
 ### V9 Servicepack 5 Fixpack 15 Hotfix 4
