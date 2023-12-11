@@ -1,11 +1,6 @@
----
-layout: "documentation"
-category: "voltmx_foundry_user_guide"
----
-                             
+# Support for OData Methods
 
-Support for ODATA Methods (substringof and indexof)
----------------------------------------------------
+## Support for ODATA Methods (substringof and indexof)
 
 A URL with a $filter query (for RDBMS/ business adapter) identifies a subset of the entries from the collection of entries identified by the expression of the URL. The subset is determined by selecting only the entries that satisfy the predicate expression specified by the query option.
 
