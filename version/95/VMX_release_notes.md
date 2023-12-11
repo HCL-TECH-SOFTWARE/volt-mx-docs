@@ -72,19 +72,14 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 ### V9 Servicepack 5 Fixpack 20
 
-December 06, 2023
+December 11, 2023
 
 #### Iris Enhancements
 
-* Added support for Volt Iris to target Android API level 33
-  (Android 14) for generating binaries.<br>
-  To add SDK 34 in the Project Preference list, first run a native build to update local libraries.
-* Upgraded Gradle version to 34, which requires Java 11.
-
-  >**_Note:_** Java 11 is mandatory to build Android applications from this release. 
-
-  For more details about Android 14 Behavioral Changes
-  click [here](https://github01.hclpnp.com/pages/phoenix-temenos/volt-mx-doc-opnsrc/95/docs/documentation/Iris/iris_user_guide/Content/Android14_Behavioral_Changes.html)
+* Optimise offline sync by aggregating CREATE and UPDATE operations on individual objects.
+* Added support for cleanup of local object reference after upload to remote.
+* deletebinary API support extended to SPA channel.
+* Security hardening for binary in protected-mode build.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
