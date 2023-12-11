@@ -803,7 +803,7 @@ December 11, 2023
 #### Foundry Enhancements
 
 * Added OData4 filter support for IN operator.
-* Foundry container support on Linux arm64 channel added through
+* Added Foundry container support on Linux arm64 channel through
   docker single container and helm installation.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
