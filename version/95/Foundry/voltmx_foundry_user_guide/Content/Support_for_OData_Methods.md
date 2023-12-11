@@ -1,3 +1,7 @@
+---
+layout: "documentation"
+category: "voltmx_foundry_user_guide"
+---
                              
 
 Support for ODATA Methods (substringof and indexof)
@@ -5,9 +9,8 @@ Support for ODATA Methods (substringof and indexof)
 
 A URL with a $filter query (for RDBMS/ business adapter) identifies a subset of the entries from the collection of entries identified by the expression of the URL. The subset is determined by selecting only the entries that satisfy the predicate expression specified by the query option.
 
-```
- $filter=expression
-```
+{% highlight voltMx %} $filter=expression
+{% endhighlight %}
 
 The expression language that is used in $filter operators are limited across business adapters. The values can be strings enclosed in single quotes, numbers, Boolean values (such as true or false), and nested values.
 
@@ -18,6 +21,7 @@ $filter for RDBMS connector supports the following string methods from release V
 *   tolower
 *   toupper
 *   substringof
+*   in
 
 ### startswith
 
@@ -25,15 +29,13 @@ This string function filters all the records that starts with doe in the lastnam
 
 **API Usage**
 
-```
- $filter=startswith('colname', 'expression') eq [true|false]
-```
+{% highlight voltMx %} $filter=startswith('colname', 'expression') eq [true|false]
+{% endhighlight %}
 
 Example
 
-```
- startswith('lastname','doe') eq true
-```
+{% highlight voltMx %} startswith('lastname','doe') eq true
+{% endhighlight %}
 
 endswith
 --------
@@ -42,15 +44,13 @@ This string function filters all the records that ends with `hon` in `firstname`
 
 API Usage
 
-```
- $filter=endswith('colname', 'expression') eq [true|false]
-```
+{% highlight voltMx %} $filter=endswith('colname', 'expression') eq [true|false]
+{% endhighlight %}
 
 Example
 
-```
- endswith('firstname', 'hon') eq true
-```
+{% highlight voltMx %} endswith('firstname', 'hon') eq true
+{% endhighlight %}
 
 substringof
 -----------
@@ -59,15 +59,13 @@ This string function filters all the records that contain with `gmail` in `email
 
 API Usage
 
-```
- $filter=substringof('colname', 'expression') eq [true|false]
-```
+{% highlight voltMx %} $filter=substringof('colname', 'expression') eq [true|false]
+{% endhighlight %}
 
 Example
 
-```
- substringof('email', 'gmail') eq true
-```
+{% highlight voltMx %} substringof('email', 'gmail') eq true
+{% endhighlight %}
 
 tolower
 -------
@@ -76,15 +74,13 @@ The string filters all the records by matching the exact value with all the valu
 
 API Usage
 
-```
- $filter=tolower('colname') eq 'value'
-```
+{% highlight voltMx %} $filter=tolower('colname') eq 'value'
+{% endhighlight %}
 
 Example
 
-```
- $filter=tolower('name') eq 'alfreds futterkiste'
-```
+{% highlight voltMx %} $filter=tolower('name') eq 'alfreds futterkiste'
+{% endhighlight %}
 
 toupper
 -------
@@ -93,12 +89,43 @@ This string function filters all the records by matching the exact value with al
 
 API Usage
 
-```
- $filter=toupper('colname') eq 'value'
-```
+{% highlight voltMx %} $filter=toupper('colname') eq 'value'
+{% endhighlight %}
 
 Example
 
-```
- $filter=toupper('name') eq 'ALFREDS FUTTERKISTE'
-```
+{% highlight voltMx %} $filter=toupper('name') eq 'ALFREDS FUTTERKISTE'
+{% endhighlight %}
+
+in
+-------
+
+a)'IN' with eq(equals) verb:
+
+This "IN" operator filters all the records that equals the list of values in the column of the table.
+Syntax rules are comma separated list of values without spaces and enclosed in parentheses(). Don't use square brackets [] or braces {}.
+
+API Usage
+
+{% highlight voltMx %} $filter=colname eq in ('value','value')
+{% endhighlight %}
+
+Example
+
+{% highlight voltMx %} $filter=Name eq in ('Milk','Cheese')
+{% endhighlight %}
+
+b)'IN' with ne(not equals) verb:
+
+This "IN" operator filters all the records that not equals the list of values in the column of the table.
+Syntax rules are comma separated list of values without spaces and enclosed in parentheses(). Don't use square brackets [] or braces {}.
+
+API Usage
+
+{% highlight voltMx %} $filter=colname ne in ('value','value')
+{% endhighlight %}
+
+Example
+
+{% highlight voltMx %} $filter=Name ne in ('butter','bread')
+{% endhighlight %}
