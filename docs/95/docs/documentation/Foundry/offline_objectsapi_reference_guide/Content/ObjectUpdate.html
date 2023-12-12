@@ -361,7 +361,7 @@
     id="__nav_1_7"
     
   />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 
   <div class="md-nav__link md-nav__link--index">
     <a href="../../../Iris/voltmxIrisFundamentals.html"> Iris </a>
@@ -1513,8 +1513,8 @@
                   
 
 
-<h1 id="objectupdate">\&lt;object&gt;.update</h1>
-<p>The <strong>\&lt;object&gt;.update</strong> API updates the records that are qualified for the criteria in the local database.</p>
+<h1 id="objectupdate">&lt;object&gt;.update</h1>
+<p>The <strong>&lt;object&gt;.update</strong> API updates the records that are qualified for the criteria in the local database.</p>
 <!-- > **Note:**  
 *   This API is supported from V8 SP4 onwards.  
 *   Supported for Windows from V8 SP4 Fix Pack 6 onwards.  
@@ -1561,15 +1561,28 @@
 <td>trackChanges</td>
 <td>Boolean</td>
 <td>If <strong>trackChanges</strong> is set to <strong>False</strong>, the record level operations are not tracked. When the option is set to false, the CUD operations performed on a record are not synced (uploaded). The key is set to <strong>True</strong>, by default.</td>
-<td></td>
+<td>No</td>
+</tr>
+<tr>
+<td>trackIntermediateUpdates</td>
+<td>Boolean</td>
+<td>If <strong>trackIntermediateUpdates</strong> is set to <strong>False</strong>, it enables to track the latest update performed on the record. The key is set to <strong>True</strong>, by default.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>markForUpload</td>
+<td>Boolean</td>
+<td>If <strong>markForUpload</strong> is set to<strong>False</strong>, the record changes are not uploaded to the server. The key is set to <strong>True</strong>, by default.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>syncLatestObjectSnapshot</td>
+<td>Boolean</td>
+<td>This option, when turned on (set to True), ensures that only the most recent update is sent for a specific primary key, rather than sending two entries when both create and update operations occur for that key.</td>
+<td>No</td>
 </tr>
 </tbody>
 </table>
-<p>| No |
-| trackIntermediateUpdates | Boolean | If <strong>trackIntermediateUpdates</strong> is set to <strong>False</strong>, it enables to track the latest update performed on the record. The key is set to <strong>True</strong>, by default.</p>
-<p>| No |
-| markForUpload | Boolean | If <strong>markForUpload</strong> is set to<strong>False</strong>, the record changes are not uploaded to the server. The key is set to <strong>True</strong>, by default.</p>
-<p>| No |</p>
 <h3 id="return-type">Return Type</h3>
 <p>void</p>
 <h3 id="example">Example</h3>
@@ -1657,6 +1670,20 @@ VMXObject.update(record, options, successCallback, errorCallback);
 //------- update using markForUpload flag --------- 
 var options = {
     &quot;markForUpload&quot;: false
+};
+var VMXObject = new voltmx.sdk.VMXObj(&quot;CATEGORY&quot;);
+VMXObject.update(record, options, successCallback, errorCallback);
+
+//------- update using markForUpload flag --------- 
+var options = {
+    &quot;markForUpload&quot;: false
+};
+var VMXObject = new voltmx.sdk.VMXObj(&quot;CATEGORY&quot;);
+VMXObject.update(record, options, successCallback, errorCallback);
+
+//------- update using syncLatestObjectSnapshot flag --------- 
+var options = {
+    &quot;syncLatestObjectSnapshot&quot;: false
 };
 var VMXObject = new voltmx.sdk.VMXObj(&quot;CATEGORY&quot;);
 VMXObject.update(record, options, successCallback, errorCallback);

@@ -361,7 +361,7 @@
     id="__nav_1_7"
     
   />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 
   <div class="md-nav__link md-nav__link--index">
     <a href="../../../Iris/voltmxIrisFundamentals.html"> Iris </a>
@@ -786,6 +786,13 @@
           <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     Example
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removeafterupload-example" class="md-nav__link">
+    removeAfterUpload Example
   </a>
   
 </li>
@@ -1392,6 +1399,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#removeafterupload-example" class="md-nav__link">
+    removeAfterUpload Example
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1551,20 +1565,27 @@
 <h1 id="vmxfoundryofflineobjectsstartsync">VMXFoundry.OfflineObjects.startSync</h1>
 <p>The <strong>VMXFoundry.OfflineObjects.startSync</strong> API performs sync on all the object services published in the Volt MX Foundry application.</p>
 <blockquote>
-<p><strong>Note:</strong></p>
-</blockquote>
+<em><b>Note: </b></em>
 <ul>
 <li>If sync is performed in an upload cache enabled scenario, cached requests that are timed out in the previous upload session are uploaded before the latest changes.</li>
 <li>The client does not handle partial records and expects the server to send the entire record. Full record with all the columns are expected in both upload and download responses. If the backend does not return the full record, use post processor to copy the missing columns from the request as demonstrated here.</li>
+<li>removeAfterUpload flag is only applicable for uploadOnly sync type.</li>
+<li>removeAfterUpload flag has no effect if it is set to downloadOnly or fullSync types.</li>
+<li>removeAfterUpload flag doesn’t clear entire local DB. It deletes the record that are only successfully uploaded during uploadOnly syncType.</li>
+<li>Client can do downloadOnly sync to get local deleted records back to local DB.</li>
+<li>removeAfterUpload flag is applicable for all three-level sync (app level, obj svc, and obj).</li>
 </ul>
+</blockquote>
+
 <h2 id="volt-mx-iris-javascript">Volt MX Iris (JavaScript)</h2>
 <blockquote>
-<p><strong>Note:</strong></p>
-</blockquote>
+<em><b>Note: </b></em>
 <ul>
 <li>Supported for Windows from V8 SP4 Fix Pack 6 onwards.</li>
 <li>Supported for Mobile Web and Desktop Web channels from V8 SP4 Fix Pack 12 onwards.</li>
 </ul>
+</blockquote>
+
 <h3 id="signature">Signature</h3>
 <pre><code>VMXFoundry.OfflineObjects.startSync(options, successCallback, failureCallback, progressCallback)
 </code></pre>
@@ -1592,6 +1613,12 @@
 <td>objectServicesOptions</td>
 <td>JSON</td>
 <td>The user can provide options to customize sync behavior. For example, Filters, downloadBatchSize and so on. For more details, refer <a href="ObjectService_startSync.html#sync-options">Sync Options</a> for supported options and <a href="../../offline_objects_gettingstarted/Content/Offline_Objects_Getting_Started.html">Offline Objects Getting Started</a> guide.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>removeAfterUpload</td>
+<td>Array (list of objects)</td>
+<td>removeAfterUpload flag removes the entries from local DB once upload is successful to backend DB. This flag is passed as option parameter to startSync function as part of sync options.</td>
 <td>No</td>
 </tr>
 </tbody>
@@ -1667,6 +1694,24 @@ voltmx.print(&quot;Application Sync failed with error: &quot; + JSON.stringify(e
 function onProgress(object) {
 voltmx.print(&quot;Application Sync progress event received&quot; + JSON.stringify(object));
 }
+</code></pre>
+<h3 id="removeafterupload-example">removeAfterUpload Example</h3>
+<pre><code>var appLevelOptions = {
+  &quot;syncType&quot;: &quot;uploadOnly&quot;
+};
+var syncOptions = {};
+syncOptions.objectServicesOptions = {
+  &quot;&lt;ObjSvc&gt;&quot;: appLevelOptions,
+};
+syncOptions.removeAfterUpload = [&lt;list of objects&gt;];
+syncOptions.isUploadCacheEnabled=true;
+voltmx.sdk.OfflineObjects.startSync(syncOptions, onSuccess, onFailure, onProgress);
+function onSuccess(response)
+{     //Handle sync success response. }
+function onFailure(error)
+{     //Handle sync failure response. }
+function onProgress(object)
+{     //Handle sync progress response. }
 </code></pre>
 <h2 id="android-java">Android (Java)</h2>
 <h3 id="signature_1">Signature</h3>
