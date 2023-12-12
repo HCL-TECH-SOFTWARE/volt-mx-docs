@@ -3,17 +3,29 @@
 
 The **VMXFoundry.OfflineObjects.startSync** API performs sync on all the object services published in the Volt MX Foundry application.
 
-> **Note:**
-
-- If sync is performed in an upload cache enabled scenario, cached requests that are timed out in the previous upload session are uploaded before the latest changes.
-- The client does not handle partial records and expects the server to send the entire record. Full record with all the columns are expected in both upload and download responses. If the backend does not return the full record, use post processor to copy the missing columns from the request as demonstrated here.
+<blockquote>
+<em><b>Note: </b></em>
+<ul>
+<li>If sync is performed in an upload cache enabled scenario, cached requests that are timed out in the previous upload session are uploaded before the latest changes.</li>
+<li>The client does not handle partial records and expects the server to send the entire record. Full record with all the columns are expected in both upload and download responses. If the backend does not return the full record, use post processor to copy the missing columns from the request as demonstrated here.</li>
+<li>removeAfterUpload flag is only applicable for uploadOnly sync type.</li>
+<li>removeAfterUpload flag has no effect if it is set to downloadOnly or fullSync types.</li>
+<li>removeAfterUpload flag doesn’t clear entire local DB. It deletes the record that are only successfully uploaded during uploadOnly syncType.</li>
+<li>Client can do downloadOnly sync to get local deleted records back to local DB.</li>
+<li>removeAfterUpload flag is applicable for all three-level sync (app level, obj svc, and obj).</li>
+</ul>
+</blockquote>
 
 ## Volt MX Iris (JavaScript)
 
-> **Note:**
+<blockquote>
+<em><b>Note: </b></em>
+<ul>
+<li>Supported for Windows from V8 SP4 Fix Pack 6 onwards.</li>
+<li>Supported for Mobile Web and Desktop Web channels from V8 SP4 Fix Pack 12 onwards.</li>
+</ul>
+</blockquote>
 
-- Supported for Windows from V8 SP4 Fix Pack 6 onwards.
-- Supported for Mobile Web and Desktop Web channels from V8 SP4 Fix Pack 12 onwards.
 
 ### Signature
 
@@ -31,6 +43,8 @@ VMXFoundry.OfflineObjects.startSync(options, successCallback, failureCallback, p
 | --------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | syncMode              | String | Option to perform object services sync in sequence or parallel. The values could be{"parallel", "sequential"} <br> **_Note:_** Default sync mode is parallel, if not provided in options.                                                                                                                                                                                                   | No       |
 | objectServicesOptions | JSON   | The user can provide options to customize sync behavior. For example, Filters, downloadBatchSize and so on. For more details, refer [Sync Options](ObjectService_startSync.md#sync-options) for supported options and [Offline Objects Getting Started](../../../Foundry/offline_objects_gettingstarted/Content/Offline_Objects_Getting_Started.md) guide. | No       |
+| removeAfterUpload | Array (list of objects)   | removeAfterUpload flag removes the entries from local DB once upload is successful to backend DB. This flag is passed as option parameter to startSync function as part of sync options. | No       |
+
 
 #### Success Callback Response
 
@@ -82,6 +96,30 @@ function onProgress(object) {
 voltmx.print("Application Sync progress event received" + JSON.stringify(object));
 }
 ```
+
+### removeAfterUpload Example
+
+```
+var appLevelOptions = {
+  "syncType": "uploadOnly"
+};
+var syncOptions = {};
+syncOptions.objectServicesOptions = {
+  "<ObjSvc>": appLevelOptions,
+};
+syncOptions.removeAfterUpload = [<list of objects>];
+syncOptions.isUploadCacheEnabled=true;
+voltmx.sdk.OfflineObjects.startSync(syncOptions, onSuccess, onFailure, onProgress);
+function onSuccess(response)
+{     //Handle sync success response. }
+function onFailure(error)
+{     //Handle sync failure response. }
+function onProgress(object)
+{     //Handle sync progress response. }
+```
+
+
+
 
 ## Android (Java)
 

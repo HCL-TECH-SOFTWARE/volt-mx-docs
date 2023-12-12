@@ -201,6 +201,7 @@ function writeb() {
 *   Windows
 *   Android
 *   SPA
+*   Desktop Web
 
 * * *
 

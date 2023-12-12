@@ -448,3 +448,45 @@ objSvc.updateBinaryContent({
         voltmx.print("Failed: " + JSON.stringify(error));
     });
 ```
+
+
+### deleteBinaryContent Method
+
+Deletes binary content on the server.
+
+#### Syntax
+
+```
+deleteBinaryContent(options, successCallback, failureCallback);
+```
+
+#### Parameters
+
+| Parameter | Description |
+| --- | --- |
+| options | JSON object with the mandatory parameter "dataObject", which is an instance of the [voltmx.sdk.dto.DataObject Class](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/ObjectsAPIReference/voltmx.sdk.dto.DataObject_Class.html), and "binaryAttrName", which is the binary field name in the object |
+| successCallback | Function invoked when the operation succeeds, with the number of records deleted |
+| failureCallback | Function invoked when the operation fails, with cause of failure |
+
+
+#### Example
+
+```
+var objSvc = voltmx.sdk.getCurrentInstance().getObjectService("serviceName", {
+    "access": "online"
+});
+var dataObject = new voltmx.sdk.dto.DataObject("ObjectName");
+dataObject.addField("name", "imgName");
+dataObject.addField("data", "binaryText");
+
+objSvc.deleteBinaryContent({
+        "dataObject": dataObject,
+        "binaryAttrName": "data"
+    },
+    function(response) {
+        voltmx.print("Binary content deleted: " + JSON.stringify(response));
+    },
+    function(error) {
+        voltmx.print("Failed: " + JSON.stringify(error));
+    });
+```
