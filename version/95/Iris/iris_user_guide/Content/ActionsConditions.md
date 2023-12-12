@@ -4,13 +4,15 @@
 Condition Actions
 -----------------
 
+> **_Note:_** Condition actions are only supported for Apple Watch on V9 Servicepack 5 Fixpack 15 or later.
+
 The behaviors that you can assign are as follows:
 
   
 | Action | Property |
 | --- | --- |
 | **If Condition** | Specifies an action to be executed when one or more conditions are satisfied. |
-| **Else If Condition** | Specifies an action to be executed when one or more conditions (in addition to the **If** condition) are satisfied. |
+| **Else If Condition** | Specifies an action to be executed when one or more conditions are satisfied (when the If Condition was not satisfied). |
 | **Else Condition** | Specifies an action to be executed when an **If** or **Else If** condition is not satisfied. |
 | **Channel Condition** | Specifies for which channels an action is executed. (Not supported for Apple Watch) |
 

@@ -4,6 +4,8 @@
 Animation Actions
 -----------------
 
+> **_Note:_** Animation actions are only supported for Apple Watch on V9 Servicepack 5 Fixpack 15 or later.
+
 From the Animation section of the list of actions available along the left column of the Action Editor, you can add any of the following six actions. Click an action for instructions on how to add it to an action sequence.
 
   
@@ -12,10 +14,11 @@ From the Animation section of the list of actions available along the left colum
 | [Flex Move](#flex-move) | Moves the widget from its original position. (Not supported for Apple Watch) |
 | [Flex Scale](#flex-scale) | Resizes a widget. |
 | [Flex Layout](#flex-layout) | Moves, scales, and rotates a widget with a single action along an X and Y axis (two dimensional). (Not supported for Apple Watch)|
-| [Transform](#transform) | Moves, scales, and rotates a widget with a single action along an X, Y, and Z axis (three dimensional). Moves, scales, and rotates a widget with a single action along an X, Y, and Z axis (three dimensional).  |
+| [Transform](#transform) | Moves, scales, and rotates a widget with a single action along an X, Y, and Z axis (three dimensional). (Not supported for Apple Watch).  |
 | [Rotate](#rotate) | Rotates a widget along an X and Y axis (two dimensional). (Not supported for Apple Watch) |
 | [Rotate 3D](#rotate-3d) | Rotates a widget along an X, Y, and Z axis (three dimensional). (Not supported for Apple Watch) |
 | [Set Style](#set-style) | Changes the background color of a widget. |
+
 
 ### Flex Move
 

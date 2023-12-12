@@ -24,6 +24,7 @@ Mapping Overview
 
 The Mapping Editor consists of two panes: the source and the target.
 
+
 ### Source
 
 The left pane of the Mapping Editor is called the Source, and contains the following folders:
@@ -44,9 +45,17 @@ The right pane of the Mapping Editor is called the Target, and contains the foll
 *   Popups: Lists all the pop-ups and their child widgets. All the properties of a pop-up and its child that can be mapped are also displayed.
 *   Headers: List all the header templates and their child widgets. All the properties of a header and its child that can be mapped are also displayed.
 *   Footer: List all the footer templates and their child widgets. All the properties of a header and its child that can be mapped are also displayed.
-*   Variables: List all the variables created for a project.
+*   Variables: List all the variables created for a project.  
 
-> **_Note:_** Skins and i18n keys folders are unavailable in the Target pane.
+
+<blockquote>
+<em><b>Note: </b></em>
+<ul>
+<li>Skins and i18n keys folders are unavailable in the Target pane.</li>
+<li>Headers and Footers are only included for Free Form JavaScript projects.</li>
+</ul>
+</blockquote>
+
 
 Important Considerations
 ------------------------

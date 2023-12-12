@@ -10,7 +10,7 @@ From the Functions section of the list of actions available along the left colum
 | Action | Description |
 | --- | --- |
 | [Add Snippet](#add-snippet) | Opens the code editor where you can write or paste a JavaScript code snippet for use within an action sequence. (Not supported for Apple Watch – See Add Swift Snippet for Apple Watch Equivalent) |
-| [Add Swift Snippet](#add-swift-snippet) | Available only for the Watch channel. Opens the code editor where you can write or paste a Swift code snippet for use within an action sequene. To create snippets for watchOS, you must use Swift; watchOS does not support JavaScript. |
+| [Add Swift Snippet](#add-swift-snippet) | Available only for the Apple Watch channel. Opens the code editor where you can write or paste a Swift code snippet for use within an action sequene. To create snippets for watchOS, you must use Swift; watchOS does not support JavaScript. |
 | [Call](#call-action) | Calls the action of your choosing from a list of available actions. To use this feature, you have to have already set up at least one action in the Project Explorer, on the Project tab, under the Actions section. (Free Form JavaScript projects only) |
 | [Invoke Function](#invoke-function) | Invokes the function of your choosing from a list of available functions. (Not supported for Apple Watch) |
 

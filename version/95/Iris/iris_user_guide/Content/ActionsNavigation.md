@@ -4,6 +4,8 @@
 General Actions
 ---------------
 
+> **_Note:_** General actions are only supported for Apple Watch on V9 Servicepack 5 Fixpack 15 or later.
+
 The general actions that you can use in an action sequence are as follows:
 
   
@@ -19,25 +21,6 @@ The general actions that you can use in an action sequence are as follows:
 | [Set Timeout](#set-timeout) | Set a timeout variable. |
 | [Clear Timeout](#clear-timeout) | Clear the timeout. |
 
-
-sections = document.querySelectorAll('h3');
-function updateHash() {
-    sections.forEach((section, index) => {
-        const rect = section.getBoundingClientRect();
-        if(window.scrollY !== 0) {
-                if (rect.top <= 0 && rect.bottom >= 0) {
-                        window.location.hash = section.id;
-                }
-        } else {
-            debugger;
-            window.location.hash = '';
-        }
-        })
-}
-window.addEventListener('scroll', updateHash);
-updateHash();
-
-
 ### Loop Action
 
 To define an action sequence for executing a loop action, do the following:
@@ -49,9 +32,9 @@ To define an action sequence for executing a loop action, do the following:
 3.  From the **General** section along the left column of the Action Editor, click **Loop Action**.  
     The action is added to the action sequence and is the current action of focus.
 4.  In the properties pane of the Action Editor, configure the following
-    1.  In the **Variable** field, you can either select `set` and enter a name for the variable or select `select` and select a variable from a list of existing variables.
-    2.  In the **Starting Value** field, you can either select `set` and enter a starting value for the variable or select `select` and select a value from the list.
-    3.  In the **End Value** field, you can either select `set` and enter an ending value for the variable or select `select` and select a value from the list.
+    1.  In the **Variable** field, you can either select `Set` and enter a name for the variable or select `Select` and select a variable from a list of existing variables.
+    2.  In the **Starting Value** field, you can either select `Set` and enter a starting value for the variable or select `Select` and select a value from the list.
+    3.  In the **End Value** field, you can either select `Set` and enter an ending value for the variable or select `Select` and select a value from the list.
     4.  In the **Step By** field, enter the value for the step.
     5.  Select the direction of the count, either `Increment` or `Decrement`.
     
@@ -91,9 +74,9 @@ To define an action sequence to modify an existing variable, do the following:
     The action is added to the action sequence and is the current action of focus.
 4.  In the properties pane of the Action Editor, in the **Value** field, select `Local` to modify a local variable, or `Global` to modify a global variable.
 5.  In the **Variable** field, select a variable from a list of existing variables.
-5.  In the **Value Type** field, you can choose to either `set` a value for the variable or `Increment` or `Decrement` the value of the variable.
+5.  In the **Value Type** field, you can choose to either `Set` a value for the variable or `Increment` or `Decrement` the value of the variable.
 
-If you choose to set a value for the variable, select a value type from the **Type** list, either **Constant** or **Expression**, and then enter the value of the variable in the text box provided below.
+If you choose to `Set` a value for the variable, select a value type from the **Type** list, either **Constant** or **Expression**, and then enter the value of the variable in the text box provided below.
 
    ![](Resources/Images/ModifyLocalVariable.PNG)
 
@@ -110,13 +93,13 @@ To define an action sequence to execute a String operation, do the following:
 3.  From the **General** section along the left column of the Action Editor, click **String Operations**.  
     The action is added to the action sequence and is the current action of focus.
 4.  In the properties pane of the Action Editor, in the **Type** field, select the type of String operation, either **Combine** or **Split**.
-5.  In the **String 1** field, you can choose to either `set` a value for the string or select `select` and select a string from a list of existing strings.
+5.  In the **String 1** field, you can choose to either `Set` a value for the string or select `Select` and select a string from a list of existing strings.
 6.  The second field varies depending on the type of String operation you select.
-    *   If you select the **Combine** option, in the **String 2** field, you can choose to either `set` a value for the string or select `select` and select a string from a list of existing strings. To add additional strings, click the green + icon. To delete a string, click its corresponding red x icon. 
+    *   If you select the **Combine** option, in the **String 2** field, you can choose to either `Set` a value for the string or select `Select` and select a string from a list of existing strings. To add additional strings, click the green + icon. To delete a string, click its corresponding red x icon. 
 
         ![](Resources/Images/String_Combine.PNG)
         
-    *   If you select the **Split** option, in the **Delimiter** field, you can choose to either `set` a delimiter for the string or select `select` and select a string from a list of existing strings.  
+    *   If you select the **Split** option, in the **Delimiter** field, you can choose to either `Set` a delimiter for the string or select `Select` and select a string from a list of existing strings.  
 
         ![](Resources/Images/String_Split.PNG)
 
@@ -187,6 +170,7 @@ To define an action sequence to set a timeout, do the following:
 4.  In the properties pane of the Action Editor, in the Delay (s) field, enter a value for the time in seconds (s) after which the timeout must occur.
 5.  In the **Assign To** list, select the variable that you want to use to set the timeout.  
 6.	For Repeat, select either `True` or `False` to choose whether or not the timer will repeat.
+    > **_Note:_** This will only apply to V9 Servicepack 5 Fixpack 15 or later.
 
     ![](Resources/Images/Timeout_Set.PNG)
 

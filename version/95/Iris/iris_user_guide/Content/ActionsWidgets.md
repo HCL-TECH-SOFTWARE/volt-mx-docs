@@ -4,6 +4,8 @@
 Widgets Actions
 ---------------
 
+> **_Note:_** Widget actions are only supported for Apple Watch on V9 Servicepack 5 Fixpack 15 or later.
+
 From the Widgets section of the list of actions available along the left column of the Action Editor, you can add any of the following four actions. Click an action for instructions on how to add it to an action sequence.
 
   

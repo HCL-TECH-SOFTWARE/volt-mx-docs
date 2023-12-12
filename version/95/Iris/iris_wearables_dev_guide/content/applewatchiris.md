@@ -35,7 +35,7 @@ App forms can be added by right clicking on “Forms” in the Apple Watch chann
 
 Navigation forms can be added by right clicking on “Notifications” in the Apple Watch channel in the Project Explorer, and selecting “New Notification”. 
 
-An Apple Watch application cannot dynamically create forms at run. You must add all forms the app needs in Iris at design time. If your app has more than one form, it can dynamically select which form it will display at any given time. 
+An Apple Watch application cannot dynamically create forms at run time. You must add all forms the app needs in Iris at design time. If your app has more than one form, it can dynamically select which form it will display at any given time. 
 
 Notification forms can be either static or dynamic, meaning that they can contain either static content that does not change, or they can hold dynamic information that changes. 
 
@@ -68,7 +68,7 @@ To use a template with the Segment widget, select the **Templates** tab, as show
  
 The Templates tab displays a list of all of the available templates in your project and enables you to add templates for each channel. In this example, there is one segment template (segTemp) for the Apple Watch channel. It contains a single group.  
 
-In templates, you can add any supported widgets. These will be applied to segments that use the template and displayed in the UI when your app displays the segment. Templates can be applied it to a segment using the following steps:  
+In templates, you can add any supported widgets. These will be applied to segments that use the template and displayed in the UI when your app displays the segment. Templates can be applied to a segment using the following steps:  
 
 1.	Select the **Project** tab of the Project Explorer and select the segment.
     ![](resources/images/apple_watch_iris7.png)
@@ -82,6 +82,8 @@ In templates, you can add any supported widgets. These will be applied to segmen
  
 Apple Watch Actions
 ---------------------
+
+> **_Note:_** Actions other than add swift snippet are only supported for Apple Watch on V9 Servicepack 5 Fixpack 15 or later.
 
 Adding actions enables you to build business logic into your Apple Watch application. Apple Watch actions are typically event handlers that are triggered by user interactions with the UI, but they can also be callbacks that are invoked by notifications. You add an action to a form or widget with the following steps.  
 
@@ -105,9 +107,12 @@ Communication Between the iPhone App and the WatchKit Extension
 Watch apps are paired with iPhones via Bluetooth. Watch apps send information requests to their companion iPhone and use it to perform time-consuming tasks such as network calls. In these cases, the watch application relies on the iPhone application to execute the business logic. The watch application can make a request that wakes the parent application up in the background (if it is not already running in the foreground), executes the operation, and returns the data that the Watch application needs. Apple refers to this feature as Watch Connectivity.  
 
 ### REQUIREMENTS
-This feature is available for all iPhone and Apple Watch OS versions supported by Volt MX. Your application must have at least one mobile form and one Apple Watch form. Not supported for Android devices.  
+<!-- This feature is available for all iPhone and Apple Watch OS versions supported by Volt MX. Your application must have at least one mobile form and one Apple Watch form. Not supported for Android devices.   -->
+Watch apps are paired with iPhones via Bluetooth. Watch apps send information requests to their respective iOS apps by calling the `sendMessage:replyHandler:errorHandler:` method, which is in the `WCSession` class in the Apple Watch Connectivity API. In addition to using the `sendMessage:replyHandler:errorHandler:` method for information requests, your watch app can invoke it to perform time-consuming tasks such as network calls. In these cases, the watch application relies on the iOS application to execute the business logic. Calling the the `sendMessage:replyHandler:errorHandler:` method wakes the parent application up in the background (if it is not already running in the foreground), executes the operation, and returns the data that the Watch application needs. The watch callback method that handles the WatchKit request must return immediately or nearly immediately.
 
 ### ENABLING WATCH CONNECTIVITY  
+
+> **_Note_**: Low code watch connectivity is only supported for Apple Watch apps paired with an iOS app on V9 Servicepack 5 Fixpack 15 or later. 
 
 Volt MX now supports adding Watch Connectivity support in a low-code way. To enable Watch Connectivity, follow these steps:  
 
@@ -131,17 +136,22 @@ WatchConnectivity.js provides the structure for processing requests received by 
  
 ### SENDING REQUESTS TO THE COMPANION PHONE APP  
 
-For any operations that require significant processing time, Apple recommends that they be performed on the companion iPhone application instead of on the Apple Watch application. To request information from the companion app, use the Send Watch Connectivity Request action. This action is available for Apple Watch Forms and Widgets (this action is not supported in Glances). The Send Watch Connectivity Request action takes in two parameters: a string key, and a collection of information. These are passed to the phone to perform the necessary operation according to the key value. Similar to other actions, the Send Watch Connectivity action has code paths for success and failure responses, as well as the default code path that continues to execute while the companion app processes the request.  
+> **_Note_**: Low code watch connectivity is only supported for Apple Watch apps paired with an iOS app on V9 Servicepack 5 Fixpack 15 or later. 
+
+For any operations that require significant processing time, Apple recommends that they be performed on the companion iPhone application instead of on the Apple Watch application. To request information from the companion app, use the Send Watch Connectivity Request action. This action is available for Apple Watch Forms and Widgets (this action is not supported in Glances or Notifications). The Send Watch Connectivity Request action takes in two parameters: a string key, and a collection of information. These are passed to the phone to perform the necessary operation according to the key value. Similar to other actions, the Send Watch Connectivity action has code paths for success and failure responses, as well as the default code path that continues to execute while the companion app processes the request.  
 
 ![](resources/images/apple_watch_iris14.png)
  
 
 ### PROCESSING REQUESTS IN THE COMPANION PHONE APP
+
+> **_Note_**: Low code watch connectivity is only supported for Apple Watch apps paired with an iOS app on V9 Servicepack 5 Fixpack 15 or later. 
+
 To set up the companion iPhone application to process this request, navigate to Mobile App Events by tapping on the Mobile channel. Select Edit for the Watch Connectivity App Event.   
 
 ![](resources/images/apple_watch_iris15.png)
 
-This action sequence takes in a string key (info), a collection of information (info), and a reply handler. The key and info variables will be the key and info provided via the Send Watch Connectivity Request action on the watch form/widget. The reply handler is the handler that corresponds to the success and failure code paths for the Send Watch Connectivity Request action.  
+This action sequence takes in a string key (key), a collection of information (info), and a reply handler (replyHandler). The key and info variables will be the key and info provided via the Send Watch Connectivity Request action on the watch form/widget. The reply handler is the handler that corresponds to the success and failure code paths for the Send Watch Connectivity Request action.  
 
 ![](resources/images/apple_watch_iris16.png)
  
@@ -227,6 +237,8 @@ In this figure, you can see that the watch app has a single form, which is highl
 Like any other type of application built with Volt MX Iris, Watch apps can have multiple forms. Each form can contain a variety of user interface objects, such as buttons, labels, sliders, and etc.  
 
 ### ADDING ACTIONS TO THE WIDGETS AND FORMS  
+
+> **_Note:_** Only swift snippet is supported on versions older than V9 Servicepack 5 Fixpack 15.
 
 As with forms and widgets in other types of applications, forms and widgets in a watch app can respond to actions. For example, if your Watch app contains a button, you can add an event handler action to have the button widget process user interactions.  
 

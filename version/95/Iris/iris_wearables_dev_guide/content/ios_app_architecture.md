@@ -23,7 +23,7 @@ Every Apple Watch app has a WatchKit Extension built into it that contains the a
 Apple Watch Apps and Volt MX Iris
 -----------------------------------
 
-When you create Apple Watch apps with Volt MX Iris, you build your app's user interface using Iris's interactive environment and tools. To add code, you can add Swift modules or use the Volt MX Iris code editor to write Swift code. You can also use the Action Editor to add low-code actions.
+When you create Apple Watch apps with Volt MX Iris, you build your app's user interface using Iris's interactive environment and tools. To add code, you can add Swift modules or use the Volt MX Iris code editor to write Swift code. You can also use the Action Editor to add low-code actions on V9 Servicepack 5 Fixpack 15 or later.
 
 WatchKit App Life Cycle
 -------------------------
