@@ -361,7 +361,7 @@
     id="__nav_1_7"
     
   />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 
   <div class="md-nav__link md-nav__link--index">
     <a href="../../../Iris/voltmxIrisFundamentals.html"> Iris </a>
@@ -855,6 +855,13 @@
           <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     Example
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removeafterupload-example" class="md-nav__link">
+    removeAfterUpload Example
   </a>
   
 </li>
@@ -1385,6 +1392,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#removeafterupload-example" class="md-nav__link">
+    removeAfterUpload Example
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1513,12 +1527,20 @@
                   
 
 
-<h1 id="objectstartsync">\&lt;object&gt;.startSync</h1>
+<h1 id="objectstartsync">&lt;object&gt;.startSync</h1>
 <blockquote>
-<p><strong>Note:</strong><br />
-<em>   If sync is performed in an upload cache enabled scenario, cached requests that are timed out in the previous upload session are uploaded before the latest changes.<br />
-</em>   The client does not handle partial records and expects the server to send the entire record. Full record with all the columns are expected in both upload and download responses. If the backend does not return the full record, use post processor to copy the missing columns from the request as demonstrated here.  </p>
+<em><b>Note: </b></em>
+<ul>
+<li>If sync is performed in an upload cache enabled scenario, cached requests that are timed out in the previous upload session are uploaded before the latest changes.</li>
+<li>The client does not handle partial records and expects the server to send the entire record. Full record with all the columns are expected in both upload and download responses. If the backend does not return the full record, use post processor to copy the missing columns from the request as demonstrated here.</li>
+<li>removeAfterUpload flag is only applicable for uploadOnly sync type.</li>
+<li>removeAfterUpload flag has no effect if it is set to downloadOnly or fullSync types.</li>
+<li>removeAfterUpload flag doesn’t clear entire local DB. It deletes the record that are only successfully uploaded during uploadOnly syncType.</li>
+<li>Client can do downloadOnly sync to get local deleted records back to local DB.</li>
+<li>removeAfterUpload flag is applicable for all three-level sync (app level, obj svc, and obj).</li>
+</ul>
 </blockquote>
+
 <h2 id="volt-mx-iris-javascript">Volt MX  Iris (JavaScript)</h2>
 <h3 id="signature">Signature</h3>
 <pre><code>&lt;VMXObj&gt;.startSync(syncOptions, successCallback, failureCallback, progressCallback)
@@ -1527,8 +1549,84 @@
 <table style="mc-table-style: url]('Resources/TableStyles/Basic.css');margin-left: 0;margin-right: auto;width: 100%;" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 223px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 120px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 752px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">syncOptions</td><td class="TableStyle-Basic-BodyE-Column1-Body1">JSON</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The user can provide options to customize sync behavior. For example, Filters, download batch size etc, Refer <a href="#Sync" class="selected">Sync Options</a> for supported options. Refer <a href="../../../Foundry/offline_objects_gettingstarted/Content/Offline_Objects_Getting_Started.html" target="_blank">Offline Objects Getting Started guide </a>for more details.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">successCallback</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Function</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The function is invoked on a successful sync.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">failureCallback</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Function</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The function is invoked on an error with the cause of failure as an argument upon Sync failure.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Yes</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">progressCallback</td><td class="TableStyle-Basic-BodyB-Column1-Body1">Function</td><td class="TableStyle-Basic-BodyB-Column1-Body1">The function is invoked on different sync phases along with phase specific data such as the number of records downloaded etc. Refer <a href="../../../Foundry/offline_objects_gettingstarted/Content/Offline_Objects_Getting_Started.html" target="_blank">Offline Objects Getting Started guide</a> for more details about sync progress events. <span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>Not applicable for Mobile Web and Desktop Web channels. If the app developer passes this parameter in the options, it will be ignored.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">No</td></tr></tbody></table>
 
 <h4 id="sync-options">Sync Options</h4>
-<table style="width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 143px;"> <col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Options</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;"><b>Type</b></td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Descriptions</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">filter</td><td class="TableStyle-Basic-BodyE-Column1-Body1">String</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The filter is a valid OData filter string, allows downloading specific records based on the supplied criteria. When the sync is performed at the object-level, filters should be supplied as valid OData filter string as shown in the sample code. All records are downloaded for the object with no or invalid OData filter.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">No</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">downloadBatchSize</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Number/String</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The downloadBatchSize option defines record based batching in downloads. Care should be taken to provide appropriate batch size (number of records) based on backend’s ability to support the same. downloadBatchSize is 500 (records) by default.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">No</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">uploadBatchSize</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Number/String</td><td class="TableStyle-Basic-BodyE-Column1-Body1">uploadBatchSize option defines record based batching in uploads. uploadBatchSize is 50 (records) by default. Default BatchSize is assumed if the supplied value is &lt;=0.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">No</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">getSyncStats</td><td class="TableStyle-Basic-BodyE-Column1-Body1">String</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The getSyncStats option is used to get sync stats information through sync success callback. This option takes two values <b>true</b> or <b>false</b>. Sync stats information is not returned to the user if the getSyncStats option is not supplied or set to <b>false</b> or an invalid value.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">No</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">syncType</td><td class="TableStyle-Basic-BodyE-Column1-Body1">String</td><td class="TableStyle-Basic-BodyE-Column1-Body1"><b>downloadOnly</b> will download the changes from the server. Change on the client side will not be pushed to the sever.<b>uploadOnly</b> will upload the changes from the client device to the server. Changes on the server will not be downloaded.<b>fullSync</b> will perform both upload and download from the client device to the server and vice-versa. <span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>Sync will move to the error state, if any other value is provided other than the above mentioned values.If sync type is not selected, full sync is performed by default.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">No</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">uploadRequestQueryParams</td><td class="TableStyle-Basic-BodyE-Column1-Body1">JSON</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The uploadRequestQueryParams option is used to pass the query parameters in upload network requests.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">No</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">downloadRequestQueryParams</td><td class="TableStyle-Basic-BodyE-Column1-Body1">JSON</td><td class="TableStyle-Basic-BodyE-Column1-Body1">The downloadRequestQueryParams is used to pass the query parameters in download network requests.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">No</td></tr><tr class="TableStyle-Basic-Body-Body1" data-mc-conditions="Default.SP4"><td class="TableStyle-Basic-BodyE-Column1-Body1">downloadReconciliationRequired</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Boolean</td><td class="TableStyle-Basic-BodyE-Column1-Body1">This parameter specifies if download reconciliation is required or not. Download reconciliation is used to compare primary keys present in backend with application database primary keys for an object. In scenarios where there are no pending edits, it is advisable to perform startSync by setting <b>downloadReconciliationRequired</b> to <b>false</b> (as in the case of initial sync). <b>downloadReconciliationRequired</b> is set to <b>true</b>, by default.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">No</td></tr><tr class="TableStyle-Basic-Body-Body1" data-mc-conditions="Default.SP4"><td class="TableStyle-Basic-BodyB-Column1-Body1">preserveBatchContext</td><td class="TableStyle-Basic-BodyB-Column1-Body1">Boolean</td><td class="TableStyle-Basic-BodyB-Column1-Body1"><b>preserveBatchContext</b> specifies whether to preserve the batchContext of last successful download batch. If batchContext is preserved, the successive download call resumes from the last successful batch, else it starts from the first batch again. Set the option to <b>True</b>, to resume the download from last successful batch. Set the option to <b>False</b>, to start downloading from the first batch. <b>preserveBatchContext</b> is set to false, by default. <span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>This parameter is not supported for Mobile Web, Windows, and Desktop Web channels.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">&nbsp;</td></tr></tbody></table>
-
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>filter</td>
+<td>String</td>
+<td>The filter is a valid OData filter string, allows downloading specific records based on the supplied criteria. When the sync is performed at the object-level, filters should be supplied as valid OData filter string as shown in the sample code. All records are downloaded for the object with no or invalid OData filter.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>objectServicesOptions</td>
+<td>JSON</td>
+<td>The user can provide options to customize sync behavior. For example, Filters, downloadBatchSize and so on. For more details, refer <a href="ObjectService_startSync.html#sync-options">Sync Options</a> for supported options and <a href="../../offline_objects_gettingstarted/Content/Offline_Objects_Getting_Started.html">Offline Objects Getting Started</a> guide.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>downloadBatchSize</td>
+<td>Number/String)</td>
+<td>downloadBatchSize option defines record based batching in downloads. Care should be taken to provide appropriate batch size (number of records) based on backend’s ability to support the same. downloadBatchsize is 500 (records) by default .</td>
+<td>No</td>
+</tr>
+<tr>
+<td>uploadBatchSize</td>
+<td>Number/String</td>
+<td>uploadBatchSize option defines record based batching in uploads. uploadBatchSize is 50 (records) by default. Default BatchSize is assumed if the supplied value is &lt;=0.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>getSyncStats</td>
+<td>String</td>
+<td>The getSyncStats option is used to get sync stats information through sync success callback. This option takes two values <strong>true</strong> or <strong>false</strong>. Sync stats information is not returned to the user if the getSyncStats option is not supplied or set to <strong>false</strong> or an invalid value.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>syncType</td>
+<td>String</td>
+<td><strong>downloadOnly</strong> will download the changes from the server. Change on the client side will not be pushed to the sever.<strong>uploadOnly</strong> will upload the changes from the client device to the server. Changes on the server will not be downloaded.<strong>fullSync</strong> will perform both upload and download from the client device to the server and vice-versa. <strong><em>Note</em></strong>: Sync will move to the error state, if any other value is provided other than the above mentioned values.If sync type is not selected, full sync is performed by default.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>uploadRequestQueryParams</td>
+<td>JSON</td>
+<td>The uploadRequestQueryParams option is used to pass the query parameters in upload network requests.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>downloadRequestQueryParams</td>
+<td>JSON</td>
+<td>The downloadRequestQueryParams is used to pass the query parameters in download network requests.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>downloadReconciliationRequired</td>
+<td>Boolean</td>
+<td>This parameter specifies if download reconciliation is required or not. Download reconciliation is used to compare primary keys present in backend with application database primary keys for an object. In scenarios where there are no pending edits, it is advisable to perform startSync by setting <strong>downloadReconciliationRequired</strong> to <strong>false</strong> (as in the case of initial sync). <strong>downloadReconciliationRequired</strong> is set to <strong>true</strong>, by default.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>preserveBatchContext</td>
+<td>Boolean</td>
+<td><strong>preserveBatchContext</strong> specifies whether to preserve the batchContext of last successful download batch. If batchContext is preserved, the successive download call resumes from the last successful batch, else it starts from the first batch again. Set the option to <strong>True</strong>, to resume the download from last successful batch. Set the option to <strong>False</strong>, to start downloading from the first batch. <strong>preserveBatchContext</strong> is set to false, by default. <strong><em>Note</em>:</strong> This parameter is not supported for Mobile Web, Windows, and Desktop Web channels.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>removeAfterUpload</td>
+<td>Array (list of objects)</td>
+<td>removeAfterUpload flag removes the entries from local DB once upload is successful to backend DB. This flag is passed as option parameter to startSync function as part of sync options.</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
 <h3 id="return-type">Return Type</h3>
 <p>void</p>
 <h3 id="example">Example</h3>
@@ -1572,6 +1670,20 @@ try {
 } catch (err) {
     //Handles Exception.
 }
+</code></pre>
+<h3 id="removeafterupload-example">removeAfterUpload Example</h3>
+<pre><code>var objectSync = new voltmx.sdk.VMXObj(&quot;&lt;Obj_Name&gt;&quot;);
+var syncOptions = {};
+syncOptions.removeAfterUpload = [&lt;Obj_Name&gt;];
+syncOptions.isUploadCacheEnabled=true;
+syncOptions.syncType = &quot;uploadOnly&quot;;
+objectSync.startSync(syncOptions, onSuccess, onFailure, onProgress);
+function onSuccess(response)
+{     //Handle sync success response. }
+function onFailure(error)
+{     //Handle sync failure response. }
+function onProgress(object)
+{     //Handle sync progress response. }
 </code></pre>
 <h2 id="android-java">Android (Java)</h2>
 <h3 id="signature_1">Signature</h3>

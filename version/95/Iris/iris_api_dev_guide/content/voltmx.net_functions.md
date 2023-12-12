@@ -214,7 +214,7 @@ If the device is offline, it will return null. Otherwise, it will return the app
 | constants.NETWORK\_TYPE\_4G | Indicates that a 4G network is used. |
 | constants.NETWORK\_TYPE\_5G | Indicates that a 5G network is used. |
 | constants.NETWORK\_TYPE\_WIFI | Indicates that Wi-Fi is used for network connection. |
-| constants.NETWORK\_TYPE\_ETHERNET | Indicates that Ethernet is used for network connection. Available only on the Desktop Web channel. |
+| constants.NETWORK\_TYPE\_ETHERNET | Indicates that Ethernet is used for network connection. Available only on the Desktop Web and Android channels. |
 | constants.NETWORK\_TYPE\_ANY | Indicates that the device has sufficient network coverage to send data over any supported data channels, especially on SPA , Mobile Web, and Desktop Web applications. |
 
  
@@ -489,7 +489,7 @@ voltmx.net.isNetworkAvailable(
 | constants.NETWORK\_TYPE\_4G | Indicates that a 4G network is used. |
 | constants.NETWORK\_TYPE\_5G | Indicates that a 5G network is used. |
 | constants.NETWORK\_TYPE\_WIFI | Indicates that Wi-Fi is used for network connection. |
-| constants.NETWORK\_TYPE\_ETHERNET | Indicates that Ethernet is used for network connection. Available only on the Desktop Web channel. |
+| constants.NETWORK\_TYPE\_ETHERNET | Indicates that Ethernet is used for network connection. Available only on the Desktop Web and Android channels. |
 | constants.NETWORK\_TYPE\_ANY | Indicates that the device has sufficient network coverage to send data over any supported data channels, especially on SPA , Mobile Web, and Desktop Web applications. |
 
  

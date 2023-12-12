@@ -361,7 +361,7 @@
     id="__nav_1_7"
     
   />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 
   <div class="md-nav__link md-nav__link--index">
     <a href="../../../../Iris/voltmxIrisFundamentals.html"> Iris </a>
@@ -1509,6 +1509,40 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#deletebinarycontent-method" class="md-nav__link">
+    deleteBinaryContent Method
+  </a>
+  
+    <nav class="md-nav" aria-label="deleteBinaryContent Method">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syntax_10" class="md-nav__link">
+    Syntax
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_10" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_10" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2406,6 +2440,40 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#deletebinarycontent-method" class="md-nav__link">
+    deleteBinaryContent Method
+  </a>
+  
+    <nav class="md-nav" aria-label="deleteBinaryContent Method">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syntax_10" class="md-nav__link">
+    Syntax
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_10" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_10" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2975,6 +3043,53 @@ objSvc.updateBinaryContent({
     },
     function(response) {
         voltmx.print(&quot;Binary content updated: &quot; + JSON.stringify(response));
+    },
+    function(error) {
+        voltmx.print(&quot;Failed: &quot; + JSON.stringify(error));
+    });
+</code></pre>
+<h3 id="deletebinarycontent-method">deleteBinaryContent Method</h3>
+<p>Deletes binary content on the server.</p>
+<h4 id="syntax_10">Syntax</h4>
+<pre><code>deleteBinaryContent(options, successCallback, failureCallback);
+</code></pre>
+<h4 id="parameters_10">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>options</td>
+<td>JSON object with the mandatory parameter "dataObject", which is an instance of the <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/ObjectsAPIReference/voltmx.sdk.dto.DataObject_Class.html">voltmx.sdk.dto.DataObject Class</a>, and "binaryAttrName", which is the binary field name in the object</td>
+</tr>
+<tr>
+<td>successCallback</td>
+<td>Function invoked when the operation succeeds, with the number of records deleted</td>
+</tr>
+<tr>
+<td>failureCallback</td>
+<td>Function invoked when the operation fails, with cause of failure</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example_10">Example</h4>
+<pre><code>var objSvc = voltmx.sdk.getCurrentInstance().getObjectService(&quot;serviceName&quot;, {
+    &quot;access&quot;: &quot;online&quot;
+});
+var dataObject = new voltmx.sdk.dto.DataObject(&quot;ObjectName&quot;);
+dataObject.addField(&quot;name&quot;, &quot;imgName&quot;);
+dataObject.addField(&quot;data&quot;, &quot;binaryText&quot;);
+
+objSvc.deleteBinaryContent({
+        &quot;dataObject&quot;: dataObject,
+        &quot;binaryAttrName&quot;: &quot;data&quot;
+    },
+    function(response) {
+        voltmx.print(&quot;Binary content deleted: &quot; + JSON.stringify(response));
     },
     function(error) {
         voltmx.print(&quot;Failed: &quot; + JSON.stringify(error));
