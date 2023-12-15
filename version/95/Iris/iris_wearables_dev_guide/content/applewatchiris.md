@@ -83,7 +83,7 @@ In templates, you can add any supported widgets. These will be applied to segmen
 Apple Watch Actions
 ---------------------
 
-> **_Note:_** Actions other than add swift snippet are only supported for Apple Watch on V9 Servicepack 5 Fixpack 15 or later.
+> **_Note:_** Actions other than Add Swift Snippet are only supported for Apple Watch on V9 Servicepack 5 Fixpack 15 or later.
 
 Adding actions enables you to build business logic into your Apple Watch application. Apple Watch actions are typically event handlers that are triggered by user interactions with the UI, but they can also be callbacks that are invoked by notifications. You add an action to a form or widget with the following steps.  
 
@@ -108,7 +108,7 @@ Watch apps are paired with iPhones via Bluetooth. Watch apps send information re
 
 ### REQUIREMENTS
 <!-- This feature is available for all iPhone and Apple Watch OS versions supported by Volt MX. Your application must have at least one mobile form and one Apple Watch form. Not supported for Android devices.   -->
-Watch apps are paired with iPhones via Bluetooth. Watch apps send information requests to their respective iOS apps by calling the `sendMessage:replyHandler:errorHandler:` method, which is in the `WCSession` class in the Apple Watch Connectivity API. In addition to using the `sendMessage:replyHandler:errorHandler:` method for information requests, your watch app can invoke it to perform time-consuming tasks such as network calls. In these cases, the watch application relies on the iOS application to execute the business logic. Calling the the `sendMessage:replyHandler:errorHandler:` method wakes the parent application up in the background (if it is not already running in the foreground), executes the operation, and returns the data that the Watch application needs. The watch callback method that handles the WatchKit request must return immediately or nearly immediately.
+This feature is available for all iPhone and Apple Watch OS versions supported by Volt MX. Your application must have at least one mobile form and one Apple Watch form. Not supported for Android devices.
 
 ### ENABLING WATCH CONNECTIVITY  
 
@@ -238,7 +238,7 @@ Like any other type of application built with Volt MX Iris, Watch apps can have 
 
 ### ADDING ACTIONS TO THE WIDGETS AND FORMS  
 
-> **_Note:_** Only swift snippet is supported on versions older than V9 Servicepack 5 Fixpack 15.
+> **_Note:_** Only Add Swift Snippet is supported on versions older than V9 Servicepack 5 Fixpack 15.
 
 As with forms and widgets in other types of applications, forms and widgets in a watch app can respond to actions. For example, if your Watch app contains a button, you can add an event handler action to have the button widget process user interactions.  
 

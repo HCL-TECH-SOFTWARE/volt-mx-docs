@@ -38,7 +38,7 @@ To define an action sequence for executing a loop action, do the following:
     4.  In the **Step By** field, enter the value for the step.
     5.  Select the direction of the count, either `Increment` or `Decrement`.
     
-        ![](Resources/Images/LoopAction_304x320.png)
+        ![](Resources/Images/LoopAction.PNG)
     
 5.  Click **Save** to save the action sequence, and close the Action Editor window.
 
