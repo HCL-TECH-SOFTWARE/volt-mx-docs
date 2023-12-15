@@ -2,23 +2,24 @@
 
 
 Switch Methods
-==============
+============== 
 
 Switch widget is associated with the following method:
 
+
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[addGestureRecognizer Method](javascript:void(0);)
+<details close markdown="block"><summary>addGestureRecognizer Method</summary>
 
 * * *
 
 This API allows you to set a gesture recognizer for a specified gesture for a specified widget.
 
-Syntax
+### Syntax
 
-addGestureRecognizer(gestureType, gestureConfigParams, onGestureClosure)
+`addGestureRecognizer(gestureType, gestureConfigParams, onGestureClosure)`
 
-Parameters
+### Parameters
 
 _gestureType_
 
@@ -48,11 +49,11 @@ This function will be raised asynchronously
 
 See Remarks for the syntax of this function.
 
-Return Values
+### Return Values
 
 String - Reference to the gesture is returned.
 
-Remarks
+### Remarks
 
 The values for the _gestureType_parameter are:
 
@@ -81,25 +82,19 @@ Gesture Type:TAP
 *   fingers \[Number\] - specifies the maximum number of fingers that must be respected for a gesture. Possible values are: 1. Default value is 1.
 *   taps \[Number\] - specifies the maximum number of taps that must be respected for a gesture. Possible values are: 1 or 2. Default value is 1.
 
-For example:  
-
-{fingers:1,taps:1}
+For example:  {fingers:1,taps:1}
 
 Gesture Type:SWIPE
 
 *   fingers \[Number\] - specifies the maximum number of fingers that must be respected for a gesture. Possible values are: 1. Default value is 1.
 
-For example:
-
-{fingers: 1}
+For example: {fingers: 1}
 
 Gesture Type:LONGPRESS
 
 *   pressDuration \[Number\] - specifies the minimum time interval (in seconds) after which the gesture is recognized as a LONGPRESS. For example, if pressDuration is 2 seconds, any continued press is recognized as LONGPRESS only if it lasts for at least 2 seconds. Default value is 1. This is not applicable to Windows.
 
-For example:
-
-{pressDuration=1}.
+For example: {pressDuration=1}.
 
 Gesture Type: PAN
 
@@ -124,7 +119,7 @@ Specifies the function that needs to be executed when a gesture is recognized.
 
 This function will be raised asynchronously and has the following Syntax:
 
-onGestureClosure(widgetRef, gestureInfo, context)
+`onGestureClosure(widgetRef, gestureInfo, context)`
 
 *   widgetRef - specifies the handle to the widget on which the gesture was recognized.
 *   gestureInfo - Table with information about the gesture. The contents of this table vary based on the gesture type.
@@ -180,7 +175,7 @@ In the android platform, the top and bottom gestures work only when the scrollin
 *   RIGHTTAP applicable only to Windows 10
 *   ROTATION is not supported on android.
 
-Example
+### Example
 
 ```
  //Sample code to add Gestures to the frmGestures FlexForm.
@@ -215,23 +210,25 @@ function onGestureFunction(commonWidget, gestureInfo) {
 }
 ```
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Windows
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[animate Method](javascript:void(0);)
+</details>
+
+<details close markdown="block"><summary>animate Method</summary>
 
 * * *
 
 Applies an animation to the widget.
 
-Syntax
+### Syntax
 
-animate (animationObj, animateConfig, animationCallbacks)
+`animate (animationObj, animateConfig, animationCallbacks)`
 
-Parameters
+### Parameters
 
 _animationObj_
 
@@ -250,15 +247,15 @@ A JavaScript dictionary that contains key-value pairs. The following keys are su
 | animationEnd | A JavaScript function that is invoked with the animation ends. For more information, see the **Remarks** section below. |
 | animationStart | A JavaScript function that is invoked with the animation starts. For more information, see the **Remarks** section below. |
 
-Return Values
+### Return Values
 
 Returns a platform-specific handle to the animation. This handle currently not used, but is returned for possible future requirements use.
 
-Remarks
+### Remarks
 
 The callback for the `animationStart` key in the JavaScript object passed in this method's _animationCallbacks_ parameter has the following signature.
 
-animationStart(source, animationHandle, elapsedTime);
+`animationStart(source, animationHandle, elapsedTime);`
 
 where `source` is the widget being animated, `animationHandle` is the handle returned by the `applyAnimation` method, and `elapsedTime` is the amount of time the animation has been running in seconds, when this event is fired..
 
@@ -266,7 +263,7 @@ This event occurs at the start of the animation. If there is 'animation-delay' c
 
 The callback for the `animationEnd` key in the JavaScript object passed in this method's _animationCallbacks_ parameter has the following signature.
 
-animationEnd(source, animationHandle, elapsedTime);
+`animationEnd(source, animationHandle, elapsedTime);`
 
 where source is the widget being animated, animationHandle is the handle returned by the applyAnimation method, and elapsedTime is the amount of time the animation has been running in seconds, when this event is fired.
 
@@ -276,7 +273,7 @@ The `animate` method throws an Invalid Animation Definition Exception if animati
 
 If the widget is not part of the currently visible view hierarchy, calling this method does nothing. Because this method is asynchronous and immediately returns, it does not wait for the animation to start or complete.
 
-Example
+### Example
 
 ```
 //Sample code of animation
@@ -292,13 +289,15 @@ function AnimateBoth() {
 }
 ```
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
 
-[![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)](javascript:void(0);)[clone Method](javascript:void(0);)
+</details>
+
+<details close markdown="block"><summary>clone Method</summary>
 
 * * *
 
@@ -310,25 +309,25 @@ For example, if the widget ID is "fc1" and the widget ID passed to clone API is 
 
 Exceptions are not displayed if widget ID parameter is not unique. Instead when the cloned copy is added to the same form as of original container then it may lead to unexpected behaviors. So it is your responsibility to provide unique widget ID.
 
-Syntax
+### Syntax
 
-clone()
+`clone()`
 
-Parameters
+### Parameters
 
 widgetId \[String\]
 
 Optional. Reference of the name of the widget.
 
-Return Values
+### Return Values
 
 Cloned copy of the widget.
 
-Exceptions
+### Exceptions
 
 None
 
-Remarks
+### Remarks
 
 *   This method is not supported on SegmentedUI2 widget.
 *   Gestures for the FlexContainer are not cloned. You have to reapply the gestures on the cloned object.
@@ -343,7 +342,7 @@ formid.widgetid.focusSkin = "skinname";
 formid.widgetid.hoverSkin = "skinname";
 ```
 
-Example
+### Example
 
 ```
 
@@ -358,9 +357,82 @@ var myLabel=frmFlex.lbl1.clone();
 
 ```
 
-Platform Availability
+### Platform Availability
 
 *   iOS, Android, Windows, and SPA
 
 * * *
+</details>
+<details close markdown="block"><summary>setActive Method</summary>
 
+* * *
+
+This method specifies the widget that must be active and brings the widget onto the viewport. Use this method to set the focus on widgets that cannot be brought into focus by using the setFocus method.
+
+**_Note:_** For widgets that can be brought into focus by using the setFocus method, the behavior of this method is similar to the **setFocus** method. To set focus on widgets such as Label, FlexContainer, FlexScrollContainer, and others by using the setActive method, you must set the tabIndex attribute of the **accessibilityConfig** property.  
+
+When you use this method to set a widget as active, the activeStateSkin property and onFocus event configured for the widget are applied to it. <br>
+For the Segment and CollectionView widgets, you can specify the rows that need to be in focus by specifying the rowIndex and itemIndex as an input parameter respectively. If you do not specify an input parameter, the whole widget is set as active.
+
+### Syntax
+```
+setActive(rowIndex/itemIndex, sectionIndex, widgetPath)
+```
+
+### Parameters
+
+* rowIndex [Number] - Optional: Specifies the index of the Segment row that must be in focus.
+* itemIndex [Number] - Optional: Specifies the index of the CollectionView item that must be in focus.
+* sectionIndex [Number] - Optional: Specifies the index of the Segment section that must be in focus.
+* widgetPath [String] - Optional: The widget path is a dot-seperated string that contains the path to the widget (present in a Segment row) from the root to the widget that must be in focus.
+
+### Return Values
+
+None
+
+### Remarks
+
+* If a widget is disabled, it cannot be set as active.
+* You cannot set the child elements of a Segment, CollectionView, or DataGrid widget as active by using the setActive method.
+* The Web Framework provides support for both the setActive and the setFocus methods. However, Temenos recommends that you use only one of the methods for a widget. 
+* If you set the onFocus Event for a widget that is set as active (by using the setActive method), ensure that you do not make any layout changes in the event callback of the onFocus Event to avoid UI glitches.
+For example, consider the following code:
+
+```
+this.view.tb.onFocus = function(eventobject) {
+var lbl = new kony.ui.Label({id: "lblTest"});
+this.view.add(lbl);
+this.view.lblTest.text = 'onFocus Button';
+}.bind(this);
+
+//focus on the textbox present at the top of the form
+this.view.tb.setActive();
+```
+
+When the setActive API is invoked on the TextBox widget, the TextBox is marked as active and made visible in the viewport. This makes the scrollbar scroll to the top of the Form where the TextBox widget is present. However, the creation of the Label widget in the callback of the onFocus Event changes the layout, making the scrollbar scroll back to the bottom of the form.
+
+
+
+### Example
+
+```
+//This is a generic method that is applicable for various widgets.
+//Here, we have shown how to use the setActive method for the FlexContainer and Segment
+ widgets.
+//You need to make a corresponding call of the setActive method for other applicable widgets.
+
+//sample code to set the FlexContainer widget as active
+this.view.flx.setActive();
+
+//sample code to set focus on the button present within a component in the third row in first section of a Segment
+this.view.seg.setActive(2,0,"CompWOC.btn1");
+```
+
+### Platform Availability
+
+*   Responsive Web
+
+
+* * *
+
+</details>
