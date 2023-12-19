@@ -1073,7 +1073,7 @@ If you are scrolling the segment data, the next section header will be docked on
 
 This property is applicable only when the segment is a screenLevelWidget and viewType is set to SEGUI\_VIEW\_TYPE\_TABLE\_VIEW and has sections data.
 
-For example, If you scroll the segment data shown in the figure below, as the segment data scrolls up, the Samsung Phones docked header moves out of view and is replaced with the HTC Phones section header which is now docked.
+For example, If you scroll the segment data shown in the figure below, as the segment data scrolls up, the Savings account docked header moves out of view and is replaced with the Checking account section header which is now docked.
 
 ![](Resources/Images/dockSectionHeaders.gif)
 
