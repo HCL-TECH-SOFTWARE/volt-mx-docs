@@ -43,7 +43,8 @@ To configure an action that sends an email message, do the following:
     | To | 	The email address of the recipient or recipients (separated by semicolons) that the email message is being sent to. |
     | Cc | 	The email address of the recipient or recipients that are to receive a "carbon copy" of the email message being sent. |
     | Bcc | 	The email address of the recipient or recipients that are to receive a "blind carbon copy" of the email message being sent (i.e. the other recipients of the email message are not able to see that the Bcc recipients are included). |
-    | Subject | 	The text that you want to appear in the subject line of the email message.Check this check box if the body of your email message includes HTML code, otherwise, the email message is sent using simple text formatting. **_Note:_** If you check the HTML Formatted Body check box, you must ensure that the HTML code that you use in the body of your email message is correct. Otherwise, your message may not display correctly. |
+    | Subject | 	The text that you want to appear in the subject line of the email message. |
+    | HTML Formatted Body |  Check this check box if the body of your email message includes HTML code, otherwise, the email message is sent using simple text formatting. **_Note:_** If you check the HTML Formatted Body check box, you must ensure that the HTML code that you use in the body of your email message is correct. Otherwise, your message may not display correctly. |
     | Body | 	The text that you want to appear in the body of the email message. This text appears in simple text format unless you check the **HTML Formatted Body** check box and format the body with correct HTML code. |  
     
 4.	Click **Save** to save the action sequence and close the Action Editor window.
@@ -63,8 +64,8 @@ To define an action sequence to get the local storage, do the following:
 
 1.	From the Project tab of the Project Explorer, select the widget you want to apply the action to. Once it’s highlighted on the Iris Canvas, right-click it, and then select one of the action sequences, such as onTouchStart. Doing so opens the Action Editor and creates an action sequence for you to configure.
 2.	From the list of actions available along the left column of the Action Editor, click **Get Local Storage** from the Client section. The action is added to the action sequence and is the current action of focus.
-3.	In the properties pane of the Action Editor, in the **Key** field, you can either select `set` and enter a value for the key, or select `choose` and select a key from a list of existing variables.
-4.	In the **Assign To** list, select the variable to assign the value associated with the key. To do so, you can either select `set` and enter a variable name, or select `choose`and select a value from a list of existing variables. 
+3.	In the properties pane of the Action Editor, in the **Key** field, you can either select `Set` and enter a value for the key, or select `Choose` and select a key from a list of existing variables.
+4.	In the **Assign To** list, select the variable to assign the value associated with the key. To do so, you can either select `Set` and enter a variable name, or select `Choose`and select a value from a list of existing variables. 
 5.	Click **Save** to save the action sequence and close the Action Editor window.
 
 
@@ -74,8 +75,8 @@ To define an action sequence to set the local storage, do the following:
 
 1.	From the Project tab of the Project Explorer, select the widget you want to apply the action to. Once it’s highlighted on the Iris Canvas, right-click it, and then select one of the action sequences, such as onTouchStart. Doing so opens the Action Editor and creates an action sequence for you to configure.
 2.	From the list of actions available along the left column of the Action Editor, click **Set Local Storage** from the Client section. The action is added to the action sequence and is the current action of focus.
-3.	In the properties pane of the Action Editor, in the **Key** field, you can either select `set` and enter a name for the key, or select `choose` and select a key from a list of existing variables.
-4.	In the Value field, you can either select `set` and enter a value, or select `choose` and select a value from a list of existing variables. If you select set, select a data type for the value from the list, either String, Number, or Boolean. Then, enter a value in the text box provided below the type field.
+3.	In the properties pane of the Action Editor, in the **Key** field, you can either select `Set` and enter a name for the key, or select `Choose` and select a key from a list of existing variables.
+4.	In the Value field, you can either select `Set` and enter a value, or select `Choose` and select a value from a list of existing variables. If you select set, select a data type for the value from the list, either String, Number, or Boolean. Then, enter a value in the text box provided below the type field.
 5.	Click **Save** to save the action sequence and close the Action Editor window.
 
 
@@ -95,7 +96,7 @@ To configure an action that places a Phone Call, do the following:
 
 1.	From the Project tab of the Project Explorer, select the widget you want to apply the action to. Once it’s highlighted on the Iris Canvas, right-click it, and then select one of the action sequences, such as onTouchStart. Doing so opens the Action Editor and creates an action sequence for you to configure.
 2.	From the list of actions available along the left column of the Action Editor, click **Phone Call** from the Client section. The action is added to the action sequence and is the current action of focus.
-3.	In the properties pane of the Action Editor, in the **Phone Number** field, you can either select `set` and enter the phone number to which you want to place a call, or select `choose` and select an existing phone number from the list of variables.
+3.	In the properties pane of the Action Editor, in the **Phone Number** field, you can either select `Set` and enter the phone number to which you want to place a call, or select `Choose` and select an existing phone number from the list of variables.
 4.	Click **Save** to save the action sequence and close the Action Editor window.
 
 

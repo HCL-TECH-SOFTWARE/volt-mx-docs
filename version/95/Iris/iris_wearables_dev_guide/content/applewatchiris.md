@@ -104,7 +104,67 @@ You can put any valid code in your custom Swift modules that your app needs. Thi
 Communication Between the iPhone App and the WatchKit Extension  
 ---------------------------------------------------------------------  
 
-Watch apps are paired with iPhones via Bluetooth. Watch apps send information requests to their companion iPhone and use it to perform time-consuming tasks such as network calls. In these cases, the watch application relies on the iPhone application to execute the business logic. The watch application can make a request that wakes the parent application up in the background (if it is not already running in the foreground), executes the operation, and returns the data that the Watch application needs. Apple refers to this feature as Watch Connectivity.  
+Watch apps are paired with iPhones via Bluetooth. Watch apps send information requests to their respective iOS apps by calling the `sendMessage:replyHandler:errorHandler:` method, which is in the `WCSession` class in the Apple Watch Connectivity API. In addition to using the `sendMessage:replyHandler:errorHandler:` method for information requests, your watch app can invoke it to perform time-consuming tasks such as network calls. In these cases, the watch application relies on the iOS application to execute the business logic. Calling the the `sendMessage:replyHandler:errorHandler:` method wakes the parent application up in the background (if it is not already running in the foreground), executes the operation, and returns the data that the Watch application needs. The watch callback method that handles the WatchKit request must return immediately or nearly immediately.
+
+To fetch data from the iOS app, the Watch app calls `sendMessage:replyHandler:errorHandler:` in accordance with the [Apple guidelines](https://developer.apple.com/documentation/watchconnectivity/wcsession) for using the `WCSession` class. The following example demonstrates how the Watch app fetchs data from the iOS app.
+
+
+```
+<Class Start>
+
+import Foundation
+import WatchConnectivity
+import WatchKit
+
+class PhoneCommunicator : NSObject, WCSessionDelegate {
+
+    static var sharedInstance:PhoneCommunicator? = nil;
+    var session:WCSession? = nil;
+
+    override init() {
+        super.init();
+        session = WCSession.defaultSession();
+        if(session!.delegate == nil){
+            session!.delegate = self;
+            session!.activateSession();
+        }
+    }
+
+    class func getSharedInstance() -> (PhoneCommunicator) {
+        if(sharedInstance == nil){
+            sharedInstance =  PhoneCommunicator();
+        }
+        return sharedInstance!;
+    }
+
+    func pingPhone() {
+        if WCSession.isSupported() {
+            print("session is supported on watch");
+            if(session!.reachable){
+                print("session reachable on phone");
+                session!.sendMessage(
+                    ["requestId": "sayHello"], 
+                    replyHandler: { 
+                        (response) -> Void in print("in reply handler");
+                        print("\(response["reply"]!)");
+                    },
+                    errorHandler: { 
+                        (error) -> Void in print("in error callback");
+                        print("\(error)")
+                    }
+                )
+            }
+        }
+    }
+}
+<Class End>
+```
+
+
+
+
+
+
 
 ### REQUIREMENTS
 <!-- This feature is available for all iPhone and Apple Watch OS versions supported by Volt MX. Your application must have at least one mobile form and one Apple Watch form. Not supported for Android devices.   -->
