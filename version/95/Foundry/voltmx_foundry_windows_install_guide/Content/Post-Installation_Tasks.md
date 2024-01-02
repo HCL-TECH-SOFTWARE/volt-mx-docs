@@ -29,51 +29,50 @@ To add an installer generated self-signed certificate to cacerts, follow these s
 
 1.  From your Volt MX Foundry installed system, open the Windows command prompt, and run the following command to generate an `intermediate.crt` file from the keystore:
     
-    <USERINSTALLDIR>\\jre\\bin\\keytool -export -alias "<HOST\_URL\_SSL\_CONF>" -file <USERINSTALLDIR>\\intermediate.crt -keystore <USERINSTALLDIR>\\keystore.jks -storepass <Password\_of\_keystore>
+    <code>&lt;USERINSTALLDIR&gt;\jre\bin\keytool -export -alias "&lt;HOST_URL_SSL_CONF&gt;" -file &lt;USERINSTALLDIR&gt;\intermediate.crt -keystore &lt;USERINSTALLDIR&gt;\keystore.jks -storepass &lt;Password_of_keystore&gt;</code>
     
     Based on the hostname and keystore password provided at the [SSL Certificate window](Installing_Foundry_on_Tomcat.md#SSLCertificate), the preceding command exports the required certificate from the source keystore with the given name - for example, `intermediate.crt`.
     
 2.  Run the following command to import the `intermediate.crt` certificate file into your Volt MX Foundry Installer's JRE trusted certificate authority (CA) certificates file:
     
-    <USERINSTALLDIR>\\jre\\bin\\keytool -import -noprompt -trustcacerts -alias "<HOST\_URL\_SSL\_CONF>" -file <USERINSTALLDIR>\\intermediate.crt -keystore <USERINSTALLDIR>\\jre\\lib\\security\\cacerts -storepass changeit  
+    <code>&lt;USERINSTALLDIR&gt;\jre\bin\keytool -import -noprompt -trustcacerts -alias "&lt;HOST_URL_SSL_CONF&gt;" -file &lt;USERINSTALLDIR&gt;\intermediate.crt -keystore &lt;USERINSTALLDIR&gt;\jre\lib\security\cacerts -storepass changeit</code> 
     
 
 ### How to Add an Existing SSL Certificate to Cacerts
 
-If Java does not identify a certificate issuer by default, you need to import an SSL into your cacerts.
+> **_Note:_** If Java does not identify a certificate issuer by default, you need to import an SSL into your cacerts.
 
-To add an existing SSL certificate to cacerts, follow these steps:
-
-Use the following steps to import your existing certificate to cacerts with the proper value of alias, keystore location and keystore password.
+To add an existing SSL certificate to cacerts, use the following steps to import your existing certificate to cacerts with the proper value of alias, keystore location and keystore password:
 
 1.  From your Volt MX Foundry installed system, open the Windows command prompt, and run the following command to add an `intermediate.crt` file from the keystore:
     
-    <USERINSTALLDIR>\\jre\\bin\\keytool -export -alias "<yourcertificate\_domain>" -file <USERINSTALLDIR>\\intermediate.crt -keystore <keystore\_location>-storepass <Password\_of\_keystore>
+    <code>&lt;USERINSTALLDIR&gt;\jre\bin\keytool -export -alias "&lt;yourcertificate_domain&gt;" -file &lt;USERINSTALLDIR&gt;\intermediate.crt -keystore &lt;keystore_location&gt;-storepass &lt;Password_of_keystore&gt;</code>
     
 
 1.  Run the following command to import the `intermediate.crt` certificate file into your Volt MX Foundry Installer's JRE trusted certificate authority (CA) certificates file:
     
-    \<USERINSTALLDIR>\\jre\\bin\\keytool -import -noprompt -trustcacerts -alias "<yourcertificate\_domain>" -file  
-     
-    \<USERINSTALLDIR>\\intermediate.crt -keystore 
-    
-    \<USERINSTALLDIR>\\jre\\lib\\security\\cacerts -storepass changeit
+    <code>&lt;USERINSTALLDIR&gt;\jre\bin\keytool -import -noprompt -trustcacerts -alias "&lt;yourcertificate_domain&gt;" -file &lt;USERINSTALLDIR&gt;\intermediate.crt -keystore &lt;USERINSTALLDIR&gt;\jre\lib\security\cacerts -storepass changeit</code>
     
 
 
-<h3 id="jdk-version-compatibility">JDK Version Compatibility</h3>
+<h3 id="jdk-version-compatibility"></h3>
+
+### JDK Version Compatibility
 
 In case if you upgrade your JDK version in your middleware server, to enable JDK version compatibility, make the appropriate changes in an app server's  `middleware.properties` file located in your middleware server installation folder.
 
 For example: When you upgrade JDK V 1.6 to JDK V 1.7 (vice-versa), you can still run your middleware server. Volt MX Foundry's run-time apps cannot be accessed. If you try to access any apps at runtime, the system throws an error message due to JDK version incompatibility.
 
 1.  In your middleware server installation folder, open the  `middleware.properties` file located at the below path:
-    *   for JBoss:`
+    *   for JBoss:
         
-        <installer folder>\middleware_home\middleware\middleware-bootconfig
+        `<installer folder>\middleware_home\middleware\middleware-bootconfig`
         
-        `
-    *   for Tomcat: `<installer folder>\middleware_home\middleware\middleware-bootconfig`
+        
+    *   for Tomcat: 
+
+        `<installer folder>\middleware_home\middleware\middleware-bootconfig`  
+
 2.  Make the following changes in the  `middleware.properties` file.
     
     *   `ssl.trustStore=<java_home>/jre/lib/security/cacerts`

@@ -50,34 +50,36 @@ Following is the description of the inputs that are required to be provided in t
     *   **Linux** - USER\_INSTALL\_DIR= `/home/VoltMXFoundry_cli`
     *   **INSTALL\_LOG\_LOCATION**: Location for storage of the logs generated during the execution of a supported action. By default, this is set to the location of the user install directory. You can edit it to point to any other location on the system.
 
-    *  **Application Server basic inputs**: Following inputs are required for the generation of application related artifacts.
+    <a id="application_server_basic_inputs"></a>
+2.  **Application Server basic inputs**: Following inputs are required for the generation of application related artifacts.
     *   **SERVER\_CHOICE**: Application servers include JBoss (Standalone/Domain), and WebSphere Liberty profile.
 
-  ` SERVER\_CHOICE= < appServerType > `
+        ` SERVER_CHOICE= < appServerType > `
 
-The possible values for <appServerType> are: JBoss or WebSphere.
+        The possible values for <appServerType> are: JBoss or WebSphere.
         
-*   **JBossServerType**: In case JBoss is chosen as the application server, the mode in which JBoss is configured needs to be provided. The corresponding valid inputs are either standalone or domain.
+        *   **JBossServerType**: In case JBoss is chosen as the application server, the mode in which JBoss is configured needs to be provided. The corresponding valid inputs are either standalone or domain.
 
-*   **FULLY\_QUALIFIED\_PUBLIC\_URL**: Refers to the URL by which Volt Foundry will be accessible post installation. This is an optional field. In case the URL is not provided, it will be derived from the HOST\_NAME, HTTP\_PORT/HTTPS\_PORT properties. This property must be specified in case your Volt Foundry environment setup consists of a load balancer/proxy.
+    *   **FULLY\_QUALIFIED\_PUBLIC\_URL**: Refers to the URL by which Volt Foundry will be accessible post installation. This is an optional field. In case the URL is not provided, it will be derived from the HOST\_NAME, HTTP\_PORT/HTTPS\_PORT properties. This property must be specified in case your Volt Foundry environment setup consists of a load balancer/proxy.
 
-    `FULLY\_QUALIFIED\_PUBLIC\_URL= <http(s)>://<Fully Qualified Domain Name>:<http(s)port>`
+        `FULLY\_QUALIFIED\_PUBLIC\_URL= <http(s)>://<Fully Qualified Domain Name>:<http(s)port>`
 
-  
-*   **HOST\_NAME**: The host name or IP address of the application server.
-    *   **HTTP\_PORT**: The HTTP port of the application server.
-    *   **HTTPS\_PORT**: The HTTPS port of the application server.
+    
+    *   **HOST\_NAME**: The host name or IP address of the application server.
+        *   **HTTP\_PORT**: The HTTP port of the application server.
+        *   **HTTPS\_PORT**: The HTTPS port of the application server.
 
-<br>
-
-1.  **Application Server management properties**: Following inputs
+    <a id="application_server_management_properties"></a>
+3.  **Application Server management properties**: Following inputs
     are required for many of the tasks related to actions performed on the application server. For example, fetching of server groups, creation of data sources, and deployment of WARs. These details are also updated in the database and hence, are required to be provided during the execution of database migration scripts.
     *   **MASTER\_IP**: This is the application server host name for either JBoss standalone or WebSphere Liberty. In case of a clustered JBoss or Liberty setup, this would correspond to the domain controller host or the collective controller host respectively
     *   **MASTER\_PORT**: This is the native management port in case of JBoss. In case of WebSphere Liberty this would be the HTTPS port of the collective controller or server.
     *   **MASTER\_USER**: Application server administrative user.
     *   **MASTER\_PASSWORD**: Application server administrative user password.
     *   **USER\_INPUT\_SERVER\_GROUPS**: The value of this property is obtained by executing the `get-server-groups` task. It is only required for JBoss configured in domain mode. You must provide the user input groups separated by the pipe **|** delimiter.
-2.  **Properties related to the Volt Foundry components**: Following 
+
+    <a id="properties_related_to_the_volt_foundry_components"></a>
+4.  **Properties related to the Volt Foundry components**: Following 
     inputs are required for any action which is related to a Foundry component. For example, the generation of WARs or the execution of database scripts.
 
     a.  **Volt Foundry Component selection properties**: The following properties must be set to either true or false. If ALL\_COMPONENTS\_ENABLED is set to true, the rest of the inputs can be left empty. If ALL\_COMPONENTS\_ENABLED is set to false then at least one of the following input properties must be set to true.
@@ -93,6 +95,8 @@ The possible values for <appServerType> are: JBoss or WebSphere.
 
     *   **VOLTMX\_FOUNDRY\_CONSOLE\_URL**: This is an optional property that needs to be specified only if API Portal as a component is enabled, and if you want to use a pre-existing Foundry console. For example: http:/foundry.hcl.com:9080/mfconsole.
 
+    <a id="database_properties"></a>
+    
     c.  **Database Properties**:
 
     *   DB\_CHOICE : Choice of Database. Valid inputs include MySQL,
@@ -106,10 +110,12 @@ The possible values for <appServerType> are: JBoss or WebSphere.
     *   DB\_PORT : The host port of the database.
     *   DB\_USER : The database user.
             
-    In case of Oracle, you must provide a user which has the permission for creating users for each of the selected Volt Foundry components. The password for all child users would be same as the parent user password.
+        **_Note:_** In case of Oracle, you must provide a user which has the permission for creating users for each of the selected Volt Foundry components. The password for all child users would be same as the parent user password.
             
     *   **DB\_PASS**: The database user password.
-        **Properties specific to the selected database**:
+        
+    d.  **Properties specific to the selected database**:
+    
     *   **Oracle specific properties**: These input properties include the Oracle service ID and the Oracle tablespace names. In case the tablespace names are left empty, the default tablespace is used. Following are the various Oracle specific input properties.
     *   ORACLE\_SERVICEID
     *   DATA\_TABLESPACE
@@ -139,7 +145,7 @@ Following is the recommended sequence of installer actions.
 
 **For WebSphere Liberty**:
 
-The only supported tasks are execution of database migration scripts ](migrate-db) and generation of application server artifacts (generate-wars). Refer to the [Installer documentation](https://docs.voltmx.com/voltmxlibrary/voltmxfoundry/voltmx_foundry_manual_install_guide/Default.md#Foundry_in_WebSphere_Liberty.html) for details on how to setup a complete Volt Foundry environment in WebSphere Application Server Liberty.
+The only supported tasks are execution of database migration scripts ](migrate-db) and generation of application server artifacts (generate-wars). Refer to the [Installer documentation](../../voltmx_foundry_manual_install_guide/Content/Foundry_in_WebSphere_Liberty.md) for details on how to setup a complete Volt Foundry environment in WebSphere Application Server Liberty.
 
 ### Generate Application Server Artifacts
 
@@ -148,12 +154,13 @@ Complete the following actions to generate the application server artifacts:
 *   [Update `userInputs.properties`](#update-userinputs-properties)
 *   [Execute Command Line Tasks](#execute-command-line-tasks)
 
+<a id="update_userinputs_properties"></a>
 #### Update userInputs.properties
 
 1.  Specify the following properties to generate the artifacts:
-    *   [Application Server basic inputs](#app_basic)
-    *   [Properties related to the Volt Foundry components](#prop_foundry)
-    *   [Database Properties](#DB_Prop)
+    *   [Application Server basic inputs](#application_server_basic_inputs)
+    *   [Properties related to the Volt Foundry components](#properties_related_to_the_volt_foundry_components)
+    *   [Database Properties](#database_properties)
 
 #### Execute Command Line Tasks
 
@@ -178,8 +185,8 @@ Complete the following actions to get Server Groups for JBoss setup in domain mo
 
 #### Update userInputs.properties
 
-*   [Application Server basic inputs](#app_basic)
-*   [Application Server management properties](#app_management)
+*   [Application Server basic inputs](#application_server_basic_inputs)
+*   [Application Server management properties](#application_server_management_properties)
 
 #### Execute Command Line Tasks
 
@@ -198,9 +205,9 @@ Complete the following actions to create or upgrade the Database Schema for the 
 
 Provide the following properties as inputs:
 
-*   [Database Properties](#DB_Prop)
-*   [Properties related to the Volt Foundry components](#prop_foundry)
-*   [Application Server management properties](#app_management)
+*   [Database Properties](#database_properties)
+*   [Properties related to the Volt Foundry components](#properties_related_to_the_volt_foundry_components)
+*   [Application Server management properties](#application_server_management_properties)
 
 #### Execute Command Line Tasks
 
@@ -220,8 +227,8 @@ Complete the following actions to deploy WAR/EAR files in the Remote Application
 
 #### Update userInputs.properties
 
-*   [Application Server basic inputs](#app_basic)
-*   [Application Server management properties](#app_management)
+*   [Application Server basic inputs](#application_server_basic_inputs)
+*   [Application Server management properties](#application_server_management_properties)
 
 #### Execute Command Line Tasks
 
@@ -245,10 +252,10 @@ Complete the following actions to Create Data Sources for Remote Application Ser
 
 Provide the following properties as inputs:
 
-*   [Application Server basic inputs](#app_basic)
-*   [Application Server management properties](#app_management)
-*   [Properties related to the Volt Foundry components](#prop_foundry)
-*   [Database Properties](#DB_Prop)
+*   [Application Server basic inputs](#application_server_basic_inputs)
+*   [Application Server management properties](#application_server_management_properties)
+*   [Properties related to the Volt Foundry components](#properties_related_to_the_volt_foundry_components)
+*   [Database Properties](#database_properties)
 
 #### Execute Command Line Tasks
 
@@ -267,6 +274,7 @@ Complete the following actions to configure Shared libraries for WebSphere:
 
 *   [Update `userInputs.properties`](#update-userinputs-properties)
 *   [Execute Command Line Tasks](#execute-command-line-tasks)
+
 
 #### Update userInputs.properties
 

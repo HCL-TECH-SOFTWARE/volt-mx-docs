@@ -1,49 +1,50 @@
                           
 
-You are here: Upgrade Issue: FoundryAdminAdapterTest Fails with JWT error
+<!-- You are here: Upgrade Issue: FoundryAdminAdapterTest Fails with JWT error -->
 
 FAQs and Troubleshooting
 ========================
 
 This section lists the troubleshooting tips to resolve problems that you may encounter during installation, and post installation.
 
-*   **Issue**: If you have upgraded from Foundry V8.x or lower versions to V9 GA or higher versions, some of the services fail to work because of an internal authentication error. These services, such as the **Foundry Admin Adapter**, **Email Adapter**, and **Workflow Email** services, fail with the following error:
+**Issue**: If you have upgraded from Foundry V8.x or lower versions to V9 GA or higher versions, some of the services fail to work because of an internal authentication error. These services, such as the **Foundry Admin Adapter**, **Email Adapter**, and **Workflow Email** services, fail with the following error:
 ```
-returned HTTP [400], Response Body [{"details":{"message":"Could not find trust security group for given envId","errcode":0,"errmsg":"Could not find trust security group for given envId"},"httpstatus":"Bad Request","requestid":"5e36d604-09ab-4fbb-9437-42c1d828140f;98","domain":"AUTH","code":-65,"mfcode":"Auth-65","message":"Some of the input parameters provided are invalid"}]
+returned HTTP [400], Response Body [{"details":{"message":"Could not find trust security group for given envId","errcode":0,"errmsg":"Could not find trust security group for given envId"},"httpstatus":"Bad Request","requestid":"5e36d604-09ab-4fbb-9437-42c1d828140f;98","domain":"AUTH","code":-65,"mfcode":"Auth-65","message":"Some of the input parameters provided are invalid"}]  
 ```
-    
-    **Workaround**
-    
-    To avoid the error, you must perform the following:
-    
-    1.  Log in to Foundry Console which you upgraded for V9.x.
-    2.  In your Volt MX Foundry account, click **Environments**. The Environments page appears.
-    3.  Click **MODIFY** for the environment. The **Modify Environment** page appears, shown below:
-        
-        ![](Resources/Images/Foundry-Environments-onpremise_613x268.png)
-        
-    4.  In the **Modify Environment** page, click **SAVE**.
 
-*   **Issue**: While upgrading from Foundry 7.3 to Volt MX Foundry V9 and then upgrading to a version after V9, the upgrade fails due to the following error:"java.sql.SQLSyntaxErrorException: Table 'prefixidglobaldbsuffix.schema\_version' doesn't exist".
+**Workaround**:
+
+To avoid the error, you must perform the following:
+
+1.  Log in to Foundry Console which you upgraded for V9.x.
+2.  In your Volt MX Foundry account, click **Environments**. The Environments page appears.
+3.  Click **MODIFY** for the environment. The **Modify Environment** page appears, shown below:
     
-    **Workaround**
+    ![](Resources/Images/Foundry-Environments-onpremise_613x268.png)
+    
+4.  In the **Modify Environment** page, click **SAVE**.  
+
+
+**Issue**: While upgrading from Foundry 7.3 to Volt MX Foundry V9 and then upgrading to a version after V9, the upgrade fails due to the following error:"java.sql.SQLSyntaxErrorException: Table 'prefixidglobaldbsuffix.schema\_version' doesn't exist".
+    
+**Workaround**:
     
     To avoid this issue, perform the following step:
     
     *   Delete the idglobaldb schema before upgrading to the version later than V9.
 
-*   **Issue**: The publishing of a Storage application fails on an environment that uses the SQLServer with Windows authentication.
+**Issue**: The publishing of a Storage application fails on an environment that uses the SQLServer with Windows authentication.
     
-    **Workaround**
+**Workaround**:
     
     In the `server_configuration` table of the Integration database(admindb) insert the key `VOLTMX_SERVER_IS_WINDOWS_AUTHENTICATION_ENABLED` with value set to **true**. Restart the application server.
     
 
-*   **Issue**
+**Issue**:
     
     The upgrade installation is rolling back with Validate failed from 8.2.1.3
     
-    Workaround
+**Workaround**:
     
     Before Upgrade, execute below SQL statement from admin database
     
@@ -61,11 +62,11 @@ returned HTTP [400], Response Body [{"details":{"message":"Could not find trust 
       
     
 
-*   **Issue**
+**Issue**:
     
     If you upgrade the integration service or install on new server using the existing database but with a different server details like fully qualified URL port, and when you publish an app, the app publish fails.
     
-    Workaround
+**Workaround**:
     
     You must update management server details in the `server_configuration` table in admin database.
     
@@ -94,41 +95,41 @@ From the Installer, you create a service having JVM params. The service gets reg
 *   Change the service in Windows Registry.
 *   Modify the JVM params by using Regedit.
 
-*   **Issue**
+**Issue**:
     
     If you face the error dialogue "`Windows error 2 occurred while loading the Java VM`" while launching the Volt MX Foundry Patch Installer, because of the following:
     
     Volt MX Foundry Patch Installer runs with your system's default Java. If an user machine has Java 8 installed, then check if the machine's `System Environment Path for Java`  or  `JAVA_HOME`  is set to `c:\programdata\oracle\java\javapath`
     
-    Workaround
+**Workaround**:
     
     1.  Remove the current path from `JAVA_HOME` and set the new path as `C:\Program Files (x86)\Java\jre1.8.0_40\bin`
     2.  Launch the Volt MX Foundry Patch Installer.
     3.  After the installation completed, reset the machine's  `System Environment Path for Java`  or  `JAVA_HOME` path to it's original path. For example `c:\programdata\oracle\java\javapath`
 
-*   **Issue**
+**Issue**:
     
     If your service provider's certificate is not configured, the system displays an error - "peer not authenticated."
     
-    Workaround
+**Workaround**:
     
     For trusted certification issues, refer to [Service Provider's Certificate Issues](Post-Installation_Tasks.md#Service_Provider's_Certificate_Issues).
     
 
-*   **Issue**
+**Issue**:
     
     When customer wants to install Volt MX Foundry with Oracle as database type, the system throws the error: `Invalid Data Type SDO_GEOMENTRY`
     
-    Workaround
+**Workaround**:
     
     Install Oracle locator, which is required for Volt MX Foundry installation. For more details, refer to [Pre-installation Tasks > Create Locator Component for Oracle Database](DB_Pre-installation_Tasks.md#create-locator-component-for-oracle-database)
     
 
-*   **Issue**
+**Issue**:
     
     Upgrading from Volt MX Foundry 6.5.2, 7.0.1 or 7.1.1 with MS SQL Server fails. Installer is rolling back, as the schema version table is not migrating properly while upgrade.
     
-    **Workaround**
+**Workaround**:
     
     To avoid this issue, follow this step:
     
@@ -140,11 +141,11 @@ drop index schema_version_vr_idx on master.<SCHEMA_NAME>.schema_version;
     alter table master.<SCHEMA_NAME>.schema_version drop column version_rank;
 ```
 
-*   **Issue**
+**Issue**:
     
     If you do not want to use a DB user with DBA role or Equivalent privileges for the Volt MX Foundry installation on ORACLE database, follow these steps:
     
-    Workaround
+**Workaround**:
     
     Manual Steps:
     
@@ -201,11 +202,11 @@ drop index schema_version_vr_idx on master.<SCHEMA_NAME>.schema_version;
     > **_Note:_**   The password for the component users and the installer user have to be same.
     
 
-*   **Issue** 
+**Issue**:
     
     If you do not want to use a DB user with DBA role or Equivalent privileges for the Volt MX Foundry installation on MSSQL, follow these steps:
     
-    Workaround
+**Workaround**:
     
     Manual Steps:
     
@@ -283,17 +284,17 @@ drop index schema_version_vr_idx on master.<SCHEMA_NAME>.schema_version;
     > **_Note:_** The userId must be same across the script.
     
 
-*   **Issue**
+**Issue**:
     
     After entering Database details the DB connection fails with the following error:
     
     ![](Resources/Images/error_troubleshooting.png)
     
-    Workaround
+**Workaround**:
     
     The password used for the Database must not contain exclamation marks (!).
     
-*   **Issue**
+**Issue**:
     
     If you are using any lower versions of MySQL 5.7 such as v5.7.12 or lower during installation, you may encounter an error due to which the installation rolls back. This error occurs due to a bug in the MySQL database.  
     For more information, refer [MySQL Bugs](https://bugs.mysql.com/bug.php?id=79286)
@@ -306,7 +307,7 @@ drop index schema_version_vr_idx on master.<SCHEMA_NAME>.schema_version;
     *   **Error Message**: You can't specify target table 'users' for update in FROM clause
     *   **Location**: <Location where the installation is done>
     
-    **Workaround**
+**Workaround**:
     
     To resolve this issue, refer [Prerequisites for Volt MX Foundry with MySQL- Applicable for Identity Services](DB_PRe-reqs.md).
     
@@ -314,7 +315,7 @@ drop index schema_version_vr_idx on master.<SCHEMA_NAME>.schema_version;
 Upgrade Issue: FoundryAdminAdapterTest Fails with JWT error
 ----------------------------------------------------------
 
-*   **Issue**: If you have upgraded from Foundry V8.x or lower versions to Foundry V9 GA or higher versions, you must edit the environment in your on-premises Foundry Console to avoid issues such as:
+**Issue**: If you have upgraded from Foundry V8.x or lower versions to Foundry V9 GA or higher versions, you must edit the environment in your on-premises Foundry Console to avoid issues such as:
     
     *   The Admin Adapter, Email Adapter and Workflow email services will not work properly.
     *   **Issue**: While execution of a Service Task in Workflow Service, if the service task fails with the following error.
@@ -323,7 +324,7 @@ Upgrade Issue: FoundryAdminAdapterTest Fails with JWT error
 returned HTTP [400], Response Body [{"details":{"message":"Could not find trust security group for given envId","errcode":0,"errmsg":"Could not find trust security group for given envId"},"httpstatus":"Bad Request","requestid":"5e36d604-09ab-4fbb-9437-42c1d828140f;98","domain":"AUTH","code":-65,"mfcode":"Auth-65","message":"Some of the input parameters provided are invalid"}]
 ```
     
-    **Workaround**
+**Workaround**:
     
     1.  Log in to your Foundry Console.
     2.  In your Volt MX Foundry account, click **Environments**. The Environments page appears.

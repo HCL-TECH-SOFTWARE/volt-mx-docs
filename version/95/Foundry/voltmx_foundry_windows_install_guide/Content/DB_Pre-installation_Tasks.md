@@ -55,67 +55,53 @@ If the above statements return zero records and MDSYS schema is not created, the
 
 The following steps need to be executed by a SYSDBA only.
 
-To create Locator or MDSYS schema, follow the steps mentioned in either option #1 or option #2:
+To create Locator or MDSYS schema, follow the steps mentioned in either <br> option #1 or option #2:
 
 *   **Option #1**. Follow DBCA or Oracle Installer enterprise edition with create database option to create Oracle database. Use the same database during Volt MX Foundry Installation.
 *   **Option #2**. Run the following scripts on the database to be used for Volt MX Foundry, where Oracle locator is not installed.
     
     1.  Connect as SYSDBA
-        
-```
-sqlplus "/as sysdba"
-```
+    ```
+    sqlplus "/as sysdba"
+    ```
     2.  Create MDSYS User if not exists:
-        
-```
-Create user mdsys identified by secret default tablespace sysaux
-```
-        
-        A secret is a dummy password. Provide the password that is used during MDSYS user creation.
-        
+    ```
+    Create user mdsys identified by secret default tablespace sysaux
+    ```
+    A secret is a dummy password. Provide the password that is used during MDSYS user creation.
     3.  Run the below SQL to grant the privileges:
-```
-SQL>@?/md/admin/mdprivs.sql
-```
+    ```
+    SQL>@?/md/admin/mdprivs.sql
+    ```
     4.  Connect to MDSYS user:
-```
-Conn mdsys/secret
-```
-        
-        A secret is dummy password. Provide the password that is used during MDSYS user creation.
-        
+    ```
+    Conn mdsys/secret
+    ```
+    A secret is dummy password. Provide the password that is used during MDSYS user creation.
     5.  Run the below SQL to create the locator objects:
-```
-SQL>@?/md/admin/catmdloc.sql
-```
-    
-    All the above `.sql` files executed will be available as part of database software `md` folder.
-    
-    After executing the above steps, execute the following query to check if everything is fine:
+    ```
+    SQL>@?/md/admin/catmdloc.sql
+    ```
+
+All the above `.sql` files executed will be available as part of database software `md` folder.
+After executing the above steps, execute the following query to check if everything is fine:
     
 ```
 Select * from dba_objects where owner='MDSYS' and object_name like 'SDO%';
 ```
     
-    Once the Oracle locator is installed, run the Installer to setup Volt MX Foundry. The system should not throw the error: `Invalid Data Type SDO_GEOMETRY`
+Once the Oracle locator is installed, run the Installer to setup Volt MX Foundry. The system should not throw the error: `Invalid Data Type SDO_GEOMETRY`
     
-    > **_Note:_** As per Oracle 12c Release 1 (12.1) documentation, Oracle Locator is available with the following editions:
-    
-    *   Oracle Database Standard Edition One
-    *   Oracle Database Standard Edition
-    *   Oracle Database Enterprise Edition
-    *   Oracle Database Express Edition (Oracle Database XE)
-    
-      For more information regarding Oracle licensing, refer to Oracle Database documentation.
-    
-    > **_Important:_** **SDO\_GEOMETRY** is part of **Oracle Locator**, which is free and does not need additional licensing, but this is bundled with **Oracle Spatial**, which is part of enterprise edition licensing.  
-      
-    For more details, please go through the following Oracle reference document:  
-    **Doc ID 1066837.1** :- Oracle Spatial and Oracle Locator Licensing Information.
+> **_Note:_** As per Oracle 12c Release 1 (12.1) documentation, Oracle Locator is available with the following editions: <br>1)   Oracle Database Standard Edition One <br>2)   Oracle Database Standard Edition <br>3)   Oracle Database Enterprise Edition<br>4)   Oracle Database Express Edition (Oracle Database XE)<br>For more information regarding Oracle licensing, refer to Oracle Database documentation<br>
+
+> **_Important:_** **SDO\_GEOMETRY** is part of **Oracle Locator**, which is free and does not need additional licensing, but this is bundled with **Oracle Spatial**, which is part of enterprise edition licensing.  
+For more details, please go through the following Oracle reference document:  
+**Doc ID 1066837.1** :- Oracle Spatial and Oracle Locator Licensing Information.
     
 
-<h2 id="maria-db">MariaDB</h2>
-
+<h2 id="maria-db"></h2>
+MariaDB
+------
 
 ### Increase the table\_definition\_cache and table\_open\_cache values
 
