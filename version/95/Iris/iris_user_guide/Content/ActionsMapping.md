@@ -83,9 +83,9 @@ To map properties, do the following:
     
     ![](Resources/Images/AddMapping_487x379.png)
     
-2.  From the Source pane, navigate to a widget's property, and then click it. You can make it easier to locate the property you want by using the Filter drop-down list to filter the app's forms and widgets according to any of the following criteria: Widget ID, Widget Category, Variables, Skins, I18N Keys, Mapped Elements, and Services.
+2.  From the Source pane, navigate to a widget's property, and then click it. You can make it easier to locate the property you want by using the Filter drop-down list to filter the app's forms and widgets according to any of the following criteria: Include Containers, Display All Properties, Variables, Skins, Mapped Elements, Services, and I18N Keys.
 
-3.  From the Target pane, navigate to a widget's property, and then click it. Doing so establishes a mapping relationship between the source element and the target element. You can make it easier to locate the property you want by using the Filter drop-down list to filter the app's forms and widgets according to any of the following criteria: Widget ID, Widget Category, Variables, Skins, I18N Keys, Mapped Elements, and Services.
+3.  From the Target pane, navigate to a widget's property, and then click it. Doing so establishes a mapping relationship between the source element and the target element. You can make it easier to locate the property you want by using the Filter drop-down list to filter the app's forms and widgets according to any of the following criteria: Include Containers, Display All Properties, Variables, Skins, Mapped Elements, Services, and I18N Keys.
     
     ![](Resources/Images/MappingEditor.png)
     
@@ -111,7 +111,8 @@ To add an expression, do the following:
 Unlink Mapped Properties
 ------------------------
 
-To unlink a mapping or to remove any expression, do the following:
+To unlink a mapping or to remove any expression, do the following:  
+
 1.	In the Target pane, right-click a property that is mapped to a source property.
 2.	Click **Unbind**.
 3.	Click **Save** to save the action sequence and close the Action Editor window.
@@ -162,7 +163,7 @@ To edit the collection index value, follow these steps:
 3.  Right-click the mapped widget (or service parameter), and then click **Edit Expression**. Doing so opens the Expression Editor.
 4.  Delete the default index value in the expression and provide the required index value. For example, students\[3\]\["name"\] indicates that you have mapped the value at the third index of name within the students collection.
 5.  Click **OK**.
-6.  To save the changes you have made to the action sequence, press Ctrl+S.
+6.  Click **Save** to save the action sequence and close the Action Editor window.
 
 Map Data Across Channels and Breakpoints
 ----------------------------------------
