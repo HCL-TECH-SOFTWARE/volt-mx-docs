@@ -420,8 +420,8 @@ createHMacHash: function() {
     var message="test message to generate hash ";  
     var key=”key1”  
     var options = {"returnBase64String":"true"};  
-    var myHashValue = voltmx.crypto.createHMacHash(algo, hMacHashKey, message,options);
-    voltmx.print("myHash :" + myHash);  
+    var myHashValue = voltmx.crypto.createHMacHash(algo, key, message,options);
+    voltmx.print("myHashValue :" + myHashValue);  
 },
 ```
 
