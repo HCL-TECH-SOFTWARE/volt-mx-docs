@@ -97,3 +97,6 @@ To upgrade Volt MX Foundry using the installer, follow these steps:
     
 14.  Click **Done** to close the window.
 15.  You can now access Volt MX Foundry Console by using the **new** URLs. For more details, refer to [Accessing Volt MX Foundry Console - On-premises](../../../Foundry/voltmx_foundry_user_guide/Content/How_to_access_VoltMX_Foundry_Portal_on-Prem.md).
+
+> **_Note:_** Please update the <b>SSL Trust Store </b> and <b> SSL Key Store </b> fields manually, post foundry upgradation".
+<b>SSL Trust Store</b> and <b>SSL Key Store</b> fields are situated at Admin Console -> Settings -> Runtime configuration -> SSL Configuration.
