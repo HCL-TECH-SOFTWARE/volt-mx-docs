@@ -19,6 +19,9 @@ The general actions that you can use in an action sequence are as follows:
 | [Set Timeout](#set-timeout) | Set a timeout variable. |
 | [Clear Timeout](#clear-timeout) | Clear the timeout. |
 
+
+
+
 ### Loop Action
 
 To define an action sequence for executing a loop action, do the following:
