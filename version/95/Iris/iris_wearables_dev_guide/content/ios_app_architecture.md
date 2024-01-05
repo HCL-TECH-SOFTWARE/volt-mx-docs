@@ -42,7 +42,7 @@ Guidelines for Creating a Wearables App's UI
 
 You must follow certain guidelines when you create a UI for an Apple Watch app. The following are a few key elements for designing an Apple Watch app:
 
-**Designing a Watch**: An Apple Watch comes in seven sizes  —  38mm, 40mm, 41mm, 42mm, 44mm, 45mm, and 49mm. The watch features a retina display, and you must provide images at double the resolution. You need not provide different sized images (although you can), or design two different layouts because Apple uses relative sizing and spacing options so images and objects resize to fill the available space.
+**Designing a Watch**: An Apple Watch comes in seven sizes  —  38mm, 40mm, 41mm, 42mm, 44mm, 45mm, and 49mm. Volt MX Iris currently supports viewing the 38mm and 42mm sizes in the Iris Canvas. The watch features a retina display, and you must provide images at double the resolution. You need not provide different sized images (although you can), or design two different layouts because Apple uses relative sizing and spacing options so images and objects resize to fill the available space.
 
 **App Anatomy**: An Apple Watch app supports hierarchical and paginated navigation methods.
 
