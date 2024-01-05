@@ -868,7 +868,7 @@
     
                 
 <li class="md-nav__item">
-  <a href="ActionsNavigations.html" class="md-nav__link">
+  <a href="ActionsNavigation.html" class="md-nav__link">
     General
   </a>
 </li>
@@ -1882,7 +1882,7 @@
 
 
 <h1 id="map-widget-properties-to-one-another">Map Widget Properties to One Another</h1>
-<p>Mapping provides an easy way of linking a widget property (or skin, variable, or an i18n key) to another widget. Mapping also allows you to achieve a uniform look and feel across the design, and reduces the effort required to design an app since any modification made to a widget property results in modifying all its linked widget properties. Click any of the following topics for more information.</p>
+<p>Mapping provides an easy way of linking a widget property (or skin, variable, or an i18n key) to another widget. Mapping also allows you to achieve a uniform look and feel across the design, and reduces the effort required to design an app since any modification made to a widget property results in modifying all its linked widget properties. Not supported for Apple Watch. Click any of the following topics for more information.</p>
 <ul>
 <li><a href="#mapping-overview">Mapping Overview</a></li>
 <li><a href="#important-considerations">Important Considerations</a></li>
@@ -1903,33 +1903,34 @@
 <p>The left pane of the Mapping Editor is called the Source, and contains the following folders:</p>
 <ul>
 <li>Forms: Lists all the forms and their child widgets. All the properties of a form and its child widgets that can be mapped are displayed.</li>
-<li>Popups: Lists all the pop-ups and their child widgets. All the properties of a pop-up and its child that can be mapped are displayed.</li>
-<li>Headers: List all the header templates and their child widgets. All the properties of a header and its child that can be mapped are displayed.</li>
-<li>Footer: List all the footer templates and their child widgets. All the properties of a header and its child that can be mapped are displayed.</li>
+<li>Headers: List all the header templates and their child widgets. All the properties of a header and its child that can be mapped are displayed. (Free Form JavaScript projects only)</li>
+<li>Footers: List all the footer templates and their child widgets. All the properties of a footer and its child that can be mapped are displayed. (Free Form JavaScript projects only)</li>
 <li>Variables: List all the variables created for a project.</li>
-<li>Skins: List all the skins available for a form (or pop-up) and its child widgets.</li>
+<li>Skins: List all the skins available for a form and its child widgets.</li>
 <li>i18n Keys: List all the i18n keys available for the project.</li>
+<li>Services: Lists all services currently available for mapping.</li>
 </ul>
 <h3 id="target">Target</h3>
 <p>The right pane of the Mapping Editor is called the Target, and contains the following folders:</p>
 <ul>
 <li>Forms: Lists all the forms and their child widgets. All the properties of a form and its child widgets that can be mapped are also displayed.</li>
-<li>Popups: Lists all the pop-ups and their child widgets. All the properties of a pop-up and its child that can be mapped are also displayed.</li>
-<li>Headers: List all the header templates and their child widgets. All the properties of a header and its child that can be mapped are also displayed.</li>
-<li>Footer: List all the footer templates and their child widgets. All the properties of a header and its child that can be mapped are also displayed.</li>
+<li>Headers: List all the header templates and their child widgets. All the properties of a header and its child that can be mapped are also displayed. (Free Form JavaScript projects only)</li>
+<li>Footer: List all the footer templates and their child widgets. All the properties of a footer and its child that can be mapped are also displayed. (Free Form JavaScript projects only)</li>
 <li>Variables: List all the variables created for a project.</li>
+<li>Services: Lists all services currently available for mapping.</li>
 </ul>
 <blockquote>
-<p><strong><em>Note:</em></strong> Skins and i18n keys folders are unavailable in the Target pane.</p>
+<em><b>Note: </b></em>
+<ul>
+<li>Skins and i18n keys folders are unavailable in the Target pane.</li>
+<li>Headers and Footers are only included for Free Form JavaScript projects.</li>
+</ul>
 </blockquote>
+
 <h2 id="important-considerations">Important Considerations</h2>
 <ul>
-<li>
-<p>The datatype for both the source and the target has to be the same. If they’re not, Volt MX Iris notifies you.</p>
-</li>
-<li>
-<p>You cannot map across channels. That is, you cannot map the widget text of a Mobile channel to the widget text of a Tablet (or Desktop) channel.</p>
-</li>
+<li>The datatype for both the source and the target has to be the same. If they’re not, Volt MX Iris notifies you.</li>
+<li>You cannot map across channels. That is, you cannot map the widget text of a Mobile channel to the widget text of a Tablet (or Desktop) channel.</li>
 <li>If a form is forked (e.g. iOS:Native), only when the source and target are of same platform (iOS:Native) are the mapped values are applied during functional preview.</li>
 <li>A source element can have one-to-many mappings, but a target element can have only one-to-one mapping. That is, a source element can be linked to multiple target elements. But a target element can only be linked to one source element.</li>
 <li>While mapping skins, source and target widgets should be of the same type. That is, you can map a skin of a Button to another Button only.</li>
@@ -1938,7 +1939,7 @@
 <li>If the source and target widgets are of the same type, and the values of the two properties being mapped are identical, you cannot map them.</li>
 <li>Since tabs are listed under form elements, you cannot map any data to a tab widget using the Mapping Editor.</li>
 <li>For service mappings, do not use structures that have more than simple key value pairs and attributes. Break out complex structures and use code to get the lost values.</li>
-<li>VoltMXService mappings cannot support dynamic associations or hierarchical structures. Use code to work around this limitation</li>
+<li>VoltMX Service mappings cannot support dynamic associations or hierarchical structures. Use code to work around this limitation.</li>
 </ul>
 <h2 id="map-properties-to-one-another">Map Properties to One Another</h2>
 <p>It's important to note that, after mapping, any changes you make to the target element effects the source element as well.</p>
@@ -1949,33 +1950,40 @@
 <p><img alt="" src="Resources/Images/AddMapping_487x379.png" /></p>
 </li>
 <li>
-<p>From the Source pane, navigate to a widget's property, and then click it. You can make it easier to locate the property you want by using the Filter drop-down list to filter the app's forms and widgets according to any of the following criteria: Widget ID, Widget Category, Variables, Skins, I18N Keys, Mapped Elements, and Services.  </p>
+<p>From the Source pane, navigate to a widget's property, and then click it. You can make it easier to locate the property you want by using the Filter drop-down list to filter the app's forms and widgets according to any of the following criteria: Include Containers, Display All Properties, Variables, Skins, Mapped Elements, Services, and I18N Keys.</p>
 </li>
 <li>
-<p>From the Target pane, navigate to a widget's property, and then click it. Doing so establishes a mapping relationship between the source element and the target element. You can make it easier to locate the property you want by using the Filter drop-down list to filter the app's forms and widgets according to any of the following criteria: Widget ID, Widget Category, Variables, Skins, I18N Keys, Mapped Elements, and Services.</p>
+<p>From the Target pane, navigate to a widget's property, and then click it. Doing so establishes a mapping relationship between the source element and the target element. You can make it easier to locate the property you want by using the Filter drop-down list to filter the app's forms and widgets according to any of the following criteria: Include Containers, Display All Properties, Variables, Skins, Mapped Elements, Services, and I18N Keys.</p>
 <p><img alt="" src="Resources/Images/MappingEditor.png" /></p>
 </li>
 <li>
-<p>To save the changes you have made to the action sequence, press Ctrl+S.</p>
+<p>Click <strong>Save</strong> to save the action sequence and close the Action Editor window.</p>
 </li>
 </ol>
 <h2 id="add-an-expression">Add an Expression</h2>
 <p>You can write a code snippet on a target element for manipulating a widget property.</p>
 <p>To add an expression, do the following:</p>
 <ol>
-<li>Right-click the target element.</li>
-<li>Click <strong>Add Expression</strong>.</li>
+<li>
+<p>Right-click the target element.</p>
+</li>
+<li>
+<p>Click <strong>Add Expression</strong>.</p>
+</li>
 <li>
 <p>Type the code and save the project. Example of an expression:</p>
-<p>"Welcome " + loginPage.FirstName.text + loginPage.LastName.text;;</p>
+<p>"Welcome " + loginPage.FirstName.text + loginPage.LastName.text;</p>
+</li>
+<li>
+<p>Click <strong>Save</strong> to save the action sequence and close the Action Editor window.</p>
 </li>
 </ol>
 <h2 id="unlink-mapped-properties">Unlink Mapped Properties</h2>
-<p>To unlink a mapping or to remove any expression, do the following:</p>
+<p>To unlink a mapping or to remove any expression, do the following:  </p>
 <ol>
 <li>In the Target pane, right-click a property that is mapped to a source property.</li>
 <li>Click <strong>Unbind</strong>.</li>
-<li>To save the changes you have made to the action sequence, press Ctrl+S.</li>
+<li>Click <strong>Save</strong> to save the action sequence and close the Action Editor window.</li>
 </ol>
 <h2 id="locate-properties-by-filtering-and-searching">Locate Properties by Filtering and Searching</h2>
 <p>The elements under Source and Target in the Mapping Editor can be sorted by either filtering or searching. When you search, the pane lists only those elements that match what you type in the Search box. The Filter feature includes the following filtering parameters:</p>
@@ -1992,28 +2000,32 @@
 <td>Displays all the elements</td>
 </tr>
 <tr>
-<td>By Widget Id</td>
-<td>Displays widgets sorted by their ID</td>
+<td>Include Containers</td>
+<td>Include Containers such as FlexContainers and FlexScrollContainers in the list of widgets</td>
 </tr>
 <tr>
-<td>By Widget Category</td>
-<td>Displays widgets sorted by their categories</td>
+<td>Display All Properties</td>
+<td>DDisplays additional widget properties for mapping</td>
 </tr>
 <tr>
 <td>Variables</td>
-<td>Displays only variables, both local and global</td>
+<td>Displays variables, both local and global</td>
 </tr>
 <tr>
 <td>Skins</td>
-<td>Displays only skins</td>
+<td>Displays skins</td>
 </tr>
 <tr>
-<td>I18N</td>
-<td>Displays only i18n keys</td>
+<td>Mapped Elements</td>
+<td>Displays data that has already been mapped</td>
 </tr>
 <tr>
 <td>Services</td>
-<td>Displays only services</td>
+<td>Displays services</td>
+</tr>
+<tr>
+<td>I18N</td>
+<td>Displays i18n keys</td>
 </tr>
 </tbody>
 </table>
@@ -2027,7 +2039,7 @@
 <li>In the Mapping Editor, select the element in the Target to which you want to map data.</li>
 <li>Right-click this element, and then click <strong>Add Expression</strong>. Doing so displays the Expression Editor.</li>
 <li>Define the required expression, and then click outside of the Expression Editor. The data derived out of the expression is mapped to the selected element, and a red circle appears next to the element indicating that it has an expression.</li>
-<li>To save the changes you have made to the action sequence, press Ctrl+S.</li>
+<li>Click <strong>Save</strong> to save the action sequence and close the Action Editor window.</li>
 </ol>
 <h2 id="map-a-collection-to-a-widget-or-a-service-parameter">Map a Collection to a Widget or a Service Parameter</h2>
 <p>When you want to map elements within a collection to a widget or a service parameter, the first element in the collection gets mapped to the widget by default.</p>
@@ -2041,7 +2053,7 @@
 <li>Right-click the mapped widget (or service parameter), and then click <strong>Edit Expression</strong>. Doing so opens the Expression Editor.</li>
 <li>Delete the default index value in the expression and provide the required index value. For example, students[3]["name"] indicates that you have mapped the value at the third index of name within the students collection.</li>
 <li>Click <strong>OK</strong>.</li>
-<li>To save the changes you have made to the action sequence, press Ctrl+S.</li>
+<li>Click <strong>Save</strong> to save the action sequence and close the Action Editor window.</li>
 </ol>
 <h2 id="map-data-across-channels-and-breakpoints">Map Data Across Channels and Breakpoints</h2>
 <p>From V9 SP1 release, you can map different data for different channels and breakpoints in the <a href="../../iris_widget_prog_guide/Content/Segment.html#segmentedui-widget">Segment</a> widget using the <strong>Mapping Editor</strong>. This feature helps you to create mappings when the Segment widget is placed inside a component or when it is placed in a Desktop web form. The following sections provide more information about how to create mappings in each scenario.</p>
