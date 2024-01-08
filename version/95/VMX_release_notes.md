@@ -825,10 +825,14 @@ For detailed information about fixes and known issues in this release, see the <
 
 
 ### V9 Servicepack 5 Fixpack 15 Hotfix 4
-November 27, 2023
+January 05, 2023
 
-There are no new features or enhancements in this release.
-For relevant support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+#### AppFactory Enhancements
+
+* Added AppFactory build support for Android 14.
+* Security Updates.
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 
 ### V9 Servicepack 5 Fixpack 15 Hotfix 3
