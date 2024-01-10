@@ -332,6 +332,10 @@ border-collapse: collapse;}
 </head>
 <body>
 <table>
+<tr>
+    <td>voltmx.io.FileSystem.copyBundledRawFileTo()</td>
+    <td>Returns Boolean value,if failure throws appropriate exception, See VoltMX voltmx.io.documentation</td>
+  </tr>
   <tr>
     <td>voltmx.io.FileSystem.getDataDirectoryPath()</td>
     <td>Return the directory where application data is stored.</td>
