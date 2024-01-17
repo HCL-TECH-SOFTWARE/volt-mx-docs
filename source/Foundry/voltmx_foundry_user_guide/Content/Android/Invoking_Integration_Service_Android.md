@@ -26,13 +26,13 @@ Map < String, String > params = new HashMap < String, String > ();
 params.put("your-input-key", "your input value");
 Map < String, String > headers = new HashMap < String, String > ();
 headers.put("your-header-key", "your-header-value");
-VoltMXClient myClient = new VoltMXClient();
+KonyClient myClient = new KonyClient();
 IntegrationService integClient = null;
 
 
 try {
     integClient = myClient.getIntegrationService(serviceName);
-} catch (VoltMXException exception) {
+} catch (KonyException exception) {
     Log.d("Exception", exception.getMessage());
 }
 integClient.invokeOperationInBackground(operationName, headers, parameters,

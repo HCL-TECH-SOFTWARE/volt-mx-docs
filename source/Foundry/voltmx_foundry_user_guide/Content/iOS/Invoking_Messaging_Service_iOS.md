@@ -27,7 +27,7 @@ In the - (BOOL)application:(UIApplication \*)application didFinishLaunchingWithO
 In the - (void)application:(UIApplication \*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData \*) deviceToken method, call the following code to register and receive push notifications.
 
 ```
- HCLMessagingService * messaging = [HCLMessagingService sharedMessagingService];
+  KNYMessagingService * messaging = [KNYMessagingService sharedMessagingService];
 
 //
 // Register with Messaging Service:
@@ -122,7 +122,6 @@ Fetching a complete message for long messages using message ID
         }
     }
 ];
-
 ```
 
 Mark a message as read

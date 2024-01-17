@@ -23,7 +23,7 @@ init
 ----
 
 ```
- //Sample code to initialize  ClientVoltMXClient myClient = new VoltMXClient();
+ //Sample code to initialize  ClientKonyClient myClient = new KonyClient();
 String appkey = "<your-app-key>";
 String appsecret = "<your-app-secret>";
 String serviceURL = "<your-service-url>";
@@ -35,11 +35,11 @@ try {
             Log.d("Init", "Success");
         }
         @Override
-        public void onFailure(VoltMXException error) {
+        public void onFailure(KonyException error) {
             Log.d("Init", "Failure");
         }
     });
-} catch (VoltMXException exception) {
+} catch (KonyException exception) {
     Log.d("Init", "Exception");
 }
 ```
