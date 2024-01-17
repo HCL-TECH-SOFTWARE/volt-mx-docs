@@ -59,7 +59,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 ### V9 Servicepack 2 Fixpack 69
 January 16, 2024
 
-*  Added support for Volt Iris to target Android API level 33 (Android 14) for generating binaries in compliance with latest Google Play Store guidelines.
+*  Added support for Volt Iris to target Android API level 34 (Android 14) for generating binaries.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
