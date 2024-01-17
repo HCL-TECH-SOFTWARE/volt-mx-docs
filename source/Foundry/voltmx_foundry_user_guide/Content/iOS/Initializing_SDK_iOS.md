@@ -8,8 +8,8 @@ Initializing the iOS Client SDK
 To use any Volt MX Foundry SDK functions, you must add  `#import <VoltMXSDK/HCLSDK.h>` in the header of your files. You must use the following code snippet to initialize the SDK Client before using any services. Do this in your _AppDelegate's application:didFinishLaunchingWithOptions:_ method.
 
 ```
-//Sample code to initialize Volt MX Foundry Client
-HCLClient * client = [HCLClient sharedClient];
+//Sample code to initialize Quantum Fabric Client
+KNYClient * client = [KNYClient sharedClient];
 [client initializeInBackgroundWithAppKey: @"<app-key>"
     appSecret: @"<app-secret>"
     serviceURLString: @"<service-url>"

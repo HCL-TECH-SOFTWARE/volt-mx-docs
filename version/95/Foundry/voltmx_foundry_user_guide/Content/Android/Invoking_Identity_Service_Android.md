@@ -34,16 +34,16 @@ String providerName = "<your-provider-name>";
 String username = "<username-for-your-provider>";
 String password = "<password-for-your-provider>";
 
-VoltMXClient myClient = new VoltMXClient();
+KonyClient myClient = new KonyClient();
 IdentityService authClient = null;
 try {
     authClient = myClient.getIdentityService(providerName);
-} catch (VoltMXException exception) {
+} catch (KonyException exception) {
     Log.d("Failure", exception.getMessage());
 }
 authClient.loginInBackground(username, password, new LoginCallback() {
     @Override
-    public void onSuccess(VoltMXUser user) {
+    public void onSuccess(KonyUser user) {
         Log.d("Login", "Success");       
     }
     @Override       public void onFailure(IdentityServiceException identityServiceException) {
@@ -76,16 +76,16 @@ String providerName = "<your-provider-name>";
 String loginOptions = {};
 Context context = getApplicationContext();
 Webview webview = (WebView) findViewById(R.id.webview);
-VoltMXClient myClient = new VoltMXClient();
+KonyClient myClient = new KonyClient();
 IdentityService authClient = null;
 try {
     authClient = myClient.getIdentityService(providerName);
-} catch (VoltMXException exception) {
+} catch (KonyException exception) {
     Log.d("Failure", exception.getMessage());
 }
 authClient.loginInBackground(context, webview, new WebViewCallback() {
     @Override
-    public void onSuccess(VoltMXUser user) {
+    public void onSuccess(KonyUser user) {
         Log.d("Login", "Success");       
     }
     @Override   
@@ -119,7 +119,7 @@ authClient.loginInBackground(customTable, new LoginCallback() {
         Log.d("Login Failure", identityServiceException.getErrorMessage());
     }
     @Override
-    public void onSuccess(VoltMXUser user) {
+    public void onSuccess(KonyUser user) {
         Log.d("Login", "Success");
     }
 });
@@ -155,7 +155,7 @@ Import the following Libraries:
 ```
  
 // Sample code to get user profile details
-VoltMXUser user = < object - returned - in -login - success - callback > ;
+KonyUser user = < object - returned - in -login - success - callback > ;
 String firstName = user.getFirstName();
 String lastName = user.getLastName();
 String email = user.getEmail();

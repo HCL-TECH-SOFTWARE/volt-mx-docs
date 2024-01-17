@@ -21,8 +21,8 @@ Create an instance of HCLMetricsService
 The HCLMetricsService class sets the configuration for APM event reporting.
 
 ```
- //Sample code to create an instance of metricService with variable name "sharedMetricsService"
-HCLMetricsService * metricService = [HCLMetricsService sharedMetricsService];
+  //Sample code to create an instance of metricService with variable name "sharedMetricsService"
+KNYMetricsService * metricService = [KNYMetricsService sharedMetricsService];
 
 ```
 
@@ -71,21 +71,21 @@ The sendEvent API allows sending custom information for the event as metadata, w
 
 The following are the enums event types with values:
 
-*   HCLEventTypeFormEntry = 0
-*   HCLEventTypeFormExit = 1
-*   HCLEventTypeTouch = 2
-*   HCLEventTypeServiceRequest = 3
-*   HCLEventTypeServiceResponse = 4
-*   HCLEventTypeGesture = 5
-*   HCLEventTypeOrientation = 6
-*   HCLEventTypeError = 7
-*   HCLEventTypeHandledException = 8
-*   HCLEventTypeCrash = 9
-*   HCLEventTypeCustom = 10
-*   HCLEventTypeServiceCall = 11
+*   KNYEventTypeFormEntry = 0
+*   KNYEventTypeFormExit = 1
+*   KNYEventTypeTouch = 2
+*   KNYEventTypeServiceRequest = 3
+*   KNYEventTypeServiceResponse = 4
+*   KNYEventTypeGesture = 5
+*   KNYEventTypeOrientation = 6
+*   KNYEventTypeError = 7
+*   KNYEventTypeHandledException = 8
+*   KNYEventTypeCrash = 9
+*   KNYEventTypeCustom = 10
+*   KNYEventTypeServiceCall = 11
     
-*   HCLEventTypeAppTransition = 12
-*   HCLEventTypeAppLoad = 13
+*   KNYEventTypeAppTransition = 12
+*   KNYEventTypeAppLoad = 13
 *   > **_Note:_** The EventType is an ENUM.  
     The eventSubType, formId, widgetId, and flowTag fields can have max of 256 characters.
     

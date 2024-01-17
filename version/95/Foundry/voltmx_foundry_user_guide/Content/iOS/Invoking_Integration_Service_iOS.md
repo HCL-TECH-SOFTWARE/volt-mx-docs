@@ -7,8 +7,8 @@ Invoking an Integration Service
 
 ```
  // Sample code to fetch the integration service details
-HCLIntegrationService * integration = [
-    [HCLIntegrationService alloc]
+KNYIntegrationService * integration = [
+    [KNYIntegrationService alloc]
     initWithServiceName: @"<service-name>"
 ];
 

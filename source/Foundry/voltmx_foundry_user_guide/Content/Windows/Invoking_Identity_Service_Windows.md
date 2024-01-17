@@ -158,8 +158,7 @@ try {
     } else {
         Console.WriteLine("Login Failure");
     }
-}
-		
+}	
 ```
 
 Get Backend Token
@@ -212,7 +211,6 @@ Volt MX  FoundryException is thrown if the provider claims token is invalid.
 Synchronous
 
 ```
- 
 // Sample code to get backend token for provider synchronously.
 string username = < username - for -logged - in -provider > ;
 string password = < password - for -logged - in -provider > ;
@@ -233,7 +231,6 @@ try {
 Asynchronous
 
 ```
- 
 // Sample code to get backend token for provider asynchronously.
 string username = < username - for -logged - in -provider > ;
 string password = < password - or -logged - in -provider > ;
@@ -248,8 +245,7 @@ try {
     Console.WriteLine("Backend Token fetched");
 } catch (Exception e) {
     Console.WriteLine("Failed to get backend token");
-}
-		
+}	
 ```
 
 Get User Profile

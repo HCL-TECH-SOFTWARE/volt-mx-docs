@@ -33,7 +33,7 @@ Import the following Libraries:
 ### Sample Code
 
 ```
- // Sample code to register to messaging 
+  // Sample code to register to messaging 
 
 Context context = getApplicationContext();
 String SENDER_ID = < your - project - number - from - google > ;
@@ -43,8 +43,8 @@ String deviceId = Secure.getString(context.getContentResolver(), Secure.ANDROID_
 String ufid = < your - ufid > ;
 
 try {
-    messagingClient = new VoltMXClient().getMessagingService();
-} catch (VoltMXException exception) {
+    messagingClient = new KonyClient().getMessagingService();
+} catch (KonyException exception) {
     Log.d("Exception", exception.getMessage());
 }
 messagingClient.registerInBackground(gcmRegistrationID, UFID, deviceID, new MessagingCallback() {
@@ -98,7 +98,7 @@ Import the following Libraries:
 ### Sample Code
 
 ```
- // Sample code to update the geolocation
+  // Sample code to update the geolocation
 Double latitude = < latitude - value > ;
 Double longitude = < longitude - value > ;
 String locationName = < location - name > ;
@@ -130,7 +130,7 @@ Import the following Libraries:
 ### Sample Code
 
 ```
- // Sample code to get all messagesint startIndex = 0;
+  // Sample code to get all messagesint startIndex = 0;
 int pageSize = 1000;
 messagingClient.fetchAllMessagesInBackground(startIndex, pageSize, new MessageContentCallback() {
     @Override
@@ -186,7 +186,7 @@ Import the following Libraries:
 ### Sample Code
 
 ```
- // Sample code to fetch message content from  Messaging 
+  // Sample code to fetch message content from  Messaging 
 String messageid = < fetch - id - of - the - message > ;
 messagingClient.fetchMessageContentInBackground(messageid, new MessageContentCallback() {
     @Override

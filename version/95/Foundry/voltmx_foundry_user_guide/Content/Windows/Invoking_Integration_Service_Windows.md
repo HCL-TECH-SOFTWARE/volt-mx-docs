@@ -37,7 +37,7 @@ The API throws this exception when not initialized, the claim token is undefined
 ### Example
 
 ```
- // Sample code to fetch the integration service details. VoltMX.VoltMXService integrationSvc;
+ // Sample code to fetch the integration service details. Kony.KonyService integrationSvc;
 var serviceName = < your - service - name > ;
 try {
     integrationSvc = sdkObject.GetIntegrationService(serviceName);
@@ -94,7 +94,7 @@ The **InvokeOperation** method throws this exception when either Name or URL is 
 Asynchronous
 
 ```
- // Sample code to invoke the specified operation asynchronously.// sdk.Object is the SDK object.
+  // Sample code to invoke the specified operation asynchronously.// sdk.Object is the SDK object.
 string serviceName = < your - service - name > ;
 string operationName = < your - operation - name > ;
 Dictionary < string, string > params = new Dictionary < string, string > ();

@@ -17,7 +17,7 @@ Create an instance of MetricsService
 You must initialize the MetricsService class before using any functionality related to analytics of the app built in .NET SDK.
 
 ```
- // Sample code to fetch the metrics service object. VoltMX.MetricsService metricsSvc;
+ // Sample code to fetch the metrics service object. Kony.MetricsService metricsSvc;
 
 try {
     metricsSvc = sdkObject.GetMetricsService();
@@ -207,7 +207,7 @@ JObject metaData = new JObject();
 metaData.Add("formdur", "100");
 try {
     metricsServiceObj.SendEvent(EventType.Custom, eventSubType, formID, widgetID, flowTag, metaData);
-} catch () {}		
+} catch () {}			
 ```
 
 ### SetEventConfig
