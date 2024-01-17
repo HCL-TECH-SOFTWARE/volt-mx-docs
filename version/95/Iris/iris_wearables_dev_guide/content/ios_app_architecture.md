@@ -63,7 +63,7 @@ User Interactions With a Watch App and the Associated Workflow
 --------------------------------------------------------------
 
 *   Interacting with glances(deprecated): Glances can only be tapped. On tapping the glance, the associated watch app will open.
-*   Interacting with notifications: You can interact with notifications by tapping on actions. Actions can be configured to execute the business logic in the foreground or the background. The foreground mode opens the watch application, and the background mode executes the business logic in the phone app.
+*   Interacting with notifications: You can interact with notifications by tapping on actions. Actions can be configured to execute the business logic in the foreground or the background. The foreground mode opens the watch application and the background mode executes the business logic in the phone app.
 *   Interacting with user interface objects in an Apple Watch app: The business logic is executed in the WatchKit Extension.
 
 Guidelines for Executing Business Logic in the Phone Background
