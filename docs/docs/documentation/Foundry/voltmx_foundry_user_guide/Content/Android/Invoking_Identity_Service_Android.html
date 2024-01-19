@@ -1837,16 +1837,16 @@ String providerName = &quot;&lt;your-provider-name&gt;&quot;;
 String username = &quot;&lt;username-for-your-provider&gt;&quot;;
 String password = &quot;&lt;password-for-your-provider&gt;&quot;;
 
-VoltMXClient myClient = new VoltMXClient();
+KonyClient myClient = new KonyClient();
 IdentityService authClient = null;
 try {
     authClient = myClient.getIdentityService(providerName);
-} catch (VoltMXException exception) {
+} catch (KonyException exception) {
     Log.d(&quot;Failure&quot;, exception.getMessage());
 }
 authClient.loginInBackground(username, password, new LoginCallback() {
     @Override
-    public void onSuccess(VoltMXUser user) {
+    public void onSuccess(KonyUser user) {
         Log.d(&quot;Login&quot;, &quot;Success&quot;);       
     }
     @Override       public void onFailure(IdentityServiceException identityServiceException) {
@@ -1869,21 +1869,21 @@ authClient.loginInBackground(username, password, new LoginCallback() {
 <li>com.voltmx.sdk.services.identity.IdentityService</li>
 </ul>
 <h3 id="sample-code_1">Sample Code</h3>
-<pre><code> // Sample code to log in using Oauth/SAML type provider
+<pre><code>  // Sample code to log in using Oauth/SAML type provider
 String providerName = &quot;&lt;your-provider-name&gt;&quot;;
 String loginOptions = {};
 Context context = getApplicationContext();
 Webview webview = (WebView) findViewById(R.id.webview);
-VoltMXClient myClient = new VoltMXClient();
+KonyClient myClient = new KonyClient();
 IdentityService authClient = null;
 try {
     authClient = myClient.getIdentityService(providerName);
-} catch (VoltMXException exception) {
+} catch (KonyException exception) {
     Log.d(&quot;Failure&quot;, exception.getMessage());
 }
 authClient.loginInBackground(context, webview, new WebViewCallback() {
     @Override
-    public void onSuccess(VoltMXUser user) {
+    public void onSuccess(KonyUser user) {
         Log.d(&quot;Login&quot;, &quot;Success&quot;);       
     }
     @Override   
@@ -1891,7 +1891,6 @@ authClient.loginInBackground(context, webview, new WebViewCallback() {
         Log.d(&quot;Login Failure&quot;, identityServiceException.getErrorMessage());
     }
 });
-
 </code></pre>
 <h2 id="custom-oauth-custom-login">Custom OAuth / Custom Login</h2>
 <h3 id="sample-code_2">Sample Code</h3>
@@ -1912,7 +1911,7 @@ authClient.loginInBackground(customTable, new LoginCallback() {
         Log.d(&quot;Login Failure&quot;, identityServiceException.getErrorMessage());
     }
     @Override
-    public void onSuccess(VoltMXUser user) {
+    public void onSuccess(KonyUser user) {
         Log.d(&quot;Login&quot;, &quot;Success&quot;);
     }
 });
@@ -1935,9 +1934,8 @@ String backendtoken = authClient.getBackendToken().toString();
 <li>com.voltmx.sdk.services.identity.IdentityService</li>
 </ul>
 <h3 id="sample-code_4">Sample Code</h3>
-<pre><code>
-// Sample code to get user profile details
-VoltMXUser user = &lt; object - returned - in -login - success - callback &gt; ;
+<pre><code>// Sample code to get user profile details
+KonyUser user = &lt; object - returned - in -login - success - callback &gt; ;
 String firstName = user.getFirstName();
 String lastName = user.getLastName();
 String email = user.getEmail();
