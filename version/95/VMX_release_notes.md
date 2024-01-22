@@ -73,12 +73,12 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 ### V9 Servicepack 5 Fixpack 21
 
-December 11, 2023
+January 23, 2023
 
 #### Iris Enhancements
 
 * Introducing support for the copyBundledRawFileTo API within the Desktop Native channel.
-* Adding the ActiveElement parameter for the onFocus event of the textarea widget.
+* Addded the ActiveElement parameter for the onFocus event of the textarea widget.
 * Supporting setActive method in responsive web.
 * Android 14 support.
 
