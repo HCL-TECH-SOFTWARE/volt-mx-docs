@@ -75,8 +75,14 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 December 11, 2023
 
-There are no new features or enhancements in this release.
-For relevant support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+#### Iris Enhancements
+
+* Introducing support for the copyBundledRawFileTo API within the Desktop Native channel.
+* Adding the ActiveElement parameter for the onFocus event of the textarea widget.
+* Supporting setActive method in responsive web.
+* Android 14 support.
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 
 ### V9 Servicepack 5 Fixpack 20
