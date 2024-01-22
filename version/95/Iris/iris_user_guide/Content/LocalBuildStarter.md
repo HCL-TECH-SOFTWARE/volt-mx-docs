@@ -54,6 +54,7 @@ Prerequisites
     *   If you choose to build an application for the **Android** platform, you must provide the paths of the Android Home and Java Home. To do so, go to **Edit** > **Preferences** > **Build**. Under the Android section, provide the location of the **Android Home** and **Java Home**.
         
         > **_Note:_** On Mac machines, while browsing from Iris Preferences, you can use **Command + Shift +.** to view hidden folders such as the Library, System, etc.
+        <br>From Iris versions 9.2.69/9.5.21 and above, Java Home should point to Java version 11. Java version 8 is no longer supported.<br>(The existing point) On Mac machines, while browsing for Iris Preferences, you can use Command + Shift + . to view hidden folders such as the Library, System, etc.
         
     *   If you choose to build an application for the **Android** platform in **Release mode**, then the Android signing details are mandatory. To do so, go to **Project Settings** > **Native** > **Android Mobile/Tablet**. For more details on Android signing details, click [here](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0083782).
     *   If you choose to build an application for the **Windows** platform, you must ensure that you have [Setup the Development Environment](BuildApplicationsForWindows10.md#development-environment-setup) on your machine, and provide the windows application settings at ****Project Settings** > **Native** > **Windows****. For more details, click [here](Project_Properties_in_VoltMX_Iris.md#windows).
