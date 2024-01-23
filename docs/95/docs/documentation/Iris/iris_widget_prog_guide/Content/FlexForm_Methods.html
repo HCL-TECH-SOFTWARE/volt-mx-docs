@@ -1097,11 +1097,78 @@
     id="__toc"
   />
 
-       
+        
+  <label class="md-nav__link md-nav__link--active" for="__toc">
+    Methods
+    <span class="md-nav__icon md-icon"></span>
+  </label>
+  
   <a href="FlexForm_Methods.html" class="md-nav__link md-nav__link--active">
     Methods
   </a>
 
+    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#syntax" class="md-nav__link">
+    Syntax
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#return-values" class="md-nav__link">
+    Return Values
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#remarks" class="md-nav__link">
+    Remarks
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#platform-availability" class="md-nav__link">
+    Platform Availability
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
   
 </li>
 
@@ -1869,6 +1936,56 @@
   
     
   
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#syntax" class="md-nav__link">
+    Syntax
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#return-values" class="md-nav__link">
+    Return Values
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#remarks" class="md-nav__link">
+    Remarks
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#platform-availability" class="md-nav__link">
+    Platform Availability
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -2802,6 +2919,61 @@ frmHome.myFlxScrlContainer.scrollToWidget(frmHome.myFlxScrlContainer.btnScroll);
 <p><b>Platform Availability</b></p>
 <ul>
 <li>iOS, Android, Windows, and SPA</li>
+</ul>
+<hr />
+</details>
+<details close="close">
+<p><summary>setActive Method</summary></p>
+<hr />
+<p>This method specifies the widget that must be active and brings the widget onto the viewport. Use this method to set the focus on widgets that cannot be brought into focus by using the setFocus method.</p>
+<p><strong><em>Note:</em></strong> For widgets that can be brought into focus by using the setFocus method, the behavior of this method is similar to the <strong>setFocus</strong> method. To set focus on widgets such as Label, FlexContainer, FlexScrollContainer, and others by using the setActive method, you must set the tabIndex attribute of the <strong>accessibilityConfig</strong> property.  </p>
+<p>When you use this method to set a widget as active, the activeStateSkin property and onFocus event configured for the widget are applied to it. <br>
+For the Segment and CollectionView widgets, you can specify the rows that need to be in focus by specifying the rowIndex and itemIndex as an input parameter respectively. If you do not specify an input parameter, the whole widget is set as active.</p>
+<h3 id="syntax">Syntax</h3>
+<pre><code>setActive(rowIndex/itemIndex, sectionIndex, widgetPath)
+</code></pre>
+<h3 id="parameters">Parameters</h3>
+<ul>
+<li>rowIndex [Number] - Optional: Specifies the index of the Segment row that must be in focus.</li>
+<li>itemIndex [Number] - Optional: Specifies the index of the CollectionView item that must be in focus.</li>
+<li>sectionIndex [Number] - Optional: Specifies the index of the Segment section that must be in focus.</li>
+<li>widgetPath [String] - Optional: The widget path is a dot-seperated string that contains the path to the widget (present in a Segment row) from the root to the widget that must be in focus.</li>
+</ul>
+<h3 id="return-values">Return Values</h3>
+<p>None</p>
+<h3 id="remarks">Remarks</h3>
+<ul>
+<li>If a widget is disabled, it cannot be set as active.</li>
+<li>You cannot set the child elements of a Segment, CollectionView, or DataGrid widget as active by using the setActive method.</li>
+<li>The Web Framework provides support for both the setActive and the setFocus methods. However, Temenos recommends that you use only one of the methods for a widget. </li>
+<li>If you set the onFocus Event for a widget that is set as active (by using the setActive method), ensure that you do not make any layout changes in the event callback of the onFocus Event to avoid UI glitches.
+For example, consider the following code:</li>
+</ul>
+<pre><code>this.view.tb.onFocus = function(eventobject) {
+var lbl = new kony.ui.Label({id: &quot;lblTest&quot;});
+this.view.add(lbl);
+this.view.lblTest.text = 'onFocus Button';
+}.bind(this);
+
+//focus on the textbox present at the top of the form
+this.view.tb.setActive();
+</code></pre>
+<p>When the setActive API is invoked on the TextBox widget, the TextBox is marked as active and made visible in the viewport. This makes the scrollbar scroll to the top of the Form where the TextBox widget is present. However, the creation of the Label widget in the callback of the onFocus Event changes the layout, making the scrollbar scroll back to the bottom of the form.</p>
+<h3 id="example">Example</h3>
+<pre><code>//This is a generic method that is applicable for various widgets.
+//Here, we have shown how to use the setActive method for the FlexContainer and Segment
+ widgets.
+//You need to make a corresponding call of the setActive method for other applicable widgets.
+
+//sample code to set the FlexContainer widget as active
+this.view.flx.setActive();
+
+//sample code to set focus on the button present within a component in the third row in first section of a Segment
+this.view.seg.setActive(2,0,&quot;CompWOC.btn1&quot;);
+</code></pre>
+<h3 id="platform-availability">Platform Availability</h3>
+<ul>
+<li>Responsive Web</li>
 </ul>
 <hr />
 </details>
