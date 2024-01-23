@@ -73,7 +73,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 ### V9 Servicepack 5 Fixpack 21
 
-January 23, 2023
+January 23, 2024
 
 #### Iris Enhancements
 
