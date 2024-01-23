@@ -1016,6 +1016,79 @@ Available on iOS and Android.
 * * *
 
 </details>
+<details close markdown="block"><summary>setActive Method</summary>
+
+* * *
+
+This method specifies the widget that must be active and brings the widget onto the viewport. Use this method to set the focus on widgets that cannot be brought into focus by using the setFocus method.
+
+**_Note:_** For widgets that can be brought into focus by using the setFocus method, the behavior of this method is similar to the **setFocus** method. To set focus on widgets such as Label, FlexContainer, FlexScrollContainer, and others by using the setActive method, you must set the tabIndex attribute of the **accessibilityConfig** property.  
+
+When you use this method to set a widget as active, the activeStateSkin property and onFocus event configured for the widget are applied to it. <br>
+For the Segment and CollectionView widgets, you can specify the rows that need to be in focus by specifying the rowIndex and itemIndex as an input parameter respectively. If you do not specify an input parameter, the whole widget is set as active.
+
+### Syntax
+```
+setActive(rowIndex/itemIndex, sectionIndex, widgetPath)
+```
+
+### Parameters
+
+* rowIndex [Number] - Optional: Specifies the index of the Segment row that must be in focus.
+* itemIndex [Number] - Optional: Specifies the index of the CollectionView item that must be in focus.
+* sectionIndex [Number] - Optional: Specifies the index of the Segment section that must be in focus.
+* widgetPath [String] - Optional: The widget path is a dot-seperated string that contains the path to the widget (present in a Segment row) from the root to the widget that must be in focus.
+
+### Return Values
+
+None
+
+### Remarks
+
+* If a widget is disabled, it cannot be set as active.
+* You cannot set the child elements of a Segment, CollectionView, or DataGrid widget as active by using the setActive method.
+* The Web Framework provides support for both the setActive and the setFocus methods. However, Temenos recommends that you use only one of the methods for a widget. 
+* If you set the onFocus Event for a widget that is set as active (by using the setActive method), ensure that you do not make any layout changes in the event callback of the onFocus Event to avoid UI glitches.
+For example, consider the following code:
+
+```
+this.view.tb.onFocus = function(eventobject) {
+var lbl = new kony.ui.Label({id: "lblTest"});
+this.view.add(lbl);
+this.view.lblTest.text = 'onFocus Button';
+}.bind(this);
+
+//focus on the textbox present at the top of the form
+this.view.tb.setActive();
+```
+
+When the setActive API is invoked on the TextBox widget, the TextBox is marked as active and made visible in the viewport. This makes the scrollbar scroll to the top of the Form where the TextBox widget is present. However, the creation of the Label widget in the callback of the onFocus Event changes the layout, making the scrollbar scroll back to the bottom of the form.
+
+
+
+### Example
+
+```
+//This is a generic method that is applicable for various widgets.
+//Here, we have shown how to use the setActive method for the FlexContainer and Segment
+ widgets.
+//You need to make a corresponding call of the setActive method for other applicable widgets.
+
+//sample code to set the FlexContainer widget as active
+this.view.flx.setActive();
+
+//sample code to set focus on the button present within a component in the third row in first section of a Segment
+this.view.seg.setActive(2,0,"CompWOC.btn1");
+```
+
+### Platform Availability
+
+*   Responsive Web
+
+
+* * *
+
+</details>
 <details close markdown="block"><summary>setBadge Method</summary>
 
 * * *
