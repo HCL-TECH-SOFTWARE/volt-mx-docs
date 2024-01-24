@@ -379,7 +379,7 @@
     id="__nav_1_8"
     checked
   />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
 
   <div class="md-nav__link md-nav__link--index">
     <a href="../../voltmxFoundryFundamentals.html"> Foundry </a>
@@ -418,7 +418,7 @@
     id="__nav_1_8_2"
     checked
   />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
 
   <div class="md-nav__link md-nav__link--index">
     <a href="../../installing_foundry.html"> Installing Foundry </a>
@@ -481,7 +481,7 @@
     id="__nav_1_8_2_3"
     
   />
-                                                                                                                          
+                                                                                                                                 
 
   <div class="md-nav__link md-nav__link--index">
     <a href="../../voltmx_foundry_linux_install_guide/Content/Introduction.html"> Volt MX Foundry Installation Guide   - Linux </a>
@@ -862,7 +862,7 @@
     id="__nav_1_8_2_6"
     
   />
-                                                                                                                                                     
+                                                                                                                                                        
 
   <div class="md-nav__link md-nav__link--index">
     <a href="../../voltmx_foundry_windows_install_guide/Content/Introduction.html"> Volt MX Foundry Installation Guide   - Windows </a>
@@ -1537,22 +1537,18 @@
 <ul>
 <li><strong>Windows</strong> - USER_INSTALL_DIR= <code>C:/VoltMXFoundry_cli</code></li>
 <li><strong>Linux</strong> - USER_INSTALL_DIR= <code>/home/VoltMXFoundry_cli</code></li>
-<li>
-<p><strong>INSTALL_LOG_LOCATION</strong>: Location for storage of the logs generated during the execution of a supported action. By default, this is set to the location of the user install directory. You can edit it to point to any other location on the system.</p>
-</li>
-<li>
-<p><strong>Application Server basic inputs</strong>: Following inputs are required for the generation of application related artifacts.</p>
-</li>
-<li><strong>SERVER_CHOICE</strong>: Application servers include JBoss (Standalone/Domain), and WebSphere Liberty profile.</li>
+<li><strong>INSTALL_LOG_LOCATION</strong>: Location for storage of the logs generated during the execution of a supported action. By default, this is set to the location of the user install directory. You can edit it to point to any other location on the system.</li>
 </ul>
-</li>
-</ol>
-<p><code>SERVER\_CHOICE= &lt; appServerType &gt;</code></p>
-<p>The possible values for <appServerType> are: JBoss or WebSphere.</p>
+<p><a id="application_server_basic_inputs"></a>
+2.  <strong>Application Server basic inputs</strong>: Following inputs are required for the generation of application related artifacts.
+*   <strong>SERVER_CHOICE</strong>: Application servers include JBoss (Standalone/Domain), and WebSphere Liberty profile.</p>
+<pre><code>` SERVER_CHOICE= &lt; appServerType &gt; `
+
+The possible values for &lt;appServerType&gt; are: JBoss or WebSphere.
+
+*   **JBossServerType**: In case JBoss is chosen as the application server, the mode in which JBoss is configured needs to be provided. The corresponding valid inputs are either standalone or domain.
+</code></pre>
 <ul>
-<li>
-<p><strong>JBossServerType</strong>: In case JBoss is chosen as the application server, the mode in which JBoss is configured needs to be provided. The corresponding valid inputs are either standalone or domain.</p>
-</li>
 <li>
 <p><strong>FULLY_QUALIFIED_PUBLIC_URL</strong>: Refers to the URL by which Volt Foundry will be accessible post installation. This is an optional field. In case the URL is not provided, it will be derived from the HOST_NAME, HTTP_PORT/HTTPS_PORT properties. This property must be specified in case your Volt Foundry environment setup consists of a load balancer/proxy.</p>
 <p><code>FULLY\_QUALIFIED\_PUBLIC\_URL= &lt;http(s)&gt;://&lt;Fully Qualified Domain Name&gt;:&lt;http(s)port&gt;</code></p>
@@ -1565,20 +1561,17 @@
 </ul>
 </li>
 </ul>
-<p><br></p>
-<ol>
-<li><strong>Application Server management properties</strong>: Following inputs
-    are required for many of the tasks related to actions performed on the application server. For example, fetching of server groups, creation of data sources, and deployment of WARs. These details are also updated in the database and hence, are required to be provided during the execution of database migration scripts.<ul>
-<li><strong>MASTER_IP</strong>: This is the application server host name for either JBoss standalone or WebSphere Liberty. In case of a clustered JBoss or Liberty setup, this would correspond to the domain controller host or the collective controller host respectively</li>
-<li><strong>MASTER_PORT</strong>: This is the native management port in case of JBoss. In case of WebSphere Liberty this would be the HTTPS port of the collective controller or server.</li>
-<li><strong>MASTER_USER</strong>: Application server administrative user.</li>
-<li><strong>MASTER_PASSWORD</strong>: Application server administrative user password.</li>
-<li><strong>USER_INPUT_SERVER_GROUPS</strong>: The value of this property is obtained by executing the <code>get-server-groups</code> task. It is only required for JBoss configured in domain mode. You must provide the user input groups separated by the pipe <strong>|</strong> delimiter.</li>
-</ul>
-</li>
-<li>
-<p><strong>Properties related to the Volt Foundry components</strong>: Following 
-    inputs are required for any action which is related to a Foundry component. For example, the generation of WARs or the execution of database scripts.</p>
+<p><a id="application_server_management_properties"></a>
+3.  <strong>Application Server management properties</strong>: Following inputs
+are required for many of the tasks related to actions performed on the application server. For example, fetching of server groups, creation of data sources, and deployment of WARs. These details are also updated in the database and hence, are required to be provided during the execution of database migration scripts.
+*   <strong>MASTER_IP</strong>: This is the application server host name for either JBoss standalone or WebSphere Liberty. In case of a clustered JBoss or Liberty setup, this would correspond to the domain controller host or the collective controller host respectively
+*   <strong>MASTER_PORT</strong>: This is the native management port in case of JBoss. In case of WebSphere Liberty this would be the HTTPS port of the collective controller or server.
+*   <strong>MASTER_USER</strong>: Application server administrative user.
+*   <strong>MASTER_PASSWORD</strong>: Application server administrative user password.
+*   <strong>USER_INPUT_SERVER_GROUPS</strong>: The value of this property is obtained by executing the <code>get-server-groups</code> task. It is only required for JBoss configured in domain mode. You must provide the user input groups separated by the pipe <strong>|</strong> delimiter.</p>
+<p><a id="properties_related_to_the_volt_foundry_components"></a>
+4.  <strong>Properties related to the Volt Foundry components</strong>: Following 
+inputs are required for any action which is related to a Foundry component. For example, the generation of WARs or the execution of database scripts.</p>
 <p>a.  <strong>Volt Foundry Component selection properties</strong>: The following properties must be set to either true or false. If ALL_COMPONENTS_ENABLED is set to true, the rest of the inputs can be left empty. If ALL_COMPONENTS_ENABLED is set to false then at least one of the following input properties must be set to true.</p>
 <ul>
 <li>ALL_COMPONENTS_ENABLED</li>
@@ -1592,6 +1585,7 @@
 <ul>
 <li><strong>VOLTMX_FOUNDRY_CONSOLE_URL</strong>: This is an optional property that needs to be specified only if API Portal as a component is enabled, and if you want to use a pre-existing Foundry console. For example: http:/foundry.hcl.com:9080/mfconsole.</li>
 </ul>
+<p><a id="database_properties"></a></p>
 <p>c.  <strong>Database Properties</strong>:</p>
 <ul>
 <li>DB_CHOICE : Choice of Database. Valid inputs include MySQL,
@@ -1603,12 +1597,16 @@
 <li>DB_IP : This input corresponds to the database IP address or
     host name.</li>
 <li>DB_PORT : The host port of the database.</li>
-<li>DB_USER : The database user.</li>
+<li>
+<p>DB_USER : The database user.</p>
+<p><strong><em>Note:</em></strong> In case of Oracle, you must provide a user which has the permission for creating users for each of the selected Volt Foundry components. The password for all child users would be same as the parent user password.</p>
+</li>
+<li>
+<p><strong>DB_PASS</strong>: The database user password.</p>
+</li>
 </ul>
-<p>In case of Oracle, you must provide a user which has the permission for creating users for each of the selected Volt Foundry components. The password for all child users would be same as the parent user password.</p>
+<p>d.  <strong>Properties specific to the selected database</strong>:</p>
 <ul>
-<li><strong>DB_PASS</strong>: The database user password.
-    <strong>Properties specific to the selected database</strong>:</li>
 <li><strong>Oracle specific properties</strong>: These input properties include the Oracle service ID and the Oracle tablespace names. In case the tablespace names are left empty, the default tablespace is used. Following are the various Oracle specific input properties.</li>
 <li>ORACLE_SERVICEID</li>
 <li>DATA_TABLESPACE</li>
@@ -1637,19 +1635,20 @@
 <li>Deployment of the generated WAR/EAR files to the application server.</li>
 </ol>
 <p><strong>For WebSphere Liberty</strong>:</p>
-<p>The only supported tasks are execution of database migration scripts ](migrate-db) and generation of application server artifacts (generate-wars). Refer to the <a href="https://docs.voltmx.com/voltmxlibrary/voltmxfoundry/voltmx_foundry_manual_install_guide/Default.md#Foundry_in_WebSphere_Liberty.html">Installer documentation</a> for details on how to setup a complete Volt Foundry environment in WebSphere Application Server Liberty.</p>
+<p>The only supported tasks are execution of database migration scripts ](migrate-db) and generation of application server artifacts (generate-wars). Refer to the <a href="../../voltmx_foundry_manual_install_guide/Content/Foundry_in_WebSphere_Liberty.html">Installer documentation</a> for details on how to setup a complete Volt Foundry environment in WebSphere Application Server Liberty.</p>
 <h3 id="generate-application-server-artifacts">Generate Application Server Artifacts</h3>
 <p>Complete the following actions to generate the application server artifacts:</p>
 <ul>
 <li><a href="#update-userinputs-properties">Update <code>userInputs.properties</code></a></li>
 <li><a href="#execute-command-line-tasks">Execute Command Line Tasks</a></li>
 </ul>
+<p><a id="update_userinputs_properties"></a></p>
 <h4 id="update-userinputsproperties">Update userInputs.properties</h4>
 <ol>
 <li>Specify the following properties to generate the artifacts:<ul>
-<li><a href="#app_basic">Application Server basic inputs</a></li>
-<li><a href="#prop_foundry">Properties related to the Volt Foundry components</a></li>
-<li><a href="#DB_Prop">Database Properties</a></li>
+<li><a href="#application_server_basic_inputs">Application Server basic inputs</a></li>
+<li><a href="#properties_related_to_the_volt_foundry_components">Properties related to the Volt Foundry components</a></li>
+<li><a href="#database_properties">Database Properties</a></li>
 </ul>
 </li>
 </ol>
@@ -1667,8 +1666,8 @@
 </ul>
 <h4 id="update-userinputsproperties_1">Update userInputs.properties</h4>
 <ul>
-<li><a href="#app_basic">Application Server basic inputs</a></li>
-<li><a href="#app_management">Application Server management properties</a></li>
+<li><a href="#application_server_basic_inputs">Application Server basic inputs</a></li>
+<li><a href="#application_server_management_properties">Application Server management properties</a></li>
 </ul>
 <h4 id="execute-command-line-tasks_1">Execute Command Line Tasks</h4>
 <p>Execute the command line task <code>get-server-groups</code> to fetch the server groups associated with the Application Server. The output of this command is used as the value of the <code>USER_INPUT_SERVER_GROUPS</code> input property for the <code>deploy-wars-remote</code> and <code>create-data-sources</code> tasks.</p>
@@ -1682,9 +1681,9 @@
 <h4 id="update-userinputsproperties_2">Update userInputs.properties</h4>
 <p>Provide the following properties as inputs:</p>
 <ul>
-<li><a href="#DB_Prop">Database Properties</a></li>
-<li><a href="#prop_foundry">Properties related to the Volt Foundry components</a></li>
-<li><a href="#app_management">Application Server management properties</a></li>
+<li><a href="#database_properties">Database Properties</a></li>
+<li><a href="#properties_related_to_the_volt_foundry_components">Properties related to the Volt Foundry components</a></li>
+<li><a href="#application_server_management_properties">Application Server management properties</a></li>
 </ul>
 <h4 id="execute-command-line-tasks_2">Execute Command Line Tasks</h4>
 <p>Execute the <code>migrate-db</code> task as follows:</p>
@@ -1701,8 +1700,8 @@
 </ul>
 <h4 id="update-userinputsproperties_3">Update userInputs.properties</h4>
 <ul>
-<li><a href="#app_basic">Application Server basic inputs</a></li>
-<li><a href="#app_management">Application Server management properties</a></li>
+<li><a href="#application_server_basic_inputs">Application Server basic inputs</a></li>
+<li><a href="#application_server_management_properties">Application Server management properties</a></li>
 </ul>
 <h4 id="execute-command-line-tasks_3">Execute Command Line Tasks</h4>
 <p>The WARs generated by the <strong>generate-wars</strong> command must be present in the deployments folder.</p>
@@ -1721,10 +1720,10 @@
 <h4 id="update-userinputsproperties_4">Update userInputs.properties</h4>
 <p>Provide the following properties as inputs:</p>
 <ul>
-<li><a href="#app_basic">Application Server basic inputs</a></li>
-<li><a href="#app_management">Application Server management properties</a></li>
-<li><a href="#prop_foundry">Properties related to the Volt Foundry components</a></li>
-<li><a href="#DB_Prop">Database Properties</a></li>
+<li><a href="#application_server_basic_inputs">Application Server basic inputs</a></li>
+<li><a href="#application_server_management_properties">Application Server management properties</a></li>
+<li><a href="#properties_related_to_the_volt_foundry_components">Properties related to the Volt Foundry components</a></li>
+<li><a href="#database_properties">Database Properties</a></li>
 </ul>
 <h4 id="execute-command-line-tasks_4">Execute Command Line Tasks</h4>
 <p>Creation of data sources requires the prior creation of database schemas. This can be done by <a href="#execute-command-line-tasks">executing the migrate-db command</a>.</p>
