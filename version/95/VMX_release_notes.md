@@ -77,6 +77,7 @@ January 23, 2024
 
 #### Iris Enhancements
 
+* <b>Starting this release, Java configured for Volt Iris should mandatorily be JDK 11. Lower versions are no longer supported. Also, higher versions are not yet certified and may also cause unexpected behavior.</b>
 * Extending the functionality of copyBundledRawFileTo API to  the Native Desktop channel.
 * Updated the onFocus event for the TextArea widget.
 * Extending the functionality of setActive API to Responsive Web.
