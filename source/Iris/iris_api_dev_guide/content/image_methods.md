@@ -107,10 +107,8 @@ Searches for and retrieves and image in the device's gallery of pictures.
 
 <blockquote>
     <em><b>Note: </b></em>
-    <ul>      
-        <li>For Android if the target SDK version is 33 and higher, below media permission is required in tags section under Application tags attributes inside android project settings. <br> 
-        <code> &lt;uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/&gt;</code>
-        </li>
+      <ul>      
+        For Android below permissions are required in IRIS project setting -> Native-> Android Mobile/Tablet -> Tags (Child tag entries under < manifest > tag) depending on the target version<br>If target version is 33 and above below media permission must be added.<br> <li> < uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/> </li>If target version is 34 and above below permission must be added along with other media permissions.<li> < uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED"/></li>For more information about Android 14 behavioral change click <a href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Iris/iris_user_guide/Content/Android14_Behavioral_Changes.html">here</a>, also for understanding other media permissions please refer <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Android13_Behavioral_Changes.html">Android 13.</a>
     </ul>
 </blockquote>
 
@@ -434,9 +432,7 @@ Writes an image to device's media gallery.
 <blockquote>
     <em><b>Note: </b></em>
     <ul>      
-        <li>For Android if the target SDK version is 33 and higher, below media permission is required in tags section under Application tags attributes inside android project settings. <br> 
-        <code> &lt;uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/&gt;</code>
-        </li>
+        For Android below permissions are required in IRIS project setting -> Native-> Android Mobile/Tablet -> Tags (Child tag entries under < manifest > tag) depending on the target version<br>If target version is 33 and above below media permission must be added.<br> <li> < uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/> </li>If target version is 34 and above below permission must be added along with other media permissions.<li> < uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED"/></li>For more information about Android 14 behavioral change click <a href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Iris/iris_user_guide/Content/Android14_Behavioral_Changes.html">here</a>, also for understanding other media permissions please refer <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Android13_Behavioral_Changes.html">Android 13.</a>
     </ul>
 </blockquote>
 

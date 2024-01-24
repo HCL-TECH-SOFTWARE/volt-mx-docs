@@ -4799,7 +4799,7 @@ Some sample use cases include navigation while driving, tracing the path while r
         <li>In the <b>androidbuild.properties</b> file, set the value of the <code>locationListenerType</code> property to <code>always</code>.  
       Appropriate entries are added to the <b>AndroidManifest.xml</b> file depending on the type of the location listener. </li>        
         <li> Enable the <b>Use Google Play Location Services</b> checkbox in the <b>Project Settings</b> > <b>Native</b> > <b>Android</b> section.</li>        
-        <li>For Android if the target SDK version is 33 and higher, below media permission is required in tags section under Application tags attributes inside android project settings to get the notifications.<br>
+        <li>For Android if Target SDK version is 33 and above, below permissions is required in IRIS project setting -> Native-> Android Mobile/Tablet -> Tags (Child tag entries under < manifest > tag)<br>
         <code> &lt;uses-permission android:name="android.permission.POST_NOTIFICATIONS"/&gt;</code>
         </li>
     </ul>
