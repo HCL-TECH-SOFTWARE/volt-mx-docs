@@ -783,7 +783,7 @@ You can view a video on using iPad Popover [here](https://youtu.be/4EKgCANM1TI).
     <em><b>Note: </b></em>
     <ul>      
     For Android below permissions are required in IRIS project setting -> Native-> Android Mobile/Tablet -> Tags (Child tag entries under <manifest> tag) depending on the target version.<br>If target version is 33 and above below media permission must be added.<li> < uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/> </li><li>< uses-permission android:name="android.permission.READ_MEDIA_VIDEO"/></li><li>< uses-permission android:name="android.permission.READ_MEDIA_AUDIO"/><br>If target version is 34 and above below permission must be added along with other media permissions.<li>< uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED"/> </li>
-    Click <a href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Iris/iris_user_guide/Content/Android14_Behavioral_Changes.html">here</a> For more information on Android 14 behavioral change, also for understanding other media permissions please refer Android 13 behavioral change documentation.
+    Click <a href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Iris/iris_user_guide/Content/Android14_Behavioral_Changes.html">here</a> For more information on Android 14 behavioral change, also for understanding other media permissions please refer <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Android13_Behavioral_Changes.html">Android 13.</a>.
 </li>
     </ul>
 </blockquote>
