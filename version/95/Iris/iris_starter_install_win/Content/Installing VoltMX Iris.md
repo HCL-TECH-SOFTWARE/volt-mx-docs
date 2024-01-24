@@ -33,13 +33,10 @@ To install Volt MX Iris, follow these steps:
     > **_Note:_** The Workspace folder contains all your Iris projects.
 
 7.  Click **Next**. The **License Agreement** pane appears.
-8.  Read the License Agreement carefully and if you accept the terms of the agreement, select **I Accept the terms of the License Agreement** option, and then click **Install**.
+8.  Read the License Agreement carefully and if you accept the terms of the agreement, select **I Accept the terms of the License Agreement** option, and then click **Install**. <br>
+    The **Installing Volt MX Iris** page appears, and the installation begins.
 
-The **Installing Volt MX Iris** page appears, and the installation begins.
-
-[![](Resources/Images/Installing.png)](Resources/Images/Installing.png)
-
-<!-- [![](Resources/Images/Installing_thumb_0_288.png)](Resources/Images/Installing.png) -->
+    [![](Resources/Images/Installing.png)](Resources/Images/Installing.png)
 
 11. After the installation is complete, the **Install Complete** pane appears.
 

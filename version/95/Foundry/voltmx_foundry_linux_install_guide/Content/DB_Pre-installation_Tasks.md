@@ -56,7 +56,6 @@ To create Locator or MDSYS schema, follow these steps in option #1 or option #2:
             <figure class="highlight"><code class="language-voltmx" data-lang="voltmx">
                 Create user mdsys identified by secret default tablespace sysaux
             </code></figure>        
-        
         A secret is a dummy password. Provide the password that is used during MDSYS user creation.        
     3.  Run the below SQL to grant the privileges:
             <figure class="highlight"><code class="language-voltmx" data-lang="voltmx">
@@ -66,7 +65,6 @@ To create Locator or MDSYS schema, follow these steps in option #1 or option #2:
             <figure class="highlight"><code class="language-voltmx" data-lang="voltmx">
                 Conn mdsys/secret
             </code></figure>
-        
         A secret is dummy password. Provide the password that is used during MDSYS user creation.        
     5.  Run the below SQL to create the locator objects:
             <figure class="highlight"><code class="language-voltmx" data-lang="voltmx">

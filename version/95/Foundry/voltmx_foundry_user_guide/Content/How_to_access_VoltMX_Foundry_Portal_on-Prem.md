@@ -16,7 +16,10 @@ To access Volt MX Foundry, follow these steps:
 2.  [How to Log In to Volt MX Foundry Console](#how-to-log-in-to-foundry-console)
 
 
-<h2 id="how-to-get-started-with-foundry-console"> How to Get Started With Volt MX Foundry Console</h2>
+<h2 id="how-to-get-started-with-foundry-console"></h2>
+
+How to Get Started With Volt MX Foundry Console
+----------
 
 > **_Note:_** If you have installed Console and Identity Service along with one or more Volt MX Foundry components such as **Integration**, **Engagement** and **Sync** services on **Tomcat** or **JBoss** on a **single node**, you can directly log in to Volt MX Foundry Console as you have already created your super administrator account.<br>  
 While installing Volt MX Foundry components with above combination, the **Administrator Account Configuration** window helps you to configure your super administrator account.
@@ -52,7 +55,9 @@ To launch Volt MX Foundry Console, follow these steps:
     *   Display the **Sign in to your Volt MX Account** page.  
         
 
-<h2 id="how-to-log-in-to-foundry-console">How to Log In to Volt MX Foundry Console</h2>
+<h2 id="how-to-log-in-to-foundry-console"></h2>
+How to Log In to Volt MX Foundry Console
+-----------
 
 If you have configured identity services and created your administrator account (VoltMX Foundry superuser account), you can log in to the Volt MX Foundry console. A superuser will have owner permissions by default.
 
@@ -102,7 +107,10 @@ If you have configured identity services and created your administrator account 
     *   For more information on **Settings**, refer to [Settings](Settings.md#settings-on-premises).
 
 
-<h2>How to View Your Login History</h2>
+<h2></h2>
+How to View Your Login History
+--------------
+
 <p></p>
 <p>You can view the history of your logins to Volt MX Foundry. The history includes both successful and unsuccessful login attempts. The account options menu shows your last successful login. You can access your login activity log by clicking the last successful login in the user account drop-down menu.</p>
 <p>To view the history of logins for your Volt MX Foundry account, do the following:</p>

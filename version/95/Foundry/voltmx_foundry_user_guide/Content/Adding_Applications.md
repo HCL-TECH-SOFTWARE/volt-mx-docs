@@ -11,7 +11,7 @@ To add an app to your Volt MX Foundry, follow these steps:
 2.  Provide your Volt MX account login credentials, and then click **Sign in**. After validating your credentials, you are directed to your Volt MX Foundry cloud account.
 3.  From Volt MX Foundry Console's left pane, click **Apps**. In the right pane, the **Foundry Apps** page appears. By default, the **Foundry Apps** page appears listing existing apps.
     
-    ![](Resources/Images/ConsoleUI_632x291.png)
+    <!-- ![](Resources/Images/ConsoleUI_632x291.png) -->
     
     *   The **Iris Previews** page lists the test live previews that you performed in a particular Cloud account. Volt MX Iris supports the Run Live Preview option that you can use to preview a prototype of your Iris application.  
         For more information on How to user Live Preview in Volt MX Iris, refer [Live Preview](../../../Iris/iris_user_guide/Content/LivePreview.md)
@@ -51,9 +51,9 @@ To add an app to your Volt MX Foundry, follow these steps:
             *   [Objects](Objectservices.md)
             *   [Offline sync](Legacy_Sync.md)
             *   [Engagement](Engagement.md)
-<!--            *   [Logic](Logic.md)-->
-        
-        After you add services to your app, you can also do the following from an app page:
-        
-        *   [Manage Client App Assets](Manage_Client_App_Assets.md)
-        *   [Publish](Publish.md)
+            *   [Logic](Logic_in_Apps.md)  
+
+        *    After you add services to your app, you can also do the following from an app page:
+
+            *   [Manage Client App Assets](Manage_Client_App_Assets.md)
+            *   [Publish](Publish.md)
