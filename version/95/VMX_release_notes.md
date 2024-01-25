@@ -833,7 +833,7 @@ January 28, 2024
 
 #### AppFactory Enhancements
 
-* Added support for Custom data adapter integration service using any Oauth identity provider. Now, The authorization header will be passed to the back-end successfully.
+* Added support for OAuth Identity Providers for Custom Data Adapters.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
