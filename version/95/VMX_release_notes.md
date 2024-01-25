@@ -831,7 +831,7 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ### V9 Servicepack 5 Fixpack 15 Hotfix 7
 January 28, 2024
 
-#### AppFactory Enhancements
+#### Foundry Enhancements
 
 * Added support for OAuth Identity Providers for Custom Data Adapters.
 
