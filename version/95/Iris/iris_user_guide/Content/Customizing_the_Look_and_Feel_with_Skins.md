@@ -41,7 +41,7 @@ Use Default Skins
 
 The default skins allow you to specify common skins for widgets in states like Normal and Focus. Normal state is the default look of the widget, and Focus state occurs when the user touches or clicks the widget in the application. With Volt MX Iris default skins, you can provide a uniform look and feel for the widgets across various platforms.
 
-For example, if you specify btnSkinNormal as the Normal skin for Button in Themes, all the buttons in the application will use btnSkinNormal as the Normal Skin for buttons.
+For example, if you specify `btnSkinNormal` as the Normal skin for Button in Themes, all the buttons in the application will use btnSkinNormal as the Normal Skin for buttons.
 
 Though the Application themes define a common skin for a particular widget across the application, you can still specify a different skin for a widget by selecting a different skin under the widget properties.
 
