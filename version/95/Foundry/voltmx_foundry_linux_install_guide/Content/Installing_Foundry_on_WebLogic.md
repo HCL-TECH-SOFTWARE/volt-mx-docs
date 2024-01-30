@@ -1,6 +1,6 @@
 
 
-# Installing Volt MX on WebLogic - Console-mode
+# Installing Volt Foundry on WebLogic - Console-mode
 
 
 > **_Note:_** If a user installs Volt MX Console on a partition different from the user's home directory, the user must have read/write execute permissions.
@@ -24,11 +24,11 @@ Execute the following command to switch to the user that you created.<br>
 </li>
 <li>Press <b>Enter</b>. The system prompt you to enter the password.</li>
 <li>Enter the password, and press <b>Enter</b>.</li>
-<li>Unzip the <code>VoltMXFoundrySetup.tar.gz</code> file, and navigate to the folder <em><b>VoltMXFoundry_Installer_Linux</b></em>.</li>
+<li>Unzip the <code>VoltFoundrySetup.tar.gz</code> file, and navigate to the folder <em><b>VoltFoundry_Installer_Linux</b></em>.</li>
 <li>
-Start the <b>./VoltMXFoundryInstaller-x.x.x.x_GA.bin</b> file by executing the following command:
+Start the <b>./VoltFoundryInstaller-x.x.x.x_GA.bin</b> file by executing the following command:
 <pre><code>
-[foundry@foundrytest12 VoltMXFoundry_Installer_Linux]$ ./VoltMXFoundryInstaller-9.5.15.0_GA.bin
+[foundry@foundrytest12 VoltFoundry_Installer_Linux]$ ./VoltFoundryInstaller-9.5.15.0_GA.bin
 Preparing to install
 Extracting the JRE from the installer archive...
 Unpacking the JRE...
@@ -497,7 +497,7 @@ ENTER A COMMA-SEPARATED LIST OF NUMBERS REPRESENTING THE DESIRED CHOICES, OR
 <li><b>Integration Services</b> - To install Volt MX Integration, type 3 and press <b>Enter</b>.  
         The system creates the following databases: <code>voltmxadmindb</code>  and  <code>mfreportsdb</code>.</li>
 <li><b>API Developer Portal</b> - To install developer portal, type 4 and press <b>Enter</b>. 
-<blockquote><em><b>Note:</b></em> During installation if you have selected <b>API Developer Portal</b>, the <b>API Developer Portal</b> is created. You can directly access your <a href="../../../Foundry/voltmx_foundry_user_guide/Content/VoltMXDevPortal.html">VoltMX Developer Portal</a> in Volt MX Foundry Console.</blockquote>
+<blockquote><em><b>Note:</b></em> During installation if you have selected <b>API Developer Portal</b>, the <b>API Developer Portal</b> is created. You can directly access your <a href="../../../Foundry/voltmx_foundry_user_guide/Content/VoltMXDevPortal.html">VoltMX Developer Portal</a> in Volt Foundry Console.</blockquote>
 </li>
 <li><b>Engagement Services</b> - To install Volt MX Engagement Services, type 5 and press <b>Enter</b>. The system creates the following database: <code>&lt;prefix&gt;kpnsdb&lt;suffix&gt;</code>.</li>
 </ul>
@@ -533,7 +533,7 @@ Please choose a destination folder for this installation. The installation
 path should not contain any special characters.
 
 
-Default Install Folder: /home/foundry/VoltMXFoundryInstaller-GA-9.5.15.0
+Default Install Folder: /home/foundry/VoltFoundryInstaller-GA-9.5.15.0
 
 ENTER AN ABSOLUTE PATH, OR PRESS &lt;ENTER&gt; TO ACCEPT THE DEFAULT
 :
@@ -567,14 +567,14 @@ Application Server Details
 
 Please enter the details of your existing WebLogic server.
 
-Fully Qualified Public URL of Volt Foundry (Default: ): http://bifrost.fnxlabs.com:7001/console
+Fully Qualified Public URL of Volt Foundry (Default: ): **************
 
 Hostname/IP Address of WebLogic Administration Server (Default:
-   foundrytest12.fnxlabs.com): bifrost.fnxlabs.com
+   **************): **************
 
-WebLogic Administration Port (Default: 7001):
+WebLogic Administration Port (Default: **************):
 
-WebLogic Administration Server User (Default: weblogic):
+WebLogic Administration Server User (Default: **************):
 </code></pre>
 <ol>
 <li>
@@ -668,9 +668,9 @@ Please enter MySQL database server details.
 
 Database Server Hostname/IP (Default: localhost): foundrytest21.fnxlabs.com
 
-Port (Default: 3306): 3309
+Port (Default: *************** ): ************
 
-Username (Default: ): dbclient
+Username (Default: ): ***************
 
 ===============================================================================
 Password for Database User
@@ -693,7 +693,7 @@ Database name prefix and suffix
 
 Please enter database name prefix and suffix.
 
-If prefix is VoltMX and suffix is 1 then database names will be VoltMXXXXXX1.
+If prefix is VoltMX and suffix is 1 then database names will be ***************.
 
 Please provide existing Prefix and Suffix if you intend to upgrade to the new
 Volt Foundry Database
@@ -717,7 +717,7 @@ Perform the following steps to complete pre-requisites before continuing with
 installation :-
 
 1. Copy the mysql-connector-java-8.0.30.jar from your Volt Foundry
-Installation folder - /home/foundry/VoltMXFoundryInstaller-GA-9.5.15.0
+Installation folder - /home/foundry/VoltFoundryInstaller-GA-9.5.15.0
 location.
 2. Paste the mysql-connector-java-8.0.30.jar into the &lt;WL_HOME&gt;/server/lib
 folder
@@ -791,11 +791,11 @@ Please enter Oracle database server details.
 
 Database Server Hostname/IP (Default: localhost): foundrytest2.fnxlabs.com
 
-Port (Default: 1521):
+Port (Default: xxxx ):   xxxxxxxxxxxxxx
 
-Service ID / Service Name (Default: ): dbclient
+Service ID / Service Name (Default: ): xxxxxxxxxxxxxx
 
-System Username (Default: ): foundry
+System Username (Default: ): xxxxxxxxxxxxxx
 
 
 
@@ -838,7 +838,7 @@ Database name prefix and suffix
 
 Please enter database name prefix and suffix.
 
-If prefix is VoltMX and suffix is 1 then database names will be VoltMXXXXXX1.
+If prefix is xxxx and suffix is 1 then database names will be xxxxxxxxxxxxxx.
 
 Please provide existing Prefix and Suffix if you intend to upgrade to the new
 Volt Foundry Database
@@ -863,7 +863,7 @@ Perform the following steps to complete pre-requisites before continuing with
 installation :-
 
 1. Copy the ojdbc11.jar from your Volt Foundry Installation folder -
-/home/foundry/VoltMXFoundryInstaller-GA-9.5.15.0 location.
+/home/foundry/VoltFoundryInstaller-GA-9.5.15.0 location.
 2. Paste the ojdbc11.jar into the &lt;WL_HOME&gt;/server/lib folder
 3. Go to the &lt;WL_HOME&gt;/user_projects/domains/base_domain/bin and edit the
 startWeblogic script file.
@@ -950,7 +950,7 @@ Ask for the Tablespaces
 
 Please enter the names of the Tablespaces
 
-Data Tablespace (Default: ): Volt123
+Data Tablespace (Default: ): xxxxxxxxxxxxxx
 Index Tablespace (Default: ):
 LOB Table Space (Default: ):
 </code></pre>
@@ -991,11 +991,11 @@ Please enter SQL Server database server details.
 
 Database Server Hostname/IP (Default: localhost): foundrytest20.fnxlabs.com
 
-Port (Default: 1433):
+Port (Default: xxxx):
 
-Username (Default: ): sa
+Username (Default: ): xxxxxxxxxxxxxx
 
-Instance Name (Optional) (Default: ): MSSQLEXPRESS
+Instance Name (Optional) (Default: ): xxxxxxxxxxxxxx
 
 </code></pre> 
     <ol>
@@ -1088,7 +1088,7 @@ Perform the following steps to complete pre-requisites before continuing with
 installation :-
 
 1. Copy the mssql-jdbc-12.2.0.jre11.jar from your Volt Foundry Installation
-folder - /home/foundry/VoltMXFoundryInstaller-GA-9.5.15.0 location.
+folder - /home/foundry/VoltFoundryInstaller-GA-9.5.15.0 location.
 2. Paste the mssql-jdbc-12.2.0.jre11.jar into the &lt;WL_HOME&gt;/server/lib folder
 3. Go to the &lt;WL_HOME&gt;/user_projects/domains/base_domain/bin and edit the
 startWeblogic script file.
@@ -1144,22 +1144,22 @@ Install Components:
     Console, Developer Portal, Identity Services, Integration Services and Engagement Services
 
 Install Folder:
-    /home/foundry/VoltMXFoundryInstaller-GA-9.5.15.0
+    /home/foundry/VoltFoundryInstaller-GA-9.5.15.0
 
 Application Server:
     WebLogic 14c (14.1.1.0)
 
 Application Server Details:
-    Hostname/IP Address: bifrost.fnxlabs.com, Port: 7001, User: weblogic
+    Hostname/IP Address: xxxxxxxxxxxxxx, Port: xxxx, User: xxxxxx
 
 Database Choice:
-    SQL Server 2019
+    SQL Server xxxx
 
 Database Details:
-    Hostname/IP Address: foundrytest20.fnxlabs.com, User: sa, Instance Name: MSSQLEXPRESS, Port: 1433
+    Hostname/IP Address: xxxxxxxxxxx, User: xxxxxx, Instance Name: xxxxxxxxx, Port: xxxx
 
 Database Names:
-    Tes_idconfigdb_t, Tes_mfconsoledb_t, Tes_mfaccountsdb_t, Tes_mfreportsdb_t, Tes_admindb_t and Tes_kpnsdb_t
+    xxxxxxxx, xxxxxxxx, xxxxxxxx, xxxxxxxx, xxxxxxxx and xxxxxxxx
 
 PRESS &lt;ENTER&gt; TO CONTINUE:
 </code></pre>
@@ -1204,7 +1204,7 @@ Identity Service URL: https://00.00.00.00:port/authService
 Integration Service URL: https://00.00.00.00:port/admin
 Engagement Services URL: http://00.00.00.000:port/kpns
 
-PRESS <ENTER\> TO EXIT THE INSTALLER: [user1@cnt6-01c downloads]$
+PRESS <ENTER\> TO EXIT THE INSTALLER: [xxxxxxxxx downloads]$
 </code></pre>
 </li>
 <li>Press Enter to complete the installation. After the installation is completed, the installer creates logs in the install folder.
@@ -1214,6 +1214,6 @@ PRESS <ENTER\> TO EXIT THE INSTALLER: [user1@cnt6-01c downloads]$
 </li>
 </ol>
 
-> **_Note:_** You can now access Volt MX Foundry Console by using the URLs. For more details, refer to [Accessing Volt MX Foundry Console - On-premises](../../../Foundry/voltmx_foundry_user_guide/Content/How_to_access_VoltMX_Foundry_Portal_on-Prem.md).  
-During installation if you have configured your super administrator account, you can directly [log in to Volt MX Foundry Console](../../../Foundry/voltmx_foundry_user_guide/Content/How_to_access_VoltMX_Foundry_Portal_on-Prem.md) by using the Console URL.
+> **_Note:_** You can now access Volt Foundry Console by using the URLs. For more details, refer to [Accessing Volt Foundry Console - On-premises](../../../Foundry/voltmx_foundry_user_guide/Content/How_to_access_VoltMX_Foundry_Portal_on-Prem.md).  
+During installation if you have configured your super administrator account, you can directly [log in to Volt Foundry Console](../../../Foundry/voltmx_foundry_user_guide/Content/How_to_access_VoltMX_Foundry_Portal_on-Prem.md) by using the Console URL.
 

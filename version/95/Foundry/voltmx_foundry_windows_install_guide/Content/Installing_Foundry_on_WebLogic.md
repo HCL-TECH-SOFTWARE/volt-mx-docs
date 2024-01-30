@@ -1,16 +1,16 @@
 
 
-# Installing Volt MX Foundry on WebLogic
+# Installing Volt Foundry on WebLogic
 
-This section of the document provides you with the instructions for installing and configuring Volt MX Foundry components.
+This section of the document provides you with the instructions for installing and configuring Volt Foundry components.
 
 > **_Important:_** You need the required hardware and access to the supporting software as mentioned in the [Prerequisites](Prerequisites.md) section and must perform the steps noted in the [Pre-installation Tasks](Pre-installation_Tasks.md) section.
 
-Ensure that you have proper administrative rights to install Volt MX Foundry on your computer.
+Ensure that you have proper administrative rights to install Volt Foundry on your computer.
 
 The **<Install Location\>** directory contains the log files documenting each invocation of the installer or uninstaller. To make problem identification easier, provide these log files to Volt MX when reporting an issue.
 
-<a name="Install_Step1"></a>To install Volt MX Foundry on WebLogic using the installer, follow these steps:
+<a name="Install_Step1"></a>To install Volt Foundry on WebLogic using the installer, follow these steps:
 
 1.  Unzip the `VoltMXFoundrySetup.zip` file.
 2.  Double-click `VoltMXFoundryInstaller-x.x.x.x_GA.exe` to launch the installer.  
@@ -18,12 +18,12 @@ The **<Install Location\>** directory contains the log files documenting each in
 
     ![](Resources/Images/Weblogic_1.png)
 
-    A dialog with the Volt MX Foundry logo appears.
+    A dialog with the Volt Foundry logo appears.
 
     ![](Resources/Images/Weblogic_2.png)
 
-3.  The **Welcome to Volt MX Foundry** windows appears.  
-    Read the instructions carefully before installing Volt MX Foundry Console.
+3.  The **Welcome to Volt Foundry** windows appears.  
+    Read the instructions carefully before installing Volt Foundry Console.
 
     ![](Resources/Images/Weblogic_3.png)
 
@@ -46,23 +46,23 @@ The **<Install Location\>** directory contains the log files documenting each in
     ![](Resources/Images/Weblogic_5.png)
 
 7.  Choose one of the appropriate install type based on your license - for example, Development, Non-Production, or Production.
-8.  Select the **Send usage data anonymously** check box. Allows Volt MX to collect product usage information to make your Volt MX Foundry experience better. Volt MX does not save any of your private or application data. By default this check box is selected.
+8.  Select the **Send usage data anonymously** check box. Allows Volt MX to collect product usage information to make your Volt Foundry experience better. Volt MX does not save any of your private or application data. By default this check box is selected.
 9.  <a name="ComponentsDBs"></a>Click **Next**. <a name="InstallComponents"></a>The **Choose components to install** window appears.
 
     ![](Resources/Images/Weblogic_6.png)
 
 10.  Select one or more check boxes for the supported components. By default, the **Console**, **Identity Services**, **Integration Services**, **Developer Portal**, and **Engagement Services** check boxes are selected:
-    *   **Console** - To install Volt MX Foundry Console, select the **Console** check box.  
+    *   **Console** - To install Volt Foundry Console, select the **Console** check box.  
         The system creates the following databases: `<prefix>mfconsoledb<suffix>`, `<prefix>mfaccountsdb<suffix>`, and  `<prefix>mfreportsdb<suffix>`.
     *   **Identity Services** - To install Volt MX Identity Services, select the **Identity Services** check box.  
         The system creates the following database: `<prefix>idconfigdb<suffix>`.
-    *   **Integration Services** - To install Volt MX Foundry Integration Services, select the **Integration Services** check box.  
+    *   **Integration Services** - To install Volt Foundry Integration Services, select the **Integration Services** check box.  
         The system creates the following databases: `voltmxadmindb`  and  `mfreportsdb`.
     *   **API Developer Portal** - To install developer portal, select the **API Developer Portal** check box.  
 
-        > **_Note:_** During installation if you have selected **API Developer Portal**, the **API Developer Portal** is created. You can directly access your [VoltMX Developer Portal](../../../Foundry/voltmx_foundry_user_guide/Content/VoltMXDevPortal.md) in Volt MX Foundry Console.
+        > **_Note:_** During installation if you have selected **API Developer Portal**, the **API Developer Portal** is created. You can directly access your [VoltMX Developer Portal](../../../Foundry/voltmx_foundry_user_guide/Content/VoltMXDevPortal.md) in Volt Foundry Console.
 
-    *   **Engagement Services** - To install Volt MX Foundry Engagement Services, select the **Engagement Services** check box.  
+    *   **Engagement Services** - To install Volt Foundry Engagement Services, select the **Engagement Services** check box.  
         The system creates the following database: `<prefix>kpnsdb<suffix>`.
 
 
@@ -72,7 +72,7 @@ The **<Install Location\>** directory contains the log files documenting each in
 
 The reports database is used for configuring reports.
 
-The Installer creates the `mfreportsdb` if you are installing the following Volt MX Foundry components:
+The Installer creates the `mfreportsdb` if you are installing the following Volt Foundry components:
 
 *   **Console** without Integration Services (with or without Engagement Services)
 *   **Console** and **Integration Services** (with or without Engagement Services)
@@ -108,7 +108,7 @@ Refer to [creating a reports database, for example, **<prefix\>mfreports<suffix\
 
          ![](Resources/Images/Weblogic_9.png)
 
-        *   **Fully Qualified Public URL of Volt MX Foundry Console**:  Enter load balancer URL to use public communication.
+        *   **Fully Qualified Public URL of Volt Foundry Console**:  Enter load balancer URL to use public communication.
 
         *   **Hostname/IP Address of WebLogic Administrator Server**: Enter IP Address/Hostname of the WebLogic Administrator Server.  
 
@@ -118,7 +118,7 @@ Refer to [creating a reports database, for example, **<prefix\>mfreports<suffix\
         *   **WebLogic Administrator Server User Password**: Enter the log-in password for WebLogic Administrator Server.  
 
      2.  Click **Next**. The **Server Groups** window appears.  
-        A WebLogic Server group consists of multiple server instances that run simultaneously on the same machine or on different machines. Volt MX Foundry supports **WebLogic Servers** and **WebLogic Clusters**.
+        A WebLogic Server group consists of multiple server instances that run simultaneously on the same machine or on different machines. Volt Foundry supports **WebLogic Servers** and **WebLogic Clusters**.
 
          ![](Resources/Images/Weblogic_10.png)
 
@@ -127,15 +127,15 @@ Refer to [creating a reports database, for example, **<prefix\>mfreports<suffix\
          ![](Resources/Images/Weblogic_11.png)
 
      4.  <a name="WebLogic_SQL_Jar"></a>Click **Next**. The following screen appears for WebLogic connector Jar.
-        *   **MS SQL**: If you want to install Volt MX Foundry on WebLogic with MS SQL, you must place the SQL connector jar ( `mssql-jdbc-7.2.2.jre11.jar` ) in the WebLogic Server path.
+        *   **MS SQL**: If you want to install Volt Foundry on WebLogic with MS SQL, you must place the SQL connector jar ( `mssql-jdbc-7.2.2.jre11.jar` ) in the WebLogic Server path.
 
             For more details, follow the below steps:            
 
-            To use Volt MX Foundry with WebLogic Server in combination with MS SQL database, place the SQL connector jar (mssql-jdbc-7.2.2.jre11.jar) in the WebLogic Server.
+            To use Volt Foundry with WebLogic Server in combination with MS SQL database, place the SQL connector jar (mssql-jdbc-7.2.2.jre11.jar) in the WebLogic Server.
 
             Perform the following steps to complete pre-requisites before continuing with installation :
 
-            1.   Copy the mssql-jdbc-7.2.2.jre11.jar from your Volt MX Foundry Installation folder.
+            1.   Copy the mssql-jdbc-7.2.2.jre11.jar from your Volt Foundry Installation folder.
             2.   Paste the mssql-jdbc-7.2.2.jre11.jar into the `<WL_HOME\>/server/lib` folder
             3.   Go to the `<WL_HOME\>/user_projects/domains/base_domain/bin` and edit the startWeblogic script file.
 
@@ -153,13 +153,13 @@ Refer to [creating a reports database, for example, **<prefix\>mfreports<suffix\
                 ![](Resources/Images/Weblogic_17.png)
 
         
-        *   **Oracle**: To use Volt MX Foundry with WebLogic Server in combination with Oracle database, you must place the Oracle connector jar (ojdbc8.jar) in the WebLogic Server path.
+        *   **Oracle**: To use Volt Foundry with WebLogic Server in combination with Oracle database, you must place the Oracle connector jar (ojdbc8.jar) in the WebLogic Server path.
 
             For more details, follow the steps in the below:
 
             Perform the following steps to complete pre-requisites before continuing with installation :
 
-            1.  Copy the ojdbc8.jar from your Volt MX Foundry Installation folder.
+            1.  Copy the ojdbc8.jar from your Volt Foundry Installation folder.
             2.  Paste the ojdbc8.jar into the `<WL_HOME\>/server/lib` folder
             3.  Go to the `<WL_HOME\>/user_projects/domains/base_domain/bin` and edit the startWeblogic script file.
 
@@ -176,13 +176,13 @@ Refer to [creating a reports database, for example, **<prefix\>mfreports<suffix\
                 ![](Resources/Images/Weblogic_18.png)
 
             
-        *   **MySQL**: To use Volt MX Foundry with WebLogic Server in combination with MySQL database, you must place the MySQL connector jar (mysql-connector-java-8.0.12.jar) in the WebLogic Server path.
+        *   **MySQL**: To use Volt Foundry with WebLogic Server in combination with MySQL database, you must place the MySQL connector jar (mysql-connector-java-8.0.12.jar) in the WebLogic Server path.
 
             For more details, follow the steps in the below
 
             Perform the following steps to complete pre-requisites before continuing with installation :
 
-            1.  Copy the mysql-connector-java-8.0.12.jar from your Volt MX Foundry Installation folder.
+            1.  Copy the mysql-connector-java-8.0.12.jar from your Volt Foundry Installation folder.
             2.  Paste the mysql-connector-java-8.0.12.jar into the `<WL_HOME\>/server/lib` folder
             3.  Go to the `<WL_HOME\>/user_projects/domains/base_domain/bin` and edit the startWeblogic script file.
                 <pre class="prettyprint prettyprinted" style=""><span class="typ">For</span> <span class="pln"></span> <span class="typ">Windows</span><span class="pun">:</span> <span class="pln">startWeblogic</span><span class="pun">.</span><span class="pln">cmd</span></pre>
@@ -207,7 +207,7 @@ Refer to [creating a reports database, for example, **<prefix\>mfreports<suffix\
 
          ![](Resources/Images/Weblogic_13.png)
 
-        *   **Database Server Hostname/IP**: Enter the DB server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
+        *   **Database Server Hostname/IP**: Enter the DB server Hostname/IP to be used to create a database of selected components of Volt Foundry. By default, the server Hostname/IP is set as localhost.
         *   **Database Port**: Enter the database port of the MySQL Server. By default, this field is set to 3306 for MySQL.
         *   **Database User**: Enter the user name used while creating the database user - for example, dbclient.
         *   **Database Password**: Enter the user password used while creating the database user.
@@ -218,7 +218,7 @@ Refer to [creating a reports database, for example, **<prefix\>mfreports<suffix\
 
         ![](Resources/Images/Weblogic_14.png)
 
-        *   **Database Server Hostname/IP**: Enter the DB server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
+        *   **Database Server Hostname/IP**: Enter the DB server Hostname/IP to be used to create a database of selected components of Volt Foundry. By default, the server Hostname/IP is set as localhost.
         *   **Database Port**: Enter the database port of the Oracle Server. By default, this field is set to 1521 for oracle.
         *   **Service ID / Service Name:** Enter Oracle service ID or service name. Service ID is unique alias given to an instance name of Oracle DB.
         *   <a name="tablespace"></a>Select the tablespace for Oracle database:
@@ -250,7 +250,7 @@ Refer to [creating a reports database, for example, **<prefix\>mfreports<suffix\
        <span class="autonumber"><span>**<span style="color: #293276;" class="mcFormatColor">Note:</span> **</span></span>If you choose to enable Windows Authentication support on SQL Server, you do not need to provide the **Database System User** and **Database System Password**.
 
 
-       *   **Database Server Hostname/IP**: Enter the DB server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
+       *   **Database Server Hostname/IP**: Enter the DB server Hostname/IP to be used to create a database of selected components of Volt Foundry. By default, the server Hostname/IP is set as localhost.
 
        *   **Database Port**: Enter the database port of the SQL Server. By default, this field is set to 1433 for SQL.
 
@@ -274,7 +274,7 @@ Refer to [creating a reports database, for example, **<prefix\>mfreports<suffix\
 
     ![](Resources/Images/DBexist.png)
 
-    <span class="autonumber"><span>**<span style="color: #293276;" class="mcFormatColor">Note:</span> **</span></span>If you are installing Volt MX Foundry V9 ServicePack 2 on an application server using the existing database and in case if there is a change in server details, you must update the `management_server` details in the `admin` database with the application server instance details for the WebAapp publish to work. You must update the following fields in the `server_configuration` table of the **admin DB**:  
+    <span class="autonumber"><span>**<span style="color: #293276;" class="mcFormatColor">Note:</span> **</span></span>If you are installing Volt Foundry V9 ServicePack 2 on an application server using the existing database and in case if there is a change in server details, you must update the `management_server` details in the `admin` database with the application server instance details for the WebAapp publish to work. You must update the following fields in the `server_configuration` table of the **admin DB**:  
 
     - management_server_host_name <application_instance hostname\>
     - management_server_port <soap port of application_instance\>
@@ -283,11 +283,11 @@ Refer to [creating a reports database, for example, **<prefix\>mfreports<suffix\
     - management_server_groups <application_instance groups details\>
 
 20.  Enter the databases details, and click **Next**. The **Pre-Installation Summary** window appears.
-21.  Click **Install**. The **Installing Volt MX Foundry** window appears.
+21.  Click **Install**. The **Installing Volt Foundry** window appears.
 
      ![](Resources/Images/Installing.png)
 
-     <span class="autonumber"><span>**<span style="color: #293276;" class="mcFormatColor">Note:</span> **</span></span> Sometimes, even after showing 100% installation progress, Volt MX Foundry Installer takes around 20 more minutes to complete installation on Windows.
+     <span class="autonumber"><span>**<span style="color: #293276;" class="mcFormatColor">Note:</span> **</span></span> Sometimes, even after showing 100% installation progress, Volt Foundry Installer takes around 20 more minutes to complete installation on Windows.
 
      Once the installation completes, the **Install Complete** window appears with the confirmation message.
 
@@ -295,7 +295,7 @@ Refer to [creating a reports database, for example, **<prefix\>mfreports<suffix\
 
 22.  <a name="Install_Step16"></a>Click **Done** to close the window.
 
-     > **_Note:_** You can now access Volt MX Foundry Console by using the URLs. For more details, refer to [Accessing Volt MX Foundry Console - On-premises](../../../Foundry/voltmx_foundry_user_guide/Content/How_to_access_VoltMX_Foundry_Portal_on-Prem.md).  
+     > **_Note:_** You can now access Volt Foundry Console by using the URLs. For more details, refer to [Accessing Volt Foundry Console - On-premises](../../../Foundry/voltmx_foundry_user_guide/Content/How_to_access_VoltMX_Foundry_Portal_on-Prem.md).  
       
-     During installation if you have configured your super administrator account, you can directly [log in to Volt MX Foundry Console](../../../Foundry/voltmx_foundry_user_guide/Content/How_to_access_VoltMX_Foundry_Portal_on-Prem.md) by using the Console URL.
+     During installation if you have configured your super administrator account, you can directly [log in to Volt Foundry Console](../../../Foundry/voltmx_foundry_user_guide/Content/How_to_access_VoltMX_Foundry_Portal_on-Prem.md) by using the Console URL.
 
