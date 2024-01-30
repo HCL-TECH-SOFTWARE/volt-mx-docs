@@ -829,7 +829,7 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ## Volt Foundry
 
 ### V9 Servicepack 5 Fixpack 15 Hotfix 7
-January 28, 2024
+January 29, 2024
 
 #### Foundry Enhancements
 
