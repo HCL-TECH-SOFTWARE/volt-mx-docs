@@ -14,11 +14,6 @@ To configure a screen for both portrait and landscape orientations, do the follo
 
     ![](Resources/Images/FormOrientationBoth.png)
 
-4.  Click a child widget on the form, and then click its **Look** tab on the Properties pane. Two buttons are located at the top of the tab: Portrait and Landscape.
-
-     ![](Resources/Images/FormOrientationBothBtns.png)
-
-5.  Click the orientation button that you want to configure the widget for.
 6.  Change the orientation of the screen on the Iris Canvas by clicking the **Orientation** toggle button. When you click this button, the orientation selected on the **Look** tab changes to match it.
 
      ![](Resources/Images/ToggleOrientation.png)
