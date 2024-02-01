@@ -1,23 +1,24 @@
-# Support for OData Methods
+                             
 
-## Support for ODATA Methods (substringof and indexof)
+Support for ODATA Methods (substringof and indexof)
+---------------------------------------------------
 
 A URL with a $filter query (for RDBMS/ business adapter) identifies a subset of the entries from the collection of entries identified by the expression of the URL. The subset is determined by selecting only the entries that satisfy the predicate expression specified by the query option.
 
 ```
-$filter=expression
+ $filter=expression
 ```
 
 The expression language that is used in $filter operators are limited across business adapters. The values can be strings enclosed in single quotes, numbers, Boolean values (such as true or false), and nested values.
 
-$filter for RDBMS connector supports the following string methods from release V8 SP4.
+$filter for RDBMS connector supports the following string methods.
 
-*   startswith
-*   endswith
-*   tolower
-*   toupper
-*   substringof
-*   in
+*   ODATA V2 Methods
+
+*   ODATA V4 Methods
+
+ODATA V2 Methods
+---------
 
 ### startswith
 
@@ -26,113 +27,188 @@ This string function filters all the records that starts with doe in the lastnam
 **API Usage**
 
 ```
-$filter=startswith('colname', 'expression') eq [true|false]
+ $filter=startswith('colname', 'expression') eq [true|false]
 ```
 
 Example
 
 ```
-startswith('lastname','doe') eq true
+ startswith('lastname','doe') eq true
 ```
 
-### endswith
-
+endswith
+--------
 
 This string function filters all the records that ends with `hon` in `firstname` column of the table.
 
 API Usage
 
 ```
-$filter=endswith('colname', 'expression') eq [true|false]
+ $filter=endswith('colname', 'expression') eq [true|false]
 ```
 
 Example
 
 ```
-endswith('firstname', 'hon') eq true
+ endswith('firstname', 'hon') eq true
 ```
 
-### substringof
+substringof
+-----------
 
 This string function filters all the records that contain with `gmail` in `email` column of the table.
 
 API Usage
-```
-$filter=substringof('colname', 'expression') eq [true|false]
-```
 
+```
+ $filter=substringof('colname', 'expression') eq [true|false]
+```
 
 Example
 
 ```
-substringof('email', 'gmail') eq true
+ substringof('email', 'gmail') eq true
 ```
 
-
-### tolower
+tolower
+-------
 
 The string filters all the records by matching the exact value with all the values present in the column after changing them to lower case.
 
 API Usage
 
 ```
-$filter=tolower('colname') eq 'value'
+ $filter=tolower('colname') eq 'value'
 ```
 
 Example
 
 ```
-$filter=tolower('name') eq 'alfreds futterkiste'
+ $filter=tolower('name') eq 'alfreds futterkiste'
 ```
 
-### toupper
+toupper
+-------
 
 This string function filters all the records by matching the exact value with all the values present in the column after changing them to uppercase.
 
 API Usage
 
 ```
-$filter=toupper('colname') eq 'value'
+ $filter=toupper('colname') eq 'value'
 ```
 
 Example
 
 ```
-$filter=toupper('name') eq 'ALFREDS FUTTERKISTE'
+ $filter=toupper('name') eq 'ALFREDS FUTTERKISTE'
 ```
 
-### in
+ODATA V4 Methods
+---------
 
-a)'IN' with eq(equals) verb:
+in
+-------
 
-This "IN" operator filters all the records that equals the list of values in the column of the table.
+a)'in' with eq(equals) verb:
+
+This `in` operator filters all the records that equals the list of values in the column of the table.
 Syntax rules are comma separated list of values without spaces and enclosed in parentheses(). Don't use square brackets [] or braces {}.
 
-API Usage
+API Usage
 
 ```
-$filter=colname eq in ('value','value')
+ $filter=colname eq in ('value','value')
 ```
 
 Example
 
 ```
-$filter=Name eq in ('Milk','Cheese')
+ Name eq in ('Milk','Cheese')
 ```
 
-b)'IN' with ne(not equals) verb:
+b)'in' with ne(not equals) verb:
 
-This "IN" operator filters all the records that not equals the list of values in the column of the table.
+This "in" operator filters all the records that not equals the list of values in the column of the table.
 Syntax rules are comma separated list of values without spaces and enclosed in parentheses(). Don't use square brackets [] or braces {}.
 
-API Usage
+API Usage
 
 ```
-$filter=colname ne in ('value','value')
+ $filter=colname ne in ('value','value')
 ```
 
 Example
 
 ```
-$filter=Name ne in ('butter','bread')
+ Name ne in ('butter','bread')
+```
+
+
+startswith
+-----------
+
+This string function filters all the records that starts with `nas` in the `lastname` column of the table.
+
+API Usage
+
+```
+ $filter=startswith('colname', 'expression')
+```
+
+Example
+
+```
+ startswith('lastname','nas')
+```
+
+not startswith
+--------------
+
+This string function filters all the records that not starts with `daq` in the `lastname` column of the table.
+
+API Usage
+
+```
+ $filter=not startswith('colname', 'expression')
+```
+
+Example
+
+```
+ not startswith('lastname','daq')
+```
+
+endswith
+--------
+
+This string function filters all the records that ends with `nse` in `firstname` column of the table.
+
+API Usage
+
+```
+ $filter=endswith('colname', 'expression')
+```
+
+Example
+
+```
+ endswith('firstname', 'nse')
+```
+
+not endswith
+-------------
+
+This string function filters all the records that not ends with `dow` in `firstname` column of the table.
+
+API Usage
+
+```
+ $filter=not endswith('colname', 'expression')
+```
+
+Example
+
+```
+ not endswith('firstname', 'dow')
 ```
