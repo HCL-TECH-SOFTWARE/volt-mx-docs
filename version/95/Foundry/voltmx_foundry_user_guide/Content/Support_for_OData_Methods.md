@@ -20,7 +20,8 @@ $filter for RDBMS connector supports the following string methods.
 ODATA V2 Methods
 ---------
 
-### startswith
+startswith
+--------
 
 This string function filters all the records that starts with doe in the lastname column of the table.
 
@@ -112,7 +113,7 @@ in
 
 a)'in' with eq(equals) verb:
 
-This `in` operator filters all the records that equals the list of values in the column of the table.
+This 'in' operator filters all the records that equals the list of values in the column of the table.
 Syntax rules are comma separated list of values without spaces and enclosed in parentheses(). Don't use square brackets [] or braces {}.
 
 API Usage
@@ -129,7 +130,7 @@ Example
 
 b)'in' with ne(not equals) verb:
 
-This "in" operator filters all the records that not equals the list of values in the column of the table.
+This 'in' operator filters all the records that not equals the list of values in the column of the table.
 Syntax rules are comma separated list of values without spaces and enclosed in parentheses(). Don't use square brackets [] or braces {}.
 
 API Usage
@@ -153,7 +154,7 @@ This string function filters all the records that starts with `nas` in the `last
 API Usage
 
 ```
- $filter=startswith('colname', 'expression')
+ $filter=startswith('colname','expression')
 ```
 
 Example
@@ -170,7 +171,7 @@ This string function filters all the records that not starts with `daq` in the `
 API Usage
 
 ```
- $filter=not startswith('colname', 'expression')
+ $filter=not startswith('colname','expression')
 ```
 
 Example
@@ -187,13 +188,13 @@ This string function filters all the records that ends with `nse` in `firstname`
 API Usage
 
 ```
- $filter=endswith('colname', 'expression')
+ $filter=endswith('colname','expression')
 ```
 
 Example
 
 ```
- endswith('firstname', 'nse')
+ endswith('firstname','nse')
 ```
 
 not endswith
@@ -204,11 +205,11 @@ This string function filters all the records that not ends with `dow` in `firstn
 API Usage
 
 ```
- $filter=not endswith('colname', 'expression')
+ $filter=not endswith('colname','expression')
 ```
 
 Example
 
 ```
- not endswith('firstname', 'dow')
+ not endswith('firstname','dow')
 ```
