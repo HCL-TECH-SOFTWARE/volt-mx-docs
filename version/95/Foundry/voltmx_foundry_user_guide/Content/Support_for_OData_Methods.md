@@ -13,9 +13,10 @@ The expression language that is used in $filter operators are limited across bus
 
 $filter for RDBMS connector supports the following string methods.
 
-*   ODATA V2 Methods
+*  [ODATA V2 Methods](#odata-v2-methods)
 
-*   ODATA V4 Methods
+
+*  [ODATA V4 Methods](#odata-v4-methods)
 
 ODATA V2 Methods
 ---------
