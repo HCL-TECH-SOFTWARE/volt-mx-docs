@@ -21,8 +21,8 @@ $filter for RDBMS connector supports the following string methods.
 ODATA V2 Methods
 ---------
 
-startswith
---------
+### startswith
+
 
 This string function filters all the records that starts with doe in the lastname column of the table.
 
@@ -38,8 +38,8 @@ Example
  startswith('lastname','doe') eq true
 ```
 
-endswith
---------
+### endswith
+
 
 This string function filters all the records that ends with `hon` in `firstname` column of the table.
 
@@ -55,8 +55,8 @@ Example
  endswith('firstname', 'hon') eq true
 ```
 
-substringof
------------
+### substringof
+
 
 This string function filters all the records that contain with `gmail` in `email` column of the table.
 
@@ -72,8 +72,8 @@ Example
  substringof('email', 'gmail') eq true
 ```
 
-tolower
--------
+### tolower
+
 
 The string filters all the records by matching the exact value with all the values present in the column after changing them to lower case.
 
@@ -89,8 +89,8 @@ Example
  $filter=tolower('name') eq 'alfreds futterkiste'
 ```
 
-toupper
--------
+### toupper
+
 
 This string function filters all the records by matching the exact value with all the values present in the column after changing them to uppercase.
 
@@ -109,8 +109,8 @@ Example
 ODATA V4 Methods
 ---------
 
-in
--------
+### in
+
 
 a)'in' with eq(equals) verb:
 
@@ -147,8 +147,8 @@ Example
 ```
 
 
-startswith
------------
+### startswith
+
 
 This string function filters all the records that starts with `nas` in the `lastname` column of the table.
 
@@ -164,8 +164,8 @@ Example
  startswith('lastname','nas')
 ```
 
-not startswith
---------------
+### not startswith
+
 
 This string function filters all the records that not starts with `daq` in the `lastname` column of the table.
 
@@ -181,8 +181,8 @@ Example
  not startswith('lastname','daq')
 ```
 
-endswith
---------
+### endswith
+
 
 This string function filters all the records that ends with `nse` in `firstname` column of the table.
 
@@ -198,8 +198,7 @@ Example
  endswith('firstname','nse')
 ```
 
-not endswith
--------------
+### not endswith
 
 This string function filters all the records that not ends with `dow` in `firstname` column of the table.
 
