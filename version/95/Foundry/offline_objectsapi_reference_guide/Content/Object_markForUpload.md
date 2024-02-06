@@ -316,9 +316,9 @@ VMXObj category = new VMXObj("CATEGORY");
 category.getUploadDeferredRecordKeys(new VMXCallback() {
         @Override
         public void onSuccess(Object result) {
-            List &lt; HashMap &lt; String, Object &gt;&gt; pksList = (List &lt; HashMap &lt; String, Object &gt;&gt; ) result;
-            for (HashMap &lt; String, Object &gt; pks: pksList) {
-                for (Map.Entry &lt; String, Object &gt; e: pks.entrySet()) {
+            List < HashMap < String, Object >> pksList = (List < HashMap < String, Object > ) result;
+            for (HashMap < String, Object > pks: pksList) {
+                for (Map.Entry < String, Object > e: pks.entrySet()) {
                     Log.d("deferred record with key : " + e.getKey() + "value: "+e.getValue());
                 }
             }
