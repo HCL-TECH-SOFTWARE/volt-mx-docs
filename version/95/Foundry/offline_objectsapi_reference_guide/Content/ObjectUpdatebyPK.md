@@ -88,11 +88,10 @@ var options = {
 };
 VMXObject.updateByPK(record, options, onSuccessCallback, onFailureCallback);
 
-//------- update using syncLatestObjectSnapshot flag ---------
-var options =
-
-{ "syncLatestObjectSnapshot": false }
-;
+///------- update using syncLatestObjectSnapshot flag ---------
+var options = { 
+    "syncLatestObjectSnapshot": false 
+};
 var VMXObject = new voltmx.sdk.VMXObj("CATEGORY");
 VMXObject.updateByPK(record, options, onSuccessCallback, onFailureCallback);
 
