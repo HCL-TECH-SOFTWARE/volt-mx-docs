@@ -1,9 +1,9 @@
 
 
-\<object\>.markForUpload
+<object\>.markForUpload
 ======================
 
-The **\<object\>.markForUpload API** selects the changes made to the records and sent to the server. If the **markForUpload** flag is not enabled, the changes made are deferred from uploading to the server until marked for upload using specific markForUpload APIs.
+The **<object\>.markForUpload API** selects the changes made to the records and sent to the server. If the **markForUpload** flag is not enabled, the changes made are deferred from uploading to the server until marked for upload using specific markForUpload APIs.
 
 The markForUpload flag is set to true, by default.
 
@@ -368,3 +368,4 @@ VMXFailureCompletionHandler onFailure = ^ void(id error) {
     NSLog("failed with error " + error.code);
 }
 ```
+
