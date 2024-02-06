@@ -112,7 +112,7 @@ ODATA V4 Methods
 ### in
 
 
-a)'in' with eq(equals) verb:
+**A**. 'in' with eq(equals) verb:
 
 This 'in' operator filters all the records that equals the list of values in the column of the table.
 Syntax rules are comma separated list of values without spaces and enclosed in parentheses(). Don't use square brackets [] or braces {}.
@@ -129,7 +129,7 @@ Example
  Name eq in ('Milk','Cheese')
 ```
 
-b)'in' with ne(not equals) verb:
+**B**. 'in' with ne(not equals) verb:
 
 This 'in' operator filters all the records that not equals the list of values in the column of the table.
 Syntax rules are comma separated list of values without spaces and enclosed in parentheses(). Don't use square brackets [] or braces {}.
@@ -150,7 +150,7 @@ Example
 ### startswith
 
 
-This string function filters all the records that starts with `nas` in the `lastname` column of the table.
+String function to filters all the records where column startswith provided String. 
 
 API Usage
 
@@ -160,14 +160,16 @@ API Usage
 
 Example
 
+Below syntax filters all the records where `firstname` startswith `nas`.
+
 ```
- startswith('lastname','nas')
+ startswith('firstname','nas')
 ```
 
 ### not startswith
 
 
-This string function filters all the records that not starts with `daq` in the `lastname` column of the table.
+String function to filters all the records where column not startswith provided String.
 
 API Usage
 
@@ -177,6 +179,8 @@ API Usage
 
 Example
 
+Below syntax filters all the records where `lastname` not startswith `daq`.
+
 ```
  not startswith('lastname','daq')
 ```
@@ -184,7 +188,7 @@ Example
 ### endswith
 
 
-This string function filters all the records that ends with `nse` in `firstname` column of the table.
+String function to filters all the records where column endswith provided String.
 
 API Usage
 
@@ -194,13 +198,15 @@ API Usage
 
 Example
 
+Below syntax filters all the records where `firstname` endswith `nse`.
+
 ```
  endswith('firstname','nse')
 ```
 
 ### not endswith
 
-This string function filters all the records that not ends with `dow` in `firstname` column of the table.
+String function to filters all the records where column not endswith provided String.
 
 API Usage
 
@@ -209,6 +215,8 @@ API Usage
 ```
 
 Example
+
+Below syntax filters all the records where `firstname` not endswith `dow`.
 
 ```
  not endswith('firstname','dow')
