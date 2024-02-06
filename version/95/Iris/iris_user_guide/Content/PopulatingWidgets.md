@@ -63,8 +63,8 @@ Container Widgets act as containers to group other widgets. Using the container 
   
 | Widget | Description | Image |
 | --- | --- | --- |
-| [FlexContainer](Flex_Container.md) | A Container Widget with flexible properties. Flexible properties allow you to place widgets anywhere in the form and configure alignment properties such as Left, Right, Top, and Bottom. You can set the properties of the FlexContainer in three units of measurement: dp(device independent pixels, dip = dp); px (actual picture elements \[i.e. pixels\] on screen); and percentage. If you want, you can convert a FlexContainer to a FlexScrollContainer. For more information, see [Convert Flex Container Widgets](#convert-flex-container-widgets). | ![](Resources/Images/FlxContainer_CRR_209x121.png) A FlexContainer Widget with a Button Widget inside. |
-| [FlexScrollContainer](FlexScrollContainer.md) | A Container Widget that works as a FlexContainer but scrolls horizontally or vertically. If you want, you can convert a FlexScrollContainer to a FlexContainer. For more information, see [Convert Flex Container Widgets](#convert-flex-container-widgets). | ![](Resources/Images/FlxScrllContainer_CRR_207x119.png) A FlexScrollContainer Widget with button widgets inside, arranged vertically with the Scroll Direction property. |
+| [FlexContainer](Flex_Container.md) | A Container Widget with flexible properties. Flexible properties allow you to place widgets anywhere in the form and configure alignment properties such as Left, Right, Top, and Bottom. You can set the properties of the FlexContainer in three units of measurement: dp(device independent pixels, dip = dp); px (actual picture elements \[i.e. pixels\] on screen); and percentage. If you want, you can convert a FlexContainer to a FlexScrollContainer. For more information, see [Convert Flex Container Widgets](#convert-flex-container-widgets). | ![](Resources/Images/FlexContainer2.png) A FlexContainer Widget with a Button Widget inside. |
+| [FlexScrollContainer](FlexScrollContainer.md) | A Container Widget that works as a FlexContainer but scrolls horizontally or vertically. If you want, you can convert a FlexScrollContainer to a FlexContainer. For more information, see [Convert Flex Container Widgets](#convert-flex-container-widgets). | ![](Resources/Images/FlexScrollContainer2.png) A FlexScrollContainer Widget with button widgets inside, arranged vertically with the Scroll Direction property. |
 | [TabPane](TabPane.md) | A Container Widget in which you can group widgets in tabs. Each tab can have its own set of widgets, and you can add a new tab by using the Tab Widget. | ![](Resources/Images/TbPane_CRR_211x115.png) |
 | [Tab](Tab.md) | A Container Widget to be used only with the TabPane Widget. Drag-and-drop this widget onto a TabPane Widget to create a new tab. | ![](Resources/Images/Tab_TbPn_CRR_221x122.png) |
 
@@ -79,12 +79,12 @@ Basic Widgets help you build the user interface in your application. Along with 
 | [Calendar](Calendar.md) | Calendar Widget allows you to select a date from a graphical calendar. The Calendar Widget appears as a label with a small calendar icon (icon does not appear on Mobile Web platforms) and displays the date or the date format you specified. Click the Calendar Widget to interact. | ![](Resources/Images/Calendar_Widget_CRR_181x37.png) |
 | [CheckBoxGroup](CheckBoxGroup.md) | The CheckBoxGroup Widget allows you to make selections from a group of check boxes. When you select a check box, a check mark appears inside the check box, to indicate the selection. | ![](Resources/Images/ChckBxGrp_Widget_CRR_168x67.png) |
 | [DataGrid](DataGrid.md) | The DataGrid Widget allows you to present a collection of data in rows and columns (tabular format). | ![](Resources/Images/DataGrid_CRR_163x114.png) |
-| [Image2](Image2.md) | The Image widget is a non-interactive widget that you can use to display a graphic (local or remote). You can use an Image Widget in scenarios such as displaying your company's logo, displaying a snapshot, and providing an illustration. | ![](Resources/Images/Img_Wdgt_CRR_169x138.png) |
-| [Label](Label.md) | The Label Widget displays non-editable text on the Form and is non-interactive. | ![](Resources/Images/Lbl_Wdgt_CRR.png) |
+| [Image2](Image2.md) | The Image widget is a non-interactive widget that you can use to display a graphic (local or remote). You can use an Image Widget in scenarios such as displaying your company's logo, displaying a snapshot, and providing an illustration. | ![](Resources/Images/Image2.png) |
+| [Label](Label.md) | The Label Widget displays non-editable text on the Form and is non-interactive. | ![](Resources/Images/Label2.png) |
 | [ListBox](ListBox.md) | The ListBox Widget displays a list of items such as a drop-down box and allows you to select a single item at a time. | ![](Resources/Images/ListBox_Wdgt_CRR_168x33.png) |
 | [RadioButtonGroup](RadioButtonGroup.md) | The RadioButtonGroup is a widget that allows you to define a set of radio buttons, and a user can choose one of the buttons as an option. | ![](Resources/Images/RdioBtnGrp_CRR_176x32.png) |
-| [RichText](RichText.md) | The RichText Widget displays non-editable and formatted text on the Form..md formatting tags in the RichText Widget to display text with styles (bold, underlined and so on), links, and images. | ![](Resources/Images/RchTxt_CRR_173x52.bmp) |
-| [Slider](Slider.md) | The Slider Widget allows you to select a value from a defined range of values by moving the thumb (an indicator) in a horizontal direction. | ![](Resources/Images/Slider_CRR_172x35.png) |
+| [RichText](RichText.md) | The RichText Widget displays non-editable and formatted text on the Form..md formatting tags in the RichText Widget to display text with styles (bold, underlined and so on), links, and images. | ![](Resources/Images/RichText2.png) |
+| [Slider](Slider.md) | The Slider Widget allows you to select a value from a defined range of values by moving the thumb (an indicator) in a horizontal direction. | ![](Resources/Images/Slider2.png) |
 | [TextArea2](TextArea2.md) | The TextArea2 Widget provides a means by which the user can enter text. | ![](Resources/Images/TxtArea_CRR_175x80.png) |
 | [TextBox2](TextBox2.md) | The TextBox2 Widget is used to capture input from the user. | ![](Resources/Images/TxtBox_CRR_181x42.png) |
 
@@ -95,14 +95,14 @@ Advanced widgets provide you the capability to achieve the most commonly used f
   
 | Widget | Description | Image |
 | --- | --- | --- |
-| [Browser](Browser.md) | Use the Browser Widget to display.md content of your application without navigating away from the application or opening the native browser. | ![](Resources/Images/Brswr_CRR_168x29.png) |
+| [Browser](Browser.md) | Use the Browser Widget to display.md content of your application without navigating away from the application or opening the native browser. | ![](Resources/Images/Browser2.png) |
 | [Cordova Browser](CordovaBrowser.md) | Use the Cordova Browser Widget to make the content of a Cordova application accessible to the user. For more information, see [Create Cordova Applications](CreateCordovaApplications.md). | ![](Resources/Images/Brswr_CRR_168x29.png) |
-| [Camera](Camera.md) | Uses the device's native camera and its functionality for image and video capture. | ![](Resources/Images/Camera_CRR_160x36.png) |
-| [Map](Map.md) | A Map Widget displays locations defined by latitude and longitude on an on-screen map. | ![](Resources/Images/Map_CRR_157x96.png) |
-| [Phone](Phone.md) | Accesses the native phone dialer and initiate a voice call to the number that appears on the widget. | ![](Resources/Images/Phone_CRR_157x51.png) |
-| [PickerView](PickerView.md) | A PickerView Widget uses either a spinning wheel control or flat view picker to display multiple sets of values and allows you to select a combination of values. | ![](Resources/Images/PickerView_CRR_163x85.png) |
+| [Camera](Camera.md) | Uses the device's native camera and its functionality for image and video capture. | ![](Resources/Images/Camera2.png) |
+| [Map](Map.md) | A Map Widget displays locations defined by latitude and longitude on an on-screen map. | ![](Resources/Images/Map2.png) |
+| [Phone](Phone.md) | Accesses the native phone dialer and initiate a voice call to the number that appears on the widget. | ![](Resources/Images/Phone2.png) |
+| [PickerView](PickerView.md) | A PickerView Widget uses either a spinning wheel control or flat view picker to display multiple sets of values and allows you to select a combination of values. | ![](Resources/Images/PickerView2.png) |
 | [Segment2](Segment2.md) | A Segment2 Widget consists of multiple segments (rows or records), and each segment (row or record) can have multiple child widgets. | ![](Resources/Images/Seg_CRR_169x58.png) |
-| [Switch](Switch.md) | The Switch Widget presents two mutually exclusive choices or states. | ![](Resources/Images/Switch_CRR.png) |
+| [Switch](Switch.md) | The Switch Widget presents two mutually exclusive choices or states. | ![](Resources/Images/Switch2.png) |
 | [Video](Video.md) | Used for displaying a video as referenced by a URL or the video user upload. |   |
 
 Populate Forms with Widgets

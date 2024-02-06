@@ -408,6 +408,7 @@ For more information, see [Add Actions](working_with_Action_Editor.md).
 2.  Click **Create Template**. Volt MX Iris displays a dialog box stating that if you have added a code snippet for the widgets inside the Segment Template, the associated code will be cloned in the Segment Template; but, the references in the custom code will not be modified appropriately. You must manually make the changes to the references in the custom code.  
       
     ![](Resources/Images/Code_Snippet_Segment_template_462x241.png)
+
 3.  Click **OK**. A new Segment Template, which is a clone of the selected Segment Template, is created and is available at Project Explorer > **Templates** > \*channel\* > **Segments**. Alternatively, you can right-click the original Segment Template and select the **Navigate to Template** option.  
       
     All the properties of the Segment Template and its associated widgets are duplicated in the newly created Template.  
@@ -425,6 +426,7 @@ To map the widgets of the Section Header Template of a Segment by using Mapping 
 3.  In the **Row Template** list box, select the **SampleRowTemplate** option.  
       
     ![](Resources/Images/Row_template_464x343.png)
+
 4.  In the **Section Header Template** list box, select the **SampleSectionHeaderTemplate** option.  
       
     ![](Resources/Images/Sample_Section_Header_371x274.png)
@@ -433,14 +435,17 @@ To map the widgets of the Section Header Template of a Segment by using Mapping 
 7.  On the left pane of [Action Editor](working_with_Action_Editor.md), locate and click the **Add Mapping** action. The Add Mapping action is added to the flow diagram, as shown here.  
       
     ![](Resources/Images/Add_Mapping_272x277.png)
+
 8.  Select **Add Mapping** from the flow diagram. [Mapping Editor](ActionsMapping.md) opens on the right pane of [Action Editor](working_with_Action_Editor.md).
+
 9.  Map the required [global variables](Global_Variables_and_Data_Store_Keys.md), services, and other items to the Segment **rowData** and **sectionData** as well as to associated rowData and sectionData widgets.  
       
     ![](Resources/Images/section_data_609x288.png)
 
 1.  Click **Code View** to see the code details of the data mappings.  
       
-    ![](Resources/Images/Code_View_section_data_620x283.png)
+    ![](Resources/Images/Code_View_section_data_620x283.png)  
+
 2.  Click **Save**. You have successfully mapped the widgets of the Section Header Template and Row Data of a Segment by using [Mapping Editor](ActionsMapping.md).
 
 **Remarks**
