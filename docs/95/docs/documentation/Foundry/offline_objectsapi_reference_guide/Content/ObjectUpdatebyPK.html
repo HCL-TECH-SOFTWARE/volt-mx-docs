@@ -1542,6 +1542,12 @@
 <td>Set the trackChanges key to <strong>False</strong>, the record level operations are not tracked. When the option is set to false, the CUD operations performed on a record are not synced (uploaded).</td>
 <td></td>
 </tr>
+<tr>
+<td>syncLatestObjectSnapshot</td>
+<td>Boolean</td>
+<td>This option, when turned on (set to True), ensures that only the most recent update is sent for a specific primary key, rather than sending two entries when both create and update operations occur for that key.</td>
+<td>No</td>
+</tr>
 </tbody>
 </table>
 <!-- > **_Note:_** Supported for Windows from V8 SP4 Fix Pack 6 onwards. Supported for Mobile Web and Desktop Web channels from V8 SP4 Fix Pack 12 onwards. -->
@@ -1594,6 +1600,14 @@ var options = {
     &quot;markForUpload&quot;: false
 };
 VMXObject.updateByPK(record, options, onSuccessCallback, onFailureCallback);
+
+///------- update using syncLatestObjectSnapshot flag ---------
+var options = { 
+    &quot;syncLatestObjectSnapshot&quot;: false 
+};
+var VMXObject = new voltmx.sdk.VMXObj(&quot;CATEGORY&quot;);
+VMXObject.updateByPK(record, options, onSuccessCallback, onFailureCallback);
+
 </code></pre>
 <h2 id="android-java">Android (Java)</h2>
 <h3 id="signature_1">Signature</h3>
