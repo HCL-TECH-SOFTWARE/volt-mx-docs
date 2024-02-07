@@ -78,20 +78,24 @@ To generate, encrypt, and use the RSA key pair, follow these steps: 
    
 1. Open a terminal (Git Bash or Cygwin terminal in Windows ) and type **openssl**. 
 2.  Generate RSA public/private key pair using OpenSSL.
+
+    Recently the cygwin and git bash tools were using the upgraded version of openssl ie 3.0 .The expected format as shown is of pkcs1 format of generating pem files using openssl. From openssl 3.0 and higher versions by default it generates pkcs8 encoded format , so in order to generate required pkcs1 format we have to first convert the generated encoded pkcs8 private key to pkcs1 using openssl and generate public key. Below are the steps for the same.
     
-    a.  Generate a 2048-bit RSA key using this command.  
+    a.  openssl genrsa -out private.pem -verbose 2048. // generates pkcs8 format. 
         
     
     openssl genrsa -out private\_key.pem 2048
     
-    b.  Extract public key from RSA key pair using this command.
+    b.  openssl pkey -in private.pem -traditional -out private_key.pem.   // generates pkcs1 format.
+
+
         
         openssl rsa -pubout -in private_key.pem -out public_key.pem
         
-    c.  View the private key using this command.  
+    c.  openssl rsa -in private_key.pem -pubout -traditional -out public_key.pem // generate publickey from pkcs1 format key. 
         `openssl rsa -text -in private_key.pem`
     
-    d.  To use private keys use the following commands.
+    d.  openssl rsa -in public_key.pem -pubin -text.
         
         i.  less private_key.pem to verify that it starts with a -----BEGIN RSA PRIVATE KEY-----.
 
