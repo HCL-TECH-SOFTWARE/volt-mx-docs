@@ -191,15 +191,13 @@ Alphabetical Listing of All Constants
 
 <tr>
     <td>constants.DIMMED</td>
-    <td rowspan="1"><a href="#ToastPosition">Toast Position Constants</a></td>
+    <td rowspan="1"><a href="#TintMode">Tint Mode Constants</a></td>
 </tr>
 <tr>
     <td>constants.TOAST_LENGTH_LONG</td>
-    <td rowspan="1"><a href="#ToastDuration">Toast Duration Constants</a></td>
 </tr>
 <tr>
     <td>constants.MULTIPLY</td>
-    <td rowspan="3"><a href="#ToastPosition">Toast Position Constants</a></td>
 </tr>
 <tr>
     <td>constants.NORMAL</td>
@@ -233,7 +231,7 @@ Alphabetical Listing of All Constants
 
 <tr>
     <td>constants.SRC_ATOP</td>
-    <td rowspan="3"><a href="#ToastPosition">Toast Position Constants</a></td>
+    <td rowspan="3"><a href="#TintMode">Tint Mode Constants</a></td>
 </tr>
 <tr>
     <td>constants.SRC_IN</td>
