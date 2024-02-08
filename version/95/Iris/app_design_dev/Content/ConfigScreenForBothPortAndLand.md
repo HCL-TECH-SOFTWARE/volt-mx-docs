@@ -14,17 +14,13 @@ To configure a screen for both portrait and landscape orientations, do the follo
 
     ![](Resources/Images/FormOrientationBoth.png)
 
-4.  Click a child widget on the form, and then click its **Look** tab on the Properties pane. Two buttons are located at the top of the tab: Portrait and Landscape.
 
-     ![](Resources/Images/FormOrientationBothBtns.png)
-
-5.  Click the orientation button that you want to configure the widget for.
 6.  Change the orientation of the screen on the Iris Canvas by clicking the **Orientation** toggle button. When you click this button, the orientation selected on the **Look** tab changes to match it.
 
      ![](Resources/Images/ToggleOrientation.png)
 
 7.  Modify the widget's properties by dragging the widget into position on the Iris Canvas, and/or setting the properties in the Flex section of the **Look** tab.
-8.  To lock a particular Flex property so that it cannot be modified (whether by dragging, or changing its value in its property field), click its lock icon.
+8.  To lock a particular Flex property so that it cannot be modified (whether by dragging, or changing its value in its property field) after switching to another orientation, click its orientation lock icon.
 
     ![](Resources/Images/LinkPropToFork.png)
 
