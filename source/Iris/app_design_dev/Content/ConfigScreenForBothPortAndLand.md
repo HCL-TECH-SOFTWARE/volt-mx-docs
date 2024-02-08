@@ -19,7 +19,7 @@ To configure a screen for both portrait and landscape orientations, do the follo
      ![](Resources/Images/ToggleOrientation.png)
 
 7.  Modify the widget's properties by dragging the widget into position on the Iris Canvas, and/or setting the properties in the Flex section of the **Look** tab.
-8.  To lock a particular Flex property so that it cannot be modified (whether by dragging, or changing its value in its property field), click its lock icon.
+8.  To lock a particular Flex property so that it cannot be modified (whether by dragging, or changing its value in its property field) after switching to another orientation, click its orientation lock icon.
 
     ![](Resources/Images/LinkPropToFork.png)
 
