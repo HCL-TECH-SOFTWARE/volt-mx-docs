@@ -31,5 +31,5 @@ These steps show how to add the VoltMX-IDE-SDK to your project and set up Volt M
 *   [](../VoltMX_Logger.md)[Using Log SDK](../VoltMX_Logger.md)
 *   [](Binary_APIs.md)[Binary APIs](Binary_APIs.md)
 
-*   <details close markdown="block"><summary>API Reference</summary>To view the API Reference for Volt MX JS, click <a href="http://docs.voltmx.com/8_x_PDFs/voltmxfoundry/voltmx_docsets/voltmx/voltmx-sdk.doc/index.html" target="_blank">VoltMX IDE docset.</a>
+*   <details close markdown="block"><summary>API Reference</summary>To view the API Reference for Volt MX JS, click <a href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/javascript_docs_apis/jsdocs/index.html" target="_blank">VoltMX IDE docset.</a>
    

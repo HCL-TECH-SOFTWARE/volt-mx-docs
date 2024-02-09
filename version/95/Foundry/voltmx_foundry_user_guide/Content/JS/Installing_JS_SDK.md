@@ -16,7 +16,7 @@ These steps show how to download JS SDK files and initialize JS client.
 
 <!-- <details close markdown="block"><summary>API Reference</summary>
 
-    To view the API Reference for Plain JS, click [VoltMX JS docset](http://docs.voltmx.com/8_x_PDFs/voltmxfoundry/voltmx_docsets/js/voltmx-sdk.doc/index.html).
+    To view the API Reference for Plain JS, click [VoltMX JS docset](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/javascript_docs_apis/jsdocs/index.html).
 </details> -->
 
 <details close markdown="block"><summary>API Reference</summary>To view the API Reference for Plain JS, click <a href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/javascript_docs_apis/jsdocs/index.html">VoltMX JS docset</a>.
