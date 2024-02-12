@@ -4554,6 +4554,8 @@ constants.TEXT\_TRUNCATE\_MIDDLE
 
 constants.TEXT\_TRUNCATE\_END
 
+constants.TEXT\_TRUNCATE\_NONE (This value is applicable only for iOS.)
+
 **Default Value:**
 
 *   For Android: constants.TEXT\_TRUNCATE\_END
@@ -4609,7 +4611,6 @@ constants.TEXT\_TRUNCATE\_MIDDLE
 
 constants.TEXT\_TRUNCATE\_END
 
-constants.TEXT\_TRUNCATE\_NONE (This value is applicable only for iOS.)
 
 **Default:**constants.TEXT\_TRUNCATE\_END
 
