@@ -102,7 +102,7 @@ Advanced widgets provide you the capability to achieve the most commonly used f
 | [Phone](Phone.md) | Accesses the native phone dialer and initiate a voice call to the number that appears on the widget. | ![](Resources/Images/Phone2.png) |
 | [PickerView](PickerView.md) | A PickerView Widget uses either a spinning wheel control or flat view picker to display multiple sets of values and allows you to select a combination of values. | ![](Resources/Images/PickerView2.png) |
 | [Segment2](Segment2.md) | A Segment2 Widget consists of multiple segments (rows or records), and each segment (row or record) can have multiple child widgets. | ![](Resources/Images/Seg_CRR_169x58.png) |
-| [Switch](Switch.md) | The Switch Widget presents two mutually exclusive choices or states. | ![](Resources/Images/Switch2.png) |
+| [Switch](Switch.md) | The Switch Widget presents two mutually exclusive choices or states. | ![](Resources/Images/Switch_CRR.png) |
 | [Video](Video.md) | Used for displaying a video as referenced by a URL or the video user upload. |   |
 
 Populate Forms with Widgets
