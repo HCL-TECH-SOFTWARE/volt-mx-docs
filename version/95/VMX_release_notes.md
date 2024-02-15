@@ -38,6 +38,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Foundry](#volt-foundry)
 
+- [V9 Servicepack 5 Fixpack 15 Hotfix 8](#v9-servicepack-5-fixpack-15-hotfix-8)
 - [V9 Servicepack 5 Fixpack 15 Hotfix 7](#v9-servicepack-5-fixpack-15-hotfix-7)
 - [V9 Servicepack 5 Fixpack 15 Hotfix 6](#v9-servicepack-5-fixpack-15-hotfix-6)
 - [V9 Servicepack 5 Fixpack 15 Hotfix 5](#v9-servicepack-5-fixpack-15-hotfix-5)
@@ -838,6 +839,13 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 -->
 
 ## Volt Foundry
+
+### V9 Servicepack 5 Fixpack 15 Hotfix 8
+February 16, 2024
+
+* OData4 queries can now support <b>startswith</b>, <b>not startswith</b>, <b>endswith</b>, <b>not endswith</b>, <b>contains</b> and <b>not contains</b> verbs.
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 ### V9 Servicepack 5 Fixpack 15 Hotfix 7
 January 29, 2024
