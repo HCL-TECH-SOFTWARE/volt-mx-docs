@@ -12,7 +12,7 @@ Revision History
 | 09/24/2018 | 1.2 | Document updated for V8 SP3 release |
 | 09/19/2017 | 1.0 | Document updated for V8 release |
 
-Getting Started Options.
+Getting Started Options
 
 
 *   Volt MX Iris Enterprise Installation Guides.

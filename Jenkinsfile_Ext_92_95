@@ -58,6 +58,11 @@ options{
           sh "git pull origin ${params.Release_Branch}"
           sh "git push origin ${params.Release_Branch}"  
           
+          //creating tags/versions
+          echo "Tagging Versions"
+          sh "git tag ${params.Release}"
+          sh "git tag"
+          sh "git push --tags"
           // ----------------------Merge changes from Feature-Release to External-Remote-Master ------------------------------//
           
           // -----
@@ -74,12 +79,6 @@ options{
           sh "git branch -D ${params.New_Branch}"       // git branch -D feature/HPHX
           sh "git status"  
           // -----
-
-          //creating versions
-
-          sh "git tag ${params.Release}"
-          sh "git tag"
-          sh "git push --tags"
 
         }
       }
