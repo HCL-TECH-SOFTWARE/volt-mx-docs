@@ -1,4 +1,4 @@
-properties([parameters([choice(choices: ['buildDocs_95.sh', 'buildDocs.sh'], description: '[Mandatory] Select a Version to Build. For V9.5 - buildDocs_95.sh, V9.2 - buildDocs.sh ', name: 'Doc_Version'), choice(choices: ['release-mkdocs'], description: '[Optional] Selected the release branch', name: 'Release_Branch'),choice(choices: ['feature/HPHX'], description: '[Optional] Selected new branch', name: 'New_Branch'), string(description: '[Optional] Enter the commit summary. (Eg: HPHX-1234: change summary) ', name: 'Commit_Summary', trim: true), string(description: '[Optional] Enter the commit description. (Eg: HPHX-1234: change description) ', name: 'Commit_Description', trim: true)])])
+properties([parameters([choice(choices: ['buildDocs_95.sh', 'buildDocs.sh'], description: '[Mandatory] Select a Version to Build. For V9.5 - buildDocs_95.sh, V9.2 - buildDocs.sh ', name: 'Doc_Version'), choice(choices: ['release-mkdocs'], description: '[Mandatory] Selected the release branch', name: 'Release_Branch'), choice(choices: ['feature/HPHX'], description: '[Mandatory] Selected new branch', name: 'New_Branch'), string(description: '[Mandatory] Enter the commit summary. (Eg: HPHX-1234: change summary) ', name: 'Commit_Summary', trim: true), string(description: '[Mandatory] Enter the commit description. (Eg: HPHX-1234: change description) ', name: 'Commit_Description', trim: true), string(description: '[Mandatory] Enter the Release. (Eg: 9.5.X.X) ', name: 'Release')])])
 pipeline{
 
 // Consider any agent
@@ -74,6 +74,13 @@ options{
           sh "git branch -D ${params.New_Branch}"       // git branch -D feature/HPHX
           sh "git status"  
           // -----
+
+          //creating versions
+
+          sh "git tag ${params.Release}"
+          sh "git tag"
+          sh "git push --tags"
+
         }
       }
   }
