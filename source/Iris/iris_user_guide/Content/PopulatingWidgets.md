@@ -115,7 +115,7 @@ Using the following options you can populate a form with widgets:
     
 *   **User-defined Collections**: From the user-defined collections, you can drag and drop a widget.
 *   **Duplicate**: If you have a widget that you want to duplicate within the same form, use the Duplicate feature. To duplicate a widget, right-click a widget and click **Duplicate**. The duplicated widget appears offset from the prior widget by a horizontal and vertical offset of 10 units, making it easy to distinguish from the prior widget.
-*   **Copy and Paste**: If you want to reuse a widget on another form or channel, you can copy and paste it. To copy and paste a widget, right-click a widget, click **Copy**, and then click **Paste**.
+*   **Copy and Paste**: If you want to reuse a widget on another form or channel, you can copy and paste it. To copy and paste a widget, right-click a widget, click **Copy** and then click **Paste**.
 
 > **_Note:_** The Duplicate feature and Copy and Paste feature differ in that you can duplicate a widget within the same form whereas you can copy a widget and then paste the widget within the same form, a different form, or a different channel.
 
