@@ -59,11 +59,12 @@ options{
           sh "git pull origin ${params.Release_Branch}"
           sh "git push origin ${params.Release_Branch}"  
           
-          //creating tags/versions
-          echo "Tagging Versions"
-          sh "git tag ${params.Release}"
-          sh "git tag"
-          sh "git push --tags"
+          //creating tags/versions in release-mkdocs branch
+          // echo "Tagging Versions"
+          // sh "git tag ${params.Release}"
+          // sh "git tag"
+          // sh "git push --tags"
+
           // ----------------------Merge changes from Feature-Release to External-Remote-Master ------------------------------//
           
           // -----
@@ -81,6 +82,12 @@ options{
           sh "git status"  
           // -----
 
+          //creating tags/versions in open-source repo master branch
+          sh "gh release create '${params.Release}' --notes '${params.Release}'"
+          sh "gh release view"  //view latest created tag / stable version
+         
+          // -----
+        
         }
       }
   }
