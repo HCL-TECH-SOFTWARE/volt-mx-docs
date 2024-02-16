@@ -24,7 +24,7 @@ ODATA V2 Methods
 ### startswith
 
 
-This string function filters all the records that starts with doe in the lastname column of the table.
+String function to filters all the records where column starts with provided String.
 
 **API Usage**
 
@@ -34,6 +34,8 @@ This string function filters all the records that starts with doe in the lastnam
 
 Example
 
+Below syntax filters all the records where `lastname` startswith `doe`.
+
 ```
  startswith('lastname','doe') eq true
 ```
@@ -41,7 +43,7 @@ Example
 ### endswith
 
 
-This string function filters all the records that ends with `hon` in `firstname` column of the table.
+String function to filters all the records where column endswith provided String.
 
 API Usage
 
@@ -51,6 +53,8 @@ API Usage
 
 Example
 
+Below syntax filters all the records where `firstname` endswith `hon`.
+
 ```
  endswith('firstname', 'hon') eq true
 ```
@@ -58,7 +62,7 @@ Example
 ### substringof
 
 
-This string function filters all the records that contain with `gmail` in `email` column of the table.
+String function to filters all the records where column contains provided String.
 
 API Usage
 
@@ -68,6 +72,8 @@ API Usage
 
 Example
 
+Below syntax filters all the records where `email` contains `gmail`.
+
 ```
  substringof('email', 'gmail') eq true
 ```
@@ -75,7 +81,7 @@ Example
 ### tolower
 
 
-The string filters all the records by matching the exact value with all the values present in the column after changing them to lower case.
+String filters all the records by matching the exact value with all the values present in the column after changing them to lower case.
 
 API Usage
 
@@ -85,6 +91,8 @@ API Usage
 
 Example
 
+Below syntax filters all the records where `name` equals to  `alfreds futterkiste`.
+
 ```
  $filter=tolower('name') eq 'alfreds futterkiste'
 ```
@@ -92,7 +100,7 @@ Example
 ### toupper
 
 
-This string function filters all the records by matching the exact value with all the values present in the column after changing them to uppercase.
+String function filters all the records by matching the exact value with all the values present in the column after changing them to uppercase.
 
 API Usage
 
@@ -101,6 +109,8 @@ API Usage
 ```
 
 Example
+
+Below syntax filters all the records where `name` equals to  `ALFREDS FUTTERKISTE`.
 
 ```
  $filter=toupper('name') eq 'ALFREDS FUTTERKISTE'
@@ -169,7 +179,7 @@ Below syntax filters all the records where `firstname` startswith `nas`.
 ### not startswith
 
 
-String function to filters all the records where column not startswith provided String.
+String function to filters all the records where column does not startswith provided String.
 
 API Usage
 
@@ -179,7 +189,7 @@ API Usage
 
 Example
 
-Below syntax filters all the records where `lastname` not startswith `daq`.
+Below syntax filters all the records where `lastname` does not startswith `daq`.
 
 ```
  not startswith('lastname','daq')
@@ -206,7 +216,7 @@ Below syntax filters all the records where `firstname` endswith `nse`.
 
 ### not endswith
 
-String function to filters all the records where column not endswith provided String.
+String function to filters all the records where column does not endswith provided String.
 
 API Usage
 
@@ -216,7 +226,7 @@ API Usage
 
 Example
 
-Below syntax filters all the records where `firstname` not endswith `dow`.
+Below syntax filters all the records where `firstname` does not endswith `dow`.
 
 ```
  not endswith('firstname','dow')
