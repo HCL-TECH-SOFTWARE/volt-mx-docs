@@ -843,10 +843,9 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ### V9 Servicepack 5 Fixpack 15 Hotfix 8
 February 16, 2024
 
-* OData4 queries can now support <b>startswith</b>, <b>not startswith</b>, <b>endswith</b>, <b>not endswith</b>, <b>contains</b> and <b>not contains</b> verbs.
+* OData4 queries now support verbs such as <b>startswith</b>, <b>not startswith</b>, <b>endswith</b>, <b>not endswith</b>, <b>contains</b> and <b>not contains</b>.
 
 For more details click [here](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Support_for_OData_Methods.html#not-startswith)
-
 
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
