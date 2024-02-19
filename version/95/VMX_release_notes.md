@@ -72,6 +72,16 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 ## Volt Iris
 
+### V9 Servicepack 5 Fixpack 22
+
+February 16, 2024
+
+* Added support for vertical and horizontal scrollbars in Browser widget for DesktopWeb and SPA.
+* Provided additional Segment indicator options to Segment widget for iOS platform.
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+
+
 ### V9 Servicepack 5 Fixpack 21
 
 January 23, 2024
