@@ -1683,19 +1683,31 @@ The available options are:
 
 *   SEGUI\_ROW\_SELECT: Specifies the disclosure indicator. The indicator appears as follows:
 
-![row Select](Resources/Images/rowSelect_58x54.png)
+![row Select](Resources/Images/rowClick1.png)
 
 > If the user selects the indicator, the related content appears in the next screen .
 
-*   SEGUI\_ROW\_CLICK: Specifies the disclosure button. The button appears as follows:
+*   SEGUI\_ROW\_CLICK: Specifies the detail button. The button appears as follows:
 
-![row Click](Resources/Images/rowClick.png)
+![row Click](Resources/Images/rowClick1.png)
 
-> If the user selects the disclosure button, the detailed content appears.
+> If the user selects the detail button, the detailed content appears.
 
-*   SEGUI\_NONE: No indicator or button is displayed.
+*   SEGUI\_ROW\_CLICKANDSELECT: Specifies the detail and disclosure button. <br>The both button appears as follows:
 
-To set the value through code, prefix the option with _constants._ such as _**constants.<option>**_.
+![row Click](Resources/Images/rowClick1.png)
+
+If the user selects the detail or disclosure button, the detailed content appears.
+
+*   SEGUI\_ROW\_CHECK: Specifies the check button.The button appears as follows:
+
+![row Click](Resources/Images/rowClick2.png)
+
+If the user selects the check button, the detailed content appears.
+
+*   SEGUI_NONE: No indicator or button is displayed.
+
+To set the value through code, prefix the option with constants. such as <b>constants..</b>
 
 ### Example
 
