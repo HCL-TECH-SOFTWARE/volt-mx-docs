@@ -841,7 +841,7 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ## Volt Foundry
 
 ### V9 Servicepack 5 Fixpack 15 Hotfix 8
-February 16, 2024
+February 19, 2024
 
 * OData4 queries now support verbs such as <b>startswith</b>, <b>not startswith</b>, <b>endswith</b>, <b>not endswith</b>, <b>contains</b> and <b>not contains</b>.
 
