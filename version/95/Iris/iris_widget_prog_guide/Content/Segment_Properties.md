@@ -1683,7 +1683,7 @@ The available options are:
 
 *   SEGUI\_ROW\_SELECT: Specifies the disclosure indicator. The indicator appears as follows:
 
-![row Select](Resources/Images/rowClick1.png)
+![row Select](Resources/Images/rowSelect.png)
 
 > If the user selects the indicator, the related content appears in the next screen .
 
@@ -1695,7 +1695,7 @@ The available options are:
 
 *   SEGUI\_ROW\_CLICKANDSELECT: Specifies the detail and disclosure button. <br>The both button appears as follows:
 
-![row Click](Resources/Images/rowClick1.png)
+![row Click](Resources/Images/rowClick5.png)
 
 If the user selects the detail or disclosure button, the detailed content appears.
 
