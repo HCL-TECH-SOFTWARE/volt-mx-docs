@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#support-for-odata-methods" class="md-skip">
+        <a href="#support-for-odata-methods-substringof-and-indexof" class="md-skip">
           Skip to content
         </a>
       
@@ -255,8 +255,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -269,7 +267,14 @@
     Support for ODATA Methods (substringof and indexof)
   </a>
   
-    <nav class="md-nav" aria-label="Support for ODATA Methods (substringof and indexof)">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#odata-v2-methods" class="md-nav__link">
+    ODATA V2 Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="ODATA V2 Methods">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -307,9 +312,50 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#odata-v4-methods" class="md-nav__link">
+    ODATA V4 Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="ODATA V4 Methods">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
   <a href="#in" class="md-nav__link">
     in
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#startswith_1" class="md-nav__link">
+    startswith
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#not-startswith" class="md-nav__link">
+    not startswith
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#endswith_1" class="md-nav__link">
+    endswith
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#not-endswith" class="md-nav__link">
+    not endswith
   </a>
   
 </li>
@@ -333,79 +379,123 @@
                 
 
 
-<h1 id="support-for-odata-methods">Support for OData Methods</h1>
+  <h1>Support for OData Methods</h1>
+
 <h2 id="support-for-odata-methods-substringof-and-indexof">Support for ODATA Methods (substringof and indexof)</h2>
 <p>A URL with a $filter query (for RDBMS/ business adapter) identifies a subset of the entries from the collection of entries identified by the expression of the URL. The subset is determined by selecting only the entries that satisfy the predicate expression specified by the query option.</p>
-<pre><code>$filter=expression
+<pre><code> $filter=expression
 </code></pre>
 <p>The expression language that is used in $filter operators are limited across business adapters. The values can be strings enclosed in single quotes, numbers, Boolean values (such as true or false), and nested values.</p>
-<p>$filter for RDBMS connector supports the following string methods from release V8 SP4.</p>
+<p>$filter for RDBMS connector supports the following string methods.</p>
 <ul>
-<li>startswith</li>
-<li>endswith</li>
-<li>tolower</li>
-<li>toupper</li>
-<li>substringof</li>
-<li>in</li>
+<li>
+<p><a href="#odata-v2-methods">ODATA V2 Methods</a></p>
+</li>
+<li>
+<p><a href="#odata-v4-methods">ODATA V4 Methods</a></p>
+</li>
 </ul>
+<h2 id="odata-v2-methods">ODATA V2 Methods</h2>
 <h3 id="startswith">startswith</h3>
-<p>This string function filters all the records that starts with doe in the lastname column of the table.</p>
+<p>String function to filters all the records where column starts with provided String.</p>
 <p><strong>API Usage</strong></p>
-<pre><code>$filter=startswith('colname', 'expression') eq [true|false]
+<pre><code> $filter=startswith('colname', 'expression') eq [true|false]
 </code></pre>
 <p>Example</p>
-<pre><code>startswith('lastname','doe') eq true
+<p>Below syntax filters all the records where <code>lastname</code> startswith <code>doe</code>.</p>
+<pre><code> startswith('lastname','doe') eq true
 </code></pre>
 <h3 id="endswith">endswith</h3>
-<p>This string function filters all the records that ends with <code>hon</code> in <code>firstname</code> column of the table.</p>
+<p>String function to filters all the records where column endswith provided String.</p>
 <p>API Usage</p>
-<pre><code>$filter=endswith('colname', 'expression') eq [true|false]
+<pre><code> $filter=endswith('colname', 'expression') eq [true|false]
 </code></pre>
 <p>Example</p>
-<pre><code>endswith('firstname', 'hon') eq true
+<p>Below syntax filters all the records where <code>firstname</code> endswith <code>hon</code>.</p>
+<pre><code> endswith('firstname', 'hon') eq true
 </code></pre>
 <h3 id="substringof">substringof</h3>
-<p>This string function filters all the records that contain with <code>gmail</code> in <code>email</code> column of the table.</p>
+<p>String function to filters all the records where column contains provided String.</p>
 <p>API Usage</p>
-<pre><code>$filter=substringof('colname', 'expression') eq [true|false]
+<pre><code> $filter=substringof('colname', 'expression') eq [true|false]
 </code></pre>
 <p>Example</p>
-<pre><code>substringof('email', 'gmail') eq true
+<p>Below syntax filters all the records where <code>email</code> contains <code>gmail</code>.</p>
+<pre><code> substringof('email', 'gmail') eq true
 </code></pre>
 <h3 id="tolower">tolower</h3>
-<p>The string filters all the records by matching the exact value with all the values present in the column after changing them to lower case.</p>
+<p>String filters all the records by matching the exact value with all the values present in the column after changing them to lower case.</p>
 <p>API Usage</p>
-<pre><code>$filter=tolower('colname') eq 'value'
+<pre><code> $filter=tolower('colname') eq 'value'
 </code></pre>
 <p>Example</p>
-<pre><code>$filter=tolower('name') eq 'alfreds futterkiste'
+<p>Below syntax filters all the records where <code>name</code> equals to  <code>alfreds futterkiste</code>.</p>
+<pre><code> $filter=tolower('name') eq 'alfreds futterkiste'
 </code></pre>
 <h3 id="toupper">toupper</h3>
-<p>This string function filters all the records by matching the exact value with all the values present in the column after changing them to uppercase.</p>
+<p>String function filters all the records by matching the exact value with all the values present in the column after changing them to uppercase.</p>
 <p>API Usage</p>
-<pre><code>$filter=toupper('colname') eq 'value'
+<pre><code> $filter=toupper('colname') eq 'value'
 </code></pre>
 <p>Example</p>
-<pre><code>$filter=toupper('name') eq 'ALFREDS FUTTERKISTE'
+<p>Below syntax filters all the records where <code>name</code> equals to  <code>ALFREDS FUTTERKISTE</code>.</p>
+<pre><code> $filter=toupper('name') eq 'ALFREDS FUTTERKISTE'
 </code></pre>
+<h2 id="odata-v4-methods">ODATA V4 Methods</h2>
 <h3 id="in">in</h3>
-<p>a)'IN' with eq(equals) verb:</p>
-<p>This "IN" operator filters all the records that equals the list of values in the column of the table.
+<p><strong>A</strong>. 'in' with eq(equals) verb:</p>
+<p>This 'in' operator filters all the records that equals the list of values in the column of the table.
 Syntax rules are comma separated list of values without spaces and enclosed in parentheses(). Don't use square brackets [] or braces {}.</p>
-<p>API Usage</p>
-<pre><code>$filter=colname eq in ('value','value')
+<p>API Usage</p>
+<pre><code> $filter=colname eq in ('value','value')
 </code></pre>
 <p>Example</p>
-<pre><code>$filter=Name eq in ('Milk','Cheese')
+<pre><code> Name eq in ('Milk','Cheese')
 </code></pre>
-<p>b)'IN' with ne(not equals) verb:</p>
-<p>This "IN" operator filters all the records that not equals the list of values in the column of the table.
+<p><strong>B</strong>. 'in' with ne(not equals) verb:</p>
+<p>This 'in' operator filters all the records that not equals the list of values in the column of the table.
 Syntax rules are comma separated list of values without spaces and enclosed in parentheses(). Don't use square brackets [] or braces {}.</p>
-<p>API Usage</p>
-<pre><code>$filter=colname ne in ('value','value')
+<p>API Usage</p>
+<pre><code> $filter=colname ne in ('value','value')
 </code></pre>
 <p>Example</p>
-<pre><code>$filter=Name ne in ('butter','bread')
+<pre><code> Name ne in ('butter','bread')
+</code></pre>
+<h3 id="startswith_1">startswith</h3>
+<p>String function to filters all the records where column startswith provided String. </p>
+<p>API Usage</p>
+<pre><code> $filter=startswith('colname','expression')
+</code></pre>
+<p>Example</p>
+<p>Below syntax filters all the records where <code>firstname</code> startswith <code>nas</code>.</p>
+<pre><code> startswith('firstname','nas')
+</code></pre>
+<h3 id="not-startswith">not startswith</h3>
+<p>String function to filters all the records where column does not startswith provided String.</p>
+<p>API Usage</p>
+<pre><code> $filter=not startswith('colname','expression')
+</code></pre>
+<p>Example</p>
+<p>Below syntax filters all the records where <code>lastname</code> does not startswith <code>daq</code>.</p>
+<pre><code> not startswith('lastname','daq')
+</code></pre>
+<h3 id="endswith_1">endswith</h3>
+<p>String function to filters all the records where column endswith provided String.</p>
+<p>API Usage</p>
+<pre><code> $filter=endswith('colname','expression')
+</code></pre>
+<p>Example</p>
+<p>Below syntax filters all the records where <code>firstname</code> endswith <code>nse</code>.</p>
+<pre><code> endswith('firstname','nse')
+</code></pre>
+<h3 id="not-endswith">not endswith</h3>
+<p>String function to filters all the records where column does not endswith provided String.</p>
+<p>API Usage</p>
+<pre><code> $filter=not endswith('colname','expression')
+</code></pre>
+<p>Example</p>
+<p>Below syntax filters all the records where <code>firstname</code> does not endswith <code>dow</code>.</p>
+<pre><code> not endswith('firstname','dow')
 </code></pre>
 
               
