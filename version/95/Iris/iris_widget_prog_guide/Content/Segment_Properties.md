@@ -1697,13 +1697,13 @@ The available options are:
 
 ![row Click](Resources/Images/rowClick5.png)
 
-If the user selects the detail or disclosure button, the detailed content appears.
+> If the user selects the detail or disclosure button, the detailed content appears.
 
 *   SEGUI\_ROW\_CHECK: Specifies the check button.The button appears as follows:
 
 ![row Click](Resources/Images/rowClick2.png)
 
-If the user selects the check button, the detailed content appears.
+> If the user selects the check button, the detailed content appears.
 
 *   SEGUI_NONE: No indicator or button is displayed.
 
