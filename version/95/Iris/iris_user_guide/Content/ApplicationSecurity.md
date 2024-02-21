@@ -74,7 +74,7 @@ Prerequisites
 
 For OpenSSL command to work, for the Windows environment, you can use a couple of different third-party tools, such as Git Bash, which is available [here](https://git-scm.com/download/win), and Cygwin, which is available [here](https://cygwin.com/install.md).
 
-To generate, encrypt, and use the RSA key pair, follow these steps: 
+To generate RSA keypair and to obtain encrypted keys please follow these steps:
    
 1. Open a terminal (Git Bash or Cygwin terminal in Windows ) and type **openssl**. 
 2.  Generate RSA public/private key pair using OpenSSL.
@@ -103,7 +103,7 @@ To generate, encrypt, and use the RSA key pair, follow these steps: 
 
     when the final  public_key.pem content is displayed  using commant  "openssl rsa text -in private_key.pem" it starts with "----BEGIN PUBLIC KEY——." which is of required pkcs1 format.
 
-3.  Engage Volt MX support and provide your public key and Volt MX Iris version. This step is applicable for Android, iOS platforms, and responsive Web/SPA platform. 
+3.  Engage Volt MX support and provide your public key and also Volt MX Iris version. This step is applicable for Android, iOS platforms, and responsive Web/SPA platform. 
 
     
       > **_Important:_** Public key must not be shared with anyone except Volt MX.
