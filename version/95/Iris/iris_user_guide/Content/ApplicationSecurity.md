@@ -74,31 +74,36 @@ Prerequisites
 
 For OpenSSL command to work, for the Windows environment, you can use a couple of different third-party tools, such as Git Bash, which is available [here](https://git-scm.com/download/win), and Cygwin, which is available [here](https://cygwin.com/install.md).
 
-To generate, encrypt, and use the RSA key pair, follow these steps: 
+To generate RSA keypair and to obtain encrypted keys please follow these steps:
    
 1. Open a terminal (Git Bash or Cygwin terminal in Windows ) and type **openssl**. 
 2.  Generate RSA public/private key pair using OpenSSL.
 
-    Recently the cygwin and git bash tools were using the upgraded version of openssl ie 3.0 .The expected format as shown is of pkcs1 format of generating pem files using openssl. From openssl 3.0 and higher versions by default it generates pkcs8 encoded format , so in order to generate required pkcs1 format we have to first convert the generated encoded pkcs8 private key to pkcs1 using openssl and generate public key. Below are the steps for the same.
-    
-    a.  openssl genrsa -out private.pem -verbose 2048. // generates pkcs8 format. 
-        
-    
-    openssl genrsa -out private\_key.pem 2048
-    
-    b.  openssl pkey -in private.pem -traditional -out private_key.pem.   // generates pkcs1 format.
-        
-        openssl rsa -pubout -in private_key.pem -out public_key.pem
-        
-    c.  openssl rsa -in private_key.pem -pubout -traditional -out public_key.pem // generate publickey from pkcs1 format key.  
-        `openssl rsa -text -in private_key.pem`
-    
-    d.  openssl rsa -in public_key.pem -pubin -text.
-        
-        i.  less private_key.pem to verify that it starts with a -----BEGIN RSA PRIVATE KEY-----.
+    From openssl 3.0 and higher versions by default it generates pkcs8 encoded format, but the expected out put format as shown below is pkcs1 type padding. In windows machine we can use cygwin or gitbash contain openssl and other operating system like mac or linux also has openssl installed. To know the current openssl version please run following command<br>
+    openssl -v<br>
+    based on openssl version please run the following set of commands to generate keys. We have to use the generated private_key.pem and public_key.pem.
 
-        ii.  less public_key.pem to verify that it starts with a -----BEGIN PUBLIC KEY——.
-3.  Engage support public key and Volt MX Iris version. This step is applicable for Android, iOS platforms, and responsive Web/SPA platform. 
+    <b>if openssl version is 3.0 and above :</b>
+
+    openssl genrsa -out private.pem -verbose 2048 // generates pkcs8 format
+
+    openssl pkey -in private.pem -traditional -out private_key.pem   // generates pkcs1 format
+
+    openssl rsa -in private_key.pem -pubout -traditional -out public_key.pem // generate publickey from pkcs1 format key.
+
+    openssl rsa -in public_key.pem -pubin -text  //to view the key
+
+    <b>if openssl version is less than 3.0 :</b>
+
+    openssl genrsa -out private_key.pem 2048
+
+    openssl rsa -pubout -in private_key.pem -out public_key.pem
+
+    openssl rsa -text -in private_key.pem  // to view the key.
+
+    when the final  public_key.pem content is displayed  using commant  "openssl rsa text -in private_key.pem" it starts with "----BEGIN PUBLIC KEY——." which is of required pkcs1 format.
+
+3.  Engage Volt MX support and provide your public key and also Volt MX Iris version. This step is applicable for Android, iOS platforms, and responsive Web/SPA platform. 
 
     
       > **_Important:_** Public key must not be shared with anyone except Volt MX.
@@ -107,9 +112,6 @@ To generate, encrypt, and use the RSA key pair, follow these steps: 
 4. For Android and iOS platforms, VoltMX's security team validates the details and encrypts your public key.  
     For the Responsive Web/SPA platform, VoltMX's security team validates the information and shares the unique **clientID** and **clientSecret** through email. You must then use these details to [create a postbuild task](BuildAnSPAApplication.md#securing-your-web-applications).
 5. VoltMX's security team then returns the encrypted public key to you through email.
-    1.  For iOS, Volt MX provides a set of `fin` keys along with the public key to protect iOS applications.
-
-    > **_Note:_** Starting with Volt MX will not provide the `fin` keys folder if your Iris version is V8 SP3 or later.
 
     > **_Important:_** You must not share your private key with anyone including Volt MX. In case of a key compromise for the Android, iOS and Responsive Web/SPA platforms, generate a new set of keys and send the public key to [voltmxlicensing@hcl.com](mailto:voltmxlicensing@hcl.com?subject=Keys). 
 6. Navigate to your Volt MX Iris workspace and create a **\_\_encryptionkeys** folder.

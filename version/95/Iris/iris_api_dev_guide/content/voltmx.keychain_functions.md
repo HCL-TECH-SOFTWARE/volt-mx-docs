@@ -148,6 +148,17 @@ A JavaScript Dictionary object that contains a key-value pair that specifies the
 | secureaccount | An iOS-specific mandatory key that contains a string that specifies the account information to store in the keychain. |
 | secureAccessControl | An iOS-specific optional key that contains information about how a keychain item can be used. |
 | securedata | A mandatory key which stores a string that contains the secure data to store in the keychain. |
+| encryptionPaddingType [ optional ]  | Android specific parameter to set the padding scheme with which the key can be used when encrypting/decrypting. Attempts to use the key with any other padding scheme then it will be fallback to default scheme of type “PKCSPADDING”.  <br>The possible values are as follows:<li>Constants.PKCSPADDING</li><li>Constants.OEAPPADDING</li><b>Note:</b><br> 1. It is always recommended to use the latest algorithms provided in the constants.<br> 2. If user wants to migrate to latest algorithms, user has to first retrieve the older values and migrate to the latest ones. |
+
+### encryptionPaddingType possible values: 
+
+| Constant Value  | Description  |
+| --- | --- |
+| Constants.OEAPPADDING  | RSA Optimal Asymmetric Encryption Padding (OAEP) scheme.  |
+| Constants.PKCSPADDING | RSA PKCS#1 v1.5 padding scheme for encryption. |
+
+
+
 
 ### Example 1 (for iOS)
 
