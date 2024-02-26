@@ -51,7 +51,7 @@ Cancel Push Message Request
 Get Message Status by Request ID
 --------------------------------
 
-*   **URL**: Displays the sample HTTP URL to cancel a push message request.
+*   **URL**: Displays the sample HTTP URL to get message status by request ID.
 *   **Http Method**: Displays the http method as GET.
 *   **Response Payload**: Displays the sample payload.
 
