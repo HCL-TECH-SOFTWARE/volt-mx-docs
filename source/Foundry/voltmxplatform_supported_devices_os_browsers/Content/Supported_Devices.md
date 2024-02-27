@@ -107,8 +107,9 @@ Volt MX  Iris supported versions for Android OS
 | 9.0 | ![](Resources/Images/yes.png) | ![](Resources/Images/yes.png) |
 | 10.0 | ![](Resources/Images/yes.png) Compatibility Support | ![](Resources/Images/yes.png)
 | 11.0 | ![](Resources/Images/yes.png)  | ![](Resources/Images/yes.png) 
-| 12.0 | ![](Resources/Images/yes.png)  | ![](Resources/Images/yes.png) Compatibility Support
-| 13.0 | ![](Resources/Images/yes.png)  | ![](Resources/Images/yes.png) Compatibility Support
+| 12.0 | ![](Resources/Images/yes.png)  | ![](Resources/Images/yes.png) 
+| 13.0 | ![](Resources/Images/yes.png)  | ![](Resources/Images/yes.png) 
+| 14.0 |  | ![](Resources/Images/yes.png) 
 
 
 Windows Platform
