@@ -17,6 +17,10 @@ To disable response caching, set the <b>Pragma header</b> (as a global request h
 </ul>
 </blockquote>
 
+<blockquote><b><em>Note:</em></b>
+Please make sure that the scope of sdk.init() & appConfig should be global. Or in other words, appConfig & sdk.init() shouldn't be defined inside a function or any custom method.
+</blockquote>
+
 ## init
 
 ```
