@@ -1,7 +1,4 @@
                             
-
-Volt MX  Foundry console User Guide: Hard Delete option for Storage Services using the X-VoltMX-Soft-Delete Flag
-
 Object Services
 ===============
 
@@ -84,7 +81,7 @@ The **Request Input** page displays the input parameters for the selected servic
   
 | Field | Description |
 | --- | --- |
-| Operation | Select a method from the drop-down list to send the request. The available methods are:CreateUpdateDeleteGetFor more information on Methods Mapping, refer [Configure Methods Mapping to the Fields in the Background](../../../Foundry/voltmx_foundry_user_guide/Content/ObjectsServices/Objectservices_Stage3.md#configuring-methods-mapping-to-fields-on-the-back-end). |
+| Operation | Select a method from the drop-down list to send the request. The available methods are: Create, Update, Delete, Get. For more information on Methods Mapping, refer [Configure Methods Mapping to the Fields in the Background](../../../Foundry/voltmx_foundry_user_guide/Content/ObjectsServices/Objectservices_Stage3.md#configuring-methods-mapping-to-fields-on-the-back-end). |
 | Server URL | Displays the middleware URL under which the request is posted. (this is a non editable field) |
 | Query Params | Enter the query parameter for the request to be sent. |
 | Body | The **Body** section displays the field names defined for the selected service. The field names are defined while creating the service in Volt MX Foundry Console.Enter the field value across the field name for the request to be sent. |

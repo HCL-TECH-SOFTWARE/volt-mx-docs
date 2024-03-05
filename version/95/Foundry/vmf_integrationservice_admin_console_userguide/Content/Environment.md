@@ -29,13 +29,13 @@ The doughnut charts display the average usage of the CPU power in a chosen time 
 
 Click a **doughnut** chart of a specific node to display the line graph and the doughnut chart specific to that node.
 
-![](Resources/Images/cpueach_502x142.png)
+![](Resources/Images/cpueach.png)
 
 Memory
 
 The line graph displays the memory usage across all the nodes within the selected time period by default, with each line representing a node. Select a node in the [Node Filter](Monitoring.md#Node) to view the line graph specific to that node.
 
-![](Resources/Images/Memory_508x104.png)
+![](Resources/Images/Memory.PNG)
 
 The memory usage for each node will be shown in terms of:
 
@@ -46,7 +46,7 @@ The memory usage for each node will be shown in terms of:
 *   Non Heap Memory Available
 *   Non Heap Memory Used
 
-![](Resources/Images/memoryeach_516x162.png)
+![](Resources/Images/memoryeach.png)
 
 The doughnut charts display the average usage of Heap Memory and Non-Heap Memory in the Total Memory.
 
@@ -56,7 +56,7 @@ Threads
 
 The line graph displays the total number of threads processed across all the nodes within the selected time period by default, with each line representing a node. Select a node in the [Node Filter](Monitoring.md#Node) to view the line graph specific to that node.
 
-![](Resources/Images/Threads_532x111.png)
+![](Resources/Images/Threads.png)
 
 The threads processed for each node will be shown in terms of:
 
