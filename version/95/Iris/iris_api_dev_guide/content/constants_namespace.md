@@ -203,13 +203,7 @@ Alphabetical Listing of All Constants
     <td>constants.SCREEN</td>
 </tr>
 
-<tr>
-    <td>constants.TOAST_LENGTH_LONG</td>
-    <td rowspan="2"><a href="#ToastDuration">Toast Duration Constants</a></td>
-</tr>
-<tr>
-    <td>constants.TOAST_LENGTH_SHORT</td>
-</tr>
+
 
 
 
@@ -315,6 +309,14 @@ Alphabetical Listing of All Constants
 </tr>
 <tr>
     <td>constants.SYSTEM_ITEM_UNDO</td>
+</tr>
+
+<tr>
+    <td>constants.TOAST_LENGTH_LONG</td>
+    <td rowspan="2"><a href="#ToastDuration">Toast Duration Constants</a></td>
+</tr>
+<tr>
+    <td>constants.TOAST_LENGTH_SHORT</td>
 </tr>
 
 <tr>
