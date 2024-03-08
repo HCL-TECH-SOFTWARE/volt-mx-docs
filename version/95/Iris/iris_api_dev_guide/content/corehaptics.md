@@ -1,7 +1,5 @@
                             
 
-You are here: Core Haptics API
-
 Core Haptics API
 ================
 
