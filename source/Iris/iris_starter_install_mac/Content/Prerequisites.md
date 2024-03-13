@@ -20,7 +20,7 @@ Mac OS X 10.9 and above
 
 | Component        | Requirement                                                                                      |
 | ---------------- | ------------------------------------------------------------------------------------------------ |
-| Processor        | x86-64 CPU (64-bit Mac, with an Intel Core i3, Intel Core i5, Intel Core i7, or Xeon processor.)<br><b>Note : </b>HCL Volt Iris is supported on MacBooks that use the M1 , M2 and M3 processor.|
+| Processor        | x86-64 CPU (64-bit Mac, with an Intel Core i3, Intel Core i5, Intel Core i7, or Xeon processor.)<br><b>Note : </b>Volt MX does support MacOS silicon (chipset) that has been applicable from M1 series onwards.|
 | RAM              | 8 GB                                                                                             |
 | Internal Storage | 24 GB                                                                                            |
 | Network          | Ethernet Port                                                                                    |
