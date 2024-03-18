@@ -1,5 +1,5 @@
 
-# What's new in V9 Service Pack 5 FixPack 15 
+# What's new in V9 Service Pack 5 Fix Pack 15 
 
 This topic provides you the list of Volt MX V9.5.15 Iris & Foundry What's new features, enhancements, & defects' fix list with detailed information of each component.
 
