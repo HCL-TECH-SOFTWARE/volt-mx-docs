@@ -16,5 +16,14 @@ To download Plain JS SDK, follow these steps:
     The `voltmx-plainJS-sdk` folder contains the following files:
     - voltmx-sdk.js
     - voltmx-sdk.doc
+    - config.js
     - LICENSE.txt
     - version.txt
+
+>**Important :** In your app, the JS files must be loaded in the following sequence: config.js → voltmx-sdk.js.
+
+The `config.`js file contains the following keys. Make sure that you replace the placeholders with values that are related to your app.
+
+* appId: Specifies the project name of your client JS app. For example: <b>NewsAndWeather</b>
+* appName: Specifies the name of your client app. For example: <b>News and Weather app</b>
+* appVersion: Specifies the version number of the client app. For example: <b>1.0.0</b>
