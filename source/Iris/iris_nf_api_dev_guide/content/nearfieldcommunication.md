@@ -19,9 +19,9 @@ Some uses of this technology are:
 *   You can buy tickets.
 *   You can share files, photos, or videos.
 
-The data is stored in tags in a standard format. You can also store data in different formats. For more information on NFC, [click here](https://github.com/kony/KNF_NFC).
+The data is stored in tags in a standard format. You can also store data in different formats. For more information on NFC, [click here](https://github.com/HCL-TECH-SOFTWARE/volt-mx-samples/tree/main/JSBindingNFC).
 
 Sample Application
 ------------------
 
-Click [here](https://github.com/kony/KNF_NFC) to download a sample application for Near Field Communication.
+Click [here](https://github.com/HCL-TECH-SOFTWARE/volt-mx-samples/tree/main/JSBindingNFC) to download a sample application for Near Field Communication.
