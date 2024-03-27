@@ -62,13 +62,13 @@ System.setProperty("webdriver.chrome.driver", sgConfig.getDriverPath());
     chromeOptions.setBinary(sg.getKeyValue(browserPath));
 ```
     
-    where **sg** is an instance of SgConfiguration class and **chromeOptions** is an instance of ChromeOptions.
+where **sg** is an instance of SgConfiguration class and **chromeOptions** is an instance of ChromeOptions.
 </details>
 
 Building and running a test
 ---------------------------
 
-> **_Important:_**
+**_Important:_**  
 
 *   To run tests that are independent from the build process, you need a Binary URL that is public (open) and accessible on the internet. For example, a URL to an S3 bucket from the email notification that is sent by the **buildIrisApp** job.
 *   If you do not have a public Binary URL, HCL recommends that you run the tests as part of the build process.
