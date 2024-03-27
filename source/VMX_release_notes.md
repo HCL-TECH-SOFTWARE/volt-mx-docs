@@ -8,6 +8,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Iris](#volt-iris)
 
+- [V9 Servicepack 2 Fixpack 71](#v9-servicepack-2-fixpack-71)
 - [V9 Servicepack 2 Fixpack 70](#v9-servicepack-2-fixpack-70)
 - [V9 Servicepack 2 Fixpack 69](#v9-servicepack-2-fixpack-69)
 - [V9 Servicepack 2 Fixpack 68](#v9-servicepack-2-fixpack-68)
@@ -59,6 +60,12 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 
 ## Volt Iris
+
+### V9 Servicepack 2 Fixpack 71
+March 26, 2024
+
+There are no new features or enhancements in this release.
+For relevant support note, see the<a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476" target="_blank"> Cumulative fix list for HCL Volt MX</a>.
 
 ### V9 Servicepack 2 Fixpack 70
 February 29, 2024
