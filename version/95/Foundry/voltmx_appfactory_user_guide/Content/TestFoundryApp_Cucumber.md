@@ -23,20 +23,55 @@ To build and run a test, follow these steps:
 2.  For the **runFoundryTests** job, click the **Build with Parameters** icon on the right side of the row.  
     Alternatively, select the **runFoundryTests** job, and then from the left panel of the details page, select **Build with Parameters**.
 3.  Configure the build parameters for the runTest job. For more information about the parameters, refer to the following sections.  
-    Source Control
-    
-    <table style="width: 80%;mc-table-style: url]('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 30%;"><col class="TableStyle-Basic-Column-Column1" style="width: 50%;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1"><p>SCM_BRANCH</p></td><td class="TableStyle-Basic-BodyA-Column1-Body1"><p>Specifies the branch, release tag, or commit ID of the repository that contains the test files.</p><p>The tests must be placed at the following location:<br><code class="file_names" style="font-size: 11pt;">&lt;repository_root&gt;/testResources/Cucumber/</code></p><p>The <b>&lt;repository_root&gt;</b> specifies the root of the Foundry project source; it must be configured in the <a href="Project_Settings.html" target="_blank">Project Settings</a>.</p></td></tr></tbody></table>
-    
-    Testing
-    
-    <table style="width: 80%;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"><col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1" madcap:conditions="Default.Not Ready for Publish"><td class="TableStyle-Basic-BodyE-Column1-Body1"><p>TEST_FRAMEWORK</p></td><td class="TableStyle-Basic-BodyD-Column1-Body1"><p>Specifies the framework that must be used for the test run. Contains the following options:</p><ul><li>Cucumber Test Framework</li></ul></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><p>MVN_OPTIONS</p></td><td class="TableStyle-Basic-BodyD-Column1-Body1"><p>Specifies the Maven options that can be included for the test run. You can also add command-line options for the <code class="codefirst" style="font-size: 11pt;">mvn</code> command.</p><p>You can invoke Maven with a different set of goals, maven profiles, or additional arguments by using the -D option.<br>For example: <code class="codefirst">clean package -DskipTests -Darg1=foo1 -Darg2=foo2</code></p></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1"><p>TEST_ZIP_PACKAGE</p></td><td class="TableStyle-Basic-BodyD-Column1-Body1"><p>Specifies a URL to the zip package that contains the test resources.</p><p class="Important" madcap:autonum="<b><i><span style=&quot;color: #ff6600;&quot; class=&quot;mcFormatColor&quot;>Important: </span></i></b>">Make sure that the URL is public and accessible from App Factory.</p><p>If you have included the test resources in the SCM, you can skip this parameter.</p></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1"><p>TEST_REPORTS_DIRS</p></td><td class="TableStyle-Basic-BodyA-Column1-Body1"><p>Specifies the custom reports that are generated during the test run. For example, <code class="file_names">target/cucumber/cucumber.json</code>.</p><p>You can include multiple reports by separating them with a comma (<code class="codefirst">,</code>).</p></td></tr></tbody></table>
-    
-    Custom Hooks
-    
-    ![](Resources/Images/runTests_customHook.png)
-    
-    <table style="mc-table-style: url]('Resources/TableStyles/Basic.css');width: 90%;" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 35%;"><col class="TableStyle-Basic-Column-Column1" style="width: 55%;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1"><p>RUN_CUSTOM_HOOKS</p></td><td class="TableStyle-Basic-BodyA-Column1-Body1"><p>Specifies whether Custom Hooks must be run in the after the tests are executed (the Post-Test stage). For more information, refer to <a href="CustomHooks.html" target="_blank">Custom Hooks</a>.</p></td></tr></tbody></table>
-    
+
+    <details>
+    <summary>
+        Source Control
+    </summary>
+    <table>
+    <tr>
+    <th>Parameter</th>
+    <th>Description</th>
+    </tr>
+    <tr>
+    <td>SCM_BRANCH</td>
+    <td>
+    Specifies the branch, release tag, or commit ID of the repository that contains the test files.<br>
+    The tests must be placed at the following location:<br>
+    <code>&lt;repository_root&gt;/testResources/Cucumber/</code><br>
+    The &lt;repository_root&gt; specifies the root of the Foundry project source; it must be configured in the <a href="Project_Settings.html">Project Settings</a>.
+    </td>
+    </tr>
+    </table>
+    </details>
+    <details>
+    <summary>
+        Testing
+    </summary>
+    <table>
+    <tr>
+    <th>Parameter</th>
+    <th>Description</th>
+    </tr>
+    <tr>
+    <td>MVN_OPTIONS</td>
+    <td>Specifies the Maven options that can be included for the test run. You can also add command-line options for the <code>mvn</code> command.<br>
+    You can invoke Maven with a different set of goals, maven profiles, or additional arguments by using the -D option.For example: <code>clean package -DskipTests -Darg1=foo1 -Darg2=foo2</code>.</td>
+    </tr>
+    <tr>
+    <td>TEST_ZIP_PACKAGE</td>
+    <td>Specifies a URL to the zip package that contains the test resources.<br>
+    <b>Note:</b> Make sure that the URL is public and accessible from App Factory.<br>
+    If you have included the test resources in the SCM, you can skip this parameter.</td>
+    </tr>
+    <tr>
+    <td>TEST_REPORTS_DIRS</td>
+    <td>Specifies the custom reports that are generated during the test run. For example,<code>target/cucumber/cucumber.json.</code><br>
+    You can include multiple reports by separating them with a comma (,).</td>
+    </tr>
+    </table>
+    </details>
+
 
 Running Tests from other jobs
 -----------------------------
@@ -54,9 +89,10 @@ To setup an auto-triggered test job, follow these steps:
 2.  Select the **createFoundryTest** job.
 3.  Configure the CRON\_SCHEDULE parameter based on your requirement.
     *   If you want to create a **Scheduler**, type a Cron expression that corresponds to the time at which the build job must be triggered.  
-          
-        For information about cron expressions, refer to [Cron](https://en.wikipedia.org/wiki/Cron).
-    *   If you want to create a **Watcher**, leave the CRON\_SCHEDULE parameter blank.
+        For information about cron expressions, refer to [Cron](https://en.wikipedia.org/wiki/Cron). 
+
+    *   If you want to create a **Watcher**, leave the CRON\_SCHEDULE parameter blank.  
+
 4.  Configure the remaining parameters, which are the same as the **runFoundryTest** job.
 5.  After you configure all the parameters, click **BUILD**.
 

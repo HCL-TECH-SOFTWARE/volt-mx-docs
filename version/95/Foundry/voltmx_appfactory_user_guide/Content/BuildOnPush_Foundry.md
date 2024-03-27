@@ -15,7 +15,7 @@ To create a watcher, you must create a [Webhook](https://en.wikipedia.org/wiki/W
 
 After you create a webhook, you can create watcher jobs in App Factory. For more information, refer to [Configuring a Watcher Job in App Factory](#configuring-a-watcher-job-in-app-factory).
 
-> **_Important:_** HCL recommends that you use the **createFoundryAppTrigger** job to create watcher jobs.  
+> **_Important:_** VoltMX recommends that you use the **createFoundryAppTrigger** job to create watcher jobs.  
   
 Other Trigger jobs such as **createExportTrigger**, **createImportTrigger**, and **createMigrationTrigger** will be deprecated soon. The functionality of these triggers is available in the **createFoundryAppTrigger** job.
 
@@ -33,7 +33,7 @@ Make sure that you have permissions to change the settings of the GitHub reposit
 1.  Open your GitHub repository in a web browser, navigate to **Settings** → **Webhooks**, and then click **Add webhook**.  
     The **Add webhook** page opens.
 
-[![](Resources/Images/Flyway_buildOnPush_GitHub_thumb_800_0.png)](Resources/Images/Flyway_buildOnPush_GitHub.png)
+    [![](Resources/Images/Flyway_buildOnPush_GitHub_thumb_800_0.png)](Resources/Images/Flyway_buildOnPush_GitHub.png)
 
 3.  Configure the following parameters in the **Add webhook** page:
     *   Set the Payload URL to: `https://<App Factory domain>/github-webhook/`  
@@ -52,7 +52,7 @@ Make sure that you have permissions to change the settings of the GitHub reposit
 4.  After you configure the necessary parameters, click **Add Webhook**.  
     The webhook is created.
 
-![](Resources/Images/AT_AddWebhook.png)
+    ![](Resources/Images/AT_AddWebhook.png)
 
 6.  You can Edit or Delete a Webhook by clicking the respective button. For more information about Webhooks, refer to the [GitHub Webhook Documentation](https://developer.github.com/webhooks).  
     [![](Resources/Images/Webhook_Edit_Delete_thumb_700_0.png)](Resources/Images/Webhook_Edit_Delete.png)

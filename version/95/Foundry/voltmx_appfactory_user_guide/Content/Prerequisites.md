@@ -58,7 +58,7 @@ Additional Requirements
 -----------------------
 
 
-<details close markdown="block"><summary>GitHub 2FA</summary>
+<details close markdown="block"><summary id="git">GitHub 2FA</summary>
 
 If you use GitHub as the Git vendor for your SCM, you need to set up two-factor authentication for GitHub.
 

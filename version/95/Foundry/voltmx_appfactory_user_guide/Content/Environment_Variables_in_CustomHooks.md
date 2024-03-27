@@ -113,7 +113,7 @@ For retrieving artifacts in post build Custom Hooks, use PROJECT\_WORKSPACE to g
 Sample Use-Case Scenario
 ------------------------
 
-For example, if you have installed Volt MX Iris 7.3 on your Mac machine. You follow a few manual steps to build the IPA by extracting the KAR on your Mac machine. During the IPA generation, you perform additional manual settings in the Xcode project to change the deployment target as shown in the following image.
+For example, if you have installed Volt MX Iris on your Mac machine. You follow a few manual steps to build the IPA by extracting the KAR on your Mac machine. During the IPA generation, you perform additional manual settings in the Xcode project to change the deployment target as shown in the following image.
 
 ![](Resources/Images/Select_Deployment_Target_590x433.png)
 
@@ -151,7 +151,8 @@ App Factory exposes all the job build parameters and file-system variables to Cu
 *   You can use the `PROJECT_VMWORKSPACE_PATH` variable in the ANT file to get the absolute path of the Xcode project in the App Factory Workspace.
 *   To update the Deployment Target on Xcode, you must update the **VMAppWithVoltMXlib.xcodeproj/project.pbxproj** file that contains the `IPHONEOS_DEPLOYMENT_TARGET` key. You can make similar changes in the project for custom requirements using Custom Hooks.
 *   Add the following ANT script to the **build.xml** file of the Custom Hook that contains the logic to update the `IPHONEOS_DEPLOYMENT_TARGET` key with the required version mentioned in the **SCRIPT\_ARGUMENTS**.  
-    SCRIPT\_ARGUMENTS is passed as the argument during the Custom Hook upload.
+    SCRIPT\_ARGUMENTS is passed as the argument during the Custom Hook upload.  
+
 ```
 <project name="default" default="project_xcodesettings_update">
 <target name="project_xcodesettings_update">
@@ -179,7 +180,9 @@ App Factory exposes all the job build parameters and file-system variables to Cu
 </target>
 </project>
 
-```*   Add the **build.xml** file to a zip file, and upload it to the Custom Hook Dashboard with the following parameters.
+```  
+
+*   Add the **build.xml** file to a zip file, and upload it to the Custom Hook Dashboard with the following parameters.
 
 | Binary Location | Description |
 | --- | --- |
@@ -192,9 +195,10 @@ App Factory exposes all the job build parameters and file-system variables to Cu
 
 For more information on Custom Hooks, refer [Configuring Custom Hooks](CustomHooksIris.md#configuring-custom-hooks).
 
-```
+
 **Custom Hook build.xml (Ant Script)**  
-  
+
+```
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project name="appfactory" basedir="." default="updateModules ">
 

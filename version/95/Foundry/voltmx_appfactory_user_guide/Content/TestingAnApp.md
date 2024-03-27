@@ -81,28 +81,52 @@ To build and run a test, follow these steps:
 3.  Configure the build parameters for the runTest job. For more information about the parameters, refer to the following sections.  
     
 
-<details close markdown="block"><summary>Source Control</summary>
-    
-    <table style="width: 80%;mc-table-style: url]('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 30%;"><col class="TableStyle-Basic-Column-Column1" style="width: 50%;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">PROJECT_SOURCE_CODE_BRANCH</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the branch, release tag, or the commit ID of the repository that contains the test files.The tests must be placed at the following location:<code class="file_names">&lt;Repository-Root&gt;/&lt;Project-Root&gt;/test/testNG/</code>The <b>&lt;Repository_Root&gt;</b> and <b>&lt;Project-Root&gt;</b> must be configured while <a href="Setup.md#Iris" target="_blank">creating the Iris project in App Factory</a>.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">RUN_NATIVE_TESTS</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies whether App Factory must run tests for the Native platform.If you enable this parameter, the console displays additional parameters for Native tests. For more information, refer to <a href="#Build_Native" class="selected">Native build parameters</a>.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">RUN_DESKTOPWEB_TESTS</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Specifies whether App Factory must run tests for the Desktop Web platform.If you enable this parameter, the console displays additional parameters for Desktop Web tests. For more information, refer to <a href="#Desktop_Build" class="selected">Desktop Web build parameters</a>.</td></tr></tbody></table>    
+<details close="" markdown="block">
+  <summary>
+    Source Control
+  </summary>
+  <table style="width: 80%;mc-table-style: url]('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0">
+    <colgroup>
+      <col class="TableStyle-Basic-Column-Column1" style="width: 30%;">
+      <col class="TableStyle-Basic-Column-Column1" style="width: 50%;">
+    </colgroup>
+    <tbody>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th>
+        <th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th>
+      </tr>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <td class="TableStyle-Basic-BodyE-Column1-Body1">PROJECT_SOURCE_CODE_BRANCH</td>
+        <td class="TableStyle-Basic-BodyD-Column1-Body1">
+          Specifies the branch, release tag, or the commit ID of the repository that contains the test files.The tests must be placed at the following location:<code class="file_names">&lt;Repository-Root&gt;/&lt;Project-Root&gt;/test/testNG/</code><br>The <b>&lt;Repository_Root&gt;</b> must be configured in the <a href="Project_Settings.html">Project Settings</a>. The &lt;Project-Root&gt;is the name of the project that is configured while creating the <a href="Setup.html">Iris project in App Factory</a>.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</details>
+
+
+<details close markdown="block"><summary>Testing</summary>
+<table style="width: 80%;mc-table-style: url]('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 30%;"><col class="TableStyle-Basic-Column-Column1" style="width: 50%;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">RUN_NATIVE_TESTS</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies whether App Factory must run tests for the Native platform.If you enable this parameter, the console displays additional parameters for Native tests. For more information, refer to <a href="#Build_Native" class="selected">Native build parameters</a>.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">TEST_FRAMEWORK</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the framework that you want to use for testing the app. The test framework can be <b>TestNG</b> or <b>Jasmine</b>.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">RUN_DESKTOPWEB_TESTS</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Specifies whether App Factory must run tests for the Desktop Web platform.If you enable this parameter, the console displays additional parameters for Desktop Web tests. For more information, refer to <a href="#Desktop_Build" class="selected">Desktop Web build parameters</a>.</td></tr></tbody></table>
 </details>
 
 <details close markdown="block"><summary>Native build parameters</summary>
     
-    <table style="mc-table-style: url]('Resources/TableStyles/Basic.css');width: 90%;" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 35%;"><col class="TableStyle-Basic-Column-Column1" style="width: 55%;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">ANDROID_UNIVERSAL_NATIVE_BINARY_URL</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the URL of the Android universal binaries that are generated by a build job or generated locally.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">ANDROID_MOBILE_NATIVE_BINARY_URL</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the URL of the Android Mobile binary that is generated by a build job or generated locally.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">ANDROID_TABLET_NATIVE_BINARY_URL</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the URL of the Android Tablet binary that is generated by a build job or generated locally.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">IOS_UNIVERSAL_NATIVE_BINARY_URL</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the URL of the iOS universal binaries that are generated by a build job or generated locally.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">IOS_MOBILE_NATIVE_BINARY_URL</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the URL of the iPhone binary that is generated by a build job or generated locally.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">IOS_TABLET_NATIVE_BINARY_URL</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the URL of the iPad binary that is generated by a build job or generated locally.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">NATIVE_TESTS_URL</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the URL of the binaries for the compiled test project. If you provide Git parameters, you can skip this parameter.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">TEST_ENVIRONMENT</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the environment on which the Device Farm runs the test. You can select a Standard Test Environment, or select a Custom Test Environment.For more information, refer to <a href="#Native" class="selected">Native Testing Environments</a>.If you select a Custom Test Environment, the console displays additional parameters. For more information, refer to Custom Test Environment parameters.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">AVAILABLE_TEST_POOLS</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Specifies the device pool that must be used for the tests. If a device pool is empty, the build fails.For more information, refer to <a href="Configuring_Device_Pools.md" target="_blank">Configuring Device Pools</a>.</td></tr></tbody></table>
+<table style="mc-table-style: url]('Resources/TableStyles/Basic.css');width: 90%;" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 35%;"><col class="TableStyle-Basic-Column-Column1" style="width: 55%;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">ANDROID_UNIVERSAL_NATIVE_BINARY_URL</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the URL of the Android universal binaries that are generated by a build job or generated locally.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">ANDROID_MOBILE_NATIVE_BINARY_URL</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the URL of the Android Mobile binary that is generated by a build job or generated locally.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">ANDROID_TABLET_NATIVE_BINARY_URL</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the URL of the Android Tablet binary that is generated by a build job or generated locally.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">IOS_UNIVERSAL_NATIVE_BINARY_URL</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the URL of the iOS universal binaries that are generated by a build job or generated locally.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">IOS_MOBILE_NATIVE_BINARY_URL</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the URL of the iPhone binary that is generated by a build job or generated locally.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">IOS_TABLET_NATIVE_BINARY_URL</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the URL of the iPad binary that is generated by a build job or generated locally.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">NATIVE_TESTS_URL</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the URL of the binaries for the compiled test project. If you provide Git parameters, you can skip this parameter.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">TEST_ENVIRONMENT</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the environment on which the Device Farm runs the test. You can select a Standard Test Environment, or select a Custom Test Environment.For more information, refer to <a href="#Native" class="selected">Native Testing Environments</a>.If you select a Custom Test Environment, the console displays additional parameters. For more information, refer to Custom Test Environment parameters.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">AVAILABLE_TEST_POOLS</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Specifies the device pool that must be used for the tests. If a device pool is empty, the build fails.For more information, refer to <a href="Configuring_Device_Pools.md" target="_blank">Configuring Device Pools</a>.</td></tr></tbody></table>
     
-    **Custom Test Environment parameters**
+**Custom Test Environment parameters**
     
-    <table style="mc-table-style: url('Resources/TableStyles/Basic.css');width: 90%;" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 35%;"><col class="TableStyle-Basic-Column-Column1" style="width: 55%;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">APPIUM_VERSION</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the Appium version that is used to run the tests.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">TESTNG_FILES</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Specifies the relative path of the TestNG.xml file in the test jar file, for example: <code class="file_names" style="font-size: 11pt;">appfactory/Testng.xml</code>.If the path is not specified, the root of the test jar file is taken as the default path.You can specify multiple file paths by using comma separated path values. For example:<code class="codefirst">voltmx/Testng.xml,voltmx/appfactory/Testng.xml,testng.xml</code><span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>If the specified TestNG file is not found in the source, the tests run independently similar to Standard Test Environment.</td></tr></tbody></table>    
+<table style="mc-table-style: url('Resources/TableStyles/Basic.css');width: 90%;" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 35%;"><col class="TableStyle-Basic-Column-Column1" style="width: 55%;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">APPIUM_VERSION</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the Appium version that is used to run the tests. For information about the artifacts that are available in the notification mail for AWS Custom Environment Run, refer to <a href="BuildingAnApp.html">Building an App in AWS Custom Environment.</a></td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">TESTNG_FILES</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Specifies the relative path of the TestNG.xml file in the test jar file, for example: <code class="file_names" style="font-size: 11pt;">appfactory/Testng.xml</code>.If the path is not specified, the root of the test jar file is taken as the default path.You can specify multiple file paths by using comma separated path values. For example:<code class="codefirst">voltmx/Testng.xml,voltmx/appfactory/Testng.xml,testng.xml</code><span class="autonumber"><span><b><i><span style="color: #0a9c4a;" class="mcFormatColor">Note: </span></i></b></span></span>If the specified TestNG file is not found in the source, the tests run independently similar to Standard Test Environment.</td></tr></tbody></table>    
 </details>
 
 <details close markdown="block"><summary>Desktop Web build parameters</summary>
     
-    <table style="mc-table-style: url('Resources/TableStyles/Basic.css');width: 90%;" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 35%;"><col class="TableStyle-Basic-Column-Column1" style="width: 55%;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">FOUNDRY_APP_URL</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the URL of the Foundry app with which the Desktop Web WAR file is published.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">DESKTOPWEB_TESTS_URL</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the URL of the Desktop Web binary that is generated by a build job or generated locally.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">AVAILABLE_BROWSERS</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the browser on which you want to run the Desktop Web tests.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">SCREEN_RESOLUTIONS</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the resolution at which the browser must launch and run the tests.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">RUN_DESKTOPWEB_TESTS_ARGUMENTS</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Specifies additional arguments (parameters) that must be passed in the Maven command for the Desktop Web tests.For Example: If you pass <span style="font-family: monospace;">-Dsurefire.suiteXmlFiles=resources/Testng.xml</span>, the argument triggers the tests from the <span style="font-family: monospace;">resources/Testng.xml</span> file. If you do not pass the argument, <span style="font-family: monospace;">Testng.xml</span> is selected as a default file.</td></tr></tbody></table>    
+<table style="mc-table-style: url('Resources/TableStyles/Basic.css');width: 90%;" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 35%;"><col class="TableStyle-Basic-Column-Column1" style="width: 55%;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">FOUNDRY_APP_URL</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the URL of the Foundry app with which the Desktop Web WAR file is published.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">DESKTOPWEB_TESTS_URL</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the URL of the Desktop Web binary that is generated by a build job or generated locally.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">AVAILABLE_BROWSERS</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the browser on which you want to run the Desktop Web tests.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">SCREEN_RESOLUTIONS</td><td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the resolution at which the browser must launch and run the tests.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">RUN_DESKTOPWEB_TESTS_ARGUMENTS</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Specifies additional arguments (parameters) that must be passed in the Maven command for the Desktop Web tests.For Example: If you pass <span style="font-family: monospace;">-Dsurefire.suiteXmlFiles=resources/Testng.xml</span>, the argument triggers the tests from the <span style="font-family: monospace;">resources/Testng.xml</span> file. If you do not pass the argument, <span style="font-family: monospace;">Testng.xml</span> is selected as a default file.</td></tr></tbody></table>    
 </details>
 
 <details close markdown="block"><summary>Custom Hooks</summary>
     
-    <table style="mc-table-style: url]('Resources/TableStyles/Basic.css');width: 90%;" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 35%;"><col class="TableStyle-Basic-Column-Column1" style="width: 55%;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">RUN_CUSTOM_HOOKS</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Specifies whether Custom Hooks must be run in the after the tests are executed (the Post-Test stage). For more information, refer to <a href="CustomHooks.md" target="_blank">Custom Hooks</a>.</td></tr></tbody></table>    
+<table style="mc-table-style: url]('Resources/TableStyles/Basic.css');width: 90%;" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 35%;"><col class="TableStyle-Basic-Column-Column1" style="width: 55%;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th><th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">RUN_CUSTOM_HOOKS</td><td class="TableStyle-Basic-BodyA-Column1-Body1">Specifies whether Custom Hooks must be run in the after the tests are executed (the Post-Test stage). For more information, refer to <a href="CustomHooks.md" target="_blank">Custom Hooks</a>.</td></tr></tbody></table>    
 </details>
 
 Native Test Environments
@@ -167,56 +191,51 @@ You can configure the Maven build to package the `testng.xml` with the Testing j
     
 To apply the **testng.xml** file to the Appium TestNG test package for AWS Device Farm, you must add the **testng.xml** file to the root of the **\*-tests.jar file**. To achieve this, do the following:
 
-1.  Place your test code in the root test folder that is available at the following locations:
+*  Place your test code in the root test folder that is available at the following locations:
     
     *   For SP4 and higher versions, `<project_root>/testresources/TestNG/`.
     *   For lower versions, `<project_root>/test/TestNG`.
     
     > **_Note:_** Ensure that **pom.xml** is present in the required directory.
     
-2.  Write the required TestNG XML and place it at `<root_test_folder>/src/test/resources` location.  
-    ![](Resources/Images/testing.png1_549x217.png)
-3.  To explicitly reference a directory, include the **testresources** tags in the **pom.xml**.
-```
-<testResources>
-         <testResource>
-            <directory>${project.basedir}/<root_test_folder>/src/test/resources</directory>
-         </testResource>
+*  Write the required TestNG XML and place it at `<root_test_folder>/src/test/resources` location.  
+    ![](Resources/Images/testing.png1_549x217.png)  
+
+*  To explicitly reference a directory, include the **testresources** tags in the **pom.xml**.
+    ```
+    <testResources>
+            <testResource>
+                <directory>${project.basedir}/<root_test_folder>/src/test/resources</directory>
+            </testResource>
     </testResources>
-    
-```
-4.  To reference the TestNG XML file for local executions, modify the **pom.xml** to include the **surefire** plugin.  
-```
-<plugin>
-        <groupId>org.apache.maven.plugins</groupId> 
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.12.4</version> 
-        <configuration>
-           <suiteXmlFiles> <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile></suiteXmlFiles>
-        </configuration>
-    </plugin>
-    
-```
+    ```  
+
+*  To reference the TestNG XML file for local executions, modify the **pom.xml** to include the **surefire** plugin. 
+
+    ```<plugin>
+            <groupId>org.apache.maven.plugins</groupId> 
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>2.12.4</version> 
+            <configuration>
+            <suiteXmlFiles> <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile></suiteXmlFiles>
+            </configuration>
+        </plugin>
+    ```
     
     > **_Note:_** For more than one TestNG XML, use multiple `<suiteXmlFile>` tags.
     
-5.  To verify the package, you can build the test code to create a dependencies **zip** that contains the **Testing JAR**. This **zip** with the dependencies will be present inside **<root\_test\_folder>**/ **target directory**. Package the tests using maven clean and package commands at the test root folder. The **\-DskipTests=true** option specifies that the build should not run the unit tests.
-```
-mvn clean package -DskipTests=true  
+*  To verify the package, you can build the test code to create a dependencies **zip** that contains the **Testing JAR**. This **zip** with the dependencies will be present inside **<root\_test\_folder>**/ **target directory**. Package the tests using maven clean and package commands at the test root folder. The **\-DskipTests=true** option specifies that the build should not run the unit tests.  
 
-```
+    `mvn clean package -DskipTests=true`  
 
-6.  Extract the zip folder. To verify whether the TestNG XML file is present at the desired location (root, by default), extract the jar using **xf** command.
-    
-```
-jar xf nameOfTheProjectFromPom-1.0-SNAPSHOT-tests.jar
-```
-    
-    Alternatively, you can use the **unzip** command to extract the contents of the jar.
-    
-```
-unzip nameOfTheProjectFromPom-1.0-SNAPSHOT-tests.jar -d sampletestsjarcontents
-```
+
+*  Extract the zip folder. To verify whether the TestNG XML file is present at the desired location (root, by default), extract the jar using **xf** command.  
+
+    `jar xf nameOfTheProjectFromPom-1.0-SNAPSHOT-tests.jar`  
+
+*  Alternatively, you can use the **unzip** command to extract the contents of the jar.  
+
+    `unzip nameOfTheProjectFromPom-1.0-SNAPSHOT-tests.jar -d sampletestsjarcontents` 
 
 If the XML is in the correct location, remove the target folder and check-in the code into a branch in Git. Now, you can run your tests on App Factory in the Custom Test Environment. For more information, please refer to [AWS Documentation](https://aws.amazon.com/premiumsupport/knowledge-center/xml-file-tests-jar-file-device-farm/).
 
@@ -257,7 +276,7 @@ When the project test build is complete and the test results are published at S3
 
 On unsuccessful build for the tests run, the following e-mail is sent to the recipients:
 
-![](Resources/Images/dweb-test-fail_616x397.png)
+![](Resources/Images/dweb-test-fail.png)
 
 In the final stage, the consolidated test run status is notified via e-mail. Refer the following screenshots for the sample email for consolidated status.
 
@@ -364,22 +383,22 @@ To setup auto-triggered job, perform the following steps:
 1.  Go to **Tests** folder under project's root folder.
 2.  Click on **createTest** job.
 
-![](Resources/Images/TA_TestsFolderStructure_577x306.png)
+    ![](Resources/Images/TA_TestsFolderStructure_577x306.png)
 
 3.  Provide all required parameters (they are the same as in "Facade" job).
 
-> **_Important:_** Please note, that there is one additional parameter, which is called "CRON\_SCHEDULE". If "CRON\_SCHEDULE" parameter is given, then a cron-triggered job is created and stored in "Schedulers" sub-folder. If the parameter is not provided, a scm-triggered job is created and stored in "Watchers" sub-folder.
+    > **_Important:_** Please note, that there is one additional parameter, which is called "CRON\_SCHEDULE". If "CRON\_SCHEDULE" parameter is given, then a cron-triggered job is created and stored in "Schedulers" sub-folder. If the parameter is not provided, a scm-triggered job is created and stored in "Watchers" sub-folder.
 
-[![](Resources/Images/TA_createTest_thumb_800_0.png)](Resources/Images/TA_createTest.png)
+    [![](Resources/Images/TA_createTest_thumb_800_0.png)](Resources/Images/TA_createTest.png)
 
 4.  Check that the createTest job is complete.
 
-![](Resources/Images/TA_CreateTestSuccess.png)
+    ![](Resources/Images/TA_CreateTestSuccess.png)
 
-> **_Important:_** Every Scheduler that is created, will have cron string in job's name to simplify the job search. Refer the image below.
+    > **_Important:_** Every Scheduler that is created, will have cron string in job's name to simplify the job search. Refer the image below.
 
-![](Resources/Images/TA_SchedulerCron_574x228.png)
+    ![](Resources/Images/TA_SchedulerCron_574x228.png)
 
-> **_Important:_** Every Watcher that is created contains the branch name in the job name to simplify job search.
+    > **_Important:_** Every Watcher that is created contains the branch name in the job name to simplify job search.
 
-![](Resources/Images/TA_WatchersCron_575x229.png)
+    ![](Resources/Images/TA_WatchersCron_575x229.png)
