@@ -19,16 +19,19 @@ For example:
 
 ![](Resources/Images/child_with_verbs_configured-2.png)
 
+**_Note:_** In case of data storage and rdbms object services, each data model gets its own verbs respectively. These data models are intended to be used in this manner.
+
 ### Limitations
 
 - The hierarchical data model depends upon the supported `group_concat_max_len` option value from the DB as query length increases with this hierarchical relationship. You might get this error while performing sync:
-    
-    ```{
-    "errmsg": "Error while executing the SQLData truncation: Invalid JSON text in argument 1 to function cast_as_json: \"Invalid value.\" at position 1025.",
-          "opstatus": 20005,
-          "httpStatusCode": -1
-    }```
-    
-    To fix this,increase the value of property `group_concat_max_len` at database level to at least 2MB.
 
-**_Note:_** In case of data storage and rdbms object services, each data model gets its own verbs respectively. These data models are intended to be used in this manner.
+```
+{
+"errmsg": "Error while executing the SQLData truncation: Invalid JSON text in argument 1 to function cast_as_json: \"Invalid value.\" at position 1025.",
+      "opstatus": 20005,
+      "httpStatusCode": -1
+}
+```
+
+   To fix this,increase the value of property `group_concat_max_len` at database level to at least 2MB.
+
