@@ -41,7 +41,6 @@ The installation of the Volt Foundry software supports the following versions of
 
     *   Ubuntu 22.04
     *   Ubuntu 22
-    *   Ubuntu 21
     *   Ubuntu 20
 
 #### AIX
@@ -112,7 +111,7 @@ For development environments, in addition to the versions of Operating Systems, 
 #### Windows
 
 *   Windows 10
-*   Windows 8.1
+
 
 ### Foundry Container Supported Config Matrix 
 
@@ -122,7 +121,7 @@ For development environments, in addition to the versions of Operating Systems, 
 
 #### DB’s 
 
-* MySQL 5.7.x 
+* MySQL 8.0.x 
 * Oracle 19c 
 * MSSQL 2017/2019 
 
