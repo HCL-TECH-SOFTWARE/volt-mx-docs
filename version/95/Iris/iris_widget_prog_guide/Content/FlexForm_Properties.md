@@ -1923,6 +1923,8 @@ transitionMode: "Default",
 };  
 
 ```
+> **_Note:_** enableDefaultBackSwipe flag in infoplist_configuration.json will stop the version 1.0 transition effects configured for your forms and uses default transition behaviour. For more details check [here](https://github01.hclpnp.com/pages/phoenix-temenos/volt-mx-doc-opnsrc/95/docs/documentation/Iris/iris_user_guide/Content/BuildAnAppForiOS.html#using-application-reference-counting)
+
 
 ### Platform Availability
 
@@ -2829,6 +2831,8 @@ myForm.outTransitionConfig = {
 };  
 
 ```
+> **_Note:_** enableDefaultBackSwipe flag in infoplist_configuration.json will stop the version 1.0 transition effects configured for your forms and uses default transition behaviour. For more details check [here](https://github01.hclpnp.com/pages/phoenix-temenos/volt-mx-doc-opnsrc/95/docs/documentation/Iris/iris_user_guide/Content/BuildAnAppForiOS.html#using-application-reference-counting)
+
 
 ### Platform Availability
 
@@ -4182,6 +4186,8 @@ var newAttributes = {
 };
 myForm.titleBarAttributes = newAttributes;
 ```
+> **_Note:_** To enable default back swipe in your forms, configure enableDefaultBackSwipe  in infoplist_configuration.json. Check  [here](https://github01.hclpnp.com/pages/phoenix-temenos/volt-mx-doc-opnsrc/95/docs/documentation/Iris/iris_user_guide/Content/BuildAnAppForiOS.html#using-application-reference-counting) to how to configure. 
+
 
 ### Platform Availability
 
@@ -4348,6 +4354,8 @@ newTransform.translate3D(223, 12, 56);
 //translates by 223 xAxis,12 in yAxis,56 in zAxis
 widget.transform = newTransform;
 ```
+
+
 
 ### Platform Availability
 

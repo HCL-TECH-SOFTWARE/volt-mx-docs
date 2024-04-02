@@ -50,6 +50,20 @@ To automatically modify info.plist with custom key value pairs, do the following
 
 The json file is incorporated into the kar file. When the kar file is extracted, iOS incorporates the key value pairs in the json fie into `info.plist`.
 
+### Enable Default Back Swipe
+
+From iOS 7 apple introduced back swipe to go previews form. However, Volt MX doesn’t provide by default to support existing apps to work as it is. 
+
+By default, all Volt MX applications are built without back swipe to go previous form. However, to enable back swipe to go previous form in the final Application by adding the following to 
+
+`<WorkspaceName>\<ProjectName>\resources\common\infoplist_configuration.json`. 
+
+```
+{ "enableDefaultBackSwipe" : true }
+```
+
+> **_Note:_** Enabling default back swipe will stop the version 1.0 transition effects configured for your forms and uses default transition behaviour. 
+
 ### Using Application Reference Counting
 
 Automatic Reference Counting (ARC) implements automatic memory management for Objective-C objects and blocks, freeing the programmer from the need to explicitly insert retains and releases.
