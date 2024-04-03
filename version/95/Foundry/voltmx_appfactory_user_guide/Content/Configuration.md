@@ -28,7 +28,7 @@ There are several groups of parameters that are required to run Facade job. The 
         
         > **_Important:_** Provide Git credentials depending on git URL format. If https link is provided, then user credentials (Username and password) are sufficient. In case of ssh link - ssh key needs to be added.
         
-    ![](Resources/Images/source_control.png)
+    ![](Resources/Images/source_control_thumb_800_0.png)
     
     > **_Note:_** If your repository is protected with 2FA (two-factor authentication) in GitHub, you need to add the GitHub credentials to your project. For more information, refer to [GitHub 2FA](Prerequisites.md#git). If you want to add SSH credentials, refer to [Add SSH Key Credentials](ManagingCredentials.md#Adding_SourceCode).
     

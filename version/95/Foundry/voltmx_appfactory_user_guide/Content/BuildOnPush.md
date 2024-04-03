@@ -100,7 +100,7 @@ Configuring a Watcher Job in App Factory
 
 7.  Configure the remaining parameters, which are the same as the [buildIris job](BuildingAnApp.md).
 
-Jobs that are triggered by a push to the SCM are stored in the **watchers** folder. Every Watcher has a branch name in the name of Job to simplify job search.
+    Jobs that are triggered by a push to the SCM are stored in the **watchers** folder. Every Watcher has a branch name in the name of Job to simplify job search.
 
     ![](Resources/Images/AT_Watchers.png)
 

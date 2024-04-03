@@ -47,7 +47,7 @@ Prerequisites
 
 *   Make sure that the Iris project contains the Selenium test files at the following location:  
     `<Project-Root>/test/TestNG/DesktopWeb/`  
-    ![](Resources/Images/dweb.png)
+    ![](Resources/Images/dweb_641x342.png)
 *   Make sure that the Desktop Web tests are run by using Selenium and TestNG
 *   Make sure that you run the tests on Google Chrome in headless mode before you run them on App Factory
 *   If you are running the test on App Factory, refer to the chrome driver path and browser path as follows:
