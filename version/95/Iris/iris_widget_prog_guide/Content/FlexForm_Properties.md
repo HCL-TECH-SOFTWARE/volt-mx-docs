@@ -1923,7 +1923,7 @@ transitionMode: "Default",
 };  
 
 ```
-> **_Note:_** enableDefaultBackSwipe flag in infoplist_configuration.json will stop the version 1.0 transition effects configured for your forms and uses default transition behaviour. For more details check [here](https://github01.hclpnp.com/pages/phoenix-temenos/volt-mx-doc-opnsrc/95/docs/documentation/Iris/iris_user_guide/Content/BuildAnAppForiOS.html#using-application-reference-counting)
+> **_Note:_** enableDefaultBackSwipe flag in infoplist_configuration.json will stop the version 1.0 transition effects configured for your forms and uses default transition behaviour. For more details check [here](https://github01.hclpnp.com/pages/phoenix-temenos/volt-mx-doc-opnsrc/95/docs/documentation/Iris/iris_user_guide/Content/BuildAnAppForiOS.html#enable-default-back-swipe)
 
 
 ### Platform Availability
@@ -2831,7 +2831,7 @@ myForm.outTransitionConfig = {
 };  
 
 ```
-> **_Note:_** enableDefaultBackSwipe flag in infoplist_configuration.json will stop the version 1.0 transition effects configured for your forms and uses default transition behaviour. For more details check [here](https://github01.hclpnp.com/pages/phoenix-temenos/volt-mx-doc-opnsrc/95/docs/documentation/Iris/iris_user_guide/Content/BuildAnAppForiOS.html#using-application-reference-counting)
+> **_Note:_** enableDefaultBackSwipe flag in infoplist_configuration.json will stop the version 1.0 transition effects configured for your forms and uses default transition behaviour. For more details check [here](https://github01.hclpnp.com/pages/phoenix-temenos/volt-mx-doc-opnsrc/95/docs/documentation/Iris/iris_user_guide/Content/BuildAnAppForiOS.html#enable-default-back-swipe)
 
 
 ### Platform Availability
@@ -4186,7 +4186,7 @@ var newAttributes = {
 };
 myForm.titleBarAttributes = newAttributes;
 ```
-> **_Note:_** To enable default back swipe in your forms, configure enableDefaultBackSwipe  in infoplist_configuration.json. Check  [here](https://github01.hclpnp.com/pages/phoenix-temenos/volt-mx-doc-opnsrc/95/docs/documentation/Iris/iris_user_guide/Content/BuildAnAppForiOS.html#using-application-reference-counting) to how to configure. 
+> **_Note:_** To enable default back swipe in your forms, configure enableDefaultBackSwipe  in infoplist_configuration.json. Check  [here](https://github01.hclpnp.com/pages/phoenix-temenos/volt-mx-doc-opnsrc/95/docs/documentation/Iris/iris_user_guide/Content/BuildAnAppForiOS.html#enable-default-back-swipe) to how to configure. 
 
 
 ### Platform Availability
