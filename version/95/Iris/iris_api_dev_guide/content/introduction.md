@@ -752,39 +752,39 @@ Volt MX  Iris APIs comprises a collection of APIs that you can use in apps writt
      <b>Example:</b>
 
     ```
-    writePackage: function(package) {
-        var config = {
-                message: "Hold your device near an NFC tag." 
-    };
-        var tagFoundCallback = function(tags) {
-            if (tags.length > 0) {
-                if (tags.length == 1) {
-                    var tag = tags[0]; //choosing first tag.  
-                    var writeSuccessCallback = function(data){
-                        voltmx.print("NFC Write success::" + data);
-                        alert("Package write success!!");
-                        voltmx.nfc.updateUI({
-                                message: "Package write success!!" 
-                    });
-                        voltmx.nfc.stopScan();
-                    };
-                    var writeFailureCallback = function(errorCode) {
-                        voltmx.print("Package write Failure");
-                        alert("Package write Failure");
-                    };
-                    tag.writeApplicationRecord(package, writeSuccessCallback, writeFailureCallback);
-                } else {
-                    voltmx.nfc.updateUI({
-                            message: "More than 1 tags found. Please present only 1 tag." 
-                });
-                }
-            }
-        };
-        var errorCallback = function(errorCode) {
-            voltmx.print("NFC ERROR :: " + errorCode);
-        };
-        voltmx.nfc.scanTag(config, tagFoundCallback, errorCallback);
-    }
+     writePackage: function(package) {
+     var config = {
+     message: "Hold your device near an NFC tag." 
+     };
+     var tagFoundCallback = function(tags) {
+     if (tags.length > 0) {
+     if (tags.length == 1) {
+     var tag = tags[0]; //choosing first tag.  
+     var writeSuccessCallback = function(data){
+     voltmx.print("NFC Write success::" + data);
+     alert("Package write success!!");
+     voltmx.nfc.updateUI({
+     message: "Package write success!!" 
+     });
+        voltmx.nfc.stopScan();
+     };
+     var writeFailureCallback = function(errorCode) {
+     voltmx.print("Package write Failure");
+     alert("Package write Failure");
+     };
+     tag.writeApplicationRecord(package, writeSuccessCallback, writeFailureCallback);
+     } else {
+     voltmx.nfc.updateUI({
+     message: "More than 1 tags found. Please present only 1 tag." 
+     });
+     }
+     }
+     };
+     var errorCallback = function(errorCode) {
+     voltmx.print("NFC ERROR :: " + errorCode);
+     };
+     voltmx.nfc.scanTag(config, tagFoundCallback, errorCallback);
+     }
      
     ```
 
