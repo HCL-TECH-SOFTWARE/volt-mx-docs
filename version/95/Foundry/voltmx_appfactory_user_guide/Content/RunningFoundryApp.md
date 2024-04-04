@@ -22,6 +22,7 @@ To run jobs for a Foundry app, open the project folder from the App Factory cons
 
 *   Builds
 *   Custom Hooks
+*   Tests
 *   Triggers
 
 ![](Resources/Images/FoundryFolder.png)
@@ -54,15 +55,31 @@ For more information, refer to [Building a Foundry app](BuildingFoundryApp.md).
 
 ### Custom Hooks
 
-Custom Hooks are custom pipelines that you can set up to run as part of the App Factory build flow. These hooks run at certain stages of the build flow. Custom Hooks consist of a Java source code and build script that is an ANT script or a MAVEN script.
+Custom Hooks are custom pipelines that consist of a Java source code and a build script, which is either an ANT script or a MAVEN script. The hooks can be set to run at certain stages of the build flow, such as pre-build and post-build.
 
 For more information, refer to [Custom Hooks for Foundry jobs](CustomHooksFoundry.md).
 
+
+### Tests
+
+The Tests folder contains jobs to create and run tests. It also contains sub-folders that store the created tests based on the trigger mechanism.
+
+![](Resources/Images/Foundry_Tests.png)
+
+For more information, refer to Testing a [Foundry app with the Cucumber Framework](TestFoundryApp_Cucumber.md).
+
+
 ### Triggers
 
-The Triggers folder contains **createFoundryAppTrigger** job, which orchestrates the scheduled run of the buildFoundryApp job with time intervals that are configured by a developer. For more information, refer to [Scheduling a Job for Foundry](AutoTriggeredJobs_Foundry.md).
+The Triggers folder contains the **createFabricAppTrigger** job, which creates a trigger to perform a build based on a schedule or based on a push to the source code. There are two sub-folders that store the created triggers based on the trigger mechanism.
+
+For more information, refer to the following sections:
+
+*   [Scheduling a Foundry Build](AutoTriggeredJobs_Foundry.md)
+*   [Build on Push for Foundry Apps](BuildOnPush_Foundry.md)
+
 
 Build Results Notification
 --------------------------
 
-After a build job is completed, members that are added to the RECIPIENTS\_LIST parameter receive an e-mail that contains the status of the build, and relevant information about the build.
+After a build job is completed, members that are added to the [Recipients](Project_Settings.md#Notifications_Foundry) project setting receive an email that contains generic information about the build. The email also contains the a list of artifacts with corresponding links to an S3 bucket.

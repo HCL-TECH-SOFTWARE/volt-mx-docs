@@ -5,7 +5,7 @@ Configuring Device Pools
 
 A device pool contains the configuration and specification about the devices that are used to run tests on your app source code. Based on your device pool, at run time, AWS Device Farm selects a set of devices from a list of available devices in a region or location. You can create, update, and delete device pools for your App Factory projects. You can also create multiple device pools for your App Factory projects.
 
-From V9 ServicePack 1, you can use device filters to define the type of devices that you want to include in the device pool. You can also the set the maximum number of devices in your pool. A filter consists of an attribute, an operator, and an operand (which can contain one or more values). These attributes are based on device specifications such as OS Version, Platform, and Manufacturer. For example: you can create a filter for Android devices that run on OS versions between 8.0 and 10.
+You can use device filters to define the type of devices that you want to include in the device pool. You can also the set the maximum number of devices in your pool. A filter consists of an attribute, an operator, and an operand (which can contain one or more values). These attributes are based on device specifications such as OS Version, Platform, and Manufacturer. For example: you can create a filter for Android devices that run on OS versions between 8.0 and 10.
 
 ### Why use device filters?
 
@@ -27,6 +27,9 @@ For more information about creating and managing device pools, refer to the foll
 *   [Updating a Device Pool](#updating-a-device-pool)
 *   [Removing a Device Pool](#removing-a-device-pool)
 
+
+<a id="create"></a>
+
 Creating a Device Pool
 ----------------------
 
@@ -38,7 +41,7 @@ Creating a Device Pool
 4.  For the DEVICE\_FILTER parameter, click **CREATE NEW DEVICE POOL**. App Factory displays additional fields that you need to configure for the DEVICE\_FILTER parameter.  
     Alternatively, you can select an existing device pool to [edit and update](#updating-a-device-pool) its configuration.  
     
-    > **_Note:_** If you are using version V9 or earlier, you need to use the POOL\_NAME and DEVICE\_LIST parameters to create a device pool. For more information, refer to [Creating Device Pools (V9 or earlier)](#reference-creating-device-pools-v9-or-earlier).
+    > **_Note:_** For earlier versions, you need to use the POOL\_NAME and DEVICE\_LIST parameters to create a device pool. For more information, refer to [Creating Device Pools](#reference-creating-device-pools-v9-or-earlier).
     
 5.  Under **Create Device Pool**, type a **Name** for the device pool.  
     [![](Resources/Images/Enter_Name_thumb_600_0.png)](Resources/Images/Enter_Name.png)
@@ -50,10 +53,15 @@ Creating a Device Pool
     3.  Configure the fields based on your preference. You can add multiple filters by adding more fields for the platform.  
         [![](Resources/Images/Add_Platform__3__thumb_600_0.png)](Resources/Images/Add_Platform__3_.png)
     4.  After you configure the fields, click the plus icon on the right side of the row. A new row is created that you can use to specify more filters.  
-        The list of devices updates every time you add a new filter.  
+        The list of devices updates every time you add a new filter.       
+        [![](Resources/Images/Add_Platform_4__thumb_0_250.png)](Resources/Images/Add_Platform_4_.png)
+
+        [![](Resources/Images/Add_Platform__5__Change_in_filter_Result_thumb_0_250.png)](Resources/Images/Add_Platform__5__Change_in_filter_Result.png)
         
-        <table style="width: 80%;border-left-style: none;border-left-width: 1.5pt;border-left-color: ;border-right-style: none;border-right-width: 1.5pt;border-right-color: ;border-top-style: none;border-top-width: 1.5pt;border-top-color: ;border-bottom-style: none;border-bottom-width: 1.5pt;border-bottom-color: ;"><colgroup><col style="width: 40%;"></colgroup><tbody><tr><td style="padding-left: 5px;padding-right: 5px;padding-top: 5px;padding-bottom: 5px;border-left-style: none;border-left-width: 1px;border-left-color: #fff;border-right-style: none;border-right-width: 1px;border-right-color: #fff;border-top-style: none;border-top-width: 1px;border-top-color: #fff;border-bottom-style: none;border-bottom-width: 1px;border-bottom-color: #bbb;" colspan="2"><a class="MCPopupThumbnailLink MCPopupThumbnailPopup" href="Resources/Images/Add_Platform_4_.png"><img class="MCPopupThumbnail img" data-mc-width="2102" data-mc-height="1196" src="Resources/Images/Add_Platform_4__thumb_0_250.png" style="border-left-style: solid;border-left-width: 1px;border-left-color: #dcdcdc;border-right-style: solid;border-right-width: 1px;border-right-color: #dcdcdc;border-top-style: solid;border-top-width: 1px;border-top-color: #dcdcdc;border-bottom-style: solid;border-bottom-width: 1px;border-bottom-color: #dcdcdc;mc-thumbnail: popup;mc-thumbnail-max-width: auto;mc-thumbnail-max-height: 250px;" tabindex=""></a> <a class="MCPopupThumbnailLink MCPopupThumbnailPopup" href="Resources/Images/Add_Platform__5__Change_in_filter_Result.png"><img class="MCPopupThumbnail img" data-mc-width="2106" data-mc-height="1234" src="Resources/Images/Add_Platform__5__Change_in_filter_Result_thumb_0_250.png" style="border-left-style: solid;border-left-width: 1px;border-left-color: #dcdcdc;border-right-style: solid;border-right-width: 1px;border-right-color: #dcdcdc;border-top-style: solid;border-top-width: 1px;border-top-color: #dcdcdc;border-bottom-style: solid;border-bottom-width: 1px;border-bottom-color: #dcdcdc;mc-thumbnail: popup;mc-thumbnail-max-width: auto;mc-thumbnail-max-height: 250px;" tabindex=""></a></td><td>zzEmptyCellzz</td></tr><tr><td style="padding-left: 5px;padding-right: 5px;padding-top: 5px;padding-bottom: 5px;border-left-style: none;border-left-width: 1px;border-left-color: #fff;border-right-style: none;border-right-width: 1px;border-right-color: #fff;border-top-style: none;border-top-width: 1px;border-top-color: #fff;border-bottom-style: none;border-bottom-width: 1px;border-bottom-color: #bbb;" colspan="2"><a class="MCPopupThumbnailLink MCPopupThumbnailPopup" href="Resources/Images/Add_Platform__6_.png"><img class="MCPopupThumbnail img" data-mc-width="1176" data-mc-height="602" src="Resources/Images/Add_Platform__6__thumb_0_250.png" style="mc-thumbnail: popup;mc-thumbnail-max-width: auto;mc-thumbnail-max-height: 250px;border-left-style: solid;border-left-width: 1px;border-left-color: #dcdcdc;border-right-style: solid;border-right-width: 1px;border-right-color: #dcdcdc;border-top-style: solid;border-top-width: 1px;border-top-color: #dcdcdc;border-bottom-style: solid;border-bottom-width: 1px;border-bottom-color: #dcdcdc;" tabindex=""></a> <a class="MCPopupThumbnailLink MCPopupThumbnailPopup" href="Resources/Images/Add_Platform__7_.png"><img class="MCPopupThumbnail img" data-mc-width="2108" data-mc-height="1374" src="Resources/Images/Add_Platform__7__thumb_0_250.png" style="border-left-style: solid;border-left-width: 1px;border-left-color: #dcdcdc;border-right-style: solid;border-right-width: 1px;border-right-color: #dcdcdc;border-top-style: solid;border-top-width: 1px;border-top-color: #dcdcdc;border-bottom-style: solid;border-bottom-width: 1px;border-bottom-color: #dcdcdc;mc-thumbnail: popup;mc-thumbnail-max-width: auto;mc-thumbnail-max-height: 250px;" tabindex=""></a></td><td>zzEmptyCellzz</td></tr></tbody></table>
+        [![](Resources/Images/Add_Platform__6__thumb_0_250.png)](Resources/Images/Add_Platform__6_.png)
         
+        [![](Resources/Images/Add_Platform__7__thumb_0_250.png)](Resources/Images/Add_Platform__7_.png)
+
         > **_Note:_** You can also set the maximum number of devices on which you want to run your tests. App Factory uses a public pool, therefore, a limit of 5 devices exists for every platform that can be selected for your rules.
         
     5.  After you add filters for the required platforms, from the lower-right corner of the **Create New Rule** window, click **SAVE DEVICE RULES**.
@@ -96,13 +104,20 @@ When the device pool **BUILD** is complete, the **managePool** job build passes 
 
 [![](Resources/Images/Pool_Updated_Build_Success_thumb_600_0.png)](Resources/Images/Pool_Updated_Build_Success.png)
 
-> **Note:**  
-*   To update a device pool for projects that were created before V9 ServicePack 1, you need to [remove the device pool](#removing-a-device-pool) and [create a new device pool](#creating-a-device-pool) with the same name.  
-*   If you upgrade your projects by recreating them in V9 ServicePack 1, the POOL\_NAME and DEVICE\_LIST parameters will not be available for device pools.  
-    Any existing pools will still be available for use.  
-*   If you upgrade the device pool, it is overwritten to have device filters and no longer contains a static set of devices.    
-    [![](Resources/Images/Pool_Created_Before_V9SP1_thumb_500_0.png)](Resources/Images/Pool_Created_Before_V9SP1.png)  
+
+<blockquote><em><b>Note: </b></em>
+<ul>
+<li>To update a device pool for projects that were created before V9 ServicePack 1, you need to <a href="#remove">remove the device pool</a> and <a href="#create">create a new device pool</a> with the same name. </li>
+<li>If you upgrade your projects by recreating them in V9 ServicePack 1, the POOL_NAME and DEVICE_LIST parameters will not be available for device pools.Any existing pools will still be available for use. </li>
+<li>If you upgrade the device pool, it is overwritten to have device filters and no longer contains a static set of devices. </li>
+<img src="Resources/Images/Pool_Created_Before_V9SP1_thumb_500_0.png">
+</ul>
+</blockquote>
+
     
+
+<a id="remove"></a>
+
 Removing a Device Pool
 ----------------------
 

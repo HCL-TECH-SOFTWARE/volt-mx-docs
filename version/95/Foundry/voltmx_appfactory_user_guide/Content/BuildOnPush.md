@@ -28,7 +28,7 @@ Make sure that you have permissions to change the settings of the GitHub reposit
 1.  Open your GitHub repository in a web browser, navigate to **Settings** → **Webhooks**, and then click **Add webhook**.  
     The **Add webhook** page opens.
 
-[![](Resources/Images/Flyway_buildOnPush_GitHub_thumb_800_0.png)](Resources/Images/Flyway_buildOnPush_GitHub.png)
+    [![](Resources/Images/Flyway_buildOnPush_GitHub_thumb_800_0.png)](Resources/Images/Flyway_buildOnPush_GitHub.png)
 
 3.  Configure the following parameters in the **Add webhook** page:
     *   Set the Payload URL to: `https://<App Factory domain>/github-webhook/`  
@@ -42,7 +42,7 @@ Make sure that you have permissions to change the settings of the GitHub reposit
     *   Select the **Just the push event** option. Only pushes of code to a specific branch trigger the **Flyway** job.
     *   The **Active** option should be marked by default.
     
-    [![](Resources/Images/Flyway_buildOnPush_GitHub_Params_thumb_0_500.png)](Resources/Images/Flyway_buildOnPush_GitHub_Params.png)
+    [![](Resources/Images/Flyway_buildOnPush_GitHub_Params.png)](Resources/Images/Flyway_buildOnPush_GitHub_Params.png)
     
 4.  After you configure the necessary parameters, click **Add Webhook**.  
     The webhook is created.
@@ -87,22 +87,22 @@ Configuring a Watcher Job in App Factory
 
 1.  From the folder of your project, navigate to the **Triggers** sub-folder.
 
-![](Resources/Images/Iris_Folder_Structure.png)
+    ![](Resources/Images/Iris_Folder_Structure.png)
 
 3.  In the **Triggers** folder, click the **build** icon for the **createTrigger** job.  
     Alternatively, select the **createTrigger** job, and then select the **Build with Parameters** option from the left panel.
 
-![](Resources/Images/AT_Triggers.png)
+    ![](Resources/Images/AT_Triggers.png)
 
 5.  For the CRON\_SCHEDULE parameter, make sure that the field is blank.
 
-![](Resources/Images/AT_CreateTrigger.png)
+    ![](Resources/Images/AT_CreateTrigger.png)
 
 7.  Configure the remaining parameters, which are the same as the [buildIris job](BuildingAnApp.md).
 
-Jobs that are triggered by a push to the SCM are stored in the **watchers** folder. Every Watcher has a branch name in the name of Job to simplify job search.
+    Jobs that are triggered by a push to the SCM are stored in the **watchers** folder. Every Watcher has a branch name in the name of Job to simplify job search.
 
-![](Resources/Images/AT_Watchers.png)
+    ![](Resources/Images/AT_Watchers.png)
 
 Reference: Payload URL Format
 -----------------------------
