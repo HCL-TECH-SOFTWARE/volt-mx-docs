@@ -11,8 +11,14 @@
       
         <link rel="canonical" href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_appfactory_user_guide/Content/TestingAnAppJasmine.html">
       
+      
+        <link rel="prev" href="TestingAnApp.html">
+      
+      
+        <link rel="next" href="CrossAppTesting.html">
+      
       <link rel="icon" href="../../../assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.2.11">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.1.18">
     
     
       
@@ -20,12 +26,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.8c5ef100.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.26e3688c.min.css">
       
-        
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.9647289d.min.css">
-        
       
+
     
     
     
@@ -40,23 +44,21 @@
     
       <link rel="stylesheet" href="../../../stylesheets/vmx_style.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
     
     
+    
   </head>
   
   
-    
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+    <body dir="ltr">
   
     
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -64,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#testing-an-app-jasmine" class="md-skip">
+        <a href="#testing-an-app-with-the-jasmine-test-framework" class="md-skip">
           Skip to content
         </a>
       
@@ -73,6 +75,7 @@
       
         <aside class="md-banner">
           <div class="md-banner__inner md-grid md-typeset">
+            
             
 <div class="content-types-banner">
     <ul class="sub-nav">
@@ -98,6 +101,7 @@
 </div>
 
           </div>
+          
         </aside>
       
     </div>
@@ -105,7 +109,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../../.." title="HCL Volt MX Documentation V9.5" class="md-header__button md-logo" aria-label="HCL Volt MX Documentation V9.5" data-md-component="logo">
       
@@ -148,7 +154,7 @@
       </label>
       <nav class="md-search__options" aria-label="Search">
         
-        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
         </button>
       </nav>
@@ -160,7 +166,7 @@
           <div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
         </div>
       </div>
     </div>
@@ -172,7 +178,7 @@
         <a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
   </div>
   <div class="md-source__repository">
     HCL-TECH-SOFTWARE/volt-mx-docs
@@ -216,7 +222,7 @@
       <a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
   </div>
   <div class="md-source__repository">
     HCL-TECH-SOFTWARE/volt-mx-docs
@@ -379,7 +385,7 @@
     id="__nav_1_8"
     checked
   />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
 
   <div class="md-nav__link md-nav__link--index">
     <a href="../../voltmxFoundryFundamentals.html"> Foundry </a>
@@ -586,7 +592,7 @@
     id="__nav_1_8_9"
     checked
   />
-                                                                                                                                                                                 
+                                                                                                                                                                                                             
 
   <div class="md-nav__link md-nav__link--index">
     <a href="Introduction.html"> App Factory User Guide </a>
@@ -659,6 +665,30 @@
   </a>
 </li>
     
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_9_6"
+    type="checkbox"
+    id="__nav_1_8_9_6"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Microservice_Projects.html"> Microservice Projects </a>
+    <label for="__nav_1_8_9_6">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
                 
 <li class="md-nav__item">
   <a href="AppFactoryCLI.html" class="md-nav__link">
@@ -672,16 +702,16 @@
     
   <input
     class="md-nav__toggle md-toggle"
-    data-md-toggle="__nav_1_8_9_7"
+    data-md-toggle="__nav_1_8_9_8"
     type="checkbox"
-    id="__nav_1_8_9_7"
+    id="__nav_1_8_9_8"
     checked
   />
-                                                       
+                                                          
 
   <div class="md-nav__link md-nav__link--index">
     <a href="RunningIrisApp.html"> Iris Projects </a>
-    <label for="__nav_1_8_9_7">
+    <label for="__nav_1_8_9_8">
       <span class="md-nav__icon md-icon"></span>
     </label>
   </div>
@@ -692,7 +722,7 @@
     aria-label="Iris Projects"
     data-md-level="4"
   >
-    <label class="md-nav__title" for="__nav_1_8_9_7">
+    <label class="md-nav__title" for="__nav_1_8_9_8">
       <span class="md-nav__icon md-icon"></span>
       Iris Projects
     </label>
@@ -785,11 +815,11 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#native-tests" class="md-nav__link">
-    Native Tests
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
   </a>
   
-    <nav class="md-nav" aria-label="Native Tests">
+    <nav class="md-nav" aria-label="Prerequisites">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -799,76 +829,14 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    Prerequisites
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#native-build-related-parameters" class="md-nav__link">
-    Native build related parameters
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#custom-test-environment-run-raw-mode" class="md-nav__link">
-    Custom Test Environment Run (Raw Mode)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#native-testing-related-parameters" class="md-nav__link">
-    Native Testing related Parameters
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#desktop-web-tests" class="md-nav__link">
-    Desktop Web Tests
-  </a>
-  
-    <nav class="md-nav" aria-label="Desktop Web Tests">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prerequisites_1" class="md-nav__link">
-    Prerequisites
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#desktop-web-related-parameters" class="md-nav__link">
-    Desktop Web related parameters
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#custom-hooks-related-parameters" class="md-nav__link">
-    Custom Hooks related parameters
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#notifications-related-parameters" class="md-nav__link">
-    Notifications related parameters
+  <a href="#building-and-running-a-test" class="md-nav__link">
+    Building and running a test
   </a>
   
 </li>
@@ -949,7 +917,7 @@
       
         <li class="md-nav__item">
   <a href="#auto-triggering-tests" class="md-nav__link">
-    Auto Triggering Tests
+    Auto-Triggering Tests
   </a>
   
 </li>
@@ -974,16 +942,16 @@
     
   <input
     class="md-nav__toggle md-toggle"
-    data-md-toggle="__nav_1_8_9_7_10"
+    data-md-toggle="__nav_1_8_9_8_10"
     type="checkbox"
-    id="__nav_1_8_9_7_10"
+    id="__nav_1_8_9_8_10"
     
   />
                      
 
   <div class="md-nav__link md-nav__link--index">
     <a href="CustomHooksIris.html"> Custom Hooks for Iris jobs </a>
-    <label for="__nav_1_8_9_7_10">
+    <label for="__nav_1_8_9_8_10">
       <span class="md-nav__icon md-icon"></span>
     </label>
   </div>
@@ -999,33 +967,16 @@
   </a>
 </li>
     
+                
+<li class="md-nav__item">
+  <a href="MicroApps_BestPractices.html" class="md-nav__link">
+    Micro Apps - Best Practices
+  </a>
+</li>
+    
     </ul>
   </nav>
   
-</li>
-
-   
-             
-  
-<li class="md-nav__item md-nav__item--nested">
-    
-  <input
-    class="md-nav__toggle md-toggle"
-    data-md-toggle="__nav_1_8_9_8"
-    type="checkbox"
-    id="__nav_1_8_9_8"
-    
-  />
-                                                             
-
-  <div class="md-nav__link md-nav__link--index">
-    <a href="RunningFoundryApp.html"> Foundry Projects </a>
-    <label for="__nav_1_8_9_8">
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-  </div>
-
-      
 </li>
 
    
@@ -1040,11 +991,35 @@
     id="__nav_1_8_9_9"
     
   />
+                                                                
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="RunningFoundryApp.html"> Foundry Projects </a>
+    <label for="__nav_1_8_9_9">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_9_10"
+    type="checkbox"
+    id="__nav_1_8_9_10"
+    
+  />
                            
 
   <div class="md-nav__link md-nav__link--index">
     <a href="Database.html"> Database Projects </a>
-    <label for="__nav_1_8_9_9">
+    <label for="__nav_1_8_9_10">
       <span class="md-nav__icon md-icon"></span>
     </label>
   </div>
@@ -1085,6 +1060,20 @@
 <li class="md-nav__item">
   <a href="Known_Issues.html#limitations" class="md-nav__link">
     Limitations
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Configuration.html" class="md-nav__link">
+    Configuration
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="FAQs.html" class="md-nav__link">
+    Frequently Asked Questions (FAQs)
   </a>
 </li>
     
@@ -1191,11 +1180,11 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#native-tests" class="md-nav__link">
-    Native Tests
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
   </a>
   
-    <nav class="md-nav" aria-label="Native Tests">
+    <nav class="md-nav" aria-label="Prerequisites">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1205,76 +1194,14 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    Prerequisites
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#native-build-related-parameters" class="md-nav__link">
-    Native build related parameters
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#custom-test-environment-run-raw-mode" class="md-nav__link">
-    Custom Test Environment Run (Raw Mode)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#native-testing-related-parameters" class="md-nav__link">
-    Native Testing related Parameters
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#desktop-web-tests" class="md-nav__link">
-    Desktop Web Tests
-  </a>
-  
-    <nav class="md-nav" aria-label="Desktop Web Tests">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prerequisites_1" class="md-nav__link">
-    Prerequisites
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#desktop-web-related-parameters" class="md-nav__link">
-    Desktop Web related parameters
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#custom-hooks-related-parameters" class="md-nav__link">
-    Custom Hooks related parameters
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#notifications-related-parameters" class="md-nav__link">
-    Notifications related parameters
+  <a href="#building-and-running-a-test" class="md-nav__link">
+    Building and running a test
   </a>
   
 </li>
@@ -1355,7 +1282,7 @@
       
         <li class="md-nav__item">
   <a href="#auto-triggering-tests" class="md-nav__link">
-    Auto Triggering Tests
+    Auto-Triggering Tests
   </a>
   
 </li>
@@ -1368,200 +1295,287 @@
               </div>
             
           
-          <div class="md-content" data-md-component="content">
-            <article class="md-content__inner md-typeset">
-              
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
                 
+                  
 
 
-<h1 id="testing-an-app-jasmine">Testing an App - Jasmine</h1>
+<h1 id="testing-an-app-with-the-jasmine-test-framework">Testing an App with the Jasmine Test Framework</h1>
 <p>Jasmine is a behavior driven development test framework for JavaScript. With App Factory, you can use the Jasmine framework to run test cases for the Native and Desktop Web platforms. For more information, refer to the following sections.</p>
-<ul>
-<li><a href="#native-tests">Native Tests</a></li>
-<li><a href="#desktop-web-tests">Desktop Web Tests</a></li>
-</ul>
 <blockquote>
-<p><strong><em>Note:</em></strong> You can run Jasmine tests only during the build process.</p>
+<p><strong><em>Note</em></strong>: If you want to run Jasmine tests for the Native channel, or if you are using version V9 ServicePack 2 or earlier, you can run Jasmine tests only during the build process (<a href="BuildingAnApp.html">buildIrisApp</a>).</p>
 </blockquote>
-<h2 id="native-tests">Native Tests</h2>
-<blockquote>
-<p><strong><em>Important:</em></strong> To run the Jasmine tests on the native platform, you need a Custom Test Environment. Standard test environment is not supported to run Jasmine tests on the native platform.</p>
-</blockquote>
-<h3 id="custom-test-environment">Custom Test Environment</h3>
-<p>Jasmine tests always run in a Custom Test Environment. App Factory uses the default Appium version to launch the app on the test device. But, you can provide a version number in the Build Parameters to override the Appium version. You can also provide the name of the Test Runner file that you want to run on the test device.</p>
-<h3 id="prerequisites">Prerequisites</h3>
+<h2 id="prerequisites"><a name="Prerequisites"></a>Prerequisites</h2>
+<details><summary>Native Prerequisites</summary>
+<b>Note:</b> To run the Jasmine tests on the native platform, you need a Custom Test Environment. Standard test environment is not supported to run Jasmine tests on the native platform.
 <ul>
-<li>Make sure that the Iris project contains the test files at the following locations:<ul>
+<li>
+Make sure that the Iris project contains the test files at the following locations:
+<ul>
 <li><code>&lt;Project-Root&gt;/testresources/Jasmine/Mobile</code> for Mobile</li>
 <li><code>&lt;Project-Root&gt;/testresources/Jasmine/Tablet</code> for Tablet</li>
 </ul>
 </li>
-<li>Make sure that you configure a device pool before you test the application.<br />
-    For more information, refer to <a href="Configuring_Device_Pools.html">Configuring Device Pools</a>.</li>
-<li>
-<p>Jasmine tests are executed in the AWS Device Farm Cloud environment.</p>
-<blockquote>
-<p><strong><em>Note:</em></strong> You can find the Jasmine tests in the root folder of the project.<br />
-<img alt="" src="Resources/Images/jasmine-rootfolder_583x612.png" /></p>
-</blockquote>
-</li>
+<li>Make sure that you configure a device pool before you test the application. For more information, refer to <a href="Configuring_Device_Pools.html">Configuring Device Pools</a></li>
+<li>Jasmine tests are executed in the AWS Device Farm Cloud environment.</li>
+You can find the Jasmine tests in the root folder of the project.
+<img src="Resources/Images/jasmine-rootfolder_583x612.png">
 </ul>
-<h3 id="native-build-related-parameters">Native build related parameters</h3>
-<p><a href="Resources/Images/runTests_native.png"><img alt="" src="Resources/Images/runTests_native_thumb_700_0.png" /></a></p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ANDROID_UNIVERSAL_NATIVE_BINARY_URL</td>
-<td>Specifies the URL of the Android universal binaries that are generated by a build job or generated locally.</td>
-</tr>
-<tr>
-<td>ANDROID_MOBILE_NATIVE_BINARY_URL</td>
-<td>Specifies the URL of the Android Mobile binary that is generated by a build job or generated locally.</td>
-</tr>
-<tr>
-<td>ANDROID_TABLET_NATIVE_BINARY_URL</td>
-<td>Specifies the URL of the Android Tablet binary that is generated by a build job or generated locally.</td>
-</tr>
-<tr>
-<td>IOS_UNIVERSAL_NATIVE_BINARY_URL</td>
-<td>Specifies the URL of the iOS universal binaries that are generated by a build job or generated locally.</td>
-</tr>
-<tr>
-<td>IOS_MOBILE_NATIVE_BINARY_URL</td>
-<td>Specifies the URL of the iPhone binary that is generated by a build job or generated locally.</td>
-</tr>
-<tr>
-<td>IOS_TABLET_NATIVE_BINARY_URL</td>
-<td>Specifies the URL of the iPad binary that is generated by a build job or generated locally.</td>
-</tr>
-<tr>
-<td>NATIVE_TESTS_URL</td>
-<td>Specifies the URL of the binaries for the compiled test project. If you provide Git parameters, you can skip this parameter.</td>
-</tr>
-<tr>
-<td>AVAILABLE_TEST_POOLS</td>
-<td>Specifies the device pool that must be used for the tests. If a device pool is empty, the build fails. For more information, refer to <a href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_appfactory_user_guide/Content/Configuring_Device_Pools.html">Configuring Device Pools.</a></td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p><strong><em>Note:</em></strong> The URLs that you provide must be open and accessible on the internet. For example, a URL to an S3 bucket from the email notification that is sent by the <strong>buildIrisApp</strong> job.</p>
-</blockquote>
-<h3 id="custom-test-environment-run-raw-mode">Custom Test Environment Run (Raw Mode)</h3>
-<p>In a custom test environment, you can select the Appium version on which you want to run your tests. Make sure that you provide an appropriate Appium version. For more information, refer to <a href="https://docs.aws.amazon.com/devicefarm/latest/developerguide/test-types-android-appium-java-junit.md">AWS Device Farm</a>.</p>
-<h3 id="native-testing-related-parameters">Native Testing related Parameters</h3>
-<p>The following parameters are applicable only if you want to run automated tests on a native app that is generated by the protected build.</p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th align="center">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>RUN_IN_CUSTOM_TEST_ENVIRONMENT</td>
-<td align="center">Specifies whether the tests in Device Farm are run on a Custom Test Environment. For more information, refer to <a href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_appfactory_user_guide/Content/CustomTestEnvRun_RawMode.html">Custom Test Environment Run</a>.<br> <b>Note:</b> Even if the checkbox is not selected, App Factory runs the Jasmine tests only in the custom test environment.</td>
-</tr>
-<tr>
-<td>APPIUM_VERSION</td>
-<td align="center">Specifies the Appium version that you want to run for the tests. For more information, refer to <a href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_appfactory_user_guide/Content/CustomTestEnvRun_RawMode.html">Custom Test Environment Run</a>.<br><br>For information about the artifacts that are available in the notification mail for AWS Custom Environment Run, refer <a href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_appfactory_user_guide/Content/BuildingAnApp.html#AWS_Custom">Building an App in AWS Custom Environment</a>.</td>
-</tr>
-<tr>
-<td>TEST_PLAN</td>
-<td align="center">Specifies the test plan that you want to execute. The test plan files must be located at <code>&lt; Project-Root &gt;/testresources/Jasmine/Mobile/TestPlans</code></td>
-</tr>
-<tr>
-<td>NATIVE_TEST_PLAN</td>
-<td align="center">Specifies the relative path of the test plan (such as <code>testRunner.js</code>) that you want to execute.<br><br>The path is relative to the following folders:<br><li><code>/testresources/Jasmine/Mobile/Test Plans</code></li> <li><code>/testresources/Jasmine/Tablet/Test Plans</code></li> <br><b>Note</b> If the test plan is not provided, the default test plan (testPlan.js) is executed.</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p><strong><em>Important:</em></strong></p>
-</blockquote>
+</details>
+
+<details><summary>Desktop Web Prerequisites</summary>
 <ul>
-<li>To run the tests individually, make sure that you provide public URLs in the <a href="#native-build-related-parameters">Native parameters</a>.</li>
-<li>You can use the universal application binary and run the tests on mobile and tablet devices based on the availability in the device pool. You can trigger a runTest job either with a universal binary or with a mobile or a tablet binary.</li>
+<li>Make sure that the Iris project contains Jasmine test files at the following location:<br><code>&lt;Project-Root&gt;/testresources/Jasmine/Desktop</code></li>
 </ul>
-<h2 id="desktop-web-tests">Desktop Web Tests</h2>
-<h3 id="prerequisites_1">Prerequisites</h3>
-<ul>
-<li>Make sure that the Iris project contains Jasmine test files at the following location:<br />
-<code>&lt;Project-Root&gt;/testresources/Jasmine/Desktop</code></li>
-</ul>
-<p><img alt="" src="Resources/Images/jasmine-dweb1_605x278.png" /></p>
+<p><img src="Resources/Images/jasmine-dweb1_605x278.png"></p>
 <ul>
 <li>Make sure that the Jasmine tests are running in your local machines in Google Chrome.</li>
 </ul>
-<h3 id="desktop-web-related-parameters">Desktop Web related parameters</h3>
-<p><a href="Resources/Images/jasmine-dweb2.png"><img alt="" src="Resources/Images/jasmine-dweb2_thumb_800_0.png" /></a></p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th align="center">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>FOUNDRY_APP_URL</td>
-<td align="center">Specifies the URL of the Foundry app with which the Desktop Web WAR file is published.</td>
-</tr>
-<tr>
-<td>AVAILABLE_BROWSERS</td>
-<td align="center">Specifies the browser on which you want to run the Desktop Web tests.</td>
-</tr>
-<tr>
-<td>SCREEN_RESOLUTIONS</td>
-<td align="center">Specifies the resolution at which the browser must launch and run the tests.</td>
-</tr>
-<tr>
-<td>WEB_TEST_PLAN</td>
-<td align="center">Specifies the relative path of the test plan (such as <code>testRunner.js</code>) that you want to execute. The path is relative to the following folder: <code>/testresources/Jasmine/Desktop/Test Plans</code> <br><b>Note:</b> If the test plan is not provided, the default test plan (testPlan.js) is executed.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="custom-hooks-related-parameters">Custom Hooks related parameters</h2>
-<p><img alt="" src="Resources/Images/runTests_customHook_633x184.png" /></p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>RUN_CUSTOM_HOOKS</td>
-<td>Specifies whether Custom Hooks must be run in the after the tests are executed (the Post-Test stage). For more information, refer to Custom Hooks.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="notifications-related-parameters">Notifications related parameters</h2>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>RECIPIENTS_LIST</td>
-<td>Specifies the list of email addresses that must receive the results of the test jobs. You can provide multiple email addresses by separating them with a comma.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="running-tests-from-the-buildirisapp-job">Running Tests from the buildIrisApp job</h2>
+</details>
+
+<h3 id="custom-test-environment">Custom Test Environment</h3>
+<p>Jasmine tests always run in a Custom Test Environment. App Factory uses the default Appium version to launch the app on the test device. But, you can provide a version number in the Build Parameters to override the Appium version. You can also provide the name of the Test Runner file that you want to run on the test device.</p>
+<h2 id="building-and-running-a-test"><a name="Build_Run"></a>Building and running a test</h2>
+<blockquote>
+<p><strong><em>Note</em></strong>:  </p>
+<ul>
+<li>From V9 ServicePack 3, you can test a deployed web app with the Jasmine Test Framework by using the <strong>runTest</strong> job.</li>
+<li>To run tests that are independent from the build process, make sure that the Binary URL is public (open) and accessible from App Factory. For example, a URL to an S3 bucket.</li>
+<li>If you do not have a public Binary URL, VoltMX recommends that you run the tests as part of the build process.</li>
+</ul>
+</blockquote>
+
+<p>To build and run a test, follow these steps:</p>
+<ol>
+<li>From the <strong>Iris</strong> folder of your project, navigate to the <strong>Tests</strong> sub-folder.</li>
+<li>For the <strong>runTest</strong> job, click the <strong>Build with Parameters</strong> icon on the right side of the row.<br />
+    Alternatively, select the <strong>runTest</strong> job, and then from the left panel of the details page, select <strong>Build with Parameters</strong>.</li>
+<li>Configure the build parameters for the runTest job. For more information about the parameters, refer to the following sections.  </li>
+</ol>
+<details>
+  <summary>
+    Source_Control
+  </summary>
+  <table style="width: 80%;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0">
+    <colgroup>
+      <col class="TableStyle-Basic-Column-Column1" style="width: 30%;">
+      <col class="TableStyle-Basic-Column-Column1" style="width: 50%;">
+    </colgroup>
+    <tbody>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th>
+        <th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th>
+      </tr>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <td class="TableStyle-Basic-BodyB-Column1-Body1">PROJECT_SOURCE_CODE_BRANCH</td>
+        <td class="TableStyle-Basic-BodyA-Column1-Body1">Specifies the branch, release tag, or the commit ID of the repository that contains the test files. The tests must be placed at the following location: <p><code>&lt;Repository-Root&gt;/&lt;Project-Root&gt;/test/Jasmine/</code></p> The <strong>&lt;Repository-Root&gt;<strong> must be configured in the <a href="Project_Settings.html">Project Settings</a>. The </strong>&lt;Project-Root&gt;</strong>is the name of the project that is configured while <a href="Setup.html#Iris">creating the Iris project in App Factory</a>.</td>
+      </tr>
+    </tbody>
+  </table>
+</details>
+
+<details>
+  <summary>
+    Testing
+  </summary><b>Note:</b> To run tests by using the Jasmine Test Framework, make sure that your app is built in the <strong>test</strong> mode.
+  <table style="width: 80%;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0">
+    <colgroup>
+      <col class="TableStyle-Basic-Column-Column1" style="width: 30%;">
+      <col class="TableStyle-Basic-Column-Column1" style="width: 50%;">
+    </colgroup>
+    <tbody>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th>
+        <th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th>
+      </tr>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <td class="TableStyle-Basic-BodyE-Column1-Body1">TEST_FRAMEWORK</td>
+        <td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the framework that you want to use for testing the app. The test framework can be <strong>TestNG</strong> or <strong>Jasmine</strong>.</td>
+      </tr>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <td class="TableStyle-Basic-BodyE-Column1-Body1">RUN_NATIVE_TESTS</td>
+        <td class="TableStyle-Basic-BodyD-Column1-Body1">
+          Specifies whether App Factory must run tests for the Native platform. If you enable this parameter, the console displays additional parameters for Native tests. For more information, refer to <a href="#Build_Native">Native build parameters</a>.
+        </td>
+      </tr>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <td class="TableStyle-Basic-BodyE-Column1-Body1">RUN_DESKTOPWEB_TESTS</td>
+        <td class="TableStyle-Basic-BodyD-Column1-Body1">
+          Specifies whether App Factory must run tests for the Desktop Web platform. If you enable this parameter, the console displays additional parameters for Desktop Web tests. For more information, refer to <a href="#Desktop_Build">Desktop Web build parameters</a>.
+        </td>
+      </tr>
+      <tr class="TableStyle-Basic-Body-Body1" madcap:conditions="Default.V9SP5">
+        <td class="TableStyle-Basic-BodyE-Column1-Body1">OVERRIDE_TEST_DATA</td>
+        <td class="TableStyle-Basic-BodyD-Column1-Body1">
+          Specifies whether custom data must be used during the test run. If you enable this parameter, App Factory displays the following parameters: <a href="#Desktop_Web">WEB_CUSTOM_DATA_PATH</a> <a href="#Custom_Environment">NATIVE_CUSTOM_DATA_PATH</a><br>Custom data is only applicable for Jasmine tests.
+        </td>
+      </tr>
+      <tr class="TableStyle-Basic-Body-Body1" madcap:conditions="Default.V9SP4">
+        <td class="TableStyle-Basic-BodyB-Column1-Body1">RERUN_FAILED_TESTS</td>
+        <td class="TableStyle-Basic-BodyA-Column1-Body1">
+          Specifies whether App Factory tracks the test suites that have at least one failed test case and reruns the test suites after the first test run is complete. To use this feature, the test suite must be written such that it can be run independent of other test suites. The test results for the rerun are included in a separate section of the notification email. For more information, refer to <a href="RunningIrisApp.html#Build">Build Results Notification</a>. This parameter is displayed only if <strong>Jasmine</strong> is selected as the test framework and either <code>RUN_NATIVE_TESTS</code> or <code>RUN_DESKTOPWEB_TESTS</code> is enabled.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</details>
+<details>
+  <summary>
+    Native build parameters
+  </summary>The following parameters are applicable only if you want to run automated tests on a native app that is generated by the protected build.<br>
+  <b>Note:</b> 
+  <ul>
+<li>To run the tests individually, make sure that you provide public URLs in the <a href="#Build_Native">Native parameters</a>.</li>
+<li>You can use the universal application binary and run the tests on mobile and tablet devices based on the availability in the device pool. You can trigger a runTest job either with a universal binary or with a mobile or a tablet binary.</li>
+</ul>
+<img src="Resources/Images/runTests_native.png" alt="runTests_native">
+  <table style="mc-table-style: url('Resources/TableStyles/Basic.css');width: 75%;" class="TableStyle-Basic" cellspacing="0">
+    <colgroup>
+      <col class="TableStyle-Basic-Column-Column1" style="width: 35%;">
+      <col class="TableStyle-Basic-Column-Column1" style="width: 40%;">
+    </colgroup>
+    <tbody>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th>
+        <th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th>
+      </tr>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <td class="TableStyle-Basic-BodyE-Column1-Body1">ANDROID_UNIVERSAL_NATIVE_BINARY_URL</td>
+        <td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the URL of the Android universal binaries that are generated by a build job or generated locally.</td>
+      </tr>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <td class="TableStyle-Basic-BodyE-Column1-Body1">ANDROID_MOBILE_NATIVE_BINARY_URL</td>
+        <td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the URL of the Android Mobile binary that is generated by a build job or generated locally.</td>
+      </tr>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <td class="TableStyle-Basic-BodyE-Column1-Body1">ANDROID_TABLET_NATIVE_BINARY_URL</td>
+        <td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the URL of the Android Tablet binary that is generated by a build job or generated locally.</td>
+      </tr>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <td class="TableStyle-Basic-BodyE-Column1-Body1">IOS_UNIVERSAL_NATIVE_BINARY_URL</td>
+        <td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the URL of the iOS universal binaries that are generated by a build job or generated locally.</td>
+      </tr>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <td class="TableStyle-Basic-BodyE-Column1-Body1">IOS_MOBILE_NATIVE_BINARY_URL</td>
+        <td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the URL of the iPhone binary that is generated by a build job or generated locally.</td>
+      </tr>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <td class="TableStyle-Basic-BodyE-Column1-Body1">IOS_TABLET_NATIVE_BINARY_URL</td>
+        <td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the URL of the iPad binary that is generated by a build job or generated locally.</td>
+      </tr>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <td class="TableStyle-Basic-BodyE-Column1-Body1">NATIVE_TESTS_URL</td>
+        <td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the URL of the binaries for the compiled test project. If you provide Git parameters, you can skip this parameter.</td>
+      </tr>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <td class="TableStyle-Basic-BodyB-Column1-Body1">AVAILABLE_TEST_POOLS</td>
+        <td class="TableStyle-Basic-BodyA-Column1-Body1">
+          Specifies the device pool that must be used for the tests. If a device pool is empty, the build fails. For more information, refer to <a href="Configuring_Device_Pools.html">Configuring Device Pools</a>.
+        </td>
+      </tr>
+    </tbody>
+  </table>The URLs that you provide must be open and accessible on the internet. For example, a URL to an S3 bucket from the email notification that is sent by the <strong>buildIrisApp</strong> job. <br><strong><a name="Custom_Environment" id="Custom_Environment"></a><br>Custom Test Environment related parameters</strong>:<br> In a custom test environment, you can select the Appium version on which you want to run your tests. Make sure that you provide an appropriate Appium version. For more information, refer to <a href="https://docs.aws.amazon.com/devicefarm/latest/developerguide/test-types-android-appium-java-junit.html">AWS Device Farm</a>.
+  <table style="mc-table-style: url('Resources/TableStyles/Basic.css');width: 90%;" class="TableStyle-Basic" cellspacing="0">
+    <colgroup>
+      <col class="TableStyle-Basic-Column-Column1" style="width: 35%;">
+      <col class="TableStyle-Basic-Column-Column1" style="width: 55%;">
+    </colgroup>
+    <tbody>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th>
+        <th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th>
+      </tr>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <td class="TableStyle-Basic-BodyE-Column1-Body1">APPIUM_VERSION</td>
+        <td class="TableStyle-Basic-BodyD-Column1-Body1">
+          Specifies the Appium version that you want to run for the tests. For more information, refer to <a href="CustomTestEnvRun_RawMode.html">Custom Test Environment Run</a>. For information about the artifacts that are available in the notification mail for AWS Custom Environment Run, refer to <a href="BuildingAnApp.html#AWS_Custom">Building an App in AWS Custom Environment</a>.
+        </td>
+      </tr>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <td class="TableStyle-Basic-BodyE-Column1-Body1">TEST_PLAN</td>
+        <td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the test plan that you want to execute. The test plan files must be located at <code>&lt;Project-Root&gt;/testresources/Jasmine/Mobile/TestPlans</code></td>
+      </tr>
+      <tr class="TableStyle-Basic-Body-Body1" madcap:conditions="Default.V9SP5">
+        <td class="TableStyle-Basic-BodyE-Column1-Body1">NATIVE_CUSTOM_DATA_PATH</td>
+        <td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the path of the custom data that you want to use for the native tests. The path is relative to the channel directory in the <code>testresources/Jasmine</code> folder of the Iris project source. For example, if your custom data files are located at <code>/testresources/Jasmine/Mobile/customTestData/DevData/DataFile.js</code>, then the relative path is <code>customTestData/DevData</code>.</td>
+      </tr>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <td class="TableStyle-Basic-BodyB-Column1-Body1">NATIVE_TEST_PLAN</td>
+        <td class="TableStyle-Basic-BodyA-Column1-Body1">Specifies the relative path of the test plan (such as <code>testRunner.js</code>) that you want to execute. The path is relative to the following folders: <em><code>/testresources/Jasmine/Mobile/Test Plans</code></em>, <code>/testresources/Jasmine/Tablet/Test Plans</code> If the test plan is not provided, the default test plan (testPlan.js) is executed.</td>
+      </tr>
+    </tbody>
+  </table>
+</details>
+<details>
+  <summary>
+    Desktop Web build parameters
+  </summary><img src="Resources/Images/jasmine-dweb2.png" alt="jasmine-dweb2">
+  <table style="mc-table-style: url('Resources/TableStyles/Basic.css');width: 90%;" class="TableStyle-Basic" cellspacing="0">
+    <colgroup>
+      <col class="TableStyle-Basic-Column-Column1" style="width: 35%;">
+      <col class="TableStyle-Basic-Column-Column1" style="width: 55%;">
+    </colgroup>
+    <tbody>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th>
+        <th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th>
+      </tr>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <td class="TableStyle-Basic-BodyE-Column1-Body1">Foundry_APP_URL</td>
+        <td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the URL of the Foundry app with which the Desktop Web WAR file is published.</td>
+      </tr>
+      <tr class="TableStyle-Basic-Body-Body1" madcap:conditions="Default.V9SP5">
+        <td class="TableStyle-Basic-BodyE-Column1-Body1">WEB_CUSTOM_DATA_PATH</td>
+        <td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the path of the custom data that you want to use for the web tests. The path is relative to the channel directory in the <code>testresources/Jasmine</code> folder of the Iris project source. For example, if your custom data files are located at <code>/testresources/Jasmine/Web/customTestData/DevData/DataFile.js</code>, then the relative path is <code>customTestData/DevData</code>.</td>
+      </tr>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <td class="TableStyle-Basic-BodyE-Column1-Body1">WEB_TEST_PLAN</td>
+        <td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the relative path of the test plan (such as <code>testRunner.js</code>) that you want to execute. The path is relative to the following folder: <code>/testresources/Jasmine/Desktop/Test Plans</code> If the test plan is not provided, the default test plan (testPlan.js) is executed.</td>
+      </tr>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <td class="TableStyle-Basic-BodyE-Column1-Body1">AVAILABLE_BROWSERS</td>
+        <td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the browser on which you want to run the Desktop Web tests.</td>
+      </tr>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <td class="TableStyle-Basic-BodyE-Column1-Body1">SCREEN_RESOLUTIONS</td>
+        <td class="TableStyle-Basic-BodyD-Column1-Body1">Specifies the resolution at which the browser must launch and run the tests.</td>
+      </tr>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <td class="TableStyle-Basic-BodyB-Column1-Body1">RUN_WEB_TESTS_ARGUMENTS</td>
+        <td class="TableStyle-Basic-BodyA-Column1-Body1">Specifies additional parameters that must be passed in a Maven command to the Web tests.</td>
+      </tr>
+    </tbody>
+  </table>
+</details>
+<details>
+  <summary>
+    Custom Hooks
+  </summary><img src="Resources/Images/runTests_customHook.png" alt="runTests_customHook">
+  <table style="mc-table-style: url('Resources/TableStyles/Basic.css');width: 90%;" class="TableStyle-Basic" cellspacing="0">
+    <colgroup>
+      <col class="TableStyle-Basic-Column-Column1" style="width: 35%;">
+      <col class="TableStyle-Basic-Column-Column1" style="width: 55%;">
+    </colgroup>
+    <tbody>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <th class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</th>
+        <th class="TableStyle-Basic-BodyD-Column1-Body1">Description</th>
+      </tr>
+      <tr class="TableStyle-Basic-Body-Body1">
+        <td class="TableStyle-Basic-BodyB-Column1-Body1">RUN_CUSTOM_HOOKS</td>
+        <td class="TableStyle-Basic-BodyA-Column1-Body1">
+          Specifies whether Custom Hooks must be run in the after the tests are executed (the Post-Test stage). For more information, refer to <a href="CustomHooks.html">Custom Hooks</a>.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</details>
+
+<h2 id="running-tests-from-the-buildirisapp-job"><a name="Running"></a>Running Tests from the buildIrisApp job</h2>
 <p>You can trigger the tests from the buildIrisApp job available at <strong>Project Name</strong> &gt; <strong>Iris</strong> &gt; <strong>Builds</strong> folder. It is the simplest way to validate your code by launching tests right after Building the application. There is no need to specify all parameters as they are provided while running the tests manually. The results can be viewed in line to the Test Results of Manual Tests.</p>
-<h2 id="test-results">Test Results</h2>
+<h2 id="test-results"><a name="Test"></a>Test Results</h2>
 <h3 id="native-test-results">Native test Results</h3>
 <p>When the project test build is complete and the test results are published at S3, e-mail notifications are sent to recipients:</p>
 <p>On an unsuccessful build for the tests run, the following e-mail is sent to the recipients:</p>
@@ -1575,10 +1589,10 @@
 <h3 id="desktop-web-test-results">Desktop Web test results</h3>
 <p>When the project test build is complete and the test results are published at S3, e-mail notifications are sent to recipients:</p>
 <p>On an unsuccessful build for the tests run, the following e-mail is sent to the recipients:</p>
-<p><img alt="" src="Resources/Images/dweb-test-fail_616x397.png" /></p>
+<p><img alt="" src="Resources/Images/dweb-test-fail.PNG" /></p>
 <h4 id="sample-email-for-desktop-web-tests">Sample email for Desktop Web tests</h4>
 <p>In the final stage, the consolidated test run status is notified via e-mail. Refer the following screenshots for the sample email for consolidated status.</p>
-<p><img alt="" src="Resources/Images/jasmine-dweb-sample-email_485x821.png" /></p>
+<p><img alt="" src="Resources/Images/jasmine-dweb-sample-email.png" /></p>
 <p>The summary of the test results are shown based on the tests executed on specified browser that includes passed, failed, skipped. Usually the tests are skipped when the driver initialization fails.</p>
 <p>To view the detailed test report, click the <strong>Detailed Test Report</strong> link.</p>
 <p>To view the details on the browser log, click the <strong>Browser Console Log</strong> link.</p>
@@ -1589,8 +1603,8 @@
 <li><strong>FAILED</strong>: The status of the test result is <strong>FAILED</strong> when the expected result does not match with the actual result of the test case, and the assertion fails.</li>
 </ul>
 <p>The <strong>SKIPPED</strong>, <strong>WARNED</strong>, <strong>STOPPED</strong>, <strong>ERRORED</strong> statuses are not applicable for Jasmine Tests.</p>
-<h2 id="troubleshooting-issues">Troubleshooting Issues</h2>
-<p>The following errors can help you during troubleshooting runTests job fail:</p>
+<h2 id="troubleshooting-issues"><a name="Troubles"></a>Troubleshooting Issues</h2>
+<p>The following errors can help you during troubleshooting if the runTest job fails:</p>
 <ul>
 <li><strong>Error</strong>: Jasmine Tests can only be executed when the app is built in Debug mode.<br />
 <strong>Solution</strong>: Make sure that you have selected the build mode as <strong>debug</strong> when the app is built before running the tests.</li>
@@ -1598,77 +1612,62 @@
 <strong>Solution</strong>: Make sure that you provide a value to AVAILABLE_TEST_POOLS parameter to run the native tests.</li>
 <li><strong>Error</strong>: Sorry, You can't run test for Android Universal binary along with Android Mobile/Tablet.<br />
 <strong>Solution</strong>: The universal binary tests both the Mobile and Tablet binaries are based on the availability of the devices in the device pool. So it is not required to provide mobile/tablet binary when you give universal binary.</li>
-<li>
-<p><strong>Error</strong>: Build parameter <parameter name> value is not valid URL!<br />
-<strong>Solution</strong>: Make sure that the URL you provide for the following parameters is valid:</p>
-<ul>
+<li><strong>Error</strong>: Build parameter <parameter name> value is not valid URL!<br />
+<strong>Solution</strong>: Make sure that the URL you provide for the following parameters is valid:</li>
 <li>ANDROID_MOBILE_NATIVE_BINARY_URL</li>
 <li>ANDROID_TABLET_NATIVE_BINARY_URL</li>
 <li>IOS_MOBILE_NATIVE_BINARY_URL</li>
 <li>IOS_TABLET_NATIVE_BINARY_URL</li>
-<li>
-<p>NATIVE_TESTS_URL</p>
-</li>
-<li>
-<p>ANDROID_UNIVERSAL_NATIVE_BINARY_URL</p>
-</li>
-<li>
-<p>DESKTOPWEB_TESTS_URL</p>
-</li>
-<li>
-<p>IOS_UNIVERSAL_NATIVE_BINARY_URL</p>
-</li>
-</ul>
-</li>
+<li>NATIVE_TESTS_URL</li>
+<li>ANDROID_UNIVERSAL_NATIVE_BINARY_URL</li>
+<li>DESKTOPWEB_TESTS_URL</li>
+<li>IOS_UNIVERSAL_NATIVE_BINARY_URL</li>
 </ul>
 <p>The builds that failed during the test can be tracked for the issues that caused the failure. For example, consider build #4 from the following screenshots of runTests job. To troubleshoot the issue, follow these steps.</p>
 <ol>
 <li>
 <p>From your project folder, navigate to <strong>Iris</strong> &gt; <strong>Tests</strong>.</p>
-<p><img alt="" src="Resources/Images/TA_TestsFolderStructure_577x306.png" /></p>
+<p><img alt="" src="Resources/Images/TA_TestsFolderStructure.png" /></p>
 </li>
 <li>
 <p>Select the runTests job, and then find the failed build.<br />
-    For example, find and click the link for build <strong>#4</strong>.</p>
+For example, find and click the link for build <strong>#4</strong>.</p>
 <p><img alt="" src="Resources/Images/TA_TestsSampleBuild.png" /></p>
 </li>
 <li>
 <p>From the details page of the failed build, select the <strong>Console Output</strong> on the left panel. The <strong>Console Output Log</strong> opens in the right pane.</p>
-<p><img alt="" src="Resources/Images/TA_ConsoleOutputLog_583x247.png" /></p>
+<p><img alt="" src="Resources/Images/TA_ConsoleOutputLog.png" /></p>
 </li>
 <li>
 <p>Scroll to find errors in the log that caused the build to fail. For example, you can trace an error that is related to invalid Android Tablet URL.</p>
-<p><img alt="" src="Resources/Images/TA_ErrorLog_576x313.png" /></p>
+<p><img alt="" src="Resources/Images/TA_ErrorLog.png" /></p>
 </li>
 <li>
-<p>Check if the ANDROID_TABLET_NATIVE_BINARY_URL parameter is valid.</p>
-<p>Alternatively you can troubleshoot the issue from the stages of Manual Testing.</p>
+<p>Check if the ANDROID_TABLET_NATIVE_BINARY_URL parameter is valid. Alternatively you can troubleshoot the issue from the stages of Manual Testing.</p>
 <p><img alt="" src="Resources/Images/TA_Troubleshoot_Build4.png" /></p>
+</li>
+</ol>
 <p>To troubleshoot the issue from the Stage View, follow these steps:</p>
-</li>
-<li>
-<p>From the Stage View, point to the failed stage, and then click <strong>Logs</strong>.  </p>
-<p><img alt="" src="Resources/Images/TA_StageLogs.png" /></p>
-</li>
+<ol>
+<li>From the Stage View, point to the failed stage, and then click <strong>Logs</strong>.<br />
+<img alt="" src="Resources/Images/TA_StageLogs.png" /></li>
 <li>
 <p>From log messages in the <strong>Stage Logs</strong> window, identify the error message that corresponds to the failure of the build.<br />
-    For example, you can trace an error that is related to invalid Android Tablet URL.</p>
+For example, you can trace an error that is related to invalid Android Tablet URL.</p>
+<p><img alt="" src="Resources/Images/TA_StageLogs_Extended.png" /></p>
+</li>
+<li>
+<p>Check whether the ANDROID_TABLET_NATIVE_BINARY_URL parameter is valid.</p>
 </li>
 </ol>
-<p><img alt="" src="Resources/Images/TA_StageLogs_Extended_575x355.png" /></p>
-<ol>
-<li>Check whether the ANDROID_TABLET_NATIVE_BINARY_URL parameter is valid.</li>
-</ol>
-<h2 id="auto-triggering-tests">Auto Triggering Tests</h2>
-<p>App Factory supports two types of auto-triggered test jobs: scm-triggered (Watchers) and cron-triggered (Schedulers). Every project contains a folder called <strong>Tests</strong> in the <strong>Iris</strong> sub-folder, which contains job for creation of auto-triggered jobs (createTrigger) and two sub-folders where created jobs are stored.</p>
+<h2 id="auto-triggering-tests"><a name="Auto"></a>Auto-Triggering Tests</h2>
+<p>App Factory supports two types of auto-triggered test jobs: scm-triggered (Watchers) and cron-triggered (Schedulers). Every project contains a folder called <strong>Tests</strong> in the <strong>Iris</strong> sub-folder, which contains a job for creation of auto-triggered jobs (createTest) and two sub-folders where created jobs are stored.</p>
 <p>To setup an auto-triggered test job, follow these steps:</p>
 <ol>
-<li>
-<p>From the project folder, navigate to the <strong>Tests</strong> sub-folder.</p>
-</li>
+<li>From the project folder, navigate to the <strong>Tests</strong> sub-folder.</li>
 <li>
 <p>Select the <strong>createTest</strong> job.</p>
-<p><img alt="" src="Resources/Images/jasmine-subfolder_560x251.png" /></p>
+<p><img alt="" src="Resources/Images/jasmine-subfolder.png" /></p>
 </li>
 <li>
 <p>Configure the CRON_SCHEDULE parameter based on your requirement.</p>
@@ -1680,30 +1679,30 @@
 </li>
 <li>
 <p>Configure the remaining parameters, which are the same as the runTest job.</p>
-<p><img alt="" src="Resources/Images/TA_createTest_574x643.png" /></p>
+<p><img alt="" src="Resources/Images/TA_createTest.png" /></p>
 </li>
 <li>
 <p>After you configure all the parameters, click <strong>BUILD</strong>.</p>
 <p><img alt="" src="Resources/Images/TA_CreateTestSuccess.png" /></p>
 </li>
 </ol>
-<blockquote>
 <p><strong><em>Note:</em></strong></p>
-</blockquote>
 <ul>
-<li>
-<p>Every Scheduler that is created contains the cron string in job name to simplify the job search.  </p>
-<p><img alt="" src="Resources/Images/TA_SchedulerCron.png" /></p>
-</li>
-<li>
-<p>Every Watcher that is created contains the branch name in job name to simplify the job search.  </p>
-<p><img alt="" src="Resources/Images/TA_WatchersCron.png" /></p>
-</li>
+<li>Every Scheduler that is created contains the cron string in job name to simplify the job search.<br />
+<img alt="" src="Resources/Images/TA_SchedulerCron.png" /></li>
+<li>Every Watcher that is created contains the branch name in job name to simplify the job search.<br />
+<img alt="" src="Resources/Images/TA_WatchersCron.png" /></li>
 </ul>
 
-              
-            </article>
-          </div>
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
         </div>
         
       </main>
@@ -1793,10 +1792,11 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant"], "search": "../../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant"], "search": "../../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.748e2769.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.220ee61c.min.js"></script>
       
     
   </body>
