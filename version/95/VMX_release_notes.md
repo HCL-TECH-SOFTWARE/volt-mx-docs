@@ -40,6 +40,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Foundry](#volt-foundry)
 
+- [V9 Servicepack 5 Fixpack 15 Hotfix 12](#v9-servicepack-5-fixpack-15-hotfix-12)
 - [V9 Servicepack 5 Fixpack 15 Hotfix 11](#v9-servicepack-5-fixpack-15-hotfix-11)
 - [V9 Servicepack 5 Fixpack 15 Hotfix 9](#v9-servicepack-5-fixpack-15-hotfix-9)
 - [V9 Servicepack 5 Fixpack 15 Hotfix 8](#v9-servicepack-5-fixpack-15-hotfix-8)
@@ -859,6 +860,13 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 -->
 
 ## Volt Foundry
+
+### V9 Servicepack 5 Fixpack 15 Hotfix 12
+April 08, 2024
+
+* Support for Vanity URLs is now added in Foundry.
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 ### V9 Servicepack 5 Fixpack 15 Hotfix 11
 March 27, 2024
