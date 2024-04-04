@@ -26,4 +26,4 @@ The following topics describe how to create, import, or migrate a project:
 
 [Export a Volt MX Iris project](ShareProjectOnTheCloud.md)
 
-[Integration with Design Tools](Integration_with_Design_Tools.md)
+<!--[Integration with Design Tools](Integration_with_Design_Tools.md) MXOP-10153-->

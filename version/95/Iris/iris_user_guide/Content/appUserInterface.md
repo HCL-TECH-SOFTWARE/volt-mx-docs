@@ -27,8 +27,8 @@ Use Components to quickly develop sophisticated applications with dynamic and re
 ### [Accessibility & Internationalization](Internationalization.md)
 Use Internationalization (i18n) features to build your app for various language locales without making changes to the application code or logic.
 
-### [Sketch and Photoshop Integration](Integration_with_Design_Tools.md)
-Use Volt MX Iris plugins to convert your UI designs built on third-party design tools into Iris projects.
+<!--### [Sketch and Photoshop Integration](Integration_with_Design_Tools.md)
+Use Volt MX Iris plugins to convert your UI designs built on third-party design tools into Iris projects. MXOP-10153-->
 
 ### [Best practices and Design Guidelines](../../../Iris/app_design_dev/Content/Application_Design_Guidelines_Overview.md)
 Learn about various aspects integral to designing mobile apps, such as functionality, design, and performance.

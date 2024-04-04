@@ -9,7 +9,7 @@ With this release, we have introduced a unified Iris experience for the design a
 
 *   Iris Development Environment
 *   Masters
-*   Photoshop Extension
+<!--*   Photoshop Extension MXOP-10153-->
 *   Requirements
 *   Wearables 2.0
 *   Zip/Unzip APIs
