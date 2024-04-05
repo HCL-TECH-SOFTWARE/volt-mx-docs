@@ -83,7 +83,11 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 April 08, 2024
 
-* Added NFC (Near Field communication) api support for reading and writing the data to NFC tags on Android and iOS.
+* Added Near Field Communication (NFC) API support for reading and writing data to NFC tags on Android and iOS.
+* Volt Iris now supports selecting a vanity-domain for Volt Foundry endpoints for building web-applications (SPA and Adaptive).
+* BottomSheet widget introduced for iOS platforms (API-only usage).
+
+
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
