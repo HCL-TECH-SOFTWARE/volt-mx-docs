@@ -65,9 +65,11 @@ HeadlessBuild.properties file is present in the project location.
 | protectedmodeenabled.android | If the user wants to build for android in protected mode, change the value to true. |
 | protectedmodeenabled .web | 	If the user wants to build a web application in the protected mode, change the value to true. |
 | plugin.dir | Points to the directory, where the plugins required for the build are copied. |
-| javaloc | Java home (provide the folder location consisting bin where the Java is installed.)Example: <Install_location>\VoltMXIrisEnterprise8.0\Java\jdk<br><b>Note :</b> From Iris versions 9.2.69/9.5.21 and above, point to Java version 11. Java version 8 is no longer supported. |
+| javaloc | Java home (provide the folder location consisting bin where the Java is installed.)Example: <Install_location>\VoltMXIrisEnterprise8.0\Java\jdk<br><b>Note:</b> From Iris versions 9.2.69/9.5.21 and above, point to Java version 11. Java version 8 is no longer supported. |
 | androidHome | Android SDK path |
 | For Proxy setup, the following new entries are applicable:<br/>proxy.host<br/>proxy.port<br/>proxy.username<br/>proxy.password | If you are running CI build on a system behind a proxy, provide proxy details. |
+| vanity_domain | Add the vanity domain. <br/><b>Note:</b> Vanity domain applies to only SPA and Responsive Web platforms. |
+
 
 
 > **_Note:_** Any property which is in the projectProperties.json can be configured via the HeadlessBuild.properties file with the same key.
