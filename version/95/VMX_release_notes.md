@@ -864,7 +864,7 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ### V9 Servicepack 5 Fixpack 15 Hotfix 12
 April 08, 2024
 
-* Support for Vanity URLs is now added in Foundry.
+* Volt Foundry now supports serving service definition files based on vanity domains as requested at build-time by Volt iris.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
