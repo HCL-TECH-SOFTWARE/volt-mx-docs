@@ -66,7 +66,8 @@ Near Field Communication (NFC) is a set of short-range wireless technologies, ty
 
 For more information about the NFC specification please visit the official NFC forum link below.
 
-https://gototags.com/companies/nfc-forum
+click [here](https://gototags.com/companies/nfc-forum)
+
 </details>
 
 <details close markdown="block"><summary>voltmx.nfc namespace</summary>
@@ -97,7 +98,8 @@ IOS also needs usage description in info.plist. Add the description with key NFC
 
 <b>Android</b>
 
-<b>To enable the NFC function for Android below permission must be added through Iris</b>
+<b>To enable the NFC function for Android below permission must be added through Iris</b><br>
+`<uses-permission android:name="android.permission.NFC"/>`
 
 >**Note:** If this permission is not added, NFC functionality for Android will not be enabled.
 
@@ -114,6 +116,7 @@ You can also check the official Android link for NFC [here](https://developer.an
 The voltmx.nfc namespace provides the below data type constants and error constants.
 
 **Data Types constants**
+
 Below are the constants to identify the type of data in the NFC tag.
 
 | Data Type | Description |
@@ -180,7 +183,6 @@ Android, iOS
 | Function | Description |
 | --- | --- |
 | voltmx.nfc.scanTag | Starts the scan session for nearby NFC tags. |
-| --- | --- |
 | voltmx.nfc.stopScan | Stops the current NFC tag scanning session. |
 | voltmx.nfc.updateUI| Updates the UI (User Interface) while scan session is in progress. |
 
@@ -200,9 +202,9 @@ Using the config parameter, the user can customize the behavior of the nfc tag s
 
 | Function | Description |
 | --- | --- |
-|  scanContinuously[Boolean](Optional)| Configure the behavior of scan should continuous or should be stopped after 1st tag identified. Th default value is true. |
-|  message [String](Optional) | Configure UI message text. Applicable for iOS only. The default value is empty |
-|  scanTimeout[number](Optional)| Configure scan timeout in milli seconds. The default timeout is 60 seconds. Configuring scan timeout applicable for Android only |
+|  scanContinuously`[Boolean]`(Optional)| Configure the behavior of scan should continuous or should be stopped after 1st tag identified. Th default value is true. |
+|  message `[String]`(Optional) | Configure UI message text. Applicable for iOS only. The default value is empty |
+|  scanTimeout`[number]`(Optional)| Configure scan timeout in milli seconds. The default timeout is 60 seconds. Configuring scan timeout applicable for Android only |
 
 <b>successcallback [Function] - Mandatory</b>
 
@@ -274,11 +276,11 @@ alert("NFC Support is not available in this device");
 
 <b>Platform Availability</b>
 
-    Android, iOS
+Android, iOS
 
-    **2.stopScan**
+## stopScan
 
-    Stops the current running NFC scan session.
+Stops the current running NFC scan session.
 
 <b>Syntax:</b>
 
@@ -286,9 +288,9 @@ voltmx.nfc.stopScan();
 
 <b>Input Parameters:</b>
 
-None.
+ None.
 
-<b><Return Values></b>
+<b>Return Values</b>
 
 None.
 
@@ -363,7 +365,7 @@ config \[Object\] - Config object that has the following key-value pai
 
 | key| Description |
 | --- | --- |
-|  message [String](Optional)| Configure UI message text. Applicable for iOS only|
+|  message `[String]`(Optional)| Configure UI message text. Applicable for iOS only|
 
 <b>Return Values</b>
 
@@ -788,9 +790,9 @@ errorcallback(readerror)- readerror is an object that has the following key-valu
     
 ```
 
-    <b>Platform Availability</b>           
+ <b>Platform Availability</b>           
 
-    Android
+ Android
 
 </details>
 
