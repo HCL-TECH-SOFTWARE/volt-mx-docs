@@ -17,7 +17,7 @@ You can configure either an idle timeout or fixed timeout for apps in the **Appl
 *   **Idle Timeout**: Specifies the number of minutes that a session can remain idle before Volt MX Foundry automatically terminates the app.
     *   Identity Session Idle Timeout: When an app session on a device remains idle for a certain period of time, the app session expires automatically. The user will need to log into the app again.
     *   **Maximum Session Duration**: An apps log-in session is active until the maximum session duration time is met.
-*   **Fixed Timeout**: Specifies the session’s idle timeout (HH:SS) of an app. When the timeout is reached, the session expires automatically, and the user will need to log into the app again.
+*   **Fixed Timeout**: Specifies the session’s idle timeout (HH:MM) of an app. When the timeout is reached, the session expires automatically, and the user will need to log into the app again.
 
 To configure an Identity Session Idle Timeout, do the following:
 
@@ -25,12 +25,12 @@ To configure an Identity Session Idle Timeout, do the following:
 2.  In Identity Session Timeout, do either of the following:
     
     *   Click the **Idle Timeout**.
-        *   Enter the hours/seconds (HH:SS) in the **Identity Session Idle Timeout**.
-        *   Enter the hours/seconds (HH:SS) in the **Maximum Session Duration**.
+        *   Enter the hours/minutes (HH:MM) in the **Identity Session Idle Timeout**.
+        *   Enter the hours/minutes (HH:MM) in the **Maximum Session Duration**.
     
     Or
     
-    *   Click the **Fixed Timeout**, and enter the hours/seconds (HH:SS) in the **Fixed Identity Session Duration**.
+    *   Click the **Fixed Timeout**, and enter the hours/minutes (HH:MM) in the **Fixed Identity Session Duration**.
 3.  Click **Save**.
     
 4.  Publish or republish the app to reflect the changes.
