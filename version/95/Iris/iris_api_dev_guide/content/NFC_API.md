@@ -105,7 +105,7 @@ voltmx.nfc.scanTag(config, successcallback, errorcallback);
 
 **Input Parameters:**
 
-config [Object] - Mandatory
+<b>config [Object] - Mandatory</b>
 
 Using the config parameter, the user can customize the behavior of the nfc tag scan. It is an object that has the following key-value pairs:
 
@@ -268,7 +268,7 @@ voltmx.nfc.updateUI(config);
 
 <b>config [Object] - Optional</b>
 
-The config object specifies what information should be updated on the UI. The config object contains certain key-value pairs.
+The config object specifies what information should be updated on the UI. The <b>config</b> object contains certain key-value pairs.
 
 config \[Object\] - Config object that has the following key-value pai
 
@@ -379,7 +379,7 @@ readData(successcallback,errorcallback);
 
 <b>successcallback [Function] - Mandatory</b>
 
-The successcallback function specifies the callback function that must be executed when the API call is successful. The signature of the callback function is successcallback(tagDataArray) where, tagDataArray contains nfc data records of the NFCTag. It is an object array, and each object contains certain key-value pairs.
+The successcallback function specifies the callback function that must be executed when the API call is successful. The signature of the callback function is successcallback(tagDataArray) where, <b>tagDataArray</b> contains nfc data records of the NFCTag. It is an object array, and each object contains certain key-value pairs.
 
 tagData \[Object\] - TagData that has the following key-value pairs
 
@@ -482,7 +482,7 @@ writeData(data, shouldAppend, successcallback, errorcallback);
 
 <b>data [Array] - Mandatory</b>
 
-The data array specifies the array of records that must be written on the NFC tag. The signature of the data array is [recordData] where recordData contains certain key-value pairs.
+The data array specifies the array of records that must be written on the NFC tag. The signature of the data array is [recordData] where <b>recordData</b> contains certain key-value pairs.
 
 recordData \[Object\] - Record data that has the following key-value pairs:
 
