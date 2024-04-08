@@ -70,10 +70,11 @@ To initialize the Volt MX JS Client SDK, run the following code:
 var appkey = "your-app-key";
 var appsecret = "your-app-secret";
 var serviceUrl = "your-service-url";
-var initOptions = {
-                      "MFAppVersion": "<your-Foundry-app-version>",  //Optional parameter to choose Foundry app version                    
-                      "vanityUrl" : "<your-Vanity-URL>"};  //Optional parameter to specify Vanity URL
-                  }
+var initOptions = 
+    {
+        "MFAppVersion": "<your-Foundry-app-version>",  //Optional parameter to choose Foundry app version                    
+        "vanityUrl" : "<your-Vanity-URL>"};  //Optional parameter to specify Vanity URL
+    }
 
 // Get an instance of SDK
 var client = new voltmx.sdk();
