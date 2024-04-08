@@ -6,7 +6,7 @@ Android NFC Manifest configuration
 
 To enable the NFC functionality on Android the applications below permission must be added in its Manifest file. 
 
-`< uses-permission android:name="android.permission.NFC" />`
+`<uses-permission android:name="android.permission.NFC"/>`
 
 <b>If this permission is not added, the NFC functionality will not be enabled.</b>
 
@@ -14,7 +14,7 @@ This permission can be added through Iris using the steps below.
 
 <b>Open Project Settings -> select Native Tab -> select Android Mobile/Tablet -> In Manifest Permissions (Permission Tab) -> add NFC and click Done.</b>
 
-image
+![](Resources/Images/nfc_001.png)
 
 ## Mime Type determination by Android 
 
@@ -59,21 +59,21 @@ Here is one more example of the intent filter which filters for a URI in the for
 
 click [here](https://developer.android.com/index.html)
 
-`< intent-filter >`
- <action android:name="android.nfc.action.NDEF_DISCOVERED"/> 
-<category android:name="android.intent.category.DEFAULT"/> 
-<data android:scheme="https" 
-android:host="developer.android.com" 
-android:pathPrefix="/index.html"/> 
-</intent-filter>`
+`<intent-filter>`<br>
+`<action android:name="android.nfc.action.NDEF_DISCOVERED"/>`<br>
+`<category android:name="android.intent.category.DEFAULT"/>`<br> 
+`<data android:scheme="https"`<br>
+`android:host="developer.android.com"`<br>
+`android:pathPrefix="/index.html"/>`<br>
+`</intent-filter>`
 
 <b>Please note that the data element can be configured differently for different data types, and you can follow the standard Android guidelines to configure the data element in the intent filter so that your application can only listen to the data types you are interested in.</b>
 
 For more detailed information regarding the intent filter and data types, please go through the official Android document links below. 
 
-click [here](https://developer.android.com/guide/components/intents-filters )
+[intent filter](https://developer.android.com/guide/components/intents-filters )
 
-click [here](https://developer.android.com/guide/topics/manifest/data-element )
+[data types](https://developer.android.com/guide/topics/manifest/data-element )
 
 ## Action TAG_DISCOVERED 
 
@@ -83,9 +83,9 @@ This action also gets triggered if no activities handle the ACTION_NDEF_DISCOVER
 
 Your application can listen to this action by adding the below intent filter.
 
-`<intent-filter> 
-    <action android:name="android.nfc.action.TAG_DISCOVERED"/> 
-</intent-filter>`
+`<intent-filter>`<br>
+`<action android:name="android.nfc.action.TAG_DISCOVERED"/>`<br>
+`</intent-filter>`
 
 For more information regarding how the Android system filters the NFC intent visit the link below. 
 
@@ -97,7 +97,7 @@ Intent filters can be added to the application using the steps below.
 
 <b>Open Project Settings -> select Native Tab -> select Android Mobile/Tablet -> In Tags section ->  Child tag entries under main launcher <activity> tag -> add intent filters and click Done</b>
 
-image
+![](Resources/Images/nfc_002.png)
 
 ## Android Official Resource link 
 
