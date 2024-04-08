@@ -1,6 +1,6 @@
                             
-Near Field communication (NFC)
-==============================
+NFC API
+========
 
 **Voltmx NFC Documentation**
 
@@ -54,7 +54,7 @@ You can also check the official Android link for NFC [here](https://developer.an
 
 </details>
 
-<details close markdown="block"><summary>Constants</summary>
+<details open markdown="block"><summary id="constants">Constants</summary>
 
 The voltmx.nfc namespace provides the below data type constants and error constants.
 
@@ -71,6 +71,7 @@ Below are the constants to identify the type of data in the NFC tag.
 
 ## Error Constants
 
+
 | Error | Description |
 | --- | --- |
 | voltmx.nfc.ERROR_TIMEOUT | This error will be thrown in error callback of scanTag Api when the no tag has been detected within the timeout.|
@@ -85,43 +86,8 @@ Below are the constants to identify the type of data in the NFC tag.
 
 </details>
 
-<details close markdown="block"><summary>Functions</summary>
+<details close markdown="block"><summary>Voltmx.nfc namespace functions</summary>
 
-**voltmx.os.hasNFCSupport**
-
-This Api is the part of voltmx.os namespace and used to check if the NFC is supported on the device or not. This Api is useful for checking the NFC support before scanning any tag.
-
-<b>Syntax</b>
-
-voltmx.os.hasNFCSupport()
-
-<b>Input Parameters</b>
-
-None
-
-<b>Example</b>
-
-```
-function startScan() {
-
-if(voltmx.os.hasNFCSupport()) { // check if the device has NFC support, then only call the other NFC Api.
-
-//call NFC API's
-
-} else {
-
-alert ("This device doesn't support NFC feature");
-
-}
-
-}
-```
-
-Platform Availability
-
-Android, iOS
-
-**voltmx.nfc namespace functions**
 
 | key | Description |
 | --- | --- |
@@ -161,7 +127,7 @@ errorcallback(readerror)- readerror is an object that has the following key-valu
 
 | key| Description |
 | --- | --- |
-|  errorCode [Number]| error code. All error code defined [here](##error_constants).|
+|  errorCode [Number]| error code. All error code defined [here](#constants).|
 |  errorMessage [String] | error message.|
 
 <b>Return Values</b>
@@ -431,7 +397,7 @@ errorcallback(readerror)- readerror is an object that has the following key-valu
 
 | key| Description |
 | --- | --- |
-|  errorCode[Number] | error code. All error code defined here. |
+|  errorCode[Number] | error code. All error code defined [here](#constants). |
 |  errorMessage [String] | error message. |
 
 <b>Return Values</b>
@@ -542,7 +508,7 @@ errorcallback(readerror)- readerror is an object that has the following key-valu
 
 | key| Description |
 | --- | --- |
-|  errorCode [Number] | error code. All error code defined [here]()|
+|  errorCode [Number] | error code. All error code defined [here](#constants)|
 |  errorMessage [String] | error message.|
 
 **Return Values**
@@ -683,7 +649,7 @@ errorcallback(readerror)- readerror is an object that has the following key-valu
 
 | key| Description |
 | --- | --- |
-|  errorCode [Number] | error code. All error code defined [here]()|
+|  errorCode [Number] | error code. All error code defined [here](#constants)|
 |  errorMessage [String | error message.|
 
 <b>Return Values</b> 
