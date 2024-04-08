@@ -47,7 +47,7 @@ To initialize the Volt MX JS Client SDK, link your Volt MX Foundry Application w
 
 After you link your Foundry application with Iris, the Volt MX Foundry SDK is initialized automatically when the app starts.
 
-> **Note:** <br><br>1.    The initialized SDK is available for use within the application with the variable name **HCLFoundry**.<br/>2.    If the operating system launches an application in the background, the session registers as a Non-Interactive session.<br><br>**For example,**<br><br>i.    On Push Notifications<br/>ii.    Content Provider Calls<br/>iii.    Registering for Geo-location Updates.<br><br>3. If the application launches for interaction, the session registers as an Interactive session.<br><br>**For example,**<br><br>i.    When a user launches the application.<br/>ii.    When another app or component launches the application.  
+> **_Note:_** <br><br>1.    The initialized SDK is available for use within the application with the variable name **HCLFoundry**.<br/>2.    If the operating system launches an application in the background, the session registers as a Non-Interactive session.<br><br>**For example,**<br><br>i.    On Push Notifications<br/>ii.    Content Provider Calls<br/>iii.    Registering for Geo-location Updates.<br><br>3. If the application launches for interaction, the session registers as an Interactive session.<br><br>**For example,**<br><br>i.    When a user launches the application.<br/>ii.    When another app or component launches the application.  
     
 > **_Note:_** When the Iris app is linked with the Foundry app, it fetches the service doc and bundles it with the application. When the Foundry app is re-published and a call is make to the Identity Server, the SDK detects the changes. It replaces the bundled service doc with the new service doc.  
 These changes are applied in the next application launch as follows:  
@@ -70,17 +70,25 @@ To initialize the Volt MX JS Client SDK, run the following code:
 var appkey = "your-app-key";
 var appsecret = "your-app-secret";
 var serviceUrl = "your-service-url";
-var initOptions = {"MFAppVersion": "<your-Foundry-app-version>"}; //This is an optional argument to be used if you want to switch to Foundry-app version other than default app version.
+var initOptions = 
+    {
+        "MFAppVersion": "<your-Foundry-app-version>",  //Optional parameter to choose Foundry app version                    
+        "vanityUrl" : "<your-Vanity-URL>"};  //Optional parameter to specify Vanity URL
+    }
+
 // Get an instance of SDK
 var client = new voltmx.sdk();
 // initialize SDK
-client.init(appkey, appsecret, serviceUrl, function(response) {
-   voltmx.print("Init success: " + JSON.stringify(response));
-}, function(error) {
-   voltmx.print("Init failed: " + JSON.stringify(error));
-}, initOptions);
+client.init(appkey, appsecret, serviceUrl, function(response)
 
+{    voltmx.print("Init success: " + JSON.stringify(response)); }
+, function(error)
+
+{    voltmx.print("Init failed: " + JSON.stringify(error)); }
+, initOptions);
 ```
+
+>**_Note:_** The key "vanityUrl" is case sensitive and value passed to it should be domain name only.
 
 Manual Initialization by using setClientParams
 ----------------------------------------------

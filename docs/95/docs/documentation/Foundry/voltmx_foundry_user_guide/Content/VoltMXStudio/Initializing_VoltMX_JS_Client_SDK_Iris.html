@@ -2056,7 +2056,7 @@ Manual Initialization through code.  </p>
 </ol>
 <p>After you link your Foundry application with Iris, the Volt MX Foundry SDK is initialized automatically when the app starts.</p>
 <blockquote>
-<p><strong>Note:</strong> <br><br>1.    The initialized SDK is available for use within the application with the variable name <strong>HCLFoundry</strong>.<br/>2.    If the operating system launches an application in the background, the session registers as a Non-Interactive session.<br><br><strong>For example,</strong><br><br>i.    On Push Notifications<br/>ii.    Content Provider Calls<br/>iii.    Registering for Geo-location Updates.<br><br>3. If the application launches for interaction, the session registers as an Interactive session.<br><br><strong>For example,</strong><br><br>i.    When a user launches the application.<br/>ii.    When another app or component launches the application.  </p>
+<p><strong><em>Note:</em></strong> <br><br>1.    The initialized SDK is available for use within the application with the variable name <strong>HCLFoundry</strong>.<br/>2.    If the operating system launches an application in the background, the session registers as a Non-Interactive session.<br><br><strong>For example,</strong><br><br>i.    On Push Notifications<br/>ii.    Content Provider Calls<br/>iii.    Registering for Geo-location Updates.<br><br>3. If the application launches for interaction, the session registers as an Interactive session.<br><br><strong>For example,</strong><br><br>i.    When a user launches the application.<br/>ii.    When another app or component launches the application.  </p>
 <p><strong><em>Note:</em></strong> When the Iris app is linked with the Foundry app, it fetches the service doc and bundles it with the application. When the Foundry app is re-published and a call is make to the Identity Server, the SDK detects the changes. It replaces the bundled service doc with the new service doc.<br />
 These changes are applied in the next application launch as follows:<br />
 1. App is launched and initialized with the existing service doc.<br />
@@ -2072,17 +2072,26 @@ These changes are applied in the next application launch as follows:<br />
 var appkey = &quot;your-app-key&quot;;
 var appsecret = &quot;your-app-secret&quot;;
 var serviceUrl = &quot;your-service-url&quot;;
-var initOptions = {&quot;MFAppVersion&quot;: &quot;&lt;your-Foundry-app-version&gt;&quot;}; //This is an optional argument to be used if you want to switch to Foundry-app version other than default app version.
+var initOptions = 
+    {
+        &quot;MFAppVersion&quot;: &quot;&lt;your-Foundry-app-version&gt;&quot;,  //Optional parameter to choose Foundry app version                    
+        &quot;vanityUrl&quot; : &quot;&lt;your-Vanity-URL&gt;&quot;};  //Optional parameter to specify Vanity URL
+    }
+
 // Get an instance of SDK
 var client = new voltmx.sdk();
 // initialize SDK
-client.init(appkey, appsecret, serviceUrl, function(response) {
-   voltmx.print(&quot;Init success: &quot; + JSON.stringify(response));
-}, function(error) {
-   voltmx.print(&quot;Init failed: &quot; + JSON.stringify(error));
-}, initOptions);
+client.init(appkey, appsecret, serviceUrl, function(response)
 
+{    voltmx.print(&quot;Init success: &quot; + JSON.stringify(response)); }
+, function(error)
+
+{    voltmx.print(&quot;Init failed: &quot; + JSON.stringify(error)); }
+, initOptions);
 </code></pre>
+<blockquote>
+<p><strong><em>Note:</em></strong> The key "vanityUrl" is case sensitive and value passed to it should be domain name only.</p>
+</blockquote>
 <h2 id="manual-initialization-by-using-setclientparams">Manual Initialization by using setClientParams</h2>
 <p>You can also initialize the Volt MX JS Client SDK by using setClient parameters. However, a few data types are not captured in the metrics of the app.</p>
 <p>Setting clientParams in the manual init by using setClientParams API allows Volt MX Foundry SDK to send client parameters such as application ID and application name to the parameters set from Volt MX Iris. It also allows these parameters to be consistent across different data collection points such as integration services, application events, and custom metrics.</p>

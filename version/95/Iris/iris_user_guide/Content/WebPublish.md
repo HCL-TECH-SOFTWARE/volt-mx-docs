@@ -98,8 +98,8 @@ Before you publish a web app, ensure that you have a project in which you have a
 5. Click either **Create New App** or **Link to Existing App**. The Volt MX Foundry console appears.
 6. If you have not already, sign in to your Volt MX Foundry account by using your cloud credentials.
 7. If you choose:
-   * **Create New App**, a new Foundry app with the same name as the Iris Project is created.
-   * **Link to Existing App**, a list of existing apps from your Volt MX Foundry account are displayed.
+       * **Create New App**, a new Foundry app with the same name as the Iris Project is created.
+       * **Link to Existing App**, a list of existing apps from your Volt MX Foundry account are displayed.
 8. To select the Volt MX Foundry app that you want to associate your Volt MX Iris app with, click **Associate** beside the App Name.
 
    ![](Resources/Images/AssociateFoundryApp_638x384.png) 
@@ -112,6 +112,7 @@ Before you publish a web app, ensure that you have a project in which you have a
     The Build and Publish Web window appears.  
 
    <!-- ![](Resources/Images/publishWebApp_389x413.png) VM -->
+   ![](Resources/Images/Build_and_Publish_Web_App.png)
     
 11.  Select the required Platforms and Channels for which you want to build and publish your web app.
 12.  From the **Post Build Action** drop-down menu, select the desired **Post Build Action**. For more details about the Post Build Action, click [here](#post-build-actions).
@@ -123,6 +124,10 @@ Before you publish a web app, ensure that you have a project in which you have a
   *   **Test Mode** - To help you identify and fix errors, Volt MX Iris provides the ability to Test the application on the device or an emulator. When you build an app using the Test Mode, you can leverage the Jasmine testing framework of Volt MX Iris to thoroughly test your app and ensure your application is errors free. You can run jasmine test cases, test suites and test plans by building an app using the Test mode.
 
 14.  You can choose to change the cloud environment on which your app will be published. To do so click on **Change** beside the **Environment** option.
+
+15. You can select the **Vanity Domain** from the drop down. The base domain is identified by appended text “[Base]” in the displayed domain name.
+
+    > **_Note:_** Change to vanity domain made in the popup is not persisted.
 
 15. If you do not want to use the SHA1, MD2, MD4, and MD5 hashing algorithms in your application, check **Strict Mode**. If you do use any of those algorithms, leave **Strict Mode** unchecked. Otherwise, you will receive an "Unsupported algorithm" error message.
 
