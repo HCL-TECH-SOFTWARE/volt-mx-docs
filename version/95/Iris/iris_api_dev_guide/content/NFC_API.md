@@ -48,7 +48,7 @@ IOS also needs usage description in info.plist. Add the description with key NFC
 
 Depending on the application functionality, you may need to configure the intent filters if your application must listen to any data scanned from the NFC tag.
 
-Detailed description related to Android manifest configuration is available [here]()
+Detailed description related to Android manifest configuration is available [here](https://github01.hclpnp.com/pages/phoenix-temenos/volt-mx-doc-opnsrc/95/docs/documentation/Iris/iris_api_dev_guide/content/Android_NFC_Manifest_Configuration.html)
 
 You can also check the official Android link for NFC [here](https://developer.android.com/develop/connectivity/nfc/nfc#manifest).
 
