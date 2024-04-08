@@ -7,6 +7,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Iris](#volt-iris)
 
+- [V9 Servicepack 5 Fixpack 24](#v9-servicepack-5-fixpack-24)
 - [V9 Servicepack 5 Fixpack 23](#v9-servicepack-5-fixpack-23)
 - [V9 Servicepack 5 Fixpack 22](#v9-servicepack-5-fixpack-22)
 - [V9 Servicepack 5 Fixpack 21](#v9-servicepack-5-fixpack-21)
@@ -39,6 +40,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Foundry](#volt-foundry)
 
+- [V9 Servicepack 5 Fixpack 15 Hotfix 12](#v9-servicepack-5-fixpack-15-hotfix-12)
 - [V9 Servicepack 5 Fixpack 15 Hotfix 11](#v9-servicepack-5-fixpack-15-hotfix-11)
 - [V9 Servicepack 5 Fixpack 15 Hotfix 9](#v9-servicepack-5-fixpack-15-hotfix-9)
 - [V9 Servicepack 5 Fixpack 15 Hotfix 8](#v9-servicepack-5-fixpack-15-hotfix-8)
@@ -76,6 +78,19 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 - [Earlier Foundry releases](#earlier-foundry-releases)
 
 ## Volt Iris
+
+### V9 Servicepack 5 Fixpack 24
+
+April 08, 2024
+
+* Added Near Field Communication (NFC) API support for reading and writing data to NFC tags on Android and iOS.
+* Volt Iris now supports selecting a vanity-domain for Volt Foundry endpoints for building web-applications (SPA and Adaptive).
+* BottomSheet widget introduced for iOS platforms (API-only usage).
+
+
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+
 
 ### V9 Servicepack 5 Fixpack 23
 
@@ -849,6 +864,13 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 -->
 
 ## Volt Foundry
+
+### V9 Servicepack 5 Fixpack 15 Hotfix 12
+April 08, 2024
+
+* Volt Foundry now supports serving service definition files based on vanity domains as requested at build-time by Volt iris.
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 ### V9 Servicepack 5 Fixpack 15 Hotfix 11
 March 27, 2024
