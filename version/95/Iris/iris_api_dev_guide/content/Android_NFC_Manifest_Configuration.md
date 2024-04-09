@@ -14,7 +14,9 @@ This permission can be added through Iris using the steps below.
 
 <b>Open Project Settings -> select Native Tab -> select Android Mobile/Tablet -> In Manifest Permissions (Permission Tab) -> add NFC and click Done.</b>
 
-![](Resources/Images/nfc_001.png)
+
+![](resources/Images/nfc_001.png)
+
 
 ## Mime Type determination by Android 
 
@@ -97,7 +99,9 @@ Intent filters can be added to the application using the steps below.
 
 <b>Open Project Settings -> select Native Tab -> select Android Mobile/Tablet -> In Tags section ->  Child tag entries under main launcher <activity> tag -> add intent filters and click Done</b>
 
-![](Resources/Images/nfc_002.png)
+
+![](resources/Images/nfc_002.png)
+
 
 ## Android Official Resource link 
 
