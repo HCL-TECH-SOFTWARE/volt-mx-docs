@@ -12,10 +12,10 @@ To enable the NFC functionality on Android the applications below permission mus
 
 This permission can be added through Iris using the steps below. 
 
-<b>Open Project Settings -> select Native Tab -> select Android Mobile/Tablet -> In Manifest Permissions (Permission Tab) -> add NFC and click Done.</b>
+**Open Project Settings -> select Native Tab -> select Android Mobile/Tablet -> In Manifest Permissions (Permission Tab) -> add NFC and click Done.**
 
 
-![](resources/Images/nfc_001.png)
+![](resources/images/nfc_001.png)
 
 
 ## Mime Type determination by Android 
@@ -47,7 +47,7 @@ Whenever the NFC tag is scanned and contains the NDEF data in the tag. Intent wi
 
 >**Note :** If there are multiple applications able to handle the type of data, Android system will present the list of applications to the user. The user will need to select which application to be launched and handle that data. 
 
-The intent filter category should be <b>android.intent.category.DEFAULT</b> and the data element can change depending on the type of data your application can handle and listen to. 
+The intent filter category should be **android.intent.category.DEFAULT** and the data element can change depending on the type of data your application can handle and listen to. 
 
 Below intent filter is an example of the application which can handle the data of type text/plain. 
 
@@ -97,10 +97,10 @@ click [here](https://developer.android.com/develop/connectivity/nfc/nfc#dispatch
 
 Intent filters can be added to the application using the steps below. 
 
-<b>Open Project Settings -> select Native Tab -> select Android Mobile/Tablet -> In Tags section ->  Child tag entries under main launcher <activity> tag -> add intent filters and click Done</b>
+**Open Project Settings -> select Native Tab -> select Android Mobile/Tablet -> In Tags section ->  Child tag entries under main launcher < activity > tag -> add intent filters and click Done**
 
 
-![](resources/Images/nfc_002.png)
+![](resources/images/nfc_002.png)
 
 
 ## Android Official Resource link 
