@@ -46,7 +46,7 @@ errorcallback(readerror)- readerror is an object that has the following key-valu
 
 | key| Description |
 | --- | --- |
-|  errorCode[Number] | error code. All error code defined [here](#constants). |
+|  errorCode[Number] | error code. All error code defined [here](Constants.md). |
 |  errorMessage [String] | error message. |
 
 <b>Return Values</b>
@@ -137,7 +137,7 @@ recordData \[Object\] - Record data that has the following key-value pairs:
 
 | key| Description |
 | --- | --- |
-|  type [Constant] | Type of data, like text, URI, or Media. All supported constants defined [here](#constants)|
+|  type [Constant] | Type of data, like text, URI, or Media. All supported constants defined [here](Constants.md)|
 |  data [Object] | Content of the specific tag record. For text and URI type data it is a string object. For Media type it is a voltmx.types.RawBytes object|
 |  mimeType [String]| Mime type of media data. Applicable only for Media type.|
 
@@ -157,7 +157,7 @@ errorcallback(readerror)- readerror is an object that has the following key-valu
 
 | key| Description |
 | --- | --- |
-|  errorCode [Number] | error code. All error code defined [here](#constants)|
+|  errorCode [Number] | error code. All error code defined [here](Constants.md)|
 |  errorMessage [String] | error message.|
 
 **Return Values**
@@ -298,7 +298,7 @@ errorcallback(readerror)- readerror is an object that has the following key-valu
 
 | key| Description |
 | --- | --- |
-|  errorCode [Number] | error code. All error code defined [here](#constants)|
+|  errorCode [Number] | error code. All error code defined [here](Constants.md)|
 |  errorMessage [String | error message.|
 
 <b>Return Values</b> 

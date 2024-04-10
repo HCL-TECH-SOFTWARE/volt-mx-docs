@@ -2,7 +2,7 @@
 Constants
 ==========
 
-<details open markdown="block"><summary id="constants">Constants</summary>
+<details open markdown="block"><summary>Constants</summary>
 
 The voltmx.nfc namespace provides the below data type constants and error constants.
 

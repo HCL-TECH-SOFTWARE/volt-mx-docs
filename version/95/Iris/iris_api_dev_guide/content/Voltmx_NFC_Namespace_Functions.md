@@ -43,7 +43,7 @@ errorcallback(readerror)- readerror is an object that has the following key-valu
 
 | key| Description |
 | --- | --- |
-|  errorCode [Number]| error code. All error code defined [here](#constants).|
+|  errorCode [Number]| error code. All error code defined [here](Constants.md).|
 |  errorMessage [String] | error message.|
 
 <b>Return Values</b>
