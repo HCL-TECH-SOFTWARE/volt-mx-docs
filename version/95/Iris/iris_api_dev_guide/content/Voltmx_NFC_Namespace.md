@@ -15,4 +15,5 @@ Currently, the below well-known types are supported for reading and writing the 
 * TEXT
 * URI
 * MIME_MEDIA
+
 </details>
