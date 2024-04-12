@@ -1,6 +1,4 @@
-                                   
-
-
+                                
 Uninstalling Volt MX Iris
 ===============================
 
