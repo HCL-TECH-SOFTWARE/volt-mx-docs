@@ -337,7 +337,7 @@ The **Container names** are:
 *   Container name for Flyway: `flyway_flyway_1`
 ))
 
-At a bash or CMD prompt, run "docker ps" to get the list of currently running containers. You can then use `docker logs -f <CONTAINER ID>` or `docker logs -f <CONTAINER_NAME>` to get the logs of the desired pod. Please refer to the official Docker documentation for more logging options for the container.
+At a bash or CMD prompt, run "docker ps" to get the list of currently running containers. You can then use `docker logs -f <CONTAINER ID>` or `docker logs -f <CONTAINER_NAME>` to get the logs of the desired pod. Please refer to the official [Docker](https://docs.docker.com/reference/cli/docker/container/logs/) documentation for more logging options for the container.
 
 (( Do we still need this?
 If you want to **extract logs** from a container, execute the following command from your terminal:
