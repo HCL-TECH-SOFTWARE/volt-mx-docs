@@ -1,7 +1,7 @@
                             
 Near Field Communication API
 ==================================
-<details open markdown="block"><summary>NFC</summary>
+<details open markdown="block"><summary>Near Field Communication</summary>
 Near Field Communication (NFC) is a set of short-range wireless technologies, typically requiring a distance of 4 cm or less to initiate a connection. NFC lets you share small payloads of data between the device and NFC tag.
 
 For more information about the NFC specification, see the official [forum](https://gototags.com/companies/nfc-forum).
