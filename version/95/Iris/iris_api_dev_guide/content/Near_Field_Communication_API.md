@@ -11,7 +11,7 @@ For more information about the NFC specification, see the official [forum](https
 
 
 * [Voltmx NFC Namespace](Voltmx_NFC_Namespace.md)
-* [Capabilities and Permissions](Capabilities_and_Permissions.md)
-* [Constants](Constants.md)
+* [NFC Capabilities and Permissions](NFC_Capabilities_and_Permissions.md)
+* [NFC Constants](NFC_Constants.md)
 * [Voltmx NFC Namespace Functions](Voltmx_NFC_Namespace_Functions.md)
 * [NFCTag Object](NFCTag_Object.md)
