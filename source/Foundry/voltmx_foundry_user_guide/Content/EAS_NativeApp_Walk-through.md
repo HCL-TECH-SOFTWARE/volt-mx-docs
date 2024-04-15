@@ -141,10 +141,10 @@ For Cloud, the Store app is bundled with the front-end and Server apps.
 2.  Click **Download**. The `store.zip` file gets downloaded to your local system. For more details on EAS versions, refer to [EAS and Platform Versions Compatibility Chart](#VersionsEASPlatforms).
 
 ### Downloading Server App (Volt MX App Store) for Volt MX Foundry
-
+MK
 The **Volt MX App Store** is the Server app (Volt MX Foundry), which contains services linked to EAS. You can download the source app (Volt MX App Store) from Marketplace.
 
-1.  Go to [VoltMX Marketplace](https://marketplace.hclvoltmx.com/items/voltmx-app-store).
+1.  Go to [Volt MX Marketplace](https://marketplace.hclvoltmx.com/items/kony-app-store?search=voltmx%20app%20store).
 2.  Click **Download**. The `voltmx_app_store.zip` file gets downloaded to your local system. For more details on EAS versions, refer to [EAS and Platform Versions Compatibility Chart](#VersionsEASPlatforms).
     
 
