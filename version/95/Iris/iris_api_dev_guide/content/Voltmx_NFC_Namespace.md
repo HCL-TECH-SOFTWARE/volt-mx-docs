@@ -2,8 +2,6 @@
 Voltmx NFC Namespace
 =====================
 
-<details open markdown="block"><summary>voltmx.nfc namespace</summary>
-
 Voltmx.nfc namespace provides a high-level interface to make the communication between NDEF capable NFC tags and the device.
 
 NDEF is a standardized data format specification by the [NFC Forum](https://gototags.com/companies/nfc-forum) which is used to describe how a set of records to be encoded onto an NFC tag.
@@ -15,5 +13,3 @@ Currently, the below well-known types are supported for reading and writing the 
 * TEXT
 * URI
 * MIME_MEDIA
-
-</details>

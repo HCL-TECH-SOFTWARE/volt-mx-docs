@@ -2,8 +2,6 @@
 NFCTag Object
 ==============
 
-<details open markdown="block"><summary>NFCTag Object</summary>
-
 The nfcTag object is part of the NFC API, and it represents an NFC Tag. Using a nfcTag object, your app can read and write the from/to the NFC tag. It consists of the following API elements.
 
 * Methods 
@@ -16,7 +14,8 @@ Use the voltmx.nfc.scanTag API to get a nfcTag object. Once you get a nfcTag obj
 
 The NFCTag Object consists of the following methods.
 
-**1. readData**
+<details open markdown="block"><summary>readData</summary>
+
 
 Reads the data records of an NFC Tag.
 
@@ -121,7 +120,9 @@ Platform Availability
 
 Android, iOS
 
-**writeData**
+</details>
+
+<details open markdown="block"><summary>writeData</summary>
 
 <b>Syntax:</b>
 

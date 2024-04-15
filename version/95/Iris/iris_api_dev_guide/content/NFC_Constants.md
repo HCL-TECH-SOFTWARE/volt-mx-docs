@@ -1,8 +1,6 @@
                             
-Constants
-==========
-
-<details open markdown="block"><summary>Constants</summary>
+NFC Constants
+=============
 
 The voltmx.nfc namespace provides the below data type constants and error constants.
 
@@ -32,4 +30,3 @@ Below are the constants to identify the type of data in the NFC tag.
 | voltmx.nfc.ERROR_DATA_TYPE_NOT_SUPPORTED| Error constant to indicate that the data attempted to write in the tag is not supported.|
 | voltmx.nfc.ERROR_UNKNOWN| Unknown error during the scan, read or write operation.|
 
-</details>

@@ -2,16 +2,14 @@ Voltmx NFC Namespace Functions
 ===============================
 
 
-<details open markdown="block"><summary>Voltmx.nfc namespace functions</summary>
-
-
 | key | Description |
 | --- | --- |
 | voltmx.nfc.scanTag | Starts the scan session for nearby NFC tags. |
 | voltmx.nfc.stopScan | Stops the current NFC tag scanning session. |
 | voltmx.nfc.updateUI| Updates the UI (User Interface) while scan session is in progress. |
 
-**1. voltmx.nfc.scanTag**
+
+<details open markdown="block"><summary>voltmx.nfc.scanTag</summary>
 
 Starts the scan session for nearby NFC tags.
 
@@ -103,7 +101,10 @@ alert("NFC Support is not available in this device");
 
 Android, iOS
 
-## stopScan
+</details>
+
+<details open markdown="block"><summary>stopScan</summary>
+
 
 Stops the current running NFC scan session.
 
@@ -172,7 +173,9 @@ alert("NFC Support is not available in this device");
 
 Android, iOS
 
-**3. updateUI**
+</details>
+
+<details open markdown="block"><summary>updateUI</summary>
 
 Update the UI during the NFC scan, reading/writing data, and finishing the scan session.
 

@@ -1,8 +1,7 @@
                             
-Capabilities and Permissions
+NFC Capabilities and Permissions
 =============================
 
-<details open markdown="block"><summary>Capabilities and Permissions</summary>
   
 The following configuration needs to be set up for IRIS application to use NFC Tag API’s.<br>
 <b>IOS</b>
@@ -25,5 +24,3 @@ Depending on the application functionality, you may need to configure the intent
 Detailed description related to Android manifest configuration is available [here](https://github01.hclpnp.com/pages/phoenix-temenos/volt-mx-doc-opnsrc/95/docs/documentation/Iris/iris_api_dev_guide/content/Android_NFC_Manifest_Configuration.html)
 
 You can also check the official Android link for NFC [here](https://developer.android.com/develop/connectivity/nfc/nfc#manifest).
-
-</details>
