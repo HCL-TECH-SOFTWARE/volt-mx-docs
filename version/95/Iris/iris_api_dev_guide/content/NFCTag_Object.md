@@ -2,7 +2,7 @@
 NFCTag Object
 ==============
 
-<details close markdown="block"><summary>NFCTag Object</summary>
+<details open markdown="block"><summary>NFCTag Object</summary>
 
 The nfcTag object is part of the NFC API, and it represents an NFC Tag. Using a nfcTag object, your app can read and write the from/to the NFC tag. It consists of the following API elements.
 

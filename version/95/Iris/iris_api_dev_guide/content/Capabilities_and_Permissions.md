@@ -2,7 +2,7 @@
 Capabilities and Permissions
 =============================
 
-<details close markdown="block"><summary>Capabilities and Permissions</summary>
+<details open markdown="block"><summary>Capabilities and Permissions</summary>
   
 The following configuration needs to be set up for IRIS application to use NFC Tag API’s.<br>
 <b>IOS</b>

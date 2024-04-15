@@ -2,7 +2,7 @@
 Voltmx NFC Namespace
 =====================
 
-<details close markdown="block"><summary>voltmx.nfc namespace</summary>
+<details open markdown="block"><summary>voltmx.nfc namespace</summary>
 
 Voltmx.nfc namespace provides a high-level interface to make the communication between NDEF capable NFC tags and the device.
 

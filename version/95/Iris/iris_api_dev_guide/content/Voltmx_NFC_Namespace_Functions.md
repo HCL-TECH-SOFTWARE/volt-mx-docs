@@ -2,7 +2,7 @@ Voltmx NFC Namespace Functions
 ===============================
 
 
-<details close markdown="block"><summary>Voltmx.nfc namespace functions</summary>
+<details open markdown="block"><summary>Voltmx.nfc namespace functions</summary>
 
 
 | key | Description |
