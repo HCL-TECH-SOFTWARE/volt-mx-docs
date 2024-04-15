@@ -23,8 +23,8 @@ Prerequisites
     
     > **Note:** For Windows and macOS, you can download and install the package installer for `Docker Desktop version 4.28.0 (139021)`. For Linux, you must install Docker Engine and Docker Compose separately.  
         
-*   On Windows machines, use any bash/shell prompt to execute the install-foundry.sh script. macOS and Linux support Bash prompt by default.
-*   Install Java 11. install-foundry.sh is located in `VoltFoundrySingleContainer-<version>_GA.zip`, which you wil download to start the installation. See {Installation]{#installation) for details.
+*   On Windows machines, use any bash/shell prompt to execute the install-foundry.sh script. macOS and Linux support Bash prompt by default. install-foundry.sh is located in `VoltFoundrySingleContainer-<version>_GA.zip`, which you wil download to start the installation. See {Installation]{#installation) for details.
+*   Install Java 11.
 *   Install an external Database. (The supported types are mentioned [here](#supported-databases).)
 
     > **Note:** The Single Container Solution comes with built-in MySQL, which will deploy alongside the Volt Foundry container. This can be used for developer use. Please refer to the Configuration section for more details.
@@ -44,9 +44,9 @@ HCL recommends using the following operating systems to install Volt Foundry Sin
   
 | Operating System | Recommended Version |
 | --- | --- |
-| Microsoft Windows | Windows 10 Pro |
+| Microsoft Windows | Windows 10 Pro or Windows 11 Pro |
 | Linux | RHEL 9.0 or Ubuntu 22.04 |
-| macOS | YTD |
+| macOS | Ventura |
 
 ### Supported Application Servers
 
@@ -62,8 +62,9 @@ Volt Foundry Single Container Solution supports the following database servers:
 | Database Type | Version Supported |
 | --- | --- |
 | MySQL | 8.0 |
-| Microsoft SQL Server | 2017, 2019 |
-| MySQL Database HA (active/passive) Cluster | 8.0 and oracle 19c |
+| Microsoft SQL Server | 2019 |
+| MySQL Database HA (active/passive) Cluster | 8.0 |
+| Oracle | 19c |
 
 > **_Note:_** You must have an existing external database. Databases do not come bundled with the Installer.
 
@@ -98,9 +99,7 @@ To pull the images, use the this docker command.
 
 <!-- `docker pull hclcr.For eio/voltmx/voltmx-foundry-console:9.2.0.0_GA` -->
 
-`docker pull https://hclcr.io/harbor/projects/47/repositories/voltmx-foundry-all:<version_tag>
-
-`<version_tag>` is the Volt Foundry version; for example, `9.5.15.10_GA`.
+`docker pull https://hclcr.io/harbor/projects/47/repositories/voltmx-foundry-all:`
 
 Volt Foundry Single Container Solution downloadable bundle contains the following directories and files.
 
@@ -345,7 +344,7 @@ If you want to **extract logs** from a container, execute the following command 
 `docker logs -f <container_name>`
 ))
 
-If you want to **teletype (tty)** into the container, execute the one of the following commands from your terminal:
+If you want to **teletype (tty)** into the container, execute one of the following commands from your terminal:
 
 *   For **Windows**: `winpty docker exec -it <container_name> bash` ((or `winpty docker exec -it <container_id> bash`))
 *   For **macOS/Linux**: `docker exec -it <container_name> bash` ((or `docker exec -it <container_id> bash`))
