@@ -9,7 +9,7 @@ Voltmx NFC Namespace Functions
 | voltmx.nfc.updateUI| Updates the UI (User Interface) while scan session is in progress. |
 
 
-<details open markdown="block"><summary>voltmx.nfc.scanTag</summary>
+<details open markdown="block"><summary>scanTag</summary>
 
 Starts the scan session for nearby NFC tags.
 
