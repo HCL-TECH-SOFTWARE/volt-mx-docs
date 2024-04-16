@@ -1408,28 +1408,19 @@
 </li>
 </ul>
 <h2 id="extracting-logs-from-your-application">Extracting Logs from your Application</h2>
-<p>To perform any actions related to the logs of your application, you need the names of the containers in the application.</p>
-<p>The <strong>Container names</strong> are:</p>
+<p>To perform any actions related to the logs of your application, you need the names or IDs of the containers in the application.</p>
+<p>At a bash or CMD prompt, run "docker ps" to get the list of currently running containers. You can then use <code>docker logs -f &lt;CONTAINER ID&gt;</code> or <code>docker logs -f &lt;CONTAINER_NAME&gt;</code> to get the logs of the desired pod. Please refer to the official <a href="https://docs.docker.com/reference/cli/docker/container/logs/" target="_blank">Docker</a> documentation for more logging options for the container.</p>
+<p>If you want to <strong>teletype (tty)</strong> into the container, execute one of the following commands from your terminal:</p>
 <ul>
-<li>Container name for Foundry: <code>foundry_tomcat_1</code></li>
-<li>Container name for Flyway: <code>flyway_flyway_1</code></li>
-</ul>
-<p>If you want to <strong>extract logs</strong> from a container, execute the following command from your terminal:</p>
-<ul>
-<li><code>docker logs -f &lt;container_name&gt;</code></li>
-</ul>
-<p>If you want to <strong>teletype (tty)</strong> into the container, execute the following command from your terminal:</p>
-<ul>
-<li>For <strong>Windows</strong>: <code>winpty docker exec -it &lt;container_name&gt; bash</code></li>
-<li>For <strong>macOS/Linux</strong>: <code>docker exec -it &lt;container_name&gt; bash</code></li>
+<li>For <strong>Windows</strong>: <code>winpty docker exec -it &lt;container_name&gt; bash</code> or <code>winpty docker exec -it &lt;container_id&gt; bash</code></li>
+<li>For <strong>macOS/Linux</strong>: <code>docker exec -it &lt;container_name&gt; bash</code> or <code>docker exec -it &lt;container_id&gt; bash</code></li>
 </ul>
 <blockquote>
 <p><strong><em>Note:</em></strong> A database container terminated after the flyway migrations are complete. As a result, you cannot tty into the database container post installation.</p>
 </blockquote>
-<p>If you want to <strong>copy logs</strong> (for example: Component logs) from the Foundry container to your local machine, execute the following command from your terminal:</p>
-<ul>
-<li><code>docker cp &lt;container_name&gt;:&lt;location_in_container&gt; &lt;location_in_machine&gt;</code></li>
-</ul>
+<p>If you want to <strong>copy logs</strong> (for example: Component logs) from the Foundry container to your local machine, execute one of the following commands from your terminal:</p>
+<p><code>docker cp &lt;container_name&gt;:&lt;location_in_container&gt; &lt;location_in_machine&gt;</code></p>
+<p><code>docker cp &lt;container_id&gt;:&lt;location_in_container&gt; &lt;location_in_machine&gt;</code></p>
 <p><em>For example</em>: To copy <strong>authService logs</strong>, execute the following command from your terminal:</p>
 <p><code>docker cp foundry_tomcat_1:/usr/local/logs/authService.log /d/Foundry/logs</code></p>
 <blockquote>
