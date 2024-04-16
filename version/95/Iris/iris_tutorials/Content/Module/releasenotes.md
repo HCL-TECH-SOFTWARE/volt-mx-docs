@@ -9,7 +9,6 @@ With this release, we have introduced a unified Iris experience for the design a
 
 *   Iris Development Environment
 *   Masters
-*   Photoshop Extension
 *   Requirements
 *   Wearables 2.0
 *   Zip/Unzip APIs
@@ -49,13 +48,6 @@ Masters
 -------
 
 A robust templating framework enabling asset reuse. Design once and reuse across Mobile, Tablet and Desktop. Edit once and update everywhere! Powerful Nesting of UI and Action sequences to support real world use cases.
-
-See How it works  
-
-Photoshop Extension
--------------------
-
-Quickly convert your existing Photoshop designs to iris forms. Global and Layer specific settings allow customization during conversion.
 
 See How it works  
 
