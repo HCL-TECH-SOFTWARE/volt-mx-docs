@@ -81,12 +81,12 @@ For flyway migrations, a container with database image (voltmx-foundry-db) is cr
 
 After the migrations are completed, the second container will run the Volt Foundry Docker single image(voltmx-foundry-all). This container keeps running in the background for as long as the Volt Foundry setup is required.
 
-Following are the two containers present in the VoltMX Foundry Single Container Solution:
+Following are the two containers present in the Volt Foundry Single Container Solution:
 
 *   Volt Foundry
 *   Database (exists on completion of the Database scripts execution)
 
-The following is the list of Docker images used in the VoltMX Foundry Single Container Solution:
+The following is the list of Docker images used in the Volt Foundry Single Container Solution:
 
 *   Foundry (contains `mfconsole.war`,   `workspace.war`, `accounts.war`, `apiportal.war`, `authService.war`, `admin.war`, `services.war`, `middleware.war`, `apps.war`, and `vpns.war`)
 *   Database (contains database migration scripts)
@@ -97,7 +97,7 @@ The docker images will be pulled when you execute the installation scripts in th
 
 To pull the images, use the this docker command.
 
-<!-- `docker pull hclcr.For eio/voltmx/voltmx-foundry-console:9.2.0.0_GA` -->
+<!-- `docker pull hclcr.For eio/Volt/Volt-foundry-console:9.2.0.0_GA` -->
 
 `docker pull https://hclcr.io/harbor/projects/47/repositories/voltmx-foundry-all:`
 
@@ -366,3 +366,5 @@ Configuring Iris to connect to Volt Foundry
 ---------------------------------------------------
 
 For details on configuring Iris to connect to Volt Foundry, refer to [Connect to Volt Foundry](../../../Iris/iris_user_guide/Content/Connect_to_VoltMXFoundry.md?Highlight=foundry) in the Iris User Guide.
+
+<!--comment-->
