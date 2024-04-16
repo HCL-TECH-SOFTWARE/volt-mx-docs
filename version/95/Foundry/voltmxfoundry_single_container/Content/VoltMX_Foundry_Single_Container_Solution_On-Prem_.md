@@ -28,7 +28,7 @@ Prerequisites
     *   For Windows and macOS, you can download and install the package installer for `Docker Desktop version 2.5.0.1 (49550)`.  
     *   For Linux, you must install Docker Engine and Docker Compose separately.  
         
-*   On Windows machines, use any bash/shell prompt to execute the install-foundry.sh script. macOS and Linux support Bash prompt by default.
+*   On Windows machines, use any bash/shell prompt to execute the install-foundry.sh script. macOS and Linux support Bash prompt by default. install-foundry.sh is located in `VoltFoundrySingleContainer-<version>_GA.zip`, which you wil download to start the installation. See {Installation]{#installation) for details.
 *   Install Java 11.
 *   Install an external Database. (The supported types are mentioned [here](#supported-databases).)
 
@@ -48,25 +48,27 @@ HCL recommends using the following operating systems to install Volt MX Foundry 
   
 | Operating System | Recommended Version |
 | --- | --- |
-| Microsoft Windows | Windows 10 Pro |
-| Linux | CentOS 7.2 |
-| macOS | macOS Catalina |
+| Microsoft Windows | Windows 10 Pro or Windows 11 Pro |
+| Linux | RHEL 9.0 or Ubuntu 22.04 |
+| macOS | Ventura |
 
 ### Supported Application Servers
 
-Volt MX  Foundry Single Container Solution supports only the **Tomcat Application server**.
+Volt Foundry Single Container Solution supports only the **Tomcat Application server**.
 
 All the Docker images built for Volt MX Foundry are built using the `Tomcat version 9.0.33-jdk11` as the base image.
 
 ### Supported Databases
 
-Volt MX  Foundry Single Container Solution supports the following database servers:
+Volt Foundry Single Container Solution supports the following database servers:
 
   
 | Database Type | Version Supported |
 | --- | --- |
-| MySQL | 5.6, 5.7 |
-| Microsoft SQL Server | 2017, 2019 |
+| MySQL | 8.0 |
+| Microsoft SQL Server | 2019 |
+| MySQL Database HA (active/passive) Cluster | 8.0 |
+| Oracle | 19c |
 
 > **_Note:_** You must have an existing external database. Databases do not come bundled with the Installer.
 
@@ -101,9 +103,9 @@ To pull the images, use the below command.
 
 <!-- `docker pull hclcr.For eio/Volt/Volt-foundry-console:9.2.0.0_GA` -->
 
-`docker pull https://hclcr.io/harbor/projects/47/repositories/voltmx-foundry-all`
+`docker pull https://hclcr.io/harbor/projects/47/repositories/voltmx-foundry-all:`
 
-Volt MX  Foundry Single Container Solution downloadable bundle contains the following directories and files.
+Volt Foundry Single Container Solution downloadable bundle contains the following directories and files.
 
 
 *   **install-foundry.sh** - Installation script
@@ -255,7 +257,7 @@ After successful completion of execution, the Volt MX Foundry URLs are displayed
 Limitations
 -----------
 
-Volt MX  Foundry Single Container Solution has the following limitations:
+Volt Foundry Single Container Solution has the following limitations:
 
 *   Support for **SPA / Desktop Web** is only available for zipped SPA apps, but not for WARs.
 *   **Log Analytics** is currently not supported.
@@ -314,6 +316,7 @@ If you want to **teletype (tty)** into the container, execute one of the followi
 If you want to **copy logs** (for example: Component logs) from the Foundry container to your local machine, execute one of the following commands from your terminal:
 
 `docker cp <container_name>:<location_in_container> <location_in_machine>`
+`docker cp <container_id>:<location_in_container> <location_in_machine>`
 
 `docker cp <container_id>:<location_in_container> <location_in_machine>`
 

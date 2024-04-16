@@ -1087,7 +1087,7 @@
 </blockquote>
 </li>
 <li>
-<p>On Windows machines, use any bash/shell prompt to execute the install-foundry.sh script. macOS and Linux support Bash prompt by default.</p>
+<p>On Windows machines, use any bash/shell prompt to execute the install-foundry.sh script. macOS and Linux support Bash prompt by default. install-foundry.sh is located in <code>VoltFoundrySingleContainer-&lt;version&gt;_GA.zip</code>, which you wil download to start the installation. See {Installation]{#installation) for details.</p>
 </li>
 <li>Install Java 11.</li>
 <li>Install an external Database. (The supported types are mentioned <a href="#supported-databases">here</a>.)</li>
@@ -1112,23 +1112,23 @@
 <tbody>
 <tr>
 <td>Microsoft Windows</td>
-<td>Windows 10 Pro</td>
+<td>Windows 10 Pro or Windows 11 Pro</td>
 </tr>
 <tr>
 <td>Linux</td>
-<td>CentOS 7.2</td>
+<td>RHEL 9.0 or Ubuntu 22.04</td>
 </tr>
 <tr>
 <td>macOS</td>
-<td>macOS Catalina</td>
+<td>Ventura</td>
 </tr>
 </tbody>
 </table>
 <h3 id="supported-application-servers">Supported Application Servers</h3>
-<p>Volt MX  Foundry Single Container Solution supports only the <strong>Tomcat Application server</strong>.</p>
+<p>Volt Foundry Single Container Solution supports only the <strong>Tomcat Application server</strong>.</p>
 <p>All the Docker images built for Volt MX Foundry are built using the <code>Tomcat version 9.0.33-jdk11</code> as the base image.</p>
 <h3 id="supported-databases">Supported Databases</h3>
-<p>Volt MX  Foundry Single Container Solution supports the following database servers:</p>
+<p>Volt Foundry Single Container Solution supports the following database servers:</p>
 <table>
 <thead>
 <tr>
@@ -1139,11 +1139,19 @@
 <tbody>
 <tr>
 <td>MySQL</td>
-<td>5.6, 5.7</td>
+<td>8.0</td>
 </tr>
 <tr>
 <td>Microsoft SQL Server</td>
-<td>2017, 2019</td>
+<td>2019</td>
+</tr>
+<tr>
+<td>MySQL Database HA (active/passive) Cluster</td>
+<td>8.0</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>19c</td>
 </tr>
 </tbody>
 </table>
@@ -1172,8 +1180,8 @@
 <p>To pull the images, use the below command.</p>
 <!-- `docker pull hclcr.For eio/Volt/Volt-foundry-console:9.2.0.0_GA` -->
 
-<p><code>docker pull https://hclcr.io/harbor/projects/47/repositories/voltmx-foundry-all</code></p>
-<p>Volt MX  Foundry Single Container Solution downloadable bundle contains the following directories and files.</p>
+<p><code>docker pull https://hclcr.io/harbor/projects/47/repositories/voltmx-foundry-all:</code></p>
+<p>Volt Foundry Single Container Solution downloadable bundle contains the following directories and files.</p>
 <ul>
 <li><strong>install-foundry.sh</strong> - Installation script</li>
 <li><strong>install-actions.sh</strong> - Installation actions script</li>
@@ -1359,7 +1367,7 @@
 <p>After successful completion of execution, the Volt MX Foundry URLs are displayed on the screen.</p>
 <p><img alt="" src="Resources/Images/Single4.PNG" /></p>
 <h2 id="limitations">Limitations</h2>
-<p>Volt MX  Foundry Single Container Solution has the following limitations:</p>
+<p>Volt Foundry Single Container Solution has the following limitations:</p>
 <ul>
 <li>Support for <strong>SPA / Desktop Web</strong> is only available for zipped SPA apps, but not for WARs.</li>
 <li><strong>Log Analytics</strong> is currently not supported.</li>
@@ -1419,7 +1427,8 @@
 <p><strong><em>Note:</em></strong> A database container terminated after the flyway migrations are complete. As a result, you cannot tty into the database container post installation.</p>
 </blockquote>
 <p>If you want to <strong>copy logs</strong> (for example: Component logs) from the Foundry container to your local machine, execute one of the following commands from your terminal:</p>
-<p><code>docker cp &lt;container_name&gt;:&lt;location_in_container&gt; &lt;location_in_machine&gt;</code></p>
+<p><code>docker cp &lt;container_name&gt;:&lt;location_in_container&gt; &lt;location_in_machine&gt;</code>
+<code>docker cp &lt;container_id&gt;:&lt;location_in_container&gt; &lt;location_in_machine&gt;</code></p>
 <p><code>docker cp &lt;container_id&gt;:&lt;location_in_container&gt; &lt;location_in_machine&gt;</code></p>
 <p><em>For example</em>: To copy <strong>authService logs</strong>, execute the following command from your terminal:</p>
 <p><code>docker cp foundry_tomcat_1:/usr/local/logs/authService.log /d/Foundry/logs</code></p>
