@@ -24,7 +24,7 @@ CSV File Format
 
 The key values can be provided either in the URL or as part of the post data. URL is on priority.
 
-[http://<host or ip>:<port>/vpns/service/bulkmessage?DELIMITER=%7c&SOURCE\_FORMAT=APP\_ID%2cSUBSCRIBERS\_KSID%2cMESSAGE\_DATA&IGNORE\_ROW=false](http://10.10.19.74:8080/service/entrydata/status/$pushId)
+[http://&lt;host or ip&gt;&lt;port&gt;/vpns/service/bulkmessage?DELIMITER=%7c&SOURCE\_FORMAT=APP\_ID%2cSUBSCRIBERS\_KSID%2cMESSAGE\_DATA&IGNORE\_ROW=false](http://10.10.19.74:8080/service/entrydata/status/$pushId)
 
 The following table details the key-values.
 

@@ -2,7 +2,7 @@
 
 
 Different types of Email APIs
-=============================
+============================= 
 
 *   [Email API with Audience ID, Email, or Template ID](#email-api-with-audience-id-email-or-template-id)
 *   [Email API with Attachments as Form data parameters](#email-api-with-attachments-as-form-data-parameters)
@@ -25,10 +25,12 @@ The `checkUserExistence` Request Parameter is by default set to true. When the p
 
 POST
 
-Email API with Audience ID, Email, or Template ID
+Email API with Audience ID or Email using Template ID
 -------------------------------------------------
 
-The **sending email with Audience ID, Email, or Template ID** accepts audience ID or email or the template ID as input parameters and sends email messages to audience members. When both Audience ID and Email are submitted, Audience ID is given preference. When the Audience ID, Email, and Template ID are all submitted then Template ID is given the highest preference. You will need to fetch Audience ID or email or Template ID first using the respective GET APIs and use these as an input parameter to send push messages using this API.
+The **sending email with Audience ID or Email using a Template ID API** accepts audience ID or email ID using a template ID as input parameter and sends email messages to audience members. When both Audience ID and Email are submitted the ID is given preference. When the subject and content, and Template ID are all submitted then Template ID is given preference over subject and content. You will need to fetch Audience ID or email or Template ID first using the respective GET APIs and use these as an input parameter to send push messages using this API.  
+
+This is a secure API.
 
 ### Header
 
@@ -162,7 +164,19 @@ Sending an email using **templateId**, **subject**, and **content**. The engagem
 Email API with Attachments as Form data parameters
 --------------------------------------------------
 
-The Engagement Server supports **sending attachments using the Email API**. It accepts an email with multiple attachments and sends the email message to the users.
+The Engagement Server supports **sending attachments using the Email API**. It accepts an email with multiple attachments and sends the email message to the users. This attachment however will not be saved in the engagement server when the message is sent. The **priority** must be set to "true" to enable sending attachments. The default value for priority is false.  
+
+*   Supported types of attachments are pdf, xls, xlsx, csv, txt, doc, docx, ppt, pptx, pps, zip, rar, tar, gzip, log, jpeg, jpg, png.
+*   Size of the attachments should not exceed the configured file size of 10.0 MB.
+*   Total size of the attachments should not exceed the configured max size of 10.0 MB (after base64 encoding).
+
+    A base64 encoded file is generally 1.4 times > original size.
+
+*   The number of attachments cannot be more than 4.
+
+This is a secure API.
+
+
 
 ### Header
 
@@ -173,12 +187,15 @@ The payload's request header includes:
 
 ### Body
 
-*   attachment - You can add multiple attachments by adding them to the body. For example:
+*   attachment - You can add multiple attachments by adding them to the body. For example:  
+
 ```
 attachment: filename.pdf
 attachment: filename1.pdf
 attachment: filename2.pdf
-```*   requestJson - Email API JSON Payload. For example, to go the [Sample Request](#sample-request).
+
+```
+*   requestJson - Email API JSON Payload. For example, to go the [Sample Request](#sample-request).
 
 Input Parameters
 ----------------
@@ -200,7 +217,7 @@ Input Parameters
 |   |   |   | startTimeStamp | Optional | String | Time relative to a starting point |
 |   |   |   | endTimeStamp | Optional | String | Time relative to an ending point |
 
-  
+
 | Level – Four | Level - Five | Level - Six | Required | Type | Description |
 | --- | --- | --- | --- | --- | --- |
 | attachmenURLs |   |   |   |   | An array of multiple attachmentURL objects. |
@@ -208,7 +225,9 @@ Input Parameters
 |   |   | fileURL | Required | String | URL of the attachment. |
 |   |   | fileName | Optional | String | Name of the file attached. |
 
-> **_Note:_** When attachments are added to an email, the **priority** must be set to **true** since the attachments do not get stored on the server.
+
+The **priority** must be set to "**true**" to enable sending attachments. The default value for priority is false. This is mandatory since the attachments do not get stored on the server.
+
 
 ### Sample Request
 
@@ -244,7 +263,10 @@ Input Parameters
 Email API with Attachment URLs
 ------------------------------
 
-The Engagement Server supports **sending attachments from attachment URLs using the Email API**. It downloads attachments from multiple attachment URLs and sends email messages to the users.
+The Engagement Server supports **sending attachments from attachment URLs using the Email API**. It downloads attachments from multiple attachment URLs and sends email messages to the users. The URLs must be signed URLs.
+
+This is a secure API.
+
 
 ### Header
 
@@ -297,6 +319,16 @@ Email API with Attachments as Form data parameters and from Attachment URLs
 
 The Engagement Server supports **sending attachments as form data parameters and from attachment URLs using the Email API**. It accepts an email with multiple attachments as form data parameters and downloads attachments from attachment URLs and sends email messages to the users.
 
+This is a secure API.
+
+*   Supported types of attachments are pdf, xls, xlsx, csv, txt, doc, docx, ppt, pptx, pps, zip, rar, tar, gzip, log, jpeg, jpg, png.
+*   Size of the attachments should not exceed the configured file size of 10.0 MB.
+*   Total size of the attachments should not exceed the configured max size of 10.0 MB (after base64 encoding).
+
+    A base64 encoded file is generally 1.4 times > original size.
+
+*   The number of attachments cannot be more than 4.
+
 ### Header
 
 The payload's request header includes:
@@ -307,13 +339,16 @@ The payload's request header includes:
 ### Body
 
 *   attachment - You can add multiple attachments by adding them to the body. For example:
+
 ```
 attachment: filename.pdf
 attachment: filename1.pdf
 attachment: filename2.pdf
-```*   requestJson - Email API JSON Payload. For example, to go the [Sample Request](#sample-request).
+```  
 
-> **_Note:_** When attachments are added to an email, the **priority** must be set to **true** since the attachments do not get stored on the server.
+*   requestJson - Email API JSON Payload. For example, to go the [Sample Request](#sample-request).
+
+When attachments are added to an email, the **priority** must be set to **true** since the attachments do not get stored on the server.
 
 ### Sample Request
 
@@ -381,6 +416,6 @@ Response for an email sent using an invalid **templateID**,
 | Code | Description |
 | --- | --- |
 | Status 200 | Request queued. |
-| Status 400 | xxxx is an invalid email address. No active audience members found. Recipient type is required. Mandatory parameters not filled. Subject and content are mandatory. File type of one or more attachments is not supported. Supported types are pdf,xls,xlsx,csv,txt,doc,docx,ppt,pptx,pps,zip,rar,tar,gzip,log,jpeg,jpg,png. Size of attachment ##FILE\_NAME## exceeds the configured file size of 10.0 MB. Total size of the attachments exceed the configured max size of 10.0 MB (after base64 encoding). No. of attachments cannot be more than 4. File Not Found. Exception during processing of email attachment(s). |
+| Status 400 | xxxx is an invalid email address. No active audience members found. Recipient type is required. Mandatory parameters not filled. Subject and content are mandatory. File type of one or more attachments is not supported. Supported types are pdf,xls,xlsx,csv,txt,doc,docx,ppt,pptx,pps,zip,rar,tar,gzip,log,jpeg,jpg,png. Size of attachment ##FILE\_NAME## exceeds the configured file size of 10.0 MB. Total size of the attachments exceed the configured max size of 10.0 MB (after base64 encoding). A base64 encoded file is generally 1.4 times. No. of attachments cannot be more than 4. File Not Found. Exception during processing of email attachment(s). |
 | Status 401 | Unauthorized request. |
 | Status 500 | Server failure to process request. |

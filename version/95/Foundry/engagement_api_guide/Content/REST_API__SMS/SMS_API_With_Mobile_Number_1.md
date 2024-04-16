@@ -47,6 +47,7 @@ The following fields are input parameters:
 |   |   |   | recipients | mobile (Required) |   | An array of recipients objects: -mobile |
 |   |   |   | content | Optional | string | SMS description |
 |   |   |   | channel | Optional | string | Used to define type of SMS. For example Voice SMS or Text SMS. |
+|   |   |   | sendVoiceSmsOnFailure | Optional | boolean | If sending the text SMS fails (response code is not `SUBMITTED`), send a voice SMS to the recipient.<br>The engagement server does not send a voice SMS in the following scenarios:<br>1.The parameter is not specified<br>2.The parameter value is `false`<br>3.The channel value is not `TEXT`<br>4.The SMS provider is not configured for Voice SMS |
 
 Sample Request
 --------------
@@ -63,7 +64,8 @@ Sample Request
 <recipients>  
 <recipient mobile="+917799622269"/>  
 </recipients>  
-<content>sample sms message</content>  
+<content>sample sms message</content>
+<sendVoiceSmsOnFailure>true</sendVoiceSmsOnFailure>  
 </message>  
 </messages>  
 </smsServiceRequest>  
@@ -105,7 +107,8 @@ Sample Request
             "mobile": "+919866694753"
           }
         },
-        "content": "sample sms message"
+        "content": "sample sms message",
+        "sendVoiceSmsOnFailure": true
       }
     }
   }
