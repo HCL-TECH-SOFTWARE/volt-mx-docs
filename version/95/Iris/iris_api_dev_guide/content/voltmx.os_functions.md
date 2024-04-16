@@ -760,6 +760,49 @@ Available on all platforms except Mobile Web.
 * * *
 
 </details>
+
+<details close markdown="block"><summary>voltmx.os.hasNFCSupport</summary>
+
+* * *
+
+This Api is the part of voltmx.os namespace and used to check if the NFC is supported on the device or not. This Api is useful for checking the NFC support before scanning any tag.
+
+<b>Syntax</b>
+
+voltmx.os.hasNFCSupport()
+
+<b>Input Parameters</b>
+
+None
+
+<b>Example</b>
+
+```
+function startScan() {
+
+if(voltmx.os.hasNFCSupport()) { // check if the device has NFC support, then only call the other NFC Api.
+
+//call NFC API's
+
+} else {
+
+alert ("This device doesn't support NFC feature");
+
+}
+
+}
+```
+
+Platform Availability
+
+Android, iOS
+
+
+* * *
+
+</details>
+
+</details>
 <details close markdown="block"><summary>voltmx.os.hasTouchSupport</summary>
 
 * * *
@@ -799,6 +842,7 @@ Available on all platforms except Mobile Web and Desktop Web.
 * * *
 
 </details>
+
 <details close markdown="block"><summary>voltmx.os.print</summary>
 
 * * *
@@ -1474,5 +1518,6 @@ Available on all platforms.
 
 * * *
 </details>
+
 
 ![](resources/prettify/onload.png)

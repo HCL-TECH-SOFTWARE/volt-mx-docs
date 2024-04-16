@@ -43,6 +43,7 @@ Volt MX  Iris APIs comprises a collection of APIs that you can use in apps writt
 *   **[Media API](media_api.md)**: The Media API enables your app to play and record audio files.
 *   **[Native Function API](../../../Iris/iris_nf_api_dev_guide/content/native_function_api_developers__guide.md)** : Volt MX Iris provides Native Function APIs that allow you to use native functions of iOS and Android platforms in Volt MX Iris. Access to the native functions is provided through a JavaScript API.
 *   **[Network](network_apis.md)**: The Network APIs enable you to invoke service calls or cancel network calls. The chapter comprises all the APIs with the namespace **voltmx.net**.
+*   **[NFC API](NFC_API.md)**: The NFC API provides the standard interface to read and write the data to NFC tags. 
 *   **[Notifications API](notifications.md)**: The notification system allows users to keep informed about relevant and timely events in your app.
 *   **[Offline Data Access API](data_store_library.md)**: This API allows you to store data onto the device data store persistently.
 *   **[Operating System API](operating_system.md)**: This chapter comprises all the APIs with the namespace **voltmx.os**.
@@ -58,3 +59,11 @@ Volt MX  Iris APIs comprises a collection of APIs that you can use in apps writt
 *   **[Toast API](toast_api.md)**: The Toast API implements toast messages in your Volt MX Iris apps..
 *   **[Worker Thread API](worker_apis.md)**: The functions in the Worker Thread API provide your apps with a means to execute different tasks in multiple parallel contexts of execution in a concurrent manner.
 *   **[File Sharing in Android with other Apps](sharefilesandroid.md)**: Android, file sharing from one app with another app happens in the form of content URI. So, you must make your app generate content URIs of files that you want to share with other apps.
+
+
+
+
+
+
+
+
