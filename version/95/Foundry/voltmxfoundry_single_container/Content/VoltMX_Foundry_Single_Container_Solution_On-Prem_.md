@@ -316,6 +316,7 @@ If you want to **teletype (tty)** into the container, execute one of the followi
 If you want to **copy logs** (for example: Component logs) from the Foundry container to your local machine, execute one of the following commands from your terminal:
 
 `docker cp <container_name>:<location_in_container> <location_in_machine>`
+`docker cp <container_id>:<location_in_container> <location_in_machine>`
 
 `docker cp <container_id>:<location_in_container> <location_in_machine>`
 
