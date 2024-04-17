@@ -25,6 +25,7 @@ For more information on Offline objects, refer to the following:
 *   [Offline Object User Guide](../../../Foundry/offline_objects_user_guide/Content/Offline_Objects_User_Guide.md)
 *   [Offline Objects Getting Started Guide](../../../Foundry/offline_objects_gettingstarted/Content/Offline_Objects_Getting_Started.md)
 *   [Offline Objects API Reference Guide](../../../Foundry/offline_objectsapi_reference_guide/Content/Offline_Objects_API_Reference.md)
+*   [Configuring Hierarchical Data Models in Offline Objects](../../../Foundry/offline_objects_user_guide/Content/hierarchical-data-models-in-offline.md)
 *   [Webinar Recording on Offline Objects](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0083698)
 *   [Video tutorial on Offline Objects](https://youtu.be/mw_OhdC3JxE)
 *   [Sample App - Offline Enabled WorkOrder in Marketplace](https://marketplace.hclvoltmx.com/items/work-order-management-offline-enabled)
