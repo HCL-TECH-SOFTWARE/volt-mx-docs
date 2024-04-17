@@ -23,7 +23,7 @@ Prerequisites
     
     > **Note:** For Windows and macOS, you can download and install the package installer for `Docker Desktop version 4.28.0 (139021)`. For Linux, you must install Docker Engine and Docker Compose separately.  
         
-*   On Windows machines, use any bash/shell prompt to execute the install-foundry.sh script. macOS and Linux support Bash prompt by default. install-foundry.sh is located in `VoltFoundrySingleContainer-<version>_GA.zip`, which you wil download to start the installation. See {Installation]{#installation) for details.
+*   On Windows machines, use any bash/shell prompt to execute the install-foundry.sh script. macOS and Linux support Bash prompt by default. install-foundry.sh is located in `VoltFoundrySingleContainer-<version>_GA.zip`, which you will download to start the installation. See [Installation]{#installation) for details.
 *   Install Java 11.
 *   Install an external Database. (The supported types are mentioned [here](#supported-databases).)
 
@@ -79,7 +79,7 @@ Architecture
 
 For flyway migrations, a container with database image (voltmx-foundry-db) is created. The database image is terminated after all the migrations are completed.
 
-After the migrations are completed, the second container will run the Volt Foundry Docker single image(voltmx-foundry-all). This container keeps running in the background for as long as the Volt Foundry setup is required.
+After the migrations are completed, the second container will run the Volt Foundry Docker single image (voltmx-foundry-all). This container keeps running in the background for as long as the Volt Foundry setup is required.
 
 Following are the two containers present in the Volt Foundry Single Container Solution:
 
@@ -293,7 +293,7 @@ FAQs and Troubleshooting
     
     To restart a container you must do the following:
     
-    *   Go to Downloads (the folder you downloaded and extracted it to) > `VoltMXFoundrySingleContainer-9.x.x.x-GA/foundry-<NUMBER>/` folder. (<NUMBER> is a random number generated during installation.
+    *   Go to Downloads (the folder you downloaded and extracted it to) > `VoltMXFoundrySingleContainer-9.x.x.x-GA/foundry-<NUMBER>/` folder. &lt;NUMBER&gt; is a random number generated during installation.
 	
     *   Run the command: `docker-compose up -d`.
     
