@@ -47,7 +47,7 @@ Sample Payload
     <ufid>xxxx</ufid>
     <sid>xxxxx</sid>
     <osType>xxxx</osType>  
-**<!-- enable authToken if you want to enable security -->**  
+   <!-- enable authToken if you want to enable security -->
  <authToken>xxxx</authToken>  
   </subscribe>
 </subscriptionService>
@@ -67,7 +67,7 @@ Sample Payload
     <ufid>xxxx</ufid>
     <sid>xxxxx</sid>  
  <osType>iphone</osType>  
-**<!-- enable authToken if you want to enable security -->**  
+<!-- enable authToken if you want to enable security -->
     <authToken>xxxx</authToken>  
 </subscribe>
 </subscriptionService>
@@ -105,7 +105,7 @@ Any one of the following two syntax can be used.
     <ufid>xxxx</ufid>
     <sid>xxxxx</sid>
    <osType>androidgcm</osType>  
-**<!-- enable authToken if you want to enable security -->**  
+  <!-- enable authToken if you want to enable security -->
     <authToken>xxxx</authToken>  
 </subscribe>
 </subscriptionService>   
@@ -124,7 +124,7 @@ Any one of the following two syntax can be used.
     <sid>xxxxx</sid>
     <osType>android</osType>
   <isGCM>true</isGCM>  
-**<!-- enable authToken if you want to enable security -->**  
+  <!-- enable authToken if you want to enable security -->
    <authToken>xxxx</authToken>  
   </subscribe>
 </subscriptionService>
@@ -206,14 +206,14 @@ Any one of the following two syntax can be used.
    "sid": "xxxx",
    "appId": "VoltMX Foundry MessagingDEV",
    "ufid": "xxxx",  
-**//enable authToken if you want to enable security**  
+   <!-- enable authToken if you want to enable security -->
    "authToken": "xxxx",  
    "osType": "xxxx",  
   
- **"deviceId": "xxxx"
+ "deviceId": "xxxx"
   }
  }
-}**
+}
 ```
 
 #### JSON syntax for iOS
@@ -357,7 +357,7 @@ The following is the list of input parameters for payload fields:
 #### XML
 
 ```
-1\. Subscription Success Response:
+1. Subscription Success Response:
 <subscriptionResponse><statusCode>200</statusCode><ksid>xxxx</ksid><message>Subscription successful. </message></subscriptionResponse>
 
 2. Subscription Update Success Response:
@@ -448,7 +448,7 @@ The following is the list of input parameters for payload fields:
     "ksid": "-1",
     "message": "Unauthorized request. The authToken is invalid."     }
 }  
-9\. Ifsubscriptionisunclear:  
+9. Ifsubscriptionisunclear:  
  {
   "subscriptionResponse": {
     "statusCode": "403",

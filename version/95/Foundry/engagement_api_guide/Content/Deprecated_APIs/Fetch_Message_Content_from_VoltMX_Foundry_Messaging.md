@@ -12,10 +12,9 @@ For example, Apple delivers messages that are limited to 256 characters only. In
 **Request URL**
 ---------------
 
-```
-[http://<host or ip>:<port>/service/entrydata/content/$pushId  
-](http://sputnik.freewisdom.org/en/Coding_Standard)
-```
+<pre><code>http://&lt;host or ip&gt;:&lt;port&gt;/service/entrydata/content/$pushId</code></pre>
+
+
 
 Request Method
 --------------
@@ -25,7 +24,7 @@ HTTP POST
 Input Parameters
 ----------------
 
-[PushID](../Status/Message Queue tab.md) is appended at the end of the URL.
+PushID is appended at the end of the URL.
 
 Response Code
 -------------

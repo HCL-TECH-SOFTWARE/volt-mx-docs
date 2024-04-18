@@ -33,7 +33,7 @@ Following fields are input parameters:
   
 | Input Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
-| ksid | int | Required, refer to [combination table](#input-combination-table) | Volt MX Subscription ID returned when you subscribe to Volt MX Foundry Engagement system. |
+| ksid | int | Required, refer to [combination table](#input-combination-table) | Volt MX Subscription ID returned when you subscribe to Engagement system. |
 | ufId | String | Refer to [combination table](#input-combination-table) | The User Friendly Identifier or UFID is used when you subscribe to Volt MX Foundry Engagement Services. Based on your requirement, you can provide an UFID. It is alphanumeric, for example, xxx@voltmx.com or 2890XZCY. It can be used to map devices to the user using the value as a reconciliation key. |
 | deviceId | String | Refer to [combination table](#input-combination-table) | Device ID of the subscriber that was used when you subscribed to the Volt MX Foundry Engagement Services. |
 | appId | long | Refer to [combination table](#input-combination-table) | Application ID in the Volt MX Foundry Engagement Services. |
