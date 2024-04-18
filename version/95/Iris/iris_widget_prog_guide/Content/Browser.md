@@ -174,6 +174,7 @@ The Browser widget capabilities can be broadly categorized into the following:
 | [bounces](Browser_Properties.md#bounces) | Specifies whether the scroll view bounces past the edge of the content and back again. |
 | [browserType](Browser_Properties.md#browserType) | Specifies the type of the web view used to load the web pages in iOS applications. |
 | [cursorType](Browser_Properties.md#cursorType) | Specifies the type of mouse pointer used. |
+| [customUserAgent](Browser_Properties.md#customUserAgent) | Use this property to set a custom user agent string. |
 | [detectTelNumber](Browser_Properties.md#detectTelNumber) | Specifies if the Browser widget must support the detection of phone numbers in the web page and display the phone numbers as clickable Phone links. |
 | [enableOverviewMode](Browser_Properties.md#enableOv) | Specifies whether the browser should load pages in overview mode. |
 | [enableNativeCommunication](Browser_Properties.md#enableNativeCommunication) | Enables web apps to access native capabilities from within the web app's JavaScript code. |

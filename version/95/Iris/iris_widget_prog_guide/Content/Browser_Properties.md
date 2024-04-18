@@ -623,6 +623,44 @@ frmButton.myButton.cursorType = "wait";
 * * *
 
 </details>
+<details close markdown="block"><summary>customUserAgent Property</summary>
+
+* * *
+
+This property is used to set a custom user agent string for your browser widget.
+
+### Syntax
+
+customUserAgent
+
+### Type
+
+String
+
+### Read/Write
+
+Read + Write
+
+### Remarks
+
+If customUserAgent is not set for browser widget or is set to _null_, the default value is set by platform.
+The default value for this property is _null_.
+
+### Example
+
+```
+//Sample code to set customUserAgent in Browser widget.  
+frmBrowser.myBrowser.customUserAgent = "VoltMX-Custom-User-Agent/1.0";  
+```
+
+### Platform Availability
+
+*   iOS
+*   Android
+
+* * *
+
+</details>
 <details close markdown="block"><summary>detectTelNumber Property</summary>
 
 * * *
