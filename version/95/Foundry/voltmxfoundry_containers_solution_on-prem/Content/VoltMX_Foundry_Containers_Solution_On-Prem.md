@@ -42,9 +42,10 @@ Volt MX Foundry Container Cluster Solution supports the following database serve
 
 | Database Type        | Version Supported                   |
 | -------------------- | ----------------------------------- |
-| MySQL                | 5.6, 5.7, 8.0.17                    |
-| Microsoft SQL Server | 2016, 2017                          |
-| Oracle               | Oracle 12c (12.1.0.1.0), Oracle 18c |
+| MySQL                | 8.0                                |
+| Microsoft SQL Server | 2019                          |
+| MySQL Database HA ( active/passive ) Cluster| 8.0                         |
+| Oracle               |  19c                          |
 
 > **_Note:_** You must have an existing external Database. The Database does not come bundled with the Installer.
 
