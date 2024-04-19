@@ -54,10 +54,10 @@ Volt MX Foundry Container Cluster Solution supports the following Kubernetes pac
 
 | Database Type | Version Supported |
 | ------------- | ----------------- |
-| Docker        | 18.09.9           |
-| kubectl       | 1.15.4            |
-| kubelet       | 1.15.4            |
-| kubeadm       | 1.15.4            |
+| Docker        | 26.0.0 |
+| kubectl       | 1.27.6 |
+| kubelet       | 1.27.6 |
+| kubeadm       | 1.27.6 |
 
 ### Date and Time
 
