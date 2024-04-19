@@ -90,14 +90,16 @@ The following is the list of Docker images used in the Volt Foundry Single Conta
 *   Database (contains database migration scripts)
 
 
-The docker images will be pulled when you execute the installation scripts in the "HCL Volt Foundry Container Installer" found on HCL's FNO download website. To download "HCL Volt Foundry Single Container Installer (Docker), log on to "https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.5_Latest&orgId=HCL.
+The docker images will be pulled when you execute the installation scripts in the "HCL Volt Foundry Container Installer" found on HCL's FNO download website. To download "HCL Volt Foundry Single Container Installer (Docker)", log on to "https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.5_Latest&orgId=HCL.
 
 
-To pull the images, use the this docker command.
+To pull the images, use this docker command.
 
 <!-- `docker pull hclcr.For eio/Volt/Volt-foundry-console:9.2.0.0_GA` -->
 
-`docker pull https://hclcr.io/harbor/projects/47/repositories/voltmx-foundry-all:`
+`docker pull https://hclcr.io/harbor/projects/47/repositories/voltmx-foundry-all:<version_tag>`
+
+&lt;version_tag&gt; is the Volt Foundry version; for example, `9.5.15.10_GA`
 
 Volt Foundry Single Container Solution downloadable bundle contains the following directories and files.
 
