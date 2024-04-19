@@ -27,7 +27,7 @@ Prerequisites
 *   Install Java 11.
 *   Install an external Database. (The supported types are mentioned [here](#supported-databases).)
 
-    > **Note:** The Single Container Solution comes with built-in MySQL, which will deploy alongside the Volt Foundry container. This can be used for developer use. Please refer to the Configuration section for more details.
+    > **Note:** The Single Container Solution comes with built-in MySQL, which will deploy alongside the Volt Foundry container. This can be used for developer use. Please refer to the Configuration section for more details. For other supported databases, Volt Foundry requires an existing external database.
 
 > **Note:**
 
@@ -66,8 +66,6 @@ Volt Foundry Single Container Solution supports the following database servers:
 | MySQL Database HA (active/passive) Cluster | 8.0 |
 | Oracle | 19c |
 
-> **_Note:_** You must have an existing external database. Databases do not come bundled with the Installer.
-
 Hardware Requirements
 ---------------------
 
@@ -92,7 +90,7 @@ The following is the list of Docker images used in the Volt Foundry Single Conta
 *   Database (contains database migration scripts)
 
 
-The docker images will be pulled when you execute the installation scripts in the "HCL Volt Foundry Container Installer" found on HCL's FNO download website: [https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.5_Latest&orgId=HCL](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.5_Latest&orgId=HCL)
+The docker images will be pulled when you execute the installation scripts in the "HCL Volt Foundry Container Installer" found on HCL's FNO download website. To download "HCL Volt Foundry Single Container Installer (Docker), log on to "https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.5_Latest&orgId=HCL.
 
 
 To pull the images, use the this docker command.
@@ -140,7 +138,7 @@ The following parameters must be provided by the user during installation:
         
     *   **Server Port** - The Port Number for Volt Foundry.  
         
-        > **_Note:_** Ensure that the specified port is not being used by another service.
+        > **_Note:_** Ensure that the specified port is not being used by another service. The default 8443 or 8080 ports are exposed inside the container and the server port which user provides is to expose the service outside the container.
         
     *   **COM\_PROTOCOL**: The communication protocol that is used for Volt Foundry. This value can be either **http** or **https**.
     
@@ -210,7 +208,7 @@ Run the Volt Foundry Single Container install script to generate and deploy Volt
 
 **Steps to Install Volt Foundry Single Container Solution on On-Premises:**
 
-1.  Download the **` VoltFoundrySingleContainer-<version>_GA.zip`** from [downloads](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/startPage.do) and extract it. The file structure will be as shown below:
+1.  Download the **` VoltFoundrySingleContainer-<version>_GA.zip`** from [downloads](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.5_Latest&orgId=HCL) and extract it. The file structure will be as shown below:
     
     ```
     config.properties
