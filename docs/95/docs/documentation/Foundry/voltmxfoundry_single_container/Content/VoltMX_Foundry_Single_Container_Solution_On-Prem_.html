@@ -1229,7 +1229,7 @@
 <li>
 <p>Install an external Database. (The supported types are mentioned <a href="#supported-databases">here</a>.)</p>
 <blockquote>
-<p><strong>Note:</strong> The Single Container Solution comes with built-in MySQL, which will deploy alongside the Volt Foundry container. This can be used for developer use. Please refer to the Configuration section for more details.</p>
+<p><strong>Note:</strong> The Single Container Solution comes with built-in MySQL, which will deploy alongside the Volt Foundry container. This can be used for developer use. Please refer to the Configuration section for more details. For other supported databases, Volt Foundry requires an existing external database.</p>
 </blockquote>
 </li>
 </ul>
@@ -1296,9 +1296,6 @@
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p><strong><em>Note:</em></strong> You must have an existing external database. Databases do not come bundled with the Installer.</p>
-</blockquote>
 <h2 id="hardware-requirements">Hardware Requirements</h2>
 <ul>
 <li><strong>CPU</strong>: Dual-core processor</li>
@@ -1317,11 +1314,12 @@
 <li>Foundry (contains <code>mfconsole.war</code>,   <code>workspace.war</code>, <code>accounts.war</code>, <code>apiportal.war</code>, <code>authService.war</code>, <code>admin.war</code>, <code>services.war</code>, <code>middleware.war</code>, <code>apps.war</code>, and <code>vpns.war</code>)</li>
 <li>Database (contains database migration scripts)</li>
 </ul>
-<p>The docker images will be pulled when you execute the installation scripts in the "HCL Volt Foundry Container Installer" found on HCL's FNO download website: <a href="https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.5_Latest&amp;orgId=HCL">https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.5_Latest&amp;orgId=HCL</a></p>
-<p>To pull the images, use the this docker command.</p>
+<p>The docker images will be pulled when you execute the installation scripts in the "HCL Volt Foundry Container Installer" found on HCL's FNO download website. To download "HCL Volt Foundry Single Container Installer (Docker)", log on to "https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.5_Latest&amp;orgId=HCL.</p>
+<p>To pull the images, use this docker command.</p>
 <!-- `docker pull hclcr.For eio/Volt/Volt-foundry-console:9.2.0.0_GA` -->
 
-<p><code>docker pull https://hclcr.io/harbor/projects/47/repositories/voltmx-foundry-all:</code></p>
+<p><code>docker pull https://hclcr.io/harbor/projects/47/repositories/voltmx-foundry-all:&lt;version_tag&gt;</code></p>
+<p>&lt;version_tag&gt; is the Volt Foundry version; for example, <code>9.5.15.10_GA</code></p>
 <p>Volt Foundry Single Container Solution downloadable bundle contains the following directories and files.</p>
 <ul>
 <li><strong>install-foundry.sh</strong> - Installation script</li>
@@ -1364,7 +1362,7 @@
 <li>
 <p><strong>Server Port</strong> - The Port Number for Volt Foundry.  </p>
 <blockquote>
-<p><strong><em>Note:</em></strong> Ensure that the specified port is not being used by another service.</p>
+<p><strong><em>Note:</em></strong> Ensure that the specified port is not being used by another service. The default 8443 or 8080 ports are exposed inside the container and the server port which user provides is to expose the service outside the container.</p>
 </blockquote>
 </li>
 <li>
@@ -1456,7 +1454,7 @@
 <p><strong>Steps to Install Volt Foundry Single Container Solution on On-Premises:</strong></p>
 <ol>
 <li>
-<p>Download the <strong><code>VoltFoundrySingleContainer-&lt;version&gt;_GA.zip</code></strong> from <a href="https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/startPage.do">downloads</a> and extract it. The file structure will be as shown below:</p>
+<p>Download the <strong><code>VoltFoundrySingleContainer-&lt;version&gt;_GA.zip</code></strong> from <a href="https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.5_Latest&amp;orgId=HCL">downloads</a> and extract it. The file structure will be as shown below:</p>
 <p><code>config.properties
 install-foundry.sh
 install-actions.sh
