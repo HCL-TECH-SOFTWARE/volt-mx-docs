@@ -23,7 +23,7 @@ Prerequisites
     
     > **Note:** For Windows and macOS, you can download and install the package installer for `Docker Desktop version 4.28.0 (139021)`. For Linux, you must install Docker Engine and Docker Compose separately.  
         
-*   On Windows machines, use any bash/shell prompt to execute the install-foundry.sh script. macOS and Linux support Bash prompt by default. install-foundry.sh is located in `VoltFoundrySingleContainer-<version>_GA.zip`, which you will download to start the installation. See [Installation]{#installation) for details.
+*   On Windows machines, use any bash/shell prompt to execute the install-foundry.sh script. macOS and Linux support Bash prompt by default. install-foundry.sh is located in `VoltFoundrySingleContainer-<version>_GA.zip`, which you will download to start the installation. See <a href="#installation">Installation</a> for details.
 *   Install Java 11.
 *   Install an external Database. (The supported types are mentioned [here](#supported-databases).)
 
@@ -203,8 +203,10 @@ The following parameters must be provided by the user during installation:
     > **_Note:_** The Time Zone is an optional value. If you do not provide any Time Zone, it is set to Etc/UTC.
     
 
+<a name="installation"></a> 
+
 Installation
-============
+------------
 
 Run the Volt Foundry Single Container install script to generate and deploy Volt Foundry containers.
 
@@ -212,15 +214,15 @@ Run the Volt Foundry Single Container install script to generate and deploy Volt
 
 1.  Download the **` VoltFoundrySingleContainer-<version>_GA.zip`** from [downloads](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.5_Latest&orgId=HCL) and extract it. The file structure will be as shown below:
     
-    ```
-    config.properties
-    install-foundry.sh
-    install-actions.sh
-      lib/
-      templates/
-      foundry/
-      flyway/
-    ```
+```
+config.properties
+install-foundry.sh
+install-actions.sh
+  lib/
+  templates/
+  foundry/
+  flyway/
+```
 
 2.  To run the installation script in silent mode using ./install-foundry.sh config.properties, make sure before running to update the values in config.properties files according the comments provided above the values. This mode is recommended as it is easy to review and edit inputs if required instead of entering all the inputs again as in interactive mode.    
 
