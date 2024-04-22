@@ -7,6 +7,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Iris](#volt-iris)
 
+- [V9 Servicepack 5 Fixpack 25](#v9-servicepack-5-fixpack-25)
 - [V9 Servicepack 5 Fixpack 24](#v9-servicepack-5-fixpack-24)
 - [V9 Servicepack 5 Fixpack 23](#v9-servicepack-5-fixpack-23)
 - [V9 Servicepack 5 Fixpack 22](#v9-servicepack-5-fixpack-22)
@@ -79,6 +80,17 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 - [Earlier Foundry releases](#earlier-foundry-releases)
 
 ## Volt Iris
+
+### V9 Servicepack 5 Fixpack 25
+
+April 20, 2024
+
+* Volt Iris now supports skin management for widgets in Native macOS/Windows Desktop platforms.
+* Added signed XCFrameworks (.xcprivacyinfo file included) in accordance with Apple's updated privacy manifest guidelines.
+*  Exposed a new property for setting custom user agent for  browser widget in iOS & Android platforms.
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+
 
 ### V9 Servicepack 5 Fixpack 24
 

@@ -549,10 +549,6 @@ To add this capability to the desktop native application an NFI would need to be
 
 * Protected mode has no affect for desktop native apps at this time.
 
-* For desktop native, the Skin tab does not show for widgets selected in the Iris canvas when a native platform is selected.  Skins from desktop web platform will apply for desktop native platforms.
-
-* Fonts for specific desktop native platforms cannot be configured at this time.
-
 * When running a desktop native app on a MacOS platform during development, the first window menu entry will say ‘Electron’ rather than the project name.  However when the installer is built for the app, the menu will correctly be the project name for the installed app.  The menu will be correct on Windows during development and in the installed app.
 
 
