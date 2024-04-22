@@ -83,7 +83,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 ### V9 Servicepack 5 Fixpack 25
 
-April 19, 2024
+April 20, 2024
 
 * Volt Iris now supports skin management for widgets in Native macOS/Windows Desktop platforms.
 * Added signed XCFrameworks (.xcprivacyinfo file included) in accordance with Apple's updated privacy manifest guidelines.
