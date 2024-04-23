@@ -120,11 +120,13 @@ If you want to store userid and password in HTTP session, write the below code i
 You need to configure the below -D parameters:
 
 ```
-
-    voltmx.http.proxyHost
-    voltmx.http.proxyPort
-    voltmx.http.proxyUser  
-    voltmx.http.proxyPassword
+kony.http.proxyHost
+kony.http.proxyPort
+kony.http.proxyUser
+kony.http.proxyPassword
+kony.proxy.ntlm.domainName
+kony.proxy.authentication.mode
+KONY_SERVER_FORCE_ENABLE_PROXY
 ```
 
 If end server is with NTLM enabled authentication, then you need to configure the additional below -D parameter:
