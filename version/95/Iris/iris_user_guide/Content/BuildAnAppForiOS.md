@@ -18,7 +18,7 @@ This topic covers the following topics:
 
 [Automatically Modify info.plist with Custom Key Value Pairs](#automatically-modify-infoplist-with-custom-key-value-pairs)
 
-[Adding Privacy Manifest to the Volt MX Application](adding-privacy-manifest-to-the-volt-mx-application)
+[Adding Privacy Manifest to the Volt MX Application](#adding-privacy-manifest-to-the-volt-mx-application)
 
 [Using Application Reference Counting](#using-application-reference-counting)
 
