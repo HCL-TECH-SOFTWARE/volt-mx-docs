@@ -1482,6 +1482,8 @@ For information about this feature, refer to the following links:
   on-premise (via script-based installation). Support for Kubernetes versions below 1.21.3 dropped.
 * Upgraded Docker (single container, on-premise) version to 20.10.17
 
+* Audit log output to containerLog in docker version of Quantum fabric.
+
   For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 
