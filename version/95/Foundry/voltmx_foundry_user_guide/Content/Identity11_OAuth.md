@@ -31,7 +31,7 @@ Only **Custom**, **User Repository**, and **Microsoft AD LDAP** identity service
 3.  Configure the parameters (fields) for the service. For more information about the parameters, refer to the following sections.  
     
     
-<details close markdown="block"><summary>Service Configuration</summary>
+<details open markdown="block"><summary>Service Configuration</summary>
     
 |            Parameter    |Description                  |
 |----------------|-------------------------------|
@@ -40,7 +40,7 @@ Only **Custom**, **User Repository**, and **Microsoft AD LDAP** identity service
     
 </details>
 
-<details close markdown="block"><summary>Login Configuration</summary>
+<details open markdown="block"><summary>Login Configuration</summary>
     
 |            Parameter    |Description                  |
 |----------------|-------------------------------|
@@ -53,7 +53,7 @@ Only **Custom**, **User Repository**, and **Microsoft AD LDAP** identity service
     
 </details>
 
-<details close markdown="block"><summary>Advanced</summary>
+<details open markdown="block"><summary>Advanced</summary>
     
 |            Parameter    |Description                  |
 |----------------|-------------------------------|
