@@ -10,7 +10,7 @@ OAuth Provider is an identity service uses an existing identity service as a aut
 From V9 ServicePack 2, the consent screen contains a Remember Consent option. For more information, refer to Remember Consent.
 
 Configuring a Volt MX Foundry OAuth Provider Identity Service
-------------------------------------------------------------
+--------------------------------------------------------------
 
 ### Prerequisites
 
@@ -21,7 +21,7 @@ Only **Custom**, **User Repository**, and **Microsoft AD LDAP** identity service
 
 
  Creating an OAuth Provider
- ---------------------------
+---------------------------
 
 1.  While [configuring the identity service](ConfigureIdentiryService.md), from the **Type of Identity** list, select **OAuth Provider**.
 2.  From the **User Authentication Source** list, select an identity service that you want to use as the authentication source for the OAuth Provider. The Service Configuration details appear.
