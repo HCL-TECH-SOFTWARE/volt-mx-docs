@@ -18,6 +18,8 @@ This topic covers the following topics:
 
 [Automatically Modify info.plist with Custom Key Value Pairs](#automatically-modify-infoplist-with-custom-key-value-pairs)
 
+[Adding Privacy Manifest to the Volt MX Application](#adding-privacy-manifest-to-the-volt-mx-application)
+
 [Using Application Reference Counting](#using-application-reference-counting)
 
 [Automatically Add Required System Frameworks to the XCode Project](#automatically-add-required-system-frameworks-to-the-xcode-project)
@@ -49,6 +51,18 @@ To automatically modify info.plist with custom key value pairs, do the following
 4.  In Volt MX Iris, build the app.
 
 The json file is incorporated into the kar file. When the kar file is extracted, iOS incorporates the key value pairs in the json fie into `info.plist`.
+
+### Adding Privacy Manifest to the Volt MX Application
+
+1. After dowloading the plugin, open VMAppWithVoltmxlib.xcodeproj and add a PrivacyManifest.xcprivacy file. 
+    1. Right-click VMAppWithVoltmxlib project. 
+    2. Click New File, select App Privacy, and click Next.
+    3. Name the file PrivacyInfo and click Create. This will create the PrivacyInfo.xcprivacy file. For information about updating PrivacyInfo, see [https://support.hcltechsw.com/csm?id=kb_article&amp;sysparm_article=KB0112251](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0112251).
+2. Place the newly created PrivacyInfo.xcprivacy in the Volt Iris project folder:
+
+       `\\resources\common`
+
+3. In Volt Iris, build the app.
 
 ### Enable Default Back Swipe
 
