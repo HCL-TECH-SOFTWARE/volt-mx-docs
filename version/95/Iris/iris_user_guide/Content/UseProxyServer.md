@@ -148,8 +148,14 @@ By default, proxies such as Squid and ISA do not allow http CONNECT requests fro
 
 Volt MX  Iris access particular domains that the proxy server must be configured to allow. Contact your system administrator and request that the following domains be white-listed:
 
-https://manage.hclvoltmx.com  
-https://api.voltmx.com  
-https://visualization.voltmx.com  
-https://prototypetransit.voltmx.com.s3.amazonaws.com  
-https://accounts.auth.voltmxcloud.com
+- https://api.hclvoltmx.com
+- https://manage.hclvoltmx.com
+- https://manage.demo-hclvoltmx.com
+- https://visualization.hclvoltmx.com
+- https://accounts.auth.hclvoltmx.com
+- https://download.hclvoltmx.com
+- https://community.hclvoltmx.com
+- https://cloud-metrics.hclvoltmx.net
+- https://opensource.hcltechsw.com
+- https://hcl-tech-software.github.io
+- https://hclvoltmx-prototypetransit.s3.amazonaws.com
