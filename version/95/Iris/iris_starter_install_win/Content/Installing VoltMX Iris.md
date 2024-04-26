@@ -206,6 +206,7 @@ Ensure that you contact your system administrator and white-list the following d
 
 - https://api.hclvoltmx.com
 - https://manage.hclvoltmx.com
+- https://manage.demo-hclvoltmx.com
 - https://visualization.hclvoltmx.com
 - https://accounts.auth.hclvoltmx.com
 - https://download.hclvoltmx.com
