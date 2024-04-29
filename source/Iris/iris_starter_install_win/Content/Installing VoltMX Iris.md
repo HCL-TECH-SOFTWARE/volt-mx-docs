@@ -207,10 +207,15 @@ PassNTLMv2      XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</code></pre></li>
 
 Ensure that you contact your system administrator and white-list the following domain URLs:
 
-- [https://manage.hclvoltmx.com](https://manage.hclvoltmx.com/oauth/authorize?oauth_token=d29221cc54d3c1b9f871bba62d5f5590460f299d)
-- [https://api.hclvoltmx.com](https://api.hclvoltmx.com/console)
-- [https://visualization.hclvoltmx.com](https://visualization.hclvoltmx.com/)
-- [https://accounts.auth.hclvoltmx.net](https://accounts.auth.hclvoltmx.net/)
-- [https://hclvoltmx-prototypetransit.s3.amazonaws.com](https://hclvoltmx-prototypetransit.s3.amazonaws.com/)
-
+- https://api.hclvoltmx.com
+- https://manage.hclvoltmx.com
+- https://manage.demo-hclvoltmx.com
+- https://visualization.hclvoltmx.com
+- https://accounts.auth.hclvoltmx.com
+- https://download.hclvoltmx.com
+- https://community.hclvoltmx.com
+- https://cloud-metrics.hclvoltmx.net
+- https://opensource.hcltechsw.com
+- https://hcl-tech-software.github.io
+- https://hclvoltmx-prototypetransit.s3.amazonaws.com
 
