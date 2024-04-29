@@ -882,9 +882,9 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ### V9 Servicepack 5 Fixpack 15 Hotfix 13
 April 19, 2024
 
-* Added support for FCM HTTP V1 API in adition to legacy FCM support.
+* Added support for FCM HTTP V1 API alongside legacy FCM support.
 * Upgraded Kubernetes version from 1.24.7 to 1.27.6.
-* Added support for MariaDB 10.11.4 for on prem installation.
+* Included support for MariaDB 10.11.4 for on-prem installation.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
