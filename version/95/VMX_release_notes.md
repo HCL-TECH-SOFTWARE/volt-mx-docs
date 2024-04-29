@@ -880,7 +880,7 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ## Volt Foundry
 
 ### V9 Servicepack 5 Fixpack 15 Hotfix 13
-April 19, 2024
+April 29, 2024
 
 * Added support for FCM HTTP V1 API alongside legacy FCM support.
 * Upgraded Kubernetes version from 1.24.7 to 1.27.6.
