@@ -5,7 +5,7 @@ User Guide: [Identity](Identity.md) > [Configure the Identity Service](Configure
 OAuth Provider Identity Service
 ===============================
 
-OAuth Provider is an identity service uses an existing identity service as a authentication source to create an OAuth Server for authentication and authorization. The OAuth Provider retrieves the service configuration from the source and saves the attributes in the Foundry Identity Sessions. The OAuth Provider also supports OpenID Connect (OIDC) for authentication. For more information about OpenID, refer to [OpenID documentation](https://openid.net/specs/openid-connect-core-1_0.md).
+The OAuth Provider uses an existing identity service, as an authentication source, to set up an OAuth Server for authentication and authorization. The OAuth Provider retrieves the service configuration from the source and saves the attributes in the Foundry Identity Sessions. The OAuth Provider also supports OpenID Connect (OIDC) for authentication. For more information about OpenID, refer to [OpenID documentation](https://openid.net/specs/openid-connect-core-1_0.md).
 
 From V9 ServicePack 2, the consent screen contains a Remember Consent option. For more information, refer to Remember Consent.
 
