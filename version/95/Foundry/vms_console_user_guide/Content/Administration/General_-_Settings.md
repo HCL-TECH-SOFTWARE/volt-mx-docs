@@ -255,6 +255,4 @@ If you want to disable concurrent sessions then disable.concurrent.sessions key 
 Use the [Update Config Resources](../../../../Foundry/engagement_api_guide/Content/REST_API_Administration/Update_Config_Resources.md) API to update the value as true. This option is applicable only when Engagement Services (on-premises) is attached to Volt MX Foundry.
 
   
-| Rev | Author | Edits |
-| --- | --- | --- |
-| 7.2 | AU | AU |
+

@@ -127,21 +127,22 @@ To add a push message for an event, follow these steps:
             ![](../Resources/Images/Engagement/Events/richcontebox3_518x285.png)
             
     
-    ### Platform Specific Properties
+### Platform Specific Properties
+
+To add platform- specific properties follow these steps:
+
+1.  Click the plus icon next to the **Platform -Specific Properties** label.
     
-    To add platform- specific properties follow these steps:
+    The system displays four tabs for iOS, Android, Windows, and Web platforms. By default, the iOS tab is set to active.
     
-    1.  Click the plus icon next to the **Platform -Specific Properties** label.
-        
-        The system displays four tabs for iOS, Android, Windows, and Web platforms. By default, the iOS tab is set to active.
-        
-        ![](../Resources/Images/Engagement/Campaign/platformspecificprotab.png)
-        
-    2.  To configure platform specific properties, click the respective link below:
-        *   [iOS](../Campaigns/camppushios.md)
-        *   [Android](../Campaigns/camp_push_android.md)
-        *   [Windows](../Campaigns/camp_push_window7and8.md)
-        *   [Web](../Campaigns/camp_push_Web.md)
+    ![](../Resources/Images/Engagement/Campaign/platformspecificprotab.png)
+    
+2.  To configure platform specific properties, click the respective link below:
+    *   [iOS](../Campaigns/camppushios.md)
+    *   [Android](../Campaigns/camp_push_android.md)
+    *   [Windows](../Campaigns/camp_push_window7and8.md)
+    *   [Web](../Campaigns/camp_push_Web.md)
+    
 3.  Click the **Cancel** button, if you do not want to save the composed message. The system displays the **Add Event** screen.
 4.  Click **Save** to save the composed message. The saved push message appears in the push message list-view under the **Define Message** tab on the **Add Event** home page.
     
