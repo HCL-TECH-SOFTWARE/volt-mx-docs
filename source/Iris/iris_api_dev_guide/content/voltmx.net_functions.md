@@ -424,7 +424,7 @@ voltmx.net.HttpRequest(requestOptions)
 
 ```
 
-var httpRequestNew = voltmx.net.HttpRequest({
+var httpRequestNew = new voltmx.net.HttpRequest({
        "timeoutIntervalForRequest": 60,
        "timeoutIntervalForResource": 600
    }

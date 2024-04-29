@@ -76,7 +76,7 @@ To install Volt MX Foundry on Tomcat using the installer, follow these steps:
         > **_Note:_** During installation if you have selected **API Developer Portal**, the **API Developer Portal** is created. You can directly access your [Volt MX Developer Portal](../../../Foundry/voltmx_foundry_user_guide/Content/VoltMXDevPortal.md) in Volt MX Foundry Console.
         
     *   **Engagement Services** - To install Volt MX Foundry Engagement Services, select the **Engagement Services** check box.  
-        The system creates the following database: `<prefix>vpnsdb<suffix>`.
+        The system creates the following database: `<prefix>kpnsdb<suffix>`.
     
     **Reports Database**
     
