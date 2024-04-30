@@ -603,6 +603,3 @@ The **Add Pass Template – Rules** screen appears.
     
 
   
-| Rev | Author | Edits |
-| --- | --- | --- |
-| 7.3 | AU | AU |
