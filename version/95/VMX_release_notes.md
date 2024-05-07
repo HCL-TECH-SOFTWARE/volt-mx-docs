@@ -7,6 +7,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Iris](#volt-iris)
 
+- [V9 Servicepack 5 Fixpack 30](#v9-servicepack-5-fixpack-30)
 - [V9 Servicepack 5 Fixpack 25](#v9-servicepack-5-fixpack-25)
 - [V9 Servicepack 5 Fixpack 24](#v9-servicepack-5-fixpack-24)
 - [V9 Servicepack 5 Fixpack 23](#v9-servicepack-5-fixpack-23)
@@ -81,6 +82,15 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 - [Earlier Foundry releases](#earlier-foundry-releases)
 
 ## Volt Iris
+
+### V9 Servicepack 5 Fixpack 30
+
+May 07, 2024
+
+* Added support for incremental setup.
+* Added support for android 14 and java 11 in sdk.
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 ### V9 Servicepack 5 Fixpack 25
 
