@@ -4,7 +4,7 @@ Volt MX  Foundry
 
 Volt MX  Foundry Installation Guide - Linux
 
-Applicable to on-premises. This document explains how to install Console, Identity, Integration Services, and Engagement Services, on Linux using an installer program.
+Applicable to on premises. This document explains how to install Console, Identity, Integration Services, and Engagement Services, on Linux using an installer program.
 
 <!-- Revision History -->
 
