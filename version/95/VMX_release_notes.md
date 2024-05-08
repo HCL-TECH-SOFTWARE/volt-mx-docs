@@ -901,7 +901,17 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ## Volt Foundry
 
 ### V9 Servicepack 5 Fixpack 16 Hotfix 0
-May 27, 2024
+May 09, 2024
+
+* OData4 filter support enhanced with support addition of ‘length’ and ‘in’ verb/clause.
+* XCode 15 and iOS17 support added for CI/CD pipeline.
+* MSSQL 2022 support added to installer. 
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+
+
+### AppFactory V9 Servicepack 5 Fixpack 15 Hotfix 6
+April 30, 2024
 
 * Enhanced OData4 filter support, now including the addition of the _length_ and _in_ verb/clause.
 * Security hardening for multiple modules including console, identity, App Runtime, etc.
