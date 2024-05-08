@@ -1,6 +1,6 @@
 <head>
     <script type="text/javascript">
-        window.location.replace('https://github01.hclpnp.com/pages/phoenix-temenos/volt-mx-doc-opnsrc/95/docs/documentation/VMX_release_notes.html#v9-servicepack-5-fixpack-30')
+        window.location.replace('https://github01.hclpnp.com/pages/phoenix-temenos/volt-mx-doc-opnsrc/docs/documentation/Iris/iris_rel_notes/Content/V9SP5FP30.html')
     </script>
 </head>
 
