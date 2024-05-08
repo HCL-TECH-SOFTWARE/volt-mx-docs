@@ -87,8 +87,8 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 May 09, 2024
 
-* Support added for Update action in Incremental Setup.
-* Added support for Android 14 and JDK 11 in SDK.
+* Added support for Update action in Incremental Setup.
+* Included support for Android 14 and JDK 11 in SDK.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
