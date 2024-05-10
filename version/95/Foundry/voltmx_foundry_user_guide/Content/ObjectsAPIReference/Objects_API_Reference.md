@@ -14,6 +14,4 @@ To know more about how to acquire a current instance of your object service, ref
 
 To know more about the methods that act on the Volt MX Foundry endpoint directly, refer to [OnlineObjectServiceClass](OnlineObjectService_Class.md) documentation.
 
-To know more about the methods that act on the local sync database, refer to [OfflineObjectServiceClass](OfflineObjectService_Class.md) documentation.
-
 To know more about the usage of the data transfer objects, refer to [Data Transfer Objects](Data_Transfer_Objects.md) documentation.
