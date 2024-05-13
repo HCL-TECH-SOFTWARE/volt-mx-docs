@@ -55,16 +55,30 @@ To add iOS Push Certificates for your app, follow these steps:
 
 > **_Note:_** Refer to the following section for creating a push certificate: [Engagement Services Console User Guide > Applications](../../../Foundry/vms_console_user_guide/Content/Apps/Applications.md)
 
-To add Android (GCM Key/Sender ID) details or Jpush details (app key and master secret), follow these steps:
+
+To add Android details or Jpush details (app key and master secret), follow these steps:
 
 1.  Expand **Android**. A list of configurable items appear.
 2.  Volt MX Engagement Services supports two options for sending push notifications to Android devices. The Google Cloud Messaging network is the recommended network, but for certain geographies such as China, JPush may be required to reliably deliver push notifications. You may select to use either network option or configure both and allow your app to specify at the time of subscription which network it will use.
+
+    **FCM Legacy API**
+
     *   Enter the **Google Cloud Messaging (GCM)** authorization key, and then click **Save** to complete the configuration process. 
         
         > **_Note:_** Google Cloud Messaging for Android (GCM) is a service that helps you to send data from servers to Android applications on Android devices. This can be a lightweight message telling the Android application that there is new data to be fetched from the server (for example, a movie uploaded by a friend), or it can be a message containing up to 4kb of payload data (so apps like instant messaging can consume the message directly). The GCM service handles all aspects of queuing of messages and delivery to the target Android application running on the target device.  
           
         Click the Create an Android GCM Key (Via Google Old Console) link for more details on how to subscribe for GCM Authorization Key.
+
+    **FCM HTTPV1 API**
+
+    *   Provide the details of **FCM Project URL** and **Service_Account_key.json**, and then click **Save** to complete the configuration process. 
         
+        > **_Note:_** FCM HTTPV1 API for Android (FCM) is a service that helps you to send data from servers to Android applications on Android devices. This can be a lightweight message telling the Android application that there is new data to be fetched from the server (for example, a movie uploaded by a friend), or it can be a message containing up to 4kb of payload data (so apps like instant messaging can consume the message directly). The FCM HTTPV1 service handles all aspects of queuing of messages and delivery to the target Android application running on the target device.  
+          
+        Click the Create an Android FCM Project URL and Service Account Key (Via Firebase Console) link for more details on how to subscribe for FCM Project URL and Service Account Key
+        
+    **JPush**
+
     *   Enter the following details for **JPush**:
         
         1.  **App Key**: Enter the app key.
@@ -76,6 +90,7 @@ To add Android (GCM Key/Sender ID) details or Jpush details (app key and master 
         
 3.  To delete push configuration for Android, click **Delete Configuration**.
     
+
     **![](Resources/Images/DeletePushConfiguration.png)**
     
 4.  Click **Delete** to confirm.
@@ -84,7 +99,9 @@ To add Android (GCM Key/Sender ID) details or Jpush details (app key and master 
       
     To enable CORS, in **VoltMX Foundry Engagement Console > General > Settings > Security**, select the **Allow Cross Domains Access** check box. In Volt MX Foundry Engagement Console, by default the check box is cleared.  
     
-      For more details, refer to [VoltMX Foundry Messaging Console > General > Settings > Security](../../../Foundry/vms_console_user_guide/Content/Administration/General_-_Settings.md#Security) section.  
+    For more details, refer to [VoltMX Foundry Messaging Console > General > Settings > Security](../../../Foundry/vms_console_user_guide/Content/Administration/General_-_Settings.md#Security) section.  
+
+    
       
     ![](Resources/Images/OnPrem/CORS_574x296.png)
     
