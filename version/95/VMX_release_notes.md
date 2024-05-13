@@ -85,7 +85,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 ### V9 Servicepack 5 Fixpack 30
 
-May 09, 2024
+May 13, 2024
 
 * Added support for Update action in Incremental Setup.
 * Included support for Android 14 and JDK 11 in SDK.
