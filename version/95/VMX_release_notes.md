@@ -891,9 +891,9 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ## Volt Foundry
 
 ### AppFactory V9 Servicepack 5 Fixpack 15 Hotfix 6
-April 30, 2024
+May 20, 2024
 
-* Upgraded AppFactory with new Jenkins and plugins to make the platform more secure.
+* Security hardening via Jenkins update.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
