@@ -63,7 +63,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 ## Volt Iris
 
 ### V9 Servicepack 2 Fixpack 72
-May 17, 2024
+May 21, 2024
 
 * Added signed XCFrameworks (.xcprivacyinfo file included) in accordance with Apple's updated privacy manifest guidelines.
 * Upgraded Python to v3.
