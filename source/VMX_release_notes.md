@@ -68,9 +68,7 @@ May 21, 2024
 * Added signed XCFrameworks (.xcprivacyinfo file included) in accordance with Apple's updated privacy manifest guidelines.
 * Upgraded Python to v3.
 
-There are no new features or enhancements in this release.
-For relevant support note, see the<a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476" target="_blank"> Cumulative fix list for HCL Volt MX</a>.
-
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 ### V9 Servicepack 2 Fixpack 71
 March 26, 2024
