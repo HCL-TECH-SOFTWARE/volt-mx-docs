@@ -901,7 +901,7 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ## Volt Foundry
 
 ### V9 Servicepack 5 Fixpack 16 Hotfix 0
-May 15, 2024
+May 23, 2024
 
 * Enhanced OData4 filter support, now including the addition of the _length_ and _in_ verb/clause.
 * Added XCode 15 and iOS 17 support to CI/CD pipeline.
