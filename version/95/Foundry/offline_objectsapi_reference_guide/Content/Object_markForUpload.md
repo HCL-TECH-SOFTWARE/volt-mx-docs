@@ -38,11 +38,6 @@ options["primaryKeys"] = primaryKeys;
 //mark the deferred record for upload with primary key 1
 category.markForUpload(options, successCallback, failureCallback);
 
-var category = new voltmx.sdk.VMXObj("CATEGORY");
-//mark all the deferred records in the object for upload
-category.markForUpload(null, successCallback, failureCallback);
-
-
 function successCallback() {
     voltmx.print("markForUpload successful");
 }
@@ -95,20 +90,6 @@ category.markForUpload(options, new VMXCallback() {
             Log.e("Object markforupload", "Object markforupload unsuccessful for category with Error :" + e.getMessage());
         }
     }
-
-VMXObj category = new VMXObj("CATEGORY");
-//mark all the deferred records in the object for upload
-category.markForUpload(null, new VMXCallback() {
-        @Override
-        public void onSuccess(Object object) {
-            Log.d("Object markforupload", "Object markforupload Successful");
-        }
-        @Override
-        public void onFailure(object error) {
-            OfflineObjectsException e = (OfflineObjectsException) error;
-            Log.e("Object markforupload", "Object markforupload unsuccessful for category with Error :" + e.getMessage());
-        }
-    }
 ```
 
 iOS (Objective C)
@@ -152,24 +133,6 @@ NSDictionary * options = @ {
 [_categories markForUpload: options
     onSuccess: ^ () {
         NSLog(@"Object markforupload successful ");
-    }
-    onFailure: ^ (id object) {
-        OfflineObjectsError * error = (OfflineObjectsError) object;
-        NSLog(@"Object markforupload unsuccessful because of error:%@", [error.userInfo
-            localizedDescription
-        ]);
-    }
-];
-
-NSError error = nil;
-VMXObj * _categories = [
-    [VMXObj alloc] initWithName: @"CATEGORY"
-    error: & error
-];
-//mark all the deferred records in the object for upload
-[_categories markForUpload: null
-    onSuccess: ^ () {
-        NSLog(@"Object markforupload");
     }
     onFailure: ^ (id object) {
         OfflineObjectsError * error = (OfflineObjectsError) object;
