@@ -48,10 +48,8 @@ The **setUserID** API sets the user ID for the data gathered from an application
 *   @param setUserId {string }User ID to be passed
 
 ```
- //Sample code to set up the user ID of application user metrics  
-  
-var metricsServiceObj = client.getMetricsService()
-metricsServiceObj.setUserID("myUserID");
+//Sample code to set up the user ID of application user metrics
+voltmx.setUserID("myUserID");
 ```
 
 > **_Note:_**  The UserId related to metrics. The UserId length cannot be more than 100 characters.
