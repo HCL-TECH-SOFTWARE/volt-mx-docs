@@ -1717,11 +1717,6 @@ options[&quot;primaryKeys&quot;] = primaryKeys;
 //mark the deferred record for upload with primary key 1
 category.markForUpload(options, successCallback, failureCallback);
 
-var category = new voltmx.sdk.VMXObj(&quot;CATEGORY&quot;);
-//mark all the deferred records in the object for upload
-category.markForUpload(null, successCallback, failureCallback);
-
-
 function successCallback() {
     voltmx.print(&quot;markForUpload successful&quot;);
 }
@@ -1762,20 +1757,6 @@ category.markForUpload(options, new VMXCallback() {
             Log.e(&quot;Object markforupload&quot;, &quot;Object markforupload unsuccessful for category with Error :&quot; + e.getMessage());
         }
     }
-
-VMXObj category = new VMXObj(&quot;CATEGORY&quot;);
-//mark all the deferred records in the object for upload
-category.markForUpload(null, new VMXCallback() {
-        @Override
-        public void onSuccess(Object object) {
-            Log.d(&quot;Object markforupload&quot;, &quot;Object markforupload Successful&quot;);
-        }
-        @Override
-        public void onFailure(object error) {
-            OfflineObjectsException e = (OfflineObjectsException) error;
-            Log.e(&quot;Object markforupload&quot;, &quot;Object markforupload unsuccessful for category with Error :&quot; + e.getMessage());
-        }
-    }
 </code></pre>
 <h2 id="ios-objective-c">iOS (Objective C)</h2>
 <h3 id="signature_2">Signature</h3>
@@ -1807,24 +1788,6 @@ NSDictionary * options = @ {
 [_categories markForUpload: options
     onSuccess: ^ () {
         NSLog(@&quot;Object markforupload successful &quot;);
-    }
-    onFailure: ^ (id object) {
-        OfflineObjectsError * error = (OfflineObjectsError) object;
-        NSLog(@&quot;Object markforupload unsuccessful because of error:%@&quot;, [error.userInfo
-            localizedDescription
-        ]);
-    }
-];
-
-NSError error = nil;
-VMXObj * _categories = [
-    [VMXObj alloc] initWithName: @&quot;CATEGORY&quot;
-    error: &amp; error
-];
-//mark all the deferred records in the object for upload
-[_categories markForUpload: null
-    onSuccess: ^ () {
-        NSLog(@&quot;Object markforupload&quot;);
     }
     onFailure: ^ (id object) {
         OfflineObjectsError * error = (OfflineObjectsError) object;
