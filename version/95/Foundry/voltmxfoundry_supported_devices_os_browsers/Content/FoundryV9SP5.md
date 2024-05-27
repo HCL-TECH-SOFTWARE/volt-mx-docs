@@ -124,7 +124,7 @@ For development environments, in addition to the versions of Operating Systems, 
 
 * MySQL 8.0.x 
 * Oracle 19c 
-* MSSQL 2017/2019 
+* MSSQL 2017/2019/2022
 
 #### Platforms 
 
