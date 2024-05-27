@@ -901,11 +901,10 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ## Volt Foundry
 
 ### V9 Servicepack 5 Fixpack 16 Hotfix 0
-May 23, 2024
+May 27, 2024
 
 * Enhanced OData4 filter support, now including the addition of the _length_ and _in_ verb/clause.
 * Security hardening for multiple modules including console, identity, App Runtime, etc.
-* Added support of SQL Server 2022.
 * Included MSSQL 2022 support in the installer.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
