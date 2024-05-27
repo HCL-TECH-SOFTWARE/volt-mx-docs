@@ -62,7 +62,7 @@ Volt Foundry Single Container Solution supports the following database servers:
 | Database Type | Version Supported |
 | --- | --- |
 | MySQL | 8.0 |
-| Microsoft SQL Server | 2022 |
+| Microsoft SQL Server | 2017,2019,2022 |
 | MySQL Database HA (active/passive) Cluster | 8.0 |
 | Oracle | 19c |
 
