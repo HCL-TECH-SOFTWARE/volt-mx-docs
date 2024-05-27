@@ -84,6 +84,7 @@ The installation of the Volt Foundry software supports the following versions of
 
 #### Microsoft SQL Server
 
+*   SQL Server 2022
 *   SQL Server 2019
 *   SQL Server 2017
 *   Azure SQL
