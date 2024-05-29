@@ -37,6 +37,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 [Volt Foundry](#volt-foundry)
 
 
+- [V9 Servicepack 2 Fixpack 2 Hotfix 6](#v9-servicepack-2-fixpack-2-hotfix-6)
 - [V9 Servicepack 2 Fixpack 2 Hotfix 5](#v9-servicepack-2-fixpack-2-hotfix-5)
 - [V9 Servicepack 2 Fixpack 2 Hotfix 4](#v9-servicepack-2-fixpack-2-hotfix-4)
 - [V9 Servicepack 2 Fixpack 2 Hotfix 3](#v9-servicepack-2-fixpack-2-hotfix-3)
@@ -314,6 +315,14 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 -->
 
 ## Volt Foundry
+
+### V9 Servicepack 2 Fixpack 2 Hotfix 6
+May 31, 2024
+
+* Added support for FCM HTTP V1 API alongside legacy FCM support.
+* Included support for MariaDB 10.11.4 for on-prem installation.
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 ### V9 Servicepack 2 Fixpack 2 Hotfix 5
 March 22, 2024
