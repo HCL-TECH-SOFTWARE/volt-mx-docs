@@ -65,7 +65,9 @@ App Services has provided the monitoring capabilities on the server performance 
     | Server Response Time | Time taken to respond by the server for the received request.Mouse over across each row in the server response time column, to view the time split taken by each process in the server to send the response. |
     | Enable Service Monitor | Select the checkbox to enable the service monitor. Clear the checkbox to disable the service monitor feature.> **_Note:_** If the Service Monitor is disabled, it logs the metrics in the DB if the log level is Debug.> **_Note:_** If **Log Level** type is set as **Debug** or lower in **Client Log Level** filter, service monitoring is captured only for the users matching the filter criteria in the log. If the service monitoring feature is enabled, the client log level set has no effect on it and data is collected for all the users. For more information on client log filters, refer [Log Level by Client Filter](Settings.md#loglevel_Client). |
     
-    > **_Note:_** Monitoring has no perceptible performance impact and it is highly recommended to keep the feature enabled.  
+    > **_Note:_** Monitoring has no perceptible performance impact and it is highly recommended to keep the feature enabled.<br>
+
+    > **_Note:_** If the Root Logger is set to OFF, logs will not be added to the database, resulting in no data being displayed on the monitoring page.
       
     You can sort the displayed data in the table using the Service Name, Object (or) Operation, Service Type, Parent Service, Total Request Count, and Server Response Time.
     
