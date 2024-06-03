@@ -901,7 +901,7 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ## Volt Foundry
 
 ### V9 Servicepack 5 Fixpack 16 Hotfix 0
-May 27, 2024
+June 02, 2024
 
 * Enhanced OData4 filter support, now including the addition of the _length_ and _in_ verb/clause.
 * Security hardening for multiple modules including console, identity, App Runtime, etc.
