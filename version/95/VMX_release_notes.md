@@ -911,16 +911,6 @@ For detailed information about fixes and known issues in this release, see the <
 
 
 ### AppFactory V9 Servicepack 5 Fixpack 15 Hotfix 6
-April 30, 2024
-
-* Enhanced OData4 filter support, now including the addition of the _length_ and _in_ verb/clause.
-* Security hardening for multiple modules including console, identity, App Runtime, etc.
-* Included MSSQL 2022 support in the installer.
-
-For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
-
-
-### AppFactory V9 Servicepack 5 Fixpack 15 Hotfix 6
 May 20, 2024
 
 * Security hardening via Jenkins update.
