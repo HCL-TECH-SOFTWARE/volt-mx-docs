@@ -55,7 +55,7 @@ Android Platform
 
 To configure Android platform, follow these steps:
 
-### GCM Authorization Key
+### FCM Legacy API
 
 1.  **GCM/FCM Authorization Key**: Enter the GCM Authorization Key.
     
@@ -65,6 +65,15 @@ To configure Android platform, follow these steps:
     *   While modifying an application, you can also test the GCM authorization key for validation by clicking the **Test Connectivity** button.  
         
 2.  Click **Test Connectivity** button to check the GCM key is valid or not. The system displays the confirmation message that GCM connection test is successful.
+
+### FCM HTTPV1 API
+
+1.  **FCM Project URL and Service Account key**: Provide FCM Project URL and Service Account Key
+
+    > **Note:**
+    *   Click the **[Create FCM Project URL and Service Account Key via firebase console](#create-fcm-project-url-and-service-account-key-via-firebase-console)** link for more details on how to create FCM Project URL and Service Account Key.
+    *   While modifying an application, you can also test the FCM Project URL and Service Account Key validation by clicking the **Test Connectivity** button.  
+2.  Click **Test Connectivity** button to check FCM Project URL and Service Account Key valid or not. The system displays the confirmation message that FCM connection test is successful.
 
 ### JPush
 
@@ -83,44 +92,18 @@ Create an Android GCM Key (Via Google Old Console)
 
 To create a GCM Authorization Key, follow these steps:
 
-1.  In a browser, go to [https://code.google.com/apis/console](https://code.google.com/apis/console), and log in. If you do not have an account, create one. Do not use a personal account.![](../Resources/Images/Overview/Apps/GCM Key/2.png)
+1.  In a browser, go to [https://code.google.com/apis/console](https://code.google.com/apis/console), and log in. If you do not have an account, create one. Do not use a personal account.
+
 2.  Enter your credentials, and click **Sign in** to continue.
 3.  Click the **Create Project** button.
-    
-    ![](../Resources/Images/Overview/Apps/GCM Key/3.png)
-    
 4.  On the left side of the API’s Dashboard page, click the drop-down menu and select **Create**.
-    
-    ![](../Resources/Images/Overview/Apps/GCM Key/4.png)
-    
-5.  Enter a name, and click **Create project**. Your browser refreshes and displays a new URL.
-    
-    ![](../Resources/Images/Overview/Apps/GCM Key/5.png)
-    
+5.  Enter a name, and click **Create project**. Your browser refreshes and displays a new URL. 
 6.  The number after #project (example, 214267376347) should be noted. This is your **Sender ID**.
-    
-    ![](../Resources/Images/Overview/Apps/GCM Key/6.png)
-    
 7.  Scroll down the page to Google Cloud Messaging for Android and set the **ON/OFF** widget to **ON**.
-    
-    ![](../Resources/Images/Overview/Apps/GCM Key/7.png)
-    
 8.  Agree to the terms and conditions, and click **Accep**t.
-    
-    ![](../Resources/Images/Overview/Apps/GCM Key/8.png)
-    
 9.  At the bottom of the API’s home page, click the **Create new Server key** button.
-    
-    ![](../Resources/Images/Overview/Apps/GCM Key/9.png)
-    
 10. Specify a server or servers that can use GCM. Click **Create**.
-    
-    ![](../Resources/Images/Overview/Apps/GCM Key/10.png)
-    
 11. Two **GCM Keys** are now displayed on the **API Access** page.
-    
-    ![](../Resources/Images/Overview/Apps/GCM Key/11.png)
-    
 12. Enter the **GCM key** and click **Save**.
 
 Create an Android GCM Key (Via Google New Console)
@@ -130,8 +113,6 @@ To create a GCM Authorization Key, follow these steps:
 
 1.  Open Google Developers Console.
 2.  If you have not created an API project, then click **Create Project**.
-    
-    ![](../Resources/Images/Overview/Apps/New GCM Key/no. 2.png)
     
     > **_Note:_** The project name is used only in the console. The project ID is used to uniquely identify project name. The identifier cannot be changed.
     
@@ -156,8 +137,28 @@ To create a GCM Authorization Key, follow these steps:
 12. In the refreshed page, copy the **API** key.
 13. If you need to rotate the key, click **Regenerate Ke**y. A new key will be generated. If you think the key has been compromised and you want to delete it immediately, click **Delete**
     
-    ![](../Resources/Images/Overview/Apps/New GCM Key/no. 11.png)
+Create FCM Project URL and Service Account Key via firebase console
+-------------------------------------------------------------------
+To create a FCM Project URL and Service Account Key, follow these steps:
+
+1.  Open firebase console.
+2.  If you have not created an API project, then click **Create Project**.
     
+    > **_Note:_** The project name is used only in the console. The project ID is used to uniquely identify project name. The identifier cannot be changed.
+    
+3.  Once a project is created, Click on project name and goto project setting and under general tab you will find your project name project ID and project number, for example 670330094152.
+
+4.  In Project Setting click on cloud messaging tab and Enable Firebase Cloud Messaging API (V1) by clicking three dots on right side.
+
+5.  Create **FCM Project URL**
+
+    https://fcm.googleapis.com/v1/projects/<Project_ID>/messages:send
+
+6.  Create **Service Account Key**
+    
+    In Project Settings click on Service Accounts and select the java then **Generate new private key**
+   
+    ![](../Resources/Images/Overview/Apps/New GCM Key/no. 11.png)
 
 Create a JPush App Key and Master Secret
 ----------------------------------------
