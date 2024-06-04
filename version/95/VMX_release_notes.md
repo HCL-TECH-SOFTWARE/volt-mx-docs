@@ -43,6 +43,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Foundry](#volt-foundry)
 
+- [AppFactory V9 Servicepack 5 Fixpack 16 Hotfix 0](#appfactory-v9-servicepack-5-fixpack-16-hotfix-0)
 - [V9 Servicepack 5 Fixpack 16 Hotfix 0](#v9-servicepack-5-fixpack-16-hotfix-0)
 - [AppFactory V9 Servicepack 5 Fixpack 15 Hotfix 6](#appfactory-v9-servicepack-5-fixpack-15-hotfix-6)
 - [V9 Servicepack 5 Fixpack 15 Hotfix 13](#v9-servicepack-5-fixpack-15-hotfix-13)
@@ -900,8 +901,16 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 
 ## Volt Foundry
 
-### V9 Servicepack 5 Fixpack 16 Hotfix 0
+### AppFactory V9 Servicepack 5 Fixpack 16 Hotfix 0
 June 02, 2024
+
+* Added XCode 15 and iOS 17 support to CI/CD pipeline.
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+
+
+### V9 Servicepack 5 Fixpack 16 Hotfix 0
+May 27, 2024
 
 * Enhanced OData4 filter support, now including the addition of the _length_ and _in_ verb/clause.
 * Security hardening for multiple modules including console, identity, App Runtime, etc.
