@@ -88,6 +88,16 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 ## Volt Iris
 
+### V9 Servicepack 5 Fixpack 32
+June 10, 2024
+
+* Updated mfcli JAR in Web Studio.
+* Security hardening options for App binary.
+* Security hardening of platform.
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+
+
 ### V9 Servicepack 5 Fixpack 31
 
 May 22, 2024
