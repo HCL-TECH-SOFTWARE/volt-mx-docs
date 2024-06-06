@@ -7,6 +7,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Iris](#volt-iris)
 
+- [V9 Servicepack 5 Fixpack 32](#v9-servicepack-5-fixpack-32)
 - [V9 Servicepack 5 Fixpack 31](#v9-servicepack-5-fixpack-31)
 - [V9 Servicepack 5 Fixpack 30](#v9-servicepack-5-fixpack-30)
 - [V9 Servicepack 5 Fixpack 25](#v9-servicepack-5-fixpack-25)
