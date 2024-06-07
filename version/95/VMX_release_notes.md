@@ -43,6 +43,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Foundry](#volt-foundry)
 
+- [AppFactory V9 Servicepack 5 Fixpack 16 Hotfix 1](#appfactory-v9-servicepack-5-fixpack-16-hotfix-1)
 - [AppFactory V9 Servicepack 5 Fixpack 16 Hotfix 0](#appfactory-v9-servicepack-5-fixpack-16-hotfix-0)
 - [V9 Servicepack 5 Fixpack 16 Hotfix 0](#v9-servicepack-5-fixpack-16-hotfix-0)
 - [AppFactory V9 Servicepack 5 Fixpack 15 Hotfix 6](#appfactory-v9-servicepack-5-fixpack-15-hotfix-6)
@@ -900,6 +901,15 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 -->
 
 ## Volt Foundry
+
+### V9 Servicepack 5 Fixpack 16 Hotfix 1
+June 10, 2024
+
+* Expanded scope of OData4 filters by adding new operations.
+* Security hardening.
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+
 
 ### AppFactory V9 Servicepack 5 Fixpack 16 Hotfix 0
 June 02, 2024
