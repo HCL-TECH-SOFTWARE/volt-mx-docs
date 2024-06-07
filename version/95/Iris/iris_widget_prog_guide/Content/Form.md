@@ -87,7 +87,7 @@ A form provides you with an option to set Basic Properties, Layout Properties, P
 |  |  | [outTransitionConfig](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#outTrans) |
 |   |   | [retainScrollPosition](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#retainSc) |
 |   |   | [scrollDirection](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#scrollDi) |
-|   |   | [scrollsToTop](../../iris_widget_prog_guide/Content/Popup_Properties.md#scrollsT) |
+|   |   | [scrollsToTop](../../iris_widget_prog_guide/Content/FlexScrollContainer_Properties.md#syntax_59) |
 |   |   | [secureData](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#secureDa) |
 |  |  | [showActionBar](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#showActi) |
 |  |  | [showActionBarIcon](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#showActi2) |
