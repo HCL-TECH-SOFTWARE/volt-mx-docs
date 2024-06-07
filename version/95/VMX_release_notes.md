@@ -43,7 +43,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Foundry](#volt-foundry)
 
-- [AppFactory V9 Servicepack 5 Fixpack 16 Hotfix 1](#appfactory-v9-servicepack-5-fixpack-16-hotfix-1)
+- [V9 Servicepack 5 Fixpack 16 Hotfix 1](#v9-servicepack-5-fixpack-16-hotfix-1)
 - [AppFactory V9 Servicepack 5 Fixpack 16 Hotfix 0](#appfactory-v9-servicepack-5-fixpack-16-hotfix-0)
 - [V9 Servicepack 5 Fixpack 16 Hotfix 0](#v9-servicepack-5-fixpack-16-hotfix-0)
 - [AppFactory V9 Servicepack 5 Fixpack 15 Hotfix 6](#appfactory-v9-servicepack-5-fixpack-15-hotfix-6)
