@@ -58,25 +58,21 @@ The following image illustrates the lifecycle of a form:
 
 A form provides you with an option to set Basic Properties, Layout Properties, Platform Specific Properties, Events, and Methods. 
 
-  
+
 | Basic Properties | Layout Properties | Platform Specific Properties |
 | --- | --- | --- |
-| [enabledForIdleTimeout](Form_Basic_Properties.md#enabledforidletimeout-property) | [displayOrientation](HBox_Properties.md#displayO) | [actionBarIcon](../../iris_user_guide/Content/Native_App_Properties.md#actionBa) |
-| [footers](Form_Basic_Properties.md#footers-property) | [gridCell](HBox_Properties.md#gridCell) | [animateHeaderFooter](../../app_design_dev/Content/Animation.md#animateH) |
-| [headers](Form_Basic_Properties.md#headers-property) | [layoutMeta](HBox_Properties.md#layoutMe) | [bounces](../../iris_widget_prog_guide/Content/ScrollBox_Basic_Properties.md#bounces) |
-| [id](Form_Basic_Properties.md#id-property) | [layoutType](HBox_Properties.md#layoutTy) | [captureGPS](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#captureG) |
-| [info](Form_Basic_Properties.md#info-property) |  | [contextPath](../../iris_widget_prog_guide/Content/Popup_Properties.md#contextP) |
-| [menuFocusSkin](Form_Basic_Properties.md#menufocusskin-property) |  | [configureExtendTop](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#configur) |
-| [menuItems](Form_Basic_Properties.md#menuitems-property) |   | [configureExtendBottom](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#configur2) |
-| [menuNormalSkin](Form_Basic_Properties.md#menunormalskin-property) |   | [configureStatusBarStyle](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#configur3) |
-| [needAppMenu](Form_Basic_Properties.md#needappmenu-property) |   | [defaultIndicatorColor](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#defaultI) |
-| [skin](Form_Basic_Properties.md#skin-property) |   | [enablePeekGesture](../../iris_widget_prog_guide/Content/GestureAPI.md#enablePe) |
-|   |   | [extendTop](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#extendTo) |
-| [title](Form_Basic_Properties.md#title-property) |   | [extendBottom](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#extendBo) |
-| [type](Form_Basic_Properties.md#type-property) |   | [statusBarStyle](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#statusBa) |
-|   |   | [footerOverlap](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#footerOv) |
-|   |   | [formTransperencyDuringPostShow](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#formTran) |
-|   |  | [headerOverlap](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#headerOv) |
+| [enabledForIdleTimeout](Form_Basic_Properties.md#enabledforidletimeout-property) | [displayOrientation](HBox_Properties.md#displayO)  | [bounces](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#bounces) |
+| [footers](Form_Basic_Properties.md#footers-property) | [gridCell](HBox_Properties.md#gridCell) | [captureGPS](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#captureG) |
+| [headers](Form_Basic_Properties.md#headers-property) | [layoutMeta](HBox_Properties.md#layoutMe) | [configureExtendTop](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#configur) |
+| [id](Form_Basic_Properties.md#id-property) | [layoutType](HBox_Properties.md#layoutTy) | [configureExtendBottom](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#configur2) |
+| [info](Form_Basic_Properties.md#info-property) |  |[configureStatusBarStyle](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#configur3)  |
+| [menuFocusSkin](Form_Basic_Properties.md#menufocusskin-property) |  | [defaultIndicatorColor](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#defaultI) |
+| [menuItems](Form_Basic_Properties.md#menuitems-property) |   | [extendTop](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#extendTo) |
+| [menuNormalSkin](Form_Basic_Properties.md#menunormalskin-property) |   | [extendBottom](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#extendBo) |
+| [needAppMenu](Form_Basic_Properties.md#needappmenu-property) |   | [statusBarStyle](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#statusBa) |
+| [skin](Form_Basic_Properties.md#skin-property) |   | [footerOverlap](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#footerOv) |
+| [title](Form_Basic_Properties.md#title-property) |   | [formTransperencyDuringPostShow](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#formTran) |
+| [type](Form_Basic_Properties.md#type-property) |   | [headerOverlap](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#headerOv) |
 |   |  | [inputAccessoryViewType](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#inputAcc) |
 |   |  | [inTransitionConfig](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#inTransi) |
 |   |  | [layout](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#layout) |
@@ -98,7 +94,9 @@ A form provides you with an option to set Basic Properties, Layout Properties, P
 |   |   | [titleBarSkin](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#titleBar3) |
 |   |   | [windowSoftInputMode](../../iris_widget_prog_guide/Content/FlexForm_Properties.md#windowSo) |
 
-  
+
+
+
 | Events | Methods |
 | --- | --- |
 | [addWidgets](Form_Events.md#addwidgets-event) | [add](Form_Methods.md#add) |
