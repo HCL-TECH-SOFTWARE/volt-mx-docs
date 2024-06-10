@@ -905,8 +905,8 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ### V9 Servicepack 5 Fixpack 16 Hotfix 1
 June 10, 2024
 
-* Expanded scope of OData4 filters by adding new operations.
-* Security hardening.
+* Expanded the scope of OData4 filters by adding new operations.
+* Strengthened security.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
