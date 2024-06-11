@@ -124,7 +124,7 @@ ODATA V4 Methods
 
 **A**. 'in' with eq(equals) verb:
 
-This 'in' operator filters all the records that equals the list of values in the column of the table.
+This 'in' operator filter all the records that equals the list of values in the column of the table.
 Syntax rules are comma separated list of values without spaces and enclosed in parentheses(). Don't use square brackets [] or braces {}.
 
 API Usage
@@ -141,7 +141,7 @@ Example
 
 **B**. 'in' with ne(not equals) verb:
 
-This 'in' operator filters all the records that not equals the list of values in the column of the table.
+This 'in' operator filter all the records that not equals the list of values in the column of the table.
 Syntax rules are comma separated list of values without spaces and enclosed in parentheses(). Don't use square brackets [] or braces {}.
 
 API Usage
@@ -175,7 +175,7 @@ Example
 ### startswith
 
 
-String function to filters all the records where column startswith provided String. 
+String function to filter all the records where column startswith provided String. 
 
 API Usage
 
@@ -185,7 +185,7 @@ API Usage
 
 Example
 
-Below syntax filters all the records where `firstname` startswith `nas`.
+Below syntax filter all the records where `firstname` startswith `nas`.
 
 ```
  startswith('firstname','nas')
@@ -194,7 +194,7 @@ Below syntax filters all the records where `firstname` startswith `nas`.
 ### not startswith
 
 
-String function to filters all the records where column does not startswith provided String.
+String function to filter all the records where column does not startswith provided String.
 
 API Usage
 
@@ -204,7 +204,7 @@ API Usage
 
 Example
 
-Below syntax filters all the records where `lastname` does not startswith `daq`.
+Below syntax filter all the records where `lastname` does not startswith `daq`.
 
 ```
  not startswith('lastname','daq')
@@ -213,7 +213,7 @@ Below syntax filters all the records where `lastname` does not startswith `daq`.
 ### endswith
 
 
-String function to filters all the records where column endswith provided String.
+String function to filter all the records where column endswith provided String.
 
 API Usage
 
@@ -223,7 +223,7 @@ API Usage
 
 Example
 
-Below syntax filters all the records where `firstname` endswith `nse`.
+Below syntax filter all the records where `firstname` endswith `nse`.
 
 ```
  endswith('firstname','nse')
@@ -231,7 +231,7 @@ Below syntax filters all the records where `firstname` endswith `nse`.
 
 ### not endswith
 
-String function to filters all the records where column does not endswith provided String.
+String function to filter all the records where column does not endswith provided String.
 
 API Usage
 
@@ -241,7 +241,7 @@ API Usage
 
 Example
 
-Below syntax filters all the records where `firstname` does not endswith `dow`.
+Below syntax filter all the records where `firstname` does not endswith `dow`.
 
 ```
  not endswith('firstname','dow')
@@ -249,7 +249,7 @@ Below syntax filters all the records where `firstname` does not endswith `dow`.
 
 ### length
 
-Length function to fillter all the records where column equals to value. 
+Length function to fillter all the records where column lenght equals to value. 
 
 API Usage
 
@@ -259,17 +259,18 @@ API Usage
 
 Example
 
-Below syntax filters all the records where `Name` lenght eq `19`.
+Below syntax filter all the records where `Name` lenght eq `19`.
 
 ```
  length(Name) eq 19
 ```
 
-### year
+### Date and Time
 
 
-The year function returns the year component of the Date. It filters all the records where column name is equal to the value.
+Date-time filters operates on date type column value. Column would contain date/time data. Filters will compare date/time fields to provided value and returns matched records 
 
+###  year 
 
 API Usage
 
@@ -279,16 +280,13 @@ API Usage
 
 Example
 
-Below syntax filters all the records where `year(BirthDate)` eq `1999`.
+Below syntax filter all the records where `year(BirthDate)` eq `1999`.
 
 ```
  year(BirthDate) eq 1999
 ```
 
 ### month
-
-
-The month function returns the month component of the Date. It filters all the records where column name is equal to the value.
 
 API Usage
 
@@ -298,15 +296,12 @@ API Usage
 
 Example
 
-Below syntax filters all the records where `month(BirthDate)` eq `5`.
+Below syntax filter all the records where `month(BirthDate)` eq `5`.
 
 ```
  month(BirthDate) eq 5
 ```
 ### day
-
-
-The Day function returns the day component of the Date. It filters all the records where column name is equal to the value.
 
 API Usage
 
@@ -316,16 +311,13 @@ API Usage
 
 Example
 
-Below syntax filters all the records where `day(BirthDate)` eq `5`.
+Below syntax filter all the records where `day(BirthDate)` eq `5`.
 
 ```
  DAY(BirthDate) eq 5
 ```
 
 ### hour
-
-
-The hour function returns the hour component (0 to 23) of the DateTimeOffset or TimeOfDay parameter value. It filters all the records where column name is equal to the value.
 
 API Usage
 
@@ -335,15 +327,12 @@ API Usage
 
 Example
 
-Below syntax filters all the records where `hour(BirthDate)` eq `10`.
+Below syntax filter all the records where `hour(BirthDate)` eq `10`.
 
 ```
  hour(BirthDate) eq 10
 ```
 ### minute
-
-
-The minute function returns the minute component (0 to 59) of the DateTimeOffset or TimeOfDay parameter value. It filters all the records where column name is equal to the value.
 
 API Usage
 
@@ -353,16 +342,13 @@ API Usage
 
 Example
 
-Below syntax filters all the records where `minute(BirthDate)` eq `45`.
+Below syntax filter all the records where `minute(BirthDate)` eq `45`.
 
 ```
  minute(BirthDate) eq 45
 ```
 
 ### second
-
-
-The second function returns the second component (0 to 59 for regular seconds) . It filters all the records where column name is equal to the value.
 
 API Usage
 
@@ -372,18 +358,20 @@ API Usage
 
 Example
 
-Below syntax filters all the records where `second(BirthDate)` eq `40`.
+Below syntax filter all the records where `second(BirthDate)` eq `40`.
 
 ```
  second(BirthDate) eq 40
 ```
 
-### ceiling
+### Data comparison filters 
 
 
-Arithmetic function to filter all the records where ceiling function rounds the column value up to the nearest numeric value with no decimal component.
+ Filters to list all the recodrs where post rounding the column value is equal to provided number.
 
-API Usage
+ ### Ceiling 
+ 
+  API Usage
 
 ```
  $filter=ceiling(colname) eq value
@@ -391,35 +379,22 @@ API Usage
 
 Example
 
-Below syntax filters all the records where `ceiling` rounds upto `32`.
-
-
-```
- ceiling(Freight) eq 32
-```
-### floor
-
-
-Arithmetic function to filter all the records where floor function rounds the column value down the nearest numeric value with no decimal component.
-
-
-API Usage
+Below syntax filter all the records where `ceiling` rounds upto `32`.
+ 
+ ### Floor
+ 
+ API Usage
 
 ```
- $filter=floor(colname) eq value
+ $filter=ceiling(colname) eq value
 ```
 
 Example
 
-Below syntax filters all the records where `floor` rounds down to  `36`
-
-```
- floor(Freight) eq 36
-```
-### round
+Below syntax filter all the records where `ceiling` rounds upto `32`.
 
 
-Arithmetic function to filter all the records where round function rounds the column value the nearest numeric value with no decimal component. The mid-point between two integers is rounded away from zero, i.e. 0.5 is rounded to 1 and  0.5 is rounded to -1.
+ ### Round 
 
 API Usage
 
@@ -429,35 +404,16 @@ API Usage
 
 Example
 
-Below syntax filters all the records where `round` rounds to  `32`.
+Below syntax filter all the records where `round` rounds to  `32`.
 
 ```
  round(Freight) eq 32
-```
-### indexof
-
-
-String function to filters all the records where string or ordered collection column values returns the zero-based character position of the first occurrence of the second string in the first string. String comparison is case-sensitive.
-
-
-API Usage
-
-```
- $filter=indexof(colname,'expression') eq value
-```
-
-Example
-
-Below syntax filters all the records where `indexof` containing `lfreds` starting at the second character.
-
-```
-  indexof(CompanyName,'lfreds') eq 1
 ```
 
 ### trim
 
 
-String function to filters all the records where column string value with all leading and trailing whitespace characters, according to Unicode rules, removed.
+Trim function to filter all the records where column name with leading and trailing whitespace.
 
 
 API Usage
@@ -468,7 +424,7 @@ API Usage
 
 Example
 
-Below syntax filters all the records where trim gives CompanyName without leading or trailing whitespace characters.
+Below syntax filter all the records where trim gives CompanyName without leading or trailing whitespace characters.
 
 ```
  trim(CompanyName) eq CompanyName
