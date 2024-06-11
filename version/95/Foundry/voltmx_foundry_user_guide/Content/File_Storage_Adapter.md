@@ -12,6 +12,29 @@ You can use the service in scenarios where you want a back end to store the data
 > **_Note:_**  
 This document is about the default File Storage adapter for Volt MX Foundry. For information on connecting to a custom S3 bucket, refer to [AWS S3 Adapter](AWS_S3_Adapter.md).
 
+Please find the link of a sample app that demonstrates file upload using object service on foundry end [here](https://github.com/HCL-TECH-SOFTWARE/volt-mx-samples/tree/main/HCLFileStoreTest)
+
+Post downloading sample app:
+
+1. Pls. Load the app in iris (App type = Responsive web app).
+2. Mark frmFileStorage as startup form.
+3. Point iris to a valid foundry running on a cloud.
+   (Preferences section).
+4. Do “build & publish web” from build menu.
+5. Post successful “Build & publish” open/click the link from
+   console in browser.
+6. Launch app.
+7. The startup form will show which will allow to select &
+   upload files of various types.
+8. Once click on “Upload” button, the file will get uploaded
+   successfully & will be displayed in the upload list box with id associated.
+9. In case of deletion of file, specify the id in the text box
+   & click on “Delete” button, which will delete file.
+10. The “Download” button will allow to download file of which
+    id is specified in text box above download button.
+11. The Upload/Delete status string will be displayed at the
+    end of the form.
+
 Configure a File Storage adapter
 --------------------------------
 
