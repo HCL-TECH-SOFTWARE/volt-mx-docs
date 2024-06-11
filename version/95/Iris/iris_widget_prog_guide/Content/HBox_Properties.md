@@ -13,17 +13,17 @@ The HBox Widget supports the following properties.
 *   [contextMenu](#contextmenu)
 *   [enableCache](#enablecache)
 *   [focusSkin](#focusskin)
-*   [gridCell](#gridcell)
+*   [gridCell](#gridCell)
 *   [hoverSkin](#hoverskin)
 *   [id](#id)
 *   [info](#info)
 *   [isVisible](#isvisible)
 *   [layoutAlignment](#layoutalignment)
-*   [layoutMeta](#layoutmeta)
-*   [layoutType](#layouttype)
+*   [layoutMeta](#layoutMe)
+*   [layoutType](#layoutTy)
 *   [margin](#margin)
 *   [marginInPixel](#margininpixel)
-*   [orientation](#orientation)
+*   [orientation](#displayO)
 *   [padding](#padding)
 *   [paddingInPixel](#paddinginpixel)
 *   [percent](#percent)
@@ -41,19 +41,19 @@ You can set indexing keys to the child widgets using integers starting from 1. I
 
 Suppose multiple widgets in a container are set with same integer value, the displaying order of the widgets is based on the addition of the widgets to the container. That is, the widget added first to the container will be read first and followed by other widgets in sequence.
 
-Syntax
+<b>Syntax</b>
 
 **JavaScript:** a11yIndex
 
-Type
+<b>Type</b>
 
 **JavaScript:** Number
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Example
+<b>Example</b>
 
 ```
 
@@ -69,7 +69,7 @@ boxFocusSkinTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 alert("box focusSkin is ::"+boxFocusSkinTest.focusSkin);
 ```
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 
@@ -83,19 +83,19 @@ You can define any one of the following values to the property:
 *   constants.ACCESSIBILITY\_NAVIGATION\_MODE\_PARENT: Applies a custom navigation for widgets based on the a11yIndices set to the child widgets.
 *   constants.ACCESSIBILITY\_NAVIGATION\_MODE\_DEFAULT: Derives the property value from its immediate parent going all the way to form level.
 
-Syntax
+<b>Syntax</b>
 
 **JavaScript:** a11yNavigationMode
 
-Type
+<b>Type</b>
 
 **JavaScript:** Number
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Example
+<b>Example</b>
 
 ```
 //Defining the properties for a box with 
@@ -124,7 +124,7 @@ boxFocusSkinTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 alert("box focusSkin is :"+boxFocusSkinTest.focusSkin);
 ```
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 
@@ -138,19 +138,19 @@ To specify a skin, select a skin from the list.
 
 > **_Note:_** For the skin to be available in the list, you must add a skin for Blocked UI under Widget Skins.
 
-Syntax
+<b>Syntax</b>
 
 blockedUISkin
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -179,11 +179,11 @@ var boxblockedUISkin = new voltmx.ui.Box(basicConfBox, layoutConfBox, {blockedUI
 boxblockedUISkin.add(lblblockedUISkin);
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   SPA (iPhone/Android/BlackBerry/Windows NTH)
 
@@ -199,19 +199,19 @@ If set to _false,_ the default space between the parent and the child widget ret
 
 ![](Resources/Images/border_collapse.png)
 
-Syntax
+<b>Syntax</b>
 
 borderCollapse
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 No
 
-Example
+<b>Example</b>
 
 ```
 
@@ -226,11 +226,11 @@ var PSPConfBox = {**borderCollapse:true**}
 var boxBorderCollapse = new voltmx.ui.Box(basicConfBox, layoutConfBox, PSPConfBox );
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Server side Mobile Web (basic)
 *   Server side Mobile Web (BJS)
@@ -241,19 +241,19 @@ Specifies percentage of width to be allocated by its parent widget. The parent w
 
 For example, a Form has Label1, Button1, and Button2 and the container weight could be 30 each for Label1 and Button1 and 40 for Button2, so that the sum of the container weight is 100.
 
-Syntax
+<b>Syntax</b>
 
 containerWeight
 
-Type
+<b>Type</b>
 
 Number (less than or equal to 100)
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -266,11 +266,11 @@ var layoutConfBox = {**containerWeight:50,margin:[0,5,0,5]**};
 boxContainerWeightTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 No
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms
 
@@ -324,19 +324,19 @@ A series of steps to be followed to use contextMenu:
 3.  Go to your project and then to desired form and drag-drop a hbox and navigate to Desktop Web properties in Widget Properties window.
 4.  Select the contextmenu template from the dropdown.
 
-Syntax
+<b>Syntax</b>
 
 contextMenu
 
-Type
+<b>Type</b>
 
 Array (voltmx.ui.Menuitem)
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -415,11 +415,11 @@ var PSPConfBox = {**contextMenu:menucontainer12068**};
 var boxBorderCollapse = new voltmx.ui.Box(basicConfBox, layoutConfBox, PSPConfBox );
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 No. But for Desktop Web platform you can access it through IDE.
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Android
 *   BlackBerry
@@ -433,23 +433,23 @@ This property enables you to improve the performance of Positional Dimension Ani
 
 **Default:**_true_
 
-Syntax
+<b>Syntax</b>
 
 enableCache
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 This property is supported only on Windows platform
 
@@ -463,19 +463,19 @@ For more information on how to create and work with skins, see the _Working with
 1\. On J2ME, if you do not specify the Focus skin, it is not possible to identify the focus change between the widgets.  
 2\. Mobile Web does not support this property; instead browser specific focus will be applied.
 
-Syntax
+<b>Syntax</b>
 
 focusSkin
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -491,15 +491,16 @@ boxFocusSkinTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 alert("box focusSkin is ::"+boxFocusSkinTest.focusSkin); 
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms. and SPA (Windows Tablet only)
 
-### gridCell
+
+<h3 id="gridCell">gridCell</h3>
 
 > **_Note:_** This property is applicable only when a widget is placed inside a container widget with Grid Layout applied.
 
@@ -512,19 +513,19 @@ Represents the grid cell details in the sequence colSpan, rowSpan, rowNo, colNo.
 
 > **_Note:_** Layout type is not visible as a property. It is set when the user applies XYLayout or GridLayout on a form. The default option is XYLayout. To set GridLayout, right-click on the form and select Apply GridLayout.  
 
-Syntax
+<b>Syntax</b>
 
 gridCell
 
-Type
+<b>Type</b>
 
 JSObject
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -541,11 +542,11 @@ var layoutConfBox = {containerWeight:100, percent:false, layoutType: constants.C
 boxLayoutAlignmentLeftTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Windows Phone
 
@@ -553,19 +554,19 @@ Platform Availability
 
 Specifies the look and feel of a widget when the cursor hovers on the widget.
 
-Syntax
+<b>Syntax</b>
 
 hoverSkin
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -580,7 +581,7 @@ var PSPConfBox = {**hoverSkin:"hskin"**}
 var boxBorderCollapse = new voltmx.ui.Box(basicConfBox, layoutConfBox, PSPConfBox );
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
@@ -592,19 +593,19 @@ Availability on platforms
 
 id is a unique identifier of a Box consisting of alpha numeric characters. Every Box widget should have a unique id within a Form.
 
-Syntax
+<b>Syntax</b>
 
 id
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read only)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -623,11 +624,11 @@ alert("box id is ::"+boxIdTest.id);
 ```
 
   
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms
 
@@ -648,19 +649,19 @@ widget.info.a = 'hello world'; //This will not update the widget info a property
 
 ```
 
-Syntax
+<b>Syntax</b>
 
 info
 
-Type
+<b>Type</b>
 
 JSObject
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -676,11 +677,11 @@ boxIdTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 alert("box info is ::"+boxIdTest.info);
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 No
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms
 
@@ -696,19 +697,19 @@ If set to _true,_ the widget is displayed.
 
 > **_Note:_** This property is not applicable if the widget is placed in a [Segment](Segment.md). When the widget is placed in a Segment, the default _Visibility_ is set to _true_. If you want to change the value to _false_, you can do so using the [Segment Methods](Segment_Methods.md).  
 
-Syntax
+<b>Syntax</b>
 
 isVisible
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -737,11 +738,11 @@ alert("Second box visibility is ::"+boxisVisibleTest.isVisible);
 
 > **_Note:_** You can set the visibility of a widget dynamically from code using the setVisibility method.
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes (Except for form/popup)
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms. and Win Mobile6x.
 
@@ -759,19 +760,19 @@ The available options are:
 
 > **_Note:_** To set the value through code, prefix the option with _constants._ such as _**constants.<option>**_ .
 
-Syntax
+<b>Syntax</b>
 
 layoutAlignment
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 No
 
-Example
+<b>Example</b>
 
 ```
 
@@ -784,15 +785,16 @@ var layoutConfBox = {containerWeight:100, percent:false, **layoutAlignment:const
 boxLayoutAlignmentLeftTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms
 
-### layoutMeta
+
+<h3 id="layoutMe">layoutmeta</h3>
 
 A custom JSObject with the key, value pairs that developer can use to provide the meta info about the grid layout. The following are the mandatory keys required to be part of the Meta.
 
@@ -806,19 +808,19 @@ A custom JSObject with the key, value pairs that developer can use to provide th
 
 The sum total of percentage (%) widths of each of the columns in the grid layout should add up to 100%.
 
-Syntax
+<b>Syntax</b>
 
 layoutMeta
 
-Type
+<b>Type</b>
 
 JSObject
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -835,15 +837,17 @@ var layoutConfBox = {containerWeight:100, percent:false, layoutType: constants.C
 boxLayoutAlignmentLeftTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Windows Tablet
 
-### layoutType
+
+<h3 id="layoutTy">layoutType</h3>  
+
 
 Defines the type of the layout of container widget. Following are the available options:
 
@@ -852,19 +856,19 @@ Defines the type of the layout of container widget. Following are the available 
 
 > **_Note:_** Layout type is not visible as a property. It is set when the user applies XYLayout or GridLayout on a form. From the IDE, the default option is XYLayout. To set GridLayout, right-click on the form and select Apply GridLayout.  
 
-Syntax
+<b>Syntax</b>
 
 layoutType
 
-Type
+<b>Type</b>
 
 String - \[Mandatory\]
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read only)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -882,11 +886,11 @@ var layoutConfBox = {containerWeight:100, percent:false, **layoutType: constants
 boxLayoutAlignmentLeftTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Windows Tablet
 
@@ -906,19 +910,19 @@ The following image illustrates a widget with a defined margin:
 
 ![](Resources/Images/Margin.png)
 
-Syntax
+<b>Syntax</b>
 
 margin
 
-Type
+<b>Type</b>
 
 Array of Numbers
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -931,11 +935,11 @@ var layoutConfBox = { containerWeight:100, **margin:[0,5,0,5]**};
 boxMarginTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms. platforms.
 
@@ -949,19 +953,19 @@ If set to _true,_ the margins are applied in pixels.
 
 If set to _false,_ the margins are applied as set in [margin](#margin) property.
 
-Syntax
+<b>Syntax</b>
 
 marginInPixel
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 No
 
-Example
+<b>Example</b>
 
 ```
 
@@ -974,38 +978,38 @@ var layoutConfBox = { containerWeight:100, margin:[0,5,0,5], **marginInPixel:tru
 boxMarginTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iPhone
 *   iPad
 *   Android
 *   Windows Phone
 
-### orientation
+<h3 id="displayO">Orientation</h3>
 
 Specifies the orientation of the HBox. The widgets placed in a HBox are aligned horizontally.
 
 **Default:** BOX\_LAYOUT\_HORIZONTAL
 
-> **_Note:_** To set the value through code, prefix the option with _constants._ such as _**constants.<option>**_ .
+> **_Note:_** To set the value through code, prefix the option with _constants._ such as _**constants.\<option\>**_ .
 
-Syntax
+<b>Syntax</b>
 
 orientation
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read only)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -1023,11 +1027,11 @@ alert("box orientation is ::"+boxIdTest.orientation);
 
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 No
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms
 
@@ -1049,19 +1053,19 @@ The following image illustrates a widget with a defined padding:
 
 ![](Resources/Images/Padding.png)
 
-Syntax
+<b>Syntax</b>
 
 padding
 
-Type
+<b>Type</b>
 
 Array of Numbers
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -1074,11 +1078,11 @@ var layoutConfBox = { containerWeight:100, **padding:[10,10,10,10]**};
 boxPaddingTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms
 
@@ -1103,19 +1107,19 @@ If set to _false,_ the padding is applied as set in [padding](#padding) property
 
 > **_Note:_** For backward compatibility on older projects, this property is will be made _true_ for iPhone, iPad, Android and Windows Phone and for other platforms it will be _false_.
 
-Syntax
+<b>Syntax</b>
 
 paddingInPixel
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 No
 
-Example
+<b>Example</b>
 
 ```
 
@@ -1128,11 +1132,11 @@ var layoutConfBox = { containerWeight:100, padding:[10,10,10,10], **paddingInPix
 boxPaddingTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iPhone
 *   iPad
@@ -1157,19 +1161,19 @@ If set to _false,_ the [layoutAlignment](#layoutalignment) is considered.
 
 If set to _true,_ the [containerWeight](#containerweight) is considered.
 
-Syntax
+<b>Syntax</b>
 
 percent
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 No
 
-Example
+<b>Example</b>
 
 ```
 
@@ -1189,11 +1193,11 @@ layoutConfBox = { ontainerWeight:100, **percent:true**, margin:[0,5,0,5]};
 boxPercentTestTrue = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms
 
@@ -1215,19 +1219,19 @@ Following are the options available:
 
 > **_Note:_** To set the value through code, prefix the option with _constants._ such as _**constants.<option>**_ .
 
-Syntax
+<b>Syntax</b>
 
 position
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 No
 
-Example
+<b>Example</b>
 
 ```
 
@@ -1248,11 +1252,11 @@ boxPositionTestFooter = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms except SPA platforms.
 
@@ -1262,19 +1266,19 @@ Specifies the look and feel of the widget when not in focus.
 
 > **_Note:_** In BlackBerry platform, HBox background image (in the skin) does not get expanded. Image is displayed as per the original size. Its a limitation in BlackBerry.
 
-Syntax
+<b>Syntax</b>
 
 skin
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -1290,11 +1294,11 @@ boxSkinTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 alert("box skin is ::"+boxSkinTest.skin); 
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms
 
@@ -1310,19 +1314,19 @@ If set to _false,_ the widget occupies the preferred height.
 
 ![Widget when the Expand vertical is set to true ](Resources/Images/Expand_Vertical.png)
 
-Syntax
+<b>Syntax</b>
 
 vExpand
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 No
 
-Example
+<b>Example</b>
 
 ```
 
@@ -1346,11 +1350,11 @@ boxvExpandFalseTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms except Desktop Web and Server side Mobile Web platforms.
 
@@ -1452,19 +1456,19 @@ Possible values for Size Mode:
 *   constants.GRID\_TYPE\_GROW\_ROWS  
     
 
-Syntax
+<b>Syntax</b>
 
 viewConfig
 
-Type
+<b>Type</b>
 
 JSObject
 
-Read/Write
+<b>Read/Write</b>
 
 Yes
 
-Example
+<b>Example</b>
 
 ```
 
@@ -1483,11 +1487,11 @@ var PSPConfBox = { viewConfig: {
 boxIdTest = new voltmx.ui.Box(basicConfBox, layoutConfBox, PSPConfBox ); 
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 This property is available on Windows Tablet platform.
 
@@ -1509,19 +1513,19 @@ The available options are:
 *   WIDGET\_ALIGN\_BOTTOM\_CENTER
 *   WIDGET\_ALIGN\_BOTTOM\_RIGHT - (BlackBerry 10 supports this option)
 
-Syntax
+<b>Syntax</b>
 
 widgetAlignment
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read only)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -1536,11 +1540,11 @@ boxwidgetAlignment = new voltmx.ui.Box(basicConfBox, layoutConfBox, {});
 
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   Server side Mobile Web
 *   SPA

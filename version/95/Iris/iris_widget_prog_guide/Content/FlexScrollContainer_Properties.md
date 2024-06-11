@@ -3003,7 +3003,7 @@ frmFlxScroll.myFlxScroll.scrollDirection=voltmx.flex.SCROLL_BOTH;
 * * *
 
 </details>
-<details close markdown="block"><summary>scrollsToTop Property</summary>
+<details close markdown="block"><summary id="syntax_59">scrollsToTop Property</summary>
 
 * * *
 
