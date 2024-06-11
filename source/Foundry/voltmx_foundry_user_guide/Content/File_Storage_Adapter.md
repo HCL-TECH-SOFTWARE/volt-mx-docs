@@ -12,8 +12,9 @@ You can use the service in scenarios where you want a back end to store the data
 > **_Note:_**  
 This document is about the default File Storage adapter for Volt MX Foundry. For information on connecting to a custom S3 bucket, refer to [AWS S3 Adapter](AWS_S3_Adapter.md).
 
-Please find the link of a sample app that demonstrates file upload using object service on foundry end [here](https://github.com/HCL-TECH-SOFTWARE/volt-mx-samples/tree/main/HCLFileStoreTest)
+This document is about the default File Storage adapter for Volt MX Foundry. For information on connecting to a custom S3 bucket, refer to [AWS S3 Adapter](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/AWS_S3_Adapter.html).
 
+Please find the link of a sample app that demonstrates file upload using object service on foundry end [here](https://github.com/HCL-TECH-SOFTWARE/volt-mx-samples/tree/main/HCLFileStoreTest)
 
 Post downloading sample app:
 
