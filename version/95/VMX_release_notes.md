@@ -908,6 +908,8 @@ June 10, 2024
 * Expanded the scope of OData4 filters by adding new operations.
 * Strengthened security.
 
+> **Note :** The scope of the on-prem installer for this release is limited to MySQL and MariaDB configurations.
+
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 
