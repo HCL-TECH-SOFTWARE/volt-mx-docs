@@ -85,7 +85,7 @@ Animation Properties Events and Methods
 Following are the widget level properties, events, and methods that are allowed to be part of the animation definition.
 
 
-<details close markdown="block"><summary>animate</summary>
+<details close markdown="block"><summary id="animateH">animate</summary>
 
 This method applies the animation to the widget immediately, if the widget is part of the currently visible view hierarchy. If widget is not part of the currently visible view hierarchy then this API invocation is ignored. This method is asynchronous and immediately returns and do not wait for the animation to start or complete.
 

@@ -360,7 +360,7 @@ This property is available on Windows Phone 8.1
 * * *
 
 </details>
-<details close markdown="block"><summary>contextPath</summary>
+<details close markdown="block"><summary id="contextP">contextPath</summary>
 
 * * *
 
@@ -1771,7 +1771,7 @@ This property is available on Desktop Web platform.
 * * *
 
 </details>
-<details close markdown="block"><summary>scrollsToTop</summary>
+<details close markdown="block"><summary id="scrollsT">scrollsToTop</summary>
 
 * * *
 
@@ -1855,7 +1855,7 @@ var popUp=new voltmx.ui.Popup(popBasic, popLayout, popPSP);
 * * *
 
 </details>
-<details close markdown="block"><summary>showMiniAppMenu</summary>
+<details close markdown="block"><summary id="showMini">showMiniAppMenu</summary>
 
 * * *
 

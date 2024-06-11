@@ -45,19 +45,19 @@ You can set indexing keys to the child widgets using integers starting from 1. I
 
 Suppose multiple widgets in a container are set with same integer value, the displaying order of the widgets is based on the addition of the widgets to the container. That is, the widget added first to the container will be read first and followed by other widgets in sequence.
 
-Syntax
+<b>Syntax</b>
 
 **JavaScript:** a11yIndex
 
-Type
+<b>Type</b>
 
 **JavaScript:** Number
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Example
+<b>Example</b>
 
 ```
 
@@ -72,7 +72,7 @@ var scrollPSP = {bounces:true };
 var scrollBox = new voltmx.ui.ScrollBox(scrollBasic, scrollLayout, scrollPSP);
 ```
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 
@@ -86,19 +86,19 @@ You can define any one of the following values to the property:
 *   constants.ACCESSIBILITY\_NAVIGATION\_MODE\_PARENT: Applies a custom navigation for widgets based on the a11yIndices set to the child widgets.
 *   constants.ACCESSIBILITY\_NAVIGATION\_MODE\_DEFAULT: Derives the property value from its immediate parent going all the way to form level.
 
-Syntax
+<b>Syntax</b>
 
 **JavaScript:** a11yNavigationMode
 
-Type
+<b>Type</b>
 
 **JavaScript:** Number
 
-Read/Write
+<b>Read/Write</b>
 
 Read + Write
 
-Example
+<b>Example</b>
 
 ```
 
@@ -113,11 +113,12 @@ var scrollPSP = {bounces:true };
 var scrollBox = new voltmx.ui.ScrollBox(scrollBasic, scrollLayout, scrollPSP);
 ```
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iOS
 
-### bounces
+
+<h3 id="bounces">bounces</h3>  
 
 Specifies whether the scroll view bounces past the edge of the content and back again.
 
@@ -127,19 +128,19 @@ If set to _false,_ the scroll view bounce is not applied.
 
 If set to _true,_ the scroll view bounce is applied.
 
-Syntax
+<b>Syntax</b>
 
 bounces
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -154,11 +155,11 @@ var scrollPSP = {**bounces:true** };
 var scrollBox = new voltmx.ui.ScrollBox(scrollBasic, scrollLayout, scrollPSP);
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iPhone
 *   iPad
@@ -185,19 +186,19 @@ Additional rules for containerHeight property based on the scrollDirection:
 | \>=0 | SCROLLBOX\_HEIGHT\_BY\_FORM\_REFERENCE | Based on containerHeight and containerHeightReference appropriately |
 | \>=0 | SCROLLBOX\_HEIGHT\_BY\_PARENT\_WIDTH | Based on containerHeight and containerHeightReference appropriately |
 
-Syntax
+<b>Syntax</b>
 
 containerHeight
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Yes- (Read and Write)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -218,7 +219,7 @@ Accessible form IDE
 
 No
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms. platforms.
 
@@ -235,19 +236,19 @@ The container height percentage is calculated based on the below options.
 
 > **_Note:_** To set the value through code, prefix the option with _constants._ such as _**constants.<option>**_ .
 
-Syntax
+<b>Syntax</b>
 
 containerHeightReference
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -267,11 +268,11 @@ alert("ScrollBox containerHeightReference ::"+scrollBox.containerHeightReference
 
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms. platforms.
 
@@ -279,19 +280,19 @@ Available on all platforms. platforms.
 
 Specifies percentage of width to be allocated by its parent widget. The parent widget space is distributed to its child widgets based on this weight factor. All its child widgets should sum up to 100% of weight except when placed in **voltmx.ui.ScrollBox**.
 
-Syntax
+<b>Syntax</b>
 
 containerWeight
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -309,11 +310,11 @@ var scrollBox = new voltmx.ui.ScrollBox(scrollBasic, scrollLayout, scrollPSP);
 alert("ScrollBox containerWeight ::"+scrollBox.containerWeight);
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms. platforms.
 
@@ -342,19 +343,19 @@ The following images illustrates the context menu on various BlackBerry devices:
 
   
 
-Syntax
+<b>Syntax</b>
 
 contextMenu
 
-Type
+<b>Type</b>
 
 JSObject
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -402,11 +403,11 @@ var scrollBox = new voltmx.ui.ScrollBox(scrollBasic, scrollLayout, scrollPSP);
 ```
 
   
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 No
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   BlackBerry
 *   Android
@@ -420,23 +421,23 @@ This property enables you to improve the performance of Positional Dimension Ani
 
 **Default:**_true_
 
-Syntax
+<b>Syntax</b>
 
 enableCache
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 This property is supported only on Windows platform
 
@@ -450,19 +451,19 @@ If set to _true,_ the scroll by page is enabled.
 
 If set to _false,_ the scroll by page is disabled.
 
-Syntax
+<b>Syntax</b>
 
 enableScrollByPage
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 No
 
-Example
+<b>Example</b>
 
 ```
 
@@ -479,11 +480,11 @@ var scrollBox = new voltmx.ui.ScrollBox(scrollBasic, scrollLayout, scrollPSP);
 
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iPhone
 *   iPad
@@ -493,19 +494,19 @@ Platform Availability
 
 id is a unique identifier of a ScrollBox consisting of alpha numeric characters. Every ScrollBox should have a unique id within a Form.
 
-Syntax
+<b>Syntax</b>
 
 id
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read only)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -521,11 +522,11 @@ var scrollBox = new voltmx.ui.ScrollBox(scrollBasic, scrollLayout, scrollPSP);
 ```
 
   
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms
 
@@ -544,19 +545,19 @@ widget.info = inf; //works
 widget.info.a = 'hello world'; //This will not update the widget info a property to Hello world. widget.info.a will have old value as hello.
 ```
 
-Syntax
+<b>Syntax</b>
 
 info
 
-Type
+<b>Type</b>
 
 JSObject
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -572,11 +573,11 @@ var scrollBox = new voltmx.ui.ScrollBox(scrollBasic, scrollLayout, scrollPSP);
 **scrollBox.info = {key:"SCROLL"};**
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 No
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms
 
@@ -590,19 +591,19 @@ If set to _false,_ the widget is not displayed.
 
 If set to _true,_ the widget is displayed.
 
-Syntax
+<b>Syntax</b>
 
 isVisible
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -621,11 +622,11 @@ var scrollBox = new voltmx.ui.ScrollBox(scrollBasic, scrollLayout, scrollPSP);
 
 > **_Note:_** You can set the visibility of a widget dynamically from code using the setVisibility method.
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms. platforms.
 
@@ -643,19 +644,19 @@ The available options are:
 
 > **_Note:_** To set the value through code, prefix the option with _constants._ such as _**constants.<option>**_ .
 
-Syntax
+<b>Syntax</b>
 
 layoutAlignment
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 No
 
-Example
+<b>Example</b>
 
 ```
 
@@ -670,11 +671,11 @@ var scrollPSP = {};
 var scrollBox = new voltmx.ui.ScrollBox(scrollBasic, scrollLayout, scrollPSP);
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms. platforms.
 
@@ -694,19 +695,19 @@ The following image illustrates a widget with a defined margin:
 
 ![](Resources/Images/Margin.png)
 
-Syntax
+<b>Syntax</b>
 
 margin
 
-Type
+<b>Type</b>
 
 Array
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -723,11 +724,11 @@ var scrollBox = new voltmx.ui.ScrollBox(scrollBasic, scrollLayout, scrollPSP);
 
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms. platforms.
 
@@ -741,19 +742,19 @@ If set to _true,_ the margins are applied in pixels.
 
 If set to _false,_ the margins are applied as set in [margin](#margin) property.
 
-Syntax
+<b>Syntax</b>
 
 marginInPixel
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 No
 
-Example
+<b>Example</b>
 
 ```
 
@@ -768,11 +769,11 @@ var scrollPSP = {};
 var scrollBox = new voltmx.ui.ScrollBox(scrollBasic, scrollLayout, scrollPSP);
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iPhone
 *   iPad
@@ -794,19 +795,19 @@ The available options are:
 
 > **_Note:_** To set the value through code, prefix the option with _constants._ such as _**constants.<option>**_ .
 
-Syntax
+<b>Syntax</b>
 
 orientation
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read only)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -824,11 +825,11 @@ var scrollBox = new voltmx.ui.ScrollBox(scrollBasic, scrollLayout, scrollPSP);
 ```
 
   
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms. platforms.
 
@@ -852,19 +853,19 @@ The following image illustrates a widget with a defined padding:
 
 ![](Resources/Images/Padding.png)
 
-Syntax
+<b>Syntax</b>
 
 padding
 
-Type
+<b>Type</b>
 
 Array of Numbers
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -881,11 +882,11 @@ var scrollBox = new voltmx.ui.ScrollBox(scrollBasic, scrollLayout, scrollPSP);
 
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms. platforms.
 
@@ -903,19 +904,19 @@ If set to _false,_ the padding are applied as set in [padding](#padding) propert
 
 > **_Note:_** For backward compatibility on older projects, this property is will be made _true_ for iPhone, iPad, Android and Windows Phone and for other platforms it will be _false_.
 
-Syntax
+<b>Syntax</b>
 
 paddingInPixel
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 No
 
-Example
+<b>Example</b>
 
 ```
 
@@ -930,11 +931,11 @@ var scrollPSP = {};
 var scrollBox = new voltmx.ui.ScrollBox(scrollBasic, scrollLayout, scrollPSP);
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iPhone
 *   iPad
@@ -953,19 +954,19 @@ If set to _false,_ the [layoutAlignment](#layoutalignment) is considered.
 
 If set to _true,_ the [containerWeight](#containerweight) is considered.
 
-Syntax
+<b>Syntax</b>
 
 percent
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 No
 
-Example
+<b>Example</b>
 
 ```
 
@@ -982,11 +983,11 @@ var scrollBox = new voltmx.ui.ScrollBox(scrollBasic, scrollLayout, scrollPSP);
 
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms. platforms.
 
@@ -1008,19 +1009,19 @@ This property is respected only for immediate child box (with horizontal orienta
 
 > **_Note:_** To set the value through code, prefix the option with _constants._ such as _**constants.<option>**_ .
 
-Syntax
+<b>Syntax</b>
 
 position
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 No
 
-Example
+<b>Example</b>
 
 ```
 
@@ -1037,11 +1038,11 @@ var scrollBox = new voltmx.ui.ScrollBox(scrollBasic, scrollLayout, scrollPSP);
 
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms. and Desktop Web platforms.
 
@@ -1051,23 +1052,23 @@ Specifies the i18N key for "pull to refresh" title. The platforms get the value 
 
 > **_Note:_** This property is supported when the orientation is set as BOX\_LAYOUT\_VERTICAL.
 
-Syntax
+<b>Syntax</b>
 
 pullToRefreshI18NKey
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms except Windows Desktop.
 
@@ -1090,23 +1091,23 @@ Following are the skin definition properties:
 
 > **_Note:_** The "release to refresh" title picks the skin of "pull to refresh" or "release to refresh" respectively.
 
-Syntax
+<b>Syntax</b>
 
 pullToRefreshSkin
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms except Windows Desktop
 
@@ -1116,23 +1117,23 @@ Specifies the i18N key for "push to refresh" title. The platforms get the value 
 
 > **_Note:_** This property is supported when the orientation is set as BOX\_LAYOUT\_VERTICAL.
 
-Syntax
+<b>Syntax</b>
 
 pushToRefreshI18NKey
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms except Windows Desktop
 
@@ -1155,23 +1156,23 @@ Following are the skin definition properties:
 
 > **_Note:_** The "release to refresh" title picks the skin of "pull to refresh" or "release to refresh" respectively.
 
-Syntax
+<b>Syntax</b>
 
 pushToRefreshSkin
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms except Windows Desktop
 
@@ -1181,23 +1182,23 @@ Specifies the i18N key for "release to refresh" title that appears for pull to r
 
 > **_Note:_** This property is supported when the orientation is set as BOX\_LAYOUT\_VERTICAL.
 
-Syntax
+<b>Syntax</b>
 
 releaseToPullRefreshI18NKey
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms except BlackBerry, Windows Desktop
 
@@ -1207,23 +1208,23 @@ Specifies the i18N key for "release to refresh" title that appears for push for 
 
 > **_Note:_** This property is supported when the orientation is set as BOX\_LAYOUT\_VERTICAL.
 
-Syntax
+<b>Syntax</b>
 
 releaseToPushRefreshI18NKey
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms except BlackBerry, Windows Desktop
 
@@ -1236,19 +1237,19 @@ Specifies the images to indicate the scroll arrows of the ScrollBox in four dire
 *   topArrow:Specifies the image location of the top arrow.
 *   bottomArrow:Specifies the image location of the bottom arrow.
 
-Syntax
+<b>Syntax</b>
 
 scrollArrowConfig
 
-Type
+<b>Type</b>
 
 Array
 
-Read/Write
+<b>Read/Write</b>
 
 No
 
-Example
+<b>Example</b>
 
 ```
 
@@ -1265,11 +1266,11 @@ var scrollBox = new voltmx.ui.ScrollBox(scrollBasic, scrollLayout, scrollPSP);
 
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   SPA (iPhone/Android/BlackBerry/Windows NTH)
 
@@ -1290,19 +1291,19 @@ The available options are:
 
 > **_Note:_** To set the value through code, prefix the option with _constants._ such as _**constants.<option>**_ .
 
-Syntax
+<b>Syntax</b>
 
 scrollDirection
 
-Type
+<b>Type</b>
 
 Number
 
-Read/Write
+<b>Read/Write</b>
 
 No
 
-Example
+<b>Example</b>
 
 ```
 
@@ -1317,11 +1318,11 @@ var scrollPSP = {};
 var scrollBox = new voltmx.ui.ScrollBox(scrollBasic, scrollLayout, scrollPSP);
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms. platforms.
 
@@ -1333,19 +1334,19 @@ Default:false
 
 > **_Note:_** If this property is true for more than one widget, then this property is not applied to any of the widgets.
 
-Syntax
+<b>Syntax</b>
 
 scrollsToTop
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -1362,11 +1363,11 @@ var scrollBox = new voltmx.ui.ScrollBox(scrollBasic, scrollLayout, scrollPSP);
 frm.scrollBox.scrollsToTop = true
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 No
 
-Platform Availability
+<b>Platform Availability</b>
 
 *   iPhone
 *   iPad
@@ -1381,19 +1382,19 @@ If set to _false,_ the scroll view horizontal and vertical edges are not faded w
 
 If set to _true,_ the scroll view horizontal and vertical edges will appear as faded when scrolled.
 
-Syntax
+<b>Syntax</b>
 
 showFadingEdges
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -1410,11 +1411,11 @@ var scrollBox = new voltmx.ui.ScrollBox(scrollBasic, scrollLayout, scrollPSP);
 
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 No
 
-Platform Availability
+<b>Platform Availability</b>
 
 This property is available on Android platform.
 
@@ -1430,19 +1431,19 @@ If set to _true,_ the scrollbars are displayed.
 
 > **_Note:_** On iPhone platform scrollbars are visible while scrolling and become invisible once you stop scrolling.
 
-Syntax
+<b>Syntax</b>
 
 showScrollbars
 
-Type
+<b>Type</b>
 
 Boolean
 
-Read/Write
+<b>Read/Write</b>
 
 No
 
-Example
+<b>Example</b>
 
 ```
 
@@ -1459,11 +1460,11 @@ var scrollBox = new voltmx.ui.ScrollBox(scrollBasic, scrollLayout, scrollPSP);
 
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms except BlackBerry 10, and Windows Desktop platforms.
 
@@ -1471,19 +1472,19 @@ Available on all platforms except BlackBerry 10, and Windows Desktop platforms.
 
 Specifies a background skin for ScrollBox widget.
 
-Syntax
+<b>Syntax</b>
 
 skin
 
-Type
+<b>Type</b>
 
 String
 
-Read/Write
+<b>Read/Write</b>
 
 Yes - (Read and Write)
 
-Example
+<b>Example</b>
 
 ```
 
@@ -1499,11 +1500,11 @@ var scrollBox = new voltmx.ui.ScrollBox(scrollBasic, scrollLayout, scrollPSP);
 
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 Available on all platforms. platforms
 
@@ -1532,19 +1533,19 @@ Possible values for Size Mode:
 *   constants.GRID\_TYPE\_GROW\_COLUMNS
 *   constants.GRID\_TYPE\_GROW\_ROWS
 
-Syntax
+<b>Syntax</b>
 
 viewConfig
 
-Type
+<b>Type</b>
 
 Object
 
-Read/Write
+<b>Read/Write</b>
 
 No
 
-Example
+<b>Example</b>
 
 ```
 
@@ -1574,11 +1575,11 @@ var scrollBox = new voltmx.ui.ScrollBox(scrollBasic, scrollLayout, scrollPSP);
 
 ```
 
-Accessible from IDE
+<b>Accessible from IDE</b>
 
 Yes
 
-Platform Availability
+<b>Platform Availability</b>
 
 This property is available on Windows Tablet platform.
 
