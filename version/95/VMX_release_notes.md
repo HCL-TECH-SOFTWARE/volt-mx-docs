@@ -93,8 +93,9 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 June 10, 2024
 
 * Updated the mfcli JAR in Web Studio.
-* Strengthened security options for the App binary.
-* Strengthened security of the platform.
+* Added support for Async functions as a part of NFIs for Desktop Native channel. 
+* Enhanced security strengths options for the App binary.
+* Security hardening of the platform.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
