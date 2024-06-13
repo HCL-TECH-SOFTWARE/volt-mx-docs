@@ -369,7 +369,7 @@ Below syntax filter all the records where `second(BirthDate)` eq `40`.
 
  Filters to list all the recodrs where post rounding the column value is equal to provided number.
 
- ### Ceiling 
+### Ceiling 
  
   API Usage
 
@@ -381,7 +381,7 @@ Example
 
 Below syntax filter all the records where `ceiling` rounds upto `32`.
  
- ### Floor
+### Floor
  
  API Usage
 
@@ -394,7 +394,7 @@ Example
 Below syntax filter all the records where `ceiling` rounds upto `32`.
 
 
- ### Round 
+### Round 
 
 API Usage
 
