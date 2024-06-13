@@ -90,7 +90,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 ## Volt Iris
 
 ### V9 Servicepack 5 Fixpack 32
-June 10, 2024
+June 12, 2024
 
 * Updated the mfcli JAR in Web Studio.
 * Added support for Async functions as a part of NFIs for Desktop Native channel. 
