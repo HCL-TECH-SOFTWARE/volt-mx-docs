@@ -3543,17 +3543,6 @@ No
 
 If you specify a tickedImage, ensure that you also specify an [unTickedimage](#unTicked). If not defined, the behavior will be undefined.
 
-You can create an image Object by using voltmx.image Namespace functions.
-
-### Example
-
-```
-
-//Sample code to set the tickedImage property of a CheckBoxGroup widget.  
-  
-frmCheckBox.myCheckBox.tickedImage="tickedImg.png";
-```
-
 ### Platform Availability
 
 *   Available in the IDE
@@ -3720,17 +3709,6 @@ No
 ### Remarks
 
 If you specify an unTickedImage, ensure that you also specify a [tickedImage](#tickedIm). If not specified, the behavior will be undefined.
-
-You can create an image Object by using voltmx.image Namespace functions.
-
-### Example
-
-```
-
-//Sample code to set the unTickedImage property of a CheckBoxGroup widget.  
-  
-frmCheckBox.myCheckBox.unTickedImage="UntickedImg.png";
-```
 
 ### Platform Availability
 
