@@ -83,7 +83,7 @@ Following are the parameters of the object.
 
 > **_originalURL \[String\]_ - Optional**
 > 
-> Specifies the original url.
+> Specifies the original url of the current page.
 > 
 > **q_ueryParams\[Object\]_ - Optional**
 > 
@@ -203,7 +203,6 @@ All errors reported by this callback:
 | 1016 | Resource related Errors |   | Found Gone MultipleChoices NotModified RequestedRangeNotSatisfiable LengthRequired NotAcceptable UnsupportedMediaType | ErrorResourceUnavailable, ErrorZeroByteResource |
 | 1018 | SSL related error | ERROR\_FAILED\_SSL\_HANDSHAKE | CertificateCommonNameIsIncorrect, CertificateContainsErrors, CertificateExpired, CertificateIsInvalid, CertificateRevoked, CertificateRevoked | ErrorSecureConnectionFailed,  ErrorServerCertificateHasBadDate,  ErrorServerCertificateUntrusted,  ErrorServerCertificateHasUnknownRoot,  ErrorServerCertificateNotYetValid,  ErrorClientCertificateRejected,  ErrorClientCertificateRequired,  ErrorCannotLoadFromNetwork |
 
-This event is called only for the given request URL, but not for the subsequent web navigation request failures.
 
 This event is also not called when [htmlString](Browser_Properties.md#htmlString) is set to the web widget.
 
@@ -260,7 +259,7 @@ The following are the parameters of the params object.
 
 _originalURL \[String\] - Optional_
 
-Specifies the original url.
+Specifies the original url of the current page.
 
 _queryParams\[Object\] - Optional_
 
@@ -316,7 +315,7 @@ The following are the parameters of the params object.
 
 _originalURL \[String\] - Optional_
 
-Specifies the original url.
+Specifies the original url of the current page.
 
 _queryParams\[Object\] - Optional_
 
