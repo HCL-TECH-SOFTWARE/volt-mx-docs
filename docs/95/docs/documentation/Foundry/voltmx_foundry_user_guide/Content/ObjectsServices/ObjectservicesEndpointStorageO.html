@@ -1,0 +1,2525 @@
+<!-- Elements added to main will be displayed on all pages -->
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/ObjectsServices/ObjectservicesEndpointStorageO.html">
+      
+      
+        <link rel="prev" href="ObjectservicesEndpointSDO.html">
+      
+      
+        <link rel="next" href="../FileServiceAdapters.html">
+      
+      <link rel="icon" href="../../../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.1.18">
+    
+    
+      
+        <title>Creating Storage Object Service - HCL Volt MX Documentation V9.5</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.26e3688c.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/vmx_style.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#create-a-storage-object-service" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+<div class="content-types-banner">
+    <ul class="sub-nav">
+        <li class="home-link">
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/index.html"  class="sub-link ">Home</a>
+        </li>
+        <li>
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/tutorials/Tutorials.html" class="sub-link">Tutorials</a>
+        </li>
+        <li>
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/index.html" class="sub-link" id="docLink">Documentation</a>
+        </li>
+        <li>
+            <a href="https://support.hcltechsw.com/csm?id=kb_search&spa=1&kb_category=db382ff1db631c14a45ad9fcd3961936" title="Articles" class="sub-link">Articles</a>
+        </li>
+        <li>
+            <a href="https://hclsoftwareu.hcltechsw.com/#VoltMxLearningJourneys" title="Articles" class="sub-link">Software Academy</a>
+        </li>
+        <li style="float:right">
+          <button onclick="myFunction92()" style="color:white; border-radius:5px ;padding:5px 10px 5px 10px; border: 2px solid white;" class="sub-link" id="docLink92">Switch to V9.2</button>
+      </li>
+    </ul>
+</div>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="HCL Volt MX Documentation V9.5" class="md-header__button md-logo" aria-label="HCL Volt MX Documentation V9.5" data-md-component="logo">
+      
+  <img src="../../../../assets/favicon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HCL Volt MX Documentation V9.5
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Creating Storage Object Service
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    HCL-TECH-SOFTWARE/volt-mx-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="HCL Volt MX Documentation V9.5" class="md-nav__button md-logo" aria-label="HCL Volt MX Documentation V9.5" data-md-component="logo">
+      
+  <img src="../../../../assets/favicon.png" alt="logo">
+
+    </a>
+    HCL Volt MX Documentation V9.5
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    HCL-TECH-SOFTWARE/volt-mx-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+                 
+  
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1"
+    type="checkbox"
+    id="__nav_1"
+    checked
+  />
+             
+  <nav
+    class="md-nav md-nested-nav"
+    aria-label="Introducing Volt MX"
+    data-md-level="1"
+  >
+    <label class="md-nav__title" for="__nav_1">
+      <span class="md-nav__icon md-icon"></span>
+      Introducing Volt MX
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+       
+                
+<li class="md-nav__item">
+  <a href="../../../../index.html" class="md-nav__link">
+    Introducing Volt MX
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_2"
+    type="checkbox"
+    id="__nav_1_2"
+    
+  />
+                              
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../../../Whats_New_Main_Page.html"> What&apos;s New </a>
+    <label for="__nav_1_2">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="../../../../VMX_release_notes.html" class="md-nav__link">
+    Release Notes
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_4"
+    type="checkbox"
+    id="__nav_1_4"
+    
+  />
+                  
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../../../Iris/app_platform/Content/AppPlatform_Overview.html"> App Platform </a>
+    <label for="__nav_1_4">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_5"
+    type="checkbox"
+    id="__nav_1_5"
+    
+  />
+                                                            
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../../../tutorials/Tutorials.html"> Tutorials </a>
+    <label for="__nav_1_5">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="../../../installationGuides.html" class="md-nav__link">
+    Installation Guides
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7"
+    type="checkbox"
+    id="__nav_1_7"
+    
+  />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../../../Iris/voltmxIrisFundamentals.html"> Iris </a>
+    <label for="__nav_1_7">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+               
+  
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8"
+    type="checkbox"
+    id="__nav_1_8"
+    checked
+  />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../../voltmxFoundryFundamentals.html"> Foundry </a>
+    <label for="__nav_1_8">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+  <nav
+    class="md-nav md-nested-nav"
+    aria-label="Foundry"
+    data-md-level="2"
+  >
+    <label class="md-nav__title" for="__nav_1_8">
+      <span class="md-nav__icon md-icon"></span>
+      Foundry
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+       
+                
+<li class="md-nav__item">
+  <a href="../../../voltmxFoundryFundamentals.html" class="md-nav__link">
+    Fundamentals
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_2"
+    type="checkbox"
+    id="__nav_1_8_2"
+    
+  />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../../installing_foundry.html"> Installing Foundry </a>
+    <label for="__nav_1_8_2">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+               
+  
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3"
+    type="checkbox"
+    id="__nav_1_8_3"
+    checked
+  />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../Introduction.html"> Volt MX Foundry User Guide </a>
+    <label for="__nav_1_8_3">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+  <nav
+    class="md-nav md-nested-nav"
+    aria-label="Volt MX Foundry User Guide"
+    data-md-level="3"
+  >
+    <label class="md-nav__title" for="__nav_1_8_3">
+      <span class="md-nav__icon md-icon"></span>
+      Volt MX Foundry User Guide
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+       
+                
+<li class="md-nav__item">
+  <a href="../Introduction.html" class="md-nav__link">
+    Overview
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../Preface.html" class="md-nav__link">
+    Preface
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../../../foundrySDKs.html" class="md-nav__link">
+    Foundry SDKs
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../Accessing_VoltMX_MBaaS_Portal.html" class="md-nav__link">
+    Accessing Volt MX Foundry Console - Volt MX Cloud
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../Environments-Cloud.html" class="md-nav__link">
+    Environments - Volt MX Cloud
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../Account_Settings_User_ACLs.html" class="md-nav__link">
+    Default Access Control Lists (ACLs) on New Apps and Services
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../UpgradeCloud.html" class="md-nav__link">
+    Volt MX Foundry Updates on Cloud
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../How_to_access_VoltMX_Foundry_Portal_on-Prem.html" class="md-nav__link">
+    Accessing Volt MX Foundry Console - On-Premises
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../Environments.html" class="md-nav__link">
+    Environments - On-Premises
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../Published_Apps-Environments.html" class="md-nav__link">
+    Viewing Applications Published to a Runtime Environment
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../Features.html" class="md-nav__link">
+    Features
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../Adding_Applications.html" class="md-nav__link">
+    Apps - How to Add Applications
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../ConsoleAccessControl.html" class="md-nav__link">
+    Console Access Control
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../Manage_Users.html" class="md-nav__link">
+    Manage Console Users
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_15"
+    type="checkbox"
+    id="__nav_1_8_3_15"
+    
+  />
+                               
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../API_Management.html"> APIs in API Management </a>
+    <label for="__nav_1_8_3_15">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="../API_Versioning.html" class="md-nav__link">
+    API Versioning
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../App_Versioning.html" class="md-nav__link">
+    Application Versioning
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../Version_Upgrade_Apps_Services_MFCLI.html" class="md-nav__link">
+    Version Upgrade support for Apps and Services - MFCLI
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../CustomDataConfig-.html" class="md-nav__link">
+    Custom Data Adapters - Overview
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../CustomDataConfig.html" class="md-nav__link">
+    Custom Data Adapters on Volt MX Foundry
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../JAR_Management.html" class="md-nav__link">
+    Managing JAR Files
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../ViewingVerbsandPrePostProcessors.html" class="md-nav__link">
+    Viewing Verbs and Pre and Post Processors
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../CLI_Analytics.html" class="md-nav__link">
+    Analytics for Third-party Client App Binaries
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../ManagingLinkedAppsinCompositeFoundryApp.html" class="md-nav__link">
+    Managing Linked Apps
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../Export-Import_Apps.html" class="md-nav__link">
+    Exporting and Importing an Application
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../LockApp.html" class="md-nav__link">
+    Locking Foundry App
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_27"
+    type="checkbox"
+    id="__nav_1_8_3_27"
+    
+  />
+                                                                                                            
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../Identity.html"> Identity </a>
+    <label for="__nav_1_8_3_27">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_28"
+    type="checkbox"
+    id="__nav_1_8_3_28"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../Legacy_Serivces.html"> Legacy Services </a>
+    <label for="__nav_1_8_3_28">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_29"
+    type="checkbox"
+    id="__nav_1_8_3_29"
+    
+  />
+                                                                                                                                                                              
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../Services.html"> Integration </a>
+    <label for="__nav_1_8_3_29">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_30"
+    type="checkbox"
+    id="__nav_1_8_3_30"
+    
+  />
+                        
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../Orchestration.html"> Orchestration </a>
+    <label for="__nav_1_8_3_30">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="../Workflow.html" class="md-nav__link">
+    Workflow
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../Workflow_BestPractices.html" class="md-nav__link">
+    Workflow Best Practices
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../EventsWorkflowImplementation.html" class="md-nav__link">
+    Event Triggered Workflow Implementation
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../IntegrationWorkflowImplementation.html" class="md-nav__link">
+    Integration Service Triggered Workflow Implementation-Async
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../IntegrationWorkflowImplementation_Sync.html" class="md-nav__link">
+    Integration Service Triggered Workflow Implementation-Sync
+  </a>
+</li>
+    
+               
+  
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_36"
+    type="checkbox"
+    id="__nav_1_8_3_36"
+    checked
+  />
+                                                                                                                         
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../Objectservices.html"> Object Services </a>
+    <label for="__nav_1_8_3_36">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+  <nav
+    class="md-nav md-nested-nav"
+    aria-label="Object Services"
+    data-md-level="4"
+  >
+    <label class="md-nav__title" for="__nav_1_8_3_36">
+      <span class="md-nav__icon md-icon"></span>
+      Object Services
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+       
+                
+<li class="md-nav__item">
+  <a href="../Objectservices.html" class="md-nav__link">
+    Overview
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Objectservices_Stage1.html" class="md-nav__link">
+    Objectservices Stage 1
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_36_3"
+    type="checkbox"
+    id="__nav_1_8_3_36_3"
+    
+  />
+                     
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Stage_2.html"> Stage 2&colon; Configuring a Data Model </a>
+    <label for="__nav_1_8_3_36_3">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_36_4"
+    type="checkbox"
+    id="__nav_1_8_3_36_4"
+    
+  />
+                        
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Objectservices_Stage3.html"> Stage 3&colon; Mapping Operations to Back-end Methods </a>
+    <label for="__nav_1_8_3_36_4">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="Objectservices_Stage4.html" class="md-nav__link">
+    Stage 4&colon; Integrating Objects Services in an Application
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../DataEncryptionObjects.html" class="md-nav__link">
+    Object Metadata for Controlling Client-side Logic
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="ObjectservicesActions.html" class="md-nav__link">
+    Context Based Options
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="DataModelTemplateXLSXStorage.html" class="md-nav__link">
+    Data Model Template in XLSX file for Storage Objects
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="ObjectservicesEnhancedIdentity.html" class="md-nav__link">
+    Enhanced Identity support in Object Services
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../Remapping_Object_Verbs.html" class="md-nav__link">
+    Remapping Verbs for Service-Driven Object Services
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Objectservices_MapperExampleRef.html" class="md-nav__link">
+    Mapper Example Reference
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Storage_ObjectServices.html" class="md-nav__link">
+    Storage Object Services
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="ObjectservicesEndpointMongoDB.html" class="md-nav__link">
+    Creating MongoDB Object Service
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="ObjectservicesEndpointSalesF.html" class="md-nav__link">
+    Creating Salesforce Object Service
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="ObjectservicesEndpointSAP.html" class="md-nav__link">
+    Creating SAP Object Service
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="ObjectservicesEndpointSDO.html" class="md-nav__link">
+    Service-Driven Object Service
+  </a>
+</li>
+    
+                
+<li class="md-nav__item md-nav__item--active">
+   
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="toc"
+    type="checkbox"
+    id="__toc"
+  />
+
+      
+  <label class="md-nav__link md-nav__link--active" for="__toc">
+    Creating Storage Object Service
+    <span class="md-nav__icon md-icon"></span>
+  </label>
+  
+  <a href="ObjectservicesEndpointStorageO.html" class="md-nav__link md-nav__link--active">
+    Creating Storage Object Service
+  </a>
+
+    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-storage-object-service" class="md-nav__link">
+    Create a Storage Object Service
+  </a>
+  
+    <nav class="md-nav" aria-label="Create a Storage Object Service">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#use-cases" class="md-nav__link">
+    Use Cases
+  </a>
+  
+    <nav class="md-nav" aria-label="Use Cases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#home-owners-association-app" class="md-nav__link">
+    Home Owner’s Association App
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#restaurant-customer-survey-app" class="md-nav__link">
+    Restaurant Customer Survey App
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-create-a-storage-object-service" class="md-nav__link">
+    How to Create a Storage Object Service
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#storage-service-usage-notes-and-data-constraints" class="md-nav__link">
+    Storage Service Usage Notes and Data Constraints
+  </a>
+  
+    <nav class="md-nav" aria-label="Storage Service Usage Notes and Data Constraints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#supported-identity-provider-types" class="md-nav__link">
+    Supported Identity Provider Types
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-constraints" class="md-nav__link">
+    Data Constraints
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-storage-objects-from-voltmx-foundry" class="md-nav__link">
+    Testing Storage Objects from VoltMX Foundry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#storage-service-sql-scripts" class="md-nav__link">
+    Storage Service SQL Scripts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-model-changes-and-republishing-errors" class="md-nav__link">
+    Data Model Changes and Republishing Errors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#health-check-for-storage-services" class="md-nav__link">
+    Health Check for Storage Services
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exportimport-of-storage-objects" class="md-nav__link">
+    Export/Import of Storage Objects
+  </a>
+  
+    <nav class="md-nav" aria-label="Export/Import of Storage Objects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#export-storage-objects-data-to-a-csv-file" class="md-nav__link">
+    Export storage objects data to a .csv file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-storage-objects-data-from-csv-to-admin-server-console" class="md-nav__link">
+    Import Storage Objects Data from .csv to Admin Server Console
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+  
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_36_18"
+    type="checkbox"
+    id="__nav_1_8_3_36_18"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../FileServiceAdapters.html"> File Service Adapters </a>
+    <label for="__nav_1_8_3_36_18">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="../HCLMicroservicesAdapter.html" class="md-nav__link">
+    HCL Microservices Adapter
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../offline_Sync.html" class="md-nav__link">
+    Offline Enablement
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_36_21"
+    type="checkbox"
+    id="__nav_1_8_3_36_21"
+    
+  />
+                        
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../Advanced_Configurations_-Object_Services.html"> Advanced Configurations Object Services </a>
+    <label for="__nav_1_8_3_36_21">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="../Objectservices_MapperExampleRef_backup.html" class="md-nav__link">
+    Mapper Example Reference
+  </a>
+</li>
+    
+    </ul>
+  </nav>
+  
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="../offline_Sync.html" class="md-nav__link">
+    Offline Sync (Offline Objects)
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../ActionsinObjects.html" class="md-nav__link">
+    Actions in Objects
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../Legacy_Sync.html" class="md-nav__link">
+    Legacy Sync
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../VoltMXDevPortal.html" class="md-nav__link">
+    Developer Portal
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../Logic_in_Apps.html" class="md-nav__link">
+    Logic in Apps
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../Logic.html" class="md-nav__link">
+    Logic - API Management
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../Logic_Publish_API_Management.html" class="md-nav__link">
+    Logic - Publish API Management
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../Rules_as_a_Service.html" class="md-nav__link">
+    Rules as a Service
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../Engagement.html" class="md-nav__link">
+    Engagement
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_46"
+    type="checkbox"
+    id="__nav_1_8_3_46"
+    
+  />
+                                               
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../Manage_Client_App_Assets.html"> Manage Client App Assets </a>
+    <label for="__nav_1_8_3_46">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="../EnterpriseAppStore.html" class="md-nav__link">
+    Volt MX Enterprise App Store Service for Digital App Distribution
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../PushNotificationsEas.html" class="md-nav__link">
+    Sending Push Notification to EAS
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../AppVersionUpgradePolicyEAS.html" class="md-nav__link">
+    Checking App Versions in EAS
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../EAS_NativeApp_Walk-through.html" class="md-nav__link">
+    Walk-through of Volt MX Enterprise App Store (EAS) Source Application
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../KnownIssuesEAS.html" class="md-nav__link">
+    Known Issues - EAS
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_52"
+    type="checkbox"
+    id="__nav_1_8_3_52"
+    
+  />
+                                              
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../Publish.html"> Publish </a>
+    <label for="__nav_1_8_3_52">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="../AppPromotion.html" class="md-nav__link">
+    Promoting a Deployment Package
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_54"
+    type="checkbox"
+    id="__nav_1_8_3_54"
+    
+  />
+                                             
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../CI_Foundry.html"> Volt MX Foundry Command Line Utility - Continuous Integration </a>
+    <label for="__nav_1_8_3_54">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_55"
+    type="checkbox"
+    id="__nav_1_8_3_55"
+    
+  />
+                                                                                                                                                                                                                                                                                                                                                                                       
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../Foundry_SDKs.html"> SDKs </a>
+    <label for="__nav_1_8_3_55">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="../Settings_Cloud.html" class="md-nav__link">
+    Settings - Cloud
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../Settings.html" class="md-nav__link">
+    Settings - On-premises
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../Reports.html" class="md-nav__link">
+    Reports
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../Support.html" class="md-nav__link">
+    Support
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../Telemetry.html" class="md-nav__link">
+    Telemetry
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../Samples/Samples.html" class="md-nav__link">
+    Tutorials
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../Appendix_-_Sync_Strategy.html" class="md-nav__link">
+    Appendix - Sync Strategy
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_63"
+    type="checkbox"
+    id="__nav_1_8_3_63"
+    
+  />
+                     
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../Appendix_-_App_Services.html"> Appendix - App Services </a>
+    <label for="__nav_1_8_3_63">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="../Appendix_-_FAQs.html" class="md-nav__link">
+    Appendix - Frequently Asked Questions (FAQs
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../Limitations.html" class="md-nav__link">
+    Limitations
+  </a>
+</li>
+    
+    </ul>
+  </nav>
+  
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_4"
+    type="checkbox"
+    id="__nav_1_8_4"
+    
+  />
+                     
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../../KF_Services_OAuth_Sample/Content/KF_Services_OAuth_Sample.html"> OAuth Sample App Guide </a>
+    <label for="__nav_1_8_4">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_5"
+    type="checkbox"
+    id="__nav_1_8_5"
+    
+  />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../../integration_services.html"> Integration Services </a>
+    <label for="__nav_1_8_5">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_6"
+    type="checkbox"
+    id="__nav_1_8_6"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../../voltmx_foundry_workflow/Content/Workflow.html"> Volt Foundry Workflow </a>
+    <label for="__nav_1_8_6">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_7"
+    type="checkbox"
+    id="__nav_1_8_7"
+    
+  />
+                                                                                                                                                                                                                                                                                                                               
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../../administering_foundry.html"> Administering Foundry </a>
+    <label for="__nav_1_8_7">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_8"
+    type="checkbox"
+    id="__nav_1_8_8"
+    
+  />
+                                                                                                                                                
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../../vmf_integrationservice_admin_console_userguide/Content/Overview.html"> App Services Console User Guide </a>
+    <label for="__nav_1_8_8">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_9"
+    type="checkbox"
+    id="__nav_1_8_9"
+    
+  />
+                                                                                                                                                                                                             
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../../voltmx_appfactory_user_guide/Content/Introduction.html"> App Factory User Guide </a>
+    <label for="__nav_1_8_9">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_10"
+    type="checkbox"
+    id="__nav_1_8_10"
+    
+  />
+                                                                                                                                   
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../../voltmx_Foundry_deployment_guide/Content/Introduction.html"> Volt MX Foundry Deployment Guide </a>
+    <label for="__nav_1_8_10">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="../../../VoltMX_Analytics_Cloud_FAQs/Content/VoltMX_Analytics_Cloud_FAQs.html" class="md-nav__link">
+    Volt MX Analytics & Reporting Cloud FAQs
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_12"
+    type="checkbox"
+    id="__nav_1_8_12"
+    
+  />
+                                     
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../../vmfintegrationservice_troubleshooting_guide/Content/Integration_Services_Troubleshooting_Guide.html"> Integration Services Troubleshooting Guide </a>
+    <label for="__nav_1_8_12">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+    </ul>
+  </nav>
+  
+</li>
+
+   
+    </ul>
+  </nav>
+  
+</li>
+
+ 
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-storage-object-service" class="md-nav__link">
+    Create a Storage Object Service
+  </a>
+  
+    <nav class="md-nav" aria-label="Create a Storage Object Service">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#use-cases" class="md-nav__link">
+    Use Cases
+  </a>
+  
+    <nav class="md-nav" aria-label="Use Cases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#home-owners-association-app" class="md-nav__link">
+    Home Owner’s Association App
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#restaurant-customer-survey-app" class="md-nav__link">
+    Restaurant Customer Survey App
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-create-a-storage-object-service" class="md-nav__link">
+    How to Create a Storage Object Service
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#storage-service-usage-notes-and-data-constraints" class="md-nav__link">
+    Storage Service Usage Notes and Data Constraints
+  </a>
+  
+    <nav class="md-nav" aria-label="Storage Service Usage Notes and Data Constraints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#supported-identity-provider-types" class="md-nav__link">
+    Supported Identity Provider Types
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-constraints" class="md-nav__link">
+    Data Constraints
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-storage-objects-from-voltmx-foundry" class="md-nav__link">
+    Testing Storage Objects from VoltMX Foundry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#storage-service-sql-scripts" class="md-nav__link">
+    Storage Service SQL Scripts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-model-changes-and-republishing-errors" class="md-nav__link">
+    Data Model Changes and Republishing Errors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#health-check-for-storage-services" class="md-nav__link">
+    Health Check for Storage Services
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exportimport-of-storage-objects" class="md-nav__link">
+    Export/Import of Storage Objects
+  </a>
+  
+    <nav class="md-nav" aria-label="Export/Import of Storage Objects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#export-storage-objects-data-to-a-csv-file" class="md-nav__link">
+    Export storage objects data to a .csv file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-storage-objects-data-from-csv-to-admin-server-console" class="md-nav__link">
+    Import Storage Objects Data from .csv to Admin Server Console
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Creating Storage Object Service</h1>
+
+<h2 id="create-a-storage-object-service"><a name="Storage_Object_Service"></a>Create a Storage Object Service</h2>
+<p>With Object Services, you can create an object on VoltMX Foundry for storing data for mobile apps. You can use VoltMX Foundry as a <madcap:keyword term="storage objects;storage service">storage provider if your application needs limited data that is not available on an enterprise backend and does not exist anywhere else.</madcap:keyword></p>
+<p>For example, a VoltMX Foundry storage object is ideal for a restaurant survey mobile app. In the restaurant, the service staff request that a customer fill out the survey on a device provided by the restaurant. The survey data that the customer enters is stored in a database on the VoltMX Foundry back end. The service staff and customer cannot access the survey results. The restaurant manager can then retrieve the survey data and use it for analysis and reporting.</p>
+<p>The VoltMX Foundry developer creates a storage object service and defines the data model with the fields that the mobile app requires. Upon publishing the VoltMX Foundry app, VoltMX Foundry creates a data schema in the back end based on the data model and instantiates a new self-contained database. The operations that the mobile app performs are performed on the database.</p>
+<h3 id="use-cases">Use Cases</h3>
+<p>The following describes use cases for a VoltMX Foundry application with storage object services.</p>
+<h4 id="home-owners-association-app">Home Owner’s Association App</h4>
+<p>A home owners association that maintains rules to ensure the neighborhood always looks nice. For example, members of the association are required to cut their grass, maintain the landscaping, and keep up the appearance of their house. The association can fine a member any time for a significant violation, but what they typically do is conduct a house-by-house assessment every two years. A representative of the association walks around each house and inspects it. The inspector documents issues with pictures and provides the homeowner a report on what they have to fix.</p>
+<p>To streamline this process, the association wants to create an iPhone and iPad app to help with the assessments. The inspector will go to the next house and create a new assessment record that contains:</p>
+<ul>
+<li>Address of the house</li>
+<li>Date/Time of the assessment</li>
+<li>Id of the user who created the assessment</li>
+<li>Picture of the house</li>
+</ul>
+<p>The association representative then inspects the house and writes up any violations. Each record of violation contains:</p>
+<ul>
+<li>An auto-generated violation number</li>
+<li>Pictures that document the issue</li>
+<li>A description of the issue</li>
+<li>A description of acceptable resolutions</li>
+</ul>
+<p>To build this VoltMX Foundry app, the VoltMX Foundry developer first defines the data model that the mobile app requires. The following describes the definition of the data model.</p>
+<p>The Assessments object has the following fields:</p>
+<ul>
+<li>AssessmentId</li>
+<li>Address</li>
+<li>Timestamp</li>
+<li>User Id</li>
+<li>Image</li>
+</ul>
+<p>The Violations object has the following fields:</p>
+<ul>
+<li>Violation Id</li>
+<li>Violation Number</li>
+<li>Timestamp</li>
+<li>Issue Description</li>
+<li>Resolution Description</li>
+</ul>
+<p>The ViolationImages object has the following fields:</p>
+<ul>
+<li>Violation Id</li>
+<li>Image</li>
+<li>Timestamp</li>
+</ul>
+<p>The ViolationTypes object has the following fields:</p>
+<ul>
+<li>Violation Id</li>
+<li>Violation Description</li>
+</ul>
+<p>The ViolationTypes object is used to populate a dropdown menu in the violation entry screen.</p>
+<p>The following relationships are established between the objects:</p>
+<ul>
+<li>Assessments one-to-many to Violations</li>
+<li>Violations one-to-many to Violation Images</li>
+</ul>
+<h4 id="restaurant-customer-survey-app">Restaurant Customer Survey App</h4>
+<p>A food service company that has several restaurants needs a way to get responses from customers to evaluate the performance of their products and services and benchmark the indices. A mobile survey app is an effective tool to get feedback from customers.</p>
+<p>The responses generated from the survey app can help the company to target the right set of customer segments, and appropriately position their products for the target segments. These are key inputs for the go-to-market strategy for the company.</p>
+<p>The following describes how the survey app is used by a restaurant:</p>
+<ol>
+<li>A member of the service team at the restaurant asks a customer to participate in the survey. The service team member explains that the objective of the survey is to improve the products and services that the restaurant offers. The restaurant may offer a coupon as an incentive to the customer.</li>
+<li>The customer begins the survey by entering her personal data, such as name, email address, and phone number.</li>
+<li>The customer selects one of the categories of the survey. The categories are Food, Restaurant, and Service.</li>
+<li>The customer responds to the survey questions for the chosen category.</li>
+<li>When the customer clicks Done, the customer's response are recorded in the VoltMX Foundry storage object on the back end. The data model for app defines the storage objects that store the customer data.</li>
+<li>The customer completes the questions for the remaining categories of the survey.</li>
+<li>The restaurant manager retrieves the results of the customer survey for his restaurant. Only users who have the role of manager can access the results of the customer survey.</li>
+</ol>
+<p>There are two personas that use the survey app:</p>
+<ul>
+<li>The customer who fills out the survey.</li>
+<li>The manager who retrieves the survey data.</li>
+</ul>
+<p>Survey App Data Model</p>
+<p>The following relationships are established between the objects:</p>
+<ul>
+<li>SurveyTable one-to-many to QuestionTable</li>
+<li>QuestionTable one-to-one to AnswerTable</li>
+<li>AnswerTable one-to-one to CustomerTable</li>
+</ul>
+<p>To build this VoltMX Foundry app, the VoltMX Foundry developer first defines the data model that the mobile app requires. The following describes the definition of the data model.</p>
+<p>SurveyTable object:</p>
+<ul>
+<li>Fields: SurveyTypeId, CreatedDate, CreatedTime, ActiveTillDate</li>
+<li>One entry per survey</li>
+</ul>
+<p>SurveyTypeTable object:</p>
+<ul>
+<li>Fields: SurveyTypeId, SurveyType, SurveyTypeDescription</li>
+<li>SurveyType values: "Food", "Service", "Restaurant"</li>
+<li>SurveyTypeDescription values: Description associated with Survey Type</li>
+</ul>
+<p>QuestionTable object:</p>
+<ul>
+<li>Fields: QuestionId, Question, QuestionsChoice</li>
+</ul>
+<p>QuestionsChoiceTable object:</p>
+<ul>
+<li>Fields: QuestionChoiceId, QuestionsChoiceOptions</li>
+<li>Examples of a QuestionChoiceId values are Overall Experience, Food, Staff, and Ambiance.</li>
+<li>Examples of QuestionsChoiceOptions are Unsatifactory, Moderately Unsatisfactory, Acceptable, Satisfied, Very Satisfied.</li>
+</ul>
+<p>SubmissionTable object:</p>
+<ul>
+<li>Fields: SubmissionId, CustomerId, SurveyId, Date, Time</li>
+</ul>
+<p>AnswerTable object:</p>
+<ul>
+<li>Fields: AnswerId, SubmissionId, QuestionId, Answer</li>
+<li>This table maintains all answers to the survey questions. SubmissionId ties it to a specific customer and date of survey.</li>
+</ul>
+<p>CustomerTable object:</p>
+<ul>
+<li>Fields: CustomerId, Name, Gender, Email, MobileNumber, City, State</li>
+<li>This table maintains only customer profile information.</li>
+</ul>
+<p>Building the Survey App</p>
+<p>John is assigned the task of creating back-end services for the Survey app.</p>
+<ol>
+<li>John signs in to VoltMX Foundry, creates a new VoltMX Foundry app, and then clicks <strong>Objects</strong>.</li>
+<li>John enters the name of the object service to create, selects the Endpoint type <strong>Storage</strong>, and configures the security level.</li>
+<li>John creates the data model. John proceeds by creating the required tables and fields, and defining the primary keys for the tables. John then defines the relationship between tables.</li>
+<li>Once John has created the data model, he clicks the Mapping tab. He clicks on the Get method to create mapping for the Get method. John can add ODATA filters. The request and response mapping are primarily a one-to-one mapping between the app data model and the VoltMX Foundry database. All the other methods have only Request and Response mapping.</li>
+<li>John then configures an OAuth2 identity service for the mobile app.</li>
+<li>John publishes the VoltMX Foundry app to a runtime environment.</li>
+<li>John then uses VoltMX Iris to create a new mobile app that uses the storage object services. The user experience of the mobile app is designed to collect survey information from restaurant customers.</li>
+</ol>
+<p>Restaurant service staff can now use their Google credentials to sign in to the survey app and the storage object service honors the authentication levels. Any object service that is configured as Authenticated allows access to only Authenticated users. Note that all the tables for the app are created when the VoltMX Foundry app is published.</p>
+<p>Reuse the Storage Object Service</p>
+<p><madcap:keyword term="reuse storage object">John is then asked to build a mobile app for the restaurant managers. The manager app is capable of pulling out all the data from the VoltMX Foundry storage object database and showing the results.</madcap:keyword></p>
+<ol>
+<li>John signs in to VoltMX Foundry and creates a new VoltMX Foundry app.</li>
+<li>John clicks <strong>Objects</strong>, and then clicks <strong>Use Existing</strong>.</li>
+<li>John selects the Storage object service that he created for the restaurant survey app.</li>
+</ol>
+<p>The Use Existing option copies the app data model to the new VoltMX Foundry app and gives access to the same back end (instance) of the storage object database. All the object services created here for the restaurant manager app will point to the same object and data that was created by the restaurant survey app.</p>
+<p>Clone the Storage Object Service</p>
+<p><madcap:keyword term="clone storage service">If John is asked to create another survey app for another restaurant location, John would clone the storage object service that he created for the first restaurant. Only the app data model is copied for the new app and the back-end data is not shared between the two survey apps.</madcap:keyword></p>
+<p>You can also clone an app data model of an existing object service. Refer to <a href="#actions">Actions in objects services</a>.</p>
+<h3 id="how-to-create-a-storage-object-service"><a name="How"></a>How to Create a Storage Object Service</h3>
+<p><madcap:keyword term="create storage service">You can create a Storage object service for a VoltMX Foundry app if you want to create an object on the VoltMX Foundry back end for storing data for mobile apps. You can use VoltMX Foundry as a storage provider if your mobile app needs limited data and an enterprise back end is not available to store the data.</madcap:keyword></p>
+<p>The following is an exercise that shows you how to create a storage object service for a VoltMX Foundry app. This VoltMX Foundry app is used by a mobile app for administering students, teachers, and the subjects that the students study.</p>
+<p>Create a VoltMX Foundry App</p>
+<ol>
+<li>
+<p>On the <strong>Applications</strong> page, click <strong>Add New</strong>.</p>
+<p>The Configure Services Identity tab appears.</p>
+</li>
+<li>
+<p>Click in <strong>Edit App Name</strong> button to enter a unique name for the app. For example, SampleStorageObject.</p>
+</li>
+<li>
+<p>On the Identity tab, configure a new identity service or use an existing service. To learn how create an identity service, see <a href="../Identity.html">Identity</a>. To learn how to use an existing identity service, see <a href="../Identity.html#UseExistingIdentity">How to Use an Existing Identity Service</a>.</p>
+<p>The following identity providers are not supported for Storage Services: Microsoft Active Directory, Open LDAP, Active Directory Federation Services (ADFS) over SAML, and Azure SAML.</p>
+</li>
+<li>
+<p>Click the <strong>Objects</strong> service tab.</p>
+</li>
+<li>Click <strong>Configure New</strong>.</li>
+<li>Click in the <strong>Name</strong> field, and enter a name for the object service. For example, SampleStudentStorage.</li>
+<li>Click in the <strong>Endpoint Type</strong> fieldand then click Storage in the drop-down menu.</li>
+<li>Under <strong>Security Level</strong>, use <strong>Authenticated App User</strong>.</li>
+<li>
+<p>Click in the <strong>Authentication</strong> field, and then select the identity provider that you want to use.</p>
+<p>This links the Identity provider to the object service.</p>
+</li>
+<li>
+<p>Click in the <strong>Description</strong> field, and enter a description for the object service.</p>
+<p><img alt="" src="../Resources/Images/StorageObject_svcDef.png" /></p>
+</li>
+<li>
+<p>Click <strong>Save &amp; Configure</strong>.</p>
+</li>
+</ol>
+<p>The Configure page for the object service appears.</p>
+<p>Create a Data Model for the Storage Service</p>
+<ol>
+<li>Click <strong>Configure New</strong>.</li>
+<li>
+<p>In the <strong>Name</strong> text box, enter <strong>Student</strong>, and then click <strong>Save</strong>.</p>
+<p>In the Configure screen, the Student object appears in the list of objects.</p>
+</li>
+<li>
+<p>In the <strong>Data Model</strong> tab of the navigation pane, under the Student object, click <strong>Fields</strong>.</p>
+<p>The fields that VoltMX Foundry generates by default appear. The fields are populated in the database when you save the object service.</p>
+</li>
+<li>
+<p>Click the <strong>Add</strong> button.</p>
+</li>
+<li>
+<p>In the <strong>Name</strong> column, click in the field and enter <strong>Id</strong>.</p>
+<p>The name of a field can be a maximum of 25 characters.</p>
+</li>
+<li>
+<p>In the <strong>Primary Key</strong> column, click in the field, and select <strong>true</strong> from the menu.</p>
+<p>When you set the Primary Key attribute to <em>true</em> for a field, the Unique attribute is automatically set to <em>true</em>.</p>
+</li>
+<li>
+<p>In the <strong><madcap:keyword term="Autogenerated column;storage object:Autogenerated column">Autogenerated</madcap:keyword></strong> column, click in the field, and select <strong>true</strong> from the menu.</p>
+<p>When you set the Autogenerated attribute to <em>true</em> for a field, the Type attribute is automatically set to <em>number</em>.</p>
+</li>
+<li>
+<p>Click the <strong>Add</strong> button.</p>
+<p>A new row appears in the fields list.</p>
+</li>
+<li>
+<p>In the <strong>Name</strong> column, click in the new row and enter <strong>Name.</strong></p>
+</li>
+<li>
+<p>Click <strong>Save</strong>.</p>
+<p><img alt="" src="../Resources/Images/StorageObject_Student1.png" /></p>
+</li>
+<li>
+<p>Click <strong>Mapping</strong>.</p>
+<p>The list of corresponding verbs created for this object appears.</p>
+<p><img alt="" src="../Resources/Images/StorageObject_Student1verbs.png" /></p>
+</li>
+</ol>
+<p>View the SQL Scripts</p>
+<p><madcap:keyword term="SQL:storage service">If you export the VoltMX Foundry app, you can see the SQL scripts that are generated for the data model. In the exported app, in the ObjectService folder, there is a _Flyway folder. Inside the _Flyway folder are SQL scripts that correspond to different database types. Currently, Storage Services supports only MYSQL. Flyway is a tool that VoltMX Foundry uses to run the SQL scripts on the server. In the MYSQL folder, you can find the corresponding schema file that VoltMX Foundry generated for the data model. In an editor, you can see the Student table and fields that VoltMX Foundry created and the primary key, and the constraints that have been added to that table.</madcap:keyword></p>
+<p>Test the Runtime Service</p>
+<p><madcap:keyword term="storage service:test run-time;storage object:index">After you publish the app, you can use App Services to test the run-time of the storage service. This represents how the mobile app on the device will interact with the runtime of the service.</madcap:keyword></p>
+<p>For example, in App Services, for Object Services, select the Student@create operation for the sample student app, and then click the service URL below the operation. In the Service Details, for Input Parameters, enter <code>{name: "S1"}</code> and click Get Response. In the Response Body, the return code indicates that the student record was created. To update a record, select the Student@update operation and enter <code>{name: "S2". Id:1}</code> in Input Parameters. To retrieve the student records, select the Student@get operation, and without specifying any filters, click Get Response. In the Response Body, the student records are returned. Note that the fields that VoltMX Foundry generates by default, CreatedDateTime and LastUpdatedDateTime, recorded when the student record was created and when the record was updated.</p>
+<p>Add a Subject Object to the Data Model</p>
+<ol>
+<li>Click the <strong>Data Model</strong> tab, and then click <strong>Data Model</strong>.</li>
+<li>Click <strong>Add</strong>.</li>
+<li>In the <strong>Name</strong> text box, enter <strong>Subject</strong>, and then click <strong>Save</strong>.
+    In the Configure screen, the Subject object appears in the list of objects.</li>
+<li>In the <strong>Data Model</strong> tab of the navigation pane, click the plus button next to the Student object.
+    Fields and Relationships appear under the Student object.</li>
+<li>Click <strong>Fields</strong>.
+    The fields that VoltMX Foundry generates by default appear. The fields are populated in the database when you save the object service.</li>
+<li>Click the <strong>Add</strong> button.</li>
+<li>In the <strong>Name</strong> column, click in the field and enter <strong>Id</strong>.</li>
+<li>In the <strong>Primary Key</strong> column, click in the field, and select <strong>true</strong> from the menu.</li>
+<li>In the <strong>Autogenerated</strong> column, click in the field, and select <strong>true</strong> from the menu.</li>
+<li>Click the <strong>Add</strong> button.
+     A new row appears in the fields list.</li>
+<li>In the <strong>Name</strong> column, click in the new row and enter <strong>name.</strong></li>
+<li>Click <strong>Save</strong>.</li>
+<li>Click <strong>Data Model</strong>, and then click <strong>Add</strong>.
+     Now add an object that records the student to subject mapping; that is, which subjects a student is studying.
+     Add a Student/Subject Object to the Data Model</li>
+<li>In the <strong>Name</strong> text box, enter <strong>Student_Subject</strong>, and then click <strong>Save</strong>.
+    In the Configure screen, the Student_Subject object appears in the list of objects.</li>
+<li>In the <strong>Data Model</strong> tab of the navigation pane, click the plus button next to the Student_Subject object.
+    Fields and Relationships appear under the Student_Subject object.</li>
+<li>Click <strong>Fields</strong>., and then click the <strong>Add</strong> button.</li>
+<li>In the <strong>Name</strong> column, click in the field and enter <strong>Id</strong>.</li>
+<li>In the <strong>Primary Key</strong> column, click in the field, and select <strong>true</strong> from the menu.</li>
+<li>In the <strong>Autogenerated</strong> column, click in the field, and select <strong>true</strong> from the menu.</li>
+<li>Click the <strong>Add</strong> button.
+    A new row appears in the fields list.</li>
+<li>In the <strong>Name</strong> column, click in the new row and enter <strong>Student_id.</strong></li>
+<li>In the <strong>Type</strong> column, click in the field, and select <strong>Number</strong> from the menu.</li>
+<li>Click the <strong>Add</strong> button.</li>
+<li>In the <strong>Name</strong> column, click in the new row and enter <strong>Subject_id.</strong></li>
+<li>In the <strong>Type</strong> column, click in the field, and select <strong>Number</strong> from the menu.</li>
+<li>
+<p>Click <strong>Save</strong>.</p>
+<p><img alt="" src="../Resources/Images/StorageObject_StudentSubject1.png" /></p>
+</li>
+</ol>
+<p>Create an Index</p>
+<p>You can performance tune the object service by creating indexes on the objects.</p>
+<ol>
+<li>In the <strong>Data Model</strong> tab of the navigation pane, click the plus button next to the <strong>Student</strong> object.</li>
+<li>Click <strong>Indexes</strong>, and then click <strong>Add</strong>.
+    The index configuration screen appears.</li>
+<li>In the <strong>Name</strong> column, enter a name for the index.</li>
+<li>In the <strong>Description</strong> column, enter a description.</li>
+<li>Click in the <strong>Fields</strong> column. A drop-down menu of fields in the object appears. Select Id, Name, and LastUpdatedDateTime.
+    The collection of records in the object are indexed by the fields that you select.
+    <img alt="" src="../Resources/Images/StorageObject_StudentIndex.png" /></li>
+<li>In the <strong>Unique</strong> column, select <strong>true</strong> to indicate that a field that you selected has a unique key.
+    An index that has multiple fields is called a clustered index. A clustered index should have a unique key as the first field. For example, Id is a unique key.</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+<p>Configure the Relationship Between Objects</p>
+<p>Now you can define the relationships between the objects in the data model.</p>
+<ol>
+<li>
+<p>In the <strong>Data Model</strong> tab of the navigation pane, under the Student object, click <strong>Relationships</strong>.
+    The Relationships screen appears.</p>
+</li>
+<li>
+<p>Click the <strong>Add</strong> button.
+    The screen for configuring the relationship appears.</p>
+</li>
+<li>
+<p>Click in the <strong>Select Target Objects</strong> field. A drop-down menu appears. Select the <strong>Student</strong>_<strong>Subject</strong> object.</p>
+</li>
+<li>In the <strong>Select Relationship Type</strong> field, a storage service currently supports only a <strong>One to Many</strong> relationship<strong>.</strong></li>
+<li>Under <strong>Specify Object Attribute Relationships</strong>, click in the <strong>Source Object Attributes</strong> field. A drop-down menu appears. Select <strong>Id.</strong></li>
+<li>Click in the <strong>Target Object Attributes</strong> field. A drop-down menu appears. Select <strong>Student_Id</strong>, and then click <strong>Save.</strong></li>
+<li>Under the Subject object, click <strong>Relationships</strong>.</li>
+<li>Click the <strong>Add</strong> button.</li>
+<li>Click in the <strong>Select Target Objects</strong> field. A drop-down menu appears. Select the <strong>Student</strong>_<strong>Subject</strong> object.</li>
+<li>Under <strong>Specify Object Attribute Relationships</strong>, click in the <strong>Source Object Attributes</strong> field. A drop-down menu appears. Select <strong>Id.</strong></li>
+<li>
+<p>Click in the <strong>Target Object Attributes</strong> field. A drop-down menu appears. Select <strong>Subject_Id</strong>.</p>
+<p><img alt="" src="../Resources/Images/StorageObject_SubjectRelation.png" /></p>
+</li>
+<li>
+<p>Click <strong>Save</strong>.</p>
+</li>
+</ol>
+<p>If you export the VoltMX Foundry app at this point, you will see the SQL scripts that correspond to the objects that you added and the relationships that you defined.</p>
+<p>After you publish the app, you can use App Services to create a subject. For example, select the Subject@create operation and enter <code>{name: "Physics"}</code> in Input Parameters. Then you can select the Student_Subject@create operation and enter <code>{name: "Student_id:1, Subject_id:1"}</code> to add a record to the Student_Subject table. You can use the Student_Subject@get operation to query the Student_Subject table and verify that the record was created.</p>
+<p>Add a Teacher Object to the Data Model</p>
+<ol>
+<li>In the navigation pane, click the <strong>Data Model</strong> tab of the navigation pane, and then click <strong><em>*Add</em></strong>*.</li>
+<li>In the <strong>Name</strong> text box, enter <strong>Teacher</strong>, and then click <strong>Save</strong>.</li>
+<li>In the navigation pane, click the plus button next to the Teacher object</li>
+</ol>
+<p>Fields and Relationships appear under the Teacher object.</p>
+<ol>
+<li>Click <strong>Fields</strong>., and then click the <strong>Add</strong> button.</li>
+<li>In the <strong>Name</strong> column, click in the field and enter <strong>Id</strong>.</li>
+<li>In the <strong>Primary Key</strong> column, click in the field, and select <strong>true</strong> from the menu.</li>
+<li>In the <strong>Autogenerated</strong> column, click in the field, and select <strong>true</strong> from the menu.</li>
+<li>
+<p>Click the <strong>Add</strong> button.</p>
+<p>A new row appears in the fields list.</p>
+</li>
+<li>
+<p>In the <strong>Name</strong> column, click in the new row and enter <strong>name.</strong></p>
+</li>
+<li>Click the <strong>Add</strong> button.</li>
+<li>In the <strong>Name</strong> column, click in the new row and enter <strong>Subject.</strong></li>
+<li>Click <strong>Save</strong>.</li>
+<li>In the <strong>Mapping</strong> tab of the navigation pane, click the plus button next to the Teacher object.</li>
+<li>
+<p>Click the <strong>get</strong> verb, and then click the <strong>OData Query Options</strong> tab.</p>
+<p>The OData Query Options that object services supports for the read operation appear in the Configure screen. For example, you can use the $skip option to return all records in the table except the top five, or you can use the $top option to return only the top five records.</p>
+<p><img alt="" src="../Resources/Images/StorageObject_StudentOData.png" /></p>
+</li>
+</ol>
+<p>Add Security Attributes Profiles to the Request Input Parameters</p>
+<p><madcap:keyword term="security attributes">When a user logs in to a mobile app, the logon can invoke a custom VoltMX Foundry identity service. The response to the back-end logon contains security attributes for the signed in user. For example, the response contains the <em>user_id</em> attribute of the logged on user.</madcap:keyword></p>
+<p>When you link an object service to an identity service, the identity session parameter can be consumed in an object service. In Object Services, you can dynamically pick up the fields received in the user attributes of the logon response from the backend, and use those fields as input parameters for operations, such as create and update.</p>
+<p><madcap:keyword term="user profile">Using attributes from user profiles in request input parameters from VoltMX Foundry can also help to preserve sensitive data from the back end on VoltMX Foundry rather than sending it to the mobile app. This reduces the vulnerability of hacking of sensitive data on the mobile device.</madcap:keyword></p>
+<p>For example, you can add an input parameter for the create operation that uses the CreatedBy field in the data model. You specify that the value of the input parameter is an Identity type. This indicates that the input parameter uses an attribute of the user security profile from the identity service that is linked to the object service. When a user of the mobile app creates a Teacher record in the storage object, VoltMX Foundry picks up the user's <em>user_id</em> from the security profile in the identity service and adds it to the new record. Along with the Name, Id, and Subject for the Teacher, the record indicates who created the record.</p>
+<p>To add an <madcap:keyword term="identity profile">identity profile to an input parameter, do the following:</madcap:keyword></p>
+<ol>
+<li>In the navigation pane, click the <strong>Mapping</strong> tab, and then click the plus button next to the Teacher object.</li>
+<li>Click the <strong>create</strong> verb.
+    The Request Input Parameters tab appears in the Configure screen. You define how to use the user profile data by selecting a verb and the data model field that you want to map to the user profile data.</li>
+<li>Click <strong>Add</strong>.</li>
+<li>In the <strong>Data_Model_Field</strong> column, click the drop-down menu, and select the <strong>CreatedBy</strong> attribute.</li>
+<li>
+<p>Click the drop-down menu in the <strong>Value</strong> column, and select <strong>identity</strong>.</p>
+<p>An identity value indicates that VoltMX Foundry will retrieve the value specified from the user's security profile in the identity service that is linked to the object service.</p>
+</li>
+<li>
+<p>In the text box next to the <strong>identity</strong> value, enter <strong>profile.user.id</strong>.</p>
+<p>This specifies that VoltMX Foundry will populate the value of the input parameter from the user's security profile.</p>
+</li>
+<li>
+<p>Click <strong>Add</strong>.</p>
+</li>
+<li>In the <strong>Data_Model_Field</strong> column, click the drop-down menu and select the <strong>LastUpdatedBy</strong> attribute.</li>
+<li>Click the drop-down menu in the <strong>Value</strong> column, and select <strong>identity</strong>.</li>
+<li>
+<p>In the text box next to the <strong>identity</strong> value, enter <strong>profile.user.id</strong>.</p>
+<p><img alt="" src="../Resources/Images/StorageObject_TeacherInputParam.png" /></p>
+</li>
+<li>
+<p>Click <strong>Save</strong>, and then in the navigation pane, click the <strong>update</strong> operation.</p>
+</li>
+<li>Click <strong>Add</strong>.</li>
+<li>In the <strong>Data_Model_Field</strong> column, click the drop-down menu in the <strong>Data_Model_Field</strong> column, and select the <strong>LastUpdatedBy</strong> attribute.</li>
+<li>Click the drop-down menu in the <strong>Value</strong> column, and select <strong>identity</strong>.</li>
+<li>In the text box next to the <strong>identity</strong> value, enter <strong>profile.user.id.</strong></li>
+<li>Click <strong>Save</strong>.</li>
+<li>In the navigation pane, under the Teacher object, click the <strong>update</strong> operation.</li>
+<li>Click <strong>Add</strong>.</li>
+<li>In the <strong>Data_Model_Field</strong> column, click the drop-down menu, and select the <strong>LastUpdatedBy</strong> attribute.</li>
+<li>Click the drop-down menu in the <strong>Value</strong> column, and select <strong>identity</strong>.</li>
+<li>In the text box next to the <strong>identity</strong> value, enter <strong>profile.user.id</strong>.</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+<p>After you publish the app, you can use an API testing program, such as Postman, and create a Teacher record to test the run-time of the storage service. You can then use the Teacher@get operation to query the Teacher table and verify that the record was created. The Response Body returns the Teacher record that you created. Note that VoltMX Foundry added the fields that you specified in the input parameters, CreatedBy an LastUpdatedBy, to the record with the identity of the user who created the record.</p>
+<h3 id="storage-service-usage-notes-and-data-constraints">Storage Service Usage Notes and Data Constraints</h3>
+<p>The following describes usage notes, guidelines, limitations, and workarounds for Storage Services.</p>
+<h4 id="supported-identity-provider-types">Supported Identity Provider Types</h4>
+<p>The following identity <madcap:keyword term="storage service:identity provider types">providers are not supported for Storage Services:</madcap:keyword></p>
+<ul>
+<li>Microsoft Active Directory</li>
+<li>Open LDAP</li>
+<li>Active Directory Federation Services (ADFS) over SAML</li>
+<li>Azure SAML.</li>
+</ul>
+<h4 id="data-constraints">Data Constraints</h4>
+<ul>
+<li>In this version of VoltMX Foundry, Storage Services does not support the creation or storage of blobs or media.</li>
+<li>Field names can have a maximum of 25 alphanumeric characters.</li>
+<li>An object service shares tables across users. You can limit access to the tables by using identity attributes from a user profile in request input parameters.</li>
+</ul>
+<p>You use the fields that are received in the identity attributes of the logon response from the back end and use those security attributes as input parameters during any subsequent integration requests.</p>
+<h4 id="testing-storage-objects-from-voltmx-foundry">Testing Storage Objects from VoltMX Foundry</h4>
+<p>After you have published a storage service, you can test the service from VoltMX Foundry. Only the published state of the storage service is tested. Changes that you make in the service designer that you have not published cannot be tested.</p>
+<p>To test a published storage service, do the following:</p>
+<ol>
+<li>In the Mapping tab for a storage service, click a verb (for example, get).</li>
+<li>In the Configure screen, click the <strong>Test</strong> tab.</li>
+<li>Click <strong>Test</strong>.</li>
+</ol>
+<h4 id="storage-service-sql-scripts">Storage Service SQL Scripts</h4>
+<p><madcap:keyword term="SQL scripts;storage service:SQL scripts">When you define objects in a storage service and save the service, VoltMX Foundry creates a SQL script file that contains all the data definition statements that you generated since you last saved the service. For example, the first time that you save the service, the data definition statements are saved in the SQL file named V1_MYSQL. The next time that you save the service, the data definition language (DDL) statements are saved in the SQL file named V2_MYSQL. Each SQL file can contain multiple DDL statements. For example, a SQL script that contains statement that creates the table and a statement that defines constraints, such as a unique key or a relationship with another table.</madcap:keyword></p>
+<p>When you publish the VoltMX Foundry app, a SQL script file is created for each DDL statement. Each script file contains one statement. For example, before publishing, when you save the VoltMX Foundry app, VoltMX Foundry creates a SQL script file named V1_MYSQL. This SQL script file contains four statements. When you publish the app, VoltMX Foundry creates a SQL script file for each statement in V1_MYSQL. For example, V1.1_MYSQL, V1.2_MYSQL, V1.3_MYSQL, and V1.4_MYSQL.</p>
+<p>VoltMX Foundry creates an individual script file for each statement because rollback support is not available. If a SQL script file fails, there is only one statement to troubleshoot and fix.</p>
+<p>When you export a VoltMX Foundry app, you can see the SQL scripts that the storage service generated for the data model. In the exported app, in the ObjectService folder there is a _Flyway folder. Inside the _Flyway folder are SQL scripts that correspond to different database types. Currently, Storage Services supports only MYSQL. Flyway is a tool that VoltMX Foundry uses to run the SQL scripts on the server. In the MYSQL folder, you can find the corresponding schema file that VoltMX Foundry generated for the data model.</p>
+<h4 id="data-model-changes-and-republishing-errors">Data Model Changes and Republishing Errors</h4>
+<p>The following describes scenarios in which republishing a storage service will fail after making certain changes to the data model.</p>
+<ul>
+<li>Change nullable to false for a field after there is already data with null values in that field.</li>
+<li>Change a field to be a primary key after the field already contains duplicate values.</li>
+<li>Change unique to true for a field after the field already has duplicate values.</li>
+<li>Change the data type of a field. For example, changing a string field to a boolean field.</li>
+<li>Reduce the size of a string field if the table already has data in the field that exceeds the altered size.</li>
+</ul>
+<p>In these scenarios, you cannot roll back the changes that caused the publish to fail. To repair the data model so that you can republish the app, do the following:</p>
+<ol>
+<li>Export the VoltMX Foundry app.</li>
+<li>Edit the SQL script and revert it to the original definition.</li>
+<li>Import the VoltMX Foundry app that contains the edited scripts.</li>
+<li>Publish the VoltMX Foundry app.</li>
+</ol>
+<p>If you delete a field from a data model and republish the storage service, any data in the deleted field is removed from the storage object.</p>
+<h4 id="health-check-for-storage-services">Health Check for Storage Services</h4>
+<p>The VoltMX Foundry <madcap:keyword term="health-check for storage services">health-check API include properties that denote the health of published storage services. The health-check API include properties that report if schema updates have been applied successfully, the current schema version, and the name of the SQL script file.</madcap:keyword></p>
+<p>The following is the health-check URL format:</p>
+<p><samp>https://<Environment_Name>.voltmxcloud.com/admin/healthcheck?output=json&amp;force=true</samp></p>
+<p>The following is a sample JSON output from the health-check API. The properties that denote the health of published storage services are highlighted.</p>
+<pre><code>
+{
+   "healthDetail": {
+      "Static Resources Location": "PASSED",
+      "Access to Cache": "PASSED",
+      "Access to Deployment Storage": "PASSED",
+      "Cloud Environment Identification": "PASSED",
+      "Access to Reporting Queue": "PASSED",
+      "Access to Device DB": "PASSED",
+      "Security Credentials": "PASSED",
+   }, <span class="span_5">"healthCheck": "PASSED",
+      "storage_health": [{
+         "version_rank": 3,
+         "success": true,
+         "service_name": "StorageService1207t20",
+         "schema_name": "StorageService1207t20_ee82885b",
+         "version": "1.2",
+         "script": "V1.2__MYSQL.sql",
+         "installed_rank": 3</span>
+    }],
+    "Console-Version": "MIDCloud-QA-7.1.0_v201607051517_r18",
+    "Gateway-Version": "5.6.72.0"
+}</code></pre>
+
+<h4 id="exportimport-of-storage-objects"><a name="ExportImport"></a>Export/Import of Storage Objects</h4>
+<p>You can download the data stored in a storage object through the admin server console. Users can upload their records and update the existing records using the export/import options.</p>
+<h5 id="export-storage-objects-data-to-a-csv-file">Export storage objects data to a .csv file</h5>
+<p><strong>To export or import data from storage objects, follow these steps</strong></p>
+<ol>
+<li>Navigate to admin server console, and click on <strong>Object Services</strong>.</li>
+<li>
+<p>The Object Services created in VoltMX Foundry Console are displayed in this page.</p>
+<p><img alt="" src="../Resources/Images/Import_Export_Storage/Export.png" /></p>
+</li>
+<li>
+<p>Click <strong>Export</strong> (the green arrow) icon to export the data in storage object.</p>
+</li>
+<li>Click <strong>Browse</strong> to select where you want to save the storage objects data file (.zip) and click <strong>OK</strong> to continue.</li>
+<li>
+<p>The data will be exported as a zip file in the selected location.</p>
+<p><img alt="" src="../Resources/Images/Import_Export_Storage/Export_data.png" /></p>
+</li>
+<li>
+<p>Extract the zip file. You will find a CSV (Comma Separated Values) file at a service level.</p>
+</li>
+<li>
+<p>Edit the .csv file, and insert the new records. A user can edit and modify more than one .csv file by inserting the new records and updating the existing records.</p>
+<p><img alt="" src="../Resources/Images/Import_Export_Storage/Editing_csv.png" /></p>
+<p>The file name the files of .csv files should be as <objectname>.csv.</p>
+<p><strong>For example</strong>: Employee and Department are two objects (tables). To update both the tables, modify both employee.csv and department.csv files. Archive the files into a single zip file.</p>
+</li>
+<li>
+<p>Zip the modified .csv file.</p>
+<p><img alt="" src="../Resources/Images/Import_Export_Storage/zip_file.png" /></p>
+</li>
+</ol>
+<h5 id="import-storage-objects-data-from-csv-to-admin-server-console">Import Storage Objects Data from .csv to Admin Server Console</h5>
+<ol>
+<li>In the admin server console, choose Object Services.</li>
+<li>Click the <strong>Import</strong> icon to import the modified data set.</li>
+<li>
+<p>In the <strong>Import File</strong> box, browse to your storage objects data file, and then double-click to select it.</p>
+<p><img alt="" src="../Resources/Images/Import_Export_Storage/Import_pop_up.png" /></p>
+</li>
+<li>
+<p>Click <strong>Upload</strong> to upload the selected file.</p>
+</li>
+<li>In the <strong>Object Services</strong> tab, select the storage service imported to get the imported data.</li>
+<li>
+<p>In the <strong>Request Input</strong> tab, click <strong>Get Response</strong>.</p>
+<p><img alt="" src="../Resources/Images/Import_Export_Storage/Request_Input.png" /></p>
+</li>
+<li>
+<p>The <strong>Response Output</strong> displays the imported data in the form of a source code.</p>
+<p><img alt="" src="../Resources/Images/Import_Export_Storage/Response_Output.png" /></p>
+</li>
+</ol>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2021 - 2024, HCL America, Inc. | <a href="https://hcltechsw.com/wps/portal/legal/privacy">Privacy Statement</a> | <a href="https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.hcltechsw.com%2Fwps%2Fportal%2Flegal%2Fterms-use&data=04%7C01%7Csuresh.chenji%40hcl.com%7Ca77ebddc51574aff8c6c08d8f056542d%7C189de737c93a4f5a8b686f4ca9941912%7C0%7C0%7C637523600856805537%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&sdata=vLnT466NGuIbvQ0nEwfn2qdXeuhHb6XOnh1pibATDI4%3D&reserved=0">Terms of Use</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+<div class="md-social">
+  <ul class="social-nav">
+    <li><a href="https://www.facebook.com/HCLDigital" class="facebook" target="_blank">Facebook</a></li>
+    <li><a href="https://www.linkedin.com/company/hclsoftware" class="linkedin" target="_blank">LinkedIn</a></li>
+    <li><a href="https://twitter.com/HCLDigital"  class="twitter" target="_blank">Twitter</a></li>
+    <li><a href="https://www.youtube.com/HCLDigitalSolutions" class="youtube" target="_blank">Youtube</a></li>
+    <li>
+      <a href="https://github.com/HCL-TECH-SOFTWARE" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    </li>
+  </ul>    
+</div>
+  </div>
+  <div class="md-footer-meta__inner md-grid">
+  <span class="md-footer__git_legacy">Please report problems with this documentation by <a class="announcement__link" href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/issues">opening issues in Github</a>.</span>
+  <span class="legacy-link md-footer__git_legacy">Can't find a topic? Check the legacy documentation <a class="announcement__link" href="https://opensource.hcltechsw.com/Volt-MX-Documentation-Archive/docs/documentation/" target="_blank">here</a>.</span>
+</span>
+    </div>
+</div>
+    <script>
+      function myFunction92(){
+          var initial_url = document.location.href;
+          // var initial_url = 'https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Upgrading_VoltMX_Foundry_9.2.html#prerequisites'
+//          var fixed_url = 'https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation'
+          var url_stub = initial_url.split( '95/docs/documentation' );
+          var fixed_url = url_stub[0]+'docs/documentation';
+		  console.log(fixed_url);
+          var url = initial_url.split( '/' );
+          var updated_url
+          var updated_url2
+          var http = new XMLHttpRequest();
+          var index_url = 'https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/index.html'
+          if ( url[ url.length - 2 ] == "Foundry" || url[ url.length - 2 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 2 ] == "articles" || url[ url.length - 2] == "getting-started" || url[ url.length - 2 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 3 ] == "Foundry" || url[ url.length - 3 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 3 ] == "articles" || url[ url.length - 3 ] == "getting-started" || url[ url.length - 3 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 4 ] == "Foundry" || url[ url.length - 4 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 4 ] == "articles" || url[ url.length - 4 ] == "getting-started" || url[ url.length - 4 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 5 ] == "Foundry" || url[ url.length - 5 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 5 ] == "articles" || url[ url.length - 5 ] == "getting-started" || url[ url.length - 5 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 5 ] + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 6 ] == "Foundry" || url[ url.length - 6 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 6 ] == "articles" || url[ url.length - 6 ] == "getting-started" || url[ url.length - 6 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 6 ] + '/' + url[ url.length - 5 ] + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else{
+            updated_url= fixed_url + '/' + url[ url.length - 1];
+          }
+          http.open('HEAD', updated_url, false);
+          http.send();
+          console.log(http.status)
+          if (http.status != 404){
+                 updated_url2 = updated_url;
+          } else{
+                updated_url2 = index_url;
+          }
+        console.log(updated_url2)
+        window.location.replace(updated_url2);
+      }
+    </script>
+  
+
+</footer>
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.instant"], "search": "../../../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+    
+  </body>
+</html>

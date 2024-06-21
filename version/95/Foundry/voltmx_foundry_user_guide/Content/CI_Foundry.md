@@ -70,9 +70,9 @@ In the scenario, a user must perform the following steps:
 
     To encrypt the password, run the following command.
 
-```
- java -jar mfcli.jar  encrypt password ciuserpwd
-```
+    ```
+    java -jar mfcli.jar  encrypt password ciuserpwd
+    ```
 
     An encrypted password is generated for the preceding ciuserpwd. Use the encrypted password in the following commands in the scenario.
 
@@ -81,59 +81,58 @@ In the scenario, a user must perform the following steps:
 
     To export the app, a user must run the following command.
 
-```
- java -jar mfcli.jar Export -u ciuser@moboco.com -p encrypted_password -a MoBoApp –f .\MoBoApp.zip -au http://10.10.25.18:8080 -cu http://10.10.25.18:8080.
-```
+    ```
+    java -jar mfcli.jar Export -u ciuser@moboco.com -p encrypted_password -a MoBoApp –f .\MoBoApp.zip -au http://10.10.25.18:8080 -cu http://10.10.25.18:8080.
+    ```
 
-In the scenario, ciuser@moboco.com is the user with password  encrypted_password. The user's account helps to export the MoBoApp as MoBoApp.zip. The Identity (Auth) Services and console are running on http://10.10.25.18:8080.
+    In the scenario, ciuser@moboco.com is the user with password  encrypted_password. The user's account helps to export the MoBoApp as MoBoApp.zip. The Identity (Auth) Services and console are running on http://10.10.25.18:8080.
 
-The following is an example of how the export command is used:
+    The following is an example of how the export command is used:
+    To export an application from an on premise installation - 
+    
+    ```
+    java -jar mfcli.jar Export -u [user] -p [encrypted_password] -a [app name] -f [file name] -au [Identity URL] -cu [Console URL]
+    ```
 
-```
+8. **Import the app (as a zip file) into Volt MX Cloud Account**  
 
+    ```
+    java -jar mfcli.jar Import -u ciuser@moboco.com -p encrypted_password -a MoBoApp –f .\MoBoApp.zip –t 100054321
+    ```
 
-To export an application from an on premise installation,
+    In the example, ciuser@moboco.com is the user with encrypted_password. The user's account helps to import the MoBoApp from MoBoApp.zip.
 
-java -jar mfcli.jar Export -u [user] -p [encrypted_password] -a [app name] -f [file name] -au [Identity URL] -cu [Console URL]
+    > **_Note:_** Since no URL is provided for Identity Service and console, it is assumed that the URL is Volt MX Cloud ([](https://manage.hclvoltmx.com/)[https://manage.hclvoltmx.com](https://manage.hclvoltmx.com/)). Since Volt MX Cloud is a multiple tenants (account) service, a user must specify the account ID using –t. The account ID in the preceding example is 100054321.
 
-```8. **Import the app (as a zip file) into Volt MX Cloud Account**
-```
- java -jar mfcli.jar Import -u ciuser@moboco.com -p encrypted_password -a MoBoApp –f .\MoBoApp.zip –t 100054321
-```
+    > **_Note:_** In the example, it is assumed a user is trying to overwrite the existing MoBoApp in the account. If this is new application, then do not specify any name with -a option.
 
-In the example, ciuser@moboco.com is the user with encrypted_password. The user's account helps to import the MoBoApp from MoBoApp.zip.
+    The following is an example of how the import command is used:
+    To import an application to manage.hclvoltmx.com,
+    ```
+    java -jar mfcli.jar import -u <user> -p <password> -t <account id> [-f <file name> | -r <directory name>] [-a <app name>] [-v <app version>] [-ay] [-to <time in secs>]
+    ```  
 
-> **_Note:_** Since no URL is provided for Identity Service and console, it is assumed that the URL is Volt MX Cloud ([](https://manage.hclvoltmx.com/)[https://manage.hclvoltmx.com](https://manage.hclvoltmx.com/)). Since Volt MX Cloud is a multiple tenants (account) service, a user must specify the account ID using –t. The account ID in the preceding example is 100054321.
+14. **Publish the app to QAEnv1**
 
-> **_Note:_** In the example, it is assumed a user is trying to overwrite the existing MoBoApp in the account. If this is new application, then do not specify any name with -a option.
+    ```
+    java -jar mfcli.jar Publish -u ciuser@moboco.com -p encrypted_password -e QAEnv1 -a MoBoApp –t 100054321
+    ```
 
-The following is an example of how the import command is used:
+    This method is similar to local publish, except the -t option specifies the account ID.
 
-```
+    The following is an example of how the publish command is used:
+    To publish an application to manage.hclvoltmx.com,
 
+    ```
+    java -jar mfcli.jar Publish -u [user] -p [encrypted_password] -e [environment name] -a [app name] -t [account id]
+    ```
 
-To import an application to manage.hclvoltmx.com,
+    If the end-point URL or any other property is different in QA environment running on Volt MX Cloud, you can use the [Application Reconfiguration](ServiceReconfig.md) support to set these properties at one time action in Volt MX Foundry Console. The environment specific properties will automatically get applied every time you publish.  
 
-java -jar mfcli.jar import -u <user> -p <password> -t <account id> [-f <file name> | -r <directory name>] [-a <app name>] [-v <app version>] [-ay] [-to <time in secs>]
-
-```14. **Publish the app to QAEnv1**
-```
- java -jar mfcli.jar Publish -u ciuser@moboco.com -p encrypted_password -e QAEnv1 -a MoBoApp –t 100054321
-```
-
-This method is similar to local publish, except the -t option specifies the account ID.
-
-The following is an example of how the publish command is used:
-
-```
- To publish an application to manage.hclvoltmx.com,
-
-java -jar mfcli.jar Publish -u [user] -p [encrypted_password] -e [environment name] -a [app name] -t [account id]
-```
-
-If the end-point URL or any other property is different in QA environment running on Volt MX Cloud, you can use the [Application Reconfiguration](ServiceReconfig.md) support to set these properties at one time action in Volt MX Foundry Console. The environment specific properties will automatically get applied every time you publish.
 
 ### Miscellaneous Features
+
+> **_Note:_** The following section provides the supported list of MFCLI commands with the links to Foundry Console features. 
 
 #### Get Usage
 
@@ -144,6 +143,8 @@ java -jar mfcli.jar help
 Following commands are supported:-
 
 <code>account-config</code>   Gets Auth url information for the Volt MX Foundry Command Line Utility can be downloaded from <a href="http://community.hclvoltmx.com/downloads">VoltMX download center</a>. Foundry installation. Applicable for on-premise installation only.
+
+<code>app-upgrade</code>   Command to generate Upgraded Version app zip. Creates an upgraded app zip with a version higher than provided. <a href="Version_Upgrade_Apps_Services_MFCLI.html">Click here for more details on the app-upgrade command</a>
 
 <code>appinfo</code>   Displays the App key, App Secret and Service URL for an application 
 
@@ -218,6 +219,9 @@ Click here for more details on the import-config command</a>
 
 <code>license</code>   Gets the license information from the Volt MX Foundry installation. Applicable for on-premise installation only.
 
+<code>lock-app</code>   Command to lock the app and return a locked app zip in the given location.
+<a href="LockApp.html">Click here for more details on lock-app command</a>
+
 <code>lock-config</code>   Command to lock services given a lock configuration json and an App zip. Creates a clone of the provided app with lock configuration applied.
 <a href="Lock_Unlock_Fields_ObjectServices_MFCLI.html">Click here for more details on lock-config command</a>
 
@@ -231,6 +235,10 @@ Click here for more details on merge-app-zip command</a>
 <a href="../../voltmx_foundry_user_guide/Content/CI_NativeUploadPublish.html"> 
 Click here for more details on native-publish command</a>
 
+<code>object-service-verbs-meta</code>   Fetches the Object Service verbs meta from the foundry application.
+
+<code>object-services-meta</code>   Fetches the Object Services Metadata of the foundry application published to an environment.
+
 <code>promote-deploymentpackage</code>   Promotes the imported deployment package to the environment.
 <a href="../../voltmx_foundry_user_guide/Content/AppPromotion.html">
 Click here for more details on Promote a Deployment Package command</a>
@@ -241,6 +249,8 @@ Click here for more details on Promote a Deployment Package command</a>
 
 <code>publish-status</code>   Queries the publish/unpublish status of an application in an environment.
 
+<code>service-upgrade</code>   Command to generate Upgraded Version service zip. Creates an upgraded service zip with a version higher than provided.
+<a href="Version_Upgrade_Apps_Services_MFCLI.html">Click here for more details on the service-upgrade command</a>
 
 <code>set-appversion</code>   Sets a particular version as default among all successfully published versions of an app.
 

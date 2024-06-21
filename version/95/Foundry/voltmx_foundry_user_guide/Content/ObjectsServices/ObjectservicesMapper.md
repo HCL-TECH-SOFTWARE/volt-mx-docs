@@ -9,7 +9,24 @@ The core mapper engine is integrated into the Object Services pipeline. The mapp
 
 For the request that is coming in to the mapper, after basic URL parsing and ODATA parsing are performed, all the context is made available to the request mapper. The request mapper modifies the payload and sends it into the next stage of the pipeline, which goes to the back end, typically by using an integration connector.
 
-After the response is picked up, the whole context is made available to the response mapper. The Response mapper makes changes to the data, and outputs the data after some formatting. The internal mapper logic is the same for both the input and output pipelines, but the context that is made available to the mapper changes.
+After the response is picked up, the whole context is made available to the response mapper. The Response mapper makes changes to the data, and outputs the data after some formatting. The internal mapper logic is the same for both the input and output pipelines, but the context that is made available to the mapper changes.  
+
+
+### Multiple Mapper Support
+
+From V9SP2 FP2, VoltMX Foundry support multiple mappers to an Object verb. You can create more than one Visual/XML mappings/s for a verb.  During the verb creation for Objects once a verb is associated with a back-end service operation, an empty Visual/XML mapper is added by default, naming as `base mapper1`. The new **Add** button is available in the Mappings header section that allows you to create mappings. You must click this to expand it, and then click EDIT for adding mappings mapping configuration.
+
+All the listed Visual/XML mappings/s are considered for the app, and the same will be published. 
+
+![](../Resources/Images/multiple_basemapper1.png)
+
+**For Locked Apps**: If you are using Locked Object Services, <u>you cannot edit locked base Visual/XML mapper/s</u>. 
+
+All locked Visual/XML mapper/s are selected with <b>Enabled</b> option to be included in the custom app by default. 
+
+However, you can choose to enable/disable the locked Visual/XML mappers for extending the base app functionality with or without custom <u>Visual/XML mapper/s</u>.
+
+For more information, refer [Locking a Foundry App](./../LockApp.md)
 
 The following diagram shows the Object Services pipeline.
 
@@ -55,19 +72,19 @@ The mapper includes the following built-in variables, built-in functions, and bl
 Built-in Variables
 
 ```
- **a/b/c**   /* An input path of a.b.c in the given object */  
-**../b**      /* inputpath = "b" on $current-input.getParent() */  
- **$current-input** /* Input instance of current map block */  
- **$current-output** /* Output instance of current map block */  
- **$mapper-input** /* Mapper instance’s global input */  
- **$mapper-output**  /* Mapper instance’s global output */  
- **$vars/x** /* Variables are stored in this hash.  All variables are GLOBAL */  
- **$args/<arg name>** /* Arguments passed to a function */
+ a/b/c   /* An input path of a.b.c in the given object */  
+ ../b      /* inputpath = "b" on $current-input.getParent() */  
+ $current-input /* Input instance of current map block */  
+ $current-output /* Output instance of current map block */  
+ $mapper-input /* Mapper instance’s global input */  
+ $mapper-output  /* Mapper instance’s global output */  
+ $vars/x /* Variables are stored in this hash.  All variables are GLOBAL */  
+ $args/<arg name> /* Arguments passed to a function */
 ```
 
 On a function call, by default, `$args.current-input` is set to `$current-input`, and `$args.current-output` is set to `$current-output`.
 
-`` `input="myinput" inputpath="firstname"` `` is equivalent to `$myinput["firstname"]`
+`input="myinput" inputpath="firstname"` is equivalent to `$myinput["firstname"]`
 
 `inputpath="firstname"` is equivalent to `$current-input["firstname"]`
 
@@ -95,22 +112,169 @@ Blocks
 
 The following table describes the blocks available:
 
+<!-- <table>
+<tr>
+<th>Block</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+<tr>
+<td>map</td>
+<td>This is the main block in mapper.</td>
+<td><pre><code><map inputpath="x/y/z" input="$current-input"
+outputpath="x" output="$current-output">
+</map></code></pre></td>
+</tr>
+
+<tr>
+<td>set-param</td>
+<td>Sets an output parameter from input.</td>
+<td><pre><code> <set-param  inputpath="x/y/z" input="$current-input" outputpath="x" output="$current-output"  />Output.outputpath=input.inputpath</code></pre></td>
+</tr>
+
+<tr>
+<td>set-arg</td>
+<td>Variant of set-param to set the argument of a function.</td>
+<td><pre><code><set-arg         
+    name="x"          
+    inputpath="x/y/z" input="$current-input"/></code></pre></td>
+</tr>
+
+<tr>
+<td>set-variable</td>
+<td>Variant of set-param to define and set a global variable.</td>
+<td><pre><code><set-variable           
+name="x"
+
+       inputpath="x/y/z" input="$current-input"
+ 
+/></code></pre><br>is a shortcut for the following:<br><pre><code> 
+<set-param         inputpath="x/y/z" input="$current-input"
+           outputpath="x" output="$vars"  /></code></pre></td>
+</tr>
+
+<tr>
+<td>exec-function</td>
+<td>Execute function.The return value of exec-function is written to the output/outputpath attributes of exec-function.</td>
+<td><pre><code><map inputpath="contact" outputpath="contact"> 
+<exec-function name="contact-field-map" >
+
+/* input is set to $current-input and
+                     output is set to  $current-output by default */
+
+</exec-function>/
+
+</map>
+/* Complex */
+
+<map inputpath="contact" outputpath="contact" output="$current-output" >
+    
+<exec-function name="field-map" outputpath="myresult" output="$vars">
+          
+<set-arg name="a" inputpath="firstname" input="$current-input" >        
+<set-arg name="b" input="3" >
+     
+</exec-function>
+ 
+</map>
+$vars[myresult] = field-map({a: "$current-input" ["firstname"], b: "3" })</code></pre></td>
+</tr>
+
+<tr>
+<td>choose-when-otherwise</td>
+<td>When a "test" condition evaluates to true, then the "when" block is executed. If the "test" condition evaluates to false the "otherwise" block is executed.</td>
+<td><pre><code><choose>
+                <when test="$vars/NTFCondition">
+...
+                </when>
+               <when test="$vars/CONCondition">
+...
+                </when>
+                <otherwise>
+                     ...
+                 </otherwise>
+</choose></code></pre></td>
+</tr>
+
+<tr>
+<td>Create-lookup</td>
+<td>Create-lookup loops on the inputpath array and creates a hashmap with a lookup-key parameter as key and value as “Node” object refers to corresponding customer row of the input object.</td>
+<td><pre><code><create-lookup inputpath=”Customers” output=”$vars” ouputpath=”customerMap”>
+		<lookup-key inputpath=”Id”/>
+	</create-lookup></code></pre></td>
+</tr>
+
+<tr>
+<td>Lookup</td>
+<td>Retrieves the “Node” object from the hashmap and makes it available in the output.</td>
+<td><pre><code><lookup input=”$vars” inputpath=”customerMap” outputpath=”customerRef” output=”$vars”>
+			<lookup-key inputpath=”CustomerId”/>
+		</lookup></code></pre></td>
+</tr>
+
+<tr>
+<td>Create-group</td>
+<td>Create-group generates an aggregate group of objects based on a key designated by the group-key block. Each object is contains multiple entries. Each entry is a key/value pair.</td>
+<td><pre><code><create-group inputpath=”Time_Entry” output=”$vars” ouputpath=”customerMap”>		<group-key inputpath=”Timesheet_Id”/>
+</create-group></code></pre></td>
+</tr>
+
+<tr>
+<td>Group-key</td>
+<td>Key used to group items for aggregation.</td>
+<td><pre><code><group-key inputpath=”Timesheet_Id”/></code></pre></td>
+</tr>
+
+<tr>
+<td>javascript</td>
+<td>JavaScript element must occur one time only as a child element to the Function element. Then name of outputpath attribute represents a field in the app data model.</td>
+<td><pre><code><function name="NameConcat">
+		<javascript outputpath="FullName">
+			<set-arg name="firstName" inputpath="FirstName" />
+			<set-arg name="middleName" inputpath="MiddleName" />
+			<set-arg name="lastName" inputpath="LastName" />
+			
+<script>
+			You logic goes here.....
+</script>
+</javascript>
+</function></code></pre></td>
+</tr>
+
+<tr>
+<td>script</td>
+<td>The Script element is a required child element in a JavaScript element. It must occur one time only. The JavaScript snippet should be written in CDATA section of this element.</td>
+<td><pre><code> 
+			<script>
+			<![CDATA[
+			  function concat(){
+			   var result = firstName+’ ‘+ middleName + ’ ‘+lastName.substring(0, 1).toUpperCase() + '. '
+			    return result;
+  			    }
+			   concat();
+			 ]]>
+			</script></code></pre></td>
+</tr>
+</table> -->
+
+
+
   
 | Block | Description | Example |
 | --- | --- | --- |
-| **map** | This is the main block in mapper. |  <map inputpath="x/y/z" input="$current-input" outputpath="x" output="$current-output"></map> |
-| **set-param** | Sets an output parameter from input. |  <set-param inputpath="x/y/z" input="$current-input" outputpath="x" output="$current-output" />Output.outputpath=input.inputpath |
-| **set-arg** | Variant of set-param to set the argument of a function. |  <set-arg name="x" inputpath="x/y/z" input="$current-input" /> is a shortcut for the following: <set-param inputpath="x/y/z" input="$current-input" outputpath="x" output="$args" /> |
-| **set-variable** | Variant of set-param to define and set a global variable. |  <set-variable name="x" inputpath="x/y/z" input="$current-input" /> is a shortcut for the following: <set-param inputpath="x/y/z" input="$current-input" outputpath="x" output="$vars" /> |
+| **map** | This is the main block in mapper. | `<map inputpath="x/y/z" input="$current-input" outputpath="x" output="$current-output"></map>` |
+| **set-param** | Sets an output parameter from input. |  `<set-param inputpath="x/y/z" input="$current-input" outputpath="x" output="$current-output" /> Output.outputpath=input.inputpath` |
+| **set-arg** | Variant of set-param to set the argument of a function. | `<set-arg name="x" inputpath="x/y/z" input="$current-input"/>` <br> is a shortcut for the following: <br>`<set-param inputpath="x/y/z" input="$current-input" outputpath="x" output="$args"  />`|
+| **set-variable** | Variant of set-param to define and set a global variable. | `<set-variable name="x" inputpath="x/y/z" input="$current-input"/>` <br> is a shortcut for the following: <br> `<set-param inputpath="x/y/z" input="$current-input" outputpath="x" output="$vars"  />`|
 |   |   |   |
-| **exec-function** | Execute function. The return value of exec-function is written to the output/outputpath attributes of exec-function. |  <map inputpath="contact" outputpath="contact"> <exec-function name="contact-field-map" > /\* input is set to $current-input and output is set to $current-output by default \*/ </exec-function>/ </map>/\* Complex \*/ <map inputpath="contact" outputpath="contact" output="$current-output" > <exec-function name="field-map" outputpath="myresult" output="$vars"> <set-arg name="a" inputpath="firstname" input="$current-input" > <set-arg name="b" input="3" > </exec-function> </map>$vars\[myresult\] = field-map({a: "$current-input" \["firstname"\], b: "3" }) |
-| **choose-when-otherwise** | When a "test" condition evaluates to true, then the "when" block is executed. If the "test" condition evaluates to false the "otherwise" block is executed. |  <choose> <when test="$vars/NTFCondition">... </when> <when test="$vars/CONCondition">... </when> <otherwise> ... </otherwise></choose> |
-| **Create-lookup** | Create-lookup loops on the inputpath array and creates a hashmap with a lookup-key parameter as key and value as “Node” object refers to corresponding customer row of the input object. |  <create-lookup inputpath=”Customers” output=”$vars” ouputpath=”customerMap”> <lookup-key inputpath=”Id”/> </create-lookup> |
-| **Lookup** | Retrieves the “Node” object from the hashmap and makes it available in the output. |  <lookup input=”$vars” inputpath=”customerMap” outputpath=”customerRef” output=”$vars”> <lookup-key inputpath=”CustomerId”/> </lookup> |
-| **Create-group** | Create-group generates an aggregate group of objects based on a key designated by the group-key block. Each object is contains multiple entries. Each entry is a key/value pair. |  <create-group inputpath=”Time\_Entry” output=”$vars” ouputpath=”customerMap”> <group-key inputpath=”Timesheet\_Id”/> </create-group> |
-| **Group-key** | Key used to group items for aggregation. |  <group-key inputpath=”Timesheet\_Id”/> |
-| javascript  | JavaScript element must occur one time only as a child element to the Function element. Then name of outputpath attribute represents a field in the app data model. |  <function name="NameConcat"> <javascript outputpath="FullName"> <set-arg name="firstName" inputpath="FirstName" /> <set-arg name="middleName" inputpath="MiddleName" /> <set-arg name="lastName" inputpath="LastName" /> <script> You logic goes here..... </script> </javascript> </function> |
-| **script** | The Script element is a required child element in a JavaScript element. It must occur one time only. The JavaScript snippet should be written in **CDATA** section of this element. |  <script> <!\[CDATA\[ function concat(){ var result = firstName+’ ‘+ middleName + ’ ‘+lastName.substring(0, 1).toUpperCase() + '. ' return result; } concat(); \]\]> </script> |
+| **exec-function** | Execute function. The return value of exec-function is written to the output/outputpath attributes of exec-function. |  `<map inputpath="contact" outputpath="contact"> <exec-function name="contact-field-map" > /* input is set to $current-input and output is set to  $current-output by default */ </exec-function>/ </map> /* Complex */ <map inputpath="contact" outputpath="contact" output="$current-output" > <exec-function name="field-map" outputpath="myresult" output="$vars"> <set-arg name="a" inputpath="firstname" input="$current-input" > <set-arg name="b" input="3" > </exec-function> </map> $vars[myresult] = field-map({a: "$current-input" ["firstname"], b: "3" })` |
+| **choose-when-otherwise** | When a "test" condition evaluates to true, then the "when" block is executed. If the "test" condition evaluates to false the "otherwise" block is executed. |  `<choose> <when test="$vars/NTFCondition"> ... </when> <when test="$vars/CONCondition"> ... </when> <otherwise> ... </otherwise> </choose> ` |
+| **Create-lookup** | Create-lookup loops on the inputpath array and creates a hashmap with a lookup-key parameter as key and value as “Node” object refers to corresponding customer row of the input object. |  `<create-lookup inputpath=”Customers” output=”$vars” ouputpath=”customerMap”> <lookup-key inputpath=”Id”/> </create-lookup>` |
+| **Lookup** | Retrieves the “Node” object from the hashmap and makes it available in the output. |  `<lookup input=”$vars” inputpath=”customerMap” outputpath=”customerRef” output=”$vars”> <lookup-key inputpath=”CustomerId”/> </lookup>` |
+| **Create-group** | Create-group generates an aggregate group of objects based on a key designated by the group-key block. Each object is contains multiple entries. Each entry is a key/value pair. |  `<create-group inputpath=”Time_Entry” output=”$vars” ouputpath=”customerMap”> <group-key inputpath=”Timesheet_Id”/> </create-group>` |
+| **Group-key** | Key used to group items for aggregation. |  `<group-key inputpath=”Timesheet_Id”/>` |
+| **javascript** | JavaScript element must occur one time only as a child element to the Function element. Then name of outputpath attribute represents a field in the app data model. | `<function name="NameConcat"> <javascript outputpath="FullName"> <set-arg name="firstName" inputpath="FirstName" /> <set-arg name="middleName" inputpath="MiddleName" /> <set-arg name="lastName" inputpath="LastName" /> <script> You logic goes here..... </script> </javascript> </function>` |
+| **script** | The Script element is a required child element in a JavaScript element. It must occur one time only. The JavaScript snippet should be written in **CDATA** section of this element. |  `<script> <![CDATA[ function concat(){ var result = firstName+’ ‘+ middleName + ’ ‘+lastName.substring(0, 1).toUpperCase() + '. ' return result; } concat(); ]]> </script>` |
 
 ### Example: Mapper Structure
 

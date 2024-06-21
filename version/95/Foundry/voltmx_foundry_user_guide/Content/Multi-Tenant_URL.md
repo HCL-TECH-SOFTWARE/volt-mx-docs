@@ -32,7 +32,7 @@ Request payload:
 
 ```
 
-The following is a sample code to map service URLs (`CUSTOM_TENANT_SVC_URLS`).
+<!-- The following is a sample code to map service URLs (`CUSTOM_TENANT_SVC_URLS`).
 
 ```
  {
@@ -45,7 +45,7 @@ The following is a sample code to map service URLs (`CUSTOM_TENANT_SVC_URLS`).
 {\"https://mfprivate.hcl.net:8443/services\": \"https://public2.hcl.net:8443/services\", \"https://mfprivate.hcl.net:8443/vpns\": \"https://public2.hcl.net:8443/vpns\", \"https://mfprivate.hcl.net:8443/syncservice\": \"https://public2.hcl.net:8443/ syncservice\" }
 }}"
 }
-```
+``` -->
 
 The following table details sample private and public URLs.
 

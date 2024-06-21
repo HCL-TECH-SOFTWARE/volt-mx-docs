@@ -30,7 +30,7 @@ How to Customize APIs in Object Services
         
         | Visual Mapper Configuration | Result of the published Parameters in Developer Portal |
         | --- | --- |
-        | ![](Resources/Images/VisualMapperOpenAPI.png) | ![](Resources/Images/VisualMaperOpenAPIDevPortal.png) |
+        | <img src = "Resources/Images/VisualMapperOpenAPI.png"> | <img src="Resources/Images/VisualMaperOpenAPIDevPortal.png"> |
         
     *   In **Response > XML Mapper**: `accountID` and `dept` fields of the object data-model are configured using **OpenAPI Specification**. You can specify multiple fields names separated by a comma. Utilizing the OpenAPI Specification feature is essential here to display correct parameters for your API.
         
@@ -38,12 +38,7 @@ How to Customize APIs in Object Services
         | --- | --- |
         | ![](Resources/Images/XMLOpenAPI.png) | ![](Resources/Images/XMLOpenAPIDevPortal.png) |
         
-    *   In **Response > XML Mapper**: the `accountID` and `dept` fields of the back-end object field is configured. 
-        
-        | XML Mapper Configuration | Result of the published Params in Developer Portal |
-        | --- | --- |
-        | ![](Resources/Images/XMLMapper.png) | ![](Resources/Images/XMLMapperDevPortal.png) |
-        
+    
 6.  Click **SAVE** the verb mapping.
 7.  Publish the app. Now, these custom details are reflected for the verb in your Developer Portal.
 

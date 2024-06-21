@@ -10,7 +10,7 @@ Perform the following steps to initialize the .NET SDK.
 1.  Include the downloaded .dll files in your Visual Studio project.
 2.  Create an instance of the SDK.
 
-`Kony.SDK sdkObject = new Kony.SDK();`
+`VoltMX.SDK sdkObject = new VoltMX.SDK();`
 
 Use the methods and properties of the SDK class to initialize and access the .NET SDK.
 
@@ -72,12 +72,12 @@ The **Init** method throws this exception when an error occurs while fetching th
 Synchronous
 
 ```
-  //Sample code to initialize Quantum Fabric Client synchronously.			
+  //Sample code to initialize VoltMX Foundry Client synchronously.			
 string appkey = < your - app - key >
     string appsecret = < your - app - secret >
     string serviceURL = < your - service - url >
 
-Kony.SDK sdkObject = new Kony.sdk();
+VoltMX.SDK sdkObject = new VoltMX.sdk();
 try {
     JObject serviceDoc = sdkObject.Init(appkey, appsecret, serviceURL);
     Console.WriteLine("Init Success");
@@ -89,12 +89,12 @@ try {
 Asynchronous
 
 ```
-  //Sample code to initialize Quantum Fabric Client asynchronously.
+  //Sample code to initialize VoltMX Foundry Client asynchronously.
 string appkey = < your - app - key >
     string appsecret = < your - app - secret >
     string serviceURL = < your - service - url >
 
-Kony.SDK sdkObject = new Kony.sdk();
+VoltMX.SDK sdkObject = new VoltMX.sdk();
 try {
     JObject serviceObj = await sdkObject.InitAsync(appkey, appsecret, serviceURL);
     Console.WriteLine("Init Success");

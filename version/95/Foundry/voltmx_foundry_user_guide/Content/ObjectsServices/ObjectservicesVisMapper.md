@@ -22,6 +22,24 @@ The design view is available along with a XML code view of your mappings. You ca
 
 The procedures in this section describe how to use the visual designer to manage your Object Service mappings.
 
+
+### Multiple Mapper Support
+
+From V9SP2 FP2, VoltMX Foundry support multiple mappers to an Object verb. You can create more than one Visual/XML mappings/s for a verb.  During the verb creation for Objects once a verb is associated with a back-end service operation, an empty Visual/XML mapper is added by default, naming as `base mapper1`. The new **Add** button is available in the Mappings header section that allows you to create mappings. You must click this to expand it, and then click EDIT for adding mappings mapping configuration.
+
+All the listed Visual/XML mappings/s are considered for the app, and the same will be published. 
+
+![](../Resources/Images/multiple_basemapper1.png)
+
+**For Locked Apps**: If you are using Locked Object Services, <u>you cannot edit locked base Visual/XML mapper/s</u>. 
+
+All locked Visual/XML mapper/s are selected with <b>Enabled</b> option to be included in the custom app by default. 
+
+However, you can choose to enable/disable the locked Visual/XML mappers for extending the base app functionality with or without custom <u>Visual/XML mapper/s</u>.
+
+For more information, refer [Locking a Foundry App](./../LockApp.md)
+
+
 ### How to View and Edit Mappings
 
 You can examine any Object Service in visual design view that has request and response mappings. This section describes how to access visual design view for your services.
@@ -34,7 +52,8 @@ You can also edit your mappings by clicking the Edit button at the bottom of the
 
 1.  In the **Object Services** list, click the ... button on the right side of the service listing you want to view, and then click **Edit Configuration**.
 2.  In the navigation pane, click the **Mapping** tab.
-3.  In the **Mapping** tab, click the item you want to view.
+3.  In the **Mapping** tab, click the object > verb you want to view. By default, base mapper1 is created.
+4.  Click the **base mapper1** to expand it.
 4.  Click either the **Request Mapping** or the **Response Mapping** tab.
 5.  Under **Request Mapping** or **Response Mapping**, click the design view tab, which is located next to the Sample Mapping button.  
     ![](../Resources/Images/VisualObjectMapperDesignViewTab.png)

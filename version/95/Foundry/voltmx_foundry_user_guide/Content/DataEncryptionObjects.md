@@ -138,7 +138,8 @@ You need to have an Object service with required fields enabled with meta-data i
         
     8.  Specify name and value meta-data for the selected field.
     9.  Click **ADD**.
-    10.  Publish Foundry app.
+    10.  Publish Foundry app.  
+
 3.  Generate the object model as follows:
     1.  Navigate to the project in Iris.
     2.  Navigate to the **Project** menu, and right-click Volt MX Foundry app, and select **Generate Object Model**. Now, the object service is enabled for **Data Pre and Post Processors for Models** registration. You can now write your logic to be applied for selected fields in the data model.
@@ -152,39 +153,39 @@ You need to have an Object service with required fields enabled with meta-data i
         
     2.  In the **Code** editor, specify your custom JS code as follows:
         1.  Specify your code for [**Data Pre and Post Processors**](#API%C2%A0sign).
-```
- 
+
+            <pre><code>
             function preProcessor(value, context) {
-                value = encrypt(value); //transformation logic to be applied before sending over the network.
-                return value;
+            value = encrypt(value); //transformation logic to be applied before sending over the network.
+            return value;
             }
-             
             function postProcessor(value, context) {
                 value = decrypt(value); //transformation logic to be applied before returning value to user.
                 return value;
-            } 
-            
-```
+            }
+            </code></pre>
+        
+
         2.  Register fields in objects with the Data Pre and Post Processors for the client app.
             
             After you register callbacks as pre and post processors for objects, the specified callbacks are automatically invoked for every CRUD operations on that object, as shown in the following sample code snippet.
-            
-```
- 
-             var objModelDef\= voltmx.mvc.MDAApplication.getSharedInstance().modelStore.getModelDefinition("ObjectName");
-             
+
+            <pre><code>
+            var objModelDef\= voltmx.mvc.MDAApplication.getSharedInstance().modelStore.getModelDefinition("ObjectName");  
+
             function registrationSuccess() {
                 alert("Registration Success");
-            }
-             
+            }  
+
             function registrationFailure(err) {
-              alert("Registration Failure" + JSON.stringify(err));
-            }
-             
+            alert("Registration Failure" + JSON.stringify(err));
+            }  
+
             var options = {'preProcessor' : preProcessor, "postProcessor" : postProcessor }; objModelDef.registerProcessors(options, registrationSuccess, registrationFailure);
-```
+            
+            </code></pre>
+
 5.  Save and build the project.
-    
     So now you have enabled security to the sensitive fields in objects in your client app.
     
 
@@ -204,74 +205,68 @@ Write the logic/code for post data processor for that value password.
 [Registering Processors](#API%C2%A0sign)
 
 ```
- 
 function preProcessor(value, context) {
    //transformation logic to be applied before sending over the network.
     return value;
 }
- 
 function postProcessor(value, context) {
     //transformation logic to be applied before returning value to user.
     return value;
 }
-
 ```
 
 1.  PreProcessor performs encryption for fields for which metadata is defined. In this implementation, it performs encryption for the password before sending data over network.
-    
-    Below snippet shows implementation of PreProcessor for the Employee.
-    
-```
- var AESKey = "ABCDEFGHIJKLMNOP";
-    var algo = "aes";
-    var prptobj = {padding:"pkcs5", mode:"ecb"};
-     
-    /**
-    ** returns Base64 encoded cipherText using AES 128 algorithm.
-    ** AES is symmetric algorithm
-    */  
-    function encrypt(plainText) {
-      //pass key in wordArray format.
-      var key = CryptoJS.enc.Utf8.parse(AESKey);
-      var myEncryptedText = voltmx.crypto.encrypt(algo, key, plainText, prptobj);
-      return (JSON.parse(myEncryptedText).ct);
-    }
-     
-    function preProcessor(value, context) {
-          if(context.metadata.enableEncryption === "true" && context.metadata.encryptionAlgorithm === "AES") {
-                value = encrypt(value);
-          }
-          return value;
-    }
-```
+    Below snippet shows implementation of PreProcessor for the Employee.  
+        
+    <pre><code>
+        var AESKey = "ABCDEFGHIJKLMNOP";
+        var algo = "aes";
+        var prptobj = {padding:"pkcs5", mode:"ecb"};
+        /**
+        ** returns Base64 encoded cipherText using AES 128 algorithm.
+        ** AES is symmetric algorithm
+        */  
+        function encrypt(plainText) {
+        //pass key in wordArray format.
+        var key = CryptoJS.enc.Utf8.parse(AESKey);
+        var myEncryptedText = voltmx.crypto.encrypt(algo, key, plainText, prptobj);
+        return (JSON.parse(myEncryptedText).ct);
+        }
+        function preProcessor(value, context) {
+            if(context.metadata.enableEncryption === "true" && context.metadata.encryptionAlgorithm === "AES") {
+                    value = encrypt(value);
+            }
+            return value;
+        }
+    </code></pre>  
+
+
 2.  PostProcessor performs decryption for fields for which metadata is defined. In this implementation, it performs decryption for the password before sending data over network.
-    
-    Below snippet shows implementation of PostProcessor for the Employee.
-    
-```
- var AESKey = "ABCDEFGHIJKLMNOP";
-    var algo = "aes";
-    var prptobj = {padding:"pkcs5", mode:"ecb"};
-     
-    /**
-    ** returns plainText from encrypted using AES 128 algorithm
-    ** AES is symmetric algorithm
-    */
-    function decrypt(cipherText) {
-      //pass key in wordArray format.
-      var key = CryptoJS.enc.Utf8.parse(AESKey);
-      var stringifyCipher = JSON.stringify({'ct':cipherText});
-      var myClearText = voltmx.crypto.decrypt(algo, key, stringifyCipher, prptobj);
-      return myClearText;
-    }
-     
-    function postProcessor(value, context) {
-          if(context.metadata.enableEncryption === "true" && context.metadata.encryptionAlgorithm === "AES") {
-                value = decrypt(value);
-          }
-          return value;
-    }
-```
+    Below snippet shows implementation of PostProcessor for the Employee. 
+
+    <pre><code>
+        var AESKey = "ABCDEFGHIJKLMNOP";
+        var algo = "aes";
+        var prptobj = {padding:"pkcs5", mode:"ecb"};
+        /**
+        ** returns plainText from encrypted using AES 128 algorithm
+        ** AES is symmetric algorithm
+        */
+        function decrypt(cipherText) {
+        //pass key in wordArray format.
+        var key = CryptoJS.enc.Utf8.parse(AESKey);
+        var stringifyCipher = JSON.stringify({'ct':cipherText});
+        var myClearText = voltmx.crypto.decrypt(algo, key, stringifyCipher, prptobj);
+        return myClearText;
+        }
+        function postProcessor(value, context) {
+            if(context.metadata.enableEncryption === "true" && context.metadata.encryptionAlgorithm === "AES") {
+                    value = decrypt(value);
+            }
+            return value;
+        }
+    </code></pre>  
+
 
 **Sample Code for Context**
 
@@ -294,8 +289,7 @@ De-registering Processors
 
 To de-register the processors, use null/undefined as callback function, as shown in the following sample code snippet.
 
-```
- 
+``` 
 
 var employeeModel = voltmx.mvc.MDAApplication.getSharedInstance().modelStore.getModelDefinition("Employee");
  

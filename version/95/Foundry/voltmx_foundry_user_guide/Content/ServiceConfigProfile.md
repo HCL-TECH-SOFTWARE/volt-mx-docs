@@ -1,6 +1,6 @@
                                
 
-User Guide: [Publish](Publish.md) > Use Case
+User Guide: [Publish](Publish.md) > Use Case 
 
 Managing Service Profiles
 =========================
@@ -37,13 +37,14 @@ When you export service profiles, the service configuration parameters are downl
     *   **Complete:** Downloads the configuration parameters in a simplified JSON file structure containing the Environment Current Configuration, which is the configuration currently in a specific environment for a specific app.
     *   **Delta**: Downloads the configuration parameters in a simplified JSON file structure **containing only the Changed Values, which are the edited values and modified artifacts.**
     
-<details close markdown="block"><summary>sample JSON file format for Exported Service Configurations</summary>
+<details close markdown="block"><summary>Click here for sample JSON file format for Exported Service Configurations</summary>
     
-    From V9SP2, the simplified JSON file structure (2.0) with level values **complete** and **delta** is supported as follows:
-    
-    | **V2.0, Complete** | **V2.0, Delta** |
-    | --- | --- |
-    | //Sample code for exported service profile for Complete { "identity": { "SampleIdentityService": { "profile\_endpoint": "https://.......", "client\_secret": "qwerty", "type": "oauth2", "version": "1.0", "client\_id": "changed value", "authorization\_endpoint": "https://.........", "token\_endpoint": "https://.............." }, "SampleIdentityService2": { } }, "objectsvc": {}, "integration": { }, "formatVersion": "2.0" } |  //Sample code for exported service profile for Delta { "identity": { "SampleIdentityService": { "type": "oauth2", "version": "1.0", "client\_id": "changed value" } }, "objectsvc": {}, "integration": {}, "formatVersion": "2.0" } |
+From V9SP2, the simplified JSON file structure (2.0) with level values **complete** and **delta** is supported as follows:  
+
+| V2.0, Complete | V2.0, Delta |
+| --- | --- |
+| //Sample code for exported service profile for Complete:<br><br>{ "identity": { "SampleIdentityService": { "profile\_endpoint": "https://.......", "client\_secret": "qwerty", "type": "oauth2", "version": "1.0", "client\_id": "changed value", "authorization\_endpoint": "https://.........", "token\_endpoint": "https://.............." }, "SampleIdentityService2": { } }, "objectsvc": {}, "integration": { }, "formatVersion": "2.0" } | //Sample code for exported service profile for Delta:<br><br>{ "identity": { "SampleIdentityService": { "type": "oauth2", "version": "1.0", "client\_id": "changed value" } }, "objectsvc": {}, "integration": {}, "formatVersion": "2.0" } |  
+
 </details>
     
 
@@ -85,10 +86,10 @@ The `export-config` helps you to export the Service Profile for the existing ser
 
 *   To export a service profile from a Cloud (manage.hclvoltmx.com) environment
 ```
-java -jar mfcli.jar export-config -u <user> -p <password> -t <account id> [-f <file name>  [-a <app name>] [-v <app version>] [-e <environment name>] [-x <format version>] [-y <level>]
+java -jar mfcli.jar export-config -u <user> -p <password> -t <account id> [-f <file name>  [-a <app name>] [-v <app version>] [-e <environment name>] [-x <format version>] [-y <reconfiguration level>]
 ```
     
-> **_Important:_** The <level> values supported are **complete** and **delta**.  
+> **_Important:_** The **level** values supported are **complete** and **delta**.  
 ```
 
 For example:    
@@ -104,18 +105,19 @@ For example:
 java -jar mfcli.jar export-config -u abc@voltmx.com -p password -t 100054321 -f "C:\\tmp\\Sample.json" -a MyApp_23 -v 1.0 -e MyCloudEnvironment \-x 2.0 -y delta
 ```
 
-*   To export a service profile from an on-premise installation
+*   To export a service profile from an on-premise installation  
+
 ```
- java -jar mfcli.jar export-config -u <user> -p <password> -au <Identity URL> -cu <Console URL> [-f <file name>  [-a <app name>] [-v <app version>] [-e <environment name>] [-x <format version>] [-y <level>]
+ java -jar mfcli.jar export-config -u <user> -p <password> -au <Identity URL> -cu <Console URL> [-f <file name>  [-a <app name>] [-v <app version>] [-e <environment name>] [-x <format version>] [-y <reconfiguration level>]
 ```
     
-    For example:
+For example:
     
 ```
 java -jar mfcli.jar export-config -u abc@voltmx.com -p password -au http://10.10.24.79:8080 -cu http://10.10.24.78:8081 -f "C:\\tmp\\Sample.json" -a MyApp_23 -v 1.0 -e MyCloudEnvironment \-x 2.0 -y delta
 ```
     
-    The following arguments are supported for the export-config command:
+The following arguments are supported for the export-config command:
     
 ```
 For example, to get the summary help on all the commands,  
@@ -123,48 +125,50 @@ For example, to get the summary help on all the commands,
     Usage: Run the self-executable JAR with relevant arguments:
 ```
     
-      
-    | Arguments | Description |
-    | --- | --- |
-    | \-t, --account | Nine-digit ID of the Volt MX Cloud account (visible on top right corner in Console), for example, 100054321. Not relevant for an on-premise installation. |
-    | \* -a, --app | Name of the app for which Service Configuration profile is to be exported. |
-    | \-cu, --console | URL of Volt MX Foundry Console (without context path), relevant for on-premise installation only. For example, http://10.10.24.78:8081 |
-    | \* -e, --environment | Name of the environment for which a Service Configuration profile is to be exported. |
-    | \* -f, --file | Name of the file to import or export. For example, C:\\\\tmp\\\\Sample.json. |
-    | \-au, --identity | URL of Volt MX Foundry Identity Services (without context path), relevant for on-premise installation only. For example, http://10.10.24.79:8080 |
-    | \--mfa | If specified, Multi-Factor Authentication is enabled. The secret key for MFA required for generating one-time password (OTP) needs to be specified in the properties file. The default value is set to `false` |
-    | \-p, --password | Password for the Volt MX user account. This could be plain text or, encrypted using 'encrypt' command. This is mandatory. |
-    | \-u, --user | Volt MX user required for authentication. For example, abc@voltmx.com. This is mandatory. |
-    | \-v, --version | Version of the app for which a Service Configuration profile to be exported. The default version is set to `1.0` |
-    | \-x <format version> | Format version 2.0 is for the simplified reconfig JSON file structure. Format version 1.0 is for the generic reconfig JSON file structure. The present available generic reconfig version will be available to be downloaded using the MFCLI |
-    | \-y <level> | <level> values supported are complete and delta. |
+
+| Arguments | Description |
+| --- | --- |
+| -t, --account | Nine-digit ID of the Volt MX Cloud account (visible on top right corner in Console), for example, 100054321. Not relevant for an on-premise installation. |
+| * -a, --app | Name of the app for which Service Configuration profile is to be exported. |
+| -cu, --console | URL of Volt MX Foundry Console (without context path), relevant for on-premise installation only. For example, http://10.10.24.78:8081 |
+| * -e, --environment | Name of the environment for which a Service Configuration profile is to be exported. |
+| * -f, --file | Name of the file to import or export. For example, C:\\\\tmp\\\\Sample.json. |
+| -au, --identity | URL of Volt MX Foundry Identity Services (without context path), relevant for on-premise installation only. For example, http://10.10.24.79:8080 |
+| --mfa | If specified, Multi-Factor Authentication is enabled. The secret key for MFA required for generating one-time password (OTP) needs to be specified in the properties file. The default value is set to `false` |
+| -p, --password | Password for the Volt MX user account. This could be plain text or, encrypted using 'encrypt' command. This is mandatory. |
+| -u, --user | Volt MX user required for authentication. For example, abc@voltmx.com. This is mandatory. |
+| -v, --version | Version of the app for which a Service Configuration profile to be exported. The default version is set to `1.0` |
+| -x <format version> | Format version 2.0 is for the simplified reconfig JSON file structure. Format version 1.0 is for the generic reconfig JSON file structure. The present available generic reconfig version will be available to be downloaded using the MFCLI |
+| -y <reconfiguration level> | Level values supported are complete and delta. |
     
 
 ### import-config command
 
 The `import-config` command helps you to import the specified Service Profile in a .json file into the given app and in an environment.
 
-*   To import a service profile to a Cloud (manage.hclvoltmx.com) environment
+*   To import a service profile to a Cloud (manage.hclvoltmx.com) environment 
 ```
 java -jar mfcli.jar import-config -u <user> -p <password> -t <account id> [-f <file name> [-a <app name>] [-v <app version>] [-e <environment name>]
 ```
     
-    For example:
+For example:
     
 ```
 java -jar mfcli.jar import-config -u abc@voltmx.com -p password -t 100054321 -f "C:\\tmp\\Sample.zip" -a MyApp_23 -v 1.0 -e MyCloudEnvironment
-```
+```  
+
 *   To import a service profile to an on-premise installation
 ```
  java -jar mfcli.jar import-config -u <user> -p <password> -au <Identity URL> -cu <Console URL> [-f <file name>  [-a <app name>] [-v <app version>] [-e <environment name>]
 ```
     
-    For example:
+For example:
     
 ```
 java -jar mfcli.jar import-config -u abc@voltmx.com -p password -au http://10.10.24.79:8080 -cu http://10.10.24.78:8081 -f "C:\\tmp\\Sample.zip" -a MyApp_23 -v 1.0 -e MyCloudEnvironment
 ```
-    *   The following arguments are supported for the import-config command:
+    
+*   The following arguments are supported for the import-config command:
 ```
  For example, to get summary help on all the commands,  
         java -jar mfcli.jar import-config help  
@@ -172,15 +176,15 @@ java -jar mfcli.jar import-config -u abc@voltmx.com -p password -au http://10.10
         Usage: Run the self-executable JAR with relevant arguments:
 ```
         
-        | Arguments | Description |
-        | --- | --- |
-        | \-t, --account | Nine-digit ID of the Volt MX Cloud account (visible on top right corner in Console), for example, 100054321. Not relevant for an on-premise installation. |
-        | \* -a, --app | Name of the app for which a Service Configuration profile is to be exported. |
-        | \-cu, --console | URL of Volt MX Foundry Console (without context path), relevant for on-premise installation only. For example, http://10.10.24.78:8081 |
-        | \* -e, --environment | Name of the environment for which a Service Configuration profile is to be exported. |
-        | \* -f, --file | Name of the file to import or export. For example, C:\\\\tmp\\\\Sample.json. |
-        | \-au, --identity | URL of Volt MX Foundry Identity Services (without context path), relevant for on-premise installation only. For example, http://10.10.24.79:8080 |
-        | \--mfa | If specified, Multi-Factor Authentication is enabled. The secret key for MFA required for generating one-time password (OTP) needs to be specified in the properties file. The default value is set to: `false` |
-        | \-p, --password | Password for the Volt MX user account. This could be plain text or, encrypted using 'encrypt' command. This is mandatory. |
-        | \-u, --user | Volt MX user required for authentication, For example, abc@voltmx.com. This is mandatory. |
-        | \-v, --version | Version of the app for which a Service Configuration profile to be exported. The default version is set to `1.0`. |
+| Arguments | Description |
+| --- | --- |
+| -t, --account | Nine-digit ID of the Volt MX Cloud account (visible on top right corner in Console), for example, 100054321. Not relevant for an on-premise installation. |
+| * -a, --app | Name of the app for which a Service Configuration profile is to be exported. |
+| -cu, --console | URL of Volt MX Foundry Console (without context path), relevant for on-premise installation only. For example, http://10.10.24.78:8081 |
+| * -e, --environment | Name of the environment for which a Service Configuration profile is to be exported. |
+| * -f, --file | Name of the file to import or export. For example, C:\\\\tmp\\\\Sample.json. |
+| -au, --identity | URL of Volt MX Foundry Identity Services (without context path), relevant for on-premise installation only. For example, http://10.10.24.79:8080 |
+| --mfa | If specified, Multi-Factor Authentication is enabled. The secret key for MFA required for generating one-time password (OTP) needs to be specified in the properties file. The default value is set to: `false` |
+| -p, --password | Password for the Volt MX user account. This could be plain text or, encrypted using 'encrypt' command. This is mandatory. |
+| -u, --user | Volt MX user required for authentication, For example, abc@voltmx.com. This is mandatory. |
+| -v, --version | Version of the app for which a Service Configuration profile to be exported. The default version is set to `1.0`. |

@@ -24,14 +24,12 @@ The use of JSON Arrays is particularly important for the mapping of data in user
 
 The following code details sample original JSON data, data converted to Volt MX Object, and in the result - data converted only limited unnamed records into an object in Volt MX Foundry (loss of data).
 
-{% highlight json %} //Sample: Original JSON Data:
-  
+<pre><code>
+ //Sample: Original JSON Data:
 {"booking":[
 {"amount":-254.6,"description":"Paiement carte BIM STORES PALMIER  le 21/02/2016 à 18:54","doc_id":17150820,"value_date":"2016-02-19","temporary":false,"date":"2016-02-21"},{"amount":-44.26,"description":"Paiement internet LYDEC ECOM  le 19/02/2016 à 13:04","doc_id":17146660,"value_date":"2016-02-18","temporary":false,"date":"2016-02-19"},{"amount":-37.26,"description":"Paiement internet LYDEC ECOM  le 19/02/2016 à 13:19","doc_id":17146835,"value_date":"2016-02-18","temporary":false,"date":"2016-02-19"},{"amount":-14.34,"description":"Paiement internet LYDEC ECOM  le 19/02/2016 à 13:11","doc_id":17146744,"value_date":"2016-02-18","temporary":false,"date":"2016-02-19"}
 ]}
-  
-**Sample: Data converted to VOLTMX Object:**  
-Dataset [id=booking, index=-1, 
+Sample: Data converted to VOLTMX Object:Dataset [id=booking, index=-1, 
 	records=[
 		Record [index=-1, order=0, id=, 
 			params=[
@@ -52,9 +50,7 @@ Dataset [id=booking, index=-1,
 				Param [name=date, value=2016-02-19]
 			], datasets=[], records=[]
 			], 
-  
-  
-//Sample: Data converted only limited unnamed records into an object in Volt MX Foundry:  
+//Sample: Data converted only limited unnamed records into an object in VoltMX Foundry:
 "booking": {
             "": {
                 "date": "2016-02-21",
@@ -65,18 +61,18 @@ Dataset [id=booking, index=-1,
                 "value_date": "2016-02-19"
             }
 		}
-
-```
+</code></pre>
 </details>
+
 ### Writing a Java Class
 
 **To write a Java class for a Java adapter, follow these steps:**
 
 1.  Create a Java adapter either by implementing the `com.hcl.voltmx.middleware.common.JavaService` interface or `com.hcl.voltmx.middleware.common.JavaService2` interface.
 2.  When you implement `com.hcl.voltmx.middleware.common.JavaService`, you have to implement the following `invoke()` method with the signature:
-```
+    ```
     public Object invoke(String paramString, Object[] paramArrayOfObject) throws Exception; 
-```
+    ```
 3.  When you implement `com.hcl.voltmx.middleware.common.JavaService2`, you have to implement the following `invoke()` method with the signature:
 ```
  public Object invoke(String methodID, Object[] objectArray, DataControllerRequest request, DataControllerResponse response) throws Exception;
@@ -109,18 +105,18 @@ To configure Java service in the **[Integration Service Definition](ConfigureInt
 
     > **_Note:_** You can select multiple JAR files from the **Java Connector JARs** list if required.
 
-    > **_Important:_** To upload an updated JAR file, upload the new file, which must have the same name as the old JAR file. The new JAR file overrides the existing file.dsd
+    > **_Important:_** To upload an updated JAR file, upload the new file, which must have the same name as the old JAR file. The new JAR file overrides the existing file.dsd  
 
 7. <details close markdown="block"><summary>For additional configuration of your service definition, provide the following details in the Advanced section:</summary>
 
-      | Field | Description |
-| --- | --- |
-| Custom Code | Custom Code enables you to specify dependent JAR. To specify dependent JAR, select the JAR containing preprocessor or postprocessor libraries from the drop-down list, or click **Upload New** to browse the JAR file from your local system. This step allows you to further filter the data sent to the back end. You can select multiple JAR files if required. <br><br> **_Important:_** Make sure that you upload a custom JAR file that is built on the same JDK version used for installing Volt MX Foundry Integration.For example, if the JDK version on the machine where Volt MX Foundry Integration is installed is 1.6, you must use the same JDK version to build your custom jar files. If the JDK version is different, an unsupported class version error will appear when a service is used from a device. You can download the uploaded jars to your local system. |
-| Throttling | API throttling enables you to limit the number of request calls within a minute. If an API exceeds the throttling limit, it will not return the service response.<br><br>**To specify throttling in Volt MX Foundry Console, follow these steps:**<br><br> In the **Total Rate Limit** text box, enter a required value. With this value, you can limit the number of requests configured in your Volt MX Foundry console in terms of Total Rate Limit. <br><br>In the **Rate Limit Per IP** text box, enter a required value. With this value, you can limit the number of IP address requests configured in your Volt MX Foundry console in terms of Per IP Rate Limit.<br><br>**To override throttling in App Services Console, refer to** [Override API Throttling Configuration](API_Throttling_Override.md#override-api-throttling-configuration). |
+    | Field | Description |
+    | --- | --- |
+    | Custom Code | Custom Code enables you to specify dependent JAR. To specify dependent JAR, select the JAR containing preprocessor or postprocessor libraries from the drop-down list, or click **Upload New** to browse the JAR file from your local system. This step allows you to further filter the data sent to the back end. You can select multiple JAR files if required. <br><br> **_Important:_** Make sure that you upload a custom JAR file that is built on the same JDK version used for installing Volt MX Foundry Integration.For example, if the JDK version on the machine where Volt MX Foundry Integration is installed is 1.6, you must use the same JDK version to build your custom jar files. If the JDK version is different, an unsupported class version error will appear when a service is used from a device. You can download the uploaded jars to your local system. |
+    | Throttling | API throttling enables you to limit the number of request calls within a minute. If an API exceeds the throttling limit, it will not return the service response.<br><br>**To specify throttling in Volt MX Foundry Console, follow these steps:**<br><br> In the **Total Rate Limit** text box, enter a required value. With this value, you can limit the number of requests configured in your Volt MX Foundry console in terms of Total Rate Limit. <br><br>In the **Rate Limit Per IP** text box, enter a required value. With this value, you can limit the number of IP address requests configured in your Volt MX Foundry console in terms of Per IP Rate Limit.<br><br>**To override throttling in App Services Console, refer to** [Override API Throttling Configuration](API_Throttling_Override.md#override-api-throttling-configuration). |  
 
-</details>
-    
-   > **_Note:_** All options in the Advanced section are optional.
+     > **_Note:_** All options in the Advanced section are optional.  
+
+    </details> 
 
 8.  In the **Description** field, provide a suitable description for the service.
     
@@ -154,29 +150,23 @@ The **Operation List** tab appears when you click **Add Operation** in the **Ser
     
 3.  To configure an operation, provide the following details:  
     
+    | Field | Description |
+    | --- | --- |
+    | Name | It is prepopulated with the operation name. You can change the name if required. |
+    | Operation Security Level | It specifies how a client must authenticate to invoke this operation.**Select one of the following security operations in the Operation Security Level field**<br><br> **Authenticated App User** – It restricts the access to clients who have successfully authenticated using an Identity Service associated with the app.<br><br> **Anonymous App User** – It allows the access from trusted clients that have the required App Key and App Secret. Authentication through an Identity Service is not required.<br><br>**Public** – It allows any client to invoke this operation without any authentication. This setting does not provide any security to invoke this operation and you should avoid this authentication type if possible.<br><br>**Private** - It blocks the access to this operation from any external client. It allows invocation either from an Orchestration/Object Service, or from the custom code in the same run-time environment. |
 
-  
-| Field | Description |
-| --- | --- |
-| Name | It is prepopulated with the operation name. You can change the name if required. |
-| Operation Security Level | It specifies how a client must authenticate to invoke this operation.**Select one of the following security operations in the Operation Security Level field**<br><br> **Authenticated App User** – It restricts the access to clients who have successfully authenticated using an Identity Service associated with the app.<br><br> **Anonymous App User** – It allows the access from trusted clients that have the required App Key and App Secret. Authentication through an Identity Service is not required.<br><br>**Public** – It allows any client to invoke this operation without any authentication. This setting does not provide any security to invoke this operation and you should avoid this authentication type if possible.<br><br>**Private** - It blocks the access to this operation from any external client. It allows invocation either from an Orchestration/Object Service, or from the custom code in the same run-time environment. |
-
-  
-6.  </details>
-<details close markdown="block"><summary> response operations, provide the following details in the Advanced section:</summary>
+6.  <details close markdown="block"><summary>For additional configurations of request (or) response operations, provide the following details in the Advanced section:</summary>
     
-      
-| Field | Description |
-| --- | --- |
-| Custom Code Invocation - Preprocessor and Postprocessor (for Java and JavaScript) | You can add pre and post processing logic to services to modify the request inputs. When you test, the services details of various stages in the service execution are presented to you for better debugging. All options in the Advanced section are optional. For more details, refer to [Preprocessor and Postprocessor](Java_Preprocessor_Postprocessor_.md). |
-| Properties | Additional Configuration Properties allows you to configure service call time out cache response. For information on different types of configuration properties, refer [Properties](Java_Preprocessor_Postprocessor_.md#timeout_cachable). |
-| Front End API | Front-end API allows you map your endpoint (or) backend URL of an operation to a front-end URL. For detailed information, refer Custom [Front-end URL](FrontEndAPI.md). |
-| Server Events | Using Server Events you can configure this service to trigger or process server side events. For detailed information, refer [Server Events](ServerEvents.md). |
+    | Field | Description |
+    | --- | --- |
+    | Custom Code Invocation - Preprocessor and Postprocessor (for Java and JavaScript) | You can add pre and post processing logic to services to modify the request inputs. When you test, the services details of various stages in the service execution are presented to you for better debugging. All options in the Advanced section are optional. For more details, refer to [Preprocessor and Postprocessor](Java_Preprocessor_Postprocessor_.md). |
+    | Properties | Additional Configuration Properties allows you to configure service call time out cache response. For information on different types of configuration properties, refer [Properties](Java_Preprocessor_Postprocessor_.md#timeout_cachable). |
+    | Front End API | Front-end API allows you map your endpoint (or) backend URL of an operation to a front-end URL. For detailed information, refer Custom [Front-end URL](FrontEndAPI.md). |
+    | Server Events | Using Server Events you can configure this service to trigger or process server side events. For detailed information, refer [Server Events](ServerEvents.md). |
+
+    > **_Note:_** All options in the Advanced section are optional.
 
 </details>
-
-> **_Note:_** All options in the Advanced section are optional.
-    
 
 ### Configure Request Operation for Java
 
@@ -191,15 +181,15 @@ You can perform the following actions in Request Input tab:
 3.  To delete an entry, select the check box for an entry and click **Delete** .
 4.  To configure the request input tab, provide the following details:  
     
-| Field | Description |
-| --- | --- |
-| Name | It Contains a Unique Identifier. Change the name if required. |
-| Test Value | Enter a value. A test value is used for testing the service. |
-| Default Value | Enter the value, if required. The default value will be used if the test value is empty. |
-| Scope | Select Request or Session. It is set to **Request** by default. **Request** indicates that the value must be retrieved from the HTTP request received from the mobile device. **Session** indicates that the value must be retrieved from the HTTP session stored on Volt MX Foundry. **Identity**: If this is selected, you can filter the request parameters based on the response from the identity provider. For more details to configure identity filters, refer to [Enhanced Identity Filters - Integration Services](Identity_Filters_Integration.md). |
-| Data Type | **Select one of the following data types**<br><br>**String** - A combination of alpha-numeric and special characters. Supports all formats including UTF-8 and UTF-16 with no maximum size limit. <br><br>**Boolean** - A value that can be true or false.<br><br>**Number** - An integer or a floating number.<br><br>**Collection** - A group of data, also referred as data set. |
-| Encode | Select the check box to enable encoding of an input parameter. For example, the name New York Times would be encoded as _New_York_Times_ when the encoding is set to True. The encoding must also adhere to the HTML URL encoding standards. |
-| Description | Provide a suitable description. |
+    | Field | Description |
+    | --- | --- |
+    | Name | It Contains a Unique Identifier. Change the name if required. |
+    | Test Value | Enter a value. A test value is used for testing the service. |
+    | Default Value | Enter the value, if required. The default value will be used if the test value is empty. |
+    | Scope | Select Request or Session. It is set to **Request** by default. **Request** indicates that the value must be retrieved from the HTTP request received from the mobile device. **Session** indicates that the value must be retrieved from the HTTP session stored on Volt MX Foundry. **Identity**: If this is selected, you can filter the request parameters based on the response from the identity provider. For more details to configure identity filters, refer to [Enhanced Identity Filters - Integration Services](Identity_Filters_Integration.md). |
+    | Data Type | **Select one of the following data types**<br><br>**String** - A combination of alpha-numeric and special characters. Supports all formats including UTF-8 and UTF-16 with no maximum size limit. <br><br>**Boolean** - A value that can be true or false.<br><br>**Number** - An integer or a floating number.<br><br>**Collection** - A group of data, also referred as data set. |
+    | Encode | Select the check box to enable encoding of an input parameter. For example, the name New York Times would be encoded as _New_York_Times_ when the encoding is set to True. The encoding must also adhere to the HTML URL encoding standards. |
+    | Description | Provide a suitable description. |
 
 6.  To validate the operation details, click **Save and Test**. For more details, refer to [Test a Service Operation](Test_a_Service_Operation.md).
     

@@ -45,68 +45,86 @@ Prerequisites
 
 *   Access to a Volt MX Cloud Build Environment version, Iris, and Foundry App Server for publishing apps to EAS.
 *   EAS V3.1.0  
-    
-    
-<details close markdown="block"><summary>Click here for more details on</summary> **EAS and Platform Versions Compatibility Chart**  
+
+
+
+
+<details close markdown="block"><summary>Click here for more details on EAS and Platform Versions Compatibility Chart</summary> 
     
 The following table details the supported versions of EAS source and Platform.
 
 > **_Important:_** If you are upgrading to EAS V 2.0.1 or a higher version, you must restart the server.
 
-| EAS Source App version || **Platform Supported Version** |||
-| --- | --- | --- | --- | --- |
-| Client App (Store.zip) | Server App (VoltMX App Store.zip) | Foundry |   Iris | Middleware |
-| --- | --- | --- | --- | --- |
-| 1.0.0
+<table>
+<tr>
+<th colspan="0"></th>
+<th colspan="2">EAS Source App version</th>
+<th colspan="3">Platform Supported Version</th>
+</tr>
+<tr>
+<th>Features</th>
+<th>Client App (Store.zip)</th>
+<th>Server App (Kony App Store.zip)</th>
+<th>Foundry</th>
+<th>Iris</th>
+<th>Middleware</th>
+</tr>
+<tr>
+<td><ul><li>Initial Release</li></ul></td>
+<td>1.0.0</td>
+<td>1.0.0</td>
+<td>NA</td>
+<td>V8 SP4 FP44 or lower</td>
+<td>8.4.3.x.</td>
+</tr>
+<tr>
+<td><ul><li>Support for Web apps</li></ul></td>
+<td>1.1.0</td>
+<td>1.0.0</td>
+<td>NA</td>
+<td>V8 SP4 FP44 or lower</td>
+<td>8.4.3.x.</td>
+</tr>
+<tr>
+<td><ul><li>Support for Android 10</li><li>Support for iOS 13</li><li>Push Notifications</li></ul></td>
+<td>2.0.0</td>
+<td>2.0.0</td>
+<td>NA</td>
+<td>V8 SP4 FP48 or higher</td>
+<td>8.4.3.x.</td>
+</tr>
 
-<details close markdown="block"><summary>Features</summary>
-    
-Initial Release
+<tr>
+<td><ul><li>Bug fixes</li></ul></td>
+<td>2.0.1</td>
+<td>2.0.1</td>
+<td>NA</td>
+<td>V8 SP4 FP66 or higher</td>
+<td>8.4.3.10.</td>
+</tr>
 
-| 1.0.0 | NA | V8 SP4 FP44 or lower | 8.4.3.x. |
-| 1.1.0
-    
-</details>
-<details close markdown="block"><summary>Features</summary>
-    
-Support for Web apps
+<tr>
+<td><ul><li>Support for Desktop View</li><li>Help section in iOS Native Apps</li></ul></td>
+<td>3.0.1</td>
+<td>3.0.1</td>
+<td>NA</td>
+<td>V9 GA</td>
+<td>8.4.3.10</td>
+</tr>
 
-| 1.0.0 | NA | V8 SP4 FP44 or lower | 8.4.3.x. |
-| 2.0.0
-    
-</details>
-<details close markdown="block"><summary>Features</summary>
-    
-Support for Android 10Support for iOS 13Push Notifications
+<tr>
+<td><ul><li>Support for Upgrade Policy</li></ul></td>
+<td>3.1.0</td>
+<td>3.1.0</td>
+<td>NA</td>
+<td>V9 SP1</td>
+<td>V9 SP1</td>
+</tr>
+</table>
 
-| 2.0.0 | NA | V8 SP4 FP48 or higher | 8.4.3.x |
-| 2.0.1
-    
-</details>
-<details close markdown="block"><summary>Features</summary>
-    
-Bug fixes
+* SP: Service Pack
+* FP: Fix Pack
 
-| 2.0.1 | NA | V8 SP4 FP66 or higher. | 8.4.3.10 |
-| 3.0.1
-    
-</details>
-<details close markdown="block"><summary>Features</summary>
-    
-Support for Desktop ViewHelp section in iOS Native Apps
-
-| 3.0.1 | NA | V9 GA | 8.4.3.10 |
-| 3.1.0
-    
-</details>
-<details close markdown="block"><summary>Features</summary>
-    
-Support for Upgrade Policy
-
-| 3.1.0 | NA | V9 SP1 | V9 SP1 |
-| **SP**: Service Pack**FP**: Fix Pack |||||
-
-</details>  
 </details>   
 
 Apps Eligible for Upgrade Policy
