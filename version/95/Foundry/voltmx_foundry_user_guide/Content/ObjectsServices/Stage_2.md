@@ -34,41 +34,41 @@ You can generate a data model from a backend LOB system that has its data model 
 3.  From the **Import Objects from Backend** screen, click the **EmpDirDetails** schema to expand the tables details.
 4.  Under **Tables**, select the check boxes for the individual tables.
 
-![](../Resources/Images/ImportObjectsBackend_622x333.png)
+    ![](../Resources/Images/ImportObjectsBackend_622x333.png)
 
 6.  Click **NEXT**.
 
-The **Import Objects from Backend** screen shows the imported back-end objects and the names of the imported objects for the data model. You can edit the names of the objects for the data model.
+    The **Import Objects from Backend** screen shows the imported back-end objects and the names of the imported objects for the data model. You can edit the names of the objects for the data model.
 
 9.  Click **GENERATE**.
 
-![](../Resources/Images/ObjSrvcGenDataModel_648x357.png)
+    ![](../Resources/Images/ObjSrvcGenDataModel_648x357.png)
 
 11.  In the **Data Model** tab of the navigation pane, click the plus button next to the **contact** object.
 
-Fields and Relationships appear under the **contact** object.
+     Fields and Relationships appear under the **contact** object.
 
 13.  Click **Fields**.
 
-The list of fields in the **contact** object appears in the Configure screen. You can change the name of the fields or modify the attributes. For example, you can change the primary key attribute. You cannot change the auto-generated attribute.
+     The list of fields in the **contact** object appears in the Configure screen. You can change the name of the fields or modify the attributes. For example, you can change the primary key attribute. You cannot change the auto-generated attribute.
 
-![](../Resources/Images/ObjectServicesFields_604x284.png)
+     ![](../Resources/Images/ObjectServicesFields_604x284.png)
 
-> **_Note:_** For metadata and Data Pre and Post Processors, refer to [Automatic Field Level Encryption for Object Services](../DataEncryptionObjects.md).
+     > **_Note:_** For metadata and Data Pre and Post Processors, refer to [Automatic Field Level Encryption for Object Services](../DataEncryptionObjects.md).
 
 17.  In the **Data Model** tab of the navigation pane, under the **contact** object, click **Relationships**.
 
-The list of relationships for the **contact** object appears. The **contact** object has a many-to-one relationship with the VTI\_SAMPLE\_COMPANY object and a one-to-many relationship with the VTI\_SAMPLE\_ORDER\_ITEM object. You can edit or delete the relationships, or add new relationships.
+     The list of relationships for the **contact** object appears. The **contact** object has a many-to-one relationship with the VTI\_SAMPLE\_COMPANY object and a one-to-many relationship with the VTI\_SAMPLE\_ORDER\_ITEM object. You can edit or delete the relationships, or add new relationships.
 
-![](../Resources/Images/ObjSrvcBtFrelationships_631x230.png)
+     ![](../Resources/Images/ObjSrvcBtFrelationships_631x230.png)
 
 20.  In the navigation pane, click the **Mapping** tab.
 
-The Common Mapping configuration screen for the VTI\_SAMPLE\_ORDER object appears. The common mapping between a data model field and a back-end object field is applied to a transform request, response, or both, when methods are invoked on a back-end object. The double-headed arrow icon in the Type drop-down indicates that the mapping transformation is applied to both request and response. The right-arrow icon indicates only request mapping, and the left-arrow icon indicates only response mapping of the object.
+     The Common Mapping configuration screen for the VTI\_SAMPLE\_ORDER object appears. The common mapping between a data model field and a back-end object field is applied to a transform request, response, or both, when methods are invoked on a back-end object. The double-headed arrow icon in the Type drop-down indicates that the mapping transformation is applied to both request and response. The right-arrow icon indicates only request mapping, and the left-arrow icon indicates only response mapping of the object.
 
 22.  Click **Save**.
 
-You can now publish the Volt MX Foundry application as it is, or you can also configure the objects to be enabled for offline synchronization.
+     You can now publish the Volt MX Foundry application as it is, or you can also configure the objects to be enabled for offline synchronization.
 
 For more details on how to enable synchronization for the application, click [Sync scope mapped to an object service](../../../../Foundry/offline_objects_gettingstarted/Content/Offline_Objects_Getting_Started.md).
 
@@ -84,8 +84,7 @@ You can create a new data model manually and map it to your backend system. You 
 
 In this procedure, you will create a new data model: **EmployeeModelSchema**, add objects to the data model, and then add fields to the objects.
 
-[![Closed](../../Skins/Default/Stylesheets/Images/transparent.gif)Steps to create a Data Model and add an object and fields  
-](javascript:void(0);)
+<b>Steps to create a Data Model and add an object and fields</b>
 
 1.  **Steps to create an object:**
     1.  Create a new object service. See [Create an Object Service](Objectservices_Stage1.md).
@@ -98,9 +97,15 @@ In this procedure, you will create a new data model: **EmployeeModelSchema**, ad
     4.  In the **Name** text box, enter **department**, and then click **SAVE**.
         
         In the Configure screen, the department object is created and appears in the list of objects.
+
+        > **_Note:_** For Locked Apps: If you are using Locked Object Services, you cannot create new objects.For more information, refer [Locking a Foundry App](./../LockApp.md)
         
 2.  **Steps to create fields:**
+
+    > **_Note:_** For Locked Apps: If you are using Locked Object Services, you cannot edit the locked base object fields (The locked base fields of objects are categorized as the BASE FIELDS).However, you can add fields to the locked objects as custom fields. The new fields in the locked objects are categorized as CUSTOM FIELDS.
     
+    For more information, refer [Locking a Foundry App](./../LockApp.md).
+
     1.  In the **Data Model** tab of the navigation pane, click the plus button next to the **department** object.
         
         Fields and Relationships appear under the **department** object.
@@ -153,6 +158,10 @@ In this procedure, you will create a new data model: **EmployeeModelSchema**, ad
     1.  Click **SAVE** to save the details of the field.
     
     > **_Note:_** If you want to create more objects in the data model, select the **Data Model** root node and click **Add.** And then repeat steps 1 and 2.
+
+    > **_Note:_** For Locked Apps: If you are using Locked Object Services, you cannot create new objects and edit the locked base object fields.
+    
+    For more information, refer [Locking a Foundry App](./../LockApp.md).
     
     > **_Note:_** To lock fields (read-only fields) in a data model of Object Services, refer to [Configuring Read-only Fields for Object Services through MFCLI](../Lock_Unlock_Fields_ObjectServices_MFCLI.md)
     
@@ -170,30 +179,19 @@ The following procedure helps you how to define relationships between the unique
 
 <details>
 <summary close markdown="block">Click here for more details..</summary>
-
-**To configure the relationships, follow these steps:**
-
-1.  In the **Data Model** tab of the navigation pane, under the **department** object, click **Relationships**.
-
-The Relationships screen appears.
-
-3.  Click the **Add** button.
-
-The screen for configuring the relationships appears.
-
-5.  Click in the **Select Target Objects** field, and then select the **employee** object from the drop-down menu.
-6.  Click in the **Select Relationship Type** field, and select **One to Many** from the drop-down menu.
-7.  Under **Specify Object Attribute Relationships**, click in the **Source Object Attributes** field, and then select **Department\_id** from the drop-down menu.
-8.  Click in the **Target Object Attributes** field, and then select **Department\_id** from the drop-down menu.
-    
-    ![](../Resources/Images/Salesforce/Relationships.png)
-    
-9.  Click **SAVE**.
-
-> **_Note:_** You can add objects to the data model, configure relationships, and enable synchronization for the application.
-
-> **_Note:_** You can sort fields by clicking the column name header in the data model.
-
+<b>To configure the relationships, follow these steps:</b>
+<ul>
+<li>In the <b>Data Model</b> tab of the navigation pane, under the <b>department</b> object, click <b>Relationships</b>.
+The Relationships screen appears.</li>
+<li>Click the <b>Add</b> button.The screen for configuring the relationships appears.</li>
+<li>Click in the <b>Select Target Objects</b> field, and then select the <b>employee</b> object from the drop-down menu.</li>
+<li>Click in the <b>Select Relationship Type</b> field, and select <b>One to Many</b> from the drop-down menu.</li>
+<li>Under <b>Specify Object Attribute Relationships</b>, click in the <b>Source Object Attributes</b> field, and then select <b>Department_id</b> from the drop-down menu.</li>
+<li>Click in the Target Object Attributes field, and then select Department_id from the drop-down menu.<img src="../Resources/Images/Salesforce/Relationships.png"></li>
+<li>Click <b>Save</b></li>
+</ul>
+<b>Note: </b>You can add objects to the data model, configure relationships, and enable synchronization for the application.<br>
+<b>Note: </b>You can sort fields by clicking the column name header in the data model.
 </details>
 
 You can now configure Common Mapping and Methods to the Fields on the Back-End, refer to [Mapping Operations to Back-end Methods](Objectservices_Stage3.md#mapping-operations-to-back-end-methods).

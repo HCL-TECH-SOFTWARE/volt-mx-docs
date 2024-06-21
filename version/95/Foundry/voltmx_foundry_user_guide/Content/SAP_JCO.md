@@ -45,7 +45,7 @@ To configure your SAP JCO Service in the **[Integration Service Definition](Co
     | Fields | Description |
     | --- | --- |
     | Connection Parameters | [Connection Parameters field description](#connection-parameters-field-description) |
-    | Authentication | Use existing Identity Provider. Select SAP JCO Identity provider from the list. |
+    | Authentication | Use existing Identity Provider. Select SAP JCO Identity provider from the list.<br>**Note:** For more information on Externalizing Identity Services, refer to [Replace the Identity Service references in a Foundry app](Replacing_Identity_Services.md).|
     
     #### Connection Parameters field description
     
@@ -219,7 +219,7 @@ You can perform the following actions in Request Input tab:
         | Field | Description |
         | --- | --- |
         | Name | It contains a unique identifier. Change the name if required. |
-        | Value | Volt MX Foundry provides four options while configuring an operation. Dependent identity services are auto populated when you edit this field, These options primarily determine the source of the header value. > **_Note:_** The field is set to Request, by default. |
+        | Value | Volt MX Foundry provides four options while configuring an operation. Dependent identity services are auto populated when you edit this field, These options primarily determine the source of the header value. > **_Note:_** The field is set to Request, by default.<br>**Note:** For more information on Externalizing Identity Services, refer to [Replace the Identity Service references in a Foundry app](Replacing_Identity_Services.md).|
         | Test Value | A test value is used for testing the service. Enter a value. |
         | Default Value | The default value is used if the test value is empty. Enter a value, if required. |
         | DATA TYPE | --- |
@@ -233,6 +233,10 @@ You can perform the following actions in Request Input tab:
         *  If you select **Session**, the value of the header is picked from the session context. You cannot edit the Default value and test value.
         *  **Constant** is used to configure the value that is picked and sent to back end by the Integration Server during the run-time.
         *  If **Identity** is selected, you can filter the request parameters based on the response from the identity provider. For more details on configuring the identity filters, refer [Enhanced Identity Filters - Integration Services](Identity_Filters_Integration.md).
+
+        > **_Note:_** The field is set to **Request**, by default.
+        
+        > **_Note:_** For more information on Externalizing Identity Services, refer to [ Replace the Identity Service references in a Foundry app](Replacing_Identity_Services.md).
 
         </details>
 

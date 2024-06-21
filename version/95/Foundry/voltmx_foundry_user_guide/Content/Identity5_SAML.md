@@ -17,7 +17,6 @@ When a user logs into an application (either a mobile app or web app), the servi
 
 > **_Note:_**  NTLM authentication is not supported by SAML identity service.
 
-> **_Note:_**  
 
 ### Prerequisites
 

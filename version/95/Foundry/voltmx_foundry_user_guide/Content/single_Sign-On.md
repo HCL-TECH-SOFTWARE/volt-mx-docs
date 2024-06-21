@@ -74,9 +74,9 @@ var identitySvc = VMXFoundry.getIdentityService(serviceName);
 var options = {};
 var loginOptions = {};
 
-**options["userid"] = "userid";
+options["userid"] = "userid";
 options["password"] = "password";
-loginOptions["isSSOEnabled"] = true;**
+loginOptions["isSSOEnabled"] = true;
 
 option["loginOptions"] = loginOptions;
 

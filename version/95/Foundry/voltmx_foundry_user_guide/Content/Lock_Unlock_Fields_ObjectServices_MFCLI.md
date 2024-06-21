@@ -30,20 +30,65 @@ Refer to the following diagram that explains how to lock fields of object servic
 ![](Resources/Images/LockField_Configurations_661x345.png)
 
 Prerequisites
--------------
+-------------  
 
-|   |
-| --- |
-| Volt MX Foundry Console Version V9 GA |
-| Foundry App with Objects Services |
-| MFCLI version <version number> onwards |
-| LockConfigTemplate.json file |
+* Volt MX Foundry Console Version V9 GA
+* Foundry App with Objects Services
+* MFCLI version &lt;version number&gt; onwards
+* LockConfigTemplate.json file 
+
 
 <details close markdown="block"><summary>Structure of Lock Configuration JSON file</summary>
 
-LoockConfigTemplate.json { "serviceLockConfigs": { "objectServices": { "<object\_service\_name>": { "version": "<version>", "paths": \[ "objects/<object\_name>/fields/<field\_name>", "objects/<object\_name>/fields/\*", "objects/<object\_name>/fields", { "path": "objects/<object\_name>/fields", "values": \[ "<field1\_name>", "<field2\_name>" \] } \] }, "<object\_service2\_name>": {}, "<object\_service3\_name>": {} } } } `"objects/<object_name>/fields"` = The path marks all the existing fields as read-only and no new fields can be created. `" objects/<object_name>/fields/*"` = This path with an `asterisk (*)` marks all the existing fields in an object as **read-only** but new fields can be created. `"objects/<object_name>/fields/<field_name>"` = The path marks only the specified field as read-only.You can also provide a path and array of specific values to mark as read-only, as follows: { "path": "objects/objName/fields", "values": \[ "fieldName1", "fieldName2", "fieldName3", "fieldName4", "fieldName5" \] }
+<pre><code>
+LoockConfigTemplate.json 
+{
+    "serviceLockConfigs": {
+        "objectServices": {
+            "<object_service_name>": {
+                "version": "<version>",
+                "paths": [
+                    "objects/<object_name>/fields/<field_name>",
+                    "objects/<object_name>/fields/*",
+                    "objects/<object_name>/fields",
+                    {
+                        "path": "objects/<object_name>/fields",
+                        "values": [
+                            "<field1_name>",
+                            "<field2_name>"
+                        ]
+                    }
+                ]
+            },
+            "<object_service2_name>": {},
+            "<object_service3_name>": {}
+        }
+    }
+}
+</code></pre>
 
-</details>
+* `"objects/<object_name>/fields"` = The path marks all the existing fields as read-only and no new fields can be created.
+
+* `objects/<object_name>/fields/*` = This path with an `asterisk (*)` marks all the existing fields in an object as read-only but new fields can be created.
+
+* `objects/<object_name>/fields/<field_name>` = The path marks only the specified field as read-only.
+You can also provide a path and array of specific values to mark as read-only, as follows:
+    <pre><code>
+        {
+            "path": "objects/objName/fields",
+            "values": [
+                "fieldName1",
+                "fieldName2",
+                "fieldName3",
+                "fieldName4",
+                "fieldName5"
+            ]
+        }
+    </code></pre>
+</details>  
+
+
+
 Lock Fields Operation
 ---------------------
 

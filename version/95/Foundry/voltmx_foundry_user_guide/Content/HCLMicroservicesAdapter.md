@@ -54,6 +54,15 @@ To configure a HCL Microservices in object service, you need to upload a Swagger
     <details close markdown="block"><summary>OpenAPI uploaded with External Reference Files</summary>
     <blockquote><em><b>Important: </b></em>If the extension files are empty and there are references in the main JSON file to schemas/custom fields of these extensions, an error message will be popped up. To prevent the error message, you need to add dummy schemas/custom fields to the extension files.<br/>
     </blockquote>
+    For example,<br>
+    <p>1. You have uploaded a mircoservices zip file provided by the Infinity microservices team. The path for uploading the zip file: Object Services > Service Definition page > <b>Swagger File</b>.</p>
+    <img src="./Resources/Images/UploadSwaggerMicroServiceAdapter.png"> 
+    <p>In case the uploaded zip file contains empty extension files whose references are present in the main JSON file, an error window will pop up when you click on the Mapping tab &gt; Mapping &gt; &lt;<b>Object</b>&gt; of the Object Service in the Foundry Console.</p>
+    <p>Failed to fetch metadata. Schema definition not present for referenced schema : customFields.</p>
+    <img src="./Resources/Images/MicroservicesAppwithNoExtension.png">
+    <p>- You will be redirected to this documentation page when you click on here.</p>
+    <p>- You will be redirected to the previous page in Console when you confirm OK.</p>
+
     <p>If the main OpenAPI file contains a reference to a schema from external files, for example:</p>
     <pre><code style="display:block;background-color:#eee;">ServiceRequest: 
           properties: 
@@ -145,29 +154,29 @@ To configure a HCL Microservices in object service, you need to upload a Swagger
 
 ### Configuring a Data Model for HCL Microservices
 
-   > **_Note:_** In the following sections, all references to screen-shots, objects, operations, and mapping are based on the sample Swagger JSON file for the Service Request microservice.
+> **_Note:_** In the following sections, all references to screen-shots, objects, operations, and mapping are based on the sample Swagger JSON file for the Service Request microservice.
 
-   1.  Click the **Data Model** tab.
+1. Click the **Data Model** tab.
 
-   2.  Click **Add** to create an object and fields as per your Swagger details. The following sample object is created for GetRequestDetails and fields:
+2. Click **Add** to create an object and fields as per your Swagger details. The following sample object is created for GetRequestDetails and fields:
 
-        <table>
-        <tr>
-        <th>Object</th>
-        <th>Fields</th>
-        </tr>
-        <tr>
-        <td><code>GetRequestDetails</code></td>        
-        <td><ul><li>account</li><li>dateFrom</li><li>dateTo</li><li>partyId</li><li>status</li><li>subType</li><li>type</li></ul></td>
-        </tr>
-        </table>     
+   <table>
+   <tr>
+   <th>Object</th>
+   <th>Fields</th>
+   </tr>
+   <tr>
+   <td><code>GetRequestDetails</code></td>        
+   <td><ul><li>account</li><li>dateFrom</li><li>dateTo</li><li>partyId</li><li>status</li><li>subType</li><li>type</li></ul></td>
+   </tr>
+   </table>     
     
- ![](Resources/Images/DataModel_Microservice_Object.png)
+![](Resources/Images/DataModel_Microservice_Object.png)
 
     
-  > **_Note:_** Currently, the option to auto-generate the data model is not supported for this adapter.
+> **_Note:_** Currently, the option to auto-generate the data model is not supported for this adapter.
     
-    For more information on creating objects and fields, refer to [Configuring a Data Model](ObjectsServices/Stage_2.html#creating-objects-definition-and-map-to-back-end-objects-manually).
+  For more information on creating objects and fields, refer to [Configuring a Data Model](ObjectsServices/Stage_2.html#creating-objects-definition-and-map-to-back-end-objects-manually).
     
 
 ### Mapping Operations to Back-end Methods for HCL Microservices
@@ -204,15 +213,15 @@ For object response calls, you can now map the back-end operations to the object
 
 ![](Resources/Images/ResponseVisaualMapper_MicroserviceAdapter_Object.png)
 
-For more information on mapping, methods ](verbs) mapping, custom verbs, and mapper elements, refer to [Mapping Operations to Back-end Methods](ObjectsServices/Objectservices_Stage3.html).
+For more information on mapping, methods (verbs) mapping, custom verbs, and mapper elements, refer to [Mapping Operations to Back-end Methods](ObjectsServices/Objectservices_Stage3.html).
 
-### Testing the Operation
+<!-- ### Testing the Operation
 
 After creating an operation and configuring the request and response mapping, you can test the operation and validate the configuration details.
 
 Select an environment from the **Select Environment** list and then click **SAVE AND FETCH RESPONSE** to test an operation. The result of the operation appears. For more details, refer to [Test a Service Operation](Test_a_Service_Operation.md).
 
-For Post or Put methods that contain nested payloads, you cannot test the service from the Foundry Console. You can only send a request from the App Services Console, or from [Postman](https://www.postman.com/).
+For Post or Put methods that contain nested payloads, you cannot test the service from the Foundry Console. You can only send a request from the App Services Console, or from [Postman](https://www.postman.com/). -->
 
 Limitations
 -----------
@@ -231,15 +240,15 @@ For instance, if the input payload is:
     "name": "string"
   },
   "name": "doggie",
-  "photoUrls": \[
+  "photoUrls": [
     "string"
-  \],
-  "tags": \[
+  ],
+  "tags": [
     {
       "id": 0,
       "name": "string"
     }
-  \],
+  ],
   "status": "available"
 }
 
@@ -252,7 +261,7 @@ The XML generated sample code does not include nested records as follows:
 ```
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mapper xmlns="http://www.voltmx.com/ns/mapper">  
-  <map inputpath="request\_in" outputpath="request\_out">    
+  <map inputpath="request_in" outputpath="request_out">    
     <set-param inputpath="id" outputpath="id"/>    
     <set-param inputpath="name" outputpath="name"/>    
     <set-param inputpath="photoUrls" outputpath="photoUrls"/>    
@@ -276,7 +285,7 @@ To achieve this case, use the custom XML mapper and generate the XML as below:
 ```
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mapper xmlns="http://www.voltmx.com/ns/mapper">  
-  <map inputpath="request\_in" outputpath="request\_out">    
+  <map inputpath="request_in" outputpath="request_out">    
     <set-param inputpath="id" outputpath="id"/>    
     <set-param inputpath="name" outputpath="name"/>    
     <set-param inputpath="photoUrls" outputpath="photoUrls"/>    
@@ -304,7 +313,7 @@ For example, Backend Response sample code:
 
 ```
 {
-  "officer": \[
+  "officer": [
     {
       "officerkey": "1",
       "description": "Implementation",
@@ -320,7 +329,7 @@ For example, Backend Response sample code:
       "description": "Implementation"
     
     }
-  \]
+  ]
 }
 
 ```
@@ -334,7 +343,7 @@ The XML generated sample code is as follows:
 ```
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>                
 <mapper xmlns="http://www.voltmx.com/ns/mapper">
-  <map inputpath="response\_in" outputpath="response\_out">
+  <map inputpath="response_in" outputpath="response_out">
     <map inputpath="getListOfOfficer" outputpath="officer">
       <set-param inputpath="officer/officerkey" outputpath="key"/>
       <set-param inputpath="officer/description" outputpath="description"/>
@@ -351,13 +360,13 @@ The Mapper generated Response sample code:
 
 ```
 {
-  "records": \[
+  "records": [
     {
       "description": "Implementation",
       "message": "2022-03-02 10:21:26.0",
       "key": "1"
     }
-  \],
+  ],
   "opstatus": 0,
   "httpStatusCode": 200
 }
@@ -369,7 +378,7 @@ For correct XML mapper response, the XML sample code should look like this
 ```
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mapper xmlns="http://www.voltmx.com/ns/mapper">
-  <map inputpath="response\_in" outputpath="response\_out">
+  <map inputpath="response_in" outputpath="response_out">
     <map inputpath="getListOfOfficer/officer" outputpath="officer">
       <set-param inputpath="officerkey" outputpath="key"/>
       <set-param inputpath="description" outputpath="description"/>
@@ -385,7 +394,7 @@ Or it can also look like this
 ```
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mapper xmlns="http://www.voltmx.com/ns/mapper">
-  <map inputpath="response\_in" outputpath="response\_out">
+  <map inputpath="response_in" outputpath="response_out">
     <map inputpath="getListOfOfficer" outputpath="">
       <map inputpath="officer" outputpath="officer">
         <set-param inputpath="officerkey" outputpath="key"/>
@@ -402,7 +411,7 @@ Now the Mapper response sample code is correct:
 
 ```
 {
-   "records": \[
+   "records": [
     {
       "description": "Implementation",
       "message": "2022-03-02 10:21:26.0",
@@ -417,7 +426,7 @@ Now the Mapper response sample code is correct:
       "description": "Implementation",
       "key": "10009"
     }
-  \],
+   ],
   "opstatus": 0,
   "httpStatusCode": 200
 }
@@ -439,7 +448,7 @@ So, The XML should be like
 ```
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>  
 <mapper xmlns="http://www.voltmx.com/ns/mapper">  
-<map inputpath="request\_in" outputpath="request\_out">  
+<map inputpath="request_in" outputpath="request_out">  
 <set-param inputpath="account" outputpath="account"/>  
 <set-param inputpath="partyId" outputpath="partyId"/>  
 <set-param inputpath="serviceReqConfId" outputpath="serviceReqConfId"/>  

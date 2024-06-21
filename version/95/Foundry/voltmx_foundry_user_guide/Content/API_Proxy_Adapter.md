@@ -32,10 +32,10 @@ To configure API Proxy service in the **[Integration Service Definition](Config
 | --- | --- |
 | Base URL Configuration | **Base URL** - Type the URL (provide the format and explain the URL parameters) <br><br>**Upload Open API file** - Click Upload File, the system allows you to upload an OAS (Swagger) file. Navigate to the swagger file from your local system, and click Open. The system uploads the selected swagger file. The operations for your API proxy service are created based on the resources defined in OAS (Swagger) file. |
 | Web Service Authentication | Web Service Authentication Select one of the following modes: <br><br>**None**\- Select this option if you do not want to provide any authentication for the service. <br><br>**Basic**\- Provide User ID and Password if the external Web service requires a form or basic authentication. <br><br>**NTLM**\- Your service follows the NT LAN Manager authentication process. You are required to provide the User ID, Password, NTLM Host, and NTLM Domain. |
-| Identity Service for Backend Token | Select the Identity service associated with your app if this service needs backend token like access\_token from that Identity service to access the backend server. |
+| Identity Service for Backend Token | Select the Identity service associated with your app if this service needs backend token like access\_token from that Identity service to access the backend server. For more information on Externalizing Identity Services, refer to [Replace the Identity Service references in a Foundry app](Replacing_Identity_Services.md). |
 
   
-6.  
+6.  For additional configuration of your service definition, provide the following details in the **Advanced** section:
       
     | Field | Description |
     | --- | --- |
@@ -61,30 +61,28 @@ The **Operations List** tab appears only after the service definition is saved.
 1.  Click **SAVE & ADD OPERATION** in your service definition page to save your service definition and display the **NewOperation** tab for adding operations.  
                         OR  
     Click **Add Operation** to add a new operation or from the tree in the left pane, click **Add > Add New Operation**.  
-<details close markdown="block"><summary>Click to View image</summary>
-    
-   ![](Resources/Images/MuleSoftAddOps_549x351.png)
-    
-   > **_Note:_** To use an existing integration service, refer to [How to Use an Existing Integration Service](Manage_Existing_Integration_Services_1.md#how-to-use-an-existing-integration-service).
-    
-</details>
+    <details close markdown="block"><summary>Click to View image</summary>
+        
+    ![](Resources/Images/MuleSoftAddOps_549x351.png)
+        
+    > **_Note:_** To use an existing integration service, refer to [How to Use an Existing Integration Service](Manage_Existing_Integration_Services_1.md#how-to-use-an-existing-integration-service).
+        
+    </details>
 
-1.  To create an operation, provide the following details:  
+2.  To create an operation, provide the following details:  
     
+
+    | Field | Description |
+    | --- | --- |
+    | Name | Enter a unique name for your operation. |
+    | Operation Security Level | It specifies how a client must authenticate to invoke this operation.<br><br>**Select one of the following security operations in the Operation Security Level field.** <br><br>**Authenticated App User** – It restricts the access to clients who have successfully authenticated using an Identity Service associated with the app. <br><br>**Anonymous App User** – It allows the access from trusted clients that have the required App Key and App Secret. Authentication through an Identity Service is not required. <br><br>**Public** – It allows any client to invoke this operation without any authentication. This setting does not provide any security to invoke this operation and you should avoid this authentication type if possible.<br><br> **Private** - It blocks the access to this operation from any external client. It allows invocation either from an Orchestration/Object Service, or from the custom code in the same run-time environment. |
+    | Front End HTTP Method | Select a HTTP method that you want to invoke on the integration server. By default, the field is set to **Post** method. <br><br> **_Note:_** The front-end HTTP methods are used for all non-SDK clients such as API Management users. Invoking a service from an SDK will continue to use the POST method for operations. <br><br> **_Note:_** From SP3 onwards, the **Front End HTTP Method** is called as **Resource Method**. You can configure the **Resource Method** in the [**Advanced**\> **Front End API** section](FrontEndAPI.md). |
+    | Target HTTP Method | Select a HTTP method that you want to invoke on the back-end service from integration server. |
+    | Operation Path | Modify the path if required. <br><br> **_Note:_** If you provide incorrect Salesforce endpoint details, the **Object** list will contain only _\_Login_ object. |
+    | Base URL and Target URL | The **Target URL** field is prepopulated with the URL that you provided at the **Base URL** field. You can add the suffix, if required. For example, to the base URL, you can add suffix such as `/latest`  or `/sports` to get latest news or sports news: ``http://feeds.foxnews.com/foxnews`/latest` `` ``http://feeds.foxnews.com/foxnews`/sports` `` |
 
   
-      | Field | Description |
-| --- | --- |
-| Name | Enter a unique name for your operation. |
-| Operation Security Level | It specifies how a client must authenticate to invoke this operation.<br><br>**Select one of the following security operations in the Operation Security Level field.** <br><br>**Authenticated App User** – It restricts the access to clients who have successfully authenticated using an Identity Service associated with the app. <br><br>**Anonymous App User** – It allows the access from trusted clients that have the required App Key and App Secret. Authentication through an Identity Service is not required. <br><br>**Public** – It allows any client to invoke this operation without any authentication. This setting does not provide any security to invoke this operation and you should avoid this authentication type if possible.<br><br> **Private** - It blocks the access to this operation from any external client. It allows invocation either from an Orchestration/Object Service, or from the custom code in the same run-time environment. |
-| Front End HTTP Method | Select a HTTP method that you want to invoke on the integration server. By default, the field is set to **Post** method. <br><br> **_Note:_** The front-end HTTP methods are used for all non-SDK clients such as API Management users. Invoking a service from an SDK will continue to use the POST method for operations. <br><br> **_Note:_** From SP3 onwards, the **Front End HTTP Method** is called as **Resource Method**. You can configure the **Resource Method** in the [**Advanced**\> **Front End API** section](FrontEndAPI.md). |
-| Target HTTP Method | Select a HTTP method that you want to invoke on the back-end service from integration server. |
-| Operation Path | Modify the path if required. <br><br> **_Note:_** If you provide incorrect Salesforce endpoint details, the **Object** list will contain only _\_Login_ object. |
-| Base URL and Target URL | The **Target URL** field is prepopulated with the URL that you provided at the **Base URL** field. You can add the suffix, if required. For example, to the base URL, you can add suffix such as `/latest`  or `/sports` to get latest news or sports news: ``http://feeds.foxnews.com/foxnews`/latest` `` ``http://feeds.foxnews.com/foxnews`/sports` `` |
-
-  
-4. ** For addition configuration of request(or) response operations, provide the following details in the Advanced
-section:**
+4. For additional configuration of request(or) response operations, provide the following details in the **Advanced** section:
       
     | Field | Description |
     | --- | --- |

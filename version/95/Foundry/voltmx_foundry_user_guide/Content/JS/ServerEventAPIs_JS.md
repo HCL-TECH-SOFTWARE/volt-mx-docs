@@ -33,17 +33,7 @@ client.setServerEventsCallbacks(options);
   
 | Parameter | Type | Description |
 | --- | --- | --- |
-| setupOptions | JSON | 
-This parameter contains the following options:
-
-*   **onEventCallback** (Mandatory): Invoked when the server returns the response for a triggered event and whenever the connection is established for the first time, that is onOpen.
-    
-*   **onFailureCallback** (Mandatory): Invoked when the server returns an error response.
-    
-*   **onCloseCallback** (Optional): Invoked when the WebSocket connection is closed.
-    
-
- |
+| setupOptions | JSON | This parameter contains the following options:<br>- <b>onEventCallback</b> (Mandatory): Invoked when the server returns the response for a triggered event and whenever the connection is established for the first time, that is onOpen.<br>- <b>onFailureCallback</b> (Mandatory): Invoked when the server returns an error response.<br>- <b>onCloseCallback</b> (Optional): Invoked when the WebSocket connection is closed.|
 
 ### Sample Code
 
@@ -86,17 +76,7 @@ client.subscribeServerEvents(topicsToSubscribe, subscribeOptions);
 | Parameter | Type | Description |
 | --- | --- | --- |
 | topicsToSubscribe | String/Array of Strings | Specifies the topics to be subscribed. |
-| subscribeOptions | JSON | 
-This parameter contains the following options:
-
-*   **subscribeMode**: Specifies the type of subscription, which can be **Private** or **Public**. If no value is passed, Private mode is used by default.
-*   **onSubscribeCallback**: A local callback that is invoked when the server sends a response for the subscription. Specifies whether the connection was successful, and also contains a list of events that were subscribed.
-
-The onSubscribeCallback is local to the subscribeServerEvents API. If a Network or Server error occurs during subscription, the error is sent to the global onFailureCallback function. As no events are subscribed due to the error, the onSubscribeCallback contains a **No events subscribed** message.
-
-If a partial subscribe occurs, the events that are subscribed are listed in the onSubscribeCallback function.
-
- |
+| subscribeOptions | JSON | This parameter contains the following options:<br>&nbsp;- <b>**subscribeMode**</b> Specifies the type of subscription, which can be **Private** or **Public**. If no value is passed, Private mode is used by default.&nbsp;<br>- <b>onSubscribeCallback</b>: A local callback that is invoked when the server sends a response for the subscription. Specifies whether the connection was successful, and also contains a list of events that were subscribed.<br><br>The onSubscribeCallback is local to the subscribeServerEvents API. If a Network or Server error occurs during subscription, the error is sent to the global onFailureCallback function. As no events are subscribed due to the error, the onSubscribeCallback contains a **No events subscribed** message.<br>If a partial subscribe occurs, the events that are subscribed are listed in the onSubscribeCallback function.|
 
 ### Sample Code
 
@@ -135,24 +115,7 @@ client.unsubscribeServerEvents(topicsToUnsubscribe, unsubscribeOptions);
 | Parameter | Type | Description |
 | --- | --- | --- |
 | topicsToUnsubscribe | String/Array of Strings | Specifies the topics to be unsubscribed. |
-| unsubscribeOptions | JSON | 
-This parameter must contain the following options:
-
-*   **unSubscribeMode**: Specifies the type of subscription, which can be **Private** or **Public**. If no value is passed, Private mode is used by default.
-*   **closeConnection**: Specifies whether the existing connection must be closed. The default value of this property is **false**. To close the existing connection, this property must be **true**.  
-    
-
-If the connection is closed successfully, the response is sent to the global **onCloseCallback** function.
-
-*   **onUnsubscribeCallback**: A local callback that is invoked when the server sends a response for the removal of subscriptions. Specifies all the events that have been unsubscribed.
-
-The onUnsubscribeCallback is local to the unsubscribeServerEvents API. If the closeConnection flag is **true**, the onUnsubscribeCallback is not invoked, and the server response is sent to the global onCloseCallback function.
-
-If a Network or Server error occurs during the removal of subscriptions, the error is sent to the global onFailureCallback function. As no events are unsubscribed due to the error, the onUnsubscribeCallback contains a **No events unsubscribed** message.
-
-If a partial unsubscribe occurs, the events that are unsubscribed are listed in the onUnsubscribeCallback function.
-
- |
+| unsubscribeOptions | JSON | This parameter must contain the following options:<br>&nbsp;- <b>unSubscribeMode</b>: Specifies the type of subscription, which can be <b>Private</b> or <b>Public</b>. If no value is passed, Private mode is used by default.&nbsp;<br>- <b>closeConnection</b>: Specifies whether the existing connection must be closed. The default value of this property is <b>false</b>. To close the existing connection, this property must be <b>true</b>.<br><br>If the connection is closed successfully, the response is sent to the global <b>onCloseCallback</b> function.<br>&nbsp;- <b>onUnsubscribeCallback</b>: A local callback that is invoked when the server sends a response for the removal of subscriptions. Specifies all the events that have been unsubscribed.<br>The onUnsubscribeCallback is local to the unsubscribeServerEvents API. If the closeConnection flag is <b>true</b>, the onUnsubscribeCallback is not invoked, and the server response is sent to the global onCloseCallback function.<br>If a Network or Server error occurs during the removal of subscriptions, the error is sent to the global onFailureCallback function. As no events are unsubscribed due to the error, the onUnsubscribeCallback contains a <b>No events unsubscribed</b> message.<br>If a partial unsubscribe occurs, the events that are unsubscribed are listed in the onUnsubscribeCallback function.|
 
 ### Sample Code
 

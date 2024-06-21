@@ -20,7 +20,7 @@ Configure the parameters for the preprocessor and postprocessor to filter the re
       <td>
       <p>The preprocessor and postprocessor are Java classes that implement <b>DataPreProcessor</b>&#47;<b>DataPreProcessor2</b> and <b>DataPostProcessor</b>&#47;<b>DataPostProcessor2</b> interfaces. A developer can write custom code in the <b>execute</b> method of the preprocessor or postprocessor class. </p>
       <p>For a sample Java class code, refer to <a href="Java_Pre-Post_Samples.html" target="_blank">Java Sample Code for Preprocessor and Postprocessor</a>. </p>
-      <p>For various objects ](session and request) and the methods with sample Java class code, refer to <a href="https://opensource.hcltechsw.com/volt-mx-docs/java_docs_apis/MiddlewareAPI/index.md" target="_blank">Volt MX App Services API</a> 
+      <p>For various objects (session and request) and the methods with sample Java class code, refer to <a href="https://opensource.hcltechsw.com/volt-mx-docs/java_docs_apis/MiddlewareAPI/index.html" target="_blank">Volt MX App Services API</a> 
       </p>
       <blockquote><b><i>Note:</i></b> You need the <code>middleware-system.jar</code> for defining custom code     <br />
         <b>- For on-premises</b> Volt MX Foundry, you can find the jar within the installation folder <code> &lt;VoltMXFoundryInstallDir&gt; / middleware_home / </code>. You can also download the <code> middleware-system.jar </code> from Admin Console.<br/>
@@ -64,6 +64,7 @@ The step allows you to further filter the data received from a service call.
 
 1.  Under the **Custom Code Invocation**, follow these steps:
     * Under **Preprocessor**, configure one of the following:
+        * Select **Java**, and in the **Class** text box, enter the preprocessor class. This step enables a developer to include any business logic on the data before forwarding the request to the external data source.
         *   For **Java**, you can configure multiple Preprocessors. This is supported for Integration/Orchestration services and Object services. If you have defined your logic for multiple preprocessors in the uploaded JAR file in the service definition, you can select the available one or other preprocessors. You can arrange the selected pre-processors to be executed in the desired order during the operation call.     
             <details close markdown="block"><summary>Use Case </summary> When customers have a large amount of custom code, the maintainability of the code becomes an issue. The issue becomes much more complicated when multiple stakeholders working on custom code. In such cases, the custom code can be split into multiple pre/post processors so that stakeholders can work on their respective modules. This increases the upgradability and maintainability of the custom code.  
             </details>  

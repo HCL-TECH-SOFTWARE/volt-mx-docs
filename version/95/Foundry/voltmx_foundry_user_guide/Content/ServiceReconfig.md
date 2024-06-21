@@ -67,10 +67,10 @@ The list of the configurable connection parameters vary for each service type. F
 | Relational Database | Connection Parameters Schema Mapping JSON |
 | MongoDB | Connection Parameters |
 | RAML | Connection Parameters |
-| OpenAPI (Swagger) | Connection Parameters Host URL Base Path |
+| OpenAPI (Swagger) | Connection Parameters: <br>- Host URL <br>- Base Path <br>- Scheme (for Swagger 2.0 only)<br>**_Note:_** If the Swagger file does not contain a scheme, **https** is selected by default. If the Swagger file contains both **http** and **https**, **http** is selected by default.<br>Reconfiguring the scheme is only available on VoltMX Foundry versions V9 SP3 or later. If your runtime server version is V9 SP2 or earlier, the reconfigured scheme from the Foundry Console is not honored at run time. |
 | Salesforce | Connection Parameters |
 | IBM MQ | Connection Parameters |
-| > **_Note:_** Throttling details for all integration services are displayed under **Publish** > **Configure & Publish** > **Integration Service Configuration**. ||
+| **_Note:_** Throttling details for all integration services are displayed under **Publish** > **Configure & Publish** > **Integration Service Configuration**.||
 
 [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Object Service](javascript:void(0);)
 

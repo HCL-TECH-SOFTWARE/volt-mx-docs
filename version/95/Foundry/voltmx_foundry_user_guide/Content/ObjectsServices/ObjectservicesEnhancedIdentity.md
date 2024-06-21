@@ -41,82 +41,82 @@ To link a storage service to an Identity Service, do the following:
 
 1.  In Volt MX Foundry, click the **Objects** service tab.
 
-A list of object services appears. This is the list of object services that have been created for the Volt MX Foundry app.
+    A list of object services appears. This is the list of object services that have been created for the Volt MX Foundry app.
 
 3.  Select a storage service.
 
-A storage service is an object service that you have configured to use storage on the Volt MX Foundry back end. When you create a storage service, you select Storage as the endpoint type.
+    A storage service is an object service that you have configured to use storage on the Volt MX Foundry back end. When you create a storage service, you select Storage as the endpoint type.
 
 5.  Click in the **Identity Service for Backend Token** field, and select the identity provider that you want to use.
 6.  Click **Save**.
 
-Configuring a Security Filter
+**Configuring a Security Filter**
 
 To configure a security filter for a Get operation in a storage service, do the following:
 
 1.  In Volt MX Foundry, click the **Objects** service tab.
 
-A list of object services appears. This is the list of object services that have been created for the Volt MX Foundry app.
+    A list of object services appears. This is the list of object services that have been created for the Volt MX Foundry app.
 
 3.  Select a storage service.
 4.  On the **Mapping** tab of the navigation pane, click the plus button next to an object.
 
-The list of operations, or verbs, for the object appears.
+    The list of operations, or verbs, for the object appears.
 
 6.  Click the **GET** verb.
 
-The configure screen for the get verb appears.
+    The configure screen for the get verb appears.
 
-![](../Resources/Images/StorageService_GetVerbEIS_583x245.png)
+    ![](../Resources/Images/StorageService_GetVerbEIS_583x245.png)
 
 10.  Click the **Add** button.
 11.  In the **Data\_Model\_Field** column, click the drop-down menu, and select a field. For example, **LastUpdatedBy**.
 
-Select a field from the object that you want to use to filter the data returned by the query.
+     Select a field from the object that you want to use to filter the data returned by the query.
 
 13.  In the **Condition** column, click the drop-down menu, and select **eq**.
 
-The available conditions are eq (equals), gt (greater than), and lt (less than).
+     The available conditions are eq (equals), gt (greater than), and lt (less than).
 
 15.  In the **Value** column, click the text box and enter **profile.user.id**. When you start editing the field, dependent identity services are auto populated. Select the identity service you want.
 
-This maps the user ID attribute from the identity service to the Id field in the storage object.
+     This maps the user ID attribute from the identity service to the Id field in the storage object.
 
 17.  In the **Description** column, enter a description of the security filter.
-
-![](../Resources/Images/StorageService_GetSecurityFilter_573x141.png)
+     ![](./../Resources/Images/StorageService_GetSecurityFilter_573x141.png)
 
 20.  Click **Save**.
-
-This security filter is added to any **get** operations performed on the Student object.
+     This security filter is added to any **get** operations performed on the Student object.
 
 The security filter constrains the results of a get operation that are returned to the mobile app. For example, if the mobile app has an option to get a list of student records that the user had recently updated, Volt MX Foundry adds this security filter to the query. The mobile app retrieves only the student records that were updated by the logged on user. The field that Volt MX Foundry used to filter the results, LastUpdatedBy, is added to the query only in Volt MX Foundry and is not sent to mobile app with the results. The mobile app user cannot access this field and use it to retrieve records that were updated by another user.
 
-Configure Identity Filters
+> For more information on Externalizing Identity Services, refer to [Replace the Identity Service references in a Foundry app](./../Replacing_Identity_Services.md). 
+
+**Configure Identity Filters**
 
 To configure identity filters for a create operation in a storage service, do the following:
 
 1.  In the navigation pane, click the **Mapping** tab, and then click the plus button next to the an object. For example, Teacher.
 2.  Click the **create** verb.
 
-The Request Input Parameters tab appears in the Configure screen. You define how to use the user profile data by selecting a verb and the data model field that you want to map to the user profile data.
+    The Request Input Parameters tab appears in the Configure screen. You define how to use the user profile data by selecting a verb and the data model field that you want to map to the user profile data.
 
 4.  Click **Add**.
 5.  In the **Data\_Model\_Field** column, click the drop-down menu, and select the **CreatedBy** attribute.
 6.  Click the drop-down menu in the **Value** column, and select **identity**.
 
-An identity value indicates that Volt MX Foundry will retrieve the value specified from the user's security profile in the identity service that is linked to the object service.
+    An identity value indicates that Volt MX Foundry will retrieve the value specified from the user's security profile in the identity service that is linked to the object service.
 
 8.  In the text box next to the **identity** value, enter **profile.user.id**.
 
-This specifies that Volt MX Foundry will populate the value of the input parameter from the user's security profile.
+    This specifies that Volt MX Foundry will populate the value of the input parameter from the user's security profile.
 
 10.  Click **Add**.
 11.  In the **Data\_Model\_Field** column, click the drop-down menu and select the **LastUpdatedBy** attribute.
 12.  Click the drop-down menu in the **Value** column, and select **identity**.
 13.  In the text box next to the **identity** value, enter **profile.user.id**.
 
-![](../Resources/Images/StorageObject_TeacherInputParam_552x193.png)
+     ![](../Resources/Images/StorageObject_TeacherInputParam_552x193.png)
 
 16.  Click **Save**, and then in the navigation pane, click the **update** operation.
 17.  Click **Add**.
@@ -133,6 +133,8 @@ This specifies that Volt MX Foundry will populate the value of the input paramet
     
     > **_Important:_** Object services enabled with security filters cannot be tested from Volt MX Foundry Console.
     
+    > For more information on Externalizing Identity Services, refer to [Replace the Identity Service references in a Foundry app](./../Replacing_Identity_Services.md). 
+
 
 #### Preprocessor and Postprocessor References
 
