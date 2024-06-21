@@ -92,8 +92,29 @@ To configure Volt MX custom identity provider, follow these steps:
             
         *   **Allow only one active user session across all apps**: Logging to simultaneous instances of **the same app or across apps** is not supported. When this option is selected, a unique app user can log in to only one instance of client apps linked to all Foundry apps using the identity service.  
             
-            > **_Important:_** Apps enabled for SSO will not work if the option is selected, Allow only one active user session across all apps.
+            > **_Important:_** Apps enabled for SSO will not work if the option is selected, Allow only one active user session across all apps.<br>
+            For the Session Restrictions feature to work as expected with Custom Identity provider, the User ID credential parameter must be named `userid`. If the parameter name is `username`, `user`, or any other value, Identity will not be able to apply the session restrictions per app per user.
+        
+        *   **Login Failure Tracking**: Specifies whether Identity must count the number of login failures, which are defined by a 401 response from the server.  
             
+            After the number of failed logins reaches (or exceeds) the specified threshold, Identity sends an `HTTP Status Code: 429` to the client. If the user signs-in with valid credentials, or if the Failure Count TTL elapses, the failure count is automatically reset to zero. 
+
+            This feature can be used to add preventive measures and provide additional security against malicious traffic.
+            
+            To disable tracking of login failures, select No Tracking. To enable tracking of login failures, select either of the following options:  
+
+               *  **Client IP Address**: The number of login failures are tracked based on the IP address of the client that generated the login requests.  
+
+               *  **User ID**: The number of login failures are tracked based on the User ID for which the login requests are generated.                  
+               
+               *  **Both Client IP Address and User ID**: The number of login failures are tracked based on the IP address of the client that generated the login requests and the User ID for which the login requests are generated. The service tracks the login failures for the IP Address and the User ID separately. 
+
+            If you enable tracking of login failures, the console displays the following parameters: 
+
+               *  **Failure Threshold**: Specifies the threshold for the number of login failures. After the count of login failures reaches the threshold, Identity responds with HTTP Status Code: 429 until the login is successful, or the Failure Count TTL is elapsed.  
+
+               * **Failure Count TTL**: Specifies the duration from the last login failure after which the failure count is automatically reset to zero. The default value is 30 minutes, and the maximum value is 168 hours.
+
 11.  After entering the above details, click the **Test Login** button to verify the credentials. The **Test Login** dialog appears.
     
     1.  Enter the required details in headers and body for custom identity provider.

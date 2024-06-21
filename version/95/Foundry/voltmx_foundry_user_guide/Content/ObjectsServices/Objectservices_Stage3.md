@@ -59,15 +59,16 @@ To configure the common mapping, follow these steps:
 17.  Click in the fifth field under **APP DATA MODEL FIELDS**. A drop-down menu appears. Select **OrderType**.
 18.  Click in the fifth field under **VTI\_SAMPLE\_ORDERS FIELDS**. A drop-down menu appears. Select **ORDER\_TYPE.**
 
-    ![](../Resources/Images/ObjectSrvcOrderCommonMap_617x266.png)
+     ![](../Resources/Images/ObjectSrvcOrderCommonMap_617x266.png)
+
 
 19.  Under **TYPE**, click in the drop-down menu for OrderID and ORDER\_NUMBER. Select the left-arrow to indicate response mapping of the object field.
 
-    > **_Note:_** You can sort fields by clicking the column name header in the Mapping tab.
+     > **_Note:_** You can sort fields by clicking the column name header in the Mapping tab.
 
 You can also map an object in your data model to additional child objects in the backend object hierarchy. To map an object to additional child objects in the backend, click **Advanced**, and then select the child objects in the hierarchy.
 
-    ![](../Resources/Images/ObjSvcMapAdditional_639x263.png)
+![](../Resources/Images/ObjSvcMapAdditional_639x263.png)
 
 #### Configuring Methods Mapping to Fields on the Back End
 
@@ -113,105 +114,92 @@ To configure the methods mapping, follow these steps:
 
 10.  Click **Request Mapping**.
 
-If you do not apply common mapping of the object to the get verb, this is where you specify a custom mapping on the request to SAP. Common mapping by default maps one-to-one the data model method to the method of the target object in the back end.
+     If you do not apply common mapping of the object to the get verb, this is where you specify a custom mapping on the request to SAP. Common mapping by default maps one-to-one the data model method to the method of the target object in the back end.
 
-    ![](../Resources/Images/ObjectSrvcRequestMapping_549x338.png)
+     ![](../Resources/Images/ObjectSrvcRequestMapping_549x338.png)
 
 11.  Click **Response Mapping**.
 
-If you do not apply common mapping of the object to the get verb, this is where you specify a custom mapping on the response to SAP.
+     If you do not apply common mapping of the object to the get verb, this is where you specify a custom mapping on the response to SAP.
 
 12.  Click **Test**.
 
-The Test panel appears. You can use the Test panel to test the mapping for a method. To test the mapping, enter the query parameters, select an environment, enter the headers and header values that you want to include with the test. Then, in Request Payload, enter values for the fields for which you want to test the mapping, and then click **Send**.
+     The Test panel appears. You can use the Test panel to test the mapping for a method. To test the mapping, enter the query parameters, select an environment, enter the headers and header values that you want to include with the test. Then, in Request Payload, enter values for the fields for which you want to test the mapping, and then click **Send**.
 
-    ![](../Resources/Images/ObjSvcTestMapping_585x390.png)
+     ![](../Resources/Images/ObjSvcTestMapping_585x390.png)
 
 13.  In the navigation pane, click the **Orders** object.
-14.  For the **Get** verb, click **Advanced**.
 
-* The **Include Related Objects** field and the **Verb Security Level** field appear. The Include Related Objects setting specifies which part of the data model Object's hierarchy can be handled by the verb. This information helps in optimizing the number of calls to the back end in case the verb also deals with other objects in the hierarchy. You can multi-select multiple objects in the drop-down to specify the information. 
+14.  For additional configuration of request (or) response operations, refer to the following <b>Advanced Configurations for Verbs</b> section.
 
-    ![](../Resources/Images/IncludeRelatedObjects_567x381.png)
+15.  Click <b>Save</b>.
 
-* **Custom Code Invocation** section appears. Configure the parameters for the preprocessor and postprocessor to filter the request and response objects for your business requirements. You can specify multiple preprocessors and postprocessors. This is supported for integration/Orchestration services and Object services.
 
-    > **_Important:_** To invoke preprocessor and postprocessor, you must **import a valid JAR file** while creating an object service. The corresponding jars have to be uploaded to the Volt MX Foundry console under the **[**Advanced** tab in the object service definition](Objectservices_Stage1.md#Custom_JAR-Objects)** service definition.
 
-*   Java Preprocessor and Postprocessor - The preprocessor and postprocessor are Java classes that implement ObjectServicePreProcessor and ObjectServicePostProcessor interfaces. A developer can write custom code in the execute method of the preprocessor or postprocessor class.
-            
-            *   Under the **Custom Code Invocation**, follow these steps:
-                1.  Under **Preprocessor**, configure the following:
-                    *   For **Java**, you can configure multiple Preprocessors. This is supported for Integration/Orchestration services and Object services. If you have defined your logic for multiple preprocessors in the uploaded JAR file in the service definition, you can then select the available one or other preprocessors. You can arrange the selected pre-processors to be executed in the desired order during the operation call.
-                        
-                        
-                        <details close markdown="block"><summary>Use Case </summary>
-                        When customers have a large amount of custom code, the maintainability of the code becomes an issue. The issue becomes much more complicated when multiple stakeholders working on custom code. In such cases, the custom code can be split into multiple pre/post processors so that stakeholders can work on their respective modules. This increases the upgradability and maintainability of the custom code.  
-                        </details>
-                        Select **Java**, and from the **Class** list, select a preprocessor class. You can select one or more classes.  
-                        This step enables a developer to include any business logic on the data before sending the response to a mobile device.  
-                        
-                2.      Under **Postprocessor**, configure the following:
-                    *   For **Java**, you can configure multiple Postprocessors. This is supported for Integration/Orchestration services and Object services. If you have defined your logic for multiple postprocessors in the uploaded JAR file in the service definition, you can select the available one or other post-processors. You can arrange the selected post-processors to be executed in the desired order during the operation call.  
-                        
+<h4><a name="Advanced"></a>Advanced Configurations for Verbs</h4>
 
-                        <details close markdown="block"><summary>Use Case </summary>
-                        When customers have a large amount of custom code, the maintainability of the code becomes an issue. The issue becomes much more complicated when multiple stakeholders working on custom code. In such cases, the custom code can be split into multiple pre/post processors so that stakeholders can work on their respective modules. This increases the upgradability and maintainability of the custom code.  
-                        </details>
-                        
-                        Select **Java**, and from the **Class** list, select a postprocessor class. You can select one or more classes.  
-                        This step enables a developer to include any business logic on the data before sending the response to a mobile device.You can rearrange the order of the classes to be executed, if required.
-        *   Preprocessor and Postprocessor interfaces in Object services
-            
-            **ObjectServicePreProcessor**
-            
-            Implement this interface and write your custom preprocessor logic by overriding execute method. You are provided with _FoundryRequestManager_, _FoundryResponseManager_ and _FoundryRequestChain_ as method arguments.
-            
-            <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
-                public interface ObjectServicePreProcessor {  
-                void execute(FoundryRequestManager foundryRequestManager,  
-                FoundryResponseManager foundryResponseManager, FoundryRequestChain foundryRequestChain)  
-                throws Exception;  
-                }
-            }</code></pre></figure>
-            
-            **Method arguments:  
-            _FoundryRequestManager_ :** This argument specifies the different types of handlers to operate on request related information.**  
-            **_FoundryResponseManager_ :** This argument specifies the different types of handlers to operate on response related information.  
-            **_FoundryRequestChain_ :** This argument specifies a chain similar to servlet _FilterChain_ used to control the request flow.**
-            
-            For a sample Java class code for ObjectServicePreProcessor, refer to [Java Sample Code for Preprocessor - Object services](../Java_Pre-Post_Samples_Objects.md#sample-objectservicepreprocessor).
-            
-            **ObjectServicePostProcessor**
-            
-            Implement this interface and write your custom postprocessor logic by overriding execute method. You are provided with _FoundryRequestManager and_ _FoundryResponseManager_ as method arguments.
-            
-            <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
-                public interface ObjectServicePostProcessor {  
-                void execute(FoundryRequestManager foundryRequestManager,  
-                FoundryResponseManager foundryResponseManager)throws Exception;  
-                }
-            }</code></pre></figure> 
-            
-            **Method arguments:  
-            _FoundryRequestManager_ :** This argument specifies the different types of handlers to operate on request related information.**  
-            **_FoundryResponseManager_ :** This argument specifies the different types of handlers to operate on response related information.**
-            
-            For a sample Java class code for ObjectServicePostProcessor, refer to [Java Sample Code for Preprocessor - Object services](../Java_Pre-Post_Samples_Objects.md#sample-objectservicepostprocessor).
-            
-            > **_Important:_** **Limitations of custom code invocation in Object services are as follows:  
-            
-            **\-  Custom code is not invoked when Bulk Sync V2 APIs are in use.\-  Custom code is not invoked when orchestration services which make use of Object services are in use.\-  Custom code is not invoked when we use Volt MX Foundry console test API.
-            
-            > **_Note:_** **For Volt MX Cloud / For on-premises:** Runtime jars to write custom code can be downloaded from Admin console. In the **Downloads** section, you can download the middleware jars as a zip file. Here the `middleware-api.jar` will have all the classes related to custom code.
-            
-            > **_Note:_** For details on middleware APIs for preprocessor and postprocessor,  
-            contact refer to [Volt MX App Services API](../../../../../../java_docs_apis/MiddlewareAPI/index.md)
-    
+<p>For additional configuration of request (or) response operations, provide the following details in the Advanced section.</p>
+<p>All options in the <b>Advanced</b> section for operations are optional.</p>
+<p>Click the Advanced section.</p>
 
-15.  Click **Save**.
+<img src="../Resources/Images/AdvanceVerbConfig.png">
+<table>
+<tr>
+<td><b>Custom Code Invocation</b>
+</td>
+<td>
+<p> You can add pre and post processing logic to services to modify the request inputs. When you test, the services details of various stages in the service execution are presented to you for better debugging.  For more details, refer to <a href="../../Content/Custom_Code_for_Invoking_ObjectService_from_pre-post-java.html" target="_blank">Preprocessor and Postprocessor for Objects Service Verbs</a>.</p>
+<ul>
+<li MadCap:conditions="Default.V9SP1GA"><a href="../../Content/Custom_Code_for_Invoking_ObjectService_from_pre-post-java.html">Custom Code for Invoking an Object service from Preprocessor or Postprocessor </a>
+<ul>
+<li><a href="../../Content/Custom_Code_for_Invoking_ObjectService_from_pre-post-java.html#Invoking">Invoking a ServicesManager</a>
+</li>
+<li>
+<p><a href="../../Content/Custom_Code_for_Invoking_ObjectService_from_pre-post-java.html#Invoking2">Invoking an Object Service from ServicesManager</a>
+</p>
+</li>
+</ul>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="TableStyle-Basic-Body-Body1">
+<td class="TableStyle-Basic-BodyE-Column1-Body1"><b><a name="RelatedObjects"></a>Related Objects</b>
+</td>
+<td class="TableStyle-Basic-BodyD-Column1-Body1">
+<p>The Include Related Objects setting specifies which part of the data model Object's hierarchy can be handled by the verb. This information helps in optimizing the number of calls to the back end in case the verb also deals with other objects in the hierarchy. You can multi-select multiple objects in the drop-down to specify the information.<p><img src="../Resources/Images/IncludeRelatedObjects.png" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;width: 567px;height: 381px;" /></p></p>
+</td>
+</tr>
+<tr class="TableStyle-Basic-Body-Body1">
+<td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Properties</td>
+<td class="TableStyle-Basic-BodyD-Column1-Body1">The Properties allows you to configure service call time out cache response. For information on different types of configuration properties, refer <a href="../../Content/Java_Preprocessor_Postprocessor_.html" target="_blank">Properties</a>.</td>
+</tr>
+<tr class="TableStyle-Basic-Body-Body1">
+<td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Server Events</td>
+<td class="TableStyle-Basic-BodyD-Column1-Body1">Using Server Events you can configure this service to trigger or process server side events. For detailed information, refer <a href="../../Content/ServerEvents.html">Server Events</a>.</td>
+</tr>
+<tr class="TableStyle-Basic-Body-Body1" MadCap:conditions="Default.V9SP3">
+<td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Front-end API</td>
+<td class="TableStyle-Basic-BodyD-Column1-Body1"> Front-end API allows you map your endpoint (or) backend URL of an operation to a front-end URL. For detailed information, refer Custom <a href="../../Content/FrontEndAPIURL_Objects.html" target="_blank">Front-end URL</a>.</td>
+</tr>
+<tr class="TableStyle-Basic-Body-Body1" MadCap:conditions="Default.V9SP3">
+<td class="TableStyle-Basic-BodyB-Column1-Body1" style="font-weight: bold;">OpenAPI Specification</td>
+<td class="TableStyle-Basic-BodyA-Column1-Body1">
+<p>
+This section allows you to customize the documentation of the Request and Response parameters for your API. For detailed information, refer to <a href="../../Content/OpenAPISpec_Objects.html" target="_blank">Customizing API&#160;documentation using OpenAPI Specification</a>.</p>
+<ul>
+<li>
+Provide the Request body to be used in the Developer Portal. This input is essential when the XML Mapper is used. In the case of Visual Mapper, the Request body is inferred from the mapping.
+</li>
+<li>
+Provide the Response body to be used in the Developer Portal. This input is essential when the XML Mapper is used. In the case of Visual Mapper, the Response body is inferred from the mapping.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 
-        You can enable the application for offline synchronization, publish the application, and then provide the code that Volt MX Foundry generates to a mobile application developer.
+
 
 #### How to Use Actions in Existing Objects Methods
 
@@ -233,7 +221,7 @@ You can perform the following actions on a method in existing object services:
 
 SAP Object Service provides you the ability to add custom verb names and map it to an operation of a back-end object. You can now create your own custom verb in addition to the existing verbs (Create, Read, Update, Delete, and Partial Update) and map to a back-end business operation.
 
-****To create a custom verb,** follow these steps**:
+**To create a custom verb**, follow these steps**:
 
 1.  In the **Mapping** screen. click the **Methods** tab.
 2.  Click the **Add** button.
@@ -258,27 +246,27 @@ SAP Object Service provides you the ability to add custom verb names and map it 
     
 10.  Click **Request Mapping**.
     
-        The verb has the Common Mappings applied by default. You can click on **Clear Mappings** and specify a custom mapping on the request to SAP to map the backend object to application model object. The custom verb will be available to the end users like the other verbs in the application. The rest client can test the custom verb from the published application.
+     The verb has the Common Mappings applied by default. You can click on **Clear Mappings** and specify a custom mapping on the request to SAP to map the backend object to application model object. The custom verb will be available to the end users like the other verbs in the application. The rest client can test the custom verb from the published application.
         
 11.  Click **Response Mapping**.
     
-        If you do not apply common mapping of the object, you should specify a custom mapping on the response to SAP.
+     If you do not apply common mapping of the object, you should specify a custom mapping on the response to SAP.
         
-        > **_Note:_** In Foundry V9 and later, any V8 custom response format is ignored and the internal response formatting is enabled (only Primary Key is returned).  
-        To get the V8 functionality, you need to set the following -D parameter on the JVM : `VOLTMX_SERVER_CUSTOM_VERB_RESPONSE_FORMAT_ENABLED` to `false`.  
+     > **_Note:_** In Foundry V9 and later, any V8 custom response format is ignored and the internal response formatting is enabled (only Primary Key is returned).  
+    To get the V8 functionality, you need to set the following -D parameter on the JVM : `VOLTMX_SERVER_CUSTOM_VERB_RESPONSE_FORMAT_ENABLED` to `false`.  
         
-        For a workflow object, internal response formatting is enabled by default.  
+     For a workflow object, internal response formatting is enabled by default.  
         
-        Before migrating to V9, any existing services or orchestrations that depend on a custom response format will need to be adjusted to use the standard response format.
+     Before migrating to V9, any existing services or orchestrations that depend on a custom response format will need to be adjusted to use the standard response format.
     
 12.  Click **Test**.
     
-        You can use the Test panel to test the mapping for a method. To test the mapping, enter the query parameters, select an environment, enter the headers and header values that you want to include with the test. Then, in Request Payload, enter the values for the fields for which you want to test the mapping, and then click **Send**.
+     You can use the Test panel to test the mapping for a method. To test the mapping, enter the query parameters, select an environment, enter the headers and header values that you want to include with the test. Then, in Request Payload, enter the values for the fields for which you want to test the mapping, and then click **Send**.
         
-        If the test is successful, the end users can invoke the created custom verb from their application post publish.
+     If the test is successful, the end users can invoke the created custom verb from their application post publish.
         
 
-        ![](../Resources/Images/CustomVerb/req_resp_mapper_628x476.png)
+     ![](../Resources/Images/CustomVerb/req_resp_mapper_628x476.png)
 
 #### Mapping verbs for Objects (for Service-driven Objects)
 
@@ -297,31 +285,37 @@ To map the verbs for the Defect object, follow these steps:
 5.  Click in the **Services** field. A drop-down menu appears. Select the **Digite** integration service.
 6.  Click in the Operations field. A drop-down menu appears. Click **createAccount**.
 7.  Click **Save**.
+
+8.  > **_Note:_** From V9SP3, Foundry supports remapping of verbs for service-driven Object Services. The new <b>Edit</b> button is available next to the mapped verb on the verb mapping page that allows you to manage the existing mapped verbs. <br> 
+Refer to [Remapping Verbs for Service-Driven Object Services](./../../Content/Remapping_Object_Verbs.md).
+<img src="../Resources/Images/ObjVerbRemap1.png">
+For Locked Apps: If you are using Locked Object Services, you cannot edit the locked base verb mapping/s. <br>However, you can choose to enable/disable the locked mappings to your apps.<br>For more information, refer [Locking a Fabric App](./../../Content/LockApp.md).  
+
 8.  Repeat steps 2 through 7, and map the data model verb **update** to the **updateDefect** operation.
 9.  Repeat steps 2 through 7, and map the data model verb **partialupdate** to the **updateDefect** operation.
-10.  Repeat steps 2 through 7, and map the data model verb **get** to the **getAllDefects** operation.
+10. Repeat steps 2 through 7, and map the data model verb **get** to the **getAllDefects** operation.
 
-        The mapping for the verbs is automatically generated. Mapping is auto-generated only when the dataset name of integration services and object name matches. The mapping is populated in the Request Mapping and Response Mapping tabs based on the input and output of the operations. You can click the **Clear Mappings** button to clear the existing mapping and then specify the custom mapping.
+    The mapping for the verbs is automatically generated. Mapping is auto-generated only when the dataset name of integration services and object name matches. The mapping is populated in the Request Mapping and Response Mapping tabs based on the input and output of the operations. You can click the **Clear Mappings** button to clear the existing mapping and then specify the custom mapping.
 
-        ![](../Resources/Images/SDOdefectMapping_638x223.png)
+    ![](../Resources/Images/SDOdefectMapping_638x223.png)
 
-        You can view the mapping for a verb by clicking the verb on the Mapping tab in the navigation pane. Request mapping is the parameters that are mapped from the device side to the back end. Response mapping is the parameters that the backend sends to the object's fields.
+    You can view the mapping for a verb by clicking the verb on the Mapping tab in the navigation pane. Request mapping is the parameters that are mapped from the device side to the back end. Response mapping is the parameters that the backend sends to the object's fields.
 
 11.  In the navigation pane, under the Defect object, click the **get** verb.
 12.  Click **Get Variants**.
 
-        The mapping configuration for the get verb appears. Object Services provides built-in variants of the get verb. You can click **Get Variants** button to view the variants for methods. The built-in variants of the get verb are getAll, getbypk, getupdated, getbatch, and getdeleted. These get verbs do not have individual mapping. They have a common request mapping and a common response mapping.
+     The mapping configuration for the get verb appears. Object Services provides built-in variants of the get verb. You can click **Get Variants** button to view the variants for methods. The built-in variants of the get verb are getAll, getbypk, getupdated, getbatch, and getdeleted. These get verbs do not have individual mapping. They have a common request mapping and a common response mapping.
 
 13.  Click in the **Service Name** field for the getbypk verb, and select **Digite**.
 14.  Click in the **Operation** field for the getbypk verb, and select **getDefectDetailsById**.
 
-        A green check mark indicates that the operation mapping has succeeded.
+     A green check mark indicates that the operation mapping has succeeded.
 
-        ![](../Resources/Images/SDOdefectGetVerbs_592x620.png)
+     ![](../Resources/Images/SDOdefectGetVerbs_592x620.png)
 
 15.  Click **Save**.
     
-        > **_Note:_** For more information on how to configure Get Variants for SDO, refer to [Configuring SDO Get Verb for Offline Objects](SDO_Get_VariantsObjectservices_Stage3.md).
+     > **_Note:_** For more information on how to configure Get Variants for SDO, refer to [Configuring SDO Get Verb for Offline Objects](SDO_Get_VariantsObjectservices_Stage3.md).
         
 
 **Support for SDO Services from Offline Objects**

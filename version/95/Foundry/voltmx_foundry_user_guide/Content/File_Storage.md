@@ -59,14 +59,12 @@ Create operations for File Storage
     | Field | Description |
     | --- | --- |
     | Name | The operation name appears in the **Name** field. You can edit the name based on your preference. |
-    | Operation Security Level | It specifies how a client must authenticate to invoke this operation.
-    [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Select one of the following security operations in the **Operation Security Level** field.](javascript:void(0);) 
-    
-    **Authenticated App User** – It restricts the access to clients who have successfully authenticated using an Identity Service associated with the app. **Anonymous App User** – It allows the access from trusted clients that have the required App Key and App Secret. Authentication through an Identity Service is not required. **Public** – It allows any client to invoke this operation without any authentication. This setting does not provide any security to invoke this operation and you should avoid this authentication type if possible. **Private** - It blocks the access to this operation from any external client. It allows invocation either from an Orchestration/Object Service, or from the custom code in the same run-time environment.
-    
-    
-    
-     |
+    | Operation Security Level | It specifies how a client must authenticate to invoke this operation. |
+
+
+    [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)Select one of the following security operations in the Operation Security Level field.](javascript:void(0);) 
+
+    <table style="width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url]('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1" style="width: 174px;"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Authenticated App User</td><td class="TableStyle-Basic-BodyD-Column1-Body1">It restricts the access to clients who have successfully authenticated using an Identity Service associated with the app.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Anonymous App User</td><td class="TableStyle-Basic-BodyD-Column1-Body1">It allows the access from trusted clients that have the required App Key and App Secret. Authentication through an Identity Service is not required.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">Public</td><td class="TableStyle-Basic-BodyD-Column1-Body1">It allows any client to invoke this operation without any authentication. This setting does not provide any security to invoke this operation and you should avoid this authentication type if possible.</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">Private</td><td class="TableStyle-Basic-BodyA-Column1-Body1">It blocks the access to this operation from any external client. It allows invocation either from an Orchestration/Object Service, or from the custom code in the same run-time environment.</td></tr></tbody></table>    
     
 6.  [![Closed](../Skins/Default/Stylesheets/Images/transparent.gif)For additional configuration of request (or) response operations, provide the following details in the Advanced section.](javascript:void(0);)
     

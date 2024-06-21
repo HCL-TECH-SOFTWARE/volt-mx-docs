@@ -28,8 +28,8 @@ Creates an object in the Volt MX Foundry endpoint.
 | Parameter | Type | Description |
 | --- | --- | --- |
 | dataObject | DataObject | An instance of the DataObject class which contains data about the object and its data. |
-| headers | Dictionary <string, string> | Key/value pairs of httpHeaders that are sent along with the network call. |
-| queryParams | Dictionary <string, string> | Key/value pairs of query params that are appended to the url while making a network call. |
+| headers | Dictionary <string, string\> | Key/value pairs of httpHeaders that are sent along with the network call. |
+| queryParams | Dictionary <string, string\> | Key/value pairs of query params that are appended to the url while making a network call. |
 
 #### Example
 
@@ -65,8 +65,8 @@ Deletes an object in the Volt MX Foundry endpoint.
 | Parameter | Type | Description |
 | --- | --- | --- |
 | dataObject | DataObject | An instance of the DataObject class which contains data about the object and its data. |
-| headers (Optional) | Dictionary <string, string> | Key/value pairs of httpHeaders that are sent along with the network call. |
-| queryParams (Optional) | Dictionary <string, string> | Key/value pairs of query params that are appended to the url while making a network call. |
+| headers (Optional) | Dictionary <string, string\> | Key/value pairs of httpHeaders that are sent along with the network call. |
+| queryParams (Optional) | Dictionary <string, string\> | Key/value pairs of query params that are appended to the url while making a network call. |
 
 #### Example
 
@@ -101,8 +101,8 @@ Gets the metadata associated with the objects defined in the service from the se
   
 | Parameter | Type | Description |
 | --- | --- | --- |
-| headers | Dictionary <string, string> | Key/value pairs of httpHeaders that are sent along with the network call. |
-| queryParams | Dictionary <string, string> | Key/value pairs of query params that are appended to the url while making a network call. To query data, the Odata Url is sent in this parameter. |
+| headers | Dictionary <string, string\> | Key/value pairs of httpHeaders that are sent along with the network call. |
+| queryParams | Dictionary <string, string\> | Key/value pairs of query params that are appended to the url while making a network call. To query data, the Odata Url is sent in this parameter. |
 
 #### Example
 
@@ -136,8 +136,8 @@ Gets the metadata associated with an object defined in the service from the serv
 | Parameter | Type | Description |
 | --- | --- | --- |
 | objectName | string | Object name in Volt MX Foundry |
-| headers | Dictionary <string, string> | Key/value pairs of httpHeaders that are sent along with the network call. |
-| queryParams | Dictionary <string, string> | Key/value pairs of query params that are appended to the url while making a network call. |
+| headers | Dictionary <string, string\> | Key/value pairs of httpHeaders that are sent along with the network call. |
+| queryParams | Dictionary <string, string\> | Key/value pairs of query params that are appended to the url while making a network call. |
 
 #### Example
 
@@ -171,8 +171,8 @@ Partially updates an object in the Volt MX Foundry endpoint.
 | Parameter | Type | Description |
 | --- | --- | --- |
 | dataObject | DataObject | An instance of the DataObject class which contains data about the object and its data. |
-| headers | Dictionary <string, string> | Key/value pairs of httpHeaders that are sent along with the network call. |
-| queryParams | Dictionary <string, string> | Key/value pairs of query params that are appended to the url while making a network call. |
+| headers | Dictionary <string, string\> | Key/value pairs of httpHeaders that are sent along with the network call. |
+| queryParams | Dictionary <string, string\> | Key/value pairs of query params that are appended to the url while making a network call. |
 
 #### Example
 
@@ -209,8 +209,8 @@ Updates an object in the Volt MX Foundry endpoint.
 | Parameter | Type | Description |
 | --- | --- | --- |
 | dataObject | DataObject | An instance of the DataObject class which contains data about the object and its data. |
-| headers | Dictionary <string, string> | Key/value pairs of httpHeaders that are sent along with the network call. |
-| queryParams | Dictionary <string, string> | Key/value pairs of query params that are appended to the url while making a network call. |
+| headers | Dictionary <string, string\> | Key/value pairs of httpHeaders that are sent along with the network call. |
+| queryParams | Dictionary <string, string\> | Key/value pairs of query params that are appended to the url while making a network call. |
 
 #### Example
 

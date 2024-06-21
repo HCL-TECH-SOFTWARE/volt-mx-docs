@@ -53,7 +53,7 @@ Appendix - Frequently Asked Questions (FAQs)
     For more details to enable CORS, refer to [API Management > Identity > SERVICE CONFIGURATION > Identity Service Cross Domain Security (CORS)](App_User_Session.md#identity-service-security-settings).
     
 
-<!-- *   **Issue**
+*   **Issue**
     
     Volt MX Foundry Console is unable to explore MySQL stored procedures from integration service for WebLogic with MSSQL,Oracle as consoleDB. Because WebLogic loads 5.1.22 mysql jar by default. (This jar is older version).
     
@@ -72,7 +72,7 @@ Appendix - Frequently Asked Questions (FAQs)
     1.  Open the WebLogic.xml file. For example, WEB-INF->INF->Weblogic.xml.
     2.  Add the following property in the four war files (mfconsole.war, middleware.war, admin.war, and services.war) located in Weblogic.xml.
         
-        `<package-name>com.mysql.jdbc.*</package-name>` -->
+        `<package-name>com.mysql.jdbc.*</package-name>`
         
 
 *   **Issue**
@@ -87,51 +87,47 @@ Appendix - Frequently Asked Questions (FAQs)
 *   **Issue**
     
     Connection Issues While Creating a Salesforce Service Using Volt MX Foundry When you create a Salesforce service by providing a wrong **client ID**, the system throws the following exception:
-    
-```
- Error retrieving the Salesforce metadata:   
-    {"error_description":"invalid client credentials","error":"invalid_client"};  
-    
-```
-    
+
+    <pre><code>
+      Error retrieving the Salesforce metadata:   
+        {"error_description":"invalid client credentials","error":"invalid_client"};  
+    </code></pre>
+        
     **Workaround:** Refer to [Creating Connected Application](../../../tutorials/MobileFoundry/Content/Overview.md#ConnectedApps).
     
 
 *   **Issue**
     
     When you create a Salesforce service by providing a wrong **secret key**, the system throws the following exception:
-    
-```
- Error retrieving the Salesforce metadata:  
-    {"error_description":"client identifier invalid","error":"invalid_client_id"};
-      
-    
-```
-    
+
+    <pre><code>
+        Error retrieving the Salesforce metadata:  
+        {"error_description":"client identifier invalid","error":"invalid_client_id"};
+    </code></pre>
+
     **Workaround:** Refer to [Creating Connected Application](../../../tutorials/MobileFoundry/Content/Overview.md#ConnectedApps).
     
 *   **Issue**
     
     When you create a Salesforce service by providing a wrong **password with suffix**, the system throws the following exception:
+
+    <pre><code>
+        Error retrieving the Salesforce metadata:   
+        {"error_description":"authentication failure - Invalid Password","error":"invalid_grant"};
+    </code></pre>
     
-```
- Error retrieving the Salesforce metadata:   
-    {"error_description":"authentication failure - Invalid Password","error":"invalid_grant"};
-      
-    
-```
-    
+
     **Workaround:** Refer to [Configuring Salesforce Account](../../../tutorials/MobileFoundry/Content/Overview.md#Configur).
     
 *   **Issue**
     
     When you create a Salesforce service by providing a wrong **password without suffix**, the system throws the following exception:
     
-```
- Error retrieving the Salesforce metadata:   
-    {"error_description":"authentication failure - Failed: API security token required","error":"invalid_grant"};
-    
-```
+    <pre><code>
+        Error retrieving the Salesforce metadata:   
+        {"error_description":"authentication failure - Failed: API security token required","error":"invalid_grant"};
+    </code></pre>
+
     
     **Workaround:** Refer to [Configuring Salesforce Account](../../../tutorials/MobileFoundry/Content/Overview.md#Configur).
     
@@ -139,11 +135,11 @@ Appendix - Frequently Asked Questions (FAQs)
     
     When you log into Salesforce by providing a wrong **UserName**, the system throws the following exception:
     
-```
- Error retrieving the Salesforce metadata:   
-    {"error_description":"expired access/refresh token","error":"invalid_grant"};
-    
-```
+    <pre><code>
+        Error retrieving the Salesforce metadata:   
+        {"error_description":"expired access/refresh token","error":"invalid_grant"};
+    </code></pre>
+
     
     **Workaround:** Refer to [Configuring Salesforce Account](../../../tutorials/MobileFoundry/Content/Overview.md#Configur).
     
@@ -155,9 +151,7 @@ Issues Publishing an Application Using Volt MX Foundry Console
     
     When you try to publish more than one apps at a time, the system throws the following error:  
     
-```
- 406 - indicates parallel application deployment is in-progress
-```
+    `406 - indicates parallel application deployment is in-progress`
     
     **Workaround:** You must wait until an app in the row is published successfully, and then re-publish the next app.
     
@@ -177,17 +171,16 @@ Issues Publishing an Application Using Volt MX Foundry Console
     
     When another deployment is in progress for the server, the system throws the following error:
     
-```
- 409 -Failed to `Publish Integration and Orchestration Services`.
-```
-    
+ 
+     `409 - Failed to Publish Integration and Orchestration Services`.
+  
+
     ![](Resources/Images/OnPrem/Publish409Error_523x171.png)
     
     **Workaround**: You must wait until an app in the queue is published successfully, and then re-publish the app.
     
 
-*   **Issue  
-    **
+*   **Issue**
     
     \- If the size of your application is more than the variable size of the server database, an error occurs while publishing. Ensure the variable  `max_allowed_packet_size`  is set to a higher value than the application size.  
       
@@ -221,7 +214,7 @@ Issues Publishing an Application Using Volt MX Foundry Console
     *   Redo log writes for large, externally stored BLOB fields could overwrite the most recent checkpoint. The 5.6.20 patch limits the size of redo log BLOB writes to 10% of the redo log file size. The 5.7.5 patch addresses the bug without imposing a limitation. For MySQL 5.5, the bug remains a known limitation. As a result of the redo log BLOB write limit introduced for MySQL 5.6, innodb\_log\_file\_size should be set to a value greater than 10 times the largest BLOB data size found in the rows of your tables plus the length of other variable length fields (VARCHAR, VARBINARY, and TEXT type fields). Failing to do so could result in “Row size too large” errors. No action is required if your `innodb_log_file_size` setting is already sufficiently large or your tables contain no BLOB data.
         
         Related Links: 
-        * [https://dev.mysql.com/doc/refman/8.0/en/packet-too-large.html](https://dev.mysql.com/doc/refman/8.0/en/packet-too-large.md)
+        * [https://dev.mysql.com/doc/refman/8.0/en/packet-too-large.html](https://dev.mysql.com/doc/refman/8.0/en/packet-too-large.html)
         * [http://stackoverflow.com/questions/25246074/row-size-too-large-8126-exception-on-adding-appcenter-application](http://stackoverflow.com/questions/25246074/row-size-too-large-8126-exception-on-adding-appcenter-application)
         
     
@@ -248,8 +241,23 @@ Issues Publishing an Application Using Volt MX Foundry Console
     **Workaround**
     
     While creating a SOAP service by uploading  `WSDL`, ensure that all the referenced  `WSDLs`  and   `XSDs`  have path to URLs and not to any local file system.
-    
 
+
+*   **Issue**
+    
+    If EMM is installed on Tomcat and Apache Server, and VoltMX Foundry installed on WebSphere 8.5.5.5 or 8.5.5.6, and when you attempt to add EMM in the **Environments** tab in VoltMX Foundry Console, the system throws the error into `accounts.log` and will display following stack-trace. This happens because some older versions of some of the IBM libraries were not able to handle `Diffie Hellman with 2048 bit key`.
+
+    `javax.net.ssl.SSLException`<br>
+    `java.lang.ArrayIndexOutOfBoundsException: Array index out of range: 64`
+
+
+    **Workaround**
+    
+    To fix the issue, update to the newer versions of `ibmjsseprovider2.jar` and `ibmjceprovider.jar`.
+
+    For more details, refer to IBM updates to these libraries as noted in the **Problem Conclusion** section at [http://www-01.ibm.com/support/docview.wss?uid=swg1IV74069](http://www-01.ibm.com/support/docview.wss?uid=swg1IV74069)
+
+    
 *   **Issue**
     
     Unable to read metadata from an integration service (for example, SOAP) that is protected by an SSL certificate.
@@ -267,7 +275,7 @@ Issues Publishing an Application Using Volt MX Foundry Console
         `keytool -import -alias somealias -file <cert-file> -keystore C:\VoltMXFoundry\jre\lib\security\cacerts`
         
 
-<!-- *   **Issue**
+*   **Issue**
     
     If your Volt MX Foundry is installed on the WebLogic Server, when a user builds an app in IDE and tries to publish the app, the system fails to deploy the app.
     
@@ -290,4 +298,4 @@ Issues Publishing an Application Using Volt MX Foundry Console
     4.  In the **Web Applications** section, select the **Archived Real Path Enabled** check box.
     5.  Click **Save** to save the configuration.
     6.  Restart the WebLogic Server.
-    7.  Republish the app. -->
+    7.  Republish the app.

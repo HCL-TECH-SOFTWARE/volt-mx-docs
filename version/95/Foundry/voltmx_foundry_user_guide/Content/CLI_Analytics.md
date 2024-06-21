@@ -88,8 +88,7 @@ An admin cannot delete an analytics enabled app binary from Volt MX Foundry Cons
 **The following is a sample command to delete an analytics enabled app binary from Volt MX Cloud**
 
 ```
- java -jar mfcli.jar **wrap-delete** -u <user> -p <password> -t <account id> -a <app name>
-
+java -jar mfcli.jar wrap-delete -u <user> -p <password> -t <account id> -a <app name>
 java -jar mfcli.jar wrap-delete -u abc@voltmx.com -p password -t 100054321 -a MyAppName
 
 ```

@@ -31,53 +31,42 @@ When you upgrade a Foundry app, a new version of the app.zip is created in your 
 The following table details a sample app with services, and the result of the app-upgrade command.
 
 
-<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');width: 870px;" class="TableStyle-TemenosTables" cellspacing="0">
-<colgroup><col class="TableStyle-TemenosTables-Column-Column1" style="width: 334px;">
-    
-<col class="TableStyle-TemenosTables-Column-Column1" style="width: 532px;">
-    
-</colgroup><thead>
-        <tr class="TableStyle-TemenosTables-Head-Header1">
-            <th class="TableStyle-TemenosTables-HeadE-Column1-Header1" scope="col">Sample Foundry App has services with versions</th>
-            <th class="TableStyle-TemenosTables-HeadD-Column1-Header1" scope="col">App-upgrade to a Major Version</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr class="TableStyle-TemenosTables-Body-Body1">
-            <td class="TableStyle-TemenosTables-BodyE-Column1-Body1" style="text-align: center;" rowspan="3">
-                <p style="text-align: left;">App v3.0</p>
-                <ul>
-                    <li style="text-align: left;">IdentityService </li>
-                    <li style="text-align: left;">IntegrationServiceOne v3.0 </li>
-                    <li style="text-align: left;">IntegrationServiceTwo v4.1 </li>
-                    <li style="text-align: left;">ObjectServiceOne v6.0 </li>
-                </ul>
-            </td>
-            <td class="TableStyle-TemenosTables-BodyD-Column1-Body1" style="text-align: center;">
-                <p style="text-align: left;">App v4.0</p>
-                <ul>
-                    <li style="text-align: left;">IdentityService</li>
-                    <li style="text-align: left;">IntegrationServiceOne v4.0</li>
-                    <li style="text-align: left;"> IntegrationServiceTwo v5.0</li>
-                    <li style="text-align: left;"> ObjectServiceOne v7.0</li>
-                </ul>
-            </td>
-        </tr>
-        <tr class="TableStyle-TemenosTables-Body-Body1" style="height: 5px;">
-            <td class="TableStyle-TemenosTables-BodyD-Column1-Body1" style="text-align: left;"><b>App-upgrade to a Minor Version</b></td>
-        </tr>
-        <tr class="TableStyle-TemenosTables-Body-Body1">
-            <td class="TableStyle-TemenosTables-BodyA-Column1-Body1" style="text-align: center;">
-                <p style="text-align: left;">App v3.1<br><br></p>
-                <ul>
-                    <li style="text-align: left;">IdentityService</li>
-                    <li style="text-align: left;">IntegrationServiceOne v3.1</li>
-                    <li style="text-align: left;">IntegrationServiceTwo v4.2</li>
-                    <li style="text-align: left;">ObjectServiceOne v6.1</li>
-                </ul>
-            </td>
-        </tr>
-    </tbody>
+<table>
+
+<tr>
+    <th>Sample Foundry App has services with versions</th>
+    <th>App-upgrade to a Major Version</th>
+    <th>App-upgrade to a Minor Version</th>
+</tr>
+<tr>
+    <td>
+        <p>App v3.0</p>
+        <ul>
+            <li>IdentityService </li>
+            <li>IntegrationServiceOne v3.0 </li>
+            <li>IntegrationServiceTwo v4.1 </li>
+            <li>ObjectServiceOne v6.0 </li>
+        </ul>
+    </td>
+    <td>
+        <p>App v4.0</p>
+        <ul>
+            <li>IdentityService</li>
+            <li>IntegrationServiceOne v4.0</li>
+            <li> IntegrationServiceTwo v5.0</li>
+            <li> ObjectServiceOne v7.0</li>
+        </ul>
+    </td>
+    <td>
+        <p>App v3.1</p>
+        <ul>
+            <li>IdentityService</li>
+            <li>IntegrationServiceOne v3.1</li>
+            <li>IntegrationServiceTwo v4.2</li>
+            <li>ObjectServiceOne v6.1</li>
+        </ul>
+    </td>
+</tr>
 </table>
  
 Use the following command to upgrade the app.zip. An output app.zip file with the new version (upgrade app zip from the previous version of the app) is created.
@@ -140,32 +129,17 @@ When you upgrade a Foundry service version, a new version of the service.zip is 
 
 For example, the following table details a sample service zip version, and the result of the service-upgrade command.
 
-<table style="margin-left: 0;margin-right: auto;mc-table-style: url('Resources/TableStyles/Basic.css');width: 653px;" class="TableStyle-TemenosTables" cellspacing="0">
-<colgroup><col class="TableStyle-TemenosTables-Column-Column1" style="width: 194px;">
-    
-<col class="TableStyle-TemenosTables-Column-Column1" style="width: 217px;">
-    
-</colgroup><thead>
-        <tr class="TableStyle-TemenosTables-Head-Header1">
-            <th style="font-size: 11pt;" class="TableStyle-TemenosTables-HeadE-Column1-Header1" scope="col">Sample Foundry Service Version</th>
-            <th class="TableStyle-TemenosTables-HeadD-Column1-Header1" style="font-size: 11pt;" scope="col">Service-upgrade to a Major Version</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr class="TableStyle-TemenosTables-Body-Body1">
-            <td class="TableStyle-TemenosTables-BodyE-Column1-Body1" style="text-align: center;" rowspan="3">
-                <p rowspan="5" style="text-align: left;">Service v1.1 </p>
-            </td>
-            <td class="TableStyle-TemenosTables-BodyD-Column1-Body1" style="text-align: left;">Service v2.0</td>
-        </tr>
-        <tr class="TableStyle-TemenosTables-Body-Body1">
-		    <td class="TableStyle-TemenosTables-BodyD-Column1-Body1" style="text-align: left;"><b>Service-upgrade to a Minor Version</b></td>
-            </th>
-        </tr>
-        <tr class="TableStyle-TemenosTables-Body-Body1">
-            <td class="TableStyle-TemenosTables-BodyA-Column1-Body1" style="text-align: left;">Service v1.2</td>
-        </tr>
-    </tbody>
+<table>
+<tr class="TableStyle-TemenosTables-Head-Header1">
+    <th>Sample Foundry Service Version</th>
+    <th>Service-upgrade to a Major Version</th>
+    <th>Service-upgrade to a Minor Version</th>
+</tr>
+<tr>
+    <td>Service v1.1</td>
+    <td>Service v2.0</td>
+    <td>Service v1.2</td>
+</tr>
 </table>
 
 Use the following command to upgrade the service.zip. An output zip file with new version (upgrade service zip from the previous version of the service) is created.

@@ -48,68 +48,83 @@ Before you start using the source of the EAS App, ensure you have access to the 
 *   Access to a Volt MX Cloud account. If you do not have a cloud account, you can register for it at [VoltMX Cloud Registration](https://manage.hclvoltmx.com/registration).
 *   Access to a Volt MX Cloud Build Environment, Volt MX Iris Starter, and access to Foundry App Server for publishing apps to EAS. 
 
-    <details close markdown="block"><summary>Click here for</summary> 
-    **EAS and Platform Versions Compatibility Chart**  
+    <details close markdown="block"><summary>Click here for more details on EAS and Platform Versions Compatibility Chart</summary> 
     
     The following table details the supported versions of EAS source and Platform.
-    
+
     > **_Important:_** If you are upgrading to EAS V 2.0.1 or a higher version, you must restart the server.
-    
-    | EAS Source App version || **Platform Supported Version** |||
-    | --- | --- | --- | --- | --- |
-    | Client App (Store.zip) | Server App (Volt MX App Store.zip) | Foundry |   Iris | Middleware |
-    | --- | --- | --- | --- | --- |
-    | 1.0.0
-    
-    <details close markdown="block"><summary>Features</summary>
-    
-    Initial Release
 
-    | 1.0.0 | NA | V8 SP4 FP44 or lower | 8.4.3.x. |
-    | 1.1.0
-    
-    </details>
-    <details close markdown="block"><summary>Features</summary>
-    
-    Support for Web apps
+    <table>
+    <tr>
+    <th colspan="0"></th>
+    <th colspan="2">EAS Source App version</th>
+    <th colspan="3">Platform Supported Version</th>
+    </tr>
+    <tr>
+    <th>Features</th>
+    <th>Client App (Store.zip)</th>
+    <th>Server App (Kony App Store.zip)</th>
+    <th>Foundry</th>
+    <th>Iris</th>
+    <th>Middleware</th>
+    </tr>
+    <tr>
+    <td><ul><li>Initial Release</li></ul></td>
+    <td>1.0.0</td>
+    <td>1.0.0</td>
+    <td>NA</td>
+    <td>V8 SP4 FP44 or lower</td>
+    <td>8.4.3.x.</td>
+    </tr>
+    <tr>
+    <td><ul><li>Support for Web apps</li></ul></td>
+    <td>1.1.0</td>
+    <td>1.0.0</td>
+    <td>NA</td>
+    <td>V8 SP4 FP44 or lower</td>
+    <td>8.4.3.x.</td>
+    </tr>
+    <tr>
+    <td><ul><li>Support for Android 10</li><li>Support for iOS 13</li><li>Push Notifications</li></ul></td>
+    <td>2.0.0</td>
+    <td>2.0.0</td>
+    <td>NA</td>
+    <td>V8 SP4 FP48 or higher</td>
+    <td>8.4.3.x.</td>
+    </tr>
 
-    | 1.0.0 | NA | V8 SP4 FP44 or lower | 8.4.3.x. |
-    | 2.0.0
-    
-    </details>
-    <details close markdown="block"><summary>Features</summary>
-    
-    Support for Android 10Support for iOS 13Push Notifications
+    <tr>
+    <td><ul><li>Bug fixes</li></ul></td>
+    <td>2.0.1</td>
+    <td>2.0.1</td>
+    <td>NA</td>
+    <td>V8 SP4 FP66 or higher</td>
+    <td>8.4.3.10.</td>
+    </tr>
 
-    | 2.0.0 | NA | V8 SP4 FP48 or higher | 8.4.3.x |
-    | 2.0.1
-    
-    </details>
-    <details close markdown="block"><summary>Features</summary>
-    
-    Bug fixes
+    <tr>
+    <td><ul><li>Support for Desktop View</li><li>Help section in iOS Native Apps</li></ul></td>
+    <td>3.0.1</td>
+    <td>3.0.1</td>
+    <td>NA</td>
+    <td>V9 GA</td>
+    <td>8.4.3.10</td>
+    </tr>
 
-    | 2.0.1 | NA | V8 SP4 FP66 or higher. | 8.4.3.10 |
-    | 3.0.1
-    
-    </details>
-    <details close markdown="block"><summary>Features</summary>
-    
-    Support for Desktop ViewHelp section in iOS Native Apps
+    <tr>
+    <td><ul><li>Support for Upgrade Policy</li></ul></td>
+    <td>3.1.0</td>
+    <td>3.1.0</td>
+    <td>NA</td>
+    <td>V9 SP1</td>
+    <td>V9 SP1</td>
+    </tr>
+    </table>
 
-    | 3.0.1 | NA | V9 GA | 8.4.3.10 |
-    | 3.1.0
-    
-    </details>
-    <details close markdown="block"><summary>Features</summary>
-    
-    Support for Upgrade Policy
-    
-    | 3.1.0 | NA | V9 SP1 | V9 SP1 |
-    | **SP**: Service Pack**FP**: Fix Pack |||||
+    * SP: Service Pack
+    * FP: Fix Pack
 
-    </details>
-    </details>
+    </details>   
     
 *   Configure the various Project Settings.
     *   Go to **Project** > **Settings** and configure the build settings for each Native platform. For more information on **Project Settings**, click [here](../../../Iris/iris_user_guide/Content/Project_Properties_In_Iris_Starter.md#top).
@@ -209,19 +224,15 @@ Volt MX EAS Source app is supported for Native channels: iOS and Android.
   
 | Elements in the Store Project | Project Structure UI in Iris |
 | --- | --- |
-| App Meta Data |    ![](Resources/Images/StoreAppProjectLayout_352x915.png)    |
-| Store app name Default app icon These details are displayed based on the metadata of the app. |
-| Supported Channels in EAS |
-| Mobile Tablet Responsive Web/Desktop |
-| Forms and Controllers |
-| **Forms** (two modules) **AuthModule** frmForgotPassword frmLogin frmSplashScreen **StoreModule**
-  
+| **App Meta Data**: <br> * Store app name<br> * Default app icon<br>These details are displayed based on the metadata of the app.<br><br> **Supported Channels in EAS**: <br> * Mobile<br> * Tablet<br> * Responsive Web/Desktop<br><br> **Forms and Controllers** - **Forms** (two modules) **AuthModule**: <br> * frmForgotPassword<br> * frmLogin<br> * frmSplashScreen | ![](Resources/Images/StoreAppProjectLayout_352x915.png) |
+
+
 | StoreModules | Channels |
 | --- | --- |
-|^^| frmAppDetails | Mobile Responsive Web/Desktop |
-| frmHelpScreen | Mobile (for iOS only) |
-| > **_Note:_** The frmStore screen contains the Help button for iOS devices only. When you click the Help button, the help is displayed in the frmHelpScreen for iOS mobile devices. And for iOS tablets, the help is displayed in a pop-up window. ||||
-| frmStore | Mobile Tablet Responsive Web/Desktop |
+|frmAppDetails | * Mobile<br>* Responsive Web/Desktop |
+|frmHelpScreen | * Mobile (for iOS only) |
+| > **_Note:_** The frmStore screen contains the Help button for iOS devices only. When you click the Help button, the help is displayed in the frmHelpScreen for iOS mobile devices. And for iOS tablets, the help is displayed in a pop-up window. |
+| frmStore | * Mobile<br> * Tablet<br> * Responsive Web/Desktop |
 
 **Controllers**
 
@@ -240,7 +251,7 @@ Volt MX EAS Source app is supported for Native channels: iOS and Android.
     *   frmStoreController
     *   frmStoreControllerActions
 
- |
+
 
 #### Supported Functionality and Forms - EAS Front-End Project
 
@@ -264,13 +275,13 @@ Volt MX EAS Source app is supported for Native channels: iOS and Android.
     *   BusinessControllers: contains custom business logic for authentication for the complete Store project.
     *   PresentationController: contains auth success and failure cases. Based on each case type, the required actions are called in the form Controllers. This is a common controller for all the supported channels.
         
-        > **_Important:_** For channel specific auth success and failure cases, you must use PresentationController\_<Channel> to configure auth handles.
+        > **_Important:_** For channel specific auth success and failure cases, you must use PresentationController_&lt;Channel&gt; to configure auth handles.
         
 *   **StoreModule**
     *   BusinessControllers: handles the fetching list of published apps, logic to download and launch apps; contains the list of apps and custom business logic for authentication for the complete Store project.
     *   PresentationController: handles the presentation of apps such as in-progress status of app downloads, success, and failure cases. Based on each case type, the required actions are called in the form Controllers. You can add filters to customize the order of apps list. This is a common controller for all the supported channels.
         
-        > **_Important:_** For channel specific presentation of apps, you must use PresentationController\_<Channel> to configure store handles.
+        > **_Important:_** For channel specific presentation of apps, you must use PresentationController_&lt;Channel&gt; to configure store handles.
         
 
 ### Source Details of EAS Back-End App - Volt MX App Store App
@@ -395,7 +406,7 @@ The `frmSplashScreen` form connects to the Server and fetches the login details 
 
 #### Reference Architecture Extensions
 
-**AuthModule** supports end-user login.BusinessControllers: contains custom business logic for authentication for the complete Store project.PresentationController: contains auth success and failure cases. Based on each case type, the required actions are called in the form Controllers. This is a common controller for all the supported channels.> **_Important:_** For channel specific auth success and failure cases, you must use PresentationController\_<Channel> to configure auth handles. **StoreModule** BusinessControllers: handles the fetching list of published apps, logic to download and launch apps; contains the list of apps and custom business logic for authentication for the complete Store project. PresentationController: handles the presentation of apps such as in-progress status of app downloads, success, and failure cases. Based on each case type, the required actions are called in the form Controllers. You can add filters to customize the order of apps list. This is a common controller for all the supported channels.> **_Important:_** For channel specific presentation of apps, you must use PresentationController\_<Channel> to configure store handles.
+**AuthModule** supports end-user login.BusinessControllers: contains custom business logic for authentication for the complete Store project.PresentationController: contains auth success and failure cases. Based on each case type, the required actions are called in the form Controllers. This is a common controller for all the supported channels.> **_Important:_** For channel specific auth success and failure cases, you must use PresentationController_&lt;Channel&gt; to configure auth handles. **StoreModule** BusinessControllers: handles the fetching list of published apps, logic to download and launch apps; contains the list of apps and custom business logic for authentication for the complete Store project. PresentationController: handles the presentation of apps such as in-progress status of app downloads, success, and failure cases. Based on each case type, the required actions are called in the form Controllers. You can add filters to customize the order of apps list. This is a common controller for all the supported channels.> **_Important:_** For channel specific presentation of apps, you must use PresentationController_&lt;Channel&gt; to configure store handles.
 
 ### Source Details of EAS Back-End App - Volt MX App Store App
 
@@ -474,13 +485,13 @@ Download the **Privacy Preferences (GDPR)** component from Marketplace. To do so
     *   BusinessControllers: contains custom business logic for authentication for the complete Store project.
     *   PresentationController: contains auth success and failure cases. Based on each case type, the required actions are called in the form Controllers. This is a common controller for all the supported channels.
         
-        > **_Important:_** For channel specific auth success and failure cases, you must use PresentationController\_<Channel> to configure auth handles.
+        > **_Important:_** For channel specific auth success and failure cases, you must use PresentationController_&lt;Channel&gt; to configure auth handles.
         
 *   **StoreModule**
     *   BusinessControllers: handles the fetching list of published apps, logic to download and launch apps; contains the list of apps and custom business logic for authentication for the complete Store project.
     *   PresentationController: handles the presentation of apps such as in-progress status of app downloads, success, and failure cases. Based on each case type, the required actions are called in the form Controllers. You can add filters to customize the order of apps list. This is a common controller for all the supported channels.
         
-        > **_Important:_** For channel specific presentation of apps, you must use PresentationController\_<Channel> to configure store handles.
+        > **_Important:_** For channel specific presentation of apps, you must use PresentationController_&lt;Channel&gt; to configure store handles.
         
 
 ### Source Details of EAS Back-End App - Volt MX App Store App

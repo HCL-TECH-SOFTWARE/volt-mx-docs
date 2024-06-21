@@ -83,8 +83,12 @@ How to use XPath in Volt MX Foundry
     | articles2 | //channel | response | Record | articles |   |
     | title | item/title | response | Sting string |   | articles2 |
     | url | item/media:group/media:content/@url | response | Sting string |   | articles2 |
-    | **Collection** - A group of data, also referred to as data set. A collection contains only records, and a record contains a string, boolean, or number values. **Record** - A group data elements under the specified parameter. A record can also be part of a collection. Typically, a record provides metadata to a segment. ||||||
-    
+
+
+    **Collection** - A group of data, also referred to as data set. A collection contains only records, and a record contains a string, boolean, or number values. 
+
+    **Record** - A group data elements under the specified parameter. A record can also be part of a collection. Typically, a record provides metadata to a segment. 
+
     > **_Note:_** For JSON integration service, the back-end response will be in JSON format. JSONPath format should contain `$` in the expression.  
       
     For example: `$` the root object/element
