@@ -450,7 +450,7 @@ objSvc.updateBinaryContent({
 ```
 
 
-### deleteBinaryContent Method
+<!-- ### deleteBinaryContent Method
 
 Deletes binary content on the server.
 
@@ -489,4 +489,4 @@ objSvc.deleteBinaryContent({
     function(error) {
         voltmx.print("Failed: " + JSON.stringify(error));
     });
-```
+``` -->

@@ -99,10 +99,27 @@ Volt MX  Foundry OAuth 2.0 helps users to configure authorization provider to ac
      
         
 4.  Under **Client Details**, configure the following parameters. The client details are used by a service provider to identify which app the authorization service is trying to access:
+    From V9SP4, Foundry supports private key jwt in the OAuth 2.0 token request flow, as specified in [rfc7523](https://tools.ietf.org/html/rfc7523). 
 
-    1.  In the **Client ID** text box, enter the client ID (for Google, app key) of the app instance that you created in service provider's developer console. For example, Google Developers Console.
-    2.  In the **Client Secret** text box, enter the client secret (for Google, app secret key) of the app instance that you created in service provider's developer console. For example, Google Developers Console.
-    3.  In the **Client Authentication Scheme**, select one of the following options to the client details as headers or form parameters:
+    1. Under **Client Assertion Type**, select **Basic authentication** or **Private key jwt**. Based on your selection, configure the following parameters.  
+
+       * **Basic authentication**:  
+         *  In the **Client ID** text box, enter the client ID (for Google, app key) of the app instance that you created in service provider's developer console. For example, Google Developers Console.  
+         * In the **Client Secret** text box, enter the client secret (for Google, app secret key) of the app instance that you created in service provider's developer console. For example, Google Developers Console.
+    
+       * **Private key jwt**:
+         *  In the **Client ID** text box, type the client ID of the app instance that you created in the service provider's developer console.  
+         *  In the **JWKS URL** box, Foundry displays the callback URL that you need to add to the service provider's back end or developer console.
+
+        <details markdown="close"><summary>For example, adding the URL to the Keycloak confidential client</summary>
+        <ol>
+        <li>On the service definition page of the Identity service, copy the JWKS URL.<img src="Resources/Images/jwt_foundry_url.png"></li>
+        <li>On the Keycloak console, open the app with the same Client ID that is configured in Foundry. Make sure that the Access Type is set to confidential.<img src="Resources/Images/jwt_keycloak_1.png"></li>
+        <li>In the JWKS URL box, paste or type the URL that you copied from Foundry.<img src="Resources/Images/jwt_keycloak_2.png"></li>
+        </ol>
+        </details>  
+
+    3. In the **Client Authentication Scheme**, select one of the following options to the client details as headers or form parameters:
         *   **Request Header**: To send client details as a header.
         *   **Form Param**: To send client details as form parameters.
 
@@ -204,7 +221,7 @@ Volt MX  Foundry OAuth 2.0 helps users to configure authorization provider to ac
     *   **Allowed URL list**: Select this to use a specific set of URLs on successful authentication.
         *   **URL**: In the URL text box, enter the allowed URLs.
             
-8.  Under **Additional Parameters**, configure the following additional parameters. Some service providers require additional parameters based on their standards. These additional parameters' name-value pairs will be sent to a service provider along with `authorization request`, `token request`, or `profile request` as header, body, or query parameters.
+8.  Under **Additional Parameters**, configure the following additional parameters. Some service providers require additional parameters based on their standards. These additional parameters' name-value pairs will be sent to a service provider along with `authorization request`, `token request`, or `profile request` as header, body, query parameters, or path parameters.
     
     > **_Note:_**  You can add an entry by clicking the **Add** button if entries for the input and the output tabs do not exist.  
     To delete an entry, click the **Delete** button at the end of that entry.  
@@ -434,15 +451,14 @@ To use PKCE if you are running an on-premise instance of Volt MX Foundry you nee
 <ol>
 <li>Navigate to <b>Settings → Runtime Configuration → Cache Configuration</b>.</li>
 <li>From the <b>Cache Type</b> list, select the type of caching that you want to use. For example, <b>MEMCACHED</b>.</li>
-<li>In the <b>Cache Server URLs</b> box, type the URLs for your cache servers. For example, `localhost:11211.`</li>
+<li>In the <b>Cache Server URLs</b> box, type the URLs for your cache servers. For example, <code>localhost:11211.</code></li>
 </ol> 
 
 ![](Resources/Images/plainJS_AdminConsole_cache.png)
 
 > **_Important:_**
-
-* Foundry supports login without the PKCE parameters for backward compatibility with clients that do not support PKCE.
-* PKCE requires both the **Client ID** and **Client Secret** to be passed to the service.
+  * Foundry supports login without the PKCE parameters for backward compatibility with clients that do not support PKCE.
+  * PKCE requires both the **Client ID** and **Client Secret** to be passed to the service.
 
 If the PKCE parameters from the back-end OAuth provider follow the <a href="https://www.rfc-editor.org/rfc/rfc7636" target="_blank">rfc7636</a>. naming convention `(code_challenge, code_challenge_method, code_verifier)`, you don’t need any additional configuration and you can use the <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/VoltMXStudio/Invoking_Identity_Service_Iris.html#login-with-provider-type-as-oauth-saml
 " target="_blank">Volt MX Iris SDK</a>. to invoke the identity service from your client app.
@@ -453,15 +469,13 @@ But, if the PKCE parameters from the back-end OAuth provider do not follow the <
 ![](Resources/Images/PKCE_Params.png)
 
 
-> **_Important:_**
+> **_Important:_**  
+  
+  *  Make sure that the source for the parameters is **Client Specified**.  
+  *  The <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/VoltMXStudio/Invoking_Identity_Service_Iris.html#login-with-provider-type-as-oauth-saml" target="_blank">Volt MX Iris SDK</a> only supports the rfc7636 naming convention for PKCE parameters. Therefore, if your OAuth provider uses custom parameters to implement PKCE, your client app must contain custom code to send the parameters to the back end by using the Additional Parameters in Foundry.
+  *  The Iris SDK continues to send the PKCE parameters with the rfc7636 naming convention, even if Additional Parameters are configured in Foundry. However, the additional parameters override the incoming request parameters from the SDK.
 
-*   Make sure that the source for the parameters is **Client Specified**.
-*   The <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/VoltMXStudio/Invoking_Identity_Service_Iris.html#login-with-provider-type-as-oauth-saml
-" target="_blank">Volt MX Iris SDK</a>.Studio/Invoking_Identity_Service_Iris.html#login-with-provider-type-as-oauth-saml) only supports the rfc7636 naming convention for PKCE parameters. Therefore, if your OAuth provider uses custom parameters to implement PKCE, your client app must contain custom code to send the parameters to the back end by using the Additional Parameters in Foundry.
-*   The Iris SDK continues to send the PKCE parameters with the rfc7636 naming convention, even if Additional Parameters are configured in Foundry. However, the additional parameters override the incoming request parameters from the SDK.
-
-The PKCE feature on the client device is applicable for the Volt MX Iris SDK. For more information, refer to <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/VoltMXStudio/Invoking_Identity_Service_Iris.html#login-with-provider-type-as-oauth-saml
-" target="_blank">PKCE Support in Iris SDK.</a>.Invoking_Identity_Service_Iris.html#login-with-provider-type-as-oauth-saml)
+The PKCE feature on the client device is applicable for the Volt MX Iris SDK. For more information, refer to <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/VoltMXStudio/Invoking_Identity_Service_Iris.html#login-with-provider-type-as-oauth-saml" target="_blank">PKCE Support in Iris SDK.</a>.
 
 
 #### Limitations

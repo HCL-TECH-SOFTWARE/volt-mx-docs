@@ -42,14 +42,14 @@ authClient.login({
 
 The client is the voltmx.sdk(); object.
 
-When you select User Repository as the identity type, the system does not allow you to provide an identity name.  
+When you select Volt MX User Repository as the identity type, the system does not allow you to provide an identity name.  
   
-To use User Repository as authentication service, ensure that the value for `providerName` is set as `userstore`. If you set it with any other value (for example, User Repository, User Store or Cloud Repository), the system throws an error.
+To use Volt MX User Repository as authentication service, ensure that the value for `providerName` is set as `userstore`. If you set it with any other value (for example, User Repository, User Store or Cloud Repository), the system throws an error.
 
 Login with provider type as OAuth/SAML
 --------------------------------------
 
-For Foundry version V9 ServicePack 3 ](or later), the JS SDK supports [rfc7636](https://www.rfc-editor.org/rfc/rfc7636) for OAuth providers that use PKCE in the Authorization Code grant flow. For more information, refer to [PKCE Support in Foundry](../Identity10_VoltMX_OAuth2.md#PKCE).
+For Foundry version V9 ServicePack 3 (or later), the JS SDK supports [rfc7636](https://www.rfc-editor.org/rfc/rfc7636) for OAuth providers that use PKCE in the Authorization Code grant flow. For more information, refer to [PKCE Support in Foundry](../Identity10_VoltMX_OAuth2.md#PKCE).
 
 ```
  // Sample code to authenticate to  Foundry Client
@@ -82,8 +82,8 @@ var providerName = <your-provider-name>;
 var username = <username-for-your-provider>;
 var password = <password-for-your-provider>;
 var options = {};
-options\["noPopup"\] = true; // This parameter in options will open the login url in the same window. It will not open any pop up.
-options\["success\_url"\] = http: //mynativeapplication; // This is a deeplink url, where the control will be redirected after login.
+options["noPopup"] = true; // This parameter in options will open the login url in the same window. It will not open any pop up.
+options["success_url"] = http: //mynativeapplication; // This is a deeplink url, where the control will be redirected after login.
 
 try {
     //The client is the voltmx.sdk();
@@ -103,7 +103,7 @@ authClient.login(options,
 The sample above shows various parameters similar to the parameters of the [Login with provider type as OAuth/SAML](#Loginoauth). The following two optional parameters are added further.
 
 *   **noPopup**: This parameter opens the login URL in the same window. It will not open any pop up.
-*   **success\_url**: After the log in is successful, control is redirected to the URL (deep link URL).
+*   **success_url**: After the log in is successful, control is redirected to the URL (deep link URL).
 
 Deep link URL is the URL that is registered to the application. After redirection, the client calls the method **handleDeeplinkCallback**. (A global function)
 
@@ -115,15 +115,15 @@ Deep link URL is the URL that is registered to the application. After redirectio
 window.onload = function() {
     // Getting the current url to retrieve the query params.
     var url = window.location.href;
-    var hashes = url.split("?")\[1\];
+    var hashes = url.split("?")[1];
     var queryParams = {};
 
     if (hashes) {
         var hash = hashes.split('&');
 
         for (var i = 0; i < hash.length; i++) {
-            var params = hash\[i\].split("=");
-            queryParams\[params\[0\]\] = params\[1\];
+            var params = hash[i].split("=");
+            queryParams[params[0]] = params[1];
         }
 
         handleDeeplinkCallback(queryParams, function success(resp) {
@@ -163,14 +163,14 @@ In the following code snippet:
 var sdkObject = voltmx.sdk.getDefaultInstance();
 var identityServiceObject = sdkObject.getIdentityService("<providerName>");
 var options = {};
-options\["loginOptions"\] = {}; 
+options["loginOptions"] = {}; 
 
-options\["loginOptions"\]\["noPopup"\] = true; 
+options["loginOptions"]["noPopup"] = true; 
 
-options\["loginOptions"\]\["customQueryParamsForOAuth"\] = {"success\_url": "<app-url>"};
+options["loginOptions"]["customQueryParamsForOAuth"] = {"success_url": "<app-url>"};
 /\* For example -> "https://example.com/apps/appName/" \*/
 
-options\["loginOptions "\]\["customDataSaveHandle"\] = function(continueLogin, abortLogin)
+options["loginOptions "]["customDataSaveHandle"] = function(continueLogin, abortLogin)
 {
 var data = getData();
 storeDataInLocalStorage(data);
@@ -307,7 +307,7 @@ var identitySvc = client.getIdentityService(serviceName);
 var options = {};
 
 //Configure logout options
-options\["logoutOptions"\]\["customOAuthParams"\] =
+options["logoutOptions"]["customOAuthParams"] =
 {
 	"key2":"value2",
 	"key3":"value3"

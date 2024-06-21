@@ -197,27 +197,27 @@ So, when an user from any of these groups try to access Foundry Clod using this 
 
 ### External User Authentication with Azure-SAML
 
-Security Assertion Markup Language (SAML) is an XML-based markup language. It is used for authentication and authorization between identity providers and service providers. Microsoft Azure provides a single sign-on SAML protocol, which can be used to create an external Identity provider for Quantum Fabric.
+Security Assertion Markup Language (SAML) is an XML-based markup language. It is used for authentication and authorization between identity providers and service providers. Microsoft Azure provides a single sign-on SAML protocol, which can be used to create an external Identity provider for VoltMX Foundry.
 
 > NOTE:
->External authentication with Azure-SAML is only supported for Quantum Fabric on the AWS (default) cloud. It is not supported for on-premises or container installations.
+>External authentication with Azure-SAML is only supported for VoltMX Foundry on the AWS (default) cloud. It is not supported for on-premises or container installations.
 
 #### Prerequisites
 
-A Fabric app that contains an Identity service with the required Azure-SAML configuration. For more information about creating the service, refer to [SAML Identity Service](Identity5_SAML.md).
+A Foundry app that contains an Identity service with the required Azure-SAML configuration. For more information about creating the service, refer to [SAML Identity Service](Identity5_SAML.md).
 
 > IMPORTANT:
 >
 > *   Mapping the **Email** and **Profile URL** fields to the back-end provider is mandatory for external authentication.
-> *   The Fabric app must be published to the cloud for which external authentication is required.
+> *   The Foundry app must be published to the cloud for which external authentication is required.
 >
->     For more information, refer to [Publishing a Fabric app](Publish.md).
+>     For more information, refer to [Publishing a Foundry app](Publish.md).
 
 #### Using Azure-SAML for external authentication
 
 After you create and publish an app with the Azure-SAML configuration, follow these steps to set up external authentication:
 
-1. Sign in to the Quantum Fabric Console.
+1. Sign in to the VoltMX Foundry Console.
 2. From the left pane, navigate to **Settings**.
 3. On the **Accounts** tab, click **External User Authentication**.
 4. Click **CONFIGURE NEW**.
@@ -226,23 +226,23 @@ After you create and publish an app with the Azure-SAML configuration, follow th
 7. Type a **Name** and **Description** for the provider based on your requirement.
 8. Click **SAVE**.
 
-Users that are registered to the back-end provider can then sign into Quantum Fabric by using their Azure-SAML credentials.
+Users that are registered to the back-end provider can then sign into VoltMX Foundry by using their Azure-SAML credentials.
 
 #### Limitations
 
-*   From the V8 SP3 release, Fabric uses the provider's name for identification instead of the GUID. Therefore, to import an app from earlier versions, you must perform additional steps before publishing the app. For more information, refer to [Importing a legacy app](Settings_Cloud.html#Importing_Legacy).
-*   An app on the Azure cloud can be linked to only one Identity provider on Fabric. Therefore, an Azure app cannot be used with multiple Fabric clouds.
+*   From the V8 SP3 release, Foundry uses the provider's name for identification instead of the GUID. Therefore, to import an app from earlier versions, you must perform additional steps before publishing the app. For more information, refer to [Importing a legacy app](Settings_Cloud.html#Importing_Legacy).
+*   An app on the Azure cloud can be linked to only one Identity provider on Foundry. Therefore, an Azure app cannot be used with multiple Foundry clouds.
 
     To link the back-end provider to a different cloud, you can create a new Azure app with the same metadata.
 
-*   For a proper back-end log out, Fabric supports only one external authentication provider.
+*   For a proper back-end log out, Foundry supports only one external authentication provider.
 
 <a id="Importing_Legacy"></a>
 <details close markdown="block"><summary>Importing a legacy app</summary>
 
 To import and publish an app from versions earlier than V8 SP3, follow these steps:
 
-1. Import the app (zip file) to Fabric.
+1. Import the app (zip file) to Foundry.
 
      For more information, refer to [How to Import an App](Export-Import_Apps.md).
 
@@ -252,7 +252,7 @@ To import and publish an app from versions earlier than V8 SP3, follow these ste
 
 4. Publish the app to the cloud for which the Identity service is required.
 
-     For more information, refer to [Publishing a Fabric app](Publish.md).
+     For more information, refer to [Publishing a Foundry app](Publish.md).
 
 </details>
 

@@ -31,13 +31,34 @@ To display the app reconfiguration page while publishing an app, follow these st
     ![](Resources/Images/AppReconfigPublish1_637x251.png)
     
     The **App Configuration** page appears with the following properties:
+
+    <table>
+    <tr>
+    <th>App Details</th>
+    <th>Properties</th>
+    </tr>
+    <tr>
+    <td>Primary App Key</td>
+    <td rowspan="4">Primary App Key/Secret for Web Channel<br>Secondary App Key/Secret for Native Channel.<br><br> <em><b>Note:</b></em> For more information on separate app key/secret, refer to <a href="SeparateAppKey-Secret.html">Separate Appkey/Secret for Native and Web Channels</a>.<br><br>Note that App Key needs to be unique. Additionally App Key and App Secret should only contain alpha numeric characters or '-' and must contain at least 5 and a max of 60 characters.</td>
+    </tr>
+    <tr>
+    <td>Primary Secret</td>
+    </tr>
+    <tr>
+    <td>Secondary App Key</td>
+    </tr>    
+    <tr>
+    <td>Secondary Secret</td>    
+    </tr>
+    </table>
+
     
-    | App Details | Properties |
+    <!-- | App Details | Properties |
     | --- | --- |
-    | Primary App Key | Primary App Key/Secret for Web ChannelSecondary App Key/Secret for Native Channel> **_Note:_** For more information on separate app key/secret, refer to [Separate Appkey/Secret for Native and Web Channels](SeparateAppKey-Secret.md) Note that App Key needs to be unique. Additionally App Key and App Secret should only contain alpha numeric characters or '-' and must contain at least 5 and a max of 60 characters. |
+    | Primary App Key | Primary App Key/Secret for Web Channel<br>Secondary App Key/Secret for Native Channel<br> **_Note:_** For more information on separate app key/secret, refer to [Separate Appkey/Secret for Native and Web Channels](SeparateAppKey-Secret.md) Note that App Key needs to be unique. Additionally App Key and App Secret should only contain alpha numeric characters or '-' and must contain at least 5 and a max of 60 characters. |
     | Primary Secret |
     | Secondary App Key |
-    | Secondary Secret |
+    | Secondary Secret | -->
     
     ![](Resources/Images/ReconfigAppsPublishModes_650x275.png)
     
@@ -48,7 +69,8 @@ To display the app reconfiguration page while publishing an app, follow these st
     | --- | --- |
     | Incremental Publish | If you select this option, the current publish will only deploy the services that have changed since the last publish to this environment. This will reduce the deployment time. |
     | Full Publish | If you select this option, the current publish will deploy all services associated to this App to the environment. |
-    | Exclusions in Publish | Details |
+    | Publish Linked Apps | **_Note:_** The Publish Linked Apps check box is available only for Composite Foundry apps. If you select this check box, the current publish will deploy all linked apps with the composite app to the environment. For more information on how to link apps to a Foundry app, refer to [Managing Linked Apps in a Composite Foundry App](ManagingLinkedAppsinCompositeFoundryApp.md). |
+    | **Exclusions in Publish** | **Details** |
     | Engagement Services Configurations | If you select this check box, the current publish will skip swagger files. Enabling this setting skips swagger generation during app publish and improves publish time. |
     | Generated OpenAPI (Swagger) API Docs | If you select this check box, the current publish will skip swagger files. Enabling this setting skips swagger generation during app publish and improves publish time. |
     

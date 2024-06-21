@@ -34,7 +34,7 @@ A successful response includes a session token.
 
 If a user's credentials are incorrect, the log-in fails, and the system generates an HTTP 401 error.
 
-Signature
+**Signature**
 
 ```
  https://accounts.auth.voltmxcloud.com/login
@@ -48,11 +48,11 @@ token="$(curl -H "Accept: application/json" --data "userid=[abc@voltmx.com]&pass
 
 ```
 
-Method
+**Method**
 
 POST
 
-Request Headers
+**Request Headers**
 
 Form post parameters
 
@@ -100,89 +100,88 @@ The Apps Export API helps you export all the services and properties of Volt MX 
 
 When you call the Apps Export API, the system exports the application in [Export app structure](Export-Import_Apps.md#folder-structure-of-an-exported-app).
 
-Signature
+**Signature**
 
 ```
  https:// {workspaceid}.workspace.voltmxcloud.com/api/v1/ws/{workspaceid}/apps/export?appName={appName}
 ```
 
-Sample cURL Script
+**Sample cURL Script**
 
 ```
  
 token="$(curl -H "Accept: application/json" --data "userid=[abc@voltmx.com]&password=[pwd]" -X POST "https://accounts.auth.voltmxcloud.com/login" | awk -F 'claims_token.*?value":"' '{print $2}' | awk -F '",' '{print $1}')"
 ```
 
-Method
+**Method**
 
 GET
 
-Request Query Parameters (Mandatory)
+**Request Query Parameters (Mandatory)**
 
 *   workspaceid : The accounts that can be accessed by a user are listed in the top right corner of Volt MX Foundry Console. The workspaceid is the account ID that corresponds to the selected account.
 *   appName : { Name of the Volt MX Foundry custom application that a user wants to export}
 
-Request Headers Parameters (Mandatory)
+**Request Headers Parameters (Mandatory)**
 
 X-VoltMX-Authorization : {Auth Service Token}
 
-Response:
+**Response:**
 
 *   **Sample Success Response**:
 ```
- HTTP 200 OK
+HTTP 200 OK
 ```
 *   **Sample Success Response Body**:
-```
- The export API returns a zip stream that can be converted to a required .zip file. For more details, refer to [Export app structure](Export-Import_Apps.md#folder-structure-of-an-exported-app).
-```
+<code>The export API returns a zip stream that can be converted to a required .zip file. For more details, refer to <a href="Export-Import_Apps.html#folder-structure-of-an-exported-app">Export app structure</a></code>
+
 *   **Sample Failure Response - if a user does not have access to the workspace**:
 ```
- HTTP 401 Unauthorized
+HTTP 401 Unauthorized
 ```
 
 *   **Sample Failure Response - if export failed due to an internal failure**:
 ```
- HTTP 500 Internal Server Error
+HTTP 500 Internal Server Error
 ```
 *   **Failure Response Body Format**:
 ```
- { 
-    "domain": "WAAS" 
-    "code": [error-code], /* a number/string based on the domain */ 
-    "message": "Message", 
-    "details": [Details of Error Message], 
-    "httpstatus": "[Http Status String]" 
-    }  
-    
+{ 
+"domain": "WAAS" 
+"code": [error-code], /* a number/string based on the domain */ 
+"message": "Message", 
+"details": [Details of Error Message], 
+"httpstatus": "[Http Status String]" 
+}  
+
 ```
 *   **Example Failure Response Body**:
 ```
- {
-        "domain": "WAAS",
-        "code": -9,
+{
+    "domain": "WAAS",
+    "code": -9,
+    "message": "Invalid App Credentials",
+    "details": {
         "message": "Invalid App Credentials",
-        "details": {
-            "message": "Invalid App Credentials",
-            "errcode": 0,
-            "errmsg": null
-        },
-        "httpstatus": "Unauthorized"
-    }
-    
+        "errcode": 0,
+        "errmsg": null
+    },
+    "httpstatus": "Unauthorized"
+}
+
 ```
 
 ### **Import an App**
 
 The App Import API in Workspace service imports the App configuration in the package in a zip file (application zip). An application zip has app configuration, services, and messaging configuration. While importing, if these details are already present in the app, these details will be updated. Otherwise, these details are created.
 
-Signature
+**Signature**
 
 ```
  https:// {workspaceid}.workspace.voltmxcloud.com/api/v1/ws/{workspaceid}/apps/import?appName={appName}
 ```
 
-Sample cURL Script
+**Sample cURL Script**
 
 ```
  
@@ -192,11 +191,11 @@ curl -F "appZip=@C:/Users/KH1895/Desktop/file.zip" -H "X-VoltMX-Authorization:[a
 
 ```
 
-Method
+**Method**
 
 POST
 
-Request Query Parameters (Mandatory)
+**Request Query Parameters (Mandatory)**
 
 *   workspaceid : The accounts that can be accessed by a user are listed in the top right corner of Volt MX Foundry Console. The Account ID corresponds to the selected account.
 
@@ -205,11 +204,11 @@ Request Query Parameters (Optional)
 *   appName : Name of the Volt MX Foundry custom application the user wants to create or update.
 *   suppressWarnings : When importing apps with identity services, the identity services are not imported if `suppressWarnings` flag is not set. The required services must be first created or updated manually and then the app needs to be imported. The query param must be set to true (suppressWarnings=true) when importing apps. When `suppressWarning` is true and if an identity provider exists in the workspace, the existing provider is linked to the app. Otherwise, the import fails.
 
-Request Headers (Mandatory)
+**Request Headers (Mandatory)**
 
 X-VoltMX-Authorization : {Auth Service Token}
 
-Request Body
+**Request Body**
 
 ```
  Content-Type : multipart/form-data
@@ -219,7 +218,7 @@ Request Body
 
 ```
 
-Response
+**Response**
 
 *   **Sample Success Response**:
 ```
@@ -257,7 +256,7 @@ Response
 ```
  HTTP 500 Internal Server Error
 ```
-*   ****Failure Response Body Format****:
+*   **Failure Response Body Format**:
 ```
  { 
     "domain": "WAAS" 
@@ -308,22 +307,22 @@ The API fetches the details of the environments that a user can access.
 
 The `environment_guid` value retrieved from the response of the API and will be used for publishing or unpublishing an app.
 
-Signature
+**Signature**
 
 ```
  https://manage.hclvoltmx.com/api/v1_0/environments
 ```
 
-Method
+**Method**
 
 GET
 
-Request Headers Parameters (Mandatory)
+**Request Headers Parameters (Mandatory)**
 
 *   X-VoltMX-Authorization : {Auth Service Token}
 *   Accept : {application/json}
 
-Response:
+**Response:**
 
 *   **Sample Success Response**:
 ```
@@ -355,17 +354,17 @@ Response:
 
 This API fetches the list of apps.
 
-Signature
+**Signature**
 
 ```
  https://{workspaceid}.workspace.voltmxcloud.com/api/v1/ws/{workspaceid}/apps
 ```
 
-Method
+**Method**
 
 GET
 
-Request Query Parameters (Mandatory)
+**Request Query Parameters (Mandatory)**
 
 *   workspaceid : The accounts that can be accessed by a user are listed in the top right corner of Volt MX Foundry Console. The Account ID corresponds to the selected account.
 
@@ -374,7 +373,7 @@ Request Headers Parameters (Mandatory)
 *   X-VoltMX-Authorization : {Auth Service Token}
 *   Accept : {application/json}
 
-Response:
+**Response:**
 
 *   **Sample Success Response**:
 ```
@@ -419,7 +418,7 @@ Response:
 ```
  HTTP 500 Internal Server Error
 ```
-*   ****Failure Response Body Format****:
+*   **Failure Response Body Format**:
 ```
  {
     "domain": "WAAS" 
@@ -454,17 +453,17 @@ The API helps you start publishing the services inside the application to an env
 
 When you call this API, the system starts publishing the app, and locks the app from publishing by different users until the publish completes or fails.
 
-Signature
+**Signature**
 
 ```
  https://api.voltmx.com/api/v1_0/environments/{env_guid}/publish
 ```
 
-Method
+**Method**
 
 POST
 
-Request Headers (Mandatory)
+**Request Headers (Mandatory)**
 
 *   X-VoltMX-Authorization : {Auth Service Token}
 *   Content-Type : {application/json or application/x-www-form-urlencoded}
@@ -472,12 +471,12 @@ Request Headers (Mandatory)
 *   Referer : [https://manage.hclvoltmx.com](https://manage.hclvoltmx.com/) (The refer generates the URL required for next step of publishing.)
     
 
-Request Headers (Optional)
+**Request Headers (Optional)**
 
 *   X-VoltMX-RequestId : {Request Id}
 *   X-HTTP-Method-Override
 
-Request Body
+**Request Body**
 
 ```
  Mandatory  
@@ -491,7 +490,7 @@ Optional
 action : release\_lock (This action releases the previous locks on the app before attempting publish). If the action parameter is not provided, the value will be set to start by default.
 ```
 
-Response
+**Response**
 
 *   **Sample Success Response**:
 ```
@@ -541,24 +540,24 @@ Response
     
 ```
     
-    > **_Note:_**  After a successful response from the initiate publish operation API, users must call the following PUT request. The PUT API should contain a header `Cookie` with the value from `Set-Cookie` header of the API response.
+> **_Note:_**  After a successful response from the initiate publish operation API, users must call the following PUT request. The PUT API should contain a header `Cookie` with the value from `Set-Cookie` header of the API response.
     
 
 #### Continue Publish
 
 The API helps you continue publishing the services inside the application to an environment with the `id {env_guid}`  a user can access. For more details on how to get the `id {env_guid}`, refer to [Fetch Environment GUID](#fetch-environment-globally-unique-identifier-guid).
 
-Signature
+**Signature**
 
 ```
  https://api.voltmx.com/api/v1_0/environments/{env_guid}/publish/{publish_id}
 ```
 
-Method
+**Method**
 
 PUT
 
-Request Headers (Mandatory)
+**Request Headers (Mandatory)**
 
 *   X-VoltMX-Authorization : {Auth Service Token}
 *   Content-Type : {application/json or application/x-www-form-urlencoded}
@@ -567,12 +566,12 @@ Request Headers (Mandatory)
     **You can get the set-cookie header from the Initiate Publish APIs
 *   Referer : [https://manage.hclvoltmx.com](https://manage.hclvoltmx.com/) (The refer generates the URL required for next step of publishing.)
 
-Request Headers (Optional)
+**Request Headers (Optional)**
 
 *   X-VoltMX-RequestId : {Request Id}
 *   X-HTTP-Method-Override
 
-Request Body
+**Request Body**
 
 ```
  
@@ -581,7 +580,7 @@ Optional
 action : cancel  | continue ( Default value is “continue” )
 ```
 
-Response
+**Response**
 
 *   **Sample Success Response**:
 ```
@@ -633,29 +632,29 @@ Similar to publish, unpublishing of a Volt MX Foundry app is a multi-step workfl
 
 #### Initiate Unpublish
 
-Signature
+**Signature**
 
 ```
  https://api.voltmx.com/api/v1_0/environments/{env_guid}/unpublish
 ```
 
-Method
+**Method**
 
 POST
 
-Request Headers (Mandatory)
+**Request Headers (Mandatory)**
 
 *   X-VoltMX-Authorization : {Auth Service Token}
 *   Content-Type : {application/json or application/x-www-form-urlencoded}
 *   Accept : {application/json}
 *   Referer : [https://manage.hclvoltmx.com](https://manage.hclvoltmx.com/) (The refer generates the URL required for next step of unpublishing.)
 
-Request Headers (Optional)
+**Request Headers (Optional)**
 
 *   X-VoltMX-RequestId : {Request Id}
 *   X-HTTP-Method-Override
 
-Request Body
+**Request Body**
 
 ```
  
@@ -670,7 +669,7 @@ Optional
 action : release\_lock (This action releases the previous locks on the app before attempting publish). If the action parameter is not provided, the value will be set to unpublish by default.
 ```
 
-Response
+**Response**
 
 *   **Sample Success Response**:
 ```
@@ -720,24 +719,24 @@ Response
     }
 ```
     
-    > **_Note:_**  After a successful response from the initiate unpublish operation API, users must call the following "PUT" API. The PUT API should contain a header `Cookie` with the value from the `Set-Cookie` header of the API response.
+> **_Note:_**  After a successful response from the initiate unpublish operation API, users must call the following "PUT" API. The PUT API should contain a header `Cookie` with the value from the `Set-Cookie` header of the API response.
     
 
 #### Continue Unpublish
 
 The API helps you to continue unpublishing the services inside the application to an environment with the `id {env_guid}` that the user can access. For more details on how to get the  `id {env_guid}`, refer to [Fetch Environment GUID](#fetch-environment-globally-unique-identifier-guid).
 
-Signature
+**Signature**
 
 ```
  https://api.voltmx.com/api/v1_0/environments/{env_guid}/unpublish/{publish_id}
 ```
 
-Method
+**Method**
 
 PUT
 
-Request Headers (Mandatory)
+**Request Headers (Mandatory)**
 
 *   X-VoltMX-Authorization : {Auth Service Token}
 *   Content-Type : {application/json or application/x-www-form-urlencoded}
@@ -745,12 +744,12 @@ Request Headers (Mandatory)
 *   Cookie : {Value from Set-Cookie header in the response of POST /unpublish API}
 *   Referer : [https://manage.hclvoltmx.com](https://manage.hclvoltmx.com/) (The refer generates the URL required for next step of unpublishing.)
 
-Request Headers (Optional)
+**Request Headers (Optional)**
 
 *   X-VoltMX-RequestId : {Request Id}
 *   X-HTTP-Method-Override
 
-Request Body
+**Request Body**
 
 ```
  
@@ -759,7 +758,7 @@ Optional
 action : cancel  | continue ( Default value is “continue” )
 ```
 
-Response
+**Response**
 
 *   **Sample Success Response**:
 ```

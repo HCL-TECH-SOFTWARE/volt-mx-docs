@@ -23,9 +23,9 @@ To get sync service instance pass context of the activity.
  //getting and initialising sync service
 Sync s = null;
 try {
-    s = new KonyClient().getSyncService();
+    s = new VoltMXClient().getSyncService();
     //init success
-} catch (KonyException e) {
+} catch (VoltMXException e) {
     //init failed
 }
 ```
@@ -103,7 +103,7 @@ For both Create and Update, we have the same APIs. If object passed is a new obj
     cat.setDescription("Apple");
     SyncClient.getSyncDataStoreInstance().save(cat);
     //save success
-} catch (KonyException e) {
+} catch (VoltMXException e) {
     //save failed
 }
 ```
@@ -121,7 +121,7 @@ c.setDescription("Apple");
 
 SyncClient.getSyncDataStoreInstance().saveInBackground(c, new SyncObjectCallback < Categories > () {
     @Override
-    public void onFailure(KonyException e) {
+    public void onFailure(VoltMXException e) {
         //save failed
     }
 
@@ -160,7 +160,7 @@ SyncClient.getSyncDataStoreInstance().saveInBackground(c, new SyncObjectCallback
 
     SyncFactory.getSyncDataStoreInstance().bulkSave(catList);
     //bulk save success
-} catch (KonyException e) {
+} catch (VoltMXException e) {
     //bulk save failed 
 }
 ```
@@ -193,7 +193,7 @@ SyncClient.getSyncDataStoreInstance().bulkSaveInBackground(catList,
     new SyncObjectListCallback < Categories > () {
 
         @Override
-        public void onFailure(KonyException arg0) {
+        public void onFailure(VoltMXException arg0) {
             // TODO Auto-generated method stub
 
         }
@@ -223,7 +223,7 @@ try {
     }
     SyncClient.getSyncDataStoreInstance().bulkSave(categoriesList);
     //save success
-} catch (KonyException e) {
+} catch (VoltMXException e) {
     //save failed
 }
 ```
@@ -240,7 +240,7 @@ SyncClient.getSyncDataStoreInstance().executeQueryInBackground(query,
     () {
 
         @Override
-        public void onFailure(KonyException arg0) {
+        public void onFailure(VoltMXException arg0) {
             //get failure
 
         }
@@ -255,7 +255,7 @@ SyncClient.getSyncDataStoreInstance().executeQueryInBackground(query,
                 new SyncObjectListCallback < Categories > () {
 
                     @Override
-                    public void onFailure(KonyException arg0) {
+                    public void onFailure(VoltMXException arg0) {
                         // update failure
 
                     }
@@ -287,7 +287,7 @@ Updating a Sync Object
     cat.setDescription("Apple Updated");
     SyncClient.getSyncDataStoreInstance().save(cat);
     //save success
-} catch (KonyException e) {
+} catch (VoltMXException e) {
     //save failed
 }
 ```
@@ -303,7 +303,7 @@ SyncClient.getSyncDataStoreInstance().getObjectInBackground(Categories.class, pk
     () {
 
         @Override
-        public void onFailure(KonyException arg0) {
+        public void onFailure(VoltMXException arg0) {
             //get record failed
 
         }
@@ -316,7 +316,7 @@ SyncClient.getSyncDataStoreInstance().getObjectInBackground(Categories.class, pk
             SyncClient.getSyncDataStoreInstance().saveInBackground(c, new SyncObjectCallback & lt; Categories & gt;
                 () {
                     @Override
-                    public void onFailure(KonyException e) {
+                    public void onFailure(VoltMXException e) {
                         //save failed
                     }
 
@@ -349,7 +349,7 @@ query.addWhereClause("
 		try {
 			List<Categories> categoriesList = dataStore.executeQuery(query);
 			//query success
-		} catch (KonyException e) {
+		} catch (VoltMXException e) {
 			//query failed
 		}
 ```
@@ -364,7 +364,7 @@ query.addWhereClause("CategoryName='Fruits'");
 dataStore.executeQueryInBackground(query, new SyncObjectListCallback < Categories > () {
 
     @Override
-    public void onFailure(KonyException arg0) {
+    public void onFailure(VoltMXException arg0) {
         //query failed
 
     }
@@ -391,7 +391,7 @@ try {
     pk.setAttribute("CategoryID", 1);
     Categories cat = SyncClient.getSyncDataStoreInstance().getObject(Categories.class, pk);
     //get success
-} catch (KonyException e) {
+} catch (VoltMXException e) {
     //get failed
 }
 ```
@@ -407,7 +407,7 @@ SyncFactory.getSyncDataStoreInstance().getObjectInBackground(Categories.class, p
     new SyncObjectCallback < Categories > () {
 
         @Override
-        public void onFailure(KonyException arg0) {
+        public void onFailure(VoltMXException arg0) {
             //get record failed
         }
 
@@ -437,7 +437,7 @@ for (Categories c: categoriesList) {
     dataStore.fetchDetails(C);
 }
 //fetch success 
-} catch (KonyException e) {
+} catch (VoltMXException e) {
     //fetch failed 
 }
 
@@ -459,7 +459,7 @@ try {
     Categories c = categoriesList.get(0);
     dataStore.fetchDetailsInBackground(c, new SyncObjectCallback < Categories > () {
         @Override
-        public void onFailure(KonyException arg0) {
+        public void onFailure(VoltMXException arg0) {
             //fetch success
         }
 
@@ -471,7 +471,7 @@ try {
     });
 
     //fetch success
-} catch (KonyException e) {
+} catch (VoltMXException e) {
     //fetch failed
 }
 
@@ -490,7 +490,7 @@ Deleting an Object
     Categories cat = SyncClient.getSyncDataStoreInstance().getObject(Categories.class, pk);
     SyncClient.getSyncDataStoreInstance().delete(cat);
     //delete success
-} catch (KonyException e) {
+} catch (VoltMXException e) {
     //delete failed
 }
 ```
@@ -505,7 +505,7 @@ SyncClient.getSyncDataStoreInstance().deleteInBackground(Categories.class, pk, n
 
     @
     Override
-    public void onFailure(KonyException arg0) {
+    public void onFailure(VoltMXException arg0) {
         //delete failed
     }
 
@@ -530,7 +530,7 @@ try {
 
     SyncClient.getSyncDataStoreInstance().bulkDelete(categoriesList);
     //delete success
-} catch (KonyException e) {
+} catch (VoltMXException e) {
     //delete failed
 }
 ```
@@ -545,7 +545,7 @@ query.addWhereClause("CategoryName='Fruits'");
 SyncFactory.getSyncDataStoreInstance().executeQueryInBackground(query, new SyncObjectListCallback < Categories > () {
 
     @Override
-    public void onFailure(KonyException arg0) {
+    public void onFailure(VoltMXException arg0) {
         //get failure
     }
 
@@ -554,7 +554,7 @@ SyncFactory.getSyncDataStoreInstance().executeQueryInBackground(query, new SyncO
         SyncClient.getSyncDataStoreInstance().bulkDeleteInBackground(arg0, new SyncCallback() {
 
             @Override
-            public void onFailure(KonyException arg0) {
+            public void onFailure(VoltMXException arg0) {
                 // delete failure
             }
 
@@ -576,7 +576,7 @@ The startSessionInBackgroundAPI can be used to sync (upload and download/push an
   Sync s;
 try {
     //get sync service
-    s = new KonyClient().getSyncService();
+    s = new VoltMXClient().getSyncService();
 
     // create instance of sync listener. ListenerImpl which implements SyncListener
     SyncListener listener = new ListenerImpl(this);
@@ -586,7 +586,7 @@ try {
 
     //start sync session
     s.startSessionInBackground();
-} catch (KonyException e) {
+} catch (VoltMXException e) {
     e.printStackTrace();
 }
 ```

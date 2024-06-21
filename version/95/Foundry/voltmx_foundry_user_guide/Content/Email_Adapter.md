@@ -79,45 +79,67 @@ In the sendEmail operation you can configure the details like Message, Attachmen
 
 Perform following steps to configure a sendEmail or getEmailStatus operation:
 
-- Click the required operation from the operations list. The operation details page appears.
-- Provide the following information in the details page:
+* Click the required operation from the operations list. The operation details page appears.
+* Provide the following information in the details page:
 
-<table>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-<tr>
-<td>Name</td>
-<td>The operation name appears in the Name field. You can modify the name, if required.</td>
-</tr>
-<tr>
-<td>Operation Security Level</td>
-<td>
-<p>It specifies how a client must authenticate to invoke this operation.</p>
-<details close="" markdown="block"><summary>
-Select one of the following security operations in the Operation Security Level field.</summary>
-<ul>
-<li><b>Authenticated App User</b> – It restricts the access to clients who have successfully authenticated using an Identity Service associated with the app.</li>
-<li><b>Anonymous App User</b> – It allows the access from trusted clients that have the required App Key and App Secret. Authentication through an Identity Service is not required.</li>
-<li><b>Public</b> – It allows any client to invoke this operation without any authentication. This setting does not provide any security to invoke this operation and you should avoid this authentication type if possible.</li>
-<li><b>Private</b> – It blocks the access to this operation from any external client. It allows invocation either from an Orchestration/Object Service, or from the custom code in the same run-time environment.</li>
-</ul>
-</details>
-<blockquote>
-<em><b>Note:</b></em> The field is set to Authenticated App User, by default.
-</blockquote>
-</td>
-</tr>
-<tr>
-<td>Mapped To</td>
-<td>Displays the operation with which the adapter is linked with in the back end. This field is non editable.</td>
-</tr>
-<tr>
-<td>Action</td>
-<td>Displays the type of connector (service or object) with which this operation is linked with. This field is non editable.</td>
-</tr>
-</table>
+    <table>
+    <tr>
+    <th>Field</th>
+    <th>Description</th>
+    </tr>
+    <tr>
+    <td>Name</td>
+    <td>The operation name appears in the Name field. You can modify the name, if required.</td>
+    </tr>
+    <tr>
+    <td>Operation Security Level</td>
+    <td>
+    <p>It specifies how a client must authenticate to invoke this operation.</p>
+    <details close="" markdown="block"><summary>
+    Select one of the following security operations in the Operation Security Level field.</summary>
+    <ul>
+    <li><b>Authenticated App User</b> – It restricts the access to clients who have successfully authenticated using an Identity Service associated with the app.</li>
+    <li><b>Anonymous App User</b> – It allows the access from trusted clients that have the required App Key and App Secret. Authentication through an Identity Service is not required.</li>
+    <li><b>Public</b> – It allows any client to invoke this operation without any authentication. This setting does not provide any security to invoke this operation and you should avoid this authentication type if possible.</li>
+    <li><b>Private</b> – It blocks the access to this operation from any external client. It allows invocation either from an Orchestration/Object Service, or from the custom code in the same run-time environment.</li>
+    </ul>
+    </details>
+    <blockquote>
+    <em><b>Note:</b></em> The field is set to Authenticated App User, by default.
+    </blockquote>
+    </td>
+    </tr>
+    <tr>
+    <td>Mapped To</td>
+    <td>Displays the operation with which the adapter is linked with in the back end. This field is non editable.</td>
+    </tr>
+    <tr>
+    <td>Action</td>
+    <td>Displays the type of connector (service or object) with which this operation is linked with. This field is non editable.</td>
+    </tr>
+    </table>  
+
+* The Advanced section contains the following additional configurations related to request (or) response operations. You can configure them if required:
+  <table>
+    <tr>
+    <td>Custom Code Invocation</td>
+    <td>You can add pre and post processing logic to services to modify the request inputs. When you test, the services details of various stages in the service execution are presented to you for better debugging. All options in the Advanced section are optional. For more details, refer to <a href="Java_Preprocessor_Postprocessor_.html">Preprocessor and Postprocessor</a>.</td>
+    </tr>    
+    <tr>
+    <td>Additional Configuration Properties</td>
+    <td>Additional Configuration Properties allows you to configure service call time out cache response. For information on different types of configuration properties, refer <a href="Java_Preprocessor_Postprocessor_.html#timeout_cachable">Properties</a>.</td>
+    </tr>    
+    <tr>
+    <td>Front-end API</td>
+    <td>Front-end API allows you map your endpoint (or) backend URL of an operation to a front-end URL. For detailed information, refer <a href="FrontEndAPI.html">Custom Front-end URL</a>.</td>
+    </tr>    
+    <tr>
+    <td>Custom Code Invocation</td>
+    <td>Using Server Events you can configure this service to trigger or process server side events. For detailed information, refer <a href="ServerEvents.html">Server Events</a>.</td>
+    </tr>
+  </table>
+
+> **_Note:_** All options in the Advanced section for operations are not mandatory. 
 
 ### Request Input Parameters
 
@@ -145,13 +167,16 @@ You can define the Body and Header related input parameters from the Request Inp
 <li><b>Constant</b> –Select Constant if you want to define the value for the input parameter in the Volt MX Foundry console directly.</li>
 <li><b>Identity</b> – Select Identity if you want to retrieve the request input parameters from the identity provider response attributes. For example - If an identity provider responds with a profile that has userid as one of its attributes after a successful login , please use ‘profile.userid’ as value to pass it as request parameter to the backend. This will help to filter the response based on the value mentioned in ‘userid’. For more details to configure identity filters, refer to <a href="Identity_Filters_Integration.html">Enhanced Identity Filters - Integration Services.</a></li>
 </ul>
-</details>
 <blockquote>
 <em><b>Note:</b></em> When you start editing this field, dependent identity services are auto populated.
-</blockquote> <br/>     
+</blockquote> 
+</details>
 <blockquote>
 <em><b>Note:</b></em> The field is set to Request, by default.
-</blockquote>      
+</blockquote>
+<blockquote>
+<em><b>Note:</b></em> For more information on Externalizing Identity Services, refer to <a href="Replacing_Identity_Services.html">Replace the Identity Service references in a Foundry app</a>.
+</blockquote>    
 </td>
 </tr>
 <tr>
