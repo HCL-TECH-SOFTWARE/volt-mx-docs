@@ -1,0 +1,8496 @@
+<!-- Elements added to main will be displayed on all pages -->
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Objectservices_MapperExampleRef_backup.html">
+      
+      
+        <link rel="prev" href="Custom_Code_for_Invoking_ObjectService_from_pre-post-java.html">
+      
+      
+        <link rel="next" href="offline_Sync.html">
+      
+      <link rel="icon" href="../../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.1.18">
+    
+    
+      
+        <title>Mapper Example Reference - HCL Volt MX Documentation V9.5</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.26e3688c.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/vmx_style.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#mapper-example-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+<div class="content-types-banner">
+    <ul class="sub-nav">
+        <li class="home-link">
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/index.html"  class="sub-link ">Home</a>
+        </li>
+        <li>
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/tutorials/Tutorials.html" class="sub-link">Tutorials</a>
+        </li>
+        <li>
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/index.html" class="sub-link" id="docLink">Documentation</a>
+        </li>
+        <li>
+            <a href="https://support.hcltechsw.com/csm?id=kb_search&spa=1&kb_category=db382ff1db631c14a45ad9fcd3961936" title="Articles" class="sub-link">Articles</a>
+        </li>
+        <li>
+            <a href="https://hclsoftwareu.hcltechsw.com/#VoltMxLearningJourneys" title="Articles" class="sub-link">Software Academy</a>
+        </li>
+        <li style="float:right">
+          <button onclick="myFunction92()" style="color:white; border-radius:5px ;padding:5px 10px 5px 10px; border: 2px solid white;" class="sub-link" id="docLink92">Switch to V9.2</button>
+      </li>
+    </ul>
+</div>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="HCL Volt MX Documentation V9.5" class="md-header__button md-logo" aria-label="HCL Volt MX Documentation V9.5" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HCL Volt MX Documentation V9.5
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Mapper Example Reference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    HCL-TECH-SOFTWARE/volt-mx-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="HCL Volt MX Documentation V9.5" class="md-nav__button md-logo" aria-label="HCL Volt MX Documentation V9.5" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.png" alt="logo">
+
+    </a>
+    HCL Volt MX Documentation V9.5
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    HCL-TECH-SOFTWARE/volt-mx-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+                 
+  
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1"
+    type="checkbox"
+    id="__nav_1"
+    checked
+  />
+             
+  <nav
+    class="md-nav md-nested-nav"
+    aria-label="Introducing Volt MX"
+    data-md-level="1"
+  >
+    <label class="md-nav__title" for="__nav_1">
+      <span class="md-nav__icon md-icon"></span>
+      Introducing Volt MX
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+       
+                
+<li class="md-nav__item">
+  <a href="../../../index.html" class="md-nav__link">
+    Introducing Volt MX
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_2"
+    type="checkbox"
+    id="__nav_1_2"
+    
+  />
+                              
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../../Whats_New_Main_Page.html"> What&apos;s New </a>
+    <label for="__nav_1_2">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="../../../VMX_release_notes.html" class="md-nav__link">
+    Release Notes
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_4"
+    type="checkbox"
+    id="__nav_1_4"
+    
+  />
+                  
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../../Iris/app_platform/Content/AppPlatform_Overview.html"> App Platform </a>
+    <label for="__nav_1_4">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_5"
+    type="checkbox"
+    id="__nav_1_5"
+    
+  />
+                                                            
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../../tutorials/Tutorials.html"> Tutorials </a>
+    <label for="__nav_1_5">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="../../installationGuides.html" class="md-nav__link">
+    Installation Guides
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_7"
+    type="checkbox"
+    id="__nav_1_7"
+    
+  />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../../Iris/voltmxIrisFundamentals.html"> Iris </a>
+    <label for="__nav_1_7">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+               
+  
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8"
+    type="checkbox"
+    id="__nav_1_8"
+    checked
+  />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../voltmxFoundryFundamentals.html"> Foundry </a>
+    <label for="__nav_1_8">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+  <nav
+    class="md-nav md-nested-nav"
+    aria-label="Foundry"
+    data-md-level="2"
+  >
+    <label class="md-nav__title" for="__nav_1_8">
+      <span class="md-nav__icon md-icon"></span>
+      Foundry
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+       
+                
+<li class="md-nav__item">
+  <a href="../../voltmxFoundryFundamentals.html" class="md-nav__link">
+    Fundamentals
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_2"
+    type="checkbox"
+    id="__nav_1_8_2"
+    
+  />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../installing_foundry.html"> Installing Foundry </a>
+    <label for="__nav_1_8_2">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+               
+  
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3"
+    type="checkbox"
+    id="__nav_1_8_3"
+    checked
+  />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Introduction.html"> Volt MX Foundry User Guide </a>
+    <label for="__nav_1_8_3">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+  <nav
+    class="md-nav md-nested-nav"
+    aria-label="Volt MX Foundry User Guide"
+    data-md-level="3"
+  >
+    <label class="md-nav__title" for="__nav_1_8_3">
+      <span class="md-nav__icon md-icon"></span>
+      Volt MX Foundry User Guide
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+       
+                
+<li class="md-nav__item">
+  <a href="Introduction.html" class="md-nav__link">
+    Overview
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Preface.html" class="md-nav__link">
+    Preface
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="../../foundrySDKs.html" class="md-nav__link">
+    Foundry SDKs
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Accessing_VoltMX_MBaaS_Portal.html" class="md-nav__link">
+    Accessing Volt MX Foundry Console - Volt MX Cloud
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Environments-Cloud.html" class="md-nav__link">
+    Environments - Volt MX Cloud
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Account_Settings_User_ACLs.html" class="md-nav__link">
+    Default Access Control Lists (ACLs) on New Apps and Services
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="UpgradeCloud.html" class="md-nav__link">
+    Volt MX Foundry Updates on Cloud
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="How_to_access_VoltMX_Foundry_Portal_on-Prem.html" class="md-nav__link">
+    Accessing Volt MX Foundry Console - On-Premises
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Environments.html" class="md-nav__link">
+    Environments - On-Premises
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Published_Apps-Environments.html" class="md-nav__link">
+    Viewing Applications Published to a Runtime Environment
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Features.html" class="md-nav__link">
+    Features
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Adding_Applications.html" class="md-nav__link">
+    Apps - How to Add Applications
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="ConsoleAccessControl.html" class="md-nav__link">
+    Console Access Control
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Manage_Users.html" class="md-nav__link">
+    Manage Console Users
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_15"
+    type="checkbox"
+    id="__nav_1_8_3_15"
+    
+  />
+                               
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="API_Management.html"> APIs in API Management </a>
+    <label for="__nav_1_8_3_15">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="API_Versioning.html" class="md-nav__link">
+    API Versioning
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="App_Versioning.html" class="md-nav__link">
+    Application Versioning
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Version_Upgrade_Apps_Services_MFCLI.html" class="md-nav__link">
+    Version Upgrade support for Apps and Services - MFCLI
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="CustomDataConfig-.html" class="md-nav__link">
+    Custom Data Adapters - Overview
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="CustomDataConfig.html" class="md-nav__link">
+    Custom Data Adapters on Volt MX Foundry
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="JAR_Management.html" class="md-nav__link">
+    Managing JAR Files
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="ViewingVerbsandPrePostProcessors.html" class="md-nav__link">
+    Viewing Verbs and Pre and Post Processors
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="CLI_Analytics.html" class="md-nav__link">
+    Analytics for Third-party Client App Binaries
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="ManagingLinkedAppsinCompositeFoundryApp.html" class="md-nav__link">
+    Managing Linked Apps
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Export-Import_Apps.html" class="md-nav__link">
+    Exporting and Importing an Application
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="LockApp.html" class="md-nav__link">
+    Locking Foundry App
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_27"
+    type="checkbox"
+    id="__nav_1_8_3_27"
+    
+  />
+                                                                                                            
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Identity.html"> Identity </a>
+    <label for="__nav_1_8_3_27">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_28"
+    type="checkbox"
+    id="__nav_1_8_3_28"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Legacy_Serivces.html"> Legacy Services </a>
+    <label for="__nav_1_8_3_28">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_29"
+    type="checkbox"
+    id="__nav_1_8_3_29"
+    
+  />
+                                                                                                                                                                              
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Services.html"> Integration </a>
+    <label for="__nav_1_8_3_29">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_30"
+    type="checkbox"
+    id="__nav_1_8_3_30"
+    
+  />
+                        
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Orchestration.html"> Orchestration </a>
+    <label for="__nav_1_8_3_30">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="Workflow.html" class="md-nav__link">
+    Workflow
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Workflow_BestPractices.html" class="md-nav__link">
+    Workflow Best Practices
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="EventsWorkflowImplementation.html" class="md-nav__link">
+    Event Triggered Workflow Implementation
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="IntegrationWorkflowImplementation.html" class="md-nav__link">
+    Integration Service Triggered Workflow Implementation-Async
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="IntegrationWorkflowImplementation_Sync.html" class="md-nav__link">
+    Integration Service Triggered Workflow Implementation-Sync
+  </a>
+</li>
+    
+               
+  
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_36"
+    type="checkbox"
+    id="__nav_1_8_3_36"
+    checked
+  />
+                                                                                                                         
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Objectservices.html"> Object Services </a>
+    <label for="__nav_1_8_3_36">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+  <nav
+    class="md-nav md-nested-nav"
+    aria-label="Object Services"
+    data-md-level="4"
+  >
+    <label class="md-nav__title" for="__nav_1_8_3_36">
+      <span class="md-nav__icon md-icon"></span>
+      Object Services
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+       
+                
+<li class="md-nav__item">
+  <a href="Objectservices.html" class="md-nav__link">
+    Overview
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="ObjectsServices/Objectservices_Stage1.html" class="md-nav__link">
+    Objectservices Stage 1
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_36_3"
+    type="checkbox"
+    id="__nav_1_8_3_36_3"
+    
+  />
+                     
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="ObjectsServices/Stage_2.html"> Stage 2&colon; Configuring a Data Model </a>
+    <label for="__nav_1_8_3_36_3">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_36_4"
+    type="checkbox"
+    id="__nav_1_8_3_36_4"
+    
+  />
+                        
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="ObjectsServices/Objectservices_Stage3.html"> Stage 3&colon; Mapping Operations to Back-end Methods </a>
+    <label for="__nav_1_8_3_36_4">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="ObjectsServices/Objectservices_Stage4.html" class="md-nav__link">
+    Stage 4&colon; Integrating Objects Services in an Application
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="DataEncryptionObjects.html" class="md-nav__link">
+    Object Metadata for Controlling Client-side Logic
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="ObjectsServices/ObjectservicesActions.html" class="md-nav__link">
+    Context Based Options
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="ObjectsServices/DataModelTemplateXLSXStorage.html" class="md-nav__link">
+    Data Model Template in XLSX file for Storage Objects
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="ObjectsServices/ObjectservicesEnhancedIdentity.html" class="md-nav__link">
+    Enhanced Identity support in Object Services
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Remapping_Object_Verbs.html" class="md-nav__link">
+    Remapping Verbs for Service-Driven Object Services
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="ObjectsServices/Objectservices_MapperExampleRef.html" class="md-nav__link">
+    Mapper Example Reference
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="ObjectsServices/Storage_ObjectServices.html" class="md-nav__link">
+    Storage Object Services
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="ObjectsServices/ObjectservicesEndpointMongoDB.html" class="md-nav__link">
+    Creating MongoDB Object Service
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="ObjectsServices/ObjectservicesEndpointSalesF.html" class="md-nav__link">
+    Creating Salesforce Object Service
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="ObjectsServices/ObjectservicesEndpointSAP.html" class="md-nav__link">
+    Creating SAP Object Service
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="ObjectsServices/ObjectservicesEndpointSDO.html" class="md-nav__link">
+    Service-Driven Object Service
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="ObjectsServices/ObjectservicesEndpointStorageO.html" class="md-nav__link">
+    Creating Storage Object Service
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_36_18"
+    type="checkbox"
+    id="__nav_1_8_3_36_18"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="FileServiceAdapters.html"> File Service Adapters </a>
+    <label for="__nav_1_8_3_36_18">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="HCLMicroservicesAdapter.html" class="md-nav__link">
+    HCL Microservices Adapter
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="offline_Sync.html" class="md-nav__link">
+    Offline Enablement
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_36_21"
+    type="checkbox"
+    id="__nav_1_8_3_36_21"
+    
+  />
+                        
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Advanced_Configurations_-Object_Services.html"> Advanced Configurations Object Services </a>
+    <label for="__nav_1_8_3_36_21">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item md-nav__item--active">
+   
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="toc"
+    type="checkbox"
+    id="__toc"
+  />
+
+      
+  <label class="md-nav__link md-nav__link--active" for="__toc">
+    Mapper Example Reference
+    <span class="md-nav__icon md-icon"></span>
+  </label>
+  
+  <a href="Objectservices_MapperExampleRef_backup.html" class="md-nav__link md-nav__link--active">
+    Mapper Example Reference
+  </a>
+
+    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mapper-example-reference" class="md-nav__link">
+    Mapper Example Reference
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+  
+</li>
+
+   
+    </ul>
+  </nav>
+  
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="offline_Sync.html" class="md-nav__link">
+    Offline Sync (Offline Objects)
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="ActionsinObjects.html" class="md-nav__link">
+    Actions in Objects
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Legacy_Sync.html" class="md-nav__link">
+    Legacy Sync
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="VoltMXDevPortal.html" class="md-nav__link">
+    Developer Portal
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Logic_in_Apps.html" class="md-nav__link">
+    Logic in Apps
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Logic.html" class="md-nav__link">
+    Logic - API Management
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Logic_Publish_API_Management.html" class="md-nav__link">
+    Logic - Publish API Management
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Rules_as_a_Service.html" class="md-nav__link">
+    Rules as a Service
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Engagement.html" class="md-nav__link">
+    Engagement
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_46"
+    type="checkbox"
+    id="__nav_1_8_3_46"
+    
+  />
+                                               
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Manage_Client_App_Assets.html"> Manage Client App Assets </a>
+    <label for="__nav_1_8_3_46">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="EnterpriseAppStore.html" class="md-nav__link">
+    Volt MX Enterprise App Store Service for Digital App Distribution
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="PushNotificationsEas.html" class="md-nav__link">
+    Sending Push Notification to EAS
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="AppVersionUpgradePolicyEAS.html" class="md-nav__link">
+    Checking App Versions in EAS
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="EAS_NativeApp_Walk-through.html" class="md-nav__link">
+    Walk-through of Volt MX Enterprise App Store (EAS) Source Application
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="KnownIssuesEAS.html" class="md-nav__link">
+    Known Issues - EAS
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_52"
+    type="checkbox"
+    id="__nav_1_8_3_52"
+    
+  />
+                                              
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Publish.html"> Publish </a>
+    <label for="__nav_1_8_3_52">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="AppPromotion.html" class="md-nav__link">
+    Promoting a Deployment Package
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_54"
+    type="checkbox"
+    id="__nav_1_8_3_54"
+    
+  />
+                                             
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="CI_Foundry.html"> Volt MX Foundry Command Line Utility - Continuous Integration </a>
+    <label for="__nav_1_8_3_54">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_55"
+    type="checkbox"
+    id="__nav_1_8_3_55"
+    
+  />
+                                                                                                                                                                                                                                                                                                                                                                                       
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Foundry_SDKs.html"> SDKs </a>
+    <label for="__nav_1_8_3_55">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="Settings_Cloud.html" class="md-nav__link">
+    Settings - Cloud
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Settings.html" class="md-nav__link">
+    Settings - On-premises
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Reports.html" class="md-nav__link">
+    Reports
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Support.html" class="md-nav__link">
+    Support
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Telemetry.html" class="md-nav__link">
+    Telemetry
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Samples/Samples.html" class="md-nav__link">
+    Tutorials
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Appendix_-_Sync_Strategy.html" class="md-nav__link">
+    Appendix - Sync Strategy
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_3_63"
+    type="checkbox"
+    id="__nav_1_8_3_63"
+    
+  />
+                     
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="Appendix_-_App_Services.html"> Appendix - App Services </a>
+    <label for="__nav_1_8_3_63">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="Appendix_-_FAQs.html" class="md-nav__link">
+    Appendix - Frequently Asked Questions (FAQs
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Limitations.html" class="md-nav__link">
+    Limitations
+  </a>
+</li>
+    
+    </ul>
+  </nav>
+  
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_4"
+    type="checkbox"
+    id="__nav_1_8_4"
+    
+  />
+                     
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../KF_Services_OAuth_Sample/Content/KF_Services_OAuth_Sample.html"> OAuth Sample App Guide </a>
+    <label for="__nav_1_8_4">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_5"
+    type="checkbox"
+    id="__nav_1_8_5"
+    
+  />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../integration_services.html"> Integration Services </a>
+    <label for="__nav_1_8_5">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_6"
+    type="checkbox"
+    id="__nav_1_8_6"
+    
+  />
+                           
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../voltmx_foundry_workflow/Content/Workflow.html"> Volt Foundry Workflow </a>
+    <label for="__nav_1_8_6">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_7"
+    type="checkbox"
+    id="__nav_1_8_7"
+    
+  />
+                                                                                                                                                                                                                                                                                                                               
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../administering_foundry.html"> Administering Foundry </a>
+    <label for="__nav_1_8_7">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_8"
+    type="checkbox"
+    id="__nav_1_8_8"
+    
+  />
+                                                                                                                                                
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../vmf_integrationservice_admin_console_userguide/Content/Overview.html"> App Services Console User Guide </a>
+    <label for="__nav_1_8_8">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_9"
+    type="checkbox"
+    id="__nav_1_8_9"
+    
+  />
+                                                                                                                                                                                                             
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../voltmx_appfactory_user_guide/Content/Introduction.html"> App Factory User Guide </a>
+    <label for="__nav_1_8_9">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_10"
+    type="checkbox"
+    id="__nav_1_8_10"
+    
+  />
+                                                                                                                                   
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../voltmx_Foundry_deployment_guide/Content/Introduction.html"> Volt MX Foundry Deployment Guide </a>
+    <label for="__nav_1_8_10">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+                
+<li class="md-nav__item">
+  <a href="../../VoltMX_Analytics_Cloud_FAQs/Content/VoltMX_Analytics_Cloud_FAQs.html" class="md-nav__link">
+    Volt MX Analytics & Reporting Cloud FAQs
+  </a>
+</li>
+    
+             
+  
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle"
+    data-md-toggle="__nav_1_8_12"
+    type="checkbox"
+    id="__nav_1_8_12"
+    
+  />
+                                     
+
+  <div class="md-nav__link md-nav__link--index">
+    <a href="../../vmfintegrationservice_troubleshooting_guide/Content/Integration_Services_Troubleshooting_Guide.html"> Integration Services Troubleshooting Guide </a>
+    <label for="__nav_1_8_12">
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+  </div>
+
+      
+</li>
+
+   
+    </ul>
+  </nav>
+  
+</li>
+
+   
+    </ul>
+  </nav>
+  
+</li>
+
+ 
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mapper-example-reference" class="md-nav__link">
+    Mapper Example Reference
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Mapper Example Reference</h1>
+
+<p>User Guide: <a href="../Objectservices.md">Object Services</a> &gt; Mapper Example Reference</p>
+<h2 id="mapper-example-reference">Mapper Example Reference</h2>
+<p>This section provides a library of mapper examples. Select a link from the following list to view:</p>
+<ul>
+<li><a href="#Attribute_To_Object_Mapping">Attribute To Object Mapping</a></li>
+<li><a href="#Attribute_To_Object_With_Empty_Fields">Attribute To Object With Empty Fields</a></li>
+<li><a href="#Attribute_To_Object_With_Missing_Fields">Attribute To Object With Missing Fields</a></li>
+<li><a href="#Attribute_To_Object_With_Null_Field_Value">Attribute To Object With Null Field Value</a></li>
+<li><a href="#Concatenation_From_Child">Concatenation From Child</a></li>
+<li><a href="#Concatenation_Mapping">Concatenation Mapping</a></li>
+<li><a href="#Concatenation_With_Child_Attribute">Concatenation With Child Attribute</a></li>
+<li><a href="#Concatenation_With_Dollar_Mapping">Concatenation With Dollar Mapping</a></li>
+<li><a href="#Conditional_Mapping">Conditional Mapping</a></li>
+<li><a href="#Conditional_Mapping_With_Choose-When-Otherwise">Conditional Mapping With Choose-When-Otherwise</a></li>
+<li><a href="#Field_Mapping">Field Mapping</a></li>
+<li><a href="#Global_Mapper_Output_Mapping">Global Mapper Output Mapping</a></li>
+<li><a href="#Global_Mapper_Output_Second_Mapping">Global Mapper Output Second Mapping</a></li>
+<li><a href="#Independent_Object_Structure_Mapping">Independent Object Structure Mapping</a></li>
+<li><a href="#Looping_Filter">Looping Filter</a></li>
+<li><a href="#One_To_N_Split_Mapping">One To N Split Mapping</a></li>
+<li><a href="#Optional_Input_Path">Optional Input Path</a></li>
+<li><a href="#Optional_Output_Path">Optional Output Path</a></li>
+<li><a href="#Parent_Attributes_To_Different_Child_Objects">Parent Attributes To Different Child Objects</a></li>
+<li><a href="#Primary_To_Secondary_Mapping">Primary To Secondary Mapping</a></li>
+<li><a href="#Random_Mapping">Random Mapping</a></li>
+<li><a href="#Reference_Only_Child_Object">Reference Only Child Object</a></li>
+<li><a href="#Reverse_Parent_Child">Reverse Parent Child</a></li>
+<li><a href="#Simple_Mapping_List">Simple Mapping List</a></li>
+<li><a href="#Simple_Mapping_List_With_One_Row">Simple Mapping List with One Row</a></li>
+<li><a href="#Simple_Split_Mapping">Simple Split Mapping</a></li>
+<li><a href="#Split_Table">Split Table</a></li>
+<li><a href="#Split_Table_Filter_Mapping">Split Table Filter Mapping</a></li>
+<li><a href="#Static_Lookup">Static Lookup</a></li>
+<li><a href="#Two_Childs_To_Same_Entity">Two Childs To Same Entity</a></li>
+<li><a href="#EAM_Notification_Mapping">EAM Notification Mapping</a></li>
+<li><a href="#Aggregation_Support_in_Mapper">Aggregation Support in Mapper</a></li>
+<li><a href="#Look-up_Support_in_Mapper">Look-up Support in Mapper</a></li>
+<li><a href="#JavaScript_Support_in_Mapper">JavaScript Support in Mapper</a></li>
+</ul>
+<h3 id="Attribute_To_Object_Mapping">Attribute To Object Mapping</h3>
+
+<p>This is an example of attribute to object mapping.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+"WorkOrder": [
+{
+"WorkOrderId": "1",
+"AddressId": "101"
+},
+{
+"WorkOrderId": "2",
+"AddressId": "202"
+}
+]
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+"WorkOrder": [
+{
+"WorkOrderId": "1",
+"Address": [
+{
+"WorkOrderId": "1",
+"AddressId": "101",
+"AddressType": "ORD"
+}
+]
+},
+{
+"WorkOrderId": "2",
+"Address": [
+{
+"WorkOrderId": "2",
+"AddressId": "202",
+"AddressType": "ORD"
+}
+]
+}
+]
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version\="1.0" encoding\="UTF-8" standalone\="yes"?&gt;
+&lt;mapper
+    xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath\="WorkOrder" inputpath\="WorkOrder"&gt;
+&lt; outputpath\="WorkOrderId" inputpath\="WorkOrderId" /&gt;
+&lt;map outputpath\="Address" inputpath\=""&gt;
+&lt; outputpath\="WorkOrderId" inputpath\="WorkOrderId" /&gt;
+&lt; outputpath\="AddressId" inputpath\="AddressId" /&gt;
+&lt; outputpath\="AddressType" input\="ORD" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="Attribute_To_Object_With_Empty_Fields">Attribute To Object With Empty Fields</h3>
+
+<p>This is an example of mapping an attribute to an object with empty fields.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{"WorkOrder": [
+
+{
+
+"WorkOrderId": "1",
+
+"AddressId": "101"
+
+},
+
+{
+
+"WorkOrderId": "2",
+
+"AddressId": "202"
+
+}
+
+{
+
+"WorkOrderId": "3",
+
+}
+]
+
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"WorkOrder": [
+
+{
+
+"WorkOrderId": "1",
+
+"Address": [
+
+{
+
+"WorkOrderId": "1",
+
+"AddressId": "101",
+
+"AddressType": "ORD"
+
+}
+]
+
+},
+
+{
+
+"WorkOrderId": "2",
+
+"Address": [
+
+{
+
+"WorkOrderId": "2",
+
+"AddressId": "202",
+
+"AddressType": "ORD"
+
+}
+]
+
+},
+
+{
+
+"WorkOrderId": "3",
+
+"Address": [
+
+{
+
+"WorkOrderId": "3",
+
+"AddressType": "ORD"
+
+}
+]
+
+}
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="WorkOrder" inputpath="WorkOrder"&gt;
+&lt; outputpath="WorkOrderId" inputpath="WorkOrderId" /&gt;
+&lt;map outputpath="Address" inputpath=""&gt;
+&lt; outputpath="WorkOrderId" inputpath="WorkOrderId" /&gt;
+&lt; outputpath="AddressId" inputpath="AddressId" /&gt;
+&lt; outputpath="AddressType" input="ORD" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="Attribute_To_Object_With_Missing_Fields">Attribute To Object With Missing Fields</h3>
+
+<p>This is an example of mapping an attribute to an object with missing fields.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"WorkOrder": [
+
+{
+
+"WorkOrderId": "1",
+
+"AddressId": "101"
+
+},
+
+{
+
+"WorkOrderId": "2",
+
+"AddressId": "202"
+
+}
+
+{
+
+"WorkOrderId": "3",
+
+}
+]
+
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"WorkOrder": [
+
+{
+
+"WorkOrderId": "1",
+
+"Address": [
+
+{
+
+"WorkOrderId": "1",
+
+"AddressId": "101",
+
+"AddressType": "ORD"
+
+}
+]
+
+},
+
+{
+
+"WorkOrderId": "2",
+
+"Address": [
+
+{
+
+"WorkOrderId": "2",
+
+"AddressId": "202",
+
+"AddressType": "ORD"
+
+}
+]
+
+},
+
+{
+
+"WorkOrderId": "3",
+
+"Address": [
+
+{
+
+"WorkOrderId": "3",
+
+"AddressType": "ORD"
+
+}
+]
+
+}
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="WorkOrder" inputpath="WorkOrder"&gt;
+&lt; outputpath="WorkOrderId" inputpath="WorkOrderId" /&gt;
+&lt;map outputpath="Address" inputpath=""&gt;
+&lt; outputpath="WorkOrderId" inputpath="WorkOrderId" /&gt;
+&lt; outputpath="AddressId" inputpath="AddressId" /&gt;
+&lt; outputpath="AddressType" input="ORD" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="Attribute_To_Object_With_Null_Field_Value">Attribute To Object With Null Field Value</h3>
+
+<p>This is an example of mapping an attribute to an object with a null field value.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"WorkOrder": [
+
+{
+
+"WorkOrderId": "1",
+
+"AddressId": "101"
+
+},
+
+{
+
+"WorkOrderId": "2",
+
+"AddressId": "202"
+
+}
+
+{
+
+"WorkOrderId": "3",
+
+"AddressId": null
+
+}
+]
+
+}
+
+Output
+
+{
+
+"WorkOrder": [
+
+{
+
+"WorkOrderId": "1",
+
+"Address": [
+
+{
+
+"WorkOrderId": "1",
+
+"AddressId": "101",
+
+"AddressType": "ORD"
+
+}
+]
+
+},
+
+{
+
+"WorkOrderId": "2",
+
+"Address": [
+
+{
+
+"WorkOrderId": "2",
+
+"AddressId": "202",
+
+"AddressType": "ORD"
+
+}
+]
+
+},
+
+{
+
+"WorkOrderId": "3",
+
+"Address": [
+
+{
+
+"WorkOrderId": "3",
+
+"AddressType": "ORD"
+
+}
+]
+
+}
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="A" inputpath="A"&gt;
+&lt; outputpath="Q1" inputpath="P1" /&gt;
+&lt; outputpath="Q2" inputpath="P2" /&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="Concatenation_From_Child">Concatenation From Child</h3>
+
+<p>This is an example of concatenation mapping from a child.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"Customers": [
+
+{
+
+"Id": "101",
+
+"Address": {
+
+"FirstName": "First1",
+
+"LastName": "Last1"
+
+}
+
+},
+
+{
+
+"Id": "102",
+
+"Address": {
+
+"FirstName": "First2",
+
+"LastName": "Last2"
+
+}
+
+},
+
+{
+
+"Id": "103",
+
+"Address": {
+
+"FirstName": "First3",
+
+"LastName": "Last3"
+
+}
+
+}
+]
+
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"Customers": [
+
+{
+
+"Id": "101",
+
+"Name": "First1 Last1"
+
+},
+
+{
+
+"Id": "102",
+
+"Name": "First2 Last2"
+
+},
+
+{
+
+"Id": "103",
+
+"Name": "First3 Last3"
+
+}
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="Customers" inputpath="Customers"&gt;
+&lt; outputpath="Id" inputpath="Id" /&gt;
+&lt;map outputpath="" inputpath="Address"&gt;
+&lt;exec-function name="voltmx.string:concat" outputpath="concatname output="$vars"&gt;
+&lt;set-arg name="FirstName" inputpath="FirstName"/&gt;
+&lt;set-arg name="Separator" input=" " /&gt;
+&lt;set-arg name="LastName" inputpath="LastName"/&lt;
+&lt;/exec-function&gt;
+&lt;set-param outputpath="Name" inputpath="$vars/concatname" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="Concatenation_Mapping">Concatenation Mapping</h3>
+
+<p>This is an example of concatenation mapping.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"A": [
+
+{
+
+"P1": "value1",
+
+"P2": "value2"
+
+}
+]
+
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"A": [
+
+{
+
+"Q1": "value1-value2",
+
+}
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="A" inputpath="A"&gt;
+&lt;exec-function name="voltmx.string:concat" outputpath="P1P2Concat" output="$vars"&gt;
+&lt;set-arg name="P1" inputpath="P1"/&gt;
+&lt;set-arg name="Separator" input="-" /&gt;
+&lt;set-arg name="P2" inputpath="P2"/&gt;
+&lt;/exec-function&gt;
+&lt; outputpath="Q1" inputpath="$vars/P1P2Concat" /&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="Concatenation_With_Child_Attribute">Concatenation With Child Attribute</h3>
+
+<p>This is an example of mapping concatenation with a child attribute.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"EAM_WO_HDR": [
+
+{
+
+"EAM_WO_Address": [
+
+{
+
+"P1": "value1",
+
+"P2": "value2"
+
+}
+]
+
+}
+]
+
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"Address": [
+
+{
+
+"Q1": "value1-value2"
+
+}
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="Address" inputpath="EAM_WO_HDR"&gt;
+&lt;exec-function name="voltmx.string:concat" outputpath="P1P2Concat" output="$vars"&gt;
+&lt;set-arg name="P1" inputpath="EAM_WO_Address/P1"/&gt;
+&lt;set-arg name="Separator" input="-" /&gt;
+&lt;set-arg name="P2" inputpath="P2"/&gt;
+&lt;/exec-function&gt;
+&lt; outputpath="Q1" inputpath="$vars/P1P2Concat" /&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="Concatenation_With_Dollar_Mapping">Concatenation With Dollar Mapping</h3>
+
+<p>This is an example of concatenation with dollar mapping.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"A": [
+
+{
+
+"P1": "value1",
+
+"P2": "value2"
+
+}
+]
+
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"A": [
+
+{
+
+"Q1": "value1$value2"
+
+}
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="A" inputpath="A"&gt;
+&lt;exec-function name="voltmx.string:concat" outputpath="P1P2Concat" output="$vars"&gt;
+&lt;set-arg name="P1" inputpath="P1"/&gt;
+&lt;set-arg name="Separator" input="\\$" /&gt;
+&lt;set-arg name="P2" inputpath="P2"/&gt;
+&lt;/exec-function&gt;
+&lt; outputpath="Q1" inputpath= "$vars/P1P2Concat" /&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="Conditional_Mapping">Conditional Mapping</h3>
+
+<p>This is an example of conditional mapping.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"Customers": [
+
+{
+
+"Id": "101",
+
+"NotStarted": "",
+
+"Started": "X",
+
+"InProgress": "",
+
+"Completed": "",
+
+},
+
+{
+
+"Id": "102",
+
+"NotStarted": "",
+
+"Started": "",
+
+"InProgress": "",
+
+"Completed": "X",
+
+},
+
+{
+
+"Id": "103",
+
+"NotStarted": "",
+
+"Started": "",
+
+"InProgress": "X",
+
+"Completed": "",
+
+}
+]
+
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"Customers": [
+
+{
+
+"Id": "101",
+
+"Status": "Started"
+
+},
+
+{
+
+"Id": "102",
+
+"Status": "Completed"
+
+},
+
+{
+
+"Id": "103",
+
+"Status": "InProgress"
+
+}
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="Customers" inputpath="Customers"&gt;
+&lt; outputpath="Id" inputpath="Id" /&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="NotStartedCond" output="$vars"&gt;
+&lt;set-arg name="NotStarted" inputpath="NotStarted" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="StartedCond" output="$vars"&gt;
+&lt;set-arg name="Started" inputpath="Started" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="InProgressCond" output="$vars"&gt;
+&lt;set-arg name="InProgress" inputpath="InProgress" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="CompletedCond" output="$vars"&gt;
+&lt;set-arg name="Completed" inputpath="Completed" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;choose&gt;
+&lt;when test="$vars/NotStartedCond"&gt;
+&lt; outputpath="Status" input="NotStarted" /&gt;
+&lt;/when&gt;
+&lt;when test="$vars/StartedCond"&gt;
+&lt; outputpath="Status" input="Started" /&gt;
+&lt;/when&gt;
+&lt;when test="$vars/InProgressCond"&gt;
+&lt; outputpath="Status" input="InProgress" /&gt;
+&lt;/when&gt;
+&lt;when test="$vars/CompletedCond"&gt;
+&lt; outputpath="Status" input="Completed" /&gt;
+&lt;/when&gt;
+&lt;/choose&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="Conditional_Mapping_With_Choose-When-Otherwise">Conditional Mapping With Choose-When-Otherwise</h3>
+
+<p>This is an example of conditional mapping that uses a choose-when-otherwise block.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"Customers": [
+
+{
+
+"Id": "101",
+
+"NotStarted": "",
+
+"Started": "X",
+
+"InProgress": "",
+
+"Completed": "",
+
+},
+
+{
+
+"Id": "102",
+
+"NotStarted": "",
+
+"Started": "",
+
+"InProgress": "",
+
+"Completed": "X",
+
+},
+
+{
+
+"Id": "103",
+
+"NotStarted": "",
+
+"Started": "",
+
+"InProgress": "X",
+
+"Completed": "",
+
+},
+
+{
+
+"Id": "104",
+
+"NotStarted": "",
+
+"Started": "",
+
+"InProgress": "",
+
+"Completed": "",
+
+}
+]
+
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"Customers": [
+
+{
+
+"Id": "101",
+
+"Status": "Started",
+
+},
+
+{
+
+"Id": "102",
+
+"Status": "Completed",
+
+},
+
+{
+
+"Id": "103",
+
+"Status": "InProgress",
+
+},
+
+{
+
+"Id": "104",
+
+"Status": "Unknown",
+
+},
+
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="Customers" inputpath="Customers"&gt;
+&lt; outputpath="Id" inputpath="Id" /&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="NotStartedCond" output="$vars"&gt;
+&lt;set-arg name="NotStarted" inputpath="NotStarted" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="StartedCond" output="$vars"&gt;
+&lt;set-arg name="Started" inputpath="Started" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="InProgressCond" output="$vars"&gt;
+&lt;set-arg name="InProgress" inputpath="InProgress" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="CompletedCond" output="$vars"&gt;
+&lt;set-arg name="Completed" inputpath="Completed" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;choose&gt;
+&lt;when test="$vars/NotStartedCond"&gt;
+&lt; outputpath="Status" input="NotStarted" /&gt;
+&lt;/when&gt;
+&lt;when test="$vars/StartedCond"&gt;
+&lt; outputpath="Status" input="Started" /&gt;
+&lt;/when&gt;
+&lt;when test="$vars/InProgressCond"&gt;
+&lt; outputpath="Status" input="InProgress" /&gt;
+&lt;/when&gt;
+&lt;when test="$vars/CompletedCond"&gt;
+&lt; outputpath="Status" input="Completed" /&gt;
+&lt;/when&gt;
+&lt;otherwise&gt;
+&lt; outputpath="Status" input="Unknown" />
+&lt;/otherwise&gt;
+&lt;/choose&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="Field_Mapping">Field Mapping</h3>
+
+<p>This is an example of field mapping.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"A": [
+
+{
+
+"P1": "A-row1-p1",
+
+"P2": "A-row1-p2"
+
+},
+
+{
+
+"P1": "A-row2-p1",
+
+"P2": "A-row2-p2"
+
+}
+]
+
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"M": [
+
+{
+
+"Q1": "A-row1-p1",
+
+"Q2": "A-row1-p2"
+
+},
+
+{
+
+"Q1": "A-row2-p1",
+
+"Q2": "A-row2-p2"
+
+}
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map name="field-mapping"&gt;
+&lt;exec-function name="field-mapping"&gt;
+&lt;/exec-function&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<p><b>Functions</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;functions xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;function name="field-mapping"&gt;
+&lt; outputpath="Q1" inputpath="P1" /&gt;
+&lt; outputpath="Q2" inputpath="P2" /&gt;
+&lt;/function&gt;
+&lt;/function&gt;</code></pre>
+
+<h3 id="Global_Mapper_Output_Mapping">Global Mapper Output Mapping</h3>
+
+<p>This is an example of global mapper output mapping.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"Customers": [
+
+{
+
+"Id": "101",
+
+"NotStarted": "",
+
+"Started": "X",
+
+"InProgress": "",
+
+"Completed": "",
+
+},
+
+{
+
+"Id": "102",
+
+"NotStarted": "",
+
+"Started": "",
+
+"InProgress": "",
+
+"Completed": "X",
+
+},
+
+{
+
+"Id": "103",
+
+"NotStarted": "",
+
+"Started": "",
+
+"InProgress": "X",
+
+"Completed": "",
+
+},
+
+{
+
+"Id": "104",
+
+"NotStarted": "",
+
+"Started": "",
+
+"InProgress": "",
+
+"Completed": "",
+
+}
+]
+
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"Error-Message": "Unknown element.",
+
+"Customers": [
+
+{
+
+"Id": "101",
+
+"Status": "Started",
+
+},
+
+{
+
+"Id": "102",
+
+"Status": "Completed",
+
+},
+
+{
+
+"Id": "103",
+
+"Status": "InProgress",
+
+},
+
+{
+
+"Id": "104",
+
+}
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="Customers" inputpath="Customers"&gt;
+&lt; outputpath="Id" inputpath="Id" /&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="NotStartedCond" output="$vars"&gt;
+&lt;set-arg name="NotStarted" inputpath="NotStarted" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="StartedCond" output="$vars"&gt;
+&lt;set-arg name="Started" inputpath="Started" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="InProgressCond" output="$vars"&gt;
+&lt;set-arg name="InProgress" inputpath="InProgress" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="CompletedCond" output="$vars"&gt;
+&lt;set-arg name="Completed" inputpath="Completed" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;choose&gt;
+&lt;when test="$vars/NotStartedCond"&gt;
+&lt; outputpath="Status" input="NotStarted" /&gt;
+&lt;/when&gt;
+&lt;when test="$vars/StartedCond"&gt;
+&lt; outputpath="Status" input="Started" /&gt;
+&lt;/when&gt;
+&lt;when test="$vars/InProgressCond"&gt;
+&lt; outputpath="Status" input="InProgress" /&gt;
+&lt;/when&gt;
+&lt;when test="$vars/CompletedCond"&gt;
+&lt; outputpath="Status" input="Completed" /&gt;
+&lt;/when&gt;
+&lt;otherwise&gt;
+&lt; outputpath="Error-Message" input="Unknown element." output="$mapper-output"/&gt;
+&lt;/otherwise&gt;
+&lt;/choose&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="Global_Mapper_Output_Second_Mapping">Global Mapper Output Second Mapping</h3>
+
+<p>This is an example of mapping a second global mapper output.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"Customers": [
+
+{
+
+"Id": "101",
+
+"NotStarted": "",
+
+"Started": "X",
+
+"InProgress": "",
+
+"Completed": "",
+
+},
+
+{
+
+"Id": "102",
+
+"NotStarted": "",
+
+"Started": "",
+
+"InProgress": "",
+
+"Completed": "X",
+
+},
+
+{
+
+"Id": "103",
+
+"NotStarted": "",
+
+"Started": "",
+
+"InProgress": "X",
+
+"Completed": "",
+
+},
+
+{
+
+"Id": "104",
+
+"NotStarted": "",
+
+"Started": "",
+
+"InProgress": "",
+
+"Completed": "",
+
+}
+]
+
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"Error-Message": "Unknown element.",
+
+"Customers": [
+
+{
+
+"Id": "101",
+
+"Status": "Started",
+
+},
+
+{
+
+"Id": "102",
+
+"Status": "Completed",
+
+},
+
+{
+
+"Id": "103",
+
+"Status": "InProgress",
+
+},
+
+{
+
+"Id": "104",
+
+},
+
+{}
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="Customers" inputpath="Customers"&gt;
+&lt; outputpath="Id" inputpath="Id" /&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="NotStartedCond" output="$vars"&gt;
+&lt;set-arg name="NotStarted" inputpath="NotStarted" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="StartedCond" output="$vars"&gt;
+&lt;set-arg name="Started" inputpath="Started" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="InProgressCond" output="$vars"&gt;
+&lt;set-arg name="InProgress" inputpath="InProgress" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="CompletedCond" output="$vars"&gt;
+&lt;set-arg name="Completed" inputpath="Completed" /&gt;
+&lt;set-arg name="X" input="X" /&gt;
+&lt;/exec-function&gt;
+&lt;choose&gt;
+&lt;when test="$vars/NotStartedCond"&gt;
+&lt; outputpath="Id" inputpath="Id" /&gt;
+&lt; outputpath="Status" input="NotStarted" /&gt;
+&lt;/when&gt;
+&lt;when test="$vars/StartedCond"&gt;
+&lt; outputpath="Status" input="Started" /&gt;
+&lt;/when&gt;
+&lt;when test="$vars/InProgressCond"&gt;
+&lt; outputpath="Id" inputpath="Id" /&gt;
+&lt; outputpath="Status" input="InProgress" /&gt;
+&lt;/when&gt;
+&lt;when test="$vars/CompletedCond"&gt;
+&lt; outputpath="Id" inputpath="Id" /&gt;
+&lt; outputpath="Status" input="Completed" /&gt;
+&lt;/when&gt;
+&lt;otherwise&gt;
+&lt; outputpath="Error-Message" input="Unknown element." output="$mapper-output"/&gt;
+&lt;/otherwise&gt;
+&lt;/choose&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="Independent_Object_Structure_Mapping">Independent Object Structure Mapping</h3>
+
+<p>This is an example of mapping an independent object structure.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"WorkOrder": [
+
+{
+
+"Address": [
+
+{
+
+"CustomerId": "1",
+
+"AddressId": "101",
+
+"PrimaryContactId": "12345",
+
+"SecondaryContactId": "123456"
+
+},
+
+{
+
+"CustomerId": "2",
+
+"AddressId": "102",
+
+"PrimaryContactId": "12346",
+
+"SecondaryContactId": "123457"
+
+}
+]
+
+},
+
+{
+
+"workOrderContacts": [
+
+{
+
+"CustomerId": "3",
+
+"AddressId": "103",
+
+"PrimaryContactId": "123459",
+
+"SecondaryContactId": "1234567"
+
+},
+
+{
+
+"CustomerId": "4",
+
+"AddressId": "104",
+
+"PrimaryContactId": "123458",
+
+"SecondaryContactId": "1234568"
+
+}
+]
+
+]
+
+}
+]
+
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"WorkOrderContacts": [
+
+{
+
+"Contacts": [
+
+{
+
+"PrimaryContactId": "12345",
+
+"SecondaryContactId": "123456"
+
+},
+
+{
+
+"PrimaryContactId": "12346",
+
+"SecondaryContactId": "1234567"
+
+}
+]
+
+},
+
+{
+
+"Contacts": [
+
+{
+
+"PrimaryContactId": "123459",
+
+"SecondaryContactId": "1234567"
+
+},
+
+{
+
+"PrimaryContactId": "123458",
+
+"SecondaryContactId": "1234568"
+
+}
+]
+
+}
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="WorkOrder" inputpath="WorkOrder"&gt;
+&lt;map outputpath="Address" inputpath="Address"&gt;
+&lt; outputpath="CustomerId" inputpath="CustomerId" /&gt;
+&lt; outputpath="AddressId" inputpath="AddressId" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;map outputpath="workOrderContacts" inputpath="WorkOrder"&gt;
+&lt;map outputpath="Contacts" inputpath="Address"&gt;
+&lt; outputpath="PrimaryContactId" inputpath="PrimaryContactId" /&gt;
+&lt; outputpath="SecondaryContactId" inputpath="SecondaryContactId" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="Looping_Filter">Looping Filter</h3>
+
+<p>This is an example of mapping a looping filter.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"Persons": [
+
+{
+
+"Id": "101",
+
+"Type": "EMP",
+
+"Name": "Employee1",
+
+},
+
+{
+
+"Id": "102",
+
+"Type": "EMP",
+
+"Name": "Customer1",
+
+},
+
+{
+
+"Id": "103",
+
+"Type": "EMP",
+
+"Name": "Employee2",
+
+},
+
+{
+
+"Id": "104",
+
+"Type": "EMP",
+
+"Name": "Customer2",
+
+}
+]
+
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"Employee": [
+
+{
+
+"Id": "101",
+
+"Name": "Employee1",
+
+},
+
+{
+
+"Id": "103",
+
+"Name": "Employee2",
+
+},
+
+{
+
+"Customer": [
+
+{
+
+"Id": "102",
+
+"Name": "Customer1",
+
+},
+
+{
+
+"Id": "104",
+
+"Name": "Customer2",
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="" inputpath="Persons">
+&lt;exec-function name="voltmx.logical:equal" outputpath="EMPCondition" output="$vars"&gt;
+&lt;set-arg name="Type" inputpath="Type" /&gt;
+&lt;set-arg name="EMP" input="EMP" />
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="CUSTCondition" output="$vars"&gt;
+&lt;set-arg name="Type" inputpath="Type" /&gt;
+&lt;set-arg name="CUST" input="CUST" />
+&lt;/exec-function&gt;
+&lt;choose&gt;
+&lt;when test="$vars/EMPCondition">
+&lt;map outputpath="Employee" inputpath=""&gt;
+&lt; outputpath="Id" inputpath="Id" /&gt;
+&lt;set-param outputpath="Name" inputpath="Name" /&gt;
+&lt;/map&gt;
+&lt;/when&gt;
+&lt;when test="$vars/CUSTCondition">
+&lt;map outputpath="Customer" inputpath=""&gt;
+&lt; outputpath="Id" inputpath="Id" /&gt;
+&lt;set-param outputpath="Name" inputpath="Name" /&gt;
+&lt;/map&gt;
+&lt;/when&gt;
+&lt;/choose&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="One_To_N_Split_Mapping">One To N Split Mapping</h3>
+
+<p>This is an example of one to N split mapping.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"WorkOrder": [
+
+{
+
+"WorkOrderId": "1",
+
+"AddressId": "101"
+
+"CustomerId": "201",
+
+"Contacts": [
+
+{
+
+"Id": "301"
+
+},
+
+{
+
+"Id": "401"
+
+}
+]
+
+},
+
+{
+
+"WorkOrderId": "3",
+
+"AddressId": ""
+
+"CustomerId": "601",
+
+"Contacts": [
+
+{
+
+"Id": "701"
+
+},
+
+{
+
+"Id": "801"
+
+},
+
+]
+
+},
+
+}{
+
+"WorkOrderId": "2",
+
+"AddressId": "102"
+
+"CustomerId": "202",
+
+"Contacts": [
+
+{
+
+"Id": "302"
+
+},
+
+{
+
+"Id": "402"
+
+}
+]
+
+}
+]
+
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"WorkOrder": [
+
+{
+
+"WorkOrderId": "1",
+
+"Address": [
+
+{
+
+"AddressId": "101",
+
+"AddressType": "ADDRESS"
+
+},
+
+{
+
+"AddressId": "201",
+
+"AddressType": "CUSTOMER"
+
+},
+
+{
+
+"AddressId": "301",
+
+"AddressType": "CONTACT"
+
+},
+
+{
+
+"AddressId": "401",
+
+"AddressType": "CONTACT"
+
+},
+
+]
+
+},
+
+{
+
+"WorkOrderId": "3",
+
+"Address": [
+
+{
+
+"AddressId": "601",
+
+"AddressType": "CUSTOMER"
+
+},
+
+{
+
+"AddressId": "201",
+
+"AddressType": "CONTACT"
+
+},
+
+{
+
+"AddressId": "301",
+
+"AddressType": "CONTACT"
+
+}
+]
+
+},
+
+{
+
+"WorkOrderId": "1",
+
+"Address": [
+
+{
+
+"AddressId": "102",
+
+"AddressType": "ADDRESS"
+
+},
+
+{
+
+"AddressId": "202",
+
+"AddressType": "CUSTOMER"
+
+},
+
+{
+
+"AddressId": "302",
+
+"AddressType": "CONTACT"
+
+},
+
+{
+
+"AddressId": "402",
+
+"AddressType": "CONTACT"
+
+}
+]
+
+}
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="WorkOrder" inputpath="WorkOrder"&gt;
+&lt; outputpath="WorkOrderId" inputpath="WorkOrderId" /&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="EmptyCondition" output="$vars"&gt;
+&lt;set-arg name="AddressId" inputpath="AddressId" /&gt;
+&lt;set-arg name="Empty" input="" /&gt;
+&lt;/exec-function&gt;
+&lt;choose&gt;
+&lt;when test="$vars/EmptyCondition"&gt;
+&lt;/when&gt;
+&lt;otherwise&gt;
+&lt;map outputpath="Address" inputpath=""&gt;
+&lt; outputpath="AddressId" inputpath="AddressId" /&gt;
+&lt; outputpath="AddressType" input="Address" /&gt;
+&lt;/map&gt;
+&lt;/otherwise&gt;
+&lt;/choose&gt;
+&lt;map outputpath="Address" inputpath=""&gt;
+&lt; outputpath="AddressId" inputpath="CustomerId" /&gt;
+&lt; outputpath="AddressType" input="Customer" /&gt;
+&lt;/map&gt;
+&lt;map outputpath="Address" inputpath="Contacts">
+&lt; outputpath="AddressId" inputpath="Id" /&gt;
+&lt; outputpath="AddressType" input="Contact" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+<h3 id="Optional_Input_Path">Optional Input Path</h3>
+
+<p>This is an example of mapping an optional input path .</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"WorkOrder": [
+
+{
+
+"Address": [
+
+{
+
+"CustomerId": "1",
+
+"AddressId": "101",
+
+"PrimaryContactId": "12345",
+
+"SecondaryContactId": "123457"
+
+},
+
+{
+
+"CustomerId": "2",
+
+"AddressId": "102",
+
+"PrimaryContactId": "12346",
+
+"SecondaryContactId": "123457"
+
+}
+]
+
+},
+
+{
+
+"Address": [
+
+{
+
+"CustomerId": "3",
+
+"AddressId": "103",
+
+"PrimaryContactId": "123459",
+
+"SecondaryContactId": "1234567"
+
+},
+
+{
+
+"CustomerId": "4",
+
+"AddressId": "104",
+
+"PrimaryContactId": "123458",
+
+"SecondaryContactId": "1234568"
+
+}
+]
+
+}
+]
+
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"Address": [
+
+{
+
+"CustomerId": "1",
+
+"AddressId": "101",
+
+"Contact": [
+
+{
+
+"PrimaryContactId": "12345",
+
+"SecondaryContactId": "123456"
+
+}
+]
+
+},
+
+{
+
+"CustomerId": "2",
+
+"AddressId": "102",
+
+"Contact": [
+
+{
+
+"PrimaryContactId": "12346",
+
+"SecondaryContactId": "123457"
+
+}
+]
+
+},
+
+{
+
+"CustomerId": "3",
+
+"AddressId": "103",
+
+"Contact": [
+
+{
+
+"PrimaryContactId": "123459",
+
+"SecondaryContactId": "1234567"
+
+}
+]
+
+},
+
+{
+
+"CustomerId": "4",
+
+"AddressId": "104",
+
+"Contact": [
+
+{
+
+"PrimaryContactId": "123458",
+
+"SecondaryContactId": "1234568"
+
+}
+]
+
+}
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="Address" inputpath="WorkOrder/Address"&gt;
+&lt; outputpath="CustomerId" inputpath="CustomerId" /&gt;
+&lt; outputpath="AddressId" inputpath="AddressId" /&gt;
+&lt;map outputpath="Contact" inputpath=""&gt;
+&lt; outputpath="PrimaryContactId" inputpath="PrimaryContactId" /&gt;
+&lt; outputpath="SecondaryContactId" inputpath="SecondaryContactId" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="Optional_Output_Path">Optional Output Path</h3>
+
+<p>This is an example of mapping an optional output path.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"WorkOrder": [
+
+{
+
+"CustomerId": "1",
+
+"Address": [
+
+{
+
+"AddressId": "101",
+
+"PrimaryContactId": "12345",
+
+"SecondaryContactId": "123456"
+
+},
+
+{
+
+"AddressId": "102",
+
+"PrimaryContactId": "12346",
+
+"SecondaryContactId": "123457"
+
+}
+]
+
+},
+
+{
+
+"CustomerId": "3",
+
+"Address": [
+
+{
+
+"AddressId": "103",
+
+"PrimaryContactId": "123459",
+
+"SecondaryContactId": "1234567"
+
+},
+
+{
+
+"AddressId": "104",
+
+"PrimaryContactId": "123458",
+
+"SecondaryContactId": "1234568"
+
+}
+]
+
+}
+]
+
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"Address": [
+
+{
+
+"CustomerId": "1",
+
+"AddressId": "102",
+
+"PrimaryContactId": "12346",
+
+"SecondaryContactId": "123457"
+
+},
+
+{
+
+"CustomerId": "3",
+
+"AddressId": "104",
+
+"PrimaryContactId": "123458",
+
+"SecondaryContactId": "1234568"
+
+}
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="Address" inputpath="WorkOrder"&gt;
+&lt; outputpath="CustomerId" inputpath="CustomerId" /&gt;
+&lt; outputpath="AddressId" inputpath="AddressId" /&gt;
+&lt;map outputpath="Contact" inputpath=""&gt;
+&lt; outputpath="PrimaryContactId" inputpath="PrimaryContactId" /&gt;
+&lt; outputpath="SecondaryContactId" inputpath="SecondaryContactId" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="Parent_Attributes_To_Different_Child_Objects">Parent Attributes To Different Child Objects</h3>
+
+<p>This is an example of mapping parent attributes to different child objects.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"EAM_CONTACTS": [
+
+{
+
+"ContactNo": "101",
+
+"EAM_CONT_ADDRESS": [
+
+{
+
+"Name1": "xyz"
+
+}
+],
+
+"EAM_CONT_MISC": [
+
+{
+
+"PREFERENCES": "PrefOne"
+
+}
+]
+
+},
+
+{
+
+"ContactNo": "102",
+
+"EAM_CONT_ADDRESS": [
+
+{
+
+"Name1": "abc"
+
+}
+],
+
+"EAM_CONT_MISC": [
+
+{
+
+"PREFERENCES": "PrefTwo"
+
+}
+]
+
+}
+]
+
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"Contact": [
+
+{
+
+"CONTACT_NO": "101",
+
+"FirstName": "xyz",
+
+"Preferences": "PrefOne"
+
+},
+
+{
+
+"CONTACT_NO": "102",
+
+"FirstName": "abc",
+
+"Preferences": "PrefTwo"
+
+}
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="Contact" inputpath="EAM_CONTACTS">
+&lt; outputpath="CONTACT_NO" inputpath="ContactNo" />
+&lt; outputpath="FirstName" inputpath="EAM_CONT_ADDRESS/Name1" />
+&lt; outputpath="Preferences" inputpath="EAM_CONT_MISC/PREFERENCES" />
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="Primary_To_Secondary_Mapping">Primary To Secondary Mapping</h3>
+
+<p>This is an example of primary to secondary mapping.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"WorkOrder": [
+
+{
+
+"Address": [
+
+{
+
+"CustomerId": "1",
+
+"AddressId": "101",
+
+"PrimaryContactId": "12345",
+
+"SecondaryContactId": "123456"
+
+},
+
+{
+
+"CustomerId": "2",
+
+"AddressId": "102",
+
+"PrimaryContactId": "12346",
+
+"SecondaryContactId": "123457"
+
+}
+]
+
+},
+
+{
+
+"Address": [
+
+{
+
+"CustomerId": "3",
+
+"AddressId": "103",
+
+"PrimaryContactId": "123459",
+
+"SecondaryContactId": "1234567"
+
+},
+
+{
+
+"CustomerId": "4",
+
+"AddressId": "104",
+
+"PrimaryContactId": "123458",
+
+"SecondaryContactId": "1234568"
+
+}
+]
+
+}
+]
+
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"Address": [
+
+{
+
+"CustomerId": "1",
+
+"AddressId": "101",
+
+"WorkOrderContacts": [
+
+{
+
+"PrimaryContactId": "12345",
+
+"SecondaryContactId": "123456"
+
+}
+]
+
+},
+
+{
+
+"CustomerId": "2",
+
+"AddressId": "102",
+
+"WorkOrderContacts": [
+
+{
+
+"PrimaryContactId": "12346",
+
+"SecondaryContactId": "123457"
+
+}
+]
+
+},
+
+{
+
+"CustomerId": "3",
+
+"AddressId": "103",
+
+"WorkOrderContacts": [
+
+{
+
+"PrimaryContactId": "123459",
+
+"SecondaryContactId": "1234567"
+
+}
+]
+
+},
+
+{
+
+"CustomerId": "4",
+
+"AddressId": "104",
+
+"WorkOrderContacts": [
+
+{
+
+"PrimaryContactId": "123458",
+
+"SecondaryContactId": "1234568"
+
+}
+]
+
+}
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="WorkOrder" inputpath="WorkOrder/Address"&gt;
+&lt; outputpath="CustomerId" inputpath="CustomerId" /&gt;
+&lt; outputpath="AddressId" inputpath="AddressId" /&gt;
+&lt;map outputpath="workOrderContacts" inputpath=""&gt;
+&lt; outputpath="PrimaryContactId" inputpath="PrimaryContactId" /&gt;
+&lt; outputpath="SecondaryContactId" inputpath="SecondaryContactId" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="Random_Mapping">Random Mapping</h3>
+
+<p>This is an example of mapping using the random function.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"A": [
+
+{
+
+"P1": "A-row1-p1"
+
+},
+
+{
+
+"P1": "A-row2-p1"
+
+}
+]
+
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"M": [
+
+{
+
+"Q1": "A-row1-p1"
+
+"Q2": ""
+
+},
+
+{
+
+"Q1": "A-row2-p1"
+
+"Q2": ""
+
+}
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="M" inputpath="A"&gt;
+&lt;exec-function name="voltmx.util:random" outputpath="random" output="$vars"&gt;
+&lt;/exec-function&gt;
+&lt; outputpath="Q1" inputpath="P1" /&gt;
+&lt; outputpath="Q2" inputpath="$vars/random" />
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="Reference_Only_Child_Object">Reference Only Child Object</h3>
+
+<p>This is an example of referencing only a child object.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"WorkOrder": [
+
+{
+
+"Address": [
+
+{
+
+"CustomerId": "1",
+
+"AddressId": "101",
+
+"PrimaryContactId": "12345",
+
+"SecondaryContactId": "123456"
+
+},
+
+{
+
+"CustomerId": "2",
+
+"AddressId": "102",
+
+"PrimaryContactId": "12346",
+
+"SecondaryContactId": "123457"
+
+}
+]
+
+},
+
+{
+
+"Address": [
+
+{
+
+"CustomerId": "3",
+
+"AddressId": "103",
+
+"PrimaryContactId": "123459",
+
+"SecondaryContactId": "1234567"
+
+},
+
+{
+
+"CustomerId": "4",
+
+"AddressId": "104",
+
+"PrimaryContactId": "123458",
+
+"SecondaryContactId": "1234568"
+
+}
+]
+
+}
+]
+
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"Address": [
+
+{
+
+"CustomerId": "1",
+
+"AddressId": "101",
+
+"PrimaryContactId": "12345",
+
+"SecondaryContactId": "123456"
+
+},
+
+{
+
+"CustomerId": "2",
+
+"AddressId": "102",
+
+"PrimaryContactId": "12346",
+
+"SecondaryContactId": "123457"
+
+},
+
+{
+
+"CustomerId": "3",
+
+"AddressId": "103",
+
+"PrimaryContactId": "123459",
+
+"SecondaryContactId": "1234567"
+
+},
+
+{
+
+"CustomerId": "4",
+
+"AddressId": "104",
+
+"PrimaryContactId": "123458",
+
+"SecondaryContactId": "1234568"
+
+}
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="Address" inputpath="WorkOrder/Address"&gt;
+&lt; outputpath="CustomerId" inputpath="CustomerId" /&gt;
+&lt; outputpath="AddressId" inputpath="AddressId" /&gt;
+&lt; outputpath="PrimaryContactId" inputpath="PrimaryContactId" /&gt;
+&lt; outputpath="SecondaryContactId" inputpath="SecondaryContactId" /&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="Reverse_Parent_Child">Reverse Parent Child</h3>
+
+<p>This is an example of reverse parent-child mapping.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"WorkOrder": [
+
+{
+
+"WorkOrderId": "1",
+
+"Name": "WorkOrder1",
+
+"Tasks": [
+
+{
+
+"TaskId": "101",
+
+"Name": "Task101"
+
+},
+
+{
+
+"TaskId": "102",
+
+"Name": "Task102"
+
+}
+]
+
+},
+
+{
+
+"WorkOrderId": "2",
+
+"Name": "WorkOrder2",
+
+"Tasks": [
+
+{
+
+"TaskId": "103",
+
+"Name": "Task103"
+
+},
+
+{
+
+"TaskId": "104",
+
+"Name": "Task104"
+
+}
+]
+
+}
+]
+
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"Tasks": [
+
+{
+
+"TaskId": "101",
+
+"Name": "Task101",
+
+"WorkOrder": [
+
+{
+
+"WorkOrderId": "1",
+
+"Name": "WorkOrder1"
+
+},
+
+]
+
+},
+
+{
+
+"TaskId": "102",
+
+"Name": "Task102",
+
+"WorkOrder": [
+
+{
+
+"WorkOrderId": "1",
+
+"Name": "WorkOrder1"
+
+},
+
+]
+
+},
+
+{
+
+"TaskId": "103",
+
+"Name": "Task103",
+
+"WorkOrder": [
+
+{
+
+"WorkOrderId": "2",
+
+"Name": "WorkOrder2"
+
+},
+
+]
+
+},
+
+{
+
+"TaskId": "104",
+
+"Name": "Task104",
+
+"WorkOrder": [
+
+{
+
+"WorkOrderId": "2",
+
+"Name": "WorkOrder2"
+
+}
+]
+
+}
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="Tasks" inputpath="WorkOrder/Tasks"&gt;
+&lt; outputpath="TaskId" inputpath="TaskId" /&gt;
+&lt;set-param outputpath="Name" inputpath="Name" /&gt;
+&lt;map outputpath="WorkOrder" inputpath=".."&gt;
+&lt; outputpath="WorkOrderId" inputpath="WorkOrderId" /&gt;
+&lt;set-param outputpath="Name" inputpath="Name" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="Simple_Mapping_List">Simple Mapping List</h3>
+
+<p>This is an example of a simple mapping list.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"A": [
+
+{
+
+"P1": "A-row1-p1",
+
+"P2": "A-row1-p2"
+
+},
+
+{
+
+"P1": "A-row2-p1",
+
+"P2": "A-row2-p2"
+
+}
+]
+
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"M": [
+
+{
+
+"Q1": "A-row1-p1",
+
+"Q2": "A-row1-p2"
+
+},
+
+{
+
+"Q1": "A-row2-p1",
+
+"Q2": "A-row2-p2"
+
+}
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="M" inputpath="A"&gt;
+&lt; outputpath="Q1" inputpath="P1" /&gt;
+&lt; outputpath="Q2" inputpath="P2" /&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="Simple_Mapping_List_With_One_Row">Simple Mapping List With One Row</h3>
+
+<p>This is an example of a simple mapping list with one row.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"A": [
+
+{
+
+"P1": "A-row1-p1",
+
+"P2": "A-row1-p2"
+
+}
+]
+
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"M": [
+
+{
+
+"Q1": "A-row1-p1",
+
+"Q2": "A-row1-p2"
+
+}
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="M" inputpath="A"&gt;
+&lt; outputpath="Q1" inputpath="P1" /&gt;
+&lt; outputpath="Q2" inputpath="P2" /&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="Simple_Split_Mapping">Simple Split Mapping</h3>
+
+<p>This is an example of simple split mapping using the substringbefore and substringafter functions.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"A": [
+
+{
+
+"Name": "First Last"
+
+}
+]
+
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"A": [
+
+{
+
+"FirstName": "First"
+
+"LastName": "Last"
+
+}
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="A" inputpath="A"&gt;
+&lt;exec-function name="voltmx.string:substringBefore" outputpath="NameSplitBeforeExpr" output="$vars"&gt;
+&lt;set-arg name="Name" inputpath="Name"/&gt;
+&lt;set-arg name="Separator" input=" " /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.string:substringAfter" outputpath="NameSplitAfterExpr" output="$vars"&gt;
+&lt;set-arg name="Name" inputpath="Name"/&gt;
+&lt;set-arg name="Separator" input=" " /&gt;
+&lt;/exec-function&gt;
+&lt; outputpath="FirstName" inputpath="$vars/NameSplitBeforeExpr" /&gt;
+&lt; outputpath="LastName" inputpath="$vars/NameSplitAfterExpr" /&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="Split_Table">Split Table</h3>
+
+<p>This is an example of split table mapping.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"Customer": [
+
+{
+
+"CustomerInfo": "Customer1",
+
+"AddressID": "Address1"
+
+},
+
+{
+
+"CustomerInfo": "Customer2",
+
+"AddressID": "Address2"
+
+}
+]
+
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"Customer": [
+
+{
+
+"CustomerInfo": "Customer1"
+
+},
+
+{
+
+"CustomerInfo": "Customer2"
+
+}
+],
+
+"CustomerAddress": [
+
+{
+
+"AddressID": "Address1"
+
+},
+
+{
+
+"AddressID": "Address2"
+
+}
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="Customer" inputpath="Customer">
+&lt; outputpath="CustomerInfo" inputpath="CustomerInfo" />
+&lt;/map&gt;
+&lt;map outputpath="CustomerAddress" inputpath="Customer">
+&lt; outputpath="AddressID" inputpath="AddressId" /&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="Split_Table_Filter_Mapping">Split Table Filter Mapping</h3>
+
+<p>This is an example of split table filter mapping.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"WorkOrder": [
+
+{
+
+"Id": "1",
+
+"WorkOrderData": [
+
+{
+
+"Id": "101",
+
+"Type": "Customer",
+
+"TypeId": "1001",
+
+"Name": "Customer-1"
+
+},
+
+{
+
+"Id": "101",
+
+"Type": "Customer",
+
+"TypeId": "1001",
+
+"Name": "Customer-1"
+
+},
+
+{
+
+"Id": "101",
+
+"Type": "Customer",
+
+"TypeId": "1001",
+
+"Name": "Customer-1"
+
+},
+
+{
+
+"Id": "101",
+
+"Type": "Customer",
+
+"TypeId": "1001",
+
+"Name": "Customer-1"
+
+},
+
+]
+
+},
+
+{
+
+"Id": "2",
+
+"WorkOrderData": [
+
+{
+
+"Id": "201",
+
+"Type": "Customer",
+
+"TypeId": "2001",
+
+"Name": "Customer-2"
+
+},
+
+{
+
+"Id": "202",
+
+"Type": "Address",
+
+"TypeId": "2002",
+
+"Name": "Address-2"
+
+},
+
+{
+
+"Id": "203",
+
+"Type": "Contact",
+
+"TypeId": "2003",
+
+"Name": "Contact-2-1"
+
+},
+
+{
+
+"Id": "204",
+
+"Type": "Contact",
+
+"TypeId": "2004",
+
+"Name": "Contact-2-2"
+
+}
+]
+
+}
+]
+
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"WorkOrder": [
+
+{
+
+"WorkOrderId": "1",
+
+"CustomerId": "101",
+
+"AddressId": "102",
+
+"Contacts": [
+
+{
+
+"ContactId": "103",
+
+"Name": "Contact-1-1"
+
+},
+
+{
+
+"ContactId": "104",
+
+"Name": "Contact-1-2"
+
+}
+]
+
+},
+
+{
+
+"WorkOrderId": "2",
+
+"CustomerId": "201",
+
+"AddressId": "202",
+
+"Contacts": [
+
+{
+
+"ContactId": "203",
+
+"Name": "Contact-2-1"
+
+},
+
+{
+
+"ContactId": "204",
+
+"Name": "Contact-2-2"
+
+}
+]
+
+}
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="WorkOrder" inputpath="WorkOrder"&gt;
+&lt; outputpath="WorkOrderId" inputpath="Id" /&gt;
+&lt;map outputpath="" inputpath="WorkOrderData">
+&lt;exec-function name="voltmx.logical:equal" outputpath="CustomerCondition" output="$vars"&gt;
+&lt;set-arg name="Type" inputpath="Type" /&gt;
+&lt;set-arg name="Customer" input="Customer" /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="AddressCondition" output="$vars"&gt;
+&lt;set-arg name="Type" inputpath="Type" /&gt;
+&lt;set-arg name="Address" input="Address" /&gt;
+&lt;/exec-function&gt;
+&lt;exec-function name="voltmx.logical:equal" outputpath="ContactCondition" output="$vars"&gt;
+&lt;set-arg name="Type" inputpath="Type" /&gt;
+&lt;set-arg name="Contact" input="Contact" /&gt;
+&lt;/exec-function&gt;
+&lt;choose&gt;
+&lt;when test="$vars/CustomerCondition">
+&lt; outputpath="CustomerId" inputpath="Id" /&gt;
+&lt;/when&gt;
+&lt;when test="$vars/AddressCondition">
+&lt; outputpath="AddressId" inputpath="Id" /&gt;
+&lt;/when&gt;
+&lt;when test="$vars/ContactCondition">
+&lt;map outputpath="Contacts" inputpath=""&gt;
+&lt; outputpath="ContactId" inputpath="Id" /&gt;
+&lt;set-param outputpath="Name" inputpath="Name" /&gt;
+&lt;/map&gt;
+&lt;/when&gt;
+&lt;/choose&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="Static_Lookup">Static Lookup</h3>
+
+<p>This is an example of static lookup mapping.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"WorkOrder": [
+
+{
+
+"Id": "101",
+
+"Status": "Completed"
+
+},
+
+{
+
+"Id": "102",
+
+"Status": "InProgress"
+
+}
+]
+
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"WorkOrder": [
+
+{
+
+"Id": "101",
+
+"Status": "DONE"
+
+},
+
+{
+
+"Id": "102",
+
+"Status": "INCOMPLETE"
+
+}
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="WorkOrder" inputpath="WorkOrder"&gt;
+&lt;variables&gt;
+&lt;variable name="statusmap" evalType="map" value="{&quot;Completed&quot;:&quot;DONE&quot;, &quot;InProgress&quot;:&quot;INCOMPLETE&quot;}" /&gt;
+&lt;/variables&gt;
+&lt; outputpath="Id" inputpath="WorkOrder/Id" /&gt;
+&lt; outputpath="Status"
+inputpath="$vars.statusmap.get($content.get('WorkOrder').getValue('Status').getValue())" /&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="Two_Childs_To_Same_Entity">Two Childs To Same Entity</h3>
+
+<p>This is an example of mapping two child objects to the same entity.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"EAM_WO_OPERATION": [
+
+{
+
+"DUR_NOR_UNIT": "H",
+
+"ROUTING_NUM": "1000000082",
+
+"START_DATE_TIME": "20151004082847",
+
+"DURATION_NORMAL": "4.0",
+
+"CONF_END_TIME": "093218",
+
+"STATUS_TXT": "CNF REL",
+
+"BASIC_START_DAT": "20151004",
+
+"QUANTITY": ".000",
+
+"FORECAST_FIN_TIM": "000000",
+
+"WORK_UNIT": "H",
+
+"CONTROL_KEY": "SM01",
+
+"USER_STATUS": "E0005",
+
+"OPERATION_TXT": "Replace valve",
+
+"PRICE": ".00",
+
+"PLANT": "8000",
+
+"FORCAST_FINISH": "00000000",
+
+"WORK_ACTIVITY": "4.0",
+
+"USERSTATUS_TXT": "FIN",
+
+"CONF_END_DATE": "20151004",
+
+"OBJ_ID_RESOURCE": "10000198",
+
+"LOCATION": "000000002358",
+
+"OPERATION": "0010",
+
+"TIMESTAMP": "20151009135631",
+
+"CONF_START_TIME": "082847",
+
+"USR04": ".000",
+
+"USR05": ".000",
+
+"USR06": ".000",
+
+"USR07": ".000",
+
+"USR08": "00000000",
+
+"USR09": "00000000",
+
+"GENERAL_COUNTER": "1",
+
+"STAT_PROF": "EAM_WOPE",
+
+"INTERNAL_NUMBER": "000004000121",
+
+"BASIC_START_TIM": "183000",
+
+"ACTUAL_WORK": "1.1",
+
+"ORDER_NUM": "000004000121",
+
+"TIME_ZONE": "UTC",
+
+"WORK_CENTER": "MAINT01",
+
+"FORECAST_DAT_TIM": "00000000000000",
+
+"HOURLY_RATE": ".000",
+
+"CONF_START_DATE": "20151004",
+
+"END_DATE_TIME": "20151004093218",
+
+"USER_NAME": "EAM00000",
+
+"ACTUAL_AMOUNT": ".000",
+
+"CALC_KEY": "0",
+
+"EAM_WO_MAT": {
+
+"MATERIAL_NUM": "A100",
+
+"RELATIONS_INTVAL": ".0",
+
+"INTERNAL_COM_ITM": "20",
+
+"SHORT_TXT_TASK": "A1 Grand Prix super sprint BMX Bike",
+
+"RESERVE_QUAN": ".000",
+
+"COMP_ITEM_NUM": "0000040001210020",
+
+"BASE_UNIT": "EA",
+
+"VSI_SIZE1": ".000",
+
+"VSI_SIZE2": ".000",
+
+"VSI_SIZE3": ".000",
+
+"VSI_NO": ".000",
+
+"LIST_PRICE": ".00",
+
+"REQUIRE_QUAN": "6.000",
+
+"ACTUAL_QUAN": ".000",
+
+"MAT_TYPE_TEXT": "Finished Product",
+
+"MATERIAL_TYPE": "FERT",
+
+"ITEM_CATEGORY": "L",
+
+"ORIGINAL_QUAN": ".000",
+
+"ORDER_NUM": "000004000121",
+
+"VSI_QTY": ".000",
+
+"RESERVATION_NUM": "591",
+
+"ITEM_NUMBER": "5",
+
+"OPERATION": "0010",
+
+"TIMESTAMP": "20151009135631",
+
+"ACTUAL_AMOUNT": ".000",
+
+"BOM_ITEM_NUM": "0020"
+
+},
+
+"EAM_WO_PRT": {
+
+"MATERIAL_NUM": "HAMMER",
+
+"ORDER_NUM": "000004000121",
+
+"OPERATION": "0010",
+
+"TOT_PLAN_QUAN": ".000",
+
+"SHORT_TXT_TASK": "Hammer Tool",
+
+"INTERNAL_COM_ITM": "10",
+
+"TIMESTAMP": "20151005165617",
+
+"PRT_CATEGORY": "R",
+
+"COMP_ITEM_NUM": "00000400012100100010"
+
+}
+
+}
+]
+
+}</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"Task": [
+
+{
+
+"Location_id": "000000002358",
+
+"Type_id": "SM01",
+
+"Plant_id": "8000",
+
+"Code": "000004000121",
+
+"WorkOrderMaterial": [
+
+{
+
+"type": "M",
+
+"Material": "A100",
+
+"Order": "000004000121",
+
+"Description": "A1 Grand Prix super sprint BMX Bike",
+
+"ItemNumber": "0000040001210020",
+
+"Item": "L"
+
+},
+
+{
+
+"type": "P",
+
+"Material": "HAMMER",
+
+"Order": "000004000121",
+
+"Description": "Hammer Tool",
+
+"ItemNumber": "00000400012100100010",
+
+"Item": "R"
+
+}
+]
+
+}
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="Task" inputpath="EAM_WO_OPERATION">
+&lt; outputpath="Location_id" inputpath="LOCATION" />
+&lt; outputpath="Type_id" inputpath="CONTROL_KEY" />
+&lt; outputpath="Plant_id" inputpath="PLANT" />
+&lt; outputpath="Code" inputpath="INTERNAL_NUMBER" />
+&lt;map outputpath="WorkOrderMaterial" inputpath="EAM_WO_MAT">
+&lt; outputpath="type" input="M" />
+&lt; outputpath="Material" inputpath="MATERIAL_NUM" />
+&lt; outputpath="Order" inputpath="ORDER_NUM" />
+&lt; outputpath="Description" inputpath="SHORT_TXT_TASK" />
+&lt; outputpath="ItemNumber" inputpath="COMP_ITEM_NUM" />
+&lt; outputpath="Item" inputpath="ITEM_CATEGORY" />
+&lt;/map&gt;
+&lt;map outputpath="WorkOrderMaterial" inputpath="EAM_WO_PRT">
+&lt; outputpath="type" input="P" />
+&lt; outputpath="Material" inputpath="MATERIAL_NUM" />
+&lt; outputpath="Order" inputpath="ORDER_NUM" />
+&lt; outputpath="Description" inputpath="SHORT_TXT_TASK" />
+&lt; outputpath="ItemNumber" inputpath="COMP_ITEM_NUM" />
+&lt; outputpath="Item" inputpath="PRT_CATEGORY" />
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="EAM_Notification_Mapping">EAM Notification Mapping</h3>
+
+<p>This is an example of enterprise asset management (EAM) notification mapping.</p>
+<p><b>Input</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"EAM_NOTIF": [
+
+{
+
+"NOTIF_NUM": "3A52D58AC4D94C5B935FE9D8CCC8ADC7",
+
+"NOTIF_TYPE": "S2",
+
+"SHORT_TEXT": "new test notification",
+
+"NOTIF_DATE": "20150812",
+
+"NOTIF_TIME": "071728",
+
+"FUNC_LOCATION": "1000-100-AA",
+
+"FLOCN_DESC": "Engineering Workshop - Auto",
+
+"EQUIP_NUM": "10000001",
+
+"TECH_OBJ_DESC": "Toyota Hilux: Reg ABC-123",
+
+"CATALOG_PROFILE": "000000001",
+
+"PRIORITY": "4",
+
+"INTERNAL_NUMBER": "000300000561",
+
+"WRRNTY_START_DT": "00000000",
+
+"WRRNTY_END_DT": "00000000",
+
+"MANU_WRRNTY_STDT": "00000000",
+
+"MANU_WRRNTY_ENDT": "00000000",
+
+"WORK_CENTER": "MAINT01",
+
+"WC_SHORT_DESC": "General Maintenance",
+
+"SYS_STATUS": "OSNO",
+
+"TIME_ZONE": "UTC",
+
+"PLANPLANT": "8000",
+
+"LOC_ACC": "000000003874",
+
+"STRMLFNDATE": "00000000",
+
+"ENDMLFNDATE": "00000000",
+
+"STRMLFNTIME": "000000",
+
+"ENDMLFNTIME": "000000",
+
+"DOWNTIME": "0.000000000E+00",
+
+"UNIT": "H",
+
+"PLANGROUP": "010",
+
+"CREATED_BY": "CPIC_VTI",
+
+"CREATED_ON": "20150812",
+
+"CHANGED_ON": "00000000",
+
+"DESSTDATE": "20150814",
+
+"DESSTTIME": "071728",
+
+"DESENDDATE": "20150817",
+
+"DESENDTM": "071728",
+
+"CUST_NO": "6",
+
+"OBJECT_NO": "00000000",
+
+"COMPTIME": "000000",
+
+"PRILANG": "E",
+
+"REFDATE": "20150812",
+
+"REFTIME": "071729",
+
+"PURCH_DATE": "00000000",
+
+"DIVISION": "10",
+
+"SALES_ORG": "1000",
+
+"DISTR_CHAN": "10",
+
+"CHANGED_AT": "000000",
+
+"CREATED_AT": "124729",
+
+"PM_WKCTR": "10000000",
+
+"NOTIFTMEZ": "INDIA",
+
+"MAINTPLANT": "8000",
+
+"BUS_AREA": "8000",
+
+"CO_AREA": "9999",
+
+"COMP_CODE": "8000",
+
+"SALES_ORG_LOC": "1000",
+
+"DIVISION_LOC": "10",
+
+"DIST_CHAN_LOC": "10",
+
+"ADDR_NO_LOC": "23380",
+
+"TIMESTAMP": "20150812124739",
+
+"EAM_NOTIFICATION_ADDRESS": [
+
+{
+
+"DOC_NUM": "3A52D58AC4D94C5B935FE9D8CCC8ADC7",
+
+"ADDR_TYPE": "AG",
+
+"ADDR_TYPE_ID": "0000000006",
+
+"PARTNER_TYPE": "KU",
+
+"ADDRESS_ID": "0000022490",
+
+"TIMESTAMP": "20150812124739",
+
+"EAM_ADDRESS": {
+
+"ADDRNO": "0000022490",
+
+"NAME1": "FLORIDA CANCER",
+
+"STREET": "150 Blackburn Rd",
+
+"CITY": "Clayton North",
+
+"POST_CODE": "3168",
+
+"COUNTRY": "AU",
+
+"PHONE1": "545453566",
+
+"TIMESTAMP": "20150921112449"
+
+}
+
+},
+
+{
+
+"DOC_NUM": "000010001370",
+
+"ADDR_TYPE": "NTF",
+
+"ADDR_TYPE_ID": "000010001370",
+
+"ADDRESS_ID": "0000024160",
+
+"TIMESTAMP": "20150401204100",
+
+"EAM_ADDRESS": {
+
+"ADDRNO": "0000024160",
+
+"HOUSE_NUM": "35",
+
+"STREET": "DUNLOP ROAD",
+
+"CITY": "MULGRAVE",
+
+"REGION": "VIC",
+
+"POST_CODE": "3170",
+
+"COUNTRY": "AU",
+
+"LATITUDE": "37.200000000000",
+
+"LONGITUDE": "49.400000000000",
+
+"PHONE1": "545453577",
+
+"PHONE2": "040323223232-124",
+
+"MOBILE1": "967631273133",
+
+"MOBILE2": "931313131124",
+
+"FAX": "0401231312314",
+
+"EMAIL": "CUSTOMER@voltmx.COM",
+
+"TIMESTAMP": "20150708153054"
+
+}
+
+},
+
+{
+
+"DOC_NUM": "3A52D58AC4D94C5B935FE9D8CCC8ADC7",
+
+"ADDR_TYPE": "CON",
+
+"ADDR_TYPE_ID": "0000000006",
+
+"PARTNER_TYPE": "SA",
+
+"ADDRESS_ID": "0000022490",
+
+"TIMESTAMP": "20150812124739",
+
+"EAM_ADDRESS": {
+
+"ADDRNO": "0000022490",
+
+"NAME1": "FLORIDA CANCER",
+
+"STREET": "150 Blackburn Rd",
+
+"CITY": "Clayton North",
+
+"POST_CODE": "3168",
+
+"COUNTRY": "AU",
+
+"PHONE1": "545453566",
+
+"TIMESTAMP": "20150921112449"
+
+}
+
+},
+
+{
+
+"DOC_NUM": "3A52D58AC4D94C5B935FE9D8CCC8ADC7",
+
+"ADDR_TYPE": "CON",
+
+"ADDR_TYPE_ID": "0000000006",
+
+"PARTNER_TYPE": "RR",
+
+"ADDRESS_ID": "0000022490",
+
+"TIMESTAMP": "20150812124739",
+
+"EAM_ADDRESS": {
+
+"ADDRNO": "0000022490",
+
+"NAME1": "FLORIDA CANCER",
+
+"STREET": "150 Blackburn Rd",
+
+"CITY": "Clayton North",
+
+"POST_CODE": "3168",
+
+"COUNTRY": "AU",
+
+"PHONE1": "545453566",
+
+"TIMESTAMP": "20150921112449"
+
+}
+
+}
+]
+
+},
+
+{
+
+"NOTIF_NUM": "3A52D58AC4D94C5B935FE9D8CCC8ADC8",
+
+"NOTIF_TYPE": "S2",
+
+"SHORT_TEXT": "new test notification",
+
+"NOTIF_DATE": "20150812",
+
+"NOTIF_TIME": "071728",
+
+"FUNC_LOCATION": "1000-100-AA",
+
+"FLOCN_DESC": "Engineering Workshop - Auto",
+
+"EQUIP_NUM": "10000001",
+
+"TECH_OBJ_DESC": "Toyota Hilux: Reg ABC-123",
+
+"CATALOG_PROFILE": "000000001",
+
+"PRIORITY": "4",
+
+"INTERNAL_NUMBER": "000300000561",
+
+"WRRNTY_START_DT": "00000000",
+
+"WRRNTY_END_DT": "00000000",
+
+"MANU_WRRNTY_STDT": "00000000",
+
+"MANU_WRRNTY_ENDT": "00000000",
+
+"WORK_CENTER": "MAINT01",
+
+"WC_SHORT_DESC": "General Maintenance",
+
+"SYS_STATUS": "OSNO",
+
+"TIME_ZONE": "UTC",
+
+"PLANPLANT": "8000",
+
+"LOC_ACC": "000000003874",
+
+"STRMLFNDATE": "00000000",
+
+"ENDMLFNDATE": "00000000",
+
+"STRMLFNTIME": "000000",
+
+"ENDMLFNTIME": "000000",
+
+"DOWNTIME": "0.000000000E+00",
+
+"UNIT": "H",
+
+"PLANGROUP": "010",
+
+"CREATED_BY": "CPIC_VTI",
+
+"CREATED_ON": "20150812",
+
+"CHANGED_ON": "00000000",
+
+"DESSTDATE": "20150814",
+
+"DESSTTIME": "071728",
+
+"DESENDDATE": "20150817",
+
+"DESENDTM": "071728",
+
+"CUST_NO": "6",
+
+"OBJECT_NO": "00000000",
+
+"COMPTIME": "000000",
+
+"PRILANG": "E",
+
+"REFDATE": "20150812",
+
+"REFTIME": "071729",
+
+"PURCH_DATE": "00000000",
+
+"DIVISION": "10",
+
+"SALES_ORG": "1000",
+
+"DISTR_CHAN": "10",
+
+"CHANGED_AT": "000000",
+
+"CREATED_AT": "124729",
+
+"PM_WKCTR": "10000000",
+
+"NOTIFTMEZ": "INDIA",
+
+"MAINTPLANT": "8000",
+
+"BUS_AREA": "8000",
+
+"CO_AREA": "9999",
+
+"COMP_CODE": "8000",
+
+"SALES_ORG_LOC": "1000",
+
+"DIVISION_LOC": "10",
+
+"DIST_CHAN_LOC": "10",
+
+"ADDR_NO_LOC": "23380",
+
+"TIMESTAMP": "20150812124739",
+
+"EAM_NOTIFICATION_ADDRESS": [
+
+{
+
+"DOC_NUM": "3A52D58AC4D94C5B935FE9D8CCC8ADC8",
+
+"ADDR_TYPE": "AG",
+
+"ADDR_TYPE_ID": "0000000007",
+
+"PARTNER_TYPE": "KU",
+
+"ADDRESS_ID": "0000022490",
+
+"TIMESTAMP": "20150812124739",
+
+"EAM_ADDRESS": {
+
+"ADDRNO": "0000022490",
+
+"NAME1": "FLORIDA CANCER",
+
+"STREET": "150 Blackburn Rd",
+
+"CITY": "Clayton North",
+
+"POST_CODE": "3168",
+
+"COUNTRY": "AU",
+
+"PHONE1": "545453566",
+
+"TIMESTAMP": "20150921112449"
+
+}
+
+},
+
+{
+
+"DOC_NUM": "000010001370",
+
+"ADDR_TYPE": "NTF",
+
+"ADDR_TYPE_ID": "000010001371",
+
+"ADDRESS_ID": "0000024160",
+
+"TIMESTAMP": "20150401204100",
+
+"EAM_ADDRESS": {
+
+"ADDRNO": "0000024160",
+
+"HOUSE_NUM": "35",
+
+"STREET": "DUNLOP ROAD",
+
+"CITY": "MULGRAVE",
+
+"REGION": "VIC",
+
+"POST_CODE": "3170",
+
+"COUNTRY": "AU",
+
+"LATITUDE": "37.200000000000",
+
+"LONGITUDE": "49.400000000000",
+
+"PHONE1": "545453577",
+
+"PHONE2": "040323223232-124",
+
+"MOBILE1": "967631273133",
+
+"MOBILE2": "931313131124",
+
+"FAX": "0401231312314",
+
+"EMAIL": "CUSTOMER@voltmx.COM",
+
+"TIMESTAMP": "20150708153054"
+
+}
+
+},
+
+{
+
+"DOC_NUM": "3A52D58AC4D94C5B935FE9D8CCC8ADC8",
+
+"ADDR_TYPE": "CON",
+
+"ADDR_TYPE_ID": "0000000006",
+
+"PARTNER_TYPE": "SA1",
+
+"ADDRESS_ID": "0000022490",
+
+"TIMESTAMP": "20150812124739",
+
+"EAM_ADDRESS": {
+
+"ADDRNO": "0000022490",
+
+"NAME1": "FLORIDA CANCER",
+
+"STREET": "150 Blackburn Rd",
+
+"CITY": "Clayton North",
+
+"POST_CODE": "3168",
+
+"COUNTRY": "AU",
+
+"PHONE1": "545453566",
+
+"TIMESTAMP": "20150921112449"
+
+}
+
+},
+
+{
+
+"DOC_NUM": "3A52D58AC4D94C5B935FE9D8CCC8ADC8",
+
+"ADDR_TYPE": "CON",
+
+"ADDR_TYPE_ID": "0000000006",
+
+"PARTNER_TYPE": "RR1",
+
+"ADDRESS_ID": "0000022490",
+
+"TIMESTAMP": "20150812124739",
+
+"EAM_ADDRESS": {
+
+"ADDRNO": "0000022490",
+
+"NAME1": "FLORIDA CANCER",
+
+"STREET": "150 Blackburn Rd",
+
+"CITY": "Clayton North",
+
+"POST_CODE": "3168",
+
+"COUNTRY": "AU",
+
+"PHONE1": "545453566",
+
+"TIMESTAMP": "20150921112449"
+
+}
+
+}
+]
+
+},
+
+{
+
+"NOTIF_NUM": "33A52D58AC4D94C5B935FE9D8CCC8ADC7",
+
+"NOTIF_TYPE": "S2",
+
+"SHORT_TEXT": "new test notification",
+
+"NOTIF_DATE": "20150812",
+
+"NOTIF_TIME": "071728",
+
+"FUNC_LOCATION": "1000-100-AA",
+
+"FLOCN_DESC": "Engineering Workshop - Auto",
+
+"EQUIP_NUM": "10000001",
+
+"TECH_OBJ_DESC": "Toyota Hilux: Reg ABC-123",
+
+"CATALOG_PROFILE": "000000001",
+
+"PRIORITY": "4",
+
+"INTERNAL_NUMBER": "000300000561",
+
+"WRRNTY_START_DT": "00000000",
+
+"WRRNTY_END_DT": "00000000",
+
+"MANU_WRRNTY_STDT": "00000000",
+
+"MANU_WRRNTY_ENDT": "00000000",
+
+"WORK_CENTER": "MAINT01",
+
+"WC_SHORT_DESC": "General Maintenance",
+
+"SYS_STATUS": "OSNO",
+
+"TIME_ZONE": "UTC",
+
+"PLANPLANT": "8000",
+
+"LOC_ACC": "000000003874",
+
+"STRMLFNDATE": "00000000",
+
+"ENDMLFNDATE": "00000000",
+
+"STRMLFNTIME": "000000",
+
+"ENDMLFNTIME": "000000",
+
+"DOWNTIME": "0.000000000E+00",
+
+"UNIT": "H",
+
+"PLANGROUP": "010",
+
+"CREATED_BY": "CPIC_VTI",
+
+"CREATED_ON": "20150812",
+
+"CHANGED_ON": "00000000",
+
+"DESSTDATE": "20150814",
+
+"DESSTTIME": "071728",
+
+"DESENDDATE": "20150817",
+
+"DESENDTM": "071728",
+
+"CUST_NO": "6",
+
+"OBJECT_NO": "00000000",
+
+"COMPTIME": "000000",
+
+"PRILANG": "E",
+
+"REFDATE": "20150812",
+
+"REFTIME": "071729",
+
+"PURCH_DATE": "00000000",
+
+"DIVISION": "10",
+
+"SALES_ORG": "1000",
+
+"DISTR_CHAN": "10",
+
+"CHANGED_AT": "000000",
+
+"CREATED_AT": "124729",
+
+"PM_WKCTR": "10000000",
+
+"NOTIFTMEZ": "INDIA",
+
+"MAINTPLANT": "8000",
+
+"BUS_AREA": "8000",
+
+"CO_AREA": "9999",
+
+"COMP_CODE": "8000",
+
+"SALES_ORG_LOC": "1000",
+
+"DIVISION_LOC": "10",
+
+"DIST_CHAN_LOC": "10",
+
+"ADDR_NO_LOC": "23380",
+
+"TIMESTAMP": "20150812124739",
+
+"EAM_NOTIFICATION_ADDRESS": [
+
+{
+
+"DOC_NUM": "3A52D58AC4D94C5B935FE9D8CCC8ADC7",
+
+"ADDR_TYPE": "AG",
+
+"ADDR_TYPE_ID": "0000000006",
+
+"PARTNER_TYPE": "KU",
+
+"ADDRESS_ID": "0000022490",
+
+"TIMESTAMP": "20150812124739",
+
+"EAM_ADDRESS": {
+
+"ADDRNO": "0000022490",
+
+"NAME1": "FLORIDA CANCER",
+
+"STREET": "150 Blackburn Rd",
+
+"CITY": "Clayton North",
+
+"POST_CODE": "3168",
+
+"COUNTRY": "AU",
+
+"PHONE1": "545453566",
+
+"TIMESTAMP": "20150921112449"
+
+}
+
+},
+
+{
+
+"DOC_NUM": "000010001370",
+
+"ADDR_TYPE": "NTF",
+
+"ADDR_TYPE_ID": "000010001370",
+
+"ADDRESS_ID": "0000024160",
+
+"TIMESTAMP": "20150401204100",
+
+"EAM_ADDRESS": {
+
+"ADDRNO": "0000024160",
+
+"HOUSE_NUM": "35",
+
+"STREET": "DUNLOP ROAD",
+
+"CITY": "MULGRAVE",
+
+"REGION": "VIC",
+
+"POST_CODE": "3170",
+
+"COUNTRY": "AU",
+
+"LATITUDE": "37.200000000000",
+
+"LONGITUDE": "49.400000000000",
+
+"PHONE1": "545453577",
+
+"PHONE2": "040323223232-124",
+
+"MOBILE1": "967631273133",
+
+"MOBILE2": "931313131124",
+
+"FAX": "0401231312314",
+
+"EMAIL": "CUSTOMER@voltmx.COM",
+
+"TIMESTAMP": "20150708153054"
+
+}
+
+},
+
+{
+
+"DOC_NUM": "3A52D58AC4D94C5B935FE9D8CCC8ADC7",
+
+"ADDR_TYPE": "CON",
+
+"ADDR_TYPE_ID": "0000000006",
+
+"PARTNER_TYPE": "SA",
+
+"ADDRESS_ID": "0000022490",
+
+"TIMESTAMP": "20150812124739",
+
+"EAM_ADDRESS": {
+
+"ADDRNO": "0000022490",
+
+"NAME1": "FLORIDA CANCER",
+
+"STREET": "150 Blackburn Rd",
+
+"CITY": "Clayton North",
+
+"POST_CODE": "3168",
+
+"COUNTRY": "AU",
+
+"PHONE1": "545453566",
+
+"TIMESTAMP": "20150921112449"
+
+}
+
+},
+
+{
+
+"DOC_NUM": "3A52D58AC4D94C5B935FE9D8CCC8ADC7",
+
+"ADDR_TYPE": "CON",
+
+"ADDR_TYPE_ID": "0000000006",
+
+"PARTNER_TYPE": "RR",
+
+"ADDRESS_ID": "0000022490",
+
+"TIMESTAMP": "20150812124739",
+
+"EAM_ADDRESS": {
+
+"ADDRNO": "0000022490",
+
+"NAME1": "FLORIDA CANCER",
+
+"STREET": "150 Blackburn Rd",
+
+"CITY": "Clayton North",
+
+"POST_CODE": "3168",
+
+"COUNTRY": "AU",
+
+"PHONE1": "545453566",
+
+"TIMESTAMP": "20150921112449"
+
+}
+
+}
+]
+
+},
+
+{
+
+"NOTIF_NUM": "3A52D58AC4D94C5B935FE9D8CCC8ADC8",
+
+"NOTIF_TYPE": "S2",
+
+"SHORT_TEXT": "new test notification",
+
+"NOTIF_DATE": "20150812",
+
+"NOTIF_TIME": "071728",
+
+"FUNC_LOCATION": "1000-100-AA",
+
+"FLOCN_DESC": "Engineering Workshop - Auto",
+
+"EQUIP_NUM": "10000001",
+
+"TECH_OBJ_DESC": "Toyota Hilux: Reg ABC-123",
+
+"CATALOG_PROFILE": "000000001",
+
+"PRIORITY": "4",
+
+"INTERNAL_NUMBER": "000300000561",
+
+"WRRNTY_START_DT": "00000000",
+
+"WRRNTY_END_DT": "00000000",
+
+"MANU_WRRNTY_STDT": "00000000",
+
+"MANU_WRRNTY_ENDT": "00000000",
+
+"WORK_CENTER": "MAINT01",
+
+"WC_SHORT_DESC": "General Maintenance",
+
+"SYS_STATUS": "OSNO",
+
+"TIME_ZONE": "UTC",
+
+"PLANPLANT": "8000",
+
+"LOC_ACC": "000000003874",
+
+"STRMLFNDATE": "00000000",
+
+"ENDMLFNDATE": "00000000",
+
+"STRMLFNTIME": "000000",
+
+"ENDMLFNTIME": "000000",
+
+"DOWNTIME": "0.000000000E+00",
+
+"UNIT": "H",
+
+"PLANGROUP": "010",
+
+"CREATED_BY": "CPIC_VTI",
+
+"CREATED_ON": "20150812",
+
+"CHANGED_ON": "00000000",
+
+"DESSTDATE": "20150814",
+
+"DESSTTIME": "071728",
+
+"DESENDDATE": "20150817",
+
+"DESENDTM": "071728",
+
+"CUST_NO": "6",
+
+"OBJECT_NO": "00000000",
+
+"COMPTIME": "000000",
+
+"PRILANG": "E",
+
+"REFDATE": "20150812",
+
+"REFTIME": "071729",
+
+"PURCH_DATE": "00000000",
+
+"DIVISION": "10",
+
+"SALES_ORG": "1000",
+
+"DISTR_CHAN": "10",
+
+"CHANGED_AT": "000000",
+
+"CREATED_AT": "124729",
+
+"PM_WKCTR": "10000000",
+
+"NOTIFTMEZ": "INDIA",
+
+"MAINTPLANT": "8000",
+
+"BUS_AREA": "8000",
+
+"CO_AREA": "9999",
+
+"COMP_CODE": "8000",
+
+"SALES_ORG_LOC": "1000",
+
+"DIVISION_LOC": "10",
+
+"DIST_CHAN_LOC": "10",
+
+"ADDR_NO_LOC": "23380",
+
+"TIMESTAMP": "20150812124739",
+
+"EAM_NOTIFICATION_ADDRESS": [
+
+{
+
+"DOC_NUM": "3A52D58AC4D94C5B935FE9D8CCC8ADC8",
+
+"ADDR_TYPE": "AG",
+
+"ADDR_TYPE_ID": "0000000007",
+
+"PARTNER_TYPE": "KU",
+
+"ADDRESS_ID": "0000022490",
+
+"TIMESTAMP": "20150812124739",
+
+"EAM_ADDRESS": {
+
+"ADDRNO": "0000022490",
+
+"NAME1": "FLORIDA CANCER",
+
+"STREET": "150 Blackburn Rd",
+
+"CITY": "Clayton North",
+
+"POST_CODE": "3168",
+
+"COUNTRY": "AU",
+
+"PHONE1": "545453566",
+
+"TIMESTAMP": "20150921112449"
+
+}
+
+},
+
+{
+
+"DOC_NUM": "000010001370",
+
+"ADDR_TYPE": "NTF",
+
+"ADDR_TYPE_ID": "000010001371",
+
+"ADDRESS_ID": "0000024160",
+
+"TIMESTAMP": "20150401204100",
+
+"EAM_ADDRESS": {
+
+"ADDRNO": "0000024160",
+
+"HOUSE_NUM": "35",
+
+"STREET": "DUNLOP ROAD",
+
+"CITY": "MULGRAVE",
+
+"REGION": "VIC",
+
+"POST_CODE": "3170",
+
+"COUNTRY": "AU",
+
+"LATITUDE": "37.200000000000",
+
+"LONGITUDE": "49.400000000000",
+
+"PHONE1": "545453577",
+
+"PHONE2": "040323223232-124",
+
+"MOBILE1": "967631273133",
+
+"MOBILE2": "931313131124",
+
+"FAX": "0401231312314",
+
+"EMAIL": "CUSTOMER@voltmx.COM",
+
+"TIMESTAMP": "20150708153054"
+
+}
+
+},
+
+{
+
+"DOC_NUM": "3A52D58AC4D94C5B935FE9D8CCC8ADC8",
+
+"ADDR_TYPE": "CON",
+
+"ADDR_TYPE_ID": "0000000006",
+
+"PARTNER_TYPE": "SA",
+
+"ADDRESS_ID": "0000022490",
+
+"TIMESTAMP": "20150812124739",
+
+"EAM_ADDRESS": {
+
+"ADDRNO": "0000022490",
+
+"NAME1": "FLORIDA CANCER",
+
+"STREET": "150 Blackburn Rd",
+
+"CITY": "Clayton North",
+
+"POST_CODE": "3168",
+
+"COUNTRY": "AU",
+
+"PHONE1": "545453566",
+
+"TIMESTAMP": "20150921112449"
+
+}
+
+},
+
+{
+
+"DOC_NUM": "3A52D58AC4D94C5B935FE9D8CCC8ADC8",
+
+"ADDR_TYPE": "CON",
+
+"ADDR_TYPE_ID": "0000000006",
+
+"PARTNER_TYPE": "RR1",
+
+"ADDRESS_ID": "0000022490",
+
+"TIMESTAMP": "20150812124739",
+
+"EAM_ADDRESS": {
+
+"ADDRNO": "0000022490",
+
+"NAME1": "FLORIDA CANCER",
+
+"STREET": "150 Blackburn Rd",
+
+"CITY": "Clayton North",
+
+"POST_CODE": "3168",
+
+"COUNTRY": "AU",
+
+"PHONE1": "545453566",
+
+"TIMESTAMP": "20150921112449"
+
+}
+
+}
+]
+
+},</code></pre>
+
+<p><b>Output</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+
+"Notification": [
+
+{
+
+"NOTIF_NUM": "3A52D58AC4D94C5B935FE9D8CCC8ADC7",
+
+"Type_id": "S2",
+
+"Description": "new test notification",
+
+"NOTIF_DATE": "20150812",
+
+"NOTIF_TIME": "071728",
+
+"FUNC_LOCATION": "1000-100-AA",
+
+"FLOCN_DESC": "Engineering Workshop - Auto",
+
+"EQUIP_NUM": "10000001",
+
+"TECH_OBJ_DESC": "Toyota Hilux: Reg ABC-123",
+
+"CATALOG_PROFILE": "000000001",
+
+"PRIORITY": "4",
+
+"INTERNAL_NUMBER": "000300000561",
+
+"WRRNTY_START_DT": "00000000",
+
+"WRRNTY_END_DT": "00000000",
+
+"WORK_CENTER": "MAINT01",
+
+"WC_SHORT_DESC": "General Maintenance",
+
+"SYS_STATUS": "OSNO",
+
+"TIME_ZONE": "UTC",
+
+"PLANPLANT": "8000",
+
+"LOC_ACC": "000000003874",
+
+"STRMLFNDATE": "00000000",
+
+"ENDMLFNDATE": "00000000",
+
+"STRMLFNTIME": "000000",
+
+"ENDMLFNTIME": "000000",
+
+"DOWNTIME": "0.000000000E+00",
+
+"UNIT": "H",
+
+"PLANGROUP": "010",
+
+"CREATED_BY": "CPIC_VTI",
+
+"CREATED_ON": "20150812",
+
+"CHANGED_ON": "00000000",
+
+"DESSTDATE": "20150814",
+
+"DESSTTIME": "071728",
+
+"DESENDDATE": "20150817",
+
+"DESENDTM": "071728",
+
+"CUST_NO": "6",
+
+"PRILANG": "E",
+
+"REFDATE": "20150812",
+
+"REFTIME": "071729",
+
+"PURCH_DATE": "00000000",
+
+"DIVISION": "10",
+
+"SALES_ORG": "1000",
+
+"DISTR_CHAN": "10",
+
+"CHANGED_AT": "000000",
+
+"CREATED_AT": "124729",
+
+"NOTIFTMEZ": "INDIA",
+
+"MAINTPLANT": "8000",
+
+"BUS_AREA": "8000",
+
+"CO_AREA": "9999",
+
+"TIMESTAMP": "20150812124739",
+
+"ADDR_NO_LOC": "23380",
+
+"Address": [
+
+{
+
+"id": "0000022490",
+
+"city": "Clayton North",
+
+"NAME1": "FLORIDA CANCER",
+
+"STREET": "150 Blackburn Rd",
+
+"POST_CODE": "3168",
+
+"COUNTRY": "AU",
+
+"PHONE1": "545453566",
+
+"TIMESTAMP": "20150921112449"
+
+},
+
+{
+
+"id": "0000024160",
+
+"city": "MULGRAVE",
+
+"STREET": "DUNLOP ROAD",
+
+"POST_CODE": "3170",
+
+"COUNTRY": "AU",
+
+"PHONE1": "545453577",
+
+"TIMESTAMP": "20150708153054"
+
+},
+
+{
+
+"id": "0000022490",
+
+"city": "Clayton North",
+
+"NAME1": "FLORIDA CANCER",
+
+"STREET": "150 Blackburn Rd",
+
+"POST_CODE": "3168",
+
+"COUNTRY": "AU",
+
+"PHONE1": "545453566",
+
+"TIMESTAMP": "20150921112449"
+
+},
+
+{
+
+"id": "0000022490",
+
+"city": "Clayton North",
+
+"NAME1": "FLORIDA CANCER",
+
+"STREET": "150 Blackburn Rd",
+
+"POST_CODE": "3168",
+
+"COUNTRY": "AU",
+
+"PHONE1": "545453566",
+
+"TIMESTAMP": "20150921112449"
+
+}
+],
+
+"Contacts": [
+
+{
+
+"NotificationId": "3A52D58AC4D94C5B935FE9D8CCC8ADC8",
+
+"ContactId": "0000000007",
+
+"Partner": "KU",
+
+"ADDRESS_ID": "0000022490",
+
+"TIMESTAMP": "20150812124739"
+
+},
+
+{
+
+"NotificationId": "000010001370",
+
+"ContactId": "000010001370",
+
+"ADDRESS_ID": "0000024160",
+
+"TIMESTAMP": "20150401204100"
+
+},
+
+{
+
+"NotificationId": "3A52D58AC4D94C5B935FE9D8CCC8ADC7",
+
+"ContactId": "0000000006",
+
+"Partner": "SA",
+
+"ADDRESS_ID": "0000022490",
+
+"TIMESTAMP": "20150812124739"
+
+},
+
+{
+
+"NotificationId": "3A52D58AC4D94C5B935FE9D8CCC8ADC7",
+
+"ContactId": "0000000006",
+
+"Partner": "RR",
+
+"ADDRESS_ID": "0000022490",
+
+"TIMESTAMP": "20150812124739"
+
+}
+]
+
+},
+
+{
+
+"NOTIF_NUM": "3A52D58AC4D94C5B935FE9D8CCC8ADC8",
+
+"Type_id": "S2",
+
+"Description": "new test notification",
+
+"NOTIF_DATE": "20150812",
+
+"NOTIF_TIME": "071728",
+
+"FUNC_LOCATION": "1000-100-AA",
+
+"FLOCN_DESC": "Engineering Workshop - Auto",
+
+"EQUIP_NUM": "10000001",
+
+"TECH_OBJ_DESC": "Toyota Hilux: Reg ABC-123",
+
+"CATALOG_PROFILE": "000000001",
+
+"PRIORITY": "4",
+
+"INTERNAL_NUMBER": "000300000561",
+
+"WRRNTY_START_DT": "00000000",
+
+"WRRNTY_END_DT": "00000000",
+
+"WORK_CENTER": "MAINT01",
+
+"WC_SHORT_DESC": "General Maintenance",
+
+"SYS_STATUS": "OSNO",
+
+"TIME_ZONE": "UTC",
+
+"PLANPLANT": "8000",
+
+"LOC_ACC": "000000003874",
+
+"STRMLFNDATE": "00000000",
+
+"ENDMLFNDATE": "00000000",
+
+"STRMLFNTIME": "000000",
+
+"ENDMLFNTIME": "000000",
+
+"DOWNTIME": "0.000000000E+00",
+
+"UNIT": "H",
+
+"PLANGROUP": "010",
+
+"CREATED_BY": "CPIC_VTI",
+
+"CREATED_ON": "20150812",
+
+"CHANGED_ON": "00000000",
+
+"DESSTDATE": "20150814",
+
+"DESSTTIME": "071728",
+
+"DESENDDATE": "20150817",
+
+"DESENDTM": "071728",
+
+"CUST_NO": "6",
+
+"PRILANG": "E",
+
+"REFDATE": "20150812",
+
+"REFTIME": "071729",
+
+"PURCH_DATE": "00000000",
+
+"DIVISION": "10",
+
+"SALES_ORG": "1000",
+
+"DISTR_CHAN": "10",
+
+"CHANGED_AT": "000000",
+
+"CREATED_AT": "124729",
+
+"NOTIFTMEZ": "INDIA",
+
+"MAINTPLANT": "8000",
+
+"BUS_AREA": "8000",
+
+"CO_AREA": "9999",
+
+"TIMESTAMP": "20150812124739",
+
+"ADDR_NO_LOC": "23380",
+
+"Address": [
+
+{
+
+"id": "0000022490",
+
+"city": "Clayton North",
+
+"NAME1": "FLORIDA CANCER",
+
+"STREET": "150 Blackburn Rd",
+
+"POST_CODE": "3168",
+
+"COUNTRY": "AU",
+
+"PHONE1": "545453566",
+
+"TIMESTAMP": "20150921112449"
+
+},
+
+{
+
+"id": "0000024160",
+
+"city": "MULGRAVE",
+
+"STREET": "DUNLOP ROAD",
+
+"POST_CODE": "3170",
+
+"COUNTRY": "AU",
+
+"PHONE1": "545453577",
+
+"TIMESTAMP": "20150708153054"
+
+},
+
+{
+
+"id": "0000022490",
+
+"city": "Clayton North",
+
+"NAME1": "FLORIDA CANCER",
+
+"STREET": "150 Blackburn Rd",
+
+"POST_CODE": "3168",
+
+"COUNTRY": "AU",
+
+"PHONE1": "545453566",
+
+"TIMESTAMP": "20150921112449"
+
+},
+
+{
+
+"id": "0000022490",
+
+"city": "Clayton North",
+
+"NAME1": "FLORIDA CANCER",
+
+"STREET": "150 Blackburn Rd",
+
+"POST_CODE": "3168",
+
+"COUNTRY": "AU",
+
+"PHONE1": "545453566",
+
+"TIMESTAMP": "20150921112449"
+
+}
+],
+
+"Contacts": [
+
+{
+
+"NotificationId": "3A52D58AC4D94C5B935FE9D8CCC8ADC8",
+
+"ContactId": "0000000007",
+
+"Partner": "KU",
+
+"ADDRESS_ID": "0000022490",
+
+"TIMESTAMP": "20150812124739"
+
+},
+
+{
+
+"NotificationId": "000010001370",
+
+"ContactId": "000010001371",
+
+"ADDRESS_ID": "0000024160",
+
+"TIMESTAMP": "20150401204100"
+
+},
+
+{
+
+"NotificationId": "3A52D58AC4D94C5B935FE9D8CCC8ADC8",
+
+"ContactId": "0000000006",
+
+"Partner": "SA1",
+
+"ADDRESS_ID": "0000022490",
+
+"TIMESTAMP": "20150812124739"
+
+},
+
+{
+
+"NotificationId": "3A52D58AC4D94C5B935FE9D8CCC8ADC8",
+
+"ContactId": "0000000006",
+
+"Partner": "RR1",
+
+"ADDRESS_ID": "0000022490",
+
+"TIMESTAMP": "20150812124739"
+
+}
+]
+
+},
+
+{
+
+"NOTIF_NUM": "3A52D58AC4D94C5B935FE9D8CCC8ADC7",
+
+"Type_id": "S2",
+
+"Description": "new test notification",
+
+"NOTIF_DATE": "20150812",
+
+"NOTIF_TIME": "071728",
+
+"FUNC_LOCATION": "1000-100-AA",
+
+"FLOCN_DESC": "Engineering Workshop - Auto",
+
+"EQUIP_NUM": "10000001",
+
+"TECH_OBJ_DESC": "Toyota Hilux: Reg ABC-123",
+
+"CATALOG_PROFILE": "000000001",
+
+"PRIORITY": "4",
+
+"INTERNAL_NUMBER": "000300000561",
+
+"WRRNTY_START_DT": "00000000",
+
+"WRRNTY_END_DT": "00000000",
+
+"WORK_CENTER": "MAINT01",
+
+"WC_SHORT_DESC": "General Maintenance",
+
+"SYS_STATUS": "OSNO",
+
+"TIME_ZONE": "UTC",
+
+"PLANPLANT": "8000",
+
+"LOC_ACC": "000000003874",
+
+"STRMLFNDATE": "00000000",
+
+"ENDMLFNDATE": "00000000",
+
+"STRMLFNTIME": "000000",
+
+"ENDMLFNTIME": "000000",
+
+"DOWNTIME": "0.000000000E+00",
+
+"UNIT": "H",
+
+"PLANGROUP": "010",
+
+"CREATED_BY": "CPIC_VTI",
+
+"CREATED_ON": "20150812",
+
+"CHANGED_ON": "00000000",
+
+"DESSTDATE": "20150814",
+
+"DESSTTIME": "071728",
+
+"DESENDDATE": "20150817",
+
+"DESENDTM": "071728",
+
+"CUST_NO": "6",
+
+"PRILANG": "E",
+
+"REFDATE": "20150812",
+
+"REFTIME": "071729",
+
+"PURCH_DATE": "00000000",
+
+"DIVISION": "10",
+
+"SALES_ORG": "1000",
+
+"DISTR_CHAN": "10",
+
+"CHANGED_AT": "000000",
+
+"CREATED_AT": "124729",
+
+"NOTIFTMEZ": "INDIA",
+
+"MAINTPLANT": "8000",
+
+"BUS_AREA": "8000",
+
+"CO_AREA": "9999",
+
+"TIMESTAMP": "20150812124739",
+
+"ADDR_NO_LOC": "23380",
+
+"Address": [
+
+{
+
+"id": "0000022490",
+
+"city": "Clayton North",
+
+"NAME1": "FLORIDA CANCER",
+
+"STREET": "150 Blackburn Rd",
+
+"POST_CODE": "3168",
+
+"COUNTRY": "AU",
+
+"PHONE1": "545453566",
+
+"TIMESTAMP": "20150921112449"
+
+},
+
+{
+
+"id": "0000024160",
+
+"city": "MULGRAVE",
+
+"STREET": "DUNLOP ROAD",
+
+"POST_CODE": "3170",
+
+"COUNTRY": "AU",
+
+"PHONE1": "545453577",
+
+"TIMESTAMP": "20150708153054"
+
+},
+
+{
+
+"id": "0000022490",
+
+"city": "Clayton North",
+
+"NAME1": "FLORIDA CANCER",
+
+"STREET": "150 Blackburn Rd",
+
+"POST_CODE": "3168",
+
+"COUNTRY": "AU",
+
+"PHONE1": "545453566",
+
+"TIMESTAMP": "20150921112449"
+
+},
+
+{
+
+"id": "0000022490",
+
+"city": "Clayton North",
+
+"NAME1": "FLORIDA CANCER",
+
+"STREET": "150 Blackburn Rd",
+
+"POST_CODE": "3168",
+
+"COUNTRY": "AU",
+
+"PHONE1": "545453566",
+
+"TIMESTAMP": "20150921112449"
+
+}
+],
+
+"Contacts": [
+
+{
+
+"NotificationId": "3A52D58AC4D94C5B935FE9D8CCC8ADC7",
+
+"ContactId": "0000000006",
+
+"Partner": "KU",
+
+"ADDRESS_ID": "0000022490",
+
+"TIMESTAMP": "20150812124739"
+
+},
+
+{
+
+"NotificationId": "000010001370",
+
+"ContactId": "000010001371",
+
+"ADDRESS_ID": "0000024160",
+
+"TIMESTAMP": "20150401204100"
+
+},
+
+{
+
+"NotificationId": "3A52D58AC4D94C5B935FE9D8CCC8ADC7",
+
+"ContactId": "0000000006",
+
+"Partner": "SA1",
+
+"ADDRESS_ID": "0000022490",
+
+"TIMESTAMP": "20150812124739"
+
+},
+
+{
+
+"NotificationId": "3A52D58AC4D94C5B935FE9D8CCC8ADC7",
+
+"ContactId": "0000000006",
+
+"Partner": "RR",
+
+"ADDRESS_ID": "0000022490",
+
+"TIMESTAMP": "20150812124739"
+
+}
+]
+
+},
+
+{
+
+"NOTIF_NUM": "3A52D58AC4D94C5B935FE9D8CCC8ADC8",
+
+"Type_id": "S2",
+
+"Description": "new test notification",
+
+"NOTIF_DATE": "20150812",
+
+"NOTIF_TIME": "071728",
+
+"FUNC_LOCATION": "1000-100-AA",
+
+"FLOCN_DESC": "Engineering Workshop - Auto",
+
+"EQUIP_NUM": "10000001",
+
+"TECH_OBJ_DESC": "Toyota Hilux: Reg ABC-123",
+
+"CATALOG_PROFILE": "000000001",
+
+"PRIORITY": "4",
+
+"INTERNAL_NUMBER": "000300000561",
+
+"WRRNTY_START_DT": "00000000",
+
+"WRRNTY_END_DT": "00000000",
+
+"WORK_CENTER": "MAINT01",
+
+"WC_SHORT_DESC": "General Maintenance",
+
+"SYS_STATUS": "OSNO",
+
+"TIME_ZONE": "UTC",
+
+"PLANPLANT": "8000",
+
+"LOC_ACC": "000000003874",
+
+"STRMLFNDATE": "00000000",
+
+"ENDMLFNDATE": "00000000",
+
+"STRMLFNTIME": "000000",
+
+"ENDMLFNTIME": "000000",
+
+"DOWNTIME": "0.000000000E+00",
+
+"UNIT": "H",
+
+"PLANGROUP": "010",
+
+"CREATED_BY": "CPIC_VTI",
+
+"CREATED_ON": "20150812",
+
+"CHANGED_ON": "00000000",
+
+"DESSTDATE": "20150814",
+
+"DESSTTIME": "071728",
+
+"DESENDDATE": "20150817",
+
+"DESENDTM": "071728",
+
+"CUST_NO": "6",
+
+"PRILANG": "E",
+
+"REFDATE": "20150812",
+
+"REFTIME": "071729",
+
+"PURCH_DATE": "00000000",
+
+"DIVISION": "10",
+
+"SALES_ORG": "1000",
+
+"DISTR_CHAN": "10",
+
+"CHANGED_AT": "000000",
+
+"CREATED_AT": "124729",
+
+"NOTIFTMEZ": "INDIA",
+
+"MAINTPLANT": "8000",
+
+"BUS_AREA": "8000",
+
+"CO_AREA": "9999",
+
+"TIMESTAMP": "20150812124739",
+
+"ADDR_NO_LOC": "23380",
+
+"Address": [
+
+{
+
+"id": "0000022490",
+
+"city": "Clayton North",
+
+"NAME1": "FLORIDA CANCER",
+
+"STREET": "150 Blackburn Rd",
+
+"POST_CODE": "3168",
+
+"COUNTRY": "AU",
+
+"PHONE1": "545453566",
+
+"TIMESTAMP": "20150921112449"
+
+},
+
+{
+
+"id": "0000024160",
+
+"city": "MULGRAVE",
+
+"STREET": "DUNLOP ROAD",
+
+"POST_CODE": "3170",
+
+"COUNTRY": "AU",
+
+"PHONE1": "545453577",
+
+"TIMESTAMP": "20150708153054"
+
+},
+
+{
+
+"id": "0000022490",
+
+"city": "Clayton North",
+
+"NAME1": "FLORIDA CANCER",
+
+"STREET": "150 Blackburn Rd",
+
+"POST_CODE": "3168",
+
+"COUNTRY": "AU",
+
+"PHONE1": "545453566",
+
+"TIMESTAMP": "20150921112449"
+
+},
+
+{
+
+"id": "0000022490",
+
+"city": "Clayton North",
+
+"NAME1": "FLORIDA CANCER",
+
+"STREET": "150 Blackburn Rd",
+
+"POST_CODE": "3168",
+
+"COUNTRY": "AU",
+
+"PHONE1": "545453566",
+
+"TIMESTAMP": "20150921112449"
+
+}
+],
+
+"Contacts": [
+
+{
+
+"NotificationId": "3A52D58AC4D94C5B935FE9D8CCC8ADC8",
+
+"ContactId": "0000000007",
+
+"Partner": "KU",
+
+"ADDRESS_ID": "0000022490",
+
+"TIMESTAMP": "20150812124739"
+
+},
+
+{
+
+"NotificationId": "000010001370",
+
+"ContactId": "000010001371",
+
+"ADDRESS_ID": "0000024160",
+
+"TIMESTAMP": "20150401204100"
+
+},
+
+{
+
+"NotificationId": "3A52D58AC4D94C5B935FE9D8CCC8ADC8",
+
+"ContactId": "0000000006",
+
+"Partner": "SA1",
+
+"ADDRESS_ID": "0000022490",
+
+"TIMESTAMP": "20150812124739"
+
+},
+
+{
+
+"NotificationId": "3A52D58AC4D94C5B935FE9D8CCC8ADC8",
+
+"ContactId": "0000000006",
+
+"Partner": "RR1",
+
+"ADDRESS_ID": "0000022490",
+
+"TIMESTAMP": "20150812124739"
+
+}
+]
+
+}
+]
+
+}</code></pre>
+
+<p><b>Mapping</b></p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;map outputpath="Notification" inputpath="EAM_NOTIF">
+&lt; outputpath="NOTIF_NUM" inputpath="NOTIF_NUM" />
+&lt; outputpath="Type_id" inputpath="NOTIF_TYPE" />
+&lt; outputpath="Description" inputpath="SHORT_TEXT" />
+&lt; outputpath="NOTIF_DATE" inputpath="NOTIF_DATE" />
+&lt; outputpath="NOTIF_TIME" inputpath="NOTIF_TIME" />
+&lt; outputpath="FUNC_LOCATION" inputpath="FUNC_LOCATION" />
+&lt; outputpath="FLOCN_DESC" inputpath="FLOCN_DESC" />
+&lt; outputpath="EQUIP_NUM" inputpath="EQUIP_NUM" />
+&lt; outputpath="TECH_OBJ_DESC" inputpath="TECH_OBJ_DESC" />
+&lt; outputpath="CATALOG_PROFILE" inputpath="CATALOG_PROFILE" />
+&lt; outputpath="PRIORITY" inputpath="PRIORITY" />
+&lt; outputpath="INTERNAL_NUMBER" inputpath="INTERNAL_NUMBER" />
+&lt; outputpath="WRRNTY_START_DT" inputpath="WRRNTY_START_DT" />
+&lt; outputpath="WRRNTY_END_DT" inputpath="WRRNTY_END_DT" />
+&lt; outputpath="WORK_CENTER" inputpath="WORK_CENTER" />
+&lt; outputpath="WC_SHORT_DESC" inputpath="WC_SHORT_DESC" />
+&lt; outputpath="SYS_STATUS" inputpath="SYS_STATUS" />
+&lt; outputpath="TIME_ZONE" inputpath="TIME_ZONE" />
+&lt; outputpath="PLANPLANT" inputpath="PLANPLANT" />
+&lt; outputpath="LOC_ACC" inputpath="LOC_ACC" />
+&lt; outputpath="STRMLFNDATE" inputpath="STRMLFNDATE" />
+&lt; outputpath="ENDMLFNDATE" inputpath="ENDMLFNDATE" />
+&lt; outputpath="STRMLFNTIME" inputpath="STRMLFNTIME" />
+&lt; outputpath="ENDMLFNTIME" inputpath="ENDMLFNTIME" />
+&lt; outputpath="DOWNTIME" inputpath="DOWNTIME" />
+&lt; outputpath="UNIT" inputpath="UNIT" />
+&lt; outputpath="PLANGROUP" inputpath="PLANGROUP" />
+&lt; outputpath="CREATED_BY" inputpath="CREATED_BY" />
+&lt; outputpath="CREATED_ON" inputpath="CREATED_ON" />
+&lt; outputpath="CHANGED_ON" inputpath="CHANGED_ON" />
+&lt; outputpath="DESSTDATE" inputpath="DESSTDATE" />
+&lt; outputpath="DESSTTIME" inputpath="DESSTTIME" />
+&lt; outputpath="DESENDDATE" inputpath="DESENDDATE" />
+&lt; outputpath="DESENDTM" inputpath="DESENDTM" />
+&lt; outputpath="CUST_NO" inputpath="CUST_NO" />
+&lt; outputpath="PRILANG" inputpath="PRILANG" />
+&lt; outputpath="REFDATE" inputpath="REFDATE" />
+&lt; outputpath="REFTIME" inputpath="REFTIME" />
+&lt; outputpath="PURCH_DATE" inputpath="PURCH_DATE" />
+&lt; outputpath="DIVISION" inputpath="DIVISION" />
+&lt; outputpath="SALES_ORG" inputpath="SALES_ORG" />
+&lt; outputpath="DISTR_CHAN" inputpath="DISTR_CHAN" />
+&lt; outputpath="CHANGED_AT" inputpath="CHANGED_AT" />
+&lt; outputpath="CREATED_AT" inputpath="CREATED_AT" />
+&lt; outputpath="NOTIFTMEZ" inputpath="NOTIFTMEZ" />
+&lt; outputpath="MAINTPLANT" inputpath="MAINTPLANT" />
+&lt; outputpath="BUS_AREA" inputpath="BUS_AREA" />
+&lt; outputpath="CO_AREA" inputpath="CO_AREA" />
+&lt; outputpath="TIMESTAMP" inputpath="TIMESTAMP" />
+&lt; outputpath="ADDR_NO_LOC" inputpath="ADDR_NO_LOC" />
+&lt;map outputpath="" inputpath="EAM_NOTIFICATION_ADDRESS">
+&lt;map outputpath="Address" inputpath=""&gt;
+&lt; outputpath="id" inputpath="EAM_ADDRESS/ADDRNO" />
+&lt; outputpath="city" inputpath="EAM_ADDRESS/CITY" />
+&lt; outputpath="NAME1" inputpath="EAM_ADDRESS/NAME1" />
+&lt; outputpath="STREET" inputpath="EAM_ADDRESS/STREET" />
+&lt; outputpath="POST_CODE" inputpath="EAM_ADDRESS/POST_CODE" />
+&lt; outputpath="COUNTRY" inputpath="EAM_ADDRESS/COUNTRY" />
+&lt; outputpath="PHONE1" inputpath="EAM_ADDRESS/PHONE1" />
+&lt; outputpath="TIMESTAMP" inputpath="EAM_ADDRESS/TIMESTAMP" />
+&lt;/map&gt;
+&lt;map outputpath="Contacts" inputpath=""&gt;
+&lt; outputpath="NotificationId" inputpath="DOC_NUM" />
+&lt; outputpath="ContactId" inputpath="ADDR_TYPE_ID" />
+&lt; outputpath="Partner" inputpath="PARTNER_TYPE" />
+&lt; outputpath="ADDRESS_ID" inputpath="ADDRESS_ID" />
+&lt; outputpath="TIMESTAMP" inputpath="TIMESTAMP" />
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+
+<h3 id="Aggregation_Support_in_Mapper">Aggregation Support in Mapper</h3>
+
+<p>Aggregation support in Mapper allows you to iterate through a collection of objects and aggregate them based on a specific key.</p>
+<p><b>Use case:</b></p>
+<p>A user has multiple objects tracking daily employee hours and would like to combine them into a weekly summary of hours.</p>
+<p><b>Input object</b></p>
+<p>Time_Entry - Project_Task_id, Timesheet_Id, End_Time, Start_Time, Time_Type_Id, Activity_Description, Employee_Id, StatusId, Actual_Hours, Id, Project_Task_Type, Date</p>
+<p><b>Output object</b></p>
+<p>Timesheet - Employee_Id, Id, Start_Date, End_Date, Total_Hours</p>
+<p><b><u>Example for Aggregation Support in Mapper</u></b></p>
+<ul>
+  <li><b>AggregationToFindMinMaxAndSum</b></li>
+</ul>
+<table>
+  <tr>
+    <td><b>Input</b></td>    
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+  "Time_Entry": [
+    {
+    "Project_Task_id" : "0000001202",
+    "Timesheet_Id" : "MYTIME_V1_20161009",
+    "End_Time" : "080000",
+    "Start_Time" : "070000",
+    "Time_Type_Id" : "0800",
+    "Activity_Description" : "",
+    "Employee_Id" : "1000001",
+    "StatusId" : "2",
+    "Actual_Hours" : "8.000",
+    "Id" : "MYTIME_V1_1209_1",
+    "Project_Task_Type" : "CC",
+    "Date" : "20161012"
+    }, 
+    {
+    "Project_Task_id" : "0000001202",
+    "Timesheet_Id" : "MYTIME_V1_20161009",
+    "End_Time" : "080000",
+    "Start_Time" : "070000",
+    "Time_Type_Id" : "0800",
+    "Activity_Description" : "",
+    "Employee_Id" : "1000001",
+    "StatusId" : "2",
+    "Actual_Hours" : "8Ti.000",
+    "Id" : "MYTIME_V1_1209_1",
+    "Project_Task_Type" : "CC",
+    "Date" : "20161013"
+    },
+    {
+        "Project_Task_id": "0000001202",
+        "Timesheet_Id": "MYTIME_V1_20161009",
+        "End_Time": "080000",
+        "Start_Time": "070000",
+        "Time_Type_Id": "0800",
+        "Activity_Description": "",
+        "Employee_Id": "1000001",
+        "StatusId": "2",
+        "Actual_Hours": "8.000",
+        "Id": "MYTIME_V1_1209_1",
+        "Project_Task_Type": "CC",
+        "Date": "20161014"
+        },
+    {
+        "Project_Task_id": "0000001202",
+        "Timesheet_Id": "MYTIME_V1_20161009",
+        "End_Time": "080000",
+        "Start_Time": "070000",
+        "Time_Type_Id": "0800",
+        "Activity_Description": "",
+        "Employee_Id": "1000001",
+        "StatusId": "2",
+        "Actual_Hours": "8.000",
+        "Id": "MYTIME_V1_1209_1",
+        "Project_Task_Type": "CC",
+        "Date": "20161015"
+    },
+    {
+        "Project_Task_id": "0000001202",
+        "Timesheet_Id": "MYTIME_V1_20161016",
+        "End_Time": "080000",
+        "Start_Time": "070000",
+        "Time_Type_Id": "0800",
+        "Activity_Description": "",
+        "Employee_Id": "1000001",
+        "StatusId": "2",
+        "Actual_Hours": "8.000",
+        "Id": "MYTIME_V1_1209_1",
+        "Project_Task_Type": "CC",
+        "Date": "20161016"
+    },
+    {
+        "Project_Task_id": "0000001202",
+        "Timesheet_Id": "MYTIME_V1_20161016",
+        "End_Time": "080000",
+        "Start_Time": "070000",
+        "Time_Type_Id": "0800",
+        "Activity_Description": "",
+        "Employee_Id": "1000001",
+        "StatusId": "2",
+        "Actual_Hours": "8.000",
+        "Id": "MYTIME_V1_1209_1",
+        "Project_Task_Type": "CC",
+        "Date": "20161017"
+    },
+    {
+        "Project_Task_id": "0000001202",
+        "Timesheet_Id": "MYTIME_V1_20161016",
+        "End_Time": "080000",
+        "Start_Time": "070000",
+        "Time_Type_Id": "0800",
+        "Activity_Description": "",
+        "Employee_Id": "1000001",
+        "StatusId": "2",
+        "Actual_Hours": "8.000",
+        "Id": "MYTIME_V1_1209_1",
+        "Project_Task_Type": "CC",
+        "Date": "20161018"
+    },
+]
+}</code></pre>
+  </td>
+  </tr>
+  <tr>      
+    <td><b>Output</b></td>  
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{"Timesheet" : [
+     {
+        "Employee_Id": "1000001",
+        "Id": " MYTIME_V1_1209_1",
+        "Start_Date": "20161012",
+        "End_Date": "20161015",
+        "Total_Hours": "32.000"
+    },
+    {
+        "Employee_Id": "1000001",
+        "Id": " MYTIME_V1_1209_1",
+        "Start_Date": "20161016",
+        "End_Date": "20161018",
+        "Total_Hours": "24.000"
+    }
+]}</code></pre>
+  </td>
+</tr>    
+<tr>      
+   <td><b>Mapping</b></td>  
+   <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+    &lt;create-group inputpath="Time_Entry" output="$vars" outputpath="TimeEntryGroup"&gt;                            
+        &lt;group-key inputpath="Timesheet_Id"/&gt;                    
+    &lt;/create-group&gt;
+    &lt;map outputpath="Timesheets" input="$vars" inputpath="TimeEntryGroup"&gt;
+        &lt;set-param outputpath="Timesheet_Id" inputpath="Timesheet_Id"/&gt;
+        &lt;set-param outputpath="Start_Date" input="99999999"/&gt;
+        &lt;set-param outputpath="End_Date" input="-1"/&gt;
+        &lt;map outputpath="" inputpath="rows"&gt;
+            &lt;set-param outputpath="Employee_Id" inputpath="Employee_Id"/&gt;
+            &lt;set-param outputpath="Id" inputpath="Id" /&gt;
+            &lt;exec-function name="voltmx.logical:min" outputpath="Start_Date"&gt;
+                &lt;set-arg name="arg1" inputpath="Date" /&gt;
+                &lt;set-arg name="arg2" inputpath="Start_Date" input="$current-output"/&gt;
+            &lt;/exec-function&gt;
+            &lt;exec-function name="voltmx.logical:max" outputpath="End_Date"&gt;
+                &lt;set-arg name="arg1" inputpath="Date" /&gt;
+                &lt;set-arg name="arg2" inputpath="End_Date" input="$current-output"/&gt;
+            &lt;/exec-function&gt;
+            &lt;exec-function name="voltmx.logical:sum" outputpath="Total_Hours"&gt;
+                &lt;set-arg name="arg1" inputpath="Actual_Hours" /&gt;
+                &lt;set-arg name="arg2" inputpath="Total_Hours" input="$current-output"/&gt;
+            &lt;/exec-function&gt;
+        &lt;/map&gt;
+    &lt;/map&gt;
+
+&lt;/mapper&gt;</code></pre>
+
+  </td>
+</tr> 
+</table>
+
+<h3 id="Look-up_Support_in_Mapper">Look-up Support in Mapper</h3>
+
+<p>Look-up support in mapper helps you combine two parallel objects and generate a common object depending upon the key. For example, the user wants to combine two parallel objects Customers and Orders with one or more fields in common and to generate a common object depending upon the key.</p>
+<ul>
+  <li>
+    <b>Input object:</b>
+    <ul>
+      <li>Customers – Id, Name, Phone</li>      
+      <li>
+        Orders – OrderId, CustomerId, ProductId, Quantity <br/>
+        In above objects, the  Id of Customers and the  CustomerId of Orders are same.
+      </li>
+    </ul>    
+  </li>
+</ul>
+<ul>
+  <li>
+    <b>Output object:</b>
+    <ul>
+      <li>CustomerOrders – OrderId, CustomerName, Phone, ProductId, Quantity</li>      
+    </ul>    
+  </li>
+</ul>
+<p><b><u><u>Examples for Look-up Support in Mapper</u></u></b></p>
+<ul>
+  <li><b>LookupMappingWithMultiplePrimaryKey</b></li>
+</ul>
+<table>
+  <tr>
+    <td><b>Input</b></td>    
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "Customers": [
+        {
+            "Id": "101",
+            "Domain": "Finance",
+            "Name": "Customer1",
+            "Phone": "12345"
+        },
+        {
+            "Id": "102",
+            "Domain": "Healthcare",
+            "Name": "Customer2",
+            "Phone": "12346"
+        }
+    ],
+    "Orders": [
+        {
+            "CustomerId": "101",
+            "OrderDomain": "Finance",
+            "OrderId": "111",
+            "ProductId": "Product1",
+            "Quantity": "5"
+        },
+        {
+            "CustomerId": "102",
+            "OrderDomain": "Healthcare",
+            "OrderId": "222",
+            "ProductId": "Product2",
+            "Quantity": "6"
+        }
+    ]
+}</code></pre>
+  </td>
+  </tr>
+  <tr>      
+    <td><b>Output</b></td>  
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "CustomerOrders": [
+        {
+            "OrderId": "111",
+            "CustomerName": "Customer1",
+            "Phone": "12345",
+            "ProductId": "Product1",
+            "Quantity": "5"
+        },
+        {
+            "OrderId": "222",
+            "CustomerName": "Customer2",
+            "Phone": "12346",
+            "ProductId": "Product2",
+            "Quantity": "6"
+        }
+    ]
+}</code></pre>
+  </td>
+</tr>    
+<tr>      
+   <td><b>Mapping</b></td>  
+   <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> 
+&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;create-lookup&gt;
+&lt;lookup-key inputpath="Id"/&gt;
+&lt;lookup-key inputpath="Domain"/&gt;
+    &lt;/create-lookup&gt;
+    &lt;map inputpath="response_in" outputpath="response_out"&gt;
+    &lt;map outputpath="CustomerOrders" inputpath="Orders"&gt;
+        &lt;set-param outputpath="OrderId" inputpath="OrderId" /&gt;
+        &lt;lookup input="$vars" inputpath="customerMap" outputpath="customerRef" output="$vars"&gt;
+            &lt;lookup-key inputpath="CustomerId" /&gt;
+            &lt;lookup-key inputpath="OrderDomain" /&gt;
+        &lt;/lookup&gt;
+        &lt;set-param outputpath="CustomerName" inputpath="$vars/customerRef/Name" /&gt;
+        &lt;set-param outputpath="Phone" inputpath="$vars/customerRef/Phone" /&gt;
+        &lt;set-param outputpath="ProductId" inputpath="ProductId" /&gt;
+        &lt;set-param outputpath="Quantity" inputpath="Quantity" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+  </td>
+</tr> 
+</table>
+
+<ul>
+  <li><b>LookupMappingWithOnePrimaryKey</b></li>
+</ul>
+<table>
+  <tr>
+    <td><b>Input</b></td>    
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "Customers": [
+        {
+            "Id": "101",
+            "Name": "Customer1",
+            "Phone": "12345"
+        },
+        {
+            "Id": "102",
+            "Name": "Customer2",
+            "Phone": "12346"
+        }
+    ],
+    "Orders": [
+        {
+            "CustomerId": "101",
+            "OrderId": "111",
+            "ProductId": "Product1",
+            "Quantity": "5"
+        },
+        {
+            "CustomerId": "102",
+            "OrderId": "222",
+            "ProductId": "Product2",
+            "Quantity": "6"
+        }
+    ]
+}</code></pre>
+  </td>
+  </tr>
+  <tr>      
+    <td><b>Output</b></td>  
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "CustomerOrders": [
+        {
+            "OrderId": "111",
+            "CustomerName": "Customer1",
+            "Phone": "12345",
+            "ProductId": "Product1",
+            "Quantity": "5"
+        },
+        {
+            "OrderId": "222",
+            "CustomerName": "Customer2",
+            "Phone": "12346",
+            "ProductId": "Product2",
+            "Quantity": "6"
+        }
+    ]
+}</code></pre>
+  </td>
+</tr>    
+<tr>      
+   <td><b>Mapping</b></td>  
+   <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;create-lookup&gt;
+&lt;lookup-key inputpath="Id"/&gt;
+&lt;lookup-key inputpath="Domain"/&gt;
+    &lt;/create-lookup&gt;
+    &lt;map inputpath="response_in" outputpath="response_out"&gt;
+    &lt;map outputpath="CustomerOrders" inputpath="Orders"&gt;
+        &lt;set-param outputpath="OrderId" inputpath="OrderId" /&gt;
+        &lt;lookup input="$vars" inputpath="customerMap" outputpath="customerRef" output="$vars"&gt;
+            &lt;lookup-key inputpath="CustomerId" /&gt;
+            &lt;lookup-key inputpath="OrderDomain" /&gt;
+        &lt;/lookup&gt;
+        &lt;set-param outputpath="CustomerName" inputpath="$vars/customerRef/Name" /&gt;
+        &lt;set-param outputpath="Phone" inputpath="$vars/customerRef/Phone" /&gt;
+        &lt;set-param outputpath="ProductId" inputpath="ProductId" /&gt;
+        &lt;set-param outputpath="Quantity" inputpath="Quantity" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+  </td>
+</tr> 
+</table>
+
+<ul>
+  <li><b>LookupMappingWhenPrimaryKeyNotFoundInChild</b></li>
+</ul>
+<table>
+  <tr>
+    <td><b>Input</b></td>    
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "Customers": [
+        {
+            "Id": "101",
+            "Name": "Customer1",
+            "Phone": "12345"
+        },
+        {
+            "Id": "102",
+            "Name": "Customer2",
+            "Phone": "12346"
+        },
+        {
+            "Id": "103",
+            "Name": "Customer3",
+            "Phone": "12347"
+        }
+    ],
+    "Orders": [
+        {
+            "CustomerId": "101",
+            "OrderId": "111",
+            "ProductId": "Product1",
+            "Quantity": "5"
+        },
+        {
+            "CustomerId": "102",
+            "OrderId": "222",
+            "ProductId": "Product2",
+            "Quantity": "6"
+        }
+    ]
+}</code></pre>
+  </td>
+  </tr>
+  <tr>      
+    <td><b>Output</b></td>  
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "CustomerOrders": [
+        {
+            "OrderId": "111",
+            "CustomerName": "Customer1",
+            "Phone": "12345",
+            "ProductId": "Product1",
+            "Quantity": "5"
+        },
+        {
+            "OrderId": "222",
+            "CustomerName": "Customer2",
+            "Phone": "12346",
+            "ProductId": "Product2",
+            "Quantity": "6"
+        }
+    ]
+}</code></pre>
+  </td>
+</tr>    
+<tr>      
+   <td><b>Mapping</b></td>  
+   <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;create-lookup&gt;
+&lt;lookup-key inputpath="Id"/&gt;
+&lt;lookup-key inputpath="Domain"/&gt;
+    &lt;/create-lookup&gt;
+    &lt;map inputpath="response_in" outputpath="response_out"&gt;
+    &lt;map outputpath="CustomerOrders" inputpath="Orders"&gt;
+        &lt;set-param outputpath="OrderId" inputpath="OrderId" /&gt;
+        &lt;lookup input="$vars" inputpath="customerMap" outputpath="customerRef" output="$vars"&gt;
+            &lt;lookup-key inputpath="CustomerId" /&gt;
+            &lt;lookup-key inputpath="OrderDomain" /&gt;
+        &lt;/lookup&gt;
+        &lt;set-param outputpath="CustomerName" inputpath="$vars/customerRef/Name" /&gt;
+        &lt;set-param outputpath="Phone" inputpath="$vars/customerRef/Phone" /&gt;
+        &lt;set-param outputpath="ProductId" inputpath="ProductId" /&gt;
+        &lt;set-param outputpath="Quantity" inputpath="Quantity" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+  </td>
+</tr> 
+</table>
+
+<ul>
+  <li><b>LookupMappingWhenPrimaryKeyNotFoundInParent</b></li>
+</ul>
+<table>
+  <tr>
+    <td><b>Input</b></td>    
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "Customers": [
+        {
+            "Id": "101",
+            "Name": "Customer1",
+            "Phone": "12345"
+        },
+        {
+            "Id": "102",
+            "Name": "Customer2",
+            "Phone": "12346"
+        }
+    ],
+    "Orders": [
+        {
+            "CustomerId": "101",
+            "OrderId": "111",
+            "ProductId": "Product1",
+            "Quantity": "5"
+        },
+        {
+            "CustomerId": "102",
+            "OrderId": "222",
+            "ProductId": "Product2",
+            "Quantity": "6"
+        },
+        {
+            "CustomerId": "103",
+            "OrderId": "333",
+            "ProductId": "Product3",
+            "Quantity": "7"
+        }
+    ]
+}</code></pre>
+  </td>
+  </tr>
+  <tr>      
+    <td><b>Output</b></td>  
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "CustomerOrders": [
+        {
+            "OrderId": "111",
+            "CustomerName": "Customer1",
+            "Phone": "12345",
+            "ProductId": "Product1",
+            "Quantity": "5"
+        },
+        {
+            "OrderId": "222",
+            "CustomerName": "Customer2",
+            "Phone": "12346",
+            "ProductId": "Product2",
+            "Quantity": "6"
+        },
+        {
+            "OrderId": "333",
+            "ProductId": "Product3",
+            "Quantity": "7"
+        }
+    ]
+}</code></pre>
+  </td>
+</tr>    
+<tr>      
+   <td><b>Mapping</b></td>  
+   <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+&lt;create-lookup&gt;
+&lt;lookup-key inputpath="Id"/&gt;
+&lt;lookup-key inputpath="Domain"/&gt;
+    &lt;/create-lookup&gt;
+    &lt;map inputpath="response_in" outputpath="response_out"&gt;
+    &lt;map outputpath="CustomerOrders" inputpath="Orders"&gt;
+        &lt;set-param outputpath="OrderId" inputpath="OrderId" /&gt;
+        &lt;lookup input="$vars" inputpath="customerMap" outputpath="customerRef" output="$vars"&gt;
+            &lt;lookup-key inputpath="CustomerId" /&gt;
+            &lt;lookup-key inputpath="OrderDomain" /&gt;
+        &lt;/lookup&gt;
+        &lt;set-param outputpath="CustomerName" inputpath="$vars/customerRef/Name" /&gt;
+        &lt;set-param outputpath="Phone" inputpath="$vars/customerRef/Phone" /&gt;
+        &lt;set-param outputpath="ProductId" inputpath="ProductId" /&gt;
+        &lt;set-param outputpath="Quantity" inputpath="Quantity" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+  </td>
+</tr> 
+</table>
+
+<h3 id="JavaScript_Support_in_Mapper">JavaScript Support in Mapper</h3>
+<p>JavaScript support in mapper helps you write JavaScript code to manipulate return values into the format that is expected from the app data model, or manipulate input values from the app data model into back-end LOB. You can use JavaScript support in mapper based on the following scenarios:</p>
+<ul>
+  <li>LOB returns data in one format (such as dates, currency, arrays) and an <b>App Data</b> model expects the data in another format.</li>  
+  <li>Attributes returned from LOB either to be clubbed or split before assigning the attributes to an <b>App Data</b> model.</li>
+</ul>
+<p>To enable JavaScript support in mapper, you need to write standalone JavaScript code snippets in mapper. Each standalone JavaScript snippet should be self-contained code and not dependent on other JavaScript files. JavaScript snippets can have multiple functions. A standalone JS snippet must be written <code>HTML CDATA</code>. ECMA 5.1 standard is supported JavaScript.</p>
+<blockquote><b><em>Important:</em></b> In the <b>Methods</b> tab, <b>Request Mapping</b> tab, and Response Mapping tab, click the <b>Validate</b> button to validate whether the XML is proper. The action does not validate the JavaScript snippet code.</blockquote>
+
+<p><b>JavaScript Snippet Rules</b></p>
+<ul>
+  <li>The Function element can occur zero or more times as a child element to the mapper element.</li>  
+  <li>The JavaScript element must occur one time only as a child element to the Function element.</li> 
+  <li>Set-arg and Script elements can occur as child elements to the JavaScript element.
+    <ul>
+      <li>The Set-arg element is optional, and can occur zero or more times. The element is a parameter for JS snippet.<br/>
+        <p>For example:</p>
+        <pre><code>&lt;set-arg name="firstName" inputpath="FirstName" /&gt;</code></pre>
+        <ul>
+          <li>inputpath - A field in LOB data</li>          
+          <li>name - A JavaScript function argument that holds a field of LOB data.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>The Script element is mandatory and must occur only once. The JavaScript snippet should be written in the CDATA section of the element.</li> 
+  <li>The <code>Exec-function</code> element invokes the JavaScript function. The exec-function name and function name should match.</li>
+</ul>
+<p>Sample JavaScript</p>
+<p><b>Sample JavaScript Use Case</b></p>
+<ul>
+  <li>
+    <b>LOB data</b> has the following attributes:
+    <ul>
+      <li>FirstName (for example, Bill)</li>      
+      <li>MiddleName (for example, Tom)</li>      
+      <li>LastName (for example, Sam)</li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <b>App Model Object</b> has the following attributes:
+    <ul>
+      <li>FirstName (for example, Bill)</li>      
+      <li>MiddleName (for example, Tom)</li>      
+      <li>LastName (for example, Sam)</li>
+      <li><b>FullName</b><br/>
+        <p>The <b>FullName</b> attribute is derived from FirstName, MiddleName and LastName - for example, <code>FullName = FirstName + MiddlName + first letter of LastName + “. “</code></p><br>
+        <p>The result: <b>Bill Tom S.</b></p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><b>Sample JavaScript mapping.xml</b></p>
+<p>The following sample mapping.xml contains JavaScript code can be used as a reference. The following highlighted XML code shows how JavaScript code can be written and used to achieve the scenario.</p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+    <mark>&lt;function name="NameConcat"&gt;
+        &lt;javascript outputpath="FullName"&gt;
+            &lt;set-arg name="firstName" inputpath="FirstName" /&gt;
+            &lt;set-arg name="middleName" inputpath="MiddleName" /&gt;
+            &lt;set-arg name="lastName" inputpath="LastName" /&gt;
+            &lt;script&gt;
+            &lt;![CDATA[
+              function concat(){
+               var result = firstName+' '+ middleName + ' '+lastName.substring(0, 1).toUpperCase() + '. '
+                return result;
+                }
+               concat();
+             ]&gt;
+            &lt;/script&gt;
+        &lt;/javascript&gt;
+    &lt;/function&gt;</mark>
+    &lt;create-lookup&gt;
+&lt;lookup-key inputpath="Id"/&gt;
+&lt;lookup-key inputpath="Domain"/&gt;
+    &lt;/create-lookup&gt;
+    &lt;map inputpath="response_in" outputpath="response_out"&gt;
+    &lt;map outputpath="CustomerOrders" inputpath="Orders"&gt;
+        &lt;set-param outputpath="OrderId" inputpath="OrderId" /&gt;
+        &lt;lookup input="$vars" inputpath="customerMap" outputpath="customerRef" output="$vars"&gt;
+            &lt;lookup-key inputpath="CustomerId" /&gt;
+            &lt;lookup-key inputpath="OrderDomain" /&gt;
+        &lt;/lookup&gt;
+        &lt;set-param outputpath="CustomerName" inputpath="$vars/customerRef/Name" /&gt;
+        &lt;set-param outputpath="Phone" inputpath="$vars/customerRef/Phone" /&gt;
+        &lt;set-param outputpath="ProductId" inputpath="ProductId" /&gt;
+        &lt;set-param outputpath="Quantity" inputpath="Quantity" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+<p><br></p>
+<p><b><u>Examples for JavaScript Support in Mapper</u></b></p>
+<ul>
+<li><b>SimpleJSFunction</b></li>
+<table>
+    <tr>
+      <td><b>Input</b></td>    
+        <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "Person": [
+        {
+            "Id": "1021",
+            "FirstName": "bill",
+            "MiddleName": "tom",
+            "LastName": "sam"
+        }
+    ]
+}</code></pre>
+      </td>
+    </tr>
+    <tr>      
+        <td><b>Output</b></td>  
+        <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+    "PersonInfo": [
+        {
+            "Id": "1021",
+            "FullName": "bill T. sam"
+        }
+    ]
+}</code></pre>
+    </td>
+    </tr>    
+      <tr>      
+      <td><b>Mapping</b></td>  
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+    &lt;function name="NameConcat"&gt;
+        &lt;javascript outputpath="FullName"&gt;
+            &lt;set-arg name="firstName" inputpath="FirstName" /&gt;
+            &lt;set-arg name="middleName" inputpath="MiddleName" /&gt;
+            &lt;set-arg name="lastName" inputpath="LastName" /&gt;
+            &lt;script&gt;
+                    &lt;![CDATA[
+                          function concat(){
+                             var result = firstName +' ' + middleName.substring(0, 1).toUpperCase() + '. ' + lastName
+                             return result;
+                          }
+                          concat();
+                    ]&gt;
+            &lt;/script&gt;
+        &lt;/javascript&gt;
+    &lt;/function&gt;
+&lt;create-lookup&gt;
+&lt;lookup-key inputpath="Id"/&gt;
+&lt;lookup-key inputpath="Domain"/&gt;
+&lt;/create-lookup&gt;
+&lt;map inputpath="response_in" outputpath="response_out"&gt;
+&lt;map outputpath="CustomerOrders" inputpath="Orders"&gt;
+&lt;set-param outputpath="OrderId" inputpath="OrderId" /&gt;
+&lt;lookup input="$vars" inputpath="customerMap" outputpath="customerRef" output="$vars"&gt;
+&lt;lookup-key inputpath="CustomerId" /&gt;
+&lt;lookup-key inputpath="OrderDomain" /&gt;
+&lt;/lookup&gt;
+&lt;set-param outputpath="CustomerName" inputpath="$vars/customerRef/Name" /&gt;
+&lt;set-param outputpath="Phone" inputpath="$vars/customerRef/Phone" /&gt;
+&lt;set-param outputpath="ProductId" inputpath="ProductId" /&gt;
+&lt;set-param outputpath="Quantity" inputpath="Quantity" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+</td>
+</tr>
+</table>
+
+<li><b>MixedFunctions</b></li>
+<table>
+    <tr>
+        <td><b>Input</b></td>    
+        <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "A": [
+        {
+            "FirstName": "bill",
+            "MiddleName": "tom",
+            "LastName": "sam"
+        }
+    ]
+}</code></pre>
+    </td>
+    </tr>
+    <tr>      
+        <td><b>Output</b></td>  
+        <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "A": [
+        {
+            "Q1": "bill-tom-sam",
+            "NameInUpperCase": "BILL-TOM-SAM"
+        }
+    ]
+}</code></pre>
+    </td>
+    </tr>    
+    <tr>      
+    <td><b>Mapping</b></td>  
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+    &lt;function name="DisplayInUpperCase"&gt;
+        &lt;javascript outputpath="NameInUpperCase"&gt;
+            &lt;set-arg name="firstName" inputpath="FirstName" /&gt;
+            &lt;set-arg name="middleName" inputpath="MiddleName" /&gt;
+            &lt;set-arg name="lastName" inputpath="LastName" /&gt;
+            &lt;script&gt;
+                &lt;![CDATA[
+                   function convertToUppercase(){
+                      var result = firstName + '-'+ middleName +'-'+ lastName;
+                      return result.toUpperCase();
+                   }
+                   convertToUppercase();
+                ]&gt;
+             &lt;/script&gt;
+        &lt;/javascript&gt;
+    &lt;/function&gt;
+&lt;create-lookup&gt;
+&lt;lookup-key inputpath="Id"/&gt;
+&lt;lookup-key inputpath="Domain"/&gt;
+&lt;/create-lookup&gt;
+&lt;map inputpath="response_in" outputpath="response_out"&gt;
+&lt;map outputpath="CustomerOrders" inputpath="Orders"&gt;
+&lt;set-param outputpath="OrderId" inputpath="OrderId" /&gt;
+&lt;lookup input="$vars" inputpath="customerMap" outputpath="customerRef" output="$vars"&gt;
+&lt;lookup-key inputpath="CustomerId" /&gt;
+&lt;lookup-key inputpath="OrderDomain" /&gt;
+&lt;/lookup&gt;
+&lt;set-param outputpath="CustomerName" inputpath="$vars/customerRef/Name" /&gt;
+        &lt;set-param outputpath="Phone" inputpath="$vars/customerRef/Phone" /&gt;
+&lt;set-param outputpath="ProductId" inputpath="ProductId" /&gt;
+&lt;set-param outputpath="Quantity" inputpath="Quantity" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+</td>
+</tr>
+</table>
+
+<li><b>JSFunctionWithZeroInputs</b></li>
+<table>
+    <tr>
+        <td><b>Input</b></td>    
+        <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "Person": [
+        {
+            "Id": "1021"
+        }
+    ]
+}</code></pre>
+    </td>
+    </tr>
+    <tr>      
+        <td><b>Output</b></td>  
+        <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "PersonInfo": [
+        {
+            "Id": "1021",
+            "Name": "Bill Tom Sam"
+        }
+    ]
+}</code></pre>
+    </td>
+    </tr>    
+    <tr>      
+    <td><b>Mapping</b></td>  
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+    &lt;function name="GiveSomeText"&gt;
+        &lt;javascript outputpath="Name"&gt;
+            &lt;script&gt;
+               &lt;![CDATA[
+                 function concat(){
+                    return 'Bill Tom Sam';
+                 }
+                 concat();
+               ]&gt;
+          &lt;/script&gt;
+        &lt;/javascript&gt;
+    &lt;/function&gt;
+    &lt;create-lookup&gt;
+&lt;lookup-key inputpath="Id"/&gt;
+&lt;lookup-key inputpath="Domain"/&gt;
+&lt;/create-lookup&gt;
+&lt;map inputpath="response_in" outputpath="response_out"&gt;
+&lt;map outputpath="CustomerOrders" inputpath="Orders"&gt;
+&lt;set-param outputpath="OrderId" inputpath="OrderId" /&gt;
+&lt;lookup input="$vars" inputpath="customerMap" outputpath="customerRef" output="$vars"&gt;
+&lt;lookup-key inputpath="CustomerId" /&gt;
+&lt;lookup-key inputpath="OrderDomain" /&gt;
+&lt;/lookup&gt;
+&lt;set-param outputpath="CustomerName" inputpath="$vars/customerRef/Name" /&gt;
+&lt;set-param outputpath="Phone" inputpath="$vars/customerRef/Phone" /&gt;
+&lt;set-param outputpath="ProductId" inputpath="ProductId" /&gt;
+&lt;set-param outputpath="Quantity" inputpath="Quantity" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+</td>
+</tr>
+ </table>
+
+<li><b>JSCodeNotAvailable</b></li>
+    <table>
+    <tr>
+        <td><b>Input</b></td>    
+        <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "Person": [
+        {
+            "Id": "1021"
+        }
+    ]
+}</code></pre>
+    </td>
+    </tr>
+    <tr>      
+        <td><b>Output</b></td>  
+        <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "PersonInfo": [
+        {
+            "Id": "1021",
+            "Name": ""
+        }
+    ]
+}</code></pre>
+    </td>
+    </tr>    
+    <tr>      
+    <td><b>Mapping</b></td>  
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+    &lt;function name="someText"&gt;
+        &lt;javascript outputpath="Name"&gt;
+        &lt;script&gt;
+               &lt;![CDATA[
+                      -
+                    ]&gt;
+        &lt;/script&gt;
+        &lt;/javascript&gt;
+    &lt;/function&gt;
+    &lt;create-lookup&gt;
+&lt;lookup-key inputpath="Id"/&gt;
+&lt;lookup-key inputpath="Domain"/&gt;
+&lt;/create-lookup&gt;
+&lt;map inputpath="response_in" outputpath="response_out"&gt;
+&lt;map outputpath="CustomerOrders" inputpath="Orders"&gt;
+&lt;set-param outputpath="OrderId" inputpath="OrderId" /&gt;
+&lt;lookup input="$vars" inputpath="customerMap" outputpath="customerRef" output="$vars"&gt;
+&lt;lookup-key inputpath="CustomerId" /&gt;
+&lt;lookup-key inputpath="OrderDomain" /&gt;
+&lt;/lookup&gt;
+&lt;set-param outputpath="CustomerName" inputpath="$vars/customerRef/Name" /&gt;
+        &lt;set-param outputpath="Phone" inputpath="$vars/customerRef/Phone" /&gt;
+&lt;set-param outputpath="ProductId" inputpath="ProductId" /&gt;
+&lt;set-param outputpath="Quantity" inputpath="Quantity" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+</td>
+</tr>
+ </table>
+
+<li><b>MapperExceptionWhenScriptTagMissedInJS</b></li>
+    <table>
+    <tr>
+        <td><b>Input</b></td>    
+        <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> {
+    "Person": [
+        {
+            "Id": "1021"
+        }
+    ]
+}</code></pre>
+    </td>
+    </tr>
+    <tr>      
+        <td><b>Output</b></td>  
+        <td>null script</td>
+    </tr>    
+    <tr>      
+    <td><b>Mapping</b></td>  
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+    &lt;function name="someText"&gt;
+        &lt;javascript>
+           &lt;![CDATA[
+             function concat(){
+                return NoElement.text;
+             }
+             concat();
+           ]&gt;
+        &lt;/javascript&gt;
+    &lt;/function&gt;
+    &lt;create-lookup&gt;
+&lt;lookup-key inputpath="Id"/&gt;
+&lt;lookup-key inputpath="Domain"/&gt;
+&lt;/create-lookup&gt;
+&lt;map inputpath="response_in" outputpath="response_out"&gt;
+&lt;map outputpath="CustomerOrders" inputpath="Orders"&gt;
+&lt;set-param outputpath="OrderId" inputpath="OrderId" /&gt;
+&lt;lookup input="$vars" inputpath="customerMap" outputpath="customerRef" output="$vars"&gt;
+&lt;lookup-key inputpath="CustomerId" /&gt;
+&lt;lookup-key inputpath="OrderDomain" /&gt;
+&lt;/lookup&gt;
+&lt;set-param outputpath="CustomerName" inputpath="$vars/customerRef/Name" /&gt;
+        &lt;set-param outputpath="Phone" inputpath="$vars/customerRef/Phone" /&gt;
+&lt;set-param outputpath="ProductId" inputpath="ProductId" /&gt;
+&lt;set-param outputpath="Quantity" inputpath="Quantity" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+</td>
+</tr>
+</table>
+
+<li><b>MapperExceptionForErrorProneJS</b></li>
+<table>
+    <tr>
+        <td><b>Input</b></td>    
+        <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">{
+    "Person": [
+        {
+            "Id": "1021"
+        }
+    ]
+}</code></pre>
+    </td>
+    </tr>
+    <tr>      
+        <td><b>Output</b></td>  
+        <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">sun.org.mozilla.javascript.internal.EcmaError: ReferenceError: "NoElement" is not defined. (&lt;Unknown source&gt;#5) in &lt;Unknown source&gt; at line number 5</code></pre>
+    </td>
+    </tr>    
+    <tr>      
+    <td><b>Mapping</b></td>  
+    <td><pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;"> &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;mapper xmlns="http://www.voltmx.com/ns/mapper"&gt;
+    &lt;function name="someText"&gt;
+        &lt;javascript>
+        &lt;script&gt;
+           &lt;![CDATA[
+             function concat(){
+                return NoElement.text;
+             }
+             concat();
+           ]&gt;
+          &lt;/script&gt;
+        &lt;/javascript&gt;
+    &lt;/function&gt;
+    &lt;create-lookup&gt;
+&lt;lookup-key inputpath="Id"/&gt;
+&lt;lookup-key inputpath="Domain"/&gt;
+&lt;/create-lookup&gt;
+&lt;map inputpath="response_in" outputpath="response_out"&gt;
+&lt;map outputpath="CustomerOrders" inputpath="Orders"&gt;
+&lt;set-param outputpath="OrderId" inputpath="OrderId" /&gt;
+&lt;lookup input="$vars" inputpath="customerMap" outputpath="customerRef" output="$vars"&gt;
+&lt;lookup-key inputpath="CustomerId" /&gt;
+&lt;lookup-key inputpath="OrderDomain" /&gt;
+&lt;/lookup&gt;
+&lt;set-param outputpath="CustomerName" inputpath="$vars/customerRef/Name" /&gt;
+        &lt;set-param outputpath="Phone" inputpath="$vars/customerRef/Phone" /&gt;
+&lt;set-param outputpath="ProductId" inputpath="ProductId" /&gt;
+&lt;set-param outputpath="Quantity" inputpath="Quantity" /&gt;
+&lt;/map&gt;
+&lt;/map&gt;
+&lt;/mapper&gt;</code></pre>
+</td>
+</tr>
+</table>
+</ul>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2021 - 2024, HCL America, Inc. | <a href="https://hcltechsw.com/wps/portal/legal/privacy">Privacy Statement</a> | <a href="https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.hcltechsw.com%2Fwps%2Fportal%2Flegal%2Fterms-use&data=04%7C01%7Csuresh.chenji%40hcl.com%7Ca77ebddc51574aff8c6c08d8f056542d%7C189de737c93a4f5a8b686f4ca9941912%7C0%7C0%7C637523600856805537%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&sdata=vLnT466NGuIbvQ0nEwfn2qdXeuhHb6XOnh1pibATDI4%3D&reserved=0">Terms of Use</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+<div class="md-social">
+  <ul class="social-nav">
+    <li><a href="https://www.facebook.com/HCLDigital" class="facebook" target="_blank">Facebook</a></li>
+    <li><a href="https://www.linkedin.com/company/hclsoftware" class="linkedin" target="_blank">LinkedIn</a></li>
+    <li><a href="https://twitter.com/HCLDigital"  class="twitter" target="_blank">Twitter</a></li>
+    <li><a href="https://www.youtube.com/HCLDigitalSolutions" class="youtube" target="_blank">Youtube</a></li>
+    <li>
+      <a href="https://github.com/HCL-TECH-SOFTWARE" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    </li>
+  </ul>    
+</div>
+  </div>
+  <div class="md-footer-meta__inner md-grid">
+  <span class="md-footer__git_legacy">Please report problems with this documentation by <a class="announcement__link" href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/issues">opening issues in Github</a>.</span>
+  <span class="legacy-link md-footer__git_legacy">Can't find a topic? Check the legacy documentation <a class="announcement__link" href="https://opensource.hcltechsw.com/Volt-MX-Documentation-Archive/docs/documentation/" target="_blank">here</a>.</span>
+</span>
+    </div>
+</div>
+    <script>
+      function myFunction92(){
+          var initial_url = document.location.href;
+          // var initial_url = 'https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_windows_install_guide/Content/Upgrading_VoltMX_Foundry_9.2.html#prerequisites'
+//          var fixed_url = 'https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation'
+          var url_stub = initial_url.split( '95/docs/documentation' );
+          var fixed_url = url_stub[0]+'docs/documentation';
+		  console.log(fixed_url);
+          var url = initial_url.split( '/' );
+          var updated_url
+          var updated_url2
+          var http = new XMLHttpRequest();
+          var index_url = 'https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/index.html'
+          if ( url[ url.length - 2 ] == "Foundry" || url[ url.length - 2 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 2 ] == "articles" || url[ url.length - 2] == "getting-started" || url[ url.length - 2 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 3 ] == "Foundry" || url[ url.length - 3 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 3 ] == "articles" || url[ url.length - 3 ] == "getting-started" || url[ url.length - 3 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 4 ] == "Foundry" || url[ url.length - 4 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 4 ] == "articles" || url[ url.length - 4 ] == "getting-started" || url[ url.length - 4 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 5 ] == "Foundry" || url[ url.length - 5 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 5 ] == "articles" || url[ url.length - 5 ] == "getting-started" || url[ url.length - 5 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 5 ] + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 6 ] == "Foundry" || url[ url.length - 6 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 6 ] == "articles" || url[ url.length - 6 ] == "getting-started" || url[ url.length - 6 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 6 ] + '/' + url[ url.length - 5 ] + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else{
+            updated_url= fixed_url + '/' + url[ url.length - 1];
+          }
+          http.open('HEAD', updated_url, false);
+          http.send();
+          console.log(http.status)
+          if (http.status != 404){
+                 updated_url2 = updated_url;
+          } else{
+                updated_url2 = index_url;
+          }
+        console.log(updated_url2)
+        window.location.replace(updated_url2);
+      }
+    </script>
+  
+
+</footer>
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant"], "search": "../../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+    
+  </body>
+</html>
