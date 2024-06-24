@@ -3543,6 +3543,8 @@ No
 
 If you specify a tickedImage, ensure that you also specify an [unTickedimage](#unTicked). If not defined, the behavior will be undefined.
 
+You can create an image Object by using voltmx.image Namespace functions.
+
 ### Platform Availability
 
 *   Available in the IDE
@@ -3709,6 +3711,8 @@ No
 ### Remarks
 
 If you specify an unTickedImage, ensure that you also specify a [tickedImage](#tickedIm). If not specified, the behavior will be undefined.
+
+You can create an image Object by using voltmx.image Namespace functions.
 
 ### Platform Availability
 
