@@ -3558,25 +3558,6 @@ You can create an image Object by using voltmx.image Namespace functions.
 
 iOS - applicable only when the viewType is selected as tableView.
 
-### Example
-
-Using a string to specify a local image resource:
-
-```
-/*Sample code to set the tickedImage property of a RadioButtonGroup widget where tickImg.png is an image file in the resources folder.*/  
-  
-frmRButton.myRButton.tickedImage="tickImg.png";
-
-```
-
-Using an image object (voltmx.image) to specify the image:
-
-```
-/*Sample code to set the tickedImage property of a RadioButtonGroup widget where local.png is an image file in the resources folder.*/
-var imgObjRef = voltmx.image.createImage("local.png");
-frmRButton.myRButton.tickedImage=imgObjRef;
-
-```
 
 ### Platform Availability
 
@@ -3742,26 +3723,6 @@ If you specify an unTickedImage, ensure that you also specify a [tickedImage](#T
 iOS - applicable only when the viewType is selected as tableView.
 
 You can create an image Object by using voltmx.image Namespace functions.
-
-### Example
-
-Using a text string pointing to a local resource to define the unTickedImage
-
-```
-/*Sample code to set the unTickedImage property of a RadioButtonGroup widget where unTickdImg.png is an image file in the resources folder.*/  
-  
-frmRButton.myRButton.unTickedImage="unTickdImg.png";
-
-```
-
-Using an image object to define unTickedImage:
-
-```
-/*Sample code to set the unTickedImage property of a RadioButtonGroup widget where local.png is an image file in the resources folder.*/
-var imgObjRef = voltmx.image.createImage("local.png");
-frmRButton.myRButton.unTickedImage=imgObjRef;
-
-```
 
 ### Platform Availability
 
