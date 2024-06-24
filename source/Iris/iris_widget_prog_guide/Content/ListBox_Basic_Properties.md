@@ -1212,6 +1212,26 @@ The following figure illustrates the default drop-down box indicator:
 
 ![Figure Depicting Default Indicator](Resources/Images/Default_Indicator__Combo-box_.png)
 
+<<<<<<< HEAD
+=======
+### Example
+
+Using a string to identify an image resource:
+
+```
+/*Sample code to set the dropDownImage property of a ListBox widget where downarrow.png is an image file in the resources folder.*/
+frmList.myList.dropDownImage="downarrow.png";
+```
+
+Using an image object (voltmx.image) to specify the dropdown image:
+
+```
+/*Sample code to set the dropDownImage property of a ListBox widget where local.png is an image file in the resources folder.*/  
+  
+var imgObjRef = voltmx.image.createImage("local.png");  
+frmList.myList.dropDownImage=imgObjRef;
+```
+>>>>>>> 2f429f1769c (9.5 release build)
 
 ### Platform Availability
 
