@@ -3554,6 +3554,8 @@ String / image Object
 
 If you specify a tickedImage, ensure that you also specify an [unTickedImage](#unticked). If not specified, the behavior will be undefined.
 
+You can create an image Object by using voltmx.image Namespace functions.
+
 iOS - applicable only when the viewType is selected as tableView.
 
 
@@ -3719,6 +3721,8 @@ String / image Object
 If you specify an unTickedImage, ensure that you also specify a [tickedImage](#Ticked). If not specified, the behavior will be undefined.
 
 iOS - applicable only when the viewType is selected as tableView.
+
+You can create an image Object by using voltmx.image Namespace functions.
 
 ### Platform Availability
 
