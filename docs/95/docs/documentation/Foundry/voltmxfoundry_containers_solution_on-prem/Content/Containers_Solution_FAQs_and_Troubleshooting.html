@@ -379,7 +379,7 @@
     id="__nav_1_8"
     checked
   />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
 
   <div class="md-nav__link md-nav__link--index">
     <a href="../../voltmxFoundryFundamentals.html"> Foundry </a>
@@ -418,7 +418,7 @@
     id="__nav_1_8_2"
     checked
   />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
 
   <div class="md-nav__link md-nav__link--index">
     <a href="../../installing_foundry.html"> Installing Foundry </a>
@@ -577,7 +577,7 @@
     id="__nav_1_8_2_7"
     checked
   />
-                                 
+                                    
 
   <div class="md-nav__link md-nav__link--index">
     <a href="Introduction.html"> Volt MX Foundry Installation Guide   - Containers Solution </a>
@@ -695,6 +695,13 @@
 <li class="md-nav__item">
   <a href="VoltMX_Foundry_Containers_Solution_On-Prem.html" class="md-nav__link">
     Prerequisites
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="VoltMX_Foundry_Containers_Solution_On-Premises_Install_Guide.html" class="md-nav__link">
+    Installation Guide - Volt MX Foundry Containers Solution On-Premises
   </a>
 </li>
     
@@ -1111,99 +1118,101 @@
 <li>
 <p><strong>How can I join a new worker node to the cluster post the cluster setup?</strong></p>
 <ol>
-<li>Copy the setup-node.zip file which is generated in Foundry container artifact folder (VoltMXFoundrySingleContainer-9.2.1.7_GA) which is present on the node on which you triggered the cluster installation. This setup-node.zip file contains the script to install the required Kubernetes packages and Docker on node and has kubeadm join token to join a node to a cluster.</li>
-<li>Extract the setup-nodes.zip file.</li>
+<li>
+<p>Copy the setup-node.zip file which is generated in Foundry container artifact folder (VoltMXFoundrySingleContainer-9.2.1.7_GA) which is present on the node on which you triggered the cluster installation. This setup-node.zip file contains the script to install the required Kubernetes packages and Docker on node and has kubeadm join token to join a node to a cluster.</p>
+</li>
+<li>
+<p>Extract the setup-nodes.zip file. </p>
+<p><code>sudo unzip setup-node.zip -d setup-node</code></p>
+</li>
+<li>
+<p>Navigate to setup-node folder.  </p>
+<p><code>cd setup-node</code></p>
+</li>
+<li>
+<p>Run the following command to add the new worker node.  </p>
+<p><code>sudo ./setup-node.sh</code></p>
+</li>
+<li>
+<p>If the node fails to join, the setup-node.sh file contains a token to join a node to the cluster. This token is valid for one hour. If you are joining the node after one hour, the token is regenerated on any master node. To generate the token, execute the following command.  </p>
+<p><code>sudo kubeadm token create --print-join-command</code></p>
+</li>
+<li>
+<p>Perform these steps if the worker node will be used for <strong>logging and monitoring</strong> purposes:</p>
+<ol>
+<li>
+<p>Label the worker node with the local volume role.</p>
+<p><code>kubectl label nodes --selector='!node-role.kubernetes.io/master' role=local-volume</code></p>
+</li>
+<li>
+<p>Create the following local volumes for logging and monitoring purposes. </p>
+<p><code>mkdir -p /root/foundry/prometheus</code>
+<code>mkdir -p /root/foundry/grafana</code>
+<code>mkdir -p /root/foundry/elasticSearch</code></p>
+</li>
 </ol>
 </li>
-</ul>
-<pre><code>sudo unzip setup-node.zip -d setup-node
-</code></pre>
-<pre><code>3.  Navigate to setup-node folder.
-</code></pre>
-<pre><code>cd setup-node
-</code></pre>
-<pre><code>4.  Run the following command to add the new worker node.
-</code></pre>
-<pre><code>sudo ./setup-node.sh
-</code></pre>
-<pre><code>5.  If the node fails to join, the setup-node.sh file contains a token to join a node to the cluster. This token is valid for one hour. If you are joining the node after one hour, the token is regenerated on any master node. To generate the token, execute the following command.
-</code></pre>
-<pre><code>sudo kubeadm token create --print-join-command
-</code></pre>
-<pre><code>6.  Perform these steps if the worker node will be used for **logging and monitoring** purposes:
-    1.  Label the worker node with the local volume role.
-</code></pre>
-<pre><code>kubectl label nodes --selector='!node-role.kubernetes.io/master' role=local-volume
-</code></pre>
-<pre><code>    2.  Create the following local volumes for logging and monitoring purposes.
-</code></pre>
-<pre><code>mkdir -p /root/foundry/prometheus
-</code></pre>
-<pre><code>mkdir -p /root/foundry/grafana
-</code></pre>
-<pre><code>mkdir -p /root/foundry/elasticSearch
-</code></pre>
-<pre><code>7.  Copy the kubeadm join which is generated from the previous step and run it in the node to be joined. This joins the worker node to master.
-</code></pre>
-<ul>
+<li>
+<p>Copy the kubeadm join which is generated from the previous step and run it in the node to be joined. This joins the worker node to master.</p>
+</li>
+</ol>
+</li>
 <li>
 <p><strong>How can I join a new master node to the cluster post the cluster setup?</strong></p>
 <p>Perform the following steps to join new master node.</p>
 <ol>
-<li>Copy the setup-node.zip file which is generated in Foundry container artifact folder (VoltMXFoundrySingleContainer-9.2.1.7_GA) which is present on the node on which you triggered the cluster installation. This setup-node.zip file contains the script to install required Kubernetes packages and Docker on node and has kubeadm join token to join node to cluster.</li>
-<li>Extract the setup-nodes.zip file.</li>
+<li>
+<p>Copy the setup-node.zip file which is generated in Foundry container artifact folder (VoltMXFoundrySingleContainer-9.2.1.7_GA) which is present on the node on which you triggered the cluster installation. This setup-node.zip file contains the script to install required Kubernetes packages and Docker on node and has kubeadm join token to join node to cluster.</p>
+</li>
+<li>
+<p>Extract the setup-nodes.zip file.</p>
+<p><code>sudo unzip setup-node.zip -d setup-node</code></p>
+</li>
+<li>
+<p>Navigate to setup-node folder.</p>
+<p><code>cd setup-node</code></p>
+</li>
+<li>
+<p>Run the following command to add a new master node.</p>
+<p><code>sudo ./setup-node.sh control-plane</code></p>
+</li>
+<li>
+<p>If the node fails to join, the setup-node.sh file contains a token to join a node to the cluster. This token is valid for one hour. If you are joining the node after one hour, the token should be regenerated on any master node. To generate the token, execute the following set of commands on an existing master node.</p>
+<p><pre><code>CERTIFICATE_KEY=$(kubeadm alpha certs certificate-key)<br />
+kubeadm init phase upload-certs --upload-certs --certificate-key $CERTIFICATE_KEY<br />
+WORKER_JOIN_COMMAND=$(kubeadm token create --print-join-command)<br />
+CONTROL_PLANE_JOIN_COMMAND="${WORKER_JOIN_COMMAND} --control-plane --certificate-key ${CERTIFICATE_KEY}"<br />
+echo $CONTROL_PLANE_JOIN_COMMAND
+</code></pre></p>
+</li>
+<li>
+<p>Copy the kubeadm join which is generated from the previous step and run it in the node to be joined. This joins the master node to the existing master cluster.</p>
+</li>
 </ol>
 </li>
-</ul>
-<pre><code>sudo unzip setup-node.zip -d setup-node
-</code></pre>
-<pre><code>3.  Navigate to setup-node folder.
-</code></pre>
-<pre><code>cd setup-node
-</code></pre>
-<pre><code>4.  Run the following command to add a new master node.
-</code></pre>
-<pre><code>sudo ./setup-node.sh control-plane
-</code></pre>
-<pre><code>5.  If the node fails to join, the setup-node.sh file contains a token to join a node to the cluster. This token is valid for one hour. If you are joining the node after one hour, the token should be regenerated on any master node. To generate the token, execute the following set of commands on an existing master node.
-</code></pre>
-<pre><code>CERTIFICATE_KEY=$(kubeadm alpha certs certificate-key)  
-        kubeadm init phase upload-certs --upload-certs --certificate-key $CERTIFICATE_KEY  
-        WORKER_JOIN_COMMAND=$(kubeadm token create --print-join-command)  
-        CONTROL_PLANE_JOIN_COMMAND=&quot;${WORKER_JOIN_COMMAND} --control-plane --certificate-key ${CERTIFICATE_KEY}&quot;  
-        echo $CONTROL_PLANE_JOIN_COMMAND
-</code></pre>
-<pre><code>6.  Copy the kubeadm join which is generated from the previous step and run it in the node to be joined. This joins the master node to the existing master cluster.
-</code></pre>
-<ul>
 <li>
 <p><strong>How to drain a worker node from the cluster?</strong></p>
 <ol>
-<li>You must cordon a node first so that pods don’t get scheduled on the node that will be drained. Run the following command to cordon a node.</li>
-</ol>
+<li>
+<p>You must cordon a node first so that pods don’t get scheduled on the node that will be drained. Run the following command to cordon a node.</p>
+<p><code>kubectl cordon &lt;Node_Name&gt;</code></p>
 </li>
-</ul>
-<pre><code>kubectl cordon &lt;Node_Name&gt;
-</code></pre>
-<pre><code>2.  To safely evict all your pods from a node before you perform maintenance on the node, you must drain the node. Run the following command to drain the node.
-</code></pre>
-<pre><code>sudo kubectl drain &lt;Node_Name&gt; --delete-local-data --ignore-daemonsets
-</code></pre>
-<pre><code>3.  After draining, you can safely delete the node. Run the following command to delete the node.
-</code></pre>
-<pre><code>sudo kubectl delete node &lt;Node_Name&gt;
-</code></pre>
-<pre><code>To join the worker node back to the cluster, generate a token in the master node and run that token in the worker node.
-</code></pre>
-<ul>
+<li>
+<p>To safely evict all your pods from a node before you perform maintenance on the node, you must drain the node. Run the following command to drain the node.</p>
+<p><code>sudo kubectl drain &lt;Node_Name&gt; --delete-local-data --ignore-daemonsets</code></p>
+</li>
+<li>
+<p>After draining, you can safely delete the node. Run the following command to delete the node.</p>
+<p><code>sudo kubectl delete node &lt;Node_Name&gt;</code></p>
+</li>
+</ol>
+<p>To join the worker node back to the cluster, generate a token in the master node and run that token in the worker node.</p>
+</li>
 <li>
 <p><strong>How to schedule pods on to a newly added worker node?</strong></p>
 <p>To schedule pods on to a newly added worker node, you have to run the descheduler template yml file. Go to the Foundry container artifacts folder (VoltMXFoundrySingleContainer-9.2.1.7_GA)and run the following command.</p>
+<p><code>sudo kubectl apply -f add-ons/voltmx-foundry-descheduler.yml</code> </p>
 </li>
-</ul>
-<pre><code>sudo kubectl apply -f add-ons/voltmx-foundry-descheduler.yml
-</code></pre>
-<ul>
 <li>
 <p><strong>Do I need to have an account with the Docker Hub to download the Foundry Images?</strong></p>
 <p>No. The images are public and you do not need any authorization to download them.</p>
@@ -1222,12 +1231,13 @@
 <ol>
 <li>In the install folder open the Foundry app yml file found at : <code>&lt;Install_folder&gt;/gen/&lt;env&gt;/voltmx-foundry-app.yml</code>.</li>
 <li>Modify all the values that have the suffix as DB_PASS, to the latest values. Save the yml file.</li>
-<li>Execute the following command:</li>
+<li>
+<p>Execute the following command:</p>
+<p><code>kubectl apply -f voltmx-foundry-app.yml</code></p>
+</li>
 </ol>
 </li>
 </ul>
-<pre><code>kubectl apply -f voltmx-foundry-app.yml
-</code></pre>
 <h2 id="commonly-used-commands">Commonly used commands</h2>
 <p>Following is the list of commonly used commands in this installation. You can execute the following commands from your terminal. For more commands refer to the <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">kubectl Cheat Sheet</a>.</p>
 <table>
