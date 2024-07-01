@@ -94,7 +94,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 ### V9 Servicepack 5 Fixpack 33
 June 28, 2024
 
-* Implementation of custom context menu for Desktop Native platforms.
+* Implementation of customisable edit menu for Desktop Native platforms.
 * Switching out AssetsLibrary (now deprecated by Apple) with the Photos framework.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
