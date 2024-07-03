@@ -17,7 +17,7 @@ Applicable to on-premises. This document explains how to install Console, Identi
 
 Getting Started Options
 
-*   [Release Notes](../../../Foundry/voltmx_foundry_release_notes/Content/VoltMX_Foundry_Release_Notes.md): Provides release details and information on the new features, known issues, and the limitations.
+*   [Release Notes](../../../Foundry/voltmx_foundry_release_notes/Content/VoltMX_Foundry_Release_Notes.md): Provides release details and information on the new features, known issues, and limitations.
 
 <!-- *   [Tutorials and Videos](../../../tutorials/voltmxfoundry/Content/Overview.md): Step-by-step instructions to set up a trial Volt MX Foundry account; how to configure Volt MX mobile services such as identity, integration, and engagement services; how to add backend services to your application; and how to invoke backend services by using Volt MX Foundry SDKs. -->
 
