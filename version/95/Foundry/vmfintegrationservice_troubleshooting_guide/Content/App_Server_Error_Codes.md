@@ -1,10 +1,10 @@
                                
 
 
-Volt MX  Foundry Integration Service Error Codes
+VoltMX  Foundry Integration Service Error Codes
 ===========================================
 
-The following are the error codes that Volt MX Foundry Integration Service throws. Each error code table consists of the error message, description of the error, severity, way to reproduce the error, error resolution and point of contact.
+The following are the error codes that VoltMX Foundry Integration Service throws. Each error code table consists of the error message, description of the error, severity, way to reproduce the error, error resolution and point of contact.
 
   
 | Error 1528 ||
@@ -30,9 +30,9 @@ The following are the error codes that Volt MX Foundry Integration Service throw
 | Error 5001 ||
 | --- | --- |
 | **MESSAGE** | Mandatory Request parameter channel is missing. |
-| **DESCRIPTION** | Volt MX Foundry Integration Service is hit from places other than the device. Mandatory parameter channel is missing. |
+| **DESCRIPTION** | VoltMX Foundry Integration Service is hit from places other than the device. Mandatory parameter channel is missing. |
 | **SEVERITY** | SEVERE |
-| **REPRODUCE THE ERROR** | Remove the request parameter "channel" while invoking Volt MX Foundry Integration Service. |
+| **REPRODUCE THE ERROR** | Remove the request parameter "channel" while invoking VoltMX Foundry Integration Service. |
 | **RESOLUTION** | Check the request parameters for mandatory parameter: channel. |
 | POINT OF CONTACT | VOLTMX |
 
@@ -40,9 +40,9 @@ The following are the error codes that Volt MX Foundry Integration Service throw
 | Error 5002 ||
 | --- | --- |
 | **MESSAGE** | Mandatory Request parameters - appID, serviceID or both are missing. |
-| **DESCRIPTION** | Volt MX Foundry Integration Service is hit from places other than the device. All the mandatory parameters such as- appID, serviceID or both are missing. |
+| **DESCRIPTION** | VoltMX Foundry Integration Service is hit from places other than the device. All the mandatory parameters such as- appID, serviceID or both are missing. |
 | **SEVERITY** | SEVERE |
-| **REPRODUCE THE ERROR** | Remove the request parameter appID or serviceID while invoking Volt MX Foundry Integration Service. |
+| **REPRODUCE THE ERROR** | Remove the request parameter appID or serviceID while invoking VoltMX Foundry Integration Service. |
 | **RESOLUTION** | Check the request parameters for mandatory parameter : appID and serviceID. |
 | POINT OF CONTACT | VOLTMX |
 
@@ -110,7 +110,7 @@ The following are the error codes that Volt MX Foundry Integration Service throw
 | Error 5301 ||
 | --- | --- |
 | **MESSAGE** | No Device ID found for <rcidentifier>. |
-| **DESCRIPTION** | Fallback device not found. Device database may be corrupt or wrong. The Volt MX Foundry Integration Service is unable to locate the fallback device IDs in the device database. |
+| **DESCRIPTION** | Fallback device not found. Device database may be corrupt or wrong. The VoltMX Foundry Integration Service is unable to locate the fallback device IDs in the device database. |
 | **SEVERITY** | SEVERE |
 | **REPRODUCE THE ERROR** | Remove the entries for 'voltmxua' and 'voltmxrc' in the device database. |
 | **RESOLUTION** | Check the device database if the fallback rcidentifiers ‘voltmxrc’ and fallback useragent ‘voltmxua’ are present. Also, check the connectivity to the device database. |
@@ -213,14 +213,14 @@ The following are the error codes that Volt MX Foundry Integration Service throw
 | **DESCRIPTION** | Check response from back-end server. |
 | **SEVERITY** | HIGH |
 | **REPRODUCE THE ERROR** | Create a dummy service on the back-end server to return a HTTP Response with error codes such as 401/500, it throws up the error. |
-| **RESOLUTION** | Check response string from back-end servers. A common scenario can be when the back-end server returns an HTTP Response (401/500) for an XML / Soap request. This is treated as invalid by Volt MX Foundry Integration Service. Check if the response from the back-end server is a valid XML or Soap request. |
+| **RESOLUTION** | Check response string from back-end servers. A common scenario can be when the back-end server returns an HTTP Response (401/500) for an XML / Soap request. This is treated as invalid by VoltMX Foundry Integration Service. Check if the response from the back-end server is a valid XML or Soap request. |
 | POINT OF CONTACT | Back-end service provider. |
 
   
 | Error 8007 ||
 | --- | --- |
 | **MESSAGE** | Error parsing the XML response. |
-| **DESCRIPTION** | This error is returned if the Volt MX Foundry Integration Service could not parse the XML with the given XPath. |
+| **DESCRIPTION** | This error is returned if the VoltMX Foundry Integration Service could not parse the XML with the given XPath. |
 | **SEVERITY** | HIGH |
 | **REPRODUCE THE ERROR** | Provide incorrect XPath to parse the XML response. |
 | **RESOLUTION** | Check if the XPath matches the XML response returned by the service. |
@@ -240,9 +240,9 @@ The following are the error codes that Volt MX Foundry Integration Service throw
 | Error 8009 ||
 | --- | --- |
 | **MESSAGE** | Request unsuccessful, server responded with status code xxx. |
-| **DESCRIPTION** | If the received status code is not 200, Volt MX Foundry Integration Service throws this error. |
+| **DESCRIPTION** | If the received status code is not 200, VoltMX Foundry Integration Service throws this error. |
 | **SEVERITY** | HIGH |
-| **REPRODUCE THE ERROR** | Shutdown the service so that a 404 or 500 error is thrown by the server hosting the service. Try to access the service through Volt MX Foundry Integration Service and the error is reproduced. |
+| **REPRODUCE THE ERROR** | Shutdown the service so that a 404 or 500 error is thrown by the server hosting the service. Try to access the service through VoltMX Foundry Integration Service and the error is reproduced. |
 | **RESOLUTION** | Check if the services are accessible. |
 | POINT OF CONTACT | Back-end service provider. |
 
@@ -620,7 +620,7 @@ The following are the error codes that Volt MX Foundry Integration Service throw
 | Error 9105 ||
 | --- | --- |
 | **MESSAGE** | Unable to fill message template. |
-| **DESCRIPTION** | This error appears when Volt MX Foundry Integration Service is unable to create the request XML / Soap message from the input parameters in the request/session. |
+| **DESCRIPTION** | This error appears when VoltMX Foundry Integration Service is unable to create the request XML / Soap message from the input parameters in the request/session. |
 | **SEVERITY** | HIGH |
 | **REPRODUCE THE ERROR** | Pass a dataset as the input variable in the pre-processor for a particular service while keeping the attribute "datatype" of the input variable in the service-definition file as "String". |
 | **RESOLUTION** | Check the input variables and their datatype. Also, check if the datatype of the input variable is the same as specified in the `service-definition` file. |
@@ -643,14 +643,14 @@ The following are the error codes that Volt MX Foundry Integration Service throw
 | **DESCRIPTION** | This error is returned to the device in the event of any exception that occurs while connecting and invoking the back-end service through connectors like XML / Soap. Look at the log file for related java stack traces. This error can also appear due to the failure of HTTP client init due to misconfiguration or missing license related values in the `middleware.properties` file. |
 | **SEVERITY** | LOW |
 | **REPRODUCE THE ERROR** | One of the ways to create this error is to specify an invalid classname "abc.xyz" as the pre-processor for a particular service in the service-definition file and invoke that service. Since this class is not present, this error appears. You can also reproduce this error by removing the SMTP configuration from the `middleware.properties` file. |
-| **RESOLUTION** | Check the `middleware.log` for previous java exceptions and stack-traces. Check the `middleware.properties` configuration values as mentioned in the Volt MX Sever installation guide. |
+| **RESOLUTION** | Check the `middleware.log` for previous java exceptions and stack-traces. Check the `middleware.properties` configuration values as mentioned in the VoltMX Sever installation guide. |
 | POINT OF CONTACT | VOLTMX |
 
   
 | Error 10002 ||
 | --- | --- |
 | **MESSAGE** | Result not available in the request context. |
-| **DESCRIPTION** | Volt MX middleware processing error. |
+| **DESCRIPTION** | VoltMX middleware processing error. |
 | **SEVERITY** | HIGH |
 | **REPRODUCE THE ERROR** |   |
 | **RESOLUTION** | Check the exception in middleware / server log. |
@@ -670,7 +670,7 @@ The following are the error codes that Volt MX Foundry Integration Service throw
 | Error 10102 ||
 | --- | --- |
 | **MESSAGE** | Service does not exist with the ServiceID. |
-| **DESCRIPTION** | Volt MX Foundry Integration Service is hit with an invalid service ID. Possible hack. |
+| **DESCRIPTION** | VoltMX Foundry Integration Service is hit with an invalid service ID. Possible hack. |
 | **SEVERITY** | SEVERE |
 | **REPRODUCE THE ERROR** | Invoke the middleware application by giving the request parameter serviceID=xyz. Since this serviceID is not present in the `service-definition` file, the error appears. Alternatively, change the `service-definition` file by changing the attribute name. |
 | **RESOLUTION** | Check the `service-definition` file for the particular service being invoked. The <service> tag for that service should be present and should be defined correctly. |
@@ -722,7 +722,7 @@ The following are the error codes that Volt MX Foundry Integration Service throw
 | **MESSAGE** | Json String Syntax error. |
 | **DESCRIPTION** | When exception appears, json result is formed, while forming, any json exception appears. |
 | **SEVERITY** | HIGH |
-| **REPRODUCE THE ERROR** | If any exception appears from end server, Volt MX Foundry Integration Service forms one JSON response for device with error status. |
+| **REPRODUCE THE ERROR** | If any exception appears from end server, VoltMX Foundry Integration Service forms one JSON response for device with error status. |
 | **RESOLUTION** | Check back end server response. |
 | POINT OF CONTACT | VOLTMX |
 
@@ -1073,7 +1073,7 @@ The following are the error codes that Volt MX Foundry Integration Service throw
 | **DESCRIPTION** | Connection to the device database is lost. Resolve immediately. |
 | **SEVERITY** | SEVERE |
 | **REPRODUCE THE ERROR** | Bring down the database server. Invoke any service and the error appears. |
-| **RESOLUTION** | Check connection to the database server. Check the context specified. Check the credentials of the database server and, if Volt MX Foundry Integration Service has permissions to access the database. |
+| **RESOLUTION** | Check connection to the database server. Check the context specified. Check the credentials of the database server and, if VoltMX Foundry Integration Service has permissions to access the database. |
 | POINT OF CONTACT | VOLTMX |
 
   
@@ -1092,7 +1092,7 @@ The following are the error codes that Volt MX Foundry Integration Service throw
 | **MESSAGE** | Error while executing Select Queries. |
 | **DESCRIPTION** | Check the query and manually query the database with the same. Possible tampering with the database tables and / or data. |
 | **SEVERITY** | HIGH |
-| **REPRODUCE THE ERROR** | Modify the database and change the name of table "voltmxlogdb.devicemaster" to "voltmxlogdb.devmaster". Since the Volt MX Foundry Integration Service queries the devicemaster table, this error appears. |
+| **REPRODUCE THE ERROR** | Modify the database and change the name of table "voltmxlogdb.devicemaster" to "voltmxlogdb.devmaster". Since the VoltMX Foundry Integration Service queries the devicemaster table, this error appears. |
 | **RESOLUTION** | Check the query and manually query the database with the same. Possible tampering with the database tables and / or data. |
 | POINT OF CONTACT | VOLTMX |
 
