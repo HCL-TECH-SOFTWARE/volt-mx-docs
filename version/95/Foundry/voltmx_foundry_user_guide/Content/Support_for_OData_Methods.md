@@ -155,6 +155,21 @@ Example
 ```
  Name ne in ('butter','bread')
 ```
+**C**. 'in' with possible pair values verb:
+ 
+This 'in' operator checks whether a pair of columns has one of several possible pair values. If a pair matches the values in the column, gets the respone.Syntax rules are comma separated list of values without spaces and enclosed in square brackets []. Max 30 colnames are allowed.
+ 
+API Usage
+ 
+```
+$filter=[colname,colname,..] in [['value1','value3'],['value1','value4'],..]
+```
+ 
+Example
+ 
+```
+[FirstName,LastName] in [['John','Doe'],['Jane','Smith']]
+```
 
 
 ### startswith
@@ -231,3 +246,251 @@ Below syntax filters all the records where `firstname` does not endswith `dow`.
 ```
  not endswith('firstname','dow')
 ```
+
+### length
+
+Length function to fillter all the records where column equals to value. 
+
+API Usage
+
+```
+ $filter=length(colname) eq value
+```
+
+Example
+
+Below syntax filters all the records where `Name` lenght eq `19`.
+
+```
+ length(Name) eq 19
+```
+
+### indexof
+
+The indexof function to fillter all the records where parameter values returns the zero-based character position of the first occurrence of the second parameter in the first parameter, or -1 if the first parameter does not contain the second parameter. 
+
+API Usage
+
+```
+ $filter=indexof('colname','expression') eq value
+```
+
+Example
+
+Below syntax filters all the records where `Name` containing 'lfreds' starting at the second character.
+
+```
+ indexof(Name,'lfreds') eq 1
+```
+Note : As of now it is supported only in the MySQL and in the Oracle backend databases.
+
+### year
+
+
+The year function returns the year component of the Date. It filters all the records where column name is equal to the value.
+
+
+API Usage
+
+```
+ $filter=year('colname') eq value
+```
+
+Example
+
+Below syntax filters all the records where `year(BirthDate)` eq `1999`.
+
+```
+ year(BirthDate) eq 1999
+```
+
+### month
+
+
+The month function returns the month component of the Date. It filters all the records where column name is equal to the value.
+
+API Usage
+
+```
+ $filter=month('colname') eq value
+```
+
+Example
+
+Below syntax filters all the records where `month(BirthDate)` eq `5`.
+
+```
+ month(BirthDate) eq 5
+```
+### day
+
+
+The Day function returns the day component of the Date. It filters all the records where column name is equal to the value.
+
+API Usage
+
+```
+ $filter=day('colname') eq value
+```
+
+Example
+
+Below syntax filters all the records where `day(BirthDate)` eq `5`.
+
+```
+ DAY(BirthDate) eq 5
+```
+
+### hour
+
+
+The hour function returns the hour component (0 to 23) of the DateTimeOffset or TimeOfDay parameter value. It filters all the records where column name is equal to the value.
+
+API Usage
+
+```
+ $filter=hour('colname') eq value
+```
+
+Example
+
+Below syntax filters all the records where `hour(BirthDate)` eq `10`.
+
+```
+ hour(BirthDate) eq 10
+```
+### minute
+
+
+The minute function returns the minute component (0 to 59) of the DateTimeOffset or TimeOfDay parameter value. It filters all the records where column name is equal to the value.
+
+API Usage
+
+```
+ $filter=minute('colname') eq value
+```
+
+Example
+
+Below syntax filters all the records where `minute(BirthDate)` eq `45`.
+
+```
+ minute(BirthDate) eq 45
+```
+
+### second
+
+
+The second function returns the second component (0 to 59 for regular seconds) . It filters all the records where column name is equal to the value.
+
+API Usage
+
+```
+ $filter=secound('colname') eq value
+```
+
+Example
+
+Below syntax filters all the records where `second(BirthDate)` eq `40`.
+
+```
+ second(BirthDate) eq 40
+```
+
+### ceiling
+
+
+Arithmetic function to filter all the records where ceiling function rounds the column value up to the nearest numeric value with no decimal component.
+
+API Usage
+
+```
+ $filter=ceiling(colname) eq value
+```
+
+Example
+
+Below syntax filters all the records where `ceiling` rounds upto `32`.
+
+
+```
+ ceiling(Freight) eq 32
+```
+### floor
+
+
+Arithmetic function to filter all the records where floor function rounds the column value down the nearest numeric value with no decimal component.
+
+
+API Usage
+
+```
+ $filter=floor(colname) eq value
+```
+
+Example
+
+Below syntax filters all the records where `floor` rounds down to  `36`
+
+```
+ floor(Freight) eq 36
+```
+### round
+
+
+Arithmetic function to filter all the records where round function rounds the column value the nearest numeric value with no decimal component. The mid-point between two integers is rounded away from zero, i.e. 0.5 is rounded to 1 and  0.5 is rounded to -1.
+
+API Usage
+
+```
+ $filter=round(colname) eq value
+```
+
+Example
+
+Below syntax filters all the records where `round` rounds to  `32`.
+
+```
+ round(Freight) eq 32
+```
+### indexof
+
+
+String function to filters all the records where string or ordered collection column values returns the zero-based character position of the first occurrence of the second string in the first string. String comparison is case-sensitive.
+
+
+API Usage
+
+```
+ $filter=indexof(colname,'expression') eq value
+```
+
+Example
+
+Below syntax filters all the records where `indexof` containing `lfreds` starting at the second character.
+
+```
+  indexof(CompanyName,'lfreds') eq 1
+```
+
+### trim
+
+
+String function to filters all the records where column string value with all leading and trailing whitespace characters, according to Unicode rules, removed.
+
+
+API Usage
+
+```
+ $filter=trim(colname) eq colname
+```
+
+Example
+
+Below syntax filters all the records where trim gives CompanyName without leading or trailing whitespace characters.
+
+```
+ trim(CompanyName) eq CompanyName
+```
+
+
