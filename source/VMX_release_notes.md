@@ -318,7 +318,7 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 
 
 ### V9 Servicepack 2 Fixpack 2 Hotfix 7
-June 28, 2024
+July 08, 2024
 
 There are no new features or enhancements in this release.
 For relevant support note, see the<a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094476" target="_blank"> Cumulative fix list for HCL Volt MX</a>.
