@@ -927,11 +927,11 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ## Volt Foundry
 
 ### V9 Servicepack 5 Fixpack 16 Hotfix 3
-July 09, 2024
+July 08, 2024
 
 * Expanded the scope of OData4 filters by adding new operations.
 * Expanded available discovery APIs for integration with HCL Leap.
-* Strengthened security.
+* Security hardening.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
