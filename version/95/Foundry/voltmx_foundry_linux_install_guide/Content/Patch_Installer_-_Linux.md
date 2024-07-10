@@ -24,7 +24,7 @@ Prerequisites
     For example, if you are required to install hotfix archive for Console version V 9.5.x, you must have the Foundry 9.5.x GA with Console installed on your system.
     
 *   Download the `patchinstaller(binary)` and `hotfix archives` from [downloads/manual/](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.2.x&orgId=HCL&fromRecentFile=false&fromRecentPkg=true&fromDL=false) with your credentials.
-*   Ensure that  `VoltMXFoundryPatchInstaller-9.5.x.QA.bin`  file has execute permission.
+*   Ensure that  `VoltFoundryPatchInstaller-9.5.x.QA.bin`  file has execute permission.
     
     
     <details close markdown="block"><summary>Click here for more details on How to download patch installer and hotfix archives:</summary>
@@ -32,9 +32,9 @@ Prerequisites
     To download Volt Foundry Patch Installer and hotfixes, follow these steps:
         
     1.   Log in to [](http://developer.voltmx.com/VoltMXReleases)[downloads/manual/](http://community.hclvoltmx.com/downloads/manual/). You can obtain a user name and password from your sales representative or partner.
-    2.  Navigate to the **VoltMX Foundry** section.
-    3.  From the **VoltMX Foundry Patch Installer**, select the specific release from the **Version** drop-down list and then click on the specific release related files you want to download based on your platform (Windows or Linux).  
-            For example, if you want to download `VoltMX Foundry Patch Installer 8.0 GA`, select the `8.0 GA` version from the drop-down list, and then click the **Installer\_Linux** link.
+    2.  Navigate to the **Volt Foundry** section.
+    3.  From the **Volt Foundry Patch Installer**, select the specific release from the **Version** drop-down list and then click on the specific release related files you want to download based on your platform (Windows or Linux).  
+            For example, if you want to download `Volt Foundry Patch Installer 8.0 GA`, select the `8.0 GA` version from the drop-down list, and then click the **Installer\_Linux** link.
     4.  For the required hotfix components, select the specific release from the **Version** drop-down list and then click **Download**.
 
     </details>
@@ -53,17 +53,17 @@ To install Volt Foundry patch using the installer, follow these steps:
 <li>Execute the following command to switch to the user that you created.<br><code># su - username</code></li>
 <li>Press <b>Enter</b>. The system prompts you to enter the password.</li>
 <li>Enter the password, and press <b>Enter</b>.</li>
-<li>Unzip the <code>VoltMXFoundrySetup-9.x.x.GA.tar.gz</code> file, and navigate to the VoltMXFoundry_Patch_Installer_Linux folder.</li>
-<li>Start the VoltMXFoundryPatchInstaller-9.5.x.QA.bin file by executing the following command:<br><code>./VoltMXFoundryPatchInstaller-9.5.x.QA.bin</code>
-<pre><code>[root@mbaastest11 ~]# chmod +x VoltMXFoundryPatchInstaller-9.5.x.QA.bin
-[root@mbaastest11 ~]# ./VoltMXFoundryPatchInstaller-9.5.x.QA.bin
+<li>Unzip the <code>VoltFoundrySetup-9.x.x.GA.tar.gz</code> file, and navigate to the VoltFoundry_Patch_Installer_Linux folder.</li>
+<li>Start the VoltFoundryPatchInstaller-9.5.x.QA.bin file by executing the following command:<br><code>./VoltFoundryPatchInstaller-9.5.x.QA.bin</code>
+<pre><code>[root@mbaastest11 ~]# chmod +x VoltFoundryPatchInstaller-9.5.x.QA.bin
+[root@mbaastest11 ~]# ./VoltFoundryPatchInstaller-9.5.x.QA.bin
 Preparing to install...
 Extracting the installation resources from the installer archive...
 Configuring the installer for this system's environment...
 
 Launching installer...
 ====================================
-VoltMX Foundry (created with InstallAnywhere)
+Volt Foundry (created with InstallAnywhere)
 ------------------------------------
 Preparing CONSOLE Mode Installation...</code></pre>
 </li>

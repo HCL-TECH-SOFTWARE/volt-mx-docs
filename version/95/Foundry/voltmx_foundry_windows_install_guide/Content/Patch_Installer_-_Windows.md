@@ -22,9 +22,9 @@ The Patch Installer uses hotfix archives and applies the software updates to an 
 <b>For example</b>, if you are required to install hotfix archive for Console version V 9.5.x, you must have Foundry 9.5.x GA with Console installed on your system.</br>
 
 
-* Ensure that  `Volt Foundry PatchInstaller-9.5.x.QA.exe`  file has execute permission
+* Ensure that  `VoltFoundryPatchInstaller-9.5.x.QA.exe`  file has execute permission
 
-* Please stop the windows Foundry service before applying the patch - pre req.
+* Please stop the windows Foundry service before applying the patch.
 
 
 <b>To download Volt Foundry Patch Installer and hotfixes, follow these steps:</b>
@@ -44,7 +44,7 @@ The Patch Installer uses hotfix archives and applies the software updates to an 
 1. Unzip the `Volt Foundry-9.x.x.GA.zip` file, and navigate to
    the Volt MX <b>Foundry_Patch_Installer_Windowsfolder</b>.
 
-2. Double-click `Volt Foundry PatchInstaller-9.5.x.QA.exe` to
+2. Double-click `VoltFoundryPatchInstaller-9.5.x.QA.exe` to
    launch the installer.<br>
    The <b>InstallAnywhere</b> dialog appears and displays the progress of the launching the installer.
 
