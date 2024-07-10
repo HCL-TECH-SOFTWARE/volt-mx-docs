@@ -1,54 +1,40 @@
                          
 
-You are here: Installing Hotfix Archives for Volt MX Foundry - Linux
+You are here: Installing Hotfix Archives for Volt Foundry - Linux
 
-Installing Hotfix Archives for Volt MX Foundry - Linux
+Installing Hotfix Archives for Volt Foundry - Linux
 =====================================================
 
-The Volt MX Foundry Patch Installer can be used to apply patches (software updates) to Volt MX Foundry components for a specific GA release. The Patch Installer supports applying patches from Foundry 7.0.1 (GA) onwards.
+The Volt Foundry Patch Installer can be used to apply patches (software updates) to Volt Foundry components for a specific GA release. The Patch Installer supports applying patches from Foundry 7.0.1 (GA) onwards.
 
 **For example**:
 
-To apply any `7.0.1.x` patches to versions below 7.0.1 GA (Foundry 7.0 GA o r 6.5.x), you need to upgrade from `V 6.5.x` or `V 7.0GA`   to  `7.0.1 GA` by using the installer, and then apply `7.0.1.x` patches.
+To apply any `9.5.x` patches to versions below 9.5.x GA (Foundry 9.5.x GA or 6.5.x), you need to upgrade from `V 9.5.x` or `V 9.5.x.GA`   to  `9.5.x GA` by using the installer, and then apply `9.5.x` patches.
 
-The Patch Installer uses hotfix archives and applies the software updates to an existing Volt MX Foundry Installation. A hotfix archive (which is a `.zip` file) file can have artifacts for one or more components. While installing hotfix archives, all components in the .zip are installed to your existing Volt MX Foundry installation.  
-
-Patch Installer GA Versions
----------------------------
-
-The following GA versions are supported for patch installer and hotfix archives.
-
-*   7.0.1 GA
-*   7.1 GA
-*   7.2 GA
-*   7.3 GA
-*   V8
-*   V8 SP2
-*   V8 SP3 FP1
-*   V8 SP4 FP3 HF1
+The Patch Installer uses hotfix archives and applies the software updates to an existing Volt Foundry Installation. A hotfix archive (which is a `.zip` file) file can have artifacts for one or more components. While installing hotfix archives, all components in the .zip are installed to your existing Volt Foundry installation. 
 
 
 Prerequisites
 -------------
 
-*   Ensure that you have a previous version of Volt MX Foundry GA installed on your system at an accessible network location.
+*   Ensure that you have a previous version of Volt Foundry GA installed on your system at an accessible network location.
     
-    > **_Important:_** If you are required to install hotfix archives to a set of components for a specific release, you must have the supported Volt MX Foundry GA version (for example, Foundry 7.0.1) with required components installed on your system.  
+    > **_Important:_** If you are required to install hotfix archives to a set of components for a specific release, you must have the supported Volt Foundry GA version (for example, Foundry 9.5.x) with required components installed on your system.  
       
-    For example, if you are required to install hotfix archive for Console version V 7.0.1, you must have the Foundry 7.0.1 GA with Console installed on your system.
+    For example, if you are required to install hotfix archive for Console version V 9.5.x, you must have the Foundry 9.5.x GA with Console installed on your system.
     
 *   Download the `patchinstaller(binary)` and `hotfix archives` from [downloads/manual/](https://hclsoftware.flexnetoperations.com/flexnet/operationsportal/entitledDownloadFile.action?downloadPkgId=HCL_Volt_Foundry_v9.2.x&orgId=HCL&fromRecentFile=false&fromRecentPkg=true&fromDL=false) with your credentials.
-*   Ensure that  `VoltMXFoundryPatchInstaller.bin`  file has execute permission.
+*   Ensure that  `VoltFoundryPatchInstaller-9.5.x.QA.bin`  file has execute permission.
     
     
     <details close markdown="block"><summary>Click here for more details on How to download patch installer and hotfix archives:</summary>
         
-    To download Volt MX Foundry Patch Installer and hotfixes, follow these steps:
+    To download Volt Foundry Patch Installer and hotfixes, follow these steps:
         
     1.   Log in to [](http://developer.voltmx.com/VoltMXReleases)[downloads/manual/](http://community.hclvoltmx.com/downloads/manual/). You can obtain a user name and password from your sales representative or partner.
-    2.  Navigate to the **VoltMX Foundry** section.
-    3.  From the **VoltMX Foundry Patch Installer**, select the specific release from the **Version** drop-down list and then click on the specific release related files you want to download based on your platform (Windows or Linux).  
-            For example, if you want to download `VoltMX Foundry Patch Installer 8.0 GA`, select the `8.0 GA` version from the drop-down list, and then click the **Installer\_Linux** link.
+    2.  Navigate to the **Volt Foundry** section.
+    3.  From the **Volt Foundry Patch Installer**, select the specific release from the **Version** drop-down list and then click on the specific release related files you want to download based on your platform (Windows or Linux).  
+            For example, if you want to download `Volt Foundry Patch Installer 8.0 GA`, select the `8.0 GA` version from the drop-down list, and then click the **Installer\_Linux** link.
     4.  For the required hotfix components, select the specific release from the **Version** drop-down list and then click **Download**.
 
     </details>
@@ -61,37 +47,37 @@ Prerequisites
     
 *   For GA version 8.4 - Patch installers (8.4.3.1), add the `mysql-connector-java-5.1.44.jar` into the VPNS zip file.
 
-To install Volt MX Foundry patch using the installer, follow these steps:
+To install Volt Foundry patch using the installer, follow these steps:
 
 <ol>
 <li>Execute the following command to switch to the user that you created.<br><code># su - username</code></li>
 <li>Press <b>Enter</b>. The system prompts you to enter the password.</li>
 <li>Enter the password, and press <b>Enter</b>.</li>
-<li>Unzip the <code>VoltMXFoundrySetup-9.x.x.GA.tar.gz</code> file, and navigate to the VoltMXFoundry_Patch_Installer_Linux folder.</li>
-<li>Start the VoltMXFoundryPatchInstaller-9.x.x.GA.bin file by executing the following command:<br><code>./VoltMXFoundryPatchInstaller-9.x.x.GA.bin</code>
-<pre><code>[root@mbaastest11 ~]# chmod +x VoltMXFoundryPatchInstaller-9.x.x.GA.bin
-[root@mbaastest11 ~]# ./VoltMXFoundryPatchInstaller-9.x.x.GA.bin
+<li>Unzip the <code>VoltFoundrySetup-9.x.x.GA.tar.gz</code> file, and navigate to the VoltFoundry_Patch_Installer_Linux folder.</li>
+<li>Start the VoltFoundryPatchInstaller-9.5.x.QA.bin file by executing the following command:<br><code>./VoltFoundryPatchInstaller-9.5.x.QA.bin</code>
+<pre><code>[root@mbaastest11 ~]# chmod +x VoltFoundryPatchInstaller-9.5.x.QA.bin
+[root@mbaastest11 ~]# ./VoltFoundryPatchInstaller-9.5.x.QA.bin
 Preparing to install...
 Extracting the installation resources from the installer archive...
 Configuring the installer for this system's environment...
 
 Launching installer...
 ====================================
-VoltMX Foundry (created with InstallAnywhere)
+Volt Foundry (created with InstallAnywhere)
 ------------------------------------
 Preparing CONSOLE Mode Installation...</code></pre>
 </li>
 <li>To continue the installation, press <b>Enter</b>. The Introduction page appears asking for following details. Enter the details to proceed with the upgrade:
 <ul>
-<li><b>Please provide the location of the patch file</b>: Provide the patch file location of the Volt MX Foundry component that you wish to install to current version. For example, <code>sample.zip</code>.</li>
-<li><b>Please provide the location of existing installation</b>: The default install location appears in this field. Provide the location of existing Volt MX Foundry installation that you wish to upgrade with the selected patch version.
+<li><b>Please provide the location of the patch file</b>: Provide the patch file location of the Volt Foundry component that you wish to install to current version. For example, <code>sample.zip</code>.</li>
+<li><b>Please provide the location of existing installation</b>: The default install location appears in this field. Provide the location of existing Volt Foundry installation that you wish to upgrade with the selected patch version.
 
 <pre><code>
 ====================================
 Introduction
 ------------
 
-Thank you for choosing to upgrade Volt MX Foundry!
+Thank you for choosing to upgrade Volt Foundry!
 
 Please provide the below details to proceed with the upgrade.
 Please provide the location of the patch file : (Default: ): /root/sample.zip
@@ -120,7 +106,7 @@ PRESS &lt;ENTER&gt; TO CONTINUE:</code></pre>
 The installer takes backup of the current install folder. The backup folder will have a suffix of <code>_{Patch_File_Name}.</code> For example, if the hotfix name is VPNS.XXX, then the suffix of the backup folder will be <code>_VPNS.XXX</code>.
 <blockquote><em><b>Important: </b></em>The Installer does not support automatic backups of database and other artifacts. The Installer does not support rollback in case of a failure during the upgrade.<br>
 - You must take backup of your database and other artifacts before upgrading.<br>
-- After the upgrade, republish your Volt MX Foundry applications.
+- After the upgrade, republish your Volt Foundry applications.
 </blockquote>
 <pre><code>
 =============================
@@ -136,7 +122,7 @@ The Installation Complete details appear.
 Installation Complete
 -----------------------------------------
 
-Congratulations. Volt MX Foundry has been successfully installed to:
+Congratulations. Volt Foundry has been successfully installed to:
 
 /root/MFJB6525132
 
@@ -149,7 +135,7 @@ PRESS &lt;ENTER&gt; TO EXIT THE INSTALLER: [user1@cnt6-01c downloads]$
 Press <b>Enter</b> to complete the installation. After the installation is completed, the installer creates logs in the install folder.
 The &lt;Install Location&gt; directory contains the log files logging each invocation of the installer. To make problem identification easier, provide these log files to Volt MX when reporting an issue.
 <blockquote><em><b>Important: </b></em>
-When you are using a third party tool (for example, PuTTY) for installing Volt MX Foundry remotely, if any network connection issues occur at the end of the installation, the installer stops the installation and the installation log is not created.
+When you are using a third party tool (for example, PuTTY) for installing Volt Foundry remotely, if any network connection issues occur at the end of the installation, the installer stops the installation and the installation log is not created.
 </blockquote>
 For troubleshooting tips to resolve problems that you may encounter during installation, refer to <a href="../Content/Troubleshooting.html">FAQs and Troubleshooting</a>
 </li>
