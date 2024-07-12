@@ -360,6 +360,104 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#length" class="md-nav__link">
+    length
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#date-and-time" class="md-nav__link">
+    Date and Time
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#year" class="md-nav__link">
+    year
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#month" class="md-nav__link">
+    month
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#day" class="md-nav__link">
+    day
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hour" class="md-nav__link">
+    hour
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minute" class="md-nav__link">
+    minute
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#second" class="md-nav__link">
+    second
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-comparison-filters" class="md-nav__link">
+    Data comparison filters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ceiling" class="md-nav__link">
+    Ceiling
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#floor" class="md-nav__link">
+    Floor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#round" class="md-nav__link">
+    Round
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trim" class="md-nav__link">
+    trim
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#indexof" class="md-nav__link">
+    indexof
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -444,7 +542,7 @@
 <h2 id="odata-v4-methods">ODATA V4 Methods</h2>
 <h3 id="in">in</h3>
 <p><strong>A</strong>. 'in' with eq(equals) verb:</p>
-<p>This 'in' operator filters all the records that equals the list of values in the column of the table.
+<p>This 'in' operator filter all the records that equals the list of values in the column of the table.
 Syntax rules are comma separated list of values without spaces and enclosed in parentheses(). Don't use square brackets [] or braces {}.</p>
 <p>API Usage</p>
 <pre><code> $filter=colname eq in ('value','value')
@@ -453,7 +551,7 @@ Syntax rules are comma separated list of values without spaces and enclosed in p
 <pre><code> Name eq in ('Milk','Cheese')
 </code></pre>
 <p><strong>B</strong>. 'in' with ne(not equals) verb:</p>
-<p>This 'in' operator filters all the records that not equals the list of values in the column of the table.
+<p>This 'in' operator filter all the records that not equals the list of values in the column of the table.
 Syntax rules are comma separated list of values without spaces and enclosed in parentheses(). Don't use square brackets [] or braces {}.</p>
 <p>API Usage</p>
 <pre><code> $filter=colname ne in ('value','value')
@@ -461,42 +559,150 @@ Syntax rules are comma separated list of values without spaces and enclosed in p
 <p>Example</p>
 <pre><code> Name ne in ('butter','bread')
 </code></pre>
+<p><strong>C</strong>. 'in' with possible pair values verb:</p>
+<p>This 'in' operator checks whether a pair of columns has one of several possible pair values. If a pair matches the values in the column, gets the respone.Syntax rules are comma separated list of values without spaces and enclosed in square brackets []. Max 30 colnames are allowed.</p>
+<p>API Usage</p>
+<pre><code>$filter=[colname,colname,..] in [['value1','value3'],['value1','value4'],..]
+</code></pre>
+<p>Example</p>
+<pre><code>[FirstName,LastName] in [['John','Doe'],['Jane','Smith']]
+</code></pre>
 <h3 id="startswith_1">startswith</h3>
-<p>String function to filters all the records where column startswith provided String. </p>
+<p>String function to filter all the records where column startswith provided String. </p>
 <p>API Usage</p>
 <pre><code> $filter=startswith('colname','expression')
 </code></pre>
 <p>Example</p>
-<p>Below syntax filters all the records where <code>firstname</code> startswith <code>nas</code>.</p>
+<p>Below syntax filter all the records where <code>firstname</code> startswith <code>nas</code>.</p>
 <pre><code> startswith('firstname','nas')
 </code></pre>
 <h3 id="not-startswith">not startswith</h3>
-<p>String function to filters all the records where column does not startswith provided String.</p>
+<p>String function to filter all the records where column does not startswith provided String.</p>
 <p>API Usage</p>
 <pre><code> $filter=not startswith('colname','expression')
 </code></pre>
 <p>Example</p>
-<p>Below syntax filters all the records where <code>lastname</code> does not startswith <code>daq</code>.</p>
+<p>Below syntax filter all the records where <code>lastname</code> does not startswith <code>daq</code>.</p>
 <pre><code> not startswith('lastname','daq')
 </code></pre>
 <h3 id="endswith_1">endswith</h3>
-<p>String function to filters all the records where column endswith provided String.</p>
+<p>String function to filter all the records where column endswith provided String.</p>
 <p>API Usage</p>
 <pre><code> $filter=endswith('colname','expression')
 </code></pre>
 <p>Example</p>
-<p>Below syntax filters all the records where <code>firstname</code> endswith <code>nse</code>.</p>
+<p>Below syntax filter all the records where <code>firstname</code> endswith <code>nse</code>.</p>
 <pre><code> endswith('firstname','nse')
 </code></pre>
 <h3 id="not-endswith">not endswith</h3>
-<p>String function to filters all the records where column does not endswith provided String.</p>
+<p>String function to filter all the records where column does not endswith provided String.</p>
 <p>API Usage</p>
 <pre><code> $filter=not endswith('colname','expression')
 </code></pre>
 <p>Example</p>
-<p>Below syntax filters all the records where <code>firstname</code> does not endswith <code>dow</code>.</p>
+<p>Below syntax filter all the records where <code>firstname</code> does not endswith <code>dow</code>.</p>
 <pre><code> not endswith('firstname','dow')
 </code></pre>
+<h3 id="length">length</h3>
+<p>Length function to fillter all the records where column lenght equals to value. </p>
+<p>API Usage</p>
+<pre><code> $filter=length(colname) eq value
+</code></pre>
+<p>Example</p>
+<p>Below syntax filter all the records where <code>Name</code> lenght eq <code>19</code>.</p>
+<pre><code> length(Name) eq 19
+</code></pre>
+<h3 id="date-and-time">Date and Time</h3>
+<p>Date-time filters operates on date type column value. Column would contain date/time data. Filters will compare date/time fields to provided value and returns matched records </p>
+<h3 id="year">year</h3>
+<p>API Usage</p>
+<pre><code> $filter=year('colname') eq value
+</code></pre>
+<p>Example</p>
+<p>Below syntax filter all the records where <code>year(BirthDate)</code> eq <code>1999</code>.</p>
+<pre><code> year(BirthDate) eq 1999
+</code></pre>
+<h3 id="month">month</h3>
+<p>API Usage</p>
+<pre><code> $filter=month('colname') eq value
+</code></pre>
+<p>Example</p>
+<p>Below syntax filter all the records where <code>month(BirthDate)</code> eq <code>5</code>.</p>
+<pre><code> month(BirthDate) eq 5
+</code></pre>
+<h3 id="day">day</h3>
+<p>API Usage</p>
+<pre><code> $filter=day('colname') eq value
+</code></pre>
+<p>Example</p>
+<p>Below syntax filter all the records where <code>day(BirthDate)</code> eq <code>5</code>.</p>
+<pre><code> DAY(BirthDate) eq 5
+</code></pre>
+<h3 id="hour">hour</h3>
+<p>API Usage</p>
+<pre><code> $filter=hour('colname') eq value
+</code></pre>
+<p>Example</p>
+<p>Below syntax filter all the records where <code>hour(BirthDate)</code> eq <code>10</code>.</p>
+<pre><code> hour(BirthDate) eq 10
+</code></pre>
+<h3 id="minute">minute</h3>
+<p>API Usage</p>
+<pre><code> $filter=minute('colname') eq value
+</code></pre>
+<p>Example</p>
+<p>Below syntax filter all the records where <code>minute(BirthDate)</code> eq <code>45</code>.</p>
+<pre><code> minute(BirthDate) eq 45
+</code></pre>
+<h3 id="second">second</h3>
+<p>API Usage</p>
+<pre><code> $filter=secound('colname') eq value
+</code></pre>
+<p>Example</p>
+<p>Below syntax filter all the records where <code>second(BirthDate)</code> eq <code>40</code>.</p>
+<pre><code> second(BirthDate) eq 40
+</code></pre>
+<h3 id="data-comparison-filters">Data comparison filters</h3>
+<p>Filters to list all the recodrs where post rounding the column value is equal to provided number.</p>
+<h3 id="ceiling">Ceiling</h3>
+<p>API Usage</p>
+<pre><code> $filter=ceiling(colname) eq value
+</code></pre>
+<p>Example</p>
+<p>Below syntax filter all the records where <code>ceiling</code> rounds upto <code>32</code>.</p>
+<h3 id="floor">Floor</h3>
+<p>API Usage</p>
+<pre><code> $filter=ceiling(colname) eq value
+</code></pre>
+<p>Example</p>
+<p>Below syntax filter all the records where <code>ceiling</code> rounds upto <code>32</code>.</p>
+<h3 id="round">Round</h3>
+<p>API Usage</p>
+<pre><code> $filter=round(colname) eq value
+</code></pre>
+<p>Example</p>
+<p>Below syntax filter all the records where <code>round</code> rounds to  <code>32</code>.</p>
+<pre><code> round(Freight) eq 32
+</code></pre>
+<h3 id="trim">trim</h3>
+<p>Trim function to filter all the records where column name with leading and trailing whitespace.</p>
+<p>API Usage</p>
+<pre><code> $filter=trim(colname) eq colname
+</code></pre>
+<p>Example</p>
+<p>Below syntax filter all the records where trim gives CompanyName without leading or trailing whitespace characters.</p>
+<pre><code> trim(CompanyName) eq CompanyName
+</code></pre>
+<h3 id="indexof">indexof</h3>
+<p>The indexof function to fillter all the records where parameter values returns the zero-based character position of the first occurrence of the second parameter in the first parameter, or -1 if the first parameter does not contain the second parameter. </p>
+<p>API Usage</p>
+<pre><code> $filter=indexof('colname','expression') eq value
+</code></pre>
+<p>Example</p>
+<p>Below syntax filters all the records where <code>Name</code> containing 'lfreds' starting at the second character.</p>
+<pre><code> indexof(Name,'lfreds') eq 1
+</code></pre>
+<p>Note : As of now it is supported only in the MySQL and in the Oracle backend databases.</p>
 
               
             </article>
