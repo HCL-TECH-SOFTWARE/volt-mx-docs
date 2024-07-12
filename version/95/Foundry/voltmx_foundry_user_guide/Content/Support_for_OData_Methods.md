@@ -124,7 +124,7 @@ ODATA V4 Methods
 
 **A**. 'in' with eq(equals) verb:
 
-This 'in' operator filters all the records that equals the list of values in the column of the table.
+This 'in' operator filter all the records that equals the list of values in the column of the table.
 Syntax rules are comma separated list of values without spaces and enclosed in parentheses(). Don't use square brackets [] or braces {}.
 
 API Usage
@@ -141,7 +141,7 @@ Example
 
 **B**. 'in' with ne(not equals) verb:
 
-This 'in' operator filters all the records that not equals the list of values in the column of the table.
+This 'in' operator filter all the records that not equals the list of values in the column of the table.
 Syntax rules are comma separated list of values without spaces and enclosed in parentheses(). Don't use square brackets [] or braces {}.
 
 API Usage
@@ -155,12 +155,27 @@ Example
 ```
  Name ne in ('butter','bread')
 ```
+**C**. 'in' with possible pair values verb:
+ 
+This 'in' operator checks whether a pair of columns has one of several possible pair values. If a pair matches the values in the column, gets the respone.Syntax rules are comma separated list of values without spaces and enclosed in square brackets []. Max 30 colnames are allowed.
+ 
+API Usage
+ 
+```
+$filter=[colname,colname,..] in [['value1','value3'],['value1','value4'],..]
+```
+ 
+Example
+ 
+```
+[FirstName,LastName] in [['John','Doe'],['Jane','Smith']]
+```
 
 
 ### startswith
 
 
-String function to filters all the records where column startswith provided String. 
+String function to filter all the records where column startswith provided String. 
 
 API Usage
 
@@ -170,7 +185,7 @@ API Usage
 
 Example
 
-Below syntax filters all the records where `firstname` startswith `nas`.
+Below syntax filter all the records where `firstname` startswith `nas`.
 
 ```
  startswith('firstname','nas')
@@ -179,7 +194,7 @@ Below syntax filters all the records where `firstname` startswith `nas`.
 ### not startswith
 
 
-String function to filters all the records where column does not startswith provided String.
+String function to filter all the records where column does not startswith provided String.
 
 API Usage
 
@@ -189,7 +204,7 @@ API Usage
 
 Example
 
-Below syntax filters all the records where `lastname` does not startswith `daq`.
+Below syntax filter all the records where `lastname` does not startswith `daq`.
 
 ```
  not startswith('lastname','daq')
@@ -198,7 +213,7 @@ Below syntax filters all the records where `lastname` does not startswith `daq`.
 ### endswith
 
 
-String function to filters all the records where column endswith provided String.
+String function to filter all the records where column endswith provided String.
 
 API Usage
 
@@ -208,7 +223,7 @@ API Usage
 
 Example
 
-Below syntax filters all the records where `firstname` endswith `nse`.
+Below syntax filter all the records where `firstname` endswith `nse`.
 
 ```
  endswith('firstname','nse')
@@ -216,7 +231,7 @@ Below syntax filters all the records where `firstname` endswith `nse`.
 
 ### not endswith
 
-String function to filters all the records where column does not endswith provided String.
+String function to filter all the records where column does not endswith provided String.
 
 API Usage
 
@@ -226,8 +241,212 @@ API Usage
 
 Example
 
-Below syntax filters all the records where `firstname` does not endswith `dow`.
+Below syntax filter all the records where `firstname` does not endswith `dow`.
 
 ```
  not endswith('firstname','dow')
 ```
+
+### length
+
+Length function to fillter all the records where column lenght equals to value. 
+
+API Usage
+
+```
+ $filter=length(colname) eq value
+```
+
+Example
+
+Below syntax filter all the records where `Name` lenght eq `19`.
+
+```
+ length(Name) eq 19
+```
+
+### Date and Time
+
+
+Date-time filters operates on date type column value. Column would contain date/time data. Filters will compare date/time fields to provided value and returns matched records 
+
+###  year 
+
+API Usage
+
+```
+ $filter=year('colname') eq value
+```
+
+Example
+
+Below syntax filter all the records where `year(BirthDate)` eq `1999`.
+
+```
+ year(BirthDate) eq 1999
+```
+
+### month
+
+API Usage
+
+```
+ $filter=month('colname') eq value
+```
+
+Example
+
+Below syntax filter all the records where `month(BirthDate)` eq `5`.
+
+```
+ month(BirthDate) eq 5
+```
+### day
+
+API Usage
+
+```
+ $filter=day('colname') eq value
+```
+
+Example
+
+Below syntax filter all the records where `day(BirthDate)` eq `5`.
+
+```
+ DAY(BirthDate) eq 5
+```
+
+### hour
+
+API Usage
+
+```
+ $filter=hour('colname') eq value
+```
+
+Example
+
+Below syntax filter all the records where `hour(BirthDate)` eq `10`.
+
+```
+ hour(BirthDate) eq 10
+```
+### minute
+
+API Usage
+
+```
+ $filter=minute('colname') eq value
+```
+
+Example
+
+Below syntax filter all the records where `minute(BirthDate)` eq `45`.
+
+```
+ minute(BirthDate) eq 45
+```
+
+### second
+
+API Usage
+
+```
+ $filter=secound('colname') eq value
+```
+
+Example
+
+Below syntax filter all the records where `second(BirthDate)` eq `40`.
+
+```
+ second(BirthDate) eq 40
+```
+
+### Data comparison filters 
+
+
+ Filters to list all the recodrs where post rounding the column value is equal to provided number.
+
+### Ceiling 
+ 
+  API Usage
+
+```
+ $filter=ceiling(colname) eq value
+```
+
+Example
+
+Below syntax filter all the records where `ceiling` rounds upto `32`.
+ 
+### Floor
+ 
+ API Usage
+
+```
+ $filter=ceiling(colname) eq value
+```
+
+Example
+
+Below syntax filter all the records where `ceiling` rounds upto `32`.
+
+
+### Round 
+
+API Usage
+
+```
+ $filter=round(colname) eq value
+```
+
+Example
+
+Below syntax filter all the records where `round` rounds to  `32`.
+
+```
+ round(Freight) eq 32
+```
+
+### trim
+
+
+Trim function to filter all the records where column name with leading and trailing whitespace.
+
+
+API Usage
+
+```
+ $filter=trim(colname) eq colname
+```
+
+Example
+
+Below syntax filter all the records where trim gives CompanyName without leading or trailing whitespace characters.
+
+```
+ trim(CompanyName) eq CompanyName
+```
+
+### indexof
+
+The indexof function to fillter all the records where parameter values returns the zero-based character position of the first occurrence of the second parameter in the first parameter, or -1 if the first parameter does not contain the second parameter. 
+
+API Usage
+
+```
+ $filter=indexof('colname','expression') eq value
+```
+
+Example
+
+Below syntax filters all the records where `Name` containing 'lfreds' starting at the second character.
+
+```
+ indexof(Name,'lfreds') eq 1
+```
+Note : As of now it is supported only in the MySQL and in the Oracle backend databases.
+
+

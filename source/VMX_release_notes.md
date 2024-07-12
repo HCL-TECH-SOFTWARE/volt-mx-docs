@@ -68,7 +68,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 July 11, 2024
 
 * Included support for Android 14 and JDK 11 in SDK.
-* Switching out AssetsLibrary (now deprecated by Apple) with the Photos framework.
+* Switched out AssetsLibrary (now deprecated by Apple) with the Photos framework.
 * Added validation for Browser events related to originalURL and queryParams.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
