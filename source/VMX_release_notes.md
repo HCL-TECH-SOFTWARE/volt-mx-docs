@@ -8,6 +8,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Iris](#volt-iris)
 
+- [V9 Servicepack 2 Fixpack 73](#v9-servicepack-2-fixpack-73)
 - [V9 Servicepack 2 Fixpack 72](#v9-servicepack-2-fixpack-72)
 - [V9 Servicepack 2 Fixpack 71](#v9-servicepack-2-fixpack-71)
 - [V9 Servicepack 2 Fixpack 70](#v9-servicepack-2-fixpack-70)
@@ -62,6 +63,16 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 
 ## Volt Iris
+
+### V9 Servicepack 2 Fixpack 73
+July 11, 2024
+
+* Included support for Android 14 and JDK 11 in SDK.
+* Switching out AssetsLibrary (now deprecated by Apple) with the Photos framework.
+* Added validation for Browser events related to originalURL and queryParams.
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+
 
 ### V9 Servicepack 2 Fixpack 72
 May 21, 2024
