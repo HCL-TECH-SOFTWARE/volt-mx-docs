@@ -462,7 +462,6 @@ The appearance of the Segment widget varies as follows.
 | --- | --- |
 | Android | ![](Resources/Images/segand.png) |
 | iOS | ![](Resources/Images/iPhoneSegment.png) |
-| Windows Phone | ![](Resources/Images/segwin7_270x202.png) |
 | SPA | ![](Resources/Images/segtca_266x302.png) |
 
 
