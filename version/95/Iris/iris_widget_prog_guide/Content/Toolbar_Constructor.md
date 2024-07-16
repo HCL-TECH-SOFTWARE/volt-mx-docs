@@ -8,18 +8,59 @@ The Toolbar widget is unusual in that it only applies to iOS applications and c
 
 ```
 
-var myToolBar= new voltmx.ui.ToolBar({
-	"isToolBarBottomAttached":false,
-	"tintColor":"3c4d32",
-	"barStyle":constants.BAR_STYLE_DEAFULT,
-	"barTintColor":"ef5151",
-	"translucent":true,
-	"zIndex":1,
-	"left":"0%",
-	"width":"100%",
-	"height" :"10%",
-	"top":"90%"  
-});
+// code placeholder
+function addToolBar(){
+    var Toolbar04a6f8f5c8b0c45 = new voltmx.ui.ToolBar({
+        "barStyle": constants.BAR_STYLE_DEFAULT,
+        "barTintColor": "ef6161",
+        "id": "Toolbar04a6f8f5c8b0c45",
+        "tintColor": "3c4c83",
+        "translucent": false,
+        "isToolBarBottomAttached": true,
+        "left": "32dp",
+        "top": "140dp",
+        "zIndex": 1,
+        "height": "50dp"
+    });
+    Home.add(Toolbar04a6f8f5c8b0c44);
+}
+
+function HomeGlobals() {
+    Home = new voltmx.ui.Form2({
+        "addWidgets": addWidgetsHome,
+        "enabledForIdleTimeout": false,
+        "id": "Home",
+        "layoutType": voltmx.flex.FREE_FORM,
+        "needAppMenu": true,
+        "postShow":addToolBar,
+        "skin": "slForm"
+    }, {
+        "displayOrientation": constants.FORM_DISPLAY_ORIENTATION_BOTH,
+        "layoutType": voltmx.flex.FREE_FORM,
+        "padding": [0, 0, 0, 0],
+        "paddingInPixel": false
+    }, {
+        "configureExtendBottom": false,
+        "configureExtendTop": false,
+        "configureStatusBarStyle": false,
+        "footerOverlap": false,
+        "formTransparencyDuringPostShow": "100",
+        "headerOverlap": false,
+        "inputAccessoryViewType": constants.FORM_INPUTACCESSORYVIEW_CANCEL,
+        "needsIndicatorDuringPostShow": false,
+        "retainScrollPosition": false,
+        "titleBar": true,
+        "titleBarConfig": {
+            "renderTitleText": true,
+            "prevFormTitle": false,
+            "titleBarLeftSideView": "button",
+            "labelLeftSideView": "Back",
+            "titleBarRightSideView": "button",
+            "labelRightSideView": "Edit"
+        },
+        "titleBarSkin": "slTitleBar"
+    });
+}; 
 ```
 
 The keys for this data include:
