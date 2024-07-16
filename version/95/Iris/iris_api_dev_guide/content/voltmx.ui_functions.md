@@ -394,7 +394,7 @@ The kind of data needed by the `BarButtonItem` in its `metaData` key in the `opt
 
 Set the value for the `metaData` key to a string containing the name of an image. -->
 
-**`BarButtonItem` of type IMAGE**:
+`BarButtonItem` of type **IMAGE**:
 
 Here, the metadata contains a key named **image** with the value being the source name of the image. Using this image, a bar button item of type image is constructed.
 
@@ -417,7 +417,7 @@ var item = new voltmx.ui.BarButtonItem({
 
 Set the value for the `metaData` key to a string containing the title for the button. -->
 
-**`BarButtonItem` of type TITLE**:
+`BarButtonItem` of type **TITLE**:
 
 Here, the metadata contains a key named **title** with the value ”Edit” specifies the title of the BarButtonItem.  
 
@@ -439,7 +439,7 @@ var item = new voltmx.ui.BarButtonItem({
 
 Set the value for the `metaData` key to a value from the [System Item Constants](constants_namespace.md#SystemItem). -->
 
-**`BarButtonItem` of type SYSTEM ITEM**:
+`BarButtonItem` of type **SYSTEM ITEM**:
 
 Here, the metaData contains a key named **systemItem** with the value which represents a system-supported bar button item used to create the bar button item. You can find all the system supported bar button items [here](./constants_namespace.md#SystemItem).
 
@@ -468,7 +468,7 @@ Set the value for the `metaData` key to a widget reference. Only the `Label` and
 | Button | text, displayText, skin, focusSkin, width, height, onClick |
 | Label | text, skin, width, height | -->
 
-**`BarButtonItem` of type CUSTOM**:
+`BarButtonItem` of type **CUSTOM**:
 
 Here, the metaData contains a key named **custom** with the value as a widget reference. Only the Label and Button widgets can be set as a widget reference. For these widgets, the following properties are supported.
 
