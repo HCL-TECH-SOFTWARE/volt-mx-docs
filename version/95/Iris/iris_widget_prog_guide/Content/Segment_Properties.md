@@ -1691,9 +1691,13 @@ The available options are:
 
 ![row Click](Resources/Images/rowClick1.png)
 
-> If the user selects the detail button, the detailed content appears.
+> If the user selects the detail button, the detailed content appears.  
 
-*   SEGUI\_ROW\_CLICKANDSELECT: Specifies the detail and disclosure button. <br>The both button appears as follows:
+----
+ 
+> **_Note:_** Below indicator property types are supported from 9.5.30
+
+*   SEGUI\_ROW\_CLICKANDSELECT: Specifies the detail and disclosure button. <br>The button appears as follows:
 
 ![row Click](Resources/Images/rowClick5.png)
 

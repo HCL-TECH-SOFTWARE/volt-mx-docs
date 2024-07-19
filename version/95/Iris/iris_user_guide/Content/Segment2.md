@@ -279,26 +279,34 @@ If the dictionary property is enabled, alphabets from A to Z appear on the scree
 
 **Indicator**
 
-Specifies the indicator type as rowSelect, rowClick, or none. Based on your selection, the behavior is exhibited:
+Specifies the indicator type as rowSelect, rowClick, rowClickandSelect, rowCheck or none . Based on your selection, the behavior is exhibited.
 
-Following are the options:
+> **_Note:_** This property is specific to the iOS platform. 
 
-If the user selects the indicator, the related content appears in the next screen .
+If the user selects the indicator, the related content appears in the next screen. Following are the options:
 
-*   Select: Specifies the disclosure button. The button appears as follows:    
+*   Select: Specifies the disclosure button. If the user selects the indicator, the related content appears in the next screen . The button appears as follows:    
 
     ![](Resources/Images/Select.png)
 
-*   Click: Specifies the disclosure button. The button appears as follows:
+*   Click: Specifies the detail button. If the user selects the detail button, the detailed content appears. The button appears as follows:
     
     ![](Resources/Images/Click.png)
     
 
-If the user selects the disclosure button, the detailed content appears.
+*   Click and Select: Specifies the detail and disclosure button. If the user selects the detail or disclosure button, the detailed content appears. The button appears as follows:
+
+    ![row Click](Resources/Images/rowClick5.png)
+
+    > **_Note:_** This indicator property type is supported from 9.5.30
+
+*   Check: Specifies the check button. If the user selects the check button, the detailed content appears.The button appears as follows:
+
+    ![row Click](Resources/Images/rowClick2.png)
+
+    > **_Note:_** This indicator property type is supported from 9.5.30
 
 *   None: No indicator or button appears.
-
-> **_Note:_** This property is specific to the iOS platform.
 
 **Edit Style**
 
@@ -453,10 +461,9 @@ To map the widgets of the Section Header Template of a Segment by using Mapping 
 *   For Visualizer V8 SP4 or earlier projects, the elements that had been mapped to the widgets of Segment Master Data will now be mapped to the widgets of Segment Section Data.
 *   If you change any of the Segment Templates, all their associated mappings will be automatically deleted.
 
-### Widget Appearance on Platforms
+### Widget Appearance on Platforms  
 
 The appearance of the Segment widget varies as follows.
-
   
 | Platform | Appearance |
 | --- | --- |
