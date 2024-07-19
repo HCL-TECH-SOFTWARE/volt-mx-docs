@@ -358,10 +358,12 @@ A JavaScript object containing key-value pairs that the constructor uses to set 
 | --- | --- |
 | type | Specifies the type of the `BarButtonItem`. Must be one of the [ButtonBarItem Type Constants](constants_namespace.md#ButtonBarItemType). |
 | tintColor | Selects the color to apply to the `BarButtonItem`. Must be specified as a hexadecimal value. |
-| style | Sets the style of the `BarButtonItem`. Must be one of the [Bar Item Style Constants](constants_namespace.md#BarItemStyle). |
+| style | Sets the style of the `BarButtonItem`.<br>**.**`constants.BAR_ITEM_STYLE_PLAIN`: Glows when tapped. The default item is style.<br>**.**`constants.BAR_ITEM_STYLE_DONE`: The style for a done button—for example, a button that completes some task and returns to the previous view.|
 | enabled | Holds a Boolean value that enables or disables the `BarButtonItem`. |
 | action | Contains a function that is automatically called when the user selects the `BarButtonItem`. |
 | metaData | Holds the data needed by the `BarButtonItem`. For more information see **Remarks** below. |
+
+<!-- Must be one of the [Bar Item Style Constants](constants_namespace.md#BarItemStyle). -->
 
 ### Example
 
@@ -382,28 +384,123 @@ Returns an instantiated and configured `BarButtonItem` object.
 
 ### Remarks
 
+`metaData`is a dictionary whose value varies depending on the type of bar button being constructed.
+
+<!-- The kind of data needed by the `BarButtonItem` in its `metaData` key in the `options` parameter varies depending on the type of the `BarButtonItem` that is being created. The value for the `metaData` key can be any of the following. -->
+
 The kind of data needed by the `BarButtonItem` in its `metaData` key in the `options` parameter varies depending on the type of the `BarButtonItem` that is being created. The value for the `metaData` key can be any of the following.
 
-constants.BAR\_BUTTON\_IMAGE
+<!-- constants.BAR\_BUTTON\_IMAGE
 
-Set the value for the `metaData` key to a string containing the name of an image.
+Set the value for the `metaData` key to a string containing the name of an image. -->
 
-constants.BAR\_BUTTON\_TITLE
+`BarButtonItem` of type **IMAGE**:
 
-Set the value for the `metaData` key to a string containing the title for the button.
+Here, the metadata contains a key named **image** with the value being the source name of the image. Using this image, a bar button item of type image is constructed.
 
-constants.BAR\_BUTTON\_SYSTEM\_ITEM
+<pre><code>
+var item = new voltmx.ui.BarButtonItem({
+    “type” :constants.BAR_BUTTON_IMAGE,   
+    “tintColor” : hex color string,   
+    “style” : constants.BAR_ITEM_STYLE_PLAIN,   
+    “enabled” :true,   
+    “action” : funtionObject,   
+    “metaData” : {
+    	“image”:"imagename"
+    }},
+    “id”:”item” 
+);
+</code></pre>
 
-Set the value for the `metaData` key to a value from the [System Item Constants](constants_namespace.md#SystemItem).
 
-constants.BAR\_BUTTON\_CUSTOM
+<!-- constants.BAR\_BUTTON\_TITLE
+
+Set the value for the `metaData` key to a string containing the title for the button. -->
+
+`BarButtonItem` of type **TITLE**:
+
+Here, the metadata contains a key named **title** with the value ”Edit” specifies the title of the BarButtonItem.  
+
+<pre><code>
+var item = new voltmx.ui.BarButtonItem({
+    “type” :constants.BAR_BUTTON_TITLE,   
+    “tintColor” : hex color string,   
+    “style” : constants.BAR_ITEM_STYLE_PLAIN,   
+    “enabled” :true,   
+    “action” : funtionObject,   
+    “metaData” : {
+    	“title”:"Edit"
+    }},
+    “id”:”item” 
+);
+</code></pre>
+
+<!-- constants.BAR\_BUTTON\_SYSTEM\_ITEM
+
+Set the value for the `metaData` key to a value from the [System Item Constants](constants_namespace.md#SystemItem). -->
+
+`BarButtonItem` of type **SYSTEM ITEM**:
+
+Here, the metaData contains a key named **systemItem** with the value which represents a system-supported bar button item used to create the bar button item. You can find all the system supported bar button items [here](./constants_namespace.md#SystemItem).
+
+<pre><code>
+var item = new voltmx.ui.BarButtonItem({
+    “type” :constants.BAR_BUTTON_SYSTEM_ITEM,   
+    “tintColor” : hex color string,   
+    “style” : constants.BAR_ITEM_STYLE_PLAIN,   
+    “enabled : true,
+    “action : funtionObject,   
+    “metaData” : {
+    	systemItem : constants.SYSTEM_ITEM_DONE
+    }},
+    “id” : “item”
+);
+</code></pre>
+
+
+
+<!-- constants.BAR\_BUTTON\_CUSTOM
 
 Set the value for the `metaData` key to a widget reference. Only the `Label` and `Button` widgets can be set as a widget reference. For these widgets, the following properties are supported.
 
 | Widget | Properties |
 | --- | --- |
 | Button | text, displayText, skin, focusSkin, width, height, onClick |
-| Label | text, skin, width, height |
+| Label | text, skin, width, height | -->
+
+`BarButtonItem` of type **CUSTOM**:
+
+Here, the metaData contains a key named **custom** with the value as a widget reference. Only the Label and Button widgets can be set as a widget reference. For these widgets, the following properties are supported.
+
+| Widget | Properties |
+| --- | --- |
+| Button | text, displayText, skin, focusSkin, width, height, onClick |
+| Label | text, skin, width, height | 
+
+In this example, the widget reference is a Button widget.
+
+<pre><code>
+var RBarBtnItemButton1 = new voltmx.ui.Button({
+    "focusSkin": "defBtnFocus",
+    "skin": "defBtnNormal",
+    "text": "Button",
+    "width": voltmx.flex.USE_PREFERRED_SIZE,
+    "id": "RBarBtnItemButton1"
+}, {
+    "displayText": true
+}, {});
+
+var RBarBtnItem1 = new voltmx.ui.BarButtonItem({
+    "type": constants.BAR_BUTTON_CUSTOM,
+    "tintColor": "4b88f100",
+    "style": constants.BAR_ITEM_STYLE_PLAIN,
+    "enabled": true,
+    "metaData": {
+        "custom": RBarBtnItemButton1
+    },
+    "id": "RBarBtnItem1"
+});
+</code></pre>
 
 * * *
 
