@@ -5469,7 +5469,7 @@ voltmx.ui.BarButtonItem(
 </tr>
 <tr>
 <td>style</td>
-<td>Sets the style of the <code>BarButtonItem</code>. Must be one of the <a href="constants_namespace.html#BarItemStyle">Bar Item Style Constants</a>.</td>
+<td>Sets the style of the <code>BarButtonItem</code>.<br><strong>.</strong><code>constants.BAR_ITEM_STYLE_PLAIN</code>: Glows when tapped. The default item is style.<br><strong>.</strong><code>constants.BAR_ITEM_STYLE_DONE</code>: The style for a done button—for example, a button that completes some task and returns to the previous view.</td>
 </tr>
 <tr>
 <td>enabled</td>
@@ -5485,6 +5485,7 @@ voltmx.ui.BarButtonItem(
 </tr>
 </tbody>
 </table>
+<!-- Must be one of the [Bar Item Style Constants](constants_namespace.md#BarItemStyle). -->
 <h3 id="example_4">Example</h3>
 <pre><code>
 var item = new voltmx.ui.BarButtonItem(
@@ -5498,15 +5499,73 @@ var item = new voltmx.ui.BarButtonItem(
 <h3 id="return-values_4">Return Values</h3>
 <p>Returns an instantiated and configured <code>BarButtonItem</code> object.</p>
 <h3 id="remarks_3">Remarks</h3>
+<p><code>metaData</code>is a dictionary whose value varies depending on the type of bar button being constructed.</p>
+<!-- The kind of data needed by the `BarButtonItem` in its `metaData` key in the `options` parameter varies depending on the type of the `BarButtonItem` that is being created. The value for the `metaData` key can be any of the following. -->
 <p>The kind of data needed by the <code>BarButtonItem</code> in its <code>metaData</code> key in the <code>options</code> parameter varies depending on the type of the <code>BarButtonItem</code> that is being created. The value for the <code>metaData</code> key can be any of the following.</p>
-<p>constants.BAR_BUTTON_IMAGE</p>
-<p>Set the value for the <code>metaData</code> key to a string containing the name of an image.</p>
-<p>constants.BAR_BUTTON_TITLE</p>
-<p>Set the value for the <code>metaData</code> key to a string containing the title for the button.</p>
-<p>constants.BAR_BUTTON_SYSTEM_ITEM</p>
-<p>Set the value for the <code>metaData</code> key to a value from the <a href="constants_namespace.html#SystemItem">System Item Constants</a>.</p>
-<p>constants.BAR_BUTTON_CUSTOM</p>
-<p>Set the value for the <code>metaData</code> key to a widget reference. Only the <code>Label</code> and <code>Button</code> widgets can be set as a widget reference. For these widgets, the following properties are supported.</p>
+<!-- constants.BAR\_BUTTON\_IMAGE
+
+Set the value for the `metaData` key to a string containing the name of an image. -->
+<p><code>BarButtonItem</code> of type <strong>IMAGE</strong>:</p>
+<p>Here, the metadata contains a key named <strong>image</strong> with the value being the source name of the image. Using this image, a bar button item of type image is constructed.</p>
+<pre><code>
+var item = new voltmx.ui.BarButtonItem({
+    “type” :constants.BAR_BUTTON_IMAGE,   
+    “tintColor” : hex color string,   
+    “style” : constants.BAR_ITEM_STYLE_PLAIN,   
+    “enabled” :true,   
+    “action” : funtionObject,   
+    “metaData” : {
+        “image”:"imagename"
+    }},
+    “id”:”item” 
+);
+</code></pre>
+<!-- constants.BAR\_BUTTON\_TITLE
+
+Set the value for the `metaData` key to a string containing the title for the button. -->
+<p><code>BarButtonItem</code> of type <strong>TITLE</strong>:</p>
+<p>Here, the metadata contains a key named <strong>title</strong> with the value ”Edit” specifies the title of the BarButtonItem.  </p>
+<pre><code>
+var item = new voltmx.ui.BarButtonItem({
+    “type” :constants.BAR_BUTTON_TITLE,   
+    “tintColor” : hex color string,   
+    “style” : constants.BAR_ITEM_STYLE_PLAIN,   
+    “enabled” :true,   
+    “action” : funtionObject,   
+    “metaData” : {
+        “title”:"Edit"
+    }},
+    “id”:”item” 
+);
+</code></pre>
+<!-- constants.BAR\_BUTTON\_SYSTEM\_ITEM
+
+Set the value for the `metaData` key to a value from the [System Item Constants](constants_namespace.md#SystemItem). -->
+<p><code>BarButtonItem</code> of type <strong>SYSTEM ITEM</strong>:</p>
+<p>Here, the metaData contains a key named <strong>systemItem</strong> with the value which represents a system-supported bar button item used to create the bar button item. You can find all the system supported bar button items <a href="constants_namespace.html#SystemItem">here</a>.</p>
+<pre><code>
+var item = new voltmx.ui.BarButtonItem({
+    “type” :constants.BAR_BUTTON_SYSTEM_ITEM,   
+    “tintColor” : hex color string,   
+    “style” : constants.BAR_ITEM_STYLE_PLAIN,   
+    “enabled : true,
+    “action : funtionObject,   
+    “metaData” : {
+        systemItem : constants.SYSTEM_ITEM_DONE
+    }},
+    “id” : “item”
+);
+</code></pre>
+<!-- constants.BAR\_BUTTON\_CUSTOM
+
+Set the value for the `metaData` key to a widget reference. Only the `Label` and `Button` widgets can be set as a widget reference. For these widgets, the following properties are supported.
+
+| Widget | Properties |
+| --- | --- |
+| Button | text, displayText, skin, focusSkin, width, height, onClick |
+| Label | text, skin, width, height | -->
+<p><code>BarButtonItem</code> of type <strong>CUSTOM</strong>:</p>
+<p>Here, the metaData contains a key named <strong>custom</strong> with the value as a widget reference. Only the Label and Button widgets can be set as a widget reference. For these widgets, the following properties are supported.</p>
 <table>
 <thead>
 <tr>
@@ -5525,6 +5584,29 @@ var item = new voltmx.ui.BarButtonItem(
 </tr>
 </tbody>
 </table>
+<p>In this example, the widget reference is a Button widget.</p>
+<pre><code>
+var RBarBtnItemButton1 = new voltmx.ui.Button({
+    "focusSkin": "defBtnFocus",
+    "skin": "defBtnNormal",
+    "text": "Button",
+    "width": voltmx.flex.USE_PREFERRED_SIZE,
+    "id": "RBarBtnItemButton1"
+}, {
+    "displayText": true
+}, {});
+
+var RBarBtnItem1 = new voltmx.ui.BarButtonItem({
+    "type": constants.BAR_BUTTON_CUSTOM,
+    "tintColor": "4b88f100",
+    "style": constants.BAR_ITEM_STYLE_PLAIN,
+    "enabled": true,
+    "metaData": {
+        "custom": RBarBtnItemButton1
+    },
+    "id": "RBarBtnItem1"
+});
+</code></pre>
 <hr />
 </details>
 <details close="close">
