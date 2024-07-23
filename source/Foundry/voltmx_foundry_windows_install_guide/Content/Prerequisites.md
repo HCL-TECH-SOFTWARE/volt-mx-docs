@@ -63,3 +63,12 @@ If the on-premises Foundry server has outbound access to the HCL Cloud License S
 
 If you use the local license server, the Foundry server must have access to that license server. In a production environment, you should sync your license server with the HCL Software Flexnet Operations site at least monthly.
 
+### Configuring Connection Timeout for Foundry
+----------------------------------------------
+
+The default connection timeout for on-premises Foundry has been set to 60000 milliseconds (60 seconds). You may need to adjust this timeout to be either longer or shorter. This can be achieved by modifying the system property configuration.
+
+Modifying the Connection Timeout :
+
+To change the connection timeout, you need to set the `FOUNDRY_OUTBOUND_CONNECTION_TIMEOUT` system property. This can be done by exporting the CATALINA_OPTS environment variable with the desired timeout value.
+
