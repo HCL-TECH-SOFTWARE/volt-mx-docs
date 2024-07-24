@@ -72,3 +72,8 @@ Modifying the Connection Timeout :
 
 To change the connection timeout, you need to set the `FOUNDRY_OUTBOUND_CONNECTION_TIMEOUT` system property. This can be done by exporting the CATALINA_OPTS environment variable with the desired timeout value.
 
+### Gateway Request Timeouts
+---------------------------------
+
+The Volt MX Cloud Gateway is configured with a default request timeout of 60 seconds. If a request does not receive a response within this timeframe, it will time out. This default setting can be extended to 180 seconds by submitting a cloud support ticket.
+
