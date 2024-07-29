@@ -304,15 +304,15 @@ POST https://<<accountnumber>>.auth.voltmxcloud.com/oidc/introspect/<provider_na
   
 | Parameter | Required | Description |
 | --- | --- | --- |
-| client-id | Yes | The app key of the Foundry app that contains the OAuth Provider service. |
-| client-secret | Yes | The app secret of the Foundry app that contains the OAuth Provider service. |
+| client_id | Yes | The app key of the Foundry app that contains the OAuth Provider service. |
+| client_secret | Yes | The app secret of the Foundry app that contains the OAuth Provider service. |
 
 **Request Header Parameters**
 
   
 | Parameter | Required | Description |
 | --- | --- | --- |
-| Content-Type | Yes | The app key of the Foundry app that contains the OAuth Provider service. |
+| Content-Type | Yes | The type of content that is sent in the request. Make sure that the value of the Content-Type is application/x-www-form-urlencoded |
 | X-VoltMX-Authorization OR Authorization | Yes | The token that you want to validate. You can validate the following tokens: access\_token id\_token refresh\_token |
 
 **Sample Response**
