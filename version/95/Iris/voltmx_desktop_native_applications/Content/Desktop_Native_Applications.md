@@ -294,11 +294,11 @@ border-collapse: collapse;}
 <table>
   <tr>
     <td>voltmx.application.createDesktopAppMenu(menuTemplate)</td>
-    <td>This will overwrite all default options.</td>
+    <td>Create and set the window menubar from the menu template. This will overwrite all default options.</td>
   </tr>
   <tr>
     <td>voltmx.application.deleteDesktopAppMenu()</td>
-    <td>This will remove all default options as well.</td>
+    <td>Delete the window menubar. This will remove all default options as well.</td>
   </tr>
    <tr>
     <td>voltmx.application.insertDesktopAppMenuItem(menuTemplate, id, position)</td>
