@@ -100,10 +100,10 @@ August 02, 2024
 
 * Added SQLite support for Desktop Native.
 * Added Context menu along with customization support for Desktop Native.
-* Support added for clean uninstall for Desktop Native.
+* Added Support for clean uninstall for Desktop Native.
 * Added AccessHandlers for Desktop Native.
-* Added custom alerts for Desktop Native.
-* Added support for application versioning for offline objects.
+* Added Custom alerts for Desktop Native.
+* Added Support for application versioning for offline objects.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
