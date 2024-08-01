@@ -1870,19 +1870,144 @@
 
 <h1 id="toolbar-constructor">Toolbar Constructor</h1>
 <p>The Toolbar widget is unusual in that it only applies to iOS applications and can not be added using the visual tools in Volt MX Iris. To add the widget to your application you must use the voltmx.io library function voltmx.ui.ToolBar({}) passing in a list of key-value pairs.</p>
+<p><b>Code for adding a toolbar</b></p>
 <pre><code>
-var myToolBar= new voltmx.ui.ToolBar({
-    &quot;isToolBarBottomAttached&quot;:false,
-    &quot;tintColor&quot;:&quot;3c4d32&quot;,
-    &quot;barStyle&quot;:constants.BAR_STYLE_DEAFULT,
-    &quot;barTintColor&quot;:&quot;ef5151&quot;,
-    &quot;translucent&quot;:true,
-    &quot;zIndex&quot;:1,
-    &quot;left&quot;:&quot;0%&quot;,
-    &quot;width&quot;:&quot;100%&quot;,
-    &quot;height&quot; :&quot;10%&quot;,
-    &quot;top&quot;:&quot;90%&quot;  
-});
+function addToolBar(){
+    var Toolbar04a6f8f5c8b0c45 = new voltmx.ui.ToolBar({
+        &quot;barStyle&quot;: constants.BAR_STYLE_DEFAULT,
+        &quot;barTintColor&quot;: &quot;ef6161&quot;,
+        &quot;id&quot;: &quot;Toolbar04a6f8f5c8b0c45&quot;,
+        &quot;tintColor&quot;: &quot;3c4c83&quot;,
+        &quot;translucent&quot;: false,
+        &quot;isToolBarBottomAttached&quot;: true,
+        &quot;left&quot;: &quot;32dp&quot;,
+        &quot;top&quot;: &quot;140dp&quot;,
+        &quot;zIndex&quot;: 1,
+        &quot;height&quot;: &quot;50dp&quot;
+    });
+    Home.add(Toolbar04a6f8f5c8b0c44);
+}
+
+function HomeGlobals() {
+    Home = new voltmx.ui.Form2({
+        &quot;addWidgets&quot;: addWidgetsHome,
+        &quot;enabledForIdleTimeout&quot;: false,
+        &quot;id&quot;: &quot;Home&quot;,
+        &quot;layoutType&quot;: voltmx.flex.FREE_FORM,
+        &quot;needAppMenu&quot;: true,
+        &quot;postShow&quot;:addToolBar,
+        &quot;skin&quot;: &quot;slForm&quot;
+    }, {
+        &quot;displayOrientation&quot;: constants.FORM_DISPLAY_ORIENTATION_BOTH,
+        &quot;layoutType&quot;: voltmx.flex.FREE_FORM,
+        &quot;padding&quot;: [0, 0, 0, 0],
+        &quot;paddingInPixel&quot;: false
+    }, {
+        &quot;configureExtendBottom&quot;: false,
+        &quot;configureExtendTop&quot;: false,
+        &quot;configureStatusBarStyle&quot;: false,
+        &quot;footerOverlap&quot;: false,
+        &quot;formTransparencyDuringPostShow&quot;: &quot;100&quot;,
+        &quot;headerOverlap&quot;: false,
+        &quot;inputAccessoryViewType&quot;: constants.FORM_INPUTACCESSORYVIEW_CANCEL,
+        &quot;needsIndicatorDuringPostShow&quot;: false,
+        &quot;retainScrollPosition&quot;: false,
+        &quot;titleBar&quot;: true,
+        &quot;titleBarConfig&quot;: {
+            &quot;renderTitleText&quot;: true,
+            &quot;prevFormTitle&quot;: false,
+            &quot;titleBarLeftSideView&quot;: &quot;button&quot;,
+            &quot;labelLeftSideView&quot;: &quot;Back&quot;,
+            &quot;titleBarRightSideView&quot;: &quot;button&quot;,
+            &quot;labelRightSideView&quot;: &quot;Edit&quot;
+        },
+        &quot;titleBarSkin&quot;: &quot;slTitleBar&quot;
+    });
+}; 
+</code></pre>
+<p><b>Code for creating evenly spaced buttons on the toolbar</b></p>
+<pre><code>function addWidgetsHome(){   
+    var item1 = new voltmx.ui.BarButtonItem({
+        type: constants.BAR_BUTTON_TITLE,
+        style: constants.BAR_ITEM_STYLE_PLAIN,
+        enabled: true,
+        action: null,
+        metaData: {
+            title: &quot;Add&quot;
+        }
+    });
+    var itemFlexibleSpace = new voltmx.ui.BarButtonItem({
+        type: constants.BAR_BUTTON_SYSTEM_ITEM,
+        style: constants.BAR_ITEM_STYLE_PLAIN,
+        enabled: true,
+        action: null,
+        metaData: {
+            systemItem:constants.SYSTEM_ITEM_FLEXIBLE_SPACE
+        }
+    });
+    var item2 = new voltmx.ui.BarButtonItem({
+        type: constants.BAR_BUTTON_TITLE,
+        style: constants.BAR_ITEM_STYLE_PLAIN,
+        enabled: true,
+        action: null,
+        metaData: {
+            title: &quot;Delete&quot;
+        }
+    });       
+
+    var toolbar04a6f8f5c8b0c45 = new voltmx.ui.ToolBar({
+        &quot;barStyle&quot;: constants.BAR_STYLE_DEFAULT,
+        &quot;barTintColor&quot;: &quot;ef6161&quot;,
+        &quot;id&quot;: &quot;Toolbar04a6f8f5c8b0c45&quot;,
+        &quot;tintColor&quot;: &quot;3c4c83&quot;,
+        &quot;translucent&quot;: false,
+        &quot;barButtonItems&quot;: [item1, itemFlexibleSpace, item2],
+        &quot;isToolBarBottomAttached&quot;: true,
+        &quot;left&quot;: &quot;32dp&quot;,
+        &quot;top&quot;: &quot;140dp&quot;,
+        &quot;zIndex&quot;: 1,
+        &quot;height&quot;: &quot;50dp&quot;
+    });
+
+    Home.add(toolbar04a6f8f5c8b0c45);
+}
+
+function HomeGlobals() {
+    Home = new voltmx.ui.Form2({
+        &quot;addWidgets&quot;: addWidgetsHome,
+        &quot;enabledForIdleTimeout&quot;: false,
+        &quot;id&quot;: &quot;Home&quot;,
+        &quot;layoutType&quot;: voltmx.flex.FREE_FORM,
+        &quot;needAppMenu&quot;: true,
+        &quot;skin&quot;: &quot;slForm&quot;
+    }, {
+        &quot;displayOrientation&quot;: constants.FORM_DISPLAY_ORIENTATION_BOTH,
+        &quot;layoutType&quot;: voltmx.flex.FREE_FORM,
+        &quot;padding&quot;: [0, 0, 0, 0],
+        &quot;paddingInPixel&quot;: false
+    }, {
+        &quot;configureExtendBottom&quot;: false,
+        &quot;configureExtendTop&quot;: false,
+        &quot;configureStatusBarStyle&quot;: false,
+        &quot;footerOverlap&quot;: false,
+        &quot;formTransparencyDuringPostShow&quot;: &quot;100&quot;,
+        &quot;headerOverlap&quot;: false,
+        &quot;inputAccessoryViewType&quot;: constants.FORM_INPUTACCESSORYVIEW_CANCEL,
+        &quot;needsIndicatorDuringPostShow&quot;: false,
+        &quot;retainScrollPosition&quot;: false,
+        &quot;titleBar&quot;: true,
+        &quot;titleBarConfig&quot;: {
+            &quot;renderTitleText&quot;: true,
+            &quot;prevFormTitle&quot;: false,
+            &quot;titleBarLeftSideView&quot;: &quot;button&quot;,
+            &quot;labelLeftSideView&quot;: &quot;Back&quot;,
+            &quot;titleBarRightSideView&quot;: &quot;button&quot;,
+            &quot;labelRightSideView&quot;: &quot;Edit&quot;
+        },
+        &quot;titleBarSkin&quot;: &quot;slTitleBar&quot;
+    });
+}; 
+
 </code></pre>
 <p>The keys for this data include:</p>
 <ul>
