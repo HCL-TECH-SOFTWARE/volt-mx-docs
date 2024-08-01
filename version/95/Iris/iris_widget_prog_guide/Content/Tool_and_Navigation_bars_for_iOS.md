@@ -11,7 +11,7 @@ iOS provides native support for a number of user interface widgets that attach 
 
 ### Navigation bar
 
-According to Apple documentation, "An iOS Navigation bar appears at the top of an app screen, below the status bar, and enables navigation through a series of hierarchical app screens. When a new screen is displayed, a back button, often labeled with the title of the previous screen, appears on the left side of the bar." For more information on the iOS Navigation Bar, see the [Navigation Bars](https://developer.apple.com/ios/human-interface-guidelines/ui-bars/navigation-bars/) topic in Apple's developer documentation.
+According to Apple documentation, "An iOS Navigation bar appears at the top of an app screen, below the status bar, and enables navigation through a series of hierarchical app screens. When a new screen is displayed, a back button, often labeled with the title of the previous screen, appears on the left side of the bar." For more information on the iOS Navigation Bar, see the [Navigation Bars UI guidelines](https://developer.apple.com/design/human-interface-guidelines/navigation-bars) topic in Apple's developer documentation.
 
 The iOS Navigation bar can be added to a FlexForm using [titleBarAttributes.](FlexForm_Properties.md#titleBarAttributes)
 

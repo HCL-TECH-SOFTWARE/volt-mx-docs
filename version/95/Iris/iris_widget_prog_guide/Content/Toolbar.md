@@ -18,7 +18,9 @@ Following are real-time use cases of Tool Bar widget:
 *   In social networking apps, tool bar can be used to display icons for the actions such as deleting a specific message and composing a new message.
     
 
-For more information see the [Toolbars](https://developer.apple.com/ios/human-interface-guidelines/ui-bars/toolbars/) topic in Apple's developer documentation.
+<!-- For more information see the [Toolbars](https://developer.apple.com/documentation/uikit/uitoolbar?language=objc) and [UI guidelines](https://developer.apple.com/design/human-interface-guidelines/toolbars) topics in Apple's developer documentation. -->
+
+For more information see the [Toolbars](https://developer.apple.com/design/human-interface-guidelines/toolbars) topic in Apple's developer documentation.
 
 The Toolbar widget capabilities can be broadly categorized into the following:
 
