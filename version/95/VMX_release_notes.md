@@ -96,7 +96,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 ## Volt Iris
 
 ### V9 Servicepack 5 Fixpack 35
-August 02, 2024
+August 01, 2024
 
 * Added SQLite support for Desktop Native.
 * Added Context menu along with customization support for Desktop Native.
