@@ -11,7 +11,8 @@ The **\<object\>.getBinaryStatus** returns an array of primary keys based on the
 Volt MX  Iris (JavaScript)
 -------------------------------
 
-> **_Note:_** Not supported for Mobile Web, Windows, and Desktop Web channels.
+> **_Note:_** Not supported for Mobile Web, Windows, Desktop Web and Desktop Native channels.
+
 
 ### Signature
 

@@ -10,7 +10,8 @@ The **\<object\>.getBinary** allows downloading and associating binary files wit
 Volt MX  Iris (JavaScript)
 -------------------------------
 
-> **_Note:_** Not supported for Mobile Web, Windows, and Desktop Web channels.
+> **_Note:_** Not supported for Mobile Web, Windows, Desktop Web and Desktop Native channels.
+
 
 ### Signature
 
