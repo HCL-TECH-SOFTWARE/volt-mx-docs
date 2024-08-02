@@ -294,11 +294,11 @@ border-collapse: collapse;}
 <table>
   <tr>
     <td>voltmx.application.createDesktopAppMenu(menuTemplate)</td>
-    <td>Create and set the window menubar from the menu template</td>
+    <td>Create and set the window menubar from the menu template. This will overwrite all default options.</td>
   </tr>
   <tr>
     <td>voltmx.application.deleteDesktopAppMenu()</td>
-    <td>Delete the window menubar</td>
+    <td>Delete the window menubar. This will remove all default options as well.</td>
   </tr>
    <tr>
     <td>voltmx.application.insertDesktopAppMenuItem(menuTemplate, id, position)</td>
@@ -316,9 +316,26 @@ border-collapse: collapse;}
     <td>voltmx.application.deleteDesktopTrayItem()</td>
     <td>Delete the application from the tray</td>
   </tr>
+  </tr>
+     <tr>
+    <td>voltmxapplication.application.addContextMenuItems(contextMenu)</td>
+    <td>Adds a context menu using the specified contextMenu template</td>
+  </tr>
+  <tr>
+    <td>voltmxapplication.application.removeContextMenu()</td>
+    <td>Deletes the entire context menu</td>
+  </tr>
+    <tr>
+    <td>voltmxapplication.application.removeContextMenuItems(label)</td>
+    <td>Deletes a specific context menu item identified by the provided ID or label
+</td>
+</tr>
 </table>
 </body>
 </html>
+<br>
+<b>Note :</b>  Any menu item changes enacted by these APIs will not be persisted beyond the app launch during which they were invoked.
+<br>
 
 ### Volt MX IO
 
