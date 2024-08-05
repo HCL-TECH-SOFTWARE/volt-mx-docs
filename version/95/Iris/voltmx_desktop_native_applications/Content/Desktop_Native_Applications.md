@@ -1,6 +1,4 @@
 
-### Desktop Native Overview
-
 A desktop native application is an application that can be installed and run locally on a desktop computer.  The desktop native application is a web application  running in an electron environment with the ability to integrate with the desktop environment and communicate and work with the desktop resources as the application developer permits.  Access to the desktop environment is managed by poly-filling existing Volt MX apis or adding your own using Native Function Interfaces.  As is typically the case with Volt MX built applications, the desktop native applications can be client-server based and interface with the Volt MX Foundry server using services and providers specific to your application needs.   Using Volt MX, desktop native applications can be created for Mac and Windows computers.  
 
 > **_Note:_**  The electron JS based desktop native build doesn’t support “free-form” architecture applications. It supports only MVC architecture applications.
@@ -462,21 +460,28 @@ See VoltMX voltmx.db documentation</td>
 
 ### Mandatory Steps in Building an Application for Desktop Native:
 
-1. Desktop Native plugin
-   * Build the project at least once to download the Desktop Native plugin.
-2. Select the desired Database configuration.
-3. If SQLite Database is selected, Enable OfflineObjects VoltMXDB NFI
-   * Navigate to Edit -> Open Manage Native Function API(s).
-   * Select the Desktop tab.
-   * Enable <b>VoltMXDB.</b>
+1.  Desktop Native plugin 
 
-   >**Note:** Version 2.0.0 of VoltMXDB includes all the Offline Object updates.
-4. Rebuild the Application to apply the changes.
+    * Build the project at least once to download the Desktop Native plugin. 
+    
+2.  Select the desired Database configuration. 
 
-   >**Note:** Unlike IndexedDB, where the database can be viewed directly in Developer Tools under the Application tab, SQLite database file for Desktop Native resides in the system's user app data folder for both Windows and macOS.
+3.  If SQLite Database is selected, Enable OfflineObjects VoltMXDB NFI
 
-   * Windows : `<System Drive>\Users\<User>\AppData\Roaming\<YourApp>\data\sync.db`
-   * macOS : `/Users/<User>/Library/Application Support/<YourApp>/data/sync.db`
+    * Navigate to Edit -> Open Manage Native Function API(s).
+    * Select the Desktop tab.
+    * Enable <b>VoltMXDB.</b> 
+
+    > **Note:** Version 2.0.0 of VoltMXDB includes all the Offline Object updates.
+
+4.  Rebuild the Application to apply the changes. 
+
+    > **Note:** Unlike IndexedDB, where the database can be viewed directly in Developer Tools under the Application tab, SQLite database file for
+                Desktop Native resides in the system's user app data folder for both Windows and macOS.
+
+    * Windows : `<System Drive>\Users\<User>\AppData\Roaming\<YourApp>\data\sync.db`
+    * macOS : `/Users/<User>/Library/Application Support/<YourApp>/data/sync.db`
+
 
 ### Desktop Native(Electron Apps)
   IndexedDB is the database that supports offline objects.
@@ -589,11 +594,11 @@ We use the app-specific password option for notarizing your application.  To lea
 
 <b>MacOS</b>
 
-An uninstaller app named "Uninstall_`<appname>` will be created in the application's installation directory. You can use this app to uninstall the application.
+An uninstaller app named "Uninstall_`<appname>"` will be created in the application's installation directory. You can use this app to uninstall the application.
 
 <b>Windows</b>
 
-An uninstaller shortcut named "Uninstall_<appname>" will be created in the application's installation directory. This shortcut can be used to uninstall the application.
+An uninstaller shortcut named "Uninstall_`<appname>"` will be created in the application's installation directory. This shortcut can be used to uninstall the application.
 
 >**Note** : This process will delete the AppData folder under Users directory and all contents within the installation directory but the empty installation directory itself will need to be manually removed.
 
@@ -633,8 +638,6 @@ Then run run.bat or run.sh and you will be able to debug the main process.
 
 * Ensure that you use 'voltmx.ui.Alert’ API instead of native alerts for consistent behavior.
 * Do not use a for loop to run CRUD operations, if you use please use promises from application code.
-* When running a desktop native app on a MacOS platform during development, the first window menu entry will say ‘Electron’ rather than the project name.  However when the installer is built for the app, the menu will correctly be the project name for the installed app.  The menu will be correct on Windows during development and in the installed app.
-
 * ScreenRecorder apis will not function without the use of electron’s desktopCapturer.  See [here](https://www.electronjs.org/docs/latest/api/desktop-capturer)
 To add this capability to the desktop native application an NFI would need to be created with apis to access desktopCapturer from the main process.
 
@@ -643,6 +646,7 @@ To add this capability to the desktop native application an NFI would need to be
 * Volt MX Camera widget is not supported for DesktopNative apps at this time.  However the camera apis do function.
 
 * Protected mode has no affect for desktop native apps at this time.
+* When running a desktop native app on a MacOS platform during development, the first window menu entry will say ‘Electron’ rather than the project name.  However when the installer is built for the app, the menu will correctly be the project name for the installed app.  The menu will be correct on Windows during development and in the installed app.
 
 
 ### Known Issues
