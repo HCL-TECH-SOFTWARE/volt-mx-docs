@@ -585,6 +585,8 @@ We use the app-specific password option for notarizing your application.  To lea
 * Architecture: x86 (32-bit), x64 (64-bit)
 
 **Mac**
+
+
 * Installer Type: .dmg
 * Architecture: arm, x64
 
