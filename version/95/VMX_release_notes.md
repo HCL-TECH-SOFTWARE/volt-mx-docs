@@ -952,12 +952,14 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ## Volt Foundry
 
 ### V9 Servicepack 5 Fixpack 16 Hotfix 5
-August 05, 2024
+August 06, 2024
 
 * Updated MySQL drivers to v8.3.0.
 
   >**Note** : After this update Volt Foundry components will no longer support connections to MySQL 5.7 RDBMS.
-  
+
+* Velocity template engine updated from 1.7.x to 2.x (core). Differences in scheme are documented <a href="https://velocity.apache.org/engine/2.0/upgrading.html" target="_blank">here</a>. _(external)_
+
 * Security hardening.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
