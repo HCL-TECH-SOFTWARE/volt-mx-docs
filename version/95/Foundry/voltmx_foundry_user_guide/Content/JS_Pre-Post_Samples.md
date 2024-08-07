@@ -1,6 +1,25 @@
                              
 
-User Guide: [Integration](Services.md#integration) \> [Advanced Configurations](Advanced_Configurations.md) > [Sample Code for Preprocessor and Postprocessor](Java_Pre-Post_Samples.md) > JavaScript Sample Code for Preprocessor and Postprocessor
+User Guide: [Integration](Services.md#integration) \> [Advanced Configurations](Advanced_Configurations.md) > [Java Sample Code for Preprocessor and Postprocessor](Java_Pre-Post_Samples.md) > JavaScript Sample Code for Preprocessor and Postprocessor
+
+Developers can also customize the sample prepost processor code displayed on Foundry javascript pre/post processor code editor.  
+Navigate to service console : 
+
+
+![](Resources/Images/Integration-Advanced_Section.png)
+
+
+Opt javascript pre/post processor :
+
+
+![](Resources/Images/Opt_Javascript_pre-post_processor.png)
+ 
+ 
+Sample code :
+
+
+![](Resources/Images/Samplecode_Javascript_pre-post_processor.png)
+ 
 
 JavaScript Sample Code for Preprocessor and Postprocessor
 =========================================================
@@ -12,50 +31,65 @@ PreProcessor
 ```
  // Sample JavaScript Code to add an input parameter for preprocessor  
       
-    function fun1() {
-        logger.debug('Tesing put method of HashMap');
-        serviceInputParams.put('place', 'London');
+    function sampleSetInputParams() {
+        logger.debug('Tesing Request params');
+        var requestObj = voltMX.getRequestObject();
+        requestObj.inputParams['place']='London';
+	    //update request
+        requestObj.update();
         return true;
     }
-    fun1();
+    sampleSetInputParams();
 ```
 
 *   **To add a new request parameter:**
 ```
  // Sample JavaScript Code to add a request parameter for preprocessor   
       
-    function fun2() {
+    function sampleSetRequestParams() {
         logger.debug('Testing addRequestParam_ method of DataControllerRequest');
-        request.addRequestParam_('newParam', 'newParamValue');
+        var requestObj = voltMX.getRequestObject();
+        requestObj.reqParams['eventId']='QueMessage';
+	    //update request
+        requestObj.update();
         return true;
     }
-    fun2();
+    sampleSetRequestParams();
 ```
 *   **To add an attribute to the session:**
 ```
  // Sample JavaScript Code to add an attribute to the session for preprocessor   
       
-    function fun3() {
-        logger.debug('Tesing getSession method of DataControllerRequest');
-        var varSession = request.getSession();
-        varSession.setAttribute('sessionAttributeName', 'sessionAttributeValue');
-        return true;
+    function sampleSetSessionAttribute() {
+        var requestObj = voltMX.getRequestObject();
+	    var session = requestObj.getSession();
+
+	    session.attributes['AppUserPreferredName'] =  'Cosmo';
+	    //update request
+	    requestObj.update();
+	    return true;
     }
-    fun3();
+    sampleSetSessionAttribute();
 ```
 *   **To validate the input parameter before Service call:**
 ```
  // Sample JavaScript Code to validate the input before service call for preprocessor   
       
-    function fun4() {
-        var varUsername = serviceInputParams.get('username');
-        var varPassword = serviceInputParams.get('password');
-        if (varUsername == 'masterUser' && varPassword == 'password') {
-            return true;
-        }
-        return false;
+    function sampleValidateInputParams() {
+        var requestObj = voltMX.getRequestObject();
+	    var userName = '';
+        if (requestObj.inputParams.containsKey('username'))
+        userName = requestObj.inputParams['username'];
+	    var password = '';
+        if (requestObj.inputParams.containsKey('password'))
+        password = requestObj.inputParams['password'];
+
+	    if( userName == 'masterUser' && password == 'password'){
+		    return true;
+	    }
+	    return false;
     }
-    fun4();
+    sampleValidateInputParams();
 ```
 *   **A function which uses most of the request APIs:**
 ```
@@ -107,23 +141,41 @@ PreProcessor
 ```
 *   **For jsonToResult API**
 ```
- For jsonToResult APIfunction executePreProcessor() {
-        var resultToModify = resultToJSON();
-        resultToModify.record = {
+// Sample JavaScript Code For jsonToResult API
+
+    function sampleModifyResultJson() {
+        var resultObj = voltMX.getResultObject();
+        var resultJson = resultObj.toJson();
+        resultJson.record = {
           "message" : "Returned from Pre-processor",
           "status" : "rejected"
         };
          
-        result = jsonToResult(resultToModify);
+        resultObj.appendJson(resultJson);
+	    //update result
+        resultObj.update();
         return false;
     }
-    
-    executePreProcessor();
+    sampleModifyResultJson();
     
 ```
 
 PostProcessor
 -------------
+
+*   **To add parameter to result:**
+```
+ // Sample JavaScript Code to add parameter to result for postprocessor   
+      
+    function AddParamToResult() {
+        logger.debug('Tesing Result params');
+        var resultObj = voltMX.getResultObject();
+        resultObj.params['Location']='RTP';
+	    //update result
+        resultObj.update();
+    }
+    AddParamToResult();
+```
 
 *   **To add a new output parameter:**
 ```
@@ -139,59 +191,49 @@ PostProcessor
     fun5();
 ```
 
-*   **To retrieve an attribute added to the session (from preprocessor):**
+*   **To get Session attribute for postprocessor:**
 ```
- // Sample JavaScript Code to retrieve an attribute added to the session for postprocessor   
+ // Sample JavaScript Code to get Session attribute for postprocessor   
       
-    function fun6() {
-        var varSessionPost = request.getSession();
-        var varRequestSessionAttribute = varSessionPost.getAttribute('sessionAttributeName');
-        logger.debug('The Session Attribute Value is :' + varRequestSessionAttribute);
+    function sampleGetSessionAttribute() {
+        var requestObj = voltMX.getRequestObject();
+	    var session = requestObj.getSession();
+	    var attrValue = session.attributes['AttributeName'];
     }
-    fun6();
+    sampleGetSessionAttribute();
 ```
 
 *   **To add a custom device header:**
 ```
  // Sample JavaScript Code to add a custom device header for postprocessor   
       
-    function fun7() {
-        logger.debug('Tesing setDeviceHeaders method of DataControllerResponse');
-        var varHashMap = new java.util.HashMap();
-        varHashMap.put('newHeader', 'newHeaderValue');
-        response.setDeviceHeaders(varHashMap);
+    function AddDeviceHeaderToResponse() {
+        var responseObj = voltMX.getResponseObject();
+	    responseObj.deviceHeaders['GEO']='NA';
+	    //update response
+	    responseObj.update();
     }
-    fun7();
+    AddDeviceHeaderToResponse();
 ```
 
 *   **To add Datasets to result:**
 ```
  // Sample JavaScript Code to add a dataset to result for postprocessor   
       
-    function fun8() {
-        var varDataSet = new com.hcl.voltmx.middleware.dataobject.Dataset();
-        var varRecord = new com.hcl.voltmx.middleware.dataobject.Record();
-        var varParam = new com.hcl.voltmx.middleware.dataobject.Param();
-          
-        varParam.setName('ParamName');
-        varParam.setValue('ParamValue');
-        varRecord.setParam(varParam);
-        varDataSet.setRecord(varRecord);
-        varDataSet.setId('DataResponse');
-        var varDataSet1 = new com.hcl.voltmx.middleware.dataobject.Dataset();
-        var varRecord1 = new com.hcl.voltmx.middleware.dataobject.Record();
-        var varParam1 = new com.hcl.voltmx.middleware.dataobject.Param();
-        varParam1.setName('ParamName1');
-        varParam1.setValue('ParamValue1');
-        varRecord1.setParam(varParam1);
-        varDataSet1.setRecord(varRecord1);
-        varDataSet1.setId('DataResponse1');
-        var varList = new java.util.ArrayList();
-        varList.add(varDataSet1);
-        varList.add(varDataSet);
-        result.setDataSets(varList);
+    function sampleAddResultDataset() {
+        var resultObj = voltMX.getResultObject();
+        resultObj.addNewDataset('id1');
+	    resultObj.datasets['id1'].addNewRecord('r00');
+	    resultObj.datasets['id1'].records['r00'].params['color']='red';
+        resultObj.datasets['id1'].records['r00'].params['value']='#f00';
+	    resultObj.addNewDataset('id2');
+	    resultObj.datasets['id2'].addNewRecord('r10');
+	    resultObj.datasets['id2'].records['r10'].params['color']='green';
+        resultObj.datasets['id2'].records['r10'].params['value']='#0f0';
+	    //update result
+	    resultObj.update();
     }
-    fun8();
+    sampleAddResultDataset();
 ```
 
 *   **A function which uses most of the response APIs:**
@@ -234,32 +276,45 @@ PostProcessor
     fun8();
 ```
     
-*   To set custom httpStatusCode params through JavaScript postprocessor in result:
+*   **To set custom httpStatusCode params through JavaScript postprocessor in result:**
 ```
-function changeHttpStatusCode() {
-        result.getParamByName("httpStatusCode").setValue(300);
-    } 
-    changeHttpStatusCode();
+// Sample JavaScript Code to add Custom Http Status
+
+    function setHttpStatusCode() {
+        var resultObj = voltMX.getResultObject();
+	    resultObj.setHttpStatus(400);
+	    //update result
+	    resultObj.update();
+    }
+    setHttpStatusCode();    
 ```
     
-*   To set custom opstatus params through JavaScript postprocessor in result:
+*   **To set custom opstatus params through JavaScript postprocessor in result:**
 ```
-function changeOpstatus() {
-        result.getParamByName("opstatus").setValue(1);
-    } 
-    changeOpstatus();
+// Sample JavaScript Code to add Custom Op Status
+
+    function setOpStatusCode() {
+        var resultObj = voltMX.getResultObject();
+	    resultObj.setOpStatus(300);
+	    //update result
+	    resultObj.update();
+    }
+    setOpStatusCode();
 ```
     
 
 *   **For resultToJSON API**
 ```
- function getCertificate_Postprocessor(){
-        var resultToModify = resultToJSON();
+// Sample JavaScript Code for resultToJSON API
+
+    function getCertificate_Postprocessor(){
+        var resultObj = voltMX.getResultObject();
+		var jsonObject = resultObj.toJson();
     
-        if(resultToModify.records &amp;&amp; resultToModify.records.length &gt; 0){
-            var cert = resultToModify.records[0];
+        if(resultObj.records && resultObj.records.length > 0){
+            var cert = jsonObject.records[0];
     
-            resultToModify.certificate = [{
+            jsonObject.certificate = [{                           
                 "online_course": true,
                 "doctor": {
                     "id": cert.doctor.doctor_id,
@@ -272,10 +327,10 @@ function changeOpstatus() {
                 }
             }];
              
-            return resultToModify;
+            return jsonObject;
         }
     }
-    
+
     getCertificate_Postprocessor();
     
 ```

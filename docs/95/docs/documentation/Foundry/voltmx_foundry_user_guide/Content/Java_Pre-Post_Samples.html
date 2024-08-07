@@ -925,15 +925,36 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#sample-datapreprocessor2" class="md-nav__link">
-    Sample DataPreProcessor2
+  <a href="#sample-datapreprocessor2-to-append-input-params-to-the-request" class="md-nav__link">
+    Sample DataPreProcessor2 to append input params to the request
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#sample-datapostprocessor" class="md-nav__link">
-    Sample DataPostProcessor
+  <a href="#sample-prerocessor-to-check-the-header-values" class="md-nav__link">
+    Sample Prerocessor to check the Header values
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-datapostprocessor-to-modify-the-results-returned-from-the-service" class="md-nav__link">
+    Sample DataPostProcessor to modify the results returned from the service
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-postprocessor-to-fetch-all-configurable-server-parameters-and-add-them-to-the-result-dataset" class="md-nav__link">
+    Sample PostProcessor to fetch all configurable server parameters and add them to the result Dataset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-postprocessor-is-to-fetch-a-specific-configurable-server-parameter-with-key-and-add-them-to-the-result-dataset" class="md-nav__link">
+    Sample PostProcessor is to fetch a specific configurable server parameter with Key and add them to the result Dataset
   </a>
   
 </li>
@@ -1713,15 +1734,36 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#sample-datapreprocessor2" class="md-nav__link">
-    Sample DataPreProcessor2
+  <a href="#sample-datapreprocessor2-to-append-input-params-to-the-request" class="md-nav__link">
+    Sample DataPreProcessor2 to append input params to the request
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#sample-datapostprocessor" class="md-nav__link">
-    Sample DataPostProcessor
+  <a href="#sample-prerocessor-to-check-the-header-values" class="md-nav__link">
+    Sample Prerocessor to check the Header values
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-datapostprocessor-to-modify-the-results-returned-from-the-service" class="md-nav__link">
+    Sample DataPostProcessor to modify the results returned from the service
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-postprocessor-to-fetch-all-configurable-server-parameters-and-add-them-to-the-result-dataset" class="md-nav__link">
+    Sample PostProcessor to fetch all configurable server parameters and add them to the result Dataset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-postprocessor-is-to-fetch-a-specific-configurable-server-parameter-with-key-and-add-them-to-the-result-dataset" class="md-nav__link">
+    Sample PostProcessor is to fetch a specific configurable server parameter with Key and add them to the result Dataset
   </a>
   
 </li>
@@ -1757,7 +1799,7 @@
 <h2 id="java-sample-code-for-preprocessor-and-postprocessor">Java Sample Code for Preprocessor and Postprocessor</h2>
 <h3 id="sample-datapreprocessor">Sample DataPreProcessor</h3>
 <p>The following is a sample DataPreProcessor file:</p>
-<pre><code> import java.util.HashMap;
+<pre><code>import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -1783,7 +1825,7 @@ public class sampleDataPreProcessor implements DataPreProcessor {
     }
 }
 </code></pre>
-<h3 id="sample-datapreprocessor2">Sample DataPreProcessor2</h3>
+<h3 id="sample-datapreprocessor2-to-append-input-params-to-the-request">Sample DataPreProcessor2 to append input params to the request</h3>
 <p>The following is a sample DataPreProcessor2 file:</p>
 <pre><code> package jsoncustjar;
 import java.util.HashMap;
@@ -1822,9 +1864,35 @@ public class DigitePreProcessor implements DataPreProcessor2 {
     }
 }
 </code></pre>
-<h3 id="sample-datapostprocessor">Sample DataPostProcessor</h3>
+<h3 id="sample-prerocessor-to-check-the-header-values">Sample Prerocessor to check the Header values</h3>
+<p>The following is a sample code for check the Header values.</p>
+<pre><code>import java.util.HashMap;
+
+import com.hcl.voltmx.middleware.common.DataPreProcessor2;
+import com.hcl.voltmx.middleware.controller.DataControllerRequest;
+import com.hcl.voltmx.middleware.controller.DataControllerResponse;
+import com.hcl.voltmx.middleware.dataobject.Result;
+
+public class PreProcessorGetHeader implements DataPreProcessor2 {
+    @Override
+    public boolean execute(HashMap arg0, DataControllerRequest req, DataControllerResponse arg2, Result arg3)
+            throws Exception {
+        //Getting the Header value using the key
+         String userAgent = req.getHeader(&quot;X-User-Agent&quot;);
+         // Checking the value then returning the boolean. 
+         if (&quot;mobile&quot;.equals(userAgent)) {
+                return true;
+            } else {
+                return false;
+            }
+
+    }
+}
+
+</code></pre>
+<h3 id="sample-datapostprocessor-to-modify-the-results-returned-from-the-service">Sample DataPostProcessor to modify the results returned from the service</h3>
 <p>The following is a sample DataPostProcessor file:</p>
-<pre><code> import com.hcl.voltmx.middleware.common.DataPostProcessor;
+<pre><code>import com.hcl.voltmx.middleware.common.DataPostProcessor;
 import com.hcl.voltmx.middleware.controller.DataControllerRequest;
 import com.hcl.voltmx.middleware.controller.DataControllerResponse;
 import com.hcl.voltmx.middleware.dataobject.Param;
@@ -1839,6 +1907,80 @@ public class sampleDataPostProcessor implements DataPostProcessor {
      // Write application logic here to modify the results returned from the service
 
      // return Result object here
+        return arg0;
+    }
+
+}
+</code></pre>
+<h3 id="sample-postprocessor-to-fetch-all-configurable-server-parameters-and-add-them-to-the-result-dataset">Sample PostProcessor to fetch all configurable server parameters and add them to the result Dataset</h3>
+<p>The following PostProcessorGetAllConfigurableParameters class is to fetch all configurable server parameters and add them to the result Dataset.</p>
+<pre><code>import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
+
+import com.hcl.voltmx.middleware.api.ConfigurableParametersHelper;
+import com.hcl.voltmx.middleware.api.ServicesManager;
+import com.hcl.voltmx.middleware.common.DataPostProcessor2;
+import com.hcl.voltmx.middleware.controller.DataControllerRequest;
+import com.hcl.voltmx.middleware.controller.DataControllerResponse;
+import com.hcl.voltmx.middleware.dataobject.Dataset;
+import com.hcl.voltmx.middleware.dataobject.Param;
+import com.hcl.voltmx.middleware.dataobject.Record;
+import com.hcl.voltmx.middleware.dataobject.Result;
+
+public class PostProcessorGetAllConfigurableParameters implements DataPostProcessor2 {
+
+    public Object execute(Result arg0, DataControllerRequest arg1,DataControllerResponse arg2) throws Exception {
+        Record rd = new Record();
+        // Retrieve the ServicesManager from the request.
+        ServicesManager sm = arg1.getServicesManager();
+        // Get the ConfigurableParametersHelper from the ServicesManager.
+        ConfigurableParametersHelper paramHelper = sm.getConfigurableParametersHelper();
+        Map&lt;String, String&gt; allSerPro = paramHelper.getAllServerProperties();
+        for(Map.Entry&lt;String, String&gt; entry : allSerPro.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            rd.addParam(new Param(key, value, &quot;string&quot;));
+        }
+        Dataset ds = new Dataset();
+        ArrayList&lt;Record&gt; rds = new ArrayList&lt;Record&gt;();   
+        rds.add(rd);
+        ds.addAllRecords((Collection)rds);
+        arg0.addDataset(ds);
+        return arg0;
+    }
+}
+</code></pre>
+<h3 id="sample-postprocessor-is-to-fetch-a-specific-configurable-server-parameter-with-key-and-add-them-to-the-result-dataset">Sample PostProcessor is to fetch a specific configurable server parameter with Key and add them to the result Dataset</h3>
+<p>The following PostProcessorGetConfigurableParameterWithKey class is to fetch a specific configurable server parameter with Key and add them to the result Dataset.</p>
+<pre><code>import java.util.ArrayList;
+import java.util.Collection;
+
+import com.hcl.voltmx.middleware.api.ConfigurableParametersHelper;
+import com.hcl.voltmx.middleware.api.ServicesManager;
+import com.hcl.voltmx.middleware.common.DataPostProcessor2;
+import com.hcl.voltmx.middleware.controller.DataControllerRequest;
+import com.hcl.voltmx.middleware.controller.DataControllerResponse;
+import com.hcl.voltmx.middleware.dataobject.Dataset;
+import com.hcl.voltmx.middleware.dataobject.Param;
+import com.hcl.voltmx.middleware.dataobject.Record;
+import com.hcl.voltmx.middleware.dataobject.Result;
+
+public class PostProcessorGetConfigurableParameterWithKey implements DataPostProcessor2 {
+
+    public Object execute(Result arg0, DataControllerRequest arg1, DataControllerResponse arg2) throws Exception {
+        Record rd = new Record();
+        ServicesManager sm = arg1.getServicesManager();
+        // Get the ConfigurableParametersHelper from the ServicesManager.
+        ConfigurableParametersHelper paramHelper = sm.getConfigurableParametersHelper();
+        // Retrieve the value of the specific server property &quot;encryption&quot;.
+        String myServerParam = paramHelper.getServerProperty(&quot;encryption&quot;);
+        rd.addParam(new Param(&quot;encryption&quot;, myServerParam, &quot;string&quot;));
+        Dataset ds = new Dataset();
+        ArrayList&lt;Record&gt; rds = new ArrayList&lt;Record&gt;();
+        rds.add(rd);
+        ds.addAllRecords((Collection) rds);
+        arg0.addDataset(ds);
         return arg0;
     }
 

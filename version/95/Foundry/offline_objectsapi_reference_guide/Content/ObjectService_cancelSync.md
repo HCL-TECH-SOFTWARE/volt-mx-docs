@@ -5,9 +5,8 @@ The **\<objectService\>.cancelSync** function cancels an in progress object serv
 
 ## Volt MX Iris (JavaScript)
 
-> **Note:**
+> **Note :**  Not supported for Mobile Web, Desktop Web and Desktop Native channels.
 
-- Not supported for Mobile Web and Desktop Web channels.
 
 ### Signature
 

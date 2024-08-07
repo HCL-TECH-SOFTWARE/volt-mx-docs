@@ -1,6 +1,4 @@
 
-### Desktop Native Application Overview
-
 A desktop native application is an application that can be installed and run locally on a desktop computer.  The desktop native application is a web application  running in an electron environment with the ability to integrate with the desktop environment and communicate and work with the desktop resources as the application developer permits.  Access to the desktop environment is managed by poly-filling existing Volt MX apis or adding your own using Native Function Interfaces.  As is typically the case with Volt MX built applications, the desktop native applications can be client-server based and interface with the Volt MX Foundry server using services and providers specific to your application needs.   Using Volt MX, desktop native applications can be created for Mac and Windows computers.  
 
 > **_Note:_**  The electron JS based desktop native build doesn’t support “free-form” architecture applications. It supports only MVC architecture applications.
@@ -459,6 +457,35 @@ See VoltMX voltmx.db documentation</td>
 </body>
 </html>
 
+
+### Mandatory Steps in Building an Application for Desktop Native:
+
+1.  Desktop Native plugin 
+
+    * Build the project at least once to download the Desktop Native plugin. 
+    
+2.  Select the desired Database configuration. 
+
+3.  If SQLite Database is selected, Enable OfflineObjects VoltMXDB NFI
+
+    * Navigate to Edit -> Open Manage Native Function API(s).
+    * Select the Desktop tab.
+    * Enable <b>VoltMXDB.</b> 
+
+    > **Note:** Version 2.0.0 of VoltMXDB includes all the Offline Object updates.
+
+4.  Rebuild the Application to apply the changes. 
+
+    > **Note:** Unlike IndexedDB, where the database can be viewed directly in Developer Tools under the Application tab, SQLite database file for
+                Desktop Native resides in the system's user app data folder for both Windows and macOS.
+
+    * Windows : `<System Drive>\Users\<User>\AppData\Roaming\<YourApp>\data\sync.db`
+    * macOS : `/Users/<User>/Library/Application Support/<YourApp>/data/sync.db`
+
+
+### Desktop Native(Electron Apps)
+  IndexedDB is the database that supports offline objects.
+
 ### Building a Desktop Native Application
 
 ### Build Prerequisites
@@ -480,11 +507,22 @@ Icons for the application and application signing can be configured in the Proje
 
 ### Project Settings
 
-There are some platform specific project settings for the MacOS and Windows native platforms.  To view or update these settings, go to ProjectSettingsNative and choose either MacOS or Windows.
+Desktop Native platforms support two databases, namely IndexedDB and SQLite.
+
+To switch the database, select the appropriate option from <b>Project Settings -> Native -> Desktop</b>
+
+
+![](Resources/Images/Project_01.png)
+
+
+There are some platform specific project settings for the macOS and Windows native platforms. To view or update these settings, go to <b>Project Settings -> Native -> Desktop</b> and choose either macOS or Windows.
+
+
 
 ### Windows Application Settings
 
 The screen shot below shows the Application UI tab of the Windows application settings.
+
 
 ![](Resources/Images/Picture8.png)
 
@@ -511,10 +549,13 @@ The next screen shot shows the Build Local tab of the Windows settings
 
 The following screen shot shows the MacOS specific project settings.
 
+
 ![](Resources/Images/Picture10.png)
+
 
 * Bundle Identifier – The bundle ID for your application.
 * Bundle Version – The version of your application
+* Enable App Notarization – Enable the checkbox to Notarize your app
 *	Developer ID – Your Apple Developer ID.
 * Development Team ID – The Apple Developer Team to which you belong.
 * App Password – An application password generated for your app on the Apple Developer site.
@@ -523,6 +564,46 @@ The following screen shot shows the MacOS specific project settings.
 NOTE:  For signing and notarizing MacOS applications, we use the process documented in the following article: [here](https://www.electronforge.io/guides/code-signing/code-signing-macos)
 
 We use the app-specific password option for notarizing your application.  To learn about app-specific passwords and how to generate them, see [here](https://support.apple.com/en-us/HT204397)
+
+### Offline Objects
+
+### Supported Databases	
+
+**DesktopNative Support**
+
+* IndexedDB (Default)
+* SQLite
+
+>**_NOTE_** : To switch the database, select the appropriate option from **Project Settings -> Native -> Desktop**
+
+### Supported Architecture
+
+**Windows**
+
+* Installer Type: .msi
+* Supported Versions: Windows 10 and later
+* Architecture: x86 (32-bit), x64 (64-bit)
+
+**Mac**
+
+
+* Installer Type: .dmg
+* Architecture: arm, x64
+
+>**_NOTE_** : The build-system architecture will determine what target devices can run the application. For example, an app built on an ARM chip will only work on a system with an ARM chip.
+
+### App Uninstallation
+
+<b>MacOS</b>
+
+An uninstaller app named "Uninstall_`<appname>"` will be created in the application's installation directory. You can use this app to uninstall the application.
+
+<b>Windows</b>
+
+An uninstaller shortcut named "Uninstall_`<appname>"` will be created in the application's installation directory. This shortcut can be used to uninstall the application.
+
+>**Note** : This process will delete the AppData folder under Users directory and all contents within the installation directory but the empty installation directory itself will need to be manually removed.
+
 
 
 ### Modifying Native Apps
@@ -555,8 +636,10 @@ You’ll also need to open a chrome browser and navigate to chrome://inspect.  I
 
 Then run run.bat or run.sh and you will be able to debug the main process.
 
-### Limitations
+### Notes
 
+* Ensure that you use 'voltmx.ui.Alert’ API instead of native alerts for consistent behavior.
+* Do not use a for loop to run CRUD operations, if you use please use promises from application code.
 * ScreenRecorder apis will not function without the use of electron’s desktopCapturer.  See [here](https://www.electronjs.org/docs/latest/api/desktop-capturer)
 To add this capability to the desktop native application an NFI would need to be created with apis to access desktopCapturer from the main process.
 
@@ -565,7 +648,13 @@ To add this capability to the desktop native application an NFI would need to be
 * Volt MX Camera widget is not supported for DesktopNative apps at this time.  However the camera apis do function.
 
 * Protected mode has no affect for desktop native apps at this time.
-
 * When running a desktop native app on a MacOS platform during development, the first window menu entry will say ‘Electron’ rather than the project name.  However when the installer is built for the app, the menu will correctly be the project name for the installed app.  The menu will be correct on Windows during development and in the installed app.
+
+
+### Known Issues
+
+* Error reporting in Iris needs improvements for notarization flow
+* For windows, project settings under General -> Application UI settings are not being applied during app package generation
+
 
 
