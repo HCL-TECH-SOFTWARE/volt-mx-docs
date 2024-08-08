@@ -3,7 +3,7 @@
 Configure Connectors - Tomcat
 =============================
 
-1.  From the `<User_Install_Directory>\apache-tomcat-9.0.33\conf`, open the `server.xml`.
+1.  From the `<User_Install_Directory>\apache-tomcat-9.x.x\conf`, open the `server.xml`.
 2.  In the `server.xml`, under the `<Service name="Catalina">` tag, add the connector tag:
     
     *   **For HTTP**
@@ -25,7 +25,7 @@ How to Configure Batch Files
 
 `Catalina.bat` files are required to be configured in Tomcat server to work properly.
 
-1.  From the `<User_Install_Directory>\apache-tomcat-9.0.33\bin`, open the `catalina.bat`.
+1.  From the `<User_Install_Directory>\apache-tomcat-9.x.x\bin`, open the `catalina.bat`.
 2.  Before the `@echo off` command, add the following JVM memory configuration.
     *   For Windows:
         
@@ -53,7 +53,7 @@ How to Configure Batch Files
 
 If you wish to configure a Windows service for this server, follow these steps
 
-1.  From the `<User_Install_Directory>\apache-tomcat-9.0.33\bin`, open the `service.bat`.
+1.  From the `<User_Install_Directory>\apache-tomcat-9.x.x\bin`, open the `service.bat`.
 2.  Set JRE home if it is not set. For example, use the following command:
     
     `set "JRE_HOME=<User_Install_Directory>\jre"`

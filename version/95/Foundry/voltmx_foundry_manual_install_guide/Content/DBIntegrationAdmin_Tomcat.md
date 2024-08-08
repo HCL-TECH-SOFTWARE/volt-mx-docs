@@ -217,44 +217,44 @@ To create a database for **Admin**, follow these steps:
 
 ### For Admin (admindb):
 
-replace the following placeholders in SQL migrations for your database flyway.placeholders.VOLTMX_SERVER_STORAGE_DATABASE_TYPE -> value must be
+replace the following placeholders in SQL migrations for your database flyway.placeholders.KONY_SERVER_STORAGE_DATABASE_TYPE -> value must be
 
 ```
     mysql/oracle/sqlserver based on the chosen databases.
 
-    flyway.placeholders.VOLTMX_SERVER_STORAGE_DATABASE_HOSTNAME -> database host name where
+    flyway.placeholders.KONY_SERVER_STORAGE_DATABASE_HOSTNAME -> database host name where
     admindb is created.
 
-    flyway.placeholders.VOLTMX_SERVER_STORAGE_DATABASE_PORT -> database port where
+    flyway.placeholders.KONY_SERVER_STORAGE_DATABASE_PORT -> database port where
     admindb is created.
 
-    flyway.placeholders.VOLTMX_SERVER_STORAGE_DATABASE_USERNAME -> database user name
-    flyway.placeholders.VOLTMX_SERVER_STORAGE_DATABASE_PASSWORD ->:  ([Encrypt](Encrypt_Passwords.md) this password)
+    flyway.placeholders.KONY_SERVER_STORAGE_DATABASE_USERNAME -> database user name
+    flyway.placeholders.KONY_SERVER_STORAGE_DATABASE_PASSWORD ->:  ([Encrypt](Encrypt_Passwords.md) this password)
           - For MySQL and SQL Server: database user password
 
-    flyway.placeholders.VOLTMX_SERVER_STORAGE_DATABASE_INSTANCE ->  MySQL – empty,
-    SQL Server – instance name if given, Oracle - SID name. flyway.placeholders.VOLTMX_SERVER_CACHEID_TRANSPORT=""flyway.placeholders.VOLTMX_SERVER_SESSION_DISTRIBUTED="FALSE"
-    flyway.placeholders.VOLTMX_SERVER_CACHE_TYPE="EHCACHE"
-    flyway.placeholders.VOLTMX_SERVER_CACHE_URL="" flyway.placeholders.VOLTMX_SERVER_JMS_INITIAL_CONTEXT_FACTORY=""
-    flyway.placeholders.VOLTMX_SERVER_JMS_PROVIDER_URL=""
-    flyway.placeholders.VOLTMX_SERVER_JMS_USER_NAME=""
-    flyway.placeholders.VOLTMX_SERVER_JMS_USER_PASSWORD="" ([Encrypt](Encrypt_Passwords.md) this password) flyway.placeholders.VOLTMX_SERVER_KEYSTORE_LOCATION=""
-    flyway.placeholders.VOLTMX_SERVER_LOG_LOCATION=""
-    flyway.placeholders.VOLTMX_SERVER_MEMCACHED_COUNT=""
-    flyway.placeholders.VOLTMX_SERVER_MEMCACHE_CLUSTER=""
-    flyway.placeholders.VOLTMX_SERVER_RICH_CLIENT_DEPLOY=""
-    flyway.placeholders.VOLTMX_SERVER_TRUSTSTORE_LOCATION=""
-    flyway.placeholders.VOLTMX_SERVER_TRUSTSTORE_PASSWORD=""  ([Encrypt](Encrypt_Passwords.md) this password)
-    flyway.placeholders.VOLTMX_SERVER_LOG_OPTION="logfile"
-    flyway.placeholders.VOLTMX_SERVER_SSL_SOCKETFACTORY_PROVIDER=
+    flyway.placeholders.KONY_SERVER_STORAGE_DATABASE_INSTANCE ->  MySQL – empty,
+    SQL Server – instance name if given, Oracle - SID name. flyway.placeholders.KONY_SERVER_CACHEID_TRANSPORT=""flyway.placeholders.KONY_SERVER_SESSION_DISTRIBUTED="FALSE"
+    flyway.placeholders.KONY_SERVER_CACHE_TYPE="EHCACHE"
+    flyway.placeholders.KONY_SERVER_CACHE_URL="" flyway.placeholders.KONY_SERVER_JMS_INITIAL_CONTEXT_FACTORY=""
+    flyway.placeholders.KONY_SERVER_JMS_PROVIDER_URL=""
+    flyway.placeholders.KONY_SERVER_JMS_USER_NAME=""
+    flyway.placeholders.KONY_SERVER_JMS_USER_PASSWORD="" ([Encrypt](Encrypt_Passwords.md) this password) flyway.placeholders.KONY_SERVER_KEYSTORE_LOCATION=""
+    flyway.placeholders.KONY_SERVER_LOG_LOCATION=""
+    flyway.placeholders.KONY_SERVER_MEMCACHED_COUNT=""
+    flyway.placeholders.KONY_SERVER_MEMCACHE_CLUSTER=""
+    flyway.placeholders.KONY_SERVER_RICH_CLIENT_DEPLOY=""
+    flyway.placeholders.KONY_SERVER_TRUSTSTORE_LOCATION=""
+    flyway.placeholders.KONY_SERVER_TRUSTSTORE_PASSWORD=""  ([Encrypt](Encrypt_Passwords.md) this password)
+    flyway.placeholders.KONY_SERVER_LOG_OPTION="logfile"
+    flyway.placeholders.KONY_SERVER_SSL_SOCKETFACTORY_PROVIDER=
     com.ibm.websphere.ssl.protocol.SSLSocketFactory
 
-    flyway.placeholders.VOLTMX_SERVER_SSL_SERVERSOCKETFACTORY_PROVIDER=
+    flyway.placeholders.KONY_SERVER_SSL_SERVERSOCKETFACTORY_PROVIDER=
     com.ibm.websphere.ssl.protocol.SSLServerSocketFactory
-    flyway.placeholders.VOLTMX_SERVER_LOGGER_JNDI_NAME=jdbc/voltmxadmindb
-    flyway.placeholders.VOLTMX_SERVER_SSL_SERVERSOCKETFACTORY_PROVIDER
-    flyway.placeholders.VOLTMX_SERVER_SSL_SOCKETFACTORY_PROVIDER
-    flyway.placeholders.VOLTMX_SERVER_LOG_OPTION
+    flyway.placeholders.KONY_SERVER_LOGGER_JNDI_NAME=jdbc/voltmxadmindb
+    flyway.placeholders.KONY_SERVER_SSL_SERVERSOCKETFACTORY_PROVIDER
+    flyway.placeholders.KONY_SERVER_SSL_SOCKETFACTORY_PROVIDER
+    flyway.placeholders.KONY_SERVER_LOG_OPTION
 
     flyway.placeholders.SERVER_TOPIC_CONNECTION_FACTORY=ConnectionFactory
 ```

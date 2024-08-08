@@ -45,7 +45,7 @@ Prerequisites
     
     > **_Note:_** After including the **ojdbc8.jar** in the Auth patch zip file, the hibernate dialect gets changed from `org.hibernate.dialect.Oracle10gDialect` to `org.hibernate.dialect.Oracle9Dialect`.
     
-*   For GA version 8.4 - Patch installers (8.4.3.1), add the `mysql-connector-java-5.1.44.jar` into the VPNS zip file.
+*   For GA version 8.4 - Patch installers (8.4.3.1), add the `mysql-connector-java-8.x.x` into the VPNS zip file.
 
 To install Volt Foundry patch using the installer, follow these steps:
 

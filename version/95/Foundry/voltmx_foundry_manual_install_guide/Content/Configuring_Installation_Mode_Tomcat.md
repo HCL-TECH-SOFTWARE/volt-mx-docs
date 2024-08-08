@@ -15,7 +15,7 @@ To download and install Tomcat, follow these steps:
     
     [https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.33/bin/](https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.33/bin/)
     
-2.  Install the `apache-tomcat-9.0.33-windows-x64.exe` (Windows) or extract the `apache-tomcat-9.0.33.tar.gz` (Linux) file and place it in your local folder. Your Tomcat Server setup is ready now.
+2.  Install the `apache-tomcat-9.x.x-windows-x64.exe` (Windows) or extract the `apache-tomcat-9.x.x.tar.gz` (Linux) file and place it in your local folder. Your Tomcat Server setup is ready now.
     
     > **_Important:_** Examples in this document refer the <User\_Install\_Directory> as your install folder. Ensure that you place JRE and Tomcat in the <User\_Install\_Directory> folder.
     
@@ -37,4 +37,4 @@ manager-jmx,manager-status" />
 
 ```
 
-Sample location to `tomcat-user.xml` file: `<\InstallerFolder>\<apache-tomca>\apache-tomcat-9.0.33\conf`
+Sample location to `tomcat-user.xml` file: `<\InstallerFolder>\<apache-tomca>\apache-tomcat-9.x.x\conf`

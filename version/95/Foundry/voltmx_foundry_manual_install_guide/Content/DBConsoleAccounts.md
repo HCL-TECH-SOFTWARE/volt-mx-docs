@@ -41,10 +41,10 @@ The following details are required for Flyway configuration:
 <code style="display:block;background-color:#eee;border: 1px solid #999;padding: 20px;">
 <strong># For Volt MX Accounts Services Database, replace the following placeholders</strong>
 <strong># in SQL migrations for your database</strong>
-flyway.placeholders.VOLTMX_ACCOUNTS_LOG_LOCATION= <strong>< INSTLL_DIR></strong>/logs
+flyway.placeholders.KONY_ACCOUNTS_LOG_LOCATION= <strong>< INSTLL_DIR></strong>/logs
 flyway.placeholders.WAAS_BASE_URL=<strong>< PUBLIC_URL></strong>/workspace
-flyway.placeholders.VOLTMX_ACCOUNTS_LOG_LEVEL=INFO
-flyway.placeholders.VOLTMX_ACCOUNTS_LOG_OPTION=logfile
+flyway.placeholders.KONY_ACCOUNTS_LOG_LEVEL=INFO
+flyway.placeholders.KONY_ACCOUNTS_LOG_OPTION=logfile
 flyway.placeholders.COM_PROTOCOL=http
 flyway.placeholders.DISP_APP_SERVER=
 flyway.placeholders.DISP_DB_CHOICE=

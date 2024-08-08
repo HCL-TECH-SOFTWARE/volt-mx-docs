@@ -9,7 +9,7 @@ For setting up database through flyway ensure you have installed the Flyway comm
 
 #### Setup
 
-Copy Mysql jdbc driver `(mysql-connector-java-8.0.12)` to Drivers folder under Flyway installation directory.
+Copy Mysql jdbc driver `(mysql-connector-java-8.x.x)` to Drivers folder under Flyway installation directory.
 
 #### Configuration
 
@@ -41,7 +41,7 @@ Uncomment and modify following parameters in `conf/flyway.conf` file under Flywa
 
 #### Setup
 
-Copy Microsoft SQL jdbc driver( `mssql-jdbc-7.0.0.jre8`) to drivers folder under flyway installation directory.
+Copy Microsoft SQL jdbc driver( `mssql-jdbc-x.x.x.jreX`) to drivers folder under flyway installation directory.
 
 #### Configuration
 
@@ -76,7 +76,7 @@ Uncomment and modify following parameters in `conf/flyway.conf` file under flywa
 
 #### Setup
 
-Copy Oracle jdbc driver(`ojdbc6.jar`) to drivers folder under flyway installation directory.
+Copy Oracle jdbc driver(`ojdbc11.jar`) to drivers folder under flyway installation directory.
 
 #### Configuration
 

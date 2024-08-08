@@ -3,14 +3,14 @@
 Prerequisites
 =============
 
-Before you install Volt MX Foundry, you must perform the following pre-installation tasks:
+Before you install Volt Foundry, you must perform the following pre-installation tasks:
 
 *   A database user should be granted all required permissions as per this document.
 *   To use your existing SSL certificate, map the SSL certificate to the domain name you want to use.
 *   To install in domain mode, the JBoss cluster should be pre-configured.
 *   For details on Supported Configurations please check [here](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmxfoundry_supported_devices_os_browsers/Content/FoundryV9SP5.html) 
 
-Before you install Volt MX Foundry, you must perform the following pre-installation tasks:
+Before you install Volt Foundry, you must perform the following pre-installation tasks:
 
 *   [Software Requirements](#software-requirements)
 *   **Hardware Requirements**
@@ -70,7 +70,7 @@ Database System Requirements (per physical instance) - Engagement Services
 
 ### Corporate Firewall Settings - Engagement Services
 
-The following firewall settings need to be configured for successful Volt MX Foundry Engagement Services installation.
+The following firewall settings need to be configured for successful Volt Foundry Engagement Services installation.
 
   
 | Source | Destination | Ports | Protocol | Direction | Action | Description |
@@ -90,12 +90,12 @@ The following firewall settings need to be configured for successful Volt MX Fou
 | Internal Corporate WiFi router for Window Devices | Add the list IPs specified in the following WNS URL [http://www.microsoft.com/en-us/download/details.aspx?id=44238](http://www.microsoft.com/en-us/download/details.aspx?id=44238) |   | TCP, HTTP, HTTPS, UDP | Both | Allow | Windows devices will connect to WNS through this port |
 | Internal Corporate WiFi router for Window Devices | Add the list IPs specified in the following MPNS URL: [https://www.microsoft.com/en-us/download/details.aspx?id=44535](https://www.microsoft.com/en-us/download/details.aspx?id=44535) |   | TCP, HTTP, HTTPS, UDP | Both | Allow | Windows devices will connect to MPNS through this port |
 
-APNS works only with SOCKS proxy type. It is because of the current technical limitation from Apple to communicate the below push notification ports when a proxy server is in place between Volt MX Foundry Engagement server and the firewall.
+APNS works only with SOCKS proxy type. It is because of the current technical limitation from Apple to communicate the below push notification ports when a proxy server is in place between Volt Foundry Engagement server and the firewall.
 
 *   TCP port 2195 (used to send notifications to the APNs)
 *   TCP port 2196 (used by the APNs feedback service)
 
-Alternatively, as a workaround, to communicate with the above ports, the system on which the Volt MX Foundry Engagement server is installed should bypass the proxies and communicate with the firewall directly.
+Alternatively, as a workaround, to communicate with the above ports, the system on which the Volt Foundry Engagement server is installed should bypass the proxies and communicate with the firewall directly.
 
 Proxy Settings for Integration Service
 --------------------------------------

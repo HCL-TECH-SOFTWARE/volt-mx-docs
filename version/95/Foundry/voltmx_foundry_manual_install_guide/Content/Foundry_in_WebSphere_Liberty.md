@@ -118,7 +118,7 @@ Reference: Liberty server.xml template file
 		<!-- Oracle 
 		<fileset dir="${server.config.dir}/libs" includes="ojdbc8.jar"/> -->
 		<!-- MySQL 
-		<fileset dir="${server.config.dir}/libs" includes="mysql-connector-java-8.0.12.jar"/> -->
+		<fileset dir="${server.config.dir}/libs" includes="mysql-connector-x-8.x.x.jar"/> -->
 		<!-- SQLServer 
 		<fileset dir="${server.config.dir}/libs" includes="mssql-jdbc-7.2.2.jre11.jar"/> -->
 		<!-- MariaDB 

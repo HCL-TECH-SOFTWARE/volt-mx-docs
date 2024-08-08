@@ -8,12 +8,12 @@ For MySQL
 
 ### How to Configure JNDI
 
-1.  Copy the `mysql-connector-java-8.0.12.jar` from the `VoltMXFoundry_Plugins\resources` folder.
-2.  Paste the `mysql-connector-java-8.0.12.jar` file under user install directory inside the **Tomcat > Lib** folder - for example, `<User install directory>\apache-tomcat-9.0.33\lib`.
+1.  Copy the `mysql-connector-x-8.x.x.jar` from the `VoltMXFoundry_Plugins\resources` folder.
+2.  Paste the `mysql-connector-x-8.x.x.jar` file under user install directory inside the **Tomcat > Lib** folder - for example, `<User install directory>\apache-tomcat-9.x.x\lib`.
 
 ### How to Configure Data Source - Context.xml
 
-1.  Open the `context.xml` file located under `<User install directory>\apache-tomcat-9.0.33\conf` depending on the database type.
+1.  Open the `context.xml` file located under `<User install directory>\apache-tomcat-9.x.x\conf` depending on the database type.
 2.  In the `context.xml` file, create two entries one for voltmxadmindb and the other for KDCDB by using the following template:
     
 ```
@@ -45,7 +45,7 @@ For MySQL
 
 ### How to Configure Data Source - Admin.xml
 
-1.  Go to `<User install directory>\apache-tomcat-9.0.33\conf\Catalina\localhost` folder.
+1.  Go to `<User install directory>\apache-tomcat-9.x.x\conf\Catalina\localhost` folder.
 2.  Create the admin.xml file.
 3.  In the `admin.xml` file, add the following data source configurations:
     

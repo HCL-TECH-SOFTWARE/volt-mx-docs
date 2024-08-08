@@ -1,9 +1,9 @@
                              
 
-How to Stop and Start Volt MX Foundry
+How to Stop and Start Volt Foundry
 ====================================
 
-After you install Volt MX Foundry, you must restart your application server to take effect all installed configurations.
+After you install Volt Foundry, you must restart your application server to take effect all installed configurations.
 
 Tomcat Server
 -------------
@@ -32,5 +32,5 @@ To stop and start JBoss Server, follow these steps:
 
 ### Linux - To stop and start JBoss Server
 
-1.  Stop server: Kill running Volt MX Foundry on JBoss service using command in Linux
+1.  Stop server: Kill running Volt Foundry on JBoss service using command in Linux
 2.  Start server: `[/root/Foundry83JBOSSSINGLE/jboss/bin]# ./startjboss.sh`

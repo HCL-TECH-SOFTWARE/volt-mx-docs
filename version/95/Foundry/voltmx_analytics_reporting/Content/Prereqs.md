@@ -90,8 +90,8 @@ Supported Databases and Drivers
   
 | Database Version | Database Connectivity Drivers |
 | --- | --- |
-| MySQL 5.7.X and 8.X | mysql-connector-java-8.0.30.jar <br> Click the below link to download the .jar:<br>[https://downloads.mysql.com/archives/c-j/](https://downloads.mysql.com/archives/c-j/) |
-| | mysql-connector-j-8.0.33.jar <br> (For Mysql server  8.0.33 DataBase) |
+| MySQL 5.7.X and 8.X | mysql-connector-java-8.x.x <br> Click the below link to download the .jar:<br>[https://downloads.mysql.com/archives/c-j/](https://downloads.mysql.com/archives/c-j/) |
+| | mysql-connector-j-8.x.x.jar <br> (For Mysql server  8.0.33 DataBase) |
 | | **In the case of MySQL 8.x Database with JasperReports Server V 7.9.2, ensure that you must delete the mariadb-java-client-2.5.3.jar file if it exist in your system.** |
 | |For example: &lt;jasperinstall-dir&gt;/apache-tomcat/lib/mariadb-java-client-2.5.3.jar|
 | Microsoft SQL Server 2012, 2014 and 2019 | mssql-jdbc-7.2.2.jre8.jar <br> Click the below link to download the .jar: <br> [https://msdn.microsoft.com/en-us/sqlserver/aa937724.aspx](https://msdn.microsoft.com/en-us/sqlserver/aa937724.aspx) |

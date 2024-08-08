@@ -45,11 +45,11 @@ For example, if you have created a workspace database with a custom name ( `<pre
 
       # Volt MX Workspace Services Database, replace the following placeholders 
         # in SQL migrations for your database
-        flyway.placeholders.VOLTMX_WAAS_LOG_LOCATION=C:VoltMXFoundry/logs
-        flyway.placeholders.VOLTMX_WAAS_LOG_LEVEL=INFO
-        flyway.placeholders.VOLTMX_WAAS_LOG_OPTION=logfile
-        flyway.placeholders.VOLTMX_WORKSPACES_GLOBAL_DB
-        flyway.placeholders.VOLTMX_WAAS_GLOBAL_DB
+        flyway.placeholders.KONY_WAAS_LOG_LOCATION=C:VoltMXFoundry/logs
+        flyway.placeholders.KONY_WAAS_LOG_LEVEL=INFO
+        flyway.placeholders.KONY_WAAS_LOG_OPTION=logfile
+        flyway.placeholders.KONY_WORKSPACES_GLOBAL_DB
+        flyway.placeholders.KONY_WAAS_GLOBAL_DB
 ```
   * Tablespace Placeholders for Oracle:
     
