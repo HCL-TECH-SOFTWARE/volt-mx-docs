@@ -956,11 +956,13 @@ August 06, 2024
 
 * Updated MySQL drivers to v8.3.0.
 
-  >**Note** : After this update Volt Foundry components will no longer support connections to MySQL 5.7 RDBMS.
+  >**Note** : After the v8.3.0 update, Volt Foundry components will no longer support connections to MySQL 5.7 RDBMS.
 
-* Velocity template engine updated from 1.7.x to 2.x (core). Differences in scheme are documented <a href="https://velocity.apache.org/engine/2.0/upgrading.html" target="_blank">here</a>. _(external)_
+* Updated the Velocity template engine from 1.7.x to 2.x (core). Differences in the scheme are documented <a href="https://velocity.apache.org/engine/2.0/upgrading.html" target="_blank">here</a>.
 
-* Security hardening.
+* Strengthened security.
+
+  >**Note** : <b>In case Android FCM notifications are being utilised, kindly upgrade to v9.5.16.6 instead which contains a critical fix to unblock this feature.</b>
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
