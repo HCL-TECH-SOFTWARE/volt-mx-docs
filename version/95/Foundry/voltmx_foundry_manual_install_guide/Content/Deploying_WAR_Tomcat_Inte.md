@@ -11,7 +11,7 @@ To deploy configured integration WAR files to Tomcat, follow these steps:
 
 1.  Copy the updated `.war` files such as `admin.war`, `middleware.war`, `services.war`, and  `apps.war`.
 2.  Paste the files in the following location:
-    *   For Tomcat, `<User install directory>\apache-tomcat-8.5.32\webapps`.
+    *   For Tomcat, `<User install directory>\apache-tomcat-9.x.x\webapps`.
     *   For Tomcat, add the `jboss-client.jar`
         1.  Copy the .jars from `\VoltMXFoundry_Plugins\middleware\`
         2.  Paste the jars into  `<TOMCAT-HOME>\lib`  

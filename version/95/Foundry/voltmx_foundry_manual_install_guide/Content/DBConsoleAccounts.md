@@ -57,7 +57,7 @@ flyway.placeholders.SELECTED_COMP=
 flyway.placeholders.USER_INSTALL_DIR=/root/MF73m
         
 
-flyway.placeholders.VOLTMX_ACCOUNTS_LOGGER_JNDI= same as < accounts schema jndi, 
+flyway.placeholders.KONY_ACCOUNTS_LOGGER_JNDI= same as < accounts schema jndi, 
 for example: 
       - Tomcat             : java:comp/env/jdbc/voltmxaccounts
       - JBoss              : java:/voltmxaccounts

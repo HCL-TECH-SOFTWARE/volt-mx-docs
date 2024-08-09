@@ -10,7 +10,7 @@ To create/register environments, install one or more runtime services such as in
 
 The following are the sample URLs for Volt Foundry Components:
 
-*   **VoltMX Foundry Console URL**: `<Protocol or http/https>://<Host or IP Address>:<Port>/mfconsole`
+*   **Volt Foundry Console URL**: `<Protocol or http/https>://<Host or IP Address>:<Port>/mfconsole`
 *   **Identity Services URL**:  `<Protocol or http/https>://<Host or IP Address>:<Port>/authService`  
 *   **Integration Services URL**: `<Protocol or http/https>://<Host or IP Address>:<Port>/admin`
 *   **Engagement Services URL**: `<Protocol or http/https>://<Host or IP Address>:<Port>/vpns`

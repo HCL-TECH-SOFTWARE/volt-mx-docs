@@ -16,7 +16,7 @@ If your SSL certificate is not configured, the system displays an error - "peer 
 
 **To enable communication between Volt Foundry Console and other products such as Volt Foundry Integration, and Volt Foundry Engagement Services, follow these steps:**
 
-*   import each product's certificate (VoltMX Foundry Integration, and Volt Foundry Engagement Services) into the Volt Foundry console (for example, `<INSTALL_DIR>/jre/lib/security/cacerts`).
+*   import each product's certificate (Volt Foundry Integration, and Volt Foundry Engagement Services) into the Volt Foundry console (for example, `<INSTALL_DIR>/jre/lib/security/cacerts`).
 *   import console cert into the product boxes cacerts such as Volt Foundry Integration, Volt Foundry Engagement Services, and Volt Foundry Management.
 
 
@@ -155,7 +155,7 @@ Log Locations for Volt Foundry
 
 <h2 id="how-to-configure-memcache-for-integration-services">How to Configure Memcache for Integration Services</h2>
 
-*   For VoltMXFoundry version 7.3 or above, you can configure the memcache from Admin console.
+*   For Volt Foundry version 7.3 or above, you can configure the memcache from Admin console.
     
     To configure memcache in Foundry 7.3 or above versions, follow these steps:
     

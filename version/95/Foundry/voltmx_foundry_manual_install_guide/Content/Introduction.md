@@ -10,10 +10,10 @@ This document helps you install and configure Volt Foundry (Console, Identity Se
 *   [Volt Foundry Topology and Components](Foundry_Architecture_and_Components.md)
 *   [Volt Foundry Installation on Single Node and Multinode](MF_Single-Node_Multinode.md)
 *   [Prerequisites](Prerequisites.md)
-*   [How to Install Volt Foundry](Installing_Volt_Foundry_Components.md)
-*   [How to Start and Stop Volt Foundry](Starting_Volt_Foundry_Console.md)
+*   [How to Install Volt Foundry](Installing_VoltMX_Foundry_Components.md)
+*   [How to Start and Stop Volt Foundry](Starting_VoltMX_Foundry_Console.md)
 *   [How to Log in to Volt Foundry Console](Log_in_to_Foundry_Console.md)
-*   [How to Upgrade Volt Foundry](Upgrading_Volt_Foundry_Manually.md)
+*   [How to Upgrade Volt Foundry](Upgrading_VoltMX_Foundry_Manually.md)
 *   [Post-Installation Tasks](Post-Installation_Tasks.md)
 
-You can also access the [Revision History](volt_foundry_manual_install_guide.md), and [FAQs and Troubleshooting](Troubleshooting.md).
+You can also access the [Revision History](voltmx_foundry_manual_install_guide.md), and [FAQs and Troubleshooting](Troubleshooting.md).

@@ -11,7 +11,7 @@ To deploy configured auth service .WAR files to Tomcat, follow these steps:
 
 1.  Copy the updated `.war` files, for example `authService.war`.
 2.  Paste the files to the following location:
-    *   For Tomcat, `<User install directory>\apache-tomcat-8.5.32\webapps`.
+    *   For Tomcat, `<User install directory>\apache-tomcat-9.x.x\webapps`.
 3.  Add the `jboss-client.jar` files, as follows:
     1.  Copy the .jars from `\VoltMXFoundry_Plugins\middleware\`
     2.  Paste the jars into  `<TOMCAT-HOME>\lib`  
