@@ -1174,7 +1174,7 @@ frmHome.browser1. height="10px";
 * * *
 
 </details>
-<details close markdown="block"><summary id="htmlString">.htmlString Property</summary>
+<details close markdown="block"><summary id="htmlString">htmlString Property</summary>
 
 * * *
 
@@ -1182,7 +1182,7 @@ Specifies the HTML content for the Browser widget.
 
 ### Syntax
 
-htmlString
+`htmlString`
 
 ### Type
 
@@ -1192,15 +1192,28 @@ String
 
 Read + Write
 
-### Example
+### Remarks
+
+In Desktop Web platform, the `htmlString` property accepts any tag that is allowed inside the `body` tag. For example, you cannot provide the `title` tag inside the `htmlString` property as the `title` tag is allowed only inside the `head` tag of HTML document.
+
+### Example 1
 
 ```
 
-//Sample code to set.htmlString property in Browser widget.  
-var.htmlStringWelcome= ".html>Welcome<.html>";  
-frmBrowser.myBrowser.htmlString.htmlStringWelcome;  
+/*Sample code to set htmlString property in Browser widget for Desktop Web platform.*/
+var htmlStringWelcome= "<h1>Welcome</h1>";
+frmBrowser.myBrowser.htmlString=htmlStringWelcome;
+```
+
+### Example 2
 
 ```
+
+/*Sample code to set htmlString property in Browser widget for all other platforms.*/
+var htmlWelcome= "<html><head><body><h1>Welcome</h1></body></head></html>";
+frmBrowser.myBrowser.htmlString=htmlWelcome;
+```
+
 
 ### Platform Availability
 
