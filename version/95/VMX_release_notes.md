@@ -956,7 +956,7 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ### V9 Servicepack 5 Fixpack 16 Hotfix 6
 August 12, 2024
 
-  >**Note** : <b>In case Android FCM notifications are being utilised, it is strongly recommended to upgrade to this version over 9.5.16.5.</b>
+  >**Note** : <b>If you use Android FCM notifications, HCL Volt MX strongly recommends upgrading to V9.5.16.6 instead of V9.5.16.5.</b>
 
 There are no new features or enhancements in this release.
 For relevant support note, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
