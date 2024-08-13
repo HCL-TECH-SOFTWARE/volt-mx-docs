@@ -22,14 +22,14 @@ Before you install Volt Foundry, you must perform the following pre-installation
 *   [Database Prerequisites](Database_Prerequsites.md)
 *   [Required Setup Files](Reqiuired_Setup_Files.md)
 *   [Encrypt Passwords](Encrypt_Passwords.md)
-*   [VoltMX Foundry Installation on Single Node and Multi-node](MF_Single-Node_Multinode.md)
+*   [Volt Foundry Installation on Single Node and Multi-node](MF_Single-Node_Multinode.md)
 *   [Pre-installation Tasks - App Servers](PreInstallation_Steps_App_Servers.md)
 *   [Configuring Installation Modes - App Servers](Configuring_Installation_Mode.md)
 
 Software Requirements
 ---------------------
 
-For software system requirements, refer to [VoltMX Foundry >](../../../Foundry/voltmxfoundry_supported_devices_os_browsers/Content/Introduction.md) [Software Requirements](../../../Foundry/voltmxfoundry_supported_devices_os_browsers/Content/Introduction.md).
+For software system requirements, refer to [Volt Foundry >](../../../Foundry/voltmxfoundry_supported_devices_os_browsers/Content/Introduction.md) [Software Requirements](../../../Foundry/voltmxfoundry_supported_devices_os_browsers/Content/Introduction.md).
 
 Hardware Requirements - Console, Identity, and Integration Services
 -------------------------------------------------------------------
@@ -102,10 +102,10 @@ Proxy Settings for Integration Service
 
 To add an Integration Service Environment when the proxy is set at an App Server level, enable the following proxy settings at the JVM level:
 
-*   Dvoltmx.http.proxyHost= 10.0.4.29
-*   Dvoltmx.http.proxyPort= 2080
-*   Dvoltmx.http.proxyUser= websphere
-*   Dvoltmx.http.proxyPassword= 3MqGU9e5nv3B
+*   Dkony.http.proxyHost= 10.0.4.29
+*   Dkony.http.proxyPort= 2080
+*   Dkony.http.proxyUser= websphere
+*   Dkony.http.proxyPassword= 3MqGU9e5nv3B
 
 #### Installation Note
 
