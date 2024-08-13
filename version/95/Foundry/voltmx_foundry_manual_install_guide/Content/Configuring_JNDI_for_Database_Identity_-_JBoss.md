@@ -11,7 +11,7 @@ For MySQL
 To configure JNDI for MySQL, follow these steps:
 
 1.  Create a directory `$JBOSS_HOME/modules/com/mysql/main`.
-2.  Copy and paste the `mysql-connector-java-8.0.12.jar`  file under `$JBOSS_HOME/modules/com/mysql/main/`
+2.  Copy and paste the `mysql-connector-x-8.x.x.jar`  file under `$JBOSS_HOME/modules/com/mysql/main/`
 3.  Create the `module.xml` file under `$JBOSS_HOME/modules/com/mysql/main/` with the following code:
     
 If you are using MySQL, the module.xml is as follows:
@@ -51,8 +51,8 @@ Configure the   `<driver> </driver>`  tag in the `standalone.xml` file of MySQ
     <connection-url>jdbc:mysql://<DB_SERVER_IP>:<DB_PORT>/<VoltMXIdentity Service Global DB name>?autoReconnect=true</connection-url>  
     <!-- Specify the driver as MySql for single-node -->  
     <driver>MySql</driver>  
-    <!-- Specify the driver as mysql-connector-java-8.0.12.jar for multi-node -->  
-    <driver>mysql-connector-java-8.0.12.jar</driver>  
+    <!-- Specify the driver as mysql-connector-x-8.x.x.jar for multi-node -->  
+    <driver>mysql-connector-x-8.x.x.jar</driver>  
     <pool>  
     <max-pool-size>5</max-pool-size>  
     <prefill>true</prefill>  
@@ -74,8 +74,8 @@ Configure the   `<driver> </driver>`  tag in the `standalone.xml` file of MySQ
     <connection-url>jdbc:mysql://<DB_SERVER_IP>:<DB_PORT>/<VoltMXIdentity Service Config DB name>?autoReconnect=true</connection-url>  
     <!-- Specify the driver as MySql for single-node -->  
     <driver>MySql</driver>  
-    <!-- Specify the driver as mysql-connector-java-8.0.12.jar for multi-node -->  
-    <driver>mysql-connector-java-8.0.12.jar</driver>  
+    <!-- Specify the driver as mysql-connector-x-8.x.x.jar for multi-node -->  
+    <driver>mysql-connector-x-8.x.x.jar</driver>  
     <pool>  
     <max-pool-size>5</max-pool-size>  
     <prefill>true</prefill>  

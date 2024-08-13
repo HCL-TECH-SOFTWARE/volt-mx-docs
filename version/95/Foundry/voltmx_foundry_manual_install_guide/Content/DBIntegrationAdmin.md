@@ -26,61 +26,61 @@ To create a database for **Admin**, follow these steps:
     *   Schema name for Admin: `admindb`
     *   Placeholders for Admin:
 ```
-# For Admin (admindb), replace the following placeholders in SQL migrations for your database flyway.placeholders.VOLTMX_SERVER_STORAGE_DATABASE_TYPE -> value must be 
+# For Admin (admindb), replace the following placeholders in SQL migrations for your database flyway.placeholders.KONY_SERVER_STORAGE_DATABASE_TYPE -> value must be 
         mysql/oracle/sqlserver based on the chosen databases.
         
-        flyway.placeholders.VOLTMX_SERVER_STORAGE_DATABASE_HOSTNAME -> database host name where 
+        flyway.placeholders.KONY_SERVER_STORAGE_DATABASE_HOSTNAME -> database host name where 
         admindb is created.
         
-        flyway.placeholders.VOLTMX_SERVER_STORAGE_DATABASE_PORT -> database port where 
+        flyway.placeholders.KONY_SERVER_STORAGE_DATABASE_PORT -> database port where 
         admindb is created.
         
-        flyway.placeholders.VOLTMX_SERVER_STORAGE_DATABASE_USERNAME -> database user name
-        flyway.placeholders.VOLTMX_SERVER_STORAGE_DATABASE_PASSWORD ->:  ([Encrypt](Encrypt_Passwords.md) this password)
+        flyway.placeholders.KONY_SERVER_STORAGE_DATABASE_USERNAME -> database user name
+        flyway.placeholders.KONY_SERVER_STORAGE_DATABASE_PASSWORD ->:  ([Encrypt](Encrypt_Passwords.md) this password)
            - For MySQL and SQL Server: **database user password** 
            - For Oracle: **admin user password** 
-        flyway.placeholders.VOLTMX_SERVER_STORAGE_DATABASE_INSTANCE ->  MySQL – empty, 
-        SQL Server – instance name if given, Oracle - SID, DB2 - DB name. flyway.placeholders.VOLTMX_SERVER_CACHEID_TRANSPORT=""flyway.placeholders.VOLTMX_SERVER_SESSION_DISTRIBUTED="FALSE"  
-        flyway.placeholders.VOLTMX_SERVER_CACHE_TYPE="EHCACHE"  
-        flyway.placeholders.VOLTMX_SERVER_CACHE_URL=""  flyway.placeholders.VOLTMX_SERVER_KEYSTORE_LOCATION=""
-        flyway.placeholders.VOLTMX_SERVER_LOG_LOCATION=""
-        flyway.placeholders.VOLTMX_SERVER_MEMCACHED_COUNT=""
-        flyway.placeholders.VOLTMX_SERVER_MEMCACHE_CLUSTER=""
-        flyway.placeholders.VOLTMX_SERVER_RICH_CLIENT_DEPLOY=""
-        flyway.placeholders.VOLTMX_SERVER_TRUSTSTORE_LOCATION=""
-        flyway.placeholders.VOLTMX_SERVER_TRUSTSTORE_PASSWORD=""  ([Encrypt](Encrypt_Passwords.md) this password)
-        flyway.placeholders.VOLTMX_SERVER_LOG_OPTION="logfile"
-        flyway.placeholders.VOLTMX_SERVER_SSL_SOCKETFACTORY_PROVIDER=
+        flyway.placeholders.KONY_SERVER_STORAGE_DATABASE_INSTANCE ->  MySQL – empty, 
+        SQL Server – instance name if given, Oracle - SID, DB2 - DB name. flyway.placeholders.KONY_SERVER_CACHEID_TRANSPORT=""flyway.placeholders.KONY_SERVER_SESSION_DISTRIBUTED="FALSE"  
+        flyway.placeholders.KONY_SERVER_CACHE_TYPE="EHCACHE"  
+        flyway.placeholders.KONY_SERVER_CACHE_URL=""  flyway.placeholders.KONY_SERVER_KEYSTORE_LOCATION=""
+        flyway.placeholders.KONY_SERVER_LOG_LOCATION=""
+        flyway.placeholders.KONY_SERVER_MEMCACHED_COUNT=""
+        flyway.placeholders.KONY_SERVER_MEMCACHE_CLUSTER=""
+        flyway.placeholders.KONY_SERVER_RICH_CLIENT_DEPLOY=""
+        flyway.placeholders.KONY_SERVER_TRUSTSTORE_LOCATION=""
+        flyway.placeholders.KONY_SERVER_TRUSTSTORE_PASSWORD=""  ([Encrypt](Encrypt_Passwords.md) this password)
+        flyway.placeholders.KONY_SERVER_LOG_OPTION="logfile"
+        flyway.placeholders.KONY_SERVER_SSL_SOCKETFACTORY_PROVIDER=
         com.ibm.websphere.ssl.protocol.SSLSocketFactory
         
-        flyway.placeholders.VOLTMX_SERVER_SSL_SERVERSOCKETFACTORY_PROVIDER=
+        flyway.placeholders.KONY_SERVER_SSL_SERVERSOCKETFACTORY_PROVIDER=
         com.ibm.websphere.ssl.protocol.SSLServerSocketFactory
-        flyway.placeholders.VOLTMX_SERVER_LOGGER_JNDI_NAME=jdbc/voltmxadmindb
-        flyway.placeholders.VOLTMX_SERVER_SSL_SERVERSOCKETFACTORY_PROVIDER
-        flyway.placeholders.VOLTMX_SERVER_SSL_SOCKETFACTORY_PROVIDER
-        flyway.placeholders.VOLTMX_SERVER_LOG_OPTION 
+        flyway.placeholders.KONY_SERVER_LOGGER_JNDI_NAME=jdbc/voltmxadmindb
+        flyway.placeholders.KONY_SERVER_SSL_SERVERSOCKETFACTORY_PROVIDER
+        flyway.placeholders.KONY_SERVER_SSL_SOCKETFACTORY_PROVIDER
+        flyway.placeholders.KONY_SERVER_LOG_OPTION 
 ```
         
   | No. | Property name | Place holder |
   | --- | --- | --- |
-        | 1 | richclient.deploy | ${VOLTMX\_SERVER\_RICH\_CLIENT\_DEPLOY} <br>Example value, `lib/apps` (Directory where the rich client binaries will be downloaded. Used by admin module) |
-        | 2 | memcache.cluster | ${VOLTMX\_SERVER\_MEMCACHE\_CLUSTER}<br>Example value, `10.10.10.10:21201` (<ip>:<port> where memcache cluster is running) <br> **Note:** If the installation is being done without memcache, leave this value empty. |
-        | 3 | memcache.no.of.clients | ${VOLTMX\_SERVER\_MEMCACHED\_COUNT}<br>Example value, `1` <br>**Note:** If the installation is being done without memcache, leave this value empty. |
-        | 4 | cacheid.transport | ${VOLTMX\_SERVER\_CACHEID\_TRANSPORT}<br>Example value, `Null`(Specify the transfer mode through below property. Valid values are PARAM\_ONLY, COOKIE\_ONLY, EITHER (Default) or null if memcache is not used) |
-        | 5 | ssl.trustStore | ${VOLTMX\_SERVER\_TRUSTSTORE\_LOCATION}<br>Example value, `C:/programfiles/java/jdk1.7/lib/security/cacerts`(cacerts Location) |
-        | 6 | ssl.keyStore | ${VOLTMX\_SERVER\_KEYSTORE\_LOCATION}<br>Example value, `C:/programfiles/java/jdk1.7/lib/security/cacerts`(cacerts Location) |
-        | 7 | ssl.trustStorePassword | ${VOLTMX\_SERVER\_TRUSTSTORE\_PASSWORD}<br>Example value, `changeit` |
-        | 8 | ssl.keyStorePassword | ${VOLTMX\_SERVER\_TRUSTSTORE\_PASSWORD<br>Example value, `changeit` |
-        | 9 | metrics.initialContextFactoryName | ${VOLTMX\_SERVER\_JMS\_INITIAL\_CONTEXT\_FACTORY}<br>Example value,<br>for WebSphere: `com.ibm.websphere.naming.WsnInitialContextFactory`<br>if jboss\_jms is used: `org.jboss.naming.remote.client.InitialContextFactory`<br>if activemq is used: `org.apache.activemq.jndi.ActiveMQInitialContextFactory` |
-        | 10 | metrics.providerURL | ${VOLTMX\_SERVER\_JMS\_PROVIDER\_URL}<br>Example value,For WebSphere: `iiop://<ip>:<port>`<br>For Tomcat/JBoss: `http-remoting://<Hostname/Host IP>:<HTTP Port>` |
-        | 11 | SERVER\_LOG\_LOCATION | ${VOLTMX\_SERVER\_LOG\_LOCATION}<br>Example value, `C:/voltmxmflogs/`(Log location for middleware log) |
-        | 12 | SERVER\_LOGGER\_JNDI\_NAME | ${VOLTMX\_SERVER\_LOGGER\_JNDI\_NAME}<br>Example value,`java:comp/env/jdbc/voltmxadmindb` |
+        | 1 | richclient.deploy | ${KONY\_SERVER\_RICH\_CLIENT\_DEPLOY} <br>Example value, `lib/apps` (Directory where the rich client binaries will be downloaded. Used by admin module) |
+        | 2 | memcache.cluster | ${KONY\_SERVER\_MEMCACHE\_CLUSTER}<br>Example value, `10.10.10.10:21201` (<ip>:<port> where memcache cluster is running) <br> **Note:** If the installation is being done without memcache, leave this value empty. |
+        | 3 | memcache.no.of.clients | ${KONY\_SERVER\_MEMCACHED\_COUNT}<br>Example value, `1` <br>**Note:** If the installation is being done without memcache, leave this value empty. |
+        | 4 | cacheid.transport | ${KONY\_SERVER\_CACHEID\_TRANSPORT}<br>Example value, `Null`(Specify the transfer mode through below property. Valid values are PARAM\_ONLY, COOKIE\_ONLY, EITHER (Default) or null if memcache is not used) |
+        | 5 | ssl.trustStore | ${KONY\_SERVER\_TRUSTSTORE\_LOCATION}<br>Example value, `C:/programfiles/java/jdk1.7/lib/security/cacerts`(cacerts Location) |
+        | 6 | ssl.keyStore | ${KONY\_SERVER\_KEYSTORE\_LOCATION}<br>Example value, `C:/programfiles/java/jdk1.7/lib/security/cacerts`(cacerts Location) |
+        | 7 | ssl.trustStorePassword | ${KONY\_SERVER\_TRUSTSTORE\_PASSWORD}<br>Example value, `changeit` |
+        | 8 | ssl.keyStorePassword | ${KONY\_SERVER\_TRUSTSTORE\_PASSWORD<br>Example value, `changeit` |
+        | 9 | metrics.initialContextFactoryName | ${KONY\_SERVER\_JMS\_INITIAL\_CONTEXT\_FACTORY}<br>Example value,<br>for WebSphere: `com.ibm.websphere.naming.WsnInitialContextFactory`<br>if jboss\_jms is used: `org.jboss.naming.remote.client.InitialContextFactory`<br>if activemq is used: `org.apache.activemq.jndi.ActiveMQInitialContextFactory` |
+        | 10 | metrics.providerURL | ${KONY\_SERVER\_JMS\_PROVIDER\_URL}<br>Example value,For WebSphere: `iiop://<ip>:<port>`<br>For Tomcat/JBoss: `http-remoting://<Hostname/Host IP>:<HTTP Port>` |
+        | 11 | SERVER\_LOG\_LOCATION | ${KONY\_SERVER\_LOG\_LOCATION}<br>Example value, `C:/voltmxmflogs/`(Log location for middleware log) |
+        | 12 | SERVER\_LOGGER\_JNDI\_NAME | ${KONY\_SERVER\_LOGGER\_JNDI\_NAME}<br>Example value,`java:comp/env/jdbc/voltmxadmindb` |
         
   *   Tablespace Placeholders for Oracle:
         
       | Product Name | Tablespace Placeholders for Oracle |
       | --- | --- |
-      | Admin DB / Integration Services | VOLTMX\_SERVER\_DATA\_TABLESPACE, VOLTMX\_SERVER\_INDEX\_TABLESPACE, VOLTMX\_SERVER\_LOB\_TABLESPACE |
+      | Admin DB / Integration Services | KONY\_SERVER\_DATA\_TABLESPACE, KONY\_SERVER\_INDEX\_TABLESPACE, KONY\_SERVER\_LOB\_TABLESPACE |
         
   *   SQL files paths for Volt MX Admin in VoltMXFoundry\_Plugins folder
           
@@ -105,7 +105,7 @@ To create a database for **Admin**, follow these steps:
     *   management\_server\_user <AppServer\_username>
     *   management\_server\_password <AppServer\_encrypted password>
     *   management\_server\_groups <server\_groups>
-    *   voltmx\_server\_shared\_lib\_name <name\_of\_the\_shared\_library\_created\_in\_websphere>_  
+    *   kony\_server\_shared\_lib\_name <name\_of\_the\_shared\_library\_created\_in\_websphere>_  
         (This property is required for WebSphere only_)
     *   management\_server\_scheme <http\_or\_https>
     *   server\_console\_redirect\_ip <Appserver\_host\_ip/name>_  

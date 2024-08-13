@@ -14,6 +14,6 @@ To deploy configured console .WAR files to JBoss, follow these steps:
     *   For JBoss single node, `<JBoss-DIR>\standalone\deployments`.
     *   For JBoss multinode, `<JBoss-DIR>\<new_Folder- for example deployedWar folder>`  
         
-        > **_Important:_**    For JBoss multinode, place the `mysql-connector-java-8.0.12.jar` file in the same location. This also applies to `accounts.war, authService.war, ROOT.war`, and `workspace.war`.
+        > **_Important:_**    For JBoss multinode, place the `mysql-connector-x-8.x.x.jar` file in the same location. This also applies to `accounts.war, authService.war, ROOT.war`, and `workspace.war`.
         
 3.  Configure your app server (JBoss) as a service.

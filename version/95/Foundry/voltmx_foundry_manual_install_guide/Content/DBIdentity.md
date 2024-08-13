@@ -38,13 +38,13 @@ The following details are required for Flyway configuration:
 ```
  
     # Volt MX Identity Services Database, replace the following placeholders 
-    # in SQL migrations for your database flyway.placeholders.VOLTMX_AUTH_LOG_LOCATION=C:VoltMXFoundry/logs
-    flyway.placeholders.VOLTMX_AUTH_LOG_OPTION=logfile  
-    flyway.placeholders.VOLTMX_AUTH_CONFIG=idconfig  
-    flyway.placeholders.VOLTMX_AUTH_GLOBAL_DB=idconfig (This placeholder is applicable only for MySQL)
-    flyway.placeholders.VOLTMX_AUTH_LOG_LEVEL=INFO
-    flyway.placeholders.VOLTMX_MFINSTALLER_VERSION=<MF_version format: 8.x.0_GA>
-    flyway.placeholders.VOLTMX_MFINSTALLER_TYPE=<enter the Volt MX Foundry installation type 
+    # in SQL migrations for your database flyway.placeholders.KONY_AUTH_LOG_LOCATION=C:VoltMXFoundry/logs
+    flyway.placeholders.KONY_AUTH_LOG_OPTION=logfile  
+    flyway.placeholders.KONY_AUTH_CONFIG=idconfig  
+    flyway.placeholders.KONY_AUTH_GLOBAL_DB=idconfig (This placeholder is applicable only for MySQL)
+    flyway.placeholders.KONY_AUTH_LOG_LEVEL=INFO
+    flyway.placeholders.KONY_MFINSTALLER_VERSION=<MF_version format: 8.x.0_GA>
+    flyway.placeholders.KONY_MFINSTALLER_TYPE=<enter the Volt MX Foundry installation type 
     such as production, non-production, or development>
 ```
     

@@ -11,7 +11,7 @@ For MySQL
 To configure JNDI for MySQL, follow these steps:
 
 1.  Create a directory `$JBOSS_HOME/modules/com/mysql/main`.
-2.  Copy and paste the `mysql-connector-java-8.0.12.jar`  file under `$JBOSS_HOME/modules/com/mysql/main/`
+2.  Copy and paste the `mysql-connector-x-8.x.x.jar`  file under `$JBOSS_HOME/modules/com/mysql/main/`
 3.  Create the `module.xml` file under `$JBOSS_HOME/modules/com/mysql/main/` with the following code:
     
     If you are using MySQL, the module.xml is as follows:

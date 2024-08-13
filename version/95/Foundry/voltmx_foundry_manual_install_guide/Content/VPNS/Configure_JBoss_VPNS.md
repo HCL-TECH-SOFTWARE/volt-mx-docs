@@ -28,8 +28,9 @@ You must configure the JBoss Server to provide the memory arguments and the loca
     | \-XX:UseParallelGC | Yes | This is a recommended setting |
     | \-Dvpns.configLocation | Yes | This is the directory where the `configResource.properties`, `database.properties`, and `vpns-log4j.propertie`s files must be placed.For example, if the location is `/data/vpns-config`, then you must specify the property as -`Dvpns.configLocation=/data/vpns-config` |
     | \-Dhibernate.dialect | Enables you to connect to the database. JDBC has to be configured on the AppServer level. | Oracle= org.hibernate.dialect. `Oracle10gDialect` |
+    |-Dlog4j2.enableJndiJdbc=true| Yes| This parameter is to fix `log4j` vulnerability |
     
-3.  `\-Xms2048m –Xmx2048m -Dvpns.configLocation=/data/vpns-config`
+3.  `\-Xms2048m –Xmx2048m -Dvpns.configLocation=/data/vpns-config -Dlog4j2.enableJndiJdbc=true`
     
 4.  Save the configuration.
 
@@ -54,7 +55,7 @@ To configure the datasource, follow these steps:
         
         $JBOSS\_HOME/modules/com/mysql/main
         
-    2.  Copy `mysql-connector-java-8.0.12.jar` to `$JBOSS_HOME/modules/com/mysql/main`
+    2.  Copy `mysql-connector-x-8.x.x.jar` to `$JBOSS_HOME/modules/com/mysql/main`
     3.  Create `module.xml` file.
     4.  Add the following content.
     
@@ -64,7 +65,7 @@ To configure the datasource, follow these steps:
         <property name="jboss.api" value="unsupported"/>
         </properties>
         <resources>
-        <resource-root path="mysql-connector-java-8.0.12.jar"/>
+        <resource-root path="mysql-connector-x-8.x.x.jar"/>
         </resources>        
         <dependencies>
         <module name="javax.api"/>
@@ -110,7 +111,7 @@ To configure the datasource, follow these steps:
 1.  Create a new module for microsoft driver.
     1.  Create a folder hierarchy with path `$JBOSS_HOME/modules`
     2.  `$JBOSS_HOME/modules/com/microsoft/main`
-    3.  Copy `` `mssql-jdbc-7.0.0.jre8` ``to `$JBOSS_HOME/modules/com/microsoft/main`
+    3.  Copy `` `mssql-jdbc-x.x.x.jreX` ``to `$JBOSS_HOME/modules/com/microsoft/main`
     4.  Create `module.xml`file.
     5.  Add the following content:
 
@@ -120,7 +121,7 @@ To configure the datasource, follow these steps:
         <property name="jboss.api" value="unsupported"/>
         </properties>
         <resources>
-        <resource-root path=" `mssql-jdbc-7.0.0.jre8`"/>
+        <resource-root path=" `mssql-jdbc-x.x.x.jreX`"/>
         </resources>
         <dependencies>
         <module name="javax.api"/>
@@ -169,7 +170,7 @@ To configure the datasource, follow these steps:
 1.  Create a new module for oracle driver.
     1.  Create a folder hierarchy with path `$JBOSS_HOME/modules.`
     2.  `$JBOSS_HOME/modules/com/oracle/main`
-    3.  Copy `ojdbc6_g.jar` to `$JBOSS_HOME/modules/com/oracle/main`
+    3.  Copy `ojdbc11` to `$JBOSS_HOME/modules/com/oracle/main`
     4.  Create `module.xml` file.
     5.  Add the following content:
 ```
@@ -178,7 +179,7 @@ To configure the datasource, follow these steps:
         <property name="jboss.api" value="unsupported"/>
         </properties>
         <resources>
-        <resource-root path="ojdbc6_g.jar"/>
+        <resource-root path="ojdbc11"/>
         </resources>
         <dependencies>
         <module name="javax.api"/>

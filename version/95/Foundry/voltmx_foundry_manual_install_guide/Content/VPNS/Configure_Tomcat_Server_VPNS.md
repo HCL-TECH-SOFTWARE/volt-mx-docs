@@ -16,13 +16,14 @@ To configure Engagement Services on Tomcat server, follow these steps:
     | \-XX:+UseConcMarkSweepGC | Yes | This is a recommended setting |
     | \-XX:HeapDumpPath | Optional | This parameter is to get `Heap Dump Path` |
     | \-Dvpns.configLocation | Yes | This is the directory where the `configResource.properties`, `database.properties`, and `vmslog4j2. xml` files must be placed.For example, if the location is`/data/vpns-config`, then you must specify the property as -`Dvpns.configLocation=/data/vpns-config` |
+    | \-Dlog4j2.enableJndiJdbc=true | Yes | This parameter is to fix `log4j` vulnerability |
     
     > **_Note:_** \-Dhibernate.dialect : This parameter mentioned in the above table is required only for Oracle database.
     
     **Example**: This is a sample for above mentioned parameters.
     
 ```
-set JAVA_OPTS="-server -Xms2048m -Xmx2048m -XX:NewSize=512m -XX:MaxNewSize=256m -XX:PermSize=512m -XX:MaxPermSize=1024m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC -XX:+CMSIncrementalMode -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/home/vpns/logs/heapdumps -Djava.awt.headless=true -Djava.net.preferIPv4Stack=true -Dnet.spy.log.LoggerImpl=net.spy.memcached.compat.log.Log4JLogger -Dfile.encoding=UTF8 -Dvpns.configLocation=/data/vpns-config/"
+set JAVA_OPTS="-server -Xms2048m -Xmx2048m -XX:NewSize=512m -XX:MaxNewSize=256m -XX:PermSize=512m -XX:MaxPermSize=1024m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC -XX:+CMSIncrementalMode -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/home/vpns/logs/heapdumps -Djava.awt.headless=true -Djava.net.preferIPv4Stack=true -Dnet.spy.log.LoggerImpl=net.spy.memcached.compat.log.Log4JLogger -Dfile.encoding=UTF8 -Dvpns.configLocation=/data/vpns-config/ -Dlog4j2.enableJndiJdbc=true"
 ```
 3.  Configure following jvm parameters:
     
@@ -37,8 +38,8 @@ set JAVA_OPTS="-server -Xms2048m -Xmx2048m -XX:NewSize=512m -XX:MaxNewSize=256m 
 
 ### MySQL
     
-   1.  Copy `mysql-connector-java-8.0.12.jar` to `<Tomcat installation directory>/lib`
-   2.  Create the **vpns.xml** file in the `<User install directory>\apache-tomcat-9.0.33\conf\Catalina\localhost` folder.
+   1.  Copy `mysql-connector-x-8.x.x.jar` to `<Tomcat installation directory>/lib`
+   2.  Create the **vpns.xml** file in the `<User install directory>\apache-tomcat-9.x.x\conf\Catalina\localhost` folder.
    3.  In the **vpns.xml** file, add the following data source configurations:
 ```
 <Resource name="jdbc/vpnsdb" auth="Container" type="javax.sql.DataSource" scope="Shareable" factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" maxActive="50" minIdle="1" maxIdle="10" testWhileIdle="true" maxWait="10000" initialSize="10" testOnBorrow="true" validationQuery="SELECT 1" removeAbandoned="false"
@@ -66,8 +67,8 @@ set JAVA_OPTS="-server -Xms2048m -Xmx2048m -XX:NewSize=512m -XX:MaxNewSize=256m 
     
 ### Oracle
     
-   1.  Copy `ojdbc6.jar` to `<Tomcat installation directory>/lib`
-   2.  Create the **vpns.xml** file in the `<User install directory>\apache-tomcat-9.0.33\conf\Catalina\localhost` folder.
+   1.  Copy `ojdbc11.jar` to `<Tomcat installation directory>/lib`
+   2.  Create the **vpns.xml** file in the `<User install directory>\apache-tomcat-9.x.x\conf\Catalina\localhost` folder.
    3.  In the **vpns.xml** file, add the following data source configurations:
 ```
 <Resource name="jdbc/vpnsdb" auth="Container" type="javax.sql.DataSource" scope="Shareable"
@@ -92,7 +93,7 @@ set JAVA_OPTS="-server -Xms2048m -Xmx2048m -XX:NewSize=512m -XX:MaxNewSize=256m 
 ### SQLServer
     
   1.  Copy `sqljdbc4-4.1.jar`to `<Tomcat installation directory>/lib`
-  2.  Create the **vpns.xml** file in the `<User install directory>\apache-tomcat-9.0.33\conf\Catalina\localhost` folder.
+  2.  Create the **vpns.xml** file in the `<User install directory>\apache-tomcat-9.x.x\conf\Catalina\localhost` folder.
   3.  In the **vpns.xml** file, add the following data source configurations:
 ```
 <Resource name="jdbc/vpnsdb" auth="Container" type="javax.sql.DataSource" scope="Shareable"factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" maxActive="50" minIdle="1" maxIdle="10" testWhileIdle="true" maxWait="10000" initialSize="10" testOnBorrow="true" validationQuery="SELECT 1" removeAbandoned="false"
@@ -129,6 +130,6 @@ To start Tomcat server, post upgrade follow these steps:
 
 1.  Clean up tomcat work directory.
     
-    <Tomcat installation directory>/work/Catalina/<host>/
+    <Tomcat installation directory\>/work/Catalina/<host\>/
     
 2.  Remove `vpns` folder in the above path and re-start Tomcat service.

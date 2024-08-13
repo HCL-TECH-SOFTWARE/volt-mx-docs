@@ -1,14 +1,14 @@
                              
 
-Volt MX  Foundry Installation on Single Node and Multinode
+Volt Foundry Installation on Single Node and Multinode
 --------------------------------------------------------
 
-You can install Volt MX Foundry in a domain mode (multinode) or a standalone mode (single node) on a local environment.
+You can install Volt Foundry in a domain mode (multinode) or a standalone mode (single node) on a local environment.
 
-The following table details Volt MX Foundry installation supported for a single node and multinode installations.
+The following table details Volt Foundry installation supported for a single node and multinode installations.
 
   
-| Volt MX Foundry Components can be installed | Single Node | Multinode |
+| Volt Foundry Components can be installed | Single Node | Multinode |
 | --- | --- | --- |
 | **Console** |   |   |
 | Workspace | ![](Resources/Images/yes.png) | ![](Resources/Images/yes.png) |

@@ -41,10 +41,10 @@ The following details are required for Flyway configuration:
 <code style="display:block;background-color:#eee;border: 1px solid #999;padding: 20px;">
 <strong># For Volt MX Accounts Services Database, replace the following placeholders</strong>
 <strong># in SQL migrations for your database</strong>
-flyway.placeholders.VOLTMX_ACCOUNTS_LOG_LOCATION= <strong>< INSTLL_DIR></strong>/logs
+flyway.placeholders.KONY_ACCOUNTS_LOG_LOCATION= <strong>< INSTLL_DIR></strong>/logs
 flyway.placeholders.WAAS_BASE_URL=<strong>< PUBLIC_URL></strong>/workspace
-flyway.placeholders.VOLTMX_ACCOUNTS_LOG_LEVEL=INFO
-flyway.placeholders.VOLTMX_ACCOUNTS_LOG_OPTION=logfile
+flyway.placeholders.KONY_ACCOUNTS_LOG_LEVEL=INFO
+flyway.placeholders.KONY_ACCOUNTS_LOG_OPTION=logfile
 flyway.placeholders.COM_PROTOCOL=http
 flyway.placeholders.DISP_APP_SERVER=
 flyway.placeholders.DISP_DB_CHOICE=
@@ -57,7 +57,7 @@ flyway.placeholders.SELECTED_COMP=
 flyway.placeholders.USER_INSTALL_DIR=/root/MF73m
         
 
-flyway.placeholders.VOLTMX_ACCOUNTS_LOGGER_JNDI= same as < accounts schema jndi, 
+flyway.placeholders.KONY_ACCOUNTS_LOGGER_JNDI= same as < accounts schema jndi, 
 for example: 
       - Tomcat             : java:comp/env/jdbc/voltmxaccounts
       - JBoss              : java:/voltmxaccounts

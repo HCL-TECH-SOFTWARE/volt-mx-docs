@@ -154,16 +154,16 @@ To add the `ojdbc8.jar` file in the WebLogic Server, follow these steps:
 
 ### Place MySQL Server Connector JAR in the WebLogic Server
 
-If you want to install MySQL Server Database with WebLogic, then you need to manually place the `mysql-connector-java-8.0.12.jar` file in the WebLogic Server.
+If you want to install MySQL Server Database with WebLogic, then you need to manually place the `mysql-connector-x-8.x.x.jar` file in the WebLogic Server.
 
-To add `mysql-connector-java-8.0.12.jar` file in the WebLogic Server, follow these steps:
+To add `mysql-connector-x-8.x.x.jar` file in the WebLogic Server, follow these steps:
 
-1.  Copy the `mysql-connector-java-8.0.12.jar` file from the Volt MX Foundry Installation Folder to the `<WL_HOME>/server/lib` folder.
+1.  Copy the `mysql-connector-x-8.x.x.jar` file from the Volt MX Foundry Installation Folder to the `<WL_HOME>/server/lib` folder.
 2.  Go to the `<WL_HOME>/user_projects/domains/base_domain/bin` folder and edit the `startWeblogic.sh` file.
 3.  Prepend your JAR file to the SAVE_CLASSPATH environment variable. For example:
 ```
 
-        SAVE_CLASSPATH="${WL_HOME}/server/lib/`mysql-connector-java-8.0.12.jar`:${CLASSPATH}"
+        SAVE_CLASSPATH="${WL_HOME}/server/lib/`mysql-connector-x-8.x.x.jar`:${CLASSPATH}"
 ```
 4.  Restart the server.
 

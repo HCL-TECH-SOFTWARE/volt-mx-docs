@@ -1,6 +1,6 @@
                              
 
-Upgrading Volt MX Foundry Manually
+Upgrading Volt Foundry Manually
 =================================
 
 Additional steps for Foundry upgrade to V9 GA and later
@@ -9,8 +9,8 @@ Additional steps for Foundry upgrade to V9 GA and later
 The Identity provider and user information which resides in the Identity schema should be moved to the Workspace schema. Perform the following steps to execute a successful data migration from Identity to Workspace:
 
 1.  Perform a backup of your schemas.
-2.  Upgrade the Identity schema to Volt MX Foundry V9 or later.
-3.  Upgrade the Workspace schema to version 899.00 by setting the `flyway.target` parameter in the `flyway.conf` to the target version. For example, set `flyway.target=899.00` while executing flyway scripts. The Workspace schema must be at v899.00 for the data migration step to be completed successfully. Once the data migration step has been completed, the schema upgrade resumes to Volt MX Foundry V9 or later.
+2.  Upgrade the Identity schema to Volt Foundry V9 or later.
+3.  Upgrade the Workspace schema to version 899.00 by setting the `flyway.target` parameter in the `flyway.conf` to the target version. For example, set `flyway.target=899.00` while executing flyway scripts. The Workspace schema must be at v899.00 for the data migration step to be completed successfully. Once the data migration step has been completed, the schema upgrade resumes to Volt Foundry V9 or later.
 4.  Execute a command line jar which takes a config.yml file as the input.
     
     **Sample config.yml file**
@@ -61,7 +61,7 @@ java -jar <Data migration jar location>/authDataMigration.jar check-status -e on
 ```
 3.  Resume the Console schema upgrade to the latest version by commenting the flyway.target parameter or leaving it blank in the flyway.conf file while executing the flyway scripts.
 
-Upgrading Volt MX Foundry manually through different application servers
+Upgrading Volt Foundry manually through different application servers
 -----------------------------------------------------------------------
 
 *   [Upgrading Integration Services](Upgrading_VoltMX_Integration.md)

@@ -13,8 +13,8 @@ To create a database for Reports, follow these steps:
     
     The following is a sample query for creating a database in MySQL:
     
-```CREATE DATABASE \`<DBNAME>\` DEFAULT CHARACTER SET utf8 COLLATE utf8\_unicode\_ci;
-```
+    `CREATE DATABASE \<DBNAME>\ DEFAULT CHARACTER SET utf8 COLLATE utf8\_unicode\_ci;`
+
     
     > **_Note:_**  For Oracle databases a schema name should be in capital letters.  
       Find the word `reportsdb` in SQL files located in the admin scripts and replace it with `REPORTSDB`.
@@ -23,24 +23,23 @@ To create a database for Reports, follow these steps:
     
     The following details are required for Flyway configuration:
     
-    
     *   Schema name for reports: `reportsdb`
     *   Placeholders for Reports:
- ```
 
-    # For Reports (reportsdb), replace the following placeholders in SQL migrations for your database
-    flyway.placeholders.VOLTMX_METRICS_LOGGER_JNDI=java:/jdbc/voltmxreports flyway.placeholders.VOLTMX_METRICS_LOG_LEVEL=INFO
-    flyway.placeholders.VOLTMX_METRICS_LOG_OPTION=logfile
-    flyway.placeholders.VOLTMX_METRICS_LOG_LOCATION=<log_location_for_metrics> 
-```
+        ```
+          # For Reports (reportsdb), replace the following placeholders in SQL migrations for your database
+          flyway.placeholders.KONY_METRICS_LOGGER_JNDI=java:/jdbc/voltmxreports flyway.placeholders.KONY_METRICS_LOG_LEVEL=INFO
+          flyway.placeholders.KONY_METRICS_LOG_OPTION=logfile
+          flyway.placeholders.KONY_METRICS_LOG_LOCATION=<log_location_for_metrics> 
+        ```
     
-  *   Tablespace Placeholders for Oracle:
+    *   Tablespace Placeholders for Oracle:
         
          | Product Name | Tablespace Placeholders for Oracle |
          | --- | --- |
-         | Reports / Metrics | METRICS\_DATA\_TABLESPACE, METRICS\_INDEX\_TABLESPACE, METRICS\_LOB\_TABLESPACE |
+         | Reports / Metrics | METRICS\_DATA\_TABLESPACE, METRICS\_INDEX\_TABLESPACE,METRICS\_LOB\_TABLESPACE |
         
-  *   SQL files paths for Reports in VoltMXFoundry\_Plugins folder:
+    *   SQL files paths for Reports in VoltMXFoundry\_Plugins folder:
         
         | Path for SQL files in the VoltMXFoundry\_Plugins folder | Database | Component |
         | --- | --- | --- |

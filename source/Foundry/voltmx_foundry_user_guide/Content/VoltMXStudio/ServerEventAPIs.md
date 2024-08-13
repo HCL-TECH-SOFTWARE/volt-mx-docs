@@ -109,41 +109,7 @@ unsubscribeOptions = {
 VMXFoundry.unSubscribeServerEvents(eventsToUnsubscribe, unsubscribeOptions);
 ```
 
-publishServerEvents API
------------------------
 
-The publishServerEvents API publishes events to server from the client SDK API.
-
-### Syntax
-
-```
-VMXFoundry.publishServerEvents(eventsToPublish);
-```
-
-### Parameters
-
-  
-| Parameter | Type | Description |
-| --- | --- | --- |
-| eventsToPublish | String | Specifies the events to be published. |
-
-### Sample Code
-
-```
-var eventsToPublish = [{
-    "topic": "transaction/deposit",
-
-    "data": {
-        "amount": "1500",
-        "user": "clientevents",
-        "account": "1000",
-        "transaction": "deposit"
-    }
-
-}];  
-  
-VMXFoundry.publishServerEvents(eventsToPublish);
-```
 
 Frequently Asked Questions
 --------------------------

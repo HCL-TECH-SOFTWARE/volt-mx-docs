@@ -176,14 +176,14 @@ Refer to [creating a reports database, for example, **<prefix\>mfreports<suffix\
                 ![](Resources/Images/Weblogic_18.png)
 
             
-        *   **MySQL**: To use Volt Foundry with WebLogic Server in combination with MySQL database, you must place the MySQL connector jar (mysql-connector-java-8.0.12.jar) in the WebLogic Server path.
+        *   **MySQL**: To use Volt Foundry with WebLogic Server in combination with MySQL database, you must place the MySQL connector jar (mysql-connector-java-8.x.x) in the WebLogic Server path.
 
             For more details, follow the steps in the below
 
             Perform the following steps to complete pre-requisites before continuing with installation :
 
-            1.  Copy the mysql-connector-java-8.0.12.jar from your Volt Foundry Installation folder.
-            2.  Paste the mysql-connector-java-8.0.12.jar into the `<WL_HOME\>/server/lib` folder
+            1.  Copy the mysql-connector-java-8.x.x from your Volt Foundry Installation folder.
+            2.  Paste the mysql-connector-java-8.x.x into the `<WL_HOME\>/server/lib` folder
             3.  Go to the `<WL_HOME\>/user_projects/domains/base_domain/bin` and edit the startWeblogic script file.
                 <pre class="prettyprint prettyprinted" style=""><span class="typ">For</span> <span class="pln"></span> <span class="typ">Windows</span><span class="pun">:</span> <span class="pln">startWeblogic</span><span class="pun">.</span><span class="pln">cmd</span></pre>
 

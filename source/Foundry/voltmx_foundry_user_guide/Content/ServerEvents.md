@@ -283,13 +283,32 @@ In Volt MX Foundry, you can also raise an event from HTTP end point from externa
 WebSocket endpoint for events (/ServerEvents/Stream)
 ----------------------------------------------------
 
-If you want to support a bi-directional communication between the client and server, you can use WebSocket to subscribe to an event, unsubscribe from an event, raise an event, and listen to an event from client. WebSocket endpoint is protected with **X-VoltMX-Authorizatio**n token. By default, WebSocket is disabled. Set the **VOLTMX\_SERVER\_CLIENT\_EVENTS\_ENABLED** to **true** in **server\_configuration** table of admin DB to enable WebSocket.
+A WebSocket supports bi-directional communication between a client and a server. With VoltMX Foundry, a client app can connect to a WebSocket, and then subscribe and unsubscribe from events to the server. For more information about the client-side APIs, refer to [Server Event APIs](./../Content/VoltMXStudio/ServerEventAPIs.md).
 
-**Sample end point URL**: <VoltMX\_foundry\_app\_services\_ul>/services/ServerEvents/Stream
+> **_Note:_** A client device can only subscribe and unsubscribe from events that are configured on the Throw Signal node in Workflows. To subscribe to an event from a client device, the event type must be [Client](./Workflow.md#throw-signal-event) Only.
+
+After a connection is established between a client and a WebSocket, the server sends a ping to the client every 30 seconds. If the client responds to the server ping, the WebSocket session continues to run. If the client closes the connection, or if the client does not respond after three pings, the WebSocket session is terminated.
+
+From V9 Service Pack 3, WebSockets are enabled by default for the VoltMX Foundry Cloud. For on-premise instances of Foundry, WebSockets are disabled by default. To enable WebSockets, set the **VOLTMX_SERVER_CLIENT_EVENTS_ENABLED** property to **true** in the **server_configuration** table of the **admin DB**, or in the **middleware.properties** file.    
+
+From V9 Service Pack 3, for on-premise instances of Foundry, you can configure the following properties in the **server_configuration** table of the **admin DB**, or in the **middleware.properties** file.  
+
+   *   **VOLTMX_SERVER_EVENT_WEBSOCKET_PING_SCHEDULED_TIME_IN_SECONDS**: Specifies the time (in seconds) after which the server is scheduled to run, so that it can send a ping to the client. The default value is 30 seconds.  
+
+   *   **VOLTMX_SERVER_EVENTS_WEBSOCKET_WORKER_THREAD_POOL_SIZE**: Specifies the number of threads that are maintained in the worker thread pool. The worker threads are used to send pings to the client. The default value is 2 threads.  
+
+**WebSocket Endpoint**  
+
+You can also use the WebSocket endpoint to subscribe to an event, unsubscribe from an event, raise an event, and listen to an event from client. The WebSocket endpoint is protected with an X-VoltMX-Authorization token.
+
+
+<!-- You can use WebSocket to subscribe to an event, unsubscribe from an event, raise an event, and listen to an event from client. WebSocket endpoint is protected with **X-VoltMX-Authorizatio**n token. By default, WebSocket is disabled. Set the **VOLTMX\_SERVER\_CLIENT\_EVENTS\_ENABLED** to **true** in **server\_configuration** table of admin DB to enable WebSocket. -->
+
+**Sample end point URL**: <VoltMX\_foundry\_app\_services\_ul\>/services/ServerEvents/Stream
 
 **Protocol**: ws
 
-**Header**: X-VoltMX-Authorization : <Authorization\_token>
+**Header**: X-VoltMX-Authorization : <Authorization\_token\>
 
 **Body**:
 

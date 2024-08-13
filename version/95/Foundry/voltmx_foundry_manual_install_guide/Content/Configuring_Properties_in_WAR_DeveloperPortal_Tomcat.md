@@ -25,7 +25,7 @@ After you configure the properties files in apiportal.war file, you must deploy 
 
 1.  Copy the updated `apiportal.war` file.
 2.  Paste the files in the following location:
-    *   For Tomcat, `<User install directory>\apache-tomcat-9.0.33\webapps`.
+    *   For Tomcat, `<User install directory>\apache-tomcat-9.x.x\webapps`.
     *   For Tomcat, add the `jboss-client.jar`
         1.  Copy the .jars from `\VoltMXFoundry_Plugins\middleware\`
         2.  Paste the jars into  `<TOMCAT-HOME>\lib`  

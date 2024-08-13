@@ -1,17 +1,17 @@
                              
 
-Volt MX  Foundry Topology and Components
+Volt Foundry Topology and Components
 ======================================
 
-Volt MX  Foundry topology explains the logical arrangement of various components, such as, console, identity services, developer environment, and production environment.
+Volt Foundry topology explains the logical arrangement of various components, such as, console, identity services, developer environment, and production environment.
 
 In design time you configure apps with services, and publish them to a developer environment. After you confirm the changes in the apps, these apps will need to be published to a production environment. Authorized users can access apps on mobile devices from a production environment.
 
-An overview of the Volt MX Foundry architecture and components follows:
+An overview of the Volt Foundry architecture and components follows:
 
 ![](Resources/Images/VoltMX_V9___Supported_Technology_Stack.jpg)
 
-The following table describes the components of Volt MX Foundry:
+The following table describes the components of Volt Foundry:
   
 <table>
 <tr>
@@ -85,17 +85,17 @@ The following table describes the components of Volt MX Foundry:
 <td>Services</td>
 <td>
 <p></p>
-<p>Services component is used only when Volt MX Foundry is integrated. It has same runtime capabilities as the middleware.</p>
-<p><blockquote><em>Note:</em>  To use Volt MX Server with Volt MX Foundry integrated, you can ignore the middleware.war. Similarly when you use only standalone Volt MX Server, you can ignore the services.war.</blockquote></p>
+<p>Services component is used only when Volt Foundry is integrated. It has same runtime capabilities as the middleware.</p>
+<p><blockquote><em>Note:</em>  To use Volt MX Server with Volt Foundry integrated, you can ignore the middleware.war. Similarly when you use only standalone Volt MX Server, you can ignore the services.war.</blockquote></p>
 <p></p>
 </td>
 </tr>
 </table>
 
 <blockquote>
-<em>Note:</em> The Volt MX Foundry components can be configured on one node or separate nodes - for example, you can use one of the following choices:
+<em>Note:</em> The Volt Foundry components can be configured on one node or separate nodes - for example, you can use one of the following choices:
 <ul>
 <li>Install All Components on one node.</li>
-<li>Install Volt MX Foundry Console, Volt MX Identity Service, and  VoltMX Integration Service on separate nodes.</li>
+<li>Install Volt Foundry Console, Volt MX Identity Service, and  VoltMX Integration Service on separate nodes.</li>
 </ul>
 </blockquote>

@@ -8,26 +8,26 @@ Post-Installation Tasks
 You can troubleshoot trusted certification issues.
 
 > **_Important:_** Apple's App Transport Security (ATS) mandates HTTPS for all communication and requires the use of TLS v1.2 or higher for all SSL certificates and load balancers. <br/> <br/>
-For Apple apps to work properly and adhere to App Store guidelines, you must enable your Volt MX Foundry on-premises instance with SSL and configure your network infrastructure to use TLS version 1.2 or higher. For more information, please refer to the following: [HCL Basecamp article on ATS Compliance](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0083519).
+For Apple apps to work properly and adhere to App Store guidelines, you must enable your Volt Foundry on-premises instance with SSL and configure your network infrastructure to use TLS version 1.2 or higher. For more information, please refer to the following: [HCL Basecamp article on ATS Compliance](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0083519).
 
-After installing Volt MX Foundry on HTTPS, import your SSL certificate (for example, `domain.subdomain.crt`) into your Volt MX Foundry Installer's JRE trusted certificate authority (CA) certificates file - for example, `<INSTALL_DIR>/jre/lib/security/cacerts`  
+After installing Volt Foundry on HTTPS, import your SSL certificate (for example, `domain.subdomain.crt`) into your Volt Foundry Installer's JRE trusted certificate authority (CA) certificates file - for example, `<INSTALL_DIR>/jre/lib/security/cacerts`  
   
 If your SSL certificate is not configured, the system displays an error - "peer not authenticated."
 
-**To enable communication between Volt MX Foundry Console and other products such as Volt MX Foundry Integration, and Volt MX Foundry Engagement Services, follow these steps:**
+**To enable communication between Volt Foundry Console and other products such as Volt Foundry Integration, and Volt Foundry Engagement Services, follow these steps:**
 
-*   import each product's certificate (VoltMX Foundry Integration, and Volt MX Foundry Engagement Services) into the Volt MX Foundry console (for example, `<INSTALL_DIR>/jre/lib/security/cacerts`).
-*   import console cert into the product boxes cacerts such as Volt MX Foundry Integration, Volt MX Foundry Engagement Services, and Volt MX Foundry Management.
+*   import each product's certificate (Volt Foundry Integration, and Volt Foundry Engagement Services) into the Volt Foundry console (for example, `<INSTALL_DIR>/jre/lib/security/cacerts`).
+*   import console cert into the product boxes cacerts such as Volt Foundry Integration, Volt Foundry Engagement Services, and Volt Foundry Management.
 
 
 <h3 id="how-to-add-an-installer-generated-self-signed-ssl-certificate-to-cacerts">How to Add an Installer Generated Self-Signed SSL Certificate to Cacerts</h3>
 <p>To add an installer generated self-signed SSL certificate to cacerts, follow these steps:</p>
 <ol>
-  <li>From your Volt MX Foundry installed system, open the Linux terminal, and run the following command to generate an <code>intermediate.crt</code> file from the keystore:
+  <li>From your Volt Foundry installed system, open the Linux terminal, and run the following command to generate an <code>intermediate.crt</code> file from the keystore:
     <pre><code style="display:block;background-color:#eee;">&lt;USERINSTALLDIR&gt;/jre/bin/keytool -export -alias "&lt;HOST_URL_SSL_CONF&gt;" -file &lt;USERINSTALLDIR&gt;/intermediate.crt -keystore &lt;USERINSTALLDIR&gt;/keystore.jks -storepass &lt;Passsword_of_keystore&gt;</code></pre>
     <p>Based on the hostname and keystore password provided at the <a href="Installing_VoltMX_Foundry_on_Linux.html#SSL_Hostname">SSL Certificate window</a>, the preceding command exports the required certificate from the source keystore with the given name - for example, <code>intermediate.crt</code>.</p>
   </li>
-  <li>Run the following command to import the <code>intermediate.crt</code> certificate file into your Volt MX Foundry Installer’s JRE trusted certificate authority (CA) certificates file:
+  <li>Run the following command to import the <code>intermediate.crt</code> certificate file into your Volt Foundry Installer’s JRE trusted certificate authority (CA) certificates file:
     <pre><code style="display:block;background-color:#eee;">&lt;USERINSTALLDIR&gt;/jre/bin/keytool -import -noprompt -trustcacerts -alias "&lt;HOST_URL_SSL_CONF&gt;" -file &lt;USERINSTALLDIR&gt;/intermediate.crt -keystore &lt;USERINSTALLDIR&gt;/jre/lib/security/cacerts -storepass changeit</code></pre>
   </li>
 </ol>
@@ -41,12 +41,12 @@ To add an existing SSL certificate to cacerts, follow these steps:
 
 Use the following steps to import your existing certificate to cacerts with the proper value of alias, keystore location and keystore password.
 
-1.  From your Volt MX Foundry installed system, open the Linux terminal, and run the following command to add an `intermediate.crt` file from the keystore:
+1.  From your Volt Foundry installed system, open the Linux terminal, and run the following command to add an `intermediate.crt` file from the keystore:
 ```
     <USERINSTALLDIR>/jre/bin/keytool -export -alias "<yourcertificate_domain>" -file <USERINSTALLDIR>/intermediate.crt -keystore <keystore_location>-storepass <Passsword_of_keystore>
 ```
 
-2.  Run the below command to import the `intermediate.crt` certificate file into your Volt MX Foundry Installer's JRE trusted certificate authority (CA) certificates file:
+2.  Run the below command to import the `intermediate.crt` certificate file into your Volt Foundry Installer's JRE trusted certificate authority (CA) certificates file:
 ```
     <USERINSTALLDIR>/jre/bin/keytool -import -noprompt -trustcacerts -alias "<yourcertificate_domain>" -file <USERINSTALLDIR>/intermediate.crt -keystore <USERINSTALLDIR>/jre/lib/security/cacerts -storepass changeit
 ```
@@ -56,7 +56,7 @@ JDK Version Compatibility
 
 In case if you upgrade your JDK version in your middleware server, to enable JDK version compatibility, make the appropriate changes in an app server's  `middleware.properties` file located in your middleware server installation folder.
 
-For example: When you upgrade JDK V 1.6 to JDK V 1.7 (vice-versa), you can still run your middleware server. Volt MX Foundry's run-time apps cannot be accessed. If you try to access any apps at runtime, the system throws an error message due to JDK version incompatibility.
+For example: When you upgrade JDK V 1.6 to JDK V 1.7 (vice-versa), you can still run your middleware server. Volt Foundry's run-time apps cannot be accessed. If you try to access any apps at runtime, the system throws an error message due to JDK version incompatibility.
 
 1.  In your middleware server installation folder, open the  `middleware.properties` file located at the below path:
     *   for JBoss: `<installer folder>\middleware_home\middleware\middleware-bootconfig`
@@ -93,14 +93,14 @@ To configure JDK version in middleware, follow these steps:
 Configure Deployment of mbaasportal.war File for Multi-Node - JBoss
 -------------------------------------------------------------------
 
-Once Volt MX Foundry installation succeeds, the Volt MX Foundry Console will not be displayed as the **enable-welcome-root** value is set to **true** in the`domain.xml` file**.**
+Once Volt Foundry installation succeeds, the Volt Foundry Console will not be displayed as the **enable-welcome-root** value is set to **true** in the`domain.xml` file**.**
 
 To configure mbaasportal.war, follow these steps:
 
 1.  In the master node, open the `domain.xml` file from `JBOSSDIR\domain\configuration`, and search for enable-welcome-root="true."
 2.  Replace enable-welcome-root="true" with enable-welcome-root="false."
 
-Log Locations for Volt MX Foundry
+Log Locations for Volt Foundry
 --------------------------------
 
 *   Log Locations for Single Node Installation: [Logs\_for\_Single Node\_Installation](../../../Foundry/voltmx_foundry_windows_install_guide/Content/Logs_for_SingleNode_Installation.md)
@@ -108,7 +108,7 @@ Log Locations for Volt MX Foundry
 *   Log Locations for Multinode Installation: [Logs\_for\_Multi-Node\_Installation](../../../Foundry/voltmx_foundry_windows_install_guide/Content/Logs_for_Multi-Node_Installation.md)
 *   **Logging Format**:
     
-    To store more and more information in the logs, Volt MX Foundry uses custom logging format. The format is:  
+    To store more and more information in the logs, Volt Foundry uses custom logging format. The format is:  
 
     `[<service-name>][%5p][%d{dd MMM yyyy HH:mm:ss,SSS}]:%x:[%t]:[%c:%M:%L]:%m%n`
     
@@ -155,7 +155,7 @@ Log Locations for Volt MX Foundry
 
 <h2 id="how-to-configure-memcache-for-integration-services">How to Configure Memcache for Integration Services</h2>
 
-*   For VoltMXFoundry version 7.3 or above, you can configure the memcache from Admin console.
+*   For Volt Foundry version 7.3 or above, you can configure the memcache from Admin console.
     
     To configure memcache in Foundry 7.3 or above versions, follow these steps:
     
@@ -273,7 +273,7 @@ Setting Custom -D Parameters
 How to change Hostname and Port
 -------------------------------
 
-In the `<USER_INSTALL_DIR>/scripts` a `<DB_TYPE>_changeHostDetails_script.sql` file is generated which consists of the SQL queries to be executed when the user wants to change the hostname and port on which Volt MX Foundry is running.
+In the `<USER_INSTALL_DIR>/scripts` a `<DB_TYPE>_changeHostDetails_script.sql` file is generated which consists of the SQL queries to be executed when the user wants to change the hostname and port on which Volt Foundry is running.
 
 1.  Execute the query to create procedure.
 2.  Call the procedure with the existing values, as follows:

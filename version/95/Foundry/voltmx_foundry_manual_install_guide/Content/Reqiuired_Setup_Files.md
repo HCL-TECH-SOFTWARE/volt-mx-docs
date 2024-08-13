@@ -80,6 +80,6 @@ Download the following jars required for your database.
   
 | Database | JARs |
 | --- | --- |
-| MySQL | mysql-connector-java-8.0.12.jar |
+| MySQL | mysql-connector-x-8.x.x.jar |
 | Oracle | ojdbc6\_g.jar |
 | MS SQL | mssql-jdbc-7.0.0.jre8 |

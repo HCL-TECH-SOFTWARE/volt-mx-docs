@@ -37,10 +37,10 @@ The following details are required for Flyway configuration:
 *   Placeholders for Reports:
 ```
 # For Reports (reportsdb), replace the following placeholders in SQL migrations for your database
-        flyway.placeholders.VOLTMX_METRICS_LOGGER_JNDI=java:comp/env/jdbc/voltmxreports
-        flyway.placeholders.VOLTMX_METRICS_LOG_LEVEL=INFO
-        flyway.placeholders.VOLTMX_METRICS_LOG_OPTION=logfile
-        flyway.placeholders.VOLTMX_METRICS_LOG_LOCATION=<log_location_for_metrics> 
+        flyway.placeholders.KONY_METRICS_LOGGER_JNDI=java:comp/env/jdbc/voltmxreports
+        flyway.placeholders.KONY_METRICS_LOG_LEVEL=INFO
+        flyway.placeholders.KONY_METRICS_LOG_OPTION=logfile
+        flyway.placeholders.KONY_METRICS_LOG_LOCATION=<log_location_for_metrics> 
 ```
 *   Tablespace Placeholders for Oracle:
         

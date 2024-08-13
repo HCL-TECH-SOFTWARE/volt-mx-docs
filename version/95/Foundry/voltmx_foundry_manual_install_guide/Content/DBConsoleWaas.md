@@ -9,7 +9,7 @@ To create a database for **Workspace Services**, follow these steps:
     
     > **_Note:_**  For Oracle databases, a schema name should be in capital letters.
     
-    > **_Note:_** For Oracle, create necessary tablespaces and Users before proceeding. Refer to [Prerequisites for Volt MX Foundry with Oracle](Database_Prerequsites.md#prerequisites-for-volt-mx-foundry-with-oracle).
+    > **_Note:_** For Oracle, create necessary tablespaces and Users before proceeding. Refer to [Prerequisites for Volt Foundry with Oracle](Database_Prerequsites.md#prerequisites-for-volt-mx-foundry-with-oracle).
     
     *   **The following is a sample query for creating a database in SQL Server**:
 
@@ -33,7 +33,7 @@ The following is a sample query for creating a database in MySQL: CREATE DATABAS
 
     
 > **_Important:_**  For workspace, you can create database with a custom name instead the default databases such as  `mfconsoledb`.  
-For example, if you have created a workspace database with a custom name ( `<prefix>mfconsoledb<suffix>`), replace the custom database name in all SQL scripts in the `\VoltMXFoundry_Plugins\scripts\waasdbmigrations\commondbscripts`  folder.  
+For example, if you have created a workspace database with a custom name ( `<prefix>mfconsoledb<suffix>`), replace the custom database name in all SQL scripts in the `\VoltFoundry_Plugins\scripts\waasdbmigrations\commondbscripts`  folder.  
     
 2.  Execute all SQL scripts for the component by using the steps provided at [Configuring Flyway Command-line Tool](FlywayNew.md).
     
@@ -45,11 +45,11 @@ For example, if you have created a workspace database with a custom name ( `<pre
 
       # Volt MX Workspace Services Database, replace the following placeholders 
         # in SQL migrations for your database
-        flyway.placeholders.VOLTMX_WAAS_LOG_LOCATION=C:VoltMXFoundry/logs
-        flyway.placeholders.VOLTMX_WAAS_LOG_LEVEL=INFO
-        flyway.placeholders.VOLTMX_WAAS_LOG_OPTION=logfile
-        flyway.placeholders.VOLTMX_WORKSPACES_GLOBAL_DB
-        flyway.placeholders.VOLTMX_WAAS_GLOBAL_DB
+        flyway.placeholders.KONY_WAAS_LOG_LOCATION=C:VoltFoundry/logs
+        flyway.placeholders.KONY_WAAS_LOG_LEVEL=INFO
+        flyway.placeholders.KONY_WAAS_LOG_OPTION=logfile
+        flyway.placeholders.KONY_WORKSPACES_GLOBAL_DB
+        flyway.placeholders.KONY_WAAS_GLOBAL_DB
 ```
   * Tablespace Placeholders for Oracle:
     
@@ -57,13 +57,13 @@ For example, if you have created a workspace database with a custom name ( `<pre
     | --- | --- |
     | Workspace | WAAS\_DATA\_TABLESPACE , WAAS\_INDEX\_TABLESPACE , WAAS\_LOB\_TABLESPACE |
         
- * SQL files paths for Workspace Services in VoltMXFoundry\_Plugins folders.
+ * SQL files paths for Workspace Services in VoltFoundry\_Plugins folders.
     
-    | Path for SQL files in the VoltMXFoundry\_Plugins folder | Database | Component |
+    | Path for SQL files in the VoltFoundry\_Plugins folder | Database | Component |
     | --- | --- | --- |
-    | \\VoltMXFoundry\_Plugins\\scripts\\waasdbmigrations\\commondbscripts | MySQL | Workspace   |
-    | \\VoltMXFoundry\_Plugins\\scripts\\mmigrations-waas-oracle\\commondbscripts | Oracle |
-    | \\VoltMXFoundry\_Plugins\\scripts\\migrations-waas-sqlserver\\commondbscripts | SQL Server |
+    | \\VoltFoundry\_Plugins\\scripts\\waasdbmigrations\\commondbscripts | MySQL | Workspace   |
+    | \\VoltFoundry\_Plugins\\scripts\\mmigrations-waas-oracle\\commondbscripts | Oracle |
+    | \\VoltFoundry\_Plugins\\scripts\\migrations-waas-sqlserver\\commondbscripts | SQL Server |
 
 
 3.  Execute all SQL scripts by using the steps provided at [Configuring Flyway Command-line Tool](FlywayNew.md).
