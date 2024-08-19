@@ -65,6 +65,8 @@ A Native Function Interface (NFI) is an extension to your application to invoke 
 
 Volt MX provides several NFIs that you can add to your desktop native application and you can build your own.
 
+> **Note:** To see the default NFIs reflected in Iris, you need to build the application at least once in the desktop native environment.
+
 The NFIs provided are the following:
 
 <br>
@@ -490,7 +492,12 @@ See VoltMX voltmx.db documentation</td>
 
 ### Build Prerequisites
 
-To build and package a Windows application, the Wix Toolset must be installed in your Windows environment.  To install the Wix Toolset, see  [here](https://learn.microsoft.com/en-us/dotnet/framework/install/dotnet-35-windows?redirectedfrom=MSDN)
+To build and package application,
+
+* Ensure to have Node.js version 16.4.0 or higher installed. You can download it from the [here](https://nodejs.org/en)
+* Git is required for version control. Install it from [here](https://git-scm.com/)
+* For Windows Application : The Wix Toolset must be installed in your Windows environment. To install the Wix Toolset, see [here](https://wixtoolset.org/)
+
 
 ### Building
 
