@@ -315,12 +315,11 @@ Available only on Mobile Web.
 
 * * *
 
-This API provides the ability to query and fetch the system-wide memory available on the mobile device for allocation.
+This API provides the ability to query and fetch the actual OS allocated memory available for the application on the mobile device.
 
 You can use this API to:
 
-*   Check the amount of free memory on the mobile device before you go ahead with installation of any software or applications.
-*   Find out the free memory on the mobile device, clear unwanted objects, and thus improve the performance of the application.
+*   Find out the free memory on the mobile device for the application, clear unwanted objects, and improve the application's performance.
 
 <b>Syntax</b>
 
