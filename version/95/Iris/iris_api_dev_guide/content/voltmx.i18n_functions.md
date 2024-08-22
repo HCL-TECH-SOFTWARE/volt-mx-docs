@@ -443,7 +443,11 @@ Available on all platforms.
 voltmx.i18n.setCurrentLocaleAsync
 -------------------------------
 
+> **_Note:_**  When the application calls the voltmx.i18n.setCurrentLocaleAsync API, VoltMX Iris Framework loads forms with the corresponding Locale. The forms that were loaded previously must be destroyed in application code to see the effect of the setCurrentLocaleAsync api for that particular form.
+
 This API provides you the ability to set the specified locale as the current locale of the application. If the locale is not supported by the device, junk characters are displayed on the screen for the locale specific string.
+
+
 
 ### Use Cases
 
