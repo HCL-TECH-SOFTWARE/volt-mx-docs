@@ -38,6 +38,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Foundry](#volt-foundry)
 
+- [V9 Servicepack 2 Fixpack 2 Hotfix 10](#v9-servicepack-2-fixpack-2-hotfix-10)
 - [V9 Servicepack 2 Fixpack 2 Hotfix 9](#v9-servicepack-2-fixpack-2-hotfix-9)
 - [V9 Servicepack 2 Fixpack 2 Hotfix 8](#v9-servicepack-2-fixpack-2-hotfix-8)
 - [V9 Servicepack 2 Fixpack 2 Hotfix 7](#v9-servicepack-2-fixpack-2-hotfix-7)
@@ -336,6 +337,14 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 -->
 
 ## Volt Foundry
+
+
+### V9 Servicepack 2 Fixpack 2 Hotfix 10
+August  26, 2024
+
+* Added imagePullSecret across single-container. OpenShift, AmazonEKS and Kube deployments to access registry.
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 
 ### V9 Servicepack 2 Fixpack 2 Hotfix 9
