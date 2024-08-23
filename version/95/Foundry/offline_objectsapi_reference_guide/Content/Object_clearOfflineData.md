@@ -1,9 +1,9 @@
 
 
-\<object\>.clearOfflineData
+<object\>.clearOfflineData
 =========================
 
-The **\<object\>.clearOfflineData** API clears the offline data persisted in the object tables and associated sync context. As the sync context is cleared, the next sync on this object fetches complete data from the server.
+The **<object\>.clearOfflineData** API clears the offline data persisted in the object tables and associated sync context. As the sync context is cleared, the next sync on this object fetches complete data from the server.
 
 The **primaryKeys** parameter clears a particular record from the local database and the changes do not reflect in backend after synchronization.
 

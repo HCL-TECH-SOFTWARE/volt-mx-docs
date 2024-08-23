@@ -1,6 +1,4 @@
 
-Volt MX  Foundry console User Guide: Application-level APIs
-
 Application-level APIs
 ======================
 

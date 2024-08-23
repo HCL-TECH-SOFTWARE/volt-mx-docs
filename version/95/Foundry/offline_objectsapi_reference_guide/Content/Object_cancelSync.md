@@ -1,7 +1,7 @@
 
-# \<object\>.cancelSync
+# <object\>.cancelSync
 
-The **\<object\>.cancelSync** function attempts to cancel an in progress object sync operation. The operation fails if the task syncing is already finished, throws an error, or does not support the **Cancel** operation.
+The **<object\>.cancelSync** function attempts to cancel an in progress object sync operation. The operation fails if the task syncing is already finished, throws an error, or does not support the **Cancel** operation.
 
 ## Volt MX Iris (JavaScript)
 
@@ -133,7 +133,7 @@ Log.d("ObjectSync Cancellation", "Object sync cancellation successful");
 ### Signature
 
 ```
-(void)cancelSync:(NSDictionary \*)options
+(void)cancelSync:(NSDictionary *)options
 onSuccess:(VMXSuccessCompletionHandler)onSuccess
 onFailure:(VMXFailureCompletionHandler)onFailure
 
@@ -150,15 +150,15 @@ void
 ### Example
 
 ```
-NSError \* error;
+NSError * error;
 
-VMXObj \* syncObject = [
+VMXObj * syncObject = [
 [VMXObj alloc] initWithName: @"Managers"
 error: & error
 ];
 
 // Define Sync options
-NSMutableDictionary \* syncOptions = [NSMutableDictionary new];
+NSMutableDictionary * syncOptions = [NSMutableDictionary new];
 [syncOptions setObject: @"100"
 forKey: @"downloadBatchSize"
 ];
@@ -173,8 +173,8 @@ forKey: @"getSyncStats"
 [syncObject startSync: syncOptions
 onSuccess: ^ (id object) {
 NSLog(@"Object sync successful");
-}
-onFailure: ^ (NSError \* error) {
+}   
+onFailure: ^ (NSError * error) {
 NSLog(@"Object sync failed with error: %@", [error description]);
 }
 onProgress: ^ (id object) {
