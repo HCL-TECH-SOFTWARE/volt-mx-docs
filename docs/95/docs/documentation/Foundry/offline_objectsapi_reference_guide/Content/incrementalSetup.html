@@ -1415,7 +1415,6 @@
                 
 
 
-<p>Volt MX Foundry console User Guide: <a href="Application_Level_APIs.html">Application-level APIs</a> &gt; VMXFoundry.OfflineObjects.incrementalSetup</p>
 <h1 id="vmxfoundryofflineobjectsincrementalsetup">VMXFoundry.OfflineObjects.incrementalSetup</h1>
 <p>The Offline Objects <strong>incrementalSetup</strong> API allows the client application to consume the latest changes made to Volt MX Foundry app’s object services schema after a particular timestamp, without breaking the existing functionality. Similar to setup API, <strong>incrementalSetup</strong> API is also an application-level API with same method arguments.</p>
 <blockquote>
@@ -1424,18 +1423,14 @@
 <p><strong>Scenarios that are supported in incrementalSetup:</strong></p>
 <ul>
 <li>Addition and deletion of the objects in an Object Service.</li>
-<li>
-<p>Update operations on objects in an Object Service as:</p>
-</li>
-<li>
-<p>Addition and deletion of new non-primary key columns.</p>
-</li>
+<li>Update operations on objects in an Object Service as:<ul>
+<li>Addition and deletion of new non-primary key columns.</li>
 <li>Update properties like nullable, unique, and auto generated on non-primary key attributes.</li>
-<li>
-<p>Update change tracking parameters like attributes for identifying a soft delete and change tracking timeStamp field.</p>
-<blockquote>
+<li>Update change tracking parameters like attributes for identifying a soft delete and change tracking timeStamp field.<blockquote>
 <p><strong><em>Note:</em></strong> If the <strong>timeStamp</strong> attribute is not linked to an object field, the incremental sync and delete operations will fail for records associated with that object.</p>
 </blockquote>
+</li>
+</ul>
 </li>
 </ul>
 <p>Unsupported scenarios include:</p>
@@ -1540,7 +1535,7 @@ alert(&quot;Exception in incremental setup &quot; + err);
 <tbody>
 <tr>
 <td>options</td>
-<td>Hashmap<String, Object></td>
+<td>Hashmap&lt;String, Object></td>
 <td>Options based on which incrementalSetup is performed.</td>
 <td>Yes</td>
 </tr>
@@ -1668,7 +1663,7 @@ onFailure: (VMXFailureCompletionHandler) onFailure
 <h3 id="example_2">Example</h3>
 <pre><code>NSError _ error;
 VMXClient _ client = [VMXClient sharedClient];
-VMXApplicationSync \* applicationSync = [client getOfflineObjects];
+VMXApplicationSync * applicationSync = [client getOfflineObjects];
 
 VMXSuccessCompletionHandler onSuccess = ^ void(id object) {
 NSLog(@&quot;incremental Setup successful&quot;);
