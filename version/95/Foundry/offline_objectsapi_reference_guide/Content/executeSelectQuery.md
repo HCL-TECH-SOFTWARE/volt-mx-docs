@@ -1,6 +1,4 @@
 
-Volt MX Foundry console User Guide: [Application-level APIs](Application_Level_APIs.md) > VMXFoundry.OfflineObjects.executeSelectQuery
-
 # VMXFoundry.OfflineObjects.executeSelectQuery
 
 The application-level API, **executeSelectQuery** allows the user to execute any select query on device database. The API executes the query provided as an argument on the device database and returns the response in successCallback.
@@ -43,7 +41,7 @@ function successCallback(response) {
 function failureCallback(error) {
 voltmx.print("executeSelectQuery failed with error:" + error.code);
 }
-var query = "Select \* from Employee where EmployeeID=5";
+var query = "Select * from Employee where EmployeeID=5";
 VMXFoundry.OfflineObjects.executeSelectQuery(query, successCallback, failureCallback);
 ```
 
@@ -71,7 +69,7 @@ void
 ```
 VoltMXClient sdk = new VoltMXClient();
 IVoltMXApplicationSync appSync = sdk.getOfflineObjects();
-String query = "Select \* from Employee where EmployeeID=5";
+String query = "Select * from Employee where EmployeeID=5";
 appSync.executeSelectQuery(query, new VMXCallback() {
 @Override
 public void onSuccess(Object object) {
@@ -90,7 +88,7 @@ Log.d("executeSelectQuery", "executeSelectQuery failed with error:" + e.getMessa
 ### Signature
 
 ```
-(void) <OfflineObjects>.executeSelectQuery:(NSString \*)query
+(void) <OfflineObjects>.executeSelectQuery:(NSString *)query
 onSuccess:(VMXSuccessCompletionHandler)onSuccess
 onFailure:(VMXFailureCompletionHandler)onFailure
 ```
@@ -99,7 +97,7 @@ onFailure:(VMXFailureCompletionHandler)onFailure
 
 | Parameter | Type                        | Description                                            | Required |
 | --------- | --------------------------- | ------------------------------------------------------ | -------- |
-| query     | NSString\*                  | Select the query to be executed on device DB.          | Yes      |
+| query     | NSString*                  | Select the query to be executed on device DB.          | Yes      |
 | onSuccess | VMXSuccessCompletionHandler | The function is invoked on successful query execution. | Yes      |
 | onFailure | VMXFailureCompletionHandler | The function is invoked on failure.                    | Yes      |
 

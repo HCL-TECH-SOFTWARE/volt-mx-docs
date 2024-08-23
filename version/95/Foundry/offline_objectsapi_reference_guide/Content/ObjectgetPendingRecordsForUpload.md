@@ -1,12 +1,11 @@
 
 
-\<object\>.getPendingRecordsForUpload
+<object\>.getPendingRecordsForUpload
 ===================================
 
-The **\<object\>.getPendingRecordsForUpload** API fetches the list of records that are yet to be uploaded.
+The **<object\>.getPendingRecordsForUpload** API fetches the list of records that are yet to be uploaded.
 
-> **Note:**  
-*   The column names and values provided as key value pairs are case sensitive.  
+> **Note:**  The column names and values provided as key value pairs are case sensitive.  
 
 Volt MX  Iris (JavaScript)
 -------------------------------
@@ -61,7 +60,7 @@ void <object>.getPendingRecordsForUpload(HashMap<String, Object> options, final 
   
 | Parameter | Type | Description | Required |
 | --- | --- | --- | --- |
-| options | HashMap <String, Object> | Reserved for future use, so the parameter is insignificant. But, the developer must pass some value such as null or { }. | Yes |
+| options | HashMap <String, Object\> | Reserved for future use, so the parameter is insignificant. But, the developer must pass some value such as null or { }. | Yes |
 | syncCallback | VMXCallback | The function is invoked when the pending records for upload are successfully fetched or on an error. | Yes |
 
 ### Return Type
@@ -110,7 +109,7 @@ void <object> getPendingRecordsForUpload:(NSDictionary <NSString *, id> *)option
   
 | Parameter | Type | Description | Required |
 | --- | --- | --- | --- |
-| options | NSDictionary<NSString \*, id> | Reserved for future use, so the parameter is insignificant. But, the developer must pass some value such as null or { }. | Yes |
+| options | NSDictionary<NSString \*, id\> | Reserved for future use, so the parameter is insignificant. But, the developer must pass some value such as null or { }. | Yes |
 | onSuccess | VMXSuccessCompletionHandler | The function is invoked when the pending records for upload are successfully fetched. | Yes |
 | onFailure | VMXFailureCompletionHandler | The function is invoked when the pending records for upload are not successfully fetched. | Yes |
 

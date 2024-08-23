@@ -1119,15 +1119,15 @@
 <tbody>
 <tr>
 <td>JavaScript</td>
-<td><strong>Signature</strong>: function onFailure(error) <strong>Error object</strong> : JSObject <strong>Error code</strong> : error.code of type number. <strong>Error description</strong> : error.message of type string. <strong>Error domain</strong>: error.domain of type string, denotes the error domain. <strong>Error callstack</strong>: error.callStack of type string. <strong>Sample Code</strong> var sdk=new voltmx.sdk();var options={};function onSuccess() { alert("Application setup successful"); } function onFailure(error) { voltmx.print("Error Code: " + error.code); voltmx.print("Error Domain: " + error.domain); voltmx.print("Error Message: " + error.message); voltmx.print("Error Callstack:" + error.callStack); } sdk.getCurrentInstance().OfflineObjects.setup(options, onSuccess, onFailure);</td>
+<td><strong>Signature</strong>: function onFailure(error)<br><strong>Error object</strong> : JSObject<br><strong>Error code</strong> : error.code of type number. <strong>Error description</strong> : error.message of type string. <strong>Error domain</strong>: error.domain of type string, denotes the error domain. <br><strong>Error callstack</strong>: error.callStack of type string. <br><strong>Sample Code</strong> :<br><pre><code>var sdk=new voltmx.sdk();<br>var options={};<br>function onSuccess() {<br>alert("Application setup successful"); }<br> function onFailure(error) {<br> voltmx.print("Error Code: " + error.code);<br> voltmx.print("Error Domain: " + error.domain);<br> voltmx.print("Error Message: " + error.message);<br> voltmx.print("Error Callstack:" + error.callStack); }<br> sdk.getCurrentInstance().OfflineObjects.setup(options, onSuccess, onFailure);</code></pre></td>
 </tr>
 <tr>
 <td>Java</td>
-<td><strong>Signature</strong>: public void onFailure(error) <strong>Error object</strong> : OfflineObjectsException <strong>Error code</strong> : (OfflineObjectsException)error.getErrorCode() of type int. <strong>Error description</strong> : (OfflineObjectsException)error.getMessage() of type string. Error domain : (OfflineObjectsException)error.getDomain() of type string Error callstack : (OfflineObjectsException)error.getCallStack() of type string. <strong>Sample Code</strong> VoltMXClient sdk= new VoltMXClient();OfflineObjects appSync = sdk.getOfflineObjects(); HashMap<String, Object> options=new HashMap<String, Object>(); appSync.setup(options, new VMXCallback() { @Override public void onSuccess(Object object) { Log.d("Application", "Application setup successful"); } @Override public void onFailure(Object error) { OfflineObjectsException e = (OfflineObjectsException)error; Log.d("Application", "Error Code:" + e.getErrorCode()); Log.d("Application", "Error Domain:" + e.getDomain()); Log.d("Application", "Error Message:" + e.getMessage()); Log.d("Application", "Error Callstack:" + e.getCallStack()); } });</td>
+<td><strong>Signature</strong>: public void onFailure(error) <br><strong>Error object</strong> : OfflineObjectsException <br><strong>Error code</strong> : (OfflineObjectsException)error.getErrorCode() of type int. <br><strong>Error description</strong> : (OfflineObjectsException)error.getMessage() of type string. Error domain : (OfflineObjectsException)error.getDomain() of type string Error callstack : (OfflineObjectsException)error.getCallStack() of type string. <br><strong>Sample Code</strong> :<br><pre><code>VoltMXClient sdk= new VoltMXClient();<br>OfflineObjects appSync = sdk.getOfflineObjects();<br>HashMap&lt;String, Object> options=new HashMap&lt;String, Object>();<br>appSync.setup(options, new VMXCallback() {<br> @Override <br>public void onSuccess(Object object) {<br> Log.d("Application", "Application setup successful");<br> }<br> @Override<br> public void onFailure(Object error) {<br> OfflineObjectsException e = (OfflineObjectsException)error;<br> Log.d("Application", "Error Code:" + e.getErrorCode()); <br>Log.d("Application", "Error Domain:" + e.getDomain()); <br>Log.d("Application", "Error Message:" + e.getMessage()); <br>Log.d("Application", "Error Callstack:" + e.getCallStack()); }<br>}); </code></pre></td>
 </tr>
 <tr>
 <td>Objective C</td>
-<td><strong>Signature</strong>: onFailure:^(id error) <strong>Error object</strong> : Error Object <strong>Error code</strong> : error.code of type NSInteger. <strong>Error description</strong> : [error.userInfo localizedDescription] of type NSString. Error domain : error.domain of type string Error callstack : [error.userInfo callStack] of type string. <strong>Sample Code</strong> VMXClient *sdk= [VMXClient sharedClient]; OfflineObjects *applicationSync = [sdk getOfflineObjects];NSDictionary *options=@{};[applicationSync setup:options             onSuccess:onSuccess              onFailure:onFailure];   VMXSuccessCompletionHandler onSuccess = ^void(id error){     NSLog(@"Application setup successful"); };     VMXFailureCompletionHandler onFailure = ^void(id object){     OfflineObjectsError *error = (OfflineObjectsError)object;     NSLog(@"Error code: %@" error.code);     NSLog(@"Error domain: %@" error.domain);     NSLog(@"Error message: %@" [error.userInfo  localizedDescription]);     NSLog(@"Error Callstack:%@",[error.userInfo callStack]); }</td>
+<td><strong>Signature</strong>: onFailure:^(id error) <br><strong>Error object</strong> : Error Object <br><strong>Error code</strong> : error.code of type NSInteger. <br><strong>Error description</strong> : [error.userInfo localizedDescription] of type NSString. Error domain : error.domain of type string Error callstack : [error.userInfo callStack] of type string. <br><strong>Sample Code</strong> :<br><pre><code>VMXClient *sdk= [VMXClient sharedClient]; <br>OfflineObjects *applicationSync = [sdk getOfflineObjects];<br>NSDictionary *options=@{};<br>[applicationSync setup:options             <br>onSuccess:onSuccess              <br>onFailure:onFailure];   <br>VMXSuccessCompletionHandler onSuccess = ^void(id error){     <br>NSLog(@"Application setup successful"); };     <br>VMXFailureCompletionHandler onFailure = ^void(id object){     <br>OfflineObjectsError *error = (OfflineObjectsError)object;     <br>NSLog(@"Error code: %@" error.code);     <br>NSLog(@"Error domain: %@" error.domain);    <br>NSLog(@"Error message: %@" [error.userInfo  localizedDescription]);     <br>NSLog(@"Error Callstack:%@",[error.userInfo callStack]); }</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -1203,15 +1203,15 @@
 <tbody>
 <tr>
 <td>JavaScript</td>
-<td>var object = new voltmx.sdk.VMXObj("CATEGORY"); function onSuccess(data){ if(data.syncErrors) { alert("sync errors for given object sync operation is" + JSON.stringify(data.syncErrors)); } else { alert("Object level sync operation is success" + JSON.stringify(data)); } } function onFailure(error){ if(error.syncErrors) { alert("Object level sync failed with sync errors" + JSON.stringify(error.syncErrors)); } else { alert("Object level sync failed"+JSON.stringify(error)); } } var options = {}; object.startSync(options, onSuccess, onFailure, null);</td>
+<td><pre><code>var object = new voltmx.sdk.VMXObj("CATEGORY"); <br>function onSuccess(data){ <br>if(data.syncErrors) { <br>alert("sync errors for given object sync operation is" + JSON.stringify(data.syncErrors)); <br>} else { <br>alert("Object level sync operation is success" + JSON.stringify(data)); }<br> }<br> function onFailure(error){ <br>if(error.syncErrors) { <br>alert("Object level sync failed with sync errors" + JSON.stringify(error.syncErrors)); <br>} else {<br> <br>alert("Object level sync failed"+JSON.stringify(error)); }<br>} <br>var options = {}; <br>object.startSync(options, onSuccess, onFailure, null);</code></pre></td>
 </tr>
 <tr>
 <td>Java</td>
-<td>syncObject = new VMXObj("CATEGORY");HashMap<String, Object>options=new HashMap<String, Object>();syncObject.startSync(options, new VMXCallback() { @Override public void onSuccess(Object object) { HashMap<String, Object> successObject = (HashMap<String, Object>) object; if(successObject.containsKey("syncErrors")) { Log.d("Object sync", "Object Sync is partial Success for syncObject with sync errors " + successObject.get("syncErrors")); } else { Log.d("Object sync", "Object Sync Successful for syncObject" + successObject); } } @Override public void onFailure(Object object) { OfflineObjectsException e= (OfflineObjectsException) object; List<HashMap> syncErrors = e.getSyncErrors(); if(syncErrors != null &amp;;&amp;; syncErrors.size&gt; 0) { Log.d("Object sync", "Object Sync is unsuccessful for syncObject with sync errors " + syncErrors); } else { Log.d("Object Sync", "Object Sync unsuccessful for syncObject with Error :" + e); } } }, null);</td>
+<td><pre><code>syncObject = new VMXObj("CATEGORY");<br>HashMap&lt;String, Object>options=new HashMap&lt;String, Object>();<br>syncObject.startSync(options, new VMXCallback() { <br>@Override <br>public void onSuccess(Object object) { <br>HashMap&lt;String, Object> successObject = (HashMap<String, Object\>) object; \<br>if(successObject.containsKey("syncErrors")) { \<br>Log.d("Object sync", "Object Sync is partial Success for syncObject with sync errors " + successObject.get("syncErrors")); \<br>} else { \<br>Log.d("Object sync", "Object Sync Successful for syncObject" + successObject); \<br>} \<br>} \<br>@Override \<br>public void onFailure(Object object) { \<br>OfflineObjectsException e= (OfflineObjectsException) object; \<br>List\<HashMap> syncErrors = e.getSyncErrors(); \<br>if(syncErrors != null &;&; syncErrors.size> 0) { <br>Log.d("Object sync", "Object Sync is unsuccessful for syncObject with sync errors " + syncErrors); <br>} else { <br>Log.d("Object Sync", "Object Sync unsuccessful for syncObject with Error :" + e); } <br>} <br>}, null);</code></pre></td>
 </tr>
 <tr>
 <td>Objective C</td>
-<td>VMXObj *object = [[VMXObj alloc] initWithName:objectName error:&amp;error];NSDictionary *options=@{};[object startSync:options onSuccess:^(id object){ if([object objectForKey:@"syncErrors"]) { NSLog(@"Sync is partially successful for %@ Object! with sync errors", name, [object objectForKey:@"syncErrors"]); } else { NSLog(@"Sync successful for %@ Object!", name); } } onFailure:^(id object){ OfflineObjectsError *error = (OfflineObjectsError *)object; NSArray<NSDictionary \*> *syncErrors = [[error userInfo] objectForKey:@"syncErrors"]; if(syncErrors) { NSLog(@"Sync is complete failure for %@ Object! with sync errors", name, syncErrors); } else { NSLog(@"Error: Sync unsuccessful because of error:%@", [syncError description]); } } onProgress:nil];</td>
+<td><pre><code>VMXObj *object = [[VMXObj alloc] initWithName:objectName error:&amp;error];<br>NSDictionary *options=@{};<br>[object startSync:options <br>onSuccess:^(id object){ <br>if([object objectForKey:@"syncErrors"]) { <br>NSLog(@"Sync is partially successful for %@ Object! with sync errors", name, [object objectForKey:@"syncErrors"]); <br>} else { <br>NSLog(@"Sync successful for %@ Object!", name); } <br>} <br>onFailure:^(id object){ <br>OfflineObjectsError *error = (OfflineObjectsError *)object; <br>NSArray<NSDictionary \*> *syncErrors = [[error userInfo] objectForKey:@"syncErrors"]; <br>if(syncErrors) { <br>NSLog(@"Sync is complete failure for %@ Object! with sync errors", name, syncErrors); <br>} else { <br>NSLog(@"Error: Sync unsuccessful because of error:%@", [syncError description]); <br>} <br>}onProgress:nil];</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -1228,52 +1228,52 @@
 <tbody>
 <tr>
 <td>2000</td>
-<td>An error occurred in the database layer:<error details></td>
+<td>An error occurred in the database layer:&lt;error details></td>
 <td>SQLite errors other than query execution errors.</td>
 </tr>
 <tr>
 <td>2001</td>
-<td>An error occurred while executing select query:<error details></td>
+<td>An error occurred while executing select query:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2002</td>
-<td>An error occurred while executing a SQL transaction with no rollback on error enabled:<error details></td>
+<td>An error occurred while executing a SQL transaction with no rollback on error enabled:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2003</td>
-<td>An error occurred while executing a SQL transaction with rollback on error enabled:<error details></td>
+<td>An error occurred while executing a SQL transaction with rollback on error enabled:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2004</td>
-<td>Failed to encrypt database:<error details></td>
+<td>Failed to encrypt database:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2005</td>
-<td>Error copying SQLCipher asset files to device:<error details></td>
+<td>Error copying SQLCipher asset files to device:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2006</td>
-<td>Failed to open or create database:<error details></td>
+<td>Failed to open or create database:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2007</td>
-<td>Failed to load the SQLCipher libraries:<error details></td>
+<td>Failed to load the SQLCipher libraries:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2008</td>
-<td>Failed to find and load the supported assets for SQLite database encryption:<error details></td>
+<td>Failed to find and load the supported assets for SQLite database encryption:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2009</td>
-<td>An error occurred while upgrading the database schema: <error details></td>
+<td>An error occurred while upgrading the database schema: &lt;error details></td>
 <td> </td>
 </tr>
 <tr>
@@ -1283,52 +1283,52 @@
 </tr>
 <tr>
 <td>2030</td>
-<td>An error occurred in the network layer:<error details></td>
+<td>An error occurred in the network layer:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2031</td>
-<td>Network call failed due to connection timeout:<error details></td>
+<td>Network call failed due to connection timeout:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2032</td>
-<td>Network call failed due to socket connection timeout:<error details></td>
+<td>Network call failed due to socket connection timeout:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2033</td>
-<td>Network call failed due to security related issues:<error details></td>
+<td>Network call failed due to security related issues:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2034</td>
-<td>Unable to connect to host:<error details></td>
+<td>Unable to connect to host:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2035</td>
-<td>Host not found:<error details></td>
+<td>Host not found:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2036</td>
-<td>No active internet connectivity found:<error details></td>
+<td>No active internet connectivity found:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2037</td>
-<td>Network response is either null or invalid JSON:<error details></td>
+<td>Network response is either null or invalid JSON:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2038</td>
-<td>Server responded with error opstatus:<error details></td>
+<td>Server responded with error opstatus:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2039</td>
-<td>The URL used is invalid:<error details></td>
+<td>The URL used is invalid:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
@@ -1338,317 +1338,317 @@
 </tr>
 <tr>
 <td>2300</td>
-<td>An error occurred in the ORM operation:<error details></td>
+<td>An error occurred in the ORM operation:&lt;error details></td>
 <td>CRUD operation errors.</td>
 </tr>
 <tr>
 <td>2301</td>
-<td>No record found in the database for given columns values or where condition:<error details></td>
+<td>No record found in the database for given columns values or where condition:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2302</td>
-<td>Foreign key constraint violation error:<error details></td>
+<td>Foreign key constraint violation error:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2303</td>
-<td>Updating values for primary key(s) of a record is not allowed:<error details></td>
+<td>Updating values for primary key(s) of a record is not allowed:&lt;error details></td>
 <td>Update operation doesn’t support updating values for primary keys.</td>
 </tr>
 <tr>
 <td>2304</td>
-<td>Supplied options are invalid, common causes are incorrect property name or value or data types:<error details></td>
+<td>Supplied options are invalid, common causes are incorrect property name or value or data types:&lt;error details></td>
 <td>Verify record provided to the CRUD operations for invalid column names or data types.</td>
 </tr>
 <tr>
 <td>2305</td>
-<td>Primary key values cannot be null or empty:<error details></td>
+<td>Primary key values cannot be null or empty:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2306</td>
-<td>Property or column names cannot be null or empty in orderByMap option:<error details></td>
+<td>Property or column names cannot be null or empty in orderByMap option:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2307</td>
-<td>Cannot perform ORM operations on null or empty record:<error details></td>
+<td>Cannot perform ORM operations on null or empty record:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2308</td>
-<td>Mandatory field or property missing in the ORM input:<error details></td>
+<td>Mandatory field or property missing in the ORM input:&lt;error details></td>
 <td>Invalid inputs to CRUD operations.</td>
 </tr>
 <tr>
 <td>2309</td>
-<td>Value should not be sent for auto generated columns:<error details></td>
+<td>Value should not be sent for auto generated columns:&lt;error details></td>
 <td>Don’t supply values for primary keys that are marked as auto generated in a Create operation.</td>
 </tr>
 <tr>
 <td>2310</td>
-<td>Invalid field or property found in the ORM input:<error details></td>
+<td>Invalid field or property found in the ORM input:&lt;error details></td>
 <td>Invalid property or column name in the supplied input to CRUD operations.</td>
 </tr>
 <tr>
 <td>2311</td>
-<td>ORM input is of invalid data type or length:<error details></td>
+<td>ORM input is of invalid data type or length:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2330</td>
-<td>Setup failed with an error:<error details></td>
+<td>Setup failed with an error:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2331</td>
-<td>Schema setup failed with an error:<error details></td>
+<td>Schema setup failed with an error:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2332</td>
-<td>Metadata refresh failed with an error:<error details></td>
+<td>Metadata refresh failed with an error:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2333</td>
-<td>Object metadata not found for the given offline object:<error details></td>
+<td>Object metadata not found for the given offline object:&lt;error details></td>
 <td>Ensure that input contains valid object or object service name or object properties.</td>
 </tr>
 <tr>
 <td>2334</td>
-<td>Namespace metadata not found for the given offline object:<error details></td>
+<td>Namespace metadata not found for the given offline object:&lt;error details></td>
 <td>Ensure that input contains valid object or object service name or object properties.</td>
 </tr>
 <tr>
 <td>2335</td>
-<td>Root metadata not found for the given offline object:<error details></td>
+<td>Root metadata not found for the given offline object:&lt;error details></td>
 <td>Ensure that input contains valid object or object service name or object properties.</td>
 </tr>
 <tr>
 <td>2336</td>
-<td>Error parsing object attributes in object metadata:<error details></td>
+<td>Error parsing object attributes in object metadata:&lt;error details></td>
 <td>Ensure that input contains valid object or object service name or object properties.</td>
 </tr>
 <tr>
 <td>2337</td>
-<td>Error parsing object metadata:<error details></td>
+<td>Error parsing object metadata:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2338</td>
-<td>Error parsing relationships:<error details></td>
+<td>Error parsing relationships:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2339</td>
-<td>Error parsing Offline Objects metadata:<error details></td>
+<td>Error parsing Offline Objects metadata:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2340</td>
-<td>Invalid root metadata found for the given object service:<error details></td>
+<td>Invalid root metadata found for the given object service:&lt;error details></td>
 <td>Ensure that input contains valid object or object service name or object properties.</td>
 </tr>
 <tr>
 <td>2341</td>
-<td>Metadata JSON from server does not contain TIMESTAMP key:<error details></td>
+<td>Metadata JSON from server does not contain TIMESTAMP key:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2342</td>
-<td>Invalid Metadata JSON string form: EM_INVALID_METADATA_JSON<error details></td>
+<td>Invalid Metadata JSON string form: EM_INVALID_METADATA_JSON&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2343</td>
-<td>An error occurred while creating tables during setup:<error details></td>
+<td>An error occurred while creating tables during setup:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2344</td>
-<td>Namespace cannot be null or empty in the metadata:<error details></td>
+<td>Namespace cannot be null or empty in the metadata:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2345</td>
-<td>Metadata JSON from server does not contain OBJECTS key:<error details></td>
+<td>Metadata JSON from server does not contain OBJECTS key:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2346</td>
-<td>Invalid relationship type found. Supported types are 'One To Many', 'Many To One' and 'One To One':<error details></td>
+<td>Invalid relationship type found. Supported types are 'One To Many', 'Many To One' and 'One To One':&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2347</td>
-<td>Metadata url is null/empty:<error details></td>
+<td>Metadata url is null/empty:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2348</td>
-<td>Cannot generate initial indices:<error details></td>
+<td>Cannot generate initial indices:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2349</td>
-<td>Metadata attributes cannot be null/empty:<error details></td>
+<td>Metadata attributes cannot be null/empty:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2350</td>
-<td>Attribute operations cannot be null /empty:<error details></td>
+<td>Attribute operations cannot be null /empty:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2351</td>
-<td>Unable to serialize delta context value:<error details></td>
+<td>Unable to serialize delta context value:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2352</td>
-<td>Unable to serialize:<error details></td>
+<td>Unable to serialize:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2400</td>
-<td>Cannot create Offline Object with name as null or empty string:<error details></td>
+<td>Cannot create Offline Object with name as null or empty string:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2401</td>
-<td>Cannot create Offline Object Service with name as null or empty string:<error details></td>
+<td>Cannot create Offline Object Service with name as null or empty string:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2403</td>
-<td>Unable to parse namespace metadata:<error details></td>
+<td>Unable to parse namespace metadata:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2404</td>
-<td>SDK Object name cannot be null/empty:<error details></td>
+<td>SDK Object name cannot be null/empty:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2405</td>
-<td>No delta context found while creating download request for the given object service:<error details></td>
+<td>No delta context found while creating download request for the given object service:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2406</td>
-<td>Invalid object service name:<error details></td>
+<td>Invalid object service name:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2407</td>
-<td>MetaInfo table does not exist:<error details></td>
+<td>MetaInfo table does not exist:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2408</td>
-<td>An error occurred while inserting into metaInfo table:<error details></td>
+<td>An error occurred while inserting into metaInfo table:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2409</td>
-<td>Attribute name cannot be null/empty:<error details></td>
+<td>Attribute name cannot be null/empty:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2411</td>
-<td>An error occurred while performing ORM operation on metaInfo table:<error details></td>
+<td>An error occurred while performing ORM operation on metaInfo table:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2412</td>
-<td>Metadata is null/empty for object service:<error details></td>
+<td>Metadata is null/empty for object service:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2430</td>
-<td>An error occurred while dropping the database: <error details></td>
+<td>An error occurred while dropping the database: &lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2460</td>
-<td>An error has occurred in the sync layer:<error details></td>
+<td>An error has occurred in the sync layer:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2461</td>
-<td>Sync is currently in progress for this object or object service:<error details></td>
+<td>Sync is currently in progress for this object or object service:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2462</td>
-<td>Object Service url cannot be null/empty:<error details></td>
+<td>Object Service url cannot be null/empty:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2463</td>
-<td>Object url cannot be null/empty:<error details></td>
+<td>Object url cannot be null/empty:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2464</td>
-<td>Object Service version cannot be null/empty:<error details></td>
+<td>Object Service version cannot be null/empty:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2465</td>
-<td>Invalid record action:<error details></td>
+<td>Invalid record action:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2466</td>
-<td>No relationship between the given Offline Objects:<error details></td>
+<td>No relationship between the given Offline Objects:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2467</td>
-<td>The number of source attributes and target attributes are not same in the given relationship:<error details></td>
+<td>The number of source attributes and target attributes are not same in the given relationship:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2468</td>
-<td>More than one parent was found for a given child record:<error details></td>
+<td>More than one parent was found for a given child record:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2469</td>
-<td>Unable to build hierarchical upload payload for the given set of records even after maximum iterations:<error details></td>
+<td>Unable to build hierarchical upload payload for the given set of records even after maximum iterations:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2470</td>
-<td>An error occurred while parsing JSON:<error details></td>
+<td>An error occurred while parsing JSON:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2471</td>
-<td>An error occurred while trying to perform rollback:<error details></td>
+<td>An error occurred while trying to perform rollback:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2472</td>
-<td>Filters applied to the current sync operation are invalid:<error details></td>
+<td>Filters applied to the current sync operation are invalid:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2473</td>
-<td>Sync upload failed with an error:<error details></td>
+<td>Sync upload failed with an error:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2474</td>
-<td>Sync download failed with an error:<error details></td>
+<td>Sync download failed with an error:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
 <td>2475</td>
-<td>Database encryption passphrase must be of type string:<error details></td>
+<td>Database encryption passphrase must be of type string:&lt;error details></td>
 <td>Ensure that encryption passphrase is a string and contains at least 6 characters.</td>
 </tr>
 <tr>
@@ -1659,21 +1659,21 @@
 <tr>
 <td>2478</td>
 <td>Syncing operation has been cancelled.</td>
-<td>This error code is triggered when an in-progress Syncing operation is successfully cancelled. With reference to <a href="Object_cancelSync.html"><object>.cancelSync</a> and <a href="ObjectService_cancelSync.html"><objectservice>.cancelSync</a> code samples, the onFailure callback is triggered for startSync operation, and the error object displays this error code.</td>
+<td>This error code is triggered when an in-progress Syncing operation is successfully cancelled. With reference to <a href="Object_cancelSync.html">&lt;object>.cancelSync</a> and <a href="ObjectService_cancelSync.html">&lt;objectservice>.cancelSync</a> code samples, the onFailure callback is triggered for startSync operation, and the error object displays this error code.</td>
 </tr>
 <tr>
 <td>2479</td>
 <td>Sync cancellation failed.</td>
-<td>This error code is triggered when an attempt to cancel an inprogress syncing operation fails. This operation fails if the syncing operation is already completed, or not started at all. With reference to <a href="Object_cancelSync.html"><object>.cancelSync</a> and <a href="ObjectService_cancelSync.html"><objectservice>.cancelSync</a> code samples, the onFailure callback is triggered for cancelSync operation, and the error object displays this error code.</td>
+<td>This error code is triggered when an attempt to cancel an inprogress syncing operation fails. This operation fails if the syncing operation is already completed, or not started at all. With reference to <a href="Object_cancelSync.html">&lt;object>.cancelSync</a> and <a href="ObjectService_cancelSync.html">&lt;objectservice>.cancelSync</a> code samples, the onFailure callback is triggered for cancelSync operation, and the error object displays this error code.</td>
 </tr>
 <tr>
 <td>2480</td>
-<td>An error occurred while trying to clear offline data on object service: <ObjectServiceName> : <error details></td>
-<td>This error is triggered when the application is unable to clear the offline data at that particular moment. During failure, all the changes will be rolled back to the existing state. If the <a href="ObjectService_clearOfflineData.html"><objectservice>.clearOfflineData</a> API is triggered while some other operation (for example, startSync), is in progress, the database can get corrupted.</td>
+<td>An error occurred while trying to clear offline data on object service: <ObjectServiceName> : &lt;error details></td>
+<td>This error is triggered when the application is unable to clear the offline data at that particular moment. During failure, all the changes will be rolled back to the existing state. If the <a href="ObjectService_clearOfflineData.html">&lt;objectservice>.clearOfflineData</a> API is triggered while some other operation (for example, startSync), is in progress, the database can get corrupted.</td>
 </tr>
 <tr>
 <td>2481</td>
-<td>An error occurred while trying to fetch the pending Sync records:<error details></td>
+<td>An error occurred while trying to fetch the pending Sync records:&lt;error details></td>
 <td> </td>
 </tr>
 <tr>
@@ -1683,42 +1683,42 @@
 </tr>
 <tr>
 <td>2483</td>
-<td>Setup is not performed. There are no object services to sync:<error details></td>
+<td>Setup is not performed. There are no object services to sync:&lt;error details></td>
 <td>The Offline Objects setup is not done. Therefore, no Object Service could be synced.</td>
 </tr>
 <tr>
 <td>2560</td>
-<td>An error occurred while performing an operation on binary data: <error details></td>
+<td>An error occurred while performing an operation on binary data: &lt;error details></td>
 <td>Generic binary download error.</td>
 </tr>
 <tr>
 <td>2561</td>
-<td>Binary column is expected, supplied column is not of type binary: <error details>.</td>
+<td>Binary column is expected, supplied column is not of type binary: &lt;error details>.</td>
 <td>Verify if the column name provided in options is a valid number.</td>
 </tr>
 <tr>
 <td>2562</td>
-<td>Chunk size supplied is not a valid number: <error details></td>
+<td>Chunk size supplied is not a valid number: &lt;error details></td>
 <td>Verify if the chunk size provided in the options is a valid number.</td>
 </tr>
 <tr>
 <td>2563</td>
-<td>Failed to save the downloaded file path in the device database: <error details></td>
+<td>Failed to save the downloaded file path in the device database: &lt;error details></td>
 <td>File is downloaded from the server on to the client, but failed to persist the file path in the app database.</td>
 </tr>
 <tr>
 <td>2564</td>
-<td>Binary download failed: <error details></td>
+<td>Binary download failed: &lt;error details></td>
 <td>Failed to download binary from the server.</td>
 </tr>
 <tr>
 <td>2565</td>
-<td>Query type sent is not a valid value: <error details></td>
+<td>Query type sent is not a valid value: &lt;error details></td>
 <td>The query type sent in the getBinaryStatus API is invalid.</td>
 </tr>
 <tr>
 <td>2566</td>
-<td>Invalid options sent to binary status:<error details></td>
+<td>Invalid options sent to binary status:&lt;error details></td>
 <td>Options provided to getBinaryStatus API are invalid.</td>
 </tr>
 <tr>

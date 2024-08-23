@@ -1,7 +1,7 @@
 
-# \<objectService\>.rollback
+# <objectService\>.rollback
 
-The **\<objectService\>.rollback** API rolls back all changes of all objects of an object service to its previous sync state.
+The **<objectService\>.rollback** API rolls back all changes of all objects of an object service to its previous sync state.
 
 ## Volt MX Iris (JavaScript)
 
@@ -99,7 +99,7 @@ void
 ### Example
 
 ```
-VMXObjSvc \* orgObjectService = [
+VMXObjSvc * orgObjectService = [
 [VMXObjSvc alloc] initWithName: @"Organization"
 error: & ;error
 ];
@@ -108,7 +108,7 @@ error: & ;error
 NSLog(@"Object service rollback successful");
 }
 onFailure: ^ (id object) {
-OfflineObjectsError \* error = (OfflineObjectsError) object;
+OfflineObjectsError * error = (OfflineObjectsError) object;
 NSLog(@"Rollback failed with error: %@", [error.userInfo localizedDescription]);
 }
 ];

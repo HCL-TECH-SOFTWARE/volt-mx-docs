@@ -1,9 +1,9 @@
 
 
-\<objectService\>.getSdkObjectByName
+<objectService\>.getSdkObjectByName
 ==================================
 
-The **\<objectService\>.getSdkObjectByName** API returns an instance of VMXObj if the given object name is valid and belongs to the owning object service.
+The **<objectService\>.getSdkObjectByName** API returns an instance of VMXObj if the given object name is valid and belongs to the owning object service.
 
 Volt MX  Iris (JavaScript)
 -------------------------------
