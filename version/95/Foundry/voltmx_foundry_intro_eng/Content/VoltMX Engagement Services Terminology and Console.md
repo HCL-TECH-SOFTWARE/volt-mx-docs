@@ -45,4 +45,4 @@ These are scheduled notifications that are sent to a user segment. For example, 
 
 Events in the Engagement Server are invoked by an external system and are set up to send out notifications when invoked. For example, a low balance event that could be invoked by a banking system to let the customer know of a low balance.
 
-> **_Important:_** For more information refer this video:
+> **_Important:_** For more information refer this video: <a href="https://www.youtube.com/watch?v=mmTaWVToO2U" target="_blank">HCL Volt Foundry Engagement Server: A First Look</a>.
