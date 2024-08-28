@@ -13,9 +13,12 @@ To generate a standard report, follow these steps:
 1.  Sign in to [VoltMX Foundry](https://manage.hclvoltmx.com/).
 2.  From the left navigation panel, click **Reports**. The Standard Reports screen is displayed by default.  
       
-    ![](Resources/Images/StandardReports_650x302.png)
-3.  On the **Standard Reports** tab, select the report you want to generate. A dialog box appears.
+    ![](Resources/Images/StandardReports_650x302.png)  
+
+3.  On the **Standard Reports** tab, select the report you want to generate. A dialog box appears. 
+
 4.  Configure the filter criteria, and then click **Generate**. The report is generated.
+
 5.  To refine the generated report, click **Refine Reports**, reconfigure the filter criteria, and then click **Generate**.  
     ![](Resources/Images/Refine_Reports.PNG)  
     The new report is generated.
