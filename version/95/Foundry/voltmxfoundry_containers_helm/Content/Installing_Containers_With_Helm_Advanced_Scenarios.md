@@ -12,6 +12,260 @@ You can use the Helm chart to install Foundry to a Kubernetes cluster hosted in 
 
     B. The pod resource requests and resource limits must be configured with the same value. The `request` parameter specifies a minimum amount used during pod scheduling, the `limit` specifies the maximum amount of resource the container will be granted during runtime.  Prior to installing Foundry, edit values.yaml and locate the parameters for `ephemeralStorageRequest` and `ephemeralStorageLimit` (there is a set of parameters for each Foundry container) and update these so the values are equal.  Similarly, `resourceRequestsMemory` and `resourceMemoryLimit` parameters need to be updated to the same value so that the size for request is equal to the size you specify for the limit.
 
+###  Labels
+
+<b>Example :-</b>  Below labels are already defined in component yaml files.
+
+<b>Labels</b>
+
+```
+ app: voltmx-foundry-apiportal.
+ app.kubernetes.io/part-of: voltmx.
+ app.kubernetes.io/component: apiportal.
+ alias: apiportal.
+ app.kubernetes.io/name: {{ include "voltmx.name" . }}.app.kubernetes.io/instance: {{ .Release.Name }}.
+
+```
+
+### Sample "labels" configuration:
+
+```
+    labels:
+        pods:
+        console:
+            - key: KEY1
+            value: VALUE1
+            - key: KEY2
+            value: VALUE2
+
+```
+
+```
+labels:
+  pods:
+    console:
+    identity:
+    apiPortal:
+    integration:
+    engagement:
+  services:
+    console:
+    identity:
+    apiPortal:
+    integration:
+    engagement:
+
+```
+
+### Annotations 
+
+For VoltMX Foundry components pods and services.
+
+Sample "annotations" configuration:
+
+```
+  labels:
+      pods:
+        console:
+          - key: KEY1
+            value: VALUE1
+          - key: KEY2
+            value: VALUE2
+```
+
+```
+annotations:
+  pods:
+    console:
+    identity:
+    apiPortal:
+    integration:
+    engagement:
+  services:
+    console:
+    identity:
+    apiPortal:
+    integration:
+    engagement:
+    
+```
+
+### NodeSelector
+
+nodeName is a field in the Pod spec. If the nodeName field is not empty, the scheduler ignores the Pod and the kubelet on the named node tries to place the Pod on that node.
+
+<b>Example :- </b> nodeName
+
+```
+ nodeName:
+   console: "node-0"
+```
+
+```
+nodeName:
+  console: ""
+  identity: ""
+  apiPortal: ""
+  integration: ""
+  engagement: ""
+
+```
+
+### Tolerations
+
+Tolerations are applied to pods. Tolerations allow the scheduler to schedule pods with matching taints.
+
+<b>Example :-</b> Tolerations
+
+```
+  tolerations:
+    console:
+    - key: "key1"
+      operator: "Equal"
+      value: "value1"
+      effect: "NoSchedule"
+
+```
+
+```
+tolerations:
+  console:
+  identity:
+  apiPortal:
+  integration:
+  engagement:
+
+```
+
+### Topology
+
+Topology spread constraints to control how Pods are spread across your cluster among failure-domains such as regions, zones, nodes, or among any other topology domains that you define.
+
+<b>Example :- </b> topologySpreadConstraints:
+
+```
+topologySpreadConstraints:
+    console:
+    - maxSkew: 1
+      topologyKey: zone
+      whenUnsatisfiable: DoNotSchedule #ScheduleAnyway
+      labelSelector:
+        matchLabels:
+          app: voltmx-foundry-console
+
+```
+
+```
+topologySpreadConstraints:
+  console:
+  identity:
+  apiPortal:
+  integration:
+  engagement:
+  
+```
+
+### Spread Constraints 
+
+Spread constraints to control how Pods are spread across your cluster among failure-domains such as regions, zones, nodes, or among any other topology domains that you define.
+
+<b>Example :- </b>topologySpreadConstraints:
+
+```
+topologySpreadConstraints:
+   console:
+   - maxSkew: 1
+     topologyKey: zone
+     whenUnsatisfiable: DoNotSchedule #ScheduleAnyway
+     labelSelector:
+       matchLabels:
+         app: voltmx-foundry-console
+
+```
+
+```
+topologySpreadConstraints:
+  console:
+  identity:
+  apiPortal:
+  integration:
+  engagement:
+```
+
+### Affinity and anti-affinity 
+
+Expands the types of constraints you can define.
+
+```
+affinity:
+  console:
+    podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - voltmx-foundry-console
+                topologyKey: "kubernetes.io/hostname"
+  identity:
+    podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - voltmx-foundry-identity
+                topologyKey: "kubernetes.io/hostname"
+  apiPortal:
+    podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - voltmx-foundry-apiportal
+                topologyKey: "kubernetes.io/hostname"
+  integration:
+    podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - voltmx-foundry-integration
+                topologyKey: "kubernetes.io/hostname"
+  engagement:
+    podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - voltmx-foundry-engagement
+                topologyKey: "kubernetes.io/hostname"
+
+```
+
+
+
+
+
+
 ## Use Cases for Helm Upgrade
 
 Use the Helm upgrade command to upgrade the version of the chart or change the configuration of the installation, such as the following:

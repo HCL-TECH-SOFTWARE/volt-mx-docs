@@ -130,6 +130,10 @@ The following parameters must be provided by the user during installation:
 
 *   **FABRIC_BUILD_VERSION** and **FABRIC_DATABASE_BUILD_VERSION** - For each, the value should be in the format "9.2.0.0_GA". This should correspond to the Foundry Docker image version you are planning to install/upgrade. The Foundry Docker images are available at [https://hclcr.io/harbor/projects/47/repositories](https://hclcr.io/harbor/projects/47/repositories). If you are not sure about the version of Foundry to install or upgrade, please contact HCL support.
 
+* **IMAGE_REGISTRY_USERNAME** - This is the email ID you use to log in.
+* **IMAGE_REGISTRY_PASSWORD** -  This is the CLI secret found under your User
+Profile in HCL Harbor.
+
 *   **FABRIC_BUILD_TYPE** - Set this to `PRODUCTION`	 for Production deployment or `NON-PRODUCTION` for DEV/QA or other non-production environments.
 
 *   **Application Server Details**:

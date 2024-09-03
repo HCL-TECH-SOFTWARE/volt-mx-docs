@@ -238,6 +238,10 @@ The following parameters are to be provided by the user during Installation:
 
     > **_Note:_** The Install Environment Name must not contain numbers.
 
+    * **IMAGE_REGISTRY_USERNAME:** - This is the email ID you use to log in.
+    * **IMAGE_REGISTRY_PASSWORD:** - This is the CLI secret found under your User
+Profile in HCL Harbor.
+
 2.  **Install Components**: The following properties must be set to either Y (yes) or N (no). If ALL_COMPONENTS_ENABLED is set to Y, the rest of the inputs can be left empty. If ALL_COMPONENTS_ENABLED is set to N then at least one of the following input properties must be set to Y.
 
     - ALL_COMPONENTS_ENABLED

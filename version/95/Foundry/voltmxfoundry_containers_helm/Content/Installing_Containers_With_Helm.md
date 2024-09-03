@@ -56,9 +56,16 @@ The following parameters are specified in the values.yaml file within the Helm c
 
     > **_Note:_** The Install Environment Name must not contain numbers.
 
-3. **foundryInstallType**: The deployment must be marked as either production or non production.  This parameter must be specified and it must be either "PRODUCTION" or "NON-PRODUCTION".
+3. **imageCredentials:**<br>
 
-4. **Install Components**: The following properties must be set to either true or false.  They specify if the component will be installed or not.
+     username: your-email<br>
+     password: your-authentication-token<br>
+
+     your-authentication-token - This is the CLI secret found under your User Profile in HCL .
+
+4. **foundryInstallType**: The deployment must be marked as either production or non production.  This parameter must be specified and it must be either "PRODUCTION" or "NON-PRODUCTION".
+
+5. **Install Components**: The following properties must be set to either true or false.  They specify if the component will be installed or not.
 
     - identityEnabled
     - consoleEnabled
@@ -67,7 +74,7 @@ The following parameters are specified in the values.yaml file within the Helm c
     - engagementEnabled
     - dbUpdateEnabled
 
-5. **Application Server Details**
+6. **Application Server Details**
 
     - **enableCaCertsOverride**: If you are utilizing a self signed cert or using a cert that was issued by a certificate authority (CA) not preloaded by the JRE trust store, you will need to add your certificate to the trust store located in `apps/certs/cacerts` and set this property to `true`.  At the present time you must leave the trust store password with the default of "changeit".
 
@@ -75,7 +82,7 @@ The following parameters are specified in the values.yaml file within the Helm c
 
       > **_Note:_** This property cannot be an IP address or 'localhost'.
 
-6. **Ingress Details**
+7. **Ingress Details**
 
     - **Overview**: Ingress provides external access to the services in your Kubernetes cluster.  It is required to enable browsers to access the applications and also used by the backend services to communicate with each other.
 
@@ -93,15 +100,24 @@ The following parameters are specified in the values.yaml file within the Helm c
 
     - **ingress.tls.enabled**: When this property is set to true, Ingress is configured to use the Cluster SSL Certificate or the specified Custom SSL certificate.
 
-    - **ingress.tls.customCert**: Use this property to specify a Custom SSL certificate. If ingress.tls.customCert.cert and ingress.tls.customCert.key are not set, then the Cluster SSL certificate will be used for tls.
+    - **ingress.tls.customCertSecretName**: If
+    customCertSecretName is not set the Cluster certificate will be used for tls. Provide secret name which has tls.crt and tls.key.
+    
+   <details close markdown="block"><summary>To create a custom secret from pem file.
+    </summary>
+    The secret can be created using the following commands:
 
-    - **ingress.tls.customCert.cert**: The file name for the custom certificate.  Place your SSL certificate file in the `apps/certs`.  The value of this property should be a file path of the form `certs/my-custom-cert.cert` where certs/ is the subdirectory name and my-custom-cert.cert is the name of your certificate file.  This certificate must be in DER format as per [Section 5.1 of RFC 7468](https://datatracker.ietf.org/doc/html/rfc7468#section-5.1).
+    ```
+    kubectl create secret tls NAME --cert=path/to/cert/file --key=path/to/key/file
 
-    - **ingress.tls.customCert.key**: The file name for the custom key.  Place your SSL certificate key file in the `apps/certs` subdirectory.  The value of this property should be of the form `certs/my-custom-cert.key` where certs/ is the subdirectory and my-custom-cert.key is the name of your private key file.  The key file must be PKCS #8 in DER format [Section 11 of RFC 7468](https://datatracker.ietf.org/doc/html/rfc7468#section-11).
+    ```
+    >**Note :** The cert should be fullchain.
+
+    </details>
 
     - **ingress.sslTermination**: This property is specific to OpenShift.  When this property is set to true, an annotation is added to each Ingress object signifying that the annotation `route.openshift.io/termination: "edge"` should be set.  This in turn causes OpenShift to configure routes and Ingress to accept connections on TLS/HTTPS and terminate the SSL connection while proxying the request over HTTP to the backend services.  This property should be used when configuring OpenShift with secured Ingress.
 
-7. **Database Details**
+8. **Database Details**
 
      - **dbType**: This is the Database type you want to use for hosting Volt MX Foundry. The possible values are:
        - For MySQL DB server: `mysql`
@@ -133,11 +149,11 @@ The following parameters are specified in the values.yaml file within the Helm c
 
     <br/>
 
-8. **timeZone** - The Time Zone of the Database used for Volt MX Foundry installation. The Time Zone variable must be set to maintain consistency between the Application server and the Database server. For determining what value to set for the time zone you can refer to [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) on Wikipedia.
+9. **timeZone** - The Time Zone of the Database used for Volt MX Foundry installation. The Time Zone variable must be set to maintain consistency between the Application server and the Database server. For determining what value to set for the time zone you can refer to [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) on Wikipedia.
 
     > **_Note:_** The Time Zone is an optional value. If you do not provide any Time Zone, it is set to Etc/UTC.
 
-9. **Readiness and Liveness Probes Details**: The following variables are set with default values in seconds. Readiness probes are used to determine if a service is available to handle requests. If it fails the configured thresholds, the service is marked as not ready and will not be routed requests. The liveness problem is similar, but when it fails the configured thresholds, the container is killed and restarted. These probes are present for each application and may be customized.
+10. **Readiness and Liveness Probes Details**: The following variables are set with default values in seconds. Readiness probes are used to determine if a service is available to handle requests. If it fails the configured thresholds, the service is marked as not ready and will not be routed requests. The liveness problem is similar, but when it fails the configured thresholds, the container is killed and restarted. These probes are present for each application and may be customized.
     - readinessInitDelay: The readiness probe initial delay. The default value is 30.  This is the number of seconds after the container has started before readiness probes are initiated.
     - livenessInitDelay: The liveness probe initial delay in seconds. The default value is 600. This is the number of seconds after the container has started before liveness probes are initiated.
     - readinessPeriodSeconds: The readiness period seconds parameter signifies how frequently the kubelet will execute a readiness probe.  The default is 30 indicating that once every 30 seconds a readiness probe will be executed.
@@ -146,11 +162,11 @@ The following parameters are specified in the values.yaml file within the Helm c
     - livenessTimeoutSeconds: The liveness timeout seconds parameter signifies how long kubelet will let a probe run before it times out and assumes the probe failed.  The default is 120 indicating 120 seconds.
 
 
-10. **Minimum and Maximum RAM percentage Details**: The following variables are used to configure the amount of RAM used by the Java process in each container.  These have default values for each application container but may be customized for each application.
+11. **Minimum and Maximum RAM percentage Details**: The following variables are used to configure the amount of RAM used by the Java process in each container.  These have default values for each application container but may be customized for each application.
     - minRamPercentage: Minimum RAM percentage, default is "50".
     - maxRamPercentage: Maximum RAM percentage, default is "80".
 
-11. **Container resource limits for memory and CPU**: The following variables are used to configure the memory and cpu resource limits for each application container.  These are string values and can be modified for each application.  Refer to <https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/> for additional details.
+12. **Container resource limits for memory and CPU**: The following variables are used to configure the memory and cpu resource limits for each application container.  These are string values and can be modified for each application.  Refer to <https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/> for additional details.
     - resourceRequestsCpu: specifies the minimum amount of CPU units the container is guaranteed to be allocated at startup.
 
     - resourceRequestsMemory: specifies the minimum amount of memory the container is guaranteed to be allocated at startup.
@@ -177,11 +193,11 @@ The following parameters are specified in the values.yaml file within the Helm c
     | Engagement  | resourceRequestsMemory | "1G"   |
     | Engagement  | resourceRequestsCpu    | "200m" |
 
-12. **Custom JAVA_OPTS Details**: Each application can be set with a custom Java options which will be used to configure the JVM.  Under each application locate the variable called `customJavaOpts`.
+13. **Custom JAVA_OPTS Details**: Each application can be set with a custom Java options which will be used to configure the JVM.  Under each application locate the variable called `customJavaOpts`.
 
-13. **Number of instances to be deployed for each component**: Each application can be configured to specify the number of container replicas.  The default value is 1.  Under each application locate the variable called `replicas`.
+14. **Number of instances to be deployed for each component**: Each application can be configured to specify the number of container replicas.  The default value is 1.  Under each application locate the variable called `replicas`.
 
-14. **VoltMX Foundry Account Registration Details**: Software license registration must be done after installation with Helm (prior versions of the install were capable of doing the registration during install).  After logging into the newly deployed console a link at the top of every page will take you to the registration page to activate the software license.
+15. **VoltMX Foundry Account Registration Details**: Software license registration must be done after installation with Helm (prior versions of the install were capable of doing the registration during install).  After logging into the newly deployed console a link at the top of every page will take you to the registration page to activate the software license.
 
 
 # Installation
@@ -237,33 +253,12 @@ The following parameters are specified in the values.yaml file within the Helm c
     Context "kube-cluster1" modified.
     </code></pre>
 
- 6. Install the Foundry DB Update application with Helm.
+ 
+
+ 6. Install the Foundry applications with Helm.
 
     <pre><code>
-    $ helm install dbupdate dbupdate -f values.yaml -n foundry
-    NAME: dbupdate
-    LAST DEPLOYED: Fri Jan 20 08:10:15 2023
-    NAMESPACE: foundry
-    STATUS: deployed
-    REVISION: 1
-    TEST SUITE: None
-    </code></pre>
-
-    This will deploy the Foundry database update application which will perform the necessary steps to create or upgrade your databases for Foundry.
-
- 7. The database update image will be pulled down from the HCL repository, installed into your cluster, and the database job will be run.   Check the status of the job and verify the logs are error free:
-
-    <pre><code>
-    $ kubectl get pods -n foundry
-    NAME                                READY   STATUS      RESTARTS   AGE
-    foundry-db-update-zfd4b             0/1     Completed   0          16m<br />
-    $ kubectl logs foundry-db-update-zfd4b -n foundry | less
-    </code></pre>
-
- 8. Install the Foundry applications with Helm (make certain step 6 completed successfully).
-
-    <pre><code>
-    $ helm install foundry apps -f values.yaml -n foundry
+    $ helm install foundry apps -f values.yaml -n foundry --timeout 10m
     NAME: foundry
     LAST DEPLOYED: Fri Jan 20 08:21:36 2023
     NAMESPACE: foundry
@@ -279,7 +274,7 @@ The following parameters are specified in the values.yaml file within the Helm c
     http://foundry.example.com/mfconsole
     </code></pre>
 
- 9. The deployment will take some time.  Container images must be downloaded from the HCL container repository and then started and applications initialized.  You can watch the progress of the deployment with a variety of commands.   The command below watches the pod status and updates the output as the deployment progresses:
+ 7. The deployment will take some time.  Container images must be downloaded from the HCL container repository and then started and applications initialized.  You can watch the progress of the deployment with a variety of commands.   The command below watches the pod status and updates the output as the deployment progresses:
 
     <pre><code>
     $ kubectl get pods -w
@@ -310,7 +305,7 @@ The following parameters are specified in the values.yaml file within the Helm c
 
     The `-w` option is short for `watch` and it causes kubectl to monitor the status and update the output with any changes.  You must press `ctrl-c` to terminate this command.
 
- 10. Verify the deployment.  Using the commands below, you should see similar output:
+ 8. Verify the deployment.  Using the commands below, you should see similar output:
 
     <pre><code>
     $ kubectl get pods
