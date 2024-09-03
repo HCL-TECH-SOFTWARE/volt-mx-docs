@@ -103,19 +103,19 @@ The following parameters are specified in the values.yaml file within the Helm c
     - **ingress.tls.customCertSecretName**: If
     customCertSecretName is not set the Cluster certificate will be used for tls. Provide secret name which has tls.crt and tls.key.
     
-   <details close markdown="block"><summary>To create a custom secret from pem file.
-    </summary>
-    The secret can be created using the following commands:
+<details close markdown="block"><summary>To create a custom secret from pem file.
+</summary>
+The secret can be created using the following commands:
 
-    ```
-    kubectl create secret tls NAME --cert=path/to/cert/file --key=path/to/key/file
+```
+kubectl create secret tls NAME --cert=path/to/cert/file --key=path/to/key/file
 
-    ```
-    >**Note :** The cert should be fullchain.
+```
+>**Note :** The cert should be fullchain.
 
-    </details>
+</details>
 
-    - **ingress.sslTermination**: This property is specific to OpenShift.  When this property is set to true, an annotation is added to each Ingress object signifying that the annotation `route.openshift.io/termination: "edge"` should be set.  This in turn causes OpenShift to configure routes and Ingress to accept connections on TLS/HTTPS and terminate the SSL connection while proxying the request over HTTP to the backend services.  This property should be used when configuring OpenShift with secured Ingress.
+- **ingress.sslTermination**: This property is specific to OpenShift.  When this property is set to true, an annotation is added to each Ingress object signifying that the annotation `route.openshift.io/termination: "edge"` should be set.  This in turn causes OpenShift to configure routes and Ingress to accept connections on TLS/HTTPS and terminate the SSL connection while proxying the request over HTTP to the backend services.  This property should be used when configuring OpenShift with secured Ingress.
 
 8. **Database Details**
 
