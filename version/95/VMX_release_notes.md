@@ -964,7 +964,7 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ## Volt Foundry
 
 ### V9 Servicepack 5 Fixpack 16 Hotfix 7
-August 29, 2024
+September 02, 2024
 
 * Added imagePullSecrets to single-container deployments for OpenShift, Amazon EKS, and Kubernetes to enable registry access.
 * Enhanced Volt Foundry Helm Chart Installers to use a single chart instead of different ones for product and database, simplifying customer setup.
