@@ -99,10 +99,6 @@ The first step to generate an Apple Push Notification Service (APNS) certificate
     The new Identifer will get created.
     
 16. The next few steps discuss the configuration of the **app ID** for push notifications. Search the newly created App ID in the search bar and Click on (HclOrderExecutionAppID) App ID to **Edit**.
-
-    ![](Resources/Images/image12_586x428.png)
-    
-    The **Edit your App ID Configuration** page appears.
     
 
     ![](Resources/Images/8.png)

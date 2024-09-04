@@ -21,7 +21,8 @@ A provisioning profile is needed to identify the devices on which the developed 
     
 5.  The **Register a New Provisioning Profile** page appears. Select the **iOS App Development** option under the **Development** section. Click **Continue**.
     
-    ![](Resources/Images/14.bmp)
+    ![](Resources/Images/14.png)
+    
     
 6.  The **Select An App ID** page appears. Select the **App ID** for which the profile is created from the drop-down list and click **Continue**.
     
