@@ -49,7 +49,7 @@ HCL recommends using the following operating systems to install Volt MX Foundry 
 | Operating System | Recommended Version |
 | --- | --- |
 | Microsoft Windows | Windows 10 Pro |
-| Linux | CentOS 7.2 |
+| RHEL | CentOS 7.2 |
 | macOS | macOS Catalina |
 
 ### Supported Application Servers
@@ -65,7 +65,7 @@ Volt MX  Foundry Single Container Solution supports the following database serve
   
 | Database Type | Version Supported |
 | --- | --- |
-| MySQL | 5.6, 5.7 |
+| MySQL | 8.0 |
 | Microsoft SQL Server | 2016, 2017 |
 
 > **_Note:_** You must have an existing external database. Databases do not come bundled with the Installer.
@@ -128,9 +128,30 @@ The following parameters must be provided by the user during Installation:
 
 1.  **Install Environment Name** - The install environment name can be anything, for example, `dev`, `qa`, `prod`, or `eastusprod`.
 
-> **_Note:_** The Install Environment Name must not contain numbers.
+    > **_Note:_** The Install Environment Name must not contain numbers.
 
-3.  **Application Server Details**:
+    a. **FABRIC_BUILD_VERSION FABRIC_DATABASE_BUILD_VERSION**
+
+    This should correspond to the Foundry Docker image version you are planning to install/upgrade
+
+    The Foundry Docker images are available at
+
+    `https://hclcr.io/harbor/projects/47/repositories.`
+
+    If you are not sure about the version of Foundry to install/upgrade, please contact HCL support.
+
+    This value should be in the format `"9.2.0.0_GA"`
+
+    * **IMAGE_REGISTRY_USERNAME** - This is the email ID you use to log in.
+    * **IMAGE_REGISTRY_PASSWORD** -  This is the CLI secret found under your User Profile in HCL Harbor.
+
+    
+
+    b. **FABRIC_BUILD_TYPE**
+
+    Set this to PRODUCTION for Production deployment NON-PRODUCTION for DEV/QA or other non-production environments 
+
+2.  **Application Server Details**:
     *   **Domain Name**: The Domain Name for Volt MX Foundry.  
         
         > **_Note:_** Domain name must not be a dynamic IP address or 'localhost'. Although, the domain name can be a static IP address.
@@ -142,7 +163,7 @@ The following parameters must be provided by the user during Installation:
     *   **COM\_PROTOCOL**: The communication protocol that is used for Volt MX Foundry. This value can be either **http** or **https**.
     *   **KEYSTORE\_FILE** : The path to the existing Keystore file. The path should point to a valid `JKS` file. This value can be empty if the communication protocol is HTTP.
     *   **KEYSTORE\_FILE\_PASS**: Password for the Keystore (`JKS`) file. This value can be empty if the communication protocol is HTTP.
-4.  **Database Details**:
+3.  **Database Details**:
 
     *   **Database Type** - This is the Database Type you want to use for hosting Volt MX Foundry.
 
@@ -162,13 +183,13 @@ The following parameters must be provided by the user during Installation:
     
     > **_Note:_** In case of upgrade, ensure that the values of the Database Prefix and Suffix that you provide are the same as you had provided during the initial installation.
     
-5.  **Automatic Registration Details** (not applicable for upgrade):
+4.  **Automatic Registration Details** (not applicable for upgrade):
     *   **User Id** – E-mail ID used for Volt MX Foundry Registration.
     *   **Password** – Password used for Volt MX Foundry Registration.
     *   **First Name** – First Name used for Volt MX Foundry Registration.
     *   **Last Name** – Last Name used for Volt MX Foundry Registration.
     *   **Environment Name** – The Volt MX Foundry Environment to publish generated applications.
-6.  **Time Zone** - The Time Zone of the Database used for Volt MX Foundry installation.
+5.  **Time Zone** - The Time Zone of the Database used for Volt MX Foundry installation.
     
     > **_Note:_** The Time Zone is an optional value. If you do not provide any Time Zone, it is set to Etc/UTC.
     

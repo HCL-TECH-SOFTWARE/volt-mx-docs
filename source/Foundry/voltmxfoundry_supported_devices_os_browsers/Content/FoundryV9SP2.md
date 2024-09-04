@@ -21,10 +21,6 @@ The installation of the Volt MX Foundry software supports the following versions
 
 #### Linux
 
-*   CentOS
-    *   CentOS 8
-    *   CentOS 7.6
-    *   CentOS 7.5
 *   Red Hat Enterprise Linux (RHEL)
     
     *   RHEL 8
@@ -63,15 +59,13 @@ The installation of the Volt MX Foundry software supports the following versions
 
 #### MySQL
 
-*   MySQL 5.6
-*   MySQL 5.7
+*   MySQL 8.0
 *   MySQL Database HA ( active/passive ) Cluster
 
 #### Oracle
 
 *   Oracle 19c
 *   Oracle 18c (18.3)
-*   Oracle 12c release 2 (12.2.0.1.0)
 
 #### Microsoft SQL Server
 
@@ -81,8 +75,7 @@ The installation of the Volt MX Foundry software supports the following versions
 
 #### MariaDB
 
-*   MariaDB 10.3.13
-*   MariaDB 10.2
+*   MariaDB 10.11.4
 
 > **_Note:_** A Database user used for install should be granted all required permissions as specified by the install guide.
 
@@ -102,7 +95,6 @@ For development environments, in addition to the versions of Operating Systems, 
 #### Windows
 
 *   Windows 10
-*   Windows 8.1
 
 ### Containers
 
