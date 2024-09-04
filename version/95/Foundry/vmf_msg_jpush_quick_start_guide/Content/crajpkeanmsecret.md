@@ -58,9 +58,10 @@ To create a JPush key, follow these steps:
     
 8.  Enter details for the following fields:
        **Application Information**:
-        *   **Application Name**: Enter a name of the application.
-        *   **Application Icon**: To provide an icon for the application, click the **Upload an image** button to browse the icon from its location. The selected icon name appears next to the **Select the File** button.
-        *   **Application category**: Select the application category.
+
+    *   **Application Name**: Enter a name of the application.
+    *   **Application Icon**: To provide an icon for the application, click the **Upload an image** button to browse the icon from its location. The selected icon name appears next to the **Select the File** button.
+    *   **Application category**: Select the application category.
 
     ![](Resources/Images/NewJPush/New/image6.png)
 
@@ -88,7 +89,7 @@ To create a JPush key, follow these steps:
     
 13. Navigate to **Home** page. In **My Apps**, click on **Application management**.
 
-    ![](Resources/Images/NewJPush/New/image4.png)
+    ![](Resources/Images/NewJPush/New/image5.png)
 
     The **Application management** page appears.
 
