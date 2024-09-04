@@ -21,10 +21,6 @@ The installation of the Volt MX Foundry software supports the following versions
 
 #### Linux
 
-*   CentOS
-    *   CentOS 8
-    *   CentOS 7.6
-    *   CentOS 7.5
 *   Red Hat Enterprise Linux (RHEL)
     
     *   RHEL 8
@@ -102,7 +98,6 @@ For development environments, in addition to the versions of Operating Systems, 
 #### Windows
 
 *   Windows 10
-*   Windows 8.1
 
 ### Containers
 

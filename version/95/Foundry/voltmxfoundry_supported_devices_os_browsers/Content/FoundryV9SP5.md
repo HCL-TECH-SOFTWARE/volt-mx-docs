@@ -23,12 +23,6 @@ The installation of the Volt Foundry software supports the following versions of
 
 #### Linux
 
-*   CentOS
-    *   Centos 9
-    *   CentOS 8
-    *   CentOS 7.6
-    *   CentOS 7.5
-
 *   Red Hat Enterprise Linux (RHEL)
     
     *   RHEL 9

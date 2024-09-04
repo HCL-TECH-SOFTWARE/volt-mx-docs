@@ -1114,6 +1114,12 @@
 </blockquote>
 </li>
 <li>
+<p><strong>imageCredentials:</strong><br></p>
+<p>username: your-email<br>
+ password: your-authentication-token<br></p>
+<p>your-authentication-token - This is the CLI secret found under your User Profile in HCL .</p>
+</li>
+<li>
 <p><strong>foundryInstallType</strong>: The deployment must be marked as either production or non production.  This parameter must be specified and it must be either "PRODUCTION" or "NON-PRODUCTION".</p>
 </li>
 <li>
@@ -1169,18 +1175,26 @@
 <p><strong>ingress.tls.enabled</strong>: When this property is set to true, Ingress is configured to use the Cluster SSL Certificate or the specified Custom SSL certificate.</p>
 </li>
 <li>
-<p><strong>ingress.tls.customCert</strong>: Use this property to specify a Custom SSL certificate. If ingress.tls.customCert.cert and ingress.tls.customCert.key are not set, then the Cluster SSL certificate will be used for tls.</p>
-</li>
-<li>
-<p><strong>ingress.tls.customCert.cert</strong>: The file name for the custom certificate.  Place your SSL certificate file in the <code>apps/certs</code>.  The value of this property should be a file path of the form <code>certs/my-custom-cert.cert</code> where certs/ is the subdirectory name and my-custom-cert.cert is the name of your certificate file.  This certificate must be in DER format as per <a href="https://datatracker.ietf.org/doc/html/rfc7468#section-5.1">Section 5.1 of RFC 7468</a>.</p>
-</li>
-<li>
-<p><strong>ingress.tls.customCert.key</strong>: The file name for the custom key.  Place your SSL certificate key file in the <code>apps/certs</code> subdirectory.  The value of this property should be of the form <code>certs/my-custom-cert.key</code> where certs/ is the subdirectory and my-custom-cert.key is the name of your private key file.  The key file must be PKCS #8 in DER format <a href="https://datatracker.ietf.org/doc/html/rfc7468#section-11">Section 11 of RFC 7468</a>.</p>
-</li>
-<li>
-<p><strong>ingress.sslTermination</strong>: This property is specific to OpenShift.  When this property is set to true, an annotation is added to each Ingress object signifying that the annotation <code>route.openshift.io/termination: "edge"</code> should be set.  This in turn causes OpenShift to configure routes and Ingress to accept connections on TLS/HTTPS and terminate the SSL connection while proxying the request over HTTP to the backend services.  This property should be used when configuring OpenShift with secured Ingress.</p>
+<p><strong>ingress.tls.customCertSecretName</strong>: If
+customCertSecretName is not set the Cluster certificate will be used for tls. Provide secret name which has tls.crt and tls.key.</p>
 </li>
 </ul>
+</li>
+</ol>
+<details close="close">
+<p><summary>To create a custom secret from pem file.
+</summary>
+The secret can be created using the following commands:</p>
+<pre><code>kubectl create secret tls NAME --cert=path/to/cert/file --key=path/to/key/file
+
+</code></pre>
+<blockquote>
+<p><strong>Note :</strong> The cert should be fullchain.</p>
+</blockquote>
+</details>
+<ul>
+<li>
+<p><strong>ingress.sslTermination</strong>: This property is specific to OpenShift.  When this property is set to true, an annotation is added to each Ingress object signifying that the annotation <code>route.openshift.io/termination: "edge"</code> should be set.  This in turn causes OpenShift to configure routes and Ingress to accept connections on TLS/HTTPS and terminate the SSL connection while proxying the request over HTTP to the backend services.  This property should be used when configuring OpenShift with secured Ingress.</p>
 </li>
 <li>
 <p><strong>Database Details</strong></p>
@@ -1347,7 +1361,7 @@
 <li>
 <p><strong>VoltMX Foundry Account Registration Details</strong>: Software license registration must be done after installation with Helm (prior versions of the install were capable of doing the registration during install).  After logging into the newly deployed console a link at the top of every page will take you to the registration page to activate the software license.</p>
 </li>
-</ol>
+</ul>
 <h1 id="installation">Installation</h1>
 <p><strong>Steps to Install Volt MX Foundry Container Cluster Solution:</strong></p>
 <ol>
@@ -1401,31 +1415,9 @@ Context "kube-cluster1" modified.
 </code></pre></p>
 </li>
 <li>
-<p>Install the Foundry DB Update application with Helm.</p>
+<p>Install the Foundry applications with Helm.</p>
 <p><pre><code>
-$ helm install dbupdate dbupdate -f values.yaml -n foundry
-NAME: dbupdate
-LAST DEPLOYED: Fri Jan 20 08:10:15 2023
-NAMESPACE: foundry
-STATUS: deployed
-REVISION: 1
-TEST SUITE: None
-</code></pre></p>
-<p>This will deploy the Foundry database update application which will perform the necessary steps to create or upgrade your databases for Foundry.</p>
-</li>
-<li>
-<p>The database update image will be pulled down from the HCL repository, installed into your cluster, and the database job will be run.   Check the status of the job and verify the logs are error free:</p>
-<p><pre><code>
-$ kubectl get pods -n foundry
-NAME                                READY   STATUS      RESTARTS   AGE
-foundry-db-update-zfd4b             0/1     Completed   0          16m<br />
-$ kubectl logs foundry-db-update-zfd4b -n foundry | less
-</code></pre></p>
-</li>
-<li>
-<p>Install the Foundry applications with Helm (make certain step 6 completed successfully).</p>
-<p><pre><code>
-$ helm install foundry apps -f values.yaml -n foundry
+$ helm install foundry apps -f values.yaml -n foundry --timeout 10m
 NAME: foundry
 LAST DEPLOYED: Fri Jan 20 08:21:36 2023
 NAMESPACE: foundry
