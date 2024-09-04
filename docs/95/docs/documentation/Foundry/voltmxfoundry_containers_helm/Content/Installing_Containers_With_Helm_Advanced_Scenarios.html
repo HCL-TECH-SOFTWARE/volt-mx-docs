@@ -750,6 +750,68 @@
     Notes for hosted Cloud installs (EKS, GKE, AKS)
   </a>
   
+    <nav class="md-nav" aria-label="Notes for hosted Cloud installs (EKS, GKE, AKS)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#labels" class="md-nav__link">
+    Labels
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-labels-configuration" class="md-nav__link">
+    Sample "labels" configuration:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#annotations" class="md-nav__link">
+    Annotations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nodeselector" class="md-nav__link">
+    NodeSelector
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tolerations" class="md-nav__link">
+    Tolerations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#topology" class="md-nav__link">
+    Topology
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spread-constraints" class="md-nav__link">
+    Spread Constraints
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#affinity-and-anti-affinity" class="md-nav__link">
+    Affinity and anti-affinity
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1178,6 +1240,68 @@
     Notes for hosted Cloud installs (EKS, GKE, AKS)
   </a>
   
+    <nav class="md-nav" aria-label="Notes for hosted Cloud installs (EKS, GKE, AKS)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#labels" class="md-nav__link">
+    Labels
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-labels-configuration" class="md-nav__link">
+    Sample "labels" configuration:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#annotations" class="md-nav__link">
+    Annotations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nodeselector" class="md-nav__link">
+    NodeSelector
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tolerations" class="md-nav__link">
+    Tolerations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#topology" class="md-nav__link">
+    Topology
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spread-constraints" class="md-nav__link">
+    Spread Constraints
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#affinity-and-anti-affinity" class="md-nav__link">
+    Affinity and anti-affinity
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1331,6 +1455,206 @@
 <p>B. The pod resource requests and resource limits must be configured with the same value. The <code>request</code> parameter specifies a minimum amount used during pod scheduling, the <code>limit</code> specifies the maximum amount of resource the container will be granted during runtime.  Prior to installing Foundry, edit values.yaml and locate the parameters for <code>ephemeralStorageRequest</code> and <code>ephemeralStorageLimit</code> (there is a set of parameters for each Foundry container) and update these so the values are equal.  Similarly, <code>resourceRequestsMemory</code> and <code>resourceMemoryLimit</code> parameters need to be updated to the same value so that the size for request is equal to the size you specify for the limit.</p>
 </li>
 </ol>
+<h3 id="labels">Labels</h3>
+<p><b>Example :-</b>  Below labels are already defined in component yaml files.</p>
+<p><b>Labels</b></p>
+<pre><code> app: voltmx-foundry-apiportal.
+ app.kubernetes.io/part-of: voltmx.
+ app.kubernetes.io/component: apiportal.
+ alias: apiportal.
+ app.kubernetes.io/name: {{ include &quot;voltmx.name&quot; . }}.app.kubernetes.io/instance: {{ .Release.Name }}.
+
+</code></pre>
+<h3 id="sample-labels-configuration">Sample "labels" configuration:</h3>
+<pre><code>    labels:
+        pods:
+        console:
+            - key: KEY1
+            value: VALUE1
+            - key: KEY2
+            value: VALUE2
+
+</code></pre>
+<pre><code>labels:
+  pods:
+    console:
+    identity:
+    apiPortal:
+    integration:
+    engagement:
+  services:
+    console:
+    identity:
+    apiPortal:
+    integration:
+    engagement:
+
+</code></pre>
+<h3 id="annotations">Annotations</h3>
+<p>For VoltMX Foundry components pods and services.</p>
+<p>Sample "annotations" configuration:</p>
+<pre><code>  labels:
+      pods:
+        console:
+          - key: KEY1
+            value: VALUE1
+          - key: KEY2
+            value: VALUE2
+</code></pre>
+<pre><code>annotations:
+  pods:
+    console:
+    identity:
+    apiPortal:
+    integration:
+    engagement:
+  services:
+    console:
+    identity:
+    apiPortal:
+    integration:
+    engagement:
+
+</code></pre>
+<h3 id="nodeselector">NodeSelector</h3>
+<p>nodeName is a field in the Pod spec. If the nodeName field is not empty, the scheduler ignores the Pod and the kubelet on the named node tries to place the Pod on that node.</p>
+<p><b>Example :- </b> nodeName</p>
+<pre><code> nodeName:
+   console: &quot;node-0&quot;
+</code></pre>
+<pre><code>nodeName:
+  console: &quot;&quot;
+  identity: &quot;&quot;
+  apiPortal: &quot;&quot;
+  integration: &quot;&quot;
+  engagement: &quot;&quot;
+
+</code></pre>
+<h3 id="tolerations">Tolerations</h3>
+<p>Tolerations are applied to pods. Tolerations allow the scheduler to schedule pods with matching taints.</p>
+<p><b>Example :-</b> Tolerations</p>
+<pre><code>  tolerations:
+    console:
+    - key: &quot;key1&quot;
+      operator: &quot;Equal&quot;
+      value: &quot;value1&quot;
+      effect: &quot;NoSchedule&quot;
+
+</code></pre>
+<pre><code>tolerations:
+  console:
+  identity:
+  apiPortal:
+  integration:
+  engagement:
+
+</code></pre>
+<h3 id="topology">Topology</h3>
+<p>Topology spread constraints to control how Pods are spread across your cluster among failure-domains such as regions, zones, nodes, or among any other topology domains that you define.</p>
+<p><b>Example :- </b> topologySpreadConstraints:</p>
+<pre><code>topologySpreadConstraints:
+    console:
+    - maxSkew: 1
+      topologyKey: zone
+      whenUnsatisfiable: DoNotSchedule #ScheduleAnyway
+      labelSelector:
+        matchLabels:
+          app: voltmx-foundry-console
+
+</code></pre>
+<pre><code>topologySpreadConstraints:
+  console:
+  identity:
+  apiPortal:
+  integration:
+  engagement:
+
+</code></pre>
+<h3 id="spread-constraints">Spread Constraints</h3>
+<p>Spread constraints to control how Pods are spread across your cluster among failure-domains such as regions, zones, nodes, or among any other topology domains that you define.</p>
+<p><b>Example :- </b>topologySpreadConstraints:</p>
+<pre><code>topologySpreadConstraints:
+   console:
+   - maxSkew: 1
+     topologyKey: zone
+     whenUnsatisfiable: DoNotSchedule #ScheduleAnyway
+     labelSelector:
+       matchLabels:
+         app: voltmx-foundry-console
+
+</code></pre>
+<pre><code>topologySpreadConstraints:
+  console:
+  identity:
+  apiPortal:
+  integration:
+  engagement:
+</code></pre>
+<h3 id="affinity-and-anti-affinity">Affinity and anti-affinity</h3>
+<p>Expands the types of constraints you can define.</p>
+<pre><code>affinity:
+  console:
+    podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - voltmx-foundry-console
+                topologyKey: &quot;kubernetes.io/hostname&quot;
+  identity:
+    podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - voltmx-foundry-identity
+                topologyKey: &quot;kubernetes.io/hostname&quot;
+  apiPortal:
+    podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - voltmx-foundry-apiportal
+                topologyKey: &quot;kubernetes.io/hostname&quot;
+  integration:
+    podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - voltmx-foundry-integration
+                topologyKey: &quot;kubernetes.io/hostname&quot;
+  engagement:
+    podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - voltmx-foundry-engagement
+                topologyKey: &quot;kubernetes.io/hostname&quot;
+
+</code></pre>
 <h2 id="use-cases-for-helm-upgrade">Use Cases for Helm Upgrade</h2>
 <p>Use the Helm upgrade command to upgrade the version of the chart or change the configuration of the installation, such as the following:</p>
 <ul>
