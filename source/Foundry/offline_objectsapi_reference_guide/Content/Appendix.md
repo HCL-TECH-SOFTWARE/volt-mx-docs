@@ -116,8 +116,8 @@ Error codes and the associated messages from the Offline Objects feature are as 
 | 2008 | Failed to find and load the supported assets for SQLite database encryption:<error details> |   |
 | 2009 | An error occurred while upgrading the database schema: <error details> |   |
 | 2010 | Invalid database schema version found, cannot upgrade the database schema. |   |
-| 2030 | An error occurred in the network layer:<error details> |   |
-| 2031 | Network call failed due to connection timeout:<error details> |   |
+| 2030 | An error occurred in the network layer:<error details> |  To see more details on platform-specific error message format and keys to access them please Click [Here](Platform-Specific-Error-Message.md) |
+| 2031 | Network call failed due to connection timeout:<error details> | To see more details on platform-specific error message format and keys to access them please Click [Here](Platform-Specific-Error-Message.md)  |
 | 2032 | Network call failed due to socket connection timeout:<error details> |   |
 | 2033 | Network call failed due to security related issues:<error details> |   |
 | 2034 | Unable to connect to host:<error details> |   |
