@@ -1,27 +1,25 @@
 
-AppPlatform Overview
+Platform Overview
 ================
 Here is a brief overview on Volt MX products, sub-products and their features. We also discuss how these products interact to provide you with a comprehensive solution to develop omni-channel digital apps.
 We classify Volt MX's product portfolio as follows:
 
 Volt MX AppPlatform
 
-*  [Volt MX Iris](#volt-mx-iris)
-    * Widgets
-    * APIs 
-    * Reusable Components
-*  [Volt MX Foundry](#volt-mx-foundry)
-    * Identity Services
-    * Integration Services
-    * Orchestration Services
-    * Object Services
-    * API Management
-    * Engagement Services
-    * Offline Objects
-    * Reports
-*  [Volt MX App Viewer](#volt-mx-appviewer)
-*  [DevOps Services - App Factory](#devops-services---appfactory)
-*  [Volt MX Marketplace](#volt-mx-marketplace)
+- [Platform Overview](#platform-overview)
+  - [Volt MX Iris](#volt-mx-iris)
+  - [Volt MX Foundry](#volt-mx-foundry)
+    - [Identity Services](#identity-services)
+    - [Integration Services](#integration-services)
+    - [Orchestration Services](#orchestration-services)
+    - [Object Services](#object-services)
+    - [API Management](#api-management)
+    - [Engagement Services](#engagement-services)
+    - [Offline Objects](#offline-objects)
+    - [Reports](#reports)
+  - [Volt MX AppViewer](#volt-mx-appviewer)
+  - [DevOps Services - AppFactory](#devops-services---appfactory)
+  - [Volt MX Marketplace](#volt-mx-marketplace)
 
 ![Overview Platform](../Resources/Images/Overview_Platform_774x286.png)
 
