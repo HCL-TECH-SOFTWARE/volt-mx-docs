@@ -1052,6 +1052,7 @@ May 27, 2024
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 
+
 ### AppFactory V9 Servicepack 5 Fixpack 15 Hotfix 6
 <<<<<<< HEAD
 =======
@@ -1069,6 +1070,7 @@ For detailed information about fixes and known issues in this release, see the <
 May 20, 2024
 
 * Security hardening via Jenkins update.
+
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
