@@ -107,10 +107,9 @@ We have installed the application, created a subscription, and updated the confi
     
 10.  Next, you will also see on your device screen that the message is successfully delivered.
     
-
-        ![](Resources/Images/app8.png)
+     <img src="./Resources/Images/app8.png">
     
-
+    
 That’s it! Congratulations on your successful install of the Engagement application and receiving your first push message.
 
 Sending SMS Notifications
