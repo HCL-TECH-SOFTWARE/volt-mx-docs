@@ -110,7 +110,7 @@ To generate, encrypt, and use the RSA key pair, follow these steps: 
     For the Responsive Web/SPA platform, VoltMX's security team validates the information and shares the unique **clientID** and **clientSecret** through email. You must then use these details to [create a postbuild task](BuildAnSPAApplication.md#securing-your-web-applications).
 5. VoltMX's security team then returns the encrypted public key to you through email.
 
-    > **_Important:_** You must not share your private key with anyone including Volt MX. In case of a key compromise for the Android, iOS and Responsive Web/SPA platforms, generate a new set of keys and send the public key to [voltmxlicensing@hcl-software.com.](mailto:voltmxlicensing@hcl-software.com.?subject=Keys). 
+    > **_Important:_** You must not share your private key with anyone including Volt MX. In case of a key compromise for the Android, iOS and Responsive Web/SPA platforms, generate a new set of keys and send the public key to [voltmxlicensing@hcl-software.com](mailto:voltmxlicensing@hcl-software.com.?subject=Keys). 
     
 6. Navigate to your Volt MX Iris workspace and create a **\_\_encryptionkeys** folder.
 7. Place the following keys received from Volt MX in **\_\_encryptionkeys** folder.
