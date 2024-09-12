@@ -50,7 +50,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Foundry](#volt-foundry)
 
-
+- [AppFactory V9 Servicepack 5 Fixpack 16 Hotfix 7](#appfactory-v9-servicepack-5-fixpack-16-hotfix-7)
 - [V9 Servicepack 5 Fixpack 16 Hotfix 7](#v9-servicepack-5-fixpack-16-hotfix-7)
 - [V9 Servicepack 5 Fixpack 16 Hotfix 6](#v9-servicepack-5-fixpack-16-hotfix-6)
 - [V9 Servicepack 5 Fixpack 16 Hotfix 5](#v9-servicepack-5-fixpack-16-hotfix-5)
@@ -980,6 +980,16 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 -->
 
 ## Volt Foundry
+
+### AppFactory V9 Servicepack 5 Fixpack 16 Hotfix 7
+September 12, 2024
+
+* Core Jenkins version upgrades made.
+* Added support for running builds on MacOS Sonoma with XCode 15.4, iOS 17.5 support on Mac devices running M2 chip.
+* Security hardening.
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+
 
 ### V9 Servicepack 5 Fixpack 16 Hotfix 7
 September 02, 2024
