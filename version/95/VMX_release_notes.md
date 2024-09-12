@@ -984,9 +984,9 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ### AppFactory V9 Servicepack 5 Fixpack 16 Hotfix 7
 September 12, 2024
 
-* Core Jenkins version upgrades made.
-* Added support for running builds on MacOS Sonoma with XCode 15.4, iOS 17.5 support on Mac devices running M2 chip.
-* Security hardening.
+* Upgraded the core Jenkins version.
+* Added support for running builds on macOS Sonoma with Xcode 15.4 and iOS 17.5 on Mac devices with the M2 chip.
+* Enhanced security.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
