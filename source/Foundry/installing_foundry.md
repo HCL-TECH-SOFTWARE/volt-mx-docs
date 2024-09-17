@@ -5,9 +5,11 @@ These topics provide information about operating system, server, and database su
 
 * [Volt MX Foundry Installation Guide - Linux](voltmx_foundry_linux_install_guide/Content/Introduction.md)
 
+* [Volt MX Foundry Install Guide for Windows](voltmx_foundry_windows_install_guide/Content/Introduction.md)
+
 * [Volt MX Foundry Manual Install Guide](voltmx_foundry_manual_install_guide/Content/Introduction.md)
 
-* [Volt MX Foundry Install Guide for Windows](voltmx_foundry_windows_install_guide/Content/Introduction.md)
+* [Volt MX Foundry Command Line Install Guide](./VoltMX_Foundry_CLI/Content/installer_cli.md)
 
 * [Volt MX Foundry Install Guide for Amazon EKS](voltmxfoundry_on_amazon_eks/Content/introduction.md)
 
