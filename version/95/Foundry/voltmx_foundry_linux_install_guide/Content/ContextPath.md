@@ -22,12 +22,12 @@ Approach 1: Changing Context Root Path after the installation using the Installe
     
     | Component | File Name | Renamed WAR files | Path for installed WAR files for Volt MX Foundry |
     | --- | --- | --- | --- |
-    |  **Console** | workspace.war | workspace`1`.war | **Tomcat** (standalone mode): `<VoltMX Foundry Install Path>\tomcat\webapps` **JBoss** (standalone mode): `<VoltMX Foundry Install Path>\jboss > standalone\deployments`  |
-    |^^| mfconsole.war | mfconsole`1`.war |
-    |^^| accounts.war | accounts`1`.war |
+    |  **Console** | workspace.war | workspace`1`.war | -**Tomcat** (standalone mode): `<VoltMX Foundry Install Path>\tomcat\webapps` <br>-**JBoss** (standalone mode): `<VoltMX Foundry Install Path>\jboss > standalone\deployments`  |
+    | | mfconsole.war | mfconsole`1`.war |
+    | | accounts.war | accounts`1`.war | 
     | **Identity** | authService.war | authService`1`.war |
-    | **Integration/****Admin/****Server** | middleware.warservices.waradmin.war | middleware`1`.warservices`1`.waradmin`1`.war |
-    | Engagement Services | vpns.war | vpns`1`.war |
+    | **Integration/****Admin/****Server** |middleware.war<br>services.war<br>admin.war |middleware`1`.war<br>services`1`.war<br>admin`1`.war |
+    | **Engagement Services** | vpns.war | vpns`1`.war |
     
 
 1.  Update `WAAS_BASE_URL` in the  `accounts_configurations` table by using the following SQL query:
@@ -38,19 +38,19 @@ Approach 1: Changing Context Root Path after the installation using the Installe
     
     *   MySQL
         
-        UPDATE accounts\_configurations SET value='<http or https>://<server\_host>:<server\_port>/workspace1' WHERE name='WAAS\_BASE\_URL';
+        `UPDATE accounts_configurations SET value='<http or https>://<server_host>:<server_port>/workspace1' WHERE name='WAAS_BASE_URL';`
         
     *   Oracle
         
-        UPDATE accounts\_configurations SET value='<http or https>://<server\_host>:<server\_port>/workspace1' WHERE name='WAAS\_BASE\_URL' ;
+        `UPDATE accounts_configurations SET value='<http or https>://<server_host>:<server_port>/workspace1' WHERE name='WAAS_BASE_URL' ;`
         
     *   SQL Server
         
-        UPDATE accounts\_configurations SET value='<http or https>://<server\_host>:<server\_port>/workspace1' WHERE name='WAAS\_BASE\_URL' ;
+        `UPDATE accounts_configurations SET value='<http or https>://<server_host>:<server_port>/workspace1' WHERE name='WAAS_BASE_URL'` ;
         
     *   DB2
         
-        UPDATE accounts\_configurations SET value='<http or https>://<server\_host>:<server\_port>/workspace1' WHERE name='WAAS\_BASE\_URL';
+        `UPDATE accounts_configurations SET value='<http or https>://<server_host>:<server_port>/workspace1' WHERE name='WAAS_BASE_URL';`
         
         > **_Note:_** From V8 SP4 FP1 HF1 onwards, DB2 is not supported for bundled Tomcat and JBoss servers.
         
@@ -69,7 +69,7 @@ Approach 1: Changing Context Root Path after the installation using the Installe
             
 3.  Update the following property in the `VOLTMX_SERVER_SERVICES_CONTEXT_PATH` in the `admindb` configuration table:
     
-    VOLTMX\_SERVER\_SERVICES\_CONTEXT\_PATH=services1
+    `VOLTMX_SERVER_SERVICES_CONTEXT_PATH=services1`
     
     For example, `<prefix>admindb<suffix>`.
     
@@ -77,22 +77,30 @@ Approach 1: Changing Context Root Path after the installation using the Installe
     
     *   MySQL
         
-        UPDATE server\_configuration SET prop\_value ='services1' WHERE prop\_name = 'VOLTMX\_SERVER\_SERVICES\_CONTEXT\_PATH';
+        `UPDATE server_configuration SET prop_value ='services1' WHERE prop_name = 'VOLTMX_SERVER_SERVICES_CONTEXT_PATH';`      
         
     *   Oracle
         
-        UPDATE server\_configuration SET prop\_value ='services1' WHERE prop\_name = 'VOLTMX\_SERVER\_SERVICES\_CONTEXT\_PATH';
+        `UPDATE server_configuration SET prop_value ='services1' WHERE prop_name = 'VOLTMX_SERVER_SERVICES_CONTEXT_PATH';`
         
     *   SQL Server
         
-        UPDATE server\_configuration SET prop\_value ='services1' WHERE prop\_name = 'VOLTMX\_SERVER\_SERVICES\_CONTEXT\_PATH';
+        `UPDATE server_configuration SET prop_value ='services1' WHERE prop_name = 'VOLTMX_SERVER_SERVICES_CONTEXT_PATH';` 
+
+4.  Configure the following properties with the customized JNDI names:
+
+    |Component|File Name|File Name|Properties to be added/updated|
+    |---|---|---|---|
+    |**Accounts**|accounts.properties|Accounts.war\WEB-INF\classes|ACCOUNTS_DB_JNDI_NAME=jdbc/voltmxaccounts<br> REPORTS_DB_JNDI_NAME=jdbc/voltmxreports|
+    |**Integration/Admin/Server**|serverconsole.properties|admin.war\WEB-INF\middleware\middleware-bootconfig\admin|-admindb.jndi.name=jdbc/voltmxadmindb<br>-reportsdb.jndi.name=jdbc/voltmxreports|
+
         
 4.  Configure the following settings for application server, as follows:
     *   For **Tomcat**: In case you have renamed a `.war`, modify the following datasource file names as per the respective renamed war files:
         
         Path for datasource files:
         
-        <INSTALL\_DIR>\\<App\_Server>\\conf\\Catalina\\localhost
+        `<INSTALL_DIR>\<App_Server>\conf\Catalina\localhost`
         
         *   Rename `accounts.xml` to `account1.xml`
         *   Rename `workspace.xml` to `workspace1.xml`
@@ -105,11 +113,11 @@ Approach 1: Changing Context Root Path after the installation using the Installe
         
         From:
         
-        <context-root>/services</context-root>
+        `<context-root>/services</context-root>`
         
         To:
         
-        <context-root>/services1</context-root>
+        `<context-root>/services1</context-root>`
         
 5.  Restart your app server.
 6.  Launch Volt MX Foundry Console with new context path and do the registration using the new auth service URL format:  
@@ -127,7 +135,7 @@ Approach 1: Changing Context Root Path after the installation using the Installe
     
     If admin is renamed to admin1 then the sample URL format is as follows:
     
-    <http or https>://<server\_host>:<server\_port>/admin1
+    `<http or https>://<server_host>:<server_port>/admin1`
     
 8.  Update `service_url` after an environment is registered in the `accountsdb` table, as follows:
     

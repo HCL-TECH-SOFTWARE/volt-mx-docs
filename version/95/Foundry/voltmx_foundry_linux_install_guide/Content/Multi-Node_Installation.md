@@ -3,7 +3,7 @@
 
 This section of the document provides you with the instructions for installing and configuring the Volt MX Foundry Console on multinode.
 
-The **\<Install Location\>** directory contains the log files logging each invocation of the installer. To make problem identification easier, provide these log files to Volt MX when reporting an issue.
+The **<Install Location\>** directory contains the log files logging each invocation of the installer. To make problem identification easier, provide these log files to Volt MX when reporting an issue.
 
 <details close="" markdown="block"><summary>Accessing the live installation logs while the installation is running</summary>
 <ul>
@@ -67,10 +67,12 @@ If you want to install with JBoss as an option for application  
     JBoss is also bundled as part of the installer, in case you want to install afresh.
 To change input, type 'back' to go back to the previous step.  
 To cancel the installation, type 'quit' at any time.
-For troubleshooting & help on the installation, use [Troubleshooting & Installation](../../../Foundry/resources/installer.md)
-For getting started on Volt MX Foundry, refer documentation
-For upgrading Foundry, refer [online documentation](../../../Foundry/voltmx_foundry_linux_install_guide/Content/Upgrading_VoltMX_Foundry_on_Linux.md).
-If you have more questions or feedback, you can join our [http://community.hclvoltmx.com/](http://community.hclvoltmx.com/) or, raise a [http://support.voltmx.com/](http://support.voltmx.com/).
+For troubleshooting & help on the installation, use
+https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/installationGuides.html.
+For getting started on Volt MX Foundry, refer
+https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Introduction.html.
+If you have more questions or feedback, you can join our
+community at https://support.hcltechsw.com/community?id=community_forum&sys_id=1cdf6e1a1bf31898beab64e6ec4bcbae or raise a support ticket at https://support.hcltechsw.com/csm.
 
 ->1- Continue with Installation.  
   2- Abort Installation.
@@ -80,7 +82,7 @@ ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
 ```
 
 <ol>
-  <li value="6">Press <b>Enter</b>.The Software_License Agreement_details appear.</li>
+  <li value="6">Press <b>Enter</b>.The Software <em>License Agreement</em> details appear.</li>
 </ol>
 
 ```
@@ -100,7 +102,7 @@ DO YOU ACCEPT THE TERMS OF THIS LICENSE AGREEMENT? (Y/N): Y
 
 ```
 <ol>
-  <li value="7">Press <b>Y</b> to accept the agreement. The_Installation Type_details appear.</li>
+  <li value="7">Press <b>Y</b> to accept the agreement. The <em>Installation Type</em> details appear.</li>
 </ol>
 
   The following installation types are supported for new installation:
@@ -143,7 +145,7 @@ ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
 ```
 <ol>
-  <li value="9"> Enter your choice and press <b>Enter.</b> The_Send Usage Data Anonymously_details appear.Allows HCL to collect product usage information to make your Volt MX Foundry experience better. HCL does not save any of your private or application data.</li>
+  <li value="9"> Enter your choice and press <b>Enter.</b> The <em>Send Usage Data Anonymously</em> details appear.Allows HCL to collect product usage information to make your Volt MX Foundry experience better. HCL does not save any of your private or application data.</li>
 </ol>
 
 ```
@@ -164,7 +166,7 @@ ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 ```
 
 <ol>
-  <li value="10">Enter your choice and press <b>Enter.</b> The_Install Components_details appear:</li>
+  <li value="10">Enter your choice and press <b>Enter.</b> The <em>Install Components</em> details appear:</li>
 </ol>
 
 ```
@@ -252,7 +254,7 @@ IS THIS CORRECT? (Y/N): y
 > **_Note:_** By default, Volt MX Foundry is installed at the home directory of the user.
 
 <ol>
-  <li value="12">Press <b>Enter</b> to continue the installation. The_Application Server_ details appear.</li>
+  <li value="12">Press <b>Enter</b> to continue the installation. The <em>Application Server</em> details appear.</li>
 </ol>
 
 ```
@@ -271,7 +273,7 @@ ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 ```
 <ol>
   <li value="13">In the <b>Application Server</b>, choose <b>2</b>.</li>
-  <li value="14">Press <b>Enter</b> to continue the installation. The_Installation Mode_ details appear.</li>
+  <li value="14">Press <b>Enter</b> to continue the installation. The <em>Installation Mode</em> details appear.</li>
 </ol>
 
 ```
@@ -295,7 +297,7 @@ ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 To install Volt MX Foundry on single node on JBoss that is installed on your machine, choose **2-** **Standalone Mode** (**Existing**). For more details, refer to refer to [Installing Volt MX Foundry on Existing JBoss - Single Node](Installing_Foundry_JBoss_existing.md).
 
 <ol>
-  <li value="15">In the Installation Mode, type 3 and press <b>Enter</b>.The_Application Server Details_appear. The <b>Application Server </b>details will appear with the following details if have selected All Components or Volt MX Foundry Console at Install Components</li>
+  <li value="15">In the Installation Mode, type 3 and press <b>Enter</b>.The <em>Application Server Details</em> appear. The <b>Application Server </b>details will appear with the following details if have selected All Components or Volt MX Foundry Console at Install Components</li>
 </ol>
 
 ```
@@ -318,7 +320,7 @@ User (Default: master):
 
 ```
 <ol>
-  <li value="16">In the_Application Server Details_details, do the following:</li>
+  <li value="16">In the <em>Application Server Details</em> details, do the following:</li>
 </ol>
 
 
@@ -329,7 +331,7 @@ User (Default: master):
 - **User**: Enter user that you configured in master node of JBoss cluster.
 
 <ol>
-  <li value="17">Press Enter. The installer prompts for_JBoss Master Node User's Password_details as follows:</li>
+  <li value="17">Press Enter. The installer prompts for <em>JBoss Master Node User's Password </em> details as follows:</li>
 </ol>
 
 
@@ -341,7 +343,7 @@ Please enter the password:
 
 ```
 <ol>
-  <li value="18">Type the password that you configured in master node of JBoss cluster. The_Server Groups_details appear.</li>
+  <li value="18">Type the password that you configured in master node of JBoss cluster. The <em>Server Groups</em> details appear.</li>
 </ol>
 
 ```
@@ -376,7 +378,7 @@ ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
 ```
 
 <ol>
-  <li value="20">Press Enter.The installer prompts the_Database Choice_details as follows:</li>
+  <li value="20">Press Enter.The installer prompts the <em>Database Choice</em> details as follows:</li>
 </ol>
 
 ```
@@ -402,7 +404,7 @@ ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
   <li value="21">In the_Database Choice_,choose the DB:</li>
 </ol>
 
-- In the *Database Choice* if you select 1, the _MySQL Database Details_ appear.
+- In the *Database Choice* if you select 1, the  <em>MySQL Database Details</em> appear.
 
 ```
 =========================
@@ -456,7 +458,7 @@ PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):
 
 ```
 
-- In the *Database Choice* if you select 2, the _Oracle Database Details_ appear.
+- In the *Database Choice* if you select 2, the <em>Oracle Database Details</em> appear.
 
 ```
 ==========================
@@ -483,7 +485,7 @@ a.  Enter the following details:
 
 - **System Username**: Enter the user name used while creating the database user.
 
-b.  Press **Enter**. The installer prompts for _Enter Password for Database User_ details as follows:
+b.  Press **Enter**. The installer prompts for <em>Enter Password for Database User</em> details as follows:
 
 ```
 ======================================
@@ -586,7 +588,7 @@ Installation wizard is not able to access the HCL123 TableSpace provided with gi
 - **LOB Tablespace**: Enter the name for LOB tablespace.
   If input for LOB Tablespace is not provided, then the value will be set to the provided Datatable space value.
 
-- In the *Database Choice* if you select 3, the _SQL Server Database Details_ appear.
+- In the *Database Choice* if you select 3, the <em>SQL Server Database Details</em> appear.
 
 ```
 ==============================
@@ -611,7 +613,7 @@ Instance Name (Optional) (Default: ):
   - **Username**: Enter the user name used while creating the database user - for example, dbclient.
   - **Instance Name (Optional)**: Enter the instance name for the database. This information is optional.
 
-  b.  Press **Enter**. The installer prompts for _Enter Password for Database User_ details as follows:
+  b.  Press **Enter**. The installer prompts for <em>Enter Password for Database User</em> details as follows:
 
 ```
 ======================================
@@ -650,7 +652,7 @@ PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):
 
 ```
 
-- In the *Database Choice* if you select 5, the _MariaDB Database Details_ appear.
+- In the *Database Choice* if you select 5, the <em>MariaDB Database Details</em> appear.
 
 ```
 ===========================
@@ -669,12 +671,12 @@ Instance Name (Optional) (Default: ):
 
 ```
 
-a.  Enter the following details:
-  - **Database Server IP**: Enter the server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
-  - **Database Port**: Enter the database port of the MariaDB Server. By default, this field is set to 3306 for MariaDB.
+a.  Enter the following details:<br>
+  - **Database Server IP**: Enter the server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.<br>
+  - **Database Port**: Enter the database port of the MariaDB Server. By default, this field is set to 3306 for MariaDB.<br>
   - **Database Username**: Enter the user name used while creating the database user - for example, dbclient.
 
-b.  Press **Enter**. The installer prompts for _Enter Password for Database User_ details as follows:
+b.  Press **Enter**. The installer prompts for <em>Enter Password for Database User</em> details as follows:
 
 ```
 ===================================
@@ -733,7 +735,7 @@ Database Name Suffix (Default: 1): 54
 - Database Name Suffix: Enter valid suffix for all databases - for example, 1.
 
 <ol>
-  <li value="23">Enter the prefix and suffix for the database and press <b>Enter</b>. The_Pre-Installation Summary_details appear.</li>
+  <li value="23">Enter the prefix and suffix for the database and press <b>Enter</b>. The <em>Pre-Installation Summary</em> details appear.</li>
 </ol>
 
 ```
@@ -767,7 +769,7 @@ PRESS <ENTER> TO CONTINUE:
 
 ```
 <ol>
-  <li value="24">Press <b>Enter</b>. The_Ready To Install_details appear.</li>
+  <li value="24">Press <b>Enter</b>. The <em>Ready To Install</em> details appear.</li>
 </ol>
 
 ```  
@@ -783,7 +785,7 @@ PRESS <ENTER> TO INSTALL:
 
 ```
 <ol>
-  <li value="25">Press <b>Enter</b>.The_Installing_details appear.</li>
+  <li value="25">Press <b>Enter</b>.The <em>Installing</em> details appear.</li>
 </ol>
 
 ```
@@ -791,11 +793,12 @@ PRESS <ENTER> TO INSTALL:
 Installing...
 ---------------
 
-[==================|==================|==================|==================\] \[------------------|------------------|------------------|------------------\]
+[==================|==================|==================|==================] 
+[------------------|------------------|------------------|------------------]
 
 ```
 <ol>
-  <li value="26">Press<b>Enter</b>.The_Installation Complete_details appear.</li>
+  <li value="26">Press<b>Enter</b>.The <em>Installation Complete </em>details appear.</li>
 </ol>
 
 ```

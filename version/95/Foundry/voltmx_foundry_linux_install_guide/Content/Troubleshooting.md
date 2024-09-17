@@ -7,16 +7,26 @@ FAQs and Troubleshooting
 
 This section lists the troubleshooting tips to resolve problems that you may encounter during installation.
 
+*   **Issue**: After installing VoltMX Foundry on a Tomcat application server with a MySQL database, publishing of Integration Services fails with the following error: 
+
+    <pre><code>Internal Error. Failed to check Server state - Failed to propagate Integration Services to Runtime. Status [deploy_failed]. Details - Database Migration failed with error : org.flywaydb.core.internal.exception.FlywaySqlException: Unable to obtain connection from database (jdbc:mysql://&lt;URL&gt;:&lt;Port No.&gt;) for user '&lt;user&gt;': Communications link failure The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+    SQL State : 08S01 Error Code : 0 Message : Communications link failure The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server. [ Tracking id - &lt;ID&gt;]</code></pre>
+
+    **Workaround**:
+    
+    To resolve this error, add the following -D parameter to the `catalina.sh` file: 
+
+    `-DSERVER_DB_USE_SSL=false`
+
+
 *   **Issue**: If you have upgraded from Foundry V8.x or lower versions to V9 GA or higher versions, some of the services fail to work because of an internal authentication error. These services, such as the **Foundry Admin Adapter**, **Email Adapter**, and **Workflow Email** services, fail with the following error:
     
-	```
-	{
+    <pre><code>{
     returned HTTP [400], Response Body [{"details":{"message":"Could not find trust security group for given envId","errcode":0,"errmsg":"Could not find trust security group for given envId"},"httpstatus":"Bad Request","requestid":"5e36d604-09ab-4fbb-9437-42c1d828140f;98","domain":"AUTH","code":-65,"mfcode":"Auth-65","message":"Some of the input parameters provided are invalid"}]
-    }
-	```
+    }</code></pre>
 	
     
-    **Workaround**
+    **Workaround:**
     
     To avoid the error, you must perform the following:
     
@@ -28,9 +38,9 @@ This section lists the troubleshooting tips to resolve problems that you may enc
         
     4.  In the **Modify Environment** page, click **SAVE**.
 
-*   **Issue**: While upgrading from Foundry 7.3 to Volt MX Foundry V9 and then upgrading to a version after V9, the upgrade fails due to the following error:"java.sql.SQLSyntaxErrorException: Table 'prefixidglobaldbsuffix.schema\_version' doesn't exist".
+*   **Issue**: While upgrading from Foundry 7.3 to Volt MX Foundry V9 and then upgrading to a version after V9, the upgrade fails due to the following error: _"java.sql.SQLSyntaxErrorException: Table 'prefixidglobaldbsuffix.schema\_version' doesn't exist"_.
     
-    **Workaround**
+    **Workaround**:
     
     To avoid this issue, perform the following step:
     
@@ -40,21 +50,22 @@ This section lists the troubleshooting tips to resolve problems that you may enc
     
     The upgrade installation from v8.2.1.3 to v9.x rolls back.
     
-    Workaround
+    **Workaround**
     
     Before the upgrade, execute the following SQL statement from admin database:
     
-    For **MySQL**  
-    \------------  
-    delete from <admindb>.schema\_version where script = 'V62.1\_\_voltmxadmin-mysql-8.2.0.0.sql';  
+    <pre><code>
+    For MySQL:
+     delete from &lt;admindb&gt;.schema_version where script = 'V62.1__voltmxadmin-mysql-8.2.0.0.sql';  
       
-    For **SQLServer**  
-    \---------------  
-    delete from <admindb>.schema\_version where script = 'V62.1\_\_voltmxadmin-sqlserver-8.2.0.0.sql';  
-      
-    For **Oracle**  
-    \----------  
-    delete from <admindb>.schema\_version where script = 'V62.1\_\_voltmxadmin-oracle-8.2.0.0.sql';  
+    For SQLServer:
+     delete from &lt;admindb&gt;.schema_version where script = 'V62.1__voltmxadmin-sqlserver-8.2.0.0.sql';  
+     
+
+    For Oracle:
+     delete from &lt;admindb&gt;.schema_version where script = 'V62.1__voltmxadmin-oracle-8.2.0.0.sql';  
+    
+    </code></pre>
       
     
 
@@ -96,12 +107,14 @@ This section lists the troubleshooting tips to resolve problems that you may enc
     **Workaround**
     
     Add the following server variable in MariaDB ini file located in the MariaDB installation folder.
+
+    `table_open_cache=64`
     
-    ```
-        table_open_cache=64
-    ```
+   
     
-    Path for MariaDB ini file, `<USER_INSTALL_DIR>\MariaDB 10.1\data\my.ini`
+    Path for MariaDB ini file,
+    
+     `<USER_INSTALL_DIR>\MariaDB 10.1\data\my.ini`
     
 
 *   **Issue**
@@ -125,7 +138,9 @@ This section lists the troubleshooting tips to resolve problems that you may enc
     For trusted certification issues, refer to [SSL Certificate Issues](Post-Installation_Tasks.md#Service_Provider's_Certificate_Issues).
     
 
-*   Issue - When you publish a number of apps, the system throws the error - too many open files.
+*   **Issue**  
+    
+    When you publish a number of apps, the system throws the error - too many open files.
     
     For example:
     
@@ -153,12 +168,11 @@ This section lists the troubleshooting tips to resolve problems that you may enc
     
     Remove the `version_rank` column from `schema_version` table in each schema by following queries before upgrade.
     
-    ```
-    {
-        drop index schema_version_vr_idx on master.<SCHEMA_NAME>.schema_version;
-        alter table master.<SCHEMA_NAME>.schema_version drop column version_rank;
-    }
-    ```
+    <pre><code>{drop index schema_version_vr_idx on master.&lt;SCHEMA_NAME&gt;.schema_version;
+    alter table master.&lt;SCHEMA_NAME&gt;.schema_version drop column version_rank;
+    }</code></pre>
+
+    
 
 *   **Issue**
     
@@ -172,9 +186,9 @@ This section lists the troubleshooting tips to resolve problems that you may enc
 *   **Issue**
     
     If you have installed Foundry 7.3 or older, and when you use the existing database for Volt MX Foundry V8 on JBoss, the Web Application publish fails. 
-    <br/>
+
     **Workaround**
-    <br/>
+
     Update the `management_server_port` in the `server_configuration` table of `admindb` with the `jboss.management.http.port` in the `<USER_INSTALL_DIR>\jboss\standalone\configuration\standalone.xml`.
     
 
@@ -182,107 +196,68 @@ This section lists the troubleshooting tips to resolve problems that you may enc
     
     If you do not want to use a DB user with DBA role or Equivalent privileges for the Volt MX Foundry installation on ORACLE database, follow these steps:
 
-    <br/>
-
     **Workaround**
-
-    <br/>
 
     Manual Steps:
 
     1. Create Component Users (schema) with the required grants as below.
 
-        ```
-        {
-        CREATE USER <prefix>MFCONSOLEDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;
+        <pre><code>{
+        CREATE USER &lt;prefix&gt;MFCONSOLEDB&lt;suffix&gt; identified by &lt;password&gt; default tablespace &lt;dataTablespace&gt; profile default;
+        ALTER USER &lt;prefix&gt;MFCONSOLEDB&lt;suffix&gt; QUOTA UNLIMITED ON USERS;
+        GRANT CONNECT,RESOURCE,CREATE VIEW TO &lt;prefix&gt;MFCONSOLEDB&lt;suffix&gt;;
+        GRANT CREATE JOB TO &lt;prefix&gt;MFCONSOLEDB&lt;suffix&gt;;
+        GRANT MANAGE SCHEDULER TO &lt;prefix&gt;MFCONSOLEDB&lt;suffix&gt;;
+        CREATE USER &lt;prefix&gt;MFACCOUNTSDB&lt;suffix&gt; identified by &lt;password&gt; default tablespace &lt;dataTablespace&gt; profile default;
+        ALTER USER &lt;prefix&gt;MFACCOUNTSDB&lt;suffix&gt; QUOTA UNLIMITED ON USERS;
+        GRANT CONNECT,RESOURCE,CREATE VIEW TO &lt;prefix&gt;MFACCOUNTSDB&lt;suffix&gt;;
+        GRANT CREATE JOB TO &lt;prefix&gt;MFACCOUNTSDB&lt;suffix&gt;;
+        GRANT MANAGE SCHEDULER TO &lt;prefix&gt;MFACCOUNTSDB&lt;suffix&gt;</code></pre>
 
-        ALTER USER <prefix>MFCONSOLEDB<suffix> QUOTA UNLIMITED ON USERS;
+        <pre><code>CREATE USER &lt;prefix&gt;MFREPORTSDB&lt;suffix&gt; identified by &lt;password&gt; default tablespace &lt;dataTablespace&gt; profile default;
+        ALTER USER &lt;prefix&gt;MFREPORTSDB&lt;suffix&gt; QUOTA UNLIMITED ON USERS;
+        GRANT CONNECT,RESOURCE,CREATE VIEW TO &lt;prefix&gt;MFREPORTSDB&lt;suffix&gt;;
+        GRANT CREATE JOB TO &lt;prefix&gt;MFREPORTSDB&lt;suffix&gt;;
+        GRANT MANAGE SCHEDULER TO &lt;prefix&gt;MFREPORTSDB&lt;suffix&gt;;</code></pre>  
 
-        GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>MFCONSOLEDB<suffix>;
 
-        GRANT CREATE JOB TO <prefix>MFCONSOLEDB<suffix>;
+        <pre><code>CREATE USER &lt;prefix&gt;IDCONFIGDB&lt;suffix&gt; identified by &lt;password&gt; default tablespace &lt;dataTablespace&gt; profile default;
+        ALTER USER &lt;prefix&gt;IDCONFIGDB&lt;suffix&gt; QUOTA UNLIMITED ON USERS;
+        GRANT CONNECT,RESOURCE,CREATE VIEW TO &lt;prefix&gt;IDCONFIGDB&lt;suffix&gt;;
+        GRANT CREATE JOB TO &lt;prefix&gt;IDCONFIGDB&lt;suffix&gt;;
+        GRANT MANAGE SCHEDULER TO &lt;prefix&gt;IDCONFIGDB&lt;suffix&gt;;
+        GRANT CREATE TABLE TO &lt;prefix&gt;IDCONFIGDB&lt;suffix&gt;;
+        GRANT CREATE ANY INDEX TO &lt;prefix&gt;IDCONFIGDB&lt;suffix&gt;;
+        GRANT ALTER ANY TABLE TO &lt;prefix&gt;IDCONFIGDB&lt;suffix&gt;;</code></pre>  
 
-        GRANT MANAGE SCHEDULER TO <prefix>MFCONSOLEDB<suffix>;
 
-        CREATE USER <prefix>MFACCOUNTSDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;
+        <pre><code>CREATE USER &lt;prefix&gt;ADMINDB&lt;suffix&gt; identified by &lt;password&gt; default tablespace &lt;dataTablespace&gt; profile default;
+        ALTER USER &lt;prefix&gt;ADMINDB&lt;suffix&gt; QUOTA UNLIMITED ON USERS;
+        GRANT CONNECT,RESOURCE,CREATE VIEW TO &lt;prefix&gt;ADMINDB&lt;suffix&gt;;
+        GRANT CREATE JOB TO &lt;prefix&gt;ADMINDB&lt;suffix&gt;;
+        GRANT MANAGE SCHEDULER TO &lt;prefix&gt;ADMINDB&lt;suffix&gt;;</code></pre>  
 
-        ALTER USER <prefix>MFACCOUNTSDB<suffix> QUOTA UNLIMITED ON USERS;
 
-        GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>MFACCOUNTSDB<suffix>;
+        <pre><code>CREATE USER &lt;prefix&gt;VPNSDB&lt;suffix&gt; identified by &lt;password&gt; default tablespace &lt;dataTablespace&gt; profile default;
+        ALTER USER &lt;prefix&gt;VPNSDB&lt;suffix&gt; QUOTA UNLIMITED ON USERS;
+        GRANT CONNECT,RESOURCE,CREATE VIEW TO &lt;prefix&gt;VPNSDB&lt;suffix&gt;;
+        GRANT CREATE JOB TO &lt;prefix&gt;VPNSDB&lt;suffix&gt;;
+        GRANT MANAGE SCHEDULER TO &lt;prefix&gt;VPNSDB&lt;suffix&gt;; 
+        }</code></pre>
 
-        GRANT CREATE JOB TO <prefix>MFACCOUNTSDB<suffix>;
 
-        GRANT MANAGE SCHEDULER TO <prefix>MFACCOUNTSDB<suffix>;
-
-        
-
-        CREATE USER <prefix>MFREPORTSDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;
-
-        ALTER USER <prefix>MFREPORTSDB<suffix> QUOTA UNLIMITED ON USERS;
-
-        GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>MFREPORTSDB<suffix>;
-
-        GRANT CREATE JOB TO <prefix>MFREPORTSDB<suffix>;
-
-        GRANT MANAGE SCHEDULER TO <prefix>MFREPORTSDB<suffix>;
-
-        
-
-        CREATE USER <prefix>IDCONFIGDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;
-
-        ALTER USER <prefix>IDCONFIGDB<suffix> QUOTA UNLIMITED ON USERS;
-
-        GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>IDCONFIGDB<suffix>;
-
-        GRANT CREATE JOB TO <prefix>IDCONFIGDB<suffix>;
-
-        GRANT MANAGE SCHEDULER TO <prefix>IDCONFIGDB<suffix>;
-
-        GRANT CREATE TABLE TO <prefix>IDCONFIGDB<suffix>;
-
-        GRANT CREATE ANY INDEX TO <prefix>IDCONFIGDB<suffix>;
-
-        GRANT ALTER ANY TABLE TO <prefix>IDCONFIGDB<suffix>;
-
-        
-
-        CREATE USER <prefix>ADMINDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;
-
-        ALTER USER <prefix>ADMINDB<suffix> QUOTA UNLIMITED ON USERS;
-
-        GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>ADMINDB<suffix>;
-
-        GRANT CREATE JOB TO <prefix>ADMINDB<suffix>;
-
-        GRANT MANAGE SCHEDULER TO <prefix>ADMINDB<suffix>;
-
-        
-
-        CREATE USER <prefix>VPNSDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;
-
-        ALTER USER <prefix>VPNSDB<suffix> QUOTA UNLIMITED ON USERS;
-
-        GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>VPNSDB<suffix>;
-
-        GRANT CREATE JOB TO <prefix>VPNSDB<suffix>;
-
-        GRANT MANAGE SCHEDULER TO <prefix>VPNSDB<suffix>;
-
-        }
-        ```
 
     2. Create a non DBA user with the below grants. This user will be given to the Installer.
 
-        ```
-        {
-        CREATE USER <INSTALLER\_USER> IDENTIFIED BY <password>;
-        GRANT CREATE SESSION TO <INSTALLER\_USER> WITH ADMIN OPTION;
-        GRANT SELECT ANY DICTIONARY TO <INSTALLER\_USER>;
-        ALTER USER <INSTALLER\_USER> QUOTA UNLIMITED ON <dataTablespace>;
-        ALTER USER <INSTALLER\_USER> QUOTA UNLIMITED ON <indexTablespace>;
-        ALTER USER <INSTALLER\_USER> QUOTA UNLIMITED ON <lobTablespace>;
-        }
-        ```
+        <pre><code>{
+        CREATE USER &lt;INSTALLER_USER&gt; IDENTIFIED BY &lt;password&gt;;
+        GRANT CREATE SESSION TO &lt;INSTALLER_USER&gt; WITH ADMIN OPTION;
+        GRANT SELECT ANY DICTIONARY TO &lt;INSTALLER_USER&gt;;
+        ALTER USER &lt;INSTALLER_USER&gt; QUOTA UNLIMITED ON &lt;dataTablespace&gt;;
+        ALTER USER &lt;INSTALLER_USER&gt; QUOTA UNLIMITED ON &lt;indexTablespace&gt;;
+        ALTER USER &lt;INSTALLER_USER&gt; QUOTA UNLIMITED ON &lt;dataTablespace&gt;;
+        }</code></pre>
+        
     
     >  **_Note:_** The password for the component users and the installer user have to be same.    
 
@@ -295,59 +270,46 @@ This section lists the troubleshooting tips to resolve problems that you may enc
     
     Manual Steps:
     
-    ```
-    {    
-        storage\_database\_type - oracle  
-        storage\_database\_hostname - Database hostname/IP  
-        storage\_database\_port - Database Port  
-        storage\_database\_username - DBA username  
-        storage\_database\_password - DBA Password  
-        storage\_database\_instance - service ID/service name  
-        storage\_data\_tablespace - Data Tablespace name  
-        storage\_index\_tablespace - Index Tablespace name  
-        storage\_lob\_tablespace - Lob Tablespace name
-    }
-    ````
+    <pre><code>{ 
+    storage_database_type - oracle  
+    storage_database_hostname - Database hostname/IP  
+    storage_database_port - Database Port  
+    storage_database_username - DBA username  
+    storage_database_password - DBA Password  
+    storage_database_instance - service ID/service name  
+    storage_data_tablespace - Data Tablespace name  
+    storage_index_tablespace - Index Tablespace name  
+    storage_lob_tablespace - Lob Tablespace name
+    }</code></pre>
+    
         
 
 *   **Issue**
         
     If you do not want to use a DB user with DBA role or Equivalent privileges for the Volt MX Foundry installation on MSSQL, follow these steps:
 
-    <br/>
-
     **Workaround**
 
-    <br/>
-
     Manual Steps:
-        
-    ```
-    Create database <prefix>mfreportsdb<suffix>;
-    Create database <prefix>mfaccountsdb<suffix>;
-    Create database <prefix>mfconsoledb<suffix>;
-    Create database <prefix>admindb<suffix>;
-    Create database <prefix>vpnsdb<suffix>;
-    Create database <prefix>idconfigdb<suffix>;
+
+    <pre><code> 
+    Create database &lt;prefix&gt;mfreportsdb&lt;suffix&gt;;
+    Create database &lt;prefix&gt;mfaccountsdb&lt;suffix&gt;;
+    Create database &lt;prefix&gt;mfconsoledb&lt;suffix&gt;;
+    Create database &lt;prefix&gt;admindb&lt;suffix&gt;;
+    Create database &lt;prefix&gt;vpnsdb&lt;suffix&gt;;
+    Create database &lt;prefix&gt;idconfigdb&lt;suffix&gt;;
     CREATE LOGIN loginId WITH PASSWORD = 'loginpwd'
     GO
     use msdb
     GO
     create user userId from LOGIN loginId;
     GO
-    EXEC sp\_addrolemember 'SQLAgentUserRole', 'userId'
-    EXEC sp\_addrolemember 'SQLAgentReaderRole', 'userId'
-    EXEC sp\_addrolemember 'SQLAgentOperatorRole', 'userId'
+    EXEC sp_addrolemember 'SQLAgentUserRole', 'userId'
+    EXEC sp_addrolemember 'SQLAgentReaderRole', 'userId'
+    EXEC sp_addrolemember 'SQLAgentOperatorRole', 'userId'
     GO
-    use <prefix>mfreportsdbAN<suffix>
-    GO
-    create user userId from LOGIN loginId;
-    GO
-    GRANT ALTER ANY DATABASE DDL TRIGGER TO userId
-    GO
-    GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER,VIEW Definition TO userId
-    GO
-    use <prefix>mfaccountsdb<suffix>
+    use &lt;prefix&gt;mfreportsdbAN&lt;suffix&gt;
     GO
     create user userId from LOGIN loginId;
     GO
@@ -355,7 +317,7 @@ This section lists the troubleshooting tips to resolve problems that you may enc
     GO
     GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER,VIEW Definition TO userId
     GO
-    use <prefix>mfconsoledb<suffix>
+    use &lt;prefix&gt;mfaccountsdb&lt;suffix&gt;
     GO
     create user userId from LOGIN loginId;
     GO
@@ -363,33 +325,40 @@ This section lists the troubleshooting tips to resolve problems that you may enc
     GO
     GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER,VIEW Definition TO userId
     GO
-    use <prefix>admindb<suffix>
+    use &lt;prefix&gt;mfconsoledb&lt;suffix&gt;
+    GO
+    create user userId from LOGIN loginId;
+    GO
+    GRANT ALTER ANY DATABASE DDL TRIGGER TO userId
+    GO
+    GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER,VIEW Definition TO userId
+    GO
+    use &lt;prefix&gt;admindb&lt;suffix&gt;
     GO
     create user userId from LOGIN loginId;
     GO
     GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId
     GO
-    use <prefix>vpnsdb<suffix>
+    use &lt;prefix&gt;vpnsdb&lt;suffix&gt;
     GO
-    CREATE SCHEMA <prefix>vpnsdb<suffix>;
-    GO
-    create user userId from LOGIN loginId;
-    GO
-    GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId
-    GO
-    use <prefix>idconfigdb<suffix>
+    CREATE SCHEMA &lt;prefix&gt;vpnsdb&lt;suffix&gt;;
     GO
     create user userId from LOGIN loginId;
     GO
     GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId
     GO
-    ```
+    use &lt;prefix&gt;idconfigdb&lt;suffix&gt;
+    GO
+    create user userId from LOGIN loginId;
+    GO
+    GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId
+    GO</code></pre>
 
     >  **_Note:_** The whole script must be run at once.
 
     >  **_Note:_** The loginId and password must be the same as used for Volt MX Foundry Installation.
 
-    >  **_Note:_** The <prefix> and <suffix> provided must be the same across the script and must also be provided at the time of the Volt MX foundry Installation.
+    >  **_Note:_** The <prefix\> and <suffix\> provided must be the same across the script and must also be provided at the time of the Volt MX foundry Installation.
 
     >  **_Note:_** You can use the same loginId and userId to avoid confusion.
 
@@ -408,61 +377,52 @@ This section lists the troubleshooting tips to resolve problems that you may enc
     
     > **_Important:_** Only DB2 database administrator (DBA) or equivalent DB user will have access to a create database.
     
+    
     1.  Create a user based on your Operating System level.
         
         *   Refer for linux: [Creating group and user IDs for a DB2 database installation (Linux and UNIX)](https://www.ibm.com/support/knowledgecenter/en/SSEPGG_9.5.0/com.ibm.db2.luw.qb.server.doc/doc/t0006742.md)
         *   Refer for Windows: [Creating a dedicated DB2 user (Windows)](https://www.ibm.com/support/knowledgecenter/en/SSYGQH_5.5.0/admin/install/t_db_create_lcuser.md)
     2.  Create databases by logging as Admin with following queries:
-        
-        ```
-        {
-        
-            CREATE SCHEMA <prefix>ADMINDB<suffix> AUTHORIZATION userid  
-            CREATE SCHEMA <prefix>MFCONSOLEDB<suffix> AUTHORIZATION userid  
-            CREATE SCHEMA <prefix>MFACCOUNTSDB<suffix> AUTHORIZATION userid  
-            CREATE SCHEMA <prefix>MFREPORTSDB<suffix> AUTHORIZATION userid  
-            CREATE SCHEMA <prefix>VPNSDB<suffix> AUTHORIZATION userid  
-            
-            CREATE SCHEMA <prefix>IDCONFIGDB<suffix> AUTHORIZATION userid  
-        }
-        ```
+
+         <pre><code>{
+            CREATE SCHEMA &lt;prefix&gt;ADMINDB&lt;suffix&gt; AUTHORIZATION userid  
+            CREATE SCHEMA &lt;prefix&gt;MFCONSOLEDB&lt;suffix&gt; AUTHORIZATION userid  
+            CREATE SCHEMA &lt;prefix&gt;MFACCOUNTSDB&lt;suffix&gt; AUTHORIZATION userid  
+            CREATE SCHEMA &lt;prefix&gt;MFREPORTSDB&lt;suffix&gt; AUTHORIZATION userid  
+            CREATE SCHEMA &lt;prefix&gt;VPNSDB&lt;suffix&gt; AUTHORIZATION userid  
+            CREATE SCHEMA &lt;prefix&gt;IDCONFIGDB&lt;suffix&gt; AUTHORIZATION userid  
+        }</code></pre> 
 
     3.  Grant database level permissions to the user:
-        
-        ```
-        {    
-            GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>ADMINDB<suffix> TO userid;  
-            GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>MFCONSOLEDB<suffix TO userid;  
-            GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>MFACCOUNTSDB<suffix> TO userid;  
-            GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>MFREPORTSDB<suffix> TO userid;  
-            GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>VPNSDB<suffix> TO userid;  
-            
-            GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>IDCONFIGDB<suffix> TO userid;  
-        }
-        ```
+         
+         <pre><code>{    
+            GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA &lt;prefix&gt;ADMINDB&lt;suffix&gt; TO userid;  
+            GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA &lt;prefix&gt;MFCONSOLEDB&lt;suffix&gt; TO userid;  
+            GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA &lt;prefix&gt;MFACCOUNTSDB&lt;suffix&gt; TO userid;  
+            GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA &lt;prefix&gt;MFREPORTSDB&lt;suffix&gt; TO userid;  
+            GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA &lt;prefix&gt;VPNSDB&lt;suffix&gt; TO userid;  
+            GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA &lt;prefix&gt;IDCONFIGDB&lt;suffix&gt; TO userid;  
+         }</code></pre>
 		
     4.  Grant schema level permissions to the user:
-
-        ```
-        {
-            GRANT createtab,CONNECT,DATAACCESS,IMPLICIT\_SCHEMA,ACCESSCTRL ON database TO USER userid;
-        }
-        ```
+         
+         <pre><code>{
+         GRANT createtab,CONNECT,DATAACCESS,IMPLICIT_SCHEMA,ACCESSCTRL ON database TO USER userid;
+         }</code></pre>
     
     > **_Note:_** The loginId and password must be the same as used for Volt MX Foundry Installation.
     
-    > **_Note:_** The <prefix> and <suffix> provided must be the same across the script and must also be provided at the time of the Volt MX foundry Installation.
+    > **_Note:_** The <prefix\> and <suffix\> provided must be the same across the script and must also be provided at the time of the Volt MX foundry Installation.
     
 
 *   **Issue**
     
     After entering Database details the DB connection fails with the following error:
-    <br/>
+
     ![](Resources/Images/error_troubleshooting.png)
-    <br/>
-    <br/>
+
     **Workaround**
-    <br/>
+
     
     The password used for the Database must not contain exclamation marks (!).
     
@@ -594,7 +554,8 @@ If you want to access everything via a proxy URL, including Volt MX Foundry Cons
         
         *   `WAAS_BASE_URL=http://test.voltmx.com/workspace`
         *   `WAAS_BASE_URL=https://test.voltmx.com:8443/workspace`
-        *   `WAAS_BASE_URL=http://test.voltmx.com:8080/workspace`
+        *   `WAAS_BASE_URL=http://test.voltmx.com:8080/workspace`  
+
     2.  Following are the changes to be made in the war for each App Server:
         *   **Tomcat**: In `mfconsole.war/WEB-INF/classes`, open the `config.properties` file, and update the `VOLTMX_ACCOUNT_API_BASE_URL=<PUBLIC_URL_OF_YOUR_APACHE>/accounts/api/v1_0/` property with a public URL instead of the private URL that was generated during installation.
         *   **JBoss - Standalone (Bundled JBoss)**: In `Standalone/deployments/mfconsole.war`, open the `config.properties` file, and update the `VOLTMX_ACCOUNT_API_BASE_URL=<PUBLIC_URL_OF_YOUR_APACHE>/accounts/api/v1_0/` property with a public URL instead of the private URL that was generated during installation.
@@ -623,9 +584,11 @@ If you are installing Volt MX Foundry on Tomcat on HTTP and wants to route reque
 proxyName="<ProxyHost>" proxyPort="<ProxyPort>" scheme="https" secure="true"
 
 Example:
-```
-<Connector server="VoltMXTEST" port="8080" protocol="HTTP/1.1" proxyName="mbaastest10.hcl.net" proxyPort="443" scheme="https" secure="true" maxHttpHeaderSize="8192" maxThreads="150" enableLookups="false" acceptCount="25" disableUploadTimeout="true" tcpNoDelay="true" compression="on" compressableMimeType="text/css,text/javascript,text.html" connectionTimeout="20000" URIEncoding="UTF-8"/>
-```
+
+<pre><code>&lt;Connector server="VoltMXTEST" port="8080" protocol="HTTP/1.1" proxyName="mbaastest10.hcl.net" proxyPort="443" scheme="https" secure="true" maxHttpHeaderSize="8192" maxThreads="150" enableLookups="false" acceptCount="25" disableUploadTimeout="true" tcpNoDelay="true" compression="on" compressableMimeType="text/css,text/javascript,text.html" connectionTimeout="20000" URIEncoding="UTF-8"/&gt;
+</code></pre>
+
+<a id="encrypt"></a>
 
 How to encrypt the database password
 ------------------------------------
@@ -635,11 +598,7 @@ How to encrypt the database password
 Quantum Fabric provides a 256-bit AES/GCM/NoPadding encryption utility, which can be used to encrypt your database password. To encrypt your database password, follow these steps:
 
 1. Download and extract the installation zip file or tar file.
-2. From the extracted folder, open a terminal (console), and then execute the following command:
-
-    ```
-    java -jar EncryptionUtility.jar
-    ```
+2. From the extracted folder, open a terminal (console), and then execute the following command: `java -jar EncryptionUtility.jar`
 
 3. In the **Enter Password to be Encrypted** field, type the password that is used to access your database.
 4. In the **Enter Key to be Encrypted** field, type the key that must be used to encrypt the password.

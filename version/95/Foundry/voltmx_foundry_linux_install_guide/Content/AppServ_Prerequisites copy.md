@@ -54,13 +54,14 @@ For Oracle Java 11, configure the heap settings for your application servers. [J
 5.  Search for the `<subsystem xmlns="urn:jboss:domain:ee:4.0">` tag and add the appropriate global module based on the database selected.
     
     For example, add the following code for the domain mode:
-    
-```
-<global-modules>  
-    <module name="com.mysql" slot="main"/>  
-    </global-modules>
-```
-6.  Save the changes.
+    <pre><code>
+    &lt;global-modules&gt;  
+    &lt;module name="com.mysql" slot="main"/&gt;  
+    &lt;/global-modules&gt;
+    </code></pre> 
+
+6.  Save the changes. 
+
 7.  Start the JBoss Server.
 
 ### Configure the Standalone Existing JBoss
@@ -69,48 +70,76 @@ To install Volt MX Foundry on an existing standalone JBoss, follow the steps to 
 
 1.  Open the `standalone.xml` from the `<JBoss_Home>/standalone/configuration`.
 2.  Configure Hostname/IP in the `standalone.xml` file for JBoss, as below:
-```
-	<interfaces>
-    		<interface name="management">
-    			<inet-address value="127.0.0.1"/>
-    		</interface>
-    		<interface name="public">
-    			<inet-address value="<myHostName>"/>
-    		</interface>
-    	</interfaces>
-```
+    <pre><code>
+     &lt;interfaces&gt;
+     &lt;interface name="management"&gt;
+     &lt;inet-address value="127.0.0.1"/&gt;
+     &lt;/interface&gt;
+     &lt;interface name="public"&gt;
+     &lt;inet-address value="<myHostName>"/&gt;
+     &lt;/interface&gt;
+     &lt;/interfaces&gt;
+    </code></pre>  
 3.  Configure JBoss to listen for remote management requests as below:
     *   Add `<socket-binding name="management-native" interface="management" port="${jboss.management.native.port:9999}"/>` under the `<socket-binding-group>`
-    *   Add following section under the `\<management-interfaces\>
-    
-```
-<native-interface security-realm="ManagementRealm">  
-        <socket-binding native="management-native"/>  
-        </native-interface>
-```
+    *   Add following section under the `<management-interfaces>`
+        <pre><code>
+        &lt;native-interface security-realm="ManagementRealm"&gt;  
+        &lt;socket-binding native="management-native"/&gt;  
+        &lt;/native-interface&gt;
+        </code></pre>
+
 4.  For Engagement Services to work, remove the following subsystem:
-```
-<subsystem xmlns="urn:jboss:domain:jpa:1.1">
-    <jpa default-datasource="" default-extended-persistence-inheritance="DEEP"/>|
-    </subsystem>
-```
+    <pre><code>
+    &lt;subsystem xmlns="urn:jboss:domain:jpa:1.1"&gt;
+    &lt;jpa default-datasource="" default-extended-persistence-inheritance="DEEP"/&gt;|
+    &lt;/subsystem&gt;
+    </code></pre> 
 
 1.  In case of installing all the Volt MX Foundry components, follow these steps to increase heap size by setting the `JAVA_OPTS` in the `<JBOSS_DIR>\standalone\bin\standalone.sh/bat`:
     
-    *   standalone.bat:
-```
-set "JAVA_OPTS= -server -Xms2048m -Xmx2048m"
-```
+    *   **standalone.bat**:
+        `set "JAVA_OPTS= -server -Xms2048m -Xmx2048m"`
+
     *   **standalone.sh**:
-```
-JAVA_OPTS="-server -Xms1024M -Xmx1024M"
-```
+        `JAVA_OPTS="-server -Xms1024M -Xmx1024M"`
+
+
+<h3><a name="JBoss_DomainMode"></a>Configure the existing Domain mode JBoss</h3>
+<p>To install VoltMX Foundry on an existing domain mode JBoss, follow these steps to configure the domain mode JBoss:</p>
+<ol>
+<li>From the <code class="codefirst">&lt;JBoss_Home&gt;/domain/configuration</code> folder, open the <code class="codefirst">domain.xml</code> file.</li>
+<li>Configure Hostname/IP in the <code class="codefirst">domain.xml</code> file for JBoss, as specified in the following code snippet:<pre class="prettyprint">&lt;interfaces&gt;
+&lt;interface name="management"/&gt;
+&lt;interface name="private"&gt;
+&lt;inet-address value="${jboss.bind.address.private:127.0.0.1}"/&gt;
+&lt;/interface&gt;
+&lt;interface name="public"/&gt;
+&lt;interface name="unsecure"&gt;
+&lt;inet-address value="${jboss.bind.address.unsecure:127.0.0.1}"/&gt;
+&lt;/interface&gt;
+&lt;/interfaces&gt;
+</pre></li>
+<li>In case you are installing all the VoltMX Foundry components, you must increase the heap size by changing the values under <code class="codefirst">jvms</code> in the <code class="codefirst">host-master.xml</code> file:<pre class="prettyprint">&lt;jvms&gt;
+&lt;jvm name="default"&gt;
+&lt;heap size="2048m" max-size="2048m"/&gt;
+&lt;jvm-options&gt;
+&lt;option value="-server"/&gt;
+&lt;option value="-XX:MetaspaceSize=2048m"/&gt;
+&lt;option value="-XX:MaxMetaspaceSize=2048m"/&gt;
+&lt;/jvm-options&gt;
+&lt;/jvm&gt;
+&lt;/jvms&gt;
+</pre></li>
+</ol>
+
+
 
 ### Configure the Log Locations - JBoss
 
 To specify the log location where the logs for all Volt MX Foundry components will be generated, you must add the following parameter in the JVM arguments present in `standalone.bat/domain.bat`( for Windows) or `standalone.sh/domain.sh`(for Unix):
 
-\-Duser.home="<log location>"
+\-Duser.home="&lt;log location&gt;"
 
 ### Configure the Standalone Existing JBoss with Self-Signed Certificate (JBoss 7.1)
 
@@ -120,27 +149,24 @@ If you need to use existing JBoss with self-signed certificate, follow these ste
 2.  Copy the keystore file to `<JBoss_Home>/standalone/configuration` folder.
     
 3.  Modify the `standalone.xml` by adding the following `security-realm` in the `security-realms` section.
-```
-   <security-realm name="WebSocketRealm">
-                     <server-identities>
-                            <ssl>
-                                 <keystore path="<Keystore_file_name>" relative-to="jboss.server.config.dir" keystore password="<Keystore_password>"/>
-                         </ssl>
-                     </server-identities>
-                </security-realm>                            
+
+    <pre><code>
+    &lt;security-realm name="WebSocketRealm"&gt;
+    &lt;server-identities&gt;
+    &lt;ssl>
+    &lt;keystore path="<Keystore_file_name>" relative-to="jboss.server.config.dir" keystore password="<Keystore_password>"/&gt;
+    &lt;/ssl&gt;
+    &lt;/server-identities&gt;
+    &lt;/security-realm&gt;                     
+    </code></pre>
     
-```
-    
-Here `<Keystore_file_name>` = Name of the keystore file. (for example, `keystore.jks`)`  
+    Here `<Keystore_file_name>` = Name of the keystore file. (for example, `keystore.jks`)`  
     <Keystore_password>` = Password of keystore file.
     
 
-1.  In the standalone.xml, add the following `https-listener` tag for `default-server` in the Subsystem `urn:jboss:domain:undertow:3.1` .
-    
-```
-<https-listener name="https" max-post-size="262144000" security-realm="WebSocketRealm" socket-binding="https"/>
-    
-```
+1.  In the standalone.xml, add the following `https-listener` tag for `default-server` in the Subsystem `urn:jboss:domain:undertow:3.1`.
+
+    `<https-listener name="https" max-post-size="262144000" security-realm="WebSocketRealm" socket-binding="https"/>`
 
 ### Configure Port Settings for Multinode Loadbalancer Setups
 
