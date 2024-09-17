@@ -28,12 +28,12 @@ Following are the prerequisites to install and configure Volt Foundry Command Li
 *   MariaDB
 *   Microsoft SQL Server
 
-To find out which versions of Application Servers and Databases are supported by Volt Foundry CLI, refer to [Supported Application Servers and Databases Guide](https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmxfoundry_supported_devices_os_browsers/Content/Introduction.html).
+To find out which versions of Application Servers and Databases are supported by Volt Foundry CLI, refer to [Supported Application Servers and Databases Guide](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmxfoundry_supported_devices_os_browsers/Content/Introduction.html).
 
 ## Using the Volt Foundry Command Line Installer
 
-1.  Download the **VoltFoundryInstaller-9.x.x.x_GA.zip** file and extract it.
-2.  Modify the properties in the  `userInputs.properties`  file available in the **VoltFoundryInstaller** folder. You can also manage the advanced properties like modifying the log levels for each Foundry Component, sending Foundry usage data, and more from the  `userInputsAdvanced.properties`  file.
+1.  Download the **VoltMXFoundryInstaller.zip** file and extract it.
+2.  Modify the properties in the  `userInputs.properties`  file available in the **VoltMXFoundryInstaller** folder. You can also manage the advanced properties like modifying the log levels for each Foundry Component, sending Foundry usage data, and more from the  `userInputsAdvanced.properties`  file.
 3.  From the current location in the command line prompt, run the execute command by specifying the appropriate task. For example: `execute migrate-db`.
 
 ## Inputs in the userInputs properties file
