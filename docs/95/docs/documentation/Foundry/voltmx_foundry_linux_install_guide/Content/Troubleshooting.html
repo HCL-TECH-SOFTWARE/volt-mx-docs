@@ -379,7 +379,7 @@
     id="__nav_1_8"
     checked
   />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
 
   <div class="md-nav__link md-nav__link--index">
     <a href="../../voltmxFoundryFundamentals.html"> Foundry </a>
@@ -418,7 +418,7 @@
     id="__nav_1_8_2"
     checked
   />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
 
   <div class="md-nav__link md-nav__link--index">
     <a href="../../installing_foundry.html"> Installing Foundry </a>
@@ -481,7 +481,7 @@
     id="__nav_1_8_2_3"
     checked
   />
-                                                                                                                                    
+                                                                                                                                                   
 
   <div class="md-nav__link md-nav__link--index">
     <a href="Introduction.html"> Volt Foundry Installation Guide   - Linux </a>
@@ -520,7 +520,7 @@
     id="__nav_1_8_2_3_2"
     
   />
-                        
+                           
 
   <div class="md-nav__link md-nav__link--index">
     <a href="Prerequisites.html"> Prerequisites </a>
@@ -582,7 +582,7 @@
     id="__nav_1_8_2_3_6"
     
   />
-                                                    
+                                                       
 
   <div class="md-nav__link md-nav__link--index">
     <a href="Installing_Modes.html"> Installation Modes </a>
@@ -658,7 +658,7 @@
     id="__nav_1_8_2_3_12"
     checked
   />
-                           
+                                 
 
   <div class="md-nav__link md-nav__link--index">
     <a href="Troubleshooting.html"> FAQs and Troubleshooting </a>
@@ -781,6 +781,13 @@
    
                 
 <li class="md-nav__item">
+  <a href="Change_Log_Levels.html" class="md-nav__link">
+    Changing Log Levels
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
   <a href="ContextRoot_Overview.html" class="md-nav__link">
     Context Root-path Overview
   </a>
@@ -800,12 +807,26 @@
   </a>
 </li>
     
+                
+<li class="md-nav__item">
+  <a href="ContextPath_Iris.html" class="md-nav__link">
+    Accessing Context Based Root VoltMx Foundry Instance through VoltMx Iris
+  </a>
+</li>
+    
     </ul>
   </nav>
   
 </li>
 
    
+                
+<li class="md-nav__item">
+  <a href="Foundry_Architecture_and_Components_Old.html" class="md-nav__link">
+    Volt Foundry Architecture and Components
+  </a>
+</li>
+    
     </ul>
   </nav>
   
@@ -1349,11 +1370,19 @@
 <p>This section lists the troubleshooting tips to resolve problems that you may encounter during installation.</p>
 <ul>
 <li>
+<p><strong>Issue</strong>: After installing VoltMX Foundry on a Tomcat application server with a MySQL database, publishing of Integration Services fails with the following error: </p>
+<p><pre><code>Internal Error. Failed to check Server state - Failed to propagate Integration Services to Runtime. Status [deploy_failed]. Details - Database Migration failed with error : org.flywaydb.core.internal.exception.FlywaySqlException: Unable to obtain connection from database (jdbc:mysql://&lt;URL&gt;:&lt;Port No.&gt;) for user '&lt;user&gt;': Communications link failure The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+SQL State : 08S01 Error Code : 0 Message : Communications link failure The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server. [ Tracking id - &lt;ID&gt;]</code></pre></p>
+<p><strong>Workaround</strong>:</p>
+<p>To resolve this error, add the following -D parameter to the <code>catalina.sh</code> file: </p>
+<p><code>-DSERVER_DB_USE_SSL=false</code></p>
+</li>
+<li>
 <p><strong>Issue</strong>: If you have upgraded from Foundry V8.x or lower versions to V9 GA or higher versions, some of the services fail to work because of an internal authentication error. These services, such as the <strong>Foundry Admin Adapter</strong>, <strong>Email Adapter</strong>, and <strong>Workflow Email</strong> services, fail with the following error:</p>
-<p><code>{
+<p><pre><code>{
 returned HTTP [400], Response Body [{"details":{"message":"Could not find trust security group for given envId","errcode":0,"errmsg":"Could not find trust security group for given envId"},"httpstatus":"Bad Request","requestid":"5e36d604-09ab-4fbb-9437-42c1d828140f;98","domain":"AUTH","code":-65,"mfcode":"Auth-65","message":"Some of the input parameters provided are invalid"}]
-}</code></p>
-<p><strong>Workaround</strong></p>
+}</code></pre></p>
+<p><strong>Workaround:</strong></p>
 <p>To avoid the error, you must perform the following:</p>
 <ol>
 <li>Log in to Foundry Console which you upgraded for V9.x.</li>
@@ -1368,8 +1397,8 @@ returned HTTP [400], Response Body [{"details":{"message":"Could not find trust 
 </ol>
 </li>
 <li>
-<p><strong>Issue</strong>: While upgrading from Foundry 7.3 to Volt MX Foundry V9 and then upgrading to a version after V9, the upgrade fails due to the following error:"java.sql.SQLSyntaxErrorException: Table 'prefixidglobaldbsuffix.schema_version' doesn't exist".</p>
-<p><strong>Workaround</strong></p>
+<p><strong>Issue</strong>: While upgrading from Foundry 7.3 to Volt MX Foundry V9 and then upgrading to a version after V9, the upgrade fails due to the following error: <em>"java.sql.SQLSyntaxErrorException: Table 'prefixidglobaldbsuffix.schema_version' doesn't exist"</em>.</p>
+<p><strong>Workaround</strong>:</p>
 <p>To avoid this issue, perform the following step:</p>
 <ul>
 <li>Delete the idglobaldb schema before upgrading to the version later than V9.</li>
@@ -1378,17 +1407,16 @@ returned HTTP [400], Response Body [{"details":{"message":"Could not find trust 
 <li>
 <p><strong>Issue</strong></p>
 <p>The upgrade installation from v8.2.1.3 to v9.x rolls back.</p>
-<p>Workaround</p>
+<p><strong>Workaround</strong></p>
 <p>Before the upgrade, execute the following SQL statement from admin database:</p>
-<p>For <strong>MySQL</strong><br />
-------------<br />
-delete from <admindb>.schema_version where script = 'V62.1__voltmxadmin-mysql-8.2.0.0.sql';  </p>
-<p>For <strong>SQLServer</strong><br />
----------------<br />
-delete from <admindb>.schema_version where script = 'V62.1__voltmxadmin-sqlserver-8.2.0.0.sql';  </p>
-<p>For <strong>Oracle</strong><br />
-----------<br />
-delete from <admindb>.schema_version where script = 'V62.1__voltmxadmin-oracle-8.2.0.0.sql';  </p>
+<p><pre><code>
+For MySQL:
+ delete from &lt;admindb&gt;.schema_version where script = 'V62.1__voltmxadmin-mysql-8.2.0.0.sql';  </p>
+<p>For SQLServer:
+ delete from &lt;admindb&gt;.schema_version where script = 'V62.1__voltmxadmin-sqlserver-8.2.0.0.sql';  </p>
+<p>For Oracle:
+ delete from &lt;admindb&gt;.schema_version where script = 'V62.1__voltmxadmin-oracle-8.2.0.0.sql';  </p>
+<p></code></pre></p>
 </li>
 <li>
 <p><strong>Issue</strong></p>
@@ -1430,7 +1458,8 @@ delete from <admindb>.schema_version where script = 'V62.1__voltmxadmin-oracle-8
 <p><strong>Workaround</strong></p>
 <p>Add the following server variable in MariaDB ini file located in the MariaDB installation folder.</p>
 <p><code>table_open_cache=64</code></p>
-<p>Path for MariaDB ini file, <code>&lt;USER_INSTALL_DIR&gt;\MariaDB 10.1\data\my.ini</code></p>
+<p>Path for MariaDB ini file,</p>
+<p><code>&lt;USER_INSTALL_DIR&gt;\MariaDB 10.1\data\my.ini</code></p>
 </li>
 <li>
 <p><strong>Issue</strong></p>
@@ -1450,7 +1479,8 @@ delete from <admindb>.schema_version where script = 'V62.1__voltmxadmin-oracle-8
 <p>For trusted certification issues, refer to <a href="Post-Installation_Tasks.html#Service_Provider's_Certificate_Issues">SSL Certificate Issues</a>.</p>
 </li>
 <li>
-<p>Issue - When you publish a number of apps, the system throws the error - too many open files.</p>
+<p><strong>Issue</strong>  </p>
+<p>When you publish a number of apps, the system throws the error - too many open files.</p>
 <p>For example:</p>
 <p><strong>Workaround</strong></p>
 <p>Update some of the default kernel parameter settings in your Linux environment. For more details, refer to <a href="Pre-installation_Tasks.html#Tuning">Tuning File Descriptor Limits on Linux</a></p>
@@ -1467,10 +1497,9 @@ delete from <admindb>.schema_version where script = 'V62.1__voltmxadmin-oracle-8
 <p><strong>Workaround</strong></p>
 <p>To avoid this issue, follow these step:</p>
 <p>Remove the <code>version_rank</code> column from <code>schema_version</code> table in each schema by following queries before upgrade.</p>
-<p><code>{
-    drop index schema_version_vr_idx on master.&lt;SCHEMA_NAME&gt;.schema_version;
-    alter table master.&lt;SCHEMA_NAME&gt;.schema_version drop column version_rank;
-}</code></p>
+<p><pre><code>{drop index schema_version_vr_idx on master.&lt;SCHEMA_NAME&gt;.schema_version;
+alter table master.&lt;SCHEMA_NAME&gt;.schema_version drop column version_rank;
+}</code></pre></p>
 </li>
 <li>
 <p><strong>Issue</strong></p>
@@ -1480,70 +1509,64 @@ delete from <admindb>.schema_version where script = 'V62.1__voltmxadmin-oracle-8
 </li>
 <li>
 <p><strong>Issue</strong></p>
-<p>If you have installed Foundry 7.3 or older, and when you use the existing database for Volt MX Foundry V8 on JBoss, the Web Application publish fails. 
-<br/>
-<strong>Workaround</strong>
-<br/>
-Update the <code>management_server_port</code> in the <code>server_configuration</code> table of <code>admindb</code> with the <code>jboss.management.http.port</code> in the <code>&lt;USER_INSTALL_DIR&gt;\jboss\standalone\configuration\standalone.xml</code>.</p>
+<p>If you have installed Foundry 7.3 or older, and when you use the existing database for Volt MX Foundry V8 on JBoss, the Web Application publish fails. </p>
+<p><strong>Workaround</strong></p>
+<p>Update the <code>management_server_port</code> in the <code>server_configuration</code> table of <code>admindb</code> with the <code>jboss.management.http.port</code> in the <code>&lt;USER_INSTALL_DIR&gt;\jboss\standalone\configuration\standalone.xml</code>.</p>
 </li>
 <li>
 <p><strong>Issue</strong></p>
 <p>If you do not want to use a DB user with DBA role or Equivalent privileges for the Volt MX Foundry installation on ORACLE database, follow these steps:</p>
-<p><br/></p>
 <p><strong>Workaround</strong></p>
-<p><br/></p>
 <p>Manual Steps:</p>
 <ol>
 <li>
 <p>Create Component Users (schema) with the required grants as below.</p>
-<p>```
-{
-CREATE USER <prefix>MFCONSOLEDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;</p>
-<p>ALTER USER <prefix>MFCONSOLEDB<suffix> QUOTA UNLIMITED ON USERS;</p>
-<p>GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>MFCONSOLEDB<suffix>;</p>
-<p>GRANT CREATE JOB TO <prefix>MFCONSOLEDB<suffix>;</p>
-<p>GRANT MANAGE SCHEDULER TO <prefix>MFCONSOLEDB<suffix>;</p>
-<p>CREATE USER <prefix>MFACCOUNTSDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;</p>
-<p>ALTER USER <prefix>MFACCOUNTSDB<suffix> QUOTA UNLIMITED ON USERS;</p>
-<p>GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>MFACCOUNTSDB<suffix>;</p>
-<p>GRANT CREATE JOB TO <prefix>MFACCOUNTSDB<suffix>;</p>
-<p>GRANT MANAGE SCHEDULER TO <prefix>MFACCOUNTSDB<suffix>;</p>
-<p>CREATE USER <prefix>MFREPORTSDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;</p>
-<p>ALTER USER <prefix>MFREPORTSDB<suffix> QUOTA UNLIMITED ON USERS;</p>
-<p>GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>MFREPORTSDB<suffix>;</p>
-<p>GRANT CREATE JOB TO <prefix>MFREPORTSDB<suffix>;</p>
-<p>GRANT MANAGE SCHEDULER TO <prefix>MFREPORTSDB<suffix>;</p>
-<p>CREATE USER <prefix>IDCONFIGDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;</p>
-<p>ALTER USER <prefix>IDCONFIGDB<suffix> QUOTA UNLIMITED ON USERS;</p>
-<p>GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>IDCONFIGDB<suffix>;</p>
-<p>GRANT CREATE JOB TO <prefix>IDCONFIGDB<suffix>;</p>
-<p>GRANT MANAGE SCHEDULER TO <prefix>IDCONFIGDB<suffix>;</p>
-<p>GRANT CREATE TABLE TO <prefix>IDCONFIGDB<suffix>;</p>
-<p>GRANT CREATE ANY INDEX TO <prefix>IDCONFIGDB<suffix>;</p>
-<p>GRANT ALTER ANY TABLE TO <prefix>IDCONFIGDB<suffix>;</p>
-<p>CREATE USER <prefix>ADMINDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;</p>
-<p>ALTER USER <prefix>ADMINDB<suffix> QUOTA UNLIMITED ON USERS;</p>
-<p>GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>ADMINDB<suffix>;</p>
-<p>GRANT CREATE JOB TO <prefix>ADMINDB<suffix>;</p>
-<p>GRANT MANAGE SCHEDULER TO <prefix>ADMINDB<suffix>;</p>
-<p>CREATE USER <prefix>VPNSDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;</p>
-<p>ALTER USER <prefix>VPNSDB<suffix> QUOTA UNLIMITED ON USERS;</p>
-<p>GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>VPNSDB<suffix>;</p>
-<p>GRANT CREATE JOB TO <prefix>VPNSDB<suffix>;</p>
-<p>GRANT MANAGE SCHEDULER TO <prefix>VPNSDB<suffix>;</p>
-<p>}
-```</p>
+<p><pre><code>{
+CREATE USER &lt;prefix&gt;MFCONSOLEDB&lt;suffix&gt; identified by &lt;password&gt; default tablespace &lt;dataTablespace&gt; profile default;
+ALTER USER &lt;prefix&gt;MFCONSOLEDB&lt;suffix&gt; QUOTA UNLIMITED ON USERS;
+GRANT CONNECT,RESOURCE,CREATE VIEW TO &lt;prefix&gt;MFCONSOLEDB&lt;suffix&gt;;
+GRANT CREATE JOB TO &lt;prefix&gt;MFCONSOLEDB&lt;suffix&gt;;
+GRANT MANAGE SCHEDULER TO &lt;prefix&gt;MFCONSOLEDB&lt;suffix&gt;;
+CREATE USER &lt;prefix&gt;MFACCOUNTSDB&lt;suffix&gt; identified by &lt;password&gt; default tablespace &lt;dataTablespace&gt; profile default;
+ALTER USER &lt;prefix&gt;MFACCOUNTSDB&lt;suffix&gt; QUOTA UNLIMITED ON USERS;
+GRANT CONNECT,RESOURCE,CREATE VIEW TO &lt;prefix&gt;MFACCOUNTSDB&lt;suffix&gt;;
+GRANT CREATE JOB TO &lt;prefix&gt;MFACCOUNTSDB&lt;suffix&gt;;
+GRANT MANAGE SCHEDULER TO &lt;prefix&gt;MFACCOUNTSDB&lt;suffix&gt;</code></pre></p>
+<p><pre><code>CREATE USER &lt;prefix&gt;MFREPORTSDB&lt;suffix&gt; identified by &lt;password&gt; default tablespace &lt;dataTablespace&gt; profile default;
+ALTER USER &lt;prefix&gt;MFREPORTSDB&lt;suffix&gt; QUOTA UNLIMITED ON USERS;
+GRANT CONNECT,RESOURCE,CREATE VIEW TO &lt;prefix&gt;MFREPORTSDB&lt;suffix&gt;;
+GRANT CREATE JOB TO &lt;prefix&gt;MFREPORTSDB&lt;suffix&gt;;
+GRANT MANAGE SCHEDULER TO &lt;prefix&gt;MFREPORTSDB&lt;suffix&gt;;</code></pre>  </p>
+<p><pre><code>CREATE USER &lt;prefix&gt;IDCONFIGDB&lt;suffix&gt; identified by &lt;password&gt; default tablespace &lt;dataTablespace&gt; profile default;
+ALTER USER &lt;prefix&gt;IDCONFIGDB&lt;suffix&gt; QUOTA UNLIMITED ON USERS;
+GRANT CONNECT,RESOURCE,CREATE VIEW TO &lt;prefix&gt;IDCONFIGDB&lt;suffix&gt;;
+GRANT CREATE JOB TO &lt;prefix&gt;IDCONFIGDB&lt;suffix&gt;;
+GRANT MANAGE SCHEDULER TO &lt;prefix&gt;IDCONFIGDB&lt;suffix&gt;;
+GRANT CREATE TABLE TO &lt;prefix&gt;IDCONFIGDB&lt;suffix&gt;;
+GRANT CREATE ANY INDEX TO &lt;prefix&gt;IDCONFIGDB&lt;suffix&gt;;
+GRANT ALTER ANY TABLE TO &lt;prefix&gt;IDCONFIGDB&lt;suffix&gt;;</code></pre>  </p>
+<p><pre><code>CREATE USER &lt;prefix&gt;ADMINDB&lt;suffix&gt; identified by &lt;password&gt; default tablespace &lt;dataTablespace&gt; profile default;
+ALTER USER &lt;prefix&gt;ADMINDB&lt;suffix&gt; QUOTA UNLIMITED ON USERS;
+GRANT CONNECT,RESOURCE,CREATE VIEW TO &lt;prefix&gt;ADMINDB&lt;suffix&gt;;
+GRANT CREATE JOB TO &lt;prefix&gt;ADMINDB&lt;suffix&gt;;
+GRANT MANAGE SCHEDULER TO &lt;prefix&gt;ADMINDB&lt;suffix&gt;;</code></pre>  </p>
+<p><pre><code>CREATE USER &lt;prefix&gt;VPNSDB&lt;suffix&gt; identified by &lt;password&gt; default tablespace &lt;dataTablespace&gt; profile default;
+ALTER USER &lt;prefix&gt;VPNSDB&lt;suffix&gt; QUOTA UNLIMITED ON USERS;
+GRANT CONNECT,RESOURCE,CREATE VIEW TO &lt;prefix&gt;VPNSDB&lt;suffix&gt;;
+GRANT CREATE JOB TO &lt;prefix&gt;VPNSDB&lt;suffix&gt;;
+GRANT MANAGE SCHEDULER TO &lt;prefix&gt;VPNSDB&lt;suffix&gt;; 
+}</code></pre></p>
 </li>
 <li>
 <p>Create a non DBA user with the below grants. This user will be given to the Installer.</p>
-<p><code>{
-CREATE USER &lt;INSTALLER\_USER&gt; IDENTIFIED BY &lt;password&gt;;
-GRANT CREATE SESSION TO &lt;INSTALLER\_USER&gt; WITH ADMIN OPTION;
-GRANT SELECT ANY DICTIONARY TO &lt;INSTALLER\_USER&gt;;
-ALTER USER &lt;INSTALLER\_USER&gt; QUOTA UNLIMITED ON &lt;dataTablespace&gt;;
-ALTER USER &lt;INSTALLER\_USER&gt; QUOTA UNLIMITED ON &lt;indexTablespace&gt;;
-ALTER USER &lt;INSTALLER\_USER&gt; QUOTA UNLIMITED ON &lt;lobTablespace&gt;;
-}</code></p>
+<p><pre><code>{
+CREATE USER &lt;INSTALLER_USER&gt; IDENTIFIED BY &lt;password&gt;;
+GRANT CREATE SESSION TO &lt;INSTALLER_USER&gt; WITH ADMIN OPTION;
+GRANT SELECT ANY DICTIONARY TO &lt;INSTALLER_USER&gt;;
+ALTER USER &lt;INSTALLER_USER&gt; QUOTA UNLIMITED ON &lt;dataTablespace&gt;;
+ALTER USER &lt;INSTALLER_USER&gt; QUOTA UNLIMITED ON &lt;indexTablespace&gt;;
+ALTER USER &lt;INSTALLER_USER&gt; QUOTA UNLIMITED ON &lt;dataTablespace&gt;;
+}</code></pre></p>
 </li>
 </ol>
 <blockquote>
@@ -1555,28 +1578,25 @@ ALTER USER &lt;INSTALLER\_USER&gt; QUOTA UNLIMITED ON &lt;lobTablespace&gt;;
 <p>For storage services to work, change the following storagedb entries in the admindb.</p>
 <p><strong>Workaround</strong></p>
 <p>Manual Steps:</p>
-<p>```
-{  <br />
-    storage_database_type - oracle<br />
-    storage_database_hostname - Database hostname/IP<br />
-    storage_database_port - Database Port<br />
-    storage_database_username - DBA username<br />
-    storage_database_password - DBA Password<br />
-    storage_database_instance - service ID/service name<br />
-    storage_data_tablespace - Data Tablespace name<br />
-    storage_index_tablespace - Index Tablespace name<br />
-    storage_lob_tablespace - Lob Tablespace name
-}
-````</p>
+<p><pre><code>{ 
+storage_database_type - oracle<br />
+storage_database_hostname - Database hostname/IP<br />
+storage_database_port - Database Port<br />
+storage_database_username - DBA username<br />
+storage_database_password - DBA Password<br />
+storage_database_instance - service ID/service name<br />
+storage_data_tablespace - Data Tablespace name<br />
+storage_index_tablespace - Index Tablespace name<br />
+storage_lob_tablespace - Lob Tablespace name
+}</code></pre></p>
 </li>
 <li>
 <p><strong>Issue</strong></p>
 <p>If you do not want to use a DB user with DBA role or Equivalent privileges for the Volt MX Foundry installation on MSSQL, follow these steps:</p>
-<p><br/></p>
 <p><strong>Workaround</strong></p>
-<p><br/></p>
 <p>Manual Steps:</p>
-<p><code>Create database &lt;prefix&gt;mfreportsdb&lt;suffix&gt;;
+<p><pre><code> 
+Create database &lt;prefix&gt;mfreportsdb&lt;suffix&gt;;
 Create database &lt;prefix&gt;mfaccountsdb&lt;suffix&gt;;
 Create database &lt;prefix&gt;mfconsoledb&lt;suffix&gt;;
 Create database &lt;prefix&gt;admindb&lt;suffix&gt;;
@@ -1588,9 +1608,9 @@ use msdb
 GO
 create user userId from LOGIN loginId;
 GO
-EXEC sp\_addrolemember 'SQLAgentUserRole', 'userId'
-EXEC sp\_addrolemember 'SQLAgentReaderRole', 'userId'
-EXEC sp\_addrolemember 'SQLAgentOperatorRole', 'userId'
+EXEC sp_addrolemember 'SQLAgentUserRole', 'userId'
+EXEC sp_addrolemember 'SQLAgentReaderRole', 'userId'
+EXEC sp_addrolemember 'SQLAgentOperatorRole', 'userId'
 GO
 use &lt;prefix&gt;mfreportsdbAN&lt;suffix&gt;
 GO
@@ -1635,11 +1655,11 @@ GO
 create user userId from LOGIN loginId;
 GO
 GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId
-GO</code></p>
+GO</code></pre></p>
 <blockquote>
 <p><strong><em>Note:</em></strong> The whole script must be run at once.</p>
 <p><strong><em>Note:</em></strong> The loginId and password must be the same as used for Volt MX Foundry Installation.</p>
-<p><strong><em>Note:</em></strong> The <prefix> and <suffix> provided must be the same across the script and must also be provided at the time of the Volt MX foundry Installation.</p>
+<p><strong><em>Note:</em></strong> The &lt;prefix> and &lt;suffix> provided must be the same across the script and must also be provided at the time of the Volt MX foundry Installation.</p>
 <p><strong><em>Note:</em></strong> You can use the same loginId and userId to avoid confusion.</p>
 <p><strong><em>Note:</em></strong> The userId must be same across the script.</p>
 </blockquote>
@@ -1662,54 +1682,43 @@ GO</code></p>
 </ol>
 </li>
 </ul>
-<p>```
-{</p>
-<pre><code>CREATE SCHEMA &lt;prefix&gt;ADMINDB&lt;suffix&gt; AUTHORIZATION userid  
-CREATE SCHEMA &lt;prefix&gt;MFCONSOLEDB&lt;suffix&gt; AUTHORIZATION userid  
-CREATE SCHEMA &lt;prefix&gt;MFACCOUNTSDB&lt;suffix&gt; AUTHORIZATION userid  
-CREATE SCHEMA &lt;prefix&gt;MFREPORTSDB&lt;suffix&gt; AUTHORIZATION userid  
-CREATE SCHEMA &lt;prefix&gt;VPNSDB&lt;suffix&gt; AUTHORIZATION userid
-
-CREATE SCHEMA &lt;prefix&gt;IDCONFIGDB&lt;suffix&gt; AUTHORIZATION userid
-</code></pre>
-<p>}
-```</p>
+<p><pre><code>{
+    CREATE SCHEMA &lt;prefix&gt;ADMINDB&lt;suffix&gt; AUTHORIZATION userid<br />
+    CREATE SCHEMA &lt;prefix&gt;MFCONSOLEDB&lt;suffix&gt; AUTHORIZATION userid<br />
+    CREATE SCHEMA &lt;prefix&gt;MFACCOUNTSDB&lt;suffix&gt; AUTHORIZATION userid<br />
+    CREATE SCHEMA &lt;prefix&gt;MFREPORTSDB&lt;suffix&gt; AUTHORIZATION userid<br />
+    CREATE SCHEMA &lt;prefix&gt;VPNSDB&lt;suffix&gt; AUTHORIZATION userid<br />
+    CREATE SCHEMA &lt;prefix&gt;IDCONFIGDB&lt;suffix&gt; AUTHORIZATION userid<br />
+}</code></pre> </p>
 </li>
 <li>
 <p>Grant database level permissions to the user:</p>
-<p>```
-{  <br />
-    GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>ADMINDB<suffix> TO userid;<br />
-    GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>MFCONSOLEDB&lt;suffix TO userid;<br />
-    GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>MFACCOUNTSDB<suffix> TO userid;<br />
-    GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>MFREPORTSDB<suffix> TO userid;<br />
-    GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA <prefix>VPNSDB<suffix> TO userid;  </p>
-<pre><code>GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA &lt;prefix&gt;IDCONFIGDB&lt;suffix&gt; TO userid;
-</code></pre>
-<p>}
-```</p>
+<p><pre><code>{  <br />
+    GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA &lt;prefix&gt;ADMINDB&lt;suffix&gt; TO userid;<br />
+    GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA &lt;prefix&gt;MFCONSOLEDB&lt;suffix&gt; TO userid;<br />
+    GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA &lt;prefix&gt;MFACCOUNTSDB&lt;suffix&gt; TO userid;<br />
+    GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA &lt;prefix&gt;MFREPORTSDB&lt;suffix&gt; TO userid;<br />
+    GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA &lt;prefix&gt;VPNSDB&lt;suffix&gt; TO userid;<br />
+    GRANT CREATEIN,ALTERIN,DROPIN ON SCHEMA &lt;prefix&gt;IDCONFIGDB&lt;suffix&gt; TO userid;<br />
+ }</code></pre></p>
 </li>
 <li>
 <p>Grant schema level permissions to the user:</p>
-<p><code>{
-    GRANT createtab,CONNECT,DATAACCESS,IMPLICIT\_SCHEMA,ACCESSCTRL ON database TO USER userid;
-}</code></p>
+<p><pre><code>{
+ GRANT createtab,CONNECT,DATAACCESS,IMPLICIT_SCHEMA,ACCESSCTRL ON database TO USER userid;
+ }</code></pre></p>
 </li>
 </ol>
 <blockquote>
 <p><strong><em>Note:</em></strong> The loginId and password must be the same as used for Volt MX Foundry Installation.</p>
-<p><strong><em>Note:</em></strong> The <prefix> and <suffix> provided must be the same across the script and must also be provided at the time of the Volt MX foundry Installation.</p>
+<p><strong><em>Note:</em></strong> The &lt;prefix> and &lt;suffix> provided must be the same across the script and must also be provided at the time of the Volt MX foundry Installation.</p>
 </blockquote>
 </li>
 <li>
 <p><strong>Issue</strong></p>
-<p>After entering Database details the DB connection fails with the following error:
-<br/>
-<img alt="" src="Resources/Images/error_troubleshooting.png" />
-<br/>
-<br/>
-<strong>Workaround</strong>
-<br/></p>
+<p>After entering Database details the DB connection fails with the following error:</p>
+<p><img alt="" src="Resources/Images/error_troubleshooting.png" /></p>
+<p><strong>Workaround</strong></p>
 <p>The password used for the Database must not contain exclamation marks (!).</p>
 </li>
 <li>
@@ -1830,10 +1839,12 @@ To add custom jar to middleware.war after installation, follow these steps:
 <ul>
 <li><code>WAAS_BASE_URL=http://test.voltmx.com/workspace</code></li>
 <li><code>WAAS_BASE_URL=https://test.voltmx.com:8443/workspace</code></li>
-<li><code>WAAS_BASE_URL=http://test.voltmx.com:8080/workspace</code><ol>
-<li>Following are the changes to be made in the war for each App Server:</li>
-</ol>
+<li><code>WAAS_BASE_URL=http://test.voltmx.com:8080/workspace</code>  </li>
+</ul>
 </li>
+<li>
+<p>Following are the changes to be made in the war for each App Server:</p>
+<ul>
 <li><strong>Tomcat</strong>: In <code>mfconsole.war/WEB-INF/classes</code>, open the <code>config.properties</code> file, and update the <code>VOLTMX_ACCOUNT_API_BASE_URL=&lt;PUBLIC_URL_OF_YOUR_APACHE&gt;/accounts/api/v1_0/</code> property with a public URL instead of the private URL that was generated during installation.</li>
 <li><strong>JBoss - Standalone (Bundled JBoss)</strong>: In <code>Standalone/deployments/mfconsole.war</code>, open the <code>config.properties</code> file, and update the <code>VOLTMX_ACCOUNT_API_BASE_URL=&lt;PUBLIC_URL_OF_YOUR_APACHE&gt;/accounts/api/v1_0/</code> property with a public URL instead of the private URL that was generated during installation.</li>
 <li><strong>JBoss - Pre-configured and Domain mode</strong>: Take a backup of the existing war. Undeploy <code>mfconsole.war</code>. In <code>mfconsole.war/WEB-INF/classes</code>, open the <code>config.properties</code> file, update the <code>VOLTMX_ACCOUNT_API_BASE_URL=&lt;PUBLIC_URL_OF_YOUR_APACHE&gt;/accounts/api/v1_0/</code> property with a public URL instead of the private URL that was generated during installation, and re-deploy the war file.</li>
@@ -1860,8 +1871,10 @@ To add custom jar to middleware.war after installation, follow these steps:
 <p>If you are installing Volt MX Foundry on Tomcat on HTTP and wants to route requests via HTTPS apache or loadbalancer, add a connector in the <code>tomcat/server.xml</code> with the following attributes:</p>
 <p>proxyName="<ProxyHost>" proxyPort="<ProxyPort>" scheme="https" secure="true"</p>
 <p>Example:</p>
-<pre><code>&lt;Connector server=&quot;VoltMXTEST&quot; port=&quot;8080&quot; protocol=&quot;HTTP/1.1&quot; proxyName=&quot;mbaastest10.hcl.net&quot; proxyPort=&quot;443&quot; scheme=&quot;https&quot; secure=&quot;true&quot; maxHttpHeaderSize=&quot;8192&quot; maxThreads=&quot;150&quot; enableLookups=&quot;false&quot; acceptCount=&quot;25&quot; disableUploadTimeout=&quot;true&quot; tcpNoDelay=&quot;true&quot; compression=&quot;on&quot; compressableMimeType=&quot;text/css,text/javascript,text.html&quot; connectionTimeout=&quot;20000&quot; URIEncoding=&quot;UTF-8&quot;/&gt;
+<pre><code>&lt;Connector server="VoltMXTEST" port="8080" protocol="HTTP/1.1" proxyName="mbaastest10.hcl.net" proxyPort="443" scheme="https" secure="true" maxHttpHeaderSize="8192" maxThreads="150" enableLookups="false" acceptCount="25" disableUploadTimeout="true" tcpNoDelay="true" compression="on" compressableMimeType="text/css,text/javascript,text.html" connectionTimeout="20000" URIEncoding="UTF-8"/&gt;
 </code></pre>
+
+<p><a id="encrypt"></a></p>
 <h2 id="how-to-encrypt-the-database-password">How to encrypt the database password</h2>
 <blockquote>
 <p><strong>IMPORTANT:</strong> Encryption is only supported for Tomcat application servers.</p>
@@ -1870,8 +1883,7 @@ To add custom jar to middleware.war after installation, follow these steps:
 <ol>
 <li>Download and extract the installation zip file or tar file.</li>
 <li>
-<p>From the extracted folder, open a terminal (console), and then execute the following command:</p>
-<p><code>java -jar EncryptionUtility.jar</code></p>
+<p>From the extracted folder, open a terminal (console), and then execute the following command: <code>java -jar EncryptionUtility.jar</code></p>
 </li>
 <li>
 <p>In the <strong>Enter Password to be Encrypted</strong> field, type the password that is used to access your database.</p>

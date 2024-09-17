@@ -379,7 +379,7 @@
     id="__nav_1_8"
     checked
   />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
 
   <div class="md-nav__link md-nav__link--index">
     <a href="../../voltmxFoundryFundamentals.html"> Foundry </a>
@@ -418,7 +418,7 @@
     id="__nav_1_8_2"
     checked
   />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
 
   <div class="md-nav__link md-nav__link--index">
     <a href="../../installing_foundry.html"> Installing Foundry </a>
@@ -481,7 +481,7 @@
     id="__nav_1_8_2_3"
     checked
   />
-                                                                                                                                    
+                                                                                                                                                   
 
   <div class="md-nav__link md-nav__link--index">
     <a href="Introduction.html"> Volt Foundry Installation Guide   - Linux </a>
@@ -520,7 +520,7 @@
     id="__nav_1_8_2_3_2"
     checked
   />
-                        
+                           
 
   <div class="md-nav__link md-nav__link--index">
     <a href="Prerequisites.html"> Prerequisites </a>
@@ -670,8 +670,15 @@
    
                 
 <li class="md-nav__item">
-  <a href="AppServ_Prerequisites.html" class="md-nav__link">
+  <a href="AppServ_Prerequisites.md" class="md-nav__link">
     Application Servers Prerequisites
+  </a>
+</li>
+    
+                
+<li class="md-nav__item">
+  <a href="Appser_Pre-installation_Tasks.html" class="md-nav__link">
+    Pre-Installation Tasks
   </a>
 </li>
     
@@ -730,7 +737,7 @@
     id="__nav_1_8_2_3_6"
     
   />
-                                                    
+                                                       
 
   <div class="md-nav__link md-nav__link--index">
     <a href="Installing_Modes.html"> Installation Modes </a>
@@ -806,7 +813,7 @@
     id="__nav_1_8_2_3_12"
     
   />
-                           
+                                 
 
   <div class="md-nav__link md-nav__link--index">
     <a href="Troubleshooting.html"> FAQs and Troubleshooting </a>
@@ -819,6 +826,13 @@
 </li>
 
    
+                
+<li class="md-nav__item">
+  <a href="Foundry_Architecture_and_Components_Old.html" class="md-nav__link">
+    Volt Foundry Architecture and Components
+  </a>
+</li>
+    
     </ul>
   </nav>
   
@@ -1459,9 +1473,11 @@ After granting privileges, disconnect existing session, and use new session in o
 <ul>
 <li>
 <p>If Oracle database is created with PDB option of Oracle 12c, use service name pointing to PDB in the JDBC URL such as <code>pdborcl</code> or <code>pdbmfdb</code>
-    <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
+    <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">
+    {
         jdbc:oracle:thin:@<Database_Host_IP>:1521/pdbmfdb 
-    }</code></pre></figure></p>
+    }
+    </code></pre></figure></p>
 <p>For example: jdbc:oracle:thin:@192.168.1.2:1521/pdbmfdb</p>
 </li>
 </ul>
@@ -1491,21 +1507,26 @@ After granting privileges, disconnect existing session, and use new session in o
 <h4 id="mysql-80-is-mandatory-for-foundry-v9515-or-above">MySQL 8.0 is mandatory for Foundry V9.5.15 or above</h4>
 <h4 id="mysql-configuration-mandated-for-foundry-9515-or-greater">MySQL configuration mandated for Foundry 9.5.15 or greater :</h4>
 <p>To support MySQL utf8mb4 charsets and collation, update the MySQL configuration file of MySQL 8.0 by adding following changes under [client], [mysql] and [mysqld] section and restart the MySQL server.</p>
-<pre><code>1. Ensure that you modify the my.cnf or my.ini with the following parameters: 
-
-
-    [client]
-    default-character-set = utf8mb4
-    [mysql]
-    default-character-set = utf8mb4
-    [mysqld]
-    character-set-client-handshake = FALSE
-    character-set-server=utf8mb4
-    collation-server=&quot;utf8mb4_unicode_ci&quot;
-
-2. Next, restart the MySQL service and run the following query to verify the details:
-
-    mysql&gt; show variables like 'collation%';
+<ol>
+<li>
+<p>Ensure that you modify the my.cnf or my.ini with the following parameters: </p>
+<p><pre><code>
+[client]
+default-character-set = utf8mb4
+[mysql]
+default-character-set = utf8mb4
+[mysqld]
+character-set-client-handshake = FALSE
+character-set-server=utf8mb4
+collation-server="utf8mb4_unicode_ci"
+</code></pre></p>
+</li>
+<li>
+<p>Next, restart the MySQL service and run the following query to verify the details:</p>
+</li>
+</ol>
+<pre><code> 
+    mysql> show variables like 'collation%';
     +----------------------+--------------------+
     | Variable_name        | Value              |
     +----------------------+--------------------+
@@ -1513,10 +1534,9 @@ After granting privileges, disconnect existing session, and use new session in o
     | collation_database   | utf8mb4_unicode_ci |
     | collation_server     | utf8mb4_unicode_ci |
     +----------------------+--------------------+
+   3 rows in set (0.00 sec)
 
-3. rows in set (0.00 sec)
-   mysql&gt; show variables like 'character%';
-
+   mysql> show variables like 'character%';
     +--------------------------+---------------------------------------------------------+
     | Variable_name            | Value                                                   |
     +--------------------------+---------------------------------------------------------+
@@ -1530,48 +1550,51 @@ After granting privileges, disconnect existing session, and use new session in o
     | character_sets_dir       | C:\Program Files\MySQL\MySQL Server 8.0\share\charsets\ |
     +--------------------------+---------------------------------------------------------+
     8 rows in set (0.00 sec)
-</code></pre>
+    </code></pre>
+
 <h4 id="applicable-for-engagement-services-for-foundry-version-earlier-than-9515">Applicable for Engagement Services for Foundry version earlier than 9.5.15</h4>
 <ol>
-<li>Create the database needed for Engagement Services with unicode character set as UTF8. Also ensure that you modify the <code>my.cnf</code> or <code>my.ini</code> with the following parameters:</li>
+<li>
+<p>Create the database needed for Engagement Services with unicode character set as UTF8. Also ensure that you modify the <code>my.cnf</code> or <code>my.ini</code> with the following parameters:</p>
+<p><pre><code>
+[client]<br />
+default-character-set = utf8<br />
+[mysql]<br />
+default-character-set = utf8<br />
+[mysqld]|<br />
+character-set-client-handshake = FALSE<br />
+collation_server='utf8_unicode_ci'<br />
+character_set_server='utf8'
+</code></pre></p>
+</li>
+<li>
+<p>Next, restart the MySQL service and run the following query to verify the details:</p>
+<p><pre><code>
+ mysql&gt; show variables like '%coll%';<br />
++----------------------+--------------------+
+| Variable_name        | Value              |
++----------------------+--------------------+
+| collation_connection | utf8_unicode_ci    |
+| collation_database   | utf8_unicode_ci    |
+| collation_server     | utf8_unicode_ci    |
++----------------------+--------------------+
+3 rows in set (0.00 sec)<br />
+mysql&gt; show variables like '%char%'; <br />
++--------------------------+------------------------------------------------------+
+| Variable_name            | Value                                                |
++--------------------------+------------------------------------------------------+
+| character_set_client     | utf8                                                 |
+| character_set_connection | utf8                                                 |
+| character_set_database   | utf8                                                 |
+| character_set_filesystem | binary                                               |
+| character_set_results    | utf8                                                 |
+| character_set_server     | utf8                                                 |
+| character_set_system     | utf8                                                 |
+| character_sets_dir       | /usr/share/mysql/charsets/                           |
++--------------------------+------------------------------------------------------+
+</code></pre>  </p>
+</li>
 </ol>
-<pre><code>
-    \[client\]  
-    default-character-set = utf8  
-    \[mysql\]  
-    default-character-set = utf8  
-    \[mysqld\]|  
-    character-set-client-handshake = FALSE  
-    collation\_server='utf8\_unicode\_ci'  
-    character\_set\_server='utf8'  
-</code></pre>
-<ol>
-<li>Next, restart the MySQL service and run the following query to verify the details:</li>
-</ol>
-<pre><code>
-    mysql&gt; show variables like '%coll%';  
-    +----------------------+-----------------+  
-    | Variable\_name | Value |  
-    +----------------------+-----------------+  
-    | collation\_connection | utf8\_unicode\_ci |  
-    | collation\_database | utf8\_unicode\_ci |  
-    | collation\_server | utf8\_unicode\_ci |  
-    +----------------------+-----------------+  
-    3 rows in set (0.00 sec)  
-    mysql&gt; show variables like '%char%';  
-    +--------------------------+----------------------------+  
-    | Variable\_name | Value |  
-    +--------------------------+----------------------------+  
-    | character\_set\_client | utf8 |  
-    | character\_set\_connection | utf8 |  
-    | character\_set\_database | utf8 |  
-    | character\_set\_filesystem | binary |  
-    | character\_set\_results | utf8 |  
-    | character\_set\_server | utf8 |  
-    | character\_set\_system | utf8 |  
-    | character\_sets\_dir | /usr/share/mysql/charsets/ |  
-    +--------------------------+----------------------------+
-</code></pre>
 <h3 id="applicable-for-identity-services">Applicable for Identity Services</h3>
 <p>If you are using any lower versions of MySQL 5.7 such as v5.7.12 or lower during installation, you may encounter an error due to which the installation rolls back. This error occurs due to a bug in the MySQL database.  </p>
 <p>For more information, refer <a href="https://bugs.mysql.com/bug.php?id=79286">MySQL Bugs</a></p>
