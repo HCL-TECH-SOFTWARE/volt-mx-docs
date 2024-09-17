@@ -1,6 +1,6 @@
                            
 
-You are here: Software Requirements
+You are here: Software Requirements 
 
 Prerequisites
 =============
@@ -81,9 +81,9 @@ To create a user, follow these steps:
     
 2.  Run the following commands:
     
-    `\# adduser core`  
+    `# adduser core`  
       
-    `\# passwd core`
+    `# passwd core`
     
 *   [Database Prerequisites](DB_PRe-reqs.md)
 *   [Application Servers Prerequisites](AppServ_Prerequisites.md)

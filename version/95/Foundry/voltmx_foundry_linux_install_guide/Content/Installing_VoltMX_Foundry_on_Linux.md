@@ -12,7 +12,7 @@ This section of the document provides you with the instructions for installing a
 
 > **_Important:_** Make sure you have proper administrative rights to install Volt MX Foundry on your computer. You also need a user where Volt MX Foundry will be installed.
 
-The **<Install Location>** directory contains the log files logging each invocation of the installer. To make problem identification easier, provide these log files to Volt MX when reporting an issue.
+The **&lt;Install Location&gt;** directory contains the log files logging each invocation of the installer. To make problem identification easier, provide these log files to Volt MX when reporting an issue.
 
 You can install Volt MX Foundry on Tomcat, JBoss and Websphere liberty servers.
 

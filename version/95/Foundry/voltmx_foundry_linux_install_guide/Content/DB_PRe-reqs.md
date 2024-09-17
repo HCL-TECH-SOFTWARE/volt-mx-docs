@@ -68,9 +68,11 @@ After granting privileges, disconnect existing session, and use new session in o
 ```
 *   If you are using VoltMX Foundry installer to setup VoltMX Foundry database, then please choose the below options based on your Oracle database version.
     *   If Oracle database is created with PDB option of Oracle 12c, use service name pointing to PDB in the JDBC URL such as `pdborcl` or `pdbmfdb`
-        <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
+        <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">
+        {
             jdbc:oracle:thin:@<Database_Host_IP>:1521/pdbmfdb 
-        }</code></pre></figure>
+        }
+        </code></pre></figure>
 
         For example: jdbc:oracle:thin:@192.168.1.2:1521/pdbmfdb
         
@@ -109,10 +111,10 @@ Prerequisites for Volt MX Foundry with MySQL
 
 To support MySQL utf8mb4 charsets and collation, update the MySQL configuration file of MySQL 8.0 by adding following changes under [client], [mysql] and [mysqld] section and restart the MySQL server.
 
-```
+
 1. Ensure that you modify the my.cnf or my.ini with the following parameters: 
 
-
+    <pre><code>
     [client]
     default-character-set = utf8mb4
     [mysql]
@@ -121,9 +123,11 @@ To support MySQL utf8mb4 charsets and collation, update the MySQL configuration 
     character-set-client-handshake = FALSE
     character-set-server=utf8mb4
     collation-server="utf8mb4_unicode_ci"
+    </code></pre>
 
 2. Next, restart the MySQL service and run the following query to verify the details:
 
+   <pre><code> 
     mysql> show variables like 'collation%';
     +----------------------+--------------------+
     | Variable_name        | Value              |
@@ -132,10 +136,9 @@ To support MySQL utf8mb4 charsets and collation, update the MySQL configuration 
     | collation_database   | utf8mb4_unicode_ci |
     | collation_server     | utf8mb4_unicode_ci |
     +----------------------+--------------------+
+   3 rows in set (0.00 sec)
 
-3. rows in set (0.00 sec)
    mysql> show variables like 'character%';
-
     +--------------------------+---------------------------------------------------------+
     | Variable_name            | Value                                                   |
     +--------------------------+---------------------------------------------------------+
@@ -149,49 +152,51 @@ To support MySQL utf8mb4 charsets and collation, update the MySQL configuration 
     | character_sets_dir       | C:\Program Files\MySQL\MySQL Server 8.0\share\charsets\ |
     +--------------------------+---------------------------------------------------------+
     8 rows in set (0.00 sec)
-```
+    </code></pre>
 
 #### Applicable for Engagement Services for Foundry version earlier than 9.5.15
 
 
 1.  Create the database needed for Engagement Services with unicode character set as UTF8. Also ensure that you modify the `my.cnf` or `my.ini` with the following parameters:
-```
 
-    \[client\]  
+    <pre><code>
+    [client]  
     default-character-set = utf8  
-    \[mysql\]  
+    [mysql]  
     default-character-set = utf8  
-    \[mysqld\]|  
+    [mysqld]|  
     character-set-client-handshake = FALSE  
-    collation\_server='utf8\_unicode\_ci'  
-    character\_set\_server='utf8'  
-```     
-2.  Next, restart the MySQL service and run the following query to verify the details:
-```
+    collation_server='utf8_unicode_ci'  
+    character_set_server='utf8'
+    </code></pre>
 
-    mysql> show variables like '%coll%';  
-    +----------------------+-----------------+  
-    | Variable\_name | Value |  
-    +----------------------+-----------------+  
-    | collation\_connection | utf8\_unicode\_ci |  
-    | collation\_database | utf8\_unicode\_ci |  
-    | collation\_server | utf8\_unicode\_ci |  
-    +----------------------+-----------------+  
+2.  Next, restart the MySQL service and run the following query to verify the details:
+
+    <pre><code>
+     mysql> show variables like '%coll%';  
+    +----------------------+--------------------+
+    | Variable_name        | Value              |
+    +----------------------+--------------------+
+    | collation_connection | utf8_unicode_ci    |
+    | collation_database   | utf8_unicode_ci    |
+    | collation_server     | utf8_unicode_ci    |
+    +----------------------+--------------------+
     3 rows in set (0.00 sec)  
-    mysql> show variables like '%char%';  
-    +--------------------------+----------------------------+  
-    | Variable\_name | Value |  
-    +--------------------------+----------------------------+  
-    | character\_set\_client | utf8 |  
-    | character\_set\_connection | utf8 |  
-    | character\_set\_database | utf8 |  
-    | character\_set\_filesystem | binary |  
-    | character\_set\_results | utf8 |  
-    | character\_set\_server | utf8 |  
-    | character\_set\_system | utf8 |  
-    | character\_sets\_dir | /usr/share/mysql/charsets/ |  
-    +--------------------------+----------------------------+
-```
+    mysql> show variables like '%char%';   
+    +--------------------------+------------------------------------------------------+
+    | Variable_name            | Value                                                |
+    +--------------------------+------------------------------------------------------+
+    | character_set_client     | utf8                                                 |
+    | character_set_connection | utf8                                                 |
+    | character_set_database   | utf8                                                 |
+    | character_set_filesystem | binary                                               |
+    | character_set_results    | utf8                                                 |
+    | character_set_server     | utf8                                                 |
+    | character_set_system     | utf8                                                 |
+    | character_sets_dir       | /usr/share/mysql/charsets/                           |
+    +--------------------------+------------------------------------------------------+
+    </code></pre>  
+
 
 ### Applicable for Identity Services
 

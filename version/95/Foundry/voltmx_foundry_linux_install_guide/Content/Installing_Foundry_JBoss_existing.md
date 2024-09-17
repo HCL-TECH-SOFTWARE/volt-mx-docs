@@ -79,17 +79,27 @@ d. If you want to install with JBoss as an option for application  
 To change input, type 'back' to go back to the previous step.  
 To cancel the installation, type 'quit' at any time.
 
-<!--    For troubleshooting & help on the installation, use [../../../Foundry/resources/installer.html](../../../Foundry/resources/installer.md)-->
-For getting started on Volt MX Foundry, refer [http://community.hclvoltmx.com/documentation](http://community.hclvoltmx.com/documentation)
-For upgrading Volt MX Foundry, refer [online documentation](../../../Foundry/voltmx_foundry_linux_install_guide/Content/Upgrading_VoltMX_Foundry_on_Linux.md).
-If you have more questions or feedback, you can join our [http://community.hclvoltmx.com/](http://community.hclvoltmx.com/) or, raise a [http://support.voltmx.com/](http://support.voltmx.com/).
+For troubleshooting & help on the installation, use
+https://opensource.hcltechsw.
+com/volt-mx-docs/docs/documentation/Foundry/installing_foundry.html.
+
+For getting started on Volt Foundry, refer
+https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltm
+x_foundry_user_guide/Content/Introduction.html.
+
+If you have more questions or feedback, you can join our
+community at https://support.hcltechsw.com/csm?id=volt_mx_support or raise a
+support ticket at https://support.hcltechsw.
+com/csm?id=sc_cat_item&sys_id=5d63dc0fdb0c60140104c59b139619c2.
+
+
 ->1- Continue with Installation.  
    2- Abort Installation.
 ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
 
 ```
 <ol>
-  <li value="6">Press <b>Enter</b>. The Software _License Agreement_details appear.</li>
+  <li value="6">Press <b>Enter</b>. The Software  License Agreement details appear.</li>
 </ol>
 
 ```
@@ -153,8 +163,11 @@ ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
 ```
 <ol>
-  <li value="9">Enter your choice and press <b>Enter.</b> The _Install Components_ details appear.</li>
+  <li value="9">Enter your choice and press <b>Enter.</b> The Install Components details appear.</li>
 </ol>
+
+
+<a id="ic1"></a>
 
 ```
 ===================
@@ -193,6 +206,9 @@ ENTER A COMMA-SEPARATED LIST OF NUMBERS REPRESENTING THE DESIRED CHOICES, OR PRE
 - **Engagement Services** - To install Volt MX Foundry Engagement Services, type 5 and press **Enter**.
       The system creates the following database: `<prefix>vpnsdb<suffix>`.
 
+
+    <a id=reports_database></a>
+
     **Reports Database**
 
     The reports database is used for configuring reports.
@@ -203,7 +219,7 @@ ENTER A COMMA-SEPARATED LIST OF NUMBERS REPRESENTING THE DESIRED CHOICES, OR PRE
     - **Console** and **Integration Services** (with or without Engagement Services)
     - **Integration Services** without Console (with or without Engagement Services)
 
-    Reports Database for Integration on a Separate Node:
+    **Reports Database for Integration on a Separate Node**:
 
     While installing console and integration on separate nodes, the installer prompts you to point the reports database during the integration installation.
 
@@ -213,10 +229,10 @@ ENTER A COMMA-SEPARATED LIST OF NUMBERS REPRESENTING THE DESIRED CHOICES, OR PRE
 
     When you install the integration with or without one or more components (identity, or Engagement Services) on a separate node, the installer displays the **Reports Database Name** field in the **Database Details** window. If the installer prompts you to enter the existing reports db, enter the reports database name (for example, `voltmxmfreportsdb1`) in the **Database Details window > Reports Database Name** field.
 
-    Refer to [creating a reports database, for example : mfreports
+    Refer to [creating a reports database, for example : <prefix\>mfreports<suffix\>](./Installing_Foundry_JBoss_existing.md#reports_database).
 
 <ol>
-  <li value="10">Press <b>Enter</b> to continue the installation. The_Install Folder_details appear.</li>
+  <li value="10">Press <b>Enter</b> to continue the installation. The Install Folder details appear.</li>
 </ol>
 
 ```
@@ -249,14 +265,14 @@ Enter requested information
 ->1- Tomcat
   2- JBoss
 
-<!-- 3- WebLogic -->
-
 ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
 ```
+<!-- 3- WebLogic -->
+
 <ol>
   <li value="12">In the <b>Application Server</b>,type two and press <b>Enter</b>.</li>
-   <li value="13">Press <b>Enter</b>to continue the installation. The _Installation Mode_ details appear.</li>
+   <li value="13">Press <b>Enter</b>to continue the installation. The  Installation Mode  details appear.</li>
 </ol>
 
 ```
@@ -285,7 +301,7 @@ To install multinode, choose **3- Domain Mode**. Before installing domain mode, 
 
 <ol>
   <li value="14">In the Installation Mode, type 2 and press <b>Enter</b>.</li>
-  <li value="15">The <b>Application Server</b> details will appear with the following details if have selected All Components or Volt MX Foundry Console at Install Components.</b>.</li>
+  <li value="15">The <b>Application Server</b> details will appear with the following details if have selected All Components or Volt MX Foundry Console at <a href="#ic1">Install Components</a>.</b></li>
 </ol>
 
 ```
@@ -310,7 +326,7 @@ User Name (Default: master):
 
 ```
 <ol>
-  <li value="16">In the _Application Server Details_ details, do the following:</li>
+  <li value="16">In the  Application Server Details  details, do the following:</li>
 </ol>
 
   - **Fully Qualified Public URL of Volt MX Foundry**: Enter Load balancer URL to use public communication. For example, `<http/https>://<hostname>:<http/https port>`.
@@ -324,7 +340,7 @@ User Name (Default: master):
 
 <ol>
   <li value="17">Type the password of the JBoss user.</li>
-  <li value="18">Press <b>Enter</b>. The_Database Choice_details appear:</li>
+  <li value="18">Press <b>Enter</b>. The Database Choice details appear:</li>
 </ol>
 
 ```
@@ -347,7 +363,7 @@ ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
 ```
 <ol>
-  <li value="19">In the_Database Choice_,choose the DB:</li>
+  <li value="19">In the Database Choice ,choose the DB:</li>
 </ol>
 
 - In the *Database Choice* if you select 1, the _MySQL Database Details_ appear.
@@ -367,9 +383,9 @@ Username (DEFAULT: ): root
 
 ```
 
-a.  Enter the following details:
-  - **Database Server IP**: Enter the server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
-  - **Port**: Enter the database port of the MySQL Server. By default, this field is set to 3306 for MySQL.
+a.  Enter the following details:<br>
+  - **Database Server IP**: Enter the server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.<br>
+  - **Port**: Enter the database port of the MySQL Server. By default, this field is set to 3306 for MySQL.<br>
   - **Username**: Enter the user name used while creating the database user - for example, dbclient.
 
 b.  Provide a password and press **Enter**.
@@ -815,11 +831,11 @@ PRESS <ENTER> TO INSTALL:
 Installing...
 -----------------
 
-[==================|==================|==================|==================\] \[------------------|------------------|------------------|------------------\]
+[==================|==================|==================|==================] [------------------|------------------|------------------|------------------]
 
 ```
 <ol>
-  <li value="26">Press <b>Enter</b>.The_Installation Complete_ details appear.</li>
+  <li value="26">Press <b>Enter</b>.The Installation Complete  details appear.</li>
 </ol>
 
 ```

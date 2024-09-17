@@ -82,13 +82,18 @@ d. If you want to install with JBoss as an option for application  server, then
 To change input, type 'back' to go back to the previous step.  
 To cancel the installation, type 'quit' at any time.
 
-<!--For troubleshooting & help on the installation, use [../../../Foundry/resources/installer.html](../../../Foundry/resources/installer.md)-->
+For troubleshooting & help on the installation, use
+https://opensource.hcltechsw.
+com/volt-mx-docs/docs/documentation/Foundry/installing_foundry.html.
 
-For getting started on Volt MX Foundry, refer [http://community.hclvoltmx.com/documentation](http://community.hclvoltmx.com/documentation)
+For getting started on Volt Foundry, refer
+https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltm
+x_foundry_user_guide/Content/Introduction.html.
 
-For upgrading Volt MX Foundry, refer [online documentation](../../../Foundry/voltmx_foundry_linux_install_guide/Content/Upgrading_VoltMX_Foundry_on_Linux.md).
-
-If you have more questions or feedback, you can join our [http://community.hclvoltmx.com/](http://community.hclvoltmx.com/) or, raise a [http://support.voltmx.com/](http://support.voltmx.com/).
+If you have more questions or feedback, you can join our
+community at https://support.hcltechsw.com/csm?id=volt_mx_support or raise a
+support ticket at https://support.hcltechsw.
+com/csm?id=sc_cat_item&sys_id=5d63dc0fdb0c60140104c59b139619c2.
 
 ->1- Continue with Installation.  
   2- Abort Installation.
@@ -269,14 +274,14 @@ ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::
 
 ```
 <ol>
-  <li value="12">In the<b>Application Server</b>, type 2.</li>
+  <li value="12">In the <b>Application Server</b>, type 2.</li>
 </ol>
 
 > **_Note:_** By default Tomcat manager password in used by Volt MX Foundry for Web Application publish. To change the default Tomcat manager password, the new password needs to be replaced in the `password` value for user `manager` in `<tomcat-users>` tag in `tomcat-users.xml`.
 <br><br>Now to replace the value in database, the password value should be encrypted. To encrypt the database password, follow these steps mentioned in the [Encrypt\_Passwords](../../../Foundry/voltmx_foundry_manual_install_guide/Content/Encrypt_Passwords.md) section<br><br>Once the password is encrypted, replace the encrypted value in the `prop_value` column in the row where prop_value is `management_server_password` of `<DatabasePrefix>admindb<DatabaseSuffix>` database in the `server_configuration` table.
 
 <ol>
-  <li value="13">Press<b>Enter</b> to continue the installation. The _Installation Mode_ details appear.</li>
+  <li value="13">Press <b>Enter</b> to continue the installation. The _Installation Mode_ details appear.</li>
 </ol>
 
 ```
@@ -403,7 +408,7 @@ ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:
 
 ```
 <ol>
-  <li value="15">Provide the <b>Hostname/IP Address</b>, <b>HTTP Port</b>, and <b>HTTPS Port</b>, and press <b>Enter</b>. The _SSL Configuration for HTTPS Communication_details appear only if you select HTTPS. Choose one of the following two options:</li>
+  <li value="15">Provide the <b>Hostname/IP Address</b>, <b>HTTP Port</b>, and <b>HTTPS Port</b>, and press <b>Enter</b>. The SSL Configuration for HTTPS Communication details appear only if you select HTTPS. Choose one of the following two options:</li>
 </ol>
 
 ```
@@ -854,7 +859,7 @@ Database Name Suffix (Default: 1): 54
 - Database Name Suffix: Enter valid suffix for all databases - for example, 1.
 
 <ol>
-  <li value="20">Enter the prefix and suffix for the database and press <b>Enter</b>. The_Administrator Account Configuration_ details appear.</li>
+  <li value="20">Enter the prefix and suffix for the database and press <b>Enter</b>. The Administrator Account Configuration details appear.</li>
 </ol>
 
 The **Administrator Account Configuration** details help you to configure your super administrator account.

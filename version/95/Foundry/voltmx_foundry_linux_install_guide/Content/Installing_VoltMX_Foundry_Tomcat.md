@@ -2,7 +2,7 @@
 
 
 Installing Volt MX Foundry on Tomcat - Console-mode
-==================================================
+================================================== 
 
 > **_Note:_**  If a user installs Volt MX Foundry Console on a partition different from the user's home directory, the user must have read/write execute permissions.
 
@@ -27,7 +27,8 @@ To install Volt MX Foundry Console on Tomcat using the installer, follow these s
     <li>Enter the password, and press <b>Enter</b>.</li>
     <li>Unzip the `VoltMXFoundrySetup.tar.gz` file, and navigate to the folder <em><b>VoltMXFoundry_Installer_Linux</b></em>.</li>
     <li>Start the <b>./VoltMXFoundryInstaller-x.x.x.x_GA.bin</b> file by executing the following command:
-    <pre><code style="display:block;background-color:#eee;">Preparing to install
+    <pre><code style="display:block;background-color:#eee;">
+    Preparing to install
     Extracting the JRE from the installer archive...
     Unpacking the JRE...
     Extracting the installation resources from the installer archive.
@@ -39,7 +40,8 @@ To install Volt MX Foundry Console on Tomcat using the installer, follow these s
     Volt MX  Foundry                                     
     (created with InstallAnywhere)
     -------------------------------
-    Preparing CONSOLE Mode Installation...======================================
+    Preparing CONSOLE Mode Installation...
+    ======================================
     Introduction
     ------------
 
@@ -85,17 +87,16 @@ To install Volt MX Foundry Console on Tomcat using the installer, follow these s
 
     For troubleshooting & help on the installation, use
 
-    [../../../Foundry/resources/installer.html](../../../Foundry/resources/installer.md).
+    https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/installationGuides.html.
+  
 
     For getting started on Volt MX Foundry, refer
 
-    [https://basecamp.voltmx.com/s/app-platform-documentation](https://basecamp.voltmx.com/s/app-platform-documentation).
+    https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Introduction.html.
 
     If you have more questions or feedback, you can join our
 
-    community at [https://basecamp.voltmx.com/](https://basecamp.voltmx.com/) or raise a support ticket at
-
-    [https://basecamp.voltmx.com/s/caselistview/](https://basecamp.voltmx.com/s/caselistview/).
+    community at https://support.hcltechsw.com/community?id=community_forum&sys_id=1cdf6e1a1bf31898beab64e6ec4bcbae or raise a support ticket at https://support.hcltechsw.com/csm.
 
     ->1- Continue with Installation.
       2- Abort Installation.
@@ -105,7 +106,8 @@ To install Volt MX Foundry Console on Tomcat using the installer, follow these s
 </code></pre>
 </li>
 <li>Press <b>Enter</b>. The Software <em>License Agreement</em>  details appear.
- <pre><code style="display:block;background-color:#eee;">==================
+ <pre><code style="display:block;background-color:#eee;">
+    ==================
 
     License Agreement
     -----------------
@@ -207,7 +209,8 @@ The following installation types are supported for new installation:
  </li>
 
 <li>Enter your choice and press <b>Enter.</b> The Install Components details appear.
-<pre><code style="display:block;background-color:#eee;">=============================
+<pre><code style="display:block;background-color:#eee;">
+            =============================
 
             Install Components
             ------------------
@@ -347,8 +350,9 @@ Once the password is encrypted, replace the encrypted value in the `prop_value` 
 </code></pre>  
 </li>
 
-<li>In _HTTP or HTTPS_  if you select 1 and press **Enter**, the following details in the _Details for Application Server_ details appear.
-<pre><code style="display:block;background-color:#eee;">=============================== 
+<li>In  HTTP or HTTPS if you select 1 and press Enter, the following details in the - Details for Application Server details appear.
+<pre><code style="display:block;background-color:#eee;">
+    =============================== 
     Details for Application Server  
     ------------------------------   
     Please enter the Hostname/IP Address and port you want to use. The default value is the IP Address of this machine.  
@@ -488,7 +492,7 @@ SSL Certificate Details
 -----------------------  
 Please provide the following details  
 
-Absolute Path to Keystore File (Default: ): /downloads/\_.hcl.net.2016.jks  
+Absolute Path to Keystore File (Default: ): /downloads/_.hcl.net.2016.jks  
 
 ```
         
@@ -568,6 +572,8 @@ a.  Enter the following details:
 
 b.  Provide a password and press **Enter**.
 
+c.  If you are using an encrypted database password, type the key that you received from the encryption tool and press Enter. Otherwise, leave the field blank and press Enter. For more information, refer to [How to encrypt the database password](./Troubleshooting.md#how-to-encrypt-the-database-password).
+
 *   If the database connection fails, the following error message displays.
             
 ```
@@ -616,10 +622,10 @@ System Username (Default: ):
 ``` 
         
 a.  Enter the following details:
-*   **Database Server IP**: Enter the server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
-*   **Port**: Enter the database port of the Oracle Server. By default, this field is set to 1521 for oracle.
-*   **Service ID** **/ Service Name**: Enter Oracle service ID or service name. Service ID is unique alias given to an instance name of Oracle DB.       
-*   **System Username**: Enter the user name used while creating the database user.
+  *   **Database Server IP**: Enter the server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
+  *   **Port**: Enter the database port of the Oracle Server. By default, this field is set to 1521 for oracle.
+  *   **Service ID** **/ Service Name**: Enter Oracle service ID or service name. Service ID is unique alias given to an instance name of Oracle DB.       
+  *   **System Username**: Enter the user name used while creating the database user.
 
 b.  Press **Enter**. The installer prompts for _Enter Password for Database User_ details as follows:
             
@@ -631,7 +637,11 @@ Please enter the password:
 
 ``` 
             
-Provide a password and press **Enter**.
+c. Provide a password and press **Enter**.
+
+d. If you are using an encrypted database password, type the key that you received from the encryption tool and press Enter. Otherwise, leave the field blank and press Enter. For more information, refer to [How to encrypt the database password](./Troubleshooting.md#how-to-encrypt-the-database-password).
+
+
 
 *   If the database connection fails, the following error message displays.
                 
@@ -764,6 +774,8 @@ Please enter the password:
             
 c.  Provide a password and press **Enter**.
 
+d.  If you are using an encrypted database password, type the key that you received from the encryption tool and press Enter. Otherwise, leave the field blank and press Enter. For more information, refer to [How to encrypt the database password](./Troubleshooting.md#how-to-encrypt-the-database-password).
+
 *   If the database connection fails, the following error message displays.
 
 ```
@@ -862,6 +874,8 @@ Please enter the password:
 ```
             
 c.  Provide a password and press **Enter**.
+
+d.  If you are using an encrypted database password, type the key that you received from the encryption tool and press Enter. Otherwise, leave the field blank and press Enter. For more information, refer to [How to encrypt the database password](./Troubleshooting.md#how-to-encrypt-the-database-password).
 
 *   If the database connection fails, the following error message displays.
     
@@ -1025,7 +1039,7 @@ Database Details:
 Hostname/IP Address: mbaastest22.hcl.net, User: mfuser, Port: 3306  
 
 Database Names:  
-Test\_mfconsoledb\_438, Test\_mfaccountsdb\_438, Test\_mfreportsdb\_438, Test\_idconfigdb\_438, Test\_admindb\_438 and Test\_vpnsdb\_438  
+Test_mfconsoledb_438, Test_mfaccountsdb_438, Test_mfreportsdb_438, Test_idconfigdb_438, Test_admindb_438 and Test_vpnsdb_438  
 
 Admin Account Details:  
 First Name:test, Last Name:one, Email:bvtuser@voltmx.com  
@@ -1058,7 +1072,7 @@ PRESS <ENTER> TO INSTALL:
 Installing...  
 ---------------
 
-\[==================|==================|==================|==================\] \[------------------|------------------|------------------|------------------\]
+[==================|==================|==================|==================\] \[------------------|------------------|------------------|------------------\]
 
 ```
 

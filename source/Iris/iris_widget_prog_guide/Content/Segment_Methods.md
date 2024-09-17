@@ -1704,6 +1704,8 @@ The widget/row model will be updated based on the animation fill modes, so that 
 
 For example, the syntax to get the label text is `segment.selectedValue.label(text)`. Earlier this was written as `segment.selectedValue.label.text`.
 
+>**Note:** For Desktop Web/Responsive Web, while using setData API to pass image(s) as data to a segment widget, ensure that the widget is rendered and visible at the point the API is invoked. This limitation does not apply to other data types, or if JS Library mode (legacy) is enabled.
+
 ### Example
 
 ```
