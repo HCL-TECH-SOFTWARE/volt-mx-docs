@@ -1,7 +1,7 @@
 
 Volt MX Foundry Deployment Guide: Overview
 
-# Deployment Guide
+# Deployment Guide 
 
 Guidelines for deploying Volt MX Foundry on-premises.
 
@@ -14,7 +14,7 @@ Volt MX Foundry is an enterprise-grade mobile backend as a service (MBaaS). How 
 - [Database Growth Sizing](#database-growth-sizing)
 - [Session Management](#session-management)
 
-Volt MX Foundry Deployment Glossary
+**Volt MX Foundry Deployment Glossary**
 
 | Term                  | Definition                                                                                                                                                                                   |
 | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -113,7 +113,7 @@ If high availability is required for Volt MX Foundry Console & Reports Portal, t
 
 The following tables also include a configuration for AWS that uses EC2 and RDS for MySQL.
 
-For Production
+**For Production**
 
 | Azure                                                                                                                     | AWS                                                                                  | Volt MX Foundry JVM’s                    |
 | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ---------------------------------------- |
@@ -121,7 +121,7 @@ For Production
 | 2 Standard tier A-series – Standard_A2                                                                                    | 2 T2 series – t2.medium                                                              | Volt MX Foundry Console & Reports Portal |
 | Azure SQL Database – Standard S1 (200 eDTU per pool) or 2 Standard tier: Dv2-series – Standard_D3_v2 for MySQL/SQL Server | Amazon RDS for MySQL – db.m4.2xlarge or 2 M3 series – m3.xlarge for MySQL/SQL Server |                                          |
 
-For Development/QA
+**For Development/QA**
 
 | Azure                                                                                                                     | AWS                                                             | Volt MX Foundry JVM’s               |
 | ------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | ----------------------------------- |
@@ -167,19 +167,19 @@ The following describes typical scenarios that may occur when you use Memcache a
 
 #### Scenario A
 
-Tomcat Instance is Down
+_Tomcat Instance is Down_
 
 In this scenario, there will be no transaction failure as the session data is available in the Memcache node. The request is routed to the other Tomcat instances. The other Tomcat instances will retrieve the session data from the Memcache.
 
 #### Scenario B
 
-Memcache Instance is Down
+_Memcache Instance is Down_
 
 In this scenario, if the session data is stored in the Memcache instance that is down, there will be a transaction failure. All the users whose session data was stored on the Memcache instance that went down, have to reinitiate the transaction.
 
 #### Scenario C
 
-Physical Computer is Down
+_Physical Computer is Down_
 
 In this scenario, if the session data is stored on one of the Memcache instances of the physical computer that is down, there will be a transaction failure. All the users whose session data was stored on the Memcache instances of the failed physical computer, will have to reinitiate the transaction.
 
