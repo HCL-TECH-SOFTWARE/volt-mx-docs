@@ -57,7 +57,7 @@ Most production grade Volt MX Foundry installations need you to consider the fol
 
 ### Installing Volt MX Foundry
 
-The Volt MX Foundry installer provides an automated way of installing the Volt MX Foundry components on a node. The installer deploys the Application Server components and executes the database scripts based on your inputs. For more information, refer to the Installation guides for your specific OS at [VoltMX Documentation](http://docs.voltmx.com/).
+The Volt MX Foundry installer provides an automated way of installing the Volt MX Foundry components on a node. The installer deploys the Application Server components and executes the database scripts based on your inputs. For more information, refer to the Installation guides for your specific OS at [VoltMX Documentation](./../../../index.md).
 
 For cluster setups, you must repeat the installation process for each node by selecting the **use existing DB** option. After you configure the first node, you can update the encryption keys on all the other nodes by selecting the **Copy the encryption keys now** check box and providing the **Previous Installation Directory**. You can skip the creation of the **Administration Account** since you have already configured it once.
 
@@ -71,23 +71,23 @@ For cluster setups, you must repeat the installation process for each node by se
 
 Use the following Healthcheck URLs post-deployment to check the status of a Volt MX Foundry component on each node:
 
-*   For Volt MX Foundry console: http://<domain\_name>:<port>/mfconsole/health\_check/all
+*   For Volt MX Foundry console: http://<domain\_name\>:<port\>/mfconsole/health\_check/all
     
     ![](Resources/Images/For_Console.png)
     
-*   For Middleware: http://<domain\_name>:<port>/services/healthcheck
+*   For Middleware: http://<domain\_name\>:<port\>/services/healthcheck
     
     ![](Resources/Images/For_Middleware_519x135.png)
     
-*   For Auth Service: http://<domain\_name>:<port>/authService/v1/manage/checkhealth
+*   For Auth Service: http://<domain\_name\>:<port\>/authService/v1/manage/checkhealth
     
     ![](Resources/Images/For_Auth_Service_572x150.png)
     
-*   For Sync: http://<domain\_name>:<port>/syncconsole/healthcheck
+*   For Sync: http://<domain\_name\>:<port\>/syncconsole/healthcheck
     
     ![](Resources/Images/For_Sync_561x202.png)
     
-*   For Messaging: http://<domain\_name>:<port>:53409/vpns/service/healthcheck/json
+*   For Messaging: http://<domain\_name\>:<port\>:53409/vpns/service/healthcheck/json
     
     ![](Resources/Images/For_Messaging_554x188.png)
     
@@ -201,6 +201,9 @@ Follow these steps in addition to the steps mentioned in the checklist.
 *   Follow the instructions in the [VoltMX Licensing Guide](../../../Foundry/voltmx_licensing_guide/Content/Homepage.md) for activating the License based on your deployment model.
 *   Ensure that the License is activated successfully.
 
+
+<a id="case2"></a>
+
 Case Study 2 - JBOSS Multi-Node Cluster + Apache/Mod\_Cluster Load Balancer with MySQL Database
 -----------------------------------------------------------------------------------------------
 
@@ -224,7 +227,7 @@ The Volt MX Foundry Installer needs to be configured on JBoss Application server
 
 A sample configuration of **Apache 2.4 with mod\_cluster** module used with JBoss is shown below. Changes have to be made to the JBoss master node to integrate the mod\_cluster load balancer.
 
-1.  In the JBoss master node, edit the `/root/EAP-7.2.0/domain/configuration/domain.xml`file. In the socket binding groups you are using, add the following node.  
+*   In the JBoss master node, edit the `/root/EAP-7.2.0/domain/configuration/domain.xml`file. In the socket binding groups you are using, add the following node.  
     For example, if you use full-sockets binding group, go to `<socket-binding-group name="full-sockets" default-interface="public">` and add following node at the end.
 ```
 
@@ -239,7 +242,7 @@ A sample configuration of **Apache 2.4 with mod\_cluster** module used with JBos
     
     
 ```
-2.  In JBoss master node, edit `/root/EAP-7.2.0/domain/configuration/domain.xml`. Go to `<subsystem xmlns="urn:jboss:domain:modcluster:4.0">` and to the proxy node, add the **proxies="proxy1"** attribute to proxy node.
+*   In JBoss master node, edit `/root/EAP-7.2.0/domain/configuration/domain.xml`. Go to `<subsystem xmlns="urn:jboss:domain:modcluster:4.0">` and to the proxy node, add the **proxies="proxy1"** attribute to proxy node.
 ```
 
     
@@ -261,9 +264,16 @@ A sample configuration of **Apache 2.4 with mod\_cluster** module used with JBos
     
     
 ```
-3.  Install Apache 2.4 and setup the mod\_cluster module. Configure mod\_cluster as per your requirement. Following is a sample snippet of a mod\_cluster configuration in Apache `httpd.conf` file.  
+*   Install Apache 2.4 and setup the mod\_cluster module. Configure mod\_cluster as per your requirement. Following code snippet is a sample of a mod\_cluster configuration in Apache `httpd.conf` file.  
     Example:  
 ```
+LoadModule proxy_module modules/mod_proxy.so
+LoadModule proxy_ajp_module modules/mod_proxy_ajp.so
+LoadModule advertise_module modules/mod_advertise.so
+LoadModule manager_module modules/mod_manager.so
+LoadModule proxy_cluster_module modules/mod_proxy_cluster.so
+LoadModule cluster_slotmem_module modules/mod_cluster_slotmem.so
+LoadModule proxy_http_module modules/mod_proxy_http.so
 MemManagerFile cache/mod_cluster
     
     CreateBalancers 1
@@ -304,8 +314,8 @@ MemManagerFile cache/mod_cluster
        </VirtualHost>
     </IfModule>
 ```
-4.  Start mod cluster by running the HTTP start service.
-5.  For setting Identity, Integration, and Console on separate nodes, access mod\_cluster console and for each node, enable only the required requests.  
+*   Start mod cluster by running the HTTP start service.
+*   For setting Identity, Integration, and Console on separate nodes, access mod\_cluster console and for each node, enable only the required requests.  
     Example:  
     ![](Resources/Images/modClusterwithJboss2.png)  
     Enable/Disable as required to manage the load at each node.
@@ -314,12 +324,20 @@ MemManagerFile cache/mod_cluster
 
 Since this is a cluster setup, you will need to repeat the installation process for each node by selecting the **use existing DB** option. After you configure the first node, you can update the encryption keys on all the other nodes by selecting the **Copy the encryption keys now** check box and providing the **Previous Installation Directory**. You can skip the creation of the **Administration Account** since you have already configured it before.
 
+For information about installing Volt MX Foundry, refer to the following links:
+
+*   [Volt MX Foundry Installation on JBoss Domain Mode (Multinode) - Linux](./../../voltmx_foundry_linux_install_guide/Content/Multi-Node_Installation.md)
+
+*   [Installing Volt MX Foundry on Domain Mode (Multi node installation in pre-configured JBoss cluster) - Windows](./../../voltmx_foundry_windows_install_guide/Content/Multi-Node_Installation.md)
+
+
 ### Manual Steps Post-Install
 
 Follow these steps in addition to the steps mentioned in the checklist.
 
 *   Set up a Memcached Cluster for the Integration nodes if needed. For more details, refer to [Memcache Configuration](../../../Foundry/vmf_integrationservice_admin_console_userguide/Content/Runtime_Configuration.md#Memcache) in the Integration Admin Console User Guide.
 *   Launch the Volt MX Foundry Console URL. This should lead to the registration page. Enter the authService URL. This may either be the load balancer URL or the authService node URL.
+*   Import and publish any required applications.
 
 ### Test the Setup
 
