@@ -201,6 +201,9 @@ Follow these steps in addition to the steps mentioned in the checklist.
 *   Follow the instructions in the [VoltMX Licensing Guide](../../../Foundry/voltmx_licensing_guide/Content/Homepage.md) for activating the License based on your deployment model.
 *   Ensure that the License is activated successfully.
 
+
+<a id="case2"></a>
+
 Case Study 2 - JBOSS Multi-Node Cluster + Apache/Mod\_Cluster Load Balancer with MySQL Database
 -----------------------------------------------------------------------------------------------
 
