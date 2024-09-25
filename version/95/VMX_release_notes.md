@@ -104,8 +104,8 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 ### V9 Servicepack 5 Fixpack 37
 September 26, 2024
 
-* Added support for async calls in Handler code during NFI generation for Desktop Native platforms.
-* Security hardening.
+* Added support for asynchronous calls in the Handler code during NFI generation for Desktop Native platforms.
+* Strengthened security measures.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
