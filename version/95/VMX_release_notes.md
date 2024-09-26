@@ -7,6 +7,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Iris](#volt-iris)
 
+- [V9 Servicepack 5 Fixpack 37](#v9-servicepack-5-fixpack-37)
 - [V9 Servicepack 5 Fixpack 36](#v9-servicepack-5-fixpack-36)
 - [V9 Servicepack 5 Fixpack 35](#v9-servicepack-5-fixpack-35)
 - [V9 Servicepack 5 Fixpack 34](#v9-servicepack-5-fixpack-34)
@@ -99,6 +100,15 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 - [Earlier Foundry releases](#earlier-foundry-releases)
 
 ## Volt Iris
+
+### V9 Servicepack 5 Fixpack 37
+September 25, 2024
+
+* Added support for asynchronous calls in the Handler code during NFI generation for Desktop Native platforms.
+* Strengthened security measures.
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+
 
 ### V9 Servicepack 5 Fixpack 36
 August 30, 2024
