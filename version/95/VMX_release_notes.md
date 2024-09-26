@@ -102,7 +102,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 ## Volt Iris
 
 ### V9 Servicepack 5 Fixpack 37
-September 26, 2024
+September 25, 2024
 
 * Added support for asynchronous calls in the Handler code during NFI generation for Desktop Native platforms.
 * Strengthened security measures.
