@@ -293,7 +293,7 @@ FAQs and Troubleshooting
 
 *   **Do I need to have an account with the HCL Harbor to pull the Volt Foundry Images?**
     
-    No. The images are public, and you do not need any authorization to download them.
+    Yes. The images are private, and you need authorization to download them.
     
 *   **How should I restart a container that has been killed?**
     
