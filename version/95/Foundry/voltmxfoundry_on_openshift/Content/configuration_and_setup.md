@@ -32,7 +32,8 @@ For more information about the properties, refer to the following section.
         Please provide the secret which is configured with hcl harbor username and secret.
 
 ```
-      To create the secret from Username and Password, please run the following command then the secret will be created as foundry-image-pull     Command: kubectl create secret docker-registry foundry-image-pull --docker-server=hclcr.io --docker-username=< your-name > --docker-password=< your-pword > --docker-email=< your-email > 
+      To create the secret from Username and Password, please run the following command then the secret will be created as foundry-image-pull     
+      Command: kubectl create secret docker-registry foundry-image-pull --docker-server=hclcr.io --docker-username=< your-name > --docker-password=< your-pword > --docker-email=< your-email > 
       username: your-email
       password: your-authentication-token
       your-authentication-token - This is the CLI secret found under your User Profile in HCL .

@@ -61,7 +61,8 @@ The following parameters are specified in the values.yaml file within the Helm c
     Please give the secret which is configured with login details of HCL Harbor site.
 
 ```
-    To create the secret from Username and Password, please run the following command then the secret will be created as foundry-image-pull     Command: kubectl create secret docker-registry foundry-image-pull --docker-server=hclcr.io --docker-username=< your-name > --docker-password=< your-pword > --docker-email=< your-email > 
+    To create the secret from Username and Password, please run the following command then the secret will be created as foundry-image-pull     
+    Command: kubectl create secret docker-registry foundry-image-pull --docker-server=hclcr.io --docker-username=< your-name > --docker-password=< your-pword > --docker-email=< your-email > 
     username: your-email
     password: your-authentication-token
     your-authentication-token - This is the CLI secret found under your User Profile in HCL .
