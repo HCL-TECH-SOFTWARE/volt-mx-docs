@@ -17,7 +17,8 @@ This section helps you understand the system requirements and necessary software
 
 ## Software Requirements
 
-For more information, please click [here](SupportedVoltMXIrisMacOSversions.md).
+[Supported VoltMX Iris MacOS versions](Supported_VoltMX_Iris_MacOS_versions.md)
+
 
 <h2 id="hr">Hardware Requirements</h2>  
 
