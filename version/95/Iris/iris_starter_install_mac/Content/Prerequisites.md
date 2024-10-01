@@ -15,11 +15,9 @@ Following are the requirements needed to complete the installation process. They
 
 This section helps you understand the system requirements and necessary software required to install Volt MX Iris.
 
-<h2 id="sor">Software Requirements</h2>
+## Software Requirements
 
-<!-- ### Software Requirements -->
-
-Mac OS X 10.9 and above
+For more information, please click [here](SupportedVoltMXIrisMacOSversions.md).
 
 <h2 id="hr">Hardware Requirements</h2>  
 
