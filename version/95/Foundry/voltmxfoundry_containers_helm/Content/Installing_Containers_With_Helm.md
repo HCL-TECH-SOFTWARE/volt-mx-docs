@@ -56,12 +56,20 @@ The following parameters are specified in the values.yaml file within the Helm c
 
     > **_Note:_** The Install Environment Name must not contain numbers.
 
-3. **imageCredentials:**<br>
+3. **hclImagePullSecret:**<br>
 
-     username: your-email<br>
-     password: your-authentication-token<br>
+    Please give the secret which is configured with login details of HCL Harbor site.
 
-     your-authentication-token - This is the CLI secret found under your User Profile in HCL .
+```
+    To create the secret from Username and Password, please run the following command then the secret will be created as foundry-image-pull     
+    Command: kubectl create secret docker-registry foundry-image-pull --docker-server=hclcr.io --docker-username=< your-name > --docker-password=< your-pword > --docker-email=< your-email > 
+    username: your-email
+    password: your-authentication-token
+    your-authentication-token - This is the CLI secret found under your User Profile in HCL .
+
+```
+
+     
 
 4. **foundryInstallType**: The deployment must be marked as either production or non production.  This parameter must be specified and it must be either "PRODUCTION" or "NON-PRODUCTION".
 
