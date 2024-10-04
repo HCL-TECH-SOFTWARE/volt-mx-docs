@@ -14,7 +14,7 @@ This section helps you understand the system requirements and necessary software
 
 ### Software Requirements
 
-Mac OS X 10.9 and above
+[Supported VoltMX Iris MacOS versions](Supported_VoltMX_Iris_MacOS_versions.md)
 
 ### Hardware Requirements
 
