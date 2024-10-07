@@ -105,7 +105,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 ### V9 Servicepack 5 Fixpack 38
 October 03, 2024
 
->**Note** : This release contains a critical update in compliance with Apple's updated Security Manifest requirements. This Volt Iris/plugin version (and above) is mandatory if you want to build and release to the Apple App Store (as on October 03, 2024). 
+>**Note** : This release includes a critical update to comply with Apple's revised Security Manifest requirements. You must use this version of Volt Iris/plugin (and later) to build and release applications to the Apple App Store, effective October 03, 2024.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
