@@ -982,7 +982,7 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ## Volt Foundry
 
 ### AppFactory V9 Servicepack 5 Fixpack 16 Hotfix 7
-September 12, 2024
+October 07, 2024
 
 * Upgraded the core Jenkins version.
 * Added support for running builds on macOS Sonoma with Xcode 15.4 and iOS 17.5 on Mac devices with the M2 chip.
