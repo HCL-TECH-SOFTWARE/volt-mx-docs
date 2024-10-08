@@ -273,12 +273,15 @@ var basicConf = {
 };
 
 var layoutConf = {
-    padding: [5, 5, 5, 5],
+    padding: [0, 0, 0, 0],
+    paddingInPixel: false,
     margin: [5, 5, 5, 5],
     containerWeight: 100
 };
 
 var pspConf = {
+    bounces: true,
+    enableDictionary: false,
     defaultSelection: true
 };
 
