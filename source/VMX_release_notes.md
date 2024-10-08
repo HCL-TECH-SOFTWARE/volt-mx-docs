@@ -8,6 +8,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Iris](#volt-iris)
 
+- [V9 Servicepack 2 Fixpack 75](#v9-servicepack-2-fixpack-75)
 - [V9 Servicepack 2 Fixpack 74](#v9-servicepack-2-fixpack-74)
 - [V9 Servicepack 2 Fixpack 73](#v9-servicepack-2-fixpack-73)
 - [V9 Servicepack 2 Fixpack 72](#v9-servicepack-2-fixpack-72)
@@ -67,6 +68,13 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 
 ## Volt Iris
+
+### V9 Servicepack 2 Fixpack 75
+October 07, 2024
+
+>**Note** : This release includes a critical update to comply with Apple's revised Security Manifest requirements. You must use this version of Volt Iris/plugin (and later) to build and release applications to the Apple App Store, effective October 07, 2024.
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
 ### V9 Servicepack 2 Fixpack 74
 August 09, 2024
