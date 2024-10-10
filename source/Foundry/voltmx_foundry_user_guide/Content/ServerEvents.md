@@ -293,9 +293,9 @@ From V9 Service Pack 3, WebSockets are enabled by default for the VoltMX Foundry
 
 From V9 Service Pack 3, for on-premise instances of Foundry, you can configure the following properties in the **server_configuration** table of the **admin DB**, or in the **middleware.properties** file.  
 
-   *   **VOLTMX_SERVER_EVENT_WEBSOCKET_PING_SCHEDULED_TIME_IN_SECONDS**: Specifies the time (in seconds) after which the server is scheduled to run, so that it can send a ping to the client. The default value is 30 seconds.  
+   *   **KONY_SERVER_EVENT_WEBSOCKET_PING_SCHEDULED_TIME_IN_SECONDS**: Specifies the time (in seconds) after which the server is scheduled to run, so that it can send a ping to the client. The default value is 30 seconds.  
 
-   *   **VOLTMX_SERVER_EVENTS_WEBSOCKET_WORKER_THREAD_POOL_SIZE**: Specifies the number of threads that are maintained in the worker thread pool. The worker threads are used to send pings to the client. The default value is 2 threads.  
+   *   **KONY_SERVER_EVENTS_WEBSOCKET_WORKER_THREAD_POOL_SIZE**: Specifies the number of threads that are maintained in the worker thread pool. The worker threads are used to send pings to the client. The default value is 2 threads.  
 
 **WebSocket Endpoint**  
 
