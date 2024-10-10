@@ -25,8 +25,6 @@ Volt MX AppPlatform
 
 Volt MX AppPlatform is a comprehensive app development platform for various digital channels. AppPlatform allows you to build an Omni-channel, multi-platform app. 
 
-<br>
-
 ### It consists of the following sub-products:
 
 * Iris – Design your app and add business logic.
@@ -39,8 +37,6 @@ Volt Iris
 ![Volt MX Iris](../Resources/Images/VoltMX-Iris.png)
 
 Iris is the Volt MX integrated development environment used to design, build, debug and deploy apps for mobile, tablet, desktop web, and other digital channels. 
-
-<br>
 
 ### Apps are designed using:
 
