@@ -25,7 +25,7 @@ Volt MX is a comprehensive app development platform that enables the creation of
 <b>It consists of the following sub-products:</b>
 
 * Volt Iris – Design your app and add business logic.
-* Volt Foundry - Integrate with data and allied services.
+* Volt Foundry – Integrate with data and allied services.
 * Volt MX App Viewer – preview the app as you develop.
 
 Volt Iris
