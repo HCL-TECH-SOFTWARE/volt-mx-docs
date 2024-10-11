@@ -1,12 +1,4 @@
 
-Platform Overview
-================
-Here is a brief overview on Volt MX products, sub-products and their features. We also discuss how these products interact to provide you with a comprehensive solution to develop omni-channel digital apps.
-We classify Volt MX's product portfolio as follows:
-
-Volt MX AppPlatform
-
-- [Platform Overview](#platform-overview)
   - [Volt Iris](#volt-iris)
   - [Volt Foundry](#volt-foundry)
     - [Identity Services](#identity-services)
@@ -23,20 +15,20 @@ Volt MX AppPlatform
 
 ![Overview Platform](../Resources/Images/Overview_Platform_774x286.png)
 
-Volt MX AppPlatform is a comprehensive app development platform for various digital channels. AppPlatform allows you to build an Omni-channel, multi-platform app. 
+Volt MX is a comprehensive app development platform that enables the creation of omni-channel, multi-platform applications for a wide range of digital channels, including mobile, web, wearables, and more.
 
-### It consists of the following sub-products:
+<b>It consists of the following sub-products:</b>
 
-* Iris – Design your app and add business logic.
-* Volt MX – Integrate with data and allied services.
-* App Viewer – preview the app as you develop.
+* Volt Iris – Design your app and add business logic.
+* Volt Foundry Integrate with data and allied services.
+* Volt MX App Viewer – preview the app as you develop.
 
 Volt Iris
 -------------
 
 ![Volt MX Iris](../Resources/Images/VoltMX-Iris.png)
 
-Iris is the Volt MX integrated development environment used to design, build, debug and deploy apps for mobile, tablet, desktop web, and other digital channels. 
+Volt Iris is the Volt MX integrated development environment used to design, build, debug and deploy apps for mobile, tablet, desktop web, and other digital channels. 
 
 ### Apps are designed using:
 
@@ -122,7 +114,7 @@ DevOps Services - AppFactory
 * Consists of features like Continuous Integration, Continuous Delivery, and Device Testing.
 * Allows developers to continuously build, test, and deploy apps.
 * Provides a Continuous Delivery platform for building multi-channel applications.
-* Check-in your Foundry configurations and Iris source code into GitHub and build the application across mobile, desktop, and web.
+* Check-in your Volt Foundry configurations and Volt Iris source code into GitHub and build the application across mobile, desktop, and web.
 * Deploy the application to a specific environment and test it through automation testing on real devices.
 * Explore more about AppFactory [here](../../../Foundry/voltmx_appfactory_user_guide/Content/Introduction.md).
 
@@ -130,7 +122,7 @@ DevOps Services - AppFactory
 
 Volt MX Marketplace
 ---------------------
-It is a repository of ready-to-use Apps, Micro Apps, Components, and Data Adapters. Apps, Micro Apps, and Components are developed using widgets and APIs in Iris. Data adapters are developed using services in Volt MX Foundry. Explore more about components and data adapters [here](../../../Foundry/voltmx_foundry_user_guide/Content/CustomDataConfig.md). Explore more about Volt MX Marketplace [here](https://marketplace.hclvoltmx.com/).
+It is a repository of ready-to-use Apps, Micro Apps, Components, and Data Adapters. Apps, Micro Apps, and Components are developed using widgets and APIs in Volt Iris". Data adapters are developed using services in Volt Foundry. Explore more about components and data adapters [here](../../../Foundry/voltmx_foundry_user_guide/Content/CustomDataConfig.md). Explore more about Volt MX Marketplace [here](https://marketplace.hclvoltmx.com/).
 
 
 ![Volt MX Foundry](../Resources/Images/Marketplace.png)
