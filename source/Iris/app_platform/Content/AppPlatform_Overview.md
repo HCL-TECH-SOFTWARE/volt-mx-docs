@@ -1,3 +1,8 @@
+Platform Overview
+==================
+Here is a brief overview on Volt MX products, sub-products and their features. We also discuss how these products interact to provide you with a comprehensive solution to develop omni-channel digital apps.
+We classify Volt MX's product portfolio as follows:
+
 
   - [Volt Iris](#volt-iris)
   - [Volt Foundry](#volt-foundry)
@@ -9,7 +14,7 @@
     - [Engagement Services](#engagement-services)
     - [Offline Objects](#offline-objects)
     - [Reports](#reports)
-  - [Volt MX AppViewer](#volt-mx-appviewer)
+  - [Volt MX App Viewer](#volt-mx-app-viewer)
   - [DevOps Services - AppFactory](#devops-services---appfactory)
   - [Volt MX Marketplace](#volt-mx-marketplace)
 
@@ -20,7 +25,7 @@ Volt MX is a comprehensive app development platform that enables the creation of
 <b>It consists of the following sub-products:</b>
 
 * Volt Iris – Design your app and add business logic.
-* Volt Foundry Integrate with data and allied services.
+* Volt Foundry - Integrate with data and allied services.
 * Volt MX App Viewer – preview the app as you develop.
 
 Volt Iris
@@ -30,7 +35,7 @@ Volt Iris
 
 Volt Iris is the Volt MX integrated development environment used to design, build, debug and deploy apps for mobile, tablet, desktop web, and other digital channels. 
 
-### Apps are designed using:
+<b>Apps are designed using:</b>
 
 * Widgets: Collection of user interface elements that can be dragged and dropped onto the application forms. Explore more about widgets [here](../../../Iris/iris_widget_prog_guide/Content/Overview.md).
 * APIs: Set of functions and procedures that are used to write the code in controller files to achieve various functionalities. Explore more about APIs [here](../../../Iris/iris_api_dev_guide/content/introduction.md).
@@ -98,9 +103,9 @@ Volt MX’s capabilities extend to providing Identity Services, Integration Serv
 * Explore more about metrics and reports [here](../../../Foundry/custom_metrics_and_reports/Content/Custom_Metrics_and_Reports_Guide.md).
 
 
-Volt MX AppViewer
+Volt MX App Viewer
 -------------------
-Use App Viewer to view the front-end prototype of a project on a device and run any action attached to a form, pop-up, or widget such as navigating from one form to other, applying a skin to a widget, and opening a pop-up window. As you make changes to your project and incrementally build and publish those changes using the App Viewer command, you can see those changes reflected in a local preview of the app on the device. Explore more about AppViewer [here](../../..//Iris/iris_app_viewer/Content/FunctionalPreviewEnterprise.md#preview-an-app-on-the-cloud).
+Use App Viewer to view the front-end prototype of a project on a device and run any action attached to a form, pop-up, or widget such as navigating from one form to other, applying a skin to a widget, and opening a pop-up window. As you make changes to your project and incrementally build and publish those changes using the App Viewer command, you can see those changes reflected in a local preview of the app on the device. Explore more about App Viewer [here](../../..//Iris/iris_app_viewer/Content/FunctionalPreviewEnterprise.md#preview-an-app-on-the-cloud).
 
 
 ![Volt MX Foundry](../Resources/Images/appviewer.png)
@@ -108,7 +113,7 @@ Use App Viewer to view the front-end prototype of a project on a device and run 
 
 
 DevOps Services - AppFactory
--------------
+-----------------------------
 ![Volt MX Foundry](../Resources/Images/AppFactory.png)
 
 * Consists of features like Continuous Integration, Continuous Delivery, and Device Testing.
