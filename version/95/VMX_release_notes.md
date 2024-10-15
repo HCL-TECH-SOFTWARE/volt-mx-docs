@@ -7,6 +7,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Iris](#volt-iris)
 
+- [V9 Servicepack 5 Fixpack 40](#v9-servicepack-5-fixpack-40)
 - [V9 Servicepack 5 Fixpack 38](#v9-servicepack-5-fixpack-38)
 - [V9 Servicepack 5 Fixpack 37](#v9-servicepack-5-fixpack-37)
 - [V9 Servicepack 5 Fixpack 36](#v9-servicepack-5-fixpack-36)
@@ -101,6 +102,15 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 - [Earlier Foundry releases](#earlier-foundry-releases)
 
 ## Volt Iris
+
+### V9 Servicepack 5 Fixpack 40
+October 16, 2024
+
+* Support added for iOS 18 builds and/on Xcode 16.
+* Security hardening.
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+
 
 ### V9 Servicepack 5 Fixpack 38
 October 03, 2024
