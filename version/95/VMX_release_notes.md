@@ -104,7 +104,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 ## Volt Iris
 
 ### V9 Servicepack 5 Fixpack 40
-October 16, 2024
+October 17, 2024
 
 * Added support for iOS 18 builds and Xcode 16.
 * Strengthened security.
