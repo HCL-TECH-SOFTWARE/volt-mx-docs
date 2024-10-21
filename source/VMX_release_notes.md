@@ -8,6 +8,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Iris](#volt-iris)
 
+- [V9 Servicepack 2 Fixpack 76](#v9-servicepack-2-fixpack-76)
 - [V9 Servicepack 2 Fixpack 75](#v9-servicepack-2-fixpack-75)
 - [V9 Servicepack 2 Fixpack 74](#v9-servicepack-2-fixpack-74)
 - [V9 Servicepack 2 Fixpack 73](#v9-servicepack-2-fixpack-73)
@@ -68,6 +69,14 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 
 ## Volt Iris
+
+### V9 Servicepack 2 Fixpack 76
+October 18, 2024
+
+* Added support for iOS 18 builds and Xcode 16.
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+
 
 ### V9 Servicepack 2 Fixpack 75
 October 07, 2024
