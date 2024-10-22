@@ -369,7 +369,7 @@ Below syntax filter all the records where `second(BirthDate)` eq `40`.
 
  Filters to list all the recodrs where post rounding the column value is equal to provided number.
 
-### Ceiling 
+ ### Ceiling 
  
   API Usage
 
@@ -380,18 +380,25 @@ Below syntax filter all the records where `second(BirthDate)` eq `40`.
 Example
 
 Below syntax filter all the records where `ceiling` rounds upto `32`.
+
+```
+ ceiling(Freight) eq 32
+```
  
-### Floor
+ ### Floor
  
  API Usage
 
 ```
- $filter=ceiling(colname) eq value
+ $filter=floor(colname) eq value
 ```
 
 Example
 
-Below syntax filter all the records where `ceiling` rounds upto `32`.
+Below syntax filter all the records where `floor` rounds upto `32`.
+```
+ floor(Freight) eq 32
+```
 
 
 ### Round 
@@ -449,4 +456,106 @@ Below syntax filters all the records where `Name` containing 'lfreds' starting a
 ```
 Note : As of now it is supported only in the MySQL and in the Oracle backend databases.
 
+### Expand with $filter
+
+The `$expand` query option specifies the related resources to be included in line with retrieved resources and
+`$filter` is used to specify conditions that the data must meet.
+
+API Usage
+
+```
+ $expand=Products($filter=location eq USA) 
+```
+
+Example
+
+Below syntax fetches a list of Categories. For each Category, retrieves the related Products, but only the products where the location field is equal to 'USA'.
+
+```
+ Categories? $expand=Products($filter=location eq USA) 
+```
+Note : As of now it is supported only `eq`
+
+### Arithmetic Operators
+
+OData defines a set of arithmetic operators that require operands that evaluate to numeric types. Arithmetic operators are typically used to filter a collection of resources. 
+If an operand of an arithmetic operator is null, the result is null. 
+
+`$filter` is used to specify conditions that the data must meet.
+### 1. Addition
+The add operator adds the left and right numeric operands.
+
+API Usage
+```
+ $filter=<colname> add <Value> eq <resultent_value> 
+```
+
+Example :
+
+Below syntax fetches a list of all products with a Price of 2.55
+
+```
+ $filter=Price add 2.45 eq 5.00 
+```
+
+### 2. Subtraction
+The sub operator subtracts the right numeric operand from the left numeric operand.
+
+API Usage
+```
+ $filter=<colname> sub <Value> eq <resultent_value> 
+```
+
+Example :
+
+Below syntax fetches a list of all products with a Price of 2.55:
+
+```
+ filter=Price sub 0.55 eq 2.00 
+```
+### 3. Multiplication
+The mul operator multiplies the left and right numeric operands. The mul operator is also valid for multiplying a Duration value with a numeric value.
+
+API Usage
+```
+ $filter=<colname> mul <Value> eq <resultent_value> 
+```
+
+Example :
+
+Below syntax fetches a list of all products with a Price of 2.55
+
+```
+ $filter=Price mul 2.0 eq 5.10
+```
+### 4. Division
+The div and divby operators divide the left numeric operand by the right numeric operand. They are also valid for dividing a Duration value by a numeric value.
+
+API Usage
+```
+ $filter=<colname> div <Value> eq <resultent_value> 
+```
+
+Example :
+
+Below syntax fetches a list of all products with a Price of 2.55
+
+```
+ $filter=Price div 2.55 eq 1
+```
+### 5. Modulo
+The mod operator returns the remainder when the left numeric operand is divided by the right numeric operand.  The sign of the result is the same as the sign of the left operand. If the right operand is zero, the request fails.
+
+API Usage
+```
+ $filter=<colname> mod <Value> eq <resultent_value> 
+```
+
+Example :
+
+Below syntax fetches a list of all products with a Rating exactly divisible by 5
+
+```
+ $filter=Rating mod 5 eq 0 
+```
 
