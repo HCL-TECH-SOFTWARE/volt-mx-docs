@@ -10,8 +10,6 @@ Configure the parameters for the preprocessor and postprocessor to filter the re
 ![](Resources/Images/Integration-Advanced_Tab_678x272.png)
 
 
-<a id="java_api"></a> 
-
 <table>
   <tbody>
     <tr>
