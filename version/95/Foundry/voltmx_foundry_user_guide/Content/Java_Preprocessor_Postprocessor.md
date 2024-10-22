@@ -27,8 +27,16 @@ Configure the parameters for the preprocessor and postprocessor to filter the re
       <blockquote><b><i>Note:</i></b> For details on middleware APIs for preprocessor and postprocessor, contact refer to <a href="https://opensource.hcltechsw.com/volt-mx-docs/java_docs_apis/MiddlewareAPI/index.html">Volt MX App Services API</a> 
        </blockquote> 
       </td>
-    </tr> 
-    <tr><td><h2 id="js_api" style="text-decoration:underline;">JavaScript Preprocessor and Postprocessor</h2></td></tr>
+    </tr>
+    </tbody>
+    </table>
+  
+  
+  <a id="js_api"></a> 
+
+  <table>
+    <tbody>
+    <tr><td><h2 style="text-decoration:underline;">JavaScript Preprocessor and Postprocessor</h2></td></tr>
     <tr>
       <td>
             <p>Based on the interface, the preprocessors and postprocessors implement the following objects:<br/> <code> &lt;serviceInputParams&gt; </code>, <code> &lt;request&gt; </code>, <code> &lt;response&gt; </code> and <code> &lt;result&gt; </code>.</p>
@@ -46,6 +54,11 @@ Configure the parameters for the preprocessor and postprocessor to filter the re
            <li>Enhanced the editor UI so that the users can access JavaScript Samples from the editor.</li>
       </td>
     </tr>
+    </tbody>
+    </table>
+    
+  <table>
+    <tbody>
     <tr><td><h2 style="text-decoration:underline;">Rules Preprocessor and Postprocessor</h2></td></tr>
     <tr>
             <td><p>You can use the <b>Rules</b> option to define you custom logic as a set of rules. This option makes defining pre and post processor custom logic closer to human language and is built using <a href="http://mvel.documentnode.com/" target="_blank" title="MVEL is an expression language based on Java-syntax, with some marked differences specific to MVEL.  Unlike Java however, MVEL is dynamically typed (with optional typing), meaning type qualification is not required in the source.">MVEL</a>. <br /> </p>
