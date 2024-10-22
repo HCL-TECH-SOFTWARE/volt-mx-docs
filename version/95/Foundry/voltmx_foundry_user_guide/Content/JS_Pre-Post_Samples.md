@@ -1,8 +1,4 @@
-                             
-
-User Guide: [Integration](Services.md#integration) \> [Advanced Configurations](Advanced_Configurations.md) > [Java Sample Code for Preprocessor and Postprocessor](Java_Pre-Post_Samples.md) > JavaScript Sample Code for Preprocessor and Postprocessor
-
-Developers can also customize the sample prepost processor code displayed on Foundry javascript pre/post processor code editor.  
+<!-- Developers can also customize the sample prepost processor code displayed on Foundry javascript pre/post processor code editor.  
 Navigate to service console : 
 
 
@@ -19,7 +15,7 @@ Sample code :
 
 
 ![](Resources/Images/Samplecode_Javascript_pre-post_processor.png)
- 
+  -->
 
 JavaScript Sample Code for Preprocessor and Postprocessor
 =========================================================

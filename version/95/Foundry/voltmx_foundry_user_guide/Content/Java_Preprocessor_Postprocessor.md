@@ -1,5 +1,3 @@
-Java Preprocessors and Postprocessors
---------------------------------------
 
 ## Custom Code Invocation - Preprocessor and Postprocessor
 
@@ -29,8 +27,8 @@ Configure the parameters for the preprocessor and postprocessor to filter the re
       <blockquote><b><i>Note:</i></b> For details on middleware APIs for preprocessor and postprocessor, contact refer to <a href="https://opensource.hcltechsw.com/volt-mx-docs/java_docs_apis/MiddlewareAPI/index.html">Volt MX App Services API</a> 
        </blockquote> 
       </td>
-    </tr>
-    <tr><td><h2 style="text-decoration:underline;">JavaScript Preprocessor and Postprocessor</h2></td></tr>
+    </tr> 
+    <tr><td><h2 id="js_api" style="text-decoration:underline;">JavaScript Preprocessor and Postprocessor</h2></td></tr>
     <tr>
       <td>
             <p>Based on the interface, the preprocessors and postprocessors implement the following objects:<br/> <code> &lt;serviceInputParams&gt; </code>, <code> &lt;request&gt; </code>, <code> &lt;response&gt; </code> and <code> &lt;result&gt; </code>.</p>
