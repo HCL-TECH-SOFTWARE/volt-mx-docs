@@ -1,9 +1,8 @@
-                               
+Java Preprocessors and Postprocessors
+--------------------------------------
 
-User Guide: [Integration](Services.md#integration) \> [Advanced Configurations](Advanced_Configurations.md) > Exception Handling in Preprocessor - Support to access config map as part of onException handler
+## Custom Code Invocation - Preprocessor and Postprocessor
 
-Custom Code Invocation - Preprocessor and Postprocessor
--------------------------------------------------------
 
 Configure the parameters for the preprocessor and postprocessor to filter the request and response objects for your business requirements. You can specify the Java class name or custom JavaScript code or Rules for preprocessor and postprocessor. Java class names contain the preprocessor and postprocessor.
 
