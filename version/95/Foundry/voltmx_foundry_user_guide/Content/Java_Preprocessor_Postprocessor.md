@@ -1,8 +1,11 @@
 
+Java Preprocessor and Postprocessor
+======================================
+
 ## Custom Code Invocation - Preprocessor and Postprocessor
 
 
-Configure the parameters for the preprocessor and postprocessor to filter the request and response objects for your business requirements. You can specify the Java class name or custom JavaScript code or Rules for preprocessor and postprocessor. Java class names contain the preprocessor and postprocessor.
+Configure the parameters for the preprocessor and postprocessor to filter the request and response objects for your business requirements. You can specify the Java class name or Rules for preprocessor and postprocessor. Java class names contain the preprocessor and postprocessor.
 
 ![](Resources/Images/Integration-Advanced_Tab_678x272.png)
 
@@ -31,31 +34,7 @@ Configure the parameters for the preprocessor and postprocessor to filter the re
     </tbody>
     </table>
   
-  
-  <a id="js_api"></a> 
 
-  <table>
-    <tbody>
-    <tr><td><h2 style="text-decoration:underline;">JavaScript Preprocessor and Postprocessor</h2></td></tr>
-    <tr>
-      <td>
-            <p>Based on the interface, the preprocessors and postprocessors implement the following objects:<br/> <code> &lt;serviceInputParams&gt; </code>, <code> &lt;request&gt; </code>, <code> &lt;response&gt; </code> and <code> &lt;result&gt; </code>.</p>
-            <p> VoltMX Foundry supports modifying the result object as JSON object in JavaScript. Two new APIs, <b>resultToJSON</b> and <b>jsonToResult</b> in <b>JavaScript</b>.</p>
-            <ul><li>
-            For <b>Postprocessor</b>, you must call <b>resultToJSON</b> API which converts result object to JSON object. You can modify the result object as a string. For sample JavaScript code, refer to <a href="JS_Pre-Post_Samples.html#resultToJSONAPI" target="_blank">Sample code for <b>Postprocessor</b></a>.
-            </li><li>
-            For <b>Preprocessor</b>, you must call <b>resultToJSON</b> API which returns JSON object. You can use the JSON object to modify the result as JSON and reset the result using <b>jsonToResult</b> API. For sample JavaScript code, refer to <a href="JS_Pre-Post_Samples.html#jsontoResultAPI" target="_blank">Sample code for <b>Preprocessor</b></a>.
-            </li></ul>
-            <p>You can use these objects and their corresponding methods directly in JavaScript code.For a sample JavaScript code, refer to <a href="JS_Pre-Post_Samples.html">JavaScript Sample Code for Preprocessor and Postprocessor</a>.</p>            
-            <blockquote><b><i>Note:</i></b> For details on Foundry Javascript for preprocessor and postprocessor, refer to <a href="../../../javascript_docs_apis/jsdocs/index.html"><code>javascript_docs_apis</code></a></blockquote>
-            <h3>Monaco Editor Enhancement</h3>
-            <li>Changed Pre and Post Processor editor from CodeMirror to Monaco (Monaco is the code editor used in Visual Studio).</li>
-            <li>Added new JavaScript APIs for commonly used middleware API Objects to use them in JavaScript friendly way and added samples and Intellisense support for the same.</li>
-           <li>Enhanced the editor UI so that the users can access JavaScript Samples from the editor.</li>
-      </td>
-    </tr>
-    </tbody>
-    </table>
     
   <table>
     <tbody>
@@ -71,15 +50,17 @@ Configure the parameters for the preprocessor and postprocessor to filter the re
 
 <br />
 
-The step allows you to further filter the data received from a service call.
+The following steps allows you to further filter the data received from a service call.
 
-1.  Under the **Custom Code Invocation**, follow these steps:
-    * Under **Preprocessor**, configure one of the following:
+1.  Under the **Custom Code Invocation**, follow these steps: 
+
+    * Under **Preprocessor**, configure one of the following: 
+
         * Select **Java**, and in the **Class** text box, enter the preprocessor class. This step enables a developer to include any business logic on the data before forwarding the request to the external data source.
-        *   For **Java**, you can configure multiple Preprocessors. This is supported for Integration/Orchestration services and Object services. If you have defined your logic for multiple preprocessors in the uploaded JAR file in the service definition, you can select the available one or other preprocessors. You can arrange the selected pre-processors to be executed in the desired order during the operation call.     
+        *   For **Java**, you can configure multiple Preprocessors. This is supported for Integration/Orchestration services and Object services. If you have defined your logic for multiple preprocessors in the uploaded JAR file in the service definition, you can select the available one or other preprocessors. You can arrange the selected pre-processors to be executed in the desired order during the operation call.  
+
             <details close markdown="block"><summary>Use Case </summary> When customers have a large amount of custom code, the maintainability of the code becomes an issue. The issue becomes much more complicated when multiple stakeholders working on custom code. In such cases, the custom code can be split into multiple pre/post processors so that stakeholders can work on their respective modules. This increases the upgradability and maintainability of the custom code.  
             </details>  
-
 
         Select **Java**, and from the **Class** list, select a preprocessor class. You can select one or more classes.  
             This step enables a developer to include any business logic on the data before sending the response to a mobile device.  
@@ -88,22 +69,9 @@ The step allows you to further filter the data received from a service call.
             
         ![](Resources/Images/multiplePreprocessor1_399x256.png)  
             
-        *   Select **JavaScript** to open a text box. Here, you can write custom JavaScript code for the preprocessor.
-            
-            **JavaScript Code Validation for the Preprocessor:** You can validate your JavaScript Code for the preprocessor before saving an operation. To validate the JavaScript code, click the Validate icon in the JavaScript code text box for the preprocessor.
-            <br />
-            ![](Resources/Images/JSValidate.png)  
-            <br/>
-            
-            **The following are different scenarios that occur when you validate the JavaScript code for the Preprocessor:**
-            
-            *   If you click **Validate**, and if the JavaScript code has **no errors**, the Validate Successful message appears. You can save the operation.
-            *   If you click **Validate**, and if the JavaScript code **has errors**, the **Error** message dialog is displayed with a **Download** link to the validation results. When you click **Download**, a .txt file with the validation results will be downloaded to your local system. In this case you must provide a valid JavaScript code, validate the updated code, and only then you can save the operation.
-                
-                > **_Important:_** If you have validated the JavaScript code and found errors, the Console does not allow you to save the operation.
-                
-            *   If you do not want to validate the JavaScript code for the Preprocessor, and want to save the operation, do not click **Validate**.
-        *   Select **Rules** to open a text box. Here, you can write rules for the preprocessor.
+        
+        *   Select **Rules** to open a text box. Here, you can write rules for the preprocessor.  
+
     *   Under **Postprocessor**, configure one of the following:
         
         *   For **Java**, you can configure multiple Postprocessors. This is supported for Integration/Orchestration services and Object services. If you have defined your logic for multiple post-processors in the uploaded JAR file in the service definition, you can select the available one or other post-processors. You can arrange the selected post-processors to be executed in the desired order during the operation call.  
@@ -114,33 +82,21 @@ The step allows you to further filter the data received from a service call.
 
 
             Select **Java**, and from the **Class** list, select a postprocessor class. You can select one or more classes.  
-            This step enables a developer to include any business logic on the data before sending the response to a mobile device.**  
+            This step enables a developer to include any business logic on the data before sending the response to a mobile device.
             ![](Resources/Images/multiplePostprocessor_346x317.png)  
+
             **You can rearrange the order of the classes to be executed, if required.**  
             ![](Resources/Images/multiplePostprocessor1_346x234.png)  
             <br/>  
             
         
-        *   Select **JavaScript** to open a text box. Here, you can write custom JavaScript code for the postprocessor.
-            
-            **JavaScript Code Validation for the Postprocessor:** You can validate your JavaScript Code for the postprocessor before saving an operation. To validate the JavaScript code, click the Validate icon in the JavaScript code text box for the postprocessor.
-            <br />
-            ![](Resources/Images/JSValidate.png)
-            <br />
-
-               
-            
-            **The following are different scenarios that occur when you validate the JavaScript code for Postprocessor:**
-            
-            *   If you click **Validate**, and if the JavaScript code has **no errors**, the Validate Successful message appears. You can save the operation.
-            *   If you click **Validate**, and if the JavaScript code **has errors**, the **Error** message dialog is displayed with a **Download** link to the validation results. When you click **Download**, a .txt file with the validation results will be downloaded to your local system. In this case you must provide a valid JavaScript code, validate the updated code, and only then you can save the operation.
-                
-                > **_Important:_** If you have validated the JavaScript code and found errors, the Console does not allow you to save the operation.
-                
-            *   If you do not want to validate the JavaScript code for the Postprocessor, and want to save the operation, do not click **Validate**.
+        
         *   Select **Rules** to open a text box. Here, you can write rules for the postprocessor.
 
-2.  <a id="timeout_cachable"></a>Under the **Properties** section, provide details for the following advanced service properties:
+
+    <a id="timeout_cachable"></a>
+    
+2.  Under the **Properties** section, provide details for the following advanced service properties:
     *   **Timeout (in ms)** - the duration in milliseconds after which the service call times out. Provide the details in the text box.
     *   **Cache Response** - the duration in seconds within which the service response is fetched from the cache. Select the **Cache Response** check box, and provide the details in the text box.
     *   **Unescape embedded xml in response -** To ignore the MuleSoft response received in the XML value field, select the **Unescape embedded xml in response** check box.
