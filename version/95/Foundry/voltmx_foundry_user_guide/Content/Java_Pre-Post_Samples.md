@@ -1,12 +1,6 @@
-                              
-
-User Guide: [Integration](Services.md#integration) \> [Advanced Configurations](Advanced_Configurations.md) > Java Sample Code for Preprocessor and Postprocessor
-
-Sample Code for Preprocessor and Postprocessor
-==============================================
 
 Java Sample Code for Preprocessor and Postprocessor
----------------------------------------------------
+===================================================
 
 ### Sample DataPreProcessor 
 
