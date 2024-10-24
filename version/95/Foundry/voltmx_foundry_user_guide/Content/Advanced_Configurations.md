@@ -7,7 +7,7 @@ Advanced Configurations
 
 You can perform the following advanced configurations while creating an Integration Service.
 
-*   [Preprocessor and Postprocessor](Java_Preprocessor_Postprocessor_.md)
+*   [Preprocessor and Postprocessor](Java_Preprocessor_Postprocessor.md)
 *   Sample Code for Preprocessor and Postprocessor
     *   [Java Sample Code for Preprocessor and Postprocessor](Java_Pre-Post_Samples.md)
     *   [JavaScript Sample Code for Preprocessor and Postprocessor](JS_Pre-Post_Samples.md)
