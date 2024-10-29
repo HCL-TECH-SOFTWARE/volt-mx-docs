@@ -115,7 +115,7 @@ For relevant support note, see the <a href="https://support.hcltechsw.com/csm?id
 October 17, 2024
 
 * Added support for iOS 18 builds and Xcode 16.
-* Strengthened security.
+* Security hardening.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
@@ -131,7 +131,7 @@ For detailed information about fixes and known issues in this release, see the <
 September 25, 2024
 
 * Added support for asynchronous calls in the Handler code during NFI generation for Desktop Native platforms.
-* Strengthened security measures.
+* Security hardening measures.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
@@ -999,6 +999,16 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 
 ## Volt Foundry
 
+### V9 Servicepack 5 Fixpack 17 Hotfix 0
+October 17, 2024
+
+* Security hardening.
+
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+
+
+
 ### AppFactory V9 Servicepack 5 Fixpack 16 Hotfix 7
 October 07, 2024
 
@@ -1038,7 +1048,7 @@ August 06, 2024
 
 * Updated the Velocity template engine from 1.7.x to 2.x (core). Differences in the scheme are documented <a href="https://velocity.apache.org/engine/2.0/upgrading.html" target="_blank">here</a>.
 
-* Strengthened security.
+* Security hardening.
 
   >**Note** : <b>In case Android FCM notifications are being utilised, kindly upgrade to v9.5.16.6 instead which contains a critical fix to unblock this feature.</b>
 
@@ -1073,7 +1083,7 @@ For relevant support note, see the <a href="https://support.hcltechsw.com/csm?id
 June 10, 2024
 
 * Expanded the scope of OData4 filters by adding new operations.
-* Strengthened security.
+* Security hardening.
 
 > **Note :** The scope of the on-prem installer for this release is limited to MySQL and MariaDB configurations.
 
