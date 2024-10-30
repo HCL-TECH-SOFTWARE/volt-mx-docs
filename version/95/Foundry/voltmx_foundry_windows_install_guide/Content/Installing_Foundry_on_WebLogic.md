@@ -136,8 +136,8 @@ Refer to [creating a reports database, for example, **<prefix\>mfreports<suffix\
             Perform the following steps to complete pre-requisites before continuing with installation :
 
             1.   Copy the mssql-jdbc-7.2.2.jre11.jar from your Volt Foundry Installation folder.
-            2.   Paste the mssql-jdbc-7.2.2.jre11.jar into the `<WL_HOME\>/server/lib` folder
-            3.   Go to the `<WL_HOME\>/user_projects/domains/base_domain/bin` and edit the startWeblogic script file.
+            2.   Paste the mssql-jdbc-7.2.2.jre11.jar into the `<WL_HOME>/server/lib` folder
+            3.   Go to the `<WL_HOME>/user_projects/domains/base_domain/bin` and edit the startWeblogic script file.
 
                 <pre class="prettyprint prettyprinted" style=""><span class="typ">For</span> <span class="pln"></span> <span class="typ">Windows</span><span class="pun">:</span> <span class="pln">startWeblogic</span><span class="pun">.</span><span class="pln">cmd</span></pre>
 
@@ -145,7 +145,7 @@ Refer to [creating a reports database, for example, **<prefix\>mfreports<suffix\
 
                 <pre class="prettyprint prettyprinted" style=""><span class="kwd">set</span> <span class="pln">SAVE_CLASSPATH</span><span class="pun">=%</span><span class="pln">WL_HOME</span><span class="pun">%</span><span class="str">/server/</span><span class="pln">lib</span><span class="pun">/</span><span class="pln">mssql</span><span class="pun">-</span><span class="pln">jdbc</span><span class="pun">-</span><span class="lit">7.2</span><span class="pun">.</span><span class="lit">2.jre11.jar</span><span class="pun">;%</span><span class="pln">CLASSPATH</span><span class="pun">%</span></pre>
 
-            5.   If Windows Integrated Auth is enabled, the sqljdbc_auth.dll should be copied to the folder at: `<WL_HOME\>/user_projects/domains/base_domain/bin`
+            5.   If Windows Integrated Auth is enabled, the sqljdbc_auth.dll should be copied to the folder at: `<WL_HOME>/user_projects/domains/base_domain/bin`
             6.   Restart the server.
 
                 <span class="autonumber"><span>**<span style="color: #293276;" class="mcFormatColor">Note:</span> **</span></span><WL_HOME\> is the folder where WebLogic is installed.
@@ -155,13 +155,13 @@ Refer to [creating a reports database, for example, **<prefix\>mfreports<suffix\
         
         *   **Oracle**: To use Volt Foundry with WebLogic Server in combination with Oracle database, you must place the Oracle connector jar (ojdbc8.jar) in the WebLogic Server path.
 
-            For more details, follow the steps in the below:
+            For more details, follow the below steps:
 
             Perform the following steps to complete pre-requisites before continuing with installation :
 
             1.  Copy the ojdbc8.jar from your Volt Foundry Installation folder.
-            2.  Paste the ojdbc8.jar into the `<WL_HOME\>/server/lib` folder
-            3.  Go to the `<WL_HOME\>/user_projects/domains/base_domain/bin` and edit the startWeblogic script file.
+            2.  Paste the ojdbc8.jar into the `<WL_HOME>/server/lib` folder
+            3.  Go to the `<WL_HOME>/user_projects/domains/base_domain/bin` and edit the startWeblogic script file.
 
                 <pre class="prettyprint prettyprinted" style=""><span class="typ">For</span> <span class="pln"></span> <span class="typ">Windows</span><span class="pun">:</span> <span class="pln">startWeblogic</span><span class="pun">.</span><span class="pln">cmd</span></pre>
 
@@ -178,13 +178,13 @@ Refer to [creating a reports database, for example, **<prefix\>mfreports<suffix\
             
         *   **MySQL**: To use Volt Foundry with WebLogic Server in combination with MySQL database, you must place the MySQL connector jar (mysql-connector-java-8.x.x) in the WebLogic Server path.
 
-            For more details, follow the steps in the below
+            For more details, follow the below steps:
 
             Perform the following steps to complete pre-requisites before continuing with installation :
 
             1.  Copy the mysql-connector-java-8.x.x from your Volt Foundry Installation folder.
-            2.  Paste the mysql-connector-java-8.x.x into the `<WL_HOME\>/server/lib` folder
-            3.  Go to the `<WL_HOME\>/user_projects/domains/base_domain/bin` and edit the startWeblogic script file.
+            2.  Paste the mysql-connector-java-8.x.x into the `<WL_HOME>/server/lib` folder
+            3.  Go to the `<WL_HOME>/user_projects/domains/base_domain/bin` and edit the startWeblogic script file.
                 <pre class="prettyprint prettyprinted" style=""><span class="typ">For</span> <span class="pln"></span> <span class="typ">Windows</span><span class="pun">:</span> <span class="pln">startWeblogic</span><span class="pun">.</span><span class="pln">cmd</span></pre>
 
             4.  Prepend your JAR file to the SAVE_CLASSPATH environment variable.
@@ -249,6 +249,7 @@ Refer to [creating a reports database, for example, **<prefix\>mfreports<suffix\
 
        <span class="autonumber"><span>**<span style="color: #293276;" class="mcFormatColor">Note:</span> **</span></span>If you choose to enable Windows Authentication support on SQL Server, you do not need to provide the **Database System User** and **Database System Password**.
 
+       <img src="./Resources/Images/SQLServer_504x386.png">
 
        *   **Database Server Hostname/IP**: Enter the DB server Hostname/IP to be used to create a database of selected components of Volt Foundry. By default, the server Hostname/IP is set as localhost.
 

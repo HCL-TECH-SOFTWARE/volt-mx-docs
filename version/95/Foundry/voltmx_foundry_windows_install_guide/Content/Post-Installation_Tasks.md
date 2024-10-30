@@ -1,6 +1,6 @@
                           
 
-You are here: How to Add an Installer Generated Self-Signed SSL Certificate to Cacerts
+You are here: How to Add an Installer Generated Self-Signed SSL Certificate to Cacerts.
 
 Post-Installation Tasks
 =======================
@@ -79,31 +79,9 @@ For example: When you upgrade JDK V 1.6 to JDK V 1.7 (vice-versa), you can still
     *   `ssl.keyStore=<java_home>/jre/lib/security/cacerts`
 
 
-<!-- <h2 id="how-to-update-security-configuration-in-config-xml-required-in-case-of-weblogic-installation">How to Update Security Configuration in Config.xml (Required in case of WebLogic installation)</h2>
-
-When you install Volt MX Foundry on WebLogic, with default configuration in the WebLogic's config.xml file, Volt MX Foundry fails to register with environments.
-
-To update security configuration in the config.xml file in WebLogic, follow these steps:
-
-1.  Go to `<weblogic profile folder>/config` folder.
-2.  Open the **config.xml**, and add below line under the `<node-manager-password-encrypted>` tag:
-    
-    `<enforce-valid-basic-auth-credentials>false</enforce-valid-basic-auth-credentials>`
-    
-    For example:
-    
-```
-<default-realm>myrealm</default-realm>
-        <credential-encrypted>{AES}rGucYtN8zScvbfvJtHyH/lwhWg1Av2yLPQmQ3vdAV/wACiJ+k8zTKQBTKf8TRcTLWPWFZkunUyllbSvLJ8P07GCgJf4v6egFUlVVdfOpgYrbkohlp49S7KVMTgRkhL79</credential-encrypted>
-        <node-manager-username>weblogic</node-manager-username>
-        <node-manager-password-encrypted>{AES}R2P+dzOm5y1ODB8e3aMj6spUrJet6h6aUv91umUe5q4=</node-manager-password-encrypted>
-        <enforce-valid-basic-auth-credentials>false</enforce-valid-basic-auth-credentials> 
-``` -->
-
-
 <h2 id="how-to-turn-off-the-send-usage-data-anonymously-feature">How to Configure Memcache for Integration Services</h2>
 
-*   For Volt MX Foundry version 7.3 or above, you can configure the memcache from Admin console.
+*   You can configure the memcache from Admin console.
     
     To configure memcache in Foundry 7.3 or above versions, follow these steps:
     
@@ -124,18 +102,17 @@ To update security configuration in the config.xml file in WebLogic, follow thes
     
     > **_Note:_** Name of the VOLTMXADMINDB depends on the suffix and prefix provided, which you provided during the installation.
     
-    1.  Execute the following steps:
-```
-UPDATE <VOLTMXADMINDB>.server_configuration set prop_value =
-        '<memcache_hostname>’:’<memcache_port>’' , created_date = CURRENT_TIMESTAMP , updated_date
-        = CURRENT_TIMESTAMP WHERE prop_name = 'memcache.cluster';
-```
+    Execute the following steps:  
+
+    `UPDATE <VOLTMXADMINDB>.server_configuration set prop_value = '<memcache_hostname>’:’<memcache_port>’' , created_date = CURRENT_TIMESTAMP , updated_date = CURRENT_TIMESTAMP WHERE prop_name = 'memcache.cluster';`
         
-        **Verification:** To verify whether the memcache configuration is successfully done, go to the **Health Check** page and look for **Access to Cache** entry.
+     **Verification:** To verify whether the memcache configuration is successfully done, go to the **Health Check** page and look for **Access to Cache** entry.
         
-        > **_Note:_** It may take up to 5 minutes for the healthcheck to reflect the cache status. If you are still unable to find the particular entry in the **Health Check** page, try clearing the healthcheck cache using the following URL:  
+    > **_Note:_** It may take up to 5 minutes for the healthcheck to reflect the cache status. If you are still unable to find the particular entry in the **Health Check** page, try clearing the healthcheck cache using the following URL:  
           
-        https://<server-host>:<server-port>/admin/healthcheck?output=json<br>![](Resources/Images/HC2_412x242.png)
+    https://<server-host\>:<server-port\>/admin/healthcheck?output=json<br>
+    
+    ![](Resources/Images/HC2_412x242.png)
         
 
 <h2 id="configure-deployment-of-mbaasportal-war-file-for-multi-node">Configure Deployment of mbaasportal.war File for Multi-Node</h2>
@@ -267,11 +244,41 @@ The Module.xml can be located at:
 2.  Navigate to `<JBOSS_DIR>/modules/org/sapjco/main`.
     *   In `module.xml`, under the **<resources>** tag add `<resource-root path="sapjco3.jar"/>`.
     *   In `standalone.xml` or `domain.xml`, in the subsystem add `<subsystem xmlns="urn:jboss:domain:ee:4.0">`. Add the following tag:
+
 ```
 <global-modules>  
 <module name="org.sapjco" slot="main"/>  
 </global-modules>
 ```
+
+
+
+
+
+
+
+<!-- <h2 id="how-to-update-security-configuration-in-config-xml-required-in-case-of-weblogic-installation">How to Update Security Configuration in Config.xml (Required in case of WebLogic installation)</h2>
+
+When you install Volt MX Foundry on WebLogic, with default configuration in the WebLogic's config.xml file, Volt MX Foundry fails to register with environments.
+
+To update security configuration in the config.xml file in WebLogic, follow these steps:
+
+1.  Go to `<weblogic profile folder>/config` folder.
+2.  Open the **config.xml**, and add below line under the `<node-manager-password-encrypted>` tag:
+    
+    `<enforce-valid-basic-auth-credentials>false</enforce-valid-basic-auth-credentials>`
+    
+    For example:
+    
+```
+<default-realm>myrealm</default-realm>
+        <credential-encrypted>{AES}rGucYtN8zScvbfvJtHyH/lwhWg1Av2yLPQmQ3vdAV/wACiJ+k8zTKQBTKf8TRcTLWPWFZkunUyllbSvLJ8P07GCgJf4v6egFUlVVdfOpgYrbkohlp49S7KVMTgRkhL79</credential-encrypted>
+        <node-manager-username>weblogic</node-manager-username>
+        <node-manager-password-encrypted>{AES}R2P+dzOm5y1ODB8e3aMj6spUrJet6h6aUv91umUe5q4=</node-manager-password-encrypted>
+        <enforce-valid-basic-auth-credentials>false</enforce-valid-basic-auth-credentials> 
+``` -->
+
+
 
 <!-- ### Steps for Weblogic
 

@@ -84,7 +84,7 @@ The Patch Installer uses hotfix archives and applies the software updates to an 
    ![](Resources/Images/voltmx_preinstalled_summary.png) 
 
 
-   The installer takes backup of the current install folder. The backup folder will have a suffix of `_{Patch_File_Name}`. For example, if the hotfix name is KPNS.XXX, then the suffix of the backup folder will be `_KPNS.XXX`.
+   The installer takes backup of the current install folder. The backup folder will have a suffix of `_{Patch_File_Name}`. For example, if the hotfix name is VPNS.XXX, then the suffix of the backup folder will be `_VPNS.XXX`.
 
    > **_IMPORTANT:_** The Installer does not support automatic backups of database and other artifacts. The Installer does not support rollback in case of a failure during the upgrade.<br>
    -  You must take backup of your database and other artifacts
@@ -104,6 +104,8 @@ The Patch Installer uses hotfix archives and applies the software updates to an 
 
    The installation of Volt Foundry is finished. In case of any errors during the installation, refer to the installation log for details. Installation log is located at below location: For example, `C:\VoltMXFoundry900\`
 
+![](Resources/Images/Patch5.png) 
+
 <ol start="6">
 <li>Click <b>Done</b> to complete the installation. After the installation
    is completed, the installer creates logs in the install folder.</li>
@@ -120,4 +122,146 @@ The Patch Installer uses hotfix archives and applies the software updates to an 
 
 To create a patch file for Foundry components, you need to create a zip file with the relevant files. The contents for the zip must be downloaded from the link to the build artifacts.
 
-  
+For information about the files and file structure for individual Foundry components, refer to the following sections.
+
+<details close markdown="block"><summary>Identity (auth.zip)</summary>
+
+*  auth.zip
+   
+   *  auth (folder)
+      *  authService.war
+      *  migrations.jar
+      *  jboss-logging-3.1.0.CR2.jar
+      *  mysql-connector-java-5.1.48.jar
+      *  db.sql
+      *  auth_config.zip
+      *  migrations-auth-db2.zip
+      *  migrations-auth-oracle.zip
+      *  migrations-auth-sqlserver.zip
+      *  migrations.zip
+
+</details>
+
+
+<details close markdown="block"><summary>Portal (portal.zip)</summary>
+
+*  portal.zip
+   
+   *  portal (folder)
+      *  mbaasportal.war
+
+</details>
+
+
+<details close markdown="block"><summary>Workspace (waas.zip)</summary>
+
+*  waas.zip
+   
+   *  waas (folder)
+      *  workspaceService.war
+      *  waasdb.sql
+      *  migrations.zip
+      *  migrations-waas-db2.zip
+      *  migrations-waas-oracle.zip
+      *  migrations-waas-sqlserver.zip
+      *  configfiles.zip
+
+</details>
+
+
+
+<details close markdown="block"><summary>Accounts (accounts.zip)</summary>
+
+*  accounts.zip
+   
+   *  accounts (folder)
+      *  migrations-accounts-sqlserver.zip
+      *  migrations-accounts-oracle.zip
+      *  migrations-accounts-db2.zip
+      *  accountsdbmigration.zip
+      *  accountsAPI.war
+
+</details>
+
+
+<details close markdown="block"><summary>Metrics Database Scripts (metricsflyway.zip)</summary>
+
+*  metricsflyway.zip
+   
+   *  metricsflyway (folder)
+      *  reportsdb_oracle.zip
+      *  reportsdb_mysql.zip
+      *  reportsdb_mssql.zip
+      *  reportsdb_db2.zip
+
+</details>
+
+
+<details close markdown="block"><summary>Metrics Processing (metricsprocessing.zip)</summary>
+
+*  metricsprocessing.zip
+   
+   *  metricsprocessing (folder)
+      *  metrics.ear
+
+</details>
+
+
+<details close markdown="block"><summary>Integration/Middleware (middleware.zip)</summary>
+
+*  middleware.zip
+   
+   *  middleware (folder)
+      *  websphere_metainf.zip
+      *  shared-libraries-was8.x.tar
+      *  services.war
+      *  schema.zip
+      *  middleware.war
+      *  middleware-system.jar
+      *  middleware-libraries.zip
+      *  middleware-libraries.tar
+      *  middleware-bootconfig.tar
+      *  VoltMXWebController.jar
+      *  VoltMXWebCommons.jar
+      *  VoltMXLuaVM.jar
+      *  VoltMXLogger.jar
+      *  VoltMXLogger-debug.jar
+      *  VoltMXIoT.tar
+      *  voltmxcache-derby.jar
+      *  jboss-client.jar
+      *  install.zip
+      *  devicestore-MIDDLEWARE.tar
+      *  devicedb_sqlserver.zip
+      *  devicedb_oracle.zip
+      *  devicedb_mysql.zip
+      *  devicedb_db2.zip
+      *  derby.jar
+      *  admindb_sqlserver.zip
+      *  admindb_oracle.zip
+      *  admindb_mysql.zip
+      *  admindb_db2.zip
+      *  admin.war
+
+</details>
+
+
+<details close markdown="block"><summary>Engagement/Push Notification Service (vpns.zip)</summary>
+
+*  vpns.zip
+   
+   *  vpns (folder)
+      *  sqlserver.zip
+      *  sharedlib.tar
+      *  quartz-2.2.1.jar
+      *  oracle.zip
+      *  mysql.zip
+      *  vpns.war
+   *  vpns-resources.zip
+db2.zip
+
+</details>
+
+
+
+
+

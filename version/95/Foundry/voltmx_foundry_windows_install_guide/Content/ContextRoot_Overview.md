@@ -8,7 +8,7 @@ A context root identifies a Web application archive (WAR) file in an application
 
 When Volt MX Foundry installed, the required components' WARs are deployed to an app server. By default, a default context path based on the name of the deployment is used. When you reinstall Volt MX Foundry on the same app server, the newly installed instance overrides the first instance.
 
-With context root configuration for Volt MX Foundry, you can install multiple sets of Volt MX Foundry instances on one app server such as for `Dev_Instance`, `QA_Instnace`, and `Prod_Instance`.
+With context root configuration for Volt MX Foundry, you can install multiple sets of Volt MX Foundry instances on one app server such as for `Dev_Instance`, `QA_Instance`, and `Prod_Instance`.
 
 A context root for each Web module of Volt MX Foundry (for example, `mfconsole.war, accounts.war, workspace.war, admin.war, services.war, middleware.war,` and `vpns.war`) is defined in the application deployment descriptor during application assembly.
 

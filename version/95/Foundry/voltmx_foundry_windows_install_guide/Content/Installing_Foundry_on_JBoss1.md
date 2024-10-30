@@ -37,7 +37,7 @@ To install Volt MX Foundry on bundled JBoss using the installer, follow these st
     
     > **_Note:_** To activate the License Agreement option, read carefully the whole agreement text.
     
-    ![](Resources/Images/Install4_583x422.png)  
+    <!-- ![](Resources/Images/Install4_583x422.png)   -->
     
 6.  Click **Next**. The **Install Components** window appears with the following supported installation types:
     
@@ -49,7 +49,7 @@ To install Volt MX Foundry on bundled JBoss using the installer, follow these st
     Installation environment is set to Development by default.
 
     
-    ![](Resources/Images/MF_InstallType_623x507.png)
+    ![](Resources/Images/MF_InstallType_568x433.png)
 
     
 7.  Choose one of the appropriate install type based on your license
@@ -199,8 +199,9 @@ To install Volt MX Foundry on bundled JBoss using the installer, follow these st
     > **_Note:_** Provide path for .jks file as input.
         
     
-    In the **SSL Configuration** window, enter the file path for keystore file and password details.
-        *   If you enter invalid certificate details, the following error message is displayed:
+    In the **SSL Configuration** window, enter the file path for keystore file and password details.  
+
+    *   If you enter invalid certificate details, the following error message is displayed:
             
     ![](Resources/Images/invalid_cert.png)
             

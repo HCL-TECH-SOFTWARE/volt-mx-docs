@@ -9,7 +9,7 @@ Volt MX  Foundry Console contains three components: portal, accounts, and worksp
 For console log files, by default log level value is set to `INFO`:
 
 *   The following are the log file names for the console components:
-    *   `mbaasportal.log (`for mbaas portal`)`
+    *   `mbaasportal.log` (for mbaas portal)
     *   `accountsService.log` (for accounts)
     *   and `workspaceService.log` (for workspace)
 
@@ -32,7 +32,7 @@ To change log levels for `accountsService.log`, follow these steps:
 
 To change log levels for `workspaceService.log`, follow these steps:
 
-1.  Go to `` `<mfconsoledb -> property table` ``, search for key  `` `LOG_LEVEL` ``.
+1.  Go to  `<mfconsoledb -> property table`, search for key  `LOG_LEVEL`.
 2.  Change the log level to the required value.
 
 To change log levels for `authService.log`, follow these steps:

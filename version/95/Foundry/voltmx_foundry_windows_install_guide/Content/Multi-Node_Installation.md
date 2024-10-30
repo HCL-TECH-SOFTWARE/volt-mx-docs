@@ -35,7 +35,7 @@ To install the Volt MX Foundry console using the installer, follow these steps:
     
     > **_Note:_** To activate the License Agreement option, read carefully the entire text.
     
-    ![](Resources/Images/Install4_583x422.png)  
+    ![](Resources/Images/Install4.png)  
     
 6.  Click **Next**. The **Install Components** window appears with the following supported installation types:
     
@@ -46,7 +46,7 @@ To install the Volt MX Foundry console using the installer, follow these steps:
     
     Installation environment is set to Development by default .
     
-    ![](Resources/Images/MF_InstallType_572x466.png)
+    ![](Resources/Images/MF_InstallType_568x433.png)
     
 7.  Choose one of the appropriate install type based on your license - for example, Development, Non-Production, or Production.
 8.  Select the **Send usage data anonymously** check box. Allows HCL to collect product usage information to make your Volt MX Foundry experience better. HCL does not save any of your private or application data. By default this check box is selected.
@@ -89,7 +89,7 @@ To install the Volt MX Foundry console using the installer, follow these steps:
       
     When you install the integration with or without one or more components (identity, or Engagement Services) on a separate node, the installer displays the **Reports Database Name** field in the **Database Details** window. If the installer prompts you to enter the existing reports db, enter the reports database name (for example, `voltmxmfreportsdb1`) in the **Database Details window > Reports Database Name** field. Refer to the [Database Details](#DatabaseDetails) window.  
       
-    Refer to creating a reports database, for example : mfreports
+    Refer to creating a reports database, for example : <prefix\>mfreports<suffix\>.
     
 11. Click **Next**. The **Install Folder** window appears. The selected path appears in the **Where would you like to install** field.
     

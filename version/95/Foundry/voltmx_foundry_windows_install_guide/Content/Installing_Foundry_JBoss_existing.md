@@ -1,5 +1,5 @@
                          
-
+ 
 
 Installing Volt MX Foundry on a Standalone Mode in a Pre-configured JBoss
 ========================================================================
@@ -38,7 +38,7 @@ To install Volt MX Foundry on a pre-configured JBoss, follow these steps:
     
     > **_Note:_** To activate the License Agreement option, read carefully the whole agreement text.
     
-    ![](Resources/Images/Install4_583x422.png)  
+    ![](Resources/Images/Install4.png)  
     
 6.  Click **Next**. The **Install Components** window appears with the following supported installation types:
     
@@ -93,7 +93,7 @@ To install Volt MX Foundry on a pre-configured JBoss, follow these steps:
       
     When you install the integration with or without one or more components (identity, or Engagement Services) on a separate node, the installer displays the **Reports Database Name** field in the **Database Details** window. If the installer prompts you to enter the existing reports db, enter the reports database name (for example, `voltmxmfreportsdb1`) in the **Database Details window > Reports Database Name** field. Refer to the Database Details window.  
       
-    Refer to [creating a reports database, for example : mfreports
+    Refer to [creating a reports database, for example, **<prefix\>mfreports<suffix\>**](#CreatingReportsDB).
     
 11. Click **Next**. The **Install Folder** window appears. The selected path appears in the **Where would you like to install** field.
     

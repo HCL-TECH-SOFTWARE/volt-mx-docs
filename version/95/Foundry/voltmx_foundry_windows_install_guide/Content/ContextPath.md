@@ -41,15 +41,15 @@ Approach 1: Changing Context Root Path after the installation using the Installe
     
     *   MySQL
         
-        UPDATE accounts\_configurations SET value='<http or https>://<server\_host>:<server\_port>/workspace1' WHERE name='WAAS\_BASE\_URL';
+        `UPDATE accounts_configurations SET value='<http or https>://<server_host>:<server_port>/workspace1' WHERE name='WAAS_BASE_URL';`
         
     *   Oracle
         
-        UPDATE accounts\_configurations SET value='<http or https>://<server\_host>:<server\_port>/workspace1' WHERE name='WAAS\_BASE\_URL' ;
+        `UPDATE accounts_configurations SET value='<http or https>://<server_host>:<server_port>/workspace1' WHERE name='WAAS_BASE_URL' ;`
         
     *   SQL Server
         
-        UPDATE accounts\_configurations SET value='<http or https>://<server\_host>:<server\_port>/workspace1' WHERE name='WAAS\_BASE\_URL' ;
+        `UPDATE accounts_configurations SET value='<http or https>://<server_host>:<server_port>/workspace1' WHERE name='WAAS_BASE_URL' ;`
         
 2.  Open the renamed `mfconsole1.war` and do the following:
     1.  **Update** the following property in the `config.properties` file:
@@ -57,7 +57,7 @@ Approach 1: Changing Context Root Path after the installation using the Installe
             
             The location for **config.properties**: `mfconsole1.war\WEB-INF\classes`
             
-            > **_Note:_** A WAR file location varies based on an app server - for example, for Tomcat, WARs are found at <INSTALL\_DIR>\\tomcat\\webapps.
+            > **_Note:_** A WAR file location varies based on an app server - for example, for Tomcat, WARs are found at <INSTALL_DIR\>\\tomcat\\webapps.
             
     2.  **Add** the following properties in the `config.properties` file:
         *   VOLTMX\_ACCOUNTS\_HEALTHCHECK\_URL=`<http or https>://<server_host>:<server_port>/accounts1/health_check`
@@ -66,7 +66,7 @@ Approach 1: Changing Context Root Path after the installation using the Installe
             
 3.  Update the following property in the `VOLTMX_SERVER_SERVICES_CONTEXT_PATH` in the `admindb` configuration table:
     
-    VOLTMX\_SERVER\_SERVICES\_CONTEXT\_PATH=services1
+    `VOLTMX_SERVER_SERVICES_CONTEXT_PATH=services1`
     
     For example, `<prefix>admindb<suffix>`.
     
@@ -74,22 +74,22 @@ Approach 1: Changing Context Root Path after the installation using the Installe
     
     *   MySQL
         
-        UPDATE server\_configuration SET prop\_value ='services1' WHERE prop\_name = 'VOLTMX\_SERVER\_SERVICES\_CONTEXT\_PATH';
+        `UPDATE server_configuration SET prop_value ='services1' WHERE prop_name = 'VOLTMX_SERVER_SERVICES_CONTEXT_PATH';`
         
     *   Oracle
         
-        UPDATE server\_configuration SET prop\_value ='services1' WHERE prop\_name = 'VOLTMX\_SERVER\_SERVICES\_CONTEXT\_PATH';
+        `UPDATE server_configuration SET prop_value ='services1' WHERE prop_name = 'VOLTMX_SERVER_SERVICES_CONTEXT_PATH';`
         
     *   SQL Server
         
-        UPDATE server\_configuration SET prop\_value ='services1' WHERE prop\_name = 'VOLTMX\_SERVER\_SERVICES\_CONTEXT\_PATH';
+        `UPDATE server_configuration SET prop_value ='services1' WHERE prop_name = 'VOLTMX_SERVER_SERVICES_CONTEXT_PATH';`
         
 4.  Configure the following settings for application server, as follows:
     *   For **Tomcat**: In case you have renamed a `.war`, modify the following datasource file names as per the respective renamed war files:
         
         Path for datasource files:
         
-        <INSTALL\_DIR>\\<App\_Server>\\conf\\Catalina\\localhost
+        <INSTALL_DIR\>\\<App_Server\>\\conf\\Catalina\\localhost
         
         *   Rename `accounts.xml` to `account1.xml`
         *   Rename `workspace.xml` to `workspace1.xml`
@@ -102,11 +102,11 @@ Approach 1: Changing Context Root Path after the installation using the Installe
         
         From:
         
-        <context-root>/services</context-root>
+        `<context-root>/services</context-root>`
         
         To:
         
-        <context-root>/services1</context-root>
+        `<context-root>/services1</context-root>`
         
 5.  Restart your app server.
 6.  Launch Volt MX Foundry Console with new context path and do the registration using the new auth service URL format:  
@@ -126,7 +126,7 @@ Approach 1: Changing Context Root Path after the installation using the Installe
     
     If admin is renamed to admin1 then the sample URL format is as follows:
     
-    <http or https>://<server\_host>:<server\_port>/admin1
+    `<http or https>://<server_host>:<server_port>/admin1`
     
 8.  Update `service_url` after an environment is registered in the `accountsdb` table, as follows:
     

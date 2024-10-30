@@ -34,48 +34,53 @@ After granting privileges, disconnect existing session, and use new session in o
     *   Lob tablespace: MF\_LOB\_DATA
         
 *   Using an SQLPlus or another Database client, connect to you Oracle database as Sysdba.  
-    Replace the <DATA\_FILE\_PATH> with actual data file path on the Oracle database server.  
+    Replace the <DATA_FILE_PATH\> with actual data file path on the Oracle database server.  
     
 ```
-
-    CREATE TABLESPACE MF\_DATA DATAFILE '<DATA\_FILE\_PATH>/MF\_DATA\_01.DBF' SIZE 2048M AUTOEXTEND ON NEXT 100M MAXSIZE 5120M;
-    CREATE TABLESPACE MF\_INDEX DATAFILE '<DATA\_FILE\_PATH>/MF\_INDEX\_01.DBF' SIZE 2048M AUTOEXTEND ON NEXT 100M MAXSIZE 5120M;
-    CREATE TABLESPACE MF\_LOB\_DATA DATAFILE '<DATA\_FILE\_PATH>/MF\_LOB\_DATA\_01.DBF' SIZE 2048M AUTOEXTEND ON NEXT 100M MAXSIZE 5120M;
+CREATE TABLESPACE MF_DATA DATAFILE '<DATA_FILE_PATH>/MF_DATA_01.DBF' SIZE 2048M AUTOEXTEND ON NEXT 100M MAXSIZE 5120M;
+CREATE TABLESPACE MF_INDEX DATAFILE '<DATA_FILE_PATH>/MF_INDEX_01.DBF' SIZE 2048M AUTOEXTEND ON NEXT 100M MAXSIZE 5120M;
+CREATE TABLESPACE MF_LOB_DATA DATAFILE '<DATA_FILE_PATH>/MF_LOB_DATA_01.DBF' SIZE 2048M AUTOEXTEND ON NEXT 100M MAXSIZE 5120M;
 ```
     
-*   Create a dedicated database user with default tablespaces (MF\_DATA) and grant quota to two other tablespaces (MF\_INDEX and MF\_LOB\_DATA tablespaces).
-    *   To create a user based on your Oracle 11g or 12c without PDB, which will be used in the JDBC.
-    	```
+*   Create a dedicated database user with default tablespaces (MF_DATA) and grant quota to two other tablespaces (MF_INDEX and MF_LOB_DATA tablespaces).
+    *   To create a user based on your Oracle 11g or 12c without PDB, which will be used in the JDBC.  
 
-	CREATE USER <install-user> IDENTIFIED BY <password> DEFAULT TABLESPACE MF_DATA TEMPORARY TABLESPACE TEMP PROFILE DEFAULT;
-        GRANT DBA TO <install-user>;
-        ALTER USER <install-user> QUOTA UNLIMITED ON MF_DATA;
-        ALTER USER <install-user> QUOTA UNLIMITED ON MF_INDEX;
-        ALTER USER <install-user> QUOTA UNLIMITED ON MF_LOB_DATA;
-        
-```<br>
-*   To create a dedicated database user based on your Oracle 12c with PDB, then create a `dedicated database local user` inside PDB, which will be used in the Java Database Connectivity (JDBC) authentication.
+```
+CREATE USER <install-user> IDENTIFIED BY <password> DEFAULT TABLESPACE MF_DATA TEMPORARY TABLESPACE TEMP PROFILE DEFAULT;
+GRANT DBA TO <install-user>;
+ALTER USER <install-user> QUOTA UNLIMITED ON MF_DATA;
+ALTER USER <install-user> QUOTA UNLIMITED ON MF_INDEX;
+ALTER USER <install-user> QUOTA UNLIMITED ON MF_LOB_DATA;
+```  
+
+*   To create a dedicated database user based on your Oracle 12c with PDB, then create a `dedicated database local user` inside PDB, which will be used in the Java Database Connectivity (JDBC) authentication.  
+
 ```
 Alter session set container = PDB<MF_DB> ;
-        CREATE USER <dedicated-database-local-user> IDENTIFIED BY <password> DEFAULT TABLESPACE MF_DATA TEMPORARY TABLESPACE TEMP PROFILE DEFAULT  CONTAINER=CURRENT;
-        GRANT DBA TO <install-local-user> CONTAINER=CURRENT;
-        ALTER USER <install-local-user> QUOTA UNLIMITED ON MF_DATA CONTAINER=CURRENT;
-        ALTER USER <install-local-user> QUOTA UNLIMITED ON MF_INDEX CONTAINER=CURRENT;
-        ALTER USER <install-local-user> QUOTA UNLIMITED ON MF_LOB_DATA CONTAINER=CURRENT;
-        
+CREATE USER <dedicated-database-local-user> IDENTIFIED BY <password> DEFAULT TABLESPACE MF_DATA TEMPORARY TABLESPACE TEMP PROFILE DEFAULT  CONTAINER=CURRENT;
+GRANT DBA TO <install-local-user> CONTAINER=CURRENT;
+ALTER USER <install-local-user> QUOTA UNLIMITED ON MF_DATA CONTAINER=CURRENT;
+ALTER USER <install-local-user> QUOTA UNLIMITED ON MF_INDEX CONTAINER=CURRENT;
+ALTER USER <install-local-user> QUOTA UNLIMITED ON MF_LOB_DATA CONTAINER=CURRENT;
 ```
 
 *   If you are using Volt MX Foundry installer to setup Volt MX Foundry database, then please choose the below options based on your Oracle database version.
     
-    *   If Oracle database is created with PDB option of Oracle 12c, use service name pointing to PDB in the JDBC URL such as `pdborcl` or `pdbmfdb
-`
+    *   If Oracle database is created with PDB option of Oracle 12c, use service name pointing to PDB in the JDBC URL such as `pdborcl` or `pdbmfdb`
+
 ```
 jdbc:oracle:thin:@<Database_Host_IP>:1521/pdbmfdb 
-```<br>For example: jdbc:oracle:thin:@192.168.1.2:1521/pdbmfdb<br>
-*   But if your database is 11g or 12c without PDB, then you can use `ORACLE_SID` in the JDBC URL such as  `orcl`  or  `mfdb`.
+```
+
+For example: `jdbc:oracle:thin:@192.168.1.2:1521/pdbmfdb`  
+
+*   But if your database is 11g or 12c without PDB, then you can use `ORACLE_SID` in the JDBC URL such as  `orcl`  or  `mfdb`.  
+
 ```
 jdbc:oracle:thin:@<Database_Host_IP>:1521:mfdb
-```<br>For example: jdbc:oracle:thin:@192.168.1.2:1521:mfdb
+``` 
+
+For example: `jdbc:oracle:thin:@192.168.1.2:1521:mfdb`
         
 </details>
 
@@ -103,7 +108,6 @@ To support MySQL utf8mb4 charsets and collation, update the MySQL configuration 
 
 ```
 1. Ensure that you modify the my.cnf or my.ini with the following parameters: 
-
 
     [client]
     default-character-set = utf8mb4
@@ -146,44 +150,46 @@ To support MySQL utf8mb4 charsets and collation, update the MySQL configuration 
  
 #### Applicable for Engagement Services for Foundry version earlier than 9.5.15
 
-1.  Create the database needed for Engagement Services with unicode character set as UTF8. Also ensure that you modify the `my.cnf` or `my.ini` with the following parameters:
- ```
+1.  Create the database needed for Engagement Services with unicode character set as UTF8. Also ensure that you modify the `my.cnf` or `my.ini` with the following parameters:  
 
-    [client]  
-    default-character-set = utf8  
-    [mysql]  
-    default-character-set = utf8  
-    [mysqld]|  
-    character-set-client-handshake = FALSE  
-    collation_server='utf8_unicode_ci'  
-    character_set_server='utf8'  
+```  
+[client]  
+default-character-set = utf8  
+[mysql]  
+default-character-set = utf8  
+[mysqld]|  
+character-set-client-handshake = FALSE  
+collation_server='utf8_unicode_ci'  
+character_set_server='utf8'  
 ```
-   Next, restart the MySQL service and run the following query to verify the details:
- ```
 
-    mysql> show variables like '%coll%';  
-    +----------------------+-----------------+  
-    | Variable_name | Value |  
-    +----------------------+-----------------+  
-    | collation_connection | utf8_unicode_ci |  
-    | collation_database | utf8_unicode_ci |  
-    | collation_server | utf8_unicode_ci |  
-    +----------------------+-----------------+  
-    3 rows in set (0.00 sec)  
-    mysql> show variables like '%char%';  
-    +--------------------------+----------------------------+  
-    | Variable_name | Value |  
-    +--------------------------+----------------------------+  
-    | character_set_client | utf8 |  
-    | character_set_connection | utf8 |  
-    | character_set_database | utf8 |  
-    | character_set_filesystem | binary |  
-    | character_set_results | utf8 |  
-    | character_set_server | utf8 |  
-    | character_set_system | utf8 |  
-    | character_sets_dir | /usr/share/mysql/charsets/ |  
-    +--------------------------+----------------------------+
- ```
+
+Next, restart the MySQL service and run the following query to verify the details:
+
+```
+mysql> show variables like '%coll%';  
++----------------------+-----------------+  
+| Variable_name | Value |  
++----------------------+-----------------+  
+| collation_connection | utf8_unicode_ci |  
+| collation_database | utf8_unicode_ci |  
+| collation_server | utf8_unicode_ci |  
++----------------------+-----------------+  
+3 rows in set (0.00 sec)  
+mysql> show variables like '%char%';  
++--------------------------+----------------------------+  
+| Variable_name | Value |  
++--------------------------+----------------------------+  
+| character_set_client | utf8 |  
+| character_set_connection | utf8 |  
+| character_set_database | utf8 |  
+| character_set_filesystem | binary |  
+| character_set_results | utf8 |  
+| character_set_server | utf8 |  
+| character_set_system | utf8 |  
+| character_sets_dir | /usr/share/mysql/charsets/ |  
++--------------------------+----------------------------+  
+```
 
 #### Applicable for Identity Services
 
@@ -197,7 +203,7 @@ Following are the error details:
 *   **SQL State**: HY000
 *   **Error Code**: 1093
 *   **Error Message**: You can't specify target table 'users' for update in FROM clause
-*   **Location**: <Location where the installation is done>
+*   **Location**: <Location where the installation is done\>
 
 To resolve this error, run the following commands in the MySQL Server:
 
