@@ -379,7 +379,7 @@
     id="__nav_1_8"
     checked
   />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
 
   <div class="md-nav__link md-nav__link--index">
     <a href="../../voltmxFoundryFundamentals.html"> Foundry </a>
@@ -418,7 +418,7 @@
     id="__nav_1_8_2"
     checked
   />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
 
   <div class="md-nav__link md-nav__link--index">
     <a href="../../installing_foundry.html"> Installing Foundry </a>
@@ -505,7 +505,7 @@
     id="__nav_1_8_2_4"
     checked
   />
-                                                                                                                                                           
+                                                                                                                                                                    
 
   <div class="md-nav__link md-nav__link--index">
     <a href="Introduction.html"> Volt Foundry Installation Guide   - Windows </a>
@@ -673,6 +673,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#configure-the-existing-domain-mode-jboss" class="md-nav__link">
+    Configure the existing Domain mode JBoss
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#configure-the-log-locations-jboss" class="md-nav__link">
     Configure the Log Locations - JBoss
   </a>
@@ -760,7 +767,7 @@
     id="__nav_1_8_2_4_7"
     
   />
-                                                  
+                                                     
 
   <div class="md-nav__link md-nav__link--index">
     <a href="Installing_Modes.html"> Installation Modes </a>
@@ -791,7 +798,7 @@
     id="__nav_1_8_2_4_9"
     
   />
-                              
+                                    
 
   <div class="md-nav__link md-nav__link--index">
     <a href="Upgrading_VoltMX_Foundry_Console_on_Windows.html"> Upgrading Volt Foundry </a>
@@ -1374,6 +1381,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#configure-the-existing-domain-mode-jboss" class="md-nav__link">
+    Configure the existing Domain mode JBoss
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#configure-the-log-locations-jboss" class="md-nav__link">
     Configure the Log Locations - JBoss
   </a>
@@ -1449,14 +1463,13 @@
 <li>
 <p>Search for the <code>&lt;subsystem xmlns="urn:jboss:domain:ee:4.0"&gt;</code> tag and add the appropriate global module based on the database selected.</p>
 <p>For example, add the following code for the domain mode:</p>
+<p><pre><code>&lt;global-modules&gt;<br />
+&lt;module name="com.mysql" slot="main"/&gt;<br />
+&lt;/global-modules&gt;</code></pre></p>
 </li>
-</ol>
-<pre><code>&lt;global-modules&gt;  
-    &lt;module name=&quot;com.mysql&quot; slot=&quot;main&quot;/&gt;  
-    &lt;/global-modules&gt;
-</code></pre>
-<ol>
-<li>Save the changes.</li>
+<li>
+<p>Save the changes.</p>
+</li>
 <li>Start the JBoss Server.</li>
 </ol>
 <h3 id="configure-the-standalone-existing-jboss">Configure the Standalone Existing JBoss</h3>
@@ -1472,46 +1485,83 @@
             &lt;interface name=&quot;public&quot;&gt;
                 &lt;inet-address value=&quot;&lt;myHostName&gt;&quot;/&gt;
             &lt;/interface&gt;
-        &lt;/interfaces&gt;
+    &lt;/interfaces&gt;
 </code></pre>
 <ul>
 <li>Configure JBoss to listen for remote management requests as below:<ul>
 <li>Add <code>&lt;socket-binding name="management-native" interface="management" port="${jboss.management.native.port:9999}"/&gt;</code> under the <code>\&lt;socket-binding-group\&gt;</code></li>
-<li>Add following section under the `\&lt;management-interfaces></li>
+<li>Add following section under the <code>&lt;management-interfaces&gt;</code></li>
 </ul>
 </li>
 </ul>
 <pre><code>&lt;native-interface security-realm=&quot;ManagementRealm&quot;&gt;  
-        &lt;socket-binding native=&quot;management-native&quot;/&gt;  
-        &lt;/native-interface&gt;
+&lt;socket-binding native=&quot;management-native&quot;/&gt;  
+&lt;/native-interface&gt;
 </code></pre>
 <ul>
 <li>For Engagement Services to work, remove the following subsystem:</li>
 </ul>
 <pre><code>&lt;subsystem xmlns=&quot;urn:jboss:domain:jpa:1.1&quot;&gt;
-    &lt;jpa default-datasource=&quot;&quot; default-extended-persistence-inheritance=&quot;DEEP&quot;/&gt;|
-    &lt;/subsystem&gt;
+&lt;jpa default-datasource=&quot;&quot; default-extended-persistence-inheritance=&quot;DEEP&quot;/&gt;|
+&lt;/subsystem&gt;
 </code></pre>
 <ul>
-<li>In case of installing all the Volt MX Foundry components, follow these steps to increase heap size by setting the <code>JAVA_OPTS</code> in the <code>&lt;JBOSS_DIR&gt;\standalone\bin\standalone.sh/bat</code>:<ul>
-<li><strong>standalone.bat</strong>:
-    <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
-        set "JAVA_OPTS= -server -Xms2048m -Xmx2048m"
-    }</code></pre></figure></li>
-<li><strong>standalone.sh</strong>:
-    <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
-        JAVA_OPTS="-server -Xms1024M -Xmx1024M"
-    }</code></pre></figure></li>
+<li>
+<p>In case of installing all the Volt MX Foundry components, follow these steps to increase heap size by setting the <code>JAVA_OPTS</code> in the <code>&lt;JBOSS_DIR&gt;\standalone\bin\standalone.sh/bat</code>:</p>
+<ul>
+<li>
+<p><strong>standalone.bat</strong>: <br>
+    <code>set "JAVA_OPTS= -server -Xms2048m -Xmx2048m"</code></p>
+</li>
+<li>
+<p><strong>standalone.sh</strong>: <br>
+    <code>JAVA_OPTS="-server -Xms1024M -Xmx1024M"</code></p>
+</li>
 </ul>
 </li>
 </ul>
+<h3 id="configure-the-existing-domain-mode-jboss">Configure the existing Domain mode JBoss</h3>
+<p>To install VoltMX Foundry on an existing domain mode JBoss, follow these steps to configure the domain mode JBoss:</p>
+<ul>
+<li>
+<p>From the <code>&lt;JBoss_Home&gt;/domain/configuration folder</code>, open the <code>domain.xml</code> file.</p>
+</li>
+<li>
+<p>Configure Hostname/IP in the <code>domain.xml</code> file for JBoss, as specified in the following code snippet:<br></p>
+</li>
+</ul>
+<pre><code>&lt;interfaces&gt;
+    &lt;interface name=&quot;management&quot;/&gt;
+    &lt;interface name=&quot;private&quot;&gt;
+        &lt;inet-address value=&quot;${jboss.bind.address.private:127.0.0.1}&quot;/&gt;
+    &lt;/interface&gt;
+    &lt;interface name=&quot;public&quot;/&gt;
+    &lt;interface name=&quot;unsecure&quot;&gt;
+        &lt;inet-address value=&quot;${jboss.bind.address.unsecure:127.0.0.1}&quot;/&gt;
+    &lt;/interface&gt;
+&lt;/interfaces&gt;
+</code></pre>
+<ul>
+<li>In case you are installing all the VoltMX Foundry components, you must increase the heap size by changing the values under <code>jvms</code> in the <code>host-master.xml</code> file:</li>
+</ul>
+<pre><code>&lt;jvms&gt;
+&lt;jvm name=&quot;default&quot;&gt;
+    &lt;heap size=&quot;2048m&quot; max-size=&quot;2048m&quot;/&gt;
+    &lt;jvm-options&gt;
+        &lt;option value=&quot;-server&quot;/&gt;
+        &lt;option value=&quot;-XX:MetaspaceSize=2048m&quot;/&gt;
+        &lt;option value=&quot;-XX:MaxMetaspaceSize=2048m&quot;/&gt;
+    &lt;/jvm-options&gt;
+&lt;/jvm&gt;
+&lt;/jvms&gt;
+</code></pre>
 <h3 id="configure-the-log-locations-jboss">Configure the Log Locations - JBoss</h3>
 <p>To specify the log location where the logs for all Volt MX Foundry components will be generated, you must add the following parameter in the JVM arguments present in <code>standalone.bat/domain.bat</code>( for Windows) or <code>standalone.sh/domain.sh</code>(for Unix):</p>
-<p>-Duser.home="<log location>"</p>
+<p><code>-Duser.home="&lt;log location&gt;"</code></p>
 <h3 id="configure-the-standalone-existing-jboss-with-self-signed-certificate-jboss-7-1">Configure the Standalone Existing JBoss with Self-Signed Certificate (JBoss 7.1)</h3>
 
 <p>If you need to use existing JBoss with self-signed certificate, follow these steps:</p>
-<ol>
+<ul>
 <li>Add an Existing SSL Certificate to Cacerts. For more details, click <a href="Post-Installation_Tasks.html#how-to-add-an-existing-ssl-certificate-to-cacerts">How to Add an Existing Secure Sockets Layer (SSL) Certificate</a>.</li>
 <li>
 <p>Copy the keystore file to <code>&lt;JBoss_Home&gt;/standalone/configuration</code> folder.</p>
@@ -1519,24 +1569,22 @@
 <li>
 <p>Modify the <code>standalone.xml</code> by adding the following <code>security-realm</code> in the <code>security-realms</code> section.</p>
 </li>
-</ol>
+</ul>
 <pre><code>   &lt;security-realm name=&quot;WebSocketRealm&quot;&gt;
-                     &lt;server-identities&gt;
-                            &lt;ssl&gt;
-                                 &lt;keystore path=&quot;&lt;Keystore_file_name&gt;&quot; relative-to=&quot;jboss.server.config.dir&quot; keystore password=&quot;&lt;Keystore_password&gt;&quot;/&gt;
-                         &lt;/ssl&gt;
-                     &lt;/server-identities&gt;
-                &lt;/security-realm&gt;                            
+        &lt;server-identities&gt;
+            &lt;ssl&gt;
+                    &lt;keystore path=&quot;&lt;Keystore_file_name&gt;&quot; relative-to=&quot;jboss.server.config.dir&quot; keystore password=&quot;&lt;Keystore_password&gt;&quot;/&gt;
+            &lt;/ssl&gt;
+        &lt;/server-identities&gt;
+    &lt;/security-realm&gt;                            
 
 </code></pre>
-<pre><code>Here `&lt;Keystore_file_name&gt;` = Name of the keystore file. (for example, `keystore.jks`)`  
-&lt;Keystore_password&gt;` = Password of keystore file.
-</code></pre>
-<ol>
+<p>Here <code>&lt;Keystore_file_name&gt;</code> = Name of the keystore file. (for example, <code>keystore.jks</code>) and 
+<code>&lt;Keystore_password&gt;</code> = Password of keystore file.</p>
+<ul>
 <li>In the standalone.xml, add the following <code>https-listener</code> tag for <code>default-server</code> in the Subsystem <code>urn:jboss:domain:undertow:3.1</code> .</li>
-</ol>
+</ul>
 <pre><code>&lt;https-listener name=&quot;https&quot; max-post-size=&quot;262144000&quot; security-realm=&quot;WebSocketRealm&quot; socket-binding=&quot;https&quot;/&gt;
-
 </code></pre>
 <h3 id="configure-port-settings-for-multinode-loadbalancer-setups">Configure Port Settings for Multinode Loadbalancer Setups</h3>
 <p>Before installing Volt MX Foundry on an application server, for the application server to communicate with a Web Server properly, you must open the port 80.</p>
