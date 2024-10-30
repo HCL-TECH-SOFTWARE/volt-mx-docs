@@ -10,7 +10,7 @@ This section of the document provides you with the instructions for installing a
 
 Make sure that you have proper administrative rights to install Volt MX Foundry on your computer.
 
-The **\<Install Location\>** directory contains the log files documenting each invocation of the installer or uninstaller. To make problem identification easier, provide these log files to Volt MX when reporting an issue.
+The **<Install Location\>** directory contains the log files documenting each invocation of the installer or uninstaller. To make problem identification easier, provide these log files to Volt MX when reporting an issue.
 
 To install Volt MX Foundry on Tomcat using the installer, follow these steps:
 
@@ -37,7 +37,7 @@ To install Volt MX Foundry on Tomcat using the installer, follow these steps:
     
 5.  Scroll until end of the screen, and then select the "**I accept the terms of the License Agreement**" option.
     
-    ![](Resources/Images/Install4.png)  
+    <!-- ![](Resources/Images/Install4.png)   -->
     
     <p id="InstallComponents"></p>
 
@@ -52,7 +52,7 @@ To install Volt MX Foundry on Tomcat using the installer, follow these steps:
     Installation environment is set to Development by default . Choose one of the install type based on your requirement.
     
 
-    ![](Resources/Images/MF_InstallType_577x469.png)
+    ![](Resources/Images/MF_InstallType_568x433.png)
 
     
 7.  Select the **Send usage data anonymously** check box. This allows
@@ -76,7 +76,7 @@ To install Volt MX Foundry on Tomcat using the installer, follow these steps:
         > **_Note:_** During installation if you have selected **API Developer Portal**, the **API Developer Portal** is created. You can directly access your [Volt MX Developer Portal](../../../Foundry/voltmx_foundry_user_guide/Content/VoltMXDevPortal.md) in Volt MX Foundry Console.
         
     *   **Engagement Services** - To install Volt MX Foundry Engagement Services, select the **Engagement Services** check box.  
-        The system creates the following database: `<prefix>kpnsdb<suffix>`.
+        The system creates the following database: `<prefix>vpnsdb<suffix>`.
     
     **Reports Database**
     
@@ -99,7 +99,7 @@ To install Volt MX Foundry on Tomcat using the installer, follow these steps:
       
     When you install the integration with or without one or more components (identity, or Engagement Services) on a separate node, the installer displays the **Reports Database Name** field in the **Database Details** window. If the installer prompts you to enter the existing reports db, enter the reports database name (for example, `voltmxmfreportsdb1`) in the **Database Details window > Reports Database Name** field. Refer to the [Database Details](#DatabaseDetails) window.  
       
-    Refer to [creating a reports database, for example : mfreports
+Refer to [creating a reports database, for example, **<prefix\>mfreports<suffix\>**](#CreatingReportsDB).
     
 10. Click **Next**. The **Install Folder** window appears. The selected
     path appears in the **Where would you like to install** field.
@@ -232,6 +232,8 @@ To install Volt MX Foundry on Tomcat using the installer, follow these steps:
         *   **Database Password**: Enter the user password used while creating the database user.
         *   **Database Name Prefix**: Enter the valid prefix databases - for example, Volt MX.
         *   **Database Name Suffix**: Enter the valid suffix for all databases - for example, 1.
+        *   **Encrypted Rotational Key**: Enter the rotational key that you received from the encryption utility. This is applicable only if you are using an encrypted database password. For more information, refer to [How to encrypt the database password](./Troubleshooting.md#how-to-encrypt-the-database-password).
+
     *   Enter the following database details for **Oracle**.
         
         ![](Resources/Images/Oracle_589x452.png)
@@ -266,25 +268,26 @@ To install Volt MX Foundry on Tomcat using the installer, follow these steps:
         *   **Database System Password**: Enter the user password used while creating the database user.
         *   **Database Name Prefix**: Enter the valid prefix databases - for example, Volt MX.
         *   **Database Name Suffix**: Enter the valid suffix for all databases - for example, 54.
+        *   **Encrypted Rotational Key**: Enter the rotational key that you received from the encryption utility. This is applicable only if you are using an encrypted database password. For more information, refer to [How to encrypt the database password](./Troubleshooting.md#how-to-encrypt-the-database-password).
       
     *   Enter the following database details for **SQL Server**.
         
-    > **_Important:_** If you want to enable Windows Authentication Support on SQL Server, run the following command to start the installation process after extracting the artifact:
+        > **_Important:_** If you want to enable Windows Authentication Support on SQL Server, run the following command to start the installation process after extracting the artifact:
         
-     
-    VoltMXFoundryInstaller-9.0.0.0_GA.exe -Dprop.java.library.path=< location of sqljdbc_auth.dll>
+        `VoltMXFoundryInstaller-9.0.0.0_GA.exe -Dprop.java.library.path=< location of sqljdbc_auth.dll>`
 
-    > **_Note:_** If you choose to enable Windows Authentication support on SQL Server, you do not need to provide the **Database System User** and **Database System Password**.
+        > **_Note:_** If you choose to enable Windows Authentication support on SQL Server, you do not need to provide the **Database System User** and **Database System Password**.
         
-    ![](Resources/Images/SQLServer_551x422.png)
+        ![](Resources/Images/SQLServer_551x422.png)
         
-    *   **Database Server Hostname/IP**: Enter the DB server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
+        *   **Database Server Hostname/IP**: Enter the DB server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
         *   **Database Port**: Enter the database port of the SQL Server. By default, this field is set to 1433 for SQL.
         *   **Database System User**: Enter the user name used while creating the database user - for example, dbclient.
         *   **Instance Name (Optional)**: Enter the instance name for the database. This information is optional.
         *   **Database System Password**: Enter the user password used while creating the database user.
         *   **Database Name Prefix**: Enter the valid prefix databases - for example, Volt MX.
         *   **Database Name Suffix**: Enter the valid suffix for all databases - for example, 54.
+        *   **Encrypted Rotational Key**: Enter the rotational key that you received from the encryption utility. This is applicable only if you are using an encrypted database password. For more information, refer to [How to encrypt the database password](./Troubleshooting.md#how-to-encrypt-the-database-password).
         
         If a database faces connection issues, the system displays an error message. For example:  
         ![](Resources/Images/Database_connection_failed.png)
@@ -293,37 +296,30 @@ To install Volt MX Foundry on Tomcat using the installer, follow these steps:
         
         *   For **Microsoft Azure (MSSQL)**, If you want to install Volt MX Foundry V9 on Tomcat with Microsoft Azure SQL, you must edit the `authService.xml` file from the existing Tomcat with Microsoft SQL Server install location. For more details, refer the following section on how to configure identity to work on Microsoft Azure SQL.
             
-            
-<details close markdown="block">
-<summary>Click here</summary>
+        <details close markdown="block">
+        <summary>Click here</summary>
 
-Configure Identity on Tomcat with Microsoft Azure SQL Server
-            
-To run identity on Tomcat with Microsoft Azure SQL, you must edit the `authService.xml` file from the existing Tomcat with MSSQL install location.
+        Configure Identity on Tomcat with Microsoft Azure SQL Server
+                    
+        To run identity on Tomcat with Microsoft Azure SQL, you must edit the `authService.xml` file from the existing Tomcat with MSSQL install location.
 
-   1.  Open the `authService.xml` file from the existing Tomcat with
-      MSSQL install location.  
-      Sample Location for authService.xml from Tomcat with MSSQL install folder, `<LocalDrive>\VoltMXFoundryInstallerV8\tomcat\conf\Catalina\localhost\authService.xml`
-   2.  Modify the following the `authService.xml` file:
+        1.  Open the `authService.xml` file from the existing Tomcat with
+            MSSQL install location.  
+            Sample Location for authService.xml from Tomcat with MSSQL install folder, `<LocalDrive>\VoltMXFoundryInstallerV8\tomcat\conf\Catalina\localhost\authService.xml`
+        2.  Modify the following the `authService.xml` file:
 
+            <pre><code>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+            &lt;!-- The contents of this file will be loaded for each web application --&gt;
+            &lt;Context&gt;
+            &lt;Resource auth="Container" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+            factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" initialSize="5" jmxEnabled="true" logAbandoned="true" maxActive="10" maxIdle="5" maxWait="10000" minEvictableIdleTimeMillis="30000" minIdle="2" name="jdbc/authglobaldb" password="&lt;Password&gt;" removeAbandoned="true" removeAbandonedTimeout="600" testOnBorrow="true" testOnReturn="false" testWhileIdle="true" timeBetweenEvictionRunsMillis="30000" type="javax.sql.DataSource" url="jdbc:sqlserver://&lt;DBServerIP:PORT&gt;;databasename=&lt;auth database name&gt;;sendStringParametersAsUnicode=true;" username="&lt;User_Name&gt;" validationInterval="30000" validationQuery="SELECT 1"/&gt;
+            &lt;Resource auth="Container" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDrive"factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" initialSize="5" jmxEnabled="true" logAbandoned="true" maxActive="10" maxIdle="5" maxWait="10000" minEvictableIdleTimeMillis="30000" minIdle="2" name="jdbc/authconfig" password="&lt;Password&gt;" removeAbandoned="true" removeAbandonedTimeout="600" testOnBorrow="true" testOnReturn="false" testWhileIdle="true" timeBetweenEvictionRunsMillis="30000" type="javax.sql.DataSource" url="jdbc:sqlserver::/&lt;DBServerIP:PORT&gt;;databasename=&lt;auth database name&gt;;sendStringParametersAsUnicode=true;" username="&lt;User_Name&gt;" validationInterval="30000" validationQuery="SELECT 1"/&gt;
+		    &lt;/Context&gt;</code></pre>  
 
-```
-    <?xml version="1.0" encoding="utf-8" ?>
-    <!-- The contents of this file will be loaded for each web application -->
-    <Context>
+        </details>
 
-    <Resource auth="Container" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"  
-    factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" initialSize="5" jmxEnabled="true" logAbandoned="true" maxActive="10" maxIdle="5" maxWait="10000" minEvictableIdleTimeMillis="30000" minIdle="2" name="jdbc/authglobaldb" password="<Password>" removeAbandoned="true" removeAbandonedTimeout="600" testOnBorrow="true" testOnReturn="false" testWhileIdle="true" timeBetweenEvictionRunsMillis="30000" type="javax.sql.DataSource" url="jdbc:sqlserver://<DBServerIP:PORT>;databasename=<auth database name>;sendStringParametersAsUnicode=true;" username="<User_Name>" validationInterval="30000" validationQuery="SELECT 1"/>
-
-    <Resource auth="Container" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDrive"factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" initialSize="5" jmxEnabled="true" logAbandoned="true" maxActive="10" maxIdle="5" maxWait="10000" minEvictableIdleTimeMillis="30000" minIdle="2" name="jdbc/authconfig" password="<Password>" removeAbandoned="true" removeAbandonedTimeout="600" testOnBorrow="true" testOnReturn="false" testWhileIdle="true" timeBetweenEvictionRunsMillis="30000" type="javax.sql.DataSource" url="jdbc:sqlserver::/<DBServerIP:PORT>;databasename=<auth database name>;sendStringParametersAsUnicode=true;" username="<User_Name>" validationInterval="30000" validationQuery="SELECT 1"/>
-
-    < /Context >
-
-```
-
-</details>
-
-*   Enter the following database details for **MariaDB**.![](Resources/Images/MariaDB_587x451.png)
+    *   Enter the following database details for **MariaDB**.
+        ![](Resources/Images/MariaDB_587x451.png)
     *   **Database Server Hostname/IP**: Enter the DB server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
     *   **Database Port**: Enter the database port of the MariaDB. By default, this field is set to 3306 for MariaDB.
     *   **Database User**: Enter the user name used while creating the database user.
@@ -333,6 +329,7 @@ To run identity on Tomcat with Microsoft Azure SQL, you must edit the `authServi
         
     *   **Database Name Prefix**: Enter the valid prefix databases - for example, Volt MX.
     *   **Database Name Suffix**: Enter the valid suffix for all databases - for example, 54.
+    *   **Encrypted Rotational Key**: Enter the rotational key that you received from the encryption utility. This is applicable only if you are using an encrypted database password. For more information, refer to [How to encrypt the database password](./Troubleshooting.md#how-to-encrypt-the-database-password).
 
 19. After entering database server details, click **Next**.
     
@@ -341,7 +338,7 @@ To run identity on Tomcat with Microsoft Azure SQL, you must edit the `authServi
     ![](Resources/Images/DBexist.png)
     
     > **_Important:_** If you are installing Volt MX Foundry V8 on an application server using the existing database and in case if there is a change in server details, you must update the `management_server` details in the `admin` database with the application server instance details for the WebAapp publish to work. You must update the following fields in the `server_configuration` table of the **admin DB**:  
-    \- management\_server\_host\_name <application\_instance hostname>  \- management\_server\_port <soap port of application\_instance>  \- management\_server\_user <application\_instance admin username>  \- management\_server\_password <application\_instance admin password>   - management\_server\_groups <application\_instance groups details>
+    \- management\_server\_host\_name <application\_instance hostname><br>\- management\_server\_port <soap port of application\_instance><br>\- management\_server\_user <application\_instance admin username><br>\- management\_server\_password <application\_instance admin password><br>- management\_server\_groups <application\_instance groups details>
     
 20. Click **Next**. The **Administrator Account Configuration** window appears.
     

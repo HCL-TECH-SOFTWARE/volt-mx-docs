@@ -57,11 +57,11 @@ For Oracle Java 7 and Java 8, configure the heap settings for your application s
 
     For example, add the following code for the domain mode:
 
-```
-<global-modules>  
-    <module name="com.mysql" slot="main"/>  
-    </global-modules>
-```
+    <pre><code>&lt;global-modules&gt;  
+    &lt;module name="com.mysql" slot="main"/&gt;  
+    &lt;/global-modules&gt;</code></pre>
+
+
 6.  Save the changes.
 7.  Start the JBoss Server.
 
@@ -79,68 +79,99 @@ To install Volt MX Foundry on an existing standalone JBoss, follow the steps to 
     		<interface name="public">
     			<inet-address value="<myHostName>"/>
     		</interface>
-    	</interfaces>
+    </interfaces>
 ```
 -  Configure JBoss to listen for remote management requests as below:
     *   Add `<socket-binding name="management-native" interface="management" port="${jboss.management.native.port:9999}"/>` under the `\<socket-binding-group\>`
-    *   Add following section under the `\<management-interfaces\>
+    *   Add following section under the `<management-interfaces>`
 ```
 <native-interface security-realm="ManagementRealm">  
-        <socket-binding native="management-native"/>  
-        </native-interface>
+<socket-binding native="management-native"/>  
+</native-interface>
 ```
 -  For Engagement Services to work, remove the following subsystem:
 ```
 <subsystem xmlns="urn:jboss:domain:jpa:1.1">
-    <jpa default-datasource="" default-extended-persistence-inheritance="DEEP"/>|
-    </subsystem>
+<jpa default-datasource="" default-extended-persistence-inheritance="DEEP"/>|
+</subsystem>
 ```
 
 -  In case of installing all the Volt MX Foundry components, follow these steps to increase heap size by setting the `JAVA_OPTS` in the `<JBOSS_DIR>\standalone\bin\standalone.sh/bat`:
-    -   **standalone.bat**:
-        <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
-            set "JAVA_OPTS= -server -Xms2048m -Xmx2048m"
-        }</code></pre></figure>
-    -   **standalone.sh**:
-        <figure class="highlight"><pre><code class="language-voltmx" data-lang="voltmx">{
-            JAVA_OPTS="-server -Xms1024M -Xmx1024M"
-        }</code></pre></figure>
+    -   **standalone.bat**: <br>
+        <code>set "JAVA_OPTS= -server -Xms2048m -Xmx2048m"</code>
+
+    -   **standalone.sh**: <br>
+        <code>JAVA_OPTS="-server -Xms1024M -Xmx1024M"</code>
+
+
+### Configure the existing Domain mode JBoss
+
+To install VoltMX Foundry on an existing domain mode JBoss, follow these steps to configure the domain mode JBoss:
+
+*   From the `<JBoss_Home>/domain/configuration folder`, open the `domain.xml` file.
+
+*   Configure Hostname/IP in the `domain.xml` file for JBoss, as specified in the following code snippet:<br>
+```
+<interfaces>
+    <interface name="management"/>
+    <interface name="private">
+        <inet-address value="${jboss.bind.address.private:127.0.0.1}"/>
+    </interface>
+    <interface name="public"/>
+    <interface name="unsecure">
+        <inet-address value="${jboss.bind.address.unsecure:127.0.0.1}"/>
+    </interface>
+</interfaces>
+```
+
+*   In case you are installing all the VoltMX Foundry components, you must increase the heap size by changing the values under `jvms` in the `host-master.xml` file:
+```
+<jvms>
+<jvm name="default">
+    <heap size="2048m" max-size="2048m"/>
+    <jvm-options>
+        <option value="-server"/>
+        <option value="-XX:MetaspaceSize=2048m"/>
+        <option value="-XX:MaxMetaspaceSize=2048m"/>
+    </jvm-options>
+</jvm>
+</jvms>
+```
 
 ### Configure the Log Locations - JBoss
 
 To specify the log location where the logs for all Volt MX Foundry components will be generated, you must add the following parameter in the JVM arguments present in `standalone.bat/domain.bat`( for Windows) or `standalone.sh/domain.sh`(for Unix):
 
-\-Duser.home="<log location>"
+`-Duser.home="<log location>"`
 
 
 <h3 id="configure-the-standalone-existing-jboss-with-self-signed-certificate-jboss-7-1">Configure the Standalone Existing JBoss with Self-Signed Certificate (JBoss 7.1)</h3>
 
 If you need to use existing JBoss with self-signed certificate, follow these steps:
 
-1.  Add an Existing SSL Certificate to Cacerts. For more details, click [How to Add an Existing Secure Sockets Layer (SSL) Certificate](../../../Foundry/voltmx_foundry_windows_install_guide/Content/Post-Installation_Tasks.md#how-to-add-an-existing-ssl-certificate-to-cacerts).
-2.  Copy the keystore file to `<JBoss_Home>/standalone/configuration` folder.
+*   Add an Existing SSL Certificate to Cacerts. For more details, click [How to Add an Existing Secure Sockets Layer (SSL) Certificate](../../../Foundry/voltmx_foundry_windows_install_guide/Content/Post-Installation_Tasks.md#how-to-add-an-existing-ssl-certificate-to-cacerts).
+*   Copy the keystore file to `<JBoss_Home>/standalone/configuration` folder.
 
-3.  Modify the `standalone.xml` by adding the following `security-realm` in the `security-realms` section.
+*   Modify the `standalone.xml` by adding the following `security-realm` in the `security-realms` section.
 ```
    <security-realm name="WebSocketRealm">
-                     <server-identities>
-                            <ssl>
-                                 <keystore path="<Keystore_file_name>" relative-to="jboss.server.config.dir" keystore password="<Keystore_password>"/>
-                         </ssl>
-                     </server-identities>
-                </security-realm>                            
+        <server-identities>
+            <ssl>
+                    <keystore path="<Keystore_file_name>" relative-to="jboss.server.config.dir" keystore password="<Keystore_password>"/>
+            </ssl>
+        </server-identities>
+    </security-realm>                            
 
 ```
 
-    Here `<Keystore_file_name>` = Name of the keystore file. (for example, `keystore.jks`)`  
-    <Keystore_password>` = Password of keystore file.
+Here `<Keystore_file_name>` = Name of the keystore file. (for example, `keystore.jks`) and 
+`<Keystore_password>` = Password of keystore file.
 
 
-1.  In the standalone.xml, add the following `https-listener` tag for `default-server` in the Subsystem `urn:jboss:domain:undertow:3.1` .
+*   In the standalone.xml, add the following `https-listener` tag for `default-server` in the Subsystem `urn:jboss:domain:undertow:3.1` .
 
 ```
 <https-listener name="https" max-post-size="262144000" security-realm="WebSocketRealm" socket-binding="https"/>
-
 ```
 
 ### Configure Port Settings for Multinode Loadbalancer Setups
@@ -182,4 +213,4 @@ After configuring the `security-configuration` tag, restart the server from WebL
 
 To specify the log location where the logs for all Volt MX Foundry components will be generated, you must add the following parameter in the JVM arguments present in `bin/startWebLogic.cmd`( for Windows) or `bin/startWebLogic.sh`(for Unix):
 
-    -Duser.home="<log location>" -->
+    -Duser.home="<log location>" --> 

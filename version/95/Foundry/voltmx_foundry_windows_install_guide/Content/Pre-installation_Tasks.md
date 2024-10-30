@@ -57,7 +57,7 @@ Memcached is a high-performance, distributed memory object caching system, gener
 
 To install Memcached Server, follow these steps:
 
-1.  Download the memcache server.
+1.  Download the memcache server. For more information, refer to [https://memcached.org/](https://memcached.org/).
 2.  Extract the zip file.
 3.  From the command prompt, navigate to ` memcached`  directory.
 4.  Run the following command:
@@ -108,5 +108,52 @@ For example:
 *   For **HAProxy**: preserve host flag is not required.
 
 
-### [Database Pre-Installation Tasks](DB_Pre-installation_Tasks.md)
-### [Application Servers Pre-Installation Tasks](Appser_Pre-installation_Tasks.md)
+### Configure Hibernate Dialect in WebLogic (only for WebLogic)
+For the Engagement Services to work with Oracle DB, set the following parameter in the setDomainEnv.cmd and run the setDomainEnv.cmd before starting the WebLogic server.
+
+`-Dhibernate.dialect=org.hibernate.dialect.Oracle10gDialect`
+
+### Download and Install the Unrestricted JCE Policy Files
+In accordance with the United States of America export restrictions, Java that is bundled with the server has limited encryption key sizes that can be used in the server operation. In order to successfully convert signed client certificates or sign server Certificate Signing Request for use in the server, you must download the following bundled encryption policy .jar files and replace them with the unrestricted files published by the Java vendor.
+
+*   `local_policy.jar`
+*   `US_export_policy.jar`
+
+To Configure Unrestricted JCE Policy Files for Tomcat, JBoss, or WebLogic, follow these steps:
+
+1.  Go to the Oracle Java SE download page [http://www.oracle.com/technetwork/java/javase/downloads/index.html](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
+
+2.  Scroll down to Additional Resources section. You will find Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy File.
+
+3.  Download the JCE version that matches your installed JVM, for example, UnlimitedJCEPolicyJDK<Version\>.zip
+
+4.  Extract the downloaded zip file. The UnlimitedJCEPolicyJDK<Version\>.zip file contains the following files:  
+
+    *   `local_policy.jar`
+    *   `US_export_policy.jar`
+    *   `README.txt`
+
+5.  Copy the .jar files (`local_policy.jar` and `US_export_policy.jar`) to <JAVA_HOME\>\jre\lib\security  
+
+    >  **Note**: These jars will be already there so you have to overwrite them. Back up the existing jars before you overwrite them with new jars.
+
+6.  Restart your application server.
+    
+    After the encryption policy files are installed, you should be able to successfully convert signed client certificates for use in the server.
+
+
+### Steps before installing (or) upgrading Quantum Foundry with the existing database
+
+Perform the following activities before installing (or) upgrading Quantum Foundry with the existing database:
+
+*   Take database backup
+*   Make sure you have previously installed directory
+*   Take a backup of applications deployed at the server level. (Post installation, take backup of the changes done to the binaries).
+*   After the installation or upgrade process, replace the old `authService.key, workspaceService.key`, and `ACCOUNTS_ENCRYPTION_KEY` keys (applicable only for the identity and workspace components).
+
+
+For Database and App Server related pre-installation tasks, refer to the following sections:
+
+*   [Database Pre-Installation Tasks](DB_Pre-installation_Tasks.md)
+
+*   [Application Servers Pre-Installation Tasks](Appser_Pre-installation_Tasks.md)

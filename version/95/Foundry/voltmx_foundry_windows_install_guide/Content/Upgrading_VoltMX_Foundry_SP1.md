@@ -60,7 +60,7 @@ To upgrade Volt MX Foundry using the installer, follow these steps:
     
 9.  Click **Yes, Use existing.** The following screen appears:
     
-    ![](Resources/Images/Upgrade_DB_keys_541x455.png)
+    ![](Resources/Images/Upgrade_DB_keys.png)
     
     Provide the path of your Previous Installation Directory.
     

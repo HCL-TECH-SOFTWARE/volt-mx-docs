@@ -7,6 +7,22 @@ FAQs and Troubleshooting
 
 This section lists the troubleshooting tips to resolve problems that you may encounter during installation, and post installation.
 
+**Issue**: The UI of the VoltMX Foundry installer does not display appropriately if the display scaling factor is at 150%.
+    
+**Workaround**:
+To avoid this issue, it is recommended to change the display scaling to 100% or 125%.
+
+
+**Issue**: After installing VoltMX Foundry on a Tomcat application server with a MySQL database, publishing of Integration Services fails with the following error:
+
+`Internal Error. Failed to check Server state - Failed to propagate Integration Services to Runtime. Status [deploy_failed]. Details - Database Migration failed with error : org.flywaydb.core.internal.exception.FlywaySqlException: Unable to obtain connection from database (jdbc:mysql://<URL>:<Port No.>) for user '<user>': Communications link failure The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.SQL State : 08S01 Error Code : 0 Message : Communications link failure The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server. [ Tracking id - <ID>]`
+    
+**Workaround**:
+To resolve this error, add the following -D parameter to the `catalina.bat` file:  
+
+`-DSERVER_DB_USE_SSL=false`
+
+
 **Issue**: If you have upgraded from Foundry V8.x or lower versions to V9 GA or higher versions, some of the services fail to work because of an internal authentication error. These services, such as the **Foundry Admin Adapter**, **Email Adapter**, and **Workflow Email** services, fail with the following error:
 ```
 returned HTTP [400], Response Body [{"details":{"message":"Could not find trust security group for given envId","errcode":0,"errmsg":"Could not find trust security group for given envId"},"httpstatus":"Bad Request","requestid":"5e36d604-09ab-4fbb-9437-42c1d828140f;98","domain":"AUTH","code":-65,"mfcode":"Auth-65","message":"Some of the input parameters provided are invalid"}]  
@@ -49,16 +65,16 @@ The upgrade installation is rolling back with Validate failed from 8.2.1.3
 Before Upgrade, execute below SQL statement from admin database
 
 For **MySQL**  
-\------------  
-delete from <admindb>.schema\_version where script = 'V62.1\_\_voltmxadmin-mysql-8.2.0.0.sql';  
+\----------------  
+delete from <admindb\>.schema\_version where script = 'V62.1\_\_voltmxadmin-mysql-8.2.0.0.sql';  
     
 For **SQLServer**  
-\---------------  
-delete from <admindb>.schema\_version where script = 'V62.1\_\_voltmxadmin-sqlserver-8.2.0.0.sql';  
+\----------------  
+delete from <admindb\>.schema\_version where script = 'V62.1\_\_voltmxadmin-sqlserver-8.2.0.0.sql';  
     
 For **Oracle**  
-\----------  
-delete from <admindb>.schema\_version where script = 'V62.1\_\_voltmxadmin-oracle-8.2.0.0.sql';  
+\----------------  
+delete from <admindb\>.schema\_version where script = 'V62.1\_\_voltmxadmin-oracle-8.2.0.0.sql';  
     
     
 
@@ -151,24 +167,31 @@ Manual Steps:
 
 1\. Create Component Users (schema) with the required grants as below.
 
+```
 CREATE USER <prefix>MFCONSOLEDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;  
 ALTER USER <prefix>MFCONSOLEDB<suffix> QUOTA UNLIMITED ON USERS;  
 GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>MFCONSOLEDB<suffix>;  
 GRANT CREATE JOB TO <prefix>MFCONSOLEDB<suffix>;  
 GRANT MANAGE SCHEDULER TO <prefix>MFCONSOLEDB<suffix>;
+```
 
+```
 CREATE USER <prefix>MFACCOUNTSDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;  
 ALTER USER <prefix>MFACCOUNTSDB<suffix> QUOTA UNLIMITED ON USERS;  
 GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>MFACCOUNTSDB<suffix>;  
 GRANT CREATE JOB TO <prefix>MFACCOUNTSDB<suffix>;  
 GRANT MANAGE SCHEDULER TO <prefix>MFACCOUNTSDB<suffix>;
+```
 
+```
 CREATE USER <prefix>MFREPORTSDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;  
 ALTER USER <prefix>MFREPORTSDB<suffix> QUOTA UNLIMITED ON USERS;  
 GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>MFREPORTSDB<suffix>;  
 GRANT CREATE JOB TO <prefix>MFREPORTSDB<suffix>;  
 GRANT MANAGE SCHEDULER TO <prefix>MFREPORTSDB<suffix>;
+```
 
+```
 CREATE USER <prefix>IDCONFIGDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;  
 ALTER USER <prefix>IDCONFIGDB<suffix> QUOTA UNLIMITED ON USERS;  
 GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>IDCONFIGDB<suffix>;  
@@ -177,27 +200,34 @@ GRANT MANAGE SCHEDULER TO <prefix>IDCONFIGDB<suffix>;
 GRANT CREATE TABLE TO <prefix>IDCONFIGDB<suffix>;  
 GRANT CREATE ANY INDEX TO <prefix>IDCONFIGDB<suffix>;  
 GRANT ALTER ANY TABLE TO <prefix>IDCONFIGDB<suffix>;
+```
 
+```
 CREATE USER <prefix>ADMINDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;  
 ALTER USER <prefix>ADMINDB<suffix> QUOTA UNLIMITED ON USERS;  
 GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>ADMINDB<suffix>;  
 GRANT CREATE JOB TO <prefix>ADMINDB<suffix>;  
 GRANT MANAGE SCHEDULER TO <prefix>ADMINDB<suffix>;
+```
 
+```
 CREATE USER <prefix>VPNSDB<suffix> identified by <password> default tablespace <dataTablespace> profile default;  
 ALTER USER <prefix>VPNSDB<suffix> QUOTA UNLIMITED ON USERS;  
 GRANT CONNECT,RESOURCE,CREATE VIEW TO <prefix>VPNSDB<suffix>;  
 GRANT CREATE JOB TO <prefix>VPNSDB<suffix>;  
 GRANT MANAGE SCHEDULER TO <prefix>VPNSDB<suffix>;
+```
 
 2\. Create a non DBA user with the below grants. This user will be given to the Installer.
 
+```
 CREATE USER <INSTALLER\_USER> IDENTIFIED BY <password>;  
 GRANT CREATE SESSION TO <INSTALLER\_USER> WITH ADMIN OPTION;  
 GRANT SELECT ANY DICTIONARY TO <INSTALLER\_USER>;  
 ALTER USER <INSTALLER\_USER> QUOTA UNLIMITED ON <dataTablespace>;  
 ALTER USER <INSTALLER\_USER> QUOTA UNLIMITED ON <indexTablespace>;  
 ALTER USER <INSTALLER\_USER> QUOTA UNLIMITED ON <lobTablespace>;
+```
 
 > **_Note:_**   The password for the component users and the installer user have to be same.
 
@@ -210,6 +240,8 @@ If you do not want to use a DB user with DBA role or Equivalent privileges for t
     
 Manual Steps:
 
+
+```
 Create database <prefix>mfreportsdb<suffix>;  
 Create database <prefix>mfaccountsdb<suffix>;  
 Create database <prefix>mfconsoledb<suffix>;  
@@ -272,12 +304,12 @@ create user userId from LOGIN loginId;
 GO  
 GRANT CREATE TABLE,CREATE TYPE,CREATE PROCEDURE,SELECT,UPDATE,DELETE,INSERT,EXECUTE,REFERENCES,CREATE VIEW,ALTER TO userId  
 GO
-
+```
 > **_Note:_** The whole script must be run at once.
 
 > **_Note:_** The loginId and password must be the same as used for Volt MX Foundry Installation.
 
-> **_Note:_** The <prefix> and <suffix> provided must be the same across the script and must also be provided at the time of the Volt MX foundry Installation.
+> **_Note:_** The <prefix\> and <suffix\> provided must be the same across the script and must also be provided at the time of the Volt MX foundry Installation.
 
 > **_Note:_** You can use the same loginId and userId to avoid confusion.
 
@@ -287,6 +319,8 @@ GO
 **Issue**:
     
 After entering Database details the DB connection fails with the following error:
+
+`ERROR,main,action.LogFlywayJavaMigrations:17,installCore,ERROR: Unable to obtain Jdbc connection from DataSource (jdbc:mariadb://odc3dmv-mf-db01.in.dc.gov:3306/?relaxAutoCommit=true) for user 'madmin': Could not connect: Access denied for user 'madmin'@'odc3dmv-mf-web02.in.dc.gov' (using password: YES)`
     
 ![](Resources/Images/error_troubleshooting.png)
     
@@ -305,7 +339,7 @@ Following are the error details:
 *   SQL State HY000
 *   Error Code 1093
 *   Error Message: You can't specify target table 'users' for update in FROM clause
-*   Location: <Location where the installation is done>
+*   Location: <Location where the installation is done\>
     
 **Workaround**:
     
@@ -445,8 +479,8 @@ If you want to access everything via a proxy URL, including Volt MX Foundry Cons
     
     > **_Note:_** Proxy configuration should have preserver host directive for Volt MX Foundry to work correctly after start up.  
       
-    For example, in case of apache proxy, use `` `ProxyPreserveHost On`  
-    ``and in case of NGINX, use `` `proxy_set_header Host $host;` ``(For more information, refer [Passing request headers](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy#passing-request-headers))
+    For example, in case of apache proxy, use `ProxyPreserveHost On`  
+    `and in case of NGINX, use` `proxy_set_header Host $host;` (For more information, refer [Passing request headers](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy#passing-request-headers))
     
 
 Preserving Proxy if Load Balancer or Proxy Server is Configured
