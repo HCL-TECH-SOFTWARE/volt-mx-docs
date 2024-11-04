@@ -1002,7 +1002,7 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ## Volt Foundry
 
 ### V9 Servicepack 5 Fixpack 17 Hotfix 0
-October 17, 2024
+October 28, 2024
 
 * Security hardening.
 
