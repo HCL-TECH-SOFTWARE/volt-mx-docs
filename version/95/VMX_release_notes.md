@@ -52,6 +52,8 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Foundry](#volt-foundry)
 
+
+- [V9 Servicepack 5 Fixpack 17 Hotfix 0](#v9-servicepack-5-fixpack-17-hotfix-0)
 - [AppFactory V9 Servicepack 5 Fixpack 16 Hotfix 7](#appfactory-v9-servicepack-5-fixpack-16-hotfix-7)
 - [V9 Servicepack 5 Fixpack 16 Hotfix 7](#v9-servicepack-5-fixpack-16-hotfix-7)
 - [V9 Servicepack 5 Fixpack 16 Hotfix 6](#v9-servicepack-5-fixpack-16-hotfix-6)
@@ -1000,7 +1002,7 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ## Volt Foundry
 
 ### V9 Servicepack 5 Fixpack 17 Hotfix 0
-October 17, 2024
+October 28, 2024
 
 * Security hardening.
 
