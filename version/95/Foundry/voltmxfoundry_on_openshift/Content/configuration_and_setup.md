@@ -27,9 +27,19 @@ For more information about the properties, refer to the following section.
 
 1.  **INSTALL_ENV_NAME**: The install environment name must be a in string value in lowercase. For example: `dev`, `qa`, `prod`, or `eastusprod`.
 
-    * **IMAGE_REGISTRY_USERNAME:** - This is the email ID you use to log in.
-    * **IMAGE_REGISTRY_PASSWORD:** - This is the CLI secret found under your User Profile in HCL Harbor.
+      * **HCL_IMAGE_REGISTRY_SECRET:**  
 
+        Please provide the secret which is configured with hcl harbor username and secret.
+
+```
+      To create the secret from Username and Password, please run the following command then the secret will be created as foundry-image-pull     
+      Command: kubectl create secret docker-registry foundry-image-pull --docker-server=hclcr.io --docker-username=< your-name > --docker-password=< your-pword > --docker-email=< your-email > 
+      username: your-email
+      password: your-authentication-token
+      your-authentication-token - This is the CLI secret found under your User Profile in HCL .
+
+```
+  
 2.  **VOLTMX_FOUNDRY_BUILD_VER**: The build version of Foundry that you want to install. While upgrading, this specifies the build version to which you want to upgrade.
 3.  **VOLTMX_FOUNDRY_BUILD_TYPE**: The type of Foundry environment that must be created. For production environments, the value must be `PRODUCTION`. For dev, QA, or other non-production environments, the value must be `NON-PRODUCTION`.  
 
