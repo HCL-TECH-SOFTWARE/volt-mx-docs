@@ -61,7 +61,7 @@ The following parameters are specified in the values.yaml file within the Helm c
      username: your-email<br>
      password: your-authentication-token<br>
 
-     > **_Note:_** your-authentication-token is the CLI secret found under your User Profile in HCL.
+     > **_Note:_** your-authentication-token is the CLI secret found under your User Profile in HCL .
 
 4. **foundryInstallType**: The deployment must be marked as either production or non production.  This parameter must be specified and it must be either "PRODUCTION" or "NON-PRODUCTION".
 
