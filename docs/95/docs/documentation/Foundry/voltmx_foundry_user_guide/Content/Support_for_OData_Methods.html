@@ -424,20 +424,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ceiling" class="md-nav__link">
-    Ceiling
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#floor" class="md-nav__link">
-    Floor
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#round" class="md-nav__link">
     Round
   </a>
@@ -454,6 +440,55 @@
           <li class="md-nav__item">
   <a href="#indexof" class="md-nav__link">
     indexof
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expand-with-filter" class="md-nav__link">
+    Expand with $filter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arithmetic-operators" class="md-nav__link">
+    Arithmetic Operators
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-addition" class="md-nav__link">
+    1. Addition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-subtraction" class="md-nav__link">
+    2. Subtraction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-multiplication" class="md-nav__link">
+    3. Multiplication
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-division" class="md-nav__link">
+    4. Division
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-modulo" class="md-nav__link">
+    5. Modulo
   </a>
   
 </li>
@@ -664,18 +699,22 @@ Syntax rules are comma separated list of values without spaces and enclosed in p
 </code></pre>
 <h3 id="data-comparison-filters">Data comparison filters</h3>
 <p>Filters to list all the recodrs where post rounding the column value is equal to provided number.</p>
-<h3 id="ceiling">Ceiling</h3>
+<p>### Ceiling </p>
 <p>API Usage</p>
 <pre><code> $filter=ceiling(colname) eq value
 </code></pre>
 <p>Example</p>
 <p>Below syntax filter all the records where <code>ceiling</code> rounds upto <code>32</code>.</p>
-<h3 id="floor">Floor</h3>
+<pre><code> ceiling(Freight) eq 32
+</code></pre>
+<p>### Floor</p>
 <p>API Usage</p>
-<pre><code> $filter=ceiling(colname) eq value
+<pre><code> $filter=floor(colname) eq value
 </code></pre>
 <p>Example</p>
-<p>Below syntax filter all the records where <code>ceiling</code> rounds upto <code>32</code>.</p>
+<p>Below syntax filter all the records where <code>floor</code> rounds upto <code>32</code>.</p>
+<pre><code> floor(Freight) eq 32
+</code></pre>
 <h3 id="round">Round</h3>
 <p>API Usage</p>
 <pre><code> $filter=round(colname) eq value
@@ -703,6 +742,66 @@ Syntax rules are comma separated list of values without spaces and enclosed in p
 <pre><code> indexof(Name,'lfreds') eq 1
 </code></pre>
 <p>Note : As of now it is supported only in the MySQL and in the Oracle backend databases.</p>
+<h3 id="expand-with-filter">Expand with $filter</h3>
+<p>The <code>$expand</code> query option specifies the related resources to be included in line with retrieved resources and
+<code>$filter</code> is used to specify conditions that the data must meet.</p>
+<p>API Usage</p>
+<pre><code> $expand=Products($filter=location eq USA) 
+</code></pre>
+<p>Example</p>
+<p>Below syntax fetches a list of Categories. For each Category, retrieves the related Products, but only the products where the location field is equal to 'USA'.</p>
+<pre><code> Categories? $expand=Products($filter=location eq USA) 
+</code></pre>
+<p>Note : As of now it is supported only <code>eq</code></p>
+<h3 id="arithmetic-operators">Arithmetic Operators</h3>
+<p>OData defines a set of arithmetic operators that require operands that evaluate to numeric types. Arithmetic operators are typically used to filter a collection of resources. 
+If an operand of an arithmetic operator is null, the result is null. </p>
+<p><code>$filter</code> is used to specify conditions that the data must meet.</p>
+<h3 id="1-addition">1. Addition</h3>
+<p>The add operator adds the left and right numeric operands.</p>
+<p>API Usage</p>
+<pre><code> $filter=&lt;colname&gt; add &lt;Value&gt; eq &lt;resultent_value&gt; 
+</code></pre>
+<p>Example :</p>
+<p>Below syntax fetches a list of all products with a Price of 2.55</p>
+<pre><code> $filter=Price add 2.45 eq 5.00 
+</code></pre>
+<h3 id="2-subtraction">2. Subtraction</h3>
+<p>The sub operator subtracts the right numeric operand from the left numeric operand.</p>
+<p>API Usage</p>
+<pre><code> $filter=&lt;colname&gt; sub &lt;Value&gt; eq &lt;resultent_value&gt; 
+</code></pre>
+<p>Example :</p>
+<p>Below syntax fetches a list of all products with a Price of 2.55:</p>
+<pre><code> filter=Price sub 0.55 eq 2.00 
+</code></pre>
+<h3 id="3-multiplication">3. Multiplication</h3>
+<p>The mul operator multiplies the left and right numeric operands. The mul operator is also valid for multiplying a Duration value with a numeric value.</p>
+<p>API Usage</p>
+<pre><code> $filter=&lt;colname&gt; mul &lt;Value&gt; eq &lt;resultent_value&gt; 
+</code></pre>
+<p>Example :</p>
+<p>Below syntax fetches a list of all products with a Price of 2.55</p>
+<pre><code> $filter=Price mul 2.0 eq 5.10
+</code></pre>
+<h3 id="4-division">4. Division</h3>
+<p>The div and divby operators divide the left numeric operand by the right numeric operand. They are also valid for dividing a Duration value by a numeric value.</p>
+<p>API Usage</p>
+<pre><code> $filter=&lt;colname&gt; div &lt;Value&gt; eq &lt;resultent_value&gt; 
+</code></pre>
+<p>Example :</p>
+<p>Below syntax fetches a list of all products with a Price of 2.55</p>
+<pre><code> $filter=Price div 2.55 eq 1
+</code></pre>
+<h3 id="5-modulo">5. Modulo</h3>
+<p>The mod operator returns the remainder when the left numeric operand is divided by the right numeric operand.  The sign of the result is the same as the sign of the left operand. If the right operand is zero, the request fails.</p>
+<p>API Usage</p>
+<pre><code> $filter=&lt;colname&gt; mod &lt;Value&gt; eq &lt;resultent_value&gt; 
+</code></pre>
+<p>Example :</p>
+<p>Below syntax fetches a list of all products with a Rating exactly divisible by 5</p>
+<pre><code> $filter=Rating mod 5 eq 0 
+</code></pre>
 
               
             </article>
