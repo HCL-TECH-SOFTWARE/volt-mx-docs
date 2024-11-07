@@ -34,7 +34,7 @@ Foundry Kubernetes cluster is supported on CentOS version 7.4.
 
 Volt MX Foundry Container Cluster Solution supports only the Tomcat Application server. The Tomcat server comes bundled along with the installer.
 
-All the Docker images built for Volt MX Foundry are built using the Tomcat version 9.0.22-jdk11 as the base image.
+All the Docker images built for Volt MX Foundry are built using the Tomcat version 9.0.90-jdk11 as the base image.
 
 ### Supported Databases
 

@@ -52,7 +52,7 @@ HCL recommends using the following operating systems to install Volt Foundry Sin
 
 Volt Foundry Single Container Solution supports only the **Tomcat Application server**.
 
-All the Docker images built for Volt Foundry are built using the `Tomcat version 9.0.62-jdk11.0.13` as the base image.
+All the Docker images built for Volt Foundry are built using the `Tomcat version 9.0.90-jdk11` as the base image.
 
 ### Supported Databases
 
