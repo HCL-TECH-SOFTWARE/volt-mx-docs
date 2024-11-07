@@ -1027,7 +1027,7 @@ Install Folder:
 /home/User/VoltMXFoundryInstaller-DEV-8.4.1.438  
 
 Application Server:  
-Tomcat 8.5.32  
+Tomcat  9.0.x
 
 Application Server Details:  
 Hostname/IP Address: 10.11.12.201, Protocol: HTTP, HTTP Port: 8080,  
