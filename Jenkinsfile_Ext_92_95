@@ -1,4 +1,4 @@
-properties([parameters([credentials(credentialType: 'com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey', defaultValue: '', description: 'Add Your Credentials', name: 'Credentials', required: true), choice(choices: ['buildDocs_95.sh', 'buildDocs.sh'], description: '[Mandatory] Select a Version to Build. For V9.5 - buildDocs_95.sh, V9.2 - buildDocs.sh ', name: 'Doc_Version'), choice(choices: ['rel-cred-test'], description: '[Mandatory] Selected release branch', name: 'Release_Branch'), choice(choices: ['feature/HPHX'], description: '[Mandatory] Selected new branch', name: 'New_Branch'), string(description: '[Mandatory] Enter the commit summary. (Eg: HPHX-1234: change summary) ', name: 'Commit_Summary', trim: true), string(description: '[Optional] Enter the commit description. (Eg: HPHX-1234: change description) ', name: 'Commit_Description', trim: true), string(description: "[Mandatory] Enter a unique string for this build, with no spaces, like '9.5-PR-1234'", name: 'Build_Tag')])])
+properties([parameters([choice(choices: ['vishwanathan.m@hcl.com', 'sanjay-c@hcl-software.com'], description: 'Add your Email ID', name: 'Emails'), credentials(credentialType: 'com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey', defaultValue: '', description: 'Add your Credential ID', name: 'Credentials', required: true), choice(choices: ['buildDocs_95.sh', 'buildDocs.sh'], description: '[Mandatory] Select a Version to Build. For V9.5 - buildDocs_95.sh, V9.2 - buildDocs.sh', name: 'Doc_Version'), choice(choices: ['rel-cred-test'], description: '[Mandatory] Selected release branch', name: 'Release_Branch'), choice(choices: ['feature/HPHX'], description: '[Mandatory] Selected new branch', name: 'New_Branch'), string(description: '[Mandatory] Enter the commit summary. (Eg: HPHX-1234: change summary)', name: 'Commit_Summary'), string(description: '[Optional] Enter the commit description. (Eg: HPHX-1234: change description)', name: 'Commit_Description'), string(description: '[Mandatory] Enter a unique string for this build, with no spaces, like \'9.5-PR-1234\'', name: 'Build_Tag')])])
 pipeline{
 
 // Consider any agent
@@ -37,6 +37,7 @@ options{
       stage('Build'){
         steps{
           sh "git config --global user.name $MY_CREDENTIALS_USR"
+          sh "git config --global user.email ${params.Emails}"
           echo "volt-mx-doc-opnsrc - repository is clonned from git scm to local"
           echo "workspace used in this job is: ${env.WORKSPACE}"
           sh "echo present working directory"
