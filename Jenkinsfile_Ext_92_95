@@ -2,15 +2,15 @@ properties([parameters([credentials(credentialType: 'com.cloudbees.jenkins.plugi
 pipeline{
 
 // Consider any agent
-//agent any
+agent any
 
 // agent {
 // label 'vmx_agent1'
 // } 
 
-agent {
-label 'agent2'
-} 
+// agent {
+// label 'agent2'
+// } 
 
 
 // Consider only agent
@@ -28,6 +28,8 @@ environment{
   PROJECT_NAME = "HCL Volt MX Document External (Open-Source) Server"
   MY_CREDENTIALS_In = credentials("${params.Credentials_Internal}")
   MY_CREDENTIALS_Prod = credentials("${params.Credentials_External}")
+  // deployBranch = 'rel-cred-test'
+  // gitUrl = 'git@github01.hclpnp.com:phoenix-temenos/volt-mx-doc-opnsrc.git'
 }
 
 options{
@@ -37,6 +39,11 @@ options{
   stages{
       stage('Build'){
         steps{
+          // git(
+          //   branch: deployBranch, 
+          //   credentialsId: MY_CREDENTIALS_In, 
+          //   url: gitUrl
+          // )
           sh "git config --global user.name $MY_CREDENTIALS_In_USR"
           sh "git config --global user.email ${params.Emails}"
 
@@ -105,6 +112,9 @@ options{
           // sh "git branch -d feature/HPHX"
           sh "git checkout -b ${params.New_Branch}"       // git checkout -b feature/HPHX
           // sh "git pull volt-mx-docs master"
+
+          // sh "git remote add volt-mx-docs git@github.com:HCL-TECH-SOFTWARE/volt-mx-docs.git"
+
           sh "git push volt-mx-docs ${params.New_Branch}"   // git push volt-mx-docs feature/HPHX
           sh "gh pr create -t '${params.Commit_Summary}' -b '${params.Commit_Description}'"
           sh "gh pr status"
@@ -118,7 +128,8 @@ options{
           //creating tags/versions in open-source repo master branch
           sh "gh release create '${params.Build_Tag}' --notes '${params.Build_Tag}'"
           sh "gh release view"  //view latest created tag / stable version
-         
+
+          // sh "git remote remove volt-mx-docs"
           // -----
         
         }
