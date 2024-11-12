@@ -1,4 +1,4 @@
-properties([parameters([choice(choices: ['vishwanathan.m@hcl.com', 'sanjay-c@hcl-software.com'], description: 'Add your Email ID', name: 'Emails'), credentials(credentialType: 'com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey', defaultValue: '', description: 'Add your Credential ID', name: 'Credentials', required: true), choice(choices: ['buildDocs_95.sh', 'buildDocs.sh'], description: '[Mandatory] Select a Version to Build. For V9.5 - buildDocs_95.sh, V9.2 - buildDocs.sh', name: 'Doc_Version'), choice(choices: ['rel-cred-test'], description: '[Mandatory] Selected release branch', name: 'Release_Branch'), choice(choices: ['feature/HPHX'], description: '[Mandatory] Selected new branch', name: 'New_Branch'), string(description: '[Mandatory] Enter the commit summary. (Eg: HPHX-1234: change summary)', name: 'Commit_Summary'), string(description: '[Optional] Enter the commit description. (Eg: HPHX-1234: change description)', name: 'Commit_Description'), string(description: '[Mandatory] Enter a unique string for this build, with no spaces, like \'9.5-PR-1234\'', name: 'Build_Tag')])])
+properties([parameters([credentials(credentialType: 'com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey', defaultValue: '', description: 'Add your Credentials for Internal Server', name: 'Credentials_Internal', required: true), credentials(credentialType: 'com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey', defaultValue: '', description: 'Add your Credentials for External Server', name: 'Credentials_External', required: true), choice(choices: ['vishwanathan.m@hcl.com', 'sanjay-c@hcl-software.com'], description: 'Add your Email ID', name: 'Emails'), choice(choices: ['buildDocs_95.sh', 'buildDocs.sh'], description: '[Mandatory] Select a Version to Build. For V9.5 - buildDocs_95.sh, V9.2 - buildDocs.sh', name: 'Doc_Version'), choice(choices: ['rel-cred-test'], description: '[Mandatory] Selected release branch', name: 'Release_Branch'), choice(choices: ['feature/HPHX'], description: '[Mandatory] Selected new branch', name: 'New_Branch'), string(description: '[Mandatory] Enter the commit summary. (Eg: HPHX-1234: change summary)', name: 'Commit_Summary'), string(description: '[Optional] Enter the commit description. (Eg: HPHX-1234: change description)', name: 'Commit_Description'), string(description: '[Mandatory] Enter a unique string for this build, with no spaces, like \'9.5-PR-1234\'', name: 'Build_Tag')])])
 pipeline{
 
 // Consider any agent
@@ -26,7 +26,8 @@ label 'agent2'
 
 environment{
   PROJECT_NAME = "HCL Volt MX Document External (Open-Source) Server"
-  MY_CREDENTIALS = credentials("${params.Credentials}")
+  MY_CREDENTIALS_In = credentials("${params.Credentials_Internal}")
+  MY_CREDENTIALS_Prod = credentials("${params.Credentials_External}")
 }
 
 options{
@@ -36,8 +37,30 @@ options{
   stages{
       stage('Build'){
         steps{
-          sh "git config --global user.name $MY_CREDENTIALS_USR"
+          sh "git config --global user.name $MY_CREDENTIALS_In_USR"
           sh "git config --global user.email ${params.Emails}"
+
+          echo "---Configure User Credentials for Internal Server ----"
+                sh '''
+                echo -e 'Host github01.hclpnp.com' | cat > ~/.ssh/config
+                echo -e "HostName github01.hclpnp.com" | cat >> ~/.ssh/config
+                echo -e "Port 22" | cat >> ~/.ssh/config
+                echo -e "User git" | cat >> ~/.ssh/config
+                echo -e "IdentityFile ~/.ssh/$MY_CREDENTIALS_In_USR" | cat >> ~/.ssh/config
+                echo -e "IdentitiesOnly yes" | cat >> ~/.ssh/config
+                '''
+                
+          echo "---Configure User Credentials for External Server ----"
+                sh '''
+                echo -e '\n' | cat >> ~/.ssh/config
+                echo -e 'Host github.com' | cat >> ~/.ssh/config
+                echo -e "HostName ssh.github.com" | cat >> ~/.ssh/config
+                echo -e "Port 443" | cat >> ~/.ssh/config
+                echo -e "User git" | cat >> ~/.ssh/config
+                echo -e "IdentityFile ~/.ssh/$MY_CREDENTIALS_Prod_USR" | cat >> ~/.ssh/config
+                echo -e "IdentitiesOnly yes" | cat >> ~/.ssh/config
+                '''
+          
           echo "volt-mx-doc-opnsrc - repository is clonned from git scm to local"
           echo "workspace used in this job is: ${env.WORKSPACE}"
           sh "echo present working directory"
