@@ -8,7 +8,8 @@ The **<object\>.update** API updates the records that are qualified for the crit
 
 <blockquote><em><b>Note:</b></em>
 <ul>
-<li>Not supported for Windows channel.</li>
+<li>This API is supported from V8 SP4 onwards.</li>
+<li>Supported for Windows from V8 SP4 Fix Pack 6 onwards.</li>
 <li>The column names and the values provided as key value pairs are case sensitive.</li>
 </ul>
 </blockquote>
@@ -38,9 +39,9 @@ Volt MX  Iris (JavaScript)
 | primaryKeys | JSON | Specify the primary keys of the record to be updated. **Key Name**: primaryKeys and **values** are column names and their respective values. | No |
 | whereCondition | JSON | Specify the where condition for the update query. **Key Name**: whereCondition and **values** are column names and their respective values. | No |
 | whereConditionAsAString | String | Specify the where condition for the update query. **Key Name**: whereConditionAsAString and the **value** is a string. > **_Note:_** For SPA/Desktop Web channels, each condition must have only one comparison operator (=,!=,>,<,>=,<=). Multiple conditions can be clubbed using conjunctions (AND, OR). Values containing whitespaces are not supported. | No |
-| trackChanges | Boolean | If **trackChanges** is set to **False**, the record level operations are not tracked. When the option is set to false, the CUD operations performed on a record are not synced (uploaded). The key is set to **True**, by default. **Note:** Not supported for SPA/Desktop Web channels.| No |
-| trackIntermediateUpdates | Boolean | If **trackIntermediateUpdates** is set to **False**, it enables to track the latest update performed on the record. The key is set to **True**, by default. **Note:** Not supported for SPA/Desktop Web channels.| No |
-| markForUpload | Boolean | If **markForUpload** is set to**False**, the record changes are not uploaded to the server. The key is set to **True**, by default. **Note:** Not supported for SPA/Desktop Web channels.| No |  
+| trackChanges | Boolean | If **trackChanges** is set to **False**, the record level operations are not tracked. When the option is set to false, the CUD operations performed on a record are not synced (uploaded). The key is set to **True**, by default. <br>**Note:** Supported for Mobile Web and Desktop Web channels from V8 SP4 Fixpack 12 onwards.| No |
+| trackIntermediateUpdates | Boolean | If **trackIntermediateUpdates** is set to **False**, it enables to track the latest update performed on the record. The key is set to **True**, by default. <br>**Note:** Supported for Mobile Web and Desktop Web channels from V8 SP4 Fixpack 12 onwards.| No |
+| markForUpload | Boolean | If **markForUpload** is set to**False**, the record changes are not uploaded to the server. The key is set to **True**, by default. <br>**Note:** Supported for Mobile Web and Desktop Web channels from V8 SP4 Fixpack 12 onwards.| No |  
 | syncLatestObjectSnapshot | Boolean | This option, when turned on (set to True), ensures that only the most recent update is sent for a specific primary key, rather than sending two entries when both create and update operations occur for that key. | No |
 
 

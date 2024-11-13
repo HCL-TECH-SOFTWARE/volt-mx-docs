@@ -14,8 +14,6 @@ The **primaryKeys** parameter clears a particular record from the local database
 Volt MX  Iris (JavaScript)
 -------------------------------
 
-> **_Note:_** This API is supported for Android, iOS, Mobile Web, and Desktop Web channels.
-
 ### Signature
 
 ```

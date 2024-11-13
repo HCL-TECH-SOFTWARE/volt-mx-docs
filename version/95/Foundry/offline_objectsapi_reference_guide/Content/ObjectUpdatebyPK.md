@@ -28,10 +28,10 @@ Volt MX  Iris (JavaScript)
 | **Keys** | Type | Description | Required |
 | --- | --- | --- | --- |
 | primaryKeys | JSON | Specify the primary keys of the record to be updated. Use records primary key column names as key and respective values to populate **primaryKeys** JSON. | Yes |
-| trackChanges | JSON | Set the trackChanges key to **False**, the record level operations are not tracked. When the option is set to false, the CUD operations performed on a record are not synced (uploaded). | No |
+| trackChanges | JSON | Set the trackChanges key to **False**, the record level operations are not tracked. When the option is set to false, the CUD operations performed on a record are not synced (uploaded).<br>**Note** Supported for Windows from V8 SP4 Fix Pack 6 onwards.<br>Supported for Mobile Web and Desktop Web channels from V8 SP4 Fix Pack 12 onwards. | No |
 | syncLatestObjectSnapshot | JSON | This option, when turned on (set to True), ensures that only the most recent update is sent for a specific primary key, rather than sending two entries when both create and update operations occur for that key.| No|
-| trackIntermediateUpdates | JSON | The option is supported only in update API. The option enables us to track the latest update performed on the record. | No|
-| markForUpload | JSON | Set the markForUpload to **false**, the record changes are not uploaded to the server.| No |
+| trackIntermediateUpdates | JSON | The option is supported only in update API. The option enables us to track the latest update performed on the record. <br>**Note**Supported for Windows from V8 SP4 Fix Pack 6 onwards.<br>Supported for Mobile Web and Desktop Web channels from V8 SP4 Fix Pack 12 onwards.| No|
+| markForUpload | JSON | Set the markForUpload to **false**, the record changes are not uploaded to the server.<br>**Note**Supported for Windows from V8 SP4 Fix Pack 6 onwards.<br>Supported for Mobile Web and Desktop Web channels from V8 SP4 Fix Pack 12 onwards.| No |
 
 ### Return Type
 

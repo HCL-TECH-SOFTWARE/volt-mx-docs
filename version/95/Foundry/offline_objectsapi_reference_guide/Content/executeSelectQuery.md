@@ -11,7 +11,8 @@ The failureCallback is invoked in case of errors such as invalid query and so on
 
 ## Volt MX Iris (JavaScript)
 
-> **_Note:_** Not supported for Mobile Web, and Desktop Web channels.
+> **_Note:_** Supported for Windows from V8 SP4 Fix Pack 6 onwards.
+
 
 ### Signature
 
