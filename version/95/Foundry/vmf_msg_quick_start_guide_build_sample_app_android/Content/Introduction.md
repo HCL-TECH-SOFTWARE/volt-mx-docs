@@ -17,6 +17,8 @@ This document provides details about how to build a sample application on Androi
 *   [Installing the Engagement Services Demo Client Application on an Android Device](Installing_the_messaging_demo.md)
 *   [Configuring the Engagement Demo Application using Engagement Services Console](Configuring_the_messaging.md)
 *   [Configuring Email and SMS Service Providers using Engagement Services Console](Configuring_Email_and_SMS.md)
+*   [Configuring the Foundry Messaging Demo Application using Foundry Messaging Console](the_VMS_demo_application_using.md)
+*   [Configuration of the Email and SMS Provider using Foundry Messaging Console](Configuration_of_the_Email.md)
 *   [Subscribing to Push Notifications Using the Engagement Services Demo Application](Subscribing_to_Ad_hoc_Notifications.md)
 *   [Sending Adhoc Email, SMS and Push Notifications](Sending_Adhoc__Email__SMS_and_Push_Notifications.md)
 
