@@ -43,6 +43,8 @@ A header is a section of the form that is docked at the top of the form, and can
     
 5.  Set the properties of these widgets and save the header template.
 
+    > **_Note:_** Volt MX Templates with headers and footers templates support are limited for Free Form Javascript based projects.
+
 ### Footers
 
 A footer is a section of the form that is docked at the bottom of the form and can be reused across the forms.
@@ -73,6 +75,8 @@ To create a footer template, follow these steps:
 5.  For inserting footer,
     1.  Click the **Edit** button against the **Footer** field to open the **Footer** dialog box.
     2.  From the available list, choose a footer and then click **OK**.
+
+    > **_Note:_** Volt MX Templates with headers and footers templates support are limited for Free Form Javascript based projects.
 
 ### Segments
 
