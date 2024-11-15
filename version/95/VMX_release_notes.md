@@ -7,6 +7,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Iris](#volt-iris)
 
+- [V9 Servicepack 5 Fixpack 43](#v9-servicepack-5-fixpack-43)
 - [V9 Servicepack 5 Fixpack 42](#v9-servicepack-5-fixpack-42)
 - [V9 Servicepack 5 Fixpack 41](#v9-servicepack-5-fixpack-41)
 - [V9 Servicepack 5 Fixpack 40](#v9-servicepack-5-fixpack-40)
@@ -108,6 +109,18 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 - [Earlier Foundry releases](#earlier-foundry-releases)
 
 ## Volt Iris
+
+### V9 Servicepack 5 Fixpack 43
+November 18, 2024
+
+* MacOS Sequoia support added for Iris.
+* Support added for new icon themes for iOS 18.
+* Updated UI for supporting icon configurations for new device family sets for iOS.
+
+
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+
 
 ### V9 Servicepack 5 Fixpack 42
 November 04, 2024
