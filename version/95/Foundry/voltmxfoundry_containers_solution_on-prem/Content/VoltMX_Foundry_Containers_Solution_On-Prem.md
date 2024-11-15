@@ -17,7 +17,7 @@ You should use this installation if you plan to use docker to setup your on-prem
 The Volt MX Foundry Container Cluster Solution provides developers with tools to build applications. The Volt MX Foundry Container Cluster Solution has the following features:
 
 1.  Deploys Volt MX Foundry on Kubernetes environment.
-2.  Supports deployment in Linux (CentOS version 7.4).
+2.  Supports deployment in Linux (RHEL 8).
 
 # Prerequisites
 
@@ -28,7 +28,7 @@ The Volt MX Foundry Container Cluster Solution provides developers with tools to
 
 ### Supported OS Platform
 
-Foundry Kubernetes cluster is supported on CentOS version 7.4.
+Foundry Kubernetes cluster is supported on RHEL 8.
 
 ### Supported Application Servers
 
@@ -56,7 +56,7 @@ Volt MX Foundry Container Cluster Solution supports the following Kubernetes pac
 | Database Type | Version Supported |
 | ------------- | ----------------- |
 | Docker        | 26.0.0 |
-| kubectl       | 1.27.6 |
+| kubectl       | 1.30.1 |
 | kubelet       | 1.27.6 |
 | kubeadm       | 1.27.6 |
 

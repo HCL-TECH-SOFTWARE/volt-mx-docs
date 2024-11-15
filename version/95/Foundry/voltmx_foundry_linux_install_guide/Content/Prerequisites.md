@@ -84,6 +84,9 @@ To create a user, follow these steps:
     `# adduser core`  
       
     `# passwd core`
-    
+
+
+For database and app server related prerequisites, refer to the following sections:
+
 *   [Database Prerequisites](DB_PRe-reqs.md)
-*   [Application Servers Prerequisites](AppServ_Prerequisites.md)
+*   [Application Servers Prerequisites](Appser_Pre-installation_Tasks.md) 

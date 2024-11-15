@@ -22,7 +22,7 @@ You can use the information to deploy Foundry to an existing Kubernetes clusters
 
 # Prerequisites
 
-- Kubernetes Cluster running version 1.27.6.
+- Kubernetes Cluster running version above 1.27.6.
 
 ## Software Requirements
 

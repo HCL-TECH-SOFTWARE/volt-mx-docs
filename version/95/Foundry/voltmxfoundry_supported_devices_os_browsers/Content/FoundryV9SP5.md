@@ -46,7 +46,7 @@ The installation of the Volt Foundry software supports the following versions of
 
 #### **Tomcat**
 
-*   Tomcat 9.0.62
+*   Tomcat 9.0.90
     *   Tomcat 9.0.45 prior to HCL Volt MX version 9.2.1.9
 
 
@@ -112,7 +112,7 @@ For development environments, in addition to the versions of Operating Systems, 
 
 #### App servers 
 
-* Tomcat 9.0.62 
+* Tomcat 9.0.90 
 
 #### DB’s 
 
@@ -131,7 +131,7 @@ For development environments, in addition to the versions of Operating Systems, 
 
 ### Kubernetes 
 
-* 1.27.6
+* 1.30.1
 
 ### Foundry container installation modes 
 

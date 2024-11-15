@@ -967,7 +967,7 @@ Application Server Details:
 Hostname/IP Address: , Port: 9999, HTTP/HTTPS Port: 8080
 
 Database Choice:
-MySQL 5.7
+MySQL
 
 Database Details:
 Hostname/IP Address: , User: mfuser, Port: 3306

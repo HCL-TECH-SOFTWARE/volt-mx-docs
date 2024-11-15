@@ -1033,7 +1033,7 @@ Application Server Details:
 Hostname/IP Address: 10.11.12.201, Protocol: HTTP, HTTP Port: 8080,  
 
 Database Choice:  
-MySQL 5.7  
+MySQL  
 
 Database Details:  
 Hostname/IP Address: mbaastest22.hcl.net, User: mfuser, Port: 3306  
