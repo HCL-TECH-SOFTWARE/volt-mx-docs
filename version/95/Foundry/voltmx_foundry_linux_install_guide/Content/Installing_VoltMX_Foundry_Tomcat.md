@@ -534,8 +534,8 @@ Database Choice
 ------------------
 Please select the database provider of your choice.
 
-->1- MySQL 5.7
-  2- MySQL 5.7 Cluster - Group Replication
+->1- MySQL
+  2- MySQL Cluster - Group Replication
   3- Oracle 19c (19.3.0)
   4- SQL Server 2017
   5- MariaDB 10.3. 13
@@ -596,7 +596,6 @@ PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):
 ===================================== 
 Incompatible Database Server Version  
 ------------------------------------  
-Minimum requirement for MySQL database server is 5.7.  
 
 PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):
 
