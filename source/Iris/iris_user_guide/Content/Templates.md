@@ -17,7 +17,6 @@ The following templates are supported on various channels:
 [Maps](#maps)
 
 [Gridcalendars](#gridcalendars)
-
 [Grids](#grids)
 
 [Tab Headers](#tab-headers)
@@ -42,6 +41,8 @@ A header is a section of the form that is docked at the top of the form, and can
 4.  Drag and drop the required widgets on the container.
     
 5.  Set the properties of these widgets and save the header template.
+
+    > **_Note:_** Volt MX Templates with headers and footers templates support are limited for Free Form Javascript based projects.
 
 ### Footers
 
@@ -73,6 +74,8 @@ To create a footer template, follow these steps:
 5.  For inserting footer,
     1.  Click the **Edit** button against the **Footer** field to open the **Footer** dialog box.
     2.  From the available list, choose a footer and then click **OK**.
+
+    > **_Note:_** Volt MX Templates with headers and footers templates support are limited for Free Form Javascript based projects.
 
 ### Segments
 
