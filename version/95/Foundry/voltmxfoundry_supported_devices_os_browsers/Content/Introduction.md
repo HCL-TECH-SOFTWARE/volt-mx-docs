@@ -9,7 +9,8 @@ This document helps you learn about the operating systems, application servers, 
 
 
 - [Volt MX Foundry V9 SP5 Software Requirements](FoundryV9SP5.md)
-- [Volt MX Foundry V9 SP2 Software Requirements](FoundryV9SP2.md)
+
+<!-- - [Volt MX Foundry V9 SP2 Software Requirements](FoundryV9SP2.md) -->
 
 
 
