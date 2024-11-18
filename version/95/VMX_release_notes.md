@@ -1014,7 +1014,7 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ### V9 Servicepack 5 Fixpack 17 Hotfix 2
 November 18, 2024
 
-* Added support for xlsx format (in addition to xls) for cloud metrics module.
+* Added support for XLSX format in the cloud metrics module, alongside XLS support.
 * Security hardening.
 
 
