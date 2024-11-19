@@ -81,8 +81,60 @@ Since VoltMX's build system is based on Gradle, integrate third party Android li
 
 Similarly, third-party java class (.jar) files can also be integrated into the project by copying .jar files to the required path.
 
-*   For mobile - `<WorkSpace>\<Application>\resources\customlibs\lib\android`
-*   For tablet - `<WorkSpace>\<Application>\resources\customlibs\lib\tabrcandroid`
+Introduction
+---------------
+From HCL Volt MX 9.x onwards, FFIs need to be converted into NFIs.  For the Android Channel we can convert them by following the steps below.  These steps are applicable only to the Android Channel.  For iOS, customers can create a case with HCL Support to have them converted.
+
+Instructions
+-------------
+
+1. Take any sample NFI zip file you have.  In this example we have used the <b>VoltMX_FileStorage-Android-4.0</b> NFI file which comes pre-configured with the VoltMX client.  This NFI file can be found under <b>Project Name --> nativebindings --> Android --> 4.0.</b>
+
+2. Create a new folder outside of the Workspace folder, for example <b>NFI ZipFiles</b>.  Copy the sample NFI zip file <b>(VoltMX_FileStorage-Android-4.0)</b> into the folder.
+
+3. Rename the NFI zip file to your FFI name .zip extension.  In this example, we renamed <b>VoltMX_FileStorage-Android-4.0 to Voltmx_MYFFINAME-Android-4.0.zip</b> which matched the name of our FFI file.
+
+4. Unzip the zip file that was renamed in step 3, and rename the directory in the file to match the name created in step 3.  In this example, we renamed it to <b>Voltmx_MYFFINAME-Android-4.0.</b>
+
+5. In the zip file opened in Step 4, open the <b>metadata.properties</b> file and you should see the following default values:
+
+```
+    moduleName=VoltMX_FileStorage
+    moduleVersion=1.0
+    moduleDescription=VoltMX_FileStorage
+    os=Android
+    sdkVersion=4.0
+
+```
+
+
+
+    Update the moduleName and moduleDescription based on the name you have provided in step 3.  In this example we updated them to Voltmx_MYFFINAME: 
+
+
+
+```
+    moduleName=Voltmx_MYFFINAME
+    moduleVersion=1.0
+    moduleDescription=Voltmx_MYFFINAME
+    os=Android
+    sdkVersion=4.0
+
+```
+
+6. Navigate to the thirdparty directory of the opened zip file and delete the jar located inside.
+
+7. Copy your original FFI aar or jar file and paste it into the folder where the jar file was just deleted
+
+8. Zip the folder renamed in Step 4 ,This will generate a zip file for a <b>SINGLE</b> FFI. You need to follow the same approach for all FFIs you need to generate.
+
+9. Once you are done with manually creating the zip file, you need to import it into Iris/Visualizer:
+
+    a) From Iris select <b>Edit --> Manage Native Function API(s) --> Android.</b>
+
+    b) Click on <b>Import</b> and select the zip file generated in the steps above.
+
+>**Note** : When you are importing as an NFI, you need to delete the JARS/AARs for which you have generated as an NFI, and the respective code calls should also be deleted in your application logic.
 
 If the library format's .aar or .jar file depends on other libraries, add them to your project.
 
