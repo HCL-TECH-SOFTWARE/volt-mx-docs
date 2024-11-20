@@ -111,13 +111,11 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 ## Volt Iris
 
 ### V9 Servicepack 5 Fixpack 43
-November 18, 2024
+November 19, 2024
 
-* MacOS Sequoia support added for Iris.
-* Support added for new icon themes for iOS 18.
-* Updated UI for supporting icon configurations for new device family sets for iOS.
-
-
+* Added MacOS Sequoia support for Iris.
+* Added support for new icon themes in iOS 18.
+* Updated UI to support icon configurations for new device family sets in iOS.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
