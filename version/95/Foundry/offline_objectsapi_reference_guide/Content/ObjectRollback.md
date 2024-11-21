@@ -4,16 +4,14 @@
 
 The **<object\>.rollback** function rolls back all changes of an object in a device's database to its previous sync state or a specific record supplied through the primaryKeyValueMap parameter.
 
->**_Note:_** <br>Supported in iOS and Android channels from V8 SP2 onwards.<br>Supported in all channels from V8 SP4 onwards.
+>**_Note_:** 
+> * Supported in iOS and Android channels from V8 SP2 onwards.
+> * Supported in all channels from V8 SP4 onwards.
 
 
 
 Volt MX  Iris (JavaScript)
 ---------------------------
-
-> **_Note:_** <br>Supported for iOS and Android channels from V8 SP2 onwards.<br>Supported for all channels from V8 SP4 onwards.
-
-
 
 ### Signature
 

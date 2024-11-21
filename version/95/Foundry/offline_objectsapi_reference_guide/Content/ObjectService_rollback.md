@@ -5,6 +5,11 @@ The **<objectService\>.rollback** API rolls back all changes of all objects of a
 
 ## Volt MX Iris (JavaScript)
 
+> **_Note_:**
+> * Supported for iOS and Android channels from V8 SP2 onwards.
+> * Supported for all channels from V8 SP4 onwards.
+
+
 ### Signature
 
 ```

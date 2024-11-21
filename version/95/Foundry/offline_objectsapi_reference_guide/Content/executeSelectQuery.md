@@ -5,9 +5,9 @@ The application-level API, **executeSelectQuery** allows the user to execute any
 
 The failureCallback is invoked in case of errors such as invalid query and so on.
 
-> **_Note:_** **executeSelectQuery** should be preferred only if the object-level **read** API is not able to serve the purpose such as **join based select** queries or complex SQL queries.
-
-> **_Note:_** **executeSelectQuery** supports only **read** or **select** queries. The API does not support **create** or **update** or **delete** operations on the device database.
+> **_Note:_** 
+> * **executeSelectQuery** should be preferred only if the object-level **read** API is not able to serve the purpose such as **join based select** queries or complex SQL queries.
+> * **executeSelectQuery** supports only **read** or **select** queries. The API does not support **create** or **update** or **delete** operations on the device database.
 
 ## Volt MX Iris (JavaScript)
 

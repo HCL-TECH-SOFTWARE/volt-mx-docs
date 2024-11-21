@@ -5,12 +5,12 @@
 
 The **<object\>.getPendingRecordsForUpload** API fetches the list of records that are yet to be uploaded.
 
-> **Note:**  The column names and values provided as key value pairs are case sensitive.  
-
-> **Note:**  <br>This API is supported from V8 SP4 onwards.<br>
-Supported for Windows from V8 SP4 Fix Pack 6 onwards.<br>
-Supported for Mobile Web and Desktop Web channels from V8 SP4 Fix Pack 12 onwards.<br>
-The column names and values provided as key value pairs are case sensitive.
+> **_Note_:**  
+> * The column names and values provided as key value pairs are case sensitive.  
+> * This API is supported from V8 SP4 onwards.
+> * Supported for Windows from V8 SP4 Fix Pack 6 onwards.
+> * Supported for Mobile Web and Desktop Web channels from V8 SP4 Fix Pack 12 onwards.
+> * The column names and values provided as key value pairs are case sensitive.
 
 
 Volt MX  Iris (JavaScript)

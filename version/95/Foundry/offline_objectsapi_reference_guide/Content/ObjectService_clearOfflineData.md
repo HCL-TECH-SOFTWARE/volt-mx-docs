@@ -11,8 +11,9 @@ Supported for Mobile Web and Desktop Web channels from V8 SP4 Fix Pack 28 onward
 ## Volt MX Iris (JavaScript)
 
 > **Note:**
+> * Supported for Windows from V8 SP4 Fix Pack 6 onwards.
+> * Supported for Mobile Web and Desktop Web channels from V8 SP4 Fix Pack 28 onwards.
 
-- Supported for Windows from V8 SP4 Fix Pack 6 onwards.
 
 ### Signature
 
