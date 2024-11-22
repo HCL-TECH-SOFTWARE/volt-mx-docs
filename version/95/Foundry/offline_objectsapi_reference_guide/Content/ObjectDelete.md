@@ -4,10 +4,15 @@
 
 The **<object\>.delete** API deletes the records that are qualified for the criteria from the local database.
 
-> **_Note_:**  
-> * This API is supported from V8 SP4 onwards.
-> * Supported for Windows from V8 SP4 Fix Pack 6 onwards.
-> * The column names and values provided as key value pairs are case sensitive.
+
+<blockquote>
+<em><b>Note: </b></em>
+<ul>
+<li>This API is supported from V8 SP4 onwards.</li>
+<li>Supported for Windows from V8 SP4 Fix Pack 6 onwards.</li>
+<li>The column names and values provided as key value pairs are case sensitive.</li>
+</ul>
+</blockquote>
 
 Volt MX  Iris (JavaScript)
 ----------------------------

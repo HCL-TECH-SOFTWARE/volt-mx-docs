@@ -4,10 +4,16 @@
 
 The Offline Objects **incrementalSetup** API allows the client application to consume the latest changes made to Volt MX Foundry app’s object services schema after a particular timestamp, without breaking the existing functionality. Similar to setup API, **incrementalSetup** API is also an application-level API with same method arguments.
 
-> **_Note:_** 
-> * Either **setup** or **incrementalSetup** API must be invoked on first time launch of the app.<br>
-Incremental setup API is not supported on multi-tenant environment.
-> * End users should have the latest schema (for the currently installed version) in the device before doing an app upgrade. To fetch the latest schema, the app needs to call an incremental setup API.
+
+<blockquote>
+<em><b>Note: </b></em>
+<ul>
+<li>Either <b>setup</b> or <b>incrementalSetup</b> API must be invoked on first time launch of the app.<br>
+Incremental setup API is not supported on multi-tenant environment.</li>
+<li>End users should have the latest schema (for the currently installed version) in the device before doing an app upgrade. To fetch the latest schema, the app needs to call an incremental setup API.</li>
+</ul>
+</blockquote>
+
 
 **Scenarios that are supported in incrementalSetup:**
 
@@ -45,6 +51,7 @@ VMXFoundry.OfflineObjects.incrementalSetup(options, onSuccess, onFailure)
 | -------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------- |
 | deviceDbEncryptionKey            | String  | password                                                                                                                                                                                                                                                                                                                                                                             | No (it is mandatory if encrypted in previous application setup). |
 | treatBooleanFieldValuesAsNumeric | Boolean | If the **treatBooleanFieldValuesAsNumeric** key is set to false, all the boolean field values are converted to boolean type (true or false) during upload session or on reading records from local device database. When the option is set to true, fallbacks to default implementation (uploading and reading boolean field values as numeric). By default, the key is set to True.<br>  <b>Note :</b> Supported for iOS, Android and Windows from V8 SP4 Fix Pack 102 onward | No                                                               |
+
 
 ### Example
 

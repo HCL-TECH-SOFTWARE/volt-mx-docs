@@ -4,9 +4,14 @@
 
 The **<object\>.rollback** function rolls back all changes of an object in a device's database to its previous sync state or a specific record supplied through the primaryKeyValueMap parameter.
 
->**_Note_:** 
-> * Supported in iOS and Android channels from V8 SP2 onwards.
-> * Supported in all channels from V8 SP4 onwards.
+
+<blockquote>
+<em><b>Note: </b></em>
+<ul>
+<li>Supported in iOS and Android channels from V8 SP2 onwards.</li>
+<li>Supported in all channels from V8 SP4 onwards.</li>
+</ul>
+</blockquote>
 
 
 

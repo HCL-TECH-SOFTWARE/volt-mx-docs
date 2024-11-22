@@ -3,10 +3,16 @@
 
 The **<object\>.create** API creates a new record in the local database.
 
-> **_Note:_**
-> *  If any column is defined as auto-generated, values are not allowed in them unless the **trackChanges** key is set to **false**.
-> * The record must contain all the mandatory columns and their respective values.
-> * The column names and values provided as key value pairs are case sensitive.
+
+<blockquote>
+<em><b>Note:</b></em>
+<ul>
+<li>If any column is defined as auto-generated, values are not allowed in them unless the <b>trackChanges</b> key is set to <b>false</b>.</li>
+<li>The record must contain all the mandatory columns and their respective values.</li>
+<li>The column names and values provided as key value pairs are case sensitive.</li>
+</ul>
+</blockquote>
+
 
 ## Volt MX Iris (JavaScript)
 

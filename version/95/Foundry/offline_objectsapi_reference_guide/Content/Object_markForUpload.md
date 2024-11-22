@@ -7,9 +7,14 @@ The **<object\>.markForUpload API** selects the changes made to the records and
 
 The markForUpload flag is set to true, by default.
 
->**_Note_:** 
-> * Supported for Windows from V8 SP4 Fix Pack 6 onwards.
-> * Supported for Mobile Web and Desktop Web channels from V8 SP4 Fixpack 12 onwards.
+
+<blockquote>
+<em><b>Note: </b></em>
+<ul>
+<li>Supported for Windows from V8 SP4 Fix Pack 6 onwards.</li>
+<li>Supported for Mobile Web and Desktop Web channels from V8 SP4 Fixpack 12 onwards.</li>
+</ul>
+</blockquote>
 
 
 Volt MX  Iris (JavaScript)
