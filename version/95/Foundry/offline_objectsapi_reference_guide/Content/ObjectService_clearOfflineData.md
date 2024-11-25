@@ -4,13 +4,8 @@
 The **<objectService\>.clearOfflineData** API clears all the offline data persisted in the object service tables and associated sync context. As the sync context is cleared, the next sync on this object service will fetch complete data from the server.
 
 
-<blockquote>
-<em><b>Note: </b></em>
-<ul>
-<li>The clearOfflineData API is considered as device only operation. Deleted records are not tracked and not sent to the server as part of next sync session.</li>
-<li>Supported for Mobile Web and Desktop Web channels from V8 SP4 Fix Pack 28 onwards.</li>
-</ul>
-</blockquote>
+
+>**Note:** The clearOfflineData API is considered as device only operation. Deleted records are not tracked and not sent to the server as part of next sync session.
 
 ## Volt MX Iris (JavaScript)
 

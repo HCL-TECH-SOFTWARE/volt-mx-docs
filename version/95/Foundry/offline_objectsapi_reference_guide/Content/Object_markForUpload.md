@@ -158,13 +158,16 @@ Utility API
 
 The API returns all the deferred records primary keys for a particular object.
 
-> **_Note:_**  Supported for Windows from V8 SP4 Fix Pack 6 onwards.
-
 
 ### Volt MX Iris (JavaScript)
 
-
-> **_Note:_** Not supported for Mobile Web, and Desktop Web channels.
+<blockquote>
+<em><b>Note: </b></em>
+<ul>
+<li>Supported for Windows from V8 SP4 Fix Pack 6.</li>
+<li>Not supported for Mobile Web, and Desktop Web channels.</li>
+</ul>
+</blockquote>
 
 #### Signature
 
