@@ -1,6 +1,6 @@
                           
 
-You are here: Software Requirements
+You are here: Software Requirements 
 
 Prerequisites
 =============
@@ -82,7 +82,9 @@ Software Requirements for JasperReports Server V 7.x
 > **_Important:_** Make sure to download TIBCO JasperReports Server version 7.9.2 or 7.1.0 and install it before configuring user attributes in How to Set Up the Jasper Reports Server. <br>
 The license key for JasperReports Server for On-premises, you must procure the license from TIBCO. 
 
-> **_Note:_**  For JasperReports Server Installation Documentation, refer to the following: [https://docs.tibco.com/products/tibco-jasperreports-server-7-9-0](https://docs.tibco.com/products/tibco-jasperreports-server-7-9-0)  
+> **_Note:_**  For JasperReports Server Installation Documentation, refer to the following:<br><br>
+[http://community.jaspersoft.com/documentation/tibco-jasperreports-server-installation-guide/v60/introduction](http://community.jaspersoft.com/documentation/tibco-jasperreports-server-installation-guide/v60/introduction)<br><br>[http://community.jaspersoft.com/documentation/tibco-jasperreports-server-installation-guide/v60/jasperreports-server-distributions](http://community.jaspersoft.com/documentation/tibco-jasperreports-server-installation-guide/v60/jasperreports-server-distributions)<br><br>[https://community.jaspersoft.com/documentation/tibco-jasperreports-server-community-edition-release-notes/v71/release-distributions](https://community.jaspersoft.com/documentation/tibco-jasperreports-server-community-edition-release-notes/v71/release-distributions)
+
 
 Supported Databases and Drivers
 -------------------------------
