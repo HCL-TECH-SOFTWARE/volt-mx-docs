@@ -725,6 +725,20 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instructions" class="md-nav__link">
+    Instructions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#network-security-configuration" class="md-nav__link">
     Network Security Configuration
   </a>
@@ -1079,6 +1093,20 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instructions" class="md-nav__link">
+    Instructions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#network-security-configuration" class="md-nav__link">
     Network Security Configuration
   </a>
@@ -1166,10 +1194,61 @@
 <h2 id="support-for-integrating-android-third-party-libraries-with-volt-mx-iris-project">Support for Integrating Android Third-Party Libraries With Volt MX Iris project</h2>
 <p>Since VoltMX's build system is based on Gradle, integrate third party Android library format (.aar) files into the project by copying .aar files to the required path.</p>
 <p>Similarly, third-party java class (.jar) files can also be integrated into the project by copying .jar files to the required path.</p>
-<ul>
-<li>For mobile - <code>&lt;WorkSpace&gt;\&lt;Application&gt;\resources\customlibs\lib\android</code></li>
-<li>For tablet - <code>&lt;WorkSpace&gt;\&lt;Application&gt;\resources\customlibs\lib\tabrcandroid</code></li>
-</ul>
+<h2 id="introduction">Introduction</h2>
+<p>From HCL Volt MX 9.x onwards, FFIs need to be converted into NFIs.  For the Android Channel we can convert them by following the steps below.  These steps are applicable only to the Android Channel.  For iOS, customers can create a case with HCL Support to have them converted.</p>
+<h2 id="instructions">Instructions</h2>
+<ol>
+<li>
+<p>Take any sample NFI zip file you have.  In this example we have used the <b>VoltMX_FileStorage-Android-4.0</b> NFI file which comes pre-configured with the VoltMX client.  This NFI file can be found under <b>Project Name --&gt; nativebindings --&gt; Android --&gt; 4.0.</b></p>
+</li>
+<li>
+<p>Create a new folder outside of the Workspace folder, for example <b>NFI ZipFiles</b>.  Copy the sample NFI zip file <b>(VoltMX_FileStorage-Android-4.0)</b> into the folder.</p>
+</li>
+<li>
+<p>Rename the NFI zip file to your FFI name .zip extension.  In this example, we renamed <b>VoltMX_FileStorage-Android-4.0 to Voltmx_MYFFINAME-Android-4.0.zip</b> which matched the name of our FFI file.</p>
+</li>
+<li>
+<p>Unzip the zip file that was renamed in step 3, and rename the directory in the file to match the name created in step 3.  In this example, we renamed it to <b>Voltmx_MYFFINAME-Android-4.0.</b></p>
+</li>
+<li>
+<p>In the zip file opened in Step 4, open the <b>metadata.properties</b> file and you should see the following default values:</p>
+</li>
+</ol>
+<pre><code>    moduleName=VoltMX_FileStorage
+    moduleVersion=1.0
+    moduleDescription=VoltMX_FileStorage
+    os=Android
+    sdkVersion=4.0
+
+</code></pre>
+<pre><code>Update the moduleName and moduleDescription based on the name you have provided in step 3.  In this example we updated them to Voltmx_MYFFINAME:
+</code></pre>
+<pre><code>    moduleName=Voltmx_MYFFINAME
+    moduleVersion=1.0
+    moduleDescription=Voltmx_MYFFINAME
+    os=Android
+    sdkVersion=4.0
+
+</code></pre>
+<ol>
+<li>
+<p>Navigate to the thirdparty directory of the opened zip file and delete the jar located inside.</p>
+</li>
+<li>
+<p>Copy your original FFI aar or jar file and paste it into the folder where the jar file was just deleted</p>
+</li>
+<li>
+<p>Zip the folder renamed in Step 4 ,This will generate a zip file for a <b>SINGLE</b> FFI. You need to follow the same approach for all FFIs you need to generate.</p>
+</li>
+<li>
+<p>Once you are done with manually creating the zip file, you need to import it into Iris/Visualizer:</p>
+<p>a) From Iris select <b>Edit --&gt; Manage Native Function API(s) --&gt; Android.</b></p>
+<p>b) Click on <b>Import</b> and select the zip file generated in the steps above.</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>Note</strong> : When you are importing as an NFI, you need to delete the JARS/AARs for which you have generated as an NFI, and the respective code calls should also be deleted in your application logic.</p>
+</blockquote>
 <p>If the library format's .aar or .jar file depends on other libraries, add them to your project.</p>
 <blockquote>
 <p><strong><em>Important:</em></strong> If the included dependencies have an associated order among them, they must be added in same order. For more information on dependency order, see <a href="https://developer.android.com/studio/build/dependencies.md#dependency_order">Dependency order</a>.</p>
