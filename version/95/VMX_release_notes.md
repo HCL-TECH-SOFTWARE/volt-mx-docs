@@ -1023,7 +1023,7 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 
 ## Volt Foundry
 
-### V9 Servicepack 5 Fixpack 17 Hotfix 2
+### V9 Servicepack 5 Fixpack 17 Hotfix 3
 December 02, 2024
 
 * Expanded the scope of OData4 filters by adding new operations.
