@@ -767,6 +767,7 @@ _<a href="mailto:email@voltmx.com?subject=Foo&body=Bar">Email Me</a>_
 * * *
 </details>
 
+
 <details close markdown="block"><summary>voltmx.phone.openMediaGallery</summary>
 
 * * *
@@ -779,16 +780,15 @@ For iPad, openMediaGallery will show the Photos/Videos in the native popover. Th
 
 You can view a video on using iPad Popover [here](https://youtu.be/4EKgCANM1TI).  
 
-<blockquote>
-    <em><b>Note: </b></em>
-    <ul>      
-        <li>For Android if the target SDK version is 33 and higher, one or more granular media permissions needs to be added in tags section under Application tags attributes based on the mime type provided to api. <br> 
-        <code>&lt;uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/&gt;</code><br>        
-        <code>&lt;uses-permission android:name="android.permission.READ_MEDIA_VIDEO"/&gt;</code><br>        
-        <code>&lt;uses-permission android:name="android.permission.READ_MEDIA_AUDIO"/&gt;</code><br>
-        </li>
-    </ul>
-</blockquote>
+### installPhotoPickerIfNotAvailable
+
+For the android, openMediaGallery will now use the Android photo picker to pick the media form the device.
+
+> **_Note:_** If photo picker is not available on the device, user can opt in for automatic installation of back ported Photo Picker automatic installation.
+
+In order to opt in for automatic installation user need to set the below flag in Android build.properties
+
+`installPhotoPickerIfNotAvailable = true`
 
 
 ### Syntax

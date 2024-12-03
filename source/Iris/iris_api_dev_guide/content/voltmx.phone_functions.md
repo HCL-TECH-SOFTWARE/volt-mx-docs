@@ -779,14 +779,16 @@ For iPad, openMediaGallery will show the Photos/Videos in the native popover. Th
 
 You can view a video on using iPad Popover [here](https://youtu.be/4EKgCANM1TI).  
 
-<blockquote>
-    <em><b>Note: </b></em>
-    <ul>      
-    For Android below permissions are required in IRIS project setting -> Native-> Android Mobile/Tablet -> Tags (Child tag entries under <manifest> tag) depending on the target version.<br>If target version is 33 and above below media permission must be added.<li> < uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/> </li><li>< uses-permission android:name="android.permission.READ_MEDIA_VIDEO"/></li><li>< uses-permission android:name="android.permission.READ_MEDIA_AUDIO"/><br>If target version is 34 and above below permission must be added along with other media permissions.<li>< uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED"/> </li>
-    Click <a href="https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation/Iris/iris_user_guide/Content/Android14_Behavioral_Changes.html">here</a> For more information on Android 14 behavioral change, also for understanding other media permissions please refer <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/Android13_Behavioral_Changes.html">Android 13.</a>.
-</li>
-    </ul>
-</blockquote>
+
+### installPhotoPickerIfNotAvailable
+
+For the android, openMediaGallery will now use the Android photo picker to pick the media form the device.
+
+> **_Note:_** If photo picker is not available on the device, user can opt in for automatic installation of back ported Photo Picker automatic installation.
+
+In order to opt in for automatic installation user need to set the below flag in Android build.properties
+
+`installPhotoPickerIfNotAvailable = true`
 
 
 ### Syntax
