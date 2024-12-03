@@ -21,7 +21,7 @@ Getting Started Options
 
 <!-- *   [Tutorials and Videos](../../../tutorials/voltmxfoundry/Content/Overview.md): Step-by-step instructions to set up a trial Volt MX Foundry account; how to configure Volt MX mobile services such as identity, integration, and engagement services; how to add backend services to your application; and how to invoke backend services by using Volt MX Foundry SDKs. -->
 
-*   [Tutorials and Videos](../../../tutorials/appFactory.md): Step-by-step instructions to set up a trial Volt MX Foundry account; how to configure Volt MX mobile services such as identity, integration, and engagement services; how to add backend services to your application; and how to invoke backend services by using Volt MX Foundry SDKs.
+*   [Tutorials and Videos](../../../tutorials/appFactory.md): Step-by-step instructions to set up a trial Volt MX Foundry account; how to configure Volt MX mobile services such as identity, integration, and engagement services; how to add backend services to your application; and how to invoke backend services by using the Volt MX Foundry SDKs.
 
 <!-- *   [QuickStart Guides](../../../Foundry/voltmx_foundry_quickstart_guide/Content/voltmx_foundry_quickstart_guide.md): Helps you create a basic set of back-end services for authenticating a user and then access a simple integration and orchestration service. -->
 
