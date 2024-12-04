@@ -780,9 +780,7 @@ For iPad, openMediaGallery will show the Photos/Videos in the native popover. Th
 
 You can view a video on using iPad Popover [here](https://youtu.be/4EKgCANM1TI).  
 
-### installPhotoPickerIfNotAvailable
-
-For the android, openMediaGallery will now use the Android photo picker to pick the media form the device.
+For the android, openMediaGallery will now use the Android photo picker to pick the media form the device. If the photo picker isn't available on a device, the library automatically invokes the ACTION_OPEN_DOCUMENT intent action instead.
 
 > **_Note:_** If photo picker is not available on the device, user can opt in for automatic installation of back ported Photo Picker automatic installation.
 
