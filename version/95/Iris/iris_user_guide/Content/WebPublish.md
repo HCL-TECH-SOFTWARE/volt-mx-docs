@@ -47,6 +47,65 @@ If no Foundry App is associated to your Iris project, an error message is displa
 
 You must either create a new Volt MX Foundry app or use an existing one. For information on how to create a new Volt MX Foundry app, see [How to Add Applications](../../../Foundry/voltmx_foundry_user_guide/Content/Adding_Applications.md) in the Volt MX Foundry Console User Guide.
 
+**Following are the prerequisites to publish a Web App from Volt MX Iris to a DX Environment**
+
+The Iris Preferences popups is now updated to support properties for seamless integration between Iris and DX. The properties are housed in a new category named "DXClient", as shown in the screenshot below.
+
+<img src="Resources/Images/Iris_Preferences_DXClient_Default.png" width="500"><br>
+
+1. Generate a Portlet for DX
+
+    To generate a portlet, user needs to provide path to the Maven executable.
+
+    <img src="Resources/Images/Iris_Preferences_DXClient_Portlet.png" width=500>
+
+    Incase the user has not provided it in preferences, an error popup is displayed at the time of application build that prompts the user to add the path.
+
+    <img src="Resources/Images/Iris_Preferences_GeneratePortlet_Build_Validation.png" width=500>
+
+2. Publish a Portlet for DX
+
+    In addition to providing Maven path, user needs to add properties that are required to publish the generated portlet to a DX environment.
+
+    <img src="Resources/Images/Iris_Preferences_DXClient_Default.png" width=500>
+
+    Incase the user has not enabled publish to DX in preferences, an error popup is displayed at the time of application build that prompts the user to enable this option.
+
+    <img src="Resources/Images/Iris_Preferences_DeployPortlet_Build_Validation.png" width=500>
+
+    <img src="Resources/Images/Iris_Preferences_DXClient_Deploy.png" width=500><br>
+
+    Once all the properties are updated, the user will be able to initiate a build.
+
+    <img src="Resources/Images/Iris_Preferences_DXClient_Complete.png" width=500>
+
+3. ```MAVEN_HOME``` needs to be added to the environment variables on Windows machines.
+
+4. If you want to connect to a DX environment with a Self-Signed Certificate, ensure that you perform at least one of the following actions:
+
+    Add the ```process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;``` entry in the <install_dir>/config/default.js file.
+
+    Add the ```NODE_TLS_REJECT_UNAUTHORIZED = 0;``` entry in the Environment variables of your System.
+
+5. Ensure that Maven version 3.9.x is installed.
+
+6. Ensure that Java version 8 or 11 is installed.
+
+
+Folowing properties are mandatory in order to publish to an DX environment
+
+| Property | Description |
+| --- | --- |
+| Enable Publish to DX Environment | This option enables the user to configure properties for publishing the MX app to the DX environment. |
+| Hostname | Specifies the hostname of the DX environment. <br>Example: “localhost”, “dx.sbx0032.play.hclsofy.com”. <br><br> Note: For host name **localhost**, Volt MX Iris connects to the DX environment using the <b>http</b> protocol. For non local hosts, <b>https</b> protocol is used to connect to the DX environment.|
+| Validate | Verifies if the DX environment is available based on the hostname provided.<br><br> Note : Ensure that Connect Username and Connect Password are provided prior to validating. |
+| Username | Specifies the DX username, which will be used to authenticate with the DX environment to publish a portlet. |
+| Password | Specifies the DX password, which will be used to authenticate with the DX environment to publish a portlet. |
+| Connect Username | Specifies the Connect username, which will be used to authenticate with the DX environment to publish a portlet. |
+| Connect Password | Specifies the Connect password, which will be used to authenticate with the DX environment to publish a portlet. |
+| DX Port | Specifies the DX port. |
+| Connect Port | Specifies the Connect port. |
+
 Post Build Actions
 ------------------
 
@@ -55,6 +114,8 @@ The Build and Publish Web option in Volt MX Iris builds the application for the
 *   [Build and Publish Web App](#build-and-publish-web-app) – This action publishes the application to your Volt MX Foundry environment.
 *   [Publish to my App Store](#publish-to-my-app-store) – This action publishes the Web application to your Enterprise App Store.
 *   [Generate Web App](#generate-web-app) – This action generates the archive for your Web application and saves it on your file system.
+*   [Generate a Portlet for DX](#generate-portlet-for-dx) - This action generates a DX compatible portlet for your Web application and saves it on you file system.
+*   [Build and Publish Portlet to DX](#build-and-publish-portlet-to-dx) - This action publishes the DX compatible portlet to your DX environment.
 
 The Post Build Action is initiated after the Build is complete.
 
@@ -84,6 +145,26 @@ Once the build is complete, the generated web archives will appear in your proje
 
 Alternatively, once the build is complete, you will get notified by an email from "VoltMX Iris – Build Service", with download links for all these binaries.
 
+### Generate a Portlet for DX
+
+The Generate a Portlet action generates a portlet for you web application and saves it on your file system. This option also publishes the Volt MX Foundry app to the respective Foundry environment.
+
+Once the build is complete, the generated portlet will appear in your project's workspace > binaries > TXArtifacts folder. You can then upload and publish the portlet on DX manually or using DX Client.
+
+> **_Note:_**
+> 1. The feature is available in Iris versions starting 9.5.45 and is not supported in 9.2.x versions.
+> 2. Desktop Web is the only supported platform.
+> 3. In Iris, projects of type “Reference Architecture” (the default project type) are supported. Projects of the type “Free Form” are not supported.
+
+### Build and Publish Portlet to DX
+
+The Build and Publish Portlet to DX action publishes the generated portlet to your DX environment and enables you to view your app in the Manage Portlet section in DX. This option also publishes the Volt MX Foundry app to the respective Foundry environment.
+
+> **_Note:_**
+> 1. The feature is available in Iris versions starting 9.5.45 and is not supported in 9.2.x versions.
+> 2. Desktop Web is the only supported platform.
+> 3. In Iris, projects of type “Reference Architecture” (the default project type) are supported. Projects of the type “Free Form” are not supported.
+
 Publish a Web app
 -----------------
 
@@ -102,7 +183,7 @@ Before you publish a web app, ensure that you have a project in which you have a
        * **Link to Existing App**, a list of existing apps from your Volt MX Foundry account are displayed.
 8. To select the Volt MX Foundry app that you want to associate your Volt MX Iris app with, click **Associate** beside the App Name.
 
-   ![](Resources/Images/AssociateFoundryApp_638x384.png) 
+   <img src="Resources/Images/AssociateFoundryApp_638x384.png" width=500> 
    
     
    The app you chose/created is successfully linked to your Iris Project.
@@ -110,13 +191,11 @@ Before you publish a web app, ensure that you have a project in which you have a
 9.  Close the Volt MX Foundry window and return to Volt MX Iris by clicking on the Iris icon on the left navigation pane.
 10.  From the main menu of Volt MX Iris, select **Build** > **Build and Publish Web**.  
     The Build and Publish Web window appears.  
-
-   <!-- ![](Resources/Images/publishWebApp_389x413.png) VM -->
-   ![](Resources/Images/Build_and_Publish_Web_App.png)
+<img src="Resources/Images/Build_and_Publish_Web_App.png" width=500>
     
-11.  Select the required Platforms and Channels for which you want to build and publish your web app.
-12.  From the **Post Build Action** drop-down menu, select the desired **Post Build Action**. For more details about the Post Build Action, click [here](#post-build-actions).
-13.  From the **Build Mode** drop-down list, select your desired build mode.
+1.   Select the required Platforms and Channels for which you want to build and publish your web app.
+2.   From the **Post Build Action** drop-down menu, select the desired **Post Build Action**. For more details about the Post Build Action, click [here](#post-build-actions).
+3.   From the **Build Mode** drop-down list, select your desired build mode.
 
   *   **Debug mode** \- To help you identify and fix errors, Volt MX Iris emits the complete symbolic debug information . To lessen the amount of time necessary to complete the build, the build is not optimized for code execution, so it may tend to execute slower than a build optimized for release. Also, the inclusion of the symbolic debug information causes the final executable to be larger than a release build.
   *   **Release mode** - Volt MX Iris optimizes the build for execution, requiring more time to generate the build. It also does not emit the complete symbolic debug information, making the final executable smaller than a debug build.
@@ -140,6 +219,116 @@ Before you publish a web app, ensure that you have a project in which you have a
     ![](Resources/Images/WebPublishURL_603x200.png)
 19.  Click on **View Logs** to access the logs of the publish process.
 20.  An **Application was deployed mail** will also be sent to your registered e-mail account. This mail will contain the App details along with the App URL. Click on the URL in the mail to open the web app in your default web browser.
+
+Generate a Portlet for DX
+-----------------
+
+Before you generate a Portlet for DX, ensure that you have a project in which you have a Web app designed.
+
+**To generate a portlet for DX, follow these steps**:
+
+1. Open the Volt MX Iris project in which you have designed a web app.  
+2. Sign in to your Volt MX Cloud account.  
+3. Link your Iris Project to a Volt MX Foundry app. You can link your Project to a new or an existing Foundry app.
+4. On the **Data & Services** panel, click the hamburger menu near the **Refresh** button.
+5. Click either **Create New App** or **Link to Existing App**. The Volt MX Foundry console appears.
+6. If you have not already, sign in to your Volt MX Foundry account by using your cloud credentials.
+7. If you choose:
+       * **Create New App**, a new Foundry app with the same name as the Iris Project is created.
+       * **Link to Existing App**, a list of existing apps from your Volt MX Foundry account are displayed.
+8. To select the Volt MX Foundry app that you want to associate your Volt MX Iris app with, click **Associate** beside the App Name.
+
+   <img src="Resources/Images/AssociateFoundryApp_638x384.png" width=500>
+   
+   The app you chose/created is successfully linked to your Iris Project.
+
+9.  Close the Volt MX Foundry window and return to Volt MX Iris by clicking on the Iris icon on the left navigation pane.
+10.  From the main menu of Volt MX Iris, select **Build** > **Build and Publish Web**.  
+    The Build and Publish Web window appears.  
+
+       <img src="Resources/Images/GenerateAPortletForDX.png" width=500>
+
+    
+11.  Select platform "Responsive Web".
+12.  From the **Post Build Action** drop-down menu, select the **Generate a Portlet for DX** as a **Post Build Action**. For more details about the Post Build Action, click [here](#post-build-actions).
+13.  From the **Build Mode** drop-down list, select your desired build mode.
+
+  *   **Debug mode** \- To help you identify and fix errors, Volt MX Iris emits the complete symbolic debug information . To lessen the amount of time necessary to complete the build, the build is not optimized for code execution, so it may tend to execute slower than a build optimized for release. Also, the inclusion of the symbolic debug information causes the final executable to be larger than a release build.
+  *   **Release mode** - Volt MX Iris optimizes the build for execution, requiring more time to generate the build. It also does not emit the complete symbolic debug information, making the final executable smaller than a debug build.
+  *   **Protected Mode** - Applications built in Volt MX Iris can use the additional security enhancements by building the application in the _Protected Mode_. Volt MX Iris platform code for iOS and Android is equipped with mechanisms that can protect your application by detecting attacks like tampering, swizzling, debugging, jail breaking (iOS), rooting (Android), and information disclosure. Additional security mechanisms are provided through the use of White Box Cryptography to protect application business logic and source code. Application reacts to the attack by exiting upon detecting attacks to prevent further attempts. If you choose to build an application in **Protected mode**, then setting the public and private keys is mandatory. To do so, go to **Project Settings** > **Protected Mode**. For more details on how to generate public and private keys, click [here](ApplicationSecurity.md#rsa-key-pair-generation-encryption-and-usage).
+
+14.  You can choose to change the cloud environment on which your app will be published. To do so click on **Change** beside the **Environment** option.
+
+15. You can select the **Vanity Domain** from the drop down. The base domain is identified by appended text “[Base]” in the displayed domain name.
+
+    > **_Note:_** Change to vanity domain made in the popup is not persisted.
+
+16. If you do not want to use the SHA1, MD2, MD4, and MD5 hashing algorithms in your application, check **Strict Mode**. If you do use any of those algorithms, leave **Strict Mode** unchecked. Otherwise, you will receive an "Unsupported algorithm" error message.
+
+17.  Once all the required settings are ready, click **Build**.  
+    The progress is displayed in the Build tab of Iris. Once the build process is complete, a link to the generated portlet appears in the Build tab.
+
+        <img src="Resources/Images/Generate_A_Portlet_Build_Tab.png" width=900>
+
+18.  Click on the generated link to navigate to the generated portlet in your file explorer.  
+
+
+Publish a Portlet for DX
+-----------------
+
+1. Open the Volt MX Iris project in which you have designed a web app.  
+2. Sign in to your Volt MX Cloud account.  
+3. Link your Iris Project to a Volt MX Foundry app. You can link your Project to a new or an existing Foundry app.
+4. On the **Data & Services** panel, click the hamburger menu near the **Refresh** button.
+5. Click either **Create New App** or **Link to Existing App**. The Volt MX Foundry console appears.
+6. If you have not already, sign in to your Volt MX Foundry account by using your cloud credentials.
+7. If you choose:
+       * **Create New App**, a new Foundry app with the same name as the Iris Project is created.
+       * **Link to Existing App**, a list of existing apps from your Volt MX Foundry account are displayed.
+8. To select the Volt MX Foundry app that you want to associate your Volt MX Iris app with, click **Associate** beside the App Name.
+
+   <img src="Resources/Images/AssociateFoundryApp_638x384.png" width=500> 
+   
+   The app you chose/created is successfully linked to your Iris Project.
+
+9.  Close the Volt MX Foundry window and return to Volt MX Iris by clicking on the Iris icon on the left navigation pane.
+10.  From the main menu of Volt MX Iris, select **Build** > **Build and Publish Web**. The Build and Publish Web window appears.
+
+        <img src="Resources/Images/BuildAndPublishPortletToDX.png" width=500>
+
+    
+11.  Select platform **Responsive Web**.
+12.  From the **Post Build Action** drop-down menu, select the **Build and Publish Portlet to DX** as a **Post Build Action**. For more details about the Post Build Action, click [here](#post-build-actions).
+13.  From the **Build Mode** drop-down list, select your desired build mode.
+
+  *   **Debug mode** \- To help you identify and fix errors, Volt MX Iris emits the complete symbolic debug information . To lessen the amount of time necessary to complete the build, the build is not optimized for code execution, so it may tend to execute slower than a build optimized for release. Also, the inclusion of the symbolic debug information causes the final executable to be larger than a release build.
+  *   **Release mode** - Volt MX Iris optimizes the build for execution, requiring more time to generate the build. It also does not emit the complete symbolic debug information, making the final executable smaller than a debug build.
+  *   **Protected Mode** - Applications built in Volt MX Iris can use the additional security enhancements by building the application in the _Protected Mode_. Volt MX IrisPlatform code for iOS and Android is equipped with mechanisms that can protect your application by detecting attacks like tampering, swizzling, debugging, jail breaking (iOS), rooting (Android), and information disclosure. Additional security mechanisms are provided through the use of White Box Cryptography to protect application business logic and source code. Application reacts to the attack by exiting upon detecting attacks to prevent further attempts. If you choose to build an application in **Protected mode**, then setting the public and private keys is mandatory. To do so, go to **Project Settings** > **Protected Mode**. For more details on how to generate public and private keys, click [here](ApplicationSecurity.md#rsa-key-pair-generation-encryption-and-usage).
+
+14.  You can choose to change the cloud environment on which your app will be published. To do so click on **Change** beside the **Environment** option.
+
+15. You can select the **Vanity Domain** from the drop down. The base domain is identified by appended text “[Base]” in the displayed domain name.
+
+    > **_Note:_** Change to vanity domain made in the popup is not persisted.
+
+15. If you do not want to use the SHA1, MD2, MD4, and MD5 hashing algorithms in your application, check **Strict Mode**. If you do use any of those algorithms, leave **Strict Mode** unchecked. Otherwise, you will receive an "Unsupported algorithm" error message.
+16.  Once all the required settings are ready, click **Build**.  
+    The progress is displayed in the Build tab of Iris.  
+    Once the publish process is complete, a URL to the Manage Portlet section in the DX environment appears in the Build tab.
+17.  Click on the generated URL to view the deployed portlet in the DX environment.
+18.  You can also click on **Copy** to copy the URL to your clipboard and view it in a web browser of choice.
+    <img src="Resources/Images/Publish_A_Portlet_Build_Tab.png" width=900>
+
+
+---
+
+## Limitations
+
+1. Only one MX app can be added in one DX page. Multiple MX apps in one DX page are not supported.
+2. App state management is not supported. In DX, if user navigates from page #1 that contains an MX app portlet, to page #2 and switches back to page #1, the previous state of MX app in page #1 is not retained.
+3. To avoid CORS issues for apps that use Foundry services available at a different domain from that of DX, the DX domain should be whitelisted in Foundry.
+4. **Test** as a build mode in Build and Publish Web popup is not supported.
+
 
 ### Enable Node Build for Responsive Web Apps
 
