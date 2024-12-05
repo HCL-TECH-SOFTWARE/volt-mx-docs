@@ -115,8 +115,8 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 ### V9 Servicepack 5 Fixpack 45
 December 06, 2024
 
-* Added support for generating and publishing portlets to DX console from Volt Iris.
-* Updated bundled executables within generated Desktop Native installers to be digitally signed.
+* Added support for generating and publishing portlets to the DX console from Volt Iris.
+* Updated bundled executables in generated Desktop Native installers to be digitally signed.
 * Security hardening.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
