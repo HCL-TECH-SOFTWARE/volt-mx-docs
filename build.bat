@@ -20,12 +20,13 @@ _data\foundry_documentation.yml+^
 _data\installing_foundry.yml+^
 _data\voltmxfoundry_supported_devices_os_browsers.yml+^
 _data\voltmx_foundry_linux_install_guide.yml+^
-_data\voltmx_foundry_manual_install_guide.yml+^
 _data\voltmx_foundry_windows_install_guide.yml+^
-_data\voltmxfoundry_containers_solution_on-prem.yml+^
+_data\voltmx_foundry_manual_install_guide.yml+^
+_data\VoltMX_Foundry_CLI.yml+^
 _data\voltmxfoundry_on_amazon_eks.yml+^
 _data\voltmxfoundry_on_openshift.yml+^
 _data\voltmxfoundry_single_container.yml+^
+_data\voltmxfoundry_containers_solution_on-prem.yml+^
 _data\voltmx_foundry_user_guide.yml+^
 _data\KF_Services_OAuth_Sample.yml+^
 _data\integration_services.yml+^
@@ -66,6 +67,4 @@ _data\vmfintegrationservice_troubleshooting_guide.yml^
 
  mkdocs.yml 
 
-mkdocs build 2>errors.txt
-
-:: move docs/docs/documentation/tutorials docs/docs/tutorials
+mkdocs build
