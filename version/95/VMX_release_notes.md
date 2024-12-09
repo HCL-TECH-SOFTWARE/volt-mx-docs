@@ -113,7 +113,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 ## Volt Iris
 
 ### V9 Servicepack 5 Fixpack 45
-December 06, 2024
+December 09, 2024
 
 * Added support for generating and publishing portlets to the DX console from Volt Iris.
 * Updated bundled executables in generated Desktop Native installers to be digitally signed.
