@@ -10,7 +10,7 @@ The following are the supported platforms for wearables using Volt MX Iris:
 | Platform | Version |
 | --- | --- |
 | watchOS | 4.0 and above, iOS 9.0 and above Xcode 12.5 and above |
-| Android | 4.4W (API 20) and above\* |
+| Android | 7.1 (API 25) and above\* |
 
 \* Notifications only.
 
