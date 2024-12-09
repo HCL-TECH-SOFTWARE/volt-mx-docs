@@ -7,6 +7,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Iris](#volt-iris)
 
+- [V9 Servicepack 5 Fixpack 45](#v9-servicepack-5-fixpack-45)
 - [V9 Servicepack 5 Fixpack 43](#v9-servicepack-5-fixpack-43)
 - [V9 Servicepack 5 Fixpack 42](#v9-servicepack-5-fixpack-42)
 - [V9 Servicepack 5 Fixpack 41](#v9-servicepack-5-fixpack-41)
@@ -110,6 +111,16 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 - [Earlier Foundry releases](#earlier-foundry-releases)
 
 ## Volt Iris
+
+### V9 Servicepack 5 Fixpack 45
+December 09, 2024
+
+* Added support for generating and publishing portlets to the DX console from Volt Iris.
+* Updated bundled executables in generated Desktop Native installers to be digitally signed.
+* Security hardening.
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+
 
 ### V9 Servicepack 5 Fixpack 43
 November 19, 2024
