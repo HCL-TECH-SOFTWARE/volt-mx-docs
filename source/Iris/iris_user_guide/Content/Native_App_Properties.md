@@ -2,7 +2,7 @@
 
 
 Set Native App Properties
-=========================
+========================= 
 
 Native app properties are divided into two categories: those that are common to all platforms, and those that are platform-specific. These properties range from the logo image your app displays to the types of screens and SDKs the app supports, and how certificates are handled.
 
@@ -205,7 +205,7 @@ From V8 SP4 onwards, you can enable or disable certain Android features by addin
 
 You can enable the following Android features by adding these properties in the androidbuild.properties file:
 
-#### Public Key Pinning
+### Public Key Pinning
 
 You can enable the [Public Key Pinning](Public_Key_Pinning.md) feature by specifying the following property in the [androidbuild.properties file](#add-android-properties-to-androidbuild-properties-file) as shown.
 
@@ -216,7 +216,7 @@ networktrustconfig = Allow Pinned
 
 ```
 
-#### APK Tamper Protection
+### APK Tamper Protection
 
 The APK Tamper Protection feature helps you to verify if an APK has been tampered with (modified from its original version). If a tamper is detected, the application safely exits during the bootup process. This is an optional feature that is supported only in Release and Protected modes. APK Tamper Protection is available from V8 SP4 onwards. From V8 SP4 Fixpack 20 onwards, support for Google Play App Signing has been added. Google Play App Signing is a mandatory signup for [Android App Bundle support](#generate-android-app-bundle).
 
@@ -311,7 +311,7 @@ support64bit = true
 
 > **_Note:_** Volt MX Iris recommends that you use a `Fat` binary for testing purposes only, and Volt MX does not recommend you to upload a `Fat` binary to Google Play. Use either the [Split APK](#split-apks-based-on-supported-architecture) feature or the [Android App Bundle](#generate-android-app-bundle) feature to reduce the size of the binary that is downloaded to customers' devices.
 
-#### Split APKs based on Supported Architecture
+### Split APKs based on Supported Architecture
 
 Bundling all architectures into a single fat APK increases the APK size of the app that is delivered to customers. This APK Splitting feature, which has been introduced from V8 SP4 Fixpack 12 GA onwards, helps you to decrease the APK size that is downloaded based on the target platform architecture. For more information on the splitting of APKs, click [here](https://developer.android.com/studio/build/configure-apk-splits).
 
@@ -357,7 +357,7 @@ The Volt MX Iris Android `build.gradle` file automatically handles the use cases
     > **_Note:_** If you want to split APKs based on density along with architecture, customize the build by adding the appropriate `build.gradle` entries in the **[Gradle Entries tab](#GradleEntries)** > **[build.gradle entries to Suffix](#Suffixentries)** section.
     
 
-#### Generate Android App Bundle
+### Generate Android App Bundle
 
 Google Play’s Dynamic Delivery feature uses your Android App Bundle to build and serve APKs that are optimized for each device configuration. This results in a smaller app download for customers by removing unused code and resources needed for other devices. The support for Android App Bundle generation has been added from V8 SP4 Fixpack 12 GA onwards. For more information about Android App Bundle, refer Google's Android App [here](https://developer.android.com/platform/technology/app-bundle).
 
@@ -414,7 +414,21 @@ When the Upload Signing Key is different from the Google App Signing Key and if 
 
 To overcome this, you must register Google App signing key as well with the same API key in the Google Play console. The same applies to external services such as OAuth, Facebook, Twitter APIs, etc. You must register the Google App Signing Key against those services.
 
-#### locationListenerType
+
+### cordovaJavaHome
+
+To ensure a successful Cordova build on Android 15, the cordovaJavaHome property must be set in the androidbuild.properties file. This property should point to the JDK 11 installation path. This property is mandatory for successful Cordova builds. If it is not set, an error will be thrown before building the Cordova module. 
+
+**Sample Usage**
+
+`cordovaJavaHome = <JDK 11 installation path>`
+
+**Example**
+
+`cordovaJavaHome = /Library/Java/JavaVirtualMachines/jdk-11.jdk/Contents/Home`
+
+
+### locationListenerType
 
 The locationListenerType property specifies the location permissions. The permissions can be coarse or fine and are either in the background or foreground. Based on the listener type, an appropriate entry is added to the AndroidManifest.xml file.
 
@@ -435,7 +449,7 @@ If the developer does not set the value for the property, the default value is f
 
 > **_Note:_** locationListenerType is respected if the Use Google play Location services checkbox is selected in **Project Settings** >**Native** > **Android**
 
-#### Bundle a Customized Cordova-Generated Android Project
+### Bundle a Customized Cordova-Generated Android Project
 
 To bundle the [manually customized version of your Cordova-generated Android project](CreateCordovaApplications.md#manually-customize-the-cordova-generated-android-project), you must set the `cordovabuildmode` property as `incremental` in the [androidbuild.properties file](#add-android-properties-to-androidbuild-properties-file). This feature is available In Volt MX Iris V9 SP 2 Fixpack 47.
 
@@ -445,7 +459,7 @@ cordovabuildmode = incremental
 
 For more information about how to manually customize the Cordova-generated Android project, click [here](CreateCordovaApplications.md#manually-customize-the-cordova-generated-android-project).
 
-#### Enable HeadlessLauncher activity
+### Enable HeadlessLauncher activity
 
 In an app that contains a flow wherein an external activity (such as a payment flow) is launched through app interaction, issues may occur when the app is moved to the background and launched again.
 
@@ -460,7 +474,7 @@ useHeadlessLauncherActivity = true
 
 > **_Note:_** This solution is purely based on current Android Native behavior observed for `singleTask` mode launcher activity and is not an Android-documented approach. This approach may not work in the future if the Android Framework implementation for Launch Modes is modified.
 
-##### Customize HeadlessLauncherActivity
+#### Customize HeadlessLauncherActivity
 
 You can customize the HeadlessLauncherActivity to add additional functionality. To create and use a custom HeadlessLauncherActivity, follow these steps:
 
@@ -523,7 +537,7 @@ You can customize the auto-generated Main activity to add additional functionali
     > **_Note:_** The <CustomMainActivity> must be the fully qualified path of the custom activity or the path relative to the package name of the current application.
     
 
-#### Android 11 Package Visibility Updates
+### Android 11 Package Visibility Updates
 
 Android 11 introduces restrictions on how apps query and interact with other apps installed on a device. When you try to invoke a specific app or query the list of installed apps on the device, the returned list is filtered . Apps must use the `<queries>` element to define other packages that interact with the app. For more information, Refer [Package Visibility](https://developer.android.com/training/basics/intents/package-visibility).
 
@@ -532,7 +546,7 @@ If an app runs on Android 11 (Target SDK level 30, or later) devices, you must i
 *   Add the `<queries>` child tag. Within the `<queries>` tag, you can specify packages by name, by intent signature, or by provider authority.
 *   Add a permission to include all the packages present in the device. For example, `<uses-permission android:name=“android.permission.QUERY_ALL_PACKAGES”/>`.
 
-##### Protected Mode Behavior
+#### Protected Mode Behavior
 
 Based on the Package Visibility behavior updates, when you build an Android 11 (Target SDK level 30, or later) app in **Protected Mode**, by default, the `<uses-permission android:name=“android.permission.QUERY_ALL_PACKAGES”/>` permission is added in the Android Manifest file for Protected Mode Builds to work seamlessly. If you do not want this permission to be automatically added, you must add the `donotAddQueryAllPackages = true` entry in the **androidbuild.properties** file of the project source directory.
 
@@ -545,7 +559,7 @@ From June 2022, Google is restricting the use of this permission to limit the vi
 
 For security reasons we strongly suggest re-submitting your apps and appealing to get this permission using our provided materials and explanations why the permission is required for your application , however the usage of this technique is just supportive algorithm that serve only as backup or deprecated technique. So If Android Playstore denies your request we suggest to temporarily disabling the techniques that use this permission by declaring the flag in androidbuild.properties as `donotAddQueryAllPackages = true`. The majority of the guards can function just as efficient in most of the situations even with these techniques disabled. 
 
-### Guidelines for appealing to playstore 
+#### Guidelines for appealing to playstore 
 
 An explanation of why the app requires broad app-visibility? (Playstore question)
  
@@ -594,7 +608,7 @@ There are multiple reasons why the Verify Apps is not a practical solution for f
    All the application scanning is performed internally in a protected container. The scanning algorithm is protected from tampering, so information about other installed applications cannot be extracted.
 
 
-#### Security Provider Patching
+### Security Provider Patching
 
 The Android Framework relies on Security Providers to provide secure network communications. However, you might find intermittent vulnerabilities in the default security provider. To protect against such vulnerabilities, [Google Play Services](https://developer.android.com/google/play-services) provides a way to automatically update the security provider to enhance device protection.
 
@@ -619,7 +633,7 @@ To support the Security Crypto Provider Patching, you must add/modify the follow
     > **_Note:_** Security Provider Patching during the app boot-up process only works if the device has the latest version of the crypto provider (that is offered by the Google Play Services library). If the Google Play Services is not up-to-date, security provider patching is skipped in silent mode.
     
 
-##### Enable all supported TLS protocols and ciphers
+#### Enable all supported TLS protocols and ciphers
 
 During network communication (while using the voltmx.net APIs), only a subset of the TLS protocols and ciphers (that are supported by the device) are enabled for an SSL handshake. To have greater control over the enabled protocols and ciphers used in a network, developers can modify the following configurations in the androidbuild.properties file of the project:
 
@@ -636,7 +650,7 @@ During network communication (while using the voltmx.net APIs), only a subset of
     > **_Note:_** In normal circumstances, you must not set the value of this property to true, as deprecated protocols and ciphers may also be enabled on the device.
     
 
-#### Configure Tablet Size for Universal App Binaries
+### Configure Tablet Size for Universal App Binaries
 
 For Universal App Binaries, you can configure the minimum length threshold that identifies a device as a Tablet. As Universal App Binaries can run on both Mobile and Tablet devices, configuring the threshold for a Tablet device enables developers to provide a uniform user experience based on the device type and orientation.
 
