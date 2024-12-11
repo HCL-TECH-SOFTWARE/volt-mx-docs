@@ -3,7 +3,7 @@ User Guide: Support
 
 # Volt MX Support
 
-The **Support** page displays links to the latest tutorials and articles and Developer resources from Base Camp Library. Base Camp is VoltMX's centralized hub for developer resources and community. Our resource-rich platform will help you get your Apps up running quickly.
+The **Support** page displays links to the latest tutorials and articles and Developer resources from HCL Volt MX Community. HCL Volt MX Community is Volt MX's centralized hub for developer resources and community. Our resource-rich platform will help you get your Apps up running quickly.
 
 ![](Resources/Images/Console-Support_710x324.png)
 
