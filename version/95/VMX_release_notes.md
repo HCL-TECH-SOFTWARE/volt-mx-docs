@@ -7,6 +7,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Iris](#volt-iris)
 
+- [V9 Servicepack 5 Fixpack 46](#v9-servicepack-5-fixpack-46)
 - [V9 Servicepack 5 Fixpack 45](#v9-servicepack-5-fixpack-45)
 - [V9 Servicepack 5 Fixpack 43](#v9-servicepack-5-fixpack-43)
 - [V9 Servicepack 5 Fixpack 42](#v9-servicepack-5-fixpack-42)
@@ -112,6 +113,17 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 - [Earlier Foundry releases](#earlier-foundry-releases)
 
 ## Volt Iris
+
+### V9 Servicepack 5 Fixpack 46
+December 15, 2024
+
+* Extended support to WearOS 4.0 applications.
+* Added support for Web pushes via FCM HTTPSv1.
+* Added notch detection to impacted API(s).
+* Added support for specifying Connect and Client protocol for connecting to TX from Volt Iris.
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+
 
 ### V9 Servicepack 5 Fixpack 45
 December 09, 2024
