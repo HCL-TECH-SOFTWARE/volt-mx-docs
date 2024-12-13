@@ -645,6 +645,7 @@ Then run run.bat or run.sh and you will be able to debug the main process.
 
 ### Notes
 
+* Desktop Native support is introduced in version V9 SP5 Fix Pack 15; However, it is recommended to use V9 SP5 Fix Pack 35 for a more stable release.
 * Ensure that you use 'voltmx.ui.Alert’ API instead of native alerts for consistent behavior.
 * Do not use a for loop to run CRUD operations, if you use please use promises from application code.
 * ScreenRecorder apis will not function without the use of electron’s desktopCapturer.  See [here](https://www.electronjs.org/docs/latest/api/desktop-capturer)

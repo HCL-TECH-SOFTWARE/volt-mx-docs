@@ -5,7 +5,14 @@
 
 The **<object\>.getBinaryStatus** returns an array of primary keys based on the query for status.
 
-> **Note:**  For the <object\>.getBinaryStatus API to work, ensure that the object definition in Volt MX Foundry has a defined binary column.  
+<blockquote>
+<em><b>Note: </b></em>
+<ul>
+<li>For the <object\>.getBinaryStatus API to work, ensure that the object definition in Volt MX Foundry has a defined binary column. </li>
+<li>This API is supported from V8 SP4 onwards.</li>
+</ul>
+</blockquote>
+
 
 
 Volt MX  Iris (JavaScript)
