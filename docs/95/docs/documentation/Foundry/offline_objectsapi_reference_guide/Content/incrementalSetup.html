@@ -1418,8 +1418,14 @@
 <h1 id="vmxfoundryofflineobjectsincrementalsetup">VMXFoundry.OfflineObjects.incrementalSetup</h1>
 <p>The Offline Objects <strong>incrementalSetup</strong> API allows the client application to consume the latest changes made to Volt MX Foundry app’s object services schema after a particular timestamp, without breaking the existing functionality. Similar to setup API, <strong>incrementalSetup</strong> API is also an application-level API with same method arguments.</p>
 <blockquote>
-<p><strong><em>Note:</em></strong> Either <strong>setup</strong> or <strong>incrementalSetup</strong> API must be invoked on first time launch of the app.</p>
+<em><b>Note: </b></em>
+<ul>
+<li>Either <b>setup</b> or <b>incrementalSetup</b> API must be invoked on first time launch of the app.<br>
+Incremental setup API is not supported on multi-tenant environment.</li>
+<li>End users should have the latest schema (for the currently installed version) in the device before doing an app upgrade. To fetch the latest schema, the app needs to call an incremental setup API.</li>
+</ul>
 </blockquote>
+
 <p><strong>Scenarios that are supported in incrementalSetup:</strong></p>
 <ul>
 <li>Addition and deletion of the objects in an Object Service.</li>
@@ -1439,9 +1445,6 @@
 <li>Update attribute properties such as data type and length.</li>
 </ul>
 <h2 id="volt-mx-iris-javascript">Volt MX Iris (JavaScript)</h2>
-<blockquote>
-<p><strong><em>Note:</em></strong> Not supported for the Windows channel.</p>
-</blockquote>
 <h3 id="signature">Signature</h3>
 <pre><code>VMXFoundry.OfflineObjects.incrementalSetup(options, onSuccess, onFailure)
 </code></pre>
@@ -1496,7 +1499,7 @@
 <tr>
 <td>treatBooleanFieldValuesAsNumeric</td>
 <td>Boolean</td>
-<td>If the <strong>treatBooleanFieldValuesAsNumeric</strong> key is set to false, all the boolean field values are converted to boolean type (true or false) during upload session or on reading records from local device database. When the option is set to true, fallbacks to default implementation (uploading and reading boolean field values as numeric). By default, the key is set to True.</td>
+<td>If the <strong>treatBooleanFieldValuesAsNumeric</strong> key is set to false, all the boolean field values are converted to boolean type (true or false) during upload session or on reading records from local device database. When the option is set to true, fallbacks to default implementation (uploading and reading boolean field values as numeric). By default, the key is set to True.<br><strong><em>Note:</em></strong>  Supported for iOS, Android and Windows from V8 SP4 Fix Pack 102 onward</td>
 <td>No</td>
 </tr>
 </tbody>
@@ -1567,7 +1570,7 @@ alert(&quot;Exception in incremental setup &quot; + err);
 <tr>
 <td>treatBooleanFieldValuesAsNumeric</td>
 <td>Boolean</td>
-<td>If the <strong>treatBooleanFieldValuesAsNumeric</strong> key is set to false, all the boolean field values are converted to boolean type (true or false) during upload session or on reading records from local device database. When the option is set to true, fallbacks to default implementation (uploading and reading boolean field values as numeric). By default, the key is set to True.</td>
+<td>If the <strong>treatBooleanFieldValuesAsNumeric</strong> key is set to false, all the boolean field values are converted to boolean type (true or false) during upload session or on reading records from local device database. When the option is set to true, fallbacks to default implementation (uploading and reading boolean field values as numeric). By default, the key is set to True.<br> <strong><em>Note:</em></strong>  Supported for iOS, Android and Windows from V8 SP4 Fix Pack 102 onward</td>
 <td>No</td>
 </tr>
 </tbody>
@@ -1655,7 +1658,7 @@ onFailure: (VMXFailureCompletionHandler) onFailure
 <tr>
 <td>treatBooleanFieldValuesAsNumeric</td>
 <td>Boolean</td>
-<td>If the <strong>treatBooleanFieldValuesAsNumeric</strong> key is set to false, all the boolean field values are converted to boolean type (true or false) during upload session or on reading records from local device database. When the option is set to true, fallbacks to default implementation (uploading and reading boolean field values as numeric). By default, the key is set to True.</td>
+<td>If the <strong>treatBooleanFieldValuesAsNumeric</strong> key is set to false, all the boolean field values are converted to boolean type (true or false) during upload session or on reading records from local device database. When the option is set to true, fallbacks to default implementation (uploading and reading boolean field values as numeric). By default, the key is set to True.<br> <strong><em>Note:</em></strong>  Supported for iOS, Android and Windows from V8 SP4 Fix Pack 102 onward</td>
 <td>No</td>
 </tr>
 </tbody>
