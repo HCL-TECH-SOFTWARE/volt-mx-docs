@@ -5,7 +5,13 @@ The **<object\>.cancelSync** function attempts to cancel an in progress object s
 
 ## Volt MX Iris (JavaScript)
 
-> **Note :** Not supported for Mobile Web, Desktop Web and Desktop Native channels.
+<blockquote>
+<em><b>Note: </b></em>
+<ul>
+<li>Not supported for Mobile Web, Desktop Web and Desktop Native channels.</li>
+<li>Supported for Windows from V8 SP4 Fix Pack 12 onwards.</li>
+</ul>
+</blockquote>
 
 ### Signature
 

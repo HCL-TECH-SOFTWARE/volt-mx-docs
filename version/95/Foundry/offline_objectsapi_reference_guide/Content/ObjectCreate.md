@@ -3,11 +3,16 @@
 
 The **<object\>.create** API creates a new record in the local database.
 
-> **_Note:_**
 
-- If any column is defined as auto-generated, values are not allowed in them unless the **trackChanges** key is set to **false**.
-- The record must contain all the mandatory columns and their respective values.
-- The column names and values provided as key value pairs are case sensitive.
+<blockquote>
+<em><b>Note:</b></em>
+<ul>
+<li>If any column is defined as auto-generated, values are not allowed in them unless the <b>trackChanges</b> key is set to <b>false</b>.</li>
+<li>The record must contain all the mandatory columns and their respective values.</li>
+<li>The column names and values provided as key value pairs are case sensitive.</li>
+</ul>
+</blockquote>
+
 
 ## Volt MX Iris (JavaScript)
 
@@ -28,7 +33,9 @@ The **<object\>.create** API creates a new record in the local database.
 ### Options
 
 
-<table style="mc-table-style: url('Resources/TableStyles/Basic.css');margin-left: 0;margin-right: auto;width: 100%;" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1" style="width: 366px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 225px;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">trackChanges</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Boolean</td><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">If the trackChanges key is set to <b>False</b>, the record level operations are not tracked. When the option is set to <b>False</b>, the CUD&nbsp;operations performed on a record are not synced (uploaded). By default, the key is set to <b>True</b>.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">No</td></tr><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: normal;" class="TableStyle-Basic-BodyB-Column1-Body1">markForUpload</td><td class="TableStyle-Basic-BodyB-Column1-Body1">JSON</td><td style="font-weight: normal;" class="TableStyle-Basic-BodyB-Column1-Body1">If markForUpload is set to <b>False</b>, the record changes are not uploaded to the server. By default, the option is set to <b>True</b>.</td><td class="TableStyle-Basic-BodyA-Column1-Body1">No</td></tr></tbody></table>
+<table style="mc-table-style: url('Resources/TableStyles/Basic.css');margin-left: 0;margin-right: auto;width: 100%;" class="TableStyle-Basic" cellspacing="0"><colgroup><col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1" style="width: 366px;"> <col class="TableStyle-Basic-Column-Column1" style="width: 225px;"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Parameter</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="font-weight: bold;">Type</td><td style="font-weight: bold;" class="TableStyle-Basic-BodyE-Column1-Body1">Description</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="font-weight: bold;">Required</td></tr><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">trackChanges</td><td class="TableStyle-Basic-BodyE-Column1-Body1">Boolean</td><td style="font-weight: normal;" class="TableStyle-Basic-BodyE-Column1-Body1">If the trackChanges key is set to <b>False</b>, the record level operations are not tracked. When the option is set to <b>False</b>, the CUD&nbsp;operations performed on a record are not synced (uploaded). By default, the key is set to True<br><b>Note:</b> <br>i) Supported for Windows from V8 SP4 Fix Pack 6 onwards.<br>ii) Supported for Mobile Web and Desktop Web channels from V8 SP4 Fix Pack 12 onwards.
+</b>.</td><td class="TableStyle-Basic-BodyD-Column1-Body1">No</td></tr><tr class="TableStyle-Basic-Body-Body1"><td style="font-weight: normal;" class="TableStyle-Basic-BodyB-Column1-Body1">markForUpload</td><td class="TableStyle-Basic-BodyB-Column1-Body1">JSON</td><td style="font-weight: normal;" class="TableStyle-Basic-BodyB-Column1-Body1">If markForUpload is set to <b>False</b>, the record changes are not uploaded to the server. By default, the option is set to <b>True</b><br><b>Note:</b><br> i) Supported for Windows from V8 SP4 Fix Pack 6 onwards.<br>ii) Supported for Mobile Web and Desktop Web channels from V8 SP4 Fix Pack 12 onwards.
+</td><td class="TableStyle-Basic-BodyA-Column1-Body1">No</td></tr></tbody></table>
 
 ### Return Type
 

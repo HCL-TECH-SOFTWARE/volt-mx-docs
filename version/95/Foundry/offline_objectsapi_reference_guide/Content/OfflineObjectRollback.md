@@ -5,6 +5,15 @@ Offline Objects rollback function rolls back all changes of the application in t
 
 ## Volt MX Iris (JavaScript)
 
+
+<blockquote>
+<em><b>Note: </b></em>
+<ul>
+<li>Supported for iOS and Android channels from V8 SP2 onwards.</li>
+<li>Supported for all channels from V8 SP4 onwards.</li>
+</ul>
+</blockquote>
+
 ### Signature
 
 ```

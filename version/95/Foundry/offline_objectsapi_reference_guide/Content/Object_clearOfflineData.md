@@ -7,14 +7,16 @@ The **<object\>.clearOfflineData** API clears the offline data persisted in the 
 
 The **primaryKeys** parameter clears a particular record from the local database and the changes do not reflect in backend after synchronization.
 
-> **Note:**  
-*   The clearOfflineData API is considered as device only operation. Deleted records are neither tracked nor sent to the server as part of next sync session.  
-*   This API clears the data of the object without clearing any references to the foreign key relationships of the object.  
+<blockquote>
+<em><b>Note: </b></em>
+<ul>
+<li>The clearOfflineData API is considered as device only operation. Deleted records are neither tracked nor sent to the server as part of next sync session.</li>
+<li>This API clears the data of the object without clearing any references to the foreign key relationships of the object.</li>
+</ul>
+</blockquote>
 
 Volt MX  Iris (JavaScript)
 -------------------------------
-
-> **_Note:_** This API is supported for Android, iOS, Mobile Web, and Desktop Web channels.
 
 ### Signature
 

@@ -7,6 +7,16 @@ The **<object\>.markForUpload API** selects the changes made to the records and
 
 The markForUpload flag is set to true, by default.
 
+
+<blockquote>
+<em><b>Note: </b></em>
+<ul>
+<li>Supported for Windows from V8 SP4 Fix Pack 6 onwards.</li>
+<li>Supported for Mobile Web and Desktop Web channels from V8 SP4 Fixpack 12 onwards.</li>
+</ul>
+</blockquote>
+
+
 Volt MX  Iris (JavaScript)
 -------------------------------
 
@@ -148,9 +158,16 @@ Utility API
 
 The API returns all the deferred records primary keys for a particular object.
 
+
 ### Volt MX Iris (JavaScript)
 
-> **_Note:_** Not supported for Mobile Web, and Desktop Web channels.
+<blockquote>
+<em><b>Note: </b></em>
+<ul>
+<li>Supported for Windows from V8 SP4 Fix Pack 6.</li>
+<li>Not supported for Mobile Web, and Desktop Web channels.</li>
+</ul>
+</blockquote>
 
 #### Signature
 
