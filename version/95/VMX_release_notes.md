@@ -1035,9 +1035,9 @@ The purpose of this fixpack is to address upgraded tomcat version from 9.0.45 to
 ## Volt Foundry
 
 ### V9 Servicepack 5 Fixpack 17 Hotfix 4
-December 15, 2024
+December 16, 2024
 
-* Added Application Gateway support for Helm Installer.
+* Added support for Application Gateway in the Helm Installer.
 * Security hardening.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
