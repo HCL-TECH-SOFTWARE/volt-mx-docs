@@ -1,9 +1,17 @@
 
-# \<objectService\>.rollback
+# <objectService\>.rollback
 
-The **\<objectService\>.rollback** API rolls back all changes of all objects of an object service to its previous sync state.
+The **<objectService\>.rollback** API rolls back all changes of all objects of an object service to its previous sync state.
 
 ## Volt MX Iris (JavaScript)
+
+<blockquote>
+<em><b>Note:</b></em> 
+<ul>
+<li>Supported for iOS and Android channels from V8 SP2 onwards.</li>
+<li>Supported for all channels from V8 SP4 onwards.</li>
+</ul>
+</blockquote>
 
 ### Signature
 
