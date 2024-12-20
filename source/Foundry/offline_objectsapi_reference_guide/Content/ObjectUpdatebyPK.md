@@ -37,7 +37,7 @@ Volt MX  Iris (JavaScript)
 | **Keys** | Type | Description | Required |
 | --- | --- | --- | --- |
 | primaryKeys | JSON | Specify the primary keys of the record to be updated. Use records primary key column names as key and respective values to populate **primaryKeys** JSON. | Yes |
-| trackChanges | Boolean | Set the trackChanges key to **False**, the record level operations are not tracked. When the option is set to false, the CUD operations performed on a record are not synced (uploaded).| No |
+| trackChanges | Boolean | Set the trackChanges key to **False**, the record level operations are not tracked. When the option is set to false, the CUD operations performed on a record are not synced (uploaded).<br>**_Note:_**<br>**.** Supported for Windows from V8 SP4 Fix Pack 6 onwards.<br>**.** Supported for Mobile Web and Desktop Web channels from V8 SP4 Fixpack 12 onwards.| No |
 | trackIntermediateUpdates | Boolean | The option is supported only in update API. The option enables us to track the latest update performed on the record.<br>**_Note:_**<br>**.** Supported for Windows from V8 SP4 Fix Pack 6 onwards.<br>**.** Supported for Mobile Web and Desktop Web channels from V8 SP4 Fixpack 12 onwards.| No |
 | markForUpload | Boolean | Set the markForUpload to **false**, the record changes are not uploaded to the server.<br>**_Note:_**<br>**.** Supported for Windows from V8 SP4 Fix Pack 6 onwards.<br>**.** Supported for Mobile Web and Desktop Web channels from V8 SP4 Fixpack 12 onwards.| No |
 
