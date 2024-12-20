@@ -5,7 +5,7 @@ User Guide: [SDKs](../Foundry_SDKs.md) > [JavaScript SDK](Installing_JS_SDK.md) 
 
 To download Plain JS SDK, follow these steps:
 
-1.  In the Volt MX Foundry console, navigate to **Apps** > **SDKs**, and click **JavaScript**. The system prompts you to save the zip file in your local system.
+1.  In the Volt MX Foundry console, navigate to **API Management** > **SDKs**, and click **JavaScript**. The system prompts you to save the zip file in your local system.
 
     ![](../Resources/Images/JS/SDKJS_594x228.png)
 
