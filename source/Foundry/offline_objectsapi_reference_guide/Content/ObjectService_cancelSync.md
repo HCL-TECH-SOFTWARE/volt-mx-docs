@@ -1,13 +1,21 @@
 
-# \<objectService\>.cancelSync
+# <objectService\>.cancelSync
 
-The **\<objectService\>.cancelSync** function cancels an in progress object service sync operation. The operation fails if the task syncing is already finished, throws an error, or does not support the **Cancel** operation.
+The **<objectService\>.cancelSync** function cancels an in progress object service sync operation. The operation fails if the task syncing is already finished, throws an error, or does not support the **Cancel** operation.
 
 ## Volt MX Iris (JavaScript)
 
-> **Note:**
 
-- Not supported for Mobile Web and Desktop Web channels.
+<blockquote>
+<em><b>Note:</b></em> 
+<ul>
+<li>Not supported for Mobile Web and Desktop Web channels.</li>
+<li>Supported for Windows from V8 SP4 Fix Pack 12 onwards.</li>
+</ul>
+</blockquote>
+
+
+
 
 ### Signature
 
