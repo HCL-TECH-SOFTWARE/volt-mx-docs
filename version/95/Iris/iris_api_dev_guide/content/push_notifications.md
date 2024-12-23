@@ -185,7 +185,7 @@ Important Considerations for Desktop Web
     
     *   Select the **Enable PWA** checkbox.
     *   Select the **Enable push notifications** check box.
-    *   Specify your messagingSenderId in the **FCM Sender ID** field.
+    *   Specify your messagingSenderId, apiKey, projectId and appId in the **FCM Sender ID, FCM API Key, FCM Project ID,** and **FCM App ID** fields (Mandatory).
 *   Push notifications will work only when you build the app in Release mode.
 *   Push notifications work only in HTTPS environment, which means that you must publish the app in HTTPS server.
     

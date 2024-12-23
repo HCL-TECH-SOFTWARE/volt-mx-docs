@@ -100,7 +100,7 @@ voltmx.push.register(configObject)([iOS](#iPhone)/[Android](#Android)/[Desktop W
 | --- | --- |
 | configObject \[Array\] - Mandatory (iOS) | The Array for iOS must contain **any** or **all** of the following: 0 - Specifies the Notification type as Badge. 1 - Specifies the Notification type as Sound. 2 - Specifies the Notification type as Alert. |
 | configObject \[Object\] - Mandatory (Android) | A Hash table for Android must contain the following key value pairs: **senderid** - Specifies the project ID of the account registered to use FCM. The projectID is the ID for a created API project. For more information on FCM , refer [here](https://firebase.google.com/docs/cloud-messaging/).[](http://developer.android.com/guide/google/gcm/gs.html#create-proj) |
-| configObject \[Object\] - Mandatory (Desktop Web) | A Hash table for Desktop Web must contain the following key value pairs: **senderid** - Specifies the sender ID of the registered FCM application. For more information on FCM, click [here](https://firebase.google.com/docs/cloud-messaging/js/client). **publicKey** - This is the value that is generated under the key-pair tab for the registered FCM application. |
+| configObject \[Object\] - Mandatory (Desktop Web) | A Hash table for DesktopWeb must contain the following key value pairs: **senderid** - Specifies the sender ID of the registered FCM application. For more information on FCM, click [here](https://firebase.google.com/docs/cloud-messaging/js/client). **publicKey** - This is the value that is generated under the key-pair tab for the registered FCM application. **apiKey** - A unique key used to authenticate requests from your app to Firebase services. **projectId** - The unique identifier for your Firebase project. **appId** - The unique identifier for the Firebase app.|
 | configObject \[Object\]- Mandatory (Windows) | The Array for Windows must contain the following key value pairs: **enableraw**: This is a Boolean parameter and it specifies if the device must receive raw messages or not. The default value is _true_ (you can receive raw messages). If you do not want the device to receive raw messages, set the value to _false_. **enabletile**: This is a Boolean parameter and it specifies if the device must receive tile messages or not. The default value is _true_ (you can receive tile messages). If you do not want the device to receive tile messages, set the value to _false_. **enabletoast**: This is a Boolean parameter and it specifies if the device must receive toast messages or not. The default value is _true_ (you can receive toast messages). If you do not want the device to receive toast messages, set the value to _false_. Use the fully qualified domain name (FQDN) as the service name. For authenticated notifications, the FQDN must match the registered certificate's subject name (the CN attribute). For example, www.contoso.com. |
 
  
@@ -147,17 +147,23 @@ function registeriPhonePush() {
 Desktop Web
 
 ```
-/**		
- * Name		:	registerDesktopWebPush
- * Author	:	VoltMX
- * Purpose	:	This function registers the senderID on the Google cloud.
- **/
-function registerDesktopWebPush() {
-    var configRegister = {
-        messagingSenderId: "88888888888",
-        publicKey: "BKf0xO2plAvCNtblOcgeTeyMleGcOnhetKe3Birx4aqhR-Wh3-D8Px7kPYa1YyMBIECg_tKz7droMbGNjFwyUMw"
-    };
-    voltmx.push.register(configRegister);
+/**     
+
+Name     :   registerDesktopWebPush  
+
+Author   :   Volt MX
+
+Purpose  :   This function registers the senderID on the Google cloud.  
+**/  
+function registerDesktopWebPush() {  
+ var configRegister = {  
+     messagingSenderId: "FIREBASE_MESSAGING_SENDERID",  
+     publicKey: "FIREBASE_PUBLIC_KEY",  
+     apiKey: "FIREBASE_API_KEY",  
+     projectId: "FIREBASE_PROJECT_ID",  
+     appId: "FIREBASE_APP_ID",  
+ };  
+ voltmx.push.register(configRegister);  
 }
 ```
 
