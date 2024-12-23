@@ -1,8 +1,8 @@
 
-\<object\>.get
+<object\>.get
 ============
 
-The **\<object\>.get** API returns all or selected records from the local database.
+The **<object\>.get** API returns all or selected records from the local database.
 
 > **_Note:_** The column names and values provided as key value pairs are case sensitive.
 

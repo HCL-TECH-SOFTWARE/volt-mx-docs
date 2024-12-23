@@ -1,12 +1,19 @@
 
 
-\<object\>.getBinaryStatus
+<object\>.getBinaryStatus
 ========================
 
-The **\<object\>.getBinaryStatus** returns an array of primary keys based on the query for status.
+The **<object\>.getBinaryStatus** returns an array of primary keys based on the query for status.
 
-> **Note:**  
-*   For the \<object\>.getBinaryStatus API to work, ensure that the object definition in Volt MX Foundry has a defined binary column.  
+
+<blockquote>
+<em><b>Note:</b></em> 
+<ul>
+<li>This API is supported from V8 SP4 onwards.</li>
+<li>For the &lt;object&gt;.getBinaryStatus API to work, ensure that the object definition in Volt MX Foundry has a defined binary column.</li>
+</ul>
+</blockquote>
+
 
 Volt MX  Iris (JavaScript)
 -------------------------------
@@ -31,10 +38,31 @@ Volt MX  Iris (JavaScript)
 
 ### Sync Options
 
-  
-| Key | Type | Description | Required |
-| --- | --- | --- | --- |
-| download | JSON | To get the binary download status of a particular binary column, provide the following variables as inputs: **columnName (String)**: The binary column name of the required object. **queryType (Number)**:A combination of the following values:{`voltmx.sdk.OfflineObjects.BinaryStatus.pending`, `voltmx.sdk.OfflineObjects.BinaryStatus.completed`, `voltmx.sdk.OfflineObjects.BinaryStatus.errored` } > **_Note:_** Use bitwise OR ("|") between the queryTypes to use the combination of the values. | Yes |
+
+<table>
+    <tr>
+        <th>Key</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Required</th>
+    </tr>
+    <tr>
+        <td>download</td>
+        <td>JSON</td>
+        <td>To get the binary download status of a particular binary column, provide the following variables as inputs:<br>
+            <ul>
+                <li><b>columnName (String)</b>: The binary column name of the required object.</li>                
+                <li><b>queryType (Number)</b>: A combination of the following values: <br>
+                    <code>{voltmx.sdk.OfflineObjects.BinaryStatus.pending, voltmx.sdk.OfflineObjects.BinaryStatus.completed, voltmx.sdk.OfflineObjects.BinaryStatus.errored}</code>
+                <em><b>Note: </b></em> Use bitwise OR ("|") between the queryTypes to use the combination of the values.
+                </li>
+            </ul>
+        </td>
+        <td>Yes</td>
+    </tr>
+</table>
+
+
 
 ### Return Type
 
@@ -68,12 +96,14 @@ function onFailure(error) {
 }
 ```
 
-<!-- Android (Java)
+
+Android (Java)
 --------------
 
 > **_Note:_** Not supported in the current version.
 
+
 iOS (Objective C)
 -----------------
 
-> **_Note:_** Not supported in the current version. -->
+> **_Note:_** Not supported in the current version.

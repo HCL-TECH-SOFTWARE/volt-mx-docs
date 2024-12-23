@@ -3,17 +3,27 @@
 
 The **VMXFoundry.OfflineObjects.startSync** API performs sync on all the object services published in the Volt MX Foundry application.
 
-> **Note:**
 
-- If sync is performed in an upload cache enabled scenario, cached requests that are timed out in the previous upload session are uploaded before the latest changes.
-- The client does not handle partial records and expects the server to send the entire record. Full record with all the columns are expected in both upload and download responses. If the backend does not return the full record, use post processor to copy the missing columns from the request as demonstrated here.
+<blockquote>
+<em><b>Note:</b></em> 
+<ul>
+<li>If sync is performed in an upload cache enabled scenario, cached requests that are timed out in the previous upload session are uploaded before the latest changes.</li>
+<li>The client does not handle partial records and expects the server to send the entire record. Full record with all the columns are expected in both upload and download responses. If the backend does not return the full record, use post processor to copy the missing columns from the request as demonstrated here.</li>
+</ul>
+</blockquote>
+
 
 ## Volt MX Iris (JavaScript)
 
-> **Note:**
 
-- Supported for Windows from V8 SP4 Fix Pack 6 onwards.
-- Supported for Mobile Web and Desktop Web channels from V8 SP4 Fix Pack 12 onwards.
+<blockquote>
+<em><b>Note:</b></em> 
+<ul>
+<li>Supported for Windows from V8 SP4 Fix Pack 6 onwards.</li>
+<li>Supported for Mobile Web and Desktop Web channels from V8 SP4 Fix Pack 12 onwards.</li>
+</ul>
+</blockquote>
+
 
 ### Signature
 

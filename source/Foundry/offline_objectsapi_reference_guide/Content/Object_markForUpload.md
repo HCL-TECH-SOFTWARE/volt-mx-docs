@@ -1,7 +1,7 @@
 
 
-\<object\>.markForUpload
-======================
+# <object\>.markForUpload
+
 
 The **<object\>.markForUpload API** selects the changes made to the records and sent to the server. If the **markForUpload** flag is not enabled, the changes made are deferred from uploading to the server until marked for upload using specific markForUpload APIs.
 
@@ -9,6 +9,15 @@ The markForUpload flag is set to true, by default.
 
 Volt MX  Iris (JavaScript)
 -------------------------------
+
+<blockquote>
+<em><b>Note:</b></em> 
+<ul>
+<li>Supported for Windows from V8 SP4 Fix Pack 6 onwards.</li>
+<li>Supported for Mobile Web and Desktop Web channels from V8 SP4 Fix Pack 12 onwards.</li>
+</ul>
+</blockquote>
+
 
 ### Signature
 
@@ -185,9 +194,20 @@ Utility API
 
 The API returns all the deferred records primary keys for a particular object.
 
+
+
 ### Volt MX Iris (JavaScript)
 
-> **_Note:_** Not supported for Mobile Web, and Desktop Web channels.
+
+<blockquote>
+<em><b>Note:</b></em> 
+<ul>
+<li>Supported for Windows from V8 SP4 Fix Pack 6 onwards.</li>
+<li>Not supported for Mobile Web, and Desktop Web channels.</li>
+</ul>
+</blockquote>
+
+
 
 #### Signature
 
