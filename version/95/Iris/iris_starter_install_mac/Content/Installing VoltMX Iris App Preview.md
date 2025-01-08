@@ -1,4 +1,4 @@
-                                   
+<!--                                    
 
 [](Prerequisites.md)
 
@@ -18,7 +18,7 @@
 
 [](#)
 
-*   All Files
+*   All Files -->
 
 Installing Volt MX Iris App Viewer
 ========================================
@@ -29,7 +29,7 @@ You can download the Volt MX Iris App Viewer on your
 
 *   [Android devices](#android) from Google Play Store.
 *   [iOS devices](#iphone) from Apple Store.
-*   [Windows devices](#windows-8-1) from Windows Store.
+
 
 Android
 -------
@@ -37,14 +37,14 @@ Android
 To install Volt MX Iris App Viewer, follow these steps:
 
 1.  Tap **Applications**, and then tap **Play Store**.
-2.  Search for **HCL VoltMX**.  
+2.  Search for **HCL Volt MX**.  
     Search results display the HCL Volt MX and HCL Volt MX Tablet installer for mobile and tablet devices respectively.
-3.  From the search results, tap **HCL VoltMX**.
+3.  From the search results, tap **Volt MX**.
 4.  Tap **Install**. Type your login credentials, if requested.
 5.  After completing the installation, tap **OPEN**.  
-    **HCL Volt MX App Viewer** application will be launched.
+    **Volt MX App Viewer** application will be launched.
 
-> **_Note:_** Follow the same process for installing **HCL Volt MX Tablet** App Viewer on your Android tablet.
+> **_Note:_** Follow the same process for installing **Volt MX For Tablet** App Viewer on your Android tablet.
 
 iPhone
 ------
@@ -52,17 +52,17 @@ iPhone
 To install Volt MX Iris App Viewer, follow these steps:
 
 1.  Tap **App Store**.
-2.  Search for **HCL VoltMX**.
-3.  From the search result, tap **HCL VoltMX**.
+2.  Search for **HCL Volt MX**.
+3.  From the search result, tap **Volt MX**.
 4.  Tap **Install**. Type your login credentials, if requested.  
     The app is downloaded and installed in your mobile device.  
     
-5.  Tap the **VoltMX** app icon to open it.
+5.  Tap the **Volt MX** app icon to open it.
     
     > **_Note:_** Follow the same process for installing Volt MX Iris App Viewer app on your iPad.
     
 
-Windows 8.1
+<!-- Windows 8.1
 -----------
 
 To install Iris App Viewer, following these steps:
@@ -73,9 +73,10 @@ To install Iris App Viewer, following these steps:
     The app is downloaded and installed in your mobile device.
 4.  Tap the **VoltMX Iris App Viewer** app icon to open it.
 
-> **_Note:_** Follow the same process for installing Iris App Viewer on your Windows tablet.
+> **_Note:_** Follow the same process for installing Iris App Viewer on your Windows tablet. -->
 
-*   [Prerequisites](Prerequisites.md#prerequisites)
+
+<!-- *   [Prerequisites](Prerequisites.md#prerequisites)
     *   [System Requirements](Prerequisites.md#system-requirements)
     *   [Download Volt MX Iris](Prerequisites.md#download)
 *   [Install Volt MX Iris](Installing VoltMX Iris.md#installing)
@@ -83,4 +84,4 @@ To install Iris App Viewer, following these steps:
 *   [Post Installation Tasks](Launching VoltMX Iris.md#post-installation-tasks)
     *   [Launching Volt MX Iris](Launching VoltMX Iris.md#launching)
 *   [Update Volt MX Iris](Upgrade.md)
-*   [FAQs](StudioInstallation_FAQs.md#appendix-frequently-asked-questions-faqs)
+*   [FAQs](StudioInstallation_FAQs.md#appendix-frequently-asked-questions-faqs) -->

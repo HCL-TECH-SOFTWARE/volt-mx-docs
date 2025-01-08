@@ -39,8 +39,9 @@ To enable the auto-update settings in Volt MX Iris, follow these steps:
     > **_Note:_** Clear the checkbox to Turn off Automatic updates. This is not recommended as it causes Iris to go out of sync with regular product updates.  
     > Even if you turn off the Auto updates, you will still receive a reminder every time you launch Volt MX Iris.
 
-3.  Click **Done**.  
-    Volt MX Iris restarts for the changes to take effect.
+3.  Click **Done**.
+
+> **_Note:_** Volt MX Iris restarts for the changes to take effect.
 
 When new updates are available, Volt MX Iris displays a notification and starts the download process. The progress of the Fixpack or ServicePack download appears in the update section of the notification bar.
 
