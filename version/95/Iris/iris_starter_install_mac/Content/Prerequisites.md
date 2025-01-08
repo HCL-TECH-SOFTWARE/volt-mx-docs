@@ -1,5 +1,5 @@
 Volt MX Iris V9 Mac Install Guide (Prerequisites)
-==================================================
+================================================== 
 
 This document explains how to install Volt MX Iris and the required software on your Macintosh computer, using an installer program.
 
@@ -61,9 +61,9 @@ Your account is activated. The Iris installer should start downloading automatic
 
 The installer is downloaded to your computer.
 
-**Note:** You must have administrative rights on your computer to install Volt MX Iris.
+> **_Note:_** You must have administrative rights on your computer to install Volt MX Iris.
 
-**Note:** When you activate your account, you receive an email with a link to the Foundry console. After you have installed Iris, visit [https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094403](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094403) for important information about configuring Iris and Foundry to work together.
+> **_Note:_** When you activate your account, you receive an email with a link to the Foundry console. After you have installed Iris, visit [https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094403](https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0094403) for important information about configuring Iris and Foundry to work together.
 
 
 <h2 id="dv">Downloading with a Volt MX Account</h2>

@@ -6,7 +6,7 @@ Generate IPA for a Native iOS Application
 
 In addition to creating iPhone and iPad applications directly from source code, you can use Volt MX Iris to build an iPhone or iPad application and deploy it to a Mac automatically. You need a dedicated Mac to enable creation of iPhone and iPad application binaries.
 
-> **_Important:_** Currently, Volt MX Iris supports XCode 12.5 and XCode 13.
+> **_Important:_** Currently, Volt MX Iris supports XCode 15.4 and XCode 16.
 
 Prerequisites
 -------------
