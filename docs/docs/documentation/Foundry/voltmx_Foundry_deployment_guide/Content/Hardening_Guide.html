@@ -1,0 +1,3929 @@
+<!-- Elements added to main will be displayed on all pages -->
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_Foundry_deployment_guide/Content/Hardening_Guide.html">
+      
+      
+        <link rel="prev" href="Introduction.html">
+      
+      
+        <link rel="next" href="FAQs.html">
+      
+      
+      <link rel="icon" href="../../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>Overview - HCL Volt MX Documentation V9.2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/vmx_style.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#security-hardening" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+<div class="content-types-banner">
+    <ul class="sub-nav">
+        <li class="home-link">
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/index.html"  class="sub-link ">Home</a>
+        </li>
+        <li>
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/tutorials/Tutorials.html" class="sub-link">Tutorials</a>
+        </li>
+        <li>
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/index.html" class="sub-link" id="docLink">Documentation</a>
+        </li>
+        <li>
+            <a href="https://support.hcltechsw.com/csm?id=kb_search&spa=1&kb_category=db382ff1db631c14a45ad9fcd3961936" title="Articles" class="sub-link">Articles</a>
+        </li>
+        <li>
+            <a href="https://hclsoftwareu.hcltechsw.com/#VoltMxLearningJourneys" title="Articles" class="sub-link">Software Academy</a>
+        </li>
+        <li style="float:right">
+          <button onclick="myFunction95()" style="color:white; border-radius:5px ;padding:5px 10px 5px 10px; border: 2px solid white;" class="sub-link" id="docLink92">Switch to V9.5</button>
+      </li>
+    </ul>
+</div>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="HCL Volt MX Documentation V9.2" class="md-header__button md-logo" aria-label="HCL Volt MX Documentation V9.2" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HCL Volt MX Documentation V9.2
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Overview
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    HCL-TECH-SOFTWARE/volt-mx-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="HCL Volt MX Documentation V9.2" class="md-nav__button md-logo" aria-label="HCL Volt MX Documentation V9.2" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.png" alt="logo">
+
+    </a>
+    HCL Volt MX Documentation V9.2
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    HCL-TECH-SOFTWARE/volt-mx-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Introducing Volt MX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Introducing Volt MX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducing Volt MX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../Whats_New_Main_Page.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    What&apos;s New
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../VMX_release_notes.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Release Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../Iris/app_platform/Content/AppPlatform_Overview.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    App Platform
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../tutorials/Tutorials.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Tutorials
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installationGuides.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation Guides
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../Iris/voltmxIrisFundamentals.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Iris
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_8" id="__nav_1_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Foundry
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_8">
+            <span class="md-nav__icon md-icon"></span>
+            Foundry
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voltmxFoundryFundamentals.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../installing_foundry.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Installing Foundry
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../voltmx_foundry_user_guide/Content/Introduction.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Volt MX Foundry User Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../KF_Services_OAuth_Sample/Content/KF_Services_OAuth_Sample.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    OAuth Sample App Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../integration_services.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Integration Services
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../administering_foundry.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Administering Foundry
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../vmf_integrationservice_admin_console_userguide/Content/App_Services_User_Guide.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    App Services Console User Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../voltmx_appfactory_user_guide/Content/Introduction.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    App Factory User Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_8_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_8_9" id="__nav_1_8_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Volt MX Foundry Deployment Guide
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_8_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_8_9">
+            <span class="md-nav__icon md-icon"></span>
+            Volt MX Foundry Deployment Guide
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Introduction.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Deployment.html#deployment-guide" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Deployment.html#software-requirements" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Software Requirements
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Deployment.html#deployment-topology" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deployment Topology
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Deployment.html#development-topology" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Development Topology
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Deployment.html#app-server-sizing" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    App Server Sizing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Deployment.html#database-growth-sizing" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Database Growth Sizing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Deployment.html#session-management" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Session Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_8_9_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_8_9_9" id="__nav_1_8_9_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Security Hardening
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_8_9_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_8_9_9">
+            <span class="md-nav__icon md-icon"></span>
+            Security Hardening
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="Hardening_Guide.html" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#volt-mx-foundry-components-covered" class="md-nav__link">
+    <span class="md-ellipsis">
+      Volt MX Foundry Components Covered
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#secure-server-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Secure Server Checklist
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Secure Server Checklist">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enable-ssltls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enable SSL/TLS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disable-weak-ciphers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Disable Weak Ciphers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-disable-weak-ciphers-in-tomcat" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to Disable Weak Ciphers in Tomcat
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-disable-weak-ciphers-in-jboss" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to Disable Weak Ciphers in JBoss
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-a-hardened-database-for-volt-mx-foundry" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use a Hardened database for Volt MX Foundry
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#users-and-account-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Users and Account roles
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#default-services-and-apps-permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Default Services and Apps Permissions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operation-security-level-for-integration-and-orchestration-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operation Security Level for Integration and Orchestration services
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verb-security-level-for-object-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verb Security Level for Object Services
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pre-requisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pre-requisites
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pre-requisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#securing-data-transport-between-the-device-and-volt-mx-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Securing Data Transport between the Device and Volt MX Server
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backend-credentials-and-session-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backend Credentials and Session Security
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-credential-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Credential Security
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="User Credential Security">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-to-set-property-pbkdf2_iterations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example to set property ''PBKDF2_ITERATIONS"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sample request
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#steps-to-get-auth-token-and-tenant-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      Steps to get Auth token and Tenant ID
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#idle-session-timeout-for-volt-mx-foundry-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      Idle Session Timeout for Volt MX Foundry App
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#password-policy-for-volt-mx-foundry-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      Password Policy for Volt MX Foundry users
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Password Policy for Volt MX Foundry users">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sample-request_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sample Request
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#steps-to-get-auth-token-and-tenant-id_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Steps to get Auth token and Tenant ID
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Version Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#network-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      Network security
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hardening-volt-mx-foundry-integration-middleware" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hardening Volt MX Foundry Integration (Middleware)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hardening-volt-mx-foundry-identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hardening Volt MX Foundry Identity
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preventing-tomcat-version-from-error-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preventing Tomcat Version from Error Pages
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Preventing Tomcat Version from Error Pages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#to-prevent-disclosure-of-the-tomcat-application-server-version-follow-these-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      To prevent disclosure of the Tomcat Application Server version, follow these steps:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#disable-concurrent-session" class="md-nav__link">
+    <span class="md-ellipsis">
+      Disable Concurrent Session
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Disable Concurrent Session">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Headers:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#form-data-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Form Data parameters:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#protection-against-automated-attacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Protection against automated attacks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Protection against automated attacks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuring-user-blocking-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring User Blocking Feature
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#headers_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Headers:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#request-body" class="md-nav__link">
+    <span class="md-ellipsis">
+      Request body:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#headers_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Headers:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#request-body_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Request body:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unblocking-the-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unblocking the user
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#restrict-tomcat-manager-to-localhost" class="md-nav__link">
+    <span class="md-ellipsis">
+      Restrict Tomcat Manager to Localhost
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#secure-your-cookies-secure-and-httponly-flags" class="md-nav__link">
+    <span class="md-ellipsis">
+      Secure your Cookies (Secure and HttpOnly flags)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Secure your Cookies (Secure and HttpOnly flags)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-tomcat-as-web-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      For Tomcat as Web Server
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-jboss-as-the-web-server-do-the-following" class="md-nav__link">
+    <span class="md-ellipsis">
+      For JBoss as the Web Server, do the following.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-websphere-as-the-web-server-follow-these-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      For WebSphere as the Web Server, follow these steps.
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#redirect-traffic-from-non-secure-protocol-http-to-secure-protocol-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      Redirect Traffic from Non-Secure Protocol (HTTP) to Secure Protocol (HTTPS)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enabling-secure-flag-for-cacheid-cookie" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enabling Secure flag for CacheID Cookie
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-owasp-secure-headers-for-spadesktop-apps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring OWASP secure headers for SPA/Desktop apps
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuring OWASP secure headers for SPA/Desktop apps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#to-set-the-response-header-for-volt-mx-foundry-version-v9-sp2-or-higher-versions-follow-these-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      To set the response header for Volt MX Foundry version V9 SP2 or higher versions, follow these steps.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-the-response-header-for-volt-mx-foundry-version-v9-sp2-or-earlier-versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting the response header for Volt MX Foundry version V9 SP2 or earlier versions.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to-add-owasp-secure-headers-to-webapp-static-files-follow-these-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      To add OWASP Secure Headers to WebApp Static Files, follow these steps.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to-add-owasp-secure-headers-to-middleware-services-follow-these-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      To add OWASP Secure Headers to Middleware Services, follow these steps.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-the-response-header-for-volt-mx-foundry-version-v9-sp2-or-later-versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting the response header for Volt MX Foundry version V9 SP2 or later versions.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to-add-the-owasp-secure-header-to-webapp-static-files-follow-these-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      To add the OWASP Secure Header to WebApp Static Files, follow these steps.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to-add-owasp-secure-headers-to-middleware-service-follow-these-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      To add OWASP Secure Headers to Middleware Service, follow these steps.
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#disable-caching-for-sensitive-middleware-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Disable Caching for Sensitive Middleware Services
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Disable Caching for Sensitive Middleware Services">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#to-set-the-header-for-volt-mx-foundry-version-v9-sp2-or-earlier-versions-do-the-following" class="md-nav__link">
+    <span class="md-ellipsis">
+      To set the header for Volt MX Foundry version V9 SP2 or earlier versions, do the following:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-fixes-for-the-external-app-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Fixes for the External App Servers
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Hardening_Guide.html#volt-mx-foundry-components-covered" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Volt MX Foundry Components Covered
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Hardening_Guide.html#secure-server-checklist" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Secure Server Checklist
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Hardening_Guide.html#use-a-hardened-database-for-volt-mx-foundry" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Use a Hardened database for Volt MX Foundry
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Hardening_Guide.html#users-and-account-roles" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Users and Account roles
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Hardening_Guide.html#default-services-and-apps-permissions" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Default Services and Apps Permissions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Hardening_Guide.html#operation-security-level-for-integration-and-orchestration-services" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Operation Security Level for Integration and Orchestration services
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Hardening_Guide.html#verb-security-level-for-object-services" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Verb Security Level for Object Services
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Hardening_Guide.html#backend-credentials-and-session-security" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Backend Credentials and Session Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Hardening_Guide.html#user-credential-security" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    User Credential Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Hardening_Guide.html#idle-session-timeout-for-volt-mx-foundry-app" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Idle Session Timeout for Volt MX Foundry App
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Hardening_Guide.html#password-policy-for-volt-mx-foundry-users" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Password Policy for Volt MX Foundry users
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Hardening_Guide.html#hardening-volt-mx-foundry-integration-middleware" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hardening Volt MX Foundry Integration (Middleware
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Hardening_Guide.html#hardening-volt-mx-foundry-identity" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hardening Volt MX Foundry Identity
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Hardening_Guide.html#preventing-tomcat-version-from-error-pages" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Preventing Tomcat Version from Error Pages
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Hardening_Guide.html#disable-concurrent-session" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Disable Concurrent Session
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Hardening_Guide.html#protection-against-automated-attacks" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Protection against automated attacks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Hardening_Guide.html#restrict-tomcat-manager-to-localhost" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Restrict Tomcat Manager to Localhost
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Hardening_Guide.html#secure-your-cookies-secure-and-httponly-flags" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Secure your Cookies (Secure and HttpOnly flags
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Hardening_Guide.html#redirect-traffic-from-non-secure-protocol-http-to-secure-protocol-https" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redirect Traffic from Non-Secure Protocol (HTTP) to Secure Protocol (HTTPS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Hardening_Guide.html#enabling-secure-flag-for-cacheid-cookie" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Enabling Secure flag for CacheID Cookie
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Hardening_Guide.html#configuring-owasp-secure-headers-for-spa-desktop-apps" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuring OWASP secure headers for SPA/Desktop apps
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Hardening_Guide.html#disable-caching-for-sensitive-middleware-services" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Disable Caching for Sensitive Middleware Services
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Hardening_Guide.html#security-fixes-for-the-external-app-servers" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Security Fixes for the External App Servers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="Deployment_Checklist.html#checklist-for-volt-mx-foundry-deployment" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Deployment Checklist and Example Case Studies
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="FAQs.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FAQs and Troubleshooting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VoltMX_Analytics_Cloud_FAQs/Content/VoltMX_Analytics_Cloud_FAQs.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Volt MX Analytics & Reporting Cloud FAQs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../vmfintegrationservice_troubleshooting_guide/Content/Integration_Services_Troubleshooting_Guide.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Integration Services Troubleshooting Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#volt-mx-foundry-components-covered" class="md-nav__link">
+    <span class="md-ellipsis">
+      Volt MX Foundry Components Covered
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#secure-server-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Secure Server Checklist
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Secure Server Checklist">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enable-ssltls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enable SSL/TLS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disable-weak-ciphers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Disable Weak Ciphers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-disable-weak-ciphers-in-tomcat" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to Disable Weak Ciphers in Tomcat
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-disable-weak-ciphers-in-jboss" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to Disable Weak Ciphers in JBoss
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-a-hardened-database-for-volt-mx-foundry" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use a Hardened database for Volt MX Foundry
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#users-and-account-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Users and Account roles
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#default-services-and-apps-permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Default Services and Apps Permissions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operation-security-level-for-integration-and-orchestration-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operation Security Level for Integration and Orchestration services
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verb-security-level-for-object-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verb Security Level for Object Services
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pre-requisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pre-requisites
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pre-requisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#securing-data-transport-between-the-device-and-volt-mx-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Securing Data Transport between the Device and Volt MX Server
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backend-credentials-and-session-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backend Credentials and Session Security
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-credential-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Credential Security
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="User Credential Security">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-to-set-property-pbkdf2_iterations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example to set property ''PBKDF2_ITERATIONS"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sample request
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#steps-to-get-auth-token-and-tenant-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      Steps to get Auth token and Tenant ID
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#idle-session-timeout-for-volt-mx-foundry-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      Idle Session Timeout for Volt MX Foundry App
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#password-policy-for-volt-mx-foundry-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      Password Policy for Volt MX Foundry users
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Password Policy for Volt MX Foundry users">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sample-request_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sample Request
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#steps-to-get-auth-token-and-tenant-id_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Steps to get Auth token and Tenant ID
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Version Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#network-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      Network security
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hardening-volt-mx-foundry-integration-middleware" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hardening Volt MX Foundry Integration (Middleware)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hardening-volt-mx-foundry-identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hardening Volt MX Foundry Identity
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preventing-tomcat-version-from-error-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preventing Tomcat Version from Error Pages
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Preventing Tomcat Version from Error Pages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#to-prevent-disclosure-of-the-tomcat-application-server-version-follow-these-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      To prevent disclosure of the Tomcat Application Server version, follow these steps:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#disable-concurrent-session" class="md-nav__link">
+    <span class="md-ellipsis">
+      Disable Concurrent Session
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Disable Concurrent Session">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Headers:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#form-data-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Form Data parameters:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#protection-against-automated-attacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Protection against automated attacks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Protection against automated attacks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuring-user-blocking-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring User Blocking Feature
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#headers_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Headers:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#request-body" class="md-nav__link">
+    <span class="md-ellipsis">
+      Request body:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#headers_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Headers:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#request-body_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Request body:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unblocking-the-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unblocking the user
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#restrict-tomcat-manager-to-localhost" class="md-nav__link">
+    <span class="md-ellipsis">
+      Restrict Tomcat Manager to Localhost
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#secure-your-cookies-secure-and-httponly-flags" class="md-nav__link">
+    <span class="md-ellipsis">
+      Secure your Cookies (Secure and HttpOnly flags)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Secure your Cookies (Secure and HttpOnly flags)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-tomcat-as-web-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      For Tomcat as Web Server
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-jboss-as-the-web-server-do-the-following" class="md-nav__link">
+    <span class="md-ellipsis">
+      For JBoss as the Web Server, do the following.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-websphere-as-the-web-server-follow-these-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      For WebSphere as the Web Server, follow these steps.
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#redirect-traffic-from-non-secure-protocol-http-to-secure-protocol-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      Redirect Traffic from Non-Secure Protocol (HTTP) to Secure Protocol (HTTPS)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enabling-secure-flag-for-cacheid-cookie" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enabling Secure flag for CacheID Cookie
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-owasp-secure-headers-for-spadesktop-apps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring OWASP secure headers for SPA/Desktop apps
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuring OWASP secure headers for SPA/Desktop apps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#to-set-the-response-header-for-volt-mx-foundry-version-v9-sp2-or-higher-versions-follow-these-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      To set the response header for Volt MX Foundry version V9 SP2 or higher versions, follow these steps.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-the-response-header-for-volt-mx-foundry-version-v9-sp2-or-earlier-versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting the response header for Volt MX Foundry version V9 SP2 or earlier versions.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to-add-owasp-secure-headers-to-webapp-static-files-follow-these-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      To add OWASP Secure Headers to WebApp Static Files, follow these steps.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to-add-owasp-secure-headers-to-middleware-services-follow-these-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      To add OWASP Secure Headers to Middleware Services, follow these steps.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-the-response-header-for-volt-mx-foundry-version-v9-sp2-or-later-versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting the response header for Volt MX Foundry version V9 SP2 or later versions.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to-add-the-owasp-secure-header-to-webapp-static-files-follow-these-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      To add the OWASP Secure Header to WebApp Static Files, follow these steps.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to-add-owasp-secure-headers-to-middleware-service-follow-these-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      To add OWASP Secure Headers to Middleware Service, follow these steps.
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#disable-caching-for-sensitive-middleware-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Disable Caching for Sensitive Middleware Services
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Disable Caching for Sensitive Middleware Services">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#to-set-the-header-for-volt-mx-foundry-version-v9-sp2-or-earlier-versions-do-the-following" class="md-nav__link">
+    <span class="md-ellipsis">
+      To set the header for Volt MX Foundry version V9 SP2 or earlier versions, do the following:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-fixes-for-the-external-app-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Fixes for the External App Servers
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<p>Volt MX Foundry Deployment Guide: Volt MX Foundry Components Covered</p>
+<h1 id="security-hardening">Security Hardening</h1>
+<p>Security Hardening section provides prescriptive guidance to customers on how to deploy and operate Volt MX Foundry in a secure manner. This document provides recommendations for improving the security ("hardening") of your Volt MX Foundry installation and to make sure Volt MX Foundry is running securely.</p>
+<h2 id="volt-mx-foundry-components-covered">Volt MX Foundry Components Covered</h2>
+<p>This section details hardening supported for the following Volt MX Foundry components.</p>
+<ul>
+<li>Installer</li>
+<li>Identity</li>
+<li>Integration</li>
+<li>Sync</li>
+<li>Console</li>
+</ul>
+<h2 id="secure-server-checklist">Secure Server Checklist</h2>
+<h3 id="enable-ssltls">Enable SSL/TLS</h3>
+<p>Serving web requests over HTTPS is essential to protect data between the client and the application server.<br />
+To make your web application accessible through HTTPS, you must implement SSL certificate.</p>
+<p>While installing Volt MX Foundry, ensure that you select HTTPS as a communication protocol and provide valid CA certificates.</p>
+<p><img alt="" src="Resources/Images/HTTPS.png" /></p>
+<p><img alt="" src="Resources/Images/SSL.png" /></p>
+<h3 id="disable-weak-ciphers">Disable Weak Ciphers</h3>
+<p>To achieve greater security, you can configure the server not to use weak ciphers when they communicate using the SSL/TLS protocol. You have to primarily take care of the following three things:</p>
+<ul>
+<li>Disable SSL 2.0 (FUBAR) and SSL 3.01 (POODLE),</li>
+<li>Disable TLS 1.0 compression (CRIME),</li>
+<li>Disable weak ciphers (DES/3DES, RC4), prefer modern ciphers (AES), modes (GCM), and protocols (TLS 1.2).</li>
+</ul>
+<p>Make use of <a href="https://www.ssllabs.com/ssltest/">Qualys SSL Server Test</a> to analyze the server SSL configurations.</p>
+<h3 id="how-to-disable-weak-ciphers-in-tomcat">How to Disable Weak Ciphers in Tomcat</h3>
+<p>To disable weak ciphers, modify the SSL Connector container attribute inside the <code>server.xml</code> with the required https <code>connector</code> tag details. The <code>server.xml</code> is located in the <code>&lt;Install_Drive&gt;\tomcat\conf</code> folder.</p>
+<p>Here is a sample of the relevant part of the SSL <code>connector</code> tag:</p>
+<pre><code>SSLEnabled=&quot;true&quot; sslEnabledProtocols=&quot;TLSv1.2&quot; ciphers=&quot;TLS_ECDHE_RSA_WITH_RC4_128_SHA, SSL_RSA_WITH_RC4_128_SHA&quot;
+
+</code></pre>
+<p>Here is a sample modified https <code>connector</code> tag:</p>
+<pre><code>&lt;connector port=&quot;443&quot; maxhttpheadersize=&quot;8192&quot; address=&quot;127.0.0.1&quot; enablelookups=&quot;false&quot; disableuploadtimeout=&quot;true&quot; acceptCount=&quot;100&quot; scheme=&quot;https&quot; secure=&quot;true&quot; clientAuth=&quot;false&quot; &lt;mark&gt; SSLEnabled=&quot;true&quot; sslEnabledProtocols=&quot;TLSv1.2&quot; ciphers=&quot;TLS_ECDHE_RSA_WITH_RC4_128_SHA,SSL_RSA_WITH_RC4_128_SHA&quot; &lt;/mark&gt; keystoreFile=&quot;mydomain.key&quot; keystorePass=&quot;password&quot; truststoreFile=&quot;mytruststore.truststore&quot; truststorePass=&quot;password&quot;/&gt;;
+
+</code></pre>
+<blockquote>
+<p><strong><em>Note:</em></strong> Upgrade the SSL Cipher list to the latest available versions.</p>
+</blockquote>
+<h3 id="how-to-disable-weak-ciphers-in-jboss">How to Disable Weak Ciphers in JBoss</h3>
+<p>To disable weak ciphers, replace the <code>https-listener</code> under JBoss <code>subsystem/undertow</code>, for example, <code>&lt;subsystem xmlns="urn:jboss:domain:undertow:3.1"&gt;</code></p>
+<p>Here is a sample <code>https-listener</code> tag:</p>
+<pre><code>&lt;https-listener name=&quot;https&quot; socket-binding=&quot;connect&quot; security-realm=&quot;ApplicationRealm&quot; verify-client=&quot;REQUIRED&quot;/&gt;
+</code></pre>
+<p>Here is a sample modified <code>https-listener</code> tag:</p>
+<pre><code>&lt;https-listener name=&quot;https&quot; enabled-protocols=&quot;TLSv1,TLSv1.1,TLSv1.2&quot; enabled-cipher-suites=&quot;SSL_RSA_WITH_3DES_EDE_CBC_SHA,SSL_DHE_RSA_WITH_3DES_EDE_CBC_SHA,TLS_DHE_DSS_WITH_AES_128_CBC_SHA, TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_DSS_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA, TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDH_RSA_WITH_AES_128_CBC_SHA, TLS_ECDH_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA, TLS_ECDH_anon_WITH_3DES_EDE_CBC_SHA,TLS_ECDH_anon_WITH_AES_128_CBC_SHA, TLS_ECDH_anon_WITH_AES_256_CBC_SHA&quot; verify-client=&quot;REQUIRED&quot; security-realm=&quot;ApplicationRealm&quot; socket-binding=&quot;connect&quot;/&gt;
+</code></pre>
+<blockquote>
+<p><strong><em>Note:</em></strong> Upgrade the SSL Cipher list to the latest available versions.</p>
+</blockquote>
+<h2 id="use-a-hardened-database-for-volt-mx-foundry">Use a Hardened database for Volt MX Foundry</h2>
+<p>Your database is the jackpot that every attacker aims to capture. As attacks get more sophisticated and networks get more hostile, it has become more important than ever to take the following additional steps to harden your database.</p>
+<ul>
+<li><strong>Set Strong Passwords</strong> (Password must contain at least 8 characters, at most 20 characters, and must include at least one uppercase letter, one lowercase letter, one digit, and one special character)</li>
+<li><strong>Remove Anonymous Users</strong></li>
+<li><strong>Follow the Principle of Least Privilege</strong></li>
+<li><strong>Enable TLS</strong> (The Installer does not support databases running TLS, so you must enable it post-installation)</li>
+</ul>
+<h2 id="users-and-account-roles">Users and Account roles</h2>
+<p>Volt MX Foundry provides a mechanism to create a store of users in Volt MX Foundry Console (locally) or import from Active Directory.</p>
+<p>Users listed in the User Management can access Volt MX Foundry Console to create apps.</p>
+<p>There are a total of four account roles in Volt MX Foundry:</p>
+<ul>
+<li>
+<p><strong>Owner</strong>: An owner has the most privileges and can do the following:</p>
+</li>
+<li>
+<p>Add, modify, and delete an environment.</p>
+</li>
+<li>
+<p>Add, modify, and delete other owners, admins, and members.</p>
+</li>
+<li>
+<p><strong>Admin</strong>: An admin has fewer privileges than an owner and can do the following:</p>
+</li>
+<li>
+<p>Add other admins and members.</p>
+</li>
+<li>Modify and delete other admins and members.</li>
+<li>
+<p>Grant and deny environment access to other admins and members.</p>
+</li>
+<li>
+<p><strong>Member</strong>: A member has the fewest privileges, which includes creating, editing or deleting new Volt MX Foundry applications or services. A member does not have permissions to invite a new user to the cloud or change the environment access of other members.</p>
+</li>
+<li><strong>Developer Portal Only</strong>: This provides access to specific Developer Portals only and does not provide access to the Volt MX Foundry Console.</li>
+</ul>
+<p><img alt="" src="Resources/Images/User_Settings.png" /></p>
+<h2 id="default-services-and-apps-permissions">Default Services and Apps Permissions</h2>
+<p>You can configure access control for Volt MX Foundry applications and services. By default, all the users have full access rights to create and access apps and services.<br />
+Use the <strong>Apps Console Access Control</strong> page to control access to an application. Use the <strong>Services Console Access Control</strong> page to control access to a service.<br />
+Change the default access permissions for a new service or application according to the company’s access policy. This setting can be found in: <strong>Settings -&gt; Default Services &amp; Apps Permissions</strong>.</p>
+<p><img alt="" src="Resources/Images/Default_633x168.png" /></p>
+<h2 id="operation-security-level-for-integration-and-orchestration-services">Operation Security Level for Integration and Orchestration services</h2>
+<p>Select one of the following security operations in the Operation Security Level field for integration and orchestration services. By default, the field is set to Authenticated App User:</p>
+<ul>
+<li><strong>Authenticated App User</strong> – indicates that the operation is secured. To use the operation, an app user must be authenticated by an associated identity service.</li>
+<li><strong>Anonymous App User</strong> – indicates that a user must have the app key and app secret to access this operation.</li>
+<li><strong>Public</strong> – indicates that the operation requires no special security.</li>
+</ul>
+<p>For Integration Services:</p>
+<p><img alt="" src="Resources/Images/For_Integration_Services_627x182.png" /></p>
+<p>For Orchestration Services:</p>
+<p><img alt="" src="Resources/Images/For_Orchestration_Services_623x149.png" /></p>
+<h2 id="verb-security-level-for-object-services">Verb Security Level for Object Services</h2>
+<p>The Verb Security Level specifies how the client must authenticate to the verb. You can restrict access to this verb to only authenticated app users who have successfully been authenticated using an Identity service. An anonymous app user verb allows access from a trusted client that has the required App Key and App Secret, but the client does not need to authenticate the user through an identity service.<br />
+Set the security level to <strong>Public</strong> to allow any client to access this verb without any authentication requirement. <strong>Authenticated App User</strong> – indicates that the operation is secured. To use the operation, an app user must be authenticated by an associated identity service.</p>
+<p><img alt="" src="Resources/Images/Verb_Security_619x171.png" /></p>
+<h2 id="pre-requisites">Pre-requisites</h2>
+<p>Ensure that you read the <a href="../../voltmx_foundry_windows_install_guide/Content/Prerequisites.html">Pre-requisites</a> which contains information on Multi-node load balancer setup and other configurations.</p>
+<h3 id="securing-data-transport-between-the-device-and-volt-mx-server">Securing Data Transport between the Device and Volt MX Server</h3>
+<p>Volt MX uses the traditional 128/256 bit SSL protocol between the device and the Volt MX Server for all the data communication. The mobile device has the native SDKs supporting the HTTPS connection from the mobile device and no additional API or infrastructure investment is required.</p>
+<h2 id="backend-credentials-and-session-security">Backend Credentials and Session Security</h2>
+<p>Volt MX Foundry uses AES-256 algorithm to encrypt backend credentials. The admin does not need to do anything for protecting the backend credentials.</p>
+<p>The backend cookies/tokens are stored after being encrypted using the tenant’s data encryption key (AES encryption). Backend tokens are deleted when the session expires, or when the user logs out.</p>
+<p>The following are the two types of sessions:</p>
+<ul>
+<li><strong>Fixed duration</strong> sessions expire when the duration elapses after login.</li>
+<li><strong>Auto-extending</strong> sessions are defined using an inactivity timeout and max active duration. They expire if there is no activity during an inactivity timeout duration or if the max active duration elapses after login.</li>
+</ul>
+<p>If the backend supports refresh, the backend tokens can be refreshed by calling the refresh API from SDK.</p>
+<h2 id="user-credential-security">User Credential Security</h2>
+<p>Volt MX Foundry currently encrypts the user credentials with PBKDF2 with 1000 iterations. The password is salted is 24 random bytes generated using java.security.SecureRandom.</p>
+<p>As per NIST, it is recommended to use at least 10,000 iterations. If the user wants PBKDF2, iterations to be increased, he can achieve that by setting a property called 'PBKDF2_ITERATIONS'. but this might AFFECT THE PERFORMANCE. Below are the performance statistics for 1k iterations and 10k iterations.</p>
+<table style="mc-table-style: url('Resources/TableStyles/Basic.css');width: 525px;" class="TableStyle-Basic" cellspacing="0"><colgroup><col style="width: 191px;" class="TableStyle-Basic-Column-Column1"> <col style="width: 162px;" class="TableStyle-Basic-Column-Column1"> <col class="TableStyle-Basic-Column-Column1"></colgroup><tbody><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1" style="text-align: center;">No of calculations (loops)</td><td class="TableStyle-Basic-BodyE-Column1-Body1" style="text-align: center;">1K Iterations (in ms)</td><td class="TableStyle-Basic-BodyD-Column1-Body1" style="text-align: center;">10K Iterations(in ms)</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">1000</td><td class="TableStyle-Basic-BodyE-Column1-Body1">3278</td><td class="TableStyle-Basic-BodyD-Column1-Body1">28159</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">2000</td><td class="TableStyle-Basic-BodyE-Column1-Body1">5780</td><td class="TableStyle-Basic-BodyD-Column1-Body1">57280</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">3000</td><td class="TableStyle-Basic-BodyE-Column1-Body1">8634</td><td class="TableStyle-Basic-BodyD-Column1-Body1">91604</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">4000</td><td class="TableStyle-Basic-BodyE-Column1-Body1">12423</td><td class="TableStyle-Basic-BodyD-Column1-Body1">122031</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">5000</td><td class="TableStyle-Basic-BodyE-Column1-Body1">14862</td><td class="TableStyle-Basic-BodyD-Column1-Body1">148167</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">6000</td><td class="TableStyle-Basic-BodyE-Column1-Body1">17967</td><td class="TableStyle-Basic-BodyD-Column1-Body1">179345</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">7000</td><td class="TableStyle-Basic-BodyE-Column1-Body1">20966</td><td class="TableStyle-Basic-BodyD-Column1-Body1">210320</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">8000</td><td class="TableStyle-Basic-BodyE-Column1-Body1">24736</td><td class="TableStyle-Basic-BodyD-Column1-Body1">242198</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyE-Column1-Body1">9000</td><td class="TableStyle-Basic-BodyE-Column1-Body1">26720</td><td class="TableStyle-Basic-BodyD-Column1-Body1">266217</td></tr><tr class="TableStyle-Basic-Body-Body1"><td class="TableStyle-Basic-BodyB-Column1-Body1">10000</td><td class="TableStyle-Basic-BodyB-Column1-Body1">30150</td><td class="TableStyle-Basic-BodyA-Column1-Body1">302918</td></tr></tbody></table>
+
+<p><img alt="" src="Resources/Images/Performance_Graph.png" /></p>
+<h3 id="example-to-set-property-pbkdf2_iterations">Example to set property ''PBKDF2_ITERATIONS"</h3>
+<pre><code>Request:  
+POST authservice/api/v1/setup/tenants/&lt;tenant-id&gt;/properties  
+Headers:  
+Authorization: &lt;auth-token&gt;  
+Content-Type: application/x-www-form-urlencoded  
+Payload:  
+name = PBKDF2_ITERATIONS  
+value = 10000
+</code></pre>
+<h3 id="sample-request">Sample request</h3>
+<pre><code>POST /authService/100000002/api/v1/setup/tenants/100000002/properties HTTP/1.1  
+Host: example.com  
+Authorization: eyAidHlwIjogImp3dCIsICJhbGciOiAiUlMyNTYiIH0.eyAiX2VtYWlsIjogInNhaWtpcmFuLmdvdWRAa29ueS5jb20iLCAiX3ZlciI6ICJ2MS4xIiwgImlzcyI6ICJodHRwOi8vc2VjdXJpdHl0ZXN0dm0ua2l0c3BsLmNvbTo4MDgwL2F1dGhTZXJ2aWNlL2FjY291bnRzIiwgIl9zY29wZSI6ICJnIiwgIl9pc3NtZXRhIjogIi9tZXRhZGF0YS9rNDVRdFcxa0V5SXRsUkg5eG9renZnPT0iLCAiX3Nlc3Npb25faWQiOiAiYTBmYTE1NmQtNDFmNi00NzkxLTgwNmMtOTBhM2FmNmZlZGFlIiwgIl9wdWlkIjogNTA0NDIxMzMzNDk2MSwgIl9pZHAiOiAidXNlcnN0b3JlIiwgImV4cCI6IDE1MTk4OTcwMzAsICJpYXQiOiAxNTE5ODkzNDMwLCAiX3Nlc3Npb25fdGlkIjogImFjY291bnRzIiwgIl9wcm92X3VzZXJpZCI6ICJzYWlraXJhbi5nb3VkQGtvbnkuY29tIiwgImp0aSI6ICI3ODYxYjA1NS0wNmNiLTQwODItOWRkZC04MDFkNTJjY2ExM2QiLCAiX2FjcyI6ICJhY2NvdW50cyIgfQ.nRhGEbfTqzl5aCgEYn85YUPxM3LOMedVFjJX4NlYhlIRzYs_5JkuCH3Yl-p8uVGw2rNOoqzK1x2KUhe3oPRQ8ab4QTVddYnTBfsQt9lFViiGMlOKgbLDI7wn9AGfwsQRB_6fNVJ5HEt2k6kC2C8mHCYGWnXTRjLEKsK-k9Wc5Gaur49yKEjl6_tkH--qoDsqFYuLGHzad4zQHtsRxrxgxfI_z3QuN3VF_DYKoD5Nzsi5rxGSCu-PPH9_gQRO2ED6S-WllJdJTTIal_pa4bGG-JhDtCdOR9GHDPcbBZ6WG1GwTJKWbqDEDzxjrxiKk5VZDOwjUuhwTJwE2cwQJIO-EQ  
+Content-Type: application/x-www-form-urlencoded  
+Cache-Control: no-cache  
+Postman-Token: 745a8e95-171b-204c-a934-37d434054adb  
+name=PBKDF2_ITERATIONS&amp;value=1000
+</code></pre>
+<h3 id="steps-to-get-auth-token-and-tenant-id">Steps to get Auth token and Tenant ID</h3>
+<ol>
+<li>Login to Volt MX Foundry using Owner account.</li>
+<li>Goto <code>http://&lt;VoltMX_host&gt;:8080/mfconsole/accountInfo</code></li>
+</ol>
+<!-- 2.  Goto [http://securitytestvm.kitspl.com:8080/mfconsole/accountInfo](http://securitytestvm.kitspl.com:8080/mfconsole/accountInfo) -->
+
+<ol>
+<li>Note down the tenant id and auth token as shown in below image.</li>
+</ol>
+<p><img alt="" src="Resources/Images/Auth_Token_665x259.png" /></p>
+<h2 id="idle-session-timeout-for-volt-mx-foundry-app">Idle Session Timeout for Volt MX Foundry App</h2>
+<p>Volt MX Foundry supports configuring session timeout (idle timeout and fixed timeout) for an app identity session.</p>
+<p>You can configure either an idle timeout or fixed timeout for apps in the Applications &gt; Identity page.</p>
+<ul>
+<li>
+<p><strong>Idle Timeout</strong>: Specifies the amount of time in minutes that a session can remain idle before Volt MX Foundry automatically terminates the app.</p>
+</li>
+<li>
+<p>Identity Session Idle Timeout: When an app session on a device remains idle for a certain amount of time, the app session expires automatically. The user will need to log in to the app again.</p>
+</li>
+<li>
+<p>Maximum Session Duration: An apps log-in session is active until the maximum session duration time is met.</p>
+</li>
+<li>
+<p><strong>Fixed Timeout</strong>: Specifies the app session’s idle timeout (HH:SS). When the timeout is reached, the session expires automatically, and the user will need to log into the app again.</p>
+</li>
+</ul>
+<p>Volt MX Security Team recommends Identity Session Idle Timeout to be set to 00:05 hours (5 Minutes).</p>
+<p><img alt="" src="Resources/Images/Idle_Session_625x169.png" /></p>
+<h2 id="password-policy-for-volt-mx-foundry-users">Password Policy for Volt MX Foundry users</h2>
+<p>No matter how secure Volt MX Foundry is, Users will eventually choose their own password. Therefore, you should set account policies that define a secure password for your systems.</p>
+<p>The default password policy is password must contain at least 8 characters, at most 20 characters and must include at least one uppercase letter, one lowercase letter, one digit and one special character.</p>
+<p>An owner of the account can change the password policy by changing “password_regex” property.</p>
+<pre><code>Request:  
+POST authservice/api/v1/setup/tenants/&lt;tenant-id&gt;/properties  
+Headers:  
+Authorization: &lt;auth-token&gt;  
+Content-Type: application/x-www-form-urlencoded  
+Payload:  
+name = password*regex  
+value = ^(?=.*[a-z])(?=._[A-Z])(?=._\\d)(?=._(_|[^\\w])).{8,20}$
+</code></pre>
+<h3 id="sample-request_1">Sample Request</h3>
+<pre><code>POST /authService/100000002/api/v1/setup/tenants/100000002/properties HTTP/1.1  
+Host: example.com  
+Authorization: eyAidHlwIjogImp3dCIsICJhbGciOiAiUlMyNTYiIH0.eyAiX2VtYWlsIjogInNhaWtpcmFuLmdvdWRAa29ueS5jb20iLCAiX3ZlciI6ICJ2MS4xIiwgImlzcyI6ICJodHRwOi8vc2VjdXJpdHl0ZXN0dm0ua2l0c3BsLmNvbTo4MDgwL2F1dGhTZXJ2aWNlL2FjY291bnRzIiwgIl9zY29wZSI6ICJnIiwgIl9pc3NtZXRhIjogIi9tZXRhZGF0YS9rNDVRdFcxa0V5SXRsUkg5eG9renZnPT0iLCAiX3Nlc3Npb25faWQiOiAiYTBmYTE1NmQtNDFmNi00NzkxLTgwNmMtOTBhM2FmNmZlZGFlIiwgIl9wdWlkIjogNTA0NDIxMzMzNDk2MSwgIl9pZHAiOiAidXNlcnN0b3JlIiwgImV4cCI6IDE1MTk4OTcwMzAsICJpYXQiOiAxNTE5ODkzNDMwLCAiX3Nlc3Npb25fdGlkIjogImFjY291bnRzIiwgIl9wcm92X3VzZXJpZCI6ICJzYWlraXJhbi5nb3VkQGtvbnkuY29tIiwgImp0aSI6ICI3ODYxYjA1NS0wNmNiLTQwODItOWRkZC04MDFkNTJjY2ExM2QiLCAiX2FjcyI6ICJhY2NvdW50cyIgfQ.nRhGEbfTqzl5aCgEYn85YUPxM3LOMedVFjJX4NlYhlIRzYs*5JkuCH3Yl-p8uVGw2rNOoqzK1x2KUhe3oPRQ8ab4QTVddYnTBfsQt9lFViiGMlOKgbLDI7wn9AGfwsQRB_6fNVJ5HEt2k6kC2C8mHCYGWnXTRjLEKsK-k9Wc5Gaur49yKEjl6_tkH--qoDsqFYuLGHzad4zQHtsRxrxgxfI_z3QuN3VF_DYKoD5Nzsi5rxGSCu-PPH9_gQRO2ED6S-WllJdJTTIal_pa4bGG-JhDtCdOR9GHDPcbBZ6WG1GwTJKWbqDEDzxjrxiKk5VZDOwjUuhwTJwE2cwQJIO-EQ  
+Content-Type: application/x-www-form-urlencoded  
+Cache-Control: no-cache  
+Postman-Token: ebb17b95-9e44-6ebd-1953-3ad9f1c9019f  
+name=password_regex&amp;value=^(?=.*[a-z])(?=._[A-Z])(?=._\\d)(?=._(_|[^\\w])).{8,20}$
+</code></pre>
+<h3 id="steps-to-get-auth-token-and-tenant-id_1">Steps to get Auth token and Tenant ID</h3>
+<ol>
+<li>Login to Volt MX Foundry using Owner account.</li>
+<li>Goto <code>http://&lt;VoltMX_host&gt;:8080/mfconsole/accountInfo</code></li>
+</ol>
+<!-- 2.  Goto [http://securitytestvm.kitspl.com:8080/mfconsole/accountInfo](http://securitytestvm.kitspl.com:8080/mfconsole/accountInfo) -->
+<ol>
+<li>Note down the tenant id and auth token as shown in below image.</li>
+</ol>
+<p><img alt="" src="Resources/Images/Auth_Token_TID_645x252.png" /></p>
+<h3 id="version-management">Version Management</h3>
+<ul>
+<li>A policy to periodically install security patches of all software must be in place.</li>
+<li>A mechanism to regularly check for missing security patches must be in place.</li>
+<li>Software should be installed from a central, trusted repository when available.</li>
+<li>Services must display minimal information about the installed version.</li>
+</ul>
+<h3 id="network-security">Network security</h3>
+<ul>
+<li>Only a minimal set of ICMP packets must be accepted</li>
+<li>Packet rate-limiting must be implemented</li>
+</ul>
+<h2 id="hardening-volt-mx-foundry-integration-middleware">Hardening Volt MX Foundry Integration (Middleware)</h2>
+<p>In addition to the security best practices followed by the customer as per their internal guidelines, Volt MX makes the following recommendations to reduce the attack surface of their integration server deployments.</p>
+<ol>
+<li><strong>Applying latest patches</strong><br />
+    The web server, the underlying operating system, the application server and the database server must all have the latest patches applied. This protects the installation against exploits for known vulnerabilities.</li>
+<li><strong>Removing unnecessary services</strong><br />
+    Every service running on the application server is an additional attack surface especially if the service is listening on a port and is remotely accessible. All services other than the ones that are absolutely required to run the Integration Server (formerly middleware) product must be turned off.</li>
+<li><strong>Use Hardened Application and Database servers</strong><br />
+    The servers included as part of the Integration Server deployment should be hardened as per the hardening recommendations available from the vendor or independent groups like NSA/SANS who have made such information available publicly.</li>
+<li><strong>Restrict Access to Non- Integration Services</strong><br />
+    Integration services would typically be made accessible from the intranet or internet. Access to other services on the server can be restricted using IP tables or other host-level firewalls.</li>
+<li><strong>Restrict Access to Admin Console</strong><br />
+    Admin Console is the administrative interface and it is recommended to restrict access to internal networks only if possible. This can be achieved in two ways:<ul>
+<li>Configure Admin Console and Integration Services to use two different ports and restrict access to the port on which Console is running to only internal users.</li>
+<li>At the Load Balancer, you can write a filter to block access to the Console part of the application from external users. Restrict Access to Non- Integration Services.</li>
+</ul>
+</li>
+<li><strong>Application Server Privileges</strong><br />
+    Integration Server can function effectively when Tomcat is run as the default Tomcat user without any special privileges being granted. It is strongly recommended that the server should be production grade with lesser privileges such as disabling direct access and process request through LB and other HTTP verbs.</li>
+<li><strong>Database Server Privileges</strong><br />
+    Integration Server installation requires creating new Databases and tables, once the installation is done, it would only <strong>insert</strong>, <strong>query</strong> and <strong>update</strong> entries in the existing tables. Hence it is recommended that only during the installation process a database user with permission to perform creation and deletion privileges is used. Once the installation is done this user account can be deleted and replaced with another user who only has permissions to <strong>Read</strong>, <strong>Insert</strong> and <strong>Update</strong>. Dangerous functions like <code>system() (MySQL)</code>, <code>xp_cmdshell (MS SQL)</code> must be disabled or permissions to use these functions should not be granted to the admin database account.</li>
+<li><strong>Log Level Recommendation</strong> Volt MX recommendation on log4j Log level is ERROR in production to avoid logging any sensitive information in log files. Make sure the below to change log level to ERROR.<ol>
+<li>In middleware-log4j.properties file, All log levels should be ERROR</li>
+<li>In Admin Console Configuration page, Log Level configuration should be selected as ERROR.</li>
+</ol>
+</li>
+<li><strong>HTTPS mode</strong>. Integration Server works both in HTTP and HTTPS mode. It is recommended to install the server in https mode.</li>
+<li><strong>SSL Certificate Type</strong><br />
+    Recommended using your own existing SSL certificate rather than going with a generated self-signed certificate.</li>
+</ol>
+<p><img alt="" src="Resources/Images/Existing_SSL.png" /></p>
+<h2 id="hardening-volt-mx-foundry-identity">Hardening Volt MX Foundry Identity</h2>
+<p>In addition to the security best practices followed by the customer as per their internal guidelines, Volt MX makes the following recommendations to reduce the attack surface of their Volt MX Foundry Identity Deployments.</p>
+<ol>
+<li><strong>Restrict Access to Non-Volt MX Foundry Identity Services</strong>: Volt MX Foundry Identity service would typically be made accessible from the intranet or the internet. Access to other services on the server can be restricted using IP tables or other host-level firewalls.</li>
+<li><strong>Restrict Access to Volt MX Foundry Console</strong>: Volt MX Foundry Console is the administrative interface and it is recommended to restrict access to internal networks only if possible. This can be achieved in two ways:<ul>
+<li>Configure Volt MX Foundry Console and Volt MX Foundry Identity Service to use two different ports and restrict access to the port on which Console is running to only internal users.</li>
+<li>At the Load Balancer, you can write a filter to block access to the Console part of the application from external users. Restrict Access to Non-Volt MX Foundry Identity Services</li>
+</ul>
+</li>
+<li><strong>Log Level Recommendation</strong> Volt MX recommendation on log4j Log level is ERROR in production to avoid logging any sensitive information in log files. It is recommended to set the LOG_LEVEL property in authService.properties to ERROR.</li>
+<li><strong>Volt MX Foundry Identity tokens and sessions</strong>: When a user logs in to an identity provider in Volt MX Foundry via an app, the user passes app credentials (Volt MX Foundry app key and secret), and user credentials for the backend identity provider. The Identity service validates the app credentials and sends the user credentials to the backend identity provider for authentication (in case of SAML or OAuth, the user credentials are passed to backend identity provider via client-side browser redirect and not via Volt MX Foundry Identity). The backend authenticates the user and returns a session token (known as the backend token), which can then be used to access the user’s data in the backend. Once the user is successfully authenticated at the backend, Volt MX Foundry Identity creates a session and issues an Identity token linked to the session. The Volt MX Foundry Identity token is a JWT token signed by the tenant’s signing key and contains claims about the authenticated user, app, provider, issuer, and session. The backend tokens are also linked to the identity session.</li>
+</ol>
+<h2 id="preventing-tomcat-version-from-error-pages">Preventing Tomcat Version from Error Pages</h2>
+<p>When you access Volt MX Foundry V9.x by using a particular URL directly from a browser, the web page displays Tomcat Application Server's version.</p>
+<p>For example, the Apache Tomcat server version is disclosed, as shown in the following screen shot:</p>
+<p><img alt="" src="Resources/Images/TomcatVersionDisclosure.png" /></p>
+<p>For security reasons, you must disable the server information disclosure for Tomcat application server.</p>
+<h3 id="to-prevent-disclosure-of-the-tomcat-application-server-version-follow-these-steps">To prevent disclosure of the Tomcat Application Server version, follow these steps:</h3>
+<ol>
+<li>Open the Tomcat Server &gt; <code>server.xml</code> file.</li>
+<li>Add the following:</li>
+</ol>
+<pre><code>&lt;Valve className=&quot;org.apache.catalina.valves.ErrorReportValve&quot;
+    showReport=&quot;false&quot; 
+    showServerInfo=&quot;false&quot;/&gt;
+</code></pre>
+<ol>
+<li>Save the server.xml.</li>
+<li>Restart the server.</li>
+</ol>
+<h2 id="disable-concurrent-session">Disable Concurrent Session</h2>
+<p>If your users are not going to connect to more than one session, it is recommended to disable concurrent sessions.</p>
+<p>To disable concurrent sessions, add the following property in the waas_property table of the console db:</p>
+<ul>
+<li><code>property_name="DISABLE_CONCURRENT_SESSIONS"</code></li>
+<li><code>property_value="true"</code></li>
+<li><code>tenant_name = __global</code></li>
+<li><code>etag = &lt;Any 36 char guid&gt;</code></li>
+</ul>
+<p>Alternatively, you can also use the following API to add the property in the waas table:</p>
+<pre><code>POST &lt;Waas_Base_URL&gt;/api/v1/setup/properties
+</code></pre>
+<h3 id="headers">Headers:</h3>
+<ul>
+<li>X-Volt MX-Authorization = <Claims token value></li>
+<li>Content-Type = application/x-www-form-urlencoded</li>
+</ul>
+<h3 id="form-data-parameters">Form Data parameters:</h3>
+<ul>
+<li>name = DISABLE_CONCURRENT_SESSIONS</li>
+<li>value = true</li>
+</ul>
+<p>Sample <code>Waas_Base_URL = http://localhost:9090/workspace/100000002</code></p>
+<p>Follow these steps to get the X-Volt MX-Authorization token:</p>
+<ol>
+<li>
+<p>Log on to Volt MX Foundry and go to the accountInfo section</p>
+<p>For example, <code>http://localhost:9090/mfconsole/accountInfo</code></p>
+</li>
+<li>
+<p>Retrieve the value corresponding to the <strong>authToken</strong> key from the output folder.</p>
+</li>
+<li>Navigate to <code>authService.war/Web-INF/classes</code>, edit the <code>authService.properties</code> file, and add <code>DISABLE_CONCURRENT_SESSIONS=true</code> at the end of the file.</li>
+<li>Restart the server.</li>
+</ol>
+<h2 id="protection-against-automated-attacks">Protection against automated attacks</h2>
+<p>Volt MX Foundry provides a security feature to block users on multiple failed log-in attempts. If a user tries to sign in multiple times using invalid credentials, Volt MX Foundry blocks their account for a certain period called the Blocking Threshold. They can log on only after the blocking threshold elapses.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> This feature is applicable for On-Premise installations of Volt MX Foundry 9.2 and above.</p>
+</blockquote>
+<p>Volt MX Foundry provides an option to configure the following:</p>
+<ul>
+<li>Number of failed log in attempts before the user is blocked.</li>
+<li>Blocking Threshold</li>
+</ul>
+<h3 id="configuring-user-blocking-feature">Configuring User Blocking Feature</h3>
+<p>You must obtain an <strong>authToken</strong> to configure the number of failed attempts to sign in and blocking threshold time in Identity.<br />
+Follow these steps to get the <strong>authToken</strong>.</p>
+<ul>
+<li>Log on to the Volt MX Foundry Console from a browser and open the <code>&lt;Volt MX Foundry Url&gt;/mfconsole/accountInfo</code> API in a new tab.</li>
+<li>The console displays the following response:</li>
+</ul>
+<p><img alt="" src="Resources/Images/BlockUser_Response_595x188.png" /></p>
+<ul>
+<li>Copy the <strong>authUrl</strong> and <strong>authToken</strong> from the response.</li>
+</ul>
+<p>Invoke the following API to enable User Blocking on multiple failed login attempts.</p>
+<pre><code>POST &lt;authUrl&gt;/api/v1/setup/tenants/\_\_global/properties
+</code></pre>
+<h3 id="headers_1">Headers:</h3>
+<ul>
+<li>Content-Type: application/json</li>
+<li>X-Volt MX-Authorization: <authToken></li>
+</ul>
+<h3 id="request-body">Request body:</h3>
+<pre><code>{
+&quot;name&quot;:&quot;MAX_LOGON_FAILED_ATTEMPTS&quot;,
+&quot;value&quot;:&quot;3&quot;
+}
+</code></pre>
+<p>Specify the value as the maximum number of failed sign in attempts you want to allow. In this scenario, Volt MX Foundry blocks the user after three consecutive failed sign in attempts.</p>
+<p>If the user tries to sign in after three failed attempts, the console displays the following message:<br />
+“User account locked due to multiple failed login attempts. Please contact the system administrator.”</p>
+<p>Use the following API to set the blocking threshold</p>
+<pre><code>POST &lt;authUrl&gt;/api/v1/setup/tenants/\_\_global/properties
+</code></pre>
+<h3 id="headers_2">Headers:</h3>
+<p>Content-Type: application/json</p>
+<p>X-Volt MX-Authorization: <authToken></p>
+<h3 id="request-body_1">Request body:</h3>
+<pre><code>{
+&quot;name&quot;:&quot;LOGON_BLOCKING_THRESHOLD_MINUTES&quot;,
+&quot;value&quot;:&quot;15&quot;
+}
+
+</code></pre>
+<p>Specify the value of the blocking threshold in the value field. In this scenario, the user is blocked for 15 minutes. After 15 minutes, they can log on to the Console using valid credentials.</p>
+<h3 id="unblocking-the-user">Unblocking the user</h3>
+<p>The user can sign in after the blocking threshold ends.</p>
+<p>A database admin can unblock a user before the blocking threshold ends. To unblock a user, follow the given steps:</p>
+<ol>
+<li>Connect to the Identity Config Database <prefix>idconfigdb<suffix> (the <prefix> and <suffix> must be the same as configured at the time of installation)</li>
+<li>Issue the following SQL command:</li>
+</ol>
+<pre><code>set sql_safe_updates = 0;
+UPDATE users
+SET
+user_status = 'active',
+login_fail_count = 0
+WHERE
+userid = '&lt;the blocked userid here&gt;';
+set sql_safe_updates = 1;
+
+</code></pre>
+<h2 id="restrict-tomcat-manager-to-localhost">Restrict Tomcat Manager to Localhost</h2>
+<p>Follow these steps to secure the tomcat manager to the localhost.</p>
+<ol>
+<li>Create an xml file called <code>manager.xml</code> in the <code>/conf/catalina/localhost</code> path.</li>
+<li>write the following code in <strong>manager.xml</strong>:</li>
+</ol>
+<pre><code>&lt;Context path=&quot;/manager&quot; debug=&quot;0&quot; privileged=&quot;true&quot;&gt;
+
+    &lt;Valve className=&quot;org.apache.catalina.valves.RemoteAddrValve&quot;
+    allow=&quot;127.0.0.1&quot;/&gt;
+
+    &lt;!-- Link to the user database we will get roles from
+          &lt;ResourceLink name=&quot;users&quot; global=&quot;UserDatabase&quot;
+    type=&quot;org.apache.catalina.UserDatabase&quot;/&gt;
+    --&gt;
+    &lt;/Context&gt;
+
+</code></pre>
+<h2 id="secure-your-cookies-secure-and-httponly-flags">Secure your Cookies (Secure and HttpOnly flags)</h2>
+<!-- ### For Tomcat/WebLogic as Web Server -->
+
+<h3 id="for-tomcat-as-web-server">For Tomcat as Web Server</h3>
+<p>Cookies let websites store data directly on the web browser of a user. Websites primarily use cookies to identify the user session based on their browsing. Cookies contain sensitive data that must be protected.</p>
+<!-- To make your cookies secure, modify the **web.xml** and **weblogic.xml** files of the webapp for the required components. -->
+
+<p>To make your cookies secure, modify the <strong>web.xml</strong> files of the webapp for the required components.</p>
+<ul>
+<li><code>WebApps &gt; mfconsole</code> for Volt MX Foundry Console</li>
+<li><code>WebApps &gt; admin</code> for Volt MX Foundry Admin Console</li>
+<li><code>WebApps &gt; vpns</code> for Volt MX Foundry Engagement</li>
+<li><code>WebApps &gt; authService</code> for Volt MX Foundry AuthService</li>
+</ul>
+<p>Add the following code in the <strong>web.xml</strong> file:</p>
+<pre><code>&lt;cookie-config&gt;
+&lt;http-only&gt;true&lt;/http-only&gt;
+&lt;secure&gt;true&lt;/secure&gt;
+&lt;/cookie-config&gt;
+
+</code></pre>
+<ul>
+<li>Restart the Application Server.</li>
+</ul>
+<p>You can use developer tools to verify the changes.</p>
+<h3 id="for-jboss-as-the-web-server-do-the-following">For JBoss as the Web Server, do the following.</h3>
+<p>To enable <code>secure/Http-only</code> for all deployed applications, you can add a session-cookie config to your undertow subsystem's <code>servlet-container</code> section (<code>domain.xml</code> file or <code>standalone-xxx.xml</code> file). For example, a session-cookie config is as follows:</p>
+<pre><code>&lt;subsystem xmlns=&quot;urn:jboss:domain:undertow:3.1&quot;&gt;
+...
+&lt;servlet-container name=&quot;default&quot;&gt;
+         &lt;jsp-config/&gt;
+         &lt;session-cookie http-only=&quot;true&quot; secure=&quot;true&quot; /&gt; &lt;!-- added --&gt;
+         &lt;websockets/&gt;
+&lt;/servlet-container&gt;
+
+</code></pre>
+<h3 id="for-websphere-as-the-web-server-follow-these-steps">For WebSphere as the Web Server, follow these steps.</h3>
+<ol>
+<li>Sign in to <a href="https://manage.hclvoltmx.com/">Volt MX Foundry Console</a>.</li>
+<li>Select Environments from the left navigation pane.</li>
+<li>Go to Admin Console.</li>
+<li>
+<p>In <strong>Application servers</strong></p>
+<ol>
+<li>Select your server.</li>
+<li>Go to <strong>Session management</strong> &gt; <strong>Cookies</strong>, enable the cookies .</li>
+</ol>
+<p><img alt="" src="Resources/Images/WebSphere-Settings_633x267.jpg" /></p>
+</li>
+</ol>
+<h2 id="redirect-traffic-from-non-secure-protocol-http-to-secure-protocol-https">Redirect Traffic from Non-Secure Protocol (HTTP) to Secure Protocol (HTTPS)</h2>
+<p>Follow these steps to setup the Tomcat Server to redirect HTTP requests to the HTTPS port to access web applications from both the ports:</p>
+<ol>
+<li>Add the following code in the <strong>server.xml</strong> file present in the <code>TomcatInstallation/conf</code> path.</li>
+</ol>
+<pre><code>&lt;security-constraint&gt;
+    &lt;web-resource-collection&gt;
+    &lt;web-resource-name&gt;securedapp&lt;/web-resource-name&gt;
+    &lt;url-pattern&gt;/\*&lt;/url-pattern&gt;
+    &lt;/web-resource-collection&gt;
+    &lt;user-data-constraint&gt;
+    &lt;transport-guarantee&gt;CONFIDENTIAL&lt;/transport-guarantee&gt;
+    &lt;/user-data-constraint&gt;
+    &lt;/security-constraint&gt;
+
+</code></pre>
+<ol>
+<li>Restart the Application Server.</li>
+</ol>
+<h2 id="enabling-secure-flag-for-cacheid-cookie">Enabling Secure flag for CacheID Cookie</h2>
+<p>The middleware sets the CacheID to refer to the cached data from Memcached.</p>
+<p>Enable the secure flag for the CacheID cookie using the following -D parameter:</p>
+<ol>
+<li>Go to <code>tomcat\bin</code> in the Installation folder.</li>
+<li>Edit <strong>Catalina</strong>.</li>
+<li>At the end of the first line, add <code>-Dis.cacheid.cookie.secure=true</code>.</li>
+<li>Save the changes</li>
+<li>Restart the server.</li>
+</ol>
+<h2 id="configuring-owasp-secure-headers-for-spadesktop-apps">Configuring OWASP secure headers for SPA/Desktop apps</h2>
+<p>The OWASP Secure Headers describe the HTTP response headers that your application can use to increase its security. The HTTP response headers can restrict modern browsers from running into easily preventable vulnerabilities. The OWASP Secure Headers Project increases awareness and the use of these headers.</p>
+<p>The HTTP headers should include the following headers and their respective values.</p>
+<ul>
+<li><strong>X-Frame-Options</strong>: SAMEORIGIN</li>
+<li><strong>X-XSS-Protection</strong>: 1; mode=block</li>
+<li><strong>X-Content-Type-Options</strong>: nosniff</li>
+<li><strong>Content-Type</strong>: text.html; charset=utf-8</li>
+<li><strong>Strict-Transport-Security</strong>: max-age=86400; includeSubDomains</li>
+</ul>
+<p>Also, if there no overriding concerns, enable the security settings.</p>
+<h3 id="to-set-the-response-header-for-volt-mx-foundry-version-v9-sp2-or-higher-versions-follow-these-steps">To set the response header for Volt MX Foundry version V9 SP2 or higher versions, follow these steps.</h3>
+<ul>
+<li>To overcome these security issues in Volt MX SPA and Desktop Web applications, add custom filter and filter mapping entry in the <strong>web.xml</strong> file.</li>
+<li>For example:</li>
+</ul>
+<pre><code>     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
+     throws IOException, ServletException {
+     HttpServletRequest req = (HttpServletRequest) request;
+     HttpServletResponse res = (HttpServletResponse) response;
+     res.setHeader (&quot;&quot;&quot;&quot;X-Content-Type-Options&quot;&quot;&quot;&quot;, &quot;&quot;&quot;&quot;nosniff&quot;&quot;&quot;&quot;);.... // Similarly add your response headers. ... filterChain.doFilter(request, response);
+  }
+
+</code></pre>
+<ul>
+<li>Create a jar file using the class that you created.</li>
+</ul>
+<pre><code>  &lt;filter&gt;
+  &lt;filter-name&gt;XXXFilter&lt;/filter-name&gt;
+  &lt;filter-class&gt;com.xyz.web.filter.XXXFilter&lt;/filter-class&gt;
+  &lt;/filter&gt;
+  &lt;filter-mapping&gt;
+  &lt;filter-name&gt;XXXFilter&lt;/filter-name&gt;
+  &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+  &lt;/filter-mapping&gt;
+
+</code></pre>
+<ul>
+<li>Extract the build application War file and add the mentioned lib and entry in web.xml.</li>
+<li>Volt MX Iris provides an option to add jars and edit the web.xml under <code>Menu &gt; File &gt; Combine EAR file</code> option.</li>
+</ul>
+<blockquote>
+<p><strong><em>Note:</em></strong> Usage of the custom filter is the responsibility of the application developer.</p>
+</blockquote>
+<h3 id="setting-the-response-header-for-volt-mx-foundry-version-v9-sp2-or-earlier-versions">Setting the response header for Volt MX Foundry version V9 SP2 or earlier versions.</h3>
+<h3 id="to-add-owasp-secure-headers-to-webapp-static-files-follow-these-steps">To add OWASP Secure Headers to WebApp Static Files, follow these steps.</h3>
+<ol>
+<li>Sign in to <a href="https://manage.hclvoltmx.com/">Volt MX Foundry Console</a>.</li>
+<li>Select Environments from the left navigation pane.</li>
+<li>Select App Services to open the Server Admin Console.</li>
+<li>Go to <code>Settings &gt; Runtime Configuration &gt; Web Apps Configuration &gt; Custom Response Header</code>.</li>
+<li>Add the required header in the following format:</li>
+</ol>
+<pre><code>[{
+    'name': 'X-Content-Type-Options',
+    'value': 'nosniff'
+    }, {
+    'name': 'X-Frame-Options',
+    'value': 'DENY'
+    }, {
+    'name': 'X-XSS-Protection',
+    'value': ' 1; mode=block'
+    }, {
+    'name': 'Strict-Transport-Security',
+    'value': 'max-age=86400; includeSubDomains'
+    }]
+</code></pre>
+<p><img alt="" src="Resources/Images/OWASP_Header_596x279.png" /></p>
+<h3 id="to-add-owasp-secure-headers-to-middleware-services-follow-these-steps">To add OWASP Secure Headers to Middleware Services, follow these steps.</h3>
+<ol>
+<li>Write a custom filter that adds the response headers to the response.</li>
+<li>Add the following custom filter to preprocessor and postprocessor jar, and publish the app.</li>
+</ol>
+<pre><code>import java.io.IOException;
+
+    import javax.servlet.Filter;
+    import javax.servlet.FilterChain;
+    import javax.servlet.FilterConfig;
+    import javax.servlet.ServletException;
+    import javax.servlet.ServletRequest;
+    import javax.servlet.ServletResponse;
+    import javax.servlet.http.HttpServletRequest;
+    import javax.servlet.http.HttpServletResponse;
+
+    import org.apache.log4j.Logger;
+
+    import com.hcl.voltmx.middleware.common.DCFilter;
+    import com.hcl.voltmx.middleware.common.MWConstants;
+    import com.hcl.voltmx.middleware.servlet.filters.IntegrationCustomFilter;
+
+    @IntegrationCustomFilter(filterOrder = 101, urlPatterns = MWConstants.ANY)
+    public class XYZCustomFIlter implements Filter {
+    private static final Logger logger = Logger.getLogger(XYZCustomFIlter.class);
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+    throws IOException, ServletException {
+    // TODO Auto-generated method stub
+    chain.doFilter(request, response);
+    HttpServletResponse res = (HttpServletResponse) response;
+    res.setHeader(&quot;Cache-Control&quot;, &quot;no-cache,no-store,must-revalidate&quot;);
+    res.setHeader(&quot;Pragma&quot;, &quot;no-cache&quot;);
+    res.setHeader(&quot;X-Content-Type-Options&quot;, &quot;nosniff&quot;);
+    res.setHeader(&quot;X-Frame-Options&quot;, &quot;DENY&quot;);
+    res.setHeader(&quot;X-XSS-Protection&quot;, &quot;1; mode=block&quot;);
+    res.setHeader(&quot;Expires&quot;, &quot;0&quot;);
+    }
+    public void init(FilterConfig filterConfig) throws ServletException {
+    // TODO Auto-generated method stub
+
+        }
+        public void destroy() {
+            // TODO Auto-generated method stub
+
+        }
+
+    }
+</code></pre>
+<h3 id="setting-the-response-header-for-volt-mx-foundry-version-v9-sp2-or-later-versions">Setting the response header for Volt MX Foundry version V9 SP2 or later versions.</h3>
+<h3 id="to-add-the-owasp-secure-header-to-webapp-static-files-follow-these-steps">To add the OWASP Secure Header to WebApp Static Files, follow these steps.</h3>
+<ol>
+<li>Sign in to <a href="https://manage.hclvoltmx.com/">Volt MX Foundry Console</a>.</li>
+<li>Select Environments from the left navigation pane.</li>
+<li>Select App Services to open the Server Admin Console.</li>
+<li>Go to <strong>Settings</strong> &gt; <strong>Runtime Configuration</strong> &gt; <strong>Web Apps Configuration</strong> &gt; <strong>Custom Response Header</strong>.</li>
+<li>Add the required header in the following format:</li>
+</ol>
+<pre><code>[{
+    'name': 'X-Content-Type-Options',
+    'value': 'nosniff'
+    }, {
+    'name': 'X-Frame-Options',
+    'value': 'DENY'
+    }, {
+    'name': 'X-XSS-Protection',
+    'value': ' 1; mode=block'
+    }, {
+    'name': 'Strict-Transport-Security',
+    'value': 'max-age=86400; includeSubDomains'
+    }]
+</code></pre>
+<p><img alt="" src="Resources/Images/OWASP_Header.png" /></p>
+<h3 id="to-add-owasp-secure-headers-to-middleware-service-follow-these-steps">To add OWASP Secure Headers to Middleware Service, follow these steps.</h3>
+<ol>
+<li>Sign in to <a href="https://manage.hclvoltmx.com/">Volt MX Foundry Console</a>.</li>
+<li>Select Environments from the left navigation pane.</li>
+<li>Go to Admin Console.</li>
+<li>In Admin Console, select Settings from the left navigation pane.</li>
+<li>In <strong>Settings</strong> &gt; <strong>Runtime Configurations</strong> &gt; <strong>General Configuration</strong> &gt; <strong>Service Custom Response Headers</strong>, add the headers in the following format:</li>
+</ol>
+<pre><code>[{
+    &quot;name&quot;: &quot;Cache-Control&quot;,
+    &quot;value&quot;: &quot;no-cache,no-store,must-revalidate&quot;
+    }, {
+    &quot;name&quot;: &quot;Pragma&quot;,
+    &quot;value&quot;: &quot;no-cache&quot;
+    }, {
+    &quot;name&quot;: &quot;X-Content-Type-Options&quot;,
+    &quot;value&quot;: &quot;nosniff&quot;
+    }, {
+    &quot;name&quot;: &quot;X-Frame-Options&quot;,
+    &quot;value&quot;: &quot;DENY&quot;
+    }, {
+    &quot;name&quot;: &quot;X- XSS-Protection&quot;,
+    &quot;value&quot;: &quot;1; mode=block&quot;
+    }, {
+    &quot;name&quot;: &quot;Expires&quot;,
+    &quot;value&quot;: &quot;0&quot;
+    }, {
+    'name': 'Strict-Transport-Security',
+    'value': 'max-age=86400;includeSubDomains'
+    }]
+</code></pre>
+<p><img alt="" src="Resources/Images/OWASP_Header2_634x379.png" /></p>
+<h2 id="disable-caching-for-sensitive-middleware-services">Disable Caching for Sensitive Middleware Services</h2>
+<p>Most modern browsers and devices store a local cache copy of content received from web servers, unless restricted. Users can also access Cache content through HTTPS. Users having access to a device can retrieve any sensitive information stored in the local cache by other users.</p>
+<p>To avoid storage of sensitive data in cache, applications must contain <strong>caching directives</strong> that instruct browsers to not store local copies of any sensitive data. You can configure the web server to prevent caching for relevant paths within the root directory of the web. Alternatively, most web development platforms allow the user to control the server's caching directives with individual scripts. Ideally, the web server must return the following HTTP headers in all responses that contain sensitive content:</p>
+<ul>
+<li><strong>Cache-control</strong>: no-store</li>
+<li><strong>Pragma</strong>: no-cache</li>
+</ul>
+<h3 id="to-set-the-header-for-volt-mx-foundry-version-v9-sp2-or-earlier-versions-do-the-following">To set the header for Volt MX Foundry version V9 SP2 or earlier versions, do the following:</h3>
+<p>Use custom filters to add cache-control as a response-header</p>
+<ul>
+<li><strong>CacheHeaderResponseWrapper</strong> is a response wrapper that adds the header just before it writes the response to the client.</li>
+<li><strong>CacheHeaderFilter</strong> is the custom filter that uses the <strong>CacheHeaderResponseWrapper</strong> response wrapper and passes it into the filter chain.</li>
+</ul>
+<p>The following code is an example for a custom filter.</p>
+<pre><code> CacheHeaderResponseWrapper.java
+package com.voltmx.custom.filters;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.hcl.voltmx.middleware.common.KHttpServletResponseWrapper;
+
+public class CacheHeaderResponseWrapper extends KHttpServletResponseWrapper {
+private static final Logger LOGGER = LogManager.getLogger(CacheHeaderResponseWrapper.class);
+
+    private ServletOutputStream originalOutputStream;
+    private PrintWriter originalWriter;
+
+    private ServletOutputStream customOutputStream;
+    private PrintWriter customWriter;
+
+    private HttpServletResponse response;
+
+    public CacheHeaderResponseWrapper(HttpServletResponse response) {
+        super(response);
+        this.response = response;
+    }
+
+    @Override
+    public PrintWriter getWriter() throws IOException {
+        if (originalWriter == null) {
+            LOGGER.debug(&quot;Creating a custom writer.&quot;);
+            originalWriter = super.getWriter();
+
+            customWriter = new PrintWriter(originalWriter) {
+
+                @Override
+                public void write(String content) {
+                    addCacheControlHeader();
+                    super.write(content);
+                }
+            };
+        }
+        return customWriter;
+    }
+
+    @Override
+    public ServletOutputStream getOutputStream() throws IOException {
+        if (originalOutputStream == null) {
+            LOGGER.debug(&quot;Creating a custom servlet output stream.&quot;);
+            originalOutputStream = super.getOutputStream();
+
+            customOutputStream = new ServletOutputStream() {
+
+                @Override
+                public void write(int b) throws IOException {
+                    originalOutputStream.write(b);
+                }
+
+                @Override
+                public void flush() throws IOException {
+                    addCacheControlHeader();
+                    super.flush();
+                }
+            };
+        }
+        return customOutputStream;
+    }
+
+    private void addCacheControlHeader() {
+        // Add the required response headers here.
+        response.setHeader(&quot;Cache-control&quot;, &quot;no-store, no-cache, must-revalidate&quot;);
+        response.setHeader(&quot;Pragma&quot;, &quot;no-cache&quot;);
+
+    }
+
+}
+
+CacheHeaderFilter.java
+package com.voltmx.custom.filters;
+
+import java.io.IOException;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.hcl.voltmx.middleware.common.MWConstants;
+import com.hcl.voltmx.middleware.servlet.filters.IntegrationCustomFilter;
+
+@IntegrationCustomFilter(filterOrder = 2, urlPatterns = MWConstants.ANY)
+public class CacheHeaderFilter implements Filter {
+private static final Logger LOGGER = LogManager.getLogger(CacheHeaderFilter.class);
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+        LOGGER.debug(&quot;Loading CacheHeaderFilter.&quot;);
+    }
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+    throws IOException, ServletException {
+        CacheHeaderResponseWrapper responseWrapper = new CacheHeaderResponseWrapper(
+            (HttpServletResponse) response);
+
+        chain.doFilter(request, responseWrapper);
+
+    }
+
+    @Override
+    public void destroy() {}
+
+}
+</code></pre>
+<p>For more information about how to implement a custom filter, refer to <a href="https://support.hcltechsw.com/csm?id=kb_article&amp;sysparm_article=KB0083514">Custom User Filter Guide</a>.</p>
+<p><strong>Setting the header for Volt MX Foundry version V9 SP2 Hotfix version or later versions.</strong></p>
+<p><strong>To add response headers to middleware services, follow these steps.</strong></p>
+<ol>
+<li>Sign in to <a href="https://manage.hclvoltmx.com/">Volt MX Foundry Console</a>.</li>
+<li>Select Environments from the left navigation pane.</li>
+<li>Go to Admin Console.</li>
+<li>In Admin Console, select Settings from the left navigation pane.</li>
+<li>In <strong>Settings</strong> &gt; <strong>Runtime Configurations</strong> &gt; <strong>General Configuration</strong> &gt; <strong>Service Custom Response Headers</strong>, add the headers in the following format:</li>
+</ol>
+<pre><code>[{
+    &quot;name&quot;: &quot;Cache-Control&quot;,
+    &quot;value&quot;: &quot;no-cache,no-store,must-revalidate&quot;
+    }, {
+    &quot;name&quot;: &quot;Pragma&quot;,
+    &quot;value&quot;: &quot;no-cache&quot;
+    }, {
+    &quot;name&quot;: &quot;X-Content-Type-Options&quot;,
+    &quot;value&quot;: &quot;nosniff&quot;
+    }, {
+    &quot;name&quot;: &quot;X-Frame-Options&quot;,
+    &quot;value&quot;: &quot;DENY&quot;
+    }, {
+    &quot;name&quot;: &quot;X- XSS-Protection&quot;,
+    &quot;value&quot;: &quot;1; mode=block&quot;
+    }, {
+    &quot;name&quot;: &quot;Expires&quot;,
+    &quot;value&quot;: &quot;0&quot;
+    }, {
+    'name': 'Strict-Transport-Security',
+    'value': 'max-age=86400;includeSubDomains'
+    }]
+</code></pre>
+<p><img alt="" src="Resources/Images/OWASP_Header2_630x376.png" /></p>
+<h2 id="security-fixes-for-the-external-app-servers">Security Fixes for the External App Servers</h2>
+<p>Enable the following headers along with their mentioned values in Foundry App Servers.</p>
+<table>
+<thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>X-Content-Type-Options</td>
+<td>nosniff</td>
+</tr>
+<tr>
+<td>Strict-Transport-Security</td>
+<td>max-age=31536000; includeSubDomains; preload</td>
+</tr>
+<tr>
+<td>Cache-Control</td>
+<td>private, no-cache, no-store, max-age=0, notransform</td>
+</tr>
+<tr>
+<td>Pragma</td>
+<td>no-cache</td>
+</tr>
+<tr>
+<td>Expires</td>
+<td>0</td>
+</tr>
+<tr>
+<td>X-XSS-Protection</td>
+<td>1; mode= block</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2021 - 2024, HCL America, Inc. | <a href="https://hcltechsw.com/wps/portal/legal/privacy">Privacy Statement</a> | <a href="https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.hcltechsw.com%2Fwps%2Fportal%2Flegal%2Fterms-use&data=04%7C01%7Csuresh.chenji%40hcl.com%7Ca77ebddc51574aff8c6c08d8f056542d%7C189de737c93a4f5a8b686f4ca9941912%7C0%7C0%7C637523600856805537%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&sdata=vLnT466NGuIbvQ0nEwfn2qdXeuhHb6XOnh1pibATDI4%3D&reserved=0">Terms of Use</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+<div class="md-social">
+  <ul class="social-nav">
+    <li><a href="https://www.facebook.com/HCLDigital" class="facebook" target="_blank">Facebook</a></li>
+    <li><a href="https://www.linkedin.com/company/hclsoftware" class="linkedin" target="_blank">LinkedIn</a></li>
+    <li><a href="https://twitter.com/HCLDigital"  class="twitter" target="_blank">Twitter</a></li>
+    <li><a href="https://www.youtube.com/HCLDigitalSolutions" class="youtube" target="_blank">Youtube</a></li>
+    <li>
+      <a href="https://github.com/HCL-TECH-SOFTWARE" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    </li>
+  </ul>    
+</div>
+  </div>
+  <div class="md-footer-meta__inner md-grid">
+  <span class="md-footer__git_legacy">Please report problems with this documentation by <a class="announcement__link" href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/issues">opening issues in Github</a>.</span>
+  <span class="legacy-link md-footer__git_legacy">Can't find a topic? Check the legacy documentation <a class="announcement__link" href="https://opensource.hcltechsw.com/Volt-MX-Documentation-Archive/docs/documentation/" target="_blank">here</a>.</span>
+</span>
+    </div>
+</div>
+    <script>
+      function myFunction95(){
+          var initial_url = document.location.href;
+          var url_stub = initial_url.split( 'docs/documentation' );
+          var fixed_url = url_stub[0]+'95/docs/documentation';
+		  console.log(fixed_url);
+//          var fixed_url = 'https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation'
+          var url = initial_url.split( '/' );
+          var updated_url
+          if ( url[ url.length - 2 ] == "Foundry" || url[ url.length - 2 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 2 ] == "articles" || url[ url.length - 2] == "getting-started" || url[ url.length - 2 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 3 ] == "Foundry" || url[ url.length - 3 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 3 ] == "articles" || url[ url.length - 3 ] == "getting-started" || url[ url.length - 3 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 4 ] == "Foundry" || url[ url.length - 4 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 4 ] == "articles" || url[ url.length - 4 ] == "getting-started" || url[ url.length - 4 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 5 ] == "Foundry" || url[ url.length - 5 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 5 ] == "articles" || url[ url.length - 5 ] == "getting-started" || url[ url.length - 5 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 5 ] + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 6 ] == "Foundry" || url[ url.length - 6 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 6 ] == "articles" || url[ url.length - 6 ] == "getting-started" || url[ url.length - 6 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 6 ] + '/' + url[ url.length - 5 ] + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else{
+            updated_url= fixed_url + '/' + url[ url.length - 1];
+          }
+          window.location.replace(updated_url);
+          }
+    </script>
+
+  
+
+</footer>
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.prune"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>
