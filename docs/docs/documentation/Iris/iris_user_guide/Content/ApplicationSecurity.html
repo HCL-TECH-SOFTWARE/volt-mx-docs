@@ -1,0 +1,2929 @@
+<!-- Elements added to main will be displayed on all pages -->
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/ApplicationSecurity.html">
+      
+      
+        <link rel="prev" href="PublishVoltMXFoundryServicesApp.html">
+      
+      
+        <link rel="next" href="Certificate_Pinning.html">
+      
+      
+      <link rel="icon" href="../../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>Overview - HCL Volt MX Documentation V9.2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/vmx_style.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#apply-application-security" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+<div class="content-types-banner">
+    <ul class="sub-nav">
+        <li class="home-link">
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/index.html"  class="sub-link ">Home</a>
+        </li>
+        <li>
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/tutorials/Tutorials.html" class="sub-link">Tutorials</a>
+        </li>
+        <li>
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/index.html" class="sub-link" id="docLink">Documentation</a>
+        </li>
+        <li>
+            <a href="https://support.hcltechsw.com/csm?id=kb_search&spa=1&kb_category=db382ff1db631c14a45ad9fcd3961936" title="Articles" class="sub-link">Articles</a>
+        </li>
+        <li>
+            <a href="https://hclsoftwareu.hcltechsw.com/#VoltMxLearningJourneys" title="Articles" class="sub-link">Software Academy</a>
+        </li>
+        <li style="float:right">
+          <button onclick="myFunction95()" style="color:white; border-radius:5px ;padding:5px 10px 5px 10px; border: 2px solid white;" class="sub-link" id="docLink92">Switch to V9.5</button>
+      </li>
+    </ul>
+</div>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="HCL Volt MX Documentation V9.2" class="md-header__button md-logo" aria-label="HCL Volt MX Documentation V9.2" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HCL Volt MX Documentation V9.2
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Overview
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    HCL-TECH-SOFTWARE/volt-mx-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="HCL Volt MX Documentation V9.2" class="md-nav__button md-logo" aria-label="HCL Volt MX Documentation V9.2" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.png" alt="logo">
+
+    </a>
+    HCL Volt MX Documentation V9.2
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    HCL-TECH-SOFTWARE/volt-mx-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Introducing Volt MX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Introducing Volt MX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducing Volt MX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../Whats_New_Main_Page.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    What&apos;s New
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../VMX_release_notes.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Release Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../app_platform/Content/AppPlatform_Overview.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    App Platform
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../tutorials/Tutorials.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Tutorials
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Foundry/installationGuides.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation Guides
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_7" id="__nav_1_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Iris
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_7">
+            <span class="md-nav__icon md-icon"></span>
+            Iris
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voltmxIrisFundamentals.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../installing_iris.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Installing Iris
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../iris_tutorials/Content/Introduction.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Iris tutorials
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_7_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_7_4" id="__nav_1_7_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Iris User Guide
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_7_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_7_4">
+            <span class="md-nav__icon md-icon"></span>
+            Iris User Guide
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Introduction.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Mobile_Channels.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Supported Digital Channels
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Hikes.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hikes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Third-Party_Licenses.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Third-Party Licenses
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="Part_I__Overview.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Configuring Your Computer
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="Part_II_CreatingAnApplication.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Designing an Application
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="C_DesigningWorkingWithComponents.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Creating Applications with Components
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_7_4_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_7_4_8" id="__nav_1_7_4_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Adding Functionality
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_7_4_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_7_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            Adding Functionality
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PartIII_Adding_functionality.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="Connecting_to_Services.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Connect to Services
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="DataPanel_Master_Page.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Connect to Back-End Services by using Data & Services Panel
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="SEOforSPA.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Search Engine Optimization for Web Apps
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PublishVoltMXFoundryServicesApp.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Publish a Project to Volt MX Foundry
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_7_4_8_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_7_4_8_6" id="__nav_1_7_4_8_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Apply Application Security
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_1_7_4_8_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_7_4_8_6">
+            <span class="md-nav__icon md-icon"></span>
+            Apply Application Security
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="ApplicationSecurity.html" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#build-runtime-security-in-the-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      Build Runtime Security in the Application
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#protect-the-application-binaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Protect the Application Binaries
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Protect the Application Binaries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#protection-mechanisms-provided-by-volt-mx-iris" class="md-nav__link">
+    <span class="md-ellipsis">
+      Protection Mechanisms Provided by Volt MX Iris
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rsa-key-pair-generation-encryption-and-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      RSA Key Pair Generation, Encryption and Usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-project-settings-in-volt-mx-iris" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure Project Settings in Volt MX Iris
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#impact-on-apps-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impact on App's Performance
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-security-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Application Security Guidelines
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Application Security Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-at-rest" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data at Rest
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-protection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Protection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database Security
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input Validation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Output Encoding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-in-transit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data in Transit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authentication
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#session-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Session Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#access-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Access Control
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-handling-and-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Handling and Logging
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Management
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jailbroken-and-rooted-device-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Jailbroken and Rooted Device Detection
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Jailbroken and Rooted Device Detection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#android" class="md-nav__link">
+    <span class="md-ellipsis">
+      Android
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ios" class="md-nav__link">
+    <span class="md-ellipsis">
+      iOS
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ApplicationSecurity.html#build-runtime-security-in-the-application" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Build Runtime Security in the Application
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Certificate_Pinning.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Certificate Pinning
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Public_Key_Pinning.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Public Key Pinning
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="ApplicationSecurity.html#protect-the-application-binaries" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Protect the Application Binaries
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="DisableScreenCaptureAndRecordingForAndroid.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Disable Screen Capture and Recording for Android
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="DisableScreenCaptureAndRecordingForWindows.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Disable Screen Capture and Recording for Windows Phone
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ApplicationSecurity.html#impact-on-app-39-s-performance" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Impact on App Performance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ApplicationSecurity.html#application-security-guidelines" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Application Security Guidelines
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ApplicationSecurity.html#jailbroken-and-rooted-device-detection" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jailbroken and Rooted Device Detection
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Developing_Offline_Applications.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Develop Offline Applications
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="BuildingAndViewAnApp.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Building and Viewing an Application
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="TestingandDebugginganApplication.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Testing and Debugging an Application
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="Internationalization.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Appendix A&colon; Internationalization
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Inputs_to_Android_Application_Developers.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Appendix B&colon; Android Build Environment and Configurations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Generating_Map_Keys.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Appendix C&colon; Generating and Configuring Map API Keys
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="AppServiceEvent.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Appendix D&colon; The App Service Event
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="CameraAccessAndroidBrowser.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Appendix E&colon; Camera Access in Android Browser
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Support_for_iPhoneX.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Appendix F&colon; Support for iPhone X
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Universal_Links.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Appendix G&colon; Universal Links iOS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="FAQs.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Frequently Asked Questions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../app_design_dev/Content/homepage.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Application Design and Development Guidelines
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../iris_api_dev_guide/content/introduction.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Volt Iris API Developers Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../iris_nf_api_dev_guide/content/native_function_api_developers__guide.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Native Function API Developers Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../iris_widget_prog_guide/Content/Overview.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Iris Widget Programmer Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../iris_wearables_dev_guide/content/homehtml.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Iris Wearables Developer Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../iris_app_viewer/Content/Overview.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Using the Volt MX App
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../voltmx_ref_arch_api/Content/VoltMX_Reference_Architecture_Guide.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Volt MX Reference Architecture Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../Foundry/voltmxFoundryFundamentals.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Foundry
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#build-runtime-security-in-the-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      Build Runtime Security in the Application
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#protect-the-application-binaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Protect the Application Binaries
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Protect the Application Binaries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#protection-mechanisms-provided-by-volt-mx-iris" class="md-nav__link">
+    <span class="md-ellipsis">
+      Protection Mechanisms Provided by Volt MX Iris
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rsa-key-pair-generation-encryption-and-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      RSA Key Pair Generation, Encryption and Usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-project-settings-in-volt-mx-iris" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure Project Settings in Volt MX Iris
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#impact-on-apps-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impact on App's Performance
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-security-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Application Security Guidelines
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Application Security Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-at-rest" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data at Rest
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-protection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Protection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database Security
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input Validation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Output Encoding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-in-transit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data in Transit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authentication
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#session-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Session Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#access-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Access Control
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-handling-and-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Handling and Logging
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Management
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jailbroken-and-rooted-device-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Jailbroken and Rooted Device Detection
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Jailbroken and Rooted Device Detection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#android" class="md-nav__link">
+    <span class="md-ellipsis">
+      Android
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ios" class="md-nav__link">
+    <span class="md-ellipsis">
+      iOS
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="apply-application-security">Apply Application Security</h1>
+<p id="Key"></p>
+
+<p>Volt MX  Iris protects all applications using methods like design time security, critical business logic security, and on-device encryption. All the applications developed through Volt MX Iris are compliant with Payment Card Industry Data Security Standard (PCI DSS), HIPAA/HITECH, SOC2 Type II, ISO 270001:2013, and address OWASP top 10 mobile vulnerabilities, support Single Sign-On (SSO), and Multi-Factor Authentication (MFA), Federal Information Processing System (FIPS) 140-2. Standards followed by Volt MX Iris adhere to Microsoft Security Development Lifecycle (SDLC) for product development, Open Web Application Security Project (OWASP) for secure coding and testing, Web Application Security Consortium (WASC) guidelines for threat modeling, coding, and testing, and follow Application Security Verification Standard (ASVS) for testing security controls.</p>
+<p>For enhanced security, Volt MX provides strong application protection solutions by using anti-tampering mechanisms, White Box Cryptography (WBC), Cryptography and Encryption APIs, and also can secure network communications. Following are two methods you can use to enhance security in your application.</p>
+<ul>
+<li><strong>VoltMX APIs</strong> - You can make your application more secure by protecting the data in your application using the security APIs provided by Volt MX Iris. Data can be encrypted using <a href="../../iris_api_dev_guide/content/cryptography.html">Cryptography APIs</a>, offline data can be encrypted and stored using <a href="../../iris_api_dev_guide/content/data_store_library.html">SQL Database Encryption APIs</a>, and network communications can be secured using two-way SSL/Mutual Authentication (SSL Pinning + Client Authentication).</li>
+<li><strong>Protected Mode option</strong> - Applications built in Volt MX Iris can use the additional security enhancements by building the application in the <em>Protected Mode</em>. Volt MX Iris Platform code for iOS and Android is equipped with mechanisms that can protect your application by detecting attacks like tampering, swizzling, debugging, jail breaking (iOS), rooting (Android), and information disclosure. Additional security mechanisms are provided through the use of White Box Cryptography to protect application business logic and source code. Application reacts to the attack by exiting upon detecting attacks to prevent further attempts.</li>
+</ul>
+<p>This topic covers the following:</p>
+<p><a href="#build-runtime-security-in-the-application">Build Runtime Security in the Application</a></p>
+<p><a href="#protect-the-application-binaries">Protect the Application Binaries</a></p>
+<p><a href="#protection-mechanisms-provided-by-volt-mx-iris">Protection Mechanisms Provided by Volt MX Iris</a></p>
+<p><a href="#rsakey-pair-generation-encryption-and-usage">RSA Public/Private Key Pair Generation, Encryption, and Usage</a></p>
+<p><a href="#configure-project-settings-in-volt-mx-iris">Configure Project Settings in Volt MX Iris</a></p>
+<p><a href="#impact-onapps-performance">Impact on App's Performance</a></p>
+<p><a href="#application-security-guidelines">Application Security Guidelines</a></p>
+<h2 id="build-runtime-security-in-the-application">Build Runtime Security in the Application</h2>
+<p>You can build runtime security in your application using the following Volt MX Iris features and API's: </p>
+<ul>
+<li>Data can be encrypted using <a href="../../iris_api_dev_guide/content/cryptography.html">Cryptography APIs</a>.</li>
+<li>Offline data can be encrypted and stored in <a href="../../iris_api_dev_guide/content/data_store_library.html">SQL Database Encryption APIs</a>.</li>
+<li>Network communications can be secured using <strong><a href="../../iris_api_dev_guide/content/client-authentication.html">Two-way SSL/Mutual Authentication</a> (SSL Pinning + Client Authentication)</strong> which defends against man-in-the-middle attacks by authenticating both the client and server to each other.<ul>
+<li><strong>SSL Pinning</strong> - This extra feature authenticates the server to which the application is communicating. For more information, see Allow Self-Signed Certificates (<a href="Native_App_Properties.html#AllowSelfSignedCertis">Android</a>, <a href="Native_App_Properties.html#SelfSignedCerti_iOS">iOS</a>).</li>
+<li><strong>Client Authentication</strong> - This extra security feature uses a certificate to authenticate a client to a server.</li>
+</ul>
+</li>
+</ul>
+<p><strong>SSL Pinning - Windows Limitation</strong></p>
+<p>For Windows devices, when SSL pinning is implemented, and the HTTPRequest initiates, if a Man in the Middle (MitM) attack accesses the HttpRequest (for example, fiddler), the HttpRequest goes to the server through the MitM and comes with a response. However, the client does not receive the response as the MitM attack corrupts the certificate of the response during the communication process. This applies to all windows channels.</p>
+<p>In case of Android and iOS platforms, if there is a MitM attach, the HttpRequest aborts.</p>
+<h2 id="protect-the-application-binaries">Protect the Application Binaries</h2>
+<p>In Volt MX Iris, <a href="#configure-project-settings-in-volt-mx-iris"><em>Protected Mode</em> option</a> enables several security features that secure the binary at build time by including multiple self-protection security mechanisms. To use the option, enable the <strong>Protected Mode</strong> check box in the <strong>Project Settings</strong> dialog. If an application attack is observed, the security mechanism exits the application.</p>
+<p>In this section, you will learn about: </p>
+<ol>
+<li><a href="#protection-mechanisms-provided-by-volt-mx-iris">Protection Mechanisms Provided by Volt MX Iris</a></li>
+<li><a href="#rsakey-pair-generation-encryption-and-usage">RSA Key Pair Generation, Encryption, and Usage</a></li>
+</ol>
+<h3 id="protection-mechanisms-provided-by-volt-mx-iris">Protection Mechanisms Provided by Volt MX Iris</h3>
+<p>Volt MX  provides the following application and code-level mechanisms to protect your application: </p>
+<ol>
+<li><strong>Anti-tamper Protection</strong> - Following are the application self-protection security mechanisms used by Volt MX Iris that react by exiting application on detecting an attack: <ul>
+<li><strong>Tamper Protection</strong> - Fights against application compromise by detecting modifications in the application.</li>
+<li><strong>Jailbreak / Root detection</strong> – Resists runtime attacks by preventing app from running on a rooted or jailbroken device. For more information on, click <a href="#jailbroken-and-rooted-device-detection">here</a>.</li>
+<li><strong>Swizzling detection</strong> – Prevents the abuse/misuse of the swizzling feature to override methods at runtime. This attack is specific to Objective C in iOS.</li>
+<li><strong>Anti-debugging</strong> - Prevents debugging of a production application to prevent attackers from analyzing the application at runtime.</li>
+</ul>
+</li>
+<li><strong>Protecting Cryptographic Keys using White Box Cryptography (WBC)</strong> - Cryptographic keys are critical to securing systems such as applications and communications, and therefore must be protected at all times. Volt MX provides powerful secure cryptographic capability beyond the native operating system’s capabilities. VoltMX's encryption and decryption uses a secure process known as White Box Cryptography to perform encryption and decryption while keeping the keys safe. The keys are never present in static form or in memory at runtime. WBC is a secure implementation of cryptographic algorithms in a system that employs cryptographic algorithm and keys. Strong algorithms are used for encryption and decryption, insecure, and deprecated algorithms are not used.</li>
+</ol>
+<h3 id="rsa-key-pair-generation-encryption-and-usage">RSA Key Pair Generation, Encryption and Usage</h3>
+<p>Prerequisites</p>
+<p>For OpenSSL command to work, for the Windows environment, you can use a couple of different third-party tools, such as Git Bash, which is available <a href="https://git-scm.com/download/win">here</a>, and Cygwin, which is available <a href="https://cygwin.com/install.html">here</a>.</p>
+<p>To generate, encrypt, and use the RSA key pair, follow these steps: </p>
+<ol>
+<li>Open a terminal (Git Bash or Cygwin terminal in Windows ) and type <strong>openssl</strong>. </li>
+<li>
+<p>Generate RSA public/private key pair using OpenSSL.</p>
+<p>Recently the cygwin and git bash tools were using the upgraded version of openssl ie 3.0 .The expected format as shown is of pkcs1 format of generating pem files using openssl. From openssl 3.0 and higher versions by default it generates pkcs8 encoded format , so in order to generate required pkcs1 format we have to first convert the generated encoded pkcs8 private key to pkcs1 using openssl and generate public key. Below are the steps for the same.</p>
+<p>a.  openssl genrsa -out private.pem -verbose 2048. // generates pkcs8 format. </p>
+<p>openssl genrsa -out private_key.pem 2048</p>
+<p>b.  openssl pkey -in private.pem -traditional -out private_key.pem.   // generates pkcs1 format.</p>
+<pre><code>openssl rsa -pubout -in private_key.pem -out public_key.pem
+</code></pre>
+<p>c.  openssl rsa -in private_key.pem -pubout -traditional -out public_key.pem // generate publickey from pkcs1 format key. 
+    <code>openssl rsa -text -in private_key.pem</code></p>
+<p>d.  openssl rsa -in public_key.pem -pubin -text.</p>
+<pre><code>i.  less private_key.pem to verify that it starts with a -----BEGIN RSA PRIVATE KEY-----.
+
+ii.  less public_key.pem to verify that it starts with a -----BEGIN PUBLIC KEY——.
+</code></pre>
+<ol>
+<li>Engage support public key and Volt MX Iris version. This step is applicable for Android, iOS platforms, and responsive Web/SPA platform. </li>
+</ol>
+<blockquote>
+<p><strong><em>Important:</em></strong> Public key must not be shared with anyone except Volt MX.</p>
+</blockquote>
+</li>
+<li>
+<p>For Android and iOS platforms, VoltMX's security team validates the details and encrypts your public key.<br />
+    For the Responsive Web/SPA platform, VoltMX's security team validates the information and shares the unique <strong>clientID</strong> and <strong>clientSecret</strong> through email. You must then use these details to <a href="BuildAnSPAApplication.html#securing-your-web-applications">create a postbuild task</a>.</p>
+</li>
+<li>
+<p>VoltMX's security team then returns the encrypted public key to you through email.</p>
+<blockquote>
+<p><strong><em>Important:</em></strong> You must not share your private key with anyone including Volt MX. In case of a key compromise for the Android, iOS and Responsive Web/SPA platforms, generate a new set of keys and send the public key to <a href="mailto:voltmxlicensing@hcl-software.com.?subject=Keys">voltmxlicensing@hcl-software.com</a>. </p>
+</blockquote>
+</li>
+<li>
+<p>Navigate to your Volt MX Iris workspace and create a <strong>__encryptionkeys</strong> folder.</p>
+</li>
+<li>
+<p>Place the following keys received from Volt MX in <strong>__encryptionkeys</strong> folder.</p>
+<p>a.  Your private key. The private key must be named as <code>private_key.pem</code>.</p>
+<p>b.  Encrypted public keys provided by Volt MX Iris.</p>
+</li>
+</ol>
+<h3 id="configure-project-settings-in-volt-mx-iris">Configure Project Settings in Volt MX Iris</h3>
+<p>To enable Protected Mode in Project Settings, follow these steps:</p>
+<ol>
+<li>In Volt MX Iris, got to <strong>Project</strong> &gt; <strong>Settings</strong>.<br />
+    The Project Settings window appears.</li>
+<li>Click <strong>Protected Mode</strong>.</li>
+<li>Under Encryption Keys, provide the <strong>Public Key</strong> and the <strong>Private Key</strong>.<br />
+    You can read the information on the screen on how to procure the keys.</li>
+<li>
+<p>Click <strong>Finish</strong>.</p>
+</li>
+<li>
+<p>From the <strong>Build</strong> menu, select <strong>Build and Publish Native</strong> .<br />
+    The <strong>Build and Publish Native</strong> dialog box appears.</p>
+</li>
+<li>Select the required channels and platforms.</li>
+<li>
+<p>In the <strong>Build Mode</strong> drop-down list, click <strong>Protected</strong>.  </p>
+<p><img alt="" src="Resources/Images/Build_Generation_for_Sample.PNG" /></p>
+</li>
+<li>
+<p>Click <strong>Build</strong>.</p>
+</li>
+</ol>
+<h2 id="impact-on-apps-performance">Impact on App's Performance</h2>
+<p>While enabling security features in your application ensures attacks are prevented, your application's start-up time may slow. Following image provides you insight on the performance hit if you enable the <em>Protected Mode</em> option.</p>
+<p><img alt="" src="Resources/Images/AppPerformanceiOS.png" /></p>
+<p><img alt="" src="Resources/Images/AppPerformanceAndroid.png" /></p>
+<h2 id="application-security-guidelines">Application Security Guidelines</h2>
+<p>It is recommended that you follow the security guidelines to ensure the application is fully protected.</p>
+<ol>
+<li><a href="#data-at-rest">Data at Rest</a></li>
+<li><a href="#data-protection">Data Protection</a></li>
+<li><a href="#database-security">Database Security</a></li>
+<li><a href="#input-validation">Input Validation</a></li>
+<li><a href="#output-encoding">Output Encoding</a></li>
+<li><a href="#data-in-transit">Data in Transit</a></li>
+<li><a href="#authentication">Authentication</a></li>
+<li><a href="#session-management">Session Management</a></li>
+<li><a href="#access-control">Access Control</a></li>
+<li><a href="#error-handling-and-logging">Error Handling and Logging</a></li>
+<li><a href="#file-management">File Management</a></li>
+</ol>
+<h3 id="data-at-rest">Data at Rest</h3>
+<ul>
+<li>Do not store sensitive information on a device (especially on jailbroken and rooted devices).</li>
+<li>Avoid hard coding sensitive data (cryptographic keys, passwords).</li>
+<li>Consider removing any data stored and cached on the device when a user logs out of the application or removes application from the device.</li>
+</ul>
+<blockquote>
+<p><strong><em>Note:</em></strong> If data must be stored, ensure that it is encrypted by leveraging VoltMX’s Cryptographic APIs. In addition, Volt MX Iris recommends building the application in <em>Protected Mode</em> for additional protection of the binary. Although Volt MX provides many security features and layers of defense, we cannot guarantee that your application will remain secure if best practices and secure design principles are not followed.</p>
+</blockquote>
+<h3 id="data-protection">Data Protection</h3>
+<ul>
+<li>Protect server-side source code from being downloaded by a user.</li>
+<li>Do not store passwords, connection strings, or other sensitive information in clear text or in any non-cryptographically secure manner on the client side. This includes embedding in insecure formats like Microsoft Viewstate, Adobe Flash, or compiled code.</li>
+<li>Remove comments in user accessible production code that may reveal back-end system or other sensitive information.</li>
+<li>Remove debug code and functionality from production code.</li>
+<li>Do not include sensitive information in HTTP GET request parameters.</li>
+<li>Disable autocomplete features on forms containing sensitive information including authentication.</li>
+<li>Disable client side caching on pages containing sensitive information. Cache-Control - no-store, may be used in conjunction with the HTTP header control <em>Pragma: no-cache</em>, which is less effective, but is HTTP/1.0 backward compatible.</li>
+<li>The application should support the removal of sensitive data when the data is no longer required. (personal information or certain financial data), such as upon a logout.</li>
+</ul>
+<h3 id="database-security">Database Security</h3>
+<ul>
+<li>Use strongly typed parameterized queries.</li>
+<li>Use input validation and output encoding and ensure you address meta characters. If these fail, do not run the database command.</li>
+<li>Ensure that variables are strongly typed.</li>
+<li>The application should use the lowest possible level of privilege when accessing the database.</li>
+<li>Ensure that only cryptographically strong one-way salted hashes of passwords are stored and that the table/file that stores the passwords and keys is write-able only by the application. (Do not use the MD5 algorithm if it can be avoided)</li>
+</ul>
+<h3 id="input-validation">Input Validation</h3>
+<ul>
+<li>Identify all data sources and classify them into trusted and untrusted. Validate all data from untrusted sources (for example, databases, file streams, and so on.)</li>
+<li>There should be a centralized input validation routine for an application.</li>
+<li>Specify proper character sets, such as UTF-8, for all sources of input.</li>
+<li>Encode data to a common character set before validating (canonicalize).</li>
+<li>All validation failures should result in input rejection.</li>
+<li>Determine if the system supports UTF-8 extended character sets. If so, validate after UTF-8 decoding is completed.</li>
+<li>Validate all client provided data before processing, including all parameters, URLs and HTTP header content (for example, cookie names and values). Include automated postbacks from JavaScript, Flash, or other embedded code.</li>
+<li>Verify that header values in both requests and responses contain only ASCII characters.</li>
+<li>Validate data from redirects (an attacker may submit malicious content directly to the target of the redirect, thus circumventing application logic and any validation performed before the redirect).</li>
+<li>Validate for expected data types.</li>
+<li>Validate data range.</li>
+<li>Validate data length.</li>
+<li>Validate all input against a white list of allowed characters, when possible.</li>
+<li>If any potentially hazardous characters must be allowed as input, implement additional controls like output encoding and secure task-specific APIs. You should also account for the use of data throughout the application . Examples of common hazardous characters include:</li>
+</ul>
+<p>&lt; &gt; " ' % ( ) &amp; + \ \' \"</p>
+<ul>
+<li>If your standard validation routine cannot address the following inputs, then they should be checked discretely<ul>
+<li>Check for null bytes (%00).</li>
+<li>Check for new line characters (%0d, %0a, \r, \n).</li>
+<li>Check for <em>dot-dot-slash" (../ or ..\)</em> path alterations characters. In cases where UTF-8 extended character set encoding is supported, address alternate representation like <code>%c0%ae%c0%ae/</code>. Utilize canonicalization to address double encoding or other forms of obfuscation attacks.</li>
+</ul>
+</li>
+</ul>
+<h3 id="output-encoding">Output Encoding</h3>
+<ul>
+<li>Conduct all encoding on a trusted system (for example, the server)</li>
+<li>Use a standard, tested routine for each type of outbound encoding.</li>
+<li>Contextually output encode all data returned to the client that originated outside the application's trust boundary. HTML entity encoding is one example, but does not work in all cases.</li>
+<li>Encode all characters unless they are known to be safe for the intended interpreter.</li>
+<li>Contextually sanitize all output of untrusted data to queries for SQL, XML, and LDAP.</li>
+<li>Sanitize all output of untrusted data to operating system commands.</li>
+</ul>
+<h3 id="data-in-transit">Data in Transit</h3>
+<ul>
+<li>Implement encryption for the transmission of all sensitive information. This should include TLS for protecting the connection and may be supplemented by discrete encryption of sensitive files or non-HTTP connections.</li>
+<li>TLS certificates should be valid and have the correct domain name. The certificates also should be current and be installed with intermediate certificates when required.</li>
+<li>Failed TLS connections should not fall back to an insecure connection.</li>
+<li>Use TLS for connections to external systems that involve sensitive information or functions.</li>
+<li>Use a single standard TLS implementation that is configured appropriately.</li>
+<li>Use TLS connections for all content requiring authenticated access and for all other sensitive information.<ul>
+<li>If SSL/TLS is used, do not mix use of encrypted and unencrypted communication (i.e. do not use HTTP and HTTPS in the application) because you may inadvertently disclose information over an unencrypted channel.</li>
+</ul>
+</li>
+<li>Use mutual authentication (Two-Way SSL) to mitigate man-in-the-middle attacks.</li>
+<li>Use certificate and public key pinning (<a href="https://www.owasp.org/index.php/Certificate_and_Public_Key_Pinning">https://www.owasp.org/index.php/Certificate_and_Public_Key_Pinning</a>) to mitigate man-in-the-middle attacks.</li>
+<li>Specify character encodings for all connections.</li>
+<li>Filter parameters containing sensitive information from the HTTP referer, when linking to external sites.</li>
+</ul>
+<blockquote>
+<p><strong><em>Note:</em></strong> If certificate pinning is used, be aware that when the SSL certificate expires or is revoked, a timely application update is required to ensure that users can communicate with the server and avoid interrupted service. Plan an application update for updating certificates.</p>
+</blockquote>
+<h3 id="authentication">Authentication</h3>
+<ul>
+<li>Authenticate each API call and resource.</li>
+<li>Authentication failure responses should not indicate which part of the authentication data is incorrect. For example, instead of Invalid username or Invalid password, just use Invalid username and/or password for both. Error responses must be identical in both display and source code.</li>
+<li>Use only HTTP POST requests to transmit authentication credentials.</li>
+<li>Enforce password complexity requirements established by policy or regulation. Authentication credentials should be sufficient to withstand attacks that are typical of the threats in the deployed environment. (requiring alphanumeric and/or special characters).</li>
+<li>Enforce password length requirements established by policy or regulation. Eight characters is commonly used, but 16 is better. Also, consider the use of multi-word pass phrases.</li>
+<li>Password entry should be obscured on the user's screen. (for example, on web forms use the input type password).</li>
+<li>Enforce account disabling after an established number of invalid login attempts (for example, a limit of five attempts is common). The account must be disabled for a period of time sufficient to discourage brute-force guessing of credentials, but not so long as to allow for a denial-of-service attack to be performed.</li>
+<li>Password reset and changing operations require the same level of controls as account creation and authentication.</li>
+<li>If using email-based resets, only send email to a pre-registered address with a temporary link/password.</li>
+<li>Temporary passwords and links should have a short expiration time.</li>
+<li>Enforce the changing of temporary passwords on the next use.</li>
+<li>Notify users when a password reset occurs.</li>
+<li>Prevent re-use of passwords.</li>
+<li>Disable <em>Remember Me</em> functionality for password fields.</li>
+<li>The last use (successful or unsuccessful) of a user account should be reported to the user upon the next successful log-in.</li>
+<li>Re-authenticate users before performing critical operations.</li>
+<li>Use multi-factor authentication for highly sensitive or high value transactional accounts.</li>
+<li>If using third-party code for authentication, inspect the code carefully for malicious code.</li>
+</ul>
+<h3 id="session-management">Session Management</h3>
+<ul>
+<li>Use the server or framework’s session management controls. The application should only recognize the session identifiers as valid.</li>
+<li>Log-out functionality should be available from all pages protected by authorization.</li>
+<li>Set the domain and path for cookies containing authenticated session identifiers to an appropriately restricted value for the site.</li>
+<li>Session management controls should use well-vetted algorithms that ensure sufficiently random session identifiers.</li>
+<li>Establish a session-inactivity timeout that is as short as possible, based on balancing risk and business functional requirements. In most cases, the timeout should be no more than several hours.</li>
+<li>Disallow persistent log-ins and enforce periodic session terminations, even when the session is active. Especially for applications supporting rich network connections or connecting to critical systems. Termination times should support business requirements, and a user should receive sufficient notification to lessen negative impacts.</li>
+<li>If a session was established before log-in, close that session and establish a new session after a successful log-in.</li>
+<li>Generate a new session identifier on any re-authentication.</li>
+<li>Do not allow concurrent log-ins with the same user ID.</li>
+<li>Do not expose session identifiers in URLs, error messages, or logs. Session identifiers should only be located in the HTTP cookie header. For example, do not pass session identifiers as GET parameters.</li>
+<li>Periodically generate a new session identifier if the connection security changes from HTTP to HTTPS, as can occur during authentication. Within an application, it is recommended to consistently use HTTPS rather than switching between HTTP to HTTPS.</li>
+<li>Generate a new session identifier and deactivate the old one periodically. (This action can mitigate certain session hijacking scenarios where the original identifier was compromised).</li>
+<li>Set HttpOnly (<a href="https://www.owasp.org/index.php/HttpOnly">https://www.owasp.org/index.php/HttpOnly</a>) attributes on all cookies.</li>
+<li>Set the <code>secure</code> attribute for cookies transmitted over a TLS connection. <a href="https://owasp.org/www-community/controls/SecureCookieAttribute">https://www.owasp.org/index.php/SecureFlag</a></li>
+</ul>
+<h3 id="access-control">Access Control</h3>
+<ul>
+<li>Access controls should fail securely.</li>
+<li>Deny all access if the application cannot access its security configuration information.</li>
+<li>Enforce authorization controls on every request, including those made by server-side scripts, includes, and requests from rich client-side technologies like AJAX and Flash.</li>
+<li>Segregate privileged logic from other application code.</li>
+<li>Restrict access to files or other resources, including those outside the application's direct control, to only authorized users.</li>
+<li>Restrict access to protected URLs to only authorized users.</li>
+<li>Restrict access to protected functions to only authorized users.</li>
+<li>Restrict direct object references to only authorized users.</li>
+<li>Restrict access to services to only authorized users.</li>
+<li>Restrict access to application data to only authorized users.</li>
+<li>Restrict access to user and data attributes, and policy information used by access controls.</li>
+<li>Restrict access to security-relevant configuration information to only authorized users.</li>
+<li>Server-side implementation and presentation layer representations of access control rules must match.</li>
+<li>If state data must be stored on the client, use encryption and integrity checking on the server side to catch state tampering.</li>
+<li>Enforce application logic flows to comply with business rules.</li>
+<li>Limit the number of transactions a single user or device can perform in a given period of time. The transactions/time should be above the actual business requirement, but low enough to deter automated attacks.</li>
+<li>Use the referer header as a supplemental check only. The referer header should never be the sole authorization check, because it can be spoofed.</li>
+<li>If long authenticated sessions are allowed, periodically re-validate a user’s authorization to ensure that the user's privileges have not changed. If the privileges have changed, log the user out and force the user to re-authenticate.</li>
+<li>Implement account auditing and enforce the disabling of unused accounts. (for example, after no more than 30 days from the expiration of an account’s password).</li>
+<li>An application must support disabling of accounts and terminating sessions when authorization ceases. (for example, changes to role, employment status, business process, and so on).</li>
+</ul>
+<h3 id="error-handling-and-logging">Error Handling and Logging</h3>
+<ul>
+<li>Do not disclose sensitive information , such as system details, session identifiers or account information,</li>
+<li>Use error handlers that do not display debugging or stack trace information.</li>
+<li>Implement generic error messages, and use custom error pages.</li>
+<li>An application should handle application errors and not rely on the server configuration.</li>
+<li>Properly free allocated memory when error conditions occur.</li>
+<li>Error handling logic associated with security controls should deny access by default.</li>
+<li>
+<p>All logging controls should be implemented on a trusted system (that is the server)</p>
+<ul>
+<li>Logging controls should support successes and failures of specified security events.</li>
+<li>Ensure logs contain important log event data.</li>
+<li>
+<p>Ensure log entries that include un-trusted data will not execute as code in the intended log viewing interface or software.</p>
+</li>
+<li>
+<p>Restrict access to logs to only authorized individuals.</p>
+</li>
+<li>Use a master routine for all logging operations.</li>
+<li>Do not store sensitive information in logs, including unnecessary system details, session identifiers, or passwords.</li>
+<li>Ensure that a mechanism exists to conduct log analysis.</li>
+<li>Log all input validation failures.</li>
+<li>Log all authentication attempts, especially failures.</li>
+<li>Log all access control failures.</li>
+<li>Log all apparent tampering events, including unexpected changes to state data.</li>
+<li>Log attempts to connect with invalid or expired session tokens.</li>
+<li>Log all system exceptions.</li>
+<li>Log all administrative functions, including changes to the security configuration settings.</li>
+<li>Log all back-end TLS connection failures.</li>
+<li>Log cryptographic module failures.</li>
+<li>Use a cryptographic hash function to validate log entry integrity.</li>
+</ul>
+</li>
+</ul>
+<h3 id="file-management">File Management</h3>
+<ul>
+<li>Require authentication before allowing a file to be uploaded.</li>
+<li>Limit the type of files that can be uploaded to only those types that are needed for business purposes.</li>
+<li>Validate uploaded files are the expected type by checking file headers. Checking for file type by extension alone is not sufficient.</li>
+<li>Do not save files in the same web context as the application. Files should either go to the content server or in the database.</li>
+<li>Prevent or restrict the uploading of any file that may be interpreted by the web server.</li>
+<li>Turn off execution privileges on file upload directories.</li>
+<li>When referencing existing files, use a white list of allowed file names and types. Validate the value of the parameter being passed, if the value does not match one of the expected values, either reject it or use a hard-coded default file value for the content instead.</li>
+<li>Do not pass directory or file paths, use index values mapped to pre-defined list of paths.</li>
+<li>Never send the absolute file path to a client.</li>
+<li>Ensure application files and resources are read only.</li>
+<li>Scan user uploaded files for viruses and malware.</li>
+</ul>
+<blockquote>
+<p><strong><em>Note:</em></strong> For a more comprehensive list, Volt MX Iris recommends the secure coding checklists and best practices maintained by the <a href="https://www.owasp.org/index.php/OWASP_Cheat_Sheet_Series">Open Web Application Security Project (OWASP)</a>.</p>
+</blockquote>
+<h2 id="jailbroken-and-rooted-device-detection">Jailbroken and Rooted Device Detection</h2>
+<h3 id="android">Android</h3>
+<p>On Android devices, root detection dialog displays when the app is launched in the foreground. The detection happens through the Volt MX Iris auto-generated launcher activity using VoltMXMain. If a user writes custom activities using FFI and Framework, root detection does not happen.</p>
+<p>If an app is triggered by background sources (Push, GeoFence, SMS, etc.,) root detection dialog does not display. However, a process is created in the background for this app with no application data loaded in memory.</p>
+<p><strong>Default Error Message</strong>: This device does not meet the minimum security requirements for this application. Please contact the app publisher for more details. The application will exit when you press OK.</p>
+<p>You can modify the <strong>Default Error Message</strong> using the i18N string defined with key ROOT_DETECTION_MESSAGE. If you do not have an i18n string, default standard error message appears.</p>
+<p>Iris tries to respect the i18N key defined in a locale which matches current device locale and then the i18N key defined in a locale which matches Iris/IDE set default locale and then the Default Error Message in order of preference.</p>
+<p>The following APIs are not respected as they are available only when JavaScript is loaded and JavaScript is never loaded when rooting of a device is detected.</p>
+<ul>
+<li>voltmx.i18n.setCurrentLocaleAsync</li>
+<li>voltmx.i18n.setDefaultLocaleAsync</li>
+</ul>
+<blockquote>
+<p><strong><em>Important:</em></strong> You must define your locate specific error message with i18n key ROOT_DETECTION_MESSAGE.</p>
+</blockquote>
+<p>To modify the default error message for Android, do the following:</p>
+<ol>
+<li>Create a <strong>stringconstants.xml</strong> file with the following content.
+ ```</li>
+</ol>
+<?xml version="1.0" encoding="utf-8"?>
+<p><resources><br />
+     <string name="default_root_detetection_message">Custom Root Detection Message</string><br />
+     </resources></p>
+<p>```
+2.  Modify the Custom Root Detection Message as per your requirement
+3.  Copy the file in the following folders as required</p>
+<pre><code>For mobile - **`&lt;WorkSpace&gt;\&lt;Application&gt;\resources\mobile\native\android\values`**
+
+For tablet - **`&lt;WorkSpace&gt;\&lt;Application&gt;\resources\tablet\native\androidtab\values`**
+</code></pre>
+<h3 id="ios">iOS</h3>
+<p>Iris tries to respect the i18N key defined in a locale which matches current device locale and then the i18N key defined in a locale which matches Iris/IDE set default locale and then the Default Error Message in order of preference.</p>
+<p>Whenever an app is launched on a jailbroken iOS device, a jailbroken detection dialog will appear.</p>
+<p>To customize the jailbroken dialog in i18n keys manually, do the following:</p>
+<ol>
+<li>In Volt MX Iris, navigate to <strong>Project</strong> &gt; <strong>Settings</strong> &gt; <strong>Application</strong>, under the <strong>Internationalization (i18n)</strong> section, select the Enable checkbox.</li>
+<li>Click <strong>Configure</strong>.<br />
+    The Configure Internationalization dialog box displays.</li>
+<li>In the Configure Internationalization dialog box, an initial row for an i18n key and the locales you want your app to support is displayed. In the Key field, type the name for your jailbroken key, <strong>ROOT_DETECTION_MESSAGE</strong>.</li>
+<li>In each locale's field for the ROOT_DETECTION_MESSAGE key, enter the word or phrase. Here, for English locale, define your message.</li>
+<li>Click <strong>Finish</strong>.</li>
+</ol>
+<p>For more information on how to manually add keys in i18N, click <a href="Internationalization.html#add-i18n-keys-manually">here</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2021 - 2024, HCL America, Inc. | <a href="https://hcltechsw.com/wps/portal/legal/privacy">Privacy Statement</a> | <a href="https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.hcltechsw.com%2Fwps%2Fportal%2Flegal%2Fterms-use&data=04%7C01%7Csuresh.chenji%40hcl.com%7Ca77ebddc51574aff8c6c08d8f056542d%7C189de737c93a4f5a8b686f4ca9941912%7C0%7C0%7C637523600856805537%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&sdata=vLnT466NGuIbvQ0nEwfn2qdXeuhHb6XOnh1pibATDI4%3D&reserved=0">Terms of Use</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+<div class="md-social">
+  <ul class="social-nav">
+    <li><a href="https://www.facebook.com/HCLDigital" class="facebook" target="_blank">Facebook</a></li>
+    <li><a href="https://www.linkedin.com/company/hclsoftware" class="linkedin" target="_blank">LinkedIn</a></li>
+    <li><a href="https://twitter.com/HCLDigital"  class="twitter" target="_blank">Twitter</a></li>
+    <li><a href="https://www.youtube.com/HCLDigitalSolutions" class="youtube" target="_blank">Youtube</a></li>
+    <li>
+      <a href="https://github.com/HCL-TECH-SOFTWARE" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    </li>
+  </ul>    
+</div>
+  </div>
+  <div class="md-footer-meta__inner md-grid">
+  <span class="md-footer__git_legacy">Please report problems with this documentation by <a class="announcement__link" href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/issues">opening issues in Github</a>.</span>
+  <span class="legacy-link md-footer__git_legacy">Can't find a topic? Check the legacy documentation <a class="announcement__link" href="https://opensource.hcltechsw.com/Volt-MX-Documentation-Archive/docs/documentation/" target="_blank">here</a>.</span>
+</span>
+    </div>
+</div>
+    <script>
+      function myFunction95(){
+          var initial_url = document.location.href;
+          var url_stub = initial_url.split( 'docs/documentation' );
+          var fixed_url = url_stub[0]+'95/docs/documentation';
+		  console.log(fixed_url);
+//          var fixed_url = 'https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation'
+          var url = initial_url.split( '/' );
+          var updated_url
+          if ( url[ url.length - 2 ] == "Foundry" || url[ url.length - 2 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 2 ] == "articles" || url[ url.length - 2] == "getting-started" || url[ url.length - 2 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 3 ] == "Foundry" || url[ url.length - 3 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 3 ] == "articles" || url[ url.length - 3 ] == "getting-started" || url[ url.length - 3 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 4 ] == "Foundry" || url[ url.length - 4 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 4 ] == "articles" || url[ url.length - 4 ] == "getting-started" || url[ url.length - 4 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 5 ] == "Foundry" || url[ url.length - 5 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 5 ] == "articles" || url[ url.length - 5 ] == "getting-started" || url[ url.length - 5 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 5 ] + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 6 ] == "Foundry" || url[ url.length - 6 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 6 ] == "articles" || url[ url.length - 6 ] == "getting-started" || url[ url.length - 6 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 6 ] + '/' + url[ url.length - 5 ] + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else{
+            updated_url= fixed_url + '/' + url[ url.length - 1];
+          }
+          window.location.replace(updated_url);
+          }
+    </script>
+
+  
+
+</footer>
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.prune"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>

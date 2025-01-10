@@ -1,0 +1,2895 @@
+<!-- Elements added to main will be displayed on all pages -->
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_linux_install_guide/Content/Installing_VoltMX_Foundry_Tomcat.html">
+      
+      
+        <link rel="prev" href="Installing_VoltMX_Foundry_on_Linux.html">
+      
+      
+        <link rel="next" href="Installing_Foundry_on_JBoss.html">
+      
+      
+      <link rel="icon" href="../../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>Installing Volt MX Foundry on Tomcat - HCL Volt MX Documentation V9.2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/vmx_style.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#installing-volt-mx-foundry-on-tomcat-console-mode" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+<div class="content-types-banner">
+    <ul class="sub-nav">
+        <li class="home-link">
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/index.html"  class="sub-link ">Home</a>
+        </li>
+        <li>
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/tutorials/Tutorials.html" class="sub-link">Tutorials</a>
+        </li>
+        <li>
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/index.html" class="sub-link" id="docLink">Documentation</a>
+        </li>
+        <li>
+            <a href="https://support.hcltechsw.com/csm?id=kb_search&spa=1&kb_category=db382ff1db631c14a45ad9fcd3961936" title="Articles" class="sub-link">Articles</a>
+        </li>
+        <li>
+            <a href="https://hclsoftwareu.hcltechsw.com/#VoltMxLearningJourneys" title="Articles" class="sub-link">Software Academy</a>
+        </li>
+        <li style="float:right">
+          <button onclick="myFunction95()" style="color:white; border-radius:5px ;padding:5px 10px 5px 10px; border: 2px solid white;" class="sub-link" id="docLink92">Switch to V9.5</button>
+      </li>
+    </ul>
+</div>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="HCL Volt MX Documentation V9.2" class="md-header__button md-logo" aria-label="HCL Volt MX Documentation V9.2" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HCL Volt MX Documentation V9.2
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Installing Volt MX Foundry on Tomcat
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    HCL-TECH-SOFTWARE/volt-mx-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="HCL Volt MX Documentation V9.2" class="md-nav__button md-logo" aria-label="HCL Volt MX Documentation V9.2" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.png" alt="logo">
+
+    </a>
+    HCL Volt MX Documentation V9.2
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    HCL-TECH-SOFTWARE/volt-mx-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Introducing Volt MX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Introducing Volt MX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducing Volt MX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../Whats_New_Main_Page.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    What&apos;s New
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../VMX_release_notes.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Release Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../Iris/app_platform/Content/AppPlatform_Overview.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    App Platform
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../tutorials/Tutorials.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Tutorials
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installationGuides.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation Guides
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../Iris/voltmxIrisFundamentals.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Iris
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_8" id="__nav_1_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Foundry
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_8">
+            <span class="md-nav__icon md-icon"></span>
+            Foundry
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voltmxFoundryFundamentals.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_8_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_8_2" id="__nav_1_8_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Installing Foundry
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_8_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_8_2">
+            <span class="md-nav__icon md-icon"></span>
+            Installing Foundry
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installing_foundry.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../voltmxfoundry_supported_devices_os_browsers/Content/Introduction.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Volt MX Foundry - Supported OS, Application Servers, and Databases Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_8_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_8_2_3" id="__nav_1_8_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Volt MX Foundry Installation Guide   - Linux
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_8_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_8_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Volt MX Foundry Installation Guide   - Linux
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Introduction.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="Prerequisites.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Prerequisites
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Foundry_Architecture_and_Components.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Volt MX Foundry Topology and Components
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="MF_Single-Node_Multinode.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation on Single Node and Multinode
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Pre-installation_Tasks.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Preinstallation Tasks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_8_2_3_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_8_2_3_6" id="__nav_1_8_2_3_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Installation Modes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_1_8_2_3_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_8_2_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            Installation Modes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Installing_Modes.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Installing_VoltMX_Foundry_on_Linux.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installing Volt MX Foundry   - Console-mode
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Installing Volt MX Foundry on Tomcat
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="Installing_VoltMX_Foundry_Tomcat.html" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Installing Volt MX Foundry on Tomcat
+  </span>
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#reports-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reports Database
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reports-database-for-integration-on-a-separate-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reports Database for Integration on a Separate Node:
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="Installing_Foundry_on_JBoss.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Installing Volt MX Foundry on JBoss
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Silent_Installation.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installing Volt MX Foundry   - Silent-mode
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Starting_VoltMX_Foundry_Console.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to Stop and Start Volt MX Foundry
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="Upgrading_VoltMX_Foundry_on_Linux.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Upgrading Volt MX Foundry
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Patch_Installer_-_Linux.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installing Hotfix Archives for Volt MX Foundry   - Linux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Uninstalling_VoltMX_Foundry.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Uninstalling Volt MX Foundry
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Post-Installation_Tasks.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Post-Installation Tasks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="Troubleshooting.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    FAQs and Troubleshooting
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../voltmx_foundry_windows_install_guide/Content/Introduction.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Volt MX Foundry Installation Guide   - Windows
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../voltmx_foundry_manual_install_guide/Content/Introduction.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Volt MX Foundry Manual Installation Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../VoltMX_Foundry_CLI/Content/installer_cli.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Volt Foundry Command Line Installer
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../voltmxfoundry_on_amazon_eks/Content/introduction.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Volt MX Foundry on Amazon EKS
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../voltmxfoundry_on_openshift/Content/introduction.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Volt MX Foundry on Red Hat OpenShift
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../voltmxfoundry_single_container/Content/Introduction_Single.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Volt MX Foundry Single Container Solution (On-Premises)
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../voltmxfoundry_containers_solution_on-prem/Content/Introduction.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Volt MX Foundry Installation Guide   - Containers Solution
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../voltmx_foundry_user_guide/Content/Introduction.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Volt MX Foundry User Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../KF_Services_OAuth_Sample/Content/KF_Services_OAuth_Sample.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    OAuth Sample App Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../integration_services.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Integration Services
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../administering_foundry.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Administering Foundry
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../vmf_integrationservice_admin_console_userguide/Content/App_Services_User_Guide.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    App Services Console User Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../voltmx_appfactory_user_guide/Content/Introduction.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    App Factory User Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../voltmx_Foundry_deployment_guide/Content/Introduction.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Volt MX Foundry Deployment Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VoltMX_Analytics_Cloud_FAQs/Content/VoltMX_Analytics_Cloud_FAQs.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Volt MX Analytics & Reporting Cloud FAQs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../vmfintegrationservice_troubleshooting_guide/Content/Integration_Services_Troubleshooting_Guide.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Integration Services Troubleshooting Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#reports-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reports Database
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reports-database-for-integration-on-a-separate-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reports Database for Integration on a Separate Node:
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="installing-volt-mx-foundry-on-tomcat-console-mode">Installing Volt MX Foundry on Tomcat - Console-mode</h1>
+<blockquote>
+<p><strong><em>Note:</em></strong>  If a user installs Volt MX Foundry Console on a partition different from the user's home directory, the user must have read/write execute permissions.</p>
+</blockquote>
+<p>This section of the document provides you with the instructions for installing and configuring Volt MX Foundry Console on a single node. For multi-node installations, refer the <a href="../../voltmx_Foundry_deployment_guide/Content/Deployment_Checklist.html">Deployment Checklist and Example Case Studies</a>.</p>
+<blockquote>
+<p><strong><em>Important:</em></strong>  Ensure that you have the required hardware and access to the supporting software as mentioned in the <a href="Prerequisites.html">Prerequisites</a> section and performed the steps as mentioned in the <a href="Pre-installation_Tasks.html">Pre-installation Tasks</a> section.</p>
+</blockquote>
+<p>Make sure you have proper administrative rights to install Volt MX Foundry on your computer.</p>
+<p>You also need a user where Volt MX Foundry will be installed.</p>
+<p>The <strong><Install Location></strong> directory contains the log files logging each invocation of the installer. To make problem identification easier, provide these log files to Volt MX when reporting an issue.</p>
+<p>To install Volt MX Foundry Console on Tomcat using the installer, follow these steps:</p>
+<ol>
+<li>Execute the following command to switch to the user that you created.  </li>
+</ol>
+<pre><code>
+\# su - username
+</code></pre>
+<ol>
+<li>Press <strong>Enter</strong>. The system prompt you to enter the password.</li>
+<li>Enter the password, and press <strong>Enter</strong>.</li>
+<li>Unzip the <code>VoltMXFoundrySetup.tar.gz</code> file, and navigate to the folder <em><strong>VoltMXFoundry_Installer_Linux</strong></em>.</li>
+<li>Start the <strong>./VoltMXFoundryInstaller-x.x.x.x_GA.bin</strong> file by executing the following command:</li>
+</ol>
+<pre><code>Preparing to install
+Extracting the JRE from the installer archive...
+Unpacking the JRE...
+Extracting the installation resources from the installer archive...
+Configuring the installer for this system's environment...
+
+Launching installer...
+==============================================================================
+Volt MX  Foundry                                     
+(created with InstallAnywhere)
+-----------------------------------------------------------------------------
+Preparing CONSOLE Mode Installation...==============================================================================
+Introduction
+------------
+
+This installer will install a new or upgrade an existing instance of Foundry.
+
+Volt MX  Foundry is a set of enterprise-grade mobile infrastructure services
+that makes it easy to build amazing apps that integrate and support all of
+your backend systems. With open, standards-based development, scalable and
+secure services, and exceptional agility, enterprises can dramatically reduce
+the cost and complexity of enterprise mobility projects.
+
+To proceed with installation, please confirm that the following prerequisites
+have been met -
+
+1. Database server with admin user for installation. MySQL, MariaDB, Oracle
+and MS SQL Server are the supported Database servers. MariaDB is supported for
+Tomcat/JBoss only
+2. Corresponding database user should exist and that user should have all
+required privileges as per the documentation.
+3. If you want to use your existing SSL certificate then please have the SSL
+certificate mapped to the domain name you want to use.
+4. If you want to install with JBoss as an option for application server, then
+have the application server preconfigured. Please note that single node JBoss
+is also bundled as part of the installer, in case you want to install afresh.
+
+To change input, type 'back' to go back to the previous step.
+To cancel the installation, type 'quit' at any time.
+
+For troubleshooting &amp; help on the installation, use
+[../../../Foundry/resources/installer.html](../../../Foundry/resources/installer.md).
+
+For getting started on Volt MX Foundry, refer
+[Volt MX Foundry User Guide](https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/Introduction.html).
+
+If you have more questions or feedback, you can join our
+community at [Volt MX Community](https://support.hcltechsw.com/community?id=community_forum&amp;sys_id=1cdf6e1a1bf31898beab64e6ec4bcbae) or raise a support ticket at
+[Customer Support](https://support.hcltechsw.com/csm).
+
+  -&gt;1- Continue with Installation.
+    2- Abort Installation.
+
+ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS &lt;ENTER&gt; TO ACCEPT THE DEFAULT:
+</code></pre>
+<ol>
+<li>Press <strong>Enter</strong>. The Software <em>License Agreement</em>  details appear.</li>
+</ol>
+<pre><code>\===============================================================================
+    License Agreement
+    -----------------
+
+    Installation and Use of Volt MX Foundry Requires Acceptance of the Following
+    License Agreement:
+
+    Volt MX is now part of the HCL group of companies
+
+    VOLTMX, INC. SOFTWARE LICENSE AGREEMENT FOR FOUNDRY (&quot;AGREEMENT&quot;)
+
+    THE TERMS AND CONDITIONS CONTAINED HEREIN CONSTITUTE A LEGAL AGREEMENT.
+    THIS AGREEMENT (&quot;AGREEMENT&quot;) CONTAINS THE ENTIRE AGREEMENT BETWEEN YOU
+    (&quot;LICENSEE&quot; or &quot;You&quot; or &quot;you&quot;) AND VOLTMX, INC. (&quot;VOLTMX&quot;) WITH RESPECT TO THE
+    TERMS AND CONDITIONS DESCRIBED HEREIN. READ THIS AGREEMENT CAREFULLY BEFORE
+    YOU CLICK THE &quot;I ACCEPT&quot; BUTTON BELOW. BY CLICKING ON THE &quot;I ACCEPT&quot; BUTTON,
+    YOU ACKNOWLEDGE THAT (1) YOU ARE AUTHORIZED TO ENTER THIS AGREEMENT FOR AND ON
+    BEHALF OF YOUR COMPANY, AND ARE DOING SO, AND (2) YOU HAVE READ, UNDERSTOOD,
+    AND AGREE THAT YOU AND  VOLTMX SHALL BE BOUND BY THESE TERMS AND CONDITIONS AND
+    ALL MODIFICATIONS AND ADDITIONS AGREED TO IN WRITING BY THE PARTIES.   IF YOU
+    DO NOT AGREE WITH THESE TERMS AND CONDITIONS, CLICK ON THE &quot;I DO NOT ACCEPT&quot;
+    BUTTON BELOW AND INSTALLATION WILL TERMINATE.
+
+
+    DO YOU ACCEPT THE TERMS OF THIS LICENSE AGREEMENT? (Y/N): Y
+</code></pre>
+<ol>
+<li>
+<p>Press <strong>Enter</strong> to continue with new installation.</p>
+<p>The following installation types are supported for new installation:</p>
+<ul>
+<li><strong>Development</strong> for single machine instance.</li>
+<li><strong>Non-Production</strong> for larger environments like QA or UAT.</li>
+<li><strong>Production</strong> for the production instance.</li>
+</ul>
+</li>
+</ol>
+<pre><code>\===============================================================================
+    Licensing Type
+    --------------
+
+    To upgrade your existing instance for Foundry, provide the Database details of
+    your existing instance. The Database schema will be updated to the latest
+    version, no application data will be lost.
+
+    Please select the type of environment you want to install.
+    Development – Single server instance typically used for development
+    Non-Production – A multi-server environment for testing or staging
+    environments
+    Production – A full production-grade environment
+
+        1- Production
+        2- Non-Production
+      -&gt;3- Development
+
+    ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS &lt;ENTER&gt; TO ACCEPT THE DEFAULT: 3
+
+</code></pre>
+<ol>
+<li>Enter your choice and press <strong>Enter.</strong> The <em>Send Usage Data Anonymously</em> details appear. Allows HCL to collect product usage information to make your Volt MX Foundry experience better. HCL does not save any of your private or application data.</li>
+</ol>
+<pre><code>\===============================================================================
+    Send Usage Data Anonymously
+    ---------------------------
+
+    Help us make your Volt MX Foundry experience better by allowing us to collect
+    product usage information. We will not save any of your private or application
+    data.
+
+    Send usage data anonymously.
+
+      -&gt;1- Yes
+        2- No
+
+    ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS &lt;ENTER&gt; TO ACCEPT THE DEFAULT: 1
+
+</code></pre>
+<ol>
+<li>Enter your choice and press <strong>Enter.</strong> The <em>Install Components</em> details appear.</li>
+</ol>
+<pre><code>\===============================================================================
+    Install Components
+    ------------------
+
+    Please select Volt MX Foundry components to install.
+    The Console is the administrative interface to manage your apps, environments
+    and users.
+    The Identity Services helps you to use a single gateway for all your
+    authentication and authorization requests.
+    The Integration Services helps you connect with any enterprise or third-party
+    system to expose, transform and orchestrate your data as APIs.
+    The API Developer Portal is a console that enables partner teams to discover,
+    test and consume APIs.
+    Engage your app users over sms, email and push using segmentation, location,
+    campaigns and event driven messaging.
+    A specialized component used to manage offline data synchronization between
+    the backend system of record and the front-end app.
+
+     Console, Identity and Integration Services are mandatory components of
+    Volt MX Foundry. In a development scenario, all components can be installed on
+    the same server. However, it is recommended to install these components on
+    separate servers for a production environment.
+
+      -&gt;1- Console
+      -&gt;2- Identity Services
+      -&gt;3- Integration Services
+      -&gt;4- API Developer Portal
+      -&gt;5- Engagement Services
+
+    ENTER A COMMA-SEPARATED LIST OF NUMBERS REPRESENTING THE DESIRED CHOICES, OR
+    PRESS &lt;ENTER&gt; TO ACCEPT THE DEFAULT: 1,2,3,4,5
+
+</code></pre>
+<ul>
+<li><strong>Console</strong> - To install Volt MX Foundry Console, type 1 and press <strong>Enter</strong>.<br />
+        The system creates the following databases: <code>&lt;prefix&gt;mfconsoledb&lt;suffix&gt;</code>, <code>&lt;prefix&gt;mfaccountsdb&lt;suffix&gt;</code>, and  <code>&lt;prefix&gt;mfreportsdb&lt;suffix&gt;</code>.</li>
+<li><strong>Identity Services</strong> - To install Volt MX Identity Services, type 2 and press <strong>Enter</strong>.<br />
+        The system creates the following database: <code>&lt;prefix&gt;idconfigdb&lt;suffix&gt;</code>.</li>
+<li><strong>Integration Services</strong> - To install Volt MX Foundry Integration, type 3 and press <strong>Enter</strong>.<br />
+        The system creates the following databases: <code>VoltMXadmindb</code>  and  <code>mfreportsdb</code>.</li>
+<li>
+<p><strong>API Developer Portal</strong> - To install developer portal, type 4 and press <strong>Enter</strong>.  </p>
+<blockquote>
+<p><strong><em>Note:</em></strong> During installation if you have selected <strong>API Developer Portal</strong>, the <strong>API Developer Portal</strong> is created. You can directly access your <a href="../../voltmx_foundry_user_guide/Content/VoltMXDevPortal.html">VoltMX Developer Portal</a> in Volt MX Foundry Console.</p>
+</blockquote>
+</li>
+<li>
+<p><strong>Engagement Services</strong> - To install Volt MX Foundry Engagement Services, type 5 and press <strong>Enter</strong>.<br />
+        The system creates the following database: <code>&lt;prefix&gt;vpnsdb&lt;suffix&gt;</code>.</p>
+</li>
+</ul>
+<h2 id="reports-database">Reports Database</h2>
+<pre><code>The reports database is used for configuring reports.
+
+The Installer creates the `mfreportsdb` if you choose either Console or Integration Services:
+
+*   **Console** without Integration Services (with or without Engagement Services)
+*   **Console** and **Integration Services** (with or without Engagement Services)
+*   **Integration Services** without Console (with or without Engagement Services)
+</code></pre>
+<h2 id="reports-database-for-integration-on-a-separate-node">Reports Database for Integration on a Separate Node:</h2>
+<pre><code>While installing console and integration on separate nodes, the installer prompts you to point the reports database during the integration installation.
+
+For example:
+
+You have installed only Console on one node. The installer creates these three databases such as `&lt;&gt;mfreportsdb&lt;&gt;` along with the `&lt;&gt;mfconsoledb&lt;&gt;` and `&lt;&gt;mfaccountsdb&lt;&gt;`. For example, your report database name is `voltmxmfreportsdb1`
+
+When you install the integration with or without one or more components (identity, or Engagement Services ) on a separate node, the installer displays the **Reports Database Name** field in the **Database Details** window. If the installer prompts you to enter the existing reports db, enter the reports database name (for example, `voltmxmfreportsdb1`) in the **Database Details window &gt; Reports Database Name** field.
+
+Refer to [creating a reports database](#reports-database), for example, **&amp;lt;prefix&gt;mfreports&amp;lt;suffix&gt;**.
+</code></pre>
+<ol>
+<li>
+<p>Press <strong>Enter</strong> to continue the installation. The <em>Install Folder</em> details appear.</p>
+<p>\=======================================================================<br />
+Install Folder<br />
+---------------------  </p>
+<p>Please choose a destination folder for this installation.  </p>
+<p>NOTE: The installation path should not contain any special characters.  </p>
+<p>Default Install Folder: /home/user1/VoltMXFoundry  </p>
+<p>ENTER AN ABSOLUTE PATH, OR PRESS <ENTER> TO ACCEPT THE DEFAULT<br />
+:</p>
+<blockquote>
+<p><strong><em>Note:</em></strong>  By default, Volt MX Foundry is installed at the home directory of the user.</p>
+</blockquote>
+</li>
+<li>
+<p>Press <strong>Enter</strong> to continue the installation. The installer prompts for the <em>Application Server</em> details as follows:</p>
+<p>\===============================================================================<br />
+Application Server<br />
+------------------  </p>
+<p>Enter requested information<br />
+-&gt;1- Tomcat<br />
+   2- JBoss</p>
+<!-- 3-WebLogic   -->
+<p>ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::</p>
+</li>
+<li>
+<p>In the <strong>Application Server</strong>, type 1.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> By default Tomcat manager password in used by Volt MX Foundry for Web Application publish. To change the default Tomcat manager password, the new password needs to be replaced in the <code>password</code> value for user <code>manager</code> in <code>&lt;tomcat-users&gt;</code> tag in <code>tomcat-users.xml</code>.  </p>
+</blockquote>
+<p>Now to replace the value in database, the password value should be encrypted. To encrypt the database password, follow these steps mentioned in the <a href="../../voltmx_foundry_manual_install_guide/Content/Encrypt_Passwords.html">Encrypt_Passwords</a> section.  </p>
+<p>Once the password is encrypted, replace the encrypted value in the <code>prop_value</code> column in the row where prop_value is <code>management_server_password</code> of <code>&lt;DatabasePrefix&gt;admindb&lt;DatabaseSuffix&gt;</code> database in the <code>server_configuration</code> table.</p>
+</li>
+<li>
+<p>Press <strong>Enter</strong>. The <em>HTTP or HTTPS</em> details appear asking you to choose the HTTP or HTTPS.</p>
+<p>\========================================================================<br />
+HTTP or HTTPS<br />
+-------------<br />
+Please select the communication protocol you want to use. We recommend that you use HTTPS in production environment.<br />
+-&gt;1- HTTP<br />
+   2- HTTPS  </p>
+<p>ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::  </p>
+</li>
+<li>
+<p>In <em>HTTP or HTTPS</em>  if you select 1 and press <strong>Enter</strong>, the following details in the <em>Details for Application Server</em> details appear.</p>
+<p>\===============================================================================<br />
+Details for Application Server<br />
+------------------------------  </p>
+<p>Please enter the Hostname/IP Address and port you want to use. The default value is the IP Address of this machine.  </p>
+<p>Hostname/IP Address (Default: ): <IP address>  </p>
+<p>HTTP Port (Default: 8080): 8181  </p>
+<p>Tomcat Shutdown Port (Default: 38011):  </p>
+<blockquote>
+<p><strong><em>Important:</em></strong> In case of Tomcat, enter the Tomcat shutdown port.</p>
+</blockquote>
+</li>
+<li>
+<p>In the <em>HTTP or HTTPS,</em> if you type 2 and press <strong>Enter</strong>, the following details in the <em>Details for Application Server</em> details appear.</p>
+<p>\===============================================================================<br />
+Details for Application Server<br />
+------------------------------  </p>
+<p>Please enter the Hostname/IP Address and port you want to use. The default value is the IP Address of this machine.  </p>
+<p>NOTE: If you want to use your existing SSL certificate then please have the SSL certificate mapped to the domain name you want to use.  </p>
+<p>Hostname/IP Address (Default: ): <IP address>  </p>
+<p>HTTP Port (Default: 8080):  </p>
+<p>HTTPS Port (Default: 8443):<br />
+Tomcat Shutdown Port (Default: 38011):</p>
+<blockquote>
+<p><strong><em>Important:</em></strong> After installing Volt MX Foundry, import your SSL certificate (for example, domain.subdomain.crt) into your Volt MX Foundry installer's JRE trusted certificate authority (CA) certificates file - for example, <code>&lt;INSTALL_DIR&gt;/jre/lib/security/cacerts</code>  </p>
+</blockquote>
+<p>If your SSL certificate is not configured, the system displays an error - for example, "peer not authenticated".  </p>
+<p>For details, refer to <a href="Troubleshooting.html#Service_Provider's_Certificate_Issues">Troubleshoot with SSL Certificate Issues</a>.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong>  Based on the inputs provided in the previous  <a href="#Step11a">HTTP or HTTPS  &gt;  a</a>  or  <a href="#Step11b">HTTP or HTTPS  &gt;  b</a>, one of the following error messages appears:</p>
+</blockquote>
+<ul>
+<li>
+<p>If a port is already in use, the installer displays the following error message:</p>
+<p>\===============================================================================<br />
+Validation of Host Detail<br />
+-------------------------<br />
+Port 22 is already in use.  </p>
+<p>Please provide a different port.  </p>
+<p>-&gt;1- Go back to give valid input.<br />
+   2- Abort Installation.  </p>
+<p>ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:</p>
+</li>
+<li>
+<p>If you provide an invalid port, the installer displays the following error message:</p>
+<p>\===============================================================================<br />
+Port Validation<br />
+---------------<br />
+Please enter a valid port. Port should be in between 1-65535.<br />
+-&gt;1- Go back to give valid port.<br />
+   2- Abort Installation.  </p>
+<p>ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::</p>
+</li>
+<li>
+<p>If you provide an invalid Hostname/IP address, the installer displays the following error message:</p>
+<p>\===============================================================================<br />
+Invalid Hostname/IP Address<br />
+---------------------------  </p>
+<p>Please enter a valid hostname/IP address.  </p>
+<p>-&gt;1- Go back to give valid details.<br />
+   2- Abort Installation.  </p>
+<p>ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Provide the <strong>Hostname/IP Address</strong>, <strong>HTTP Port</strong>, and <strong>HTTPS Port</strong>, and press <strong>Enter</strong>. The <em>SSL Configuration for HTTPS Communication</em> details appear only if you select HTTPS. Choose one of the following two options:</p>
+<p>\========================================================================<br />
+SSL Configuration for HTTPS Communication<br />
+-----------------------------------------  </p>
+<p>Please select the appropriate option to proceed.  </p>
+<p>-&gt;1- Create self-signed certificate<br />
+   2- Provide SSL certificate  </p>
+<p>ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::  </p>
+<ol>
+<li>
+<p>In the <em>SSL Configuration for HTTPS Communication</em>, if you select 1, the <em>Details for self-signed SSL Certificate</em> details appear.</p>
+<blockquote>
+<p><strong><em>Important:</em></strong> To add an existing SSL certificate to cacerts file, refer to <a href="Post-Installation_Tasks.html#how-to-add-an-existing-ssl-certificate-to-cacerts">How to Add Your Existing SSL Certificate</a>.</p>
+</blockquote>
+<p>\========================================================================<br />
+Details for self-signed SSL Certificate<br />
+-----------------------------------------  </p>
+<p>Please provide the following details to create self-signed certificate. All the fields are mandatory.  </p>
+<p>Please note that the path of self-signed certificate will be  /root/VoltMXFoundry/keystore.jks.  </p>
+<p>Organizational Unit (DEFAULT: ): platform  </p>
+<p>Host Name (DEFAULT: ): voltmx.com  </p>
+<p>Company (DEFAULT: ): Volt MX  </p>
+<p>City (DEFAULT: ): HYD  </p>
+<p>State (DEFAULT: ): AP  </p>
+<p>Country (DEFAULT: ): IND  </p>
+<blockquote>
+<p><strong><em>Note:</em></strong> The path for a self-signed certificate will be in this location: <code>&lt;install folder&gt;\keystore.jks</code></p>
+</blockquote>
+</li>
+<li>
+<p>In the <em>SSL Configuration for HTTPS Communication</em>, if you select 2, the <em>SSL Certificate Details</em> details appear.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> Provide path for .jks file as input.</p>
+</blockquote>
+<p>\========================================================================<br />
+SSL Certificate Details<br />
+-----------------------<br />
+Please provide the following details  </p>
+<p>Absolute Path to Keystore File (Default: ): /downloads/_.hcl.net.2016.jks  </p>
+</li>
+<li>
+<p>Type the details. The installer prompts for <em>Password for keystore file</em> details as follows:</p>
+<p>\========================================================================<br />
+Password for keystore file<br />
+-----------------------------------------  </p>
+<p>Password should contain minimum six characters and should not contain space.  </p>
+<p>Please enter the password:</p>
+<ul>
+<li>
+<p>If you enter an incorrect password -- for example, one that is fewer than six characters, contains a space, or is empty -- the following error message for an invalid keystore password is displayed.</p>
+<p>\========================================================================<br />
+Password for keystore file<br />
+-----------------------------------------  </p>
+<p>\========================================================================<br />
+Invalid Keystore Password<br />
+-------------------------<br />
+Keystore password must be at least six characters and should not contain space.  </p>
+<p>PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p>Type the password.</p>
+</li>
+<li>
+<p>Press <strong>Enter</strong>. The <em>Database Choice</em> details appear:</p>
+<p>\========================================================================<br />
+Database Choice<br />
+-----------------------------------------<br />
+Please select the database provider of your choice.</p>
+<p>-&gt;1- MySQL 5.7</p>
+<p>2- MySQL 5.7 Cluster - Group Replication</p>
+<p>3- Oracle 19c (19.3.0)</p>
+<p>4- SQL Server 2017</p>
+<p>5- MariaDB 10.3. 13</p>
+<p>ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::  </p>
+</li>
+<li>
+<p>In the <em>Database Choice</em>, choose the DB:</p>
+<ul>
+<li>
+<p>In the <em>Database Choice</em> if you select 1, the <em>MySQL Database Details</em> appear.</p>
+<p>\========================================================================<br />
+MySQL Database Details<br />
+-----------------------------------------  </p>
+<p>Please enter MySQL database server details  </p>
+<p>Database Server IP (DEFAULT: localhost): <IP address>  </p>
+<p>Port (DEFAULT: 3306):  </p>
+<p>Username (DEFAULT: ): root  </p>
+<ol>
+<li>Enter the following details:<ul>
+<li><strong>Database Server IP</strong>: Enter the server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.</li>
+<li><strong>Port</strong>: Enter the database port of the MySQL Server. By default, this field is set to 3306 for MySQL.</li>
+<li><strong>Username</strong>: Enter the user name used while creating the database user - for example, dbclient.</li>
+</ul>
+</li>
+<li>
+<p>Provide a password and press <strong>Enter</strong>.</p>
+<ul>
+<li>
+<p>If the database connection fails, the following error message displays.</p>
+<p>\===============================================================================<br />
+Database Connection Failed<br />
+--------------------------<br />
+Database connection failed.  </p>
+<p>For the following reasons: Communications link failure  </p>
+<p>The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.  </p>
+<p>PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):</p>
+</li>
+<li>
+<p>If the database server not compatible, the following error message displays:</p>
+<p>\===============================================================================<br />
+Incompatible Database Server Version<br />
+------------------------------------<br />
+Minimum requirement for MySQL database server is 5.7.  </p>
+<p>PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p>In the <em>Database Choice</em> if you select 2, the <em>Oracle Database Details</em> appear.</p>
+<p>\========================================================================<br />
+Oracle Database Details<br />
+-----------------------------------------  </p>
+<p>Please enter Oracle database server details.  </p>
+<p>Database Server Hostname/IP (Default: 10.10.24.51): <Hostname/IP>  </p>
+<p>Port (Default: 1521):  </p>
+<p>Service ID / Service Name(Default: ):  </p>
+<p>System Username (Default: ):  </p>
+<ol>
+<li>
+<p>Enter the following details:</p>
+<ul>
+<li><strong>Database Server IP</strong>: Enter the server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.</li>
+<li><strong>Port</strong>: Enter the database port of the Oracle Server. By default, this field is set to 1521 for oracle.</li>
+<li>
+<p><strong>Service ID</strong> <strong>/ Service Name</strong>: Enter Oracle service ID or service name. Service ID is unique alias given to an instance name of Oracle DB.</p>
+</li>
+<li>
+<p><strong>System Username</strong>: Enter the user name used while creating the database user.
+        2.  Press <strong>Enter</strong>. The installer prompts for <em>Enter Password for Database User</em> details as follows:</p>
+</li>
+</ul>
+<p>\========================================================================<br />
+Enter Password for Database User<br />
+-----------------------------------------<br />
+Please enter the password:  </p>
+</li>
+<li>
+<p>Provide a password and press <strong>Enter</strong>.</p>
+<ul>
+<li>
+<p>If the database connection fails, the following error message displays.</p>
+<p>\===============================================================================<br />
+Database Connection Failed<br />
+--------------------------<br />
+Database connection failed.  </p>
+<p>For the following reasons: Communications link failure  </p>
+<p>The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.  </p>
+<p>PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):</p>
+</li>
+<li>
+<p>If the database server not compatible, the following error message displays:</p>
+<p>\===============================================================================<br />
+Incompatible Database Server Version<br />
+------------------------------------  </p>
+<p>PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Select the tablespace for Oracle database:</p>
+<blockquote>
+<p><strong><em>Important:</em></strong>  If tablespaces were already created, the DBA must grant quota (permissions) on these tablespaces to installer with admin option.  </p>
+</blockquote>
+<p>The DBA also must include grant quota on the schemas from installer login.</p>
+<p>\========================================================================<br />
+Tablespace Choice<br />
+-----------------------------------------  </p>
+<p>Please select the Table Space type  </p>
+<p>-&gt;1- Default Tablespace<br />
+ 2- User Defined Tablespace  </p>
+<p>ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::  </p>
+<ul>
+<li><strong>Default Tablespace</strong>: If selected, the database schema and SQL scripts migration happens automatically to the default tablespace - for example, <code>USERS</code></li>
+<li>
+<p><strong>User Defined Tablespace</strong>: If selected, enter the tablespaces for the following:</p>
+<p>\========================================================================<br />
+Ask for the Tablespaces<br />
+-----------------------------------------  </p>
+<p>Please enter the names of the Tablespaces  </p>
+<p>Data Tablespace (Default: ): VoltMX123<br />
+Index Tablespace (Default: ):<br />
+LOB Table Space (Default: ):  </p>
+<ul>
+<li>
+<p><strong>Data Tablespace</strong>:<br />
+    Enter the name for Data tablespace.  </p>
+<p>This is a mandatory field. If the Data tablespace field is empty, the installers displays the error message:</p>
+<p>\========================================================================<br />
+TableSpace details not provided<br />
+---------------------------------------<br />
+Please provide a valid Tablespace for at least the Data field for the installation wizard to proceed further. PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):  </p>
+<p>If the Data tablespace (for example, VoltMX123) does not exist, the installers displays the error message:</p>
+<p>\========================================================================<br />
+Invalid TableSpace Details<br />
+---------------------------------------<br />
+Installation wizard is not able to access the VoltMX123 TableSpace provided with give credentials. Please verify the details again. PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):  </p>
+</li>
+<li>
+<p><strong>Index Index Tablespace</strong>: Enter the name for Index tablespace.<br />
+    If input for Index Tablespace is not provided, then the value will be set to the provided Datatable space value.</p>
+</li>
+<li><strong>LOB Tablespace</strong>: Enter the name for LOB tablespace.<br />
+    If input for LOB Tablespace is not provided, then the value will be set to the provided Datatable space value.<ul>
+<li>In the <em>Database Choice</em> if you select 3, the <em>SQL Server Database Details</em> appear.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>\========================================================================<br />
+SQLServer Database Details<br />
+-----------------------------------------  </p>
+<p>Please enter SQL database server details.  </p>
+<p>Database Server Hostname/IP (Default: 10.10.24.51): <Hostname/IP>  </p>
+<p>Port (Default: 1433):  </p>
+<p>Username 9Default: ):  </p>
+<p>Instance Name (Optional) (Default: ):</p>
+<ol>
+<li>Enter the following details:<ul>
+<li><strong>Database Server IP</strong>: Enter the server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.</li>
+<li><strong>Port</strong>: Enter the database port of the SQL Server. By default, this field is set to 1433 for SQL.</li>
+<li><strong>Username</strong>: Enter the user name used while creating the database user - for example, dbclient.</li>
+<li><strong>Instance Name (Optional)</strong>: Enter the instance name for the database. This information is optional.</li>
+</ul>
+</li>
+<li>
+<p>Press <strong>Enter</strong>. The installer prompts for <em>Enter Password for Database User</em> details as follows:</p>
+<p>\========================================================================<br />
+Enter Password for Database User<br />
+-----------------------------------------<br />
+Please enter the password:  </p>
+</li>
+<li>
+<p>Provide a password and press <strong>Enter</strong>.</p>
+<ul>
+<li>
+<p>If the database connection fails, the following error message displays.</p>
+<p>\===============================================================================<br />
+Database Connection Failed<br />
+--------------------------<br />
+Database connection failed.  </p>
+<p>For the following reasons: Communications link failure  </p>
+<p>The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.  </p>
+<p>PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):</p>
+</li>
+<li>
+<p>If the database server not compatible, the following error message displays:</p>
+<p>\===============================================================================<br />
+Incompatible Database Server Version<br />
+------------------------------------  </p>
+<p>PRESS <ENTER> TO ACCEPT THE FOLLOWING (OK):</p>
+<blockquote>
+<p><strong><em>Important:</em></strong> Follow the below steps only if you want install Volt MX Foundry on Tomcat with Microsoft Azure SQL Server database.</p>
+</blockquote>
+<ul>
+<li>For <strong>Microsoft Azure (MSSQL)</strong>, If you want to install Volt MX Foundry V8 on Tomcat with Microsoft Azure SQL, you must edit the <code>authService.xml</code> file from the existing Tomcat with Microsoft SQL Server install location. For more details, refer the following section on how to configure identity to work on Microsoft Azure SQL.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<details close="close">
+<p><summary>Click here</summary></p>
+<pre><code>                Configure Identity on Tomcat with Microsoft Azure SQL Server
+
+                To run identity on Tomcat with Microsoft Azure SQL, you must edit the `authService.xml` file from the existing Tomcat with MSSQL install location.
+
+                1.  Open the `authService.xml` file from the existing Tomcat with MSSQL install location.  
+                    Sample Location for authService.xml from Tomcat with MSSQL install folder, `&lt;LocalDrive&gt;\VoltMXFoundryInstallerV8\tomcat\conf\Catalina\localhost\authService.xml`
+        2.  Modify the following the `authService.xml` file:
+        ```
+
+             <?xml version="1.0" encoding="utf-8" ?>
+                    <!-- The contents of this file will be loaded for each web application -->
+                    &lt;Context&gt;
+
+                            <Resource auth="Container" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"  
+                        factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" initialSize="5" jmxEnabled="true" logAbandoned="true" maxActive="10" maxIdle="5" maxWait="10000" minEvictableIdleTimeMillis="30000" minIdle="2" name="jdbc/authglobaldb" password="<Password>" removeAbandoned="true" removeAbandonedTimeout="600" testOnBorrow="true" testOnReturn="false" testWhileIdle="true" timeBetweenEvictionRunsMillis="30000" type="javax.sql.DataSource" url="jdbc:sqlserver://<DBServerIP:PORT>;databasename=<auth database name>;sendStringParametersAsUnicode=true;" username="<User_Name>" validationInterval="30000" validationQuery="SELECT 1"/>
+
+                            <Resource auth="Container" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"  
+                        factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" initialSize="5" jmxEnabled="true" logAbandoned="true" maxActive="10" maxIdle="5" maxWait="10000" minEvictableIdleTimeMillis="30000" minIdle="2" name="jdbc/authconfig" password="<Password>" removeAbandoned="true" removeAbandonedTimeout="600" testOnBorrow="true" testOnReturn="false" testWhileIdle="true" timeBetweenEvictionRunsMillis="30000" type="javax.sql.DataSource" url="jdbc:sqlserver::/<DBServerIP:PORT>;databasename=<auth database name>;sendStringParametersAsUnicode=true;" username="<User_Name>" validationInterval="30000" validationQuery="SELECT 1"/>
+
+                    &lt;/Context&gt;
+</code></pre>
+<p>```</p>
+</details>
+<pre><code>*   In the _Database Choice_ if you select 5, the _MariaDB Database Details_ appear.
+
+    \========================================================================  
+    MariaDB Database Details  
+    \-----------------------------------------
+
+    Please enter MariaDB database server details.
+
+    Database Server Hostname/IP (Default: 10.10.24.51): &lt;Hostname/IP&gt;
+
+    Database Port (Default: 1433):
+
+    Database Username (Default: ):
+
+    Instance Name (Optional) (Default: ):
+
+    1.  Enter the following details:
+        *   **Database Server IP**: Enter the server Hostname/IP to be used to create a database of selected components of Volt MX Foundry. By default, the server Hostname/IP is set as localhost.
+        *   **Database Port**: Enter the database port of the MariaDB Server. By default, this field is set to 3306 for MariaDB.
+        *   **Database Username**: Enter the user name used while creating the database user - for example, dbclient.
+    2.  Press **Enter**. The installer prompts for _Enter Password for Database User_ details as follows:
+
+        \========================================================================  
+        Enter Password for Database User  
+        \-----------------------------------------  
+        Please enter the password:
+
+    3.  Provide a password and press **Enter**.
+        *   If the database connection fails, the following error message displays.
+
+            \===============================================================================  
+            Database Connection Failed  
+            \--------------------------  
+            Database connection failed.
+
+            For the following reasons: Communications link failure
+
+            The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+
+            PRESS &lt;ENTER&gt; TO ACCEPT THE FOLLOWING (OK):
+
+        *   If the database server not compatible, the following error message displays:
+
+            \===============================================================================  
+            Incompatible Database Server Version  
+            \------------------------------------
+
+
+            PRESS &lt;ENTER&gt; TO ACCEPT THE FOLLOWING (OK):
+</code></pre>
+<ol>
+<li>
+<p>Press <strong>Enter</strong>. The installation prompts for Database name prefix and suffix details as follows:</p>
+<p>\===============================================================================<br />
+Database name prefix and suffix<br />
+-------------------------------  </p>
+<p>Please enter database name prefix and suffix. Please provide existing Prefix and Suffix if you intend to upgrade to the new Volt MX Foundry Database.  </p>
+<p>Database Name Prefix (Default: voltmx): tomcat  </p>
+<p>Database Name Suffix (Default: 1): 54</p>
+<ul>
+<li>Database Name Prefix: Enter valid prefix databases - for example, Volt MX.</li>
+<li>Database Name Suffix: Enter valid suffix for all databases - for example, 1.</li>
+<li>Enter the prefix and suffix for the database and press <strong>Enter</strong>. The <em>Administrator Account Configuration</em> details appear.</li>
+</ul>
+<p>The <strong>Administrator Account Configuration</strong> details help you to configure your super administrator account.</p>
+<p>The <strong>Administrator Account Configuration</strong> window appears only while installing Console and Identity Services along with one or all other Volt MX Foundry components such as Integration Services, and Engagement Services on Tomcat or JBoss on a single node. You can select the components at <a href="#InstallComponentsSN">Install Components</a>.</p>
+<p>\===============================================================================<br />
+Administrator Account Configuration<br />
+-------------------------------  </p>
+<p>Please configure your Administrator Account. We require your First Name, Last Name, Email Address and Password. Your Name is used for display purposes in the console, the Email address will be used as your login ID and we do not use it to send unsolicited emails.  </p>
+<p>Public URL (Default: ):  </p>
+<p>First Name (Default: ):  </p>
+<p>Last Name (Default: ):  </p>
+<p>Email (Default: ):  </p>
+<ol>
+<li>
+<p>In the <strong>Administrator Account Configuration</strong>, enter the following details to create the administrator account.</p>
+<ul>
+<li>
+<p><strong>Public URL</strong>: The URL field is filled with required details, for example. <code>&lt;Hostname/IP address&gt;:&lt;port&gt;</code>. Change these details, if required.</p>
+</li>
+<li>
+<p><strong>First Name</strong>: Enter the first name of the user.</p>
+</li>
+<li>
+<p><strong>Last Name</strong>: Enter the last name of the user.</p>
+</li>
+<li>
+<p><strong>Email</strong>: Enter the email address of the user. It can include alphanumeric and special characters that follow standard email address form.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> During Volt MX Foundry installation if you have configured your super administrator account, you can directly log in to Volt MX Foundry Console.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>Press <strong>Enter</strong>. The <em>Password for the Administrator Account</em> details appear.</p>
+<p>\===============================================================================<br />
+Password for the Administrator Account<br />
+-------------------------------<br />
+Please Enter the Password:  </p>
+<p>Confirm Password for the Administrator Account Configuration  </p>
+<p>Please Enter the Password:  </p>
+</li>
+<li>
+<p>Enter the admin log-in password and press <strong>Enter</strong>. The <em>Confirm Password for the Administrator Account Configuration</em> details appear.</p>
+<p>\===============================================================================<br />
+Confirm Password for the Administrator Account Configuration<br />
+-------------------------------  </p>
+<p>Please Enter the Password:</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Re-enter the admin log-in password and press <strong>Enter</strong>. The <em>VoltMX Foundry server startup</em> details appear.</p>
+<p>\===============================================================================<br />
+Volt MX Foundry server startup details<br />
+-----------------------------------  </p>
+<p>Do you want to start the Volt MX Foundry server after successful installation of Volt MX Foundry<br />
+-&gt;1- Yes<br />
+   2- No  </p>
+<p>ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT::</p>
+</li>
+<li>
+<p>To start the server automatically after the successful installation of Volt MX Foundry, press <strong>Enter</strong>.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> To start the server manually after the successful installation of Volt MX Foundry, refer to <a href="../../voltmx_foundry_manual_install_guide/Content/Starting_VoltMX_Foundry_Console.html">Starting Volt MX Foundry Console.</a></p>
+</blockquote>
+<p>The <em>Pre-Installation Summary</em> details appear.</p>
+<p>\==================================================<br />
+Pre-Installation Summary<br />
+------------------------<br />
+Please review the following before continuing:  </p>
+<p>Installation Type:<br />
+New Installation  </p>
+<p>Install Components:<br />
+Console, Developer Portal, Identity Services, Integration Services and Engagement Services  </p>
+<p>Install Folder:<br />
+/home/User/VoltMXFoundryInstaller-DEV-8.4.1.438  </p>
+<p>Application Server:<br />
+Tomcat 8.5.32  </p>
+<p>Application Server Details:<br />
+Hostname/IP Address: 10.11.12.201, Protocol: HTTP, HTTP Port: 8080,  </p>
+<p>Database Choice:<br />
+MySQL 5.7  </p>
+<p>Database Details:<br />
+Hostname/IP Address: mbaastest22.hcl.net, User: mfuser, Port: 3306  </p>
+<p>Database Names:<br />
+Test_mfconsoledb_438, Test_mfaccountsdb_438, Test_mfreportsdb_438, Test_idconfigdb_438, Test_admindb_438 and Test_vpnsdb_438  </p>
+<p>Admin Account Details:<br />
+First Name:test, Last Name:one, Email:bvtuser@voltmx.com  </p>
+<p>PRESS <ENTER> TO CONTINUE: =========================================================== Installing... ------------- [==================|==================|==================]</p>
+</li>
+<li>
+<p>Type the details and press <strong>Enter</strong>. The <em>Ready To Install</em>  details appear.</p>
+<p>\========================================================================<br />
+Ready To Install<br />
+-----------------------------------------  </p>
+<p>Installer is now ready to install Volt MX Foundry Console onto your system at the following location:  </p>
+<p>/home/user1/VoltMXFoundry  </p>
+<p>PRESS <ENTER> TO INSTALL:  </p>
+</li>
+<li>
+<p>Press <strong>Enter</strong> to continue the installation.</p>
+<p>\========================================================================<br />
+Installing...<br />
+-----------------------------------------  </p>
+<p>[==================|==================|==================|==================] [------------------|------------------|------------------|------------------]</p>
+</li>
+<li>
+<p>Press <strong>Enter</strong>. The <em>Installation Complete</em> details appear.</p>
+<p>\========================================================================<br />
+Installation Complete<br />
+-----------------------------------------  </p>
+<p>Congratulations. Volt MX Foundry has been successfully installed to:  </p>
+<p>/home/user1/VoltMXFoundry  </p>
+<p>Console URL: https://00.00.00.00:port/mfconsole<br />
+Identity Service URL: https://00.00.00.00:port/authService<br />
+Integration Service URL: https://00.00.00.00:port/admin<br />
+Engagement Services URL: http://00.00.00.000:port/vpns  </p>
+<p>PRESS <ENTER> TO EXIT THE INSTALLER: [user1@cnt6-01c downloads]$</p>
+</li>
+<li>
+<p>Press <strong>Enter</strong> to complete the installation. After the installation is completed, the installer creates logs in the install folder.</p>
+<blockquote>
+<p><strong><em>Important:</em></strong> When you are using a third party tool (for example, PuTTY) for installing Volt MX Foundry remotely, if any network connection issues occur at the end of the installation, the installer stops the installation and the installation log is not created.</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p><strong><em>Important:</em></strong>  After installing Volt MX Foundry, import your SSL certificate (for example, domain.subdomain.crt) into your Volt MX Foundry installer's JRE trusted certificate authority (CA) certificates file - for example,<br />
+<code>&lt;INSTALL_DIR&gt;/jre/lib/security/cacerts</code>  </p>
+</blockquote>
+<p>If your SSL certificate is not configured, the system displays an error - for example, "peer not authenticated".  </p>
+<p>For details, refer to <a href="Troubleshooting.html#Service_Provider's_Certificate_Issues">Troubleshoot with SSL Certificate Issues</a>.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> You can now access Volt MX Foundry Console by using the URLs. For more details, refer to <a href="../../voltmx_foundry_user_guide/Content/How_to_access_VoltMX_Foundry_Portal_on-Prem.html">Accessing Volt MX Foundry Console - On-premises</a>.<br />
+<img alt="" src="Resources/Images/MFWelcome_649x407.png" />  </p>
+</blockquote>
+<p>During installation if you have configured your super administrator account, you can directly <a href="../../voltmx_foundry_user_guide/Content/How_to_access_VoltMX_Foundry_Portal_on-Prem.html">log in to Volt MX Foundry Console</a> by using the Console URL.  </p>
+<p><img alt="" src="Resources/Images/Sign-inMF_648x363.png" /></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2021 - 2024, HCL America, Inc. | <a href="https://hcltechsw.com/wps/portal/legal/privacy">Privacy Statement</a> | <a href="https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.hcltechsw.com%2Fwps%2Fportal%2Flegal%2Fterms-use&data=04%7C01%7Csuresh.chenji%40hcl.com%7Ca77ebddc51574aff8c6c08d8f056542d%7C189de737c93a4f5a8b686f4ca9941912%7C0%7C0%7C637523600856805537%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&sdata=vLnT466NGuIbvQ0nEwfn2qdXeuhHb6XOnh1pibATDI4%3D&reserved=0">Terms of Use</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+<div class="md-social">
+  <ul class="social-nav">
+    <li><a href="https://www.facebook.com/HCLDigital" class="facebook" target="_blank">Facebook</a></li>
+    <li><a href="https://www.linkedin.com/company/hclsoftware" class="linkedin" target="_blank">LinkedIn</a></li>
+    <li><a href="https://twitter.com/HCLDigital"  class="twitter" target="_blank">Twitter</a></li>
+    <li><a href="https://www.youtube.com/HCLDigitalSolutions" class="youtube" target="_blank">Youtube</a></li>
+    <li>
+      <a href="https://github.com/HCL-TECH-SOFTWARE" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    </li>
+  </ul>    
+</div>
+  </div>
+  <div class="md-footer-meta__inner md-grid">
+  <span class="md-footer__git_legacy">Please report problems with this documentation by <a class="announcement__link" href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/issues">opening issues in Github</a>.</span>
+  <span class="legacy-link md-footer__git_legacy">Can't find a topic? Check the legacy documentation <a class="announcement__link" href="https://opensource.hcltechsw.com/Volt-MX-Documentation-Archive/docs/documentation/" target="_blank">here</a>.</span>
+</span>
+    </div>
+</div>
+    <script>
+      function myFunction95(){
+          var initial_url = document.location.href;
+          var url_stub = initial_url.split( 'docs/documentation' );
+          var fixed_url = url_stub[0]+'95/docs/documentation';
+		  console.log(fixed_url);
+//          var fixed_url = 'https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation'
+          var url = initial_url.split( '/' );
+          var updated_url
+          if ( url[ url.length - 2 ] == "Foundry" || url[ url.length - 2 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 2 ] == "articles" || url[ url.length - 2] == "getting-started" || url[ url.length - 2 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 3 ] == "Foundry" || url[ url.length - 3 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 3 ] == "articles" || url[ url.length - 3 ] == "getting-started" || url[ url.length - 3 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 4 ] == "Foundry" || url[ url.length - 4 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 4 ] == "articles" || url[ url.length - 4 ] == "getting-started" || url[ url.length - 4 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 5 ] == "Foundry" || url[ url.length - 5 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 5 ] == "articles" || url[ url.length - 5 ] == "getting-started" || url[ url.length - 5 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 5 ] + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 6 ] == "Foundry" || url[ url.length - 6 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 6 ] == "articles" || url[ url.length - 6 ] == "getting-started" || url[ url.length - 6 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 6 ] + '/' + url[ url.length - 5 ] + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else{
+            updated_url= fixed_url + '/' + url[ url.length - 1];
+          }
+          window.location.replace(updated_url);
+          }
+    </script>
+
+  
+
+</footer>
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.prune"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,4250 @@
+<!-- Elements added to main will be displayed on all pages -->
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_foundry_user_guide/Content/EAS_NativeApp_Walk-through.html">
+      
+      
+        <link rel="prev" href="AppVersionUpgradePolicyEAS.html">
+      
+      
+        <link rel="next" href="KnownIssuesEAS.html">
+      
+      
+      <link rel="icon" href="../../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>Walk-through of Volt MX Enterprise App Store (EAS) Source Application - HCL Volt MX Documentation V9.2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/vmx_style.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#walk-through-of-volt-mx-enterprise-app-store-eas-source-application" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+<div class="content-types-banner">
+    <ul class="sub-nav">
+        <li class="home-link">
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/index.html"  class="sub-link ">Home</a>
+        </li>
+        <li>
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/tutorials/Tutorials.html" class="sub-link">Tutorials</a>
+        </li>
+        <li>
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/index.html" class="sub-link" id="docLink">Documentation</a>
+        </li>
+        <li>
+            <a href="https://support.hcltechsw.com/csm?id=kb_search&spa=1&kb_category=db382ff1db631c14a45ad9fcd3961936" title="Articles" class="sub-link">Articles</a>
+        </li>
+        <li>
+            <a href="https://hclsoftwareu.hcltechsw.com/#VoltMxLearningJourneys" title="Articles" class="sub-link">Software Academy</a>
+        </li>
+        <li style="float:right">
+          <button onclick="myFunction95()" style="color:white; border-radius:5px ;padding:5px 10px 5px 10px; border: 2px solid white;" class="sub-link" id="docLink92">Switch to V9.5</button>
+      </li>
+    </ul>
+</div>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="HCL Volt MX Documentation V9.2" class="md-header__button md-logo" aria-label="HCL Volt MX Documentation V9.2" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HCL Volt MX Documentation V9.2
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Walk-through of Volt MX Enterprise App Store (EAS) Source Application
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    HCL-TECH-SOFTWARE/volt-mx-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="HCL Volt MX Documentation V9.2" class="md-nav__button md-logo" aria-label="HCL Volt MX Documentation V9.2" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.png" alt="logo">
+
+    </a>
+    HCL Volt MX Documentation V9.2
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    HCL-TECH-SOFTWARE/volt-mx-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Introducing Volt MX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Introducing Volt MX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducing Volt MX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../Whats_New_Main_Page.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    What&apos;s New
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../VMX_release_notes.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Release Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../Iris/app_platform/Content/AppPlatform_Overview.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    App Platform
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../tutorials/Tutorials.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Tutorials
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installationGuides.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation Guides
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../Iris/voltmxIrisFundamentals.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Iris
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_8" id="__nav_1_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Foundry
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_8">
+            <span class="md-nav__icon md-icon"></span>
+            Foundry
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voltmxFoundryFundamentals.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../installing_foundry.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Installing Foundry
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_8_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_8_3" id="__nav_1_8_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Volt MX Foundry User Guide
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_8_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_8_3">
+            <span class="md-nav__icon md-icon"></span>
+            Volt MX Foundry User Guide
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Introduction.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Preface.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Preface
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundrySDKs.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Foundry SDKs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Accessing_VoltMX_MBaaS_Portal.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Accessing Volt MX Foundry Console - Volt MX Cloud
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Environments-Cloud.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Environments - Volt MX Cloud
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Account_Settings_User_ACLs.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Default Access Control Lists (ACLs) on New Apps and Services
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="UpgradeCloud.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Volt MX Foundry Updates on Cloud
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="How_to_access_VoltMX_Foundry_Portal_on-Prem.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Accessing Volt MX Foundry Console - On-Premises
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Environments.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Environments - On-Premises
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Published_Apps-Environments.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Viewing Applications Published to a Runtime Environment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Features.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Features
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Adding_Applications.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Apps - How to Add Applications
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ConsoleAccessControl.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Console Access Control
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="API_Management.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    APIs in API Management
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="API_Versioning.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Versioning
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="App_Versioning.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Application Versioning
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="CustomDataConfig.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Custom Data Adapters on Volt MX Foundry
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="JAR_Management.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Managing JAR Files
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="CLI_Analytics.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Analytics for Third-party Client App Binaries
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Export-Import_Apps.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exporting and Importing an Application
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="Identity.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Identity
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="Legacy_Serivces.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Legacy Services
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="Services.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Integration
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="Orchestration.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Orchestration
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="Objectservices.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Object Services
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="offline_Sync.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Offline Enablement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Legacy_Sync.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Legacy Sync
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="VoltMXDevPortal.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Developer Portal
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Logic_in_Apps.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Logic
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Rules_as_a_Service.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rules as a Service
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Engagement.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Engagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="Manage_Client_App_Assets.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Manage Client App Assets
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="EnterpriseAppStore.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Volt MX Enterprise App Store Service for Digital App Distribution
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PushNotificationsEas.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sending Push Notification to EAS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="AppVersionUpgradePolicyEAS.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Checking App Versions in EAS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Walk-through of Volt MX Enterprise App Store (EAS) Source Application
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="EAS_NativeApp_Walk-through.html" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Walk-through of Volt MX Enterprise App Store (EAS) Source Application
+  </span>
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#eas-app-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      EAS App Implementation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#app-architecture-under-volt-mx-reference-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      App Architecture under Volt MX Reference Architecture
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites-to-configure-eas-source-app-in-iris" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites to Configure EAS Source App in Iris
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#downloading-eas-app-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Downloading EAS App Assets
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Downloading EAS App Assets">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#downloading-front-end-project-for-eas-app-for-volt-mx-iris" class="md-nav__link">
+    <span class="md-ellipsis">
+      Downloading Front-end Project for EAS App for Volt MX Iris
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#downloading-server-app-volt-mx-app-store-for-volt-mx-foundry" class="md-nav__link">
+    <span class="md-ellipsis">
+      Downloading Server App (Volt MX App Store) for Volt MX Foundry
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-eas-app-in-iris" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring EAS App in Iris
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuring EAS App in Iris">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#importing-eas-front-end-project-in-iris" class="md-nav__link">
+    <span class="md-ellipsis">
+      Importing EAS Front-End Project in Iris
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importing-server-app-to-volt-mx-foundry" class="md-nav__link">
+    <span class="md-ellipsis">
+      Importing Server App to Volt MX Foundry
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#associating-front-end-project-with-server-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      Associating Front-end Project with Server App
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-of-eas-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      Source of EAS App
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Source of EAS App">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#structure-of-the-eas-front-end-project-store-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      Structure of the EAS Front-end Project - Store Project
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Structure of the EAS Front-end Project - Store Project">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-layout-of-the-front-end-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Layout of the Front-End App
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supported-functionality-and-forms-eas-front-end-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supported Functionality and Forms - EAS Front-End Project
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reference-architecture-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference Architecture Extensions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source-details-of-eas-back-end-app-volt-mx-app-store-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      Source Details of EAS Back-End App - Volt MX App Store App
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#branding-enterprise-app-store-to-your-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Branding Enterprise App Store to your Requirements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Branding Enterprise App Store to your Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#branding-eas-app-to-your-company-logo-and-splash-screen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Branding EAS App to your Company Logo and Splash Screen
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Branding EAS App to your Company Logo and Splash Screen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changing-an-app-icon" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changing an App Icon
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replacing-image-for-the-existing-splash-screen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Replacing Image for the existing Splash Screen
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-new-image-to-splash-screen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding New Image to Splash Screen
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changing-the-eas-package-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changing the EAS Package Name
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-contact-us-form-and-support-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding Contact Us Form and Support Details
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Adding Contact Us Form and Support Details">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#supported-functionality-and-forms-eas-front-end-project_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supported Functionality and Forms - EAS Front-End Project
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reference-architecture-extensions_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference Architecture Extensions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source-details-of-eas-back-end-app-volt-mx-app-store-app_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Source Details of EAS Back-End App - Volt MX App Store App
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#branding-enterprise-app-store-to-your-requirements_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Branding Enterprise App Store to your Requirements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Branding Enterprise App Store to your Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#branding-eas-app-to-your-company-logo-and-splash-screen_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Branding EAS App to your Company Logo and Splash Screen
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Branding EAS App to your Company Logo and Splash Screen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changing-an-app-icon_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changing an App Icon
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replacing-image-for-the-existing-splash-screen_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Replacing Image for the existing Splash Screen
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-new-image-to-splash-screen_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding New Image to Splash Screen
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changing-the-eas-package-name_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changing the EAS Package Name
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-contact-us-form-and-support-details_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding Contact Us Form and Support Details
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Adding Contact Us Form and Support Details">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#supported-functionality-and-forms-eas-front-end-project_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supported Functionality and Forms - EAS Front-End Project
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reference-architecture-extensions_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference Architecture Extensions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source-details-of-eas-back-end-app-volt-mx-app-store-app_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Source Details of EAS Back-End App - Volt MX App Store App
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#branding-enterprise-app-store-to-your-requirements_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Branding Enterprise App Store to your Requirements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Branding Enterprise App Store to your Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#branding-eas-app-to-your-company-logo-and-splash-screen_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Branding EAS App to your Company Logo and Splash Screen
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Branding EAS App to your Company Logo and Splash Screen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changing-an-app-icon_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changing an App Icon
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replacing-image-for-the-existing-splash-screen_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Replacing Image for the existing Splash Screen
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-new-image-to-splash-screen_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding New Image to Splash Screen
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changing-the-eas-package-name_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changing the EAS Package Name
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-contact-us-form-and-support-details_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding Contact Us Form and Support Details
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modifying-server-eas-app-for-identity-services-and-metadata-of-binaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modifying Server EAS App for Identity Services and Metadata of Binaries
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modifying Server EAS App for Identity Services and Metadata of Binaries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuring-identity-services-for-eas-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring Identity Services for EAS Authentication
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-properties-for-client-binaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring Properties for Client Binaries
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#publishing-eas-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      Publishing EAS App
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Publishing EAS App">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build-and-publish-app-binaries-to-eas-using-volt-mx-iris" class="md-nav__link">
+    <span class="md-ellipsis">
+      Build and Publish App Binaries to EAS using Volt MX Iris
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#publish-app-binaries-to-eas-using-volt-mx-foundry" class="md-nav__link">
+    <span class="md-ellipsis">
+      Publish App Binaries to EAS using Volt MX Foundry
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="KnownIssuesEAS.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Known Issues - EAS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="Publish.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Publish
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="AppPromotion.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Promoting a Deployment Package
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="CI_Foundry.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Volt MX Foundry Command Line Utility - Continuous Integration
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="Foundry_SDKs.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    SDKs
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Settings_Cloud.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Settings - Cloud
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Settings.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Settings - On-premises
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Reports.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reports
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Support.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Support
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Telemetry.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Telemetry
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Samples/Samples.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tutorials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Appendix_-_Sync_Strategy.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Appendix - Sync Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="Appendix_-_App_Services.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Appendix - App Services
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Appendix_-_FAQs.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Appendix - Frequently Asked Questions (FAQs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Limitations.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Limitations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../KF_Services_OAuth_Sample/Content/KF_Services_OAuth_Sample.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    OAuth Sample App Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../integration_services.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Integration Services
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../administering_foundry.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Administering Foundry
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../vmf_integrationservice_admin_console_userguide/Content/App_Services_User_Guide.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    App Services Console User Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../voltmx_appfactory_user_guide/Content/Introduction.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    App Factory User Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../voltmx_Foundry_deployment_guide/Content/Introduction.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Volt MX Foundry Deployment Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VoltMX_Analytics_Cloud_FAQs/Content/VoltMX_Analytics_Cloud_FAQs.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Volt MX Analytics & Reporting Cloud FAQs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../vmfintegrationservice_troubleshooting_guide/Content/Integration_Services_Troubleshooting_Guide.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Integration Services Troubleshooting Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#eas-app-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      EAS App Implementation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#app-architecture-under-volt-mx-reference-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      App Architecture under Volt MX Reference Architecture
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites-to-configure-eas-source-app-in-iris" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites to Configure EAS Source App in Iris
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#downloading-eas-app-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Downloading EAS App Assets
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Downloading EAS App Assets">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#downloading-front-end-project-for-eas-app-for-volt-mx-iris" class="md-nav__link">
+    <span class="md-ellipsis">
+      Downloading Front-end Project for EAS App for Volt MX Iris
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#downloading-server-app-volt-mx-app-store-for-volt-mx-foundry" class="md-nav__link">
+    <span class="md-ellipsis">
+      Downloading Server App (Volt MX App Store) for Volt MX Foundry
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-eas-app-in-iris" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring EAS App in Iris
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuring EAS App in Iris">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#importing-eas-front-end-project-in-iris" class="md-nav__link">
+    <span class="md-ellipsis">
+      Importing EAS Front-End Project in Iris
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importing-server-app-to-volt-mx-foundry" class="md-nav__link">
+    <span class="md-ellipsis">
+      Importing Server App to Volt MX Foundry
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#associating-front-end-project-with-server-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      Associating Front-end Project with Server App
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-of-eas-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      Source of EAS App
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Source of EAS App">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#structure-of-the-eas-front-end-project-store-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      Structure of the EAS Front-end Project - Store Project
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Structure of the EAS Front-end Project - Store Project">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-layout-of-the-front-end-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Layout of the Front-End App
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supported-functionality-and-forms-eas-front-end-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supported Functionality and Forms - EAS Front-End Project
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reference-architecture-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference Architecture Extensions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source-details-of-eas-back-end-app-volt-mx-app-store-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      Source Details of EAS Back-End App - Volt MX App Store App
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#branding-enterprise-app-store-to-your-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Branding Enterprise App Store to your Requirements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Branding Enterprise App Store to your Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#branding-eas-app-to-your-company-logo-and-splash-screen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Branding EAS App to your Company Logo and Splash Screen
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Branding EAS App to your Company Logo and Splash Screen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changing-an-app-icon" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changing an App Icon
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replacing-image-for-the-existing-splash-screen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Replacing Image for the existing Splash Screen
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-new-image-to-splash-screen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding New Image to Splash Screen
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changing-the-eas-package-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changing the EAS Package Name
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-contact-us-form-and-support-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding Contact Us Form and Support Details
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Adding Contact Us Form and Support Details">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#supported-functionality-and-forms-eas-front-end-project_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supported Functionality and Forms - EAS Front-End Project
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reference-architecture-extensions_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference Architecture Extensions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source-details-of-eas-back-end-app-volt-mx-app-store-app_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Source Details of EAS Back-End App - Volt MX App Store App
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#branding-enterprise-app-store-to-your-requirements_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Branding Enterprise App Store to your Requirements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Branding Enterprise App Store to your Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#branding-eas-app-to-your-company-logo-and-splash-screen_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Branding EAS App to your Company Logo and Splash Screen
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Branding EAS App to your Company Logo and Splash Screen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changing-an-app-icon_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changing an App Icon
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replacing-image-for-the-existing-splash-screen_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Replacing Image for the existing Splash Screen
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-new-image-to-splash-screen_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding New Image to Splash Screen
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changing-the-eas-package-name_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changing the EAS Package Name
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-contact-us-form-and-support-details_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding Contact Us Form and Support Details
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Adding Contact Us Form and Support Details">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#supported-functionality-and-forms-eas-front-end-project_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supported Functionality and Forms - EAS Front-End Project
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reference-architecture-extensions_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference Architecture Extensions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source-details-of-eas-back-end-app-volt-mx-app-store-app_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Source Details of EAS Back-End App - Volt MX App Store App
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#branding-enterprise-app-store-to-your-requirements_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Branding Enterprise App Store to your Requirements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Branding Enterprise App Store to your Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#branding-eas-app-to-your-company-logo-and-splash-screen_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Branding EAS App to your Company Logo and Splash Screen
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Branding EAS App to your Company Logo and Splash Screen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changing-an-app-icon_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changing an App Icon
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replacing-image-for-the-existing-splash-screen_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Replacing Image for the existing Splash Screen
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-new-image-to-splash-screen_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding New Image to Splash Screen
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changing-the-eas-package-name_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changing the EAS Package Name
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-contact-us-form-and-support-details_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding Contact Us Form and Support Details
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modifying-server-eas-app-for-identity-services-and-metadata-of-binaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modifying Server EAS App for Identity Services and Metadata of Binaries
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modifying Server EAS App for Identity Services and Metadata of Binaries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuring-identity-services-for-eas-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring Identity Services for EAS Authentication
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-properties-for-client-binaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring Properties for Client Binaries
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#publishing-eas-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      Publishing EAS App
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Publishing EAS App">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build-and-publish-app-binaries-to-eas-using-volt-mx-iris" class="md-nav__link">
+    <span class="md-ellipsis">
+      Build and Publish App Binaries to EAS using Volt MX Iris
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#publish-app-binaries-to-eas-using-volt-mx-foundry" class="md-nav__link">
+    <span class="md-ellipsis">
+      Publish App Binaries to EAS using Volt MX Foundry
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<p>User Guide: EAS App Implementation</p>
+<h1 id="walk-through-of-volt-mx-enterprise-app-store-eas-source-application">Walk-through of Volt MX Enterprise App Store (EAS) Source Application</h1>
+<h2 id="eas-app-implementation">EAS App Implementation</h2>
+<p>Volt MX Enterprise App Store (EAS) is a simplified app distribution service that enables an enterprise to securely and easily distribute and manage apps to the users. All features of Volt MX EAS are available on Cloud and On-Premises. For more information on EAS, refer to <a href="EnterpriseAppStore.html">VoltMX Enterprise App Store (EAS) Service for Digital App Distribution</a>.</p>
+<p>From Volt MX AppPlatform V8 SP4 JuneFP onwards, Volt MX allows you to access the complete EAS App assets including the front-end project details and the back-end app. You can download the EAS App assets from the <a href="https://marketplace.hclvoltmx.com/">VoltMX Marketplace</a>. These assets contain the source code of the Enterprise App Store, which is available for you to edit as per your requirement. You may choose to re-brand the app, or add specific forms to best suit your requirements.</p>
+<p>For example, you can brand some of the following use cases:</p>
+<ul>
+<li>Name, Slogan, Style</li>
+<li>Graphics: Logo, app icon, splash screen, and visual image of the app</li>
+<li>
+<p>Look of the app</p>
+</li>
+<li>
+<p>Brand keywords</p>
+</li>
+</ul>
+<h2 id="app-architecture-under-volt-mx-reference-architecture">App Architecture under Volt MX Reference Architecture</h2>
+<ul>
+<li><strong>Volt MX Reference Architecture</strong>: Volt MX EAS App is built on the Volt MX Reference Architecture. Volt MX Reference Architecture encapsulates your app's code into Volt MX's implementation of the Model View Controller (MVC) software architecture. Under Volt MX Reference Architecture, the code for your app has a clear division between the domain objects that model the app's functional domain and the presentation objects that represent what the user sees on the screen. Therefore, domain objects work independently of the presentation objects and can support multiple presentations, even simultaneously. Both domain objects and presentation objects are encapsulated into specific modules that Volt MX Reference Architecture generates automatically for you from the user interface that you create in Volt MX Reference Architecture Iris. For more information on Volt MX Reference Architecture Reference Architecture, refer to <a href="../../../Iris/voltmx_ref_arch_api/Content/A_Deeper_Look_at_VoltMX_Reference_Architecture.html">A Deeper Look at Volt MX Reference Architecture Reference Architecture</a>.</li>
+<li>
+<p>Extensibility and Customization: While Volt MX Reference Architecture EAS provide optimal functionality out of the box, HCL understands that each enterprise has unique requirements. The solutions can be easily extended to support business-specific applications and requirements by leveraging the power of the Volt MX platform. This allows customers to add their own functionality via third-party solutions or their own built-in modules on the Volt MX AppPlatform. For more information on Extensibility and Customization, refer to <a href="https://voltmxsolutions.atlassian.net/wiki/spaces/ARBD/pages/271811283/Extension+Points#ExtensionPoints-commanpatternBusinessExtensionsusingCommandPattern">Extensibility</a>.</p>
+<p>Volt MX EAS is built by using the industry-leading Volt MX Iris and Volt MX Foundry tools, which allow enterprises to customize and extend the following:</p>
+<ul>
+<li>Look and feel of the application</li>
+<li>Business rules that define the application functionality</li>
+<li>Rules around the data flow between the device and the back end</li>
+</ul>
+<p>Further, the solution includes an extension framework that allows implementation teams to do the following:</p>
+<ul>
+<li>Introduce a new form in an existing business workflow</li>
+<li>Replace an existing business logic method with new implementation</li>
+<li>Programmatically add new widgets to existing forms</li>
+<li>Update various properties of widgets</li>
+<li>Hide a feature that the bank does not need</li>
+</ul>
+</li>
+</ul>
+<h2 id="prerequisites-to-configure-eas-source-app-in-iris">Prerequisites to Configure EAS Source App in Iris</h2>
+<p>Before you start using the source of the EAS App, ensure you have access to the following:</p>
+<ul>
+<li>Access to a Volt MX Cloud account. If you do not have a cloud account, you can register for it at <a href="https://manage.hclvoltmx.com/registration">VoltMX Cloud Registration</a>.</li>
+<li>
+<p>Access to a Volt MX Cloud Build Environment, Volt MX Iris Starter, and access to Foundry App Server for publishing apps to EAS. </p>
+<p><details close markdown="block"><summary>Click here for</summary> 
+<strong>EAS and Platform Versions Compatibility Chart</strong>  </p>
+<p>The following table details the supported versions of EAS source and Platform.</p>
+<blockquote>
+<p><strong><em>Important:</em></strong> If you are upgrading to EAS V 2.0.1 or a higher version, you must restart the server.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>EAS Source App version</th>
+<th></th>
+<th><strong>Platform Supported Version</strong></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Client App (Store.zip)</td>
+<td>Server App (Volt MX App Store.zip)</td>
+<td>Foundry</td>
+<td>  Iris</td>
+<td>Middleware</td>
+</tr>
+<tr>
+<td>---</td>
+<td>---</td>
+<td>---</td>
+<td>---</td>
+<td>---</td>
+</tr>
+<tr>
+<td>1.0.0</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><details close markdown="block"><summary>Features</summary></p>
+<p>Initial Release</p>
+<p>| 1.0.0 | NA | V8 SP4 FP44 or lower | 8.4.3.x. |
+| 1.1.0</p>
+<p></details>
+<details close markdown="block"><summary>Features</summary></p>
+<p>Support for Web apps</p>
+<p>| 1.0.0 | NA | V8 SP4 FP44 or lower | 8.4.3.x. |
+| 2.0.0</p>
+<p></details>
+<details close markdown="block"><summary>Features</summary></p>
+<p>Support for Android 10Support for iOS 13Push Notifications</p>
+<p>| 2.0.0 | NA | V8 SP4 FP48 or higher | 8.4.3.x |
+| 2.0.1</p>
+<p></details>
+<details close markdown="block"><summary>Features</summary></p>
+<p>Bug fixes</p>
+<p>| 2.0.1 | NA | V8 SP4 FP66 or higher. | 8.4.3.10 |
+| 3.0.1</p>
+<p></details>
+<details close markdown="block"><summary>Features</summary></p>
+<p>Support for Desktop ViewHelp section in iOS Native Apps</p>
+<p>| 3.0.1 | NA | V9 GA | 8.4.3.10 |
+| 3.1.0</p>
+<p></details>
+<details close markdown="block"><summary>Features</summary></p>
+<p>Support for Upgrade Policy</p>
+<p>| 3.1.0 | NA | V9 SP1 | V9 SP1 |
+| <strong>SP</strong>: Service Pack<strong>FP</strong>: Fix Pack |||||</p>
+<p></details>
+</details></p>
+</li>
+<li>
+<p>Configure the various Project Settings.</p>
+<ul>
+<li>Go to <strong>Project</strong> &gt; <strong>Settings</strong> and configure the build settings for each Native platform. For more information on <strong>Project Settings</strong>, click <a href="../../../Iris/iris_user_guide/Content/Project_Properties_In_Iris_Starter.html#top">here</a>.</li>
+</ul>
+</li>
+<li>Platform specific prerequisites:<ul>
+<li>If you choose to build an application for the <strong>iOS</strong> platform, you must provide the Mobile Provision, .P12, P12 password, and the Development method. To do so, go to <strong>Project Settings &gt; Native &gt; iPhone/iPad</strong>. For more details on the iOS configurations, click <a href="https://support.hcltechsw.com/csm?id=kb_article&amp;sysparm_article=KB0083760">here</a>.</li>
+<li>If you choose to build an application for the <strong>Android</strong> platform in <strong>Release</strong> <strong>mode</strong>, then the Android signing details are mandatory. To do so, go to <strong>Project Settings</strong> &gt; <strong>Native</strong> &gt; <strong>Android Mobile/Tablet</strong>. For more details on Android sign in details, click <a href="https://support.hcltechsw.com/csm?id=kb_article&amp;sysparm_article=KB0083782">here</a>.</li>
+</ul>
+</li>
+<li>If you choose to build an application in <strong>Protected mode</strong>, then setting the public and private keys is mandatory. To do so, go to <strong>Project Settings &gt; Protected Mode</strong>. For more details on how to generate public and private keys, click <a href="../../../Iris/iris_user_guide/Content/ApplicationSecurity.html#Key">here</a>.</li>
+</ul>
+<h2 id="downloading-eas-app-assets">Downloading EAS App Assets</h2>
+<p>The EAS App assets are divided as follows:</p>
+<ul>
+<li><code>store.zip</code> is the front-end source app of the EAS.</li>
+<li><strong><code>voltmx_app_store.zip</code></strong>is the back-end source app of the EAS.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Store.zip</th>
+<th>Volt MX App Store.zip</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>store.zip</code> is the Iris project created for EAS based on Volt MX Reference Architecture. The Store project contains the client app/front-end app details of the EAS App. It contains the details of the project layout, modules and forms, and the client-side code of the front-end app. The <strong>Store</strong> project is associated with the <strong>Volt MX App Store</strong> App for the linked services.</td>
+<td><strong><code>`voltmx_app_store.zip`</code></strong> is the Server app containing the services linked to the EAS App.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="downloading-front-end-project-for-eas-app-for-volt-mx-iris">Downloading Front-end Project for EAS App for Volt MX Iris</h3>
+<p><strong>Store</strong> is the front-end project of the EAS created based on the Volt MX Reference Architecture. You can download the EAS App assets from <a href="https://marketplace.hclvoltmx.com/">VoltMX Marketplace</a>. The store.zip app contains details such as forms for supported channels, splash screen, client-side code, and modules and forms of EAS.</p>
+<p>For Cloud, the Store app is bundled with the front-end and Server apps.</p>
+<ol>
+<li>Go to <a href="https://marketplace.hclvoltmx.com/items/store-0">VoltMX Marketplace</a>.</li>
+<li>Click <strong>Download</strong>. The <code>store.zip</code> file gets downloaded to your local system. For more details on EAS versions, refer to <a href="#VersionsEASPlatforms">EAS and Platform Versions Compatibility Chart</a>.</li>
+</ol>
+<h3 id="downloading-server-app-volt-mx-app-store-for-volt-mx-foundry">Downloading Server App (Volt MX App Store) for Volt MX Foundry</h3>
+<p>MK
+The <strong>Volt MX App Store</strong> is the Server app (Volt MX Foundry), which contains services linked to EAS. You can download the source app (Volt MX App Store) from Marketplace.</p>
+<ol>
+<li>Go to <a href="https://marketplace.hclvoltmx.com/items/kony-app-store?search=voltmx%20app%20store">Volt MX Marketplace</a>.</li>
+<li>Click <strong>Download</strong>. The <code>voltmx_app_store.zip</code> file gets downloaded to your local system. For more details on EAS versions, refer to <a href="#VersionsEASPlatforms">EAS and Platform Versions Compatibility Chart</a>.</li>
+</ol>
+<h2 id="configuring-eas-app-in-iris">Configuring EAS App in Iris</h2>
+<h3 id="importing-eas-front-end-project-in-iris">Importing EAS Front-End Project in Iris</h3>
+<p>You can view the layout of the front-end app and the source code by importing the Store project to Volt MX Iris.</p>
+<ol>
+<li>Make sure you are logged into Volt MX Iris.</li>
+<li>
+<p>From the <strong>Project</strong> menu, click <strong>Import &gt;</strong> <strong>Local Project</strong> &gt; <strong>Open as New Project</strong>.</p>
+<p><img alt="" src="Resources/Images/ImportEAS_428x405.png" /></p>
+</li>
+<li>
+<p>In the <strong>Import</strong> dialog box, select <strong>Select archive files</strong>, and then click <strong>Browse</strong> to select the <strong>store.zip</strong> file that you have downloaded.</p>
+<p>The Store project gets imported to your Iris. <a href="#the-layout-of-the-front-end-app">You can view the layout of the EAS project</a>.</p>
+</li>
+</ol>
+<h3 id="importing-server-app-to-volt-mx-foundry">Importing Server App to Volt MX Foundry</h3>
+<p>The Volt MX App Store app is available in your account in Volt MX Foundry by default. The app should be existing always in your account for EAS to work. The Volt MX App Store app is configured with the required services to be used in an app for EAS, for example, Identity Services.</p>
+<p>In case you want to import a different version of the app, you can re-import it from <a href="https://marketplace.hclvoltmx.com/">VoltMX Marketplace</a>.</p>
+<ol>
+<li>Log in to Volt MX Foundry.</li>
+<li>In the <strong>Apps</strong> &gt; <strong>Foundry App</strong>, click <strong>IMPORT</strong>, and drag and drop or browse for the <strong><code>voltmx_app_store_v1.0.zip</code></strong> file to upload.</li>
+<li>
+<p>In the <strong>Open</strong> dialog, select the <strong>Volt MX App Store</strong> app that you downloaded.</p>
+<blockquote>
+<p><strong><em>Important:</em></strong> Ensure the Volt MX App Store App must be published to Server before you build and publish the EAS App in Iris.</p>
+</blockquote>
+</li>
+<li>
+<p>Associate the Store project with the Server app. For more information, refer to <a href="#importing-server-app-to-foundry">How to Link EAS Front-End Project with Back-End App</a>.</p>
+</li>
+</ol>
+<h3 id="associating-front-end-project-with-server-app">Associating Front-end Project with Server App</h3>
+<p>To publish your app to Volt MX Foundry, your Volt MX Iris client app must be associated with a Volt MX Foundry app. After you import the Store project in Iris, you must associate it with the Volt MX App Store App.</p>
+<ol>
+<li>In Volt MX Iris, sign in to your Volt MX Cloud account. To do so, from the top right corner of the Iris window, click <strong>Login</strong>. The Volt MX Account sign-in window opens. Enter your HCL Cloud email and password credentials, and then click <strong>Sign in</strong>.</li>
+<li>In Iris, open the <strong>Store</strong> project.</li>
+<li>
+<p>From the <strong>Data &amp; Services</strong> panel, click <strong>Open Foundry Console</strong> <strong>&gt; Use Existing</strong> or <strong>Link to Existing App</strong>. The list of pre-configured services appears.</p>
+<p><img alt="" src="Resources/Images/FoundryExistingApp.png" /></p>
+</li>
+<li>
+<p>In the Volt MX Foundry Applications, search for <strong>Volt MX App Store</strong>, and then click <strong>ASSOCIATE</strong>.</p>
+<p>The Volt MX App Store app is associated with the Store project.</p>
+<p><img alt="" src="Resources/Images/StorewithAppStore.png" /></p>
+</li>
+</ol>
+<h2 id="source-of-eas-app">Source of EAS App</h2>
+<h3 id="structure-of-the-eas-front-end-project-store-project">Structure of the EAS Front-end Project - Store Project</h3>
+<h4 id="the-layout-of-the-front-end-app">The Layout of the Front-End App</h4>
+<p>Volt MX EAS Source app is supported for Native channels: iOS and Android.</p>
+<table>
+<thead>
+<tr>
+<th>Elements in the Store Project</th>
+<th>Project Structure UI in Iris</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>App Meta Data</td>
+<td>   <img alt="" src="Resources/Images/StoreAppProjectLayout_352x915.png" />   </td>
+</tr>
+<tr>
+<td>Store app name Default app icon These details are displayed based on the metadata of the app.</td>
+<td></td>
+</tr>
+<tr>
+<td>Supported Channels in EAS</td>
+<td></td>
+</tr>
+<tr>
+<td>Mobile Tablet Responsive Web/Desktop</td>
+<td></td>
+</tr>
+<tr>
+<td>Forms and Controllers</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Forms</strong> (two modules) <strong>AuthModule</strong> frmForgotPassword frmLogin frmSplashScreen <strong>StoreModule</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>StoreModules</th>
+<th>Channels</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>^^</td>
+<td>frmAppDetails</td>
+</tr>
+<tr>
+<td>frmHelpScreen</td>
+<td>Mobile (for iOS only)</td>
+</tr>
+<tr>
+<td>&gt; <strong><em>Note:</em></strong> The frmStore screen contains the Help button for iOS devices only. When you click the Help button, the help is displayed in the frmHelpScreen for iOS mobile devices. And for iOS tablets, the help is displayed in a pop-up window.</td>
+<td></td>
+</tr>
+<tr>
+<td>frmStore</td>
+<td>Mobile Tablet Responsive Web/Desktop</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Controllers</strong></p>
+<ul>
+<li><strong>AuthModule</strong><ul>
+<li>frmForgotPasswordController</li>
+<li>frmForgotPasswordControllerActions</li>
+<li>frmLoginController</li>
+<li>frmLoginControllerActions</li>
+<li>frmSplashScreenController</li>
+<li>frmSplashScreenControllerActions</li>
+</ul>
+</li>
+<li><strong>StoreModule</strong><ul>
+<li>frmAppDetailsController</li>
+<li>frmAppDetailsControllerActions</li>
+<li>frmHelpScreenController</li>
+<li>frmHelpScreenControllerActions</li>
+<li>frmStoreController</li>
+<li>frmStoreControllerActions</li>
+</ul>
+</li>
+</ul>
+<p>|</p>
+<h4 id="supported-functionality-and-forms-eas-front-end-project">Supported Functionality and Forms - EAS Front-End Project</h4>
+<ul>
+<li>
+<p>The <code>frmSplashScreen</code> form connects to the Server and fetches the login details of the Store app.</p>
+<ul>
+<li>If the Volt MX User Store custom auth type is enabled, the <code>frmLogin</code> form appears.</li>
+<li>If the OAuth 2.0 auth type is enabled, the login screen for that service provider type appears.</li>
+</ul>
+<p>The startup screen is displayed after the default splash screen.</p>
+<ul>
+<li>The <code>frmForgotPassword</code> form allows you to retrieve your login password for EAS.</li>
+<li>The <code>frmAppDetails</code> form displays the metadata of an app.</li>
+<li>If auth is not enabled, the <code>frmStore</code> form is displayed with the list of published apps.</li>
+</ul>
+<blockquote>
+<p><strong><em>Note:</em></strong> For iOS apps, if the device displays the <strong>Untrusted Enterprise Developer</strong> pop-up message, you must trust your iOS certificates. The <code>frmStore</code> form displays with the <strong>Help</strong> button<img alt="" src="Resources/Images/iOSEnableTrust1_61x72.png" />, which you can follow in your device to trust your iOS certificate. For more details, refer to <a href="EnterpriseAppStore.html#trust-ios-certificates">Trust iOS Certificates</a>.</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="reference-architecture-extensions">Reference Architecture Extensions</h4>
+<ul>
+<li>
+<p><strong>AuthModule</strong> supports end-user login.</p>
+<ul>
+<li>BusinessControllers: contains custom business logic for authentication for the complete Store project.</li>
+<li>
+<p>PresentationController: contains auth success and failure cases. Based on each case type, the required actions are called in the form Controllers. This is a common controller for all the supported channels.</p>
+<blockquote>
+<p><strong><em>Important:</em></strong> For channel specific auth success and failure cases, you must use PresentationController_<Channel> to configure auth handles.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>StoreModule</strong></p>
+<ul>
+<li>BusinessControllers: handles the fetching list of published apps, logic to download and launch apps; contains the list of apps and custom business logic for authentication for the complete Store project.</li>
+<li>
+<p>PresentationController: handles the presentation of apps such as in-progress status of app downloads, success, and failure cases. Based on each case type, the required actions are called in the form Controllers. You can add filters to customize the order of apps list. This is a common controller for all the supported channels.</p>
+<blockquote>
+<p><strong><em>Important:</em></strong> For channel specific presentation of apps, you must use PresentationController_<Channel> to configure store handles.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="source-details-of-eas-back-end-app-volt-mx-app-store-app">Source Details of EAS Back-End App - Volt MX App Store App</h3>
+<p>The <strong>Volt MX App Store</strong> is the Server app (Volt MX Foundry), which contains the following services linked to EAS.</p>
+<ul>
+<li>Identity Services: By default, the AppStoreUserRepository Identity Service of User Repository type is configured to authenticate EAS. You can configure another service type, if required.</li>
+<li>
+<p>Objects Services: By default, the EASDownloadBinaryService Object Service of File Store type is configured to store binaries of all the published apps. You cannot modify this service.</p>
+<ul>
+<li>By default, the EASMetaServices Object Service of Store type is configured to store the metadata of all the published apps. You cannot modify this service.</li>
+</ul>
+</li>
+<li>
+<p>Contains uploaded app binaries to publish them to EAS.</p>
+</li>
+<li>Contains environments for Server and Volt MX App Server (EAS).</li>
+</ul>
+<h2 id="branding-enterprise-app-store-to-your-requirements">Branding Enterprise App Store to your Requirements</h2>
+<p>You can use the source app of the EAS to brand it to suit according to your business requirements.</p>
+<p>Volt MX allows developers to access complete suite of the EAS App source. You can view details of the source code of the app, structure, layout, forms, and functionality, and linked services, and can customize the brand according to business requirements as well.</p>
+<p>For example, you can brand an app for the following business requirements:</p>
+<ul>
+<li>Name, Slogan, Style</li>
+<li>Graphics: Logo, app icon, splash screen, and visual image of the app.</li>
+<li>
+<p>Look of the app</p>
+</li>
+<li>
+<p>Brand keywords</p>
+</li>
+</ul>
+<h3 id="branding-eas-app-to-your-company-logo-and-splash-screen">Branding EAS App to your Company Logo and Splash Screen</h3>
+<h4 id="changing-an-app-icon">Changing an App Icon</h4>
+<ol>
+<li>In Iris Project, click the <strong>Splash Screen</strong>.</li>
+<li>Click the <strong>Assets</strong> tab, right-click <strong>Media</strong>, and then click <strong>Resource Location</strong>.</li>
+<li>In the <code>..\\Store\resources</code> folder, open <strong>common</strong> for the channel type, for example, mobile or tablet.</li>
+<li>Change the image file of the app icon. Ensure the file name is same as the existing one. For example, <code>icon.png</code>.</li>
+</ol>
+<h4 id="replacing-image-for-the-existing-splash-screen">Replacing Image for the existing Splash Screen</h4>
+<p>The splash screen and the frmSplashScreen can be same or different. You can modify the splash screen in the following two ways:</p>
+<p>To replace the existing splash screen, follow these steps:</p>
+<ol>
+<li>In Iris Project, click the <strong>Splash Screen</strong>.</li>
+<li>Click the <strong>Assets</strong> tab, right-click <strong>Media</strong>, and then click <strong>Resource Location</strong>.</li>
+<li>In the <code>..\\Store\resources</code> folder, open <strong>common</strong> folder.</li>
+<li>Replace the new splash screen with the one existing. Ensure the file name is same as the existing one. By default, the image resource name is <code>`splash_eas.png`</code> for mobile and tablet. By default, the image resource name is <code>`splash_screen.png`</code> for responsive web.</li>
+</ol>
+<h4 id="adding-new-image-to-splash-screen">Adding New Image to Splash Screen</h4>
+<p>If you choose to add new image to splash screen, the new image name must be</p>
+<ol>
+<li>In Iris Project, click <strong>Splash Screen</strong>.</li>
+<li>Click the <strong>Assets</strong> tab, right-click <strong>Media</strong>, and then click <strong>Resource Location</strong>.</li>
+<li>In the <code>..\\Store\resources</code> folder, open <strong>common</strong> folder.</li>
+<li>Add the new splash screen file to the common folder.</li>
+<li>Now, you must link the new image to the start-up screen in your store project as follows:<ol>
+<li>In <strong>Iris &gt; Store</strong> project, expand the channel type. For example, <strong>Mobile</strong>.</li>
+<li>Click <strong>Splash Screen</strong>.</li>
+<li>In Properties &gt; <strong>Splash Screen &gt; General</strong>, click <strong>Edit</strong>.</li>
+<li>In the <strong>Splash Image</strong> dialog box, select the new file.</li>
+</ol>
+</li>
+<li>Go to <strong>Forms</strong> &gt; <strong>AuthModules</strong> &gt; <strong>frmSplashScreen</strong>, double-click the <strong>Splash Screen</strong> and select the new image file.</li>
+</ol>
+<blockquote>
+<p><strong><em>Important:</em></strong> All images must be maintained with the default set scaling. </p>
+</blockquote>
+<h4 id="changing-the-eas-package-name">Changing the EAS Package Name</h4>
+<p>If you want to build the EAS app with a custom <strong>Package Name</strong> and <strong>Bundle Identifier</strong>, you must configure the native settings in the Store project that you imported to Iris.</p>
+<ul>
+<li>
+<p><strong>iOS</strong></p>
+<ol>
+<li>Ensure that you imported the Store.zip app into Iris project.</li>
+<li>In Iris, open <strong>Project Settings</strong>.</li>
+<li>Open <strong>Project Settings</strong>, click <strong>Native</strong>.</li>
+</ol>
+<p><img alt="" src="Resources/Images/EAS-iOS-PackageName_541x330.png" /></p>
+<ol>
+<li>
+<p>Click <strong>iPhone/iPad</strong> &gt; <strong>iOS Build Settings</strong> &gt; <strong>Bundle Identifier</strong>, change the package name.</p>
+<blockquote>
+<p><strong><em>Important:</em></strong> The <strong>Bundle Identifier</strong> must match with the iOS Certificates that you configured in the Store project. For more details, refer to <a href="../../../Iris/iris_user_guide/Content/EAS.html#Build">Platform specific prerequisites</a>.</p>
+</blockquote>
+</li>
+<li>
+<p>Click <strong>Done</strong>.</p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>Android</strong></p>
+<ol>
+<li>Ensure that you imported the Store.zip app into Iris project.</li>
+<li>In Iris, open <strong>Project Settings</strong>.</li>
+<li>In the <strong>Project Settings</strong> dialog, click the <strong>Native</strong>.</li>
+<li>Click <strong><em>*Android Mobile/Tablet</em></strong>*, and do the following:<ol>
+<li>Under <strong>General Settings</strong> &gt; <strong>Package Name</strong>, specify the desired package name.</li>
+<li>Under <strong>Manifest Permission, Tags and Gradle Build Entries</strong>, click the <strong>Tags</strong> tab.</li>
+<li>Under the <code>Child tag entries under &lt;application&gt; tag</code> text box, specify the same package name value for <code>android:authorities="&lt;package_name&gt;"</code>.</li>
+</ol>
+</li>
+<li>Click <strong>Done</strong>.</li>
+</ol>
+<p><img alt="" src="Resources/Images/EAS-Anroid-PackageName_587x677.png" /></p>
+</li>
+</ul>
+<h3 id="adding-contact-us-form-and-support-details">Adding Contact Us Form and Support Details</h3>
+<p>You can add new forms to your EAS App as per your business requirements.</p>
+<p>For example, to add the <strong>Contact Us</strong> form to your EAS App and provide a link to the new form within the <strong>StoreModule &gt; fromStore</strong> form. The following steps details how to add a <strong>Contact Us</strong> form, provide contact details, and links to the form for a Mobile channel. In this example, you will be using the sample component: <strong>privacypreferences</strong>, which contains ready-to-use text placeholder and action buttons to navigate between forms.</p>
+<blockquote>
+<p><strong><em>Important:</em></strong> While modifying the source app, ensure that you follow <a href="../../../Iris/voltmx_ref_arch_api/Content/A_Deeper_Look_at_VoltMX_Reference_Architecture.html">VoltMX Reference Architecture and Extensibility Guidelines</a> lines to support product upgrades. </p>
+</blockquote>
+<ul>
+<li>Add new form to the project as follows:<ol>
+<li>In <strong>Iris</strong>, open the <strong>Store</strong> project, and ensure you are in the <strong>DESIGN</strong> mode.</li>
+<li>Click <strong>Store project &gt; Mobile</strong>, right-click <strong>Forms</strong>, and click <strong>New Group</strong>.</li>
+<li>Right-click the NewGroup and rename the new group to <code>ContactUS</code>.</li>
+<li>Right-click the ContactUS Group, and click <strong>New Form</strong>.</li>
+<li>Rename the new form to <code>frmContactUs</code>.</li>
+</ol>
+</li>
+<li>Download the <strong>Privacy Preferences (GDPR)</strong> component from Marketplace. To do so, click <strong>Marketplace</strong> menu &gt; <strong>Browse</strong> and search for Privacy Preferences (GDPR). Click <strong>Import to Collection Library</strong>.</li>
+<li>
+<p>Click <code>frmContactUs</code> form.
+From the downloaded components section, drag and drop the <strong>privacypreferences</strong> component to the <code>frmContactUs</code> form. The privacypreferences component is added to the form. You can change the caption, as follows:</p>
+</li>
+<li>
+<p>In <strong>Properties</strong> panel, click <strong>Component</strong>.</p>
+</li>
+<li>Change the <strong>ID</strong> to <code>ContactUsDetails</code>.</li>
+</ul>
+<p>Now, you will be modifying the actions and text in the component details section according to the your business requirement for the <strong>Contact Us</strong> form as shown in the following table.</p>
+<h4 id="supported-functionality-and-forms-eas-front-end-project_1">Supported Functionality and Forms - EAS Front-End Project</h4>
+<p>The <code>frmSplashScreen</code> form connects to the Server and fetches the login details of the Store app. If the Volt MX User Store custom auth type is enabled, the <code>frmLogin</code> form appears. If the OAuth 2.0 auth type is enabled, the login screen for that service provider type appears. The startup screen is displayed after the default splash screen.The <code>frmForgotPassword</code> form allows you to retrieve your login password for EAS. The <code>frmAppDetails</code> form displays the metadata of an app. If auth is not enabled, the <code>frmStore</code> form is displayed with the list of published apps. &gt; <strong><em>Note:</em></strong> For iOS apps, if the device displays the <strong>Untrusted Enterprise Developer</strong> pop-up message, you must trust your iOS certificates. The <code>frmStore</code> form displays with the <strong>Help</strong> button<img alt="" src="Resources/Images/iOSEnableTrust1_61x72.png" />, which you can follow in your device to trust your iOS certificate. For more details, refer to <a href="EnterpriseAppStore.html#trust-ios-certificates">Trust iOS Certificates</a>.</p>
+<h4 id="reference-architecture-extensions_1">Reference Architecture Extensions</h4>
+<p><strong>AuthModule</strong> supports end-user login.BusinessControllers: contains custom business logic for authentication for the complete Store project.PresentationController: contains auth success and failure cases. Based on each case type, the required actions are called in the form Controllers. This is a common controller for all the supported channels.&gt; <strong><em>Important:</em></strong> For channel specific auth success and failure cases, you must use PresentationController_<Channel> to configure auth handles. <strong>StoreModule</strong> BusinessControllers: handles the fetching list of published apps, logic to download and launch apps; contains the list of apps and custom business logic for authentication for the complete Store project. PresentationController: handles the presentation of apps such as in-progress status of app downloads, success, and failure cases. Based on each case type, the required actions are called in the form Controllers. You can add filters to customize the order of apps list. This is a common controller for all the supported channels.&gt; <strong><em>Important:</em></strong> For channel specific presentation of apps, you must use PresentationController_<Channel> to configure store handles.</p>
+<h3 id="source-details-of-eas-back-end-app-volt-mx-app-store-app_1">Source Details of EAS Back-End App - Volt MX App Store App</h3>
+<p>The <strong>Volt MX App Store</strong> is the Server app (Volt MX Foundry), which contains the following services linked to EAS. Identity Services: By default, the AppStoreUserRepository Identity Service of User Repository type is configured to authenticate EAS. You can configure another service type, if required. Objects Services: By default, the EASDownloadBinaryService Object Service of File Store type is configured to store binaries of all the published apps. You cannot modify this service.By default, the EASMetaServices Object Service of Store type is configured to store the metadata of all the published apps. You cannot modify this service. Contains uploaded app binaries to publish them to EAS. Contains environments for Server and Volt MX App Server (EAS).</p>
+<h2 id="branding-enterprise-app-store-to-your-requirements_1">Branding Enterprise App Store to your Requirements</h2>
+<p>You can use the source app of the EAS to brand it to suit according to your business requirements. Volt MX allows developers to access complete suite of the EAS App source. You can view details of the source code of the app, structure, layout, forms, and functionality, and linked services, and can customize the brand according to business requirements as well. For example, you can brand an app for the following business requirements: Name, Slogan, Style Graphics: Logo, app icon, splash screen, and visual image of the app. Look of the app Brand keywords</p>
+<h3 id="branding-eas-app-to-your-company-logo-and-splash-screen_1">Branding EAS App to your Company Logo and Splash Screen</h3>
+<h4 id="changing-an-app-icon_1">Changing an App Icon</h4>
+<p>In Iris Project, click the <strong>Splash Screen</strong>. Click the <strong>Assets</strong> tab, right-click <strong>Media</strong>, and then click <strong>Resource Location</strong>. In the <code>..\\Store\resources</code> folder, open <strong>common</strong> for the channel type, for example, mobile or tablet. Change the image file of the app icon. Ensure the file name is same as the existing one. For example, <code>icon.png</code>.</p>
+<h4 id="replacing-image-for-the-existing-splash-screen_1">Replacing Image for the existing Splash Screen</h4>
+<p>The splash screen and the frmSplashScreen can be same or different. You can modify the splash screen in the following two ways: To replace the existing splash screen, follow these steps:</p>
+<p>In Iris Project, click the <strong>Splash Screen</strong>. Click the <strong>Assets</strong> tab, right-click <strong>Media</strong>, and then click <strong>Resource Location</strong>. In the <code>..\\Store\resources</code> folder, open <strong>common</strong> folder. Replace the new splash screen with the one existing. Ensure the file name is same as the existing one. By default, the image resource name is <code>`splash_eas.png`</code> for mobile and tablet. By default, the image resource name is <code>`splash_screen.png`</code> for responsive web.</p>
+<h4 id="adding-new-image-to-splash-screen_1">Adding New Image to Splash Screen</h4>
+<p>If you choose to add new image to splash screen, the new image name must be</p>
+<p>In Iris Project, click <strong>Splash Screen</strong>. Click the <strong>Assets</strong> tab, right-click <strong>Media</strong>, and then click <strong>Resource Location</strong>. In the <code>..\\Store\resources</code> folder, open <strong>common</strong> folder. Add the new splash screen file to the common folder. Now, you must link the new image to the start-up screen in your store project as follows:</p>
+<p>In <strong>Iris &gt; Store</strong> project, expand the channel type. For example, <strong>Mobile</strong>.Click <strong>Splash Screen</strong>. In Properties &gt; <strong>Splash Screen &gt; General</strong>, click <strong>Edit</strong>.In the <strong>Splash Image</strong> dialog box, select the new file.</p>
+<p>Go to <strong>Forms</strong> &gt; <strong>AuthModules</strong> &gt; <strong>frmSplashScreen</strong>, double-click the <strong>Splash Screen</strong> and select the new image file.</p>
+<blockquote>
+<p><strong><em>Important:</em></strong> All images must be maintained with the default set scaling.</p>
+</blockquote>
+<h4 id="changing-the-eas-package-name_1">Changing the EAS Package Name</h4>
+<p>If you want to build the EAS app with a custom <strong>Package Name</strong> and <strong>Bundle Identifier</strong>, you must configure the native settings in the Store project that you imported to Iris. iOS</p>
+<p>Ensure that you imported the Store.zip app into Iris project.In Iris, open <strong>Project Settings</strong>.Open <strong>Project Settings</strong>, click <strong>Native</strong>.<img alt="" src="Resources/Images/EAS-iOS-PackageName_541x330.png" />Click <strong>iPhone/iPad</strong> &gt; <strong>iOS Build Settings</strong> &gt; <strong>Bundle Identifier</strong>, change the package name.&gt; <strong><em>Important:</em></strong> The <strong>Bundle Identifier</strong> must match with the iOS Certificates that you configured in the Store project. For more details, refer to <a href="../../../Iris/iris_user_guide/Content/EAS.html#Build">Platform specific prerequisites</a>.Click <strong>Done</strong>.</p>
+<p>Android</p>
+<p>Ensure that you imported the Store.zip app into Iris project.In Iris, open <strong>Project Settings</strong>.In the <strong>Project Settings</strong> dialog, click the <strong>Native</strong>.Click <strong><em>*Android Mobile/Tablet</em></strong>*, and do the following:</p>
+<p>Under <strong>General Settings</strong> &gt; <strong>Package Name</strong>, specify the desired package name.Under <strong>Manifest Permission, Tags and Gradle Build Entries</strong>, click the <strong>Tags</strong> tab.Under the <code>Child tag entries under &lt;application&gt; tag</code> text box, specify the same package name value for <code>android:authorities="&lt;package_name&gt;"</code>.</p>
+<p>Click <strong>Done</strong>.<img alt="" src="Resources/Images/EAS-Anroid-PackageName_587x677.png" /></p>
+<h3 id="adding-contact-us-form-and-support-details_1">Adding Contact Us Form and Support Details</h3>
+<p>You can add new forms to your EAS App as per your business requirements. For example, to add the <strong>Contact Us</strong> form to your EAS App and provide a link to the new form within the <strong>StoreModule &gt; fromStore</strong> form. The following steps details how to add a <strong>Contact Us</strong> form, provide contact details, and links to the form for a Mobile channel. In this example, you will be using the sample component: <strong>privacypreferences</strong>, which contains ready-to-use text placeholder and action buttons to navigate between forms. &gt; <strong><em>Important:</em></strong> While modifying the source app, ensure that you follow <a href="../../../Iris/voltmx_ref_arch_api/Content/A_Deeper_Look_at_VoltMX_Reference_Architecture.html">VoltMX Reference Architecture and Extensibility Guidelines</a> lines to support product upgrades. Add new form to the project as follows:</p>
+<p>In <strong>Iris</strong>, open the <strong>Store</strong> project, and ensure you are in the <strong>DESIGN</strong> mode.Click <strong>Store project &gt; Mobile</strong>, right-click <strong>Forms</strong>, and click <strong>New Group</strong>. Right-click the NewGroup and rename the new group to <code>ContactUS</code>.Right-click the ContactUS Group, and click <strong>New Form</strong>. Rename the new form to <code>frmContactUs</code>.</p>
+<p>Download the <strong>Privacy Preferences (GDPR)</strong> component from Marketplace. To do so, click <strong>Marketplace</strong> menu &gt; <strong>Browse</strong> and search for Privacy Preferences (GDPR). Click <strong>Import to Collection Library</strong>. Click <code>frmContactUs</code> form. From the downloaded components section, drag and drop the <strong>privacypreferences</strong> component to the <code>frmContactUs</code> form. The privacypreferences component is added to the form. You can change the caption, as follows:In <strong>Properties</strong> panel, click <strong>Component</strong>.Change the <strong>ID</strong> to <code>ContactUsDetails</code>.Now, you will be modifying the actions and text in the component details section according to the your business requirement for the <strong>Contact Us</strong> form as shown in the following table.</p>
+<h4 id="supported-functionality-and-forms-eas-front-end-project_2">Supported Functionality and Forms - EAS Front-End Project</h4>
+<ul>
+<li>
+<p>The <code>frmSplashScreen</code> form connects to the Server and fetches the login details of the Store app.</p>
+<ul>
+<li>If the Volt MX User Store custom auth type is enabled, the <code>frmLogin</code> form appears.</li>
+<li>If the OAuth 2.0 auth type is enabled, the login screen for that service provider type appears.</li>
+</ul>
+<p>The startup screen is displayed after the default splash screen.</p>
+<ul>
+<li>The <code>frmForgotPassword</code> form allows you to retrieve your login password for EAS.</li>
+<li>The <code>frmAppDetails</code> form displays the metadata of an app.</li>
+<li>If auth is not enabled, the <code>frmStore</code> form is displayed with the list of published apps.</li>
+</ul>
+<blockquote>
+<p><strong><em>Note:</em></strong> For iOS apps, if the device displays the <strong>Untrusted Enterprise Developer</strong> pop-up message, you must trust your iOS certificates. The <code>frmStore</code> form displays with the <strong>Help</strong> button<img alt="" src="Resources/Images/iOSEnableTrust1_61x72.png" />, which you can follow in your device to trust your iOS certificate. For more details, refer to <a href="EnterpriseAppStore.html#trust-ios-certificates">Trust iOS Certificates</a>.</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="reference-architecture-extensions_2">Reference Architecture Extensions</h4>
+<ul>
+<li>
+<p><strong>AuthModule</strong> supports end-user login.</p>
+<ul>
+<li>BusinessControllers: contains custom business logic for authentication for the complete Store project.</li>
+<li>
+<p>PresentationController: contains auth success and failure cases. Based on each case type, the required actions are called in the form Controllers. This is a common controller for all the supported channels.</p>
+<blockquote>
+<p><strong><em>Important:</em></strong> For channel specific auth success and failure cases, you must use PresentationController_<Channel> to configure auth handles.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>StoreModule</strong></p>
+<ul>
+<li>BusinessControllers: handles the fetching list of published apps, logic to download and launch apps; contains the list of apps and custom business logic for authentication for the complete Store project.</li>
+<li>
+<p>PresentationController: handles the presentation of apps such as in-progress status of app downloads, success, and failure cases. Based on each case type, the required actions are called in the form Controllers. You can add filters to customize the order of apps list. This is a common controller for all the supported channels.</p>
+<blockquote>
+<p><strong><em>Important:</em></strong> For channel specific presentation of apps, you must use PresentationController_<Channel> to configure store handles.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="source-details-of-eas-back-end-app-volt-mx-app-store-app_2">Source Details of EAS Back-End App - Volt MX App Store App</h3>
+<p>The <strong>Volt MX App Store</strong> is the Server app (Volt MX Foundry), which contains the following services linked to EAS.</p>
+<ul>
+<li>Identity Services: By default, the AppStoreUserRepository Identity Service of User Repository type is configured to authenticate EAS. You can configure another service type, if required.</li>
+<li>
+<p>Objects Services: By default, the EASDownloadBinaryService Object Service of File Store type is configured to store binaries of all the published apps. You cannot modify this service.</p>
+<ul>
+<li>By default, the EASMetaServices Object Service of Store type is configured to store the metadata of all the published apps. You cannot modify this service.</li>
+</ul>
+</li>
+<li>
+<p>Contains uploaded app binaries to publish them to EAS.</p>
+</li>
+<li>Contains environments for Server and Volt MX App Server (EAS).</li>
+</ul>
+<h2 id="branding-enterprise-app-store-to-your-requirements_2">Branding Enterprise App Store to your Requirements</h2>
+<p>You can use the source app of the EAS to brand it to suit according to your business requirements.</p>
+<p>Volt MX allows developers to access complete suite of the EAS App source. You can view details of the source code of the app, structure, layout, forms, and functionality, and linked services, and can customize the brand according to business requirements as well.</p>
+<p>For example, you can brand an app for the following business requirements:</p>
+<ul>
+<li>Name, Slogan, Style</li>
+<li>Graphics: Logo, app icon, splash screen, and visual image of the app.</li>
+<li>
+<p>Look of the app</p>
+</li>
+<li>
+<p>Brand keywords</p>
+</li>
+</ul>
+<h3 id="branding-eas-app-to-your-company-logo-and-splash-screen_2">Branding EAS App to your Company Logo and Splash Screen</h3>
+<h4 id="changing-an-app-icon_2">Changing an App Icon</h4>
+<ol>
+<li>In Iris Project, click the <strong>Splash Screen</strong>.</li>
+<li>Click the <strong>Assets</strong> tab, right-click <strong>Media</strong>, and then click <strong>Resource Location</strong>.</li>
+<li>In the <code>..\\Store\resources</code> folder, open <strong>common</strong> for the channel type, for example, mobile or tablet.</li>
+<li>Change the image file of the app icon. Ensure the file name is same as the existing one. For example, <code>icon.png</code>.</li>
+</ol>
+<h4 id="replacing-image-for-the-existing-splash-screen_2">Replacing Image for the existing Splash Screen</h4>
+<p>The splash screen and the frmSplashScreen can be same or different. You can modify the splash screen in the following two ways:</p>
+<p>To replace the existing splash screen, follow these steps:</p>
+<ol>
+<li>In Iris Project, click the <strong>Splash Screen</strong>.</li>
+<li>Click the <strong>Assets</strong> tab, right-click <strong>Media</strong>, and then click <strong>Resource Location</strong>.</li>
+<li>In the <code>..\\Store\resources</code> folder, open <strong>common</strong> folder.</li>
+<li>Replace the new splash screen with the one existing. Ensure the file name is same as the existing one. By default, the image resource name is <code>`splash_eas.png`</code> for mobile and tablet. By default, the image resource name is <code>`splash_screen.png`</code> for responsive web.</li>
+</ol>
+<h4 id="adding-new-image-to-splash-screen_2">Adding New Image to Splash Screen</h4>
+<p>If you choose to add new image to splash screen, the new image name must be</p>
+<ol>
+<li>In Iris Project, click <strong>Splash Screen</strong>.</li>
+<li>Click the <strong>Assets</strong> tab, right-click <strong>Media</strong>, and then click <strong>Resource Location</strong>.</li>
+<li>In the <code>..\\Store\resources</code> folder, open <strong>common</strong> folder.</li>
+<li>Add the new splash screen file to the common folder.</li>
+<li>Now, you must link the new image to the start-up screen in your store project as follows:<ol>
+<li>In <strong>Iris &gt; Store</strong> project, expand the channel type. For example, <strong>Mobile</strong>.</li>
+<li>Click <strong>Splash Screen</strong>.</li>
+<li>In Properties &gt; <strong>Splash Screen &gt; General</strong>, click <strong>Edit</strong>.</li>
+<li>In the <strong>Splash Image</strong> dialog box, select the new file.</li>
+</ol>
+</li>
+<li>Go to <strong>Forms</strong> &gt; <strong>AuthModules</strong> &gt; <strong>frmSplashScreen</strong>, double-click the <strong>Splash Screen</strong> and select the new image file.</li>
+</ol>
+<blockquote>
+<p><strong><em>Important:</em></strong> All images must be maintained with the default set scaling.</p>
+</blockquote>
+<h4 id="changing-the-eas-package-name_2">Changing the EAS Package Name</h4>
+<p>If you want to build the EAS app with a custom <strong>Package Name</strong> and <strong>Bundle Identifier</strong>, you must configure the native settings in the Store project that you imported to Iris.</p>
+<ul>
+<li>
+<p>iOS</p>
+<ol>
+<li>Ensure that you imported the Store.zip app into Iris project.</li>
+<li>In Iris, open <strong>Project Settings</strong>.</li>
+<li>
+<p>Open <strong>Project Settings</strong>, click <strong>Native</strong>.</p>
+<p><img alt="" src="Resources/Images/EAS-iOS-PackageName_541x330.png" /></p>
+</li>
+<li>
+<p>Click <strong>iPhone/iPad</strong> &gt; <strong>iOS Build Settings</strong> &gt; <strong>Bundle Identifier</strong>, change the package name.</p>
+<blockquote>
+<p><strong><em>Important:</em></strong> The <strong>Bundle Identifier</strong> must match with the iOS Certificates that you configured in the Store project. For more details, refer to <a href="../../../Iris/iris_user_guide/Content/EAS.html#Build">Platform specific prerequisites</a>.</p>
+</blockquote>
+</li>
+<li>
+<p>Click <strong>Done</strong>.</p>
+</li>
+<li>Android</li>
+<li>Ensure that you imported the Store.zip app into Iris project.</li>
+<li>In Iris, open <strong>Project Settings</strong>.</li>
+<li>In the <strong>Project Settings</strong> dialog, click the <strong>Native</strong>.</li>
+<li>Click <strong><em>*Android Mobile/Tablet</em></strong>*, and do the following:<ol>
+<li>Under <strong>General Settings</strong> &gt; <strong>Package Name</strong>, specify the desired package name.</li>
+<li>Under <strong>Manifest Permission, Tags and Gradle Build Entries</strong>, click the <strong>Tags</strong> tab.</li>
+<li>Under the <code>Child tag entries under &lt;application&gt; tag</code> text box, specify the same package name value for <code>android:authorities="&lt;package_name&gt;"</code>.</li>
+</ol>
+</li>
+<li>
+<p>Click <strong>Done</strong>.</p>
+<p><img alt="" src="Resources/Images/EAS-Anroid-PackageName_587x677.png" /></p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="adding-contact-us-form-and-support-details_2">Adding Contact Us Form and Support Details</h3>
+<p>You can add new forms to your EAS App as per your business requirements.</p>
+<p>For example, to add the <strong>Contact Us</strong> form to your EAS App and provide a link to the new form within the <strong>StoreModule &gt; fromStore</strong> form. The following steps details how to add a <strong>Contact Us</strong> form, provide contact details, and links to the form for a Mobile channel. In this example, you will be using the sample component: <strong>privacypreferences</strong>, which contains ready-to-use text placeholder and action buttons to navigate between forms.</p>
+<blockquote>
+<p><strong><em>Important:</em></strong> While modifying the source app, ensure that you follow <a href="../../../Iris/voltmx_ref_arch_api/Content/A_Deeper_Look_at_VoltMX_Reference_Architecture.html">VoltMX Reference Architecture and Extensibility Guidelines</a> lines to support product upgrades.</p>
+</blockquote>
+<ol>
+<li>Add new form to the project as follows:<ol>
+<li>In <strong>Iris</strong>, open the <strong>Store</strong> project, and ensure you are in the <strong>DESIGN</strong> mode.</li>
+<li>Click <strong>Store project &gt; Mobile</strong>, right-click <strong>Forms</strong>, and click <strong>New Group</strong>.</li>
+<li>Right-click the NewGroup and rename the new group to <code>ContactUS</code>.</li>
+<li>Right-click the ContactUS Group, and click <strong>New Form</strong>.</li>
+<li>Rename the new form to <code>frmContactUs</code>.</li>
+</ol>
+</li>
+<li>Download the <strong>Privacy Preferences (GDPR)</strong> component from Marketplace. To do so, click <strong>Marketplace</strong> menu &gt; <strong>Browse</strong> and search for Privacy Preferences (GDPR). Click <strong>Import to Collection Library</strong>.</li>
+<li>Click <code>frmContactUs</code> form.</li>
+<li>
+<p>From the downloaded components section, drag and drop the <strong>privacypreferences</strong> component to the <code>frmContactUs</code> form. The privacypreferences component is added to the form. You can change the caption, as follows:</p>
+<ul>
+<li>In <strong>Properties</strong> panel, click <strong>Component</strong>.</li>
+<li>Change the <strong>ID</strong> to <code>ContactUsDetails</code>.</li>
+</ul>
+<p>Now, you will be modifying the actions and text in the component details section according to the your business requirement for the <strong>Contact Us</strong> form as shown in the following table.</p>
+<table>
+<thead>
+<tr>
+<th>Default text and actions in the Component</th>
+<th>Modified details in the Component sectionfor the Contact Us form</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="" src="Resources/Images/Store/ContactUSform1.png" /></td>
+<td><img alt="" src="Resources/Images/Store/ContactUSform2.png" /></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Click <code>ContactUsDetails</code> to edit component properties.</p>
+<ol>
+<li>
+<p>In <strong>Properties</strong> &gt; <strong>Component</strong>, do the following:</p>
+<ol>
+<li>In <strong>Header Text</strong>, change the text to <code>Contact Us</code>.</li>
+<li>
+<p>In <strong>Message</strong>, specify the contact details.</p>
+<p>For example, Volt MX Support URL:<br />
+<code>&lt;p&gt;We welcome your feedback on our documentation. &lt;br&gt;&lt;br&gt;&lt;a href="https://techpubs@voltmx.com/"&gt;Click here to write to us at&lt;/a&gt;.&lt;br&gt;&lt;br&gt;\n&lt;a href="https://support@voltmx.com/"&gt;For technical questions, suggestions, and comments, or to report problems on Volt MX product line, click here.&lt;/a&gt;​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​\n&lt;/p&gt;</code></p>
+</li>
+</ol>
+</li>
+<li>
+<p>To add the link to the <strong>OK</strong> button, do the following:</p>
+<ol>
+<li>On <strong>Properties</strong>, click <strong>Action</strong>.</li>
+<li>From <strong>onRightButtonClick</strong>, click the <strong>Edit</strong> button.</li>
+<li>From <strong>Action ID</strong> <strong>&gt; Navigation</strong>, click <strong>Navigate to Form</strong>.</li>
+<li>Click the <code>Navigate to Form &lt;Form Name&gt;</code> element.</li>
+<li>
+<p>Click <code>frmStore</code>. By doing this, when you click the <strong>OK</strong> button on the <strong>Contact Us</strong> form, the <code>frmStore</code> form appears.</p>
+<p><img alt="" src="Resources/Images/Store/StoreSourceEdit_583x213.png" /></p>
+</li>
+</ol>
+</li>
+<li>
+<p>For the <strong>Contact Us</strong> form, you do not need any action for the <strong>No</strong> button. So, you can hide the button by removing the text, as follows:</p>
+<ol>
+<li>From <strong>Properties</strong> panel, click <strong>Component</strong>.</li>
+<li>In <strong>Left Button Text</strong> field, delete the caption.</li>
+</ol>
+</li>
+<li>Now, add the link to the new button widget in the <strong>frmStore</strong> form to navigate to the <strong>Contact Us</strong> form.</li>
+<li>Select the <code>frmStore</code> form.</li>
+<li>
+<p>From <strong>Iris &gt; Default Library</strong>, drag and drop the <strong>Button</strong> widget to the form.</p>
+<p>You can change the button properties such as skin and text.</p>
+</li>
+<li>
+<p>On <strong>Properties</strong>, click <strong>Action</strong>.</p>
+</li>
+<li>From <strong>onClick</strong>, click the <strong>Edit</strong> button.</li>
+<li>From <strong>Action ID</strong> <strong>&gt; Navigation</strong>, click <strong>Navigate to Form</strong>.</li>
+<li>Click the <code>Navigate to Form &lt;Form Name&gt;</code> element.</li>
+<li>
+<p>Click <code>frmContactUs</code>. By doing this, when you click the newly added widget on the <code>frmStore</code> form, the <code>frmContactUs</code> form appears.</p>
+<p>You can build or preview the EAS App to view the customized results now.</p>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="modifying-server-eas-app-for-identity-services-and-metadata-of-binaries">Modifying Server EAS App for Identity Services and Metadata of Binaries</h3>
+<h4 id="configuring-identity-services-for-eas-authentication">Configuring Identity Services for EAS Authentication</h4>
+<p>You can configure new Identity Services and Object Services for EAS in the <strong>Volt MX App Store</strong> App. After you configure the new services, you must map the new services in the project and update the source code of the Store project.</p>
+<h4 id="configuring-properties-for-client-binaries">Configuring Properties for Client Binaries</h4>
+<p>For information on how to configure basic properties such as the description of a client binary file, the icon of a binary, and the related screenshots of a binary file. refer to <a href="EnterpriseAppStore.html#configuring-properties-for-client-binaries">Configuring Properties for Client Binaries in VoltMX Foundry</a>.</p>
+<h2 id="publishing-eas-app">Publishing EAS App</h2>
+<p>EAS native apps need to be distributed in the same way as you distribute the other native apps. So, to distribute EAS native apps to end-users, you must publish your EAS native apps to the EAS Web app. End-users can access the EAS Web app to view and download EAS native apps on devices like any other native apps. By default, the EAS Web app is selected while publishing the apps to EAS.</p>
+<h3 id="build-and-publish-app-binaries-to-eas-using-volt-mx-iris">Build and Publish App Binaries to EAS using Volt MX Iris</h3>
+<p>With Iris Starter, you can build client binaries and publish them directly to Volt MX App Server from Iris. For more information, refer to Publishing Native Apps to Enterprise App Store from Iris Starter.</p>
+<ul>
+<li>For more information on how to build app binaries and publish them to EAS, refer to <a href="../../../Iris/iris_user_guide/Content/EAS.html#Publish"><strong>Publish to Enterprise App Store section</strong> in Publishing Client Binaries to Volt MX App Server from Volt MX Iris (for Cloud only)</a>.</li>
+</ul>
+<h3 id="publish-app-binaries-to-eas-using-volt-mx-foundry">Publish App Binaries to EAS using Volt MX Foundry</h3>
+<p>By using Volt MX Foundry, you can upload the client binaries and publish them to Volt MX App Server. After an app is published to Volt MX App Server, an authorized end-user can access the EAS Client app to view the available applications and download them using a mobile device.</p>
+<ul>
+<li>For more information on how to upload app binaries to the Server and publish them to EAS by using Volt MX Foundry, refer to <a href="EnterpriseAppStore.html#publishing-client-binaries-to-app-server-from-foundry">Publishing Client Binaries to Volt MX App Server from Volt MX Foundry</a>.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2021 - 2024, HCL America, Inc. | <a href="https://hcltechsw.com/wps/portal/legal/privacy">Privacy Statement</a> | <a href="https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.hcltechsw.com%2Fwps%2Fportal%2Flegal%2Fterms-use&data=04%7C01%7Csuresh.chenji%40hcl.com%7Ca77ebddc51574aff8c6c08d8f056542d%7C189de737c93a4f5a8b686f4ca9941912%7C0%7C0%7C637523600856805537%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&sdata=vLnT466NGuIbvQ0nEwfn2qdXeuhHb6XOnh1pibATDI4%3D&reserved=0">Terms of Use</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+<div class="md-social">
+  <ul class="social-nav">
+    <li><a href="https://www.facebook.com/HCLDigital" class="facebook" target="_blank">Facebook</a></li>
+    <li><a href="https://www.linkedin.com/company/hclsoftware" class="linkedin" target="_blank">LinkedIn</a></li>
+    <li><a href="https://twitter.com/HCLDigital"  class="twitter" target="_blank">Twitter</a></li>
+    <li><a href="https://www.youtube.com/HCLDigitalSolutions" class="youtube" target="_blank">Youtube</a></li>
+    <li>
+      <a href="https://github.com/HCL-TECH-SOFTWARE" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    </li>
+  </ul>    
+</div>
+  </div>
+  <div class="md-footer-meta__inner md-grid">
+  <span class="md-footer__git_legacy">Please report problems with this documentation by <a class="announcement__link" href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/issues">opening issues in Github</a>.</span>
+  <span class="legacy-link md-footer__git_legacy">Can't find a topic? Check the legacy documentation <a class="announcement__link" href="https://opensource.hcltechsw.com/Volt-MX-Documentation-Archive/docs/documentation/" target="_blank">here</a>.</span>
+</span>
+    </div>
+</div>
+    <script>
+      function myFunction95(){
+          var initial_url = document.location.href;
+          var url_stub = initial_url.split( 'docs/documentation' );
+          var fixed_url = url_stub[0]+'95/docs/documentation';
+		  console.log(fixed_url);
+//          var fixed_url = 'https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation'
+          var url = initial_url.split( '/' );
+          var updated_url
+          if ( url[ url.length - 2 ] == "Foundry" || url[ url.length - 2 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 2 ] == "articles" || url[ url.length - 2] == "getting-started" || url[ url.length - 2 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 3 ] == "Foundry" || url[ url.length - 3 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 3 ] == "articles" || url[ url.length - 3 ] == "getting-started" || url[ url.length - 3 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 4 ] == "Foundry" || url[ url.length - 4 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 4 ] == "articles" || url[ url.length - 4 ] == "getting-started" || url[ url.length - 4 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 5 ] == "Foundry" || url[ url.length - 5 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 5 ] == "articles" || url[ url.length - 5 ] == "getting-started" || url[ url.length - 5 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 5 ] + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 6 ] == "Foundry" || url[ url.length - 6 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 6 ] == "articles" || url[ url.length - 6 ] == "getting-started" || url[ url.length - 6 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 6 ] + '/' + url[ url.length - 5 ] + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else{
+            updated_url= fixed_url + '/' + url[ url.length - 1];
+          }
+          window.location.replace(updated_url);
+          }
+    </script>
+
+  
+
+</footer>
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.prune"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>

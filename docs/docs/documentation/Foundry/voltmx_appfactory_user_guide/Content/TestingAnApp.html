@@ -1,0 +1,2419 @@
+<!-- Elements added to main will be displayed on all pages -->
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Foundry/voltmx_appfactory_user_guide/Content/TestingAnApp.html">
+      
+      
+        <link rel="prev" href="Configuring_Device_Pools.html">
+      
+      
+        <link rel="next" href="TestingAnAppJasmine.html">
+      
+      
+      <link rel="icon" href="../../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>Testing an App - TestNG - HCL Volt MX Documentation V9.2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/vmx_style.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#testing-an-app-testng" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+<div class="content-types-banner">
+    <ul class="sub-nav">
+        <li class="home-link">
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/index.html"  class="sub-link ">Home</a>
+        </li>
+        <li>
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/tutorials/Tutorials.html" class="sub-link">Tutorials</a>
+        </li>
+        <li>
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/index.html" class="sub-link" id="docLink">Documentation</a>
+        </li>
+        <li>
+            <a href="https://support.hcltechsw.com/csm?id=kb_search&spa=1&kb_category=db382ff1db631c14a45ad9fcd3961936" title="Articles" class="sub-link">Articles</a>
+        </li>
+        <li>
+            <a href="https://hclsoftwareu.hcltechsw.com/#VoltMxLearningJourneys" title="Articles" class="sub-link">Software Academy</a>
+        </li>
+        <li style="float:right">
+          <button onclick="myFunction95()" style="color:white; border-radius:5px ;padding:5px 10px 5px 10px; border: 2px solid white;" class="sub-link" id="docLink92">Switch to V9.5</button>
+      </li>
+    </ul>
+</div>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="HCL Volt MX Documentation V9.2" class="md-header__button md-logo" aria-label="HCL Volt MX Documentation V9.2" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HCL Volt MX Documentation V9.2
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Testing an App - TestNG
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    HCL-TECH-SOFTWARE/volt-mx-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="HCL Volt MX Documentation V9.2" class="md-nav__button md-logo" aria-label="HCL Volt MX Documentation V9.2" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.png" alt="logo">
+
+    </a>
+    HCL Volt MX Documentation V9.2
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    HCL-TECH-SOFTWARE/volt-mx-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Introducing Volt MX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Introducing Volt MX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducing Volt MX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../Whats_New_Main_Page.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    What&apos;s New
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../VMX_release_notes.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Release Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../Iris/app_platform/Content/AppPlatform_Overview.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    App Platform
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../tutorials/Tutorials.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Tutorials
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installationGuides.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation Guides
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../Iris/voltmxIrisFundamentals.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Iris
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_8" id="__nav_1_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Foundry
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_8">
+            <span class="md-nav__icon md-icon"></span>
+            Foundry
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voltmxFoundryFundamentals.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../installing_foundry.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Installing Foundry
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../voltmx_foundry_user_guide/Content/Introduction.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Volt MX Foundry User Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../KF_Services_OAuth_Sample/Content/KF_Services_OAuth_Sample.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    OAuth Sample App Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../integration_services.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Integration Services
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../administering_foundry.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Administering Foundry
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../vmf_integrationservice_admin_console_userguide/Content/App_Services_User_Guide.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    App Services Console User Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_8_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_8_8" id="__nav_1_8_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    App Factory User Guide
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_8_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_8_8">
+            <span class="md-nav__icon md-icon"></span>
+            App Factory User Guide
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Introduction.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devOps.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DevOps
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="AppFactory_CICD_Runtime.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    App Factory CI&sol;CD Runtime
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="Prerequisites.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Project_Settings.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Project Settings
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="Microservice_Projects.md" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Microservice Projects
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_8_8_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_8_8_7" id="__nav_1_8_8_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Iris Projects
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_8_8_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_8_8_7">
+            <span class="md-nav__icon md-icon"></span>
+            Iris Projects
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="RunningIrisApp.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="IrisProjectVersioning.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Versioning an Iris project in SCM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="BuildingAnApp.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Building an Iris App
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="AutoTriggeredJobs.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scheduling an Iris build
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="BuildOnPush.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Build on Push for Iris apps
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Configuring_Device_Pools.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuring Device Pools
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Testing an App - TestNG
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="TestingAnApp.html" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Testing an App - TestNG
+  </span>
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-and-running-a-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      Building and running a test
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#native-test-environments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Native Test Environments
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Native Test Environments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#standard-test-environment-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      Standard Test Environment Run
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-test-environment-run-raw-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Test Environment Run (Raw Mode)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-tests-from-buildirisapp-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running Tests from buildIrisApp job
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Results
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#native-test-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Native Test Results
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desktop-web-test-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Desktop Web Test Results
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Status
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting Issues
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#auto-triggering-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Auto Triggering Tests
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="TestingAnAppJasmine.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testing an App - Jasmine
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="CustomHooksIris.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Custom Hooks for Iris jobs
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Troubleshooting.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="MicroApps_BestPractices.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Micro Apps - Best Practices
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="RunningFoundryApp.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Foundry Projects
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="Database.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Database Projects
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Project_Upgrade.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Upgrading a Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ManagingCredentials.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Managing Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Results.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Results
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Known_Issues.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Known Issues
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Known_Issues.html#limitations" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Limitations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Configuration.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="FAQs.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Frequently Asked Questions (FAQs)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../voltmx_Foundry_deployment_guide/Content/Introduction.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Volt MX Foundry Deployment Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VoltMX_Analytics_Cloud_FAQs/Content/VoltMX_Analytics_Cloud_FAQs.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Volt MX Analytics & Reporting Cloud FAQs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../vmfintegrationservice_troubleshooting_guide/Content/Integration_Services_Troubleshooting_Guide.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Integration Services Troubleshooting Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-and-running-a-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      Building and running a test
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#native-test-environments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Native Test Environments
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Native Test Environments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#standard-test-environment-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      Standard Test Environment Run
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-test-environment-run-raw-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Test Environment Run (Raw Mode)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-tests-from-buildirisapp-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running Tests from buildIrisApp job
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Results
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#native-test-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Native Test Results
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desktop-web-test-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Desktop Web Test Results
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Status
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting Issues
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#auto-triggering-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Auto Triggering Tests
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="testing-an-app-testng">Testing an App - TestNG</h1>
+<p>TestNG is a testing framework that can be used for unit testing and integration testing. With the TestNG framework, App Factory uses Appium to run test cases on the Native platform, and Selenium to run test cases on the Desktop Web platform. For more information, refer to the following sections.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<details close="close">
+<p><summary>Native Prerequisites</summary></p>
+<ul>
+<li>Make sure that the Iris project contains the Appium test files at the following location:<br />
+<code>&lt;Project-Root&gt;/test/TestNG/</code></li>
+<li>Make sure that you configure a device pool before you test the application<br />
+    For information about device pools, refer to <a href="Configuring_Device_Pools.html">Configuring Device Pools</a></li>
+<li>
+<p>The Appium tests must be compatible with AWS Device Farm because the Appium tests are executed in the AWS Device Farm Cloud environment</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> You can find the Appium tests in the root folder of the project.<br />
+<img alt="" src="Resources/Images/TA_TestRootFolder.png" /></p>
+</blockquote>
+</li>
+<li>
+<p>Tests must be compiled by using a Maven configuration file (pom.xml) that is available in the Tests root folder (<code>&lt;Project-Root&gt;/test/TestNG</code>)<br />
+<img alt="" src="Resources/Images/TA_AppTestFolder.png" /></p>
+</li>
+</ul>
+</details>
+<details close="close">
+<p><summary>Desktop Web Prerequisites</summary></p>
+<ul>
+<li>Make sure that the Iris project contains the Selenium test files at the following location:<br />
+<code>&lt;Project-Root&gt;/test/TestNG/DesktopWeb/</code><br />
+<img alt="" src="Resources/Images/dweb.png" /></li>
+<li>Make sure that the Desktop Web tests are run by using Selenium and TestNG</li>
+<li>Make sure that you run the tests on Google Chrome in headless mode before you run them on App Factory</li>
+<li>If you are running the test on App Factory, refer to the chrome driver path and browser path as follows:</li>
+</ul>
+<pre><code>System.setProperty(&quot;webdriver.chrome.driver&quot;, System.getProperty(&quot;DRIVER_PATH&quot;));  
+    String browserPath = System.getProperty(&quot;BROWSER_PATH&quot;);
+</code></pre>
+<ul>
+<li>If you are using appscommon.jar in the test code, you can set driver path and browser path as follows:</li>
+</ul>
+<pre><code>System.setProperty(&quot;webdriver.chrome.driver&quot;, sgConfig.getDriverPath());  
+    chromeOptions.setBinary(sg.getKeyValue(browserPath));
+</code></pre>
+<pre><code>where **sg** is an instance of SgConfiguration class and **chromeOptions** is an instance of ChromeOptions.
+</code></pre>
+</details>
+<h2 id="building-and-running-a-test">Building and running a test</h2>
+<blockquote>
+<p><strong><em>Important:</em></strong></p>
+</blockquote>
+<ul>
+<li>To run tests that are independent from the build process, you need a Binary URL that is public (open) and accessible on the internet. For example, a URL to an S3 bucket from the email notification that is sent by the <strong>buildIrisApp</strong> job.</li>
+<li>If you do not have a public Binary URL, HCL recommends that you run the tests as part of the build process.</li>
+</ul>
+<p>To build and run a test, follow these steps:</p>
+<ol>
+<li>From the <strong>Iris</strong> folder of your project, navigate to the <strong>Tests</strong> sub-folder.</li>
+<li>For the <strong>runTest</strong> job, click the <strong>Build with Parameters</strong> icon on the right side of the row.<br />
+    Alternatively, select the <strong>runTest</strong> job, and then from the left panel of the details page, select <strong>Build with Parameters</strong>.</li>
+<li>Configure the build parameters for the runTest job. For more information about the parameters, refer to the following sections.  </li>
+</ol>
+<details close="close">
+<p><summary>Source Control</summary></p>
+<pre><code>&lt;table style="width: 80%;mc-table-style: url('Resources/TableStyles/Basic.css');" class="TableStyle-Basic" cellspacing="0"&gt;&lt;colgroup&gt;&lt;col class="TableStyle-Basic-Column-Column1" style="width: 30%;"&gt;&lt;col class="TableStyle-Basic-Column-Column1" style="width: 50%;"&gt;&lt;/colgroup&gt;&lt;tbody&gt;&lt;tr class="TableStyle-Basic-Body-Body1"&gt;&lt;th class="TableStyle-Basic-BodyE-Column1-Body1"&gt;Parameter&lt;/th&gt;&lt;th class="TableStyle-Basic-BodyD-Column1-Body1"&gt;Description&lt;/th&gt;&lt;/tr&gt;&lt;tr class="TableStyle-Basic-Body-Body1"&gt;&lt;td class="TableStyle-Basic-BodyE-Column1-Body1"&gt;PROJECT_SOURCE_CODE_BRANCH&lt;/td&gt;&lt;td class="TableStyle-Basic-BodyD-Column1-Body1"&gt;Specifies the branch, release tag, or the commit ID of the repository that contains the test files.The tests must be placed at the following location:&lt;code class="file_names"&gt;&lt;Repository-Root&gt;/&lt;Project-Root&gt;/test/testNG/&lt;/code&gt;The &lt;b&gt;&lt;Repository_Root&gt;&lt;/b&gt; and &lt;b&gt;&lt;Project-Root&gt;&lt;/b&gt; must be configured while &lt;a href="Setup.html#Iris" target="_blank"&gt;creating the Iris project in App Factory&lt;/a&gt;.&lt;/td&gt;&lt;/tr&gt;&lt;tr class="TableStyle-Basic-Body-Body1"&gt;&lt;td class="TableStyle-Basic-BodyE-Column1-Body1"&gt;RUN_NATIVE_TESTS&lt;/td&gt;&lt;td class="TableStyle-Basic-BodyD-Column1-Body1"&gt;Specifies whether App Factory must run tests for the Native platform.If you enable this parameter, the console displays additional parameters for Native tests. For more information, refer to &lt;a href="#Build_Native" class="selected"&gt;Native build parameters&lt;/a&gt;.&lt;/td&gt;&lt;/tr&gt;&lt;tr class="TableStyle-Basic-Body-Body1"&gt;&lt;td class="TableStyle-Basic-BodyB-Column1-Body1"&gt;RUN_DESKTOPWEB_TESTS&lt;/td&gt;&lt;td class="TableStyle-Basic-BodyA-Column1-Body1"&gt;Specifies whether App Factory must run tests for the Desktop Web platform.If you enable this parameter, the console displays additional parameters for Desktop Web tests. For more information, refer to &lt;a href="#Desktop_Build" class="selected"&gt;Desktop Web build parameters&lt;/a&gt;.&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+</code></pre>
+</details>
+<details close="close">
+<p><summary>Native build parameters</summary></p>
+<pre><code>&lt;table style="mc-table-style: url('Resources/TableStyles/Basic.css');width: 90%;" class="TableStyle-Basic" cellspacing="0"&gt;&lt;colgroup&gt;&lt;col class="TableStyle-Basic-Column-Column1" style="width: 35%;"&gt;&lt;col class="TableStyle-Basic-Column-Column1" style="width: 55%;"&gt;&lt;/colgroup&gt;&lt;tbody&gt;&lt;tr class="TableStyle-Basic-Body-Body1"&gt;&lt;th class="TableStyle-Basic-BodyE-Column1-Body1"&gt;Parameter&lt;/th&gt;&lt;th class="TableStyle-Basic-BodyD-Column1-Body1"&gt;Description&lt;/th&gt;&lt;/tr&gt;&lt;tr class="TableStyle-Basic-Body-Body1"&gt;&lt;td class="TableStyle-Basic-BodyE-Column1-Body1"&gt;ANDROID_UNIVERSAL_NATIVE_BINARY_URL&lt;/td&gt;&lt;td class="TableStyle-Basic-BodyD-Column1-Body1"&gt;Specifies the URL of the Android universal binaries that are generated by a build job or generated locally.&lt;/td&gt;&lt;/tr&gt;&lt;tr class="TableStyle-Basic-Body-Body1"&gt;&lt;td class="TableStyle-Basic-BodyE-Column1-Body1"&gt;ANDROID_MOBILE_NATIVE_BINARY_URL&lt;/td&gt;&lt;td class="TableStyle-Basic-BodyD-Column1-Body1"&gt;Specifies the URL of the Android Mobile binary that is generated by a build job or generated locally.&lt;/td&gt;&lt;/tr&gt;&lt;tr class="TableStyle-Basic-Body-Body1"&gt;&lt;td class="TableStyle-Basic-BodyE-Column1-Body1"&gt;ANDROID_TABLET_NATIVE_BINARY_URL&lt;/td&gt;&lt;td class="TableStyle-Basic-BodyD-Column1-Body1"&gt;Specifies the URL of the Android Tablet binary that is generated by a build job or generated locally.&lt;/td&gt;&lt;/tr&gt;&lt;tr class="TableStyle-Basic-Body-Body1"&gt;&lt;td class="TableStyle-Basic-BodyE-Column1-Body1"&gt;IOS_UNIVERSAL_NATIVE_BINARY_URL&lt;/td&gt;&lt;td class="TableStyle-Basic-BodyD-Column1-Body1"&gt;Specifies the URL of the iOS universal binaries that are generated by a build job or generated locally.&lt;/td&gt;&lt;/tr&gt;&lt;tr class="TableStyle-Basic-Body-Body1"&gt;&lt;td class="TableStyle-Basic-BodyE-Column1-Body1"&gt;IOS_MOBILE_NATIVE_BINARY_URL&lt;/td&gt;&lt;td class="TableStyle-Basic-BodyD-Column1-Body1"&gt;Specifies the URL of the iPhone binary that is generated by a build job or generated locally.&lt;/td&gt;&lt;/tr&gt;&lt;tr class="TableStyle-Basic-Body-Body1"&gt;&lt;td class="TableStyle-Basic-BodyE-Column1-Body1"&gt;IOS_TABLET_NATIVE_BINARY_URL&lt;/td&gt;&lt;td class="TableStyle-Basic-BodyD-Column1-Body1"&gt;Specifies the URL of the iPad binary that is generated by a build job or generated locally.&lt;/td&gt;&lt;/tr&gt;&lt;tr class="TableStyle-Basic-Body-Body1"&gt;&lt;td class="TableStyle-Basic-BodyE-Column1-Body1"&gt;NATIVE_TESTS_URL&lt;/td&gt;&lt;td class="TableStyle-Basic-BodyD-Column1-Body1"&gt;Specifies the URL of the binaries for the compiled test project. If you provide Git parameters, you can skip this parameter.&lt;/td&gt;&lt;/tr&gt;&lt;tr class="TableStyle-Basic-Body-Body1"&gt;&lt;td class="TableStyle-Basic-BodyE-Column1-Body1"&gt;TEST_ENVIRONMENT&lt;/td&gt;&lt;td class="TableStyle-Basic-BodyD-Column1-Body1"&gt;Specifies the environment on which the Device Farm runs the test. You can select a Standard Test Environment, or select a Custom Test Environment.For more information, refer to &lt;a href="#Native" class="selected"&gt;Native Testing Environments&lt;/a&gt;.If you select a Custom Test Environment, the console displays additional parameters. For more information, refer to Custom Test Environment parameters.&lt;/td&gt;&lt;/tr&gt;&lt;tr class="TableStyle-Basic-Body-Body1"&gt;&lt;td class="TableStyle-Basic-BodyB-Column1-Body1"&gt;AVAILABLE_TEST_POOLS&lt;/td&gt;&lt;td class="TableStyle-Basic-BodyA-Column1-Body1"&gt;Specifies the device pool that must be used for the tests. If a device pool is empty, the build fails.For more information, refer to &lt;a href="Configuring_Device_Pools.html" target="_blank"&gt;Configuring Device Pools&lt;/a&gt;.&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+
+**Custom Test Environment parameters**
+
+&lt;table style="mc-table-style: url('Resources/TableStyles/Basic.css');width: 90%;" class="TableStyle-Basic" cellspacing="0"&gt;&lt;colgroup&gt;&lt;col class="TableStyle-Basic-Column-Column1" style="width: 35%;"&gt;&lt;col class="TableStyle-Basic-Column-Column1" style="width: 55%;"&gt;&lt;/colgroup&gt;&lt;tbody&gt;&lt;tr class="TableStyle-Basic-Body-Body1"&gt;&lt;th class="TableStyle-Basic-BodyE-Column1-Body1"&gt;Parameter&lt;/th&gt;&lt;th class="TableStyle-Basic-BodyD-Column1-Body1"&gt;Description&lt;/th&gt;&lt;/tr&gt;&lt;tr class="TableStyle-Basic-Body-Body1"&gt;&lt;td class="TableStyle-Basic-BodyE-Column1-Body1"&gt;APPIUM_VERSION&lt;/td&gt;&lt;td class="TableStyle-Basic-BodyD-Column1-Body1"&gt;Specifies the Appium version that is used to run the tests.&lt;/td&gt;&lt;/tr&gt;&lt;tr class="TableStyle-Basic-Body-Body1"&gt;&lt;td class="TableStyle-Basic-BodyB-Column1-Body1"&gt;TESTNG_FILES&lt;/td&gt;&lt;td class="TableStyle-Basic-BodyA-Column1-Body1"&gt;Specifies the relative path of the TestNG.xml file in the test jar file, for example: &lt;code class="file_names" style="font-size: 11pt;"&gt;appfactory/Testng.xml&lt;/code&gt;.If the path is not specified, the root of the test jar file is taken as the default path.You can specify multiple file paths by using comma separated path values. For example:&lt;code class="codefirst"&gt;voltmx/Testng.xml,voltmx/appfactory/Testng.xml,testng.xml&lt;/code&gt;&lt;span class="autonumber"&gt;&lt;span&gt;&lt;b&gt;&lt;i&gt;&lt;span style="color: #0a9c4a;" class="mcFormatColor"&gt;Note: &lt;/span&gt;&lt;/i&gt;&lt;/b&gt;&lt;/span&gt;&lt;/span&gt;If the specified TestNG file is not found in the source, the tests run independently similar to Standard Test Environment.&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+</code></pre>
+</details>
+<details close="close">
+<p><summary>Desktop Web build parameters</summary></p>
+<pre><code>&lt;table style="mc-table-style: url('Resources/TableStyles/Basic.css');width: 90%;" class="TableStyle-Basic" cellspacing="0"&gt;&lt;colgroup&gt;&lt;col class="TableStyle-Basic-Column-Column1" style="width: 35%;"&gt;&lt;col class="TableStyle-Basic-Column-Column1" style="width: 55%;"&gt;&lt;/colgroup&gt;&lt;tbody&gt;&lt;tr class="TableStyle-Basic-Body-Body1"&gt;&lt;th class="TableStyle-Basic-BodyE-Column1-Body1"&gt;Parameter&lt;/th&gt;&lt;th class="TableStyle-Basic-BodyD-Column1-Body1"&gt;Description&lt;/th&gt;&lt;/tr&gt;&lt;tr class="TableStyle-Basic-Body-Body1"&gt;&lt;td class="TableStyle-Basic-BodyE-Column1-Body1"&gt;FOUNDRY_APP_URL&lt;/td&gt;&lt;td class="TableStyle-Basic-BodyD-Column1-Body1"&gt;Specifies the URL of the Foundry app with which the Desktop Web WAR file is published.&lt;/td&gt;&lt;/tr&gt;&lt;tr class="TableStyle-Basic-Body-Body1"&gt;&lt;td class="TableStyle-Basic-BodyE-Column1-Body1"&gt;DESKTOPWEB_TESTS_URL&lt;/td&gt;&lt;td class="TableStyle-Basic-BodyD-Column1-Body1"&gt;Specifies the URL of the Desktop Web binary that is generated by a build job or generated locally.&lt;/td&gt;&lt;/tr&gt;&lt;tr class="TableStyle-Basic-Body-Body1"&gt;&lt;td class="TableStyle-Basic-BodyE-Column1-Body1"&gt;AVAILABLE_BROWSERS&lt;/td&gt;&lt;td class="TableStyle-Basic-BodyD-Column1-Body1"&gt;Specifies the browser on which you want to run the Desktop Web tests.&lt;/td&gt;&lt;/tr&gt;&lt;tr class="TableStyle-Basic-Body-Body1"&gt;&lt;td class="TableStyle-Basic-BodyE-Column1-Body1"&gt;SCREEN_RESOLUTIONS&lt;/td&gt;&lt;td class="TableStyle-Basic-BodyD-Column1-Body1"&gt;Specifies the resolution at which the browser must launch and run the tests.&lt;/td&gt;&lt;/tr&gt;&lt;tr class="TableStyle-Basic-Body-Body1"&gt;&lt;td class="TableStyle-Basic-BodyB-Column1-Body1"&gt;RUN_DESKTOPWEB_TESTS_ARGUMENTS&lt;/td&gt;&lt;td class="TableStyle-Basic-BodyA-Column1-Body1"&gt;Specifies additional arguments (parameters) that must be passed in the Maven command for the Desktop Web tests.For Example: If you pass &lt;span style="font-family: monospace;"&gt;-Dsurefire.suiteXmlFiles=resources/Testng.xml&lt;/span&gt;, the argument triggers the tests from the &lt;span style="font-family: monospace;"&gt;resources/Testng.xml&lt;/span&gt; file. If you do not pass the argument, &lt;span style="font-family: monospace;"&gt;Testng.xml&lt;/span&gt; is selected as a default file.&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+</code></pre>
+</details>
+<details close="close">
+<p><summary>Custom Hooks</summary></p>
+<pre><code>&lt;table style="mc-table-style: url('Resources/TableStyles/Basic.css');width: 90%;" class="TableStyle-Basic" cellspacing="0"&gt;&lt;colgroup&gt;&lt;col class="TableStyle-Basic-Column-Column1" style="width: 35%;"&gt;&lt;col class="TableStyle-Basic-Column-Column1" style="width: 55%;"&gt;&lt;/colgroup&gt;&lt;tbody&gt;&lt;tr class="TableStyle-Basic-Body-Body1"&gt;&lt;th class="TableStyle-Basic-BodyE-Column1-Body1"&gt;Parameter&lt;/th&gt;&lt;th class="TableStyle-Basic-BodyD-Column1-Body1"&gt;Description&lt;/th&gt;&lt;/tr&gt;&lt;tr class="TableStyle-Basic-Body-Body1"&gt;&lt;td class="TableStyle-Basic-BodyB-Column1-Body1"&gt;RUN_CUSTOM_HOOKS&lt;/td&gt;&lt;td class="TableStyle-Basic-BodyA-Column1-Body1"&gt;Specifies whether Custom Hooks must be run in the after the tests are executed (the Post-Test stage). For more information, refer to &lt;a href="CustomHooks.html" target="_blank"&gt;Custom Hooks&lt;/a&gt;.&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+</code></pre>
+</details>
+<h2 id="native-test-environments">Native Test Environments</h2>
+<p>App Factory uses the AWS Device farm to run test cases on specific devices. The Device Farm offers two types of environments to run the tests.</p>
+<ul>
+<li>
+<p><strong>Standard Test Environment</strong><br />
+    In a standard test environment, the Device Farm provides the logs and reports for every test case that available in the test suite. You can use the logs to locate and fix issues in your app. The tests are run on Appium version 1.9.1, and a new instance of the application is built for every test case. The test cases are implemented based on the sequence that is provided in the test package. The reports are gathered for every minor detail of the tests, therefore, running the tests takes time. For more information, refer to <a href="#Running">Standard Test Environment</a>.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> TestNG annotations and TestNG XML files are not supported in a Standard Testing Environment.</p>
+</blockquote>
+</li>
+<li>
+<p><strong>CustomTest Environment</strong><br />
+    In a Custom Test Environment, you can use the TestNG annotations to group, exclude, and include the test cases that you want to run, and also generate the logs and reports. You can use a TestNG XML file to determine the order in which the test runs. You can provide the required Appium version and the device farm downloads and installs the version to run the tests on it. All the test cases run on a single instance of the app, which makes the test execution faster in this environment. However, the speed of the test execution depends on the logic and flow of the test cases. For more information, refer to <a href="#Custom">Custom Test Environment</a>.</p>
+</li>
+</ul>
+<blockquote>
+<p><strong><em>Note:</em></strong> For information about the difference between Standard and Custom Test Environments, refer to <a href="https://support.hcltechsw.com/csm?id=kb_article&amp;sysparm_article=KB0083659">Standard and Custom test Environments</a>.</p>
+</blockquote>
+<h3 id="standard-test-environment-run">Standard Test Environment Run</h3>
+<p>The test run process consists of the following steps:</p>
+<ol>
+<li>Checkout of test project if GIT_BRANCH and GIT_CREDENTIALS are selected.</li>
+<li>Build the test project</li>
+<li>Publish test binaries at S3 based on the <code>&lt;S3 bucket&gt;/&lt;project name&gt;/Tests/runTests/&lt;build number&gt;/KitchenSinkApp_TestApp.zip</code>. For example: <code>https://s3-eu-west-1.amazonaws.com/ voltmxdemo/KitchenSinkApp/Tests/runTests/4/KitchenSinkApp_TestApp.zip</code></li>
+<li>Fetch binaries to run them in AWS Device Farm</li>
+<li>Create a project in AWS Device Farm</li>
+<li>Create a device pool at AWS Device Farm, taking a device list selected from the configuration</li>
+<li>Upload test binaries to the Device Farm</li>
+<li>Upload application binaries to the Device Farm and schedule a run.</li>
+<li>Retrieve the test results.</li>
+</ol>
+<p>Usually, the test run process takes around 20 minutes per each device in the device pool. Only the devices that are available in the Device Farm are used for testing. All unknown devices are skipped. If a particular application binary is missing, the devices for that channel are skipped from the test run.<br />
+<img alt="" src="Resources/Images/TA_RunTestsStageView.png" /></p>
+<blockquote>
+<p><strong>Note:</strong><br />
+<em>   You can capture screenshots and display them in the email template under the respective test cases, when the tests are running through AWS Device Farm.  <br />
+    For more information, refer to <a href="https://support.hcltechsw.com/csm?id=kb_article&amp;sysparm_article=KB0083618">Run Appium Test Cases for Iris Application through App Factory</a>.<br />
+</em>   For more information about writing test cases for native Iris applications from scratch, and running them through App Factory using AWS Device Farm, refer to <a href="https://support.hcltechsw.com/csm?id=kb_article&amp;sysparm_article=KB0083618">Run Appium Test Cases</a>.  </p>
+</blockquote>
+<h3 id="custom-test-environment-run-raw-mode">Custom Test Environment Run (Raw Mode)</h3>
+<p>When you customize the test environment, you can specify the commands that must be run on the Device Farm to execute your tests. Running a test on a Custom Test Environment ensures that the tests on Device Farm run similar to the tests that run on your local machine. A Custom Test Environment does not generate granular reports for every test case.</p>
+<p>In a Custom test environment, you can select the Appium version on which the test must be run. All the TestNG annotations, such as grouping and parallel tests/methods, are supported.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> Make sure that you provide an appropriate Appium version. For more information, refer to <a href="https://docs.aws.amazon.com/devicefarm/latest/developerguide/test-types-android-appium-java-junit.html">AWS Device Farm</a>.</p>
+</blockquote>
+<p>Including a testng.xml File in the tests.jar File for Device Farm</p>
+<p>In a Custom Test Environment, TestNG XML is used to run the tests in the project test code. The <code>testng.xml</code> file must be present in the Testing jar file that is created as part of the test code compilation.</p>
+<p>You can configure the Maven build to package the <code>testng.xml</code> with the Testing jar file as part of the maven build.</p>
+<blockquote>
+<p><strong>Note:</strong><br />
+<em>   In Device Farm's standard environment, only a subset of features are supported for the testng.xml file.<br />
+</em>   Use Custom environment if the following are required for the project:<br />
+    *   Priority tag<br />
+    *   Include and Exclude tag<br />
+    *   Complex Grouping<br />
+    *   Parameters from <strong>testng.xml</strong> file  </p>
+</blockquote>
+<p>To apply the <strong>testng.xml</strong> file to the Appium TestNG test package for AWS Device Farm, you must add the <strong>testng.xml</strong> file to the root of the <strong>*-tests.jar file</strong>. To achieve this, do the following:</p>
+<ol>
+<li>
+<p>Place your test code in the root test folder that is available at the following locations:</p>
+<ul>
+<li>For SP4 and higher versions, <code>&lt;project_root&gt;/testresources/TestNG/</code>.</li>
+<li>For lower versions, <code>&lt;project_root&gt;/test/TestNG</code>.</li>
+</ul>
+<blockquote>
+<p><strong><em>Note:</em></strong> Ensure that <strong>pom.xml</strong> is present in the required directory.</p>
+</blockquote>
+</li>
+<li>
+<p>Write the required TestNG XML and place it at <code>&lt;root_test_folder&gt;/src/test/resources</code> location.<br />
+<img alt="" src="Resources/Images/testing.png1_549x217.png" /></p>
+</li>
+<li>To explicitly reference a directory, include the <strong>testresources</strong> tags in the <strong>pom.xml</strong>.</li>
+</ol>
+<pre><code>&lt;testResources&gt;
+         &lt;testResource&gt;
+            &lt;directory&gt;${project.basedir}/&lt;root_test_folder&gt;/src/test/resources&lt;/directory&gt;
+         &lt;/testResource&gt;
+    &lt;/testResources&gt;
+
+</code></pre>
+<ol>
+<li>To reference the TestNG XML file for local executions, modify the <strong>pom.xml</strong> to include the <strong>surefire</strong> plugin.  </li>
+</ol>
+<pre><code>&lt;plugin&gt;
+        &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt; 
+        &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
+        &lt;version&gt;2.12.4&lt;/version&gt; 
+        &lt;configuration&gt;
+           &lt;suiteXmlFiles&gt; &lt;suiteXmlFile&gt;src/test/resources/testng.xml&lt;/suiteXmlFile&gt;&lt;/suiteXmlFiles&gt;
+        &lt;/configuration&gt;
+    &lt;/plugin&gt;
+
+</code></pre>
+<pre><code>&gt; **_Note:_** For more than one TestNG XML, use multiple `&lt;suiteXmlFile&gt;` tags.
+</code></pre>
+<ol>
+<li>To verify the package, you can build the test code to create a dependencies <strong>zip</strong> that contains the <strong>Testing JAR</strong>. This <strong>zip</strong> with the dependencies will be present inside <strong><root\_test\_folder></strong>/ <strong>target directory</strong>. Package the tests using maven clean and package commands at the test root folder. The <strong>-DskipTests=true</strong> option specifies that the build should not run the unit tests.</li>
+</ol>
+<pre><code>mvn clean package -DskipTests=true  
+
+</code></pre>
+<ol>
+<li>Extract the zip folder. To verify whether the TestNG XML file is present at the desired location (root, by default), extract the jar using <strong>xf</strong> command.</li>
+</ol>
+<pre><code>jar xf nameOfTheProjectFromPom-1.0-SNAPSHOT-tests.jar
+</code></pre>
+<pre><code>Alternatively, you can use the **unzip** command to extract the contents of the jar.
+</code></pre>
+<pre><code>unzip nameOfTheProjectFromPom-1.0-SNAPSHOT-tests.jar -d sampletestsjarcontents
+</code></pre>
+<p>If the XML is in the correct location, remove the target folder and check-in the code into a branch in Git. Now, you can run your tests on App Factory in the Custom Test Environment. For more information, please refer to <a href="https://aws.amazon.com/premiumsupport/knowledge-center/xml-file-tests-jar-file-device-farm/">AWS Documentation</a>.</p>
+<p>For information on test results, refer to <a href="#test-results">Test Results</a>.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> Steps 3 and 4 are only for verification purpose. Tests will be compiled by App Factory during runtime unless the zip with dependencies is directly provided via build parameters.</p>
+<p><strong><em>Important:</em></strong> You can use the universal application binary and run the tests on both mobile and tablet devices based on the availability in the device pool.<br />
+You can trigger a run test job either with universal binary or with individual mobile/tablet.</p>
+</blockquote>
+<h2 id="running-tests-from-buildirisapp-job">Running Tests from buildIrisApp job</h2>
+<p>You can also trigger the tests from the buildIrisApp job available at <strong>Project Name</strong> &gt; <strong>Iris</strong> &gt; <strong>Builds</strong> folder. It is the simplest way to validate your code by launching tests right after Building the application. There is no need to specify all parameters as they are provided while running the tests manually. The results can be viewed in line to the Test Results of Manual Tests. For more information, refer to <a href="BuildingAnApp.html">Building a Iris App</a>.</p>
+<h2 id="test-results">Test Results</h2>
+<h3 id="native-test-results">Native Test Results</h3>
+<p>When the project test build is complete and the test results are published at S3, e-mail notifications are sent to recipients:</p>
+<p>On unsuccessful build for the tests run, the following e-mail is sent to the recipients:</p>
+<p><img alt="" src="Resources/Images/TA_TestBuildFailure1.png" /> <img alt="" src="Resources/Images/TA_TestBuildFailure2.png" /></p>
+<p>In the final stage, the consolidated test run status is notified via e-mail. Refer the following screenshots for the sample email for consolidated status.</p>
+<p>Sample email for Native tests</p>
+<p><img alt="" src="Resources/Images/native-test-result.PNG" /></p>
+<p>To download test data fetched from AWS Device Farm, click <strong>Download File</strong> link. Data is stored at S3 and available for review without time limitations.</p>
+<h3 id="desktop-web-test-results">Desktop Web Test Results</h3>
+<p>When the project test build is complete and the test results are published at S3, e-mail notifications are sent to recipients:</p>
+<p>On unsuccessful build for the tests run, the following e-mail is sent to the recipients:</p>
+<p><img alt="" src="Resources/Images/dweb-test-fail_616x397.png" /></p>
+<p>In the final stage, the consolidated test run status is notified via e-mail. Refer the following screenshots for the sample email for consolidated status.</p>
+<p>Sample email for DesktopWeb tests</p>
+<p><img alt="" src="Resources/Images/TA_TestBuildSuccess_1_485x821.png" /></p>
+<p>The summary of the test results are shown based on the tests executed on specified browser that includes passed, failed, skipped. Usually the tests are skipped when the driver initialization fails.</p>
+<p>You can click the respective links in Brief Summary table to view the test summary.</p>
+<p>To download the log files for each test case, click the respective <strong>Download File</strong> link. If you have any test failures, you can use these files to debug them.</p>
+<h3 id="test-status">Test Status</h3>
+<p>Test Status is available in the test result email which is sent to the recipient after you execute the test cases. Following are different statuses in the test result email:</p>
+<p><strong>PASSED</strong>: The status of the test result is <strong>PASSED</strong> when the test case is run without any issues, and when the assertion is successful.</p>
+<p><strong>FAILED</strong>: The status of the test result is <strong>FAILED</strong> when the expected result does not match with the actual result of the test case, the assertion will fail and hence the test case status will be set to <strong>FAILED</strong>.</p>
+<p><strong>SKIPPED</strong>: Following are the scenarios where a test case can be skipped while testing, and the status of the test result can be <strong>SKIPPED</strong>.</p>
+<ul>
+<li>AWS Issue: AWS skips the test cases yet to run when the duration of the test run exceeds 150 minutes (AWS Device Farm default time limit) resulting in the <strong>SKIPPED</strong> status. This is applicable only for Native test results.</li>
+<li>TestNG issue: There are various scenarios where TestNG can skip the test cases during a test run. The most common scenario is, if a parent test case fails for any reason, TestNG will skip all the related child test cases, and the status of the test result is <strong>SKIPPED</strong>.</li>
+</ul>
+<p><strong>WARNED</strong>: The status of the test result is <strong>WARNED</strong> when the device farm returns any warning due to the issues from AWS.</p>
+<p><strong>STOPPED</strong>: The status of the test result is <strong>STOPPED</strong> when you abort the test case forcefully.</p>
+<p><strong>ERRORED</strong>: The status of the test result is <strong>ERRORED</strong> when the device farm returns any error due to the technical issue on AWS.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> WARNED, STOPPED, and ERRORED statuses are not applicable for DesktopWeb tests.</p>
+</blockquote>
+<h2 id="troubleshooting-issues">Troubleshooting Issues</h2>
+<p>The following errors can help you during troubleshooting runTests job fail:</p>
+<ul>
+<li><strong>Error</strong>: Jasmine Tests can only be executed when the app is built in Debug mode.<br />
+<strong>Solution</strong>: Make sure that you have selected the build mode as <strong>debug</strong> when the app is built before running the tests.</li>
+<li><strong>Error</strong>: Please provide pool to test on.<br />
+<strong>Solution</strong>: Make sure that you provide a value to AVAILABLE_TEST_POOLS parameter to run the native tests.</li>
+<li><strong>Error</strong>: Sorry, You can't run test for Android Universal binary along with Android Mobile/Tablet.<br />
+<strong>Solution</strong>: The universal binary tests both the Mobile and Tablet binaries are based on the availability of the devices in the device pool. So it is not required to provide mobile/tablet binary when you give universal binary.</li>
+<li>
+<p><strong>Error</strong>: Build parameter <parameter name> value is not valid URL!<br />
+<strong>Solution</strong>: Make sure that the URL you provide for the following parameters is valid:</p>
+<ul>
+<li>ANDROID_MOBILE_NATIVE_BINARY_URL</li>
+<li>ANDROID_TABLET_NATIVE_BINARY_URL</li>
+<li>IOS_MOBILE_NATIVE_BINARY_URL</li>
+<li>IOS_TABLET_NATIVE_BINARY_URL</li>
+<li>
+<p>NATIVE_TESTS_URL</p>
+</li>
+<li>
+<p>ANDROID_UNIVERSAL_NATIVE_BINARY_URL</p>
+</li>
+<li>
+<p>DESKTOPWEB_TESTS_URL</p>
+</li>
+<li>
+<p>IOS_UNIVERSAL_NATIVE_BINARY_URL</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>The builds that failed during the test can be tracked for the issues that caused the failure. For example, consider build #4 from the following screenshots of runTests job. To troubleshoot the issue, follow these steps.</p>
+<ol>
+<li>From your project folder, navigate to <strong>Iris</strong> &gt; <strong>Tests</strong>.</li>
+</ol>
+<p><img alt="" src="Resources/Images/TA_TestsFolderStructure_577x306.png" /></p>
+<ol>
+<li>Select the runTests job, and then find the failed build.<br />
+    For example, find and click the link for build <strong>#4</strong>.</li>
+</ol>
+<p><img alt="" src="Resources/Images/TA_TestsSampleBuild.png" /></p>
+<ol>
+<li>From the details page of the failed build, select the <strong>Console Output</strong> on the left panel. The <strong>Console Output Log</strong> opens in the right pane.</li>
+</ol>
+<p><img alt="" src="Resources/Images/TA_ConsoleOutputLog_583x247.png" /></p>
+<ol>
+<li>Scroll to find errors in the log that caused the build to fail. For example, you can trace an error that is related to invalid Android Tablet URL.</li>
+</ol>
+<p><img alt="" src="Resources/Images/TA_ErrorLog_576x313.png" /></p>
+<ol>
+<li>Check if the ANDROID_TABLET_NATIVE_BINARY_URL parameter is valid.</li>
+</ol>
+<p>Alternatively you can troubleshoot the issue from the stages of Manual Testing.</p>
+<p><img alt="" src="Resources/Images/TA_Troubleshoot_Build4.png" /></p>
+<p>To troubleshoot the issue from the Stage View, follow these steps:</p>
+<ol>
+<li>From the Stage View, point to the failed stage, and then click <strong>Logs</strong>.<br />
+<img alt="" src="Resources/Images/TA_StageLogs.png" /></li>
+<li>From log messages in the <strong>Stage Logs</strong> window, identify the error message that corresponds to the failure of the build.<br />
+    For example, you can trace an error that is related to invalid Android Tablet URL.</li>
+</ol>
+<p><img alt="" src="Resources/Images/TA_StageLogs_Extended_575x355.png" /></p>
+<ol>
+<li>Check whether the ANDROID_TABLET_NATIVE_BINARY_URL parameter is valid.</li>
+</ol>
+<h2 id="auto-triggering-tests">Auto Triggering Tests</h2>
+<p>Currently, there are two types of auto-triggered test jobs: scm-triggered (Watchers) and cron-triggered (Schedulers). Every project structure has folder called "Tests" in "Iris" sub-folder, that contains job for creation of auto-triggered jobs (createTrigger) and two sub-folders where created jobs are stored.</p>
+<p>To setup auto-triggered job, perform the following steps:</p>
+<ol>
+<li>Go to <strong>Tests</strong> folder under project's root folder.</li>
+<li>Click on <strong>createTest</strong> job.</li>
+</ol>
+<p><img alt="" src="Resources/Images/TA_TestsFolderStructure_577x306.png" /></p>
+<ol>
+<li>Provide all required parameters (they are the same as in "Facade" job).</li>
+</ol>
+<blockquote>
+<p><strong><em>Important:</em></strong> Please note, that there is one additional parameter, which is called "CRON_SCHEDULE". If "CRON_SCHEDULE" parameter is given, then a cron-triggered job is created and stored in "Schedulers" sub-folder. If the parameter is not provided, a scm-triggered job is created and stored in "Watchers" sub-folder.</p>
+</blockquote>
+<p><a href="Resources/Images/TA_createTest.png"><img alt="" src="Resources/Images/TA_createTest_thumb_800_0.png" /></a></p>
+<ol>
+<li>Check that the createTest job is complete.</li>
+</ol>
+<p><img alt="" src="Resources/Images/TA_CreateTestSuccess.png" /></p>
+<blockquote>
+<p><strong><em>Important:</em></strong> Every Scheduler that is created, will have cron string in job's name to simplify the job search. Refer the image below.</p>
+</blockquote>
+<p><img alt="" src="Resources/Images/TA_SchedulerCron_574x228.png" /></p>
+<blockquote>
+<p><strong><em>Important:</em></strong> Every Watcher that is created contains the branch name in the job name to simplify job search.</p>
+</blockquote>
+<p><img alt="" src="Resources/Images/TA_WatchersCron_575x229.png" /></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2021 - 2024, HCL America, Inc. | <a href="https://hcltechsw.com/wps/portal/legal/privacy">Privacy Statement</a> | <a href="https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.hcltechsw.com%2Fwps%2Fportal%2Flegal%2Fterms-use&data=04%7C01%7Csuresh.chenji%40hcl.com%7Ca77ebddc51574aff8c6c08d8f056542d%7C189de737c93a4f5a8b686f4ca9941912%7C0%7C0%7C637523600856805537%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&sdata=vLnT466NGuIbvQ0nEwfn2qdXeuhHb6XOnh1pibATDI4%3D&reserved=0">Terms of Use</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+<div class="md-social">
+  <ul class="social-nav">
+    <li><a href="https://www.facebook.com/HCLDigital" class="facebook" target="_blank">Facebook</a></li>
+    <li><a href="https://www.linkedin.com/company/hclsoftware" class="linkedin" target="_blank">LinkedIn</a></li>
+    <li><a href="https://twitter.com/HCLDigital"  class="twitter" target="_blank">Twitter</a></li>
+    <li><a href="https://www.youtube.com/HCLDigitalSolutions" class="youtube" target="_blank">Youtube</a></li>
+    <li>
+      <a href="https://github.com/HCL-TECH-SOFTWARE" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    </li>
+  </ul>    
+</div>
+  </div>
+  <div class="md-footer-meta__inner md-grid">
+  <span class="md-footer__git_legacy">Please report problems with this documentation by <a class="announcement__link" href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/issues">opening issues in Github</a>.</span>
+  <span class="legacy-link md-footer__git_legacy">Can't find a topic? Check the legacy documentation <a class="announcement__link" href="https://opensource.hcltechsw.com/Volt-MX-Documentation-Archive/docs/documentation/" target="_blank">here</a>.</span>
+</span>
+    </div>
+</div>
+    <script>
+      function myFunction95(){
+          var initial_url = document.location.href;
+          var url_stub = initial_url.split( 'docs/documentation' );
+          var fixed_url = url_stub[0]+'95/docs/documentation';
+		  console.log(fixed_url);
+//          var fixed_url = 'https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation'
+          var url = initial_url.split( '/' );
+          var updated_url
+          if ( url[ url.length - 2 ] == "Foundry" || url[ url.length - 2 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 2 ] == "articles" || url[ url.length - 2] == "getting-started" || url[ url.length - 2 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 3 ] == "Foundry" || url[ url.length - 3 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 3 ] == "articles" || url[ url.length - 3 ] == "getting-started" || url[ url.length - 3 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 4 ] == "Foundry" || url[ url.length - 4 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 4 ] == "articles" || url[ url.length - 4 ] == "getting-started" || url[ url.length - 4 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 5 ] == "Foundry" || url[ url.length - 5 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 5 ] == "articles" || url[ url.length - 5 ] == "getting-started" || url[ url.length - 5 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 5 ] + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 6 ] == "Foundry" || url[ url.length - 6 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 6 ] == "articles" || url[ url.length - 6 ] == "getting-started" || url[ url.length - 6 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 6 ] + '/' + url[ url.length - 5 ] + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else{
+            updated_url= fixed_url + '/' + url[ url.length - 1];
+          }
+          window.location.replace(updated_url);
+          }
+    </script>
+
+  
+
+</footer>
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.prune"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>

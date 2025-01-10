@@ -1,0 +1,2737 @@
+<!-- Elements added to main will be displayed on all pages -->
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_user_guide/Content/C_CreatingComponent.html">
+      
+      
+        <link rel="prev" href="C_UsingComponents.html">
+      
+      
+        <link rel="next" href="PartIII_Adding_functionality.html">
+      
+      
+      <link rel="icon" href="../../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>Creating a Component - HCL Volt MX Documentation V9.2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/vmx_style.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#create-a-component" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+<div class="content-types-banner">
+    <ul class="sub-nav">
+        <li class="home-link">
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/index.html"  class="sub-link ">Home</a>
+        </li>
+        <li>
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/tutorials/Tutorials.html" class="sub-link">Tutorials</a>
+        </li>
+        <li>
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/index.html" class="sub-link" id="docLink">Documentation</a>
+        </li>
+        <li>
+            <a href="https://support.hcltechsw.com/csm?id=kb_search&spa=1&kb_category=db382ff1db631c14a45ad9fcd3961936" title="Articles" class="sub-link">Articles</a>
+        </li>
+        <li>
+            <a href="https://hclsoftwareu.hcltechsw.com/#VoltMxLearningJourneys" title="Articles" class="sub-link">Software Academy</a>
+        </li>
+        <li style="float:right">
+          <button onclick="myFunction95()" style="color:white; border-radius:5px ;padding:5px 10px 5px 10px; border: 2px solid white;" class="sub-link" id="docLink92">Switch to V9.5</button>
+      </li>
+    </ul>
+</div>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="HCL Volt MX Documentation V9.2" class="md-header__button md-logo" aria-label="HCL Volt MX Documentation V9.2" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HCL Volt MX Documentation V9.2
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Creating  a Component
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    HCL-TECH-SOFTWARE/volt-mx-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="HCL Volt MX Documentation V9.2" class="md-nav__button md-logo" aria-label="HCL Volt MX Documentation V9.2" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.png" alt="logo">
+
+    </a>
+    HCL Volt MX Documentation V9.2
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    HCL-TECH-SOFTWARE/volt-mx-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Introducing Volt MX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Introducing Volt MX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducing Volt MX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../Whats_New_Main_Page.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    What&apos;s New
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../VMX_release_notes.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Release Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../app_platform/Content/AppPlatform_Overview.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    App Platform
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../tutorials/Tutorials.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Tutorials
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Foundry/installationGuides.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation Guides
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_7" id="__nav_1_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Iris
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_7">
+            <span class="md-nav__icon md-icon"></span>
+            Iris
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voltmxIrisFundamentals.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../installing_iris.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Installing Iris
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../iris_tutorials/Content/Introduction.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Iris tutorials
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_7_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_7_4" id="__nav_1_7_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Iris User Guide
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_7_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_7_4">
+            <span class="md-nav__icon md-icon"></span>
+            Iris User Guide
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Introduction.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Mobile_Channels.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Supported Digital Channels
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Hikes.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hikes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Third-Party_Licenses.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Third-Party Licenses
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="Part_I__Overview.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Configuring Your Computer
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="Part_II_CreatingAnApplication.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Designing an Application
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_7_4_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_7_4_7" id="__nav_1_7_4_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Creating Applications with Components
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_7_4_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_7_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            Creating Applications with Components
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="C_DesigningWorkingWithComponents.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Working with Components
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="C_ComponentsOverview.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Components Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="C_UsingComponents.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Using Components
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Creating  a Component
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="C_CreatingComponent.html" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Creating  a Component
+  </span>
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-component-without-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create a Component Without Contract
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-component-with-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create a Component With Contract
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expose-a-components-widgets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expose a Component's Widgets
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-services-panel-support-for-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data &amp; Services Panel Support for Components
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data & Services Panel Support for Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-create-a-component-with-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to Create a Component with Services
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-a-component-with-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to Use a Component with Services
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#specify-a-container-widget-as-a-target-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      Specify a Container Widget as a Target Container
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expose-a-components-skins" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expose a Component's Skins
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lock-a-component" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lock a Component
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manage-properties-of-a-component-with-a-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manage Properties of a Component with a Contract
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Manage Properties of a Component with a Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reorder-properties-or-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reorder Properties or Groups
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manage-events-of-a-component-with-a-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manage Events of a Component with a Contract
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Manage Events of a Component with a Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#expose-events-of-a-component" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expose Events of a Component
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manage-methods-of-a-component-with-a-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manage Methods of a Component with a Contract
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-properties-events-and-methods-of-a-component-with-a-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      Group Properties, Events and Methods of a Component with a Contract
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-data-for-components-with-contract-by-using-mapping-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set Data for Components with Contract by using Mapping Editor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#define-the-behavior-of-a-custom-property-in-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Define the Behavior of a Custom Property in Code
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#define-a-custom-event" class="md-nav__link">
+    <span class="md-ellipsis">
+      Define a Custom Event
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="PartIII_Adding_functionality.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Adding Functionality
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="BuildingAndViewAnApp.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Building and Viewing an Application
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="TestingandDebugginganApplication.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Testing and Debugging an Application
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="Internationalization.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Appendix A&colon; Internationalization
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Inputs_to_Android_Application_Developers.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Appendix B&colon; Android Build Environment and Configurations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Generating_Map_Keys.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Appendix C&colon; Generating and Configuring Map API Keys
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="AppServiceEvent.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Appendix D&colon; The App Service Event
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="CameraAccessAndroidBrowser.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Appendix E&colon; Camera Access in Android Browser
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Support_for_iPhoneX.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Appendix F&colon; Support for iPhone X
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Universal_Links.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Appendix G&colon; Universal Links iOS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="FAQs.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Frequently Asked Questions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../app_design_dev/Content/homepage.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Application Design and Development Guidelines
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../iris_api_dev_guide/content/introduction.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Volt Iris API Developers Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../iris_nf_api_dev_guide/content/native_function_api_developers__guide.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Native Function API Developers Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../iris_widget_prog_guide/Content/Overview.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Iris Widget Programmer Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../iris_wearables_dev_guide/content/homehtml.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Iris Wearables Developer Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../iris_app_viewer/Content/Overview.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Using the Volt MX App
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../voltmx_ref_arch_api/Content/VoltMX_Reference_Architecture_Guide.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Volt MX Reference Architecture Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../Foundry/voltmxFoundryFundamentals.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Foundry
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-component-without-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create a Component Without Contract
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-component-with-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create a Component With Contract
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expose-a-components-widgets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expose a Component's Widgets
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-services-panel-support-for-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data &amp; Services Panel Support for Components
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data & Services Panel Support for Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-create-a-component-with-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to Create a Component with Services
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-a-component-with-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to Use a Component with Services
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#specify-a-container-widget-as-a-target-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      Specify a Container Widget as a Target Container
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expose-a-components-skins" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expose a Component's Skins
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lock-a-component" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lock a Component
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manage-properties-of-a-component-with-a-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manage Properties of a Component with a Contract
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Manage Properties of a Component with a Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reorder-properties-or-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reorder Properties or Groups
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manage-events-of-a-component-with-a-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manage Events of a Component with a Contract
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Manage Events of a Component with a Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#expose-events-of-a-component" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expose Events of a Component
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manage-methods-of-a-component-with-a-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manage Methods of a Component with a Contract
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-properties-events-and-methods-of-a-component-with-a-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      Group Properties, Events and Methods of a Component with a Contract
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-data-for-components-with-contract-by-using-mapping-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set Data for Components with Contract by using Mapping Editor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#define-the-behavior-of-a-custom-property-in-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Define the Behavior of a Custom Property in Code
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#define-a-custom-event" class="md-nav__link">
+    <span class="md-ellipsis">
+      Define a Custom Event
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="create-a-component">Create a Component</h1>
+<p>The most powerful way to create reusable components is to create a component that includes a defined <em>contract</em>. The contract is a JSON file that specifies the component's exposed properties, events, and methods. You can specify those properties, events, and methods within the Iris interface, and then define the behavior of custom properties, events, and methods by adding code to the component's controller module.</p>
+<p>When you create a component, you have a choice of creating a component with or without a contract. A component without a contract is similar to a master in earlier versions of Volt MX Iris, except that it includes a controller module. You can also convert a component that does not have a contract, or an imported master, to a component with a contract.</p>
+<p>Once you create a component with a contract, you can control what is exposed to users of the component. You expose only the properties, events, and methods that you want to make available to your target audience, enhancing your ability to rapidly create and deploy digitalapplications for different audiences. The exposed properties, events, and methods are part of the contract.</p>
+<p><img alt="" src="Resources/Images/CompManageProps_814x343.png" /></p>
+<p>You can then use the component in other applications, or share your custom components with other digital application developers by publishing them to HCL Forge . For more information about using components, see <a href="C_UsingComponents.html">Using Components</a>.</p>
+<blockquote>
+<p><strong><em>Important:</em></strong> Parent value for components will always be null. In component controller code, <strong>this.view.parent</strong> will always return a null value.</p>
+</blockquote>
+<p>The following topics provide additional information about creating components:</p>
+<ul>
+<li><a href="#create-a-component-without-contract">Create a Component without Contract</a></li>
+<li><a href="#create-a-component-with-contract">Create a Component with Contract</a></li>
+<li><a href="#expose-a-components-widgets">Expose a Component's Widgets</a></li>
+<li><a href="#data--services-panel-support-for-components">Data &amp; Services Panel Support for Components</a></li>
+<li><a href="#specify-a-container-widget-as-a-target-container">Specify a Container Widget as a Target Container</a></li>
+<li><a href="#expose-a-component-39-s-skins">Expose a Component's Skins</a></li>
+<li><a href="#lock-a-component">Lock a Component</a></li>
+<li><a href="#manage-properties-of-a-component-with-a-contract">Manage Properties of a Component with Contract</a></li>
+<li><a href="#manage-events-of-a-component-with-a-contract">Manage Events of a Component with Contract</a></li>
+<li><a href="#manage-methods-of-a-component-with-a-contract">Manage Methods of a Component with Contract</a></li>
+<li><a href="#group-properties-events-and-methods-of-a-component-with-a-contract">Group Properties, Events, and Methods of a Component with Contract</a></li>
+<li><a href="#set-data-for-components-with-contract-by-using-mapping-editor">Set Data for Components with Contract by using Mapping Editor</a></li>
+<li><a href="Segment2.html#Map_Service_Parameters_to_the_Segment_of_a_Component">Map Service Parameters to the Segment in a Component</a></li>
+<li><a href="#define-the-behavior-of-a-custom-property-in-code">Define the Behavior of a Custom Property in Code</a></li>
+<li><a href="#define-a-custom-event">Define a Custom Event in Code</a></li>
+</ul>
+<h2 id="create-a-component-without-contract">Create a Component Without Contract</h2>
+<p>A component without contract is similar to a Master in earlier versions of Volt MX Iris, except that a component includes a Controller module. You can reuse the component within your application and distribute it via HCL Forge . However, you cannot control which of the component's properties, events, and methods are exposed, or create custom properties, events, and methods. To control the exposed properties, events, and methods of a component, <a href="#create-a-component-with-contract">create a component with contract.</a></p>
+<p>To create a component without contract, follow these steps:</p>
+<ol>
+<li>In the Project Explorer, click the <strong>Templates</strong> tab.</li>
+<li>Right-click <strong>Components</strong>, point to <strong>New</strong>, and then select <strong>w/o Contract</strong>. The <strong>Create new Component without Contract</strong> dialog box appears.</li>
+<li>
+<p>Enter a <strong>Namespace</strong> ,<strong>Name</strong> and <strong>Version</strong> for the component. </p>
+<p>The component must follow this naming convention: <em><first part>.<second part></em>; for example, <em>my.namespace</em>.<br />
+  The component version helps you track changes or upgrades made to the component.  </p>
+<p>The new component without contract is created. The component includes a FlexContainer to contain any widgets that you add to the component and a Modules node, comprising the component's <em>Controller</em> and <em>Actions Controller</em> JavaScript files. The Actions Controller module is auto-generated and contains any defined action sequences.</p>
+</li>
+<li>
+<p>Add widgets to the FlexContainer, just as you would for a
+    standard form.</p>
+</li>
+<li>Add code to the component's controller module or to actions for widgets on the form. To add code to widget actions, select the FlexContainer. On the <strong>Properties</strong> panel, on the <strong>Action</strong> tab, click <strong>Edit</strong> for the event to which you want to add code. For more information, refer <a href="working_with_Action_Editor.html">Add Actions</a>.</li>
+</ol>
+<h2 id="create-a-component-with-contract">Create a Component With Contract</h2>
+<p>To create a reusable component that can be published to HCL Forge , create a component with contract. Components with a contract use the Volt MX Iris Reference Architecture: a structured, modular framework based on the Model-View-Controller (MVC) architecture. For more information on how to create a Volt MX Iris Reference Architecture project, refer <a href="CreateKRAProject.html">Create a Volt MX Iris Reference Architecture Project</a>.</p>
+<p>To create a component with contract, follow these steps:</p>
+<ol>
+<li>In the Project Explorer, click the <strong>Templates</strong> tab.</li>
+<li>Right-click <strong>Components</strong>, point to <strong>New</strong>, and then select <strong>with Contract</strong>. The <strong>Create new Component with Contract</strong> dialog box appears.</li>
+<li>
+<p>Enter a <strong>Namespace</strong> ,<strong>Name</strong> and <strong>Version</strong> for the component.  </p>
+<p>The component must follow this naming convention: <em><first part>.<second part></em>; for example, <em>my.namespace</em>.<br />
+The component version helps you track changes or upgrades made to the component.  </p>
+<p>The new component with contract is created. The component includes a FlexContainer to contain any widgets that you add to the component and a Modules node, comprising the component's <em>Controller</em> and <em>Actions Controller</em> JavaScript files. The Actions Controller module is auto-generated and contains any defined action sequences.</p>
+</li>
+<li>
+<p>Add widgets to the FlexContainer, just as you would for a standard form.</p>
+</li>
+<li>Add code to the component's controller module or to actions for widgets on the form. To add code to widget actions, select the FlexContainer. On the <strong>Properties</strong> panel, on the <strong>Action</strong> tab, click <strong>Edit</strong> for the event to which you want to add code. For more information, refer <a href="working_with_Action_Editor.html">Add Actions</a>.</li>
+<li>Manage properties, events, and methods for the component with contract. For more information, refer <a href="#manage-properties-of-a-component-with-a-contract">Manage Properties of a Component with a Contract</a>, <a href="#manage-events-of-a-component-with-a-contract">Manage Events of a Component with a Contract</a>, and <a href="#manage-methods-of-a-component-with-a-contract">Manage Methods of a Component with a Contract</a>.</li>
+</ol>
+<p>Each component's controller module contains the JavaScript code associated with the component.  You can add additional modules containing any supporting code to the Modules node. The actions Controller module is auto-generated and should not be modified.</p>
+<h2 id="expose-a-components-widgets">Expose a Component's Widgets</h2>
+<p>Typically, a component comprises multiple widgets. Once you create a component with a contract, you can specify which of the component's widgets to expose to users.</p>
+<p>To expose a component's widgets:</p>
+<p>Select a component's widget on the Iris canvas or on the <strong>Templates</strong> tab of Project Explorer.</p>
+<p>You can select a container widget or a child widget of a container widget.</p>
+<p>Right-click the widget and select <strong>Expose Widget</strong>, or click on the <strong>Look</strong> tab in the <strong>Properties</strong> pane and set the <strong>Expose Widget</strong> property to <em>On</em>.</p>
+<p>Volt MX  Iris displays the <strong>Programmatic Key</strong> property. You can use the default value or specify a different programmatic key.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> The Expose property will allow a component creator to make the widget visible in the form or another component. A developer who is using the component cannot access the widget directly through code.</p>
+</blockquote>
+<pre><code> If you select a container widget, all widgets within the container will be exposed. If you do not want to expose an individual widget within the container widget, select the widget and set its **Expose Widget** property to _Off_.
+</code></pre>
+<blockquote>
+<p><strong><em>Note:</em></strong> You can set the <strong>Expose Widget</strong> property of a container widget to <em>Off</em> but expose an individual widget within the container by setting its <strong>Expose Widget</strong> property to <em>On</em>.</p>
+</blockquote>
+<p>Repeat the process for each widget that you want to expose.</p>
+<h2 id="data-services-panel-support-for-components">Data &amp; Services Panel Support for Components</h2>
+<p>Earlier, the ability to leverage Data &amp; Services panel features for components was not supported in Volt MX Iris. From V8 SP4 Fixpack 20, you can directly drag and drop services from the Data &amp; Services panel to a component. In addition, you can drag and drop individual parameters of a sample service to a component. This enhancement will enable you to quickly customize components according to your requirement, and reuse them at various places in your Volt MX Iris Classic and Volt MX Irisprojects. Furthermore, you can <a href="C_UsingComponents.html#publish-a-component-to">publish customized components to HCL Forge</a> . You can leverage Data Panel support for both <a href="#create-a-component-with-contract">components with contract</a> and <a href="#create-a-component-without-contract">components without contract</a>. For more information on the Data &amp; Services panel, click <a href="DataPanel.html">here</a>.</p>
+<p>Once you drag and drop a sample service from the Data &amp; Services panel to a component, a corresponding project service is added. That particular project service and its associated parameters are auto-highlighted in the Data &amp; Services panel. So if multiple components exist and when you select a specific component, only those services which have been added to that component are highlighted in the Project Services of the Data &amp; Services panel. The Data &amp; Services panel also allows you to view the mappings for each project service operation in the component. The <strong>onMapping</strong> Event of the operations in the component is not generated separately in the CodeGen. You can view the onMapping Event in the <strong>preShow</strong> Event of the component</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> Currently, only the Details form and List form UI are supported for the drag and drop of services into a component; Entry form UI is not supported.</p>
+</blockquote>
+<p>If the sample service that you are trying to add to a component has already been added to another component, a <strong>Conflict</strong> window appears. In such a scenario, you must perform any one of the following actions to resolve this issue:</p>
+<ul>
+<li>Select the Skip radio button, and then click <strong>OK</strong> to use the original service.<ul>
+<li>If multiple instances of the same service exist and you want to use the original service, click Skip All.</li>
+</ul>
+</li>
+<li>
+<p>Select the Replace radio button, and then click <strong>OK</strong> to use a new service.</p>
+<ul>
+<li>If multiple instances of the same service exist and you want to use a new service, click Replace All.</li>
+</ul>
+<p><img alt="" src="Resources/Images/Conflict.PNG" /></p>
+</li>
+</ul>
+<p>This section contains the following topics:</p>
+<ul>
+<li><a href="#how-to-create-a-component-with-services">How to Create a Component with Services</a></li>
+<li><a href="#how-to-use-a-component-with-services">How to Use a Component with Services</a></li>
+</ul>
+<h3 id="how-to-create-a-component-with-services">How to Create a Component with Services</h3>
+<p>Create a component and leverage sample services from the Data &amp; Services panel. You can bundle these services to the required widgets of a component. You can directly drag and drop services into a component and customize it according to your requirement.</p>
+<p>In this scenario, we will xthe <a href="https://marketplace.hclvoltmx.com/items/list-details-employee">List-Details (Employee)</a> component from <a href="https://marketplace.hclvoltmx.com/">HCL Forge</a> and add services to the widgets of the component. You can add parameters (for example, <strong>Name</strong>) to specific widgets (for example, <strong>empname</strong> Label) of the component. This component contains the following two screens:</p>
+<ul>
+<li><strong>Employee List</strong><br />
+<img alt="" src="Resources/Images/List-Detail_Canvas_169x307.png" /></li>
+<li><strong>Employee Details</strong><br />
+<img alt="" src="Resources/Images/List-Detail_Employee_Details_163x300.png" /></li>
+</ul>
+<p><strong>To import the List-Details (Employee) component and add services to the component, follow these steps</strong>:</p>
+<ol>
+<li>
+<p>In Volt MX Iris, create a new <strong>Sample App</strong> project , and then import the <a href="https://marketplace.hclvoltmx.com/items/list-details-employee">List-Details (Employee)</a> component from <a href="https://marketplace.hclvoltmx.com/">HCL Forge</a> .<br />
+    The landing page of the <a href="https://marketplace.hclvoltmx.com/items/list-details-employee">List-Details (Employee)</a> component is displayed on the Project Canvas and its associated widgets are displayed in the Project Explorer.</p>
+</li>
+<li>
+<p>To add services to the Employee List screen, follow these steps:</p>
+<ol>
+<li>In the Project Explorer, go to <strong>Mobile</strong> &gt; <strong>Forms</strong>, and then click <strong>frmList</strong>. The list screen is displayed on the Project Canvas.</li>
+<li>Go to <strong>Data &amp; Services</strong> panel &gt; <strong>Sample Services</strong>, and then expand <strong>Employee Services</strong>.</li>
+<li>
+<p>Under the <strong>employees</strong> &gt; <strong>get</strong> &gt; <strong>Response</strong> &gt; <strong>records</strong> operation, drag and drop the following parameters to the respective widgets:</p>
+<ul>
+<li>Name &gt; empname</li>
+<li>Designation &gt; designation</li>
+<li>Department &gt; department</li>
+</ul>
+<p><img alt="" src="Resources/Images/List_Data_Panel_155x257.png" /></p>
+</li>
+</ol>
+</li>
+<li>
+<p>To add services to the Employee Details screen, follow these steps:</p>
+<ol>
+<li>In the Project Explorer, go to <strong>Mobile</strong> &gt; <strong>Forms</strong>, and then click <strong>frmDetails</strong>. The details screen is displayed on the Project Canvas.</li>
+<li>Go to <strong>Data &amp; Services</strong> panel &gt; <strong>Sample Services</strong>, and then expand <strong>Employee Services</strong>.</li>
+<li>
+<p>Under the <strong>employees</strong> &gt; <strong>get</strong> &gt; <strong>Response</strong> &gt; <strong>records</strong> operation, drag and drop the following parameters to the respective widgets:</p>
+<ul>
+<li>Designation &gt; lblEmployeeDesignation</li>
+<li>Primary_Phone &gt; callMobileFlex</li>
+<li>Email &gt; emailFlex</li>
+<li>Department &gt; departmentFlex</li>
+<li>Manager_Name &gt; reportingToFlex</li>
+</ul>
+<p><img alt="" src="Resources/Images/Details_Objects_251x218.png" /></p>
+</li>
+<li>
+<p>Go to <strong>Data &amp; Services</strong> panel &gt; <strong>Sample Services</strong>, and then expand <strong>Contacts</strong>.</p>
+</li>
+<li>
+<p>Under the <strong>getContacts</strong> &gt; <strong>Response</strong> &gt; <strong>responseList</strong> operation, drag and drop the following parameters to the respective widgets:</p>
+<ul>
+<li>Name &gt; lblEmployeeName</li>
+<li>Phone &gt; callWorkFlex</li>
+</ul>
+<p><img alt="" src="Resources/Images/Details_Contacts_278x232.png" /></p>
+</li>
+</ol>
+<p>The parameters are mapped to the corresponding component widgets, and the services are created in your Volt MX Foundry instance. In addition, the mappings are highlighted and displayed under <strong>Project Services</strong> on the Data &amp; Services panel.  </p>
+</li>
+<li>
+<p>Click <strong>View Mapping</strong> for a service, and then click <strong>Generate Code</strong> to view the respective mappings of the operations in the component. Alternatively, you can go to <strong>Properties panel</strong> &gt; <strong>Component</strong>, click <strong>Edit</strong> for the <strong>onMapping</strong> Event, and then click <strong>Generate Code</strong>.</p>
+</li>
+<li>You can then reuse the updated component across your Volt MX Iris projects or <a href="C_UsingComponents.html#publish-a-component-to">publish this customized component to HCL Forge</a> .</li>
+</ol>
+<h3 id="how-to-use-a-component-with-services">How to Use a Component with Services</h3>
+<p>Users can import the component with bundled services that you published on HCL Forge . They can then modify the component as per their requirement.</p>
+<p>Consider a scenario where Valerie (a user who wants to create a CRM app) imports your Employee List-Detail component to Volt MX Iris. However, she does not want to view employee data. Instead, Valerie wants to view the data of her customers. She can use the Data Panel support for Components feature to map data from another service that fetches customer data to the widgets, wherever required. Valerie can leverage an Object service to fetch the data, and she can directly map the response parameters from the Data &amp; Services panel.</p>
+<p><strong>Valerie can follow these steps to import the Employee List-detail component from HCL Forge and customize the services bundled with it</strong>:</p>
+<ol>
+<li>Create a new project in Volt MX Iris, and then import the component to Collection Library.</li>
+<li>Create a new form, say <strong>frm1</strong>.</li>
+<li>Drag and drop the component from Collection Library to frm1. The component is added to the form and the bundled services are displayed under Project Services of the Data &amp; Services panel.</li>
+<li>
+<p>For the List and Details screen, add response parameters of the required Object service (that fetches customer data) to the corresponding widgets of the component. Response parameters of other services (such as <strong>Contacts</strong>) can also be used wherever necessary. The new parameters are mapped to the corresponding component widgets, and the services are created in Volt MX Foundry. Furthermore, the mappings are highlighted and displayed under <strong>Project Services</strong> on the Data &amp; Services panel.</p>
+</li>
+<li>
+<p>Click <strong>View Mapping</strong> for the service, and then click <strong>Generate Code</strong> to view all the mappings of the parameters in the component.<br />
+    Alternatively, you can go to <strong>Properties panel</strong> &gt; <strong>Component</strong>, click <strong>Edit</strong> for the <strong>onMapping</strong> Event, and then click <strong>Generate Code</strong>.</p>
+</li>
+<li>This component can now be used in the CRM app to display the list of customers on the Customer List screen and specific customers' information on the Customer Details screen.</li>
+</ol>
+<h2 id="specify-a-container-widget-as-a-target-container">Specify a Container Widget as a Target Container</h2>
+<p>A <em>target container</em> is a Container widget that can contain other child widgets. To specify a Container widget as a target container, set both its <strong>Expose Widget</strong> and <strong>Set As Target Container</strong> properties to <em>On</em>.</p>
+<p>To specify a Container widget as a target container:</p>
+<ol>
+<li>Select the container widget on the Iris canvas or on the <strong>Templates</strong> tab of Project Explorer.</li>
+<li>Click on the <strong>Look</strong> tab in the <strong>Properties</strong> pane.</li>
+<li>Set the <strong>Expose Widget</strong> property to <em>On</em>, and then set the <strong>Set As Target Container</strong> property to <em>On</em>.</li>
+</ol>
+<blockquote>
+<p><strong><em>Note:</em></strong> If the <strong>Expose Widget</strong> property is set to <em>Off</em>, setting the <strong>Set As Target Container</strong> property to <em>On</em> will set both the <strong>Expose Widget</strong> and <strong>Set As Target Container</strong> properties to <em>On</em>.</p>
+</blockquote>
+<p>Volt MX  Iris displays the <strong>Placeholder</strong> property. The Placeholder property lets you specify further information or direction to a user; for example "Add Content Here" or "Drop Image Here."</p>
+<h2 id="expose-a-components-skins">Expose a Component's Skins</h2>
+<p>In addition to specifying which of a component's widgets to expose to users, you can specify the skins to expose.</p>
+<p>To expose a component's skins:</p>
+<ol>
+<li>Select the component on the Iris canvas or on the <strong>Templates</strong> tab of Project Explorer.</li>
+<li>Select the <strong>Skin</strong> tab in the <strong>Properties</strong> pane and select the skin that you want to expose.</li>
+<li>Set the <strong>Expose Skins</strong> property to <em>On</em>.</li>
+<li>Repeat the process for each skin that you want to expose.</li>
+</ol>
+<h2 id="lock-a-component">Lock a Component</h2>
+<p>To prevent your component from being modified by users, you can lock the component. Users will not be able to view or modify the component's source code.</p>
+<p>To lock a component:</p>
+<ol>
+<li>Select the component on the Iris canvas or on the <strong>Templates</strong> tab of Project Explorer.</li>
+<li>Right-click the component and select <strong>Lock</strong>.</li>
+</ol>
+<h2 id="manage-properties-of-a-component-with-a-contract">Manage Properties of a Component with a Contract</h2>
+<p>Once you create a component with a contract, you can specify which properties of the component to expose to users. The specified properties are called <em>pass-through</em> properties. You can also define custom properties.</p>
+<p>To manage properties of a component with a contract:</p>
+<ol>
+<li>Click the <strong>Templates</strong> tab in the Project Explorer or the Library Explorer.</li>
+<li>Expand the components node, if necessary, and then select the component.</li>
+<li>In the <strong>Properties</strong> pane, click the <strong>Component</strong> tab.</li>
+<li>Click <strong>Manage Properties</strong>. Volt MX Iris displays the <strong>Manage Properties</strong> dialog box.</li>
+<li>To define pass through properties, select the <strong>Pass Through</strong> tab on the <strong>Manage Properties</strong> dialog box.</li>
+</ol>
+<p>Click the plus sign (+) for each pass-through property you want to define. Click the delete symbol (X) to delete an existing property. To define a new pass-through property, specify the following for each property:</p>
+<ul>
+<li>Source Widget — The widget that contains the property. Click in the <strong>Source Widget</strong> field to display a hierarchical list of the component's widgets, and then select the widget.</li>
+</ul>
+<blockquote>
+<p><strong><em>Note:</em></strong> In Volt MX Iris version, you can add i18N properties also as a pass-through property. However, the i18N properties cannot be changed dynamically at runtime. When the i18N properties of a text is made pass-through, the corresponding text property is also made pass-through.<br />
+From the Volt MX Iris V9 SP2 FP 7 release, you can add the <a href="../../iris_widget_prog_guide/Content/Button_Properties.html#accessibilityConfig">accessibilityConfig</a> property also as a pass-through property using the <strong>Property</strong> panel and <strong>Manage Properties</strong> window. While using <strong>Property</strong> panel, you must make the entire <strong>Accessibility Config</strong> section as pass through and not the individual fields.</p>
+</blockquote>
+<ul>
+<li>Widget Property — The property that you want to define as a pass-through property. Click in the <strong>Widget Property</strong> field to display a list of the source widget's properties, and then select the property.</li>
+<li>Display Name — The name to display in the <strong>Component</strong> tab of the <strong>Properties</strong> pane. Click in the <strong>Display Name</strong> field and enter a name. The display name should start with a non-numeric character, and can contain only alphanumeric characters and spaces.</li>
+<li>Programmatic Name — The name to identify the property in code. Click in the <strong>Programmatic Name</strong> field, and enter a name. The programmatic name can contain only alphanumeric characters, and cannot start with a number or contain spaces.</li>
+<li>Tooltip: Enter the information about the property. Developers can enter detailed information about the property to convey the functionality of the property. When a user hovers over the property of the component, information entered in this property will appear.</li>
+<li>Group — The group to which the property belongs. Use groups to display related properties in their own section in the <strong>Properties</strong> pane.</li>
+<li>Access — Whether the property is enabled or disabled. Click in the <strong>Access</strong> field, and select either <em>Enable</em> or <em>Disable</em>.</li>
+<li>
+<p>Conditions: Set a property as a conditional property. You can also define dependent properties. Based on the value of the conditional property, dependent properties will be shown or hidden on the property panel.<br />
+    To set a conditional property, in the <strong>Manage Properties</strong> section of the Properties panel, click the <strong>Conditions</strong> column corresponding to the property. Click <strong>Define Properties</strong> to set dependant properties. Select the <strong>Type of Property</strong> (either pass-through or custom), and provide the name of the <strong>Dependant Property</strong>, and then click <strong>Done</strong>. In the <strong>Conditions</strong> dialog box, click <strong>Set Visibility</strong> for a conditional value to set the show/hide conditions for the property on the Properties Panel.</p>
+</li>
+<li>
+<p>All conditional values must be unique. You cannot set the same dependant property for different conditional properties.</p>
+</li>
+<li>The supported data types for the property are String, Integer, Boolean, List Selector.</li>
+<li>You cannot define cyclic dependencies and dependant properties for Templates, Image Identifiers, and Flex Properties.</li>
+<li>You cannot set forkable properties as conditional properties. Only properties of type String, Integer, Boolean, and List Selector (that do not support forking) can be set as conditional properties.</li>
+<li>If a property does not support conditions, the <strong>Conditions</strong> button is disabled and a tool tip appears with the ‘This property can't be used as a conditional property’ message.</li>
+<li>Properties that are already implicitly dependent on other properties cannot be set as dependent properties. For example, The <strong>Separator Thickness</strong> property of the Segment widget is implicitly dependent on the <strong>Separator</strong> property, and therefore cannot be set as a dependent property.</li>
+<li>If you add a component with defined conditional properties into another component, the conditional properties of the child component are not retained as part of the parent component. You must define the properties as pass through properties for the parent component again.</li>
+</ul>
+<p>Click <strong>Apply</strong> to add the pass-through property.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> You can also designate a widget's property as a pass-through property by navigating to the widget and right-clicking on the property name.</p>
+</blockquote>
+<ol>
+<li>To define custom properties, select the <strong>Custom</strong> tab on the <strong>Manage Properties</strong> dialog box.</li>
+</ol>
+<p>Click the plus sign (+) for each custom property you want to define. Click the delete symbol (X) to delete an existing property. To define a new custom property, specify the following for each property:</p>
+<ul>
+<li>Property Name — The name you want to give the property. Click in the <strong>Property Name</strong> field and enter a name. The property name can contain only alphanumeric characters, and cannot start with a number or contain spaces. The property name is used to refer to the property in code.</li>
+</ul>
+<blockquote>
+<p><strong><em>Note:</em></strong> From Volt MX Iris V9 SP2 version, you can also add i18N properties as a custom property. However, you cannot modify the i18N properties dynamically at runtime.</p>
+</blockquote>
+<ul>
+<li>Display Name — The name to display in the <strong>Component</strong> tab of the <strong>Properties</strong> pane. Click in the <strong>Display Name</strong> field and enter a name. The display name should start with a non-numeric character, and can contain only alphanumeric characters and spaces.</li>
+<li>Tooltip: Enter the information about the property. Developers can enter detailed information about the property to convey the functionality of the property. When a user hovers over the property of the component, information entered in this property will appear.</li>
+<li>Property Type — The data type of the property. Click in the <strong>Property Type</strong> field, and select a value, either <em>boolean</em>, <em>List Selector</em>, <em>String</em>, or <em>HTML</em>, <em>Data Grid</em>, <em>Integer</em>, <em>JSON</em>.</li>
+<li>Value — For a property with a List Selector data type, the key-value pairs that make up the list. If the property type value is <em>List Selector</em> and you click in the <strong>Value</strong> field, Volt MX Iris displays the <strong>Key Value Popup</strong> dialog box. Enter the values and click <strong>OK</strong>. For a <em>boolean</em> property type, the <strong>Value</strong> field is automatically set to <em>true/false</em>. For other property types, the value field is not applicable.</li>
+<li>
+<p>Default Value — The default property value. Click in the <strong>Default Value</strong> field, and enter a default value.</p>
+<p>When you click the default value field for a HTML property, a new HTML editor appears. Enter the HTML code in the HTML Editor window.</p>
+<p>When you click the default value field for a JSON property type, a new JSON editor appears. Enter the JSON code in the JSON Editor window.</p>
+</li>
+<li>
+<p>Group — The group to which the property belongs. Use groups to display related properties in their own section in the <strong>Properties</strong> pane.</p>
+</li>
+<li>Read/Write — Whether the property is read-only or read-write. Click in the <strong>Read/Write</strong> field, and select either <em>Read</em> or <em>Write</em>.</li>
+<li>Conditions: Set a property as a conditional property. You can also define dependent properties. Based on the value of the conditional property, dependent properties will be shown or hidden on the property panel.  </li>
+</ul>
+<p>To set a conditional property, in the <strong>Manage Properties</strong> section of the Properties panel, click the <strong>Conditions</strong> column corresponding to the property. Click <strong>Define Properties</strong> to set dependent properties. Select the <strong>Type of Property</strong> (either pass-through or custom), and provide the name of the <strong>Dependent Property</strong>, and then click <strong>Done</strong>. In the <strong>Conditions</strong> dialog box, click <strong>Set Visibility</strong> for a conditional value to set the show/hide conditions for the property on the Properties Panel.  </p>
+<p>Conditional rendering of properties has been introduced to de-clutter the Properties Panel during the designing phase. Configuring conditions does not affect the properties or the values of the properties at runtime. Users can access the properties at runtime irrespective of any conditions configured for the property. Following is a list of limitations that you must consider when you configure conditions for a custom property:</p>
+<ul>
+<li>All conditional values must be unique. You cannot set the same dependent property for different conditional properties.</li>
+<li>The supported data types for the property are String, Integer, Boolean, List Selector.</li>
+<li>You cannot define cyclic dependencies and dependent properties for Templates, Image Identifiers, and Flex Properties.</li>
+<li>You cannot set forkable properties as conditional properties. Only properties of type String, Integer, Boolean, and List Selector (that do not support forking) can be set as conditional properties.</li>
+<li>If a property does not support conditions, the <strong>Conditions</strong> button is disabled and a tool tip appears with the ‘This property can't be used as a conditional property’ message.</li>
+<li>Properties that are already implicitly dependent on other properties cannot be set as dependent properties. For example, The <strong>Separator Thickness</strong> property of the Segment widget is implicitly dependent on the <strong>Separator</strong> property, and therefore cannot be set as a dependent property.</li>
+<li>If you add a component with defined conditional properties into another component, the conditional properties of the child component are not retained as part of the parent component. You must define the properties as pass through properties for the parent component again.</li>
+</ul>
+<p>Click <strong>Apply</strong> to add the custom property.</p>
+<blockquote>
+<p><strong><em>Important:</em></strong> Unlike a pass-through property, which is based on an existing property of the component, a custom property has no built-in behavior. You must define the property's behavior programmatically. On the Templates tab, expand the component's <strong>Modules</strong> node, open the controller module, and add code defining the property's behavior to the controller code. For more information, see <a href="#define-the-behavior-of-a-custom-property-in-code">Define the Behavior of a Custom Property, Event, or Method in Code</a>.</p>
+</blockquote>
+<h3 id="reorder-properties-or-groups">Reorder Properties or Groups</h3>
+<p>From Volt MX Iris V9 SP2 GA, you can specify the order of the properties or groups in the Properties panel. Within a group you can reorder the properties.</p>
+<p>To reorder properties of a component with contract, follow these steps:</p>
+<p><strong>Pre-requisites</strong>: Pass-through properties or Custom properties must be defined for the component. For more information on how to define these properties, refer <a href="#manage-properties-of-a-component-with-a-contract">Manage Properties of a Component with a Contract</a>.</p>
+<ol>
+<li>In Volt MX Iris, open the project.</li>
+<li>In the Project explorer, click <strong>Templates</strong>.</li>
+<li>Expand <strong>Components</strong>.</li>
+<li>Select the component for which you want to reorder the properties.<br />
+    The component Properties panel appears on the right-hand side with the <strong>Component</strong> tab open by default.</li>
+<li>Click <strong>Manage Properties</strong>.<br />
+    The Manage Properties window appears.</li>
+<li>
+<p>Click <strong>Reorder Properties</strong>.<br />
+    The Reorder Properties window appears.  </p>
+</li>
+<li>
+<p>Select the group or property that you want to reorder.</p>
+</li>
+<li>Use the up or down arrow icons to reorder.</li>
+<li>Click <strong>Apply</strong>.<br />
+    The new order is successfully applied.</li>
+</ol>
+<h2 id="manage-events-of-a-component-with-a-contract">Manage Events of a Component with a Contract</h2>
+<p>In addition to specifying pass-through properties, you can specify which of the component's events to expose to users. You can also define custom events.</p>
+<p>To manage events of a component with a contract:</p>
+<ol>
+<li>Click the <strong>Templates</strong> tab in the Project Explorer or the Library Explorer.</li>
+<li>Expand the components node, if necessary, and then select the component.</li>
+<li>In the <strong>Properties</strong> pane, click the <strong>Action</strong> tab.</li>
+<li>Click <strong>Manage Events</strong>. Volt MX Iris displays the <strong>Manage Events</strong> dialog box.</li>
+<li>To define pass-through events, select the <strong>Pass Through</strong> tab on the <strong>Manage Events</strong> dialog box.</li>
+</ol>
+<p>Click the plus sign (+) for each pass-through event you want to define. To delete an existing event, select the event and click the delete symbol (X). To define a new pass-through event, specify the following for each event:</p>
+<ul>
+<li>Source Widget — The widget that contains the event. Click in the <strong>Source Widget</strong> field to display a hierarchical list of the component's widgets, and then select the widget.</li>
+<li>Event — The event that you want to define as a pass-through event. Click in the <strong>Event</strong> field to display a list of the source widget's events, and then select the event.</li>
+<li>Programmatic Name — The name to identify the event in code. Click in the <strong>Programmatic Name</strong> field and enter a name. The programmatic name can contain only alphanumeric characters, and cannot start with a number or contain spaces.</li>
+<li>Group — The group to which the event belongs. Use groups to display related events in their own section on the <strong>Action</strong> tab of the <strong>Properties</strong> pane.  </li>
+</ul>
+<p>Click <strong>Apply</strong> to add the pass through event. Volt MX Iris adds the event to the <strong>Pass Through</strong> section of the <strong>Properties</strong> pane's <strong>Action</strong> tab.</p>
+<ol>
+<li>To define custom events, select the <strong>Custom</strong> tab on the <strong>Manage Events</strong> dialog box.</li>
+</ol>
+<p>Click the plus sign (+) for each custom event you want to define. Click the delete symbol (X) to delete an existing event. To define a new custom event, specify the following for each event:</p>
+<ul>
+<li>Raised Event — The name you want to give the event. Click in the <strong>Raised Events</strong> field and enter a name. The event name can contain only alphanumeric characters, and cannot start with a number or contain spaces.</li>
+<li>Group — The group to which the event belongs. Use groups to display related events in their own section on the <strong>Action</strong> tab of the <strong>Properties</strong> pane.</li>
+</ul>
+<p>To add parameters to the custom event, click the <strong>Manage Events</strong> button, and specify the parameter information in the dialog box.</p>
+<p>Click <strong>Apply</strong> to add the custom event. Volt MX Iris adds the event to the <strong>Custom</strong> section of the <strong>Properties</strong> pane's <strong>Action</strong> tab.</p>
+<blockquote>
+<p><strong><em>Important:</em></strong> Unlike a pass-through event, which is based on an existing event of the component, a custom event has no built-in behavior. You must define the event's behavior programmatically. On the Templates tab, expand the component's <strong>Modules</strong> node, open the controller module, and add code defining the event's behavior to the controller code. For more information, see <a href="#define-the-behavior-of-a-custom-property-in-code">Define the Behavior of a Custom Property, Event, or Method in Code</a>.</p>
+</blockquote>
+<h3 id="expose-events-of-a-component">Expose Events of a Component</h3>
+<p>From Volt MX Iris V9 Service Pack 2, you can select lifecycle events of the component and events of the child widgets present in the component as a pass-through event.</p>
+<p>To add a widget's event as a pass-through event in a component, follow these steps:</p>
+<ol>
+<li>Navigate to the <strong>Templates</strong> tab of the <strong>Project Explorer</strong>, and select the component.</li>
+<li>From the <strong>Properties</strong> Panel, right-click an event, and then select one of the following options:<ul>
+<li><strong>Add Event to Component</strong>: The event is added as a pass-through event to the component.</li>
+<li><strong>Add Event to Component with Action Sequence</strong>: The event along with the associated action sequence is added as a pass-through event to the component.</li>
+</ul>
+</li>
+</ol>
+<p>Limitations:</p>
+<p>When you select the <strong>Add Event to Component with Action Sequence</strong> option, the action sequence is translated at runtime. However, the action sequence is not created if it contains actions that cannot be translated.</p>
+<ul>
+<li>The following actions can be translated as part of the action sequence based on the existence of a criteria:<ul>
+<li>Set Widget Property</li>
+<li>If Condition</li>
+<li>Else Condition</li>
+<li>Else If Condition</li>
+<li>Add Mapping</li>
+<li>Invoke Service</li>
+<li>Pass-through properties or top-level flex properties<br />
+    For example, the <strong>Set Widget Property</strong> of a Button widget with the text property can be translated, if the text property is a pass-through property.</li>
+</ul>
+</li>
+<li>The following actions cannot be translated as part of the action sequence:<ul>
+<li>Move</li>
+<li>Scale</li>
+<li>Rotate</li>
+<li>Rotate 3D</li>
+<li>Transform</li>
+<li>Style</li>
+<li>Invoke Function</li>
+<li>Add Snippet</li>
+<li>Set Map Location</li>
+<li>Raise Custom Event</li>
+</ul>
+</li>
+</ul>
+<h2 id="manage-methods-of-a-component-with-a-contract">Manage Methods of a Component with a Contract</h2>
+<p>In addition to specifying pass through properties and events, you can specify which of the component's methods to expose to users. You can also define custom methods.</p>
+<p>To manage methods of a component with a contract:</p>
+<ol>
+<li>Click the <strong>Templates</strong> tab in the Project Explorer or the Library Explorer.</li>
+<li>Expand the components node, if necessary, and then select the component.</li>
+<li>In the <strong>Properties</strong> pane, click the <strong>Action</strong> tab.</li>
+<li>Click <strong>Manage Methods</strong>. Volt MX Iris displays the <strong>Manage Methods</strong> dialog box.</li>
+<li>To define pass-through methods, select the <strong>Pass Through</strong> tab on the <strong>Manage Methods</strong> dialog box.</li>
+</ol>
+<p>Click the plus sign (+) for each pass-through method you want to define. Click the delete symbol (X) to delete an existing method. To define a new pass-through method, specify the following for each method:</p>
+<ul>
+<li>Source Widget — The widget that contains the method. Click in the <strong>Source Widget</strong> field to display a hierarchical list of the component's widgets, and then select the widget.</li>
+<li>Method — The method that you want to define as a pass-through method. Click in the <strong>Method</strong> field to display a list of the source widget's methods, and then select the method.</li>
+<li>Programmatic Name — The name to identify the method in code. Click in the <strong>Programmatic Name</strong> field and enter a name. The programmatic name can contain only alphanumeric characters, and cannot start with a number or contain spaces.</li>
+<li>Group — The group to which the event belongs. Use groups to display related events in their own section on the <strong>Action</strong> tab of the <strong>Properties</strong> pane.</li>
+</ul>
+<p>Click <strong>Apply</strong> to add the pass-through method.</p>
+<p>To define custom properties, select the <strong>Custom</strong> tab on the <strong>Manage Methods</strong> dialog box.</p>
+<p>Click the plus sign (+) for each custom method you want to define. Click the delete symbol (X) to delete an existing method. To define a new custom method, specify the following for each method:</p>
+<ul>
+<li>Method — The name you want to give the method. Click in the <strong>Method</strong> field and enter a name. The method name can contain only alphanumeric characters, and cannot start with a number or contain spaces.</li>
+<li>Group — The group to which the event belongs. Use groups to display related events in their own section on the <strong>Action</strong> tab of the <strong>Properties</strong> pane.</li>
+</ul>
+<p>To add parameters to the custom method, click the <strong>Manage Methods</strong> button, and specify the parameter information in the dialog box.</p>
+<p>Click <strong>Apply</strong> to add the custom method.</p>
+<blockquote>
+<p><strong><em>Important:</em></strong> Unlike a pass-through method, which is based on an existing method of the component, a custom method has no built-in behavior. You must define the method's behavior programmatically. On the Templates tab, expand the component's <strong>Modules</strong> node, open the controller module, and add code defining the method's behavior to the controller code. For more information, see <a href="#define-the-behavior-of-a-custom-property-in-code">Define the Behavior of a Custom Property, Event, or Method in Code</a>.</p>
+</blockquote>
+<h2 id="group-properties-events-and-methods-of-a-component-with-a-contract">Group Properties, Events and Methods of a Component with a Contract</h2>
+<p>When you define pass-through or custom properties, events, and methods for a component, you can specify how they are displayed in the <strong>Properties</strong> pane by organizing them in groups.</p>
+<p>For example, you can specify that two custom properties are displayed in a group under the heading, "General," and that a third property is displayed under the heading "Special" by defining them as follows in the <strong>Manage Properties</strong> dialog box.</p>
+<p><img alt="" src="Resources/Images/GroupPropsDialog_762x267.png" /></p>
+<p>The properties will be displayed in the <strong>Properties</strong> pane.</p>
+<p>You can also group both pass-through and custom properties under the same heading. For example, the following General properties of the Rating Prompt component include a mixture of pass-through and custom properties:</p>
+<p><img alt="" src="Resources/Images/RatingPromptPTProps_592x190.png" /></p>
+<p><img alt="" src="Resources/Images/RatingPromptCustProps_591x203.png" /></p>
+<p>To group properties of a component with a contract:</p>
+<ol>
+<li>Follow the steps in <a href="#manage-properties-of-a-component-with-a-contract">Manage Properties of a Component with a Contract</a> to define a pass-through or custom property.</li>
+<li>
+<p>Under <strong>Group</strong>, specify the group where you want the property to be displayed.</p>
+<p>If the group name does not exist, click in the <strong>Group</strong> field, select <strong>Manage Group</strong> to open the <strong>Manage Groups</strong> dialog box, and then add the group name.</p>
+</li>
+<li>
+<p>Click <strong>Apply</strong> to add the custom property.</p>
+<p>To group events of a component with a contract:</p>
+</li>
+<li>
+<p>Follow the steps in <a href="#manage-events-of-a-component-with-a-contract">Manage Events of a Component with a Contract</a> to define a pass-through or custom event.</p>
+</li>
+<li>Under <strong>Group</strong>, specify the group where you want the event to be displayed.</li>
+</ol>
+<p>If the group name does not exist, click in the <strong>Group</strong> field, select <strong>Manage Group</strong> to open the <strong>Manage Groups</strong> dialog box, and then add the group name.</p>
+<ol>
+<li>
+<p>Click <strong>Apply</strong> to add the custom event.</p>
+<p>To group methods of a component with a contract:</p>
+</li>
+<li>
+<p>Follow the steps in <a href="#manage-methods-of-a-component-with-a-contract">Manage Methods of a Component with a Contract</a> to define a pass-through or custom method.</p>
+</li>
+<li>
+<p>Under <strong>Group</strong>, specify the group where you want the method to be displayed.</p>
+<p>If the group name does not exist, click in the <strong>Group</strong> field, select <strong>Manage Group</strong> to open the <strong>Manage Groups</strong> dialog box, and then add the group name.</p>
+<p>Click <strong>Apply</strong> to add the custom method.</p>
+<h2 id="set-data-for-components-with-contract-by-using-mapping-editor">Set Data for Components with Contract by using Mapping Editor</h2>
+</li>
+</ol>
+<p>To set data for a component with contract by using Mapping Editor, follow these steps:</p>
+<p>In Volt MX Iris, <a href="#create-a-component-with-contract">create a component with contract</a>, add the required widgets, define the <a href="#pass_through_Properties">pass through</a> and <a href="#Custom_Properties">custom properties</a> of the component, and then click <strong>Apply</strong>.  </p>
+<p><img alt="" src="Resources/Images/Pass_Through_690x438.png" />  </p>
+<p><img alt="" src="Resources/Images/Custom_Properties_694x456.png" /></p>
+<ol>
+<li>In Project Explorer, select the form into which you want to insert the component with contract.</li>
+<li>Go back to <strong>Templates</strong> &gt; <strong>Components</strong>, and right-click the newly created component. A list of options appears.</li>
+<li>Click <strong>Insert Into</strong>. The component with contract is inserted into the selected form.</li>
+<li>Select the form, and then go to <strong>Properties</strong> panel &gt; <strong>Action</strong>.</li>
+<li>For any Event (for example, <strong>onMapping</strong>), click <strong>Edit</strong>. The <strong>Action Editor</strong> window appears, with <strong>Diagram View</strong> open by default.</li>
+<li>
+<p>On the left pane of <a href="working_with_Action_Editor.html">Action Editor</a>, locate and click the <strong>Add Mapping</strong> action. The Add Mapping action is added to the flow diagram, as shown here.  </p>
+<p><img alt="" src="Resources/Images/Add_Mapping_272x277.png" />
+8.  Select <strong>Add Mapping</strong> from the flow diagram. <a href="ActionsMapping.html">Mapping Editor</a> opens on the right pane of <a href="working_with_Action_Editor.html">Action Editor</a>.
+9.  You can use <a href="ActionsMapping.html">Mapping Editor</a> to expand and create mappings among various form, component, and widget elements as well as <a href="Global_Variables_and_Data_Store_Keys.html">global variables</a>.  </p>
+<p><img alt="" src="Resources/Images/Mapped_Elements_513x221.png" />
+10.  Click <strong>Code View</strong> to see the generated sample code details of the data mappings.  </p>
+<p><img alt="" src="Resources/Images/Code_View_Component_474x213.png" /></p>
+</li>
+<li>
+<p>Click <strong>Save</strong>. You have successfully set data for the component with contract by using <a href="ActionsMapping.html">Mapping Editor</a>.</p>
+</li>
+</ol>
+<h2 id="define-the-behavior-of-a-custom-property-in-code">Define the Behavior of a Custom Property in Code</h2>
+<p>When you create a component with a contract, you can define pass-through and custom properties, events, and methods for the component. Defining pass-through properties, events, and methods does not require that you write code. You simply specify the built-in properties, events, and methods that you want to expose. However, a custom property, event, or method does not have any built-in behavior. You must define its behavior in code.</p>
+<p>First, specify a name for the custom property, event, or method using the <strong>Manage Properties</strong> dialog box. For a custom property, you can also specify a display name, data type, and default value, and whether the property is read-only or read-write. If the property has a list selector, you can specify the key value pairs that make up the list. For more information on working with the <strong>Manage Properties</strong> dialog box, see <a href="#manage-properties-of-a-component-with-a-contract">Manage Properties of a Component with a Contract</a>, <a href="#manage-events-of-a-component-with-a-contract">Manage Events of a Component with a Contract</a>, or <a href="#manage-methods-of-a-component-with-a-contract">Manage Methods of a Component with a Contract</a>.</p>
+<p>Once you specify information in the <strong>Manage Properties</strong> dialog box, you can add code to the component's controller module to define the behavior of the custom property, event, or method.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> From Volt MX Iris V9 Service Pack 2, when you create or modify a custom property through the <strong>Manage Properties</strong> dialog box, the getters and setters of the property are automatically added to the <code>initGettersSetters</code> function in the controller file of the component. However, when you delete a custom property, you must manually remove the code pertaining to the property.</p>
+</blockquote>
+<p>To define the behavior of a custom property, event, or method in code (Beta):</p>
+<ol>
+<li>Specify the required information in the <strong>Manage Properties</strong> dialog box.</li>
+<li>On the Templates tab, expand the <strong>Modules</strong> node of the component that contains the property, event, or method.</li>
+<li>
+<p>Open the component's controller module; for example, <em>loginController.js</em>.</p>
+<p><img alt="" src="Resources/Images/LoginController_776x192.png" /></p>
+</li>
+<li>
+<p>Add JavaScript code that defines the behavior of the property, event, or method.</p>
+</li>
+</ol>
+<p>For example, the following code defines custom properties for the Login component, which can be downloaded from <a href="http://community.hclvoltmx.com/marketplace">HCL Forge</a> .</p>
+<pre><code>/**
+ * @function initGettersSetters
+ * @description contains getters/setters for the usernameMinimumChar and usernameValidationMsg custom properties
+ */
+initGettersSetters: function() { 
+    defineGetter(this, &quot;usernameMinimumChar&quot;, function() {
+        voltmxmp.logger.trace(&quot;----------Entering usernameMinimumCharacter Getter---------&quot;, voltmxmp.logger.FUNCTION_ENTRY);
+        return this._usernameMinimumChar;
+    }); 
+    defineSetter(this, &quot;usernameMinimumChar&quot;, function(val) {
+        voltmxmp.logger.trace(&quot;----------Entering usernameMinimumCharacter Setter---------&quot;, voltmxmp.logger.FUNCTION_ENTRY);
+        try {
+            if (val == null || val == undefined) {
+                voltmxmp.logger.warn(&quot;Username Min Char is undefined&quot;);
+                throw {
+                    &quot;Error&quot;: &quot;LoginComponent&quot;,
+                    &quot;message&quot;: &quot;Username Min Char is undefined&quot;
+                };
+            }
+            if (isNaN(val)) {
+                voltmxmp.logger.warn(&quot;Invalid datatype for Username Min Characters Property&quot;);
+                throw {
+                    &quot;Error&quot;: &quot;LoginComponent&quot;,
+                    &quot;message&quot;: &quot;Invalid datatype for Username Min Characters Property&quot;
+                };
+            }
+            if (this.usernameMaxChar &amp; amp; lt; val) {
+                voltmxmp.logger.warn(&quot;usernameMaxChar is less than usernameMinimumChar&quot;);
+                throw {
+                    &quot;Error&quot;: &quot;LoginComponent&quot;,
+                    &quot;message&quot;: &quot;username Max Char is less than Username Min Character propert&quot;
+                };
+            }
+            this._usernameMinimumChar = val;
+        } catch (exception) {
+            if (exception[&quot;Error&quot;] === &quot;LoginComponent&quot;)
+                alert(JSON.stringify(exception));
+        }
+    }); 
+    defineGetter(this, &quot;usernameValidationMsg&quot;, function() {
+        voltmxmp.logger.trace(&quot;----------Entering usernameValidationMsg Getter---------&quot;, voltmxmp.logger.FUNCTION_ENTRY);
+        return this._usernameValidationMsg;
+    }); 
+    defineSetter(this, &quot;usernameValidationMsg&quot;, function(val) {
+        voltmxmp.logger.trace(&quot;----------Entering usernameValidationMsg Setter---------&quot;, voltmxmp.logger.FUNCTION_ENTRY);
+        this._usernameValidationMsg = val;
+    });
+}
+
+</code></pre>
+<h2 id="define-a-custom-event">Define a Custom Event</h2>
+<p>Creating and using a Custom Event involves three stages, creating a custom event, invoking the custom event, and consuming the custom event.</p>
+<p>To create, consume, and invoke a custom event, do the following:</p>
+<ol>
+<li>In your Iris Project, from the <strong>Project Explorer</strong> section, click <strong>Templates</strong> tab.</li>
+<li>From <strong>Components</strong>, select <strong>Create new Component with Contract</strong>.</li>
+<li>Enter the <strong>Namespace</strong></li>
+<li>Enter <strong>Name</strong></li>
+<li>
+<p>Click <strong>OK</strong>.  </p>
+</li>
+<li>
+<p>Navigate to <strong>Project</strong></p>
+</li>
+<li>Navigate to <strong>Mobile</strong> &gt; <strong>Forms</strong> &gt; New Form. A new form is created.</li>
+<li>Navigate to the <strong>Templates</strong> tab, and drag and drop the new template you created earlier onto this form. Your component is created, and it is added to the form. Now, let us define a custom event.</li>
+<li>Navigate to the component you created.</li>
+<li>In the <strong>Properties</strong> pane, click <strong>Action</strong>.</li>
+<li>Click <strong>Manage Events</strong>. The Manage Events pane displays.</li>
+<li>Click <strong>Custom</strong> tab.</li>
+<li>Click on the <strong>+</strong> sign to add a new custom event.</li>
+<li>In the <strong>RaisedEvents</strong> column, enter a name for your event. For example, testEvent.</li>
+<li>Click <strong>Apply</strong>. The event is created, and you can view it in the <strong>Action</strong> tab under <strong>General</strong>. Now, the custom event is defined. Let us now invoke the custom event.</li>
+<li>In your component, add a button.</li>
+<li>Name the button. For example, Trigger Event.</li>
+<li>In the <strong>Properties</strong> pane of the button, navigate to the <strong>Action</strong> tab and click onClick event <strong>Edit</strong> button. The Action Editor opens.</li>
+<li>From the list of functions available, select <strong>Raise Event</strong>.</li>
+<li>From the <strong>Function</strong> <strong>Name</strong> dropdown, select <strong>testEvent</strong>.</li>
+<li>Close the Action Editor. Now, let us consume the event.</li>
+<li>Navigate to your form on your Mobile channel.</li>
+<li>On the form, select the component and from the <strong>Properties</strong> pane, click <strong>Action</strong> tab.</li>
+<li>Under <strong>General</strong>, you will notice the testEvent you created. Click <strong>Edit</strong>. The Action Editor opens.</li>
+<li>From the Functions list, select <strong>Add Snippet</strong>.</li>
+<li>In the code pane, enter <code>alert(“Yay! Custom event”);</code></li>
+<li>Close the action editor.</li>
+<li>From the File Explorer menu of Iris, from <strong>Run</strong>, select <strong>Run</strong>.</li>
+<li>The Building pane appears.</li>
+<li>Navigate to your local preview. For more information on how to preview your app locally, click here. You will see your form in local preview in chrome.</li>
+<li>Click <strong>Trigger Event</strong>.<br />
+    An alert Yay! custom event is displayed.</li>
+<li>Click <strong>OK</strong> to close the alert.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2021 - 2024, HCL America, Inc. | <a href="https://hcltechsw.com/wps/portal/legal/privacy">Privacy Statement</a> | <a href="https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.hcltechsw.com%2Fwps%2Fportal%2Flegal%2Fterms-use&data=04%7C01%7Csuresh.chenji%40hcl.com%7Ca77ebddc51574aff8c6c08d8f056542d%7C189de737c93a4f5a8b686f4ca9941912%7C0%7C0%7C637523600856805537%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&sdata=vLnT466NGuIbvQ0nEwfn2qdXeuhHb6XOnh1pibATDI4%3D&reserved=0">Terms of Use</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+<div class="md-social">
+  <ul class="social-nav">
+    <li><a href="https://www.facebook.com/HCLDigital" class="facebook" target="_blank">Facebook</a></li>
+    <li><a href="https://www.linkedin.com/company/hclsoftware" class="linkedin" target="_blank">LinkedIn</a></li>
+    <li><a href="https://twitter.com/HCLDigital"  class="twitter" target="_blank">Twitter</a></li>
+    <li><a href="https://www.youtube.com/HCLDigitalSolutions" class="youtube" target="_blank">Youtube</a></li>
+    <li>
+      <a href="https://github.com/HCL-TECH-SOFTWARE" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    </li>
+  </ul>    
+</div>
+  </div>
+  <div class="md-footer-meta__inner md-grid">
+  <span class="md-footer__git_legacy">Please report problems with this documentation by <a class="announcement__link" href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/issues">opening issues in Github</a>.</span>
+  <span class="legacy-link md-footer__git_legacy">Can't find a topic? Check the legacy documentation <a class="announcement__link" href="https://opensource.hcltechsw.com/Volt-MX-Documentation-Archive/docs/documentation/" target="_blank">here</a>.</span>
+</span>
+    </div>
+</div>
+    <script>
+      function myFunction95(){
+          var initial_url = document.location.href;
+          var url_stub = initial_url.split( 'docs/documentation' );
+          var fixed_url = url_stub[0]+'95/docs/documentation';
+		  console.log(fixed_url);
+//          var fixed_url = 'https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation'
+          var url = initial_url.split( '/' );
+          var updated_url
+          if ( url[ url.length - 2 ] == "Foundry" || url[ url.length - 2 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 2 ] == "articles" || url[ url.length - 2] == "getting-started" || url[ url.length - 2 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 3 ] == "Foundry" || url[ url.length - 3 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 3 ] == "articles" || url[ url.length - 3 ] == "getting-started" || url[ url.length - 3 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 4 ] == "Foundry" || url[ url.length - 4 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 4 ] == "articles" || url[ url.length - 4 ] == "getting-started" || url[ url.length - 4 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 5 ] == "Foundry" || url[ url.length - 5 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 5 ] == "articles" || url[ url.length - 5 ] == "getting-started" || url[ url.length - 5 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 5 ] + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 6 ] == "Foundry" || url[ url.length - 6 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 6 ] == "articles" || url[ url.length - 6 ] == "getting-started" || url[ url.length - 6 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 6 ] + '/' + url[ url.length - 5 ] + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else{
+            updated_url= fixed_url + '/' + url[ url.length - 1];
+          }
+          window.location.replace(updated_url);
+          }
+    </script>
+
+  
+
+</footer>
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.prune"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>

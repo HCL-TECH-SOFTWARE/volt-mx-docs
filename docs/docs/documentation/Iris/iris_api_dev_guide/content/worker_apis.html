@@ -1,0 +1,4852 @@
+<!-- Elements added to main will be displayed on all pages -->
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/Iris/iris_api_dev_guide/content/worker_apis.html">
+      
+      
+        <link rel="prev" href="voltmx.ui_functions.html">
+      
+      
+        <link rel="next" href="voltmx.worker_functions.html">
+      
+      
+      <link rel="icon" href="../../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>Overview - HCL Volt MX Documentation V9.2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/vmx_style.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#worker-thread-api" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+<div class="content-types-banner">
+    <ul class="sub-nav">
+        <li class="home-link">
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/index.html"  class="sub-link ">Home</a>
+        </li>
+        <li>
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/tutorials/Tutorials.html" class="sub-link">Tutorials</a>
+        </li>
+        <li>
+            <a href="https://opensource.hcltechsw.com/volt-mx-docs/docs/documentation/index.html" class="sub-link" id="docLink">Documentation</a>
+        </li>
+        <li>
+            <a href="https://support.hcltechsw.com/csm?id=kb_search&spa=1&kb_category=db382ff1db631c14a45ad9fcd3961936" title="Articles" class="sub-link">Articles</a>
+        </li>
+        <li>
+            <a href="https://hclsoftwareu.hcltechsw.com/#VoltMxLearningJourneys" title="Articles" class="sub-link">Software Academy</a>
+        </li>
+        <li style="float:right">
+          <button onclick="myFunction95()" style="color:white; border-radius:5px ;padding:5px 10px 5px 10px; border: 2px solid white;" class="sub-link" id="docLink92">Switch to V9.5</button>
+      </li>
+    </ul>
+</div>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="HCL Volt MX Documentation V9.2" class="md-header__button md-logo" aria-label="HCL Volt MX Documentation V9.2" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HCL Volt MX Documentation V9.2
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Overview
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    HCL-TECH-SOFTWARE/volt-mx-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="HCL Volt MX Documentation V9.2" class="md-nav__button md-logo" aria-label="HCL Volt MX Documentation V9.2" data-md-component="logo">
+      
+  <img src="../../../assets/favicon.png" alt="logo">
+
+    </a>
+    HCL Volt MX Documentation V9.2
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    HCL-TECH-SOFTWARE/volt-mx-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Introducing Volt MX
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Introducing Volt MX
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducing Volt MX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../Whats_New_Main_Page.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    What&apos;s New
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../VMX_release_notes.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Release Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../app_platform/Content/AppPlatform_Overview.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    App Platform
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../tutorials/Tutorials.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Tutorials
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Foundry/installationGuides.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation Guides
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_7" id="__nav_1_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Iris
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_7">
+            <span class="md-nav__icon md-icon"></span>
+            Iris
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../voltmxIrisFundamentals.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fundamentals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../installing_iris.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Installing Iris
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../iris_tutorials/Content/Introduction.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Iris tutorials
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../iris_user_guide/Content/Introduction.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Iris User Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../app_design_dev/Content/homepage.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Application Design and Development Guidelines
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_7_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_7_6" id="__nav_1_7_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Volt Iris API Developers Guide
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_7_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_7_6">
+            <span class="md-nav__icon md-icon"></span>
+            Volt Iris API Developers Guide
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="introduction.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="accelereometer_apis.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Accelerometer API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="actionsheet_api.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Action Sheet API for iOS
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="alert_api.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Alert API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="animationapi.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Animation API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Android_NFC_Manifest_Configuration.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Android NFC Manifest Configuration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="app-extension-ios.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    App Extension API for iOS
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="application_api.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Application API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="application_settings.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Application Settings API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="voltmx_automation_api.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Automation API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="backgroundagent_api.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Background Agent API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="badge.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Badge API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="battery_api.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Battery API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="beaconffi.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Beacon API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="bookmark_refresh_apis.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bookmark and Refresh API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="caching_api.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Caching API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="camera.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Camera API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="charms.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Charm Setting API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="client-authentication.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Client Authentication API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="corehaptics.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Core Haptics
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="communication_api_for_react_native.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Communication API for React Native App
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="cryptography.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Cryptography APIs
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="drag_and_drop_api.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Drag and Drop API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="forcetouch_api.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    ForceTouch API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="modules.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Functional Modules API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="geolocation_api_watchposition.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    GeoLocation API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="gestures.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Gesture API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="gms_api.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Google Mobile Services APIs
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="imageapi.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Image API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="imageclassificationapi.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Image Classification API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="in-app_updates_api.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    In-App Updates API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="inputoutput_api.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Input and Output API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="internationalization.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Internationalization API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="keychain_api_for_ios.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Keychain API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="language_apis.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Language API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="live_tiles.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Live Tiles API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="localauthapi.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Local Authentication API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="mapapi.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Map API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="map_styling_api.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Map Styling API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="math_library.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Math API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="media_api.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Media API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="network_apis.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Network API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="notifications.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Notifications API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="data_store_library.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Offline Data Access API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="operating_system.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Operating System API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="passbook.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Passbook API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="payment_api.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Payment API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="phone.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Phone API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="request_app_review_api.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Request App Review API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="runtime_permissions.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Runtime Permission API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="sharedappgroupcontainerapi.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Shared App Group Container API for iOS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="signinwithapple_api.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    SignInWithApple API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="generic_apis.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Standard Volt MX API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="string.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    String API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="sync_apis.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Sync API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="themes.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Theme API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="threading_apis.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Threading API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="timer.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Timer API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="toast_api.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Toast API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="voltmx.ui_functions.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    UI API
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_7_6_61" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_7_6_61" id="__nav_1_7_6_61_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Worker Thread API
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_7_6_61_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_7_6_61">
+            <span class="md-nav__icon md-icon"></span>
+            Worker Thread API
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="worker_apis.html" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction-to-constructor-workerthread" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction to Constructor - WorkerThread()
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction to Constructor - WorkerThread()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#worker-thread-scenarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worker Thread Scenarios
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worker-thread-life-cycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worker Thread Life Cycle
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#message-event-handler" class="md-nav__link">
+    <span class="md-ellipsis">
+      message event handler
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="message event handler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syntax" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syntax
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input Parameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#platform-availability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Platform Availability
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#importing-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Importing scripts
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Importing scripts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syntax_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syntax
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input-parameters_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input Parameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#return-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Return Values
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exceptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exceptions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#platform-availability_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Platform Availability
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-worker-threads-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using Worker Threads Feature
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using Worker Threads Feature">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#communicating-and-data-processing-between-threads" class="md-nav__link">
+    <span class="md-ellipsis">
+      Communicating and Data Processing Between Threads
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nesting-of-threads-and-performing-parallel-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nesting of Threads and Performing Parallel Tasks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scope-rules-and-supported-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scope Rules and Supported APIs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ffi-and-custom-widgets" class="md-nav__link">
+    <span class="md-ellipsis">
+      FFI and Custom Widgets
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#guidelines-and-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Guidelines and Limitations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worker-life-cycle-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worker Life Cycle Notes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="voltmx.worker_functions.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    voltmx.worker Namespace
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="workerthreadobject_methods.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WorkerThread Object
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="unsupportedapis.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deprecated/Unsupported APIs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="exceptions.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Appendix&colon; Exceptions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="appendix_general_frequently_asked_questions.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Appendix&colon; General FAQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="appendix_javascript_frequently_asked_questions.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Appendix&colon; JavaScript FAQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="appendix_preprocesor_directives.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Appendix&colon; Preprocessor Directives
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="sqllite.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Appendix&colon; SQLite
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="background_tasks_in_ios.html#background-fetch" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Appendix&colon; Background Jobs in iOS 7
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../iris_nf_api_dev_guide/content/native_function_api_developers__guide.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Native Function API Developers Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../iris_widget_prog_guide/Content/Overview.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Iris Widget Programmer Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../iris_wearables_dev_guide/content/homehtml.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Iris Wearables Developer Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../iris_app_viewer/Content/Overview.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Using the Volt MX App
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../voltmx_ref_arch_api/Content/VoltMX_Reference_Architecture_Guide.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Volt MX Reference Architecture Guide
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../Foundry/voltmxFoundryFundamentals.html" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Foundry
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction-to-constructor-workerthread" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction to Constructor - WorkerThread()
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction to Constructor - WorkerThread()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#worker-thread-scenarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worker Thread Scenarios
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worker-thread-life-cycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worker Thread Life Cycle
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#message-event-handler" class="md-nav__link">
+    <span class="md-ellipsis">
+      message event handler
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="message event handler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syntax" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syntax
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input Parameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#platform-availability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Platform Availability
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#importing-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Importing scripts
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Importing scripts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syntax_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syntax
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input-parameters_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input Parameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#return-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Return Values
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exceptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exceptions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#platform-availability_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Platform Availability
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-worker-threads-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using Worker Threads Feature
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using Worker Threads Feature">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#communicating-and-data-processing-between-threads" class="md-nav__link">
+    <span class="md-ellipsis">
+      Communicating and Data Processing Between Threads
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nesting-of-threads-and-performing-parallel-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nesting of Threads and Performing Parallel Tasks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scope-rules-and-supported-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scope Rules and Supported APIs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ffi-and-custom-widgets" class="md-nav__link">
+    <span class="md-ellipsis">
+      FFI and Custom Widgets
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#guidelines-and-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Guidelines and Limitations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worker-life-cycle-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worker Life Cycle Notes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<p>You are here: Worker Thread API</p>
+<h1 id="worker-thread-api">Worker Thread API</h1>
+<p>Worker threads are a means to execute different tasks in multiple parallel contexts of execution in a concurrent manner, which can take advantage of multiprocessor and multithreaded environments as well as to keep UI Thread in Application responsive by delegating or offloading work which need not be handled in UI Main thread, to a different secondary thread.</p>
+<p>Worker thread is a continuous parallel thread that runs and accepts messages until the time it is explicitly closed or terminated. Messages to a worker thread can be sent from the parent thread or its child worker threads. Through out this document, parent thread is referred as thread where a worker thread is spawned.</p>
+<p>Worker can have logic that gets executed parallel for each of the messages that it receives. If worker thread is busy handling messages, incoming messages that it receives will be queued for processing.</p>
+<p>Sharing data between parent thread and worker threads is done through message passing and by default variables, functions, or state is not shared.</p>
+<p>The current specification is inspired from and based on HTML5 Web Worker threads standard, that use <em>Message Passing</em> model or mechanism for communication between threads.</p>
+<blockquote><em>Note:</em> To use AWS in workerthreads, you must follow these steps.
+<ol>
+<li>Copy all AWS related files from <b>&lt;workspace&gt;</b>/<b>&lt;appname&gt;</b>/<b>cloudsdks</b> folder into the <b>&lt;workspace&gt;</b>/<b>&lt;appname&gt;</b>/<b>workerthreads</b> folder of the project. This is because while importing the AWS files using Iris, the Volt MX HttpRequest and DOMParser related code are added to the AWS files. These modified files are then saved in the <b>cloudsdks</b> folder by Iris.</li>
+<li>After the files have been copied, use the <code>require(&lt;aws files&gt;)</code>code in the workerthread.js file to import all the AWS files into worker threads context.<br/>AWS objects must be created in the worker thread. Any object created in the regular thread will not work in the worker thread.</li>
+</ol>
+</blockquote>
+<p>The Worker Thread API contains the following API Elements:</p>
+<p><a href="voltmx.worker_functions.html">voltmx.worker Namespace</a></p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="voltmx.worker_functions.html#hasWorkerThreadSupport">voltmx.worker.hasWorkerThreadSupport</a></td>
+<td>Determines whether the current platform environment has worker thread support.</td>
+</tr>
+<tr>
+<td><a href="voltmx.worker_functions.html#WorkerThread">voltmx.worker.WorkerThread</a></td>
+<td>Creates a WorkerThread object and returns a handle to it. The worker object represents a worker thread.</td>
+</tr>
+</tbody>
+</table>
+<p><a href="workerthreadobject_methods.html">WorkerThread Object</a></p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="workerthreadobject_methods.html#addeventlistener">addEventListener</a></td>
+<td>Event Handlers can be registered using <em>addEventListener()</em> method on the worker Objects and once registered messages and errors from a worker thread can be received in parent thread.</td>
+</tr>
+<tr>
+<td><a href="workerthreadobject_methods.html#close">close</a></td>
+<td>Worker thread can be terminated from inner scope of the worker by invoking close(). The worker thread is killed immediately without an opportunity to complete its operations or clean up.</td>
+</tr>
+<tr>
+<td><a href="workerthreadobject_methods.html#postmessage">postMessage</a></td>
+<td>postMessage() sends a JSON object or String message to the Parent/worker's scope by invoking respective registered "message" event handlers.</td>
+</tr>
+<tr>
+<td><a href="workerthreadobject_methods.html#removeeventlistener">removeEventListener</a></td>
+<td>removeEventListener() is used to remove the previously registered <em>message</em> or <em>error</em> event listener that was registered using <em>addEventListener</em>().</td>
+</tr>
+<tr>
+<td><a href="workerthreadobject_methods.html#terminate">terminate</a></td>
+<td>When called from parent scope immediately terminates the worker. This does not offer the worker an opportunity to finish its operations. It is simply stopped at once.</td>
+</tr>
+</tbody>
+</table>
+<h2>Scope</h2>
+<ol type="1">
+<li>&lt;Volt MX Iris platform version &gt;= 9.2</li>
+<!-- <li>&lt;Volt MX Iris platform version &gt;= 5.6.2.</li> -->
+<li>Support for JavaScript.</li>
+<li>Supported mobile Platforms:
+<ul>
+<li>iOS</li>
+<li>Android</li>
+<li>SPA: Supported List of browsers starting from versions.</li>
+</ul>
+</li>
+<li>Supported List of Browsers:
+<p style="margin-left:15px;"><b>SPA</b></p>
+<table style="margin-left:20px;">
+<tr>
+<th>iOS</th>
+<th>Android Native</th>
+<th>Android Chrome</th>
+<th>Windows</th>
+</tr>
+<tr>
+<td>5.0-5.1</td>
+<td>4.4</td>
+<td>33.0</td>
+<td>10</td>
+</tr>
+</table>
+<p style="margin-left:15px;"><b>DesktopWeb</b></p>
+<table style="margin-left:20px;">
+<tr>
+<th>IE</th>
+<th>Firefox</th>
+<th>Chrome</th>
+<th>Safari</th>
+</tr>
+<tr>
+<td>10.0</td>
+<td>4.0</td>
+<td>20</td>
+<td>5.0</td>
+</tr>
+</table>
+</li>
+<li>Windows</li>
+</ol>
+
+<h2 id="introduction-to-constructor-workerthread">Introduction to Constructor - WorkerThread()</h2>
+<ul>
+<li>The <em>WorkerThread()</em> constructor creates and returns the handle to the newly created worker thread. The new worker thread can be used by the Parent thread for any further communication with the worker thread.</li>
+<li>To create a worker thread, it requires a JavaScript file name or a functional module name. The <em>WorkerThread()</em> constructor is invoked with the JavaScript file or a functional module name as its only argument and a worker thread instance is then created and returned.</li>
+<li>Worker threads may in turn initiate new worker threads.</li>
+<li>If a Javascript file name with ".js" extension is passed as <em>WorkerThread()</em> constructor argument, it looks up only in the <code>workerthreads</code> directory in <code>modules/js</code> path and loads if the file is found. This holds good for functional modules based projects as well as non-functional modules based projects.</li>
+<li>If a function module name is provided as an argument for <em>WorkerThread()</em> constructor, in case of functional modules based project then the module will be loaded if found in the modules listing.</li>
+</ul>
+<h3 id="worker-thread-scenarios">Worker Thread Scenarios</h3>
+<p>The scenarios of using <em>WorkerThread()</em> constructor are as follows:</p>
+<ul>
+<li>
+<p>The <em>WorkerThread()</em> constructor creates a new worker thread and returns a handle to the new worker thread, which can be used by the parent thread for any further communication with the worker thread.<br/>
+  Creating a worker thread requires a JavaScript file name or a functional module name. The <em>WorkerThread()</em> constructor is invoked with the JavaScript file or a functional module name as its only argument and a worker thread instance is then created and returned:
+<br />
+<pre><code style="display:block;background-color:#eee;">
+  var worker = new voltmx.worker.WorkerThread('helper.js');
+  var worker = new voltmx.worker.WorkerThread('functionModuleName');
+  </code></pre></p>
+</li>
+<li>
+<p>A <em>message</em> event handler can be registered with the worker by parent thread to receive messages from the worker thread.</p>
+</li>
+</ul>
+<p><code> worker.addEventListener("message", function (event) { ... }); </code></p>
+<ul>
+<li>To send data from parent to a worker, <em>postMessage()</em> method can be used from parent.</li>
+</ul>
+<p><code> worker.postMessage({ operation: 'find-edges', input: 'buffer', threshold: 0.6 } );</code></p>
+<ul>
+<li>To send messages back from worker thread to parent thread scope, <em>postMessage()</em> can be used.</li>
+</ul>
+<p><code> postMessage({'msg':'Data'});</code></p>
+<ul>
+<li>To receive a messages inside the worker thread from parent thread, the <em>message</em> event handler can be registered using <em>addEventListener()</em> inside worker thread.</li>
+</ul>
+<p><code> self.addEventListener( "message", function (event) { ... });</code></p>
+<h3 id="worker-thread-life-cycle">Worker Thread Life Cycle</h3>
+<p>The following steps provide the work flow to use worker thread:</p>
+<ol>
+<li>Call to Worker constructor will create a new Worker instance and a new parallel execution environment context is created, and immediately starts execution in the new parallel thread of control in an asynchronous manner. In this new thread, first the Worker will try to load the ‘workerjs’ script.</li>
+<li>As a result of the asynchronous parallel nature of execution in worker thread context, invocation of Worker constructor call in Parent thread will return a new Worker instance handle and Parent proceeds with execution of next instructions.</li>
+<li>Every Worker thread will have its own event loop which takes care of the execution of all the received message tasks which are queued for this worker in that order until ‘self.close()’ in worker scope or ‘worker.terminate()’ in parent worker scope are invoked.</li>
+<li>From the moment of successful creation of worker thread and until ‘self.close()’ in worker scope or ‘worker.terminate()’ in parent worker scope are invoked, the worker thread will be alive and can receive and process messages which are sent to this worker form its parent or from its child workers if created, as well as it can send messages using postMessage() to its parent thread and its child worker threads if created.</li>
+</ol>
+<h2 id="message-event-handler">message event handler</h2>
+<p>"message" event handler receives an "event" object which contains the JSON or string message that is passed to postMessage() during invocation and the same message can be accessed from its "event.data" field. The data passed to postMessage() should be a String or JSON object.</p>
+<p>Adhering to the JSON standard, the JSON object passed to postMessage() API should be serializable JSON without opaque object handles or function object handles etc. The data which is passed between the parent thread and worker thread using postMessage() API are copied, not shared, so the end result is that a duplicate is created on each end.</p>
+<p>Multiple "message" event handlers can also be registered in Parent scope and in workers inner scope and all the registered event handlers will be invoked in the registered order whenever a postMessage() is called.</p>
+<h3 id="syntax">Syntax</h3>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">function(event) { });</code></pre>
+
+<h3 id="input-parameters">Input Parameters</h3>
+<p>String / JSON Object</p>
+<ul>
+<li>"message" event handler receives an "event" object which contains the JSON or string message that is passed to postMessage() during invocation and the same message can be accessed from its "event.data" field.</li>
+<li>The data passed to postMessage() should be a String or JSON object.</li>
+<li>Adhering to the JSON standard, the JSON object passed to postMessage() API should be serializable JSON without opaque object handles or function object handles etc.</li>
+<li>The data which is passed between the parent thread and worker thread using postMessage() API are copied, not shared, so the end result is that a duplicate is created on each end.</li>
+<li>Multiple "message" event handlers can also be registered in Parent scope and in workers inner scope and all the registered event handlers will be invoked in the registered order whenever a postMessage() is called.</li>
+</ul>
+<h3 id="example">Example</h3>
+<pre><code>
+var evtMessageHandler_1 = function(event) {
+//In case of JSONvoltmx.print (&quot;Received message :&quot; + event.data[&quot;msg&quot;]);&quot;
+
+//In case of string
+voltmx.print (&quot;Received message :&quot; + event.data);
+};
+
+</code></pre>
+<h3 id="platform-availability">Platform Availability</h3>
+<p>Available for iOS, Android, Windows, SPA, and Desktop Web. For more information, see <a href="#scope">Scope</a>.</p>
+<h2 id="importing-scripts">Importing scripts</h2>
+<p>Worker threads can use importScripts() function to import external scripts their scope by providing the JS file name to import. This method takes one or more JavaScript file names to import.</p>
+<p>This API is only available in worker thread scope and not in main parent thread scope.</p>
+<p>In case of Functional modules based project " voltmx.modules.loadFunctionalModule()" API can be used to import a functional module into workers scope. Refer <a href="modules.html">Functional Modules</a> specification document for usage help on loadFunctionalModule() API.</p>
+<p>importScripts() if invoked with .js file, looks up only in the "workerthreads" directory under "modules/js/" in Volt MX Iris IDE Project structure to import scripts into workers scope. This holds good for both functional modules based projects and non-functional modules based projects.</p>
+<p>In case of loading multiple files using importScripts(), if an error occurs while loading one of the script, then the remaining scripts are not loaded into context scope.</p>
+<p>For more information on Functional Module APIs, refer <a href="modules.html">Functional Modules APIs</a>.</p>
+<h3 id="syntax_1">Syntax</h3>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">importScripts(".js_file_name");</code></pre>
+
+<p>or</p>
+<pre><code style="display:block;background-color:#eee;border:1px solid #999;padding:10px;">importScripts("functional_module_name");</code></pre>
+
+<h3 id="input-parameters_1">Input Parameters</h3>
+<p>JSFileNames [Object]</p>
+<p>or</p>
+<p>Functional_Module_Name [Object]</p>
+<ul>
+<li>One or more comma separated list of JavaScript file names.</li>
+</ul>
+<h3 id="example_1">Example</h3>
+<pre><code>
+importScripts(&quot;Utility.js&quot;); // loads Util.js
+
+importScripts(&quot;Utility1.js&quot;, &quot;Utility2.js&quot;, &quot;Utility3.js&quot;);
+
+</code></pre>
+<h3 id="return-values">Return Values</h3>
+<p>None</p>
+<h3 id="exceptions">Exceptions</h3>
+<blockquote>
+<p><strong><em>Note:</em></strong> If no argument is given, no exception is raised and it does nothing.</p>
+</blockquote>
+<p>When an error is encountered, the VoltMXError JS object is thrown with the following information:</p>
+<table>
+<thead>
+<tr>
+<th>Error Code</th>
+<th>Name</th>
+<th>Message</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3002</td>
+<td>WorkerThreadError</td>
+<td>importScripts: InvalidParameter. Invalid script name</td>
+<td>This exception occurs when the argument passed is not a string.</td>
+</tr>
+<tr>
+<td>3002</td>
+<td>WorkerThreadError</td>
+<td>importScripts: InvalidParameter. Unable to import script. <scriptname></td>
+<td>This exception occurs when it is unable to find and load the JS script.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>In worker scope, if these exceptions are not handled and if an <em>error</em> event handler is registered in worker’s inner scope or/and in parent scope for this worker object, then it is invoked with an error event object and its message attribute is set as follows:</li>
+</ul>
+<blockquote>
+<p>Exception 1 - message: "importScripts: InvalidParameter. Invalid script name"</p>
+<p>Exception 2 - message: "importScripts: InvalidParameter. Invalid script name"</p>
+</blockquote>
+<p>Differences in behavior of <em>importScripts</em>() and _<a href="voltmx.modules*functions.md#loadfunctionalmodule">_voltmx.modules.loadFunctionalModule_()</a>* API with respect to Functional Modules:</p>
+<table>
+<thead>
+<tr>
+<th>Without Functional Modules</th>
+<th>With Functional Modules</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>From inside Worker context if importScripts() is used to import external JS scripts the search criteria would be : only "workerthreads" directory.</td>
+<td>From inside Worker context if importScripts() is used to import external JS scripts the search criteria would be : only "workerthreads" directory.</td>
+</tr>
+<tr>
+<td>voltmx.modules.loadFunctionalModule() function cannot be used in workers scope to load any FunctionalModule.</td>
+<td><a href="voltmx.modules_functions.html#loadfunctionalmodule">voltmx.modules.loadFunctionalModule()</a> function can be used in workers scope to load any JavaScript script which is part of some Functional Module.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="platform-availability_1">Platform Availability</h3>
+<p>Available for iOS, Android, Windows, SPA, and Desktop Web. For more information, see <a href="#scope">Scope</a>.</p>
+<h2 id="using-worker-threads-feature">Using Worker Threads Feature</h2>
+<p>The following topics helps you to use the worker thread feature:</p>
+<ul>
+<li><a href="#getMonit2"></a><a href="#communicating-and-data-processing-between-threads">Communicating and Data Processing Between Threads</a></li>
+<li><a href="#getRange"></a><a href="#nesting-of-threads-and-performing-parallel-tasks">Nesting of Threads and Performing Parallel Tasks</a></li>
+<li><a href="#scope-rules-and-supported-apis">Scope Rules and Supported APIs</a></li>
+<li><a href="#ffi-and-custom-widgets">FFI and Custom Widgets</a></li>
+<li><a href="#guidelines-and-limitations">Guidelines and Limitations</a></li>
+<li><a href="#debugger-support">Debugger Support</a></li>
+</ul>
+<h3 id="communicating-and-data-processing-between-threads">Communicating and Data Processing Between Threads</h3>
+<p>Main.js</p>
+<pre><code>//create new worker
+var worker = new voltmx.worker.WorkerThread('1_worker.js');
+
+//invoked when worker calls postmessage() from its inner scope
+worker.addEventListener(&quot;message&quot;, function (event) {
+voltmx.print('Parent Scope : onmessage : event.data : ' + event.data[&quot;message&quot;]);
+});
+
+voltmx.print('Parent Scope : Invoking worker.postmessage()');
+//will invoke worker's inner scope onmessage()
+worker.postMessage({
+'message': 'Hello World From Parent'
+});
+</code></pre>
+<p>1_worker.js</p>
+<pre><code>//workers inner scope
+//invoked when Parent calls worker.postmessage()
+self.addEventListener(&quot;message&quot;, function (event) {
+voltmx.print('Worker Scope : onmessage : event.data : ' + event.data[&quot;message&quot;]);
+//call func
+do_something_in_worker();
+});
+
+function do_something_in_worker() {
+voltmx.print('Worker Scope : invoking postMessage()');
+//will invoke Parent worker.onmessage()
+postMessage({
+'message': &quot;Hello World From Worker &quot;
+});
+};
+</code></pre>
+<p>Expected Output</p>
+<pre><code>&quot;Parent Scope: Invoking worker.postmessage()&quot;
+&quot;Worker Scope: onmessage : event.data : &quot; &quot;Hello World From Parent&quot;
+&quot;Worker Scope: invoking postMessage()&quot;
+&quot;Parent Scope: onmessage : event.data : &quot; &quot;Hello World From Worker &quot;
+</code></pre>
+<p>Explanation</p>
+<ol>
+<li>In Parent Scope: Creates new worker using new <em>voltmx.worker.WorkerThread</em> ()</li>
+<li>In Parent Scope: Call to <em>worker.postMessage</em>() invokes <em>message</em> event handler registered using <em>addEventListener</em>() in worker threads inner scope.</li>
+<li>In Worker Scope: Call to <em>postMessage</em>() invokes <em>message</em> event handler registered using <em>addEventListener</em>() in the parent thread scope.</li>
+</ol>
+<h3 id="nesting-of-threads-and-performing-parallel-tasks">Nesting of Threads and Performing Parallel Tasks</h3>
+<p>Main.js</p>
+<pre><code>try {
+voltmx.print(&quot;Parent Scope: Init test_case_parent_thread()&quot;);
+voltmx.print(&quot;Parent Scope: In try block&quot;);
+
+    //create new voltmx.worker.WorkerThread
+    var worker = new voltmx.worker.WorkerThread('WorkerThread.js');
+
+    //invoked when worker calls postmessage() from its inner scope
+    worker.addEventListener(&quot;message&quot;, function (event) {
+        voltmx.print('Parent Scope : onmessage : event.data : ' + event.data);
+    });
+
+    worker.postMessage(&quot;Hello from Parent&quot;);
+
+} catch (err) {
+voltmx.print(&quot;Parent Scope: In Catch block&quot;);
+
+}
+
+//invoke a function  
+invoke_timer_task();
+
+//
+function invoke_timer_task() {
+voltmx.print(&quot;Parent Scope :- voltmx.timer.schedule - &quot;);
+
+    var timerId = &quot;mytimer12111&quot;;
+    var i = 0;
+
+    function timerFunc() {
+
+        i++;
+        voltmx.print(&quot;Parent Scope :- voltmx.timer.schedule - In timerFunc() : &quot; + i);
+        if (i &gt; 20) {
+            voltmx.print(&quot;Parent Scope :- voltmx.timer.schedule - Stopping timer : &quot;);
+            voltmx.timer.cancel(timerId);
+        }
+    };
+
+    //
+    voltmx.timer.schedule(timerId, timerFunc, 1, true);
+    voltmx.print(&quot;Parent Scope :- voltmx.timer.schedule - Done&quot;);
+
+};
+voltmx.print(&quot;Parent Scope: Exit test_case_parent_thread()&quot;);
+</code></pre>
+<p>WorkerThread.js</p>
+<pre><code>//worker
+//workers inner scope
+
+voltmx.print(&quot;Worker Scope: Init&quot;);
+
+var worker = new voltmx.worker.WorkerThread('WorkerThread2.js');
+
+//invoked when Parent calls worker.postmessage()
+this.addEventListener(&quot;message&quot;, function(event) {
+voltmx.print('Worker Scope : onmessage : event.data : ' + event.data);
+});
+
+self.postMessage(&quot;Hello from Worker&quot;);
+//
+invoke_timer_task();
+
+//
+function invoke_timer_task() {
+voltmx.print(&quot;Worker Scope :- voltmx.timer.schedule - &quot;);
+
+    var timerId = &quot;mytimer121&quot;;
+    var i = 0;
+
+    function timerFunc() {
+
+        i++;
+        voltmx.print(&quot;Worker Scope :- voltmx.timer.schedule - In timerFunc() : &quot; + i);
+
+
+        if(i &gt; 20) {
+            voltmx.print(&quot;Worker Scope :- voltmx.timer.schedule - Stopping timer : &quot;);
+            voltmx.timer.cancel(timerId);
+        }
+    };
+    //
+    voltmx.timer.schedule(timerId,timerFunc, 1, true);
+    voltmx.print(&quot;Worker Scope :- voltmx.timer.schedule - Done&quot;);
+
+};
+voltmx.print(&quot;Worker Scope: Loading done&quot;);
+
+</code></pre>
+<p>WorkerThread2.js</p>
+<pre><code>//Grand child worker2 – nested worker
+//workers inner scope
+
+voltmx.print(&quot;Grand child: Worker2 Scope: Init&quot;);
+
+//invoked when Parent calls worker.postmessage()
+this.addEventListener(&quot;message&quot;, function(event) {
+voltmx.print('Grand child: Worker2 Scope : onmessage : event.data : ' + event.data);
+});
+
+self.postMessage(&quot;Hello from Worker2&quot;);
+//
+invoke_timer_task();
+
+//
+function invoke_timer_task () {
+voltmx.print(&quot;Grand child: Worker2 Scope :- voltmx.timer.schedule - &quot;);
+
+    var timerId = &quot;mytimer1211&quot;;
+    var i = 0;
+
+    function timerFunc()
+    {
+        i++;
+        voltmx.print(&quot;Worker2 Scope :- voltmx.timer.schedule - In timerFunc() : &quot; + i + &quot; : Grand child &quot;);
+
+        if(i &gt; 20) {
+            voltmx.print(&quot;Grand child: Worker2 Scope :- voltmx.timer.schedule - Stopping timer : &quot;);
+            voltmx.timer.cancel(timerId);
+        }
+    };
+
+    //
+    voltmx.timer.schedule(timerId,timerFunc, 1, true);
+    voltmx.print(&quot;Grand child: Worker2 Scope :- voltmx.timer.schedule - Done&quot;);
+
+};
+voltmx.print(&quot;Grand child: Worker2 Scope : Loading done&quot;);
+
+</code></pre>
+<h3 id="scope-rules-and-supported-apis">Scope Rules and Supported APIs</h3>
+<p>Global resources in the App context will not be available in the worker thread context as it can lead to Race conditions since no locking mechanisms are provided.</p>
+<p>Every worker has its own context of execution, which is not shared between the parent and its worker. As a result the global variables in parent scope are not available in worker scope and vice versa.</p>
+<table border="1">
+<tr>
+<th>Not Supported APIs</th>
+<td>
+<ul>
+<li>VoltMX UI APIs and UI object handles</li>
+<li>App Global variables</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Supported APIs and Platform</th>
+<td>
+<table border="1">
+<tr>
+<th>String API</th>
+<td>iOS</td>
+<td>Android</td>
+<td>Windows</td>
+<td>SPA</td>
+<td>Desktop Web</td>
+</tr>
+<tr>
+<th>Math API</th>
+<td>iOS</td>
+<td>Android</td>
+<td>Windows</td>
+<td>SPA</td>
+<td>Desktop Web</td>
+</tr>
+<tr>
+<th>Table API</th>
+<td>iOS</td>
+<td>Android</td>
+<td>Windows</td>
+<td>SPA</td>
+<td>Desktop Web</td>
+</tr>
+<tr>
+<th>Standard Volt MX API</th>
+<td>iOS</td>
+<td>Android</td>
+<td>Windows</td>
+<td colspan=2>
+<p></p>
+<p>Limited Availability</p>
+<p> For SPA and Desktop Web, the following APIs are supported:</p>
+<ul>
+<li>voltmx.convertToBase64</li>
+<li>voltmx.convertToRawBytes</li>
+<li>voltmx.type</li>
+<li>voltmx.props.getProperty</li>
+<li>voltmx.print() is not supported in Safari</li>
+<li>voltmx.print() is supported in Mozilla from version 29.0.</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Network API</th>
+<td>iOS</td>
+<td>Android</td>
+<td>Windows</td>
+<td colspan=2>
+<p></p>
+<p>For SPA and DesktopWeb: </p>
+<p>Limited Availability</p>
+<ul>
+<li>The following API will not be available in SPA & Desktop Web: voltmx.net.setNetworkCallbacks</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th rowspan=2>Offline Data Access API</th>
+<td>Local Storage</td>
+<td>iOS</td>
+<td>Android</td>
+<td>Windows</td>
+</tr>
+<tr>
+<td>Web SQL</td>
+<td>iOS</td>
+<td>Android</td>
+<td>Windows</td>
+<td>SPA and DesktopWeb</td>
+</tr>
+<tr>
+<th>Operating System API</th>
+<td>iOS</td>
+<td>Android</td>
+<td>Windows</td>
+<td colspan=2>
+<p></p>
+<p> For SPA and Desktop Web, the following APIs are NOT supported:</p>
+<ul>
+<li>voltmx.os.addHiddenField</li>
+<li>voltmx.os.readHiddenField</li>
+<li>voltmx.os.startSecureTransaction</li>
+<li>voltmx.os.endSecureTransaction</li>
+<li>voltmx.os.getAppContext</li>
+<li>voltmx.os.hasAccelerometerSupport</li>
+<li>voltmx.os.deviceInfo</li>
+<li>voltmx.os.deviceInfo().httpheaders</li>
+<li>voltmx.os.addMetaTag</li>
+<li>voltmx.os.removeMetaTag</li>
+<li>voltmx.os.removeAllMetaTags</li>
+<li>voltmx.os.hasGPSSupport</li>
+<li>voltmx.os.hasCameraSupport</li>
+<li>voltmx.os.hasTouchSupport</li>
+<li>voltmx.os.hasOrientationSupport</li>
+<li>voltmx.os.getDeviceCurrentOrientation</li>
+<li>voltmx.os.print</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Cryptography API</th>
+<td>iOS</td>
+<td>Android</td>
+<td>Windows</td>
+<td colspan=2>
+<p></p>
+<p>For SPA and Desktop Web, the following APIs are NOT supported:</p>
+<ul>
+<li>voltmx.crypto.saveKey</li>
+<li>voltmx.crypto.deleteKey</li>
+<li>voltmx.crypto.readKey</li>
+</ul>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+<h3 id="ffi-and-custom-widgets">FFI and Custom Widgets</h3>
+<p>With and without Functional Module in Worker context:</p>
+<table>
+<tr>
+<th></th>
+<th>iOS</th>
+<th>Android</th>
+<th>Windows</th>
+<th>SPA</th>
+</tr>
+<tr>
+<th>FFI</th>
+<td colspan=4>Platform will load modules by default</td>
+</tr>
+<tr>
+<th>Custom Widgets</th>
+<td colspan=4>No need to load Custom Widgets in worker scope.</td>
+</tr>
+</table>
+
+<h3 id="guidelines-and-limitations">Guidelines and Limitations</h3>
+<p>The following guidelines are recommended before using worker thread:</p>
+<ol>
+<li>The objects "this" and "self" are available in worker thread inner scope that is referred as worker thread itself.</li>
+<li>Event propagation cannot be stopped by using <em>event.stopPropagation</em>() as in HTML specification. Where <em>event.stopPropagation</em>() stops the DOM event to be propagated further by breaking the event chain.</li>
+<li>Data passed between the main thread and workers are copied, but not shared. Objects are serialized as they are handed to the worker, and subsequently, de-serialized on the other end. The main thread and worker do not share the same instance. So the end result is that a duplicate is created on each end. HTML5 worker threads support transferable objects that allow transferring the objects from one thread to other without making a copy.</li>
+<li>
+<p>As explicit thread synchronization mechanisms like locking or mutexes are not available in JS environment, you must take required care in scenarios where multiple threads concurrently or simultaneously are trying to access and write/insert data into local database or local datastore using WebSQL or Local datastore APIs, as these are shared resources across the Application context.</p>
+<ul>
+<li>The outcome of these simultaneous or concurrent accesses to database/datastore might push the database/datastore to inconsistent state and is dependent on the individual platforms WebSQL or DataStore implementations. It is always suggested to avoid such scenarios of multiple threads accessing the database/datastore simultaneously/concurrently.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Limitations in SPA and DesktopWeb:</strong></p>
+<ol>
+<li>Nested Workers support will be available only if they are supported by the underlying browser platforms.</li>
+<li>Error event messages in error event handler sometimes might be appended with extra prefix or suffix string messages from underlying browsers (like Uncaught, Uncaught error etc).</li>
+<li>Even though error event handler is invoked in case of unhandled exceptions, the same event messages might also be logged on browser console.</li>
+<li>Line number, file name populated in error event object passed to error event handler might be different from user defined files.</li>
+</ol>
+<blockquote>
+<p><strong><em>Note:</em></strong> For SPA and Desktop Web, nested workers are not supported in Google Chrome.</p>
+</blockquote>
+<p><strong>terminate API</strong></p>
+<p>As the worker threading model is mapped to underlying native threading models in native platforms, there can be some deviations from what specification says, this is due to technical limitations in the underlying platforms which include:</p>
+<ol>
+<li>If terminate() is invoked in Parent thread on worker, and if worker is currently executing a large task, it might not immediately terminate, it will continue to execute the task to completion and terminate.</li>
+<li>If terminate() is invoked in Parent thread on worker, and if there are pending tasks waiting in the message queues for this worker to perform, some platforms might discard all the pending tasks without accepting them for execution and terminate, and on some platform all the pending tasks are executed to completion and then the worker terminates.</li>
+<li>It is to be noted that to achieve cross platform consistency, it is always advised that terminate() be invoked on the worker once all the tasks in message queues are completed.</li>
+</ol>
+<p><strong>close API</strong></p>
+<ol>
+<li>As the worker threading model is mapped to underlying native threading models in native platforms, there can be some deviations from what specification says, this is due to technical limitations in the underlying platforms which include:</li>
+<li>When close() is invoked in worker scope, and if worker is currently executing a large task, it might not immediately terminate, it will continue to execute the task to completion and then terminate.</li>
+<li>When close () is invoked in worker scope, and if there are pending tasks waiting in the message queues for this worker to perform, some platforms might discard all the pending tasks without accepting them for execution and terminate, and on some platform all the pending tasks are executed to completion and then the worker terminates.</li>
+<li>Hence it is to be noted that to achieve cross platform consistency, it is always advised that close() be invoked in worker scope once all the tasks in message queues are completed.</li>
+</ol>
+<!-- ### Debugger Support
+
+Debugger support for worker threads is not available in 5.6.2 release. -->
+
+<h3 id="worker-life-cycle-notes">Worker Life Cycle Notes</h3>
+<p>Following are some worker life cycle notes:</p>
+<ul>
+<li>Call to Worker constructor will create a new Worker instance and a new parallel execution environment context is created, and immediately starts execution in the new parallel thread of control in an asynchronous manner. In this new thread, first the Worker will try to load the ‘workerjs’ script.</li>
+<li>As a result of the asynchronous parallel nature of execution in worker thread context, invocation of Worker constructor call in Parent thread will return a new Worker instance handle and Parent proceeds with execution of next instructions.</li>
+<li>Every Worker thread will have its own event loop which takes care of the execution of all the received message tasks which are queued for this worker in that order until ‘self.close()’ in worker scope or ‘worker.terminate()’ in parent worker scope are invoked.</li>
+<li>From the moment of successful creation of worker thread and until ‘self.close()’ in worker scope or ‘worker.terminate()’ in parent worker scope are invoked, the worker thread will be alive and can receive and process messages which are sent to this worker form its parent or from its child workers if created, as well as it can send messages using postMessage() to its parent thread and its child worker threads if created.</li>
+<li>In worker thread scope when there is no "message" event handler registered which indicates that no tasks can be posted or queued by parent for this worker, and if no callbacks are registered in this worker scope for network, timer APIs etc, then after postMessage() call in Workers inner scope if any, worker can terminate itself without worker.terminate() being called in Parent scope or self.close() called in inner scope.</li>
+<li>In case of orphaned threads if no tasks are queued in message handler and if the worker is not waiting for any callbacks to be returned from network, timer APIs etc then the orphaned thread can be terminated.</li>
+<li>If Parent stops either due to unhandled exception raised in it scope, Worker threads still continues to exist and execute.</li>
+</ul>
+<hr />
+<p><img alt="" src="resources/prettify/onload.png" /></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2021 - 2024, HCL America, Inc. | <a href="https://hcltechsw.com/wps/portal/legal/privacy">Privacy Statement</a> | <a href="https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.hcltechsw.com%2Fwps%2Fportal%2Flegal%2Fterms-use&data=04%7C01%7Csuresh.chenji%40hcl.com%7Ca77ebddc51574aff8c6c08d8f056542d%7C189de737c93a4f5a8b686f4ca9941912%7C0%7C0%7C637523600856805537%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&sdata=vLnT466NGuIbvQ0nEwfn2qdXeuhHb6XOnh1pibATDI4%3D&reserved=0">Terms of Use</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+<div class="md-social">
+  <ul class="social-nav">
+    <li><a href="https://www.facebook.com/HCLDigital" class="facebook" target="_blank">Facebook</a></li>
+    <li><a href="https://www.linkedin.com/company/hclsoftware" class="linkedin" target="_blank">LinkedIn</a></li>
+    <li><a href="https://twitter.com/HCLDigital"  class="twitter" target="_blank">Twitter</a></li>
+    <li><a href="https://www.youtube.com/HCLDigitalSolutions" class="youtube" target="_blank">Youtube</a></li>
+    <li>
+      <a href="https://github.com/HCL-TECH-SOFTWARE" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    </li>
+  </ul>    
+</div>
+  </div>
+  <div class="md-footer-meta__inner md-grid">
+  <span class="md-footer__git_legacy">Please report problems with this documentation by <a class="announcement__link" href="https://github.com/HCL-TECH-SOFTWARE/volt-mx-docs/issues">opening issues in Github</a>.</span>
+  <span class="legacy-link md-footer__git_legacy">Can't find a topic? Check the legacy documentation <a class="announcement__link" href="https://opensource.hcltechsw.com/Volt-MX-Documentation-Archive/docs/documentation/" target="_blank">here</a>.</span>
+</span>
+    </div>
+</div>
+    <script>
+      function myFunction95(){
+          var initial_url = document.location.href;
+          var url_stub = initial_url.split( 'docs/documentation' );
+          var fixed_url = url_stub[0]+'95/docs/documentation';
+		  console.log(fixed_url);
+//          var fixed_url = 'https://opensource.hcltechsw.com/volt-mx-docs/95/docs/documentation'
+          var url = initial_url.split( '/' );
+          var updated_url
+          if ( url[ url.length - 2 ] == "Foundry" || url[ url.length - 2 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 2 ] == "articles" || url[ url.length - 2] == "getting-started" || url[ url.length - 2 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 3 ] == "Foundry" || url[ url.length - 3 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 3 ] == "articles" || url[ url.length - 3 ] == "getting-started" || url[ url.length - 3 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 4 ] == "Foundry" || url[ url.length - 4 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 4 ] == "articles" || url[ url.length - 4 ] == "getting-started" || url[ url.length - 4 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 5 ] == "Foundry" || url[ url.length - 5 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 5 ] == "articles" || url[ url.length - 5 ] == "getting-started" || url[ url.length - 5 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 5 ] + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else if ( url[ url.length - 6 ] == "Foundry" || url[ url.length - 6 ] == "Iris" || url[ url.length - 2 ] == "tutorials" || url[ url.length - 6 ] == "articles" || url[ url.length - 6 ] == "getting-started" || url[ url.length - 6 ] == "java_docs_apis" ){
+            updated_url= fixed_url + '/' + url[ url.length - 6 ] + '/' + url[ url.length - 5 ] + '/' + url[ url.length - 4 ] + '/' + url[ url.length - 3 ] + '/' + url[ url.length - 2 ] + '/' + url[ url.length - 1 ];
+          }else{
+            updated_url= fixed_url + '/' + url[ url.length - 1];
+          }
+          window.location.replace(updated_url);
+          }
+    </script>
+
+  
+
+</footer>
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.prune"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>
