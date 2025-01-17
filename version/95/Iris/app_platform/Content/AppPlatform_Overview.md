@@ -7,8 +7,8 @@ We classify Volt MX's product portfolio as follows:
 Volt MX AppPlatform
 
 - [Platform Overview](#platform-overview)
-  - [Volt MX Iris](#volt-mx-iris)
-  - [Volt MX Foundry](#volt-mx-foundry)
+  - [Volt Iris](#volt-iris)
+  - [Volt Foundry](#volt-foundry)
     - [Identity Services](#identity-services)
     - [Integration Services](#integration-services)
     - [Orchestration Services](#orchestration-services)
@@ -23,12 +23,15 @@ Volt MX AppPlatform
 
 ![Overview Platform](../Resources/Images/Overview_Platform_774x286.png)
 
-Volt MX AppPlatform is a comprehensive app development platform for various digital channels. AppPlatform allows you to build an Omni-channel, multi-platform app. It consists of the following sub-products:
-* Iris – Design your app and add business logic.
-* Volt MX – Integrate with data and allied services.
-* App Viewer – preview the app as you develop.
+Volt MX AppPlatform is a comprehensive app development platform for various digital channels. AppPlatform allows you to build an Omni-channel, multi-platform app. 
 
-Volt MX Iris
+<b>It consists of the following sub-products:</b>
+
+* Volt Iris – Design your app and add business logic.
+* Volt Foundry – Integrate with data and allied services.
+* Volt MX App Viewer – preview the app as you develop.
+
+Volt Iris
 -------------
 ![Volt MX Iris](../Resources/Images/VoltMX-Iris.png)
 
@@ -37,7 +40,7 @@ Iris is the Volt MX integrated development environment used to design, build, de
 * APIs: Set of functions and procedures that are used to write the code in controller files to achieve various functionalities. Explore more about APIs [here](../../../Iris/iris_api_dev_guide/content/introduction.md).
 * Components: Ready-to-use building blocks for applications.
 
-Volt MX Foundry
+Volt Foundry
 -------------
 ![Volt MX Foundry](../Resources/Images/VoltMXFoundry.png)
 
@@ -71,7 +74,7 @@ Volt MX’s capabilities extend to providing Identity Services, Integration Serv
 ### API Management
 * Manage shared services (identity, integration, orchestration, objects, and logic for Node.js services) without linking or configuring them within an app.
 * Supports versioning for integration services and orchestration services.
-* Create a Portal for exposing APIs created using Volt MX Foundry.
+* Create a Portal for exposing APIs created using Volt Foundry.
 * Explore more about API Management [here](../../../Foundry/voltmx_foundry_user_guide/Content/API_Management.md).
 
 ### Engagement Services
@@ -81,9 +84,9 @@ Volt MX’s capabilities extend to providing Identity Services, Integration Serv
 * Explore more about Engagement Services [here](../../../Foundry/vms_console_user_guide/Content/Introduction.md).
 
 ### Offline Objects
-* Download objects data an object service, use the data without network connectivity and sync later with the Volt MX Foundry object services back end.
+* Download objects data an object service, use the data without network connectivity and sync later with the Volt Foundry object services back end.
 * Uses the OData protocol, an open-sourced protocol to connect directly with object services.
-* Use with apps developed with Volt MX Iris or apps that are developed natively.
+* Use with apps developed with Volt Iris or apps that are developed natively.
 * Explore more about Offline Objects [here](../../../Foundry/offline_objects_gettingstarted/Content/Offline_Objects_Getting_Started.md).
 
 ### Reports
@@ -114,6 +117,6 @@ DevOps Services - AppFactory
 
 Volt MX Marketplace
 -------------
-It is a repository of ready-to-use Apps, Micro Apps, Components, and Data Adapters. Apps, Micro Apps, and Components are developed using widgets and APIs in Iris. Data adapters are developed using services in Volt MX Foundry. Explore more about components and data adapters [here](../../../Foundry/voltmx_foundry_user_guide/Content/CustomDataConfig.md). Explore more about Volt MX Marketplace [here](https://marketplace.hclvoltmx.com/).
+It is a repository of ready-to-use Apps, Micro Apps, Components, and Data Adapters. Apps, Micro Apps, and Components are developed using widgets and APIs in Iris. Data adapters are developed using services in Volt Foundry. Explore more about components and data adapters [here](../../../Foundry/voltmx_foundry_user_guide/Content/CustomDataConfig.md). Explore more about Volt MX Marketplace [here](https://marketplace.hclvoltmx.com/).
 {: .left-float}
 ![Volt MX Foundry](../Resources/Images/Marketplace.png){: .right-float-img}
