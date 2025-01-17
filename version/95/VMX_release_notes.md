@@ -118,8 +118,8 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 ### V9 Servicepack 5 Fixpack 47
 January 20, 2025
 
-* Binary Obfuscation enhancements for Windows (Electron Fuses and ASAR) and MacOS target platforms.
-* Adding support for Android 15 SDK as build target.
+* Enhanced binary obfuscation for Windows (Electron Fuses and ASAR) and macOS platforms.
+* Added support for Android 15 SDK as a build target.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
