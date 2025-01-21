@@ -4,7 +4,7 @@ Learn about HCL Volt MX products, sub-products and their features. Further, lear
 
 ### [App User Interface](../Iris/iris_user_guide/Content/appUserInterface.md)
 
-Learn about the various parts that come together to help design the user-facing interface of your application
+Learn about the various parts that come together to help design the user-facing interface of your application.
 
 
 ### [Widgets and API reference](../Iris/iris_widget_prog_guide/Content/widgetApiReference.md)
