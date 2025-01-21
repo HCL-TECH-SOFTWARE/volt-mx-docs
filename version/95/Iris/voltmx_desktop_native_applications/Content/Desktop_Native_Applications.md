@@ -494,7 +494,7 @@ See VoltMX voltmx.db documentation</td>
 
 To build and package application,
 
-* Ensure to have Node.js version 16.4.0 or higher installed. You can download it from the [here](https://nodejs.org/en)
+* Ensure to have Node.js version 20.11.1 or higher installed. You can download it from the [here](https://nodejs.org/en)
 * Git is required for version control. Install it from [here](https://git-scm.com/)
 * For Windows Application : The Wix Toolset must be installed in your Windows environment. To install the Wix Toolset, see [here](https://wixtoolset.org/)
 
