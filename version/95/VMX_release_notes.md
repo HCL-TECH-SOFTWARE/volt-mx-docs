@@ -122,6 +122,7 @@ January 21, 2025
 * Cleanup of usage of READ_MEDIA_IMAGES and READ_MEDIA_VIDEO permissions from API references to minimise impact of Google's new PlayStore regulations regarding file/media usage WEF Jan 22, 2025.
 * Enhanced binary obfuscation for Windows (Electron Fuses and ASAR) and macOS platforms.
 * Added support for Android 15 SDK as a build target.
+* Android build dependency updated to JDK 17.
 
 For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
 
