@@ -117,8 +117,9 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 ## Volt Iris
 
 ### V9 Servicepack 5 Fixpack 47
-January 20, 2025
+January 21, 2025
 
+* Cleanup of usage of READ_MEDIA_IMAGES and READ_MEDIA_VIDEO permissions from API references to minimise impact of Google's new PlayStore regulations regarding file/media usage WEF Jan 22, 2025.
 * Enhanced binary obfuscation for Windows (Electron Fuses and ASAR) and macOS platforms.
 * Added support for Android 15 SDK as a build target.
 
