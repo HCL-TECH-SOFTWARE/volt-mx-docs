@@ -7,6 +7,7 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 
 [Volt Iris](#volt-iris)
 
+- [V9 Servicepack 5 Fixpack 47](#v9-servicepack-5-fixpack-47)
 - [V9 Servicepack 5 Fixpack 46](#v9-servicepack-5-fixpack-46)
 - [V9 Servicepack 5 Fixpack 45](#v9-servicepack-5-fixpack-45)
 - [V9 Servicepack 5 Fixpack 43](#v9-servicepack-5-fixpack-43)
@@ -113,6 +114,15 @@ For detailed information about fixes and known issues in Volt MX, see the <a hre
 - [Earlier Foundry releases](#earlier-foundry-releases)
 
 ## Volt Iris
+
+### V9 Servicepack 5 Fixpack 47
+January 20, 2025
+
+* Enhanced binary obfuscation for Windows (Electron Fuses and ASAR) and macOS platforms.
+* Added support for Android 15 SDK as a build target.
+
+For detailed information about fixes and known issues in this release, see the <a href="https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0101445" target="_blank">Cumulative fix list for HCL Volt MX</a>.
+
 
 ### V9 Servicepack 5 Fixpack 46
 December 19, 2024
