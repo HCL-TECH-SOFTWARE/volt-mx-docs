@@ -1,0 +1,84 @@
+                            
+
+Generating Firebase Cloud Messaging (FCM) Credentials
+=====================================================
+
+Creating FCM Project URL and Generating Service Account Key for Android Device
+--------------------------------------------------------------------------------
+
+The first step in the installation and configuration of the sample Engagement application on an Android device is the generation of the sender ID. Android devices use the sender ID to register with FCM and receive notifications.
+
+1.  Open the Google developer's console window by logging into: [https://console.firebase.google.com/](https://console.firebase.google.com/)
+    
+    The **Google Developer’s** account **Sign in** page appears.
+    
+
+    ![](Resources/Images/newfcmhttpv1_1.png)
+
+    
+2.  Enter your Google credentials. Click **Sign in** to continue.
+    
+    The **Welcome to Firebase** page appears.
+
+    
+    ![](Resources/Images/newfcmhttpv1_2_579x204.png)
+
+    
+3.  Click **Create New Project**.
+    
+    The **Create a project** dialog box appears.
+
+    
+    ![](Resources/Images/newfcmhttpv1_3.png)
+
+    
+4.  Enter details for the following fields:
+    
+    *   **Project name**: Enter the project name. Based on the project name, the system generates the project ID. The project name is used in the Google console and the project ID identifies the project name.
+
+
+    ![](Resources/Images/newfcmht1pv1_4.png)
+
+
+    *   **Country/region**: Select the required country from the drop-down list.
+    
+
+    ![](Resources/Images/newfcmhttpv1_5.png)
+
+    
+5.  **Cancel**: Click **Cancel** to close the **Create a project** dialog box.
+6.  Enter the required details. Click **Create Project** to continue.
+    
+    The **Welcome to Firebase! Get started here** page appears.
+    
+7.  Click the wheel icon next to the **Engagement Services Demo App** label in the left menu bar.
+
+    
+    ![](Resources/Images/wheelfirebasehttpv1.png)
+
+    
+    The **Project settings** drop-down list appears.
+    
+
+    ![](Resources/Images/newfcmhttpv15_580x286.png)
+
+    
+8.  Click **Project Settings** from the drop-down list.
+    
+    The **Project Settings** page appears. Here you can view the **Project name**, **Project ID**, **Project Number** and the **Web API Key** under **General** tab for your reference.
+    
+
+    ![](Resources/Images/newfcmhttpv16_577x264.png)
+
+    
+    You can edit the **Project name**.
+    
+9.  Under **Project Settings**, click the **Service Accounts** tab next to the **Integrations** tab.  
+    The **Firebase admin SDK** section appears. Here Select the Language as Java and Generate the Service_Account_Key.json file by clicking Generate new private key
+    
+
+    ![](Resources/Images/newfcmhttpv17_577x258.png)
+    
+    
+10.  Copy the **Project ID**. You use the **Project ID** in the client-side application to register to FCM from the device.
+11.  Copy the **Service_Account_Key.json**. You use the **Service_Account_Key.json** in the Engagement server while creating an application.
